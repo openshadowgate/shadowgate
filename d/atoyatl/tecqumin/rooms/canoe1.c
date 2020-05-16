@@ -939,7 +939,7 @@ int apply_lateral_travel(){
 }
 
 void special_report(string str){
-  "/daemon/reporter_d"->report("lujke", str);
+  /* "/daemon/reporter_d"->report("lujke", str); */
 }
 
 int query_relative_direction(){

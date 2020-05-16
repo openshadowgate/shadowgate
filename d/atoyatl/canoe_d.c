@@ -18,7 +18,7 @@ string * display, *temp_display;
 string previous_direction;
 string direction;
 int current_x;
-int current_y;  
+int current_y;
 int top_edge;
 int bottom_edge;
 int left_edge;
@@ -287,7 +287,7 @@ string * get_boat(int dir){
   case 4:
     return E_BOAT;
     break;
-  case 5: 
+  case 5:
     return ESE_BOAT;
     break;
   case 6:
@@ -323,11 +323,11 @@ string * get_boat(int dir){
   }
 }
 
-void clean_up() { 
+void clean_up() {
   // This function added to prevent data being removed by the inherited
   // clean_up function.
-  return; 
-} 
+  return;
+}
 
 void SAVE()
 {
@@ -373,7 +373,7 @@ varargs int load_path(  object canoe){
   if (!intp(current_position) || current_position<1) current_position = 1;
   if (!intp(build_progress) || build_progress<1) build_progress = 1;
   if (!intp(current_direction) || current_direction<1) current_direction = 1;
-  return 1;  
+  return 1;
 }
 
 varargs int build_map_section(int start, int length, object who){
@@ -672,7 +672,7 @@ varargs int build_map(int *pth, int start_point, object who){
       add_southeast_block();
       pathreport("Adding southeast");
       break;
-    case 7: 
+    case 7:
       add_southsoutheast_block();
       pathreport("Adding southsoutheast");
       break;
@@ -768,7 +768,7 @@ string colour_line(string line){
         break;
       }
       newline += ch;
-      continue; 
+      continue;
     }
     if (bwch == "*"){
       switch(flag)
@@ -783,7 +783,7 @@ string colour_line(string line){
       }
       newline += "_";
       continue;
-    } 
+    }
     if (bwch == "."){
       switch(flag)
       {
@@ -808,13 +808,13 @@ string colour_line(string line){
         newline += "%^B_GREEN%^";
         flag = 0;
         break;
-      } 
+      }
     }
     newline += ch;
-//    if (flag ==2) 
+//    if (flag ==2)
 //    {
 //      newline += "%^B_BLUE%^";
-//    } 
+//    }
   }
   return newline;
 }
@@ -855,43 +855,43 @@ void show_map(object who, string * map){
 //    if (j==left_y ){
 //      if ( j==right_y ){
 //        if (left_x<right_x){
-//          report("Inserting L. left_x = " + left_x + " left_edge = " + left_edge + ". Therefore inserting at position: " + lpos); 
-//          line = "/daemon/str_insert_d"->insert_string(line, "L", lpos); 
+//          report("Inserting L. left_x = " + left_x + " left_edge = " + left_edge + ". Therefore inserting at position: " + lpos);
+//          line = "/daemon/str_insert_d"->insert_string(line, "L", lpos);
 //          report("Inserting R. right_x = " + right_x + " left_edge = " + left_edge + ". Therefore inserting at position: " + rpos);
 //          line = "/daemon/str_insert_d"->insert_string(line, "R", rpos);
-//        } else { 
+//        } else {
 //          report("Inserting R. right_x = " + right_x + " left_edge = " + left_edge + ". Therefore inserting at position: " +rpos);
 //          line = "/daemon/str_insert_d"->insert_string(line, "R", rpos);
-//          report("Inserting L. left_x = " + left_x + " left_edge = " + left_edge + ". Therefore inserting at position: " +lpos); 
+//          report("Inserting L. left_x = " + left_x + " left_edge = " + left_edge + ". Therefore inserting at position: " +lpos);
 //          line = "/daemon/str_insert_d"->insert_string(line, "L", lpos);
-//        } 
-//      } else { 
-//        report("Inserting L. left_x = " + left_x + " left_edge = " + left_edge + ". Therefore inserting at position: " +lpos); 
-//        line = "/daemon/str_insert_d"->insert_string(line, "L", lpos); 
-//      } 
-//    } else { 
-//      if (j==right_y ){ 
+//        }
+//      } else {
+//        report("Inserting L. left_x = " + left_x + " left_edge = " + left_edge + ". Therefore inserting at position: " +lpos);
+//        line = "/daemon/str_insert_d"->insert_string(line, "L", lpos);
+//      }
+//    } else {
+//      if (j==right_y ){
 //        report("Inserting R. right_x = " + right_x + " left_edge = " + left_edge + ". Therefore inserting at position: " +rpos);
-//        line = "/daemon/str_insert_d"->insert_string(line, "R", rpos); 
-//      } 
-//    } 
+//        line = "/daemon/str_insert_d"->insert_string(line, "R", rpos);
+//      }
+//    }
 //    if (j==left_y + 1 || j == left_y-1){
 //      if ( j==right_y +1 || j == right_y -1){
 //        if (left_x<right_x){
-//          line = "/daemon/str_insert_d"->insert_string(line, "l", lpos); 
+//          line = "/daemon/str_insert_d"->insert_string(line, "l", lpos);
 //          line = "/daemon/str_insert_d"->insert_string(line, "r", rpos);
-//        } else { 
+//        } else {
 //          line = "/daemon/str_insert_d"->insert_string(line, "r", rpos);
 //          line = "/daemon/str_insert_d"->insert_string(line, "l", lpos);
-//        } 
-//      } else { 
-//        line = "/daemon/str_insert_d"->insert_string(line, "l", lpos); 
-//      } 
-//    } else { 
-//      if (j==right_y + 1 || j == right_y-1 ){ 
-//        line = "/daemon/str_insert_d"->insert_string(line, "r", rpos); 
-//      } 
-//    } 
+//        }
+//      } else {
+//        line = "/daemon/str_insert_d"->insert_string(line, "l", lpos);
+//      }
+//    } else {
+//      if (j==right_y + 1 || j == right_y-1 ){
+//        line = "/daemon/str_insert_d"->insert_string(line, "r", rpos);
+//      }
+//    }
 //
 ///////////////////////////////////////////////////////////////////////////////////////////////
     line = colour_line(line);
@@ -924,7 +924,7 @@ void show_boat_with_sprite(){
   boat = N_BOAT;
   tell_object(TP, "size of block: " + sizeof(block));
   show_map(TP, block);
-  block = add_sprite_to_block(boat, block, 0, 0);    
+  block = add_sprite_to_block(boat, block, 0, 0);
   tell_object(TP, "size of block: " + sizeof(block));
 
   show_map(TP, block);
@@ -941,7 +941,7 @@ int query_x_correction(int boat_direction, string river_direction){
       return 0;
     case 8:
       if (current_position>4) return 1;
-      return 0;  
+      return 0;
     case 1:
       if (current_position>3) return -1;
       return -2;
@@ -951,11 +951,11 @@ int query_x_correction(int boat_direction, string river_direction){
       return -3;
     case 2:
       if (current_position>3) return -3;
-      return -4;  
+      return -4;
     case 6:
       if (current_position>3) return -3;
       if (current_position==3) return -4;
-      return -5;  
+      return -5;
     case 3:
       if (current_position>3) return -5;
       return -6;
@@ -987,20 +987,20 @@ int query_x_correction(int boat_direction, string river_direction){
     switch(boat_direction)
     {
     case 0:
-      return 0;  
+      return 0;
     case 8:
-      return -3;  
+      return -3;
     case 1:
       if (current_position<4) return -3;
       return -2;
     case 7:
       if (current_position<4) return -5;
-      return -4;  
+      return -4;
     case 2:
-      return -4;  
+      return -4;
     case 6:
       if (current_position<4) return -8;
-      return -7;  
+      return -7;
     case 3:
       if (current_position<4) return -7;
       return -6;
@@ -1033,19 +1033,19 @@ int query_x_correction(int boat_direction, string river_direction){
       return 1;
     case 8:
       if (current_position>3) return -6;
-      return -7;  
+      return -7;
     case 1:
       return -3;
     case 7:
       if (current_position>3) return -7;
       return -7;
     case 2:
-      return -4;  
+      return -4;
     case 6:
       if (current_position>3) return -11;
-      return -11;  
+      return -11;
     case 3:
-      if (current_position>3) return -8;   
+      if (current_position>3) return -8;
       return -7;
     case 5:
       if (current_position<4) return -7;
@@ -1077,7 +1077,7 @@ int query_x_correction(int boat_direction, string river_direction){
     switch(boat_direction)
     {
     case 0:
-      return 0;  
+      return 0;
     case 8:
       if (current_position>3) return 0;
       return 1;
@@ -1089,7 +1089,7 @@ int query_x_correction(int boat_direction, string river_direction){
       return -3;
     case 3:
       if (current_position>3) return -5;
-      return -4;  
+      return -4;
     case 4:
       if (current_position>3) return -5;
      if (current_position ==3) return -4;
@@ -1119,9 +1119,9 @@ int query_x_correction(int boat_direction, string river_direction){
     {
     case 0:
       if (current_position<4) return 1;
-      return 0;  
+      return 0;
     case 8:
-      return 0;  
+      return 0;
     case 1:
       return -2;
     case 7:
@@ -1129,7 +1129,7 @@ int query_x_correction(int boat_direction, string river_direction){
       return -3;
     case 2:
       if (current_position >3) return -4;
-      return -5;  
+      return -5;
     case 6:
       if (current_position >3) return -4;
 //      if (current_position ==3) return -4;
@@ -1159,18 +1159,18 @@ int query_x_correction(int boat_direction, string river_direction){
     switch(boat_direction)
     {
     case 0:
-      return -2;  
+      return -2;
     case 8:
       if (current_position>3) return -3;
-      return -2;  
+      return -2;
     case 1:
       if (current_position>3) return -5;
       return -4;
-    case 7:   
+    case 7:
       return -5;
     case 2:
       if (current_position>3) return -7;
-      return -6;  
+      return -6;
     case 6:
 
       return -7;
@@ -1205,10 +1205,10 @@ int query_x_correction(int boat_direction, string river_direction){
     case 8:
     report("%^B_WHITE%^%^BOLD%^%^RED%^ADDING SPECIAL X CORRECTION for SOUTH facing");
       if (current_position>3)return 3;
-      return 4;  
+      return 4;
     case 1:
       if (current_position>3)return -2;
-      return -1;  
+      return -1;
     case 7:
       if (current_position>3)return 0;
       return 1;
@@ -1217,7 +1217,7 @@ int query_x_correction(int boat_direction, string river_direction){
       return -3;
     case 6:
       if (current_position>3)return -1;
-      return 0;  
+      return 0;
     case 3:
       if (current_position>3)return -7;
       return -6;
@@ -1243,10 +1243,10 @@ int query_x_correction(int boat_direction, string river_direction){
     {
     case 0:
       if (current_position>3) return -1;
-      return 0;  
+      return 0;
     case 8:
       if (current_position>3) return -1;
-      return 0;  
+      return 0;
     case 1:
       if (current_position>3) return -3;
       return -2;
@@ -1258,7 +1258,7 @@ int query_x_correction(int boat_direction, string river_direction){
       return -4;
     case 6:
       if (current_position>3) return -5;
-      return -4;  
+      return -4;
     case 3:
       return -7;
     case 5:
@@ -1284,7 +1284,7 @@ int query_x_correction(int boat_direction, string river_direction){
       return 4;
     case 8:
       if (current_position>3) return 1;
-      return 0;  
+      return 0;
     case 1:
       return 1;
     case 7:
@@ -1294,7 +1294,7 @@ int query_x_correction(int boat_direction, string river_direction){
       return -1;
     case 6:
       if (current_position>3) return -4;
-      return -5;  
+      return -5;
     case 3:
       return -4;
     case 5:
@@ -1321,37 +1321,37 @@ int query_x_correction(int boat_direction, string river_direction){
     case 0:
       return 8;
     case 8:
-      return 1;  
+      return 1;
     case 1:
       return 4;
     case 2:
       if (current_position>3) return 4;
-      return 3;  
+      return 3;
     case 3:
-      if (current_position>3) return 1;      
+      if (current_position>3) return 1;
       return 0;
     case 4:
       return 1;
     case 5:
-      if (current_position>3) return -2;      
+      if (current_position>3) return -2;
       return -1;
     case 6:
-      return -3;  
+      return -3;
     case 7:
       return 1;
     case 9:
       return 3;
     case 10:
-      if (current_position>3) return 3;      
+      if (current_position>3) return 3;
       return 2;
     case 11:
-      if (current_position>3) return 5;      
+      if (current_position>3) return 5;
       return 4;
     case 12..13:
-      if (current_position>3) return 8;      
+      if (current_position>3) return 8;
       return 7;
     case 14..15:
-      return 7;      
+      return 7;
     }
     break;
   case "westsouthwest":
@@ -1381,7 +1381,7 @@ int query_x_correction(int boat_direction, string river_direction){
     case 6:
       if (current_position>3) return -3;
       if (current_position == 3) return -4;
-      return -5;  
+      return -5;
     case 7:
       if (current_position>3) return -1;
       if (current_position>1) return -2;
@@ -1406,7 +1406,7 @@ int query_x_correction(int boat_direction, string river_direction){
     switch(boat_direction)
     {
     case 0:
-      return -8;  
+      return -8;
     case 1:
       return -9;
     case 2:
@@ -1425,7 +1425,7 @@ int query_x_correction(int boat_direction, string river_direction){
     case 7:
       return -5;
     case 8:
-      return -1; 
+      return -1;
     case 9..10:
       return -2;
     case 11:
@@ -1442,13 +1442,13 @@ int query_x_correction(int boat_direction, string river_direction){
     switch(boat_direction)
     {
     case 0:
-      return -1;  
+      return -1;
     case 1:
       if (current_position>3) return -2;
       return -3;
     case 2:
       if (current_position>3) return -4;
-      return -5;  
+      return -5;
     case 3:
       if (current_position>3) return -6;
       return -7;
@@ -1459,7 +1459,7 @@ int query_x_correction(int boat_direction, string river_direction){
       if (current_position>3) return -4;
       return -5;
     case 6:
-      if (current_position>3) return -1;     
+      if (current_position>3) return -1;
       return -2;
     case 7:
       if (current_position>3) return 0;
@@ -1473,7 +1473,7 @@ int query_x_correction(int boat_direction, string river_direction){
     case 10:
       if (current_position>3) return 3;
       if (current_position == 2) return 2;
-      return 1;    
+      return 1;
     case 11..13:
       if (current_position>3) return 1;
       if (current_position==3) return 0;
@@ -1491,14 +1491,14 @@ int query_x_correction(int boat_direction, string river_direction){
     {
     case 0:
     case 8:
-      return 0;  
+      return 0;
     case 1:
       return 1;
     case 7:
       return 0;
     case 2:
     case 6:
-      return -2;  
+      return -2;
     case 3:
       return -4;
     case 5:
@@ -1520,13 +1520,13 @@ int query_x_correction(int boat_direction, string river_direction){
     {
     case 0:
     case 8:
-      return 0;  
+      return 0;
     case 1:
     case 7:
       return -1;
     case 2:
     case 6:
-      return -4;  
+      return -4;
     case 3:
     case 5:
       return -6;
@@ -1553,8 +1553,8 @@ void show_river(object who){
   if (!intp(screen_height) || screen_height <21) screen_height = 30;
   report("screen_width: " + screen_width);
   for (i = current_position; i<sizeof(path)-1; i++)
-  { 
-    report("i: " + i);    
+  {
+    report("i: " + i);
     temp_display = display;
     build_map_section(current_progress, i - current_progress +1);
     if (sizeof(display)>0)
@@ -1562,7 +1562,7 @@ void show_river(object who){
       display_width = strlen(display[0]);
       display_height = sizeof(display);
     }
-    if (display_width >= screen_width-2 || display_height >=screen_height-8) 
+    if (display_width >= screen_width-2 || display_height >=screen_height-8)
     {
       report( "We broke out of the show river LOOP!");
       show_map(who, temp_display);
@@ -1577,7 +1577,7 @@ void show_river(object who){
 }
 
 void special_report(string str){
-  "/daemon/reporter_d"->report("lujke", str);
+  /* "/daemon/reporter_d"->report("lujke", str); */
 }
 
 varargs int query_y_correction(int boat_direction, string river_direction){
@@ -1596,7 +1596,7 @@ switch(river_direction){
       return 5;
     case 5:
     case 11:
-      return 3;  
+      return 3;
     case 9..10:
       return 4;
     case 6:
@@ -1628,7 +1628,7 @@ switch(river_direction){
       if (current_position>3) return 2;
       return 3;
     case 11:
-      return 2;  
+      return 2;
     case 9..10:
       return 3;
     case 6:
@@ -1661,7 +1661,7 @@ switch(river_direction){
     case 5:
     case 11:
       if (current_position>3) return 1;
-      return 2;  
+      return 2;
     case 9..10:
       if (current_position>3) return 2;
       return 3;
@@ -1690,9 +1690,9 @@ switch(river_direction){
     case 8:
       return -4;
     case 5:
-      return -1;  
+      return -1;
     case 11:
-      return -2;  
+      return -2;
     case 9:
       return -3;
     case 10:
@@ -1712,7 +1712,7 @@ switch(river_direction){
     case 14:
       return -1;
     }
-    break; 
+    break;
 
   case "northwest":
     switch(boat_direction)
@@ -1734,8 +1734,8 @@ switch(river_direction){
     case 2..4:
       return 1;
 //      if (current_position >2) return 0;
-      return -1;     
-    case 5: 
+      return -1;
+    case 5:
 //      if (current_position>3) return -1;
       return -2;
     case 1:
@@ -1754,7 +1754,7 @@ switch(river_direction){
       return 4;
     case 5:
     case 11:
-      return 2;  
+      return 2;
     case 9..10:
       return 3;
     case 6:
@@ -1780,7 +1780,7 @@ switch(river_direction){
       return 4;
     case 5:
     case 11:
-      return 2;  
+      return 2;
     case 9..10:
       return 3;
     case 6:
@@ -1808,7 +1808,7 @@ int add_north_block(){
     else pos = current_position *2;
 //    if (pos>13) pos = 13;
     pos += query_x_correction(current_direction, "north");
-    block = add_sprite_to_block(get_boat(current_direction), block, pos, 0);    
+    block = add_sprite_to_block(get_boat(current_direction), block, pos, 0);
   }
   if (sizeof(obstacles)>build_progress && obstacles[build_progress] != "none")
   {
@@ -1836,42 +1836,42 @@ int add_north_block(){
   case "none":
     block = N_BLOCK;
     report("Adding n_block to top twice");
-    add_block_top(N_BLOCK, 0, 5, 0, 5, "north");  
-    add_block_top(block, 0, 5, 0, 5, "north");     
-    break;  
+    add_block_top(N_BLOCK, 0, 5, 0, 5, "north");
+    add_block_top(block, 0, 5, 0, 5, "north");
+    break;
   case "north":
     report("Adding n_block to top twice");
-    add_block_top(N_BLOCK, 0, 5, 0, 5, "north");  
-    add_block_top(block, 0, 5, 0, 5, "north");     
-    break;  
+    add_block_top(N_BLOCK, 0, 5, 0, 5, "north");
+    add_block_top(block, 0, 5, 0, 5, "north");
+    break;
   case "northeast":
     report("Adding ne_n_block to top");
     add_block_top(NE_N_BLOCK,6,6,6,6, "north");
-    add_block_top(block, 0, 5, 0, 5, "north");      
+    add_block_top(block, 0, 5, 0, 5, "north");
     break;
   case "northwest":
     report("adding se_s block to top");
     add_block_top(S_SE_BLOCK,-6, 5, -6, 5, "north");
-    add_block_top(block, 0, 5, 0, 5, "north"); 
+    add_block_top(block, 0, 5, 0, 5, "north");
     break;
   case "northnorthwest":
     report("adding sse_s block to top");
     add_block_top(S_SSE_BLOCK,-2,5,-2,5, "north");
-    add_block_top(block, 0, 5, 0, 5, "north"); 
+    add_block_top(block, 0, 5, 0, 5, "north");
     break;
   case "northnortheast":
     report("Adding nne_n block to top");
-    add_block_top(NNE_N_BLOCK, 4, 6, 4, 6, "north");  
+    add_block_top(NNE_N_BLOCK, 4, 6, 4, 6, "north");
     left_x--;
     right_x--;
-    add_block_top(block, 0, 5, 0, 5, "north");      
-    break;  
+    add_block_top(block, 0, 5, 0, 5, "north");
+    break;
   case "eastnortheast":
     report("Adding ene_n block to right");
 //a    left_y--;
 //    right_y--;
     add_block_right(ENE_N_BLOCK, 4,2,19,9, "north");
-    add_block_top(block, 0, 5, 0, 5, "north");      
+    add_block_top(block, 0, 5, 0, 5, "north");
     left_y--;
     right_y--;
     break;
@@ -1882,18 +1882,18 @@ int add_north_block(){
     add_block_right(E_N_BLOCK, 2,1,17,8, "north");
     left_x--;
     right_x--;
-    add_block_top(block, 0, 5, 0, 5, "north");      
+    add_block_top(block, 0, 5, 0, 5, "north");
     break;
-  
+
   case "west":
     report("Adding s_e block to left");
     add_block_left(S_E_BLOCK, -16,7, -1,0, "north");
-    add_block_top(block, 0, 5, 0, 5, "north");   
+    add_block_top(block, 0, 5, 0, 5, "north");
     break;
   case "westnorthwest":
     report("Adding s_ese block to left");
     add_block_left(S_ESE_BLOCK, -17,9,-2,2, "north");
-    add_block_top(block, 0, 5, 0, 5, "north");   
+    add_block_top(block, 0, 5, 0, 5, "north");
     break;
   }
   previous_direction = "north";
@@ -1908,10 +1908,10 @@ int add_northnortheast_block(){
   {
     if (current_position <1) pos = 0;
     else pos = current_position *2;
-//    if (current_position<4) pos --; 
+//    if (current_position<4) pos --;
     pos += 4;
     pos += query_x_correction(current_direction, "northnortheast");
-    block = add_sprite_to_block(get_boat(current_direction), block, pos, 0);    
+    block = add_sprite_to_block(get_boat(current_direction), block, pos, 0);
   }
   if (sizeof(obstacles) > build_progress && obstacles[build_progress] != "none")
   {
@@ -1932,7 +1932,7 @@ int add_northnortheast_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "northnortheast";
-    add_block_top(block, 5,5,5,5, "northnortheast");    
+    add_block_top(block, 5,5,5,5, "northnortheast");
     return 1;
   }
   switch(previous_direction)
@@ -1940,16 +1940,16 @@ int add_northnortheast_block(){
   case "northeast":
     report ("adding ne_nne_block to top");
     add_block_top(NE_NNE_BLOCK,8,5,8,5, "northnortheast");
-    add_block_top(block, 5,5,5,5, "north");    
-    break;  
+    add_block_top(block, 5,5,5,5, "north");
+    break;
   case "none":
   case "north":
     report ("adding n_nne_block to top");
     add_block_top(N_NNE_BLOCK,1,4,1,4, "northnortheast");
     left_x ++;
     right_x ++;
-    add_block_top(block, 5,5,5,5, "northnortheast");   
-    break;  
+    add_block_top(block, 5,5,5,5, "northnortheast");
+    break;
     case "northwest":
     report ("adding ssw_se_block to top");
     left_x-=3;
@@ -1957,22 +1957,22 @@ int add_northnortheast_block(){
     add_block_top(SSW_SE_BLOCK,-2,5,-2,5, "northnortheast");
     left_x+=3;
     right_x+=3;
-    add_block_top(block, 5,5,5,5, "northnortheast");    
-    break;  
+    add_block_top(block, 5,5,5,5, "northnortheast");
+    break;
   case "northnorthwest":
     report ("adding ssw_se_block to top");
     add_block_top(SSW_SSE_BLOCK,2,5,2,5, "northnortheast");
-    add_block_top(block, 5,5,5,5, "northnortheast");    
-    break;  
+    add_block_top(block, 5,5,5,5, "northnortheast");
+    break;
   case "northnortheast":
     report("Adding nne block to top twice");
-    add_block_top(NNE_BLOCK, 5,5,5,5, "northnortheast");    
-    add_block_top(block, 5,5,5,5, "northnortheast");    
-    break;  
+    add_block_top(NNE_BLOCK, 5,5,5,5, "northnortheast");
+    add_block_top(block, 5,5,5,5, "northnortheast");
+    break;
   case "east":
     report("Adding e_nne block to right");
     add_block_right(E_NNE_BLOCK, 3,1,18,8, "northnortheast");
-    add_block_top(block, 5,5,5,5, "northnortheast");    
+    add_block_top(block, 5,5,5,5, "northnortheast");
     break;
   case "eastsoutheast":
     report("Adding ese_NNE block to right");
@@ -1995,7 +1995,7 @@ int add_northnortheast_block(){
     right_x+=2;
     add_block_top(block, 5,5,5,5, "northnortheast");
     break;
-  } 
+  }
   previous_direction = "northnortheast";
   return 1;
 }
@@ -2011,7 +2011,7 @@ int add_northeast_block(){
     else pos = current_position *2;
     pos += 8;
     pos += query_x_correction(current_direction, "northeast");
-    block = add_sprite_to_block(get_boat(current_direction), block, pos, 0);    
+    block = add_sprite_to_block(get_boat(current_direction), block, pos, 0);
   }
 
   if (sizeof(obstacles) > build_progress && obstacles[build_progress] != "none")
@@ -2036,7 +2036,7 @@ int add_northeast_block(){
     previous_direction = "northeast";
     add_block_top(block, 9, 5, 9, 5, "northeast");
     left_x++;
-    right_x++;    
+    right_x++;
     return 1;
   }
 
@@ -2050,22 +2050,22 @@ int add_northeast_block(){
     add_block_top(block, 9,5,9,5, "northeast");
     left_x++;
     right_x++;
-    break;   
+    break;
   case "none":
   case "northeast":
     report ("Adding ne_block to top twice");
-    add_block_top(NE_BLOCK, 9,5,9,5, "northeast"); 
+    add_block_top(NE_BLOCK, 9,5,9,5, "northeast");
     left_x++;
-    right_x++; 
-    add_block_top(block, 9,5,9,5, "northeast");  
+    right_x++;
+    add_block_top(block, 9,5,9,5, "northeast");
     left_x++;
-    right_x++; 
-    break;  
+    right_x++;
+    break;
   case "north":
     report("Adding n_ne block to top");
     add_block_top(N_NE_BLOCK,4,4,4,4, "northeast");
     add_block_top(block, 9,5,9,5, "northeast");
-    break;   
+    break;
   case "northwest":
     report("Adding se_sw block to top");
     left_x-=3;
@@ -2074,7 +2074,7 @@ int add_northeast_block(){
     left_x+=3;
     right_x+=3;
     add_block_top(block, 9,5,9,5, "northeast");
-    break;   
+    break;
   case "eastnortheast":
     report("Adding ene_ne block to right");
 //    left_y++;
@@ -2117,8 +2117,8 @@ int add_northeast_block(){
     add_block_top(SW_SSE_BLOCK,4,5,4,5, "northnortheast");
     left_x--;
     right_x--;
-    add_block_top(block, 9,5,9,5, "northnortheast");    
-    break;  
+    add_block_top(block, 9,5,9,5, "northnortheast");
+    break;
   }
   previous_direction = "northeast";
   return 1;
@@ -2136,8 +2136,8 @@ int add_eastnortheast_block(){
     pos ++;
     report("Y correction: " + query_y_correction(current_direction));
     if (query_y_correction(current_direction)!=0)  pos -= query_y_correction(current_direction);
-    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos); 
-    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");   
+    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos);
+    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");
   }
 
   if (sizeof(obstacles) > build_progress && obstacles[build_progress] != "none")
@@ -2162,9 +2162,9 @@ int add_eastnortheast_block(){
     previous_direction = "eastnortheast";
     left_x++;
     right_x++;
-    add_block_top(block, 11, 4, 11, 4, "eastnortheast");   
+    add_block_top(block, 11, 4, 11, 4, "eastnortheast");
     left_y--;
-    right_y--; 
+    right_y--;
     return 1;
   }
   switch(previous_direction)
@@ -2176,7 +2176,7 @@ int add_eastnortheast_block(){
     add_block_right(block, 11,4,11,4, "eastnortheast");
     left_y--;
     right_y--;
-    break; 
+    break;
   case "northeast":
     report("Adding ne_ene block to top");
     left_x++;
@@ -2184,7 +2184,7 @@ int add_eastnortheast_block(){
     add_block_top(NE_ENE_BLOCK, 20,9,5,2, "eastnortheast");
     left_x++;
     right_x ++;
-    add_block_right(block, 11,4,11,4, "eastnortheast");  
+    add_block_right(block, 11,4,11,4, "eastnortheast");
     left_y--;
     right_y--;
 //    left_x --;
@@ -2196,7 +2196,7 @@ int add_eastnortheast_block(){
     add_block_right(block, 11,4,11,4, "eastnortheast");
     left_y--;
     right_y--;
-    break;  
+    break;
   case "eastnortheast":
     report("Adding ene block to right twice");
     left_x++;
@@ -2232,7 +2232,7 @@ int add_eastnortheast_block(){
 //    left_x--;
 //    right_x--;
     left_y--;
-    right_y--;  
+    right_y--;
 //    left_x++;
 //    right_x++;
     break;
@@ -2283,8 +2283,8 @@ int add_east_block(){
     report("Y correction: " + query_y_correction(current_direction));
 //    if (current_position >2) pos ++;
     if (query_y_correction(current_direction)!=0)  pos -= query_y_correction(current_direction);
-    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos); 
-    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");   
+    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos);
+    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");
   }
 
 
@@ -2308,7 +2308,7 @@ int add_east_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "east";
-    add_block_right(block, 8, 0, 8, 0, "east");  
+    add_block_right(block, 8, 0, 8, 0, "east");
     return 1;
   }
   switch(previous_direction)
@@ -2330,9 +2330,9 @@ int add_east_block(){
     break;
   case "northeast":
     report("Adding ne_e block to top");
-    add_block_top(NE_E_BLOCK, 20,9,5,2, "east");  
+    add_block_top(NE_E_BLOCK, 20,9,5,2, "east");
     add_block_right(block, 8,0,8,0, "east");
-    break;  
+    break;
   case "eastnortheast":
     report("Adding ene_e block to right");
 //    left_y--;
@@ -2352,7 +2352,7 @@ int add_east_block(){
     add_block_right(block, 8,0,8,0, "east");
     left_x--;
     right_x--;
-    break;  
+    break;
   case "eastsoutheast":
     report("Adding ese_e block to right");
     add_block_right(ESE_E_BLOCK,15,-4,15,-4, "east");
@@ -2378,7 +2378,7 @@ int add_east_block(){
 //    left_y++;
 //    right_y++;
     break;
-  case "south": 
+  case "south":
     report("Adding s_e block to bottom");
     add_block_bottom(S_E_BLOCK, 0,0, 15,-7);
 //    add_block_right(block, 8,0,8,0);
@@ -2396,14 +2396,14 @@ int add_eastsoutheast_block(){
   {
     if (current_position <1) pos = 0;
     else pos = current_position;
-    sprite_x = 0; // 
+    sprite_x = 0; //
     if (current_position>1) sprite_x++;
     pos +=3;
     report("Y correction: " + query_y_correction(current_direction));
 //    if (current_position>3) pos --;
     if (query_y_correction(current_direction)!=0)  pos -= query_y_correction(current_direction);
-    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos); 
-    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");   
+    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos);
+    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");
   }
 
   if (sizeof(obstacles) > build_progress && obstacles[build_progress] != "none")
@@ -2425,7 +2425,7 @@ int add_eastsoutheast_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "eastsoutheast";
-    add_block_right(block, 9,-3,9,-3, "eastsoutheast");  
+    add_block_right(block, 9,-3,9,-3, "eastsoutheast");
     return 1;
   }
   switch(previous_direction)
@@ -2437,12 +2437,12 @@ int add_eastsoutheast_block(){
     break;
   case "northnortheast":
     report("Adding nne_ese block to top");
-    add_block_top(NNE_ESE_BLOCK, 17,8,2,1, "eastsoutheast");  
+    add_block_top(NNE_ESE_BLOCK, 17,8,2,1, "eastsoutheast");
     add_block_right(block, 9,-3,9,-3, "eastsoutheast");
     break;
   case "northeast":
     report("adding ne_ese block to top");
-    add_block_top(NE_ESE_BLOCK, 16,8,1,1, "eastsoutheast");  
+    add_block_top(NE_ESE_BLOCK, 16,8,1,1, "eastsoutheast");
     add_block_right(block, 9,-3,9,-3, "eastsoutheast");
     break;
   case "eastsoutheast":
@@ -2482,7 +2482,7 @@ int add_eastsoutheast_block(){
     left_x--;
     right_x--;
     break;
-  case "south": 
+  case "south":
     report("Adding s_ese block to bottom");
     add_block_bottom(S_ESE_BLOCK, 2,-2,17,-9, "eastsoutheast");
     add_block_right(block, 9,-3,9,-3, "eastsoutheast");
@@ -2517,8 +2517,8 @@ int add_southeast_block(){
     sprite_x = 21+ query_x_correction(current_direction, "southeast") - current_position*2;
     report("Y correction: " + query_y_correction(current_direction));
     if (query_y_correction(current_direction)!=0)  pos -= query_y_correction(current_direction);
-    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos); 
-    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");   
+    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos);
+    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");
   }
 
   if (sizeof(obstacles) > build_progress && obstacles[build_progress] != "none")
@@ -2542,7 +2542,7 @@ int add_southeast_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "southeast";
-    add_block_bottom(block, 10,-5,10,-5, "southeast");  
+    add_block_bottom(block, 10,-5,10,-5, "southeast");
     left_x--; right_x--;
     return 1;
   }
@@ -2551,8 +2551,8 @@ int add_southeast_block(){
   case "none":
   case "northeast":
     report("Adding ne_se block to top");
-    add_block_top(NE_SE_BLOCK, 36,-1,6,-1, "southeast"); 
-    break;  
+    add_block_top(NE_SE_BLOCK, 36,-1,6,-1, "southeast");
+    break;
   case "eastsoutheast":
     report("Adding ese_se block to right");
     add_block_right(ESE_SE_BLOCK,21,-10,6,-3, "southeast");
@@ -2594,7 +2594,7 @@ int add_southeast_block(){
     add_block_bottom(SSE_SE_BLOCK, 8,-6,8,-6, "southeast");
     add_block_bottom(block, 9,-5,9,-5, "southeast");
     break;
-  case "south": 
+  case "south":
     report("Adding s_se block to bottom");
     add_block_bottom(S_SE_BLOCK, 6, -5, 6,-5, "southeast");
     add_block_bottom(block, 9,-5,9,-5, "southeast");
@@ -2636,8 +2636,8 @@ int add_southsoutheast_block(){
  //   if (current_position>2) pos --;
     sprite_y=0;
     pos += query_x_correction(current_direction, "southsoutheast");
-    block = add_sprite_to_block(get_boat(current_direction), block, pos, sprite_y);    
-  } 
+    block = add_sprite_to_block(get_boat(current_direction), block, pos, sprite_y);
+  }
   if (sizeof(block)<1) block = temp_block;
   temp_block = block;
 
@@ -2663,7 +2663,7 @@ int add_southsoutheast_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "southsoutheast";
-    add_block_bottom(block, 5,-5,5,-5, "southsoutheast");  
+    add_block_bottom(block, 5,-5,5,-5, "southsoutheast");
     return 1;
   }
   switch(previous_direction)
@@ -2701,46 +2701,46 @@ int add_southsoutheast_block(){
     right_x++;
     left_y++;
     right_y++;
-    add_block_bottom(SE_SSE_BLOCK, 7,-6,7,-6, "southsoutheast");  
+    add_block_bottom(SE_SSE_BLOCK, 7,-6,7,-6, "southsoutheast");
     add_block_bottom(block, 5,-5,5,-5, "southsoutheast");
-    break;  
+    break;
   case "southsoutheast":
     report("Adding sse block to bottom twice");
     add_block_bottom(SSE_BLOCK, 5,-5,5,-5, "southsoutheast");
     add_block_bottom(block, 5,-5,5,-5, "southsoutheast");
-    break;  
+    break;
   case "none":
   case "south":
     report("Adding s_sse block to bottom");
     left_y++;
     right_y++;
-    add_block_bottom(S_SSE_BLOCK, 2,-5,2,-5, "southsoutheast");  
+    add_block_bottom(S_SSE_BLOCK, 2,-5,2,-5, "southsoutheast");
     left_y++;
     right_y++;
     add_block_bottom(SSE_BLOCK, 5,-5,5,-5, "southsoutheast");
-    break;  
+    break;
   case "southwest":
     report("Adding sw_sse block to bottom");
     left_x-=8;
     right_x-=8;
     left_y++;
     right_y++;
-    add_block_bottom(SW_SSE_BLOCK, 5,-6, 5,-6, "southsoutheast");  
+    add_block_bottom(SW_SSE_BLOCK, 5,-6, 5,-6, "southsoutheast");
     left_x-=3;
     right_x-=3;
     add_block_bottom(block, 5,-5,5,-5, "southsoutheast");
-    break;  
+    break;
   case "southsouthwest":
     report("Adding ssw_sse block to bottom");
-    add_block_bottom(SSW_SSE_BLOCK, -2,-5, -2,-5, "southsoutheast");  
+    add_block_bottom(SSW_SSE_BLOCK, -2,-5, -2,-5, "southsoutheast");
     add_block_bottom(SSE_BLOCK, 5,-5,5,-5, "southsoutheast");
-    break;  
+    break;
   case "westsouthwest":
     report("Adding wsw_sse  block to bottom");
-    add_block_bottom(WSW_SSE_BLOCK, -4,-2, -19,-9, "southsoutheast");  
+    add_block_bottom(WSW_SSE_BLOCK, -4,-2, -19,-9, "southsoutheast");
     add_block_bottom(SSE_BLOCK, 5,-5,5,-5, "southsoutheast");
-    break;  
-  } 
+    break;
+  }
   previous_direction = "southsoutheast";
   return 1;
 }
@@ -2757,7 +2757,7 @@ int add_south_block(){
 //    if (current_position>2) pos --;
     sprite_y=-1;
     pos += query_x_correction(current_direction, "south");
-    block = add_sprite_to_block(get_boat(current_direction), block, pos, sprite_y);    
+    block = add_sprite_to_block(get_boat(current_direction), block, pos, sprite_y);
   }
 
 
@@ -2782,7 +2782,7 @@ int add_south_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "south";
-    add_block_bottom(block, 0,-5,0,-5, "south");  
+    add_block_bottom(block, 0,-5,0,-5, "south");
     return 1;
   }
   switch(previous_direction)
@@ -2798,7 +2798,7 @@ int add_south_block(){
     add_block_bottom(block, 0,-5,0,-5, "south");
     break;
   case "east":
-    report("Adding eastsouth block to right"); 
+    report("Adding eastsouth block to right");
     add_block_right(E_S_BLOCK, 18,-9,3,-2, "south");
     left_x-=2;
     right_x-=2;
@@ -2807,7 +2807,7 @@ int add_south_block(){
   case "southeast":
     report("Adding se_s block to bottom");
     left_x++;
-    right_x++;  
+    right_x++;
     add_block_bottom(SE_S_BLOCK, 7,-6,7,-6, "south");
     left_y++;
     right_y++;
@@ -2824,7 +2824,7 @@ int add_south_block(){
     right_x--;
     add_block_bottom(block, 0,-5,0,-5, "south");
     break;
-  case "south": 
+  case "south":
     report("Adding s_s block to bottom twice");
     add_block_bottom(N_BLOCK, 0,-5,0,-5, "south");
     add_block_bottom(block, 0,-5,0,-5, "south");
@@ -2871,7 +2871,7 @@ int add_southsouthwest_block(){
     if (current_position>3) pos --;
     sprite_y=0;
     pos += query_x_correction(current_direction, "southsouthwest");
-    block = add_sprite_to_block(get_boat(current_direction), block, pos, sprite_y);    
+    block = add_sprite_to_block(get_boat(current_direction), block, pos, sprite_y);
   }
 
   if (sizeof(obstacles) > build_progress && obstacles[build_progress] != "none")
@@ -2893,25 +2893,25 @@ int add_southsouthwest_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "southsouthwest";
-    add_block_bottom(block, -5,-5,-5,-5, "southsouthwest");  
+    add_block_bottom(block, -5,-5,-5,-5, "southsouthwest");
     return 1;
   }
   switch(previous_direction)
-  {  
+  {
   case "eastsoutheast":
     report("Adding ese_ssw block to left");
     add_block_right(ESE_SSW_BLOCK, 18, -10, 4, -3, "southsouthwest");
     left_x++;
     right_x++;
-    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest"); 
-    break; 
+    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest");
+    break;
   case "west":
     report("Adding nne_e block to left");
     left_y--;
     right_y--;
     add_block_left(NNE_E_BLOCK, -3,-1,-18,-8, "southsouthwest");
-    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest"); 
-    break; 
+    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest");
+    break;
   case "westsouthwest":
     report("Adding nne_ese block to right");
     left_x--;
@@ -2920,13 +2920,13 @@ int add_southsouthwest_block(){
     right_y++;
 
     add_block_left(NNE_ENE_BLOCK, -3,-3,-18,-10, "southsouthwest");
-    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest"); 
+    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest");
     break;
   case "none":
   case "south":
     report("Adding nne_n block to bottom");
     add_block_bottom(NNE_N_BLOCK, -3,-6,-3,-6, "southsouthwest");
-    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest"); 
+    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest");
     break;
   case "southeast":
     report("Adding nne_nw block to bottom");
@@ -2937,31 +2937,31 @@ int add_southsouthwest_block(){
     left_x++;
 //    left_y++;
 //    right_y++;
-    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest"); 
+    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest");
     break;
   case "southwest":
-    report("Adding nne_ne block to bottom");    
+    report("Adding nne_ne block to bottom");
     add_block_bottom(NNE_NE_BLOCK, -8,-5,-8,-5, "southsouthwest");
-//    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest"); 
+//    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest");
     break;
   case "southsoutheast":
     report("Adding nne_nnw block to bottom");
     add_width_right(5);
     add_block_bottom(SSE_SSW_BLOCK, 5,-6,1,-6, "southsouthwest");
     left_x-=4;
-    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest"); 
+    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest");
     break;
   case "southsouthwest":
     report("Adding nne_nne block to bottom twice");
-    add_block_bottom(NNE_BLOCK,-5,-5,-5,-5, "southsouthwest"); 
-    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest"); 
+    add_block_bottom(NNE_BLOCK,-5,-5,-5,-5, "southsouthwest");
+    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest");
     break;
   case "westnorthwest":
     report("Adding nne_ene block to bottom twice");
-    add_block_left(NNE_ENE_BLOCK,-5,-2,-20,-9, "southsouthwest"); 
-    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest"); 
+    add_block_left(NNE_ENE_BLOCK,-5,-2,-20,-9, "southsouthwest");
+    add_block_bottom(block,-5,-5,-5,-5, "southsouthwest");
     break;
-  } 
+  }
   previous_direction = "southsouthwest";
   return 1;
 }
@@ -2978,7 +2978,7 @@ int add_southwest_block(){
 //    if (current_position>2) pos --;
     sprite_y=0;
     pos += query_x_correction(current_direction, "southwest");
-    block = add_sprite_to_block(get_boat(current_direction), block, pos, sprite_y);    
+    block = add_sprite_to_block(get_boat(current_direction), block, pos, sprite_y);
   }
 
 
@@ -3003,7 +3003,7 @@ int add_southwest_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "southwest";
-    add_block_bottom(block, -10,-5,-10,-5, "southwest");  
+    add_block_bottom(block, -10,-5,-10,-5, "southwest");
     return 1;
   }
   switch(previous_direction)
@@ -3017,15 +3017,15 @@ int add_southwest_block(){
     right_y++;
     left_x--;
     right_x--;
-    add_block_bottom(block, -10,-5,-10,-5, "southwest"); 
+    add_block_bottom(block, -10,-5,-10,-5, "southwest");
     break;
   case "none":
-  case "south": 
+  case "south":
     report("Adding ne_n block to bottom");
     add_block_bottom(NE_N_BLOCK, -6,-6,-6,-6, "southwest");
     left_x--;
     right_x--;
-    add_block_bottom(block, -10,-5,-10,-5, "southwest"); 
+    add_block_bottom(block, -10,-5,-10,-5, "southwest");
     break;
   case "southsoutheast":
     report("Adding sse_sw block to bottom");
@@ -3036,7 +3036,7 @@ int add_southwest_block(){
 //    right_x --;
 //    left_y++;
 //    right_y++;
-    add_block_bottom(block, -10,-5,-10,-5, "southwest"); 
+    add_block_bottom(block, -10,-5,-10,-5, "southwest");
     break;
   case "southsouthwest":
     report("Adding ss_sw block to bottom");
@@ -3045,19 +3045,19 @@ int add_southwest_block(){
     left_x--;
     right_x--;
     add_block_bottom(NE_NNE_BLOCK, -7,-6,-7,-6, "southwest");
-    add_block_bottom(block, -10,-5,-10,-5, "southwest"); 
+    add_block_bottom(block, -10,-5,-10,-5, "southwest");
     break;
   case "southwest":
     report("Adding ne block to bottom twice");
-    add_block_bottom(NE_BLOCK,-10,-5,-10,-5, "southwest"); 
-    add_block_bottom(block, -10,-5,-10,-5, "southwest"); 
+    add_block_bottom(NE_BLOCK,-10,-5,-10,-5, "southwest");
+    add_block_bottom(block, -10,-5,-10,-5, "southwest");
     break;
   case "westnorthwest":
     report("Adding ne_ene block to left");
     add_block_left(NE_ENE_BLOCK, -4,-2,-19,-9, "southwest");
     left_y--;
     right_y--;
-    add_block_bottom(block, -10,-5,-10,-5, "southwest"); 
+    add_block_bottom(block, -10,-5,-10,-5, "southwest");
     break;
   case "west":
     report("Adding ne_e block to left");
@@ -3066,7 +3066,7 @@ int add_southwest_block(){
     right_y--;
     left_x--;
     right_x--;
-    add_block_bottom(block, -10,-5,-10,-5, "southwest"); 
+    add_block_bottom(block, -10,-5,-10,-5, "southwest");
     break;
   case "westsouthwest":
     report("Adding ne_ene block to left");
@@ -3075,7 +3075,7 @@ int add_southwest_block(){
     add_block_left(NE_ENE_BLOCK, -5,-2,-19,-9, "southwest");
     left_y--;
     right_y--;
-    add_block_bottom(block, -10,-5,-10,-5, "southwest"); 
+    add_block_bottom(block, -10,-5,-10,-5, "southwest");
     break;
   case "northwest":
     report("Adding ne_se block to top");
@@ -3084,7 +3084,7 @@ int add_southwest_block(){
     right_x--;
     left_y--;
     right_y--;
-    add_block_bottom(block, -10,-5,-10,-5, "southwest"); 
+    add_block_bottom(block, -10,-5,-10,-5, "southwest");
     break;
   }
   previous_direction = "southwest";
@@ -3103,7 +3103,7 @@ int add_westsouthwest_block(){
     report("Y correction: " + query_y_correction(current_direction), "westsouthwest");
 //    if (current_position>3) pos --;
     if (query_y_correction(current_direction, "westsouthwest")!=0)  pos -= query_y_correction(current_direction, "westsouthwest");
-    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos); 
+    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos);
   }
   if (sizeof(obstacles) > build_progress && obstacles[build_progress] != "none")
   {
@@ -3124,43 +3124,43 @@ int add_westsouthwest_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "westsouthwest";
-    add_block_bottom(block, -12,-3,-12,-3, "westsouthwest"); 
+    add_block_bottom(block, -12,-3,-12,-3, "westsouthwest");
     return 1;
   }
   switch(previous_direction)
   {
   case "none":
     report("Adding ene block to top");
-    add_block_top(ENE_BLOCK,0,0,0,7, "westsouthwest"); 
+    add_block_top(ENE_BLOCK,0,0,0,7, "westsouthwest");
 
     break;
   case "northnorthwest":
     report("Adding ene block to top");
-    add_block_top(ENE_SSE_BLOCK, -3,1,-18,8, "westsouthwest"); 
+    add_block_top(ENE_SSE_BLOCK, -3,1,-18,8, "westsouthwest");
     left_y++;
     right_y++;
-    add_block_bottom(block, -11,-4,-11,-4, "southwest"); 
+    add_block_bottom(block, -11,-4,-11,-4, "southwest");
     break;
   case "northwest":
     report("Adding ene_se block to top");
-    add_block_top(NW_WSW_BLOCK, -6,1,-21,8, "westsouthwest");  
-//    add_block_bottom(block, -11,-5,-11,-5, "southwest"); 
-    break;  
+    add_block_top(NW_WSW_BLOCK, -6,1,-21,8, "westsouthwest");
+//    add_block_bottom(block, -11,-5,-11,-5, "southwest");
+    break;
   case "westnorthwest":
     report ("adding ene_ese block to left");
-    add_block_left(ENE_ESE_BLOCK, -14,0,-14,0, "westsouthwest");  
+    add_block_left(ENE_ESE_BLOCK, -14,0,-14,0, "westsouthwest");
     left_y++;
     right_y++;
     left_x--;
     right_x--;
-    add_block_bottom(block, -11,-4,-11,-4, "southwest"); 
+    add_block_bottom(block, -11,-4,-11,-4, "southwest");
     break;
   case "west":
     report ("adding ene_e block to left");
     add_block_left(ENE_E_BLOCK, -14,-4,-14,-4, "westsouthwest");
     left_y++;
-    right_y++;  
-    add_block_bottom(block, -11,-4,-11,-4, "southwest"); 
+    right_y++;
+    add_block_bottom(block, -11,-4,-11,-4, "southwest");
     break;
   case "westsouthwest":
     report("Adding ene block to left twice");
@@ -3168,14 +3168,14 @@ int add_westsouthwest_block(){
     right_x--;
     left_y++;
     right_y++;
-    add_block_bottom(ENE_BLOCK, -11,-4,-11,-4, "southwest"); 
+    add_block_bottom(ENE_BLOCK, -11,-4,-11,-4, "southwest");
     left_y++;
     right_y++;
     left_x--;
     right_x--;
-    add_block_bottom(block, -11,-4,-11,-4, "southwest"); 
+    add_block_bottom(block, -11,-4,-11,-4, "southwest");
     break;
-  case "south": 
+  case "south":
     report("Adding ene_n block to bottom");
     left_x++;
     right_x++;
@@ -3184,7 +3184,7 @@ int add_westsouthwest_block(){
     right_x--;
     left_y++;
     right_y++;
-    add_block_bottom(block, -11,-4,-11,-4, "southwest"); 
+    add_block_bottom(block, -11,-4,-11,-4, "southwest");
     break;
   case "southsouthwest":
     report("Adding ene_nne block to bottom");
@@ -3193,12 +3193,12 @@ int add_westsouthwest_block(){
     right_x--;
     left_y++;
     right_y++;
-    add_block_bottom(block, -11,-4,-11,-4, "southwest"); 
+    add_block_bottom(block, -11,-4,-11,-4, "southwest");
     break;
   case "southwest":
     report("Adding ene_ne block to bottom");
     add_block_bottom(ENE_NE_BLOCK, -17,-8,-3,-1, "westsouthwest");
-    add_block_bottom(block, -12,-3,-12,-3, "westsouthwest"); 
+    add_block_bottom(block, -12,-3,-12,-3, "westsouthwest");
     break;
   case "southsoutheast":
     report("Adding sse_wsw block to bottom");
@@ -3231,8 +3231,8 @@ int add_west_block(){
     report("Y correction: " + query_y_correction(current_direction, "west"));
 //    if (current_position >2) pos ++;
     if (query_y_correction(current_direction, "west")!=0)  pos -= query_y_correction(current_direction, "west");
-    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos); 
-    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_west_block");   
+    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos);
+    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_west_block");
   }
 
 
@@ -3257,7 +3257,7 @@ int add_west_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "west";
-    add_block_left(block, -8,0,-8,0, "west"); 
+    add_block_left(block, -8,0,-8,0, "west");
     return 1;
   }
   switch(previous_direction)
@@ -3339,13 +3339,13 @@ int add_westnorthwest_block(){
     sprite_x += query_x_correction(current_direction, "westnorthwest");
     report("Y correction: " + query_y_correction(current_direction, "westnorthwest"));
     if (query_y_correction(current_direction)!=0)  pos += query_y_correction(current_direction, "westnorthwest");
-    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos); 
-    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");   
+    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos);
+    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");
   }
 
   if (sizeof(obstacles) > build_progress && sizeof(obstacle_placements)>build_progress && obstacles[build_progress] != "none" && intp(obstacle_placements[build_progress]))
   {
- 
+
     pos = 8 - obstacle_placements[build_progress];
     sprite_x = 3; // 7 - obstacle_placements[build_progress];
     if (intp(query_sprite_y_correction (obstacles[build_progress], 13)))  pos -= query_sprite_y_correction(obstacles[build_progress], 13);
@@ -3370,7 +3370,7 @@ int add_westnorthwest_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "westnorthwest";
-    add_block_left(block, -9,3,-9,3, "westnorthwest"); 
+    add_block_left(block, -9,3,-9,3, "westnorthwest");
     return 1;
   }
   switch(previous_direction)
@@ -3381,26 +3381,26 @@ int add_westnorthwest_block(){
     right_x++;
     add_block_top(ENE_SSW_BLOCK, -4, 3, -19, 10, "westnorthwest");
     left_y--;
-    right_y--;  
+    right_y--;
     add_block_left(block, -9,3,-9,3, "westnorthwest");     left_y++;
     right_y++;
-    break;  
+    break;
   case "north":
   case "none":
     report("Adding n_wnw block to top");
-    add_block_top(N_WNW_BLOCK, -2,0,-17,7, "westnorthwest");  
+    add_block_top(N_WNW_BLOCK, -2,0,-17,7, "westnorthwest");
     left_x--;
     right_x--;
     add_block_left(block, -9, 3,-9,3, "westnorthwest");
-    break;  
+    break;
   case "northwest":
     report("Adding ese_se block to top");
-    add_block_top(NW_WNW_BLOCK, -6,2,-21,9, "westnorthwest");  
-    add_block_left(block, -9,3,-9,3, "westnorthwest");     break;  
+    add_block_top(NW_WNW_BLOCK, -6,2,-21,9, "westnorthwest");
+    add_block_left(block, -9,3,-9,3, "westnorthwest");     break;
   case "northnorthwest":
     report("Adding ese_ssw block to top");
-    add_block_top(ESE_SSE_BLOCK, -1, 0,-16, 7, "westnorthwest");  
-    add_block_left(block, -9,3,-9,3, "westnorthwest");     break;  
+    add_block_top(ESE_SSE_BLOCK, -1, 0,-16, 7, "westnorthwest");
+    add_block_left(block, -9,3,-9,3, "westnorthwest");     break;
   case "westnorthwest":
     report("adding ese_block to left twice");
     add_block_left(ESE_BLOCK, -9, 3,-9,3, "westnorthwest");
@@ -3465,8 +3465,8 @@ int add_northwest_block(){
     sprite_x = 9+ query_x_correction(current_direction, "northwest")+ current_position*2;
     report("Y correction: " + query_y_correction(current_direction, "northwest"));
     if (query_y_correction(current_direction, "northwest")!=0)  pos -= query_y_correction(current_direction, "northwest");
-    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos); 
-    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");   
+    block = add_sprite_to_block(get_boat(current_direction), block, sprite_x, pos);
+    if (sizeof(block)<1) report("%^B_GREEN%^Size of block is <1 in add_eastnortheast_block");
   }
 
 
@@ -3496,13 +3496,13 @@ int add_northwest_block(){
     previous_direction = "northwest";
     left_x--;
     right_x--;
-    add_block_top(block, -9,5,-9,5, "northwest"); 
+    add_block_top(block, -9,5,-9,5, "northwest");
     return 1;
   }
   switch(previous_direction)
   {
   case "southwest":
-    report("Adding se_ne block to bottom");  
+    report("Adding se_ne block to bottom");
     add_block_bottom(SE_NE_BLOCK, -35,-7,-5,-7, "northwest");
     left_y += 7;
     right_y += 7;
@@ -3512,14 +3512,14 @@ int add_northwest_block(){
     add_block_left(SE_ESE_BLOCK,-19,9,-4,2, "northwest");
     left_x--;
     right_x--;
-    add_block_top(block, -9,5,-9,5, "northwest"); 
+    add_block_top(block, -9,5,-9,5, "northwest");
     break;
   case "west":
     report("adding se_e_block to left");
     add_block_left(SE_E_BLOCK, -18,9,-3,2, "northwest");
     left_x --;
     right_x--;
-    add_block_top(block, -9,5,-9,5, "northwest"); 
+    add_block_top(block, -9,5,-9,5, "northwest");
     break;
   case "westsouthwest":
     report("Adding se_ene block to left");
@@ -3528,26 +3528,26 @@ int add_northwest_block(){
     add_block_left(SE_ENE_BLOCK, -18,8,-3,1, "northwest");
     left_x--;
     right_x--;
-    add_block_top(block, -9,5,-9,5, "northwest"); 
+    add_block_top(block, -9,5,-9,5, "northwest");
     break;
   case "northnortheast":
     report("Adding nne_nw block to top");
     left_x--;
     right_x--;
     add_block_top(NNE_NW_BLOCK,-4,6,-4,6, "northwest");
-    add_block_top(block, -9,5,-9,5, "northwest"); 
+    add_block_top(block, -9,5,-9,5, "northwest");
     break;
   case "northwest":
     report("Adding nw block to top twice");
     add_block_top(SE_BLOCK, -10,5,-10,5, "northwest");
-    add_block_top(block, -10,5,-10,5, "northwest"); 
+    add_block_top(block, -10,5,-10,5, "northwest");
     break;
   case "northnorthwest":
     report("Adding se_sse block to top");
     add_block_top(SE_SSE_BLOCK,-7,5,-7,5, "northwest");
     left_x--;
     right_x--;
-    add_block_top(block, -9,5,-9,5, "northwest"); 
+    add_block_top(block, -9,5,-9,5, "northwest");
     break;
   case "none":
   case "north":
@@ -3557,14 +3557,14 @@ int add_northwest_block(){
     right_x--;
     report("%^B_MAGENTA%^%^BOLD%^%^YELLOW%^Previous Direction: " + previous_direction);
     previous_direction = "north_northwest";
-    add_block_top(block, -9,5,-9,5, "northwest"); 
+    add_block_top(block, -9,5,-9,5, "northwest");
     left_y++;
     right_y++;
     break;
   case "northeast":
     report("Adding NE_NW block to top");
     add_block_top(NE_NW_BLOCK,-1,6,-1,6, "northwest");
-    add_block_top(block, -9,5,-9,5, "northwest"); 
+    add_block_top(block, -9,5,-9,5, "northwest");
     break;
   }
   previous_direction = "northwest";
@@ -3581,7 +3581,7 @@ int add_northnorthwest_block(){
     else pos = current_position *2;
     pos +=2;
     pos += query_x_correction(current_direction, "northnorthwest");
-    block = add_sprite_to_block(get_boat(current_direction), block, pos, 0);    
+    block = add_sprite_to_block(get_boat(current_direction), block, pos, 0);
   }
 
   if (sizeof(obstacles) > build_progress && obstacles[build_progress] != "none")
@@ -3603,54 +3603,54 @@ int add_northnorthwest_block(){
     bottom_edge = 0;
     trim_display();
     previous_direction = "northnorthwest";
-    add_block_top(block, -5,5,-5,5, "northnorthwest"); 
+    add_block_top(block, -5,5,-5,5, "northnorthwest");
     return 1;
   }
   switch(previous_direction)
   {
   case "eastnortheast":
     report("Adding ene_nnw block to right");
-    add_block_right(ENE_NNW_BLOCK, 1,4,15,11, "northnorthwest");  
+    add_block_right(ENE_NNW_BLOCK, 1,4,15,11, "northnorthwest");
     add_block_top(block, -5,5,-5,5, "northnorthwest");
-    break;   
+    break;
   case "none":
   case "north":
     report("Adding n_nnw block to top");
-    add_block_top(N_NNW_BLOCK, -2,5,-2,5, "northnorthwest");  
+    add_block_top(N_NNW_BLOCK, -2,5,-2,5, "northnorthwest");
     add_block_top(block, -5,5,-5,5, "northnorthwest");
-    break;   
+    break;
   case "northeast":
     report("Adding ne_nnw block to top");
-    add_block_top(NE_NNW_BLOCK, 1,7,1,7, "northnorthwest");  
+    add_block_top(NE_NNW_BLOCK, 1,7,1,7, "northnorthwest");
     add_block_top(block, -5,5,-5,5, "northnorthwest");
-    break;   
+    break;
   case "northwest":
     report("Adding sse_se block to top");
-    add_block_top(SSE_SE_BLOCK, -8,5,-8,5, "northnorthwest");  
+    add_block_top(SSE_SE_BLOCK, -8,5,-8,5, "northnorthwest");
     add_block_top(block, -5,5,-5,5, "northnorthwest");
-    break;   
+    break;
   case "northnorthwest":
     report("Adding sse block to top twice");
     add_block_top(SSE_BLOCK, -5,5,-5,5, "northnorthwest");
     add_block_top(block, -5,5,-5,5, "northnorthwest");
-    break;   
+    break;
   case "northnortheast":
     report("Adding sse_ssw block to top");
-    add_block_top(SSE_SSW_BLOCK, -1,5,-1,5, "northnorthwest");  
+    add_block_top(SSE_SSW_BLOCK, -1,5,-1,5, "northnorthwest");
     left_y++;
     right_y++;
     add_block_top(block, -5,5,-5,5, "northnorthwest");
     left_y++;
     right_y++;
-    break;   
+    break;
   case "west":
     report("Adding sse_e block to left");
-    add_block_left(SSE_E_BLOCK, -17,8,-2,1, "northnorthwest");  
+    add_block_left(SSE_E_BLOCK, -17,8,-2,1, "northnorthwest");
     add_block_top(block, -5,5,-5,5, "northnorthwest");
-    break;   
+    break;
   case "westsouthwest":
     report("Adding sse_ene block to left");
-    add_block_left(SSE_ENE_BLOCK, -18,-1,-3,-8, "northnorthwest");  
+    add_block_left(SSE_ENE_BLOCK, -18,-1,-3,-8, "northnorthwest");
     left_y+=9;
     right_y+=9;
     left_x-=4;
@@ -3658,13 +3658,13 @@ int add_northnorthwest_block(){
     add_block_top(block, -5,5,-5,5, "northnorthwest");
     left_x+=3;
     right_x+=3;
-    break;   
+    break;
   case "westnorthwest":
     report("Adding sse_ese block to top");
-    add_block_left(SSE_ESE_BLOCK, -22,9,-7,2, "northnorthwest");  
+    add_block_left(SSE_ESE_BLOCK, -22,9,-7,2, "northnorthwest");
     add_block_top(block, -5,5,-5,5, "northnorthwest");
-    break;   
-  } 
+    break;
+  }
   previous_direction = "northnorthwest";
   return 1;
 }
@@ -3682,64 +3682,64 @@ int show_block(string blockname){
   case "nne":
     map = NNE_BLOCK;
     break;
-  case "ne": 
+  case "ne":
     map = NE_BLOCK;
     break;
-  case "ene": 
+  case "ene":
     map = ENE_BLOCK;
     break;
-  case "e": 
+  case "e":
     map = E_BLOCK;
     break;
-  case "ese": 
+  case "ese":
     map = ESE_BLOCK;
     break;
-  case "se": 
+  case "se":
     map = SE_BLOCK;
     break;
-  case "sse": 
+  case "sse":
     map = SSE_BLOCK;
     break;
-  case "n_w": 
+  case "n_w":
     map = N_W_BLOCK;
     break;
-  case "n_wnw": 
+  case "n_wnw":
     map = N_WNW_BLOCK;
     break;
-  case "n_nw": 
+  case "n_nw":
     map = N_NW_BLOCK;
     break;
-  case "n_nnw": 
+  case "n_nnw":
     map = N_NNW_BLOCK;
     break;
-  case "n_nne": 
+  case "n_nne":
     map = N_NNE_BLOCK;
     break;
-  case "n_ne": 
+  case "n_ne":
     map = N_NE_BLOCK;
     break;
-  case "n_ene": 
+  case "n_ene":
     map = N_ENE_BLOCK;
     break;
-  case "n_e": 
+  case "n_e":
     map = N_E_BLOCK;
     break;
-  case "nne_wnw": 
+  case "nne_wnw":
     map = NNE_WNW_BLOCK;
     break;
-  case "nne_nw": 
+  case "nne_nw":
     map = NNE_NW_BLOCK;
     break;
-  case "nne_nnw": 
+  case "nne_nnw":
     map = NNE_NNW_BLOCK;
     break;
-  case "nne_n": 
+  case "nne_n":
     map = NNE_N_BLOCK;
     break;
-  case "nne_ne": 
+  case "nne_ne":
     map = NNE_NE_BLOCK;
     break;
-  case "nne_ene": 
+  case "nne_ene":
     map = NNE_ENE_BLOCK;
     break;
   }
@@ -3779,7 +3779,7 @@ void show_whole_display(object who){
 //    count_line += i%10;
 //  }
 //  tell_object(TP, count_line);
-//  tell_object(TP, "" + left_edge);  
+//  tell_object(TP, "" + left_edge);
 }
 
 int query_left_x(){
@@ -3824,7 +3824,7 @@ int trim_top(){
   int i, siz;
   siz = sizeof(display);
   if (siz<1) return 0;
-  line = display[0];  
+  line = display[0];
   for (i=0;i<strlen(line);i++)
   {
     if (line[i..i]!= " ")
@@ -3842,7 +3842,7 @@ int trim_bottom(){
   int i, siz;
   siz = sizeof(display);
   if (siz<1) return 0;
-  line = display[siz-1];  
+  line = display[siz-1];
   for (i=0;i<strlen(line);i++)
   {
     if (line[i..i]!= " ")
@@ -3870,7 +3870,7 @@ int trim_left(){
     line = display[i];
     line = line[1..sizeof(line)-1];
     display[i] = line;
-  }  
+  }
   left_edge ++;
   return 1;
 }
@@ -3891,7 +3891,7 @@ int trim_right(){
     line = line[0..sizeof(line)-2];
     display[i] = line;
   }
-  right_edge--;  
+  right_edge--;
   return 1;
 }
 
@@ -3902,7 +3902,7 @@ void adjust_edges(){
   if (right_y<bottom_edge) bottom_edge = right_y;
   if (left_x>right_edge) right_edge = left_x;
   if (right_x>right_edge) right_edge = right_x;
-  if (left_x<left_edge) left_edge = left_x; 
+  if (left_x<left_edge) left_edge = left_x;
   if (right_x<left_edge) left_edge = right_x;
 }
 
@@ -3910,7 +3910,7 @@ void adjust_width(int left_adjust_x, int right_adjust_x){
   int new_left_x, new_right_x;
   new_left_x = left_x + left_adjust_x;
   new_right_x = right_x + right_adjust_x;
-  report ("Adjusting width left. left_x: " + left_x + "  left_adjust_x: " + left_adjust_x + " new_left_x: " + new_left_x + "  right_x: " + right_x +" right_adjust_x: " + right_adjust_x + " new_right_x: " + new_right_x + " left_edge: " + left_edge + "  right_edge: " + right_edge);    
+  report ("Adjusting width left. left_x: " + left_x + "  left_adjust_x: " + left_adjust_x + " new_left_x: " + new_left_x + "  right_x: " + right_x +" right_adjust_x: " + right_adjust_x + " new_right_x: " + new_right_x + " left_edge: " + left_edge + "  right_edge: " + right_edge);
   if (new_left_x < left_edge)
   {
     add_width_left( (new_left_x * -1) - (left_edge * -1));
@@ -3978,22 +3978,22 @@ varargs void adjust_height(int left_adjust_y, int right_adjust_y, int blocksize)
     if (new_left_y <= bottom_edge +1)
     {
       how_many = bottom_edge - new_left_y +1;
-      report("%^BOLD%^%^RED%^ADJUST HEIGHT: Adding " + how_many + " lines to bottom"); 
+      report("%^BOLD%^%^RED%^ADJUST HEIGHT: Adding " + how_many + " lines to bottom");
       add_height_bottom(how_many);
     }
-  } else 
+  } else
   {
     if (new_right_y <= bottom_edge +1)
     {
       how_many = bottom_edge - new_right_y +1;
       report("%^BOLD%^%^RED%^ADJUST HEIGHT: Adding " + how_many + " lines to bottom ");
       add_height_bottom(how_many);
-    } else 
+    } else
     {
       report ("%^BOLD%^%^RED%^ADJUST_HEIGHT: No need to add any lines to bottom after initial check");
     }
   }
-  if (temp_bottom<bottom_edge) 
+  if (temp_bottom<bottom_edge)
   {
       how_many = bottom_edge - temp_bottom +1;
       report("%^BOLD%^%^MAGENTA%^ADJUST HEIGHT SECONDARY CHECK: Adding " + how_many + " lines to bottom ");
@@ -4002,13 +4002,13 @@ varargs void adjust_height(int left_adjust_y, int right_adjust_y, int blocksize)
   if (new_left_y > top_edge -1)
   {
     how_many = new_left_y - top_edge+1;
-      report("%^BOLD%^%^MAGENTA%^ADJUST HEIGHT: Adding " + how_many + " lines to top ");    
+      report("%^BOLD%^%^MAGENTA%^ADJUST HEIGHT: Adding " + how_many + " lines to top ");
     add_height_top(new_left_y - top_edge);
   }
   if (new_right_y > top_edge-1)
   {
     how_many = new_right_y - top_edge +1;
-    report("%^BOLD%^%^MAGENTA%^ADJUST HEIGHT: Adding " + how_many + " lines to top ");    
+    report("%^BOLD%^%^MAGENTA%^ADJUST HEIGHT: Adding " + how_many + " lines to top ");
     add_height_top(new_right_y - top_edge);
   }
   temp_top = temp_bottom + blocksize+1;
@@ -4095,7 +4095,7 @@ varargs int add_block_top(string * block, left_adjust_x, left_adjust_y, right_ad
   if(left_x < right_x)
   {
     x = left_x - left_edge;
-  } else 
+  } else
   {
     x = right_x - left_edge;
   }
@@ -4134,7 +4134,7 @@ varargs int add_block_top(string * block, left_adjust_x, left_adjust_y, right_ad
 
     top_point = calculate_top_point (left_adjust_y, right_adjust_y, sizeof(block), sizeof(display));
     insert_block(block, x, top_point, direction);
-  } else 
+  } else
   {
     report("adding block on top of existing display");
     full_width = strlen(display[0]);
@@ -4211,11 +4211,11 @@ leftest_x, rightest_x, bottom_left, bottom_right, top_left, top_right, temp_bott
     adjust_width(0, 0);
     adjust_edges();
     return 1;
-  } 
-  x = left_x; 
+  }
+  x = left_x;
   if (left_adjust_x<1) x += left_adjust_x;
   if (right_x<x) x = right_x;
-  if (right_x + right_adjust_x < x) x = right_x + right_adjust_x;  
+  if (right_x + right_adjust_x < x) x = right_x + right_adjust_x;
   report("%^BOLD%^%^MAGENTA%^About to adjust width. Current width: " + strlen(display[0]) + " left_adjust_x: " + left_adjust_x + " right_adjust_x: " + right_adjust_x);
   report ("%^B_BLUE%^X 1: " + x + " width: " + strlen(display[0]) + " left edge: " + left_edge);
   adjust_width(left_adjust_x + left_point_adjust, right_adjust_x+ right_point_adjust);
@@ -4243,17 +4243,17 @@ leftest_x, rightest_x, bottom_left, bottom_right, top_left, top_right, temp_bott
   if (right_x + right_adjust_x > rightest_x) rightest_x = right_x + right_adjust_x;
   if (right_point_adjust>0) rightest_x += right_point_adjust;
     adjust_width(leftest_x - left_x, rightest_x - right_x);
-  if (left_adjust_y<0) 
+  if (left_adjust_y<0)
   {
     top_left = left_y + left_adjust_y;
-  } else 
+  } else
   {
     top_left = left_y;
   }
-  if (right_adjust_y<0) 
+  if (right_adjust_y<0)
   {
     top_right = right_y + right_adjust_y;
-  } else 
+  } else
   {
     top_right = right_y;
   }
@@ -4269,11 +4269,11 @@ leftest_x, rightest_x, bottom_left, bottom_right, top_left, top_right, temp_bott
   if ( temp_top >= bottom_edge)
   {
     report("Add_block_bottom: inserting block into existing display");
-    report("%^B_RED%^%^BOLD%^%^BLACK%^Add_block_bottom: first line of existing display: \n" + display[0]);  
+    report("%^B_RED%^%^BOLD%^%^BLACK%^Add_block_bottom: first line of existing display: \n" + display[0]);
 //    if(left_x < right_x)
 //    {
 //      x = left_x;
-//    } else 
+//    } else
 //    {
 //      x = right_x;
 //    }
@@ -4291,13 +4291,13 @@ leftest_x, rightest_x, bottom_left, bottom_right, top_left, top_right, temp_bott
   report ("%^B_BLUE%^X 5a: " + x + " width: " + strlen(display[0]) + " left edge: " + left_edge);
 
     insert_block(block, x, top_point, direction);
-  } else 
+  } else
   {
     report("adding block under existing display");
     full_width = strlen(display[0]);
     left_placement = x;
     report ("%^B_BLUE%^X 6: " + x + " width: " + strlen(display[0]) + " left edge: " + left_edge);
-    report ("%^BOLD%^%^YELLOW%^Insert block bottom. Left placement =" + left_placement); 
+    report ("%^BOLD%^%^YELLOW%^Insert block bottom. Left placement =" + left_placement);
     for (i=height;i>0;i--)
     {
       line  = "";
@@ -4348,31 +4348,31 @@ leftest_x, rightest_x, bottom_left, bottom_right, top_left, top_right, temp_bott
 
 string query_coords(){
   string result;
-  result = "left_x: " + left_x + "left_y: " + left_y + " right_x: " + right_x + " right_y: " + right_y + "."; 
+  result = "left_x: " + left_x + "left_y: " + left_y + " right_x: " + right_x + " right_y: " + right_y + ".";
   return result;
 }
 
 int calculate_bottom_point(int left_adjust_y, int right_adjust_y){
   int bottom_left, bottom_right, bottom_point;
-  report ("Calculating bottom point. left_y: " + left_y  + " left_adjust_y: " + left_adjust_y + " right_y: "+ right_y + " right_adjust_y: " + right_adjust_y); 
-  if (left_adjust_y<0) 
+  report ("Calculating bottom point. left_y: " + left_y  + " left_adjust_y: " + left_adjust_y + " right_y: "+ right_y + " right_adjust_y: " + right_adjust_y);
+  if (left_adjust_y<0)
   {
     bottom_left = left_y + left_adjust_y;
-  } else 
+  } else
   {
     bottom_left = left_y;
   }
-  if (right_adjust_y<0) 
+  if (right_adjust_y<0)
   {
     bottom_right = right_y + right_adjust_y;
-  } else 
+  } else
   {
     bottom_right = right_y;
   }
   if (bottom_left < bottom_right)
   {
     bottom_point = bottom_left;
-  } else 
+  } else
   {
     bottom_point = bottom_right;
   }
@@ -4387,22 +4387,22 @@ varargs int calculate_top_point(int left_adjust_y, int right_adjust_y, int block
     {
       report("%^BOLD%^%^BLUE%^1");
       if (left_y + left_adjust_y < right_y + right_adjust_y)
-      { 
+      {
         report("%^BOLD%^%^BLUE%^2");
         bottom_placement = full_height- (left_y + left_adjust_y) +1;
-      } else 
+      } else
       {
         report("%^BOLD%^%^BLUE%^3");
         bottom_placement = full_height- (right_y + right_adjust_y) +1;
       }
     } else
     {
-      if (left_y<right_y) 
+      if (left_y<right_y)
       {
         report("%^BOLD%^%^BLUE%^4");
         bottom_placement = full_height - left_y +1 ;
-      } else 
-      { 
+      } else
+      {
         report("%^BOLD%^%^BLUE%^5");
         bottom_placement = full_height - right_y +1;
       }
@@ -4428,10 +4428,10 @@ int query_initial_left_x(string direction){
   case "south":
   case "southsouthwest":
   case "southwest":
-    return 15; 
+    return 15;
   case "westsouthwest":
   case "westnorthwest":
-    return 9; 
+    return 9;
   case "west":
     return 8;
   case "northwest":
@@ -4450,7 +4450,7 @@ int query_initial_right_x(string direction){
   case "east":
     return 14;
   case "west":
-    return 14; 
+    return 14;
   }
 }
 
@@ -4463,7 +4463,7 @@ int query_initial_left_y(string direction){
   case "east":
     return 7;
   case "west":
-    return 0; 
+    return 0;
   }
 }
 
@@ -4476,7 +4476,7 @@ int query_initial_right_y(string direction){
   case "east":
     return 0;
   case "west":
-    return 7; 
+    return 7;
   }
 }
 
@@ -4489,8 +4489,8 @@ int add_block_right(string * block, left_adjust_x, left_adjust_y, right_adjust_x
   if (height >0)
   {
     width = strlen(block[0]);
-  } else 
-  { 
+  } else
+  {
     report ("Add_block_right error: block is not valid");
     return 0;
   }
@@ -4513,7 +4513,7 @@ int add_block_right(string * block, left_adjust_x, left_adjust_y, right_adjust_x
   if(left_x < right_x)
   {
     x = left_x;
-  } else 
+  } else
   {
     x = right_x;
   }
@@ -4522,7 +4522,7 @@ int add_block_right(string * block, left_adjust_x, left_adjust_y, right_adjust_x
 //    y = left_y;
     report("left_y: " + left_y + "bottom edge: " + bottom_edge);
     y = left_y - bottom_edge;
-    report("y: " + y); 
+    report("y: " + y);
   } else
   {
 //    y = right_y;
@@ -4537,8 +4537,8 @@ int add_block_right(string * block, left_adjust_x, left_adjust_y, right_adjust_x
 //  y = sizeof(display) + bottom_edge - y;
 //   report("Actual y: " + y);
   flag = 0;
-  if ( left_x < right_edge) flag = 1;  
-  if ( right_x < right_edge) flag = 1;  
+  if ( left_x < right_edge) flag = 1;
+  if ( right_x < right_edge) flag = 1;
   if ( flag ==1)
   {
     report ("FLAG == 1");
@@ -4557,9 +4557,9 @@ int add_block_right(string * block, left_adjust_x, left_adjust_y, right_adjust_x
     case "east":
       left_x --;
       right_x --;
-      break;  
+      break;
     }
-  } else 
+  } else
   {
     report("adding block to right of existing display. Left_y: " + left_y + " Right_y: " + right_y + " Left_adjust_y: " + left_adjust_y + " Right_adjust_y: " + right_adjust_y + " Right Edge: " + right_edge);
 
@@ -4568,19 +4568,19 @@ int add_block_right(string * block, left_adjust_x, left_adjust_y, right_adjust_x
     if (left_adjust_y <0 || right_adjust_y<0)
     {
       if (left_y + left_adjust_y < right_y + right_adjust_y)
-      { 
+      {
         bottom_placement = full_height - left_y - left_adjust_y;
-      } else 
+      } else
       {
         bottom_placement = full_height - right_y - right_adjust_y;
       }
     } else
     {
-      if (left_y<right_y) 
+      if (left_y<right_y)
       {
         bottom_placement = left_y;
-      } else 
-      { 
+      } else
+      {
         bottom_placement = right_y;
       }
     }
@@ -4605,7 +4605,7 @@ int add_block_right(string * block, left_adjust_x, left_adjust_y, right_adjust_x
       {
         report ("i (" + i + ") is not within placement range. Adding blank line");
         tmp = "";
-        tmp = tmp + line;  
+        tmp = tmp + line;
         display[i] = display[i] + tmp;
         continue;
       }
@@ -4613,7 +4613,7 @@ int add_block_right(string * block, left_adjust_x, left_adjust_y, right_adjust_x
       report ("j= " + j);
       tmp = "";
       tmp = tmp + display[i];
-      display[i] = tmp + block[j]; // + " j =  " + j;  
+      display[i] = tmp + block[j]; // + " j =  " + j;
       j ++;
     }
   }
@@ -4640,7 +4640,7 @@ int add_block_right(string * block, left_adjust_x, left_adjust_y, right_adjust_x
 int query_bottom_edge(){
   return bottom_edge;
 }
- 
+
 int query_top_edge(){
   return top_edge;
 }
@@ -4654,7 +4654,7 @@ int add_block_left(string * block, left_adjust_x, left_adjust_y, right_adjust_x,
   if (height >0)
   {
     width = strlen(block[0]);
-  } else 
+  } else
   {
     report ("Add_block_left error: block is not valid");
     return 0;
@@ -4702,14 +4702,14 @@ int add_block_left(string * block, left_adjust_x, left_adjust_y, right_adjust_x,
     }
     if (x<left_edge) add_width_left(left_edge - x);
     report("%^B_CYAN%^%^BOLD%^%^WHITE%^4a) Left edge: " + left_edge);
-    
+
     report("inserting block into existing display. Left_x: " + left_x + " Right_x: " + right_x + " Right_edge: " + right_edge);
     blockline = block[0];
     report("%^B_CYAN%^%^BOLD%^%^WHITE%^4b) Left edge: " + left_edge);
  //   insert_block(block, x - strlen(blockline)+1, y-1, direction);
     insert_block(block, x, y-1, direction);
     report("%^B_CYAN%^%^BOLD%^%^WHITE%^4c) Left edge: " + left_edge);
-  } else 
+  } else
   {
     report("adding block to left of existing display. Left_y: " + left_y + " Right_y: " + right_y + " Left_adjust_y: " + left_adjust_y + " Right_adjust_y: " + right_adjust_y);
   report("%^B_CYAN%^%^BOLD%^%^WHITE%^5) Left edge: " + left_edge);
@@ -4718,16 +4718,16 @@ int add_block_left(string * block, left_adjust_x, left_adjust_y, right_adjust_x,
     report("%^BOLD%^%^MAGENTA%^Switching on direction. Direction: " + direction + " Previous direction: " + previous_direction + " top_placement: " + top_placement);
     report("%^BOLD%^%^YELLO%^Finished switching on direction. Direction: " + direction + " Previous direction: " + previous_direction + " top_placement: " + top_placement);
     bottom_placement = top_placement + sizeof(block);
- 
+
   report("%^B_CYAN%^%^BOLD%^%^WHITE%^6) Left edge: " + left_edge);
   report("Add_block_left: %^BOLD%^%^GREEN%^CHECKING WHETHER I NEED TO ADD HEIGHT TO BOTTOM! y:" + y + " sizeof(display): "+sizeof(display));
   if(y + sizeof(block)>sizeof(display)-1)
   {
-    add_height_bottom(y-sizeof(display) +1 + sizeof(block));  
+    add_height_bottom(y-sizeof(display) +1 + sizeof(block));
     report("%^B_ORANGE%^Height added to bottom: " + (y-sizeof(display) +1 + sizeof(block)));
   }
   report("%^B_CYAN%^%^BOLD%^%^WHITE%^7) Left edge: " + left_edge);
- 
+
 //Make blank line of the right width
     line = "";
     for (i=0;i<strlen(block[0]);i++)
@@ -4745,8 +4745,8 @@ int add_block_left(string * block, left_adjust_x, left_adjust_y, right_adjust_x,
         report ("i (" + i + ") is not within placement range. Adding blank line");
         tmp = "";
 //        tmp = tmp + i;
-        tmp = tmp + line; 
-//        if (i<10) tmp = tmp + " "; 
+        tmp = tmp + line;
+//        if (i<10) tmp = tmp + " ";
         display[i] = tmp + display[i];
         continue;
       }
@@ -4757,7 +4757,7 @@ int add_block_left(string * block, left_adjust_x, left_adjust_y, right_adjust_x,
 //      if (i<10) tmp = tmp + " ";
       tmp = tmp + block[j];
       report("%^BOLD%^%^CYAN%^block[j]: %^WHITE%^'" + block[j] + "'%^YELLOW%^  tmp: %^WHITE%^'" + tmp + "'");
-      display[i] = tmp + display[i]; // + " j =  " + j;  
+      display[i] = tmp + display[i]; // + " j =  " + j;
       j ++;
     }
   }
@@ -4768,7 +4768,7 @@ int add_block_left(string * block, left_adjust_x, left_adjust_y, right_adjust_x,
   right_x += right_adjust_x;
   right_y += right_adjust_y;
   adjust_edges();
-  report("%^B_CYAN%^%^BOLD%^%^WHITE%^9a) Left edge: " + left_edge);  
+  report("%^B_CYAN%^%^BOLD%^%^WHITE%^9a) Left edge: " + left_edge);
   trim_display();
   report("%^B_CYAN%^%^BOLD%^%^WHITE%^9b) Left edge: " + left_edge);
   switch(direction)
@@ -4836,10 +4836,10 @@ int query_left_adjust_x(string direction){
     case "east":
     switch(previous_direction)
     {
-      case "north": 
-      case "northeast": 
+      case "north":
+      case "northeast":
         return 20;
-        break;    
+        break;
       case "east":
         return 14;
         break;
@@ -5118,7 +5118,7 @@ void insert_block(string * block, int x, int y, string direction){
     report("%^BOLD%^%^WHITE%^Adding width to the right. x:" + x + " left edge: " + left_edge + " strlen(block[0]): " + strlen(block[0]) + " strlen(display[0]): " + strlen(display[0]));
     add_width_right(x - left_edge + strlen(block[0]) - strlen(display[0]));
     report("%^B_MAGENTA%^%^BOLD%^%^WHITE%^Insert_block 1a: x: " + x);
-  } else 
+  } else
   {
     report("%^BOLD%^%^BLACK%^No need to add width to the right. x:" + x + " strlen(block[0]): " + strlen(block[0]) + " strlen(display[0]): " + strlen(display[0]) + " left_x: " + left_x + " right_x: " + right_x);
   }
@@ -5135,11 +5135,11 @@ void insert_block(string * block, int x, int y, string direction){
   {
     report("%^BOLD%^%^WHITE%^Adding width to the left. x:" + x + " left_edge: " + left_edge );
     add_width_left((x-left_edge));
-  } else 
+  } else
   {
     report("%^BOLD%^%^BLACK%^No need to add width to the left. x:" + x + " left_edge: " + left_edge );
   }
-  report("%^B_MAGENTA%^%^BOLD%^%^WHITE%^Insert_block 4: x: " + x);  
+  report("%^B_MAGENTA%^%^BOLD%^%^WHITE%^Insert_block 4: x: " + x);
   report( " %^B_GREEN%^%^BOLD%^%^WHITE%^Insert_block 4) Sizeof display: " + sizeof(display));
   if (full_height<1) return;
 
@@ -5159,7 +5159,7 @@ void insert_block(string * block, int x, int y, string direction){
   if(y + sizeof(block)>sizeof(display)-1)
   {
     height_added = y-sizeof(display)+1+sizeof(block);
-    add_height_bottom(y-sizeof(display) +1 + sizeof(block));  
+    add_height_bottom(y-sizeof(display) +1 + sizeof(block));
     report("%^B_ORANGE%^Height added to bottom: " + (y-sizeof(display) +1 + sizeof(block)));
     report( " %^B_GREEN%^%^BOLD%^%^WHITE%^Insert_block 6a) Sizeof display: " + sizeof(display));
   }
@@ -5169,11 +5169,11 @@ void insert_block(string * block, int x, int y, string direction){
   if(y<0)
   {
     height_added = 0-y;
-    add_height_top(0-y);  
+    add_height_top(0-y);
     report("%^B_ORANGE%^Height added to top: " + (0-y));
     report("%^B_GREEN%^%^BOLD%^%^WHITE%^New size of display: " + sizeof(display));
     y=0;
-  } 
+  }
   x-=left_edge;
   report("%^B_MAGENTA%^%^BOLD%^%^WHITE%^Insert_block 8: x: " + x + " %^BOLD%^%^YELLOW%^Y: " + y);
   report( " %^B_GREEN%^%^BOLD%^%^WHITE%^Insert_block 8) Sizeof display: " + sizeof(display));
@@ -5186,18 +5186,18 @@ void insert_block(string * block, int x, int y, string direction){
     line += display[line_no];
     report ("%^BOLD%^%^GREEN%^Line successfully added");
     report ("i = " + i + " line_no = " + line_no);
-    report ("Inserting block at line_no " + line_no + " x = " + x); 
-    report ("Block line to be inserted: " + block[i-y]); 
+    report ("Inserting block at line_no " + line_no + " x = " + x);
+    report ("Block line to be inserted: " + block[i-y]);
     count2 = strlen(line);
     if (left_x<right_x)
     {
       lower_x = left_x;
-    } else 
+    } else
     {
       lower_x = right_x;
     }
-    if (left_x + left_adjust_x < lower_x)  lower_x = left_x + left_adjust_x; 
-    if (right_x + right_adjust_x < lower_x)  lower_x = right_x + right_adjust_x; 
+    if (left_x + left_adjust_x < lower_x)  lower_x = left_x + left_adjust_x;
+    if (right_x + right_adjust_x < lower_x)  lower_x = right_x + right_adjust_x;
 
     report("%^BOLD%^%^GREEN%^About to insert block. x: " + x + " left edge: " + left_edge);
     for (j=x;j<x+strlen(block[0]);j++)
@@ -5216,17 +5216,17 @@ void insert_block(string * block, int x, int y, string direction){
 //        } else {
           report ("%^BOLD%^%^YELLOW%^x = " + x + "  j = " + j + "  Adjusted line");
 //        }
-      }else 
+      }else
       {
         report ("Not a blank space. Character found: " + line[j..j] + "  j = : " + j + " line no: " + line_no + " i: " + i) ;
-      }   
-    
+      }
+
     }
     report("About to replace a line. i =  " + i);
     display[line_no] = line;
   }
   report("%^B_MAGENTA%^%^BOLD%^%^WHITE%^Insert_block 10: x: " + x);
-  report ("%^BOLD%^%^MAGENTA%^Insert_block: Adjusting x & y. Left_x: " + left_x + " Right_x: " + right_x + "Left_adjust_x: " + left_adjust_x + " Right_adjust_x: " + right_adjust_x); 
+  report ("%^BOLD%^%^MAGENTA%^Insert_block: Adjusting x & y. Left_x: " + left_x + " Right_x: " + right_x + "Left_adjust_x: " + left_adjust_x + " Right_adjust_x: " + right_adjust_x);
 }
 
 string substitute_character(string ch){
@@ -5255,7 +5255,7 @@ varargs string * add_sprite_to_block(string * sprite, string * block, int x, int
     if (stringp(spritename))
     {
       // special_report("Sprite name: " + spritename);
-    } else 
+    } else
     {
       // special_report("Sprite name is not a valid string. BOO!");
     }
@@ -5269,14 +5269,14 @@ varargs string * add_sprite_to_block(string * sprite, string * block, int x, int
       if (sizeof(obstacles)> build_progress){
         // special_report("Obstacles[build_progress] = " + obstacles[build_progress]);
       }
-    } else 
+    } else
     {
       // special_report("Sprite  name: " + spritename);
     }
     if (sizeof(path)>build_progress)
-    { 
+    {
       // special_report("direction: " + path[build_progress]);
-    } else 
+    } else
     {
       // special_report("sizeof path: " + sizeof(path) + " build progress: " + build_progress);
     }
@@ -5287,7 +5287,7 @@ varargs string * add_sprite_to_block(string * sprite, string * block, int x, int
     return ({});
   }
   sprite_width = strlen(sprite[0]);
-  if (sprite_width<1) 
+  if (sprite_width<1)
   {
     report("sprite is width zero");
     return ({});
@@ -5298,7 +5298,7 @@ varargs string * add_sprite_to_block(string * sprite, string * block, int x, int
     return ({});
   }
 
-  if (y>height) 
+  if (y>height)
   {
     report("y > height. y: " + y + " width: " + width);
     return ({});
@@ -5328,6 +5328,6 @@ varargs string * add_sprite_to_block(string * sprite, string * block, int x, int
     if (j<=width -1) newline += line[j..width-1];
     newblock += ({newline});
   }
-  if (y+ sprite_height<=height-1) newblock += block[y+sprite_height..height-1];  
+  if (y+ sprite_height<=height-1) newblock += block[y+sprite_height..height-1];
   return newblock;
 }
