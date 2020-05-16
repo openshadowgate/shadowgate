@@ -1,4 +1,4 @@
-//Nobacherie.c - The Tabaxi Elder                                 
+//Nobacherie.c - The Tabaxi Elder
 // Coded by Lujke 13/03/10
 #include <std.h>
 #include <party.h>
@@ -47,7 +47,7 @@ void create(){
 }
 
 set_responses(){
-  set_response(({"hello", "greetings", "good day", "gooday", "hi", "hai"}), 
+  set_response(({"hello", "greetings", "good day", "gooday", "hi", "hai"}),
            ({"Hmm"}), "greet" );
   set_response(({"tabaxi"}), ({"Wee arre dee peeple of dee jongle, and dee"
               +" farmers of dee maize. Wee would be jus fine if eet was"
@@ -59,7 +59,7 @@ set_responses(){
                +" refusing to giff ourr %^BOLD%^%^YELLOW%^maize%^RESET%^ to"
                +" dee %^GREEN%^orogs%^RESET%^. Dey attacked the veellage"
                +" and we werre unable to fight dem off. Dey burrned all off"
-               +" ourr %^BOLD%^%^YELLOW%^grain %^RESET%^storres."}), 
+               +" ourr %^BOLD%^%^YELLOW%^grain %^RESET%^storres."}),
                "extort" );
   set_response(({ "help", "defend"}), ({"Could you elp uss defend ourr"
                +" veellage? Just nod to me eef you will. Dere could be some"
@@ -80,7 +80,7 @@ set_responses(){
                 +" thee stores to carry us from one harvest to thee next. Weethout it, many of us"
                 +" would starve." }) );
   set_response( ({"warrior"}), ({"You look like you would bee good in a fight. Would you"
-                +" help us %^CYAN%^fight them off%^RESET%^?"}) ); 
+                +" help us %^CYAN%^fight them off%^RESET%^?"}) );
   set_response( ({"fight them off", "fighting them off"}),({"My people would reesist the orogs eef"
                 +" they could, but wee have"
                 +" not the strength or skill.", "Eef wee could beat them just once, they would think"
@@ -114,7 +114,7 @@ set_responses(){
   set_response(({"tired an emotional", "tired and emotional"}), ({"Well, alright, shee ees eemotional,"
                 +" an sometimes tired. But I really mean shee's been drunk a lonng time. It's herr way"
                 +" of coping."}) );
-  set_response(({"request aid for the village"}), 
+  set_response(({"request aid for the village"}),
                 ({"Yes - de veellagers weell elp if dey can. Jus tell dem dat "
                +"you want to %^CYAN%^request aid for de veellage%^RESET%^ and"
                +" dey weell elp. They arre not warriors, though, and may need to be"
@@ -123,7 +123,7 @@ set_responses(){
   set_response(({"defence", "defences"}), ({"Hmm"}), "defences");
   set_response(({"jongle", "veellage", "de", "dee", "jew", "eemotional"}), ({"Arre jew making"
                +" fun off my accent?"}),"accent"  );
-  set_response(({"ready to fight"}), ({"Jew arre ready to fight?" }), "ready"); 
+  set_response(({"ready to fight"}), ({"Jew arre ready to fight?" }), "ready");
   set_response(({"try again"}), ({"Jew want too try again too defeat dee orog attack? Verry"
                 +" well... Once we haff built up dee grain storres again, and"
                 +" jew haff prepared dee defences, giff me dee signal"
@@ -142,7 +142,7 @@ void init(){
 
 
 void report(string what){
-  "/daemon/reporter_d"->report("lujke", what);
+  /* "/daemon/reporter_d"->report("lujke", what); */
 }
 
 object * query_defenders(){
@@ -167,11 +167,11 @@ int start_attack(string str){
                    +" the village%^RESET%^, so he's not going to start the"
                    +" attack. Try talking to him some more.");
     return 1;
-  }   
+  }
   if (EVENT_RECORDS_D->completed_event(TPQN,"Failed to protect the Tabaxi" , 2000)>0){
-    tell_object(TP, "You have Failed to protect the Tabaxi recently. You cannot start the fight again yet."); 
+    tell_object(TP, "You have Failed to protect the Tabaxi recently. You cannot start the fight again yet.");
     return 1;
-  }   
+  }
   EVENT_RECORDS_D->remove_event("Failed to protect the Tabaxi", TPQN);
   report ("Loading granary");
   granary = find_object_or_load(TABAXROOM + "granary");
@@ -186,12 +186,12 @@ int start_attack(string str){
       +" be back forr a while. Ask me again laterr.");
     return 1;
   }
-  report ("No-one in " + name + "'s party has defended the Tabaxi recently"); 
+  report ("No-one in " + name + "'s party has defended the Tabaxi recently");
   if( EVENT_RECORDS_D->completed_event(name, "Failed to protect the Tabaxi", 3000)>0){
     force_me("say But wee need a bit morre time too build up ourr storres"
       +" first. Ask me again laterr.");
     return 1;
-  } 
+  }
   report ("No-one in " + name + "'s party has failed to defend the Tabaxi recently");
   report ("Checking if the granary is burned");
   if (granary->query_burned()>0){
@@ -224,7 +224,7 @@ int start_attack(string str){
         +" gods be with you.");
     }
   }
-  call_out("start_attack2", 4, TP); 
+  call_out("start_attack2", 4, TP);
   return 1;
 }
 
@@ -258,7 +258,7 @@ start_attack2(object ob){
   }
   battler = new(TABAXOBJ + "tabaxi_battler");
   battler->move(TO);
-  battler->start_attack(ob);  
+  battler->start_attack(ob);
 
 }
 
@@ -291,12 +291,12 @@ void ready(object ob){
     force_me("say But dee Orogs are in retreat affter last time. Dey won't"
       +" be back forr a while. Ask me again laterr.");
     return;
-  } 
+  }
   if( EVENT_RECORDS_D->completed_event(name, "Failed to protect the Tabaxi", 24000)>0){
     force_me("say But wee need a bit morre time too build up ourr storres"
       +" first. Ask me again laterr.");
     return;
-  } 
+  }
   force_me("say Verry well... I ope jew haff prepared dee defences well!"
           +" Giff me dee signal when jew weesh me to send de message dat"
           +" weell start dee attack!");
@@ -322,7 +322,7 @@ void ready(object ob){
           mem->set_mini_quest("Tabaxi Defender");
         }
       }
-    } 
+    }
   }
 }
 
@@ -409,7 +409,7 @@ void greet_great_defenders(object ob){
     }
     battler->move("/d/shadowgate/void");
     battler->remove();
-  } else //if no relevant battler was found, just greet the great defenders 
+  } else //if no relevant battler was found, just greet the great defenders
   {//bah
     force_me("emote acknowledges " + ob->QCN);
     force_me("say Ello again, friend. All dee Tabaxi thank jew for jour aid!");
@@ -487,7 +487,7 @@ void greet(object ob){
                                       +" destroyed the tabaxi's crops. They"
                                       +" burned the whole lot. They gained"
                                       +" entry by ")..strlen(how_failed)-1];
-      } 
+      }
       force_me("emote looks up despairingly");
       force_me("say " + how_failed);
       greeted[name] = time();
@@ -496,7 +496,7 @@ void greet(object ob){
       return;
     }
   }
-  report (name + " has not Failed to protect the Tabaxi recently"); 
+  report (name + " has not Failed to protect the Tabaxi recently");
   if (arrayp(quests) && member_array("Tabaxi defender", quests)!=-1){
     force_me("say Ello again, friend. Tanks for agreeing too elp protect our"
             +" grain stores. Pleese urry.");
@@ -550,8 +550,8 @@ void catch_tell(string str){
           ob = all_living(ETO)[i];
           break;
        }
-    } 
-  
+    }
+
     if (member_array(ob, helpers)!=-1){
       if (objectp(ob) && ob->is_player()){
         name = ob->query_true_name();
@@ -580,13 +580,13 @@ string long_desc(){
            +" the light catches it. His arms are a bit skinny and he is carrying a"
            +" little extra weight on his belly. His once upright posture has stooped"
            +" slightly, rounding his shoulders and giving him an air of defeat.\n";
-  if (member_array(TP, helpers)!=-1){ 
+  if (member_array(TP, helpers)!=-1){
     desc += "%^BOLD%^%^YELLOW%^Nobacherie is waiting for you to tell him you are <ready"
             +" to fight>. You might want to make sure you have prepared all the "
             +"%^RESET%^%^CYAN%^defences%^BOLD%^%^YELLOW%^ you can, first  - and you may"
             +" want some friends to help you in the battle ahead.";
   }
-  if (member_array(TP, defenders)!=-1){ 
+  if (member_array(TP, defenders)!=-1){
     desc += "%^BOLD%^%^YELLOW%^Nobacherie is waiting for you to tell him to"
             +" %^BOLD%^%^RED%^<start attack>%^BOLD%^%^YELLOW%^. You might want to make"
             +" sure you have prepared all the %^RESET%^%^CYAN%^defences%^BOLD%^"
