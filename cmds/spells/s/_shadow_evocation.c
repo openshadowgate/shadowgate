@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     set_spell_name("shadow evocation");
-    set_spell_level(([ "mage" : 5, "bard" : 5, "innate":5]));
+    set_spell_level(([ "mage" : 5, "bard" : 5, "innate" : 5]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS shadow evocation on SPELL_NAME [on SPELL_ARGS]");
     set_description("You tap energy from the Plane of Shadow to cast a quasi-real, illusory version of an evocation mage spell of 4th level or lower.
@@ -30,54 +30,52 @@ int preSpell()
     string spl, sargs;
     string splfn;
 
-    if(!stringp(arg))
-    {
-        tell_object(caster,"You must provide arguments to this spell!");
+    if (!stringp(arg)) {
+        tell_object(caster, "You must provide arguments to this spell!");
         return 0;
     }
 
-    tell_room(place,"%^BLUE%^"+caster->QCN+" %^BOLD%^%^BLACK%^w%^RESET%^%^BLUE%^h%^BOLD%^i%^RESET%^%^BLUE%^sp%^BOLD%^%^BLACK%^e%^RESET%^%^BLUE%^r in%^BOLD%^%^BLACK%^c%^RESET%^%^BLUE%^o%^BOLD%^h%^RESET%^%^BLUE%^er%^BOLD%^%^BLACK%^e%^RESET%^%^BLUE%^ntly.%^WHITE%^");
-    if(sscanf(arg, "%s on %s", spl, sargs)!=2)
+    tell_room(place, "%^BLUE%^" + caster->QCN + " %^BOLD%^%^BLACK%^w%^RESET%^%^BLUE%^h%^BOLD%^i%^RESET%^%^BLUE%^sp%^BOLD%^%^BLACK%^e%^RESET%^%^BLUE%^r%^BOLD%^%^BLUE%^s %^RESET%^%^BLUE%^in%^BOLD%^%^BLACK%^c%^RESET%^%^BLUE%^o%^BOLD%^h%^RESET%^%^BLUE%^er%^BOLD%^%^BLACK%^e%^RESET%^%^BLUE%^ntly.%^WHITE%^");
+    if (sscanf(arg, "%s on %s", spl, sargs) != 2) {
         spl = arg;
+    }
 
-    if(!stringp(spl))
-    {
-        tell_object(caster,"You must provide another spell to this spell!");
+    if (!stringp(spl)) {
+        tell_object(caster, "You must provide another spell to this spell!");
         return 0;
     }
 
     spl = replace_string(spl, " ", "_");
-    splfn = "/cmds/spells/"+spl[0..0]+"/_"+spl+".c";
+    splfn = "/cmds/spells/" + spl[0..0] + "/_" + spl + ".c";
 
-    if(!file_exists(splfn))
-	{
-        tell_object(TP,"Either that spell does not exist, or you do not know it!");
+    if (!file_exists(splfn)) {
+        tell_object(TP, "Either that spell does not exist, or you do not know it!");
         return 0;
     }
-    if(!sargs || sargs == "" || !stringp(sargs))
+    if (!sargs || sargs == "" || !stringp(sargs)) {
         sargs = "";
+    }
     spell_to_cast = new(splfn);
-    if(spell_to_cast->query_spell_sphere()!=shadow_school())
-    {
-        tell_object(TP,"Only evocation school spells are allowed!");
+    if (spell_to_cast->query_spell_sphere() != shadow_school()) {
+        tell_object(TP, "Only evocation school spells are allowed!");
         return 0;
     }
 
     slevel = spell_to_cast->query_spell_level("mage");
-    if(slevel > max_level || slevel == 0)
-    {
-        tell_object(TP,"This spell is too powerful for shadow evocation!");
+    if (slevel > max_level || slevel == 0) {
+        tell_object(TP, "This spell is too powerful for shadow evocation!");
         return 0;
     }
     spell_to_cast->set_shadow_spell(max_level);
 
-    spell_to_cast->use_spell(TP,sargs,clevel,100,"mage");
+    spell_to_cast->use_spell(TP, sargs, clevel, 100, "mage");
     return 1;
-
 }
 
-void dest_effect(){
+void dest_effect()
+{
     ::dest_effect();
-    if(objectp(TO))
+    if (objectp(TO)) {
         TO->remove();
+    }
 }
