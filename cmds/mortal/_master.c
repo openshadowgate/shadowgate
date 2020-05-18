@@ -16,6 +16,11 @@ mapping CLASSMAP=(["mage":MAGEKNOWN,
                    "bard":INQKNOWN,
                    "warlock":WARLOCKKNOWN]);
 
+mapping query_mastering_classes()
+{
+    return CLASSMAP;
+}
+
 int cmd_master(string args)
 {
     string myclass = TP->query_class();

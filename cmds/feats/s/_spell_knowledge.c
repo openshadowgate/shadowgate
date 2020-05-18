@@ -8,7 +8,7 @@ void create() {
     feat_type("permanent");
     feat_category("ArcaneSpellcraft");
     feat_name("spell knowledge");
-    feat_prereq("Sorcerer L21 or Oracle L21");
+    feat_prereq("L21 in any class that can master");
     feat_desc("This feat allows a caser to master an additional two spells of any level, above what the class would normally allow");
     permanent(1);
 }
@@ -17,14 +17,22 @@ int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {
+    int *clslvls;
+    string *clss;
+
     if (!objectp(ob)) {
         return 0;
     }
-    if (!(ob->query_class_level("sorcerer") > 20 ||
-        ob->query_class_level("oracle") > 20)) {
+
+    clss = ({"bard", "inquisitor", "mage", "oracle", "psion", "psywarrior", "sorcerer", "warlock"});
+    clslvls = map(clss, (:$2->query_class_level($1):), ob);
+
+    if(max(clslvls) < 21)
+    {
         dest_effect();
         return 0;
     }
+
     return ::prerequisites(ob);
 }
 
