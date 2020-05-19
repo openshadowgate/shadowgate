@@ -643,26 +643,11 @@ instantly to the "
         }
         return (damage * mult);
     }else if ((int)"/daemon/config_d.c"->check_config("critical damage") == 1) {
-        mult -= 1;
+        mult -= 1; //Odin's note that we already dealt normal damage and need to reduce multiplier by one
         if (!attacker->query_property("shapeshifted")) {
             if (FEATS_D->usable_feat(attacker, "exploit weakness")) {
                 mult += 2;
-            }else if (FEATS_D->usable_feat(attacker, "lethal strikes")) {
-                wielded = (object*)attacker->query_wielded();
-                if (sizeof(wielded) >= 2) {
-                    if (wielded[0] != wielded[1]) {
-                        mult += 1;
-                    }
-                    if ((int)wielded[0]->query_size() == 1 && (int)wielded[1]->query_size() == 1) {
-                        mult += 1;
-                    }
-                }else if (sizeof(wielded) == 1) {
-                    mult += 1;
-                    if ((int)wielded[0]->query_size() == 1) {
-                        mult += 1;
-                    }
-                }
-            } else if (FEATS_D->usable_feat(attacker, "weapon mastery")) {
+            }else if (FEATS_D->usable_feat(attacker, "weapon mastery")) {
                 mult += 1;
             }
         }
@@ -2760,25 +2745,14 @@ void internal_execute_attack(object who)
         target_thing = (string)victim->return_target_limb();
         roll = BONUS_D->process_hit(who, victim, i, current, 0, touch_attack);
         //crit stuff
-        if (sizeof(weapons) && !who->query_property("shapeshifted")) {
+        if (sizeof(weapons)) {
             temp1 = (int)current->query_critical_threat_range();
-            if (FEATS_D->usable_feat(who, "lethal strikes") && !who->query_property("shapeshifted")) {
-                if (sizeof(weapons) >= 2) {
-                    if (weapons[0] != weapons[1]) {
-                        temp1 += 1;
-                    }
-                    if ((int)weapons[0]->query_size() == 1 && (int)weapons[1]->query_size() == 1) {
-                        temp1 += 1;
-                    }
-                }else if (sizeof(weapons) == 1) {
-                    temp1 += 1;
-                    if ((int)weapons[0]->query_size() == 1) {
-                        temp1 += 1;
-                    }
-                }
+            if (!temp1) {
+                temp1 = 1;
             }
-        }else {
-            temp1 = 2;
+            if (FEATS_D->usable_feat(who, "lethal strikes") && !who->query_property("shapeshifted")) {
+                temp1 *= 2;
+            }
         }
 
         if (roll > (20 - temp1)) { // if threat range of weapon is 2, then we have a crit threat on a roll of 19 or 20

@@ -9,16 +9,21 @@ void create()
     feat_type("permanent");
     feat_category("MeleeAccuracy");
     feat_name("lethal strikes");
-    feat_desc("This feat represents your ability to strike in a much more lethal manner. This feat only works when wielding normal or small sized weapons. When using normal weapons the feat increases the critical threat range and the critical multiplier by 1. When using small weapons the feat increase the critical threat range and the critical multiplier by 2. If mixing normal and small weapons, the critical threat range and critical multiplier will only be increased by 1. \n\nA small weapon that normally does 1d8 extra critical damage on a dice roll of 18-20 will do 3d8 extra critical damage on a dice roll of 16-20. A normal weapon would do 2d8 damage on a dice roll of 17-20.");
+    feat_desc("This feat represents your ability to strike in a much more lethal manner. This will double the critical threat range on any weapons you use.");
     permanent(1);
     //set_obsolete(1);
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted()
+{
+    return 1;
+}
 
 int prerequisites(object ob)
 {
-    if(!objectp(ob)) {return 0; }
+    if (!objectp(ob)) {
+        return 0;
+    }
 
     return ::prerequisites(ob);
 }

@@ -8,38 +8,33 @@
 // Silver & cold iron leaving in for use on monsters. N, 8/15.
 
 #define VALID_DAMAGE_TYPES ({ \
-    "fire", \
-    "cold", \
-    "electricity", \
-    "acid", \
-    "sonic", \
-    "bludgeoning", \
-    "piercing", \
-    "slashing", \
-    "silver", \
-    "cold iron", \
-    "positive energy", \
-    "negative energy", \
-    "force", \
-    "divine", \
-    "untyped", \
-    "mental", \
-})
+        "fire", \
+        "cold", \
+        "electricity", \
+        "acid", \
+        "sonic", \
+        "bludgeoning", \
+        "piercing", \
+        "slashing", \
+        "silver", \
+        "cold iron", \
+        "positive energy", \
+        "negative energy", \
+        "force", \
+        "divine", \
+        "untyped", \
+        "mental", \
+    })
 
-#define PHYSICAL_DAMAGE_TYPES ({\
-    "bludgeoning",\
-    "piercing",\
-    "slashing",\
-    "silver",\
-    "cold iron",\
-})   
+#define PHYSICAL_DAMAGE_TYPES ({ \
+        "bludgeoning", \
+        "piercing", \
+        "slashing", \
+        "silver", \
+        "cold iron", \
+    })
 
-#define CRIT_DAMAGE_MODIFIER ([\
-    "illithid" : 1.5,\
-    "ooze" : 0,\
-    "zombie" : 0.75,\
-    "skeleton" : 0.6,\
-    "construct" : 0,\
-    "undead" : 0.5,\
-    ])
-
+#define CRIT_DAMAGE_MODIFIER ([ \
+                                  "ooze" : 0, \
+                                  "elemental" : 0, \
+                              ])
