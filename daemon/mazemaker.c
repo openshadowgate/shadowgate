@@ -244,10 +244,10 @@ simple_render(mixed *mze)
         for (j = 0; j < sz_b; j++ )
         {
 
-            p_m[i * 2 + 1][j * 2 + 1] = sizeof(mze[i][j]) ? ("#") : (" ");
+            p_m[i * 2 + 1][j * 2 + 1] = sizeof(mze[i][j]) ? ("▓") : (" ");
 
             if (has_point(({i - 1, j}), mze[i][j])) {
-                p_m[i * 2][j * 2 + 1] = "#";
+                p_m[i * 2][j * 2 + 1] = "▓";
             }
 
             /* if (has_point(({i + 1, j}), mze[i][j])) { */
@@ -255,7 +255,7 @@ simple_render(mixed *mze)
             /* } */
 
             if (has_point(({i, j - 1}), mze[i][j])) {
-                p_m[i * 2 + 1][j * 2] = "#";
+                p_m[i * 2 + 1][j * 2] = "▓";
             }
 
             /* if (has_point(({i, j + 1}), mze[i][j])) { */
