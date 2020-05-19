@@ -821,7 +821,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
 
     if (critical_hit) {
-        damage = crit_damage(attacker, targ, weapon, attacker_size, damage);
+        damage += crit_damage(attacker, targ, weapon, attacker_size, damage);
     }
     new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit);
 
