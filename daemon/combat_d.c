@@ -42,6 +42,7 @@ void new_struck(int damage, object weapon, object attacker, string limb, object 
 void do_fumble(object attacker, object weapon);
 void miss(object attacker, int magic, object target, string type, string target_thing);
 int calculate_unarmed_damage(object attacker);
+int critical_roll;
 
 
 //****** END OF FUNCTION DEFINITIONS ******//
@@ -821,7 +822,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
 
     if (critical_hit) {
-        damage += crit_damage(attacker, targ, weapon, attacker_size, damage);
+        damage += crit_damage(attacker, targ, weapon, attacker_size, damage); //I have no clue why I had to change this to += from = for crit damage to work properly, since crit_damage already returns damage + crit_damage, but this kluge seems to be working properly after numerous tests - Odin 5/19/2020
     }
     new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit);
 
@@ -1193,6 +1194,7 @@ your " + used + "!%^RESET%^";
 
 
     if (critical_message) {
+        //me = "%^BOLD%^%^WHITE%^" + critical_roll + ": %^BOLD%^%^RED%^(Critical) %^RESET%^" + me; debug version
         me = "%^BOLD%^%^RED%^(Critical) %^RESET%^" + me;
         you = "%^BOLD%^%^RED%^(Critical) %^RESET%^" + you;
         others = "%^BOLD%^%^RED%^(Critical) %^RESET%^" + others;
@@ -2756,6 +2758,7 @@ void internal_execute_attack(object who)
         }
 
         if (roll > (20 - temp1)) { // if threat range of weapon is 2, then we have a crit threat on a roll of 19 or 20
+            critical_roll = roll;
             if (!victim->query_property("no crit") && (!interactive(victim) || ((int)victim->query_level() > 5))) {
                 temp2 = BONUS_D->process_hit(who, victim, i, current);
                 if (temp2) {
