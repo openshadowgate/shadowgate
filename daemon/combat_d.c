@@ -584,7 +584,6 @@ int crit_damage(object attacker, object targ, object weapon, int size, int damag
     }
     if (objectp(weapon) && !attacker->query_property("shapeshifted") && weapon != attacker) {
         mult = (int)weapon->query_critical_hit_multiplier();
-
         if (FEATS_D->usable_feat(attacker, "skull collector") && attacker->is_wielding("two handed")) {
             if (objectp(targ)) {
                 perc = 25 + roll_dice(1, 25);
@@ -657,18 +656,18 @@ instantly to the "
             mult--;
             if (objectp(weapon) && !attacker->query_property("shapeshifted") && weapon != attacker) {
                 if (size < 3) {
-                    crit_dam += weapon->query_wc();
+                    crit_dam += damage;
                 }else {
-                    crit_dam += weapon->query_large_wc();
+                    crit_dam += damage;
                 }
                 continue;
             }else {
                 //unarmed crit damage
                 if (attacker->is_class("monk")) {
-                    crit_dam += (int)"/std/class/monk.c"->critical_damage(attacker);
+                    crit_dam += damage;
                     continue;
                 }
-                crit_dam += roll_dice(1, 4);
+                crit_dam += damage;
                 continue;
             }
         }
@@ -678,7 +677,7 @@ instantly to the "
                 crit_dam = crit_dam * CRIT_DAMAGE_MODIFIER[targRace];
             }
         }
-        return (damage + crit_dam);
+        return crit_dam;
     }
     return damage;
 }
@@ -822,7 +821,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
 
     if (critical_hit) {
-        damage += crit_damage(attacker, targ, weapon, attacker_size, damage); //I have no clue why I had to change this to += from = for crit damage to work properly, since crit_damage already returns damage + crit_damage, but this kluge seems to be working properly after numerous tests - Odin 5/19/2020
+        damage = crit_damage(attacker, targ, weapon, attacker_size, damage); //I have no clue why I had to change this to += from = for crit damage to work properly, since crit_damage already returns damage + crit_damage, but this kluge seems to be working properly after numerous tests - Odin 5/19/2020
     }
     new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit);
 
