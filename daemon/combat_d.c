@@ -511,7 +511,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         tell_object(attacker, "%^CYAN%^You cry a brief warsong and unleash wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^");
         tell_object(target, "%^CYAN%^" + attacker->QCN + " shouts a brief warsong, and %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ burns through you!%^RESET%^");
         tell_room(environment(attacker), "%^CYAN%^" + attacker->QCN + " shouts a brief warsong and unleashes wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^", ({ target, attacker }));
-        target->do_damage(target->return_target_limb(), roll_dice(1, 8));
+        target->do_damage(target->return_target_limb(), roll_dice(1, 8)); //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
     }
     if (weapon->is_lrweapon() &&
         FEATS_D->usable_feat(attacker, "arcane arrows") &&
@@ -654,22 +654,7 @@ instantly to the "
         crit_dam = 0;
         while (mult > 0) {
             mult--;
-            if (objectp(weapon) && !attacker->query_property("shapeshifted") && weapon != attacker) {
-                if (size < 3) {
-                    crit_dam += damage;
-                }else {
-                    crit_dam += damage;
-                }
-                continue;
-            }else {
-                //unarmed crit damage
-                if (attacker->is_class("monk")) {
-                    crit_dam += damage;
-                    continue;
-                }
-                crit_dam += damage;
-                continue;
-            }
+            crit_dam += damage;
         }
         if (objectp(targ)) {
             targRace = (string)targ->query_race();
@@ -677,7 +662,7 @@ instantly to the "
                 crit_dam = crit_dam * CRIT_DAMAGE_MODIFIER[targRace];
             }
         }
-        return crit_dam;
+        return crit_dam + damage;
     }
     return damage;
 }

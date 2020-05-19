@@ -39,8 +39,6 @@ void spell_effect(int prof)
     victims = target_selector();
     victims = target_filter(victims);
 
-    tell_object(FPL("ilmarinen"),":"+identify(victims));
-
     if (!sizeof(victims)) {
         tell_object(caster,"%^BOLD%^%^GREEN%^Your spell fails to connect to anyone.");
         dest_effect();
