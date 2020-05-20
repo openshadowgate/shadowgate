@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-string *VALID_SETTINGS = ({"brief","brief_combat","hints","logon_notify","persist","simpleinv","expgain","hardcore","levelcheck","no_reward","taxperc","columns", "vcolumns","scrlines","scrwidth","term",});
+string* VALID_SETTINGS = ({ "brief", "brief_combat", "hints", "logon_notify", "persist", "simpleinv", "expgain", "hardcore", "levelcheck", "no_reward", "taxperc", "columns", "vcolumns", "scrlines", "scrwidth", "term", });
 
 object tp;
 

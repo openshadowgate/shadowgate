@@ -630,41 +630,34 @@ instantly to the "
             }
         }
     }
-    if ((int)"/daemon/config_d.c"->check_config("critical damage") == 0) {
-        if (objectp(targ)) {
-            //races that are more/less vulnerable to critical hits - Saide, November 2016
-            targRace = (string)targ->query_race();
-            if (CRIT_DAMAGE_MODIFIER[targRace]) {
-                mult = mult * CRIT_DAMAGE_MODIFIER[targRace];
-                if (mult < 1) {
-                    mult = 1;
-                }
-            }
+
+    mult -= 1;
+
+    //Odin's note that we already dealt normal damage and need to reduce multiplier by one
+
+    if (!attacker->query_property("shapeshifted")) {
+        if (FEATS_D->usable_feat(attacker, "exploit weakness")) {
+            mult += 2;
+        }else if (FEATS_D->usable_feat(attacker, "weapon mastery")) {
+            mult += 1;
         }
-        return (damage * mult);
-    }else if ((int)"/daemon/config_d.c"->check_config("critical damage") == 1) {
-        mult -= 1; //Odin's note that we already dealt normal damage and need to reduce multiplier by one
-        if (!attacker->query_property("shapeshifted")) {
-            if (FEATS_D->usable_feat(attacker, "exploit weakness")) {
-                mult += 2;
-            }else if (FEATS_D->usable_feat(attacker, "weapon mastery")) {
-                mult += 1;
-            }
-        }
-        crit_dam = 0;
-        while (mult > 0) {
-            mult--;
-            crit_dam += damage;
-        }
-        if (objectp(targ)) {
-            targRace = (string)targ->query_race();
-            if (CRIT_DAMAGE_MODIFIER[targRace]) {
-                crit_dam = crit_dam * CRIT_DAMAGE_MODIFIER[targRace];
-            }
-        }
-        return crit_dam + damage;
     }
-    return damage;
+    crit_dam = 0;
+
+    while (mult > 0) {
+        mult--;
+        crit_dam += damage;
+    }
+
+    if (objectp(targ)) {
+        targRace = (string)targ->query_race();
+        if (CRIT_DAMAGE_MODIFIER[targRace]) {
+            crit_dam = crit_dam * CRIT_DAMAGE_MODIFIER[targRace];
+        }
+    }
+
+    return crit_dam + damage;
+
 }
 
 int unarmed_enchantment(object who)
@@ -2736,9 +2729,10 @@ void internal_execute_attack(object who)
             if (!temp1) {
                 temp1 = 1;
             }
-            if (FEATS_D->usable_feat(who, "lethal strikes") && !who->query_property("shapeshifted")) {
-                temp1 *= 2;
-            }
+        }
+
+        if (FEATS_D->usable_feat(who, "lethal strikes")) {
+            temp1 *= 2;
         }
 
         if (roll > (20 - temp1)) { // if threat range of weapon is 2, then we have a crit threat on a roll of 19 or 20
