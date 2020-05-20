@@ -8,10 +8,9 @@ void create()
     ::create();
     feat_type("permanent");
     feat_category("MeleeAccuracy");
-x    feat_name("lethal strikes"); // Improved critical
+    feat_name("lethal strikes"); // Improved critical
     feat_desc("This feat represents your ability to strike in a much more lethal manner. This will double the critical threat range, with weapons or unarmed and in shapeshifted form.");
     permanent(1);
-    //set_obsolete(1);
 }
 
 int allow_shifted()
