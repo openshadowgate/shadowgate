@@ -51,7 +51,7 @@ int cmd_actions()
         tell_object(TP, msg + implode(actions, ", ") + "\n");
     }
     if (!found) {
-        write("There are no features to observe.")
+        write("There are no features to observe.");
     }
 
     return 1;
