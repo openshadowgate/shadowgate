@@ -8,7 +8,7 @@ int cmd_actions()
 {
     string msg, * items, * searches, * actions;
     mapping* itemmap, * searchmap;
-    int i, num;
+    int i, num, found = 0;
 
 // This section reports out the items you can look at in a room.
 
@@ -19,6 +19,7 @@ int cmd_actions()
         items -= WEATHER;
         num = sizeof(items);
         if (num > 0) {
+            found = 1;
             msg = "You can <look> at the following items in this room: \n";
             // this if statement parses the array into a list separated by
             // commas and ending with a period.
@@ -30,6 +31,7 @@ int cmd_actions()
     searchmap = ETP->query_searches();
     num = sizeof(searchmap);
     if (num > 0) {
+        found = 1;
         searches = keys(searchmap);
         msg = "You can <search> the following items in this room: \n";
         // this if statement parses the array into a list separated by
@@ -42,11 +44,16 @@ int cmd_actions()
     actions = ETP->query_actions();
     num = sizeof(actions);
     if (num > 0) {
+        found = 1;
         msg = "You feel that you can take the following actions in this room: \n";
         // this if statement parses the array into a list separated by
         // commas and ending with a period.
         tell_object(TP, msg + implode(actions, ", ") + "\n");
     }
+    if (!found) {
+        write("There are no features to observe.")
+    }
+
     return 1;
 }
 
