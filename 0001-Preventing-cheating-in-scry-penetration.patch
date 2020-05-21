@@ -1,0 +1,217 @@
+From 15aff923e6ab18760ab26e4cb0c4898bc1c17643 Mon Sep 17 00:00:00 2001
+From: nm0i <nm0i@me0w.net>
+Date: Thu, 21 May 2020 18:17:09 +0300
+Subject: [PATCH] Preventing cheating in scry penetration
+
+---
+ d/magic/obj/scry_control.c | 185 +++++++++++++++++++------------------
+ 1 file changed, 94 insertions(+), 91 deletions(-)
+
+diff --git a/d/magic/obj/scry_control.c b/d/magic/obj/scry_control.c
+index eaed17b62..affa3209b 100644
+--- a/d/magic/obj/scry_control.c
++++ b/d/magic/obj/scry_control.c
+@@ -182,106 +182,109 @@ SCRYING2
+   return 1;
+ }
+ 
+-int scry(string str) {
+-  string targ, real, msg;
+-  mapping map;
+-  string *map_keys;
+-  int i, matches;
+-  object blockobj;
+-
+-  if(spellused) {
+-    write("You've already successfully chosen your scrying target!");
+-    return 1;
+-  }
+-
+-  if(sscanf(str, "person %s", targ) == 1) {
+-    targ = lower_case(targ);
+-    if(targ == (string)TPQN && !wizardp(TP)) {
+-      write("%^BOLD%^RED%^Why don't you just look in a mirror or something?");
+-      return 1;
++int scry(string str)
++{
++    string targ, real, msg;
++    mapping map;
++    string* map_keys;
++    int i, matches;
++    object blockobj;
++
++    if (spellused) {
++        write("You've already successfully chosen your scrying target!");
++        return 1;
+     }
+-    //    if(!TP->isKnown(targ)) {
+-    // I have no idea how this was supposed to work, but all I know is it was
+-    // not working right anymore.
+-
+-    if( TP->isKnown(targ) || ((string)TP->realNameVsProfile(targ) != "") ) {
+-      if(TP->isKnown(targ)) { real = targ; }
+-      else { real = (string)TP->realNameVsProfile(targ); }
+-
+-      target = find_player(real);
+ 
+-      if(target == TP && !wizardp(TP)) {
+-        write("%^BOLD%^RED%^Why don't you just look in a mirror or something?");
++    if (sscanf(str, "person %s", targ) == 1) {
++        targ = lower_case(targ);
++        if (targ == (string)TPQN && !wizardp(TP)) {
++            write("%^BOLD%^RED%^Why don't you just look in a mirror or something?");
++            return 1;
++        }
++        //    if(!TP->isKnown(targ)) {
++        // I have no idea how this was supposed to work, but all I know is it was
++        // not working right anymore.
++
++        if (TP->isKnown(targ) || ((string)TP->realNameVsProfile(targ) != "")) {
++            if (TP->isKnown(targ)) {
++                real = targ;
++            }else {
++                real = (string)TP->realNameVsProfile(targ);
++            }
++
++            target = find_player(real);
++
++            if (target == TP && !wizardp(TP)) {
++                write("%^BOLD%^RED%^Why don't you just look in a mirror or something?");
++                return 1;
++            }
++        }
++        if (!objectp(target)) {
++            write("%^BOLD%^%^RED%^The target of your spell is not here!");
++            return 1;
++        }
++        if (target->query_true_invis()) {
++            write("%^BOLD%^%^RED%^The target of your spell is not here!");
++            return 1;
++        }
++
++        if (blockobj = present("blockerx111", environment(target)) || blockobj = present("blockerx111", target)) {
++            if (TO->query_scry_power() < blockobj->query_block_power()) {
++                tell_object(ETO, "%^BOLD%^RED%^There appears to be " +
++                            "interference blocking your scrying attempt in the " +
++                            "vicinity of the target!%^RESET%^");
++                dest_me();
++                SCRY_D->stop_scry(TO, 0);
++                return 1;
++            }
++        }
++
++        if (!objectp(target)) {
++            write("%^BOLD%^RED%^You can't get a fix on that!");
++            return 1;
++        }
++    }else if (sscanf(str, "location %s", targ) == 1) {
++        map = TP->query_rem_rooms();
++        if (!map[targ]) {
++            write("%^BOLD%^RED%^You do not recall a location called " + targ + "!");
++            return 1;
++        }
++        target = find_object_or_load(map[targ]);
++        if (blockobj = present("blockerx111", target)) {
++            if (TO->query_scry_power() < blockobj->query_block_power()) {
++                tell_object(ETO, "%^BOLD%^RED%^There appears to be " +
++                            "interference blocking your scrying attempt in " +
++                            "the vicinity of the target!%^RESET%^");
++                dest_me();
++                SCRY_D->stop_scry(TO, 0);
++                return 1;
++            }
++        }
++    }else {
++        write("Usage: scry person <name>  OR  "
++              "scry location <location-id>");
+         return 1;
+-      }
+-    }
+-    if(!objectp(target)) {
+-      write("%^BOLD%^%^RED%^The target of your spell is not here!");
+-      return 1;
+-    }
+-    if (target->query_true_invis()) { // changed from avatarp to allow scrying of personas
+-      write("%^BOLD%^%^RED%^The target of your spell is not here!");
+-      return 1;
+     }
++    if (TP != observer) {
++        write("%^BOLD%^RED%^You do not have control of this device!");
++        return 1;
+ 
+-    if(blockobj = present("blockerx111", environment(target)) || blockobj = present("blockerx111",target)){
+-//    if(blockobj = present("blockerx111", environment(target))){
+-       if(TO->query_scry_power() < blockobj->query_block_power()){
+-          tell_object(ETO, "%^BOLD%^RED%^There appears to be "+
+-             "interference blocking your scrying attempt in the "+
+-             "vicinity of the target!%^RESET%^");
+-          dest_me();
+-          SCRY_D->stop_scry(TO, 0);
+-          return 1;
+-       }
+     }
+ 
+-    if(!objectp(target)) {
+-      write("%^BOLD%^RED%^You can't get a fix on that!");
+-      return 1;
+-    }
+-  }
+-  else if(sscanf(str, "location %s", targ) == 1) {
+-    map = TP->query_rem_rooms();
+-    if(!map[targ]) {
+-      write("%^BOLD%^RED%^You do not recall a location called "+targ+"!");
+-      return 1;
+-    }
+-    target = find_object_or_load(map[targ]);
+-    if(blockobj = present("blockerx111", target)) {
+-       if(TO->query_scry_power() < blockobj->query_block_power()){
+-          tell_object(ETO, "%^BOLD%^RED%^There appears to be "+
+-             "interference blocking your scrying attempt in "+
+-             "the vicinity of the target!%^RESET%^");
+-          dest_me();
+-          SCRY_D->stop_scry(TO, 0);
+-          return 1;
+-       }
++    msg = SCRY_D->scry_interface(TP, target, TO, 0);
++    write("%^BOLD%^CYAN%^" + msg);
++    if (!objectp(scry_object)) {
++        write("%^BOLD%^RED%^Your scry attempt failed.");
++        dest_me();
++        SCRY_D->stop_scry(TO, 0);
++        return 1;
+     }
+-
+-  }
+-  else {
+-    write("Usage: scry person <name>  OR  "
+-	  "scry location <location-id>");
+-    return 1;
+-  }
+-  if(TP != observer) {
+-    write("%^BOLD%^RED%^You do not have control of this device!");
+-    return 1;
+-  }
+-  msg = SCRY_D->scry_interface(TP, target, TO, 0);
+-  write("%^BOLD%^CYAN%^"+msg);
+-  if(!objectp(scry_object)) {
+-    write("%^BOLD%^RED%^Your scry attempt failed.");
+-    dest_me();
+-    SCRY_D->stop_scry(TO, 0);
++    TP->set_paralyzed(8, "%^BOLD%^You're concentrating on a remote location...");
++    write("%^BOLD%^GREEN%^You concentrate on remote location scrying...");
++    ok_to_scry = 1;
++    scry_object->scry_on();
++    spellused = 1;
+     return 1;
+-  }
+-  write("%^BOLD%^GREEN%^You begin scrying...");
+-  ok_to_scry = 1;
+-  scry_object->scry_on();
+-  spellused = 1;
+-  return 1;
+ }
+ 
+ int dismiss(string str) {
+-- 
+2.26.2
+

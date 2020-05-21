@@ -657,7 +657,6 @@ instantly to the "
     }
 
     return crit_dam + damage;
-
 }
 
 int unarmed_enchantment(object who)
@@ -2726,16 +2725,17 @@ void internal_execute_attack(object who)
         //crit stuff
         if (sizeof(weapons)) {
             temp1 = (int)current->query_critical_threat_range();
-            if (!temp1) {
-                temp1 = 1;
-            }
+        }
+
+        if (!temp1) {
+            temp1 = 1;
         }
 
         if (FEATS_D->usable_feat(who, "lethal strikes")) {
             temp1 *= 2;
         }
 
-        if (roll > (20 - temp1)) { // if threat range of weapon is 2, then we have a crit threat on a roll of 19 or 20
+        if (roll >= (21 - temp1)) { // if threat range of weapon is 2, then we have a crit threat on a roll of 19 or 20
             critical_roll = roll;
             if (!victim->query_property("no crit") && (!interactive(victim) || ((int)victim->query_level() > 5))) {
                 temp2 = BONUS_D->process_hit(who, victim, i, current);
