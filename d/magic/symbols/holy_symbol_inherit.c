@@ -9,7 +9,7 @@
 //      holy_symbol.c
 //      took god names out of the prayer ending message 12/26/04 Tsera
 //      changed symbols to show rangers spells 1-5, and paladins/anti's 1-6 -Tsera
-//      changed symbols to query for spell class to allow spells to be 
+//      changed symbols to query for spell class to allow spells to be
 //      set for one type of class 3/22/05 -Tsera
 //      Made wearable by Circe 4/10/05 after approval from T
 // 	lowered delay for higher levels & cut down spam from praying *Styx* 6/6/06
@@ -133,9 +133,9 @@ SYMBOL
 }
 
 int valid_has_cleric_spells() {
-    if(ETO->is_class("cleric") 
+    if(ETO->is_class("cleric")
     || ETO->is_class("paladin")
-    || ETO->is_class("antipaladin") 
+    || ETO->is_class("antipaladin")
     || ETO->is_class("ranger")) {
         return 1;
     }
@@ -159,7 +159,7 @@ void init() {
     if(((string)ETO->query_name() == owner || 
     (string)ETO->QCN == owner)
     && valid_has_cleric_spells()) {
-        add_action("report_spells","report");
+        add_action("report_spells","reportspells");
     }
     add_action("help","help");
 }
@@ -170,17 +170,17 @@ int add_all() {
 
     if(catch(get_dir("/cmds/priest/*.c"))) { return 0; }
     all_spells = get_dir("/cmds/priest/*.c");
-    for (x=0 ; x < sizeof(all_spells); x++) 
+    for (x=0 ; x < sizeof(all_spells); x++)
     {
 		if(catch(new("/cmds/priest/"+all_spells[x]))) { continue; }
         spellgod = ("/cmds/priest/"+all_spells[x])->query_diety();
-        if(spellgod == "me" || spellgod == query_diety() || wizardp(ETO)) 
+        if(spellgod == "me" || spellgod == query_diety() || wizardp(ETO))
 		{
-            //if( ("/cmds/priest/"+all_spells[x])->get_single_class(ETO)) 
+            //if( ("/cmds/priest/"+all_spells[x])->get_single_class(ETO))
             //{
-                if( ("/cmds/priest/"+all_spells[x])->spell_domain_check(ETO)) 
+                if( ("/cmds/priest/"+all_spells[x])->spell_domain_check(ETO))
                 {
-                    if( ("/cmds/priest/"+all_spells[x])->quest_spells_check(ETO,all_spells[x])) 
+                    if( ("/cmds/priest/"+all_spells[x])->quest_spells_check(ETO,all_spells[x]))
                     {
                         if( ("/cmds/priest/"+all_spells[x])->is_restricted_to_class(ETO->query_classes()) )
                         {
@@ -216,7 +216,7 @@ int report_spells(string str){
         for (j=0;j<sizeof(k2);j++) {
             TP->force_me("say I currently have "+k2[j]+" memorized "+level[k2[j]]+" times.");
         }
-        
+
     }
     return 1;
 }
@@ -227,7 +227,7 @@ int add_spell(string str) {
 
     if (!str) return 1;
     str=lower_case(str);
-    
+
     if (TP->is_class("ranger"))
         j = 6;
     if (TP->is_class("paladin") || TP->is_class("antipaladin"))
@@ -339,7 +339,7 @@ int pray_spell(string str) {
     if(sscanf(str,"%s times %d",splnm, num) == 2 || sscanf(str, "%s times", splnm) == 1 )  {
 //	tell_object(find_player("styx"), "spellname is "+splnm+" and num is "+num+".");
 	str = splnm;
-    }	
+    }
     if(num < 0)
         return notify_fail("You must specify a positive number.  Syntax is <pray spellname> or <pray spellname times # > - use the numeric such as 2.\n");
 
@@ -412,7 +412,7 @@ The requirement for blessing a room is out of date and a quality of life issue f
 //    TP->set_paralyzed(temp);
 //      TP->setAdminBlock();
        TP->set_property("memorizing",TO);
-    return 1;        
+    return 1;
 }
 
 int check_activity(string str) {
@@ -441,7 +441,7 @@ object obt;
     if (temp > 0 && ((int)TP->can_memorize_cl(str) == MEM_OK)) {
 // don't wait until the end for all to go in mem. in case they bail from a long set
 // tell_object(find_player("styx"), "In flip first try num is "+num+".");
- 	if(num > 1 && !random(3)) { 
+ 	if(num > 1 && !random(3)) {
 	    play->set_cl_memorized(str, 1);
 	    num--;
 	}
@@ -540,7 +540,7 @@ int *bonus_spell_slots(object ob, int *spells)
     return spells;
 }
 
-//For some reason "help" wasn't doing anything - it looks like it's been taken out of init. 
+//For some reason "help" wasn't doing anything - it looks like it's been taken out of init.
 //Fixing up syntax and adding it back. ~Circe~ 5/22/11
 
 int help(string str) {
@@ -565,7 +565,7 @@ int help(string str) {
 //    tell_object(TP, "- OR - %^YELLOW%^<pray spellname times #> %^GREEN%^example:  <pray light times 3>");
     tell_object(TP, "%^YELLOW%^<prepare classname spellname> %^GREEN%^example: <prepare cleric light>%^RESET%^");
     tell_object(TP, "%^YELLOW%^<prepare classname spellname times #> %^GREEN%^example: <prepare cleric light times 3>%^RESET%^");
-    tell_object(TP, "%^YELLOW%^<forget>%^RESET%^ spellname");    
+    tell_object(TP, "%^YELLOW%^<forget>%^RESET%^ spellname");
     tell_object(TP, "%^YELLOW%^<spells classname>%^RESET%^    Will list spells your god offers");
     tell_object(TP, "%^YELLOW%^<spells classname by level>%^RESET%^    Will list spells your god offers, sorted by spell level");
 
@@ -604,7 +604,7 @@ int help(string str) {
         if (level < 0 ) level = 0;
         tell_object(TP, "%^MAGENTA%^"+arrange_string("Spell level:", 18)+"Number allowed:      Prepared:     [Your level: "+level+"]");
         line();
-        
+
         for (x = 0; x < 9;x++) {
             tmp = in_mind[x];
             if(!tmp) tmp = "0";

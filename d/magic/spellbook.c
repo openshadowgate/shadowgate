@@ -88,7 +88,7 @@ void init() {
     add_action("help", "help");
     add_action("offer","offer");
     add_action("mydesc","setdesc");
-    add_action("report_spells","report");
+    add_action("report_spells","reportspells");
     add_action("remove_spell", "rmspell");
     if((string)TP->query_name() == owner) {
         mastered = ({});
