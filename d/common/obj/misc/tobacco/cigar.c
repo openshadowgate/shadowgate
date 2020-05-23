@@ -4,7 +4,7 @@
 inherit OBJECT;
 
 object ob;
-string * mymsgs, * yourmsgs;
+string* mymsgs, * yourmsgs;
 int lit, hasmsgs, intox, tracker;
 
 void create()
@@ -19,8 +19,8 @@ void create()
     lit = 0;
     hasmsgs = 1;
     tracker = 0;
-    mymsgs = ({ "%^RESET%^%^ORANGE%^You enjoy the pungent taste of the tobacco.%^RESET%^"});
-    yourmsgs = ({"%^RESET%^%^ORANGE%^You smell the pungent aroma of the burning tobacco from the cigar.%^RESET%^"});
+    mymsgs = ({ "%^RESET%^%^ORANGE%^You enjoy the pungent taste of the tobacco.%^RESET%^" });
+    yourmsgs = ({ "%^RESET%^%^ORANGE%^You smell the pungent aroma of the burning tobacco from the cigar.%^RESET%^" });
     intox = 0;
 }
 
@@ -74,9 +74,9 @@ void take_drag()
 {
     int i;
     if (!living(ETO)) {
-      call_out("go out",2);
+        call_out("go out", 2);
     }
-    if (tracker > 60 + random(31)) {
+    if (tracker > 30 + random(16)) {
         call_out("go_out", 1);
     }
     if (living(ETO)) {
@@ -95,7 +95,7 @@ void take_drag()
         tell_room(EETO, yourmsgs[i], ETO);
     }
     tracker++;
-    call_out("take_drag", random(10) + 20);
+    call_out("take_drag", random(30) + 60);
 }
 
 void go_out()

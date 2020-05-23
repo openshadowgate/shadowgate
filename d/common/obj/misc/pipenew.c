@@ -137,9 +137,9 @@ void take_drag()
 {
     int i;
     if (!living(ETO)) {
-      call_out("go_out", 0);
+        call_out("go_out", 0);
     }
-    if (tracker > 60 + random(31)) {
+    if (tracker > 30 + random(16)) {
         call_out("go_out", 0);
     }
     if (living(ETO)) {
@@ -158,7 +158,7 @@ void take_drag()
         tell_room(EETO, yourmsgs[i], ETO);
     }
     tracker++;
-    call_out("take_drag", random(10) + 20);
+    call_out("take_drag", random(30) + 60);
 }
 
 void go_out()
@@ -229,7 +229,7 @@ int pack_pipe(string str)
 remove()
 {
     if (lit) {
-      call_out("go out", 2);
+        call_out("go out", 2);
     }
     if (packed) {
         call_out("empty", 2);
@@ -244,5 +244,5 @@ int get_tracker()
 
 int is_carving()
 {
-  return 1;
+    return 1;
 }
