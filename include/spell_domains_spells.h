@@ -30,7 +30,7 @@ DOMAIN_SPELLS = ([
 "magic" : ({ "color spray", "resist energy", "break curse", "freedom of movement", "mystic bolt", "protection from spells", "true seeing", "spellscar", "clashing rocks" }),
 "mentalism":({"confusion", "detect thoughts", "clairvoyance", "modify memory", "telepathic bond", "bolt of force", "mind blank", "inner eye", "astral projection"}),
 "moon":({"darkness", "confusion", "owls wisdom", "placeholder", "moonbeam", "placeholder", "placeholder", "insanity", "meteor swarm"}),
-"plant" : ({ "entangle", "barkskin", "thorn body", "wall of thorns", "liveoak", "animate plants", "mind blank", "shambler" }),
+"plant" : ({ "entangle", "barkskin", "contagion", "thorn body", "wall of thorns", "liveoak", "animate plants", "mind blank", "shambler" }),
 "protection" : ({ "divine favor", "shield other", "resist energy", "lesser globe of invulnerability", "invisibility purge", "repulsion", "spell turning", "mind blank", "dimensional lock" }),
 "renewal" : ({ "bless", "restoration", "rejuvenation", "freedom of movement", "waves of fatigue", "disintegrate", "waves of exhaustion", "rebirth", "greater ruin" }),
 "repose" : ({ "spectral touch", "gentle repose", "phantom steed", "deathward", "slay living", "undeath is death", "waves of exhaustion", "destruction", "wail of the banshee" }),

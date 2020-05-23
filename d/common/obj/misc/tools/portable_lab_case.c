@@ -25,7 +25,8 @@ void unpack_func()
         tell_object(TP, "You need to set the case down before you begin unpacking it.");
         return 1;
     }
-    tell_object(TP, "%^RESET%^%^ORANGE%^You press a button on the handle of the wooden case it opens and begins unpacking itself.  In a matter of moments it has set up a fully functioning laboratory bench that might be used for alchemy or enchanting.%^RESET%^");
+    tell_object(TP, "%^RESET%^%^ORANGE%^As you press a button on the handle of the wooden case, it opens and begins unpacking itself.  In a matter of moments it has set up a fully functioning laboratory bench that might be used for alchemy or enchanting.%^RESET%^");
+    tell_room(ETO, "%^RESET%^%^ORANGE%^As " + TP->QCN + " presses a button on the handle of the wooden case, it opens and begins unpacking itself.  In a matter of moments it has set up a fully functioning laboratory bench that might be used for alchemy or enchanting.%^RESET%^", TP);
     new("/d/common/obj/misc/tools/portable_lab_bench")->move(ETO);
     TO->remove();
     return 1;

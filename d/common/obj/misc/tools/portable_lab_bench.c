@@ -23,7 +23,8 @@ void packup_func()
         tell_object(TP, "You are much too busy to collapse the lab right now!");
         return 1;
     }
-    tell_object(TP, "You press a button on the side of the lab bench and it begins to magically pack itself away.  In a matter of moments it has returned itself to its wooden case.");
+    tell_object(TP, "%^RESET%^%^ORANGE%^You press a button on the side of the lab bench and it begins to magically pack itself away. In a matter of moments it has returned itself to its wooden case.%^RESET%^");
+    tell_room(ETO, "%^RESET%^%^ORANGE%^" + TP->QCN + " presses a button on the side of the lab bench and it begins to magically pack itself away. In a matter of moments it has returned itself to its wooden case.%^RESET%^", TP);
     new("/d/common/obj/misc/tools/portable_lab_case")->move(ETO);
     TO->remove();
     return 1;
