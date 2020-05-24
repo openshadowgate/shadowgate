@@ -10,40 +10,50 @@
 #define PO previous_object()
 int query_stat_bonus(object who, string stat);
 
-int high_thaco(int level) { return (level - 20); }
-
-varargs int thaco(int level, string myclass,object ob)
+int high_thaco(int level)
 {
-    string file,*classes,myrace,mysubrace;
-    int ret,i;
+    return (level - 20);
+}
 
-    if(!intp(level)) { return 0; }
-    if(!stringp(myclass)) { return 0; }
+varargs int thaco(int level, string myclass, object ob)
+{
+    string file, * classes, myrace, mysubrace;
+    int ret, i;
 
-    if(objectp(ob))
-    {
-        if(ob->query("new_class_type"))
-        {
+    if (!intp(level)) {
+        return 0;
+    }
+    if (!stringp(myclass)) {
+        return 0;
+    }
+
+    if (objectp(ob)) {
+        if (ob->query("new_class_type")) {
             ret = 0;
-            if((int)ob->query_property("transformed") || (int)ob->query_property("dance-of-cuts")) { // fighter BAB under transformation/dance.
-              ret = (int)ob->query_level();
-              ret = ret - 20;
-              ret = ret * -1;
-              return ret;
+            if ((int)ob->query_property("transformed") || (int)ob->query_property("dance-of-cuts")) { // fighter BAB under transformation/dance.
+                ret = (int)ob->query_level();
+                ret = ret - 20;
+                ret = ret * -1;
+                return ret;
             }
-            classes = (string *)ob->query_classes();
-            if(!sizeof(classes)) { return 0; }
-            for(i=0;i<sizeof(classes);i++)
-            {
-                file = DIR_CLASSES+"/"+classes[i]+".c";
-                if(!file_exists(file)) { continue; }
+            classes = (string*)ob->query_classes();
+            if (!sizeof(classes)) {
+                return 0;
+            }
+            for (i = 0; i < sizeof(classes); i++) {
+                file = DIR_CLASSES + "/" + classes[i] + ".c";
+                if (!file_exists(file)) {
+                    continue;
+                }
                 ret += file->attack_bonus(ob);
             }
             // our LAs work as monster levels, so should give BAB per LA also
             myrace = (string)ob->query_race();
             mysubrace = (string)ob->query("subrace");
-            file = DIR_RACES+"/"+myrace+".c";
-            if(file_exists(file)) ret += file->level_adjustment(mysubrace);
+            file = DIR_RACES + "/" + myrace + ".c";
+            if (file_exists(file)) {
+                ret += file->level_adjustment(mysubrace);
+            }
 
             ret = ret - 20;
             ret = ret * -1;
@@ -51,38 +61,46 @@ varargs int thaco(int level, string myclass,object ob)
         }
     }
 
-    if (myclass == "fighter" || myclass == "ranger" || myclass == "paladin" || myclass == "antipaladin" || myclass == "cavalier" || myclass == "barbarian")
-    {
-        ret = 20 - (level -1);
+    if (myclass == "fighter" || myclass == "ranger" || myclass == "paladin" || myclass == "antipaladin" || myclass == "cavalier" || myclass == "barbarian") {
+        ret = 20 - (level - 1);
     }
-    if (myclass == "cleric" || myclass == "oracle" || myclass == "druid" || myclass == "warlord" || myclass == "psywarrior" || myclass == "monk" || myclass == "inquisitor")
-    {
-        if(level < 21) { ret = (20 - (2*((level-1) / 3))); }
-        else { ret = 8 - high_thaco(level); }
+    if (myclass == "cleric" || myclass == "oracle" || myclass == "druid" || myclass == "warlord" || myclass == "psywarrior" || myclass == "monk" || myclass == "inquisitor") {
+        if (level < 21) {
+            ret = (20 - (2 * ((level - 1) / 3)));
+        }else {
+            ret = 8 - high_thaco(level);
+        }
     }
-    if (myclass == "mage" || myclass == "illusionist" || myclass == "psion")
-    {
-        if(level < 21) { ret = (20 - ((level - 1) / 3)); }
-        else { ret = 14 - high_thaco(level); }
+    if (myclass == "mage" || myclass == "illusionist" || myclass == "psion") {
+        if (level < 21) {
+            ret = (20 - ((level - 1) / 3));
+        }else {
+            ret = 14 - high_thaco(level);
+        }
     }
-    if (myclass == "thief" || myclass == "bard" || myclass == "assassin")
-    {
-        if(level < 21) { ret = (20 - ((level + 1) / 2)); }
-        else { ret = 10 - high_thaco(level); }
+    if (myclass == "thief" || myclass == "bard" || myclass == "assassin") {
+        if (level < 21) {
+            ret = (20 - ((level + 1) / 2));
+        }else {
+            ret = 10 - high_thaco(level);
+        }
     }
     return ret;
 }
 
 // 3rd edition style attack bonus.. 1 at level 2 fighter, 39 at level 40 fighter
-int attack_bonus(string myclass,int level,object player)
+int attack_bonus(string myclass, int level, object player)
 {
     int num;
-    num = thaco(level,myclass,player);
+    num = thaco(level, myclass, player);
     num = 20 - (num);
     return num;
 }
 
-int monster_thaco(int hd) { return thaco((int)PO->query_level(),(string)PO->query_class()); }
+int monster_thaco(int hd)
+{
+    return thaco((int)PO->query_level(), (string)PO->query_class());
+}
 
 int query_con_bonus(int num)
 {
@@ -94,8 +112,8 @@ int query_con_bonus(int num)
 
 int query_dex_bonus(object target)
 {
-    object *torso=({});
-    int i,dex,ret,enc,bonus,max=10;
+    object* torso = ({});
+    int i, dex, ret, enc, bonus, max = 10;
 
     if (!objectp(target)) {
         return 0;
@@ -119,7 +137,7 @@ int query_dex_bonus(object target)
     }
 
     // gets the max dex bonus based on armor type
-    torso = (object *)target->query_armour("torso");
+    torso = (object*)target->query_armour("torso");
 
     if (!sizeof(torso) || FEATS_D->usable_feat(target, "armor training")) {
         max = 10;
@@ -151,63 +169,71 @@ int query_dex_bonus(object target)
     return ret;
 }
 
-int query_stance_bonus(object victim){
-  int fnord= 0;
+int query_stance_bonus(object victim)
+{
+    int fnord = 0;
 
-  fnord -= (int)victim->query_defensive_bonus();
-  fnord += (int)PO->query_offensive_bonus();
-  return fnord;
+    fnord -= (int)victim->query_defensive_bonus();
+    fnord += (int)PO->query_offensive_bonus();
+    return fnord;
 }
-
 
 //this could have been accomplished much much easier - simply by doing 1 per level for fighters, 0.75 for clerics and the like, and 0.50 for mages
 //adding that up, diving by the number of classes * total level - Saide
 int new_bab(int level, object ob)
 {
-    string *classes, file, myrace, mysubrace;
+    string* classes, file, myrace, mysubrace;
     int i, ret = 0;
-    if(objectp(ob))
-    {
-        if((int)ob->query_property("transformed") || (int)ob->query_property("dance-of-cuts")) { // fighter BAB under transformation/dance.
+    if (objectp(ob)) {
+        if ((int)ob->query_property("transformed") || (int)ob->query_property("dance-of-cuts")) { // fighter BAB under transformation/dance.
             //ret = (int)ob->query_level();
             //changing to query_character_level()
             ret = (int)ob->query_character_level();
             return ret;
         }
-        classes = (string *)ob->query_classes();
-        if(!sizeof(classes)) { return 0; }
-        for(i=0;i<sizeof(classes);i++)
-        {
-            file = DIR_CLASSES+"/"+classes[i]+".c";
-            if(!file_exists(file)) { continue; }
+        classes = (string*)ob->query_classes();
+        if (!sizeof(classes)) {
+            return 0;
+        }
+        for (i = 0; i < sizeof(classes); i++) {
+            file = DIR_CLASSES + "/" + classes[i] + ".c";
+            if (!file_exists(file)) {
+                continue;
+            }
             ret += file->attack_bonus(ob);
             //since mobs are usually much higher level than players - Saide
-            if(!interactive(ob)) return ret;
+            if (!interactive(ob)) {
+                return ret;
+            }
         }
         // ret /= sizeof(classes);  // don't think there should be division here?  Attack bonus from each class should be adding -Ares
         // our LAs work as monster levels, so should give BAB per LA also
         myrace = (string)ob->query_race();
         mysubrace = (string)ob->query("subrace");
-        file = DIR_RACES+"/"+myrace+".c";
-        if(file_exists(file)) ret += file->level_adjustment(mysubrace);
+        file = DIR_RACES + "/" + myrace + ".c";
+        if (file_exists(file)) {
+            ret += file->level_adjustment(mysubrace);
+        }
         return ret;
     }
     return ret;
 }
 
-
-int tohit_bonus(int dex, int str, object target) {
+int tohit_bonus(int dex, int str, object target)
+{
     int ret, exc_str, enc_percent;
     int abonus;
 
 /*   tell_object(PO, "You are the previous object!! [attack]"); */
     abonus = PO->query_attack_bonus();
-    if (!abonus) abonus = 0;
+    if (!abonus) {
+        abonus = 0;
+    }
 
     // Putting these in functions all their own for easier maintenance and...
     // sanity. - G.
 
-    ret = query_dex_bonus(target)*(-1);
+    ret = query_dex_bonus(target) * (-1);
     //this was decreasing their bonus for some reason. *(-1) to see if it fixes. Nienne, 07/10
     //ret += query_stance_bonus(target);
     ret += abonus;
@@ -221,7 +247,9 @@ varargs effective_ac(object who)
 {
     int MyAc = 0, tmp = 0;
 
-    if(!objectp(who)) return 0;
+    if (!objectp(who)) {
+        return 0;
+    }
 
     //AC is starting at 10 now - Saide
     //AC starts at 10 and goes up
@@ -286,15 +314,21 @@ varargs ac_bonus(object who, object attacker)
 varargs int hit_bonus(object who, object targ, int attack_num, object current)
 {
     int th, to_hit, tmp;
-    int i,j,min,hold,mysize,fired,bab_scale, pen;
-    string *classes;
+    int i, j, min, hold, mysize, fired, bab_scale, pen;
+    string* classes;
     object ammo;
 
     th = 0;
 
-    if(!objectp(who)) { return 0; }
-    if (who->query_unconscious() || who->query_bound()) { return 0; }
-    if(!objectp(targ)) { return 0; }
+    if (!objectp(who)) {
+        return 0;
+    }
+    if (who->query_unconscious() || who->query_bound()) {
+        return 0;
+    }
+    if (!objectp(targ)) {
+        return 0;
+    }
     //in 3ed you get base attack bonus for your first attack and then
     //-5 for every subsequent attack which is actually included
     //in the bab tables so attack 1 is full bonus, attack 2
@@ -304,12 +338,17 @@ varargs int hit_bonus(object who, object targ, int attack_num, object current)
     //accordingly - Saide
     //adjusting to -2 penalty per subsequent attack -
     //capping at -6 for everything now - Saide, November 2016
-    if (sizeof(distinct_array((object *)who->query_wielded())) > 1)
-    {
-        if (attack_num == 1) { pen = 2; }
+    if (sizeof(distinct_array((object*)who->query_wielded())) > 1) {
+        if (attack_num == 1) {
+            pen = 2;
+        }
     }
-    if (attack_num >= 2) { pen = 2*(attack_num-1); }
-    if(pen > 6) pen = 6;
+    if (attack_num >= 2) {
+        pen = 2 * (attack_num - 1);
+    }
+    if (pen > 6) {
+        pen = 6;
+    }
 
     th -= pen;
 
@@ -321,62 +360,69 @@ varargs int hit_bonus(object who, object targ, int attack_num, object current)
 
     to_hit = th;
 
-    if( (current && objectp(current)) && !who->query_property("shapeshifted") && current != who) { // weapon finesse calculations if wielding a weapon
-      if(current->is_lrweapon())
-      {
-          ammo = present(current->query_ammo(),who);
-          if(FEATS_D->usable_feat(who,"point blank shot") && objectp(ammo) && ammo->query_shots())
-          {
-              to_hit += (query_dex_bonus(who) * -1);
-              fired = 1;
-          }
-      }
-      if(!fired) // if they didn't fire the ranged wep, it must be a melee weapon
-      {
-          mysize = (int)who->query_size();
-          if(mysize == 1) mysize++; //run small creatures as normal size please.
-          mysize -= (int)current->query_size();
-          if(FEATS_D->usable_feat(who,"weapon finesse") && (mysize > 0)) // if has-feat & weapon is smaller than user
-              to_hit += (query_dex_bonus(who) * -1);
-          else to_hit += query_stat_bonus(who, "strength");
-      }
+    if ((current && objectp(current)) && !who->query_property("shapeshifted") && current != who) { // weapon finesse calculations if wielding a weapon
+        if (current->is_lrweapon()) {
+            ammo = present(current->query_ammo(), who);
+            if (FEATS_D->usable_feat(who, "point blank shot") && objectp(ammo) && ammo->query_shots()) {
+                to_hit += (query_dex_bonus(who) * -1);
+                fired = 1;
+            }
+        }
+        if (!fired) { // if they didn't fire the ranged wep, it must be a melee weapon
+            mysize = (int)who->query_size();
+            if (mysize == 1) {
+                mysize++;           //run small creatures as normal size please.
+            }
+            mysize -= (int)current->query_size();
+            if (FEATS_D->usable_feat(who, "weapon finesse") && (mysize >= 0)) { // if has-feat & weapon is smaller/same size as user - Odin 5/24/2020
+                to_hit += (query_dex_bonus(who) * -1);
+            }else {
+                to_hit += query_stat_bonus(who, "strength");
+            }
+        }
     }
     // if no weapon (unarmed), run the same check
-    else
-    {
-        if(FEATS_D->usable_feat(who,"weapon finesse"))
+    else {
+        if (FEATS_D->usable_feat(who, "weapon finesse")) {
             to_hit += (query_dex_bonus(who) * -1);
-        else to_hit += query_stat_bonus(who, "strength");
+        }else {
+            to_hit += query_stat_bonus(who, "strength");
+        }
     }
 
     // +1 BAB to rock gnome, racial, vs goblinoids
-    if((string)who->query_race() == "gnome" && (string)who->query("subrace") == "rock gnome") {
-      if((string)targ->query_race() == "goblin" || (string)targ->query_race() == "hobgoblin" || (string)targ->query_race() == "bugbear") to_hit += 1;
+    if ((string)who->query_race() == "gnome" && (string)who->query("subrace") == "rock gnome") {
+        if ((string)targ->query_race() == "goblin" || (string)targ->query_race() == "hobgoblin" || (string)targ->query_race() == "bugbear") {
+            to_hit += 1;
+        }
     }
     // +1 BAB to morinnen human ethnicity if mounted
-    if((string)who->query_race() == "human" && (string)who->query("subrace") == "morinnen" && who->query_in_vehicle()) to_hit += 1;
+    if ((string)who->query_race() == "human" && (string)who->query("subrace") == "morinnen" && who->query_in_vehicle()) {
+        to_hit += 1;
+    }
 
-    if (current && objectp(current) && current != who)
-    {
-        if(current->query_property("enchantment")) {
+    if (current && objectp(current) && current != who) {
+        if (current->query_property("enchantment")) {
             to_hit += (int)current->query_property("enchantment");
         }
     }
-    if((!objectp(current) || current == who) && (who->is_class("monk") || FEATS_D->usable_feat(who, "enchanted fists")) && !who->query_property("shapeshifted"))
-    {
+    if ((!objectp(current) || current == who) && (who->is_class("monk") || FEATS_D->usable_feat(who, "enchanted fists")) && !who->query_property("shapeshifted")) {
         //if(find_player("saide")) tell_object(find_player("saide"), "Should be using unarmed enchantments... equal to "+COMBAT_D->unarmed_enchantment(who));
         to_hit += COMBAT_D->unarmed_enchantment(who);
     }
-    if(who->query("protecting")) { to_hit -= random(7)+1; }
-    if(who->query_blind() && !FEATS_D->usable_feat(who,"blindfight")) { to_hit -= 8 + random(4); }
+    if (who->query("protecting")) {
+        to_hit -= random(7) + 1;
+    }
+    if (who->query_blind() && !FEATS_D->usable_feat(who, "blindfight")) {
+        to_hit -= 8 + random(4);
+    }
 
 
     // trying to scale bab with each attack, might take some tweaking -Ares
     // only scales on attacks with main hand, so dual wielders don't get penalized more
     bab_scale = (int)who->query_property("bab_scale");
 
-    if(!who->query_property("testing_bab"))
-    {
+    if (!who->query_property("testing_bab")) {
         to_hit += bab_scale;
     }
     return to_hit;
@@ -387,37 +433,45 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
 {
     object PlayerBoss;
     int attack_roll, bon, AC = 0, pFlag;
-    if(!objectp(who)) return 0;
-    if(!objectp(targ)) return 0;
-    if(!intp(attack_num)) attack_num = 1;
-    if(!flag) AC += effective_ac(targ);
+    if (!objectp(who)) {
+        return 0;
+    }
+    if (!objectp(targ)) {
+        return 0;
+    }
+    if (!intp(attack_num)) {
+        attack_num = 1;
+    }
+    if (!flag) {
+        AC += effective_ac(targ);
+    }
     AC += ac_bonus(targ, who);
 
-    if (!interactive(who))
-    {
-        if(objectp(PlayerBoss = who->query_property("minion")))
-        {
-            if(userp(PlayerBoss)) pFlag = 1;
+    if (!interactive(who)) {
+        if (objectp(PlayerBoss = who->query_property("minion"))) {
+            if (userp(PlayerBoss)) {
+                pFlag = 1;
+            }
         }
-        if (who->query_static_bab() && !pFlag) // giving monsters a static base attack bonus to see if this helps armor classes vs monsters -Ares
-        {
+        if (who->query_static_bab() && !pFlag) { // giving monsters a static base attack bonus to see if this helps armor classes vs monsters -Ares
             bon = (int)who->query_static_bab();
             bon += ((int)who->query_max_hp() / 250); // give some extra chance to hit based on monster health, so bosses don't miss as often
             bon += ((int)hit_bonus(who, targ, attack_num, current) / 2);
+        }else {
+            bon = hit_bonus(who, targ, attack_num, current);
         }
-        else bon = hit_bonus(who, targ, attack_num, current);
-    }
-    else
-    {
+    }else {
         bon = hit_bonus(who, targ, attack_num, current);
     }
 
-    if(intp(current)) bon += current;
+    if (intp(current)) {
+        bon += current;
+    }
     attack_roll = roll_dice(1, 20);
     //removing the 1 attack roll = automatic miss for now - perhaps it is
     //overly punitive on our game? - Saide May 2016
     /*if(attack_roll == 1 && interactive(who))
-    {
+       {
         //essentially giving everyone the chance to reroll 1s, since they
         //are a miss now - at least after their first one - Saide
         if((int)who->query_property("rolled_a_1"))
@@ -426,48 +480,59 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
             attack_roll = roll_dice(1,20);
         }
         else who->set_property("rolled_a_1", 1);
-    }*/
+       }*/
 
-    if(objectp(DebugOb))
-    {
-        tell_object(DebugOb, "Attack roll = "+ attack_roll);
-        tell_object(DebugOb, "Attack bonus = "+ bon);
-        tell_object(DebugOb, "AC = "+AC);
+    if (objectp(DebugOb)) {
+        tell_object(DebugOb, "Attack roll = " + attack_roll);
+        tell_object(DebugOb, "Attack bonus = " + bon);
+        tell_object(DebugOb, "AC = " + AC);
     }
-    if(attack_roll == 20) return 20;
+    if (attack_roll == 20) {
+        return 20;
+    }
     //if(attack_roll == 1) return -1;
     //does this change make AC less OP? - Saide, August 2017
-    if((bon + 15) < AC)
-    {
-        if(random(bon+AC+attack_roll) >= AC) return attack_roll;
+    if ((bon + 15) < AC) {
+        if (random(bon + AC + attack_roll) >= AC) {
+            return attack_roll;
+        }
         return 0;
     }
-    if((attack_roll+bon) >= AC) return attack_roll;
+    if ((attack_roll + bon) >= AC) {
+        return attack_roll;
+    }
     return 0;
 }
 
 int query_stat_bonus(object who, string stat)
 {
     int ret;
-    if(!objectp(who)) return 0;
-    if(!stringp(stat)) return 0;
+    if (!objectp(who)) {
+        return 0;
+    }
+    if (!stringp(stat)) {
+        return 0;
+    }
     return ret = (((int)who->query_stats(stat) - 10) / 2);
 }
 
-
-int damage_bonus(int str) {
+int damage_bonus(int str)
+{
     int ret;
     int dbonus;
     int estr;
 
 /*   tell_object(PO, "You are the previous object!! [damage]"); */
     dbonus = PO->query_damage_bonus();
-    if (!dbonus) dbonus = 0;
+    if (!dbonus) {
+        dbonus = 0;
+    }
 
     ret += (str - 10) / 2;
     ret += dbonus;
     return ret;
 }
+
 //added to allow this to still function since
 //the function that called damage_bonus() is located
 //in combat_d.c now - which would mean combat_d.c is
@@ -475,9 +540,13 @@ int damage_bonus(int str) {
 int new_damage_bonus(object attacker, int str)
 {
     int dbonus;
-    if(objectp(attacker)) dbonus = (int)attacker->query_damage_bonus();
-    if (!dbonus) dbonus = 0;
+    if (objectp(attacker)) {
+        dbonus = (int)attacker->query_damage_bonus();
+    }
+    if (!dbonus) {
+        dbonus = 0;
+    }
 
-    dbonus += ((str-10) / 2);
+    dbonus += ((str - 10) / 2);
     return dbonus;
 }

@@ -95,7 +95,7 @@ int hitme(object targ)
     if (!objectp(targ)) {
         return 1;
     }
-    if (random(1000) > 500) { //this might need tweaking
+    if (random(1000) > 600) { //this might need tweaking
         switch (random(10)) {
         case 0..4:  //Causes a free extra hit that ignores 10 DR.
             tell_room(EETO, "%^BOLD%^%^RED%^" + ETOQCN + "'s arrow %^WHITE%^pierces %^WHITE%^through armor and flesh, coming %^WHITE%^clean out %^RED%^the other side!%^RESET%^", ETO);
