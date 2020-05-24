@@ -4,7 +4,7 @@
 
 inherit SPELL;
 
-int flag, mrbonus;
+int flag, mrbonus, mrflag;
 
 void emote_em();
 
@@ -33,6 +33,7 @@ int preSpell()
         return 0;
     }
     mrbonus = 10 + clevel / 2;
+    mrflag = 0;
     return 1;
 }
 
@@ -48,7 +49,11 @@ void spell_effect(int prof)
     caster->set_property("added short", ({ "%^RED%^ (giant)%^RESET%^" }));
     caster->set_size_bonus(1);
     caster->add_ac_bonus(6);
-    caster->set_property("magic resistance", mrbonus);
+    if (!caster->query_property("raised resistance")) {
+        caster->set_property("magic resistance", mrbonus);
+        caster->set_property("raised resistance", 1);
+        mrflag = 1;
+    }
     spell_successful();
     addSpellToCaster();
     environment(caster)->addObjectToCombatCycle(TO, 1);
@@ -99,7 +104,11 @@ void dest_effect()
         caster->set_property("damage resistance", -5);
         caster->add_ac_bonus(-6);
         caster->remove_property("frightful_aspect");
-        caster->set_property("magic resistance", -mrbonus);
+        if (mrflag) {
+            caster->set_property("magic resistance", -mrbonus);
+            caster->set_property("raised resistance", 0);
+            mrflag = 0;
+        }
         tell_object(target, "%^RED%^You shrink back to normal!");
         tell_room(environment(caster), "%^RED%^" + caster->QCN + " shrinks back to normal size.", target);
     }

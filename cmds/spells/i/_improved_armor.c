@@ -8,7 +8,7 @@
 #include <daemons.h>
 inherit SPELL;
 
-int benchmark, tally, bonus, mrbonus;
+int benchmark, tally, bonus, mrbonus, mrflag = 0;
 
 
 void create()
@@ -32,10 +32,6 @@ int preSpell()
     }
     if (target->query_property("armoured")) {
         tell_object(caster, "%^BOLD%^%^BLACK%^You feel your spell repelled...");
-        return 0;
-    }
-    if (target->query_property("raised resistance")) {
-        tell_object(caster, "Your target already has raised resistance from a spell or temporary item.");
         return 0;
     }
     mrbonus = clevel;
@@ -90,8 +86,11 @@ void spell_effect(int prof)
     }
 
     target->add_ac_bonus(bonus);
-    target->set_property("magic resistance", mrbonus); //not quite as good as caster's lament since it also gives 8 AC
-    target->set_property("raised resistance", 1);
+    if (!caster->query_property("raised resistance")) {
+        caster->set_property("magic resistance", mrbonus);
+        caster->set_property("raised resistance", 1);
+        mrflag = 1;
+    }
     target->set_property("spelled", ({ TO }));
     target->set_property("armoured", 1);
     addSpellToCaster();
@@ -131,8 +130,11 @@ void dest_effect()
     if (objectp(target)) {
         target->add_ac_bonus(-1 * bonus);
         target->remove_property_value("spelled", ({ TO }));
-        target->set_property("magic resistance", -1 * mrbonus);
-        target->remove_property("raised resistance", -1);
+        if (mrflag) {
+            caster->set_property("magic resistance", -mrbonus);
+            caster->set_property("raised resistance", 0);
+            mrflag = 0;
+        };
         tell_object(target, "%^CYAN%^The magic shielding around you glows briefly, then fades away.");
         tell_room(environment(target), "%^CYAN%^" + target->QCN + " glows briefly.", target);
         target->remove_property("armoured");
