@@ -96,12 +96,6 @@ int special_damage()
 {
     int sdamage;
     sdamage = roll_dice(TO->query_wc_num(), TO->query_wc_dice()) + (int)TO->query_property("enchantment") + (int)ETO->query_damage_bonus() + (int)BONUS_D->new_damage_bonus(ETO, ETO->query_stats("strength"));
-    if (FEATS_D->usable_feat(ETO, "strength of arm")) {
-        sdamage *= 1.5;
-    }
-    if (FEATS_D->usable_feat(ETO, "opportunity strikes")) {
-        sdamage *= 1.75;
-    }
     return sdamage;
 }
 

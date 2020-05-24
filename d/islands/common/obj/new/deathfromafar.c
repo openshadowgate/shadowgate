@@ -76,9 +76,6 @@ int special_damage()
 {
     int sdamage;
     sdamage = roll_dice(TO->query_wc_num(), TO->query_wc_dice()) + (int)TO->query_property("enchantment") + (int)ETO->query_damage_bonus() + (int)BONUS_D->new_damage_bonus(ETO, ETO->query_stats("dexterity"));
-    if (FEATS_D->usable_feat(ETO, "deadeye")) {
-        sdamage *= 1.5;
-    }
     return sdamage;
 }
 

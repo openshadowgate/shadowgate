@@ -9,6 +9,7 @@ void create()
 {
     ::create();
     set_short("%^BOLD%^%^MAGENTA%^Potion of Gender Inversion%^RESET%^");
+    set_id(({ "potion", "vial", "purple potion", "bright purple potion", "potion of gender inversion" }));
     set_obvious_short("A vial containing a %^BOLD%^%^MAGENTA%^bright purple %^RESET%^potion");
     set_long("The %^BOLD%^%^MAGENTA%^bright purple %^RESET%^liquid in this vial steams "
              "the side of it's container with a glowing white smoke.  "

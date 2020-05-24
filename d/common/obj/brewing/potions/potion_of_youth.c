@@ -6,6 +6,7 @@ void create()
 {
     ::create();
     set_short("%^BOLD%^%^ORANGE%^Potion of Youth%^RESET%^");
+    set_id(({ "potion", "vial", "yellow potion", "glowing yellow potion", "potion of youth" }));
     set_obvious_short("A vial containing a %^BOLD%^%^ORANGE%^glowing yellow %^RESET%^potion");
     set_long("The %^BOLD%^%^YELLOW%^glowing golden yellow %^RESET%^liquid in this vial steams the side of it's container with a glowing white smoke.  It is of a thick consistency, like cold honey, even though the vial itself is warm to the touch.  There can be little doubt that whatever substance is inside of this vial is dangerous at best.");
     set_lore("This is the famed potion of youth.");
@@ -110,9 +111,6 @@ int do_effect()
 
 int do_wear_off()
 {
-    if (ok) {
-        tell_object(drinker, "You feel the effects of the potion set into your system.\n");
-    }
-
+    tell_object(drinker, "You feel the effects of the potion set into your system.\n");
     return 1;
 }
