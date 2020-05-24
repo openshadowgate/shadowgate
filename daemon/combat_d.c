@@ -693,11 +693,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
     attacker_size = (int)targ->query_size();
     if (objectp(weapon) && weapon != attacker && !attacker->query_property("shapeshifted")) {
-        if (attacker_size < 3) {
-            damage = (int)weapon->query_wc();
-        }else {
-            damage = (int)weapon->query_large_wc();
-        }
+        damage = (int)weapon->query_wc();
         if (weapon->is_lrweapon()) {
             ammoname = weapon->query_ammo();
             ammo = present(ammoname, attacker);
