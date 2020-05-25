@@ -2769,8 +2769,8 @@ void internal_execute_attack(object who)
                 calculate_damage(who, victim, current, target_thing, critical_hit);
             }
         }
+
         if (roll == 1) {
-            //if(find_player("saide") && userp(who)) tell_object(find_player("saide"), identify(who) + " rolled a 1 against "+identify(victim));
             if (objectp(current)) {
                 if ((int)current->query("PoisonDoses")) {
                     if (who->reflex_save(15)) {
@@ -2779,8 +2779,8 @@ void internal_execute_attack(object who)
                 }
             }
         }
+
         if (!roll || fumble == 1) {
-            //if(find_player("saide") && userp(who)) tell_object(find_player("saide"), identify(who) + " missed "+identify(victim));
             if (!current || who->query_property("shapeshifted")) {
                 who->miss(who->query_casting(), victim, 0, target_thing);
             }else {
