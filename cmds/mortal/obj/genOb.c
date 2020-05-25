@@ -134,7 +134,7 @@ void init()
         return;
     }
     if (skill == "armorsmith") {
-        if (!EETO->query_property("smithy") || !present("portable smithy", EETO)) {
+        if (!EETO->query_property("smithy") && !present("portable smithy", EETO)) {
             tell_object(ETO, "You must be in a smithy to forge new armor.");
             exit();
             return;
@@ -142,7 +142,7 @@ void init()
     }
 
     if (skill == "weaponsmith") {
-        if (!EETO->query_property("smithy") || !present("portable smithy", EETO)) {
+        if (!EETO->query_property("smithy") && !present("portable smithy", EETO)) {
             tell_object(ETO, "You must be in a smithy to forge new weapons.");
             exit();
             return;

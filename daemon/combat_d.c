@@ -2076,9 +2076,9 @@ void send_dodge(object who, object att)
     adverb = ({ "easily", "quickly", "barely", "poorly", "with agility", "deftly" });
     v = verb[random(sizeof(verb))];
     a = adverb[random(sizeof(adverb))];
-    tell_object(who, att->QCN + " " + v + "s " + a + " from your blow.");
-    tell_object(att, "You " + v + " " + a + " from " + who->QCN + "'s blow.");
-    tell_room(environment(who), att->QCN + " " + v + "s " + a + " from " + who->QCN + "'s blow.", ({ who, att }));
+    tell_object(who, "%^BOLD%^%^WHITE%^" + att->QCN + " " + v + "s " + a + " from your blow.");
+    tell_object(att, "%^BOLD%^%^WHITE%^You " + v + " " + a + " from " + who->QCN + "'s blow.");
+    tell_room(environment(who), "%^BOLD%^%^WHITE%^" + att->QCN + " " + v + "s " + a + " from " + who->QCN + "'s blow.", ({ who, att }));
     return;
 }
 
@@ -2493,11 +2493,9 @@ int check_avoidance(object who, object victim, object* weapons)
 
     switch (avoidanceType) {
     case "TYPE_COMBINED":
-        tell_object(who, "Your opponent anticipates your attack and maneuvers"
-                    " into perfect position!");
-        tell_object(victim, "You anticipate your opponent's attack and maneuver"
-                    " into perfect position!");
-        tell_room(EWHO, "You see " + who->QCN + "'s attack expertly avoided by " + victim->QCN + "!", ({ who, victim }));
+        tell_object(who, "%^BOLD%^%^WHITE%^Your opponent anticipates your attack and maneuvers into perfect position!%^RESET%^");
+        tell_object(victim, "%^BOLD%^%^WHITE%^You anticipate your opponent's attack and maneuver into perfect position!%^RESET%^");
+        tell_room(EWHO, "%^BOLD%^%^WHITE%^You see " + who->QCN + "'s attack expertly avoided by " + victim->QCN + "!%^RESET%^", ({ who, victim }));
         combined_attack(who, victim);
         break;
 
@@ -2509,16 +2507,16 @@ int check_avoidance(object who, object victim, object* weapons)
         break;
 
     case "TYPE_PARRY":
-        tell_object(who, "Your attack is parried by your attacker!");
-        tell_object(victim, "You deftly parry your opponent's blow!");
-        tell_room(EWHO, "You see " + who->QCN + "'s attack parried by " + victim->QCN + ".", ({ who, victim }));
+        tell_object(who, "%^BOLD%^%^WHITE%^Your attack is parried by your attacker!%^RESET%^");
+        tell_object(victim, "%^BOLD%^%^WHITE%^You deftly parry your opponent's blow!%^RESET%^");
+        tell_room(EWHO, "%^BOLD%^%^WHITE%^You see " + who->QCN + "'s attack parried by " + victim->QCN + ".%^RESET%^", ({ who, victim }));
         if (counterAttack) {
             counter_attack(victim);
         }
         break;
 
     case "TYPE_RIDDEN":
-        tell_object(who, "%^RESET%^%^BOLD%^" + victim->QCN + " has already ridden past you and "
+        tell_object(who, "%^%^RESET%^%^BOLD%^" + victim->QCN + " has already ridden past you and "
                     "is out of reach!%^RESET%^");
 
         tell_object(victim, "%^RESET%^%^BOLD%^You deftly steer your steed and " + who->QCN +
@@ -2769,8 +2767,8 @@ void internal_execute_attack(object who)
                 calculate_damage(who, victim, current, target_thing, critical_hit);
             }
         }
-
         if (roll == 1) {
+            //if(find_player("saide") && userp(who)) tell_object(find_player("saide"), identify(who) + " rolled a 1 against "+identify(victim));
             if (objectp(current)) {
                 if ((int)current->query("PoisonDoses")) {
                     if (who->reflex_save(15)) {
@@ -2779,8 +2777,8 @@ void internal_execute_attack(object who)
                 }
             }
         }
-
         if (!roll || fumble == 1) {
+            //if(find_player("saide") && userp(who)) tell_object(find_player("saide"), identify(who) + " missed "+identify(victim));
             if (!current || who->query_property("shapeshifted")) {
                 who->miss(who->query_casting(), victim, 0, target_thing);
             }else {
