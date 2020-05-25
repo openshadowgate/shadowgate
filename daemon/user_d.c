@@ -654,10 +654,10 @@ string *determine_lines(object who)
     if(!objectp(who)) return ({});
     restricted_channels = who->query_restricted_channels();
 
-    mychannels = ({"inform", "newbie", "ooc", "rp"});
+    mychannels = ({"inform", "newbie", "ooc", "rp", "wiz"});
 
     if (avatarp(who))
-        mychannels += ({ "discuss", "wiz"});
+        mychannels += ({ "discuss", });
 
     if(avatarp(who) &&
        !wizardp(who))
