@@ -117,7 +117,7 @@ int cmd_tell(string str)
         return 1;
     }
 
-    if (ob->query_invis() && (int)ob->query_level() > (int)TP->query_level() && !member_group(getuid(TP), "superuser")) {
+    if (ob->query_invis() || ob->query_quietness() && !avatarp(TP)) {
         message("info", sprintf("%s%s", capitalize(who), NOT_HERE), this_player());
 
         if (member_array(TPQN, ignored) == -1 || wizardp(TP)) {

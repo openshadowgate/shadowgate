@@ -110,7 +110,7 @@ string list_users(string *races, object tp)
             if(!length||length<18)
                 length=43;
 
-            if ( wizardp(who[i]) && who[i]->query_quietness() ) {
+            if ( who[i]->query_quietness() ) {
                 tmp += "%^BOLD%^%^CYAN%^Q %^RESET%^";
                 length -=2;
             }
@@ -202,10 +202,6 @@ int wizards(object who)
     if ((avatarp(TP)) && (TP==who))
         return 1;
     if (!avatarp(who))
-        return 0;
-    if(wizardp(who) && who->query("true_quietness"))
-        return 0;
-    if (who->query_quietness()&&avatarp(who)&&(!avatarp(TP)))
         return 0;
     return 1;
 }
@@ -302,7 +298,7 @@ Lists all players online.
 
 If argument is provided, filters players by races.
 
-%^CYAN%^PLAYER KILL FLAGS%^
+%^CYAN%^PLAYER KILL FLAGS%^RESET%^
 
  %^BOLD%^%^MAGENTA%^NoPK%^RESET%^ - no player kill - flag in front of the line means the character can't engage in player kill interractions.
 
@@ -319,6 +315,12 @@ If argument is provided, filters players by races.
  %^RESET%^%^BOLD%^%^RED%^F%^RESET%^ means you're %^BOLD%^%^RED%^forbidden%^RESET%^ to adventure and engage in unrestricted player kill with the player due to difference in levels.
 
 The difference in power is defined by the weakest character. To engage in adventures and PK the difference must be less than 5 levels for characters below level 30 and 10 levels for characters above.
+
+%^CYAN%^OTHER FLAGS%^RESET%^
+
+ %^BOLD%^%^CYAN%^Q%^RESET%^ - quietness - before the name means this staff member is not accepting direct tells and is probably ignoring the lines.
+
+ %^BOLD%^%^CYAN%^I%^RESET%^ - invisibility - before the name means this staff member is truly invisible. Players usually don't see this flag.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

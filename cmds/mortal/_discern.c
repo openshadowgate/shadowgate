@@ -141,9 +141,9 @@ int cmd_discern(string str)
             dice = 1;
         }
 
-        lnum = obj->query_large_wc_num();
-        ldice = obj->query_large_wc_dice();
-        ldice = to_int(0.5 + (ldice * wear / 100.0));
+        //lnum = obj->query_large_wc_num();
+        //ldice = obj->query_large_wc_dice();
+        //ldice = to_int(0.5 + (ldice * wear / 100.0));
         if (ldice < 1) {
             ldice = 1;
         }
@@ -153,8 +153,8 @@ int cmd_discern(string str)
         range = 20 - (range - 1);
 
         write("%^WHITE%^It does %^BOLD%^%^GREEN%^" + damtype + " %^RESET%^damage.");
-        write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + num + "-" + num * dice + " (" + num + "d" + dice + ")%^RESET%^ damage to normal creatures.");
-        write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + lnum + "-" + lnum * ldice + " (" + lnum + "d" + ldice + ")%^RESET%^ damage to large creatures.");
+        write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + num + "-" + num * dice + " (" + num + "d" + dice + ")%^RESET%^ damage.");
+        //write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + lnum + "-" + lnum * ldice + " (" + lnum + "d" + ldice + ")%^RESET%^ damage to large creatures.");
         write("%^WHITE%^It scores critical hit on a roll of %^BOLD%^%^ORANGE%^" + range + "-20%^RESET%^.");
         write("%^WHITE%^It has critical damage multiplier of %^BOLD%^%^ORANGE%^" + multiplier + "%^RESET%^.");
         if ((int)"/daemon/config_d.c"->check_config("critical damage") == 0) {
@@ -162,8 +162,8 @@ int cmd_discern(string str)
         }
         if ((int)"/daemon/config_d.c"->check_config("critical damage") == 1) {
             multiplier--;
-            write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + num * multiplier + "-" + num * dice * multiplier + " (" + num * multiplier + "d" + dice + ")%^RESET%^ additional damage on a crit to normal creatures.");
-            write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + lnum * multiplier + "-" + num * dice * multiplier + " (" + lnum * multiplier + "d" + ldice + ")%^RESET%^ additional damage on a crit to large creatures%^");
+            write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + num * multiplier + "-" + num * dice * multiplier + " (" + num * multiplier + "d" + dice + ")%^RESET%^ additional damage on a crit.");
+            //write("%^WHITE%^It deals %^BOLD%^%^GREEN%^" + lnum * multiplier + "-" + num * dice * multiplier + " (" + lnum * multiplier + "d" + ldice + ")%^RESET%^ additional damage on a crit to large creatures%^");
         }
         if (obj->query("PoisonDoses")) {
             write("It has %^BOLD%^%^GREEN%^" + obj->query("PoisonDoses") + "%^RESET%^ layers of poison oil.");
