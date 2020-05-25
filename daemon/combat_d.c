@@ -42,7 +42,7 @@ void new_struck(int damage, object weapon, object attacker, string limb, object 
 void do_fumble(object attacker, object weapon);
 void miss(object attacker, int magic, object target, string type, string target_thing);
 int calculate_unarmed_damage(object attacker);
-int critical_roll;
+int critical_roll, fumble;
 
 
 //****** END OF FUNCTION DEFINITIONS ******//
@@ -2716,6 +2716,13 @@ void internal_execute_attack(object who)
         }
         roll = random(20) + 1;
 
+        if (roll == 1) { //automatic miss on rolls of a one
+            fumble = 1;
+        }else {
+            fumble = 0;
+        }
+
+
         target_thing = (string)victim->return_target_limb();
         roll = BONUS_D->process_hit(who, victim, i, current, 0, touch_attack);
         //crit stuff
@@ -2743,7 +2750,7 @@ void internal_execute_attack(object who)
             }
         }
         // end crit stuff
-        if (roll) {
+        if (roll && fumble == 0) {
             if (!victim->query_unconscious() && !victim->query_ghost() && !victim->query_bound()) {
                 if (!extra_hit_calcs(who, victim, current, target_thing) || check_avoidance(who, victim, weapons)) {
                     if (!objectp(who)) {
@@ -2772,7 +2779,7 @@ void internal_execute_attack(object who)
                 }
             }
         }
-        if (!roll) {
+        if (!roll || fumble == 1) {
             //if(find_player("saide") && userp(who)) tell_object(find_player("saide"), identify(who) + " missed "+identify(victim));
             if (!current || who->query_property("shapeshifted")) {
                 who->miss(who->query_casting(), victim, 0, target_thing);
