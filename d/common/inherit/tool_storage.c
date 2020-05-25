@@ -58,6 +58,9 @@ void reset()
     if (!present("portable lab case")) {
         new("/d/common/obj/misc/tools/portable_lab_case")->move(TO);
     }
+    if (!present("portable smithy bag")) {
+        new("/d/common/obj/misc/tools/portable_smithy_bag")->move(TO);
+    }
 
     switch (random(6)) {
     case 0:
