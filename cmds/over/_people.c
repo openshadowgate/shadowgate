@@ -16,7 +16,7 @@ cmd_people(string args)
     object peep;
 
     foreach(peep in people) {
-        write(sprintf("%16s %12s %s", query_ip_number(peep), peep->query_name(), peep->query_position()));
+        write(sprintf("%4s %12s %s", query_ip_number(peep) == "127.0.0.1" ? "tun" : "lnk", peep->query_name(), peep->query_position()));
     }
 
     return 1;
