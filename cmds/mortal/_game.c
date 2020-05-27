@@ -149,7 +149,7 @@ report(string *lines)
     switch(varg)
     {
         case "bug": case "typo": case "idea":
-            rep = capitalize(varg) + " reported by "+capitalize(TPQN)+" " +ctime(time())+":\n";
+            rep = capitalize(varg) + " reported by "+capitalize(TPQN);
             break;
     }
     mlog = TLOG[varg];
@@ -178,6 +178,7 @@ report(string *lines)
         title = "~" + title;
     }
     seteuid(UID_CRESAVE);
+    log_file("reports/bugreports", rep + " " + title);
     write_file("/tmp/bugs/export_" + time() + "_" + TPQN + ".txt", title + "\n" + message);
     // "/adm/daemon/bboard_d.c"->direct_post(get_board(),capitalize(TPQN),title,message);
     seteuid(getuid());
