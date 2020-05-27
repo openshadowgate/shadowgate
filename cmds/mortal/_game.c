@@ -42,13 +42,13 @@ int cmd_game(string str)
     string arg, mtitle;
     if(!str)
     {
-        tell_object(TP, "%^BOLD%^%^WHITE%^Please specify the type of report that you want "+
+        tell_object(TP, "%^BOLD%^%^WHITE%^Specify the type of report that you want "+
         "to make. Valid options are "+notify_valid()+".%^RESET%^");
         return 1;
     }
     if(sscanf(str, "%s %s", arg, mtitle) != 2)
     {
-        tell_object(TP, "%^BOLD%^%^WHITE%^Please specify the type of report that you want "+
+        tell_object(TP, "%^BOLD%^%^WHITE%^Specify the type of report that you want "+
         "to make, as well as a target object or title for the report.%^RESET%^");
         return 1;
     }
@@ -60,7 +60,7 @@ int cmd_game(string str)
     }
     if(strlen(mtitle) > 30)
     {
-       tell_object(TP, "Please be more brief on the title, less than 30 characters.\n  You can elaborate in the editor.\n");
+       tell_object(TP, "Be more brief on the title, less than 30 characters.\n  You can elaborate in the editor.\n");
        return 1;
     }
     do_post(arg, mtitle);
@@ -77,35 +77,7 @@ void do_post(string arg, string mtitle)
         return 1;
     }
     varg = arg;
-    switch(arg)
-    {
-        case "bug":
-            write("You are about to post to a board for the wizzes saying there is a "
-            "bug related to %^BOLD%^%^YELLOW%^"+mtitle+"%^RESET%^.  If you "
-            "specified 'here', it will report the specific room you are "
-            "in.  Some things may be flukes or be difficult "
-            "to track down and eradicate, but we do look into each report and "
-            "try.  %^BOLD%^Please type in your message below.%^RESET%^  Any "
-            "details you can provide about what was wrong, "
-            "including a copy/paste or details of events just before the "
-            "error are usually helpful.\n");
-            break;
-        case "typo":
-            write("You are about to post to a board for the immortals saying there is a "
-            "typo related to %^BOLD%^%^YELLOW%^"+mtitle+"%^RESET%^.  If you "
-            "specified 'here', it will report the specific room you are "
-            "in.  %^BOLD%^Please type in your message below.  "
-            "%^RESET%^Feel free to copy/paste the relevant text from your screen "
-            "and please indicate the corrections needed.\n");
-            break;
-        case "idea":
-            write("You are about to post an idea to a board for the immortals to see. "+
-            "Please note that all ideas are considered, regardless of where or who "+
-            "they originate from. Also know that they may take time as the staff "+
-            "continues to work on improving the game and you may or may not receive "+
-            "a response.\n");
-            break;
-    }
+
     if(mtitle == "here")
     {
         file = base_name(ETP);
@@ -121,6 +93,9 @@ void do_post(string arg, string mtitle)
         title = mtitle;
         file = base_name(ETP);
     }
+    write("%^GREEN%^You're about to report a bug or make a suggestion. Include as many details as possible, even false bug reports help.\n");
+    write("%^GREEN%^Tag: " + arg);
+    write("%^GREEN%^Subject: " + title);
     rm(DIR_TMP+"/"+geteuid(previous_object())+"."+varg);
     previous_object()->edit(DIR_TMP+"/"+geteuid(previous_object())+"."+varg,
     "end_edit", TO);
@@ -140,7 +115,7 @@ report(string * lines)
 {
     string who, trash, * elements, rep, mlog;
     int x;
-    string message;
+    string message = "";
 
     elements = explode(file, "/");
     if (elements[0] == "realms") {
@@ -150,31 +125,18 @@ report(string * lines)
     }else {
         who = 0;
     }
-    switch (varg) {
-    case "bug": case "typo": case "idea":
-        rep = capitalize(varg) + " reported by " + capitalize(TPQN);
-        break;
-    }
-    mlog = TLOG[varg];
+
     seteuid(UID_LOG);
-    log_file(mlog, rep);
-    if (who) {
-        log_file("reports/" + who, rep);
-    }
-    x = -1;
-    while (++x < sizeof(lines)) {
-        log_file(mlog, lines[x] + "\n");
-        if (who) {
-            log_file("reports/" + who, lines[x] + "\n");
-        }
-    }
-    for (x = 0; i < sizeof(lines); x++ )
+
+    log_file("reports/bugreports", rep + " " + title);
+
+    message = message + "\nLocation: " + base_name(ETP) + "\nDate: " + ctime(time()) + "\nTarget: " + file + "\nFrom: " + who + "\n\n";
+
+    for (x = 0; x < sizeof(lines); x++ )
     {
-        message += "    " + lines[x] + "\n";
+        message += lines[x] + "\n";
     }
-    message = message + "\n" + base_name(ETP) + "\n" + ctime(time()) + "\n "
-        + file + ".\n\n";
-    //  title = file;
+
     if (strlen(title) > 30) {
         while (strlen(title) > 29 && get_eval_cost() >= 100000) {
             sscanf(title, "%s/%s", trash, title);
@@ -182,12 +144,11 @@ report(string * lines)
         title = "~" + title;
     }
     seteuid(UID_CRESAVE);
-    log_file("reports/bugreports", rep + " " + title);
-    write(title + "\n" + varg + "\n" + message);
-    // write_file("/tmp/bugs/export_" + time() + "_" + TPQN + ".txt",  title + "\n" + get_board()+ "\n" + message);
-    // "/adm/daemon/bboard_d.c"->direct_post(get_board(),capitalize(TPQN),title,message);
+
+    // write(title + "\n" + varg + "\n" + message);
+    write_file("/tmp/bugs/export_" + time() + "_" + TPQN + ".txt",  title + "\n" + varg + "\n" + message);
+
     seteuid(getuid());
-    file = 0;
     write(capitalize(varg) + " reported!  Thank you!\n");
     return 1;
 }
