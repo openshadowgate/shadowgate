@@ -31,7 +31,7 @@ string ldesc() {
 	"in a closet instead of the open wilderness.  An owl hoots in "+
 	"the distance, startling a small creature in the bushes a little "+
 	"ways ahead of you.  As best you can tell, the path stretches "+
-	"to the north and south of here."
+	"to the south of here."
      );
 
    return("%^BOLD%^A Path Through The Forest%^RESET%^\n"
@@ -42,7 +42,7 @@ string ldesc() {
 	"stretches out and away from the path.  Signs of wildlife are "+
 	"everywhere...birds sing merrily from their perches, and the bushes "+
 	"rustle all around you as small creatures scurry about.  "+
-    	"The path you are on seems to continue north and south from here, "+
+    	"The path you are on seems to continue south from here, "+
 	"hopefully providing you with safe passage through the forest."
   );
 }
