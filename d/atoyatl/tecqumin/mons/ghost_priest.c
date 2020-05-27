@@ -64,7 +64,7 @@ void create()
              + "%^WHITE%^b%^RESET%^o%^BOLD%^%^WHITE%^ne%^RESET%^ striking"
              + " your eyes as different layers of " + gender_poss
              + " body fade in and out of vision.");
-    set_hd(120, 12);
+    set_hd(50, 12);
     set_size(2);
     set("aggressive", "aggfunc");
     set_class("cleric");
@@ -82,7 +82,7 @@ void create()
     set_stats("dexterity", 18);
     set_new_exp(38, "normal");
     set_alignment(4);
-    set_mob_magic_resistance("very low");
+    set_mob_magic_resistance("average");
     set_property("full attacks", 1);
     set_property("swarm", 1);
     add_money("gold", random(2000) + 2000);
