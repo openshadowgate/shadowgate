@@ -179,7 +179,7 @@ report(string *lines)
     }
     seteuid(UID_CRESAVE);
     log_file("reports/bugreports", rep + " " + title);
-    write_file("/tmp/bugs/export_" + time() + "_" + TPQN + ".txt", title + "\n" + message);
+    write_file("/tmp/bugs/export_" + time() + "_" + TPQN + ".txt", get_board() + ": " + title + "\n" + message);
     // "/adm/daemon/bboard_d.c"->direct_post(get_board(),capitalize(TPQN),title,message);
     seteuid(getuid());
     file = 0;
