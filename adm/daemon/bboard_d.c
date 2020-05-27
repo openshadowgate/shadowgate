@@ -209,9 +209,10 @@ int dump_board(string id, string fname)
     foreach(message in posts)
     {
         tosave = "";
-        tosave += "From: " + message["owner"] + "\n";
-        tosave += "Date: " + ctime(message["date"]) + "\n";
-        tosave += "Subject: " + message["title"] + "\n";
+        /* tosave += "From: " + message["owner"] + "\n"; */
+        /* tosave += "Date: " + ctime(message["date"]) + "\n"; */
+        /* tosave += "Subject: " + message["title"] + "\n"; */
+        tosave += message["title"] + "\n";
         tosave += message["message"];
 
         write_file(fname + "." + message["date"] + ".txt", tosave, 1);
