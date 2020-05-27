@@ -69,7 +69,7 @@ void spell_effect(int prof)
 
     spell_kill(target, caster);
 
-    tell_room(place, "%^BOLD%^%^WHITE%^The sorge having been freed chooses its own path!");
+    tell_room(place, "%^BOLD%^%^WHITE%^The surge having been freed chooses its own path!");
 
 
     while (number > 0 && sizeof(inven) != 0) {

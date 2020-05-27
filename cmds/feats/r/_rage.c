@@ -14,7 +14,7 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("Rapage");
+    feat_category("Rampage");
     feat_name("rage");
     feat_syntax("rage");
     feat_prereq("Barbarian L1");

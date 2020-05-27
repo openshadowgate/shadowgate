@@ -9,17 +9,11 @@ void create(){
   set_property("no teleport",1);
    set_property("used sticks",1);
   set_light(1);
-  
-  set_long(
-@DESC
-   %^RED%^%^BOLD%^Meeting area for some fire newts%^RESET%^
-Firenewts have gathered here. You see the strider droppings
-around the room. Evidentally some poor being was dinner too.
-You see the well cooked remains piled in a corner.
-DESC
-  );
-  
-  
+  set_short("%^BOLD%^%^RED%^Meeting area for some fire newts%^RESET%^");
+
+  set_long("Firenewts have gathered here. You see the strider droppings You see the well cooked remains piled in a corner.");
+
+
   set_exits(([
     "northeast":LAVA+"lava54",
     "south":LAVA+"lava56"
