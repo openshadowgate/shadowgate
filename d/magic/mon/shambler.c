@@ -88,3 +88,20 @@ void die(object obj)
     ::die(obj);
     return;
 }
+
+void heart_beat()
+{
+    string party;
+    int i;
+    ::heart_beat();
+
+    if (query_hp_percent() < 70 && present("vial", TO)) {
+        for (i = 0; i < 4; i++) {
+            command("quaff vial");
+        }
+    }
+
+    if (query_hp() < query_max_hp()) {
+        add_hp(query_max_hp() / 25);
+    }
+}
