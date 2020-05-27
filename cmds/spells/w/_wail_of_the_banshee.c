@@ -15,7 +15,7 @@ void create()
     set_syntax("cast CLASS wail of the banshee");
     set_damage_desc("sonic");
     set_domains(({"repose"}));
-    set_description("A caster invokes a horrible arcane scream that kills everything living in sight. Those who withstand the scream still suffer a little.");
+    set_description("A caster invokes a horrible arcane scream that may kill everything living in sight, mostly targets closest to caster. Those who withstand the scream still suffer a little.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("fort");
