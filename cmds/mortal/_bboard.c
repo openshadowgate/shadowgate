@@ -33,9 +33,6 @@ string * BBOARDS=({
             "avatarmail",
             "lib",
             "wiz",
-            "bugs",
-            "typos",
-            "ideas"
             });
 
 
@@ -93,7 +90,7 @@ int check_access(string my_command, string which_board)
             if (newbiep(TP) || high_mortalp(TP) || OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()) || avatarp(TP)) return 1;
             else return 0;
             break;
-        case "comment": case "ideas": case "typos": case "bugs":
+        case "comment":
             return 1;
             break;
         case "announcement":

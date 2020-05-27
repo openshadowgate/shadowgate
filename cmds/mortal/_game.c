@@ -168,8 +168,8 @@ report(string *lines)
     {
         message += lines[x]+"\n";
     }
-    message = message + "\nReported from location "+base_name(ETP)+"\non "+ctime(time())+" related to %^BOLD%^"
-    +file+"%^RESET%^.\n\n";
+    message = message + "\nReported from location "+base_name(ETP)+"\non "+ctime(time())+" related to "
+    +file+".\n\n";
     //  title = file;
     if (strlen(title) > 30)
     {
@@ -178,7 +178,8 @@ report(string *lines)
         title = "~" + title;
     }
     seteuid(UID_CRESAVE);
-    "/adm/daemon/bboard_d.c"->direct_post(get_board(),capitalize(TPQN),title,message);
+    write_file("/tmp/bugs/export_" + time() + "_" + TPQN + ".txt", title + "\n" + message);
+    // "/adm/daemon/bboard_d.c"->direct_post(get_board(),capitalize(TPQN),title,message);
     seteuid(getuid());
     file = 0;
     write(capitalize(varg)+" reported!  Thank you!\n");
