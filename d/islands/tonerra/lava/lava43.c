@@ -23,7 +23,7 @@ DESC
   );
   set_items(([
    "crates":"These are full of some basic healing supplies, and some smokes goods.",
-   "sacks":"Tese have some stange herbs and such, possibly for making potions.",
+   "sacks":"These have some stange herbs and such, possibly for making potions.",
    ]));
   set_search("crates",(:TO,"search":));
   
