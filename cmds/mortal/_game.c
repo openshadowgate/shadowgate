@@ -130,60 +130,65 @@ end_edit()
 {
     string *lines;
     string tmpfile;
-    tmpfile = file+":\n"+read_file(DIR_TMP+"/"+geteuid(TP)+"."+varg);
+    tmpfile = read_file(DIR_TMP+"/"+geteuid(TP)+"."+varg);
     lines = explode(wrap(tmpfile, 72), "\n");
     rm("/tmp/"+TPQN+"."+varg);
     report(lines);
 }
 
-report(string *lines)
+report(string * lines)
 {
-    string who, trash, *elements, rep, mlog;
+    string who, trash, * elements, rep, mlog;
     int x;
     string message;
 
     elements = explode(file, "/");
-    if(elements[0] == "realms") who = elements[1];
-    else if(elements[0] == "d") who = elements[1];
-    else who = 0;
-    switch(varg)
-    {
-        case "bug": case "typo": case "idea":
-            rep = capitalize(varg) + " reported by "+capitalize(TPQN);
-            break;
+    if (elements[0] == "realms") {
+        who = elements[1];
+    }else if (elements[0] == "d") {
+        who = elements[1];
+    }else {
+        who = 0;
+    }
+    switch (varg) {
+    case "bug": case "typo": case "idea":
+        rep = capitalize(varg) + " reported by " + capitalize(TPQN);
+        break;
     }
     mlog = TLOG[varg];
     seteuid(UID_LOG);
     log_file(mlog, rep);
-    if(who) log_file("reports/"+who, rep);
+    if (who) {
+        log_file("reports/" + who, rep);
+    }
     x = -1;
-    while(++x < sizeof(lines))
-    {
-        log_file(mlog, lines[x]+"\n");
-        if(who) log_file("reports/"+who, lines[x]+"\n");
+    while (++x < sizeof(lines)) {
+        log_file(mlog, lines[x] + "\n");
+        if (who) {
+            log_file("reports/" + who, lines[x] + "\n");
+        }
     }
-    message = lines[0]+"\n";
-    x=0;
-    while(++x < sizeof(lines))
+    for (x = 0; i < sizeof(lines); x++ )
     {
-        message += lines[x]+"\n";
+        message += "    " + lines[x] + "\n";
     }
-    message = message + "\nReported from location "+base_name(ETP)+"\non "+ctime(time())+" related to "
-    +file+".\n\n";
+    message = message + "\n" + base_name(ETP) + "\n" + ctime(time()) + "\n "
+        + file + ".\n\n";
     //  title = file;
-    if (strlen(title) > 30)
-    {
-        while(strlen(title) > 29 && get_eval_cost() >= 100000)
+    if (strlen(title) > 30) {
+        while (strlen(title) > 29 && get_eval_cost() >= 100000) {
             sscanf(title, "%s/%s", trash, title);
+        }
         title = "~" + title;
     }
     seteuid(UID_CRESAVE);
     log_file("reports/bugreports", rep + " " + title);
-    write_file("/tmp/bugs/export_" + time() + "_" + TPQN + ".txt", get_board() + ": " + title + "\n" + message);
+    write(title + "\n" + varg + "\n" + message);
+    // write_file("/tmp/bugs/export_" + time() + "_" + TPQN + ".txt",  title + "\n" + get_board()+ "\n" + message);
     // "/adm/daemon/bboard_d.c"->direct_post(get_board(),capitalize(TPQN),title,message);
     seteuid(getuid());
     file = 0;
-    write(capitalize(varg)+" reported!  Thank you!\n");
+    write(capitalize(varg) + " reported!  Thank you!\n");
     return 1;
 }
 
