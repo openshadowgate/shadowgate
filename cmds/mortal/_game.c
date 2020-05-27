@@ -58,9 +58,9 @@ int cmd_game(string str)
         "supported options are "+notify_valid()+".%^RESET%^");
         return 1;
     }
-    if(strlen(mtitle) > 72)
+    if(strlen(mtitle) > 30)
     {
-       tell_object(TP, "Please be more brief on the title, less than 72 characters.\n  You can elaborate in the editor.\n");
+       tell_object(TP, "Please be more brief on the title, less than 30 characters.\n  You can elaborate in the editor.\n");
        return 1;
     }
     do_post(arg, mtitle);
