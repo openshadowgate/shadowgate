@@ -8,7 +8,7 @@ void create() {
     feat_type("permanent");
     feat_category("GeneralCombat");
     feat_name("spot");
-    feat_desc("The Spot skill is used primarily to detect characters or creatures who are hiding. Typically, your Spot check is opposed by the stealth check of the creature trying not to be seen. Spot increases your ability to passively percieve, removing panalty to perception when making passice rolls.
+    feat_desc("The Spot skill is used primarily to detect characters or creatures who are hiding. Typically, your Spot check is opposed by the stealth check of the creature trying not to be seen. Spot increases your ability to passively percieve, removing penalty to perception when making passive rolls.
 
 A spot check might allow you to be come aware of hidden creatures around you. Unlike other spot checks this one is rolled against target's stealth.
 

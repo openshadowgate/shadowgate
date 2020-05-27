@@ -9,7 +9,7 @@ int FLAG;
 void create()
 {
     ::create();
-    feat_type("premanent");
+    feat_type("permanent");
     feat_category("NonCombat");
     feat_name("skill focus");
     feat_desc("Skill Focus allows the selection of one non-class skill, which the character will then be skilled at as per a class skill.
