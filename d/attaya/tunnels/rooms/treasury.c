@@ -20,7 +20,7 @@
 
 inherit VAULT;
 
-// last_hoard tracks the time the last hoard was added to the room. The 
+// last_hoard tracks the time the last hoard was added to the room. The
 // hoard is not replaced more than once per SG day, other than at reboots.
 
 int piles_searched;
@@ -40,7 +40,7 @@ void create(){
 
   set_long((:TO, "long_desc":) );
 
-  set_items( ([ 
+  set_items( ([
 
 ({ "cabinet", "cabinets"}): "%^RED%^Several tall, redwood cased cabinets"
                            +" stand around the room, each of them fronted"
@@ -70,7 +70,7 @@ void create(){
                               +" piles of coins, with paintings, statues"
                               +" and art treasures dotted in amongst the"
                               +" general wealth"
-  
+
   ]) );
 
   set_search("cabinet", (:TO, "search_cabinets":) );
@@ -90,7 +90,7 @@ void create(){
 
  set_exits( ([
         "out":TUNNELS+ "d_cauldron",
-    ]) ); 
+    ]) );
   if (time() > TREASURY_D->last_hoard()+DAY) {
     make_hoard();
     TREASURY_D->set_last_hoard(time());
@@ -123,8 +123,8 @@ string long_desc(){
 void reset()
 {
   ::reset();
-  if (!present("wand",TO)&&!present("staff",TO)  &&!present("instrument",TO) 
-       && !present("boots",TO) && !present("phylactery",TO) && time() > TREASURY_D->last_hoard()+DAY) 
+  if (!present("wand",TO)&&!present("staff",TO)  &&!present("instrument",TO)
+       && !present("boots",TO) && !present("phylactery",TO) && time() > TREASURY_D->last_hoard()+DAY)
   {
     make_hoard();
     TREASURY_D->set_last_hoard(time());
@@ -151,7 +151,7 @@ int decipher(string str){
   if (str!="rune" && str !="the rune"&&str!="mosaic"){
     return notify_fail("decipher what?");
   }
-  // Check to see if the person can decipher the rune (code robbed from 
+  // Check to see if the person can decipher the rune (code robbed from
   // scroll.c
   if (interactive(TP)){
       skill = TP->query_skill("spellcraft");
@@ -184,7 +184,7 @@ int search_chests()
     return 0;
   }
   i = random(sizeof(MUSICALS));
-  switch(random(5)){
+  switch(random(6)){
   case 0:
     ob = new(OBJ+"r_wand");
     break;
@@ -263,7 +263,7 @@ int search_cabinets()
     tell_room(TO,TPQCN + " looks through the display cabinets and finds "
                         + ob->query_short() + "!", TP);
   }
-  
+
   cabinets_searched++;
 }
 
@@ -302,4 +302,3 @@ int search_piles()
   }
   piles_searched++;
 }
-
