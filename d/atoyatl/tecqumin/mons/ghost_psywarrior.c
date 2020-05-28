@@ -37,7 +37,7 @@ void create()
         gender_obj = "her";
       }
   	set_long("%^RESET%^A long dead %^BOLD%^%^BLUE%^psywarrior%^RESET%^ of the"
-              +" Tecqumin. Once an incisive mind and specialist in battling magic, " 
+              +" Tecqumin. Once an incisive mind and specialist in battling magic, "
               + gender_poss +" spirit now appears as a flickering,"
               +" %^CYAN%^tr%^RESET%^a%^CYAN%^nsl%^RESET%^u%^CYAN%^cent"
               +" %^RESET%^human figure. When at its most visible, you can"
@@ -45,11 +45,11 @@ void create()
               +" lithe, well muscled body. " + gender_Subj + " is dressed"
               +" in a woven kilt, with a multi coloured"
               +" %^RED%^p%^MAGENTA%^o%^ORANGE%^n%^MAGENTA%^c%^ORANGE%^h"
-              +"%^RED%^o%^RESET%^ thrown over " + gender_poss 
+              +"%^RED%^o%^RESET%^ thrown over " + gender_poss
               +" shoulders. %^YELLOW%^G%^RESET%^%^ORANGE%^ol%^YELLOW%^d"
               +"%^RESET%^%^ORANGE%^e%^YELLOW%^n br%^RESET%^%^ORANGE%^a"
               +"%^YELLOW%^c%^RESET%^%^ORANGE%^e%^YELLOW%^rs%^RESET%^"
-              +" adorn " + gender_poss + " arms and " + gender_subj 
+              +" adorn " + gender_poss + " arms and " + gender_subj
               +" wears an abundance of decorative s%^BOLD%^%^WHITE%^i"
               +"%^RESET%^lv%^BOLD%^%^WHITE%^e%^RESET%^r %^BOLD%^"
               +"%^WHITE%^t%^RESET%^or%^BOLD%^%^WHITE%^c%^RESET%^s and"
@@ -61,9 +61,9 @@ void create()
               +"%^RESET%^, %^BOLD%^%^RED%^f%^MAGENTA%^l%^RESET%^"
               +"%^MAGENTA%^e%^BOLD%^%^MAGENTA%^sh%^RESET%^ and %^BOLD%^"
               +"%^WHITE%^b%^RESET%^o%^BOLD%^%^WHITE%^ne%^RESET%^ striking"
-              +" your eyes as different layers of " + gender_poss 
-              +" body fade in and out of vision. you notice that " + gender_poss + 
-              " striking eyes remain clear and visible at all times, even when " 
+              +" your eyes as different layers of " + gender_poss
+              +" body fade in and out of vision. you notice that " + gender_poss +
+              " striking eyes remain clear and visible at all times, even when "
               + gender_poss + " skin seems stripped away."  );
 	set_class("psywarrior");
 	set_mlevel("psywarrior",50);
@@ -72,10 +72,10 @@ void create()
    	set_hp(random(1000)+1400 + random(400));
 	set_max_level(49);
 	set_property("swarm",1);
-  	set_overall_ac(-70);
+  	set_overall_ac(-50);
       set_size(2);
       set("aggressive", 18);
-      add_attack_bonus(70); 
+      add_attack_bonus(70);
       set_property("magic",1);
   set_monster_feats(({"damage resistance","improved damage
 resistance","improved toughness",
@@ -111,10 +111,10 @@ spell power"}));
       set_attack_limbs(({"left arm","right arm"}));
       set_damage(7,6);
       set_property("full attacks",1);
-      set_property("swarm", 1); 
+      set_property("swarm", 1);
 	set_speed(0);
 
- 
+
   	set_emotes(1,({
            "The %^CYAN%^translucent%^RESET%^, %^BOLD%^%^WHITE%^g%^RESET%^"
           +"%^ORANGE%^h%^BOLD%^%^WHITE%^ost%^RESET%^%^ORANGE%^l%^BOLD%^"
@@ -205,7 +205,7 @@ void summon_help(){
   if (count_players()< count_ghosts()*3 || count_ghosts()>10) return;
   force_me("emote casts " + TO->QP + " %^BOLD%^%^WHITE%^gaze%^RESET%^ upwards, briefly closing " + TO->QP + " eyes as if in %^CYAN%^mute supplication");
   all_rooms = ({});
-  new_rooms = ({ETO}); 
+  new_rooms = ({ETO});
   for (i = 0;i<4;i++){
     all_rooms += new_rooms;
     rooms = new_rooms;
@@ -216,7 +216,7 @@ void summon_help(){
     }
     for (j=0;j<count;j++){
       exits = rooms[j]->query_exits();
-      count2 = sizeof(exits); 
+      count2 = sizeof(exits);
       //tell_room(ETO, "There are " + count2 + " exits in " + base_name(rooms[j]));
       if (count2<1){
         continue;
@@ -268,7 +268,7 @@ void summon_help(){
       //tell_room(ETO, base_name(all_critters[i]) + " starting walking towards " + base_name(ETO));
       all_critters[i]->start_walking(base_name(ETO));
     }
-  }  
+  }
 }
 
 void heart_beat(){
@@ -305,8 +305,8 @@ void heart_beat(){
          }
       }
     }
-  } else 
-  { 
+  } else
+  {
     report("I don't have any attackers");
   }
   path = ETO->get_path();
@@ -322,14 +322,14 @@ void heart_beat(){
       {
         force_me("swing across canal");
         report("Trying to swing across the canal");
-      } else 
+      } else
       {
         report("Not on the broken bridge");
         if (member_array(roomname, ({"canalbank01", "city_jung02", "ragged_road01", "city_jung01", "canalbank03"}))!=-1)
         {
           report("Trying to walk to " + CITY_ROOM + "broken_bridge01");
           start_walking(CITY_ROOM + "broken_bridge01");
-        } else 
+        } else
         {
           report("%^BOLD%^%^CYAN%^Not currently across the canal. roomname: " + roomname);
         }
@@ -340,12 +340,12 @@ void heart_beat(){
         report("Trying to go to zigzenith");
         go_to_zigzenith();
       }
-    } else 
-    {  
+    } else
+    {
       report ("I am not dragging anyone");
       report("Draggee is: " + query_draggee());
     }
-  } else 
+  } else
   {
     report("Path is : " + path +". Starting NON city room options");
     remove_property("knock unconscious");
@@ -371,7 +371,7 @@ void heart_beat(){
             return;
           }
           race = critters[i]->query_race();
-          num = critters[i]->query_id_no(race);   
+          num = critters[i]->query_id_no(race);
           force_me("gag " + race + " " + num);
         }
         if (critters[i]->query_unconscious()){
@@ -397,7 +397,7 @@ void heart_beat(){
     {
       report("%^BOLD%^%^YELLOW%^Base name of ETO IS ROOMS + zigzenith");
     }
-  } 
+  }
   report (file_name(TO) + ": %^BOLD%^%^GREEN%^heartbeat completed");
 }
 
@@ -414,11 +414,11 @@ void go_to_zigzenith(){
   switch(path)
   {
   case ROOMS:
-    report("go_to_zigzenith function: Trying to start walking to zigzenith"); 
+    report("go_to_zigzenith function: Trying to start walking to zigzenith");
     start_walking("/d/atoyatl/tecqumin/rooms/zigzenith");
     break;
   case CITY_ROOM:
-    report("go_to_zigzenith function: We are in a city room"); 
+    report("go_to_zigzenith function: We are in a city room");
     switch(roomname)
     {
     case "plaza":
@@ -432,11 +432,11 @@ void go_to_zigzenith(){
     case "canalbank01":
     case "canalbank03":
     case "ragged_road01": //deliberately falling through
-      report("go_to_zigzenith function: Trying to start walking to broken_bridge01"); 
+      report("go_to_zigzenith function: Trying to start walking to broken_bridge01");
       start_walking( "/d/atoyatl/tecqumin/city/rooms/broken_bridge01");
-      break; 
+      break;
     default:
-      report("go_to_zigzenith function: Trying to start walking to plaza"); 
+      report("go_to_zigzenith function: Trying to start walking to plaza");
       start_walking(CITY_ROOM + "plaza");
       break;
     }
@@ -488,10 +488,10 @@ void reach_destination(){
     force_me("swing across canal");
     break;
   }
-} 
+}
 
 void do_sacrifice(){
-  object draggee, * critters; 
+  object draggee, * critters;
   int i, count;
   draggee = query_draggee();
   if (!objectp(draggee)){
@@ -554,13 +554,13 @@ object query_draggee(){
     {
       report("draggee does not have a draggee property. Draggee = " + draggee->QCN);
     }
-  } else 
+  } else
   {
     report("draggee is not a valid object in the first place");
-  } 
+  }
   return 0;
 }
- 
+
 void sunder(){
   object * critters;
   string who;
@@ -585,7 +585,7 @@ void rush(){
   critters = query_attackers();
   if (sizeof(critters)<1) return;
   who = critters[random(sizeof(critters))]->query_name();
-  force_me("rush " + who); 
+  force_me("rush " + who);
 }
 
 void check_my_heart()
@@ -625,4 +625,3 @@ void die(){
   }
   ::die();
 }
-

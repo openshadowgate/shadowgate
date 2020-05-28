@@ -76,7 +76,7 @@ void create()
 
     set_max_level(50);
     set_property("swarm", 1);
-    set_overall_ac(-67);
+    set_overall_ac(-50);
     add_attack_bonus(65);
     set_stats("strength", 18);
     set_stats("dexterity", 18);

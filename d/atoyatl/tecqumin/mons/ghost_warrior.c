@@ -74,7 +74,7 @@ void create()
     set_max_level(49);
     set_property("swarm", 1);
     set_alignment(7);
-    set_overall_ac(-70);
+    set_overall_ac(-50);
     set_size(2);
     add_attack_bonus(73);
     set_property("magic", 1);
