@@ -392,23 +392,8 @@ int expanded_knowledge_power(string str,object ob,string feat,string mytype){
             break;
     }
 
-    if((int)"/daemon/config_d.c"->check_config("character improvement") == 0 && amt > 0)
-    {
-        tell_object(ob,"%^YELLOW%^Are you sure you want to add the feat "+
-        feat+"?  It will cost you %^MAGENTA%^"+amt+"%^YELLOW%^ exp.%^RESET%^");
-    }
-    else if((int)"/daemon/config_d.c"->check_config("character improvement") == 1 && amt > 0)
-    {
-        tell_object(ob,"%^YELLOW%^Are you sure you want to add the feat "+
-        feat+"?  It will cause you to incur a character improvement tax of "+
-        "%^MAGENTA%^"+amt+"%^YELLOW%^.  This tax will reduce all future "+
-        "experience gained by %^RED%^50%%^YELLOW%^ until it is repaid.%^RESET%^");
-    }
-    else
-    {
-        tell_object(ob,"%^YELLOW%^Are you sure you want to add the feat "+
-        feat+"?");
-    }
+    tell_object(ob,"%^YELLOW%^Are you sure you want to add the feat "+
+                feat+"?");
     tell_object(ob,"Enter <yes> to add the feat, anything else to abort.");
 
     switch(mytype)
