@@ -3,22 +3,11 @@
 
 inherit FEAT;
 
-#define FEAT_CMD "/cmds/mortal/_feats"
+int expanded_level = 3;
 
 int cmd_expanded_knowledge_3(string args)
 {
-    int ret;
-
-    if(TP->query("expanded_knowledge_change")>time()-60*60*24*3)
-    {
-        write("%^BOLD%^%^BLACK%^Too soon, once per three days, go away.");
-        return 1;
-    }
-
-    if(FEAT_CMD->expanded_knowledge_power(args,TP,"expanded knowledge 3","normal"))
-        TP->set("expanded_knowledge_change",time());
-
-    return 1;
+#include "_expanded_knowledge_common.h";
 }
 
 void create() {

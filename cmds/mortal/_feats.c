@@ -288,133 +288,6 @@ int skill_focus_setting(string str,object ob,string feat){
     return 1;
 }
 
-/////////Expanded Knowledge//////// markers for ~Circe~ because she's old and has trouble finding things.
-int expanded_knowledge_power(string str,object ob,string feat,string mytype){
-    int num,level, okclasslvl, i, mymax, amt;
-    object spell;
-    string file, *okclasses, *myclasses = ({}), tmp, activeclass, mydisc;
-
-    if(!objectp(ob)) return 0;
-    if(!stringp(feat)) return 0;
-    if(!stringp(str)) return 0;
-
-    okclasses = ({});
-    myclasses = ob->query_classes();
-
-    if(!sizeof(myclasses)) {
-        tell_object(ob,"Your classes are broken! Contact a wiz!");
-        free = 0;
-        return 1;
-    }
-
-    if(ob->is_class("psywarrior")){
-       activeclass = "psywarrior";
-       myclasses += ({"psion"});
-    }else if(ob->is_class("psion")){
-       activeclass = "psion";
-       myclasses += ({"psywarrior"});
-       mydisc = ob->query_discipline();
-    }else{
-       tell_object(ob,"You can take the expanded knowledge feats only if you can manifest psionic powers.");
-       free = 0;
-       return 1;
-    }
-    mymax = 0;
-    level = ob->query_class_level(activeclass);
-//Expanded Knowledge is different from Spellmastery and Spell Knowledge. The player has to use
-//one feat to take one power and can take a power from any psionic list, but only up to one level
-//below what he can currently cast (e.g. if he can cast 4th level powers, he can take only up to a
-//3rd level power). The powers are not cast for free. They use power points just like any others.
-    if(activeclass == "psywarrior"){
-       if(level >= 4) mymax++;
-       if(level >= 7) mymax++;
-       if(level >= 10) mymax++;
-       if(level >= 13) mymax++;
-       if(level >= 16) mymax++;
-       if(mymax > 5) mymax = 5;
-    }else if(activeclass == "psion"){
-       if(level >= 3) mymax++;
-       if(level >= 5) mymax++;
-       if(level >= 7) mymax++;
-       if(level >= 9) mymax++;
-       if(level >= 11) mymax++;
-       if(level >= 13) mymax++;
-       if(level >= 15) mymax++;
-       if(level >= 17) mymax++;
-       if(mymax > 8) mymax = 8;
-    }else{
-       tell_object(ob,"You can take the expanded knowledge feats only if you can manifest psionic powers.");
-       free = 0;
-       return 1;
-    }
-
-    tmp = "/cmds/spells/"+str[0..0]+"/_"+replace_string(str," ","_")+".c";
-    if(!file_exists(tmp)) {
-        tell_object(ob,"The spell "+str+" does not exist!");
-        free = 0;
-        return 1;
-    }
-
-    spell = new(tmp);
-
-    if(activeclass = "psion" && mydisc != 0 && mydisc != ""){
-       if((string)spell->query_discipline() == mydisc){
-          tell_object(ob,"You receive the "+str+" power for free with the "+mydisc+" discipline!");
-          free = 0;
-          return 1;
-       }
-    }
-
-    for(i = 0;i<sizeof(myclasses);i++) {
-       if((int)spell->query_spell_level(activeclass) > 0 && (int)spell->query_spell_level(activeclass) <= mymax){
-          okclasses += ({ activeclass }); //check for their own class first
-       }else if((int)spell->query_spell_level(myclasses[i]) > 0 && (int)spell->query_spell_level(myclasses[i]) <= mymax) {
-          okclasses += ({ myclasses[i] }); //then the other psionic class
-       }
-    }
-
-    if(!sizeof(okclasses)) {
-        tell_object(ob,"You do not have a class that can manifest "+str+" at a suitable level.");
-        free = 0;
-        return 1;
-    }
-
-    switch(mytype)
-    {
-        case "sorc":
-            tell_object(ob,"%^YELLOW%^Setting your "+feat+" power to %^BLUE%^"+str+"%^YELLOW%^ with a free hybrid feat.%^RESET%^");
-            break;
-        case "psion":
-            tell_object(ob,"%^YELLOW%^Setting your "+feat+" power to %^BLUE%^"+str+"%^YELLOW%^ with a free hybrid feat.%^RESET%^");
-            break;
-        default:
-            tell_object(ob,"%^YELLOW%^Setting your "+feat+" power to %^BLUE%^"+str+"%^YELLOW%^.%^RESET%^");
-            break;
-    }
-
-    tell_object(ob,"%^YELLOW%^Are you sure you want to add the feat "+
-                feat+"?");
-    tell_object(ob,"Enter <yes> to add the feat, anything else to abort.");
-
-    switch(mytype)
-    {
-        case "sorc":
-            input_to("confirm_add_hybrid",ob,feat,str);
-            return 1;
-            break;
-        case "psion":
-            input_to("confirm_add_magic",ob,feat,str);
-            return 1;
-            break;
-        default:
-            input_to("confirm_add",ob,feat,str);
-            return 1;
-            break;
-    }
-    return 1;
-}
-//////////////End Expanded Knoweldge/////////////
-
 int confirm_add(string str,object ob,string feat,string extradata) {
     int price;
 
@@ -433,9 +306,6 @@ int confirm_add(string str,object ob,string feat,string extradata) {
     }
 
     if(feat == "spellmastery" || feat == "archmage" || feat == "greater spell mastery") { ob->set("spellmastery_spell",extradata); }
-    if(feat == "expanded knowledge 1"){ ob->set("expanded_knowledge_1",extradata); }
-    if(feat == "expanded knowledge 2"){ ob->set("expanded_knowledge_2",extradata); }
-    if(feat == "expanded knowledge 3"){ ob->set("expanded_knowledge_3",extradata); }
     if(feat == "skill focus") { ob->set("skill_focus",extradata); }
     FEATS_D->add_my_feat(ob,"other",feat);
     //moved this down - otherwise feats that require a specific level will
@@ -497,9 +367,6 @@ int confirm_add_magic(string str,object ob,string feat,string extradata) {
         return 1;
     }
     if(feat == "spellmastery") { ob->set("spellmastery_spell",extradata); }
-    if(feat == "expanded knowledge 1"){ ob->set("expanded_knowledge_1",extradata); }
-    if(feat == "expanded knowledge 2"){ ob->set("expanded_knowledge_2",extradata); }
-    if(feat == "expanded knowledge 3"){ ob->set("expanded_knowledge_3",extradata); }
     FEATS_D->add_my_feat(ob,"magic",feat);
     log_file("added_feats",""+ob->QCN+" added magic bonus feat "+feat+" on "+ctime(time())+".\n");
     tell_object(ob,"%^YELLOW%^Congratulations, you have successfully added "
@@ -517,12 +384,7 @@ int confirm_add_hybrid(string str,object ob,string feat,string extradata) {
         free = 0;
         return 1;
     }
-//leaving this for now - may remove spellmastery from psywarriors
-//~Circe~ 9/3/15
     if(feat == "spellmastery") { ob->set("spellmastery_spell",extradata); }
-    if(feat == "expanded knowledge 1"){ ob->set("expanded_knowledge_1",extradata); }
-    if(feat == "expanded knowledge 2"){ ob->set("expanded_knowledge_2",extradata); }
-    if(feat == "expanded knowledge 3"){ ob->set("expanded_knowledge_3",extradata); }
     FEATS_D->add_my_feat(ob,"hybrid",feat);
     log_file("added_feats",""+ob->QCN+" added hybrid bonus feat "+feat+" on "+ctime(time())+".\n");
     tell_object(ob,"%^YELLOW%^Congratulations, you have successfully added "
@@ -546,9 +408,6 @@ int confirm_remove(string str,object ob,string feat,string extradata)
     }
     if((feat == "archmage" && extradata != "") || (feat == "greater spell mastery" && extradata != "")) { ob->set("spellmastery_spell",extradata); } // has to be reset to L1-2 if they have it.
     if(feat == "spellmastery") { ob->delete("spellmastery_spell"); }
-    if(feat == "expanded knowledge 1"){ ob->delete("expanded_knowledge_1"); }
-    if(feat == "expanded knowledge 2"){ ob->delete("expanded_knowledge_2"); }
-    if(feat == "expanded knowledge 3"){ ob->delete("expanded_knowledge_3"); }
     if(feat == "skill focus") { ob->delete("skill_focus"); }
 
     price = calculate_feat_cost(ob) / 8;
@@ -956,42 +815,6 @@ int cmd_feats(string str){
             input_to("spell_mastery_spell",TP,tmp,"normal");
             return 1;
         }
-        if(tmp == "expanded knowledge 1")
-        {
-            tell_object(TP,"%^YELLOW%^In order to gain the expanded knowledge 1 feat, "
-                "you must select a psywarrior or psion power (including discipline-"
-                "specific powers) one level below the highest level you can currently "
-                "cast. If you are unsure of the powers available to select, please check "
-                "<spells [class] expanded knowledge>.%^RESET%^");
-            tell_object(TP,"Please type the name of the power that you would like "
-                "your expanded knowledge 1 feat to use.");
-            input_to("expanded_knowledge_power",TP,tmp,"normal");
-            return 1;
-        }
-        if(tmp == "expanded knowledge 2")
-        {
-            tell_object(TP,"%^YELLOW%^In order to gain the expanded knowledge 2 feat, "
-                "you must select a psywarrior or psion power (including discipline-"
-                "specific powers) one level below the highest level you can currently "
-                "cast. If you are unsure of the powers available to select, please check "
-                "<spells [class] expanded knowledge>.%^RESET%^");
-            tell_object(TP,"Please type the name of the power that you would like "
-                "your expanded knowledge 2 feat to use.");
-            input_to("expanded_knowledge_power",TP,tmp,"normal");
-            return 1;
-        }
-        if(tmp == "expanded knowledge 3")
-        {
-            tell_object(TP,"%^YELLOW%^In order to gain the expanded knowledge 3 feat, "
-                "you must select a psywarrior or psion power (including discipline-"
-                "specific powers) one level below the highest level you can currently "
-                "cast. If you are unsure of the powers available to select, please check "
-                "<spells [class] expanded knowledge>.%^RESET%^");
-            tell_object(TP,"Please type the name of the power that you would like "
-                "your expanded knowledge 3 feat to use.");
-            input_to("expanded_knowledge_power",TP,tmp,"normal");
-            return 1;
-        }
         if((tmp == "archmage" || tmp == "greater spell mastery") && FEATS_D->has_feat(TP,"spellmastery"))
         {
             tell_object(TP,"%^YELLOW%^In order to gain the archmage feat, you must "
@@ -1246,42 +1069,6 @@ int cmd_feats(string str){
             input_to("spell_mastery_spell",TP,tmp,"sorc");
             return 1;
         }
-        if(tmp == "expanded knowledge 1")
-        {
-            tell_object(TP,"%^YELLOW%^In order to gain the expanded knowledge 1 feat, "
-                "you must select a psywarrior or psion power (including discipline-"
-                "specific powers) one level below the highest level you can currently "
-                "cast. If you are unsure of the powers available to select, please check "
-                "<spells [class] expanded knowledge>.%^RESET%^");
-            tell_object(TP,"Please type the name of the power that you would like "
-                "your expanded knowledge 1 feat to use.");
-            input_to("expanded_knowledge_power",TP,tmp,"psion");
-            return 1;
-        }
-        if(tmp == "expanded knowledge 2")
-        {
-            tell_object(TP,"%^YELLOW%^In order to gain the expanded knowledge 2 feat, "
-                "you must select a psywarrior or psion power (including discipline-"
-                "specific powers) one level below the highest level you can currently "
-                "cast. If you are unsure of the powers available to select, please check "
-                "<spells [class] expanded knowledge>.%^RESET%^");
-            tell_object(TP,"Please type the name of the power that you would like "
-                "your expanded knowledge 2 feat to use.");
-            input_to("expanded_knowledge_power",TP,tmp,"psion");
-            return 1;
-        }
-        if(tmp == "expanded knowledge 3")
-        {
-            tell_object(TP,"%^YELLOW%^In order to gain the expanded knowledge 3 feat, "
-                "you must select a psywarrior or psion power (including discipline-"
-                "specific powers) one level below the highest level you can currently "
-                "cast. If you are unsure of the powers available to select, please check "
-                "<spells [class] expanded knowledge>.%^RESET%^");
-            tell_object(TP,"Please type the name of the power that you would like "
-                "your expanded knowledge 3 feat to use.");
-            input_to("expanded_knowledge_power",TP,tmp,"psion");
-            return 1;
-        }
         tell_object(TP,"%^YELLOW%^Are you sure you want to add the feat "+tmp+" as one of "
             "your free bonus magic feats?  It will cost nothing to add, but you will have "
             "to spend exp to remove it later if you change your mind.%^RESET%^");
@@ -1393,42 +1180,6 @@ int cmd_feats(string str){
             tell_object(TP,"Please type the name of the spell that you would like "
                 "your spellmastery feat to use.");
             input_to("spell_mastery_spell",TP,tmp,"sorc");
-            return 1;
-        }
-        if(tmp == "expanded knowledge 1")
-        {
-            tell_object(TP,"%^YELLOW%^In order to gain the expanded knowledge 1 feat, "
-                "you must select a psywarrior or psion power (including discipline-"
-                "specific powers) one level below the highest level you can currently "
-                "cast. If you are unsure of the powers available to select, please check "
-                "<spells [class] expanded knowledge>.%^RESET%^");
-            tell_object(TP,"Please type the name of the power that you would like "
-                "your expanded knowledge 1 feat to use.");
-            input_to("expanded_knowledge_power",TP,tmp,"sorc");
-            return 1;
-        }
-        if(tmp == "expanded knowledge 2")
-        {
-            tell_object(TP,"%^YELLOW%^In order to gain the expanded knowledge 2 feat, "
-                "you must select a psywarrior or psion power (including discipline-"
-                "specific powers) one level below the highest level you can currently "
-                "cast. If you are unsure of the powers available to select, please check "
-                "<spells [class] expanded knowledge>.%^RESET%^");
-            tell_object(TP,"Please type the name of the power that you would like "
-                "your expanded knowledge 2 feat to use.");
-            input_to("expanded_knowledge_power",TP,tmp,"sorc");
-            return 1;
-        }
-        if(tmp == "expanded knowledge 3")
-        {
-            tell_object(TP,"%^YELLOW%^In order to gain the expanded knowledge 3 feat, "
-                "you must select a psywarrior or psion power (including discipline-"
-                "specific powers) one level below the highest level you can currently "
-                "cast. If you are unsure of the powers available to select, please check "
-                "<spells [class] expanded knowledge>.%^RESET%^");
-            tell_object(TP,"Please type the name of the power that you would like "
-                "your expanded knowledge 3 feat to use.");
-            input_to("expanded_knowledge_power",TP,tmp,"sorc");
             return 1;
         }
         tell_object(TP,"%^YELLOW%^Are you sure you want to add the feat "+tmp+" as one of "
