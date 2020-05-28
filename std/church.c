@@ -358,7 +358,7 @@ int __Read_me(string str)
   %^ORANGE%^<pick domain %^ORANGE%^%^ULINE%^DOMAIN%^RESET%^%^ORANGE%^>%^RESET%^   Choose a domain
   %^ORANGE%^<forget domains>%^RESET%^       Forget all current domains
 
-  %^ORANGE%^<pick way %^ORANGE%^%^ULINE%^WAY%^RESET%^%^ORANGE%^>%^RESET%^         Dedicate to that emphasis of Ki
+  %^ORANGE%^<pick way %^ORANGE%^%^ULINE%^WAY%^RESET%^%^ORANGE%^>%^RESET%^         Dedicate to that emphasis of Ki. E.g. <pick way of the fist>.
 
 Temples also have donation boxes. You will probably want to %^ORANGE%^<donate>%^RESET%^ coins or items to various deities. You can also %^ORANGE%^<look donation box>%^RESET%^ in temples even if there isn't one explicitly in the description.");
     return 1;

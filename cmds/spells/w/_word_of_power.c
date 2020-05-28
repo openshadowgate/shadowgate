@@ -2,6 +2,7 @@
 //changed the Seneca exit to unload into new Seneca ~Circe~ 1/9/09
 
 #include <priest.h>
+#include <teleport.h>
 inherit SPELL;
 
 #define ACTIVETEMPLES ({ "jarmila","kreysneothosies", "lord shadow", "lysara", "ryorik", "the faceless one", "callamir","kismet","nilith","nimnavanon"})
@@ -44,6 +45,7 @@ You can also go to the temple of your deity by using 'temple' as the location.
 
 void spell_effect(int prof) {
     string arg, where, placename, mygod;
+    object dest;
     int mypower,startpower,endpower,bonus;
 
     arg = lower_case(ARG);
@@ -139,41 +141,26 @@ void spell_effect(int prof) {
           break;
         }
     }
-    if(environment(CASTER)->query_property("no teleport") || where->query_property("no teleport")) {
-        tell_object(CASTER,"Nothing happens.");
+    if (environment(CASTER)->query_property("no teleport") || where->query_property("no teleport")) {
+        tell_object(CASTER, "Nothing happens.");
         dest_effect();
         return;
     }
-   if(where &&
-      (where->query_property("teleport proof") ||
-      place->query_property("teleport proof") ||
-      !where->is_room())){
-      startpower = place->query_property("teleport proof");
-      endpower = where->query_property("teleport proof");
-      bonus = caster->query_stats("wisdom");
-      bonus = bonus - 10;
-      if((object *)caster->query_attackers() != ({}))
-         mypower = CLEVEL + bonus + random(6);
-      else
-         mypower = CLEVEL + bonus + random(6) + 5;
-      if((mypower < startpower) || (mypower < endpower)){
-          tell_object(CASTER,"Nothing happens.");
-          dest_effect();
-          return;
-      }
-   }
 
-   caster->clear_followers();
+    caster->clear_followers();
+    dest = find_object_or_load(where);
 
-    tell_object(CASTER, "You are magically transported to the church in "+placename+".");
-// trying just move to get rid of bug from TP not being defined for move.c
-    CASTER->move_player(where);
-//    CASTER->move(where);
+    if(!TELEPORT->object_can_be_teleported(caster,caster,dest,clevel))
+    {
+        tell_object(caster,"You sense something is wrong with your spell and loose concentration.");
+        tell_room(place,caster->QCN+" "+
+                  "looks startled.",caster);
+        dest_effect();
+        return;
+    }
+    caster->move(dest);
+    tell_object(caster,"You find yourself elsewhere, disoriented.");
+    caster->force_me("look");
     CASTER->set_casting(0);
     dest_effect();
-}
-
-void dest_effect(){
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
 }

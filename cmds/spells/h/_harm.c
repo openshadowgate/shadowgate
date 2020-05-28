@@ -63,7 +63,7 @@ spell_effect(int prof)
         tell_object(target, "%^BOLD%^%^BLACK%^"+caster->QCN+" sends a beam of fell energy at you.");
     }
 
-    rnd = - sdamage * 7/6;
+    rnd = sdamage * 7/6;
     damage_targ(target,target->return_target_limb(),rnd,"negative energy");
 
     if(query_spell_name()=="harm")
