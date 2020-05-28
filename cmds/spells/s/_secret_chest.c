@@ -15,7 +15,7 @@ void create()
     set_spell_level(([ "mage" : 5 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS secret chest");
-    set_description("This spell calls to a floating extraplanar chest that will follow the caster everywhere, and even defend him, although poorly. The primary function of this chest is to store caster's equipment and be dispelled. If you keep it around, be aware: it is easy to steal from it. To store items in the chest simply give them to it. To retrieve them command it to give them to you or to drop them. When it is dismissed it will save all its contents. This chest will refuse all non-empty containers. This is a greater summon and won't work with spells of such class, such as gate and conjure elemental.
+    set_description("This spell calls to a floating extraplanar chest that will follow the caster everywhere, and even defend him, although poorly. The primary function of this chest is to store caster's equipment and be dispelled. If you keep it around, be aware: it is easy to steal from it, and this chest is not designed to store money. To store items in the chest simply give them to it. To retrieve them command it to give them to you or to drop them. When it is dismissed it will save all its contents. This chest will refuse all non-empty containers. This is a greater summon and won't work with spells of such class, such as gate and conjure elemental.
 
 To command chest, use %^ORANGE%^<command chest to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^.
 To command lost chest to follow you once again, use %^ORANGE%^<command chest to follow>%^RESET%^.
