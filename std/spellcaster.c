@@ -1095,3 +1095,21 @@ int has_aoe(string spellname)
         return 0;
     }
 }
+
+void clear_targeted_spells()
+{
+    object * spells, spell;
+
+    spells = TO->query_property("dispellable spells");
+
+    foreach(spell in spells) {
+        if (objectp(spell)) {
+            if (spell->query_target_required()) {
+                if (!objectp(spell->query_target_object())) {
+                    spell->dest_effect();
+                }
+            }
+
+        }
+    }
+}

@@ -32,6 +32,7 @@ int cmd_dispell(string str)
         return 1;
     }
 
+    TP->clear_targeted_spells();
 
     if (!str)
     {
@@ -44,7 +45,7 @@ int cmd_dispell(string str)
                 message("info","%^BOLD%^%^BLUE%^"+sprintf("%2d",i)+".%^BOLD%^GREEN%^ "+spells[i]->querySpellDisplay(),TP);
             }
         }
-    return 1;
+        return 1;
     }
     if(sizeof(spells))
     {
