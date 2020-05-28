@@ -130,7 +130,11 @@ report(string * lines)
 
     log_file("reports/bugreports", rep + " " + title);
 
-    message = message + "\nLocation: " + base_name(ETP) + "\nDate: " + ctime(time()) + "\nTarget: " + file + "\nFrom: " + who + "\n\n";
+    message += "Date: " + ctime(time()) + "\n";
+    message += "From: " + who + "\n";
+    message += "File: " + file + "\n";
+    message += "Location:" + base_name(ETP) + "\n";
+    message += "\n";
 
     for (x = 0; x < sizeof(lines); x++ )
     {
@@ -145,11 +149,11 @@ report(string * lines)
     }
     seteuid(UID_CRESAVE);
 
-    // write(title + "\n" + varg + "\n" + message);
     write_file("/tmp/bugs/export_" + time() + "_" + TPQN + ".txt",  title + "\n" + varg + "\n" + message);
 
     seteuid(getuid());
     write(capitalize(varg) + " reported!  Thank you!\n");
+    TO->remove();
     return 1;
 }
 
