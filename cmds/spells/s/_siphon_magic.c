@@ -15,7 +15,7 @@ void create()
         "cast CLASS siphon magic on OBJECT2 into OBJECT2");
     set_description("With this spell you can transfer enchantment value between objects of the same type.
 
-This spell uses 66 260 gp as a material component.");
+This spell uses 66 260 gp as a material component.  When siphoned into a player enchanted item, that item will no longer be en enchantable by players.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();

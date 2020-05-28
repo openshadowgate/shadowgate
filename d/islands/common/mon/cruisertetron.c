@@ -78,7 +78,7 @@ void create()
 
     set_property("add quest", "%^RESET%^%^YELLOW%^Returned the Dominion Warrior to eternal rest.%^RESET%^");
     set_property("quest exp", 5000000);
-    set_skill("athletics", 10); //trying to turn down stupid parry chance
+    set_skill("athletics", 20); //upping from 10, which makes parry chance seem low
 }
 
 object get_targ()
