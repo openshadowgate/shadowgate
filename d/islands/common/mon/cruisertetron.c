@@ -21,7 +21,7 @@ void create()
     set_race("human");
     set_gender("male");
     set_class("fighter");
-    set_hd(50, 6); // had him set to higher level, but parry gets a little out of hand that way.
+    set_hd(60, 6);
     set_size(3);
     set_overall_ac(-20);
     set_property("magic", 1);
