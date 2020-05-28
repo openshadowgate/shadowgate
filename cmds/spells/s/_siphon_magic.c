@@ -72,7 +72,7 @@ int preSpell()
     if (((fob->is_weapon() && !tob->is_weapon()) ||
          (!fob->is_weapon() && tob->is_weapon())) &&
         ((fob->is_armor() && !tob->is_armor()) ||
-         (!fob->is_armo() && tob->is_weapon()))) {
+         (!fob->is_armor() && tob->is_weapon()))) {
         tell_object(caster, "Both objects must be of the same type.");
         return 0;
     }
@@ -88,10 +88,10 @@ int preSpell()
         tell_object(caster, "The first object is too powerful.");
         return 0;
     }
-    if (tob->query_property("player enchanted")) {
+    /*if (tob->query_property("player enchanted")) {
         tell_object(caster, "The second object must not be enchanted by adventurers.");
         return 0;
-    }
+    }*/
     if (tob->query_property("enchantment") > fob->query_property("enchantment")) {
         tell_object(caster, "The second object must not have higher enchantment than the first one.");
         return 0;
@@ -124,6 +124,7 @@ void spell_effect(int prof)
     fob->remove_property("enchantment");
     tob->remove_property("enchantment");
     tob->set_property("enchantment", abs(enchantment));
+    tob->remove_property("player enchantment");
     tell_object(caster, "%^BOLD%^%^MAGENTA%^You place " + fob->query_short() + "%^BOLD%^%^MAGENTA%^ over " + tob->query_short() + "%^BOLD%^%^MAGENTA%^ and melt a golden pile beneath them, the vapor transfers the magic.%^RESET%^");
     tell_room(caster, "%^BOLD%^%^MAGENTA%^" + caster->QCN + " places " + fob->query_short() + "%^BOLD%^%^MAGENTA%^ over " + tob->query_short() + "%^BOLD%^%^MAGENTA%^ and melts a pile of gold beneath them into a vapor that carries magic.%^RESET%^", ({ caster }));
     dest_effect();
