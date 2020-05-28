@@ -124,7 +124,7 @@ int extra_hit(object targ)
             tell_object(ETO, "%^GREEN%^With uncanny precision, you bring your elven curved blade down on " + targ->QCN + " in a deadly overhead chop!%^RESET%^");
             tell_object(targ, "%^GREEN%^With uncanny precision, " + ETO->QCN + " brings " + ETO->QP + " elven curved blade down on you in a deadly overhead chop!%^RESET%^");
             tell_room(EETO, "%^GREEN%^With uncanny precision, " + ETO->QCN + " brings " + ETO->QP + " elven curved blade down on " + targ->QCN + " in a deadly overhead chop!%^RESET%^", ({ targ, ETO }));
-            targ->cause_typed_damage(targ, targ->return_target_limb(), TO->special_damage() * 2, TO->query_damage_type());
+            targ->cause_typed_damage(targ, targ->return_target_limb(), TO->special_damage() * 150 / 100, TO->query_damage_type());
 
         case 6..7:
             tell_object(ETO, "%^CYAN%^You twirl the elven curved blade quickly and send the flat of the blade down low, sweeping under " + targ->QCN + " and knocking " + targ->QO + " down!%^RESET%^");

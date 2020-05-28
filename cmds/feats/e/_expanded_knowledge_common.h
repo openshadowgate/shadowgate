@@ -7,10 +7,12 @@ if (!stringp(args)) {
     return 1;
 }
 
-if(TP->query("expanded_knowledge_change")>time()-60*60*24*3)
-{
-    write("%^BOLD%^%^BLACK%^Too soon, once per three days, go away.");
-    return 1;
+if (TP->query("expanded_knowledge_" + expanded_level)) {
+    if(TP->query("expanded_knowledge_change")>time()-60*60*24*3)
+    {
+        write("%^BOLD%^%^BLACK%^Too soon, once per three days, go away.");
+        return 1;
+    }
 }
 
 if (member_array(args, TP->query_mastered_spells("psion") + TP->query_mastered_spells("psywarrior")) != -1) {
@@ -44,7 +46,11 @@ if (!(sminpow > 0 && sminpow < maxpow)) {
 }
 
 write("%^YELLOW%^You have gained knowledge of %^BLUE%^" + args + "%^YELLOW%^ as of your expanded knowledge " +expanded_level + " power.");
+
+if (TP->query("expanded_knowledge_" + expanded_level)) {
+    TP->set("expanded_knowledge_change",time());
+}
 TP->set("expanded_knowledge_" + expanded_level, args);
-TP->set("expanded_knowledge_change",time());
+
 
 return 1;

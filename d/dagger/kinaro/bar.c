@@ -48,7 +48,7 @@ void create() {
 				"K%^bar %^RESET%^is 10 feet up and, like the rest of the fou"
 				"ndation stone, is carved from %^BOLD%^%^BLACK%^rock%^RESET%^.",
 	     ]));
-    set_exits( 
+    set_exits(
       (["west" : "/d/dagger/kinaro/street2"]) );
     set_property("no castle", 1);
     set_property("no attack", 1);
@@ -56,9 +56,8 @@ void create() {
 
 void reset() {
     ::reset();
-    if(!present("barkeep")) 
+    if(!present("barkeep"))
 	new("/d/dagger/kinaro/mon/barkeep")->move(this_object());
-    new("/d/dagger/kinaro/mon/barkeep2")->move(this_object());
 }
 
 int read(string str) {

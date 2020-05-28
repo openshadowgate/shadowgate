@@ -173,7 +173,7 @@ int extra_hit(object targ)
             tell_object(ETO, "%^RED%^You roar as you bring one end of the ancient double axe down on " + targ->QCN + " in a deadly overhead chop!%^RESET%^");
             tell_object(targ, "%^RED%^" + ETO->QCN + " roars as " + ETO->QS + " brings one end of " + ETO->QP + " ancient double axe down on you in a deadly overhead chop!%^RESET%^");
             tell_room(EETO, "%^RED%^" + ETO->QCN + " roars as " + ETO->QS + " brings one end of " + ETO->QP + " ancient double axe down on " + targ->QCN + " in a deadly overhead chop!%^RESET%^", ({ targ, ETO }));
-            targ->cause_typed_damage(targ, targ->return_target_limb(), TO->special_damage() * 2, TO->query_damage_type());
+            targ->cause_typed_damage(targ, targ->return_target_limb(), TO->special_damage() * 150 / 100, TO->query_damage_type());
             break;
 
         case 6..7:

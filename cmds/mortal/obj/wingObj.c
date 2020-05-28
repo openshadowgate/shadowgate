@@ -101,6 +101,6 @@ void flystep()
 
 void remove()
 {
-    log_file("wing_watch", "I've been removed by " + identify(previous_object()));
+    log_file("wing_watch", "I've been removed by " + identify(previous_object()) + "\n");
     ::remove();
 }

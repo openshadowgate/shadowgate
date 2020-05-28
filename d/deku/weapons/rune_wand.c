@@ -26,7 +26,7 @@ void create(){
     "impossible to interpret, but a lone inscription circles "+
     "the stick near its thin and frail base.  The end of the stick "+
     "has been slightly rounded, for whatever reason.");
-	
+
     set_read("Simply 'point wand at foe' to activate its strange "+
     "function");
     set("langage",!random(2) ? "kobold" : "common");
@@ -88,7 +88,7 @@ int point_at(string str) {
                 ({ob,ETO}));
                 ETO->set_paralyzed(3,"%^RED%^You are using the wand!"+
                 "%^RESET%^");
-                new("/cmds/spells/"+spell[1..1]+"/"+spell+".c")->use_spell(ETO,ob,8 + random(5),12,"mage");
+                new("/cmds/spells/"+spell[1..1]+"/"+spell+".c")->use_spell(ETO,ob,25 + roll_dice(1, 20),50,"mage");
                 used = 1;
                 used();
                 return 1;
@@ -103,4 +103,3 @@ int point_at(string str) {
     }
     return 0;
 }
-
