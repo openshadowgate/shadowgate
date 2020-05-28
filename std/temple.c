@@ -445,7 +445,7 @@ int look_box(string str) {
    }
    if(wizardp(TP))
        tell_object(TP,"FYI (wiz eyes only) - All is logged to /log/tithes.\n");
-   if((high_mortalp(TP) && (string)TP->query_diety() == diety) ) {
+   if((string)TP->query_diety() == diety)  {
       tell_object(TP,"Due to your status in the church, you are allowed the "
          "privelege to <check balance> or <check withdrawals> of funds.\n");
    }
@@ -534,7 +534,6 @@ int soulbind(string str) {
    object bindob,unbindob,*myinven=({}),invisobj;
    int i,findbind=0,cost;
    if(!str) return 0;
-   if(!high_mortalp(TP) && !avatarp(TP)) return 0;
    if(!bindob = present(str, TP)) return notify_fail("The "+str+" must be in your possession.\n");
    if(TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
      TP->send_paralyzed_message("info",TP);
