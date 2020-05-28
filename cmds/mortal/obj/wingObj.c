@@ -98,3 +98,9 @@ void flystep()
     step++;
     call_out("flystep", 2);
 }
+
+void remove()
+{
+    log_file("wing_watch", "I've been removed by " + identify(previous_object()));
+    ::remove();
+}

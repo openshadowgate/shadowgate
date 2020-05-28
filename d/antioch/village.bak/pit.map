@@ -1,9 +1,0 @@
-pool2
-  |
-pool1
-    \
-     pit3  -  pit4  -  pit9
-               |        |
-     pit2  -  pit5     pit8
-      |        |        |
-     pit1  -  pit6     pit7  -  tunnel1  -  tunnel2

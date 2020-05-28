@@ -1,4 +1,3 @@
-//added check to make sure what they type is a spell based on bug reports ~Circe~ 8/9/19
 #include <std.h>
 #include <daemons.h>
 
@@ -6,44 +5,48 @@
 
 inherit DAEMON;
 
-int cmd_forget(string str){
+int cmd_forget(string str)
+{
     string myclass, myspell, file;
 
-    if(!str) { return notify_fail("Forget what?\n"); }
-
-    if(regexp(str,implode("/daemon/player_d"->list_classes(),"|")+"|innate"))
-    {
-        if(!sscanf(str,"%s %s",myclass,myspell))
-            return notify_fail("Syntax: <forget CLASS SPELL>\n");
+    if (!str) {
+        return notify_fail("Forget what?\n");
     }
-    else
-    {
+
+    if (regexp(str, implode("/daemon/player_d"->list_classes(), "|") + "|innate")) {
+        if (!sscanf(str, "%s %s", myclass, myspell)) {
+            return notify_fail("Syntax: <forget CLASS SPELL>\n");
+        }
+    } else {
         myclass = TP->query_class();
         myspell = str;
     }
 
-    if(!TP->is_class(myclass)) { return notify_fail("You cannot cast spells as a "+myclass+"!\n"); }
+    if (!TP->is_class(myclass)) {
+        return notify_fail("You cannot cast spells as a " + myclass + "!\n");
+    }
 
-    if(myclass == "antipaladin") { myclass = "paladin"; }
-    TP->set_property("forgetting spell",1);
+    if (myclass == "antipaladin") {
+        myclass = "paladin";
+    }
+    TP->set_property("forgetting spell", 1);
     file = MAGIC_D->get_spell_file_name(myspell);
 
-    if (!TP->forget_memorized(myclass,myspell,1)){
+    if (!TP->forget_memorized(myclass, myspell, 1)) {
         TP->remove_property("forgetting spell");
-        return notify_fail("The spell, '"+myspell+"' is not in your memory! Use <fixspells> if this is wrong.\n");
+        return notify_fail("The spell, '" + myspell + "' is not in your memory! Use <fixspells> if this is wrong.\n");
     } else {
         TP->remove_property("forgetting spell");
         file = MAGIC_D->get_spell_file_name(myspell);
-        if(!file_exists(file)){
-           myspell=capitalize(myspell);
-           tell_object(TP,""+myspell+" is not a spell!");
-        }else{
-           tell_object(TP, "The spell '"+myspell+"' has been forgotten successfully!");
+        if (!file_exists(file)) {
+            myspell = capitalize(myspell);
+            tell_object(TP, "" + myspell + " is not a spell!");
+        }else {
+            tell_object(TP, "The spell '" + myspell + "' has been forgotten successfully!");
         }
     }
     return 1;
 }
-
 
 void help()
 {

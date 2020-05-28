@@ -13,7 +13,7 @@ void do_eyes(object targ);
 
 void create(){
 	::create();
-	
+
 	set_name("beholder");
 	set("id",({"beholder","Beholder","eye"}));
 	set("short","Beholder, the Eye Tyrant");
@@ -59,11 +59,11 @@ OLI
     set_moving(1);
     set_speed(15);
 }
-	
+
 void attack(object targ){
     int damage;
     if(!objectp(TO) && !objectp(targ)) { return; }
-	
+
     count++;
     switch (count){
       case 1:
@@ -145,8 +145,8 @@ void do_eyes(object targ){
 		case 7:
 			tell_object(targ,"%^BOLD%^%^YELLOW%^The eye sends it's dreaded death ray streaking toward you!!!\n");
 			tell_room(environment(TO),"%^BOLD%^%^YELLOW%^The eye sends it's dreaded death ray streaking toward "+targ->query_cap_name()+"!!!",targ);
-			if(!SAVING_D->saving_throw(targ,"paralyzation_poison_death",-1))
-				targ->do_damage(targ->return_target_limb(),200);
+                        "/std/effect/status/cowering"->apply_effect(targ,roll_dice(1,4));
+                        targ->do_damage(targ->return_target_limb(),100);
 			break;
 		default: break;
 	}
