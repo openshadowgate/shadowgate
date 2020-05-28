@@ -1,7 +1,7 @@
 #include "../../newbie.h"
 inherit ROOM;
 
-void create() 
+void create()
 {
   object ob;
   ::create();
@@ -49,7 +49,7 @@ void create()
     "west":MAINTOWN"wstreet1",
     "oochub":"/d/newbie/ooc/hub_room3",
   ]));
-  
+
    ob = new("/std/bboard");
    ob->set_name("board");
    ob->set_id( ({ "board", "bulletin board", "newbie board" }) );
@@ -59,7 +59,7 @@ void create()
     "the town.%^RESET%^");
    ob->set_max_posts(50);
    ob->set_location(MAINTOWN"square.c");
-  
+
 }
 
 void init()
@@ -74,7 +74,7 @@ void init()
         new("/d/newbie/obj/misc/newbie_object.c")->move(TP);
         return;
     }
-    return;    
+    return;
 }
 
 void reset(){

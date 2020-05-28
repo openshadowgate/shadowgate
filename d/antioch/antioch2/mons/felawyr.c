@@ -1,5 +1,5 @@
 //Changed prices per discussion with Circe - Cythera 4/05
-//added option to create a pike as well 
+//added option to create a pike as well
 #include <std.h>
 #include "../antioch.h"
 inherit INTERACTIVE;
@@ -68,6 +68,10 @@ void catch_say(string message)
 		call_out("sell_sword",1,TP,message);
 		return;
 	}
+	if(strsrch(message,"gold") != -1 && strsrch(message,"rapier") != -1) {
+		call_out("sell_sword",1,TP,message);
+		return;
+	}
 	if(strsrch(message,"gold") != -1 && strsrch(message,"pike") != -1) {
 		call_out("sell_pike",1,TP,message);
 		return;
@@ -76,7 +80,15 @@ void catch_say(string message)
 		call_out("do_talk",1,TP,message);
 		return;
 	}
+	if(strsrch(message,"tooth") != -1 || strsrch(message,"rapier") != -1) {
+		call_out("do_talk",1,TP,message);
+		return;
+	}
 	if(strsrch(message,"sword") != -1) {
+		call_out("do_sword_talk",1,TP,message);
+		return;
+	}
+	if(strsrch(message,"rapier") != -1) {
 		call_out("do_sword_talk",1,TP,message);
 		return;
 	}
@@ -133,7 +145,7 @@ void gold_talk(object ob, string message)
 }
 
 void sell_pike(object ob, string message)
-{	
+{
 	if(strsrch(message,"gold") != -1) {
 		if(objectp(current_haggler) && present(current_haggler,ETO)) {
 			if(current_haggler != ob) {
@@ -326,7 +338,7 @@ void heart_beat()
 	::heart_beat();
 	if(!objectp(TO)) return;
    if(sizeof(query_attackers())) return;
-   
+
    if(talking) return;
 	if(query_night() != 1) {
 		if(!random(200)) {

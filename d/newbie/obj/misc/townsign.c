@@ -4,7 +4,7 @@ inherit "/d/newbie/obj/misc/map";
 
 void create() {
     ::create();
-    set_id( ({"sign","large sign"}) );
+    set_id( ({"sign","large sign", "map"}) );
     set_name("large sign");
     set_short("%^RESET%^%^ORANGE%^a large sign%^RESET%^");
     set_weight(1000000);
@@ -28,13 +28,13 @@ void init(){
 int __Read(string str)
 {
 //   object mapObj;
-//   if(str == "sign") 
+//   if(str == "sign")
 //   {
 //        TP->force_me("look sign");
 //        return 1;
 //   }
 //   if(str == "map")
-//   {  
+//   {
 //     mapObj = new("/d/newbie/obj/misc/map");
 //     return (: "/d/newbie/obj/misc/map"->"read_func", str :);
 //     mapObj->remove();

@@ -2704,7 +2704,7 @@ void internal_execute_attack(object who)
             current = who;
         }
 
-        if (current->is_lrweapon() && !FEATS_D->usable_feat(who, "point blank shot")) {
+        if (current->is_lrweapon() && !FEATS_D->usable_feat(who, "point blank shot") && !who->query_property("shapeshifted")) {
             tell_object(who, "Your bow is useless in hand to hand combat.\n");
             who->prepare_attack();
             if (who->query_combat_mapps("static vars", "attack count") && !who->query_combat_mapps("static vars", "attack loop")) {
