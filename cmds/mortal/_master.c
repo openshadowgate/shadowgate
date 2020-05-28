@@ -198,6 +198,13 @@ int cmd_master(string args)
         {
             TP->add_mastered(myclass,args);
             write("%^CYAN%^You have just mastered %^BOLD%^%^WHITE%^"+args+"%^RESET%^%^CYAN%^!%^RESET%^");
+            if (myclass == "mage") {
+                object sb;
+                if (objectp(sb = present("spellbook", TP))) {
+                    sb->init();
+                }
+            }
+
             return 1;
         }
         else

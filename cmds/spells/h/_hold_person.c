@@ -105,10 +105,7 @@ void spell_effect(int prof)
         return;
     }
 
-    change = (( roll_dice(1,clevel) / 2 ) + ( clevel / 4));
-    if(change < 5) { change = 5; }
-    if(change > 100) { change = 100; }
-    target->set_paralyzed(change,"%^BOLD%^%^CYAN%^Your mind is caught within the grips of a spell!");
+    target->set_paralyzed(roll_dice(1, 4) * 8,"%^BOLD%^%^CYAN%^Your mind is caught within the grips of a spell!");
 
     if(spell_type == "monk")
     {

@@ -102,7 +102,9 @@ void init() {
                     masterflag = 1;
                 }
             }
-            if(masterflag) tell_object(TP,"Mastered spells added successfully!");
+            if (masterflag) {
+                tell_object(TP, "You take your time and scribe mastered spells into your spellbook.");
+            }
         }
     }
     validate_book(TP);
