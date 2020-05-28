@@ -48,6 +48,7 @@ void spell_effect(int prof){
 	}
 	place = environment(caster);
       make_sword();
+      addSpellToCaster();
 }
 
 void make_sword() {

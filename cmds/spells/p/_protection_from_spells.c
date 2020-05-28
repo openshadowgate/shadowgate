@@ -11,6 +11,7 @@ void create() {
     set_spell_sphere("abjuration");
     set_mystery("dragon");
     set_domains("magic");
+    set_damage_desc("10 to all saves");
     set_syntax("cast CLASS protection from spells on TARGET");
     set_description("Using this power will allow a mage or sorcerer to temporarily raise the target's "
 "resistance to spells of all kinds.  This is only a temporary state, however, and will fade after a "
@@ -19,9 +20,6 @@ void create() {
     set_somatic_comp();
     set_target_required(1);
     set_helpful_spell(1);
-    set_components(([
-      "mage" : ([ "small diamond" : 1, ]),
-    ]));
 }
 
 string query_cast_string() {
@@ -75,9 +73,8 @@ void spell_effect(int prof) {
         return;
     }
 
-    lower = clevel / 3;
-    target->set_property("spell damage resistance",lower);
-    target->set_property("raised spell damage resistance",1);
+    lower = 10;
+    target->add_saving_bonus(lower);
     addSpellToCaster();
     call_out("dest_effect",clevel*4*ROUND_LENGTH);
 }
@@ -86,8 +83,7 @@ void dest_effect(){
 
     if(objectp(target))
     {
-        target->set_property("spell damage resistance",(-1*lower));
-        target->remove_property("raised spell damage resistance");
+        target->add_saving_bonus(-lower);
         tell_room(environment(target),"%^RESET%^%^CYAN%^The air suddenly seems to grow dull as "
         "a wave of energy dissipates from the air around "+target->QCN+".%^RESET%^",target);
         tell_object(target,"%^RESET%^%^CYAN%^The air suddenly seems to grow dull as "

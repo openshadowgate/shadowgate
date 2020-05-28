@@ -247,7 +247,7 @@ int extra_hit(object ob)
                         "A fiery ball burns your body!"
                         "%^RESET%^"
                         , vic);
-                vic->do_damage(vic->return_target_limb(), random(2) + 1);
+                vic->do_damage(vic->return_target_limb(), roll_dice(1, 6));
             }
             return 1;
         }
