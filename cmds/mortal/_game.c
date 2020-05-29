@@ -130,10 +130,10 @@ report(string * lines)
 
     log_file("reports/bugreports", rep + " " + title);
 
-    message += "> Date: " + ctime(time()) + "\n";
-    message += "> From: " + TP->query_name() + "\n";
-    message += "> File: " + file + "\n";
-    message += "> Location:" + base_name(ETP) + "\n";
+    message += "Date: " + ctime(time()) + "  \n";
+    message += "From: " + TP->query_name() + "  \n";
+    message += "File: " + file + "  \n";
+    message += "Location:" + base_name(ETP) + "  \n";
     message += "\n";
 
     for (x = 0; x < sizeof(lines); x++ )
