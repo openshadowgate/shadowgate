@@ -15,7 +15,7 @@ void create()
         "cast CLASS siphon magic on OBJECT2 into OBJECT2");
     set_description("With this spell you can transfer enchantment value between objects of the same type.
 
-This spell uses 66 260 gp as a material component.  When siphoned into a player enchanted item, that item will no longer be en enchantable by players.");
+This spell uses 66 260 gp as a material component.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -88,10 +88,10 @@ int preSpell()
         tell_object(caster, "The first object is too powerful.");
         return 0;
     }
-    /*if (tob->query_property("player enchanted")) {
+    if (tob->query_property("player enchanted")) {
         tell_object(caster, "The second object must not be enchanted by adventurers.");
         return 0;
-    }*/
+    }
     if (tob->query_property("enchantment") > fob->query_property("enchantment")) {
         tell_object(caster, "The second object must not have higher enchantment than the first one.");
         return 0;
@@ -123,9 +123,6 @@ void spell_effect(int prof)
 
     fob->remove_property("enchantment");
     tob->remove_property("enchantment");
-    if(tob->query_property("player enchantment")){
-    tob->remove_property("player enchantment");
-    }
     tob->set_property("enchantment", abs(enchantment));
     tell_object(caster, "%^BOLD%^%^MAGENTA%^You place " + fob->query_short() + "%^BOLD%^%^MAGENTA%^ over " + tob->query_short() + "%^BOLD%^%^MAGENTA%^ and melt a golden pile beneath them, the vapor transfers the magic.%^RESET%^");
     tell_room(caster, "%^BOLD%^%^MAGENTA%^" + caster->QCN + " places " + fob->query_short() + "%^BOLD%^%^MAGENTA%^ over " + tob->query_short() + "%^BOLD%^%^MAGENTA%^ and melts a pile of gold beneath them into a vapor that carries magic.%^RESET%^", ({ caster }));
