@@ -10,8 +10,8 @@ void create()
     feat_category("MagicDamage");
     feat_name("apoapsis of power");
     feat_prereq("Greater spell penetration, Greater spell power,
-               Mage, Sorcerer or Psion");
-    feat_desc("Casters learn ability to shift their damage table four levels up. Only mage, sorcerer, and psion spells will be affected.");
+               Mage, Sorcerer, Psion or Oracle");
+    feat_desc("Casters learn ability to shift their damage table two levels up. Only mage, sorcerer, and psion spells will be affected.");
     permanent(1);
 }
 
@@ -31,7 +31,10 @@ int prerequisites(object ob)
         return 0;
     }
 
-    if (!(ob->is_class("mage") || ob->is_class("sorcerer") || ob->is_class("psion"))) {
+    if (!(ob->is_class("mage") ||
+          ob->is_class("sorcerer") ||
+          ob->is_class("oracle") ||
+          ob->is_class("psion"))) {
         dest_effect();
         return 0;
     }

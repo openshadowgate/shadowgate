@@ -2273,7 +2273,7 @@ void define_base_spell_level_bonus()
 
     if ((spell_type == "mage" || spell_type == "sorcerer" || spell_type == "psion")
         && FEATS_D->usable_feat(caster, "apoapsis of power")) {
-        sdamage_adjustment += 3;
+        sdamage_adjustment += 2;
     }
     sdamage_adjustment = sdamage_adjustment < 0 ? 0 : sdamage_adjustment;
 }
@@ -2284,18 +2284,18 @@ void define_base_spell_level_bonus()
 void define_base_damage(int adjust)
 {
     if (query_aoe_spell() || query_traveling_spell() || query_traveling_aoe_spell()) {
-        sdamage = roll_dice(clevel / 2 + 1, 4);
+        sdamage = roll_dice(clevel / 2 + 1, 6);
     } else if (spell_type == "warlock") {
         string blasttype;
 
         blasttype = (string)caster->query("warlock_blast_type");
         if (blasttype == "utterdark") {
-            sdamage = roll_dice(clevel, 11);
+            sdamage = roll_dice(clevel, 12);
         }else {
-            sdamage = roll_dice(clevel, 10);
+            sdamage = roll_dice(clevel, 11);
         }
     } else if (spell_type == "monk") {
-        sdamage = roll_dice(clevel, 10);
+        sdamage = roll_dice(clevel, 11);
     } else {
         int slevel;
 
@@ -2309,13 +2309,9 @@ void define_base_damage(int adjust)
         slevel = slevel < 1 ? 1 : slevel;
 
         if (slevel < 1) {
-            sdamage = roll_dice(clevel, 7);
+            sdamage = roll_dice(clevel, 5);
         }else if (slevel > 0 && slevel < 20) {
-            if (slevel % 2) {
-                sdamage = roll_dice(clevel, 8 + (slevel) / 2);
-            }else {
-                sdamage = roll_dice(clevel, 8 + (slevel - 1) / 2 ) + roll_dice(1, clevel / 2);
-            }
+            sdamage = roll_dice(clevel, 5 + slevel);
         } else {
             sdamage = roll_dice(clevel, 8);
         }
