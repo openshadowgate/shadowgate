@@ -32,7 +32,7 @@ void create(){
 }
 
 int preSpell(){
-   if(caster->query_property("rebirth") || (int)caster->query_property("foresight")){
+   if(caster->query_property("rebirth")){
       tell_object(caster,"%^BOLD%^You are already surrounded by a "+
          "rebirth spell.%^RESET%^");
       return 0;
