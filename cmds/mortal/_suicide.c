@@ -13,14 +13,29 @@ int wizuserp(object ob) {
   else
     return 0;
 }
-int help() {
-   message("info","Syntax: <suicide>\n"
-           "Removes you forever from the world of Shadow Gate\n"
-           "Key Word: FOREVER.", TP);
-   return 1;
+
+void help()
+{
+    write(
+"
+%^CYAN%^NAME%^RESET%^
+
+suicide - prevent further logins on the character
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command moves your character file into suicide directory. After a while, it will be deleted.
+
+Restoration of deleted accounts is not possible without aid of an admin.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+kill, quit, account
+"
+        );
 }
 
-int cmd_suicide(string str) 
+int cmd_suicide(string str)
 {
     string name,*oldfiles;
     int j;
@@ -30,7 +45,7 @@ int cmd_suicide(string str)
     if(TP->query_ghost())
     {
         tell_object(TP, "You cannot commit suicide being a ghost.");
-        return 1;        
+        return 1;
     }
     if((TP->query_property("last_death")<time()+3600) &&
        TP->query_property("last_death"))
@@ -38,13 +53,13 @@ int cmd_suicide(string str)
         tell_object(TP, "You cannot commit suicide so soon after death. Reflect upon what went wrong and if you're sure, try again in an hour.");
         return 1;
     }
-    if(TP && TP->query_forced()) 
+    if(TP && TP->query_forced())
     {
         seteuid(UID_ROOT);
         write_file("log/ILLEGAL", "suicide " + ctime(time()) + " " +"Forcer: "+getuid(this_player(2))+" "+TPQN+ " (forced)\n");
         return notify_fail("Someone tried to force you to suicide!\n");
     }
-    if(archp(TP)) 
+    if(archp(TP))
     {
         message("my_action","Arches cannot use this command.  If you really wish to do this, demote yourself first.",TP);
         return 1;
@@ -54,7 +69,7 @@ int cmd_suicide(string str)
         tell_object(TP, "You cannot commit suicide with an avatar.");
         return 1;
     }
-    if(!TP || !userp(TP) || TP != this_player(1) || TP != previous_object()) 
+    if(!TP || !userp(TP) || TP != this_player(1) || TP != previous_object())
     {
         write_file("/log/ILLEGAL", "suicide " + ctime(time()) + " " +geteuid(previous_object()) + "\n");
         return notify_fail("I dont think so!\n");
@@ -68,13 +83,13 @@ int cmd_suicide(string str)
     return 1;
 }
 
-nomask static int really_suicide(string typed_password) 
+nomask static int really_suicide(string typed_password)
 {
     string real_password, name;
     string *oldfiles, *files;
     int j,x;
 
-    if(!typed_password) 
+    if(!typed_password)
     {
         message("info","Suicide cancelled.", TP);
         return 0;
@@ -89,7 +104,7 @@ nomask static int really_suicide(string typed_password)
    TP->save_player(name);
    log_file("suicide", name+" (level "+TP->query_level()+") at "+ctime(time())+" "+" from "+TP->query_ip()+" \n");
    seteuid(UID_USERSAVE);
-   if(file_exists(DIR_USERS+"/"+name[0..0]+"/"+name+".o")) 
+   if(file_exists(DIR_USERS+"/"+name[0..0]+"/"+name+".o"))
    rename(DIR_USERS+"/"+name[0..0]+"/"+name+".o", DIR_USERS+"/suicide/"+name+".o");
    if(file_exists(DIR_ACCOUNTS+"/"+name+".o")) rename(DIR_ACCOUNTS+"/"+name+".o",DIR_USERS+"/suicide/"+name+".account.o");
    if(file_size(DIR_POSTAL+"/"+name[0..0]+"/"+name+".o") > -1) rm(DIR_POSTAL+"/"+name[0..0]+"/"+name+".o");
@@ -124,4 +139,3 @@ nomask static int really_suicide(string typed_password)
    TP->remove();
    return 1;
 }
-
