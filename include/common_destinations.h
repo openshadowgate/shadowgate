@@ -1,0 +1,20 @@
+mapping preset_destinations;
+preset_destinations =
+    ([ "asgard" :"/d/laerad/parnelli/asgard/as59",
+       "azha"   :"/d/tharis/road/wroad30",
+       "deku":"/d/deku/forest/dforest15-5",
+       "eldebaro":"/d/islands/common/eldebaro/newrooms/east_oasis15",
+       "graez":"/d/undead/rooms/town/street12",
+       "juran":"/d/shadow/room/forest/owagon26",
+       "kinaro":"/d/dagger/kinaro/path3",
+       "muuldaan":"/d/shadow/room/muuldaan/rooms/path6",
+       "lothwaite":"/d/barriermnts/lothwaite/rooms/pathway10",
+       "nurval":"/d/dagger/road/p7",
+       "shadow":"/d/darkwood/room/road18",
+       "seneca":"/d/attaya/newseneca/rooms/boardwalk3",
+       "tabor":"/d/darkwood/tabor/road/road1",
+       "tharis":"/d/tharis/road/road8",
+       "tonovi":"/d/dagger/tonovi/crossrd",
+       "torm":"/d/dagger/Torm/road/path12",
+       "antioch":"/d/antioch/antioch2/rooms/trail6",
+        ]);

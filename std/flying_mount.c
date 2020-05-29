@@ -9,7 +9,7 @@ inherit "/std/riding_animal.c";
 
 string FLYING_ROOM = "/std/flying_room";
 
-void check_flying(mapping info);
+#include <common_destinations.h>
 
 static string FLIGHT;    // string to keep track of what "stage" of flight its in, default is landed
 string too_soon;  // The message the mount gives if they try to fly it too often
@@ -38,7 +38,9 @@ void set_flight_delay(int num) { flight_delay = num; }
 // returns the delay in SECONDS per round trip.. meaning fly to somewhere and back
 int query_flight_delay()
 {
-    if(!flight_delay) { return 3600; } // defaults to 1 hour per *2* flights
+    if (!flight_delay) {
+        return 1800;
+    }
     return flight_delay;
 }
 
