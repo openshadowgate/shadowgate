@@ -17,8 +17,6 @@ string * RAND_MSG = ({"A cool breeze gives your wings some extra lift as you soa
             "Soaring through the air calm you as you ride the wind currents."});
 string * RAND_CLRS = ({"%^BLUE%^%^BOLD%^","%^BOLD%^%^WHITE%^","%^WHITE%^","%^BLUE%^","%^ORANGE%^"});
 string FLIGHT_ROOM = "/std/flying_room.c";
-object flyee;
-string destination;
 object destobj;
 object flroom;
 int step;
@@ -33,8 +31,6 @@ void create()
 
 void setup(object thingy, string dest)
 {
-    flyee = thingy;
-    destination = dest;
     destobj = find_object_or_load(dest);
 
     if (!objectp(destobj)) {
@@ -44,12 +40,12 @@ void setup(object thingy, string dest)
 
     step = 0;
     flroom = new(FLIGHT_ROOM);
-    thingy->move(flroom);
+    thingy->move_player(flroom);
     TO->move(thingy);
-    flystep();
+    flystep(dest, thingy);
 }
 
-void flystep()
+void flystep(string destination, object flyee)
 {
     if (!objectp(flyee)) {
         TO->remove();
@@ -57,6 +53,7 @@ void flystep()
     }
 
     if (!objectp(flroom)) {
+        flyee->move_player("/d/darkwood/room/road18");
         TO->remove();
         return;
     }
@@ -83,8 +80,7 @@ void flystep()
         flroom->change_stage("final landing");
     } else if (step > 30) {
         tell_room(destobj, "%^BOLD%^%^WHITE%^" + flyee->QCN + " descends into the area from the sky.%^RESET%^");
-        flyee->move(destobj);
-        flyee->force_me("look");
+        flyee->move_player(destination);
         tell_object(flyee, "%^BOLD%^%^WHITE%^You have arrived at your destination.%^RESET%^");
         TO->remove();
         return;
@@ -96,11 +92,5 @@ void flystep()
     }
 
     step++;
-    call_out("flystep", 2);
-}
-
-void remove()
-{
-    log_file("wing_watch", "I've been removed by " + identify(previous_object()) + "\n");
-    ::remove();
+    call_out("flystep", 2, destination, flyee);
 }
