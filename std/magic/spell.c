@@ -305,39 +305,7 @@ void set_affixed_spell_level(int x)
 
 void set_components(mapping temp)
 {
-    if (!components) {
-        components = ([]);
-    }
-    components = temp;
-}
-
-int query_components_value(string myclass)
-{
-    string* compkeys;
-    int i, value;
-    mapping compmap;
-
-    if (!components) {
-        components = ([]);
-    }
-    if (myclass == "sorcerer") {
-        myclass = "mage";
-    }
-    if (!components[myclass]) {
-        return 0;
-    }
-    compkeys = keys(components[myclass]);
-    if (!sizeof(compkeys)) {
-        return 0;
-    }
-    value = 0;
-    compmap = COMPONENTS1;
-    for (i = 0; i < sizeof(compkeys); i++) {
-        if (compmap[compkeys[i]]) {
-            value += (compmap[compkeys[i]] * components[myclass][compkeys[i]]);
-        }
-    }
-    return value;
+    return;
 }
 
 void set_description(string descript)
@@ -592,18 +560,6 @@ void startCasting()
     return;
 }
 
-object find_compbag(string component, int amnt, string myclass)
-{
-    object compBag;
-    int i = 1;
-    while (compBag = present("compx " + i, caster)) {
-        if ((int)compBag->query_comp(component) >= amnt) {
-            return compBag;
-        }
-        i++;
-    }
-}
-
 // used to remove the perfect caster feat from a player after they have reflected a spell
 // need this to prevent parties from killing each other because of reflection
 void remove_reflection_effects(object o_caster, object o_targ)
@@ -843,11 +799,6 @@ void wizard_interface(object user, string type, string targ)
         return;
     }
 
-    comp = TO->query_components(spell_type);
-    comp_names = ({});
-    if (!comp) {
-        comp = ([]);
-    }
     if (!user) {
         return 0;
     }
@@ -1006,8 +957,6 @@ void wizard_interface(object user, string type, string targ)
         }
     }
 
-    // welcome to the new casting restrictions on melee-powered forms! Currently applies to druid shapeshifts (except elemental), as well as rage & transformation spells.
-    // this only allows the casting of helpful spelltypes, and only if non- or self-targetted with no arguments. Ie. no complex casting or nuking. N, 10/15.
     if (caster->query_property("raged") ||
         caster->query_property("transformed")) {
         if (!FEATS_D->usable_feat(caster, "ragecaster")) {
@@ -1038,12 +987,12 @@ void wizard_interface(object user, string type, string targ)
                     TO->remove();
                     return;
                 }
-                if (!help_or_harm) { // only spells flagged as helpful work in these states
+                if (!help_or_harm) {
                     tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
                     TO->remove();
                     return;
                 }
-                if (arg_needed || (target_required && target != caster)) { // only non-arg and non- or self-targetted spells
+                if (arg_needed || (target_required && target != caster)) {
                     tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
                     TO->remove();
                     return;
@@ -1054,20 +1003,6 @@ void wizard_interface(object user, string type, string targ)
             tell_object(caster, "You can't cast while in this form!");
             TO->remove();
             return;
-        }
-    }
-
-    //Need components bag present
-
-    if (spell_type == "sorcerer") {
-        if (mapp(components["mage"])) {
-            comp_names = keys(components["mage"]);
-        }
-    }else if (spell_type == "monk") {
-        comp_names = ({});
-    }else {
-        if (mapp(components[spell_type])) {
-            comp_names = keys(components[spell_type]);
         }
     }
 
@@ -1084,7 +1019,6 @@ void wizard_interface(object user, string type, string targ)
         (!stringp(improv = query_property("improvised")) ||
          !"/daemon/magic_d"->can_cast(caster, casting_level, spell_type, improv, spell_duration))) {
         tell_object(caster, "You cannot " + whatdo + " that " + whatsit + ".\n");
-
         TO->remove();
         return;
     }
@@ -1662,20 +1596,6 @@ int query_spell_level_map()
         spell_levels = ([]);
     }
     return spell_levels;
-}
-
-mapping query_components(string classtype)
-{
-    if (!mapp(components)) {
-        components = ([]);
-    }
-    if (classtype == "sorcerer") {
-        classtype = "mage";
-    }
-    if (!mapp(components[classtype])) {
-        return ([]);
-    }
-    return components[classtype];
 }
 
 string query_spell_type()
