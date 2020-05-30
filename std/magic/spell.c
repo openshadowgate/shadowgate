@@ -2238,7 +2238,9 @@ void define_clevel()
 
     if (caster->is_class("hierophant")) {
         if (spell_type == "cleric" ||
-            spell_type == "druid") {
+            spell_type == "druid" ||
+            spell_type == "oracle")
+            {
             if (FEATS_D->usable_feat(caster, "mastery of power")) {
                 clevel += 2;
             }
