@@ -2191,13 +2191,13 @@ void define_clevel()
 
     if (spell_type == "monk") {
         if (FEATS_D->usable_feat(caster, "elemental attunement")) {
-            clevel += 5;
+            clevel += 4;
         }
     }
 
     if (spell_type == "psywarrior" || spell_type == "psion") {
         if (FEATS_D->usable_feat(caster, "mind wave")) {
-            clevel += 3;
+            clevel += 2;
         }
     }
 
@@ -2205,14 +2205,14 @@ void define_clevel()
         if (caster->query_school() && caster->query_opposing_school()) {
             if (spell_sphere == caster->query_school()) {
                 if (caster->is_class("mage")) {
-                    clevel += caster->query_guild_level("mage") / 16;
+                    clevel += caster->query_guild_level("mage") / 18;
                 }
                 if (FEATS_D->usable_feat(caster, "school familiarity")) {
-                    clevel += 4;
+                    clevel += 3;
                 }
             } else if (spell_sphere == caster->query_opposing_school()) {
                 if (caster->is_class("mage")) {
-                    clevel -= caster->query_guild_level("mage") / 16;
+                    clevel -= caster->query_guild_level("mage") / 18;
                 }
             }
         }
@@ -2222,7 +2222,7 @@ void define_clevel()
                 if (spell_sphere == "necromancy" ||
                     spell_sphere == "illusion" ||
                     spell_sphere == "enchantment_charm") {
-                    clevel += 2;
+                    clevel += 1;
                 }
             }
         }
@@ -2231,15 +2231,17 @@ void define_clevel()
     if (caster->is_class("gravecaller")) {
         if (FEATS_D->usable_feat(caster, "negative energy conduit")) {
             if (spell_sphere == "necromancy") {
-                clevel += 3;
+                clevel += 2;
             }
         }
     }
 
-    if (spell_type == "cleric" ||
-        spell_type == "druid") {
-        if (FEATS_D->usable_feat(caster, "mastery of power")) {
-            clevel += 3;
+    if (caster->is_class("hierophant")) {
+        if (spell_type == "cleric" ||
+            spell_type == "druid") {
+            if (FEATS_D->usable_feat(caster, "mastery of power")) {
+                clevel += 2;
+            }
         }
     }
 

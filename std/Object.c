@@ -423,15 +423,11 @@ mixed query_property(string prop)
     }
 
     if (prop == "empowered") {
-        if (FEATS_D->usable_feat(TO, "mind wave")) {
-            num += 2;
-        }
-// rearranging this so it only runs through the query chain once; cuts down on recursion. N, 5/15.
         if (FEATS_D->usable_feat(TO, "greater spell power")) {
-            num += 5;
+            num += 3;
         } else {
             if (FEATS_D->usable_feat(TO, "improved spell power")) {
-                num += 3;
+                num += 2;
             } else {
                 if (FEATS_D->usable_feat(TO, "spell power")) {
                     num += 1;
