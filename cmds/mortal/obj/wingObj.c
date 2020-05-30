@@ -59,7 +59,7 @@ void flystep(string destination, object flyee)
     }
 
     if (!objectp(destobj)) {
-        destobj = find_object_or_load(destination);
+        destobj = load_object(destination);
     }
 
     if (flroom != ENV(flyee)) {
