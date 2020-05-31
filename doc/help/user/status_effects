@@ -58,7 +58,7 @@ Invisible creatures can not be seen by other creatures unless they have the true
 You see stars and unable to do anything. Daze usually is short duration.
 
 %^CYAN%^Fast healing%^RESET%^
-A creature with the fast healing special quality regains hit points at an exceptional rate. This gives (grade)d(level/4) points of passive regeneration each round. For example, fast healing 2 gives 2d2 hp regeneration to a level 10 monster per round.
+A creature with the fast healing special quality regains hit points at an exceptional rate. This gives (grade)d(lvl/2) points of passive regeneration each round. For example, fast healing 2 gives 2d2 hp regeneration to a level 10 monster per round.
 
 %^CYAN%^Paralysis%^RESET%^
 A paralyzed creature cannot act. Paralyzed players can not enter many commands. They loose their dexterity bonus to armor class.
@@ -67,7 +67,7 @@ A paralyzed creature cannot act. Paralyzed players can not enter many commands. 
 Prone or staggered creatures can not use most weapons for the duration of the effect. They loose their dexterity bonus to armor class.
 
 %^CYAN%^Regeneration%^RESET%^
-A creature gets 1d(lvl/4) health poins of regeneration per round as part of its innate ability to heal.
+A creature gets 1d(lvl/2) health poins of regeneration per round as part of its innate ability to heal.
 
 %^CYAN%^Sickened%^RESET%^
 All core skills, attack, damage bonus, saves are reduced by lvl/12+1. The effect is cumulative but usually won't last for long.
