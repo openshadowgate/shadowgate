@@ -224,7 +224,7 @@ int pray()
         exp = (int)TP->query_exp();
 
         expdelta = exp_for_level(thelevel);
-        exploss = expdelta * 12 / 11;
+        exploss = expdelta * thelevel / 41;
         log_file("deathlexp", TPQN + " lost " + exploss + " in resurrection at a church.\n");
 
         if (TP->query("hardcore")) {
