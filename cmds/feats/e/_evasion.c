@@ -18,7 +18,7 @@ int allow_shifted() { return 1; }
 
 int prerequisites(object ob){
     if(!objectp(ob)) return 0;
-    if(!FEATS_D->has_feat(ob,"dodge")) {
+    if(!FEATS_D->has_feat(ob,"dodge") && !ob->is_class("ranger")) {
       dest_effect();
       return 0;
     }
