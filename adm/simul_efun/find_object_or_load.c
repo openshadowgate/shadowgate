@@ -1,20 +1,3 @@
-/*====================================================================
-// file: find_object_or_load.c
-// Author either Huthar or Wayfarer
-// Thanks to the folks at Portals for this one.
-// Now a part of the distribution mudlib.
-// Purpose: To either find the object with the matching file,
-// and return it, or to load it, then return it.
-   Updated December, 2016 by Saide
-   I've removed the reset call on create, in Object.c
-   I've added a room reset to this efun and I've removed
-   the call to place_mobs in /std/random_monsters.c and used this efun to
-   accomplish the same thing. My sincerest hope is that by doing
-   so, by essentially splitting create, reset, and mob placement,
-   that we can eliminate the too deep recursion bugs that sometimes happen
-   when a room is loaded
-   If anyone changes anything with this efun, keep this in mind. ** Saide **
-=====================================================================*/
 #include <security.h>
 
 /**
