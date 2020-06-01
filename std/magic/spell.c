@@ -3053,15 +3053,16 @@ object *target_selector()
     slevel = slevel < 1 ? 1 : slevel;
 
     if (splash_spell == 2) {
-        aff = random(slevel) + 1 + ((get_casting_stat() - 10) / 2);
-        aff = (aff + ((get_casting_stat() - 10) / 2)) > (6 + ((get_casting_stat() - 10) / 2)) ? (6 + ((get_casting_stat() - 10) / 2)) : aff;
+        aff = random(slevel) + 1;
+        aff = aff > 6 ? 6 : aff;
         slctd += foes[0..aff];
     } else if (splash_spell == 3 || aoe_spell) {
-        aff = random(slevel) + 1 + ((get_casting_stat() - 10) / 2);
-        aff = (aff + ((get_casting_stat() - 10) / 2)) > (6 + ((get_casting_stat() - 10) / 2)) ? (6 + ((get_casting_stat() - 10) / 2)) : aff;
+        aff = random(slevel) + 1;
+        aff = aff > 6 ? 6 : aff;
         slctd += everyone[0..aff];
     } else {
-        aff = (aff + ((get_casting_stat() - 10) / 2)) > (4 + ((get_casting_stat() - 10) / 2)) ? (4 + ((get_casting_stat() - 10) / 2)) : aff;
+        aff = random(slevel) + 1;
+        aff = aff > 4 ? 4 : aff;
         slctd += foes[0..aff];
         if (roll_dice(1, 20) > (clevel / 3)) {
             slctd += everyone[0..(48 / clevel + 1)];
