@@ -6,27 +6,8 @@
 private string __Forward;
 private mapping __MyGroups;
 private mapping *__BoxInfo;
-static private string __File;
-static private mapping __MudGroups, __Remote;
-
-static private string enkey(string str);
-static private int valid_access(object ob);
-static private remote_post(mapping borg);
-static private void load_post_box(string who);
-static private void save_post_box();
-string *post_letter(mapping borg);
-static private int local_post(string who, mapping borg);
-string *expand_list(string *who);
-string *expand_group(string grp);
-void add_post(string *local, mapping borg);
-void remove_post(string who, string id);
-static private int get_post_number(string id);
-mapping mail_status(string who);
-static private notify_online(string *who, string de, string sub);
-mapping add_group(string who, string grp, string *in_grp);
-mapping remove_group(string who, string grp, string *out_grp);
-void mark_read(string who, string id);
-mapping query_mud_groups();
+nosave private string __File;
+nosave private mapping __MudGroups, __Remote;
 
 void create() {
     string *tmp;
@@ -57,18 +38,18 @@ __MudGroups["immortals"] = tmp;
    __Forward = "";
 }
 
-static private string enkey(string str) {
+protected string enkey(string str) {
    return replace_string(lower_case(str), " ", ".");
 }
 
-static private int valid_access(object ob) {
+protected int valid_access(object ob) {
    if(base_name(ob) == OB_POSTAL) return 1;
    if(base_name(ob) == "/cmds/mortal/_bug") return 1;
    if(base_name(ob) == "/adm/daemon/lawbounty_d") return 1;
    return(geteuid(ob) == UID_POSTAL || geteuid(ob) == UID_ROOT);
 }
 
-static private void load_post_box(string who) {
+protected void load_post_box(string who) {
    if(__File == DIR_POSTAL+"/"+who[0..0]+"/"+who) return;
    if(__File && __File != "") save_post_box();
    if(file_size(DIR_POSTAL+"/"+who[0..0]) != -2) {
@@ -85,7 +66,7 @@ static private void load_post_box(string who) {
    seteuid(getuid());
 }
 
-static private void save_post_box() {
+protected void save_post_box() {
   string catcherr = "";
    seteuid(UID_POSTALSAVE);
   // Was if(!sizeof(__BoxInfo) && !sizeof(__MyGroups) && __Forward == "")
@@ -123,7 +104,7 @@ string *post_letter(mapping borg) {
    return tmp;
 }
 
-static int local_post(string who, mapping borg) {
+protected int local_post(string who, mapping borg) {
    string pl, mud;
 
    __Remote = ([]);
@@ -218,7 +199,7 @@ void remove_post(string who, string id) {
    __BoxInfo = exclude_array(__BoxInfo, x);
 }
 
-static private int get_post_number(string id) {
+protected int get_post_number(string id) {
    int i;
 
    i = sizeof(__BoxInfo);
@@ -238,7 +219,7 @@ mapping mail_status(string who) {
    return([ "unread":un, "total":tot ]);
 }
 
-static private notify_online(string *who, string de, string sub) {
+protected notify_online(string *who, string de, string sub) {
    object ob, mail;
    string str;
    int i;
@@ -299,7 +280,7 @@ void mark_read(string who, string id) {
    while(i--) if(id == __BoxInfo[i]["id"]) __BoxInfo[i]["read"] = 1;
 }
 
-static private remote_post(mapping borg) {
+protected remote_post(mapping borg) {
    string *muds;
    int i;
 

@@ -12,75 +12,17 @@
 inherit OBJECT;
 
 mapping AVATAR_ROOMS;
-static mapping ROOM_INFO=([]),TRAVEL_TYPES = TRAVEL_PENALTY,CURRENT_DOOR=([]),CURRENT_LOCK=([]);
-
-static string PATH,FILE,DIR,*completed_stages=({}),*completed_door_stages=({}),*completed_lock_stages=({});
-static string *STAGES = ({ "name","indoors","light","terrain_type","travel_type","climate","short_desc","long_desc","smell","listen","search","items","exits","doors" });
-static string DOOR_STAGES = ({ "door_id", "door_destination","door_direction","door_closed","door_open_message","door_close_message","door_description","door_knock_message","door_locks" });
-static string LOCK_STAGES = ({ "lock_name","lock_key","lock_description","lock_difficulty","is_locked" });
-static string *CLIMATES = ({"arctic","temperate","tropical","mountain","desert"});
-static string *TERRAINS = TERRAIN;
-
-
-
-void clean();
-int check(string str);
-int fill_stages();
-int add_stage(string stage);
-void set_path(string path);
-void set_file(string file);
-int terrain_check(string terrain);
-int travel_check(string travel);
-int climate_check(string climate);
-int set_room_name(string name);
-int set_room_ids(string *ids);
-int set_indoors_outdoors(int num);
-int set_room_light(int num);
-int set_room_terrain(string terrain);
-int set_room_travel(string travel);
-int set_room_climate(string climate);
-int set_room_short(string str);
-int set_long_desc(string desc);
-int set_room_smell(string smell);
-int set_room_listen(string listen);
-void clear_all_doors();
-void clear_all_locks(string door);
-int clear_current_door(string door);
-int clear_current_lock(string door,string lock);
-int is_existing_door(string door);
-int is_existing_lock(string door,string lock);
-int is_current_door(string door);
-int is_current_lock(string lock);
-int set_door_data(string door,string type,string data);
-int set_lock_data(string door,string lock,string type,string data);
-void add_lock(string door,string lock);
-int complete_lock(string door,string lock);
-void add_door(string door);
-int complete_door(string door);
-int set_room_searches(mapping searches);
-int set_room_items(mapping items);
-int set_room_exits(mapping exits);
-int set_room_doors(mapping doors);
-mapping query_room_info();
-void set_room_info(mapping map);
-mixed query_room_data(string data);
-string query_save_path();
-string query_file_name();
-string *stage_check();
-string *query_stages();
-string *query_climates();
-string *query_terrains();
-mapping query_travel_types();
-int query_complete();
-mapping retrieve_room_info(string file);
-void delete_room_from_map(string file);
-int SAVE();
-
-
+nosave mapping ROOM_INFO=([]),TRAVEL_TYPES = TRAVEL_PENALTY,CURRENT_DOOR=([]),CURRENT_LOCK=([]);
+nosave string PATH,FILE,DIR,*completed_stages=({}),*completed_door_stages=({}),*completed_lock_stages=({});
+nosave string *STAGES = ({ "name","indoors","light","terrain_type","travel_type","climate","short_desc","long_desc","smell","listen","search","items","exits","doors" });
+nosave string DOOR_STAGES = ({ "door_id", "door_destination","door_direction","door_closed","door_open_message","door_close_message","door_description","door_knock_message","door_locks" });
+nosave string LOCK_STAGES = ({ "lock_name","lock_key","lock_description","lock_difficulty","is_locked" });
+nosave string *CLIMATES = ({"arctic","temperate","tropical","mountain","desert"});
+nosave string *TERRAINS = TERRAIN;
 
 void clean()
 {
-	ROOM_INFO = (([ 
+	ROOM_INFO = (([
 				 "name"			: "",
 				 "ids"			: "",
 				 "indoors"		: "",
@@ -104,7 +46,7 @@ void clean()
 	return;
 }
 
-void create() 
+void create()
 {
 	clean();
 	AVATAR_ROOMS=([]);
@@ -401,7 +343,7 @@ int clear_current_door(string door)
 
 int clear_current_lock(string door,string lock)
 {
-	if(!stringp(door) || !stringp(lock)) { return 0; }	
+	if(!stringp(door) || !stringp(lock)) { return 0; }
 	if(door != CURRENT_DOOR["door_id"]) { return 0; }
 	if(lock != CURRENT_LOCK["lock_name"]) { return 0; }
 	CURRENT_LOCK = ([]);
@@ -525,9 +467,9 @@ int complete_door(string door)
 	if(!is_current_door(door)) { return 0; }
 	for(i=0;i<sizeof(DOOR_STAGES);i++)
 	{
-		if(member_array(DOOR_STAGES[i],completed_door_stages) == -1) 
-		{ 
-			return 0; 
+		if(member_array(DOOR_STAGES[i],completed_door_stages) == -1)
+		{
+			return 0;
 		}
 	}
 	add_door(door);
@@ -550,7 +492,7 @@ mapping query_locks(string door)
 	locks = doors["door_locks"];
 	if(!mapp(locks)) { return ([]); }
 	return locks;
-}	
+}
 
 mapping query_door(string door)
 {
@@ -807,7 +749,7 @@ int SAVE()
 
 	write_file(DIR,"// File created with /daemon/persistent_room_d.c\n");
 	write_file(DIR,"#include <std.h>\n\n");
-	
+
 	write_file(DIR,"inherit \""+INHERIT_ROOM+"\";\n\n");
 
 	write_file(DIR,"void create()\n");
@@ -843,8 +785,8 @@ int SAVE()
 	}
 
 	write_file(DIR,"    set_smell(\"default\",\"\n"+ROOM_INFO["smell"]+"\");\n");
-	write_file(DIR,"    set_listen(\"default\",\""+ROOM_INFO["listen"]+"\");\n\n");	
-	
+	write_file(DIR,"    set_listen(\"default\",\""+ROOM_INFO["listen"]+"\");\n\n");
+
 	if(mapp(ROOM_INFO["search"]) && ROOM_INFO["search"] != ([]))
 	{
 		info = ROOM_INFO["search"];
@@ -886,7 +828,7 @@ int SAVE()
 	{
 		info = ROOM_INFO["exits"];
 		arr = keys(info);
-		
+
 		if(sizeof(arr))
 		{
 			write_file(DIR,"\n    set_exits(([ \n");
@@ -902,7 +844,7 @@ int SAVE()
 	{
 		write_file(DIR,"\n\n    set_invis_exits("+identify(ROOM_INFO["hidden_exits"])+");\n\n");
 	}
-	
+
 	if(mapp(ROOM_INFO["doors"]) && ROOM_INFO["doors"] != ([]))
 	{
 		info = ROOM_INFO["doors"];
@@ -916,7 +858,7 @@ int SAVE()
 
 				if(mapp(locks)) { temp = keys(locks); }
 				if(pointerp(temp) && sizeof(temp))
-				{		
+				{
 					write_file(DIR,"    set_door(\""+door["door_id"]+"\",\""+door["door_destination"]+"\",\""+door["door_direction"]+"\",\""+locks[temp[0]]["lock_key"]+"\",\""+temp[0]+"\");\n");
 
 					for(j=0;j<sizeof(temp);j++)
@@ -951,7 +893,7 @@ int SAVE()
 				if(door["door_close_message"])
 				{
 					write_file(DIR,"    set_string(\""+door["door_id"]+"\",""\"close\",\""+door["door_close_message"]+"\");\n");
-				}				
+				}
 				if(door["door_description"])
 				{
 					write_file(DIR,"    set_door_description(\""+door["door_id"]+"\",\""+door["door_description"]+"\");\n");
@@ -961,7 +903,7 @@ int SAVE()
 	}
 
 	write_file(DIR,"}");
-	
+
 	write("%^B_RED%^%^CYAN%^Finishing..  file created "+DIR+".%^RESET%^");
 	return 1;
 }

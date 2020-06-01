@@ -104,7 +104,7 @@ string query_name() { return "High random quests daemon."; }
 string query_short() { return "High random quests daemon"; }
 
 
-static void SAVE()
+protected void SAVE()
 {
     seteuid(UID_DAEMONSAVE);
     save_object(SAVE_QUESTS);

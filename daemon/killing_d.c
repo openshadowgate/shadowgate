@@ -21,40 +21,7 @@ string *__Evil;
 string *__Good;
 string *__Neutral;
 
-static void SAVE();
-void do_bad_pkill(object attacker, object victim);
-void check_actions(object attacker, object victim);
-void check_bounty(object person);
-static int personal_bounty(object attacker, object victim);
-mixed add_personal_bounty(string name, object poster, int amount);
-static void pbounty_shout(string hunter, string hunted, string issued);
-string *query_personals();
-mapping query_personal_bounties();
-int remove_personal_bounty(string name);
-static int legal_bounty(object victim, object attacker);
-static int collect_law_bounty(object victim, object attacker, int dead);
-string *query_bounties();
-int query_bounty_dead(string nme);
-mapping query_bounties_map();
-void add_bounty(string name, int dead, string alias);
-int remove_bounty(string name);
-static int evil_bounty(object victim, object attacker);
-static int good_bounty(object victim, object attacker);
-static int neutral_bounty(object victim, object attacker);
-void add_evil(string name);
-void add_good(string name);
-void remove_evil(string name);
-void remove_good(string name);
-string * query_evil_bounties();
-string * query_good_bounties();
-void remove_all_bounties(string name);
-void spec_exp_adj(object who);
-void check_diety_change(object who);
-void check_align(object person);
-void check_class_change(object who);
-
-
-static void SAVE() {
+protected void SAVE() {
     seteuid(UID_DAEMONSAVE);
     save_object(SAVE_KILLS);
     seteuid(getuid());
@@ -135,7 +102,7 @@ void check_actions(object attacker, object victim) {
         if (ALIGN->is_evil(attacker) && (ALIGN->is_good(victim))) myalignmod = -20;
         if (ALIGN->is_evil(attacker) && (ALIGN->is_neutral(victim))) myalignmod = -10;
         attacker->add_align_adjust(myalignmod);
-        
+
         message("warning","%^BOLD%^%^RED%^This action is increasing your renown!",attacker);
         check_bounty(attacker);
     }
@@ -183,7 +150,7 @@ void check_bounty(object person) {
 }
 
 
-static int personal_bounty(object attacker, object victim) {
+protected int personal_bounty(object attacker, object victim) {
     int money;
     string who, *pkilled, *pkilled2;
     int palign, aalign, valign, exp;
@@ -248,7 +215,7 @@ mixed add_personal_bounty(string name, object poster, int amount) {
     log_file("bounties","Personal bounty placed on "+capitalize(name)+" for "+amount+" by "+capitalize(poster->query_name())+" at "+ctime(time())+".\n");
 }
 
-static void pbounty_shout(string hunter, string hunted, string issued) {
+protected void pbounty_shout(string hunter, string hunted, string issued) {
     if (find_player(hunter))
         tell_object(find_player( hunter ),"%^BOLD%^%^YELLOW%^You have collected the bounty on "+capitalize(hunted)+" issued by a citizen.");
     //message("bounty","%^BOLD%^%^YELLOW%^"+capitalize(hunter)+" has collected the bounty on "+capitalize(hunted)+"!", users(), find_player("hunter"));
@@ -268,14 +235,14 @@ int remove_personal_bounty(string name) {
     SAVE();
 }
 
-static int legal_bounty(object victim, object attacker) {
+protected int legal_bounty(object victim, object attacker) {
     //This is left in so that stuff that calls it doesn't break.  bounties are
     //  now taken care of in a call to collect_law_bounty from the magistrate.
     //return 0;
     return collect_law_bounty(victim, attacker, 1);
 }
 
-static int collect_law_bounty(object victim, object attacker, int dead){
+protected int collect_law_bounty(object victim, object attacker, int dead){
     //The magistrate will call this when a bounty is collected.
     //  attacker is the killer object, victim is the object of the person turned in, and
     //  dead is a flag for if the person was presented alive, or just their head.
@@ -330,7 +297,7 @@ int remove_bounty(string name) {
     SAVE();
 }
 
-static int evil_bounty(object victim, object attacker) {
+protected int evil_bounty(object victim, object attacker) {
     if (member_array((string)victim->query_name(),__Evil) != -1) {
         if (ALIGN->is_evil(attacker)) return 0;
         __Evil -= ({victim->query_name()});
@@ -348,7 +315,7 @@ static int evil_bounty(object victim, object attacker) {
     return 0;
 }
 
-static int good_bounty(object victim, object attacker) {
+protected int good_bounty(object victim, object attacker) {
     if (member_array((string)victim->query_name(),__Good) != -1) {
         if (ALIGN->is_good(attacker)) return 0;
         __Good -= ({victim->query_name()});
@@ -366,16 +333,19 @@ static int good_bounty(object victim, object attacker) {
     return 0;
 }
 
-static int neutral_bounty(object victim, object attacker) {
-    if (member_array((string)victim->query_name(),__Neutral) != -1) {
-        if (ALIGN->is_neutral(attacker)) return 0;
-        __Neutral -= ({victim->query_name()});
+protected int neutral_bounty(object victim, object attacker)
+{
+    if (member_array((string)victim->query_name(), __Neutral) != -1) {
+        if (ALIGN->is_neutral(attacker)) {
+            return 0;
+        }
+        __Neutral -= ({ victim->query_name() });
         SAVE();
-        message("bounty","%^BOLD%^%^YELLOW%^"+attacker->query_cap_name()+" has stemmed the deeds of "+capitalize(victim->query_name())+"!",evil());
+        message("bounty", "%^BOLD%^%^YELLOW%^" + attacker->query_cap_name() + " has stemmed the deeds of " + capitalize(victim->query_name()) + "!", evil());
         seteuid(UID_LOG);
-        log_file("bounties",">>>"+capitalize(attacker->query_name())+" collected the good bounty on "+capitalize(victim->query_name())+" at "+ctime(time())+"!\n");
+        log_file("bounties", ">>>" + capitalize(attacker->query_name()) + " collected the good bounty on " + capitalize(victim->query_name()) + " at " + ctime(time()) + "!\n");
         seteuid(getuid());
-        attacker->set_mini_quest("Bounty collection on "+capitalize(victim->query_name()), 2000*(int)victim->query_lowest_level(),"Bounty collection on "+capitalize(victim->query_cap_name()));
+        attacker->set_mini_quest("Bounty collection on " + capitalize(victim->query_name()), 2000 * (int)victim->query_lowest_level(), "Bounty collection on " + capitalize(victim->query_cap_name()));
         victim->reset_adjust();
         victim->delete("renown");
         return 1;
@@ -531,10 +501,10 @@ void check_align(object person) {
     }
 
     //This part checks their alignment as related to their chaotic/lawful status
-    if(ALIGN->is_lawful(person) && law < -99 ||  
-	ALIGN->is_chaotic(person) && law > 99 || 
-	ALIGN->is_law_neutral(person) && law > 199 || 
-	ALIGN->is_law_neutral(person) && law < -199 ) 
+    if(ALIGN->is_lawful(person) && law < -99 ||
+	ALIGN->is_chaotic(person) && law > 99 ||
+	ALIGN->is_law_neutral(person) && law > 199 ||
+	ALIGN->is_law_neutral(person) && law < -199 )
     {
        person->reset_law_adjust();
        align_penalty(person, points, law);

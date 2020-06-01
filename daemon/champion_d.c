@@ -5,33 +5,33 @@
 #define MONSTER_FILE "/daemon/save/leveled_monster_list"
 
 inherit DAEMON;
-static int MAX_L5_CHAMPS = 8;
-static int MAX_L10_CHAMPS = 12;
-static int MAX_L15_CHAMPS = 16;
-static int MAX_L20_CHAMPS = 20;
-static int MAX_L25_CHAMPS = 24;
-static int MAX_L30_CHAMPS = 30;
-static int MAX_L35_CHAMPS = 36;
-static int MAX_L40_CHAMPS = 42;
-static int MAX_L45_CHAMPS = 48;
-static int MAX_L50_CHAMPS = 50;
-static int MAX_CHAMPS = 400;
-static int CHAMP_CHANCE = 125;
+nosave int MAX_L5_CHAMPS = 8;
+nosave int MAX_L10_CHAMPS = 12;
+nosave int MAX_L15_CHAMPS = 16;
+nosave int MAX_L20_CHAMPS = 20;
+nosave int MAX_L25_CHAMPS = 24;
+nosave int MAX_L30_CHAMPS = 30;
+nosave int MAX_L35_CHAMPS = 36;
+nosave int MAX_L40_CHAMPS = 42;
+nosave int MAX_L45_CHAMPS = 48;
+nosave int MAX_L50_CHAMPS = 50;
+nosave int MAX_CHAMPS = 400;
+nosave int CHAMP_CHANCE = 125;
 
-static mapping CHAMP_SIZE = (["MAX_L5_CHAMPS" : MAX_L5_CHAMPS, "MAX_L10_CHAMPS" : MAX_L10_CHAMPS,
+nosave mapping CHAMP_SIZE = (["MAX_L5_CHAMPS" : MAX_L5_CHAMPS, "MAX_L10_CHAMPS" : MAX_L10_CHAMPS,
                        "MAX_L15_CHAMPS" : MAX_L15_CHAMPS, "MAX_L20_CHAMPS" : MAX_L20_CHAMPS,
                        "MAX_L25_CHAMPS" : MAX_L25_CHAMPS, "MAX_L30_CHAMPS" : MAX_L30_CHAMPS,
                        "MAX_L35_CHAMPS" : MAX_L35_CHAMPS, "MAX_L40_CHAMPS" : MAX_L40_CHAMPS,
                        "MAX_L45_CHAMPS" : MAX_L45_CHAMPS, "MAX_L50_CHAMPS" : MAX_L50_CHAMPS,
                        "MAX_CHAMPS" : MAX_CHAMPS]);
-                       
-static mapping CURRENT_CHAMPIONS = ([]);
 
-//list of monsters that exist in the game world by level 
+nosave mapping CURRENT_CHAMPIONS = ([]);
+
+//list of monsters that exist in the game world by level
 mapping MONSTER_LIST_BY_LEVEL;
 string *MONSTER_LIST;
-string *MONSTER_QUESTS;                  
-                  
+string *MONSTER_QUESTS;
+
 void champion_monster(object mon);
 varargs int check_champions(int lev, object mon);
 varargs void create_champion(object mon, int manual);
@@ -47,9 +47,9 @@ void check_valid()
     if(!pointerp(MONSTER_LIST) || !sizeof(MONSTER_LIST) || !pointerp(MONSTER_QUESTS) || !sizeof(MONSTER_QUESTS))
     {
         monster_list_restore();
-        if(!pointerp(MONSTER_LIST)) MONSTER_LIST = ({});       
+        if(!pointerp(MONSTER_LIST)) MONSTER_LIST = ({});
         if(!pointerp(MONSTER_QUESTS)) MONSTER_QUESTS = ({});
-    }    
+    }
 }
 
 varargs int check_champions(int lev, object mon)
@@ -75,7 +75,7 @@ varargs int check_champions(int lev, object mon)
             if(objectp(champs[y]))
             {
                 if(objectp(environment(champs[y]))) continue;
-                else 
+                else
                 {
                     to_remove += ({champs[y]});
                     continue;
@@ -96,7 +96,7 @@ varargs int check_champions(int lev, object mon)
             if(objectp(mon))
             {
                 CURRENT_CHAMPIONS[lev_brack] += ({mon});
-            }            
+            }
             return 1;
         }
     }
@@ -108,7 +108,7 @@ int get_champ_level(int lev)
     if(!intp(lev)) return 0;
     switch(lev)
     {
-        case 0..5: 
+        case 0..5:
             return 5;
             break;
         case 6..10:
@@ -149,7 +149,7 @@ varargs void create_champion(object mon, int manual)
 {
     int champ_level, champ_bracket, mod;
     int cur_hp, cur_max_hp, cur_str, cur_dex, cur_con, cur_int, cur_wis, cur_cha, cur_level, cur_ac;
-    int y;    
+    int y;
     string *cur_classes, cur_class;
     if(!objectp(mon)) return;
     if(mon->query_property("is_champion_monster")) return;
@@ -172,7 +172,7 @@ varargs void create_champion(object mon, int manual)
             mon->set_property("added short",({ "%^RESET%^ (%^BOLD%^%^BLACK%^Heroic%^RESET%^)"}));
             break;
     }
-    
+
     cur_max_hp = (int)mon->query_max_hp();
     cur_ac = (int)mon->query_ac();
     cur_str = (int)mon->query_stats("strength");
@@ -185,7 +185,7 @@ varargs void create_champion(object mon, int manual)
     mon->set_overall_ac((cur_ac-mod));
     mon->set_attack_bonus(mod*2);
     mon->set_property("noMissChance", 1);
-    mon->set_damage_bonus(mod);    
+    mon->set_damage_bonus(mod);
     mon->set_stats("strength", (cur_str+mod));
     mon->set_stats("dexterity", (cur_dex+mod));
     mon->set_stats("consitution", (cur_con+mod));
@@ -233,12 +233,12 @@ int check_max_health(object mon)
         case 0..5:
             if(mhp > 50) return 1;
             return 0;
-        case 6..10: 
+        case 6..10:
             if(mhp > 125) return 1;
             return 0;
         case 11..15:
             if(mhp > 180) return 1;
-            return 0;            
+            return 0;
         case 16..20:
             if(mhp > 400) return 1;
             return 0;
@@ -258,7 +258,7 @@ int check_max_health(object mon)
         case 36..40:
             if(mhp > 1500) return 1;
             return 0;
-            break;               
+            break;
     }
     if(mhp > 2000) return 1;
     return 0;
@@ -277,26 +277,26 @@ void champion_monster(object mon)
     if(mon->is_merc()) return;
     if(mon->is_animal()) return;
     if(check_max_health(mon)) return;
-    if(objectp(mon->query_property("minion"))) return;    
+    if(objectp(mon->query_property("minion"))) return;
     create_champion(mon);
     return;
 }
 
 int clean_up() { return 0; }
 
-//Following functions are used to build a list of game-wide monsters by level - in order to later 
+//Following functions are used to build a list of game-wide monsters by level - in order to later
 //assign random monsters to areas - Saide, April 2017
 
 void init_monster_list_by_level()
-{    
+{
     monster_list_restore();
     if(!mapp(MONSTER_LIST_BY_LEVEL) || !sizeof(keys(MONSTER_LIST_BY_LEVEL)))
     {
-        MONSTER_LIST_BY_LEVEL = (["level 5" : ({}), "level 10" : ({}), "level 15" : ({}), "level 20" : ({}), 
+        MONSTER_LIST_BY_LEVEL = (["level 5" : ({}), "level 10" : ({}), "level 15" : ({}), "level 20" : ({}),
         "level 25" : ({}), "level 30" : ({}), "level 35" : ({}), "level 40" : ({}),
-        "level 45" : ({}), "level 50" : ({}), "level 55" : ({}), "level 60" : ({}), 
-        "level 65" : ({}), "level 70" : ({}), "level 75" : ({}), "level 80" : ({}), 
-        "level 85" : ({}), "level 90" : ({}), "level 95" : ({}), "level 100" : ({}), 
+        "level 45" : ({}), "level 50" : ({}), "level 55" : ({}), "level 60" : ({}),
+        "level 65" : ({}), "level 70" : ({}), "level 75" : ({}), "level 80" : ({}),
+        "level 85" : ({}), "level 90" : ({}), "level 95" : ({}), "level 100" : ({}),
         "level 105" : ({})]);
     }
 }
@@ -357,11 +357,11 @@ void add_mob_to_level_list(object mon)
     check_valid();
 
     if(!mapp(MONSTER_LIST_BY_LEVEL) || !sizeof(keys(MONSTER_LIST_BY_LEVEL))) init_monster_list_by_level();
-    //stuff not to include 
-        
+    //stuff not to include
+
     mFile = base_name(mon);
-    if(member_array(mFile, MONSTER_LIST) != -1) return; //already in the list. 
-    if(!intp(mLev = mon->query_level())) return;       
+    if(member_array(mFile, MONSTER_LIST) != -1) return; //already in the list.
+    if(!intp(mLev = mon->query_level())) return;
     mLev = fix_level(mLev);
     if(!intp(mLev) || mLev < 5 || mLev > 105) return;
     LevelList = "level "+mLev;
@@ -371,7 +371,7 @@ void add_mob_to_level_list(object mon)
     MONSTER_LIST += ({mFile});
     MONSTER_LIST_BY_LEVEL[LevelList] += ({mFile});
     monster_list_save();
-    return;   
+    return;
 }
 
 string *retrieve_monster_list(int lev)
@@ -380,8 +380,8 @@ string *retrieve_monster_list(int lev)
     int x;
     if(lev > 14 && lev < 40) lev -= 6;
     else if(lev > 9) lev -= 5;
-    
-    if(!intp(lev = fix_level(lev))) return ({});   
+
+    if(!intp(lev = fix_level(lev))) return ({});
     LevelList = "level "+lev;
     if(!mapp(MONSTER_LIST_BY_LEVEL) || !sizeof(keys(MONSTER_LIST_BY_LEVEL))) init_monster_list_by_level();
     mlist = ({});
@@ -427,7 +427,7 @@ void verify_all_monsters()
             mon = new(LList[y]);
             if(!verify_valid_mon(mon, Lkeys[x]))
             {
-                remove_from_level += ({LList[y]});              
+                remove_from_level += ({LList[y]});
             }
             if(objectp(mon)) mon->remove();
             continue;
@@ -448,14 +448,14 @@ void monster_list_save()
 {
     seteuid(UID_ROOT);
     save_object(MONSTER_FILE);
-    seteuid(geteuid());    
+    seteuid(geteuid());
 }
 
 void monster_list_restore()
 {
     seteuid(UID_ROOT);
     restore_object(MONSTER_FILE);
-    seteuid(geteuid());    
+    seteuid(geteuid());
 }
 
 void add_monster_quest(string quest)

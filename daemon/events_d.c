@@ -7,26 +7,9 @@
 
 private int __RebootInterval;
 private mapping __Events;
-private static int __InReboot;
-private static string __TimeOfDay;
-private static mapping __Almanac;
-
-static void Save();
-void change_sky();
-mapping almanac_data();
-int query_minutes(int x);
-int query_day(int x);
-string query_day_name(int x);
-int query_hour(int x);
-int query_year(int x);
-int query_month(int x);
-string query_month_name(int x);
-int query_now();
-int query_week(int x);
-string query_time_of_day();
-void next_change();
-void configure_day();
-static void reboot();
+private nosave int __InReboot;
+private nosave string __TimeOfDay;
+private nosave mapping __Almanac;
 
 void create() {
     seteuid(UID_DAEMONSAVE);
@@ -48,7 +31,7 @@ void set_reboot_interval(int x) {
 varargs void add_events(object ob, string fun, int when, mixed *args, int reg) {
     if(file_name(previous_object()) != OB_SIMUL_EFUN) return;
     __Events[file_name(ob)] =
-      (["time":time()+when, "function":fun, "regular":(reg?when:0), 
+      (["time":time()+when, "function":fun, "regular":(reg?when:0),
       "args":(pointerp(args) ? args : ({})) ]);
     Save();
 }
@@ -59,7 +42,7 @@ void interval(){
 
 int check_time() { return time(); }
 
-static void check_events() {
+protected void check_events() {
     string *events;
     int i, x;
 
@@ -83,13 +66,13 @@ static void check_events() {
     Save();
 }
 
-static void Save() {
+protected void Save() {
     seteuid(UID_DAEMONSAVE);
     save_object(SAVE_EVENTS);
     seteuid(getuid());
 }
 
-static void reboot() {
+protected void reboot() {
     shout("%^BOLD%^%^RED%^ATTENTION: %^YELLOW%^ Time for the weekly reboot!");
     shout("%^GREEN%^ShadowGate will be back up moments after the reboot.");
     seteuid(UID_SHUTDOWN);
@@ -191,11 +174,11 @@ mapping almanac_data() {
     int temps, days, x, morn, even, tmp, hour, min;
     mapping ret;
 
-    if((days= ((query_month(temps = time())*20) + query_day(temps))) == 
+    if((days= ((query_month(temps = time())*20) + query_day(temps))) ==
       LONGEST_DAY)
         return (["sunrise":({4,0}),"morning":({5,0}),"sunset":({18,0}),
           "twilight":({17,0}) ]);
-    else if(days == SHORTEST_DAY) 
+    else if(days == SHORTEST_DAY)
       return (["sunrise":({6,0}),"morning":({7,0}),"sunset":({16,0}),
         "twilight":({15,0}) ]);
     else if(days > LONGEST_DAY) x = days-LONGEST_DAY;

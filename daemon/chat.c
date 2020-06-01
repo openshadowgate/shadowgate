@@ -6,7 +6,7 @@
 #define MAGENTA "%^MAGENTA%^"
 #define RESET "%^RESET%^"
 
-static private mapping channels;
+nosave private mapping channels;
 
 int list_channel(string str);
 object *arches(object *objs);
