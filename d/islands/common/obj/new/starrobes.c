@@ -2,7 +2,7 @@
 // added auto-close of an existing rift if the robe is removed from wearer. Nienne, 11/12.
 #include <std.h>
 
-#define CLASSES_ALLOWED ({ "mage","cleric","druid","sorcerer","psion","bard" })
+#define CLASSES_ALLOWED ({ "mage","cleric","druid","sorcerer","psion","bard","oracle" })
 
 
 inherit "/d/common/obj/clothing/magerobe.c";
