@@ -3,19 +3,18 @@
 #include <objects.h>
 #include <daemons.h>
 
+nosave string ACCOUNTS_DIR = "/adm/save/user_accounts/";
+nosave int LOADED;
+nosave object tp;
+nosave int ATTEMPTS;
 
-static string ACCOUNTS_DIR = "/adm/save/user_accounts/";
-static int LOADED;
-static object tp;
-static int ATTEMPTS;
+nosave string DEBUG_TARGET = "ares";
+nosave int DEBUG;
 
-static string DEBUG_TARGET = "ares";
-static int DEBUG;
-
-private static string pass_one,pass_two;
-static string MM = "%^RESET%^%^MAGENTA%^";
-static string RR = "%^RESET%^";
-static string *positions;
+private nosave string pass_one,pass_two;
+nosave string MM = "%^RESET%^%^MAGENTA%^";
+nosave string RR = "%^RESET%^";
+nosave string *positions;
 
 
 string __AccountName;
@@ -52,13 +51,12 @@ int exit();
 int enter_email_address(string str);
 int enter_real_name(string str);
 int delete_account(string str);
-nomask static int password_two(string str);
-nomask static int password_one(string str);
-nomask static int enter_password(string str);
-nomask static int change_password(string str);
+nomask protected int password_two(string str);
+nomask protected int password_one(string str);
+nomask protected int enter_password(string str);
+nomask protected int change_password(string str);
 int new_account_check(string str);
 int new_association_check();
-
 
 void db(string str)
 {
@@ -880,7 +878,7 @@ void set_tp(object obj)
 
 
 // Password related functions
-nomask static int password_two(string str)
+nomask protected int password_two(string str)
 {
     pass_two = str;
 
@@ -902,7 +900,7 @@ nomask static int password_two(string str)
 }
 
 
-nomask static int password_one(string str)
+nomask protected int password_one(string str)
 {
     tell_object(tp,"%^RESET%^%^YELLOW%^Please enter your password again.");
     pass_one = str;
@@ -911,7 +909,7 @@ nomask static int password_one(string str)
 }
 
 
-nomask static int enter_password(string str)
+nomask protected int enter_password(string str)
 {
     if(ATTEMPTS > 3)
     {
@@ -941,7 +939,7 @@ nomask static int enter_password(string str)
 }
 
 
-nomask static int change_password(string str)
+nomask protected int change_password(string str)
 {
     if(ATTEMPTS > 3)
     {

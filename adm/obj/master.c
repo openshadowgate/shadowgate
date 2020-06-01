@@ -13,7 +13,7 @@
 // simul_efun object.  Everything written with 'write()' at startup
 // will be printed to stdout.  At startup, the following functions
 // will be called in the following order:
-// 1) create() 
+// 1) create()
 // 2) flag() will be called once for every argument to the command flag -f
 // 3) epilog()
 // Finally, the game will enter multiuser mode and users can login.
@@ -40,7 +40,7 @@
 #define READ 0
 #define WRITE 1
 
-static mapping access, groups, privs;
+nosave mapping access, groups, privs;
 
 string creator_file(string str);
 void preload(string str);
@@ -155,7 +155,7 @@ void load_privs() {
     }
 }
 
-string *query_privs(string file){ 
+string *query_privs(string file){
 	return privs[file];
 }
 
@@ -249,16 +249,16 @@ mixed connect() {
     return ob;
 }
 
-mixed compile_object(string file) 
+mixed compile_object(string file)
 {
     return (mixed)VIRTUAL_D->compile_object(file);
 }
 
-static void crash(string err) {
+protected void crash(string err) {
     log_file("crashes", mud_name()+" crashed "+ctime(time())+" with error "+err+".\n");
     shout("
 %^BOLD%^%^BLUE%^Server is shutting down with reason: "+err);
-    shout("%^BOLD%^%^%^BLUE%^Be back shortly!");    
+    shout("%^BOLD%^%^%^BLUE%^Be back shortly!");
     shout("%^YELLOW%^Forcing players to quit.%^RESET%^");
     users()->force_me("quit");
 }
@@ -398,7 +398,7 @@ string author_file(string str) {
     return 0;
 }
 
-static int slow_shutdown() {
+protected int slow_shutdown() {
     log_file("game_log", "Armageddon loaded by master: "+ctime(time())+".\n");
     new(OB_SHUT)->move(ROOM_START);
     SHUT_D->do_armageddon();
@@ -446,7 +446,7 @@ void error_handler(mapping map,int num)
     object ob;
     ob = find_object_or_load("/adm/daemon/error_handler_d.c");
     if(objectp(ob)) ob->process_error(map,num);
-    return;    
+    return;
 }
 /*mixed get_include_path(string file)
 {

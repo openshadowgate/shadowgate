@@ -7,32 +7,12 @@
 #include <ansi.h>
 #include <pwgen.h>
 
-static private int __CrackCount;
-static private string __Name;
-static private object __Player;
-static private string subname, xyz, __ob_name;
-static private int flag = 0;
-static private int __LoginTimeBuffer;
-
-void logon();
-void get_name(string str);
-void get_password(string str);
-int locked_access();
-int check_password(string str);
-int valid_site(string ip);
-int is_copy();
-disconnect_copy(string str, object ob);
-void exec_user();
-void new_user(string str);
-void choose_password(string str);
-void confirm_password(string str2, string str1);
-void choose_gender(string str);
-void enter_email(string str);
-void enter_real_name(string str);
-void idle();
-void receive_message(string cl, string msg);
-private void internal_remove();
-void remove();
+nosave private int __CrackCount;
+nosave private string __Name;
+nosave private object __Player;
+nosave private string subname, xyz, __ob_name;
+nosave private int flag = 0;
+nosave private int __LoginTimeBuffer;
 
 void create()
 {
@@ -42,7 +22,7 @@ void create()
     __Player = 0;
 }
 
-static void logon()
+protected void logon()
 {
     int Z, ttl;
     call_out("idle", LOGON_TIMEOUT);
@@ -91,7 +71,7 @@ static void logon()
     input_to("get_name");
 }
 
-static void get_name(string str) {
+protected void get_name(string str) {
     if (!str || str == "") {
         message("logon", "\nInvalid entry.  Please try again.\n", this_object());
         internal_remove();
@@ -189,7 +169,7 @@ void get_password(string str) {
     if (!is_copy()) exec_user();
 }
 
-static private int locked_access() {
+protected int locked_access() {
     int i;
     string fore, aft;
 
@@ -203,7 +183,7 @@ static private int locked_access() {
     return 0;
 }
 
-static private int check_password(string str) {
+protected int check_password(string str) {
     string pass;
 
     master()->load_player_from_file(__Name, __Player);
@@ -212,7 +192,7 @@ static private int check_password(string str) {
     __Player->remove();
 }
 
-static private int valid_site(string ip) {
+protected int valid_site(string ip) {
     string a, b;
     string *miens;
     int i;
@@ -225,7 +205,7 @@ static private int valid_site(string ip) {
     return 0;
 }
 
-static private int is_copy() {
+protected int is_copy() {
     object ob;
 
     if (!(ob = find_player(__Name))) return 0;
@@ -246,7 +226,7 @@ static private int is_copy() {
     return 1;
 }
 
-static void disconnect_copy(string str, object ob) {
+protected void disconnect_copy(string str, object ob) {
     object tmp;
 
     if (str == "") {
@@ -270,7 +250,7 @@ static void disconnect_copy(string str, object ob) {
     internal_remove();
 }
 
-static private void exec_user()
+protected void exec_user()
 {
     __Player->set_name(__Name);
     if (!exec(__Player, this_object())) {
@@ -284,7 +264,7 @@ static private void exec_user()
     }
     destruct(this_object());
 }
-static void new_user(string str) {
+protected void new_user(string str) {
     if ((str = lower_case(str)) == "" || str[0] != 'y') {
         message("logon", "\nOk, then enter the name you really want: ", this_object());
         input_to("get_name");
@@ -294,7 +274,7 @@ static void new_user(string str) {
     input_to("choose_password", I_NOECHO | I_NOESC);
 }
 
-static void choose_password(string str) {
+protected void choose_password(string str) {
     if (strlen(str) < 6) {
         message("logon", "\nYour password must be at least 6 characters long.\n",
                 this_object());
@@ -305,7 +285,7 @@ static void choose_password(string str) {
     input_to("confirm_password", I_NOECHO | I_NOESC, str);
 }
 
-static void confirm_password(string str2, string str1)
+protected void confirm_password(string str2, string str1)
 {
     string salt;
     salt = PWGEN->random_salt(43);
@@ -334,7 +314,7 @@ decision.
         return;
     }
 }
-static void ansi_test(string str) {
+protected void ansi_test(string str) {
     str=capitalize(str);
     if (str != "Y" && str != "N") {
         message("logon", "\nPlease enter Y for yes, or N for no.\n",
@@ -364,7 +344,7 @@ Your email address: ", mud_name()), this_object());
 
 }
 
-static void enter_email(string str) {
+protected void enter_email(string str) {
     string a, b;
 
     __Player->set_email(str);
@@ -376,12 +356,12 @@ static void enter_email(string str) {
     exec_user();
 }
 
-static void idle() {
+protected void idle() {
     message("logon", "\nLogin timed out.\n", this_object());
     internal_remove();
 }
 
-static void receive_message(string cl, string msg)
+protected void receive_message(string cl, string msg)
 {
     mapping TermInfo;
     if (cl != "logon") return;
@@ -391,7 +371,7 @@ static void receive_message(string cl, string msg)
     receive(msg);
 }
 
-static private void internal_remove() {
+protected void internal_remove() {
     if (__Player) destruct(__Player);
     destruct(this_object());
 }

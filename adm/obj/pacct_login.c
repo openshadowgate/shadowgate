@@ -10,33 +10,12 @@
 #include <daemons.h>
 #include <objects.h>
 #include <ansi.h>
-static private int __CrackCount;
-static private string __Name;
-static private string __Email;
-static private object __Player, __Pacct;
-static private string subname, xyz, __ob_name;
-static private int flag = 0;
-
-void logon();
-static void get_email(string str);
-static void get_pacct_password(string str);
-static void get_user_password(string str);
-static private int locked_access();
-static private int check_password(string str);
-static private int valid_site(string ip);
-static private int is_copy();
-static void disconnect_copy(string str, object ob);
-static private void exec_user();
-static void new_pacct(string str);
-static void choose_pacct_password(string str);
-static void confirm_pacct_password(string str2, string str1);
-static void choose_gender(string str);
-static void enter_email(string str);
-static void enter_real_name(string str);
-static void idle();
-static void receive_message(string cl, string msg);
-static private void internal_remove();
-void remove();
+nosave private int __CrackCount;
+nosave private string __Name;
+nosave private string __Email;
+nosave private object __Player, __Pacct;
+nosave private string subname, xyz, __ob_name;
+nosave private int flag = 0;
 
 void create() {
     seteuid(UID_ROOT);
@@ -69,7 +48,7 @@ void logon() {
     input_to("get_email");
 }
 
-static void get_email(string str) {
+protected void get_email(string str) {
   string user,host;
 
   if (stringp(str) && (strlen(str) <= 6)) {
@@ -80,7 +59,7 @@ static void get_email(string str) {
     input_to("get_email");
     return;
   }
-  
+
   if( sscanf(str,"%s@%s",user,host) != 2) {
     write("Email address must be in the form user@host.\nPlease input again.");
     input_to("get_email");
@@ -189,7 +168,7 @@ static void get_email(string str) {
     input_to("get__pacct_password", I_NOECHO | I_NOESC);
 }
 
-static void get_pacct_password(string str) {
+protected void get_pacct_password(string str) {
     if (!str || str == "") {
         message("logon", "\nYou must enter a password.  Try again later.\n",
                 this_object());
@@ -226,7 +205,7 @@ static void get_pacct_password(string str) {
         seteuid(getuid());
     if (!is_copy()) exec_user();
 }
-static void get_user_password(string str) {
+protected void get_user_password(string str) {
     if (!str || str == "") {
         message("logon", "\nYou must enter a password.  Try again later.\n",
                 this_object());
@@ -270,7 +249,7 @@ static void get_user_password(string str) {
     if (!is_copy()) exec_user();
 }
 
-static private int locked_access() {
+protected int locked_access() {
     int i;
     string fore, aft;
 
@@ -288,7 +267,7 @@ static private int locked_access() {
     return 0;
 }
 
-static private int check_password(string str) {
+protected int check_password(string str) {
     string pass;
 
     master()->load_player_from_file(__Name, __Player);
@@ -296,7 +275,7 @@ static private int check_password(string str) {
     return valid_site(query_ip_number());
 }
 
-static private int valid_site(string ip) {
+protected int valid_site(string ip) {
     string a, b;
     string *miens;
     int i;
@@ -309,7 +288,7 @@ static private int valid_site(string ip) {
     return 0;
 }
 
-static private int is_copy() {
+protected int is_copy() {
     object ob;
 
     if (!(ob = find_player(__Name))) return 0;
@@ -330,7 +309,7 @@ static private int is_copy() {
     return 1;
 }
 
-static void disconnect_copy(string str, object ob) {
+protected void disconnect_copy(string str, object ob) {
     object tmp;
 
     if ((str = lower_case(str)) == "" || str[0] != 'y') {
@@ -356,7 +335,7 @@ static void disconnect_copy(string str, object ob) {
     internal_remove();
 }
 
-static private void exec_user() {
+protected void exec_user() {
     if (MULTI_D->query_prevent_login(__Name)) {
         internal_remove();
         return;
@@ -373,7 +352,7 @@ static private void exec_user() {
     destruct(this_object());
 }
 
-static void new_pacct(string str) {
+protected void new_pacct(string str) {
     if ((str = lower_case(str)) == "" || str[0] != 'y') {
         message("logon", "\nOk, then enter your real email address: ", this_object());
         input_to("get_email");
@@ -383,7 +362,7 @@ static void new_pacct(string str) {
     input_to("choose_pacct_password", I_NOECHO | I_NOESC);
 }
 
-static void choose_pacct_password(string str) {
+protected void choose_pacct_password(string str) {
     if (strlen(str) < 5) {
         message("logon", "\nYour password must be at least 5 letters long.\n",
                 this_object());
@@ -394,7 +373,7 @@ static void choose_pacct_password(string str) {
     input_to("confirm_pacct_password", I_NOECHO | I_NOESC, str);
 }
 
-static void confirm_pacct_password(string str2, string str1) {
+protected void confirm_pacct_password(string str2, string str1) {
     if (str1 == str2) {
         __Pacct->set_password(str2 = crypt(str2, 0));
 
@@ -406,7 +385,7 @@ static void confirm_pacct_password(string str2, string str1) {
     }
 }
 
-static void start_ansi() {
+protected void start_ansi() {
         message("logon",
 @BELPHY
 
@@ -425,7 +404,7 @@ BELPHY
         input_to("ansi_test");
 }
 
-static void ansi_test(string str) {
+protected void ansi_test(string str) {
     str=capitalize(str);
     if (str != "Y" && str != "N") {
         message("logon", "\nPlease enter Y for yes, or N for no.\n",
@@ -453,7 +432,7 @@ static void ansi_test(string str) {
 
 }
 
-static void choose_gender(string str) {
+protected void choose_gender(string str) {
     if (str != "male" && str != "female") {
         message("logon", "\nCute, but pretend to be "+
                 "either male or female instead.\n",
@@ -470,7 +449,7 @@ static void choose_gender(string str) {
     input_to("enter_real_name");
 }
 
-static void enter_real_name(string str) {
+protected void enter_real_name(string str) {
     if (!str || str == "") str = "Unknown";
     __Player->set_rname(str);
     seteuid(UID_LOG);
@@ -481,17 +460,17 @@ static void enter_real_name(string str) {
     exec_user();
 }
 
-static void idle() {
+protected void idle() {
     message("logon", "\nLogin timed out.\n", this_object());
     internal_remove();
 }
 
-static void receive_message(string cl, string msg) {
+protected void receive_message(string cl, string msg) {
     if (member_array(cl,({ "broadcast","shutdown","logon" }) ) == -1 ) return;
     receive(msg);
 }
 
-static private void internal_remove() {
+protected void internal_remove() {
     if (__Player) destruct(__Player);
     destruct(this_object());
 }
@@ -500,4 +479,3 @@ void remove() {
     if (geteuid(previous_object()) != UID_ROOT) return;
     internal_remove();
 }
-
