@@ -31,7 +31,9 @@ private string save_file_name(string name) {
 nomask int restore_player(string name) {
 	int res;
         if(geteuid(previous_object()) != UID_ROOT &&
-          geteuid(previous_object()) != UID_USERACCESS) return 0;
+           geteuid(previous_object()) != UID_BACKBONE &&
+           geteuid(previous_object()) != UID_USERACCESS) return 0;
+	
 	res = restore_object(save_file_name(name));
 	seteuid(0); // was seteuid(0);
 	return res;
