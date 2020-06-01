@@ -170,7 +170,7 @@ void execute_attack()
             num = 1;
             tell_object(attackers[i], "%^BOLD%^%^CYAN%^" + caster->QCN + "'s " + weapons[0]->query_short() + " slams "
                         "into you as it sweeps by!%^RESET%^");
-            attackers[i]->do_damage(attackers[i]->return_target_limb(), dam);
+            attackers[i]->cause_typed_damage(attackers[i],attackers[i]->return_target_limb(), dam, weapons[0]->query_damage_type());
             if (reaping && !attackers[i]->fort_save(clevel) && !attackers[i]->query_property("no knockdown") && !attackers[i]->query_property("no trip")) {
                 tell_object(attackers[i], "%^BOLD%^%^GREEN%^" + caster->QCN + "'s " + weapons[0]->query_short() + " hits you with "
                             "such force that it knocks you flat onto the ground!");

@@ -119,18 +119,21 @@ int extra_hit(object targ)
             tell_object(targ, "%^BOLD%^" + ETO->QCN + " spins " + ETO->QP + " elven curved blade quickly and turns " + ETO->QP + " body, using the momentum to hit you with devastating force!%^RESET%^");
             tell_room(EETO, "%^BOLD%^" + ETO->QCN + " spins " + ETO->QP + " elven curved blade quickly and turns " + ETO->QP + " body, using the momentum to hit " + targ->QCN + " with a devastating blow!%^RESET%^", ({ targ, ETO }));
             targ->cause_typed_damage(targ, targ->return_target_limb(), TO->special_damage(), TO->query_damage_type());
+            break;
 
         case 4..5: // between 3 and 5 or 30%
             tell_object(ETO, "%^GREEN%^With uncanny precision, you bring your elven curved blade down on " + targ->QCN + " in a deadly overhead chop!%^RESET%^");
             tell_object(targ, "%^GREEN%^With uncanny precision, " + ETO->QCN + " brings " + ETO->QP + " elven curved blade down on you in a deadly overhead chop!%^RESET%^");
             tell_room(EETO, "%^GREEN%^With uncanny precision, " + ETO->QCN + " brings " + ETO->QP + " elven curved blade down on " + targ->QCN + " in a deadly overhead chop!%^RESET%^", ({ targ, ETO }));
             targ->cause_typed_damage(targ, targ->return_target_limb(), TO->special_damage() * 150 / 100, TO->query_damage_type());
+            break;
 
         case 6..7:
             tell_object(ETO, "%^CYAN%^You twirl the elven curved blade quickly and send the flat of the blade down low, sweeping under " + targ->QCN + " and knocking " + targ->QO + " down!%^RESET%^");
             tell_object(targ, "%^CYAN%^" + ETO->QCN + " twirls the elven curved blade quickly and sends the flat of the blade down, sweeping under you and knocking you down!%^RESET%^");
             tell_room(EETO, "%^CYAN%^" + ETO->QCN + " twirls the elven curved blade quickly and sends the flat of the blade down low, sweeping under " + targ->QCN + " and knocking " + targ->QP + " down!%^RESET%^", ({ targ, ETO }));
             targ->set_paralyzed(roll_dice(1, 10) + 10, "%^GREEN%^You are struggling to stand up!%^RESET%^");
+            break;
 
         case 8..9:
             tell_object(ETO, "%^RESET%^%^BOLD%^%^BLUE%^You snap the flat of one the blade down atop " + targ->QCN + "'s head and use the force of the rebound to launch another attack!%^RESET%^");
@@ -140,6 +143,7 @@ int extra_hit(object targ)
                 ETO->execute_attack();
                 ETO->execute_attack();
             }
+            break;
 
         case 10:
             if ((member_array("neck", targ->query_limbs()) != -1) && !random(10) && !targ->reflex_save(50) && !targ->query_property("no death") && !FEATS_D->usable_feat(targ, "death ward")) { //increased reflex save to 50 so everyone doesn't autopass it
@@ -160,7 +164,7 @@ int extra_hit(object targ)
                 targ->cause_typed_damage(targ, "neck", roll_dice(500000, 500000), TO->query_damage_type());
                 ETO->set_property("noMissChance", 1);
                 head->move(EETO);
-                return 1;
+                break;
             }
             tell_object(ETO, "%^BOLD%^%^RED%^You drop to one knee and snap the elven curved blade in a deadly upwards arc!%^RESET%^");
             tell_object(ETO, "%^BOLD%^%^BLUE%^%^BLUE%^At the last instant, " + targ->QCN + " manages to dodge out of the way, avoiding the fatal strike!%^RESET%^");
@@ -178,7 +182,7 @@ int extra_hit(object targ)
             if (!targ->will_save(40)) {
                 targ->set_temporary_blinded(roll_dice(1, 4));
             }
-            return 1;
+            break;
         }
     }
     return 0;
