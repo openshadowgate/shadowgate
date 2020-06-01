@@ -381,10 +381,10 @@ void execute_attack()
     if (objectp(target_two)) {
         if (target_two->query_property("weapon resistance")) {
             if (enchant < (int)target_two->query_property("weapon resistance")) {
-                target_two->do_damage(target_two->return_target_limb(), 0);
+                target_two->cause_typed_damage(target_two, target_two->return_target_limb(), 0, weapons[0]->query_damage_type());
             }
         }else {
-            target_two->do_damage(target_two->return_target_limb(), dam);
+            target_two->cause_typed_damage(target_two, target_two->return_target_limb(), dam, weapons[0]->query_damage_type());
         }
 
         newmap += ([ target_two:timerz ]);
