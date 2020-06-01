@@ -18,12 +18,6 @@ inherit OB_USER;
 string true_name;
 string myclass;
 
-string alig_str(string what, int x);
-string query_title();
-string query_last_on();
-string query_hah(object ob, int verbose);
-static void complete_variables();
-
 void create() {
     seteuid(getuid());
 }
@@ -291,7 +285,7 @@ void save_player(string file) {
     save_object(file);
 }
 
-static void complete_variables() {
+protected void complete_variables() {
     if (!true_name) true_name = "";
     if (!real_name) real_name = "???";
     if (!myclass) myclass = "child";

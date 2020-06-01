@@ -11,7 +11,7 @@
 #define MAX_CELL_TIER 4
 
 mapping account;
-static string current;
+nosave string current;
 
 int valid_access(string who);
 int account_exists(string who);

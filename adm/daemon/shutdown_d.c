@@ -23,20 +23,6 @@
 
 inherit DAEMON;
 
-int initShutdownDaemon();
-int checkMemory();
-int stopMemoryCheck();
-int notifyUsers(string msg);
-int startShutdown(int type, int time);
-int countDown();
-int cancelShutdown();
-int executeShutdown();
-int emergencyShutdown();
-int enableShutdown();
-void do_armageddon(int tmp);
-static void cancel_it();
-int query_login_allow();
-
 object *queue;
 int timeLeft, armShutdown, loginAllow;
 int shuttingDown, time_estimate;
@@ -274,10 +260,10 @@ int disableShutdown()
   return 1;
 }
 
-static void cancel_it()
+protected void cancel_it()
 {
-  cancelShutdown();
-  return;
+    cancelShutdown();
+    return;
 }
 
 int cancelShutdown()

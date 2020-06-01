@@ -2,10 +2,6 @@
 #include <security.h>
 #include <network.h>
 
-void send_affirmation_a(string host, string port, string de, string a,
-string msg, string type);
-static private string *build_mudlist(mapping muds);
-
 void create() {
     seteuid(getuid());
 }
@@ -425,21 +421,32 @@ sprintf("@@@%s||NAME:%s||PORTUDP:%d||CMD:%s||PARAM:%s||ANSWERID:%s@@@\n",
     return 1;
   }
 
-static int filter_invis(object ob) {
+protected int filter_invis(object ob)
+{
     return (!((int)ob->query_invis()) && !hiddenp(ob));
-  }
+}
 
-static int filter_admins(object ob) { return archp(ob); }
+protected int filter_admins(object ob)
+{
+    return archp(ob);
+}
 
-static int filter_creators(object ob) { return wizardp(ob) && !archp(ob); }
+protected int filter_creators(object ob)
+{
+    return wizardp(ob) && !archp(ob);
+}
 
+protected int filter_hm(object ob)
+{
+    return high_mortalp(ob);
+}
 
-static int filter_hm(object ob) { return high_mortalp(ob); }
-
-static int filter_mortals(object ob) {
+protected int filter_mortals(object ob)
+{
     return (!wizardp(ob) && !high_mortalp(ob));
-  }
-static private string *build_mudlist(mapping muds) {
+}
+
+protected private string *build_mudlist(mapping muds) {
     string *noms, *ret;
     int i, pos, maxi;
 

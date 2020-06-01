@@ -10,7 +10,7 @@
 */
 
 #ifdef DEBUG_MACRO
-static int _debug_level;
+nosave int _debug_level;
 #define set_debug_level(x) _debug_level = x;
 #ifdef TELL
 /* debug tries to tell the player specifed by #define TELL "playername" */

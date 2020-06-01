@@ -24,16 +24,32 @@ void create() {
     seteuid(getuid());
 }
 
-static void complete_variables() 
+protected void complete_variables()
 {
-    if (!true_name) true_name = "";
-    if (!real_name) real_name = "???";
-    if (!classes) classes =  ({ "child" });
-    if (!last_on) last_on = "no record";
-    if (!ip) ip = "nowhere";
-    if (!level) level = -1;
-    if(!query("race")) set("race","Unborn");
-    if (!player_age) player_age = 0;
+    if (!true_name) {
+        true_name = "";
+    }
+    if (!real_name) {
+        real_name = "???";
+    }
+    if (!classes) {
+        classes = ({ "child" });
+    }
+    if (!last_on) {
+        last_on = "no record";
+    }
+    if (!ip) {
+        ip = "nowhere";
+    }
+    if (!level) {
+        level = -1;
+    }
+    if (!query("race")) {
+        set("race", "Unborn");
+    }
+    if (!player_age) {
+        player_age = 0;
+    }
 }
 
 string avatar_finger_display(string who) {
@@ -294,4 +310,3 @@ string alig_str(string what, int x) {
     for (y=0; y<=x; y++) out += " ";
     return out;
 }
-

@@ -4,11 +4,10 @@
 
 inherit DAEMON;
 
-static string *valid_mtype = ({"chanmsg"});
+nosave string *valid_mtype = ({"chanmsg"});
 
 void create()
 {
     ::create();
-    seteuid(getuid());    
+    seteuid(getuid());
 }
-

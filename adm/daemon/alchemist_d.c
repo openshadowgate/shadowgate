@@ -13,10 +13,10 @@
 
 inherit "/std/prop_logic";
 
-static string *props;      // Names of properties all objects must have
-static int num_props;      // number of properties in the above array
-       mapping properties; // Values of those properties for each material
-static string save_file;   // place where the data for the above mapping is kept
+nosave string* props;      // Names of properties all objects must have
+nosave int num_props;      // number of properties in the above array
+mapping properties;        // Values of those properties for each material
+nosave string save_file;   // place where the data for the above mapping is kept
 
 mixed get( string property )
 {

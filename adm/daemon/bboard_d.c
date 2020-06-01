@@ -12,8 +12,8 @@ inherit DAEMON;
 
 mapping *posts;
 mixed *read_by;
-static string *edit_ok;
-static string current;
+nosave string *edit_ok;
+nosave string current;
 
 int valid_edit(int x, string id);
 string when(int x);

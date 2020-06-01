@@ -32,13 +32,13 @@
   //
   obj = to_object("!key@%truilkan");
   //
-  // find the orc NPC which is in the bag which is in the church 
+  // find the orc NPC which is in the bag which is in the church
   //
   obj = to_object("$orc@!bag@/room/church");
   //
   //  Destroy the 4th object in the inventory of the environment of this
   //  player (0 is the first object :)
-  // 
+  //
   to_object("#3@here")->remove();
 */
 
@@ -46,14 +46,14 @@
 
 #include <debug.h>
 
-static object
+protected object
 e(object p, int outside)
 {
-   if (outside) {
-      return p ? environment(p) : 0;
-   } else {
-      return p;
-   }
+    if (outside) {
+        return p ? environment(p) : 0;
+    } else {
+        return p;
+    }
 }
 
 object

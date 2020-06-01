@@ -5,16 +5,16 @@
 #define SAVE_FILE "/daemon/save/average_age"
 
 //keeping a mapping of 40 players last on to be counted for the average - probably not needed to calculate
-//anymore than this - Saide 
+//anymore than this - Saide
 mapping PLAYER_LIST;
 
 int average, original_average;
 
-static int TWO_WEEKS = 1209600;
+nosave int TWO_WEEKS = 1209600;
 //minimum age for them to count toward the average - should be 6 hours right now - Saide
-static int MIN_AGE = 21600;
+nosave int MIN_AGE = 21600;
 //minimum percent of age that a player needs in order to be able to engage in player kill situations - Saide
-static int MIN_PERC = 40;
+nosave int MIN_PERC = 40;
 
 
 void check_average();
@@ -48,10 +48,10 @@ void check_average()
 }
 void restore_average_age()
 {
-    if(!average) 
-    {   
+    if(!average)
+    {
         seteuid(UID_ROOT);
-        if(file_exists(SAVE_FILE +".o") || file_exists(SAVE_FILE)) 
+        if(file_exists(SAVE_FILE +".o") || file_exists(SAVE_FILE))
         {
             seteuid(UID_RESTORE);
             restore_object(SAVE_FILE);
@@ -61,9 +61,9 @@ void restore_average_age()
     }
     if(!average) average = "/adm/daemon/user_age_d.c"->GET_AVERAGE_TIME();
     if(average == -1) call_out("check_average", 600);
-    if(!mapp(PLAYER_LIST)) 
+    if(!mapp(PLAYER_LIST))
     {
-        PLAYER_LIST = ([]);  
+        PLAYER_LIST = ([]);
         original_average = average;
         save_average_age();
     }
@@ -97,7 +97,7 @@ void update_average()
 {
     string *player_names;
     int x, y, tmp;
-    if(average == -1) 
+    if(average == -1)
     {
         //some reason it is trying to get it from the daemon and hasn't yet - Saide
         call_out("update_average", 600);
@@ -108,7 +108,7 @@ void update_average()
     player_names = keys(PLAYER_LIST);
     y = sizeof(player_names);
     if(y > 40) y = 40;
-    if(y < 20) 
+    if(y < 20)
     {
         //let's only update the average once 20 current characters have logged in - Saide
         if(average != original_average) average = original_average;
@@ -118,15 +118,15 @@ void update_average()
     for(x = 0;x < y;x++)
     {
         //tell_object(find_player("saide"), "Adding age for "+player_names[x]);
-        if(tmp > 0) 
+        if(tmp > 0)
         {
             tmp += PLAYER_LIST[player_names[x]]["age"];
             tmp /= 2;
         }
-        else tmp += PLAYER_LIST[player_names[x]]["age"];        
+        else tmp += PLAYER_LIST[player_names[x]]["age"];
         continue;
     }
-    if(tmp) 
+    if(tmp)
     {
         //original_average = average;
         average = tmp;
@@ -148,11 +148,11 @@ varargs void register_player(object who)
     player_name = who->query_name();
     player_names = keys(PLAYER_LIST);
     //there are no people who have been online in the past two weeks - restart
-    if(!sizeof(player_names)) 
-    {    
-        average = original_average; 
+    if(!sizeof(player_names))
+    {
+        average = original_average;
         save_average_age();
-    }        
+    }
     if(sizeof(player_names) >= 40 && member_array(player_name, player_names) == -1) return;
     player_age = who->query_age();
     player_last_on = who->query_quit_time();
@@ -172,9 +172,9 @@ varargs void register_player(object who)
 
 string *contributors() { return keys(PLAYER_LIST); }
 int return_rolling_average() { return average; }
-int return_age_needed(int lev) 
-{ 
-    if(!intp(lev)) return (average * MIN_PERC) / 100; 
+int return_age_needed(int lev)
+{
+    if(!intp(lev)) return (average * MIN_PERC) / 100;
     if(lev < 21) return 0;
     else if(lev >= 21 && lev < 26) return (average * (MIN_PERC/5)) / 100;
     else if(lev >= 26 && lev < 30) return (average * (MIN_PERC/4)) / 100;
