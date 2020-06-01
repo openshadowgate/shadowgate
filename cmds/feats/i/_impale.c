@@ -372,10 +372,10 @@ void execute_attack()
 
     if (target->query_property("weapon resistance")) {
         if (enchant < (int)target->query_property("weapon resistance")) {
-            target->do_damage(target->return_target_limb(), 0);
+            target->cause_typed_damage(target, target->return_target_limb(), 0, weapons[0]->query_damage_type() );
         }
     }else {
-        target->do_damage(target->return_target_limb(), dam);
+        target->cause_typed_damage(target, target->return_target_limb(), dam, weapons[0]->query_damage_type());
     }
 
     if (objectp(target_two)) {

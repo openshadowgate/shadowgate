@@ -140,7 +140,7 @@ void execute_feat()
 void execute_attack()
 {
     int damage, timerz, i, res;
-    object* weapons, * keyz;
+    object* weapons, * keyz, weapon;
     mapping tempmap, newmap;
 
     if (!objectp(caster)) {
@@ -221,16 +221,22 @@ void execute_attack()
         return;
     }
 
-    damage = roll_dice(clevel, 8); // up to d8 on a trial basis
-    if ((int)target->query_size() < 3) {
-        damage += weapons[0]->query_damage();
-    }else {
-        damage += weapons[0]->query_large_damage();
+    if(weapons[0]->is_lrweapon())
+    {
+      weapon = weapons[0];
     }
+    else{
+      weapon = weapons[1];
+    }
+
+    damage = roll_dice(clevel, 8); // up to d8 on a trial basis
+
+    damage += weapon->query_damage();
+
     damage += "/daemon/bonus_d"->damage_bonus(caster->query_stats("dexterity"));
     damage += (int)caster->query_damage_bonus();
     if (target->query_property("weapon resistance")) {
-        if ((int)weapons[0]->query_property("enchantment") < (int)target->query_property("weapon resistance")) {
+        if ((int)weapon->query_property("enchantment") < (int)target->query_property("weapon resistance")) {
             damage = 0;
         }
     }
@@ -239,7 +245,7 @@ void execute_attack()
     tell_room(environment(caster), "%^BOLD%^%^YELLOW%^" + caster->QCN + "'s shot flies true and thuds deep into " + target->QCN + ", the sheer force of it causing " + target->QO + " to stumble!", ({ caster, target }));
     tell_object(target, "%^BOLD%^%^YELLOW%^" + caster->QCN + "'s shot flies true and thuds deep into you, the sheer force and pain of it causing you to stumble momentarily!");
 
-    caster->cause_damage_to(target, target->return_target_limb(), damage);
+    caster->cause_typed_damage(target, target->return_target_limb(), damage, weapon->query_damage_type());
 
     if (!objectp(target)) {
         dest_effect();

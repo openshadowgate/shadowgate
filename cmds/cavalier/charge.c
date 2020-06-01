@@ -23,7 +23,7 @@ void create()
     ::create();
     set_heart_beat(1);
     set_no_clean(1);
-    DEBUG = 1; 
+    DEBUG = 1;
 }
 
 void set_target(string x) { target=x; }
@@ -38,15 +38,15 @@ void set_tp(object x)
 void heart_beat()
 {
     if(!objectp(TO)) return;
-    if(!objectp(tp)) 
+    if(!objectp(tp))
     {
-        remove(); 
-        return; 
-    }    
-    
-    if (counter > 3) 
+        remove();
+        return;
+    }
+
+    if (counter > 3)
     {
-        if(env == environment(tp)) 
+        if(env == environment(tp))
         {
             tell_object(tp,"%^BOLD%^%^BLUE%^You have not continued the charge, you pull your horse up.");
             tell_room(environment(tp),"%^BOLD%^%^BLUE%^"+tp->QCN+" pulls "+tp->QP+" horse up.",tp);
@@ -56,19 +56,19 @@ void heart_beat()
             tp->remove_property("charge_target_found");
             remove();
             return;
-        } 
+        }
         else { counter = 0; }
     }
 
     counter++;
 
-    if(time >= level && level > 0) 
+    if(time >= level && level > 0)
     {
-        if (objectp(tp)) 
+        if (objectp(tp))
         {
             tell_object(tp,"%^BOLD%^%^BLUE%^You have expended too much energy on charging, you pull your horse up.");
             tell_room(environment(tp),"%^BOLD%^%^BLUE%^"+tp->QCN+" pulls "+tp->QP+" horse up.",tp);
-            tp->remove_property("charging");         
+            tp->remove_property("charging");
             tp->remove_property("charging object");
             tp->remove_property("using instant feat");
             tp->remove_property("charge_target_found");
@@ -81,14 +81,14 @@ void heart_beat()
 
     //if(objectp(tp)) tell_object(tp,"timer = "+time+" counter = "+counter);
 
-    if(objectp(tp)) 
-    { 
+    if(objectp(tp))
+    {
         if(!tp->query_property("charge_target_found")) TO->do_work();
     }
 }
- 
- 
-void do_harm(int damage, object ob, object play) 
+
+
+void do_harm(int damage, object ob, object play)
 {
     int thaco,roll;
     object *weapon;
@@ -96,30 +96,30 @@ void do_harm(int damage, object ob, object play)
     if(!objectp(TO)) { return; }
     // added weapon & in_vehicle checks *Styx* 12/24/03, last change 10/17/03
 
-    
-    if (!objectp(play)) { 
+
+    if (!objectp(play)) {
         remove();
-        return; 
+        return;
     }
-    
+
     weapon = play->query_wielded();
-    
+
     play->remove_property("using instant feat");
     play->remove_property("charging object");
     play->remove_property("charging");
     play->remove_property("charge_target_found");
-    if(!objectp(ob)) { 
+    if(!objectp(ob)) {
         remove();
-        return; 
-    }    
+        return;
+    }
     if (play->query_bound() || play->query_tripped()) {
         play->send_paralyzed_message("info",play);
         remove();
         return;
     }
-    if(ob->query_deaths_door()) { 
+    if(ob->query_deaths_door()) {
         remove();
-        return; 
+        return;
     }
     if(!present(ob, environment(play))) {
         tell_object(play,"%^BOLD%^You realize that your opponent has escaped your charge.");
@@ -169,16 +169,16 @@ void do_harm(int damage, object ob, object play)
         tell_object(ob,"%^BOLD%^"+play->QCN+" rides with tremendous force into you, "+play->QP+" weapon doing great damage!\n");
         //play->set_disable(1,ob);
         ob->kill_ob(tp,1);
-        play->cause_damage_to(ob,ob->return_target_limb(),damage);
-        play->cause_damage_to(ob,ob->return_target_limb(),(int)play->get_damage(weapon[0]));
+        play->cause_typed_damage(ob,ob->return_target_limb(),damage,weapon[0]->query_damage_type());
+        play->cause_typed_damage(ob,ob->return_target_limb(),(int)play->get_damage(weapon[0]),weapon[0]->query_damage_type());
         ob->set_paralyzed(8,"You are recovering from that last hit.");
-    } 
+    }
     else {
         tell_room(environment(tp),"%^BOLD%^%^BLUE%^As "+tpqcn+" charges, "+ob->QCN+" manages to dodge the attack.",({tp,ob}));
         tell_object(tp,"%^BOLD%^%^BLUE%^"+ob->QCN+" dodges your charge.");
         tell_object(ob,"%^BOLD%^%^BLUE%^You successfully dodge the charge.");
     }
-   
+
     flag = 1;
     tp->remove_property("charging");
     tp->remove_property("charging object");
@@ -192,7 +192,7 @@ void do_harm(int damage, object ob, object play)
     return;
 }
 
-// Could possibly consider making trample into it's own object to randomly trample stuff on heartbeat 
+// Could possibly consider making trample into it's own object to randomly trample stuff on heartbeat
 // instead of firing right before charge lands.  Would risk trampling and charging the same target tho
 void do_trample(int damage,object targ,object play) {
     int i,dam,mod,bonus,roll,thaco,cbonus;
@@ -220,9 +220,9 @@ void do_trample(int damage,object targ,object play) {
     attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     roll   = (roll_dice(1,20)-rooms);
     weapon = tp->query_wielded();
-    if(weapon == ({})) { 
+    if(weapon == ({})) {
         remove();
-        return; 
+        return;
     }
 
     // There's a thaco check to see if the trample lands, and a random roll modified by the
@@ -232,22 +232,22 @@ void do_trample(int damage,object targ,object play) {
     {
         for(i=0;i<sizeof(attackers);i++)
         {
-            if(!objectp(attackers[i])) { continue; }            
+            if(!objectp(attackers[i])) { continue; }
             if((int)attackers[i]->query_property("trampled") > time()) { continue; } // So they can't get trampled more than once
             attackers[i]->set_property("trampled",time() + 10);
             thaco  = tp->Thaco(1,attackers[i],weapon[0],"cavalier");
-            if( thaco >= roll) 
-            { 
+            if( thaco >= roll)
+            {
                 tell_object(tp,"%^BOLD%^"+attackers[i]->QCN+" easily avoids being trampled by your mount!%^RESET%^");
                 tell_object(attackers[i],"%^BOLD%^You easily avoid "+tp->QCN+"'s trampling mount!%^RESET%^");
                 tell_room(environment(tp),"%^BOLD%^"+attackers[i]->QCN+" easily avoids "+tp->QCN+"'s trampling "
                     "mount!%^RESET%^",({tp,attackers[i]}));
-                continue; 
+                continue;
             }
             bonus  = "/daemon/bonus_d.c"->query_dex_bonus(attackers[i]);
             cbonus = level/5;
             if((roll_dice(1,20) + bonus) < (roll_dice(1,20) - cbonus) ) // Might need to tweak this until we find a good balance
-            {   
+            {
                 tell_object(tp,"%^MAGENTA%^"+attackers[i]->QCN+" dodges out of the way as you "
                     "charge towards "+targ->QCN+"!");
                 tell_object(attackers[i],"%^MAGENTA%^You dodge out of the way as "+tp->QCN+" charges "
@@ -255,8 +255,8 @@ void do_trample(int damage,object targ,object play) {
                 tell_object(targ,"%^MAGENTA%^"+attackers[i]->QCN+" dodges out of the way as "+tp->QCN+" charges "
                     "towards you!%^RESET%^");
                 tell_room(environment(tp),"%^MAGENTA%^"+attackers[i]->QCN+" dodges out of the way "
-                    "as "+tp->QCN+" charges towards "+targ->QCN+"!%^RESET%^",({ targ,tp,attackers[i]}) ); 
-                continue; 
+                    "as "+tp->QCN+" charges towards "+targ->QCN+"!%^RESET%^",({ targ,tp,attackers[i]}) );
+                continue;
             }
             dam = damage;
             mod = roll_dice(1,20);
@@ -360,7 +360,7 @@ int do_room(string str) {
     tell_room(environment(tp), "%^BOLD%^%^BLUE%^"+tpqcn+" digs "+tp->QP+" heels into "+tp->QP+" "+tp->query_in_vehicle()->QCN+".",tp);
     tell_object(tp,"%^BOLD%^%^BLUE%^You dig your heels into your "+tp->query_in_vehicle()->QCN+".");
     tell_object(ob,"%^BOLD%^%^BLUE%^"+tpqcn+" is charging toward you!!!");
-    
+
     weapon = tp->query_wielded();
     if((int)ob->query_size() < 3)   { damage = weapon[0]->query_damage(); }
     else                            { damage = weapon[0]->query_large_damage(); }
@@ -369,13 +369,13 @@ int do_room(string str) {
 
     added = rooms;
     if(added > 5 && ob->is_player()) { added = 5; }
-    damage += added * (random(level)+10); // Adds random(level) + 10 damage per room up to a max of 5 in pkill 
+    damage += added * (random(level)+10); // Adds random(level) + 10 damage per room up to a max of 5 in pkill
 
     damage += roll_dice(level,6); //tuned to d6 like most skills these days!
-       
-    if (ob->query_property("weapon resistance")) 
+
+    if (ob->query_property("weapon resistance"))
     {
-        if((weapon[0]->query_property("enchantment")) < (ob->query_property("weapon resistance")) ) 
+        if((weapon[0]->query_property("enchantment")) < (ob->query_property("weapon resistance")) )
         {
             damage = 0;
         }
@@ -413,12 +413,12 @@ int can_charge(object who)
     if(!objectp(who)) return 0;
     weapon = who->query_wielded();
 
-    if (who->query_bound() || who->query_tripped() || who->query_paralyzed()) 
+    if (who->query_bound() || who->query_tripped() || who->query_paralyzed())
     {
         who->send_paralyzed_message("info",TP);
         return 0;
     }
-    if ((weapon == ({}))) 
+    if ((weapon == ({})))
     {
         write("This attack is useless without weapons!\n");
         return 0;
@@ -429,24 +429,24 @@ int can_charge(object who)
         return 0;
     }
     /*
-    if (!weapon[0]->query_property("lance")) 
+    if (!weapon[0]->query_property("lance"))
     {
         write("You can charge with only one kind of weapon, a lance.\n");
         return 0;
     }*/
 
-    if (!who->query_in_vehicle() || !objectp((object)who->query_in_vehicle())) 
+    if (!who->query_in_vehicle() || !objectp((object)who->query_in_vehicle()))
     {
         write("You need to be mounted to do that.\n");
         return 0;
     }
-    if (environment(who)->query_property("no charge")) 
+    if (environment(who)->query_property("no charge"))
     {
         if (environment(who)->query_charge_message() == 0) tell_object(who,"You are unable to charge in this room.");
         else tell_object(who,environment(who)->query_charge_message());
         return 0;
     }
-    if (who->query_disable()) 
+    if (who->query_disable())
     {
         // added to explain why charge might not work.
         tell_object(who,"You are unable to disengage from combat just yet.");
@@ -456,25 +456,25 @@ int can_charge(object who)
 }
 
 
-void do_work() 
+void do_work()
 {
     if(!objectp(TO)) { return; }
     if(!objectp(tp)) { return; }
     if(!objectp(environment(tp))) { return; }
-    if(!can_charge(tp)) 
-    { 
+    if(!can_charge(tp))
+    {
         tp->remove_property("charging");
         tp->remove_property("charging object");
         tp->remove_property("using instant feat");
         tp->remove_property("charge_target_found");
-        remove(); 
-        return; 
+        remove();
+        return;
     }
 
     message("info", "%^BOLD%^%^BLUE%^You hear the thunder of charging hooves in the distance.", nearbyRoom(environment(tp),3),tp);
     message("info","%^BOLD%^%^BLUE%^You charge forward", tp);
-    
-    if(present(target, environment(tp))) 
+
+    if(present(target, environment(tp)))
     {
         tp->set_property("charge_target_found",1);
         do_room(target);
@@ -483,7 +483,7 @@ void do_work()
 
     rooms++;
 
-    if (rooms >= level) 
+    if (rooms >= level)
     {
         tell_object(tp,"%^BOLD%^%^BLUE%^You've charged as far as you can.");
         tell_room(environment(tp),"%^BOLD%^%^BLUE%^"+
@@ -518,7 +518,7 @@ void do_exit()
 void remove()
 {
     if(!objectp(TO)) { return; }
-    if (objectp(tp)) 
+    if (objectp(tp))
     {
         tp->remove_property("charging");
         tp->remove_property("charging object");
@@ -570,9 +570,9 @@ int weapon_check(object *weapon)
 
     message += "\t Beginning DC of 10\n";
 
-    if(tp->is_class("paladin") || tp->is_class("cavalier")) 
-    { 
-        DC -= 5; // give paladins and cavaliers a 5 bonus to beat the DC check 
+    if(tp->is_class("paladin") || tp->is_class("cavalier"))
+    {
+        DC -= 5; // give paladins and cavaliers a 5 bonus to beat the DC check
         message += "\t Adding bonus of 5 for paladin or cavalier class\n";
     }
 
@@ -626,7 +626,7 @@ int weapon_check(object *weapon)
         if(effective_size == 0) // normal sized exotic weapons have +10 DC
         {
             message += "\t Exotic weapon of normal size, +10 DC\n";
-            DC += 10; 
+            DC += 10;
             break;
         }
         DC += 20; // non standard sized exotics DC +20

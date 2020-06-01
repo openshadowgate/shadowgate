@@ -124,7 +124,7 @@ void execute_feat()
 
 void execute_attack()
 {
-    object* weapons, * attackers;
+    object* weapons, * attackers, weapon;
     int i, dam, num, enchant, hit;
 
     if (!objectp(caster)) {
@@ -161,7 +161,13 @@ void execute_attack()
         dest_effect();
         return;
        }*/
-
+    if(weapons[0]->is_lrweapon())
+    {
+      weapon = weapons[0];
+    }
+    else{
+      weapon = weapons[1];
+    }
     caster->remove_property("using manyshot");
     caster->set_property("using manyshot", time() + 35);
     delay_messid_msg(35, "%^BOLD%^%^WHITE%^You can %^CYAN%^manyshot%^WHITE%^ again.%^RESET%^");
@@ -173,10 +179,10 @@ void execute_attack()
         if (!objectp(attackers[i])) {
             continue;
         }
-        enchant = weapons[0]->query_property("enchantment");
-        dam = weapons[0]->query_damage();
-        dam += weapons[0]->query_property("enchantment");
-        dam += caster->query_damage_bonus();
+        enchant = weapon->query_property("enchantment");
+        dam = weapon->query_damage();
+        dam += weapon->query_property("enchantment");
+        dam += weapon->query_damage_bonus();
 
         dam += roll_dice((int)caster->query_level(), 5) + roll_dice(2, 8); // this is copied per whirl; please modify if changed.
 
@@ -196,7 +202,7 @@ void execute_attack()
             }
         }
         display_messages(attackers[i], caster);
-        caster->cause_damage_to(attackers[i], attackers[i]->return_target_limb(), dam);
+        caster->cause_typed_damage(attackers[i], attackers[i]->return_target_limb(), dam, weapon->query_damage_type();
         hit = 1;
     }
     if (!hit) {
