@@ -23,7 +23,7 @@ void create()
 
 string query_cast_string()
 {
-    return "%^BOLD%^%^WHITE%^" + caster->QCN + " wavers unevenly as " +caster->QCN+" %^ORANGE%^c%^BOLD%^%^WHITE%^h%^RESET%^%^ORANGE%^a%^BOLD%^%^WHITE%^n%^RESET%^%^ORANGE%^t%^WHITE%^ sonorously.";
+    return "%^BOLD%^%^WHITE%^" + caster->QCN + " wavers unevenly as " +caster->QCN+" %^ORANGE%^c%^BOLD%^%^WHITE%^h%^RESET%^%^ORANGE%^a%^BOLD%^%^WHITE%^n%^RESET%^%^ORANGE%^t%^WHITE%^s sonorously.";
 }
 
 int spell_effect()
