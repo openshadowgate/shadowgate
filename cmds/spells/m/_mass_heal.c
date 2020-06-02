@@ -97,7 +97,7 @@ void spell_effect(int prof)
             if(!present(targets[i],place)) { continue; }
             if(!!target->query_property("negative energy affinity"))
             {
-                tell_room(place,"%^BOLD%^%^CYAN%^A brillaint wave moves through"+
+                tell_room(place,"%^BOLD%^%^CYAN%^A brilliant wave moves through"+
                     " "+targets[i]->QCN+" carrying with it the essence of "+
                     "life, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
                 tell_object(caster,"%^BOLD%^%^CYAN%^A brilliant "+
@@ -115,7 +115,7 @@ void spell_effect(int prof)
             }
             else
             {
-                tell_room(place,"%^BOLD%^%^CYAN%^A brillaint wave moves through"+
+                tell_room(place,"%^BOLD%^%^CYAN%^A brilliant wave moves through"+
                     " "+targets[i]->QCN+" carrying with it the essence of "+
                     "life, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
                 tell_object(caster,"%^BOLD%^%^CYAN%^A brilliant "+
