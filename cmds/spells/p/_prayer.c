@@ -40,7 +40,7 @@ int spell_effect()
     allies = distinct_array(allies);
     allies = filter_array(allies, (: environment($1) == $2 :), place);
 
-    tell_room(place, "%^WHITE%^Soft %^BOLD%^%^WHITE%^r%^RESET%^%^ORANGE%^a%^BOLD%^%^WHITE%^d%^RESET%^%^ORANGE%^i%^ORANGE%^a%^ORANGE%^n%^BOLD%^%^WHITE%^c%^RESET%^%^ORANGE%^e%^WHITE%^ emanates into all directions from" + caster->QCN, caster);
+    tell_room(place, "%^WHITE%^Soft %^BOLD%^%^WHITE%^r%^RESET%^%^ORANGE%^a%^BOLD%^%^WHITE%^d%^RESET%^%^ORANGE%^i%^ORANGE%^a%^ORANGE%^n%^BOLD%^%^WHITE%^c%^RESET%^%^ORANGE%^e%^WHITE%^ emanates into all directions from " + caster->QCN, caster);
     tell_object(caster,"%^WHITE%^You feel %^BOLD%^%^WHITE%^s%^RESET%^%^ORANGE%^o%^ORANGE%^f%^BOLD%^%^WHITE%^t %^WHITE%^radi%^RESET%^%^ORANGE%^a%^BOLD%^%^WHITE%^nce%^RESET%^%^WHITE%^ emanating out from you and washing over everyone in the area.");
 
     foreach(ally in allies)
