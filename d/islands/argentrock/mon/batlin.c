@@ -24,9 +24,8 @@ void create()
     set("aggressive", 2);
     set_size(2);
 
-    set_hd(60, 8);
     set_class("mage");
-    set_mlevel("mage", 68);
+    set_hd(68, 8);
     set_guild_level("mage", 68);
 
     set_overall_ac(-80);
