@@ -52,7 +52,7 @@ void setup()
 void weather()
 {
     string tempcondition;
-    tempcondition = "\n %^BOLD%^%^BLUE%^A chaotic elemental storm scorches the sky, and it seems unseasonably cold!%^RESET%^";
+    tempcondition = "\n %^RESET%^A chaotic elemental storm of %^RESET%^%^ORANGE%^Earth%^RESET%^, %^BOLD%^%^WHITE%^Wind%^RESET%^, %^BOLD%^%^RED%^Fire%^RESET%^, and %^BOLD%^%^BLUE%^Water %^RESET%^scorches the sky!%^RESET%^";
     restore_object(SAVE_WEATHER);
 
     write("%^BOLD%^%^GREEN%^ Time of Day    %^RESET%^%^GREEN%^: %^YELLOW%^" + capitalize(TOD));
@@ -87,7 +87,7 @@ int get_temp(object obj)
     string temp;
     int temperature;
     int modifier;     //adjustable for plots
-    modifier = -10;     //set at 10 for Kismet's climate change plot
+    modifier = 0;     //set at 10 for Kismet's climate change plot
 
     temp = get_zone(obj);
     if (!__CLIMATE) {
