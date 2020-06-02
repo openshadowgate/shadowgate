@@ -30,6 +30,11 @@ string * GIBBERISH = ({
             "You stink!",
             "You're mean! Bye!",
             "Your shoes are untied!",
+            "Your mother was a hamster!",
+            "You father smelt of elderberries!",
+            "I fart in your general direction!",
+            "Klaatu barada nikto",
+            "Are you threatening me?",
                 });
 
 create()
