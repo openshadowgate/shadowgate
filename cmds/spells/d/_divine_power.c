@@ -35,6 +35,8 @@ int preSpell()
         return 0;
     }
     return 1;
+
+    mybonus = clevel / 8;
 }
 
 void spell_effect(int prof)
@@ -43,7 +45,7 @@ void spell_effect(int prof)
               "overwhelm " + caster->QCN + ".%^RESET%^", caster);
     tell_object(caster, "%^BOLD%^%^CYAN%^The madness of war and the need for victory overwhelm you.%^RESET%^");
 
-    mybonus = (int)caster->query_class_level("cleric") / 8;
+
     caster->add_attack_bonus(mybonus);
     caster->add_damage_bonus(mybonus);
     caster->set_property("berserked", 1);
