@@ -147,7 +147,7 @@ int __Value(string str) {
    return 1;
 }
 
-static int __SellAll() {
+protected int __SellAll() {
    tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^Sorry, I do not purchase items.");
    return 1;
 }

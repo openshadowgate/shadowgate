@@ -14,7 +14,7 @@ inherit "/std/spellcaster";
  * @brief Weaponless combatans
  */
 
-static mapping static_weaponless = ([]);
+nosave mapping static_weaponless = ([]);
 
 void set_damage(int num, int dice);
 void set_attacks_num(int number);

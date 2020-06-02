@@ -16,13 +16,13 @@ inherit "/std/weaponless_users.c"; // consolidating all weaponless combat into o
 
 int set_heart_beat(int flag); // For slowing down monster's heart beats to sync (sorta) with combat. - g
 object tmp;
-static int heart_beat_on;
+nosave int heart_beat_on;
 //swarm is added here - was previously in combat.c but didn't actually do anything - Saide
 int level, round, numround, swarm;
 string charmed_by;
 int hit_dice, hit_dice_bonus, stage;
-static int speed;
-static int moving;
+nosave int speed;
+nosave int moving;
 string* nogolist;   // * for the addition to move_around()
 int no_moving;
 mapping emotes;
@@ -30,16 +30,16 @@ mapping spells;
 mapping thief_skill;
 string stabbed;
 int steal;
-string body_type; private static mixed __Die;
+string body_type; private nosave mixed __Die;
 int charmed;
 mapping charmed_int, offend_int, norm_int;
-static int is_npc;
-static object master_wiz;
+nosave int is_npc;
+nosave object master_wiz;
 int no_catch_tell;
 // going to give them a 1 heart_beat delay between being able to recieve messages, to try to
 // prevent two mobs talking and spamming the mud into submission -Ares
-static int already_listened;
-static int init_pause; // delay of 1 heart_beat after calls to ::init() to stop recursion error spam
+nosave int already_listened;
+nosave int init_pause; // delay of 1 heart_beat after calls to ::init() to stop recursion error spam
 string* funcs;
 int func_chance;
 int max_level;
@@ -50,7 +50,7 @@ int will_open;       // addition by Ares for checks in move_around & pathfinder
 int will_avoid_traps;
 int BONUS_ADDED;     // global flag to make sure the to hit bonus doesn't get added more than
                      // once.  -Ares
-static string* monster_feats; // added so monsters can have feats, use set_monster_feats(string *feats)
+nosave string* monster_feats; // added so monsters can have feats, use set_monster_feats(string *feats)
 
 int static_bab;      // going to try giving them a static bab that's uneffected by stats to try and help balance vs player armor class
 
@@ -64,7 +64,6 @@ string return_chat();
 string return_achat();
 void set_exp(int x);
 void set_level(int x);
-//
 int query_level();
 string getParsableName();
 void move_around();

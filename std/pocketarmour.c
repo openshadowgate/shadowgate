@@ -13,8 +13,8 @@
 inherit BAG;
 
 private string *actualLimbs, type, wear, struck, unwear;
-static private string *possibleLimbs;
-private static int originalAc;
+nosave private string *possibleLimbs;
+private nosave int originalAc;
 private object wornBy;
 int max_dex_bonus;
 

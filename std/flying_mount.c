@@ -11,7 +11,7 @@ string FLYING_ROOM = "/std/flying_room";
 
 #include <common_destinations.h>
 
-static string FLIGHT;    // string to keep track of what "stage" of flight its in, default is landed
+nosave string FLIGHT;    // string to keep track of what "stage" of flight its in, default is landed
 string too_soon;  // The message the mount gives if they try to fly it too often
 int flying_prof;  // different from riding prof, so it can be harder/easier to fly than to ride
 int flight_delay; // can fly TWICE in this time period, so once there and once back

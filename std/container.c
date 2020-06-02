@@ -11,13 +11,11 @@
                           360,365,370,375,380,385,390,395,400,405,410,415,420,425,430,435,440,445,450,455,460,465,470,475,480,485,495,500,505,510,\
                           515,520,525,530,535,540,545,550,555,565,576,585,590,595,600,605,610})
 inherit OBJECT;
-//These were static - removed the static part to see if it
-//will fix the problem with lockable chests
-//being able to receive items even while locked - Saide
-private static int internal_encumbrance;
+
+nosave private int internal_encumbrance;
 private int possible_to_close;
 private int is_closed;
-private static int max_internal_encumbrance;
+nosave private int max_internal_encumbrance;
 
 void set_max_internal_encumbrance(int max);
 int query_max_internal_encumbrance();

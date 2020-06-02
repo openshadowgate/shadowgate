@@ -63,17 +63,17 @@
 
 
 #define MAX_SPAM_COMMANDS 100 // if they enter more than this amount of commands in 2 seconds, they will get a spam warning and we log the commands -Ares
- 
+
 inherit OBJECT;
 
-static mapping spam_count;
+nosave mapping spam_count;
 
 int clean_up() { return 1; }
 
-void create() 
-{ 
+void create()
+{
     clear_spam_count();
-    ::create(); 
+    ::create();
 }
 
 void clear_spam_count()
@@ -87,17 +87,17 @@ void clear_spam_count()
 int spam_buffer(object player)
 {
     int num;
-    
+
     if(!objectp(player)) { return 1; } // 1 allows command to happen
 
     if(!spam_count[player]) { num = 1; }
-    else 
+    else
     {
         num = spam_count[player];
     }
     num++;
-    spam_count[player] = num;    
-    if(num > MAX_SPAM_COMMANDS) { return 0; }    
+    spam_count[player] = num;
+    if(num > MAX_SPAM_COMMANDS) { return 0; }
     return 1;
 }
 

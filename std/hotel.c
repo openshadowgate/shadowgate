@@ -2,19 +2,19 @@
 inherit ROOM;
 
 mapping bedrooms;
-static string ob_file;
+nosave string ob_file;
 int bedcost;
 
 int add_tenant(string tenant, string room);
 int query_inn(){ return 1; }
 
-void create(){ 
+void create(){
   string *temp;
-    ::create(); 
+    ::create();
 	temp = explode(file_name(),"/");
-	ob_file = "/tmp/hotel/"+geteuid()+temp[sizeof(temp)-2]+temp[sizeof(temp)-1];  
+	ob_file = "/tmp/hotel/"+geteuid()+temp[sizeof(temp)-2]+temp[sizeof(temp)-1];
 }
-void set_rooms(mapping room){ 
+void set_rooms(mapping room){
 	int inc,temp,size;
 	string *tmp;
 	bedrooms = ([]);
@@ -29,7 +29,7 @@ void set_rooms(mapping room){
 	}
 }
 
-void remove_tenant(string str){ 
+void remove_tenant(string str){
     int inc,inc2;
     string *room;
 	room = keys(bedrooms);
@@ -40,7 +40,7 @@ void remove_tenant(string str){
 			TP->add_stuffed(50);
 			TP->add_quenched(50);
 			TP->add_hp(random(TP->query_level()));
-			save_object(ob_file); 
+			save_object(ob_file);
 		    return;
 		}
 	    }
@@ -122,13 +122,13 @@ int __Rooms(){
 	string *temp,melnmarn;
 	tell_object(TP,"%^BOLD%^%^GREEN%^                             The Register");
 	tell_object(TP,"%^BOLD%^%^BLACK%^-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-");
-	tell_object(TP,       "%^YELLOW%^ Room Name     Bed #1      Bed #2      Bed #3      Bed #4      Bed #5");  
+	tell_object(TP,       "%^YELLOW%^ Room Name     Bed #1      Bed #2      Bed #3      Bed #4      Bed #5");
 	temp = keys(bedrooms);
 	temp = sort_array(temp,"sort_em",TO);
 	for(inc = 0;inc < sizeof(temp); inc ++){
 		melnmarn = "%^BOLD%^%^CYAN%^"+sprintf("%-12s",capitalize(temp[inc]));
 		for(inc2 = 0;inc2 < sizeof(bedrooms[temp[inc]]);inc2 ++){
-			melnmarn += (bedrooms[temp[inc]][inc2] == "-- empty -- ") ? "%^BLUE%^" : "%^GREEN%^"; 
+			melnmarn += (bedrooms[temp[inc]][inc2] == "-- empty -- ") ? "%^BLUE%^" : "%^GREEN%^";
 			melnmarn += capitalize(sprintf("%-12s",bedrooms[temp[inc]][inc2]));
 		}
 		for(inc2 = 0;inc2 < (5 - sizeof(bedrooms[temp[inc]]));inc2 ++)
@@ -138,7 +138,7 @@ int __Rooms(){
 	tell_object(TP,"%^BOLD%^%^BLACK%^-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-=*=-");
 	return 1;
 }
-int sort_em(string a,string b){ 
+int sort_em(string a,string b){
 	if(sizeof(bedrooms[a]) > sizeof(bedrooms[b])) return 1;
 	else if(sizeof(bedrooms[a]) == sizeof(bedrooms[b])) return 0;
 	else return -1;
@@ -151,7 +151,7 @@ int __Help(string str){
 %^ORANGE%^Commands:
 %^BOLD%^%^RED%^Read
 %^GREEN%^  syntax:  read
-%^CYAN%^	The read command will show a list of rooms with the occupants 
+%^CYAN%^	The read command will show a list of rooms with the occupants
 	of the beds. You can RENT a bed in any room that has empty beds.
 
 %^BOLD%^%^RED%^Rent
@@ -164,7 +164,7 @@ int __Help(string str){
 %^CYAN%^	This command will give you a price list for the beds in each
 	room. The more beds in the room, the lower the price.
 %^BOLD%^%^RED%^Help
-%^GREEN%^  syntax:  help hotel 
+%^GREEN%^  syntax:  help hotel
 %^CYAN%^	Gets this screen...
 HELP
 );

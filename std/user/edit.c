@@ -13,16 +13,16 @@
 #define EDITOR_TAIL 1000
 void display_ed_help();
 
-private static string edit_filename, callback;
-private static mixed edit_args;
-private static object act_ob;
-private static int mtime;
+private nosave string edit_filename, callback;
+private nosave mixed edit_args;
+private nosave object act_ob;
+private nosave int mtime;
 
 varargs int edit (string fname, string fun, object ob, mixed args) {
   string tmp,cut_tmp;
   mixed *stat_buf;
   int length, limit_length;
-  
+
   callback = fun;
   edit_args = args;
   if (!ob) ob = this_player();
@@ -63,9 +63,9 @@ varargs int edit (string fname, string fun, object ob, mixed args) {
   return 1;
 }
 
-static void lines(string str) {
+protected void lines(string str) {
    string file;
- 
+
    if (str == "." || str == "**") {
       this_player()->set_is_editing("");
       if (act_ob && function_exists(callback,act_ob)) {
@@ -86,12 +86,12 @@ static void lines(string str) {
       return;
    }
    if (str == "~p") {
- 
-	  if(!file_exists(edit_filename) || !read_file(edit_filename)) 
+
+	  if(!file_exists(edit_filename) || !read_file(edit_filename))
           message("system", "Buffer empty.", this_player());
- 
+
           else message("Nsystem", read_file(edit_filename)+"\n",this_player());
- 
+
 	  input_to("lines");
 	  return;
    }
@@ -101,32 +101,32 @@ static void lines(string str) {
 	input_to("lines");
 	return;
    }
- 
+
    if(wizardp(this_object()) && sscanf(str, "~r %s", file) == 1) {
- 
+
    	file = resolv_path("cwd", file);
 
 	if(!file_exists(file)) {
         message("system", sprintf("No such file: %s", file), this_player());
 	input_to("lines");
 	return; }
- 
+
 	if((int)master()->valid_read(file, this_object()) == 0) {
         message("system", sprintf("%s: Access denied.", file), this_player());
 	input_to("lines");
 	return; }
- 
+
 	write_file(edit_filename, read_file(file));
         message("system", sprintf("%s appended.", file), this_player());
 	input_to("lines");
 	return;
 
    }
- 
+
    if(wizardp(this_object()) && sscanf(str,"~w %s", file) == 1) {
 
  	file = resolv_path("cwd", file);
- 
+
 	if((int)master()->valid_write(file, this_object()) == 0) {
         message("system", sprintf("%s: Write access denied.", file),
           this_player());
@@ -138,20 +138,20 @@ static void lines(string str) {
             this_player());
         else message("system", sprintf("Buffer written to %s.", file),
           this_player());
- 
+
 	write_file(file, read_file(edit_filename));
 	input_to("lines");
 	return;
- 
+
    }
- 
- 
+
+
    if(str == "~h" || str == "~help") {
 	display_ed_help();
 	input_to("lines");
 	return;
    }
- 
+
    write_file(edit_filename,str + "\n");
    input_to("lines");
    return;
@@ -184,7 +184,7 @@ void set_edit_filename(string str) {
    edit_filename = str;
    return;
 }
- 
+
 void display_ed_help() {
 
    message("system", "\nStandard User Editor\n====================\n\n"
@@ -192,12 +192,11 @@ void display_ed_help() {
 	 "\t~h\t- This editor help display\n"
 	 "\t~p\t- Display contents of editor buffer\n"
 	 "\t~q\t- Abort editor without saving contents", this_player());
- 
+
    if(wizardp(this_object()))
    message("system", "\n\t~r [file]\t- Read contents of file into editor\n"
 	 "\t~w [file]\t- Write editor buffer to file\n", this_player());
- 
+
    message("system", "\n\tExit and save with \".\" or \"**\".\n", this_player());
 
 return; }
- 

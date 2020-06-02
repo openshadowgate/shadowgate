@@ -3,10 +3,9 @@
     -- by Truilkan@TMI - 92/03/11
 */
 
-static mixed *queue;
-static int hptr, tptr, size, primed;
-static int count;
-void alloc(int s);
+nosave mixed *queue;
+nosave int hptr, tptr, size, primed;
+nosave int count;
 
 mixed *query_queue()
 {

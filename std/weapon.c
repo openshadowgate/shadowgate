@@ -12,17 +12,7 @@ int poisoning;
 string profType, type, weapon_prof;
 int maxAtLevel = 1;
 int Weapon_speed = -1;
-static string damage_type, special_material_type;
-
-void set_wc(int num, int dice);
-void set_large_wc(int num, int dice);
-void set_type(string str);
-void add_poisoning(int x);
-string query_type();
-int query_poisoning();
-int is_weapon();
-int query_weapon_speed();
-void set_weapon_speed(int x);
+nosave string damage_type, special_material_type;
 
 #ifdef __OLD_ROOM_BEHAVIOUR
 
@@ -33,8 +23,8 @@ void set_weapon_speed(int x);
 
 // New critical hit related functions -Ares
 
-static int threat_range;
-static int crit_multiplier;
+protected int threat_range;
+protected int crit_multiplier;
 
 // This should be a small interger.  The number 2 would indicate a critical hit on
 // a roll of 19-20, a 3 would be 18-20

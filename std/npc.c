@@ -16,7 +16,7 @@ inherit TOWNSMAN;
 #define STDDB "/d/db/std"
 #define STDDBH "/d/db/std"
 // #define WAIT 600  // for testing = 10 mins.
-#define WAIT 14400    // 60 secs/min * 60 min/hr * 4 hrs. 
+#define WAIT 14400    // 60 secs/min * 60 min/hr * 4 hrs.
 
 int disabled(object who, string *not_allowed);  // specify what states preclude actions
 nomask int iacting,iinteract,do_rand,rpct,needadd;
@@ -51,13 +51,6 @@ void remove_std_db(); // not to use the standard database, calls update_db()
 void add_std_db(); //adds the standard DB back in.
 void remove_dbs(string *files); // remove already added database(s)
 void remove_random_act_dbs(string *files); // remove already added random db(s)
-
-/*
-static string * strippable;
-void init_strippable();
-//string filter_colors(string str);
-//string filter_alphabet(string str);
-*/
 
 string getSaveFileName() {
     string fn = base_name(TO);
@@ -699,16 +692,16 @@ string filter_alphabet(string str) {
 }
 */
 
-int disabled(object who, string *not_allowed) 
+int disabled(object who, string *not_allowed)
 {
     if(!objectp(who)) { return 1; }
 
-    if(who->query_hidden()) 
+    if(who->query_hidden())
     {
 	    who->force_me("step");
     }
 
-    if(!not_allowed) 
+    if(!not_allowed)
     {
 	    not_allowed = ({"disabled"});
     }
@@ -719,14 +712,14 @@ int disabled(object who, string *not_allowed)
         return 1;
     }
 
-    if(member_array("disabled", not_allowed) != -1) 
+    if(member_array("disabled", not_allowed) != -1)
     {
-	    if(who->query_unconscious()) 
+	    if(who->query_unconscious())
         {
 	        tell_object(who, "Not in your current state!");
 	        return 1;
         }
-    	if(who->query_paralyzed()) 
+    	if(who->query_paralyzed())
         {
 	        who->send_paralyzed_message("info",who);
 	        return 1;
@@ -751,7 +744,7 @@ int disabled(object who, string *not_allowed)
             return 1;
         }
 	}
- 
+
     if(member_array("blind", not_allowed) != -1) {
     	if(who->query_blind()) {
             if(who != TO) {

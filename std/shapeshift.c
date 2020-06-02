@@ -4,7 +4,7 @@
 
 inherit OBJECT;
 
-static string   *attack_limbs,
+nosave string   *attack_limbs,
                 *limbs,
                 *old_attack_limbs,
                 *speech_garbles,
@@ -18,7 +18,7 @@ static string   *attack_limbs,
                 mastery_feat,
                 no_restrictions;
 
-static int      ac_bonus,
+nosave int      ac_bonus,
                 base_attack_num,
                 can_cast_spells,
                 can_speak_languages,
@@ -27,15 +27,15 @@ static int      ac_bonus,
                 shape_weight,
                 feat_flagged;
 
-static float    hp_percent;
+nosave float    hp_percent;
 
-static function attack_functions;
+nosave function attack_functions;
 
-static object   desc,
+nosave object   desc,
                 shape,
                 owner;
 
-static mapping  bonuses;
+nosave mapping  bonuses;
 
 
 void create()

@@ -31,23 +31,23 @@ author: Truilkan@Babylon - May 26, 1991
 
 private mixed *theHead, *theTail;
 
-static mixed *set_head(mixed *arg)
+protected mixed *set_head(mixed *arg)
 {
 	return (theHead = arg);
 }
 
-static mixed *set_tail(mixed *arg)
+protected mixed *set_tail(mixed *arg)
 {
 	return (theTail = arg);
 }
 
-static void set_prev(mixed *arg, mixed *before)
+protected void set_prev(mixed *arg, mixed *before)
 {
 	if (arg != NULL)
 		arg[2] = before;
 }
 
-static void set_next(mixed *arg, mixed *after)
+protected void set_next(mixed *arg, mixed *after)
 {
 	if (arg != NULL)
 		arg[1] = after;
@@ -63,7 +63,7 @@ mixed *query_tail()
 	return theTail;
 }
 
-static mixed *new_elt(mixed thisObj, mixed *nextObj, mixed *prevObj)
+protected mixed *new_elt(mixed thisObj, mixed *nextObj, mixed *prevObj)
 {
 	return ({ thisObj, nextObj, prevObj });
 }

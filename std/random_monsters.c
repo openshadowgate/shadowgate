@@ -7,7 +7,7 @@ See /doc/help/tutorials/poster-l-croom or refer to topic "l" on the poster in th
 // added to make it ignore repop rate on first load *Styx*  3/19/05
 
 
-// added monster_party(int mon_speed) and form_monster_party(int speed) to maintain 
+// added monster_party(int mon_speed) and form_monster_party(int speed) to maintain
 // consistency with CROOM. Setting a speed of -1 will make a stationary
 // party of otherwise moving mobs - Ares 8/21/05
 
@@ -21,12 +21,12 @@ See /doc/help/tutorials/poster-l-croom or refer to topic "l" on the poster in th
 int interacting_mob(object ob);
 void form_monster_party(int speed);
 void place_mobs();
-static int repop;
+nosave int repop;
 int mon_speed;
 
 static mapping mons;
 
-void create() 
+void create()
 {
     if(!mapp(mons)) mons = ([]);
     if(!intp(mon_speed)) mon_speed = 0;
@@ -66,14 +66,14 @@ void place_mobs()
     object CroomMon;
    	int i,j,k,l, pflag, rnum;
     mixed catch_error;
-// added this to check if should repop any given reset based on chance set in room 
+// added this to check if should repop any given reset based on chance set in room
    	if(!repop) repop = random(100);
 // added to make it ignore repop rate on first load *Styx*  3/19/05
     rnum = (int)TO->query_reset_number();
     TO->remove_property("lastresetmobs");
     TO->set_property("lastresetmobs", rnum);
-   	if(repop < random(100) && rnum > 1)  return; 
-    if(mapp(mons) && mons != ([])) 	
+   	if(repop < random(100) && rnum > 1)  return;
+    if(mapp(mons) && mons != ([]))
 	{
         aKeys = keys(mons);
         j = sizeof(aKeys);
@@ -84,64 +84,64 @@ void place_mobs()
             {
                 if(!objectp(mons[aKeys[i]][k]))
                 {
-                    if(catch_error = catch(CroomMon = new(aKeys[i]))) 
+                    if(catch_error = catch(CroomMon = new(aKeys[i])))
                     {
                         log_file("croom.log", "Monster Failed to Load - Error was = "+identify(catch_error)+". Happened in "+file_name(TO)+" on file "+identify(aKeys[i])+". Attempting to "+
                         "clone again.\n");
-                        if(catch_error = catch(CroomMon = new(aKeys[i]))) 
+                        if(catch_error = catch(CroomMon = new(aKeys[i])))
                         {
                             log_file("croom.log", "Monster failed to load - Error was = "+identify(catch_error)+". Happened in "+file_name(TO)+" on file "+identify(aKeys[i])+" twice.\n");
                             continue;
                         }
                     }
                     //CroomMon = new(aKeys[i]);
-                    if(objectp(CroomMon)) 
+                    if(objectp(CroomMon))
                     {
                         mons[aKeys[i]][k] = CroomMon;
                         CroomMon->set_property("croom_track",1);
-                        if(CroomMon->move(TO) != MOVE_OK) 
+                        if(CroomMon->move(TO) != MOVE_OK)
                         {
                             log_file("croom.log", base_name(TO) + " failed to move "+base_name(mons[aKeys[i][k]]) + " in reset.");
-                        }  
+                        }
                         else pflag = 1;
-                    }           
+                    }
                 }
                 continue;
             }
         }
     }
-    if(mon_speed && pflag) { form_monster_party(mon_speed); } // called if speed is set with monster_party() -Ares   
+    if(mon_speed && pflag) { form_monster_party(mon_speed); } // called if speed is set with monster_party() -Ares
     return;
 }
 
 
 void reset()
 {
-    //find object or load efun will call 
-    //place mobs now on the first reset, after the 
+    //find object or load efun will call
+    //place mobs now on the first reset, after the
     //reset is all the way finished - does this fix
     //the too deep recursion errors in new()? Saide, December 2016
     //if((int)TO->query_reset_number() < 2) return;
     //place_mobs();
     return;
-}  
+}
 
 // this function added to check if mobs exist before allowing to change
-int has_mobs() 
+int has_mobs()
 {
 	string *aKeys;
    	int i,j,k,l, active;
   	active = 0;
-    if(mapp(mons) && mons != ([])) 
+    if(mapp(mons) && mons != ([]))
     {
         aKeys = keys(mons);
         j = sizeof(aKeys);
-        for(i=0;i<j;i++) 
+        for(i=0;i<j;i++)
         {
             l = sizeof(mons[aKeys[i]]);
             for(k=0;k<l;k++)
             {
-                if(objectp(mons[aKeys[i]][k]))    
+                if(objectp(mons[aKeys[i]][k]))
                 {
                     active++;
                     break;
@@ -163,23 +163,23 @@ void form_monster_party(int speed)
 
     if(!has_mobs()) { return; }
     if(speed == -1) { speed = 0; }
-   
-    if(mapp(mons) && mons != ([])) 
+
+    if(mapp(mons) && mons != ([]))
     {
         aKeys = keys(mons);
         j = sizeof(aKeys);
-        for(i=0;i<j;i++) 
+        for(i=0;i<j;i++)
         {
             l = sizeof(mons[aKeys[i]]);
             for(k=0;k<l;k++)
             {
                 if(objectp(mons[aKeys[i]][k]))
-                {                    
+                {
                     guard = mons[aKeys[i]][k];
                     if(environment(guard) != TO) { continue; }
                     if(!leader)
                     {
-                        leader = guard; 
+                        leader = guard;
                         leader->set_speed(speed);
                         continue;
                     }
@@ -216,7 +216,7 @@ int interacting_mob(object mob) {
     //    for(i = 0; i < sizeof(inv); i++){
     //      if(interactive(inv[i])) return 1;
     //    }
-    
+
     if (sizeof(filter_array(all_inventory(environment(mob)), "__interactive","/daemon/filters_d"))) {
       environment(mob)->remove_property("croom_clean");
       environment(mob)->set_property("croom_clean",1);
@@ -238,7 +238,7 @@ int clean_up() {
   object * tempmons;
   int i,j,k,l;
   int continueClean = 1;
-  
+
   if(mons && sizeof(mons)){
     aKeys = keys(mons);
     j = sizeof(aKeys);
@@ -276,7 +276,7 @@ int clean_up() {
   {
     return 1;
   }
-  return 1; 
+  return 1;
 
 // changing to 1 again to see if that helps clean things up better without making lag too bad since the lag seems to have been from other causes *Styx*, 12/30/03
 // This really should be a 1 so it continues to get called over and over, but it causes horrendous clean_up lag if allowed to continue. - garrett

@@ -5,17 +5,17 @@
  * last modified: 2/5/92
  */
 
-private static object find_item(object prev, string str)
+protected private object find_item(object prev, string str)
 {
    object ob;
    string tmp;
    int i;
-   
+
    if (str == "here")
      return environment(this_object());
    if (str == "^")
      return environment(prev);
-   if(sscanf(str, "^%s", tmp) == 1) 
+   if(sscanf(str, "^%s", tmp) == 1)
      {
 	if(!(ob = find_living(tmp)))
 	  return 0;
@@ -74,7 +74,7 @@ object parse_list(string str)
 {
    string tmp, rest;
    object prev;
-   
+
    prev = environment(this_object());
    while(prev && str) {
       if (sscanf(str, "%s:%s", tmp, rest) == 2) {
@@ -94,7 +94,7 @@ get_act_ob(string str)
     object ob;
     if(!str)
         return this_player();
-    
+
     if(ob = parse_list(str))
         return ob;
     else
@@ -107,7 +107,7 @@ get_e_act_ob(string str)
 
     if(!str)
         return this_player();
-    
+
     ob = parse_list(str);
     if(!ob)
         return 0;
@@ -170,4 +170,3 @@ mixed *parse_args(string str)
          break;
    }
 }
-

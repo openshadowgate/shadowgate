@@ -5,7 +5,7 @@
 // 93-03-17    Pallando@Tabor      Cleaned up code and modularised.
 // 93-06-08    Pallando@Nightmare  Used for material properties
 
-static nomask mixed _query( mapping map, string *parts )
+protected nomask mixed _query( mapping map, string *parts )
 {
   mixed value;
   int i, s;
@@ -22,7 +22,7 @@ static nomask mixed _query( mapping map, string *parts )
   return value;
 }
 
-static nomask int _delete( mapping map, string *parts )
+protected nomask int _delete( mapping map, string *parts )
 {
   if( sizeof( parts ) == 1 )
   {
@@ -34,7 +34,7 @@ static nomask int _delete( mapping map, string *parts )
   return _delete( map[parts[0]], parts[1..sizeof( parts )-1] );
 }
 
-static nomask mixed _set( mapping map, string *parts, mixed value )
+protected nomask mixed _set( mapping map, string *parts, mixed value )
 {
   mixed old_value;
 
