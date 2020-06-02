@@ -7,7 +7,7 @@ inherit "/std/food.c";
 void create() {
     ::create();
     set_name("mushy red fruit");
-    set_id( ({"fruit","red fruit", "mushy red fruit", "mushy fruit",
+    set_id( ({"fruit","red fruit", "mushy red fruit", "mushy fruit", "boozefruit", "booze fruit"
               "food" }) );
     set_short("%^ORANGE%^mushy %^BOLD%^%^RED%^r%^RESET%^%^RED%^e"
       +"%^BOLD%^d fru%^BLACK%^i%^RESET%^t");
@@ -22,4 +22,3 @@ int eat(string str){
   TP->add_intox(200 + random(150));
   return ::eat(str);
 }
-
