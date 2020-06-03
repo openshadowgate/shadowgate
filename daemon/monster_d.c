@@ -356,9 +356,6 @@ void check_for_place(string room)
 	                    log_file("debug.log","monster_d error in check_for_place "
 		                    "ob->move(room):  "+identify(catch_err)+" room was: "+room+", "
 		                    "what is "+what+"\n");
-	                    log_file("Misc_Errors","monster_d error in check_for_place() "
-		                    "ob->move(room):  "+identify(catch_err)+" room was: "+room+", "
-		                    "what is "+what+"\n");
 	                    seteuid(getuid());
 	                    continue;
 	                }
@@ -404,9 +401,15 @@ mapping load_mons_db(string fromfile)
     for(i=0;i<max;i++)
     {
         // ignore comments, null lines...
-        if(!strlen(lines[i])) continue;
-        if(!lines[i] || lines[i] == "") continue;
-        if(lines[i][0..0] == '#') continue;
+        if (!strlen(lines[i])) {
+            continue;
+        }
+        if (!lines[i] || lines[i] == "") {
+            continue;
+        }
+        if (regexp(lines[i], "^#")) {
+            continue;
+        }
         // If we start with +:, append to the last monster entry.
         // I need to test this. - garrett
 
@@ -415,10 +418,11 @@ mapping load_mons_db(string fromfile)
             if(sizeof(explode(str, " "))) work[workstr] += explode(str, " ");
             continue;
         }
+
         if(sscanf(lines[i], "(%s): %s", workstr, str) != 2)
         {
 	        seteuid(UID_LOG);
-	        log_file("errors","/daemon/monster_d: Error in reading monsters database ("+fromfile+") in line "+(i+1)+" in load_mons_db().\n");
+	        log_file("debug.log","/daemon/monster_d: Error in reading monsters database ("+fromfile+") in line "+(i+1)+" in load_mons_db().\n");
 	        // changed the write to log *Styx* 11/16/03
 	        seteuid(getuid());
             continue;

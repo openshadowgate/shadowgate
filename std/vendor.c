@@ -679,7 +679,7 @@ int filter_list(object ob, string str)
     return 0;
 }
 
-static int __SellAll()
+protected int __SellAll()
 {
     object* inv;
     int i, value;

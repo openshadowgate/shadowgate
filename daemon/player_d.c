@@ -28,39 +28,59 @@ void create() {
 
 mapping *query_player_list() {return player_list;}
 
-varargs void add_player_info(object ob) {
-  int exp, x;
-  int i;
+varargs void add_player_info(object ob)
+{
+    int exp, x;
+    int i;
 
-  if(!objectp(ob)) { if(!(ob = previous_object()) || !userp(ob)) return; }
-  if(avatarp(ob)) {
+    if (!objectp(ob)) {
+        if (!(ob = previous_object()) || !userp(ob)) {
+            return;
+        }
+    }
+    if (avatarp(ob)) {
+        i = sizeof(player_list);
+        while (i--) {
+            if (player_list[i]["name"] == (string)ob->query_name() && avatarp(ob)) {
+                player_list -= ({ player_list[i] });
+            }
+        }
+        return;
+    }
+    x = -1;
     i = sizeof(player_list);
-    while(i--)
-      if(player_list[i]["name"] == (string)ob->query_name() && avatarp(ob))
-	player_list -= ({ player_list[i]});
-    return;
-  }
-  x = -1;
-  i = sizeof(player_list);
-  while(i--) if(player_list[i]["name"] == (string)ob->query_name()) x = i;
-  if((sizeof(player_list) == 20) && (x == -1) &&
-     (((int)ob->query_exp()) < player_list[19]["experience"]))
-    return;
-  if(x > -1) player_list -= ({ player_list[x]});
-  player_list += ({ ([ "name":(string)ob->query_name(), "experience":(int)ob->query_exp(),
-		     "kills":sizeof((string *)ob->query_kills()),
-		     "deaths": sizeof((mixed *)ob->query_deaths()),
-		     "quests": sizeof((string *)ob->query_quests()),
-		     "major accomplishments": sizeof((mixed *)ob->query_mini_quests()),
-		     "level": (int)ob->query_level(),
-		     "class": (string)ob->query_class(),
-		     "guild": (string)ob->query_guild()
-  ])});
-  player_list = sort_array(player_list, "sort_list", this_object());
-  if(sizeof(player_list) > 20) player_list = player_list[0..19];
-  seteuid(UID_DAEMONSAVE);
-  save_object(SAVE_PLAYER_LIST);
-  seteuid(getuid());
+    while (i--) {
+        if (player_list[i]["name"] == (string)ob->query_name()) {
+            x = i;
+        }
+    }
+    if ((sizeof(player_list) == 20) && (x == -1) &&
+        (((int)ob->query_exp()) < player_list[19]["experience"])) {
+        return;
+    }
+    if (x > -1) {
+        player_list -= ({ player_list[x] });
+    }
+    if (!arrayp(player_list)) {
+        player_list = ({});
+    }
+
+    player_list += ({ ([ "name" : (string)ob->query_name(), "experience" : (int)ob->query_exp(),
+                    "kills" : sizeof((string*)ob->query_kills()),
+                    "deaths" : sizeof((mixed*)ob->query_deaths()),
+                    "quests" : sizeof((string*)ob->query_quests()),
+                    "major accomplishments" : sizeof((mixed*)ob->query_mini_quests()),
+                    "level" : (int)ob->query_level(),
+                         "class" : (string)ob->query_class(),
+                         "guild" : (string)ob->query_guild()
+                       ]) });
+    player_list = sort_array(player_list, "sort_list", this_object());
+    if (sizeof(player_list) > 20) {
+        player_list = player_list[0..19];
+    }
+    seteuid(UID_DAEMONSAVE);
+    save_object(SAVE_PLAYER_LIST);
+    seteuid(getuid());
 }
 
 int sort_list(mapping alpha, mapping beta) {

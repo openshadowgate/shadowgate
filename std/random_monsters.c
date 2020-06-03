@@ -24,7 +24,7 @@ void place_mobs();
 nosave int repop;
 int mon_speed;
 
-static mapping mons;
+nosave mapping mons;
 
 void create()
 {

@@ -7,7 +7,7 @@
 // daemon to strip colors and characters from catch_say
 // borrowed from Garrett's fix to /std/psychic & moved into a daemon by Styx
 
-// questions:  
+// questions:
 //  does string *strippable need to be static in the daemon?
 //  does the filter_alphabet() need to init_strippable since it gets passed a string
 //     from filter_colors now?
@@ -16,18 +16,18 @@
 // to use it in /std/npc.c, I think it just needs this added -
 //    /d/common/daemon/filters_d.c->filter_colors(str);
 //  as the second line (after the strings are defined) in int apprentice()
-   
+
 #include <std.h>
 #include <daemons.h>
 #define POSSIBLE_COLORS ({"%^BOLD%^", "%^WHITE%^", "%^RED%^", "%^YELLOW%^", "%^BLUE%^",\
                           "%^GREEN%^", "%^MAGENTA%^", "%^ORANGE%^", "%^RESET%^", "%^BLACK%^", "%^CYAN%^",\
                           "%^B_RED%^","%^B_BLUE%^","%^B_ORANGE%^","%^B_YELLOW%^","%^B_GREEN%^","%^B_MAGENTA%^",\
                           "%^B_BLACK%^","%^B_WHITE%^","%^B_CYAN%^","%^FLASH%^","%^INITTERM%^","%^WINDOW%^","%^ENDTERM%^" })
-                   
+
 inherit DAEMON;
 #define NUMBERS ({ "0","1","2","3","4","5","6","7","8","9","0" })
 
-static string * strippable;   // does this need to be static for the daemon?
+nosave string * strippable;   // does this need to be static for the daemon?
 void init_strippable();
 string filter_colors(string str);
 string filter_alphabet(string str);
@@ -50,15 +50,15 @@ void init_strippable() {
   }
 }
 
-string filter_colors(string str) 
+string filter_colors(string str)
 {
     int count;
     string tmp;
     init_strippable();
     if(!stringp(str)) return str;
     for(count = 0; count < sizeof(POSSIBLE_COLORS);count++)
-    {        
-        if(count > 25) 
+    {
+        if(count > 25)
         {
             //tell_object(find_player("saide"), "count = "+count+ " in filters_d.c");
             count = 0;
@@ -76,21 +76,21 @@ string filter_colors(string str)
 
 string filter_alphanumeric(string str) {
   int iter=0;
-  
-  init_strippable(); 
+
+  init_strippable();
   for(iter=0;iter<sizeof(strippable);iter++) {
-    if (member_array(strippable[iter], NUMBERS) != -1)   
+    if (member_array(strippable[iter], NUMBERS) != -1)
      continue;
     str=replace_string(str,strippable[iter],"");
   }
-  
+
   return str;
 }
 
 string filter_alphabet(string str) {
   int iter=0;
 
-   init_strippable(); 
+   init_strippable();
   for(iter=0;iter<sizeof(strippable);iter++)
     str=replace_string(str,strippable[iter],"");
 
@@ -141,7 +141,7 @@ int is_player(object fnord) {
 int is_non_immortal(object fnord)
 {
   if (!objectp(fnord)) return 0;
-  if (fnord->query_true_invis()){ 
+  if (fnord->query_true_invis()){
      return 0;
   }else if(fnord->query_property("no detect") || !fnord->is_detectable()){ //added to stop scry objects from being hit ~Circe~ 10/23/15
      return 0;

@@ -104,14 +104,11 @@ int test_passive_perception();
 
 nosave int user_ticker = 0; // timer increased once per heartbeat
 int killable;
-//static object *protectors;
-//static int blinking;
 
 //For ignoring specific tells.
 //static string *ignored_people;
 mapping profs;
 
-//static int disguised;
 string disguise;
 string vis_name;
 

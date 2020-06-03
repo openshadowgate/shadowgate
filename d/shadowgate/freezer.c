@@ -15,7 +15,6 @@ void create()
     set_property("indoors", 1);
     set("short", "The freezer");
     set("long", "The local freezer.");
-    //    set_exits( (["exit" : "/d/shadowgate/adv_main"]) );
     set_exits((["exit" : "/d/shadow/room/forest/road30"]));
     set_pre_exit_functions(({ "exit" }), ({ "GoThroughDoor" }));
     set_no_clean(1);
@@ -52,11 +51,7 @@ int GoThroughDoor()
     if (!newbiep(TP)) {
         return 1;
     }
-    write(
-        @GARRETT
-        You drift back to where you belong.
-        GARRETT
-        );
+    write("You drift back to where you belong.");
     TP->move_player("/d/newbie/rooms/town/square");
     return 0;
 }

@@ -10,7 +10,6 @@
 inherit DAEMON;
 
 /*****
- * static void create();
  *  -- apply that the driver calls when this object is first created
  *****/
 protected void create()
