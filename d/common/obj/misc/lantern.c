@@ -9,7 +9,7 @@
 
 inherit OBJECT;
 
-static int lit;
+nosave int lit;
 int fuel, full_fuel, light_time, brighter;
 
 void create() {

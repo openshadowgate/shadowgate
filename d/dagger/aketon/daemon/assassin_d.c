@@ -1,4 +1,4 @@
-//There is a trick about this file, the call_out() of the load_room() and 
+//There is a trick about this file, the call_out() of the load_room() and
 //drop_them() functions are necessary. If the monster is dropped into the
 //destination room before the room which calls make_*(), if will cause an
 //error of Illegal Operation (duplicated objects in current object table)
@@ -9,8 +9,6 @@
 
 inherit DAEMON;
 
-static void load_room(string room);
-static void drop_them(object mon,string room);
 object sop,wey,vor;
 
 void create() {
@@ -63,13 +61,13 @@ void make_vorloc() {
    call_out("drop_them",4,vor,room);
 }
 
-static void load_room(string room) {
+protected void load_room(string room) {
    if(!stringp(room)) return;
    find_object_or_load(room);
    return;
 }
 
-static void drop_them(object mon, string room) {
+protected void drop_them(object mon, string room) {
    if(!objectp(mon)) return;
    mon->move(room);
    return;

@@ -34,21 +34,21 @@ inherit MONSTER;
 #define EXCLUDED_ROOMS ({ "/std/flying_room" })
 
 
-static mapping  INFO,
+nosave mapping  INFO,
                 ENEMIES,
                 TIMERS;
 
 
-static object   REAL_OWNER,
+nosave object   REAL_OWNER,
                 TEMP_OWNER,
                 OWNER,
                 MY_WHISTLE;
 
 
-static string   OWNER_NAME;
+nosave string   OWNER_NAME;
 
 
-static int      DISMISSED,
+nosave int      DISMISSED,
                 FIRED,
                 PARTY_COUNTER,
                 COMBAT_TIME,

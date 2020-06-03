@@ -19,7 +19,7 @@ inherit MONSTER;
                       " somersaults backwards, gurgling horribly as an arrow takes it in the throat" })
 
 int clinging, tell_caught;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 string entry_method;
 object clinger;
 
@@ -45,7 +45,7 @@ void create()
                 +"\n%^GREEN%^Unlike an orc, however, this creature stands nearly 6 and a half feet"
                 +" tall and has an olympian build, with powerful limbs, broad chest and back and a"
                 +" narrow waist. " + capitalize(QS) +" looks fit, lithe and dangerous.");
- 
+
         set_race("orog");
         set_body_type("humanoid");
         set_class("fighter");
@@ -56,7 +56,7 @@ void create()
         set_property("swarm",1);
         set_overall_ac(-69);
       set_size(2);
-      set_attack_bonus(67); 
+      set_attack_bonus(67);
       set_property("magic",1);
       set_monster_feats(({
         "power attack",
@@ -65,7 +65,7 @@ void create()
         "shatter",
         "sunder",
         "daze",
-      })); 
+      }));
       set_stats("strength",30);
       set_stats("intelligence",10);
       set_stats("dexterity",30);
@@ -104,7 +104,7 @@ void report(string str){
 
 void init(){
   ::init();
-  if (sizeof(TO->query_wielded())<1 
+  if (sizeof(TO->query_wielded())<1
       && file_name(all_inventory(TO)[0])[0..20]== "/d/common/obj/weapon/"){
     force_me("wield " + all_inventory(TO)[0]->query_name());
   }
@@ -215,7 +215,7 @@ void rush(){
   critters = query_attackers();
   if (sizeof(critters)<1) return;
   who = critters[random(sizeof(critters))]->query_name();
-  force_me("rush " + who); 
+  force_me("rush " + who);
 }
 
 
@@ -270,7 +270,7 @@ void log(string str){
   kids = children(TABAXOBJ + "tabaxi_battler.c");
   if (sizeof(kids)>0){
     for (i=0;i<sizeof(kids);i++){
-      if (objectp(kids[i])){ 
+      if (objectp(kids[i])){
         battler = kids[i];
         break;
       }
@@ -331,7 +331,7 @@ void ram_roll(){
     force_me("batter gate");
     force_me("approach gate");
     return;
-  } 
+  }
 }
 
 object query_squad(){
@@ -354,7 +354,7 @@ object query_squad(){
   squad->set_hp(-1);
   squad->remove_property("squad name");
   squad->set_property("squad name", squad_name);
-  return squad;  
+  return squad;
 }
 
 void clamber_battlements(){
@@ -368,7 +368,7 @@ void clamber_battlements(){
       if ((string)critters[i]->query_property("squad name")== squad_name){
         squad = critters[i];
         break;
-      } 
+      }
     }
   }
   if (!objectp(squad)){
@@ -389,7 +389,7 @@ void clamber_battlements(){
       if((string)critter->query_property("squad name")== squad_name){
         flag = 1;
         break;
-      } 
+      }
     }
   }
   if (flag == 0){
@@ -417,7 +417,7 @@ void swing_in(){
       if ((string)critters[i]->query_property("squad name")== squad_name){
         squad = critters[i];
         break;
-      } 
+      }
     }
   }
   squad_room = environment(squad);
@@ -449,7 +449,7 @@ void swing_in(){
         flag = 1;
         force_me("tell lujke there's one of my buddies still out there. No-one left behind");
         break;
-      } 
+      }
     }
   }
   if (flag == 0){
@@ -467,7 +467,7 @@ void bow_hit(object ob, int dam){
     call_out("die", 1,TO);
   } else {
     do_damage(return_target_limb(),dam);
-  } 
+  }
 }
 
 void die (object ob){
@@ -497,7 +497,7 @@ void rejoin_squad(){
   if (sizeof(critters)>0){
     for (i=0;i<sizeof(critters);i++){
       critter = critters[i];
-      if (critter->id("xxsquadxx") && (string)critter->query_property("squad name")==squad_name){ 
+      if (critter->id("xxsquadxx") && (string)critter->query_property("squad name")==squad_name){
           if (!critter->is_squad_member(TO)){
             critter->add_orog(TO);
           }
@@ -532,7 +532,7 @@ void reach_destination(){
       force_me("block down");
       return;
     case 7:
-      return;      
+      return;
     }
     wood = new ("/d/common/obj/misc/wood.c");
     wood->move(TO);
@@ -559,7 +559,7 @@ void start_fire(){
   if (sizeof(attackers)>0){
     i = random(sizeof(attackers));
     force_me("emote tries to get to the firewood to start a fire, but can't get"
-            +" past" + attackers[i]->QCN); 
+            +" past" + attackers[i]->QCN);
     call_out("start_fire", 3 + random(4));
   }
   if(!present("wood", ETO )){
@@ -585,7 +585,7 @@ void heart_beat(){
   object room;
   string where, test, * exits;
   ::heart_beat();
-  if (!objectp(TO) || !objectp(ETO)){ 
+  if (!objectp(TO) || !objectp(ETO)){
     return;
   }
   if (random(5)>0){
@@ -606,7 +606,7 @@ void heart_beat(){
       {
         force_me("say Way is blocked. Have to dig");
         force_me("dig down");
-      } 
+      }
     }
     test = "east_section";
     if (interact(test, where)==1)
@@ -615,7 +615,7 @@ void heart_beat(){
       {
         force_me("say Way is blocked. Have to dig");
         force_me("dig north");
-      } 
+      }
     }
     test = "north_section";
     if (interact(test, where)==1)
@@ -624,7 +624,7 @@ void heart_beat(){
       {
         force_me("say Way is blocked. Have to dig");
         force_me("dig east");
-      } 
+      }
     }
 
 

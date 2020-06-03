@@ -16,7 +16,7 @@ int* tentacle_hps, empress_moves, spirits_absorbed, countdown, invincible, last_
 mapping targeters, seized, exits_used, victory, city_route;
 string* destinations_visited, * path_trod, roomname;
 int mucus, frozen_mucus, skin, tentacles_withdrawn, relaying, power_absorbed, last_move, absorbing, reporting;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 
 void grant_quest(object slayer, string quest, int exp, string explanation, int must_be_near);
 void distribute_attacks();

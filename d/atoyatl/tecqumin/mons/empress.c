@@ -4,7 +4,7 @@
 #include "../tecqumin.h"
 inherit QNPC;
 
-static int BEAT;
+nosave int BEAT;
 
 void set_responses();
 void receive_spirit(object giver, string spirit_name);

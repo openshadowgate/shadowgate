@@ -2,7 +2,7 @@
 
 inherit OBJECT;
 
-static int lit;
+nosave int lit;
 int fuel, light_time;
 
 void create() {

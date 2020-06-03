@@ -62,8 +62,7 @@ void retreat();
 void clear_rolling();
 void heart_beat();
 
-static int BEAT, heartcount;
-
+nosave int BEAT, heartcount;
 
 void create(){
    ::create();
@@ -213,7 +212,7 @@ varargs void roll_ram(int repeat){
     report("no stored directions. getting some new ones");
     if (objectp(ETO)){
       ram = (object)ETO->query_ram();
-      if (objectp(ram)){ 
+      if (objectp(ram)){
         report("valid ram available. Getting its environment");
         env = environment(ram);
         if (objectp(env)){
@@ -252,9 +251,9 @@ varargs void roll_ram(int repeat){
             }
           } else report("%^BOLD%^%^CYAN%^Oh no! Waystation is not valid! (orog squad)");
         } else report("%^BOLD%^%^YELLOW%^Oh no! Ram's environment is not valid! (orog squad)");
-      } else 
+      } else
       {
-        if (repeat >0) 
+        if (repeat >0)
         {
           report("Making the new ram clearly didn't work");
         }
@@ -313,7 +312,7 @@ void climb_orogs(){
         break;
       default:
         report("tell lujke orog is not in a field. Making it start walking");
-        orogs[i]->start_walking(TABAXROOM + "main_field"); 
+        orogs[i]->start_walking(TABAXROOM + "main_field");
       }
     }
     orogs -= removes;
@@ -341,7 +340,7 @@ void crash_recover(){
         if (orogs[i]->query_paralyzed()>0){
           call_out("crash_recover", 4);
           return;
-        }  
+        }
       }
     }
   }
@@ -370,17 +369,17 @@ void receive_orog(){
         if ((string)field->query_exit("north")=="/d/shadowgate/void"){
           start_walking(TABAXROOM + "stockade");
           return;
-        }       
+        }
       }
       start_walking(TABAXROOM+"granary");
       set_tactic(WALK_IN);
     } else {
-      if (tactic ==LADDER || tactic == CLIMB){  
+      if (tactic ==LADDER || tactic == CLIMB){
         climb_orogs();
       }
     }
-    break;    
-  } 
+    break;
+  }
 }
 
 void log(string str){
@@ -389,7 +388,7 @@ void log(string str){
   kids = children(TABAXOBJ + "tabaxi_battler.c");
   if (sizeof(kids)>0){
     for (i=0;i<sizeof(kids);i++){
-      if (objectp(kids[i])){ 
+      if (objectp(kids[i])){
         battler = kids[i];
         break;
       }
@@ -433,7 +432,7 @@ int force_me(string str) {
       orogs[i]->force_me(str);
     }
   }
-  
+
   report("Squad being forced to : " + str);
   return ::force_me(str);
 }
@@ -481,8 +480,8 @@ void regroup(){  // for getting the squad back together if they get separated
     }
     if (where_orog != where_squad){
       report("%^BOLD%^%^YELLOW%^This orog is not where the squad is");
-      if (where_orog == TABAXROOM + "treetop1" || 
-          where_orog == TABAXROOM + "treetop2" || 
+      if (where_orog == TABAXROOM + "treetop1" ||
+          where_orog == TABAXROOM + "treetop2" ||
           where_orog == TABAXROOM + "treetop3"  ||
           where_orog == TABAXOBJ + "ram_interior"){
         report("%^BOLD%^%^GREEN%^But it is either up a tree or in a ram, so it is okay. Carrying on...");
@@ -495,12 +494,12 @@ void regroup(){  // for getting the squad back together if they get separated
         report("%^BOLD%^%^BLUE%^Starting orog walking to " + where_squad);
         orogs[i]->start_walking(where_squad);
       }
-    } 
+    }
   }
   if (sizeof(conflict_points)>0){
     if (member_array(ETO, conflict_points)==-1){
       report("Some orogs are in conflict, and the squad is not there. Moving squad to " + conflict_points[0] + ", so the orogs can regroup there.");
-      move(conflict_points[0]);   
+      move(conflict_points[0]);
     }
   }
 }
@@ -543,7 +542,7 @@ int check_grouped(){
     remove();
     return -1;
   }
-  for (i=0;i<sizeof(orogs);i++){ 
+  for (i=0;i<sizeof(orogs);i++){
     if (!objectp(orogs[i])){
       continue;
     }
@@ -595,7 +594,7 @@ int climb_trees(){
       report("tell lujke An %^GREEN%^orog%^RESET%^ is stuck in a faulty room in the"
               +" orog_squad climb_trees function!");
       orogs[i]->move("/d/shadowgate/void");
-      continue;      
+      continue;
     }
     if (!objectp(ETO)){
       return -1;
@@ -610,11 +609,11 @@ int climb_trees(){
       if (roomname == (string)treetop->query_target_room_name("south")){
         continue;
       }
-    } 
+    }
   }
   if (i<num-1){
     call_out("climb_trees", 2+random(3));
-  } else { 
+  } else {
     report("climb tree");
     report("swing to south");
   }
@@ -638,7 +637,7 @@ int count_ladders(){
 int pickup_ladder(){
   if (count_ladders()>1){
     return -1;
-  } 
+  }
   orogs[0]->force_me("get ladder");
   call_out("goto_field", 2);
   return 1;
@@ -664,7 +663,7 @@ int reach_destination(){
     break;
   case TABAXROOM + "treetop_base1": //deliberately falling through
   case TABAXROOM + "treetop_base2": //deliberately falling through
-  case TABAXROOM + "treetop_base3": 
+  case TABAXROOM + "treetop_base3":
     if (tactic == SWING){
       switch(random(3)){
       case 0:
@@ -682,7 +681,7 @@ int reach_destination(){
         regroup();
         return 0;
       }
-      climb_trees();      
+      climb_trees();
 //      report("climb");
 //     report("swing to south");
       return 1;
@@ -691,7 +690,7 @@ int reach_destination(){
     break;
   case TABAXROOM + "main_field": // deliberately falling through
   case TABAXROOM + "low_field": // deliberately falling through
-  case TABAXROOM + "high_field": 
+  case TABAXROOM + "high_field":
     if ((string)ETO->query_exit("north")== TABAXROOM + "stockade"){
       set_entry_method("walking right in through the open gate.");
       start_walking(TABAXROOM + "granary");
@@ -703,13 +702,13 @@ int reach_destination(){
     } else {
       report("tell lujke arrived at a field, but the tactic was NOT ladders");
       if (tactic == ARCHERY){
-        rooms = ({TABAXROOM + "battlement1", TABAXROOM + "battlement2", 
-                  TABAXROOM + "battlement3", TABAXROOM + "battlement4", 
-                  TABAXROOM + "battlement5", TABAXROOM + "battlement6", 
-                  TABAXROOM + "battlement7", TABAXROOM + "battlement8", 
+        rooms = ({TABAXROOM + "battlement1", TABAXROOM + "battlement2",
+                  TABAXROOM + "battlement3", TABAXROOM + "battlement4",
+                  TABAXROOM + "battlement5", TABAXROOM + "battlement6",
+                  TABAXROOM + "battlement7", TABAXROOM + "battlement8",
                   TABAXROOM + "watchtower"});
         broadcast("%^BOLD%^%^RED%^A squad of %^RESET%^%^GREEN%^orog%^BOLD%^%^RED%^"
-        +" crossbow archers arrives in %^RESET%^"+ ETO->query_name() 
+        +" crossbow archers arrives in %^RESET%^"+ ETO->query_name()
         +"%^BOLD%^%^RED%^ and begins preparing to fire on the battlements!"
           , rooms);
         battlers = children(TABAXOBJ + "tabaxi_battler");
@@ -747,7 +746,7 @@ int reach_destination(){
     ram = present("ram", ETO);
     if (objectp(ram)){
       report("tell lujke Ram present. Checking whether there are"
-                          +" orogs available");  
+                          +" orogs available");
       if (sizeof(orogs)>0){
         field = find_object_or_load(TABAXROOM + "main_field");
         report("tell lujke Orogs present. Entering Ram");
@@ -766,7 +765,7 @@ int reach_destination(){
       return 0;
     }else {
       get_ladder();
-    }  
+    }
   }
   return 0;
 }
@@ -833,8 +832,8 @@ void get_ladder(){
       if (roomname == "/d/shadowgate/void"){
         roomname = "nowhere";
         continue;
-      }      
-      break;  
+      }
+      break;
     }
   }
   if (roomname == "nowhere"){
@@ -929,12 +928,12 @@ void review_tactic(){
   case WAIT:
     if (random(4) <3){
       return;
-    } 
+    }
     goto_field();
     return;
   case SWING:
     room = file_name(ETO);
-    if (room == TABAXROOM + "treetop_base1" || 
+    if (room == TABAXROOM + "treetop_base1" ||
         room == TABAXROOM + "treetop_base2" ||
         room == TABAXROOM + "treetop_base3"){
       climb_trees();
@@ -942,7 +941,7 @@ void review_tactic(){
     }
     if (query_walking()==1){
       return;
-    }      
+    }
     dests = DESTINATIONS_D->query_waystations(TABAXROOM + "treetop_base1");
     if (sizeof(dests)<1){
       DESTINATIONS_D->generate_waystations(TABAXROOM + "treetop_base1",4, 4);
@@ -952,7 +951,7 @@ void review_tactic(){
   case LADDER:
     if (query_walking()==1){
       return;
-    }      
+    }
     num = sizeof(orogs);
     if (!objectp(ETO)||num<1){
       remove();
@@ -1025,7 +1024,7 @@ void review_tactic(){
       case 2:
         tactic = LADDER;
         break;
-      } 
+      }
       return;
     }
     room = file_name(environment(rams[flag]));
@@ -1039,7 +1038,7 @@ void review_tactic(){
     return;
   case ARCHERY:
     room = file_name(ETO);
-    if (room == TABAXROOM + "high_field" || room == TABAXROOM + "main_field" 
+    if (room == TABAXROOM + "high_field" || room == TABAXROOM + "main_field"
                                          || room == TABAXROOM + "low_field"){
       if (random(3)>0){
         battlers = children(TABAXOBJ + "tabaxi_battler");
@@ -1051,7 +1050,7 @@ void review_tactic(){
               break;
             }
           }
-        } 
+        }
       }
     } else {
       goto_field();
@@ -1125,5 +1124,5 @@ void heart_beat(){
   }
   if (random(7)<2){
     review_tactic();
-  } 
+  }
 }

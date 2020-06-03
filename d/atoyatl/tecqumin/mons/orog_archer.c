@@ -6,7 +6,7 @@ inherit MOB + "orog";
                     "%^BOLD%^%^YELLOW%^yellow%^RESET%^"})
 
 int climbed;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 
 void create()
 {

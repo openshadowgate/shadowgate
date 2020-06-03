@@ -2,7 +2,7 @@
 #include <std.h>
 inherit "/std/armour";
 
-static int flag;
+nosave int flag;
 
 create() {
     ::create();

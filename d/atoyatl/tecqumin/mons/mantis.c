@@ -4,7 +4,7 @@
 inherit MONSTER;
 
 object seized;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 void breakout(object ob);
 
 
@@ -42,7 +42,7 @@ void create()
         "damage resistance",
         "sunder",
         "daze",
-    })); 
+    }));
 
 
 
@@ -66,14 +66,14 @@ void create()
     set_damage(3,9);
     set_base_damage_type("piercing");
     set_fake_limbs(({"torso", "thorax", "head",
-      "front leg", "back leg", 
+      "front leg", "back leg",
       "left forearm", "right forearm"}));
     set_attack_limbs(({"mandibles", "left forearm", "right forearm"}));
     set("aggressive", 30);
       set_new_exp(level, "normal");
   	set_overall_ac(-65);
       set_size(2);
-      add_attack_bonus(65); 
+      add_attack_bonus(65);
   	set_alignment(4);
       set_property("full attacks",1);
       set_funcs(({"seize", "sunder", "rush", "seize", "seize"}));
@@ -82,14 +82,14 @@ void create()
 
             "%^BOLD%^%^GREEN%^The mantis brings its spiked forelimbs"
            +" together, as if in %^RESET%^prayer%^BOLD%^%^GREEN%^. ",
-   
+
             "%^BOLD%^%^GREEN%^The mantis %^RESET%^chitters%^BOLD%^%^GREEN%^"
            +" angrily.",
 
             "%^BOLD%^%^GREEN%^The mantis dances back and raises its"
            +" forelimbs high in a threatening posture, its wings fanning"
            +" out behind it to make it look enormous.",
-   
+
             "%^BOLD%^%^GREEN%^The mantis lets out an angry %^RESET%^hiss",
     	}),1);
   	set_emotes(10,({
@@ -99,7 +99,7 @@ void create()
 		"%^BOLD%^%^GREEN%^The mantis goes very still, but sways like a"
            +"%^RESET%^%^GREEN%^ leaf%^BOLD%^%^GREEN%^ in the wind.",
             "%^GREEN%^The mantis takes a few steps backwards"
-            
+
     	}),0);
       set_property("no random treasure", 1);
       BEAT = 0;
@@ -151,7 +151,7 @@ void rush(){
   critters = query_attackers();
   if (sizeof(critters)<1) return;
   who = critters[random(sizeof(critters))]->query_name();
-  force_me("rush " + who); 
+  force_me("rush " + who);
 }
 
 
@@ -165,12 +165,12 @@ void munch(int count){
     breakout(seized);
     return;
   }
-  tell_object(seized, "%^BOLD%^%^GREEN%^The " + TO->QCN 
+  tell_object(seized, "%^BOLD%^%^GREEN%^The " + TO->QCN
                      +"%^BOLD%^%^GREEN%^ drags you close and"
                      +" %^RESET%^munches %^BOLD%^%^GREEN%^on your head,"
                      +" chewing with its %^RESET%^powerful mandibles"
                      +"%^BOLD%^%^GREEN%^.");
-  tell_room(ETO, TO->QCN + "%^BOLD%^%^GREEN%^ drags " + seized->QCN 
+  tell_room(ETO, TO->QCN + "%^BOLD%^%^GREEN%^ drags " + seized->QCN
                  +"%^BOLD%^%^GREEN%^ close and %^RESET%^munches"
                  +" %^BOLD%^%^GREEN%^on " + seized->QP +" head, grinding"
                  +" away with its powerful mandibles.", seized);
@@ -194,7 +194,7 @@ void seize(object targ){
   tell_object(targ, TO->QCN + "%^BOLD%^%^GREEN%^ seizes you in the"
                  +" unyielding grip of its %^RESET%^spiked%^BOLD%^%^GREEN%^"
                  +" forelegs.");
-  tell_room(room, TO->QCN + "%^BOLD%^%^GREEN%^ seizes " + targ->QCN 
+  tell_room(room, TO->QCN + "%^BOLD%^%^GREEN%^ seizes " + targ->QCN
                  +"%^BOLD%^%^GREEN%^ in the unyielding grip of its"
                  +" %^RESET%^spiked%^BOLD%^%^GREEN%^ forelegs.", targ);
   targ->set_paralyzed(30, "You"

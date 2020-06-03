@@ -4,7 +4,7 @@
 inherit MONSTER;
 
 
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 int summoned;
 void breakout(object ob);
 
@@ -31,8 +31,8 @@ void create()
         "power attack",
         "rush",
         "damage resistance",
-        
-      })); 
+
+      }));
       set_hp(query_max_hp());
       set_property("swarm", 1);
       set_overall_ac(-68);
@@ -51,7 +51,7 @@ void create()
     set("aggressive", 6);
       set_new_exp(level, "normal");
       set_size(3);
-      add_attack_bonus(71); 
+      add_attack_bonus(71);
   	set_alignment(4);
       set_property("full attacks",1);
       set_funcs(({"barge", "rush", "toss" }));
@@ -60,7 +60,7 @@ void create()
 
             "%^ORANGE%^The warthog %^RESET%^snuffles %^ORANGE%^around in the"
            +" %^GREEN%^undergrowth%^RESET%^",
-   
+
             "%^ORANGE%^The warthog scents the air and glares around with its"
            +" %^BOLD%^%^RED%^r%^RESET%^%^RED%^e%^BOLD%^d %^MAGENTA%^piggy"
            +" %^RED%^e%^RESET%^%^RED%^ye%^BOLD%^s%^RESET%^%^ORANGE%^.",
@@ -68,7 +68,7 @@ void create()
             "%^ORANGE%^The warthog digs frantically at the ground for a few"
            +" moments, creating quite a deep crater and coming up with a prize"
            +"%^RESET%^ tuber",
-   
+
             "%^ORANGE%^The warthog scratches its back against the rough bark of a"
            +"%^BOLD%^%^GREEN%^ young tree%^RESET%^%^ORANGE%^, making the whole"
            +" thing shudder",
@@ -140,9 +140,9 @@ barge2(object ob){
     remove_property("using instant feat");
     return;
   }
-  tell_object(ob, "The %^ORANGE%^warthog%^RESET%^ slams into you, shoulder first!"); 
+  tell_object(ob, "The %^ORANGE%^warthog%^RESET%^ slams into you, shoulder first!");
   tell_room(ETO, "The %^ORANGE%^warthog%^RESET%^ slams into " + ob->QCN + "%^RESET%^,"
-    +" shoulder first!", ob); 
+    +" shoulder first!", ob);
   targscore = (ob->query_size()* 10) + ob->query_stats("strength");
   targscore = targscore + random(targscore);
   myscore = 65 + random(65);
@@ -154,14 +154,14 @@ barge2(object ob){
     tell_object(ob, "%^BOLD%^%^BLUE%^You manage to stand firm, despite the"
       +" %^CYAN%^force %^BLUE%^of the impact!");
     tell_room(ETO, ob->QCN + "%^BOLD%^%^BLUE%^ manages to stand firm, despite the"
-      +" %^CYAN%^force %^BLUE%^of the impact!", ob);   
-  } else 
+      +" %^CYAN%^force %^BLUE%^of the impact!", ob);
+  } else
   {
     //do knockback
     tell_object(ob, "%^BOLD%^%^YELLOW%^You go flying and land, winded, flat on your"
       +" back!");
     tell_room(ETO, ob->QCN + "%^BOLD%^%^YELLOW%^ goes flying and lands, winded,"
-      +" flat on "+ ob->QP + " back!", ob);   
+      +" flat on "+ ob->QP + " back!", ob);
     ob->set_paralyzed(30 + random(20), "%^BOLD%^%^YELLOW%^You are winded from the%^RESET%^"
       +" %^ORANGE%^warthog's %^BOLD%^%^YELLOW%^shoulder barge!");
   }
@@ -188,7 +188,7 @@ void squeal3(object where, object * hogs) //This time it's porksonal
     tell_room(where, "The %^ORANGE%^warthog's%^RESET%^ seem to go unanswered");
     summoned = 0;
     return;
-  } 
+  }
   for (i=0;i<count;i++){
     hogroom = environment(hogs[i]);
     if (!objectp(hogroom))
@@ -209,7 +209,7 @@ void squeal3(object where, object * hogs) //This time it's porksonal
         continue;
       }
     }
-  } 
+  }
 }
 
 void squeal2(object where) //the squeakuel
@@ -244,7 +244,7 @@ void squeal2(object where) //the squeakuel
     tell_room(where, "The %^ORANGE%^warthog's%^RESET%^ seem to go unanswered");
     summoned = 0;
     return;
-  }  
+  }
   hogs = ({});
   count = sizeof(query_attackers()) + 1;
   for (i=0;i<count;i++)
@@ -295,9 +295,9 @@ void barge(){
     +" direction.");
   tell_room(ETO, "%^ORANGE%^The warthog snorts and fixes its"
     +" %^BOLD%^%^RED%^e%^BOLD%^%^RED%^ye%^RESET%^%^RED%^s %^RESET%^%^ORANGE%^on "
-    + critter->QCN 
+    + critter->QCN
     +" before charging %^BOLD%^%^MAGENTA%^madly %^RESET%^%^ORANGE%^in "
-    + critter->QP 
+    + critter->QP
     +" direction.", critter);
   set_property("using instant feat",1);
   call_out("barge2", 2, critter);
@@ -309,7 +309,7 @@ void rush(){
   critters = query_attackers();
   if (sizeof(critters)<1) return;
   who = critters[random(sizeof (critters))]->query_name();
-  force_me("rush " + who); 
+  force_me("rush " + who);
 }
 
 
@@ -342,7 +342,7 @@ void toss(){
     tell_object(critter, "%^BOLD%^%^RED%^You crash into the ground!");
     tell_room(ETO, critter->QCN + " %^BOLD%^%^RED%^crashes into the ground");
     critter->do_damage(225+random(155));
-    return;   
+    return;
   }
   exit = exits[random(sizeof(exits))];
   roomname = ETO->query_exit(exit);
@@ -351,7 +351,7 @@ void toss(){
     tell_object(critter, "%^BOLD%^%^RED%^You crash into the ground!");
     tell_room(ETO, critter->QCN + " %^BOLD%^%^RED%^crashes into the ground");
     critter->do_damage(225+random(155));
-    return;   
+    return;
   }
   room = find_object_or_load(roomname);
   if (!objectp(room))
@@ -359,7 +359,7 @@ void toss(){
     tell_object(critter, "%^BOLD%^%^RED%^You crash into the ground!");
     critter->do_damage(225+random(155));
     tell_room(ETO, critter->QCN + " %^BOLD%^%^RED%^crashes into the ground");
-    return;   
+    return;
   }
   critter->move(room);
   tell_room(ETO, critter->QCN + " %^BOLD%^%^CYAN%^sails%^RESET%^ out of the room!");
@@ -370,4 +370,3 @@ void toss(){
   critter->do_damage(225+random(155));
   critter->force_me("look");
 }
-

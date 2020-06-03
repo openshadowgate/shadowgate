@@ -12,9 +12,9 @@
 
 #define VOID "/d/shadowgate/void"
 
-static private int encumbrance, no_clean;
+nosave private int encumbrance, no_clean;
 private int size;
-static private object last_location;
+nosave private object last_location;
 
 void set_weight(int x);
 void set_no_clean(int x);
@@ -93,7 +93,7 @@ int move(mixed dest)
     move_object(this_object(), ob);
     ob->gain_item(TO);
 
-    // setting static had_players to 3 if a person enters a room, used for clean_up -Ares
+    // setting nosave had_players to 3 if a person enters a room, used for clean_up -Ares
     if(ob->is_room() && TO->is_player()) { ob->set_had_players(); }
 
     if (objectp(prev))

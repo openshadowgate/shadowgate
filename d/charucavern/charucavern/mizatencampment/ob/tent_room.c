@@ -5,8 +5,8 @@ inherit ROOM;
 string MyDest, UNIQ_ID;
 object destination, entry_tent;
 
-static mixed cleaner;
-static int tent_installed;
+nosave mixed cleaner;
+nosave int tent_installed;
 
 int filth;
 
@@ -61,7 +61,7 @@ string longdesc()
     return ret;
 }
 
-void create() 
+void create()
 {
     ::create();
     set_property("light",1);
@@ -70,15 +70,15 @@ void create()
     set_travel(SLICK_FLOOR);
     set_name("Inside of a tent");
     set_short("The inside of a tent");
-    
+
     set_property("no sticks",1);
-    //make this dependent on area? 
+    //make this dependent on area?
     //set_property("no teleport", 1);
     filth = 0;
     set_long((:TO, "longdesc":));
 
     //set_listen("default","The sound of rumbling echoes all around you.");
-    //set_smell("default","\nThe smell of rot and decay invades your senses.");    
+    //set_smell("default","\nThe smell of rot and decay invades your senses.");
     call_out("check_my_tent", 5);
 }
 
@@ -96,7 +96,7 @@ void check_tent()
     object where, *inv, tent_ob;
     int x;
     if(!objectp(TO)) return;
-    if(!stringp(MyDest)) 
+    if(!stringp(MyDest))
     {
         //tell_object("/std/user#1244235", "removing the tent because it couldn't find the string environment");
         TO->remove();
@@ -104,7 +104,7 @@ void check_tent()
     }
     if(!objectp(destination))
     {
-        if(!objectp(destination = find_object_or_load(MyDest))) 
+        if(!objectp(destination = find_object_or_load(MyDest)))
         {
             //tell_object("/std/user#1244235", "removing the tent because it couldn't find the environment");
             TO->remove();
@@ -118,7 +118,7 @@ void check_tent()
         tent_ob = new(MOB+"tent_object");
         tent_ob->register_tent_room(TO);
         tent_ob->set_my_tent(query_my_tent());
-        tent_ob->move(destination);        
+        tent_ob->move(destination);
         TO->set_had_players();
         tent_ob->set_had_players();
         entry_tent = tent_ob;
@@ -141,7 +141,7 @@ void check_tent()
         //more than one of them - remove it
         //if(sizeof(inv)) inv->remove();
     }
-    return;   
+    return;
 }
 
 int init_tent(object tentbag, object where)
@@ -156,7 +156,7 @@ int init_tent(object tentbag, object where)
     tent_ob = new(MOB+"tent_object");
     tent_ob->register_tent_room(TO);
     tent_ob->set_my_tent((string)tentbag->query_my_tent());
-    tent_ob->move(destination);    
+    tent_ob->move(destination);
     entry_tent = tent_ob;
     set_had_players();
     tent_ob->set_had_players();
@@ -166,7 +166,7 @@ int init_tent(object tentbag, object where)
     TO->set_property("teleport proof", (int)destination->query_property("teleport proof"));
     if(stringp(destination->query_smell("default"))) TO->set_smell("default", "\nWafting in from outside: "+(string)destination->query_smell("default"));
     if(stringp(destination->query_listen("default"))) TO->set_listen("default", "Filtering in from outside: "+(string)destination->query_listen("default"));
-    return 1;    
+    return 1;
 }
 
 void check_my_tent()
@@ -180,15 +180,15 @@ void check_my_tent()
     //if(base_name(environment(entry_tent)) != MyDest) check_tent();
     if(objectp(entry_tent))
     {
-        if(!objectp(environment(entry_tent))) 
+        if(!objectp(environment(entry_tent)))
         {
             check_tent();
             return;
         }
-        if(objectp(environment(entry_tent))) 
+        if(objectp(environment(entry_tent)))
         {
             if(base_name(environment(entry_tent)) != MyDest) check_tent();
-        }       
+        }
     }
     if(!objectp(TO)) return;
     if(filth >= 701)
@@ -196,10 +196,10 @@ void check_my_tent()
         lice = new("/d/charucavern/diseases/lice.c");
         lice->move(TO);
         lice->do_infection();
-        if(objectp(lice)) lice->remove();        
+        if(objectp(lice)) lice->remove();
     }
     if(random(250)) return;
-    
+
     inv = sizeof(all_inventory(TO));
     if(!inv) inv = random(30);
     else inv *= (1+random(10)+random(10));
@@ -290,11 +290,11 @@ int clean_func(string str)
             return 1;
         }
     }
-    if(!filth) 
+    if(!filth)
     {
         tell_object(TP, "%^BOLD%^%^WHITE%^This tent is not dirty, you see no reason to clean it!%^RESET%^");
         return 1;
-    }   
+    }
     tell_object(TP, "%^BOLD%^%^BLACK%^You start carefully cleaning the tent, trying to avoid tearing it!%^RESET%^");
     tell_room(TO, TPQCN+"%^BOLD%^%^BLACK%^ starts carefully cleaning the tent, trying to avoid tearing it!%^RESET%^");
     cleaner = TP;
@@ -302,5 +302,3 @@ int clean_func(string str)
     input_to("check_cleaning", 1);
     return 1;
 }
-
-

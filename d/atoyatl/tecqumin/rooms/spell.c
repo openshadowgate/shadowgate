@@ -40,7 +40,7 @@ string spell_name,
        psyclass,
        aoe_message;
 
-static int FULL_EFFECT = 100;
+nosave int FULL_EFFECT = 100;
 
 mixed WildMagicArea(object where);
 

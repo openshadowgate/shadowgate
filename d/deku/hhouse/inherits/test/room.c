@@ -25,9 +25,9 @@ inherit "/d/deku/hhouse/inherits/test/senses";
 private int reset_number = 0;
 int already_encountered, only_on_reset, flag;
 string sneakf, peer_message, mcharge_message, charge_message;
-static int storage, storing,had_players;
-static int test_grafitti_loaded; // This will be 1 if the grafitti has been loaded for the room from the daemon.
-static object * dependencies = ({ });
+nosave int storage, storing,had_players;
+nosave int test_grafitti_loaded; // This will be 1 if the grafitti has been loaded for the room from the daemon.
+nosave object * dependencies = ({ });
 
 void reset();
 void reinitiate();

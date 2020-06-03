@@ -22,7 +22,7 @@ void create()
     call_out("clean_room", MAX_NET_DEAD_TIME);
 }
 
-static void clean_room()
+void clean_room()
 {
     object* in_here, * to_clean;
     int i;

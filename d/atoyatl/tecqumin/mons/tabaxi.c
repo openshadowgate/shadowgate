@@ -7,7 +7,7 @@ inherit QNPC;
                     "%^BOLD%^%^YELLOW%^yellow%^RESET%^"})
 
 int armored, command_time;
-static int BEAT, heartcount, eyecolour;
+nosave int BEAT, heartcount, eyecolour;
 string last_command,* commanders;
 mapping greeted;
 object requester;

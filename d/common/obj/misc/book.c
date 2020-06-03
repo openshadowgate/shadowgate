@@ -16,7 +16,7 @@ int __CheckedOut;
 int last_page;
 int library_book;
 int modified;
-static int current_page;
+nosave int current_page;
 
 int stuff(string str);
 void set_stuff(string str,string stuff);

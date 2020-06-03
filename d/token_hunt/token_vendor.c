@@ -6,8 +6,8 @@ inherit "/std/vendor.c";
 #define INV INV_PATH"token_inventory"
 
 mapping INVENTORY;
-static string STORE_TYPE;
-static object INV_OB;
+nosave string STORE_TYPE;
+nosave object INV_OB;
 void fill_storage_room();
 void set_store_type(string type);
 string query_store_type();

@@ -4,13 +4,13 @@
 #include <dirs.h>
 #define SPEED ( __COMBAT_SPEED__ - 1 )
 
-// garrett - I made the next two variables static because we now have
+// garrett - I made the next two variables nosave because we now have
 // savable rooms. Maybe they should ALL be static, but I'm not willing
 // to mess with code that deeply.
 
-static object * combatants= ({});
-static mixed * round= ({});
-static mapping lookAhead = ([]);
+nosave object * combatants= ({});
+nosave mixed * round= ({});
+nosave mapping lookAhead = ([]);
 
 // end of statication.
 

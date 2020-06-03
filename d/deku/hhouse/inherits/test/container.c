@@ -10,13 +10,13 @@
 
 inherit "/d/deku/hhouse/inherits/test/Object";
 
-//These were static - removed the static part to see if it
+//These were nosave - removed the static part to see if it
 //will fix the problem with lockable chests 
 //being able to receive items even while locked - Saide
-private static int internal_encumbrance;
+private nosave int internal_encumbrance;
 private int possible_to_close;
 private int is_closed;
-private static int max_internal_encumbrance;
+private nosave int max_internal_encumbrance;
 
 void set_max_internal_encumbrance(int max);
 int query_max_internal_encumbrance();

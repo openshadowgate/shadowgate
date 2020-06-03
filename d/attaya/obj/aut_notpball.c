@@ -4,7 +4,7 @@
 inherit OBJECT;
 
 object room;
-static int flag;
+nosave int flag;
 
 int charge;
 

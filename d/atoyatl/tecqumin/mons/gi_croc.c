@@ -6,7 +6,7 @@ inherit MONSTER;
 object seized;
 
 void breakout(object ob);
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 
 void create()
 {

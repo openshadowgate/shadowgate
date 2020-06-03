@@ -67,9 +67,9 @@ void create() {
     orig_exits = ([]);
     footprints = allocate(SIZE);
     skip_obvious = 0;
-    
+
     log_file("deku_code", "@@END@@\n exits.c end of create function\n");
-    
+
 }
 
 // exitName:({"destination",dc-check,damageper fall, height})
@@ -116,7 +116,7 @@ int perform_pre_exits(string str) {
 
 
 
-void add_tracks(object ob, string action, string direction) 
+void add_tracks(object ob, string action, string direction)
 {
     int i,j;
     string tmp,*feats;
@@ -249,7 +249,7 @@ int use_exit() {
     if ((verb == "climb") || (verb == "descend"))
         if (!climb_ok(verb))
             return 1;
-	//leaving this in until I get the rest of the lib 
+	//leaving this in until I get the rest of the lib
 	//updated to support new traps - Saide
     	if (TO->trapped(verb))
         if (TO->do_spec_trap(verb)) return 1;
@@ -312,13 +312,13 @@ int use_exit() {
     return 1;
 }
 
-void setupExits() 
+void setupExits()
 {
     string *borg;
     int i;
     i = sizeof(CLIMB);
     while (i--) add_action("use_stupid_exit",CLIMB[i]);
-    if (climb_exits) 
+    if (climb_exits)
 	{
     	i = sizeof(borg = keys(climb_exits));
         while (i--) add_action("use_exit", borg[i]);
@@ -331,7 +331,7 @@ void setupExits()
 
 }
 
-static void initiate() 
+nosave void initiate()
 {
     object ob,incoming;
     string *borg,verb, tmp;
@@ -351,27 +351,27 @@ static void initiate()
         incoming = TP->query_in_vehicle();
 	}
 	if(!objectp(incoming)) return;
-    
+
     //I'm going try it this way and see what breaks... err happens :P
     //Property is set when you sneak successfully - Saide
 
-    if(TP->query_property("sneaking_from")) 
+    if(TP->query_property("sneaking_from"))
 	{
         tmp = TP->query_property("sneaking_from");
         TP->remove_property("sneaking_from");
         tmp = query_direction(tmp);
-        if(tmp != ROOM_VOID) 	
+        if(tmp != ROOM_VOID)
 		{
             add_tracks(incoming,"entered",tmp);
         	return;
-        }       
+        }
     }
-    
-    //Debug msgs below - trying to figure out what exactly 
-    //happens here when I sneak and it turns out... well, all 
+
+    //Debug msgs below - trying to figure out what exactly
+    //happens here when I sneak and it turns out... well, all
     //of them happen sometimes.... Saide
 
-    if (!objectp(ob)) 
+    if (!objectp(ob))
 	{
         add_tracks(incoming,"appeared",0);
         return;
@@ -405,7 +405,7 @@ static void initiate()
     add_tracks(incoming,"entered",verb);
 }
 
-varargs static void set_exits(mixed dests, string *dirs) 
+nosave void set_exits(mixed dests, string *dirs)
 {
     int i;
     string result,where,how;
@@ -432,7 +432,7 @@ varargs static void set_exits(mixed dests, string *dirs)
 }
 
 
-void add_exit(string dest, string dir) 
+void add_exit(string dest, string dir)
 {
     if (!dest || !dir) return;
     if (!destinations) destinations = ([]);
@@ -475,12 +475,12 @@ string *query_obvious_exits() {
 }
 
 mixed query_exits_string(int hidden)
-{	
+{
 	int x, max;
 	string *sorties;
 	string str = "";
 	if(!destinations) return 0;
-	if(hidden) 
+	if(hidden)
 	{
 		sorties = query_exits();
 	}
@@ -545,7 +545,7 @@ string query_short_exits() {
     return s + "]";
 }
 
-static void set_post_exit_functions(string *dirs, string *funcs) {
+void set_post_exit_functions(string *dirs, string *funcs) {
     int i;
 
     if (!dirs || !funcs || ((i=sizeof(dirs)) != sizeof(funcs))) return;
@@ -553,19 +553,19 @@ static void set_post_exit_functions(string *dirs, string *funcs) {
     while (i--) post_exit_func[dirs[i]] = funcs[i];
 }
 
-static void add_post_exit_function(string dir, string func) {
+void add_post_exit_function(string dir, string func) {
     if (!post_exit_func) post_exit_func = ([]);
     post_exit_func[dir] = func;
     this_object()->reinitiate();
 }
 
-static void remove_post_exit_function(string dir) {
+void remove_post_exit_function(string dir) {
     if (!dir || !post_exit_func || !post_exit_func[dir]) return;
     map_delete(post_exit_func, dir);
     this_object()->reinitiate();
 }
 
-static void set_pre_exit_functions(string *dirs, string *funcs) {
+void set_pre_exit_functions(string *dirs, string *funcs) {
     int i;
 
     if (!dirs || ! funcs || (sizeof(dirs) != sizeof(funcs))) return;
@@ -574,14 +574,14 @@ static void set_pre_exit_functions(string *dirs, string *funcs) {
     while (i--) pre_exit_func[dirs[i]] = funcs[i];
 }
 
-static void add_pre_exit_function(string dir, string func) {
+void add_pre_exit_function(string dir, string func) {
     if (!dir || !func) return;
     if (!pre_exit_func) pre_exit_func = ([]);
     pre_exit_func[dir] = func;
     this_object()->reinitiate();
 }
 
-static void remove_pre_exit_function(string dir) {
+void remove_pre_exit_function(string dir) {
     if (!pre_exit_func || !pre_exit_func[dir]) return;
     map_delete(pre_exit_func, dir);
     this_object()->reinitiate();

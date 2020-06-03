@@ -17,7 +17,7 @@
 inherit MONSTER;
 
 int flag, form, timer, leaving_lair, acting, para;
-static int BEAT;
+nosave int BEAT;
 object current_room;
 string para_message;
 void leave_lair();

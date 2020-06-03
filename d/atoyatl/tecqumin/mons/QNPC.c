@@ -37,7 +37,7 @@ mapping responses;
 mapping dependencies;
 mapping functions;
 
-static int BEAT;
+nosave int BEAT;
 
 int check_dependency(string trigger, object speaker);
 int remove_response(string * trigs);

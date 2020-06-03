@@ -7,9 +7,9 @@ inherit OBJECT;
 
 mapping horse_stats;
 
-static mapping example_variable;
+nosave mapping example_variable;
 
-static string race_horses;
+nosave string race_horses;
 object horse_master;
 
 void SAVE();

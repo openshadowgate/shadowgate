@@ -2,7 +2,7 @@
 #include <std.h>
 inherit "/d/common/obj/weapon/club";
 
-static int dynbonus;
+nosave int dynbonus;
 object owner;
 int uses;
 int BLAST;

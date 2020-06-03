@@ -38,7 +38,7 @@ private string true_name;         // kept in seperate variable for security
 private string creator;           // File name of the ob that created an object
 
 string cursed;
-//static string d_master;           // File name of an object's domain master ob
+//nosave string d_master;           // File name of an object's domain master ob
 private string * identified;
 private string *studied;
 private mapping studied_failed;
@@ -48,23 +48,23 @@ string *magic_properties;  //  Allows all objects to have magic properties
 //3/19/2007
 string *item_owners = ({});
 
-//going to manipulate this string with 
-//the set_bit() and test_bit() efuns 
-//this string will determine if an item can have more than 
+//going to manipulate this string with
+//the set_bit() and test_bit() efuns
+//this string will determine if an item can have more than
 //one owner, if the item owners will clear
-//on death, if it will clear on 
-//fencing - the bits are, 
-//from left to right - 
+//on death, if it will clear on
+//fencing - the bits are,
+//from left to right -
 //clear on sale,
-//clear on fence, 
+//clear on fence,
 //clear single owner on death,
 //clear all owners on death,
 //multiple owners
 string item_owner_props = "01100";
 
 //hiding things..
-private static int hidden, magic_hidden;
-private static object * hidden_seen;
+nosave int hidden, magic_hidden;
+nosave object * hidden_seen;
 
 // To allow this item to use the unique item system
 // Thorn@ShadowGate - 27 June 2000
@@ -187,7 +187,7 @@ void init_ob() {
 
 }
 
-void set(string what, mixed arg) 
+void set(string what, mixed arg)
 {
     	if( !stringp(what) ) return;
     	if(functionp(arg) && geteuid(this_object()) != geteuid(arg[0])) return;
@@ -205,14 +205,14 @@ void set(string what, mixed arg)
 // changing so an aggessive of 0 doesn't automatically swarm  *Styx* 8/29/03
 //    if(what == "aggressive") TO->set_property("swarm",1);
     	if(what == "aggressive" && arg != 0)  TO->set_property("swarm",1);
-	if(functionp(arg)) 
+	if(functionp(arg))
 	{
 		TO->remove_property("function_"+what);
 		TO->set_property("function_"+what, arg[1]);
 	}
     	if(ob_data[what]) ob_data[what] = arg;
     	else ob_data += ([ what: arg ]);
-    	if(what == "value") 
+    	if(what == "value")
 	{
       	what = "cointype";
         	if(ob_data[what]) ob_data[what] = "gold";
@@ -220,7 +220,7 @@ void set(string what, mixed arg)
     	}
 }
 
-static void add(string what, mixed arg) {
+protected void add(string what, mixed arg) {
     if(!ob_data) ob_data = ([]);
     if(functionp(arg) && geteuid(this_object()) != geteuid(arg[0])) return;
     if(stringp(arg) || intp(arg)) arg = ({ arg});
@@ -268,43 +268,43 @@ void UpdateBonuses(object possessor, string which)
 	if(!living(possessor)) return;
 	if(!objectp(TO)) return;
  	if(!living(TO))
-	{	
-		if(TO->is_armor()) 
+	{
+		if(TO->is_armor())
 		{
 			possessor->ApplyObjectBonuses(TO, possessor, which, "wear");
 		}
 		if(TO->is_weapon())
 		{
-			possessor->ApplyObjectBonuses(TO, possessor, which, "wield");			
+			possessor->ApplyObjectBonuses(TO, possessor, which, "wield");
 		}
 		else
-		{	
-			if(TO->query_property("inanimate_bonus")) 
+		{
+			if(TO->query_property("inanimate_bonus"))
 			{
 				possessor->ApplyObjectBonuses(TO, possessor, which, "move");
-			}					
+			}
 		}
 	}
 
 }
 
-void set_property(string prop, mixed value) 
+void set_property(string prop, mixed value)
 {
 	object possessor;
-    //Added to support the ability for an item that's worn/wielded/held 
-    //and adds a bonus to be updated by this - without having to 
+    //Added to support the ability for an item that's worn/wielded/held
+    //and adds a bonus to be updated by this - without having to
     //remove/wear/unwield/wield the object to take affect - Saide
     if(!TO->is_room()) { possessor = ETO; }
 
     if(member_array(prop, VALID_BONUSES) != -1)
-    {		
+    {
         if(!living(TO)) { UpdateBonuses(possessor, "remove"); }
     }
     if(prop == "enchantment"  && !random(20) && ! query("no curse"))
     {
         value = -1* value;
-    }	
-    if(pointerp(value)) 
+    }
+    if(pointerp(value))
     {
         if(!props) props = ([]);
         if(!props[prop] || !pointerp(props[prop])) props[prop] = ({});
@@ -315,12 +315,12 @@ void set_property(string prop, mixed value)
         }
         return;
     }
-    else 
+    else
     {
-        if(!props || !mapp(props)) props = ([]);    
+        if(!props || !mapp(props)) props = ([]);
         if(!props[prop]) props[prop] = value;
 
-        else if(props[prop]) 			
+        else if(props[prop])
         {
             props[prop] += value;
             if(member_array(prop, VALID_BONUSES) != -1)
@@ -334,7 +334,7 @@ void set_property(string prop, mixed value)
 
     if(member_array(prop, VALID_BONUSES) != -1)
     {
-        if(!living(TO)) { UpdateBonuses(possessor, "add"); }	
+        if(!living(TO)) { UpdateBonuses(possessor, "add"); }
     }
 }
 
@@ -347,14 +347,14 @@ int armor_filter(object ob)
     return 0;
 }
 
-mixed query_property(string prop) 
+mixed query_property(string prop)
 {
 // racial bonuses errored when querying from /std/races; had to apply manually
     object *worn;
     int num, mylevel;
     string subrace, binding;
 
-  	if(!props) 
+  	if(!props)
 	{
       	props = ([]);
        	return 0;
@@ -418,7 +418,7 @@ mixed query_property(string prop)
         if((string)TO->query_race() == "gnome") {
           subrace = (string)TO->query("subrace");
           if(subrace) {
-            if(subrace == "deep gnome" || subrace == "svirfneblin") num += 10; 
+            if(subrace == "deep gnome" || subrace == "svirfneblin") num += 10;
           }
         }
         if((string)TO->query_race() == "orc") {
@@ -469,11 +469,11 @@ mixed query_property(string prop)
 	//Added this to allow for a temporary enchantment property - Saide
 	if(prop == "enchantment")
 	{
-		if(props["temporary enchantment"]) 
+		if(props["temporary enchantment"])
 		{
 			return props[prop] + props["temporary enchantment"];
 		}
-	}		
+	}
       if(prop == "soulbound"){
             if(TO->is_sheath()) {
                 worn = ({});
@@ -497,9 +497,9 @@ int is_cursed() {
     return query_property("enchantment") && query_property("enchantment") < 0;
 }
 
-void remove_all_properties() 
+void remove_all_properties()
 {
-	if(!living(TO)) 
+	if(!living(TO))
 	{
 		if(objectp(ETO))
 		{
@@ -514,19 +514,19 @@ void remove_all_properties()
     props = ([]);
 }
 
-int remove_property (string prop) 
+int remove_property (string prop)
 {
-	//added this as a fix for bonuses not 
-	//being removed on removing armor 
+	//added this as a fix for bonuses not
+	//being removed on removing armor
       //problem was the remove_property("wear_order")
-	//in /cmds/mortal/_remove.c - which was throwing 
-	//off the sizeof() comparison - 
+	//in /cmds/mortal/_remove.c - which was throwing
+	//off the sizeof() comparison -
 	//this way if the bonuses aren't removed, no matter
       //the result of that comparison, then they wont be
 	//re-added - Saide
     object shape;
     int tmp_flag = 0;
-   
+
     if(prop == "shapeshifted")
     {
         if(objectp(shape = TO->query_property("shapeshifted")))
@@ -535,18 +535,18 @@ int remove_property (string prop)
         }
     }
 
-    if(props && props[prop]) 
+    if(props && props[prop])
 	{
 //        	props[prop] = 0;
 		if(member_array(prop, VALID_BONUSES) != -1)
 		{
-			if(!living(TO)) 
-			{ 
+			if(!living(TO))
+			{
 				tmp_flag = 1;
 				if(objectp(ETO)) { UpdateBonuses(ETO, "remove"); }
 			}
 		}
-		map_delete(props,prop);	
+		map_delete(props,prop);
 		if(!living(TO))
 		{
 			if(sizeof(keys(props)) != sizeof(keys(props) - VALID_BONUSES) && tmp_flag == 1)
@@ -634,7 +634,7 @@ string query_true_name() {
     return true_name;
 }
 
-string query_long(string str) 
+string query_long(string str)
 {
 	string tmd;
 	function func;
@@ -643,8 +643,8 @@ string query_long(string str)
     {
         return(string)(*ob_data["long"])(str);
     }
-    //new method of being able to use 	
-    //a functionp for a long description 
+    //new method of being able to use
+    //a functionp for a long description
     //in an object that saves to a player/etc - Saide
     if(tmd = query_property("function_long"))
     {
@@ -654,7 +654,7 @@ string query_long(string str)
             tmd = "A function messed up in query_long() in Object.c";
         }
     }
-    else 
+    else
     {
         tmd = ob_data["long"];
     }
@@ -771,7 +771,7 @@ string set_obvious_short(string str){
 }
 
 
-string query_short() 
+string query_short()
 {
     string theShort,*short_info;
     int i;
@@ -804,18 +804,18 @@ string query_short()
         }
     }
 
-	if(objectp(TP) && !TO->is_room() && !living(TO)) 
+	if(objectp(TP) && !TO->is_room() && !living(TO))
 	{
 		if(TP->query("is_auto_detecting_traps"))
 		{
-			if(sizeof(TO->query_trap_data())) 
+			if(sizeof(TO->query_trap_data()))
 			{
 				theShort = TO->get_trap_object_auto_detect(theShort, TP);
 			}
 		}
 	}
 
-    	if(TO->is_weapon() || !wielded) return theShort;		
+    	if(TO->is_weapon() || !wielded) return theShort;
     	else return theShort+limbString;
 }
 
@@ -879,7 +879,7 @@ void add_hidden_seen(object obj){
 void add_all_to_hidden_seen(object * objs){
     if(!pointerp(hidden_seen)){
       hidden_seen = ({});
-    } 
+    }
     hidden_seen += objs;
 }
 
@@ -1108,14 +1108,14 @@ int query_use_delay(){
     return query("use delay");
 }
 
-void reset() 
+void reset()
 {
-    log_file("deku_code", "@@RESET@@START\n Object.c START OF FUNCTION \n@@RESET@@END@@\n");    
+    log_file("deku_code", "@@RESET@@START\n Object.c START OF FUNCTION \n@@RESET@@END@@\n");
     return;
     // do temperature
 }
 
-void create() 
+void create()
 {
     int CleanCheck;
     seteuid( getuid() ); // ensures all objects have an euid.
@@ -1140,7 +1140,7 @@ void create()
     //do not comment this out - the world WILL break - Saide
 }
 
-void init() 
+void init()
 {
     string *actions;
     int i,j;
@@ -1149,26 +1149,26 @@ void init()
     // remove it.
     // Thorn@ShadowGate - 28 June 2000
     log_file("deku_code", "@@@START@INIT@@@\n Object.c init() start\n");
-    if(unique_item == 1) 
+    if(unique_item == 1)
     {
-        if(sizeof(children(query_unique_id())) > 2) 
+        if(sizeof(children(query_unique_id())) > 2)
         {
             if (objectp(ETO) && (base_name(ETO) != "/d/shadowgate/void") )
             move("/d/shadowgate/void");
             return;
         }
-        else 
+        else
         {
             if(!objectp(ETO)) return;
-            else if(!UNIQUE_D->ok_to_clone(TO->query_unique_id(), ETO)) 
+            else if(!UNIQUE_D->ok_to_clone(TO->query_unique_id(), ETO))
             {
                 move("/d/shadowgate/void");
             }
-            else if(userp(ETO)) 
+            else if(userp(ETO))
             {
                 UNIQUE_D->issue_lease(TO->query_unique_id(),ETOQN,unique_lease);
             }
-            else 
+            else
             {
                 UNIQUE_D->clear_lease(TO->query_unique_id());
             }
@@ -1179,7 +1179,7 @@ void init()
     log_file("deku_code", "@@@START@INIT@@@\n Object.c init() end\n");
 }
 
-int move(mixed dest) 
+int move(mixed dest)
 {
     int i;
     if(!objectp(TO)) { return MOVE_NOT_ALLOWED; }
@@ -1188,27 +1188,27 @@ int move(mixed dest)
 
     if(!objectp(TO)) { return MOVE_NOT_ALLOWED; }
 
-    if(objectp(ETO))     
+    if(objectp(ETO))
     {
 		if(living(ETO))
 		{
     		ETO->ApplyObjectBonuses(TO, ETO, "remove", "move");
 		}
 	}
-    
+
 	i = move::move(dest);
-	
-	
+
+
 	if(objectp(TO))
 	{
 		if(objectp(ETO) && living(ETO))
 		{
 			ETO->ApplyObjectBonuses(TO, ETO, "add", "move");
-		}	
+		}
 
-		if (!i && !living(TO)) 
+		if (!i && !living(TO))
 		{
-			if (query_real_hidden()) 
+			if (query_real_hidden())
 			{
 				reset_hidden_seen();
 				set_hidden(0);
@@ -1232,7 +1232,7 @@ int drop() {
     return 0;
 }
 
-int get() 
+int get()
 {
     string who;
     int pd;
@@ -1245,7 +1245,7 @@ int get()
             " from taking the "+query_name()+".\n", TP);
         return 0;
     }
-    POISON_D->is_object_poisoned(TO, TP, "get", 1);	
+    POISON_D->is_object_poisoned(TO, TP, "get", 1);
     if(TO->is_trapped("get"))
         TO->execute_trap("get", TP);
       if(TO->query_hidden() || TO->query_magic_hidden()) return TP->detecting_invis();
@@ -1339,7 +1339,7 @@ void set_lrhit(mixed val) {
         lrhit = val;
 }
 
-void set_wield(mixed val) 
+void set_wield(mixed val)
 {
     if(functionp(val) && geteuid(this_object()) != geteuid(val[0])) return;
     if(functionp(val)) {
@@ -1405,11 +1405,11 @@ void __ActuallyUnwield() {
     if(!objectp(wielded)) {
         return;
     }
-   
+
     if(TO->query_property("funwield")) {
 		unwieldf = TO->query_unwield();
 		f = (:TO,unwieldf:);
-		if ((!"/adm/daemon/shutdown_d"->shuttingDown()) && (query_verb() != "quit") && interactive(ETO)) {	
+		if ((!"/adm/daemon/shutdown_d"->shuttingDown()) && (query_verb() != "quit") && interactive(ETO)) {
 			catchbug=catch(answer=(*f)());
 			if (catchbug) write(catchbug);
 			if (!answer) return 1;
@@ -1563,7 +1563,7 @@ void set_item_owner_prop(string str, int flag)
 			break;
 		default:
 			break;
-	}	
+	}
 }
 
 int query_item_owner_prop(string str)
@@ -1573,8 +1573,8 @@ int query_item_owner_prop(string str)
 	//which means the item owner will only clear
 	//when an item is being fenced - and only have 1 owner
 	//since gear is now kept on pk death
-	//this wouldn't benefit someone who is killing 
-	//bob for his ownered sword of rabbit 
+	//this wouldn't benefit someone who is killing
+	//bob for his ownered sword of rabbit
 	//slaying - maybe change "death_remove" to be
 	//strip_remove or something? //Saide
     	if(!item_owner_props) { item_owner_props = "01000"; }
@@ -1607,7 +1607,7 @@ int add_item_owner(string str)
 	if(!objectp(find_player(str))) return 0;
 	if(avatarp(find_player(str))) return 1;
 	if(sizeof(item_owners) >= 1 &&
-	!query_item_owner_prop("multiple_owners")) 
+	!query_item_owner_prop("multiple_owners"))
 	{
 		return 0;
 	}
@@ -1656,7 +1656,7 @@ void add_the_bonus(object myplayer,string bonustype,int bonusvalue) {
 	switch(bonustype) {
 		// stats
      		case "strength": case "dexterity": case "constitution": case "intelligence": case "wisdom": case "charisma":
-			myplayer->add_stat_bonus(bonustype,bonusvalue); 
+			myplayer->add_stat_bonus(bonustype,bonusvalue);
 			break;
 		// saving throws
 		case "fortitude": case "will": case "reflex":
@@ -1666,31 +1666,31 @@ void add_the_bonus(object myplayer,string bonustype,int bonusvalue) {
 		case "academics": case "athletics": case "craft, armorsmith": case "craft, jeweller": case "craft, leatherworker":
 		case "craft, tailor": case "craft, weaponsmith": case "craft, woodworker": case "disguise": case "dungeoneering":
 		case "endurance": case "healing": case "influence": case "perception": case "rope use": case "stealth":
-		case "spellcraft": case "survival": case "thievery": 
-			myplayer->add_skill_bonus(bonustype,bonusvalue); 
+		case "spellcraft": case "survival": case "thievery":
+			myplayer->add_skill_bonus(bonustype,bonusvalue);
 			break;
 		case "attack bonus":
-			myplayer->add_attack_bonus(bonusvalue); 
+			myplayer->add_attack_bonus(bonusvalue);
 			break;
 		case "damage bonus":
-			myplayer->add_damage_bonus(bonusvalue); 
+			myplayer->add_damage_bonus(bonusvalue);
 			break;
 		case "armor bonus":
-			myplayer->add_ac_bonus(bonusvalue); 
+			myplayer->add_ac_bonus(bonusvalue);
 			break;
 		case "sight bonus":
 			if(member_array((string)myplayer->query_race(),PLAYER_D->night_races()) != -1) myplayer->add_sight_bonus((-1)*bonusvalue);
-			else myplayer->add_sight_bonus(bonusvalue); 
+			else myplayer->add_sight_bonus(bonusvalue);
 			break;
 		// misc bonuses held in set_property()
 		case "magic resistance": case "spell damage resistance": case "damage resistance": case "spell penetration":
-			myplayer->set_property(bonustype,bonusvalue); 
+			myplayer->set_property(bonustype,bonusvalue);
 			break;
 		case "bonus spell slots":
-			myplayer->set_property("bonus_spell_slots",bonusvalue); 
+			myplayer->set_property("bonus_spell_slots",bonusvalue);
 			break;
 		case "caster level":
-			myplayer->set_property("empowered",bonusvalue); 
+			myplayer->set_property("empowered",bonusvalue);
 			break;
 		case "shieldMiss":
 			myplayer->set_shieldMiss(bonusvalue);
@@ -1705,10 +1705,10 @@ void add_the_bonus(object myplayer,string bonustype,int bonusvalue) {
             myplayer->set_resistance(replace_string(bonustype," resistance",""),bonusvalue);
             break;
         case "fire resistance percent": case "cold resistance percent":
-        case "water resistance percent": case "air resistance percent": case "earth resistance percent": 
+        case "water resistance percent": case "air resistance percent": case "earth resistance percent":
         case "bludgeoning resistance percent": case "piercing resistance percent": case "slashing resistance percent":
-        case "silver resistance percent": case "cold iron resistance percent": case "electricity resistance percent": case "acid resistance percent": 
-        case "sonic resistance percent": case "positive energy resistance percent": case "negative energy resistance percent": case "force resistance percent": 
+        case "silver resistance percent": case "cold iron resistance percent": case "electricity resistance percent": case "acid resistance percent":
+        case "sonic resistance percent": case "positive energy resistance percent": case "negative energy resistance percent": case "force resistance percent":
         case "divine resistance percent": case "untyped resistance percent": case "nature resistance percent":
         case "mental resistance percent": case "light resistance percent": case "darkness resistance percent":
             myplayer->set_resistance_percent(replace_string(bonustype," resistance percent",""),bonusvalue);
@@ -1724,7 +1724,7 @@ void add_the_bonus(object myplayer,string bonustype,int bonusvalue) {
 
 void run_item_bonuses(string mystatus,object myplayer,mapping itembonuses){
 // listing of currently functional bonuses: stats (strength, dexterity, constitution, intelligence, wisdom, charisma),
-// magic resistance, spell damage resistance, damage resistance, armor bonus, attack bonus, damage bonus, sight bonus, 
+// magic resistance, spell damage resistance, damage resistance, armor bonus, attack bonus, damage bonus, sight bonus,
 // saving throws (will, reflex, fortitude), caster level, bonus spell slots, skills (academics; athletics; craft, armorsmith;
 // craft, jeweller; craft, leatherworker; craft, tailor; craft, weaponsmith; craft, woodworker; disguise; dungeoneering;
 // endurance; healing; influence; perception; rope use; stealth; spellcraft; survival; thievery); spell penetration; shieldMiss
@@ -1734,7 +1734,7 @@ void run_item_bonuses(string mystatus,object myplayer,mapping itembonuses){
    	object *myarmors, *myweapons;
       string *mykeys;
 
-	if(!objectp(myplayer)) return;	
+	if(!objectp(myplayer)) return;
 	if(!objectp(TO)) return;
       if(!mapp(itembonuses)) return;
       if(!stringp(mystatus)) return;
@@ -1785,42 +1785,42 @@ void run_item_bonuses(string mystatus,object myplayer,mapping itembonuses){
 	}
 }
 
-/*void do_remove_stat(object myplayer, string mystat) 
+/*void do_remove_stat(object myplayer, string mystat)
 {
 	int myhighest, i, mycurrent, mydifference, mymod;
    	object *myarmors, *myweapons;
-	//was no check to make sure myplayer is valid 
+	//was no check to make sure myplayer is valid
 	//I'm thinking wielded above gets cleared at some point
 	//and causes this to be an invalid object - Saide
-	if(!objectp(myplayer)) return;	
+	if(!objectp(myplayer)) return;
 	if(!objectp(TO)) return;
 	//tell_object(find_player("saide"), "myplayer = "+identify(myplayer));
 	//tell_object(find_player("saide"), "TO = "+identify(TO));
    	mymod = (int)TO->query(mystat);
    	if(!mymod) return;
-   	if(mymod < 0) 
+   	if(mymod < 0)
 	{ // if negative stat, add directly.
-     		switch(mystat) 
+     		switch(mystat)
 		{
-       		case "strbonus": 
-				myplayer->add_stat_bonus("strength",(-1)*mymod); 
+       		case "strbonus":
+				myplayer->add_stat_bonus("strength",(-1)*mymod);
 				break;
-       		case "dexbonus": 
-				myplayer->add_stat_bonus("dexterity",(-1)*mymod); 
+       		case "dexbonus":
+				myplayer->add_stat_bonus("dexterity",(-1)*mymod);
 				break;
-       		case "conbonus": 
-				myplayer->add_stat_bonus("constitution",(-1)*mymod); 
+       		case "conbonus":
+				myplayer->add_stat_bonus("constitution",(-1)*mymod);
 				break;
-       		case "intbonus": 
-				myplayer->add_stat_bonus("intelligence",(-1)*mymod); 
+       		case "intbonus":
+				myplayer->add_stat_bonus("intelligence",(-1)*mymod);
 				break;
-       		case "wisbonus": 
-				myplayer->add_stat_bonus("wisdom",(-1)*mymod); 
+       		case "wisbonus":
+				myplayer->add_stat_bonus("wisdom",(-1)*mymod);
 				break;
-       		case "chabonus": 
-				myplayer->add_stat_bonus("charisma",(-1)*mymod); 
+       		case "chabonus":
+				myplayer->add_stat_bonus("charisma",(-1)*mymod);
 				break;
-       		default: 
+       		default:
 				tell_object(myplayer,"Your armor has a stat "+
 				"bonus error, please inform a wiz.");
      		}
@@ -1838,9 +1838,9 @@ void run_item_bonuses(string mystatus,object myplayer,mapping itembonuses){
    	myhighest = 0;
 	//tell_object(find_player("saide"), "myarmors = "+identify(myarmors));
 	//tell_object(find_player("saide"), "myweapons = "+identify(myweapons));
-   	if(sizeof(myweapons)) 
+   	if(sizeof(myweapons))
 	{
-     		for(i = 0; i < sizeof(myweapons); i++) 
+     		for(i = 0; i < sizeof(myweapons); i++)
 		{
 			//make sure this is a valid object - Saide
 			if(!objectp(myweapons[i])) continue;
@@ -1848,9 +1848,9 @@ void run_item_bonuses(string mystatus,object myplayer,mapping itembonuses){
        		if((mycurrent > myhighest) && myweapons[i] != TO) myhighest = mycurrent;
      		}
    	}
-   	if(sizeof(myarmors)) 
+   	if(sizeof(myarmors))
 	{
-     		for(i = 0; i < sizeof(myarmors); i++) 
+     		for(i = 0; i < sizeof(myarmors); i++)
 		{
 			//also make sure this is valid - Saide
 			if(!objectp(myarmors[i])) continue;
@@ -1859,37 +1859,37 @@ void run_item_bonuses(string mystatus,object myplayer,mapping itembonuses){
      		}
    	}
 
-   	// if the mod is the same or less than the highest worn, do nothing. 
+   	// if the mod is the same or less than the highest worn, do nothing.
 	//If it is greater, modify.
    	if(myhighest >= mymod) return;
    	mydifference = myhighest - mymod;
-   	switch(mystat) 
+   	switch(mystat)
 	{
-     		case "strbonus": 
-			myplayer->add_stat_bonus("strength",mydifference); 
+     		case "strbonus":
+			myplayer->add_stat_bonus("strength",mydifference);
 			break;
-     		case "dexbonus": 
-			myplayer->add_stat_bonus("dexterity",mydifference); 
+     		case "dexbonus":
+			myplayer->add_stat_bonus("dexterity",mydifference);
 			break;
-     		case "conbonus": 
-			myplayer->add_stat_bonus("constitution",mydifference); 
+     		case "conbonus":
+			myplayer->add_stat_bonus("constitution",mydifference);
 			break;
-     		case "intbonus": 
-			myplayer->add_stat_bonus("intelligence",mydifference); 
+     		case "intbonus":
+			myplayer->add_stat_bonus("intelligence",mydifference);
 			break;
-     		case "wisbonus": 	
-			myplayer->add_stat_bonus("wisdom",mydifference); 
+     		case "wisbonus":
+			myplayer->add_stat_bonus("wisdom",mydifference);
 			break;
-     		case "chabonus": myplayer->add_stat_bonus("charisma",mydifference); 
+     		case "chabonus": myplayer->add_stat_bonus("charisma",mydifference);
 			break;
-     		default: 
+     		default:
 			tell_object(myplayer,"Your armor has a stat bonus error, "+
 			"please inform a wiz.");
    	}
 } */
 
 
-//Added for support of items that have special circumstances around 
+//Added for support of items that have special circumstances around
 //their adding of bonuses - Saide
 int BonusCheck(string BonusName) { return 1; }
 

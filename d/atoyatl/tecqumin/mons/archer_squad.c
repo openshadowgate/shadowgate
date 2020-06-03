@@ -10,7 +10,7 @@
 inherit MONSTER;
 
 object * orogs;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 
 int is_squad_member(object orog);
 int check_grouped();

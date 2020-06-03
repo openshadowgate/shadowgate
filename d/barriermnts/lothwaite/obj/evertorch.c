@@ -4,7 +4,7 @@
 
 inherit OBJECT;
 
-static int lit;
+nosave int lit;
 int brighter;
 
 void create() {

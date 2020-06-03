@@ -26,7 +26,7 @@ inherit MONSTER;
 
 int tactic, flag;
 int crashed, climbing;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 string entry_method;
 
 void remove_orog();
@@ -148,7 +148,7 @@ string long_desc(){
               +"  upright posture than their orcish cousins. They hav broad,"
               +" powerful backs and chests and thick, muscular limbs. Their faces are"
               +" thoroughly orcish in origin though, with broad snouts and large, tusklike canines.";
-  return desc;  
+  return desc;
 }
 
 int move(mixed dest){
@@ -175,7 +175,7 @@ int do_damage(string limb, int damage){
     switch(num_deaths){
     case 0:
       break;
-    case 1: 
+    case 1:
       tell_room(ETO, "%^BOLD%^%^RED%^An orog archer falls in battle!", TO);
       break;
     default:
@@ -281,11 +281,11 @@ int reach_destination(){
   switch (where){
   case TABAXROOM + "main_field": // deliberately falling through
   case TABAXROOM + "low_field": // deliberately falling through
-  case TABAXROOM + "high_field": 
+  case TABAXROOM + "high_field":
     call_out("volley", 5);
     return 1;
     break;
-  default: 
+  default:
     goto_field();
     break;
   }
@@ -338,5 +338,3 @@ void transfer_orog(object other_troop){
   other_troop->add_orog();
   remove_orog();
 }
-
-

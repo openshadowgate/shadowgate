@@ -9,19 +9,19 @@
 /*  changed to have vendors seem more interactive, esp. to indicate to room that someone is interracting with the vendor   *Styx*  Jan. 03
     added to have vendor tell what skill is needed on show command *Styx*  2/13/03
     also added to deny buying if no coin type is set (solve kit problem)
-*/ 
+*/
 //changed it so that you cannot buy, sell or get an appraisal from an unconscious vendor *tsera* 4/2/04
 /*
 Changed by Circe 3/19/05
-This change should make it so we can set a maximum level on 
+This change should make it so we can set a maximum level on
 the vendor that will control the value and/or power of items
 that can be sold in the shop.  Essentially, vendors will have
-a property set_mymaxvalue() that will be a number 1-40.  
+a property set_mymaxvalue() that will be a number 1-40.
 This will make it so that anything above a certain value
-(defined below) or a certain enchantment will still be sold, 
+(defined below) or a certain enchantment will still be sold,
 but won't go into the shop's storage area to be re-sold to the
 public.  The set_mymaxvalue() should be basically the level
-of the players who should frequent the area. 
+of the players who should frequent the area.
 */
 
 //Minor change 6/14/05 by ~Circe~ to allow showing by size.
@@ -40,7 +40,6 @@ inherit "/std/npc";
 mapping __Eco, __Values;
 int query_mymaxvalue();
 int mymaxvalue;
-static int __SellAll();
 int convert_money(string cointype,int amount);
 int is_fence;
 mixed sort_items(object one, object two);
@@ -98,10 +97,10 @@ int __Buy(string str) {
         return 1;
     }
     not_allowed = ({ "bound", "disabled", "unconscious" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
     if(disabled(TO, not_allowed)){
-      write("Do you really expect someone who cannot move to sell you something?");  
+      write("Do you really expect someone who cannot move to sell you something?");
 	return 1;
     }
     response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
@@ -160,7 +159,7 @@ int __Buy(string str) {
        }
     }
 //added the above faction stuff to allow for faction-specific
-//items.  ~Circe~ 11/24/07     
+//items.  ~Circe~ 11/24/07
 /*Below stuff about levelrestrict is set up to allow restriction of items to certain levels ~Circe~ 1/19/08*/
     if(ob->query_property("levelrestrict")){
        lvl = ob->query_property("levelrestrict");
@@ -192,10 +191,10 @@ int __Sell(string str) {
         write("Try 'sell <object>'!");
         return 1;
     }
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	return 1;
-    if(disabled(TO, ({"disabled", "unconscious", "bound"})) ){  
-      write("Do you really expect a person who cannot move to buy something?");  
+    if(disabled(TO, ({"disabled", "unconscious", "bound"})) ){
+      write("Do you really expect a person who cannot move to buy something?");
 	return 1;
     }
     if (!should_interact(TP)) {
@@ -243,13 +242,13 @@ int __Sell(string str) {
         tell_room(ETO, response+"Please unwield that before selling it.");
         return 1;
     }
-    //Added by Saide to support the new soulbound/ownered 
+    //Added by Saide to support the new soulbound/ownered
     //item code - 3/21/2007
-    if(ob->query_item_owner_prop("sale_clear")) 
+    if(ob->query_item_owner_prop("sale_clear"))
     {
         ob->clear_item_owners();
     }
-	//this mymax check is here so it will bypass this code if the vendor has no max set 
+	//this mymax check is here so it will bypass this code if the vendor has no max set
 	//This starts the maxvalue code.  Circe 3/19/05
 	if(mymax = TO->query_mymaxvalue())
 	{
@@ -298,7 +297,7 @@ int __Sell(string str) {
        	}
     	}
     	//this ends the maxvalue code
-             
+
     	value = value - (value/3);
 
     	value = adjust_cost(value,1);
@@ -306,12 +305,12 @@ int __Sell(string str) {
     	tell_room(ETO, TPQCN+" sells "+(string)ob->query_short()+".",TP);
    	tell_object(TP, "You sell "+(string)ob->query_short()+
 	" for "+value + " " +ob->query_cointype()+".");
-    	if (ob->query_destroy()) 
-	{ 
-		"/daemon/search_d.c"->add_object(ob); 
-		ob->remove(); 
+    	if (ob->query_destroy())
+	{
+		"/daemon/search_d.c"->add_object(ob);
+		ob->remove();
 	}
-    	else 
+    	else
 	{
 //                 "/daemon/search_d.c"->add_object(ob);// added to populate the search table -Ares
 // was glitching & spamming the bug log, commenting out til it can be fixed. N, 4/14.
@@ -329,10 +328,10 @@ int __Show(string str) {
         write("Try 'show <object>'.");
         return 1;
     }
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	return 1;
-    if(disabled(TO, ({"disabled", "unconscious", "bound"})) ){  
-      write("Get real.");  
+    if(disabled(TO, ({"disabled", "unconscious", "bound"})) ){
+      write("Get real.");
 	return 1;
     }
     if(sscanf(str, "%s to %s",what, whom) == 2)
@@ -350,20 +349,20 @@ int __Show(string str) {
     tell_room(ETO, TOQCN+" shows "+TPQCN+" "+(string)ob->query_short()+".", TP);
     message("info", (string)ob->query_long(), TP);
 // added to have vendor tell them the skillneeded per requests *Styx*  2/13/03
-    if(ob->is_weapon()) 
+    if(ob->is_weapon())
     {
-	    if(ob->is_lrweapon()) 
+	    if(ob->is_lrweapon())
         {
             if(TP->query("new_class_type"))
             {
 	            tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says: %^RESET%^To use this as a ranged weapon, you'll have to visit the archery range and train in the use of "+ob->query_weapon_prof()+" weapon proficiency.");
             }
-            else 
+            else
             {
                 tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says: %^RESET%^To use this as a ranged weapon, you'll have to visit the archery range and train in the use of "+ob->query_lr_prof_type()+".");
             }
         }
-	    else 
+	    else
         {
             if(TP->query("new_class_type"))
             {
@@ -375,7 +374,7 @@ int __Show(string str) {
             }
         }
     }
-    if(ob->is_armor()) 
+    if(ob->is_armor())
     {
        if(TP->query("new_class_type"))
        {
@@ -409,7 +408,7 @@ int __List(string str) {
     object *inv;
     string *tmp;
     int i, x, j;
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	return 1;
     tell_room(ETO, TPQCN+" looks over the shop's inventory and price list.", TP);
     while (!__Eco["storage object"]) {
@@ -461,10 +460,10 @@ int __Value(string str) {
         write("Try 'value <object>'.");
         return 1;
     }
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	return 1;
-    if(disabled(TO, ({"unconscious", "disabled"})) ){  
-      write("Do you really expect an unconscious person to give you an appraisal?");  
+    if(disabled(TO, ({"unconscious", "disabled"})) ){
+      write("Do you really expect an unconscious person to give you an appraisal?");
 	return 1;
     }
     if (!should_interact(TP)) {
@@ -524,7 +523,7 @@ int filter_list(object ob, string str) {
     return 0;
 }
 
-static int __SellAll() {
+protected int __SellAll() {
     object *inv;
     int i, value;
     int cp,sp,ep,gp,pp;
@@ -532,7 +531,7 @@ static int __SellAll() {
 
     cp=0;sp=0;ep=0;gp=0;pp=0;
 
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	    return 1;
 
     if (!(i = sizeof(inv = all_inventory(TP)))) {
@@ -578,7 +577,7 @@ static int __SellAll() {
 }
 
 mixed sort_items(object one,object two) {
-    return strcmp(one->query_short(),two->query_short()); 
+    return strcmp(one->query_short(),two->query_short());
 }
 
 void set_storage_room(string str) {
@@ -603,7 +602,7 @@ void set_items_allowed( string str) {
     if (!(TO->query_property("generic db")))  return;
     if (str == "all" || str == "weapon") {
 // removing the generic databases from being automatically added
-// too spammy now that we have specific ones set or these manually added 
+// too spammy now that we have specific ones set or these manually added
 // in the most needed places  *Styx*  12/7/02
 //        set_db("weapons");
     }
@@ -642,11 +641,11 @@ int check_allowed(object ob) {
     }
     if (strcmp("armor",(string)this_object()->query_items_allowed()) == 0) {
         if (ob->is_armour()) return 1;
-        else return 0; 
+        else return 0;
     }
     if (strcmp("weapon",(string)this_object()->query_items_allowed()) == 0) {
         if (ob->is_weapon()) return 1;
-        else return 0; 
+        else return 0;
     }
     if((string)this_object()->query_items_allowed() == "material"){ return ob->is_material();}
     if (member_array((string)this_object()->query_items_allowed(),ob->query_id(),0) == -1)
@@ -666,14 +665,14 @@ void inventory() {
     int i, value;
     string tmp;
 
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
 	    return 1;
 
     if (!(i = sizeof(inv = all_inventory(TP)))) {
         write("You don't have anything!");
         return 1;
     }
-    write("%^CYAN%^The shop clerk looks over your inventory.");   
+    write("%^CYAN%^The shop clerk looks over your inventory.");
     while (i--) {
         tmp = "";
          if ((check_allowed(inv[i]) == 0)||(!(value = (int)inv[i]->query_value()))) {
@@ -696,11 +695,11 @@ void inventory() {
 string types(object ob) {
     string type;
     string ret;
-    if (ob->is_lrweapon() || ob->is_weapon()) 
-    {        
+    if (ob->is_lrweapon() || ob->is_weapon())
+    {
         //type = (string)ob->get_weapon_prof();
         type = (string)ob->query_weapon_prof();
-    } 
+    }
     else if(ob->is_armour())
     {
         if((string)ob->query_type() == "clothing") { type = "clothing"; }
@@ -711,7 +710,7 @@ string types(object ob) {
         type = (string)ob->query_type();
     }
     /*
-    switch (type) 
+    switch (type)
     {
     case "slashing":
     case "piercing":
@@ -849,39 +848,39 @@ int convert_money(string cointype,int cost) {
 
 // Repair Stuff
 
-int __Repair(string str) 
+int __Repair(string str)
 {
     object ob;
     string tmp;
     int cost, x,lvl,enchant;
     string cointype, *not_allowed, response,type;
 
-    if (!str) 
+    if (!str)
     {
         write("Try 'repair <item> [#]'!");
         return 1;
     }
 
     not_allowed = ({ "bound", "disabled", "unconscious" });
-    
+
     if(disabled(TP, not_allowed)) {	return 1; }
 
     if(disabled(TO, not_allowed))
     {
-        write("Do you really expect someone who cannot move to repair something?");  
+        write("Do you really expect someone who cannot move to repair something?");
 	    return 1;
     }
-    
+
     response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
-    
-    if (!should_interact(TP)) 
+
+    if (!should_interact(TP))
     {
         force_me("glare "+TPQN);
         force_me("say Leave my shop, scum, I will not serve you.");
         return 1;
     }
 
-    if (!TP->is_player() && member_array(TP->query_race(),RACE_D->query_races())== -1) 
+    if (!TP->is_player() && member_array(TP->query_race(),RACE_D->query_races())== -1)
     {
         force_me("say We don't serve your kind around here.");
         return 1;
@@ -894,7 +893,7 @@ int __Repair(string str)
         return 1;
     }
 
-    if (check_allowed(ob) == 0) 
+    if (check_allowed(ob) == 0)
     {
         tell_room(ETO, response+"Sorry, I don't deal in "+str+"s!");
         return 1;
@@ -938,10 +937,10 @@ int __Repair(string str)
     }
 
     cointype = (string)ob->query_cointype();
-    if ((int)this_player()->query_money(cointype) < cost) 
+    if ((int)this_player()->query_money(cointype) < cost)
     {
         convert_money(cointype,cost);
-        if ((int)this_player()->query_money(cointype) < cost) 
+        if ((int)this_player()->query_money(cointype) < cost)
         {
             tell_room(ETO, response+TPQCN+", you don't have enough money for that!", TP);
 	        tell_object(TP, response+"You don't have enough money.");
@@ -982,10 +981,10 @@ int __Resize(string str) {
     not_allowed = ({ "bound", "disabled", "unconscious" });
     if(disabled(TP, not_allowed)) {	return 1; }
     if(disabled(TO, not_allowed)) {
-	write("Do you really expect someone who cannot move to repair something?");  
+	write("Do you really expect someone who cannot move to repair something?");
 	return 1;
     }
-    
+
     response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
     if (!should_interact(TP)) {
         force_me("glare "+TPQN);

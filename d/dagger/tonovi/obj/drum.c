@@ -1,11 +1,11 @@
 #include <std.h>
 
 inherit OBJECT;
-static int used; //so you can only use it once until it wears off - Saide//
-static string name;
-static object *affected_players;
+nosave int used; //so you can only use it once until it wears off - Saide//
+nosave string name;
+nosave object *affected_players;
 
-// changed all global variable to static on Styx's advice, to stop them 
+// changed all global variable to static on Styx's advice, to stop them
 // saving unnecessarily and to try to fix a bug
 // when players logged out while the effect was still running
 // Lujke September 2005
@@ -36,14 +36,14 @@ int rally(string str) {
     if(!TP->is_class("bard")) {
         return notify_fail("Only bards may use the drum.");
     }
-    
+
     align = TP->query_alignment();
-    
+
     if(align==1 || align==3 || align==7 || align==9){
 	    tell_object(TP,"You cannot use your bard skills unless you are of a neutral alignment!\n");
 	    return 1;
     }
-    
+
     if((object)TP->query_attackers() != ({})) {
 	    tell_object(TP,"Not while fighting.\n");
 	    return 1;
@@ -58,7 +58,7 @@ int rally(string str) {
     cur_players = ({});
 
     inven += all_living(environment(TP));
-    
+
     for(i = 0;i<sizeof(inven);i++) {
 	    if(userp(inven[i])) {
 	        cur_players += ({inven[i]});
@@ -83,7 +83,7 @@ void set_listeners(object player, object *cur_players){
 	name = player->query_name();
 	for(i = 0;i <sizeof(cur_players);i++){
 	    if(ob = present(cur_players[i],environment(player))){
-		
+
         if(pointerp(ob->query_property("rally") )&& member_array(name,ob->query_property("rally")) != -1) continue;
 		    ob->add_saving_bonus("all", 2);
 		    ob->add_attack_bonus(2);
@@ -122,7 +122,7 @@ void reset_player(string name, object *players_listen){
             if(!pointerp(tmp)) {
                 continue;
             }
-            if(!name) { 
+            if(!name) {
                 continue;
             }
 removing this to see if it fixes error with rally wearing off.

@@ -2,7 +2,7 @@
 
 inherit OBJECT;
 
-static int lit;
+nosave int lit;
 int fuel, light_time;
 
 void create() {
@@ -117,4 +117,3 @@ remove() {
    if (lit) environment(this_object())->set_property("light",-2);
    return ::remove();
 }
-

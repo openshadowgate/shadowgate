@@ -9,8 +9,8 @@
 
 inherit DAEMON;
 
-static object * watch = ({});
-static string * names2;
+nosave object * watch = ({});
+nosave string * names2;
 
 mapping wanted = ([]);
 

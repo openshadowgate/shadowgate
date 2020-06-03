@@ -4,7 +4,7 @@
 inherit MONSTER;
 
 
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 int summoned;
 void breakout(object ob);
 

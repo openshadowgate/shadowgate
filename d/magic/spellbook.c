@@ -42,10 +42,10 @@ string query_owner();
 private void swap(int i, int j);
 void cull_non_school_spells(object holder);
 
-static string *magic;
+nosave string *magic;
 mapping spells = ([]);
 
-static mapping speccache;
+nosave mapping speccache;
 
 string *mID, bookdesc;
 string owner;

@@ -5,7 +5,7 @@
 inherit ARMOUR;
 #define MAXUSES 50
 int uses;
-static int flag;
+nosave int flag;
 string place;
 void create(){
     ::create();
@@ -47,7 +47,7 @@ void create(){
          " of each %^BOLD%^%^WHITE%^silver%^RESET%^%^BLUE%^ length an open cut five sided "+
          "miniature %^BOLD%^%^WHITE%^s%^RESET%^t%^BOLD%^a%^RESET%^r%^BLUE%^ rests on the "+
          "%^CYAN%^cyan%^BLUE%^ field.  Looking closer at the ring, the %^BOLD%^%^WHITE%^silver"+
-         " %^RESET%^%^BLUE%^lengths look more like the %^BOLD%^%^CYAN%^glittering%^RESET%^%^BLUE%^"+ 
+         " %^RESET%^%^BLUE%^lengths look more like the %^BOLD%^%^CYAN%^glittering%^RESET%^%^BLUE%^"+
          " trail of a %^BOLD%^%^CYAN%^s%^WHITE%^h%^RESET%^%^CYAN%^o%^BOLD%^o%^WHITE%^t%^RESET%^%^CYAN%^"+
          "i%^BOLD%^n%^WHITE%^g%^RESET%^%^CYAN%^ s%^BOLD%^t%^RESET%^%^CYAN%^a%^BOLD%^r%^RESET%^%^BLUE%^"+
          ", creating a pleasing shape and form.  Delicate script is written across the band.%^RESET%^\n");

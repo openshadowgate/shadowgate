@@ -2,7 +2,7 @@
 
 inherit "/std/riding_animal.c";
 
-private static int regulate;
+nosave int regulate;
 
 void create() {
    ::create();

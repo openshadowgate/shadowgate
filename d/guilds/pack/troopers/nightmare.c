@@ -2,7 +2,7 @@
 
 inherit "/std/riding_animal.c";
 
-private static int healingStuff;
+private nosave int healingStuff;
 
 void create(){
   ::create();
