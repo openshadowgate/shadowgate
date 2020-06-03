@@ -9,7 +9,7 @@
 
 inherit OBJECT;
 
-static int lit;
+nosave int lit;
 int fuel, full_fuel, light_time, brighter;
 
 void create() {
@@ -47,7 +47,7 @@ void init() {
 
 int light(string str) {
   int prevlight;
-   if(TP->query_bound() || TP->query_unconscious()) { 
+   if(TP->query_bound() || TP->query_unconscious()) {
       TP->send_paralyzed_message("info",TP);
       return 1;
    }
@@ -56,14 +56,14 @@ int light(string str) {
    notify_fail(TP->light_blind_fail_message(prevlight)+"\n");
       return 0;
    }
-   
-   if(!str) { 
+
+   if(!str) {
       notify_fail("Light what?\n");
       return 0;
-   } 
+   }
    if(!id(str))
    if (TO != present(str,ETO)) {
-     notify_fail("You can only light things designed to burn and only if you have them.\n"); 
+     notify_fail("You can only light things designed to burn and only if you have them.\n");
      return 0;
    }
    if(!fuel) {
@@ -73,7 +73,7 @@ int light(string str) {
      if(lit) {
        write("It is already lit!\n");
        return 1;
-     } 
+     }
     write ("You light the lantern.\n");
     say(TPQCN+" lights a lantern.\n", TP);
   prevlight = ETO->query_property("light");
@@ -94,17 +94,17 @@ int extinguish(string str) {
       TP->send_paralyzed_message("info",TP);
       return 1;
    }
-   
-   if(!str) { 
+
+   if(!str) {
       notify_fail("Douse what?\n");
       return 0;
-   } 
+   }
    if(!id(str))
    if (TO != present(str,ETO)) {
-     notify_fail("You can only douse things you have that are lit.\n"); 
+     notify_fail("You can only douse things you have that are lit.\n");
      return 0;
    }
-   if(!lit) { 
+   if(!lit) {
       write("The lantern is not lit!");
       return 1;
    }
@@ -177,15 +177,15 @@ remove() {
 }
 
 int check_fuel(string str) {
-   if(!str) { 
+   if(!str) {
       notify_fail("Check what?\n");
       return 0;
-   } 
+   }
    if(!id(str))
    if (TO != present(str,ETO)) {
-     notify_fail("You can only check the fuel in lanterns you have.\n"); 
+     notify_fail("You can only check the fuel in lanterns you have.\n");
      return 0;
-   } 
+   }
    if(!living(ETO)) {
      notify_fail("You need to have it in your possession to try to guess how much fuel remains.\n");
      return 0;
@@ -193,7 +193,7 @@ int check_fuel(string str) {
    if(!interactive(ETO)) {
       notify_fail("You need to have it in your possession to try to guess how much fuel remains.\n");
       return 0;
-   } 
+   }
    if(lit) {
       write("You should douse it before you go shaking or opening it to try to check the fuel.");
       return 1;
@@ -215,7 +215,7 @@ int check_fuel(string str) {
          tell_object(ETO,"The lantern is empty.  Maybe you should refill it with oil.");
          break;
       default:
-         fuel = full_fuel;         
+         fuel = full_fuel;
          write("If you get this message more than once with this lantern, you should bug report it.  The first time you get the message, the problem should be fixing itself.  If it happens again, there is a real problem.\n");
          return 1;
    }

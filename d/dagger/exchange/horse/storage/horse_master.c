@@ -9,11 +9,11 @@ inherit OBJECT;
 #define SAVE_FILE STORAGE"horse_race_stuff"
 
 
-mapping horse_stats; 
+mapping horse_stats;
 
-static mapping example_variable;  
+nosave mapping example_variable;
 
-static string race_horses; 
+nosave string race_horses;
 int edge1, edge2, edge3, edge4;
 int weather;
 int location;
@@ -24,12 +24,8 @@ int h1, h2;
 string new_horse_name;
 int real1, real2, real3, real4;
 string check_if_dead;
-void setup_horses(); 
-void create_race();
-void SAVE();
-void dramatic_pause(int num);
 
-void create() 
+void create()
 {
 
     horse_stats = ([]);
@@ -61,9 +57,9 @@ void setup_horses()
 		horse_stats[1]["stable"] = 3;
 		horse_stats[1]["blurb1"] = 1;
 		horse_stats[1]["blurb2"] = 1;
-        horse_stats[1]["total_skills"] = 70;	
-		
-		
+        horse_stats[1]["total_skills"] = 70;
+
+
         horse_stats[2] = ([]);
 		horse_stats[2]["UID"] = 2;
 		horse_stats[2]["name"] = "%^RESET%^%^ORANGE%^Ka%^BLACK%^%^BOLD%^"+
@@ -81,7 +77,7 @@ void setup_horses()
 		horse_stats[2]["stable"] = 1;
 		horse_stats[2]["blurb1"] = 2;
 		horse_stats[2]["blurb2"] = 6;
-        horse_stats[2]["total_skills"] = 84;		
+        horse_stats[2]["total_skills"] = 84;
 
         horse_stats[3] = ([]);
 		horse_stats[3]["UID"] = 3;
@@ -99,8 +95,8 @@ void setup_horses()
 		horse_stats[3]["real_owner"] = "loki";
 		horse_stats[3]["stable"] = 3;
 		horse_stats[3]["blurb1"] = 4;
-		horse_stats[3]["blurb2"] = 5;	
-        horse_stats[3]["total_skills"] = 85;		
+		horse_stats[3]["blurb2"] = 5;
+        horse_stats[3]["total_skills"] = 85;
 
         horse_stats[4] = ([]);
 		horse_stats[4]["UID"] = 4;
@@ -117,7 +113,7 @@ void setup_horses()
 		horse_stats[4]["real_owner"] = "loki";
 		horse_stats[4]["stable"] = 2;
 		horse_stats[4]["blurb1"] = 7;
-		horse_stats[4]["blurb2"] = 9;	
+		horse_stats[4]["blurb2"] = 9;
 		horse_stats[4]["total_skills"] = 75;
 
 		horse_stats[5] = ([]);
@@ -136,9 +132,9 @@ void setup_horses()
 		horse_stats[5]["real_owner"] = "loki";
 		horse_stats[5]["stable"] = 2;
 		horse_stats[5]["blurb1"] = 4;
-		horse_stats[5]["blurb2"] = 1;	
+		horse_stats[5]["blurb2"] = 1;
 		horse_stats[5]["total_skills"] = 72;
-		
+
 		horse_stats[6] = ([]);
 		horse_stats[6]["UID"] = 6;
 		horse_stats[6]["name"] = "%^MAGENTA%^S%^BOLD%^o%^RESET%^%^MAGENTA%^hritani%^RESET%^";
@@ -155,8 +151,8 @@ void setup_horses()
 		horse_stats[6]["stable"] = 4;
 		horse_stats[6]["blurb1"] = 9;
 		horse_stats[6]["blurb2"] = 3;
-        horse_stats[6]["total_skills"] = 86;		
-		
+        horse_stats[6]["total_skills"] = 86;
+
 		horse_stats[7] = ([]);
 		horse_stats[7]["UID"] = 7;
 		horse_stats[7]["name"] = "%^RESET%^%^GREEN%^Per%^BOLD%^f%^RESET%^%^GREEN%^ect "+
@@ -174,7 +170,7 @@ void setup_horses()
 		horse_stats[7]["stable"] = 4;
 		horse_stats[7]["blurb1"] = 7;
 		horse_stats[7]["blurb2"] = 8;
-        horse_stats[7]["total_skills"] = 70;		
+        horse_stats[7]["total_skills"] = 70;
 
 		horse_stats[8] = ([]);
 		horse_stats[8]["UID"] = 8;
@@ -193,7 +189,7 @@ void setup_horses()
 		horse_stats[8]["stable"] = 2;
 		horse_stats[8]["blurb1"] = 7;
 		horse_stats[8]["blurb2"] = 3;
-        horse_stats[8]["total_skills"] = 73;		
+        horse_stats[8]["total_skills"] = 73;
 
 		horse_stats[9] = ([]);
 		horse_stats[9]["UID"] = 9;
@@ -212,8 +208,8 @@ void setup_horses()
 		horse_stats[9]["stable"] = 1;
 		horse_stats[9]["blurb1"] = 4;
 		horse_stats[9]["blurb2"] = 1;
-        horse_stats[9]["total_skills"] = 81;		
-		
+        horse_stats[9]["total_skills"] = 81;
+
 		horse_stats[10] = ([]);
 		horse_stats[10]["UID"] = 10;
 		horse_stats[10]["name"] = "%^RESET%^%^BLUE%^She Shall Race%^RESET%^";
@@ -230,8 +226,8 @@ void setup_horses()
 		horse_stats[10]["stable"] = 1;
 		horse_stats[10]["blurb1"] = 2;
 		horse_stats[10]["blurb2"] = 5;
-        horse_stats[10]["total_skills"] = 69;		
-		
+        horse_stats[10]["total_skills"] = 69;
+
 
 		horse_stats[11] = ([]);
 		horse_stats[11]["UID"] = 11;
@@ -250,8 +246,8 @@ void setup_horses()
 		horse_stats[11]["stable"] = 4;
 		horse_stats[11]["blurb1"] = 5;
 		horse_stats[11]["blurb2"] = 2;
-        horse_stats[11]["total_skills"] = 80;		
-		
+        horse_stats[11]["total_skills"] = 80;
+
 		horse_stats[12] = ([]);
 		horse_stats[12]["UID"] = 12;
 		horse_stats[12]["name"] = "%^RESET%^%^BLUE%^Fa%^CYAN%^s%^RESET%^%^BLUE%^t"+
@@ -268,7 +264,7 @@ void setup_horses()
 		horse_stats[12]["real_owner"] = "loki";
 		horse_stats[12]["stable"] = 2;
 		horse_stats[12]["blurb1"] = 3;
-		horse_stats[12]["blurb2"] = 3;	
+		horse_stats[12]["blurb2"] = 3;
         horse_stats[12]["total_skills"] = 70;
 
 		horse_stats[13] = ([]);
@@ -287,7 +283,7 @@ void setup_horses()
 		horse_stats[13]["real_owner"] = "loki";
 		horse_stats[13]["stable"] = 4;
 		horse_stats[13]["blurb1"] = 1;
-		horse_stats[13]["blurb2"] = 4;	
+		horse_stats[13]["blurb2"] = 4;
         horse_stats[13]["total_skills"] = 61;
 
 		horse_stats[14] = ([]);
@@ -306,8 +302,8 @@ void setup_horses()
 		horse_stats[14]["stable"] = 4;
 		horse_stats[14]["blurb1"] = 6;
 		horse_stats[14]["blurb2"] = 6;
-        horse_stats[14]["total_skills"] = 78;		
-		
+        horse_stats[14]["total_skills"] = 78;
+
 		horse_stats[15] = ([]);
 		horse_stats[15]["UID"] = 15;
 		horse_stats[15]["name"] = "%^YELLOW%^The P%^RESET%^%^ORANGE%^r%^YELLOW%^ince%^RESET%^";
@@ -324,8 +320,8 @@ void setup_horses()
 		horse_stats[15]["stable"] = 1;
 		horse_stats[15]["blurb1"] = 8;
 		horse_stats[15]["blurb2"] = 2;
-        horse_stats[15]["total_skills"] = 90;		
-		
+        horse_stats[15]["total_skills"] = 90;
+
 		SAVE();
     }
 
@@ -346,17 +342,17 @@ void create_race()
 		aa = (random(sizeof(temp)));
 		check_if_dead = horse_stats[/**/temp[aa]/**/]["name"];
 		if(check_if_dead != "dead"){
-            horses += ({ temp[aa] });		
+            horses += ({ temp[aa] });
             horses = distinct_array(horses);
-        }			
+        }
 		}
-		
+
     race_horses = horses;
     weather = (random(3)+1);
     location = (random(4)+1);
     length = (random(4)+2);
 	real_length = (length-1);
-    danger = random(2); 
+    danger = random(2);
     purse = random(100000);
 
     return;
@@ -366,15 +362,15 @@ void run_race()
 {
     int highest, lap_to_beat, score_to_beat;
     string name;
-    int lap; 
-    int speed, accel, health, jockey;  
-    int num, num2, num3, num4; 
-    int score, score2, score3, score4;	
+    int lap;
+    int speed, accel, health, jockey;
+    int num, num2, num3, num4;
+    int score, score2, score3, score4;
     int i,x;
 	int win, loss;
 	int yay_loss;
 	int uid, old_winning;
-	
+
         score = 0;
 		score2 = 0;
 		score3 = 0;
@@ -385,7 +381,7 @@ void run_race()
 		num4 = 0;
 		score_to_beat = 0;
 		lap_to_beat = 0;
-	
+
 	lap = 1;
 	tell_room(ETP,"Clarise %^CYAN%^relates%^RESET%^: And they're off!!!\n");
 	for (lap=1;lap<length;lap++)
@@ -393,12 +389,12 @@ void run_race()
         tell_room(ETP,"Clarise %^CYAN%^relates%^RESET%^: On the start of lap "+lap+".\n");
 
 
-        name = horse_stats[/**/race_horses[0]/**/]["name"]; 
-        speed = horse_stats[/**/race_horses[0]/**/]["speed"]; 
+        name = horse_stats[/**/race_horses[0]/**/]["name"];
+        speed = horse_stats[/**/race_horses[0]/**/]["speed"];
         accel = horse_stats[race_horses[0]]["accel"];
         health = horse_stats[race_horses[0]]["health"];
 		jockey = horse_stats[race_horses[0]]["jockey"];
-		
+
         num = ((accel / lap) + (speed / weather) + (health * lap) + (jockey * danger) +(random(50)) );
 			switch(random(3)){
 			case(0): tell_room(ETP,"Clarise %^CYAN%^relates%^RESET%^: On the start of the lap "+name+"%^RESET%^ has a strong start!");
@@ -411,9 +407,9 @@ void run_race()
 		score = (score + num);
 	    highest = 0;
 		lap_to_beat = num;
-		
-        name = horse_stats[/**/race_horses[1]/**/]["name"]; 
-        speed = horse_stats[/**/race_horses[1]/**/]["speed"]; 
+
+        name = horse_stats[/**/race_horses[1]/**/]["name"];
+        speed = horse_stats[/**/race_horses[1]/**/]["speed"];
         accel = horse_stats[race_horses[1]]["accel"];
         health = horse_stats[race_horses[1]]["health"];
 		jockey = horse_stats[race_horses[1]]["jockey"];
@@ -433,9 +429,9 @@ void run_race()
 		highest = 1;
 		lap_to_beat = num2;
 		}
-		
-        name = horse_stats[/**/race_horses[2]/**/]["name"]; 
-        speed = horse_stats[/**/race_horses[2]/**/]["speed"]; 
+
+        name = horse_stats[/**/race_horses[2]/**/]["name"];
+        speed = horse_stats[/**/race_horses[2]/**/]["speed"];
         accel = horse_stats[race_horses[2]]["accel"];
         health = horse_stats[race_horses[2]]["health"];
 		jockey = horse_stats[race_horses[2]]["jockey"];
@@ -455,9 +451,9 @@ void run_race()
 		highest = 2;
 		lap_to_beat = num3;
 		}
-		
-        name = horse_stats[/**/race_horses[3]/**/]["name"]; 
-        speed = horse_stats[/**/race_horses[3]/**/]["speed"]; 
+
+        name = horse_stats[/**/race_horses[3]/**/]["name"];
+        speed = horse_stats[/**/race_horses[3]/**/]["speed"];
         accel = horse_stats[race_horses[3]]["accel"];
         health = horse_stats[race_horses[3]]["health"];
 		jockey = horse_stats[race_horses[3]]["jockey"];
@@ -478,7 +474,7 @@ void run_race()
 		highest = 3;
 		lap_to_beat = num4;
 		}
-		
+
 		if(danger = 1){
 			switch(random(7)){
 			    case(0): tell_room(ETP,"Clarise %^CYAN%^relates%^RESET%^: Seems like reports of danger on the track today were unwarrented!");
@@ -491,12 +487,12 @@ void run_race()
 				break;
 			}
 		}
-		
-		    name = horse_stats[/**/race_horses[highest]/**/]["name"]; 
+
+		    name = horse_stats[/**/race_horses[highest]/**/]["name"];
 		    tell_room(ETP,"Clarise %^CYAN%^relates%^RESET%^: And out front of the pack leading by a nose, "+name+" %^RESET%^won the lap!");
 			dramatic_pause(0);
 		}
-		
+
 		highest = 0;
 		score_to_beat = score;
 		if (score2 > score_to_beat)
@@ -514,7 +510,7 @@ void run_race()
 		highest = 3;
 		score_to_beat = score4;
 		}
-	name = horse_stats[/**/race_horses[highest]/**/]["name"]; 
+	name = horse_stats[/**/race_horses[highest]/**/]["name"];
 	uid = horse_stats[/**/race_horses[highest]/**/]["UID"];
 	old_winning = horse_stats[/**/race_horses[highest]/**/]["winnings"];
 	switch(highest) {
@@ -549,7 +545,7 @@ void run_race()
 		horse_stats[score2]["loss"] = num2;
 		horse_stats[score3]["loss"] = num3;
 	    horse_stats[score4]["loss"] = num4;
-	
+
 	win = horse_stats[/**/race_horses[highest]/**/]["win"];
 	yay_loss = horse_stats[/**/race_horses[highest]/**/]["loss"];
 	yay_loss = (yay_loss-1);
@@ -558,10 +554,10 @@ void run_race()
     horse_stats[uid]["loss"] = yay_loss;
 	horse_stats[uid]["winnings"] = old_winning + purse;
     current_winner = uid;
-	
+
 	SAVE();
-	return;	
-	
+	return;
+
     }
 
 void show_all_horses()
@@ -591,7 +587,7 @@ write ("------------------------------------------------------------------------
 	}
 	}
 }
-	
+
 void show_one_horse(string str)
 {
 
@@ -601,30 +597,30 @@ int win, loss, winnings, uid, aa, blurb1, blurb2, stable, speed, health, accel, 
 temp = keys(horse_stats);
 
     aa = sizeof(temp);
-	
+
     if(!sscanf(str,"%d",uid)) return notify_fail("Try research #.");
-	
+
 	if (aa < uid || uid == 0){
     write("%^ORANGE%^You flip through the book of horses, but it looks "+
 	"like that horse doesn't exist. Perhaps you should look at the list "+
 	"of all the horses on file and check to make sure that number is a valid one.\n");
 	return 0;
     }
-	
-	check_if_dead = horse_stats[uid]["name"]; 
+
+	check_if_dead = horse_stats[uid]["name"];
 	if(check_if_dead == "dead"){
 	    tell_object(TP, "%^RESET%^%^RED%^You flip through the book but find "+
 		"this horse's number has the information removed. Perhaps some accident "+
 		"befell the horse and it is dead?\n\n%^RESET%^");
 	return;
 	}
-		
-	
-	
+
+
+
 	if (aa >= uid){
-	
+
     write("Horse "+uid+" ...");
-    name = horse_stats[uid]["name"]; 
+    name = horse_stats[uid]["name"];
 	owner = horse_stats[uid]["owner"];
 	real_owner = horse_stats[uid]["real_owner"];
 	win = horse_stats[uid]["win"];
@@ -634,16 +630,16 @@ temp = keys(horse_stats);
 	accel = horse_stats[uid]["accel"];
 	jockey = horse_stats[uid]["jockey"];
 	blurb1 = horse_stats[uid]["blurb1"];
-	blurb2 = horse_stats[uid]["blurb2"];	
-	stable = horse_stats[uid]["stable"];	
-    invested = horse_stats[uid]["invested"];		
-	
+	blurb2 = horse_stats[uid]["blurb2"];
+	stable = horse_stats[uid]["stable"];
+    invested = horse_stats[uid]["invested"];
+
 	if (accel < 10 || accel == 10){app_accel = "a horse that takes an extremely long time to get up to speed"; }
 	if (accel > 10 && accel < 20 || accel == 20){app_accel = "a slow starter"; }
 	if (accel > 20 && accel < 40 || accel == 40){app_accel = "a horse that is relatively quick out of the gate"; }
 	if (accel > 40 && accel < 60 || accel == 60){app_accel = "a horse well trained to gain speed";}
 	if (accel > 60 && accel < 85 || accel == 80){app_accel = "a horse gifted with incredible ability to gain speed"; }
-	if (accel > 85 && accel < 100){app_accel = "a horse that launches like an arrow out of the gate"; }		
+	if (accel > 85 && accel < 100){app_accel = "a horse that launches like an arrow out of the gate"; }
 	if (accel == 100){app_accel = "a horse with an unearthly ability to launch ahead of the pack";	 }
 
 	if (speed < 10 || speed == 10){app_speed = "a stunningly slow runner"; }
@@ -651,35 +647,35 @@ temp = keys(horse_stats);
 	if (speed > 20 && speed < 40 || speed == 40){app_speed = "a good pace that keeps up with the pack"; }
 	if (speed > 40 && speed < 60 || speed == 60){app_speed = "a well trained pace horse with great speed";}
 	if (speed > 60 && speed < 85 || speed == 80){app_speed = "a long running fast steed"; }
-	if (speed > 85 && speed < 100){app_speed = "a blindingly fast runner"; }		
+	if (speed > 85 && speed < 100){app_speed = "a blindingly fast runner"; }
 	if (speed == 100){app_speed = "a speed that must be the work of gods";	 }
-	
+
 	if (jockey < 10 || jockey == 10){app_jockey = "a completely untrained"; }
 	if (jockey > 10 && jockey < 20 || jockey == 20){app_jockey = "a novice"; }
 	if (jockey > 20 && jockey < 40 || jockey == 40){app_jockey = "a journeyman"; }
 	if (jockey > 40 && jockey < 60 || jockey == 60){app_jockey = "a veteren";}
 	if (jockey > 60 && jockey < 85 || jockey == 80){app_jockey = "a master"; }
-	if (jockey > 85 && jockey < 100){app_jockey = "a more then masterful"; }		
+	if (jockey > 85 && jockey < 100){app_jockey = "a more then masterful"; }
 	if (jockey == 100){app_jockey = "a godly";	 }
 
     if (stable == 1){app_stable = "%^CYAN%^Antioch Royal Stables"; }
     if (stable == 2){app_stable = "%^YELLOW%^Azha Outpost Stables"; }
-    if (stable == 3){app_stable = "%^RESET%^%^BOLD%^Seneca Stables and Aviary"; }	
-    if (stable == 4){app_stable = "%^MAGENTA%^Shadow Stables"; }	
+    if (stable == 3){app_stable = "%^RESET%^%^BOLD%^Seneca Stables and Aviary"; }
+    if (stable == 4){app_stable = "%^MAGENTA%^Shadow Stables"; }
 
 	if (blurb1 == 1){app_blurb1 = "The horse is known for its fear of animals."; }
-	if (blurb1 == 2){app_blurb1 = "The horse was born under a full moon."; }	
-	if (blurb1 == 3){app_blurb1 = "Several times this horse has refused the gate."; }	
+	if (blurb1 == 2){app_blurb1 = "The horse was born under a full moon."; }
+	if (blurb1 == 3){app_blurb1 = "Several times this horse has refused the gate."; }
 	if (blurb1 == 4){app_blurb1 = "They come from a very proud line of race horses."; }
 	if (blurb1 == 5){app_blurb1 = "The horse's coloring is considered unique."; }
 	if (blurb1 == 6){app_blurb1 = "They refuse to practice before a race."; }
 	if (blurb1 == 7){app_blurb1 = "The horse is known for its fear of armed soldiers."; }
 	if (blurb1 == 8){app_blurb1 = "The horse refuses jockeys of half-blood."; }
 	if (blurb1 == 9){app_blurb1 = "Strangely, they only accept half-blood jockeys."; }
-	
+
 	if (blurb2 == 1){app_blurb2 = "Training such a horse is always expensive."; }
-	if (blurb2 == 2){app_blurb2 = "Some consider if all the gold spent on this horse is a wise investment."; }	
-	if (blurb2 == 3){app_blurb2 = "The trainer for this horse is a master, but has a secret past."; }	
+	if (blurb2 == 2){app_blurb2 = "Some consider if all the gold spent on this horse is a wise investment."; }
+	if (blurb2 == 3){app_blurb2 = "The trainer for this horse is a master, but has a secret past."; }
 	if (blurb2 == 4){app_blurb2 = "This horse is only happy when training."; }
 	if (blurb2 == 5){app_blurb2 = "The horse requires special shoes that most say are enchanted."; }
 	if (blurb2 == 6){app_blurb2 = "They are known for a love of long races."; }
@@ -687,13 +683,13 @@ temp = keys(horse_stats);
 	if (blurb2 == 8){app_blurb2 = "This horse is strangely afraid of priests and clerics."; }
 	if (blurb2 == 9){app_blurb2 = "This horse favors shorter races in hot climates."; }
 
-							
+
     write("%^ORANGE%^You flip through the records of one horse.%^RESET%^\n");
     write("%^RESET%^%^RED%^ ----------------------------------------------------------------------- %^RESET%^");
 	write("%^RESET%^%^ORANGE%^Number \t\t%^RESET%^%^BOLD%^"+uid+"\n%^RESET%^%^ORANGE%^"+
 	"Horse Name\t%^RESET%^%^BOLD%^"+name+"\n%^RESET%^%^ORANGE%^Owner's Name\t"+
 	"%^RESET%^%^BOLD%^%^"+owner+"\n%^RESET%^%^ORANGE%^Record\t\t%^RESET%^%^BOLD%^"+win+"/"+loss+" \n");
-	
+
 	write("%^RESET%^%^ORANGE%^According to records "+name+"%^RESET%^%^ORANGE%^ "+
 	"was sired in the "+app_stable+"%^RESET%^%^ORANGE%^ and was purchased "+
 	"by "+owner+"%^RESET%^%^ORANGE%^. "+app_blurb1+" %^RESET%^%^ORANGE%^While great "+
@@ -709,17 +705,17 @@ temp = keys(horse_stats);
 		"they have invested "+invested+" gold in its training. ");
     }
 
-	
+
     return;
 	}
-	
+
     write("%^ORANGE%^You flip through the book of horses, but it looks "+
 	"like that horse doesn't exist. Perhaps you should look at the list "+
 	"of all the horses on file and check to make sure that number is a valid one.\n");
 	return 0;
-	
+
 	}
-	
+
 void show_current_race()
 {
 
@@ -729,21 +725,21 @@ void show_current_race()
 	string odds1, odds2, odds3, odds4;
 	string name1, name2, name3, name4;
 	int uid1, uid2, uid3, uid4, totaledge;
-	
+
 	edge1 = ((horse_stats[/**/race_horses[0]/**/]["win"]*4) - (horse_stats[/**/race_horses[0]/**/]["loss"]) + (horse_stats[/**/race_horses[0]/**/]["total_skills"]));
 	edge2 = ((horse_stats[/**/race_horses[1]/**/]["win"]*4) - (horse_stats[/**/race_horses[1]/**/]["loss"]) + (horse_stats[/**/race_horses[1]/**/]["total_skills"]));
 	edge3 = ((horse_stats[/**/race_horses[2]/**/]["win"]*4) - (horse_stats[/**/race_horses[2]/**/]["loss"]) + (horse_stats[/**/race_horses[2]/**/]["total_skills"]));
 	edge4 = ((horse_stats[/**/race_horses[3]/**/]["win"]*4) - (horse_stats[/**/race_horses[3]/**/]["loss"]) + (horse_stats[/**/race_horses[3]/**/]["total_skills"]));
-	
+
 	totaledge = ((edge1 + edge2 + edge3 + edge4) / 4);
-	
+
 	edge1 = (totaledge - edge1);
 	edge2 = (totaledge - edge2);
 	edge3 = (totaledge - edge3);
 	edge4 = (totaledge - edge4);
-	
+
 	odds1 = "blah";
-	
+
     if (edge1 < -50){odds1 = ("1:5");}
 	if ((edge1 > -49) && (edge1 < -40)){odds1 = ("1:6");}
 	if ((edge1 > -39) && (edge1 < -30)){odds1 = ("1:5");}
@@ -804,12 +800,12 @@ void show_current_race()
 	if ((edge4 > 29) && (edge4 < 40)){odds4 = ("7:1");}
     if (edge4 > 49){odds4 = ("8:1");}
 
-    name1 = horse_stats[/**/race_horses[0]/**/]["name"]; 
+    name1 = horse_stats[/**/race_horses[0]/**/]["name"];
 	name2 = horse_stats[/**/race_horses[1]/**/]["name"];
     name3 = horse_stats[/**/race_horses[2]/**/]["name"];
     name4 = horse_stats[/**/race_horses[3]/**/]["name"];
-	
-	uid1 = horse_stats[/**/race_horses[0]/**/]["UID"]; 
+
+	uid1 = horse_stats[/**/race_horses[0]/**/]["UID"];
 	uid2 = horse_stats[/**/race_horses[1]/**/]["UID"];
     uid3 = horse_stats[/**/race_horses[2]/**/]["UID"];
     uid4 = horse_stats[/**/race_horses[3]/**/]["UID"];
@@ -818,23 +814,23 @@ void show_current_race()
     if (location == 2){common_course = ("Tharis underground");}
 	if (location == 3){common_course = ("Northern star");}
 	if (location == 4){common_course = ("Royal Asgard Yards");}
-	
+
 	if (weather == 1){common_weather = ("clear");}
 	if (weather == 2){common_weather = ("foggy");}
 	if (weather == 3){common_weather = ("storming");}
-	
+
 	if (danger == 0 && location == 1){common_danger = ("the course appears clear");}
 	if (danger == 1 && location == 1){common_danger = ("there are reports of bandits near the course");}
-	
+
 	if (danger == 0 && location == 2){common_danger = ("the course appears safe");}
 	if (danger == 1 && location == 2){common_danger = ("there have been reports of escaped rats and gelatinous cubes near the course");}
-	
+
 	if (danger == 0 && location == 3){common_danger = ("guards are patrolling the course");}
 	if (danger == 1 && location == 3){common_danger = ("several undead were dispatched near the course");}
-	
+
 	if (danger == 0 && location == 4){common_danger = ("commandos have the course secured");}
 	if (danger == 1 && location == 4){common_danger = ("It is rumroed Sysquatch raiders might be in the area");}
-	
+
 	write("%^ORANGE%^You look over the board on the wall that has the details of the race about to be run. You "+
 	"can '%^BOLD%^place'%^RESET%^%^ORANGE%^ your bet once you decide if there is a horse here that looks lucky, "+
 	"or %^BOLD%^'research'%^RESET%^%^ORANGE%^ a horse to learn more about them.\n%^RESET%^\n");
@@ -845,20 +841,20 @@ void show_current_race()
 	"%^RESET%^%^CYAN%^and %^BOLD%^"+common_danger+"%^RESET%^%^CYAN%^"+
 	". The purse for the winning horse is %^YELLOW%^"+purse+"%^RESET%^%^CYAN%^. The following horses are running the race.\n");
 	write("%^YELLOW%^#        Horse Name      Odds%^RESET%^\n");
-    write(""+uid1+"\t "+name1+"\t "+odds1+" ");    
+    write(""+uid1+"\t "+name1+"\t "+odds1+" ");
 	write(""+uid2+"\t "+name2+"\t "+odds2+" ");
 	write(""+uid3+"\t "+name3+"\t "+odds3+" ");
 	write(""+uid4+"\t "+name4+"\t "+odds4+" \n");
-    return; 
-}	
+    return;
+}
 
 void dramatic_pause(int num)
 {
     switch(num){
-	    case(0): 
+	    case(0):
 		tell_room(ETP,"%^RESET%^%^MAGENTA%^%^RESET%^");
 		break;
-		case(1): 
+		case(1):
 		break;
 		return;
 	}
@@ -869,9 +865,9 @@ void dramatic_pause(int num)
 
 void SAVE()
 {
-    seteuid(UID_DAEMONSAVE);  
-	save_object(SAVE_FILE); 
-    seteuid(getuid());  
+    seteuid(UID_DAEMONSAVE);
+	save_object(SAVE_FILE);
+    seteuid(getuid());
     return;
 }
 

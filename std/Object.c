@@ -41,7 +41,6 @@ private string true_name;         // kept in seperate variable for security
 private string creator;           // File name of the ob that created an object
 
 string cursed;
-//static string d_master;           // File name of an object's domain master ob
 private string *identified;
 private string *studied;
 private mapping studied_failed;
@@ -66,8 +65,8 @@ string *item_owners = ({});
 string item_owner_props = "01100";
 
 //hiding things..
-private static int hidden, magic_hidden;
-private static object * hidden_seen;
+nosave private int hidden, magic_hidden;
+nosave private object * hidden_seen;
 
 // To allow this item to use the unique item system
 // Thorn@ShadowGate - 27 June 2000
@@ -240,7 +239,7 @@ void set(string what, mixed arg)
     }
 }
 
-static void add(string what, mixed arg) {
+protected void add(string what, mixed arg) {
     if(!ob_data) ob_data = ([]);
     if(functionp(arg) && geteuid(this_object()) != geteuid(arg[0])) return;
     if(stringp(arg) || intp(arg)) arg = ({ arg});

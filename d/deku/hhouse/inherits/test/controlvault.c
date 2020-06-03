@@ -20,10 +20,10 @@ inherit VAULT;
 
 int interacting_mob(object ob);
 void form_monster_party(int speed);
-static int repop;
+nosave int repop;
 int mon_speed;
 
-static mapping mons;
+nosave mapping mons;
 
 void create() {
     log_file("deku_code", "@@START@@\n controlvault.c before ::create\n");

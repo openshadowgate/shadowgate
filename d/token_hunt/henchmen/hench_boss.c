@@ -4,9 +4,9 @@
 
 inherit NPC;
 
-static int talking,ATTACKED_TIME;
-static mapping decision,timer;
-static string MY_ROOM = "/d/shadow/room/forest/road3";
+nosave int talking,ATTACKED_TIME;
+nosave mapping decision,timer;
+nosave string MY_ROOM = "/d/shadow/room/forest/road3";
 
 void talk_func(string str, object ob);
 

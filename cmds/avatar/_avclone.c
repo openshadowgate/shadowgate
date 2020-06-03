@@ -9,10 +9,10 @@
 inherit DAEMON;
 
 private mapping AreaObjects, AvcloneAreas;
-private static mapping TmpMap;
-private static string EUID_TMP;
-private static int IC;
-private static string hformat = "\n%^BOLD%^%^GREEN%^===================================="+
+nosave mapping TmpMap;
+nosave string EUID_TMP;
+nosave int IC;
+nosave string hformat = "\n%^BOLD%^%^GREEN%^===================================="+
 "=====================================\n%^RESET%^";
 
 mixed build_avclone_database(int myFlag);
@@ -30,7 +30,7 @@ private void swap(int i, int j, string* stuff)
 
 void AvcloneAreaRestore()
 {
-	if(mapp(AvcloneAreas)) 
+	if(mapp(AvcloneAreas))
 	{
 		if(sizeof(keys(AvcloneAreas))) return;
 	}
@@ -50,7 +50,7 @@ void AvcloneObjectRestore(string area)
 	TmpMap = copy(AvcloneAreas);
     //tell_object(TP, "AvcloneAreas = "+identify(AvcloneAreas));
 	AvcloneAreas = ([]);
-    if(!file_exists(AVDIR+area+".o")) 
+    if(!file_exists(AVDIR+area+".o"))
     {
         AreaObjects = ([]);
         return;
@@ -58,7 +58,7 @@ void AvcloneObjectRestore(string area)
 	seteuid(UID_RESTORE);
 	restore_object(AVDIR+area);
     seteuid(getuid());
-	AvcloneAreas = TmpMap;	
+	AvcloneAreas = TmpMap;
     //tell_object(TP, "AvcloneAreas now = "+identify(AvcloneAreas));
 }
 
@@ -74,27 +74,27 @@ void AvcloneAreasSave()
 }
 
 void AvcloneObjectSave(string area)
-{	
+{
     TmpMap = ([]);
 	TmpMap = copy(AvcloneAreas);
 	AvcloneAreas = ([]);
     seteuid(UID_RESTORE);
 	save_object(AVDIR + area);
     seteuid(getuid());
-	AvcloneAreas = TmpMap;	
+	AvcloneAreas = TmpMap;
 }
 
 mixed *sort(string *stuff)
 {
     int i,j;
 
- 	for(j=0;j<sizeof(stuff);j++) 
+ 	for(j=0;j<sizeof(stuff);j++)
 	{
       	for(i=sizeof(stuff)-1;i>j;i--)
 		{
     		if(!stringp(stuff[i-1]) || !strlen(stuff[i-1])) continue;
 			if(!stringp(stuff[i]) || !strlen(stuff[i-1])) continue;
-		    if(lower_case(stuff[i]) < lower_case(stuff[i-1]))	
+		    if(lower_case(stuff[i]) < lower_case(stuff[i-1]))
 			{
 		    	swap(i-1,i,stuff);
         	}
@@ -111,7 +111,7 @@ string strip_colors(string sh)
     string output = "", *list = ({});
     string *words = ({});
 	int i;
-	if(!sh) 
+	if(!sh)
 	{
 		return output;
 	}
@@ -144,7 +144,7 @@ string create_display_list(mapping objects_list, int flag)
 	string tmp_mon = "%^CYAN%^Monster: %^RESET%^\n";
 	terms = keys(objects_list);
 	for(x = 0;x < sizeof(terms);x++)
-	{	
+	{
 		tmp_str = "";
 		object_info = objects_list[terms[x]];
 		tmp_str += "%^CYAN%^Short:  %^RESET%^";
@@ -152,7 +152,7 @@ string create_display_list(mapping objects_list, int flag)
 		tmp_str += "\t%^CYAN%^Clone Words:  %^RESET%^";
 		tmp_str += object_info[4][0] + ", ";
 		tmp_str += object_info[4][1] + "\n";
-		if(wizardp(TP))	
+		if(wizardp(TP))
 		{
 			tmp_str += "\t%^CYAN%^File Name:  %^RESET%^";
 			tmp_str += object_info[1] + "\n";
@@ -199,10 +199,10 @@ void avclone_register(object ob)
 	if(sizeof(tmparr) < 1) myArea = tmparr[0];
 	else myArea = tmparr[1];
 	myDir = implode(tmparr[0..(sizeof(tmparr)-2)], "/")+"/";
-	
-	if(member_array(myArea, myAreas) != -1) 
+
+	if(member_array(myArea, myAreas) != -1)
 	{
-		if(member_array(myDir, AvcloneAreas[myArea]) != -1) 
+		if(member_array(myDir, AvcloneAreas[myArea]) != -1)
 		{
 			tell_object(TP, ob->query_short() + " is already registered in the "+
 			myArea + " area!");
@@ -245,13 +245,13 @@ void avclone_register(object ob)
 			build_avclone_database(0);
 		}
 		else
-		{ 
+		{
 			tell_object(TP, "Adding the area "+myArea+" to avclone and registering "+
 			ob->query_short() + " in it!");
 			build_avclone_database(0);
-		}		
+		}
 		return 1;
-	}	
+	}
 }
 
 
@@ -260,7 +260,7 @@ void nuke(object ob)
 	if(!ob)
 	{
 		return;
-	}	
+	}
 	if(environment(ob)) return;
 	ob->remove();
 	if(ob)
@@ -290,7 +290,7 @@ mixed build_avclone_database(int myFlag)
 	{
 		myArea = areas[x];
 		AvcloneObjectRestore(myArea);
-		
+
 		for(y = 0; y < sizeof(AvcloneAreas[myArea]);y++)
 		{
 			//should be the directory
@@ -299,7 +299,7 @@ mixed build_avclone_database(int myFlag)
 			else object_files = get_dir(myDir + "*.c");
 			if(sizeof(keys(AreaObjects)))
 			{
-				if(AreaObjects[myDir]) 
+				if(AreaObjects[myDir])
 				{
 					//tell_object(TP, "My dir = "+myDir);
 					myCount = AreaObjects[myDir]["count"];
@@ -314,7 +314,7 @@ mixed build_avclone_database(int myFlag)
 			//Starting of File Loop - Saide
 			for(i = 0;i < sizeof(object_files);i++)
 			{
-				if(myArea == "avatars") 
+				if(myArea == "avatars")
                 {
                     if(catch(ob = new("/d/avatars/" + myDir +"/"+ object_files[i])))
                     {
@@ -335,38 +335,38 @@ mixed build_avclone_database(int myFlag)
 					false_count++;
 					continue;
 				}
-				else 
+				else
 				{
 					search_words = ({});
 					short = (string)ob->query("short");
 					if(short)
 					{
-						if(functionp(short)) 
+						if(functionp(short))
 						{
 							short = ob->query_short();
 						}
 						true_short = strip_colors(short);
 						if(stringp(true_short)) true_short = lower_case(true_short);
-						if(living(ob)) 
+						if(living(ob))
 						{
 							object_type = "monster";
 						}
-						else if(ob->is_armour()) 
+						else if(ob->is_armour())
 						{
 							object_type = "armor";
 						}
-						else if(ob->is_weapon()) 
+						else if(ob->is_weapon())
 						{
 							object_type = "weapon";
 						}
 						else
 						{
 							object_type = "other";
-						}									
+						}
 					}
                     continue;
 				}
-				myTrueFileName = base_name(ob);						
+				myTrueFileName = base_name(ob);
 				tmp_arr = explode(myTrueFileName, "/");
 				if(myArea == "avatars")
 				{
@@ -378,9 +378,9 @@ mixed build_avclone_database(int myFlag)
 				}
 				flag++;
 				count++;
-				search_words += ({lower_case(myFileName)});				
+				search_words += ({lower_case(myFileName)});
 				search_words += ({true_short});
-				myDirObjects += ([short : (["filename" : myFileName, "true filename" : myTrueFileName, 
+				myDirObjects += ([short : (["filename" : myFileName, "true filename" : myTrueFileName,
 				"object type" : object_type, "search words" : search_words ]) ]);
 				nuke(ob);
 				continue;
@@ -401,7 +401,7 @@ mixed build_avclone_database(int myFlag)
 		AvcloneObjectSave(myArea);
 		continue;
 	}
-	if(flag) 
+	if(flag)
 	{
 		SAVE_D->remove_array("AVCLONE_IN_DEPTH");
 	}
@@ -412,9 +412,9 @@ mixed compile_objects_list(string area, string type, int flag)
 	string *areas, myArea, fname, tr_fname, object_type, true_short, short;
 	int depth, x, y, i, z, k;
 	string *myDirs, *search_words = ({}), *myShorts, myDir, *TmpDirs;
-	object ob; //Variable that handles loading/manipulating an object	
-	
-	//Format of (["Short" : ({"file_name", "true_file_name", "area", "type", 
+	object ob; //Variable that handles loading/manipulating an object
+
+	//Format of (["Short" : ({"file_name", "true_file_name", "area", "type",
 	//({"Search words"})]);
 	mapping cp_objects_list = ([]), myTmp = ([]), tmpObjectInfo = ([]);
 
@@ -427,7 +427,7 @@ mixed compile_objects_list(string area, string type, int flag)
 	if(area != "search" && area != "avsearch")
 	{
 		depth = 1;
-		if(member_array(area, areas) == -1) 
+		if(member_array(area, areas) == -1)
 		{
 			return -1;
 		}
@@ -444,11 +444,11 @@ mixed compile_objects_list(string area, string type, int flag)
     IC = 0;
     TmpDirs = ({});
 	for(x = 0;x < depth;x++)
-	{        
+	{
 		if(area == "search")
 		{
-			myArea = areas[x];			
-		}	
+			myArea = areas[x];
+		}
 		else
 		{
 			myArea = area;
@@ -462,16 +462,16 @@ mixed compile_objects_list(string area, string type, int flag)
 		for(i = 0;i < sizeof(myDirs);i++)
 		{
 			myDir = myDirs[i];
-            if(strsrch(myDir, myArea) == -1) 
+            if(strsrch(myDir, myArea) == -1)
             {
                 TmpDirs += ({myDir});
                 continue;
             }
-			tmpObjectInfo = AreaObjects[myDir]["objects"];	
+			tmpObjectInfo = AreaObjects[myDir]["objects"];
             if(!sizeof(myShorts = keys(tmpObjectInfo))) continue;
             IC += sizeof(myShorts);
   			for(z = 0;z < sizeof(myShorts);z++)
-			{ 
+			{
                 flag = 0;
 				if(area == "search")
 				{
@@ -488,20 +488,20 @@ mixed compile_objects_list(string area, string type, int flag)
 					if(type != "all" && type != tmpObjectInfo[myShorts[z]]["object type"]) continue;
 					flag++;
 				}
-				if(flag) 
+				if(flag)
 				{
-					search_words = tmpObjectInfo[myShorts[z]]["search words"];;	
+					search_words = tmpObjectInfo[myShorts[z]]["search words"];;
 					fname = tmpObjectInfo[myShorts[z]]["filename"];
 					tr_fname = tmpObjectInfo[myShorts[z]]["true filename"];
 					object_type = tmpObjectInfo[myShorts[z]]["object type"];
-					cp_objects_list += ([myShorts[z] : ({fname, tr_fname, myArea, 
+					cp_objects_list += ([myShorts[z] : ({fname, tr_fname, myArea,
 					object_type, search_words})]);
 					continue;
 				}
 			}
 			continue;
 		}
-        if(sizeof(TmpDirs)) 
+        if(sizeof(TmpDirs))
         {
             for(i = 0;i < sizeof(TmpDirs);i++)
             {
@@ -512,22 +512,22 @@ mixed compile_objects_list(string area, string type, int flag)
             {
                 map_delete(AvcloneAreas, myArea);
                 AvcloneAreasSave();
-                if(file_exists(AVDIR+myArea+".o")) 
+                if(file_exists(AVDIR+myArea+".o"))
                 {
                     seteuid(UID_RESTORE);
                     rm(AVDIR+myArea+".o");
                     seteuid(geteuid());
                 }
             }
-            
+
         }
-		//END OF FILE LOOP 
+		//END OF FILE LOOP
         continue;
-		
+
 	}
-    if(sizeof(TmpDirs)) 
+    if(sizeof(TmpDirs))
     {
-        
+
     }
 	return cp_objects_list;
 }
@@ -548,7 +548,7 @@ int cmd_avclone(string str)
 	}
 
 	//Shows the available areas to clone items from - Saide
-	if(!str) 
+	if(!str)
 	{
 		head = hformat;
 		head += "\t\t\t\tAreas";
@@ -557,7 +557,7 @@ int cmd_avclone(string str)
 		for(i = 0;i < sizeof(areas);i++)
 		{
 			tmps = "";
-			if((i+1) < 10) 
+			if((i+1) < 10)
 			{
 				tmps += " " + (i + 1) + ".) ";
 			}
@@ -590,7 +590,7 @@ int cmd_avclone(string str)
 			if((string)TP->query_name() == "saide")
 			{
 				if(!type) return 1;
-				if(type) 
+				if(type)
 				{
 					map_delete(AvcloneAreas, type);
 					AvcloneAreasSave();
@@ -600,21 +600,21 @@ int cmd_avclone(string str)
 						rm(AVDIR+type+".o");
 						seteuid(getuid());
 					}
-					tell_object(TP, "removing area "+type+" from avclone!");			
+					tell_object(TP, "removing area "+type+" from avclone!");
 				}
 				return 1;
 			}
 		}
 		if(area == "register")
 		{
-			if(!type) 
+			if(!type)
 			{
 				tell_object(TP, "What do you wish to register with avclone?");
 				return 1;
 			}
-			if(!objectp(ob = present(type, TP))) 
+			if(!objectp(ob = present(type, TP)))
 			{
-				if(!objectp(ob = present(type, ETP))) 
+				if(!objectp(ob = present(type, ETP)))
 				{
 					tell_object(TP, "You do not see a "+type+" to register!");
 					return 1;
@@ -629,11 +629,11 @@ int cmd_avclone(string str)
 			"with avclone.");
 			avclone_register(ob);
 			return 1;
-		} 
-			
-		if(area == "search" || area == "avsearch") 
+		}
+
+		if(area == "search" || area == "avsearch")
 		{
-			if(!type || type == "") 
+			if(!type || type == "")
 			{
 				tell_object(TP, "You must enter a valid search term.");
 				return 1;
@@ -647,7 +647,7 @@ int cmd_avclone(string str)
 			{
 				objects_list = compile_objects_list(area, type, 1);
                 if(!mapp(objects_list)) objects_list = compile_objects_list(area, type, 1);
-			}	
+			}
             if(!mapp(objects_list))
             {
                 tell_object(TP, "Apparently something broke... Saide is trying to sort it out "+
@@ -655,8 +655,8 @@ int cmd_avclone(string str)
                 return 1;
             }
 			y = sizeof(keys(objects_list));
-			if(y) 
-			{					
+			if(y)
+			{
 				tell_object(TP, "Your search found %^BOLD%^%^WHITE%^("+y
                 + "/"+IC+")%^RESET%^ items"+
 				" that matched the term "+type);
@@ -672,16 +672,16 @@ int cmd_avclone(string str)
 			}
 		}
 		//END OF SEARCH CODE AREA - Saide
-		
+
 		//START of Code That Tries to Clone the Item - Saide
-		area = lower_case(area);	
+		area = lower_case(area);
 		type = lower_case(type);
 		//type = explode(type, " ")[0];
 		//tell_object(TP, "type = "+type+" and area = "+area);
 
-		
+
 		if(type != "armor" && type != "other" && type != "weapon" && type != "monster")
-		{	
+		{
 			if((objects_list = compile_objects_list(area, type, 1)) == -1)
 			{
 				tell_object(TP, "No area with the name "+area+" found.  Try again.");
@@ -691,12 +691,12 @@ int cmd_avclone(string str)
 			for(x = 0;x < sizeof(object_names);x++)
 			{
 				if(member_array(type, objects_list[object_names[x]][4]) != -1)
-				{	
+				{
 					if(catch(ob = new(objects_list[object_names[x]][1])))
                     {
                         tell_object(TP, "Error trying to clone object.");
                         return 1;
-                    }                        
+                    }
 					break;
 				}
 			}
@@ -707,15 +707,15 @@ int cmd_avclone(string str)
 				return 1;
 			}
 			if(living(ob)) ob->move(ETP);
-			else 
+			else
 			{
 				if(ob->move(TP) != MOVE_OK)
 				{
 					ob->move(ETP);
 					tell_object(TP, ob->query("short") + " has been spawned on the ground!");
-				}		
+				}
 			}
-			tell_object(TP, "You create a "+ob->query("short")+"!");	
+			tell_object(TP, "You create a "+ob->query("short")+"!");
 			return 1;
 		}
 		//END OF CLONING CODE - Saide
@@ -726,7 +726,7 @@ int cmd_avclone(string str)
 				tell_object(TP, "No area with the name "+area+" found.  Try again.");
 				return 1;
 			}
-			if(objects_list == -2) 
+			if(objects_list == -2)
 			{
 				tell_object(TP, "Cannot display avatar objects because of "+
 				"the massive amount - use avclone avsearch <search_term> and then "+
@@ -762,18 +762,18 @@ int cmd_avclone(string str)
 			tell_object(TP, "No area with the name "+str+" found.  Try again.");
 			return 1;
 		}
-		if(objects_list == -2) 
+		if(objects_list == -2)
 		{
 			tell_object(TP, "Cannot display avatar objects because of "+
 			"the massive amount - use avclone avsearch <search_term> and then "+
 			"avclone avatars <item_name> to clone the item.");
 			return 1;
-		}			
-		if(!sizeof(keys(objects_list))) 
+		}
+		if(!sizeof(keys(objects_list)))
 		{
 			tell_object(TP, "No objects found for the area "+str+".  Please try again.");
 			return 1;
-		} 
+		}
 		tmps += create_display_list(objects_list, 0);
 		TP->more(explode(tmps,"\n"));
 		return 1;
@@ -784,7 +784,7 @@ int cmd_avclone(string str)
 
 
 int help()
-{	
+{
     write("%^BOLD%^%^CYAN%^Syntax%^RESET%^:"+
 	    "\tavclone\n"+
 	    "\tavclone <%^BOLD%^%^WHITE%^area_name%^RESET%^>\n"+
@@ -798,7 +798,7 @@ int help()
 		"<%^BOLD%^%^WHITE%^target%^RESET%^>\n\n\n"+
 	    "The avclone command is a advanced clone command for avatars to use for either "+
 	    "replacing equipment or cloning equipment for a persona to use.\n\n"+
-	
+
 	    "avclone by itself will show the areas currently supported by the command.\n\n"+
 	    "avclone <area_name> will list all the available items from the specified "+
 	    "<area_name>.  <area_name> must be an area that is currently supported. \n\n"+

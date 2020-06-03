@@ -33,8 +33,7 @@
 inherit DAEMON;
 
 
-static mapping loaded_objects = ([ ]);
-// ([ objectp(loaded object): stringp(file_name) ])
+nosave mapping loaded_objects = ([ ]);
 
 void save_item(object item);
 
@@ -116,7 +115,7 @@ int good_customer(object fence, object who, int adj, int base){
   default:
     base -= 25; // 25
   }
-  
+
   if (base >= MAX_FEE_PERCENT) base = MAX_FEE_PERCENT ;
   if (base <= MIN_FEE_PERCENT) base = MIN_FEE_PERCENT ;
   switch (base-original_base) {
@@ -145,7 +144,7 @@ int good_customer(object fence, object who, int adj, int base){
     break;
   case -24..-20:
     fence->force_me("laugh out loud");
-    fence->force_me("say Yeah yeah, I know, so how's life?"); 
+    fence->force_me("say Yeah yeah, I know, so how's life?");
     break;
   default:
     fence->force_me("emote shakes "+fence->query_possessive()+" head in amazement.");
@@ -155,12 +154,12 @@ int good_customer(object fence, object who, int adj, int base){
 }
 
 void launder(object fence, object who, int amount){
-  
+
   int total, difficulty, adj, base, diff, adj_amount, exp;
-  
+
   if(!objectp(who)) return;
   if(!objectp(fence)) return;
-  
+
   total = who->query("stolen money");
   if (amount <= 0) {
   fence->force_me("say Look, I don't have time for this nonsense. Get on with it.");
@@ -170,7 +169,7 @@ void launder(object fence, object who, int amount){
     fence->force_me("say I'm only interested in stolen money. You're trying to launder more then you've stolen.");
     return;
   }
-  
+
   fence->force_me("hmm");
   if (!who->query_funds("gold",amount)) {
     fence->force_me("say You don't even have that money. You spent it all on booze and such.");
@@ -197,14 +196,14 @@ void launder(object fence, object who, int amount){
   } else {
     who->set("thief account",adj_amount);
   }
-  
+
   who->set("total laundered money",adj+amount);
 //  who->add_exp(exp=(amount*((int)who->query_highest_level()/5 +1)));
   if (who->is_class("thief"))
     who->add_general_exp("thief",exp=(amount*((int)who->query_level("thief")/5 +1)));
   else if (who->is_class("bard"))
     who->add_general_exp("bard",exp=(amount*((int)who->query_level("bard")/10 +1)));
-  else 
+  else
     exp = 0;
   seteuid(UID_LOG);
   LF(who->query_name()+" laundered "+amount+" gold");
@@ -213,8 +212,8 @@ void launder(object fence, object who, int amount){
     LF(""+exp+" (thief) experience on "+ctime(time())+"\n");
   } else if (who->is_class("bard")) {
     LF(""+exp+" (bard) experience on "+ctime(time())+"\n");
-  } else { 
-    LF("(No XP Intentionally!) on "+ctime(time())+"\n"); 
+  } else {
+    LF("(No XP Intentionally!) on "+ctime(time())+"\n");
   }
   seteuid(getuid());
 }
@@ -223,18 +222,18 @@ int value(object fence, object who, object item)
 {
     int base, adj, value1;
     mapping stolen;
-  
+
     base = BASE_FEE_PERCENT;
     adj = who->query("total fenced money");
     base = good_customer(fence, who, adj,base);
-  
+
     stolen = (mapping)item->query_property("stolen");
     if(!stolen || !stolen[who->query_name()]) {
         return 0;
     }
     value1 = item->query_value();
     value1 = stolen[who->query_name()]["max value"] <= value1?stolen[who->query_name()]["max value"]:value1;
-  
+
     value1 -= (value1*base)/100;
     return value1;
 }
@@ -243,7 +242,7 @@ void fence(object fence, object item, object who)
 {
     //function was modified - check /daemon/fence_d.saide for the old function
     //the idea was to increase the amount of exp gained so that fencing is worthwhile
-    //to any thief, regardless of 
+    //to any thief, regardless of
 	mapping stolen;
 	int value, adj_value, difficulty, adj, base;
 	int ench, levelmod, expdiff, wholevel, expvalue;
@@ -254,17 +253,17 @@ void fence(object fence, object item, object who)
   	if(!objectp(fence)) return;
     if(!objectp(item))  return;
     if(!objectp(who))   return;
-    
+
   	stolen = (mapping)item->query_property("stolen");
-  	if(!stolen || !stolen[who->query_name()]) 
+  	if(!stolen || !stolen[who->query_name()])
     {
         fence->force_me("say You didn't steal that, get out of here.");
         return;
     }
-    
+
     value = item->query_value();
     value = stolen[who->query_name()]["max value"] <= value?stolen[who->query_name()]["max value"]:value;
-    if(!value) 
+    if(!value)
     {
         fence->force_me("say That has no value, do you think I'm a fool?");
         return;
@@ -272,15 +271,15 @@ void fence(object fence, object item, object who)
     base = BASE_FEE_PERCENT;
     adj = who->query("total fenced money");
     base = good_customer(fence, who, adj,base);
-  
+
     fence->force_me("emote takes the merchandise.");
     adj_value = value - (value*base)/100;
     fence->force_me("say I'm gonna give ya "+adj_value+" for that hard work.");
-    tell_object(who,"The fence puts "+adj_value+" into your thief account.");    
-    
+    tell_object(who,"The fence puts "+adj_value+" into your thief account.");
+
     if (who->query("thief account")) who->set("thief account",(int)who->query("thief account")+adj_value);
     else who->set("thief account",adj_value);
-    
+
     who->set("total fenced money", adj+value);
     difficulty = stolen[who->query_name()]["difficulty"];
     if(item->query_property("enchantment") > 0) { ench = item->query_property("enchantment"); }
@@ -295,41 +294,41 @@ void fence(object fence, object item, object who)
         case 1001..5000: exp_perc = 0.035; break;
         case 5001..25000: exp_perc = 0.04; break;
         case 25001..200000: exp_perc = 0.050; break;
-        default: exp_perc = 0.050; break;        
+        default: exp_perc = 0.050; break;
     }
     expdiff = ( (difficulty<=0?1:difficulty) /3);
     if(expdiff < 1) expdiff = 1;
     myLev = (int)who->query_character_level();
     if(myLev > 100) myLev = 100;
     expvalue = to_int(to_float(exp_for_level(myLev)) * exp_perc);
-    expvalue = to_int(to_float(expvalue * expdiff) / 33);    
+    expvalue = to_int(to_float(expvalue * expdiff) / 33);
     tell_object(who, "exp value = "+expvalue);
     seteuid(UID_LOG);
     LF(who->query_name()+" ("+wholevel+") fenced "+item->query_short());
     LF(" worth "+value+" for "+adj_value+" credit and ");
-    if (who->is_class("thief") || who->is_class("bard")) 
+    if (who->is_class("thief") || who->is_class("bard"))
     {
         who->add_exp(expvalue);
         LF(""+expvalue+" (thief or bard) experience.\n");
     }
-    else 
+    else
     {
         expvalue = 0;
-        LF("(No XP Intentionally!)\n"); 
+        LF("(No XP Intentionally!)\n");
     }
 
-    if(expvalue > (wholevel * 4000)) 
+    if(expvalue > (wholevel * 4000))
     {
         log_file("reports/fencing_high",who->query_name()+" ("+wholevel+
         ") fenced "+item->query_short()+" worth "+value+" for "+adj_value+
         " credit and "+expvalue+" exp. (diff.: "+difficulty+").\n");
     }
     seteuid(getuid());
-    
-    if(item->is_container()) 
-    {        
+
+    if(item->is_container())
+    {
         contents = deep_inventory(item);
-        for(x = 0;x < sizeof(contents);x++) 
+        for(x = 0;x < sizeof(contents);x++)
         {
             if(contents[x]->query_item_owner_prop("fence_clear"))
             {
@@ -355,7 +354,7 @@ object query_object_loaded_by_filename(string filename) {
 
   if(!stringp(filename) || filename == "")
     return 0;
-  
+
   array = values(loaded_objects);
   if ((which=member_array(filename,array)) != -1)
     return (keys(loaded_objects)[which]);
@@ -406,7 +405,7 @@ int remove_loaded_object(object ob) {
 // Note items aren't deleted on load. They're deleted on selling.
   return 1;
 }
-    
+
 
 
 void save_item(object item){
@@ -432,7 +431,7 @@ int restore_item(object dest){
   string filename, s1, v, thing;
 
   items = get_dir(INVDIR+"ob*.o");
-  
+
   if(!sizeof(items)) {
     return 0;
   }
@@ -440,15 +439,15 @@ int restore_item(object dest){
 // I might be able to use filter_array here, But I didn't.
   i = sizeof(items);
   while (i--) {
-    
+
 //    DEBUG(identify(items));
 //    DEBUG(i);
 //    DEBUG(thing);
-    
+
     thing = items[i];
     if (query_loaded_somewhere(INVDIR+thing))
       items -= ({ thing });
-    
+
     if(!sizeof(items)) {
       return 0;
     }
@@ -457,9 +456,9 @@ int restore_item(object dest){
   if(!sizeof(items)) {
     return 0;
   }
-  
+
   i= random(sizeof(items));
-  
+
   thing = INVDIR + items[i];
   thing = thing[0..strlen(thing)-3];
 // strlen - 3 gets the , off of the ,o for some reason, strlen -2 didn't
@@ -488,7 +487,7 @@ int restore_item(object dest){
 //  LF("Restored "+ob->query_short()+" on "+ctime(time())+".\n");
   return sizeof(items);
   // tell us if we loaded one up. And tell us 1- the number of items remaining.
-  
+
 }
 
 int fence_item(object ob) {

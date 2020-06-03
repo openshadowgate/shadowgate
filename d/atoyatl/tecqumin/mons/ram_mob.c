@@ -3,7 +3,7 @@
 #include "../tecqumin.h"
 inherit MONSTER;
 
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 
 void create()
 {

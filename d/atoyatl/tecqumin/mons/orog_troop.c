@@ -29,7 +29,7 @@ inherit MONSTER;
 
 int tactic, flag;
 int crashed, climbing;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 string entry_method;
 
 void remove_orog();
@@ -156,7 +156,7 @@ string long_desc(){
                 +"\n%^GREEN%^Unlike orcs, however, these creatures stand nearly 6 and a half feet"
                 +" tall and haven olympian build, with powerful limbs, broad chests and backs and"
                 +" narrow waists. They look fit, lithe and dangerous.";
-  return desc;  
+  return desc;
 }
 
 int move(mixed dest){
@@ -183,7 +183,7 @@ int do_damage(string limb, int damage){
     switch(num_deaths){
     case 0:
       break;
-    case 1: 
+    case 1:
       tell_room(ETO, "%^BOLD%^%^RED%^An orog falls in battle!", TO);
       break;
     default:
@@ -216,7 +216,7 @@ void ram_roll(){
     force_me("batter gate");
     force_me("approach gate");
     return;
-  } 
+  }
 }
 
 
@@ -271,7 +271,7 @@ int start_ladders(object room){
   tell_room(room, capitalize(num) + " orogs arrive bearing seige ladders and begin moving toward the"
              +" stockade wall" );
   for (i=0;i<sizeof(rooms);i++){
-    tell_room(rooms[i], capitalize(num) + " orogs carrying seige ladders arive in the " 
+    tell_room(rooms[i], capitalize(num) + " orogs carrying seige ladders arive in the "
         + (string)room->query_name() + " and begin moving toward the stockade fence");
   }
   ladder = new (TABAXOBJ + "ladder");
@@ -292,7 +292,7 @@ void start_fire(){
   if (sizeof(attackers)>0){
     i = random(sizeof(attackers));
     force_me("emote tries to get to the firewood to start a fire, but can't get"
-            +" past" + attackers[i]->QCN); 
+            +" past" + attackers[i]->QCN);
     call_out("start_fire", 3 + random(4));
   }
   if(!present("wood", ETO )&& !present("firewood", ETO)){
@@ -434,7 +434,7 @@ void review_tactic(){
       case 2:
         tactic = LADDER;
         break;
-      } 
+      }
       return;
     }
     room = file_name(environment(rams[flag]));
@@ -449,7 +449,7 @@ void review_tactic(){
     return;
   case ARCHERY:
     room = file_name(ETO);
-    if (room == TABAXROOM + "high_field" || room == TABAXROOM + "main_field" 
+    if (room == TABAXROOM + "high_field" || room == TABAXROOM + "main_field"
                                          || room == TABAXROOM + "low_field"){
       if (random(3)>0){
         battlers = children(TABAXOBJ + "tabaxi_battler");
@@ -461,7 +461,7 @@ void review_tactic(){
               break;
             }
           }
-        } 
+        }
       }
     } else {
       goto_field();
@@ -535,7 +535,7 @@ int reach_destination(){
 //  lujke = find_player("lujke");
   where = file_name(ETO);
   switch (where){
-  case TABAXROOM + "treetop_base1": 
+  case TABAXROOM + "treetop_base1":
     if (tactic == SWING){
       switch(random(3)){
       case 0:
@@ -576,7 +576,7 @@ int reach_destination(){
     break;
   case TABAXROOM + "main_field": // deliberately falling through
   case TABAXROOM + "low_field": // deliberately falling through
-  case TABAXROOM + "high_field": 
+  case TABAXROOM + "high_field":
     if ((string)ETO->query_exit("north")== TABAXROOM + "stockade"){
       set_entry_method("Walking right in through the open gate.");
       start_walking(TABAXROOM + "granary");
@@ -595,7 +595,7 @@ int reach_destination(){
   ram = present("ram", ETO);
   if (objectp(ram)){
 //    ::force_me("tell lujke Ram present. Checking whether there are"
-//                        +" orogs available");  
+//                        +" orogs available");
     if (count_orogs()>0){
       field = find_object_or_load(TABAXROOM + "main_field");
 //      ::force_me("tell lujke Orogs present. Entering Ram");

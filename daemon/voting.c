@@ -8,7 +8,7 @@
 #include <voting.h>
 #include <daemons.h>
 
-static string current_class;
+nosave string current_class;
 int elir;
 mapping votes;
 string *candidates;
@@ -102,7 +102,7 @@ void end_elections() {
     int i;
 
     if(geteuid(previous_object()) != UID_LAW) return;
-    i = sizeof(ELECTIONS); 
+    i = sizeof(ELECTIONS);
     while(i--) {
         seteuid(UID_VOTESAVE);
         tmp = read_file(DIR_VOTES+"/"+ELECTIONS[i]+"_votes");

@@ -7,7 +7,7 @@ inherit MONSTER;
 
 //object dragee;
 int last_beat, sacrificing;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 
 void create()
 {

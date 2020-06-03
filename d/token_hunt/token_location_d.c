@@ -24,7 +24,7 @@ void add_monsters(string type,int num);
 void check_population();
 
 mapping DIRS,PLAYER_TOKENS;
-static mapping MONS;
+nosave mapping MONS;
 string *EXCLUDED;
 
 void create()

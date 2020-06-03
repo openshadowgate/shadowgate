@@ -21,9 +21,9 @@ int cmd_chfn(string arg) {
     return 1;
 }
 
-static void new_name(string rname) 
+protected void new_name(string rname)
 {
-    if( rname && (strlen( rname ) > 0) ) 
+    if( rname && (strlen( rname ) > 0) )
     {
         seteuid(UID_USERACCESS);
         this_player()->set_rname(rname);
@@ -36,9 +36,9 @@ static void new_name(string rname)
 
 void warning_display()
 {
-    write ("Please input any information you wish to show up at the bottom of your finger display. 
+    write ("Please input any information you wish to show up at the bottom of your finger display.
 
-You may use it to allow other players to contact you OOG. Do NOT use any such information for harassment and if you are harassed, please report by whom. 
+You may use it to allow other players to contact you OOG. Do NOT use any such information for harassment and if you are harassed, please report by whom.
 
 Displaying any information here is entirely voluntary and not required. However, whatever you input here will be available to anyone who uses the finger command. You are free to include whatever you wish to include.
 
@@ -47,11 +47,11 @@ If you do not enter anything then ** will simply exit the command and nothing wi
 Type ** to exit.");
 }
 
-static void new_email(string e) 
+protected void new_email(string e)
 {
     string user,host, olde;
-    olde=this_player()->query_email(); 
-    if (!e && stringp(olde) && (strlen(olde) > 6)) 
+    olde=this_player()->query_email();
+    if (!e && stringp(olde) && (strlen(olde) > 6))
     {
         // Show me a valid email address with 6 characters and I
         // will be amazed.
@@ -59,29 +59,29 @@ static void new_email(string e)
         warning_display();
         input_to("ooc_contact");
         return;
-    } 
-    else if (stringp(e) && (strlen(e) <= 6)) 
+    }
+    else if (stringp(e) && (strlen(e) <= 6))
     {
         write("Sorry, I don't believe you.\nAt least TRY to make it valid!\n");
-        write("Email address ["+olde+"] : ");    
+        write("Email address ["+olde+"] : ");
         input_to("new_email");
         return;
     }
-  
+
     if( (strlen(e) > 0 ) && sscanf(e,"%s@%s",user,host) != 2)
     {
         write("Email address must be in the form user@host.\nPlease input again.");
-        write("Email address ["+olde+"] : ");    
+        write("Email address ["+olde+"] : ");
         input_to("new_email");
         return;
     }
-    if (e == olde) 
+    if (e == olde)
     {
         warning_display();
         input_to("ooc_contact");
         return;
     }
-    if( e && strlen( e ) > 0 ) 
+    if( e && strlen( e ) > 0 )
     {
         seteuid(UID_USERACCESS);
         this_player()->set_email(e);
@@ -97,7 +97,7 @@ static void new_email(string e)
     return 1;
 }
 
-static void ooc_contact(string cont, string contact)
+protected void ooc_contact(string cont, string contact)
 {
     if(cont == "**")
     {
@@ -122,14 +122,14 @@ static void ooc_contact(string cont, string contact)
         input_to("ooc_contact", contact);
         return;
     }
-    else 
+    else
     {
         if(stringp(contact)) contact += cont;
         else contact = cont;
         write("Enter any additional OOG contact information. Or enter ** to exit.");
         input_to("ooc_contact", contact);
         return;
-    }   
+    }
 }
 
 int

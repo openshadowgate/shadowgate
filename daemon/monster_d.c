@@ -11,9 +11,9 @@ inherit DAEMON;
 
 mapping unique_mons_where;
 mapping cloned_mons_where;
-static mapping to_be_placed;
-static mapping deployed_mons;
-static object * death_watchers;
+nosave mapping to_be_placed;
+nosave mapping deployed_mons;
+nosave object * death_watchers;
 // void Save();
 // void Restore();
 void place_mons(mapping monmap);
@@ -31,7 +31,7 @@ void create()
     //      Restore();
     unique_mons_where=load_mons_db("/daemon/save/monsters_unique.db");
     cloned_mons_where=load_mons_db("/daemon/save/monsters_cloned.db");
-    place_mons(unique_mons_where); // Side effects to 
+    place_mons(unique_mons_where); // Side effects to
     place_mons(cloned_mons_where);   // to_be_placed mapping.
 }
 
@@ -56,10 +56,10 @@ void remove_mon(string name)
 
     if(deployed_mons && deployed_mons != ([]))
     {
-        if(deployed_mons[name]) 
+        if(deployed_mons[name])
         {
-	        if(objectp(deployed_mons[name])) 
-            { 
+	        if(objectp(deployed_mons[name]))
+            {
 	            deployed_mons[name]->move("/d/shadowgate/void.c");
 	            deployed_mons[name]->remove();
 	        }
@@ -96,15 +96,15 @@ void set_mon_places(string file, string *places)
 
 void place_mon_at(string what, string where)
 {
-    if(where == "") 
+    if(where == "")
     {
         seteuid(UID_LOG);
         log_file("debug.log","/daemon/monster_d: Bad (or no file) to place monster for monster "+what+" in place_mon_at()!\n");  // added to make it log the what it was trying to place.  *Styx* 11/18/03, last change 4/5/03
         seteuid(getuid());
         return;
     }
-  
-    if(what == "") 
+
+    if(what == "")
     {
         seteuid(UID_LOG);
         log_file("debug.log","/daemon/monster_d: Bad (or no file) for the monster in place_mon_at()!\n");
@@ -112,13 +112,13 @@ void place_mon_at(string what, string where)
         return;
     }
 
-    if(!pointerp(to_be_placed[where])) 
+    if(!pointerp(to_be_placed[where]))
     {
         // If we haven't scheduled something to be put in the room yet...
         // Start.
         to_be_placed[where] = ({ what });
-    } 
-    else 
+    }
+    else
     {
         // Otherwise add to it.
         to_be_placed[where] += ({ what });
@@ -127,24 +127,24 @@ void place_mon_at(string what, string where)
 }
 
 
-string assure_file_exists_without_c(string filename) 
+string assure_file_exists_without_c(string filename)
 {
     string temp;
     int len;
     temp = filename;
     len = strlen(temp);
-  
+
     if(temp[len-2..len-1] != ".c")
     {
         temp += ".c";
         len += 2;
     }
-  
+
     if(file_exists(temp))
     {
         temp = temp[0..len-3];
-    } 
-    else 
+    }
+    else
     {
         temp = "";
     }
@@ -157,7 +157,7 @@ string explode_dir(string dir)
     string *rooms, *wildcards, room, roomdir;
     object ob;
     int i;
-    
+
     rooms = ({ });
     /***********
     if strsrch(dir,"?") {
@@ -165,7 +165,7 @@ string explode_dir(string dir)
     for (i=0; i < sizeof(wildcards); i++) {
     if (i+1 = sizeof(wildcards)) {
     rooms += wildcards[i] + get_dir(wildcards[i]+"?.c");
-    } else {  rooms += wildcards[i] + get_dir(wildcards[i]+"?"+wildcards[i+1]) 
+    } else {  rooms += wildcards[i] + get_dir(wildcards[i]+"?"+wildcards[i+1])
     }
     }
     if strsrch(dir,"*") {
@@ -175,31 +175,31 @@ string explode_dir(string dir)
     } else {   }
     }
     *******************/
-    if (strsrch(dir,"*") == -1) 
+    if (strsrch(dir,"*") == -1)
     {
         rooms = get_dir(dir+"*.c");
-    } 
-    else 
+    }
+    else
     {
         rooms = get_dir(dir+".c");
     }
     //   write(identify(rooms));
 
-    if ((i=strsrch(dir,"/",-1)) != -1) 
+    if ((i=strsrch(dir,"/",-1)) != -1)
     {
         roomdir=dir[0..i];
-    } 
-    else 
+    }
+    else
     {
         roomdir = "/";
     }
-    
-    if(!pointerp(rooms) || !sizeof(rooms)) 
-    { 
+
+    if(!pointerp(rooms) || !sizeof(rooms))
+    {
         seteuid(UID_LOG);
         log_file("debug.log","/daemon/monster_d: directory "+dir+" empty or invalid, please "
             "correct /daemon/save/monsters_unique.db.\n");
-        return assure_file_exists_without_c(""); 
+        return assure_file_exists_without_c("");
     }
 
     room = roomdir + rooms[random(sizeof(rooms))];
@@ -208,7 +208,7 @@ string explode_dir(string dir)
 }
 
 
-string do_placement(string * dest) 
+string do_placement(string * dest)
 {
     string file, where;
     if(!pointerp(dest)) return "";
@@ -223,16 +223,16 @@ string do_placement(string * dest)
             return explode_dir(where);
             // Not sure this will work, damnit.
             // going to get crowded here
-        } 
-        else 
+        }
+        else
         {
             return assure_file_exists_without_c(where);
 	        //	place_mon_at(where,file[0..len-3]);
 	        //               Save();
         }
-    } 
-    else 
-    {  
+    }
+    else
+    {
         // if (dest != ([])) {
         return "";
     }
@@ -253,15 +253,15 @@ void place_mons(mapping monsmap)
 
     key = keys(monsmap);
     j = sizeof(key);
-   
+
     for(i=0;i<j;i++)
     {
         to_where = monsmap[key[i]];
         place_what = key[i];
-        if (place_what != "") 
-        {             
+        if (place_what != "")
+        {
 	        place_mon_at(place_what, do_placement(to_where));
-        } 
+        }
         else
         {
 	        seteuid(UID_LOG);
@@ -269,7 +269,7 @@ void place_mons(mapping monsmap)
 	        seteuid(getuid());
         }
     } // for
-}	
+}
 
 
 void check_for_place(string room)
@@ -278,22 +278,22 @@ void check_for_place(string room)
     int iter;
     string what;
     mixed catch_err;
-    if(objectp(PO)) 
+    if(objectp(PO))
     {
         if(PO->query("alternative world")) return;
     }
     if(member_array(room,keys(to_be_placed)) != -1)
     {
         iter = sizeof(to_be_placed[room]);
-    
-        while (iter--) 
+
+        while (iter--)
         {
             catch_err = 0;
             what = to_be_placed[room][iter];
-            
-            if(!objectp(deployed_mons[what])) 
+
+            if(!objectp(deployed_mons[what]))
             {
-	            if(member_array(what,keys(unique_mons_where)) != -1) 
+	            if(member_array(what,keys(unique_mons_where)) != -1)
                 {
 	                // if it's in that array, it's a master NPC
 	                catch_err = catch(ob=find_object_or_load(what));
@@ -303,14 +303,14 @@ void check_for_place(string room)
                             "couldn't load monster: "+what+", error is: "+identify(catch_err)+"\n");
                         continue;
                     }
-	            } 
-                else 
+	            }
+                else
                 {
 	                // Otherwise clone it.
                     // removing the catch to save processor effort since clone shouldn't bug *Styx* 12/18/05
                     //	  catch_err = catch(ob=new(what));
 	                ob = new(what);
-                    
+
                     if(!objectp(ob))
                     {
                         catch_err = catch(ob=new(what));
@@ -319,27 +319,27 @@ void check_for_place(string room)
                         continue;
                     }
 	            }
-	            
-                if (!catch_err) 
+
+                if (!catch_err)
                 {
                     // going to try making the room load before moving them in *Styx* 12/18/05
                     // if that doesn't work, we'll try putting the mobs into this room first
                     //	  catch_err = catch(ob->move("/realms/styx/saferoom.c");
-                    if(!objectp(room)) 
-                    { 
-                        the_room = find_object_or_load(room); 
+                    if(!objectp(room))
+                    {
+                        the_room = find_object_or_load(room);
                     }
-                    
+
                     if(!objectp(the_room))
                     {
                         catch_err = catch(the_room=find_object_or_load(room));
                         log_file("debug.log","monster_d error in check_for_place, "
                             "couldn't load room: "+room+", error was: "+identify(catch_err)+"\n");
                         continue;
-                    } 
+                    }
 
                     catch_err = catch(call_other(the_room,"???"));
-      
+
                     if(catch_err)
                     {
                         seteuid(UID_LOG);
@@ -348,29 +348,26 @@ void check_for_place(string room)
                         continue;
                     }
 	                catch_err = catch(ob->move(the_room));
-	  
-                    if (catch_err) 
+
+                    if (catch_err)
                     {
 	                    seteuid(UID_LOG);
                         // more info. in error logging due to seeing only recursion errors *Styx* 9/05
 	                    log_file("debug.log","monster_d error in check_for_place "
 		                    "ob->move(room):  "+identify(catch_err)+" room was: "+room+", "
 		                    "what is "+what+"\n");
-	                    log_file("Misc_Errors","monster_d error in check_for_place() "
-		                    "ob->move(room):  "+identify(catch_err)+" room was: "+room+", "
-		                    "what is "+what+"\n");
 	                    seteuid(getuid());
 	                    continue;
 	                }
-  
+
 	                ob->set_property("deployed_mons",1);
 	                deployed_mons[what] = ob;
 
 	                // Later... Set a flag in the monster and make a clean_up function
 	                // that will tell the room that it has to notify the daemon that
-	                // it cleaned up the monster.	        
-                } 
-                else 
+	                // it cleaned up the monster.
+                }
+                else
                 {
 	                write(identify(catch_err));
 	                seteuid(UID_LOG);
@@ -381,76 +378,83 @@ void check_for_place(string room)
 	                continue;
 	            }
 	            //      Save();
-      
+
             }  // Otherwise this monster's deployed.
         } // While we've still got things to put in the room.
     } // if the room has something to be put into it.
 }
 
 
-mapping load_mons_db(string fromfile) 
+mapping load_mons_db(string fromfile)
 {
     string *lines;
     string workstr, str;
     mapping work;
     int i, max;
     // Mostly cribbed from /adm/obj/master.c
-    work = ([ ]);    
-    if(!(max=sizeof(lines=explode(read_file(fromfile), "\n")))) 
+    work = ([ ]);
+    if(!(max=sizeof(lines=explode(read_file(fromfile), "\n"))))
     {
         write("Error in reading monsters database ("+fromfile+").\n");
         return work ;
-    }    
-    for(i=0;i<max;i++) 
-    {        
+    }
+    for(i=0;i<max;i++)
+    {
         // ignore comments, null lines...
-        if(!strlen(lines[i])) continue;
-        if(!lines[i] || lines[i] == "") continue;
-        if(lines[i][0..0] == '#') continue;
+        if (!strlen(lines[i])) {
+            continue;
+        }
+        if (!lines[i] || lines[i] == "") {
+            continue;
+        }
+        if (regexp(lines[i], "^#")) {
+            continue;
+        }
         // If we start with +:, append to the last monster entry.
         // I need to test this. - garrett
 
-        if(sscanf(lines[i], "+: %s", str) == 1) 
+        if(sscanf(lines[i], "+: %s", str) == 1)
         {
             if(sizeof(explode(str, " "))) work[workstr] += explode(str, " ");
             continue;
-        }    
-        if(sscanf(lines[i], "(%s): %s", workstr, str) != 2) 
+        }
+
+        if(sscanf(lines[i], "(%s): %s", workstr, str) != 2)
         {
 	        seteuid(UID_LOG);
-	        log_file("Misc_Errors","/daemon/monster_d: Error in reading monsters database ("+fromfile+") in line "+(i+1)+" in load_mons_db().\n");  
+	        log_file("debug.log","/daemon/monster_d: Error in reading monsters database ("+fromfile+") in line "+(i+1)+" in load_mons_db().\n");
 	        // changed the write to log *Styx* 11/16/03
 	        seteuid(getuid());
             continue;
-        }        
-        if(!sizeof(work[workstr] = explode(str, " "))) 
-        {            
+        }
+        if(!sizeof(work[workstr] = explode(str, " ")))
+        {
             map_delete(work, workstr);
-        }  
-        continue;        
+        }
+        continue;
     }
-    return work; 
+    return work;
 }
 
 int clean_up() { return 0; } // I could swear this is right.
 int cleanup() { return 0; } // return 0 says never call clean up again.
 
 
-add_death_watcher(object dw) 
+add_death_watcher(object dw)
 {
-    if((death_watchers == 0) || (sizeof(death_watchers) == 0)) 
+    if((death_watchers == 0) || (sizeof(death_watchers) == 0))
     {
         if(objectp(dw)) { death_watchers = ({ dw }); }
         return;
     }
 
     if(objectp(dw)) { death_watchers += ({dw}); }
-    
+
     return;
 }
 
 
-void tell_death_watch(object whom) 
+void tell_death_watch(object whom)
 {
     object * obz;
     obz = filter_array(death_watchers,"is_objectp","/daemon/messaging_d.c");

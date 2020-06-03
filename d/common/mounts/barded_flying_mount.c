@@ -5,7 +5,7 @@
 #include <std.h>
 inherit "/std/flying_mount.c";
 
-private static int healingStuff;
+nosave int healingStuff;
 
 int is_warhorse() { return 1; }
 

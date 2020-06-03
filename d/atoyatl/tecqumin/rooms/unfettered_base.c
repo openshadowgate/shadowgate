@@ -16,7 +16,7 @@ int * tentacle_hps, empress_moves, spirits_absorbed, countdown, invincible, last
 mapping targeters, seized, exits_used, victory;
 string * destinations_visited, *path_trod;
 int mucus, frozen_mucus, skin, tentacles_withdrawn, relaying, power_absorbed, last_move, absorbing, reporting;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 
 void grant_quest(object slayer, string quest, int exp, string explanation, int must_be_near);
 void distribute_attacks();
@@ -65,7 +65,7 @@ void create(){
     seized = ([]);
     spirits_absorbed = 0;
     set_new_exp("boss", 70);
-    set_property("swarm", 1); 
+    set_property("swarm", 1);
     set_property("cast and attack",1);
     set_stats("strength", 30);
     set_stats("dexterity",18);
@@ -82,7 +82,7 @@ void create(){
     set_property("no crit", 1);
     set_property("no tripped", 1);
     set_overall_ac(-220);
-    add_attack_bonus(85); 
+    add_attack_bonus(85);
     set_overall_ac(-95);
     destinations_visited = ({});
     set_emotes(2,({
@@ -104,11 +104,11 @@ void create(){
     set_size(4);
     set_base_damage_type("bludgeoning");
     set_fake_limbs(({"torso", "first tentacle", "second tentacle",
-      "third tentacle", "fourth tentacle", "fifth tentacle", 
+      "third tentacle", "fourth tentacle", "fifth tentacle",
       "sixth tentacle", "seventh tentacle", "maw", "bloodshot eye"}));
-    set_attack_limbs( ({ "maw","first tentacle", "second tentacle", 
-      "third tentacle", "fourth tentacle", "fifth tentacle", 
-      "sixth tentacle", "seventh tentacle" }) );   
+    set_attack_limbs( ({ "maw","first tentacle", "second tentacle",
+      "third tentacle", "fourth tentacle", "fifth tentacle",
+      "sixth tentacle", "seventh tentacle" }) );
     set("aggressive", 0);
     set_overall_ac(69);
     set_alignment(4);
@@ -117,7 +117,7 @@ void create(){
     set_emotes(10,({
 
     }),1);
-    set_spells( ({"microcosm","ultrablast", "true metabolism", 
+    set_spells( ({"microcosm","ultrablast", "true metabolism",
                                                       "hostile empathic transfer" }) );
     set_spell_chance(30);
     set_attacks_num(7);
@@ -126,12 +126,12 @@ void create(){
     tentacles_withdrawn = 0;
     skin = SURFACE_AREA;
     set_property("vacuum breather", 1);
-    set_property("resist vacuum", 1);    
+    set_property("resist vacuum", 1);
     rent = new(OBJ + "void");
     rent->move(ETO);
     relaying = 0;
     clones = ({});
-    targeters = ([]);                                                                                         
+    targeters = ([]);
     paralyze("There's nothing you can do for now; wait until you can act!");
     last_move = 0;
     BEAT = 0;
@@ -246,7 +246,7 @@ int target_limb(string str){
       +"%^RESET%^%^BLUE%^a%^BOLD%^%^BLACK%^cle", TP);
     target = "seventh tentacle";
   }
-  if (str == "tentacle" || str == "tentacles" 
+  if (str == "tentacle" || str == "tentacles"
                  || (target == "none" && interact ("tentacle", str))){
     tell_object(TP, "You focus your attacks on the creature's"
       +" %^BOLD%^%^BLACK%^t%^RESET%^e%^BOLD%^%^BLACK%^nt%^RESET%^"
@@ -278,7 +278,7 @@ void summon_help(){
   critters = query_attackers();
   if (sizeof(critters)<1) return;
   mob_names = ({"taluc", "epithon", "guamansuri", "empress"});
-  for (i=0;i<count;i++) 
+  for (i=0;i<count;i++)
   {
     killed_mob[i] = EVENT_RECORDS_D->has_anyone_here_killed(ETO, MOB + mob_names[i], 2400*10*7);
     if (present(mob_names[i], ETO)) continue;
@@ -291,11 +291,11 @@ void summon_help(){
       {
         tell_room(room, critter->QCN + "%^RESET%^ looks around in sudden alarm, and vanishes");
         critter->move(ETO);
-        tell_room(ETO, critter->QCN + " %^BOLD%^%^CYAN%^appears in a %^BOLD%^%^WHITE%^flash");      
+        tell_room(ETO, critter->QCN + " %^BOLD%^%^CYAN%^appears in a %^BOLD%^%^WHITE%^flash");
         critters[i]->join_unfettered_battle();
       }
     }
-  } 
+  }
 }
 
 mapping query_targeters(){
@@ -324,24 +324,24 @@ void seize2(object targ){
     +"%^GREEN%^d%^RESET%^%^GREEN%^o%^BOLD%^dg%^RESET%^%^GREEN%^e"
     +"%^BOLD%^", "%^BOLD%^%^BLACK%^d%^RESET%^%^BLUE%^u%^BOLD%^"
     +"%^BLACK%^ck"});
-  save_msgs = ({" %^RESET%^to one side of", 
+  save_msgs = ({" %^RESET%^to one side of",
      " %^RESET%^a clever %^BOLD%^%^CYAN%^sh%^RESET%^%^CYAN%^i"
-        +"%^BOLD%^mm%^RESET%^%^CYAN%^y%^RESET%^ to evade", 
-     " %^RESET%^out the way of", " %^RESET%^away from", 
+        +"%^BOLD%^mm%^RESET%^%^CYAN%^y%^RESET%^ to evade",
+     " %^RESET%^out the way of", " %^RESET%^away from",
      " %^RESET%^underneath"});
   if(targ->reflex_save(45)){
     evasion_roll = random(sizeof(save_verbs));
-    tell_object(targ, "You " + save_verbs[evasion_roll] 
+    tell_object(targ, "You " + save_verbs[evasion_roll]
       + save_msgs[evasion_roll] + " the %^BOLD%^%^BLACK%^t"
       +"%^RESET%^e%^BOLD%^%^BLACK%^nt%^RESET%^%^BLUE%^a%^BOLD%^"
       +"%^BLACK%^cl%^RESET%^e%^BOLD%^%^BLACK%^'s%^RESET%^ grasp!");
-    tell_room(ETO, targ->QCN + " " + save_verbs[evasion_roll] + "s" 
+    tell_room(ETO, targ->QCN + " " + save_verbs[evasion_roll] + "s"
       + save_msgs[evasion_roll] + " the %^BOLD%^%^BLACK%^t"
       +"%^RESET%^e%^BOLD%^%^BLACK%^nt%^RESET%^%^BLUE%^a%^BOLD%^"
       +"%^BLACK%^cl%^RESET%^e%^BOLD%^%^BLACK%^'s%^RESET%^ grasp!"
         , targ);
-  } else { 
-    actually_seize(targ);    
+  } else {
+    actually_seize(targ);
   }
 }
 
@@ -349,7 +349,7 @@ void actually_seize(object targ){
   tell_object(targ, "The %^BOLD%^%^BLACK%^t"
     +"%^RESET%^e%^BOLD%^%^BLACK%^nt%^RESET%^%^BLUE%^a%^BOLD%^"
     +"%^BLACK%^cl%^RESET%^e%^BOLD%^%^BLACK%^'s%^RESET%^ seizes"
-    +" you and lifts you up high!"); 
+    +" you and lifts you up high!");
   tell_room(ETO, "The %^BOLD%^%^BLACK%^t"
     +"%^RESET%^e%^BOLD%^%^BLACK%^nt%^RESET%^%^BLUE%^a%^BOLD%^"
     +"%^BLACK%^cl%^RESET%^e%^BOLD%^%^BLACK%^'s%^RESET%^ seizes "
@@ -428,7 +428,7 @@ void really_add_seized(object seizee){
       res = query_seized()[seizees[i]];
       tentacle = res[1];
       if (sizeof(free_tentacles)>0 && member_array(tentacle, used_tentacles)!=-1){
-        free_tentacles -= ({tentacle}); 
+        free_tentacles -= ({tentacle});
       }
     }
   }
@@ -528,7 +528,7 @@ object * query_unseized_attackers(){
   object * critters;
   critters = query_attackers();
   if (sizeof(seized)>0){
-    critters = critters - seized;    
+    critters = critters - seized;
   }
   if (sizeof(critters)<1){
     return ({});
@@ -573,7 +573,7 @@ void withdraw_tentacles(){
   object start_room, unfettered, rift, destination;
   string rm_name;
   int i;
-  if ( tentacles_withdrawn == 1 || !objectp(ETO) 
+  if ( tentacles_withdrawn == 1 || !objectp(ETO)
            || file_name(ETO)!= TECVOID + "inner_void0" ){
     return;
   }
@@ -748,7 +748,7 @@ void wander_when_lost(){
   temp_exits += ({exit});
   exits_used[base_name(ETO)] = temp_exits;
   force_me(exit);
-  if (objectp(ETO)){ 
+  if (objectp(ETO)){
     ETO->short_desc();
   }
 }
@@ -801,7 +801,7 @@ void retrace_steps(){
   for (i=0;i<count;i++){
     if (ETO->query_exit(exits[i])==last_step){
       force_me(exits[i]);
-      if (objectp(ETO)){ 
+      if (objectp(ETO)){
         ETO->short_desc();
       }
       if (base_name(ETO)== last_step){
@@ -834,7 +834,7 @@ string long_desc(){
         +"%^RESET%^%^BLUE%^n%^BOLD%^%^WHITE%^s%^RESET%^i%^BOLD%^"
         +"%^BLACK%^o%^BOLD%^%^WHITE%^n%^RESET%^a%^BOLD%^%^WHITE%^l"
         +" %^RESET%^%^BLUE%^void%^BOLD%^%^BLACK%^.";
-  } 
+  }
   desc += " A %^RESET%^%^MAGENTA%^g%^BOLD%^%^RED%^a%^RESET%^%^MAGENTA%^"
         +"ping %^BOLD%^%^RED%^m%^RESET%^%^RED%^a%^BOLD%^%^RED%^w %^BOLD%^"
         +"%^BLACK%^can be seen within the void. Ugly,%^RESET%^ %^RED%^"
@@ -853,7 +853,7 @@ string long_desc(){
         +"e%^BOLD%^%^RED%^n%^RESET%^%^RED%^or%^BOLD%^m%^RESET%^%^RED%^ou"
         +"%^BOLD%^s%^RESET%^. Its bulk stretches into the %^BLUE%^void"
         +" %^RESET%^in all directions.";
-  } 
+  }
   desc = desc +"
 ";
   desc = desc + "%^RESET%^The creature is so large, you could choose to"
@@ -920,11 +920,11 @@ void throw2(){
       rm_name = ETO->query_exit(direction);
       room = find_object_or_load(rm_name);
       if (objectp(room)){
-        tell_object(critters[i], "%^BOLD%^%^YELLOW%^A%^BOLD%^%^BLUE%^" 
+        tell_object(critters[i], "%^BOLD%^%^YELLOW%^A%^BOLD%^%^BLUE%^"
           +" tentacle %^BOLD%^%^YELLOW%^catches you and throws you into the"
           +" next room!");
         tell_room(room, critters[i]->QCN + "%^BOLD%^%^WHITE%^flies in from"
-          +" the next room"); 
+          +" the next room");
         critters[i]->move(room);
         tell_room(ETO, "%^CYAN%^" + critters[i]->QCN + "%^BOLD%^%^WHITE%^"
           +" is thrown off to the %^BOLD%^%^YELLOW%^" + direction );
@@ -937,7 +937,7 @@ void throw2(){
           tell_object(critters[i], "%^ORANGE%^You %^BOLD%^%^RED%^slam"
             +" %^RESET%^%^ORANGE%^into the ground.");
           damage = (int)critters[i]->query_max_hp() * (30 + random(30))/100;
-          critters[i]->do_damage(critters[i]->return_target_limb(),damage/3 
+          critters[i]->do_damage(critters[i]->return_target_limb(),damage/3
                                                           + random(damage));
           critters[i]->add_attacker(TO);
           critters[i]->continue_attack();
@@ -977,14 +977,14 @@ void target(object targ){
     +"%^BOLD%^t%^RESET%^%^MAGENTA%^i%^BOLD%^%^GREEN%^ng%^RESET%^ gaze"
     +" of %^BLUE%^the %^RESET%^%^MAGENTA%^Un%^BLUE%^f%^MAGENTA%^e"
     +"%^BLUE%^tt%^MAGENTA%^e%^BLUE%^r%^MAGENTA%^ed%^RESET%^!", targ);
-  
+
 }
 
 void tent_monster(){
   object * critters, monster, target, *targets;
   int i, count;
-  
-  if (!objectp(ETO) || ETO->is_vacuum()){ 
+
+  if (!objectp(ETO) || ETO->is_vacuum()){
     return;
   }
   summon_help();
@@ -1088,7 +1088,7 @@ void fling(){
     }else {
       tell_room("There're no targets to fling anything at");
     }
-  } 
+  }
   if (!objectp(target)){
     fling_out_of_rift(flingee);
     return;
@@ -1101,16 +1101,16 @@ void fling(){
                       && environment(target) == environment(flingee)){
     tell_room( environment(flingee), "The %^BOLD%^%^BLACK%^t%^RESET%^"
       +"e%^BOLD%^%^BLACK%^nt%^RESET%^%^BLUE%^a%^BOLD%^%^BLACK%^c"
-      +"%^RESET%^l%^BOLD%^%^BLACK%^e%^RESET%^ holding " + flingee->QCN 
-      +" %^RESET%^swings back wildly before flinging " + flingee->QO 
+      +"%^RESET%^l%^BOLD%^%^BLACK%^e%^RESET%^ holding " + flingee->QCN
+      +" %^RESET%^swings back wildly before flinging " + flingee->QO
       +" toward " + target->QCN, flingee, target);
   } else {
     if (objectp(environment(flingee))){
-      tell_room(environment(flingee), "%^BOLD%^%^RED%^"+flingee->QCN 
+      tell_room(environment(flingee), "%^BOLD%^%^RED%^"+flingee->QCN
         +" flies off toward " + target->QCN, flingee );
     }
     if (objectp(environment(target))){
-      tell_room(environment(target),"%^BOLD%^%^RED%^" + flingee->QCN 
+      tell_room(environment(target),"%^BOLD%^%^RED%^" + flingee->QCN
         +" %^BOLD%^%^RED%^flies in from elsewhere!");
       flingee->move(environment(target));
       tell_object(flingee, "%^BOLD%^%^RED%^You are flung into another"
@@ -1118,28 +1118,28 @@ void fling(){
     }
   }
   if (target->reflex_save(46)){
-    tell_object(target, "%^BOLD%^%^YELLOW%^You dive out the way as " 
+    tell_object(target, "%^BOLD%^%^YELLOW%^You dive out the way as "
       + flingee->QCN + " %^BOLD%^%^YELLOW%^hurtles toward you!");
     tell_object(flingee, "%^BOLD%^%^YELLOW%^" + target->QCN+ " dives"
       +" out of the way as you hurtle toward " + target->QO + "!");
     if (objectp(environment(flingee))){
-      tell_room(environment(flingee), "%^BOLD%^%^YELLOW%^" 
+      tell_room(environment(flingee), "%^BOLD%^%^YELLOW%^"
         + target->QCN + " %^BOLD%^%^YELLOW%^dives out of the way as "
-        + flingee->QCN + " %^BOLD%^%^YELLOW%^hurtles toward " 
+        + flingee->QCN + " %^BOLD%^%^YELLOW%^hurtles toward "
         + target->QO + "!", target, flingee);
     }
     tell_object(flingee, "You %^BOLD%^%^RED%^crash%^RESET%^ into the"
       +" %^ORANGE%^ground%^RESET%^!");
-    flingee->set_paralyzed(15, "You're dazed from the impact!");  
+    flingee->set_paralyzed(15, "You're dazed from the impact!");
     if (objectp(environment(flingee))){
       tell_room(environment(flingee), flingee->QCN + "%^BOLD%^%^RED%^"
         +" crashes %^RESET%^into the %^ORANGE%^ground%^RESET%^!"
         , flingee);
     }
-    flingee->cause_typed_damage(TO, flingee->return_target_limb(), 
+    flingee->cause_typed_damage(TO, flingee->return_target_limb(),
       400, "bludgeoning");
   } else {
-    tell_object(flingee, "You %^BOLD%^%^RED%^SLAM%^RESET%^ into " 
+    tell_object(flingee, "You %^BOLD%^%^RED%^SLAM%^RESET%^ into "
       + target->QCN + " %^RESET%^and fall to the floor in a%^GREEN%^"
       + " tangle%^RESET%^ of limbs");
     tell_object(target, flingee->QCN + " %^BOLD%^%^RED%^SLAMS%^RESET%^"
@@ -1150,9 +1150,9 @@ void fling(){
       +" SLAMS%^RESET%^ into " + target->QCN + " and they fall to the"
       +" floor in a %^GREEN%^tangle%^RESET%^ of limbs", flingee, target);
     }
-    flingee->cause_typed_damage(TO, flingee->return_target_limb(), 
+    flingee->cause_typed_damage(TO, flingee->return_target_limb(),
       300, "bludgeoning");
-    target->cause_typed_damage(TO, target->return_target_limb(), 
+    target->cause_typed_damage(TO, target->return_target_limb(),
       300, "bludgeoning");
     target->set_paralyzed(10, "You are dazed from the impact!");
     flingee->set_paralyzed(10, "You are dazed from the impact!");
@@ -1201,7 +1201,7 @@ void sweep(){
         +" off your feet!");
       tell_room(ETO, "%^BOLD%^%^BLUE%^The %^BOLD%^%^BLACK%^t%^RESET%^"
         +"e%^BOLD%^%^BLACK%^nt%^RESET%^%^BLUE%^a%^BOLD%^%^BLACK%^c"
-        +"%^RESET%^l%^BOLD%^%^BLACK%^e %^BLUE%^knocks " 
+        +"%^RESET%^l%^BOLD%^%^BLACK%^e %^BLUE%^knocks "
         + critters[i]->QCN +" off " + critters[i]->QP + " feet."
         , critters[i]);
       critters[i]->set_tripped(1);
@@ -1337,7 +1337,7 @@ void retreat3(object room){
 //    ob->move(ETO);
 //    ob->set_exit_room(file_name(room));
   }
-  rift = present("outer rent", ETO);//Move the rift back to where it was, 
+  rift = present("outer rent", ETO);//Move the rift back to where it was,
   if (objectp(rift)){     //because it will have followed the Unfettered
     report ("moving rift back to original room");
     rift->move(room);
@@ -1414,7 +1414,7 @@ void retreat(){
     }
     critters[i]->set_paralyzed(40, "%^BOLD%^%^CYAN%^You are stunned from"
       +" the deafening screech!");
-  } 
+  }
   v = present("rent", ETO);
   if (objectp(v)){
     names = ({});
@@ -1447,7 +1447,7 @@ int categorize_incoming_attack(object attacker){
 //  tell_room(ETO, "My attacker was: " + attacker->query_name());
 //  tell_room(ETO, "Its file name is: " + file_name(attacker));
   attacker_name = attacker->query_name();
-  // Work out what sort of attack it was, to determine what feat would affect the chances of targetting the attack  
+  // Work out what sort of attack it was, to determine what feat would affect the chances of targetting the attack
   tell_room(ETO, "My attacker is targetting one of my limbs");
   attack_type =0;
   if (!objectp(attacker)){
@@ -1505,7 +1505,7 @@ int check_accuracy_feat(object attacker, int attack_type){
       tell_room(ETO, "%^BOLD%^%^BLUE%^Attacker DOESN'T have the right feat to target a limb");
       return 0;
     }
-    
+
   case AREASPELL:
     return 0;
   }
@@ -1561,7 +1561,7 @@ void hurt_tentacle(string limb, int damage){
         }
         if (release_time - damage <= time()){
            release_seized(seizees[i]);
-        } 
+        }
       }
     }
   }
@@ -1590,7 +1590,7 @@ void cause_typed_damage(victim,limb,damage,damage_type){
   if (!objectp(attacker)){
     tell_room(ETO, "Error with damage processing function: attacker does not exist. Please make a bug report.");
     return;
-  }  
+  }
   attacker_name = attacker->query_name();
 //  tell_room(ETO, "Attacker name is : " + attacker_name);
   targeter_names = keys(targeters);
@@ -1649,22 +1649,22 @@ void cause_typed_damage(victim,limb,damage,damage_type){
         case 1:
           limb = "first tentacle";
           break;
-        case 2: 
-          limb = "second tentacle";  
+        case 2:
+          limb = "second tentacle";
           break;
         case 3:
           limb = "third tentacle";
           break;
         case 4:
-          limb = "fourth tentacle";  
+          limb = "fourth tentacle";
           break;
         case 5:
-          limb = "fifth tentacle";  
+          limb = "fifth tentacle";
           break;
         case 6:
-          limb = "sixth tentacle";  
+          limb = "sixth tentacle";
           break;
-        case 7: 
+        case 7:
           limb = "seventh tentacle";
           break;
         }
@@ -1686,7 +1686,7 @@ void cause_typed_damage(victim,limb,damage,damage_type){
     switch(limb){
     case "maw":
       switch(damage_type){
-      case "cold": 
+      case "cold":
         tell_room(main_room, "The %^BOLD%^%^CYAN%^cold%^RESET%^"
           +" %^BOLD%^%^WHITE%^freezes%^RESET%^ the creature's"
           +" %^RED%^m%^MAGENTA%^a%^RED%^w%^RESET%^.");
@@ -1734,7 +1734,7 @@ void cause_typed_damage(victim,limb,damage,damage_type){
         +"%^GREEN%^burns%^RESET%^ the creature's %^BOLD%^%^RED%^m"
         +"%^RESET%^%^RED%^a%^BOLD%^%^RED%^w.");
         tell_room(main_room, "The creature's many %^BOLD%^%^WHITE%^e"
-        +"%^BLUE%^y%^RED%^e%^WHITE%^s%^RESET%^ all focus on " 
+        +"%^BLUE%^y%^RED%^e%^WHITE%^s%^RESET%^ all focus on "
         + attacker->QCN, attacker);
         tell_object(attacker, "The creature's many %^BOLD%^%^WHITE%^e"
         +"%^BLUE%^y%^RED%^e%^WHITE%^s%^RESET%^ all focus on you!");
@@ -1765,7 +1765,7 @@ void cause_typed_damage(victim,limb,damage,damage_type){
         +" its %^BOLD%^%^RED%^m%^RESET%^%^MAGENTA%^a%^BOLD%^%^RED%^w"
         +"%^RESET%^.");
         tell_room(main_room, "The creature's many %^BOLD%^%^WHITE%^e%^BLUE%^y"
-        +"%^RED%^e%^WHITE%^s%^RESET%^ all focus on " 
+        +"%^RED%^e%^WHITE%^s%^RESET%^ all focus on "
         + attacker->QCN, attacker);
         tell_object(attacker, "The creature's many %^BOLD%^%^WHITE%^e"
         +"%^BLUE%^y%^RED%^e%^WHITE%^s%^RESET%^ all focus on you!");
@@ -1873,7 +1873,7 @@ void cause_typed_damage(victim,limb,damage,damage_type){
     case "sixth tentacle":  //
     case "seventh tentacle":// deliberately falling through
       switch (damage_type){
-      case "fire":     
+      case "fire":
         tell_room(main_room, "The %^BOLD%^%^RED%^fire%^RESET%^ partly %^BOLD%^"
         +"%^BLUE%^d%^BOLD%^%^WHITE%^i%^BOLD%^%^BLUE%^s%^BOLD%^%^WHITE%^s"
         +"%^BOLD%^%^BLUE%^i%^BOLD%^%^WHITE%^p%^BOLD%^%^BLUE%^a%^BOLD%^"
@@ -1900,7 +1900,7 @@ void cause_typed_damage(victim,limb,damage,damage_type){
               +"%^WHITE%^o%^CYAN%^z%^WHITE%^e%^CYAN%^n%^GREEN%^!");
           } else {
             mucus -= result;
-            frozen_mucus += result;          
+            frozen_mucus += result;
             result = 0;
             ratio = frozen_mucus*100 / (frozen_mucus + mucus);
             if (ratio<=25){
@@ -1948,8 +1948,8 @@ void cause_typed_damage(victim,limb,damage,damage_type){
             +" %^RESET%^is partially absorbed by the creature's thick,"
             +" %^RESET%^%^MAGENTA%^rubbery sk%^BOLD%^%^BLACK%^i%^RESET%"
             +"^%^MAGENTA%^n");
-        }  
-        break;  
+        }
+        break;
       case "acid":
         if (mucus >0){
           if (mucus - result < 0){
@@ -2133,7 +2133,7 @@ void cause_typed_damage(victim,limb,damage,damage_type){
     switch(limb){
     case "maw":
       switch(damage_type){
-      case "cold": 
+      case "cold":
         tell_room(main_room, "The %^BOLD%^%^CYAN%^cold%^RESET%^ heads toward the"
         +" creature's %^BOLD%^%^RED%^m%^RESET%^%^RED%^a%^BOLD%^%^RED%^w"
         +"%^RESET%^, but simply %^BOLD%^%^BLUE%^d%^BOLD%^%^WHITE%^i%^BOLD%^"
@@ -2346,7 +2346,7 @@ void cause_typed_damage(victim,limb,damage,damage_type){
     case "sixth tentacle":  //
     case "seventh tentacle":// deliberately falling through
       switch (damage_type){
-      case "fire":     
+      case "fire":
       case "cold":
         if (mucus >0){
           tell_room(main_room, "%^BOLD%^%^CYAN%^The %^WHITE%^cold%^CYAN%^ creeps"
@@ -2362,7 +2362,7 @@ void cause_typed_damage(victim,limb,damage,damage_type){
               +"%^WHITE%^o%^CYAN%^z%^WHITE%^e%^CYAN%^n%^GREEN%^!");
           } else {
             mucus -= result;
-            frozen_mucus += result;          
+            frozen_mucus += result;
             result = 0;
             ratio = frozen_mucus*100 / (frozen_mucus + mucus);
             if (ratio<=25){
@@ -2410,8 +2410,8 @@ void cause_typed_damage(victim,limb,damage,damage_type){
             +" %^RESET%^is partially absorbed by the creature's thick,"
             +" %^RESET%^%^MAGENTA%^rubbery sk%^BOLD%^%^BLACK%^i%^RESET%"
             +"^%^MAGENTA%^n");
-        }  
-        break;  
+        }
+        break;
       case "acid":
         if (mucus >0){
           if (mucus - result < 0){
@@ -2588,7 +2588,7 @@ void cause_typed_damage(victim,limb,damage,damage_type){
   }
   start_hp = query_hp();
   report ("Final damage taken: " + result + " Limb:  " + limb);
-  report ("starting hp: " + start_hp);  
+  report ("starting hp: " + start_hp);
   do_damage(limb,result);
   relaying = 0;
   relay_room = 0;
@@ -2616,8 +2616,8 @@ int do_damage(string limb, int damage){
   len = strlen(TECVOID + "inner_void");
   room_name = file_name(main_room);
   report ("Final hp: " + query_hp());
-  if (start_hp >= query_max_hp()/2 && query_hp() < query_max_hp()/2 
-    && (strlen(room_name)>=len 
+  if (start_hp >= query_max_hp()/2 && query_hp() < query_max_hp()/2
+    && (strlen(room_name)>=len
     && room_name[0..len-1] != TECVOID + "inner_void"||strlen(room_name)<len)){
     report ("%^BOLD%^%^MAGENTA%^I have taken lots of damage. Time to %^GREEN%^RETREAT");
     retreat();
@@ -2625,7 +2625,7 @@ int do_damage(string limb, int damage){
     report ("No need to retreat!");
     report("start hp: " + start_hp + "  max_hp: " + query_max_hp() + "strlen(room_name): " + strlen(room_name) + "  room_name: " + room_name);
  }
-  if (strlen(room_name)>=len 
+  if (strlen(room_name)>=len
         && room_name[0..len-1] != TECVOID + "inner_void"){
     if(start_hp >= query_max_hp()/4){
       if (query_hp() < query_max_hp()/4){
@@ -2635,25 +2635,25 @@ int do_damage(string limb, int damage){
       }
     }
   }
- 
+
   if (start_hp >= 2600 && query_hp() < 2600){
     defeat1();
-  } 
+  }
   if (start_hp >= 2200 && query_hp() < 2200){
     defeat2();
-  } 
+  }
   if (start_hp >= 1900 && query_hp() < 1900){
     defeat3();
-  } 
+  }
   if (start_hp >= 1600 && query_hp() < 1600){
     defeat4();
-  } 
+  }
   if (start_hp >= 1300 && query_hp() < 1300){
     defeat5();
-  } 
+  }
   if (start_hp >= 1000 && query_hp() < 1000){
     defeat6();
-  } 
+  }
 
 }
 
@@ -2667,14 +2667,14 @@ void tell_void(string str){
       inner_void = find_object_or_load(rm_name);
       if (objectp(inner_void)){
         tell_room(inner_void, str);
-      } 
+      }
     }
     if (i>0){
       rm_name = TECVOID + "outer_void" + i;
       outer_void = find_object_or_load(rm_name);
       if (objectp(outer_void)){
         tell_room(outer_void, str);
-      } 
+      }
     }
   }
 }
@@ -2735,7 +2735,7 @@ void defeat(object targ){
   if (stringp(party)){
     party_members = PARTY_D->query_party_members(party);
   }
-  tell_void("With a final, defeated scream, " + query_short() 
+  tell_void("With a final, defeated scream, " + query_short()
     + " starts to fade, backing up further into the void than you can"
     + " reach.");
   ::die(targ);
@@ -2878,7 +2878,7 @@ void defeat7(object room, string* exits){
     +" %^RED%^e%^BLUE%^y%^WHITE%^e%^RED%^s %^BOLD%^%^WHITE%^roving"
     +" desperately in every direction.");
 
-  call_out("defeat8", 3, room); 
+  call_out("defeat8", 3, room);
 }
 
 void defeat6(){
@@ -2950,7 +2950,7 @@ void defeat6(){
     attacker = query_current_attacker();
     grant_quest(attacker, "%^RED%^Defeated %^RESET%^%^BLUE%^The"
      +"%^MAGENTA%^ U%^BLUE%^n%^MAGENTA%^f%^BLUE%^e%^MAGENTA%^tt"
-     +"%^BLUE%^e%^MAGENTA%^r%^BLUE%^e%^MAGENTA%^d", 10000000, 
+     +"%^BLUE%^e%^MAGENTA%^r%^BLUE%^e%^MAGENTA%^d", 10000000,
       "%^BOLD%^%^BLUE%^You gained experience for the%^RED%^"
      +" astonishing %^BLUE%^feat of driving %^RESET%^%^BLUE%^The"
      +" %^MAGENTA%^U%^BLUE%^n%^MAGENTA%^f%^BLUE%^e%^MAGENTA%^tt"
@@ -3003,7 +3003,7 @@ void defeat5(){
     +"%^B_RED%^%^BLUE%^f%^BLACK%^e%^RESET%^%^B_RED%^%^BLUE%^tt%^BLACK%^e"
     +"%^RESET%^%^B_RED%^%^BLUE%^r%^BLACK%^e%^RESET%^%^B_RED%^%^BLUE%^d"
     +"%^BLACK%^'s central mass. It %^BOLD%^%^RED%^%^FLASH%^pulses"
-    +"%^RESET%^%^B_RED%^%^BLACK%^, as if tasting something."); 
+    +"%^RESET%^%^B_RED%^%^BLACK%^, as if tasting something.");
   tell_void("                                                        "
     +"                   ");
   tell_void("                                                        "
@@ -3162,7 +3162,7 @@ void heart_beat(){
   }
   report ("%^BOLD%^%^CYAN%^HEARTBEAT STAGE 2");
 
-  if (objectp(ETO) && base_name(ETO) == TECVOID + "inner_void0" 
+  if (objectp(ETO) && base_name(ETO) == TECVOID + "inner_void0"
                                              && tentacles_withdrawn == 0){
     if(random(5)>2){
       close_rift();
@@ -3176,8 +3176,8 @@ void heart_beat(){
       seize_nums = query_seized()[seizees[i]];
       when = time();
       if (when > seize_nums[0]){
-        releasees += ({ seizees[i] }); 
-      } 
+        releasees += ({ seizees[i] });
+      }
     }
   }
 //  report ("dealing with seizures");
@@ -3190,14 +3190,14 @@ void heart_beat(){
           +"nt%^RESET%^%^BLUE%^a%^BOLD%^%^BLACK%^cl"
           +"%^RESET%^e!");
         if (objectp(environment(releasees[i]))){
-          tell_room(environment(releasees[i]), releasees[i]->QCN 
+          tell_room(environment(releasees[i]), releasees[i]->QCN
             + " squirms free of the %^BOLD%^%^BLACK%^t%^RESET%^"
             +"e%^BOLD%^%^BLACK%^nt%^RESET%^%^BLUE%^a%^BOLD%^"
             +"%^BLACK%^cl%^RESET%^e!", releasees[i]);
         }
       }
       release_seized(releasees[i]);
-    }  
+    }
   }
   if (sizeof(seizees)>0){
     return 1;  //So that he won't just wander off if he is or has been holding someone
@@ -3285,7 +3285,7 @@ void countdown(){
       set("aggressive", 31);
       invincible = 0;
       room = find_object_or_load(ETO->query_exit("up"));
-      if (objectp(room)){ 
+      if (objectp(room)){
         room->short_desc();
       }
       force_me("up");
@@ -3347,7 +3347,7 @@ int is_invincible(){
 
 void report(string str){
   if (objectp(ETO) && reporting == 1){ //this is necessary, or I get reports from the base object
-     "/daemon/reporter_d"->report("lujke", str); 
+     "/daemon/reporter_d"->report("lujke", str);
   }
 }
 
@@ -3376,7 +3376,7 @@ void go_somewhere(){
     name = base_name(ETO)[strlen(CITY_ROOM)..strlen(base_name(ETO))-1];
   }
   report ("%^BOLD%^%^GREEN%^Go somewhere 3");
- 
+
   if (interact("ropebridge", base_name(ETO))){
     path = JUNG_ROOM5;
     name = "ropebridge";
@@ -3394,7 +3394,7 @@ void go_somewhere(){
 
   if (interact("ziggurat", base_name(ETO))){
     path = ROOMS;
-    name = "ziggurat"; 
+    name = "ziggurat";
   }
   report ("%^BOLD%^%^GREEN%^Go somewhere 6");
 
@@ -3424,7 +3424,7 @@ void go_somewhere(){
     break;
   case JUNG_ROOM10:
     report ("In a JUNG_ROOM10 room");
-    switch(name){ 
+    switch(name){
     case "j_link10a":
       report ("In j_link10a");
       force_me("north");
@@ -3539,9 +3539,9 @@ void go_somewhere(){
     }
   }
   report ("Starting walking to path: " + target_path + " name: " + target_name);
-  start_walking(target_path + target_name); 
+  start_walking(target_path + target_name);
   report ("End of go_somewhere");
-} 
+}
 
 
 void damage_spirits(){
@@ -3592,11 +3592,11 @@ void enhance(){
   }
   if (objectp(ETO)){
     tell_room(ETO, "The %^MAGENTA%^U%^BLUE%^nf%^MAGENTA%^e%^BLUE%^tt%^MAGENTA%^e%^BLUE%^r"
-        +"%^MAGENTA%^e%^BLUE%^d%^RESET%^ %^RED%^pulses%^RESET%^ and grows in power.");       
+        +"%^MAGENTA%^e%^BLUE%^d%^RESET%^ %^RED%^pulses%^RESET%^ and grows in power.");
   }
   set_hp(query_hp() + 200);
   spirits_absorbed += 1;
-  if (spirits_absorbed>29){ 
+  if (spirits_absorbed>29){
     victory = 1;
     victory();
   }
@@ -3612,7 +3612,7 @@ void summon_more_spirits(int how_many){
     return;
   }
   excluded_locations = ({CITY_ROOM + "ragged_road01",
-      CITY_ROOM + "city_jung01", CITY_ROOM + "city_jung02", 
+      CITY_ROOM + "city_jung01", CITY_ROOM + "city_jung02",
       CITY_ROOM + "canalbank01", CITY_ROOM + "canalbank03" });
   room_names = get_dir(CITY_ROOM);
   room_names -= excluded_locations;
@@ -3623,7 +3623,7 @@ void summon_more_spirits(int how_many){
       report ("Trying to load room: " + room_names[rnd]);
       room = find_object_or_load(CITY_ROOM + room_names[rnd]);
       j++;
-    } 
+    }
     if (!objectp(room)){
       report ("Couldn't find a room to put it in.");
       continue;
@@ -3667,7 +3667,7 @@ void absorb_spirit3(object spirit){
   absorbing = 0;
   if(power_absorbed>30){
     victory(); //Muahahaha
-  }  
+  }
 }
 
 void absorb_spirit2(object spirit){
@@ -3679,13 +3679,13 @@ void absorb_spirit2(object spirit){
   }
   switch (lower_case(spirit->query_name())){
   case "jontar":
-    emote = "'s%^RESET%^%^CYAN%^ eyes widen as his form blurs and stretches as it seems to be sucked toward " + query_short() + ". %^BOLD%^%^CYAN%^'Oh, '%^RESET%^%^CYAN%^ he says. %^BOLD%^'So this is what it is like...'"; 
+    emote = "'s%^RESET%^%^CYAN%^ eyes widen as his form blurs and stretches as it seems to be sucked toward " + query_short() + ". %^BOLD%^%^CYAN%^'Oh, '%^RESET%^%^CYAN%^ he says. %^BOLD%^'So this is what it is like...'";
     break;
   case "mehaq":
     emote = "%^RESET%^%^CYAN%^ draws herself up straight and appears to fight against a force that tries to stretch her form toward " + query_short() + "%^RESET%^%^CYAN%^. But it is no use...";
     break;
   case "taluc":
-    emote = "'s%^RESET%^%^CYAN%^ eyes widen in alarm as his form blurs and stretches as it seems to be sucked toward " + query_short() + ". %^BOLD%^%^BLUE%^'My Lord! No!'%^RESET%^%^CYAN%^ he cries. %^BOLD%^%^BLUE%^'Not me, you promised! The others, not MEEEeeee...'"; 
+    emote = "'s%^RESET%^%^CYAN%^ eyes widen in alarm as his form blurs and stretches as it seems to be sucked toward " + query_short() + ". %^BOLD%^%^BLUE%^'My Lord! No!'%^RESET%^%^CYAN%^ he cries. %^BOLD%^%^BLUE%^'Not me, you promised! The others, not MEEEeeee...'";
     break;
   case "epithon":
     emote = "'s %^RESET%^%^CYAN%^face curls into a snarl as his form blurs and stretches as it seems to be sucked toward " + query_short() + "%^RESET%^%^CYAN%^. He grits his teeth and appears to be trying to resist, to no avail...";
@@ -3694,7 +3694,7 @@ void absorb_spirit2(object spirit){
     break;
   case "guamansuri":
     emote = "%^RESET%^%^CYAN%^ braces himself as his form blurs and stretches, seeming to be sucked toward " + query_short() + "%^RESET%^%^CYAN%^. As it becomes obviously inevitable, he gives up and launches himself sword first toward it.";
-  default: 
+  default:
     emote = "%^RESET%^%^CYAN%^ gives a cry of anguish as its form blurs and stretches as it seems to be sucked toward " + query_short();
     break;
   }
@@ -3749,8 +3749,8 @@ void summon_spirits(){
   tecqumin = children(MOB + "ghost_warrior");
   tecqumin += children(MOB + "ghost_priest");
   npc_names = ({"jontar", "taluc", "empress", "apothecary", "epithon"});
-  npc_locations = ({CITY_ROOM + "throne_room", 
-     CITY_ROOM + "taluc_room", CITY_ROOM + "mehaq_room", 
+  npc_locations = ({CITY_ROOM + "throne_room",
+     CITY_ROOM + "taluc_room", CITY_ROOM + "mehaq_room",
      CITY_ROOM + "grand_interior02", ROOMS + "jontar_room"});
   npcs = ({});
   dead_npcs = ({});
@@ -3763,7 +3763,7 @@ void summon_spirits(){
       room = environment(npc);
       if (objectp(room)){  //check if they are somewhere in the city; if not, move them back to their start room.
         report ("mob: " + npc_names[i] + " is in valid environment: " + base_name(room));
-        if (!interact("city", base_name(room)) && !interact("zig", base_name(room)) 
+        if (!interact("city", base_name(room)) && !interact("zig", base_name(room))
              && !interact("step", base_name(room))){
           room2 = find_object_or_load(npc_locations[i]);
           if (!objectp(room2)){
@@ -3771,7 +3771,7 @@ void summon_spirits(){
             continue;
           } else {
             report ("moving " + npc->query_name() + " to " + base_name(room));
-            tell_room(room, "the %^BOLD%^%^WHITE%^spirit%^RESET%^ of " 
+            tell_room(room, "the %^BOLD%^%^WHITE%^spirit%^RESET%^ of "
               + npc->query_name() + " %^RESET%^fl%^BOLD%^%^WHITE%^i%^RESET%^ckers"
               +" and disappears");
             tell_room(room2, npc->query_name() +"%^RESET%^ appears from nowhere");
@@ -3786,7 +3786,7 @@ void summon_spirits(){
       }
     } else {
       report ("Adding " + npc_names[i] + " to list of DEAD NPCs");
-      dead_npcs += ({ npc_names[i]});  
+      dead_npcs += ({ npc_names[i]});
     }
   }
   count = sizeof(dead_npcs);
@@ -3854,7 +3854,7 @@ string choose_destination(){
 //    tell_room(ETO,  "regenerating waystations");
     // Above check makes sure the next lag inducing maneuvre only happens
     // if the maze has been reset since the waystations were set up
-//    tell_room(ETO,  "Generating new waystations to : " + dest);    
+//    tell_room(ETO,  "Generating new waystations to : " + dest);
     DEST->clear_waystations(dest);
     MAZE_D->generate_waystations(JUNG_ROOM5, dest_name, 20, 3);
   } else {
@@ -3884,7 +3884,7 @@ string choose_destination(){
 //    tell_room(ETO,  "regenerating waystations");
     // Above check makes sure the next lag inducing maneuvre only happens
     // if the maze has been reset since the waystations were set up
-//    tell_room(ETO,  "Generating new waystations to : " + dest);    
+//    tell_room(ETO,  "Generating new waystations to : " + dest);
     DEST->clear_waystations(dest);
     MAZE_D->generate_waystations(JUNG_ROOM5, dest_name,20, 3);
   } else {
@@ -3893,7 +3893,7 @@ string choose_destination(){
   }
 
 //  tell_room(ETO, "%^BOLD%^%^RED%^No waystation available to: %^RESET%^" + dest + ". %^BOLD%^%^BLUE%^Looking for next location");
-  
+
   dest = JUNG_ROOM5 + MAZE_D->get_middle_room(JUNG_ROOM5);
   cleanse_waystations(dest);
   waystation = "/daemon/pathfinder_d.c"->find_waystation(ETO, dest,5);
@@ -3919,12 +3919,12 @@ string choose_destination(){
       if (waytime == 0 || mazetime >= waytime){
      // Above check makes sure the next lag inducing maneuvre only happens
       // if the maze has been reset since the waystations were set up
-        tell_room(ETO, "%^BOLD%^%^YELLOW%^Generating new waystations to : " + dest);    
+        tell_room(ETO, "%^BOLD%^%^YELLOW%^Generating new waystations to : " + dest);
         DEST->clear_waystations(dest);
         dest_name = dest[strlen(JUNG_ROOM5)..strlen(dest)-1];
         MAZE_D->generate_waystations(JUNG_ROOM5, dest_name ,20 , 3);
       } else {
- //       tell_room(ETO, "%^BOLD%^%^GREEN%^No need to generate new waystations to : " + JUNG_ROOM5 + dest_name);    
+ //       tell_room(ETO, "%^BOLD%^%^GREEN%^No need to generate new waystations to : " + JUNG_ROOM5 + dest_name);
       }
       cleanse_waystations(dest);
       waystation = "/daemon/pathfinder_d.c"->find_waystation(ETO, dest,5);
@@ -3949,7 +3949,7 @@ void cleanse_waystations(string dest){
   count = sizeof(ks);
   for(i=count-1;i>=0;i--){
     if (interact("ropebridge1", ks[i])
-     || interact("ropebridge2", ks[i]) 
+     || interact("ropebridge2", ks[i])
      || interact("ropebridge3", ks[i])
      || interact("ropebridge4", ks[i])
      || interact("ropebridge5", ks[i])
@@ -3958,7 +3958,7 @@ void cleanse_waystations(string dest){
 //      tell_room(ETO, "deleting " + ks[i]);
       map_delete(map, ks[i]);
     } else {
-//      tell_room(ETO, ks[i] + " does not contain ropebridge"); 
+//      tell_room(ETO, ks[i] + " does not contain ropebridge");
     }
   }
   DEST->set_waystations(dest, map);
@@ -3970,7 +3970,7 @@ int clean_up(){
 
 close_rift(){
   object room, rift;
-  if (objectp(ETO) && file_name(ETO) == TECVOID + "inner_void0" 
+  if (objectp(ETO) && file_name(ETO) == TECVOID + "inner_void0"
        && tentacles_withdrawn == 0 && !query_paralyzed()){
     if (ETO->query_exit("out")=="/d/shadowgate/void"){
       return;
@@ -3998,7 +3998,7 @@ void ooze_mucus(){
     +"%^MAGENTA%^ed%^BOLD%^%^GREEN%^ oozes m%^RESET%^%^GREEN%^u"
     +"%^BOLD%^c%^RESET%^%^GREEN%^u%^BOLD%^s from its %^BOLD%^"
     +"%^BLACK%^tentacles");
-  if (mucus > SURFACE_AREA){ 
+  if (mucus > SURFACE_AREA){
     mucus = SURFACE_AREA;
     tell_room(ETO, "%^BOLD%^%^GREEN%^M%^RESET%^%^GREEN%^u%^BOLD%^c"
       +"%^RESET%^%^GREEN%^u%^BOLD%^s%^RESET%^ dr%^BOLD%^i%^RESET%^"
@@ -4015,7 +4015,7 @@ void ooze_mucus(){
   }
 }
 
-varargs void grant_quest(object slayer, string quest, int exp, 
+varargs void grant_quest(object slayer, string quest, int exp,
                               string explanation, int must_be_near){
   object leader, * party, found_thing;
   string name, party_name;
@@ -4062,7 +4062,7 @@ string slime_desc(){
        +"%^BOLD%^%^GREEN%^me covers its %^BOLD%^%^BLACK%^t%^RESET%^"
        +"%^GREEN%^e%^BOLD%^%^BLACK%^ntacl%^RESET%^e%^BOLD%^"
        +"%^BLACK%^s.";
-    } 
+    }
     return slime + "%^RESET%^";
   }
   ratio = mucus * 100/SURFACE_AREA;
@@ -4085,7 +4085,7 @@ string slime_desc(){
        +"%^BOLD%^%^BLACK%^u%^RESET%^%^BLUE%^t%^BOLD%^r%^MAGENTA%^i"
        +"%^RESET%^%^BLUE%^d %^BOLD%^%^GREEN%^sl%^RESET%^%^GREEN%^i"
        +"%^BOLD%^%^GREEN%^me.";
-    } 
+    }
   }
   if (ratio >= 75 && ratio <90){
     if (objectp(ETO) && !ETO->is_vacuum()){
@@ -4103,7 +4103,7 @@ string slime_desc(){
        +"%^BOLD%^%^BLACK%^u%^RESET%^%^BLUE%^t%^BOLD%^r%^MAGENTA%^i"
        +"%^RESET%^%^BLUE%^d %^BOLD%^%^GREEN%^sl%^RESET%^%^GREEN%^i"
        +"%^BOLD%^%^GREEN%^me.";
-    } 
+    }
   }
   if (ratio >=50 && ratio <75){
     if (objectp(ETO) && !ETO->is_vacuum()){
@@ -4121,7 +4121,7 @@ string slime_desc(){
        +"%^BOLD%^%^BLACK%^u%^RESET%^%^BLUE%^t%^BOLD%^r%^MAGENTA%^i"
        +"%^RESET%^%^BLUE%^d %^BOLD%^%^GREEN%^sl%^RESET%^%^GREEN%^i"
        +"%^BOLD%^%^GREEN%^me.";
-    } 
+    }
   }
   if (ratio >= 25 && ratio <50){
     slime_desc = "%^GREEN%^More than %^RESET%^a quarter of the"
@@ -4179,7 +4179,7 @@ string slime_desc(){
     freeze_desc =  "%^BOLD%^%^CYAN%^A crust of fr%^BOLD%^%^WHITE%^o%^CYAN%^"
       +"z%^RESET%^e%^BOLD%^%^CYAN%^n %^BOLD%^%^GREEN%^m%^RESET%^%^GREEN%^u"
       +"%^BOLD%^%^GREEN%^c%^RESET%^%^GREEN%^u%^BOLD%^s %^CYAN%^covers"
-      +" %^RESET%^less than a quarter %^BOLD%^%^CYAN%^of the"      
+      +" %^RESET%^less than a quarter %^BOLD%^%^CYAN%^of the"
       +" %^BOLD%^%^BLACK%^tentacles%^CYAN%^.";
   }
   if ( freeze_ratio >0 && freeze_ratio <10 ){
@@ -4188,7 +4188,7 @@ string slime_desc(){
       +"%^BOLD%^%^GREEN%^c%^RESET%^%^GREEN%^u%^BOLD%^s %^CYAN%^covers"
       +" %^RESET%^a tiny bit %^BOLD%^%^CYAN%^of the%^BOLD%^%^BLACK%^"
       +" tentacles%^CYAN%^.";
-  }    
+  }
   if (frozen_mucus ==0){
     freeze_desc = "";
   }
@@ -4216,8 +4216,8 @@ string skin_desc(){
       +"%^BOLD%^%^BLACK%^n%^RESET%^ on the %^BOLD%^%^BLACK%^tentacles"
       +" %^RESET%^has been damaged and has a quite a few"
       +" %^MAGENTA%^g%^BOLD%^%^RED%^a%^MAGENTA%^p%^RESET%^%^MAGENTA%^s"
-      +" %^RESET%^in it.";    
-  } 
+      +" %^RESET%^in it.";
+  }
   if (ratio >=50 && ratio <75){
     desc = "  The %^BOLD%^%^BLACK%^th%^RESET%^i%^BOLD%^%^BLACK%^ck,"
       +" r%^RESET%^%^BLUE%^u%^BOLD%^%^BLACK%^bbery sk%^RESET%^%^MAGENTA%^i"
@@ -4225,7 +4225,7 @@ string skin_desc(){
       +" %^RESET%^has been badly damaged and has a lots of"
       +" %^MAGENTA%^g%^BOLD%^%^RED%^a%^MAGENTA%^p%^RESET%^%^MAGENTA%^s"
       +" %^RESET%^in it.";
-  } 
+  }
   if (ratio >=25 && ratio <50){
     desc = "  More than half of the %^BOLD%^%^BLACK%^tentacles'"
       +" r%^RESET%^%^BLUE%^u%^BOLD%^%^BLACK%^bbery sk%^RESET%^%^MAGENTA%^i"
@@ -4234,7 +4234,7 @@ string skin_desc(){
       +"%^BOLD%^%^MAGENTA%^a%^RESET%^%^MAGENTA%^ble %^BOLD%^%^MAGENTA%^f"
       +"%^BOLD%^%^RED%^l%^MAGENTA%^e%^RESET%^%^RED%^s%^MAGENTA%^h"
       +" %^RESET%^underneath";
-  } 
+  }
   if (ratio >=10 && ratio <25){
     desc = "  The %^BOLD%^%^BLACK%^th%^RESET%^i%^BOLD%^%^BLACK%^ck,"
       +" r%^RESET%^%^BLUE%^u%^BOLD%^%^BLACK%^bbery sk%^RESET%^%^MAGENTA%^i"
@@ -4243,15 +4243,15 @@ string skin_desc(){
       +"%^RED%^a%^RESET%^%^MAGENTA%^p%^BOLD%^i%^RESET%^%^MAGENTA%^ng"
       +" %^BOLD%^%^RED%^r%^RESET%^%^RED%^e%^BOLD%^%^MAGENTA%^n%^RED%^ts"
       +" %^RESET%^in it.";
-  } 
+  }
   if (ratio <10){
     desc = "  The %^BOLD%^%^BLACK%^th%^RESET%^i%^BOLD%^%^BLACK%^ck,"
       +" r%^RESET%^%^BLUE%^u%^BOLD%^%^BLACK%^bbery sk%^RESET%^%^MAGENTA%^i"
       +"%^BOLD%^%^BLACK%^n%^RESET%^ on the %^BOLD%^%^BLACK%^tentacles"
       +" %^RESET%^has been %^BOLD%^%^RED%^shredded%^RESET%^, and only a"
       +" few %^RED%^ragged %^BOLD%^%^BLACK%^str%^RESET%^%^RED%^i%^BOLD%^"
-      +"%^BLACK%^p%^RED%^s %^RESET%^remain";    
-  } 
+      +"%^BLACK%^p%^RED%^s %^RESET%^remain";
+  }
   if (skin == 0){
     desc = "The %^BOLD%^%^BLACK%^sk%^RESET%^%^MAGENTA%^i%^BOLD%^%^BLACK%^n"
     +" %^RESET%^has been flayed from the %^BOLD%^%^BLACK%^tentacles"
@@ -4273,7 +4273,7 @@ void goto_bridge(){
   mazetime = MAZE_D->query_timing(JUNG_ROOM5);
   if (mazetime == 0 || mazetime > waytime){
   // Above check makes sure the next lag inducing maneuvre only happens
-  // if the maze has been reset since the waystations were set up    
+  // if the maze has been reset since the waystations were set up
     DEST->clear_waystations(dest);
     DEST->generate_waystations(dest,6, 4);
   }
@@ -4377,7 +4377,7 @@ varargs void paralyze_all(string msg){
   count1 = sizeof(usrs);
   if (count1<1){
     return;
-  }    
+  }
   for(i=0;i<count1;i++){
     room = environment(usrs[i]);
     if(objectp(room) && interact("tecqumin", base_name(room))){
@@ -4400,7 +4400,7 @@ varargs void paralyze_all(string msg){
       }
       critters[j]->remove_property("no paralyze");
       critters[j]->set_paralyzed(1000, msg);
-      
+
     }
   }
 }
@@ -4413,7 +4413,7 @@ void kill_all(){
   count1 = sizeof(usrs);
   if (count1<1){
     return;
-  }    
+  }
   for(i=0;i<count1;i++){
     room = environment(usrs[i]);
     if(objectp(room) && interact("tecqumin", base_name(room))){
@@ -4433,7 +4433,7 @@ void kill_all(){
       }
       critters[j]->set_hp(-20);
       critters[j]->die();
-      
+
     }
   }
 }
@@ -4450,7 +4450,7 @@ void goto_zigzenith(){
   if (waytime<time()-uptime()){
     "/daemon/destinations_d"->clear_waystations(dest_name);
     "/daemon/destinations_d"->generate_waystations(dest_name, 4,3);
-    
+
   }
   waystation = "/daemon/pathfinder_d"->find_waystation(ETO, dest_name, 5);
   if(!objectp(waystation)){
@@ -4472,11 +4472,11 @@ varargs void tell_continent(string str, string alignment){
   for (i=0;i<count;i++){
     if (users[i]->query_true_invis()){
       if (stringp(alignment)){
-        who = alignment + " aligned characters in the %^CYAN%^Tecqumin%^RESET%^ area"; 
+        who = alignment + " aligned characters in the %^CYAN%^Tecqumin%^RESET%^ area";
       } else {
         who = "all characters in the %^CYAN%^Tecqumin%^RESET%^ area";
       }
-      tell_object(users[i], who + " hear a message that: " + str); 
+      tell_object(users[i], who + " hear a message that: " + str);
       continue;
     }
     if (!objectp(environment(users[i])) || !interact("tecqumin", base_name(environment(users[i]))) ){
@@ -4547,7 +4547,7 @@ void empress_warning(){
   empress->move(room);
   room->tell_bridge("The %^CYAN%^spirit%^RESET%^ of%^MAGENTA%^"
         +" Empress Mehaq%^RESET%^ appears in the centre of the bridge");
-  "/d/atoyatl/bridge_monitor_d.c"->set_PosDir(empress, ({29, 0, 1})); 
+  "/d/atoyatl/bridge_monitor_d.c"->set_PosDir(empress, ({29, 0, 1}));
   call_out("empress_warning2", 1, empress);
 }
 
@@ -4559,8 +4559,8 @@ void empress_warning2(object empress){
     empress_warning();
     return;
   }
-  if (base_name(room)!= JUNG_ROOM + "ropebridge0" && base_name(room)!= JUNG_ROOM + "ropebridge1" 
-   && base_name(room)!= JUNG_ROOM + "ropebridge2" && base_name(room)!= JUNG_ROOM + "ropebridge3" 
+  if (base_name(room)!= JUNG_ROOM + "ropebridge0" && base_name(room)!= JUNG_ROOM + "ropebridge1"
+   && base_name(room)!= JUNG_ROOM + "ropebridge2" && base_name(room)!= JUNG_ROOM + "ropebridge3"
    && base_name(room)!= JUNG_ROOM + "ropebridge4" && base_name(room)!= JUNG_ROOM + "ropebridge5"){
     empress_warning();
     return;
@@ -4578,8 +4578,8 @@ void empress_warning3(object empress){
     empress_warning();
     return;
   }
-  if (base_name(room)!= JUNG_ROOM + "ropebridge0" && base_name(room)!= JUNG_ROOM + "ropebridge1" 
-   && base_name(room)!= JUNG_ROOM + "ropebridge2" && base_name(room)!= JUNG_ROOM + "ropebridge3" 
+  if (base_name(room)!= JUNG_ROOM + "ropebridge0" && base_name(room)!= JUNG_ROOM + "ropebridge1"
+   && base_name(room)!= JUNG_ROOM + "ropebridge2" && base_name(room)!= JUNG_ROOM + "ropebridge3"
    && base_name(room)!= JUNG_ROOM + "ropebridge4" && base_name(room)!= JUNG_ROOM + "ropebridge5"){
     empress_warning();
     return;
@@ -4597,8 +4597,8 @@ void empress_warning4(object empress){
     empress_warning();
     return;
   }
-  if (base_name(room)!= JUNG_ROOM + "ropebridge0" && base_name(room)!= JUNG_ROOM + "ropebridge1" 
-   && base_name(room)!= JUNG_ROOM + "ropebridge2" && base_name(room)!= JUNG_ROOM + "ropebridge3" 
+  if (base_name(room)!= JUNG_ROOM + "ropebridge0" && base_name(room)!= JUNG_ROOM + "ropebridge1"
+   && base_name(room)!= JUNG_ROOM + "ropebridge2" && base_name(room)!= JUNG_ROOM + "ropebridge3"
    && base_name(room)!= JUNG_ROOM + "ropebridge4" && base_name(room)!= JUNG_ROOM + "ropebridge5"){
     empress_warning();
     return;
@@ -4633,7 +4633,7 @@ void stop_combat(){
   count = sizeof(critters);
   if (count<1){
     return;
-  }  
+  }
   for (i=0;i<count;i++){
     critters[i]->cease_all_attacks();
     attackers = critters[i]->query_attackers();
@@ -4695,10 +4695,10 @@ void victory4(){
   tell_continent("%^B_BLACK%^%^BOLD%^%^WHITE%^As the light and life fade from"
     +" your eyes, you know that the world is at risk, and the final victory of the"
     +" %^RESET%^%^MAGENTA%^U%^BLUE%^nf%^MAGENTA%^e%^BLUE%^tt%^MAGENTA%^e"
-    +"%^BLUE%^r%^MAGENTA%^e%^BLUE%^d%^BOLD%^%^WHITE%^ is made closer");   
+    +"%^BLUE%^r%^MAGENTA%^e%^BLUE%^d%^BOLD%^%^WHITE%^ is made closer");
   call_out("victory5", 2);
 }
-void victory3(){ 
+void victory3(){
   paralyze_all();
   tell_continent("\n\n\n\n\n\n");
   tell_continent("%^B_BLACK%^%^BOLD%^%^WHITE%^The %^RESET%^%^CYAN%^air %^BOLD%^%^WHITE%^thins and you fall to your knees as the %^MAGENTA%^life%^BOLD%^%^WHITE%^ is drawn out of you towards the malevolant force of the %^RESET%^%^MAGENTA%^U%^BLUE%^nf%^MAGENTA%^e%^BLUE%^tt%^MAGENTA%^e%^BLUE%^r%^MAGENTA%^e%^BLUE%^d%^BOLD%^%^WHITE%^, unleashed upon the world by adventurers too proud to acknowledge the slim chances of their success");
@@ -4708,7 +4708,7 @@ void victory2(){
   paralyze_all();
   if (objectp(ETO)){
     tell_room(ETO, "The air rushes out of the room as the Unfettered pushes more of its massive bulk out of the huge rift it has torn in the sky.");
-  } 
+  }
   call_out("victory3", 2);
 }
 
@@ -4738,9 +4738,9 @@ void victory(){
   paralyze_all("You are in the grip of the %^GREEN%^horror%^RESET%^ of the events unfolding. You cannot move.");
   //Add a 'failed to stop the Unfettered' event for everyone on the continent
   fail_all();
-  //next, stop all combat in the room  
+  //next, stop all combat in the room
   stop_combat();
   tell_continent("\n\n\n\n\n");
-  tell_continent("%^B_BLACK%^%^BOLD%^%^RED%^A massive BOOMING %^BOLD%^%^WHITE%^shockwave %^RED%^hits you as the sky overhead is %^CYAN%^TORN APART");  
+  tell_continent("%^B_BLACK%^%^BOLD%^%^RED%^A massive BOOMING %^BOLD%^%^WHITE%^shockwave %^RED%^hits you as the sky overhead is %^CYAN%^TORN APART");
   call_out("victory2", 2);
-} 
+}

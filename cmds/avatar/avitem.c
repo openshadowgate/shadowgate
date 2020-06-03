@@ -1,8 +1,8 @@
-//A new - menu driven - avatar item maker command - that will, hopefully, 
-//be much easier to update - will also add the ability to save your 
-//current object when it's not yet finished - by adding whatever 
-//you set into a mapping or a couple of them and then 
-//saving those - and will also look much much better 
+//A new - menu driven - avatar item maker command - that will, hopefully,
+//be much easier to update - will also add the ability to save your
+//current object when it's not yet finished - by adding whatever
+//you set into a mapping or a couple of them and then
+//saving those - and will also look much much better
 //Coded by Saide@Shadowgate - May, 2008
 #include <std.h>
 #include "items.h"
@@ -18,10 +18,10 @@ inherit OBJECT;
 
 #include "valid_weapons.h"
 
-static string DIR, cur_menu;
-static string PAD = "%^BOLD%^%^GREEN%^>>%^RESET%^ ";
-static string cur_type;
-static int menu_place = 0;
+nosave string DIR, cur_menu;
+nosave string PAD = "%^BOLD%^%^GREEN%^>>%^RESET%^ ";
+nosave string cur_type;
+nosave int menu_place = 0;
 void finish();
 void display_menu();
 void update_this_menu();
@@ -33,10 +33,10 @@ void update_this_menu();
 //
 void do_response(string msg, string msg_type);
 
-mapping ObjectInfo = (["File Name" : "NIL", "Object Type" : "NIL", "Item Name" : "NIL", 
-"IDS" : "NIL", "Description" : ({"NIL", "NIL", "NIL"}), "Read" : ({"NIL", "common"}), 
+mapping ObjectInfo = (["File Name" : "NIL", "Object Type" : "NIL", "Item Name" : "NIL",
+"IDS" : "NIL", "Description" : ({"NIL", "NIL", "NIL"}), "Read" : ({"NIL", "common"}),
 "Lore" : ({"NIL", "NIL"}), "Value" : ({"gold", 10}), "Weight" : "NIL", "Size" : "NIL",
-"Armor Class" : 0, "Enchantment" : "NIL", "Prof" : "NIL", "Damage" : ({"NIL", "NIL", "NIL"}), 
+"Armor Class" : 0, "Enchantment" : "NIL", "Prof" : "NIL", "Damage" : ({"NIL", "NIL", "NIL"}),
 "Weapon Type" : "NIL", "Armor Type" : "NIL", "Limbs" : "NIL", "Encumbrance" : "NIL"]);
 
 mixed Bonuses = ([]);
@@ -49,66 +49,66 @@ mixed WieldOrWear = (["wield" : ({"NIL", "NIL"}), "wear" : ({"NIL", "NIL"}),]);
 
 mixed UnwieldOrRemove = (["unwield" : ({"NIL", "NIL"}), "remove" : ({"NIL", "NIL"}),]);
 
-static string ThisMenu = ({});
+nosave string ThisMenu = ({});
 
 string repeat_string(string rep, int amt);
 
-static string HeartBeatMenu = ({});
+nosave string HeartBeatMenu = ({});
 
-static string SpecialsMenu = ({});
+nosave string SpecialsMenu = ({});
 
-static string BonusMenu = VALID_BONUSES + ({"str", "int", "wis", "cha", "dex", "con"});
+nosave string BonusMenu = VALID_BONUSES + ({"str", "int", "wis", "cha", "dex", "con"});
 
-static string WieldUnwieldMenu = ({"Wield Message", "Room Wield Message", 
+nosave string WieldUnwieldMenu = ({"Wield Message", "Room Wield Message",
 						"Unwield Message", "Room Unwield Message"});
 
-static string WearRemoveMenu = ({"Wear Message", "Room Wear Message", 
+nosave string WearRemoveMenu = ({"Wear Message", "Room Wear Message",
 					   "Remove Message", "Room Remove Message"});
 
-static string menu_header = repeat_string("%^BOLD%^%^CYAN%^--%^RESET%^", 33);
+nosave string menu_header = repeat_string("%^BOLD%^%^CYAN%^--%^RESET%^", 33);
 
-static string *OTMenu = ({"Armor", "Object", "Weapon", "PocketArmor"});
+nosave string *OTMenu = ({"Armor", "Object", "Weapon", "PocketArmor"});
 
-static string *CurrencyMenu = HARD_CURRENCIES + ({"Enter Amount"});
+nosave string *CurrencyMenu = HARD_CURRENCIES + ({"Enter Amount"});
 
-static string *WeaponTypeMenu = keys(VALID_WP_TYPES);
+nosave string *WeaponTypeMenu = keys(VALID_WP_TYPES);
 
-static string *ArmorTypeMenu = keys(VALID_AR_TYPES);
+nosave string *ArmorTypeMenu = keys(VALID_AR_TYPES);
 
-static string *ArmorProfsMenu = ({"Light", "Medium", "Heavy"});
+nosave string *ArmorProfsMenu = ({"Light", "Medium", "Heavy"});
 
-static string *WeaponProfsMenu = ({"Common", "Exotic", "Martial"});
+nosave string *WeaponProfsMenu = ({"Common", "Exotic", "Martial"});
 
-static string SizeMenu = ({"Small", "Medium", "Large", "Giant"});
+nosave string SizeMenu = ({"Small", "Medium", "Large", "Giant"});
 
-static string LoreMenu = ({"Enter Lore", "Lore Difficulty"});
+nosave string LoreMenu = ({"Enter Lore", "Lore Difficulty"});
 
-static string *ReadMenu = ALL_LANGS + ({"Enter Writing"});
+nosave string *ReadMenu = ALL_LANGS + ({"Enter Writing"});
 
-static string *DescriptionMenu = ({"Long", "Short", "Obvious Short"});
+nosave string *DescriptionMenu = ({"Long", "Short", "Obvious Short"});
 
-static string AllSubMenus = ({"Back"});
+nosave string AllSubMenus = ({"Back"});
 
-static string DamageMenu = ({"Normal Damage", "Large Damage"}) + WEAPON_TYPES;
+nosave string DamageMenu = ({"Normal Damage", "Large Damage"}) + WEAPON_TYPES;
 
-static string AllMenus = ({"Clear All", "Finish", "Exit"});
+nosave string AllMenus = ({"Clear All", "Finish", "Exit"});
 
-static string *MainMenu = ({"File Name", "Object Type", "Item Name", 
+nosave string *MainMenu = ({"File Name", "Object Type", "Item Name",
 "Item Identities", "Description",
 "Writing on Object", "Lore", "Weight", "Value", "Heart Beat", "Bonuses"});
 
-static string *MainMenuWANA = ({"Enchantment", "Armor Class", "Size", "Specials", "Prof"});
+nosave string *MainMenuWANA = ({"Enchantment", "Armor Class", "Size", "Specials", "Prof"});
 
-static string *MainMenuWeapon = ({"Weapon Type", "Damage", "Wield/Unwield"});
+nosave string *MainMenuWeapon = ({"Weapon Type", "Damage", "Wield/Unwield"});
 
-static string *MainMenuArmor = ({"Armor Type", "Wear/Remove", "Limbs"});
+nosave string *MainMenuArmor = ({"Armor Type", "Wear/Remove", "Limbs"});
 
-static string *MainMenuPArmor = ({"Encumbrance"});
+nosave string *MainMenuPArmor = ({"Encumbrance"});
 
-static string MyRestoredFileName;
+nosave string MyRestoredFileName;
 
 int save_me(string file)
-{ 
+{
 	return 1;
 }
 
@@ -117,7 +117,7 @@ string strip_colors(string sh)
     	string output = "", *list = ({});
     	string *words = ({});
       int i;
-	if(!sh) 
+	if(!sh)
 	{
 		return output;
 	}
@@ -140,7 +140,7 @@ string strip_colors(string sh)
 }
 
 string repeat_string(string rep, int amt)
-{	
+{
 	string tmp = "";
 	if(!stringp(rep)) return "";
 	amt = to_int(amt);
@@ -149,16 +149,16 @@ string repeat_string(string rep, int amt)
 	{
 		amt--;
 		tmp += rep;
-	}		
+	}
 	return tmp;
 }
 
-void exit() 
+void exit()
 {
 	string TFD, AD, *tf;
 	int num = 1;
 
-	if(ObjectInfo["File Name"] == "NIL") 
+	if(ObjectInfo["File Name"] == "NIL")
 	{
 		remove();
 		return;
@@ -167,25 +167,25 @@ void exit()
 	AD = "/d/avatars/"+TPQN+"/";
 	TFD = AD + "tmp_files/";
 	seteuid(UID_ROOT);
-	if(!sizeof(get_dir(AD))) 
+	if(!sizeof(get_dir(AD)))
 	{
 		mkdir(AD);
 	}
 	tell_object(TP, "Saving temp file for later completion...");
 	tf = get_dir(TFD);
-	if(!sizeof(tf)) 
+	if(!sizeof(tf))
 	{
 		mkdir(TFD);
 		save_object(TFD + ObjectInfo["File Name"]);
 	}
-	if(sizeof(tf)) 
+	if(sizeof(tf))
 	{
 		if(member_array(ObjectInfo["File Name"]+".o", tf) == -1)
 		{
 			save_object(TFD + ObjectInfo["File Name"]);
 		}
-		else 
-		{	
+		else
+		{
 			while(member_array(ObjectInfo["File Name"]+"_"+num+".o", tf) != -1)
 			{
 				num++;
@@ -198,7 +198,7 @@ void exit()
 	remove();
 }
 
-//Function to update certain item properties based on the 
+//Function to update certain item properties based on the
 //inherit for weapon type/armor type in /d/common/obj/armour
 //and /d/common/obj/weapon - Saide
 void update_object(string input, int size)
@@ -215,7 +215,7 @@ void update_object(string input, int size)
 	}
 	if(member_array(input, keys(VALID_WP_TYPES)) != -1)
 	{
-		if(size) 
+		if(size)
 		{
 			if(VALID_WP_SUBTYPES[input])
 			{
@@ -223,9 +223,9 @@ void update_object(string input, int size)
 			}
 			else return;
 		}
-		if(MyObFile) 
+		if(MyObFile)
 		{
-			if(!file_exists(MyObFile +".c")) 
+			if(!file_exists(MyObFile +".c"))
 			{
 				MyObFile = VALID_WP_TYPES[input];
 			}
@@ -240,14 +240,14 @@ void update_object(string input, int size)
 	MyOb = new(MyObFile);
 	if(!objectp(MyOb))
 	{
-		//tell_object(TP, "MyOb is an invalid object"); 
+		//tell_object(TP, "MyOb is an invalid object");
 		return;
 	}
 	MyObWeight = (int)MyOb->query_weight();
 	if(MyObWeight) ObjectInfo["Weight"] = MyObWeight;
 	MyObCoinType = (string)MyOb->query_cointype();
 	if(MyObCoinType) ObjectInfo["Value"][0] = MyObCoinType;
-	MyObValue = (int)MyOb->query_value();	
+	MyObValue = (int)MyOb->query_value();
 	if(MyObValue) ObjectInfo["Value"][1] = MyObValue;
 	MyObWcNum = (int)MyOb->query_wc_num();
 	MyObWcDice = (int)MyOb->query_wc_dice();
@@ -259,7 +259,7 @@ void update_object(string input, int size)
 	if(MyObDamType) ObjectInfo["Damage"][2] = MyObDamType;
 	MyObAc = (int)MyOb->query_ac();
 	if(MyObAc) ObjectInfo["Armor Class"] = MyObAc;
-	if(MyOb->is_armour()) 
+	if(MyOb->is_armour())
 	{
 		MyObProf = (string)MyOb->query_armor_prof();
 	}
@@ -272,7 +272,7 @@ void update_object(string input, int size)
 	if(sizeof(MyObLimbs)) ObjectInfo["Limbs"] = MyObLimbs;
 	MyObSize = (int)MyOb->query_size();
 	if(MyObSize) ObjectInfo["Size"] = MyObSize;
-	if(objectp(MyOb)) 
+	if(objectp(MyOb))
 	{
 		//tell_object(TP, "MyOb is a Valid Object Still");
 		MyOb->remove();
@@ -283,13 +283,13 @@ void update_object(string input, int size)
 //End of Item Properties Update Function
 
 void set_directory(string str) { DIR = str; }
-void init() 
+void init()
 {
-      ::init();   
+      ::init();
 	cur_menu = "main";
 	update_this_menu();
       display_menu();
-      input_to("pick_menu_item");	
+      input_to("pick_menu_item");
 }
 
 string CheckStatus(string which)
@@ -298,13 +298,13 @@ string CheckStatus(string which)
 	string cl = "%^YELLOW%^)%^RESET%^";
 	//Color for Needed
 	string nc = "%^BOLD%^%^WHITE%^";
-	//Reset 
+	//Reset
 	string rs = "%^RESET%^";
 	//Color for something that's set
 	string sc = "%^BOLD%^%^GREEN%^";
 	//Color for something that's set to Default
 	string de = "%^BOLD%^%^RED%^";
-	//Color for something that's not set, but also not 
+	//Color for something that's not set, but also not
 	//required
 	string tmp;
 	string unc = "%^BOLD%^%^CYAN%^";
@@ -317,7 +317,7 @@ string CheckStatus(string which)
 	{
 		if(ObjectInfo["File Name"] == "NIL" || ObjectInfo["File Name"] == "")
 		{
-			return needed_str;	
+			return needed_str;
 		}
 		else { return op + sc + ObjectInfo["File Name"] + cl; }
 	}
@@ -336,7 +336,7 @@ string CheckStatus(string which)
 		else { return op + sc + ObjectInfo["Object Type"] + cl; }
 	}
 	if(which == "Item Name")
-	{	
+	{
 		if(ObjectInfo["Item Name"] == "NIL")
 		{
 			return needed_str;
@@ -384,13 +384,13 @@ string CheckStatus(string which)
 		else { return set_str; }
 	}
 	if(which == "Value")
-	{	
+	{
 		if(ObjectInfo["Value"][0] == "NIL" || ObjectInfo["Value"][1] == "NIL")
 		{
 			return unset_str;
 		}
-		else 
-		{ 
+		else
+		{
 			return op + sc + ObjectInfo["Value"][1] + " " + ObjectInfo["Value"][0]+cl;
 		}
 		/*if(ObjectInfo["Value"][0] == "gold" || ObjectInfo["Value"][1] == 10)
@@ -405,14 +405,14 @@ string CheckStatus(string which)
 		{
 			return needed_str;
 		}
-		else 
-		{ 
-			return op + sc + ObjectInfo["Weight"] + cl; 
+		else
+		{
+			return op + sc + ObjectInfo["Weight"] + cl;
 		}
 	}
 	if(which == "Bonuses")
 	{
-		if(!sizeof(Bonuses)) 
+		if(!sizeof(Bonuses))
 		{
 			return unset_str;
 		}
@@ -428,7 +428,7 @@ string CheckStatus(string which)
 	}
 	if(which == "Wear/Remove" || which == "Wield/Unwield")
 	{
-		if(cur_type == "Armor" || cur_type == "PocketArmor") 
+		if(cur_type == "Armor" || cur_type == "PocketArmor")
 		{
 			if(WieldOrWear["wear"][0] == "NIL" ||
 			WieldOrWear["wear"][1] == "NIL" ||
@@ -466,9 +466,9 @@ string CheckStatus(string which)
 		{
 			return needed_str;
 		}
-		else 
-		{ 
-			if(sizeof(ObjectInfo["Limbs"])) 
+		else
+		{
+			if(sizeof(ObjectInfo["Limbs"]))
 			{
 				tmp = implode(ObjectInfo["Limbs"], ", ");
 			}
@@ -476,19 +476,19 @@ string CheckStatus(string which)
 		}
 	}
 	if(which == "Size")
-	{	
+	{
 		if(ObjectInfo["Size"] == "NIL")
 		{
 			return needed_str;
 		}
 		else { return op + sc + SizeMenu[ObjectInfo["Size"]-1] + cl; }
 	}
-	if(which == "Armor Class") 
-	{	
+	if(which == "Armor Class")
+	{
 		if(ObjectInfo["Armor Class"] == "NIL")
 		{
 			if(ObjectInfo["Object Type"] == "Armor")
-			{	
+			{
 				return needed_str;
 			}
 			else { return op + sc + ObjectInfo["Armor Class"] + cl; }
@@ -519,11 +519,11 @@ string CheckStatus(string which)
 		{
 			return needed_str;
 		}
-		else 
-		{ 	
+		else
+		{
 			tmp = op + sc + implode(ObjectInfo["Damage"], ", ");
 			tmp += cl;
-			return tmp;	
+			return tmp;
 		}
 	}
 	if(which == "Weapon Type")
@@ -566,7 +566,7 @@ string CheckStatus(string which)
 	}
 	if(cur_menu == "BonusMenu")
 	{
-		if(Bonuses[which]) 
+		if(Bonuses[which])
 		{
 			if(sizeof(Bonuses[which]))
 			{
@@ -676,7 +676,7 @@ string CheckStatus(string which)
 	{
 		if(ObjectInfo["Size"] != "NIL")
 		{
-			if(which == SizeMenu[ObjectInfo["Size"]-1]) 
+			if(which == SizeMenu[ObjectInfo["Size"]-1])
 			{
 				return selected_str;
 			}
@@ -716,7 +716,7 @@ string CheckStatus(string which)
 		if(which == "Long")
 		{
 			if(ObjectInfo["Description"][0] == "NIL")
-			{	
+			{
 				return needed_str;
 			}
 			return set_str;
@@ -750,7 +750,7 @@ string CheckStatus(string which)
 		}
 		if(which == ObjectInfo["Read"][1])
 		{
-			return selected_str;	
+			return selected_str;
 		}
 	}
 	if(cur_menu == "Lore")
@@ -774,13 +774,13 @@ string CheckStatus(string which)
 	}
 	if(cur_menu == "RestoreTempFile")
 	{
-		if(MyRestoredFileName == which) 
+		if(MyRestoredFileName == which)
 		{
 			return op + sc + "Restored" + cl;
 		}
 	}
 	return "";
-}	
+}
 
 void update_this_menu()
 {
@@ -805,7 +805,7 @@ void update_this_menu()
 		{
 			ThisMenu += MainMenuPArmor;
 		}
-	}	
+	}
 	if(cur_menu == "ObjectTypes")
 	{
 		ThisMenu += OTMenu;
@@ -814,7 +814,7 @@ void update_this_menu()
 	{
 		ThisMenu += CurrencyMenu;
 	}
-	if(cur_menu == "Description")	
+	if(cur_menu == "Description")
 	{
 		ThisMenu += DescriptionMenu;
 	}
@@ -848,7 +848,7 @@ void update_this_menu()
 	if(cur_menu == "ArmorType")
 	{
 		ThisMenu += ArmorTypeMenu;
-	}	
+	}
 	if(cur_menu == "SizeMenu")
 	{
 		ThisMenu += SizeMenu;
@@ -869,7 +869,7 @@ void update_this_menu()
 	{
 		ThisMenu += BonusMenu;
 	}
-	if(sizeof(ThisMenu) > 18) 
+	if(sizeof(ThisMenu) > 18)
 	{
 		if(menu_place == 0)
 		{
@@ -885,7 +885,7 @@ void update_this_menu()
 	else { menu_place = 0; }
 	if(cur_menu == "main")
 	{
-		if(sizeof(get_dir("/d/avatars/"+TPQN+"/tmp_files/*.o"))) 
+		if(sizeof(get_dir("/d/avatars/"+TPQN+"/tmp_files/*.o")))
 		{
 			ThisMenu += ({"Restore Temp File"});
 		}
@@ -896,7 +896,7 @@ void update_this_menu()
 	}
 	ThisMenu += AllMenus;
 }
-		
+
 void display_menu()
 {
 	int x;
@@ -910,7 +910,7 @@ void display_menu()
 	{
 		count++;
 		if(x < 9) { num = " " + count + " "; }
-		else { num = count + " "; }			
+		else { num = count + " "; }
 		tmp_str = "\t" + num + PAD + capitalize(ThisMenu[x]) + " ";
 		tmp_str += repeat_string(" ", (30 - strlen(strip_colors(tmp_str))));
 		tmp_str += CheckStatus(ThisMenu[x]+"");
@@ -923,7 +923,7 @@ void display_menu()
 	}
 	tmp_display += menu_header + "\nPlease Select One of The Above Options.\n"+
 	"Input ** At any time to exit.\n" + menu_header;
-      //TP->more(explode(tmp_display, "\n"));	
+      //TP->more(explode(tmp_display, "\n"));
 	tell_object(TP, tmp_display);
 }
 
@@ -944,7 +944,7 @@ void do_response(string msg, string msg_type)
 	}
 	if(msg_type == "msg")
 	{
-		tmp_string = rdec+"\t\t\t\tResponse";	
+		tmp_string = rdec+"\t\t\t\tResponse";
 		tmp_string += repeat_string(" ", (42 - strlen(strip_colors(tmp_string)))) + rdec;
 		tmp_string = msg_header + "\n" + tmp_string + "\n" + msg_header + "\n" + msg + "\n";
 	}
@@ -955,7 +955,7 @@ void do_response(string msg, string msg_type)
 
 
 //Function to hightlight a specific word - Saide
-				
+
 void hl(string str)
 {
 	return "%^BOLD%^%^CYAN%^"+str+"%^RESET%^";
@@ -963,10 +963,10 @@ void hl(string str)
 
 void ResetAll(string otype)
 {
-	ObjectInfo = (["File Name" : "NIL", "Object Type" : "NIL", "Item Name" : "NIL", 
-	"IDS" : "NIL", "Description" : ({"NIL", "NIL", "NIL"}), "Read" : ({"NIL", "common"}), 
+	ObjectInfo = (["File Name" : "NIL", "Object Type" : "NIL", "Item Name" : "NIL",
+	"IDS" : "NIL", "Description" : ({"NIL", "NIL", "NIL"}), "Read" : ({"NIL", "common"}),
 	"Lore" : ({"NIL", "NIL"}), "Value" : ({"gold", 10}), "Weight" : "NIL", "Size" : "NIL",
-	"Armor Class" : 0, "Enchantment" : "NIL", "Prof" : "NIL", 
+	"Armor Class" : 0, "Enchantment" : "NIL", "Prof" : "NIL",
 	"Damage" : ({"NIL","NIL","NIL"}),
 	"Weapon Type" : "NIL", "Armor Type" : "NIL", "Limbs" : "NIL", "Encumbrance" : "NIL"]);
 	if(otype != "NIL")
@@ -978,7 +978,7 @@ void ResetAll(string otype)
 	HeartBeat = ([]);
 	WieldOrWear = (["wield" : ({"NIL", "NIL"}), "wear" : ({"NIL", "NIL"}),]);
 	UnwieldOrRemove = (["unwield" : ({"NIL", "NIL"}), "remove" : ({"NIL", "NIL"}),]);
-	cur_menu = "main";	
+	cur_menu = "main";
 	MyRestoredFileName = "";
 	update_this_menu();
 	display_menu();
@@ -1051,7 +1051,7 @@ void show_category(string input)
 			update_this_menu();
 			display_menu();
 			input_to("pick_menu_item");
-			return 1;	
+			return 1;
 		}
 		if(input == "Limbs")
 		{
@@ -1065,10 +1065,10 @@ void show_category(string input)
 				return 1;
 			}
 			else
-			{	
+			{
 				do_response("This armor has already been set to be "+
 				"worn on the following limbs : \n"+
-				hl(identify(ObjectInfo["Limbs"])) +"\n"+ 
+				hl(identify(ObjectInfo["Limbs"])) +"\n"+
 				"Do you wish to change this, y/n?", "warning");
 				input_to("change_item_limbs");
 				return 1;
@@ -1081,7 +1081,7 @@ void show_category(string input)
 			display_menu();
 			input_to("pick_menu_item");
 			return 1;
-		}		
+		}
 		if(input == "Prof")
 		{
 			cur_menu = "Prof";
@@ -1139,11 +1139,11 @@ void show_category(string input)
 			return 1;
 		}
 		if(input == "File Name")
-		{	
+		{
 			if(ObjectInfo["File Name"] == "NIL")
 			{
 				do_response("Please enter the file name you wish to save this "+
-				"object as.", "msg");			
+				"object as.", "msg");
 				input_to("set_file_name");
 				return 1;
 			}
@@ -1154,9 +1154,9 @@ void show_category(string input)
 				"Do you wish to change it, y/n?", "warning");
 				input_to("check_change_file_name");
 				return 1;
-			}		
+			}
 		}
-		if(input == "Armor Class") 
+		if(input == "Armor Class")
 		{
 			if(ObjectInfo["Armor Class"] == 0)
 			{
@@ -1219,7 +1219,7 @@ void show_category(string input)
 				return 1;
 			}
 			else
-			{	
+			{
 				do_response("The Item Name of this object has already been set to "+
 				hl(ObjectInfo["Item Name"]) + ".\n"
 				"Do you wish to change it, y/n?", "warning");
@@ -1244,7 +1244,7 @@ void show_category(string input)
 				"Example: test, test sword, sword ", "msg");
 				input_to("set_item_ids");
 				return 1;
-			}	
+			}
 			else
 			{
 				do_response("The ids for this object are currently "+
@@ -1253,16 +1253,16 @@ void show_category(string input)
 				input_to("check_change_item_ids");
 				return 1;
 			}
-		}	
+		}
 		if(input == "Size")
 		{
 			cur_menu = "SizeMenu";
 			update_this_menu();
-			display_menu();	
+			display_menu();
 			input_to("pick_menu_item");
 			return 1;
 		}
-		
+
 	}
 	tmp_msg =   "$OB = the object name\n"+
 			"$N = the name of the possessor\n"+
@@ -1351,7 +1351,7 @@ void show_category(string input)
 				input_to("change_equip_message", "room remove");
 				return 1;
 			}
-		}			
+		}
 	}
 
 	if(cur_menu == "WieldUnwieldMenu")
@@ -1435,7 +1435,7 @@ void show_category(string input)
 				input_to("change_equip_message", "room unwield");
 				return 1;
 			}
-		}			
+		}
 	}
 	if(cur_menu == "SizeMenu")
 	{
@@ -1443,11 +1443,11 @@ void show_category(string input)
 		if(member_array(input, SizeMenu) != -1)
 		{
 			ObjectInfo["Size"] = member_array(input, SizeMenu) + 1;
-			if(ObjectInfo["Object Type"] == "Weapon" && 
+			if(ObjectInfo["Object Type"] == "Weapon" &&
 			ObjectInfo["Weapon Type"] != "NIL")
 			{
 				update_object(ObjectInfo["Weapon Type"], ObjectInfo["Size"]);
-			}			
+			}
 			display_menu();
 			input_to("pick_menu_item");
 			return 1;
@@ -1484,7 +1484,7 @@ void show_category(string input)
 				input_to("set_item_large_damage");
 				return 1;
 			}
-			else 
+			else
 			{
 				do_response("The large damage for this item has "+
 				"already been set to "+hl(ObjectInfo["Damage"][1])+".  "+
@@ -1502,7 +1502,7 @@ void show_category(string input)
 			return 1;
 		}
 	}
-				
+
 	if(cur_menu == "Lore")
 	{
 		if(input == "Enter Lore")
@@ -1531,7 +1531,7 @@ void show_category(string input)
 				do_response("Please input the lore difficulty.\n"+
 				"Enter a number between " +hl("1 - 40")+ ".\nKeep in mind that "+
 				"this is basically compared against how good "+
-				"a players Academics and Spellcraft skills are.", "msg");		
+				"a players Academics and Spellcraft skills are.", "msg");
 				input_to("set_item_lore_difficulty");
 				return 1;
 			}
@@ -1554,14 +1554,14 @@ void show_category(string input)
 			input_to("pick_menu_item");
 			return 1;
 		}
-		if(input != cur_type) 
+		if(input != cur_type)
 		{
 			do_response("You are trying to change the current "+
 			"object type to "+hl(""+input+"") +" from "+hl(cur_type)+".\n"+
 			"If you proceed, all data you've already entered "+
 			"except for the Object Type will be lost.\n"+
 			"Do you wish to proceed?  y/n?", "warning");
-			input_to("change_type", input);				
+			input_to("change_type", input);
 			return 1;
 		}
 	}
@@ -1604,7 +1604,7 @@ void show_category(string input)
 	if(cur_menu == "RestoreTempFile")
 	{
 		//tell_object(TP, "Input = "+input);
-		if(file_exists("/d/avatars/"+TPQN+"/tmp_files/"+input)) 
+		if(file_exists("/d/avatars/"+TPQN+"/tmp_files/"+input))
 		{
 			seteuid(UID_ROOT);
 			MyRestoredFileName = input;
@@ -1651,7 +1651,7 @@ void show_category(string input)
 	{
 		if(member_array(input, BonusMenu) != -1)
 		{
-			if(!Bonuses[input]) 
+			if(!Bonuses[input])
 			{
 				if(input == "skill bonus")
 				{
@@ -1664,7 +1664,7 @@ void show_category(string input)
 				{
 					do_response("Please input how much "+
 					"of a bonus this tem should give to "+
-					hl(input)+".", "msg");	
+					hl(input)+".", "msg");
 					input_to("pick_bonus", input, "");
 					return 1;
 				}
@@ -1686,8 +1686,8 @@ void show_category(string input)
 					input_to("change_bonus", input);
 					return 1;
 				}
-			}		
-		}	
+			}
+		}
 	}
 
 
@@ -1799,7 +1799,7 @@ void show_category(string input)
 				input_to("check_change_obvious_short");
 				return 1;
 			}
-		}				
+		}
 	}
 
 	if(input == "Back")
@@ -1812,8 +1812,8 @@ void show_category(string input)
 	}
 }
 
-//FUNCTION for picking a menu item and directing to the right 
-//submenu/request for input, etc; 
+//FUNCTION for picking a menu item and directing to the right
+//submenu/request for input, etc;
 
 void pick_menu_item(string str)
 {
@@ -1821,7 +1821,7 @@ void pick_menu_item(string str)
 	string true_input;
 	if(str == "**") exit();
 	max = sizeof(ThisMenu);
-	input = to_int(str);	
+	input = to_int(str);
 	if(input > max || input < 1)
 	{
 		do_response("You have entered "+hl(""+input+"")+".  Please input a number from "+
@@ -1835,11 +1835,11 @@ void pick_menu_item(string str)
 	return 1;
 }
 
-//END 
+//END
 
 
 
-					
+
 //Function to pick a pick the amount of a bonus an item should give - Saide
 
 void pick_bonus(string str, string input, string skill_name)
@@ -1856,9 +1856,9 @@ void pick_bonus(string str, string input, string skill_name)
 		{
 			do_response("Please input how much "+
 			"of a bonus this item should give to "+
-			hl(input)+".", "msg");	
+			hl(input)+".", "msg");
 		}
-		else 
+		else
 		{
 			do_response("Please input how much "+
 			"of a bonus this item should give to "+
@@ -1868,7 +1868,7 @@ void pick_bonus(string str, string input, string skill_name)
 		return 1;
 	}
 	if(!Bonuses[input]) Bonuses += ([input : ({})]);
-	if(skill_name != "") 
+	if(skill_name != "")
 	{
 		do_response("Adding "+hl(str)+" bonus to "+hl(skill_name)+"\n\n"+
 		"Do you want this item to give a bonus to another skill, y/n?", "msg");
@@ -1909,7 +1909,7 @@ void add_another_skill_bonus(string str, string input)
 }
 //End of function to check if they want to add another skill bonus - Saide
 
-//Function to check if they want to change the amount 
+//Function to check if they want to change the amount
 //of an already present bonus - Saide
 
 void change_bonus(string str, string input)
@@ -1919,7 +1919,7 @@ void change_bonus(string str, string input)
 	{
 		do_response("Please input how much "+
 		"of a bonus this item should give to "+
-		hl(input)+".", "msg");	
+		hl(input)+".", "msg");
 		input_to("pick_bonus", input, "");
 		Bonuses[input] = ({});
 		return 1;
@@ -1946,7 +1946,7 @@ void change_bonus(string str, string input)
 void pick_bonus_skill(string str, string input)
 {
 	if(str == "**") return exit();
-	if(!str || str == "" || !TP->is_valid_skill(str)) 
+	if(!str || str == "" || !TP->is_valid_skill(str))
 	{
 		do_response("Please input the name of the "+
 		"skill you want this item to give a bonus to.", "msg");
@@ -1955,17 +1955,17 @@ void pick_bonus_skill(string str, string input)
 	}
 	do_response("Please input how much "+
 	"of a bonus this tem should give to "+
-	hl(str)+".", "msg");	
+	hl(str)+".", "msg");
 	input_to("pick_bonus", input, str);
 	return 1;
 }
 
 //End of function to pick the skill they want an item to give a bonus to
 
-//Function to see if they want to change the skill or skills that an item 
+//Function to see if they want to change the skill or skills that an item
 //is already giving a bonus to - Saide
 void change_bonus_skill(string str, string input)
-{	
+{
 	if(str == "**") return exit();
 	if(lower_case(str[0..0]) == "y")
 	{
@@ -1990,8 +1990,8 @@ void change_bonus_skill(string str, string input)
 }
 //End of function to check if they want to change the current skill bonus set
 
-//Function to clear what needs to be cleared 
-//if they change type and to make sure they 
+//Function to clear what needs to be cleared
+//if they change type and to make sure they
 //really want to change type - Saide
 
 void change_type(string str, string new_type)
@@ -2005,7 +2005,7 @@ void change_type(string str, string new_type)
 		return 1;
 	}
 	if(lower_case(str[0..0]) == "n")
-	{	
+	{
 		display_menu();
 		input_to("pick_menu_item");
 		return 1;
@@ -2015,19 +2015,19 @@ void change_type(string str, string new_type)
 	"If you proceed, all data you've already entered "+
 	"except for the Object Type will be lost.\n.  "+
 	"Do you wish to proceed?  y/n?", "warning");
-	input_to("change_type", new_type);			
+	input_to("change_type", new_type);
 	return 1;
 }
 
 //END Of type change function - Saide
 
-//Function to set the file name for an object - 
-//checks to make sure the file name doesn't already exist.  
+//Function to set the file name for an object -
+//checks to make sure the file name doesn't already exist.
 
 void set_file_name(string str)
 {
 	if(str == "**") return exit();
-	if(str == "delete") 
+	if(str == "delete")
 	{
 		do_response(hl("Delete") +" is reserved and cannot be used for a "+
 		"file name.  Try again.", "warning");
@@ -2073,7 +2073,7 @@ void check_change_file_name(string str)
 	if(lower_case(str[0..0]) == "y")
 	{
 		do_response("Please enter the file name you wish to save this "+
-		"object as.", "msg");			
+		"object as.", "msg");
 		input_to("set_file_name");
 		return 1;
 	}
@@ -2141,7 +2141,7 @@ void check_change_armor_class(string str)
 //Function to set the enchantment on an item - Saide
 
 void set_enchantment(string str)
-{	
+{
 	int num = 0;
 	if(str == "**") return exit();
 	if(!str || str == "" || sscanf(str, "%d", num) != 1 || strlen(str) > 2)
@@ -2151,7 +2151,7 @@ void set_enchantment(string str)
 		input_to("set_enchantment");
 		return 1;
 	}
-	if(absolute_value(num) > 6) 
+	if(absolute_value(num) > 6)
 	{
 		do_response("Please enter the enchantment you want this item to have.  "+
 		"You can do from -6 to +6.  Please only use +6/-6 sparingly.", "msg");
@@ -2200,7 +2200,7 @@ void set_item_ids(string str)
 {
 	string *tmp_arr;
 	if(str == "**") return exit();
-	if(strsrch(str, ",") == -1 || !str) 
+	if(strsrch(str, ",") == -1 || !str)
 	{
 		do_response("Please enter the ids for this object.\n"+
 		"Seperate each item with a comma.\n"+
@@ -2216,9 +2216,9 @@ void set_item_ids(string str)
 	display_menu();
 	input_to("pick_menu_item");
 	return 1;
-	
+
 }
-		
+
 //End of ID setting function
 
 
@@ -2230,12 +2230,12 @@ void check_change_item_ids(string str)
 	if(lower_case(str[0..0]) == "n")
 	{
 		do_response("Item ids not changed.", "msg");
-		display_menu();	
+		display_menu();
 		input_to("pick_menu_item");
 		return 1;
 	}
 	if(lower_case(str[0..0]) == "y")
-	{		
+	{
 		do_response("Please enter the ids for this object.\n"+
 		"Seperate each item with a comma.\n"+
 		"Do not use spaces after the commas.\n"+
@@ -2256,7 +2256,7 @@ void set_item_limbs(string str)
 {
 	string *tmp_arr;
 	if(str == "**") return exit();
-	if(strsrch(str, ",") == -1 || !str) 
+	if(strsrch(str, ",") == -1 || !str)
 	{
 		do_response("Please input which limbs you want "+
 		"this armor to be worn on.  Use commas to seperate "+
@@ -2272,9 +2272,9 @@ void set_item_limbs(string str)
 	display_menu();
 	input_to("pick_menu_item");
 	return 1;
-	
+
 }
-		
+
 //End of ID setting function
 
 
@@ -2286,12 +2286,12 @@ void change_item_limbs(string str)
 	if(lower_case(str[0..0]) == "n")
 	{
 		do_response("Item limbs not changed.", "msg");
-		display_menu();	
+		display_menu();
 		input_to("pick_menu_item");
 		return 1;
 	}
 	if(lower_case(str[0..0]) == "y")
-	{		
+	{
 		do_response("Please input which limbs you want "+
 		"this armor to be worn on.  Use commas to seperate "+
 		"each limb.  Do not use spaces after the commas. \n"+
@@ -2301,7 +2301,7 @@ void change_item_limbs(string str)
 	}
 	do_response("This armor has already been set to be "+
 	"worn on the following limbs : \n"+
-	hl(identify(ObjectInfo["Limbs"])) +"\n"+ 
+	hl(identify(ObjectInfo["Limbs"])) +"\n"+
 	"Do you wish to change this, y/n?", "warning");
 	input_to("change_item_limbs");
 	return 1;
@@ -2386,7 +2386,7 @@ void set_item_large_damage(string str)
 	}
 	if(sscanf(str, "%dd%d", num, dice) == 2)
 	{
-		if(num > 0 && dice > 0) 
+		if(num > 0 && dice > 0)
 		{
 			do_response("Large Damage set to "+hl(num+"d"+dice)+".\n", "msg");
 			ObjectInfo["Damage"][1] = num+"d"+dice;
@@ -2479,11 +2479,11 @@ void check_change_item_name(string str)
 //Function To Set an Items Value - Saide
 
 void set_item_value(string str)
-{	
+{
 	int val;
 	if(str == "**") return exit();
 	val = to_int(str);
-	if(!str || str == "0" || val < 0 || !intp(val)) 
+	if(!str || str == "0" || val < 0 || !intp(val))
 	{
 		do_response("Please enter the value you wish for this object.\n"+
 		"It cannot be a negative number.", "warning");
@@ -2497,7 +2497,7 @@ void set_item_value(string str)
 	return 1;
 }
 
-//End of Item Value set function		
+//End of Item Value set function
 
 //Function To Change an Items Value - Saide
 void change_item_value(string str)
@@ -2535,11 +2535,11 @@ void set_long_description(string str, string longd)
 		if(!longd || longd == "")
 		{
 			do_response("Aborting... long description for this item has not "+
-			"been set.", "warning");			
+			"been set.", "warning");
 			display_menu();
 			input_to("pick_menu_item");
 			return 1;
-		}	
+		}
 		ObjectInfo["Description"][0] = longd;
 		do_response("Long description set to \n"+
 		hl(ObjectInfo["Description"][0])+"\n", "msg");
@@ -2547,12 +2547,12 @@ void set_long_description(string str, string longd)
 		input_to("pick_menu_item");
 		return 1;
 	}
-	longd = longd + str + "\n";	
+	longd = longd + str + "\n";
 	input_to("set_long_description", longd);
 	return 1;
-}	
+}
 
-//End of Function to set long description 
+//End of Function to set long description
 
 //Change Long Description Function - Saide
 
@@ -2615,7 +2615,7 @@ void set_item_lore(string str, string lore_str)
 void change_item_lore(string str)
 {
 	if(str == "**") return exit();
-	if(lower_case(str[0..0]) == "n")	
+	if(lower_case(str[0..0]) == "n")
 	{
 		do_response("Item lore has not been changed.", "msg");
 		display_menu();
@@ -2630,7 +2630,7 @@ void change_item_lore(string str)
 		input_to("set_item_lore", "");
 		return 1;
 	}
-	
+
 	do_response("The lore for this item has already been set to \n"+
 	hl(ObjectInfo["Lore"][0]) + "\n"+
 	"Do you wish to change it, y/n?", "warning");
@@ -2638,14 +2638,14 @@ void change_item_lore(string str)
 	return 1;
 }
 
-//End of Function to check if they wanna change the lore	
+//End of Function to check if they wanna change the lore
 
 //Function to set the lore difficulty - Saide
 
 void set_item_lore_difficulty(string str)
 {
 	if(str == "**") return exit();
-	if(!str || str == 0) 
+	if(!str || str == 0)
 	{
 		do_response("Please input a number, it must be between "+hl("1 - 40")+".", "warning");
 		input_to("set_item_lore_difficulty");
@@ -2685,7 +2685,7 @@ void change_item_lore_difficulty(string str)
 		"this is basically compared against how good "+
 		"a players Academics and Spellcraft skills are.", "msg");
 		input_to("set_item_lore_difficulty");
-		return 1;		
+		return 1;
 	}
 	do_response("The lore difficulty for this item has already been "+
 	"set to "+hl(ObjectInfo["Lore"][1]) + ".\n"+
@@ -2709,7 +2709,7 @@ void set_item_read(string str, string read_str)
 			display_menu();
 			input_to("pick_menu_item");
 			return 1;
-		}	
+		}
 		ObjectInfo["Read"][0] = read_str;
 		do_response("Writing on this object set to \n"+
 		hl(ObjectInfo["Read"][0])+"\n", "msg");
@@ -2755,7 +2755,7 @@ void check_change_item_read(string str)
 //Function to Set Short Description - Saide
 
 void set_short_description(string str)
-{	
+{
 	if(str == "**") return exit();
 	if(!str || str == "" || str == "0")
 	{
@@ -2768,7 +2768,7 @@ void set_short_description(string str)
 	ObjectInfo["Description"][1] = str;
 	display_menu();
 	input_to("pick_menu_item");
-	return 1;	
+	return 1;
 }
 
 //End of Function To set Short Description
@@ -2817,11 +2817,11 @@ void set_obvious_short_description(string str)
 	ObjectInfo["Description"][2] = str;
 	display_menu();
 	input_to("pick_menu_item");
-	return 1;	
+	return 1;
 }
 
 //End of obvious short description set function - Saide
-	
+
 //Function to check if they want to change the obvious short - Saide
 
 void check_change_obvious_short(string str)
@@ -2903,7 +2903,7 @@ void check_change_item_weight(string str)
 	return 1;
 }
 
-//End of function to see if they want to change items weight 
+//End of function to see if they want to change items weight
 
 //If they choose Clear All - Make sure they really want to - Saide
 

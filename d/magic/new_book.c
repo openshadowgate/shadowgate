@@ -7,7 +7,7 @@
 /* Version History */
 //	v1.1:	copy function added
 //	v1.2:	changed to archiving values on disk in a file
-//	v1.2.1	added code to prevent null spells from being added	
+//	v1.2.1	added code to prevent null spells from being added
 //	v1.3	limited the amount and level of spells in the book to
 //			coincide with the requirements of Table 21 in the
 //			Players Handbook.  Checks WIZ_CALCS daemon.
@@ -35,30 +35,7 @@ string owner;
 mapping memorized;
 int *in_mind;
 int lost_book;
-static int serial_number;
-string get_owner();
-
-
-void forget_all_spells();
-int query_memorized(string str);
-mapping query_all_memorized();
-int forget_spell(string str);
-int memorize_spell(string str);
-int wait(int a);
-int end();
-void memorize2(string str, int sl, int temp);
-int save_book();
-void set_memorized(string str, int sl, int xmemorized);
-string get_book_id();
-string query_book_id();
-void enable_spellbook();
-int use_book();
-int get_serial_number();
-void lose_book();
-void set_lost_book(int a);
-int query_lost_book();
-
-
+nosave int serial_number;
 
 string get_book_id() {
   bookid = get_owner() + get_serial_number();
@@ -68,7 +45,7 @@ string get_book_id() {
 
 void remote_set_spellbook(string spell, int level) {
 	object owner;
-	
+
 	if(!level) return;
 	if(!spell) return;
 	if(!spells_at_level) spells_at_level = ({});
@@ -83,7 +60,7 @@ void set_spellbook(string spell, int level) {
   object owner;
   int owner_level, limit, present_spells_at_level;
   string owner_class;
-	
+
   if(!level) return;
   if(!spell) return;
   if(!spells_at_level) spells_at_level = ({});
@@ -98,7 +75,7 @@ void set_spellbook(string spell, int level) {
 void create() {
   ::create();
     spells = ([]);
-    set_id( ({ "book", "bookx", "magic book", 
+    set_id( ({ "book", "bookx", "magic book",
 		 "spell book" }) );
     set_weight(10);
     set_value(0);
@@ -106,7 +83,7 @@ void create() {
     set_short("A Book");
     set_long(
 @MAGICK
-	     
+
 	This is a wizard's book of magic.  This book is required
         for a wizard to cast any spell whatsoever.  Also, the only
         spells that a wizard may cast are the ones enscribed in
@@ -120,7 +97,7 @@ MAGICK
 }
 
 string query_book_id() {
-	return bookid; 
+	return bookid;
 }
 
 int query_spellbook(string spell) { return spells[spell]; }
@@ -156,10 +133,10 @@ int spellbook() {
   for(x = 0; x < sizeof(magic);x++) {
     if(member_array(magic[x], keys(memorized)) == -1) temp = 0;
     else temp = query_memorized(magic[x]);
-    write(arrange_string(magic[x], 20) + 
-	  arrange_string(spells[magic[x]], 10) + 
+    write(arrange_string(magic[x], 20) +
+	  arrange_string(spells[magic[x]], 10) +
 	  temp
-	  ); 
+	  );
   }
   write("--------------------------------------------------------\n");
   return 1;
@@ -242,7 +219,7 @@ int spells() {
 
 string get_owner() {
         object pos;
-   
+
         pos = environment(this_object());
         if(userp(pos)) owner = (string)pos->query_name();
         else if(living(pos)) owner = "monster";
@@ -347,7 +324,7 @@ void forget_all_spells() {
 
 void set_memorized(string str, int sl, int xmemorized) {
   int temp, x;
-  
+
   if(!sl) return;
   if(!xmemorized) x = 1;
   else x = xmemorized;
@@ -371,9 +348,9 @@ int save_book() {
 
 // Functions that control the behavior of the book while
 // it is out of the possession of its owner
-  
+
 void lose_book() {
-  string *temp, *new_id, *inv;     
+  string *temp, *new_id, *inv;
   int x;
 
   if(!new_id) new_id = ({});
@@ -430,7 +407,7 @@ int use_book() {
   write("You are now using this spell book!");
   return 1;
 }
-     
+
 void enable_spellbook() {
   TO->set_lost_book(0);
   write(find_player("thorn"), "Book enabled correctly!");

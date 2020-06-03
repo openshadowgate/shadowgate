@@ -19,7 +19,7 @@ inherit BODY;
 
 private string myclass, * classes, posed, * oldclasses;
 mapping skills, guilds, mlevels;
-static mapping skill_bonuses;
+nosave mapping skill_bonuses;
 mapping _IRS, combat_specs;
 //int dualClassed;
 string dualClass;

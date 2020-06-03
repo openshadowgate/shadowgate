@@ -16,7 +16,7 @@ mapping __Lang;
 mapping _grammar;
 mapping subgrammar;
 string choice;
-static mapping langOverload = ([]);
+nosave mapping langOverload = ([]);
 
 void init_lang();
 

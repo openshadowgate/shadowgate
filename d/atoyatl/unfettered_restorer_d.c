@@ -9,7 +9,7 @@ int * tentacle_hps, empress_moves, spirits_absorbed, countdown, invincible, last
 mapping targeters, seized, exits_used, victory;
 string * destinations_visited, *path_trod, roomname;
 int mucus, frozen_mucus, skin, tentacles_withdrawn, relaying, power_absorbed, last_move, absorbing, reporting;
-static int BEAT, heartcount, COUNT;
+nosave int BEAT, heartcount, COUNT;
 
 
 void create(){
@@ -23,11 +23,11 @@ void checkunf(){
   if (!objectp(unfettered) && stringp(roomname) && COUNT <3)
   {
     COUNT ++;
-    
+
     if (!stringp(roomname) || !catch(roomname->query_short()))
     {
       restore();
-    } else 
+    } else
     {
       report("Roomname " + roomname + " failed to load");
     }
@@ -51,7 +51,7 @@ void backup(object r_room, object * cls, int t_hps, int e_moves, int s_absorbed,
   last_summoned = l_summoned;
   targeters = t_ers;
   seized = s_zed;
-  exits_used = e_used;  
+  exits_used = e_used;
   last_move = l_move;
   absorbing = ab_ing;
   reporting = r_ting;
@@ -64,7 +64,7 @@ void set_unfettered(object unf){
   if (!objectp(unfettered))
   {
     call_out("checkunf", 10);
-  } 
+  }
   unfettered = unf;
 }
 

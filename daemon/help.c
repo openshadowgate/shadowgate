@@ -29,7 +29,7 @@ varargs void help(string topic, string category, int menu) {
    else cmd_help(topic, category, menu);
 }
 
-static void help_menu(string category, string *topics, int ind) {
+protected void help_menu(string category, string *topics, int ind) {
    string tmp;
    int i, maxi, x;
 
@@ -72,7 +72,7 @@ static void help_menu(string category, string *topics, int ind) {
    input_to("select_topic", category, topics, ind);
 }
 
-static void select_topic(string str, string category, string *topics,int ind) {
+protected void select_topic(string str, string category, string *topics,int ind) {
    if(str == "") {
       if(ind+32 < sizeof(topics)) help_menu(category, topics, ind+32);
       else help_menu(category, topics, ind);
@@ -83,7 +83,7 @@ static void select_topic(string str, string category, string *topics,int ind) {
    } else help(str, category, 1);
 }
 
-static string *query_categories() {
+protected string *query_categories() {
    string *tmp;
 
    tmp = ({ "*player general", "*player commands","*feats","*skills","*spells", "*diseases"});
@@ -299,7 +299,7 @@ void cmd_help(string topic, string category, int menu) {
    }
 }
 
-static int find_help(string topic, string category, int menu) {
+protected int find_help(string topic, string category, int menu) {
    object ob;
    string str;
    mixed tmp;
@@ -501,7 +501,7 @@ static int find_help(string topic, string category, int menu) {
    return 1;
 }
 
-static void menu_return(string duh, string category) {
+protected void menu_return(string duh, string category) {
    if(duh != "q") help(category);
 }
 

@@ -3,7 +3,7 @@
 #include <std.h>
 inherit ARMOUR;
 
-static int flag;
+nosave int flag;
 
 void create() {
     ::create();

@@ -22,7 +22,7 @@ inherit ROOM;
 
 mapping doors, held, door_mod;
 
-static mapping default_door_state; // used in clean_up so we can set doors outside to the right state -Ares
+nosave mapping default_door_state; // used in clean_up so we can set doors outside to the right state -Ares
 
 void set_hold_portal(string str1, int casterlevel);
 int query_hold_portal(string str);

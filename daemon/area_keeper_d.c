@@ -3,25 +3,18 @@
 // for longterm area settings & allowing players to shift things in-game without imm help;
 // longterm/timed spawns, etc.
 
-// For now, setting this up to specify a particular area/header/setting (eg/ areaname) 
-// and then allow any variables to be set up for that. Area/header/setting will be the 
+// For now, setting this up to specify a particular area/header/setting (eg/ areaname)
+// and then allow any variables to be set up for that. Area/header/setting will be the
 // resulting stored filename.
 
-// Thoughts: for now using mixed to allow for any variable type. Not sure if this opens us 
+// Thoughts: for now using mixed to allow for any variable type. Not sure if this opens us
 // up to problems in any cases?
 
 #include <security.h>
 #include <dirs.h>
 
 mapping area_vars;
-static string current;
-
-int area_exists(string where);
-mapping query_area(string where);
-mixed query_area_variable(string where,string varname);
-void reset_area(string where);
-void reset_area_variable(string where,string varname);
-int set_area_variable(string where,string varname,mixed value);
+nosave string current;
 
 void create() {
     seteuid(getuid());

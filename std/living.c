@@ -30,9 +30,9 @@ inherit "/std/lang";
 
 int invis;
 int ok_to_heal, player_age, spell_interrupted;
-static int parrying, scrambling;
+nosave int parrying, scrambling;
 int num_attacks;
-static int forced, sight_bonus;
+nosave int forced, sight_bonus;
 string description;
 string background;
 string acquired_template;
@@ -45,25 +45,25 @@ string psion_discipline;
 //by Circe, for psions 7/16/05
 string* divine_domain = ({}); // For cleric domains -Ares 4/7/07
 string* quest_spells = ({}); // For priest quest spells - Ares 4/8/08
-static string party;
-static string* search_path;
+nosave string party;
+nosave string* search_path;
 private string gender;
 mapping stats;
 int temp_flag;
-static int abonus, dbonus; // For true AD&D-style attack and damage bonuses
-static mapping stat_bonus;
+nosave int abonus, dbonus; // For true AD&D-style attack and damage bonuses
+nosave mapping stat_bonus;
 mapping save_bonus;
 object in_vehicle;
 object poisoner;
 object draggee;
-static int living_ticker = 0;
+nosave int living_ticker = 0;
 int tolerance, tolerance_flag, used_stamina;
-static int detecting_invis;
-static int true_seeing;
+nosave int detecting_invis;
+nosave int true_seeing;
 mapping time_delay;
-static function* pre_exit_funcs;
-static function* post_exit_funcs;
-private static object* protectors;
+nosave function* pre_exit_funcs;
+nosave function* post_exit_funcs;
+private nosave object* protectors;
 string diety;
 
 int query_condition();
@@ -574,7 +574,7 @@ void init_stats()
     stats = ([]);
 }
 
-nomask static int cmd_hook(string cmd)
+nomask protected int cmd_hook(string cmd)
 {
     string file, verb;
     object shapeshift_restricted_commands;
@@ -1041,7 +1041,7 @@ void delete_search_path(string dir)
     }
 }
 
-private static int traceFlag;
+nosave private int traceFlag;
 
 /*****************
    // Migrated to /std/living/skills.c for better centralization

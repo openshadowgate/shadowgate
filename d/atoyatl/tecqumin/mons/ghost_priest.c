@@ -9,7 +9,7 @@ void block_all_priests();
 
 int is_raising;
 int ignoring;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 
 void create()
 {

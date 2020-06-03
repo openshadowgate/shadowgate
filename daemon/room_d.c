@@ -1,14 +1,14 @@
 // room_d.c
-//Updating this to allow for other use and to 
+//Updating this to allow for other use and to
 //make each thing (trainers/laerad caves/tharis forest, etc)
 //have its own save file - the benefit of this
 //is that it shouldn't break anymore
 //and it should allow for future use of
 //rooms moving around - so if someone makes
-//an area they want to have a random room 
-//or random room entrance, that would 
-//just need to do something like 
-///daemon/room_d.c->register_moving_room("save_file_name", "moving_room_name", 
+//an area they want to have a random room
+//or random room entrance, that would
+//just need to do something like
+///daemon/room_d.c->register_moving_room("save_file_name", "moving_room_name",
 //"enter exit", "out exit", ({"possible place 1", "possible place 2"}), etc.
 //Saide - April 1st, 2009
 
@@ -25,24 +25,13 @@
 inherit DAEMON;
 
 mapping __NeededRooms;
-static mapping NeededRooms;
-static mapping MobilRooms;
+nosave mapping NeededRooms;
+nosave mapping MobilRooms;
 string *__AreaSaves;
-static string *AreaSaves;
+nosave string *AreaSaves;
 mapping whatWhere;
 string RoomDisabled;
 string EnterName, ExitName;
-
-void Save();
-void Restore();
-void RestoreAreaFile();
-void RestoreTrainerFile();
-int RestoreThisArea(string file);
-int SaveThisArea(string file);
-void SaveTrainerFile();
-void SaveAreaFile();
-void RandomizeRooms(string which_area);
-int delete_mobil_room(string room);
 
 void create(){
     ::create();
@@ -68,17 +57,17 @@ void create(){
 int disable_room(string savename, string x)
 {
     string prev;
-    string droom, droomt, exit, enter;	
-    if(!AreaSaves || !sizeof(AreaSaves)) 
+    string droom, droomt, exit, enter;
+    if(!AreaSaves || !sizeof(AreaSaves))
     {
         if(file_exists(AREASAVEFILE+".o"))
-        {	
+        {
             RestoreAreaFile();
         }
-    }	
+    }
     if(!sizeof(AreaSaves)) return 0;
     if(member_array(savename, AreaSaves) == -1) return 0;
-    if(RestoreThisArea(savename)) 
+    if(RestoreThisArea(savename))
     {
         prev = RoomDisabled;
         RoomDisabled = x;
@@ -94,7 +83,7 @@ int disable_room(string savename, string x)
             droomt = explode(droomt, "&")[0];
             exit = explode(MobilRooms[droom], "&")[1];
             enter = explode(MobilRooms[droomt],"&")[1];
-            droomt->remove_exit(enter);	
+            droomt->remove_exit(enter);
             droom->remove_exit(exit);
             delete_mobil_room(droom);
             delete_mobil_room(droomt);
@@ -106,8 +95,8 @@ int disable_room(string savename, string x)
 
 //Function to register another moving
 //room - Saide
-void register_moving_room(string save_name, 
-string room_file, string enter_name, string exit_name, 
+void register_moving_room(string save_name,
+string room_file, string enter_name, string exit_name,
 string *places)
 {
     string *nrooms;
@@ -128,32 +117,32 @@ string *places)
     whatWhere = ([room_file : nrooms]);
     SaveThisArea(save_name);
     AreaSaves += ({save_name});
-    SaveAreaFile();	
+    SaveAreaFile();
     RandomizeRooms(save_name);
-    return;		
+    return;
 }
 //End of function to register another
 //moving room.
 
 void ConvertOldRooms()
-{	
+{
     int x;
     mapping ThisWhatWhere;
     string *rkeys, tkey, *nrooms;
     if(!file_exists(SAVEFILE+".o")) return;
-    Restore();	
+    Restore();
     ThisWhatWhere = whatWhere;
     rkeys = keys(ThisWhatWhere);
     for(x = 0;x < sizeof(rkeys);x++)
     {
         nrooms = ThisWhatWhere[rkeys[x]];
-        nrooms = explode(implode(nrooms, ""), ".c");    
+        nrooms = explode(implode(nrooms, ""), ".c");
         if(sizeof(nrooms) <= 1) nrooms = ThisWhatWhere[rkeys[x]];
         tkey = explode(rkeys[x], ".c")[0];
         if(rkeys[x] == "/d/laerad/parnelli/asgard/as43")
         {
-            register_moving_room("estal", 
-            tkey, "", "", 
+            register_moving_room("estal",
+            tkey, "", "",
 			nrooms);
 			continue;
 		}
@@ -223,16 +212,16 @@ void inhere(string name)
     string room, player;
     if(!NeededRooms || NeededRooms == ([])) return;
     if(!NeededRooms[name]) return 0;
-	
+
     if(sscanf(NeededRooms[name],"%s&%s",player,room) != 2) return 0;
-	
-    if (!user_exists(player)) 
+
+    if (!user_exists(player))
 	{
         map_delete(NeededRooms,name);
         SaveTrainerFile();
         return;
     }
-    if (name != (string) USERCALL->user_call(player,"query","advance place")) 
+    if (name != (string) USERCALL->user_call(player,"query","advance place"))
     {
         map_delete(NeededRooms,name);
         SaveTrainerFile();
@@ -252,7 +241,7 @@ void remove_room(string name)
 {
     if(!NeededRooms || NeededRooms == ([])) return;
     if(!NeededRooms[name]) return 0;
-	
+
     map_delete(NeededRooms,name);
     SaveTrainerFile();
 }
@@ -268,10 +257,10 @@ int delete_mobil_room(string room)
 int set_mobil_rooms(string room, string dest, string exit)
 {
     if(!MobilRooms) MobilRooms = ([]);
-	
+
     MobilRooms[room] = dest+"&"+exit;
     log_file("mobile_rooms",identify(PO)+", "+room+", "+dest+", "+exit+".\n");
-	
+
     //Save();
     return 1;
 }
@@ -280,7 +269,7 @@ string query_new_dest(string name)
 {
     if(!MobilRooms || MobilRooms == ([])) return 0;
     if(!MobilRooms[name]) return 0;
-	
+
     return MobilRooms[name];
 }
 
@@ -328,14 +317,14 @@ void RandomizeRooms(string which_area)
 {
     int i,j, x, count;
     string where,exit,*key,*dest, fn;
-    if(!sizeof(AreaSaves)) return;	
+    if(!sizeof(AreaSaves)) return;
     for(x = 0;x < sizeof(AreaSaves);x++)
     {
         fn = AreaSaves[x];
         if(fn != which_area && which_area != "all") continue;
         if(!RestoreThisArea(fn)) continue;
         if(RoomDisabled == "1") continue;
-        if(!whatWhere) continue;		
+        if(!whatWhere) continue;
         key = keys(whatWhere);
         j = sizeof(key);
         for(i=0;i<j;i++)
@@ -350,7 +339,7 @@ void RandomizeRooms(string which_area)
                     where = dest[random(sizeof(dest))];
                     count++;
                 }
-                if(count >= 5) 
+                if(count >= 5)
                 {
                     log_file("room_d_errors", "Moving Room ("+
                     key[i] + ") added an entrance ("+
@@ -363,7 +352,7 @@ void RandomizeRooms(string which_area)
             }
         }
     }
-}	
+}
 
 int clean_up(){return 1;}
 string query_needed(string str)
@@ -374,7 +363,7 @@ mapping query_all_needed() { return NeededRooms; }
 string * values_query_all_needed() { return values(NeededRooms); }
 string * keys_query_all_needed() { return keys(NeededRooms); }
 string *query_area_saves(){ return AreaSaves; }
-int is_savename_okay(string fn) 
+int is_savename_okay(string fn)
 {
     if(!AreaSaves) return 1;
     if(!sizeof(AreaSaves)) return 1;
@@ -385,7 +374,7 @@ int is_savename_okay(string fn)
 
 //Adding all Save and Restore Functions
 //to the bottom of the file now - Saide
-//Note that Save() and Restore() 
+//Note that Save() and Restore()
 //probably shouldn't be used anymore
 
 void Save(){
@@ -442,7 +431,7 @@ int RestoreThisArea(string file)
     seteuid(UID_DAEMONSAVE);
     restore_object(SAVE_DIR+file);
     seteuid(getuid());
-    return 1;		
+    return 1;
 }
 
 void Restore()

@@ -11,12 +11,12 @@ inherit NPC;
 int x,y,w,q;
 object horse_edit, buyer;
 
-static mapping example_variable;  
+nosave mapping example_variable;
 
-static string race_horses; 
+nosave string race_horses;
 string new_horse_name, training_picked;
 
-void create() 
+void create()
 {
    	::create();
         set_name("Baffert");
@@ -91,10 +91,10 @@ void receive_given_item(object obj){
     name = TPQN;
     i = 0;
 	x = 0;
-    real_owner_name = TP->query_true_name();   
-   
+    real_owner_name = TP->query_true_name();
+
     if(!objectp(obj)) return;
-    
+
 	if((string)obj->query_name() != "horse_upgrade") {
         force_me("say I doubt this will help your horse much...");
         force_me("give "+obj->query_name()+" to "+name+"");
@@ -102,10 +102,8 @@ void receive_given_item(object obj){
     }
 	value = (int)obj->check_value();
 	type = (int)obj->check_type();
-	
-        horse_edit =find_object_or_load(STORAGE"horse_edit.c");  
-		horse_edit->item_fun(real_owner_name, type, value); 
-    obj->remove();   
+
+        horse_edit =find_object_or_load(STORAGE"horse_edit.c");
+		horse_edit->item_fun(real_owner_name, type, value);
+    obj->remove();
 	}
-
-

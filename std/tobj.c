@@ -7,7 +7,7 @@
 // 93-06-16   Pallando added create(), reset(), prop() and set_material()
 // 93-06-21   Pallando added init()
 // 93-06-23   Pallando added seteuid(getuid()) to create()
-// traps will be based from here although room.c and bag_logic.c will cantain code that references these 
+// traps will be based from here although room.c and bag_logic.c will cantain code that references these
 // in an attempt to make traps as all encompassing and legitimate as possible
 
 // std contains the def of MOVE
@@ -28,13 +28,13 @@ private mapping ob_data;   // Object data that does not get saved.
 private string cap_name;   // kept in seperate variable for security
 private string true_name;         // kept in seperate variable for security
 private string creator;           // File name of the ob that created an object
-static string d_master;           // File name of an object's domain master ob
+nosave string d_master;           // File name of an object's domain master ob
 string material;                  // Substance object is made from.
 string *magic_properties;  //  Allows all objects to have magic properties
 mapping set_trap_func, trap_set, trap_trigger, trap_ref;  //these will contain the informantion require to run traps
 
 //hiding things..
-private static int hidden, magic_hidden;
+nosave int hidden, magic_hidden;
 
 // To allow this item to use the unique item system
 // Thorn@ShadowGate - 27 June 2000
@@ -94,7 +94,7 @@ int save_me(string fname) {
   return x;
 }
 
-int restore_me(string fname) 
+int restore_me(string fname)
 {
   int x;
   seteuid(UID_ROOT);
@@ -122,7 +122,7 @@ void set(string what, mixed arg) {
     }
 }
 
-static void add(string what, mixed arg) {
+protected void add(string what, mixed arg) {
     if(!ob_data) ob_data = ([]);
     if(functionp(arg) && geteuid(this_object()) != geteuid(arg[0])) return;
     if(stringp(arg) || intp(arg)) arg = ({ arg });
@@ -156,7 +156,7 @@ void set_properties(mapping borg) {
 }
 
 void set_property(string prop, mixed value) {
-	
+
 	if(pointerp(value)){
 		if(!props) props = ([]);
     	if(!props[prop] || !pointerp(props[prop])) props[prop] = ({});
@@ -175,7 +175,7 @@ void set_property(string prop, mixed value) {
 }
 
 mixed query_property(string prop) {
-    if(!props) 
+    if(!props)
     {
         props = ([]);
         return 0;
@@ -214,7 +214,7 @@ string * regexp_query_property (string pattern)
 
    vars = keys(props);
    prop = regexp (vars, pattern);
-   if (!prop) 
+   if (!prop)
         prop = ({});
    return prop;
 }
@@ -300,7 +300,7 @@ string query_eng_short() {
   return str;
 }
 
-string query_cap_name() { 
+string query_cap_name() {
     if(!true_name) return 0;
     if(!cap_name) return 0;
     if(this_object()->query_invis()) return "Someone";
@@ -367,7 +367,7 @@ void set_material( string str )
   if( !str ) material = "/default";
   else material = (  (str[0..0] == "/") ? str : ("/" + str)  );
 
-  // The next few lines do the equivalent of 
+  // The next few lines do the equivalent of
   //   sscanf( material, "%s/%s", type, name );
   // except they search for the / from the other end first.
   parts = explode( material, "/" );
@@ -396,7 +396,7 @@ void set_material( string str )
 
 
 
-int __Read(string str) { 
+int __Read(string str) {
     if(!str) return notify_fail("Read what?\n");
     if(!ob_data || !ob_data["read"])
       return notify_fail(living(this_object()) ? "Read a living thing?\n" :
@@ -483,20 +483,20 @@ int move(mixed dest) {
     // If this item is moved, clear the lease on it to allow
     // the destination to possess it.
     // Thorn@ShadowGate - 28 June 2000
-    if(unique_item == 1) { 
+    if(unique_item == 1) {
       UNIQUE_D->clear_lease(TO->query_unique_id());
       tell_object(find_player("thorn"), "Lease cleared in move().\n");
     }
     return ::move(dest);
 }
- 
+
 int drop() {
 	if(query_property("monsterweapon"))
 		return 1;
     // If this item is dropped, clear the lease on it to allow
     // the destination to possess it.
     // Thorn@ShadowGate - 28 June 2000
-    if(unique_item == 1) { 
+    if(unique_item == 1) {
       UNIQUE_D->clear_lease(TO->query_unique_id());
       tell_object(find_player("thorn"), "Lease cleared in drop().\n");
     }
@@ -515,7 +515,7 @@ int get() {
             " from taking the "+query_name()+".\n", this_player());
 	return 0;
     }
-    
+
     if(TO->trapped("get"))
     	return TO->do_special_trap("get");
     return 1;
@@ -528,7 +528,7 @@ void set_magic_properties(string *temp) {
 string *query_magic_properties(int a) {
 	string *temp;
 	int x;
-	
+
 	temp = ({});
 	if(!a) return magic_properties;
 	if(a >= sizeof(magic_properties)) return magic_properties;
@@ -548,9 +548,9 @@ string query_serial_number() { return serial_number; }
 void clear_all_traps(string *action){
 	//special for blanket clearing of all traps
 	//if action is empty ({}) will clear for all members if otherwise
-	
+
 	int num, j;
-	
+
 	if(!(num = sizeof(action))) {
 		trap_trigger = ([]);
 		set_trap_func = ([]);
@@ -561,7 +561,7 @@ void clear_all_traps(string *action){
 	}
 	return;
 }
-	
+
 void set_trap_functions(string *what, string *funcs, string *trigger){
     int i,num;
 	if(!trap_set) trap_set = ([]);
@@ -613,8 +613,8 @@ int trapped(string action){
 
 int do_trap(string str){
 	string verb;
-	
-	
+
+
 	verb = query_verb();
 	if(!trap_set[trap_trigger[verb]]) return 0;
 	if(trap_trigger[verb]);
@@ -624,9 +624,9 @@ int do_trap(string str){
 
 int do_spec_trap(string verb){
 	mapping traps;
-	
+
 	traps = query_traps();
-	
+
 	if(!traps || traps == ([]) || !traps[verb]) return 0;
 	return call_other(TO,traps[verb]);
 }
@@ -635,7 +635,7 @@ int temp_find_trap(string str){
   	int num;
   	string what;
   	if(!str) return 0;
-  
+
   	if(sscanf(str,"traps in %s",what)!=1) return 0;
 	if(!TO->is_room())
 		if(!id(what)) return 0;
@@ -648,7 +648,7 @@ int temp_remove_trap(string str){
         int num;
 	string what;
 	if(!str) return 0;
-	
+
 	if(sscanf(str,"traps in %s",what)!=1) return 0;
 	if(!TO->is_room())
 		if(!id(what)) return 0;
@@ -659,7 +659,7 @@ int temp_remove_trap(string str){
 
 // To allow this item to use the unique item system
 // Thorn@ShadowGate - 27 June 2000
-varargs void set_unique(int x) { 
+varargs void set_unique(int x) {
     if(undefinedp(x)) unique_item = 1;
     else unique_item = x;
 }
@@ -668,7 +668,7 @@ varargs void set_unique(int x) {
 // coder.  There is no query function for this since
 // the information will be stored in the UNIQUE_D
 // Thorn@ShadowGate - 27 June 2000
-void set_lease(int x) { 
+void set_lease(int x) {
     unique_lease = x;
 }
 

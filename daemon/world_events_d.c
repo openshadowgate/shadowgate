@@ -10,41 +10,25 @@ Random World/Area Events - bonus experience for certain time or when certain eve
 inherit DAEMON;
 
 mapping WORLD_EVENTS;
-static int MAX_WORLD_EVENTS = 5;
-static int WORLD_EVENT_CHANCE = 100+random(11);
-static int WEEK_DELAY = 604800;
-static int WEEKLY_START_TIME = 1501261255; // Fri Jul 28 17:00:55 GMT 2017
-static int WEEKLY_EVENT_LENGTH = 216000;
-static int CHECKING = 0;
+nosave int MAX_WORLD_EVENTS = 5;
+nosave int WORLD_EVENT_CHANCE = 100+random(11);
+nosave int WEEK_DELAY = 604800;
+nosave int WEEKLY_START_TIME = 1501261255; // Fri Jul 28 17:00:55 GMT 2017
+nosave int WEEKLY_EVENT_LENGTH = 216000;
+nosave int CHECKING = 0;
 int NEXT_WEEKLY_EVENT, NEXT_WEEKLY_EVENT_END, WEEKLY_EVENT_ONGOING;
-void world_events_save();
-void world_events_restore();
-void establish_random_events();
-int check_events();
-void create();
-varargs mixed parsable_world_events(object who);
-int event_time_remaining(string event);
-void announce_events();
-mixed query_event_notification(string eventName);
-int additional_mod();
-varargs int get_exp_modifier(object who);
-mixed check_exp_events(int exp, object who);
-void kill_event(string eventName);
-varargs void inject_event(mapping eventMap, int flag);
-int get_random_treasure_modifier(object who);
-varargs int treasure_drop_rate_event(int chance, object who);
 
 void world_events_save()
 {
     seteuid(UID_ROOT);
     save_object(WORLD_EVENT_SAVE);
-    seteuid(geteuid());    
+    seteuid(geteuid());
 }
 
 void create()
 {
     if(!mapp(WORLD_EVENTS)) world_events_restore();
-    if(!mapp(WORLD_EVENTS)) 
+    if(!mapp(WORLD_EVENTS))
     {
         WORLD_EVENTS = ([]);
     }
@@ -57,7 +41,7 @@ void world_events_restore()
 {
     seteuid(UID_ROOT);
     restore_object(WORLD_EVENT_SAVE);
-    seteuid(geteuid());    
+    seteuid(geteuid());
 }
 
 int check_events()
@@ -68,22 +52,22 @@ int check_events()
     {
         /*if(objectp(find_player("saide")))
         {
-            tell_object(find_player("saide"), "Removing "+identify(TO)+"!");                     
+            tell_object(find_player("saide"), "Removing "+identify(TO)+"!");
         }*/
         TO->remove();
         return 0;
     }
     if(!mapp(WORLD_EVENTS)) world_events_restore();
-    if(!mapp(WORLD_EVENTS)) 
+    if(!mapp(WORLD_EVENTS))
     {
         WORLD_EVENTS = ([]);
         return 0;
     }
-    if(CHECKING) 
+    if(CHECKING)
     {
         /*if(objectp(find_player("saide")))
         {
-            tell_object(find_player("saide"), "calling check_events() before the first call is completed?");                     
+            tell_object(find_player("saide"), "calling check_events() before the first call is completed?");
         }*/
         return 0;
     }
@@ -95,7 +79,7 @@ int check_events()
         if(time() > WORLD_EVENTS[thisEvent]["end time"])
         {
             eventName = WORLD_EVENTS[thisEvent]["event name"];
-            
+
             if(WORLD_EVENTS[thisEvent]["announce"])
             {
                 if(WORLD_EVENTS[thisEvent]["announce to"] == "world")
@@ -117,7 +101,7 @@ int check_events()
                         broadcast_area(eventArea, msg);
                     }
                 }
-            }                      
+            }
             if(WORLD_EVENTS[thisEvent]["increases delay"]) WORLD_EVENT_CHANCE -= additional_mod();
             if(WORLD_EVENTS[thisEvent]["weekly event"]) WEEKLY_EVENT_ONGOING = 0;
             map_delete(WORLD_EVENTS, thisEvent);
@@ -128,7 +112,7 @@ int check_events()
     }
     if(flag) world_events_save();
     CHECKING = 0;
-    return sizeof(keys(WORLD_EVENTS));    
+    return sizeof(keys(WORLD_EVENTS));
 }
 
 varargs int get_exp_modifier(object who)
@@ -164,13 +148,13 @@ varargs int get_exp_modifier(object who)
 mixed check_exp_events(int exp, object who)
 {
     int modifier, x;
-    if(!intp(exp)) return exp;    
-    if(!check_events()) return exp;    
+    if(!intp(exp)) return exp;
+    if(!check_events()) return exp;
     modifier = get_exp_modifier(who);
-    if(!modifier) return exp; 
+    if(!modifier) return exp;
     if(modifier > 0) exp += to_float((exp * modifier) / 100);
     if(modifier < 0) exp -= to_float((exp * modifier) / 100);
-    return exp;    
+    return exp;
 }
 
 varargs int treasure_drop_rate_event(int chance, object who)
@@ -194,7 +178,7 @@ int get_random_treasure_modifier(object who)
     {
         myEvent = events[x];
         if(WORLD_EVENTS[myEvent]["type"] != "treasure drop rate") continue;
-        if(WORLD_EVENTS[myEvent]["announce to"] == "world") 
+        if(WORLD_EVENTS[myEvent]["announce to"] == "world")
         {
             mod += WORLD_EVENTS[myEvent]["modifier"];
             continue;
@@ -224,7 +208,7 @@ varargs int stacking_bonus_active(object who, int neg)
     {
         myEvent = events[x];
         if(WORLD_EVENTS[myEvent]["type"] != checkbonus) continue;
-        if(WORLD_EVENTS[myEvent]["announce to"] == "world") 
+        if(WORLD_EVENTS[myEvent]["announce to"] == "world")
         {
             mod += WORLD_EVENTS[myEvent]["modifier"];
             if(mod) return mod;
@@ -236,7 +220,7 @@ varargs int stacking_bonus_active(object who, int neg)
         if(strsrch(whoLoc, eventLoc) == -1) continue;
         mod += WORLD_EVENTS[myEvent]["modifier"];
         if(mod) return mod;
-        continue;        
+        continue;
     }
     return mod;
 }
@@ -260,7 +244,7 @@ void kill_event(string eventName)
 }
 
 varargs void inject_event(mapping eventMap, int flag)
-{   
+{
     string eventName, *events, eventType, announceTo, start_msg, end_msg, notification;
     int x, len, announce, eChance;
     mixed mod;
@@ -285,14 +269,14 @@ varargs void inject_event(mapping eventMap, int flag)
         if(!stringp(end_msg = eventMap[eventName]["end message"]))
         {
             end_msg = "%^BOLD%^%^RED%^The event "+eventName+" has ended!%^RESET%^";
-        }       
+        }
         if(undefinedp(announce)) announce = 1;
-        if(undefinedp(len)) len = 25 + random(31) + random(31);       
+        if(undefinedp(len)) len = 25 + random(31) + random(31);
         if(eventType == "monster modifications")
         {
             if(!mapp(mod = eventMap[eventName]["modifier"])) continue;
         }
-        else 
+        else
         {
             if(!intp(mod = eventMap[eventName]["modifier"])) mod = 25 + random(10) + random(10) + random(10);
         }
@@ -300,8 +284,8 @@ varargs void inject_event(mapping eventMap, int flag)
         if(!stringp(notification = eventMap[eventName]["notification"]))
         {
             notification = mod+"% " + eventType;
-        }        
-        WORLD_EVENTS += ([eventName : (["type" : eventType, "end time": (time() + (len*60)), 
+        }
+        WORLD_EVENTS += ([eventName : (["type" : eventType, "end time": (time() + (len*60)),
         "event name" : eventName, "modifier" : mod, "announce" : announce, "announce to" : announceTo,
         "announce start" : start_msg, "announce end" : end_msg, "notification" : notification, "announced" : 0]),]);
         world_events_save();
@@ -318,7 +302,7 @@ int monster_modification_event(int to_mod, string myMod, object who)
     string eventLoc, whoLoc, *events, thisEvent, *mods, thisMod;
     object myMaster;
     mapping modMap;
-    
+
     if(!intp(to_mod)) return to_mod;
     if(!objectp(who)) return to_mod;
     if(!stringp(myMod)) return to_mod;
@@ -337,7 +321,7 @@ int monster_modification_event(int to_mod, string myMod, object who)
         thisEvent = events[x];
         if(WORLD_EVENTS[thisEvent]["type"] != "monster modifications") continue;
         if(!stringp(eventLoc = WORLD_EVENTS[thisEvent]["announce to"])) continue;
-        if(eventLoc == "world") modMap = WORLD_EVENTS[thisEvent]["modifier"];            
+        if(eventLoc == "world") modMap = WORLD_EVENTS[thisEvent]["modifier"];
         else if(strsrch(whoLoc, eventLoc) != -1) modMap = WORLD_EVENTS[thisEvent]["modifier"];
         if(!mapp(modMap)) continue;
         if(!sizeof(mods = keys(modMap))) continue;
@@ -365,19 +349,19 @@ void establish_random_events()
     if(random(WORLD_EVENT_CHANCE)) return;
     switch(random(10))
     {
-        case 0..4:   
+        case 0..4:
             if(WORLD_EVENTS["WorldWide Bonus Experience"]) return;
             length = 25 + random(31) + random(31);
             mod = 25 + random(10) + random(10) + random(10);
-            eventName = "WorldWide Bonus Experience";            
+            eventName = "WorldWide Bonus Experience";
             WORLD_EVENTS += ([eventName : (["type" : "exp bonus", "end time" : (time() + (length*60)),
             "event name" : eventName, "modifier" : mod, "announce" : 1, "announce to" : "world",
             "announce start" : "%^BOLD%^%^WHITE%^The %^BOLD%^%^CYAN%^"+eventName+"%^BOLD%^%^WHITE%^ event "+
             "has launched and will be active for the next "+length+" minutes. Any experience awarded during "+
-            "this time will award an additional %^BOLD%^%^CYAN%^("+mod+"%)%^BOLD%^%^WHITE%^!%^RESET%^", 
-            "announce end": "%^BOLD%^%^RED%^The event "+eventName + " event has ended!%^RESET%^", "announced" : 0, 
-            "notification" : mod+"% Bonus Exp", "increases delay" : 1]), ]);            
-            world_events_save();       
+            "this time will award an additional %^BOLD%^%^CYAN%^("+mod+"%)%^BOLD%^%^WHITE%^!%^RESET%^",
+            "announce end": "%^BOLD%^%^RED%^The event "+eventName + " event has ended!%^RESET%^", "announced" : 0,
+            "notification" : mod+"% Bonus Exp", "increases delay" : 1]), ]);
+            world_events_save();
             flag = 1;
             break;
         case 5..9:
@@ -389,19 +373,19 @@ void establish_random_events()
             "event name" : eventName, "modifier" : mod, "announce" : 1, "announce to" : "world",
             "announce start" : "%^BOLD%^%^WHITE%^The %^BOLD%^%^CYAN%^"+eventName+"%^BOLD%^%^WHITE%^ event "+
             "has launched and will be active for the next "+length+" minutes. Monsters world wide will "+
-            "have a %^BOLD%^%^CYAN%^("+mod+"%)%^BOLD%^%^WHITE%^ increased chance to drop random treasure!%^RESET%^", 
-            "announce end" : "%^BOLD%^%^RED%^The event "+eventName+" has ended!%^RESET%^", "announced" : 0, 
+            "have a %^BOLD%^%^CYAN%^("+mod+"%)%^BOLD%^%^WHITE%^ increased chance to drop random treasure!%^RESET%^",
+            "announce end" : "%^BOLD%^%^RED%^The event "+eventName+" has ended!%^RESET%^", "announced" : 0,
             "notification" : mod+"% higher random treasure drop rate.", "increases delay" : 1]),]);
             world_events_save();
             flag = 1;
             break;
-    }    
-    if(flag) 
+    }
+    if(flag)
     {
         announce_events();
         WORLD_EVENT_CHANCE += additional_mod();
     }
-    return;    
+    return;
 }
 
 void establish_weekend_events()
@@ -412,7 +396,7 @@ void establish_weekend_events()
     //tell_object(find_player("saide"), "world_events = "+identify(WORLD_EVENTS));
     if(!mapp(WORLD_EVENTS)) return;
     events = keys(WORLD_EVENTS);
-    if(time() > NEXT_WEEKLY_EVENT && time() > NEXT_WEEKLY_EVENT_END) 
+    if(time() > NEXT_WEEKLY_EVENT && time() > NEXT_WEEKLY_EVENT_END)
     {
         NEXT_WEEKLY_EVENT = 0;
         NEXT_WEEKLY_EVENT_END = 0;
@@ -442,38 +426,38 @@ void establish_weekend_events()
     if(WEEKLY_EVENT_ONGOING) return;
     if(NEXT_WEEKLY_EVENT > time()) return;
     if(WORLD_EVENTS["Fate's Conundrum!"]) return;
-    
+
     length = (NEXT_WEEKLY_EVENT_END - time()) / (60 * 60);
-    eventName = "Fate's Conundrum!"; 
-    WEEKLY_EVENT_ONGOING = 1;            
-    flag = 1;  
+    eventName = "Fate's Conundrum!";
+    WEEKLY_EVENT_ONGOING = 1;
+    flag = 1;
     eventDesc = "%^BOLD%^%^WHITE%^A %^BOLD%^%^GREEN%^ROAR%^BOLD%^%^WHITE%^ echoes across the world....\n\n"+
                 "%^BOLD%^%^BLACK%^Suddenly a %^BOLD%^%^BLUE%^myst%^CYAN%^e%^BLUE%^r%^CYAN%^iou%^BOLD%^%^BLUE%^s %^BOLD%^%^WHITE%^being "+
                 "%^BOLD%^%^BLACK%^is visible to you....\n\n"+
                 "%^BOLD%^%^GREEN%^You watch in %^BOLD%^%^RED%^HORROR%^BOLD%^%^GREEN%^ as it tosses a %^BOLD%^%^CYAN%^large glowing "+
                 "%^BOLD%^%^GREEN%^dice toward you!\n\n";
-                
+
     mod = 15 + random(5);
     eventType = "exp bonus";
     eventNotify = mod+"% Bonus Exp!";
     eventMod = "%^BOLD%^%^WHITE%^The number %^CYAN%^1%^BOLD%^%^WHITE%^ lands facing up!!";
-    
+
     eventDesc += eventMod +"\n\n";
     eventDesc += "%^BOLD%^%^BLACK%^The %^BOLD%^%^BLUE%^myst%^CYAN%^e%^BLUE%^r%^CYAN%^iou%^BOLD%^%^BLUE%^s %^BOLD%^%^WHITE%^being "+
                  "%^BOLD%^%^GREEN%^CACKLES%^BOLD%^%^BLACK%^ insanely for a brief moment before vanishing as suddenly as it appeared!%^RESET%^\n\n";
     eventDesc += "\n\n%^BOLD%^%^WHITE%^"+eventName+"%^BOLD%^%^WHITE%^ has been triggered!%^RESET%^";
-    
+
     WORLD_EVENTS += ([eventName : (["type" : eventType, "end time" : NEXT_WEEKLY_EVENT_END,
     "event name" : eventName, "modifier" : mod, "announce" : 1, "announce to" : "world",
-    "announce start" : eventDesc, "announce end" : "%^BOLD%^%^RED%^The event "+eventName+" has ended!%^RESET%^", "announced" : 0, 
+    "announce start" : eventDesc, "announce end" : "%^BOLD%^%^RED%^The event "+eventName+" has ended!%^RESET%^", "announced" : 0,
     "notification" : eventNotify, "increases delay" : 0, "weekly event" : 1]),]);
-    
-    if(flag) 
+
+    if(flag)
     {
-        world_events_save(); 
+        world_events_save();
         announce_events();
     }
-    return;    
+    return;
 }
 
 
@@ -492,7 +476,7 @@ int event_time_remaining(string eventName)
     int remaining;
     if(!stringp(eventName)) return 0;
     if(!check_events()) return 0;
-    if(!WORLD_EVENTS[eventName]) return 0;    
+    if(!WORLD_EVENTS[eventName]) return 0;
     if(!intp(remaining = WORLD_EVENTS[eventName]["end time"])) return 0;
     remaining -= time();
     //remaining /= 60;
@@ -526,7 +510,7 @@ void announce_events()
                 continue;
             }
         }
-        continue;    
+        continue;
     }
     return;
 }
@@ -567,7 +551,7 @@ void heart_beat()
     {
         /*if(objectp(find_player("saide")))
         {
-            tell_object(find_player("saide"), "Removing "+identify(TO)+"!");                     
+            tell_object(find_player("saide"), "Removing "+identify(TO)+"!");
         }*/
         TO->remove();
         return;

@@ -23,8 +23,8 @@ private void unsubscribe(string);
 private void show_headers();
 private void post(string, function);
 
-static void ask_what_next(string);
-static void ask_about_group(string);
+protected void ask_what_next(string);
+protected void ask_about_group(string);
 
 #define STRIP_UNSUB(x) ((x) ? ((x)[0] == '#' ? (x)[1..strlen(x)] : x) : 0)
 #define IS_UNSUB(x) ((x) && ((x)[0] == '#'))
@@ -39,13 +39,13 @@ int *ids;
 
 /* The following code is imported from the first newsreader I ever
    wrote, which is also one of the first LPC objects I ever wrote :)
-   It's hideously inefficient and in need of a rewrite, but it will 
+   It's hideously inefficient and in need of a rewrite, but it will
    do for now */
 
 int included(int id,string read) {
     string *ranges;
     int i,begin,end;
-    
+
     if (!read) return 0;
     ranges=explode(read,",");
     for (i=0;i<sizeof(ranges);i++) {
@@ -70,7 +70,7 @@ int GetRight(string range) {
 
 int GetLeft(string range) {
     int begin,end;
-    
+
     if (sscanf(range,"%d-%d",begin,end)==2) return begin;
     sscanf(range,"%d",begin);
     return begin;
@@ -123,7 +123,7 @@ private void exit(int aborted) {
     string *groups;
     int i, n;
 
-    if (!aborted) 
+    if (!aborted)
         write("End of news.");
 
     unguarded( (: write_file, "/daemon/save/news/rn/"+who->query_name(),
@@ -194,7 +194,7 @@ private void next_group() {
     main_loop();
 }
 
-static void ask_what_next(string response) {
+protected void ask_what_next(string response) {
     int num;
 
     switch (response) {
@@ -208,7 +208,7 @@ static void ask_what_next(string response) {
     case "c": /* catch up */
         {
             int i,n;
-            for (i=0, n=sizeof(ids); i<n; i++) 
+            for (i=0, n=sizeof(ids); i<n; i++)
                 add_read(groups[0], ids[i]);
         }
         next_group();
@@ -221,7 +221,7 @@ static void ask_what_next(string response) {
         break;
     case "F":
     case "f": /* followup */
-        { 
+        {
             string insert;
 
             if (ids[0] == -1) {
@@ -372,7 +372,7 @@ private void list_groups() {
     }
 }
 
-static void ask_subscribe(string response, string group) {
+protected void ask_subscribe(string response, string group) {
     switch (response) {
     case "y":
         subscribe(group);
@@ -404,7 +404,7 @@ private void goto_group( string group ) {
 
 }
 
-static void ask_about_group(string response) {
+protected void ask_about_group(string response) {
     switch (response) {     /* break; instead of return; goes to next group */
     case "q": /* quit */
         exit(1);
@@ -412,7 +412,7 @@ static void ask_about_group(string response) {
     case "c": /* catch up */
         {
             int i,n;
-            for (i=0, n=sizeof(ids); i<n; i++) 
+            for (i=0, n=sizeof(ids); i<n; i++)
                 add_read(groups[0], ids[i]);
             break;
         }
@@ -467,7 +467,7 @@ sizeof(ids), groups[0]);
     next_group();
 }
 
-static void ask_about_new_groups(string response, string *groups_left) {
+protected void ask_about_new_groups(string response, string *groups_left) {
     int n;
 
     if (response) {
@@ -475,7 +475,7 @@ static void ask_about_new_groups(string response, string *groups_left) {
         if ((n=sizeof(groups_left)) <= 1) {
             start_main_loop();
             return;
-        } 
+        }
         groups_left = groups_left[1..n];
     }
     printf("group '%s' is new; subscribe? (y/n) >", groups_left[0]);
@@ -526,9 +526,9 @@ private void end_post(string subj, string group, function when_done) {
     evaluate(when_done);
 }
 
-static void get_subject(string subj, string group, function when_done) {
-    who->edit("/tmp/rn."+who->query_name(), 
-              (: end_post, subj, group, when_done :), 
+protected void get_subject(string subj, string group, function when_done) {
+    who->edit("/tmp/rn."+who->query_name(),
+              (: end_post, subj, group, when_done :),
               (: abort_post, when_done :));
 }
 
@@ -542,7 +542,7 @@ int start_up( string str ) {
     int n;
 
     int posting;
-    
+
     who = this_player();
     if (str) {
         args = explode(str, " ");

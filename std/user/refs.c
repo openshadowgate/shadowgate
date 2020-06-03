@@ -4,7 +4,7 @@
 // Author:     Douglas Reay (Pallando @ TMI, Nightmare, etc)
 // Date V1.0:  93-06-05
 
-static mapping refs;
+nosave mapping refs;
 
 void set_refs( mapping a ) { refs = ( mapp( a ) ? a : ([]) ); }
 

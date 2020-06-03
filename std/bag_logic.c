@@ -6,7 +6,7 @@
 //      lockable functions added 21 October 1992 by Descartes
 //  cleaned up some fail messages to be more meaningful, also changed to consistently use #defines for ETO, TP, etc. to make it more readable, last change was 10/02 *Styx 8/19/03
 //   added item_allowed() function to enable having special restrictions at the item level *Styx*  11/30/04
-// edited to allow items to be put into containers on the ground, and to give the right message when putting something onto a table. Lujke 2016 
+// edited to allow items to be put into containers on the ground, and to give the right message when putting something onto a table. Lujke 2016
 
 #include <std.h>
 #include <move.h>
@@ -24,11 +24,11 @@ mapping lock_data;
 int lock_dif, solve_once = 1;
 void toggle_lock();
 int item_allowed(object item);  // use this function at the object level if needed, don't call this one *Styx*  12/04/04
-static object pilfered_for, pilfered_by, pilfered_at;
+nosave object pilfered_for, pilfered_by, pilfered_at;
 
-void init() 
+void init()
 {
-    ::init(); //added by Saide in an attempt to fix the 
+    ::init(); //added by Saide in an attempt to fix the
     //bug where writing cannot be read on certain objects (contains specifically
     //in dealing with this file) - June 08
     add_action("get_from","get");
@@ -43,23 +43,23 @@ void init()
 varargs receive_objects(object ob)
 
 {
-    //Added in order to fix lockable chests so that 
-    //you cant put items into them while they are locked 
-    //this assumes that if a chest is locked it is therefore 
+    //Added in order to fix lockable chests so that
+    //you cant put items into them while they are locked
+    //this assumes that if a chest is locked it is therefore
     //also closed - Saide - 8/24/07
     //write(identify(TO));
     if(!objectp(TO)) return ::receive_objects(ob);
-    if(!TO->query_lock_data()) 
+    if(!TO->query_lock_data())
     {
         return ::receive_objects(ob);
     }
     if((string)TO->query_lock_data("status") == "locked")
     {
-        if(!TO->query_closed()) 
+        if(!TO->query_closed())
         {
             TO->set_closed(1);
         }
-    }       
+    }
     return ::receive_objects(ob);
 }
 string *query_open_riddles() { return open_riddles; }
@@ -98,10 +98,10 @@ int isMagic(){
     return p;
 }
 
-int query_lock_data(string str) 
+int query_lock_data(string str)
 {
     if(!str) {
-        if(!lock_data) {  return 0; } 
+        if(!lock_data) {  return 0; }
         else {  return 1; }
     }
     switch(str) {
@@ -116,7 +116,7 @@ int query_value(){
     int val;
     int n, i;
     object * inven;
-    
+
     val = ::query_value();
     inven = all_inventory(TO);
     for (i = 0;i<sizeof(inven);i++) {
@@ -125,14 +125,14 @@ int query_value(){
     return val;
 }
 
-int item_allowed(object item) 
+int item_allowed(object item)
 {
     return 1;   // to have a default in for when it's not restricted
 }
 
 int is_table(){ return -1;} //added by lujke, to allow for tables
 
-int put_into(string str) 
+int put_into(string str)
 {
     int res, i, silly;
 
@@ -156,14 +156,14 @@ to get their lantern out, etc. *Styx*  12/23/03, last change 8/19/03
    }
 */
 
-    if(stringp(str) && sscanf(str,"%s in %s",this,that) == 2) 
+    if(stringp(str) && sscanf(str,"%s in %s",this,that) == 2)
     {
-       
+
         if(objectp(shapeshift_restricted_commands=to_object("/std/races/shapeshifted_races/restricted_commands")))
         {
             if(!avatarp(TP))
             {
-               
+
                 if(!shapeshift_restricted_commands->allow_shifted_command(TP,"put",this+""+that))
                 {
                     tell_object(TP,"You can't put "+this+" in "+that+" while shapeshifted.");
@@ -173,76 +173,76 @@ to get their lantern out, etc. *Styx*  12/23/03, last change 8/19/03
             }
         }
 
-        if(present(this,TP)) 
+        if(present(this,TP))
         {
-            if(present(that,TP) || present(that,ETP)) 
+            if(present(that,TP) || present(that,ETP))
             {
                 ths = present(this,TP);
                 tht = present(that, TP);
-                
-                if(ths == tht) 
+
+                if(ths == tht)
                 { /* Plura 930208 */
                     notify_fail("Get real!\n");
                     return 0;
                 }
-            
+
 //reversed the order of the next two lines, to make it possible to put
 // stuff in a container on the ground. Lujke
-                if(!tht) tht = present(that, ETP);        
-                    if(tht != TO) return 0;               
-                                               
-                if(ths->drop()) 
+                if(!tht) tht = present(that, ETP);
+                    if(tht != TO) return 0;
+
+                if(ths->drop())
                 {
                     notify_fail("You cannot do that!\n");
                     return 0;
                 }
-            
-                if(tht->receive_objects()) 
+
+                if(tht->receive_objects())
                 {
-                    if(!tht->item_allowed(ths)) 
+                    if(!tht->item_allowed(ths))
                     {
                         notify_fail("You fail to put "+ths->query_short()+" in "+tht->query_short()+".\n");
                         return 0;
                     }
 
-      
-                    if(ths->is_baggy() &&  sizeof(all_inventory(ths))) 
+
+                    if(ths->is_baggy() &&  sizeof(all_inventory(ths)))
                     {
                         notify_fail("You realize "+ths->query_short()+" is too full to fit into "+tht->query_short()+".\n");
                         return 0;
                     }
-               
-                    desc = tht->query_short(); //getting this before changing contents because some containers now 
+
+                    desc = tht->query_short(); //getting this before changing contents because some containers now
                                              // change short description to reflect contents. Lujke 2016
                     res = (int)ths->move(tht);
- //next 2 lines added, and write lines altered to give correct message 
+ //next 2 lines added, and write lines altered to give correct message
  // when putting something on a table. Lujke
                     prep = " in ";
-                    if (is_table()== 1) {prep = " on ";} 
-                    if(res == MOVE_OK) 
+                    if (is_table()== 1) {prep = " on ";}
+                    if(res == MOVE_OK)
                     {
-                        write("You put "+ths->query_short()+ prep 
+                        write("You put "+ths->query_short()+ prep
                         +desc+".\n");
-                        tell_room(ETP,TPQCN+" puts "+ths->query_short()+ prep 
+                        tell_room(ETP,TPQCN+" puts "+ths->query_short()+ prep
                         +desc+".",TP);
                         return 1;
                     }
-                    
+
                     if(res == MOVE_NO_ROOM) { notify_fail("For some reason it does not fit...\n"); }
-               
+
                     if(res == MOVE_NOT_ALLOWED) { notify_fail("You are not allowed to do that...\n"); }
-               
+
                     return 0;
                 }
-            
+
                 notify_fail("It is closed.\n");
-                return 0;         
+                return 0;
             }
-         
+
             notify_fail(capitalize(that)+" is not here.\n");
             return 0;
         }
-      
+
         notify_fail("You are not carrying "+this+".\n");
         return 0;
     }
@@ -262,13 +262,13 @@ int actually_get(object who, object what)
     if(!objectp(what)) return 0;
     if(!objectp(who)) return 0;
     if(!objectp(TO)) return 0;
-    if(who->query_bound() || who->query_unconscious()) 
-    { 
+    if(who->query_bound() || who->query_unconscious())
+    {
         who->send_paralyzed_message("info",who);
         return 1;
     }
     res = (int)what->move(TP);
-    if(res == MOVE_OK) 
+    if(res == MOVE_OK)
     {
         if(objectp(what))
         {
@@ -282,10 +282,10 @@ int actually_get(object who, object what)
             return 1;
         }
     }
-    
+
     if(res == MOVE_NOT_ALLOWED) tell_object(who, "You can't do that!");
     if(res == MOVE_NO_ROOM) tell_object(who, what->query_short() + ": Too heavy!");
-    return 1;   
+    return 1;
 }
 
 void delayed_get(object ob, object who, object where)
@@ -308,16 +308,16 @@ void delayed_get(object ob, object who, object where)
     return;
 }
 
-int get_from(string str) 
+int get_from(string str)
 {
     int silly, res, i, delay;
     object ob, tmp, *inv,shapeshift_restricted_commands;
     string what, where;
-   
+
     if(!stringp(str)) return 0;
     if(TP->query_ghost()) return 0;
-    if(TP->query_bound() || TP->query_unconscious()) 
-    { 
+    if(TP->query_bound() || TP->query_unconscious())
+    {
         TP->send_paralyzed_message("info",TP);
         return 1;
     }
@@ -329,12 +329,12 @@ int get_from(string str)
    }
    */
     if(sscanf(str, "%s from %s", what, where) != 2) return 0;
-   
+
     if(objectp(shapeshift_restricted_commands=to_object("/std/races/shapeshifted_races/restricted_commands")))
     {
         if(!avatarp(TP))
         {
-           
+
             if(!shapeshift_restricted_commands->allow_shifted_command(TP,"get",what+""+where))
             {
                 tell_object(TP,"You can't get "+what+" from "+where+" while shapeshifted.");
@@ -347,21 +347,21 @@ int get_from(string str)
     if(id(where)) tmp = TO;
     else tmp = parse_objects(ETO, where);
     if(tmp != TO) return 0;
-   
-    if(TO->receive_objects()) 
+
+    if(TO->receive_objects())
     {
-        if(what != "all") 
+        if(what != "all")
         {
             ob = present(what, TO);
             if(!ob) ob = parse_objects(TO, what);
-            if(!ob) 
+            if(!ob)
             {
                 write("There is no "+what+" in "+TO->query_short()+".");
                 return 1;
             }
             if(TO->is_chest())
             {
-                if(objectp(TP)) 
+                if(objectp(TP))
                 {
                     if(sizeof(TP->query_attackers()))
                     {
@@ -372,7 +372,7 @@ int get_from(string str)
                         }
                         delay = (int)ob->query_weight() * 3;
                         if(delay < 2) delay = 2;
-                        if(delay > 10) delay = 10;                        
+                        if(delay > 10) delay = 10;
                         if(objectp(pilfered_for))
                         {
                             tell_object(TP, "You are already pilfering through the "+TO->query_short()+
@@ -382,10 +382,10 @@ int get_from(string str)
                         tell_object(TP, "You begin pilfering through "+TO->query_short() +
                         " in an attempt to get "+ob->query_short()+ " from it!");
                         tell_room(ETP, TPQCN+" begins pilfering through "+TO->query_short()+"!", TP);
-                        
+
                         pilfered_for = ob;
                         pilfered_by = TP;
-                        pilfered_at = ETP;                        
+                        pilfered_at = ETP;
                         call_out("delayed_get", delay, ob, TP, ETP);
                         return 1;
                     }
@@ -402,7 +402,7 @@ int get_from(string str)
             return 1;
         }
         inv = all_inventory(TO);
-        if(!sizeof(inv)) 
+        if(!sizeof(inv))
         {
             write("There is nothing in "+TO->query_short()+".");
             return 1;
@@ -418,11 +418,11 @@ int get_from(string str)
                 all_inventory(TO)->move(ETP);
                 TO->move(ETP);
                 clear_pilfer();
-                return 1;              
+                return 1;
             }
         }
-        for(i=0; i<sizeof(inv); i++) 
-        {            
+        for(i=0; i<sizeof(inv); i++)
+        {
             actually_get(TP, inv[i]);
             continue;
         }
@@ -442,27 +442,27 @@ string query_closed_long_desc() {    return closed_long_desc;}
 
 string query_cont_long(){   return container::query_long("");}
 
-string query_long(string str) 
+string query_long(string str)
 {
    object *inv;
    int i;
    string desc;
    // added by lujke, to deal with a problem where chests appeared to be
    // closed even when open. March 2008
-   if (query_possible_to_close()){  
+   if (query_possible_to_close()){
      if (query_closed()){
        desc = query_closed_long_desc();
      } else {
        desc = query_open_long_desc();
      }
-   } 
+   }
    if (!stringp(desc))
    {
      desc = container::query_long(str);
    }
    //does this container sort it's own contents? Saide, December 2016
    if(TO->is_sortable_container()) return desc;
-   
+
  // end of additions by lujke
 // desc = container::query_long(str); This line replaced by additions above
    if((int)TO->receive_objects() || (int)TO->clear()) {
@@ -491,7 +491,7 @@ mixed do_riddle_open(object ch)
 {
     int which_riddle;
     string current_riddle, riddle_answer;
-    if(!objectp(ch)) 
+    if(!objectp(ch))
     {
         write("That is not here!");
         return 1;
@@ -541,19 +541,19 @@ void answer_open_riddle(string input, string riddle, string answer, object ch)
         riddle_header();
         riddle_solvers += ({environment(ch)->query_name()});
         if((string)ch->query_open_long_desc())
-        {                        
+        {
             ch->set_long((string)ch->query_open_long_desc());
             ch->toggle_closed();
             write("You open "+ch->query_short()+".");
-            tell_room(ETP,TPQCN+" opens "+       
+            tell_room(ETP,TPQCN+" opens "+
             ch->query_short()+ ".",TP);
             return;
         }
         return;
     }
-}       
+}
 
-int open_container(string str) 
+int open_container(string str)
 {
     object ch;
     if(!stringp(str)) {
@@ -569,33 +569,33 @@ int open_container(string str)
         TP->send_paralyzed_message("info",TP);
         return 1;
     }
-    if(ch->query_lock_data()) 
+    if(ch->query_lock_data())
     {
-        if((string)ch->query_lock_data("status") == "locked") 
+        if((string)ch->query_lock_data("status") == "locked")
         {
             write("It is locked.\n");
             return 1;
         }
     }
-    if(sizeof(open_riddles) && (!solve_once || member_array(environment(ch)->query_name(), riddle_solvers) == -1)) 
+    if(sizeof(open_riddles) && (!solve_once || member_array(environment(ch)->query_name(), riddle_solvers) == -1))
     {
         do_riddle_open(ch);
         return 1;
     }
     if(ch->receive_objects())
         write("It is already open.");
-    else 
+    else
     {
-        if(ch->is_trapped("open")) 
+        if(ch->is_trapped("open"))
         {
             if(ch->execute_trap("open", TP)) return 1;
         }
-        if(ch->trapped("open"))                 
+        if(ch->trapped("open"))
         {
             if(ch->do_spec_trap("open"))
             return 1;
         }
-        if(sizeof(open_riddles) && (!solve_once || member_array(environment(ch)->query_name(), riddle_solvers) == -1)) 
+        if(sizeof(open_riddles) && (!solve_once || member_array(environment(ch)->query_name(), riddle_solvers) == -1))
         {
             do_riddle_open(ch);
             return 1;
@@ -606,7 +606,7 @@ int open_container(string str)
         ch->toggle_closed();
         POISON_D->is_object_poisoned(ch, TP, "open", 1);
         write("You open "+ch->query_short()+".");
-        tell_room(ETP,TPQCN+" opens "+       
+        tell_room(ETP,TPQCN+" opens "+
         ch->query_short()+ ".",TP);
     }
     return 1;
@@ -614,18 +614,18 @@ int open_container(string str)
 
 int close_container(string str) {
     object ch;
-    
+
     if(!stringp(str)) {
         tell_object(TP,"Close what?");
         return 1;
     }
-    
+
     ch = present(str,TP);
 
     if(!ch) ch = present(str,ETP);
     if(!ch) { return 0; }
     if(!ch->is_bag()) return 0;
-        
+
     if(TP->query_bound() || TP->query_unconscious()){
         TP->send_paralyzed_message("info",TP);
         return 1;
@@ -637,7 +637,7 @@ int close_container(string str) {
         if(!ch->toggle_closed())
             write("It cannot be closed.");
         else {
-                if(ch->is_trapped("close")) 
+                if(ch->is_trapped("close"))
                 {
                         if(ch->execute_trap("close", TP)) return 1;
                 }
@@ -648,7 +648,7 @@ int close_container(string str) {
             ch->set_long((string)ch->query_closed_long_desc());
          write("You close "+ch->query_short()+".");
            POISON_D->is_object_poisoned(ch, TP, "close", 1);
-         tell_room(ETP,TPQCN+" closes "+ 
+         tell_room(ETP,TPQCN+" closes "+
                    ch->query_short()+".",TP);
       }
     return 1;
@@ -665,9 +665,9 @@ int lock_container(string str) {
       return 1;
    }
    ch = present(str,TP);
-   
+
    if(!ch) ch = present(str,ETP);
-   if(!ch) { 
+   if(!ch) {
       notify_fail("No '"+str+"' here or bad syntax.\n");
       return 0;
    }
@@ -685,7 +685,7 @@ int lock_container(string str) {
       write("It is already locked!\n");
       return 1;
    }
-   if((string)ch->query_lock_data("key") 
+   if((string)ch->query_lock_data("key")
    && present((string)ch->query_lock_data("key"), TP)) {
       write("You lock the "+str+".\n");
       tell_room(ETP,TPQCN+" locks the "+str+".\n",TP);
@@ -714,7 +714,7 @@ int unlock_container(string str) {
    }
    ch = present(str,TP);
    if(!ch) ch = present(str,ETP);
-   if(!ch) { 
+   if(!ch) {
       notify_fail("No '"+str+"' found.  If you are trying to unlock a door,\n "
         "try <unlock [door id] with [key id]>.  If there are multiple "
         "locks,\n try <unlock [lock id] on [door id] with [key id]>.\n");
@@ -739,15 +739,15 @@ int unlock_container(string str) {
       notify_fail("Unlock the "+str+" with what?\n");
       return 0;
    }
-        if(ch->is_trapped("unlock")) 
+        if(ch->is_trapped("unlock"))
         {
                 if(ch->execute_trap("unlock", TP)) return 1;
         }
-        if(ch->trapped("unlock")) 
+        if(ch->trapped("unlock"))
         {
         if(ch->do_spec_trap("unlock")) return 1;
         }
-        
+
    write("You unlock the "+str+".\n");
    tell_room(ETP,TPQCN+" unlocks the "+str+".\n",TP);
    ch->toggle_lock();
@@ -781,7 +781,7 @@ void set_key(string str) {
 }
 int is_bag() {return 1;}
 void lock_difficulty( int mod) {
-   lock_dif = mod;     
+   lock_dif = mod;
 }
 int query_mod(string str) {return lock_dif;}
 
@@ -831,7 +831,7 @@ int PickLock(string str) {
    } */
    modifier = ch->query_mod();
    score = TP->query_skill("dungeoneering") + modifier + roll_dice(1,20);
-        if(ch->is_trapped("pick")) 
+        if(ch->is_trapped("pick"))
         {
                 if(ch->execute_trap("pick", TP)) return 1;
         }
@@ -908,7 +908,7 @@ void db(string str)
 }
 
 
-int restore_me(string file) 
+int restore_me(string file)
 {
     string *files, fname, fn,who,item, path, *stuff;
     int fsize, pweight;
@@ -920,7 +920,7 @@ int restore_me(string file)
 
     seteuid(UID_ROOT);
     sscanf(file,"/inv/%s/%s", who, path);
-   
+
     if(stringp(path))
     sscanf(path,"ob%d",num);
 
@@ -929,23 +929,23 @@ int restore_me(string file)
     lstate = (int)TO->query_locked();
     if(cstate == 1) TO->set_closed(0);
     if(lstate == 1) TO->set_locked(0);
-    for(x = 0; x < (fsize) ; x++) 
+    for(x = 0; x < (fsize) ; x++)
     {
         //    write("Loading Object #"+x);
         fname = "/inv/"+first_letter(who)+"/"+who+"/"+files[x];
         tmp = "/daemon/yuck_d"->restore_files(fname);
-        if(stringp(tmp)) 
+        if(stringp(tmp))
         {
             write(tmp);
             rm(fname);
-        } 
-        else 
+        }
+        else
         {
             pweight = tmp->query_weight();
             tmp->set_weight(0);
-            if(tmp->move(TO) != MOVE_OK) 
-            {       
-                tmp->move(EETO);                           
+            if(tmp->move(TO) != MOVE_OK)
+            {
+                tmp->move(EETO);
                 write("You dropped "+tmp->query_short()+ " from a container!");
             }
             tmp->set_weight(pweight);
@@ -955,7 +955,7 @@ int restore_me(string file)
     stuff = explode(file,"/");
     fn = stuff[sizeof(stuff)-1];
     path = "/";
-    for (i=0;i<sizeof(stuff)-1;i++) 
+    for (i=0;i<sizeof(stuff)-1;i++)
     {
         path +=stuff[i];
         path += "/";
@@ -964,7 +964,7 @@ int restore_me(string file)
     i=0;
 
     fsize = sizeof(files = get_dir(path +"save*"+fn+".*"));
-    for(x = 0; x < (fsize) ; x++) 
+    for(x = 0; x < (fsize) ; x++)
     {
         fname = path + files[x];
 
@@ -975,19 +975,19 @@ int restore_me(string file)
             db("fname: "+fname+" is empty");
         }
 
-        if(stringp(tmp) || !tmp) 
+        if(stringp(tmp) || !tmp)
         {
-            if(tmp) { write(tmp); }                     
+            if(tmp) { write(tmp); }
             rm(fname);
-        } 
-        else 
-        {           
+        }
+        else
+        {
             pweight = tmp->query_weight();
             tmp->set_weight(0);
-            if(tmp->move(TO) != MOVE_OK) 
+            if(tmp->move(TO) != MOVE_OK)
             {
                 tmp->move(EETO);
-                write("You dropped "+tmp->query_short()+ " from a container!");               
+                write("You dropped "+tmp->query_short()+ " from a container!");
             }
             tmp->set_weight(pweight);
             rm(fname);

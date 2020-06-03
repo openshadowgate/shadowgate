@@ -11,14 +11,7 @@
 #define MID "/daemon/quests_mid"
 
 inherit DAEMON;
-/*
-static void SAVE(){
-  seteuid(UID_DAEMONSAVE);
-  save_object(SAVE_QUESTS);
-  seteuid(getuid());
-}
 
-  */
 void create(){
    ::create();
 }

@@ -53,7 +53,7 @@ if(!member_group(geteuid(previous_object()),"law_c")) return 0;
     return 1;
     }
 
-static do_imprison(string who,int duration,string why,string bywho) {
+private do_imprison(string who,int duration,string why,string bywho) {
      object ob;
      int i;
      seteuid(UID_LOG);

@@ -4,7 +4,7 @@
 inherit MONSTER;
 
 object seizee;
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 int swallowing;
 void breakout(object ob);
 

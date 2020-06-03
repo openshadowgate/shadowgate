@@ -1,7 +1,7 @@
 #include <std.h>
 inherit "/std/riding_animal.c";
 
-private static int healingStuff;
+nosave private int healingStuff;
 
 int is_warhorse() { return 1; }
 

@@ -2,25 +2,17 @@
  * sefun.c -- craz's personal sefun daemon.  this daemon contains funtions
  *  that are commonly used through craz's junk... >:P
  *
- * craz@shadowgate -- 9609 -- creation 
+ * craz@shadowgate -- 9609 -- creation
  *****/
 #include <std.h>
 #include "/realms/craz/include/defs.h"
 
 inherit DAEMON;
 
-/* prototype some member functions */
-static void create();
-string *loadConfig( string file );
-string trim( string str );
-static int loadConfig_filter( string e );
-
-
 /*****
- * static void create();
  *  -- apply that the driver calls when this object is first created
  *****/
-static void create()
+protected void create()
 {
   daemon::create();
 
@@ -40,7 +32,7 @@ string *loadConfig( string file )
   string *ret;
   string s;
   int c, x;
-  
+
   /* read in the file */
   if ( ( s = read_file( file ) ) == 0 )
     error( "CRAZ_SEFUN_D::loadConfig -- unknown file '" + file + "'\n" );
@@ -59,7 +51,7 @@ string *loadConfig( string file )
 
   /* filter out unwanted lines */
   ret = filter_array( ret, "loadConfig_filter", TO() );
-  
+
   /* all done. */
   return ret;
 }
@@ -80,7 +72,7 @@ string trim( string str )
     ;
 
   /* find the end of ending of the string w/o whitespace */
-  for ( e = strlen( str ) - 1; 
+  for ( e = strlen( str ) - 1;
         b < e && member_array( str[e], ({ ' ', '\t' }) ) != -1;
         e-- )
     ;
@@ -95,7 +87,7 @@ string trim( string str )
  *  -- internal function used by loadConfig.  this function filters out
  *     any unwanted lines from the configuration file
  *****/
-static int loadConfig_filter( string e )
+protected int loadConfig_filter( string e )
 {
   int c;
 
@@ -106,4 +98,3 @@ static int loadConfig_filter( string e )
   /* everything passed... keep this line */
   return 1;
 }
-

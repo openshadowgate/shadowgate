@@ -5,35 +5,15 @@
 inherit WEAPON;
 
 object ammunition;
-static int reload, reloadCount;
+nosave int reload, reloadCount;
 string prof_type, lr_type = "piercing";
 int twoHanded;
 int s_range, m_range, l_range;
 int rate_of_fire, current_range;
 string ammo;
 object current_ammo;
-static mapping targets = ([]);
-static int mPerfect;
-
-int is_lrweapon();
-
-void set_range(int s_range, int m_range, int l_range);
-
-int query_range(int range);
-void set_rate_of_fire(int rate);
-void query_rate_of_fire();
-void set_current_range(int range);
-int query_current_range();
-string query_lr_prof_type();
-void set_lr_prof_type(string str);
-int query_ammo_damage();
-int query_large_ammo_damage();
-string query_ammo();
-int calc_speed();
-
-int damage_done(object foe,int damage);
-int adjust_to_hit(int tohit);
-
+nosave mapping targets = ([]);
+nosave int mPerfect;
 
 void create() {
     ::create();

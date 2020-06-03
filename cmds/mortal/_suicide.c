@@ -83,7 +83,7 @@ int cmd_suicide(string str)
     return 1;
 }
 
-nomask static int really_suicide(string typed_password)
+nomask private int really_suicide(string typed_password)
 {
     string real_password, name;
     string *oldfiles, *files;

@@ -6,7 +6,7 @@ inherit ROOM;
 object entry, rope;
 string roomName;
 string castname;
-static int clevel;
+nosave int clevel;
 
 mapping extraitems=([]);
 

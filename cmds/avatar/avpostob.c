@@ -9,8 +9,8 @@
 inherit OBJECT;
 string POST_TITLE;
 mapping board_names = ([]);
-static string *boards_selected = ({});
-static string *menu = ({});
+nosave string *boards_selected = ({});
+nosave string *menu = ({});
 int do_auto_remove = 0;
 void build_menu();
 void display_board_menu();
@@ -21,18 +21,18 @@ void set_avpost_title(string title)
 }
 
 int save_me(string file)
-{ 
+{
 	return 1;
 }
 
-void init() 
+void init()
 {
-      ::init(); 
+      ::init();
 	board_names = ([]);
 	boards_selected = ({});
 	do_auto_remove = 0;
 	menu = ({});
-	ETO->edit(BBOARD_EDIT+(string)ETO->query_name(), "finish", TO);  
+	ETO->edit(BBOARD_EDIT+(string)ETO->query_name(), "finish", TO);
 }
 
 void exit_avpost()
@@ -48,9 +48,9 @@ void exit_avpost()
 
 void finish()
 {
-	board_names = ([]);	
-	if(file_exists(BBOARD_EDIT+(string)ETO->query_name()) && 
-	file_size(BBOARD_EDIT+(string)ETO->query_name()) != -1) 
+	board_names = ([]);
+	if(file_exists(BBOARD_EDIT+(string)ETO->query_name()) &&
+	file_size(BBOARD_EDIT+(string)ETO->query_name()) != -1)
 	{
 		if(read_file(BBOARD_EDIT+(string)ETO->query_name()) != 0)
 		{
@@ -85,7 +85,7 @@ void check_is_post_correct(string str)
 		exit_avpost();
 		return 1;
 	}
-	if(!str || str == "" || (str != "yes" && str != "y" && str != "no" && str != "n")) 
+	if(!str || str == "" || (str != "yes" && str != "y" && str != "no" && str != "n"))
 	{
 		finish();
 		return 1;
@@ -95,13 +95,13 @@ void check_is_post_correct(string str)
 		boards_selected = ({});
 		board_names = ([]);
 		menu = ({});
-		if(!file_exists(APB + ".o")) 
+		if(!file_exists(APB + ".o"))
 		{
 			tell_object(ETO, "Something went wrong... the list of boards "+
 			"registered to work with avpost is missing.");
 			exit_avpost();
 			return;
-		}	
+		}
 		if(file_exists(APB + ".o"))
 		{
 			restore_object(APB);
@@ -146,18 +146,18 @@ void display_board_menu()
 			}
 			tmp += board_names[menu[x]][0];
 		}
-		else 
+		else
 		{
 			tmp += menu[x];
 		}
 		tell_object(ETO, tmp);
 	}
 	tell_object(ETO, "\n%^BOLD%^%^GREEN%^============================================"+
-	"======================%^RESET%^");	
+	"======================%^RESET%^");
 	tell_object(ETO, "%^RED%^Instructions :%^RESET%^");
 	tell_object(ETO, "\n1. ) %^YELLOW%^*%^RESET%^ = Indicates A board that "+
 	"you've selected to post to.");
-	tell_object(ETO, "2. ) Please input a number from the list above.\n" + 
+	tell_object(ETO, "2. ) Please input a number from the list above.\n" +
 	"3.) You must select at least one board to post to.");
 	tell_object(ETO, "4. ) Selecting 'All Boards' will take you to the "+
 	"next step - as if you selected 'Post It!'\n5.) When Finished select 'Post It!' to "+
@@ -165,7 +165,7 @@ void display_board_menu()
 	tell_object(ETO, "6. ) Input ** at any time to exit.");
 	return;
 }
-	
+
 void my_action(string str)
 {
 	int choice;
@@ -177,7 +177,7 @@ void my_action(string str)
 	}
 	choice = to_int(str);
 	choice = choice - 1;
-	if(choice < 0 || choice >= sizeof(menu)) 
+	if(choice < 0 || choice >= sizeof(menu))
 	{
 		tell_object(ETO, "Please input a number between 1 - "+sizeof(menu)+".");
 		display_board_menu();
@@ -197,12 +197,12 @@ void my_action(string str)
 		"from the any selected board, if needed?  yes/no?  Default is NO.");
 		tell_object(ETO, "Please note that if you answer no, then your post will "+
 		"not be added to any board that is full.");
-		input_to("do_auto_remove");		
+		input_to("do_auto_remove");
 		return 1;
 	}
 	if(str_choice == "Post It!")
 	{
-		if(sizeof(boards_selected) < 1) 
+		if(sizeof(boards_selected) < 1)
 		{
 			tell_object(ETO, "You must select at least 1 board to post to.");
 			display_board_menu();
@@ -213,10 +213,10 @@ void my_action(string str)
 		"from the any selected board, if needed?  yes/no?  Default is NO.");
 		tell_object(ETO, "Please note that if you answer no, then your post will "+
 		"not be added to any board that is full.");
-		input_to("do_auto_remove");	
+		input_to("do_auto_remove");
 		return 1;
 	}
-	if(member_array(str_choice, boards_selected) == -1)	
+	if(member_array(str_choice, boards_selected) == -1)
 	{
 		boards_selected += ({str_choice});
 		display_board_menu();
@@ -277,11 +277,11 @@ void add_my_avpost()
 		{
 			tell_object(ETO, "Msg posted successfully on "+
 			board_names[boards_selected[x]][0]+"!\n");
-			cp(BBOARD_EDIT+(string)ETO->query_name()+"_tmp", 
+			cp(BBOARD_EDIT+(string)ETO->query_name()+"_tmp",
 			BBOARD_EDIT+(string)ETO->query_name());
 			continue;
 		}
-		else 
+		else
 		{
 			tell_object(ETO, "Msg NOT posted on "+
 			board_names[boards_selected[x]][0]+"!\n");
@@ -310,4 +310,3 @@ void do_auto_remove(string str)
 	tell_object(ETO, "Attempting to post your message, please be patient.\n\n");
 	add_my_avpost();
 }
-		

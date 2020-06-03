@@ -31,10 +31,10 @@ int logon_notify;  /* for belphy's logon notification system */
 int level,ghost;// , crash_money, verbose_moves, verbose_combat;
 int start_time, quit_time, down_time;  // For user timing -- Thorn 950420
 int birth;
-static mapping static_user=([]);// = (["net_died_here":0,"term_info":([]),"channels":({}),"died_here":0,"watched":0,"pastMessages":([]),"saveable":({})]);
+nosave mapping static_user=([]);// = (["net_died_here":0,"term_info":([]),"channels":({}),"died_here":0,"watched":0,"pastMessages":([]),"saveable":({})]);
 mapping blocked, news;
 mapping thief_skills;
-static mapping thief_skill_bonuses;
+nosave mapping thief_skill_bonuses;
 string real_name, email, ip, last_on, password, cpath, original_site, real_last_on;
 int start_age, pheight, pweight;
 private string position;
@@ -81,149 +81,6 @@ int retinue_level;
 
 mapping __FEAT_DATA=([]);
 string *player_feats=({});
-void init_feats();
-void clear_feats();
-void set_class_feats_gained(int num);
-int query_class_feats_gained();
-void set_bonus_feats_gained(int num);
-int query_bonus_feats_gained();
-void set_magic_feats_gained(int num);
-int query_magic_feats_gained();
-void set_hybrid_feats_gained(int num);
-int query_hybrid_feats_gained();
-void set_other_feats_gained(int num);
-int query_other_feats_gained();
-void set_epic_feats_gained(int num);
-int query_epic_feats_gained();
-void set_class_feats(mapping feats);
-mapping query_class_feats();
-void set_bonus_feats(mapping feats);
-mapping query_bonus_feats();
-void set_magic_feats(mapping feats);
-mapping query_magic_feats();
-void set_hybrid_feats(mapping feats);
-mapping query_hybrid_feats();
-void set_other_feats(mapping feats);
-mapping query_other_feats();
-void set_epic_feats(mapping feats);
-mapping query_epic_feats();
-void set_player_feats(string *feats);
-string *query_player_feats();
-
-int query_blocked(string str);
-int set_mini_quest(string str, int x, string desc);
-void set_thief_skill(string name, int percent);
-void set_thief_skill_bonus(string name, int percent);  // added Saide 2/04
-int query_base_thief_skill(string name);  // added for a fix to bonuses *Styx* 8/14/05
-mapping query_thief_skill_map();   // added to query full set *Styx*  8/20/05
-mapping query_thief_skill_bonus_map();   // added to query full set *Styx*  8/20/05
-int query_thief_skill(string name);
-int set_quest(string str);
-string *query_mini_quests();
-void reset_terminal();
-int general_exp_adjust_perc(int perc);
-int class_exp_adjust_perc(string myclass, int perc);
-void convert_kills();
-mapping get_mini_quest_map();
-string *query_quests();
-void register_channels();
-string *query_mysites();
-void set_mysites(string *str);
-int query_start_time();
-void set_start_time(int time);
-void set_guild(string str);
-void remove_guild(string str);
-void clear_guilds();
-void set_position(string pos);
-void set_level(int x);
-void fix_crash_victim();
-nomask int query_level();
-string *query_guild();
-string query_guild_string();
-static void set_disguised(int x);
-static void set_disguise(string str);
-int query_disguised();
-string query_disguise();
-static void set_vis_name(string str);
-string query_vis_name();
-void set_hm_quest(int done);
-int query_hm_quest();
-void get_email(string e);
-int query_ghost();
-void add_message(string str);
-void write_messages();
-string query_email();
-nomask string query_position();
-void set_primary_start(string str);
-string query_time_logged_in();
-void add_pet(object pet);
-void remove_pet(object pet);
-void load_pets();
-string query_pets();
-void remove_all_pets();
-void reduce_my_skills(string myclass);
-void reduce_guild_level(string myclass);
-void set_killable();
-int query_killable();
-string *query_pkilled();
-void set_pkilled(string *pkills);
-void remove_pkilled();
-int query_align_adjust();
-void add_align_adjust(int value);
-void reset_adjust();
-void set_class_change(string myclass);
-mixed query_class_change();
-string *query_rem_rooms_sort();
-string *query_rem_obs_sort();
-void set_rem_rooms( mapping remembered, string *sorted );
-void set_rem_obs( mapping remembered, string *sorted );
-mapping query_rem_rooms();
-int toggle_quit(int x);
-mapping query_rem_obs();
-void set_quietness();
-int query_quietness();
-int quit();
-void net_dead();
-int query_profs(string str);
-mapping query_profs_map();
-void set_profs_map(mapping map);
-void use_prof(string skill);
-void remove_ignored(string str);
-void add_ignored(string str);
-string query_my_ip_name();
-void reset_ignored();
-string *query_ignored();
-void reset_height();
-int query_player_height();
-void reset_weight();
-int query_player_weight();
-string query_body_type();
-string query_hair_color();
-string query_eye_color();
-void init_spellcaster();
-int query_start_age();
-string query_real_age_cat();
-void init_mud_guilds();
-void set_unique(int x);
-string getDescriptivePhrase();
-void setDescriptivePhrase(string phrase);
-string knownAs(string str);
-string getWholeDescriptivePhrase();
-string getParsableName();
-void break_all_spells();
-int light_blind(int actionbonus);
-// adding for death tracking support *Styx* 9/22/06
-int query_death_age();
-void set_pk_death_flag();
-void remove_pk_death_flag();
-int get_pk_death_flag();
-void init_feats();
-void set_ghost(int x);
-int query_rolled_stats(string stat);
-int age_mod(string stat);
-int race_mod(string stat);
-int query_death_flag();
-void convert_relationships();
 
 // *** END OF PROTOTYPING ** (gar)
 
@@ -235,18 +92,54 @@ void save_player(string name) {
    return;
 }
 
-int query_quit_time() { return quit_time; }
+int query_quit_time()
+{
+    return quit_time;
+}
 
-void set_diety(string str) { if(!stringp(str)) { return; } diety = str; }
-string query_diety() { return diety; }
+void set_diety(string str)
+{
+    if (!stringp(str)) {
+        return;
+    }
+    diety = str;
+}
 
-int query_player_age() { return player_age; } // is in units of seconds * 2
-int query_death_time() { return death_time; } // is in units of seconds.
-int set_death_time(int x) { return death_time = x; }
-int add_death_time(int x) { return death_time += x; }
-int advance_death_time() { return USERUC_D->advance_death_time(TO); }
+string query_diety()
+{
+    return diety;
+}
+
+int query_player_age()
+{
+    return player_age;
+}                                             // is in units of seconds * 2
+
+int query_death_time()
+{
+    return death_time;
+}                                             // is in units of seconds.
+
+int set_death_time(int x)
+{
+    return death_time = x;
+}
+
+int add_death_time(int x)
+{
+    return death_time += x;
+}
+
+int advance_death_time()
+{
+    return USERUC_D->advance_death_time(TO);
+}
+
 //this shit is long gone - Saide
-int do_exceptional_str() { return 0; }
+int do_exceptional_str()
+{
+    return 0;
+}
 
 int filter_autowear(string awstr) { return USERUC_D->filter_autowear(awstr, TO); }
 int sort_autowear(string awstr1, string awstr2) { return USERUC_D->sort_autowear(awstr1, awstr2); }

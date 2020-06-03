@@ -6,8 +6,6 @@
 inherit SPELL;
 
 int adjust,origstr, theProf;
-// static means does change ????
-
 
 int is_curse()
 {

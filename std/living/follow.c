@@ -7,9 +7,9 @@
 #include <std.h>
 
 
-static private string *allowed_to_follow = ({});
-static private object *followers=({});
-static private object following;
+nosave private string *allowed_to_follow = ({});
+nosave private object *followers=({});
+nosave private object following;
 
 object *query_followers() { followers = distinct_array(followers); followers -= ({ 0 }); return followers; }
 object query_following() { return following; }
@@ -18,7 +18,7 @@ object *query_allowed()  { return allowed_to_follow; }
 void set_following(object f) { following = f; }
 
 
-int set_followers(object *f) 
+int set_followers(object *f)
 {
     int i;
 
@@ -26,7 +26,7 @@ int set_followers(object *f)
     if(member_array( TO, f ) != -1 ) { return 0; }
     if(following && member_array(following, f) != -1) { return 0; }
     followers = f;
-    for(i=0; i<sizeof(f); i++) 
+    for(i=0; i<sizeof(f); i++)
     {
         if(!f[i]) { followers -= ({ f[i] }); }
         else { f[i]->set_following(TO); }
@@ -35,12 +35,12 @@ int set_followers(object *f)
 }
 
 
-int add_follower(object f) 
+int add_follower(object f)
 {
     if( f == this_object() ) return 0;
     if( f == following ) return 0;
 
-    if(!followers) 
+    if(!followers)
     {
 	    followers = ({ f });
 	    f->set_following(TO);
@@ -53,7 +53,7 @@ int add_follower(object f)
 }
 
 
-void remove_follower(object ob) 
+void remove_follower(object ob)
 {
     if(followers && member_array(ob, followers) == -1) { return; }
     followers -= ({ ob });
@@ -62,30 +62,30 @@ void remove_follower(object ob)
 }
 
 
-void clear_followers() 
+void clear_followers()
 {
     int i;
 
     if(!followers) return;
-    for(i=0; i<sizeof(followers); i++) 
+    for(i=0; i<sizeof(followers); i++)
     {
         if(followers[i]) { followers[i]->set_following(0); }
     }
     followers = ({});
 }
 
-void move_followers(object prev) 
+void move_followers(object prev)
 {
     object *tmp;
     int i;
 
     tmp = ({});
-    
-    for(i=0; i<sizeof(followers); i++) 
+
+    for(i=0; i<sizeof(followers); i++)
     {
         if(!objectp(followers[i])) continue;
 	    if(!environment(followers[i])) continue;
-	    if(environment(followers[i]) != prev) 
+	    if(environment(followers[i]) != prev)
         {
             if (!followers[i]->query_true_invis())
 	        {
@@ -94,7 +94,7 @@ void move_followers(object prev)
 	        tell_object(followers[i], TO->QCN+" has ditched you.\n");
 	        followers[i]->set_following(0);
 	    }
-	    else 
+	    else
         {
             if(followers[i]->follow(base_name(ETO),followers[i])) { tmp += ({ followers[i] }); }
 	    }
@@ -104,11 +104,11 @@ void move_followers(object prev)
 }
 
 
-void follow_allow(string str) 
-{ 
+void follow_allow(string str)
+{
     str = lower_case(str);
     if(!pointerp(allowed_to_follow)) { allowed_to_follow = ({}); }
-    allowed_to_follow += ({ str }); 
+    allowed_to_follow += ({ str });
     allowed_to_follow = distinct_array(allowed_to_follow);
 }
 
@@ -118,17 +118,17 @@ void unallow_follower(string str)
     if(member_array(str,allowed_to_follow) == -1) { return; }
     allowed_to_follow -= ({ str });
     return;
-}        
+}
 
 
-int can_follow(string str) 
-{ 
+int can_follow(string str)
+{
     if(member_array(str,allowed_to_follow) == -1) { return 0; }
     return 1;
 }
 
 
-varargs int follow(string exit,object obj) 
+varargs int follow(string exit,object obj)
 {
     string cmd, dotc;
     object here,there;
@@ -147,7 +147,7 @@ varargs int follow(string exit,object obj)
         {
             distant = 1;
         }
-    }    
+    }
 
     if((cmd = (string)ETO->query_direction(exit)) == "/d/shadowgate/void")
        if((cmd = (string)ETO->query_direction(exit+".c")) == "/d/shadowgate/void")

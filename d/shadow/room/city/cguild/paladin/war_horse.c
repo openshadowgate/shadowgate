@@ -5,7 +5,7 @@
 // changing per Garrett to use the common file to fix bugs *Styx* 10/18/03
 inherit "/d/common/mounts/war_horse.c";
 
-// private static int healingStuff;
+// private nosave int healingStuff;
 
 void create(){
     ::create();

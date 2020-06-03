@@ -45,7 +45,7 @@ inherit "/std/npc";
 mapping __Eco, __Values;
 int query_mymaxvalue();
 int mymaxvalue;
-static int __SellAll();
+nosave int __SellAll();
 int convert_money(string cointype, int amount);
 int is_fence;
 mixed sort_items(object one, object two);
@@ -679,7 +679,7 @@ int filter_list(object ob, string str)
     return 0;
 }
 
-static int __SellAll()
+protected int __SellAll()
 {
     object* inv;
     int i, value;

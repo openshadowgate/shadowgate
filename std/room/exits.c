@@ -377,7 +377,7 @@ void setupExits()
 
 }
 
-static void initiate()
+protected void initiate()
 {
     object ob,incoming;
     string *borg,verb, tmp;
@@ -600,7 +600,7 @@ string query_short_exits() {
     return s + "]";
 }
 
-static void set_post_exit_functions(string *dirs, string *funcs) {
+protected void set_post_exit_functions(string *dirs, string *funcs) {
     int i;
 
     if (!dirs || !funcs || ((i=sizeof(dirs)) != sizeof(funcs))) return;
@@ -608,19 +608,19 @@ static void set_post_exit_functions(string *dirs, string *funcs) {
     while (i--) post_exit_func[dirs[i]] = funcs[i];
 }
 
-static void add_post_exit_function(string dir, string func) {
+protected void add_post_exit_function(string dir, string func) {
     if (!post_exit_func) post_exit_func = ([]);
     post_exit_func[dir] = func;
     this_object()->reinitiate();
 }
 
-static void remove_post_exit_function(string dir) {
+protected void remove_post_exit_function(string dir) {
     if (!dir || !post_exit_func || !post_exit_func[dir]) return;
     map_delete(post_exit_func, dir);
     this_object()->reinitiate();
 }
 
-static void set_pre_exit_functions(string *dirs, string *funcs) {
+protected void set_pre_exit_functions(string *dirs, string *funcs) {
     int i;
 
     if (!dirs || ! funcs || (sizeof(dirs) != sizeof(funcs))) return;
@@ -629,14 +629,14 @@ static void set_pre_exit_functions(string *dirs, string *funcs) {
     while (i--) pre_exit_func[dirs[i]] = funcs[i];
 }
 
-static void add_pre_exit_function(string dir, string func) {
+protected void add_pre_exit_function(string dir, string func) {
     if (!dir || !func) return;
     if (!pre_exit_func) pre_exit_func = ([]);
     pre_exit_func[dir] = func;
     this_object()->reinitiate();
 }
 
-static void remove_pre_exit_function(string dir) {
+protected void remove_pre_exit_function(string dir) {
     if (!pre_exit_func || !pre_exit_func[dir]) return;
     map_delete(pre_exit_func, dir);
     this_object()->reinitiate();

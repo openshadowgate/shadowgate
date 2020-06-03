@@ -22,7 +22,7 @@ int quantity;
 
 mapping rqueue = ([ ]);
 mapping notes;
-static mapping rcache = ([ ]);
+nosave mapping rcache = ([ ]);
 
 int help(string str);
 int help(string str);
@@ -126,7 +126,7 @@ int shelve(string str) {
 		write("You cannot do that in this library.");
 		return 1;
 	}
-	
+
     if(!str) {
         return help("library");
     }
@@ -142,7 +142,7 @@ int shelve(string str) {
     }
 
     if(!file_exists(SAVE_FILE+lib_id+".o")) {
-    	
+
     }
 
    TO->Save();
@@ -167,63 +167,63 @@ int obtain(string str) {
 	int amount;
 	string stuff;
 	mapping btemp;
-	
-	
+
+
 	if(locked) {
 		write("You cannot take the books from this library");
 		return 1;
 	}
-	
+
 	if(!str) {
 	  return help("library");
 	}
-	
+
 	if(sscanf(str, "%d %s",amount, stuff) != 2) {
 	  stuff = str;
 	  amount = -1;
 	}
-	
+
 	if(!file_exists(SAVE_FILE+lib_id+".o")) {
 	}
-	
+
 	TO->Restore();
 	TO->Save();
-	
+
 	if (!TO->query_book(str)) {
 	    return notify_fail("You have no book entitled "+str+" on your bookshelf.\n");
 	}
-	
+
 	book = new("/d/magic/manual");
 	btemp = TO->query_book_data(str);
 	book->set_manual_properties(btemp);
 	TO->remove_book(str);
 	TO->Save();
-	
+
 	if( (int)(book->move(TP)) != MOVE_OK ) {
 	    write("You drop the book to the floor as soon as you select it!");
 	    book->move(ETP);
 	}
 	else book->move(TP);
-	
+
 	tell_object(TP,"%^BOLD%^You obtain the manual titled "+str+" from your bookshelf here.");
 	tell_room(TO,"%^BOLD%^"+TPQCN+" obtains a book from a bookshelf.",TP);
 	return 1;
 	}
-	
+
 	int list(string str){
 	string *titles;
 	int i,j;
-	
+
 	if (!str) {
 	  return notify_fail("List what?\n");
 	}
-	
+
 	if (str != "books") {
 	  return notify_fail("List what?\n");
 	}
-	
+
 	titles = keys(books);
-	
+
 	j = sizeof(books);
 	write("%^ORANGE%^<==========================>");
 	write(" %^ORANGE%^    Books on this shelf    ");
@@ -270,9 +270,9 @@ void add_book(object book) {
 	mapping temp;
 	string title, *schools;
 	int i;
-		
+
 	if(!objectp(book)) return;
-	
+
 	book_data = ([ ]);
 	book_data["long"] = book->query_long();
 	book_data["short"] = book->query_short();
@@ -281,12 +281,12 @@ void add_book(object book) {
 	book_data["unique"] = book->query_unique();
 	book_data["ids"] = book->query_id();
 	title = book_data["title"] = book->query_title();
-	
+
 	if (!books) {
 		books = ([]);
 	}
 	books[title] = book_data;
-	
+
 	for(i=0;i<sizeof(schools);i++) {
 		add_collection(schools[i], temp[schools[i]]);
 	}
@@ -299,7 +299,7 @@ int remove_book(string title) {
 	mapping book_data, temp;
 	string *schools;
 	int level, i;
-	
+
 	if(!books) {
 		books = ([ ]);
 		return 0;
@@ -329,7 +329,7 @@ int query_book(string title) {
 
 string *query_books() {
 	string *retval;
-	
+
 	if(!books) {
 		books = ([ ]);
 		return 0;
@@ -340,7 +340,7 @@ string *query_books() {
 
 mapping query_book_data(string title){
 	mapping book_data;
-	
+
 	if(!books) {
 		books = ([ ]);
 		return 0;
@@ -407,16 +407,16 @@ int wizadd(string str) {
    int amount, level;
    string title, school;
    object book;
-	
+
 	if(!avatarp(TP)) return 0;
     if(!str) {
         return write("Usage: wizadd <title>, <school>, <book level>");
     }
-    
+
     if(sscanf(str, "%s, %s, %d", title, school, level) != 3) {
         return write("Usage: wizadd <title>, <school>, <book level>");
 	}
-	    	
+
 	if((int)TO->query_book_quantity() + 1 > allowed_storage) {
 		write("You are overflowing this library.  Hope that's okay.");
 	}
@@ -465,12 +465,12 @@ int collection() {
 	string *schools;
 	string sch;
 	int lev, i, j;
-	
+
 	if(!avatarp(TP)) return 0;
 
 	schools = TO->query_schools();
 	j = sizeof(schools);
-	
+
 	write("%^BLUE%^BOLD%^<==================================>");
 	write("%^CYAN%^BOLD%^  Knowledge Levels in this Library    ");
 	write("%^BLUE%^BOLD%^<==================================>");
@@ -482,7 +482,7 @@ int collection() {
 	return 1;
 }
 
-int research(string str) { 
+int research(string str) {
 	if(!TP->query_guild_level("mage")) {
 		write("The books in this library mean nothing to you!");
 		return 1;
@@ -491,8 +491,8 @@ int research(string str) {
 	      "stop researching.  You can type 'help' for a list of commands "
 	      "and 'help <command name>' for information on a command.\n");
 	message("prompt", PROMPT, TP);
-	input_to("rshell", I_NOESC); 
-	return 1; 
+	input_to("rshell", I_NOESC);
+	return 1;
 }
 
 int rshell(string str) {
@@ -524,7 +524,7 @@ int rshell(string str) {
 	else {
 		write("Invalid command.");
 		message("prompt", PROMPT, TP);
-		input_to("rshell", I_NOESC); 
+		input_to("rshell", I_NOESC);
 	}
     return 1;
 }
@@ -545,7 +545,7 @@ int shell_help(string str) {
 		write("Usage: quit|end\n\nEnds your research WITHOUT copying "+
 		      "your notes to a notebook for constructing a new spell.\n\n"+
 		      "See: copy");
-	}		
+	}
 	else if(str == "copy") {
 		write("Usage: copy notes\n\nCopys your notes to a notebook for "+
 		      "bringing to another location.  Also, you will need to "+
@@ -582,27 +582,27 @@ int shell_help(string str) {
 	          "to gain a proficency higher than "+MAX_PROF+" percent.  Any "+
 	          "further proficency must be gained through use of the spell.\n\n"+
 	          "See: schools");
-	}	
+	}
 	else if(str == "schools") {
-		write("The recognized schools of magic in the realms are:\n"  
-	          "invocation_evocation\n"	                            
-	          "conjuration_summoning\n"	                            
-	          "alteration\n"	                                        
-	          "necromancy\n"	                                        
-	          "divination\n"	                                        
-	          "abjuration\n\n"                                        
-		);	          
-	}	
+		write("The recognized schools of magic in the realms are:\n"
+	          "invocation_evocation\n"
+	          "conjuration_summoning\n"
+	          "alteration\n"
+	          "necromancy\n"
+	          "divination\n"
+	          "abjuration\n\n"
+		);
+	}
 	else if(str == "transcribe") {
 		write("Usage: transcribe <spell name>\n\nAllows you to transcribe "+
-	          "a spell from your master spell book to a travelling spell "+                     
-	          "book in your possession.");                                                     
-	}	
+	          "a spell from your master spell book to a travelling spell "+
+	          "book in your possession.");
+	}
 	else if(str == "master") {
 		write("Usage: master\n\nAllows you to view the spells that you "+
-	          "have in your master spell book.  Your master spell book "+                     
-	          "is always available at a library for viewing.");                                                     
-	}	
+	          "have in your master spell book.  Your master spell book "+
+	          "is always available at a library for viewing.");
+	}
 	else if(str == "search") {
 		write("Usage: search school randomly|for <keyword, keyword, ....\n\n "+
 	          "A random search will put you on track for the first spell that "+
@@ -612,7 +612,7 @@ int shell_help(string str) {
 	          "spells have keywords, and so some spells must be searched for "+
 	          "randomly.\n\n"+
 	          "See: keywords");
-	}	
+	}
 	else if(str == "keywords") {
 		write("You may do a keyword spell search with the following words:\n"+
 			implode(SRD->get_keywords(), "\n"));
@@ -624,10 +624,10 @@ int shell_help(string str) {
 		write("Available commands in this shell "+
 		      "are: quit, end, study, transcribe, master, and help.\n\n");
 		write("You can type 'help <command>' to get help for that "+
-		      "specific command.\n");		      
+		      "specific command.\n");
 	}
 	message("prompt", PROMPT, TP);
-	input_to("rshell", I_NOESC); 
+	input_to("rshell", I_NOESC);
     return 1;
 }
 
@@ -640,14 +640,14 @@ int research_event() {
 	float bonus;
 	string *qrefs;
 	string *keywords;
-	
+
 	qrefs = keys(rqueue);
 	jobs = sizeof(qrefs);
 	if(!jobs) {
 //		tell_object(find_player("thorn"), "No jobs found in rqueue.");
 		return 1;
 	}
-//	tell_object(find_player("thorn"), "Job(s) found in rqueue.");	
+//	tell_object(find_player("thorn"), "Job(s) found in rqueue.");
 	for(i=0;i<jobs;i++) {
 		qref = qrefs[i];
 		job = rqueue[qref];
@@ -656,21 +656,21 @@ int research_event() {
 		school = job["school"];
 		keywords = job["keywords"];
 		current_points = job["points"];
-		
+
 		know = query_collection(school);
 		intel = current->query_stats("intelligence");
 		level = current->query_guild_level("mage");
-		if(school == (string)current->query_school()) 
+		if(school == (string)current->query_school())
 			bonus = SPEC_RSRCH_BONUS;
 		else bonus = 1;
-		
+
 		/* THE Spell Research formula */
 		intbonus = (intel - BASE_INT) * INT_BONUS_MULTIPLIER;
 		pts = random(to_int(know * bonus)) + intbonus;
 		/*                            */
-		
+
 		current_points += pts;
-		
+
 		if(current_points > max_rsrch_pts(level)) {
 			tell_object(current, "You feel that you do not "+
 				"have enough experience to comprehend anything else.");
@@ -687,7 +687,7 @@ int research_event() {
 			rstop(qref);
 		}
 	}
-	
+
 	call_out("research_event", 2);
 //	tell_object(find_player("thorn"), "Callout made in research_event().");
 	return 1;
@@ -696,12 +696,12 @@ int research_event() {
 int transcribe(string spell) {
 	object book;
 	int prof, level, cost;
-	
+
 	level = SRD->get_spell_level(spell);
 	if(!level) {
 		// That's not a spell.
 		message("prompt", PROMPT, TP);
-		input_to("rshell", I_NOESC); 
+		input_to("rshell", I_NOESC);
 		return 1;
 	}
 	level--;
@@ -709,34 +709,34 @@ int transcribe(string spell) {
 	if(!book = present("bookx2", TP)) {
 		write("There's no spellbook here to transcribe to!");
 		message("prompt", PROMPT, TP);
-		input_to("rshell", I_NOESC); 
+		input_to("rshell", I_NOESC);
 		return 1;
 	}
 	if(book->query_owner() != TPQN) {
 		write("That isn't your spellbook!");
 		message("prompt", PROMPT, TP);
-		input_to("rshell", I_NOESC); 
+		input_to("rshell", I_NOESC);
 		return 1;
 	}
 	if(!prof = TP->query_spell_prof_level(spell)) {
 		write("You don't know a spell by that name.");
 		message("prompt", PROMPT, TP);
-		input_to("rshell", I_NOESC); 
+		input_to("rshell", I_NOESC);
 		return 1;
 	}
 	if(!TP->query_funds(cost)) {
 		write("You don't have enough money to buy the materials.");
 		message("prompt", PROMPT, TP);
-		input_to("rshell", I_NOESC); 
+		input_to("rshell", I_NOESC);
 		return 1;
 	}
 	write("You transcribe the spell called "+spell+" into your "+
 	      "travelling spellbook.");
 	write("The materials cost you "+cost+" gold pieces.");
 	TP->use_funds(cost);
-	book->add_spell(spell);      
+	book->add_spell(spell);
 	message("prompt", PROMPT, TP);
-	input_to("rshell", I_NOESC); 
+	input_to("rshell", I_NOESC);
 	return 1;
 }
 
@@ -746,12 +746,12 @@ int study(string str) {
 	string *keywords;
 	mapping note;
 	int i;
-	
+
 	if(!str) {
 		shell_help("study");
 		return 1;
-	}	
-	
+	}
+
 	if(str == "notes") {
 		if(!note = notes[(string)TP->query_name()]) {
 			write("You have no notes to refer to!  If you have a "+
@@ -762,54 +762,54 @@ int study(string str) {
 				"you remember a combination or you are feeling "+
 				"adventurous!");
 			return 1;
-		}  
+		}
 		write("You turn to your notes, so you can refer to them "+
 			"while you research your latest leads...."
 		);
 		write("You may simply press <ENTER> to stop.");
-		job = ([ "user"     : TP,     
-		         "type"     : "study notes",   
-		         "school"   : note["school"],   
-		         "points"   : note["points"],      
+		job = ([ "user"     : TP,
+		         "type"     : "study notes",
+		         "school"   : note["school"],
+		         "points"   : note["points"],
 		         "spell"    : note["spell"],
 		         "formula"  : note["formula"]
-		]);                         
-	}     
+		]);
+	}
 	else if(sscanf(str, "spell %s", name) == 1) {
 		if(!TP->query_spell_prof_level(name)) {
 			write("You don't know any spell by the name of \'"+name+"\'!\n");
 			message("prompt", PROMPT, TP);
-			input_to("rshell", I_NOESC); 
+			input_to("rshell", I_NOESC);
 			return 1;
 		}
 		if((int)TP->query_spell_prof_level(name) >= MAX_PROF) {
 			write("Any more proficency that you gain in this spell must be "+
 			      "accomplished through use of the spell itself.\n");
 			message("prompt", PROMPT, TP);
-			input_to("rshell", I_NOESC); 
+			input_to("rshell", I_NOESC);
 			return 1;
 		}
 		write("You open your master spell book and turn to the pages "+
 			"with "+name+" on it...."
 		);
 		write("You may simply press <ENTER> to stop.");
-		job = ([ "user"     : TP,     
-		         "type"     : "study spell",   
-		         "school"   : SRD->get_spell_sphere(name),   
-		         "points"   : 0,      
+		job = ([ "user"     : TP,
+		         "type"     : "study spell",
+		         "school"   : SRD->get_spell_sphere(name),
+		         "points"   : 0,
 		         "keywords" : 0,
 		         "level"    : SRD->get_spell_level(name),
 		         "spell"    : name
-		]);                         
+		]);
 	}
 	else if(sscanf(str, "school %s", school) == 1) {
 		if(!SRD->valid_school(school)) {
 			write("No such school of magic is known in these realms!\n");
 			message("prompt", PROMPT, TP);
-			input_to("rshell", I_NOESC); 
+			input_to("rshell", I_NOESC);
 			return 1;
 		}
-		
+
 		write("Pull a few of tomes off the shelf to study"+
 			"the theories of "+school+"...."
 		);
@@ -825,25 +825,25 @@ int study(string str) {
 				  "to try again, you may come up with something."
 			);
 			message("prompt", PROMPT, TP);
-			input_to("rshell", I_NOESC); 
+			input_to("rshell", I_NOESC);
 			return 1;
 		}
 //		tell_object(find_player("thorn"), "Spell selected: "+name);
 		write("You may simply press <ENTER> to stop.");
-		job = ([ "user"     : TP,     
-		         "type"     : "study school",   
-		         "school"   : school,   
-		         "points"   : TP->query_spell_research_level(name),      
+		job = ([ "user"     : TP,
+		         "type"     : "study school",
+		         "school"   : school,
+		         "points"   : TP->query_spell_research_level(name),
 		         "keywords" : 0,
 		         "level"    : SRD->get_spell_level(name),
 		         "spell"    : name
-		]);                         
+		]);
 	}
 	else {
 		shell_help("study");
-		input_to("rshell", I_NOESC); 
+		input_to("rshell", I_NOESC);
 		return 1;
-	}	
+	}
 //	tell_object(find_player("thorn"), "user = "+file_name(TP));
 	qref = enqueue(job);
 	input_to("stop_study", I_NOESC, qref);
@@ -855,7 +855,7 @@ int stop_study(string str, string qref) {
 	dequeue(qref);
 	write("You cease your studies on this matter.");
 	message("prompt", PROMPT, TP);
-	input_to("rshell", I_NOESC); 
+	input_to("rshell", I_NOESC);
 	return 1;
 }
 
@@ -880,13 +880,13 @@ string enqueue(mapping job) {
 		call_out("research_event", 2);
 //		tell_object(find_player("thorn"), "Callout made in enqueue().");
 	}
-	
-	return qref;		
+
+	return qref;
 }
 
 void dequeue(string qref) {
 	string *qrefs;
-	
+
 	if(!rqueue) rqueue = ([ ]);
 	map_delete(rqueue, qref);
 	qrefs = keys(rqueue);
@@ -899,17 +899,17 @@ void dequeue(string qref) {
 
 int max_rsrch_pts(int level) {
 	int i, retval;
-	
+
 	if(level > 17) return RSRCH_PT_LVLS[8];
-    else if(level > 15) i = 9; 	
-	else if(level > 13) i = 8; 	
-	else if(level > 11) i = 7; 	
-	else if(level > 9) i = 6; 	
-	else if(level > 7) i = 5; 	
-	else if(level > 5) i = 4; 	
-	else if(level > 3) i = 3; 	
-	else i = 2; 	
-	
+    else if(level > 15) i = 9;
+	else if(level > 13) i = 8;
+	else if(level > 11) i = 7;
+	else if(level > 9) i = 6;
+	else if(level > 7) i = 5;
+	else if(level > 5) i = 4;
+	else if(level > 3) i = 3;
+	else i = 2;
+
 	retval = RSRCH_PT_LVLS[i-1];
 	return (retval - 1);
 }
@@ -922,14 +922,14 @@ int research_director(mapping job) {
 	int points, elem, current_formula_level, spell_level;
 	int sprof, cprof;
 	object user;
-	
+
 	type        = job["type"];
 	user        = job["user"];
 	school      = job["school"];
 	points      = job["points"];
 	spell       = job["spell"];
 	spell_level = job["level"];
-			
+
 	switch(type) {
 		case "random search":
 		// NOT DONE
@@ -941,7 +941,7 @@ int research_director(mapping job) {
 		}
 		if(points >= RSRCH_PT_LVLS[0]) {
 			tell_object(user, "You have found some information on a spell, "+
-				"that you have never seen before.  You eagerly copy an "+ 
+				"that you have never seen before.  You eagerly copy an "+
 				"element of the spell into your notes!\n\n"+
 				"To research this spell, simply <study notes> from the "+
 				"research prompt."
@@ -970,7 +970,7 @@ int research_director(mapping job) {
 			if(!sizeof(files)) {
 				tell_object(user, "You can't seem to find any reference to "+
 					"spells that match the characteristics you are looking "+
-					"for.  This probably means you need to perhaps use fewer "+ 
+					"for.  This probably means you need to perhaps use fewer "+
 					"or different keywords in your search.  Also, keep in "+
 					"mind that some words just don't go together, like "+
 					"offensive and defensive!\n\n"+
@@ -980,12 +980,12 @@ int research_director(mapping job) {
 			}
 			tell_object(user, "You have found some information on a spell, "+
 				"that you have never seen before.  It seems to have the "+
-				"characteristics that you are looking for.  You eagerly copy an "+ 
+				"characteristics that you are looking for.  You eagerly copy an "+
 				"element of the spell into your notes!\n\n"+
 				"First, 'add <word> to notes' and then to research this "+
 				"spell, simply <study notes> from the research prompt."
 			);
-			
+
 			spell = files[random(sizeof(files))];
 			elem = SRD->get_formula_element(user, spell, 0);
 			magicword = SRD->code2word(elem);
@@ -995,16 +995,16 @@ int research_director(mapping job) {
 			return 0;
 		}
 		break;
-		
+
 		case "study notes":
 		// NOT DONE
-		
+
 		// Check the current level that the research is at.
 		// Put that in a variable.
 		current_formula_level = sizeof(job["formula"]);
-		
-		
-		
+
+
+
 		// If there are enough points for the next level, then
 		// give away the next word in the formula and add it to
 		// the notes.  Stop us here with a return 0;
@@ -1016,10 +1016,10 @@ int research_director(mapping job) {
 				magicword+"\'."
 			);
 		}
-		
+
 		// Increment the current level of the formula
 		current_formula_level++;
-		
+
 		// If this is the last element in the formula, then do
 		// the finishing touches on the notes to make them able
 		// to be used to generate the new spell.
@@ -1030,8 +1030,8 @@ int research_director(mapping job) {
 			return 0;
 		}
 		// Otherwise, let the research continue with a return 1!
-		break;	
-		
+		break;
+
 		case "study spell":
 		if(points >= (RSRCH_PT_LVLS[spell_level-1])/50) {
 			sprof = random(2)+1;
@@ -1076,20 +1076,20 @@ int search(string str) {
 	string type, name, qref, wordstr, mystring;
 	mapping job;
 	string *keywords;
-	
+
 	if(sscanf(str, "%s randomly", name) == 1) {
 		write("You begin to search through books on "+name+
 			" for anything interesting...."
 		);
 		write("You may simply press <ENTER> to stop.");
-		job = ([ "user"     : TP,     
-		         "type"     : "random search",   
-		         "school"   : name,   
-		         "points"   : 0,      
+		job = ([ "user"     : TP,
+		         "type"     : "random search",
+		         "school"   : name,
+		         "points"   : 0,
 		         "keywords" : 0,
 		         "spell"    : 0
-		]);                         
-	}     
+		]);
+	}
 	else if(sscanf(str, "%s for %s", name, wordstr) == 2) {
 		keywords = explode(wordstr, " and ");
 		mystring = implode(keywords, " and ");
@@ -1098,18 +1098,18 @@ int search(string str) {
 			mystring+"."
 		);
 		write("You may simply press <ENTER> to stop.");
-		job = ([ "user"     : TP,     
-		         "type"     : "keyword search",   
-		         "school"   : name,   
-		         "points"   : 0,      
+		job = ([ "user"     : TP,
+		         "type"     : "keyword search",
+		         "school"   : name,
+		         "points"   : 0,
 		         "keywords" : keywords,
 		         "spell"    : 0
-		]);                         
+		]);
 	}
 	else {
 		shell_help("search");
 		return 1;
-	}	
+	}
 	tell_object(find_player("thorn"), "user = "+file_name(TP));
 	qref = enqueue(job);
 	input_to("stop_study", I_NOESC, qref);
@@ -1125,7 +1125,7 @@ int add_comp(string str) {
 	string word, key;
 	object user;
 	int code;
-	
+
 	user = TP;
 	write(TPQN);
 	key = TPQN;
@@ -1154,7 +1154,7 @@ int master_book() {
 	string *keyz;
 	int level, research, x, toggle;
 	string name, out;
-	
+
 	toggle = 0;
 	out = "";
 	info = TP->get_spell_skills();
@@ -1173,11 +1173,11 @@ int master_book() {
 		entry = info[name];
 		level = entry[0];
 		research = entry[1];
-		
+
 		// Must have a level of 1% to show up.  0% represents a spell
 		// in the process of being discovered.
 		if(!level) continue;
-		
+
 		out += "%^WHITE%^BOLD%^";
 		out += arrange_string(name, 25);
 		out += "%^MAGENTA%^BOLD%^";
@@ -1185,7 +1185,7 @@ int master_book() {
 		if(toggle) {
 			toggle = 0;
 			out += "\n";
-		} 
+		}
 		else {
 			toggle = 1;
 		}
@@ -1193,7 +1193,6 @@ int master_book() {
 	out += "\n";
 	write(out);
 	message("prompt", PROMPT, TP);
-	input_to("rshell", I_NOESC); 
+	input_to("rshell", I_NOESC);
 	return 1;
 }
-

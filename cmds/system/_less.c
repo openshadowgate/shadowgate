@@ -75,7 +75,7 @@ swap_out()
 }
 
 
-static void
+protected void
 write_menu_bar()
 {
 	int max;
@@ -87,8 +87,8 @@ write_menu_bar()
 		( max * 100 / lines ) + "% (help ?) " );
 }
 
- 
-static void
+
+protected void
 display_page()
 {
 	int n, ps;
@@ -98,9 +98,9 @@ display_page()
 	n = cat( fname, top_line, ps );
 	if( top_line + n > lines ) eof = 1;
 }
- 
 
-static void
+
+protected void
 cont_more()
 {
 	write_menu_bar();
@@ -128,7 +128,7 @@ get_mark( string str )
 }
 
 private int
-search_string( string str ) 
+search_string( string str )
 {
         int tmp_line;
 	string tmp1;
@@ -136,8 +136,8 @@ search_string( string str )
 
 	tmp_line = top_line + page_size / 2;
 	tmp1 = read_file( fname, tmp_line, SEARCH_LINES );
-	
-	while( tmp1 && sscanf( tmp1, "%s" + str, tmp2 ) != 1 ) 
+
+	while( tmp1 && sscanf( tmp1, "%s" + str, tmp2 ) != 1 )
         {
 	         tmp_line += SEARCH_LINES;
                  tmp1 = read_file( fname, tmp_line, SEARCH_LINES );
@@ -147,14 +147,14 @@ search_string( string str )
 	{
 	         while( sscanf( tmp2, "%s\n%s",tmp1, tmp2 ) )
 		        tmp_line++;
-                 tmp_line -= 2;    
-		 return tmp_line;  
+                 tmp_line -= 2;
+		 return tmp_line;
 	}
         return top_line;
 }
 
 
-static void
+protected void
 get_more_com( string str )
 {
 	int n, cmd;
@@ -239,18 +239,18 @@ get_more_com( string str )
 			top_line = mark[n-1][1];
 			lines = mark[n-1][2];
 			break;
-			
+
 		case 'n':       /* Search for last r.e */
                         if( rem_expr ) str = rem_expr;
 			else str = "";
 
                 case '/':       /* Search for a regular expresssion */
-                        if( ! str  || str == "" ) 
+                        if( ! str  || str == "" )
 			{
 			        write( "\nNo previous regular expression.\n\n" );
 				return cont_more();
 			}
-			
+
 			rem_expr = str;
 			rem_line = top_line;
 			top_line = search_string( str );
@@ -273,7 +273,7 @@ get_more_com( string str )
 	display_page();
 	cont_more();
 }
- 
+
 
 int
 more_file( string str )
@@ -323,13 +323,13 @@ pager( string str )
 	more_file( str );
 }
 
- 
+
 int
-cmd_less( string arg ) 
+cmd_less( string arg )
 {
 	string more;
 	object more_ob;
- 
+
 	seteuid( getuid( this_player(1) ) );
 	if( ! arg || arg == "" ) return help();
 	more = (string) this_player() -> getenv("PAGER");

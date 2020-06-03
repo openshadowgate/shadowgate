@@ -3,7 +3,7 @@
 
 #define RTH_MAX_NAMES 256
 
-private static string *rth_pairs_arr = ({
+nosave private string *rth_pairs_arr = ({
 /* Planets from the original Elite */
         "..lexegezacebiso" +
             "usesarmaindirea." +
@@ -31,34 +31,34 @@ private static string *rth_pairs_arr = ({
             "nenoofearoseorar",
             });
 
-private static string rth_pairs;
+nosave private string rth_pairs;
 
-private static mapping rth_seed = ([
+nosave private mapping rth_seed = ([
                                        "w0": 0,
                                        "w1": 0,
                                        "w2": 0,
                                        ]);
 
-private static int rth_rotatel(int x)
+protected int rth_rotatel(int x)
 {
     x = (x & 255) * 2;
     if(x > 255) x -= 255;
     return x;
 }
 
-private static int rth_twist(int x)
+protected int rth_twist(int x)
 {
     return (rth_rotatel(x >> 8) << 8) + rth_rotatel(x & 255);
 }
 
-private static void rth_next()
+protected void rth_next()
 {
     rth_seed["w0"] = rth_twist(rth_seed["w0"]);
     rth_seed["w1"] = rth_twist(rth_seed["w1"]);
     rth_seed["w2"] = rth_twist(rth_seed["w2"]);
 }
 
-private static void rth_tweakseed()
+protected void rth_tweakseed()
 {
     int tmp;
 
@@ -70,7 +70,7 @@ private static void rth_tweakseed()
     rth_seed["w2"] = tmp;
 }
 
-private static string rth_makename()
+protected string rth_makename()
 {
     string name;
     int pair1, pair2, pair3, pair4;
@@ -128,5 +128,3 @@ varargs string generate_name(int pair, int num, int ind)
 
     return names[ind];
 }
-
-

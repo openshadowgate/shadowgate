@@ -12,12 +12,12 @@
 
 #define DEFAULT_MORE "%^BOLD%^%^BLACK%^%^B_WHITE%^"
 #define TO this_object()
-static private mapping __More;
+nosave private mapping __More;
 
-void do_more(string str);
-void do_help();
-
-void create() { __More = ([]); }
+void create()
+{
+    __More = ([]);
+}
 
 void fixmore(){ __More = ([]);}
 varargs int more(mixed what, string cl, function endmore)
@@ -61,7 +61,7 @@ varargs int more(mixed what, string cl, function endmore)
     return 1;
 }
 
-static void do_more(string cmd) {
+protected void do_more(string cmd) {
     string arg;
     string *matches;
     int i;

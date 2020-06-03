@@ -3,8 +3,8 @@
 // daemon to strip colors and characters from catch_say
 // borrowed from Garrett's fix to /std/psychic & moved into a daemon by Styx
 
-// questions:  
-//  does string *strippable need to be static in the daemon?
+// questions:
+//  does string *strippable need to be nosave in the daemon?
 //  does the filter_alphabet() need to init_strippable since it gets passed a string
 //     from filter_colors now?
 //  does init_strippable need run separately now (it was before ::create in the mobs)
@@ -12,7 +12,7 @@
 // to use it in /std/npc.c, I think it just needs this added -
 //    /d/common/daemon/filters_d.c->filter_colors(str);
 //  as the second line (after the strings are defined) in int apprentice()
-   
+
 
 
 #include <std.h>
@@ -21,7 +21,7 @@
 inherit DAEMON;
 
 
-static string * strippable;   // does this need to be static for the daemon?
+nosave string * strippable;
 void init_strippable();
 string filter_colors(string str);
 string filter_alphabet(string str);
@@ -55,11 +55,9 @@ string filter_colors(string str) {
 string filter_alphabet(string str) {
   int iter=0;
 
-   init_strippable(); 
+   init_strippable();
   for(iter=0;iter<sizeof(strippable);iter++)
     str=replace_string(str,strippable[iter],"");
 
   return str;
 }
-
-

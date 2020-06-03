@@ -4,7 +4,7 @@
 #include "../tecqumin.h"
 inherit MOB + "QNPC.c";
 
-static int BEAT;
+nosave int BEAT;
 
 void set_responses();
 

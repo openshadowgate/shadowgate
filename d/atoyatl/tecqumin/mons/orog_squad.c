@@ -62,7 +62,7 @@ void retreat();
 void clear_rolling();
 void heart_beat();
 
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 
 
 void create(){

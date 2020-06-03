@@ -8,38 +8,12 @@ inherit OBJECT;
 private string __Forward;
 private mapping __MyGroups;
 private mapping *__BoxInfo;
-static int __Current, __JustSending, __FwdFlag;
-static private int *__Delete;
-static private string __Owner;
-static mapping __MudGroups, __TmpPost;
+nosave int __Current, __JustSending, __FwdFlag;
+nosave private int *__Delete;
+nosave private string __Owner;
+nosave mapping __MudGroups, __TmpPost;
 string import_file;
 int import_ready;
-
-void headers(int x);
-void do_import(string str);
-void erase_import();
-void do_mail(string str);
-void get_to(string str);
-void add_group(string str);
-void remove_group(string str);
-static private void restore_post_box();
-void do_groups(string str);
-void do_help(string str);
-void do_save(string cmd, string str);
-void do_reply(string cmd, string arg);
-void do_forward(string cmd, string arg);
-void do_quit(string cmd);
-void verify_quit(string str);
-void really_quit(string str);
-void handle___Delete(string cmd, string arg);
-void set_forward(string str);
-void do_header(string str);
-void read_mail(int x);
-void get_cc(string str);
-string letter_head(mapping this_letter);
-static void other_post_box(string str);
-string get_header_time(mixed x);
-void get_text();
 
 void create() {
     ::create();
@@ -86,23 +60,23 @@ void init() {
     __Delete = allocate(sizeof(__BoxInfo));
 }
 
-void start_mail(string str) 
+void start_mail(string str)
 {
     if(str && str != "") {
         __JustSending = 1;
-        do_mail(str);        
+        do_mail(str);
         return;
     }
     message("mail", "%^GREEN%^Imaginary Intermud Postal Service (IIPS) 2.0"
       "\nDescartes of Borg 1993, 1994 (type \"?\" for help)%^RESET%^", this_player());
     message("mail", "%^BLUE%^%^BOLD%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
       "-=-=-=%^RESET%^", this_player());
-    if((int)this_player()->getenv("NO_MAIL_HEADERS")) 
+    if((int)this_player()->getenv("NO_MAIL_HEADERS"))
     {
         do_mail(0);
     }
     else
-    {       
+    {
         headers(0);
     }
 }
@@ -742,7 +716,7 @@ void do_forward(string cmd, string arg) {
     }
     else {
         write_file(DIR_TMP+"/"+__TmpPost["from"]+".iips",
-     
+
             "\n-----\nOriginal letter sent by "+capitalize(__BoxInfo[__Current]["from"])+" to "+capitalize(__Owner)+" "+(stringp(__BoxInfo[__Current]["date"])?__BoxInfo[__Current]["date"]:ctime(__BoxInfo[__Current]["date"]))+"\n"+
           "-----\n");
         write_file(DIR_TMP+"/"+__TmpPost["from"]+".iips",
@@ -788,13 +762,22 @@ string letter_head(mapping this_letter) {
     return ret;
 }
 
-int valid_shadow() { return 1; }
+int valid_shadow()
+{
+    return 1;
+}
 
-int drop () { return 1; }
+int drop()
+{
+    return 1;
+}
 
-int get() { return 0; }
+int get()
+{
+    return 0;
+}
 
-static void restore_post_box() {
+protected void restore_post_box() {
     mapping borg;
 
     borg = (mapping)LOCALPOST_D->query_post_data(__Owner);
@@ -803,12 +786,12 @@ static void restore_post_box() {
     __Forward = borg["forward"];
 }
 
-static void save_post_box() {
+protected void save_post_box() {
     LOCALPOST_D->remake_post_box(__Owner, ([ "box info" : __BoxInfo,
       "forward" : __Forward, "my groups" : __MyGroups ]));
 }
 
-static void other_post_box(string str) {
+protected void other_post_box(string str) {
     mapping borg;
 
     borg = (mapping)LOCALPOST_D->query_post_data(str);

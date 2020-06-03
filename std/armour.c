@@ -12,7 +12,7 @@ inherit OBJECT;
 
 private string *actualLimbs, type, wear, struck, unwear,armor_prof;
 private string *possibleLimbs;
-private static int originalAc,max_dex_bonus;
+nosave private int originalAc,max_dex_bonus;
 private object wornBy;
 int block_chance;
 

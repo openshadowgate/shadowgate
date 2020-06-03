@@ -73,12 +73,12 @@ inherit OBJECT;
 mapping MyCharacterInfo;
 string MyPlace, StartFrom, EndAt, *BuildArray;
 int MyBrief, FinalFlag, EndFlag, FirstBuild = 0, BeenBuilt, stats_setup;
-static object MyObject;
+nosave object MyObject;
 
 
-static string *my_choices;
-static string astr, unique;
-static int bonus;
+nosave string *my_choices;
+nosave string astr, unique;
+nosave int bonus;
 
 void ProcessStep();
 void ShowStep();

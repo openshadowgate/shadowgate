@@ -13,9 +13,9 @@
 #define VOID "/d/shadowgate/void"
 
 private int encumbrance;
-static private int no_clean;
+nosave private int no_clean;
 private int size;
-static private object last_location;
+nosave private object last_location;
 
 void set_weight(int x);
 void set_no_clean(int x);
@@ -57,21 +57,21 @@ int move(mixed dest)
 
     if ( (!this_object()) || (!objectp(this_object())) )
         return MOVE_DESTRUCTED;
-    if (stringp(dest)) 
+    if (stringp(dest))
     {
         ob = find_object_or_load(dest);
         if(!objectp(ob))
-        {      
+        {
             if(objectp(TO))
-            { 
-                msg = identify(TO) + " attempted to move to invalid object."; 
+            {
+                msg = identify(TO) + " attempted to move to invalid object.";
                 if(objectp(ETO)) { msg += " environment was "+identify(ETO); }
             }
             else msg = "Invalid object attempted to move into invalid object.";
             log_file("invalid_moves", msg+"\n");
             return;
         }
-    } else 
+    } else
         ob = dest;
     if (!ob)
         return MOVE_NOT_ALLOWED;
@@ -91,24 +91,28 @@ int move(mixed dest)
     }
     set_last_location(environment(this_object()));
     prev = ETO;
-    if(!objectp(TO)) return MOVE_DESTRUCTED;  
-    if(!objectp(ob)) return MOVE_DESTRUCTED; 
+    if(!objectp(TO)) return MOVE_DESTRUCTED;
+    if(!objectp(ob)) return MOVE_DESTRUCTED;
     move_object(ob);
     if(!objectp(TO)) return MOVE_DESTRUCTED;
     ob->gain_item(TO);
 
-    // setting static had_players to 3 if a person enters a room, used for clean_up -Ares
-    if(ob->is_room() && TO->is_player()) { ob->set_had_players(); }
+    if (ob->is_room() && TO->is_player()) {
+        ob->set_had_players();
+    }
 
-    if (objectp(prev))
+    if (objectp(prev)) {
         prev->loose_item(TO);
+    }
 
-    if ( objectp(TO) && (interactive(TO) || TO->query_property("croom_track")) ) {
-     if (objectp(prev) && (!prev->query_property("croom_dirty")))
-       prev->set_property("croom_dirty",1);
+    if (objectp(TO) && (interactive(TO) || TO->query_property("croom_track"))) {
+        if (objectp(prev) && (!prev->query_property("croom_dirty"))) {
+            prev->set_property("croom_dirty", 1);
+        }
 
-     if (!ob->query_property("croom_dirty"))
-    ob->set_property("croom_dirty",1);
+        if (!ob->query_property("croom_dirty")) {
+            ob->set_property("croom_dirty", 1);
+        }
     }
     return MOVE_OK;
 }
@@ -125,9 +129,9 @@ int remove(){
         i= sizeof(inv = all_inventory(this_object()));
         while (i--) inv[i]->move(env);
     }
-	if(objectp(env)) 
+	if(objectp(env))
 	{
-		if(living(env)) 
+		if(living(env))
 		{
 			env->ApplyObjectBonuses(TO, env, "remove", "move");
 		}
@@ -154,14 +158,14 @@ int clean_up(){
     ob = this_object();
     env = environment(ob);
 
-    if (objectp(ob)) 
+    if (objectp(ob))
     {
         if ( ob->is_player() )
             return 0;
 
 
 
-        if (objectp(env)) 
+        if (objectp(env))
         {
 
             if (env->query_property("storage room"))
@@ -175,7 +179,7 @@ int clean_up(){
 
             if (living(env) || userp(env))
                 return 1;
-        } 
+        }
         else
         /* No environment! Get rid of it and everything in it! */
         {

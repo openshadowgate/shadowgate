@@ -6,7 +6,7 @@ inherit "/d/shadow/mon/guards/watchint.c";
 string rank;
 int monster_ac;
 
-static object leader;
+nosave object leader;
 
 void set_leader(object ob){
     leader = ob;

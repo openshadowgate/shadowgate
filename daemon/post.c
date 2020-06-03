@@ -8,32 +8,10 @@ inherit OBJECT;
 private string __Forward;
 private mapping __MyGroups;
 private mapping *__BoxInfo;
-static int __Current, __JustSending, __FwdFlag;
-static private int *__Delete;
-static private string __Owner;
-static mapping __MudGroups, __TmpPost;
-
-void headers(int x);
-void do_mail(string str);
-void get_to(string str);
-void add_group(string str);
-void remove_group(string str);
-static private void restore_post_box();
-void do_groups(string str);
-void do_help(string str);
-void do_save(string cmd, string str);
-void do_reply(string cmd, string arg);
-void do_forward(string cmd, string arg);
-void do_quit(string cmd);
-void verify_quit(string str);
-void really_quit(string str);
-void handle___Delete(string cmd, string arg);
-void set_forward(string str);
-void do_header(string str);
-void read_mail(int x);
-void get_cc(string str);
-string letter_head(mapping this_letter);
-string get_header_time(mixed x);
+nosave int __Current, __JustSending, __FwdFlag;
+nosave private int *__Delete;
+nosave private string __Owner;
+nosave mapping __MudGroups, __TmpPost;
 
 void create() {
     ::create();
@@ -134,8 +112,8 @@ void postal_cmd(string str) {
         case "g": do_groups(arg); return;
         case "w": set_forward(arg); break;
         case "?": do_help(arg); return;
-        case "s": case "S": 
-            if(!wizardp(this_player())) 
+        case "s": case "S":
+            if(!wizardp(this_player()))
               message("mail", "Save option only for creators.\n",this_player());
             else do_save(cmd, arg);
             break;
@@ -304,7 +282,7 @@ void do_help(string str) {
           break;
         default:
           this_player()->more(explode(read_file(wizardp(this_player()) ?
-            POSTAL_CREATOR_HELP : POSTAL_USER_HELP), "\n"), "help", 
+            POSTAL_CREATOR_HELP : POSTAL_USER_HELP), "\n"), "help",
             (: this_object(), "do_mail" :));
           return;
     }
@@ -328,7 +306,7 @@ void do_save(string cmd, string str) {
         write("Invalid letter number  (\"?\" for help).");
         return;
     }
-    if(strsrch(where, "..") != -1) { 
+    if(strsrch(where, "..") != -1) {
         message("mail", "Illegal file name.", this_player());
         return;
     }
@@ -538,9 +516,9 @@ void get_cc(string str) {
 // If a player actually tries to send to a general group
 // the cc fails  -- Thorn 950607
     if(strsrch(str, "users") != -1 || strsrch(str, "immortals") != -1) {
-        if(!wizardp(TP)) { 
-            get_cc(""); 
-            return;    
+        if(!wizardp(TP)) {
+            get_cc("");
+            return;
         }
     }
 ///////////////////
@@ -549,7 +527,7 @@ void get_cc(string str) {
     if(str && str != "") __TmpPost["cc"] += explode(lower_case(str), " ");
     orig = distinct_array(__TmpPost["to"]+__TmpPost["cc"]);
     diff = orig - (who=(string *)LOCALPOST_D->post_letter(__TmpPost));
-    if(sizeof(who)) 
+    if(sizeof(who))
         write("Mail sent successfully to:\n"+format_page(who, 3));
     else {
         if(wizardp(this_player())) dead = user_path(__Owner)+"dead.letter";
@@ -708,7 +686,7 @@ int drop () { return 1; }
 
 int get() { return 0; }
 
-static void restore_post_box() {
+protected void restore_post_box() {
     mapping borg;
 
     borg = (mapping)LOCALPOST_D->query_post_data(__Owner);
@@ -717,7 +695,7 @@ static void restore_post_box() {
     __Forward = borg["forward"];
 }
 
-static void save_post_box() {
+protected void save_post_box() {
     LOCALPOST_D->remake_post_box(__Owner, ([ "box info" : __BoxInfo,
       "forward" : __Forward, "my groups" : __MyGroups ]));
 }

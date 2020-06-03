@@ -4,7 +4,7 @@
 
 inherit DAEMON;
 
-static string *gnolls;
+nosave string *gnolls;
 
 void fix_bandits(object ob, int num, object where, int what);
 

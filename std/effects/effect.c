@@ -35,7 +35,7 @@ string effect_name,
        my_diety,
        *immune;
 
-static int FULL_EFFECT = 100;
+nosave int FULL_EFFECT = 100;
 
 int effect_level,
     silent_casting,
@@ -570,7 +570,7 @@ varargs int do_saving_throw(object player, string type, int mod) {
 
 int check_light(object caster) {
 //    if (effective_light(caster) + caster->query_sight_bonus() < -2) return 0;
- 
+
     if(!caster->light_blind(0)) return 1;
     if (caster->query_blind()) return 0;
     else return 1;

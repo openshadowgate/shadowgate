@@ -5,19 +5,16 @@ inherit OBJECT;
 
 #define SAVE_FILE STORAGE"horse_race_stuff"
 
-mapping horse_stats; 
+mapping horse_stats;
 
-static mapping example_variable;  
+nosave mapping example_variable;
 
-static string race_horses; 
+nosave string race_horses;
 string new_horse_name, training_picked;
 int real1, real2, real3, real4, uid_to_train, uid_to_kill;
 object horse_master;
 
-void SAVE();
-void RELOAD();
-
-void create() 
+void create()
 {
     horse_stats = ([]);
     restore_object(SAVE_FILE);
@@ -35,7 +32,7 @@ void add_horse_name(string str)
     temp = keys(horse_stats);
     i = 0;
     real_owner_name = TP->query_true_name();
-	
+
 	for (i=0;i<sizeof(temp);i++)
 	{
 	    owner_on_file = horse_stats[/**/temp[i]/**/]["real_owner"];
@@ -44,9 +41,9 @@ void add_horse_name(string str)
 		"You can't buy another\n");
 		return 1;
 	    }
-	
+
 	}
-	
+
 	if (!TP->query_funds("gold",500000)){
         tell_object(TP, "%^BLACK%^%^BOLD%^You dig through your posessions and can't "+
 		"find enough to pay for that. A horse costs 500,000 gold.%^RESET%^");
@@ -54,23 +51,23 @@ void add_horse_name(string str)
 		"buy a horse, then looks embarassed.%^RESET%^",TP);
     return 1;
     }
-	
 
-	
+
+
     if(!str || str == "") {
-	
+
 	    tell_object(TP,"%^RESET%^%^ORANGE%^You sit down with a merchant and "+
 		"arrange to buy a racing horse. They look through a large book of "+
 		"diferent horses and flip through the pages quickly. You can see "+
 		"each page has specifics on where a horse was bred, who its sire "+
 		"was, and more information. They find a page that does not have an "+
 		"owner's information on it and set it down to fill it out. \n%^RESET%^");
-		
+
 		tell_room(ETP,"%^RESET%^%^ORANGE%^Pulling out a chair, "+TPQCN+"%^RESET%^"+
 		"%^ORANGE%^ starts the paperwork to buy a race horse. The merchant flips "+
 		"through a book of horses before settling on one and pulling the "+
 		"papers out for them. \n%^RESET%^",TP);
-	
+
 	    tell_object(TP,"%^RESET%^%^RED%^You are purchasing a fine young horse. "+
 		"You must now give it a name. This is the name that the rest of the world "+
 		"will see when it is researched or when it is racing. You can use color "+
@@ -93,7 +90,7 @@ void add_horse_name(string str)
     "name. If you would like to end the process and think it over more then "+
     "enter ** to abort.\n%^RESET%^");
     input_to("add_owner_name",str);
-	
+
 return;
 }
 
@@ -109,12 +106,12 @@ void add_owner_name(string str)
     temp = keys(horse_stats);
     i = 0;
     real_owner_name = TP->query_true_name();
-    new_owner_name = str; 
-	
+    new_owner_name = str;
+
 	    if( new_owner_name == "**"){
 	return;
 	}
-	
+
     if(!str || str == "") {
     tell_object(TP,"%^BOLD%^%^RED%^\n\n A fine name for a racing horse. Now your trainer "+
     "will know to only work with you, and knows you personally, but you choose how the "+
@@ -125,24 +122,24 @@ void add_owner_name(string str)
     "enter ** to abort.\n%^RESET%^");
     input_to("add_owner_name",str);
 
-	new_owner_name = str; 
-	
+	new_owner_name = str;
+
 	    if(new_owner_name == "**"){
 	return;
 	}
 	return;
 	}
-	
+
 
 temp = keys(horse_stats);
 x = (sizeof(temp)+1);
-	
+
 	a = (random(10)+10);
 	b = (random(10)+10);
 	c = (random(10)+10);
 	d = (random(10)+10);
 	e = (a+b+c+d);
-	
+
         horse_stats[x] = ([]);
 		horse_stats[x]["UID"] = x;
 		horse_stats[x]["name"] = new_horse_name;
@@ -173,12 +170,12 @@ x = (sizeof(temp)+1);
 		"improve it, and its jockey over time to better compete against the "+
 		"other horses. The sign here will help if you forget how to manage "+
 		"your horse. And good luck.\n%^RESET%^");
-	
+
 }
 
 void train_horse(string str)
 {
-   
+
 	string *temp=({});
     string new_owner_name, real_owner_name, owner_on_file, choice;
     int x;
@@ -189,7 +186,7 @@ void train_horse(string str)
     i = 0;
 	x = 0;
     real_owner_name = TP->query_true_name();
-	
+
 	for (i=0;i<sizeof(temp);i++)
 	{
 	    owner_on_file = horse_stats[/**/temp[i]/**/]["real_owner"];
@@ -218,14 +215,14 @@ void pick_training(string str)
     int x;
     int i;
     string name,owner, blah;
- 
+
     temp = keys(horse_stats);
     i = 0;
 	x = 0;
-	
-	training_picked = str; 
-    if(training_picked == "speed"){ 
-	
+
+	training_picked = str;
+    if(training_picked == "speed"){
+
 	    status_of_training = horse_stats[/**/temp[uid_to_train]/**/]["status"];
 	    if(status_of_training == 1){
 	        tell_object(TP,"%^RESET%^%^ORANGE%^Your trainer looks over the books "+
@@ -236,8 +233,8 @@ void pick_training(string str)
     input_to("train_speed",str);
 		return;
 	}
-	
-	if(training_picked == "acceleration"){	
+
+	if(training_picked == "acceleration"){
 	    status_of_training = horse_stats[/**/temp[uid_to_train]/**/]["status"];
 	    if(status_of_training == 1){
 	        tell_object(TP,"%^RESET%^%^ORANGE%^Your trainer looks over the books "+
@@ -259,14 +256,14 @@ void pick_training(string str)
     input_to("train_jockey",str);
 		return;
     }
-	
+
 	tell_object(TP,"%^RESET%^%^ORANGE%^Your trainer thanks you for your time.\n%^RESET%^");
 		return;
 }
-	
+
 void train_speed(int num)
 {
-   
+
 	string *temp=({});
     int x, i, y, invested_old, invested_new, invested, speed_old, difference, speed_new, status_of_training, old_total_stats, new_total_stats;
     string name,owner, blah;
@@ -278,15 +275,15 @@ void train_speed(int num)
 	speed_old = horse_stats[/**/temp[uid_to_train]/**/]["speed"];
 	status_of_training = horse_stats[/**/temp[uid_to_train]/**/]["status"];
 	old_total_stats = horse_stats[/**/temp[uid_to_train]/**/]["total_skills"];
-	
+
 	if(speed_old < 100){y = 1000000;}
 	if(speed_old < 75){y = 150000;}
 	if(speed_old < 50){y = 50000;}
 	if(speed_old < 25){y = 10000;}
-	
+
 	difference = (invested / y);
 	new_total_stats = (old_total_stats + difference);
-	
+
 	if (!TP->query_funds("gold",invested)){
         tell_object(TP, "%^BLACK%^%^BOLD%^You dig through your posessions and can't "+
 		"find enough to pay for that%^RESET%^");
@@ -294,13 +291,13 @@ void train_speed(int num)
 		"invest, then looks embarassed.%^RESET%^",TP);
     return 1;
     }
-	
+
     TP->use_funds("gold", invested);
-		
+
     tell_object(TP,"%^RESET%^%^ORANGE%^You hand over the gold and give your instructions. "+
 	"You are informed by Baffert that the training will take some time, and you will not "+
 	"be able to do any training in the mean time.\n%^RESET%^");
-	
+
 	if(difference > 5){difference = 5;}
 	horse_stats[/**/temp[uid_to_train]/**/]["status"] = 1;
 	invested_new = invested_old + invested;
@@ -309,14 +306,14 @@ void train_speed(int num)
 	if(speed_new > 100){speed_new = 100;}
 	horse_stats[/**/temp[uid_to_train]/**/]["speed"] = speed_new;
 	horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;
-	
+
 		SAVE();
-	
-}	
+
+}
 
 void train_acc(int num)
 {
-   
+
 	string *temp=({});
     int x, i, y, invested_old, invested_new, invested, acc_old, difference, acc_new, status_of_training, old_total_stats, new_total_stats;
     string name,owner, blah;
@@ -327,13 +324,13 @@ void train_acc(int num)
 	invested_old = horse_stats[/**/temp[uid_to_train]/**/]["invested"];
 	acc_old = horse_stats[/**/temp[uid_to_train]/**/]["accel"];
 	status_of_training = horse_stats[/**/temp[uid_to_train]/**/]["status"];
-	old_total_stats = horse_stats[/**/temp[uid_to_train]/**/]["total_skills"];	
-	
+	old_total_stats = horse_stats[/**/temp[uid_to_train]/**/]["total_skills"];
+
 	if(acc_old < 100){y = 1000000;}
 	if(acc_old < 75){y = 150000;}
 	if(acc_old < 50){y = 50000;}
 	if(acc_old < 25){y = 10000;}
-	
+
 	difference = (invested / y);
 	new_total_stats = (old_total_stats + difference);
 
@@ -344,13 +341,13 @@ void train_acc(int num)
 		"invest, then looks embarassed.%^RESET%^",TP);
     return 1;
     }
-	
+
     TP->use_funds("gold", invested);
-	
+
     tell_object(TP,"%^RESET%^%^ORANGE%^You hand over the gold and give your instructions. "+
 	"You are informed by Baffert that the training will take some time, and you will not "+
 	"be able to do any training in the mean time.\n%^RESET%^");
-	
+
 	if(difference > 5){difference = 5;}
 	horse_stats[/**/temp[uid_to_train]/**/]["status"] = 1;
 	invested_new = invested_old + invested;
@@ -358,14 +355,14 @@ void train_acc(int num)
 	acc_new = acc_old + difference;
 	if(acc_new > 100){acc_new = 100;}
 	horse_stats[/**/temp[uid_to_train]/**/]["accel"] = acc_new;
-	horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;	
-	
+	horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;
+
 		SAVE();
 }
 
 void train_jockey(int num)
 {
- 
+
 	string *temp=({});
     int x, i, y, invested_old, invested_new, invested, jockey_old, difference, jockey_new, status_of_training, old_total_stats, new_total_stats;
     string name,owner, blah;
@@ -377,15 +374,15 @@ void train_jockey(int num)
 	jockey_old = horse_stats[/**/temp[uid_to_train]/**/]["jockey"];
 	status_of_training = horse_stats[/**/temp[uid_to_train]/**/]["status"];
 	old_total_stats = horse_stats[/**/temp[uid_to_train]/**/]["total_skills"];
-	
+
 	if(jockey_old < 100){y = 1000000;}
 	if(jockey_old < 75){y = 150000;}
 	if(jockey_old < 50){y = 50000;}
 	if(jockey_old < 25){y = 10000;}
-	
+
 	difference = (invested / y);
 	new_total_stats = (old_total_stats + difference);
-	
+
 	if (!TP->query_funds("gold",invested)){
         tell_object(TP, "%^BLACK%^%^BOLD%^You dig through your posessions and "+
 		"can't find enough to pay for that%^RESET%^");
@@ -393,13 +390,13 @@ void train_jockey(int num)
 		"invest, then looks embarassed.%^RESET%^",TP);
     return 1;
     }
-	
+
     TP->use_funds("gold", invested);
-		
+
     tell_object(TP,"%^RESET%^%^ORANGE%^You hand over the gold and give your instructions. "+
 	"You are informed by Baffert that the training will take some time, and you will not "+
 	"be able to do any training in the mean time.\n%^RESET%^");
-	
+
 	if(difference > 5){difference = 5;}
 	horse_stats[/**/temp[uid_to_train]/**/]["status"] = 1;
 	invested_new = invested_old + invested;
@@ -408,25 +405,25 @@ void train_jockey(int num)
 	if(jockey_new > 100){jockey_new = 100;}
 	horse_stats[/**/temp[uid_to_train]/**/]["jockey"] = jockey_new;
 	horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;
-		
+
 		SAVE();
 }
 
 void clear_all_training(string str)
 {
-   
+
 	string *temp=({});
     string new_owner_name, real_owner_name, owner_on_file, choice;
     int x;
     int i,w,q;
     string name,owner;
- 
+
     temp = keys(horse_stats);
-    RELOAD();	
+    RELOAD();
     i = 0;
 	q = 0;
     real_owner_name = TP->query_true_name();
-	
+
 	for (i=0;i<sizeof(temp);i++)
 	{
 	    horse_stats[/**/temp[i]/**/]["status"] = 0;
@@ -434,7 +431,7 @@ void clear_all_training(string str)
 		tell_room(ETP,"%^RESET%^%^ORANGE%^trainers scurry around giving reports to Baffert%^RESET%^\n");
 	    SAVE();
 		return 1;
-	
+
 }
 
 void kill_a_horse(string str)
@@ -449,7 +446,7 @@ void kill_a_horse(string str)
     i = 0;
 	x = 0;
     real_owner_name = TP->query_true_name();
-	
+
 	for (i=0;i<sizeof(temp);i++)
 	{
 	    owner_on_file = horse_stats[/**/temp[i]/**/]["real_owner"];
@@ -488,8 +485,8 @@ void kill_the_horse(string str)
 	"\nBaffert looks over with a serious expression and nods, then signs the paperwork "+
 	"and hands it back. The trainer disapears to handle the horse. Baffert explains that "+
 	"no one will want to buy a horse you gave up, so... other means must be taken.\n%^RESET%^\n");
-	SAVE();	
-	return; 
+	SAVE();
+	return;
 }
 
 void item_fun(string str, int y, int x)
@@ -497,7 +494,7 @@ void item_fun(string str, int y, int x)
 
 int type, true_value, value, stat_old, stat_new, old_total_stats, new_total_stats,i;
 string *temp=({});
-string owner_on_file, name_check;	
+string owner_on_file, name_check;
 type = y;
 x = x + 1;
 true_value = x;
@@ -519,10 +516,10 @@ for (i=0;i<sizeof(temp);i++)
 	    horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;
     tell_object(TP,"%^RESET%^%^BOLD%^Baffert hands the horse shoes to a trainer who "+
 	"sends it to your jockey.%^RESET%^\n");
-		SAVE();	
+		SAVE();
 		return;
 		}
-		
+
 	if(type == 2){
 		stat_old = horse_stats[/**/temp[uid_to_train]/**/]["accel"];
 		old_total_stats = horse_stats[/**/temp[uid_to_train]/**/]["total_skills"];
@@ -532,10 +529,10 @@ for (i=0;i<sizeof(temp);i++)
 	    horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;
     tell_object(TP,"%^RESET%^%^ORANGE%^Baffert hands the spurs to a trainer who "+
 	"sends it to your jockey.%^RESET%^\n");
-		SAVE();	
+		SAVE();
 		return;
 	    }
-		
+
 	if(type == 3){
 		stat_old = horse_stats[/**/temp[uid_to_train]/**/]["jockey"];
 		old_total_stats = horse_stats[/**/temp[uid_to_train]/**/]["total_skills"];
@@ -545,7 +542,7 @@ for (i=0;i<sizeof(temp);i++)
 	    horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;
     tell_object(TP,"%^RESET%^%^RED%^Baffert hands the riding crop to a trainer who "+
 	"sends it to your jockey.%^RESET%^\n");
-		SAVE();	
+		SAVE();
 		return;
 	    }
 			tell_room(ETP,"%^RESET%^%^ORANGE%^not trained!%^RESET%^");
@@ -558,7 +555,7 @@ for (i=0;i<sizeof(temp);i++)
 
 void reinvest(string str)
 {
-   
+
 	string *temp=({});
     string new_owner_name, real_owner_name, owner_on_file, choice;
     int x;
@@ -569,7 +566,7 @@ void reinvest(string str)
     i = 0;
 	x = 0;
     real_owner_name = TP->query_true_name();
-	
+
 	for (i=0;i<sizeof(temp);i++)
 	{
 	    owner_on_file = horse_stats[/**/temp[i]/**/]["real_owner"];
@@ -599,18 +596,18 @@ void pick_reinvest(string str)
     int i;
 	int amount_avail, winnings, claim_winnings;
     string name,owner, blah;
- 
+
     temp = keys(horse_stats);
     i = 0;
 	x = 0;
-	
-	training_picked = str; 
-	
+
+	training_picked = str;
+
 	winnings = horse_stats[/**/temp[uid_to_train]/**/]["winnings"];
 	claim_winnings = horse_stats[/**/temp[uid_to_train]/**/]["claim_winnings"];
 	amount_avail = winnings - claim_winnings;
-	
-    if(training_picked == "speed"){ 
+
+    if(training_picked == "speed"){
 	    if(amount_avail < 1){
 	        tell_object(TP,"%^RESET%^%^ORANGE%^Your trainer looks over the books "+
 			"and reminds you that you have no winnings to reinvest.\n%^RESET%^");
@@ -621,8 +618,8 @@ void pick_reinvest(string str)
     input_to("train_speed2",str);
 		return;
 	}
-	
-	if(training_picked == "acceleration"){	
+
+	if(training_picked == "acceleration"){
 	    if(amount_avail < 1){
 	        tell_object(TP,"%^RESET%^%^ORANGE%^Your trainer looks over the books "+
 			"and reminds you that you have no winnings to reinvest.\n%^RESET%^");
@@ -642,17 +639,17 @@ void pick_reinvest(string str)
 	tell_object(TP,"%^RESET%^%^ORANGE%^How much of your "+amount_avail+" available do "+
 	"you want to reinvest?\n%^RESET%^");
     input_to("train_jockey2",str);
-	
+
 		return;
     }
-	
+
 	tell_object(TP,"%^RESET%^%^ORANGE%^Your trainer thanks you for your time.\n%^RESET%^");
 		return;
 }
 
 void train_speed2(int num)
 {
-   
+
 	string *temp=({});
     int x, i, y, invested_old, invested_new, invested, speed_old, difference, speed_new, status_of_training, old_total_stats, new_total_stats;
 	int winnings, claim_winnings, amount_avail;
@@ -661,37 +658,37 @@ void train_speed2(int num)
     i = 0;
 	x = 0;
 	sscanf(num,"%d",invested);
-	
+
 	invested_old = horse_stats[/**/temp[uid_to_train]/**/]["invested"];
 	speed_old = horse_stats[/**/temp[uid_to_train]/**/]["speed"];
 	status_of_training = horse_stats[/**/temp[uid_to_train]/**/]["status"];
 	old_total_stats = horse_stats[/**/temp[uid_to_train]/**/]["total_skills"];
-	
+
     winnings = horse_stats[/**/temp[uid_to_train]/**/]["winnings"];
 	claim_winnings = horse_stats[/**/temp[uid_to_train]/**/]["claim_winnings"];
 	amount_avail = winnings - claim_winnings;
-	
+
 	if(speed_old < 100){y = 1000000;}
 	if(speed_old < 75){y = 150000;}
 	if(speed_old < 50){y = 50000;}
 	if(speed_old < 25){y = 10000;}
-	
+
 	difference = (invested / y);
 	new_total_stats = (old_total_stats + difference);
-	
+
 	if (invested > amount_avail){
         tell_object(TP, "%^BLACK%^%^BOLD%^There is not that much available to re-invest%^RESET%^");
         tell_room(ETP, "%^BLACK%^%^BOLD%^"+TPQCN+"%^BLACK%^%^BOLD%^ frowns as they look over their paperwork.%^RESET%^",TP);
     return 1;
     }
-	
+
     claim_winnings = claim_winnings + invested;
 	horse_stats[/**/temp[uid_to_train]/**/]["claim_winnings"] = claim_winnings;
-	
-		
+
+
     tell_object(TP,"%^RESET%^%^ORANGE%^You hand over the paperwork to reinvest and give your instructions. "+
 	"You are informed by Baffert that the training will take some time.\n%^RESET%^");
-	
+
 	if(difference > 5){difference = 5;}
 	horse_stats[/**/temp[uid_to_train]/**/]["status"] = 1;
 	invested_new = invested_old + invested;
@@ -700,14 +697,14 @@ void train_speed2(int num)
 	if(speed_new > 100){speed_new = 100;}
 	horse_stats[/**/temp[uid_to_train]/**/]["speed"] = speed_new;
 	horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;
-	
+
 		SAVE();
-	
-}	
+
+}
 
 void train_acc2(int num)
 {
-   
+
 	string *temp=({});
     int x, i, y, invested_old, invested_new, invested, acc_old, difference, acc_new, status_of_training, old_total_stats, new_total_stats;
     int winnings, claim_winnings, amount_avail;
@@ -719,18 +716,18 @@ void train_acc2(int num)
 	invested_old = horse_stats[/**/temp[uid_to_train]/**/]["invested"];
 	acc_old = horse_stats[/**/temp[uid_to_train]/**/]["accel"];
 	status_of_training = horse_stats[/**/temp[uid_to_train]/**/]["status"];
-	old_total_stats = horse_stats[/**/temp[uid_to_train]/**/]["total_skills"];	
-		
+	old_total_stats = horse_stats[/**/temp[uid_to_train]/**/]["total_skills"];
+
     winnings = horse_stats[/**/temp[uid_to_train]/**/]["winnings"];
 	claim_winnings = horse_stats[/**/temp[uid_to_train]/**/]["claim_winnings"];
 	amount_avail = winnings - claim_winnings;
-	
-	
+
+
 	if(acc_old < 100){y = 1000000;}
 	if(acc_old < 75){y = 150000;}
 	if(acc_old < 50){y = 50000;}
 	if(acc_old < 25){y = 10000;}
-	
+
 	difference = (invested / y);
 	new_total_stats = (old_total_stats + difference);
 
@@ -739,13 +736,13 @@ void train_acc2(int num)
         tell_room(ETP, "%^BLACK%^%^BOLD%^"+TPQCN+"%^BLACK%^%^BOLD%^ frowns as they look over their paperwork.%^RESET%^",TP);
     return 1;
     }
-	
+
     claim_winnings = claim_winnings + invested;
 	horse_stats[/**/temp[uid_to_train]/**/]["claim_winnings"] = claim_winnings;
-	
+
     tell_object(TP,"%^RESET%^%^ORANGE%^You hand over the paperwork to reinvest and give your instructions. "+
 	"You are informed by Baffert that the training will take some time.\n%^RESET%^");
-	
+
 	if(difference > 5){difference = 5;}
 	horse_stats[/**/temp[uid_to_train]/**/]["status"] = 1;
 	invested_new = invested_old + invested;
@@ -753,14 +750,14 @@ void train_acc2(int num)
 	acc_new = acc_old + difference;
 	if(acc_new > 100){acc_new = 100;}
 	horse_stats[/**/temp[uid_to_train]/**/]["accel"] = acc_new;
-	horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;	
-	
+	horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;
+
 		SAVE();
 }
 
 void train_jockey2(int num)
 {
- 
+
 	string *temp=({});
     int x, i, y, invested_old, invested_new, invested, jockey_old, difference, jockey_new, status_of_training, old_total_stats, new_total_stats;
 	int winnings, claim_winnings, amount_avail;
@@ -773,31 +770,31 @@ void train_jockey2(int num)
 	jockey_old = horse_stats[/**/temp[uid_to_train]/**/]["jockey"];
 	status_of_training = horse_stats[/**/temp[uid_to_train]/**/]["status"];
 	old_total_stats = horse_stats[/**/temp[uid_to_train]/**/]["total_skills"];
-		
+
     winnings = horse_stats[/**/temp[uid_to_train]/**/]["winnings"];
 	claim_winnings = horse_stats[/**/temp[uid_to_train]/**/]["claim_winnings"];
 	amount_avail = winnings - claim_winnings;
-	
+
 	if(jockey_old < 100){y = 1000000;}
 	if(jockey_old < 75){y = 150000;}
 	if(jockey_old < 50){y = 50000;}
 	if(jockey_old < 25){y = 10000;}
-	
+
 	difference = (invested / y);
 	new_total_stats = (old_total_stats + difference);
-	
+
 	if (invested > amount_avail){
         tell_object(TP, "%^BLACK%^%^BOLD%^There is not that much available to re-invest%^RESET%^");
         tell_room(ETP, "%^BLACK%^%^BOLD%^"+TPQCN+"%^BLACK%^%^BOLD%^ frowns as they look over their paperwork.%^RESET%^",TP);
     return 1;
     }
-	
+
     claim_winnings = claim_winnings + invested;
 	horse_stats[/**/temp[uid_to_train]/**/]["claim_winnings"] = claim_winnings;
-		
+
     tell_object(TP,"%^RESET%^%^ORANGE%^You hand over the paperwork to reinvest and give your instructions. "+
 	"You are informed by Baffert that the training will take some time.\n%^RESET%^");
-	
+
 	if(difference > 5){difference = 5;}
 	horse_stats[/**/temp[uid_to_train]/**/]["status"] = 1;
 	invested_new = invested_old + invested;
@@ -806,7 +803,7 @@ void train_jockey2(int num)
 	if(jockey_new > 100){jockey_new = 100;}
 	horse_stats[/**/temp[uid_to_train]/**/]["jockey"] = jockey_new;
 	horse_stats[/**/temp[uid_to_train]/**/]["total_skills"] = new_total_stats;
-		
+
 		SAVE();
 }
 
@@ -823,12 +820,12 @@ void withdraw1(int num)
     i = 0;
 	x = 0;
     real_owner_name = TP->query_true_name();
-	
+
 	winnings = horse_stats[/**/temp[uid_to_train]/**/]["winnings"];
 	claim_winnings = horse_stats[/**/temp[uid_to_train]/**/]["claim_winnings"];
 	amount_avail = winnings - claim_winnings;
-	
-	
+
+
 	for (i=0;i<sizeof(temp);i++)
 	{
 	    owner_on_file = horse_stats[/**/temp[i]/**/]["real_owner"];
@@ -860,21 +857,21 @@ void withdraw2(int num)
     i = 0;
 	x = 0;
     real_owner_name = TP->query_true_name();
-    
+
 	sscanf(num,"%d",withdraw);
 	winnings = horse_stats[/**/temp[uid_to_train]/**/]["winnings"];
 	claim_winnings = horse_stats[/**/temp[uid_to_train]/**/]["claim_winnings"];
 	amount_avail = winnings - claim_winnings;
-	
+
 	if (withdraw > amount_avail){
         tell_object(TP, "%^BLACK%^%^BOLD%^There is not that much available to withdrawt%^RESET%^");
         tell_room(ETP, "%^BLACK%^%^BOLD%^"+TPQCN+"%^BLACK%^%^BOLD%^ frowns as they look over their paperwork.%^RESET%^",TP);
     return 1;
     }
-	
+
 	claim_winnings = claim_winnings + withdraw;
 	horse_stats[/**/temp[uid_to_train]/**/]["claim_winnings"] = claim_winnings;
-	
+
 	withdraw = (withdraw / 2);
 	TP->add_money("gold", withdraw);
     tell_object(TP, "%^BLACK%^%^BOLD%^Your trainer hands over "+withdraw+" gold.%^RESET%^");
@@ -882,16 +879,16 @@ void withdraw2(int num)
 	SAVE();
 	return;
 }
-	
+
 void SAVE()
 {
-    seteuid(UID_DAEMONSAVE);  
-	save_object(SAVE_FILE); 
-    seteuid(getuid());  
-	
+    seteuid(UID_DAEMONSAVE);
+	save_object(SAVE_FILE);
+    seteuid(getuid());
+
 	horse_master =find_object_or_load(STORAGE"horse_master.c");
 	horse_master->create();
-	
+
     return;
 }
 
@@ -900,5 +897,3 @@ void RELOAD()
     horse_stats = ([]);
     restore_object(SAVE_FILE);
 }
-
-

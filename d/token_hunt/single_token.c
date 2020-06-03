@@ -4,7 +4,7 @@ inherit OBJECT;
 
 #define VALID_TOKENS ({ "copper","silver","gold","platinum" })
 
-static mapping TOKEN_COLORS = ([ 
+nosave mapping TOKEN_COLORS = ([ 
     "copper" : "%^RESET%^%^ORANGE%^copper%^RESET%^%^BOLD%^%^GREEN%^", 
     "silver" : "%^RESET%^%^BOLD%^silver%^RESET%^%^BOLD%^%^GREEN%^", 
     "gold" : "%^RESET%^%^YELLOW%^gold%^RESET%^%^BOLD%^GREEN%^", 

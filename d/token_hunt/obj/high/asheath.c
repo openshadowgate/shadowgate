@@ -23,7 +23,7 @@ void create(){
   set_long("%^BOLD%^%^BLACK%^This dark sheath is as black as the midnight hour on a moonless night."
 "  No light seems to escape it, not even when shone directly onto the carefully woven fabric.  This makes it"
 " extremely difficult to see exactly what materials were used in making the sheath.  The whole thing seems to"
-" constantly buzz with an almost static electricity, an inner power unbeknownst to anything of this plane that"
+" constantly buzz with an almost nosave electricity, an inner power unbeknownst to anything of this plane that"
 " bounces its way up and down the length of it.  Oddly enough, two black straps are attached to hold it securely"
 " in place rather than the usual one.%^RESET%^\n");
 

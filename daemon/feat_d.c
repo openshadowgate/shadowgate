@@ -7,8 +7,8 @@
 
 inherit DAEMON;
 
-static mapping __ALL_FEATS;
-static mapping __USABLE_FEATS;
+nosave mapping __ALL_FEATS;
+nosave mapping __USABLE_FEATS;
 
 /**
  * Checks for any class feat changes

@@ -5,8 +5,8 @@ inherit ROOM;
 string MyDest, UNIQ_ID;
 object destination, entry_tent;
 
-static mixed cleaner;
-static int tent_installed;
+nosave mixed cleaner;
+nosave int tent_installed;
 
 int filth;
 

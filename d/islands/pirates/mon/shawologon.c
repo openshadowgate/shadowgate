@@ -38,7 +38,7 @@ int __Value(string str) {
    return 1;
 }
 
-static int __SellAll() {
+protected int __SellAll() {
    tell_room(ETO, "%^MAGENTA%^"+TOQCN+" smirks and says: %^RESET%^Thanks but no thanks, I've got me own "
 "suppliers.");
    return 1;
@@ -60,10 +60,10 @@ int __List(string str) {
     string *tmp, *not_allowed, short, who, what, type;
     int i, x, cost;
 
-    if(!at_shop())  
+    if(!at_shop())
 	return 1;
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
 
     if(member_array("letters", ETO->query_allowed()) != -1)
@@ -97,7 +97,7 @@ int __List(string str) {
 	type = types(inv[x]);
 	if(avatarp(TP))   type = inv[x]->query_property("pstore_cust");
         tmp +=({ sprintf("%%^BOLD%%^%%^GREEN%%^%-45s %%^YELLOW%%^%5d %%^WHITE%%^%-5s %-20s",
-	   short,cost,"gold", type ) 
+	   short,cost,"gold", type )
 	});
     }
     if(tmp == ({}))

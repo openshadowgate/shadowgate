@@ -93,8 +93,7 @@ private string expand_macro( string msg, int flags, int personal ){
     people.
 */
 
-static int
-describe_action( string verb, object victim, string pre, string post, int flags ){
+protected int describe_action( string verb, object victim, string pre, string post, int flags ){
     object pob, *all, *pick;
     string src_name, src_name_x, victim_name, victim_name_x, v_ext, msg;
     int i;
@@ -217,8 +216,7 @@ describe_action( string verb, object victim, string pre, string post, int flags 
     herself, then extract_args() returns 0.
 */
 
-static mixed *
-extract_args( string arg ){
+protected mixed *extract_args( string arg ){
     string name, adj;
     object victim;
 

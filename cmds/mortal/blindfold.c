@@ -2,8 +2,8 @@
 
 inherit ARMOUR;
 
-static int prev_blind, isblinded, isused;
-static object who;
+nosave int prev_blind, isblinded, isused;
+nosave object who;
 
 void create() {
   ::create();

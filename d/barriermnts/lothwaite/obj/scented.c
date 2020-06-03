@@ -5,7 +5,7 @@
 
 inherit OBJECT;
 
-static int lit;
+nosave int lit;
 
 int j,fuel, light_time;
 string SCENT,VAR;

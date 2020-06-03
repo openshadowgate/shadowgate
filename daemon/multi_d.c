@@ -18,13 +18,13 @@ string *non_voting;
 mapping entered;
 mapping whoWhen;
 
-static void save_data() {
+protected void save_data() {
    seteuid(UID_DAEMONSAVE);
    save_object(SAVE_MULTI);
    seteuid(getuid());
 }
 
-static void restore_data() {restore_object(SAVE_MULTI);}
+protected void restore_data() {restore_object(SAVE_MULTI);}
 
 void create() {
    seteuid( getuid() );
@@ -73,7 +73,7 @@ int make_link( string *names ) {
    non_voting += realNames[1..size-1];
    size = sizeof(realNames);
    for( loop = 0 ; loop < size ; loop++ ) {
-      
+
       links[realNames[loop]] = ( realNames - realNames[loop..loop] );
       //write("key = "+realNames[loop]+" value "+identify(links[realNames[loop]]));
    }

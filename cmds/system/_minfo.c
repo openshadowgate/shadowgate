@@ -12,16 +12,10 @@ inherit DAEMON;
 /* define some constants */
 #define MEM_THRESH    33000
 #define LIL_THRESH    5000
-#define INSTANCE_COUNT 50  
+#define INSTANCE_COUNT 50
 
-/* prototype some member functions */
-void parseArgs( string str );
-void listUser( string user );
-void listLoose();
-void junk(int what, object player);
-int cmd_info( string str );
-
-/* define some data members */private static string msg;
+/* define some data members */
+nosave string msg;
 
 /*****
  * void parseArgs( string str )
@@ -67,7 +61,7 @@ void listLoose() {
     j=sizeof(objs);
     for (i=0;i<j && stop < 50;i++) {
         if (clonep(objs[i]) && !objectp(environment(objs[i])) && !objs[i]->is_room()) {
-            //if(!stringp(objs[i]->query_creator())) objs[i]->remove();  
+            //if(!stringp(objs[i]->query_creator())) objs[i]->remove();
             stop++;
             write(" Object "+base_name(objs[i]) +" created by "+objs[i]->query_creator());
         }
@@ -93,7 +87,7 @@ void listUser( string user ) {
 	return;
     }
     path = sprintf( "/realms/%s/", user );
-    
+
     /* find the user */
     if ( stat( path ) == 0 ) {
         write( "The user %^CYAN%^" + capitalize( user ) +
@@ -102,7 +96,7 @@ void listUser( string user ) {
     }
 
     /* banner */
-    msg += "    %^CYAN%^-=-=-=-=-=-=-=- %^BOLD%^GREEN%^ " + 
+    msg += "    %^CYAN%^-=-=-=-=-=-=-=- %^BOLD%^GREEN%^ " +
            capitalize( user ) + "'s Loaded "
            "Objects%^RESET%^CYAN%^ -=-=-=-=-=-=-=- %^RESET%^\n";
 
@@ -110,7 +104,7 @@ void listUser( string user ) {
     for ( c = 0; c < sizeof( o ); ++c ) {
         if ( strsrch( file_name( o[c] ), path ) == 0 ) {
             /* found an object... put the text into 'msg' */
-            msg += sprintf( "      %-40s%s %d%s\n", identify( o[c] ), 
+            msg += sprintf( "      %-40s%s %d%s\n", identify( o[c] ),
                             " %^BOLD%^CYAN%^", memory_info( o[c] ), "%^RESET%^" );
         }
     }
@@ -162,7 +156,7 @@ void junk(int what, object player) {
     /* get the total memory for users */
     for ( c = 0; c < sizeof( u ); ++c )
     {
-        if(objectp(u[c]) && u[c]->query("true_quietness") && member_group(u[c]->query_true_name(), "law")) 
+        if(objectp(u[c]) && u[c]->query("true_quietness") && member_group(u[c]->query_true_name(), "law"))
         {
             rm += ({u[c]});
             continue;
@@ -178,9 +172,9 @@ void junk(int what, object player) {
     /* total object stats */
     msg += "    %^CYAN%^Total Objects:           %^BOLD%^" + sizeof( o ) +
            "%^RESET%^\n";
-    msg += "    %^CYAN%^Memory in Objects:       %^BOLD%^" + oMem + 
+    msg += "    %^CYAN%^Memory in Objects:       %^BOLD%^" + oMem +
            "%^RESET%^\n";
-    msg += "    %^CYAN%^Avg. Memory per Object:  %^BOLD%^" + 
+    msg += "    %^CYAN%^Avg. Memory per Object:  %^BOLD%^" +
            oMem / sizeof( o ) + "%^RESET%^\n";
     msg += "     %^CYAN%^Total cloned objects without env is "+loose+"\n\n";
 
@@ -188,16 +182,16 @@ void junk(int what, object player) {
     /* user stats */
     msg += "    %^CYAN%^Total Users:             %^BOLD%^" + sizeof( u ) +
            "%^RESET%^\n";
-    msg += "    %^CYAN%^Memory in Users:         %^BOLD%^" + uMem + 
+    msg += "    %^CYAN%^Memory in Users:         %^BOLD%^" + uMem +
            "%^RESET%^\n";
-    msg += "    %^CYAN%^Avg. Memory per Users:   %^BOLD%^" + 
+    msg += "    %^CYAN%^Avg. Memory per Users:   %^BOLD%^" +
            uMem / sizeof( u ) + "%^RESET%^\n\n";
 
     msg += "    %^CYAN%^Total Rooms:             %^BOLD%^" + rooms +
            "%^RESET%^\n";
-    msg += "    %^CYAN%^Memory in Rooms:         %^BOLD%^" + rMem + 
+    msg += "    %^CYAN%^Memory in Rooms:         %^BOLD%^" + rMem +
            "%^RESET%^\n";
-    msg += "    %^CYAN%^Avg. Memory per Room:   %^BOLD%^" + 
+    msg += "    %^CYAN%^Avg. Memory per Room:   %^BOLD%^" +
            rMem / rooms  + "%^RESET%^\n\n";
 
     }
@@ -205,9 +199,9 @@ void junk(int what, object player) {
     if ( sizeof( m ) > 0 ) {
         msg += "    %^CYAN%^Total NPCs:              %^BOLD%^" + sizeof( m ) +
                "%^RESET%^\n";
-        msg += "    %^CYAN%^Memory in NPCs:          %^BOLD%^" + mMem + 
+        msg += "    %^CYAN%^Memory in NPCs:          %^BOLD%^" + mMem +
                "%^RESET%^\n";
-        msg += "    %^CYAN%^Avg. Memory per NPCs:    %^BOLD%^" + 
+        msg += "    %^CYAN%^Avg. Memory per NPCs:    %^BOLD%^" +
                mMem / sizeof( m ) + "%^RESET%^\n\n";
     }
 // moving high instance counts above large objects since the large objects list is so long, per discussion with Grendel and Garrett  *Styx* 3/15/05
@@ -229,7 +223,7 @@ void junk(int what, object player) {
             if ( warning[c] == 0 )
                 continue;
 
-            msg += sprintf( "      %-50s%s %d%s\n", identify( warning[c] ), 
+            msg += sprintf( "      %-50s%s %d%s\n", identify( warning[c] ),
                             " %^BOLD%^CYAN%^", memory_info( warning[c] ), "%^RESET%^" );
         }
 //        msg += "    %^CYAN%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=";
@@ -278,11 +272,11 @@ void help() {
 @STYX
      syntax   minfo [ -u | -l | -p ]
 
-     optional arguments 
+     optional arguments
 	 -u <wizname> 	   user = wizname, checks the /realms/user dir objects
 	 -l 		   loose (cloned objects with no env., only lists the first 50)
 	 -p <playername>   player, gives memory stats on player & objects in inventory
-				over 5,000 
+				over 5,000
 
 With no arguments summarizes memory use by object types, lists large objects, and lists objects with more than 50 instances cloned.
 STYX

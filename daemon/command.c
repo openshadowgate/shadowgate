@@ -7,13 +7,8 @@
 // added settings for the new spell dir. Nienne, 06/10.
 #include <dirs.h>
 
-private static mapping __Cmds;
-private static string *__Paths;
-
-void rehash(mixed *val);
-string find_cmd(string cmd, string *path);
-string *query_paths();
-varargs string *query_commands(string str);
+private nosave mapping __Cmds;
+private nosave string *__Paths;
 
 string *build_alpha_directory(string direct)
 {

@@ -2,7 +2,7 @@
 inherit OBJECT;
 
 object room;
-static int flag;
+nosave int flag;
 
 int charge;
 
@@ -58,7 +58,7 @@ int query_charge(){
 
 init(){
     ::init();
-    
+
     if (ETO->is_room()) {
     if(objectp(room)) {
          room->set_property("teleport proof",-67);

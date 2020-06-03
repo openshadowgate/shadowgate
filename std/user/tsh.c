@@ -30,8 +30,8 @@
 
 inherit CSTACK_ADT;       /* for pushd and popd */
 
-static string tsh_prompt;
-static int cur, hist_size, pushd_size, custom_prompt, aBlock, timeBlock;
+nosave string tsh_prompt;
+nosave int cur, hist_size, pushd_size, custom_prompt, aBlock, timeBlock;
 
 string do_nicknames(string arg);
 string do_alias(string arg);

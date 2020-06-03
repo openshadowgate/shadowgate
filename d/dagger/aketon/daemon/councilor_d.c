@@ -2,8 +2,6 @@
 
 inherit DAEMON;
 
-static void load_room(string room);
-static void drop_them(object mon,string room);
 object mor,fea,cro;
 
 void create() {
@@ -35,13 +33,13 @@ void make_councilors() {
    return;
 }
 
-static void load_room(string room) {
+protected void load_room(string room) {
    if(!stringp(room)) return;
    find_object_or_load(room);
    return;
 }
 
-static void drop_them(object mon, string room) {
+protected void drop_them(object mon, string room) {
    if(!objectp(mon)) return;
    mon->move(room);
    return;

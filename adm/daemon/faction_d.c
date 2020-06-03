@@ -1,44 +1,44 @@
 // Nienne's faction system. To make the cities work! August 2015... wait, Nov 2016 and into 2017!
 
 // This system includes a dual list of factions, and is intended to bring cities to life.
-// Longterm, it's intended to allow for players to influence their own standing (quests, attacks, 
+// Longterm, it's intended to allow for players to influence their own standing (quests, attacks,
 // etc) or potentially gain official ranks within the town.
 
-// For now, it's tied in to the ambience.c object in each city, which manipulates messages and 
-// reactions in that city area (phase 1). Only Tharis is installed so far, for testing purposes, 
+// For now, it's tied in to the ambience.c object in each city, which manipulates messages and
+// reactions in that city area (phase 1). Only Tharis is installed so far, for testing purposes,
 // but more will be rolled out once this is working well.
 
-// To install a new faction, please set up factionname.o in /std/factions, with a function for 
-// initialise_status(object theplayer). This will give a default standing for the player the 
-// first time they encounter that faction. Eg/ humans will likely be neutral or friendly with 
-// most groups, whereas a thieves guild may default to friendly ranking only for thieves and 
+// To install a new faction, please set up factionname.o in /std/factions, with a function for
+// initialise_status(object theplayer). This will give a default standing for the player the
+// first time they encounter that faction. Eg/ humans will likely be neutral or friendly with
+// most groups, whereas a thieves guild may default to friendly ranking only for thieves and
 // bards on a first encounter. Also please add the faction to the relevant array.
 
-// Arrays: OK_FACTIONS stores all standard and publically-known cities, which players may expect 
-// to gain status with in standard interactions. HIDDEN_FACTIONS is just that, ones that are 
-// not readily apparent, and may be guilds, player groups, or other secret gatherings. The player 
+// Arrays: OK_FACTIONS stores all standard and publically-known cities, which players may expect
+// to gain status with in standard interactions. HIDDEN_FACTIONS is just that, ones that are
+// not readily apparent, and may be guilds, player groups, or other secret gatherings. The player
 // UI will not reveal this list by default unless a player has already gained standing with them.
 
-// Rankings: on a sliding scale, hostile -> unfriendly -> indifferent -> friendly -> respected. 
-// These will change the way city echoes & NPCs react to the player (phase 2). Also two special 
-// flags to override other ranks, hunted & appointed - which can only be manually set (phase 3). 
-// These should be given by immortals based on interactions. Hunted are those beyond just 
-// banned from the city/area, who later can have actual bounties, pursuit, and rewards for capture. 
-// Appointed are city officials, which should be limited to HMs & should allow commands later to 
+// Rankings: on a sliding scale, hostile -> unfriendly -> indifferent -> friendly -> respected.
+// These will change the way city echoes & NPCs react to the player (phase 2). Also two special
+// flags to override other ranks, hunted & appointed - which can only be manually set (phase 3).
+// These should be given by immortals based on interactions. Hunted are those beyond just
+// banned from the city/area, who later can have actual bounties, pursuit, and rewards for capture.
+// Appointed are city officials, which should be limited to HMs & should allow commands later to
 // direct city guards, etc.
-// Scale is appointed/respected/friendly/indifferent/unfriendly/hostile/hunted. Matching number 
+// Scale is appointed/respected/friendly/indifferent/unfriendly/hostile/hunted. Matching number
 // values: 6000/4000 to 5999/2000 to 3999/-1999 to 1999/-3999 to -2000/-5999 to -4000/-6000.
 
-// Initial rankings: all characters start somewhere between hostile and friendly. A files for each 
-// faction in /std/factions specify the clauses (race, class, etc) to give default standings for 
-// new characters. These then get adjusted by player actions in-game (phase 3) by quests, attacks, 
+// Initial rankings: all characters start somewhere between hostile and friendly. A files for each
+// faction in /std/factions specify the clauses (race, class, etc) to give default standings for
+// new characters. These then get adjusted by player actions in-game (phase 3) by quests, attacks,
 // etc. Also they can be manually overridden/adjusted by immortals.
 
 #include <security.h>
 #include <dirs.h>
 
 mapping factions;
-static string current;
+nosave string current;
 
 int valid_access(string who);
 int account_exists(string who);
@@ -54,7 +54,7 @@ mapping query_active_factions(string who);
 void display_factions(object ob,string who);
 
 //#define OK_FACTIONS ({ "tharis","tonovi","shadow","tsarven","antioch","torm","juran" }) // eventually! Not all in yet.
-#define OK_FACTIONS ({ "tharis","shadow","torm","tsarven","antioch","tonovi","juran","synoria" }) 
+#define OK_FACTIONS ({ "tharis","shadow","torm","tsarven","antioch","tonovi","juran","synoria" })
 #define HIDDEN_FACTIONS ({ "enclave of shadows","independent thieves guilds","rilynath","circle of light","silver thread" })
 
 void create() {
@@ -113,7 +113,7 @@ void initialize_faction(string who,string thisfaction) {
     startval = (int)MyFile->query_start_attitude(theplayer);
     if(!intp(startval)) return;
 
-    factions[myprofile][thisfaction] = startval;    
+    factions[myprofile][thisfaction] = startval;
     tell_object(find_player("nienne"),"Initialized faction "+thisfaction+" under profile "+myprofile+" to "+startval+".");
     save_object(DIR_FACTIONS+"/"+current);
 }
@@ -161,7 +161,7 @@ void reset_faction(string who,string thisprofile,string thisfaction) {
 
 // to wipe all hostile- or hunted-rank faction standings. This should trigger on a PK to clean any history there.
 // if certain factions are naturally hostile to a character type, they will simply reconfigure on the next encounter.
-// this does not automatically wipe appointed rank, I would prefer this done manually by imms if the PK merits 
+// this does not automatically wipe appointed rank, I would prefer this done manually by imms if the PK merits
 // such a situation, rather than it being automatic.
 void pk_reset_hostile(string who) {
     string *myprofiles, *myfactions;

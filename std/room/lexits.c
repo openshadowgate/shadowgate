@@ -72,14 +72,14 @@ void create() {
 // exitName:({"destination",dc-check,damageper fall, height})
 //dc-check to match intended player level, damage is per fall, height is multiple of 100, each 100 takes a check.
 void set_climb_exits(mixed dests) {
-    if (mapp(dests)) 
+    if (mapp(dests))
     {
         //so we can clear climb_exits intentionally - Saide
-        if(!sizeof(keys(dests))) 
+        if(!sizeof(keys(dests)))
         {
             if(mapp(climb_exits))
             {
-                if(sizeof(keys(climb_exits))) 
+                if(sizeof(keys(climb_exits)))
                 {
                     climb_exits = ([]);
                     TO->reinitiate();
@@ -146,7 +146,7 @@ int object_pre_exits(string str){
   return 1;
 }
 
-void add_tracks(object ob, string action, string direction) 
+void add_tracks(object ob, string action, string direction)
 {
     int i,j;
     string tmp,*feats;
@@ -213,7 +213,7 @@ int blocked(string exit) {
     return 0;
 }
 
-int use_exit() 
+int use_exit()
 {
     string verb,paths;
     string *tmpstrs;
@@ -247,14 +247,14 @@ int use_exit()
     if (blocked(verb)) {
         return 1;
     }
-    if (sizeof(TP->query_attackers()) &&  verb != (string)TP->query_property("true moving")) 
+    if (sizeof(TP->query_attackers()) &&  verb != (string)TP->query_property("true moving"))
     {
         flee_delay = random(2) + 2;
         effect = new("/std/room/exiteffect");
         effect->set_tp(TP);
         effect->set_dir(verb);
         effect->set_env(TO);
-       
+
         if(TP->is_player())
         {
             if(TP->query_property("my_exiteffect"))
@@ -262,10 +262,10 @@ int use_exit()
                 TO->removeObjectFromCombatCycle((object)TP->query_property("my_exiteffect"));
                 obj = (object)TP->query_property("my_exiteffect");
                 TP->remove_property("my_exiteffect");
-                if(objectp(obj)) 
-                { 
+                if(objectp(obj))
+                {
                     flee_delay += ((int)obj->query_delay()/2);
-                    obj->remove();                   
+                    obj->remove();
                 }
             }
             effect->set_delay(flee_delay);
@@ -290,7 +290,7 @@ int use_exit()
     if ((verb == "climb") || (verb == "descend"))
         if (!climb_ok(verb))
             return 1;
-	//leaving this in until I get the rest of the lib 
+	//leaving this in until I get the rest of the lib
 	//updated to support new traps - Saide
     	if (TO->trapped(verb))
         if (TO->do_spec_trap(verb)) return 1;
@@ -353,13 +353,13 @@ int use_exit()
     return 1;
 }
 
-void setupExits() 
+void setupExits()
 {
     string *borg;
     int i;
     i = sizeof(CLIMB);
     while (i--) add_action("use_stupid_exit",CLIMB[i]);
-    if (climb_exits) 
+    if (climb_exits)
 	{
     	i = sizeof(borg = keys(climb_exits));
         while (i--) add_action("use_exit", borg[i]);
@@ -372,7 +372,7 @@ void setupExits()
 
 }
 
-static void initiate() 
+protected void initiate()
 {
     object ob,incoming;
     string *borg,verb, tmp;
@@ -392,27 +392,27 @@ static void initiate()
         incoming = TP->query_in_vehicle();
 	}
 	if(!objectp(incoming)) return;
-    
+
     //I'm going try it this way and see what breaks... err happens :P
     //Property is set when you sneak successfully - Saide
 
-    if(TP->query_property("sneaking_from")) 
+    if(TP->query_property("sneaking_from"))
 	{
         tmp = TP->query_property("sneaking_from");
         TP->remove_property("sneaking_from");
         tmp = query_direction(tmp);
-        if(tmp != ROOM_VOID) 	
+        if(tmp != ROOM_VOID)
 		{
             add_tracks(incoming,"entered",tmp);
         	return;
-        }       
+        }
     }
-    
-    //Debug msgs below - trying to figure out what exactly 
-    //happens here when I sneak and it turns out... well, all 
+
+    //Debug msgs below - trying to figure out what exactly
+    //happens here when I sneak and it turns out... well, all
     //of them happen sometimes.... Saide
 
-    if (!objectp(ob)) 
+    if (!objectp(ob))
 	{
         add_tracks(incoming,"appeared",0);
         return;
@@ -446,12 +446,12 @@ static void initiate()
     add_tracks(incoming,"entered",verb);
 }
 
-varargs void set_exits(mixed dests, string *dirs) 
+varargs void set_exits(mixed dests, string *dirs)
 {
     int i;
     string result,where,how;
 
-    if (mapp(dests)) 
+    if (mapp(dests))
     {
         destinations = ([]);
         destinations = dests;
@@ -475,7 +475,7 @@ varargs void set_exits(mixed dests, string *dirs)
 }
 
 
-void add_exit(string dest, string dir) 
+void add_exit(string dest, string dir)
 {
     if (!dest || !dir) return;
     if (!destinations) destinations = ([]);
@@ -490,7 +490,7 @@ void clear_exits()
     TO->reinitiate();
 }
 
-void remove_exit(string dir) 
+void remove_exit(string dir)
 {
     if (!dir || !destinations || !destinations[dir]) return;
     map_delete(destinations, dir);
@@ -525,12 +525,12 @@ string *query_obvious_exits() {
 }
 
 mixed query_exits_string(int hidden)
-{	
+{
 	int x, max;
 	string *sorties;
 	string str = "";
 	if(!destinations) return 0;
-	if(hidden) 
+	if(hidden)
 	{
 		sorties = query_exits();
 	}
@@ -595,7 +595,7 @@ string query_short_exits() {
     return s + "]";
 }
 
-static void set_post_exit_functions(string *dirs, string *funcs) {
+protected void set_post_exit_functions(string *dirs, string *funcs) {
     int i;
 
     if (!dirs || !funcs || ((i=sizeof(dirs)) != sizeof(funcs))) return;
@@ -603,19 +603,19 @@ static void set_post_exit_functions(string *dirs, string *funcs) {
     while (i--) post_exit_func[dirs[i]] = funcs[i];
 }
 
-static void add_post_exit_function(string dir, string func) {
+protected void add_post_exit_function(string dir, string func) {
     if (!post_exit_func) post_exit_func = ([]);
     post_exit_func[dir] = func;
     this_object()->reinitiate();
 }
 
-static void remove_post_exit_function(string dir) {
+protected void remove_post_exit_function(string dir) {
     if (!dir || !post_exit_func || !post_exit_func[dir]) return;
     map_delete(post_exit_func, dir);
     this_object()->reinitiate();
 }
 
-static void set_pre_exit_functions(string *dirs, string *funcs) {
+protected void set_pre_exit_functions(string *dirs, string *funcs) {
     int i;
 
     if (!dirs || ! funcs || (sizeof(dirs) != sizeof(funcs))) return;
@@ -624,14 +624,14 @@ static void set_pre_exit_functions(string *dirs, string *funcs) {
     while (i--) pre_exit_func[dirs[i]] = funcs[i];
 }
 
-static void add_pre_exit_function(string dir, string func) {
+protected void add_pre_exit_function(string dir, string func) {
     if (!dir || !func) return;
     if (!pre_exit_func) pre_exit_func = ([]);
     pre_exit_func[dir] = func;
     this_object()->reinitiate();
 }
 
-static void remove_pre_exit_function(string dir) {
+protected void remove_pre_exit_function(string dir) {
     if (!pre_exit_func || !pre_exit_func[dir]) return;
     map_delete(pre_exit_func, dir);
     this_object()->reinitiate();

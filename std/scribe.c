@@ -1,7 +1,7 @@
-//Adding the ability to translate the writing on any object - 
-//You give the item to the scribe, he'll save it to 
-//a folder, with his name - remove it, 
-//translate it, you can then pick 
+//Adding the ability to translate the writing on any object -
+//You give the item to the scribe, he'll save it to
+//a folder, with his name - remove it,
+//translate it, you can then pick
 //said item up anywhere from 3 - 10 minutes
 //later based on how long the writing is
 //and how many people are ahead of you - Saide - June 2008
@@ -13,15 +13,15 @@
 
 inherit NPC;
 
-static string SCRIBE_KEY = "/realms/saide/scribe_key";
-static string SAVE_LOC = "/d/save/scribe/";
-static string REGION;
-static string SAVE_DIR;
-static string SCRIBE_FILE;
-static string SCRIBE_OFILE;
-static int div = 20;
-static int CLEAR_TIME = 604800;
-static int end_game(string str, object ob, string lang);
+nosave string SCRIBE_KEY = "/realms/saide/scribe_key";
+nosave string SAVE_LOC = "/d/save/scribe/";
+nosave string REGION;
+nosave string SAVE_DIR;
+nosave string SCRIBE_FILE;
+nosave string SCRIBE_OFILE;
+nosave int div = 20;
+nosave int CLEAR_TIME = 604800;
+nosave int end_game(string str, object ob, string lang);
 int add_item_to_list(object ob, string pname, int cost, int how_long, string lang, string skey);
 int GetNextItemNum();
 string *my_languages();
@@ -31,24 +31,24 @@ void do_restore_object(string fname);
 string __ScribeName;
 mapping SavedObjects = ([]);
 
-//The max number of items he can be working on translating 
-//at any given time - should all of them be finished, 
+//The max number of items he can be working on translating
+//at any given time - should all of them be finished,
 //he'll take on more - basically making it this way so
-//we dont have to wait on A player picking up their 
+//we dont have to wait on A player picking up their
 //item before B player can get something translated - Saide
 
 int MaxItems = 10;
 
-//Max number of items he'll translate for any given person 
+//Max number of items he'll translate for any given person
 //at any given time - you have to pick them up before
 //he'll translate anymore for you - Saide
 
 int YourItems = 3;
 
-void create() 
+void create()
 {
 	::create();
-}  
+}
 
 void set_region(string str)
 {
@@ -62,7 +62,7 @@ string strip_colors(string sh)
     	string output = "", *list = ({});
     	string *words = ({});
       int i;
-	if(!sh) 
+	if(!sh)
 	{
 		return output;
 	}
@@ -96,37 +96,37 @@ void StartFencing()
 	{
 		if(time() - SavedObjects[files[x]][0] > CLEAR_TIME)
 		{
-			//Load the item, remove it from the mapping, 
+			//Load the item, remove it from the mapping,
 			//count how many items are removed, fence the item
 			//remove the file - Saide
 			//stolen from the inventory loading daemon - Saide
 
 			fname = read_file(files[x] + ".o",1,1);
-			if(!stringp(fname)) 	
+			if(!stringp(fname))
 			{
 				continue;
 			}
      			sscanf(fname,"#%s.c",s1);
 		      s1 = "/"+s1;
-		      if (catch(item = new(s1))) 
+		      if (catch(item = new(s1)))
 			{
-      			continue;		
+      			continue;
 		      }
       		j = catch(i = item->restore_me(files[x]));
-      		if (j) 
+      		if (j)
 			{
-				continue;      	
-      		}	
+				continue;
+      		}
 			//End of stolen code :P
 			"/daemon/fence_d"->save_item(item);
 			item->remove();
 			rm(files[x] + ".o");
-			map_delete(SavedObjects, files[x]);		
-			count++;	
+			map_delete(SavedObjects, files[x]);
+			count++;
 		}
 	}
 	if(count != 0)
-	{	
+	{
 		save_object(SCRIBE_FILE);
 	}
 }
@@ -139,7 +139,7 @@ void set_scribe_name(string name)
 	SAVE_DIR = SAVE_LOC + __ScribeName + "/";
 	SCRIBE_FILE = SAVE_DIR + __ScribeName + "info";
 	SCRIBE_OFILE = SAVE_DIR + __ScribeName + "_object_";
-	if(!get_dir(SAVE_DIR)) 
+	if(!get_dir(SAVE_DIR))
 	{
 		mkdir(SAVE_DIR);
 	}
@@ -161,7 +161,7 @@ void init()
 {
 	::init();
     	add_action("write_stuff","write");
-	if(stringp(__ScribeName)) 
+	if(stringp(__ScribeName))
 	{
 		add_action("translate_object", "translate");
 		add_action("estimate_object", "estimate");
@@ -202,7 +202,7 @@ int get_cost(int len)
 string get_translate_time(int len)
 {
 	int time_it_takes, mod;
-	if(!len) 
+	if(!len)
 	{
 		return "Something went wrong, notify SAIDE or bug report this, immediately.";
 	}
@@ -222,7 +222,7 @@ string get_translate_time(int len)
 			break;
 	}
 	mod = get_last_item_time();
-	if(!mod) 
+	if(!mod)
 	{
 		return (time_it_takes / 60);
 	}
@@ -242,7 +242,7 @@ int get_items_translating()
 	if(!sizeof(people)) return 0;
 	for(x = 0;x < sizeof(people);x++)
 	{
-		if(SavedObjects[people[x]][0] > time()) 
+		if(SavedObjects[people[x]][0] > time())
 		{
 			amt++;
 			continue;
@@ -255,7 +255,7 @@ int get_your_items(string pname)
 {
 	int x, amt = 0;
 	string *people;
-	if(!pname) 
+	if(!pname)
 	{
 		return -1;
 	}
@@ -272,7 +272,7 @@ int get_your_items(string pname)
 	}
 	return amt;
 }
-	
+
 
 void estimate_object(string str)
 {
@@ -311,7 +311,7 @@ void estimate_object(string str)
 			"your stuff together.");
 			return 1;
 		}
-	}		
+	}
 	written = ob->query("read");
 	if(sizeof(written))
 	{
@@ -332,7 +332,7 @@ void estimate_object(string str)
 		return 1;
 	}
 	if(x >= YourItems)
-	{	
+	{
 		force_me("say I'm already translating "+x+ " items for you, "+
 		"either wait until I'm finished with those or pick some of "+
 		"them up.");
@@ -350,7 +350,7 @@ void estimate_object(string str)
 //Region Functions - Saide
 string *my_languages()
 {
-	if(!REGION) 
+	if(!REGION)
 	{
 		return ALL_LANGS;
 	}
@@ -428,7 +428,7 @@ void translate_object(string str)
 	}
 	if(!objectp(ob = present(targ, TP)))
 	{
-		tell_object(TP, "You do not have a "+targ+"!");		
+		tell_object(TP, "You do not have a "+targ+"!");
 		return 1;
 	}
 	tell_room(ETP, TPQCN + " walks up to to " + query_short() + " and shows "+
@@ -440,7 +440,7 @@ void translate_object(string str)
 		force_me("say I'm afraid I dont see any writing on that.");
 		return 1;
 	}
-	if(member_array(lang, my_languages()) == -1) 
+	if(member_array(lang, my_languages()) == -1)
 	{
 		force_me("say I'm afraid I dont know the "+lang+" language.");
 		force_me("say I only understand the "+ say_my_languages());
@@ -448,7 +448,7 @@ void translate_object(string str)
 	}
 	if(member_array((string)ob->query_language(), my_languages()) == -1)
 	{
-		force_me("say I'm afraid I dont know the "+(string)ob->query_language() + 
+		force_me("say I'm afraid I dont know the "+(string)ob->query_language() +
 		" language to translate it for you.");
 		force_me("say I only understand the "+ say_my_languages());
 		return 1;
@@ -458,7 +458,7 @@ void translate_object(string str)
 		force_me("say the writing on that object is already written in "+
 		lang+".  I'm afraid my services would not help you.");
 		return 1;
-	}	
+	}
 	if(ob->query_worn())
 	{
 		force_me("say I'm not going to translate something you're wearing.  "+
@@ -503,7 +503,7 @@ void translate_object(string str)
 		return 1;
 	}
 	if(x >= YourItems)
-	{	
+	{
 		force_me("say I'm already translating "+x+ " items for you, "+
 		"either wait until I'm finished with those or pick some of "+
 		"them up.");
@@ -519,7 +519,7 @@ void translate_object(string str)
 	}
 	force_me("emote takes the "+ob->query_short() + " from "+TPQCN+" and puts it "+
 	"away.");
-	force_me("say I should have it done in about "+get_translate_time(len)+ 
+	force_me("say I should have it done in about "+get_translate_time(len)+
 	" minutes, come see me then.  Dont forget to bring along "+cost+" gold coins.");
 	key = new(SCRIBE_KEY);
 	key->set_weight(ob->query_weight());
@@ -527,7 +527,7 @@ void translate_object(string str)
 	key->set_scribe_owner(__ScribeName);
 	skey = (string)key->query_scribe_key();
 
-	if(add_item_to_list(ob, (string)TP->query_name(), 
+	if(add_item_to_list(ob, (string)TP->query_name(),
 	cost, to_int(get_translate_time(len)), lang, skey) != 0)
 	{
 		key->move(TO);
@@ -569,10 +569,10 @@ int add_item_to_list(object ob, string pname, int cost, int how_long, string lan
 	if(item_num == -1) return 0;
 	ob->save_me(SCRIBE_OFILE + item_num);
 	if(!SavedObjects) SavedObjects = ([]);
-	if(!SavedObjects[SCRIBE_OFILE + item_num]) 
+	if(!SavedObjects[SCRIBE_OFILE + item_num])
 	{
 		finished_time = time() + (how_long  * 60);
-		SavedObjects += ([ SCRIBE_OFILE + item_num : ({finished_time, pname, cost, 
+		SavedObjects += ([ SCRIBE_OFILE + item_num : ({finished_time, pname, cost,
 		ob->query_id(), lang, skey})]);
 	}
 	save_object(SCRIBE_FILE);
@@ -592,15 +592,15 @@ int GetNextItemNum()
 		if(SAVE_DIR + files[x] == SCRIBE_FILE + ".o") continue;
 		//tell_object(find_player("saide"), "Counted file = "+files[x]);
 		//tell_object(find_player("saide"), "Scribe file = "+SCRIBE_FILE);
-		tmp = explode(files[x], "_");		
+		tmp = explode(files[x], "_");
 		if(sizeof(tmp) > 1)
 		{
-			if(to_int(tmp[2]) >= num) 
+			if(to_int(tmp[2]) >= num)
 			{
 				num = to_int(tmp[2]) + 1;
 			}
 		}
-		continue;		
+		continue;
 	}
 	return num;
 }
@@ -673,11 +673,11 @@ void pickup_object(string str)
 	{
 		force_me("emote grumbles loudly");
 		force_me("say I haven't gotten around to translating that item yet.  I need "+
-		"more time!  Come back in about "+((SavedObjects[ob_name][0] - time()) / 60) + 
+		"more time!  Come back in about "+((SavedObjects[ob_name][0] - time()) / 60) +
 		" minutes.");
 		return 1;
 	}
-	if(!TP->query_funds("gold", (int)SavedObjects[ob_name][2])) 
+	if(!TP->query_funds("gold", (int)SavedObjects[ob_name][2]))
 	{
 		force_me("say you dont seem to have enough gold to pay for my services.  "+
 		"Come back with at least "+SavedObjects[ob_name][2]+ " gold coins.");
@@ -692,27 +692,27 @@ void pickup_object(string str)
 	//stolen from the inventory loading daemon - Saide
 
 	fname = read_file(ob_name + ".o",1,1);
-	if(!stringp(fname)) 
+	if(!stringp(fname))
 	{
 		force_me("say something went wrong.. bug report me");
 		return 1;
 	}
      	sscanf(fname,"#%s.c",s1);
       s1 = "/"+s1;
-      if (catch(item = new(s1))) 
+      if (catch(item = new(s1)))
 	{
       	force_me("say Error: File "+s1+" not found");
             return 1;
       }
       j = catch(i = item->restore_me(ob_name));
-      if (j) 
+      if (j)
 	{
       	force_me("say There is a problem with this item.  Bug report me.");
-		return 1;		
+		return 1;
       }
-	
+
 	//End of stolen code :P
-	item->move(TO);	
+	item->move(TO);
 	written = item->query("read");
 	if(sizeof(written))
 	{
@@ -741,7 +741,7 @@ void pickup_object(string str)
 	{
 		force_me("say I dont think you can carry it.  I'll lay it on the counter instead.");
 		force_me("drop "+item_id);
-	}	
+	}
 	tell_room(ETP, TPQCN + " pays the scribe and "+QS+ " takes a slight bow.", TP);
 	tell_object(TP, "You pay the scribe and "+QS+" takes a slight bow.");
 	TP->use_funds("gold", (int)SavedObjects[ob_name][2]);
@@ -756,32 +756,32 @@ void pickup_object(string str)
 	save_object(SCRIBE_FILE);
 	rm(ob_name + ".o");
 	return 1;
-}		
+}
 
 void write_stuff(string str)
 {
 	object ob;
     	string lang;
 
-    	if (!str) 
+    	if (!str)
 	{
       	force_me("say In what language should I write this?");
         	force_me("emote sits up, focusing intently, saying 'I know the "+say_my_languages()+
 		"'");
         	return 1;
     	}
-    	if (sscanf(str,"in %s",lang) != 1) 
+    	if (sscanf(str,"in %s",lang) != 1)
 	{
       	force_me("say In what language should I write this?");
         	force_me("say Please it's simple enough, \"write in <lang>\".");
         	return 1;
     	}
-    	if (member_array(lang,ALL_LANGS) == -1) 
+    	if (member_array(lang,ALL_LANGS) == -1)
 	{
       	force_me("say I am quite certain that "+lang+" is not a real language.");
         	return 1;
     	}
-	if (member_array(lang, my_languages()) == -1) 
+	if (member_array(lang, my_languages()) == -1)
 	{
 		force_me("say I do not understand the language "+ lang+" well enough to write "+
 		"anything in it.");
@@ -804,19 +804,19 @@ void write_stuff(string str)
 
 void long_desc(string str, string long, object ob,string lang)
 {
-	if (str == "**") 	
+	if (str == "**")
 	{
       	end_game(long,ob,lang);
-    	} 
-	else 
+    	}
+	else
 	{
       	if (!long) long = str+"\n";
         	else long = long+str+"\n";
         	input_to("long_desc", long, ob, lang);
-    	}           
+    	}
 }
 
-static int end_game(string str, object ob, string lang)
+protected int end_game(string str, object ob, string lang)
 {
     if(!objectp(ob)) { return 0; }
     if(!stringp(str)) { str = ""; }

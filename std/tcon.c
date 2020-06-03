@@ -9,7 +9,10 @@
 
 inherit OBJECT;
 
-private static int internal_encumbrance;private static int possible_to_close;private static int is_closed;private static int max_internal_encumbrance;
+nosave private int internal_encumbrance;
+nosave private int possible_to_close;
+nosave private int is_closed;
+nosave private int max_internal_encumbrance;
 
 void set_max_internal_encumbrance(int max);
 int query_max_internal_encumbrance();

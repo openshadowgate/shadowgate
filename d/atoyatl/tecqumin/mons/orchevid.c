@@ -3,7 +3,7 @@
 #include "../tecqumin.h"
 inherit "/realms/lujke/tecqumin/mons/hunt_mon.c";
 
-static int BEAT, heartcount;
+nosave int BEAT, heartcount;
 
 void create()
 {

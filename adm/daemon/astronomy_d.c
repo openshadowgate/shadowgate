@@ -9,9 +9,9 @@
  * @brief Functions that handle astronomy calculations
  */
 
-static mapping moons;
-private static mapping moonstate, moonphase, moonorbit;
-static string *moonphases;
+nosave mapping moons;
+nosave mapping moonstate, moonphase, moonorbit;
+nosave string *moonphases;
 int in_eclipse;
 
 /**

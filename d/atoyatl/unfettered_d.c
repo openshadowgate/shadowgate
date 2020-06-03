@@ -9,7 +9,7 @@ int * tentacle_hps, empress_moves, spirits_absorbed, countdown, invincible, last
 mapping targeters, seized, exits_used, victory;
 string * destinations_visited, *path_trod, roomname;
 int mucus, frozen_mucus, skin, tentacles_withdrawn, relaying, power_absorbed, last_move, absorbing, reporting;
-static int BEAT, heartcount, COUNT;
+nosave int BEAT, heartcount, COUNT;
 
 
 void create(){

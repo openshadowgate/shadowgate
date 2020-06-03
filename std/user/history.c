@@ -6,14 +6,25 @@
 
 #include <security.h>
 
-static string *history_queue;
-static int cmd_num, ptr;
-static int max;
+nosave string *history_queue;
+nosave int cmd_num, ptr;
+nosave int max;
 
-int query_cmd_num() { return cmd_num ? cmd_num : 1; }
-int query_ptr() { return ptr; }
-int query_max() { return max; }
-string *query_history() 
+int query_cmd_num()
+{
+    return cmd_num ? cmd_num : 1;
+}
+
+int query_ptr()
+{
+    return ptr;
+}
+
+int query_max()
+{
+    return max;
+}
+string *query_history()
 {
     if(geteuid(previous_object()) != geteuid() &&
       geteuid(previous_object()) != UID_USERACCESS) return ({});

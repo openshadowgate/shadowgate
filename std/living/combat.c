@@ -37,11 +37,11 @@
                            "bound" : DEFAULT_BOUND_MESSAGE, "tripped" : DEFAULT_TRIPPED_MESSAGE, "unconscious" : DEFAULT_UNCONSCIOUS_MESSAGE])
 inherit SKILLS;
 //Various Variables - working on consolidating them into mappings - Saide, January 2017
-static object current_weapon;
+nosave object current_weapon;
 string wimpydir;
 //almost every pre-existing variable has been rolled into the following mappings - Saide, January 2017
 mapping combat_vars, combat_messages, combat_counters;
-static mapping combat_static_vars, combat_arrays;
+nosave mapping combat_static_vars, combat_arrays;
 
 void send_dodge(object att);
 void add_attacker(object ob);
@@ -104,21 +104,21 @@ string query_asleep_message();
 object set_current_weapon(object ob);
 object query_current_weapon();
 int get_block_chance(object obj);
-static void internal_execute_attack();  // this is the renamed execute_attack, putting in recursion testing to prevent errors -Ares
+protected void internal_execute_attack();  // this is the renamed execute_attack, putting in recursion testing to prevent errors -Ares
 mixed return_player_target(int flag); //should return a player target if flag is > roll_dice(1,100) - Saide
 object *query_active_protectors(object obj); // different way to do protection
 
 //  This function is used to initialize various variables
-void init_attack() 
+void init_attack()
 {
     init_complex_body();
     adjust_combat_mapps("arrays", "hunters", ({}));
     adjust_combat_mapps("arrays", "attackers", ({}));
-    adjust_combat_mapps("arrays", "atnames", ({}));    
+    adjust_combat_mapps("arrays", "atnames", ({}));
     wimpydir = "out";
     adjust_combat_mapps("static vars", "toattack", 4);
     adjust_combat_mapps("static vars", "attack", 0);
-    adjust_combat_mapps("vars", "toAttack", -1);    
+    adjust_combat_mapps("vars", "toAttack", -1);
 }
 
 int clean_up_attackers() { return COMBAT_D->clean_up_attackers(TO); }
@@ -127,14 +127,14 @@ string *query_atnames() { return query_combat_mapps("arrays", "atnames"); }
 void set_atnames(string *attNames) { return adjust_combat_mapps("arrays", "atnames", attNames); }
 int kill_ob(object victim, int which) { return COMBAT_D->kill_ob(TO, victim, which); }
 
-void resetCombat() 
+void resetCombat()
 {
     setFuncCast(0);
     setCastFunc(0);
 }
 
-void set_attackers(object *what) 
-{ 
+void set_attackers(object *what)
+{
     adjust_combat_mapps("arrays", "attackers", what);
     adjust_combat_mapps("vars", "any attack", 1);
     return;
@@ -174,10 +174,10 @@ void send_debug_crap(object ob, string str)
 //neither SHOULD be used - retained by returning 0 in case - Saide, January 2017
 varargs int Thaco(int attack_num, object targ, object current, string myclass) { return 0; }
 int rangedTouchAC(object targ) { return 0; }
-void struck(int damage, object weapon, object attacker, string limb) 
+void struck(int damage, object weapon, object attacker, string limb)
 {
     int x;
-    if(damage > 0)  { x = do_damage(limb, damage); }    
+    if(damage > 0)  { x = do_damage(limb, damage); }
     else            { x = 0; }
     if(objectp(attacker)) { attacker->send_messages(0, weapon,limb, x, TO); }
 }
@@ -187,33 +187,33 @@ void new_struck(int damage, object weapon, object attacker, string limb, object 
 }
 
 //use /daemon/combat_d.c->calculate_damage(attacker, target, weapon, target_thing, critical hit)
-void do_hits(object targ, object current, string target_thing) 
+void do_hits(object targ, object current, string target_thing)
 {
     return COMBAT_D->calculate_damage(TO, targ, current, target_thing, query_combat_mapps("static vars", "critical hit"));
 }
 
 // Will do fumbling
 void do_fumble(object current) { return COMBAT_D->fumble(TO, current); }
-int reactionAdj(int dex) 
-{ 
+int reactionAdj(int dex)
+{
     if(dex == 10) { return 0; }
     else return (dex - 10) / 2;
 }
 void prepare_attack() { return adjust_combat_mapps("static vars", "attacking", 0); } //called in battle.c to ensure bugs don't fuck up attacks -Ares
-int attack_count() { return query_combat_mapps("static vars", "attack count"); } 
+int attack_count() { return query_combat_mapps("static vars", "attack count"); }
 void set_for_attack() { return adjust_combat_mapps("static vars", "attacking", 1); }
 
-// renamed the old execute_attack() to internal_execute_attack() down below.  We're going to track 
-// if execute_attack gets called from inside of do_attack here, and if it does we'll increment 
-// attack_count.  When the do_attack finishes, it'll set attacking = 0, and if there were any attacks 
-// that didn't get executed we'll execute them then.  Hopefully this will stop our recursion errors 
+// renamed the old execute_attack() to internal_execute_attack() down below.  We're going to track
+// if execute_attack gets called from inside of do_attack here, and if it does we'll increment
+// attack_count.  When the do_attack finishes, it'll set attacking = 0, and if there were any attacks
+// that didn't get executed we'll execute them then.  Hopefully this will stop our recursion errors
 // on attack from spamming the debug.log -Ares
 void execute_attack()
 {
     int i;
     if(!query_combat_mapps("static vars", "attacking"))
     {
-        if(!query_combat_mapps("static vars", "attack count"))        
+        if(!query_combat_mapps("static vars", "attack count"))
         {
             internal_execute_attack();
             //call_out("internal_execute_attack",0.500);  // I think this might not work, call outs getting called at the time will fire at the same time.. need to consider a different way
@@ -226,7 +226,7 @@ void execute_attack()
             internal_execute_attack();
         }
         adjust_combat_mapps("static vars", "attack loop", 0);
-        adjust_combat_mapps("static vars", "attack count", 0);        
+        adjust_combat_mapps("static vars", "attack count", 0);
     }
     else
     {
@@ -236,27 +236,27 @@ void execute_attack()
 }
 
 // this shouldn't get called by anything besides execute_attack.
-static void internal_execute_attack() { return COMBAT_D->internal_execute_attack(TO); }
-void stop_hunting() 
+protected void internal_execute_attack() { return COMBAT_D->internal_execute_attack(TO); }
+void stop_hunting()
 {
     adjust_combat_mapps("static vars", "hunting", 0);
     adjust_combat_mapps("arrays", "hunters", ({}));
 }
 
-void cease_all_attacks() 
+void cease_all_attacks()
 {
     adjust_combat_mapps("arrays", "attackers", ({}));
-    adjust_combat_mapps("arrays", "atnames", ({}));    
+    adjust_combat_mapps("arrays", "atnames", ({}));
     adjust_combat_mapps("vars", "any attack", 0);
 }
-object query_current_attacker() 
+object query_current_attacker()
 {
     if(!clean_up_attackers()) return 0;
     else return query_combat_mapps("arrays", "attackers")[0];
 }
 
 void run_away() { return COMBAT_D->run_away(TO); }
-void set_wimpydir(string str) 
+void set_wimpydir(string str)
 {
     if (!stringp(str)) return;
     wimpydir = str;
@@ -268,24 +268,24 @@ void set_wimped(int x) { adjust_combat_mapps("vars", "wimped", x); }
 int query_wimped() { return query_combat_mapps("vars", "wimped"); }
 void set_casting(int x) { adjust_combat_mapps("static vars", "casting", x); }
 int query_casting() { return query_combat_mapps("static vars", "casting"); }
-int valid_casting() 
+int valid_casting()
 {
     if(query_casting() && objectp(TO->query_property("spell_casting"))) return 1;
     return 0;
 }
 
-void send_messages(int magic, object current, string what, int x, object attacker, int fired, string ammo) 
+void send_messages(int magic, object current, string what, int x, object attacker, int fired, string ammo)
 {
     return COMBAT_D->send_messages(TO, magic, current, what, x, attacker, fired, ammo, query_combat_mapps("static vars", "critical message"));
 }
 object *query_hunted() { return query_combat_mapps("arrays", "hunters"); }
-object *query_attackers() 
-{ 
-    if(!sizeof(query_combat_mapps("arrays", "attackers"))) COMBAT_D->clean_attacker_flags(TO); 
+object *query_attackers()
+{
+    if(!sizeof(query_combat_mapps("arrays", "attackers"))) COMBAT_D->clean_attacker_flags(TO);
     return query_combat_mapps("arrays", "attackers");
 }
 int sight_adjustment() { return COMBAT_D->sight_adjustment(TO); }
-void miss(int magic, object target, string type, string target_thing) 
+void miss(int magic, object target, string type, string target_thing)
 {
     return COMBAT_D->miss(TO, magic, target, type, target_thing);
 }
@@ -295,7 +295,7 @@ void ok_to_wield() { return COMBAT_D->ok_to_wield(TO); }
 void add_attacker(object ob) { return COMBAT_D->add_attacker(TO, ob); }
 int reaction_adj() { return BONUS_D->query_stat_bonus(TO, "dexterity"); }
 void thaco_messages(int thaco) { return COMBAT_D->thaco_message(TO, thaco); }
-void remove_attacker(object attack) 
+void remove_attacker(object attack)
 {
     if(!objectp(attack)) { return; }
     adjust_combat_mapps("arrays", "attackers", attack, 1);
@@ -325,26 +325,26 @@ void remove_paralyzed() { return COMBAT_D->remove_paralyzed(TO); }
 void set_gagged(int x, string message) { return COMBAT_D->set_gagged(TO, x, message); }
 void set_bound(int difficulty, string message) { return COMBAT_D->set_bound(TO, difficulty, message); }
 varargs void set_temporary_blinded(int difficulty, string message) { return COMBAT_D->set_temporary_blinded(TO, difficulty, message); }
-varargs void set_blind(int difficulty, string message) 
-{ 
-    if(!intp(difficulty)) { return; } 
-    if(difficulty < 15) { difficulty *= 15; }        
+varargs void set_blind(int difficulty, string message)
+{
+    if(!intp(difficulty)) { return; }
+    if(difficulty < 15) { difficulty *= 15; }
     return COMBAT_D->set_temporary_blinded(TO, difficulty, message);
 }
 
 varargs void set_blindfolded(int difficulty, string message) { return COMBAT_D->set_blindfolded(TO, difficulty, message); }
-varargs void set_tripped(int severity, string message,int special) { return COMBAT_D->set_tripped(TO, severity, message, special); }	
+varargs void set_tripped(int severity, string message,int special) { return COMBAT_D->set_tripped(TO, severity, message, special); }
 void set_unconscious(int xxx, string message) { return COMBAT_D->set_unconscious(TO, xxx, message); }
 void set_asleep(int xxx, string message) { return COMBAT_D->set_asleep(TO, xxx, message); }
 
 int query_unconscious() { return (query_combat_mapps("vars", "unconscious") || (query_hp() < 1) || query_combat_mapps("vars", "asleep")); }
 int query_asleep() { return query_combat_mapps("vars", "asleep"); }
 int query_tripped() { return query_combat_mapps("vars", "tripped"); }
-int query_temporary_blinded() { return query_combat_mapps("static_vars", "blinded"); }         
+int query_temporary_blinded() { return query_combat_mapps("static_vars", "blinded"); }
 int query_blindfolded() { return query_combat_mapps("vars", "blindfolded"); }
 int query_blind() { return (query_combat_mapps("static vars", "blinded") + query_combat_mapps("vars", "blindfolded")); }
 int query_bound() { return query_combat_mapps("vars", "bound"); }
-int query_paralyzed() 
+int query_paralyzed()
 {
     if(TO->adminBlock()) { return 1; }
     return (query_combat_mapps("vars", "paralyzed") || query_unconscious());
@@ -366,7 +366,7 @@ void send_paralyzed_message(string type,object who) { return COMBAT_D->send_para
 int reset_hunted() { adjust_combat_mapps("arrays", "hunters", ({})); return 1; }
 int remove_hunted(object hunt) { adjust_combat_mapps("arrays", "hunters", hunt, 1); return 1; }
 
-string view_combat_vars() 
+string view_combat_vars()
 {
     string str;
     str = "";
@@ -389,7 +389,7 @@ void slide_offensive_scale(int x)
 {
     add_offensive_bonus(x);
     add_defensive_bonus(-1 * x);
-}                         
+}
 void reset_offensive_scale()
 {
 	set_offensive_bonus(0);
@@ -400,7 +400,7 @@ object set_current_weapon(object ob)
     if (!objectp(ob)) ob = 0;
     return current_weapon = ob;
 }
-object query_current_weapon() 
+object query_current_weapon()
 {
     if (!objectp(current_weapon)) return TO;
     return current_weapon;
@@ -408,9 +408,9 @@ object query_current_weapon()
 int get_block_chance(object obj)
 {
     object shield,*equip;
-    int i,chance;    
+    int i,chance;
     if(!objectp(obj)) { return 0; }
-    if(!living(obj)) { return 0; } 
+    if(!living(obj)) { return 0; }
     chance = (int)obj->query_shieldMiss();
     return chance;
 }
@@ -426,8 +426,8 @@ varargs void adjust_combat_mapps(string type, string which, mixed val, mod)
     {
         case "vars":
             if(!intp(val)) return;
-            if(!member_array(which, keys(combat_vars)) == -1) return 0;               
-            if(!mod) combat_vars[which] = val;            
+            if(!member_array(which, keys(combat_vars)) == -1) return 0;
+            if(!mod) combat_vars[which] = val;
             else
             {
 //                if(which == "paralyzed" || which == "tripped") { combat_vars[which] = val; }
@@ -446,7 +446,7 @@ varargs void adjust_combat_mapps(string type, string which, mixed val, mod)
             break;
         case "messages":
             if(!member_array(which, keys(combat_messages)) == -1) return 0;
-            if(!stringp(val)) 
+            if(!stringp(val))
             {
                 if(DEFAULT_MESSAGES[val]) val = DEFAULT_MESSAGES[val];
             }
@@ -467,7 +467,7 @@ varargs void adjust_combat_mapps(string type, string which, mixed val, mod)
                 else combat_arrays[which] += ({val});
             }
             combat_arrays[which] -= ({0});
-            if(which == "attackers" || which == "hunters") 
+            if(which == "attackers" || which == "hunters")
             {
                 combat_arrays[which] = distinct_array(combat_arrays[which]);
             }

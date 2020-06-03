@@ -9,8 +9,8 @@
 
 inherit DAEMON;
 
-static object * watch = ({});
-static string * names2;
+nosave object * watch = ({});
+nosave string * names2;
 
 mapping wanted = ([]);
 
@@ -132,7 +132,7 @@ void alert_gates(object watchman){
 int add_wanted(mixed live){
     string name, alias;
 
-    
+
     if (objectp(live)) {
         if (!userp(live)) {
             return 0;
@@ -140,7 +140,7 @@ int add_wanted(mixed live){
         name = live->query_name();
         alias = live->query_title();
     } else {
-        
+
         name = TP->realName(live);
           if(!stringp(name) || (name == "" && !avatarp(TP))){
             return 0;
@@ -151,7 +151,7 @@ int add_wanted(mixed live){
 
     wanted[name] = (["name":name,"alias":alias]);
     SAVE();
-    return 1;                                        
+    return 1;
 
 }
 
@@ -202,6 +202,6 @@ int isWanted(mixed live){
     }
     if (wanted[name]) {
         return 1;
-    } 
+    }
     return 0;
 }
