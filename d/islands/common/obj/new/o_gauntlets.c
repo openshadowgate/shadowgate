@@ -6,16 +6,16 @@ inherit "/d/common/obj/armour/leather_gauntlets";
 void create()
 {
     ::create();
-    
+
     set_name("leather gauntlets");
-    
+
     set_id(({"gauntlets","gauntlets of ogre strength","ogre gauntlets", "leather gauntlets"}));
-    
+
     set_obvious_short("%^RESET%^%^ORANGE%^A pair of heavy leather gauntlets%^RESET%^");
-    
+
     set_short("%^RESET%^%^ORANGE%^Gauntlets of %^BOLD%^%^BLACK%^O"+
         "%^RESET%^g%^BOLD%^%^BLACK%^r%^RESET%^e %^RED%^Strength%^RESET%^");
-    
+
     set_long("%^RESET%^%^ORANGE%^Crafted from a tough thick leather, these "+
         "gauntlets have a %^RED%^wild%^ORANGE%^ and %^BOLD%^%^BLACK%^savage"+
         "%^RESET%^%^ORANGE%^ appearance to them.  The leather itself is "+
@@ -25,8 +25,8 @@ void create()
         " care for aesthetics. Square shaped %^RESET%^i%^BOLD%^%^BLACK%^r"+
         "%^RESET%^o%^BOLD%^%^BLACK%^n%^RESET%^%^ORANGE%^ studs have been "+
         "pressed across the hands and fingers of the gauntlets, adding to "+
-        "the savage feel.");        
-   
+        "the savage feel.");
+
     set_lore("Almost any adventures knows of the famed Gauntlets of "+
         "Ogre Strength, though few know how they exactly came about. "+
         " Some seem to think that the gauntlets were made by a barbarian"+
@@ -36,22 +36,22 @@ void create()
         "orcs, and ogres to crown herself the ruler of all.  No one is "+
         "quite sure what the history of these gauntlets are, only that"+
         " they are always in high demand.");
-        
+
     set_property("lore difficulty",36);
-    
+
     set_value(200000);
-    
+
     set_property("no curse",1);
     set_property("enchantment",7);
 
     set_size(-1);
     set_wear((:TO,"wear":));
     set_remove((:TO,"remove_me":));
-    
+
     set_item_bonus("strength",6);
-    set_item_bonus("constitution",6);
+    set_item_bonus("attack bonus",7);
     set_item_bonus("damage bonus",7);
-    
+
     set_property("quest required","%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^");
     set_property("level required",35);
 }
