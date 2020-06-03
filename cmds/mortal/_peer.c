@@ -102,7 +102,7 @@ int do_lp(string str)
         return 0;
     }
 
-    if(!objectp(dest = find_object_or_load((string)current->query_exit(dirlist[i]))))
+    if(!objectp(dest = find_object_or_load(current->query_exit(dirlist[i]))))
     {
         tell_object(TP, "You cannot see much in that direction.");
         return 0;
