@@ -5,9 +5,9 @@
 inherit DAEMON;
 
 #define SAVE_FILE   INV_PATH"directories"
-#define POP_LOW     30
-#define POP_MID     30
-#define POP_HIGH    30
+#define POP_LOW     15
+#define POP_MID     15
+#define POP_HIGH    15
 #define MON_FILE    FILE_PATH"token_monster"
 
 int type_check(string type);
@@ -24,7 +24,7 @@ void add_monsters(string type,int num);
 void check_population();
 
 mapping DIRS,PLAYER_TOKENS;
-nosave mapping MONS;
+static mapping MONS;
 string *EXCLUDED;
 
 void create()
@@ -144,6 +144,14 @@ int add_directory(string type,string dir)
     return 1;
 }
 
+int remove_directory(string type,string dir)
+{
+    if(!stringp(dir) || dir == " " || dir == "") { return 0; }    
+    DIRS[type] -= ({ dir });
+    save_object(SAVE_FILE);
+    return 1;    
+}
+
 string *query_directories(string type)
 {
     if(!type_check(type)) { return ([]); }
@@ -242,7 +250,7 @@ void add_monsters(string type,int num)
             {
                 mob = new(MON_FILE);                        
                 mob->set_monster_level(type);
-                "/adm/daemon/party_d.c"->add_member(mob,party);
+                //"/adm/daemon/party_d.c"->add_member(mob,party);
                 mob->move(room_ob);
                 if(objectp(mob)) { track_monster(type,mob); }
             }
@@ -252,7 +260,7 @@ void add_monsters(string type,int num)
         if(objectp(mob))
         {
             mob->set_monster_level(type);
-            "/adm/daemon/party_d.c"->add_member(mob,party);
+            //"/adm/daemon/party_d.c"->add_member(mob,party);
             track_monster(type,mob);
         }
     }

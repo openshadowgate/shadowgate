@@ -42,7 +42,7 @@ string query_sphere();
 void sort();
 void sort_two();private void swap(int i, int j);
 
-static mapping spells = ([]);  // Changing this to static to handle removing quest spells -Ares
+nosave mapping spells = ([]);  // Changing this to static to handle removing quest spells -Ares
 string *magic, owner,single_class;
 int temp;
 string diety, sphere_of_influence,myclass;
@@ -156,7 +156,7 @@ void init() {
     if (!owner) set_owner();
     if (!query_sphere()) set_sphere((string)(ETO->query_sphere()));
     if (!query_diety()) set_diety((string)(ETO->query_diety()));
-    if(((string)ETO->query_name() == owner || 
+    if(((string)ETO->query_name() == owner ||
     (string)ETO->QCN == owner)
     && valid_has_cleric_spells()) {
         add_action("report_spells","reportspells");

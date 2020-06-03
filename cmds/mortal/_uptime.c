@@ -2,7 +2,7 @@
 
 inherit DAEMON;
 void help();
-nosave string parse_time(int i);
+//nosave string parse_time(int i);
 
 int cmd_uptime(string str) {
    int up, ttl;
@@ -31,7 +31,7 @@ who, version
    );
 }
 
-static string
+protected string
 parse_time(int t)
 {
    string str;
