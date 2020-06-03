@@ -5,9 +5,9 @@
 #include <abalance.h>
 
 inherit DAEMON;
-static string *magical, *limbs, *id, *dir, read_msg, home_path;
-static string path,name,rname,short,long,type,wear_string,unwear_string;
-static int ac, value, weight, is_armour,enchanted;
+nosave string *magical, *limbs, *id, *dir, read_msg, home_path;
+nosave string path,name,rname,short,long,type,wear_string,unwear_string;
+nosave int ac, value, weight, is_armour,enchanted;
 int error;
 
 mixed *query_names(){ return(keys(ARMOR_MISC)); }
@@ -38,14 +38,14 @@ int check_armour(object ob)
     if (!stringp(type)) {
 	write_file(home_path,"Warning: query_type() did not return a string.\n");
 	error = 1;
-    } 
+    }
 
     rname = (string)ob->query_name();
     if (!stringp(rname)) {
 	write_file(home_path,"Warning: query_name() did not return a string.\n");
 	error = 1;
-    } 
-    if(member_array(rname,keys(ARMOR_MISC)) == -1) 
+    }
+    if(member_array(rname,keys(ARMOR_MISC)) == -1)
       if(type != "clothing"){
 	write_file(home_path,"Warning: query_name() did not return a valid name.\n");
 	error = 1;
@@ -98,7 +98,7 @@ int check_armour(object ob)
     if (!intp(value)) {
 	write_file(home_path,"Warning: query_value() did not return an int.\n");
 	error = 1;
-    }  
+    }
     weight = (int)ob->query_weight();
     if (!intp(weight)) {
 	write_file(home_path,"Warning: query_weight() did not return an int.\n");
@@ -118,7 +118,7 @@ int check_armour(object ob)
 		write_file(home_path,"Warning: query_limbs() array member " + i +
 		    " is not a string.....\n");
 		error = 1;
-	    } 
+	    }
 	    else if(type == "clothing");
 	    else if(strsrch(limbs[i],"hand") != -1){
 	    	if("hand" != ARMOR_MISC[name][4]){
@@ -150,7 +150,7 @@ int check_armour(object ob)
     read_msg = ob->query("read");
     magical = (string *)ob->query_property("magic item");
    return !error;
-	
+
 
 }
 
@@ -229,7 +229,7 @@ int cmd_acheck(string armour)
 		write_file(home_path,"PASSED\n");
 		write("%^GREEN%^Checking: %^BOLD%^%^BLACK%^--------- %^MAGENTA%^" + arrange_string(capitalize(dir[inc]),20)+" %^GREEN%^Passed.");
 	    }
-	    else 
+	    else
 		write("%^GREEN%^Checking: %^BOLD%^%^BLACK%^--------- %^MAGENTA%^" + arrange_string(capitalize(dir[inc]),20)+" %^RED%^Failed.");
 	}
 	return 1;
@@ -271,4 +271,3 @@ EndText
   );
   return 1;
 }
-

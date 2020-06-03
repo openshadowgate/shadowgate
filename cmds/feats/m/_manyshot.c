@@ -202,7 +202,7 @@ void execute_attack()
             }
         }
         display_messages(attackers[i], caster);
-        caster->cause_typed_damage(attackers[i], attackers[i]->return_target_limb(), dam, weapon->query_damage_type();
+        caster->cause_typed_damage(attackers[i], attackers[i]->return_target_limb(), dam, weapon->query_damage_type());
         hit = 1;
     }
     if (!hit) {

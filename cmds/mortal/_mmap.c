@@ -8,9 +8,9 @@ inherit DAEMON;
 mixed * map;
 int dim;
 
-static mapping topology;
-static string * topoexits;
-static mapping exitsymbols;
+nosave mapping topology;
+nosave string * topoexits;
+nosave mapping exitsymbols;
 
 int cmd_mmap(string str)
 {

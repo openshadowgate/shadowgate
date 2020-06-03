@@ -41,15 +41,15 @@ void activate_profile();
 void manual_set_and_save_avsay_profile(mapping tmp);
 
 
-static string DIR;
-static string PAD = "%^BOLD%^%^GREEN%^>>%^RESET%^ ";
-static int menu_place = 0;
-static string cur_menu, MYDIR;
-static string menu_header = repeat_string("%^BOLD%^%^CYAN%^--%^RESET%^", 33);
-static string *ThisMenu;
-static string RestoredProfile;
-static string *MainMenu = ({"Profile Name", "Character Name", "Speech", "Language", "Color", "Activate Profile", "Restore Profile", "Default Profile"});
-static string *AllMenus = ({"Clear All", "Finish"});
+nosave string DIR;
+nosave string PAD = "%^BOLD%^%^GREEN%^>>%^RESET%^ ";
+nosave int menu_place = 0;
+nosave string cur_menu, MYDIR;
+nosave string menu_header = repeat_string("%^BOLD%^%^CYAN%^--%^RESET%^", 33);
+nosave string *ThisMenu;
+nosave string RestoredProfile;
+nosave string *MainMenu = ({"Profile Name", "Character Name", "Speech", "Language", "Color", "Activate Profile", "Restore Profile", "Default Profile"});
+nosave string *AllMenus = ({"Clear All", "Finish"});
 
 mapping ProfileInfo = (["Character Name" : "NIL", "Speech" : "NIL", "Language" : "NIL", "Profile Name" : "NIL", "Color" : "NIL"]);
 

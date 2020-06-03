@@ -86,14 +86,11 @@ string eye_color;
 /****************
  * mapping for message remembrance*
  ****************/
-//static mapping pastMessages;
-//static string *saveable;
 
 ///PETS
 string *pets;
 
 //alignment and pkilling
-//static string *pkilled;
 string class_change;
 int align_adjust, law_align_adjust;
 int death_age, death_time, pk_death_flag;  // death tracking & display support *Styx* 9/23/06
@@ -105,7 +102,7 @@ string *rem_rooms_sort, *rem_obs_sort;
 
 int test_passive_perception();
 
-static int user_ticker = 0; // timer increased once per heartbeat
+nosave int user_ticker = 0; // timer increased once per heartbeat
 int killable;
 //static object *protectors;
 //static int blinking;
@@ -3154,11 +3151,12 @@ int clear_channels() {
   static_user["channels"] = ({ });
   return 1;
 }
+
 //this function is larged moved to /daemon/user_d.c
 //in the determine_lines() func - starting at
 //line 764 - Saide, August 2017
 
-static private register_channels()
+protected register_channels()
 {
     static_user["channels"] = USER_D->determine_lines(TO);
     return;

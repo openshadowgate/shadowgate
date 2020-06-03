@@ -10,35 +10,7 @@
 
 inherit WEAPONLESS;
 
-void set_monster_name(string str);
-void add_monster_id(string str);
-void set_monster_race(string str);
-void set_monster_gender(string str);
-void set_monster_size(int num);
-void set_monster_short(string str);
-void set_monster_long(string str);
-void set_monster_class(string str);
-void remove_monster_class(string str);
-void set_monster_level(int num);
-void set_monster_hp(int num);
-void set_monster_exp(int num);
-void set_monster_swarm(int num);
-void set_monster_ac(int num);
-void set_monster_stat(string str, int num);
-void set_monster_attacks(int num);
-void set_monster_damage(int num);
-void set_monster_spells(string* str);
-void add_monster_spell(string str);
-void set_monster_spell_chance(int num);
-void set_monster_money(string str, int num);
-void set_monster_resistance(int num);
-void set_smart(int num);
-void set_guard_targets(string* names);
-void set_monster_classes(string* classes);
-void set_allied_players(string* players);
-string get_object_id(object ob);
-
-static int FLAG, FLAG2, SMART, DROP, TARGETING, BLINKED = 0, AGG;
+nosave int FLAG, FLAG2, SMART, DROP, TARGETING, BLINKED = 0, AGG;
 string* TARGETS = ({}), * monster_classes = ({}), * DONT_TARGET = ({});
 
 void create()

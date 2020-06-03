@@ -93,7 +93,7 @@ private string expand_macro( string msg, int flags, int personal ){
     people.
 */
 
-static int
+nosave int
 describe_action( string verb, object victim, string pre, string post, int flags ){
     object pob, *all, *pick;
     string src_name, src_name_x, victim_name, victim_name_x, v_ext, msg;

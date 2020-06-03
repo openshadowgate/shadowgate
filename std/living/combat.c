@@ -41,7 +41,7 @@ nosave object current_weapon;
 string wimpydir;
 //almost every pre-existing variable has been rolled into the following mappings - Saide, January 2017
 mapping combat_vars, combat_messages, combat_counters;
-nosave mapping combat_nosave_vars, combat_arrays;
+nosave mapping combat_static_vars, combat_arrays;
 
 void send_dodge(object att);
 void add_attacker(object ob);

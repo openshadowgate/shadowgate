@@ -2,12 +2,12 @@
 
 inherit DAEMON;
 void help();
-static string parse_time(int i);
+nosave string parse_time(int i);
 
 int cmd_uptime(string str) {
    int up, ttl;
    string s;
-   
+
    up = uptime();
    s = parse_time(up);
    write("%^GREEN%^Up "+s+" since "+ctime(time()-uptime())+"%^RESET%^");

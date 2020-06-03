@@ -34,7 +34,7 @@ string *magic_properties;  //  Allows all objects to have magic properties
 mapping set_trap_func, trap_set, trap_trigger, trap_ref;  //these will contain the informantion require to run traps
 
 //hiding things..
-private static int hidden, magic_hidden;
+nosave int hidden, magic_hidden;
 
 // To allow this item to use the unique item system
 // Thorn@ShadowGate - 27 June 2000
@@ -122,7 +122,7 @@ void set(string what, mixed arg) {
     }
 }
 
-static void add(string what, mixed arg) {
+protected void add(string what, mixed arg) {
     if(!ob_data) ob_data = ([]);
     if(functionp(arg) && geteuid(this_object()) != geteuid(arg[0])) return;
     if(stringp(arg) || intp(arg)) arg = ({ arg });

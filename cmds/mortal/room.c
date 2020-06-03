@@ -25,9 +25,9 @@ inherit "/std/room/senses";
 private int reset_number;
 int already_encountered, only_on_reset, flag;
 string sneakf, peer_message, mcharge_message, charge_message;
-static int storage, storing,had_players;
-static int test_grafitti_loaded; // This will be 1 if the grafitti has been loaded for the room from the daemon.
-static object * dependencies = ({ });
+nosave int storage, storing,had_players;
+nosave int test_grafitti_loaded; // This will be 1 if the grafitti has been loaded for the room from the daemon.
+nosave object * dependencies = ({ });
 
 void reset();
 void reinitiate();
@@ -144,7 +144,7 @@ void set_climate(string str) {
   WEATHER_D->set_climate(str, TO);
 }
 
-void reset() 
+void reset()
 {
   object *ppl;
 
@@ -160,18 +160,18 @@ void reset()
   if(sizeof(ppl)) { ppl = filter_array(ppl,"is_player",FILTERS_D); }
   if(!sizeof(ppl)) { if(had_players > 0) { had_players--; } }
   else { had_players = 3; }
-	//Adding this to remove the study attempts - 
-	//hopefully on about half the resets - 
+	//Adding this to remove the study attempts -
+	//hopefully on about half the resets -
 	//that happen on a room or item in the room - Saide
-	if(!random(2)) 
+	if(!random(2))
 	{
 		remove_property("successful study");
 		remove_property("failed study");
 	}
 	TO->reactivate_traps();
-	if(TO->query_property("random traps")) 
+	if(TO->query_property("random traps"))
 	{
-		if(!random(5)) 
+		if(!random(5))
 		{
 			TO->set_random_traps();
 			TO->set_property("next_random_trap_time", time() + 3600);
@@ -199,7 +199,7 @@ int query_random_frequency() {
   return only_on_reset;
 }
 
-void do_random_encounters(string *monsters, int percentile, int num_mons) 
+void do_random_encounters(string *monsters, int percentile, int num_mons)
 {
   int actual_num,x,check,test,number, invis;
   string mob,*temp,*hold, id;
@@ -375,10 +375,10 @@ string query_long(string str) {
     if(query_night() && (query("night long") || has_grafitti("night long") )) {
     if (has_grafitti("night long")) ret=query_grafitti("night long");
     else {
- 
+
       if(functionp(query("night long")))
 	ret=(string)(*query("night long"))(str);
-      else 
+      else
 	ret = query("night long");
     }
    }
@@ -502,8 +502,8 @@ int set_room_dependencies(object * obs) {
    dependencies = copy(obs);
 }
 
-varargs void set_had_players(int num) 
-{ 
+varargs void set_had_players(int num)
+{
     if(!intp(num) || !num) { had_players = 3; }
     else { had_players = num; }
 }

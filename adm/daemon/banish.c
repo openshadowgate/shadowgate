@@ -10,41 +10,6 @@
 string *__Names, *__Sites, *__WatchNames, *__WatchSites, *__Block;
 string *__Allowed, *__Guests, *__IllegalSubStrings, *__Retired;
 
-nosave private int valid_access(object ob);
-void block_site(string str);
-void unblock_site(string str);
-string *query_blocked();
-void register_site(string str);
-void unregister_site(string str);
-string *query_register();
-void banish_name(string str);
-void unbanish_name(string str);
-string *query_banished();
-void retire_name(string str);
-void unretire_name(string str);
-string *query_retired();
-void watch_site(string str);
-void unwatch_site(string str);
-string *query_watched_sites();
-void watch_name(string str);
-void unwatch_name(string str);
-string *query_watched_names();
-void allow_name(string str);
-void unallow_name(string str);
-string *query_allowed();
-void set_illegal_substring(string str);
-void remove_illegal_substring(string str);
-string *query_illegal_substrings();
-void add_guest(string str);
-void remove_guest(string str);
-string *query_guests();
-nosave private void save_banish();
-nosave private void restore_banish();
-int is_guest(string str);
-int valid_name(string str);
-int allow_logon(string nom, string ip);
-nosave private int match_ip(string ip, string *sites);
-
 void create() {
     seteuid(getuid());
     __Names = ({});
@@ -59,7 +24,7 @@ void create() {
     if(file_exists(SAVE_BANISH+".o")) restore_banish();
 }
 
-static private int valid_access(object ob) {
+protected int valid_access(object ob) {
     return (geteuid(ob) == UID_BANISH || geteuid(ob) == UID_ROOT);
 }
 
@@ -216,13 +181,13 @@ string *query_guests() {
     else return __Guests;
 }
 
-static private void save_banish() {
+protected void save_banish() {
     seteuid(UID_SECURE_DAEMONSAVE);
     save_object(SAVE_BANISH);
     seteuid(getuid());
 }
 
-static private void restore_banish() {
+protected void restore_banish() {
     seteuid(UID_SECURE_DAEMONSAVE);
     restore_object(SAVE_BANISH);
     seteuid(getuid());
@@ -297,7 +262,7 @@ int allow_logon(string nom, string ip) {
 }
 
 
-static private int match_ip(string ip, string *sites) {
+protected int match_ip(string ip, string *sites) {
     string a, b;
     int i;
 

@@ -5,7 +5,7 @@
  * last modified: 2/5/92
  */
 
-protected private object find_item(object prev, string str)
+private object find_item(object prev, string str)
 {
    object ob;
    string tmp;

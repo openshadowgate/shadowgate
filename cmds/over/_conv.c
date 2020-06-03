@@ -15,8 +15,8 @@ inherit DAEMON;
 #define REPLACE_TEXT    2
 
 // define some member variables
-private static string *args;
-private static int recurse = 0;
+nosave string *args;
+nosave int recurse = 0;
 
 // prototype some functions
 void doConv( string dir );

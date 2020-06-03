@@ -19,7 +19,7 @@
 
 inherit DAEMON;
 
-private static string tmp;
+nosave private string tmp;
 private object user;
 private string playerf;
 
@@ -72,7 +72,7 @@ int cmd_passwd(string str)
     return 1;
 }
 
-nomask static int oldpass(string pass)
+nomask private int oldpass(string pass)
 {
     string password;
 
@@ -88,7 +88,7 @@ nomask static int oldpass(string pass)
     return 1;
 }
 
-nomask static int newpass(string pass)
+nomask private int newpass(string pass)
 {
     tmp = pass;
     if (strlen(tmp)<0)
@@ -101,7 +101,7 @@ nomask static int newpass(string pass)
     return 1;
 }
 
-nomask static int npass2(string pass)
+nomask private int npass2(string pass)
 {
     string salt;
 

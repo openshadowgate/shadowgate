@@ -6,8 +6,8 @@
 inherit SPELL;
 
 int adjust, origstr, theProf;
-// static means does change ????
-static object orig_targ;
+
+object orig_targ;
 
 void set_orig_targ(object ot)
 {

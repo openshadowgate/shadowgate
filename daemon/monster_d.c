@@ -418,7 +418,7 @@ mapping load_mons_db(string fromfile)
         if(sscanf(lines[i], "(%s): %s", workstr, str) != 2)
         {
 	        seteuid(UID_LOG);
-	        log_file("Misc_Errors","/daemon/monster_d: Error in reading monsters database ("+fromfile+") in line "+(i+1)+" in load_mons_db().\n");
+	        log_file("errors","/daemon/monster_d: Error in reading monsters database ("+fromfile+") in line "+(i+1)+" in load_mons_db().\n");
 	        // changed the write to log *Styx* 11/16/03
 	        seteuid(getuid());
             continue;
