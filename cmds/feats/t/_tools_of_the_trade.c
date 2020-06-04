@@ -7,7 +7,7 @@ void create() {
     feat_type("permanent");
     feat_category("Evasion");
     feat_name("tools of the trade");
-    feat_prereq("Thief L12, Bard L12");
+    feat_prereq("Thief L10, Bard L10");
     feat_desc("This feat represents a knack for using items that would befuddle a normal person. Such rogue-ish tactics include the use of powder, caltrops, smoke bombs, and other trickery both in and out of combat.");
     permanent(1);
     set_required_for(({}));
@@ -45,4 +45,3 @@ void dest_effect() {
     remove_feat(TO);
     return;
 }
-
