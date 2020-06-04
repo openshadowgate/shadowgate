@@ -15,8 +15,8 @@ void create()
     set_long("%^BOLD%^%^WHITE%^This small wagon comes complete with four thick walls to keep all the supplies it is hauling safe and secure. Four large wheels provide a sturdy means of transport and you notice that a fifth wheel is strapped under the belly to provide for a quick repair should one of the first four break. At the front a wide, flat seat provides a spot for the driver to sit and guide the large, lumbering %^YELLOW%^triceratops %^WHITE%^that pulls the wagon. Beside the driver's seat is a secure looking %^BLUE%^iron chest %^WHITE%^with several %^MAGENTA%^magical runes %^WHITE%^decorating it. More of these enchanted chests are located in the back of the wagon and every one of them appears to be very well maintained. Draped over the sides of the wagon are a number of %^MAGENTA%^%^BOLD%^b%^BLUE%^r%^MAGENTA%^igh%^BLUE%^t%^MAGENTA%^ly%^WHITE%^ colored banners, each proclaiming that this is the fabled %^YELLOW%^Emporium of Exotic Wares%^WHITE%^: A traveling warehouse of rare, fabulous things that have been brought back from all over the realm and sold to the small gnome that tends the traveling shop.
 
 You can see a list posted on the side of the wagon, maybe you can <read list>.
-There's also a slot near the wagon wheel with a box protruding from it. You could probably <retrieve box>.
-There's also a second slot for mysterous devices. You could probably <retrieve device [with gold|mats]>.");
+There's also a slot near the wagon wheel with a box protruding from it. You could probably <retrieve box>.");
+    // There's also a second slot for mysterous devices. You could probably <retrieve device [with gold|mats]>.
     set_weight(100000000);
 }
 
@@ -77,13 +77,15 @@ int read_list(string str)
 
 int retrieve_stuff(string str)
 {
-    if(!stringp(str)) { return 0; }
-    if(str == "box" || str == "Box")
-    {
-        tell_object(TP,"You pull a box from the dispenser and it falls onto the ground.");
-        new(FILE_PATH"tokens")->move(ETO);
+    if (!stringp(str)) {
+        return 0;
+    }
+    if (str == "box" || str == "Box") {
+        tell_object(TP, "You pull a box from the dispenser and it falls onto the ground.");
+        new(FILE_PATH "tokens")->move(ETO);
         return 1;
     }
+    return 0;
     if(regexp(str,"device"))
     {
         object ob;

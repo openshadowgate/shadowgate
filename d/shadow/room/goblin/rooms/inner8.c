@@ -104,6 +104,9 @@ int strike(string str) {
 	"%^YELLOW%^The gong rings out and flashes briefly with a "
 	"%^RED%^red%^YELLOW%^ glow.%^RESET%^"
     ,TP);
+
+    // Suggestion, add invasion in the observable world;
+    return 1;
     message("invasion",
 	"%^BOLD%^%^GREEN%^A strange gong rings out across the lands.\n"
 	"%^ORANGE%^Goblin "
