@@ -801,7 +801,7 @@ void do_healing(int x)
 int calculate_healing()
 {
     string msg;
-    if (query_intox()) {
+    if (query_intox() && !(TO->query_property("inactive"))) {
         healing["intox"]--;
         if (TO->is_undead()) {
             healing["intox"] = 0;
@@ -851,24 +851,15 @@ int calculate_healing()
         }
     }
 
-    if (query_stuffed()) {
-        if (!(TO->query_property("sustenance") ||
-              FEATS_D->usable_feat(TO, "timeless body") ||
-              TO->query_property("inactive") ||
-              (TO->is_undead()))) {
-            healing["stuffed"]--;
-        }
+    if (!(TO->query_property("sustenance") ||
+          TO->query_property("inactive") ||
+          FEATS_D->usable_feat(TO, "timeless body") ||
+          TO->is_undead()
+            )) {
+        healing["stuffed"]--;
+        healing["quenched"]--;
         if (healing["stuffed"] < 0) {
             healing["stuffed"] = 0;
-        }
-    }
-
-    if (query_quenched()) {
-        if (!TO->query_property("sustenance") &&
-            !FEATS_D->usable_feat(TO, "timeless body") &&
-            !TO->query_property("inactive") &&
-            !TO->is_undead()) {
-            healing["quenched"]--;
         }
         if (healing["quenched"] < 0) {
             healing["quenched"] = 0;

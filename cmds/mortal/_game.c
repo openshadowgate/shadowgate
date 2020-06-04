@@ -58,11 +58,6 @@ int cmd_game(string str)
         "supported options are "+notify_valid()+".%^RESET%^");
         return 1;
     }
-    if(strlen(mtitle) > 30)
-    {
-       tell_object(TP, "Be more brief on the title, less than 30 characters.\n  You can elaborate in the editor.\n");
-       return 1;
-    }
     do_post(arg, mtitle);
     return 1;
 }
@@ -71,6 +66,7 @@ void do_post(string arg, string mtitle)
 {
     string trash;
     object ob;
+
     if(!stringp(arg))
     {
         tell_object(TP, "Something went wrong.");
@@ -78,16 +74,19 @@ void do_post(string arg, string mtitle)
     }
     varg = arg;
 
-    if(mtitle == "here")
-    {
-        file = base_name(ETP);
-        title = file;
+    if (sizeof(mtitle) < 30) {
+        if(mtitle == "here")
+        {
+            file = base_name(ETP);
+            title = file;
+        }
+        else if(ob = present(mtitle,TP) || ob = present(mtitle, ETP) )
+        {
+            file = base_name(ob);
+            title = file;
+        }
     }
-    else if(ob = present(mtitle,TP) || ob = present(mtitle, ETP) )
-    {
-        file = base_name(ob);
-        title = file;
-    }
+
     if(!file)
     {
         title = mtitle;
@@ -141,12 +140,6 @@ report(string * lines)
         message += lines[x] + "\n";
     }
 
-    if (strlen(title) > 30) {
-        while (strlen(title) > 29 && get_eval_cost() >= 100000) {
-            sscanf(title, "%s/%s", trash, title);
-        }
-        title = "~" + title;
-    }
     seteuid(UID_CRESAVE);
 
     write_file("/tmp/bugs/export_" + time() + "_" + TPQN + ".txt",  title + "\n" + varg + "\n" + message);
