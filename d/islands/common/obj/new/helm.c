@@ -3,20 +3,18 @@
 #include <clock.h>
 
 inherit "/d/common/obj/armour/helm";
-int uses_per_day = 10, used, end_day;
+int uses_per_day = 50, used, end_day;
 
 void create()
 {
     ::create();
-    set_name("helm of true sight");
+    set_name("helm of true seeing");
 
-    set_id(({ "helm", "helm of true sight", "black iron helm", "cold black iron helm" }));
+    set_id(({ "helm", "helm of true seeing", "black iron helm", "cold black iron helm" }));
 
     set_obvious_short("%^BOLD%^%^BLACK%^A cold black iron helm adorned with %^BLUE%^sapphires%^RESET%^");
 
-    set_short("%^BOLD%^%^BLACK%^Helm of %^BLUE%^T%^CYAN%^r%^RESET%^%^CYAN%^u" +
-              "%^BLUE%^e%^BOLD%^ S%^RESET%^%^CYAN%^i%^BOLD%^%^BLUE%^g%^CYAN%^h" +
-              "%^RESET%^%^CYAN%^t%^RESET%^");
+    set_short("%^BOLD%^%^BLACK%^Helm of %^BLUE%^T%^CYAN%^r%^RESET%^%^CYAN%^u%^BLUE%^e %^BOLD%^S%^BOLD%^%^CYAN%^ee%^BOLD%^%^BLUE%^ing%^RESET%^");
 
     set_long("%^CYAN%^This helm is made from %^BOLD%^%^BLACK%^cold black iron%^RESET%^%^CYAN%^" +
              ". The design is small and compact, with a streamline styling. The top of the helm is" +
@@ -37,9 +35,8 @@ void create()
 
     set_property("no curse", 1);
     set_property("enchantment", 7);
-
     set_item_bonus("sight bonus", 7);
-    set_item_bonus("constitution", 6);
+    set_item_bonus("perception", 6);
 
     set_value(150000);
     set_wear((: TO, "wearme" :));
