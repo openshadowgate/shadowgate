@@ -122,6 +122,7 @@ void execute_attack()
 {
     object* weapons, * attackers;
     int i, dam, num, enchant, hit, res;
+    string damtype;
 
     if (!objectp(caster)) {
         dest_effect();
@@ -171,9 +172,11 @@ void execute_attack()
         if (sizeof(weapons)) {
             enchant = weapons[0]->query_property("enchantment");
             dam = weapons[0]->query_damage();
-            dam += weapons[0]->query_property("enchantment");
+            damtype = weapons[0]->query_damage_type();
+            //dam += weapons[0]->query_property("enchantment"); redundant, query damage already includes enchantment
         }else {
             enchant = 0;
+            damtype = "slashing";
         }
         dam += caster->query_damage_bonus();
         dam += roll_dice(clevel, 5) + roll_dice(2, 8);
@@ -209,7 +212,7 @@ void execute_attack()
             }
         }
         display_messages(attackers[i], caster);
-        caster->cause_damage_to(attackers[i], attackers[i]->return_target_limb(), dam);
+        caster->cause_typed_damage(attackers[i], attackers[i]->return_target_limb(), dam, damtype);
         hit = 1;
     }
     if (!hit) {
