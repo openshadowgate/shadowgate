@@ -102,10 +102,10 @@ string armor_desc()
 {
     if (armor1 && armor2) {
         return "Various armor is strewn about. One pile consists of an ornate %^YELLOW%^chainshirt"
-               "%^RESET%^, dull blue %^YELLOW%^fullplate%^RESET%^, a crystal-like %^YELLOW%^breastplate%^RESET%^, a mass of %^YELLOW%^shadows%^RESET%^, a crystal %^YELLOW%^mail shirt%^RESET%^ and a black leather %^YELLOW%^carapace%^RESET%^.\n\nA second stack, off to the side, holds a few smaller pieces including an iron %^YELLOW%^helm%^RESET%^, a %^YELLOW%^colorful cloak%^RESET%^, a shimmering %^YELLOW%^cape%^RESET%^, a hooded black %^YELLOW%^cloak%^RESET%^, a %^YELLOW%^robe%^RESET%^ decorated with stars, some dark red %^YELLOW%^boots%^RESET%^, some %^YELLOW%^forest green boots%^RESET%^, and a pair of heavy %^YELLOW%^gauntlets%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...";
+               "%^RESET%^, dull blue %^YELLOW%^fullplate%^RESET%^, a crystal-like %^YELLOW%^breastplate%^RESET%^, a mass of %^YELLOW%^shadows%^RESET%^, a crystal %^YELLOW%^mail shirt%^RESET%^ , a black leather %^YELLOW%^carapace%^RESET%^, and a silver %^YELLOW%^headband%^RESET%^\n\nA second stack, off to the side, holds a few smaller pieces including an iron %^YELLOW%^helm%^RESET%^, a %^YELLOW%^colorful cloak%^RESET%^, a shimmering %^YELLOW%^cape%^RESET%^, a hooded black %^YELLOW%^cloak%^RESET%^, a %^YELLOW%^robe%^RESET%^ decorated with stars, some dark red %^YELLOW%^boots%^RESET%^, some %^YELLOW%^forest green boots%^RESET%^, and a pair of heavy %^YELLOW%^gauntlets%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...";
     }
     if (armor1) {
-        return "Various armor is strewn about. One pile consists of an ornate %^YELLOW%^chainshirt%^RESET%^, dull blue %^YELLOW%^fullplate%^RESET%^, a crystal-like %^YELLOW%^breastplate%^RESET%^, a mass of %^YELLOW%^shadows%^RESET%^, a crystal %^YELLOW%^mail shirt%^RESET%^ and a black leather %^YELLOW%^carapace%^RESET%^.\nYou could try to %^YELLOW%^take %^RESET%^something...\n\nOff to the side is another stack, this time of smaller accessories, but a dull red ward flickers above them that prevents you from reaching out to take one.";
+        return "Various armor is strewn about. One pile consists of an ornate %^YELLOW%^chainshirt%^RESET%^, dull blue %^YELLOW%^fullplate%^RESET%^, a crystal-like %^YELLOW%^breastplate%^RESET%^, a mass of %^YELLOW%^shadows%^RESET%^, a crystal %^YELLOW%^mail shirt%^RESET%^, a black leather %^YELLOW%^carapace%^RESET%^, and a silver %^YELLOW%^headband%^RESET%^.\nYou could try to %^YELLOW%^take %^RESET%^something...\n\nOff to the side is another stack, this time of smaller accessories, but a dull red ward flickers above them that prevents you from reaching out to take one.";
     }
     if (armor2) {
         return "Various armor is strewn about. Off to the side is a stack that holds a few small pieces including an iron %^YELLOW%^helm%^RESET%^, a %^YELLOW%^colorful cloak%^RESET%^, a shimmering %^YELLOW%^cape%^RESET%^, a hooded black %^YELLOW%^cloak%^RESET%^, a %^YELLOW%^robe%^RESET%^ decorated with stars, some dark red %^YELLOW%^boots%^RESET%^, some %^YELLOW%^forest green boots%^RESET%^, and a pair of heavy %^YELLOW%^gauntlets%^RESET%^.\nYou could try to %^YELLOW%^take%^RESET%^ something...\n\nOff to the side is another pile, these much larger items, but a dull red ward flickers above them that prevents you from reaching out to take one.";
@@ -231,7 +231,8 @@ int take_fun(string str)
     case "breastplate":
     case "shadows":
     case "mail shirt":
-    case "carapace":                                                                                              //armor1
+    case "carapace":
+    case "headband":                                                                                            //armor1
         if (!armor1) {
             tell_object(TP, "You reach out for a piece of armor and are stung sharply by the crimson ward around it!");
             return 1;
@@ -261,6 +262,10 @@ int take_fun(string str)
 
         case "carapace":
             ob = new(ITEM + "sarmor.c")->move(TO);
+            break;
+
+        case "headband":
+            ob = new(ITEM + "headband_o_mp.c")->move(TO);
             break;
         }
         armor1--;
