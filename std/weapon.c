@@ -598,8 +598,7 @@ void query_damage_type()
     if (query_special_material_type() == "none") {
         return damage_type;
     }
-    damage_type = query_special_material_type();
-    return damage_type;
+    return query_special_material_type();
 }
 
 void set_special_material_type(string type)

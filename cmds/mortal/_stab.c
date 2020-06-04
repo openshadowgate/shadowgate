@@ -14,6 +14,7 @@ inherit DAEMON;
 
 int flip_weapons(object sheath);
 int do_strike(object play, object vic);
+string damtype;
 
 #define CLASS_STAB_DIE 8
 #define MULTI_STAB_DIE 6
@@ -184,11 +185,19 @@ int scramble_stab(object stabber, object victim)
             stabber->set_property("magic",1);
         }
 
-        stabber->cause_damage_to(victim,"torso",damage);
+        if(sizeof(weapon))
+        {
+          damtype = weapon[0]->query_damage_type();
+        }
+        else{
+          damtype = "piercing";
+        }
+
+        stabber->cause_typed_damage(victim,"torso",damage,damtype);
         // putting this here so if their weapon gets an execute_attack special they don't loose their stab -Ares
         if(sizeof(weapon) && objectp(weapon[0]))
         {
-            stabber->cause_damage_to(victim,"torso",(int)stabber->get_damage(weapon[0]));
+            stabber->cause_typed_damage(victim,"torso",(int)stabber->get_damage(weapon[0]),weapon[0]->query_damage_type());
         }
 
         if(magic)
@@ -361,10 +370,19 @@ int do_strike(object play, object vic)
         play->set_property("magic",1);
     }
 
-    play->cause_damage_to(vic,"torso",damage);
-    // putting this here in case the weapon calls execute_attack, so they still get their stab -Ares
-    if(sizeof(weapon) && objectp(weapon[0])) {
-        play->cause_damage_to(vic,"torso",(int)play->get_damage(weapon[0]));
+    if(sizeof(weapon))
+    {
+      damtype = weapon[0]->query_damage_type();
+    }
+    else{
+      damtype = "piercing";
+    }
+
+    play->cause_typed_damage(vic,"torso",damage,damtype);
+    // putting this here so if their weapon gets an execute_attack special they don't loose their stab -Ares
+    if(sizeof(weapon) && objectp(weapon[0]))
+    {
+        play->cause_typed_damage(vic,"torso",(int)play->get_damage(weapon[0]),weapon[0]->query_damage_type());
     }
 
     if(magic)
