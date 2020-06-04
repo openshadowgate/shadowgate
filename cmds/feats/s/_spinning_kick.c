@@ -164,7 +164,7 @@ void execute_attack()
             }
         }
         display_messages(attackers[i],caster);
-        caster->cause_damage_to(attackers[i], attackers[i]->return_target_limb(), dam);
+        caster->cause_typed_damage(attackers[i], attackers[i]->return_target_limb(), dam, "bludgeoning");
         hit = 1;
         continue;
     }
