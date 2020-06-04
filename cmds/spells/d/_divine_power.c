@@ -34,9 +34,8 @@ int preSpell()
         tell_object(caster, "Similar magic already affects you.");
         return 0;
     }
+    mybonus = clevel / 12 + 1; //same as rally melee
     return 1;
-
-    mybonus = clevel / 8;
 }
 
 void spell_effect(int prof)
@@ -45,11 +44,10 @@ void spell_effect(int prof)
               "overwhelm " + caster->QCN + ".%^RESET%^", caster);
     tell_object(caster, "%^BOLD%^%^CYAN%^The madness of war and the need for victory overwhelm you.%^RESET%^");
 
-
-    caster->add_attack_bonus(mybonus);
-    caster->add_damage_bonus(mybonus);
     caster->set_property("berserked", 1);
     caster->set_property("dance-of-cuts", 1);
+    caster->add_attack_bonus(mybonus);
+    caster->add_damage_bonus(mybonus);
     addSpellToCaster();
     call_out("dest_effect", clevel * 10);
     call_out("berserk", ROUND_LENGTH);
@@ -83,10 +81,10 @@ void dest_effect()
             tell_object(caster, "%^CYAN%^The rage leaves you.%^RESET%^");
             tell_room(environment(caster), "%^CYAN%^The rage of " +
                       "war lifts from " + caster->QCN + ".", caster);
-            caster->add_attack_bonus(-mybonus);
-            caster->add_damage_bonus(-mybonus);
             caster->remove_property("berserked");
             caster->remove_property("dance-of-cuts");
+            caster->add_attack_bonus(-mybonus);
+            caster->add_damage_bonus(-mybonus);
             caster->remove_property_value("spelled", ({ TO }));
             caster->use_stamina(25);
             remove_call_out("berserk");
