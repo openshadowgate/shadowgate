@@ -1,11 +1,9 @@
 #include <std.h>
+#include <daemons.h>
+#include <clock.h>
 
 inherit "/d/common/obj/armour/helm";
-
-#define MAXUSES 1000
-
-int detect, x;
-
+int uses_per_day = 10, used, end_day;
 
 void create()
 {
@@ -43,7 +41,7 @@ void create()
     set_item_bonus("sight bonus", 7);
     set_item_bonus("constitution", 6);
 
-    set_value(15000);
+    set_value(150000);
     set_wear((: TO, "wearme" :));
     set_remove((: TO, "removeme" :));
 
@@ -64,30 +62,44 @@ void init()
 
 int true(string str)
 {
-    if (TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
-        TP->send_paralyzed_message("info", TP);
-        return 1;
-    }
+  if (TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
+      TP->send_paralyzed_message("info", TP);
+      return 0;
+  }
 
-    if (!query_worn()) {
-        return notify_fail("Wear it first.\n");
-    }
+  if (!query_worn()) {
+      return notify_fail("Wear it first.\n");
+  }
+  if (!end_day) {
+      end_day = time() + DAY;
+  }
+  if (end_day) {
+      if (time() < end_day) {
 
-    if (detect < MAXUSES) {
         if (!str) {
             return notify_fail("True what?\n");
         }
         if (str != "seeing") {
             return notify_fail("You cannot call upon the powers of true " + str + "!\n");
         }
-        tell_room(ETO, "%^BOLD%^%^BLUE%^The sapphires in the helmet shimmer briefly.", TO);
-        new("/cmds/spells/t/_true_seeing")->use_spell(ETO, 0, 50, 100, "mage");
-        detect++;
-        return 1;
-    }else {
-        tell_object(ETO, "The helm does not have enough power to do that.");
-    }
-    return 1;
+          if (used < uses_per_day) {
+              if (new("/cmds/spells/t/_true_seeing")->use_spell(TP, TP, 50, 100, "mage")) {
+                  tell_room(ETO, "%^BOLD%^%^BLUE%^The sapphires in the helmet shimmer briefly.", TO);
+                  used++;
+                  tell_object(ETO, "Used " + used + " of " + uses_per_day + " uses per day.");
+              }
+          }else if (used >= uses_per_day) {
+              tell_object(ETO, "The magic has been drained from the helm, it needs time "
+                          "to recharge.");
+              return 1;
+          }
+      }
+      if (time() > end_day) {
+          end_day = time() + DAY;
+          used = 0;
+      }
+  }
+  return 1;
 }
 
 int wearme()
