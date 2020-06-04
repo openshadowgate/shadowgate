@@ -165,9 +165,9 @@ void execute_attack() {
     target->set_property("rushed at",time());
     delay_subject_msg(target,FEATTIMER,"%^BOLD%^%^WHITE%^"+target->QCN+" can be %^CYAN%^rushed%^WHITE%^ again.%^RESET%^");
 
-    if(objectp(weapon = caster->query_wielded()))
+    if(sizeof(myweapon))
     {
-        enchant = (int)weapon[0]->query_property("enchantment");
+        enchant = (int)myweapon[0]->query_property("enchantment");
     }
     else
     {
@@ -202,10 +202,10 @@ void execute_attack() {
     }
     damage = roll_dice(clevel,8); // up to d8 on a trial basis
 
-    if(objectp(weapon))
+    if(sizeof(myweapon))
     {
-        damage += weapon[0]->query_damage();
-        damtype = weapon[0]->query_damage_type();
+        damage += myweapon[0]->query_damage();
+        damtype = myweapon[0]->query_damage_type();
     }
     else if(caster->query_property("shapeshifted"))
     {
