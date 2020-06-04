@@ -124,6 +124,7 @@ void execute_attack() {
     int damage, timerz, i, enchant, res;
     object *weapon, *keyz,shape, *myweapon;
     mapping tempmap, newmap;
+    string damtype;
 
     if(!objectp(caster)) {
         dest_effect();
@@ -203,12 +204,16 @@ void execute_attack() {
 
     if(objectp(weapon))
     {
-        if((int)target->query_size() < 3) damage += weapon[0]->query_damage();
-        else damage += weapon[0]->query_large_damage();
+        damage += weapon[0]->query_damage();
+        damtype = weapon[0]->query_damage_type();
     }
     else if(caster->query_property("shapeshifted"))
     {
         damage += (int)caster->get_hand_damage();
+        damtype = caster->get_new_damage_type();
+    }
+    else{
+      damtype = "bludgeoning";
     }
 
     damage += "/daemon/bonus_d"->damage_bonus(caster->query_stats("strength"));
@@ -223,7 +228,7 @@ void execute_attack() {
     }
 
     hit_mess(caster,target);
-    caster->cause_damage_to(target,target->return_target_limb(),damage);
+    caster->cause_typed_damage(target,target->return_target_limb(),damage,damtype);
 
     if(!objectp(target)) {
       dest_effect();
