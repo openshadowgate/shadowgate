@@ -2,8 +2,6 @@
 
 inherit INH+"assassin";
 
-int is_lab();
-
 void create()
 {
     set_short("%^BOLD%^%^BLACK%^An Alchemy Shop%^RESET%^");
@@ -29,5 +27,3 @@ void init()
       if(!present("tercera",TO))
          find_object_or_load(MON+"/tercera")->move(TO);
 }
-
-int is_lab(){ return 1;}
