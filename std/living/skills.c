@@ -278,7 +278,7 @@ int query_base_skill(string skill)
 int query_skill(string skill)
 {
     int i, j, x, mymod, mylevel;
-    string mystat, * myclasses, myrace, * myclassskills, file, mydisc;
+    string mystat, * myclasses, myrace, * myclassskills, file, mydisc, mysubrace;
     mapping myraceskills;
 
     if (!userp(this_object())) {
@@ -334,10 +334,11 @@ int query_skill(string skill)
     }
 
     myrace = TO->query_race();
+    mysubrace = TO->query("subrace");
     file = "/std/races/" + myrace + ".c";
 
     if (file_exists(file)) {
-        myraceskills = (string*)file->skill_mods();
+        myraceskills = (string*)file->skill_mods(mysubrace);
         if (myraceskills[skill]) {
             x += myraceskills[skill];
         }
@@ -572,7 +573,7 @@ int query_character_level()
 // adding LA adjustment here; this is the only place it should be needed. -N, 10/10
 
     myrace = this_object()->query_race();
-    mysubrace = (string)query("subrace");
+    mysubrace = (string)TO->query("subrace");
     file = "/std/races/" + myrace + ".c";
     if (file_exists(file)) {
         lvladjust = (int)file->level_adjustment(mysubrace);
