@@ -12,7 +12,7 @@ void create()
    set_id(({"cloak","red cloak","cape","red cape","cape of the ruby heart"}));
    set_long(
 @CIRCE
-%^RED%^This rich ruby red silken cape is extremely lightweight.  The cape is cut into a fashion that is called a 'half cape', meaning that it just covers one’s back.  Interwoven into the red silk are %^BOLD%^metallic red%^RESET%^%^RED%^ threads that give the cape a sparkle.  A thin %^RESET%^silver chain%^RED%^ serves as the only closure for the cape.  From the chain dangles two heart shapes made of ruby.  One features a tiny %^RESET%^silver dagger%^RED%^ through the heart, while the other is mounted onto a %^RESET%^silver starburst%^RED%^.  The images are quite small, no bigger than the tip of your finger.%^RESET%^
+%^RED%^This rich ruby red silken cape is extremely lightweight.  The cape is cut into a fashion that is called a 'half cape', meaning that it just covers one's back.  Interwoven into the red silk are %^BOLD%^metallic red%^RESET%^%^RED%^ threads that give the cape a sparkle.  A thin %^RESET%^silver chain%^RED%^ serves as the only closure for the cape.  From the chain dangles two heart shapes made of ruby.  One features a tiny %^RESET%^silver dagger%^RED%^ through the heart, while the other is mounted onto a %^RESET%^silver starburst%^RED%^.  The images are quite small, no bigger than the tip of your finger.%^RESET%^
 CIRCE
    );
    set_lore(
@@ -30,4 +30,3 @@ CIRCE
    set_wear("%^BOLD%^%^RED%^You fasten the chain around your neck and put on the red cloak.");
    set_remove("You undo the chain and slip off the red cloak.");
 }
-
