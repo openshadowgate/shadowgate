@@ -57,10 +57,13 @@ int* stat_mods(string subrace)   // stats in order: str, dex, con, int, wis, cha
 }
 
 mapping skill_mods(string subrace) {
-    if(!subrace || subrace == "") return ([ "academics" : 2 ]);
-    switch(subrace) {
-    case "forest gnome" : case "svirfneblin": case "deep gnome": case "trixie": return ([ "stealth" : 2 ]); break;
-      default: return ([ "academics" : 2 ]); break; //rock gnome default
+    switch (subrace) {
+    case "forest gnome": case "svirfneblin": case "deep gnome": case "trixie":
+        return ([ "stealth" : 2 ]);
+        break;
+    default:
+        return ([ "academics" : 2 ]);
+        break;
     }
 }
 
