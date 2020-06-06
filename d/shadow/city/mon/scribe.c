@@ -1,10 +1,9 @@
 #include <std.h>
 #include <langs.h>
 
-inherit "/realms/saide/scribe";
+inherit "/std/scribe";
 
 int end_game(string str, object ob, string lang);
-
 
 void create() {
     ::create();
@@ -44,4 +43,4 @@ void create() {
     add_money("silver",random(10));
     add_money("gold",random(5));
     add_money("copper",random(20));
-}  
+}
