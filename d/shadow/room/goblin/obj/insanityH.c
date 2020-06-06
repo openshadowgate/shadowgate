@@ -10,10 +10,8 @@ void create() {
     set_id(({"sword","longsword","sword of insanity","insanity"}));
     set_short("%^BOLD%^%^MAGENTA%^Sword of Insanity%^RESET%^");
     set_long(
-@CIRCE
-It is hard to determine what kind of metal this curious blade is made out of.  As you see the entire blade has been painting with %^YELLOW%^c%^CYAN%^h%^GREEN%^a%^BLACK%^o%^BLUE%^t%^RED%^i%^MAGENTA%^c%^RESET%^ stripes in a dazzling variety of colors.  There is no rhyme or reason to the stripes it seems, their size and colors vary at whim.  Some start out wide and taper off to skinny, while others use at least seven different colors just to finish one stripe.  The pommel of this long sword is wrapped with strips of %^CYAN%^basket-woven %^RESET%^cotton, giving plenty of cushions for the hands, and adding to the motley array of colors.
-CIRCE
-    );
+"It is hard to determine what kind of metal this curious blade is made out of.  As you see the entire blade has been painting with %^YELLOW%^c%^CYAN%^h%^GREEN%^a%^BLACK%^o%^BLUE%^t%^RED%^i%^MAGENTA%^c%^RESET%^ stripes in a dazzling variety of colors.  There is no rhyme or reason to the stripes it seems, their size and colors vary at whim.  Some start out wide and taper off to skinny, while others use at least seven different colors just to finish one stripe.  The pommel of this long sword is wrapped with strips of %^CYAN%^basket-woven %^RESET%^cotton, giving plenty of cushions for the hands, and adding to the motley array of colors."
+        );
     set_lore("The Sword of Insanity is an ancient sword from Shadow's "+
        "past.  The sword in truth was made somewhere in the second or "+
        "third century and was deemed a holy blade to the deity of Good "+

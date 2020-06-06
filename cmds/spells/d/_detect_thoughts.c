@@ -20,7 +20,7 @@ void create() {
 spell_effect()
 {
     tell_object(caster,"%^CYAN%^You quickly touch your temples, attuning yourself to detect presence of telepathic communication.");
-    tell_room(place, "%^CYAN%^" + caster->QCN + " quickly touches his temples.");
+    tell_room(place, "%^CYAN%^" + caster->QCN + " quickly touches his temples.", caster);
 
     spell_successful();
     caster->set_property("spelled", ({TO}) );
