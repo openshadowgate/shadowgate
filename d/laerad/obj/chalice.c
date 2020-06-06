@@ -34,13 +34,11 @@ void create()
              "shaped %^CYAN%^aquamarines%^WHITE%^, and triangles of" +
              " iv%^YELLOW%^o%^WHITE%^ry. The ripples of the pool " +
              "seem to spell out something.");
-    set_lore("First created by the faiths of Eldath and Mielikki," +
+    set_lore("First created by the faiths of Lysara and Nim'navanon," +
              " the Chalice of Purity symbolized the main themes of both" +
              " goddesses.  The unicorn is used to symbolize purity and" +
-             " cleansing, while the still pool is an icon of Eldath's" +
-             " tranquility.  With merging of Eldath into Istishia, the" +
-             " faith of Istishia has continued to create these chalices" +
-             " with the priests of Mielikki.");
+             " cleansing, while the still pool is an icon of Lysara's" +
+             " tranquility.");
     set_property("lore difficulty", 9);
     set_read("%^BOLD%^%^CYAN%^\nTo feel the blessings of purity " +
              "simply %^GREEN%^measure liquid%^CYAN%^.\nAnd %^GREEN%^drink" +

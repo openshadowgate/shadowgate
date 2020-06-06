@@ -11,10 +11,10 @@ void create()
 	set_short("%^BOLD%^%^WHITE%^Sea shell top%^RESET%^");
 	set_long("%^BOLD%^%^WHITE%^This top is not for the modest!  Strung on strands of"+
 		" pearls, two seashells work to provide some covering to a"+
-		" woman’s chest.  The halter neckline of the top works to "+
-		"only emphasize a woman’s decollete instead of conceal, as"+
+		" womans chest.  The halter neckline of the top works to "+
+		"only emphasize a womans decollete instead of conceal, as"+
 		" any sane woman would.  The milky white pearls give a lavish"+
-		" feel to this top.  Another strand of pearls encircles one’s"+
+		" feel to this top.  Another strand of pearls encircles ones"+
 		" body just under the bust.  Fringe made of pearls fall about"+
 		" the midriff, hanging almost down to the navel in the center"+
 		" and then angling up to only a few inches.  The inside of the"+
@@ -48,7 +48,7 @@ int wearme(string str)
 		return 0;
 	}
 		tell_object(ETO,"%^BOLD%^You slip the top over your head"+
-			" and under your bust, and can’t help but feel a bit"+
+			" and under your bust, and cant help but feel a bit"+
 			" exposed.  You feel the urge to %^CYAN%^bounce%^WHITE%^");
 
     return 1;
