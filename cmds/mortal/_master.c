@@ -139,7 +139,9 @@ int cmd_master(string args)
                 return 1;
             }
         }
-
+        if (TP->is_class("warlock")) {
+            TP->delete("warlock_blast_type");
+        }
         TP->set("last_master_forget",time());
         TP->remove_mastered(myclass,sarg);
         write("%^CYAN%^You have forgotten %^BOLD%^%^WHITE%^"+sarg+"%^RESET%^%^CYAN%^.%^RESET%^");
