@@ -15,7 +15,7 @@ void create() {
        "%^YELLOW%^leather cord%^WHITE%^.%^RESET%^");
     set_lore("The Bone Knife is made from the rib bone of a beast.  "+
        "The size of the blade rules out any humanoid creatures, as "+
-       "it’s too thick and long.  The Bone Knife is a favored weapon "+
+       "it's too thick and long.  The Bone Knife is a favored weapon "+
        "of goblin rogues and assassins, for its deadly edge and ease "+
        "to wield.  Many an adventure's life has been cut short by his "+
        "underestimation of how deadly these types of knives can be.");
