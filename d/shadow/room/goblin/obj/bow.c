@@ -19,12 +19,12 @@ void create() {
 "%^RESET%^%^ORANGE%^ from a gnome here, an %^GREEN%^elven ear%^RESET%^%^ORANGE%^ "
 "there, and even what looks to be the preserved %^BLUE%^eyeball%^RESET%^%^ORANGE%^ "
 "of some kind of humanoid.");
-    set_lore("The Headhunter’s Bow is used by the trained archers of the goblins.  "
+    set_lore("The Headhunter's Bow is used by the trained archers of the goblins.  "
 "These goblin rangers, as they are called (though they possess no ranger skills or "
 "respect for nature) are the hunters and trappers for a goblin community.  In times "
 "of warfare, the goblin archers are able to provide a brutal and savage rain of arrows "
 "down onto their foes.  They have earned the name of headhunters, because they often "
-"aim for one’s head.");
+"aim for one's head.");
     set_property("lore difficulty",6);
     set_property("enchantment",1);
     set_value(40);
