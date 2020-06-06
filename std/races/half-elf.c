@@ -21,7 +21,7 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
 }
 
 mapping skill_mods(string subrace) {
-    if(!subrace || subrace == "") return ([ "influence" : 2 ]);
+    return ([ "influence" : 2 ]);
 }
 
 int level_adjustment(string subrace) {

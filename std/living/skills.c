@@ -278,7 +278,7 @@ int query_base_skill(string skill)
 int query_skill(string skill)
 {
     int i, j, x, mymod, mylevel;
-    string mystat, * myclasses, myrace, * myclassskills, file, mydisc;
+    string mystat, * myclasses, myrace, * myclassskills, file, mydisc, mysubrace;
     mapping myraceskills;
 
     if (!userp(this_object())) {
@@ -334,12 +334,15 @@ int query_skill(string skill)
     }
 
     myrace = TO->query_race();
+    mysubrace = TO->query("subrace");
     file = "/std/races/" + myrace + ".c";
 
     if (file_exists(file)) {
-        myraceskills = (string*)file->skill_mods();
-        if (myraceskills[skill]) {
-            x += myraceskills[skill];
+        myraceskills = file->skill_mods(mysubrace);
+        if (myraceskills) {
+            if (myraceskills[skill]) {
+                x += myraceskills[skill];
+            }
         }
     }
 
