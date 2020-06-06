@@ -7,8 +7,8 @@ void create() {
    set_property("light",2);
    set_terrain(STONE_BUILDING);
    set_travel(PAVED_ROAD);
-   set_name("Tiamat’s Lair");
-   set_short("%^RESET%^%^ORANGE%^Tiamat’s Lair%^RESET%^");
+   set_name("Tiamats Lair");
+   set_short("%^RESET%^%^ORANGE%^Tiamats Lair%^RESET%^");
    set_long("%^RESET%^%^ORANGE%^You are standing within a cavern of immense proportions, deep underground in "
 "an unknown plane of the multiverse.  Scarce light is provided by torches and small bonfires.  Their glow "
 "bounces off a trinket here or there and softly illuminates an impossibly large %^BOLD%^hoa%^RED%^r%^ORANGE%^"

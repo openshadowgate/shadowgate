@@ -14,7 +14,7 @@ Nienne, Octothorpe and Tsera.   Thanks guys! */
 This area is designed for levels 20-23 with the expectation 
 that some classes will be able to challenge it as early as 
 18th level and that players may continue to explore it 
-through 26th level or so.  A large mob (Aysu – created by 
+through 26th level or so.  A large mob (Aysu  created by 
 Circe) will attack players when they attempt to enter the 
 area if they are over 26th level.  Likewise, the dock will 
 warn players under 18th from entering as well.  This is 
@@ -78,49 +78,49 @@ The general theme of this area is to produce gear that
 stuns, though said stuns are very short in duration:
 
 Weapons:
-* belaypin.c – This is by far the coolest of the weapon rewards 
+* belaypin.c  This is by far the coolest of the weapon rewards 
 and is carried by pirates and the captain.  There is a minor 
 rate of drop so we shouldn't see a lot surfacing though if 
 players want one they would just need to cycle a while.  A +2 
 medium club with several nifty specials including a stunning and 
 damage special. Also comes equipped with a lightning touch 2/day 
 use command. 
-* pikeofthedepths.c – A nice little polearm of +3 range to fill 
+* pikeofthedepths.c  A nice little polearm of +3 range to fill 
 in a spot that was lacking, two specials that either do damage 
 or stun. Dropped by Pirates.
-* sharkskinwhip.c – A +3 whip that, like the polearm has a minor 
+* sharkskinwhip.c  A +3 whip that, like the polearm has a minor 
 damage special or a stunning (choking) special. Dropped by 
 Pirates or possibly Captain.
-* coral_ale.c – This doesn't drop but is an impressive weapon 
+* coral_ale.c  This doesn't drop but is an impressive weapon 
 for Grizon when/if attacked.  It is meant to make this otherwise 
 less then productive member of society a bit fierce. 
 
 Armor:
-* coralscape.c – Banded mail +2 that has been covered in living 
+* coralscape.c  Banded mail +2 that has been covered in living 
 coral.  Has a special on-hit that may stun the striker for a 
 short period of time as coral dust flies into their eyes. 
 Dropped by the priates on occasion. 
-* kelpwrap.c – Only dropped by the captain.  +2 Leather armor 
+* kelpwrap.c  Only dropped by the captain.  +2 Leather armor 
 that allows a player 2/day to cast either 'detect invisibility' 
 or 'invisibility'. 
 
 Objects:
-* coral_goodchest.c – The chest that the eel drops. It can be 
+* coral_goodchest.c  The chest that the eel drops. It can be 
 broken into and if a player does so, then it will auto spawn a 
 badchest. 
-* coral_badchest.c – What is spawned if players get greedy and 
+* coral_badchest.c  What is spawned if players get greedy and 
 peeks inside the good chest.
-* coral_compass.c – What is needed to put into the bulkhead's 
+* coral_compass.c  What is needed to put into the bulkhead's 
 design to open the passage to the eel and golden chest.  The 
 captain has this in his inventory and drops it when he is killed.
-* coral_prize.c – A single file with multi-change-describe stuff 
+* coral_prize.c  A single file with multi-change-describe stuff 
 that can be found by searching the kelp or ground of the sea.  
 These are treasures of 300-400 gold value.  There is about a 
 10% chance in around 30 rooms, so most players should find
 four or five. 
-* coral_earring.c – A prize from the Eel. Casts tongues 2d2 
+* coral_earring.c  A prize from the Eel. Casts tongues 2d2 
 uses. More of a utility/fun thing then anything else.
-* coral_brasskey.c – Needed to reach the captain's cabin and 
+* coral_brasskey.c  Needed to reach the captain's cabin and 
 'fresh air' while undersea.  Can be found on the masthead 
 located in the tower's balcony by searching the clam shell.
 
@@ -276,7 +276,7 @@ jaws do a little damage, but nothing major.  Players over 30th
 level who go swimming here will find the Aysu is hungry and 
 she will take players to her lair where she'll fight them!  
 Considering she has sharks for pets and she's as tough as 
-Genoslu, this isn’t a great place to be.  Thankfully, your 
+Genoslu, this isnt a great place to be.  Thankfully, your 
 friends can find you, if you can last that long.  Aysu attacks 
 in any location that is underwater. 
 

@@ -12,12 +12,12 @@ void create()
 	set_id(({"club", "ogre club", "large club", "sacrificial club", "club of sacrificial possession", "Club of Sacrificial Possession", "gray club", "large gray club"}));
 	set_long(
 @CIRCE
-Ghostly grey weathered driftwood is used to create this club.  The club is carved with great craftsmanship in the appearance of a %^RED%^screaming figure%^RESET%^.  A chilling look of %^MAGENTA%^terror %^RESET%^is brought to life in the carving as the figure's %^RED%^mouth %^RESET%^is stretched wide in a %^BLUE%^horrific scream%^RESET%^.  The club is marred with cuts and nicks, showing that it’s been used in battle often.  The grey wood you notice has been stained %^RED%^reddish brown %^RESET%^in some area
+Ghostly grey weathered driftwood is used to create this club.  The club is carved with great craftsmanship in the appearance of a %^RED%^screaming figure%^RESET%^.  A chilling look of %^MAGENTA%^terror %^RESET%^is brought to life in the carving as the figure's %^RED%^mouth %^RESET%^is stretched wide in a %^BLUE%^horrific scream%^RESET%^.  The club is marred with cuts and nicks, showing that its been used in battle often.  The grey wood you notice has been stained %^RED%^reddish brown %^RESET%^in some area
 CIRCE
 	);
       set_lore(
 @CIRCE
-The Club of Sacrificial Possession is rumored to have been made from a follower of Eldath that the Grey Claws, a tribe of orcs, sacrificed to their dark god.  The legend goes that Cyric was very pleased with his hunters that he transformed the Eldathian’s corpse into a club.  Each club is rumored to be different, bearing the image of the Eldathian sacrificed.  The victim’s soul is said to be housed within the club and forced to serve the needs of the orcs and the will of Cyric.  A chilling fate for anyone,
+The Club of Sacrificial Possession is rumored to have been made from a follower of Eldath that the Grey Claws, a tribe of orcs, sacrificed to their dark god.  The legend goes that Cyric was very pleased with his hunters that he transformed the Eldathians corpse into a club.  Each club is rumored to be different, bearing the image of the Eldathian sacrificed.  The victims soul is said to be housed within the club and forced to serve the needs of the orcs and the will of Cyric.  A chilling fate for anyone,
 CIRCE
       );
       set_property("lore difficulty",12);

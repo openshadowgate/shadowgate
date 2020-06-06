@@ -17,9 +17,9 @@ void create_sash(object obj)
 	obj->set_id(({"sash",""+COLOR+" sash"}));
 	obj->set_long("Long rectangular cut "+COLOR+" silk %^RESET%^"+
          "is used to create this sash.  The sash is worn about the "+
-         "waist, as a display of one’s pride and to conceal money "+
+         "waist, as a display of ones pride and to conceal money "+
          "pouches within its many folds.  In the Tsvaren Empire these "+
-         "sashes’ ends are tucked within each other, and only a thug "+
+         "sashes ends are tucked within each other, and only a thug "+
          "would leave them exposed!");
 	obj->set_weight(1);
 	obj->set_type("ring");

@@ -23,7 +23,7 @@ void create(){
             "with.  Some claim that the whip is actually forged in the dying fires of the "+
             "phoenix, before the mythical bird is reborn.  Still others claim the whip is "+
             "a testament of the raw power of fire and the damage that can be done with it.  "+
-            "With so many stories in circulation, it’s nearly impossible to know the truth.");
+            "With so many stories in circulation, its nearly impossible to know the truth.");
    	set_property("lore difficulty",16);
      	set_value(1000);
       set_type("lash");

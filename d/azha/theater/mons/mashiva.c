@@ -25,7 +25,7 @@ inherit "std/monster";
 		"violet%^GREEN%^ shade, adding to her unearthly beauty.  "+
 		"Dressed in a tight outfit that is barely there, there is "+
 		"little left to imagination with this devil.  Though being"+
-		" an eryines, it's hard to say if this is her true form….%^RESET%^");
+		" an eryines, it's hard to say if this is her true form.%^RESET%^");
 	set_race("eryines");
 	set_gender("female");
 	set_body_type("human");

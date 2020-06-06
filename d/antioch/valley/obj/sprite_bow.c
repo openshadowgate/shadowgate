@@ -14,7 +14,7 @@ void create() {
 		" elegant, graceful and very strange.  The slender "+
 		"light crossbow is made of pure ivory.  %^YELLOW%^Gold"+
 		" %^WHITE%^filigree stripes only help to heighten the"+
-		" ivory’s luster and the elegance of the bow.  A bow"+
+		" ivorys luster and the elegance of the bow.  A bow"+
 		" string made of glittering silver looks very thin and"+
 		" fragile, as if it might break at any moment.  Though"+
 		" it is in truth deceptively strong.  The crossbow rises"+
@@ -24,7 +24,7 @@ void create() {
 		" free hand to load it with arrows.  Very strange!");
 	set_lore("The Sprite Bow is a rather newer creation of the"+
 		" brilliant minds of the fey folk.  The crossbow helps "+
-		"to play on the fey’s natural dexterity and overcomes the"+
+		"to play on the feys natural dexterity and overcomes the"+
 		" physical weakness many of them seem to have.  The crossbow"+
 		" is well balanced allowing for land, air and sea use, when needed."+
 		" The crossbow is rumored to have large moonstone tucked away "+

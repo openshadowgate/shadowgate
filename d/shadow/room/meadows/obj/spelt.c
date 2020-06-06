@@ -12,7 +12,7 @@ void create()
    " a light brown shade with black spots. It is very soft.");
    set_lore(
 @CIRCE
-The hide of a lion, the King of the Beasts, is prized by many tanner and trappers.  Garments made of the lion’s hide are quite popular among the faithful of Torm as well as many young noblemen of Tabor.
+The hide of a lion, the King of the Beasts, is prized by many tanner and trappers.  Garments made of the lions hide are quite popular among the faithful of Torm as well as many young noblemen of Tabor.
 CIRCE
    );
    set_property("lore difficulty",5);

@@ -69,7 +69,7 @@ int * query_last_move(){
 string display_board_small(){
   int i, j, k, x;
   string display;
-  display = "%^B_RED%^-+-+-+-+-+-+-+-+-¬%^RESET%^\n";
+  display = "%^B_RED%^-+-+-+-+-+-+-+-+-%^RESET%^\n";
   display += "%^B_RED%^ |A|B|C|D|E|F|G|H|%^RESET%^\n";
   for (i=0;i<8;i++){
     display += "%^B_RED%^-+-+-+-+-+-+-+-+-+%^RESET%^\n";
@@ -119,7 +119,7 @@ string get_board_display(object ob){
 string display_board(){
   int i, j, k, x;
   string display;
-  display = "%^B_RED%^---+---+---+---+---+---+---+---+---¬%^RESET%^\n";
+  display = "%^B_RED%^---+---+---+---+---+---+---+---+---%^RESET%^\n";
   display += "%^B_RED%^   | A | B | C | D | E | F | G | H |%^RESET%^\n";
   display += "%^B_RED%^   |   |   |   |   |   |   |   |   |%^RESET%^\n";
   for (i=0;i<8;i++){

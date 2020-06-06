@@ -10,7 +10,7 @@ void create()
    set_id(({"belt","golden belt","golden link belt","gold belt"}));
    set_long(
 @CIRCE
-%^ORANGE%^Made from burnished brass, to look like %^YELLOW%^gold%^RESET%^%^ORANGE%^, this metal belt looks quite heavy.  Made to encircle a woman’s waist and rest low on her hips, this belt is commonly used by many %^MAGENTA%^dancers %^ORANGE%^and %^CYAN%^entertainers %^ORANGE%^in the Tsarven Empire.  %^YELLOW%^Golden disks %^RESET%^%^ORANGE%^that look like %^BOLD%^%^WHITE%^coins %^RESET%^%^ORANGE%^hang by the hundreds from the belt, chiming as the wearer moves about or shakes her hips.%^RESET%^
+%^ORANGE%^Made from burnished brass, to look like %^YELLOW%^gold%^RESET%^%^ORANGE%^, this metal belt looks quite heavy.  Made to encircle a womans waist and rest low on her hips, this belt is commonly used by many %^MAGENTA%^dancers %^ORANGE%^and %^CYAN%^entertainers %^ORANGE%^in the Tsarven Empire.  %^YELLOW%^Golden disks %^RESET%^%^ORANGE%^that look like %^BOLD%^%^WHITE%^coins %^RESET%^%^ORANGE%^hang by the hundreds from the belt, chiming as the wearer moves about or shakes her hips.%^RESET%^
 CIRCE
    );
    set_weight(3);

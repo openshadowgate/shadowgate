@@ -118,7 +118,7 @@ void dispel_em(object ob){
 //~Circe~ 11/19/15
 //Per table top: You make a dispel check (1d20 + your caster level, maximum +10)
 //against the spell or against each ongoing spell currently in effect on the object
-//or creature. The DC for this dispel check is 11 + the spell’s caster level.
+//or creature. The DC for this dispel check is 11 + the spells caster level.
 //Because we currently add 10 for greater dispel, I am not capping the level.
 //We could revisit this as well.
 

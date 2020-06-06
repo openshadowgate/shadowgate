@@ -2321,7 +2321,7 @@ void setup_Pictures(){
 
 //Dragon pictures
   pics = ([]);
-  pics["empty hand"] = ({"     _______.", "     )       \\;`a__", ">-¬_  )______/ /-,w ~~", "    `( )_____)/", "    __>   __>"});
+  pics["empty hand"] = ({"     _______.", "     )       \\;`a__", ">-_  )______/ /-,w ~~", "    `( )_____)/", "    __>   __>"});
   __RPictures["dragon"] = pics;
   pics = ([]);
   pics["empty hand"] = ({"         ._______", "   __a';/       (", "~~ w.-\\ \\______(   _,-<", "       \\(_____( )'", "         <__    <__" });
@@ -2425,7 +2425,7 @@ void setup_Pictures(){
 
 //monkey pictures
   pics = ([]);          
-  pics["empty hand"] = ({"|    nn","\\ __(..)"," (  _ )","  /¬ \\¬"});
+  pics["empty hand"] = ({"|    nn","\\ __(..)"," (  _ )","  / \\"});
   __RPictures["monkey"] = pics;
   pics = ([]);
   pics["empty hand"] = ({" nn   |","(..)__/"," (  _ )","  /3 \\3"});

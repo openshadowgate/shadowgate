@@ -45,7 +45,7 @@ void create()
              " liquid%^CYAN%^ from this chalice.");
     set_language("common");
     set_weight(5);
-    set_value(1800);
+    set_value(15000);
     set_heart_beat(1);
 }
 
@@ -104,10 +104,10 @@ int measure_me(string str)
     }
     if (flag == 0) {
         write("%^BOLD%^%^CYAN%^The stones on the cup start to" +
-              " glow as the chalice fills with crystal clear water.");
+              " glow as the chalice fills with crystal clear water. It appears that the chalice has been used " + uses + " of 8 times.");
         return 1;
     }
-    write("%^BOLD%^%^GREEN%^The cup is still replenishing itself.");
+    write("%^BOLD%^%^GREEN%^The cup is still replenishing itself. It appears that the chalice has been used " + uses + " of 8 times.");
     return 1;
 }
 

@@ -21,12 +21,12 @@ void create_sari(object obj)
          "is often seen that way.  Colorful silk dyed a "+COLOR+" "+
          "shade %^RESET%^with %^YELLOW%^"+
          "golden threads %^RESET%^is pleated and wrapped around a "+
-         "woman’s waist to create the flowing long skirt.  The ends "+
-         "of the fabric are then draped horizontally across one’s "+
+         "womans waist to create the flowing long skirt.  The ends "+
+         "of the fabric are then draped horizontally across ones "+
          "shoulder.  Along the outer edge of the draped cloth a "+
          "%^YELLOW%^detailed golden border %^RESET%^shimmers.  It "+
          "is said that in the Tsvaren Empire one can determine a "+
-         "woman’s rank, social class, and religion by this border.");
+         "womans rank, social class, and religion by this border.");
 	obj->set_weight(8);
 	obj->set_type("ring");
 	obj->set_limbs(({"torso"}));

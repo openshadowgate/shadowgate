@@ -224,7 +224,7 @@ string display_board(){
   display = "Next player: ";
   if (next_player ==1) display += "%^BOLD%^%^WHITE%^white%^RESET%^\n";
   else display += "%^BOLD%^%^BLACK%^black%^RESET%^\n";
-  display += "%^B_RED%^--+--+--+--+--+--+--+--+--¬\n";
+  display += "%^B_RED%^--+--+--+--+--+--+--+--+--\n";
   display += "%^B_RED%^  |A |B |C |D |E |F |G |H |\n";
 //  display += "%^B_RED%^ | | | | | |   |   |   |\n";
   for (i=0;i<8;i++){

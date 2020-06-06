@@ -17,7 +17,7 @@ CIRCE
 	);
       set_lore(
 @CIRCE
-The kama is one of those strange weapons that came about from a harvest tool.  The kama is much like a sickle in many ways, though without the sharp curve the sickle posses.  The kama is used to harvest grains.  Many druids have come to adopt the kama as one of their favored weapons, mainly due to it’s small size.  The aventurine used in this kama’s blade is a sacred stone to the followers of Mielikki.  A curious story surrounds the braided length of hair that wraps around the kama.  Some sages believe it to be actually dryad hair, and if unbraided one will find a single white strand in the center of the braid-given by a unicorn.  Though the braid seems resistant to anyone attempting to unbraid it, tangling about itself as if living.
+The kama is one of those strange weapons that came about from a harvest tool.  The kama is much like a sickle in many ways, though without the sharp curve the sickle posses.  The kama is used to harvest grains.  Many druids have come to adopt the kama as one of their favored weapons, mainly due to its small size.  The aventurine used in this kamas blade is a sacred stone to the followers of Mielikki.  A curious story surrounds the braided length of hair that wraps around the kama.  Some sages believe it to be actually dryad hair, and if unbraided one will find a single white strand in the center of the braid-given by a unicorn.  Though the braid seems resistant to anyone attempting to unbraid it, tangling about itself as if living.
 CIRCE
       );
       set_property("lore difficulty",14);
@@ -46,7 +46,7 @@ int hitme(object targ){
    if(!objectp(targ)) return 0;
    if(random(10) < 3){
       tell_object(ETO,"%^GREEN%^You sink the kama deep into "+
-         ""+targ->QCN+"’s flesh!");
+         ""+targ->QCN+"s flesh!");
       tell_object(targ,"%^GREEN%^"+ETOQCN+" sinks "+ETO->QP+" "+
          "kama deep into your flesh!");
       tell_room(EETO,"%^GREEN%^"+ETOQCN+" sinks "+ETO->QP+" "+

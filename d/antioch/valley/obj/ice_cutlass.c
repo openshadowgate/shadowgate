@@ -29,7 +29,7 @@ void create()
 		"  Deep within the orb the image of a snowflake is housed within"+
 		" the icy blue gem.");
 	set_weight(8);
-	set_lore("The Ice Cutlass or as it’s more commonly known Cold Heart "+
+	set_lore("The Ice Cutlass or as its more commonly known Cold Heart "+
 		"of Love is a blade that is devoted to Auril.  The Cutlass "+
 		"was rumored to first have been wielded by a fallen ranger of"+
 		" Auril, one Jarthow Urdethan, an elven male whose heart turned"+
@@ -38,17 +38,17 @@ void create()
 		"love with one of her priestesses.  The two, being elves, carried on"+
 		" a long romance that lasted many many many years.  It was not "+
 		"uncommon for Jarthow to take flight into the forests to spend "+
-		"time alone with the trees and his goddess’ presence.  On one "+
+		"time alone with the trees and his goddess presence.  On one "+
 		"such wandering through the woods he came upon a pool deep within"+
 		" the woods.  There he found his lovely priestess engaged in a "+
 		"scandalous affair with a low ranking half-elf priest of "+
-		"Lathander’s faith. Jarthow felt betrayed by his love, his goddess"+
+		"Lathanders faith. Jarthow felt betrayed by his love, his goddess"+
 		" and everything that he once believed in.  He turned his back on "+
 		"everything he knew and allowed his heart to grow cold to those he"+
 		" once called friends.  He found his place in Auril's service as her"+
 		" Slayer of Love, a grim cold figure that preyed on young lovers"+
 		" seeking to end their romances in what ever way he could.  Some "+
-		"claim that Jarthow is still out there… stalking young lovers.");
+		"claim that Jarthow is still out there stalking young lovers.");
 	set_property("lore",14);
 	set_type("slashing");
 	set_size(2);

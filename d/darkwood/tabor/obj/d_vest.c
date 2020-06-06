@@ -19,7 +19,7 @@ void create_vest(object obj)
          "Woven into the "+COLOR+" silk %^RESET%^are molten "+
          "%^YELLOW%^golden ovals%^RESET%^, a common theme in "+
          "Tsvarian clothing.  The vest is cut in a way that it "+
-         "exposes one’s chest.  %^YELLOW%^Gold braid %^RESET%^"+
+         "exposes ones chest.  %^YELLOW%^Gold braid %^RESET%^"+
          "trims the edges of the vest.");
 	obj->set_weight(2);
 	obj->set_type("ring");

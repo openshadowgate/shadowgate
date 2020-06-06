@@ -33,9 +33,9 @@ void create(){
 		"the shadowy shapes+\n\n\n"+
 		"%^RESET%^Written in fresher ink than the play reads\n"+
 		"%^BLUE%^They have come, gods save us they have come.  "+
-		"From where I do not know … but they are here.  Blue "+
+		"From where I do not know  but they are here.  Blue "+
 		"skinned females lead by a dark skinned winged woman.. "+
-		"they hunt us… they prey on us..  The exits are blocked.."+
+		"they hunt us they prey on us..  The exits are blocked.."+
 		" we are at their mercy.  Sweet Lathander, deliver us from"+
 		" these creat...\n\n");
       set_language("common");

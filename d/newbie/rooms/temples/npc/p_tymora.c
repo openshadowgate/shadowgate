@@ -11,7 +11,7 @@ void create() {
 	set_id(({"npc cleric","cleric", "rumpus", "Rumpus", "priest", "luckbringer", "Luckbringer"}));
 	set_long(
 @CIRCE
-%^ORANGE%^Rumpus is a small pudgy halfling with reddish brown hair that has a chaotic kink to it. His deep blue eyes sparkle with warmth and mirth. His plump cheeks feature deep wrinkles from his jovial appearance and the wide smile he always carries. He is dressed in a small %^BOLD%^%^BLUE%^blue robe%^RESET%^ORANGE%^ with a %^BOLD%^%^WHITE%^silver trim%^RESET%^%^ORANGE%^ around the cuffs and hem. The robe is stretched taunt across his plumpy tummy, looking as if the buttons might pop at any time. Perhaps it’s by sheer luck that he can even fit into such a garment still. A %^BOLD%^%^WHITE%^silver coin%^RESET%^%^ORANGE%^ with a winking woman’s face engraved into the metal hangs about his neck on a chain. A small grey rabbit occasionally peaks it head from a pocket in his robe.
+%^ORANGE%^Rumpus is a small pudgy halfling with reddish brown hair that has a chaotic kink to it. His deep blue eyes sparkle with warmth and mirth. His plump cheeks feature deep wrinkles from his jovial appearance and the wide smile he always carries. He is dressed in a small %^BOLD%^%^BLUE%^blue robe%^RESET%^ORANGE%^ with a %^BOLD%^%^WHITE%^silver trim%^RESET%^%^ORANGE%^ around the cuffs and hem. The robe is stretched taunt across his plumpy tummy, looking as if the buttons might pop at any time. Perhaps its by sheer luck that he can even fit into such a garment still. A %^BOLD%^%^WHITE%^silver coin%^RESET%^%^ORANGE%^ with a winking womans face engraved into the metal hangs about his neck on a chain. A small grey rabbit occasionally peaks it head from a pocket in his robe.
 CIRCE
 	);
 	set_race("halfling");

@@ -13,7 +13,7 @@ void create()
    " coats and hats out of such fine pelts.");
    set_lore(
 @CIRCE
-Muskrat has quickly become popular with many lower class people in Tabor.  The fur has a close resemblance to mink, a trim that is popping up on many garments of Tabor’s nobles.  Though it may look similar, there is clearly a world of difference.  
+Muskrat has quickly become popular with many lower class people in Tabor.  The fur has a close resemblance to mink, a trim that is popping up on many garments of Tabors nobles.  Though it may look similar, there is clearly a world of difference.  
 CIRCE
    );
    set_property("lore difficulty",5);

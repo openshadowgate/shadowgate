@@ -180,7 +180,7 @@ string query_tactic_name(){
     return "SWING";
     break;
   case LADDER:
-    return "LADD£R";
+    return "LADDR";
     break;
   case WAIT:
     return "WAIT";

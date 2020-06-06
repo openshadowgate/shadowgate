@@ -23,7 +23,7 @@ create() {
   	set_wear((:TO,"do_wear":));
 	set_lore("Hematite is prized by many for its protective powers."+
 		"  The stone is used often as a ward of the basis for "+
-		"protective enchantments. There are a few Old Wives’ "+
+		"protective enchantments. There are a few Old Wives "+
 		"tales of hematite being a bane of were creatures and "+
 		"undead.  When then undead and were creatures took hold"+
 		" of the Dark Woods and the Dark Trail, hematite was in "+

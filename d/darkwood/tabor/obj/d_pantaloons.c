@@ -16,7 +16,7 @@ void create_pantaloons(object obj)
 	obj->set_short(""+COLOR+" pantaloons%^RESET%^");
         obj->set_id(({"pantaloons",""+COLOR+" pantaloons","pants","tabor pantaloons"}));
 	obj->set_long("Long flowing soft "+COLOR+" cotton pantaloons "+
-         "%^RESET%^fall to one’s ankles.  The pantaloons are typically "+
+         "%^RESET%^fall to ones ankles.  The pantaloons are typically "+
          "worn tight around the waist and loose around the legs.  The "+
          "excess fabric is then gathered by the use of %^BOLD%^"+
          "embroidered bands %^RESET%^around the ankles, thus creating "+

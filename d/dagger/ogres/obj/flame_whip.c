@@ -23,7 +23,7 @@ void create()
 " inhabited by demons and devils, which they use on to torment mortals with.  Some claim"+
 " that the whip is actually forged in the dying fires of the phoenix, before the mythical"+
 " bird is reborn.  Still others claim the whip is a testament of the raw power of fire and"+
-" the damage that can be done with it.  With so many stories in circulation it’s near"+
+" the damage that can be done with it.  With so many stories in circulation its near"+
 " impossible to learn what is true and what it not.");
     set_property("lore difficulty",16);
     set_value(1000);

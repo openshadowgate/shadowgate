@@ -23,7 +23,7 @@ void create_ghagra(object obj)
          "%^RESET%^to create tiny ornate circles along the cloth.  "+
          "A %^YELLOW%^golden border %^RESET%^encircles the bottom of "+
          "the skirt.  They say that in the Tsvarian Empire one can "+
-         "tell a person’s social class, religion, and where they are "+
+         "tell a persons social class, religion, and where they are "+
          "from by the pattern of this border.");
 	obj->set_weight(5);
 	obj->set_type("clothing");

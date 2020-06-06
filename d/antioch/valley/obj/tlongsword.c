@@ -17,7 +17,7 @@ void create()
 		"rubies are inlaid for her lips, creating a seductive smirk. "+
 		"Sparkling %^GREEN%^emeralds%^WHITE%^ are used for her "+
 		"captivating eyes.  Her %^YELLOW%^golden%^WHITE%^ hair shines"+
-		" in the light, only then do you realize that it’s been carved"+
+		" in the light, only then do you realize that its been carved"+
 		" out of yellow sapphire.  Such a pommel on this blade only adds"+
 		" to the beauty of this tiny rapier.");
 	set_lore("The Moonstone Rapier is a favorite weapon of the mischievous"+

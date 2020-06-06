@@ -15,7 +15,7 @@ void create()
 	set_long("%^ORANGE%^Golden reeds have been bound"+
 		" together with %^GREEN%^green ivy%^ORANGE%^."+
 		"  The reeds are cut in a descending fashion,"+
-		" starting no bigger than a finger’s length long"+
+		" starting no bigger than a fingers length long"+
 		" and ending larger than ones hand.  A series of"+
 		" holes are drilled into the hollow pipes, each"+
 		" reed having one.  The holes allows for one to"+
@@ -26,7 +26,7 @@ void create()
 	);
 	set_weight(5);
 	set_value(600);
-	set_lore("The Satyr’s Pipes are a rustic instrument that "+
+	set_lore("The Satyrs Pipes are a rustic instrument that "+
 		"many of the more 'civilized' folk frown upon.  "+
 		"Though the instrument quite popular with the faeries"+
 		" and other fey creatures.  The satyrs use the pipes to"+

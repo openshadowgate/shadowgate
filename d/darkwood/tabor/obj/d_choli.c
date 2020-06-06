@@ -16,7 +16,7 @@ void create_choli(object obj)
 	obj->set_short(""+COLOR+" choli%^RESET%^");
 	obj->set_id(({"choli","shirt",""+COLOR+" choli"}));
 	obj->set_long("The choli is a tight-fitting top that exposes "+
-         "one’s midriff.  This one has a rounded neckline and short "+
+         "ones midriff.  This one has a rounded neckline and short "+
          "slender sleeves.  Made from "+COLOR+" silk %^RESET%^that "+
          "has been woven with %^YELLOW%^golden threads%^RESET%^, "+
          "this shirt has an exotic appearance.  A pair of ties is "+

@@ -13,7 +13,7 @@ void create()
    " dull red glow.");
    set_lore(
 @CIRCE
-It’s very rare to find a gland from a fire beetle that has not been ruptured.  Wizards and alchemists pay dearly for such a gland, it is said.  The glands seem to be used in the creation of spells and objects that rely on fire.  It’s speculated that these glands also are used in the summoning of a fire elemental.  Followers of Kossuth are known to string the glands onto golden chain and wear them as a badge of courage.
+Its very rare to find a gland from a fire beetle that has not been ruptured.  Wizards and alchemists pay dearly for such a gland, it is said.  The glands seem to be used in the creation of spells and objects that rely on fire.  Its speculated that these glands also are used in the summoning of a fire elemental.  Followers of Kossuth are known to string the glands onto golden chain and wear them as a badge of courage.
 CIRCE
    );
    set_property("lore difficulty",10);

@@ -76,7 +76,7 @@ int whisper_func(string str) {
         break;
 
         case 7:
-           tell_object(TP,"%^RESET%^%^BOLD%^I was Menagra…\n\n%^RESET%^.");
+           tell_object(TP,"%^RESET%^%^BOLD%^I was Menagra\n\n%^RESET%^.");
            tell_room(ETP,"%^RESET%^%^CYAN%^"+TP->QCN+"%^RESET%^%^CYAN%^ stops to listen...%^RESET%^",TP);
            return 1;
         break;

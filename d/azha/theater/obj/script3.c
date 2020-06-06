@@ -60,11 +60,11 @@ void create(){
 		"%^RESET%^Written in fresher ink than the play reads\n"+
 		"%^RESET%^%^BLUE%^All hope has left us now.  The church "+
 		"of Tyr arrived to deliver us from these creatures"+
-		".  Or so we thought…  They tried to rush the theater"+
+		".  Or so we thought  They tried to rush the theater"+
 		", but were met with that winged devil's army.. They"+
 		" were like twigs trying to battle an inferno.. the"+
 		" first wave was killed instantly.  They have left "+
-		"us…retreated..  Obelisks now encircle the theater.."+
+		"usretreated..  Obelisks now encircle the theater.."+
 		" Marjamal says they are wards set in place to keep "+
 		"these creatures here in the theater, from escaping "+
 		"to the rest of the lands.  What of us though?  "+

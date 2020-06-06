@@ -106,7 +106,7 @@ void create_statue(object obj)
       "highly praised by many noble folks and religious leaders "+
       "throughout the lands.  This little Halfling has found his "+
       "sudden fame a shock and slightly uncomfortable.  For all he "+
-      "wanted to do, as he’s been quoted, was just to listen to what "+
+      "wanted to do, as hes been quoted, was just to listen to what "+
       "the material wanted to be.");
    obj->set_property("lore difficulty",6);
    obj->set_short("A "+STONE+" statue of "+VAR+" "+str+"");

@@ -69,7 +69,7 @@ case "earth":
 case "fire":
 	TO->set_long("%^RED%^This fitted tunic is made from heavy "+
 		"%^BOLD%^fiery red%^RESET%^%^RED%^ silk.  The dramatic"+
-		" and bold tunic features appliqués of tendrils of "+
+		" and bold tunic features appliqus of tendrils of "+
 		"flames in fiery shades of r%^BOLD%^e%^RESET%^%^RED%^d"+
 		", %^ORANGE%^orange%^RED%^, and %^YELLOW%^yellow%^RESET%^"+
 		"%^RED%^.  The flames lick around the short sleeves and "+

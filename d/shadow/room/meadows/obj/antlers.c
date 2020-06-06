@@ -12,7 +12,7 @@ void create()
    " might sell for a bit of gold if you could find someone to buy it.");
    set_lore(
 @CIRCE
-Antelope antlers have long been used as weapons with many cultures.  Many folk find the twisting spirals of the horns pleasing and lightweight.  It’s only been in the past 40 years or so that people have began to use them in decorative arts.
+Antelope antlers have long been used as weapons with many cultures.  Many folk find the twisting spirals of the horns pleasing and lightweight.  Its only been in the past 40 years or so that people have began to use them in decorative arts.
 CIRCE
    );
    set_property("lore difficulty",5);
