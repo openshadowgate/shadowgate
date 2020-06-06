@@ -23,10 +23,10 @@ void create() {
        "gems and their shapes points to this alone.  Though the "+
        "raven carved out of fire opal seems to point to a now defunct "+
        "warlord by the name of Trelezarn, a human who use to control "+
-       "the lands of what is now the city of Shadow.  Trelezarn’s "+
+       "the lands of what is now the city of Shadow.  Trelezarn's "+
        "reign was in the first century, diviners have been able to "+
        "point to somewhere in the area of the years 50 - 75.  "+
-       "Trelezarn’s kingdom was to be a grand place, until a great "+
+       "Trelezarn's kingdom was to be a grand place, until a great "+
        "plague wiped everything out.");
     set_property("lore difficulty",9);
     set_value(100);
