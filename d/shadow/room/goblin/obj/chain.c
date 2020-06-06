@@ -9,7 +9,7 @@ void create() {
     set_short("Chainmail armor");
     set_long(
 @CIRCE
-Crafted from scavenged suits of chain mail, this tunic would seem to offer some protection.   Though because the armor was not tailored to the wearer and has had to be modified (rather poorly) you can’t tell for sure how well it will protect.  Many of the links are coated with rust.  Still, it’s got to be better than nothing.
+Crafted from scavenged suits of chain mail, this tunic would seem to offer some protection.   Though because the armor was not tailored to the wearer and has had to be modified (rather poorly) you can't tell for sure how well it will protect.  Many of the links are coated with rust.  Still, it's got to be better than nothing.
 CIRCE
     );
     set_lore("Goblins are scavengers by nature.  From weapons to armor "+
