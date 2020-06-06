@@ -7,41 +7,39 @@
 
 inherit DAEMON;
 
-int
-cmd_save(string str) 
+int cmd_save(string str)
 {
     string file;
-    if(this_player()->query_disable()) 
-    {
+    if (this_player()->query_disable()) {
         write("Wait a minute.");
         return 1;
     }
 //    this_player()->set_disable();
     TP->setAdminBlock(1);
-    if(objectp(ETP)) 
-    { 
-        if(clonep(ETP)) 
-        {
+    if (objectp(ETP)) {
+        if (clonep(ETP)) {
             file = "/daemon/virtual_room_d.c"->register_virtual_room(ETP, TP->query("my_virtual_room"), TP->query("my_virtual_base"));
-            if(!TP->query("my_virtual_room") != file) 
-            {
+            if (!TP->query("my_virtual_room") != file) {
                 TP->delete("my_virtual_room");
                 TP->delete("my_virtual_base");
                 TP->set("my_virtual_room", file);
                 TP->set("my_virtual_base", base_name(ETP));
             }
+        }else {
+            TP->set_primary_start(file_name(environment(this_player())));
         }
-        else TP->set_primary_start(file_name(environment(this_player()))); 
+    }else {
+        TP->set_primary_start("/d/darkwood/room/road18");
     }
-    else { TP->set_primary_start("/d/shadow/room/pass/pass3"); }
     "/daemon/yuck_d"->save_inventory(this_player());
     this_player()->save_player((string)this_player()->query_name());
-    
-      write(capitalize(TPQN)+" is now saved.");
+
+    write(capitalize(TPQN) + " is now saved.");
     return 1;
 }
 
-void help() {
+void help()
+{
     write(
         "
 %^CYAN%^NAME%^RESET%^
@@ -58,4 +56,3 @@ inventory, score
 "
         );
 }
-

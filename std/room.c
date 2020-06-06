@@ -63,7 +63,7 @@ string getSaveFileName()
 void restoreContents()
 {
     int i;
-    string fn, * files;
+    string * files;
     mixed ob;
     files = get_dir(getSaveFileName() + "/ob*.o");
     for (i = 0; i < sizeof(files); i++) {
@@ -92,7 +92,6 @@ string get_name()
 string get_path()
 {
     string f_name, junk, result;
-    object mazeroom;
     f_name = file_name(TO);
 
     result = "";
@@ -304,7 +303,7 @@ int query_random_frequency()
 
 void do_random_encounters(string* monsters, int percentile, int num_mons)
 {
-    int actual_num, x, check, test, number, invis;
+    int actual_num, x, check, number, invis;
     string mob, * temp, * hold, id;
     object me, * obj, mon;
 

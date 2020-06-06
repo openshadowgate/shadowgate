@@ -1523,13 +1523,15 @@ void heart_beat()
     }
 
     if (player_age > static_user["autosave"]) {
-        if (!wizardp(TO))
+        if (!wizardp(TO)) {
             message("environment", "Autosaving.", TO);
+        }
         inv = all_inventory(TO);
-        if(objectp(ETO))
+        if (objectp(ETO)) {
             set_primary_start(file_name(ETO));
-        else
+        }else {
             set_primary_start("/d/shadow/room/pass/pass3");
+        }
         save_player(query_name());
         YUCK_D->save_inventory(this_player());
         static_user["autosave"] = player_age + 500;
