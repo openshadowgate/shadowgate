@@ -1,18 +1,5 @@
-/*
- * options.h: defines for the compile-time configuration of the MudOS driver
- */
-
-#ifndef _OPTIONS_H_
-#define _OPTIONS_H_
-#define SYSMALLOC
-#undef SMALLOC
-#undef BSDMALLOC
-#undef MMALLOC
-#undef WRAPPEDMALLOC
-#define DEBUGMALLOC
 #undef SBRK_OK
 #undef DO_MSTATS
-#undef DEBUGMALLOC_EXTENSIONS
 #undef CHECK_MEMORY
 #define HAS_STATUS_TYPE
 #undef IGNORE_STRICT_PRAGMA
@@ -41,49 +28,10 @@
 #undef NO_BUFFER_TYPE
 #undef ARRAY_RESERVED_WORD
 #undef REF_RESERVED_WORD
-
-#define PACKAGE_CONTRIB
-#define PACKAGE_OPS
-#define PACKAGE_CORE
-#define PACKAGE_CONTRIB
-#define PACKAGE_DEVELOP
-#define PACKAGE_MATH
-#define PACKAGE_MUDLIB_STATS
-#define PACKAGE_SOCKETS
-#define PACKAGE_PARSER
-#define PACKAGE_EXTERNAL
-#define PACKAGE_DB
-
-#ifdef PACKAGE_DB
-#undef USE_MSQL
-#undef MSQL
-#undef USE_POSTGRES
-#define USE_SQLITE3 1
-#define DEFAULT_DB USE_SQLITE3
-#endif
-
-#define PACKAGE_UIDS
-#define AUTO_SETEUID
-#define AUTO_TRUST_BACKBONE
-#undef USE_32BIT_ADDRESSES
-#define LARGEST_PRINTABLE_STRING 8192
-
-#define SMALL_STRING_SIZE     100
-#define LARGE_STRING_SIZE     1000
-#define COMMAND_BUF_SIZE      2000
-#define MAX_SAVE_SVALUE_DEPTH 100
-
-#define CFG_MAX_LOCAL_VARIABLES         100
-#define CFG_EVALUATOR_STACK_SIZE        300000
-#define CFG_COMPILER_STACK_SIZE         600000
-#define CFG_MAX_CALL_DEPTH              250
-#define CFG_LIVING_HASH_SIZE            256
-
 #undef HAVE_ZLIB
 #undef PACKAGE_COMPRESS
 #define SAVE_GZ_EXTENSION ".o.gz"
 #undef USE_ICONV
-
 #define PARSE_DEBUG
 #define FLUFFOS
-#endif
+#define AUTO_SETEUID
