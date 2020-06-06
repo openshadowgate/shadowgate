@@ -14,12 +14,12 @@ void create() {
 It is hard to determine what kind of metal this curious blade is made out of.  As you see the entire blade has been painting with %^YELLOW%^c%^CYAN%^h%^GREEN%^a%^BLACK%^o%^BLUE%^t%^RED%^i%^MAGENTA%^c%^RESET%^ stripes in a dazzling variety of colors.  There is no rhyme or reason to the stripes it seems, their size and colors vary at whim.  Some start out wide and taper off to skinny, while others use at least seven different colors just to finish one stripe.  The pommel of this long sword is wrapped with strips of %^CYAN%^basket-woven %^RESET%^cotton, giving plenty of cushions for the hands, and adding to the motley array of colors.
 CIRCE
     );
-    set_lore("The Sword of Insanity is an ancient sword from Shadow’s "+
+    set_lore("The Sword of Insanity is an ancient sword from Shadow's "+
        "past.  The sword in truth was made somewhere in the second or "+
        "third century and was deemed a holy blade to the deity of Good "+
        "Fortune then, Tymora.  Sages believe that this is indeed the "+
        "same Tymora that has made a return to the lands in recent years."+
-       "  The blade was a favored weapon for all of Tymora’s followers, "+
+       "  The blade was a favored weapon for all of Tymora's followers, "+
        "for it offered a comical appeal in the middle of battle and "+
        "just when the Tymorian needed a bit of good luck it seemed to "+
        "come to them.  Though more rigid and serious folks called the "+
@@ -30,7 +30,7 @@ CIRCE
     set_value(100);
     set_hit((: TO, "extra_hit":));
     set_wield((: TO, "extra_wield":));
-    set_unwield((: TO, "extra_unwield" :));	
+    set_unwield((: TO, "extra_unwield" :));
     set_property("enchantment",1);
     set_heart_beat(1);
     uses = random(75)+50;
@@ -160,7 +160,7 @@ if(!objectp(ob) || !objectp(vic)) return 1;
     if(random(8) > 3) return 0;
     xx=random(6)+1;
     switch(xx) {
- 
+
     case 1:
     message("my_action","%^BOLD%^%^MAGENTA%^"
         "Suddenly, a glowing purple Anvil drops from the sky and bonks "
@@ -183,7 +183,7 @@ if(!objectp(ob) || !objectp(vic)) return 1;
     uses = uses - random(3)+1;
     new( OPATH "anvil.c" )->move(environment(ETO));
     return 1;
- 
+
     case 2:
     dam = random((int)environment(TO)->query_stats("dexterity"))/4;
     message("my_action","%^BOLD%^%^GREEN%^"
@@ -203,7 +203,7 @@ if(!objectp(ob) || !objectp(vic)) return 1;
         "%^RESET%^"
     ,ob);
     return dam;
- 
+
     case 3:
     dam = 10 - random((int)environment(TO)->query_level());
     if(dam < 0) dam = 1;
@@ -226,7 +226,7 @@ if(!objectp(ob) || !objectp(vic)) return 1;
     ,ob);
     uses = uses - 1;
     return dam;
- 
+
     case 4:
     if((int)environment(TO)->query_hp() < 10) {
     message("my_action","%^BOLD%^%^RED%^"
@@ -306,9 +306,9 @@ if(!objectp(ob) || !objectp(vic)) return 1;
         "Manna falls from the sky!"
         "%^RESET%^"
     ,ob);
-    new(OPATH "manna.c")->move(environment(ETO)); 
+    new(OPATH "manna.c")->move(environment(ETO));
     uses = uses - 1;
-    return 1;   	
+    return 1;
     }
 }
 
