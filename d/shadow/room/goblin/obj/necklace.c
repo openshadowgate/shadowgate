@@ -17,7 +17,7 @@ void create() {
        "different races.  Thin, weathered %^ORANGE%^leather flesh"+
        "%^BLUE%^ still covers most of the skulls, though signs of "+
        "decomposition are apparent.  Some skulls still possess a "+
-       "lock of hair or two, though it’s hard to tell with the grime "+
+       "lock of hair or two, though it's hard to tell with the grime "+
        "and dirt that covers this fetish.%^RESET%^"
     );
     set_lore("This goblin fetish you come to realize is a very sacred "+

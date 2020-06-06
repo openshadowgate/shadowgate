@@ -9,7 +9,7 @@ void create() {
     set_short("Scavenged helm");
     set_long(
 @CIRCE
-This helm is covered a layer of mud.  The mud has hardened to the point where you are not sure if you can really get it off, be it chipping away or washing.  Strange barbaric symbols and totems are drawn into the mud and filled with colored paste.  %^GREEN%^Olive green%^RESET%^, %^ORANGE%^yellow ochre%^RESET%^, and %^RED%^a reddish-orange brown color%^RESET%^ are the most prominent hues coloring images of what look like boars.  There are also some warg like shapes and strange symbols you can’t seem to understand.
+This helm is covered a layer of mud.  The mud has hardened to the point where you are not sure if you can really get it off, be it chipping away or washing.  Strange barbaric symbols and totems are drawn into the mud and filled with colored paste.  %^GREEN%^Olive green%^RESET%^, %^ORANGE%^yellow ochre%^RESET%^, and %^RED%^a reddish-orange brown color%^RESET%^ are the most prominent hues coloring images of what look like boars.  There are also some warg like shapes and strange symbols you can't seem to understand.
 CIRCE
     );
     set_lore("The scavenged helm is typical for goblins, since they do "+

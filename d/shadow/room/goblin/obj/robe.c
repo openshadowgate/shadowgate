@@ -14,13 +14,13 @@ void create() {
     set_long(
        "This dark %^MAGENTA%^purple%^RESET%^ robe is extremely "+
        "lightweight.  The material is hard to describe, while it "+
-       "possess some similarities to silk, it does not have silk’s "+
+       "possess some similarities to silk, it does not have silk's "+
        "famed smoothness and cool feeling.  Instead this robe has "+
        "a fine%^CYAN%^ nubby%^RESET%^ texture to it.  The long sleeves "+
        "and dragging hem on the robe seem to suggest it has an arcane "+
        "background.  With%^BOLD%^%^BLUE%^ brilliant blue%^RESET%^ runes "+
        "on the hem of the sleeves and along the back of the robe, this "+
-       "only confirms the guess that it’s an arcane item."
+       "only confirms the guess that it's an arcane item."
     );
     set_lore("The Mystic Robe is actually a gnomish garment, not goblin."+
        "  Though goblins are scavengers by nature and take what they "+

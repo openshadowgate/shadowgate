@@ -10,7 +10,7 @@ void create() {
     set_short("%^BOLD%^%^BLACK%^a left fur boot%^RESET%^");
     set_long(
 @CIRCE
-This is a single boot made from a %^BOLD%^%^BLACK%^shaggy black fur%^RESET%^.  The fur looks as if it might be flea infested and full of grime.  And let’s not even mention the %^BOLD%^%^GREEN%^stench%^RESET%^ that comes from within the boot.  Only someone truly desperate would ever wear something this disgusting.
+This is a single boot made from a %^BOLD%^%^BLACK%^shaggy black fur%^RESET%^.  The fur looks as if it might be flea infested and full of grime.  And let's not even mention the %^BOLD%^%^GREEN%^stench%^RESET%^ that comes from within the boot.  Only someone truly desperate would ever wear something this disgusting.
 CIRCE
     );
     set_lore("The fur boot is crafted from the hide of a warg.  The "+
