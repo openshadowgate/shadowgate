@@ -13,7 +13,7 @@ void create() {
     set_short("%^RESET%^%^ORANGE%^Headhunter's Bow%^RESET%^");
     set_obvious_short("%^RESET%^%^ORANGE%^warped wooden shortbow%^RESET%^");
     set_long("%^ORANGE%^This slightly warped short bow looks well aged and old, "
-"and it’s obvious the bow has not been cared for.  With the grime and mud that "
+"and it's obvious the bow has not been cared for.  With the grime and mud that "
 "covers the bow, the wood used in its construction is hard to determine.  "
 "Goblinoid fetishes hang from the top of the bow, a %^BOLD%^%^WHITE%^finger bone"
 "%^RESET%^%^ORANGE%^ from a gnome here, an %^GREEN%^elven ear%^RESET%^%^ORANGE%^ "
