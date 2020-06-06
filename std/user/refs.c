@@ -6,23 +6,38 @@
 
 nosave mapping refs;
 
-void set_refs( mapping a ) { refs = ( mapp( a ) ? a : ([]) ); }
-
-mapping get_refs() { return ( refs ? copy(refs) : ([]) ); }
-
-void set_ref( string ref, mixed value )
+void set_refs(mapping a)
 {
-  if( !refs ) refs = ([]);
-  if( !ref ) ref = "default";
-  if( undefinedp( value ) )
-    map_delete( refs, ref );
-  else
-    refs[ref] = value;
+    refs = (mapp(a) ? a : ([]));
 }
 
-mixed get_ref( string ref )
+mapping get_refs()
 {
-  if( !refs ) refs = ([]);
-  if( !ref ) ref = "default";
-  return refs[ref];
+    return (refs ? copy(refs) : ([]));
+}
+
+void set_ref(string ref, mixed value)
+{
+    if (!refs) {
+        refs = ([]);
+    }
+    if (!ref) {
+        ref = "default";
+    }
+    if (undefinedp(value)) {
+        map_delete(refs, ref);
+    }else {
+        refs[ref] = value;
+    }
+}
+
+mixed get_ref(string ref)
+{
+    if (!refs) {
+        refs = ([]);
+    }
+    if (!ref) {
+        ref = "default";
+    }
+    return refs[ref];
 }
