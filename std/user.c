@@ -1764,63 +1764,40 @@ void resetLevelForExp(int expLoss)
     string *classes,curclass,myclass,active_class;
     int i, hp_loss,*rolls,tmp;
 
-//  ::resetLevelForExp(expLoss);
-    if (expLoss)
-    { // just to point out, general_exp_adjust_perc() calls class_exp_adjust_perc() which calls this function -Ares
-        log_file("resetLevelForExp",identify(PO)+" needs to consider using general_exp_adjust_perc() function?\n");
-    }
-
     add_exp(expLoss);
 
-    if (TO->query("new_class_type")) {
-        if (active_class = (string)TO->query("active_class")) {
-            ;
-        }
-        {
-            if (member_array(active_class, (string*)TO->query_classes()) == -1) {
-                return notify_fail("Your active_class is set to a class that you do not currently have.");
-            }
-
-            my_levels = TO->query_levels();
-
-            while (total_exp_for_level(query_character_level()) > query_exp() && (my_levels[active_class] > 1)) {
-                hp_loss = ADVANCE_D->get_hp_bonus(active_class,
-                                                  query_base_stats("constitution"),
-                                                  query_base_character_level(), TO);
-                set_mlevel(active_class, query_class_level(active_class) - 1);
-
-                rolls = (int*)TO->query("hp_array");
-                tmp = 20;
-                for (i = 0; i < query_base_character_level() + 1; i++) {
-                    tmp += rolls[i];
-                }
-                //set_max_hp(query_true_max_hp() - hp_loss);
-                set_max_hp(tmp);
-
-                reduce_my_skills(active_class);
-                reduce_guild_level(active_class);
-                NWP_D->reduce_player(TO, active_class, query_class_level(active_class));
-            }
+    if (active_class = (string)TO->query("active_class")) {
+        if (member_array(active_class, (string*)TO->query_classes()) == -1) {
+            return notify_fail("Your active_class is set to a class that you do not currently have.");
         }
 
-        setenv("TITLE", (string)ADVANCE_D->get_new_title(TO));
-        return;
+        my_levels = TO->query_levels();
+
+        while (total_exp_for_level(query_character_level()) > query_exp() && (my_levels[active_class] > 1)) {
+            hp_loss = ADVANCE_D->get_hp_bonus(active_class,
+                                              query_base_stats("constitution"),
+                                              query_base_character_level(), TO);
+            set_mlevel(active_class, query_class_level(active_class) - 1);
+
+            rolls = (int*)TO->query("hp_array");
+            tmp = 20;
+            for (i = 0; i < query_base_character_level() + 1; i++) {
+                tmp += rolls[i];
+            }
+            //set_max_hp(query_true_max_hp() - hp_loss);
+            set_max_hp(tmp);
+
+            reduce_my_skills(active_class);
+            reduce_guild_level(active_class);
+            NWP_D->reduce_player(TO, active_class, query_class_level(active_class));
+        }
+        if (active_class == "warlock") {
+            TO->delete("warlock_blast_type");
+        }
     }
 
-  if(myclass = get_dual_class()) { classes = ({ myclass }); }
-  else { classes = query_classes(); }
-  for (i = 0; i < sizeof(classes); i++) {
-      curclass = classes[i];
-      while ((int) ADVANCE_D->get_exp(query_class_level(curclass), curclass, TO) > (get_general_exp(curclass))) {
-          hp_loss = ADVANCE_D->get_hp_bonus(curclass, query_base_stats("constitution"), query_class_level(curclass), TO);
-          set_mlevel(curclass, query_class_level(curclass) - 1);
-          set_max_hp(query_true_max_hp() - hp_loss);
-          reduce_my_skills(curclass);
-          reduce_guild_level(curclass);
-          NWP_D->reduce_player(TO, curclass, query_class_level(curclass));
-      }
-  }
-  setenv("TITLE", (string)ADVANCE_D->get_new_title(TO));
+    setenv("TITLE", (string)ADVANCE_D->get_new_title(TO));
+    return;
 }
 
 void reset_all_status_problems()
