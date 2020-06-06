@@ -404,9 +404,8 @@ void do_kit_stuff()
 
 void heart_beat()
 {
-    string lang, pre;
+    string pre;
     object ob3, ob2;
-    int num, i;
 
     ::heart_beat();
 
@@ -423,44 +422,6 @@ void heart_beat()
     if (init_pause) {
         init_pause = 0;
     }
-/*
-   Removing this for now until we can balance it a bit and figure out some guidelines.
-   Removing it this way lets us keep all the code without having feats set on the mobs.
-   ~Circe~ 525/13
-    if(!query("feats_enabled"))
-    {
-        MONSTER_FEAT_D->setup_monster_feats(TO);
-        set("feats_enabled", 1);
-    }
- */
-    //Lines 369-393 moved to the int move() function at the end of
-    //this file - in order to **attempt** to try to set up
-    //some monster stuff before peer kicks in - Saide, August 2017
-    /*if(!TO->query_property("new_exp_set"))
-       {
-        if(TO->query_property("minion"))
-        {
-            TO->set_new_exp(1,"normal");
-            TO->set_property("new_exp_set",1);
-        }
-        else
-        {
-            TO->set_new_exp((int)TO->query_highest_level(),"normal");
-            TO->set_property("new_exp_set",1);
-        }
-       }
-
-       if(!TO->query_property("champion_check"))
-       {
-        CHAMPION_D->champion_monster(TO);
-       }*/
-
-    //added to support assigning random treasure to monsters based on their level/hps
-    //it is also possible to set_property("treasure type", A||B||C||D||E)
-    //and set_property("treasure level", 5||10||15||20||25||30||35||40)
-    //on a specific monster - this function call will assign the treasure - Saide - May 2016
-    //if(!TO->query_property("has_random_treasure") && !TO->query_property("no_random_treasure")) "/daemon/random_monster_treasure_d.c"->assign_treasure(TO);
-
 
     player_age += 2;
     ok_to_heal++;
@@ -475,7 +436,6 @@ void heart_beat()
     }
     if (!stage) {
         if (1) {
-// moved objectp check above creation of ob2 so it won't get stranded in memory by the objectp check kicking out of the function (without zapping the ob2 created). *Styx* 3/17/03
             if (!objectp(TO)) {
                 return;
             }
@@ -1018,7 +978,6 @@ void set_race(string str)
 void set_body_type(string str)
 {
     mapping monster_bod;
-    int mag, max_mag;
     string* mon_limbs;
     int i, max;
 
@@ -1586,9 +1545,8 @@ string query_destination()
  */
 varargs void do_walk(int iteration)
 {
-    string* finalpath, step, allsteps, door;
-    object startroom, endroom, * rooms, scanner;
-    int i;
+    string* finalpath, step, door;
+    object startroom, endroom, * rooms;
 
     rooms = ({});
     finalpath = ({});
