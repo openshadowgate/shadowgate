@@ -14,7 +14,7 @@ void create() {
        "Only the tip of the blade is sharp, as this dagger seems to "+
        "be utilized for piercing the flesh rather than slashing.  Dull "+
        "%^BLACK%^grey leather%^WHITE%^ wraps around the pommel of this "+
-       "dagger, also carved from the bone.  A small %^RED%^rat’s skull"+
+       "dagger, also carved from the bone.  A small %^RED%^rat's skull"+
        "%^WHITE%^ has been affixed to the bottom of the pommel.%^RESET%^"
     );
     set_lore("The Bone Dagger, many sages feel, is an insight to "+
