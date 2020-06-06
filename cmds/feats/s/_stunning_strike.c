@@ -122,11 +122,17 @@ void execute_feat()
         }
         if(!sizeof(attackers))
         {
-            tell_object(caster,"%^BOLD%^Nobody to affect.%^RESET%^");
+            tell_object(caster,"%^BOLD%^Nobody to strike.%^RESET%^");
             dest_effect();
             return;
         }
         target = attackers[random(sizeof(attackers))];
+    }
+
+    if (!objectp(target)) {
+        tell_object(caster,"%^BOLD%^Nobody to strike.%^RESET%^");
+        dest_effect();
+        return;
     }
 
     if(!present(target, place))
