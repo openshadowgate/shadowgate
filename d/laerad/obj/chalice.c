@@ -51,11 +51,7 @@ void create()
 
 int query_value()
 {
-    if (uses != 0) {
-        return 0;
-    } else {
-        return 1500;
-    }
+    return 15000 / uses;
 }
 
 void init()
