@@ -46,8 +46,7 @@
 
 #include <debug.h>
 
-protected object
-e(object p, int outside)
+protected object e(object p, int outside)
 {
     if (outside) {
         return p ? environment(p) : 0;
@@ -56,103 +55,105 @@ e(object p, int outside)
     }
 }
 
-object
-to_object(mixed target)
+object to_object(mixed target)
 {
-   int ch;
-   string err;
+    int ch;
 
-   if (objectp(target)) { /* already an object */
-      return target;
-   } else if (stringp(target)) { /* is a string */
-      string str, thing, env_desc, temp, path;
-      object env, p, *list;
-      int len, outside, is_object, place, which;
+    if (objectp(target)) { /* already an object */
+        return target;
+    } else if (stringp(target)) { /* is a string */
+        string str, thing, env_desc, temp, path;
+        object env, p, * list;
+        int len, outside, is_object, place, which;
 
-      outside = 0;
-      place = 0;
-      env = 0;
-      str = (string)target;
-      if (sscanf(str,"e(%s)",temp) == 1) {
-         str = temp;
-         outside = 1;
-      }
-      if (sscanf(str,"%s@%s", thing, env_desc) == 2) {
-         str = thing;
-         if (!(env = to_object(env_desc))) {
-            return 0;
-         }
-         place = 1;
-         debug(1,"return env = " + file_name(env) + "\n");
-      }
-      if (str == "here") {
-         return e(environment(this_player()), outside);
-      }
-      if (str == "me") {
-         return e(this_player(), outside);
-      }
-      if (!env) {
-         env = this_player();
-      }
-      len = strlen(str);
-      ch = str[0];
-      if (ch == '/' || ch == '$' || ch == '#' || ch == '%' || ch == '!') {
-         if (len < 2) {
-            return 0;
-         }
-         if (ch != '/') {
-            str = str[1..len-1];
-            len--;
-         }
-      }
-      p = 0;
-      is_object = 0;
-      switch (ch) {
-      case '/' : /* filename */
-         debug(1,"doing a filename " + str + "\n");
-         if(file_size(str + ".c") < 0) return 0; /* patch by val */
-         return e(find_object_or_load(str), outside);
-      case '#' : /* nth object */
-         list = all_inventory(env);
-         sscanf(str, "%d", which);
-         return e(list[which], outside);
-      case '$' : /* monster */
-         p = find_living(str);
-         debug(1,"doing a monster " + str + " p ?= 0: " + (p == 0) + "\n");
-         if (!p || interactive(p)) {
-            return 0; /* p non-existent or was a player */
-         }
-         break;
-      case '%' :  /* player */
-         p = find_player(str);
-         debug(1,"doing a player " + str + " p ?= 0: " + (p == 0) + "\n");
-         if (!p) {
-            return 0;
-         }
-         break;
-      case '!' :
-         is_object = 1;
-         break;
-      }
-      if (!is_object) {
-         if (!p) {
-            p = find_player(str);
-         }
-         if (!p) {
+        outside = 0;
+        place = 0;
+        env = 0;
+        str = (string)target;
+        if (sscanf(str, "e(%s)", temp) == 1) {
+            str = temp;
+            outside = 1;
+        }
+        if (sscanf(str, "%s@%s", thing, env_desc) == 2) {
+            str = thing;
+            if (!(env = to_object(env_desc))) {
+                return 0;
+            }
+            place = 1;
+            debug(1, "return env = " + file_name(env) + "\n");
+        }
+        if (str == "here") {
+            return e(environment(this_player()), outside);
+        }
+        if (str == "me") {
+            return e(this_player(), outside);
+        }
+        if (!env) {
+            env = this_player();
+        }
+        len = strlen(str);
+        ch = str[0];
+        if (ch == '/' || ch == '$' || ch == '#' || ch == '%' || ch == '!') {
+            if (len < 2) {
+                return 0;
+            }
+            if (ch != '/') {
+                str = str[1..len - 1];
+                len--;
+            }
+        }
+        p = 0;
+        is_object = 0;
+        switch (ch) {
+        case '/': /* filename */
+            debug(1, "doing a filename " + str + "\n");
+            if (file_size(str + ".c") < 0) {
+                return 0;                        /* patch by val */
+            }
+            return e(find_object_or_load(str), outside);
+        case '#': /* nth object */
+            list = all_inventory(env);
+            sscanf(str, "%d", which);
+            return e(list[which], outside);
+        case '$': /* monster */
             p = find_living(str);
-         }
-      }
-      if (!p) {
-         p = present(str, env);
-      }
-      if (p && (!place || present(p, env))) {
-         return e(p, outside);
-      }
-      debug(1,"trying get_path\n");
-      path = (string)this_player()->resolve_path(str);
-      if(!path) return 0;
+            debug(1, "doing a monster " + str + " p ?= 0: " + (p == 0) + "\n");
+            if (!p || interactive(p)) {
+                return 0; /* p non-existent or was a player */
+            }
+            break;
+        case '%': /* player */
+            p = find_player(str);
+            debug(1, "doing a player " + str + " p ?= 0: " + (p == 0) + "\n");
+            if (!p) {
+                return 0;
+            }
+            break;
+        case '!':
+            is_object = 1;
+            break;
+        }
+        if (!is_object) {
+            if (!p) {
+                p = find_player(str);
+            }
+            if (!p) {
+                p = find_living(str);
+            }
+        }
+        if (!p) {
+            p = present(str, env);
+        }
+        if (p && (!place || present(p, env))) {
+            return e(p, outside);
+        }
+        debug(1, "trying get_path\n");
+        path = (string)this_player()->resolve_path(str);
+        if (!path) {
+            return 0;
+        }
 /* patch added by valodin to avoid searching for bad path */
-      return e(find_object_or_load(path), outside);
-   }
-   return 0;
+        return e(find_object_or_load(path), outside);
+    }
+    return 0;
 }

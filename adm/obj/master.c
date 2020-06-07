@@ -197,41 +197,72 @@ int valid_link(string original, string reference) {
     return valid_read(original, this_player(), "") && valid_write(reference, this_player(),"");
 }
 
-nomask int check_access(string file, object ob, int ind) {
-    string *path, *grps;
-    string euid, tmp, fn, tmp2;
+nomask int check_access(string file, object ob, int ind)
+{
+    string* path, * grps;
+    string euid, tmp, fn;
     int i, j;
 
-	if(strsrch(file, "//") != -1) return 0;
-    if(!objectp(ob)) return 0;
-    if((euid=geteuid(ob)) == UID_ROOT) return 1;
-    if(sscanf(file, user_path(euid)+"%s", tmp) ==1) return 1;
-    if(!euid) return 1;
-    if(sscanf(euid, "%sobj", tmp) == 1 && sscanf(file,user_path(tmp)+"%s",tmp)
-      ==1) return 1;
-    if(!access) load_access();
-    if(!groups) load_groups();
-    if(!privs) load_privs();
+    if (strsrch(file, "//") != -1) {
+        return 0;
+    }
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if ((euid = geteuid(ob)) == UID_ROOT) {
+        return 1;
+    }
+    if (sscanf(file, user_path(euid) + "%s", tmp) == 1) {
+        return 1;
+    }
+    if (!euid) {
+        return 1;
+    }
+    if (sscanf(euid, "%sobj", tmp) == 1 && sscanf(file, user_path(tmp) + "%s", tmp)
+        == 1) {
+        return 1;
+    }
+    if (!access) {
+        load_access();
+    }
+    if (!groups) {
+        load_groups();
+    }
+    if (!privs) {
+        load_privs();
+    }
     fn = base_name(ob);
-    if(sscanf(file, REALMS_DIRS+"/%s", tmp) ||
-      sscanf(file, DOMAINS_DIRS+"/%s", tmp))
-        if(groups["ambassador"] && member_array(euid, groups["ambassador"])
-          != -1) return 0;
-    if(!(path = explode(file, "/"))) path = ({});
+    if (sscanf(file, REALMS_DIRS + "/%s", tmp) ||
+        sscanf(file, DOMAINS_DIRS + "/%s", tmp)) {
+        if (groups["ambassador"] && member_array(euid, groups["ambassador"])
+            != -1) {
+            return 0;
+        }
+    }
+    if (!(path = explode(file, "/"))) {
+        path = ({});
+    }
     i = sizeof(path);
-    while((i--) != -1) {
-        if(i== -1) file = "/";
-        else file = "/"+implode(path[0..(i)], "/");
-        if(access[file]) {
-            if(access[file]["all"] && access[file]["all"][ind] == 1) return 1;
-            else if(access[file][euid]) return access[file][euid][ind];
-            else {
-              j = sizeof(grps = keys(access[file]));
-              while(j--) {
-                if(groups[grps[j]] && member_array(euid, groups[grps[j]]) != -1
-                 && access[file][grps[j]][ind] == 1) return 1;
-              }
-              return 0;
+    while ((i--) != -1) {
+        if (i == -1) {
+            file = "/";
+        }else {
+            file = "/" + implode(path[0..(i)], "/");
+        }
+        if (access[file]) {
+            if (access[file]["all"] && access[file]["all"][ind] == 1) {
+                return 1;
+            }else if (access[file][euid]) {
+                return access[file][euid][ind];
+            }else {
+                j = sizeof(grps = keys(access[file]));
+                while (j--) {
+                    if (groups[grps[j]] && member_array(euid, groups[grps[j]]) != -1
+                        && access[file][grps[j]][ind] == 1) {
+                        return 1;
+                    }
+                }
+                return 0;
             }
         }
     }
@@ -307,9 +338,14 @@ int valid_hide(object who) {
     return member_group(geteuid(who), "superuser");
 }
 
-int valid_override(string file, string nom) {
-    if(file == "/adm/simul_efun/overrides" || file == OB_SIMUL_EFUN) return 1;
-    if(function_exists(nom, find_object(OB_SIMUL_EFUN))) return 0;
+int valid_override(string file, string nom)
+{
+    if (file == "/adm/simul_efun/overrides" || file == OB_SIMUL_EFUN) {
+        return 1;
+    }
+    if (function_exists(nom, find_object(OB_SIMUL_EFUN))) {
+        return 0;
+    }
     return 1;
 }
 
@@ -351,22 +387,29 @@ string get_wiz_name(string file) {
     return nom;
 }
 
-void log_error(string file, string msg) {
-    string nom, home;
+void log_error(string file, string msg)
+{
+    string nom;
 
-    if(!(nom = get_wiz_name(file))) nom = "log";
-    catch(write_file(DIR_ERROR_LOGS+"/"+nom, ctime(time()) + ":\n" +msg));
-    catch(write_file("/log/debug.log", ctime(time()) + ": " +msg));
+    if (!(nom = get_wiz_name(file))) {
+        nom = "log";
+    }
+    catch(write_file(DIR_ERROR_LOGS + "/" + nom, ctime(time()) + ":\n" + msg));
+    catch(write_file("/log/debug.log", ctime(time()) + ": " + msg));
 }
 
-void destruct_env_of(object ob) {
-    if(!interactive(ob)) return;
-    tell_object(ob, "The world about you swirls into nothingness, as "+
-      "you are quickly teleported somewhere else.\n");
+void destruct_env_of(object ob)
+{
+    if (!interactive(ob)) {
+        return;
+    }
+    tell_object(ob, "The world about you swirls into nothingness, as " +
+                "you are quickly teleported somewhere else.\n");
     ob->move(ROOM_VOID);
 }
 
-string make_path_absolute(string file) {
+string make_path_absolute(string file)
+{
     return resolv_path((string)this_player()->get_path(), file);
 }
 

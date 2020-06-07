@@ -12,7 +12,7 @@
  */
 object find_object_or_load(mixed str)
 {
-    object ob, ns;
+    object ob;
     string err;
 
     if (objectp(str)) {
