@@ -51,7 +51,7 @@ void create()
 
 int query_value()
 {
-    return 15000 / uses;
+    return 15000 / (uses + 1);
 }
 
 void init()
