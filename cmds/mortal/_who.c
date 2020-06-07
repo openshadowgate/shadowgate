@@ -90,7 +90,7 @@ string list_users(string *races, object tp)
                     if((string)shape->query_shape_race())
                         rabbit = (string)shape->query_shape_race();
 
-                if (time() - who[i]->query_login_time() < 120)
+                if (!wizardp(who) && time() - who[i]->query_login_time() < 120)
                 {
                     rabbit = "someone";
                 }
