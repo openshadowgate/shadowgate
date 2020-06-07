@@ -55,100 +55,38 @@ void check_actions(object attacker, object victim) {
     string *akills, *vkills;
     object *a_atk, *v_atk;
 
-    // if victim has a bounty or they are already attacking each other, do nothing
-    if (!objectp(attacker) || !objectp(victim)) return;
-    if (member_array(victim->query_name(),keys(__newBounties)) != -1) return;
-        a_atk = attacker->query_attackers();
-        v_atk = victim->query_attackers();
-        if (!pointerp(a_atk)) a_atk = ({});
-        if (!pointerp(v_atk)) v_atk = ({});
-    if (member_array(victim,a_atk) != -1) return;
-    if (member_array(attacker,v_atk) != -1) return;
-// was if (member_array(victim,attacker->query_attackers()) != -1) return;
-//  was -    if (member_array(attacker,victim->query_attackers()) != -1) return;
-// Changed to try to stop a bug that might have been a victim->query_attackers() of 0, i.e. uninitialized. -- g
-    if(pointerp(victim->query_atnames()) && sizeof(victim->query_atnames())) {  // adding to try to stop a bad argument 2 to member_array error
-        if (member_array(attacker->query_name(),victim->query_atnames()) != -1) return;
+    if (!objectp(attacker) || !objectp(victim)) {
+        return;
+    }
+    if (member_array(victim->query_name(), keys(__newBounties)) != -1) {
+        return;
+    }
+    a_atk = attacker->query_attackers();
+    v_atk = victim->query_attackers();
+    if (!pointerp(a_atk)) {
+        a_atk = ({});
+    }
+    if (!pointerp(v_atk)) {
+        v_atk = ({});
+    }
+    if (member_array(victim, a_atk) != -1) {
+        return;
+    }
+    if (member_array(attacker, v_atk) != -1) {
+        return;
+    }
+    if (pointerp(victim->query_atnames()) && sizeof(victim->query_atnames())) {
+        if (member_array(attacker->query_name(), victim->query_atnames()) != -1) {
+            return;
+        }
     }
 
     // if victim is not interactive or not a monster with alignment changing properties, do nothing
-    if (!(number = victim->query_property("alignment adjustment")) && !interactive(victim)) return;
-
-    // if victim is interactive, adjust attackers alignment, check for alignment change, and check for bounty
-    if (interactive(victim)) {
-        akills = attacker->query_pkilled();
-        vkills = victim->query_pkilled();
-        if (!pointerp(akills)) akills = ({});
-        if (!pointerp(vkills)) vkills = ({});
-        // if attacker is allowed to attack victim, do nothing
-        if (member_array(attacker->query_name(),vkills)!=-1 || member_array(victim->query_name(),akills)!=-1) return;
-        if (member_array(victim->query_name(),akills)==-1) {
-            akills += ({victim->query_name()});
-            attacker->set_pkilled(akills);
-        }
-        if (member_array(attacker->query_name(),vkills)==-1) {
-            vkills += ({attacker->query_name()});
-            victim->set_pkilled(vkills);
-        }
-        myrenown = attacker->query("renown"); //adding renown status for new mycause system. Nienne, 02/10
-        myrenown = myrenown +20;
-        if(myrenown > 200) myrenown = 200;
-        attacker->set("renown",myrenown);
-
-        if (ALIGN->is_good(attacker) && (ALIGN->is_evil(victim))) myalignmod = 20;
-        if (ALIGN->is_good(attacker) && (ALIGN->is_neutral(victim))) myalignmod = 10;
-        if (ALIGN->is_neutral(attacker) && (ALIGN->is_good(victim))) myalignmod = -20;
-        if (ALIGN->is_neutral(attacker) && (ALIGN->is_evil(victim))) myalignmod = 20;
-        if (ALIGN->is_evil(attacker) && (ALIGN->is_good(victim))) myalignmod = -20;
-        if (ALIGN->is_evil(attacker) && (ALIGN->is_neutral(victim))) myalignmod = -10;
-        attacker->add_align_adjust(myalignmod);
-
-        message("warning","%^BOLD%^%^RED%^This action is increasing your renown!",attacker);
-        check_bounty(attacker);
-    }
-}
-
-void check_bounty(object person) {
-// revising to use on new PK list.
-    string *pkilled;
-    int points, myrep;
-
-    points = person->query_align_adjust();
-    myrep = person->query("renown");
-    if(myrep < 200) return;
-    if(member_array((string)person->query_name(),__Good) != -1) return;
-    if(member_array((string)person->query_name(),__Evil) != -1) return;
-    if(member_array((string)person->query_name(),__Neutral) != -1) return;
-
-    message("bounty","%^BOLD%^%^YELLOW%^A bounty has been issued!!",evil());
-    message("bounty","%^BOLD%^%^YELLOW%^"+person->query_cap_name()+"'s actions need to be stopped!",users());
-    if (points > 30) {
-        seteuid(UID_LOG);
-        log_file("bounties","Good bounty issued for "+capitalize(person->query_name())+" at "+ctime(time())+".\n");
-        seteuid(getuid());
-        __Good += ({(string)person->query_name()});
-        __Good = distinct_array(__Good);
-        SAVE();
-        return ;
-    }
-    if (points < -30) {
-        seteuid(UID_LOG);
-        log_file("bounties","Evil bounty issued for "+capitalize(person->query_name())+" at "+ctime(time())+".\n");
-        seteuid(getuid());
-        __Evil += ({(string)person->query_name()});
-        __Evil = distinct_array(__Evil);
-        SAVE();
+    if (!(number = victim->query_property("alignment adjustment")) && !userp(victim)) {
         return;
     }
-    seteuid(UID_LOG);
-    log_file("bounties","Neutral bounty issued for "+capitalize(person->query_name())+" at "+ctime(time())+".\n");
-    seteuid(getuid());
-    __Neutral += ({(string)person->query_name()});
-    __Neutral = distinct_array(__Neutral);
-    SAVE();
-    return;
-}
 
+}
 
 protected int personal_bounty(object attacker, object victim) {
     int money;
@@ -242,30 +180,6 @@ protected int legal_bounty(object victim, object attacker) {
     return collect_law_bounty(victim, attacker, 1);
 }
 
-protected int collect_law_bounty(object victim, object attacker, int dead){
-    //The magistrate will call this when a bounty is collected.
-    //  attacker is the killer object, victim is the object of the person turned in, and
-    //  dead is a flag for if the person was presented alive, or just their head.
-
-    //This is assuming that the magistrate checked and the proper type of dead or alive
-    //  bounty is being collected.
-    if (member_array((string)victim->query_name(),keys(__newBounties)) != -1) {
-        remove_bounty((string)victim->query_name());
-        SAVE();
-//        message("bounty","%^BOLD%^%^YELLOW%^The bounty on "+capitalize(victim->query_name())+" has been collected by "+attacker->query_cap_name()+"!",users());
-        seteuid(UID_LOG);
-        log_file("bounties",">>>"+capitalize(attacker->query_name())+" collected the legal bounty on "+capitalize(victim->query_name())+" at "+ctime(time())+"!\n");
-        seteuid(getuid());
-        attacker->set_mini_quest("Bounty collection on "+capitalize(victim->query_name()), 1000,"Bounty collection on "+capitalize(victim->query_cap_name()));
-        attacker->add_money("gold",2000 * (int)victim->query_lowest_level());
-        attacker->add_align_adjust(5);
-        victim->set("pkills",0);
-        return 1;
-    }
-    return 0;
-
-}
-
 string *query_bounties() {
     return distinct_array(keys(__newBounties));
 }
@@ -295,62 +209,6 @@ int remove_bounty(string name) {
     map_delete(__newBounties, name);
     map_delete(__newBountiesAlias, name);
     SAVE();
-}
-
-protected int evil_bounty(object victim, object attacker) {
-    if (member_array((string)victim->query_name(),__Evil) != -1) {
-        if (ALIGN->is_evil(attacker)) return 0;
-        __Evil -= ({victim->query_name()});
-        SAVE();
-        message("bounty","%^BOLD%^%^YELLOW%^"+attacker->query_cap_name()+" has stemmed the deeds of "+capitalize(victim->query_name())+"!",good());
-        seteuid(UID_LOG);
-        log_file("bounties",">>>"+capitalize(attacker->query_name())+" collected the evil bounty on "+capitalize(victim->query_name())+" at "+ctime(time())+"!\n");
-        seteuid(getuid());
-        attacker->set_mini_quest("Bounty collection on "+capitalize(victim->query_name()), 2000 * (int)victim->query_lowest_level(),"Bounty collection on "+capitalize(victim->query_cap_name()));
-        attacker->add_align_adjust(20);
-        victim->reset_adjust();
-        victim->delete("renown");
-        return 1;
-    }
-    return 0;
-}
-
-protected int good_bounty(object victim, object attacker) {
-    if (member_array((string)victim->query_name(),__Good) != -1) {
-        if (ALIGN->is_good(attacker)) return 0;
-        __Good -= ({victim->query_name()});
-        SAVE();
-        message("bounty","%^BOLD%^%^YELLOW%^"+attacker->query_cap_name()+" has stemmed the deeds of "+capitalize(victim->query_name())+"!",evil());
-        seteuid(UID_LOG);
-        log_file("bounties",">>>"+capitalize(attacker->query_name())+" collected the good bounty on "+capitalize(victim->query_name())+" at "+ctime(time())+"!\n");
-        seteuid(getuid());
-        attacker->set_mini_quest("Bounty collection on "+capitalize(victim->query_name()), 2000*(int)victim->query_lowest_level(),"Bounty collection on "+capitalize(victim->query_cap_name()));
-        attacker->add_align_adjust(-20);
-        victim->reset_adjust();
-        victim->delete("renown");
-        return 1;
-    }
-    return 0;
-}
-
-protected int neutral_bounty(object victim, object attacker)
-{
-    if (member_array((string)victim->query_name(), __Neutral) != -1) {
-        if (ALIGN->is_neutral(attacker)) {
-            return 0;
-        }
-        __Neutral -= ({ victim->query_name() });
-        SAVE();
-        message("bounty", "%^BOLD%^%^YELLOW%^" + attacker->query_cap_name() + " has stemmed the deeds of " + capitalize(victim->query_name()) + "!", evil());
-        seteuid(UID_LOG);
-        log_file("bounties", ">>>" + capitalize(attacker->query_name()) + " collected the good bounty on " + capitalize(victim->query_name()) + " at " + ctime(time()) + "!\n");
-        seteuid(getuid());
-        attacker->set_mini_quest("Bounty collection on " + capitalize(victim->query_name()), 2000 * (int)victim->query_lowest_level(), "Bounty collection on " + capitalize(victim->query_cap_name()));
-        victim->reset_adjust();
-        victim->delete("renown");
-        return 1;
-    }
-    return 0;
 }
 
 void add_evil(string name) {
@@ -460,238 +318,63 @@ void align_penalty(object person, int points, int law) {
    return;
 }
 
-void check_align(object person) {
+/**
+ * Checks alignment taking into account adjustment
+ */
+void check_align(object person)
+{
     int align, points, law;
-//    align = person->query_alignment();
     align = person->query_true_align();
     points = person->query_align_adjust();
     law = person->query_law_align_adjust();
 
-//    if (ALIGN->is_good(person) && points < -99) {
-    if ((align%3 == 1) && points < -99) {
-        if (member_array((string)person->query_name(), __Good) != -1)
-            __Good -= ({(string)person->query_name()});
-       person->reset_adjust();
-       align_penalty(person, points, law);
-       return;
-    }
-//    if (ALIGN->is_evil(person) && points > 99) {
-    if ((align%3 == 0) && points > 99) {
+    if ((align % 3 == 1) && points < -99) {
+        if (member_array((string)person->query_name(), __Good) != -1) {
+            __Good -= ({ (string)person->query_name() });
+        }
         person->reset_adjust();
-        if (member_array((string)person->query_name(), __Evil) != -1)
-            __Evil -= ({(string)person->query_name()});
-        align_penalty(person, points, law);
-        return;
-    }
-//    if (ALIGN->is_neutral(person) && points < -199) {
-    if ((align%3 == 2) && points < -199) {
-        person->reset_adjust();
-        if (member_array((string)person->query_name(), __Good) != -1)
-            __Good -= ({(string)person->query_name()});
-        align_penalty(person, points, law);
-        return;
-    }
-//    if (ALIGN->is_neutral(person) && points > 199) {
-    if ((align%3 == 2) && points > 199) {
-        person->reset_adjust();
-        if (member_array((string)person->query_name(), __Evil) != -1)
-            __Evil -= ({(string)person->query_name()});
         align_penalty(person, points, law);
         return;
     }
 
-    //This part checks their alignment as related to their chaotic/lawful status
-    if(ALIGN->is_lawful(person) && law < -99 ||
-	ALIGN->is_chaotic(person) && law > 99 ||
-	ALIGN->is_law_neutral(person) && law > 199 ||
-	ALIGN->is_law_neutral(person) && law < -199 )
-    {
-       person->reset_law_adjust();
-       align_penalty(person, points, law);
-       return;
+    if ((align % 3 == 0) && points > 99) {
+        person->reset_adjust();
+        if (member_array((string)person->query_name(), __Evil) != -1) {
+            __Evil -= ({ (string)person->query_name() });
+        }
+        align_penalty(person, points, law);
+        return;
+    }
+
+    if ((align % 3 == 2) && points < -199) {
+        person->reset_adjust();
+        if (member_array((string)person->query_name(), __Good) != -1) {
+            __Good -= ({ (string)person->query_name() });
+        }
+        align_penalty(person, points, law);
+        return;
+    }
+
+    if ((align % 3 == 2) && points > 199) {
+        person->reset_adjust();
+        if (member_array((string)person->query_name(), __Evil) != -1) {
+            __Evil -= ({ (string)person->query_name() });
+        }
+        align_penalty(person, points, law);
+        return;
+    }
+
+    if (ALIGN->is_lawful(person) && law < -99 ||
+        ALIGN->is_chaotic(person) && law > 99 ||
+        ALIGN->is_law_neutral(person) && law > 199 ||
+        ALIGN->is_law_neutral(person) && law < -199) {
+        person->reset_law_adjust();
+        align_penalty(person, points, law);
+        return;
     }
     SAVE();
     return;
 }
-
-
-/* new function added (see above) making it not actually change, just zap them for the exp. loss and tell them to atone *Styx* 1/14/04
-void check_align(object person) {
-    int align, points, law;
-
-    align = person->query_alignment();
-    points = person->query_align_adjust();
-    law = person->query_law_align_adjust();
-
-    // check for alignment change in person
-    if (ALIGN->is_good(person) && points < -99) {
-        person->reset_adjust();
-        message("alignment loss","%^BOLD%^"+person->query_cap_name()+" has lost "+person->query_possessive()+" alignment!",environment(person),person);
-        switch (align) {
-        case 1:
-            person->set_alignment(2);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Lawful Neutral!",person);
-            break;
-        case 4:
-            person->set_alignment(5);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to True Neutral!",person);
-            break;
-        case 7:
-            person->set_alignment(8);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Chaotic Neutral!",person);
-            break;
-        }
-        if (member_array((string)person->query_name(), __Good) != -1)
-            __Good -= ({(string)person->query_name()});
-    }
-    if (ALIGN->is_evil(person) && points > 99) {
-        person->reset_adjust();
-        message("alignment loss","%^BOLD%^"+person->query_cap_name()+" has lost "+person->query_possessive()+" alignment!",environment(person),person);
-        switch (align) {
-        case 3:
-            person->set_alignment(2);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Lawful Neutral!",person);
-            break;
-        case 6:
-            person->set_alignment(5);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to True Neutral!",person);
-            break;
-        case 9:
-            person->set_alignment(8);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Chaotic Neutral!",person);
-            break;
-        }
-        if (member_array((string)person->query_name(), __Evil) != -1)
-            __Evil -= ({(string)person->query_name()});
-    }
-    if (ALIGN->is_neutral(person) && points < -199) {
-        person->reset_adjust();
-        message("alignment loss","%^BOLD%^"+person->query_cap_name()+" has lost "+person->query_possessive()+" alignment!",environment(person),person);
-        switch (align) {
-        case 2:
-            person->set_alignment(3);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Lawful Evil!",person);
-            break;
-        case 5:
-            person->set_alignment(6);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Neutral Evil!",person);
-            break;
-        case 8:
-            person->set_alignment(9);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Chaotic Evil!",person);
-            break;
-        }
-        if (member_array((string)person->query_name(), __Good) != -1)
-            __Good -= ({(string)person->query_name()});
-    }
-    if (ALIGN->is_neutral(person) && points >199) {
-        person->reset_adjust();
-        message("alignment loss","%^BOLD%^"+person->query_cap_name()+" has lost "+person->query_possessive()+" alignment!",environment(person),person);
-        switch (align) {
-        case 2:
-            person->set_alignment(1);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Lawful Good!",person);
-            break;
-        case 5:
-            person->set_alignment(4);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Neutral Good!",person);
-            break;
-        case 8:
-            person->set_alignment(7);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Chaotic Good!",person);
-            break;
-        }
-        if (member_array((string)person->query_name(), __Evil) != -1)
-            __Evil -= ({(string)person->query_name()});
-    }
-
-    //This part checks their alignment as related to their chaotic/lawful status
-    if (ALIGN->is_lawful(person) && law < -99) {
-        person->reset_law_adjust();
-        message("alignment loss","%^BOLD%^"+person->query_cap_name()+" has lost "+person->query_possessive()+" alignment!",environment(person),person);
-        switch (align) {
-        case 1:
-            person->set_alignment(4);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Neutral Good!",person);
-            break;
-        case 2:
-            person->set_alignment(5);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to True Neutral!",person);
-            break;
-        case 3:
-            person->set_alignment(6);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Neutral Evil!",person);
-            break;
-        }
-    }
-    if (ALIGN->is_chaotic(person) && law > 99) {
-        person->reset_law_adjust();
-        message("alignment loss","%^BOLD%^"+person->query_cap_name()+" has lost "+person->query_possessive()+" alignment!",environment(person),person);
-        switch (align) {
-        case 7:
-            person->set_alignment(4);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Neutral Good!",person);
-            break;
-        case 8:
-            person->set_alignment(5);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to True Neutral!",person);
-            break;
-        case 9:
-            person->set_alignment(6);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Neutral Evil!",person);
-            break;
-        }
-    }
-    if (ALIGN->is_law_neutral(person) && law > 199) {
-        person->reset_law_adjust();
-        message("alignment loss","%^BOLD%^"+person->query_cap_name()+" has lost "+person->query_possessive()+" alignment!",environment(person),person);
-        switch (align) {
-        case 4:
-            person->set_alignment(1);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Lawful Good!",person);
-            break;
-        case 5:
-            person->set_alignment(2);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Lawful Neutral!",person);
-            break;
-        case 6:
-            person->set_alignment(3);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Lawful Evil!",person);
-            break;
-        }
-    }
-    if (ALIGN->is_law_neutral(person) && law < -199) {
-        person->reset_law_adjust();
-        message("alignment loss","%^BOLD%^"+person->query_cap_name()+" has lost "+person->query_possessive()+" alignment!",environment(person),person);
-        switch (align) {
-        case 4:
-            person->set_alignment(7);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Chaotic Good!",person);
-            break;
-        case 5:
-            person->set_alignment(8);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Chaotic Neutral!",person);
-            break;
-        case 6:
-            person->set_alignment(9);
-            message("alignment loss","%^BOLD%^Your alignment has been changed to Chaotic Evil!",person);
-            break;
-        }
-    }
-
-    if (align != (int)person->query_alignment()) {
-               person-> resetLevelForExp(-((int)(person->query_exp())*10/100));
-        log_file("align_change",capitalize(person->query_name())+" lost "+person->query_possessive()+" alignment. Changed from "+align+" to "+person->query_alignment()+" at "+ctime(time())+"\n");
-       "/cmds/avatar/_note.c"->cmd_note("ckpt "+(string)person->query_name()+
-       " %^YELLOW%^Alignment changed from "+align+" to "+
-        (int)person->query_alignment()+"!");
-        check_class_change(person);
-        check_diety_change(person);
-    }
-     SAVE();
-    return;
-}
-*/
 
 void check_class_change(object who) {
     //Limitations:  Can only currently handle special classes that cannot be multiclass.
