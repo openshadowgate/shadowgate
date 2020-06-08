@@ -33,7 +33,6 @@ void create(){
    set_wield((:TO,"wieldme":));
    set_unwield((:TO,"unwieldme":));
 //   set_weapon_prof("exotic"); // removed for inherit fixing, N 2/20
-   set_property("master weapon",1);
 }
 
 int wieldme(){
@@ -43,20 +42,14 @@ int wieldme(){
          return 0;
       }
    }
-   if(ETO->query_property("master weapon")) { //preventing stack up with other "top" weapons
-     tell_object(ETO,"You find it impossible to lift two such mighty weapons!",ETO);
-     return 0;
-   }
    tell_object(ETO," %^BOLD%^%^BLACK%^As you gr%^BLUE%^i%^BLACK%^p the weapon %^WHITE%^s%^RESET%^t%^BOLD%^e%^RESET%^a%^BOLD%^m%^BLACK%^ rises from the point of contact%^RESET%^ ");
    tell_room(environment(ETO)," %^BOLD%^%^BLACK%^As "+ETO->QCN+" gr%^BLUE%^i%^BLACK%^ps the weapon %^WHITE%^s%^RESET%^t%^BOLD%^e%^RESET%^a%^BOLD%^m%^BLACK%^ rises from the point of contact%^RESET%^ ",ETO);
-   ETO->set_property("master weapon",1);
    return 1;
 }
 
 int unwieldme(){
    tell_object(ETO," %^BOLD%^%^CYAN%^A slight crackling can be heard as you release your grip on the cold weapon. ");
    tell_room(environment(ETO),"%^BOLD%^%^CYAN%^A slight crackling can be heard as "+ETO->QCN+" releases the chilling weapon.",ETO);
-   ETO->set_property("master weapon",-1);
    return 1;
 }
 
@@ -159,7 +152,6 @@ int transform(string str){
    TO->move("/d/shadowgate/void");
    ob->move(theplayer);
    theplayer->force_me("wield spear of destruction");
-   if(!ob->query_wielded()) { theplayer->set_property("master weapon",-1); }
    TO->remove();
    return 1;
 }

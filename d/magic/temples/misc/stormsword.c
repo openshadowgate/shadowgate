@@ -1,6 +1,5 @@
 //balanced for +6 - Yves 9/3/19
 // trade item for mephistar spear as there is no non-evil 2h equivalent (spear well outstrips the hammer).
-// added master weapon locks; good version did not match evil & can now no longer be wielded with other master weps! N, 2/20
 #include <std.h>
 inherit "/d/common/obj/weapon/shortsword.c";
 
@@ -53,15 +52,11 @@ int wieldme(){
          return 0;
       }
    }
-   if(ETO->query_property("master weapon")) { //preventing stack up with other "top" weapons
-     tell_object(ETO,"You find it impossible to lift two such mighty weapons!",ETO);
-     return 0;
-   }
-   if(!((int)ETO->query_true_align()%3)) {
-     tell_object(ETO,"%^BOLD%^%^CYAN%^The engraved hawk lets out an ear-splitting scream of rage, and you drop the spear!%^RESET%^");
-     tell_room(EETO,"%^BOLD%^%^CYAN%^The engraved hawk upon the spear lets out an ear-splitting scream of rage, and "+ETO->QCN+" relinquishes hold of it!%^RESET%^",ETO);
-     ETO->set_paralyzed(25,"%^BOLD%^%^RED%^You're still recovering from the shriek!%^RESET%^");
-     return 0;
+   if (!((int)ETO->query_true_align() % 3)) {
+       tell_object(ETO, "%^BOLD%^%^CYAN%^The engraved hawk lets out an ear-splitting scream of rage, and you drop the spear!%^RESET%^");
+       tell_room(EETO, "%^BOLD%^%^CYAN%^The engraved hawk upon the spear lets out an ear-splitting scream of rage, and " + ETO->QCN + " relinquishes hold of it!%^RESET%^", ETO);
+       ETO->set_paralyzed(25, "%^BOLD%^%^RED%^You're still recovering from the shriek!%^RESET%^");
+       return 0;
    }
    if(ETO->query_property("evil item")) {
      tell_object(ETO,"%^YELLOW%^There is so much evil in the items you carry that the spear repels your hand!%^RESET%^");
@@ -72,7 +67,6 @@ int wieldme(){
    tell_room(EETO,"%^BOLD%^%^BLACK%^As "+ETO->QCN+" gr%^BLUE%^i%^BLACK%^ps the weapon, sparks of e%^BOLD%^%^CYAN%^n%^BOLD%^%^BLUE%^e%^BOLD%^%^BLACK%^r%^BOLD%^%^CYAN%^g%^BOLD%^%^BLACK%^y dance "
 "across "+ETO->QP+" fingertips.%^RESET%^",ETO);
    ETO->set_property("good item",1);
-   ETO->set_property("master weapon",1);
    return 1;
 }
 
@@ -82,7 +76,6 @@ int unwieldme(){
    tell_room(EETO,"%^BOLD%^%^BLACK%^A slight cr%^BOLD%^%^CYAN%^a%^BOLD%^%^WHITE%^c%^BOLD%^%^BLACK%^kli%^BOLD%^%^BLUE%^n%^BOLD%^%^BLACK%^g can be heard as "+ETO->QCN+" releases the "
 "magnificent weapon.",ETO);
    ETO->set_property("good item",-1);
-   ETO->set_property("master weapon",-1);
    return 1;
 }
 

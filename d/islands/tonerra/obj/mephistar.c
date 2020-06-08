@@ -37,7 +37,6 @@ set_obvious_short("%^BOLD%^%^BLACK%^A %^BLUE%^r%^CYAN%^i%^BLACK%^m%^BLUE%^e %^BL
    set_item_bonus("damage bonus",5);
    set_item_bonus("influence",5);
 //   set_weapon_prof("exotic"); // removing for inherit fixes, N 2/20
-   set_property("master weapon",1);
 }
 
 int wieldme(){
@@ -47,19 +46,13 @@ int wieldme(){
          return 0;
       }
    }
-   if(ETO->query_property("master weapon")) { //preventing stack up with other "top" weapons
-     tell_object(ETO,"You find it impossible to lift two such mighty weapons!",ETO);
-     return 0;
-   }
    tell_object(ETO," %^BOLD%^%^BLACK%^As you gr%^BLUE%^i%^BLACK%^p the weapon "+
       "%^WHITE%^s%^RESET%^t%^BOLD%^e%^RESET%^a%^BOLD%^m%^BLACK%^ rises from the point of contact%^RESET%^");
-   ETO->set_property("master weapon",1);
    return 1;
 }
 
 int unwieldme(){
    tell_object(ETO," %^BOLD%^%^CYAN%^A slight crackling can be heard as you release your grip on the cold weapon. ");
-   ETO->set_property("master weapon",-1);
    return 1;
 }
 
@@ -231,7 +224,6 @@ Previous code - leaving just in case.
    TO->move("/d/shadowgate/void");
    ob->move(theplayer);
    theplayer->force_me("wield sword of destruction");
-   if(!ob->query_wielded()) { theplayer->set_property("master weapon",-1); }
    TO->remove();
    return 1;
 }
