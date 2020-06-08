@@ -1,9 +1,0 @@
-Nightmare mudlib living lfun: add_hp()
-
-void add_hp(int x)
-
-This is a function in living objects that will change the hit points of the
-object.  This can never push the hit points above "max_hp" or below "1".
-
-See also: do_damage(), set_hp(), set_max_hp(), query_hp(), query_max_hp()
-Defined in /std/living/body.c

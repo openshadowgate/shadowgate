@@ -1,9 +1,0 @@
-Nightmare mudlib living lfun: add_sp()
-
-void add_sp(int x)
-
-This function adds "x" to the current number of stamina points in a living
-object.  It keeps the stamina points between 0 and "max_sp".
-
-See also: query_max_sp(), set_sp(), query_sp()
-Defined in /std/living/body.c

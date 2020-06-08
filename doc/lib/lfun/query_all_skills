@@ -1,8 +1,0 @@
-Nightmare mudlib living lfun: query_all_skills()
-
-string *query_all_skills()
-
-Returns the names of all the skills in a living object.
-
-See also: set_skills(), add_skill()
-Defined in /std/living/skills.c

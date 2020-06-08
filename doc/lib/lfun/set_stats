@@ -1,9 +1,0 @@
-Nightmare mudlib living lfun: set_stats()
-
-void set_stats(string str, int x)
-
-This is used to set the value of a stat in a living object.  The current stats
-are: strength, constitution, dexterity, charisma, intelligence, wisdom
-
-See also: set_skill()
-Defined in /std/living.c

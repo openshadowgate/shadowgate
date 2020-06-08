@@ -1,9 +1,0 @@
-Nightmare mudlib object lfun: query_property()
-
-mixed query_property(string prop)
-
-This returns the value of the property, "prop", if it exists.  If it has not 
-been set, then this returns 0.
-
-See also: set_property(), set(), query()
-Defined in /std/Object.c

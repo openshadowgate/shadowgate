@@ -1,8 +1,0 @@
-Nightmare mudlib room lfun: remove_exit()
-
-void remove_exit(string dir)
-
-Removes the exit activated by the verb "dir".
-
-See also: add_exit(), set_exits()
-Defined in /std/room/exits.c

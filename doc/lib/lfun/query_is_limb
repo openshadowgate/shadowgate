@@ -1,9 +1,0 @@
-Nightmare mudlib living lfun: query_is_limb()
-
-int query_is_limb(string limb)
-
-This returns a 1 if "limb" is an actual limb name in the living object and
-a 0 if "limb" is not.
-
-See also: add_limb()
-Defined in /std/living/body.c

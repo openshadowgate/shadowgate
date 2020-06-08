@@ -1,9 +1,0 @@
-Nightmare mudlib room lfun: add_exit()
-
-void add_exit(string dest, string dir)
-
-This adds a single exit to a room.  "dest" should be the filename of the room
-the exit leads to and "dir" is the verb used to get there.
-
-See also: remove_exit(), set_exits()
-Defined in /std/room/exits.c

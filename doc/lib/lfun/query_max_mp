@@ -1,7 +1,0 @@
-Nightmare mudlib living lfun: query_max_mp()
-
-int query_max_mp()
-
-This returns the maximum magic points of a living object.
-
-See also: query_mp(), set_max_mp(), set_mp(), add_mp()

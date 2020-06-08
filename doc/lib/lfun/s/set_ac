@@ -1,8 +1,0 @@
-Nightmare mudlib living lfun: set_ac()
-
-void set_ac(string limb_name, int ac)
-
-This sets the armour class of a limb, "limb_name", to "ac".
-
-See also: query_ac(), set_overall_ac()
-Defined in /std/living/body.c

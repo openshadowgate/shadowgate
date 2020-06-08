@@ -1,8 +1,0 @@
-Nightmare mudlib room lfun: remove_invis_exit()
-
-void remove_invis_exit(string dir)
-
-Removes the exit activated by the verb "dir" from the invisible list.
-
-See also: add_invis_exit(), invis_exit(), set_invis_exits()
-Defined in /std/room/exits.c

@@ -1,8 +1,0 @@
-Nightmare mudlib living lfun: query_limbs()
-
-string *query_limbs()
-
-This returns a list of the names of all the limbs that a living object has.
-
-See also: add_limb(), query_is_limb()
-Defined in /std/living/body.c

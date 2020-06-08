@@ -1,8 +1,0 @@
-Nightmare mudlib living lfun: set_max_sp()
-
-void set_max_sp(int sp)
-
-This sets the maximum stamina points in a living object to "sp".
-
-See also: query_max_sp(), set_sp(), add_sp()
-Defined in /std/living/body.c

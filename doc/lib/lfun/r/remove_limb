@@ -1,9 +1,0 @@
-Nightmare mudlib living lfun: remove_limb()
-
-int remove_limb(string limb_name)
-
-This removes the limb with the name "limb_name" from the living object.  It
-returns a 1 if the limb was there to remove and a 0 if it was not.
-
-See also: add_limb()
-Defined in /std/living/body.c

@@ -1,8 +1,0 @@
-Nightmare mudlib room lfun: skip_obvious()
-
-void skip_obvious()
-
-Makes it so that the "The obvious exits are:" line is not displayed in the
-long description of the room.
-
-Defined in /std/room/exits.c

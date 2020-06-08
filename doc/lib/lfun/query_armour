@@ -1,9 +1,0 @@
-Nightmare mudlib living lfun: query_armour()
-
-string *query_armour(string limb)
-
-This returns a list of all the types of the armour worn on "limb".  If there
-are none then ({}) is returned.  If "limb" does not exist then 0 is returned.
-
-See also: query_weapon(), query_limbs(), equip_armour_to_limb(), 
-          remove_armour_from_limb()

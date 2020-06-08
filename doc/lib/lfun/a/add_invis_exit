@@ -1,7 +1,0 @@
-Nightmare mudlib room lfun: add_invis_exit()
-
-void add_invis_exit(string dir)
-
-This makes the exit activated by the verb "dir" invisible.
-
-See also: remove_invis_exit(), invis_exit(), set_invis_exits()

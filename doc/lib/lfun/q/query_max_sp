@@ -1,7 +1,0 @@
-Nightmare mudlib living lfun: query_max_sp()
-
-int query_max_sp()
-
-This returns the maximum stamina points of a living object.
-
-See also: query_sp(), set_max_sp(), set_sp(), add_sp()

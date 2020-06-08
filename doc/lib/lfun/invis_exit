@@ -1,8 +1,0 @@
-Nightmare mudlib room lfun: invis_exit()
-
-int invis_exit(string str)
-
-Returns a 1 if "str" is a verb activating an invisible exit and a 0 otherwise.
-
-See also: set_invis_exits(), add_invis_exit(), remove_invis_exit()
-Defined in /std/room/exits.c

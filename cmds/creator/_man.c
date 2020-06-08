@@ -9,7 +9,7 @@ int cmd_man(string str)
 
     if (!str) {
         write("%^BOLD%^Sections: ");
-        write(format_page(get_dir("/doc/lib/efuns/")));
+        write(format_page(get_dir("/doc/lib/efun/")));
         write("%^BOLD%^To view section type: <man *SECTION>");
         return 1;
     }
@@ -17,7 +17,7 @@ int cmd_man(string str)
         string sname;
         sscanf(str, "*%s", sname);
         write("%^BOLD%^Subtopics: ");
-        write(format_page(get_dir("/doc/lib/efuns/" + sname + "/")));
+        write(format_page(get_dir("/doc/lib/efun/" + sname + "/")));
         write("%^BOLD%^To view topic type: <man *TOPIC>");
         return 1;
     }
@@ -27,13 +27,13 @@ int cmd_man(string str)
         string* contents;
 
         str = replace_string(str, " ", "_");
-        dirs = get_dir("/doc/lib/efuns/");
+        dirs = get_dir("/doc/lib/efun/");
         foreach(dir in dirs)
         {
-            contents = get_dir("/doc/lib/efuns/" + dir + "/");
+            contents = get_dir("/doc/lib/efun/" + dir + "/");
             contents = regexp(contents, str);
             if (sizeof(contents)) {
-                TP->more("/doc/lib/efuns/" + dir + "/" + contents[0]);
+                TP->more("/doc/lib/efun/" + dir + "/" + contents[0]);
                 return 1;
             }
         }
