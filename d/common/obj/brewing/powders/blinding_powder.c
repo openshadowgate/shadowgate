@@ -135,6 +135,8 @@ int toss(string str) {
    tell_room(ETP, "%^BOLD%^%^CYAN%^You see "+TPQCN+" reach into a small bag, from which "+TP->query_subjective()+" pulls a handful of powder and throws it in the air!",({TP}));
    tell_object(TP,"%^BOLD%^%^CYAN%^You reach into the bag and grab a handful of powder and toss it!\n");
 
+   TP->set_paralyzed(2,"%^CYAN%^%^BOLD%^You are busy throwing the dust!%^RESET%^");
+
    if(!SAVING_THROW_D->reflex_save(ob,TP->query_skill("thievery"))) {
      tell_room(ETP,"%^BOLD%^%^CYAN%^The cloud of dust formed by the powder billows toward "+ob->query_cap_name()+", and "+ob->query_subjective()+" tries to avoid the cloud, but is unsuccessful.",ob);
      tell_room(ETP,"%^BOLD%^%^CYAN%^The irritants in the dust quickly effect "+ob->query_cap_name()+"'s eyes causing "+ob->query_objective()+" to become paralyzed with stinging pain.",ob);
@@ -149,6 +151,8 @@ int toss(string str) {
      tell_room(ETP,"%^BOLD%^%^CYAN%^The cloud of dust formed by the powder billows about but the cloud doesn't seem to hit anything.",ob);
      tell_object(ob, "%^BOLD%^%^CYAN%^The cloud of dust formed by the powder billows toward you, but you turn your head and avoid the cloud of irritants!\n");
    }
+
+   uses -=1;
 
    if(uses < 1) {
       set_short("An empty bag");
