@@ -31,6 +31,9 @@ int cmd_man(string str)
         foreach(dir in dirs)
         {
             contents = get_dir("/doc/lib/efun/" + dir + "/");
+            if (!sizeof(contents)) {
+                continue;
+            }
             contents = regexp(contents, str);
             if (sizeof(contents)) {
                 TP->more("/doc/lib/efun/" + dir + "/" + contents[0]);
