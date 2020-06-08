@@ -211,7 +211,7 @@ int dump_board(string id, string fname)
         tosave = "";
         tosave += "From: " + message["owner"] + "\n";
         tosave += "Date: " + ctime(message["date"]) + "\n";
-        tosave += "Subject: " + message["title"] + "\n";
+        tosave += "Subject: " + message["title"] + "\n\n";
         tosave += message["message"];
 
         write_file(fname + "." + message["date"] + ".txt", tosave, 1);
@@ -233,7 +233,7 @@ void save_message(string id, int number, string fname)
     tosave = "";
     tosave += "From: " + message["owner"] + "\n";
     tosave += "Date: " + ctime(message["date"]) + "\n";
-    tosave += "Subject: " + message["title"] + "\n";
+    tosave += "Subject: " + message["title"] + "\n\n";
     tosave += message["message"];
 
     write_file(fname + "." + message["date"] + ".txt", tosave, 1);
