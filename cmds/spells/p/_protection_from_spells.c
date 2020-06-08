@@ -29,9 +29,9 @@ string query_cast_string() {
 
 int preSpell()
 {
-    if(target->query_property("raised spell damage resitance"))
+    if(target->query_property("protection from spells"))
     {
-        tall_object(caster,"The target is already under the influence of a similar effect.");
+        tell_object(caster,"The target is already under the influence of a similar effect.");
         return 0;
     }
     return 1;
@@ -66,7 +66,7 @@ void spell_effect(int prof) {
         "%^BOLD%^%^WHITE%^er%^BOLD%^%^CYAN%^s brightly, the "
         "sparks spreading across you in a brilliant wave!");
     }
-    if(target->query_property("raised spell damage resistance")){
+    if(target->query_property("protection from spells")){
         tell_object(caster,"%^BOLD%^The power is repelled forcibly.");
         tell_object(target,"%^BOLD%^The power is repelled forcibly.");
         dest_effect();
@@ -74,16 +74,18 @@ void spell_effect(int prof) {
     }
 
     lower = 10;
-    target->add_saving_bonus(lower);
+    target->add_saving_bonus("all",lower);
+    target->set_property("protection from spells", 1);
     addSpellToCaster();
-    call_out("dest_effect",clevel*4*ROUND_LENGTH);
+    call_out("dest_effect",clevel * 10 * ROUND_LENGTH);
 }
 
 void dest_effect(){
 
     if(objectp(target))
     {
-        target->add_saving_bonus(-lower);
+        target->add_saving_bonus("all",-lower);
+        target->remove_property("protection from spells");
         tell_room(environment(target),"%^RESET%^%^CYAN%^The air suddenly seems to grow dull as "
         "a wave of energy dissipates from the air around "+target->QCN+".%^RESET%^",target);
         tell_object(target,"%^RESET%^%^CYAN%^The air suddenly seems to grow dull as "
