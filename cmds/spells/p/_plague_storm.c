@@ -29,7 +29,7 @@ void spell_effect(int prof)
 {
     tell_object(caster, "%^GREEN%^You swiftly wave your hand and invoke a hi%^BOLD%^d%^BLACK%^e%^RESET%^%^GREEN%^o%^BOLD%^u%^RESET%^%^GREEN%^s %^BOLD%^green %^RESET%^%^GREEN%^clo%^BOLD%^u%^RESET%^%^GREEN%^d, infused with %^BOLD%^d%^RESET%^%^GREEN%^is%^BOLD%^e%^BLACK%^a%^GREEN%^se%^RESET%^%^GREEN%^s.%^WHITE%^");
     tell_room(place, "%^GREEN%^" + caster->QCN + " swiftly waves " + caster->QP + " hand and invokes a hi%^BOLD%^d%^BLACK%^e%^RESET%^%^GREEN%^o%^BOLD%^u%^RESET%^%^GREEN%^s %^BOLD%^green %^RESET%^%^GREEN%^clo%^BOLD%^u%^RESET%^%^GREEN%^d, infused with %^BOLD%^d%^RESET%^%^GREEN%^is%^BOLD%^e%^BLACK%^a%^GREEN%^se%^RESET%^%^GREEN%^s.%^WHITE%^", ({ caster }));
-    counter = clevel / 10 + 1;
+    counter = clevel / 6 + 1;
     addSpellToCaster();
     spell_successful();
     execute_attack();
