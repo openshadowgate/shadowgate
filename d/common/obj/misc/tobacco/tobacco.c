@@ -15,7 +15,7 @@ void create()
              "pipe.\n%^YELLOW%^You should pack this in a pipe.\n%^RESET%^There are " + loads + " loads left.");
     set_weight(1);
     set_value(100);
-    loads = 10;
+    loads = 50;
     hasmsgs = 0;
 }
 

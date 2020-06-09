@@ -1,5 +1,5 @@
 #include <std.h>
-inherit "/std/armour";
+inherit "/d/common/obj/clothing/hat";
 int FLAG;
 
 create() {
@@ -16,11 +16,7 @@ create() {
     "Drow Regime utilize it.  It is known to possess the "+
     "power to %^CYAN%^scry%^RESET%^%^BLUE%^ those who "+
     "find themselves on the wrong side of the high priests.%^RESET%^");
-    set_weight(10);
     set_value(10);
-    set_type("clothing");
-    set_limbs(({"head"}));
-    set_ac(0);
     set_item_bonus("sight bonus",3);
     set_wear((: TO, "wearit" :));
     set_remove((: TO, "removeit" :));
@@ -187,9 +183,9 @@ int look_func(string str) {
     } else {
        tell_object(TP,"%^BLUE%^You feel %^RED%^Lloth%^BLUE%^ look through your eyes.");
        if (!str || str == "$*") {
-          if(!TP->query_invis()) {
+          /*if(!TP->query_invis()) {
             tell_room(ETP,"%^BLUE%^"+TPQCN+" sweeps %^MAGENTA%^spider like eyes%^BLUE%^ slowly over "+TP->query_possessive()+" surroundings.",TP);
-          }
+          }*/ //commenting out to eliminate spam
        }
        return 0;
     }
