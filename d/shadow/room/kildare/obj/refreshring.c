@@ -27,12 +27,6 @@ AVATAR
         );
      set("langage","str");      set_weight(2);
         set_value(750);
-        set_lore(
-@AVATAR
-The Ring of Refresh is common among the followers of Auril and Eldath, oddly enough.  The Aurilites favor the ring, for it aids them in being comfortable in even the most sweltering heat, like in a desert.  The Eldathians belive the ring is a present from Eldath, to remind all people that the Mistress of the Still Pools is in all of our lives.  Despite Eldath's fading, many followers of the allied faith still see the ring as a blessing of peace.
-
-AVATAR
-        );
         set_property("lore difficulty",5);
         set_type("ring");
         set_limbs(({ "left hand","right hand" }));
@@ -57,7 +51,7 @@ TP->query_tripped()) {
                 TP->send_paralyzed_message("info",TP);
                 return 1;
     }
- 
+
     if(query_worn()){
     if(uses < MAXUSES){
             tell_room(ETP,"%^BOLD%^%^WHITE%^"+TPQCN+"'s skin forms a fine white "+
