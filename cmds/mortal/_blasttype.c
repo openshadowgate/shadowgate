@@ -6,9 +6,6 @@ inherit DAEMON;
 int cmd_blasttype(string str)
 {
     string spellname, masteredspells;
-    if (!userp(TP)) {
-        return 0;
-    }
     if (!TP->is_class("warlock")) {
         return 0;
     }

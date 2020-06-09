@@ -14,7 +14,7 @@ void create()
     set_long("This is a pouch of standard tobacco.  The leaves are finely chopped and ready to be smoked in a "
              "pipe.\n%^YELLOW%^You should pack this in a pipe.\n%^RESET%^There are " + loads + " loads left.");
     set_weight(1);
-    set_value(50);
+    set_value(100);
     loads = 10;
     hasmsgs = 0;
 }
