@@ -14,7 +14,7 @@ void create(){
    //set_property("no teleport",1);
    set_property("teleport proof",67);
    set_short("Leaders' Room");
-   set_long("%^CYAN%^Leader's Room%^RESET%^\n "+
+   set_long("%^CYAN%^Leader's Room%^RESET%^\n"+
       "%^BOLD%^%^WHITE%^You appear in a large room, a old, round "+
 	  "table stands in the center surrounded by three chairs. The "+
 	  "table is covered by a faded %^RESET%^%^BLUE%^blue %^BOLD%^"+
@@ -28,7 +28,7 @@ void create(){
 	  "rather large shelf with many scrolls, documents and a few books "+
 	  "stored. You also notice a map on the wall above the desk, it's a "+
 	  "map of the surrounding regions. You get the feeling that great "+
-	  "decisions were once made here.\n");
+	  "decisions are made here.\n");
    set_listen("default","You cannot really hear anything in here, it's very quiet.");
    set_smell("default","You smell ink and burning torches.");
    set_exits(([
