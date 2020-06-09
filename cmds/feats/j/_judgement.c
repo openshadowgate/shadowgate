@@ -17,19 +17,19 @@ void create()
 
 The list of judgements to choose from:
 
-%^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them damage bonus point per every nine levels.
+%^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them a damage bonus point plus an additional damage bonus point per every nine levels.
 
-%^BOLD%^Healing:%^RESET%^ The inquisitor is surrounded by a healing light, gaining fast healing point per every eighteen levels.
+%^BOLD%^Healing:%^RESET%^ The inquisitor is surrounded by a healing light, gaining a fast healing pointplus an additional fast healing point per every eighteen levels.
 
-%^BOLD%^Justice:%^RESET%^ This judgment spurs the inquisitor to seek justice, gaining a sacred bonus point to attack per every five levels.
+%^BOLD%^Justice:%^RESET%^ This judgment spurs the inquisitor to seek justice, gaining a sacred bonus point to attack plus an additional bonus point to attack per every five levels.
 
-%^BOLD%^Piercing:%^RESET%^ This judgment gives the inquisitor great focus and makes his spells more potent. This grants a point of spell penetration and a caster level point for every twelve levels.
+%^BOLD%^Piercing:%^RESET%^ This judgment gives the inquisitor great focus and makes his spells more potent. This grants a point of spell penetration and a caster level, plus an additonal point of spell penetrationn and caster level for every twelve levels.
 
-%^BOLD%^Protection:%^RESET%^ The inquisitor is surrounded by a protective aura, granting a sacred armor class point per every five levels.
+%^BOLD%^Protection:%^RESET%^ The inquisitor is surrounded by a protective aura, granting a sacred armor class point plus an additional sacred armor class point per every five levels.
 
-%^BOLD%^Purity:%^RESET%^ The inquisitor is protected from the vile taint of her foes, gaining a sacred bonus to all saves, worth of a point per every five levels.
+%^BOLD%^Purity:%^RESET%^ The inquisitor is protected from the vile taint of her foes, gaining a sacred bonus point to all saves plus an additional point to saves per every five levels.
 
-%^BOLD%^Resiliency:%^RESET%^ This judgment makes the inquisitor resistant to harm, granting him one point of spell damage resistance per two levels.
+%^BOLD%^Resiliency:%^RESET%^ This judgment makes the inquisitor resistant to harm, granting him one point of spell damage resistance plus an additional point of spell damage resistance per two levels.
 
 %^BOLD%^See also:%^RESET%^ status effects
 ");
