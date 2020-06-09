@@ -74,7 +74,7 @@ void spell_effect(int prof) {
     }
 
     lower = cleve / 6 + 2;
-    lower = lover > 8 ? 8 : lower;
+    lower = lower > 8 ? 8 : lower;
     target->add_saving_bonus("all",lower);
     target->set_property("protection from spells", 1);
     addSpellToCaster();
