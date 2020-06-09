@@ -11,7 +11,7 @@ void create() {
     set_spell_sphere("abjuration");
     set_mystery("dragon");
     set_domains("magic");
-    set_damage_desc("10 to all saves");
+    set_damage_desc("clevel / 6 + 2 but no more than 8 to all saves");
     set_syntax("cast CLASS protection from spells on TARGET");
     set_description("Using this power will allow a mage or sorcerer to temporarily raise the target's "
 "resistance to spells of all kinds.  This is only a temporary state, however, and will fade after a "
@@ -73,11 +73,12 @@ void spell_effect(int prof) {
         return;
     }
 
-    lower = 10;
+    lower = cleve / 6 + 2;
+    lower = lover > 8 ? 8 : lower;
     target->add_saving_bonus("all",lower);
     target->set_property("protection from spells", 1);
     addSpellToCaster();
-    call_out("dest_effect",clevel * 10 * ROUND_LENGTH);
+    call_out("dest_effect",clevel * (10 + roll_dice(1, 6)) * ROUND_LENGTH);
 }
 
 void dest_effect(){
