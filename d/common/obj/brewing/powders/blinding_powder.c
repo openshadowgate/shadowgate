@@ -73,7 +73,7 @@ int find_em(string str)
     tell_room(ETP,"%^BOLD%^%^CYAN%^"+TPQCN+" whirls a bag of powder in a sweeping arc, "
         "the dust coats everything in the room!%^RESET%^",TP);
     here->set_property("no invis", 1);
-    uses -= 1;
+    uses -= 2;
     "/daemon/delay_d"->sleep(base_name(TO),"invis_again",10,({ here }));
     return 1;
 }
