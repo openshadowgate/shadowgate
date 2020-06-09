@@ -10,7 +10,7 @@ void create()
     feat_category("TwoWeapons");
     feat_name("two weapon fighting");
     feat_prereq("Whirl");
-    feat_desc("Two Weapon Fighting is a passive feat that gives an extra attack to your off hand weapon. You must be wielding a second weapon before receiving the extra attack.");
+    feat_desc("Two Weapon Fighting is a passive feat that gives an extra two attacks. You must be wielding a second weapon before receiving the bonus.");
     permanent(1);
     set_required_for(({"improved two weapon fighting","unassailable parry"}));
 }
@@ -55,4 +55,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
