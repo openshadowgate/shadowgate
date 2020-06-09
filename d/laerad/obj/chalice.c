@@ -5,6 +5,7 @@
 inherit OBJECT;
 int flag;
 int uses;
+int maxuses = 20;
 int count;
 object who;
 int counter;
@@ -69,7 +70,7 @@ int drink_me(string str)
     if ("liquid" != str) {
         return 0;
     }
-    if (uses > 20) {
+    if (uses > maxuses) {
         write("%^BOLD%^The chalice's power has disappeared forever.");
         return 1;
     }
@@ -100,10 +101,10 @@ int measure_me(string str)
     }
     if (flag == 0) {
         write("%^BOLD%^%^CYAN%^The stones on the cup start to" +
-              " glow as the chalice fills with crystal clear water. It appears that the chalice has been used " + uses + " of 8 times.");
+              " glow as the chalice fills with crystal clear water. It appears that the chalice has been used " + uses + " of " + maxuses + " times.");
         return 1;
     }
-    write("%^BOLD%^%^GREEN%^The cup is still replenishing itself. It appears that the chalice has been used " + uses + " of 8 times.");
+    write("%^BOLD%^%^GREEN%^The cup is still replenishing itself. It appears that the chalice has been used " + uses + " of " + maxuses + " times.");
     return 1;
 }
 
