@@ -190,6 +190,11 @@ string write_prompt()
         } else {
             prompt = replace_string(prompt, "$E", "No Essence");
         }
+        if (stringp(this_object()->query("cast and attack"))) {
+            prompt = replace_string(prompt, "$w", "Warfare");
+        } else {
+            prompt = replace_string(prompt, "$w", "");
+        }
         if (avatarp(this_player())) {
             prompt = replace_string(prompt, "$I", am_invis);
         }
