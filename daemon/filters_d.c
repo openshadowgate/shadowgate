@@ -39,7 +39,7 @@ void init_strippable() {
 
   if(pointerp(strippable)) return;
   strippable = ({});
-  for (iter=0;iter<256;iter++) {
+  for (iter=1;iter<256;iter++) {
     if (iter == 32)
       continue;
     if ((iter > 64) && (iter < 91))

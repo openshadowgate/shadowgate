@@ -6,8 +6,12 @@ int cmd_history(string args)
 
     if(!avatarp(TP))
         fname = "/log/tshlog/player/"+TP->query_name();
-    else
-        fname = "/log//tshlog/avatar/"+TP->query_name();
+    else {
+        if (wizardp(TP)(wizardp(TP))
+            fname = "/log//tshlog/wizard/"+TP->query_name();
+        else
+            fname = "/log/tshlog/avatar/"+TP->query_name();
+    }
     if(args=="all")
         TP->more(fname);
     else
