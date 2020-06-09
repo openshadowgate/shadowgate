@@ -4,7 +4,7 @@ inherit "/d/common/obj/jewelry/necklace";
 string choose_protection();
 
 void create(){
-    
+
 	::create();
 	set_name("amulet");
 	set_id(({ "amulet", "amulet of protection", "protection amulet", "crystal amulet", "blue crystal amulet", "blue amulet" }));
@@ -14,7 +14,7 @@ void create(){
     "n%^RESET%^");
     set_obvious_short("%^BOLD%^%^BLUE%^A blue crystal amulet%^RESET%^");
     set_property("repairtype",({ "jewel" }));
-    
+
     set_long("The cord of this necklace is made from several "+
     "thin strips of leather.  The strips have been woven so that "+
     "they intertwine harmoniously with one another to form a "+
@@ -25,7 +25,7 @@ void create(){
     "forms another and somewhat different angle.  It is "+
     "large and the angles serve to grant it a reflective and "+
     "almost captivating quality.%^RESET%^");
-    
+
     set_lore("Created by a guild of magi some many years ago "+
     "these amulets have all been remarkably similiar in design.  "+
     "They were enchanted to grant the wearer a protection from "+
@@ -33,12 +33,12 @@ void create(){
     "like to employ.  Some say that they are still being forged "+
     "and circulated, the location of such work a mystery that is "+
     "likely to remain unsolved.");
- 
+
 	set_value(1000);
 	set_size(-1);
 	set_property("enchantment",3);
     set_wear((:TO,"wearme":));
-    set_remove((:TO,"removeme":));     
+    set_remove((:TO,"removeme":));
     set_item_bonus(choose_protection(), 10);
 }
 
@@ -47,7 +47,7 @@ string choose_protection()
     int x;
     string myprot;
     string *possible_protections;
-    possible_protections = ({"fire resistance", "magic resistance", "cold resistance", "sonic resistance ", "acid resistance", "negative energy resistance", "positive energy resistance", "mental resistance"});   
+    possible_protections = ({"fire resistance", "cold resistance", "sonic resistance ", "acid resistance", "negative energy resistance", "positive energy resistance", "mental resistance"});   
     x = sizeof(possible_protections);
     myprot = possible_protections[random(x)];
     return myprot;
