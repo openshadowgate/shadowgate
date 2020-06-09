@@ -174,6 +174,7 @@ void remove_eclipse()
  */
 int query_eclipse()
 {
+    return 1;
     return in_eclipse;
 }
 
