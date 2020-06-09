@@ -51,7 +51,7 @@ void create()
 
 int query_value()
 {
-    return 15000 / (uses + 1);
+    return 25000 / (uses + 1);
 }
 
 void init()
@@ -69,7 +69,7 @@ int drink_me(string str)
     if ("liquid" != str) {
         return 0;
     }
-    if (uses > 8) {
+    if (uses > 20) {
         write("%^BOLD%^The chalice's power has disappeared forever.");
         return 1;
     }
@@ -113,6 +113,7 @@ int heal_me(object targ)
           " from your body disappear.");
     targ->add_hp(targ->query_max_hp() / 2);
     targ->add_poisoning(-100);
+    targ->add_intox(-targ->query_intox());
     POISON_D->clear_poisons_by_dc(targ, 50, 0);
     return 1;
 }
