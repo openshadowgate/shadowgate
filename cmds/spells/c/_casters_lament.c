@@ -39,7 +39,7 @@ void spell_effect(int prof) {
       tell_object(caster,"%^MAGENTA%^You press your hands together and the energy r%^CYAN%^i%^MAGENTA%^pp%^RED%^l%^BOLD%^%^MAGENTA%^e%^RESET%^%^MAGENTA%^s and flows back over itself, down your arms and over your body to encase you in protective spellcraft!%^RESET%^");
       tell_room(place,"%^MAGENTA%^"+caster->QCN+" presses "+caster->QP+" hands together and the energy r%^CYAN%^i%^MAGENTA%^pp%^RED%^l%^BOLD%^%^MAGENTA%^e%^RESET%^%^MAGENTA%^s and flows back over itself, down "+caster->QP+" arms and over "+caster->QP+" body!%^RESET%^",caster);
       wasbuff = 1;
-      lower = (int)caster->query_level() +10;
+      lower = clevel;
       caster->set_property("magic resistance",lower);
       caster->set_property("raised resistance",1);
       addSpellToCaster();
@@ -51,9 +51,9 @@ void spell_effect(int prof) {
         what = arg;
         who = 0;
     }
-    if(!who) ob = present(what,caster); 
+    if(!who) ob = present(what,caster);
     else {
-        if((string)caster->realName(who) != "") who = (string)caster->realName(who);   
+        if((string)caster->realName(who) != "") who = (string)caster->realName(who);
         if(!ob2 = present(who, place)) {
             tell_object(caster,"That person isn't here.");
             dest_effect();

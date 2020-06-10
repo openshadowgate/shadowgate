@@ -132,10 +132,8 @@ void execute_feat()
     } else {
         tell_object(caster, "%^BOLD%^%^BLACK%^You step back and quickly thrust your " + weapons[0]->query_short() + " "
                     "at " + target->QCN + " with all of your might!%^RESET%^");
-        tell_object(target, "%^BOLD%^%^BLACK%^" + caster->QCN + " steps back and quickly thrusts " + caster->QP + " "
-                    "" + weapons[0]->query_short() + " at you with all of " + caster->QP + " might!%^RESET%^");
-        tell_room(place, "%^BOLD%^%^BLACK%^" + caster->QCN + " steps back and quickly thrusts " + caster->QP + " "
-                  "" + weapons[0]->query_short() + " at " + target->QCN + " with all of " + caster->QP + " "
+        tell_object(target, "%^BOLD%^%^BLACK%^" + caster->QCN + " steps back and quickly thrusts " + caster->QP + + " weapon at you with all of " + caster->QP + " might!%^RESET%^");
+        tell_room(place, "%^BOLD%^%^BLACK%^" + caster->QCN + " steps back and quickly thrusts " + caster->QP + " weapon at " + target->QCN + " with all of " + caster->QP + " "
                   "might!%^RESET%^", ({ caster, target }));
     }
 

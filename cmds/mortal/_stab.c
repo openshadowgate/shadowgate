@@ -359,10 +359,10 @@ int do_strike(object play, object vic)
         }
     }
 
-    tell_room(environment(play),"%^BOLD%^You see "+play->QCN+" plunge a deep blow "
+    tell_room(environment(play),"%^BOLD%^%^RED%^You see "+play->QCN+" plunge a deep blow "
         "into "+vic->QCN+"'s back.",({play,vic}));
-    tell_object(play,"%^BOLD%^You land a deep blow into your target's back.");
-    tell_object(vic,"%^BOLD%^"+play->QCN+" stabs you in the back!");
+    tell_object(play,"%^BOLD%^%^RED%^You land a deep blow into your target's back.%^RESET%^");
+    tell_object(vic,"%^BOLD%^%^RED%^"+play->QCN+" stabs you in the back!%^RESET%^");
 
     if(sizeof(weapon) && objectp(weapon[0]) && weapon[0]->query_property("magic"))
     {

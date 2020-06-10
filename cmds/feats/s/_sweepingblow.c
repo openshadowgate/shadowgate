@@ -93,10 +93,9 @@ void execute_feat()
 
     ::execute_feat();
 
-    tell_object(caster, "%^BOLD%^%^GREEN%^You growl as you swing your " + weapons[0]->query_short() + " in "
+    tell_object(caster, "%^BOLD%^%^GREEN%^You growl as you swing your weapon in "
                 "a wide sweeping arc, trying to hit everything in front of you!%^RESET%^");
-    tell_room(place, "%^BOLD%^%^GREEN%^" + caster->QCN + " growls as " + caster->QS + " swings " + caster->QP + " "
-              "" + weapons[0]->query_short() + " in a sweeping arc in front of " + caster->QO + "!%^RESET%^", caster);
+    tell_room(place, "%^BOLD%^%^GREEN%^" + caster->QCN + " growls as " + caster->QS + " swings " + caster->QP + " weapon in a sweeping arc in front of " + caster->QO + "!%^RESET%^", caster);
 
     caster->use_stamina(roll_dice(1, 6));
     caster->set_property("using instant feat", 1);
@@ -144,7 +143,7 @@ void execute_attack()
         return;
     }
     if (!sizeof(attackers)) {
-        tell_object(caster, "You have nothing to hit with your " + weapons[0]->query_short() + " and "
+        tell_object(caster, "You have nothing to hit with your weapon and "
                     "your momentum spins you around and nearly drops you onto the ground!");
         tell_room(place, "" + caster->QCN + " spins around wildly and nearly falls onto the ground!", caster);
         dest_effect();
@@ -168,11 +167,11 @@ void execute_attack()
         if ((res = thaco(attackers[i])) > 0) {
             // if(!attackers[i]->reflex_save(clevel+random(clevel)))
             num = 1;
-            tell_object(attackers[i], "%^BOLD%^%^CYAN%^" + caster->QCN + "'s " + weapons[0]->query_short() + " slams "
+            tell_object(attackers[i], "%^BOLD%^%^CYAN%^" + caster->QCN + "'s weapon slams "
                         "into you as it sweeps by!%^RESET%^");
             attackers[i]->cause_typed_damage(attackers[i],attackers[i]->return_target_limb(), dam, weapons[0]->query_damage_type());
             if (reaping && !attackers[i]->fort_save(clevel) && !attackers[i]->query_property("no knockdown") && !attackers[i]->query_property("no trip")) {
-                tell_object(attackers[i], "%^BOLD%^%^GREEN%^" + caster->QCN + "'s " + weapons[0]->query_short() + " hits you with "
+                tell_object(attackers[i], "%^BOLD%^%^GREEN%^" + caster->QCN + "'s weapon hits you with "
                             "such force that it knocks you flat onto the ground!");
                 attackers[i]->set_tripped(clevel / 10, "%^BOLD%^%^GREEN%^You are trying to get up!");
             }
@@ -217,7 +216,7 @@ void execute_attack()
 
         attackers += ({ caster });
         tell_object(caster, "%^BOLD%^%^CYAN%^Your " + weapons[0]->query_short() + " slams into your opponents as it sweeps by!%^RESET%^");
-        tell_room(place, "%^BOLD%^%^CYAN%^" + caster->QCN + "'s " + weapons[0]->query_short() + " slams into " + caster->QP + " opponents as it sweeps by!%^RESET%^", attackers);
+        tell_room(place, "%^BOLD%^%^CYAN%^" + caster->QCN + "'s weapon slams into " + caster->QP + " opponents as it sweeps by!%^RESET%^", attackers);
     }
     dest_effect();
 }

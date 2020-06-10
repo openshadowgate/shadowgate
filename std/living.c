@@ -336,7 +336,7 @@ void set_scrambling(int i)
 
 int query_scrambling()
 {
-    if (TO->query_tripped() || TO->query_in_vehicle() || (!TO->is_ok_armour("thief") && !TO->query_property("shapeshifted"))) {
+    if (TO->query_tripped() || TO->query_in_vehicle() || (!TO->is_ok_armour("thief"))) {
         return 0;
     }
     if (FEATS_D->usable_feat(TO, "scramble")) {
