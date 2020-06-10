@@ -89,7 +89,7 @@ int cmd_animal_companion(string str)
     return 1;
 }
 
-void execute_feat()
+void execute_eat()
 {
     object ob;
     
@@ -150,7 +150,7 @@ void execute_feat()
     companion->set_max_hp(10 + (10 * comp_hd));
     companion->set_hp(10 * comp_hd + 10);
     companion->set_alignment(caster->query_alignment());
-    companion->set_owner(caster);
+    companion->set_owner(aster);
        
     caster->set_property("animal_companion", companion);
     caster->add_follower(companion);
@@ -159,7 +159,6 @@ void execute_feat()
     control = new("/d/magic/obj/holder");
     control->set_caster(caster);
     control->move(caster);
-    control->set_elemental(companion);
     control->set_property("spell",TO);
     control->set_property("spelled", ({TO}) );
 
