@@ -6,7 +6,7 @@ inherit "/d/common/obj/weapon/glaive.c";
 
 void create(){
     ::create();
-	
+
     set_name("Glaive");
     set_id(({"glaive","sapphire glaive","glaive of the exterminated"}));
     set_short("%^RESET%^%^BLUE%^gla%^BOLD%^%^BLUE%^i%^RESET%^%^BLUE%^ve "+
@@ -34,7 +34,7 @@ void create(){
     set_value(9000);
     set_hit((: TO, "extra_hit":));
     set_wield((: TO, "extra_wield":));
-    set_unwield((: TO, "extra_unwield" :));     
+    set_unwield((: TO, "extra_unwield" :));
     set_property("enchantment",5);
     set_item_bonus("attack bonus",3);
     set_item_bonus("damage bonus",3);
@@ -51,8 +51,8 @@ void sensey(){  //point out non elven blooded
   for (i = 0; i < sizeof (ppl); i++){
     race= ppl[i]->query_race();
     if(member_array(race,({"elf","half-elf","drow","half-drow",
-	"half-drow", "voadkyn" })) != -1)
-          continue;  
+	"half-drow", "voadkyn", "fey'ri" })) != -1)
+          continue;
 	  write(ppl[i]->query_cap_name()+" has no elven blood"+
 	   " the world would be better without "+ppl[i]->QO+".");
   }
@@ -86,12 +86,12 @@ void mess() {
 "Also, I can _grow_ a rope if needed.",
 "You are Fey'ri?  I can sense your elven blood but without a body things appear different than as a mortal.",
 "Tanar'ri blood has made us perfect. When the other elves join us they will know what we have long known.",
-	
+
 	});
  write("%^BOLD%^%^RED%^The Glaive tells you%^RESET%^: "
    +msgs[random(sizeof(msgs))]);
  sensey();
- call_out("mess",120+random(1000)); 
+ call_out("mess",120+random(1000));
 return;
 }
 
@@ -112,11 +112,11 @@ int extra_hit(object targ)
 	"Your airway slowly gets cut off!.");
 	if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-40))
 	  targ->set_paralyzed(5,"%^BLUE%^The brambles around your neck stop you from breathing.");
-	  
+
                 if(!present("brambobj",targ)){
                 ob = new(OBJ+"bram");
                 ob->move(targ);
-                if(objectp(ob) && objectp(targ))  
+                if(objectp(ob) && objectp(targ))
 				  ob->hurt(targ);
 				}
 	return roll_dice(2,6);
@@ -133,7 +133,7 @@ int extra_hit(object targ)
 	    tree ->move(environment(ETO));
 		ETO->add_protector(tree);
 		tree ->force_me("kill "+targ->query_name());
-        ETO->add_follower(tree); 
+        ETO->add_follower(tree);
 		return 1;
 	}
    if(!random(16)) {
@@ -142,20 +142,20 @@ int extra_hit(object targ)
       tell_object(targ,"%^ORANGE%^"+ETO->QCN+"'s"+
                 " glaive slashes into you leaving a thorn filled wound.");
       tell_room(EETO,"%^ORANGE%^"+ETO->QCN+"'s glaive slashes "+targ->QCN+"'s"+
-                " body, leaving a thorn filled wound.",({ETO,targ}));             
-     
+                " body, leaving a thorn filled wound.",({ETO,targ}));
+
         return roll_dice(2,6)+2;}
    if(!random(50)) {
-   
-   
+
+
      tell_object(ETO,"%^ORANGE%^You slash into "+targ->QCN+
-	 " and your weapon sprays thorns into the wound.."); 
+	 " and your weapon sprays thorns into the wound..");
      tell_room(EETO,"%^ORANGE%^"+ETO->QCN+"'s"+
           " glaive sprays thorns at "+
 		  targ->QCN+".",({ETO,targ}));
 	 tell_object(targ,"%^ORANGE%^"+ETO->QCN+"'s"+
                 " glaive slashes you then begins spraying thorns.");
-     new("/cmds/spells/t/_thorn_spray")->use_spell(ETO,targ,15,100,"cleric");            
+     new("/cmds/spells/t/_thorn_spray")->use_spell(ETO,targ,15,100,"cleric");
         return 1;
    }
 }
@@ -175,17 +175,17 @@ int extra_wield() { // only part elven
             "%^CYAN%^"+ETOQCN+" wields a glaive and gets a far "+
             "away look in "+ETO->QP+" eyes.\n"+
             "Blinking, "+ETO->QS+" looks quite disturbed. ");
-		
+
 		ETO->set_property("evil item",1);
-	 if(find_call_out("mess")==-1)  
-	   call_out("mess",120+random(1000)); 
+	 if(find_call_out("mess")==-1)
+	   call_out("mess",120+random(1000));
 		}
 	else{
 	   say("%^RED%^"+ETOQCN+" holds the glaive but jerks violently"+
 	     " as brambles lash out from it, wrapping "+ETO->QO+" tightly.");
 	   write("%^ORANGE%^The glaive juts out brambles that bind"+
 	   " you fast when you place your hand on it."+
-	   "  \n %^RED%^They cut into you terribly."); 
+	   "  \n %^RED%^They cut into you terribly.");
 	   ETO->set_paralyzed(10,"You can't move!");
        ETO->set_bound(50,"Brambles bind you fast.");
 	   ETO->do_damage(100);
@@ -211,14 +211,14 @@ void init() {
 
 int grow(string str) {
    object rope;
- 
+
    if(ETO->query_bound() || ETO->query_unconscious()) {
      ETO->send_paralyzed_message("info",ETO);
 	 return 1;}
    if(!query_wielded()){
      write("You must wield the glaive to use this power.");
      return 1; }
-  
+
        tell_object(ETO,"%^ORANGE%^Your weapon grows a rope-like vine."+
 	     "  The action drains your energy.");
        tell_room(EETO,"%^ORANGE%^"+ETO->QCN+"'s weapon grows a rope-like vine.",ETO);
