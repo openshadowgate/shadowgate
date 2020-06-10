@@ -2380,108 +2380,169 @@ string query_paralyze_message(object who)
 //altered to allow best avoidance type to process
 //added ultra counter attack if both spring attack and masters parry process
 //Yves - 11/02/2018
+//Rewritten so remove multiple sequential avoidance rolls 
+//Uriel - 06/09/2020
+
 int check_avoidance(object who, object victim, object* weapons)
 {
     object EWHO, rider;
-    int athleticsWho, athleticsVictim, avoidance = 0, mod = 0, springAttack = 0, counterAttack = 0;
+    int attack, defend, roll, chance;
+    int parry = 0, scramble = 0, ride_by_attack = 0; 
+    int shot_on_the_run = 0, mount = 0;
+    int whirling_steel = 0, combo = 0; 
+    int avoidance = 0, mod = 0, springAttack = 0, counterAttack = 0;
+    string *avoid = ({}); 
     string avoidanceType = "";
 
-    if (!objectp(who) || !objectp(victim)) {
-        return 0;
-    }
-    if (!objectp(EWHO = environment(who))) {
-        return 0;
-    }
-    if (!objectp(victim)) {
-        return 0;
-    }
-    //shouldn't be parrying/scrambling, etc, if you are paralyzed
-    if (victim->query_paralyzed()) {
-        return 0;
-    }
-    //if they have the noMissChance property set, then don't miss via parry/scramble/ride by attack
-    if (who->query_property("noMissChance")) {
+// Check for errors, paralysis, and automatic hits
+    if (   !objectp(who) 
+        || !objectp(victim)
+        || !objectp(EWHO = environment(who))
+        || victim->query_paralyzed() 
+        || who->query_property("noMissChance")) {
         return 0;
     }
 
-    athleticsWho = (int)who->query_character_level();
-    athleticsWho += (int)who->query_skill("athletics");
-    athleticsVictim = (int)victim->query_character_level();
-    athleticsVictim += (int)victim->query_skill("athletics");
+// What kinds of avoidance are possible?
+// 4 basic types: parry, scramble, ride-by attack, shot on the run
+// 3 combos: parry+scramble, parry+ride-by attack, scramble+shot on the run
+// 1 special case: mounts (rider has mounted combat feat)
 
-    //scramble
-    if (victim->query_scrambling()) {
-        if (victim->is_ok_armour("thief") || victim->query_property("shapeshifted")) {
-            //can't flip around if you are laying on the ground
-            if (!victim->query_tripped()) {
-                if (victim->query_parrying()) {
-                    mod = -roll_dice(1, 10);
-                }
-                //else mod = roll_dice(1,8);
-                if ((roll_dice(1, athleticsVictim) + mod) > roll_dice(1, athleticsWho)) {
-                    avoidance = 1;
-                    avoidanceType = "TYPE_SCRAMBLE";
-                    if (FEATS_D->usable_feat(victim, "spring attack") && !random(5)) {
-                        springAttack = 1;
-                    }
-                }
+    if (victim->query_parrying()) { 
+       //dependencies checked in living.c
+       parry = 1;
+       avoid += ({"TYPE_PARRY"});  
+       //check for counterattack
+       if (FEATS_D->usable_feat(victim, "masters parry") 
+           && victim->is_wielding("dual wielding")) {
+           if (random(4)) {
+               // should happen frequently as it's a level 47 ability
+               counterAttack = 1; 
+           }
+       }
+    }
+    if (victim->query_scrambling()) { 
+       //dependencies checked in living.c
+       scramble = 1;
+       avoid += ({"TYPE_SCRAMBLE"});  
+       //check for spring attack 
+       if (FEATS_D->usable_feat(victim, "spring attack") && !random(5)) {
+            springAttack = 1;
+       }
+    }
+    if (FEATS_D->usable_feat(victim, "ride-by attack")
+       && victim->query_in_vehicle()) {
+       ride_by_attack = 1;
+       avoid += ({"TYPE_RIDDEN"});  
+    }
+    if (FEATS_D->usable_feat(victim,"shot on the run")
+       && sizeof(weapons) 
+       && !weapons[0]->is_lrweapon()) {
+       shot_on_the_run = 1;
+       avoid += ({"TYPE_SHOT"});  
+    }
+    if (victim->is_animal()) {
+        rider = (object)victim->query_current_rider();
+        if (objectp(rider)) {
+            if (FEATS_D->usable_feat(rider, "mounted combat")) {
+                mount = 1; 
+                avoid += ({"TYPE_MOUNT"});  
             }
         }
     }
-
-    if ((sizeof(weapons) && !weapons[0]->is_lrweapon()) || !FEATS_D->usable_feat(who, "point blank shot")) {
-        //ride-by attack
-        if (victim->query_in_vehicle()) {
-            if (FEATS_D->usable_feat(victim, "ride-by attack")) {
-                if (roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho)) {
-                    avoidance = 1;
-                    avoidanceType = "TYPE_RIDDEN";
-                }
-            }
-        }
-
-        //shot on the run
-        if (!FEATS_D->usable_feat(victim, "ride-by attack") && victim->query_property("shotontherun")) {
-            if (roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho)) {
-                avoidance = 1;
-                avoidanceType = "TYPE_SHOT";
-            }
-        }
-
-        //mounted combat
-        if (victim->is_animal()) {
-            rider = (object)victim->query_current_rider();
-            if (objectp(rider)) {
-                if (FEATS_D->usable_feat(rider, "mounted combat") && (roll_dice(1, athleticsVictim) > roll_dice(1, athleticsWho))) {
-                    avoidance = 1;
-                    avoidanceType = "TYPE_MOUNT";
-                }
-            }
-        }
+//  If avoidance is not possible then exit. 
+    if (!sizeof(avoid)) {
+        return 0; 
     }
 
-    //parry
-    if (sizeof(weapons) || FEATS_D->usable_feat(victim, "unarmed parry")) {
-        if ((victim->query_parrying()) && (!victim->query_property("shapeshifted"))) {
-            if (victim->query_property("shield_of_whirling_steel")) {
-                mod += victim->query_property("shield_of_whirling_steel");
-            }
-            if (victim->query_scrambling() && !victim->query_property("shield_of_whirling_steel")) {
-                mod = -roll_dice(1, 10);
-            }
-            //else mod = roll_dice(1,8);
-            if ((roll_dice(1, athleticsVictim) + mod) > roll_dice(1, athleticsWho)) {
-                avoidance = 1;
-                avoidanceType = "TYPE_PARRY";
-                if (FEATS_D->usable_feat(victim, "masters parry") && victim->is_wielding("dual wielding")) {
-                    if (random(4)) {
-                        counterAttack = 1;           // should happen frequently as it's a level 47 ability
-                    }
-                }
-            }
-        }
+//  Decide if there are multiple options for avoidance. 
+    if (   (parry && scramble) 
+        || (parry && ride_by_attack)
+        || (scramble && shot_on_the_run)) {
+        combo = 1;
     }
 
+//  This is a fractional version that accomodates 
+//  large differences in levels, like L40 vs L100.
+//  The math is very good but is less intuitive than
+//  a d20.   
+
+// Add bonuses for specific feats or avoidance combos
+    if (victim->query_property("shield_of_whirling_steel")) {
+         whirling_steel = 1;
+    }
+    if (combo && whirling_steel) { 
+         mod = 1.50; 
+    }    
+    else if (combo || whirling_steel) { 
+         mod = 1.25;
+    }
+    else {
+         mod = 1.00;
+    }
+
+//  Avoidance Roll
+    attack = (int) BONUS_D->new_bab(1,who);  
+    attack += (int)who->query_skill("athletics")/10;
+    defend = (int) BONUS_D->new_bab(1,victim);  
+    defend += (int)victim->query_skill("athletics")/10;
+    defend *= mod; // mod is a multiplier for fraction method
+    chance = (int) 1.0*defend/(attack + defend) * 1000;
+    roll = roll_dice(1,1000); 
+    if (roll <= chance) { 
+         avoidance = 1; 
+    } 
+/* Debug Code
+    tell_room(EWHO, " attack "+ attack);
+    tell_room(EWHO," defend "+ defend);
+    tell_room(EWHO," chance "+ chance);
+    tell_room(EWHO," roll   "+ roll);
+    tell_room(EWHO," avoidance "+ avoidance);
+*/
+
+/* // This is the d20 version
+   //
+   // This version is very transparent but it is not
+   // very good when level differences are large. 
+   // Basically D&D is designed for up to 20 levels 
+   // and the math starts to get bad after that. For example
+   // the chance of a L40 hitting a L60 and a L80 are the same.
+
+// Add bonuses for specific feats or avoidance combos
+    if (combo) {
+         mod += 2;
+    }    
+    if (victim->query_property("shield_of_whirling_steel")) {
+         mod += 3;
+    }
+
+//  Avoidance Roll
+    attack = (int) BONUS_D->new_bab(1,who);  
+    attack += (int)who->query_skill("athletics")/10;
+    attack += 10; // attacker gets 10 and defender gets 1d20
+    defend = (int) BONUS_D->new_bab(1,victim);  
+    defend += (int)victim->query_skill("athletics")/10;
+    defend += mod; 
+    roll   =  roll_dice(1,20);
+    if (roll == 20) {
+         avoidance = 1;
+    }
+    else if (roll == 1) {
+         avoidance = 0;
+    }  
+    else if (roll + defend >= attack) {
+         avoidance = 1;
+    }
+    else {
+         avoidance = 0;
+    }  
+*/
+//  If avoidance failed, exit. 
+    if (!avoidance) {
+        return 0; 
+    }
+    //choose the avoidance message
+    avoidanceType = avoid[random(sizeof(avoid))];
     //ensure the correct avoidance message fires
     if (counterAttack && springAttack) {
         avoidanceType = "TYPE_COMBINED";
