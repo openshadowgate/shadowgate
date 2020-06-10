@@ -1024,7 +1024,7 @@ void copy_list(object obj, string list_one, string list_two, string class_name)
         return;
     }
 
-    lists[list_two] = the_list;
+    lists[list_two] = deep_copy(the_list);
     obj->delete("prepared_lists");
     save_lists(obj, lists);
     tell_object(TP,"Copied "+list_one+" to "+list_two+".");
