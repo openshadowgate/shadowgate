@@ -45,7 +45,7 @@ void create()
 
   LEVEL  3 - Evasion
   LEVEL  6 - Resistance
-  LEVEL  9- Rapid Strikes
+  LEVEL  9 - Rapid Strikes
   LEVEL 15 - Stalwart
   
 The Animal Companion will hide if you use the 'hide_in_shadows' command, allowing you to effectively sneak about with your faithful friend.
@@ -120,6 +120,7 @@ void execute_feat()
     {
         tell_object(caster, "You dismiss your animal companion.");
         caster->remove_property("animal_companion");
+        caster->remove_property("has_elemental");
         companion && companion->remove();
         control && control->remove();
         return;
@@ -148,23 +149,25 @@ void execute_feat()
     companion->set_attacks_num(2 + class_level / 8);
     companion->set_mlevel("fighter", comp_hd);
     companion->set_max_hp(10 + (10 * comp_hd));
-    companion-set_hp(10 * comp_hd + 10);
+    companion->set_hp(10 * comp_hd + 10);
     companion->set_alignment(caster->query_alignment());
     companion->set_owner(caster);
        
     caster->set_property("animal_companion", companion);
     caster->add_follower(companion);
     caster->add_protector(companion);
+    caster->set_property("has_elemental", 1);
     
     control = new("/d/magic/obj/holder");
     control->set_caster(caster);
     control->move(caster);
+    control->set_elemental(companion);
     control->set_property("spell",TO);
     control->set_property("spelled", ({TO}) );
 
     companion->set_property("minion", caster);
     companion->move(environment(caster));
-    companion->set_heart_bet(1);
+    companion->set_heart_beat(1);
     
     //Setting companion stats based on type per SRD
     companion->set_stats("strength", valid_types[arg][0] + min( ({ class_level / 5, 6 }) ) );
