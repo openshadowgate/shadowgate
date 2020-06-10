@@ -89,7 +89,7 @@ int cmd_animal_companion(string str)
     return 1;
 }
 
-void execute_eat()
+void execute_feat()
 {
     object ob;
     
@@ -148,9 +148,9 @@ void execute_eat()
     companion->set_attacks_num(2 + class_level / 8);
     companion->set_mlevel("fighter", comp_hd);
     companion->set_max_hp(10 + (10 * comp_hd));
-    companion->set_hp(10 * comp_hd + 10);
+    companion-set_hp(10 * comp_hd + 10);
     companion->set_alignment(caster->query_alignment());
-    companion->set_owner(aster);
+    companion->set_owner(caster);
        
     caster->set_property("animal_companion", companion);
     caster->add_follower(companion);
@@ -164,7 +164,7 @@ void execute_eat()
 
     companion->set_property("minion", caster);
     companion->move(environment(caster));
-    companion->set_heart_beat(1);
+    companion->set_heart_bet(1);
     
     //Setting companion stats based on type per SRD
     companion->set_stats("strength", valid_types[arg][0] + min( ({ class_level / 5, 6 }) ) );
