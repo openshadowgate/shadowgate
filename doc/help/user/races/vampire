@@ -48,4 +48,4 @@
 
 %^RED%^Hunger is tracked with the %^BLUE%^$B%^RED%^ parameter found on the prompt and in %^BLUE%^<score>%^RED%^. You can saturate it with the %^BLUE%^<drain>%^RED%^ command. Draining increases max hp points, and heals. Just one feeding is sufficient to reset saturation.
 
-%^BOLD%^%^BLACK%^See also:%^RESET%^%^RED%^ races, undead, dhampir, status effects, weather, the covenant
+%^BOLD%^%^BLACK%^See also:%^RESET%^%^RED%^ races, undead, dhampir, status effects, weather
