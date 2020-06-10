@@ -8,14 +8,14 @@ void create() {
    set_terrain(SCRUB_LANDS);
    set_property("light",2);
    set_property("indoors",0);
-   set_short("%^YELLOW%^Road to the east of Tharis%^RESET%^");
+   set_short("%^ORANGE%^Road to the east of Tharis%^RESET%^");
    set_smell("default","Hints of the forest to the north reach your nostrils.");
    set_listen("default","The sounds of people milling about reach your ears.");
-	set_long("The road you travel passes through land left untamed by known civilizations.  To the east it seems to have"
-        " once have been meant to reach the sea.  It runs along the border between"+
+   set_long(query_short() + "\n%^GREEN%^The road you travel passes through land left untamed by known civilizations.  To the east it seems to have"
+        " once have been meant to reach the sea. It runs along the border between"+
         " the great forest to the north"+
-        " and the mountains which loom large to the south.  To the west is the rich"+
-        " city of Tharis.  You know that rich cities bring wealth but with"+
+        " and the mountains which loom large to the south. To the west is the rich"+
+        " city of Tharis. You know that rich cities bring wealth but with"+
         " that wealth bring thieves in great quantity. The road stops here, it"+
 	" is blocked off by heavy boulders that appear to have fallen down from"+
 	" the mountains. Thick grass and forest lie thick to either side of you.\n"
