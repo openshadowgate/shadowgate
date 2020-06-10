@@ -232,7 +232,6 @@ object find_object(string str)
 string query_ip_name(object ob)
 {
     string whom;
-    int i, j;
     if (sscanf(geteuid(previous_object()), "%sobj", whom) > 0) {
         if (member_group(whom, "superuser")) {
             return efun::query_ip_name();

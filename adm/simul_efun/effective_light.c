@@ -7,12 +7,14 @@
 
 int effective_light(object who)
 {
-  object *inv;   // for the players inventory
-  int light, i, tmp;
+    int light;
 
-  if(!who) return 0;
-    if((int)who->query_level() == 1) return 1; /* Let newbies see */
-  light = total_light(who);
-  inv = all_inventory(who);
-  return light;
+    if (!who) {
+        return 0;
+    }
+    if ((int)who->query_level() == 1) {
+        return 1;                              /* Let newbies see */
+    }
+    light = total_light(who);
+    return light;
 }
