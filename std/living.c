@@ -300,7 +300,7 @@ int query_parrying()
           }
     if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
         weapons = TO->query_wielded();
-        if (sizeof(weapons) == 1) {
+        if (sizeof(weapons) == 1 && !weapons[0]->is_lrweapon()) {
             return 1;
         }
     }
