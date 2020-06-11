@@ -50,19 +50,19 @@ void init()
 
 _pick(string str)
 {
-    if (call_other(TO, "select_" + ROLL_CHAIN[head], str)) {
+    if (select_common(str)) {
         head++;
         if (head >= sizeof(ROLL_CHAIN)) {
             review();
         } else {
-            call_other(TO, "display_" + ROLL_CHAIN[head]);
+            display_common();
         }
     } else {
-        call_other(TO, "display_" + ROLL_CHAIN[head]);
+        display_common();
     }
 }
 
-review()
+_review()
 {
     string i;
 
@@ -71,25 +71,36 @@ review()
     }
 }
 
-// MODULES
-
-select_class(string str)
+select_common(string str)
 {
-    string * choices = generate_class();
+    string * choices;
+
+    if (functionp((:TO, "select_" + $1, ROLL_CHAIN[head]:))) {
+        return call_other(TO, "select_" + ROLL_CHAIN[head], str);
+    }
+
+    choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
     if (!member_array(str, choices)) {
         write("INVALID SELECTION " + str);
         return 0;
     }
 
-    char_sheet["class"] = str;
+    char_sheet[ROLL_CHAIN[head]] = str;
     return 1;
 }
 
-display_class()
+display_common()
 {
     string i;
-    string * choices = generate_class();
+    string * choices;
+
+    if (functionp((:TO, "display_" + $1, ROLL_CHAIN[head]:))) {
+        call_other(TO, "display_" + ROLL_CHAIN[head]);
+        return;
+    }
+
+    choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
     foreach(i in choices)
     {
@@ -97,14 +108,25 @@ display_class()
     }
 }
 
+// MODULES
+
 string *generate_class()
 {
     string * choices;
 
     choices = get_dir("/std/class/*.c");
     choices = map(choices, (:replace_string($1, ".c", ""):));
-    choices = filter_array(choices, (:!find_object_or_load("/std/class/" + $1)->is_prestige_class():));
-    choices = filter_array(choices, (:!find_object_or_load("/std/class/" + $1)->is_locked_class():));
+    choices = filter_array(choices, (:!("/std/class/" + $1)->is_prestige_class():));
+    choices = filter_array(choices, (:!("/std/class/" + $1)->is_locked_class():));
 
     return choices;
+}
+
+string *generate_race()
+{
+    string * choices;
+
+    choices = get_dir("/std/races/*.c");
+    choices = map(choices, (:replace_string($1, ".c", ""):));
+    choices = map(choices, (:member_array($1, ("/std/class/" + $2)->restricted_races()) == -1:), char_sheet["class"]);
 }
