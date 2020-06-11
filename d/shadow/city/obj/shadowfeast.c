@@ -10,39 +10,23 @@ int duration,FLAG;
 void create()
 {
     ::create();
-    set_id( ({ "table","banquet table","banquet","feast","heroes feast" }) );
-    set_name("Heroes Feast");
-    set_short("%^YELLOW%^An elaborate banquet table%^RESET%^");
-    set_long("%^ORANGE%^This huge banquet table is covered with a silken cloth.  "+
-		"Woven upon the cloth are images of all sorts of dragons, "+
-		"celestials, demons, devils, elementals, and other fantastic"+
-		" beasts, displayed in a heroic fashion.  The table is crowded"+
-		" with platters of %^BOLD%^%^WHITE%^silver%^RESET%^%^ORANGE%^ "+
-		"and %^YELLOW%^gold%^RESET%^%^ORANGE%^, each overflowing with "+
-		"mouth-watering treats.  Racks of %^RED%^roasted meat%^ORANGE%^,"+
-		" %^BOLD%^%^RED%^thick juicy steaks%^RESET%^%^ORANGE%^,"+
-		" %^YELLOW%^stuffed pheasants%^RESET%^%^ORANGE%^, and "+
-		"%^BOLD%^%^CYAN%^seared seafood%^RESET%^%^ORANGE%^ rest on silver platters.  "+
-		"A large cornucopia filled with fresh %^BOLD%^%^GREEN%^a%^YELLOW%^p%^RED%^"+
-		"p%^GREEN%^l%^YELLOW%^e%^RED%^s%^RESET%^%^ORANGE%^, %^MAGENTA%^grapes"+
-		"%^ORANGE%^, oranges, %^YELLOW%^lemons%^RESET%^%^ORANGE%^, "+
-		"%^BOLD%^%^MAGENTA%^peaches %^RESET%^%^ORANGE%^and %^BOLD%^%^GREEN%^"+
-		"melons%^RESET%^%^ORANGE%^ spills out onto the cloth.  In golden"+
-		" dishes %^GREEN%^roasted asparagus%^ORANGE%^, %^RED%^baked potatoes"+
-		"%^ORANGE%^, roasted ears of %^YELLOW%^corn%^RESET%^%^ORANGE%^, "+
-		"and %^BOLD%^%^GREEN%^fresh greens%^RESET%^%^ORANGE%^ lay.  Platters of "+
-		"gold hold fresh baked %^MAGENTA%^pastries%^ORANGE%^,"+
-		" %^BOLD%^%^WHITE%^cakes%^RESET%^%^ORANGE%^, and %^CYAN%^pies%^ORANGE%^.  "+
-		"Glass decanters of %^MAGENTA%^wine%^ORANGE%^, %^BOLD%^%^CYAN%^water%^RESET%^"+
-		"%^ORANGE%^, and %^YELLOW%^ale%^RESET%^%^ORANGE%^ rest near"+
-		" ornate goblets. As you give a second look at the feast before you, "+
-		"even more dishes seem to materialize.  A %^BOLD%^%^MAGENTA%^feast%^RESET%^"+
-		"%^ORANGE%^ fit truly for a hero!\n\nType <feast> to eat from the table.");
+    set_id( ({ "table","food-stall","food stall","feast","heroes feast","stall" }) );
+    set_name("food-stall");
+    set_short("%^YELLOW%^A long food stall%^RESET%^");
+    set_long("%^ORANGE%^This long table is covered with a patchwork stained cloth.  "+
+		"From the color and quality, it was clearly gathered from tables across "+
+		"the city. The stall's constant use means that there is never time to "+
+		"clean up the many spills and crumbs that cover it. On top are "+
+		" woooden plates, wooden and clay bowls, more cloths for holding food, "+
+		"and iron pots of bland soups, stews of strange tubers, and hard, plain bread."+
+		" Jugs of water and watered down wine dot the stall, refilling from wooden"+
+		" barrels sitting back near the volunteers and dead-eyed civil servants."+
+		
+		"\n\nType <feast> to eat from the table.");
     set_weight(100000);
     set("value", 0);
     set_property("no animate",1);
     set_property("no offer", 1);
-    set_heart_beat(10000000);
 }
 
 void feast_func()
@@ -70,47 +54,5 @@ void init()
 {
     ::init();
     add_action("feast_func","feast");
-    return;
-}
-
-void set_duration(int x)            { duration = x; }
-void set_caster(object obj)         { caster = obj; }
-void set_casting_spell(object obj)  { casting_spell = obj; }
-
-void heart_beat()
-{
-    if(!objectp(ETO))
-    {
-        dest_effect();
-        return;
-    }
-    if(!objectp(caster) || !userp(caster))
-    {
-        call_out("dest_effect",duration);
-        set_heart_beat(0);
-        return;
-    }
-    if(!present(caster,ETO) && !FLAG)
-    {
-        FLAG = 1;
-        call_out("dest_effect",duration);
-        return;
-    }
-    if(present(caster,ETO) && FLAG)
-    {
-        FLAG = 0;
-        remove_call_out("dest_effect");
-        return;
-    }
-    return;
-}
-
-void dest_effect()
-{
-    tell_object(ETO, "The banquet table vanishes before your eyes!");
-    if (objectp(casting_spell)) {
-        casting_spell->dest_effect();
-    }
-    TO->remove();
     return;
 }
