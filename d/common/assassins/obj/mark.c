@@ -1,6 +1,5 @@
 #include <std.h>
 #include <terrain.h>
-#include "../assassin_den.h"
 
 inherit OBJECT;
 
@@ -59,14 +58,14 @@ void heart_beat()
     if(present("voidhuntress",EETO))
         return;
 
-    creature = new(MON+"voidhuntress");
+    creature = new("/d/common/assassins/mon/voidhuntress");
 
     tell_room(EETO, "%^RED%^An assassin steps out of shadows and attacks "+ ETO->QCN + "!");
 
     level = ETO->query_character_level();
 
     creature->set_property("fighter_attacks_mod",level/4);
-    creature->set_property("magic resistance",level + 30);
+    creature->set_property("magic resistance",level + 10);
     creature->set_property("spell damage resistance",level);
     creature->add_damage_bonus(8+(level/8));
     creature->add_attack_bonus(8+(level/8));
