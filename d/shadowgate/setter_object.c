@@ -129,4 +129,21 @@ string *generate_race()
     choices = get_dir("/std/races/*.c");
     choices = map(choices, (:replace_string($1, ".c", ""):));
     choices = map(choices, (:member_array($1, ("/std/class/" + $2)->restricted_races()) == -1:), char_sheet["class"]);
+
+    return choices;
+}
+
+string *generate_subrace()
+{
+    string * choices = ({});
+
+    choices += ("/std/races/" + char_sheet["race"])->query_subraces(ETO);
+    if (sizeof(choices)) {
+        choices = map(choices, (:
+                                member_array($2, ("/std/races/" + char_sheet["race"])->restricted_classes($1)) == -1
+                                :), char_sheet["class"]);
+    }
+
+    return choices;
+
 }
