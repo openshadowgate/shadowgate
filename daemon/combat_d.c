@@ -701,9 +701,9 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
                 fired = 1;
             }
             if (fired) {
-                damage += get_lrdamage(attacker, weapon, targ);
+                damage += get_damage(attacker, weapon, targ);
                 if (FEATS_D->usable_feat(attacker, "point blank shot")) {
-                    damage += BONUS_D->damage_bonus(attacker->query_stats("dexterity"));
+                    damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("dexterity"));
                 }
             }
         }else {
