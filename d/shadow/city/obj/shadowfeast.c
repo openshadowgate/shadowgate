@@ -10,8 +10,8 @@ int duration,FLAG;
 void create()
 {
     ::create();
-    set_id( ({ "table","food-stall","food stall","feast","heroes feast","stall" }) );
-    set_name("food-stall");
+    set_id( ({ "table","shadowfeast","shadow feast","feast","heroes feast","stall" }) );
+    set_name("shadow feast");
     set_short("%^YELLOW%^A long food stall%^RESET%^");
     set_long("%^ORANGE%^This long table is covered with a patchwork stained cloth.  "+
 		"From the color and quality, it was clearly gathered from tables across "+
