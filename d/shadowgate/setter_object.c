@@ -11,7 +11,7 @@ mapping char_sheet = ([]);
 void create()
 {
     ::create();
-    set_short("A strange and powerful object");
+    set_short("%^MAGENTA%^A strange and powerful object%^RESET%^");
     set_long("%^BOLD%^%^WHITE%^This strange object radiates power " +
              "the likes of which you have never before seen. It seems to contain " +
              "the very essence of life, allowing one who holds it to " +
@@ -23,29 +23,24 @@ void create()
              "of current options that this object affords you. It has " +
              "attached itself to you and will be with you for as long as you " +
              "are a newbie character in the world of ShadowGate.%^RESET%^");
-    set_property("no drop", 1);
-    set_property("death keep", 1);
+    /* set_property("no drop", 1); */
+    /* set_property("death keep", 1); */
     set_id(({ "setter object", "object", "charactercreationsetterobject" }));
     set_weight(0);
-    set_property("no animate", 1);
-    set_property("soulbound", 1);
+    /* set_property("no animate", 1); */
+    /* set_property("soulbound", 1); */
 }
 
 void init()
 {
     ::init();
-    if (!objectp(TP)) {
-        return;
-    }
-    if (!interactive(TP)) {
-        return;
-    }
-    if (userp(ETO))
-        if (!newbiep(ETO)) {
-            TO->remove();
-        }
+    /* if (userp(ETO)) */
+    /*     if (!newbiep(ETO)) { */
+    /*         TO->remove(); */
+    /*     } */
 // actions to add: reset done reroll add review pick check finalize brief recommended random
     add_action("_pick", "pick");
+    add_action("_review", "review");
 }
 
 _pick(string str)
@@ -60,23 +55,21 @@ _pick(string str)
     } else {
         display_common();
     }
+    return 1;
 }
 
 _review()
 {
-    string i;
-
-    foreach(i in keys(char_sheet)) {
-        tell_object(ETO, i + ":" + char_sheet[i]);
-    }
+    display_common();
+    return 1;
 }
 
 select_common(string str)
 {
     string * choices;
 
-    if (functionp((:TO, "select_" + $1, ROLL_CHAIN[head]:))) {
-        return call_other(TO, "select_" + ROLL_CHAIN[head], str);
+    if (call_other(TO, "select_" + ROLL_CHAIN[head], str)) {
+        return 1;
     }
 
     choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
@@ -95,8 +88,7 @@ display_common()
     string i;
     string * choices;
 
-    if (functionp((:TO, "display_" + $1, ROLL_CHAIN[head]:))) {
-        call_other(TO, "display_" + ROLL_CHAIN[head]);
+    if (call_other(TO, ("display_" + ROLL_CHAIN[head]))) {
         return;
     }
 
@@ -104,7 +96,7 @@ display_common()
 
     foreach(i in choices)
     {
-        write("%^BOLD%^%^MAGENTA%^" + i);
+        write("%^BOLD%^%^MAGENTA%^" + capitalize(i));
     }
 }
 
@@ -145,5 +137,4 @@ string *generate_subrace()
     }
 
     return choices;
-
 }
