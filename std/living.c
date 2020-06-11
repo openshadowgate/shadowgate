@@ -295,10 +295,9 @@ int query_parrying()
     object* weapons;
     if (FEATS_D->usable_feat(TO, "parry")) {
         weapons = TO->query_wielded();
-        if (sizeof(weapons)) {
+        if (sizeof(weapons) && !weapons[0]->is_lrweapon()){
             return 1;
-        }
-    }
+          }
     if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
         weapons = TO->query_wielded();
         if (sizeof(weapons) == 1) {
@@ -308,8 +307,9 @@ int query_parrying()
     if (FEATS_D->usable_feat(TO, "unassailable parry")) {
         weapons = TO->query_wielded();
         weapons = distinct_array(weapons);
-        if (sizeof(weapons) > 1) {
+        if (sizeof(weapons) > 1 && !weapons[0]->is_lrweapon() && !weapons[1]->is_lrweapon()) {
             return 1;
+          }
         }
     }
     if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
@@ -325,6 +325,10 @@ int query_parrying()
         if (!sizeof(weapons)) {
             return 1;
         }
+    }
+    if(!parrying)
+    {
+      return 0;
     }
     return parrying;
 }
