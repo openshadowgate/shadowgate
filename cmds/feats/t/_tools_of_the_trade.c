@@ -16,7 +16,7 @@ void create() {
 int prerequisites(object ob) {
    if(!objectp(ob)) { return 0; }
 
-   if((int)ob->query_class_level("thief") < 12 && (int)ob->query_class_level("bard") < 12) {
+   if((int)ob->query_class_level("thief") < 10 && (int)ob->query_class_level("bard") < 10) {
       dest_effect();
       return 0;
    }

@@ -54,7 +54,7 @@ int get_exp_cost(object obj, int num)
     }
     extra = (int)obj->query_exp() - total_exp_for_level(level);
 
-    cost = total_exp_for_level(level) - total_exp_for_level(level - (num - level_adjust));
+    cost = total_exp_for_level(level) - total_exp_for_level(level - (num + level_adjust));
     cost = cost + extra;
     return cost;
 }
