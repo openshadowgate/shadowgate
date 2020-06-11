@@ -511,7 +511,8 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         tell_object(attacker, "%^CYAN%^You cry a brief warsong and unleash wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^");
         tell_object(target, "%^CYAN%^" + attacker->QCN + " shouts a brief warsong, and %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ burns through you!%^RESET%^");
         tell_room(environment(attacker), "%^CYAN%^" + attacker->QCN + " shouts a brief warsong and unleashes wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^", ({ target, attacker }));
-        target->do_damage(target->return_target_limb(), roll_dice(1, 8)); //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
+        target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped"); //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
+        //attempting to debug to see if it's multiplied - Odin
     }
     if (weapon->is_lrweapon() &&
         FEATS_D->usable_feat(attacker, "arcane arrows") &&
