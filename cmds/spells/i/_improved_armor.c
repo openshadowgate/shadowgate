@@ -18,7 +18,8 @@ void create()
     set_spell_level(([ "mage" : 6 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS improved armor [on TARGET]");
-    set_description("With this spell, the caster surrounds themselves with strong force field that absorbs weak attacks and spells. Furthermore, this spell grants magic resistance equal to caster level.  This spell won't work together with lesser variant, as it is essentially the same spell pumped with power.");
+    set_damage_desc("+8 AC");
+    set_description("With this spell, the caster surrounds themselves with strong force field that absorbs weak attacks and spells. This spell won't work together with lesser variant, as it is essentially the same spell pumped with power.");
     set_verbal_comp();
     set_somatic_comp();
     set_components(([ "mage" : ([ "dragon scale" : 1, ]), ]));
@@ -34,7 +35,6 @@ int preSpell()
         tell_object(caster, "%^BOLD%^%^BLACK%^You feel your spell repelled...");
         return 0;
     }
-    mrbonus = clevel;
     return 1;
 }
 
@@ -51,9 +51,6 @@ void spell_effect(int prof)
         TO->remove();
         return;
     }
-
-    benchmark = target->query_hp();
-    tally = 0;
 
     if (target->query_property("armoured")) {
         tell_object(caster, "The spell is repelled by its own magic.");
@@ -86,11 +83,6 @@ void spell_effect(int prof)
     }
 
     target->add_ac_bonus(bonus);
-    if (!caster->query_property("raised resistance")) {
-        caster->set_property("magic resistance", mrbonus);
-        caster->set_property("raised resistance", 1);
-        mrflag = 1;
-    }
     target->set_property("spelled", ({ TO }));
     target->set_property("armoured", 1);
     addSpellToCaster();
@@ -129,12 +121,7 @@ void dest_effect()
 
     if (objectp(target)) {
         target->add_ac_bonus(-1 * bonus);
-        target->remove_property_value("spelled", ({ TO }));
-        if (mrflag) {
-            caster->set_property("magic resistance", -mrbonus);
-            caster->set_property("raised resistance", 0);
-            mrflag = 0;
-        };
+        target->remove_property_value("spelled", ({ TO }))
         tell_object(target, "%^CYAN%^The magic shielding around you glows briefly, then fades away.");
         tell_room(environment(target), "%^CYAN%^" + target->QCN + " glows briefly.", target);
         target->remove_property("armoured");

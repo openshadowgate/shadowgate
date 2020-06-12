@@ -8,6 +8,7 @@ void create() {
     set_author("nienne");
     set_spell_name("casters lament");
     set_spell_level(([ "warlock" : 4 ]));
+    set_damage_desc("clevel / 6 + 2 but no more than 8 to all saves OR shatters magic on cursed item");
     set_syntax("cast CLASS casters lament (on <object> [at <player>])");
     set_description("This invocation harnesses the greatest of a warlock's natural aptitude for manipulating "
 "magical energies and items. For the first, if cast with no target, it will imbue the warlock with a considerable "
@@ -30,8 +31,8 @@ void spell_effect(int prof) {
     object ob, ob2;
     int ench;
 
-    if(!arg) { // if no targetting, raise MR of the caster - same formula as prot from spells/etc
-      if(caster->query_property("raised resistance")){
+    if(!arg) { // if no targetting, raise saves of the caster - same formula as prot from spells/etc
+      if(caster->query_property("protection from spells")){
         tell_object(caster,"%^BOLD%^Your invocation conflicts with existing magic and is repelled forcibly.");
         dest_effect();
         return;
@@ -39,12 +40,12 @@ void spell_effect(int prof) {
       tell_object(caster,"%^MAGENTA%^You press your hands together and the energy r%^CYAN%^i%^MAGENTA%^pp%^RED%^l%^BOLD%^%^MAGENTA%^e%^RESET%^%^MAGENTA%^s and flows back over itself, down your arms and over your body to encase you in protective spellcraft!%^RESET%^");
       tell_room(place,"%^MAGENTA%^"+caster->QCN+" presses "+caster->QP+" hands together and the energy r%^CYAN%^i%^MAGENTA%^pp%^RED%^l%^BOLD%^%^MAGENTA%^e%^RESET%^%^MAGENTA%^s and flows back over itself, down "+caster->QP+" arms and over "+caster->QP+" body!%^RESET%^",caster);
       wasbuff = 1;
-      lower = clevel;
-      caster->set_property("magic resistance",lower);
-      caster->set_property("raised resistance",1);
+      lower = clevel / 6 + 2;
+      lower = lower > 8 ? 8 : lower;
+      target->add_saving_bonus("all",lower);
+      target->set_property("protection from spells", 1);
       addSpellToCaster();
-      spell_successful();
-      call_out("dest_effect",80 + clevel*8);
+      call_out("dest_effect", clevel * (10 + roll_dice(1, 6)) * ROUND_LENGTH);
       return;
     }
     if (sscanf(arg,"%s at %s", what, who) != 2) {
@@ -87,8 +88,8 @@ void spell_effect(int prof) {
 void dest_effect(){
     if(wasbuff) {
       if (objectp(caster)) {
-        caster->set_property("magic resistance",(-1*lower));
-        caster->set_property("raised resistance",-1);
+        target->add_saving_bonus("all",-lower);
+        target->remove_property("protection from spells");
         tell_room(environment(caster),"%^MAGENTA%^Energy flickers briefly around "+caster->QCN+" before waning.%^RESET%^",caster);
         tell_object(caster,"%^MAGENTA%^A breath of cool air reaches your skin as the protective invocation flickers and wanes!%^RESET%^");
       }
