@@ -30,7 +30,7 @@ void create() {
     eyeColor();
     set_race("human");
     set_hd(60+random(10),1);
-    set_hp(roll_dice(query_hd(),40));
+    set_hp(TO->query_max_hp());
     set_new_exp(20,"normal");
     set_class("fighter");
         add_search_path("/cmds/fighter");
