@@ -11,36 +11,10 @@ void create()
 	set_property("light",2);
 	set_short("Pine Street");
 	set_long(
-	"You are on Pine street.\n"+
-	"This is close to the intersection of"+
-	" Pine and Crescent. To the west there is a sign hanging"+
-	" over the entrance of a house. The sign is engraved with"+
-	" the symbol of a leather worker. The smell of leather is"+
-	" thick in the air here. The street continues up to the"+
-	" northwest. To the southeast you can see the intersection"+
-	" of Pine and Crescent. There is a Healer and the guard tower"+
-	" that way."
+	"%^YELLOW%^This part of the city lies in ruins, covered in a black haze.%^RESET%^"
 	);
-	set("night long",
-	"You are on Pine street.\n"+
-	"Inviting light spills forth from"+
-	" the doorway of the house on the west. There is a sign above"+
-	" the entrance with the symbol of a leather worker engraved"+
-	" on it. To the northwest Pine street continues and you"+
-	" can see a street light helping to light the way."+
-	" To the southeast is the intersection of Pine and Crescent"+
-	" with another street light there. The guard tower and Healer"+
-	" are also in that direction."
-	);
-	set_smell("default","The smell of leather is in the air.");
-	if(query_night() == 1) {
-		set_listen("default","It is fairly quiet here at this"+
-		" time of night.");
-	}
-	else {
-		set_listen("default","The city is alive with the noises"+
-		" of citizens and shoppers.");
-	}
+	set_smell("default","It smells of death and decay.");
+	set_listen("default","The city is dead.");
 	set_items(([
 	"street sign" : "This is Pine Street.",
 	({"street","cobblestones","cobbles","road","path"}) : "The"+

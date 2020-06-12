@@ -2,7 +2,7 @@
 #include "../antioch.h"
 inherit ROOM;
 
-void create()
+void create() 
 {
 	::create();
    set_terrain(LIGHT_FOREST);
@@ -11,15 +11,11 @@ void create()
 	set_property("light",2);
 	set_short("Road Through the Woods");
 	set_long(
-	"%^GREEN%^Road Through the Woods
-%^ORANGE%^This is a little %^CYAN%^road%^ORANGE%^ through the %^CYAN%^C%^BOLD%^%^BLACK%^h%^RESET%^%^CYAN%^aru %^CYAN%^Mou%^BOLD%^%^BLACK%^n%^RESET%^%^CYAN%^t%^BOLD%^%^BLACK%^a%^RESET%^%^CYAN%^i%^BOLD%^%^BLACK%^n%^BLACK%^s%^RESET%^%^CYAN%^.%^ORANGE%^ It curves to the southwest and back to the east are the ruins of Antioch. The road is mostly dirt, though a few %^CYAN%^s%^BOLD%^%^BLACK%^t%^RESET%^%^CYAN%^ones%^ORANGE%^ have been set along the sides to help define it more. It is easily wide enough for several people to walk side by side.\n"
+	"%^GREEN%^Road Through the Woods\n"+
+	"%^ORANGE%^This is a little %^CYAN%^road%^ORANGE%^ through the %^CYAN%^C%^BOLD%^%^BLACK%^h%^RESET%^%^CYAN%^aru %^CYAN%^Mou%^BOLD%^%^BLACK%^n%^RESET%^%^CYAN%^t%^BOLD%^%^BLACK%^a%^RESET%^%^CYAN%^i%^BOLD%^%^BLACK%^n%^BLACK%^s%^RESET%^%^CYAN%^.%^ORANGE%^ It curves to the southwest and back to the east are the ruins of Antioch. The road is mostly dirt, though a few %^CYAN%^s%^BOLD%^%^BLACK%^t%^RESET%^%^CYAN%^ones%^ORANGE%^ have been set along the sides to help define it more. It is easily wide enough for several people to walk side by side. %^BOLD%^%^RED%^To the west, you can see tendrils of darkness rise from the ruined city of New Antioch and the wreckage of a ruined shrine. It fills you with dread and you feel your skin begin to crawl and itch. Best turn back!"
 	);
-	set("night long",
-	"%^GREEN%^Road Through the Woods
-%^BLUE%^The peaks of the %^CYAN%^Charu %^CYAN%^M%^BOLD%^%^BLACK%^o%^BLACK%^u%^BLACK%^n%^RESET%^%^CYAN%^tai%^BOLD%^%^BLACK%^n%^RESET%^%^CYAN%^s%^BLUE%^ are outlined by the moon. The forest seems more dangerous at night, the dark %^CYAN%^trees%^BLUE%^ seem to crowd in close to the trail and cast strange shadows over the %^CYAN%^road%^BOLD%^%^BLACK%^.%^RESET%^%^BLUE%^ The road bends to the southwest here, back to the east are the ruins of Antioch. %^CYAN%^St%^BOLD%^%^BLACK%^o%^BLACK%^n%^BLACK%^e%^BLACK%^s%^RESET%^%^BLUE%^ line the path to either side, but it is basically a wide dirt trail that doesn't seem to be used very often.\n"
-	);
-	set_smell("default","You smell the scent of pine trees.");
-	set_listen("default","The wind whistles through the trees.");
+	set_smell("default","You smell the scent of pine trees and death.");
+	set_listen("default","The wind whistles through the trees, whispering of your worst nightmares.");
 	set_items(([
 	"mountains" : "The mountains extend as far as the eye can see.",
 	({"road","little road","path","trail"}) : "The road curves"+
@@ -30,6 +26,7 @@ void create()
 	({"trees","tree","pines"}) : "The trees are thick and tall"+
 	" and block out a lot of the light, casting strange shadows"+
 	" on the trail.",
+	"tendrils" : "Tendrils of darkness flow from an abyss to the west, turning the sky black and blanketing the world in darkness.",
 	]));
 	set_exits(([
 	"east" : ROOMS+"trail3",

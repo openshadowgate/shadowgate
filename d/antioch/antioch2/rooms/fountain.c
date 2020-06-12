@@ -25,31 +25,10 @@ void create()
 	" street continues to the west and east with shops along the way"+
 	" and directly south of here is a large stone building with a"+
 	" wooden sign with the symbol of a bank on it. To the north Oak"+
-	" street runs to the palace."
+	" street runs to the palace. %^YELLOW%^The city is in ruins!%^RESET%^"
 	);
-	set("night long",
-	"This is the intersection of Cherry street with Oak. A large"+
-	" and impressive %^BOLD%^white marble fountain%^RESET%^ is here."+
-	" In the center of the fountain is a statue of Ignatius humbly"+
-	" kneeling down in the water with his arms outstretched,"+
-	" imploring for forgiveness. %^YELLOW%^Golden tears%^RESET%^"+
-	" spill down his handsome face, glowing in the darkness of the"+
-	" night and returning to a normal %^BOLD%^%^CYAN%^blue%^RESET%^"+
-	" as they join with the rest of the %^BOLD%^%^BLUE%^water%^RESET%^."+
-	" There seems to be a light shining from below the water,"+
-	" clearly illuminating the statue. The base of the fountain is"+
-	" three feet in height and circular with a diameter of approximately"+
-   " four feet. On the base of the fountain many %^BOLD%^%^RED%^runes%^RESET%^ are carved,"+
-	" they tell of the sad tale of Antioch. Cherry street continues"+
-	" to the east and west with shops along the way, though they"+
-	" all appear to be closed at this time of night. Directly to the"+
-	" south is a large stone bank that looks as though it is still open."+
-	" To the north Oak street travels to the palace."
-	);
-	set_smell("default","The scent of spring flowers seems to be"+
-	" on the breeze.");
-	set_listen("default","The gentle fall of water from the fountain"+
-	" is quite soothing to your nerves.");
+	set_smell("default","It smells of death and decay.");
+	set_listen("default","The city is dead.");
 	set_items(([
 	({"street","cobblestones","cobbles","road","path"}) : "The"+
 	" street is paved with cobblestones.",

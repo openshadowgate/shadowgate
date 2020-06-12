@@ -3,7 +3,7 @@
 
 #include <std.h>
 #include "../antioch.h" 
-#include <daemons.h>
+#include <daemons.h> 
 
 inherit CVAULT;
 
@@ -17,17 +17,9 @@ void create()
 	set_property("light",2);
 	set_short("A cobbled street");
 	set_long("A cobbled street.\n"+
-"You are standing just inside the impressive gates of the New City of Antioch. The city is bustling with life, yet the thoroughfare is kept neat and relatively clean. To the west, there is a square with a large tree in its center, behind which looms the city jail. The cobblestone street leads you further north, towards a busy intersection, where you can see an entrance to the guard tower. Opposite the tower, you can barely make out a plaque with the symbol of a Healer engraved onto it.");
-	set("night long",
-	"A cobbled street.\n"+
-"You are standing just inside the impressive gates of the New City of Antioch. Warm light spills forth from many doorways to help light the way, and a street light is posted at the intersection up north. To the west, there is a square with a large tree in its center, behind which looms the city jail. The cobblestone street leads you further north, towards a busy intersection, where you can see an entrance to the guard tower. Opposite the tower, you can barely make out a plaque with the symbol of a Healer engraved onto it.");
-    set_smell("default","There is a faint herbal scent in the air.");
-    if(query_night() == 1) {
-        set_listen("default","You hear the sounds of a bustling city all around.");
-        }
-    else {
-        set_listen("default","The streets are quiet, but you think you hear the low sound of snoring coming from the west.");
-        }
+	"%^BOLD%^%^BLACK%^The city lies in ruins, covered in a dark, black haze. To the west, a gaping hole has opened up into the abyss. Tendrils of darkness spew out from it, blanketing the world in shadows. %^RED%^Even here, you feel your skin begin to boil and your soul is slowly crushed by terrible nightmares. %^RESET%^");
+    set_smell("default","The smell of death hangs in the air.");
+    set_listen("default","You hear the sound of your worst nightmares to the west.");
 	set_items(([
         ({"guard tower","tower"}) : "There's a guard tower on the"+
         " right, it looks like there's an entrance to it to the north.",
@@ -42,7 +34,7 @@ void create()
         " street is paved with cobblestones.",
         ]));
 	set_exits(([
-        "east" : ROOMS+"gates",
+        //"east" : ROOMS+"gates",
         "west" : ROOMS+"square",
         "north" : ROOMS+"street2",
         ]));

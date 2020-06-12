@@ -28,7 +28,7 @@ void create()
 	" the left is a large silver mirror. The mirror is approximately"+
 	" seven feet tall and oval shaped. It has a frame and base made"+
 	" of shadowtop wood and it is fixed to the back wall. At the foot"+
-	" of the bed is a large chest."
+	" of the bed is a large chest.%^RED%^The church is in ruins, but this room appears somewhat intact still."
 	);
 	set_smell("default","The room smells fresh and clean.");
 	set_listen("default","A heavy silence hangs in the room.");

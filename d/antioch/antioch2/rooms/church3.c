@@ -11,17 +11,10 @@ void create()
 	set_property("light",2);
 	set_short("%^BOLD%^Grand Church of Antioch");
 	set_long(
-	"There is a grand stair case here, it spirals up for at least"+
-	" another level and probably beyond, but it is hard to see because"+
-	" it winds out of sight. The chants of acolytes drift to your"+
-	" ears from upstairs. The second floor must be where they study"+
-	" and sleep. There are stone sconces here that hold some of the"+
- 	" incense that is throughout the church. The acolytes are probably"+
-	" responsible for keeping them lit and fresh."
+	"The church has been destroyed, but you seem to be able to make your way upstairs, if you really wanted to."
 	);
-	set_smell("default","The scent of incense is relaxing.");
-	set_listen("default","You can hear the chants drifting down from"+
-	" the acolytes upstairs.");
+	set_smell("default","It smells of death.");
+	set_listen("default","It is silent like the grave.");
 	set_items(([
 	({"sconce","sconces","stone sconces"}) : "The sconces are carved"+
 	" out of the stone blocks themselves, actually part of the wall."+
