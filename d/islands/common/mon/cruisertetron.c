@@ -623,6 +623,10 @@ void heart_beat()
     if (!objectp(ETO)) {
         return;
     }
+    if (!sizeof(TO->query_wielded())){
+      command("wield axe");
+    }
+
 
     live = all_living(ETO);
     live -= ({ TO });

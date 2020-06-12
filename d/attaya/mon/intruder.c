@@ -137,6 +137,9 @@ void heart_beat()
         TO->set_hp((int)TO->query_max_hp());
         return;
     }
+    if (!sizeof(TO->query_wielded())){
+      command("wield bonestripper");
+    }
 }
 
 void init(){
