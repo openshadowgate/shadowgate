@@ -2390,12 +2390,14 @@ int check_avoidance(object who, object victim, object* weapons)
     string *avoid = ({});
     string avoidanceType = "";
 
-// Check for errors, paralysis, and automatic hits
+// Check for errors, paralysis, and automatic hits, adding tripped to unify avoidance
     if (   !objectp(who)
         || !objectp(victim)
         || !objectp(EWHO = environment(who))
         || victim->query_paralyzed()
-        || who->query_property("noMissChance")) {
+        || who->query_property("noMissChance")
+        || victim->query_tripped())
+        {
         return 0;
     }
 
