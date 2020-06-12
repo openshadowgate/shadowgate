@@ -177,7 +177,7 @@ protected int legal_bounty(object victim, object attacker) {
     //This is left in so that stuff that calls it doesn't break.  bounties are
     //  now taken care of in a call to collect_law_bounty from the magistrate.
     //return 0;
-    return collect_law_bounty(victim, attacker, 1);
+    //return collect_law_bounty(victim, attacker, 1); references undefined function
 }
 
 string *query_bounties() {
