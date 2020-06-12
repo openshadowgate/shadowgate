@@ -16,7 +16,7 @@ void create()
     set_weight(0);
     set_property("no animate",1);
     set_heart_beat(2);
-    tracker = time() + 3600+random(82800);
+    tracker = time() + 3600;
     reason = "";
 }
 
@@ -48,21 +48,16 @@ void heart_beat()
         return;
     if(EETO->query_property("no teleport"))
         return;
-    if(ETO->query_invis())
-        return;
 
     logintime = (int)ETO->query_login_time();
     if(time() < logintime+600)
-        return;
-
-    if(present("voidhuntress",EETO))
         return;
 
     creature = new("/d/common/assassins/mon/voidhuntress");
 
     tell_room(EETO, "%^RED%^An assassin steps out of shadows and attacks "+ ETO->QCN + "!");
 
-    level = ETO->query_character_level() + 30;
+    level = ETO->query_character_level() + 10; //ten levels above trackee
 
     creature->set_property("fighter_attacks_mod",level/4);
     creature->set_property("spell damage resistance",level);
@@ -71,10 +66,12 @@ void heart_beat()
     creature->set_mlevel("fighter",level);
     creature->set_hd(level + 5,20);
     creature->set_mlevel("thief",level);
-
-    creature->set_max_hp(level*12+3000);
-    creature->set_hp(ETO->query_max_hp());
+    creature->set_max_hp(level * 12 * 4);
+    creature->set_hp(level * 12 * 4);
     creature->set_overall_ac(-1 * level -10);
+    creature->set_mob_magic_resistance("very high");
+    creature->set_property("damage resistance",level/4);
+    creature->set_new_exp(level,"boss");
 
     creature->move(EETO);
     creature->force_me("speak wizzish");
