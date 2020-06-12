@@ -8,9 +8,9 @@ void create() {
     feat_category("RangedCombat");
     feat_name("shot on the run");
     feat_prereq("Preciseshot");
-    feat_desc("The most skilled marksmen are able to master shooting at close range while continuing to move, so that at times they are able to get clear of imminent attacks before they have even landed. 
+    feat_desc("The most skilled marksmen are able to master shooting at close range while continuing to move, so that at times they are able to get clear of imminent attacks before they have even landed.  Note you must be wielding a ranged weapon in your main hand for this feat to work.
 
-%^BOLD%^N.B.%^RESET%^ This feat is not effective against ranged attackers, as the marksman does not gain sufficient distance to out-range their attacks. 
+%^BOLD%^N.B.%^RESET%^ This feat is not effective against ranged attackers, as the marksman does not gain sufficient distance to out-range their attacks.
 
 %^BOLD%^N.B.%^RESET%^ This feat does not work in conjunction with ride-by attack, as it is effectively the same action, but not on horseback.");
     permanent(1);
