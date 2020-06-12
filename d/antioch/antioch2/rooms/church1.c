@@ -41,9 +41,9 @@ void create()
 	" one leads to the north and the other to the south.",
 	]));
 	set_exits(([
-	//"west" : ROOMS+"street14",
+	"west" : ROOMS+"street14",
 	//"south" : ROOMS+"church2",
-	"north" : ROOMS+"church3", //keeping this for the quest. 
+	"north" : ROOMS+"church3", //keeping this for the quest.
 	//"east" : ROOMS+"church4",
 	]));
 }

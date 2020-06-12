@@ -34,7 +34,7 @@ void create()
         " street is paved with cobblestones.",
         ]));
 	set_exits(([
-        //"east" : ROOMS+"gates",
+        "east" : ROOMS+"gates",
         "west" : ROOMS+"square",
         "north" : ROOMS+"street2",
         ]));

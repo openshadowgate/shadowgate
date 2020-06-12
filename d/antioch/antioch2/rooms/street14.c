@@ -18,8 +18,7 @@ void create()
 	);
 	set_smell("default","It smells of death and decay.");
 	set_listen("default","The city is dead.");
-        ]));
-        set_exits(([
+    set_exits(([
         "east" : ROOMS+"church1",
         "west" : ROOMS+"street21",
         "north" : ROOMS+"street13",

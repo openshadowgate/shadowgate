@@ -47,7 +47,7 @@ void create()
 	]));
 	set_exits(([
 	"north" : ROOMS+"church8",
-	//"up" : ROOMS+"church14",
+	"up" : ROOMS+"church14",
 	"east" : ROOMS+"church10"
 	]));
 	set_door("door",ROOMS+"church10","east",0);

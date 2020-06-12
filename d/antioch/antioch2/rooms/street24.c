@@ -4,7 +4,7 @@ inherit VAULT;
 
 void create()
 {
-   object ob;
+   object ob; 
 	::create();
    set_terrain(CITY);
    set_travel(PAVED_ROAD);
@@ -12,7 +12,7 @@ void create()
 	set_property("light",2);
 	set_short("Oak Street");
 	set_long(
-	"%^YELLOW%^This part of the city lies in ruins, covered in a black haze. There used to be an inn to the west and a bar to the east, but they now lay wrecked. There was a palace to the north but entire buildings have crumbled to the ground here, blocking your path in that direction.%^RESET%^"
+	"%^YELLOW%^This part of the city lies in ruins, covered in a black haze. There used to be an inn to the west and a bar to the east, but they now lay wrecked. There was a palace to the north but entire buildings have crumbled to the ground here, blocking your path in that direction. A ruined inn lies to the east, while to the west was a fenced neighborhood.%^RESET%^"
 	);
 	set_smell("default","It smells of death and decay.");
 	set_listen("default","The city is dead.");
@@ -32,10 +32,10 @@ void create()
 	" fountain at the southern end of this street.",
 	]));
 	set_exits(([
-	//"north" : ROOMS+"street25",
+	"north" : ROOMS+"street25",
 	"south" : ROOMS+"street10",
-	//"west" : ROOMS+"bar",
-	//"east" : ROOMS+"inn1",
+	"west" : ROOMS+"bar",
+	"east" : ROOMS+"inn1",
 	]));
 	set_door("door",ROOMS+"inn1","east",0);
 /**************
