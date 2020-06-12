@@ -1,6 +1,6 @@
 #include <std.h>
 #include <daemons.h>
-inherit NPC;
+inherit MONSTER;
 
 string reason;
 
