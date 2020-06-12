@@ -10,7 +10,7 @@ void create()
     feat_category("ArmorMastery");
     feat_name("armor mastery");
     feat_prereq("Fighter L19");
-    feat_desc("You learn to absorb some damage with your armor even if you got hit. Any damage taken will have a point subtracted for every six fighter levels.");
+    feat_desc("You learn to absorb some damage with your armor even if you got hit. Any damage taken will have a point subtracted for every six fighter levels. You must be wearing some form of armor for this feat to work.");
     permanent(1);
 }
 
