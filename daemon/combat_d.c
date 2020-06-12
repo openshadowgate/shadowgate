@@ -817,12 +817,6 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
     check_extra_abilities(attacker, targ, weapon, critical_hit);
 
-    if (fired) { // add the flag here for shot on the run, affects only rounds where an attack has hit
-        if (FEATS_D->usable_feat(attacker, "shot on the run") && !attacker->query_property("shotontherun")) {
-            attacker->set_property("shotontherun", 1);
-        }
-    }
-
     // added only 1/3 chance to decay weapon on hit; weapons degrade super fast. N, 4/13.
     if ((damage > 0) && (weapon && !attacker->query_property("shapeshifted")) && !random(3)) {
         weapon->decay();
