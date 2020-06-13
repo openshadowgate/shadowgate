@@ -81,6 +81,8 @@ void heart_beat()
     creature->set_target(ETO->query_name());
     creature->set_reason(reason);
     creature->kill_ob(ETO);
+    creature->force_me("set seal");
+    creature->force_me("set seal");
     creature->force_me("crit " + ETO);
     TO->remove();
     return;
