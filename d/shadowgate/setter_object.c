@@ -1,4 +1,5 @@
 #include <daemons.h>
+#include "genetics.h"
 
 inherit OBJECT;
 
@@ -9,6 +10,9 @@ string *SPECIAL_CHAIN = ({"stats"});
 int head = 0;
 
 mapping char_sheet = ([]);
+mapping cache = ([]);
+
+int brief = 0;
 
 void create()
 {
@@ -43,6 +47,8 @@ void init()
 // actions to add: reset done reroll add review pick check finalize brief recommended random
     add_action("_pick", "pick");
     add_action("_review", "review");
+
+
 }
 
 _pick(string str)
@@ -75,16 +81,16 @@ select_common(string str)
 {
     string * choices;
 
-
     if (member_array(ROLL_CHAIN[head], SPECIAL_CHAIN) != -1) {
         call_other(TO, "select_" + ROLL_CHAIN[head]);
         return;
     }
 
     choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
+    tell_object(FPL("ilmarinen"),":"+identify(choices));
 
     if (sizeof(choices)) {
-        if (!member_array(str, choices)) {
+        if (member_array(str, choices) == -1) {
             write("INVALID SELECTION " + str);
             return 0;
         }
@@ -164,4 +170,128 @@ string *generate_template()
     choices = map(filter_array(map(get_dir("/std/acquired_template/*.c"),(:"/std/acquired_template/" + $1:)), (:member_array($2, arrayp($1->races_allowed()) ? $1->races_allowed() : ({$2})) != -1:), char_sheet["race"]), (: replace_string(replace_string($1, "/std/acquired_template/", ""), ".c", "") :));
 
     return choices;
+}
+
+display_stats()
+{
+    string i;
+    int sum = 0;
+
+    if (!sizeof(char_sheet["stats"])) {
+        char_sheet["stats"] = ([
+                                   "strength":6,
+                                   "dexterity":6,
+                                   "constitution":6,
+                                   "intelligence":6,
+                                   "wisdom":6,
+                                   "charisma":6,
+                                   ]);
+
+        add_action("_add_stats", "add");
+        /* add_action("_recommended_stats", "recommended"); */
+        /* add_action("_done_stats", "done"); */
+    }
+
+    if (!sizeof(cache["minstats"])) {
+        mapping tmpl_stats = ("/std/acquired_template/" + char_sheet["template"])->stat_requirements();
+
+        cache["minstats"] = ("/std/class/" + char_sheet["class"])->stat_requirements();
+        if (sizeof(tmpl_stats)) {
+            foreach(i in keys(tmpl_stats)) {
+                cache["minstats"][i] = max(({tmpl_stats[i], cache["minstats"][i]}));
+            }
+        }
+    }
+
+    char_sheet["stats"] += cache["minstats"];
+
+    foreach(i in STATS) {
+        write("%^BOLD%^%^GREEN%^" + capitalize(i) + " : " + char_sheet["stats"][i]);
+        sum += char_sheet["stats"][i];
+    }
+
+    write("
+%^BOLD%^%^GREEN%^You have %^CYAN%^" + (92 - sum) + "%^GREEN%^ points left to assign.");
+
+    synopsis_stats();
+}
+
+synopsis_stats()
+{
+    write("
+%^BOLD%^%^WHITE%^Use %^ORANGE%^<review>%^RESET%^%^BOLD%^ to view your current stats.
+%^BOLD%^%^WHITE%^Use %^ORANGE%^<add %^ORANGE%^%^ULINE%^NUM%^RESET%^%^BOLD%^%^ORANGE%^ to %^ORANGE%^%^ULINE%^STAT%^RESET%^%^BOLD%^%^ORANGE%^>%^RESET%^%^BOLD%^ to increase your stat.
+
+%^BOLD%^%^WHITE%^Type %^ORANGE%^<done>%^RESET%^%^BOLD%^ when you're done with your selection.
+");
+}
+
+_add_stats(string str){
+    int amount;
+    string stat;
+
+    string i;
+    int sum = 0;
+
+    if (!str) {
+        display_stats();
+        return 1;
+    }
+
+    if (sscanf(str, "%d to %s", amount, stat) != 2) {
+        tell_object(ETO, "%^BOLD%^%^WHITE%^Syntax is %^ORANGE%^<add %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^ to %^ULINE%^STAT%^RESET%^%^BOLD%^%^ORANGE%^>%^RESET%^, e.g. %^BOLD%^%^ORANGE%^<add 10 to intelligence>%^RESET%^%^WHITE.");
+        return 1;
+    }
+
+    foreach(i in STATS) {
+        sum += char_sheet["stats"][i];
+    }
+
+    if (amount > (92 - sum)) {
+        tell_object(ETO, "%^BOLD%^%^WHITE%^You have only %^CYAN%^" + (92 - sum) + "%^RESET%^%^WHITE%^ points left to apply.");
+        return 1;
+    }
+
+    if (stat == "str") {
+        stat = "strength";
+    }
+    if (stat == "int") {
+        stat = "intelligence";
+    }
+    if (stat == "dex") {
+        stat = "dexterity";
+    }
+    if (stat == "con") {
+        stat = "constitution";
+    }
+    if (stat == "cha") {
+        stat = "charisma";
+    }
+    if (stat == "wis") {
+        stat = "wisdom";
+    }
+
+    if (char_sheet["stats"][stat] + amount > 18) {
+        tell_object(ETO,"%^BOLD%^%^WHITE%^That score will exceed maximum allowed at start %^CYAN%^18%^WHITE%^.");
+        return 1;
+    }
+
+    if (char_sheet["stats"][stat] + amount < 4) {
+        tell_object(ETO,"%^BOLD%^%^WHITE%^That score will be lower than minimum allowed at start %^CYAN%^4%^WHITE%^.");
+        return 1;
+    }
+
+    if (char_sheet["stats"][stat] + amount < cache["minstats"][stat]) {
+        tell_object(ETO,"%^BOLD%^%^WHITE%^That score will be lower than minimum allowed for " +stat+" %^CYAN%^" +cache["stat"]+"%^WHITE%^ at your class and template combination.");
+        return 1;
+    }
+
+    char_sheet["stats"][stat] += amount;
+    display_stats();
+    return 1;
+}
+
+select_stats()
+{
+    synopsis_stats();
 }
