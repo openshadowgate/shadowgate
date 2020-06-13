@@ -52,6 +52,8 @@ void create()
     set_max_level(35);
     set_base_damage_type("piercing");
     reason = "";
+    new("/d/atoyatl/tecqumin/obj/seal.c")->move(TO);
+    new("/d/atoyatl/tecqumin/obj/seal.c")->move(TO);
 }
 
 
