@@ -6,7 +6,7 @@
 
 #include <std.h>
 
-inherit "/std/armour";
+inherit "/d/common/obj/jewelry/ring.c";
 
 int uses, old, resamt;
 object protect;
@@ -40,11 +40,7 @@ create()
         "to offer a small amount of magic resistance.");
 
     set_property("lore difficulty",7);
-    set_type("ring");
-    set_ac(0);
-    set_weight(5);
     set("value", 25);
-    set_limbs(({"right hand","left hand"}));
     set_wear((:TO,"do_wear":));
     set_remove((:TO,"takeoff":));
     uses = random(4)+2;

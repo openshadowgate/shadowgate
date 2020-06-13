@@ -1,6 +1,6 @@
 //code shamelessly stolen from thorn
 #include <std.h>
-inherit ARMOUR;
+inherit "/d/common/obj/jewelry/ring.c";
 int uses, old;
 object protect;
 
@@ -26,11 +26,7 @@ void create()
 	" of pride.  Many stories exist about how rings like "+
 	"these saved and elf's life");
     set_property("lore difficulty",30);
-    set_type("ring");
-    set_ac(0);
-    set_weight(5);
     set_value(2025);
-    set_limbs(({"right hand","left hand"}));
     set_wear((:TO,"do_wear":));
     set_remove((:TO,"takeoff":));
     uses = roll_dice(1,12)+3;

@@ -5,7 +5,7 @@
 // modified to grant a set amount, and fixed to ETO wear/remove. nienne, 08/07.
 //Added some color - Octothorpe 12/5/09
 #include <std.h>
-inherit ARMOUR;
+inherit "/d/common/obj/jewelry/ring.c";
 
 int uses, old, resamt;
 object protect;
@@ -40,11 +40,7 @@ void create()
         "offer more magic resistance than others.");
 
     set_property("lore difficulty",7);
-    set_type("ring");
-    set_ac(0);
-    set_weight(5);
     set_value(125);
-    set_limbs(({"right hand","left hand"}));
     set_wear((:TO,"do_wear":));
     set_remove((:TO,"takeoff":));
     uses = roll_dice(1,12)+3;
