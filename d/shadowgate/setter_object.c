@@ -3,7 +3,7 @@
 
 inherit OBJECT;
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "hair_color", "eye_color", "height", "weight", "body_type", "age"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "hair_color", "eye_color", "height", "weight", "body_type", "age", "alignment"});
 
 string *SPECIAL_CHAIN = ({"stats", "height", "weight", "age"});
 
@@ -85,6 +85,8 @@ select_common(string str)
         return;
     }
 
+    str = lower_case(str);
+
     choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
     if (sizeof(choices)) {
@@ -117,7 +119,7 @@ display_common()
         write("%^BOLD%^%^WHITE%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^ from the following:\n");
         foreach(i in choices)
         {
-            write(" %^BOLD%^%^MAGENTA%^" + capitalize(i));
+            write(" %^CYAN%^" + capitalize(i));
         }
     write("
 %^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, e.g. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
@@ -228,11 +230,13 @@ display_stats()
         sum += char_sheet["stats"][i];
     }
 
-    write("
-%^BOLD%^%^GREEN%^You have %^CYAN%^" + (92 - sum) + "%^GREEN%^ points left to assign.");
+    write("\n");
     if (92 - sum == 0) {
         write("%^BOLD%^%^GREEN%^You may proceed to the next step.");
+    } else {
+        write("%^BOLD%^%^GREEN%^You have %^CYAN%^" + (92 - sum) + "%^GREEN%^ points left to assign.");
     }
+
 
     synopsis_stats();
 }
@@ -362,9 +366,11 @@ _add_stats(string str){
         return 1;
     }
 
-    if (char_sheet["stats"][stat] + amount < cache["minstats"][stat]) {
-        tell_object(ETO,"%^BOLD%^%^WHITE%^That score will be lower than minimum allowed for " +stat+" %^CYAN%^" +cache["stat"]+"%^WHITE%^ at your class and template combination.");
-        return 1;
+    if (cache["minstats"][stat]) {
+        if (char_sheet["stats"][stat] + amount < cache["minstats"][stat]) {
+            tell_object(ETO,"%^BOLD%^%^WHITE%^That score will be lower than minimum allowed for " +stat+" %^CYAN%^" +cache["stat"]+"%^WHITE%^ at your class and template combination.");
+            return 1;
+        }
     }
 
     char_sheet["stats"][stat] += amount;
@@ -415,14 +421,13 @@ select_height(string str)
     int maxh = minh + racefile->height_mod(char_sheet["gender"]);
 
     if (sscanf(str, "%d", amount) != 1) {
-        write("%^BOLD%^%^WHITE%^You have to enter a number.");
-        synopsis_height();
+        write("%^BOLD%^%^RED%^You have to enter a number.");
+        return 1;
     }
 
     if (amount > maxh || amount < minh) {
-        write("%^BOLD%^%^WHITE%^Your height must be within allowed range.");
-
-        synopsis_height();
+        write("%^BOLD%^%^RED%^Your height must be within allowed range.");
+        return 1;
     }
 
     char_sheet["height"] = amount;
@@ -437,9 +442,9 @@ synopsis_height()
     int minh = racefile->height_base(char_sheet["gender"]);
     int maxh = minh + racefile->height_mod(char_sheet["gender"]);
 
-    write("%^BOLD%^%^WHITE%^Choose height for your race, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Choose height for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
     write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^height%^WHITE%^ in %^CYAN%^inches%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
 }
 
 display_weight()
@@ -459,14 +464,13 @@ select_weight(string str)
     int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
 
     if (sscanf(str, "%d", amount) != 1) {
-        write("%^BOLD%^%^WHITE%^You have to enter a number.");
-        synopsis_weight();
+        write("%^BOLD%^%^RED%^You have to enter a number.");
+        return 1;
     }
 
     if (amount > maxh || amount < minh) {
-        write("%^BOLD%^%^WHITE%^Your weight must be within allowed range.");
-
-        synopsis_weight();
+        write("%^BOLD%^%^RED%^Your weight must be within allowed range.");
+        return 1;
     }
 
     char_sheet["weight"] = amount;
@@ -481,12 +485,109 @@ synopsis_weight()
     int minh = racefile->weight_base(char_sheet["gender"]);
     int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
 
-    write("%^BOLD%^%^RED%^Choose weight for your race, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Choose weight for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
     write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^weight%^WHITE%^ in %^CYAN%^pounds%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
 }
 
 string *generate_body_type()
 {
     return ({"frail", "skinny", "slender", "svelte", "hardy", "portly", "heavy"});
+}
+
+display_age()
+{
+    write("
+");
+    synopsis_age();
+}
+
+select_age(string str)
+{
+    int amount;
+    int *age_brackets;
+
+    string racefile = "/std/races/" + char_sheet["race"];
+    string templatefile = "/std/acquired_template/" + char_sheet["template"];
+
+    if (sscanf(str, "%d", amount) != 1) {
+        write("%^BOLD%^%^RED%^You have to enter a number.");
+        return 1;
+    }
+
+    age_brackets = racefile->age_brackets();
+
+    if (amount < age_brackets[0]) {
+        write("%^BOLD%^%^RED%^Your can't be that young.");
+        return 1;
+    }
+
+    if (!templatefile->query_unbound_age()) {
+        if (!racefile->query_unbound_age()) {
+            if (amount > age_brackets[3] * 12 / 10) {
+                write("%^BOLD%^%^WHITE%^Your can't be that old. Maximum allowed age for your race and template is %^CYAN%^" + age_brackets[3] * 12 / 10 + "%^WHITE%^.");
+                return 1;
+            }
+        }
+    }
+
+    char_sheet["age"] = amount;
+    advance_head();
+    return 1;
+}
+
+synopsis_age()
+{
+    string racefile = "/std/races/" + char_sheet["race"];
+
+    int *age_brackets;
+
+    age_brackets = racefile->age_brackets();
+
+    write("%^BOLD%^%^WHITE%^Choose age for your character.
+");
+    write("%^BOLD%^%^WHITE%^Values between %^GREEN%^" + age_brackets[0] + "%^WHITE%^ and %^GREEN%^" + age_brackets[1] + "%^WHITE%^ will make you of %^CYAN%^normal%^WHITE%^ age.");
+    write("%^BOLD%^%^WHITE%^Values between %^GREEN%^" + age_brackets[1] + "%^WHITE%^ and %^GREEN%^" + age_brackets[2] + "%^WHITE%^ will make you %^CYAN%^middle%^WHITE%^ aged.");
+    write("%^BOLD%^%^WHITE%^Values between %^GREEN%^" + age_brackets[2] + "%^WHITE%^ and %^GREEN%^" + age_brackets[3] + "%^WHITE%^ will make you %^CYAN%^old%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Values above %^GREEN%^" + age_brackets[3] + "%^WHITE%^ will make you %^CYAN%^venerable%^WHITE%^.");
+
+    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^age%^WHITE%^ in %^CYAN%^years%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + age_brackets[0] + random(age_brackets[1] - age_brackets[0])+ ">%^WHITE%^.");
+}
+
+string *generate_alignment()
+{
+    string racefile = "/std/races/" + char_sheet["race"];
+    string classfile = "/std/class/" + char_sheet["class"];
+
+    int *alignments = ({1, 2, 3, 4, 5, 6, 7, 8, 9});
+
+    string * choices;
+
+    alignments -= racefile->restricted_alignments(char_sheet["subrace"] ? char_sheet["subrace"] : 0);
+    alignments -= classfile->restricted_alignments();
+
+    choices = map_array(alignments, (: $2->align_to_string($1) :), TO);
+
+    return choices;
+}
+
+string align_to_string(int x)
+{
+    string * aligarr = ({
+                            "lawful good",
+                            "lawful neutral",
+                            "lawful evil",
+                            "neutral good",
+                            "true neutral",
+                            "neutral evil",
+                            "chaotic good",
+                            "chaotic neutral",
+                            "chaotic evil",
+                                });
+    if (x > 9 || x < 1) {
+        return "";
+    }
+
+    return aligarr[x - 1];
 }
