@@ -72,16 +72,15 @@ void heart_beat()
     creature->set_mob_magic_resistance("very high");
     creature->set_property("damage resistance",level/4);
     creature->set_new_exp(level,"boss");
-    creature->set_damage(4,level);
+    creature->set_damage(4,level/2);
 
     creature->move(EETO);
-    creature->force_me("speak wizzish");
+    creature->force_me("speak wizish");
     creature->force_me("speech %^BOLD%^%^MAGENTA%^pu%^RESET%^%^MAGENTA%^r%^MAGENTA%^r%^BOLD%^%^BLACK%^ in a %^RESET%^%^MAGENTA%^s%^MAGENTA%^m%^BOLD%^%^MAGENTA%^ok%^RESET%^%^MAGENTA%^y%^BOLD%^%^BLACK%^ voice%^RESET%^");
     creature->force_me("say %^BOLD%^%^MAGENTA%^You have been chosen to %^RED%^die%^MAGENTA%^.%^RESET%^");
     creature->set_target(ETO->query_name());
     creature->set_reason(reason);
     creature->kill_ob(ETO);
-    creature->force_me("set seal");
     creature->force_me("set seal");
     creature->force_me("crit " + ETO);
     TO->remove();
