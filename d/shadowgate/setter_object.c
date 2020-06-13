@@ -1,9 +1,10 @@
 #include <daemons.h>
 #include "genetics.h"
+#include <dieties.h>
 
 inherit OBJECT;
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "hair_color", "eye_color", "height", "weight", "body_type", "age", "alignment"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "hair_color", "eye_color", "height", "weight", "body_type", "age", "alignment", "diety"});
 
 string *SPECIAL_CHAIN = ({"stats", "height", "weight", "age"});
 
@@ -45,8 +46,11 @@ void init()
     /*         TO->remove(); */
     /*     } */
 // actions to add: reset done reroll add review pick check finalize brief recommended random
+
+    add_action("_select", "pick");
     add_action("_select", "select");
     add_action("_select", "sel");
+
     add_action("_review", "review");
 }
 
@@ -119,7 +123,7 @@ display_common()
         write("%^BOLD%^%^WHITE%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^ from the following:\n");
         foreach(i in choices)
         {
-            write(" %^CYAN%^" + capitalize(i));
+            write(" %^GREEN%^%^BOLD%^" + capitalize(i));
         }
     write("
 %^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, e.g. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
@@ -392,7 +396,7 @@ string *generate_hair_color()
 
     choices = ("/std/races/" + char_sheet["race"])->query_hair_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
 
-    return choices;
+    return sort_array(choices, 1);
 }
 
 string *generate_eye_color()
@@ -401,7 +405,7 @@ string *generate_eye_color()
 
     choices = ("/std/races/" + char_sheet["race"])->query_eye_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
 
-    return choices;
+    return sort_array(choices, 1);
 }
 
 display_height()
@@ -443,7 +447,7 @@ synopsis_height()
     int maxh = minh + racefile->height_mod(char_sheet["gender"]);
 
     write("%^BOLD%^%^WHITE%^Choose height for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^height%^WHITE%^ in %^CYAN%^inches%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^height%^WHITE%^ in %^CYAN%^inches%^WHITE%^.\n");
     write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
 }
 
@@ -486,7 +490,7 @@ synopsis_weight()
     int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
 
     write("%^BOLD%^%^WHITE%^Choose weight for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^weight%^WHITE%^ in %^CYAN%^pounds%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^weight%^WHITE%^ in %^CYAN%^pounds%^WHITE%^.\n");
     write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
 }
 
@@ -551,8 +555,8 @@ synopsis_age()
     write("%^BOLD%^%^WHITE%^Values between %^GREEN%^" + age_brackets[2] + "%^WHITE%^ and %^GREEN%^" + age_brackets[3] + "%^WHITE%^ will make you %^CYAN%^old%^WHITE%^.");
     write("%^BOLD%^%^WHITE%^Values above %^GREEN%^" + age_brackets[3] + "%^WHITE%^ will make you %^CYAN%^venerable%^WHITE%^.");
 
-    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^age%^WHITE%^ in %^CYAN%^years%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + age_brackets[0] + random(age_brackets[1] - age_brackets[0])+ ">%^WHITE%^.");
+    write("\n%^BOLD%^%^WHITE%^Enter your %^CYAN%^age%^WHITE%^ in %^CYAN%^years%^WHITE%^.\n");
+    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + (age_brackets[0] + random(age_brackets[1] - age_brackets[0]))+ ">%^WHITE%^.");
 }
 
 string *generate_alignment()
@@ -572,6 +576,26 @@ string *generate_alignment()
     return choices;
 }
 
+
+string *generate_diety()
+{
+    string * choices = ({});
+
+    if (char_sheet["class"] == "cleric" ||
+        char_sheet["class"] == "inquisitor") {
+        choices = filter_array(keys(DIETIES), (:member_array($2, DIETIES[$1][2]) != -1:), str_to_align(char_sheet["alignment"]));
+    } else {
+        choices = filter_array(keys(DIETIES), (:member_array($2, DIETIES[$1][1]) != -1:), str_to_align(char_sheet["alignment"])) + ({"godless"});
+        if (char_sheet["class"] == "paladin") {
+            choices = choices - (choices - PALADIN_GODS);
+        }
+    }
+
+    return choices;
+}
+
+// Modules end here
+
 string align_to_string(int x)
 {
     string * aligarr = ({
@@ -590,4 +614,20 @@ string align_to_string(int x)
     }
 
     return aligarr[x - 1];
+}
+
+int str_to_align(string x)
+{
+    string * aligarr = ({
+            "lawful good",
+                "lawful neutral",
+                "lawful evil",
+                "neutral good",
+                "true neutral",
+                "neutral evil",
+                "chaotic good",
+                "chaotic neutral",
+                "chaotic evil",
+                });
+    return member_array(x, aligarr) + 1;
 }
