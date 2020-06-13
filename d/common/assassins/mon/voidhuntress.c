@@ -53,7 +53,6 @@ void create()
     set_base_damage_type("piercing");
     reason = "";
     new("/d/atoyatl/tecqumin/obj/seal.c")->move(TO);
-    new("/d/atoyatl/tecqumin/obj/seal.c")->move(TO);
 }
 
 
