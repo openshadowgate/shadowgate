@@ -3,9 +3,9 @@
 
 inherit OBJECT;
 
-string *ROLL_CHAIN = ({"class", "race", "subrace", "template", "stats", "hair_color", "eye_color"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "hair_color", "eye_color", "height", "weight", "body_type", "age"});
 
-string *SPECIAL_CHAIN = ({"stats"});
+string *SPECIAL_CHAIN = ({"stats", "height", "weight", "age"});
 
 int head = 0;
 
@@ -45,13 +45,12 @@ void init()
     /*         TO->remove(); */
     /*     } */
 // actions to add: reset done reroll add review pick check finalize brief recommended random
-    add_action("_pick", "pick");
+    add_action("_select", "select");
+    add_action("_select", "sel");
     add_action("_review", "review");
-
-
 }
 
-_pick(string str)
+_select(string str)
 {
     if (select_common(str)) {
         advance_head();
@@ -82,7 +81,7 @@ select_common(string str)
     string * choices;
 
     if (member_array(ROLL_CHAIN[head], SPECIAL_CHAIN) != -1) {
-        call_other(TO, "select_" + ROLL_CHAIN[head]);
+        call_other(TO, "select_" + ROLL_CHAIN[head], str);
         return;
     }
 
@@ -120,16 +119,14 @@ display_common()
         {
             write(" %^BOLD%^%^MAGENTA%^" + capitalize(i));
         }
-    write("%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<pick %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, e.g. %^ORANGE%^<pick " + choices[0] + ">%^WHITE%^.");
+    write("
+%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, e.g. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
     } else if (sizeof(choices) == 1) {
         select_common(choices[0]);
         advance_head();
     } else {
         advance_head();
     }
-
-    write("
-");
 
     if (brief == 0) {
 
@@ -150,6 +147,11 @@ string *generate_class()
     return choices;
 }
 
+string *generate_gender()
+{
+    return ({"male", "female", "other"});
+}
+
 string *generate_race()
 {
     string * choices;
@@ -157,6 +159,7 @@ string *generate_race()
     choices = get_dir("/std/races/*.c");
     choices = map(choices, (:replace_string($1, ".c", ""):));
     choices = filter_array(choices, (:member_array($1, ("/std/class/" + $2)->restricted_races()) == -1:), char_sheet["class"]);
+    choices = filter_array(choices, (:!(("/std/races/" + $1)->is_gender_locked(char_sheet["gender"])):));
 
     return choices;
 }
@@ -218,8 +221,10 @@ display_stats()
 
     char_sheet["stats"] += cache["minstats"];
 
+    write("
+");
     foreach(i in STATS) {
-        write("%^BOLD%^%^GREEN%^" + capitalize(i) + " : " + char_sheet["stats"][i]);
+        write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]));
         sum += char_sheet["stats"][i];
     }
 
@@ -391,4 +396,97 @@ string *generate_eye_color()
     choices = ("/std/races/" + char_sheet["race"])->query_eye_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
 
     return choices;
+}
+
+display_height()
+{
+    write("
+");
+    synopsis_height();
+}
+
+select_height(string str)
+{
+    int amount;
+
+    string racefile = "/std/races/" + char_sheet["race"];
+
+    int minh = racefile->height_base(char_sheet["gender"]);
+    int maxh = minh + racefile->height_mod(char_sheet["gender"]);
+
+    if (sscanf(str, "%d", amount) != 1) {
+        write("%^BOLD%^%^WHITE%^You have to enter a number.");
+        synopsis_height();
+    }
+
+    if (amount > maxh || amount < minh) {
+        write("%^BOLD%^%^WHITE%^Your height must be within allowed range.");
+
+        synopsis_height();
+    }
+
+    char_sheet["height"] = amount;
+    advance_head();
+    return 1;
+}
+
+synopsis_height()
+{
+    string racefile = "/std/races/" + char_sheet["race"];
+
+    int minh = racefile->height_base(char_sheet["gender"]);
+    int maxh = minh + racefile->height_mod(char_sheet["gender"]);
+
+    write("%^BOLD%^%^WHITE%^Choose height for your race, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^height%^WHITE%^ in %^CYAN%^inches%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.");
+}
+
+display_weight()
+{
+    write("
+");
+    synopsis_weight();
+}
+
+select_weight(string str)
+{
+    int amount;
+
+    string racefile = "/std/races/" + char_sheet["race"];
+
+    int minh = racefile->weight_base(char_sheet["gender"]);
+    int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
+
+    if (sscanf(str, "%d", amount) != 1) {
+        write("%^BOLD%^%^WHITE%^You have to enter a number.");
+        synopsis_weight();
+    }
+
+    if (amount > maxh || amount < minh) {
+        write("%^BOLD%^%^WHITE%^Your weight must be within allowed range.");
+
+        synopsis_weight();
+    }
+
+    char_sheet["weight"] = amount;
+    advance_head();
+    return 1;
+}
+
+synopsis_weight()
+{
+    string racefile = "/std/races/" + char_sheet["race"];
+
+    int minh = racefile->weight_base(char_sheet["gender"]);
+    int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
+
+    write("%^BOLD%^%^RED%^Choose weight for your race, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^weight%^WHITE%^ in %^CYAN%^pounds%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.");
+}
+
+string *generate_body_type()
+{
+    return ({"frail", "skinny", "slender", "svelte", "hardy", "portly", "heavy"});
 }
