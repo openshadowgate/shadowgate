@@ -3,7 +3,7 @@
 
 inherit OBJECT;
 
-string *ROLL_CHAIN = ({"class", "race", "subrace", "template", "stats"});
+string *ROLL_CHAIN = ({"class", "race", "subrace", "template", "stats", "hair_color", "eye_color"});
 
 string *SPECIAL_CHAIN = ({"stats"});
 
@@ -87,16 +87,17 @@ select_common(string str)
     }
 
     choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
-    tell_object(FPL("ilmarinen"),":"+identify(choices));
 
     if (sizeof(choices)) {
         if (member_array(str, choices) == -1) {
-            write("INVALID SELECTION " + str);
+            write("%^BOLD%^%^WHITE%^Selection %^RED%^" + str + "%^WHITE%^ is not valid for your %^RED%^" + ROLL_CHAIN[head] + "%^WHITE%^.");
             return 0;
         }
     }
 
     char_sheet[ROLL_CHAIN[head]] = str;
+
+    write("%^BOLD%^%^WHITE%^You have selected %^CYAN%^" + str + "%^WHITE%^ for your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^.");
     return 1;
 }
 
@@ -112,15 +113,26 @@ display_common()
 
     choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
+
     if (sizeof(choices) > 1) {
+        write("%^BOLD%^%^WHITE%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^ from the following:\n");
         foreach(i in choices)
         {
-            write("%^BOLD%^%^MAGENTA%^" + capitalize(i));
+            write(" %^BOLD%^%^MAGENTA%^" + capitalize(i));
         }
+    write("%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<pick %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, e.g. %^ORANGE%^<pick " + choices[0] + ">%^WHITE%^.");
     } else if (sizeof(choices) == 1) {
         select_common(choices[0]);
+        advance_head();
     } else {
         advance_head();
+    }
+
+    write("
+");
+
+    if (brief == 0) {
+
     }
 }
 
@@ -187,9 +199,10 @@ display_stats()
                                    "charisma":6,
                                    ]);
 
+        add_action("_reroll_stats", "reroll");
         add_action("_add_stats", "add");
-        /* add_action("_recommended_stats", "recommended"); */
-        /* add_action("_done_stats", "done"); */
+        add_action("_recommended_stats", "recommended");
+        add_action("_done_stats", "done");
     }
 
     if (!sizeof(cache["minstats"])) {
@@ -212,6 +225,9 @@ display_stats()
 
     write("
 %^BOLD%^%^GREEN%^You have %^CYAN%^" + (92 - sum) + "%^GREEN%^ points left to assign.");
+    if (92 - sum == 0) {
+        write("%^BOLD%^%^GREEN%^You may proceed to the next step.");
+    }
 
     synopsis_stats();
 }
@@ -220,10 +236,70 @@ synopsis_stats()
 {
     write("
 %^BOLD%^%^WHITE%^Use %^ORANGE%^<review>%^RESET%^%^BOLD%^ to view your current stats.
+%^BOLD%^%^WHITE%^Use %^ORANGE%^<recommended>%^RESET%^%^BOLD%^ to set your stats to recommended value.
 %^BOLD%^%^WHITE%^Use %^ORANGE%^<add %^ORANGE%^%^ULINE%^NUM%^RESET%^%^BOLD%^%^ORANGE%^ to %^ORANGE%^%^ULINE%^STAT%^RESET%^%^BOLD%^%^ORANGE%^>%^RESET%^%^BOLD%^ to increase your stat.
+%^BOLD%^%^WHITE%^Use %^ORANGE%^<reroll>%^RESET%^%^BOLD%^ to start over.
 
 %^BOLD%^%^WHITE%^Type %^ORANGE%^<done>%^RESET%^%^BOLD%^ when you're done with your selection.
 ");
+}
+
+_done_stats()
+{
+    string i;
+    int sum = 0;
+
+    foreach(i in STATS) {
+        sum += char_sheet["stats"][i];
+    }
+
+    if (sum != 92) {
+        write("
+%^BOLD%^%^GREEN%^You have %^CYAN%^" + (92 - sum) + "%^GREEN%^ points left to assign.
+%^BOLD%^%^WHITE%^You should assign them to continue.
+");
+        return 1;
+    }
+
+    remove_action("_reroll_stats", "reroll");
+    remove_action("_add_stats", "add");
+    remove_action("_recommended_stats", "recommended");
+    remove_action("_done_stats", "done");
+
+    advance_head();
+    return 1;
+}
+
+_reroll_stats()
+{
+    cache["minstats"] = ([]);
+    char_sheet["stats"] = ([]);
+    display_stats();
+    return 1;
+}
+
+_recommended_stats()
+{
+    string i;
+    int sum = 0;
+
+    mapping temp_stats = char_sheet["stats"];
+
+    foreach(i in STATS) {
+        temp_stats[i] = max(({RECOMMENDED_STATS[char_sheet["class"]][i], cache["minstats"][i]}));
+        sum += temp_stats[i];
+    }
+
+    if (sum > 92) {
+        write("%^BOLD%^%^WHITE%^The total amount of stats you have to get due to template and class limitation exceeds recommendations. You're on your own.");
+        synopsis_stats();
+        return 1;
+    }
+
+    char_sheet["stats"] = temp_stats;
+
+    display_stats();
+    return 1;
 }
 
 _add_stats(string str){
@@ -293,5 +369,26 @@ _add_stats(string str){
 
 select_stats()
 {
+
+    write("%^BOLD%^%^WHITE%^You must now set your %^CYAN%^stat points.\n");
+
     synopsis_stats();
+}
+
+string *generate_hair_color()
+{
+    string * choices;
+
+    choices = ("/std/races/" + char_sheet["race"])->query_hair_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
+
+    return choices;
+}
+
+string *generate_eye_color()
+{
+    string * choices;
+
+    choices = ("/std/races/" + char_sheet["race"])->query_eye_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
+
+    return choices;
 }
