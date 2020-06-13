@@ -2,7 +2,9 @@
 
 inherit OBJECT;
 
-string *ROLL_CHAIN = ({"class", "race", "subrace", "template"});
+string *ROLL_CHAIN = ({"class", "race", "subrace", "template", "stats"});
+
+string *SPECIAL_CHAIN = ({"stats"});
 
 int head = 0;
 
@@ -46,12 +48,7 @@ void init()
 _pick(string str)
 {
     if (select_common(str)) {
-        head++;
-        if (head >= sizeof(ROLL_CHAIN)) {
-            review();
-        } else {
-            display_common();
-        }
+        advance_head();
     } else {
         display_common();
     }
@@ -64,19 +61,33 @@ _review()
     return 1;
 }
 
+advance_head()
+{
+    head++;
+    if (head >= sizeof(ROLL_CHAIN)) {
+        review();
+    } else {
+        display_common();
+    }
+}
+
 select_common(string str)
 {
     string * choices;
 
-    if (call_other(TO, "select_" + ROLL_CHAIN[head], str)) {
-        return 1;
+
+    if (member_array(ROLL_CHAIN[head], SPECIAL_CHAIN) != -1) {
+        call_other(TO, "select_" + ROLL_CHAIN[head]);
+        return;
     }
 
     choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
-    if (!member_array(str, choices)) {
-        write("INVALID SELECTION " + str);
-        return 0;
+    if (sizeof(choices)) {
+        if (!member_array(str, choices)) {
+            write("INVALID SELECTION " + str);
+            return 0;
+        }
     }
 
     char_sheet[ROLL_CHAIN[head]] = str;
@@ -88,15 +99,22 @@ display_common()
     string i;
     string * choices;
 
-    if (call_other(TO, ("display_" + ROLL_CHAIN[head]))) {
+    if (member_array(ROLL_CHAIN[head], SPECIAL_CHAIN) != -1) {
+        call_other(TO, "display_" + ROLL_CHAIN[head]);
         return;
     }
 
     choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
-    foreach(i in choices)
-    {
-        write("%^BOLD%^%^MAGENTA%^" + capitalize(i));
+    if (sizeof(choices) > 1) {
+        foreach(i in choices)
+        {
+            write("%^BOLD%^%^MAGENTA%^" + capitalize(i));
+        }
+    } else if (sizeof(choices) == 1) {
+        select_common(choices[0]);
+    } else {
+        advance_head();
     }
 }
 
@@ -120,7 +138,7 @@ string *generate_race()
 
     choices = get_dir("/std/races/*.c");
     choices = map(choices, (:replace_string($1, ".c", ""):));
-    choices = map(choices, (:member_array($1, ("/std/class/" + $2)->restricted_races()) == -1:), char_sheet["class"]);
+    choices = filter_array(choices, (:member_array($1, ("/std/class/" + $2)->restricted_races()) == -1:), char_sheet["class"]);
 
     return choices;
 }
@@ -129,12 +147,21 @@ string *generate_subrace()
 {
     string * choices = ({});
 
-    choices += ("/std/races/" + char_sheet["race"])->query_subraces(ETO);
+    choices = ("/std/races/" + char_sheet["race"])->query_subraces(ETO);
     if (sizeof(choices)) {
-        choices = map(choices, (:
+        choices = filter_array(choices, (:
                                 member_array($2, ("/std/races/" + char_sheet["race"])->restricted_classes($1)) == -1
                                 :), char_sheet["class"]);
     }
+
+    return choices;
+}
+
+string *generate_template()
+{
+    string * choices = ({});
+
+    choices = map(filter_array(map(get_dir("/std/acquired_template/*.c"),(:"/std/acquired_template/" + $1:)), (:member_array($2, arrayp($1->races_allowed()) ? $1->races_allowed() : ({$2})) != -1:), char_sheet["race"]), (: replace_string(replace_string($1, "/std/acquired_template/", ""), ".c", "") :));
 
     return choices;
 }
