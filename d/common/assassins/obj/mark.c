@@ -72,6 +72,7 @@ void heart_beat()
     creature->set_mob_magic_resistance("very high");
     creature->set_property("damage resistance",level/4);
     creature->set_new_exp(level,"boss");
+    creature->set_damage(4,level);
 
     creature->move(EETO);
     creature->force_me("speak wizzish");
@@ -80,6 +81,7 @@ void heart_beat()
     creature->set_target(ETO->query_name());
     creature->set_reason(reason);
     creature->kill_ob(ETO);
+    creature->force_me("crit " + ETO);
     TO->remove();
     return;
 }

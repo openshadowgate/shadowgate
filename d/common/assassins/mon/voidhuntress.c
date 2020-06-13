@@ -16,6 +16,7 @@ void create()
     set_gender("female");
     set_class("fighter");
     set_mlevel("fighter",50);
+    set_mlevel("assassin",10);
     add_search_path("/cmds/feats");
     set_hd(60,10);
     set_level(60);
@@ -32,10 +33,10 @@ void create()
     set_property("full attacks",1);
     set_mob_magic_resistance("average");
     set_property("spell damage resistance",70);
-    set_monster_feats(({"dodge","evasion","knockdown","expertise", "mobility","powerattack","rush","combat reflexes", "dodge","evasion","scramble","spring attack"}));
+    set_monster_feats(({"dodge","evasion","knockdown","expertise", "mobility","powerattack","rush","combat reflexes", "dodge","evasion","scramble","spring attack","crit","hide in plain sight","void stalker","penetrating strike","greater penetrating strike"}));
     set_skill("stealth",50);
     set_skill("athletics",50);
-    set_property("damage resistance",2);
+    set_property("damage resistance",10);
     set_spells(({"horrid wilthing",
                     "fear",
                     "weird",}));
