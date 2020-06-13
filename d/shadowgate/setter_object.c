@@ -4,9 +4,9 @@
 
 inherit OBJECT;
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "hair_color", "eye_color", "height", "weight", "body_type", "age", "alignment", "diety"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "age", "alignment", "diety"});
 
-string *SPECIAL_CHAIN = ({"stats", "height", "weight", "age"});
+string *SPECIAL_CHAIN = ({"stats", "age"});
 
 int head = 0;
 
@@ -377,7 +377,9 @@ _add_stats(string str){
         }
     }
 
-    char_sheet["stats"][stat] += amount;
+    tell_object(FPL("ilmarinen"),":"+amount + ":" + identify(char_sheet["stats"]));
+
+    char_sheet["stats"][stat] = char_sheet["stats"][stat] + amount;
     display_stats();
     return 1;
 }
@@ -388,115 +390,6 @@ select_stats()
     write("%^BOLD%^%^WHITE%^You must now set your %^CYAN%^stat points.\n");
 
     synopsis_stats();
-}
-
-string *generate_hair_color()
-{
-    string * choices;
-
-    choices = ("/std/races/" + char_sheet["race"])->query_hair_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
-
-    return sort_array(choices, 1);
-}
-
-string *generate_eye_color()
-{
-    string * choices;
-
-    choices = ("/std/races/" + char_sheet["race"])->query_eye_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
-
-    return sort_array(choices, 1);
-}
-
-display_height()
-{
-    write("
-");
-    synopsis_height();
-}
-
-select_height(string str)
-{
-    int amount;
-
-    string racefile = "/std/races/" + char_sheet["race"];
-
-    int minh = racefile->height_base(char_sheet["gender"]);
-    int maxh = minh + racefile->height_mod(char_sheet["gender"]);
-
-    if (sscanf(str, "%d", amount) != 1) {
-        write("%^BOLD%^%^RED%^You have to enter a number.");
-        return 1;
-    }
-
-    if (amount > maxh || amount < minh) {
-        write("%^BOLD%^%^RED%^Your height must be within allowed range.");
-        return 1;
-    }
-
-    char_sheet["height"] = amount;
-    advance_head();
-    return 1;
-}
-
-synopsis_height()
-{
-    string racefile = "/std/races/" + char_sheet["race"];
-
-    int minh = racefile->height_base(char_sheet["gender"]);
-    int maxh = minh + racefile->height_mod(char_sheet["gender"]);
-
-    write("%^BOLD%^%^WHITE%^Choose height for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^height%^WHITE%^ in %^CYAN%^inches%^WHITE%^.\n");
-    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
-}
-
-display_weight()
-{
-    write("
-");
-    synopsis_weight();
-}
-
-select_weight(string str)
-{
-    int amount;
-
-    string racefile = "/std/races/" + char_sheet["race"];
-
-    int minh = racefile->weight_base(char_sheet["gender"]);
-    int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
-
-    if (sscanf(str, "%d", amount) != 1) {
-        write("%^BOLD%^%^RED%^You have to enter a number.");
-        return 1;
-    }
-
-    if (amount > maxh || amount < minh) {
-        write("%^BOLD%^%^RED%^Your weight must be within allowed range.");
-        return 1;
-    }
-
-    char_sheet["weight"] = amount;
-    advance_head();
-    return 1;
-}
-
-synopsis_weight()
-{
-    string racefile = "/std/races/" + char_sheet["race"];
-
-    int minh = racefile->weight_base(char_sheet["gender"]);
-    int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
-
-    write("%^BOLD%^%^WHITE%^Choose weight for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^weight%^WHITE%^ in %^CYAN%^pounds%^WHITE%^.\n");
-    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
-}
-
-string *generate_body_type()
-{
-    return ({"frail", "skinny", "slender", "svelte", "hardy", "portly", "heavy"});
 }
 
 display_age()
