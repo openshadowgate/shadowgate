@@ -137,7 +137,7 @@ void expire2()
     object room;
     room = find_object_or_load(location);
     if (objectp(room)) {
-        tell_room(room, "The " + ENERGIES + "%^RESET%^finally sputter out, rushing back into the octagonal stone seal, which implodes and disappears.");
+        tell_room(room, "The " + ENERGIES + " %^RESET%^finally sputter out, rushing back into the octagonal stone seal, which implodes and disappears.");
         restore_exits();
         TO->move("/d/shadowgate/void");
         TO->remove();
