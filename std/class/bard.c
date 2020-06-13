@@ -22,7 +22,7 @@ int *restricted_alignments() { // switched March 2016 to 3e standard, all non-la
 string *restricted_gods() { return ({}); }
 
 mapping stat_requirements() {
-    return ([ "charisma" : 15 ]);
+    return ([ "charisma" : 14 ]);
 }
 
 // strong & weak saving throws. Fort, Ref, Will

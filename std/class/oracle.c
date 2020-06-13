@@ -19,7 +19,7 @@ int *restricted_alignments() { return ({}); }
 string *restricted_gods() { return ({}); }
 
 mapping stat_requirements() {
-    return ([ "charisma" : 15 ]);
+    return ([ "charisma" : 16 ]);
 }
 
 // strong & weak saving throws. Fort, Ref, Will

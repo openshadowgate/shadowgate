@@ -20,7 +20,7 @@ int *restricted_alignments() { return ({}); }
 string *restricted_gods() { return ({}); }
 
 mapping stat_requirements() {
-    return ([ "intelligence" : 15 ]);
+    return ([ "intelligence" : 16 ]);
 }
 
 // strong & weak saving throws. Fort, Ref, Will

@@ -27,7 +27,7 @@ int *saving_throws() { return ({ 1,1,0 }); }
 
 mapping stat_requirements()
 {
-    return ([ "dexterity" : 13, "wisdom" : 13 ]);
+    return ([ "dexterity" : 12, "wisdom" : 12 ]);
 }
 
 string *combat_styles() {
