@@ -50,7 +50,7 @@ create() {
     		ob->move(TO);
     		command("wield sword");
     	set_max_level(8);
-    	command("speak kobold");
+    	command("speak draconic");
     	command("speech yip");
     	FLAG = 0;
 	set_property("knock unconscious");

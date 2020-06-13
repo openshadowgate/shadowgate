@@ -69,7 +69,7 @@ create() {
   			"with fleas and other insect life.");
             ob->add_id(({"cloth","loin cloth","bear skin loin cloth"}));
     		command("wear robe");
-    	command("speak ogrish");
+    	command("speak giant");
     	command("speech roar");
    	set_property("full attacks",1);
     	add_search_path("/cmds/fighter");

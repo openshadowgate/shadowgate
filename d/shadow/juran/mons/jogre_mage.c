@@ -80,7 +80,7 @@ create() {
     	set_max_level(15);
     	set_property("swarm",1);
     	set_property("full attacks",1);
-        command("speak ogrish");
+        command("speak giant");
     	command("speech intone");
     	set_speed(40);
 	set_property("knock unconscious");
