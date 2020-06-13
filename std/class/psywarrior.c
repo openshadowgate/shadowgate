@@ -19,7 +19,7 @@ int *restricted_alignments() { return ({}); }
 string *restricted_gods() { return ({}); }
 
 mapping stat_requirements() {
-    return ([ "intelligence" : 15 ]); // making them intelligence-based like psions
+    return ([ "intelligence" : 14 ]); // making them intelligence-based like psions
 }
 
 // strong & weak saving throws. Fort, Ref, Will
