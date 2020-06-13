@@ -1,4 +1,5 @@
-#include <spell.h>
+#include <std.h>
+#include <magic.h>
 inherit SPELL;
 
 int wasbuff, lower;
