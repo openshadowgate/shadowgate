@@ -11,7 +11,7 @@ void create(){
    set_id(({"statue"}));
    set_short("block of ivory");
    set_long("");
-   set_weight(10);
+   set_weight(5);
    set_value(2500);
 }
 
