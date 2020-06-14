@@ -10,20 +10,20 @@
 # -------------------------------------------------------------
 
 (superuser): nienne eris ilmarinen nuwisha
-(assist): Restore eris garrett ilmarinen lujke circe odin tsera
+(assist): Restore eris garrett ilmarinen lujke circe odin tsera yves
 
 (mudlib): lujke ilmarinen
-(daemon): ilmarinen lujke circe tsera
+(daemon): ilmarinen lujke circe tsera yves
 
 #       misc groups
-(law_c): eris ilmarinen nienne nuwisha garrett circe tsera
-(law): eris ilmarinen nienne nuwisha garrett circe tsera
+(law_c): eris ilmarinen nienne nuwisha garrett circe tsera yves
+(law): eris ilmarinen nienne nuwisha garrett circe tsera yves
 (standard): Standard
 (classcoding): lujke ilmarinen
 (tutor): garrett
 
 #       Teams
-(area): chernobog circe ergo essyllis garrett lujke nienne octothorpe odin titania tlaloc uriel tsera
+(area): chernobog circe ergo essyllis garrett lujke nienne octothorpe odin titania tlaloc uriel tsera yves
 (daemonassist): lujke nienne
 (help): chernobog kismet titania
 
