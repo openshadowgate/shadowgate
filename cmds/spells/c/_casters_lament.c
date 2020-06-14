@@ -43,8 +43,8 @@ void spell_effect(int prof) {
       wasbuff = 1;
       lower = clevel / 6 + 2;
       lower = lower > 8 ? 8 : lower;
-      target->add_saving_bonus("all",lower);
-      target->set_property("protection from spells", 1);
+      caster->add_saving_bonus("all",lower);
+      caster->set_property("protection from spells", 1);
       addSpellToCaster();
       call_out("dest_effect", clevel * (10 + roll_dice(1, 6)) * ROUND_LENGTH);
       return;
@@ -89,8 +89,8 @@ void spell_effect(int prof) {
 void dest_effect(){
     if(wasbuff) {
       if (objectp(caster)) {
-        target->add_saving_bonus("all",-lower);
-        target->remove_property("protection from spells");
+        caster->add_saving_bonus("all",-lower);
+        caster->remove_property("protection from spells");
         tell_room(environment(caster),"%^MAGENTA%^Energy flickers briefly around "+caster->QCN+" before waning.%^RESET%^",caster);
         tell_object(caster,"%^MAGENTA%^A breath of cool air reaches your skin as the protective invocation flickers and wanes!%^RESET%^");
       }
