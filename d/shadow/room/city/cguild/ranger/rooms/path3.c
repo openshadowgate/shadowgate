@@ -31,13 +31,15 @@ void init(){
 int enter_tree(string str){
     if(!str) return notify_fail("Enter what?");
     if(str != "tree") return notify_fail("Enter what?");
-    if(TP->is_class("ranger")) {
-       tell_object(TP, "You walk towards the tree, and as you get close, you can feel your lifeforce meld with it as you are moved to another place.");
+    if (TP->is_class("ranger") ||
+        TP->is_class("druid")
+        ) {
+        tell_object(TP, "You walk towards the tree, and as you get close, you can feel your lifeforce meld with it as you are moved to another place.");
     } else {
         tell_object(TP, "As you enter the tree, you are overcome with a weariness.\n"
-	   "You have the strong sense the tree has sapped your strength and "
-	   "you are not welcome here.");
-	TP->use_stamina(100);
+                    "You have the strong sense the tree has sapped your strength and "
+                    "you are not welcome here.");
+        TP->use_stamina(100);
     }
     TP->move_player("/d/shadow/room/city/cguild/ranger/rooms/hall2");
     return 1;
