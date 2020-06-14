@@ -1266,6 +1266,21 @@ string query_long(string unused)
     }
     /* sub = capitalize(query_subjective()); */
     sub = "They";
+    if (userp(TO)) {
+        height = TO->query_player_height();
+        if (objectp(shape)) {
+            height = (int)shape->query_shape_height();
+        }
+        weight = TO->query_player_weight();
+        if (objectp(shape)) {
+            weight = (int)shape->query_shape_weight();
+        }
+        if (TO->query_size_bonus()) {
+            height = to_int(height * pow(2, TO->query_size_bonus()));
+            weight = to_int(weight * pow(pow(2, TO->query_size_bonus()), 2));
+        }
+        reg += "%^BOLD%^" + sub + " are approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";
+    }
 
     x = ((player_data["general"]["hp"] * 100) / (player_data["general"]["max_hp"]) + 1);
     if (x > 90) {
@@ -1342,6 +1357,17 @@ string query_desc(string unused)
         }
     }
     sub = capitalize(query_subjective());
+    if (userp(TO)) {
+        height = TO->query_player_height();
+        if (objectp(shape)) {
+            height = (int)shape->query_shape_height();
+        }
+        weight = TO->query_player_weight();
+        if (objectp(shape)) {
+            weight = (int)shape->query_shape_weight();
+        }
+        reg += "%^BOLD%^" + sub + " is approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";
+    }
 
     x = ((player_data["general"]["hp"] * 100) / player_data["general"]["max_hp"]);
     if (x > 90) {
