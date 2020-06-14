@@ -4,9 +4,7 @@
 
 inherit OBJECT;
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "age", "alignment", "diety"});
-
-string *SPECIAL_CHAIN = ({"stats", "age"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "age", "alignment", "diety", "class_special"});
 
 int head = 0;
 
@@ -52,6 +50,8 @@ void init()
     add_action("_select", "sel");
 
     add_action("_review", "review");
+
+    _review();
 }
 
 _select(string str)
@@ -74,7 +74,7 @@ advance_head()
 {
     head++;
     if (head >= sizeof(ROLL_CHAIN)) {
-        review();
+        display_char_sheet();
     } else {
         display_common();
     }
@@ -84,7 +84,7 @@ select_common(string str)
 {
     string * choices;
 
-    if (member_array(ROLL_CHAIN[head], SPECIAL_CHAIN) != -1) {
+    if (function_exists("select_" + ROLL_CHAIN[head], TO)) {
         call_other(TO, "select_" + ROLL_CHAIN[head], str);
         return;
     }
@@ -111,7 +111,7 @@ display_common()
     string i;
     string * choices;
 
-    if (member_array(ROLL_CHAIN[head], SPECIAL_CHAIN) != -1) {
+    if (function_exists("display_" + ROLL_CHAIN[head], TO)) {
         call_other(TO, "display_" + ROLL_CHAIN[head]);
         return;
     }
@@ -166,6 +166,7 @@ string *generate_race()
     choices = map(choices, (:replace_string($1, ".c", ""):));
     choices = filter_array(choices, (:member_array($1, ("/std/class/" + $2)->restricted_races()) == -1:), char_sheet["class"]);
     choices = filter_array(choices, (:!(("/std/races/" + $1)->is_gender_locked(char_sheet["gender"])):));
+    choices = filter_array(choices, (:sizeof(({1, 2, 3, 4, 5, 6, 7, 8, 9}) - (("/std/races/" + $1)->restricted_alignments(char_sheet["subrace"]) + ("/std/class/" + $2)->restricted_alignments())) :), char_sheet["class"]);
 
     return choices;
 }
@@ -197,6 +198,7 @@ display_stats()
 {
     string i;
     int sum = 0;
+    mapping race_stats = ([]);
 
     if (!sizeof(char_sheet["stats"])) {
         char_sheet["stats"] = ([
@@ -223,14 +225,22 @@ display_stats()
                 cache["minstats"][i] = max(({tmpl_stats[i], cache["minstats"][i]}));
             }
         }
+        char_sheet["stats"] += cache["minstats"];
     }
 
-    char_sheet["stats"] += cache["minstats"];
+    {
+        race_stats["strength"] = ("/std/races/" + char_sheet["race"])->stat_mods(char_sheet["subrace"])[0];
+        race_stats["dexterity"] = ("/std/races/" + char_sheet["race"])->stat_mods(char_sheet["subrace"])[1];
+        race_stats["constitution"] = ("/std/races/" + char_sheet["race"])->stat_mods(char_sheet["subrace"])[2];
+        race_stats["intelligence"] = ("/std/races/" + char_sheet["race"])->stat_mods(char_sheet["subrace"])[3];
+        race_stats["wisdom"] = ("/std/races/" + char_sheet["race"])->stat_mods(char_sheet["subrace"])[4];
+        race_stats["charisma"] = ("/std/races/" + char_sheet["race"])->stat_mods(char_sheet["subrace"])[5];
+    }
 
     write("
 ");
     foreach(i in STATS) {
-        write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]));
+        write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]) + (race_stats[i] ? ((race_stats[i] > 0 ? "%^BOLD%^%^CYAN%^ +" : "%^BOLD%^%^RED%^ ") + race_stats[i]) : ""));
         sum += char_sheet["stats"][i];
     }
 
@@ -294,19 +304,16 @@ _reroll_stats()
 _recommended_stats()
 {
     string i;
-    int sum = 0;
 
     mapping temp_stats = char_sheet["stats"];
 
-    foreach(i in STATS) {
-        temp_stats[i] = max(({RECOMMENDED_STATS[char_sheet["class"]][i], cache["minstats"][i]}));
-        sum += temp_stats[i];
+    if (sizeof(cache["minstats"]) && sizeof(("/std/acquired_template/" + char_sheet["template"])->stat_requirements())) {
+        write("%^BOLD%^%^RED%^You can't use stat recommendations while having stat restrictions imposed by a template. You're on your own.");
+        return 1;
     }
 
-    if (sum > 92) {
-        write("%^BOLD%^%^WHITE%^The total amount of stats you have to get due to template and class limitation exceeds recommendations. You're on your own.");
-        synopsis_stats();
-        return 1;
+    foreach(i in STATS) {
+        temp_stats[i] = RECOMMENDED_STATS[char_sheet["class"]][i];
     }
 
     char_sheet["stats"] = temp_stats;
@@ -377,7 +384,8 @@ _add_stats(string str){
         }
     }
 
-    char_sheet["stats"][stat] = char_sheet["stats"][stat] + amount;
+    char_sheet["stats"][stat] += amount;
+
     display_stats();
     return 1;
 }
@@ -459,7 +467,7 @@ string *generate_alignment()
 
     string * choices;
 
-    alignments -= racefile->restricted_alignments(char_sheet["subrace"] ? char_sheet["subrace"] : 0);
+    alignments -= racefile->restricted_alignments(char_sheet["subrace"]);
     alignments -= classfile->restricted_alignments();
 
     choices = map_array(alignments, (: $2->align_to_string($1) :), TO);
@@ -483,6 +491,26 @@ string *generate_diety()
     }
 
     return choices;
+}
+
+display_diety()
+{
+    string * choices = generate_diety();
+    string i;
+
+    write("%^BOLD%^%^WHITE%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^ from the following:\n");
+    foreach(i in choices)
+    {
+        write(" %^GREEN%^%^BOLD%^" + implode(map(explode(i, " "), (:capitalize($1):)), " "));
+    }
+
+    write("
+%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, e.g. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
+}
+
+string *generate_class_special()
+{
+    return ("/std/class/" + char_sheet["class"])->query_newbie_stuff(str_to_align(char_sheet["alignment"]));
 }
 
 // Modules end here
