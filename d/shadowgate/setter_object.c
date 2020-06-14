@@ -377,8 +377,6 @@ _add_stats(string str){
         }
     }
 
-    tell_object(FPL("ilmarinen"),":"+amount + ":" + identify(char_sheet["stats"]));
-
     char_sheet["stats"][stat] = char_sheet["stats"][stat] + amount;
     display_stats();
     return 1;
