@@ -94,9 +94,13 @@ select_common(string str)
     choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
     if (sizeof(choices)) {
-        if (member_array(str, choices) == -1) {
-            write("%^BOLD%^%^WHITE%^Selection %^RED%^" + str + "%^WHITE%^ is not valid for your %^RED%^" + ROLL_CHAIN[head] + "%^WHITE%^.");
-            return 0;
+        if (str == "random") {
+            str = choices[random(sizeof(choices))];
+        } else {
+            if (member_array(str, choices) == -1) {
+                write("%^BOLD%^%^WHITE%^Selection %^RED%^" + str + "%^WHITE%^ is not valid for your %^RED%^" + ROLL_CHAIN[head] + "%^WHITE%^.");
+                return 0;
+            }
         }
     }
 
@@ -127,6 +131,7 @@ display_common()
         }
     write("
 %^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, e.g. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random value.");
     } else if (sizeof(choices) == 1) {
         select_common(choices[0]);
         advance_head();
@@ -511,11 +516,13 @@ _add_stats(string str){
     return 1;
 }
 
-select_stats()
+select_stats(string str)
 {
-
     write("%^BOLD%^%^WHITE%^You must now set your %^CYAN%^stat points.\n");
 
+    if (str == "random") {
+        _recommended_stats();
+    }
     synopsis_stats();
 }
 
@@ -534,23 +541,27 @@ select_age(string str)
     string racefile = "/std/races/" + char_sheet["race"];
     string templatefile = "/std/acquired_template/" + char_sheet["template"];
 
-    if (sscanf(str, "%d", amount) != 1) {
-        write("%^BOLD%^%^RED%^You have to enter a number.");
-        return 1;
-    }
-
     age_brackets = racefile->age_brackets();
 
-    if (amount < age_brackets[0]) {
-        write("%^BOLD%^%^RED%^Your can't be that young.");
-        return 1;
-    }
+    if (str == "random") {
+        amount = age_brackets[0] + random(age_brackets[3] * 12 / 10 - age_brackets[0]);
+    } else {
+        if (sscanf(str, "%d", amount) != 1) {
+            write("%^BOLD%^%^RED%^You have to enter a number.");
+            return 1;
+        }
 
-    if (!templatefile->query_unbound_age()) {
-        if (!racefile->query_unbound_age()) {
-            if (amount > age_brackets[3] * 12 / 10) {
-                write("%^BOLD%^%^WHITE%^Your can't be that old. Maximum allowed age for your race and template is %^CYAN%^" + age_brackets[3] * 12 / 10 + "%^WHITE%^.");
-                return 1;
+        if (amount < age_brackets[0]) {
+            write("%^BOLD%^%^RED%^Your can't be that young.");
+            return 1;
+        }
+
+        if (!templatefile->query_unbound_age()) {
+            if (!racefile->query_unbound_age()) {
+                if (amount > age_brackets[3] * 12 / 10) {
+                    write("%^BOLD%^%^WHITE%^Your can't be that old. Maximum allowed age for your race and template is %^CYAN%^" + age_brackets[3] * 12 / 10 + "%^WHITE%^.");
+                    return 1;
+                }
             }
         }
     }
@@ -577,6 +588,7 @@ synopsis_age()
 
     write("\n%^BOLD%^%^WHITE%^Enter your %^CYAN%^age%^WHITE%^ in %^CYAN%^years%^WHITE%^.\n");
     write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + (age_brackets[0] + random(age_brackets[1] - age_brackets[0]))+ ">%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random age.");
 }
 
 string *generate_alignment()
