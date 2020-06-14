@@ -43,17 +43,9 @@ This command sets short description or your character, a phrase that precedes yo
 
 You are required to use automatic racial substitutions %^CYAN%^$R%^RESET%^, for your race, or %^CYAN%^$SR%^RESET%^ in the adjective. If you won't, %^CYAN%^$R%^RESET%^ will be appended to the end of your description.
 
-In addition to that, there are several substitutions to expand your adjective:
+In addition to that, you can use %^CYAN%^$G%^RESET%^ to put in your gender.
 
-    %^CYAN%^$B%^RESET%^ - body type
-
-    %^CYAN%^$G%^RESET%^ - gender
-
-    %^CYAN%^$E%^RESET%^ - eye color
-
-    %^CYAN%^$H%^RESET%^ - hair color
-
-    Your adjective should be something appropriate that someone could tell almost immediately about your character. It should also be fairly short and succinct as well as stable over reasonable periods of time.
+Your adjective should be something appropriate that someone could tell almost immediately about your character. It should also be fairly short and succinct as well as stable over reasonable periods of time.
 
 %^CYAN%^EXAMPLES%^RESET%^
 
@@ -64,10 +56,6 @@ $R with long hair
 $SR with blue hair
 
     A water genasi with blue hair, if your subrace is water genasi.
-
-$G $R with a $B build
-
-    A male human with a scrawny build, if you are human male with scrawny build.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
