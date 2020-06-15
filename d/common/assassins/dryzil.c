@@ -57,7 +57,7 @@ void create() {
    set_hp(375);
    set_exp(19000);
    set_funcs(({"dart"}));
-   set_func_chance(25);    
+   set_func_chance(25);
    set("aggressive","attack_fun");
    set_emotes(5, ({
       "%^MAGENTA%^Dryzil says:%^RESET%^ I long for blood!%^RESET%^",
@@ -65,11 +65,11 @@ void create() {
       "%^MAGENTA%^Dryzil says:%^RESET%^ You will die like the rest of my victims!",
       "%^MAGENTA%^Dryzil says: %^RESET%^DIE ALREADY!  What the hell?!?",
    }), 1);
-   ob =  new( "/realms/grazzt/assassins/dagger.c" );
+   ob =  new( "/d/common/assassins/assassins_dagger.c" );
    ob->set_property("monsterweapon",1);
    ob->move(TO);
    command("wield dagger in left hand");
-   ob =  new( "/realms/grazzt/assassins/dagger.c" );
+   ob =  new( "/d/common/assassins/assassins_dagger.c" );
    ob->set_property("monsterweapon",1);
    ob->move(TO);
    command("wield dagger");
@@ -84,7 +84,7 @@ void do_kill(object ob) {
       if(!TO->query_paralyzed()) {
          ("/cmds/spells/d/_dispel_magic.c")->use_spell(TO,who,10,100,"mage");
       }
-      call_out("do_kill",20,ob);   
+      call_out("do_kill",20,ob);
    }
 }
 void dart(object targ) {
@@ -125,14 +125,14 @@ int attack_fun() {
          for(j = 0;j < i;j++) {
             if(high_mortalp(user[j])){
                tell_object(user[j],"%^RESET%^Dryzil %^MAGENTA%^<hm>%^RESET%^ "
-               "Lovely show "+TPQCN+"! Saved me hunting you down a second time!");        
+               "Lovely show "+TPQCN+"! Saved me hunting you down a second time!");
             }
          }
       } else {
          for(j = 0;j < i;j++) {
             if(high_mortalp(user[j])){
                tell_object(user[j],"%^RESET%^Dryzil %^MAGENTA%^<hm>%^RESET%^ "
-               "Well, well, well "+TPQCN+"...I knew I would find you among the weenies!");        
+               "Well, well, well "+TPQCN+"...I knew I would find you among the weenies!");
             }
          }
       }
@@ -145,7 +145,7 @@ int attack_fun() {
 void heart_beat() {
    object *user;
    string *exits;
-   string exitn; 
+   string exitn;
    int i,j;
    int ii,jj;
    ::heart_beat();
@@ -172,7 +172,7 @@ void heart_beat() {
          ii = sizeof(user);
          for(jj = 0;jj < ii;jj++) {
             if(high_mortalp(user[jj])){
-               tell_object(user[jj],"%^RESET%^Dryzil %^MAGENTA%^<hm>%^RESET%^ Wait! "+TARGET+" come back! I am not finished with you yet!!!");        
+               tell_object(user[jj],"%^RESET%^Dryzil %^MAGENTA%^<hm>%^RESET%^ Wait! "+TARGET+" come back! I am not finished with you yet!!!");
             }
          }
          ATTACK = 0;
@@ -189,8 +189,8 @@ void heart_beat() {
                j = random(i);
                exitn = (string)environment(TO)->query_exit(exits[j]);
 // added to keep him doing his job in Goblins over longer reboots *Styx* 1/26/03
-	       if(exitn == "/d/shadow/room/goblin/rooms/gate2" || 
-		     exitn == "/d/shadow/room/forest/road3") 
+	       if(exitn == "/d/shadow/room/goblin/rooms/gate2" ||
+		     exitn == "/d/shadow/room/forest/road3")
 		  return;
                TO->force_me(exits[j]);
                wander = 0;
@@ -202,7 +202,7 @@ void heart_beat() {
          }
       }
    }
-}    
+}
 int test_heart() {return 1;}
 int drink_fun(string str) {
    if(TP->query_lowest_level()<20) return 0;
@@ -231,13 +231,13 @@ void stab(object targ) {
            );
       say("%^BOLD%^%^RED%^"
           +TO->query_cap_name()+" executes an assassin like move upon "
-          +targ->query_cap_name()+" and swiftly the steel garot finds its mark!" 
+          +targ->query_cap_name()+" and swiftly the steel garot finds its mark!"
           "%^RESET%^"
           ,TP);
       targ->set_paralyzed(80,"Dryzil has a garot wrapped around your throat and you struggle in vain to break free!");
       TO->set_paralyzed(80,"Bug report if seen!");
       write("%^RED%^You are being strangled to death!%^RESET%^");
-      targ->do_damage("head",random(mod)+5); 
+      targ->do_damage("head",random(mod)+5);
       call_out("squeeze",10,targ,mod);
       if(!targ->kill_ob(TO, 0)) return 1;
    }
@@ -249,6 +249,6 @@ void squeeze(object targ,int mod) {
    if(!present(targ,ETO)) return;
    if(!TO->query_paralyzed()) return;
    write("%^RED%^You are being strangled to death!%^RESET%^");
-   targ->do_damage("head",random(mod)+5); 
+   targ->do_damage("head",random(mod)+5);
    call_out("squeeze",10,targ,mod);
 }
