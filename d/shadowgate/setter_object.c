@@ -4,7 +4,7 @@
 
 inherit OBJECT;
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "age", "height", "weight", "body_type", "alignment", "diety", "class_special"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "age", "height", "weight", "body_type", "language", "alignment", "diety", "class_special"});
 
 int head = 0;
 
@@ -51,6 +51,8 @@ void init()
 
     add_action("_review", "review");
 
+    add_action("_reset", "reset");
+
     _review();
 }
 
@@ -67,6 +69,12 @@ _select(string str)
 _review()
 {
     display_common();
+    return 1;
+}
+
+_reset(string str)
+{
+    reset_common(str);
     return 1;
 }
 
@@ -130,7 +138,7 @@ display_common()
             write(" %^GREEN%^%^BOLD%^" + capitalize(i));
         }
     write("
-%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, e.g. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
+%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
     write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random value.");
     } else if (sizeof(choices) == 1) {
         select_common(choices[0]);
@@ -142,6 +150,35 @@ display_common()
     if (brief == 0) {
 
     }
+}
+
+reset_common(string str)
+{
+    int i, rstpos;
+
+    if (member_array(str, ROLL_CHAIN) == -1) {
+        write("%^BOLD%^%^RED%^You cant reset that.");
+        write("%^BOLD%^%^WHITE%^Valid options to reset are: %^CYAN%^" + replace_string(implode(ROLL_CHAIN, "%^WHITE%^, %^CYAN%^"), "_", " "));
+        return 1;
+    }
+
+    str = replace_string(str, " ", " ");
+    str = lower_case(str);
+
+    rstpos = member_array(str, ROLL_CHAIN);
+
+    if (head < rstpos) {
+        write("%^BOLD%^%^RED%^You haven't yet selected %^CYAN%^" + str + "%^RED%^.");
+        return 1;
+    }
+
+    for (i = head; i >= rstpos; i-- )
+    {
+        map_delete(char_sheet, ROLL_CHAIN[i]);
+    }
+    cache = ([]);
+
+    _review();
 }
 
 // MODULES
@@ -193,6 +230,10 @@ string *generate_subrace()
 string *generate_template()
 {
     string * choices = ({});
+
+    // Ths one is hard to read but not impossible, it is copypaste from old chargen.
+
+    // To read it start from outer functions.
 
     choices = map(filter_array(map(get_dir("/std/acquired_template/*.c"),(:"/std/acquired_template/" + $1:)), (:member_array($2, arrayp($1->races_allowed()) ? $1->races_allowed() : ({$2})) != -1:), char_sheet["race"]), (: replace_string(replace_string($1, "/std/acquired_template/", ""), ".c", "") :));
 
@@ -371,7 +412,7 @@ synopsis_weight()
 
     write("%^BOLD%^%^WHITE%^Choose weight for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
     write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^weight%^WHITE%^ in %^CYAN%^pounds%^WHITE%^.\n");
-    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
+    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. For example, %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
     write("%^BOLD%^%^WHITE%^You can also select a random value with %^ORANGE%^<select random>%^WHITE%^.");
     write("\n");
 }
@@ -638,12 +679,52 @@ display_diety()
     }
 
     write("
-%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, e.g. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
+%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
 }
 
 string *generate_class_special()
 {
     return ("/std/class/" + char_sheet["class"])->query_newbie_stuff(str_to_align(char_sheet["alignment"]));
+}
+
+string *generate_language()
+{
+    int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4;
+
+    if (maxbonus > 0) {
+        return (("/std/races/" + char_sheet["race"])->query_languages(char_sheet["subrace"]))["optional"];
+    }else {
+        return ({});
+    }
+}
+
+select_language(string str)
+{
+    string * toselect;
+    string * prospective;
+    string * tmp;
+    int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4;
+
+    toselect = explode(str, " ");
+
+    if (!sizeof(toselect)) {
+        write("%^BOLD%^%^WHITE%^Enter space separated list of languages. You can select up to %^CYAN%^" + maxbonus + "%^WHITE%^ languages.");
+        return 0;
+    }
+
+    prospective = (("/std/races/" + char_sheet["race"])->query_languages(char_sheet["subrace"]))["optional"];
+
+    if (sizeof(tmp = (toselect - prospective))) {
+        write("%^BOLD%^%^WHITE%^You can't select one of the languages you have entered: %^CYAN%^" + implode(tmp, "%^WHITE%^, %^CYAN%^"));
+        return 0;
+    }
+
+    char_sheet[ROLL_CHAIN[head]] = toselect;
+
+    write("%^BOLD%^%^WHITE%^You have selected %^CYAN%^" + implode(toselect, "%^WHITE%^, %^CYAN%^") + "%^WHITE%^ for your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^.");
+
+    advance_head();
+    return 1;
 }
 
 // Modules end here
