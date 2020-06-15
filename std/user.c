@@ -4062,6 +4062,12 @@ string realName(string who)
 
     for (i = 0; i < sizeof(names); i++) {
         temp = relationships[names[i]];
+        if (temp == "victim") {
+          log_file("user_relationships", ctime(time())+": "+this_object()->query_name()+" tried to pull relationships mapping and pulled victim. PO="+previous_object()+".\n");
+          continue;
+        }
+// Trying to track down a bug in debug.log where temp is "victim"...
+// *Mon Jun 15 04:10:56 2020: /std/user line 4065: *Bad argument 1 to keys() Expected: mapping Got: "victim".
         if (!sizeof(keys(temp))) {
             continue;
         }
