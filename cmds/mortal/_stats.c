@@ -326,7 +326,7 @@ int cmd_stats(string person)
         if (stringp(person) && strsrch(person, "move") != -1) {
 // breaking on level-adjusted characters @ L11, fixing. N, 4/1/20
 //            if((int)TP->query_base_character_level() < 10)
-            if ((int)TP->query_character_level() < 10) {
+            if ((int)TP->query_base_character_level() < 10) {
                 tell_object(TP, "You must be above level 10 in order to move one of your "
                             "stats.");
                 return 1;
