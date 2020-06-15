@@ -4667,6 +4667,11 @@ string *query_player_feats() {
     int i;
 
     myreturn = ({});
+
+    if (!mapp(__FEAT_DATA)) {
+        init_feats();
+    }
+
     if(mapp(__FEAT_DATA["class"])) {
       testmap = __FEAT_DATA["class"];
       mykeys = keys(testmap);
