@@ -323,7 +323,7 @@ void receive_given_item(object obj)
 		obj2->move(TP);
 	}else if (name == "Shadow Bracelets") {
 		obj->remove();
-		force_me("say Yes, these are horribly tainted by Sharran magic, or so the stories" +
+		force_me("say Yes, these are horribly tainted by dark magic, or so the stories" +
 			 " tell. But from the first they were designed to serve the cause of the light," +
 			 " not darkness.");
 		force_me("emote tosses the dark bracelets into the mirror, from" +
