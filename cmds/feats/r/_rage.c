@@ -20,7 +20,7 @@ void create()
     feat_prereq("Barbarian L1");
     feat_desc("This feat allows the barbarian to enter a fit of furious rage, boosting their strength, constitution, and will. The ability will last longer, and grow stronger, as the barbarian gains levels. Rage can be turned off by typing rage again. By the end of raging the barbarian will become fatigued. Rage will be interrupted if the barbarran becomes fatigued and exhausted.
 
-%^BOLD%^N.B.%^RESET%^ Being enraged means that you are maddened uncontrollably. This is *not* a state in which you can calmly participate in a normal conversation, undertake delicate tasks, cast offensive spells, solve problems, or pretty much do anything other than shout obscenities andkill things. This power won't work in conjunction with similar magical effects, such as rally, transformation, rage, berserker and fell flight.
+%^BOLD%^N.B.%^RESET%^ Being enraged means that you are maddened uncontrollably. This is *not* a state in which you can calmly participate in a normal conversation, undertake delicate tasks, cast offensive spells, solve problems, or pretty much do anything other than shout obscenities and kill things. This power won't work in conjunction with similar magical effects, such as rally, transformation, rage, berserker and fell flight.
 
 %^BOLD%^N.B.%^RESET%^ Rage status can be set using prompt. Please see help prompt for more information.
 

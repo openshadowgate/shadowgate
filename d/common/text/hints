@@ -58,5 +58,5 @@
 %^CYAN%^If you don't know where to go or where to hunt, use %^GREEN%^<rumors>%^CYAN%^ command to list areas appropriate to your level.
 %^CYAN%^Use %^GREEN%^<set term ansi-no-black>%^CYAN%^ if you can't see black colors.
 %^CYAN%^You can manipulate your mood with %^GREEN%^<fortune>%^CYAN%^ command.
-%^CYAN%^You will die. A lot. Learn about death in %^GREEN%^<help death>%^CYAN%^.
+%^CYAN%^You will die. A lot. (You should die in Shadowgate, it means you're experiencing danger!) Learn about death in %^GREEN%^<help death>%^CYAN%^.
 %^CYAN%^Using the %^GREEN%^<actions>%^CYAN%^ command is an easy way to see what actions are able to be performed in a room.
