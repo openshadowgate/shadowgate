@@ -76,33 +76,12 @@ string pick_room(); // To pick a room for them to be in.
 
 int cost(string myclass, int lottc)
 {
-    int train;
-    if(1) return 0;
-    switch(myclass)
-    {
-    case "fighter":
-    case "paladin":
-    case "ranger" :
-        train = lottc *300;
-        break;
-    case "bard":
-    case "thief"  :
-        train = lottc*275;
-        break;
-    case "mage" :
-    case "psion" :
-        train = lottc*225;
-        break;
-    default :
-        train = lottc*250;
-        break;
-    }
-    return train;
+    return 0;
 }
 
 int do_multiclass(object ob,string myclass) {
     int level;
-    level = (int)ob->query_character_level();
+    level = (int)ob->query_base_character_level();
     ob->set_class(myclass);
     ob->set("lvl_"+level+"_class",myclass);
     ob->set("active_class",myclass);
@@ -124,7 +103,7 @@ int can_multiclass(object ob,string myclass) {
     subrace             = (string)ob->query("subrace");
     alignment           = (int)ob->query_alignment();
     deity               = (int)ob->query_diety();
-    level               = (int)ob->query_character_level();
+    level               = (int)ob->query_base_character_level();
     classes             = (string *)ob->query_classes();
     classes            += ({ myclass });
     if(!sizeof(classes)) { return 1; }
@@ -172,7 +151,11 @@ int can_multiclass(object ob,string myclass) {
 
 // first, check that their race & subrace is ok for the new class. The class files do not discern the subrace options for each class so we need to use the race file!
     file                = DIR_RACES+"/"+race+".c";
-    if(!file_exists(file)) { return 0; }
+    if(!file_exists(file)) {
+        tell_object(ob,"%^BOLD%^Your race seems to not exist, please contact an immortal/wiz.");
+        return 0;
+    }
+
     bad_classes         = (string *)file->restricted_classes(subrace);
 
     if(member_array(myclass,bad_classes) != -1) {
@@ -181,7 +164,11 @@ int can_multiclass(object ob,string myclass) {
     }
 
     file                = DIR_CLASSES+"/"+myclass+".c";
-    if(!file_exists(file)) { return 0; }
+    if(!file_exists(file)) {
+      tell_object(ob,"%^BOLD%^We don't know how to make you a "+myclass+" please contact an immortal/wiz.");
+      return 0;
+    }
+
     if(file->is_prestige_class())
     {
         {
@@ -302,9 +289,6 @@ void add_base_class(string str, object obj, string the_class)
         "in order to complete the advancement process.%^RESET%^\n");
     return 1;
 }
-
-
-
 
 int add_class_feats(object ob,string myclass)
 {
@@ -621,7 +605,7 @@ int cmd_advance(string myclass){
 
    TP->remove_property("adding base class");
 
-   //"no adance" setting had been used here to lock players from
+   //"no advance" setting had been used here to lock players from
    //advancing in ancient times. It defines highest level player is
    //allowed to be
 
@@ -673,7 +657,7 @@ int cmd_advance(string myclass){
    }
 //Multiclassing code
    if(TP->query("new_class_type")){
-      char_level = (int)TP->query_character_level();
+      char_level = (int)TP->query_base_character_level();
       if(char_level != 10 &&
          char_level != 20 &&
          char_level != 30 &&
@@ -756,7 +740,7 @@ int cmd_advance(string myclass){
    }else{
       FEATS_D->update_usable(TP);
       if(TP->query("new_class_type")) {
-         char_level = (int)TP->query_character_level();
+         char_level = (int)TP->query_base_character_level();
       }else{
          char_level = (int)TP->query_lowest_level();
       }
@@ -768,8 +752,8 @@ int cmd_advance(string myclass){
          if(ETP->query_property("Specialist") && (string)ETP->query_player() == (string)TPQN){
 //            TP->set("last done",char_level);
             if(ADVANCE_D->advance(this_player(),myclass)){
-               if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0
-                  && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
+               if(TP->query("new_class_type") && (int)TP->query_base_character_level()%4 == 0
+                  && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_base_character_level())){
                   tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please type <help stats>.%^RESET%^");
                }
                if(TP->query_property("multiclassing")){
@@ -811,8 +795,8 @@ int cmd_advance(string myclass){
             }
 	   }else if(char_level > 50){
             if(ADVANCE_D->advance(this_player(),myclass)){
-               if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0
-                  && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
+               if(TP->query("new_class_type") && (int)TP->query_base_character_level()%4 == 0
+                  && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_base_character_level())){
                   tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please type <help stats>.%^RESET%^");
                }
                if(TP->query_property("multiclassing")){
@@ -822,7 +806,7 @@ int cmd_advance(string myclass){
                FEATS_D->update_usable(TP);
                initiate_psychic_powers(TP);
                TP->InitInnate();
-	         TP->use_funds("gold",train);
+	           TP->use_funds("gold",train);
                if(was_newbie != newbiep(TP)){
                   write("%^GREEN%^Congratulations, you are now a full-fledged player.\nYou have heard of a gate to the south, "
                      "that leads into foreign lands.  It will provide passage to the next step of your adventure!%^RESET%^");
@@ -831,8 +815,8 @@ int cmd_advance(string myclass){
 	      }
 	   }else{
             if(ADVANCE_D->advance(this_player(),myclass)){
-               if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0
-                  && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
+               if(TP->query("new_class_type") && (int)TP->query_base_character_level()%4 == 0
+                  && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_base_character_level())){
                   tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please type <help stats>.%^RESET%^");
                }
                if(TP->query_property("multiclassing")){
@@ -860,8 +844,8 @@ int cmd_advance(string myclass){
          }
       }else{
          if(ADVANCE_D->advance(this_player(),myclass)){
-            if(TP->query("new_class_type") && (int)TP->query_character_level()%4 == 0
-               && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_character_level())){
+            if(TP->query("new_class_type") && (int)TP->query_base_character_level()%4 == 0
+               && (((int)TP->query("stat_points_gained") * 4) < (int)TP->query_base_character_level())){
                tell_object(TP,"%^B_RED%^%^CYAN%^You have earned a new stat point, please type <help stats>.%^RESET%^");
             }
             if(TP->query_property("multiclassing")){
@@ -900,7 +884,7 @@ string pick_room()
   string *classes, room,*rooms,*dirs,dir,place,hold1,hold2;
 
   if(TP->query("test_character")) { return 0; }
-  if(TP->query("new_class_type")) { level = (int)TP->query_character_level(); }
+  if(TP->query("new_class_type")) { level = (int)TP->query_base_character_level(); }
   else { level = (int)TP->query_lowest_level(); }
 
   switch(level)
