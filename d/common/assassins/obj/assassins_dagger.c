@@ -32,6 +32,7 @@ void create() {
     set_wield((: TO, "extra_wield":));
     set_unwield((:TO,"removeme":));
     set_property("enchantment",4);
+    set_special_material_type("cold iron");
 }
 int extra_hit(object ob) {
     object vic;
