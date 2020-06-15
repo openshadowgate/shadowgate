@@ -110,7 +110,7 @@ command("wear ring");
 	  "evasion",
 	  "combat reflexes",
 	  "blindfighting"
-    }));       
+    }));
 }
 
 heart_beat() {
@@ -128,7 +128,7 @@ heart_beat() {
  // if(present("powder", TO) && !(atkr->query_paralyzed()))
  //   TO->force_me("toss powder at "+atkr->query_name());
   if(flag) return;
-  ob=new("/realms/grazzt/assassins/dagger");
+  ob=new("/d/common/assassins/assassins_dagger.c");
   ob->set_property("monsterweapon",1);
  tell_room(environment(TO), "%^RED%^Ellgarsh turns to "+atkr->query_cap_name()+
   "%^RED%^ and screams something about hobbit assassins as he rips a
@@ -165,7 +165,7 @@ int xlook(string str)
     write("I wonder why...");
     write("I hope you weren't planning to kill me.");
     write("%^BOLD%^I think I'll just make sure by KILLING YOU!!");
-    ob=new("/realms/grazzt/assassins/dagger");
+    ob=new("/d/common/assassins/assassins_dagger.c");
     ob->set_property("monsterweapon",1);
     ob->move(TO);
     TO->force_me("wield dagger");
@@ -204,7 +204,7 @@ He smiles for a second and says:
 RAD
   );
     write("A good attempt "+TPQCN+", but now you die.");
-    ob=new("/realms/grazzt/assassins/dagger");
+    ob=new("/d/common/assassins/assassins_dagger.c");
     ob->set_property("monsterweapon",1);
     ob->move(TO);
     TO->force_me("wield dagger");
@@ -232,7 +232,7 @@ int xrush(string str)
         "and produces a small bag...%^RESET%^"
        );
     write("Damn you, "+TPQCN+"!  I won't be taken so easily!");
-    ob=new("/realms/grazzt/assassins/dagger");
+    ob=new("/d/common/assassins/assassins_dagger.c");
     ob->set_property("monsterweapon",1);
     ob->move(TO);
     TO->force_me("wield dagger");
@@ -253,14 +253,14 @@ int xsteal(string str)
     write(
 @RAD
 Ellgarsh exclaims:  Is there no honor among thieves?  I guess
-not!  Oh well.  I assume you want my dagger, everyone else does.  
+not!  Oh well.  I assume you want my dagger, everyone else does.
 So here, take it...
 
 %^BOLD%^...IN THE BACK!!!%^RESET%^
 
 RAD
   );
-    ob=new("/realms/grazzt/assassins/dagger");
+    ob=new("/d/common/assassins/assassins_dagger.c");
     ob->set_property("monsterweapon",1);
     ob->move(TO);
     TO->force_me("wield dagger");

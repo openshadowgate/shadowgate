@@ -57,7 +57,7 @@ void create() {
    set_hp(1500);
    set_exp(666);
    set_funcs(({"dart"}));
-   set_func_chance(25);    
+   set_func_chance(25);
    set("aggressive","attack_fun");
    set_emotes(5, ({
                   "%^MAGENTA%^Freloc says:%^RESET%^ I long for blood!"
@@ -68,11 +68,11 @@ void create() {
                   "%^MAGENTA%^Freloc says:%^RESET%^ You will die like the rest of my victims!",
                   "%^MAGENTA%^Freloc says: %^RESET%^DIE ALREADY! "
                   "What the hell?!?",}), 1);
-   new( "/realms/grazzt/assassins/dagger.c" )->move(TO);
+   new( "/d/common/assassins/assassins_dagger.c" )->move(TO);
    command("wield dagger in left hand");
-   new( "/realms/grazzt/assassins/dagger.c" )->move(TO);
+   new( "/d/common/assassins/assassins_dagger.c" )->move(TO);
    command("wield dagger in right hand");
-   remove_property("swarm");  
+   remove_property("swarm");
 
 }
 void do_kill(object ob) {
@@ -81,7 +81,7 @@ void do_kill(object ob) {
    if(objectp(ob) && present(ob,environment(TO))) {
       who = ob->query_name();
       ("/cmds/spells/d/_dispel_magic.c")->use_spell(TO,who,80,100,"mage");
-      call_out("do_kill",20,ob);   
+      call_out("do_kill",20,ob);
    }
 }
 void dart(object targ) {
@@ -119,7 +119,7 @@ int attack_fun() {
              "say Do not trifle with me "+TPQCN+"!"
              );
       command(
-             "say I have no time to deal with one as puny as yourself, but if you interfere with my plans..." 
+             "say I have no time to deal with one as puny as yourself, but if you interfere with my plans..."
              );
       command("grin "+TP->query_name());
    } else {
@@ -132,14 +132,14 @@ int attack_fun() {
          for(j = 0;j < i;j++) {
             if((string)user[j]->query_level() > 19) {
                tell_object(user[j],"%^RESET%^Freloc %^MAGENTA%^<hm>%^RESET%^ "
-                           "Alright "+TPQCN+"! What a sport, came back to play!");        
+                           "Alright "+TPQCN+"! What a sport, came back to play!");
             }
          }
       } else {
          for(j = 0;j < i;j++) {
             if((string)user[j]->query_level() > 19) {
                tell_object(user[j],"%^RESET%^Freloc %^MAGENTA%^<hm>%^RESET%^ "
-                           "I have hunted long for you "+TPQCN+"...let the pain begin!");        
+                           "I have hunted long for you "+TPQCN+"...let the pain begin!");
             }
          }
       }
@@ -153,7 +153,7 @@ int attack_fun() {
 void heart_beat() {
    object *user;
    string *exits;
-   string exitn; 
+   string exitn;
    int i,j;
    int ii,jj;
    ::heart_beat();
@@ -180,7 +180,7 @@ void heart_beat() {
          ii = sizeof(user);
          for(jj = 0;jj < ii;jj++) {
             if((string)user[jj]->query_level() > 19) {
-               tell_object(user[jj],"%^RESET%^Freloc %^MAGENTA%^<hm>%^RESET%^ GET BACK HERE "+TARGET+" YOU SPINELESS WUSS!!!");        
+               tell_object(user[jj],"%^RESET%^Freloc %^MAGENTA%^<hm>%^RESET%^ GET BACK HERE "+TARGET+" YOU SPINELESS WUSS!!!");
             }
          }
          ATTACK = 0;
@@ -206,7 +206,7 @@ void heart_beat() {
          }
       }
    }
-}    
+}
 int test_heart() {return 1;}
 void stab(object targ) {
    int mod;
@@ -296,5 +296,3 @@ void stab(object targ) {
    }
 }
 void set_paralyzed(int time,string message) {return 1;}
-
-
