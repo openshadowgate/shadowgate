@@ -5,7 +5,14 @@
 #include <dirs.h>
 #include <new_exp_table.h>
 
-#define my_skills ({ "academics", "alchemy", "athletics", "craft, armorsmith", "craft, jeweller", "craft, leatherworker", "craft, weaponsmith", "craft, woodworker", "craft, tailor", "disguise", "dungeoneering", "endurance", "healing", "influence", "perception", "rope use", "stealth", "spellcraft", "survival", "thievery" })
+#define MY_SKILLS ({ "academics", "alchemy", "athletics", \
+                     "craft, armorsmith", "craft, jeweller", \
+                     "craft, leatherworker", "craft, weaponsmith", \
+                     "craft, woodworker", "craft, tailor", \
+                     "disguise", "dungeoneering", "endurance", "healing", \
+                     "influence", "perception", "rope use", "stealth", \
+                     "spellcraft", "survival", "thievery"\
+                 })
 
 
 int get_level_block(int num)
@@ -86,27 +93,29 @@ int confirm_drop(string str, string theclass, int drop, int cost)
 
     //tell_object(TP, "cost = "+cost);
     TP->set("active_class", theclass);
+    tell_object(TP, "%^BOLD%^Subtracting exp...%^RESET%^");
     TP->add_exp(-cost);
     TP->remove_XP_tax("all");
-    tell_object(TP, "%^BOLD%^Subtracting exp...%^RESET%^");
-    TP->resetLevelForExp(0);
     tell_object(TP, "%^BOLD%^Reducing level...%^RESET%^");
-    TP->set_combat_spec(theclass, "");
+    TP->resetLevelForExp(0);
     tell_object(TP, "%^BOLD%^Resetting class combat spec...%^RESET%^");
-    skills = my_skills;
+    TP->set_combat_spec(theclass, "");
+    skills = MY_SKILLS;
 
+    tell_object(TP, "%^BOLD%^Clearing skills...%^RESET%^");
     if (sizeof(skills)) {
         for (i = 0; i < sizeof(skills); i++) {
             TP->set_skill(skills[i], 0);
         }
-        tell_object(TP, "%^BOLD%^Clearing skills...%^RESET%^");
     }
 
+    tell_object(TP, "%^BOLD%^Adding up feats...%^RESET%^");
     feats = (int)TP->query_other_feats_gained();
     feats += (int)TP->query("free_feats");
-    tell_object(TP, "%^BOLD%^Adding up feats...%^RESET%^");
     TP->clear_feats();
+    tell_object(TP, "%^BOLD%^Adding free feats...%^RESET%^");
     TP->set("free_feats", feats);
+    tell_object(TP, "%^BOLD%^Clearing old feats...%^RESET%^");
     TP->delete("free_feat_wipe");
     TP->delete("is_auto_detecting_traps");
 
@@ -114,43 +123,41 @@ int confirm_drop(string str, string theclass, int drop, int cost)
         TP->delete("warlock_blast_type");
     }
 
-    tell_object(TP, "%^BOLD%^Clearing old feats...%^RESET%^");
-    tell_object(TP, "%^BOLD%^Adding free feats...%^RESET%^");
 
     // this should only get called if they have no levels in the class that they abandoned, to remove it from the score sheet
     if (((int)TP->query_class_level(theclass) == 1 || (int)TP->query_class_level(theclass) == 0) && sizeof(TP->query_classes()) > 1) {
+        tell_object(TP, "%^BOLD%^Removing class %^MAGENTA%^" + theclass + "%^RESET%^%^BOLD%^...%^RESET%^");
         TP->set_guild_level(theclass, 0);
         TP->set_mlevel(theclass, 0);
         TP->remove_class(theclass);
-        tell_object(TP, "%^BOLD%^Removing class %^MAGENTA%^" + theclass + "%^RESET%^%^BOLD%^...%^RESET%^");
     }
 
 // moved all of the next section out of the above subquery; N, 6/16
 // these should be run regardless of 1/0 level in the abandoned class
 // allows players to reset certain attributes, and mastered spells should be cleared by default
     if (theclass == "mage" || theclass == "sorcerer" || theclass == "psywarrior" || theclass == "warlock" || theclass == "psion") {
-        TP->reset_mastered();
         tell_object(TP, "%^BOLD%^Clearing mastered spells... please reassign your spell slots if you still have class levels.");
+        TP->reset_mastered();
     }
     if (theclass == "mage") {
-        TP->set_school(0);
         tell_object(TP, "%^BOLD%^Clearing mage school... if you still have class levels you may reassign this with <help advance>.");
+        TP->set_school(0);
     }
     if (theclass == "psion") {
-        TP->set_discipline(0);
         tell_object(TP, "%^BOLD%^Clearing psion discipline... if you still have class levels you may reassign this with <help advance>.");
+        TP->set_discipline(0);
     }
     if (theclass == "warlock") {
-        TP->delete("warlock heritage");
         tell_object(TP, "%^BOLD%^Clearing warlock heritage... if you still have class levels you may reassign this with <help advance>.");
+        TP->delete("warlock heritage");
     }
     if (theclass == "fighter") {
-        TP->set_fighter_style(0);
         tell_object(TP, "%^BOLD%^Clearing fighting style... if you still have class levels you may reassign this with <help advance>.");
+        TP->set_fighter_style(0);
     }
     if (theclass == "cleric") {
-        TP->set_divine_domain(({}));
         tell_object(TP, "%^BOLD%^Clearing domains... you may reassign these at a church/temple if you still have class levels.");
+        TP->set_divine_domain(({}));
     }
 
     tell_object(TP, "%^BOLD%^Rebuilding class feats...%^RESET%^");
@@ -165,6 +172,7 @@ int confirm_drop(string str, string theclass, int drop, int cost)
         TP->set_posed(classes[i]);
     }
     if (theclass == "monk") {
+        tell_object(TP, "%^BOLD%^Resetting your monk way and ki spells. You may reassign these at a church/temple if you still have class levels.");        
         TP->delete("monk way");
         TP->delete("ki spells");
         "/daemon/user_d.c"->init_ki_(TP);
@@ -184,7 +192,7 @@ int confirm_drop(string str, string theclass, int drop, int cost)
 int cmd_abandon(string str)
 {
     string* classes, myrace, mysubrace, file;
-    int class_level, cost, drop, lvladjust = 0, i, feedlevel, classlvls;
+    int class_level, cost, drop, lvladjust = 0, i;
     object class_ob;
 
     if (!objectp(TP)) {
@@ -214,27 +222,30 @@ int cmd_abandon(string str)
             tell_object(TP, "There's something wrong with one of your classes, please contact a wiz and try again later.");
             return 1;
         }
+
         if (class_ob->is_prestige_class() &&
             str != classes[i] &&
             member_array(str, class_ob->query_base_classes()) != -1 &&
-            TP->query_class_level(str) > 20 - lvladjust) {
-            tell_object(TP, "You must abandon prestige class before abandoning more than twenty base class levels.");
+            TP->query_class_level(str) > 20 ) {
+            tell_object(TP, "You must abandon your prestige class before abandoning more than twenty base class levels.");
             return 1;
         }
     }
 
 
-    if ((int)TP->query_character_level() < (11 - lvladjust)) {
+    if ((int)TP->query_base_character_level() < (11) ) {
         tell_object(TP, "%^BOLD%^You only have one class, you can't drop your only class.%^RESET%^");
         return 1;
     }
     str = lower_case(str);
     str = replace_string(str, " ", "_");
+    
     if (TP->query("negative level")) {
         tell_object(TP, "%^BOLD%^%^RED%^You have incurred a negative level and must remove it " +
                     "before you are able to abandon.");
         return 1;
     }
+
     if (intp("/daemon/user_d.c"->get_scaled_level(TP))) {
         tell_object(TP, "%^BOLD%^%^RED%^You have scaled your level down and cannot abandon " +
                     "until your level is reset to normal.%^RESET%^");
@@ -246,25 +257,10 @@ int cmd_abandon(string str)
         return 1;
     }
 
-    feedlevel = (int)TP->query_class_level(str);
-    if (lvladjust) {
-        classlvls = 0;
-        if (sizeof(classes) > 1) {
-            for (i = 0; i < sizeof(classes); i++) {
-                if (classes[i] != str) {
-                    classlvls += TP->query_class_level(classes[i]);
-                }
-            }
-        }
-        if (!(classlvls % 10)) {
-            feedlevel += lvladjust;
-        }
-    }
-
-    drop = get_level_block(feedlevel);
+    drop = get_level_block((int)TP->query_base_class_level(str));
     cost = get_exp_cost(TP, drop);
 
-    if ((int)TP->query_class_level(str) > (10 - lvladjust)) {
+    if ((int)TP->query_base_class_level(str) > (10)) {
         tell_object(TP, "\nAre you sure you want to drop %^BOLD%^%^" + drop + " %^RESET%^"
                     "levels in your %^BOLD%^" + str + "%^RESET%^ class? This will cost you %^BOLD%^" + cost + " "
                     "%^RESET%^ experience points. Enter %^BOLD%^yes%^RESET%^ to confirm, "
@@ -304,4 +300,5 @@ You will also have your experience tax reduced by half of the lost exp.
 
 advance, score, stat
 ");
+    return 1;
 }
