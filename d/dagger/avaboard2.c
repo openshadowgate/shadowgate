@@ -23,7 +23,7 @@ void place_board()
 //added by Styx 6/02 just in case a mortal ends up in the room
        obj->set_restricted_read();
    }
-    
+
 }
 
 void create() {
@@ -48,17 +48,17 @@ void create() {
 	set_exits(([
 	"west" : "/d/dagger/avalounge",
 	"east" : "/d/dagger/pkboard",
-        "bodytyper":"/realms/vetri/bodyhold",
-        "colors" : "/realms/crystal/colorhold",
+        "bodytyper":"/d/dagger/bodyhold",
+        "colors" : "/d/daggercolorhold",
 	]));
     //place_board();
 }
 
-void reset() 
+void reset()
 {
     ::reset();
     place_board();
-}   
+}
 
 void init() {
    ::init();
