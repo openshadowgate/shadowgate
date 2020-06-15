@@ -124,7 +124,7 @@ int xlook(string str)
     write("I wonder why...");
     write("I hope you weren't planning to kill me.");
     write("%^BOLD%^I think I'll just make sure by KILLING YOU!!");
-    ob=new("/d/common/assassins/assassins_dagger.c");
+    ob=new("/d/common/assassins/obj/assassins_dagger.c");
     ob->move(TO);
     TO->force_me("wield dagger");
     flag = 1;
@@ -160,7 +160,7 @@ He smiles for a second and says:
 RAD
   );
     write("A good attempt "+TPQCN+", but now you die.");
-    ob=new("/d/common/assassins/assassins_dagger.c");
+    ob=new("/d/common/assassins/obj/assassins_dagger.c");
     ob->move(TO);
     TO->force_me("wield dagger");
     flag = 1;
@@ -188,7 +188,7 @@ int xrush(string str)
     ob=new("/d/tharis/obj/bpowder");
     ob->move(TO);
     TO->force_me("throw powder at "+TPQN);
-    ob=new("/d/common/assassins/assassins_dagger.c");
+    ob=new("/d/common/assassins/obj/assassins_dagger.c");
     ob->move(TO);
     TO->force_me("wield dagger");
     flag = 1;
