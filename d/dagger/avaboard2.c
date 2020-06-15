@@ -49,7 +49,7 @@ void create() {
 	"west" : "/d/dagger/avalounge",
 	"east" : "/d/dagger/pkboard",
         "bodytyper":"/d/dagger/bodyhold",
-        "colors" : "/d/daggercolorhold",
+        "colors" : "/d/dagger/colorhold",
 	]));
     //place_board();
 }
