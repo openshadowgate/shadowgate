@@ -611,7 +611,7 @@ void set_special_material_type(string type)
 
 string query_special_material_type()
 {
-    if (!special_material_type) {
+    if (!special_material_type || special_material_type == "" || special_material_type == " ") {
         return "none";
     }
     return special_material_type;
