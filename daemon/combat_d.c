@@ -2395,8 +2395,7 @@ int check_avoidance(object who, object victim, object* weapons)
         || !objectp(victim)
         || !objectp(EWHO = environment(who))
         || victim->query_paralyzed()
-        || who->query_property("noMissChance")
-        || victim->query_tripped())
+        || who->query_property("noMissChance"))
         {
         return 0;
     }
