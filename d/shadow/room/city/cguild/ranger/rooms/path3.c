@@ -41,6 +41,6 @@ int enter_tree(string str){
                     "you are not welcome here.");
         TP->use_stamina(100);
     }
-    TP->move_player("/d/shadow/room/city/cguild/ranger/rooms/hall2");
+    TP->move_player("/d/shadow/room/city/cguild/ranger/rooms/hall1");
     return 1;
 }
