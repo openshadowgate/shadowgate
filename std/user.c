@@ -1338,9 +1338,9 @@ void setup() {
    PLAYER_D->add_player_info();
    if (!(PRISON_D->is_imprisoned(query_name()))) {
        if (!query_body_type() && query_race() != "unborn") {
-           move_player("/realms/vetri/bodyhold");
+           move_player("/d/dagger/bodyhold");
        } else if (!query_eye_color() && query_race() != "unborn") {
-           move_player("/realms/crystal/colorhold");
+           move_player("/d/dagger/colorhold");
        } else {
            load_pets();
        }
