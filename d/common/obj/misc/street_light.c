@@ -30,14 +30,13 @@ void init() {
    ::init();   // don't know how we missed having this but adding it now, Styx 12/24/03
     if(!interactive(TP)) return;
     tod = EVENTS_D->query_time_of_day();
-    if((tod == "night") && !query_property("light")) { 
+    //burning that lamp fuel all the time until eternal night is over -- Yves
+    // if((tod == "night") && !query_property("light")) {
         set_property("light",3);
-// 	set_short("A lit street light");
-	set_short(query("nightShort"));	  
-    }
-    if((tod != "night") && query_property("light")){
-        remove_property("light");
-//	set_short("A dark street light");
-	set_short(query("dayShort"));	  
-    }
+        set_short(query("nightShort"));
+    // }
+    // if((tod != "night") && query_property("light")){
+    //     remove_property("light");
+    //     set_short(query("dayShort"));
+    // }
 }
