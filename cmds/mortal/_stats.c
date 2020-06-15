@@ -22,7 +22,7 @@ int stat_points_left(object ob)
     }
 
     gained = (int)ob->query("stat_points_gained");
-    allowed = (int)ob->query_character_level() / 4;
+    allowed = (int)ob->query_base_character_level() / 4;
     remaining = allowed - gained;
     if (remaining < 0) {
         remaining = 0;
