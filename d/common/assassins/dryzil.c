@@ -65,11 +65,11 @@ void create() {
       "%^MAGENTA%^Dryzil says:%^RESET%^ You will die like the rest of my victims!",
       "%^MAGENTA%^Dryzil says: %^RESET%^DIE ALREADY!  What the hell?!?",
    }), 1);
-   ob =  new( "/d/common/assassins/assassins_dagger.c" );
+   ob =  new( "/d/common/assassins/obj/assassins_dagger.c" );
    ob->set_property("monsterweapon",1);
    ob->move(TO);
    command("wield dagger in left hand");
-   ob =  new( "/d/common/assassins/assassins_dagger.c" );
+   ob =  new( "/d/common/assassins/obj/assassins_dagger.c" );
    ob->set_property("monsterweapon",1);
    ob->move(TO);
    command("wield dagger");

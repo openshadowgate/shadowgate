@@ -68,9 +68,9 @@ void create() {
                   "%^MAGENTA%^Freloc says:%^RESET%^ You will die like the rest of my victims!",
                   "%^MAGENTA%^Freloc says: %^RESET%^DIE ALREADY! "
                   "What the hell?!?",}), 1);
-   new( "/d/common/assassins/assassins_dagger.c" )->move(TO);
+   new( "/d/common/assassins/obj/assassins_dagger.c" )->move(TO);
    command("wield dagger in left hand");
-   new( "/d/common/assassins/assassins_dagger.c" )->move(TO);
+   new( "/d/common/assassins/obj/assassins_dagger.c" )->move(TO);
    command("wield dagger in right hand");
    remove_property("swarm");
 
