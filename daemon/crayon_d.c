@@ -21,24 +21,24 @@ string COLORS = ({ "%^RED%^","%^BLUE%^","%^ORANGE%^","%^YELLOW%^","%^GREEN%^","%
 
 // doesn't work as a preprocessor directive with #define for some reason, has me completely baffled -Ares
 // will have to add quite a few more words to this
-string COMMON = ({  "(wielded", "(worn)", "I", "after", "again", "all", "almost", "also", "although", "and", "anywhere", "are", "around", 
-                    "assuming", "atop", "back", "be", "because", "been", "before", "begins", "behind", "beside", "besides", "both", "but", 
-                    "by", "can", "can't", "case", "certain", "contains", "conversely", "could", "each", "early", "either", "empty", "even", 
-                    "ever", "fact", "feel", "few", "first", "fit", "for", "form", "from", "front", "full", "furthermore", "get", "half", 
-                    "hand", "hand)", "hand),", "hand).", "hardly", "has", "have", "hear", "hearing", "her", "here", "hers", "herself", 
+string COMMON = ({  "(wielded", "(worn)", "I", "after", "again", "all", "almost", "also", "although", "and", "anywhere", "are", "around",
+                    "assuming", "atop", "back", "be", "because", "been", "before", "begins", "behind", "beside", "besides", "both", "but",
+                    "by", "can", "can't", "case", "certain", "contains", "conversely", "could", "each", "early", "either", "empty", "even",
+                    "ever", "fact", "feel", "few", "first", "fit", "for", "form", "from", "front", "full", "furthermore", "get", "half",
+                    "hand", "hand)", "hand),", "hand).", "hardly", "has", "have", "hear", "hearing", "her", "here", "hers", "herself",
                     "himself", "his", "hit", "how", "however", "i", "if", "impossible", "in", "instant", "instead", "into", "it", "it's",
-                    "its", "itself", "just", "keeps", "large", "late", "later", "left", "lest", "like", "likewise", "looks", "lower", 
-                    "lowers", "made", "many", "matter", "moreover", "much", "multiple", "must", "near", "nearly", "neither","nevertheless", 
-                    "nonetheless", "nor", "of", "off", "on", "once", "only", "open", "or", "other", "otherwise", "out", "perhaps", "possible", 
-                    "prone", "provided", "put", "puts", "raise", "raises", "rather", "right", "scarcely", "seem", "seems", "self", "several", 
-                    "should", "shut", "sight", "since", "small", "snap", "snaps", "so", "some", "soon", "sooner", "still", "such", "sure", 
-                    "take", "taken", "than", "that", "the", "their", "them", "then", "there", "these", "they", "this", "those", "though", 
-                    "through", "till", "to", "too", "towards", "type", "uncertain", "undecided", "unless", "until", "various", "very", "way", 
-                    "well", "what", "when", "whenever", "where", "whereas", "wherever", "whether", "which", "whichever", "while", "who", 
-                    "whoever", "whole", "whom", "whomever", "whose", "why", "wielded", "will", "with", "worn", "would", "yet", "you", "your", 
+                    "its", "itself", "just", "keeps", "large", "late", "later", "left", "lest", "like", "likewise", "looks", "lower",
+                    "lowers", "made", "many", "matter", "moreover", "much", "multiple", "must", "near", "nearly", "neither","nevertheless",
+                    "nonetheless", "nor", "of", "off", "on", "once", "only", "open", "or", "other", "otherwise", "out", "perhaps", "possible",
+                    "prone", "provided", "put", "puts", "raise", "raises", "rather", "right", "scarcely", "seem", "seems", "self", "several",
+                    "should", "shut", "sight", "since", "small", "snap", "snaps", "so", "some", "soon", "sooner", "still", "such", "sure",
+                    "take", "taken", "than", "that", "the", "their", "them", "then", "there", "these", "they", "this", "those", "though",
+                    "through", "till", "to", "too", "towards", "type", "uncertain", "undecided", "unless", "until", "various", "very", "way",
+                    "well", "what", "when", "whenever", "where", "whereas", "wherever", "whether", "which", "whichever", "while", "who",
+                    "whoever", "whole", "whom", "whomever", "whose", "why", "wielded", "will", "with", "worn", "would", "yet", "you", "your",
                     "yourself", "nearby", });
 
-                    
+
 
 // will occasionally need to run better_list() function and replace common above, just filters out duplicate words and sorts alphabetically
 string *better_list()
@@ -69,7 +69,7 @@ int num_vowels(string word)
         if(!is_vowel(letters[i])) { continue; }
         vowels++;
     }
-    return vowels;    
+    return vowels;
 }
 
 
@@ -87,11 +87,11 @@ mapping color_scheme(string scheme)
     mapping map = ([]);
     string back_color,*common_colors, *rare_colors, *rand_colors=({}), *rand = ({});
     string *possible = ({ R, B, O, Y, G, L, C, M, D, S, D+R, D+B, D+O, D+Y, D+G, D+C, D+M, S+D });
-    int scatter; 
+    int scatter;
 
     rand_colors = ({"dark","dark red","red and black","dark black","very black","dark green","green","light green","rand" });
     if(scheme == "random") { scheme = rand_colors[random(sizeof(rand_colors))]; }
-    
+
     switch(scheme)
     {
     case "grey":
@@ -124,7 +124,7 @@ mapping color_scheme(string scheme)
         common_colors = ({ B,Y,O });
         rare_colors = ({ M });
         scatter = 2;
-        break;        
+        break;
     case "red and black":
         back_color = L;
         common_colors = ({ R });
@@ -199,13 +199,13 @@ mapping color_scheme(string scheme)
         scatter = roll_dice(1,6);
         break;
     }
-    
+
     map["back color"]    = back_color;
     map["common colors"] = common_colors;
     map["rare colors"]   = rare_colors;
     map["scatter"]       = scatter;
-    
-    return map;    
+
+    return map;
 }
 
 void create()
@@ -216,11 +216,6 @@ void create()
 
 void db(string str)
 {
-    object obj;
-    if(objectp(obj = find_object_or_load("/realms/ares/workroom.c")))
-    {
-        tell_room(obj,str);
-    }
     return;
 }
 
@@ -233,7 +228,7 @@ int is_cap_word(string str)
     if(strlen(str) > 1) { next = str[1..1]; }
     if(member_array(first,explode(CAPS,"")) == -1) { return 0; }
     if(member_array(next,explode(CAPS,"")) !=-1) { return 0; }
-    return 1;    
+    return 1;
 }
 
 // returns 0 if it's one of the common words defined above
@@ -244,16 +239,16 @@ int common_check(string word)
     string *bad_end = ({ "ly","ng","ed","ly,","ly.","ng,","ng.","ed,","ed." });
     int length;
     string *end;
-    
+
     if(!stringp(word) || !strlen(word)) { return 0; }
-    word = lower_case(word);    
+    word = lower_case(word);
     length = strlen(word);
     if(length < 3) { return 0; }
     if(length > 2)
     {
         end = word[(length-2)..(length-1)];
         if(member_array(end,bad_end) != -1) { return 0; }
-    } 
+    }
     if(member_array(word,COMMON+COLORS) != -1) { return 0; }
 
     return 1;
@@ -267,7 +262,7 @@ int special_check(string word, string *special)
     if(!stringp(word) || !strlen(word)) { return 0; }
     if(!pointerp(special) || !sizeof(special)) { return 0; }
     if(member_array(word,special) != -1) { return 1; }
-    return 0;    
+    return 0;
 }
 
 
@@ -279,7 +274,7 @@ string strip_punctuation(string word)
     {
         word = replace_string(word,bad[i],"");
     }
-    return word;    
+    return word;
 }
 
 
@@ -291,12 +286,12 @@ mapping add_word(string word, mapping map)
 
     word = strip_punctuation(word);
 
-    if(!sizeof(words) || (member_array(word, words) == -1)) 
-    { 
+    if(!sizeof(words) || (member_array(word, words) == -1))
+    {
         map += ([ word : word ]);
         return map;
     }
-    return map;    
+    return map;
 }
 
 
@@ -310,39 +305,39 @@ string color_word(string word, string *common_colors, string *rare_colors, int s
     string *letters,*to_use=({}),start_color;
     int colors_used,base_chance,num_colors,i,*colors=({}),color,vowels,mod;
     if(!stringp(word) || !strlen(word)) { return word; }
-   
+
     if(scatter < 1) { scatter = 1; }
     if(scatter > 10) { scatter = 10; }
-    
+
     letters = explode(word,"");
-    base_chance = scatter-1;    
+    base_chance = scatter-1;
     num_colors = 1;
-    
+
     // determines the amount of colors in the word based on the amount of letters in the word
     // and the scatter setting. Higher scatter is larger chance of lots of color in each word
     for(i=0;i<sizeof(letters);i++)
     {
         if(roll_dice(1,10) > base_chance)
         {
-            if(!is_vowel(letters[i])) { base_chance--; } 
-            continue;                
+            if(!is_vowel(letters[i])) { base_chance--; }
+            continue;
         }
         num_colors++;
     }
-    
+
     if(!num_colors) { num_colors = 1; }
     // determics which colors are actually selected
     // common colors have about a 60% chance per color to be picked
     // rare colors have about a 20% chance to be picked
     while((sizeof(colors) < num_colors) && (sizeof(colors) < sizeof(letters)) && i < 100)
     {
-        if((roll_dice(1,10) > 4) && sizeof(common_colors)) 
-        { 
+        if((roll_dice(1,10) > 4) && sizeof(common_colors))
+        {
             color = common_colors[random(sizeof(common_colors))];
             common_colors -= ({ color });
             colors += ({ color });
             colors = distinct_array(colors);
-            continue;            
+            continue;
         }
         else if( (roll_dice(1,10) > 8) && sizeof(rare_colors))
         {
@@ -356,9 +351,9 @@ string color_word(string word, string *common_colors, string *rare_colors, int s
         colors = distinct_array(colors);
         continue;
     }
-    
-    if(!sizeof(colors)) { colors = ({ back_color }); } 
-    
+
+    if(!sizeof(colors)) { colors = ({ back_color }); }
+
     // determines if the colors should be bolded or not
     // 50/50 chance
     for(i=0;i<sizeof(colors);i++)
@@ -372,16 +367,16 @@ string color_word(string word, string *common_colors, string *rare_colors, int s
             colors[i] = S + colors[i];
         }
     }
-    
+
     to_use = colors;
     mod = sizeof(to_use);
-    
+
     // assigns the first color in the word to the first color picked
-    
+
     start_color = colors[0];
     letters[0] = start_color + letters[0];
     to_use -= ({ start_color });
-    
+
     // checks if there are a lot of vowels, if there are, we color these first
     vowels = num_vowels(word);
 
@@ -398,9 +393,9 @@ string color_word(string word, string *common_colors, string *rare_colors, int s
             }
             else
             {
-                color = colors[random(sizeof(colors))];            
+                color = colors[random(sizeof(colors))];
             }
-            
+
             if(vowels >= sizeof(colors))
             {
                 if(is_vowel(letters[i]))
@@ -430,7 +425,7 @@ string color_word(string word, string *common_colors, string *rare_colors, int s
             }
         }
     }
-    
+
     word = implode(letters,"");
     word = word + S + back_color;
     return word;
@@ -441,7 +436,7 @@ int descending_size(string one, string two)
 {
     if(strlen(one) == strlen(two)) { return 0; }
     if(strlen(one) > strlen(two)) { return -1; }
-    return 1;    
+    return 1;
 }
 
 
@@ -449,16 +444,16 @@ string color_words(string str, mapping map, mapping scheme)
 {
     string back_color,*common_colors, *rare_colors,*words,word;
     int scatter,i;
-    
+
     if(!mapp(scheme) || sizeof(keys(scheme) != 4)) { return str; }
-    
+
     back_color = scheme["back color"];
     common_colors = scheme["common colors"];
     rare_colors = scheme["rare colors"];
     scatter = scheme["scatter"];
-    
-    str = back_color + str + S;    
-    words = keys(map);    
+
+    str = back_color + str + S;
+    words = keys(map);
     words = sort_array(words,"descending_size");
 
     for(i=0;i<sizeof(words);i++)
@@ -466,14 +461,14 @@ string color_words(string str, mapping map, mapping scheme)
         word = words[i];
         word = color_word(word, common_colors, rare_colors, scatter, back_color);
         map[words[i]] = word;
-    }    
+    }
 
     for(i=0;i<sizeof(words);i++)
     {
 
         str = replace_string(str, words[i], map[words[i]]);
-    }   
-    
+    }
+
     return str;
 }
 
@@ -483,7 +478,7 @@ varargs string color_string(string str, string scheme, string *special, mapping 
     string *sentences,*words,sentence,first_word,final;
     mapping map=([]),color_scheme;
     int i,j;
-    
+
     if(!stringp(str) || !strlen(str)) { return 0; }
     sentences = explode(str,".");
 
@@ -491,9 +486,9 @@ varargs string color_string(string str, string scheme, string *special, mapping 
     {
         sentence = sentences[i];
         if(!stringp(sentence) || !strlen(sentence)) { continue; }
-        
+
         words = explode(sentence," ");
-        
+
         if(sizeof(words) > 0)
         {
             for(j=0;j<sizeof(words);j++)
@@ -511,7 +506,7 @@ varargs string color_string(string str, string scheme, string *special, mapping 
                         continue;
                     }
                 }
-                
+
                 if(special_check(words[j], special) || common_check(words[j]))
                 {
                     map = add_word(words[j],map);
@@ -519,13 +514,13 @@ varargs string color_string(string str, string scheme, string *special, mapping 
             }
         }
     }
-    
+
     if(!mapp(custom) || (sizeof(keys(custom)) != 4))
     {
         color_scheme = color_scheme(scheme);
     }
     else { color_scheme = custom; }
-    
+
     final = color_words(str,map,color_scheme);
     return final;
 }

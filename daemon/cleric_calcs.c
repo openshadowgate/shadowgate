@@ -10,7 +10,6 @@
 
 #include <std.h>
 #include <clerics.h>
-//#include "/realms/ares/clerics.h"
 
 int *query_bonus_spells(int mywis);
 int query_spell_limit(int spell_level, int mylevel, string myclass, int mywis);
@@ -20,25 +19,25 @@ inherit DAEMON;
 
 void create() { seteuid(getuid()); }
 
-int *query_max_spell_array(int mylevel, string myclass, int mywis) 
+int *query_max_spell_array(int mylevel, string myclass, int mywis)
 {
     int *spells_allowed, *bonus, result;
     int i;
 
     spells_allowed = ({});
-    if (myclass == "cleric") 
+    if (myclass == "cleric")
     {
         if (mylevel < 41) { spells_allowed = CDLEVELS[mylevel]; }
         else { spells_allowed = ({ 15,15,15,15,15,15,15,15,15 }); }
     }
 
-    if (myclass == "paladin" || myclass == "antipaladin") 
+    if (myclass == "paladin" || myclass == "antipaladin")
     {
         if (mylevel < 41) { spells_allowed = PLEVELS[mylevel]; }
         else { spells_allowed = ({15,15,15,15,15,15,0,0,0}); }
     }
 
-    if (myclass == "ranger") 
+    if (myclass == "ranger")
     {
         if (mylevel < 41) { spells_allowed = RLEVELS[mylevel]; }
         else { spells_allowed = ({10,10,10,10,10,0,0,0,0}); }
@@ -63,7 +62,7 @@ int query_spell_limit(int spell_level, int mylevel, string myclass, int mywis) {
 
     if(!mywis)
         mywis = 10;
-    
+
     x = query_max_spell_array(mylevel, myclass, mywis);
     return x[spell_level-1];
 }

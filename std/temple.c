@@ -18,9 +18,7 @@
 #define DIETY_D "/daemon/diety_d.c"
 #define FORSAKE_DELAY 86400
 #define FUNDS "/daemon/templefunds_d.c"
-// #define FUNDS "/realms/styx/templefunds_d.c"
 inherit "/std/church";
-//inherit "/realms/saide/church.c";
 
 string diety;
 

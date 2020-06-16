@@ -5,7 +5,6 @@
 inherit DAEMON;
 
 #define SAVE_FILE "/daemon/save/henchmen_saves"
-//#define SAVE_FILE "/realms/ares/henchmen/henchman_saves"
 
 mapping DATA_MAP;
 

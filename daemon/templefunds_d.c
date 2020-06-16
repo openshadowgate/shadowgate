@@ -8,7 +8,6 @@
 #include <daemons.h>
 
 #define SAVE_FILE "/daemon/save/templefunds"
-// #define SAVE_FILE "/realms/styx/templefunds"
 inherit DAEMON;
 
 // string *temples;
@@ -57,7 +56,7 @@ int query_donations(string name) {
 //   which = keys(pDonations[name]);
 //   amount = pDonations[name][which];
    j = sizeof(which);
-/* Didn't get this working and the other isn't pretty, but it provides the info. so it'll have to do for now  *Styx*  5/3/03  
+/* Didn't get this working and the other isn't pretty, but it provides the info. so it'll have to do for now  *Styx*  5/3/03
    write(capitalize(name)+" has made the following donations to temples:\n");
    for(i=0;i < j;i++) {
       temple = which[i];
@@ -111,7 +110,7 @@ void add_temple_gold(string temple, int amount, string type, object who, string 
    if(!pDonations)                pDonations = ([]);
    if(!pDonations[name])          pDonations[name] = ([]);
    if(!pDonations[name][diety])   pDonations[name][diety] = 0;
-    
+
    if(type != "gold") {
       amt2 = amount * (int) ECONOMY_D->currency_rate(type);
       amount = amt2/(int)ECONOMY_D->currency_rate("gold");

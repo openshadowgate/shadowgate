@@ -1625,12 +1625,8 @@ int query_large_damage() {
 
 void db(string str)
 {
-    object ob;
-    ob = find_object_or_load("/realms/ares/workroom.c");
-    if(objectp(ob)) { tell_room(ob,str); }
     return;
 }
-
 
 void temp_hit()
 {

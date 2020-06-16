@@ -4,23 +4,10 @@
 #include <security.h>
 #include <new_exp_table.h>
 
-#undef GARRETT_DEBUG 1
-
-#ifdef GARRETT_DEBUG
-
-#define SAVEOBJECT "/realms/garrett/fence_d"
-#define INVDIR "/inv/garrett/"
-#define LF(X) log_file("reports/fencing",X);
-#define DEBUG(X) tell_object(find_player("garrett"),X);
-
-#else // GARRETT_DEBUG
-
 #define SAVEOBJECT "/daemon/fence_d"
 #define INVDIR "/inv/fence/"
 #define LF(X) log_file("fencing",X);
 #define DEBUG(X) TO->fnord(X);
-
-#endif // GARRETT_DEBUG
 
 #define BASE_FEE_PERCENT 50
 // The standard cut.
