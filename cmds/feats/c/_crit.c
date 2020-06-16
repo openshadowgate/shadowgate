@@ -144,7 +144,6 @@ void execute_feat()
 
     spell_kill(target, caster);
     if (target->query_property("no death") ||
-        target->query_race() == "squole" ||
         target->is_undead() ||
         do_save(target, -bonusdc)) {
         int todamage;
