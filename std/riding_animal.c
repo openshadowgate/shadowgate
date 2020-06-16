@@ -339,8 +339,10 @@ int zoom(string str)
     }
     if (!str)
         return notify_fail("Please use the format ride <direction> <distance>.\n");
-    if ((object) TP->query_in_vehicle() != TO)
-        return notify_fail("You must be on the " + orig_short + " to command it.\n");
+    if ((object) TP->query_in_vehicle() != TO){
+        write("You must be on the " + orig_short + " to command it.\n");
+        return;
+    }
     if (sscanf(str, "%s %d", dir, dist) != 2) {
         sscanf(str, "%s", dir);
         dist = 1;
@@ -412,8 +414,12 @@ int kill_something(string str)
 
     if ((!objectp(TO)))
         return 0;
-    if ((object) TP->query_in_vehicle() != TO)
-        return notify_fail("You must be on the " + orig_short + " to command it.\n");
+
+    if ((object)TP->query_in_vehicle() != TO) {
+        write("You must be on the " + orig_short + " to command it.\n");
+        return;
+    }
+
     if (owner && (TP != owner))
         return notify_fail("You are not this animal's owner!\n");
     if (!str)
