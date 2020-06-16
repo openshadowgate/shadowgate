@@ -194,8 +194,9 @@ void execute_feat()
 
 void dest_effect()
 {
-    ::dest_effect();
+//    ::dest_effect();
     control && control->remove();
     remove_feat(this_object());
-    return;
+//    return;
+    return ::dest_effect();
 }
