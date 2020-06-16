@@ -322,9 +322,6 @@ void check_for_place(string room)
 
                 if (!catch_err)
                 {
-                    // going to try making the room load before moving them in *Styx* 12/18/05
-                    // if that doesn't work, we'll try putting the mobs into this room first
-                    //	  catch_err = catch(ob->move("/realms/styx/saferoom.c");
                     if(!objectp(room))
                     {
                         the_room = find_object_or_load(room);

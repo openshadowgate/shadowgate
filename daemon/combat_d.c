@@ -15,9 +15,7 @@
 #include <security.h>
 
 #define PO previous_object()
-#define DAMAGE_TRACKER_OBJECT "/realms/saide/damage_tracking_saide"
 #define BAD_LIMBS ({ "torso", "neck", "waist", "lower torso", "tail" })
-#define TEMP_HIT_BONUS "/realms/ares/temporary_hit.c"  // remove this when done
 #define DEATHS_DOOR_MESSAGE "You are at %^BOLD%^Death's door%^RESET%^. Your body is slipping from you."
 #define PK_OB "/d/shadowgate/pkill_tracker"
 
@@ -49,14 +47,12 @@ int critical_roll, fumble;
 void save_damage_tracker()
 {
     seteuid(UID_RESTORE);
-    save_object(DAMAGE_TRACKER_OBJECT);
     seteuid(geteuid());
 }
 
 void restore_damage_tracker()
 {
     seteuid(UID_RESTORE);
-    restore_object(DAMAGE_TRACKER_OBJECT);
     seteuid(geteuid());
 }
 

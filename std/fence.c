@@ -1,4 +1,4 @@
-//fence 
+//fence
 
 /*  added disabled checks to preclude actions if bound, unconscious, paralyzed, gagged, etc.
     allowed strings are "bound", "blind", "disabled" (for unconscious or paralyzed)
@@ -13,18 +13,10 @@ Also made it force step for thief hidden because they would have given away thei
 
 #include <std.h>
 
-#undef GARRETT_DEBUG
 #define STORE "/std/obj/fence_store.c"
 #define LF(X) log_file("fencing",X)
 
-#ifdef GARRETT_DEBUG
-#define FENCE_D "/realms/garrett/fence_d"
-
-#else // GARRETT_DEBUG
-
 #define FENCE_D "/daemon/fence_d"
-
-#endif // GARRETT_DEBUG
 
 inherit "/std/vendor.c";
 
@@ -69,15 +61,15 @@ int adjust_cost(object ob) {
     }
 
     ench /= 2;
-    
-    if(!ench) { ench = 1; } //changed to make enchantment 1 if it's 
+
+    if(!ench) { ench = 1; } //changed to make enchantment 1 if it's
                             //less
     cost *= ench;
 // bumping thieves guilds to amplify cost of credit items from selling price. As most items fall extremely short of a real value when bought from the fence. N, 10/15.
     cost *= 3;
 
     return ::adjust_cost(cost);   // uses the /std/npc function for charisma factor
-} 
+}
 
 int __Buy(string str) {
     object ob;
@@ -87,9 +79,9 @@ int __Buy(string str) {
     string *not_allowed;
 
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
-    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) { 
+    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) {
        tell_room(ETO, TPQCN+" seems to be trying to make a deal with "+TOQCN+".", TP);
        tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says%^RESET%^:  I'm sorry, but I don't deal with your kind and think you should leave now.");
        return 1;
@@ -107,13 +99,13 @@ int __Buy(string str) {
         tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^I don't have any "+str+"s to sell you!");
         return 1;
     }
-    /*I'm going to override the adjust cost function 
-    here so we can use it instead of another one to 
-    get the modified fence price using the 
+    /*I'm going to override the adjust cost function
+    here so we can use it instead of another one to
+    get the modified fence price using the
     formula that the fence uses - cause we need
     to get the same price in a few different places
-    IE - Show/List - Saide*/    
-   
+    IE - Show/List - Saide*/
+
     cost = adjust_cost(ob);
 
     if(!TP->query("thief account") || (int)TP->query("thief account") < cost) {
@@ -146,12 +138,12 @@ int __Value(string str) {
     string *not_allowed;
 
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
-    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) { 
+    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) {
        tell_room(ETO, TPQCN+" asks "+TOQCN+" for an appraisal on an item.", TP);
        tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says%^RESET%^: I'm sorry, but I don't make a habit of appraising items.  Maybe you should try a local vendor for that.");
-       if(!random(4)) 
+       if(!random(4))
           tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says%^RESET%^:  Maybe I'll see if someone will aquire that for me though.");
        return 1;
     }
@@ -181,9 +173,9 @@ int __Launder(string str){
     string *not_allowed;
 
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
-    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) { 
+    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) {
        tell_room(ETO, TPQCN+" seems to be trying to make a deal with "+TOQCN+".", TP);
        tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says%^RESET%^: I'm sorry, but I think you're confused and should leave before I take offense.");
        return 1;
@@ -214,12 +206,12 @@ int __Fence(string str){
         return notify_fail("fence <item>\n");
     }
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
-    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) { 
+    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) {
        tell_room(ETO, TPQCN+" seems to be trying to make a deal with "+TOQCN+".", TP);
        tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says%^RESET%^: I don't think I should be dealing with you.  In fact, you being here is probably bad for business, so please leave.");
-       if(!random(4)) 
+       if(!random(4))
           tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says%^RESET%^:  Maybe I'll see if one of them will aquire that for me though.");
        return 1;
     }
@@ -234,7 +226,7 @@ int __Fence(string str){
       return 1;
     }
     if(ob->is_container()) {
-        
+
         obs = deep_inventory(ob);
         for(x = 0;x < sizeof(obs);x++) {
             stolen = (mapping)obs[x]->query_property("stolen");
@@ -256,9 +248,9 @@ int __Account(string str) {
     string *not_allowed;
 
     not_allowed = ({ "bound", "disabled" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
 	return 1;
-    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) { 
+    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) {
        tell_room(ETO, TPQCN+" seems to be trying to ask "+TOQCN+" about something.", TP);
        tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says%^RESET%^:  I'm sorry, but I don't think you and I have any business to discuss and you should probably just leave.");
        return 1;
@@ -273,7 +265,7 @@ int __Account(string str) {
 }
 
 int __Help(string str) {
-    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) 
+    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP))
        return 0;
     if(!str) {
         TP->force_me("help fencing");
@@ -292,9 +284,9 @@ int __List(string str) {
    int i, x;
    string *not_allowed;
    not_allowed = ({ "bound", "disabled" });
-   if(disabled(TP, not_allowed))  
+   if(disabled(TP, not_allowed))
 	return 1;
-    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) { 
+    if(!TP->is_class("thief") && !TP->is_class("bard") && !avatarp(TP)) {
        tell_room(ETO, TPQCN+" seems to be asking "+TOQCN+" about something.", TP);
        tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says%^RESET%^:  Do I look like a common vendor or something?  I don't think your kind is exactly welcome here either, so please leave.");
        return 1;

@@ -167,10 +167,6 @@ void set_climate(string str, object ob)
     if (temp == "d/standard/") {
         return;
     }
-    if (temp == "realms/melnmarn/") {
-        return;
-    }
-//	if(member_array(temp,keys(__CLIMATE)) != -1) return;
     __CLIMATE[temp] = str;
     __WEATHER[temp] = 0;
     save_object(SAVE_WEATHER);
