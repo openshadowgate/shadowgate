@@ -73,15 +73,6 @@ int cmd_reply(string str)
         write("Current reply addressee: "+reply+"\n");
         return 1;
     }
-  /*  Fuck this, we're not going to use it and it's breaking my mods.
-   *  - Garrett 10/18/2001.
-   *   if(sscanf(reply, "%s@%s", a, b) == 2) {
-   *    a = lower_case(a);
-   *     SERVICES_D->send_gtell(b, a, str);
-   *    return 1;
-   *  }
-   */
-  //    if(ob->query_invis()) reply = "someone";
 
     if(!interactive(ob) && userp(ob))
     {
@@ -97,61 +88,47 @@ int cmd_reply(string str)
         ignored = TP->query_ignored();
     }
 
-    if(ob->query_true_invis() || TP->query_true_invis() || avatarp(TP) || avatarp(ob)) {} //intentionally empty
-    else if(ob->query_property("corresponding") || TP->query_property("corresponding")){
-       caster_correspond = TP->query_property("corresponding");
-       targ_correspond = ob->query_property("corresponding");
-       if(!caster_correspond) caster_correspond = ({});
-       if(!targ_correspond) targ_correspond = ({});
-       if(member_array(ob->query_name(),caster_correspond) != -1 && member_array(TP->query_name(),targ_correspond) != -1){} //intentionally empty
-    }else{
-// removing this, makes no sense that you can't telepathy in were-shifts, mageforms, etc
-/*         if((TP->query_property("shapeshifted")) && (!FEATS_D->usable_feat(TP,"wild speech")))
-        {
-            tell_object(TP,"You can't reply while shapeshifted");
-            return 1;
-        } */
-       // str= "daemon/language_d"->translate(str, TP->query_spoken(), TP);
+    if (ob->query_property("corresponding") || TP->query_property("corresponding")) {
+        caster_correspond = TP->query_property("corresponding");
+        targ_correspond = ob->query_property("corresponding");
+        if (!caster_correspond) {
+            caster_correspond = ({});
+        }
+        if (!targ_correspond) {
+            targ_correspond = ({});
+        }
+        if (member_array(ob->query_name(), caster_correspond) != -1 && member_array(TP->query_name(), targ_correspond) != -1) {
+        }
     }
 
-    if((member_array(TPQN, ignored) != -1) && !wizardp(TP))
-    {
-        write(reply+" is ignoring you.");
+    if ((member_array(TPQN, ignored) != -1) && !wizardp(TP)) {
+        write(reply + " is ignoring you.");
         return 1;
     }
 
-
-    if(wizardp(ob))
-    {
-        if (TP->query_invis())
-            message("reply","%^BOLD%^%^RED%^("+capitalize(TP->query_name())+") replies: %^RESET%^"+str,ob);
-        else
-            message("reply","%^BOLD%^%^RED%^"+TPQCN+" replies: %^RESET%^"+str,ob);
-    }
-    else
-    {
-        message("reply","%^BOLD%^%^RED%^"+TP->getParsableName()+" replies: %^RESET%^"+str,ob);
+    if (wizardp(ob) || wizardp(TP)) {
+        message("reply", "%^BOLD%^%^RED%^" + TPQCN + " replies: %^RESET%^" + str, ob);
+    } else {
+        message("reply", "%^BOLD%^%^RED%^" + TP->getParsableName() + " replies: %^RESET%^" + str, ob);
     }
 
-    if(TP->query_blocked("reply")) TP->set_blocked("reply");
-
-    if(wizardp(TP))
-    {
-        if (ob->query_invis())
-            message("reply","%^BOLD%^%^RED%^You reply to ("+capitalize(ob->query_name())+"):%^RESET%^ "+str,TP);
-        else
-            message("reply","%^BOLD%^%^RED%^You reply to "+capitalize(ob->query_name())+":%^RESET%^ "+str,TP);
-    }
-    else
-    {
-        if (avatarp(TP))
-            message("reply","%^BOLD%^%^RED%^You reply to "+capitalize(ob->query_name())+":%^RESET%^ "+str,TP);
-        else
-            message("reply","%^BOLD%^%^RED%^You reply to "+reply+":%^RESET%^ "+str,TP);
+    if (TP->query_blocked("reply")) {
+        TP->set_blocked("reply");
     }
 
-    if(!wizardp(ob) && !wizardp(TP) && !ob->query_true_invis() && !TP->query_true_invis())
-      CHAT_D->force_chat(TP,"telepathy","tells "+ob->QCN+" ( "+str+" )",1);
+    if (wizardp(TP)) {
+            message("reply", "%^BOLD%^%^RED%^You reply to " + capitalize(ob->query_name()) + ":%^RESET%^ " + str, TP);
+    }else {
+        if (avatarp(TP)) {
+            message("reply", "%^BOLD%^%^RED%^You reply to " + capitalize(ob->query_name()) + ":%^RESET%^ " + str, TP);
+        }else {
+            message("reply", "%^BOLD%^%^RED%^You reply to " + reply + ":%^RESET%^ " + str, TP);
+        }
+    }
+
+    if (!wizardp(ob) && !wizardp(TP) && !ob->query_true_invis() && !TP->query_true_invis()) {
+        CHAT_D->force_chat(TP, "telepathy", "tells " + ob->QCN + " " + str + " ", 1);
+    }
 
 #include <detect_thoughts.h>
 

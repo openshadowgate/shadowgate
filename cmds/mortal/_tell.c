@@ -101,12 +101,8 @@ int cmd_tell(string str)
         ignored = TP->query_ignored();
     }
 
-    if (wizardp(ob) && (ob->query_highest_level() > TP->query_highest_level()) && (!member_group(getuid(TP), "superuser"))) {
-        if (TP->query_invis()) {
-            namestr = "(" + capitalize(TPQN) + ")";
-        } else {
-            namestr = capitalize(TPQN);
-        }
+    if (wizardp(ob) || wizardp(TP)) {
+        namestr = capitalize(TPQN);
     } else {
         namestr = capitalize(TP->getParsableName());
     }
