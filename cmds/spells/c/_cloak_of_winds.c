@@ -32,7 +32,7 @@ void spell_effect(int prof)
     int duration;
     duration = (ROUND_LENGTH * 6) * clevel;
     tell_room(place, "%^WHITE%^%^BOLD%^A cloak of winds surrounds and embraces " + caster->QCN + ".", caster);
-    tell_object(caster, "%^WHITE%^%^BOLD%^A cloaked of winds surrounds and embraces you.");
+    tell_object(caster, "%^WHITE%^%^BOLD%^A cloak of winds surrounds and embraces you.");
     caster->set_property("cloak of winds", 1);
     caster->set_property("spelled", ({ TO }));
     caster->set_property("added short", ({ "%^WHITE%^ (%^BOLD%^%^CYAN%^beyond veil of winds%^RESET%^%^WHITE%^)%^RESET%^" }));
@@ -91,7 +91,7 @@ void execute_attack()
     if (sizeof(attackers)) {
         define_base_damage(0);
         tell_room(place, "%^BOLD%^%^WHITE%^Winds around " + caster->QCN + " forcefully push " + caster->QP + " enemies!", ({ caster, target }));
-        tell_object(caster, "%^GREEN%^%^Winds around you forcefully push your enemies!");
+        tell_object(caster, "%^GREEN%^%^The winds around you forcefully push your enemies!");
         for (i = 0; i < sizeof(attackers); i++) {
             if (!objectp(attackers[i])) {
                 continue;
@@ -110,9 +110,9 @@ void dest_effect()
     remove_call_out("room_check");
 
     if (objectp(caster)) {
-        tell_room(environment(caster), "%^BOLD%^%^WHITE%^Cloak of winds around " + caster->QCN + " retreat.");
+        tell_room(environment(caster), "%^BOLD%^%^WHITE%^The cloak of winds around " + caster->QCN + " retreats.");
         caster->remove_property("cloak of winds");
-        caster->remove_property_value("added short", ({ "%^WHITE%^ (%^BOLD%^%^CYAN%^beyond veil of winds%^RESET%^%^WHITE%^)%^RESET%^" }));
+        caster->remove_property_value("added short", ({ "%^WHITE%^ (%^BOLD%^%^CYAN%^beyond a veil of winds%^RESET%^%^WHITE%^)%^RESET%^" }));
         caster->add_ac_bonus(-2);
     }
     ::dest_effect();
