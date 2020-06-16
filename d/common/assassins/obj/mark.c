@@ -72,7 +72,7 @@ void heart_beat()
     creature->set_mob_magic_resistance("very high");
     creature->set_property("damage resistance",level/4);
     creature->set_new_exp(level,"boss");
-    creature->set_damage(4,level/2);
+    creature->set_damage(2,level/2);
 
     creature->move(EETO);
     creature->force_me("speak wizish");
