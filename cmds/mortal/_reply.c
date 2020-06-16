@@ -107,7 +107,7 @@ int cmd_reply(string str)
     }
 
     if (wizardp(ob) || wizardp(TP)) {
-        message("reply", "%^BOLD%^%^RED%^" + TPQCN + " replies: %^RESET%^" + str, ob);
+        message("reply", "%^BOLD%^%^RED%^" + capitalize(TPQN) + " replies: %^RESET%^" + str, ob);
     } else {
         message("reply", "%^BOLD%^%^RED%^" + TP->getParsableName() + " replies: %^RESET%^" + str, ob);
     }
