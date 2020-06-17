@@ -9,7 +9,7 @@ void create()
     set_property("no animate", 1);
     set_id(({"bloodshard","blood shard","shard"}));
     set_name("bloodshard");
-    set_short("%^BOLD%^%^RED%^b%^RESET%^%^RED%^lo%^BOLD%^%^RED%^o%^RESET%^%^RED%^ds%^BOLD%^%^RED%^h%^RESET%^%^RED%^ard");
+    set_short("%^BOLD%^%^RED%^b%^RESET%^%^RED%^lo%^BOLD%^%^RED%^o%^RESET%^%^RED%^ds%^BOLD%^%^RED%^h%^RESET%^%^RED%^ard%^RESET%^");
     set_weight(5);
 
     set_long("%^RED%^This elongated piece of %^RED%^dark %^RED%^re%^BOLD%^%^RED%^d%^RESET%^ %^RED%^glass%^BOLD%^%^RED%^,%^RESET%^%^RED%^ known as bloodshard, seems to %^RED%^fl%^BOLD%^%^RED%^o%^RESET%^%^RED%^w%^RED%^ in its irregular %^RED%^sh%^BOLD%^%^RED%^a%^RED%^p%^RESET%^%^RED%^e%^RED%^ at a slow pace. Just by looking at it you experience.. Some form of discomfort. Perhaps even pain? Yet is warm on touch and doesn't feels dangerous. Closer, you can see an etching in unknown tongue, yet you still can %^BOLD%^%^BLACK%^<read bloodshard>%^RESET%^%^RED%^ and understand what it says.
