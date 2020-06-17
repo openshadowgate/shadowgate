@@ -15,7 +15,9 @@
 #include <security.h>
 
 #define PO previous_object()
+#define DAMAGE_TRACKER_OBJECT "/realms/saide/damage_tracking_saide"
 #define BAD_LIMBS ({ "torso", "neck", "waist", "lower torso", "tail" })
+#define TEMP_HIT_BONUS "/realms/ares/temporary_hit.c"  // remove this when done
 #define DEATHS_DOOR_MESSAGE "You are at %^BOLD%^Death's door%^RESET%^. Your body is slipping from you."
 #define PK_OB "/d/shadowgate/pkill_tracker"
 
@@ -40,19 +42,21 @@ void new_struck(int damage, object weapon, object attacker, string limb, object 
 void do_fumble(object attacker, object weapon);
 void miss(object attacker, int magic, object target, string type, string target_thing);
 int calculate_unarmed_damage(object attacker);
-int critical_roll, fumble;
+int critical_roll = 0;
 
 
 //****** END OF FUNCTION DEFINITIONS ******//
 void save_damage_tracker()
 {
     seteuid(UID_RESTORE);
+    save_object(DAMAGE_TRACKER_OBJECT);
     seteuid(geteuid());
 }
 
 void restore_damage_tracker()
 {
     seteuid(UID_RESTORE);
+    restore_object(DAMAGE_TRACKER_OBJECT);
     seteuid(geteuid());
 }
 
@@ -678,7 +682,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     int attacker_size, damage, mod;
     int res, eff_ench, ench;
     int i, j, mysize;
-    int speed, enchantment, fired = 0;// added for new stamina formula -Ares
+    int speed, enchantment, fired = 0, bonus_hit_damage = 0;// added for new stamina formula -Ares
     object* armor, shape, ammo;
     string ammoname;
 
@@ -698,13 +702,13 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
                 fired = 1;
             }
             if (fired) {
-                damage += get_damage(attacker, weapon, targ);
+                bonus_hit_damage = get_damage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
                 if (FEATS_D->usable_feat(attacker, "point blank shot")) {
                     damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("dexterity"));
                 }
             }
         }else {
-            damage += get_damage(attacker, weapon, targ);
+            bonus_hit_damage += get_damage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
             mysize = (int)attacker->query_size();
             if (mysize == 1) {
                 mysize++;             //run small creatures as normal size please.
@@ -793,6 +797,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     if (critical_hit) {
         damage = crit_damage(attacker, targ, weapon, attacker_size, damage); //I have no clue why I had to change this to += from = for crit damage to work properly, since crit_damage already returns damage + crit_damage, but this kluge seems to be working properly after numerous tests - Odin 5/19/2020
     }
+    damage += bonus_hit_damage; //pulling it in here so it's not multiplied by a critical hit
     new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit);
 
     if (!objectp(weapon) || attacker->query_property("shapeshifted")) {
@@ -2667,7 +2672,7 @@ void combined_attack(object who, object victim)
 void internal_execute_attack(object who)
 {
     int toAttack, toattack, lastHand, critical_hit;
-    int i, roll, temp1, temp2, touch_attack = 0;
+    int i, roll, temp1, temp2, touch_attack = 0, fumble = 0;
     object* weapons, current, victim, * protectors, * attackers, EWHO;
     string target_thing;
 
