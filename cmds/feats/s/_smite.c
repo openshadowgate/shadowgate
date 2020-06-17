@@ -105,7 +105,7 @@ void execute_attack() {
         if(!objectp(targets[i])) continue;
    	  tell_object(targets[i],"%^BOLD%^%^WHITE%^The energy washes over you, burning like fire!%^RESET%^");
         dmg = roll_dice(clevel + chamod,8);
-        caster->cause_damage_to(targets[i],"head",dmg);
+        caster->cause_typed_damage(targets[i],"head",dmg,"divine");
         caster->add_attacker(targets[i]);
         targets[i]->add_attacker(caster);
     }
