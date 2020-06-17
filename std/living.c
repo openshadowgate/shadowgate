@@ -1279,7 +1279,7 @@ string query_long(string unused)
             height = to_int(height * pow(2, TO->query_size_bonus()));
             weight = to_int(weight * pow(pow(2, TO->query_size_bonus()), 2));
         }
-        reg += "%^BOLD%^" + sub + " are approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";
+        reg += "%^BOLD%^" + sub + " are approximately " + height + " inches tall " + "(" + height/12 + "ft, " + height%12 + "in)" + " and " + weight + " pounds.%^RESET%^\n";
     }
 
     x = ((player_data["general"]["hp"] * 100) / (player_data["general"]["max_hp"]) + 1);
@@ -1366,7 +1366,7 @@ string query_desc(string unused)
         if (objectp(shape)) {
             weight = (int)shape->query_shape_weight();
         }
-        reg += "%^BOLD%^" + sub + " is approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";
+        reg += "%^BOLD%^" + sub + " are approximately " + height + " inches tall " + "(" + height/12 + "ft, " + height%12 + "in)" + " and " + weight + " pounds.%^RESET%^\n";
     }
 
     x = ((player_data["general"]["hp"] * 100) / player_data["general"]["max_hp"]);
