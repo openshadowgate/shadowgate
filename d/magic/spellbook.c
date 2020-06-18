@@ -59,7 +59,7 @@ int is_spellbook() {
 void create() {
     ::create();
     set_id( ({ "book", "bookx", "magic book", "spell book", "spellbook", "tome", "grimoire"}) );
-    set_weight(3);
+    set_weight(10);
     set_value(0);
     set_name("spell book");
     set_short("A Book");
