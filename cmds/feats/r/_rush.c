@@ -212,10 +212,10 @@ void execute_attack() {
         damage += (int)caster->get_hand_damage();
         damtype = caster->get_new_damage_type();
     }
-    else{
+    if(!damtype)
+    {
       damtype = "bludgeoning";
     }
-
     damage += "/daemon/bonus_d"->damage_bonus(caster->query_stats("strength"));
     damage += (int)caster->query_damage_bonus();
 
