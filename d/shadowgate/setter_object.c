@@ -172,10 +172,10 @@ reset_common(string str)
         return 1;
     }
 
-    for (i = head; i >= rstpos; i-- )
-    {
+    for (i = head; i > rstpos; --i) {
         map_delete(char_sheet, ROLL_CHAIN[i]);
     }
+    head = i;
     cache = ([]);
 
     _review();
@@ -563,6 +563,7 @@ select_stats(string str)
 
     if (str == "random") {
         _recommended_stats();
+        _done_stats();
     }
     synopsis_stats();
 }
