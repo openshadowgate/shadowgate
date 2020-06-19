@@ -229,7 +229,7 @@ void execute_attack()
     tell_room(place, "%^BOLD%^" + target->QCN + " is unable to avoid " + caster->QCN + "'s shieldbash "
               "and staggers back in pain as " + target->QS + " is slammed hard!%^RESET%^", ({ target, caster }));
     target->set_paralyzed(roll_dice(6, 4), "%^MAGENTA%^You are trying to regain your senses!%^RESET%^");
-    target->do_damage("head", dam);
+    target->cause_typed_damage(target, "head", dam, bludgeoning);
 
     if (!objectp(target)) {
         dest_effect();
