@@ -31,12 +31,7 @@ void create()
     set_stats("constitution",18);
     add_money("platinum",random(2000));
     set_property("full attacks",1);
-    set_mob_magic_resistance("average");
-    set_property("spell damage resistance",70);
-    set_monster_feats(({"dodge","evasion","knockdown","expertise", "mobility","powerattack","rush","combat reflexes", "dodge","evasion","scramble","spring attack","crit","hide in plain sight","void stalker","penetrating strike","greater penetrating strike"}));
-    set_skill("stealth",50);
-    set_skill("athletics",50);
-    set_property("damage resistance",10);
+    set_monster_feats(({"dodge","evasion","knockdown","expertise", "mobility","powerattack","rush", "dodge","evasion","scramble","spring attack","crit","hide in plain sight","void stalker","penetrating strike","greater penetrating strike", "weapon focus", "weapon specialization", "greater weapon focus", "greater weapon specialization", "epic weapon focus", "epic weapon specialization", "lethal strikes"));
     set_spells(({"horrid wilthing",
                     "fear",
                     "weird",}));
@@ -45,12 +40,12 @@ void create()
     set_funcs(({"strike"}));
     set_func_chance(30);
     set_scrambling(1);
+    set_parrying(1);
     set_attacks_num(8);
     set_damage(4,20);
-    add_attack_bonus(20);
     set_new_exp(60,"boss");
     set_max_level(35);
-    set_base_damage_type("piercing");
+    set_base_damage_type("silver");
     reason = "";
     new("/d/atoyatl/tecqumin/obj/seal.c")->move(TO);
 }
