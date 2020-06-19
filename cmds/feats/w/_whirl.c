@@ -176,8 +176,13 @@ void execute_attack()
             //dam += weapons[0]->query_property("enchantment"); redundant, query damage already includes enchantment
         }else {
             enchant = 0;
-            damtype = "slashing";
         }
+
+        if(!damtype)
+        {
+          damtype = "slashing";
+        }
+
         dam += caster->query_damage_bonus();
         dam += roll_dice(clevel, 5) + roll_dice(2, 8);
 
