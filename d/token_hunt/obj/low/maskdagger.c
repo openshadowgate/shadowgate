@@ -72,7 +72,7 @@ int hit_func(object target) {
          case 6..7:
             if(ETO->query_highest_level()<20) return 0;
             tell_room(environment(ETO),"%^BOLD%^%^BLACK%^The blade in "+ETO->query_cap_name()+"'s hand suddenly darkens as the shadows begin to swirl and take on a humanoid form!");
-            ob=new("/d/avatars/tsera/smon.c");
+            ob=new("/d/islands/common/new/smon.c");
             ob->move(environment(ETO));
             ob->force_me("protect "+ETO->query_name());
             ETO->add_follower(ob);

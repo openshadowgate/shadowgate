@@ -90,7 +90,7 @@ int wield_func(){
       set_property("enchantment",6);
       while(TO->query_property("enchantment")< 6) set_property("enchantment",6);
       return 1;
-   } 
+   }
    tell_object(ETO,"%^BOLD%^%^BLACK%^A loud hiss can be heard as you try to wield the scimitar, followed by the sounds of a dark voice echoing through your mind:
 %^RED%^You will never have me foolish Mortal!  Akra'Mashul was not meant for your type!");
    tell_room(EETO,"%^BOLD%^%^BLACK%^"+ETO->QCN+" recoils in horror as "+ETO->QS+" grasps its hilt!",ETO);
@@ -151,7 +151,7 @@ int hit_func(object target) {
               break;
          case 3:
             tell_room(environment(ETO),"%^BOLD%^%^BLACK%^The sword darkens as the shadows begin to swirl and take on a humanoid form!");
-            ob2=new("/d/avatars/tsera/smon.c");
+            ob2=new("/d/islands/common/new/smon.c");
             ob2->move(environment(ETO));
             ob2->force_me("protect "+ETO->query_name());
             break;
@@ -162,11 +162,11 @@ int hit_func(object target) {
             target->set_paralyzed(20,"You are trying to get to your feet.");
             if(!random(5)) target->set_blind(1);
             else target->set_paralyzed(3+random(4),"%^BOLD%^%^BLACK%^You are trying to remove the orb of darkness from around you!");
-            break;   
+            break;
          case 5:
             tell_object(ETO,"%^BOLD%^%^BLACK%^Akra'Mashul's voice cackles with glee in your mind as it and strikes out at "+target->query_cap_name()+"!%^RESET%^");
 		return roll_dice(1,8)+1;
-            break;         
+            break;
       }
    }
 }
@@ -180,9 +180,9 @@ void heart_beat(){
       tell_room(environment(EETO),"%^BOLD%^%^BLACK%^The shadow no longer feels the pull of its master and begins to break apart, disappearing back into that from which it came!");
       sm->move("/d/shadowgate/void");
       sm->remove();
-    return; 
+    return;
    }
-   if(ETO->id("akrasheath")){charm=0; return;} 
+   if(ETO->id("akrasheath")){charm=0; return;}
    if(!ETO->id("akrasheath")&&EETO->is_player()&&burn==0){
       TO->move(EETO);
       tell_room(EETO,"%^BOLD%^%^RED%^The sword breaks free of its confines and appears back at "+ETO->query_cap_name()+"'s side!",ETO);
@@ -201,12 +201,12 @@ void heart_beat(){
       temp->remove();
       return ;
    }
-   if(EETO->is_player()) return; 
+   if(EETO->is_player()) return;
    if(!objectp(EETO)) return;
    nombre = (string)ETO->query_name();
    livings = ({});
    livings =filter_array(all_living(environment(ETO)),"is_non_immortal_player",FILTERS_D);
-   j = sizeof(livings); 
+   j = sizeof(livings);
    if(random(1000) < 5){
    for(i=0;i<j;i++){
       if((string)livings[i]->query_gender()=="male" && (string)livings[i]->query_name()!=nombre){
@@ -240,7 +240,7 @@ void heart_beat(){
          ETO->remove_attacker(livings[i]);
          return ;
          }
-         if(!TO->query_wielded()){   
+         if(!TO->query_wielded()){
             switch(random(100)) {
                case 0..2:
                   tell_room(livings[i],"%^BOLD%^%^BLACK%^The sword begins to glow darkly as %^RESET%^%^BLUE%^blue arcs %^BOLD%^%^BLACK%^are emmitted from it!",ETO);

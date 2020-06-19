@@ -214,7 +214,7 @@ int hit_func(object target) {
               break;
          case 3:
             tell_room(environment(ETO),"%^BOLD%^%^BLACK%^The sword darkens as the shadows begin to swirl and take on a humanoid form!");
-            ob2=new("/d/avatars/tsera/smon.c");
+            ob2=new("/d/islands/common/new/smon.c");
             ob2->move(environment(ETO));
             ob2->force_me("protect "+ETO->query_name());
             break;
