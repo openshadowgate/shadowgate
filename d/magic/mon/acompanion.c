@@ -259,7 +259,7 @@ void die(object ob)
 int remove()
 {
     //"/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
-    all_inventory(this_object())->remove();
+    //all_inventory(this_object())->remove();
     owner && owner->remove_property("animal_companion");
     owner && owner->remove_property("has_elemental");
     ::remove();
