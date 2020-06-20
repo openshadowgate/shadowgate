@@ -1,6 +1,7 @@
 #include <daemons.h>
 #include "genetics.h"
 #include <dieties.h>
+#include <objects.h>
 
 inherit OBJECT;
 
@@ -55,12 +56,17 @@ void init()
 
     add_action("_reset", "reset");
 
+    add_action("_display_char_sheet", "sheet");
+
     _review();
 }
 
 _select(string str)
 {
-    if (select_common(str)) {
+
+    if (head >= sizeof(ROLL_CHAIN)) {
+        _display_char_sheet();
+    } else if (select_common(str)) {
         advance_head();
     } else {
         display_common();
@@ -70,7 +76,10 @@ _select(string str)
 
 _review()
 {
-    display_common();
+    if (head >= sizeof(ROLL_CHAIN)) {
+        _display_char_sheet();
+    } else{
+        display_common();}
     return 1;
 }
 
@@ -80,11 +89,54 @@ _reset(string str)
     return 1;
 }
 
+_display_char_sheet()
+{
+
+    string i, j;
+
+    write("%^BOLD%^%^WHITE%^Your current choices are as follows:
+");
+
+    write(" %^BOLD%^%^GREEN%^Character Name   %^RESET%^%^GREEN%^: %^BOLD%^%^WHITE%^" + capitalize(ETO->query_name()));
+
+    foreach(i in ROLL_CHAIN)
+    {
+        if(!char_sheet[i]){
+            continue;
+        }
+        if (arrayp(char_sheet[i])) {
+            write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(replace_string(i, "_", " ")), 16) + "%^RESET%^%^GREEN%^ : %^BOLD%^%^WHITE%^" + implode(char_sheet[i], "%^CYAN%^, %^WHITE%^"));
+            continue;
+        }
+        if (mapp(char_sheet[i])) {
+            foreach(j in keys(char_sheet[i]))
+            {
+                write("%^BOLD%^GREEN%^ " + arrange_string(capitalize(j), 16) + "%^RESET%^%^GREEN%^ : %^BOLD%^%^WHITE%^" + char_sheet[i][j]);
+            }
+            continue;
+        }
+
+        write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(replace_string(i, "_", " ")), 16) + "%^RESET%^%^GREEN%^ : %^BOLD%^%^WHITE%^" + char_sheet[i]);
+    }
+
+    write("
+%^BOLD%^%^WHITE%^You can %^ORANGE%^<reset %^ULINE%^KEY%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^ if you're not satisfied with the result, for example, %^ORANGE%^<reset age>%^WHITE%^ will reset your %^CYAN%^age%^WHITE%^.");
+
+    if (head >= sizeof(ROLL_CHAIN)) {
+        write("
+%^BOLD%^%^WHITE%^If you're done with your creation, you can %^ORANGE%^<finalize>%^WHITE%^ your choices and proceed further.");
+    } else {
+        write("
+%^BOLD%^%^WHITE%^You're not yet done with the creation. To see your current choices type %^ORANGE%^<review>%^WHITE%^.");
+    }
+    return 1;
+}
+
 advance_head()
 {
     head++;
     if (head >= sizeof(ROLL_CHAIN)) {
-        display_char_sheet();
+        _display_char_sheet();
     } else {
         display_common();
     }
@@ -185,6 +237,8 @@ reset_common(string str)
     _review();
 }
 
+
+
 // MODULES
 
 string *generate_class()
@@ -239,7 +293,10 @@ string *generate_template()
 
     // To read it start from outer functions.
 
-    choices = map(filter_array(map(get_dir("/std/acquired_template/*.c"),(:"/std/acquired_template/" + $1:)), (:member_array($2, arrayp($1->races_allowed()) ? $1->races_allowed() : ({$2})) != -1:), char_sheet["race"]), (: replace_string(replace_string($1, "/std/acquired_template/", ""), ".c", "") :));
+    if(unrestricted_player(ETO))
+    {
+        choices = map(filter_array(map(get_dir("/std/acquired_template/*.c"),(:"/std/acquired_template/" + $1:)), (:member_array($2, arrayp($1->races_allowed()) ? $1->races_allowed() : ({$2})) != -1:), char_sheet["race"]), (: replace_string(replace_string($1, "/std/acquired_template/", ""), ".c", "") :));
+    }
 
     return choices;
 }
@@ -854,4 +911,9 @@ int age_to_adjust(int age, string stat, string race)
         break;
     }
 
+}
+
+int unrestricted_player(object plr)
+{
+    return OB_ACCOUNT->is_experienced(ETO->query_true_name()) || OB_ACCOUNT->is_high_mortal(ETO->query_true_name()) || avatarp(ETO);
 }
