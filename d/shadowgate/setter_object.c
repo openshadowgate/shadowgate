@@ -139,6 +139,7 @@ _finalize(){
 
     string i;
     object desc;
+    object troom;
 
     if (head < sizeof(ROLL_CHAIN))
     {
@@ -172,7 +173,40 @@ seen. It seems to be dormant at the time.");
 
 ");
 
+    troom = new("/d/newbie/ooc/hub_room");
+    ETO->move_player(troom);
+    ETO->setenv("LINES", "20");
+    ETO->setenv("COLUMNS", "2");
+    ETO->setenv("VCOLUMNS", 1);
+    ETO->set("new_hp_rolled_two",1);
+    ETO->set("no pk",1);
+    ETO->set("new_hm_cap_set",1);
+    ETO->set("new_stat_type2", 1);
+
+    ("/std/class/" + char_sheet["class"])->newbie_func(ETO);
+
+    ETO->add_quenched(50);
+    ETO->add_stuffed(500);
+    ETO->add_hp(TP->query_max_hp());
+    ETO->add_hp(TP->query_max_hp());
+    ETO->update_channels();
+    ETO->new_body();
+
+    ETO->init_skills("blah");
+    ETO->set("align ok",1);
+    ETO->clear_feats();
+
+    ETO->set("hp_array",0);
+    ETO->make_new_hitpoint_rolls(ETO);
+
+    ETO->force_me("fixspells");
+    ETO->force_me("save");
+
+    ETO->add_money("gold", 200 + roll_dice(5, 20));
+
     final_set = 1;
+
+    TO->remove();
 
     return 1;
 }
@@ -966,6 +1000,12 @@ build_class()
     ETO->set_hp(20);
     ETO->init_spellcaster();
     ETO->add_exp(1);
+
+    ETO->set("active_class", char_sheet["class"]);
+    ETO->set("new_class_type", 1);
+    ETO->set_posed(char_sheet["class"]);
+
+    ADVANCE_D->advance(TP,char_sheet["class"]);
 }
 
 build_gender()
