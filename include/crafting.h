@@ -93,8 +93,8 @@ WEAPONSMITH = ([
                    "cannonball":(["file":COMMONFILE"lrweapon/cannonball","units":20]),
                    "bastard sword":(["file":COMMONFILE"weapon/bastard","units":3]),
                    "claw":(["file":COMMONFILE"weapon/claw","units":2]),
-                   "double axe":(["file":COMMONFILE"weapon/double_axe","units":4])
-                   "double bladed sword":(["file":COMMONFILE"weapon/double_bladed_sword","units":4])
+                   "double axe":(["file":COMMONFILE"weapon/double_axe","units":4]),
+                   "double bladed sword":(["file":COMMONFILE"weapon/double_bladed_sword","units":4]),
                    "dwarven waraxe":(["file":COMMONFILE"weapon/dwarvenwaraxe","units":3]),
                    "elven curved blade":(["file":COMMONFILE"weapon/elvencurvedblade","units":4]),
                    "dagger":(["file":COMMONFILE"weapon/dagger","units":1]),
