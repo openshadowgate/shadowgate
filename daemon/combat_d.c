@@ -40,7 +40,7 @@ void new_struck(int damage, object weapon, object attacker, string limb, object 
 void do_fumble(object attacker, object weapon);
 void miss(object attacker, int magic, object target, string type, string target_thing);
 int calculate_unarmed_damage(object attacker);
-int critical_roll, fumble;
+int critical_roll = 0;
 
 
 //****** END OF FUNCTION DEFINITIONS ******//
@@ -678,7 +678,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     int attacker_size, damage, mod;
     int res, eff_ench, ench;
     int i, j, mysize;
-    int speed, enchantment, fired = 0;// added for new stamina formula -Ares
+    int speed, enchantment, fired = 0, bonus_hit_damage = 0;// added for new stamina formula -Ares
     object* armor, shape, ammo;
     string ammoname;
 
@@ -698,13 +698,13 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
                 fired = 1;
             }
             if (fired) {
-                damage += get_damage(attacker, weapon, targ);
+                bonus_hit_damage = get_damage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
                 if (FEATS_D->usable_feat(attacker, "point blank shot")) {
                     damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("dexterity"));
                 }
             }
         }else {
-            damage += get_damage(attacker, weapon, targ);
+            bonus_hit_damage += get_damage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
             mysize = (int)attacker->query_size();
             if (mysize == 1) {
                 mysize++;             //run small creatures as normal size please.
@@ -793,6 +793,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     if (critical_hit) {
         damage = crit_damage(attacker, targ, weapon, attacker_size, damage); //I have no clue why I had to change this to += from = for crit damage to work properly, since crit_damage already returns damage + crit_damage, but this kluge seems to be working properly after numerous tests - Odin 5/19/2020
     }
+    damage += bonus_hit_damage; //pulling it in here so it's not multiplied by a critical hit
     new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit);
 
     if (!objectp(weapon) || attacker->query_property("shapeshifted")) {
@@ -2429,10 +2430,12 @@ int check_avoidance(object who, object victim, object* weapons)
        avoid += ({"TYPE_RIDDEN"});
     }
     if (FEATS_D->usable_feat(victim,"shot on the run")
-       && sizeof(weapons)
-       && (!weapons[0]->is_lrweapon() || !weapons[1]->is_lrweapon())) {
+       && sizeof(weapons)) {
+       if(weapons[0]->is_lrweapon())
+       {
        shot_on_the_run = 1;
        avoid += ({"TYPE_SHOT"});
+       }
     }
     if (victim->is_animal()) {
         rider = (object)victim->query_current_rider();
@@ -2667,7 +2670,7 @@ void combined_attack(object who, object victim)
 void internal_execute_attack(object who)
 {
     int toAttack, toattack, lastHand, critical_hit;
-    int i, roll, temp1, temp2, touch_attack = 0;
+    int i, roll, temp1, temp2, touch_attack = 0, fumble = 0;
     object* weapons, current, victim, * protectors, * attackers, EWHO;
     string target_thing;
 

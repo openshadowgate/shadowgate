@@ -65,7 +65,6 @@ void heart_beat()
     creature->add_attack_bonus(8+(level/8));
     creature->set_mlevel("fighter",level);
     creature->set_hd(level + 5,20);
-    creature->set_mlevel("thief",level);
     creature->set_max_hp(level * 12 * 4);
     creature->set_hp(level * 12 * 4);
     creature->set_overall_ac(-1 * level -10);
@@ -73,6 +72,8 @@ void heart_beat()
     creature->set_property("damage resistance",level/4);
     creature->set_new_exp(level,"boss");
     creature->set_damage(2,level/2);
+    creature->set_skill("athletics", level);
+    creature->set_skill("stealth", level);
 
     creature->move(EETO);
     creature->force_me("speak wizish");

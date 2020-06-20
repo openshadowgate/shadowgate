@@ -19,10 +19,9 @@ void create() {
     "most everything in their way."	);
 	set_property("lore difficulty",15);
    set("value",2000);
-   set_property("enchantment",2);  
+   set_property("enchantment",2);
    set_hit((:TO,"hit_func":));
-   set_item_bonus("earth resistance",1);
- 
+
 }
 
 int hit_func(object targ){
@@ -34,8 +33,8 @@ int hit_func(object targ){
            targ->QCN+" in a serious manner.");
         tell_object(targ,"%^ORANGE%^"+
            "The blow from "+ETOQCN+"'s drill %^RED%^_SMASHES_%^ORANGE%^ you.");
-                     
+
 		return roll_dice(3,10)+1;}
- 
+
    return 0;
 }

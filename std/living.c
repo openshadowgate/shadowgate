@@ -295,21 +295,21 @@ int query_parrying()
     object* weapons;
     if (FEATS_D->usable_feat(TO, "parry")) {
         weapons = TO->query_wielded();
-        if (sizeof(weapons) && !weapons[0]->is_lrweapon()){
-            return 1;
-          }
-    if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
-        weapons = TO->query_wielded();
-        if (sizeof(weapons) == 1 && !weapons[0]->is_lrweapon()) {
+        if (sizeof(weapons) && !weapons[0]->is_lrweapon()) {
             return 1;
         }
-    }
-    if (FEATS_D->usable_feat(TO, "unassailable parry")) {
-        weapons = TO->query_wielded();
-        weapons = distinct_array(weapons);
-        if (sizeof(weapons) > 1 && !weapons[0]->is_lrweapon() && !weapons[1]->is_lrweapon()) {
-            return 1;
-          }
+        if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
+            weapons = TO->query_wielded();
+            if (sizeof(weapons) == 1 && !weapons[0]->is_lrweapon()) {
+                return 1;
+            }
+        }
+        if (FEATS_D->usable_feat(TO, "unassailable parry")) {
+            weapons = TO->query_wielded();
+            weapons = distinct_array(weapons);
+            if (sizeof(weapons) > 1 && !weapons[0]->is_lrweapon() && !weapons[1]->is_lrweapon()) {
+                return 1;
+            }
         }
     }
     if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
@@ -326,9 +326,8 @@ int query_parrying()
             return 1;
         }
     }
-    if(!parrying)
-    {
-      return 0;
+    if (!parrying) {
+        return 0;
     }
     return parrying;
 }
@@ -859,7 +858,7 @@ int calculate_healing()
           TO->query_property("inactive") ||
           FEATS_D->usable_feat(TO, "timeless body") ||
           TO->is_undead()
-            )) {
+          )) {
         healing["stuffed"]--;
         healing["quenched"]--;
         if (healing["stuffed"] < 0) {
@@ -1279,7 +1278,7 @@ string query_long(string unused)
             height = to_int(height * pow(2, TO->query_size_bonus()));
             weight = to_int(weight * pow(pow(2, TO->query_size_bonus()), 2));
         }
-        reg += "%^BOLD%^" + sub + " are approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";
+        reg += "%^BOLD%^" + sub + " are approximately " + height + " inches (" + height / 12 + "ft " + height % 12 + "in) tall and " + weight + " pounds.%^RESET%^\n";
     }
 
     x = ((player_data["general"]["hp"] * 100) / (player_data["general"]["max_hp"]) + 1);
@@ -1366,7 +1365,11 @@ string query_desc(string unused)
         if (objectp(shape)) {
             weight = (int)shape->query_shape_weight();
         }
+<<<<<<< HEAD
         reg += "%^BOLD%^" + sub + " is approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";
+=======
+        reg += "%^BOLD%^" + sub + " are approximately " + height + " inches (" + height / 12 + "ft " + height % 12 + "in) tall and " + weight + " pounds.%^RESET%^\n";
+>>>>>>> clean_setter
     }
 
     x = ((player_data["general"]["hp"] * 100) / player_data["general"]["max_hp"]);
@@ -1978,21 +1981,27 @@ string query_condition_string()
     case 1..20:
         stamina = "Falling Over";
         break;
+
     case 21..40:
         stamina = "Exhausted";
         break;
+
     case 41..60:
         stamina = "Tired";
         break;
+
     case 61..80:
         stamina = "Vigorous";
         break;
+
     case 81..99:
         stamina = "Energetic";
         break;
+
     case 100:
         stamina = "Buzzing and Hustling";
         break;
+
     default:
         stamina = "Passed out";
     }
@@ -2210,6 +2219,14 @@ int is_undead()
 int is_vampire()
 {
     return (query_acquired_template() == "vampire") || 0;
+}
+
+int is_were()
+{
+    if (query_acquired_template() == "weretiger" || query_acquired_template() == "werewolf" || query_acquired_template() == "wererat") {
+        return 1;
+    }
+    return 0;
 }
 
 void reset_all_status_effects()

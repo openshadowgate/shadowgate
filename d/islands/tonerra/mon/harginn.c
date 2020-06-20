@@ -36,7 +36,7 @@ void create()
     set("aggressive", 25);
     add_money("gold", random(500));
     add_money("platinum", random(75));
-    if (!random(15)) {
+    if (!random(2)) {
         ob = new("/d/common/obj/brewing/herb_special_inherit");
         ob->set_herb_name("tendril of flame");
         ob->move(TO);

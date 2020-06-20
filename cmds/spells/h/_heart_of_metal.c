@@ -17,7 +17,7 @@ void create()
     set_spell_name("heart of metal");
     set_spell_level(([ "mage" : 3, "cleric" : 3, "inquisitor" : 3 ]));
     set_spell_sphere("alteration");
-    set_syntax("cast CLASS heart of metal <weapon> with <type>");
+    set_syntax("cast CLASS heart of metal on <weapon> with <type>");
     set_description("Using this spell, you temporarily lend the powers of either silver or cold iron to the target weapon.  This will change its base damage type for the duration of the spell.  It will last a number of rounds equal to twice your caster level.");
     set_verbal_comp();
     set_somatic_comp();
@@ -31,12 +31,10 @@ int preSpell()
     args = sscanf(arg, "%s with %s", weaponarg, typearg);
     if (!weaponarg) {
         tell_object(caster, "You must specify a target weapon for this power!");
-        dest_effect();
         return 0;
     }
     if (!mywpn = present(weaponarg, caster)) {
         tell_object(caster, "You don't have any " + weaponarg + " in your inventory!");
-        dest_effect();
         return 0;
     }
     if (!mywpn->is_weapon()) {
@@ -78,6 +76,7 @@ void spell_effect(int prof)
     case "cold iron":
         ashort = " %^RESET%^%^RED%^{{cold iron}}%^RESET%^";
         mywpn->set_special_material_type("cold iron");
+        mywpn->remove_property("added short string");
         mywpn->set_property("added short string", ({ ashort }));
         mywpn->set_property("added short", ({ ashort }));
         if (interactive(caster)) {
@@ -99,6 +98,8 @@ void dest_effect()
     }
     if (objectp(mywpn)) {
         mywpn->remove_property_value("added short", ({ ashort }));
+        mywpn->remove_property("added short string", ({ ashort }));
+        mywpn->remove_property("added short string");
         mywpn->set_special_material_type(origtype);
     }
     ::dest_effect();

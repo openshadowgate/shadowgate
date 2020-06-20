@@ -260,10 +260,8 @@ varargs int get_stab_damage(object player,object target,object weapon)
 	size = (int)target->query_size();
 	if(objectp(weapon))
 	{
-		if (size < 3) { damage = weapon->query_damage(); }
-		else { damage = weapon->query_large_damage(); }
-		//damage += player->get_damage(weapon);
-	}
+    damage = weapon->query_damage();
+  }
 	else { damage = roll_dice(1,4); }
 
 	if(FEATS_D->usable_feat(player,"weapon finesse")) damage += "/daemon/bonus_d"->damage_bonus(player->query_stats("dexterity"));

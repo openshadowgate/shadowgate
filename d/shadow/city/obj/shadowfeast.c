@@ -10,7 +10,7 @@ int duration,FLAG;
 void create()
 {
     ::create();
-    set_id( ({ "table","shadowfeast","shadow feast","feast","heroes feast","stall" }) );
+    set_id( ({ "table","shadowfeast","shadow feast","feast","heroes feast","stall","food stall","long food stall" }) );
     set_name("shadow feast");
     set_short("%^YELLOW%^A long food stall%^RESET%^");
     set_long("%^ORANGE%^This long table is covered with a patchwork stained cloth.  "+
@@ -21,7 +21,7 @@ void create()
 		"and iron pots of bland soups, stews of strange tubers, and hard, plain bread."+
 		" Jugs of water and watered down wine dot the stall, refilling from wooden"+
 		" barrels sitting back near the volunteers and dead-eyed civil servants."+
-		
+
 		"\n\nType <feast> to eat from the table.");
     set_weight(100000);
     set("value", 0);

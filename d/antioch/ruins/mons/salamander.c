@@ -61,7 +61,7 @@ void create()
     }
     command("wield fire spear");
     set_diety("kossuth");
-    if (!random(15)) {
+    if (!random(2)) {
         ob = new("/d/common/obj/brewing/herb_special_inherit");
         ob->set_herb_name("tendril of flame");
         ob->move(TO);

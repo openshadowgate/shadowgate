@@ -4,21 +4,21 @@
 inherit ELDEBARO_MONSTER;
 int enraged;
 
-void create() 
-{  
+void create()
+{
     object ob;
-    ::create();  
-    
-    set_race("minotaur");    
-    
+    ::create();
+
+    set_race("minotaur");
+
     set_id( ({ "minotaur", "dreadhorn", "male minotaur", "massive minotaur", "ancient dreadhorn", "eldebarocreature"}) );
     set_body_type("minotaur");
     set_class("fighter");
     set_alignment(5);
     set_hd(50,12);
     set_hp(5500 + random(451));
-    set_max_hp(query_hp());    
-    
+    set_max_hp(query_hp());
+
     set_stats("strength", 24 + random(3));
     set_stats("constitution", 24 + random(4));
     set_stats("dexterity", 11 + random(3));
@@ -29,13 +29,13 @@ void create()
     set_mob_magic_resistance("average");
     set_property("no death", 1);
     set_gender("male");
-    
+
     set_name("ancient dreadhorn");
-    
+
     set_short("%^BOLD%^%^BLACK%^An ancient %^BOLD%^%^RED%^d%^BOLD%^%^BLACK%^r"+
     "%^BOLD%^%^RED%^e%^BOLD%^%^BLACK%^a%^BOLD%^%^RED%^d%^BOLD%^%^BLACK%^h%^BOLD%^"+
     "%^RED%^o%^BOLD%^%^BLACK%^r%^BOLD%^%^RED%^n%^RESET%^");
-    
+
     set_long("%^BOLD%^%^BLACK%^This minotaur like creature is covered with "+
     "thick and dark fur. His head is enormous, nearly three feet around, with "+
     "glaring %^BOLD%^%^RED%^red%^BOLD%^%^BLACK%^ eyes set above a pair of flaring "+
@@ -47,27 +47,27 @@ void create()
     "that seems barely contained within. Large meaty fists extend from the end of its "+
     "massive arm like appendages. Two ebony hooves rest at the end of its massive "+
     "leg like appendages and give this enormous creature some balance. A heavy "+
-    "darkness envelopes this creature. %^RESET%^");   
-    
+    "darkness envelopes this creature. %^RESET%^");
+
     set_property("add kits",25);
     set("aggressive", 55);
     set_alignment(9);
-    set_property("full attacks", 2);    
-   
+    set_property("full attacks", 2);
+
     add_money("silver", 12500 + random(5500));
     add_money("gold", 8500 + random(8500));
-    add_money("copper", 25500 + random(65000));    
-    set_new_exp(40, "boss");        
+    add_money("copper", 25500 + random(65000));
+    set_new_exp(40, "boss");
     set_monster_feats(({"rush", "impale", "sweepingblow"}));
     set_func_chance(75);
-    set_funcs(({"charge", "pound", "stomp", "charge", "pound", "stomp", "something_evil", "charge", "pound", "stomp", "stomp", "charge", "pound"}));    
+    set_funcs(({"charge", "pound", "stomp", "charge", "pound", "stomp", "something_evil", "charge", "pound", "stomp", "stomp", "charge", "pound"}));
     enraged = 0;
     ob = new(ELOB+"brutal_allocation");
     if(random(4)) ob->set_property("monsterweapon", 1);
     ob->move(TO);
     command("wield axe");
     ob = new(ELOB+"brutal_allocation");
-    ob->set_property("monsterweapon", 1);
+    if(random(4)) ob->set_property("monsterweapon", 1);
     ob->move(TO);
     command("wield axe");
 }
@@ -98,7 +98,7 @@ void stomp(object targ)
         if(!objectp(vics[x])) continue;
         if(!objectp(environment(vics[x]))) continue;
         if(environment(vics[x]) != ETO) continue;
-        
+
         if(vics[x]->reflex_save(26))
         {
             tell_object(vics[x], "%^BOLD%^%^CYAN%^The wave of energy washes over you "+
@@ -118,12 +118,12 @@ void stomp(object targ)
         {
             tell_object(vics[x], "%^BOLD%^%^BLACK%^You %^BOLD%^%^RED%^COLLAPSE%^BOLD%^%^BLACK%^ under the "+
             "force of the energy!%^RESET%^");
-            
+
             tell_room(ETO, vics[x]->QCN+"%^BOLD%^%^RED%^ COLLAPSES%^BOLD%^%^BLACK%^ under the force of the "+
             "energy!%^RESET%^", vics[x]);
             vics[x]->set_tripped(2, "%^BOLD%^%^CYAN%^You are struggling to get back to your feet!%^RESET%^");
         }
-        continue;        
+        continue;
     }
 }
 
@@ -138,10 +138,10 @@ void pound(object targ)
     if(!objectp(environment(targ))) return;
     if(environment(targ) != ETO) return;
     me = TO->query_short();
-    
+
     tell_object(targ, me+"%^BOLD%^%^RED% pounds you in the head with its large "+
     "meaty fist!%^RESET%^");
-    
+
     tell_room(ETO, me+"%^BOLD%^%^RED%^ pounds "+targ->QCN+" in the head with its "+
     "large meaty fist!%^RESET%^");
     dam = roll_dice(35, 4);
@@ -158,12 +158,12 @@ void charge(object targ)
     if(!objectp(ETO)) return;
     if(!objectp(targ)) return;
     me = TO->query_short();
-    
+
     tell_object(targ, me +"%^BOLD%^%^RED%^ lowers his head and charges directly at you!%^RESET%^");
-    
+
     tell_room(ETO, me+"%^BOLD%^%^RED%^ lowers his head and charges directly at "+targ->QCN+
     "%^BOLD%^%^RED%^!%^RESET%^", targ);
-    
+
     if(targ->reflex_save(25))
     {
         tell_object(targ, "%^BOLD%^%^WHITE%^You are able to move out of the way before "+me+
@@ -173,21 +173,21 @@ void charge(object targ)
         return;
     }
     limb = targ->return_target_limb();
-    
+
     tell_object(targ, "%^BOLD%^%^BLACK%^You are unable to move out of the way in time and "+
     me+"%^BOLD%^%^BLACK%^ impales your "+limb+" wish its horns!%^RESET%^");
-    
+
     tell_room(ETO, targ->QCN+"%^BOLD%^%^BLACK%^ is unable to move out of the way in time and "+
     me+"%^BOLD%^%^BLACK%^ impales "+targ->QP+" "+limb+" with its horns!%^RESET%^", targ);
-    
+
     targ->cause_typed_damage(targ, limb, roll_dice(50, 4), "piercing");
-    
+
     if(!random(5)) pound(targ);
-    return;    
+    return;
 }
 
-void set_paralyzed(int time,string message) 
-{ 
+void set_paralyzed(int time,string message)
+{
     if(!objectp(TO)) return;
     if(!objectp(ETO)) return;
     if(!enraged)
@@ -200,8 +200,8 @@ void set_paralyzed(int time,string message)
     return;
 }
 
-void set_tripped(int time, string message) 
-{ 
+void set_tripped(int time, string message)
+{
     if(!objectp(TO)) return;
     if(!objectp(ETO)) return;
     if(!enraged)
