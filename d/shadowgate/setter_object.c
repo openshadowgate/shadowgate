@@ -7,7 +7,7 @@ inherit OBJECT;
 
 // Skip to MODULES section to write new module.
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age", "stats", "height", "weight", "body_type", "language", "alignment", "diety", "class_special"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age", "stats", "height", "weight", "body_type", "language", "alignment", "deity", "class_special"});
 
 int head = 0;
 
@@ -31,12 +31,12 @@ void create()
              "of current options that this object affords you. It has " +
              "attached itself to you and will be with you for as long as you " +
              "are a newbie character in the world of ShadowGate.%^RESET%^");
-    /* set_property("no drop", 1); */
-    /* set_property("death keep", 1); */
+    set_property("no drop", 1);
+    set_property("death keep", 1);
     set_id(({ "setter object", "object", "charactercreationsetterobject" }));
     set_weight(0);
-    /* set_property("no animate", 1); */
-    /* set_property("soulbound", 1); */
+    set_property("no animate", 1);
+    set_property("soulbound", 1);
 }
 
 void init()
@@ -57,6 +57,8 @@ void init()
     add_action("_reset", "reset");
 
     add_action("_display_char_sheet", "sheet");
+
+    add_action("_finalize", "finalize");
 
     _review();
 }
@@ -132,6 +134,43 @@ _display_char_sheet()
     return 1;
 }
 
+_finalize(){
+
+    string i;
+    object desc;
+
+    if (head < sizeof(ROLL_CHAIN))
+    {
+        write("%^BOLD%^You're not yet done with your selections. Type %^ORANGE%^<review>%^WHITE%^ to see what is available.");
+        return 1;
+    }
+
+    if (objectp(to_object("/daemon/description_d")))
+        if (desc = new("/daemon/description_d")) {
+            desc->new_description_profile(ETO);
+                destruct(desc);
+            }
+
+    foreach(i in ROLL_CHAIN)
+    {
+        if (!char_sheet[i]) {
+            continue;
+        }
+
+        call_other("build_" + i, TO);
+    }
+
+    tell_object(ETO, "
+
+%^BOLD%^  Entering the world of ShadowGate!
+
+");
+
+    TO->remove();
+
+    return 1;
+}
+
 advance_head()
 {
     head++;
@@ -190,15 +229,19 @@ display_common()
             write(" %^GREEN%^%^BOLD%^" + capitalize(i));
         }
 
-        if (function_exists("synopsis_" + ROLL_CHAIN[head], TO)) {
+        if (function_exists("hint_" + ROLL_CHAIN[head], TO)) {
+            call_other(TO, "hint_" + ROLL_CHAIN[head]);
+        }
 
+        if (function_exists("synopsis_" + ROLL_CHAIN[head], TO)) {
             call_other(TO, "synopsis_" + ROLL_CHAIN[head]);
             return;
         }
 
-        write("
-%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
+        write("\n%^BOLD%^%^WHITE%^To review all your choices and view your current character sheet use %^ORANGE%^<sheet>%^WHITE%^.");
+        write("%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
         write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random value.");
+
 
     } else if (sizeof(choices) == 1) {
         select_common(choices[0]);
@@ -253,9 +296,28 @@ string *generate_class()
     return choices;
 }
 
+hint_class()
+{
+    write("
+%^BOLD%^Your character class defines core of your game play and responds to what your character does as an adventurer. Different classes have different mechanics and can behave very unlike others. Difficulty of your game play will depend on your class, so if you're unsure what to pick, it is highly recommended no to select caster classes for your first time on the ShadowGate.
+
+%^BOLD%^To overview all available classes look at %^ORANGE%^<help classes>%^WHITE%^.
+%^BOLD%^To see what embodies class of your choice see %^ORANGE%^<help %^ULINE%^CLASSNAME%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<help fighter>%^RESET%^.");
+}
+
 string *generate_gender()
 {
     return ({"male", "female", "other"});
+}
+
+hint_gender()
+{
+    write("
+%^BOLD%^Gender defines how game will reference you in messages and which races are available to you. For example, %^CYAN%^Dryads%^WHITE%^ can be only %^CYAN%^females%^WHITE%^, while %^CYAN%^Satyrs%^WHITE%^ only %^CYAN%^males%^WHITE%^.
+
+%^BOLD%^%^CYAN%^ Male%^WHITE%^ will be referenced to as %^CYAN%^he%^WHITE%^.
+%^BOLD%^%^CYAN%^ Female%^WHITE%^ will be referenced to as %^CYAN%^she%^WHITE%^.
+%^BOLD%^%^CYAN%^ Other%^WHITE%^ will be referenced to as %^CYAN%^they%^WHITE%^.");
 }
 
 string *generate_race()
@@ -267,8 +329,20 @@ string *generate_race()
     choices = filter_array(choices, (:member_array($1, ("/std/class/" + $2)->restricted_races()) == -1:), char_sheet["class"]);
     choices = filter_array(choices, (:!(("/std/races/" + $1)->is_gender_locked(char_sheet["gender"])):));
     choices = filter_array(choices, (:sizeof(({1, 2, 3, 4, 5, 6, 7, 8, 9}) - (("/std/races/" + $1)->restricted_alignments(char_sheet["subrace"]) + ("/std/class/" + $2)->restricted_alignments())) :), char_sheet["class"]);
+    if (!unrestricted_player(ETO)) {
+        choices = filter_array(choices, (:!(("/std/races/") + $1)->is_restricted():));
+    }
 
     return choices;
+}
+
+hint_races()
+{
+    write("
+%^BOLD%^Your race determines your make-up. Your race determines your make-up. Some races are predisposed to being stronger, sturdier, more intelligent, more sensitive to light, etc. than other races. In addition, different races are physically different from others, having different limbs and other types of body parts. Some races are better suited to be magical classes, others prefer physical approach. Whatever choice you make, remember that how other characters will treat you will depend on your race. If you're unsure, pick %^CYAN%^human%^WHITE%^ or %^CYAN%^elf%^WHITE%^ for your first character.
+
+%^BOLD%^To overview all available races look at %^ORANGE%^<help races>%^WHITE%^.
+%^BOLD%^To see what embodies race of your choice see %^ORANGE%^<help %^ULINE%^RACENAME%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<help human>%^RESET%^.");
 }
 
 string *generate_subrace()
@@ -285,6 +359,14 @@ string *generate_subrace()
     return choices;
 }
 
+hint_subrace()
+{
+    write("
+%^BOLD%^Your subrace is your ethnicity and this choice will be usually less consequential than race. Some races, such as %^CYAN%^saurians%^WHITE%^ have ethnicities that impact your gameplay severely. Some subraces, such as %^CYAN%^tiefling%^WHITE%^ or %^CYAN%^fey'ri%^WHITE%^ may be treated very unlike their parent race.
+
+%^BOLD%^To see more details, refer to your race's helpfile, for example, %^ORANGE%^<help " + char_sheet["race"] + ">%^WHITE%^.");
+}
+
 string *generate_template()
 {
     string * choices = ({});
@@ -299,6 +381,12 @@ string *generate_template()
     }
 
     return choices;
+}
+
+hint_template()
+{
+    write("
+%^BOLD%^Your template will define additional flavor of your game play. You already should know what to do if you're here. If you're unsure, choose %^CYAN%^none%^WHITE%^.");
 }
 
 display_stats()
@@ -359,7 +447,7 @@ display_stats()
 
     write("\n");
     if (92 - sum == 0) {
-        write("%^BOLD%^%^GREEN%^You may proceed to the next step.");
+        write("%^BOLD%^%^GREEN%^You may proceed with %^ORANGE%^<done>%^GREEN%^ to the next step.");
     } else {
         write("%^BOLD%^%^GREEN%^You have %^CYAN%^" + (92 - sum) + "%^GREEN%^ points left to assign.");
 
@@ -369,129 +457,16 @@ display_stats()
 
 }
 
-string *generate_hair_color()
-{
-    string * choices;
-
-    choices = ("/std/races/" + char_sheet["race"])->query_hair_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
-
-    return sort_array(choices, 1);
-}
-
-string *generate_eye_color()
-{
-    string * choices;
-
-    choices = ("/std/races/" + char_sheet["race"])->query_eye_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
-
-    return sort_array(choices, 1);
-}
-
-display_height()
-{
-    write("
-");
-    synopsis_height();
-}
-
-select_height(string str)
-{
-    int amount;
-
-    string racefile = "/std/races/" + char_sheet["race"];
-
-    int minh = racefile->height_base(char_sheet["gender"]);
-    int maxh = minh + racefile->height_mod(char_sheet["gender"]);
-
-    if (str == "random") {
-        amount = minh + random(maxh - minh);
-    } else {
-        if (sscanf(str, "%d", amount) != 1) {
-            write("%^BOLD%^%^RED%^You have to enter a number.");
-            return 0;
-        }
-
-        if (amount > maxh || amount < minh) {
-            write("%^BOLD%^%^RED%^Your height must be within allowed range.");
-            return 0;
-        }
-    }
-
-    char_sheet["height"] = amount;
-    write("%^BOLD%^%^WHITE%^You have selected %^CYAN%^" + amount + "%^WHITE%^ for your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^.");
-    return 1;
-}
-
-synopsis_height()
-{
-    string racefile = "/std/races/" + char_sheet["race"];
-
-    int minh = racefile->height_base(char_sheet["gender"]);
-    int maxh = minh + racefile->height_mod(char_sheet["gender"]);
-
-    write("%^BOLD%^%^WHITE%^Choose height for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^height%^WHITE%^ in %^CYAN%^inches%^WHITE%^.\n");
-    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. For example, %^ORANGE%^<select " + minh + ">%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^You can also select a random value with %^ORANGE%^<select random>%^WHITE%^.");
-    write("\n");
-}
-
-display_weight()
-{
-    write("
-");
-    synopsis_weight();
-}
-
-select_weight(string str)
-{
-    int amount;
-
-    string racefile = "/std/races/" + char_sheet["race"];
-
-    int minh = racefile->weight_base(char_sheet["gender"]);
-    int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
-
-    if (str == "random") {
-        amount = minh + random(maxh - minh);
-    } else {
-        if (sscanf(str, "%d", amount) != 1) {
-            write("%^BOLD%^%^RED%^You have to enter a number.");
-            return 0;
-        }
-
-        if (amount > maxh || amount < minh) {
-            write("%^BOLD%^%^RED%^Your height must be within allowed range.");
-            return 0;
-        }
-    }
-
-    char_sheet["weight"] = amount;
-    write("%^BOLD%^%^WHITE%^You have selected %^CYAN%^" + amount + "%^WHITE%^ for your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^.");
-    return 1;
-}
-
-synopsis_weight()
-{
-    string racefile = "/std/races/" + char_sheet["race"];
-
-    int minh = racefile->weight_base(char_sheet["gender"]);
-    int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
-
-    write("%^BOLD%^%^WHITE%^Choose weight for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^weight%^WHITE%^ in %^CYAN%^pounds%^WHITE%^.\n");
-    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. For example, %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
-    write("%^BOLD%^%^WHITE%^You can also select a random value with %^ORANGE%^<select random>%^WHITE%^.");
-    write("\n");
-}
-
-string *generate_body_type()
-{
-    return ({"frail", "skinny", "slender", "svelte", "hardy", "portly", "heavy"});
-}
-
 synopsis_stats()
 {
+
+    write("
+%^BOLD%^Your stats define your physical and mental abilities. To see in-dept explanation of each stat, type in %^ORANGE%^<help %^ULINE%^STAT%^%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<help charisma>%^WHITE%^.
+
+%^BOLD%^%^Your race and age has some effect on your stats. After your selections, values right of the stats will be added or subtracted from choices you have made.
+
+%^BOLD%^If you're here for the first time it is highly recommended you select %^ORANGE%^<recommended>%^WHITE%^ option here.");
+
     write("
 %^BOLD%^%^WHITE%^Use %^ORANGE%^<review>%^RESET%^%^BOLD%^ to view your current stats.
 %^BOLD%^%^WHITE%^Use %^ORANGE%^<recommended>%^RESET%^%^BOLD%^ to set your stats to recommended value.
@@ -641,6 +616,128 @@ select_stats(string str)
 
 }
 
+string *generate_hair_color()
+{
+    string * choices;
+
+    choices = ("/std/races/" + char_sheet["race"])->query_hair_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
+
+    return sort_array(choices, 1);
+}
+
+string *generate_eye_color()
+{
+    string * choices;
+
+    choices = ("/std/races/" + char_sheet["race"])->query_eye_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
+
+    return sort_array(choices, 1);
+}
+
+display_height()
+{
+    write("
+");
+    synopsis_height();
+}
+
+select_height(string str)
+{
+    int amount;
+
+    string racefile = "/std/races/" + char_sheet["race"];
+
+    int minh = racefile->height_base(char_sheet["gender"]);
+    int maxh = minh + racefile->height_mod(char_sheet["gender"]);
+
+    if (str == "random") {
+        amount = minh + random(maxh - minh);
+    } else {
+        if (sscanf(str, "%d", amount) != 1) {
+            write("%^BOLD%^%^RED%^You have to enter a number.");
+            return 0;
+        }
+
+        if (amount > maxh || amount < minh) {
+            write("%^BOLD%^%^RED%^Your height must be within allowed range.");
+            return 0;
+        }
+    }
+
+    char_sheet["height"] = amount;
+    write("%^BOLD%^%^WHITE%^You have selected %^CYAN%^" + amount + "%^WHITE%^ for your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^.");
+    return 1;
+}
+
+synopsis_height()
+{
+    string racefile = "/std/races/" + char_sheet["race"];
+
+    int minh = racefile->height_base(char_sheet["gender"]);
+    int maxh = minh + racefile->height_mod(char_sheet["gender"]);
+
+    write("%^BOLD%^%^WHITE%^Choose height for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^height%^WHITE%^ in %^CYAN%^inches%^WHITE%^.\n");
+    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. For example, %^ORANGE%^<select " + minh + ">%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^You can also select a random value with %^ORANGE%^<select random>%^WHITE%^.");
+    write("\n");
+}
+
+display_weight()
+{
+    write("
+");
+    synopsis_weight();
+}
+
+select_weight(string str)
+{
+    int amount;
+
+    string racefile = "/std/races/" + char_sheet["race"];
+
+    int minh = racefile->weight_base(char_sheet["gender"]);
+    int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
+
+    if (str == "random") {
+        amount = minh + random(maxh - minh);
+    } else {
+        if (sscanf(str, "%d", amount) != 1) {
+            write("%^BOLD%^%^RED%^You have to enter a number.");
+            return 0;
+        }
+
+        if (amount > maxh || amount < minh) {
+            write("%^BOLD%^%^RED%^Your height must be within allowed range.");
+            return 0;
+        }
+    }
+
+    char_sheet["weight"] = amount;
+    write("%^BOLD%^%^WHITE%^You have selected %^CYAN%^" + amount + "%^WHITE%^ for your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^.");
+    return 1;
+}
+
+synopsis_weight()
+{
+    string racefile = "/std/races/" + char_sheet["race"];
+
+    int minh = racefile->weight_base(char_sheet["gender"]);
+    int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
+
+    write("%^BOLD%^%^WHITE%^Choose weight for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
+    write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^weight%^WHITE%^ in %^CYAN%^pounds%^WHITE%^.\n");
+    write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. For example, %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
+    write("%^BOLD%^%^WHITE%^You can also select a random value with %^ORANGE%^<select random>%^WHITE%^.");
+    write("\n");
+}
+
+string *generate_body_type()
+{
+    return ({"frail", "skinny", "slender", "svelte", "hardy", "portly", "heavy"});
+}
+
+
 display_age()
 {
     write("
@@ -700,6 +797,8 @@ synopsis_age()
     write("%^BOLD%^%^WHITE%^Values between %^GREEN%^" + age_brackets[2] + "%^WHITE%^ and %^GREEN%^" + age_brackets[3] + "%^WHITE%^ will make you %^CYAN%^old%^WHITE%^.");
     write("%^BOLD%^%^WHITE%^Values above %^GREEN%^" + age_brackets[3] + "%^WHITE%^ will make you %^CYAN%^venerable%^WHITE%^.");
 
+    write("\n%^BOLD%^Your age will have impact on your stats. Refer to %^ORANGE%^<help age>%^WHITE%^ for details.");
+
     write("\n%^BOLD%^%^WHITE%^Enter your %^CYAN%^age%^WHITE%^ in %^CYAN%^years%^WHITE%^.\n");
     write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. E.g. %^ORANGE%^<select " + (age_brackets[0] + random(age_brackets[1] - age_brackets[0]))+ ">%^WHITE%^.");
     write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random age.");
@@ -722,8 +821,15 @@ string *generate_alignment()
     return choices;
 }
 
+hint_alignment()
+{
+    write("
+%^BOLD%^Many ages of arguing have been dedicated to this selection. In the end, your alignment determines your disposition to the law and actions you tend to take. It also restricts %^CYAN%^deities%^WHITE%^ you will be able to select later, and for some classes it restricts %^CYAN%^class special%^WHITE%^ choices.%^WHITE%^.
 
-string *generate_diety()
+%^BOLD%^Refer to %^ORANGE%^<help alignment>%^WHITE%^ if you want to know more about alignments on ShadowGate.");
+}
+
+string *generate_deity()
 {
     string * choices = ({});
 
@@ -740,9 +846,9 @@ string *generate_diety()
     return choices;
 }
 
-display_diety()
+display_deity()
 {
-    string * choices = generate_diety();
+    string * choices = generate_deity();
     string i;
 
     write("%^BOLD%^%^WHITE%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^ from the following:\n");
@@ -755,9 +861,24 @@ display_diety()
 %^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
 }
 
+hint_deity()
+{
+    write("
+%^BOLD%^You're about to select divine power to follow. If you're a %^CYAN%^cleric%^WHITE%^, %^CYAN%^paladin%^WHITE%^ or otherwise divine engaged character, it is highly recommended you read deity help file prior to selection.%^WHITE%^.
+
+%^BOLD%^Refer to %^ORANGE%^<help help deities>%^WHITE%^ to overview selection.");
+}
+
+
 string *generate_class_special()
 {
     return ("/std/class/" + char_sheet["class"])->query_newbie_stuff(str_to_align(char_sheet["alignment"]));
+}
+
+hint_class_special()
+{
+    write("
+%^BOLD%^This choice determines additional mechanics for your class. Refer to %^ORANGE%^<help " + char_sheet["class"] + ">%^WHITE%^ for details.");
 }
 
 string *generate_language()
@@ -769,6 +890,11 @@ string *generate_language()
     }else {
         return ({});
     }
+}
+
+synopsis_language()
+{
+
 }
 
 select_language(string str)
@@ -830,6 +956,105 @@ select_language(string str)
 
 /*     write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random languages."); */
 /* } */
+
+build_class()
+{
+    ETO->set_class(char_sheet["class"], 1);
+    ETO->set_guild_level(char_sheet["class"], 1);
+    ETO->set_mlevel(char_sheet["class"], 1);
+    ETO->new_body();
+    ETO->set_max_mp(0);
+    ETO->set_mp(0);
+    ETO->set_hp(20);
+    ETO->init_spellcaster();
+    ETO->add_exp(1);
+}
+
+build_gender()
+{
+    ETO->set_gender(char_sheet["gender"]);
+}
+
+build_race()
+{
+    ETO->set_race(char_sheet["race"]);
+    ETO->init_lang();
+}
+
+build_subrace()
+{
+    ETO->set("subrace", char_sheet["subrace"]);
+}
+
+build_template()
+{
+    ("/std/acquired_template/" + char_sheet["template"])->apply_template(ETO);
+}
+
+build_age()
+{
+    ETO->set_start_age(char_sheet["age"]);
+}
+
+build_stats()
+{
+    string i;
+
+    foreach(i in STATS) {
+        ETO->set_stats(i, char_sheet["stats"][i]);
+    }
+}
+
+build_height()
+{
+    ETO->set_player_height(char_sheet["height"]);
+}
+
+build_weight()
+{
+    ETO->set_player_weight(char_sheet["weight"]);
+}
+
+build_body_type()
+{
+    ETO->set_body_type(char_sheet["body_type"]);
+}
+
+/**
+ * Builds BONUS languages.
+ */
+build_language()
+{
+    string i;
+    foreach(i in char_sheet["language"]) {
+        ETO->set_lang(i, 100);
+    }
+}
+
+build_alignment()
+{
+    ETO->set_alignment(str_to_align(char_sheet["alignment"]));
+}
+
+build_diey()
+{
+
+    ETO->set_diety(char_sheet["deity"]);
+    if (char_sheet["deity"] != "godless") {
+
+        object ob        ;
+
+        ob = new("/d/magic/symbols/holy_symbol.c");
+        ob->set_short("The holy symbol of "+capitalize(char_sheet["deity"]));
+        ob->move(ETO);
+        ob->save(ETOQCN);
+    }
+}
+
+build_class_special()
+{
+    ("/std/class/" + char_sheet["class"])->process_newbie_choice(ETO, char_sheet["class_special"]);
+}
 
 // Modules end here
 
