@@ -31,12 +31,10 @@ int preSpell()
     args = sscanf(arg, "%s with %s", weaponarg, typearg);
     if (!weaponarg) {
         tell_object(caster, "You must specify a target weapon for this power!");
-        dest_effect();
         return 0;
     }
     if (!mywpn = present(weaponarg, caster)) {
         tell_object(caster, "You don't have any " + weaponarg + " in your inventory!");
-        dest_effect();
         return 0;
     }
     if (!mywpn->is_weapon()) {
@@ -78,6 +76,7 @@ void spell_effect(int prof)
     case "cold iron":
         ashort = " %^RESET%^%^RED%^{{cold iron}}%^RESET%^";
         mywpn->set_special_material_type("cold iron");
+        mywpn->remove_property("added short string");
         mywpn->set_property("added short string", ({ ashort }));
         mywpn->set_property("added short", ({ ashort }));
         if (interactive(caster)) {
@@ -99,6 +98,7 @@ void dest_effect()
     }
     if (objectp(mywpn)) {
         mywpn->remove_property_value("added short", ({ ashort }));
+        mywpn->remove_property("added short string", ({ ashort }));
         mywpn->remove_property("added short string");
         mywpn->set_special_material_type(origtype);
     }
