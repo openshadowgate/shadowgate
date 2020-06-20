@@ -99,6 +99,7 @@ void dest_effect()
     }
     if (objectp(mywpn)) {
         mywpn->remove_property_value("added short", ({ ashort }));
+        mywpn->remove_property("added short string");
         mywpn->set_special_material_type(origtype);
     }
     ::dest_effect();
