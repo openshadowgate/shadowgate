@@ -4,6 +4,8 @@
 
 inherit OBJECT;
 
+// Skip to MODULES section to write new module.
+
 string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "age", "height", "weight", "body_type", "language", "alignment", "diety", "class_special"});
 
 int head = 0;
@@ -93,8 +95,7 @@ select_common(string str)
     string * choices;
 
     if (function_exists("select_" + ROLL_CHAIN[head], TO)) {
-        call_other(TO, "select_" + ROLL_CHAIN[head], str);
-        return;
+        return call_other(TO, "select_" + ROLL_CHAIN[head], str);
     }
 
     str = lower_case(str);
@@ -130,25 +131,28 @@ display_common()
 
     choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
-
     if (sizeof(choices) > 1) {
         write("%^BOLD%^%^WHITE%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^ from the following:\n");
         foreach(i in choices)
         {
             write(" %^GREEN%^%^BOLD%^" + capitalize(i));
         }
-    write("
+
+        if (function_exists("synopsis_" + ROLL_CHAIN[head], TO)) {
+
+            call_other(TO, "synopsis_" + ROLL_CHAIN[head]);
+            return;
+        }
+
+        write("
 %^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
-    write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random value.");
+        write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random value.");
+
     } else if (sizeof(choices) == 1) {
         select_common(choices[0]);
         advance_head();
     } else {
         advance_head();
-    }
-
-    if (brief == 0) {
-
     }
 }
 
@@ -180,6 +184,8 @@ reset_common(string str)
 
     _review();
 }
+
+
 
 // MODULES
 
@@ -246,7 +252,7 @@ display_stats()
     int sum = 0;
     mapping race_stats = ([]);
 
-    if (!sizeof(char_sheet["stats"])) {
+    if (!mapp(char_sheet["stats"])) {
         char_sheet["stats"] = ([
                                    "strength":6,
                                    "dexterity":6,
@@ -295,10 +301,11 @@ display_stats()
         write("%^BOLD%^%^GREEN%^You may proceed to the next step.");
     } else {
         write("%^BOLD%^%^GREEN%^You have %^CYAN%^" + (92 - sum) + "%^GREEN%^ points left to assign.");
+
     }
 
-
     synopsis_stats();
+
 }
 
 string *generate_hair_color()
@@ -340,17 +347,17 @@ select_height(string str)
     } else {
         if (sscanf(str, "%d", amount) != 1) {
             write("%^BOLD%^%^RED%^You have to enter a number.");
-            return 1;
+            return 0;
         }
 
         if (amount > maxh || amount < minh) {
             write("%^BOLD%^%^RED%^Your height must be within allowed range.");
-            return 1;
+            return 0;
         }
     }
 
     char_sheet["height"] = amount;
-    advance_head();
+    write("%^BOLD%^%^WHITE%^You have selected %^CYAN%^" + amount + "%^WHITE%^ for your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^.");
     return 1;
 }
 
@@ -389,17 +396,17 @@ select_weight(string str)
     } else {
         if (sscanf(str, "%d", amount) != 1) {
             write("%^BOLD%^%^RED%^You have to enter a number.");
-            return 1;
+            return 0;
         }
 
         if (amount > maxh || amount < minh) {
             write("%^BOLD%^%^RED%^Your height must be within allowed range.");
-            return 1;
+            return 0;
         }
     }
 
     char_sheet["weight"] = amount;
-    advance_head();
+    write("%^BOLD%^%^WHITE%^You have selected %^CYAN%^" + amount + "%^WHITE%^ for your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^.");
     return 1;
 }
 
@@ -456,7 +463,6 @@ _done_stats()
     remove_action("_recommended_stats", "recommended");
     remove_action("_done_stats", "done");
 
-    advance_head();
     return 1;
 }
 
@@ -476,7 +482,7 @@ _recommended_stats()
 
     if (sizeof(cache["minstats"]) && sizeof(("/std/acquired_template/" + char_sheet["template"])->stat_requirements())) {
         write("%^BOLD%^%^RED%^You can't use stat recommendations while having stat restrictions imposed by a template. You're on your own.");
-        return 1;
+        return 0;
     }
 
     foreach(i in STATS) {
@@ -559,13 +565,19 @@ _add_stats(string str){
 
 select_stats(string str)
 {
+
     write("%^BOLD%^%^WHITE%^You must now set your %^CYAN%^stat points.\n");
 
     if (str == "random") {
-        _recommended_stats();
-        _done_stats();
+        int res = _recommended_stats();
+        if (res) {
+            _done_stats();
+        }
+        return res;
     }
+
     synopsis_stats();
+
 }
 
 display_age()
@@ -590,12 +602,12 @@ select_age(string str)
     } else {
         if (sscanf(str, "%d", amount) != 1) {
             write("%^BOLD%^%^RED%^You have to enter a number.");
-            return 1;
+            return 0;
         }
 
         if (amount < age_brackets[0]) {
             write("%^BOLD%^%^RED%^Your can't be that young.");
-            return 1;
+            return 0;
         }
 
         if (!templatefile->query_unbound_age()) {
@@ -609,7 +621,6 @@ select_age(string str)
     }
 
     char_sheet["age"] = amount;
-    advance_head();
     return 1;
 }
 
@@ -701,32 +712,63 @@ string *generate_language()
 
 select_language(string str)
 {
-    string * toselect;
     string * prospective;
     string * tmp;
+    string * toselect;
+    string tlang;
     int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4;
-
-    toselect = explode(str, " ");
-
-    if (!sizeof(toselect)) {
-        write("%^BOLD%^%^WHITE%^Enter space separated list of languages. You can select up to %^CYAN%^" + maxbonus + "%^WHITE%^ languages.");
-        return 0;
-    }
+    int i;
 
     prospective = (("/std/races/" + char_sheet["race"])->query_languages(char_sheet["subrace"]))["optional"];
 
-    if (sizeof(tmp = (toselect - prospective))) {
-        write("%^BOLD%^%^WHITE%^You can't select one of the languages you have entered: %^CYAN%^" + implode(tmp, "%^WHITE%^, %^CYAN%^"));
-        return 0;
+    if (str == "random") {
+        i = maxbonus;
+        toselect = ({});
+        while(i)
+        {
+            tlang = prospective[random(sizeof(prospective))];
+            toselect += ({tlang});
+            prospective -= ({tlang});
+            i--;
+        }
+    } else {
+
+        toselect = explode(str, " ");
+
+        if (!sizeof(toselect)) {
+            write("%^BOLD%^%^WHITE%^Enter space separated list of languages. You can select up to %^CYAN%^" + maxbonus + "%^WHITE%^ languages.");
+            return 0;
+        }
+
+        if (sizeof(tmp = (toselect - prospective))) {
+            write("%^BOLD%^%^WHITE%^You can't select one of the languages you have entered: %^CYAN%^" + implode(tmp, "%^WHITE%^, %^CYAN%^"));
+            return 0;
+        }
+
     }
 
     char_sheet[ROLL_CHAIN[head]] = toselect;
 
     write("%^BOLD%^%^WHITE%^You have selected %^CYAN%^" + implode(toselect, "%^WHITE%^, %^CYAN%^") + "%^WHITE%^ for your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^.");
-
-    advance_head();
     return 1;
 }
+
+/* synopsis_language() */
+/* { */
+/*     int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4; */
+/*     string * choices = generate_language(); */
+
+/*     if (maxbonus > 1) { */
+/*         write(" */
+/* %^BOLD%^%^WHITE%^You can select up to %^CYAN%^" + maxbonus + "%^WHITE%^ as your bonus languages. To select them enter them separated by space, for example, %^ORANGE%^<select %^ULINE%^" + choices[0] + "%^RESET%^ %^BOLD%^%^ORANGE%^ULINE%^" + choices[1] + "%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^."); */
+/*     } else { */
+/*         write(" */
+/* %^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^."); */
+
+/*     } */
+
+/*     write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random languages."); */
+/* } */
 
 // Modules end here
 
