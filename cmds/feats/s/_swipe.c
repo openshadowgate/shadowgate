@@ -220,10 +220,7 @@ void execute_attack()
     }
     damage = roll_dice(clevel,10);
     damage += (int)caster->query_damage_bonus();
-    if((int)target->query_size() < 3)
-        damage += weapons[0]->query_damage();
-    else
-        damage += weapons[0]->query_large_damage();
+    damage += weapons[0]->query_damage();
     damage += "/daemon/bonus_d"->damage_bonus(max(({caster->query_stats("dexterity"),
                         caster->query_stats("strength")})));
 
@@ -233,7 +230,7 @@ void execute_attack()
     tell_object(target, "%^BOLD%^%^RED%^You feel immense pain!%^RESET%^");
     target->set_paralyzed(roll_dice(2,6),"%^BOLD%^%^RED%^You feel immense pain!%^RESET%^");
 
-    caster->cause_damage_to(target,target->return_target_limb(),damage);
+    caster->cause_typed_damage(target,target->return_target_limb(),damage,weapons[0]->query_damage_type());
 
     if(target->is_npc() || userp(target)) {
       if(target->query_deaths_door() && (userp(caster) || caster->query_property("knock unconscious"))) {
