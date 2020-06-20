@@ -46,7 +46,7 @@ OLI
    set_alignment(9);
    set("aggressive",25);
    set_new_exp(35,"very high");
-   if(!random(20)) {
+   if(!random(2)) {
      ob = new("/d/common/obj/brewing/herb_special_inherit");
      ob->set_herb_name("tendril of flame");
      ob->move(TO);
@@ -83,7 +83,7 @@ void attack(object targ){
 	 targ->do_damage("torso",roll_dice(2,15));
 	 tell_object(targ,"%^BOLD%^%^RED%^The heat from its body burns you badly.");
 	 targ->do_damage("torso",roll_dice(2,10));
-// changing to use paralyzed for a meaningful message *Styx*  11/30/03, last change 
+// changing to use paralyzed for a meaningful message *Styx*  11/30/03, last change
 //	 targ->set_disable(45);
 	 targ->set_paralyzed(roll_dice(4,10), "%^YELLOW%^The salamader's tail is holding you immobile!");
       }

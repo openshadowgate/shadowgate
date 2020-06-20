@@ -48,7 +48,7 @@ void create()
     add_money("gold", random(1000) + 50);
     set_spells(({ "fireball", "meteor swarm" }));
     set_spell_chance(20);
-    if (!random(15)) {
+    if (!random(2)) {
         ob = new("/d/common/obj/brewing/herb_special_inherit");
         ob->set_herb_name("tendril of flame");
         ob->move(TO);
