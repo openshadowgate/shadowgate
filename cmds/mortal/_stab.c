@@ -260,8 +260,8 @@ varargs int get_stab_damage(object player,object target,object weapon)
 	size = (int)target->query_size();
 	if(objectp(weapon))
 	{
-		if (size < 3) { damage = weapon->query_damage(); }
-		else { damage = weapon->query_large_damage(); }
+    damage = weapon->query_damage();
+  }
 		//damage += player->get_damage(weapon);
 	}
 	else { damage = roll_dice(1,4); }
