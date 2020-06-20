@@ -2434,10 +2434,12 @@ int check_avoidance(object who, object victim, object* weapons)
        avoid += ({"TYPE_RIDDEN"});
     }
     if (FEATS_D->usable_feat(victim,"shot on the run")
-       && sizeof(weapons)
-       && (!weapons[0]->is_lrweapon() || !weapons[1]->is_lrweapon())) {
+       && sizeof(weapons)) {
+       if(weapons[0]->is_lrweapon())
+       {
        shot_on_the_run = 1;
        avoid += ({"TYPE_SHOT"});
+       }
     }
     if (victim->is_animal()) {
         rider = (object)victim->query_current_rider();
