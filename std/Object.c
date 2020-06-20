@@ -584,10 +584,8 @@ mixed query_property(string prop)
             num += 1;
         }
         if ((string)TO->query_race() == "drow" ||
-            (string)TO->query("subrace") == "szarkai" &&
-            !TO->query_property("raised resistance")) {
-            mylevel = (int)TO->query_level() + 10;
-            num += 2;
+            (string)TO->query("subrace") == "szarkai") {
+            num += 1;
         }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "magic resistance"));
