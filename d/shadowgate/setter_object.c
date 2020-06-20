@@ -7,7 +7,7 @@ inherit OBJECT;
 
 // Skip to MODULES section to write new module.
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age", "stats", "height", "weight", "body_type", "language", "alignment", "deity", "class_special"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age", "stats", "height", "weight", "body_type", "hair_color", "eye_color", "language", "alignment", "deity", "class_special"});
 
 int head = 0;
 
@@ -15,6 +15,7 @@ mapping char_sheet = ([]);
 mapping cache = ([]);
 
 int brief = 0;
+final_set = 0;
 
 void create()
 {
@@ -42,25 +43,25 @@ void create()
 void init()
 {
     ::init();
-    /* if (userp(ETO)) */
-    /*     if (!newbiep(ETO)) { */
-    /*         TO->remove(); */
-    /*     } */
-// actions to add: reset done reroll add review pick check finalize brief recommended random
+    if (userp(ETO))
+        if (!newbiep(ETO)) {
+            TO->remove();
+        }
 
-    add_action("_select", "pick");
-    add_action("_select", "select");
-    add_action("_select", "sel");
+    if(!final_set)
+    {
+        add_action("_select", "pick");
+        add_action("_select", "select");
+        add_action("_select", "sel");
 
-    add_action("_review", "review");
+        add_action("_review", "review");
 
-    add_action("_reset", "reset");
+        add_action("_reset", "reset");
 
-    add_action("_display_char_sheet", "sheet");
+        add_action("_display_char_sheet", "sheet");
 
-    add_action("_finalize", "finalize");
-
-    _review();
+        add_action("_finalize", "finalize");
+    }
 }
 
 _select(string str)
@@ -145,6 +146,8 @@ _finalize(){
         return 1;
     }
 
+    ETO->convert_relationships();
+
     if (objectp(to_object("/daemon/description_d")))
         if (desc = new("/daemon/description_d")) {
             desc->new_description_profile(ETO);
@@ -157,8 +160,11 @@ _finalize(){
             continue;
         }
 
-        call_other("build_" + i, TO);
+        call_other(TO, "build_" + i);
     }
+
+    set_long("%^WHITE%^%^BOLD%^This strange object radiates power the likes of which you have never before
+seen. It seems to be dormant at the time.");
 
     tell_object(ETO, "
 
@@ -166,7 +172,7 @@ _finalize(){
 
 ");
 
-    TO->remove();
+    final_set = 1;
 
     return 1;
 }
@@ -414,7 +420,11 @@ display_stats()
     }
 
     if (!sizeof(cache["minstats"])) {
-        mapping tmpl_stats = ("/std/acquired_template/" + char_sheet["template"])->stat_requirements();
+        mapping tmpl_stats = ([]);
+
+        if (char_sheet["template"]) {
+            tmpl_stats = ("/std/acquired_template/" + char_sheet["template"])->stat_requirements();
+        }
 
         cache["minstats"] = ("/std/class/" + char_sheet["class"])->stat_requirements();
         if (sizeof(tmpl_stats)) {
@@ -516,9 +526,11 @@ _recommended_stats()
 
     mapping temp_stats = char_sheet["stats"];
 
-    if (sizeof(cache["minstats"]) && sizeof(("/std/acquired_template/" + char_sheet["template"])->stat_requirements())) {
-        write("%^BOLD%^%^RED%^You can't use stat recommendations while having stat restrictions imposed by a template. You're on your own.");
-        return 0;
+    if (char_sheet["template"]) {
+        if (sizeof(cache["minstats"]) && sizeof(("/std/acquired_template/" + char_sheet["template"])->stat_requirements())) {
+            write("%^BOLD%^%^RED%^You can't use stat recommendations while having stat restrictions imposed by a template. You're on your own.");
+            return 0;
+        }
     }
 
     foreach(i in STATS) {
@@ -614,24 +626,6 @@ select_stats(string str)
 
     synopsis_stats();
 
-}
-
-string *generate_hair_color()
-{
-    string * choices;
-
-    choices = ("/std/races/" + char_sheet["race"])->query_hair_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
-
-    return sort_array(choices, 1);
-}
-
-string *generate_eye_color()
-{
-    string * choices;
-
-    choices = ("/std/races/" + char_sheet["race"])->query_eye_colors(stringp(char_sheet["subrace"]) ? char_sheet["subrace"] : 0);
-
-    return sort_array(choices, 1);
 }
 
 display_height()
@@ -737,6 +731,15 @@ string *generate_body_type()
     return ({"frail", "skinny", "slender", "svelte", "hardy", "portly", "heavy"});
 }
 
+string *generate_hair_color()
+{
+    return ("/std/races/" + char_sheet["race"])->query_hair_colors(char_sheet["subrace"]);
+}
+
+string *generate_eye_color()
+{
+    return ("/std/races/" + char_sheet["race"])->query_eye_colors(char_sheet["subrace"]);
+}
 
 display_age()
 {
@@ -892,11 +895,6 @@ string *generate_language()
     }
 }
 
-synopsis_language()
-{
-
-}
-
 select_language(string str)
 {
     string * prospective;
@@ -940,22 +938,22 @@ select_language(string str)
     return 1;
 }
 
-/* synopsis_language() */
-/* { */
-/*     int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4; */
-/*     string * choices = generate_language(); */
+synopsis_language()
+{
+    int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4;
+    string * choices = generate_language();
 
-/*     if (maxbonus > 1) { */
-/*         write(" */
-/* %^BOLD%^%^WHITE%^You can select up to %^CYAN%^" + maxbonus + "%^WHITE%^ as your bonus languages. To select them enter them separated by space, for example, %^ORANGE%^<select %^ULINE%^" + choices[0] + "%^RESET%^ %^BOLD%^%^ORANGE%^ULINE%^" + choices[1] + "%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^."); */
-/*     } else { */
-/*         write(" */
-/* %^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^."); */
+    if (maxbonus > 1) {
+        write("
+%^BOLD%^%^WHITE%^You can select up to %^CYAN%^" + maxbonus + "%^WHITE%^ as your bonus languages. To select them enter them separated by space, for example, %^ORANGE%^<select %^ULINE%^" + choices[0] + "%^RESET%^ %^BOLD%^%^ORANGE%^ULINE%^" + choices[1] + "%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^.");
+    } else {
+        write("
+%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
 
-/*     } */
+    }
 
-/*     write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random languages."); */
-/* } */
+    write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random languages.");
+}
 
 build_class()
 {
@@ -1018,6 +1016,16 @@ build_weight()
 build_body_type()
 {
     ETO->set_body_type(char_sheet["body_type"]);
+}
+
+build_hair_color()
+{
+    ETO->set_hair_color(char_sheet["hair_color"]);
+}
+
+build_eye_color()
+{
+    ETO->set_eye_color(char_sheet["eye_color"]);
 }
 
 /**
