@@ -6,7 +6,7 @@ inherit OBJECT;
 
 // Skip to MODULES section to write new module.
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "stats", "age", "height", "weight", "body_type", "language", "alignment", "diety", "class_special"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age", "stats", "height", "weight", "body_type", "language", "alignment", "diety", "class_special"});
 
 int head = 0;
 
@@ -176,16 +176,14 @@ reset_common(string str)
         return 1;
     }
 
-    for (i = head; i > rstpos; --i) {
-        map_delete(char_sheet, ROLL_CHAIN[i]);
+    for (i = head; i > rstpos; i-- ) {
+        map_delete(char_sheet, ROLL_CHAIN[i - 1]);
     }
     head = i;
     cache = ([]);
 
     _review();
 }
-
-
 
 // MODULES
 
@@ -252,6 +250,8 @@ display_stats()
     int sum = 0;
     mapping race_stats = ([]);
 
+    int tadjust;
+
     if (!mapp(char_sheet["stats"])) {
         char_sheet["stats"] = ([
                                    "strength":6,
@@ -292,7 +292,11 @@ display_stats()
     write("
 ");
     foreach(i in STATS) {
-        write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]) + (race_stats[i] ? ((race_stats[i] > 0 ? "%^BOLD%^%^CYAN%^ +" : "%^BOLD%^%^RED%^ ") + race_stats[i]) : ""));
+
+        tadjust = race_stats[i];
+        tadjust += age_to_adjust(char_sheet["age"], i, char_sheet["race"]);
+
+        write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]) + (tadjust ? ((tadjust > 0 ? "%^BOLD%^%^CYAN%^ +" : "%^BOLD%^%^RED%^ ") + tadjust) : ""));
         sum += char_sheet["stats"][i];
     }
 
@@ -468,8 +472,8 @@ _done_stats()
 
 _reroll_stats()
 {
-    cache["minstats"] = ([]);
-    char_sheet["stats"] = ([]);
+    map_delete(cache, "minstats");
+    map_delete(char_sheet, "stats");
     display_stats();
     return 1;
 }
@@ -552,7 +556,7 @@ _add_stats(string str){
 
     if (cache["minstats"][stat]) {
         if (char_sheet["stats"][stat] + amount < cache["minstats"][stat]) {
-            tell_object(ETO,"%^BOLD%^%^WHITE%^That score will be lower than minimum allowed for " +stat+" %^CYAN%^" +cache["stat"]+"%^WHITE%^ at your class and template combination.");
+            tell_object(ETO,"%^BOLD%^%^WHITE%^That score will be lower than minimum allowed for " +stat+" %^CYAN%^" +cache["minstats"][stat]+"%^WHITE%^ at your class and template combination.");
             return 1;
         }
     }
@@ -613,8 +617,8 @@ select_age(string str)
         if (!templatefile->query_unbound_age()) {
             if (!racefile->query_unbound_age()) {
                 if (amount > age_brackets[3] * 12 / 10) {
-                    write("%^BOLD%^%^WHITE%^Your can't be that old. Maximum allowed age for your race and template is %^CYAN%^" + age_brackets[3] * 12 / 10 + "%^WHITE%^.");
-                    return 1;
+                    write("%^BOLD%^%^RED%^Your can't be that old. Maximum allowed age for your race and template is %^CYAN%^" + age_brackets[3] * 12 / 10 + "%^RED%^.");
+                    return 0;
                 }
             }
         }
@@ -806,4 +810,48 @@ int str_to_align(string x)
                 "chaotic evil",
                 });
     return member_array(x, aligarr) + 1;
+}
+
+int age_to_adjust(int age, string stat, string race)
+{
+
+    string racefile = "/std/races/" + char_sheet["race"];
+
+    int *base = ({0, 0, 0, 0, 0, 0});
+
+    int *age_brackets = racefile->age_brackets();
+
+    if(age > age_brackets[3])
+    {
+        base = ({ -3, -3, -3, 3, 3, 3});
+    } else if (age > age_brackets[2]) {
+        base = ({ -2, -2, -2, 2, 2, 2});
+    } else if (age > age_brackets[1]) {
+        base = ({ -1, -1, -1, 1, 1, 1});
+    }
+
+    switch (stat) {
+    case "strength":
+        return base[0];
+        break;
+    case "dexterity":
+        return base[1];
+        break;
+    case "constitution":
+        return base[2];
+        break;
+    case "intelligence":
+        return base[3];
+        break;
+    case "wisdom":
+        return base[4];
+        break;
+    case "charisma":
+        return base[5];
+        break;
+    default:
+        return 0;
+        break;
+    }
+
 }
