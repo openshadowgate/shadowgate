@@ -47,20 +47,23 @@ Available codes:
   %^MAGENTA%^$H%^WHITE%^ maximum hp
   %^MAGENTA%^$i%^WHITE%^ hunger level
   %^MAGENTA%^$o%^WHITE%^ thirst level
-  %^MAGENTA%^$B%^WHITE%^ blood hunger percent
   %^MAGENTA%^$s%^WHITE%^ stamina percent
   %^MAGENTA%^$S%^WHITE%^ stamina string
   %^MAGENTA%^$x%^WHITE%^ encumbrance level
   %^MAGENTA%^$X%^WHITE%^ maximum encumbrance level
-  %^MAGENTA%^$f%^WHITE%^ lower case shapeshifted form
-  %^MAGENTA%^$p%^WHITE%^ power points
-  %^MAGENTA%^$P%^WHITE%^ maximum power points
+  %^MAGENTA%^$T%^WHITE%^ time of day (word)
+  %^MAGENTA%^$t%^WHITE%^ time of day (clock)
+
+Addicional codes:
+  %^MAGENTA%^$_EW%^WHITE%^ Eldritch Warfare
   %^MAGENTA%^$r%^WHITE%^ rage status
   %^MAGENTA%^$E%^WHITE%^ eldritch essence
   %^MAGENTA%^$k%^WHITE%^ available ki
   %^MAGENTA%^$K%^WHITE%^ maximum ki
-  %^MAGENTA%^$T%^WHITE%^ time of day (word)
-  %^MAGENTA%^$t%^WHITE%^ time of day (clock)
+  %^MAGENTA%^$p%^WHITE%^ power points
+  %^MAGENTA%^$P%^WHITE%^ maximum power points
+  %^MAGENTA%^$f%^WHITE%^ lower case shapeshifted form
+  %^MAGENTA%^$B%^WHITE%^ blood hunger percent
 
 Avatars+ only:
   %^MAGENTA%^$I%^WHITE%^ shows True Invis / Mortal Invis / Stealthed status%^RESET%^
