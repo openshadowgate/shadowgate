@@ -44,7 +44,7 @@
 %^CYAN%^Using the %^GREEN%^<buff> %^RESET%^%^CYAN%^command allows casters to refresh their defensive spells in a single command. See %^GREEN%^<help buff> %^CYAN%^for more information!
 %^CYAN%^Want to pass through an area without being seen or heard? Trying using %^GREEN%^<sneak %^ULINE%^DIRECTION%^RESET%^%^GREEN%^>%^CYAN%^. The more stealthy you are, the better chance you will have.
 %^CYAN%^You can disable these messages with %^GREEN%^<set hints off>%^CYAN%^.
-%^CYAN%^You can track your own progress or keep character notes by using pcnotes. See %^GREEN%^<help pcnotes> %^CYAN%^for more information!
+%^CYAN%^You can track your own progress or keep character notes by using pcnotes. See %^GREEN%^<help pcnote> %^CYAN%^for more information!
 %^CYAN%^You can use the %^GREEN%^<forage> %^RESET%^%^CYAN%^command to find food in the wilderness. You can also drink from some ponds and fountains.
 %^CYAN%^Use the %^GREEN%^<watch> %^CYAN%^command to have more success at catching thief stabs!
 %^CYAN%^The city of Shadow has its own IG message system. Find it in the northern part of the city.
