@@ -363,3 +363,16 @@ varargs int monk_check(object player, string type, mixed extra)
 
     return 0;
 }
+
+string newbie_choice() { return "Monk Way"; }
+string *query_newbie_stuff(int align)
+{
+    return ({"way of the fist", "way of the shadow", "way of the elements"});
+}
+void process_newbie_choice(object who, string str)
+{
+    if (!objectp(who) || !stringp(str)) {
+        return;
+    }
+    who->set("monk way",str);
+}
