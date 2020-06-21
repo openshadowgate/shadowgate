@@ -7,7 +7,7 @@ int cmd_levelcheck(string str)
     if(!objectp(TP)) return 0;
     if (!str)
         return notify_fail("Levelcheck whom?\n");
-    if(!(targ = find_player(str)))
+    if(!(targ = find_player(TP->realNameVsProfile(str))))
         if(!(targ = present(str,ETP)))
             return notify_fail("That person is not available for levelcheck.\n");
     if(avatarp(targ))
