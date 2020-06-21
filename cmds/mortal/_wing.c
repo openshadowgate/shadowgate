@@ -82,7 +82,7 @@ int cmd_wing(string args)
 
     TP->remove_property("wing delay");
     TP->set_property("wing delay",time());
-    tell_room(ETP,"%^BOLD%^%^WHITE%^"+TP->QCN+" flaps "+TP->QP+" wings and off "+TP->QS+" goes.%^RESET%^");
+    tell_room(ETP,"%^BOLD%^%^WHITE%^"+TP->QCN+" flaps "+TP->QP+" wings and off "+TP->QS+" goes.%^RESET%^", TP);
 
     {
         object wing;
