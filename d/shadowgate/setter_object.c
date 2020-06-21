@@ -109,7 +109,7 @@ _display_char_sheet()
 
     string i, j;
 
-    write("%^BOLD%^%^WHITE%^Your current choices are as follows:
+    write("%^RESET%^--==%^BOLD%^< %^GREEN%^Your choices are as follows %^WHITE%^>%^RESET%^==--
 ");
 
     write(" %^BOLD%^%^GREEN%^Character Name   %^RESET%^%^GREEN%^: %^BOLD%^%^WHITE%^" + capitalize(ETO->query_name()));
@@ -275,7 +275,7 @@ display_common()
     choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
     if (sizeof(choices) > 1) {
-        write("%^BOLD%^%^WHITE%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^ from the following:\n");
+        write("%^RESET%^--==%^BOLD%^< %^GREEN%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + " %^WHITE%^>%^RESET%^==--\n");
         foreach(i in choices)
         {
             write(" %^GREEN%^%^BOLD%^" + capitalize(i));
@@ -388,7 +388,7 @@ string *generate_race()
     return choices;
 }
 
-hint_races()
+hint_race()
 {
     write("
 %^BOLD%^Your race determines your make-up. Your race determines your make-up. Some races are predisposed to being stronger, sturdier, more intelligent, more sensitive to light, etc. than other races. In addition, different races are physically different from others, having different limbs and other types of body parts. Some races are better suited to be magical classes, others prefer physical approach. Whatever choice you make, remember that how other characters will treat you will depend on your race. If you're unsure, pick %^CYAN%^human%^WHITE%^ or %^CYAN%^elf%^WHITE%^ for your first character.
@@ -493,8 +493,7 @@ display_stats()
         race_stats["charisma"] = ("/std/races/" + char_sheet["race"])->stat_mods(char_sheet["subrace"])[5];
     }
 
-    write("
-");
+    write("%^RESET%^--==%^BOLD%^< %^GREEN%^You must now assign your %^CYAN%^character stats %^WHITE%^>%^RESET%^==--\n");
     foreach(i in STATS) {
 
         tadjust = race_stats[i];
@@ -673,8 +672,6 @@ select_stats(string str)
 
 display_height()
 {
-    write("
-");
     synopsis_height();
 }
 
@@ -713,6 +710,8 @@ synopsis_height()
     int minh = racefile->height_base(char_sheet["gender"]);
     int maxh = minh + racefile->height_mod(char_sheet["gender"]);
 
+    write("%^RESET%^--==%^BOLD%^< %^GREEN%^You must now assign your %^CYAN%^height %^WHITE%^>%^RESET%^==--\n");
+
     write("%^BOLD%^%^WHITE%^Choose height for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
     write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^height%^WHITE%^ in %^CYAN%^inches%^WHITE%^.\n");
     write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. For example, %^ORANGE%^<select " + minh + ">%^WHITE%^.");
@@ -722,8 +721,6 @@ synopsis_height()
 
 display_weight()
 {
-    write("
-");
     synopsis_weight();
 }
 
@@ -762,6 +759,8 @@ synopsis_weight()
     int minh = racefile->weight_base(char_sheet["gender"]);
     int maxh = minh + racefile->weight_mod(char_sheet["gender"]);
 
+    write("%^RESET%^--==%^BOLD%^< %^GREEN%^You must now assign your %^CYAN%^weight %^WHITE%^>%^RESET%^==--\n");
+
     write("%^BOLD%^%^WHITE%^Choose weight for your character, anywhere between %^CYAN%^" + minh + "%^WHITE%^ and %^CYAN%^" + maxh + "%^WHITE%^.");
     write("%^BOLD%^%^WHITE%^Enter your %^CYAN%^weight%^WHITE%^ in %^CYAN%^pounds%^WHITE%^.\n");
     write("%^BOLD%^%^WHITE%^Use %^BOLD%^%^ORANGE%^<select %^ULINE%^NUMBER%^RESET%^%^BOLD%^%^ORANGE%^>%^WHITE%^. For example, %^ORANGE%^<select " + minh + ">%^WHITE%^.\n");
@@ -786,8 +785,6 @@ string *generate_eye_color()
 
 display_age()
 {
-    write("
-");
     synopsis_age();
 }
 
@@ -842,8 +839,7 @@ synopsis_age()
 
     age_brackets = racefile->age_brackets();
 
-    write("%^BOLD%^%^WHITE%^Choose age for your character.
-");
+    write("%^RESET%^--==%^BOLD%^< %^GREEN%^You must now assign your %^CYAN%^age %^WHITE%^>%^RESET%^==--\n");
     write("%^BOLD%^%^WHITE%^Values between %^GREEN%^" + age_brackets[0] + "%^WHITE%^ and %^GREEN%^" + age_brackets[1] + "%^WHITE%^ will make you of %^CYAN%^normal%^WHITE%^ age.");
     write("%^BOLD%^%^WHITE%^Values between %^GREEN%^" + age_brackets[1] + "%^WHITE%^ and %^GREEN%^" + age_brackets[2] + "%^WHITE%^ will make you %^CYAN%^middle%^WHITE%^ aged.");
     write("%^BOLD%^%^WHITE%^Values between %^GREEN%^" + age_brackets[2] + "%^WHITE%^ and %^GREEN%^" + age_brackets[3] + "%^WHITE%^ will make you %^CYAN%^old%^WHITE%^.");
@@ -903,7 +899,8 @@ display_deity()
     string * choices = generate_deity();
     string i;
 
-    write("%^BOLD%^%^WHITE%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + "%^WHITE%^ from the following:\n");
+    write("%^RESET%^--==%^BOLD%^< %^GREEN%^You must now assign your %^CYAN%^deity %^WHITE%^>%^RESET%^==--\n");
+
     foreach(i in choices)
     {
         write(" %^GREEN%^%^BOLD%^" + implode(map(explode(i, " "), (:capitalize($1):)), " "));
