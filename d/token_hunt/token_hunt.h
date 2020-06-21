@@ -2,7 +2,7 @@
 
 #define FILE_PATH   "/d/token_hunt/"+
 
-#define INV_PATH    "/realms/ares/token_storage/"+
+#define INV_PATH    "/d/token_hunt/token_storage/"+
 
-#define TOKEN_D     "/realms/ares/token_storage/token_location_d.c"
-#define TOKEN_INV   "/realms/ares/token_storage/token_inventory.c"
+#define TOKEN_D     "/d/token_hunt/token_location_d.c"
+#define TOKEN_INV   "/d/token_hunt/token_inventory.c"

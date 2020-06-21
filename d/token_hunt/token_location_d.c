@@ -24,7 +24,7 @@ void add_monsters(string type,int num);
 void check_population();
 
 mapping DIRS,PLAYER_TOKENS;
-static mapping MONS;
+nosave mapping MONS;
 string *EXCLUDED;
 
 void create()
@@ -146,10 +146,10 @@ int add_directory(string type,string dir)
 
 int remove_directory(string type,string dir)
 {
-    if(!stringp(dir) || dir == " " || dir == "") { return 0; }    
+    if(!stringp(dir) || dir == " " || dir == "") { return 0; }
     DIRS[type] -= ({ dir });
     save_object(SAVE_FILE);
-    return 1;    
+    return 1;
 }
 
 string *query_directories(string type)
@@ -193,14 +193,14 @@ string select_room(string type)
 
     if(!type_check(type)) { return "/d/shadowgate/void"; }
 
-    if(!pointerp(DIRS[type])) 
+    if(!pointerp(DIRS[type]))
     {
         DIRS[type] = ({});
         return "/d/shadowgate/void";
     }
     dirs = DIRS[type];
     if(!sizeof(dirs)) { return "/d/shadowgate/void"; }
-    
+
     while(!objectp(choice) && (i < 25))
     {
         i++;
@@ -208,9 +208,9 @@ string select_room(string type)
         rooms = get_dir(dir);
         if(!sizeof(rooms)) { continue; }
         rooms = filter_array(rooms,"filter_valid_rooms",TO);
-        if(!sizeof(rooms)) { continue; }        
+        if(!sizeof(rooms)) { continue; }
         room = rooms[random(sizeof(rooms))];
-        if(strsrch(room,".c") == -1) { continue; } 
+        if(strsrch(room,".c") == -1) { continue; }
         room = ""+dir+""+room+"";
         if(!file_exists(room) && !file_exists(room+".c")) { continue; }
         if(check_excluded(room)) { continue; }
@@ -248,7 +248,7 @@ void add_monsters(string type,int num)
             rand = roll_dice(1,3);
             for(j=0;j<rand;j++)
             {
-                mob = new(MON_FILE);                        
+                mob = new(MON_FILE);
                 mob->set_monster_level(type);
                 //"/adm/daemon/party_d.c"->add_member(mob,party);
                 mob->move(room_ob);
@@ -264,7 +264,7 @@ void add_monsters(string type,int num)
             track_monster(type,mob);
         }
     }
-    
+
     if(rand)
     {
         mobs = all_living(room_ob);
@@ -335,10 +335,9 @@ void set_player_tokens(object player,mapping tokens)
 }
 
 mapping get_player_tokens(string name)
-{    
+{
     if(!stringp(name)) { return ([]); }
     if(!mapp(PLAYER_TOKENS)) { PLAYER_TOKENS = ([]); }
     if(!mapp(PLAYER_TOKENS[name])) { return ([]); }
     return PLAYER_TOKENS[name];
 }
-    

@@ -146,7 +146,7 @@ string write_prompt()
         }
 
         if (TP->is_class("eldritch_knight")) {
-            if (FEATS_D->is_active(caster, "eldritch warfare")) {
+            if (FEATS_D->is_active(TP, "eldritch warfare")) {
                 replace_string(prompt, "$_EW", "In Warfare");
             }
         }
