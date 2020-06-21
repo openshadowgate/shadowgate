@@ -1084,7 +1084,7 @@ build_alignment()
     ETO->set_alignment(str_to_align(char_sheet["alignment"]));
 }
 
-build_diey()
+build_deity()
 {
 
     ETO->set_diety(char_sheet["deity"]);
