@@ -1365,15 +1365,7 @@ string query_desc(string unused)
         if (objectp(shape)) {
             weight = (int)shape->query_shape_weight();
         }
-<<<<<<< HEAD
         reg += "%^BOLD%^" + sub + " are approximately " + height + " inches (" + height / 12 + "ft " + height % 12 + "in) tall and " + weight + " pounds.%^RESET%^\n";
-=======
-<<<<<<< HEAD
-        reg += "%^BOLD%^" + sub + " is approximately " + height + " inches tall and " + weight + " pounds.%^RESET%^\n";
-=======
-        reg += "%^BOLD%^" + sub + " are approximately " + height + " inches (" + height / 12 + "ft " + height % 12 + "in) tall and " + weight + " pounds.%^RESET%^\n";
->>>>>>> clean_setter
->>>>>>> 9f1906818e60ac8b2c4741269ad90eab5b2b9fb2
     }
 
     x = ((player_data["general"]["hp"] * 100) / player_data["general"]["max_hp"]);
