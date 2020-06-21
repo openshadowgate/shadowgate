@@ -28,7 +28,7 @@ void create()
     set_hd(68, 8);
     set_guild_level("mage", 68);
 
-    set_overall_ac(-80);
+    set_overall_ac(-70);
 
     set_stats("intelligence", 30);
     set_stats("wisdom", 26);
