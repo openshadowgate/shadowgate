@@ -48,4 +48,5 @@ DOMAIN_SPELLS = ([
 "void":({"blurred movement", "levitate", "dismissal", "dimension door", "conjure elemental", "phantom guardians",  "reverse gravity", "nightmare maw", "gate"}),
 "war" : ({ "magic weapon", "spiritual weapon", "magic vestments", "divine power", "flame strike", "transformation", "powerword blind", "powerword stun", "powerword kill" }),
 "water" : ({ "touch of sickening", "acid arrow", "stinking cloud", "ice storm", "cone of cold", "sirocco", "elemental body iv", "horrid wilting", "tidal surge" }),
+"martyr":({"command", "shield other", "magic vestments", "vicarious view", "demand", "sacrificial oath", "repulsion", "storm of vengeance", "last sacrifice"}),
 ]);

@@ -3,7 +3,7 @@
 // Must correspond to deities.h
 #define SPELL_DOMAINS (([\
     "callamir"         : ({ "good", "charm", "air", "trickery", "travel", "chaos",}), \
-    "jarmila"          : ({ "good", "renewal", "sun", "protection", "fire" }) ,\
+    "jarmila"          : ({ "good", "renewal", "sun", "protection", "fire", "martyr"}) , \
     "kismet"           : ({ "creation", "knowledge", "mentalism", "magic", "law", "stars"}) , \
     "kreysneothosies"  : ({ "protection", "vigilance", "strength", "good", "war", "law"}) , \
     "lord shadow"      : ({ "evil", "cold", "tyranny", "suffering", "darkness", "law"}) , \
