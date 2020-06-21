@@ -1,10 +1,10 @@
-//recoded by Saide, May 2017 
+//recoded by Saide, May 2017
 //should use deep_inventory now, instead of all_inventory
 //switched from heart beat to a call out, removed the init function entirely - handling players with the
-//handle_player_object() function if a player happens to be inside the room when the call out happens. 
+//handle_player_object() function if a player happens to be inside the room when the call out happens.
 
-//I believe a lot of recent lag is related to the void having shit loads of objects inside of it, each with init functions, 
-//likely calling each other 
+//I believe a lot of recent lag is related to the void having shit loads of objects inside of it, each with init functions,
+//likely calling each other
 
 #include <config.h>
 #include <std.h>
@@ -14,18 +14,36 @@ void check_my_inventory();
 void clean_inventory();
 inherit "/std/room";
 
-void create() 
+void create()
 {
     ::create();
     set("short", "The void");
     set("long",
-        "You have been assimilated.\n"
-        "From this time on, you will service the Borg.");
+        "You're in the void, stuck here for reasons unknown.\n"
+        "To get out, simply %^WHITE%^<break free>%^WHITE%^.");
     set_property("light", 1);
     call_out("check_my_inventory", 20);
     set_property("no teleport", 1);
     set_no_clean(1);
     return;
+}
+
+init()
+{
+    ::init();
+    add_action("break_free", "break");
+}
+
+int break_free()
+{
+    if (!str) {
+        return 0;
+    }
+    if (str != "free") {
+        return 0;
+    }
+    ob->move_player("/d/shadow/room/forest/road30");
+    return 1;
 }
 
 void handle_player_object(object ob)
@@ -72,13 +90,13 @@ void clean_inventory()
 
 
 void check_my_inventory()
-{   
+{
     if(!objectp(TO)) return;
     if(clonep(TO))
     {
         clean_inventory();
         reclaim_objects();
-        TO->remove();        
+        TO->remove();
         return;
     }
     clean_inventory();
