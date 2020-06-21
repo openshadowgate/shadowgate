@@ -34,7 +34,7 @@ init()
     add_action("break_free", "break");
 }
 
-int break_free()
+int break_free(string str)
 {
     if (!str) {
         return 0;
@@ -42,7 +42,7 @@ int break_free()
     if (str != "free") {
         return 0;
     }
-    ob->move_player("/d/shadow/room/forest/road30");
+    TP->move_player("/d/shadow/room/forest/road30");
     return 1;
 }
 
