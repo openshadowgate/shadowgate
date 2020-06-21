@@ -94,11 +94,9 @@ int animal_command(string str)
         rm(SAVEDIR + "long");
         write_file(SAVEDIR + "long", query_long());
         break;
-        /*
         case "command":
-        command(input[1], this_object());
+        command(input[1]);
         break;
-        */
         default:
         tell_object(this_player(), "Please select 'long', 'short', or 'command' as options.");
         return 1;
