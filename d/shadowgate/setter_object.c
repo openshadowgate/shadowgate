@@ -543,6 +543,8 @@ _done_stats()
     remove_action("_recommended_stats", "recommended");
     remove_action("_done_stats", "done");
 
+    advance_head();
+
     return 1;
 }
 
@@ -650,16 +652,8 @@ select_stats(string str)
 
     write("%^BOLD%^%^WHITE%^You must now set your %^CYAN%^stat points.\n");
 
-    if (str == "random") {
-        int res = _recommended_stats();
-        if (res) {
-            _done_stats();
-        }
-        return res;
-    }
-
     synopsis_stats();
-
+    return 0;
 }
 
 display_height()
