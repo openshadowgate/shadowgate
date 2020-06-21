@@ -9,7 +9,7 @@
     "lord shadow"      : ({ "evil", "cold", "tyranny", "suffering", "darkness", "law"}) , \
     "lysara"           : ({ "travel", "fate", "repose", "moon", "water", "void"}) , \
     "nilith"           : ({ "war", "strength", "destruction", "evil", "chaos", "undeath"}), \
-    "nimnavanon"       : ({ "storms", "plant", "animal", "earth", "destruction" }) , \
+    "nimnavanon"       : ({ "storms", "plant", "animal", "earth", "destruction", "plague"}) , \
     "the faceless one" : ({ "trickery", "illusion", "cavern", "darkness", "evil", "madness"}) , \
     "dream"            : ({ "chaos", "madness", "void", "stars", "evil", "good"}),\
 ]))
