@@ -167,6 +167,10 @@ string room_check(object obj,string location)
 
     room = temp[location];
 
+    if (!temp[location]) {
+        room = preset_destinations[location];
+    }
+
     if(!stringp(room) || room == "" || room == " ")
     {
         tell_object(obj,"You don't know a place called "+location+" to fly to.");
