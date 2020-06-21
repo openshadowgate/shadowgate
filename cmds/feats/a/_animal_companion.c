@@ -195,6 +195,7 @@ void execute_feat()
 void dest_effect()
 {
 //    ::dest_effect();
+    companion && companion->remove();
     control && control->remove();
     remove_feat(this_object());
 //    return;
