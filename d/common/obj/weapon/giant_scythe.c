@@ -20,7 +20,7 @@ void create(){
 //    set_large_wc(1,8);
     set_wc(2,6);
     set_large_wc(2,6);
-    set_size(3);
+    set_size(4);
     set_type("slashing");
     set_prof_type("polearm");
     set_weapon_speed(4);

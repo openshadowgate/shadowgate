@@ -12,7 +12,7 @@ void create() {
       " to attack, giving weapon much versatility in combat."
    );
    set_weight(20);
-   set_size(3);
+   set_size(4);
    set_value(50);
    set_wc(3,8); //putting this a die higher than TT to reflect that we lack tech to make it usable as two weapons without needing ambidexterity
     set_type("slashing");

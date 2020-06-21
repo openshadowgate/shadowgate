@@ -12,7 +12,7 @@ void create() {
       " a well trained person to use both axes in combat."
    );
    set_value(50);
-   set_size(3);
+   set_size(4);
    set_type("slashing");
    set_prof_type("double axe");
    set_weapon_prof("exotic");
