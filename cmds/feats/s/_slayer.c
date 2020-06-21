@@ -4,9 +4,10 @@
 inherit FEAT;
 
 int FLAG;
-string * JUDGEMENT_TYPES;
+string* JUDGEMENT_TYPES;
 
-void create() {
+void create()
+{
     ::create();
     feat_type("premanent");
     feat_category("Inquisition");
@@ -24,42 +25,43 @@ To check what is currently set just type %^ORANGE%^<slayer>%^RESET%^.");
 int cmd_slayer(string args)
 {
     int cancastflag;
-    string * myclasses, myclass;
+    string* myclasses, myclass;
 
-    if(!args)
-    {
-        write("%^BOLD%^%^WHITE%^Your current slayer judgement is "+TP->query("slayer_judgement")+".");
+    if (!args) {
+        write("%^BOLD%^%^WHITE%^Your current slayer judgement is " + TP->query("slayer_judgement") + ".");
         return 1;
     }
 
-    if(TP->query("slayer_change") > time() - 60*60*24*3)
-    {
+    if (TP->query("slayer_change") + 60 * 60 * 24 * 3 > time()) {
         write("%^BOLD%^%^WHITE%^You can change your slayer judgement only once in three days.");
         return 1;
     }
     JUDGEMENT_TYPES = "/cmds/feats/obj/judgement"->query_judgement_types();
 
-    if(member_array(args,JUDGEMENT_TYPES)==-1)
-    {
-        write("%^BOLD%^%^RED%^No such judgement. Allowed types are: %^RESET%^"+implode(JUDGEMENT_TYPES," "));
+    if (member_array(args, JUDGEMENT_TYPES) == -1) {
+        write("%^BOLD%^%^RED%^No such judgement. Allowed types are: %^RESET%^" + implode(JUDGEMENT_TYPES, " "));
         return 1;
     }
 
-    TP->set("slayer_change",time());
-    TP->set("slayer_judgement",args);
-    write("%^BOLD%^%^RED%^Done. Your slayer judgement is set to %^WHITE%^"+args+"%^RED%^.%^RESET%^");
+    TP->set("slayer_change", time());
+    TP->set("slayer_judgement", args);
+    write("%^BOLD%^%^RED%^Done. Your slayer judgement is set to %^WHITE%^" + args + "%^RED%^.%^RESET%^");
 
     return 1;
 }
 
-int allow_shifted() { return 1; }
+int allow_shifted()
+{
+    return 1;
+}
 
 int prerequisites(object ob)
 {
-    if(!objectp(ob)) { return 0; }
+    if (!objectp(ob)) {
+        return 0;
+    }
 
-    if((int)ob->query_class_level("inquisitor") < 17)
-    {
+    if ((int)ob->query_class_level("inquisitor") < 17) {
         dest_effect();
         return 0;
     }

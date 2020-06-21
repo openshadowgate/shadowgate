@@ -9,6 +9,18 @@ inherit OBJECT;
 
 string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age", "stats", "height", "weight", "body_type", "hair_color", "eye_color", "language", "alignment", "deity", "class_special"});
 
+/**
+ * @file
+ * @brief Setter object used in character creation
+ *
+ * To add a module x you must include it into ROLL_CHAIN, and at minimum add string *generate_x() and build_x() functions.
+ * optional display_x() will handle display of _x.
+ * optional synopsis_x() will display custom synopsis, if there is no display_x().
+ * optional hint_x() will display hints before synopsis, if there is no synopsis_x() and no display_x().
+ * optional select_x(string s) will handle custom selection.
+ */
+
+
 int head = 0;
 
 mapping char_sheet = ([]);
