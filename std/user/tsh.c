@@ -144,6 +144,13 @@ string write_prompt()
         }else {
             prompt = replace_string(prompt, "$r", "");
         }
+
+        if (TP->is_class("eldritch_knight")) {
+            if (FEATS_D->is_active(caster, "eldritch warfare")) {
+                replace_string(prompt, "$_EW", "In Warfare");
+            }
+        }
+
         if ((int)TP->query("maximum ki")) {
             prompt = replace_string(prompt, "$k", "" + (int)TP->query("available ki"));
             prompt = replace_string(prompt, "$K", "" + (int)TP->query("maximum ki"));
