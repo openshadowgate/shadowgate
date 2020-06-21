@@ -549,6 +549,10 @@ int query_base_character_level()
 	return num;
 }
 
+int query_adjusted_character_level() {
+  return query_character_level();
+}
+
 int query_character_level() {
     int i,num,lvladjust;
     string myrace,mysubrace,file;

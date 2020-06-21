@@ -297,9 +297,10 @@ int advance(object tp, string myclass)
         file->advanced_func(tp);
     }
 
-    if(tp->query("new_class_type")) { check = tp->query_character_level(); }
-    if(tp->query("new_class_type")) { check = tp->query_character_level(); }
-    else { check = lev; }
+    // if(tp->query("new_class_type")) { check = tp->query_character_level(); }
+    // if(tp->query("new_class_type")) { check = tp->query_character_level(); }
+    // else { check = lev; }
+    // Not sure why this was here -- garrett 06/21/2020
 
     if (!interactive(tp))
         return 0;
@@ -308,14 +309,13 @@ int advance(object tp, string myclass)
 
     gexp = get_exp(check+1,cl, tp);
 
-    if((gexp < exp) && !wizardp(tp))
-    {
+    if((gexp < exp) && !wizardp(tp)) {
         if ((tp->query_lowest_level() > 5 || lev + 1 > 5) && !tp->query_description())
         {
             tell_object(tp,"Please take a moment to set a description first.");
             return 0;
         }
-// adding this as a reminder too
+        // Let whoever called us know we advanced.
         ret = 1;
         tp->set_mlevel(myclass,lev+1);
 
@@ -328,7 +328,7 @@ int advance(object tp, string myclass)
 
         rolls = (int*)tp->query("hp_array");
 
-// NOTE this needs to keep using base_character_level as LA levels get automatic HP on their own. Only class levels get rolled.
+        // NOTE this needs to keep using base_character_level as LA levels get automatic HP on their own. Only class levels get rolled.
         for(i=0;i<(int)tp->query_base_character_level()+1;i++) // always adds up the array of hitpoint rolls on advance now, hopefully fixing the errors
         {
             hpbonus += rolls[i];
@@ -341,8 +341,8 @@ int advance(object tp, string myclass)
         {
             tell_object(tp,"You are now level "+(lev+1)+" in your "+myclass+" class.");
             tell_object(tp,"Your total character level is "+tp->query_base_character_level()+".");
-            tell_object(tp,"Your adjusted character level is "+tp->query_character_level()+".");
-            if((int)tp->query_character_level() == 1 || (int)tp->query_character_level()%3==0 && (((int)tp->query_other_feats_gained() *3) <= (int)tp->query_character_level()))
+            tell_object(tp,"Your adjusted character level is "+tp->query_adjusted_character_level()+".");
+            if((int)tp->query_base_character_level() == 1 || (int)tp->query_base_character_level()%3==0 && (((int)tp->query_other_feats_gained() *3) <= (int)tp->query_base_character_level()))
             {
                 tell_object(tp,"%^B_RED%^%^CYAN%^You earned new feats this level, please type help feats.%^RESET%^");
             }
@@ -361,6 +361,8 @@ int advance(object tp, string myclass)
         }
 //        NWP_D->advance_player(tp,class,lev+1); //nwps no longer exist! N, 1/14.
 
+    } else {
+        // You didn't have enough exp to advance, or you were a Wizard.
     }
     tp->update_channels();
     if((tp->is_class("sorcerer") || tp->is_class("psywarrior") || tp->is_class("psion") || tp->is_class("warlock"))) tp->set("can_swap_spells",1); // flag to let sorcs swap spells on even levels; added psionic classes ~Circe~ 9/20/15; added warlocks, N 12/15.
