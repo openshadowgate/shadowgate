@@ -124,10 +124,12 @@ _display_char_sheet()
             continue;
         }
         if (mapp(char_sheet[i])) {
+            write(" ");
             foreach(j in keys(char_sheet[i]))
             {
-                write("%^BOLD%^GREEN%^ " + arrange_string(capitalize(j), 16) + "%^RESET%^%^GREEN%^ : %^BOLD%^%^WHITE%^" + char_sheet[i][j]);
+                write("%^BOLD%^GREEN%^ " + arrange_string(capitalize(j), 16) + "%^RESET%^%^GREEN%^ : %^BOLD%^%^CYAN%^" + char_sheet[i][j]);
             }
+            write(" ");
             continue;
         }
 
@@ -932,7 +934,7 @@ hint_class_special()
 
 string *generate_language()
 {
-    int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4;
+    int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4 + 1;
 
     if (maxbonus > 0) {
         return (("/std/races/" + char_sheet["race"])->query_languages(char_sheet["subrace"]))["optional"];
@@ -947,7 +949,7 @@ select_language(string str)
     string * tmp;
     string * toselect;
     string tlang;
-    int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4;
+    int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4 + 1;
     int i;
 
     prospective = (("/std/races/" + char_sheet["race"])->query_languages(char_sheet["subrace"]))["optional"];
@@ -986,7 +988,7 @@ select_language(string str)
 
 synopsis_language()
 {
-    int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4;
+    int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4 + 1;
     string * choices = generate_language();
 
     if (maxbonus > 1) {
