@@ -788,7 +788,11 @@ select_age(string str)
     int *age_brackets;
 
     string racefile = "/std/races/" + char_sheet["race"];
-    string templatefile = "/std/acquired_template/" + char_sheet["template"];
+    string templatefile;
+
+    if (char_sheet["template"]) {
+        templatefile = "/std/acquired_template/" + char_sheet["template"];
+    }
 
     age_brackets = racefile->age_brackets();
 
@@ -805,11 +809,13 @@ select_age(string str)
             return 0;
         }
 
-        if (!templatefile->query_unbound_age()) {
-            if (!racefile->query_unbound_age()) {
-                if (amount > age_brackets[3] * 12 / 10) {
-                    write("%^BOLD%^%^RED%^Your can't be that old. Maximum allowed age for your race and template is %^CYAN%^" + age_brackets[3] * 12 / 10 + "%^RED%^.");
-                    return 0;
+        if (templatefile) {
+            if (!templatefile->query_unbound_age()) {
+                if (!racefile->query_unbound_age()) {
+                    if (amount > age_brackets[3] * 12 / 10) {
+                        write("%^BOLD%^%^RED%^Your can't be that old. Maximum allowed age for your race and template is %^CYAN%^" + age_brackets[3] * 12 / 10 + "%^RED%^.");
+                        return 0;
+                    }
                 }
             }
         }
