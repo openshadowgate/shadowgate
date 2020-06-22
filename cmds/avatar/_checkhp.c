@@ -41,7 +41,7 @@ int cmd_checkhp(string str)
 
     }
 
-    tell_object(TP,"%^MAGENTA%^"+str[-2]+".");
+    tell_object(TP,"%^MAGENTA%^"+str[0..strlen(str)-3]+".");
     tell_object(TP,"%^MAGENTA%^Base rolls before mods: %^RESET%^"+x+"");
 
     tmp = (int)targ->query_stats("constitution");
