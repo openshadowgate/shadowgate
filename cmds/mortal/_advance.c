@@ -712,7 +712,7 @@ int cmd_advance(string myclass){
    train = cost(myclass, lottc);
 
    if(TP->query("new_class_type")){
-      if((int)TP->query_character_level() == MAX_LEVEL && !TP->query("test_character")){
+      if((int)TP->query_adjusted_character_level() == MAX_LEVEL && !TP->query("test_character")){
          tell_object(TP,"%^BOLD%^%^GREEN%^You have reached the pinnacle of your ability. Congratulations. Unfortunately you can learn no more.");
          return 1;
       }

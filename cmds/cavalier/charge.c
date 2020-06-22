@@ -31,7 +31,7 @@ void set_target(string x) { target=x; }
 void set_tp(object x)
 {
     tp    = x;
-    level = tp->query_character_level();
+    level = tp->query_base_character_level();
     env   = environment(tp);
 }
 
@@ -355,7 +355,7 @@ int do_room(string str) {
     ob->clean_up_attackers();
     ob->kill_ob(tp,1);
     tp->kill_ob(ob,1);
-    level = tp->query_character_level();
+    level = tp->query_base_character_level();
     tp->set_property("charging",1);
     tell_room(environment(tp), "%^BOLD%^%^BLUE%^"+tpqcn+" digs "+tp->QP+" heels into "+tp->QP+" "+tp->query_in_vehicle()->QCN+".",tp);
     tell_object(tp,"%^BOLD%^%^BLUE%^You dig your heels into your "+tp->query_in_vehicle()->QCN+".");

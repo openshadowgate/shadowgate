@@ -29,9 +29,9 @@ int cmd_checkhp(string str)
         return 1;
     }
 
-    level = (int)targ->query_character_level();
+    level = (int)targ->query_character_level(); // *FIXME* 
 
-    x = 20;
+    x = 30;
     for(i=0;i<level;i++)
     {
         x += rolls[i];
