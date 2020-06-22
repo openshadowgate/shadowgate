@@ -1,10 +1,10 @@
 %^BOLD%^%^BLUE%^Shade:
 
-%^BOLD%^%^BLUE%^Level adjustment: %^RESET%^3 (requires an account with a lvl 30 character)
-%^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 constitution, +2 charisma
+%^BOLD%^%^BLUE%^Level adjustment: %^RESET%^0 (requires an account with a lvl 30 character)
+%^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 to stat of choice*
 %^BOLD%^%^BLUE%^Skill adjustments: %^RESET%^+2 stealth
 %^BOLD%^%^BLUE%^Misc bonuses: %^RESET%^1MR, regeneration
-%^BOLD%^%^BLUE%^Innate spells: %^RESET%^ darkness, invisibility, shadow stride, shadow travel
+%^BOLD%^%^BLUE%^Innate spells: %^RESET%^ darkness
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^any evil
 %^BOLD%^%^BLUE%^Classes restricted: %^RESET%^druid, ranger
@@ -19,3 +19,5 @@ Not all Shadovar are shades. Shadovar is the name given to the Zin'Charu people 
 Shades look very much like humans, although their skin is gray to inky black, and their eyes are of a dark solid shade with no pupils. They are thinner than most humans, and tend to prefer dark-hued clothes and equipment. Shadovar are never made into shades until they have reached adulthood; there is no such thing as a young shade, and the offspring of those empowered are still normal humans.
 
 Shades are an extremely politically- and religiously-aligned race, and are expected to be played as such; even beyond the choice of the most loyal for the ritual, the gift is quickly taken away from those who betray the Shadovar cause, leaving them 'mere humans' once more. Please take this into account before rolling the race, as they will be expected to be played accordingly.
+
+*not yet implemented

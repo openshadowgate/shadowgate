@@ -18,7 +18,7 @@ string *restricted_deities(string subrace) {
 }
 
 // stats in order: str, dex, con, int, wis, cha
-int *stat_mods(string subrace) { return ({ 0, 2, 0, 2, 2, -2 }); }
+int *stat_mods(string subrace) { return ({ -2, 2, 0, 2, 2, -2 }); }
 
 mapping skill_mods(string subrace) { return ([ "perception" : 2, "stealth" : 2 ]); }
 
@@ -28,15 +28,12 @@ int natural_AC(string subrace) { return 0; }
 
 int sight_bonus(string subrace) { return 2; }
 
-mapping daily_uses(string subrace) { return ([ "charm monster" : 1, "fear" : 1, "darkness" : 1, "entangle" : 1, "viper form" : -1 ]); }
+mapping daily_uses(string subrace) { return ([ "viper form" : -1 ]); }
 
 int misc_bonuses(string subrace, string bonus) { return 0; }
 
 mapping query_racial_innate(string subrace){
-   return (["charm monster" : (["type" : "spell", "casting level" : 0.5, "daily uses" : 1, "delay" : 1, "uses left" : 1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-   "fear" : (["type" : "spell", "casting level" : 0.5, "daily uses" : 1, "delay" : 1, "uses left" : 1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-   "darkness" : (["type" : "spell", "casting level" : 0.5, "daily uses" : 1, "delay" : 1, "uses left" : 1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-   "entangle" : (["type" : "spell", "casting level" : 0.5, "daily uses" : 1, "delay" : 1, "uses left" : 1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+   return ([
    "viper form" : (["type" : "spell", "casting level" : 0.5, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),]);
 }
 

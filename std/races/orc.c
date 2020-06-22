@@ -27,20 +27,20 @@ string *restricted_deities(string subrace) {
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
     if(!subrace || subrace == "") return ({ 2, 0, 2, 0, -2, -2 });
     switch(subrace) {
-      case "mountain orc": return ({ 2, 0, 0, -2, 2, -2 }); break;
+      case "mountain orc": return ({ 4, 0, 0, -2, 2, -2 }); break;
       case "orog" : return ({ 4, -2, 0, 0, -2, 2 }); break;
       case "tanarukk" : return ({ 4, 2, 0, 0, -2, -4 }); break;
-      default: return ({ 2, 0, 2, 0, -2, -2 }); break; // gray orc default
+      default: return ({ 4, 0, 2, 0, -2, -2 }); break; // gray orc default
     }
 }
 
 mapping skill_mods(string subrace) {
-    if(!subrace || subrace == "") return ([ "survival" : 2 ]);
+    if(!subrace || subrace == "") return ([ "survival" : 2, "endurance" : 2 ]);
     switch(subrace) {
       case "mountain orc": return ([ "survival" : 2, "endurance" : 2 ]); break;
       case "orog": return ([ "craft, armorsmith" : 2, "craft, weaponsmith" : 2 ]); break;
       case "tanarukk": return ([ "endurance" : 2 ]); break;
-      default: return ([ "survival" : 2 ]); break; // gray orc default
+      default: return ([ "survival" : 2, "endurance" : 2 ]); break; // gray orc default
     }
 }
 
@@ -59,7 +59,7 @@ int natural_AC(string subrace) {
     switch(subrace) {
       case "mountain orc": return 0; break;
       case "orog": return 2; break;
-      case "tanarukk": return 3; break;
+      case "tanarukk": return 2; break;
       default: 0; break;
     }
 }

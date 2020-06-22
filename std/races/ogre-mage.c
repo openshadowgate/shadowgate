@@ -18,18 +18,18 @@ string *restricted_deities(string subrace) {
 }
 
 // stats in order: str, dex, con, int, wis, cha
-int *stat_mods(string subrace) { return ({ 0, 0, 2, 0, 2, 0 }); }
+int *stat_mods(string subrace) { return ({ 0, 0, 2, 0, 2, -2 }); }
 
 mapping skill_mods(string subrace) { return ([ "endurance" : 2 ]); }
 
 int level_adjustment(string subrace) { return 0; }
 
-int natural_AC(string subrace) { return 4; }
+int natural_AC(string subrace) { return 2; }
 
 int sight_bonus(string subrace) { return -2; }
 
 mapping daily_uses(string subrace) { // needs charm person if possible down the track
-  return ([ "invisibility" : 1, "fly" : 1, "darkness" : 1, "sleep" : 1, "cone of cold" : 1 ]);
+  return ([ "levitate" : 1]);
 }
 
 int misc_bonuses(string subrace, string bonus) { return 0; }
@@ -55,22 +55,11 @@ int fingers() { return 5; }
 
 mapping query_racial_innate(string subrace)
 {
-	return (["sleep" : (["type" : "spell", "casting level" : 0.5,
+	return ([
+		   "levitate"      : (["type" : "spell", "casting level" : 0.5,
 				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
 				   "refresh time" : -1, "level required" : 0,
-				   "class specific" : 0]),
-		   "darkness" : (["type" : "spell", "casting level" : 0.5,
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
-				   "refresh time" : -1, "level required" : 0,
-				   "class specific" : 0]),
-		   "fly"      : (["type" : "spell", "casting level" : 0.5,
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
-				   "refresh time" : -1, "level required" : 0,
-				   "class specific" : 0]),
-		   "cone of cold" : (["type" : "spell", "casting level" : 0.5,
-				    "daily uses" : 1, "delay" : 1, "uses left" : 1,
-			 	    "refresh time" : -1, "level required" : 0,
-				    "class specific" : 0]), ]);
+				   "class specific" : 0])]);
 }
 
 string *wielding_limbs() { return ({ "right hand", "left hand" }); }

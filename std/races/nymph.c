@@ -18,7 +18,7 @@ string *restricted_deities(string subrace) {
 }
 
 // stats in order: str, dex, con, int, wis, cha
-int *stat_mods(string subrace) { return ({ -2, 0, -2, 2, 0, 2 }); }
+int *stat_mods(string subrace) { return ({ -2, 0, -2, 2, 0, 4 }); }
 
 mapping skill_mods(string subrace) { return ([ "spellcraft" : 2 ]); }
 
@@ -28,10 +28,10 @@ int natural_AC(string subrace) { return 2; }
 
 int sight_bonus(string subrace) { return 3; }
 
-mapping daily_uses(string subrace) { return (["telepathic bond":1,]); }
+mapping daily_uses(string subrace) { return (["telepathic bond":1, "charm person":1]); }
 
 mapping query_racial_innate(string subrace) {
-	return (["telepathic bond" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),]);
+	return (["telepathic bond" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),"charm person" : (["type" : "spell", "daily uses" : -1, "level required" : 0,])]);
 }
 
 
