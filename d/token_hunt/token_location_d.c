@@ -1,6 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 #include "/d/token_hunt/token_hunt.h"
+#include <security.h>
 
 inherit DAEMON;
 
@@ -321,14 +322,22 @@ void check_population()
 
 int clean_up() { return 1; }
 
-void set_player_tokens(object player,mapping tokens)
+void set_player_tokens(object player, mapping tokens)
 {
     string name;
-    if(!objectp(player)) { return; }
-    if(!mapp(tokens)) { return; }
-    if(!interactive(player)) { return; }
+    if (!objectp(player)) {
+        return;
+    }
+    if (!mapp(tokens)) {
+        return;
+    }
+    if (!interactive(player)) {
+        return;
+    }
     name = player->query_true_name();
-    if(!mapp(PLAYER_TOKENS)) { PLAYER_TOKENS = ([]); }
+    if (!mapp(PLAYER_TOKENS)) {
+        PLAYER_TOKENS = ([]);
+    }
     PLAYER_TOKENS[name] = tokens;
     save_object(SAVE_FILE);
     return;
