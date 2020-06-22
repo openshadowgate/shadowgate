@@ -55,7 +55,7 @@ int get_exp_cost(object obj, int num)
         level_adjust = (int)file->level_adjustment(subrace);
     }
 
-    level = (int)obj->query_character_level();
+    level = (int)obj->query_adjusted_character_level();
     if (level > CHARACTER_LEVEL_CAP) {
         level = CHARACTER_LEVEL_CAP;
     }

@@ -109,8 +109,8 @@ int gain_stat(object ob, string stat)
     }
 
     total_exp = (int)ob->query_exp();
-    exp = total_exp_for_level(ob->query_character_level());
-    cost = exp_for_level(ob->query_character_level());
+    exp = total_exp_for_level(ob->query_adjusted_character_level());
+    cost = exp_for_level(ob->query_adjusted_character_level());
 
     tell_object(ob, "%^YELLOW%^Do you really want to add a point to " + stat + "?  It will " +
                 "add a character improvement tax of %^MAGENTA%^" + cost + "%^YELLOW%^ experience points. " +
@@ -248,8 +248,8 @@ int move_stat(object obj, string* stats)
         return 1;
     }
     total_exp = (int)obj->query_exp();
-    exp = total_exp_for_level(obj->query_character_level());
-    cost = exp_for_level(obj->query_character_level());
+    exp = total_exp_for_level(obj->query_adjusted_character_level());
+    cost = exp_for_level(obj->query_adjusted_character_level());
     tcheck = cost;
 
     tell_object(obj, "%^YELLOW%^You will incur a character improvement " +

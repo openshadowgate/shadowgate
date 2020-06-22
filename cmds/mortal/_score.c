@@ -48,11 +48,11 @@ mixed* genoutput(object targ)
             clvls += ({ "" + targ->query_class_level(cl) });
         }
 
-        output += ({ ({ "Level", "%^BOLD%^%^GREEN%^" + implode(clvls, "/") + " (%^RESET%^" + targ->query_character_level() + "%^BOLD%^%^GREEN%^)" + (targ->query("scaledlevel") ? "%^RED%^(scaled)%^RESET%^" : "") }) });
+        output += ({ ({ "Level", "%^BOLD%^%^GREEN%^" + implode(clvls, "/") + " (%^RESET%^" + targ->query_adjusted_character_level() + "%^BOLD%^%^GREEN%^)" + (targ->query("scaledlevel") ? "%^RED%^(scaled)%^RESET%^" : "") }) });
     }
 
-    if (targ->query_character_level() < 100) {
-        output += ({ ({ "Exp to Next", "%^BOLD%^%^WHITE%^" + english_number(total_exp_for_level(targ->query_character_level() + 1) - targ->query_exp()) }) });
+    if (targ->query_adjusted_character_level() < 100) {
+        output += ({ ({ "Exp to Next", "%^BOLD%^%^WHITE%^" + english_number(total_exp_for_level(targ->query_adjusted_character_level() + 1) - targ->query_exp()) }) });
     }
     if (mapp(targ->query_XP_tax()["improvement"])) {
         output += ({ ({ "Exp Tax", "%^BOLD%^%^CYAN%^" + english_number(targ->query_XP_tax()["improvement"]["amount"]) }) });

@@ -41,7 +41,8 @@ int cmd_reward(string str)
 
     {
         int expdelta;
-        int thelevel = target->query_character_level();
+        int thelevel = target->query_adjusted_character_level(); 
+        // garrett thinks adjusted is right for here, since this is a scaling award.
 
         expdelta = abs(EXP_NEEDED[thelevel + 1] - EXP_NEEDED[thelevel]) / 8;
 

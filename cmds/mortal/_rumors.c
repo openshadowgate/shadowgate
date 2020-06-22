@@ -130,7 +130,7 @@ areas = ([
 int cmd_rumors(string args)
 {
     mixed * area;
-    int lev = TP->query_character_level();
+    int lev = TP->query_base_character_level();
     int allflag = 0;
     int dispflag = 0;
     string color;

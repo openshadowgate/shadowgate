@@ -49,7 +49,7 @@ int cmd_hide(string str)
     num = num / 2;
     prof = num;
     prof+=2;
-    max_hide_level = (prof + (int)TP->query_character_level()/2);
+    max_hide_level = (prof + (int)TP->query_base_character_level()/2);
     hide_level = max_hide_level;
 
     item = present(what, TP);

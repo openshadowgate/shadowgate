@@ -133,7 +133,7 @@ nomask private int really_suicide(string typed_password)
    rm("/d/save/background/"+TP->query_true_name()+".htm");
    "/daemon/save_d"->remove_name(name);
     "/daemon/guilds_d.c"->delete_player(name);
-     if(TP->query_character_level() > 15) "/daemon/multi_d"->add_name(name,2);
+     if(TP->query_base_character_level() > 15) "/daemon/multi_d"->add_name(name,2);
   message("notify","%^YELLOW%^<< "+TP->query_name()+" has committed suicide! >>\n",filter_array(users(),"wizuserp",TO));
     "/cmds/avatar/_note.c"->cmd_note("ckpt "+TP->query_name()+" committed suicide!\n");
    TP->remove();

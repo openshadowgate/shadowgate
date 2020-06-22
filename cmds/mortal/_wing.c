@@ -74,7 +74,7 @@ int cmd_wing(string args)
         return 1;
     }
 
-    if(!TELEPORT->object_can_be_teleported(TP,find_object_or_load(dest),TP->query_character_level()/2))
+    if(!TELEPORT->object_can_be_teleported(TP,find_object_or_load(dest),TP->query_base_character_level()/2))
     {
         tell_object(TP,"Something prevents you from flying there.");
         return 1;

@@ -63,7 +63,7 @@ int cmd_wear(string str)
 
     if((int)ob->query_property("level required"))
     {
-        if((int)TP->query_character_level() < (int)ob->query_property("level required"))
+        if((int)TP->query_base_character_level() < (int)ob->query_property("level required"))
         {
             tell_object(ETO,"You are not strong enough to wear "+ob->query_short());
             return 1;

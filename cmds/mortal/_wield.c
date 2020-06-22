@@ -63,7 +63,7 @@ int cmd_wield(string str)
 
     if(ob->query_property("level required"))
     {
-        if(TP->query_character_level() < ob->query_property("level required"))
+        if(TP->query_base_character_level() < ob->query_property("level required"))
         {
             tell_object(TP,"You are not strong enough to wield "+ob->query_short());
             return 1;
