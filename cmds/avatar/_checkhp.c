@@ -29,7 +29,7 @@ int cmd_checkhp(string str)
         return 1;
     }
 
-    level = (int)targ->query_base_character_level(); // *FIXME* 
+    level = (int)targ->query_base_character_level();
 
     str = "Rolls: ";
     x = 30;
@@ -41,7 +41,7 @@ int cmd_checkhp(string str)
 
     }
 
-    tell_object(TP,"%^MAGENTA%^"+str+".");
+    tell_object(TP,"%^MAGENTA%^"+str[-2]+".");
     tell_object(TP,"%^MAGENTA%^Base rolls before mods: %^RESET%^"+x+"");
 
     tmp = (int)targ->query_stats("constitution");
