@@ -16,7 +16,7 @@ string *restricted_classes(string subrace) {
 string *restricted_deities(string subrace) { return ({}); }
 
 // stats in order: str, dex, con, int, wis, cha
-int *stat_mods(string subrace) { return ({ 2, 0, 0, 0, 0, -2 }); }
+int *stat_mods(string subrace) { return ({ 2, 0, 0, 0, 0, 0 }); }
 
 mapping skill_mods(string subrace) { return ([ "endurance" : 2 ]); }
 

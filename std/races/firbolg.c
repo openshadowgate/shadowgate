@@ -4,6 +4,7 @@ inherit DAEMON;
 void create() { ::create(); }
 
 // age at which each age cat starts: normal, middle, old, venerable
+//fearless in player_d.c
 int *age_brackets() { return ({ 40, 100, 133, 200 }); }
 
 int *restricted_alignments(string subrace) { return ({ 3, 6, 9 }); }
@@ -18,7 +19,7 @@ string *restricted_deities(string subrace) {
 }
 
 // stats in order: str, dex, con, int, wis, cha
-int *stat_mods(string subrace) { return ({ 2, -2, 0, 0, 0, 0 }); }
+int *stat_mods(string subrace) { return ({ 4, -2, 0, 0, 0, 0 }); }
 
 mapping skill_mods(string subrace) { return ([ "survival" : 2 ]); }
 

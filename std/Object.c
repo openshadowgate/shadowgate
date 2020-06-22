@@ -437,7 +437,7 @@ mixed query_property(string prop)
             subrace = (string)TO->query("subrace");
             if (subrace) {
                 if (strsrch(subrace, "genasi") != -1) {
-                    num += 1;
+                    num += 0;
                 }
             }
         }

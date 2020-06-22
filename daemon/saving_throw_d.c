@@ -108,7 +108,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
 
         if ((string)ob->query_race() == "gnome" &&
             ((string)ob->query("subrace") == "deep gnome" || (string)ob->query("subrace") == "svirfneblin")) {
-            mod += 2;                                                                                                                                                // svirfneblin +2 saves racial
+            mod += 0;                                                                                                                                                // svirfneblin +2 saves racial - changed in racial update
         }
         if (FEATS_D->usable_feat(ob, "resistance")) {
             mod += 2;

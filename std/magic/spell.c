@@ -2836,11 +2836,10 @@ varargs int do_save(object targ, int mod)
         }
     }
 
-    if ((string)targ->query_race() == "gnome" && spell_sphere == "illusion") {    // rock & forest gnome, +2 vs illusions
-        if (targ->query("subrace") == "rock gnome" || targ->query("subrace") == "forest gnome" || targ->query("subrace") == "trixie") {
+    if ((string)targ->query_race() == "gnome" && spell_sphere == "illusion") {    // all gnomes +2 vs illusions
             caster_bonus -= 2;
-        }
     }
+    
     if ((string)targ->query_race() == "elf" || (string)targ->query_race() == "half-elf") {
         if (spell_sphere == "enchantment_charm") {
             caster_bonus -= 2;                                       //elves & half-elves, +2 vs charm

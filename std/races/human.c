@@ -44,12 +44,12 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
     if(!subrace || subrace == "") return ({ 0, 0, 0, 0, 0, 0 });
     switch(subrace) {
       case "aasimar": return ({ 0, 0, 0, -2, 2, 2 }); break;
-      case "air genasi": return ({ 0, 2, 0, 2, -2, -2 }); break;
-      case "earth genasi": return ({ 2, 0, 2, -2, 0, -2 }); break;
+      case "air genasi": return ({ 0, 2, 0, 2, 0, -2 }); break;
+      case "earth genasi": return ({ 2, 0, 2, 0, 0, -2 }); break;
       case "feytouched": return ({ 0, 2, -2, 0, 0, 2 }); break;
-      case "fire genasi": return ({ 0, 0, 0, 2, 0, -2 }); break;
+      case "fire genasi": return ({ 0, 0, 0, 2, 2, -2 }); break;
       case "tiefling": return ({ 0, 2, 0, 2, 0, -2 }); break;
-      case "water genasi": return ({ 0, 0, 2, 0, 0, -2 }); break;
+      case "water genasi": return ({ 0, 0, 2, 0, 2, -2 }); break;
       case "dhampir": return ({ 0, 2, -2, 0, 0, 2 }); break;
       default: return ({ 0, 0, 0, 0, 0, 0 }); break;
     }

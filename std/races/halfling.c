@@ -29,10 +29,10 @@ string *restricted_deities(string subrace) {
 }
 
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
-    if(!subrace || subrace == "") return ({ -2, 2, 0, 0, 0, 0 });
+    if(!subrace || subrace == "") return ({ -2, 2, 0, 0, 0, 2 });
     switch(subrace) {
-      case "strongheart halfling": return ({ -2, 0, 2, 0, 0, 0 }); break;
-      default: return ({ -2, 2, 0, 0, 0, 0 }); break;
+      case "strongheart halfling": return ({ -2, 0, 2, 0, 0, 2 }); break;
+      default: return ({ -2, 2, 0, 0, 0, 2 }); break;
     }
 }
 

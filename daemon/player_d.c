@@ -1818,6 +1818,9 @@ int immunity_check(object obj, string type)
         case "halfling":
             return 1;
 
+        case "firbolg":
+            return 1;
+
         case "human":
             if (mysubrace == "attayan") {
                 return 1;
