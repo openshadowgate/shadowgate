@@ -1307,7 +1307,7 @@ int human_bonus_feat()
 {
     string myrace, subrace;
     myrace = TP->query_race();
-    subrace = (string)TO->query("subrace");
+    subrace = (string)TP->query("subrace");
 
     if (myrace == "human") {
         if (!subrace || subrace == "" || (subrace != "tiefling" && subrace != "aasimar" && subrace != "feytouched" && (strsrch(subrace, "genasi") == -1))) {

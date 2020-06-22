@@ -413,7 +413,7 @@ int can_gain_feat(object ob,string feat)
     if(!stringp(feat)) { return 0; }
     if(has_feat(ob,feat)) { return 0; }
     if(!meets_requirements(ob,feat)) { return 0; }
-    MAX_ALLOWED = ((int)ob->query_highest_level() / 3) + 1;
+    MAX_ALLOWED = ((int)ob->query_highest_level() / 3) + 1 + human_bonus_feat(ob);
     if((int)ob->query_other_feats_gained() >= MAX_ALLOWED) { return 0; }
     return 1;
 }
@@ -1686,4 +1686,18 @@ int bought_as_hybrid_feat(string feat,object targ) {
     if(!sizeof(feat_array)) return 0;
     if(member_array(feat,feat_array) == -1) return 0;
     return 1;
+}
+
+int human_bonus_feat(object ob)
+{
+    string myrace, subrace;
+    myrace = ob->query_race();
+    subrace = (string)ob->query("subrace");
+
+    if (myrace == "human") {
+        if (!subrace || subrace == "" || (subrace != "tiefling" && subrace != "aasimar" && subrace != "feytouched" && (strsrch(subrace, "genasi") == -1))) {
+            return 1; //bonus feat for baseline humans
+        }
+    }
+    return 0;
 }

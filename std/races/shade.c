@@ -35,9 +35,9 @@ mapping daily_uses(string subrace) { return ([ "darkness" : 1]); }
 
 mapping query_racial_innate(string subrace) {
 	return (["darkness" : (["type" : "spell", "casting level" : 0.5,
-		"daily uses" : 1, "delay" : 1, "uses left" : 1,
-		"refresh time" : -1, "level required" : 0,
-		"class specific" : 0]
+				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
+				   "refresh time" : -1, "level required" : 0,
+				   "class specific" : 0])]);
 }
 
 int misc_bonuses(string subrace, string bonus) { return 0; }
