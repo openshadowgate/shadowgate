@@ -413,7 +413,7 @@ int can_gain_feat(object ob,string feat)
     if(!stringp(feat)) { return 0; }
     if(has_feat(ob,feat)) { return 0; }
     if(!meets_requirements(ob,feat)) { return 0; }
-    MAX_ALLOWED = ((int)ob->query_highest_level() / 3) + 1 + human_bonus_feat(ob);
+    MAX_ALLOWED = ((int)ob->query_highest_level() / 3) + 1;
     if((int)ob->query_other_feats_gained() >= MAX_ALLOWED) { return 0; }
     return 1;
 }

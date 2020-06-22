@@ -670,7 +670,7 @@ int cmd_feats(string str)
         return 1;
 
     case "allowed":
-        MAX_ALLOWED = ((int)TP->query_highest_level() / 3) + 1 + human_bonus_feat();
+        MAX_ALLOWED = ((int)TP->query_highest_level() / 3) + 1;
         num_feats = (int)TP->query_other_feats_gained();
         allowed = MAX_ALLOWED - num_feats;
         if (allowed < 0) {
@@ -797,7 +797,7 @@ int cmd_feats(string str)
 
 //        if(sizeof(info)) { tmp = implode(info," "); }
 
-        MAX_ALLOWED = ((int)TP->query_highest_level() / 3) + 1 + human_bonus_feat();
+        MAX_ALLOWED = ((int)TP->query_highest_level() / 3) + 1;
         num_feats = (int)TP->query_other_feats_gained();
         if (num_feats >= MAX_ALLOWED) {
             tell_object(TP, "%^RESET%^%^BOLD%^You are not able to add "
