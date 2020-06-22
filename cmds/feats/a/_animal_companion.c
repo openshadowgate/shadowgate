@@ -55,7 +55,7 @@ The Animal Companion can also be customized through several commands, which will
   'animal short [DESCRIPTION]' - Changes the short description of the companion.
   'animal long  [DESCRIPTION]' - Changes the long description of the companion.
   
-  To command the animal companion, use %^ORANGE%^<command companion to %^ULINE%^ACTION%^RESET%^ORANGE%^>.%^RESET%^");
+  To command the animal companion, use %^ORANGE%^<animal command %^ULINE%^ACTION%^RESET%^ORANGE%^>.%^RESET%^");
   
     set_target_required(0);
 }
@@ -120,7 +120,6 @@ void execute_feat()
     {
         tell_object(caster, "You dismiss your animal companion.");
         caster->remove_property("animal_companion");
-        caster->remove_property("has_elemental");
         companion && companion->remove();
         control && control->remove();
         return;
@@ -136,7 +135,7 @@ void execute_feat()
     tell_object(caster, sprintf("You summon your trusty %s companion to your side.", arg));
     
     class_level = caster->query_guild_level("ranger");
-    comp_hd = class_level;
+    comp_hd = class_level + 1;
     comp_ac = class_level + 5;
     
     companion = new("/d/magic/mon/acompanion");
@@ -156,14 +155,14 @@ void execute_feat()
     caster->set_property("animal_companion", companion);
     caster->add_follower(companion);
     caster->add_protector(companion);
-    caster->set_property("has_elemental", 1);
-    
+
+/*
     control = new("/d/magic/obj/holder");
     control->set_caster(caster);
     control->move(caster);
-    control->set_elemental(companion);
     control->set_property("spell",TO);
     control->set_property("spelled", ({TO}) );
+*/
 
     companion->set_property("minion", caster);
     companion->move(environment(caster));
@@ -194,10 +193,8 @@ void execute_feat()
 
 void dest_effect()
 {
-//    ::dest_effect();
-    companion && companion->remove();
-    control && control->remove();
+    //control && control->remove();
     remove_feat(this_object());
-//    return;
-    return ::dest_effect();
+    ::dest_effect();
+    return;
 }

@@ -589,7 +589,7 @@ void single_target_spell() // always cast two
     case 1: // phantom guardians
 
         if (!has_spell(TO, "phantom guardians")) {
-            new("/cmds/spells/f/_phantom_guardians.c")->use_spell(TO, "soldiers", MULT, 100, "mage");
+            new("/cmds/spells/p/_phantom_guardians.c")->use_spell(TO, "soldiers", MULT, 100, "mage");
             break;
         }
 
