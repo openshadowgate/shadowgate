@@ -27,7 +27,7 @@
 (/cmds/system): (all)[r] (assist)[r] (mudlib)[rw] (superuser)[rw]
 
 (/d): (all)[r] (assist)[rw] (superuser)[rw] (area)[rw]
-(/d/token_hunt/token_storage): (all)[r] (area)[rw] (Token_hunt)[rwe]
+(/d/token_hunt/token_storage): (all)[rw] (Token_hunt)[rw]
 (/d/av_rooms): (all)[rw]
 (/d/avatars): (all)[rw]
 (/d/common): (all)[r] (area)[rw] (superuser)[rw] (assist)[rw] (common)[rw]
