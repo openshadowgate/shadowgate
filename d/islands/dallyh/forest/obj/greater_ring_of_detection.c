@@ -70,7 +70,7 @@ void init()
     {
         if(!objectp(ETO)) return;
         if(!ETO->is_player()) return;
-        SetLevel = ETO->query_character_level();
+        SetLevel = ETO->query_base_character_level();
         set_value(SetLevel * (random(300) + 200));
         return;
     }

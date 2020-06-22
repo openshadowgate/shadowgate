@@ -121,7 +121,7 @@ void heart_beat()
                         tell_room(EETO, "A vicious hunter bursts in and attacks "+ETO->QCN + "!", ETO);
                         tell_object(ETO,"A vicious hunter bursts in and attacks you!");
                         
-                        level = ETO->query_character_level();
+                        level = ETO->query_base_character_level();
           
                         creature->set_property("fighter_attacks_mod",level/7);
                         creature->set_property("magic resistance",level + 30);
@@ -156,7 +156,7 @@ void heart_beat()
                 {
                     creature = new(ARCHER);                        
 
-                    level = ETO->query_character_level();
+                    level = ETO->query_base_character_level();
       
                     creature->set_property("fighter_attacks_mod",level/10);
                     creature->set_property("magic resistance",level + 30);

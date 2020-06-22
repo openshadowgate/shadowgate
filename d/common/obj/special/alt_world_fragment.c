@@ -47,7 +47,7 @@ void reward_player(object player)
         player->delete("altquesttime");
         player->set("altquesttime", time() + 86400);
     }
-    plev = (int)player->query_character_level();
+    plev = (int)player->query_base_character_level();
     exp_reward = exp_for_level(plev + 1) / 13;
     exp_reward *= mod;
     tell_object(player, "%^BOLD%^%^WHITE%^You feel yourself become more experienced! (You gain "+english_number(exp_reward)+ " experience points!)%^RESET%^");

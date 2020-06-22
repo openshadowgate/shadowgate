@@ -67,7 +67,7 @@ int cmd_void_stalker(string str)
 
     location = environment(find_living(target));
 
-    if(!TELEPORT->object_can_be_teleported(TP,location,TP->query_character_level()))
+    if(!TELEPORT->object_can_be_teleported(TP,location,TP->query_base_character_level()))
     {
         notify_fail("Something is blocking your path.");
         return 1;

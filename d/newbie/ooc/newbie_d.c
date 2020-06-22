@@ -30,7 +30,7 @@ void advance_level(object who)
     if(!objectp(who)) return;
     if(!newbiep(who)) return;
     myExp = (int)who->query_exp();  
-    expNext = EXP_NEEDED[(int)who->query_character_level() + 1];
+    expNext = EXP_NEEDED[(int)who->query_adjusted_character_level() + 1];
     expNext = expNext - myExp;
     if(expNext >= 0)
     {

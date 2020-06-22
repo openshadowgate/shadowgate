@@ -117,11 +117,11 @@ int exp_steal(object targ)
                 targ->set_hp(-50);
             }
 
-            level = (int)targ->query_character_level();
+            level = (int)targ->query_adjusted_character_level();
             loss = to_int(exp * (random(500) * 0.0001)); // between 0 and 5% of their exp
             targ->add_exp(-1 * loss);
             targ->resetLevelForExp(0);
-            if((int)targ->query_character_level() < level)
+            if((int)targ->query_adjusted_character_level() < level)
             {
                 ADVANCE_D->class_news((string)targ->query_class(),targ->QCN+" has lost a level to the "
                     "short sword, nine lives stealer!");

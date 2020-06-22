@@ -262,7 +262,7 @@ int strike(object targ)  // It's intentional that more than one special is possi
             "suddenly %^BOLD%^immolated %^RESET%^%^RED%^by %^BOLD%^%^BLACK%^crackling black "
             "flames%^RESET%^%^RED%^!%^RESET%^",({ETO,targ}));
         targ->set_paralyzed(roll_dice(5,5) + 25, "%^BOLD%^BLACK%^You are overcome by the seering pain!%^RESET%^");
-        if(!targ->fort_save(ETO->query_character_level())) { targ->set_temporary_blinded(2); }
+        if(!targ->fort_save(ETO->query_base_character_level())) { targ->set_temporary_blinded(2); }
     }
 
     return 0;

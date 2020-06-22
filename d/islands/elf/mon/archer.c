@@ -167,7 +167,7 @@ void shoot(object targ)
             yell();
         }
         
-        level = targ->query_character_level() / 5;
+        level = targ->query_base_character_level() / 5;
         for(i=0;level, i<level;i++)
         {
             force_me("shoot " + target_name + " " + direction);

@@ -45,7 +45,7 @@ void heart_beat()
     tell_room(EETO, "%^RED%^An elven assassin bursts in and attacks "+ ETO->QCN + "!", ETO);
     tell_object(ETO,"%^RED%^A vengeful elf bursts in and attacks you!");
     
-    level = ETO->query_character_level();
+    level = ETO->query_base_character_level();
 
     creature->set_property("fighter_attacks_mod",level/5);
     creature->set_property("magic resistance",level + 30);

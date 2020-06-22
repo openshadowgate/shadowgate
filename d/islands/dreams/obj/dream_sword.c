@@ -147,7 +147,7 @@ int hitme(object targ){
       return 1;
    }
    if(!random(15)){
-       int powah = ETO->query_character_level();
+       int powah = ETO->query_base_character_level();
        powah = powah * 3 /4;
        powah = powah<10?10:powah;
       switch(mygod){

@@ -24,7 +24,7 @@ void hunting(object targ)
     }
     after = targ->query_true_name();
     classes = (string *)targ->query_classes();
-    lev = (int)targ->query_character_level();
+    lev = (int)targ->query_base_character_level();
     race = (string)targ->query_race();
     set_name((string)targ->getWholeDescriptivePhrase());
     set_id( ({ "doppleganger", race}) );

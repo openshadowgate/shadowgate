@@ -212,7 +212,7 @@ int more_hit(object targ)
     me_int = (int)ETO->query_stats("intelligence");
     you_wis = (int)targ->query_stats("wisdom");
 
-    dam = (int)ETO->query_character_level() + me_int - you_wis;
+    dam = (int)ETO->query_base_character_level() + me_int - you_wis;
     if (dam <= 1) {
         dam = 1;
     }

@@ -122,7 +122,7 @@ int disrupt(string str)
     tell_room(EETO, "%^BOLD%^%^CYAN%^Suddenly you feel an aura of power wash over the area.... and "+
     "you realize that something totally unseen settles here as "+ETOQCN+"%^BOLD%^%^CYAN%^ stops "+
     "focusing on the smooth hollow orb.%^RESET%^", ETO);
-    EETO->set_property("wild magic", ((int)ETO->query_character_level()));
+    EETO->set_property("wild magic", ((int)ETO->query_base_character_level()));
     EETO->set_property("wild magic affect", ({"random", "random level", 0}));
     MyRooms += ([EETO : (["ends at" : time() + 300 + random(300) + random(300)]),]);
    // MyRooms += ([EETO : (["ends at" : 1,]),]);

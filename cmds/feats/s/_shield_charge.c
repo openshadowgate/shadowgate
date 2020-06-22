@@ -150,7 +150,7 @@ void execute_attack()
 
     if(sizeof(attackers))
     {
-        level = caster->query_character_level();
+        level = caster->query_base_character_level();
         level += roll_dice(1,10); // might need adjustment
 
         for(i=0;i<sizeof(attackers);i++)

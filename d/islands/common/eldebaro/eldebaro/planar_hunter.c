@@ -23,7 +23,7 @@ void hunting(object targ)
     }
     hunted = targ;
     classes = (string *)targ->query_classes();
-    lev = (int)targ->query_character_level();
+    lev = (int)targ->query_adjusted_character_level(); // Used for EXP.
     
     set_name("a tall hooded figure");
     set_id( ({ "a tall hooded figure", "figure", "planar being", "being", "hunter", "hooded figure"}) );

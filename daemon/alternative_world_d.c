@@ -583,7 +583,7 @@ void setup_alt_monster(object mob, object player)
     {
         if(!objectp(player = find_player(environment(mob)->query("created for player")))) return;
     }
-    newlev = player->query_character_level();
+    newlev = player->query_base_character_level();
     if(mob->query_level() < newlev)
     {
         for(x = 0;x < sizeof(mclasses = mob->query_classes());x++)

@@ -111,7 +111,7 @@ varargs int check_snakes(int amt)
     if(sizeof(SNAKES) >= 5) return 0;
     while(amt--)
     {
-        chooser = random(100) + (int)ETO->query_character_level();
+        chooser = random(100) + (int)ETO->query_base_character_level();
         switch (chooser) 
         {
         case 0..70:

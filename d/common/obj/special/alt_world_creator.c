@@ -47,7 +47,7 @@ void alt_world(string str)
         for(x = 0; x < sizeof(pl);x++)
         {
             if(!objectp(pl[x])) continue;
-            mylev = pl[x]->query_character_level();
+            mylev = pl[x]->query_base_character_level();
             if(mylev < minlev || mylev > maxlev) continue;
             //if(pl[x]->query_true_name() != "testsubject") continue;
             players += ({pl[x]});
@@ -74,8 +74,8 @@ void alt_world(string str)
                 check_obj->remove();
                 break;
             }
-            mylev = peri["created for"]->query_character_level();
-            if(absolute_value(((int)player->query_character_level() - mylev)) > 5)
+            mylev = peri["created for"]->query_base_character_level();
+            if(absolute_value(((int)player->query_base_character_level() - mylev)) > 5)
             {
                 check_obj->remove();
                 continue;

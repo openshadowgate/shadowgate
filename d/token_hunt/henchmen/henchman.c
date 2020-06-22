@@ -583,7 +583,7 @@ varargs int setup_merc(string myclass, string race, object owner, string myname)
 
     set_body_type("human");
 
-    level = (int)owner->query_character_level();
+    level = (int)owner->query_base_character_level();
 
     if(level < 3) { level = 3; } // make the ones in offestry a little bit stronger
 

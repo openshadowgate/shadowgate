@@ -61,14 +61,14 @@ void spell_effect(int prof) {
             eff->set_spell();
     }
 
-    if(target->query_character_level()<clevel)
+    if(target->query_base_character_level()<clevel)
     {
         object eff =  "/std/effect/status/panicked"->apply_effect(target,roll_dice(1,4));
         if(objectp(eff))
             eff->set_spell();
     }
     //Panicked and comatose at the same time, sure, DnD, you make sense
-    if(target->query_character_level()<clevel)
+    if(target->query_base_character_level()<clevel)
     {
         tell_object(target,"%^BOLD%^%^BLUE%^Unable to contain your terror, you faint!%^RESET%^");
         tell_room(environment(target),"%^BOLD%^%^BLUE%^"+target->QCN+" faints!%^RESET%^",target);

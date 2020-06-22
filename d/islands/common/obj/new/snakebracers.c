@@ -81,15 +81,15 @@ int strike_func(int damage, object what, object targ)
 
     switch (random(10)) {
     case 0..1:
-        new("/cmds/spells/a/_acid_breath")->use_spell(ETO, targ, ETO->query_character_level(), 100, "mage");
+        new("/cmds/spells/a/_acid_breath")->use_spell(ETO, targ, ETO->query_base_character_level(), 100, "mage");
         break;
 
     case 5..6:
-        new("/cmds/spells/a/_acid_orb")->use_spell(ETO, targ, ETO->query_character_level(), 100, "mage");
+        new("/cmds/spells/a/_acid_orb")->use_spell(ETO, targ, ETO->query_base_character_level(), 100, "mage");
         break;
 
     default:
-        new("/cmds/spells/a/_acid_arrow")->use_spell(ETO, targ, ETO->query_character_level(), 100, "mage");
+        new("/cmds/spells/a/_acid_arrow")->use_spell(ETO, targ, ETO->query_base_character_level(), 100, "mage");
         break;
     }
 }

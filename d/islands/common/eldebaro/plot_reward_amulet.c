@@ -98,10 +98,10 @@ void update_bonuses()
     if(!stringp(belongs_to)) return;
     if((string)ETO->query_name() != belongs_to) return;
     clear_item_bonus();
-    amulet_level = (int)ETO->query_character_level();
-    set_item_bonus("damage resistance", (int)ETO->query_character_level()/mod);
+    amulet_level = (int)ETO->query_base_character_level();
+    set_item_bonus("damage resistance", (int)ETO->query_base_character_level()/mod);
     remove_property("enchantment");
-    set_property("enchantment", (int)ETO->query_character_level()/mod);    
+    set_property("enchantment", (int)ETO->query_base_character_level()/mod);    
 }
 
 void init() 
@@ -196,7 +196,7 @@ void heart_beat()
     if(!objectp(ETO)) return;
     if(!using_amulet) 
     {
-        if(amulet_level != (int)ETO->query_character_level() && belongs_to == (string)ETO->query_name()) update_bonuses();
+        if(amulet_level != (int)ETO->query_base_character_level() && belongs_to == (string)ETO->query_name()) update_bonuses();
         if(being_hunted)
         {
             if(!objectp(hunter))

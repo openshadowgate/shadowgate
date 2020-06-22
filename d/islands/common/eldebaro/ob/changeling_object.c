@@ -179,7 +179,7 @@ int special_attack(object ob, object targ, string form, int damage)
                     {
                         if(!objectp(vics[x])) continue;
                         if(EEOB != environment(vics[x])) continue;
-                        if(vics[x]->reflex_save((int)EOB->query_character_level())) continue;
+                        if(vics[x]->reflex_save((int)EOB->query_base_character_level())) continue;
                         limb = vics[x]->return_target_limb();
                         tell_object(vics[x], "%^BOLD%^%^GREEN%^Your "+limb+" is soaked by the acid!%^RESET%^");
                         tell_room(EEOB, vics[x]->QCN+"%^BOLD%^%^GREEN%^'s "+limb+" is soaked by the acid!%^RESET%^", vics[x]);
@@ -271,7 +271,7 @@ int special_attack(object ob, object targ, string form, int damage)
                     {
                         if(!objectp(vics[x])) continue;
                         if(EEOB != environment(vics[x])) continue;
-                        if(vics[x]->reflex_save((int)EOB->query_character_level()) || vics[x]->query_property("no paralzye")) continue;
+                        if(vics[x]->reflex_save((int)EOB->query_base_character_level()) || vics[x]->query_property("no paralzye")) continue;
                         tell_object(vics[x], "%^BOLD%^%^CYAN%^You are thrown to the ground by "+
                         "the wave of sonic energy!%^RESET%^");
                         tell_room(EEOB, vics[x]->QCN+"%^BOLD%^%^CYAN%^ is thrown to the ground by "+

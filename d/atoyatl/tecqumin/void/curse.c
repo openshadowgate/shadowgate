@@ -208,7 +208,7 @@ string long_desc(){
   result += ".\n";
   spellcraft = TP->query_skill("spellcraft");
   report ("spellcraft: " + spellcraft + " spellcraft_target: " + ((level/5) + 4 + level));
-  if (objectp(ETO) && living(ETO)) level = ETO->query_character_level();
+  if (objectp(ETO) && living(ETO)) level = ETO->query_base_character_level();
   else level = 50;
   if (spellcraft < (level/5) + 4 + level && !TP->query_true_invis()) return result;
   if (count_curses()<2) result += "It is harming the following ability:\n";

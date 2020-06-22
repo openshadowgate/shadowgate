@@ -74,12 +74,12 @@ int GoThroughDoor()
 
     verb = query_verb();
 
-    if((int)TP->query_character_level() > 6 && verb == "offestry")
+    if((int)TP->query_base_character_level() > 6 && verb == "offestry")
     {
         tell_object(TP,"Only newbies can take that exit.");
         return 0;
     }
-    if((int)TP->query_character_level() < 6 && verb != "offestry")
+    if((int)TP->query_base_character_level() < 6 && verb != "offestry")
     {
         tell_object(TP,"You are only allowed to use the offestry exit");
         return 0;

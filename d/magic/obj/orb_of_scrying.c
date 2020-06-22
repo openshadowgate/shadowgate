@@ -162,14 +162,14 @@ void heart_beat()
     {
         if(hunger > 0)
         {
-            hunger -= (int)ETO->query_character_level() * 10;
+            hunger -= (int)ETO->query_base_character_level() * 10;
         }
         return;
     }
 
     step++;
 
-    hunger += (int)ETO->query_character_level() * 10;
+    hunger += (int)ETO->query_base_character_level() * 10;
 
     //ETO->add_exp(-1*hunger);
     if(!avatarp(ETO))

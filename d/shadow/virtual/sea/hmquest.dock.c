@@ -52,7 +52,7 @@ int GoThroughDoor() {
         tell_room(TO,"You see "+TP->QCN+" go to step off the pier, before pausing and simply shrugging in disinterest.",TP);
         return 0;
     }
-    if(TP->query_character_level()<19) {
+    if(TP->query_base_character_level()<19) {
         tell_object(TP,"A feeling of dread fills you as you go to step upon the island, and something within you shudders back from a challenge far too great yet!");
         tell_room(TO,"You see "+TP->QCN+" stop dead in "+TP->QP+" tracks, deciding better of stepping onto the island.",TP);
         return 0;

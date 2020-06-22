@@ -231,7 +231,7 @@ int hitme(object targ)
 					        if(!random(25)) 
                             {
                                 //if(!"daemon/saving_d"->saving_throw(targ,"spell")) 
-                                if(!"/daemon/saving_throw_d"->reflex_save(targ,(-1*(int)ETO->query_character_level())))
+                                if(!"/daemon/saving_throw_d"->reflex_save(targ,(-1*(int)ETO->query_base_character_level())))
                                 {
 							        tell_object(ETO,"%^BOLD%^Your sword flashes"+
 							            " with a bright light, blinding "+targ->query_cap_name()+".");

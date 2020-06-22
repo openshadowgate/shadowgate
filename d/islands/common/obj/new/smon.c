@@ -35,7 +35,7 @@ void setup_shadow(object player)
     if(!objectp(player)) return;
     if(!objectp(TO)) return;
 
-    num = (int)player->query_character_level();
+    num = (int)player->query_base_character_level();
 
     add_id(""+(string)player->query_name()+" smon");
     set_level(num/2);

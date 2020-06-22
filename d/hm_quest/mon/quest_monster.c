@@ -39,8 +39,9 @@ void do_setup(object ob)
         if(!file_exists(file)) { continue; }
         caster += (int)file->caster_class();        
         set_class(classes[i]);
-        set_mlevel(classes[i],(int)ob->query_character_level());
-        set_guild_level(classes[i],(int)ob->query_character_level());
+        set_mlevel(classes[i],(int)ob->query_base_class_level(classes[i]));
+        set_guild_level(classes[i],(int)ob->query_class_level(classes[i]));
+        // This might need real fixing if it's still in use!
         add_search_path("/cmds/"+classes[i]+"");
     }
 

@@ -53,7 +53,7 @@ void setup_perimeters()
         TO->remove();
         return;
     }
-    mlev = ETO->query_character_level();
+    mlev = ETO->query_base_character_level();
 
     mchance = mlev + random(mlev) + random(mlev);
 

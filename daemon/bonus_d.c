@@ -187,8 +187,8 @@ int new_bab(int level, object ob)
     if (objectp(ob)) {
         if ((int)ob->query_property("transformed") || (int)ob->query_property("dance-of-cuts")) { // fighter BAB under transformation/dance.
             //ret = (int)ob->query_level();
-            //changing to query_character_level()
-            ret = (int)ob->query_character_level();
+            //changing to query_base_character_level()
+            ret = (int)ob->query_base_character_level();
             return ret;
         }
         classes = (string*)ob->query_classes();
