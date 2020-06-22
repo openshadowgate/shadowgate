@@ -1,9 +1,9 @@
 %^BOLD%^%^BLUE%^Aquatic elf:
 
-%^BOLD%^%^BLUE%^Level adjustment: %^RESET%^1 (requires an account with a lvl 30 character)
+%^BOLD%^%^BLUE%^Level adjustment: %^RESET%^0 (requires an account with a lvl 30 character)
 %^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 dexterity, +2 intelligence, -2 constitution
-%^BOLD%^%^BLUE%^Skill adjustments: %^RESET%^+2 perception, +2 spellcraft
-%^BOLD%^%^BLUE%^Misc bonuses: %^RESET%^+2 saves vs charm spells, +1 caster level
+%^BOLD%^%^BLUE%^Skill adjustments: %^RESET%^+2 perception
+%^BOLD%^%^BLUE%^Misc bonuses: %^RESET%^+2 saves vs charm spells
 %^BOLD%^%^BLUE%^Innate spells: %^RESET%^water breathing
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^any neutral

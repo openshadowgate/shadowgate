@@ -445,7 +445,7 @@ mixed query_property(string prop)
             subrace = (string)TO->query("subrace");
             if (subrace) {
                 if (subrace == "aquatic elf") {
-                    num += 1;
+                    num += 0;
                 }
             }
         }
@@ -528,7 +528,7 @@ mixed query_property(string prop)
         if (TO->query_race() == "elf") {
             subrace = (string)TO->query("subrace");
             if (subrace == "fey'ri") {
-                num += 5;
+                num += 0;
             }
         }
         num += props[prop];

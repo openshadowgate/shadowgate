@@ -41,7 +41,7 @@ int sight_bonus(string subrace) {
 }
 
 mapping daily_uses(string subrace) {
-    return ([ "dancing lights" : 1, "faerie fire" : 1, "darkness" : 1 ]);
+    return ([ "faerie fire" : 1, "darkness" : 1 ]);
 }
 
 int misc_bonuses(string subrace, string bonus) { return 0; }
@@ -68,11 +68,7 @@ int fingers() { return 5; }
 string *wielding_limbs() { return ({ "right hand", "left hand" }); }
 
 mapping query_racial_innate(string subrace){
-        return (["dancing lights" : (["type" : "spell", "casting level" : 0.5,
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
-				   "refresh time" : -1, "level required" : 0,
-				   "class specific" : 0]),
-		   "darkness" : (["type" : "spell", "casting level" : 0.5,
+        return (["darkness" : (["type" : "spell", "casting level" : 0.5,
 				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
 				   "refresh time" : -1, "level required" : 0,
 				   "class specific" : 0]),

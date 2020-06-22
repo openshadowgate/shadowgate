@@ -31,7 +31,7 @@ string* restricted_deities(string subrace)
 
 int* stat_mods(string subrace)   // stats in order: str, dex, con, int, wis, cha
 {
-    return ({ 0, 2, 0, 0, 0, 2 });
+    return ({ 0, 0, 0, 0, 0, 2 });
 }
 
 mapping skill_mods(string subrace)
@@ -61,14 +61,8 @@ mapping daily_uses(string subrace)
 
 mapping query_racial_innate(string subrace)
 {
-    return (["light" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-             "divine weapon" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-             "divine shield" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-             "invisibility" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-             "sacred nimbus" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-             "cure critical wounds" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-             "cure disease" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
-             "angelic aspect" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]), ]);
+    return (["light" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ])
+    ]);
 }
 
 int misc_bonuses(string subrace, string bonus)
@@ -238,5 +232,5 @@ int is_pk_race()
 string* query_languages(string subrace)
 {
     return (["required" : ({ "common", "celestial", }),
-             "optional" : ({ "infernal", "sylvan", "draconic" })]);
+             "optional" : ({ "infernal", "sylvan", "draconic", "abyssal" })]);
 }

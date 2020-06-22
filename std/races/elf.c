@@ -82,15 +82,15 @@ int* stat_mods(string subrace)   // stats in order: str, dex, con, int, wis, cha
 
     case "fey'ri": return ({ 0, 2, -2, 2, 0, 0 }); break;
 
-    case "sun elf": return ({ 0, 0, -2, 2, 0, 0 }); break;
+    case "sun elf": return ({ 0, 0, -2, 2, 0, 2 }); break;
 
     case "szarkai": return ({ 0, 2, -2, 2, 0, 0 }); break;
 
-    case "wild elf": return ({ 0, 2, 0, -2, 0, 0 }); break;
+    case "wild elf": return ({ 2, 2, 0, 0, 0, -2 }); break;
 
-    case "wood elf": return ({ 2, 2, 0, -2, 0, -2 }); break;
+    case "wood elf": return ({ 2, 2, 0, -2, 0, 0 }); break;
 
-    default: return ({ 0, 2, -2, 0, 0, 0 }); break;   //moon elf default
+    default: return ({ 0, 2, -2, 2, 0, 0 }); break;   //moon elf default
     }
 }
 
@@ -100,9 +100,9 @@ mapping skill_mods(string subrace)
         return ([ "perception" : 2 ]);
     }
     switch (subrace) {
-    case "aquatic elf": return ([ "perception" : 2, "spellcraft" : 2 ]); break;
+    case "aquatic elf": return ([ "perception" : 2]); break;
 
-    case "fey'ri": return ([ "perception" : 2, "influence" : 2 ]); break;
+    case "fey'ri": return ([ "perception" : 2]); break;
 
     case "szarkai": return ([ "perception" : 2]); break;
 
@@ -148,13 +148,13 @@ mapping daily_uses(string subrace)
         return ([]);
     }
     if (subrace == "szarkai") {
-        return ([ "dancing lights" : 1, "faerie fire" : 1, "darkness" : 1 ]);
+        return ([ "faerie fire" : 1, "darkness" : 1 ]);
     }
     if (subrace == "aquatic elf") {
         return ([ "water breathing" : 1 ]);
     }
     if (subrace == "fey'ri") {
-        return ([ "darkness" : 1, "dimension door" : 1, "clairvoyance" : 1, "alter self" : -1 ]);
+        return (["alter self" : -1 ]);
     }
     return ([]);
 }
@@ -163,19 +163,7 @@ mapping query_racial_innate(string subrace)
 {
     switch (subrace) {
     case "fey'ri":
-        return (["darkness" : (["type" : "spell", "casting level" : 0.5,
-                                "daily uses" : 1, "delay" : 1, "uses left" : 1,
-                                "refresh time" : -1, "level required" : 0,
-                                "class specific" : 0]),
-                 "dimension door" : (["type" : "spell", "casting level" : 0.5,
-                                      "daily uses" : 1, "delay" : 1, "uses left" : 1,
-                                      "refresh time" : -1, "level required" : 0,
-                                      "class specific" : 0]),
-                 "clairvoyance" : (["type" : "spell", "casting level" : 0.5,
-                                    "daily uses" : 1, "delay" : 1, "uses left" : 1,
-                                    "refresh time" : -1, "level required" : 0,
-                                    "class specific" : 0]),
-                 "alter self" : (["type" : "spell", "casting level" : 0.5,
+        return (["alter self" : (["type" : "spell", "casting level" : 0.5,
                                   "daily uses" : -1, "delay" : 1, "uses left" : -1,
                                   "refresh time" : -1, "level required" : 0,
                                   "class specific" : 0]), ]);
@@ -183,11 +171,7 @@ mapping query_racial_innate(string subrace)
         break;
 
     case "szarkai":
-        return (["dancing lights" : (["type" : "spell", "casting level" : 0.5,
-                                      "daily uses" : 1, "delay" : 1, "uses left" : 1,
-                                      "refresh time" : -1, "level required" : 0,
-                                      "class specific" : 0]),
-                 "darkness" : (["type" : "spell", "casting level" : 0.5,
+        return (["darkness" : (["type" : "spell", "casting level" : 0.5,
                                 "daily uses" : 1, "delay" : 1, "uses left" : 1,
                                 "refresh time" : -1, "level required" : 0,
                                 "class specific" : 0]),

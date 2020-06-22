@@ -37,19 +37,19 @@ string *restricted_deities(string subrace) {
 }
 
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
-    if(!subrace || subrace == "") return ({ 0, 0, 2, 0, 0, -2 });
+    if(!subrace || subrace == "") return ({ 0, 0, 2, 2, 0, -2 });
     switch(subrace) {
-      case "gold dwarf": return ({ 0, -2, 2, 0, 0, 0 }); break;
-      case "duergar": case "gray dwarf": return ({ 0, 0, 2, 0, 0, -2 }); break;
-      default: return ({ 0, 0, 2, 0, 0, -2 }); break; //shield dwarf is default
+      case "gold dwarf": return ({ 0, -2, 2, 0, 2, 0 }); break;
+      case "duergar": case "gray dwarf": return ({ 0, 0, 2, 0, 2, -2 }); break;
+      default: return ({ 0, 0, 2, 2, 0, -2 }); break; //shield dwarf is default
     }
 }
 
 mapping skill_mods(string subrace) {
-    if(!subrace || subrace == "") return ([]);
+    if(!subrace || subrace == "") return (["perception" : 2]);
     switch(subrace) {
       case "duergar": case "gray dwarf": return ([ "stealth" : 2, "perception" : 2 ]); break;
-      default: return ([]); break;
+      default: return (["perception" : 2]); break; //gold and shield dwarves get 2 perception
     }
 }
 
