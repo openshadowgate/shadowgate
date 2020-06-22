@@ -2105,7 +2105,7 @@ void define_clevel()
 
     if (FEATS_D->usable_feat(caster, "eldritch conditioning")) {
         if (spell_type == caster->query("eldritch_knight_base_class")) {
-            clevel = caster->query_character_level();
+            clevel = caster->query_base_character_level();
         }
     }
 
@@ -2165,7 +2165,7 @@ void define_clevel()
     }
 
     if (FEATS_D->usable_feat(caster, "ragecaster")) {
-        clevel = caster->query_character_level();
+        clevel = caster->query_base_character_level(); // CHECK ME!
         if (caster->query_property("raged")) {
             clevel += 3;
         }
