@@ -44,9 +44,6 @@ void create() {
 void do_bad_pkill(object attacker, object victim) {
     // if attacker is collecting a bounty on victim, do nothing
     if (legal_bounty(victim, attacker)) return;
-    if (good_bounty(victim, attacker)) return;
-    if (evil_bounty(victim, attacker)) return;
-    if (neutral_bounty(victim, attacker)) return;
     if (personal_bounty(attacker, victim)) return;
 }
 
