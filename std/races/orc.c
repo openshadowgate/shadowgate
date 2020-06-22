@@ -47,9 +47,9 @@ mapping skill_mods(string subrace) {
 int level_adjustment(string subrace) {
     if(!subrace || subrace == "") return 0;
     switch(subrace) {
-      case "mountain orc": return 1; break;
-      case "orog": return 2; break;
-      case "tanarukk": return 2; break;
+      case "mountain orc": return 0; break;
+      case "orog": return 0; break;
+      case "tanarukk": return 0; break;
       default: 0; break;
     }
 }

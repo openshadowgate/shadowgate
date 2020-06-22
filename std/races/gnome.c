@@ -73,8 +73,8 @@ int level_adjustment(string subrace)
         return 0;
     }
     switch (subrace) {
-    case "svirfneblin": case "deep gnome": return 3; break;
-    case "trixie":return 1; break;
+    case "svirfneblin": case "deep gnome": return 0; break;
+    case "trixie":return 0; break;
     default: return 0; break;
     }
 }

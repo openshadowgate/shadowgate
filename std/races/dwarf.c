@@ -56,7 +56,7 @@ mapping skill_mods(string subrace) {
 int level_adjustment(string subrace) {
     if(!subrace || subrace == "") return 0;
     switch(subrace) {
-      case "duergar": case "gray dwarf": return 1; break;
+      case "duergar": case "gray dwarf": return 0; break;
       default: return 0; break;
     }
 }
