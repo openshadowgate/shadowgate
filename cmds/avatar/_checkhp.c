@@ -31,12 +31,17 @@ int cmd_checkhp(string str)
 
     level = (int)targ->query_base_character_level(); // *FIXME* 
 
+    str = "Rolls: ";
     x = 30;
     for(i=1;i<level+1;i++)
     {
         x += rolls[i];
+        str += (string)rolls[i];
+        if (1 < i < (level+1) ) str += " [" + i + "], ";
+
     }
 
+    tell_object(TP,"%^MAGENTA%^"+str+".");
     tell_object(TP,"%^MAGENTA%^Base rolls before mods: %^RESET%^"+x+"");
 
     tmp = (int)targ->query_stats("constitution");
