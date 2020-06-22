@@ -80,7 +80,7 @@ int level_adjustment(string subrace) {
        subrace == "fire genasi" ||
        subrace == "water genasi" ||
        subrace == "dhampir")
-        return 1;
+        return 0;
     return 0;
 }
 
