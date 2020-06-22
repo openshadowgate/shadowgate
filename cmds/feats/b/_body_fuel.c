@@ -59,8 +59,9 @@ void execute_feat()
         return;
     }
 
-    clevel = max(({ caster->query_character_level("psion"),
-                    caster->query_character_level("psywarrior") }));
+    clevel = max(({ caster->query_class_level("psion"),
+                    caster->query_class_level("psywarrior") }));
+    // Fix for using full caster level instead of class level 06/21/2020 -- garrett
 
     caster->set_property("using instant feat", 1);
     return;
