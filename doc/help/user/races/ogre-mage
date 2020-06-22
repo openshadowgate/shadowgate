@@ -1,10 +1,10 @@
 %^BOLD%^%^BLUE%^Ogre-mage:
 
-%^BOLD%^%^BLUE%^Level adjustment: %^RESET%^3 (requires an account with a lvl 30 character)
-%^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 constitution, +2 wisdom
+%^BOLD%^%^BLUE%^Level adjustment: %^RESET%^0 (requires an account with a lvl 30 character)
+%^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 constitution, +2 wisdom, -2 charisma
 %^BOLD%^%^BLUE%^Skill adjustments: %^RESET%^+2 endurance
-%^BOLD%^%^BLUE%^Misc bonuses: %^RESET%^+4 natural armor
-%^BOLD%^%^BLUE%^Innate spells: %^RESET%^fly, darkness, sleep, cone of cold
+%^BOLD%^%^BLUE%^Misc bonuses: %^RESET%^+2 natural armor
+%^BOLD%^%^BLUE%^Innate spells: %^RESET%^levitate
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^LN, LE, NE
 %^BOLD%^%^BLUE%^Classes restricted: %^RESET%^cleric, bard, ranger, psion, psywarrior,  paladin, monk, druid
