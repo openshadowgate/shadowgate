@@ -297,10 +297,11 @@ int advance(object tp, string myclass)
         file->advanced_func(tp);
     }
 
-    // if(tp->query("new_class_type")) { check = tp->query_character_level(); }
-    // if(tp->query("new_class_type")) { check = tp->query_character_level(); }
+    // if(tp->query("new_class_type")) { check = tp->query_adjusted_character_level(); }
+    // if(tp->query("new_class_type")) { check = tp->query_adjusted_character_level(); }
     // else { check = lev; }
-    // Not sure why this was here -- garrett 06/21/2020
+    // Not sure why this was here --  marking them as adjusted to clear
+    //     them off my list  -- garrett 06/22/2020
 
     if (!interactive(tp))
         return 0;
