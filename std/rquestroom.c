@@ -42,7 +42,7 @@ int read_list(string str)
 
     if(!str || str!="list") return 0;
 
-    character_level = (int)TP->query_character_level();
+    character_level = (int)TP->query_base_character_level();
     switch(character_level) {
         case 1..14: QUEST_D = "/daemon/quests_low"; break;
         case 15..24: QUEST_D = "/daemon/quests_mid"; break;
@@ -134,7 +134,7 @@ int claim(string str){
     if(TP->query_property("bloodshard")+1800>time()) return notify_fail("Energies of bloodshard prevent you from claiming a reward.");
     if(waiting) return notify_fail("Please wait a moment while I clean up this mess the last person left.\n");
 
-    character_level = (int)TP->query_character_level();
+    character_level = (int)TP->query_base_character_level();
     switch(character_level) {
         case 1..14: QUEST_D = "/daemon/quests_low"; break;
         case 15..24: QUEST_D = "/daemon/quests_mid"; break;

@@ -395,13 +395,13 @@ nomask string query_position()
 nomask int query_level()
 {
     int i,x,tmp;
-    if(TO->query("new_class_type") && !avatarp(TO)) { return (int)TO->query_character_level(); }
+    if(TO->query("new_class_type") && !avatarp(TO)) { return (int)TO->query_base_character_level(); }
     if (!mlevels || mlevels  == ([]))
     {
         if (query_classes() == ({})) return 0;
         mlevels = ([query_classes()[0]:level]);
     }
-    if(avatarp(TO) && mlevels[query_class()] < 150) { return (int)TO->query_character_level(); }
+    if(avatarp(TO) && mlevels[query_class()] < 150) { return (int)TO->query_base_character_level(); }
     return mlevels[query_class()];
 }
 
@@ -1840,7 +1840,7 @@ int query_death_flag()
 {
     if(!avatarp(TO) && query("death level"))
     {
-        if(query_character_level() >= (int)query("death level"))
+        if(query_base_character_level() >= (int)query("death level"))
         {
             set_death_age(0);
             delete("death level");

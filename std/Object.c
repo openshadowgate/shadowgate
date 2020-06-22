@@ -416,7 +416,7 @@ mixed query_property(string prop)
 
     if (prop == "untrippable") {
         if (FEATS_D->usable_feat(TO, "shield master")) {
-            num += TO->query_character_level();
+            num += TO->query_base_character_level();
             num += 25;
         }
     }

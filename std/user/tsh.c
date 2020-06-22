@@ -122,7 +122,7 @@ string write_prompt()
         }
 
         {
-            int lvl = query_character_level();
+            int lvl = query_adjusted_character_level();
             if(lvl>1&&lvl<100)
             {
                 int expcurlvl = total_exp_for_level(lvl);
