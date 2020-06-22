@@ -81,7 +81,7 @@ void shall_I_feed(string str){
   {
     return;
   }
-  ETO->set_exp(total_exp_for_level(TP->query_character_level() - 1));
+  ETO->set_exp(total_exp_for_level(TP->query_adjusted_character_level() - 1));
   ETO->resetLevelForExp(0); 
   tell_object(ETO, "You allow the point of the " + query_short() 
     + "%^RESET%^ to pierce your %^BOLD%^%^MAGENTA%^flesh%^RESET%^, and it"
