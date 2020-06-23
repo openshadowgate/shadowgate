@@ -25,14 +25,14 @@ create() {
     set_weight(1);
     set_value(500);
     set_type("ring");
-    set_limbs(({"right hand","left hand"}));
+    set_limbs(({"right hand"}));
     set_ac(0);
     set_wear((:TO,"wearit":));
     set_remove((:TO,"removeit":));
 }
 
 int wearit() {
-    if((int)ETO->query_level() < 20) {    
+    if((int)ETO->query_level() < 20) {
         write("The magic of the ring rejects you!");
 	TO->remove();
         return 0;
@@ -44,7 +44,7 @@ int wearit() {
     }
     write("%^YELLOW%^A strange energy begins to flow through your body!%^RESET%^");
     tell_room(environment(ETO), "%^YELLOW%^"+TPQCN+" slips on a golden ring.%^RESET%^"
-    ,ETO);	
+    ,ETO);
     ETO->set_property("demongate flying",1);
     uses = uses - 1;
     return 1;
@@ -53,7 +53,7 @@ int wearit() {
 int removeit() {
     if(uses < 1) {
 	write("%^YELLOW%^As you remove the golden ring it vanishes!%^RESET%^");
-	say("%^YELLOW%^As "+ETOQCN+" removes a golden ring, it vanishes!%^RESET%^",ETO);   
+	say("%^YELLOW%^As "+ETOQCN+" removes a golden ring, it vanishes!%^RESET%^",ETO);
 	TO->remove();
     }
     ETO->remove_property("demongate flying",1);
