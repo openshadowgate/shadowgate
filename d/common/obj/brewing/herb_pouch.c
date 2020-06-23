@@ -13,7 +13,7 @@ void create()
              "waist.  Upon looking inside, you see that what is a " +
              "simple design from the outside is actually a complicated " +
              "series of pouches and slots on the inside.  It looks as " +
-             "though fifty separate packets of herbs or other alchemical " +
+             "though three hundred separate packets of herbs or other alchemical " +
              "additives could be held inside this one pouch.");
     set_id(({ "pouch", "leather pouch", "herb pouch", "leather herb pouch" }));
     set_max_internal_encumbrance(300); //sextupling this 4/5/2020, Odin
