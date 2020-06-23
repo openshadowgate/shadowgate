@@ -7,7 +7,7 @@ void create() {
     feat_type("permanent");
     feat_category("Presence");
     feat_name("force of personality");
-    feat_desc("This passive feat grants an additional amount  equivalent to the character's charisma bonus, to all of their saving throws.  This is capped at five.");
+    feat_desc("This passive feat grants an additional amount equivalent to the character's charisma bonus (maximum +5), to all of their saving throws.");
     feat_prereq("Indomitable");
     permanent(1);
     set_required_for(({"unyielding soul","leadership"}));
