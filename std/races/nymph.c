@@ -28,7 +28,7 @@ int natural_AC(string subrace) { return 2; }
 
 int sight_bonus(string subrace) { return 3; }
 
-mapping daily_uses(string subrace) { return (["telepathic bond":1, "charm person":1]); }
+mapping daily_uses(string subrace) { return (["telepathic bond":1]); }
 
 mapping query_racial_innate(string subrace) {
 	return (["telepathic bond" : (["type" : "spell", "daily uses" : -1, "level required" : 0,]),"charm person" : (["type" : "spell", "daily uses" : -1, "level required" : 0,])]);

@@ -3,7 +3,7 @@
 %^BOLD%^%^BLUE%^Level adjustment: %^RESET%^0 (requires an account with a lvl 30 character)
 %^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^-2 strength, -2 constitution, +2 intelligence, +4 charisma
 %^BOLD%^%^BLUE%^Skill adjustments: %^RESET%^+2 spellcraft
-%^BOLD%^%^BLUE%^Innate spells: %^RESET%^ telepathic bond, charm person
+%^BOLD%^%^BLUE%^Innate spells: %^RESET%^ telepathic bond, charm person*
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^NG, CG, CN
 %^BOLD%^%^BLUE%^Genders allowed: %^RESET%^female
@@ -15,5 +15,7 @@
 Many have lost their lives in vain search of the beauty of the nymph, and many more to the madness and obsession their grace has upon minds and bodies unprepared for their companionship. Yet the nymph herself is not a cruel creature—a guardian of nature's purest places and most beautiful realms, she treats those who respect her and her abode with kindness, and may even favor someone who takes her fancy with magical gifts. Yet those who would seek to abuse or harm her or her home quickly find that behind her beauty is a fierce protector more than capable of defending her charge.
 
 Nymph are creatures of the feywild, and thus don't understand mortality. Their natural curiosity leads them out of the feywild into mortal realm, but they prefer to keep to nature, quietly studying beauty of the world, rarely venturing outside of the communities of fey creatures. Of mortal races they mostly speak - of course - to elves, less often to gnomes, halflings. They are afraid of what might come from humans and dwarves, despise drow and all fell races. However, due to their playfulness, curiosity and carefree nature, the strongly individual nymph can be found all over supporting a wide variety of different causes.
+
+*not yet implemented
 
 %^BOLD%^%^BLUE%^See also: %^RESET%^feywild
