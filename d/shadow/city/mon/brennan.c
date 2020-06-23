@@ -25,7 +25,7 @@ void create() {
                     "iced green tea latte",
                     "strawberry smoothie",
                     "vanilla steamer",
-                    "a small striped mug",
+                    "drinking chocolate",
                     "blueberry muffin",
                     "coffee cake",
                     "cinnamon bun",
@@ -65,7 +65,7 @@ void create() {
                     "A huge blueberry muffin",
                     "A huge slice of coffee cake",
                     "A sticky cinnamon bun",
-                    "A bowl of steaming oatmeal", 
+                    "A bowl of steaming oatmeal",
                     }));
     set_menu_long(({
                 "The scent of this strong, steaming coffee is perfect. It is served in a white ceramic mug.",
@@ -78,8 +78,8 @@ void create() {
                     "A large muffin filled with blueberries and topped with sugary crumbs sit on a black and white striped plate, looking delicious.",
                     "This rich cake is served on a black and white striped plate, and looks incredibly appetizing. It is two layers, with a little taste of heaven in-between. The top is overflowing with crumbs.",
                     "Drizzled with icing and coated in thick, sweet, gooey cinnamon, this huge sticky bun is not for the faint of heart. It looks absolutely delicious.",
-                    "This hearty and hot oatmeal is served in a white bowl with a black rim, alongside a small cup of blueberries and strawberries for some additional flavor.", 
-                    })); 
+                    "This hearty and hot oatmeal is served in a white bowl with a black rim, alongside a small cup of blueberries and strawberries for some additional flavor.",
+                    }));
     set_my_mess(({"The strong coffee makes you feel alive.",
                     "The rich, slightly bitter little espresso shot packs quite a punch.",
                     "The thick drink is warm and delicious.",
@@ -103,8 +103,8 @@ void create() {
                     "polishes off every last crumb of a blueberry muffin.",
                     "finishes the whole huge slice of cake.",
                     "finishes a sticky cinnamon bun and licks lips clean.",
-                    "finishes off the warm bowl of oatmeal.", 
-                    })); 
+                    "finishes off the warm bowl of oatmeal.",
+                    }));
 }
 
 void receive_given_item(object ob){
@@ -132,4 +132,3 @@ awk -F '|' '{printf("\"%s\",\n",$2)}' |sed -r 's/  +/ /g;s/" /"/;s/ "/"/'
    | Cinnamon Bun         | food       |    20 | A sticky cinnamon bun                     | Drizzled with icing and coated in thick, sweet, gooey cinnamon, this huge sticky bun is not for the faint of heart. It looks absolutely delicious.                                            | The icing leaves your lips sweet and sticky.                                     | finishes a sticky cinnamon bun and licks lips clean. |
    | Hot Oatmeal          | food       |     5 | A bowl of steaming oatmeal                | This hearty and hot oatmeal is served in a white bowl with a black rim, alongside a small cup of blueberries and strawberries for some additional flavor.                                     | The oatmeal is quite warm and filling, and leaves you feeling ready for the day. | finishes off the warm bowl of oatmeal.               |
  */
-
