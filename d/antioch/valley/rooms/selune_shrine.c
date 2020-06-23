@@ -1,5 +1,6 @@
 //lysara_shrine.c - Designed by Kiya, coded by Circe 2/4/04
 //edited by ~Circe~ 6/10/14 to function as a temple since other shrines do
+//updated to remove references to Selune
 
 #include <std.h>
 #include <daemons.h>
@@ -36,7 +37,7 @@ void create() {
            "with %^WHITE%^%^BOLD%^silver%^RESET%^%^CYAN%^.  Behind the altar upon "+
            "the back wall is a simple tapestry again in %^BLACK%^%^BOLD%^black"+
            "%^RESET%^%^CYAN%^-and-%^WHITE%^%^BOLD%^silver%^RESET%^%^CYAN%^, stitched "+
-           "carefully with the words of the Selunite charge.%^RESET%^\n"
+           "carefully with the words of the Lysaran charge.%^RESET%^\n"
         );
         set("night long","%^BLUE%^This small temple has been formed of "+
            "what looks like %^ORANGE%^pale-brown sandstone%^BLUE%^.  "+
@@ -60,7 +61,7 @@ void create() {
            "material, trimmed with %^WHITE%^%^BOLD%^silver%^RESET%^%^BLUE%^.  "+
            "Behind the altar upon the back wall is a simple tapestry again in "+
            "%^BLACK%^%^BOLD%^black%^RESET%^%^BLUE%^-and-%^WHITE%^%^BOLD%^silver"+
-           "%^RESET%^%^BLUE%^, stitched carefully with the words of the Selunite "+
+           "%^RESET%^%^BLUE%^, stitched carefully with the words of the Lysaran "+
            "charge.%^RESET%^");
         set_smell("default","Fresh scents of the surrounding meadows fill the room, "+
            "blending with the dusky smell of stone.");
