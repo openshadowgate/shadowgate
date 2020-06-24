@@ -2,28 +2,28 @@
 #include "../inherits/area_stuff.h"
 inherit FFCE;
 
-void create() 
+void create()
 {
     ::create();
     set_long(TO->query_long()+" %^BOLD%^%^BLUE%^There is a %^RESET%^%^MAGENTA%^large crack"+
     "%^RESET%^%^BOLD%^%^BLUE%^ on the east wall and on the west wall of the cellar here. The cellar appears to end here. "+
     "An opening to the northwest offers the only exit.%^RESET%^");
     set_exits( ([ "northwest" : FFCR"7"]) );
-    TO->add_item(({"crack", "east crack", "west crack", "large crack", 
+    TO->add_item(({"crack", "east crack", "west crack", "large crack",
     "large cracks"}), "%^RESET%^%^MAGENTA%^These cracks, upon closer inspection, appear to open behind the wall "+
-    "into what appear to be dirt tunnels.  You could %^RESET%^squeeze%^MAGENTA%^ into either "+
+    "into what appear to be dirt tunnels.  You could %^RESET%^squeeze into %^MAGENTA%^either "+
     "one of them if you were bold enough to do so. You could also possible %^RESET%^peer%^MAGENTA%^"+
     " into them to get a better look at what lies on the other side.%^RESET%^");
 }
 
 void init()
 {
-    ::init();   
+    ::init();
     add_action("peer_function","peer");
     add_action("squeeze_function", "squeeze");
 }
 
-int do_peer_stuff(string where) 
+int do_peer_stuff(string where)
 {
     int i;
     string target_room, targ;
@@ -32,7 +32,7 @@ int do_peer_stuff(string where)
     if(where != "east crack" && where != "west crack") return 0;
     targ = explode(where, " ")[0];
     if(TP->query_bound() || TP->query_unconcious() || TP->query_paralyzed()
-    || TP->query_tripped()) 
+    || TP->query_tripped())
     {
         TP->send_paralyzed_message("info",TP);
         return 1;
@@ -55,19 +55,19 @@ int do_peer_stuff(string where)
     {
         if(!objects_in_room[i]->query_invis())
         {
-            //spiders might notice you peering into the room and come through the 
+            //spiders might notice you peering into the room and come through the
             //crack after you? - Saide
             if(!objectp(TP)) return 1;
             tell_object(TP,objects_in_room[i]->query_short());
             spider = objects_in_room[i];
-            if(spider->id("feyrenspidermob")) 
+            if(spider->id("feyrenspidermob"))
             {
-                if(!random(3) && !TP->query_invis()) 
+                if(!random(3) && !TP->query_invis())
                 {
                     tell_object(TP, spider->QCN+ " seems to notice "+
                     "your gaze and climbs through the crack on the "+
                     targ + " wall after you!%^RESET%^");
-					
+
                     tell_room(TO, spider->QCN + " climbs into the room "+
                     "through the crack on the "+targ+" wall and "+
                     "attacks "+TPQCN+"!%^RESET%^", TP);
@@ -75,7 +75,7 @@ int do_peer_stuff(string where)
                     spider->move(TO);
                     spider->force_me("kill "+TPQCN);
                 }
-            }       
+            }
         }
     }
     return 1;
@@ -87,14 +87,14 @@ int squeeze_function(string str, string what, string where)
     string targ, ntarg, targ_room;
     if(!str) return 0;
     if(!objectp(TP)) return 0;
-    if(sscanf(str, "%s %s", what, where)) 
+    if(sscanf(str, "%s %s", what, where))
     {
         if(what != "into") return 0;
         where = lower_case(where);
-        if(where != "east crack" && where != "west crack") return 0;	
+        if(where != "east crack" && where != "west crack") return 0;
         targ = explode(where, " ")[0];
         if(TP->query_bound() || TP->query_unconcious() || TP->query_paralyzed()
-        || TP->query_tripped()) 
+        || TP->query_tripped())
         {
             TP->send_paralyzed_message("info",TP);
             return 1;
@@ -104,8 +104,8 @@ int squeeze_function(string str, string what, string where)
         tell_object(TP, "%^BOLD%^%^MAGENTA%^You carefully squeeze "+
         "through the crack on the "+targ+" wall into the dirt tunnel "+
         "beyond.%^RESET%^");
-				
-        if(!TP->query_invis()) 
+
+        if(!TP->query_invis())
         {
             tell_room(TO, TPQCN + " %^BOLD%^%^MAGENTA%^carefully squeezes "+
             "through the crack on the "+targ+" wall!%^RESET%^", TP);
@@ -127,7 +127,7 @@ int squeeze_function(string str, string what, string where)
     }
     return 0;
 }
-		
+
 
 int peer_function(string str,string what,string where)
 {
@@ -136,7 +136,7 @@ int peer_function(string str,string what,string where)
     {
         if(what != "into") return 0;
         where = lower_case(where);
-        if(where == "east crack" || where == "west crack") 
+        if(where == "east crack" || where == "west crack")
         {
             do_peer_stuff(where);
             return 1;
