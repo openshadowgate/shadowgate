@@ -384,6 +384,39 @@ void redo_my_languages() {
   return;
 }
 
+void redo_active_class()
+{
+    string * classes;
+    string s;
+    string classfile;
+    string act_class_to_set;
+
+    classes = TO->query_classes();
+
+    foreach(s in classes) {
+
+        if (!(TO->query_class_level(s) % 10)) {
+            continue;
+        } else {
+            act_class_to_set = s;
+
+            classfile = DIR_CLASSES + "/" + s;
+
+            if (classfile->is_prestige_class()) {
+                continue;
+            } else {
+                break;
+            }
+        }
+
+    }
+
+    if (act_class_to_set) {
+        TO->set("active_class", act_class_to_set);
+        tell_object(TO,"%^BOLD%^%^RED%^Your active class had been set to: " + act_class_to_set);
+    }
+}
+
 void new_hm_cap() {
    int posxxx;
    if(!objectp(TP)) { return; }
@@ -1303,6 +1336,8 @@ void setup() {
     convert_to_new_class_type();
     redo_my_languages();
     convert_relationships();
+
+    redo_active_class();
 
     if (TO->query("relationship_profile")) {
         if (objectp(to_object("/daemon/description_d"))) {
