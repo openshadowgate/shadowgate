@@ -16,7 +16,7 @@ string *races_allowed()
 
 mapping* stat_requirements()
 {
-    return (["constitution" : 16]);
+    return (["constitution" : 18]);
 }
 
 mapping innate_spells()

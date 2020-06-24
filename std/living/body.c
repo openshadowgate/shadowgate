@@ -722,11 +722,11 @@ int query_resistance_percent(string res)
             return -25;
         }
         if (res == "cold") {
-            return 25;
+            return 50;
         }
         if (TO->is_vampire()) {
             if (res == "electricity") {
-                return 25;
+                return 50;
             }
             if (res == "divine") {
                 return -25;
