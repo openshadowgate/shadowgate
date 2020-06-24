@@ -411,9 +411,10 @@ void redo_active_class()
 
     }
 
-    if (act_class_to_set) {
+    if (act_class_to_set && act_class_to_set != query("active_class")) {
         TO->set("active_class", act_class_to_set);
         tell_object(TO,"%^BOLD%^%^RED%^Your active class had been set to: " + act_class_to_set);
+        tell_object(TO,"%^BOLD%^%^RED%^Use <advance> if you're underleveled.");
     }
 }
 
