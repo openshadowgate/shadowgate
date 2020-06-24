@@ -20,8 +20,12 @@ void create()
     set_shape_bonus("dexterity", 2);
     set_shape_bonus("constitution", 2);
     set_shape_bonus("wisdom", 2);
-    set_shape_bonus("cold resistance percent", 15);
-    set_shape_bonus("silver resistance percent", -50);
+
+    set_shape_bonus("damage bonus",3);
+    set_shape_bonus("attack bonus",3);
+
+    set_shape_bonus("cold resistance percent", 14);
+    set_shape_bonus("silver resistance percent", -33);
     set_shape_race("werewolf");
     set_shape_profile("werewolf_hybrid_999");
 }

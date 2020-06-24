@@ -19,10 +19,10 @@ void create()
     set_can_talk(0);
     set_shape_race("wolf");
     set_shape_profile("vampire_wolf_999");
-    set_shape_bonus("perception",2);
+    set_shape_bonus("perception",4);
     set_shape_bonus("survival",4);
-    set_shape_bonus("cold resistance",5);
-    set_shape_bonus("sight bonus",3);
+    set_shape_bonus("cold resistance",10);
+    set_shape_bonus("sight bonus",4);
     set_shape_height(30+random(12));
     set_shape_weight(90+random(50));
     set_shape_mastery_feat("knockdown");

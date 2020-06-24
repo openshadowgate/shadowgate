@@ -19,7 +19,7 @@ void create()
     set_shape_profile("weretiger_tiger_999");
     set_shape_bonus("perception", 4);
     set_shape_bonus("survival", 2);
-    set_shape_bonus("fire resistance percent", 5);
+    set_shape_bonus("fire resistance percent", 15);
     set_shape_bonus("silver resistance percent", -33);
     set_shape_bonus("sight bonus", 3);
     set_shape_bonus("damage bonus", 3);

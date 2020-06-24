@@ -719,20 +719,20 @@ int query_resistance_percent(string res)
     }
     if (TO->is_undead()) {
         if (res == "fire") {
-            return -33;
+            return -25;
         }
         if (res == "cold") {
-            return 33;
+            return 25;
         }
         if (TO->is_vampire()) {
             if (res == "electricity") {
-                return 33;
+                return 25;
             }
             if (res == "divine") {
-                return -33;
+                return -25;
             }
             if (res == "silver") {
-                return -33;
+                return -25;
             }
         }
     }

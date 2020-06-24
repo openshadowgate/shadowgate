@@ -20,7 +20,7 @@ void create() {
     set_shape_race("bird");
     set_shape_profile("vampire_bat_999");
     set_shape_bonus("sight bonus",5);
-    set_shape_bonus("dexterity",2);
+    set_shape_bonus("dexterity",4);
     set_shape_height(10+random(5));
     set_shape_weight(10+random(20));
 }

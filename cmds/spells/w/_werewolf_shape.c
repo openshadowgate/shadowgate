@@ -25,22 +25,13 @@ void create()
 int preSpell()
 {
     object shape;
-    if(objectp(shape = caster->query_property("shapeshifted")) ||
-       objectp(shape = caster->query_property("altered")))
-    {
-        tell_object(caster,"You are already in an alternative form!");
+    if (objectp(shape = caster->query_property("shapeshifted")) ||
+        objectp(shape = caster->query_property("altered"))) {
+        tell_object(caster, "You are already in an alternative form!");
         return 0;
     }
-    if (caster->query_property("raged") ||
-        caster->query_property("transformed") ||
-        caster->query_property("dance-of-cuts"))
-    {
-        tell_object(caster,"Powerful transformation magic already affecting you.");
-        return 0;
-    }
-    if(member_array(arg,valid_forms())==-1)
-    {
-        tell_object(caster,"Invalid form, valid forms are: "+implode(valid_forms(),", "));
+    if (member_array(arg, valid_forms()) == -1) {
+        tell_object(caster, "Invalid form, valid forms are: " + implode(valid_forms(), ", "));
         return;
     }
     return 1;
@@ -61,8 +52,6 @@ void spell_effect(int prof)
         shape = caster->query_property("altered");
     }
 
-    bonus = clevel / 4 + 1;
-    caster->set_property("dance-of-cuts", 1); //Full BAB
     spell_successful();
     addSpellToCaster();
 }
@@ -71,7 +60,6 @@ void dest_effect()
 {
     object shape;
     if (objectp(caster)) {
-        caster->set_property("dance-of-cuts", -1);
         if (caster->query_property("shapeshifted")) {
             shape = caster->query_property("shapeshifted");
         } else {
