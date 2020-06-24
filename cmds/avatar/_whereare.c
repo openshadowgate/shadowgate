@@ -28,6 +28,18 @@ string filter_colors(string str) {
   return str;
 }
 
+string my_strip_colors(string str)
+{
+    string ret;
+    mapping Uncolor = ([ "RESET" : "", "BOLD" : "", "ULINE" : "", "FLASH" : "", "BLACK" : "", "RED" : "",
+                         "BLUE" : "", "CYAN" : "", "MAGENTA" : "", "ORANGE" : "", "YELLOW" : "",
+                         "GREEN" : "", "WHITE" : "", "BLACK" : "", "B_RED" : "", "B_ORANGE" : "",
+                         "B_YELLOW" : "", "B_BLACK" : "", "B_CYAN" : "", "B_WHITE" : "", "B_GREEN" : "",
+                         "B_MAGENTA" : "", "STATUS" : "", "WINDOW" : "", "INITTERM" : "", "B_BLUE" : "",
+                         "ENDTERM" : ""]);
+    ret = terminal_colour(str, Uncolor);
+    return ret;
+}
 int cmd_whereare(string arguments) {
   object *peo, *players, *reported, ob;
   string loc, str, name, temp, *targetnames;
@@ -74,7 +86,8 @@ int cmd_whereare(string arguments) {
   while (sizeof(players)) {
     if ((!str = environment(players[0])->query_short()) || (str ==""))
       str = "Unnamed Room!";
-    str = filter_colors(replace_string(str,"\n",""));
+//    str = filter_colors(replace_string(str,"\n",""));
+    str = my_strip_colors(str);
     undeads = strlen(str);
     loc = "[" +file_name(environment(players[0])) + "]";
     snakes = strlen(loc);
