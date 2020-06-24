@@ -785,9 +785,9 @@ int query_lowest_level()
 
     if (TO->query("new_class_type") && !avatarp(TO)) {
         if (intp(TO->query("negative levels"))) {
-            return query_character_level() + (int)TO->query("negative level");
+            return query_base_character_level() + (int)TO->query("negative level");
         }
-        return query_character_level();
+        return query_base_character_level();
     }
 
     cls = query_classes();
@@ -819,7 +819,7 @@ int true_query_highest_level()
     }
 
     if (TO->query("new_class_type") && !avatarp(TO)) {
-        return query_character_level();
+        return query_base_character_level();
     }
 
     hold = mlevels[classes[0]];
@@ -847,9 +847,9 @@ int query_highest_level()
 
     if (TO->query("new_class_type") && !avatarp(TO)) {
         if (intp(TO->query("negative levels"))) {
-            return query_character_level() + (int)TO->query("negative levels");
+            return query_base_character_level() + (int)TO->query("negative levels");
         } else {
-            return query_character_level();
+            return query_base_character_level();
         }
     }
 
@@ -1010,7 +1010,7 @@ varargs void set_XP_tax(int percent, int duration, string tax)
         _IRS["tax"]["death"]["fall off"] = 7200;
         break;
     case "improvement":
-        cost = total_exp_for_level(query_character_level() + 1);
+        cost = total_exp_for_level(query_adjusted_character_level() + 1);
         if ((_IRS["tax"]["improvement"]["amount"] + percent) > cost && percent > 0) {
             return -1;
         }
@@ -1291,9 +1291,10 @@ int resolve_auto_tax(int exp)
         return exp;
     }
     if ((int)TO->query_property("ignore tax")) {
-        return exp;                                       //installed to stop imm-granted exp going awry. Nienne, 04/10
+        return exp;
+        //installed to stop imm-granted exp going awry. Nienne, 04/10
     }
-    if (!intp(level = query_character_level())) {
+    if (!intp(level = query_adjusted_character_level())) {
         return exp;
     }
     if (!level) {

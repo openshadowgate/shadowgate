@@ -50,8 +50,8 @@ public int levelcheck(object first, object second)
 
     if(first == second) return 3;
 
-    lvl = (int)first->query_character_level();
-    lvl2 = (int)second->query_character_level();
+    lvl = (int)first->query_base_character_level();
+    lvl2 = (int)second->query_base_character_level();
 
     if(lvl2 > lvl) { low = lvl; }
     else { low = lvl2; }

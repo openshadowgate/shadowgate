@@ -282,7 +282,7 @@ void make_new_hitpoint_rolls(object obj)
 
     hp = 30;
     rolls = (int*)obj->query("hp_array");
-    for(i=0;i<(int)obj->query_character_level()+1;i++)
+    for(i=0;i<(int)obj->query_base_character_level()+1;i++)
     {
         hp += rolls[i];
     }
@@ -1809,7 +1809,7 @@ void resetLevelForExp(int expLoss)
 
         my_levels = TO->query_levels();
 
-        while (total_exp_for_level(query_character_level()) > query_exp() && (my_levels[active_class] > 1)) {
+        while (total_exp_for_level(query_adjusted_character_level()) > query_exp() && (my_levels[active_class] > 1)) {
             hp_loss = ADVANCE_D->get_hp_bonus(active_class,
                                               query_base_stats("constitution"),
                                               query_base_character_level(), TO);
@@ -1907,14 +1907,14 @@ nomask void die()
     {
         if((int)TO->query("death level"))
         {
-            if((int)TO->query_character_level() > (int)TO->query("death level"))
+            if((int)TO->query_base_character_level() > (int)TO->query("death level"))
             {
-                TO->set("death level",(int)TO->query_character_level());
+                TO->set("death level",(int)TO->query_base_character_level());
             }
         }
         else
         {
-            TO->set("death level",(int)TO->query_character_level());
+            TO->set("death level",(int)TO->query_base_character_level());
         }
     }
     death_age = player_age;
@@ -2322,7 +2322,7 @@ int query_prestige_level(string the_class)
 nomask int query_level() {
   int i,x,tmp;
 
-  if(TO->query("new_class_type") && !avatarp(TO)) { return (int)TO->query_character_level(); }
+  if(TO->query("new_class_type") && !avatarp(TO)) { return (int)TO->query_base_character_level(); }
 
   if (!mlevels || mlevels  == ([])) {
     if (query_classes() == ({}))
@@ -2330,7 +2330,7 @@ nomask int query_level() {
     mlevels = ([query_classes()[0]:level]);
   }
 
-  if(avatarp(TO) && mlevels[query_class()] < 150) { return (int)TO->query_character_level(); }
+  if(avatarp(TO) && mlevels[query_class()] < 150) { return (int)TO->query_base_character_level(); }
 
   return mlevels[query_class()];
 }
@@ -4355,7 +4355,7 @@ int query_death_flag()
     }
 
     if (query("death level")) {
-        if (query_character_level() >= (int)query("death level")) {
+        if (query_base_character_level() >= (int)query("death level")) {
             set_death_age(0);
             delete("death level");
         }

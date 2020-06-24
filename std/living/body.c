@@ -593,7 +593,7 @@ int query_max_hp_base()
     }
 
     if (TO->query("negative level") || intp("/daemon/user_d.c"->get_scaled_level(TO))) {
-        num += sum_array(TO->query("hp_array"), (int)TO->query_character_level());
+        num += sum_array(TO->query("hp_array"), (int)TO->query_base_character_level());
         num = WORLD_EVENTS_D->monster_modification_event(num, "health", TO);
         return num;
     }
@@ -701,7 +701,7 @@ int query_resistance(string res)
             if ((subrace == "ice" && res == "cold") ||
                 (subrace == "magma" && res == "fire") ||
                 (subrace == "ooze" && res == "acid")) {
-                myres += TO->query_character_level();
+                myres += TO->query_base_character_level();
             }
         }
     }

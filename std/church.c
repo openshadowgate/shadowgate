@@ -202,16 +202,16 @@ int pray()
 
     /* Punishment for non-newbies. */
     if (!newbiep(TP) &&
-        ((int)TP->query_character_level() > 6)) {
+        ((int)TP->query_base_character_level() > 6)) {
 
         int exploss, expdelta, exp, thelevel;
         int i;
         string myclass;
         int charlvl;
 
-        "/daemon/user_d.c"->scale_level_to(TP, TP->query_base_character_level());
+        "/daemon/user_d.c"->scale_level_to(TP, TP->query_adjusted_character_level());
         /* Subtracting exp to next level  */
-        thelevel = TP->query_character_level();
+        thelevel = TP->query_adjusted_character_level();
 
         if (TP->query("active_class")) {
             myclass = TP->query("active_class");

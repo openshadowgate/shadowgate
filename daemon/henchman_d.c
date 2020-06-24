@@ -140,7 +140,7 @@ int calculate_price(object player)
 
     penalty = has_penalty(player);
 
-    level = (int)player->query_character_level();
+    level = (int)player->query_base_character_level();
 
     if(level < 5) { return -1; }
 

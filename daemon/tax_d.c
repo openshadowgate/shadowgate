@@ -130,7 +130,7 @@ int resolve_auto_tax(int exp)
     if(avatarp(TO)) { return exp; }
     if(exp < 1) { return exp; }
     if((int)TO->query_property("ignore tax")) return exp; //installed to stop imm-granted exp going awry. Nienne, 04/10
-    if(!intp(level=query_character_level())) { return exp; }
+    if(!intp(level=query_base_character_level())) { return exp; }
     if(!level) { return exp; }
 
     time    = (int)TO->query_age();

@@ -435,7 +435,7 @@ int get_character_improvement_tax_percent(object who)
     int lev;
     if(!objectp(who))
         return 50;
-    lev = (int)who->query_character_level();
+    lev = (int)who->query_base_character_level();
     if(lev>20&&lev<51)
         ret = 50+50*lev/60;
     else
@@ -453,7 +453,7 @@ int set_character_improvement_tax_percent(object who, int perc)
     int base, lev;
     if(!objectp(who)) return 0;
     perc = to_int(perc);
-    lev = (int)who->query_character_level();
+    lev = (int)who->query_base_character_level();
     if(lev>20&&lev<51)
         base = 50+50*lev/60;
     else

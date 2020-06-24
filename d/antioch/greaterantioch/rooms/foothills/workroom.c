@@ -298,7 +298,7 @@ int go_wild(object room)
         for(i=0;i<sizeof(players);i++)
         {
             if(!objectp(players[i])) { continue; }
-            highest = (int)players[i]->query_character_level();
+            highest = (int)players[i]->query_adjusted_character_level();
             if(highest > num) { highest = num; }
             rand += highest;
         }

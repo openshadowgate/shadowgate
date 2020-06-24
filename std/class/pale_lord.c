@@ -141,7 +141,7 @@ int caster_level_calcs(object player, string the_class)
     int level;
     string base;
     if(!objectp(player)) { return 0; }
-    level = player->query_character_level();
+    level = player->query_base_character_level();
     level += player->query_class_level("pale_master");
     return level;
 }

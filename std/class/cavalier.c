@@ -64,7 +64,7 @@ void advanced_func(object player)
     int prof,level;
     if(!objectp(player)) { return; }
 
-    level = (int)player->query_character_level();
+    level = (int)player->query_base_character_level();
 
     player->set_guild_level("cavalier",(int)player->query_class_level("cavalier"));
 

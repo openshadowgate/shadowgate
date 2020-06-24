@@ -128,7 +128,7 @@ int resolve_auto_tax(object who, int exp)
     if(avatarp(who)) { return exp; }
     if(exp < 1) { return exp; }
     if((int)who->query_property("ignore tax")) return exp; //installed to stop imm-granted exp going awry. Nienne, 04/10
-    if(!intp(level=(int)who->query_character_level())) { return exp; }
+    if(!intp(level=(int)who->query_adjusted_character_level())) { return exp; }
     if(!level) { return exp; }
 
     time    = (int)who->query_age();
@@ -463,7 +463,7 @@ int query_lowest_level(){
   if(!mlevels ||mlevels == ([])) return 0;
    if(!classes || classes == ({})) return 0;
 
-   if(TO->query("new_class_type") && !avatarp(TO)) { return query_character_level(); }
+   if(TO->query("new_class_type") && !avatarp(TO)) { return query_base_character_level(); }
 
    cls = query_classes();
    hold = mlevels[cls[0]];
@@ -487,7 +487,7 @@ int true_query_highest_level(){
     if(!classes || !sizeof(classes)) return 0;
     if(!mlevels || mlevels == ([])) return 0;
 
-    if(TO->query("new_class_type") && !avatarp(TO)) { return query_character_level(); }
+    if(TO->query("new_class_type") && !avatarp(TO)) { return query_base_character_level(); }
 
     hold = mlevels[classes[0]];
     for(i=1;i<sizeof(classes);i++){
@@ -504,7 +504,7 @@ int query_highest_level(){
   if(!mlevels || mlevels == ([])) return 0;
   if(!objectp(TO)) { return 0; }
 
-  if(TO->query("new_class_type") && !avatarp(TO)) { return query_character_level(); }
+  if(TO->query("new_class_type") && !avatarp(TO)) { return query_base_character_level(); }
 
   hold = mlevels[classes[0]];
   num = hold;

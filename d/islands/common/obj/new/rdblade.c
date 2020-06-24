@@ -88,7 +88,7 @@ int hit(object targ)
         case 601..800:
             tell_room(EETO,"%^BOLD%^%^YELLOW%^A flash of light erupts and "+targ->QCN+" screams out loudly.",({ETO,targ}));
             tell_object(ETO,"%^BOLD%^%^YELLOW%^A flash of light erupts and "+targ->QCN+" screams out loudly and looks stunned only for a second.");
-            if(targ->will_save(ETO->query_character_level()))
+            if(targ->will_save(ETO->query_base_character_level()))
             {
                 tell_object(targ,"%^BOLD%^%^YELLOW%^A flash of light blinds you!");
                 targ->set_blind(1);

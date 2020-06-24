@@ -285,7 +285,7 @@ void fence(object fence, object item, object who)
     }
     expdiff = ( (difficulty<=0?1:difficulty) /3);
     if(expdiff < 1) expdiff = 1;
-    myLev = (int)who->query_character_level();
+    myLev = (int)who->query_adjusted_character_level();
     if(myLev > 100) myLev = 100;
     expvalue = to_int(to_float(exp_for_level(myLev)) * exp_perc);
     expvalue = to_int(to_float(expvalue * expdiff) / 33);

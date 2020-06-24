@@ -220,8 +220,8 @@ int steal_object(object player,object tools)
         return 1;
     }
 
-    if(objectp(find_player(person))) { targ_lvl = (int)find_player(person)->query_character_level(); }
-    else { targ_lvl = "/adm/daemon/user_call.c"->user_call(person,"query_character_level"); }
+    if(objectp(find_player(person))) { targ_lvl = (int)find_player(person)->query_base_character_level(); }
+    else { targ_lvl = "/adm/daemon/user_call.c"->user_call(person,"query_base_character_level"); }
     skill = player->query_skill("dungeoneering");
 
     DC += targ_lvl + roll_dice(1,20) + (targ_lvl/10);
