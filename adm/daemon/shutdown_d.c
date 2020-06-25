@@ -42,51 +42,11 @@ int initShutdownDaemon()
   timeLeft = -1;
   loginAllow = 1;
   armShutdown = 0;
-  call_out("checkMemory", TEST_INTERVAL * 60);
   time_estimate=time()+(TEST_INTERVAL*60)+(LAG_MINUTES*60);
-  call_out("checkCPU", TEST_INTERVAL * 60);
   return 1;
 }
 
 int shuttingDown(){ return shuttingDown;}
-int checkMemory()
-{
-  int memory;
-
-  // Get memory in MEGS not BLOCKS  - Firedragon 12/7/2004
-  memory = memory_info() / 512 / 1024;
-  if(memory >= MAX_MEMORY)
-    {
-      startShutdown(MEMORY, 10);
-      return 1;
-    }
-  call_out("checkMemory", TEST_INTERVAL * 60);
-  return -1;
-}
-
-int stopMemoryCheck()
-{
-  remove_call_out("checkMemory");
-  return 1;
-}
-
-int checkCPU()
-{
-  if(time() >= time_estimate)
-    {
-      startShutdown(CPU, 10);
-      return 1;
-    }
-  time_estimate=time()+(TEST_INTERVAL*60)+(LAG_MINUTES*60);
-  call_out("checkCPU", TEST_INTERVAL * 60);
-  return -1;
-}
-
-int stopCPUCheck()
-{
-  remove_call_out("checkCPU");
-  return 1;
-}
 
 int notifyUsers(string msg)
 {
@@ -96,7 +56,6 @@ int notifyUsers(string msg)
 
 int startShutdown(int type, int time)
 {
-  stopMemoryCheck();
 // hmm
   remove_call_out("countDown");
    if(geteuid(TO) != UID_SHUTDOWN) return 0;
@@ -294,6 +253,3 @@ int clean_up()
 }
 
 int query_time_left() { return timeLeft; }
-
-int query_max_memory() { return MAX_MEMORY ; }
-int query_max_memory_blocks() { return MAX_MEMORY*512*1024 ; }
