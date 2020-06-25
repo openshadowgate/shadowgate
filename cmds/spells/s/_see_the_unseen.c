@@ -42,7 +42,6 @@ void spell_effect(int prof) {
     else modifier = 8;
     caster->set_detecting_invis(1);
     caster->add_sight_bonus(modifier);
-    caster->set_property("darkvision",1);
     spell_successful();
     addSpellToCaster();
     caster->set_property("spelled", ({TO}) );
@@ -57,7 +56,6 @@ void dest_effect() {
         tell_room(environment(caster),"%^GREEN%^The g%^BOLD%^%^GREEN%^l%^BOLD%^%^CYAN%^o%^RESET%^%^GREEN%^w fades from "+caster->QCN+"'s eyes.%^RESET%^",caster);
         caster->set_detecting_invis(0);
         caster->add_sight_bonus(-1*modifier);
-        caster->set_property("darkvision",-1);
         caster->remove_property_value("spelled", ({TO}) );
     }
     ::dest_effect();

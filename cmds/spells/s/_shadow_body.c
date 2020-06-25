@@ -21,7 +21,6 @@ void effect(int direction)
     if(direction > 0)
     {
         caster->set_property("flying",1);
-        caster->set_property("darkvision", 1);
         caster->set_property("iron body", 1);
         caster->set_property("poison immunity", 1);
         caster->set_property("disease immunity", 1);
@@ -29,7 +28,6 @@ void effect(int direction)
     else
     {
         caster->remove_property("flying");
-        caster->remove_property("darkvision");
         caster->remove_property("iron body");
         caster->remove_property("disease immunity");
         caster->remove_property("poison immunity");
@@ -54,7 +52,7 @@ void create()
     set_spell_sphere("alteration");
     set_discipline("egoist");
     set_syntax("cast CLASS shadow body");
-    set_description("Your body and all your equipment are subsumed by your shadow. As a living shadow, you blend perfectly into any other shadow and vanish in darkness. You appear as an unattached shadow in areas of full light. You shadow body gived you 10 damage reduction, darkvision, flying, and 50% fire, acid and electricity resistance.");
+    set_description("Your body and all your equipment are subsumed by your shadow. As a living shadow, you blend perfectly into any other shadow and vanish in darkness. You appear as an unattached shadow in areas of full light. You shadow body gived you 10 damage reduction, flying, and 50% fire, acid and electricity resistance.");
     set_helpful_spell(1);
 }
 
