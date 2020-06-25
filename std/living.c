@@ -1368,7 +1368,7 @@ string query_desc(string unused)
         reg += "%^BOLD%^" + sub + " are approximately " + height + " inches (" + height / 12 + "ft " + height % 12 + "in) tall and " + weight + " pounds.%^RESET%^\n";
     }
 
-    x = ((player_data["general"]["hp"] * 100) / player_data["general"]["max_hp"]);
+    x = ((player_data["general"]["hp"] * 100) /( player_data["general"]["max_hp"] + 1));
     if (x > 90) {
         reg += "%^YELLOW%^" + sub + " is in top shape.%^RESET%^\n";
     } else if (x > 75) {
