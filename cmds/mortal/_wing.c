@@ -7,7 +7,7 @@ inherit DAEMON;
 #define WING_DELAY 120
 
 string * flyraces = ({"deva"});
-string * flysubraces = ({"fey'ri","rock gnome", "trixie", "air genasi"});
+string * flysubraces = ({"fey'ri","rock gnome", "trixie",});
 string * flyprofiles = ({"druid_bird_999","druid_dragon_999","mage_red_dragon_999","mage_demon_999","vampire_bat_999","vampire_lord_999", "mage_pixie_999"});
 
 string WINGO = "/cmds/mortal/obj/wingObj.c";
