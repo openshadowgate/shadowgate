@@ -26,7 +26,7 @@ You are standing in a guard tower.  The walls are lined with bows and swords "+
 */
     set_long(::query_long()+"\nThis is the ruins of one of the guard "
        "towers surrounding the city.  It has faired better than the "
-       "city itself, but not by much.  The walls rise only a few fee "
+       "city itself, but not by much.  The walls rise only a few feet "
        "into the air, and the top has been sheared off, littering the "
        "floor with broken stone and wood.\n");
     set_exits( ([
