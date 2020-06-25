@@ -714,29 +714,31 @@ int query_resistance(string res)
 
 int query_resistance_percent(string res)
 {
+    int mod = 0;
+
     if (!valid_resistance(res)) {
-        return 0;                        // to avoid throwing errors on any invalid queries. N, 8/15.
+        return 0;
     }
     if (TO->is_undead()) {
         if (res == "fire") {
-            return -25;
+            mod += -25;
         }
         if (res == "cold") {
-            return 50;
+            mod += 50;
         }
         if (TO->is_vampire()) {
             if (res == "electricity") {
-                return 50;
+                mod += 50;
             }
             if (res == "divine") {
-                return -25;
+                mod += -25;
             }
             if (res == "silver") {
-                return -25;
+                mod += -25;
             }
         }
     }
-    return resistances["resistance percents"][res];
+    return resistances["resistance percents"][res] + mod;
 }
 
 void set_resistances(mapping map)
