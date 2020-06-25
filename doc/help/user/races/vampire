@@ -17,9 +17,9 @@
 %^RED%^   * twilight shape
 %^RED%^ * resistances
 %^RED%^   + 10 spell damage resistance
-%^RED%^   + 33% electricity resistance
-%^RED%^   - 33% silver resistance
-%^RED%^   - 33% divine resistance
+%^RED%^   + 50% electricity resistance
+%^RED%^   - 25% silver resistance
+%^RED%^   - 25% divine resistance
 %^RED%^ * fast healing 5
 %^RED%^ * sunlight damage
 %^RED%^ * garlic intolerance
