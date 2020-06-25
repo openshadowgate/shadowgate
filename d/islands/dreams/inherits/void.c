@@ -5,11 +5,11 @@ void pick_critters();
 
 void create()
 {
-	
+
 	pick_critters();
    	set_repop(35);
    	::create();
-	set_terrain(BARREN);
+	set_terrain(PAVED_ROAD);
    	set_travel(PAVED_ROAD);
    	set_property("no teleport",1);
    	set_property("no scry",1);
