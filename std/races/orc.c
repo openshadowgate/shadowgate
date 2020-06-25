@@ -29,7 +29,7 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
     switch(subrace) {
       case "mountain orc": return ({ 4, 0, 0, -2, 2, -2 }); break;
       case "orog" : return ({ 4, -2, 0, 0, -2, 2 }); break;
-      case "tanarukk" : return ({ 4, 2, 0, 0, -2, -4 }); break;
+      case "tanarukk" : return ({ 4, 2, 0, 0, -2, -2 }); break;
       default: return ({ 4, 0, 2, 0, -2, -2 }); break; // gray orc default
     }
 }

@@ -51,7 +51,8 @@ int* stat_mods(string subrace)   // stats in order: str, dex, con, int, wis, cha
     }
     switch (subrace) {
     case "svirfneblin": case "deep gnome": return ({ -2, 2, 0, 0, 2, -2 }); break;
-    //case "trixie": case "deep gnome": return ({ -2, 2, 0, 2, 0, 0 }); break;
+    case "trixie":return ({ -2, 2, 0, 2, 0, 0 }); break;
+    case "deep gnome": return ({ -2, 2, 0, 0, 2, 0 }); break;
     case "forest": case "forest gnome": return ({ -2, 0, 2, 0, 0, 2 }); break;
     default: return ({ -2, 0, 2, 2, 0, 0 }); break; //rock gnome default
     }
