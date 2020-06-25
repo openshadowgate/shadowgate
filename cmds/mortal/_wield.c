@@ -255,7 +255,7 @@ int cmd_wield(string str)
 
     // https://shadowgate.org/git/shadowgate/shadowgate/issues/339
 
-    if (item_size > 1) {
+    if (ob->query_size() > 1) {
        ob->reset_hidden_seen();
     }
 
