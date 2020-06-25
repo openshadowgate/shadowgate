@@ -22,7 +22,7 @@ SEETH
       ]) );
     set_exits( ([
     "west" : HALL "hall.c",
-    "east" : HALL "bookie.c",
+    //"east" : HALL "bookie.c",
     "north" : HALL "store1.c",
       ]) );
 
