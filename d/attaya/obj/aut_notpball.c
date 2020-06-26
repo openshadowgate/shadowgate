@@ -84,7 +84,7 @@ int press(string str){
 	     "whole sphere stops glowing.",TP);
       flag = 0;
       if(room){
-         room->set_property("teleport proof",-67);
+         room->set_property("teleport proof",-63);
       }
       return 1;
    }
