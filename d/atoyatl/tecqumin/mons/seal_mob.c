@@ -89,7 +89,7 @@ int activate()
         destinations += ({ ETO->query_exit(exits[i]) });
         ETO->remove_exit(exits[i]);
     }
-    ETO->set_property("teleport proof", 67); //upped to 67, equivalent of no tp ball
+    ETO->set_property("teleport proof", 63); //upped to 67, equivalent of no tp ball
     //ETO->set_property("sealed", 15);
     tell_room(ETO, "Sheets of " + ENERGIES + " %^RESET%^shoot off from the octagonal stone seal, blocking all the exits.");
     tell_room(ETO, "%^ORANGE%^A final, %^BOLD%^%^CYAN%^sh%^RESET%^"
@@ -119,7 +119,7 @@ void restore_exits()
             tell_room(room, "%^BOLD%^%^RED%^The " + exits[i] + " exit is revealed!");
         }
     }
-    room->set_property("teleport proof", -67);
+    room->set_property("teleport proof", -63);
 }
 
 void expire()

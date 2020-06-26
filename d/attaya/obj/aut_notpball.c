@@ -57,14 +57,14 @@ void init(){
    ::init();
    if(ETO->is_room()){
       if(objectp(room)){
-         room->set_property("teleport proof",-67);
+         room->set_property("teleport proof",-63);
       }
    room = ETO;
-   room->set_property("teleport proof",67);
+   room->set_property("teleport proof",63);
    }
    else{
       if(objectp(room)){
-         room->set_property("teleport proof",-67);
+         room->set_property("teleport proof",-63);
          room = 0;
       }
    }

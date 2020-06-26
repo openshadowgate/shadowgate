@@ -749,23 +749,23 @@ int get_phouse_tp_proof(string tpprooflevel) //function to standardize tp proof 
         break;
 
     case "common":
-        tp_proof_dc += 10;
+        tp_proof_dc += 3;
         break;
 
     case "good":
-        tp_proof_dc += 20;
+        tp_proof_dc += 13;
         break;
 
     case "rare":
-        tp_proof_dc += 30;
+        tp_proof_dc += 23;
         break;
 
     case "epic":
-        tp_proof_dc += 40;
+        tp_proof_dc += 33;
         break;
 
     case "legendary":
-        tp_proof_dc += 47;
+        tp_proof_dc += 43;
         break;
 
     default:
