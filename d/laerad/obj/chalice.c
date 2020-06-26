@@ -95,7 +95,7 @@ int measure_me(string str)
     if ("liquid" != str) {
         return 0;
     }
-    if (uses > 8) {
+    if (uses > maxuses) {
         write("%^BOLD%^The chalice's power has disappeared forever.");
         return 1;
     }
