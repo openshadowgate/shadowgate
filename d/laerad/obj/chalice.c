@@ -279,7 +279,7 @@ void heart_beat()
         deep_chalice_check(); // added so people don't carry an extra around in a sack to use as a weapon -Ares
     }
 
-    if (uses <= 8) {
+    if (uses <= maxuses) {
         if (count > 2) {
             flag = 0;
             count = 0;
