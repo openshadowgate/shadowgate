@@ -806,7 +806,7 @@ int get_phouse_scry_proof(string scryprooflevel) //function to standardize scry 
         break;
 
     case "legendary":
-        scry_proof_dc += 50;
+        scry_proof_dc += 46;
         break;
 
     default:
