@@ -70,7 +70,7 @@ void spell_effect(int prof) {
         return;
     }
 
-    strength = clevel + roll_dice(2, 4);
+    strength = clevel;
 
     oldstrength = (int)target->query_property("teleport proof");
     if(oldstrength > strength) {
