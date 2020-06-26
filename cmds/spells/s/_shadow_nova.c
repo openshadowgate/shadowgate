@@ -21,7 +21,6 @@ void create()
 %^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
     set_somatic_comp();
-    debug_saves(1);
     splash_spell(2);
     set_save("reflex");
 }
