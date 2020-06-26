@@ -31,7 +31,7 @@ void create(){
 	  "however its supply of magic is probably running low after "+
 	  "many centuries of existence.");
    set_property("lore",20);
-   charge = 900 + random(300);
+   charge = 90 + random(30);
    set_heart_beat(10);
 }
 
