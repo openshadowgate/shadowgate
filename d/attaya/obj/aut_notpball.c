@@ -32,6 +32,7 @@ void create(){
 	  "many centuries of existence.");
    set_property("lore",20);
    charge = 450 + random(101);
+   set_heart_beat(1);
 }
 
 void heart_beat(){
