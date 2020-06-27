@@ -560,15 +560,8 @@ mixed query_property(string prop)
         if (FEATS_D->usable_feat(TO, "spell focus")) {
             num += 2;
         }
-        if (FEATS_D->usable_feat(TO, "greater spell power")) {
-            num += 3;
-        }else if (FEATS_D->usable_feat(TO, "improved spell power")) {
-            num += 2;
-        }else if (FEATS_D->usable_feat(TO, "spell power")) {
-            num += 1;
-        }
         //num += props["empowered"]; //doesn't seem to do anything
-        return (num + EQ_D->gear_bonus(TO, "caster level"));
+        return (num + TO->query_property("empowered"));
     }
 
     if (prop == "damage resistance") {

@@ -33,7 +33,7 @@ void setup(object thingy, string dest)
 {
     destobj = find_object_or_load(dest);
 
-    if (!objectp(destobj) || !strlen(dest)) {
+    if (!objectp(destobj)) {
         tell_object(thingy,"%^BOLD%^You stumple in confusion. Something wend wrong and you didn't take off.");
         TO->remove();
     }
