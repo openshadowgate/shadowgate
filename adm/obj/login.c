@@ -162,7 +162,7 @@ void get_password(string str) {
         return;
     }
     if (str[0..2] != "$6$") {
-        message("logon", "Your password is too old. Upgrade it as soon as you can.", this_object());
+        message("logon", "\nYour password is too old. Upgrade it as soon as you can.\n", this_object());
     }
     str = 0;
     master()->load_player_from_file(__Name, __Player);
