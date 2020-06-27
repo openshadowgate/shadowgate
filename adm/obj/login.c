@@ -161,7 +161,7 @@ void get_password(string str) {
         input_to("get_password", I_NOECHO | I_NOESC);
         return;
     }
-    if (password[0..2] != "$6$") {
+    if (str[0..2] != "$6$") {
         message("login", "Your password is too old. Upgrade it as soon as you can.");
     }
     str = 0;
