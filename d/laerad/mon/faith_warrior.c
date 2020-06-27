@@ -48,7 +48,8 @@ void create(){
     set_race("human");
     set_size(2);
     set_hd(20+(random(9)),6);
-    set_hp(166+(random(72)));
+    set_max_hp(166+(random(72)));
+    set_hp(TO->query_max_hp());
     set_max_level(27);
     set_overall_ac(-5);
     set_new_exp(24,"normal");

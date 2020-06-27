@@ -14,12 +14,11 @@ void create()
 	" %^CYAN%^steel%^WHITE%^ and are in very good condition. Lightweight"+
         " mithril mesh fills the gaps between the steel plates, adding even "+
         "more protection to these gauntlets.  The steel plates are engraved"+
-        " with life-like images of dragons.%^RESET%^" 
+        " with life-like images of dragons.%^RESET%^"
 	);
 	set_lore("The Gauntlets of Knighthood are crafted and enchanted "+
 		"to only allow the most devoted cavaliers and knights to "+
-		"wear them.  Crafted at first for the faiths of Tyr and "+
-		"Torm for their knights, the gauntlets soon came to be "+
+		"wear them.  Crafted at first by the faithful of Kreysneothosies for their knights, the gauntlets soon came to be "+
 		"used by every knightly order across the realms.  The "+
 		"rare gauntlets once use to be a common item in the "+
 		"regalia of a knight, but with the loss of how they "+
