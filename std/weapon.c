@@ -12,7 +12,8 @@ int poisoning;
 string profType, type, weapon_prof;
 int maxAtLevel = 1;
 int Weapon_speed = -1;
-nosave string damage_type, special_material_type;
+nosave string damage_type;
+string special_material_type;
 
 #ifdef __OLD_ROOM_BEHAVIOUR
 
