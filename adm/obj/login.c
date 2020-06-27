@@ -161,6 +161,9 @@ void get_password(string str) {
         input_to("get_password", I_NOECHO | I_NOESC);
         return;
     }
+    if (password[0..2] != "$6$") {
+        message("login", "Your password is too old. Upgrade it as soon as you can.");
+    }
     str = 0;
     master()->load_player_from_file(__Name, __Player);
     seteuid(UID_LOG);
@@ -183,11 +186,15 @@ protected int locked_access() {
     return 0;
 }
 
-protected int check_password(string str) {
+protected int check_password(string str)
+{
     string pass;
 
     master()->load_player_from_file(__Name, __Player);
-    if ((pass = (string)__Player->query_password()) != crypt(str, pass)) return 0;
+
+    if ((pass = (string)__Player->query_password()) != crypt(str, pass)) {
+        return 0;
+    }
     return valid_site(query_ip_number());
     __Player->remove();
 }
