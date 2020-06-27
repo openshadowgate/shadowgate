@@ -55,7 +55,11 @@ int lookin(string str)
     string *map_keys,real;
     int i,matches,num,duration,power,cost;
     mapping map;
-
+    if(ETO->query_property("scrying_orb_drain"))
+    {
+      notify_fail("You are already using a scrying device.\n");
+      return 0;
+    }
     if(!objectp(TO)) { return 0; }
     if(!objectp(ETO)) { return 0; }
     if(living(ETO))
@@ -224,7 +228,7 @@ void heart_beat()
 
             tell_object(ETO,"%^RED%^The terrible pain has become too much, you feel your lifeforce being "
                 "drained away by the orb!");
-            dest_effect();
+            stop_scrying();
             ETO->die();
             break;
         }

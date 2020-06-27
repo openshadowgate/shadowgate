@@ -2839,7 +2839,7 @@ varargs int do_save(object targ, int mod)
     if ((string)targ->query_race() == "gnome" && spell_sphere == "illusion") {    // all gnomes +2 vs illusions
             caster_bonus -= 2;
     }
-    
+
     if ((string)targ->query_race() == "elf" || (string)targ->query_race() == "half-elf") {
         if (spell_sphere == "enchantment_charm") {
             caster_bonus -= 2;                                       //elves & half-elves, +2 vs charm
@@ -2928,7 +2928,7 @@ varargs int do_save(object targ, int mod)
     }
 
     // one reroll chance for shadowdancers if they fail an enchantment spell save
-    if ((FEATS_D->usable_feat(caster, "shadowdancer") || caster->is_class("shadowdancer")) && !num && spell_sphere == "enchantment_charm") {
+    /*if ((FEATS_D->usable_feat(caster, "shadowdancer") || caster->is_class("shadowdancer")) && !num && spell_sphere == "enchantment_charm") {
         // this is a direct copy of the above - if anything changed there, change here too plz!
         switch (lower_case(type)) {
         case "fortitude":
@@ -2961,16 +2961,16 @@ varargs int do_save(object targ, int mod)
             num = 0;
             break;
         }
-    }
+    }*/
 
-    if (save_debug) {
+    /*if (save_debug) {
         tell_object(caster, "Shadowdancer reroll on failed enchantment-sphere save!");
         tell_object(caster, "Type of save actually used in daemon: " + debug_map["save_type"] + "");
         tell_object(caster, "Saving throw number before any rolls: " + debug_map["final_saving_throw"] + "");
         tell_object(caster, "DC of saving throw: " + debug_map["dc"] + "");
         tell_object(caster, "Save result (1 pass, 0 fail): " + debug_map["save_result"] + "");
         tell_object(caster, "Throw passed or failed by: " + debug_map["pass_or_fail_by"] + "");
-    }
+    }*/
 
     if (save_debug) {
         return debug_map["save_result"];
