@@ -19,7 +19,7 @@ void create(){
          " %^BOLD%^S%^RESET%^%^CYAN%^t%^BOLD%^a%^RESET%^%^CYAN%^r%^BOLD%^s%^RESET%^");
    set_lore("When first crafted in the year 369, the Ring of the Shooting"+
          " Stars was hailed as celebration of magic and magical artisry. Crafted by a"+
-         " wizard of the name Paldiex Y'altran for his devotion to Mystra and to his "+
+         " wizard of the name Paldiex Y'altran for his devotion to Kismet and to his "+
          "Art this ring became quite popular with all types of people.  Paldiex, being a human, "+
          "often times had trouble in seeing in the dark even with his magic.  Thus "+
          "the ring started out being only something that would help him to see better "+
