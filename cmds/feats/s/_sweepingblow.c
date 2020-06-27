@@ -154,8 +154,9 @@ void execute_attack()
         reaping = 1;
     }
 
+    attackers = shuffle(attackers);
 
-    for (i = 0; i < sizeof(attackers); i++) {
+    for (i = 0; i < sizeof(attackers) && i < 8; i++) {
         if (!objectp(attackers[i])) {
             continue;
         }

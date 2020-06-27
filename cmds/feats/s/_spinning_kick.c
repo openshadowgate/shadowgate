@@ -124,7 +124,9 @@ void execute_attack()
     caster->set_property("using spinning kick", time() + 35 );
     delay_messid_msg(35,"%^BOLD%^%^WHITE%^You can %^CYAN%^spinning_kick%^WHITE%^ again.%^RESET%^");
 
-    for(i=0;i<sizeof(attackers);i++)
+    attackers = shuffle(attackers);
+
+    for(i=0;i<sizeof(attackers) && i < 8;i++)
     {
         if(!objectp(attackers[i])) continue;
         enchant = 0;

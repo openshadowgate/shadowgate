@@ -165,7 +165,9 @@ void execute_attack()
         delay_messid_msg(35, "%^BOLD%^%^WHITE%^You can %^CYAN%^whirl%^WHITE%^ again.%^RESET%^");
     }
 
-    for (i = 0; i < sizeof(attackers); i++) {
+    attackers = shuffle(attackers);
+
+    for (i = 0; i < sizeof(attackers) && i < 8; i++) {
         if (!objectp(attackers[i])) {
             continue;
         }

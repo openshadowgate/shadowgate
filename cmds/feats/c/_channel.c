@@ -82,6 +82,7 @@ void execute_attack()
     string energy_type;
     string color;
     int dam;
+    int i;
 
     if(!objectp(caster)) {
         dest_effect();
@@ -119,8 +120,11 @@ void execute_attack()
 
     tell_room(ENV(caster), "%^BOLD%^" + color + "The area is washed with divine energies!");
 
-    foreach(ally in allies)
-    {
+    allies = shuffle(allies);
+
+    for (i = 0; i < sizeof(allies) && i < 8; i++) {
+        ally = allies[i];
+
         if (!objectp(ally)) {
             continue;
         }
@@ -137,8 +141,11 @@ void execute_attack()
         tell_object(ally, "%^BOLD%^" + color + "Waves of divine energy wash over you, healing your wounds!");
     }
 
-    foreach(attacker in attackers)
+    attackers = shuffle(attackers);
+
+    for (i = 0; i < sizeof(attackers) && i < 8; i++) {
     {
+        attackers = attackers[i];
         if (!objectp(attacker)) {
             continue;
         }

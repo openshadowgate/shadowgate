@@ -114,7 +114,9 @@ void execute_attack()
     tell_room(place, "%^RESET%^%^MAGENTA%^A low hum resonates throughout the area before " + caster->QCN + " unleashes a psionic tempest that slices through " + caster->QP + " enemies!", targets);
     targets -= ({ caster });
 
-    for (i = 0; i < sizeof(targets); i++) {
+    targets = shuffle(targets);
+
+    for (i = 0; i < sizeof(targets) && i < 8; i++) {
 
         if (targets[i] == caster) {
             continue;

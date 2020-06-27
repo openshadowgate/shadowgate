@@ -175,7 +175,10 @@ void execute_attack()
     if (hits > sizeof(attackers)) {
         hits = sizeof(attackers);                          // if some targets have since died, don't bother hitting them.
     }
-    for (i = 0; i < sizeof(attackers); i++) {
+
+    attackers = shuffle(attackers);
+
+    for (i = 0; i < sizeof(attackers) && i < 8; i++) {
         if (!objectp(attackers[i])) {
             continue;
         }

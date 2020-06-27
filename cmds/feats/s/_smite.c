@@ -100,7 +100,10 @@ void execute_attack() {
     tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" lets out a shout to the heavens and unleashes a wave of divine "
 "energy!",targets);
     targets -= ({ caster });
-    for(i=0;i<sizeof(targets);i++) {
+
+    targets = shuffle(targets);
+
+    for(i=0;i<sizeof(targets) && i < 8;i++) {
         if(targets[i] == caster) continue;
         if(!objectp(targets[i])) continue;
    	  tell_object(targets[i],"%^BOLD%^%^WHITE%^The energy washes over you, burning like fire!%^RESET%^");
