@@ -4,7 +4,7 @@
 inherit "/d/common/inherit/hitching_post";
 
 void create()  {
-  ::create();
+  //::create();
   set_property("indoors",0);
 //  set_property("light", 2);  it has light set in the inherit *Styx*  7/28/05
   set_terrain(LIGHT_FOREST);
