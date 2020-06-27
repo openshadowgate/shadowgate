@@ -41,14 +41,14 @@ private string true_name;         // kept in seperate variable for security
 private string creator;           // File name of the ob that created an object
 
 string cursed;
-private string *identified;
-private string *studied;
+private string* identified;
+private string* studied;
 private mapping studied_failed;
 string material;                  // Substance object is made from.
-string *magic_properties;  //  Allows all objects to have magic properties
+string* magic_properties;  //  Allows all objects to have magic properties
 //Added by Saide for use with the soulbound/item ownership functions
 //3/19/2007
-string *item_owners = ({});
+string* item_owners = ({});
 
 //going to manipulate this string with
 //the set_bit() and test_bit() efuns
@@ -66,7 +66,7 @@ string item_owner_props = "01100";
 
 //hiding things..
 nosave private int hidden, magic_hidden;
-nosave private object * hidden_seen;
+nosave private object* hidden_seen;
 
 // To allow this item to use the unique item system
 // Thorn@ShadowGate - 27 June 2000
@@ -93,25 +93,25 @@ mixed query_hit();
 mixed query_lrhit();
 mixed query_wield();
 mixed query_unwield();
-int remove_property (string prop);
+int remove_property(string prop);
 
 void unequip();
 void __ActuallyUnwield();
 void set_not_inhand();
 int wieldable();
-string * query_identified();
+string* query_identified();
 void add_identified(string str);
-void set_identified(string *myidentified);
+void set_identified(string* myidentified);
 int is_identified(string name);
 void add_studied(string str);
 int is_studied(string name);
-void add_studied_failed(string name,int level);
-int is_studied_failed(string name,int level);
+void add_studied_failed(string name, int level);
+int is_studied_failed(string name, int level);
 void remove_studied_failed(string name);
 void set_read(string str);
 void set_language(string str);
 //void do_remove_stat(object myplayer, string mystat);
-void run_item_bonuses(string mystatus,object myplayer,mapping itembonuses);
+void run_item_bonuses(string mystatus, object myplayer, mapping itembonuses);
 
 //Below added by Circe for faction-specific items.  11/24/07
 void set_factionitem(string str);
@@ -119,7 +119,7 @@ string query_factionitem();
 string factionitem;
 
 //new functions for property-set bonuses. N, 7/12.
-void set_item_bonus(string bonustype,int thebonus);
+void set_item_bonus(string bonustype, int thebonus);
 int query_item_bonus(string bonustype);
 mapping query_item_bonuses();
 
@@ -166,208 +166,274 @@ string query_unique_id();
 void reset_hidden_seen();
 void set_hidden(int xxx);
 
-int save_me(string fname) {
+int save_me(string fname)
+{
     int x;
-     if (query_property("temporary_item"))  return 1;
+    if (query_property("temporary_item")) {
+        return 1;
+    }
     seteuid(UID_RESTORE);
-    x=catch(save_object(fname, 1));
+    x = catch(save_object(fname, 1));
     return x;
 }
-varargs int query_id_no(string id_name){
-  int i, limit;
-  if (!objectp(ETO)){
-    return 0;
-  }
-  if(!stringp(id_name)){
-    id_name = "object";
-  }
-  limit = sizeof(all_inventory(ETO));
-  for(i=1;i<limit;i++){
-    if (present(id_name + " " + i) == TO){
-      return i;
+
+varargs int query_id_no(string id_name)
+{
+    int i, limit;
+    if (!objectp(ETO)) {
+        return 0;
     }
-  }
-  return 0;
+    if (!stringp(id_name)) {
+        id_name = "object";
+    }
+    limit = sizeof(all_inventory(ETO));
+    for (i = 1; i < limit; i++) {
+        if (present(id_name + " " + i) == TO) {
+            return i;
+        }
+    }
+    return 0;
 }
 
-int restore_me(string fname) {
+int restore_me(string fname)
+{
     int x;
     seteuid(UID_ROOT);
     x = catch(restore_object(fname, 1));
     return x;
 }
 
-
 // *** Object property functions ***
 // I] That use the "ob_data" mapping
 
-void init_ob() {
-    ob_data = ([ "id": ({}) ]);
-
+void init_ob()
+{
+    ob_data = ([ "id" : ({}) ]);
 }
 
 void set(string what, mixed arg)
 {
-    if( !stringp(what) ) return;
-    if(functionp(arg) && geteuid(this_object()) != geteuid(arg)) return;
-    if(!ob_data) init_ob();
-    if (what == "read" && !functionp(arg))
-    {
+    if (!stringp(what)) {
+        return;
+    }
+    if (functionp(arg) && geteuid(this_object()) != geteuid(arg)) {
+        return;
+    }
+    if (!ob_data) {
+        init_ob();
+    }
+    if (what == "read" && !functionp(arg)) {
         set_read(arg);
         return;
     }
-    if(what == "language")
-    {
+    if (what == "language") {
         set_language(arg);
         return;
     }
 // changing so an aggessive of 0 doesn't automatically swarm  *Styx* 8/29/03
 //    if(what == "aggressive") TO->set_property("swarm",1);
-    if(what == "aggressive" && arg != 0)  TO->set_property("swarm",1);
-    if(functionp(arg))
-    {
-        if(TO->query_property("function_"+what)) TO->remove_property("function_"+what);
-        TO->set_property("function_"+what, (*arg)(1));
+    if (what == "aggressive" && arg != 0) {
+        TO->set_property("swarm", 1);
     }
-    if(ob_data[what]) ob_data[what] = arg;
-    else ob_data += ([ what: arg ]);
-    if(what == "value")
-    {
+    if (functionp(arg)) {
+        if (TO->query_property("function_" + what)) {
+            TO->remove_property("function_" + what);
+        }
+        TO->set_property("function_" + what, (*arg)(1));
+    }
+    if (ob_data[what]) {
+        ob_data[what] = arg;
+    }else {
+        ob_data += ([ what:arg ]);
+    }
+    if (what == "value") {
         what = "cointype";
-        if(ob_data[what]) ob_data[what] = "gold";
-        else ob_data += ([ what: "gold" ]);
+        if (ob_data[what]) {
+            ob_data[what] = "gold";
+        }else {
+            ob_data += ([ what:"gold" ]);
+        }
     }
 }
 
-protected void add(string what, mixed arg) {
-    if(!ob_data) ob_data = ([]);
-    if(functionp(arg) && geteuid(this_object()) != geteuid(arg[0])) return;
-    if(stringp(arg) || intp(arg)) arg = ({ arg});
-    if(!ob_data[what]) {
+protected void add(string what, mixed arg)
+{
+    if (!ob_data) {
+        ob_data = ([]);
+    }
+    if (functionp(arg) && geteuid(this_object()) != geteuid(arg[0])) {
+        return;
+    }
+    if (stringp(arg) || intp(arg)) {
+        arg = ({ arg });
+    }
+    if (!ob_data[what]) {
         ob_data += ([what:arg]);
         return;
     }
 
-    if(!pointerp(ob_data[what]) && !mapp(ob_data[what])) return;
+    if (!pointerp(ob_data[what]) && !mapp(ob_data[what])) {
+        return;
+    }
     ob_data[what] += arg;
 }
 
-void delete(string what) {
-    if( !stringp(what) ) return;
-    if(!ob_data) init_ob();
-    if(what == "aggressive") TO->remove_property("swarm");
-    if(ob_data[what]) map_delete(ob_data,what);
+void delete(string what)
+{
+    if (!stringp(what)) {
+        return;
+    }
+    if (!ob_data) {
+        init_ob();
+    }
+    if (what == "aggressive") {
+        TO->remove_property("swarm");
+    }
+    if (ob_data[what]) {
+        map_delete(ob_data, what);
+    }
 }
 
-varargs mixed query(string what, mixed element) {
+varargs mixed query(string what, mixed element)
+{
     mixed res, tmp;
     int i, query_flag = 0;
 
     res = 0;
-    if(!ob_data) init_ob();
-    if(!stringp(what)) return 0;
-    if(!ob_data[what]) return 0;
-    if(!element)
+    if (!ob_data) {
+        init_ob();
+    }
+    if (!stringp(what)) {
+        return 0;
+    }
+    if (!ob_data[what]) {
+        return 0;
+    }
+    if (!element) {
         res = ob_data[what];
-    else if( stringp(element) )
+    }else if (stringp(element)) {
         res = ob_data[what][element];
-    else if( (intp(element)) && pointerp(ob_data[what]) &&
-             (element < sizeof(ob_data[what])) ) res = ob_data[what][element];
-    if( pointerp(res) && previous_object() != this_object() ) res += ({});
+    }else if ((intp(element)) && pointerp(ob_data[what]) &&
+              (element < sizeof(ob_data[what]))) {
+        res = ob_data[what][element];
+    }
+    if (pointerp(res) && previous_object() != this_object()) {
+        res += ({});
+    }
     return res;
 }
 
-
 // II] That use the "props" mapping
 
-void set_properties(mapping borg) {
+void set_properties(mapping borg)
+{
     props += borg;
 }
 
-mapping query_props() { return props; }
+mapping query_props()
+{
+    return props;
+}
 
 void UpdateBonuses(object possessor, string which)
 {
-        if(!stringp(which)) return;
-        if(!objectp(possessor)) return;
-        if(!living(possessor)) return;
-        if(!objectp(TO)) return;
-        if(!living(TO))
-        {
-                if(TO->is_armor())
-                {
-                        possessor->ApplyObjectBonuses(TO, possessor, which, "wear");
-                }
-                if(TO->is_weapon())
-                {
-                        possessor->ApplyObjectBonuses(TO, possessor, which, "wield");
-                }
-                else
-                {
-                        if(TO->query_property("inanimate_bonus"))
-                        {
-                                possessor->ApplyObjectBonuses(TO, possessor, which, "move");
-                        }
-                }
+    if (!stringp(which)) {
+        return;
+    }
+    if (!objectp(possessor)) {
+        return;
+    }
+    if (!living(possessor)) {
+        return;
+    }
+    if (!objectp(TO)) {
+        return;
+    }
+    if (!living(TO)) {
+        if (TO->is_armor()) {
+            possessor->ApplyObjectBonuses(TO, possessor, which, "wear");
         }
-
+        if (TO->is_weapon()) {
+            possessor->ApplyObjectBonuses(TO, possessor, which, "wield");
+        }else {
+            if (TO->query_property("inanimate_bonus")) {
+                possessor->ApplyObjectBonuses(TO, possessor, which, "move");
+            }
+        }
+    }
 }
 
 void set_property(string prop, mixed value)
 {
-        object possessor;
+    object possessor;
     //Added to support the ability for an item that's worn/wielded/held
     //and adds a bonus to be updated by this - without having to
     //remove/wear/unwield/wield the object to take affect - Saide
-    if(!TO->is_room()) { possessor = ETO; }
-    if(member_array(prop, VALID_BONUSES) != -1)
-    {
-        if(!living(TO)) { UpdateBonuses(possessor, "remove"); }
+    if (!TO->is_room()) {
+        possessor = ETO;
     }
-    if(prop == "enchantment"  && !random(20) && !query("no curse") && !query_property("no curse"))
-    {
-        value = -1* value;
+    if (member_array(prop, VALID_BONUSES) != -1) {
+        if (!living(TO)) {
+            UpdateBonuses(possessor, "remove");
+        }
     }
-    if(pointerp(value))
-    {
-        if(!props) props = ([]);
-        if(!props[prop] || !pointerp(props[prop])) props[prop] = ({});
+    if (prop == "enchantment" && !random(20) && !query("no curse") && !query_property("no curse")) {
+        value = -1 * value;
+    }
+    if (pointerp(value)) {
+        if (!props) {
+            props = ([]);
+        }
+        if (!props[prop] || !pointerp(props[prop])) {
+            props[prop] = ({});
+        }
         props[prop] += value;
-        if(member_array(prop, VALID_BONUSES) != -1)
-        {
-            if(!living(TO)) { UpdateBonuses(possessor, "add"); }
+        if (member_array(prop, VALID_BONUSES) != -1) {
+            if (!living(TO)) {
+                UpdateBonuses(possessor, "add");
+            }
         }
         return;
-    }
-    else
-    {
-        if(!props || !mapp(props)) props = ([]);
-        if(!props[prop]) props[prop] = value;
+    }else {
+        if (!props || !mapp(props)) {
+            props = ([]);
+        }
+        if (!props[prop]) {
+            props[prop] = value;
+        }
         //random treasure on that will appear on monsters - Saide
-        else if(props[prop])
-        {
+        else if (props[prop]) {
             //in the event of a property being something like an object
             //or maybe even a function then doing += will fail
             //hopefully this bit of code fixes that and pretty much retains
             //all properties except for the ones that might error - Saide June 2016
-            if(intp(value) && intp(props[prop])) props[prop] += value;
-            else if(stringp(value) && stringp(props[prop])) props[prop] += value;
-            else if(floatp(value) && floatp(props[prop])) props[prop] += value;
-            else props[prop] = value;
-            if(member_array(prop, VALID_BONUSES) != -1)
-            {
-                if(!living(TO)) { UpdateBonuses(possessor, "add"); }
+            if (intp(value) && intp(props[prop])) {
+                props[prop] += value;
+            }else if (stringp(value) && stringp(props[prop])) {
+                props[prop] += value;
+            }else if (floatp(value) && floatp(props[prop])) {
+                props[prop] += value;
+            }else {
+                props[prop] = value;
+            }
+            if (member_array(prop, VALID_BONUSES) != -1) {
+                if (!living(TO)) {
+                    UpdateBonuses(possessor, "add");
+                }
             }
             return;
         }
-        props += ([ prop : value]);
+        props += ([ prop:value]);
 
-        if(prop == "treasure_type" && !living(TO)) "/daemon/random_monster_treasure_d.c"->add_treasure(TO);
+        if (prop == "treasure_type" && !living(TO)) {
+            "/daemon/random_monster_treasure_d.c"->add_treasure(TO);
+        }
     }
 
-    if(member_array(prop, VALID_BONUSES) != -1)
-    {
-        if(!living(TO)) { UpdateBonuses(possessor, "add"); }
+    if (member_array(prop, VALID_BONUSES) != -1) {
+        if (!living(TO)) {
+            UpdateBonuses(possessor, "add");
+        }
     }
 }
 
@@ -405,7 +471,7 @@ int light_armor_filter(object ob)
 mixed query_property(string prop)
 {
 // racial bonuses errored when querying from /std/races; had to apply manually
-    object *worn;
+    object* worn;
     int num, mylevel, scaled, tmpval;
     string subrace, binding;
 
@@ -494,7 +560,14 @@ mixed query_property(string prop)
         if (FEATS_D->usable_feat(TO, "spell focus")) {
             num += 2;
         }
-        num += props["empowered"];
+        if (FEATS_D->usable_feat(TO, "greater spell power")) {
+            num += 3;
+        }else if (FEATS_D->usable_feat(TO, "improved spell power")) {
+            num += 2;
+        }else if (FEATS_D->usable_feat(TO, "spell power")) {
+            num += 1;
+        }
+        //num += props["empowered"]; //doesn't seem to do anything
         return (num + EQ_D->gear_bonus(TO, "caster level"));
     }
 
@@ -604,8 +677,7 @@ mixed query_property(string prop)
             return 1;
         }
     }
-    if (prop == "no disarm")
-    {
+    if (prop == "no disarm") {
         if (FEATS_D->usable_feat(TO, "weapon mastery")) {
             return 1;
         }
@@ -726,165 +798,193 @@ void remove_all_properties()
     props = ([]);
 }
 
-int remove_property (string prop)
+int remove_property(string prop)
 {
     //added this as a fix for bonuses not
     //being removed on removing armor
-      //problem was the remove_property("wear_order")
-        //in /cmds/mortal/_remove.c - which was throwing
-        //off the sizeof() comparison -
-        //this way if the bonuses aren't removed, no matter
-      //the result of that comparison, then they wont be
-        //re-added - Saide
+    //problem was the remove_property("wear_order")
+    //in /cmds/mortal/_remove.c - which was throwing
+    //off the sizeof() comparison -
+    //this way if the bonuses aren't removed, no matter
+    //the result of that comparison, then they wont be
+    //re-added - Saide
     object shape;
     int tmp_flag = 0;
 
-    if(prop == "shapeshifted")
-    {
-        if(objectp(shape = TO->query_property("shapeshifted")))
-        {
+    if (prop == "shapeshifted") {
+        if (objectp(shape = TO->query_property("shapeshifted"))) {
             shape->remove(); // hopefully to reverse shapeshifting effects if it disappears for whatever reason -Ares
         }
     }
 
-    if(props && props[prop])
-        {
+    if (props && props[prop]) {
 //              props[prop] = 0;
-                if(member_array(prop, VALID_BONUSES) != -1)
-                {
-                        if(!living(TO))
-                        {
-                                tmp_flag = 1;
-                                if(objectp(ETO)) { UpdateBonuses(ETO, "remove"); }
-                        }
+        if (member_array(prop, VALID_BONUSES) != -1) {
+            if (!living(TO)) {
+                tmp_flag = 1;
+                if (objectp(ETO)) {
+                    UpdateBonuses(ETO, "remove");
                 }
-                map_delete(props,prop);
-                if(!living(TO))
-                {
-                        if(sizeof(keys(props)) != sizeof(keys(props) - VALID_BONUSES) && tmp_flag == 1)
-                        {
-                                if(objectp(ETO)) { UpdateBonuses(ETO, "add"); }
-                        }
-                }
-                return 1;
+            }
         }
-        return 0;
+        map_delete(props, prop);
+        if (!living(TO)) {
+            if (sizeof(keys(props)) != sizeof(keys(props) - VALID_BONUSES) && tmp_flag == 1) {
+                if (objectp(ETO)) {
+                    UpdateBonuses(ETO, "add");
+                }
+            }
+        }
+        return 1;
+    }
+    return 0;
 }
 
-int remove_property_value(string prop, mixed val) {
-    if(props && props[prop]) {
+int remove_property_value(string prop, mixed val)
+{
+    if (props && props[prop]) {
         props[prop] -= val;
         return 1;
     }
     return 0;
 }
 
-string * regexp_query_property (string pattern) {
-    string *vars, *prop;
+string* regexp_query_property(string pattern)
+{
+    string* vars, * prop;
 
     vars = keys(props);
-    prop = regexp (vars, pattern);
-    if(!prop)
+    prop = regexp(vars, pattern);
+    if (!prop) {
         prop = ({});
+    }
     return prop;
 }
 
-int has_property(mixed val) {
-   if (mapp(val)) return 0;
-    if(!pointerp(val)) {
-       if (member_array(val,keys(props)) == -1) return 0;
-       else return 1;
+int has_property(mixed val)
+{
+    if (mapp(val)) {
+        return 0;
+    }
+    if (!pointerp(val)) {
+        if (member_array(val, keys(props)) == -1) {
+            return 0;
+        }else {
+            return 1;
+        }
     } else {
-    if (sizeof(keys(props)) == sizeof(keys(props)-(mixed *)val) ) return 0;
-      else return 1;
+        if (sizeof(keys(props)) == sizeof(keys(props) - (mixed*)val)) {
+            return 0;
+        }else {
+            return 1;
+        }
     }
 }
 
 // *** One line set and query functions ***
-void   set_id(string str) {
+void   set_id(string str)
+{
     set("id", str);
 }
-void   set_short(string str) {
+
+void   set_short(string str)
+{
     set("short", str);
 }
-void   set_long(string str) {
+
+void   set_long(string str)
+{
     set("long", str);
 }
-void   add_id(string str) {
-    add("id",str);
+
+void   add_id(string str)
+{
+    add("id", str);
 }
 
 void remove_id(string str)
 {
-    string *tmp_ids;
+    string* tmp_ids;
     tmp_ids = (string*)TO->query_id();
     tmp_ids -= ({ str });
     TO->delete("id");
-    TO->set("id",tmp_ids);
+    TO->set("id", tmp_ids);
 }
 
-void   set_value(int x) {
+void   set_value(int x)
+{
     set("value", x);
-    if(!query("cointype")) {
-        set("cointype","gold");
+    if (!query("cointype")) {
+        set("cointype", "gold");
     }
 }
 
-void   set_cointype(string str) {
-    set("cointype",str);
+void   set_cointype(string str)
+{
+    set("cointype", str);
 }
-string *query_id() {
+
+string* query_id()
+{
     return query("id");
 }
-string query_name() {
-   /* adding a default in case one isn't set for bug prevention, found often with thrown objects *Styx*  12/24/03, last change 8/29/03  */
-    if(!true_name)
-        return("unnamed object");
+
+string query_name()
+{
+    /* adding a default in case one isn't set for bug prevention, found often with thrown objects *Styx*  12/24/03, last change 8/29/03  */
+    if (!true_name) {
+        return ("unnamed object");
+    }
     return true_name;
 }
-string query_true_name() {
+
+string query_true_name()
+{
     return true_name;
 }
 
 string query_long(string str)
 {
-        string tmd;
-        function func;
-    if(tmd = query_property("function_long"))
-    {
-        if(!tmd = call_other(TO, tmd))
-        {
+    string tmd;
+    function func;
+    if (tmd = query_property("function_long")) {
+        if (!tmd = call_other(TO, tmd)) {
             tmd = "A function messed up in query_long() in Object.c";
         }
-    }
-    else
-    {
+    }else {
         tmd = ob_data["long"];
     }
-    if(!TO->is_room() && !TO->is_armour() && !TO->is_weapon() && !living(TO))
-    {
-        if(query_broken() != "")
-        tmd += " Condition appears to be"+query_broken()+"\n";
+    if (!TO->is_room() && !TO->is_armour() && !TO->is_weapon() && !living(TO)) {
+        if (query_broken() != "") {
+            tmd += " Condition appears to be" + query_broken() + "\n";
+        }
         tmd += query_bonus_display();
     }
     return tmd;
 }
 
-int query_value() {
-    return(int)this_object()->query("value");
+int query_value()
+{
+    return (int)this_object()->query("value");
 }
 
 string query_cointype()
 {
     string ret = (string)TO->query("cointype");
-    if(stringp(ret)) return ret;
-    else return "gold";
+    if (stringp(ret)) {
+        return ret;
+    }else {
+        return "gold";
+    }
 }
 
-int query_destroy() {
+int query_destroy()
+{
     return ob_data["destroy"];
 }
-string query_creator() {
+
+string query_creator()
+{
     return creator;
 }
 
@@ -956,57 +1056,69 @@ int id(string str)
     return 0;
 }
 
-void set_name(string str) {
-    if( !stringp(str) ) return;
+void set_name(string str)
+{
+    if (!stringp(str)) {
+        return;
+    }
     cap_name = capitalize(str);
     true_name = str;
-    if(creator) return;
-    if(previous_object()) creator = file_name(previous_object());
-    else creator = "Unknown";
+    if (creator) {
+        return;
+    }
+    if (previous_object()) {
+        creator = file_name(previous_object());
+    }else {
+        creator = "Unknown";
+    }
 }
 
-
-int isMagic(){
+int isMagic()
+{
     int p = 0;
-    if (query_property("enchantment") || query_property("magic") || query_property("spell") || query_property("spelled")){
-
+    if (query_property("enchantment") || query_property("magic") || query_property("spell") || query_property("spelled")) {
         p += query_property("enchantment");
         p += query_property("magic");
-        if (intp(query_property("spell")))
-        p += query_property("spell");
+        if (intp(query_property("spell"))) {
+            p += query_property("spell");
+        }
     }
     p += query("uses");
     return p;
 }
 
-
-string addMagic(string theShort){
-
+string addMagic(string theShort)
+{
     int p;
     if (p = isMagic()) {
         switch (p) {
         case -1:
         case 1:
-            theShort = theShort+" (surrounded by a faint blue glow)";
+            theShort = theShort + " (surrounded by a faint blue glow)";
             break;
+
         case -2:
         case 2:
-            theShort = theShort+" (surrounded by a blue glow)";
+            theShort = theShort + " (surrounded by a blue glow)";
             break;
+
         case -3:
         case 3:
-            theShort = theShort+" (surrounded by a bright blue glow)";
+            theShort = theShort + " (surrounded by a bright blue glow)";
             break;
+
         case -4:
         case 4:
-            theShort = theShort+" (surrounded by a very bright blue glow)";
+            theShort = theShort + " (surrounded by a very bright blue glow)";
             break;
+
         case -5:
         case 5:
-            theShort = theShort+" (surrounded by an extremely bright blue glow)";
+            theShort = theShort + " (surrounded by an extremely bright blue glow)";
             break;
+
         default:
-            theShort = theShort+" (surrounded by a nearly blinding blue glow)";
+            theShort = theShort + " (surrounded by a nearly blinding blue glow)";
             break;
         }
     }
@@ -1016,40 +1128,41 @@ string addMagic(string theShort){
 string query_obvious_short()
 {
     string tmd, theShort;
-    if(tmd = query_property("function_general short"))
-    {
-        if(!theShort = call_other(TO, tmd))
-        {
+    if (tmd = query_property("function_general short")) {
+        if (!theShort = call_other(TO, tmd)) {
             theShort = "A function messed up in query_short() in Object.c";
         }
+    }else {
+        theShort = query("general short");
     }
-    else theShort = query("general short");
     return theShort;
 }
 
-string set_obvious_short(string str){
-    set("general short",str);
+string set_obvious_short(string str)
+{
+    set("general short", str);
 }
-
 
 string query_short()
 {
-    string theShort,*short_info, tmd;
+    string theShort, * short_info, tmd;
     int i;
     function func;
-    if(!ob_data) init_ob();
-    if(!living(TO) && this_object()->query_invis()) return 0;
+    if (!ob_data) {
+        init_ob();
+    }
+    if (!living(TO) && this_object()->query_invis()) {
+        return 0;
+    }
     theShort = query_obvious_short();
-    if(!theShort || (objectp(TP) && is_identified((string)TPQN)))
-    {
-        if(tmd = query_property("function_short"))
-        {
-            if(!theShort = call_other(TO, tmd))
-            {
+    if (!theShort || (objectp(TP) && is_identified((string)TPQN))) {
+        if (tmd = query_property("function_short")) {
+            if (!theShort = call_other(TO, tmd)) {
                 theShort = "A function messed up in query_short() in Object.c";
             }
+        }else {
+            theShort = ob_data["short"];
         }
-        else theShort = ob_data["short"];
     }
     if (objectp(TP)) {
         if (TP->get_static("detecting magic")) {
@@ -1057,170 +1170,213 @@ string query_short()
         }
     }
 
-    if(query_property("added short"))
-    {
-        short_info = (string *)query_property("added short");
-        if(pointerp(short_info) && sizeof(short_info))
-        {
-            for(i=0;i<sizeof(short_info);i++)
-            {
-                if(!stringp(short_info[i])) { continue; }
+    if (query_property("added short")) {
+        short_info = (string*)query_property("added short");
+        if (pointerp(short_info) && sizeof(short_info)) {
+            for (i = 0; i < sizeof(short_info); i++) {
+                if (!stringp(short_info[i])) {
+                    continue;
+                }
                 theShort += short_info[i];
             }
         }
     }
 
-    if(objectp(TP) && !TO->is_room() && !living(TO))
-    {
-        if(TP->query("is_auto_detecting_traps"))
-        {
-            if(sizeof(TO->query_trap_data()))
-            {
+    if (objectp(TP) && !TO->is_room() && !living(TO)) {
+        if (TP->query("is_auto_detecting_traps")) {
+            if (sizeof(TO->query_trap_data())) {
                 theShort = TO->get_trap_object_auto_detect(theShort, TP);
             }
         }
     }
-    if(!TO->is_weapon() && objectp(wielded)) theShort += limbString;
-    if(!TO->is_room() && !TO->is_weapon() && !TO->is_armour() && !living(TO))
-    {
-        if(query_broken() != "" && stringp(theShort)) theShort += query_broken();
+    if (!TO->is_weapon() && objectp(wielded)) {
+        theShort += limbString;
+    }
+    if (!TO->is_room() && !TO->is_weapon() && !TO->is_armour() && !living(TO)) {
+        if (query_broken() != "" && stringp(theShort)) {
+            theShort += query_broken();
+        }
     }
     return theShort;
 }
 
 string query_eng_short()
 {
-    string str,s1,s2;
-    if(!ob_data) init_ob();
-    if(this_object()->query_invis()) return 0;
+    string str, s1, s2;
+    if (!ob_data) {
+        init_ob();
+    }
+    if (this_object()->query_invis()) {
+        return 0;
+    }
 
     str = query_obvious_short();
-    if(!str || (objectp(TP) &&  is_identified((string)TPQN)))
-    {
-        if(functionp(ob_data["short"]))
-        {
+    if (!str || (objectp(TP) && is_identified((string)TPQN))) {
+        if (functionp(ob_data["short"])) {
             str = (string)(*ob_data["short"])();
         } else {
-            str =  ob_data["short"];
+            str = ob_data["short"];
         }
     }
-    if(sscanf(str,"A %s",s1)) {
+    if (sscanf(str, "A %s", s1)) {
         return s1;
     }
-    if(sscanf(str,"a %s",s1)) {
+    if (sscanf(str, "a %s", s1)) {
         return s1;
     }
     return str;
 }
 
-string query_cap_name() {
-    if(!true_name) return 0;
-    if(!cap_name) return 0;
-    if(this_object()->query_invis()) return "Someone";
-    if(this_object()->query_ghost()) return "A ghost";
+string query_cap_name()
+{
+    if (!true_name) {
+        return 0;
+    }
+    if (!cap_name) {
+        return 0;
+    }
+    if (this_object()->query_invis()) {
+        return "Someone";
+    }
+    if (this_object()->query_ghost()) {
+        return "A ghost";
+    }
     return cap_name;
 }
 
-string query_vis_cap_name() {
+string query_vis_cap_name()
+{
 // This function is here to prevent objects that assume everything has a
 // vis_cap_name set, has one, when users/monsters were the only previous ones.
     return query_cap_name();
 // This should get properly overridden by the user.c object.
 }
 
-string query_vis_name() { return query_name(); }
+string query_vis_name()
+{
+    return query_name();
+}
+
 // Same logic as for query_vis_cap_name here. Bug Prevention.
 int query_light()
 {
     int light;
-    if(!props) return 0;
-    if(props["light"]) light = props["light"];
+    if (!props) {
+        return 0;
+    }
+    if (props["light"]) {
+        light = props["light"];
+    }
 
-    if(light > 7) { light = 7; }
-    if(light < -7) { light = -7; }
+    if (light > 7) {
+        light = 7;
+    }
+    if (light < -7) {
+        light = -7;
+    }
 
     return light;
 }
 
-void set_destroy() {
-    if(!ob_data) ob_data = ([]);
+void set_destroy()
+{
+    if (!ob_data) {
+        ob_data = ([]);
+    }
     ob_data["destroy"] = 1;
 }
 
-void add_hidden_seen(object obj){
-     if(!pointerp(hidden_seen)){
-          hidden_seen = ({});
-     }
-     hidden_seen += ({obj});
+void add_hidden_seen(object obj)
+{
+    if (!pointerp(hidden_seen)) {
+        hidden_seen = ({});
+    }
+    hidden_seen += ({ obj });
 }
 
-void add_all_to_hidden_seen(object * objs){
-    if(!pointerp(hidden_seen)){
-      hidden_seen = ({});
+void add_all_to_hidden_seen(object* objs)
+{
+    if (!pointerp(hidden_seen)) {
+        hidden_seen = ({});
     }
     hidden_seen += objs;
 }
 
-object * query_hidden_seen(){
-     return hidden_seen;
+object* query_hidden_seen()
+{
+    return hidden_seen;
 }
-void reset_hidden_seen(){
+
+void reset_hidden_seen()
+{
     if (hidden_seen) {
         hidden_seen = ({});
     }
 }
-void set_hidden(int xxx) {
+
+void set_hidden(int xxx)
+{
     if (xxx) {
         hidden_seen = ({});
     }
     hidden = xxx;
 }
 
-void set_magic_hidden(int xxx) {
+void set_magic_hidden(int xxx)
+{
     magic_hidden = xxx;
 }
 
-int query_real_hidden(){
+int query_real_hidden()
+{
     return hidden;
 }
 
-int query_hidden() {
-     return hidden && (objectp(TP)?(member_array(TP,hidden_seen) == -1):1);
+int query_hidden()
+{
+    return hidden && (objectp(TP) ? (member_array(TP, hidden_seen) == -1) : 1);
 }
 
-int query_magic_hidden() {
+int query_magic_hidden()
+{
     return magic_hidden;
 }
 
-int is_detectable() {
+int is_detectable()
+{
     return 1;
 }
-void set_read(string str){
-    string *read;
+
+void set_read(string str)
+{
+    string* read;
     read = ob_data["read"];
     if (!pointerp(read)) {
         read = ({});
     }
-    read += ({str});
-    ob_data["read"]=read;
+    read += ({ str });
+    ob_data["read"] = read;
 }
 
-void set_language(string str){
-    string *read;
+void set_language(string str)
+{
+    string* read;
     read = ob_data["language list"];
     if (!pointerp(read)) {
         read = ({});
     }
-    read += ({str});
-    ob_data["language list"]=read;
+    read += ({ str });
+    ob_data["language list"] = read;
 }
 
-void set_factionitem(string str){
-   factionitem = str;
+void set_factionitem(string str)
+{
+    factionitem = str;
 }
 
-string query_factionitem(){
-   return factionitem;
+string query_factionitem()
+{
+    return factionitem;
 }
 
 void sign(object signer, string sign_as, int skill)
@@ -1229,17 +1385,18 @@ void sign(object signer, string sign_as, int skill)
         ob_data["signature"] = ({});
     }
 
-    ob_data["signature"] += ({ ({signer->query_name(), sign_as, skill}) });
+    ob_data["signature"] += ({ ({ signer->query_name(), sign_as, skill }) });
 }
 
-int __Read(string str) {
+int __Read(string str)
+{
     int i;
     if (!objectp(TO)) {
         return 0;
     }
     if (!objectp(TP)) {
-            return 0;
-        }
+        return 0;
+    }
     if (!str) {
         return notify_fail("Read what?\n");
     }
@@ -1262,8 +1419,7 @@ int __Read(string str) {
             return 1;
         }
         return call_other(TO, (*ob_data["read"])(0), (str));
-    }
-    else if(stringp(ob_data["read"]) || pointerp(ob_data["read"])) {
+    }else if (stringp(ob_data["read"]) || pointerp(ob_data["read"])) {
         if (query_property("sealed")) {
             tell_object(TP, "That seems to be sealed.  You will need " +
                         "to <seal break> first.");
@@ -1303,13 +1459,13 @@ int __Read(string str) {
                         }
                     }
                 }
-
             }
         }
-        message("other_action", (string)TPQCN+" reads the "+query_name()+".", ETP, ({ TP }));
+        message("other_action", (string)TPQCN + " reads the " + query_name() + ".", ETP, ({ TP }));
         return 1;
+    }else {
+        return notify_fail("It looks all jumbled.\n");
     }
-    else return notify_fail("It looks all jumbled.\n");
 }
 
 int __Use(string str)
@@ -1364,11 +1520,13 @@ int __Use(string str)
     return call_other(find_object_or_load(EFFECTS_D), effect, TP, TO, command);
 }
 
-void set_use_delay(int sec){
-    set("use delay",sec);
+void set_use_delay(int sec)
+{
+    set("use delay", sec);
 }
 
-int query_use_delay(){
+int query_use_delay()
+{
     if (!query("use delay")) {
         return 1;
     }
@@ -1382,16 +1540,20 @@ void reset()
     return;
 }
 
-void create() {
-    seteuid( getuid() ); // ensures all objects have an euid.
+void create()
+{
+    seteuid(getuid());   // ensures all objects have an euid.
 
     // Once all objects call ::create(), many of the checks that
     // ob_data and props exist can be removed, saving on cpu.
-    ob_data = (["id": ({}), "condition":100, "updated time" : time()]);
+    ob_data = (["id" : ({}), "condition" : 100, "updated time" : time()]);
     props = ([]);
     item_bonuses = ([]);
-    if(previous_object()) creator = file_name(previous_object());
-    else creator = "Unknown";
+    if (previous_object()) {
+        creator = file_name(previous_object());
+    }else {
+        creator = "Unknown";
+    }
 
     identified = ({});
     studied = ({});
@@ -1405,50 +1567,43 @@ void create() {
 
 int query_updated_time()
 {
-    if(!ob_data["updated time"]) ob_data += (["updated time" : time() - 1000]);
+    if (!ob_data["updated time"]) {
+        ob_data += (["updated time" : time() - 1000]);
+    }
     return ob_data["updated time"];
 }
 
 void init()
 {
-    string *actions;
-    int i,j;
+    string* actions;
+    int i, j;
 
     // If this item is unique and someone else has it, then
     // remove it.
     // Thorn@ShadowGate - 28 June 2000
-    if(unique_item == 1)
-    {
-        if(sizeof(children(query_unique_id())) > 2)
-        {
-            if (objectp(ETO) && (base_name(ETO) != "/d/shadowgate/void") )
-            move("/d/shadowgate/void");
-            return;
-        }
-        else
-        {
-            if(!objectp(ETO));
-            else if(!UNIQUE_D->ok_to_clone(TO->query_unique_id(), ETO))
-            {
+    if (unique_item == 1) {
+        if (sizeof(children(query_unique_id())) > 2) {
+            if (objectp(ETO) && (base_name(ETO) != "/d/shadowgate/void")) {
                 move("/d/shadowgate/void");
             }
-            else if(userp(ETO))
-            {
-                UNIQUE_D->issue_lease(TO->query_unique_id(),ETOQN,unique_lease);
-            }
-            else
-            {
+            return;
+        }else {
+            if (!objectp(ETO)) {
+                ;
+            }else if (!UNIQUE_D->ok_to_clone(TO->query_unique_id(), ETO)) {
+                move("/d/shadowgate/void");
+            }else if (userp(ETO)) {
+                UNIQUE_D->issue_lease(TO->query_unique_id(), ETOQN, unique_lease);
+            }else {
                 UNIQUE_D->clear_lease(TO->query_unique_id());
             }
         }
     }
     add_action("__Read", "read");
-    add_action("__Use","use");
-    if(!TO->query_property("repairtype"))
-    {
-        if(!TO->is_instrument() && !TO->is_armor() && !TO->is_weapon())
-        {
-            TO->set_property("repairtype",({"tailor","jewel","woodwork","leatherwork"}));
+    add_action("__Use", "use");
+    if (!TO->query_property("repairtype")) {
+        if (!TO->is_instrument() && !TO->is_armor() && !TO->is_weapon()) {
+            TO->set_property("repairtype", ({ "tailor", "jewel", "woodwork", "leatherwork" }));
         }
     }
 }
@@ -1456,31 +1611,34 @@ void init()
 int move(mixed dest)
 {
     int i, scaled;
-    if(!objectp(TO)) { return MOVE_NOT_ALLOWED; }
+    if (!objectp(TO)) {
+        return MOVE_NOT_ALLOWED;
+    }
 
-    if(objectp(TO)) { TO->unequip(); }
-    if(!objectp(TO)) { return MOVE_NOT_ALLOWED; }
-    if(TO->query("scaledlevel") && !living(TO)) { TO->delete("scaledlevel"); }
-        i = move::move(dest);
-        if(objectp(TO))
-        {
-                if(objectp(ETO) && living(ETO))
-                {
-            if(intp(scaled = "/daemon/user_d.c"->get_scaled_level(ETO)) && (string)TO->query("scaledfor") == (string)ETO->query_true_name())
-            {
+    if (objectp(TO)) {
+        TO->unequip();
+    }
+    if (!objectp(TO)) {
+        return MOVE_NOT_ALLOWED;
+    }
+    if (TO->query("scaledlevel") && !living(TO)) {
+        TO->delete("scaledlevel");
+    }
+    i = move::move(dest);
+    if (objectp(TO)) {
+        if (objectp(ETO) && living(ETO)) {
+            if (intp(scaled = "/daemon/user_d.c"->get_scaled_level(ETO)) && (string)TO->query("scaledfor") == (string)ETO->query_true_name()) {
                 TO->set("scaledlevel", scaled);
             }
-                }
-
-                if (!i && !living(TO))
-                {
-                        if (query_real_hidden())
-                        {
-                                reset_hidden_seen();
-                                set_hidden(0);
-                        }
-                }
         }
+
+        if (!i && !living(TO)) {
+            if (query_real_hidden()) {
+                reset_hidden_seen();
+                set_hidden(0);
+            }
+        }
+    }
     return i;
 }
 
@@ -1500,140 +1658,176 @@ int get()
     string who;
     int pd;
 
-    if(this_object()->query_property("monsterweapon") && userp(TP)) return 0;
+    if (this_object()->query_property("monsterweapon") && userp(TP)) {
+        return 0;
+    }
     who = (string)this_object()->query_property("keep");
-    if(stringp(who) && who != (string)TPQN) {
+    if (stringp(who) && who != (string)TPQN) {
         write("A magical force prevents you from taking it!\n");
-        say("A magical force prevents "+(string)TPQCN+
-            " from taking the "+query_name()+".\n", TP);
+        say("A magical force prevents " + (string)TPQCN +
+            " from taking the " + query_name() + ".\n", TP);
         return 0;
     }
     POISON_D->is_object_poisoned(TO, TP, "get", 1);
-    if(TO->is_trapped("get"))
+    if (TO->is_trapped("get")) {
         TO->execute_trap("get", TP);
-    if(TO->query_hidden() || TO->query_magic_hidden()) return TP->detecting_invis();
+    }
+    if (TO->query_hidden() || TO->query_magic_hidden()) {
+        return TP->detecting_invis();
+    }
     return 1;
 }
 
-void set_magic_properties(string *temp) {
+void set_magic_properties(string* temp)
+{
     magic_properties = temp;
 }
 
-string *query_magic_properties(int a) {
-    string *temp;
+string* query_magic_properties(int a)
+{
+    string* temp;
     int x;
 
     temp = ({});
-    if(!a) return magic_properties;
-    if(a >= sizeof(magic_properties)) return magic_properties;
-    for(x=0;x<a;x++) {
-        temp += ({ magic_properties[x]});
+    if (!a) {
+        return magic_properties;
+    }
+    if (a >= sizeof(magic_properties)) {
+        return magic_properties;
+    }
+    for (x = 0; x < a; x++) {
+        temp += ({ magic_properties[x] });
     }
     return temp;
 }
 
-string get_serial_number() {
-    serial_number = "SG"+time();
+string get_serial_number()
+{
+    serial_number = "SG" + time();
     return serial_number;
 }
 
-string query_serial_number() {
+string query_serial_number()
+{
     return serial_number;
 }
 
 // To allow this item to use the unique item system
 // Thorn@ShadowGate - 27 June 2000
-varargs void set_unique(int x) {
-    if(undefinedp(x)) unique_item = 1;
-    else unique_item = x;
+varargs void set_unique(int x)
+{
+    if (undefinedp(x)) {
+        unique_item = 1;
+    }else {
+        unique_item = x;
+    }
 }
 
 // To allow a custom lease period to be set by the
 // coder.  There is no query function for this since
 // the information will be stored in the UNIQUE_D
 // Thorn@ShadowGate - 27 June 2000
-void set_lease(int x) {
+void set_lease(int x)
+{
     unique_lease = x;
 }
 
 // Checks if this item is unique.
 // Thorn@ShadowGate - 27 June 2000
-int query_unique() {
+int query_unique()
+{
     return unique_item;
 }
 
 // Sets this object's unique_id.
 // Thorn@ShadowGate - 27 June 2000
-string query_unique_id() {
-    return base_name(TO)+".c";
+string query_unique_id()
+{
+    return base_name(TO) + ".c";
 }
 
 //For wielding...
 
-void set_limbString(string what) {
+void set_limbString(string what)
+{
     limbString = what;
 }
 
-
-void set_wielded(object who) {
+void set_wielded(object who)
+{
     wielded = who;
     cursed = who->query_name();
-    if(TO->query_property("player enchanted")) CHECK_D->validate(TO);
+    if (TO->query_property("player enchanted")) {
+        CHECK_D->validate(TO);
+    }
 }
-string query_cursed() { return cursed; }
 
+string query_cursed()
+{
+    return cursed;
+}
 
-void set_hit(mixed val) {
-    if(functionp(val) && geteuid(this_object()) != geteuid(val)) return;
-    if(functionp(val)) {
-        set_property("fhit",1);
+void set_hit(mixed val)
+{
+    if (functionp(val) && geteuid(this_object()) != geteuid(val)) {
+        return;
+    }
+    if (functionp(val)) {
+        set_property("fhit", 1);
         hit = (*val)(1);
-    }
-    else
+    }else {
         hit = val;
+    }
 }
 
-void set_lrhit(mixed val) {
-    if(functionp(val) && geteuid(this_object()) != geteuid(val)) return;
-    if(functionp(val)) {
-        set_property("flrhit",1);
-        lrhit = (*val)(1);
+void set_lrhit(mixed val)
+{
+    if (functionp(val) && geteuid(this_object()) != geteuid(val)) {
+        return;
     }
-    else
+    if (functionp(val)) {
+        set_property("flrhit", 1);
+        lrhit = (*val)(1);
+    }else {
         lrhit = val;
+    }
 }
 
 void set_wield(mixed val)
 {
-    if(functionp(val) && geteuid(this_object()) != geteuid(val)) return;
-    if(functionp(val)) {
-        set_property("fwield",1);
+    if (functionp(val) && geteuid(this_object()) != geteuid(val)) {
+        return;
+    }
+    if (functionp(val)) {
+        set_property("fwield", 1);
         wieldf = (*val)(1);
-    }
-    else
+    }else {
         wieldf = val;
-}
-
-void set_unwield(mixed val) {
-    if(functionp(val) && geteuid(this_object()) != geteuid(val)) return;
-    if(functionp(val)) {
-        set_property("funwield",1);
-        unwieldf = (*val)(1);
     }
-    else
+}
+
+void set_unwield(mixed val)
+{
+    if (functionp(val) && geteuid(this_object()) != geteuid(val)) {
+        return;
+    }
+    if (functionp(val)) {
+        set_property("funwield", 1);
+        unwieldf = (*val)(1);
+    }else {
         unwieldf = val;
+    }
 }
 
-
-int query_damage() {
+int query_damage()
+{
     return 1;
 }
 
-
-int query_large_damage() {
+int query_large_damage()
+{
     return 1;
 }
-
 
 void db(string str)
 {
@@ -1644,41 +1838,50 @@ void temp_hit()
 {
     object item;
     mapping info;
-    string file,func_name;
+    string file, func_name;
     int ret;
 
-    if(!objectp(TO)) { return; }
-    if(!TO->is_weapon() && !TO->is_lrweapon()) { return; }
+    if (!objectp(TO)) {
+        return;
+    }
+    if (!TO->is_weapon() && !TO->is_lrweapon()) {
+        return;
+    }
 
-    if(!info = TO->query_property("temp_hit_bonus")) { return; }
-    if(!mapp(info) || !sizeof(keys(info))) { return; }
+    if (!info = TO->query_property("temp_hit_bonus")) {
+        return;
+    }
+    if (!mapp(info) || !sizeof(keys(info))) {
+        return;
+    }
 
-    file      = info["file"];
+    file = info["file"];
     func_name = info["func name"];
 
-    if(!file_exists(file+".c")) { return; }
-    if(!stringp(func_name))     { return; }
+    if (!file_exists(file + ".c")) {
+        return;
+    }
+    if (!stringp(func_name)) {
+        return;
+    }
 
-    if(!objectp(item = TO->query_property("temp_hit_item")))
-    {
+    if (!objectp(item = TO->query_property("temp_hit_item"))) {
         item = find_object_or_load(file);
-        TO->set_property("temp_hit_item",item);
+        TO->set_property("temp_hit_item", item);
     }
 
     call_other(item, func_name, TO);
     return;
 }
 
-
 //varargs int property_special(mixed arg, object enemy_weapon, object attacker)
 mixed query_hit()
 {
     function f;
     temp_hit();
-    if(query_property("hit"))
-    {
-        f = (:TO,"property_special":);
-        set_property("fhit",1);
+    if (query_property("hit")) {
+        f = (: TO, "property_special" :);
+        set_property("fhit", 1);
         return (*f)(1);
     }
     return hit;
@@ -1688,146 +1891,180 @@ mixed query_lrhit()
 {
     function f;
     temp_hit();
-    if(query_property("hit"))
-    {
-        f = (:TO,"property_special":);
-        set_property("flrhit",1);
+    if (query_property("hit")) {
+        f = (: TO, "property_special" :);
+        set_property("flrhit", 1);
         return (*f)(1);
     }
     return lrhit;
 }
 
-mixed query_wield() {
+mixed query_wield()
+{
     return wieldf;
 }
 
-mixed query_unwield() {
+mixed query_unwield()
+{
     return unwieldf;
 }
 
-
-object query_wielded() {
+object query_wielded()
+{
     return wielded;
 }
 
-
-void unequip() {
-    if(wielded && objectp(wielded)) __ActuallyUnwield();
+void unequip()
+{
+    if (wielded && objectp(wielded)) {
+        __ActuallyUnwield();
+    }
 }
 
-void __ActuallyUnwield() {
+void __ActuallyUnwield()
+{
     function f;
-        string catchbug;
-        int answer;
+    string catchbug;
+    int answer;
     mapping itembonuses;
 
-    if(!objectp(wielded)) {
+    if (!objectp(wielded)) {
         return;
     }
-    if(TO->query_property("funwield")) {
-                unwieldf = TO->query_unwield();
-                f = (:call_other,TO,unwieldf:);
-                if ((!"/adm/daemon/shutdown_d"->shuttingDown()) && (query_verb() != "quit") && interactive(ETO)) {
-                        catchbug=catch(answer=(*f)());
-                        if (catchbug) write(catchbug);
-                        if (!answer) return 1;
-                } else {
-                        if (!(*f)()) return 1;
-                }
+    if (TO->query_property("funwield")) {
+        unwieldf = TO->query_unwield();
+        f = (: call_other, TO, unwieldf:);
+        if ((!"/adm/daemon/shutdown_d"->shuttingDown()) && (query_verb() != "quit") && interactive(ETO)) {
+            catchbug = catch(answer = (*f)());
+            if (catchbug) {
+                write(catchbug);
+            }
+            if (!answer) {
+                return 1;
+            }
+        } else {
+            if (!(*f)()) {
+                return 1;
+            }
         }
-    if(itembonuses = TO->query_item_bonuses()) run_item_bonuses("remove",wielded,itembonuses);
+    }
+    if (itembonuses = TO->query_item_bonuses()) {
+        run_item_bonuses("remove", wielded, itembonuses);
+    }
 
     wielded->remove_weapon_from_limb(this_object());
-    if(stringp(unwieldf) && !query_property("funwield"))
+    if (stringp(unwieldf) && !query_property("funwield")) {
         message("my_action", unwieldf, wielded);
-    else message("my_action", "You unwield "+query_short()+".",
-                 wielded);
-    if(objectp(environment(wielded)))
-    {
+    }else {
+        message("my_action", "You unwield " + query_short() + ".",
+                wielded);
+    }
+    if (objectp(environment(wielded))) {
         message("other_action", (string)wielded->query_cap_name() +
-        " unwields "+query_short()+".", environment(wielded),
-        ({ wielded}));
+                " unwields " + query_short() + ".", environment(wielded),
+                ({ wielded }));
     }
     set_not_inhand();
 }
 
-void set_not_inhand() {
+void set_not_inhand()
+{
     wielded = 0;
     limbString = "";
 }
 
-
-int wieldable() {
+int wieldable()
+{
     return 1;
 }
 
-int reaction_to_hit(object target, int damage) {
+int reaction_to_hit(object target, int damage)
+{
     return 0;
 }
 
-int thrown() {
+int thrown()
+{
     return 1;
 }
 
-int thrown_hit(object target) {
+int thrown_hit(object target)
+{
     return 0;
 }
 
-mapping *query_studied_failed(){
-   return studied_failed;
+mapping* query_studied_failed()
+{
+    return studied_failed;
 }
 
-int is_studied_failed(string name,int level){
-   if(!studied_failed || studied_failed == ([])){
-      return 0;
-   }
-   return studied_failed[name];
+int is_studied_failed(string name, int level)
+{
+    if (!studied_failed || studied_failed == ([])) {
+        return 0;
+    }
+    return studied_failed[name];
 }
 
-void add_studied_failed(string name, int level) {
-    if(!studied_failed) studied_failed = ([]);
-    if(!studied_failed[name]) {
+void add_studied_failed(string name, int level)
+{
+    if (!studied_failed) {
+        studied_failed = ([]);
+    }
+    if (!studied_failed[name]) {
         studied_failed[name] = level;
         return;
     }
     studied_failed[name] = level;
 }
 
-void remove_studied_failed(string str){
-   map_delete(studied_failed,str);
-}
-
-string *query_studied(){
-   return studied;
-}
-
-void add_studied(string str){
-   studied += ({str});
-   map_delete(studied_failed,str);
-}
-
-int is_studied(string name){
-   return (member_array(name,query_studied()) != -1);
-}
-
-string * query_identified()
+void remove_studied_failed(string str)
 {
-    if(!pointerp(identified)) identified = ({});
+    map_delete(studied_failed, str);
+}
+
+string* query_studied()
+{
+    return studied;
+}
+
+void add_studied(string str)
+{
+    studied += ({ str });
+    map_delete(studied_failed, str);
+}
+
+int is_studied(string name)
+{
+    return (member_array(name, query_studied()) != -1);
+}
+
+string* query_identified()
+{
+    if (!pointerp(identified)) {
+        identified = ({});
+    }
     return identified;
 }
 
-void set_identified(string *myidentified)
+void set_identified(string* myidentified)
 {
-    if(!pointerp(identified)) identified = ({});
-    if(!pointerp(myidentified)) return;
+    if (!pointerp(identified)) {
+        identified = ({});
+    }
+    if (!pointerp(myidentified)) {
+        return;
+    }
     identified = myidentified;
     return;
 }
 
 void add_identified(string name)
 {
-    if(!pointerp(identified)) { identified = ({}); }
-    identified += ({name});
+    if (!pointerp(identified)) {
+        identified = ({});
+    }
+    identified += ({ name });
 }
 
 int is_identified(string name)
@@ -1835,15 +2072,18 @@ int is_identified(string name)
     return (member_array(name, query_identified()) != -1);
 }
 
-void set_lore(string lore){
-    set("lore",lore);
+void set_lore(string lore)
+{
+    set("lore", lore);
 }
 
-string query_lore(){
-  return (string) query("lore");
+string query_lore()
+{
+    return (string)query("lore");
 }
 
-string query_language(){
+string query_language()
+{
     if (!query("language")) {
         return "wizish";
     }
@@ -1852,205 +2092,315 @@ string query_language(){
 
 void set_item_owner_prop(string str, int flag)
 {
-        int which_bit = -1;
-        switch(str)
-        {
-                case "sale_clear":
-                        which_bit = 0;
-                        break;
-                case "fence_clear":
-                        which_bit = 6;
-                        break;
-                case "death_remove":
-                        which_bit = 12;
-                        break;
-                case "death_clear":
-                        which_bit = 18;
-                        break;
-                case "multiple_owners":
-                        which_bit = 24;
-                        break;
-                default:
-                        break;
-        }
-        if(which_bit == -1) return;
-        switch(flag)
-        {
-                case 0:
-                        item_owner_props = clear_bit(item_owner_props, which_bit);
-                        break;
-                case 1:
-                        item_owner_props = set_bit(item_owner_props, which_bit);
-                        break;
-                default:
-                        break;
-        }
+    int which_bit = -1;
+    switch (str) {
+    case "sale_clear":
+        which_bit = 0;
+        break;
+
+    case "fence_clear":
+        which_bit = 6;
+        break;
+
+    case "death_remove":
+        which_bit = 12;
+        break;
+
+    case "death_clear":
+        which_bit = 18;
+        break;
+
+    case "multiple_owners":
+        which_bit = 24;
+        break;
+
+    default:
+        break;
+    }
+    if (which_bit == -1) {
+        return;
+    }
+    switch (flag) {
+    case 0:
+        item_owner_props = clear_bit(item_owner_props, which_bit);
+        break;
+
+    case 1:
+        item_owner_props = set_bit(item_owner_props, which_bit);
+        break;
+
+    default:
+        break;
+    }
 }
 
 int query_item_owner_prop(string str)
 {
-        if(!str) return 0;
-        //changing this so that the default will be 01000
-        //which means the item owner will only clear
-        //when an item is being fenced - and only have 1 owner
-        //since gear is now kept on pk death
-        //this wouldn't benefit someone who is killing
-        //bob for his ownered sword of rabbit
-        //slaying - maybe change "death_remove" to be
-        //strip_remove or something? //Saide
-        if(!item_owner_props) { item_owner_props = "01000"; }
+    if (!str) {
+        return 0;
+    }
+    //changing this so that the default will be 01000
+    //which means the item owner will only clear
+    //when an item is being fenced - and only have 1 owner
+    //since gear is now kept on pk death
+    //this wouldn't benefit someone who is killing
+    //bob for his ownered sword of rabbit
+    //slaying - maybe change "death_remove" to be
+    //strip_remove or something? //Saide
+    if (!item_owner_props) {
+        item_owner_props = "01000";
+    }
 
-        switch(str)
-        {
-                case "sale_clear":
-                        return test_bit(item_owner_props,0);
-                        break;
-                case "fence_clear":
-                        return test_bit(item_owner_props,6);
-                        break;
-                case "death_remove":
-                        return test_bit(item_owner_props,12);
-                        break;
-                case "death_clear":
-                        return test_bit(item_owner_props,18);
-                        break;
-                case "multiple_owners":
-                        return test_bit(item_owner_props,24);
-                        break;
-                default:
-                        return 0;
-                        break;
-        }
+    switch (str) {
+    case "sale_clear":
+        return test_bit(item_owner_props, 0);
+
+        break;
+
+    case "fence_clear":
+        return test_bit(item_owner_props, 6);
+
+        break;
+
+    case "death_remove":
+        return test_bit(item_owner_props, 12);
+
+        break;
+
+    case "death_clear":
+        return test_bit(item_owner_props, 18);
+
+        break;
+
+    case "multiple_owners":
+        return test_bit(item_owner_props, 24);
+
+        break;
+
+    default:
+        return 0;
+
+        break;
+    }
 }
 
 int add_item_owner(string str)
 {
-        if(!objectp(find_player(str))) return 0;
-        if(avatarp(find_player(str))) return 1;
-        if(sizeof(item_owners) >= 1 &&
-        !query_item_owner_prop("multiple_owners"))
-        {
-                return 0;
-        }
-        if(member_array(str, item_owners) == -1)
-        {
-                item_owners += ({str});
-                return 1;
-        }
+    if (!objectp(find_player(str))) {
         return 0;
+    }
+    if (avatarp(find_player(str))) {
+        return 1;
+    }
+    if (sizeof(item_owners) >= 1 &&
+        !query_item_owner_prop("multiple_owners")) {
+        return 0;
+    }
+    if (member_array(str, item_owners) == -1) {
+        item_owners += ({ str });
+        return 1;
+    }
+    return 0;
 }
 
 string query_item_owners()
 {
-        return item_owners;
+    return item_owners;
 }
 
 int query_owns_item(string str)
 {
-        if(!objectp(find_player(str))) return 0;
-        if(avatarp(find_player(str))) return 1;
-        if(member_array(str, item_owners) != -1)
-        {
-                return 1;
-        }
+    if (!objectp(find_player(str))) {
         return 0;
+    }
+    if (avatarp(find_player(str))) {
+        return 1;
+    }
+    if (member_array(str, item_owners) != -1) {
+        return 1;
+    }
+    return 0;
 }
 
 void remove_item_owner(string str)
 {
-        if(member_array(str, item_owners) != -1)
-        {
-                item_owners = item_owners - ({str});
-        }
+    if (member_array(str, item_owners) != -1) {
+        item_owners = item_owners - ({ str });
+    }
 }
 
 void clear_item_owners()
 {
-        item_owners = ({});
+    item_owners = ({});
 }
 
 //following two functions are retained but are now defunct
 //equipment bonuses are handled now with /daemon/equipment_d - allowing
 //bonuses to degrade with equipment condition - Saide, February 2017
-void add_the_bonus(object myplayer,string bonustype,int bonusvalue) {
+void add_the_bonus(object myplayer, string bonustype, int bonusvalue)
+{
     return;
-        if(!objectp(myplayer)) return;
-        if(!stringp(bonustype)) return;
-        if(!bonusvalue) return;
 
-        switch(bonustype)
-    {
-                // stats
-        case "strength": case "dexterity": case "constitution": case "intelligence": case "wisdom": case "charisma":
-                        myplayer->add_stat_bonus(bonustype,bonusvalue);
-                        break;
-                // saving throws
-                case "fortitude": case "will": case "reflex":
-                        myplayer->add_saving_bonus(bonustype,bonusvalue);
-                        break;
-                // skills
-                case "academics": case "athletics": case "craft, armorsmith": case "craft, jeweller": case "craft, leatherworker":
-                case "craft, tailor": case "craft, weaponsmith": case "craft, woodworker": case "disguise": case "dungeoneering":
-                case "endurance": case "healing": case "influence": case "perception": case "rope use": case "stealth":
-                case "spellcraft": case "survival": case "thievery":
-                        myplayer->add_skill_bonus(bonustype,bonusvalue);
-                        break;
-                case "attack bonus":
-                        myplayer->add_attack_bonus(bonusvalue);
-                        break;
-                case "damage bonus":
-                        myplayer->add_damage_bonus(bonusvalue);
-                        break;
-                case "armor bonus":
-                        myplayer->add_ac_bonus(bonusvalue);
-                        break;
-                case "sight bonus":
-                        if(member_array((string)myplayer->query_race(),PLAYER_D->night_races()) != -1) myplayer->add_sight_bonus((-1)*bonusvalue);
-                        else myplayer->add_sight_bonus(bonusvalue);
-                        break;
-                // misc bonuses held in set_property()
-                case "magic resistance": case "spell damage resistance": case "damage resistance": case "spell penetration":
-                        myplayer->set_property(bonustype,bonusvalue);
-                        break;
-                case "bonus spell slots":
-                        myplayer->set_property("bonus_spell_slots",bonusvalue);
-                        break;
-                case "caster level":
-                        myplayer->set_property("empowered",bonusvalue);
-                        break;
-                case "shieldMiss":
-                        myplayer->set_shieldMiss(bonusvalue);
-                        break;
+    if (!objectp(myplayer)) {
+        return;
+    }
+    if (!stringp(bonustype)) {
+        return;
+    }
+    if (!bonusvalue) {
+        return;
+    }
+
+    switch (bonustype) {
+    // stats
+    case "strength":
+    case "dexterity":
+    case "constitution":
+    case "intelligence":
+    case "wisdom":
+    case "charisma":
+        myplayer->add_stat_bonus(bonustype, bonusvalue);
+        break;
+
+    // saving throws
+    case "fortitude":
+    case "will":
+    case "reflex":
+        myplayer->add_saving_bonus(bonustype, bonusvalue);
+        break;
+
+    // skills
+    case "academics":
+    case "athletics":
+    case "craft, armorsmith":
+    case "craft, jeweller":
+    case "craft, leatherworker":
+    case "craft, tailor":
+    case "craft, weaponsmith":
+    case "craft, woodworker":
+    case "disguise":
+    case "dungeoneering":
+    case "endurance":
+    case "healing":
+    case "influence":
+    case "perception":
+    case "rope use":
+    case "stealth":
+    case "spellcraft":
+    case "survival":
+    case "thievery":
+        myplayer->add_skill_bonus(bonustype, bonusvalue);
+        break;
+
+    case "attack bonus":
+        myplayer->add_attack_bonus(bonusvalue);
+        break;
+
+    case "damage bonus":
+        myplayer->add_damage_bonus(bonusvalue);
+        break;
+
+    case "armor bonus":
+        myplayer->add_ac_bonus(bonusvalue);
+        break;
+
+    case "sight bonus":
+        if (member_array((string)myplayer->query_race(), PLAYER_D->night_races()) != -1) {
+            myplayer->add_sight_bonus((-1) * bonusvalue);
+        }else {
+            myplayer->add_sight_bonus(bonusvalue);
+        }
+        break;
+
+    // misc bonuses held in set_property()
+    case "magic resistance":
+    case "spell damage resistance":
+    case "damage resistance":
+    case "spell penetration":
+        myplayer->set_property(bonustype, bonusvalue);
+        break;
+
+    case "bonus spell slots":
+        myplayer->set_property("bonus_spell_slots", bonusvalue);
+        break;
+
+    case "caster level":
+        myplayer->set_property("empowered", bonusvalue);
+        break;
+
+    case "shieldMiss":
+        myplayer->set_shieldMiss(bonusvalue);
+        break;
+
 // so we have a bunch of extra non-existent types here, I'm going to remove them... N, 8/15.
 // and percentages aren't supported in any sourcebooks & don't really work in a d20 system so removing entirely.
-        case "fire resistance": case "cold resistance": case "water resistance": case "air resistance":
-        case "earth resistance": case "bludgeoning resistance": case "piercing resistance": case "slashing resistance":
-        case "silver resistance": case "cold iron resistance": case "electricity resistance": case "acid resistance": case "sonic resistance":
-        case "positive energy resistance": case "negative energy resistance": case "force resistance": case "divine resistance": case "untyped resistance":
-        case "mental resistance": case "light resistance": case "darkness resistance": case "nature resistance":
-            myplayer->set_resistance(replace_string(bonustype," resistance",""),bonusvalue);
-            break;
-        case "fire resistance percent": case "cold resistance percent":
-        case "water resistance percent": case "air resistance percent": case "earth resistance percent":
-        case "bludgeoning resistance percent": case "piercing resistance percent": case "slashing resistance percent":
-        case "silver resistance percent": case "cold iron resistance percent": case "electricity resistance percent": case "acid resistance percent":
-        case "sonic resistance percent": case "positive energy resistance percent": case "negative energy resistance percent": case "force resistance percent":
-        case "divine resistance percent": case "untyped resistance percent": case "nature resistance percent":
-        case "mental resistance percent": case "light resistance percent": case "darkness resistance percent":
-            myplayer->set_resistance_percent(replace_string(bonustype," resistance percent",""),bonusvalue);
-            break;
+    case "fire resistance":
+    case "cold resistance":
+    case "water resistance":
+    case "air resistance":
+    case "earth resistance":
+    case "bludgeoning resistance":
+    case "piercing resistance":
+    case "slashing resistance":
+    case "silver resistance":
+    case "cold iron resistance":
+    case "electricity resistance":
+    case "acid resistance":
+    case "sonic resistance":
+    case "positive energy resistance":
+    case "negative energy resistance":
+    case "force resistance":
+    case "divine resistance":
+    case "untyped resistance":
+    case "mental resistance":
+    case "light resistance":
+    case "darkness resistance":
+    case "nature resistance":
+        myplayer->set_resistance(replace_string(bonustype, " resistance", ""), bonusvalue);
+        break;
+
+    case "fire resistance percent":
+    case "cold resistance percent":
+    case "water resistance percent":
+    case "air resistance percent":
+    case "earth resistance percent":
+    case "bludgeoning resistance percent":
+    case "piercing resistance percent":
+    case "slashing resistance percent":
+    case "silver resistance percent":
+    case "cold iron resistance percent":
+    case "electricity resistance percent":
+    case "acid resistance percent":
+    case "sonic resistance percent":
+    case "positive energy resistance percent":
+    case "negative energy resistance percent":
+    case "force resistance percent":
+    case "divine resistance percent":
+    case "untyped resistance percent":
+    case "nature resistance percent":
+    case "mental resistance percent":
+    case "light resistance percent":
+    case "darkness resistance percent":
+        myplayer->set_resistance_percent(replace_string(bonustype, " resistance percent", ""), bonusvalue);
+        break;
+
 // functional resistance code here!! Contains sourcebook 5x energy types, 3x physical types, 4x divine types, plus untyped. N, 8/15.
-       // case "fire resistance": case "cold resistance": case "electricity resistance": case "acid resistance": case "sonic resistance":
-        case "bludgeoning resistance": case "piercing resistance": case "slashing resistance":
-        case "positive energy resistance": case "negative energy resistance": case "force resistance": case "divine resistance": case "untyped resistance":
-            myplayer->set_resistance(replace_string(bonustype," resistance",""),bonusvalue);
-            break;
-        }
+    // case "fire resistance": case "cold resistance": case "electricity resistance": case "acid resistance": case "sonic resistance":
+    case "bludgeoning resistance":
+    case "piercing resistance":
+    case "slashing resistance":
+    case "positive energy resistance":
+    case "negative energy resistance":
+    case "force resistance":
+    case "divine resistance":
+    case "untyped resistance":
+        myplayer->set_resistance(replace_string(bonustype, " resistance", ""), bonusvalue);
+        break;
+    }
 }
 
 void run_item_bonuses(string mystatus, object myplayer, mapping itembonuses)
 {
-
 // listing of currently functional bonuses: stats (strength, dexterity, constitution, intelligence, wisdom, charisma),
 // magic resistance, spell damage resistance, damage resistance, armor bonus, attack bonus, damage bonus, sight bonus,
 // saving throws (will, reflex, fortitude), caster level, bonus spell slots, skills (academics; athletics; craft, armorsmith;
@@ -2058,128 +2408,190 @@ void run_item_bonuses(string mystatus, object myplayer, mapping itembonuses)
 // endurance; healing; influence; perception; rope use; stealth; spellcraft; survival; thievery); spell penetration; shieldMiss
 // adding resistance, and resistance perc -Ares
 
-        int myhighest, i, j, mycurrent, mydifference, mymod, scaled;
-        object *myarmors, *myweapons;
-      string *mykeys;
+    int myhighest, i, j, mycurrent, mydifference, mymod, scaled;
+    object* myarmors, * myweapons;
+    string* mykeys;
     return;
-        if(!objectp(myplayer)) return;
-        if(!objectp(TO)) return;
-      if(!mapp(itembonuses)) return;
-      if(!stringp(mystatus)) return;
-      if(mystatus != "equip" && mystatus != "remove") return;
 
-      mykeys = ({});
-      mykeys += keys(itembonuses);
-      if(!sizeof(mykeys)) return;
+    if (!objectp(myplayer)) {
+        return;
+    }
+    if (!objectp(TO)) {
+        return;
+    }
+    if (!mapp(itembonuses)) {
+        return;
+    }
+    if (!stringp(mystatus)) {
+        return;
+    }
+    if (mystatus != "equip" && mystatus != "remove") {
+        return;
+    }
 
-      for(j = 0;j<sizeof(mykeys);j++)
-      {
-                mymod = itembonuses[mykeys[j]];
-                if(!mymod) continue;
+    mykeys = ({});
+    mykeys += keys(itembonuses);
+    if (!sizeof(mykeys)) {
+        return;
+    }
 
-                if(mymod < 0) { //negative bonus; always add or remove without a check.
-                        if(mystatus == "equip") add_the_bonus(myplayer,mykeys[j],itembonuses[mykeys[j]]);
-                        else add_the_bonus(myplayer,mykeys[j],(-1*(itembonuses[mykeys[j]])));
-                }
+    for (j = 0; j < sizeof(mykeys); j++) {
+        mymod = itembonuses[mykeys[j]];
+        if (!mymod) {
+            continue;
+        }
 
-                else
-        { // if positive bonus, check through inven for other of the same bonus, and find the highest
-                        myarmors = myplayer->all_armour();
-                        myweapons = myplayer->query_wielded();
-                        myhighest = 0;
-            if(intp(scaled = TO->query("scaledlevel")) && scaled > 0)
-            {
-                mymod = to_int(to_float(scaled)/to_float(myplayer->query_base_character_level()) * mymod);
-                if(mymod < 1) mymod = 0;
+        if (mymod < 0) {        //negative bonus; always add or remove without a check.
+            if (mystatus == "equip") {
+                add_the_bonus(myplayer, mykeys[j], itembonuses[mykeys[j]]);
+            }else {
+                add_the_bonus(myplayer, mykeys[j], (-1 * (itembonuses[mykeys[j]])));
             }
-                        if(sizeof(myweapons)) {
-                                for(i = 0; i < sizeof(myweapons); i++) {
-                                        //make sure this is a valid object - Saide
-                                        if(!objectp(myweapons[i])) continue;
-                                mycurrent = (int)myweapons[i]->query_item_bonus(mykeys[j]);
-                                if((mycurrent > myhighest) && myweapons[i] != TO) myhighest = mycurrent;
-                                }
-                        }
-                        if(sizeof(myarmors)) {
-                                for(i = 0; i < sizeof(myarmors); i++) {
-                                        if(!objectp(myarmors[i])) continue;
-                                mycurrent = (int)myarmors[i]->query_item_bonus(mykeys[j]);
-                                if((mycurrent > myhighest) && myarmors[i] != TO) myhighest = mycurrent;
-                                }
-                        }
+        }else { // if positive bonus, check through inven for other of the same bonus, and find the highest
+            myarmors = myplayer->all_armour();
+            myweapons = myplayer->query_wielded();
+            myhighest = 0;
+            if (intp(scaled = TO->query("scaledlevel")) && scaled > 0) {
+                mymod = to_int(to_float(scaled) / to_float(myplayer->query_base_character_level()) * mymod);
+                if (mymod < 1) {
+                    mymod = 0;
+                }
+            }
+            if (sizeof(myweapons)) {
+                for (i = 0; i < sizeof(myweapons); i++) {
+                    //make sure this is a valid object - Saide
+                    if (!objectp(myweapons[i])) {
+                        continue;
+                    }
+                    mycurrent = (int)myweapons[i]->query_item_bonus(mykeys[j]);
+                    if ((mycurrent > myhighest) && myweapons[i] != TO) {
+                        myhighest = mycurrent;
+                    }
+                }
+            }
+            if (sizeof(myarmors)) {
+                for (i = 0; i < sizeof(myarmors); i++) {
+                    if (!objectp(myarmors[i])) {
+                        continue;
+                    }
+                    mycurrent = (int)myarmors[i]->query_item_bonus(mykeys[j]);
+                    if ((mycurrent > myhighest) && myarmors[i] != TO) {
+                        myhighest = mycurrent;
+                    }
+                }
+            }
 
-                        // if the mod is the same or less than the highest already equipped, do nothing. If it is greater, modify.
+            // if the mod is the same or less than the highest already equipped, do nothing. If it is greater, modify.
             //changed to continue because this is returning before it loops through the all item bonuses on items
             //with more than one bonus
-                        if(myhighest >= mymod) continue; //return;
-                        mydifference = myhighest - mymod;
+            if (myhighest >= mymod) {
+                continue;                                //return;
+            }
+            mydifference = myhighest - mymod;
 //                      tell_object(myplayer,"Doing run_item_bonuses with myhighest: "+myhighest+" and mymod: "+mymod+" and mydifference: "+mydifference+".");
             //changing here as well - Saide 7/2/2016
-                        if(!mydifference) continue; //return;
-                        if(mystatus == "equip") add_the_bonus(myplayer,mykeys[j],(-1*mydifference));
-                        else add_the_bonus(myplayer,mykeys[j],mydifference);
-                }
+            if (!mydifference) {
+                continue;                           //return;
+            }
+            if (mystatus == "equip") {
+                add_the_bonus(myplayer, mykeys[j], (-1 * mydifference));
+            }else {
+                add_the_bonus(myplayer, mykeys[j], mydifference);
+            }
         }
+    }
 }
 
 //Added for support of items that have special circumstances around
 //their adding of bonuses - Saide
-int BonusCheck(string BonusName) { return 1; }
+int BonusCheck(string BonusName)
+{
+    return 1;
+}
 
 //function get_obfunc(string str) { return (: TO,str :); }
 
 //new functionality to replace old stat bonuses with all magical bonuses
-void set_item_bonus(string bonustype,int thebonus) {
-   if(!item_bonuses) item_bonuses = ([]);
-   if(!thebonus) { if(item_bonuses[bonustype]) map_delete(item_bonuses,bonustype); } // a "zero" needs to revoke the bonus entirely now for enchanting. N, 7/18
-   else item_bonuses[bonustype] = thebonus;
+void set_item_bonus(string bonustype, int thebonus)
+{
+    if (!item_bonuses) {
+        item_bonuses = ([]);
+    }
+    if (!thebonus) {
+        if (item_bonuses[bonustype]) {
+            map_delete(item_bonuses, bonustype);
+        }
+    }                                                                                // a "zero" needs to revoke the bonus entirely now for enchanting. N, 7/18
+    else {
+        item_bonuses[bonustype] = thebonus;
+    }
 }
 
-int query_item_bonus(string bonustype) {
-   if(!item_bonuses) item_bonuses = ([]);
-   if(!item_bonuses[bonustype]) return 0;
-   return item_bonuses[bonustype];
+int query_item_bonus(string bonustype)
+{
+    if (!item_bonuses) {
+        item_bonuses = ([]);
+    }
+    if (!item_bonuses[bonustype]) {
+        return 0;
+    }
+    return item_bonuses[bonustype];
 }
 
-void clear_item_bonus() { item_bonuses = ([]); }
+void clear_item_bonus()
+{
+    item_bonuses = ([]);
+}
 
-
-mapping query_item_bonuses() {
-   if(!item_bonuses) item_bonuses = ([]);
-   return item_bonuses;
+mapping query_item_bonuses()
+{
+    if (!item_bonuses) {
+        item_bonuses = ([]);
+    }
+    return item_bonuses;
 }
 
 string query_bonus_display()
 {
     string ret = "";
-    string *mykeys;
+    string* mykeys;
     int mytracker, i;
     mapping mybonuses;
     mybonuses = query_item_bonuses();
-    if(!mapp(mybonuses) || !objectp(TP)) return ret;
-    if(!sizeof(mybonuses)) return ret;
+    if (!mapp(mybonuses) || !objectp(TP)) {
+        return ret;
+    }
+    if (!sizeof(mybonuses)) {
+        return ret;
+    }
     mykeys = keys(mybonuses);
 
-    if(is_identified((string)TPQN))
-    {
+    if (is_identified((string)TPQN)) {
         mytracker = 0;
-        for(i=0;i<sizeof(mykeys);i++) { if(mybonuses[mykeys[i]]) mytracker = 1; }
-        if(!mytracker) return ret; // skip out if it has nothing but zero (conditional) bonuses. N, 8/12.
+        for (i = 0; i < sizeof(mykeys); i++) {
+            if (mybonuses[mykeys[i]]) {
+                mytracker = 1;
+            }
+        }
+        if (!mytracker) {
+            return ret;            // skip out if it has nothing but zero (conditional) bonuses. N, 8/12.
+        }
         ret += "\n%^BOLD%^%^WHITE%^You are aware of the following %^RESET%^%^WHITE%^(base)%^BOLD%^ innate magical properties of this item:%^RESET%^ ";
-        if(mybonuses[mykeys[0]])
-        {
-            if(!pointerp(mybonuses[mykeys[0]])) ret += ""+mybonuses[mykeys[0]]+" "+mykeys[0]+"";
-            else ret += ""+implode(mybonuses[mykeys[0]], ", ") + " "+mykeys[0]+"";
+        if (mybonuses[mykeys[0]]) {
+            if (!pointerp(mybonuses[mykeys[0]])) {
+                ret += "" + mybonuses[mykeys[0]] + " " + mykeys[0] + "";
+            }else {
+                ret += "" + implode(mybonuses[mykeys[0]], ", ") + " " + mykeys[0] + "";
+            }
 
-            if(sizeof(mykeys) > 1)
-            {
-                for(i=1;i<sizeof(mykeys);i++)
-                {
-
-                    if(mybonuses[mykeys[i]])
-                    {
-                         if(!pointerp(mybonuses[mykeys[i]])) ret += ", "+mybonuses[mykeys[i]]+" "+mykeys[i]+"";
-                         else ret += ", "+implode(mybonuses[mykeys[i]], ", ")+" "+mykeys[i]+"";
+            if (sizeof(mykeys) > 1) {
+                for (i = 1; i < sizeof(mykeys); i++) {
+                    if (mybonuses[mykeys[i]]) {
+                        if (!pointerp(mybonuses[mykeys[i]])) {
+                            ret += ", " + mybonuses[mykeys[i]] + " " + mykeys[i] + "";
+                        }else {
+                            ret += ", " + implode(mybonuses[mykeys[i]], ", ") + " " + mykeys[i] + "";
+                        }
                     }
                 }
             }
@@ -2188,7 +2600,6 @@ string query_bonus_display()
     }
     return ret;
 }
-
 
 // Designed so that you can use set_property to create most common specials on armors and weapons.  This should make crafted armor,
 // weapons and random item generators much more simple to use.
@@ -2245,74 +2656,102 @@ string query_bonus_display()
 // $S  = summon->query_short();
 varargs int property_special(mixed arg, object enemy_weapon, object attacker)
 {
-    string *specials,special,*ids,spell,*classes,the_class,summon,wound, poison, *poisons;
-    int frequency,enchantment,min_level,damage;
-    object spell_ob,target,summon_ob,bleed_ob;
-    mapping messages=([]), map=([]);
+    string* specials, special, * ids, spell, * classes, the_class, summon, wound, poison, * poisons;
+    int frequency, enchantment, min_level, damage;
+    object spell_ob, target, summon_ob, bleed_ob;
+    mapping messages = ([]), map = ([]);
 
-    if(!objectp(ETO) || !living(ETO) || !objectp(EETO)) { return 0; }
+    if (!objectp(ETO) || !living(ETO) || !objectp(EETO)) {
+        return 0;
+    }
 
-    if(objectp(arg) || (!enemy_weapon && !attacker && !intp(arg)))
-    {
+    if (objectp(arg) || (!enemy_weapon && !attacker && !intp(arg))) {
         attacker = arg;
         messages["special"] = "weapon";
-    }
-    else
-    {
-        if(intp(arg)) { damage = arg; }
+    }else {
+        if (intp(arg)) {
+            damage = arg;
+        }
         messages["special"] = "armor";
     }
 
-    if(!objectp(attacker)) { attacker = ETO->query_current_attacker(); }
-    if(!objectp(attacker)) { return 0; }
+    if (!objectp(attacker)) {
+        attacker = ETO->query_current_attacker();
+    }
+    if (!objectp(attacker)) {
+        return 0;
+    }
 
-    if(query_property("struck")) { specials = explode(query_property("struck"), ", "); }
-    if(query_property("hit"))    { specials = explode(query_property("hit"), ", "); }
-    if(!sizeof(specials)) { return 0; }
+    if (query_property("struck")) {
+        specials = explode(query_property("struck"), ", ");
+    }
+    if (query_property("hit")) {
+        specials = explode(query_property("hit"), ", ");
+    }
+    if (!sizeof(specials)) {
+        return 0;
+    }
 
     special = specials[random(sizeof(specials))];
 
     enchantment = query_property("enchantment");
-    if(enchantment < 1) { enchantment = 1; }
-    if(query_property("magic") > enchantment) { enchantment = query_property("magic"); }
+    if (enchantment < 1) {
+        enchantment = 1;
+    }
+    if (query_property("magic") > enchantment) {
+        enchantment = query_property("magic");
+    }
 
     min_level = enchantment * 7;
 
-    if(query_property("struck frequency")) { frequency = query_property("struck frequency"); }
-    if(query_property("hit frequency")) { frequency = query_property("hit frequency"); }
-
-    if(messages["special"] == "weapon")
-    {
-        if(!frequency) { frequency = ( enchantment * 2 ) + 6; }
-        if(frequency > 20) { frequency = 20; }
-        damage = roll_dice(1,enchantment);
-        messages["weapon"] = TO;
+    if (query_property("struck frequency")) {
+        frequency = query_property("struck frequency");
     }
-    else
-    {
-        if(!frequency) { frequency = ( enchantment * 5 ) + 5; }
-        if(frequency > 40) { frequency = 40; }
+    if (query_property("hit frequency")) {
+        frequency = query_property("hit frequency");
+    }
+
+    if (messages["special"] == "weapon") {
+        if (!frequency) {
+            frequency = (enchantment * 2) + 6;
+        }
+        if (frequency > 20) {
+            frequency = 20;
+        }
+        damage = roll_dice(1, enchantment);
+        messages["weapon"] = TO;
+    }else {
+        if (!frequency) {
+            frequency = (enchantment * 5) + 5;
+        }
+        if (frequency > 40) {
+            frequency = 40;
+        }
         messages["weapon"] = enemy_weapon;
     }
 
-    if(!damage) { damage = roll_dice(1,enchantment); }
-    if(frequency < 10) { frequency = 10; }
-    if(random(100) > frequency) { return damage; }
+    if (!damage) {
+        damage = roll_dice(1, enchantment);
+    }
+    if (frequency < 10) {
+        frequency = 10;
+    }
+    if (random(100) > frequency) {
+        return damage;
+    }
 
     messages["attacker"] = attacker;
 
 
-    switch(special)
-    {
+    switch (special) {
     case "poison":
 
         messages["type"] = "poison";
         send_messages(messages);
-        if( (!poison = query_property("struck poison")) && (!poison = query_property("hit poison")) )
-        {
+        if ((!poison = query_property("struck poison")) && (!poison = query_property("hit poison"))) {
             poisons = get_dir("/d/common/obj/poisons/base/");
             poison = poisons[random(sizeof(poisons))];
-            poison = "/d/common/obj/poisons/base/"+poison;
+            poison = "/d/common/obj/poisons/base/" + poison;
         }
         POISON_D->ApplyPoison(attacker, poison, ETO, "injury");
         break;
@@ -2321,11 +2760,12 @@ varargs int property_special(mixed arg, object enemy_weapon, object attacker)
 
         messages["type"] = "bleed";
         send_messages(messages);
-        if( (wound = query_property("struck wound")) || (wound = query_property("hit wound")) )
-        {
+        if ((wound = query_property("struck wound")) || (wound = query_property("hit wound"))) {
             bleed_ob = new(wound);
         }
-        if(!objectp(bleed_ob)) { bleed_ob = new("/d/magic/obj/bleeding_wound.c"); }
+        if (!objectp(bleed_ob)) {
+            bleed_ob = new("/d/magic/obj/bleeding_wound.c");
+        }
         bleed_ob->set_level(min_level);
         bleed_ob->set_target(attacker);
         attacker->do_damage(attacker->return_target_limb(), min_level);
@@ -2349,61 +2789,66 @@ varargs int property_special(mixed arg, object enemy_weapon, object attacker)
 
         messages["type"] = "trip";
         send_messages(messages);
-        attacker->set_tripped(roll_dice(1,enchantment),"%^YELLOW%^You are trying to get your feet back under you!%^RESET%^");
+        attacker->set_tripped(roll_dice(1, enchantment), "%^YELLOW%^You are trying to get your feet back under you!%^RESET%^");
         break;
 
     case "heal":
 
         messages["type"] = "heal";
         send_messages(messages);
-        ETO->do_damage("torso", -1 * roll_dice(1, min_level)+enchantment+5);
+        ETO->do_damage("torso", -1 * roll_dice(1, min_level) + enchantment + 5);
         break;
 
     case "attack":
 
         messages["type"] = "attack";
         send_messages(messages);
-        if(sizeof(ETO->query_attackers())) { ETO->execute_attack(); }
+        if (sizeof(ETO->query_attackers())) {
+            ETO->execute_attack();
+        }
         break;
 
     case "repair":
 
         messages["type"] = "repair";
         send_messages(messages);
-        TO->repairMe(roll_dice(1,enchantment));
+        TO->repairMe(roll_dice(1, enchantment));
         break;
 
     case "disarm": // don't use this with weapon specials, it would happen too often
 
-        if(objectp(enemy_weapon))
-        {
+        if (objectp(enemy_weapon)) {
             messages["type"] = "disarm";
             send_messages(messages);
-            if(!attacker->will_save(min_level))
-            {
+            if (!attacker->will_save(min_level)) {
                 ids = enemy_weapon->query_id();
-                attacker->force_me("unwield "+ids[0]);
+                attacker->force_me("unwield " + ids[0]);
                 attacker->remove_property("disarm time");
-                attacker->set_property("disarm time",time() + ( ROUND_LENGTH * roll_dice(1,enchantment)) );
+                attacker->set_property("disarm time", time() + (ROUND_LENGTH * roll_dice(1, enchantment)));
             }
             break;
         } // falls through intentionally if no valid weapon
 
     case "cast":
 
-        if( (query_property("struck spell")) || (query_property("hit spell")) )
-        {
-            if(query_property("struck spell")) { spell = query_property("struck spell"); }
-            if(query_property("hit spell")) { spell = query_property("hit spell"); }
+        if ((query_property("struck spell")) || (query_property("hit spell"))) {
+            if (query_property("struck spell")) {
+                spell = query_property("struck spell");
+            }
+            if (query_property("hit spell")) {
+                spell = query_property("hit spell");
+            }
             spell_ob = new(spell);
             classes = keys(spell_ob->query_spell_level_map());
             the_class = classes[random(sizeof(classes))];
-            if(objectp(spell_ob))
-            {
+            if (objectp(spell_ob)) {
                 messages["type"] = "cast";
                 send_messages(messages);
-                if(spell_ob->query_helpful()) { target = ETO; }
-                else { target = attacker; }
+                if (spell_ob->query_helpful()) {
+                    target = ETO;
+                }else {
+                    target = attacker;
+                }
                 spell_ob->use_spell(ETO, target, min_level, 100, the_class);
             }
             break;
@@ -2411,25 +2856,24 @@ varargs int property_special(mixed arg, object enemy_weapon, object attacker)
 
     case "summon": // should be cautious using this with weapons, or there might be a ton of summoned stuff eventually
 
-        if( (query_property("struck summon")) || (query_property("hit summon")) )
-        {
-            if(query_property("struck summon")) { summon = query_property("struck summon"); }
-            if(query_property("hit summon")) { summon = query_property("hit summon"); }
-            if(objectp(summon_ob = new(summon)))
-            {
-                if(summon_ob->query_name())
-                {
+        if ((query_property("struck summon")) || (query_property("hit summon"))) {
+            if (query_property("struck summon")) {
+                summon = query_property("struck summon");
+            }
+            if (query_property("hit summon")) {
+                summon = query_property("hit summon");
+            }
+            if (objectp(summon_ob = new(summon))) {
+                if (summon_ob->query_name()) {
                     messages["summon"] = summon_ob->query_name();
-                }
-                else
-                {
+                }else {
                     messages["summon"] = summon_ob->query_short();
                 }
                 messages["type"] = "summon";
                 send_messages(messages);
-                summon_ob->set("aggressive",1);
+                summon_ob->set("aggressive", 1);
                 summon_ob->remove_property("swarm");
-                summon_ob->set_property("minion",ETO);
+                summon_ob->set_property("minion", ETO);
                 summon_ob->add_id("summoned monster");
                 summon_ob->move(EETO);
                 ETO->add_follower(summon_ob);
@@ -2443,315 +2887,248 @@ varargs int property_special(mixed arg, object enemy_weapon, object attacker)
     case "damage":
     default:
 
-        if(messages["special"] == "armor")
-        {
+        if (messages["special"] == "armor") {
             messages["type"] = "reflect";
             send_messages(messages);
-            attacker->do_damage("torso",damage);
-        }
-        else
-        {
+            attacker->do_damage("torso", damage);
+        }else {
             messages["type"] = "damage";
             send_messages(messages);
-            damage = roll_dice(1,min_level) + min_level /2;
-            attacker->do_damage(attacker->return_target_limb(),damage);
+            damage = roll_dice(1, min_level) + min_level / 2;
+            attacker->do_damage(attacker->return_target_limb(), damage);
         }
         break;
     }
 
-    if(messages["special"] == "weapon") { return roll_dice(1,enchantment); }
+    if (messages["special"] == "weapon") {
+        return roll_dice(1, enchantment);
+    }
     return 0;
 }
 
-
-string color_me(string str) { return CRAYON_D->color_string(str, "random"); }
-
+string color_me(string str)
+{
+    return CRAYON_D->color_string(str, "random");
+}
 
 void send_messages(mapping map)
 {
-    string type, user_message, target_message, room_message,summon,*to_replace, special;
-    object weapon,attacker;
-    mapping messages =([]),replace=([]);
-    int i, user_messages,ranged;
+    string type, user_message, target_message, room_message, summon, * to_replace, special;
+    object weapon, attacker;
+    mapping messages = ([]), replace = ([]);
+    int i, user_messages, ranged;
 
-    if(!mapp(map) || !sizeof(keys(map))) { return; }
+    if (!mapp(map) || !sizeof(keys(map))) {
+        return;
+    }
 
-    type     = map["type"];
+    type = map["type"];
     attacker = map["attacker"];
-    weapon   = map["weapon"];
-    special  = map["special"];
-    if(TO->is_lrweapon()) { ranged = 1; }
+    weapon = map["weapon"];
+    special = map["special"];
+    if (TO->is_lrweapon()) {
+        ranged = 1;
+    }
 
-    switch(type)
-    {
+    switch (type) {
     case "poison":
 
-        if(query_property("poison message") && mapp(query_property("poison message")))
-        {
+        if (query_property("poison message") && mapp(query_property("poison message"))) {
             messages = query_property("poison message");
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "As $T strikes your $O, $TS is infected by a dangerous poison!";
+        }else if (special == "armor") {
+            messages["user"] = "As $T strikes your $O, $TS is infected by a dangerous poison!";
             messages["target"] = "As you strike $U's $O, you are infected by a dangerous poison!";
-            messages["room"]   = "As $T strikes $U's $O, $TS is infected by a dangerous poison!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "As you shoot $T with your $O, you infect $TO with a dangerous poison!";
+            messages["room"] = "As $T strikes $U's $O, $TS is infected by a dangerous poison!";
+        }else if (ranged) {
+            messages["user"] = "As you shoot $T with your $O, you infect $TO with a dangerous poison!";
             messages["target"] = "As $U shoots you with $UP $O, $US infects you with a dangerous poison!";
-            messages["room"]   = "As $U shoots $U with $UP $O, $US infects $TO with a dangerous poison!";
-        }
-        else
-        {
-            messages["user"]   = "As you strike $T with your $O, you infect $TO with a dangerous poison!";
+            messages["room"] = "As $U shoots $U with $UP $O, $US infects $TO with a dangerous poison!";
+        }else {
+            messages["user"] = "As you strike $T with your $O, you infect $TO with a dangerous poison!";
             messages["target"] = "As $U strikes you with $UP $O, $US infects you with a dangerous poison!";
-            messages["room"]   = "As $U strikes $T with $UP $O, $USin fects $TO with a dangerous poison!";
+            messages["room"] = "As $U strikes $T with $UP $O, $USin fects $TO with a dangerous poison!";
         }
         break;
 
     case "bleed":
 
-        if(query_property("bleed message") && mapp(query_property("bleed message")))
-        {
+        if (query_property("bleed message") && mapp(query_property("bleed message"))) {
             messages = query_property("bleed message");
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "As $T strikes your $O, it tears a jagged wound in $TO!";
+        }else if (special == "armor") {
+            messages["user"] = "As $T strikes your $O, it tears a jagged wound in $TO!";
             messages["target"] = "As you strike $U's $O, it tears a jagged wound in you!";
-            messages["room"]   = "As $T strikes $U's $O, it tears a jagged wound in $TO!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "As you shoot $T with your $O, it opens up a jagged wound in $TO!";
+            messages["room"] = "As $T strikes $U's $O, it tears a jagged wound in $TO!";
+        }else if (ranged) {
+            messages["user"] = "As you shoot $T with your $O, it opens up a jagged wound in $TO!";
             messages["target"] = "As $U shoots you with $UP $O, it opens up a jagged wound!";
-            messages["room"]   = "As $U shoots $T with $UP $O, it opens up a jagged wound!";
-        }
-        else
-        {
-            messages["user"]   = "As you strike $T with your $O, it opens up a jagged wound in $TO!";
+            messages["room"] = "As $U shoots $T with $UP $O, it opens up a jagged wound!";
+        }else {
+            messages["user"] = "As you strike $T with your $O, it opens up a jagged wound in $TO!";
             messages["target"] = "As $U strikes you with $UP $O, it opens up a jagged wound!";
-            messages["room"]   = "As $U strikes $T with $UP $O, it opens up a jagged wound in $TO!";
+            messages["room"] = "As $U strikes $T with $UP $O, it opens up a jagged wound in $TO!";
         }
         break;
 
 
     case "blind":
 
-        if(query_property("blind message") && mapp(query_property("blind message")))
-        {
+        if (query_property("blind message") && mapp(query_property("blind message"))) {
             messages = query_property("blind message");
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "As $T strikes your $O, a sudden blinding flash of magical energy steals $TP sight!";
+        }else if (special == "armor") {
+            messages["user"] = "As $T strikes your $O, a sudden blinding flash of magical energy steals $TP sight!";
             messages["target"] = "As you strike $U's $O, a sudden blinding flash of magical energy steals your sight!";
-            messages["room"]   = "As $T strikes $U's $O, a sudden blinding flash of magical energy steals $TP sight!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "Your shoot $T right across the eyes, blinding $TO!";
+            messages["room"] = "As $T strikes $U's $O, a sudden blinding flash of magical energy steals $TP sight!";
+        }else if (ranged) {
+            messages["user"] = "Your shoot $T right across the eyes, blinding $TO!";
             messages["target"] = "$U shoots right across your eyes, blinding you!";
-            messages["room"]   = "$U shoots right across $T's eyes, blinding $TO!";
-        }
-        else
-        {
-            messages["user"]   = "Your attack hits $T right in the eyes, blinding $TO!";
+            messages["room"] = "$U shoots right across $T's eyes, blinding $TO!";
+        }else {
+            messages["user"] = "Your attack hits $T right in the eyes, blinding $TO!";
             messages["target"] = "$U's attack hits you right in the eyes, blinding you!";
-            messages["room"]   = "$U's attack hits $T right in the eyes, blinding $TO!";
+            messages["room"] = "$U's attack hits $T right in the eyes, blinding $TO!";
         }
         break;
 
     case "stun":
 
-        if(query_property("stun message") && mapp(query_property("stun message")))
-        {
+        if (query_property("stun message") && mapp(query_property("stun message"))) {
             messages = query_property("stun message");
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "As $T strikes your $O, $TS receives a jolt of magical energy, stunning $TO!";
+        }else if (special == "armor") {
+            messages["user"] = "As $T strikes your $O, $TS receives a jolt of magical energy, stunning $TO!";
             messages["target"] = "As you strike $U's $O, you are jolted by magical energy, stunning you!";
-            messages["room"]   = "As $T strikes $U's $O, $TS receives a jolt of magical energy, stunning $TO!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "You shoot $T right in the temple with your $O, stunning $TO!";
+            messages["room"] = "As $T strikes $U's $O, $TS receives a jolt of magical energy, stunning $TO!";
+        }else if (ranged) {
+            messages["user"] = "You shoot $T right in the temple with your $O, stunning $TO!";
             messages["target"] = "$U shoots you right in the temple with $UP $O, stunning you!";
-            messages["room"]   = "$U shoots $T right in the temple with $UP $O, stunning $TO!";
-        }
-        else
-        {
-            messages["user"]   = "You strike $T stoutly in the head with your $O, stunning $TO!";
+            messages["room"] = "$U shoots $T right in the temple with $UP $O, stunning $TO!";
+        }else {
+            messages["user"] = "You strike $T stoutly in the head with your $O, stunning $TO!";
             messages["target"] = "$U strikes you stoutly in the head with $UP $O, stunning you!";
-            messages["room"]   = "$U strikes $T stoutly in the head with $UP $O, stunning $TO!";
+            messages["room"] = "$U strikes $T stoutly in the head with $UP $O, stunning $TO!";
         }
         break;
 
     case "trip":
 
-        if(query_property("trip message") && mapp(query_property("trip message")))
-        {
+        if (query_property("trip message") && mapp(query_property("trip message"))) {
             messages = query_property("trip message");
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "As $T strikes your $O, $TS is knocked off balance and looses $TP footing!";
+        }else if (special == "armor") {
+            messages["user"] = "As $T strikes your $O, $TS is knocked off balance and looses $TP footing!";
             messages["target"] = "As you strike $U's $O, you are knocked off balance and loose your footing!";
-            messages["room"]   = "As $T strikes $U's $O, $TS is knocked off balance and looses $TP footing!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "You shoot the front of $T's knee, knocking $TO to the ground!";
+            messages["room"] = "As $T strikes $U's $O, $TS is knocked off balance and looses $TP footing!";
+        }else if (ranged) {
+            messages["user"] = "You shoot the front of $T's knee, knocking $TO to the ground!";
             messages["target"] = "$U shoots the front of your knee, knocking you to the ground!";
-            messages["room"]   = "$U shoots the front of $T's knee, knocking $TO to the ground!";
-        }
-        else
-        {
-            messages["user"]   = "You sweep your $O at $T, knocking $TO to the ground!";
+            messages["room"] = "$U shoots the front of $T's knee, knocking $TO to the ground!";
+        }else {
+            messages["user"] = "You sweep your $O at $T, knocking $TO to the ground!";
             messages["target"] = "$U sweeps $UP $O at you, knocking you to the ground!";
-            messages["room"]   = "$U sweeps $UP $O at $T, knocking $TO to the ground!";
+            messages["room"] = "$U sweeps $UP $O at $T, knocking $TO to the ground!";
         }
         break;
 
     case "heal":
 
-        if(query_property("heal message") && mapp(query_property("heal message")))
-        {
+        if (query_property("heal message") && mapp(query_property("heal message"))) {
             messages = query_property("heal message");
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "As $T strikes your $O, a surge of healing energy replenishes your health!";
+        }else if (special == "armor") {
+            messages["user"] = "As $T strikes your $O, a surge of healing energy replenishes your health!";
             messages["target"] = "As you strike $U's $O, a sudden surge of healing energy replenishes $UP health!";
-            messages["room"]   = "As $T strikes $U's $O, a sudden surge of healing energy replenishes $UP health!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "As you shoot $T with your $O, a wave of healing energy washes over you!";
+            messages["room"] = "As $T strikes $U's $O, a sudden surge of healing energy replenishes $UP health!";
+        }else if (ranged) {
+            messages["user"] = "As you shoot $T with your $O, a wave of healing energy washes over you!";
             messages["target"] = "As $U shoots you with $UP $O, a wave of healing energy washes over $UO!";
-            messages["room"]   = "As $U shoots $T with $UP $O, a wave of healing energy washes over $UO!";
-        }
-        else
-        {
-            messages["user"]   = "As you strike $T with your $O, a wave of healing energy washes over you!";
+            messages["room"] = "As $U shoots $T with $UP $O, a wave of healing energy washes over $UO!";
+        }else {
+            messages["user"] = "As you strike $T with your $O, a wave of healing energy washes over you!";
             messages["target"] = "As $U strikes you with $UP $O, a wave of healing energy washes over $UO!";
-            messages["room"]   = "As $U strikes $T with $UP $O, a wave of healing energy washes over $UO!";
+            messages["room"] = "As $U strikes $T with $UP $O, a wave of healing energy washes over $UO!";
         }
         break;
 
     case "attack":
 
-        if(query_property("attack message") && mapp(query_property("attack message")))
-        {
+        if (query_property("attack message") && mapp(query_property("attack message"))) {
             messages = query_property("attack message");
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "You take advantage of the opening when $T strikes your $O, quickly executing another attack!";
+        }else if (special == "armor") {
+            messages["user"] = "You take advantage of the opening when $T strikes your $O, quickly executing another attack!";
             messages["target"] = "$U takes advantage of the opening when you strike $UP $O, quickly executing another attack!";
-            messages["room"]   = "$U takes advantage of the opening when $T strikes $U's $O, quickly executing another attack!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "You quickly fire another time with your $O!";
+            messages["room"] = "$U takes advantage of the opening when $T strikes $U's $O, quickly executing another attack!";
+        }else if (ranged) {
+            messages["user"] = "You quickly fire another time with your $O!";
             messages["target"] = "$U quickly fires another time with $UP $O!";
-            messages["room"]   = "$U quickly fires another time with $UP $O!";
-        }
-        else
-        {
-            messages["user"]   = "You take advantage of the opening left by your attack, striking again!";
+            messages["room"] = "$U quickly fires another time with $UP $O!";
+        }else {
+            messages["user"] = "You take advantage of the opening left by your attack, striking again!";
             messages["target"] = "$U takes advantage of the opening left by $UP attack, striking again!";
-            messages["room"]   = "$U takes advantage of the opening left by $UP attack, striking again!";
+            messages["room"] = "$U takes advantage of the opening left by $UP attack, striking again!";
         }
         break;
 
     case "repair":
 
-        if(query_property("repair message") && mapp(query_property("repair message")))
-        {
+        if (query_property("repair message") && mapp(query_property("repair message"))) {
             messages = query_property("repair message");
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "Your $O seems to absorb the energy of $T's attack and uses it to repair itself!";
+        }else if (special == "armor") {
+            messages["user"] = "Your $O seems to absorb the energy of $T's attack and uses it to repair itself!";
             messages["target"] = "$U's $O seems to absorb the energy of your attack and uses it to repair itself!";
-            messages["room"]   = "$U's $O seems to absorb the energy of $T's attack and uses it to repair itself!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "Your $O seems to draw energy from $T and uses it to repair itself!";
+            messages["room"] = "$U's $O seems to absorb the energy of $T's attack and uses it to repair itself!";
+        }else if (ranged) {
+            messages["user"] = "Your $O seems to draw energy from $T and uses it to repair itself!";
             messages["target"] = "$U's $O seems to drawn energy from you and uses it to repair itself!";
-            messages["room"]   = "$U's $O seems to drawn energy from $T and uses it to repair itself!";
-        }
-        else
-        {
-            messages["user"]   = "Your $O seems to draw energy from $T and uses it to repair itself!";
+            messages["room"] = "$U's $O seems to drawn energy from $T and uses it to repair itself!";
+        }else {
+            messages["user"] = "Your $O seems to draw energy from $T and uses it to repair itself!";
             messages["target"] = "$U's $O seems to draw energy from you and uses it to repair itself!";
-            messages["room"]   = "$U's $O seems to draw energy from $T and uses it to repair itself!";
+            messages["room"] = "$U's $O seems to draw energy from $T and uses it to repair itself!";
         }
         break;
 
     case "disarm":
 
-        if(query_property("disarm message") && mapp(query_property("disarm message")))
-        {
+        if (query_property("disarm message") && mapp(query_property("disarm message"))) {
             messages = query_property("disarm message");
             user_messages = 1;
-        }
-        else if(special == "armor") // should ONLY be possible with armor
-        {
-            messages["user"]   = "As $T strikes your $O, a jolt of magical energy knocks the $W out of $TP hand!";
+        }else if (special == "armor") { // should ONLY be possible with armor
+            messages["user"] = "As $T strikes your $O, a jolt of magical energy knocks the $W out of $TP hand!";
             messages["target"] = "As you strike $U's $O, a jolt of magical energy knocks your $W out of your hand!";
-            messages["room"]   = "As $T strikes $U's $O, a jolt of magical energy knocks $TP $W out of $TP hand!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "This special should not be happening, please contact a wiz";
+            messages["room"] = "As $T strikes $U's $O, a jolt of magical energy knocks $TP $W out of $TP hand!";
+        }else if (ranged) {
+            messages["user"] = "This special should not be happening, please contact a wiz";
             messages["target"] = "This special should not be happening, please contact a wiz";
-            messages["room"]   = "This special should not be happening, please contact a wiz";
-        }
-        else
-        {
-            messages["user"]   = "This special should not be happening, please contact a wiz";
+            messages["room"] = "This special should not be happening, please contact a wiz";
+        }else {
+            messages["user"] = "This special should not be happening, please contact a wiz";
             messages["target"] = "This special should not be happening, please contact a wiz";
-            messages["room"]   = "This special should not be happening, please contact a wiz";
+            messages["room"] = "This special should not be happening, please contact a wiz";
         }
         break;
 
     case "cast":
 
-        if(query_property("cast message") && mapp(query_property("cast message")))
-        {
+        if (query_property("cast message") && mapp(query_property("cast message"))) {
             messages = query_property("cast message");
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "As $T strikes your $O, you begin casting a spell!";
+        }else if (special == "armor") {
+            messages["user"] = "As $T strikes your $O, you begin casting a spell!";
             messages["target"] = "As you strike $U's $O, $US begins casting a spell!";
-            messages["room"]   = "As $T strikes $U's $O, $US begins casting a spell!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "As you shoot $T with your $O, magic flows through you and you begin casting a spell!";
+            messages["room"] = "As $T strikes $U's $O, $US begins casting a spell!";
+        }else if (ranged) {
+            messages["user"] = "As you shoot $T with your $O, magic flows through you and you begin casting a spell!";
             messages["target"] = "As $U shoots you with $UP $O, magic flows through $UO and $US begins casting a spell!";
-            messages["room"]   = "As $U shoots $T with $UP $O, magic flows through $UO and $US begins casting a spell!";
-        }
-        else
-        {
-            messages["user"]   = "As you strike $T with your $O magic flows through you and you begin casting a spell!";
+            messages["room"] = "As $U shoots $T with $UP $O, magic flows through $UO and $US begins casting a spell!";
+        }else {
+            messages["user"] = "As you strike $T with your $O magic flows through you and you begin casting a spell!";
             messages["target"] = "As $U strikes you with $UP $O, magic flows through $UO and $US begins casting a spell!";
-            messages["room"]   = "As $U strikes $T with $UP $UO, magic flows through $UO and $US begins casting a spell!";
+            messages["room"] = "As $U strikes $T with $UP $UO, magic flows through $UO and $US begins casting a spell!";
         }
         break;
 
@@ -2759,28 +3136,21 @@ void send_messages(mapping map)
 
         summon = map["summon"];
 
-        if(query_property("summon message") && mapp(query_property("summon message")))
-        {
+        if (query_property("summon message") && mapp(query_property("summon message"))) {
             messages = query_property("summon message");
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "As $T strikes your $O, a $S appears at your side and protects you!";
+        }else if (special == "armor") {
+            messages["user"] = "As $T strikes your $O, a $S appears at your side and protects you!";
             messages["target"] = "As you strike $U's $O, a $S appears at $UP side and protects $UO!";
-            messages["room"]   = "As $T strikes $U's $O, a $S appears at $UP side and protects $UO!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "As you shoot $T with your $O, a $S appears at your side and protects you!";
+            messages["room"] = "As $T strikes $U's $O, a $S appears at $UP side and protects $UO!";
+        }else if (ranged) {
+            messages["user"] = "As you shoot $T with your $O, a $S appears at your side and protects you!";
             messages["target"] = "As $U shoots you with $UP $O, a $S appears at $UP side and protects $UO!";
-            messages["room"]   = "As $U shoots $T with $UP $O, a $S appears at $UP side and protects $UO!";
-        }
-        else
-        {
-            messages["user"]   = "As you strike $T with your $O, a $S appears at your side and protects you!";
+            messages["room"] = "As $U shoots $T with $UP $O, a $S appears at $UP side and protects $UO!";
+        }else {
+            messages["user"] = "As you strike $T with your $O, a $S appears at your side and protects you!";
             messages["target"] = "As $U strikes you with $UP $O, a $S appears at $UP side and protects $UO!";
-            messages["room"]   = "As $U strikes $T with $UP $O, a $S appears at $UP side and protects $UO!";
+            messages["room"] = "As $U strikes $T with $UP $O, a $S appears at $UP side and protects $UO!";
         }
         break;
 
@@ -2788,69 +3158,74 @@ void send_messages(mapping map)
     case "damage":
     default:
 
-        if( (query_property("reflect message") && mapp(query_property("reflect message"))) || (query_property("damage message") && mapp(query_property("damage message"))) )
-        {
+        if ((query_property("reflect message") && mapp(query_property("reflect message"))) || (query_property("damage message") && mapp(query_property("damage message")))) {
             messages = query_property("reflect message");
-            if(!mapp(messages)) { messages = query_property("damage message"); }
+            if (!mapp(messages)) {
+                messages = query_property("damage message");
+            }
             user_messages = 1;
-        }
-        else if(special == "armor")
-        {
-            messages["user"]   = "As $T strikes your $O, a surge of energy runs back into $T, hurting $TO!";
+        }else if (special == "armor") {
+            messages["user"] = "As $T strikes your $O, a surge of energy runs back into $T, hurting $TO!";
             messages["target"] = "As you strike $U's $O, a surge of energy hurts you!";
-            messages["room"]   = "As $T strikes $U's $O, a surge of energy runs back into $T, hurting $TO!";
-        }
-        else if(ranged)
-        {
-            messages["user"]   = "You shoot $T painfully with your $O, dealing extra damage!";
+            messages["room"] = "As $T strikes $U's $O, a surge of energy runs back into $T, hurting $TO!";
+        }else if (ranged) {
+            messages["user"] = "You shoot $T painfully with your $O, dealing extra damage!";
             messages["target"] = "$U shoots you painfully with $UP $O, dealing extra damage!";
-            messages["room"]   = "$U shoots $T painfully with $UP $O, dealing extra damage!";
-        }
-        else
-        {
-            messages["user"]   = "You strike $T painfully with your $O, dealing extra damage!";
+            messages["room"] = "$U shoots $T painfully with $UP $O, dealing extra damage!";
+        }else {
+            messages["user"] = "You strike $T painfully with your $O, dealing extra damage!";
             messages["target"] = "$U strikes you painfully with $UP $O, dealing extra damage!";
-            messages["room"]   = "$U strikes $T painfully with $UP $O, dealing extra damage!";
+            messages["room"] = "$U strikes $T painfully with $UP $O, dealing extra damage!";
         }
         break;
     }
 
-    user_message   = messages["user"];
+    user_message = messages["user"];
     target_message = messages["target"];
-    room_message   = messages["room"];
+    room_message = messages["room"];
 
-    if(objectp(ETO))        { replace["$U"]  = ETO->QCN;
-                              replace["$UO"] = ETO->QO;     // him/her
-                              replace["$US"] = ETO->QS;     // he/she
-                              replace["$UP"] = ETO->QP; }   // his/hers
-    if(objectp(attacker))   { replace["$T"]  = attacker->QCN;
-                              replace["$TO"] = attacker->QO;
-                              replace["$TS"] = attacker->QS;
-                              replace["$TP"] = attacker->QP; }
-    if(objectp(TO))         { replace["$O"]  = TO->query_short(); }     // used for the wearer/wielder's weapon or armor
-    if(objectp(weapon))     { replace["$W"]  = weapon->query_short(); } // used for the attacker's weapon with armor specials
-    if(summon)              { replace["$S"]  = summon; }
+    if (objectp(ETO)) {
+        replace["$U"] = ETO->QCN;
+        replace["$UO"] = ETO->QO;                           // him/her
+        replace["$US"] = ETO->QS;                           // he/she
+        replace["$UP"] = ETO->QP;
+    }                                                       // his/hers
+    if (objectp(attacker)) {
+        replace["$T"] = attacker->QCN;
+        replace["$TO"] = attacker->QO;
+        replace["$TS"] = attacker->QS;
+        replace["$TP"] = attacker->QP;
+    }
+    if (objectp(TO)) {
+        replace["$O"] = TO->query_short();
+    }                                                                   // used for the wearer/wielder's weapon or armor
+    if (objectp(weapon)) {
+        replace["$W"] = weapon->query_short();
+    }                                                                   // used for the attacker's weapon with armor specials
+    if (summon) {
+        replace["$S"] = summon;
+    }
 
     to_replace = keys(replace);
-    to_replace = sort_array(to_replace,"descending_size",CRAYON_D); // shorter strings organized last
+    to_replace = sort_array(to_replace, "descending_size", CRAYON_D); // shorter strings organized last
 
-    for(i=0;i<sizeof(to_replace);i++)
-    {
-        user_message   = replace_string(user_message,   to_replace[i], replace[to_replace[i]]);
+    for (i = 0; i < sizeof(to_replace); i++) {
+        user_message = replace_string(user_message, to_replace[i], replace[to_replace[i]]);
         target_message = replace_string(target_message, to_replace[i], replace[to_replace[i]]);
-        room_message   = replace_string(room_message,   to_replace[i], replace[to_replace[i]]);
+        room_message = replace_string(room_message, to_replace[i], replace[to_replace[i]]);
     }
 
-    if(!user_messages)
-    {
-        user_message   = color_me(user_message);
+    if (!user_messages) {
+        user_message = color_me(user_message);
         target_message = color_me(target_message);
-        room_message   = color_me(room_message);
+        room_message = color_me(room_message);
     }
 
-    tell_object(ETO,      user_message);
+    tell_object(ETO, user_message);
     tell_object(attacker, target_message);
-    if(objectp(EETO)) { tell_room(EETO, room_message, ({attacker, ETO})); }
+    if (objectp(EETO)) {
+        tell_room(EETO, room_message, ({ attacker, ETO }));
+    }
     return;
 }
 
