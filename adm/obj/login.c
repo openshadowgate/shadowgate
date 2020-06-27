@@ -290,7 +290,7 @@ protected void confirm_password(string str2, string str1)
     string salt;
     salt = PWGEN->random_salt(43);
     if (str1 == str2) {
-        __Player->set_password(str2 = crypt(str2, "$5$"+salt));
+        __Player->set_password(str2 = crypt(str2, "$6$"+salt));
         message("logon",
 "
 

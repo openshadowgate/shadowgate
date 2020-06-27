@@ -336,7 +336,7 @@ void set_password(string pass)
 {
     string salt;
     salt = PWGEN->random_salt(43); //Make it better someone
-    password = crypt(pass, "$5$"+salt);
+    password = crypt(pass, "$6$"+salt);
     save_player( query_name() );
 }
 

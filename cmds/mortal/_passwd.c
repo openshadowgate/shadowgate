@@ -76,7 +76,7 @@ adm_pw_verify(string str, passwd)
     }
 
     salt = PWGEN->random_salt(43);
-    pass = crypt(passwd, "$5$" + salt);
+    pass = crypt(passwd, "$6$" + salt);
 
     TP->set_password(pass);
 

@@ -5,7 +5,7 @@ int shift = 0;
 
 string make_entropy()
 {
-    return crypt(random(1024)+"","$5$")[4..];
+    return crypt(random(1024)+"","$6$")[4..];
 }
 
 set_seed(string ss)
