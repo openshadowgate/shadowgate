@@ -3,6 +3,7 @@
 #include <daemons.h>
 
 inherit VAULT;
+int lastsearch = 0;
 
 void create()
 {
@@ -43,10 +44,17 @@ void create()
 }
 
 void searching() {
+    lastsearch = time();
+
+    if (time() - lastsearch < 4) {
+        write("%^BOLD%^%^BLACK%^You are still searching!");
+        return;
+    }
     write("%^BOLD%^%^BLACK%^You move into the alcove to search it and something leaps out and attacks you!");
     tell_room(TO,"%^BOLD%^%^BLACK%^"+TPQCN+" searches the alcove and then jumps back as they are attacked!",TP);
+    lastsearch = time();
     new(MON+"gnollthief")->move(TO);
-   }
+}
 
 void init()
 {
