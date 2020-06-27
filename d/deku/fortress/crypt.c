@@ -1,6 +1,6 @@
-//Okay, I've updated the description of this room and the method in which the king works AS 
+//Okay, I've updated the description of this room and the method in which the king works AS
 //well as the way the exit of the tomb works - you can now unlock the door with the soulcrusher
-//or it will unlock itself once the king dies and I've add a random search for the rubble 
+//or it will unlock itself once the king dies and I've add a random search for the rubble
 //that was already in the room. -  Saide
 #include <std.h>
 #include "/d/deku/inherits/graveyard.h"
@@ -14,12 +14,12 @@ int being_pulled, sword_pulled, searched;
 void original() {
     set_long("%^BOLD%^%^BLACK%^You have entered a large above ground burial chamber.  A %^RED%^"+
     "throne%^BOLD%^%^BLACK%^ sits against the wall at the northern end and a %^RED%^decayed "+
-    "corpse%^BOLD%^%^BLACK%^ rests on it.  Piles of %^RED%^rubble%^BOLD%^%^BLACK%^ liter "+
+    "corpse%^BOLD%^%^BLACK%^ rests on it.  Piles of %^RED%^rubble%^BOLD%^%^BLACK%^ litter "+
     "the floor of the chamber and a %^RESET%^small boulder%^BOLD%^%^BLACK%^ lies directly in "+
     "the center, with a %^YELLOW%^glowing sword%^BOLD%^%^BLACK%^ potruding vertically from it.  "+
     "An %^RESET%^ornate door%^BOLD%^%^BLACK%^ is inset into the southern wall of the "+
     "chamber, leading out to the graveyard.%^RESET%^");
-  
+
     set_items(([
     "throne": "%^RED%^You walk up to the throne and take a good hard look.  You realize that "+
     "the corpse is wearing a golden crown.  As you look into its eyes, you get the eerie "+
@@ -140,7 +140,7 @@ void pull_sword(string str) {
     player_str = TP->query_stats("strength");
 
     if(player_str > random(21)) {
-    
+
         tell_object(TP,"%^BOLD%^%^WHITE%^You have succeeded in pulling the sword from its "+
         "resting place.%^RESET%^\n\n");
         tell_room(TO,TPQCN + "%^BOLD%^%^WHITE%^ has succeeded in pulling the sword from its "+
@@ -152,28 +152,28 @@ void pull_sword(string str) {
         remove_item("glowing sword");
         remove_item("corpse");
         remove_item("decayed corpse");
-			
+
         add_item("throne","%^YELLOW%^This throne is empty and sits against the northern wall "+
         "of the chamber.%^RESET%^");
         set_locked("ornate door",1,"lock");
-			
+
         tell_object(TP,"%^RED%^Your excitement is short lived, as the once decaying corpse rises\n"+
         "from its throne to point an accusatory finger at you!%^RESET%^\n\n");
         tell_room(TO,"%^RED%^The excitement is short lived, as the once decaying corpse rises "+
         "from its throne to point an accusatory finger at "+TPQCN+"!%^RESET%^\n\n",TP);
-				
+
         if(!query_open("ornate door")) {
             tell_room(TO,"%^RED%^Just as you thought things couldn't get worse a loud click echoes "+
             "through the chamber as the lock falls into place, trapping you here!%^RESET%^\n\n");
         }
-				
+
         if(query_open("ornate door") == 1) {
             set_open("ornate door",0);
             tell_room(TO,"%^RED%^Just as you thought things couldn't get worse, the ornate door "+
             "slams shut and a loud click echoes through the chamber as the lock falls into place, "+
             "trapping you here!%^RESET%^\n\n");
         }
-				    
+
         new("/d/deku/monster/skel-king")->move(TO);
         if(ob=present("skeleton king", TO)) {
             ob->rush();
