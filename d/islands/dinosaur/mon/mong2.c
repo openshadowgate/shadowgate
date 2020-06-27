@@ -55,7 +55,7 @@ void create(){
     duh = choose_limbs();
     create_mong_body(duh);
     set_name("mongrelman");
-    set_id( ({"mong", "mongrelman", "humanoid", "dino"}) );
+    set_id( ({"mong", "mongrelman", "humanoid", "dino", "mongrel", "man"}) );
     set_short("Mongrelman");
     set_hd(20,1);
     set_gender("male");
