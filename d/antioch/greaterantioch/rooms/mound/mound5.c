@@ -44,8 +44,6 @@ void create()
 }
 
 void searching() {
-    lastsearch = time();
-
     if (time() - lastsearch < 4) {
         write("%^BOLD%^%^BLACK%^You are still searching!");
         return;
