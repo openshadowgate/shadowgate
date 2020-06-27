@@ -14,11 +14,11 @@ void create(){
 	  "    Perhaps you could read it?\n");
       set_read("\n\n%^CYAN%^This island is stuck in"+
 	  " a perpetual winter.  There is nothing"+
-	  " here but the chill touch of Auril.  "+
+	  " here but the chill touch of Lord Shadow.  "+
 	  "Turn back lest you end up a frozen corpse.\n\n"+
 	  "%^MAGENTA%^This area is designed for HMs and "+
 	  "parties close to 30. \n%^BOLD%^%^RED%^Characters lower than that will"+
-	  " likely get to meet Kelemvor.");
+	  " likely get to meet Lysara.");
       set_language("wizish");
       set_weight(10000);
       set_value(0);
