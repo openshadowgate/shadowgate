@@ -144,7 +144,6 @@ void execute_attack()
     attackers = shuffle(attackers);
 
     for (i = 0; i < sizeof(attackers) && i < 8; i++) {
-    {
         attackers = attackers[i];
         if (!objectp(attacker)) {
             continue;
