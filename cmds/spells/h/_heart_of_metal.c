@@ -69,6 +69,8 @@ void spell_effect(int prof)
         tell_room(place, "%^BOLD%^%^WHITE%^As " + caster->QCN + " concentrates on " + caster->QP + " " + weaponarg + ", the weapon itself turns to pure silver!.%^RESET%^", caster);
         caster->remove_paralyzed();
         spell_successful();
+        caster->set_property("spelled", ({TO}) );
+        addSpellToCaster();
         mylevel = clevel;
         call_out("dest_effect", (mylevel * 2 * ROUND_LENGTH));
         break;
@@ -85,6 +87,8 @@ void spell_effect(int prof)
         tell_room(place, "%^RESET%^%^RED%^As " + caster->QCN + " concentrates on " + caster->QP + " " + weaponarg + ", the weapon itself turns to pure cold iron!.%^RESET%^", caster);
         caster->remove_paralyzed();
         spell_successful();
+        caster->set_property("spelled", ({TO}) );
+        addSpellToCaster();
         mylevel = clevel;
         call_out("dest_effect", (mylevel * 2 * ROUND_LENGTH));
         break;
@@ -102,8 +106,8 @@ void dest_effect()
         mywpn->remove_property("added short string");
         mywpn->set_special_material_type(origtype);
     }
-    ::dest_effect();
     if (objectp(TO)) {
         TO->remove();
     }
+    ::dest_effect();
 }
