@@ -134,7 +134,7 @@ int natural_AC(string subrace)
 int sight_bonus(string subrace)
 {
     if (!subrace || subrace == "") {
-        return 3;
+        return 2;
     }
     if (subrace == "szarkai") {
         return -2;

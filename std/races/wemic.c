@@ -26,7 +26,7 @@ int level_adjustment(string subrace) { return 0; }
 
 int natural_AC(string subrace) { return 2; }
 
-int sight_bonus(string subrace) { return 2; }
+int sight_bonus(string subrace) { return 1; }
 
 mapping daily_uses(string subrace) { return ([]); }
 

@@ -49,7 +49,7 @@ int natural_AC(string subrace)
 
 int sight_bonus(string subrace)
 {
-    return 3;
+    return 4;
 }
 
 mapping daily_uses(string subrace)

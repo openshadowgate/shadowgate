@@ -14,7 +14,7 @@ int* age_brackets()
 
 int* restricted_alignments(string subrace)
 {
-    return ({ 1, 2, 3, 4, 7 });
+    return ({ 1, 3, 7, 9});
 }
 
 string* restricted_classes(string subrace)
@@ -36,7 +36,10 @@ int level_adjustment(string subrace) { return 0; }
 
 int natural_AC(string subrace) { return 2; }
 
-int sight_bonus(string subrace) { return 3; }
+int sight_bonus(string subrace)
+{
+    return 2;
+}
 
 mapping daily_uses(string subrace) { return (["alter self":1,"dancing lights":1]); }
 
@@ -142,7 +145,12 @@ string *query_eye_colors(string subrace) {
     return choices;
 }
 
+int is_pk_race()
+{
+    return 1;
+}
+
 string *query_languages(string subrace)
 {
-    return (["required":({"common","sylvan",}),"optional":({"elven","aklo", "celestial", "gnomish"})]);
+    return (["required":({"common","sylvan",}),"optional":({"elven","aklo", "celestial", "gnomish", "tengu"})]);
 }
