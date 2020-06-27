@@ -29,6 +29,7 @@ void create(){
     set_stats("dexterity",14);
     set_exp(3000);
     set_overall_ac(5);
+    set_property("undead", 1);
     set("aggressive",19);
     set_attack_bonus(1);
     set_wielding_limbs(({"right forepaw","left forepaw","head"}));
