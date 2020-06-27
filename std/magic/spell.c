@@ -3057,7 +3057,7 @@ object *target_selector()
         slctd += foes[0..aff];
     } else if (splash_spell == 3 || aoe_spell) {
         aff = random(slevel) + 1;
-        aff = aff > 6 ? 6 : aff;
+        aff = aff > 8 ? 8 : aff;
         slctd += everyone[0..aff];
     } else {
         aff = random(slevel) + 1;
@@ -3414,9 +3414,9 @@ void help()
         write("%^BOLD%^%^RED%^Sphere:%^RESET%^ " + spell_sphere + (spell_domain ? (" [" + spell_domain + "]") : "") + (evil_spell ? " [evil]" : "") + (mental_spell ? " [mind-affecting]" : ""));
     }
 
-    /* if (verbal_comp || somatic_comp) { */
-    /*     write("%^BOLD%^%^RED%^Components:%^RESET%^ " + (verbal_comp ? "V " : "") + (somatic_comp ? "S " : "")); */
-    /* } */
+    if (verbal_comp || somatic_comp) {
+        write("%^BOLD%^%^RED%^Components:%^RESET%^ " + (verbal_comp ? "Verbal " : "") + (somatic_comp ? "Somatic " : ""));
+    }
     if (save_type) {
         write("%^BOLD%^%^RED%^Saving throw:%^RESET%^ " + save_type);
     }
@@ -3446,13 +3446,13 @@ void help()
         write("%^BOLD%^%^RED%^This spell is a curse.");
     }
     if (aoe_spell) {
-        write("%^BOLD%^%^RED%^This spell is Area of Effect.");
+        write("%^BOLD%^%^RED%^This spell affects current area.");
     }
     if (traveling_aoe_spell || traveling_spell) {
         write("%^BOLD%^%^RED%^This spell's effect will move with the caster.");
     }
     if (splash_spell == 1) {
-        write("%^BOLD%^%^RED%^This spell has a chance to affect multiple targets.");
+        write("%^BOLD%^%^RED%^This spell can affect multiple targets.");
     }
     if (splash_spell == 2) {
         write("%^BOLD%^%^RED%^This spell will affect mostly enemies.");
