@@ -153,7 +153,7 @@ void slam(object targ)
                 "abandon onto you, covering you with its entire %^BOLD%^%^YELLOW%^foul smelling " +
                 "and gooey%^BOLD%^%^GREEN%^ body!%^RESET%^");
 
-    targ->set_paralyzed(25, "%^BOLD%^%^GREEN%^You are struggling to stand!%^RESET%^");
+    targ->set_tripped(random(4)+1, "%^BOLD%^%^GREEN%^You are struggling to stand!%^RESET%^");
 
     tell_room(ETO, "%^BOLD%^%^RED%^You watch in HORROR as " + me + "%^BOLD%^%^BLACK%^ DIVES " +
               "%^BOLD%^%^RED%^ with a reckless abandon onto " + targ->QCN + "%^BOLD%^%^RED%^ covering " +
