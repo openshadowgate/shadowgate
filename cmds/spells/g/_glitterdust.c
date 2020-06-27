@@ -50,7 +50,7 @@ void spell_effect(int prof) {
     object *inven;
     duration = (ROUND_LENGTH) * clevel+4;
 
-    inven = target_selector();
+    inven = all_inventory(place);
     inven = filter_array(inven, "is_non_immortal",FILTERS_D);
     inven = target_filter(inven);
 
