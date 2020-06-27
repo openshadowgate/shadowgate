@@ -23,7 +23,7 @@ void create() {
 " and %^WHITE%^white %^BLACK%^"+
 "ribbons.  They %^WHITE%^sp%^BLACK%^ir%^WHITE%^al%^BLACK%^"+
 " up and down the shaft with seemingly no end.  "+
-"It is impossible to tell what wood the shaft is made of "+ 
+"It is impossible to tell what wood the shaft is made of "+
 "from because the ribbons fit so perfectly.%^RESET%^");
     set_lore(
 "It is said that there was a group of sunites that turned "+
@@ -38,7 +38,7 @@ void create() {
     set_value(1000);
     set_hit((: TO, "extra_hit":));
     set_wield((: TO, "extra_wield":));
-    set_unwield((: TO, "extra_unwield" :));     
+    set_unwield((: TO, "extra_unwield" :));
     set_property("enchantment",3);
     set_heart_beat(1);
     uses = random(75)+10;
@@ -72,18 +72,21 @@ void heart_beat() {
         return;
     } else {
         if( obj = present("corpse",env)) {
-		    
+
             tell_room(EETO,"%^BOLD%^%^WHITE%^"+
               owner->QCN+"'s spear lashes out at the corpse with ribbons.\n"
               "%^BLACK%^The ribbons wrap around the corpse completely.  \n"
               "The corpse spasms as they tighten and shrink"+
 			  " into nothing.%^RESET%^");
+            if(owner->query_hp() < owner->query_max_hp())
+            {
             owner->heal(random(10)+10);
+            }        
             uses = uses + random(2)+1;
             obj->remove();
             return;
-			} 
-			 
+			}
+
     if((int)environment(TO)->query_hp() < 50 && uses > 5) {
       message("my_action","%^BOLD%^%^MAGENTA%^"+
         "The spear shouts:%^RESET%^ You are bleeding all over me, stop it!"
@@ -211,13 +214,13 @@ if(!objectp(ob) || !objectp(vic)) return 1;
 
     xx=random(4)+1;
     switch(xx) {
- 
+
     case 1:
     message("my_action",""
         "%^BOLD%^%^BLACK%^A single ribbon unwinds from your spear and wraps itself around "
         +vic->query_cap_name()+
         " knocking them down."
-     
+
     ,environment(TO));
     message("other_action",""
       "%^%^BOLD%^%^BLACK%^A single ribbon unwinds from "+ETO->query_cap_name()+
@@ -233,7 +236,7 @@ if(!objectp(ob) || !objectp(vic)) return 1;
     uses = uses - random(3)+1;
 
     return 1;
- 
+
     case 2..3:
 	num = cha-14; // extra dam for good cha
     dam = roll_dice(num,8);
@@ -248,10 +251,10 @@ if(!objectp(ob) || !objectp(vic)) return 1;
 		" shoots out ri%^WHITE%^bb%^BLACK%^ons that impale "
 		+vic->query_name()+"."
     ,environment(ob),(({environment(TO), ob})));
-  
+
     return 1;
- 
-  
+
+
   case 4:
 
   if (!random(2)) {
@@ -275,11 +278,11 @@ if(!objectp(ob) || !objectp(vic)) return 1;
 	    rib ->move(environment(ETO));
 		 ETO->add_protector(rib);
 		rib ->force_me("kill "+vic->query_name());
-        ETO->add_follower(rib); 
-  } 
+        ETO->add_follower(rib);
+  }
     uses = uses - 3;
     return 1;
-           
+
     }
   }
 
@@ -299,7 +302,7 @@ int extra_wield() { // no ugly wielders
 	else{
 	   say("%^RED%^"+ETOQCN+" holds the spear but jerks violently"+
 	     " as ribbons lash out from it, wrapping tightly.");
-	   write("Your whole body seems to seize and you feel ugly."); 
+	   write("Your whole body seems to seize and you feel ugly.");
 	   TP->set_paralyzed(10,"Your head is pounding");
        TP->set_bound(50,"Ribbons bind you fast.");
 	   return 0;
