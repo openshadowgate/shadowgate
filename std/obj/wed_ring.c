@@ -13,11 +13,6 @@ set_me(str)
     me = str;
 }
 
-void init()
-{
-    ::init();
-}
-
 void create()
 {
     ::create();

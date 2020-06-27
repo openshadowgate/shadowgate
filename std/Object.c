@@ -890,54 +890,68 @@ string query_creator() {
 
 // *** More complicated set and query functions ***
 
-int id(string str) {
+int id(string str)
+{
     int i, d, res;
 
+    string* parts, what, where;
 
-    string *parts, what, where;
+    if (!ob_data) {
+        init_ob();
+    }
 
-    if(!ob_data) init_ob();
-    if( !stringp(str) ) return 0;
-   if (!objectp(TO)) return 0;
- // If it's not a valid object, why are we trying? - Garrett 05/10/2002.
-////////////////////////////////////////////////////////////////////////
-// This section added to allow players to use 'my'  or 'on ground' to //
-// accurately id stuff in their inventory or on the ground, respectively.
-/////////////////////////////////////////////////////                 //
-    if (sscanf(str, "my %s", what)){               //                 //
-      if (ETO != TP){ return 0;}                   //                 //
-      str = what;                                  //  Lujke  2016    //
-    } else {                                       //                 //
-      res = sscanf(str, "%s on ground", what);     /////////////////////
-      if (res > 0){                                //
-        if ( ETO == TP){                           //
-          return 0;                                //
-        }                                          //
-        res = sscanf(what, "%s %d", what, d);      //
-        str = what;                                //
-        if (res == 2){                             //
-          str = str + " " + d;                     //
-        }                                          //
-      }                                            //
-    }                                              //
-/////////////////////////////////////////////////////
+    if (!stringp(str)) {
+        return 0;
+    }
 
-    if( lower_case(str) == true_name) return 1;
+    if (!objectp(TO)) {
+        return 0;
+    }
 
-    if(member_array(str, ob_data["id"]) != -1) return 1;
+    if (sscanf(str, "my %s", what)) {
+        if (ETO != TP) {
+            return 0;
+        }
+        str = what;
+    } else {
+        res = sscanf(str, "%s on ground", what);
+        if (res > 0) {
+            if (ETO == TP) {
+                return 0;
+            }
+            res = sscanf(what, "%s %d", what, d);
+            str = what;
+            if (res == 2) {
+                str = str + " " + d;
+            }
+        }
+    }
 
-    if(userp(TO) && objectp(TP)) {
-        if(TP->knownAs(TO->query_true_name())) {
-            if(lower_case(TP->knownAs(TO->query_true_name())) == lower_case(str)) {
+    if (lower_case(str) == true_name) {
+        return 1;
+    }
+
+    if (!ob_data["id"]) {
+        return 1;
+    }
+
+    if (member_array(str, ob_data["id"]) != -1) {
+        return 1;
+    }
+
+    if (userp(TO) && objectp(TP)) {
+        if (TP->knownAs(TO->query_true_name())) {
+            if (lower_case(TP->knownAs(TO->query_true_name())) == lower_case(str)) {
                 return 1;
             }
         }
     }
-    if(str == "attacker" && objectp(TP) && !avatarp(TO) && (!TO->query_invis() ||
-                                                            TP->detecting_invis()))
-    {
-       if(member_array(TO,TP->query_attackers()) != -1) return 1;
-     }
+    if (str == "attacker" && objectp(TP) && !avatarp(TO) && (!TO->query_invis() ||
+                                                             TP->detecting_invis())) {
+        if (member_array(TO, TP->query_attackers()) != -1) {
+            return 1;
+        }
+    }
 
     return 0;
 }
