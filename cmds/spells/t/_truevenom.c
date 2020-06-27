@@ -97,6 +97,8 @@ void spell_effect(int prof){
          "layer of %^RESET%^%^GREEN%^p%^BOLD%^o%^RESET%^%^GREEN%^i%^BOLD%^s%^RESET%^"
          "%^GREEN%^o%^BOLD%^n %^BLACK%^coats the weapon.%^RESET%^",caster);
       caster->set_property("truevenom",1);
+      caster->set_property("spelled", ({TO}) );
+      addSpellToCaster();
       caster->remove_paralyzed();
       spell_successful();
 
