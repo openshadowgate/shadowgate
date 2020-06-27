@@ -171,7 +171,7 @@ void execute_attack()
             tell_object(attackers[i], "%^BOLD%^%^CYAN%^" + caster->QCN + "'s weapon slams "
                         "into you as it sweeps by!%^RESET%^");
             attackers[i]->cause_typed_damage(attackers[i],attackers[i]->return_target_limb(), dam, weapons[0]->query_damage_type());
-            if (reaping && !attackers[i]->fort_save(clevel) && !attackers[i]->query_property("no knockdown") && !attackers[i]->query_property("no trip")) {
+            if (reaping && !attackers[i]->reflex_save(clevel) && !attackers[i]->query_property("no knockdown") && !attackers[i]->query_property("no trip")) {
                 tell_object(attackers[i], "%^BOLD%^%^GREEN%^" + caster->QCN + "'s weapon hits you with "
                             "such force that it knocks you flat onto the ground!");
                 attackers[i]->set_tripped(clevel / 10, "%^BOLD%^%^GREEN%^You are trying to get up!");
