@@ -1,6 +1,6 @@
 #include <std.h>
 #include "../lair.h"
-inherit "/d/common/obj/weapon/wakizashi";
+inherit "/d/common/obj/weapon/waveblade";
 
 int OWNED;
 string *owners;
