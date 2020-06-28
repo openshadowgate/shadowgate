@@ -366,12 +366,20 @@ void execute_attack()
         }
     }
 
-    if (target->query_property("weapon resistance")) {
-        if (enchant < (int)target->query_property("weapon resistance")) {
-            target->cause_typed_damage(target, target->return_target_limb(), 0, weapons[0]->query_damage_type() );
+    {
+
+        string dtype = weapons[0]->query_damage_type();
+
+        dtype = dtype ? dtype : "piercing";
+
+        if (target->query_property("weapon resistance")) {
+            if (enchant < (int)target->query_property("weapon resistance")) {
+                target->cause_typed_damage(target, target->return_target_limb(), 0, dtype);
+            }
+        }else {
+            target->cause_typed_damage(target, target->return_target_limb(), dam, dtype);
         }
-    }else {
-        target->cause_typed_damage(target, target->return_target_limb(), dam, weapons[0]->query_damage_type());
+
     }
 
     if (objectp(target_two)) {
