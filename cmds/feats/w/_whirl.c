@@ -121,7 +121,7 @@ void execute_feat()
 void execute_attack()
 {
     object* weapons, * attackers;
-    int i, udam, num, enchant, hit, res;
+    int i, udam, dam, num, enchant, hit, res;
     string damtype;
 
     if (!objectp(caster)) {
