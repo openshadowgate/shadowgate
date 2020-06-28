@@ -370,8 +370,10 @@ void execute_attack()
 
         string dtype;
 
-        if (objectp(weapons[0])) {
-            dtype = weapons[0]->query_damage_type();
+        if (arrayp(weapons)) {
+            if (objectp(weapons[0])) {
+                dtype = weapons[0]->query_damage_type();
+            }
         }
 
         dtype = dtype ? dtype : "piercing";
