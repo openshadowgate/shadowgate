@@ -4822,13 +4822,18 @@ string query_real_age_cat()
     return "child";
 }
 
-int query_base_stats(string stat) {
-   int mystat;
-   mystat = query_rolled_stats(stat)+age_mod(stat)+race_mod(stat);
+int query_base_stats(string stat)
+{
+    int mystat;
+    mystat = query_rolled_stats(stat) + age_mod(stat) + race_mod(stat);
 
-   if(mystat > 60) return 60;
-   if(mystat < 1) return 1;
-   return mystat;
+    if (mystat > 40) {
+        return 40;
+    }
+    if (mystat < 1) {
+        return 1;
+    }
+    return mystat;
 }
 
 int query_rolled_stats(string stat) { //this will give base 92-pt statline plus any purchased stats

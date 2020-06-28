@@ -49,7 +49,7 @@ int cmd_recall(string str) {
             int scrw = atoi(TP->getenv("SCREEN"));
             int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
             int roomnw;
-            int maxknown = TP->query_stats("intelligence");
+            int maxknown = TP->query_base_stats("intelligence");
 
             strarr = sort_array(strarr,1);
             num = sizeof(strarr);
