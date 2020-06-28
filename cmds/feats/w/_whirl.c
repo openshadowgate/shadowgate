@@ -121,7 +121,7 @@ void execute_feat()
 void execute_attack()
 {
     object* weapons, * attackers;
-    int i, dam, num, enchant, hit, res;
+    int i, udam, num, enchant, hit, res;
     string damtype;
 
     if (!objectp(caster)) {
@@ -167,31 +167,35 @@ void execute_attack()
 
     attackers = shuffle(attackers);
 
+    if (sizeof(weapons) && objectp(weapons[0])) {
+        enchant = weapons[0]->query_property("enchantment");
+        udam = weapons[0]->query_damage();
+        damtype = weapons[0]->query_damage_type();
+    }else {
+        enchant = 0;
+    }
+
+    if(!damtype)
+    {
+        damtype = "slashing";
+    }
+
+    udam += caster->query_damage_bonus();
+
     for (i = 0; i < sizeof(attackers) && i < 8; i++) {
+
         if (!objectp(attackers[i])) {
             continue;
         }
-        if (sizeof(weapons)) {
-            enchant = weapons[0]->query_property("enchantment");
-            dam = weapons[0]->query_damage();
-            damtype = weapons[0]->query_damage_type();
-            //dam += weapons[0]->query_property("enchantment"); redundant, query damage already includes enchantment
-        }else {
-            enchant = 0;
-        }
 
-        if(!damtype)
-        {
-          damtype = "slashing";
-        }
-
-        dam += caster->query_damage_bonus();
+        dam = udam;
         dam += roll_dice(clevel, 5) + roll_dice(2, 8);
 
         if (!present(attackers[i], environment(caster))) {
             tell_object(caster, "%^RED%^That target is no longer in range!%^RESET%^");
             continue;
         }
+
         if (sizeof(weapons)) {
             if (!(res = thaco(attackers[i]))) {
                 tell_object(attackers[i], "%^CYAN%^" + caster->QCN + " sends a barrage of attacks your way, but you dodge quickly out of the way!%^RESET%^");

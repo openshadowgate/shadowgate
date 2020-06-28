@@ -101,12 +101,14 @@ void execute_feat()
     caster->set_property("using instant feat", 1);
     spell_kill(target, caster);
     return;
+
 }
 
 void execute_attack()
 {
     object* weapons, * attackers;
     int i, dam, mod, num, reaping, diff, res;
+    string dtype;
 
     if (!objectp(caster)) {
         dest_effect();
@@ -166,7 +168,7 @@ void execute_attack()
             dam = roll_dice(clevel, 8) + dam;
         }
         if ((res = thaco(attackers[i])) > 0) {
-            // if(!attackers[i]->reflex_save(clevel+random(clevel)))
+
             num = 1;
             tell_object(attackers[i], "%^BOLD%^%^CYAN%^" + caster->QCN + "'s weapon slams "
                         "into you as it sweeps by!%^RESET%^");
