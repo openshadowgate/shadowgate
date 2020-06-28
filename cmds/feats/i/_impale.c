@@ -370,7 +370,7 @@ void execute_attack()
 
         string dtype;
 
-        if (arrayp(weapons)) {
+        if (sizeof(weapons)) {
             if (objectp(weapons[0])) {
                 dtype = weapons[0]->query_damage_type();
             }
