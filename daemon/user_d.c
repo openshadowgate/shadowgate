@@ -592,14 +592,10 @@ void scale_level_to(object who, int lev)
     else
     {
         who->delete("scaledlevel");
-        tell_object(who, "%^BOLD%^%^WHITE%^You scale your character level down to "+lev+
-        " please NOTE this is highly experimental as Saide tries to work out any unforseen "+
-        "kinks so use at YOUR OWN RISK and immediately BUG REPORT anything out of whack.");
+        tell_object(who, "%^BOLD%^%^WHITE%^You scale your character level down to "+lev+".");
         hp_perc = percent(who->query_hp(), who->query_max_hp());
-        //tell_object(who, "hp_perc = "+hp_perc);
         who->set("scaledlevel", lev);
         new_hp = (to_float(who->query_max_hp()) / 100) * hp_perc;
-        //tell_object(who, "new_hp = "+new_hp);
         who->set_hp(to_int(new_hp));
         inv = deep_inventory(who);
         myName = who->query_true_name();

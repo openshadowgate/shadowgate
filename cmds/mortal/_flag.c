@@ -101,7 +101,7 @@ int cmd_flag(string str)
         do_flag_display(TP);
         return 1;
     }
-    if(sscanf(str, "%s . %s", targ, arg) == 2)
+    if(sscanf(str, "%s as %s", targ, arg) == 2)
     {
         targ = lower_case(targ);
         if(member_array(targ, SUPPORTEDFLAGS) == -1)
@@ -283,16 +283,16 @@ flag - manipulate player flags
 %^CYAN%^SYNTAX%^RESET%^
 
 flag
-flag scaled level . %^ORANGE%^%^ULINE%^LEVEL%^RESET%^|normal
-flag roleplay flag . on
-flag player kill . on
+flag scaled level as %^ORANGE%^%^ULINE%^LEVEL%^RESET%^|normal
+flag roleplay flag as on
+flag player kill as on
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command lets you adjust some various flags about your character. %^ORANGE%^<flag>%^RESET%^ by itself will show all flags and their current settings.
 
 %^CYAN%^scaled level%^RESET%^
-  Will allow you to scale your level down to the specified %^ORANGE%^<level>%^RESET%^in order to adventure with or take part in plots with lower level characters. It is highlyexperimental, so use at your own risk, it is likely that it will tweaked as issues becomeapparent. You cannot go below level 6 or above your own base character level. Using%^ORANGE%^<normal>%^RESET%^ instead of a level will revert you back to your normal non scaled level.
+  Will allow you to scale your level down to the specified %^ORANGE%^<level>%^RESET%^in order to adventure with or take part in plots with lower level characters. Use at your own risk, it is likely that it will tweaked as issues becomeapparent. You cannot go below level 6 or above your own base character level. Using%^ORANGE%^<normal>%^RESET%^ instead of a level will revert you back to your normal non scaled level.
 
 %^CYAN%^roleplay flag %^RESET%^
   Will fly a RP flag in your current environment. This will causeyour current room to show up on the who list as a RP FLAG and will show up in the rumorscommand.
