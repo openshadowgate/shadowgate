@@ -135,5 +135,5 @@ int caster_level_calcs(object player, string the_class)
 
 string *query_bonus_languages()
 {
-    return ({"kobold"});
+    return ({"draconic"});
 }

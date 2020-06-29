@@ -932,15 +932,21 @@ hint_class_special()
 %^BOLD%^This choice determines additional mechanics for your class. Refer to %^ORANGE%^<help " + char_sheet["class"] + ">%^WHITE%^ for details.");
 }
 
-string *generate_language()
+string* generate_language()
 {
     int maxbonus = (char_sheet["stats"]["intelligence"] - 10) / 4 + 1;
+    string* choices = ({}), tmp;
 
     if (maxbonus > 0) {
-        return (("/std/races/" + char_sheet["race"])->query_languages(char_sheet["subrace"]))["optional"];
-    }else {
-        return ({});
+        if (arrayp(tmp = ("/std/races/" + char_sheet["race"])->query_languages(char_sheet["subrace"])["optional"])) {
+            choices += tmp;
+        }
+        if (arrayp(tmp = (("/std/class/" + char_sheet["class"])->query_bonus_languages()))) {
+            choices += tmp;
+        }
     }
+
+    return choices;
 }
 
 select_language(string str)
