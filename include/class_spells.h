@@ -51,7 +51,7 @@ class_spell_storage =
     "ancestor":
         ({"unseen servant", "spiritual weapon", "heroism", "spiritual ally", "telekinetic push", "greater heroism","vision", "timeless body", "astral projection"}),
     "lore":
-        ({"identify","clairvoyance","tongues","modify memory","telepathic bond","legend lore","vision","screen","timestop"}),
+        ({"magic missile","clairvoyance","tongues","modify memory","telepathic bond","legend lore","vision","screen","timestop"}),
     "nature":
         ({"entangle", "barkskin", "charm monster", "polymorph self", "wall of thorns", "summon natures ally vi", "animate plants", "shapechange", "shambler"}),
     "stone":
