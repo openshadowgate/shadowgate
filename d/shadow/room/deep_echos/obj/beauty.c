@@ -81,7 +81,7 @@ void heart_beat() {
             if(owner->query_hp() < owner->query_max_hp())
             {
             owner->heal(random(10)+10);
-            }        
+            }
             uses = uses + random(2)+1;
             obj->remove();
             return;
@@ -178,7 +178,7 @@ if(yy == 19) tell_object(owner,"%^BOLD%^%^RED%^The spear tells you:%^RESET%^ "+
                 if(yy == 9) {
                     tell_object(owner,""
                         "%^BOLD%^%^RED%^The spear tells you:%^RESET%^ "
-                        " If your forsake our mission, I'll kill you.");
+                        " If you forsake our mission, I'll kill you.");
                 }
                 if(yy == 10) {
                     if((int)owner->query_hp() < 50) {
