@@ -1,4 +1,5 @@
 #include <std.h>
+#include <clock.h>
 
 #define WTROB "/d/magic/obj/breathob.c"
 
@@ -39,7 +40,7 @@ void spell_effect(int prof) {
     tell_object(target, "%^BOLD%^%^CYAN%^"+caster->QCN+" gives you the power to breathe water.");
 
     breathob = new(WTROB);
-    breathob->set_maxtime(500+(5*clevel*prof/100));
+    breathob->set_maxtime(clevel * 2 * HOUR);
     breathob->set_property("spell", TO);
     breathob->set_property("spelled", ({TO}));
     addSpellToCaster();
