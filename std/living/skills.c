@@ -165,8 +165,8 @@ void init_skills(string cl)
 int query_max_skills()
 {
 // revised since odd-numbered LAs were glitching. Need to tally all levels separately (4 and 6 skill-bracket types) and then collate. N, 5/15.
-    int num = 0, i, mylevel, lowskill = 0, highskill = 0;
-    string* myclasses, myrace, subrace;
+    int num = 0, i, mylevel, lvladj, lowskill = 0, highskill = 0;
+    string* myclasses, file, myrace, subrace;
 
 // first, count up class levels in 2 batches - high skill (rogue types, 6pts/2lvls) and low skill (the rest, 4pts/2lvls)
     myclasses = this_object()->query_classes();
@@ -182,7 +182,6 @@ int query_max_skills()
         }
     }
 
-// if applicable, tally any LA into the low skill batch as well. Eg/ drow fighter L8 should have skills as a L10 low-skill type.
     myrace = (string)TO->query_race();
     subrace = (string)TO->query("subrace");
 
@@ -554,8 +553,8 @@ int query_adjusted_character_level() {
 
 int query_character_level()
 {
-    int i, num;
-    string myrace, mysubrace;
+    int i, num, lvladjust;
+    string myrace, mysubrace, file;
     if (!sizeof(classes)) {
         return 0;
     }
@@ -573,7 +572,7 @@ int query_character_level()
 
     myrace = this_object()->query_race();
     mysubrace = (string)query("subrace");
-
+    num += lvladjust;
     if (intp("/daemon/user_d.c"->get_scaled_level(TO))) {
         return "/daemon/user_d.c"->get_scaled_level(TO);
     }
