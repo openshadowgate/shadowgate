@@ -532,7 +532,7 @@ int query_true_max_hp()
 
 int query_max_hp_base()
 {
-    int num, lvladj, mypsi;
+    int num, mypsi;
     string file, myrace, subrace;
 
     if (!objectp(TO)) {
@@ -580,17 +580,6 @@ int query_max_hp_base()
 
     myrace = (string)TO->query_race();
     subrace = (string)TO->query("subrace");
-
-    file = DIR_RACES + "/" + myrace + ".c";
-
-    if (file_exists(file)) {
-        lvladj = (int)file->level_adjustment(subrace);
-
-        // LA races have a flat 8hp per LA as "beast" levels from monster manual
-        if (lvladj) {
-            num += (lvladj * 8);
-        }
-    }
 
     if (TO->query("negative level") || intp("/daemon/user_d.c"->get_scaled_level(TO))) {
         num += sum_array(TO->query("hp_array"), (int)TO->query_base_character_level());
@@ -902,48 +891,12 @@ int do_damage(string limb, int damage)
             body[real_limb]["armour_ob"]->decay();
         }
     }
-    //if(player_data["general"]["max_hp"] < player_data["general"]["hp"])
-/*
-    if(interactive(TO))
-    {
-        num = "/daemon/bonus_d.c"->query_con_bonus((int)TO->query_stats("constitution"));
-        num = num * (int)TO->query_highest_level();
 
-   //      if(FEATS_D->usable_feat(TO,"toughness")) { num += TO->query_level(); }
-   //      Halving toughness effect since it's only a low-end feat. Nienne, 03/10
-
-        if(FEATS_D->usable_feat(TO,"toughness")) { num += ((int)TO->query_level())/2; }
-        if(FEATS_D->usable_feat(TO,"improved toughness")) { num += TO->query_level(); }
-        if(FEATS_D->usable_feat(TO,"psionic body")) {
-           mypsi = 0;
-           mypsi += FEATS_D->calculate_psionic_feats(TO);
-           if(mypsi < 1) mypsi = 1; //This shouldn't happen, but better safe than sorry.
-           mypsi = mypsi*5; // 5 bonus hit points per psionic feat
-           num += mypsi;
-        }
-
-   // adding monster hitdice for each level of LA per the books. Nienne, 5/13.
-        myrace = (string)TO->query_race();
-        subrace = (string)TO->query("subrace");
-        file = DIR_RACES+"/"+myrace+".c";
-        if(file_exists(file)) {
-          lvladj = (int)file->level_adjustment(subrace);
-          if(lvladj) num += (lvladj*8); // LA races should have a flat 8hp per LA as "beast" levels from monster manual
-        }
-
-        num += player_data["general"]["max_hp"];
-    }
-    else
-    {
-       num = player_data["general"]["max_hp"];
-    }*/
     num = TO->query_max_hp();
 
     if (num < player_data["general"]["hp"]) {
         player_data["general"]["hp"] = num;
     }
-    //if(player_data["general"]["max_hp"] < player_data["general"]["hp"])
-    //   player_data["general"]["hp"] = player_data["general"]["max_hp"];
 
     if (query_max_hp()) {
         message("damage", "%^BOLD%^%^RED%^Hp: %^RESET%^" + query_hp() + "    " + (query_hp() * 100) / query_max_hp() + "%", TO);

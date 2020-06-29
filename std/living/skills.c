@@ -165,8 +165,8 @@ void init_skills(string cl)
 int query_max_skills()
 {
 // revised since odd-numbered LAs were glitching. Need to tally all levels separately (4 and 6 skill-bracket types) and then collate. N, 5/15.
-    int num = 0, i, mylevel, lvladj, lowskill = 0, highskill = 0;
-    string* myclasses, file, myrace, subrace;
+    int num = 0, i, mylevel, lowskill = 0, highskill = 0;
+    string* myclasses, myrace, subrace;
 
 // first, count up class levels in 2 batches - high skill (rogue types, 6pts/2lvls) and low skill (the rest, 4pts/2lvls)
     myclasses = this_object()->query_classes();
@@ -185,13 +185,6 @@ int query_max_skills()
 // if applicable, tally any LA into the low skill batch as well. Eg/ drow fighter L8 should have skills as a L10 low-skill type.
     myrace = (string)TO->query_race();
     subrace = (string)TO->query("subrace");
-    file = DIR_RACES + "/" + myrace + ".c";
-    if (file_exists(file)) {
-        lvladj = (int)file->level_adjustment(subrace);
-        if (lvladj) {
-            lowskill += lvladj;      // LA races should give skills at the same rate as 4-point classes. N, 8/12.
-        }
-    }
 
 // put in a safeguard for high-skill classes with an odd LA; eg/ L39 thief LA1 race would miss out on last skill bracket.
 // instead they should get up to L38 at 6x points, and the last two levels at 4x points.
@@ -561,8 +554,8 @@ int query_adjusted_character_level() {
 
 int query_character_level()
 {
-    int i, num, lvladjust;
-    string myrace, mysubrace, file;
+    int i, num;
+    string myrace, mysubrace;
     if (!sizeof(classes)) {
         return 0;
     }
@@ -580,11 +573,7 @@ int query_character_level()
 
     myrace = this_object()->query_race();
     mysubrace = (string)query("subrace");
-    file = "/std/races/" + myrace + ".c";
-    if (file_exists(file)) {
-        lvladjust = (int)file->level_adjustment(mysubrace);
-    }
-    num += lvladjust;
+
     if (intp("/daemon/user_d.c"->get_scaled_level(TO))) {
         return "/daemon/user_d.c"->get_scaled_level(TO);
     }
