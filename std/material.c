@@ -117,15 +117,18 @@ string query_long(string str){
    hold= ::query_long(str);
    hold += "
 It appears to have approximately "+query_uses()+" units left. If you have another material of the same type, you can <combine MATERIAL with MATERIAL2>.";
+
    return hold;
 }
 
 init(){
     ::init();
+    if (query_uses() < 1) {
+        TO->remove();
+    }
     if(TP == ETO){
         add_action("combine","combine");
     }
-
 }
 
 int combine(string str){
