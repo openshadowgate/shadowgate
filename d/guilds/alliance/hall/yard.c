@@ -1,8 +1,8 @@
 /*
   yard.c
-  
+
   Rewritten for the new guild Alliance Reborn.
-  
+
   -- Tlaloc -- 01 - 20
 */
 
@@ -13,12 +13,12 @@ inherit ROOM;
 void create()
 {
     ::create();
-    
+
     set_terrain(VILLAGE);
     set_travel(PAVED_ROAD);
     set_indoors(0);
     set_light(3);
-    set_property("teleport proof", 67);
+    set_property("teleport proof", get_phouse_tp_proof("epic"));
     set_short("At the Castle Courtyard");
     set_long("\n\
 %^CYAN%^Castle Courtyard%^RESET%^%^BOLD%^\n"+

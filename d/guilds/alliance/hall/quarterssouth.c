@@ -18,7 +18,7 @@ void create()
     set_travel(PAVED_ROAD);
     set_indoors(1);
     set_light(3);
-    set_property("teleport proof", 67);
+    set_property("teleport proof", get_phouse_tp_proof("epic"));
     set_short("%^RESET%^%^RED%^Red Quarters%^RESET%^");
     set_long("\n\
 %^RED%^Red Quarters%^RESET%^\n"+

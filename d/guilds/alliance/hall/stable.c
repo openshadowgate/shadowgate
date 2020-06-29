@@ -6,11 +6,11 @@ inherit "/d/common/inherit/hitching_post";
 
 void create(){
    object ob;
-   
+
    ::create();
    set_terrain(STONE_BUILDING);
    set_travel(PAVED_ROAD);
-   set_property("teleport proof",67);
+    set_property("teleport proof", get_phouse_tp_proof("epic"));
    set_indoors(1);
    set_light(2);
    set_short("Stables");

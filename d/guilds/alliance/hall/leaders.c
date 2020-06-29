@@ -12,7 +12,7 @@ void create(){
    set_indoors(1);
    set_light(2);
    //set_property("no teleport",1);
-   set_property("teleport proof",67);
+    set_property("teleport proof", get_phouse_tp_proof("epic"));
    set_short("Leaders' Room");
    set_long("%^CYAN%^Leader's Room%^RESET%^\n"+
       "%^BOLD%^%^WHITE%^You appear in a large room, a old, round "+

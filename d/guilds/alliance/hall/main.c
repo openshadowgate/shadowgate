@@ -15,7 +15,7 @@ void create(){
    set_indoors(1);
    set_light(2);
    //set_property("no teleport",1);
-   set_property("teleport proof",67);
+    set_property("teleport proof", get_phouse_tp_proof("epic"));
    set_short("Main Hall in the Castle of the Alliance");
    set_long("%^CYAN%^Main Hall in the Castle of the Alliance%^RESET%^\n "+
       "%^BOLD%^This is the main hall of a once magnificent castle, on "+
@@ -32,12 +32,12 @@ void create(){
 %^CYAN%^Main Hall in the Castle of the Alliance%^RESET%^
 %^BOLD%^%^WHITE%^You are standing in the main hall of the magnificent castle,
 on the walls you see old paintings of the knights that once
-lived in this castle. The hall is lit by many torches on the 
-wall and many chandeliers hanging from the ceiling. The floor 
-is made of pure %^BOLD%^%^CYAN%^marble%^RESET%^%^BOLD%^%^WHITE%^ that reflects the light from the torches. 
-You also notice the exits leading to the many rooms of the 
-castle. You see a giant posting board where the warriors of 
-the %^CYAN%^Alliance%^RESET%^%^BOLD%^%^WHITE%^, gather to read and write about the news of the 
+lived in this castle. The hall is lit by many torches on the
+wall and many chandeliers hanging from the ceiling. The floor
+is made of pure %^BOLD%^%^CYAN%^marble%^RESET%^%^BOLD%^%^WHITE%^ that reflects the light from the torches.
+You also notice the exits leading to the many rooms of the
+castle. You see a giant posting board where the warriors of
+the %^CYAN%^Alliance%^RESET%^%^BOLD%^%^WHITE%^, gather to read and write about the news of the
 lands.
 DESC
    );
