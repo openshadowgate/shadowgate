@@ -49,10 +49,9 @@ int prerequisites(object player)
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
 
-    if( (player->query_class_level("druid") + adj) < 20) { return 0; }
+    if( (player->query_class_level("druid")) < 20) { return 0; }
     if(player->query_base_stats("wisdom") < 20) { return 0; }
     return 1;
 }

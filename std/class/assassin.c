@@ -120,7 +120,6 @@ int prerequisites(object player)
     mapping skills;
     object race_ob;
     string race, base;
-    int adj;
     if (!objectp(player)) {
         return 0;
     }
@@ -133,7 +132,6 @@ int prerequisites(object player)
     if (!objectp(race_ob)) {
         return 0;
     }
-    adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
     if (skills["stealth"] < 10) {
         write("failed skill");

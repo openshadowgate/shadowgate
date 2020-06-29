@@ -96,23 +96,39 @@ int prerequisites(object player)
     mapping skills;
     object race_ob;
     string race, base;
-    int adj;
-    if(!objectp(player)) { return 0; }
+    if (!objectp(player)) {
+        return 0;
+    }
 
     race = player->query("subrace");
-    if(!race) { race = player->query_race(); }
-    race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
-    if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);
+    if (!race) {
+        race = player->query_race();
+    }
+    race_ob = find_object_or_load(DIR_RACES + "/" + player->query_race() + ".c");
+    if (!objectp(race_ob)) {
+        return 0;
+    }
     skills = player->query_skills();
 
     base = player->query("arcane_trickster_base_class");
-    if(!base) { return 0; }
-    if(!player->is_class(base)) { return 0; }
-    if((player->query_class_level(base) + adj) < 10) { return 0; }
-    if( (player->query_class_level("thief") + adj) < 10) { return 0; }
-    if(skills["stealth"] < 10) { return 0; }
-    if(skills["spellcraft"] < 10) { return 0; }
+    if (!base) {
+        return 0;
+    }
+    if (!player->is_class(base)) {
+        return 0;
+    }
+    if ((player->query_class_level(base)) < 10) {
+        return 0;
+    }
+    if ((player->query_class_level("thief")) < 10) {
+        return 0;
+    }
+    if (skills["stealth"] < 10) {
+        return 0;
+    }
+    if (skills["spellcraft"] < 10) {
+        return 0;
+    }
     return 1;
 }
 

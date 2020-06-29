@@ -95,7 +95,6 @@ int prerequisites(object player)
     if (!objectp(race_ob)) {
         return 0;
     }
-    adj = race_ob->level_adjustment(race);
     skills = player->query_skills();
     if (skills["spellcraft"] < 10) {
         write("Fail spellcraft.");
@@ -113,7 +112,7 @@ int prerequisites(object player)
     if (!player->is_class(base)) {
         return 0;
     }
-    if ((player->query_class_level(base) + adj) < 20) {
+    if ((player->query_class_level(base)) < 20) {
         write("Fail base class level.");
         return 0;
     }

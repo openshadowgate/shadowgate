@@ -52,11 +52,10 @@ int prerequisites(object player)
     if(!race) { race = player->query_race(); }
     race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
     if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);
 
     if(!FEATS_D->usable_feat(player,"savage instincts ii")) { return 0; }
     if(!FEATS_D->usable_feat(player,"mastery of fang and claw")) { return 0; }
-    if( (player->query_class_level("druid") + adj) < 20) { return 0; }
+    if( (player->query_class_level("druid")) < 20) { return 0; }
     if(player->query_base_stats("strength") < 20 && player->query_base_stats("dexterity") < 20) { return 0; }
     return 1;
 }

@@ -93,8 +93,10 @@ int prerequisites(object player)
 {
     object race_ob;
     string race, base;
-    int adj;
-    if(!objectp(player)) { return 0; }
+
+    if (!objectp(player)) {
+        return 0;
+    }
 
     race = player->query("subrace");
     if (!race) {
@@ -105,7 +107,6 @@ int prerequisites(object player)
         return 0;
     }
 
-    adj = race_ob->level_adjustment(race);
     base = player->query("immortal_defender_base_class");
 
     if (!base) {
@@ -116,7 +117,7 @@ int prerequisites(object player)
         write("You are not your base class.");
         return 0;
     }
-    if ((player->query_class_level(base) + adj) < 20) {
+    if ((player->query_class_level(base)) < 20) {
         write("Base level is low.");
         return 0;
     }

@@ -106,25 +106,31 @@ int prerequisites(object player)
     object race_ob;
     string race, base;
     int adj;
-    if(!objectp(player))
+    if (!objectp(player)) {
         return 0;
+    }
 
     race = player->query("subrace");
-    if(!race)
+    if (!race) {
         race = player->query_race();
-    race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
-    if(!objectp(race_ob))
+    }
+    race_ob = find_object_or_load(DIR_RACES + "/" + player->query_race() + ".c");
+    if (!objectp(race_ob)) {
         return 0;
-    adj = race_ob->level_adjustment(race);
+    }
     base = player->query("pale_master_base_class");
-    if(player->is_undead())
+    if (player->is_undead()) {
         return 0;
-    if(!base)
+    }
+    if (!base) {
         return 0;
-    if(!player->is_class(base))
+    }
+    if (!player->is_class(base)) {
         return 0;
-    if((player->query_class_level(base) + adj) < 20)
+    }
+    if ((player->query_class_level(base)) < 20) {
         return 0;
+    }
     return 1;
 }
 

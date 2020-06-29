@@ -42,18 +42,26 @@ int prerequisites(object player)
     mapping skills;
     object race_ob;
     string race;
-    int adj;
-    if(!objectp(player)) { return 0; }
+    if (!objectp(player)) {
+        return 0;
+    }
 
     race = player->query("subrace");
-    if(!race) { race = player->query_race(); }
-    race_ob = find_object_or_load(DIR_RACES+"/"+player->query_race()+".c");
-    if(!objectp(race_ob)) { return 0; }
-    adj = race_ob->level_adjustment(race);
+    if (!race) {
+        race = player->query_race();
+    }
+    race_ob = find_object_or_load(DIR_RACES + "/" + player->query_race() + ".c");
+    if (!objectp(race_ob)) {
+        return 0;
+    }
     skills = player->query_skills();
 
-    if( (player->query_class_level("sorcerer") + adj) < 20) { return 0; }
-    if(player->query_base_stats("charisma") < 20) { return 0; }
+    if ((player->query_class_level("sorcerer")) < 20) {
+        return 0;
+    }
+    if (player->query_base_stats("charisma") < 20) {
+        return 0;
+    }
     return 1;
 }
 
