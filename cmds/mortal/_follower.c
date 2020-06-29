@@ -64,7 +64,7 @@ OLI
 	"carrying much in sacks.\n\n"
       "%^BOLD%^%^RED%^Please note:%^WHITE%^ We do not refund gear for followers. "
       "To help avoid gear loss, the following hints may help: 1) Dismiss before "
-      "logging out. 2) Don't move when summoning. 3) Summon one follower at a time.%^RESET%^"
+      "logging out. 2) Don't move when summoning. 3) Summon one follower at a time. 4) Command your follower to save when you are satisfied with their setup.%^RESET%^"
     );
     if(avatarp(TP))
 	write("%^BOLD%^%^GREEN%^(Immortal eyes only) - you can ban or reinstate "
