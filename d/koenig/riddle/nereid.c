@@ -145,7 +145,7 @@ void mist()
            TO->set_property("magic", 1);
            targ->do_damage("torso", random(30)+20);
            TO->set_property("magic", -1);
-           continue;            
+           continue;
     }
     return;
 }
@@ -154,9 +154,9 @@ void mist()
 #define GROUP5 ({"elf","hobgoblin","half-drow","yuan-ti"})
 #define GROUP6 ({"gnome","ogre","kobold","minotaur"})
 #define GROUP7 ({"voadkyn","bugbear","dwarf","shade"})
-#define GROUP1 ({"firbolg","goblin","half-elf","satyr"})
+#define GROUP1 ({"firbolg","goblin","half-elf","satyr", "nymph"})
 #define GROUP2 ({"half-orc","halfling","drow","human"})
-#define GROUP3 ({"ogre-mage","gnoll","orc","beastkin"})
+#define GROUP3 ({"ogre-mage","gnoll","orc","beastkin", "kitsune", })
 #define BADDIES ({"scarlet","traelis","testlackey"})
 //BADDIES is for anyone who has done something stupid in front of the nereid
 //a minor IC punishment.  Circe 6/21/04
@@ -165,7 +165,7 @@ void mist()
 
 void reply_func(string msg, object who)
 {
-//Note - quests are stored on the player.o, not by name. 
+//Note - quests are stored on the player.o, not by name.
 //"who" returns the player object, so need to query the name for the other arrays.
    object current;
    string race;
@@ -366,9 +366,9 @@ void reply_func(string msg, object who)
       force_me("emote rises from the water and takes a seat at the edge, dangling her feet in the pool.");
       force_me("say Would you like to hear a riddle?");
       force_me ("? "+name+"");
-   }   
-   if((strsrch(msg,"riddle") != -1 || strsrch(msg,"yes") != -1 || 
-    strsrch(msg,"Yes") != -1 || strsrch(msg,"would like") != -1 || 
+   }
+   if((strsrch(msg,"riddle") != -1 || strsrch(msg,"yes") != -1 ||
+    strsrch(msg,"Yes") != -1 || strsrch(msg,"would like") != -1 ||
     strsrch(msg,"answer") != -1  || strsrch(msg,"reward") != -1 || strsrch(msg,"okay") != -1 || strsrch(msg,"Okay") != -1 || strsrch(msg,"Sure") != -1 || strsrch(msg,"sure") != -1)&& step1 && !step2)        {
       force_me("say Wonderful!");
       force_me("emote bites her bottom lip and thinks a moment with a playful smile "+
@@ -382,7 +382,7 @@ void reply_func(string msg, object who)
       return;
    }
 
-   if((strsrch(msg,"yes") != -1 || strsrch(msg,"Yes") != -1 || 
+   if((strsrch(msg,"yes") != -1 || strsrch(msg,"Yes") != -1 ||
    strsrch(msg,"agree") != -1 || strsrch(msg,"Agree") != -1 || strsrch(msg,"fair") != -1 || strsrch(msg,"first") != -1 || strsrch(msg,"okay") !=-1 || strsrch(msg,"Okay") != -1 || strsrch(msg,"lright") != -1 || strsrch(msg,"riddle") != -1 || strsrch(msg,"understand") != -1) && step2 == 1) {
       if(member_array(name, asked) == -1) {
          SAVE_D->set_value("riddle_quest_asked", name);
@@ -445,7 +445,7 @@ void receive_given_item(object obj){
      return;
    }
 /*
-   if(member_array("Riddle Quest",TP->query_quests()) != -1){ 
+   if(member_array("Riddle Quest",TP->query_quests()) != -1){
       force_me("say You have already solved my riddle and received your reward!  Do "+
          "you have a riddle for me?");
       force_me("smile");
@@ -921,13 +921,13 @@ int reward_me(){
    riddle1 = SAVE_D->query_array("riddle_quest_riddle1");
    riddle2 = SAVE_D->query_array("riddle_quest_riddle2");
    riddle3 = SAVE_D->query_array("riddle_quest_riddle3");
-   if(member_array(TPQN, asked) != -1) 
+   if(member_array(TPQN, asked) != -1)
         SAVE_D->remove_name_from_array("riddle_quest_asked", TPQN);
-   if(member_array(TPQN, riddle1) != -1) 
+   if(member_array(TPQN, riddle1) != -1)
         SAVE_D->remove_name_from_array("riddle_quest_riddle1", TPQN);
-   if(member_array(TPQN, riddle2) != -1) 
+   if(member_array(TPQN, riddle2) != -1)
         SAVE_D->remove_name_from_array("riddle_quest_riddle2", TPQN);
-   if(member_array(TPQN, riddle3) != -1) 
+   if(member_array(TPQN, riddle3) != -1)
         SAVE_D->remove_name_from_array("riddle_quest_riddle3", TPQN);
       if(TP->is_class("mage") || TP->is_class("psion") || TP->is_class("sorcerer")){
                obj = new("/d/koenig/riddle/rewards/mage_default.c");
@@ -1018,13 +1018,13 @@ int reward_me(){
    riddle1 = SAVE_D->query_array("riddle_quest_riddle1");
    riddle2 = SAVE_D->query_array("riddle_quest_riddle2");
    riddle3 = SAVE_D->query_array("riddle_quest_riddle3");
-   if(member_array(TPQN, asked) != -1) 
+   if(member_array(TPQN, asked) != -1)
         SAVE_D->remove_name_from_array("riddle_quest_asked", TPQN);
-   if(member_array(TPQN, riddle1) != -1) 
+   if(member_array(TPQN, riddle1) != -1)
         SAVE_D->remove_name_from_array("riddle_quest_riddle1", TPQN);
-   if(member_array(TPQN, riddle2) != -1) 
+   if(member_array(TPQN, riddle2) != -1)
         SAVE_D->remove_name_from_array("riddle_quest_riddle2", TPQN);
-   if(member_array(TPQN, riddle3) != -1) 
+   if(member_array(TPQN, riddle3) != -1)
         SAVE_D->remove_name_from_array("riddle_quest_riddle3", TPQN);
 //   if(member_array("Riddle Quest",TP->query_quests()) == -1){
       if(TP->is_class("mage") || TP->is_class("psion") || TP->is_class("sorcerer") || TP->is_class("psywarrior")){
@@ -1287,9 +1287,9 @@ int kill_ob(object victim, int which){
 void catch_say(string msg)
 {
     if(!objectp(TO)) return;
-    ::catch_say(msg);    
+    ::catch_say(msg);
     if(!objectp(TP)) return;
-    if(interactive(TP)) 
+    if(interactive(TP))
     {
         call_out("reply_func",1,msg,TP);
         return;
