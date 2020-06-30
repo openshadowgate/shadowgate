@@ -1,7 +1,7 @@
 //Coded by Bane//
 // modified slightly to recharge while it's not in use
 #include <std.h>
-inherit "/d/common/obj/jewelery/ring.c";
+inherit "/d/common/obj/jewelry/ring.c";
 int uses;
 
 void create()
