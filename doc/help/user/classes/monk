@@ -25,7 +25,7 @@ The monk is an enlightened warrior, able to transcend many of the bodily limits 
 
 They despise most tradional armor, finding that it gets in the way of their ability to perfect their inner self. Which is something that they dedicate their lives to. Most have an amazing ability to manipulate their own energies and that of others, which they refer to simply as "Ki", in profound ways, especially as they grow wiser.
 
-Some monks are known to use small weapons. Others limit themselves to using their bare hands. All monks are experts at using their body as a weapon. Some are very quick, using their dexterity in combat to both hit and deal damage, others are very strong and benefit from a higher strength stat.
+Some monks use small weapons. Others limit themselves to using their bare hands.
 
 Unarmed monks use the following damage table:
  Levels  1-10 : 1d6 damage
@@ -34,18 +34,16 @@ Unarmed monks use the following damage table:
  Levels 31-40 : 1d12 damage
  Levels 41-50 : 1d14 damage
 
-By default a monk uses strength for unarmed attacks (for both hit and damage), however, a monk may choose the weapon finesse feat in order to use dexterity instead.
-
 Unarmed monks have a base critical multiplier of 2, and receive an increased critical damage multiplier of their monk level divided by 10. A level 10 monk, for example, would have a critical damage multiplier of 3.
 
 An unarmed monk also receives +1 to damage and hit, per six levels in their monk class. This is considered magical for purposes of bypassing monster weapon resistance and or special abilities.
 
-Starting at level 3 you may dedicate to a particular emphasis of Ki, in any church or temple, by using %^ORANGE%^<pick WAY>%^RESET%^. The current known ways are:
+You may dedicate to a particular emphasis of Ki, known as ways. The current known ways are:
  %^CYAN%^The Way of The Fist
  %^CYAN%^The Way of The Shadow
  %^CYAN%^The Way of The Elements %^RESET%^
 
-Monk feats, abilities, and spells require ki. Most monks receive 1 ki point per level starting at level 2. Ki regenerates passively. Ki regeneration rate is 1-2 every 10-20 seconds. A higher wisdom score reduces this time but never below 5 seconds.
+Monk feats, abilities, and spells require ki. Most monks receive 1 ki point per level starting at level 2. Ki regenerates passively. Ki regeneration rate is 1-2 every 10-20 seconds. A higher wisdom score reduces this time but never below 6 seconds.
 
 The %^ORANGE%^<ki>%^RESET%^ command is a command showing the abilities imparted to you by your dedication, your total and available ki, and how long until you passively regenerate more.
 
