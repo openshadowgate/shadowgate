@@ -737,10 +737,10 @@ string* query_actions()
 int get_phouse_tp_proof(string tpprooflevel) //function to standardize tp proof levels across player houses, six levels available
 {
     int tp_proof_dc, base_tp_proof_dc;
-    base_tp_proof_dc = 20; //this is a poor quality lock
+    base_tp_proof_dc = 13; //this base tp proof/poor DC
     tp_proof_dc = base_tp_proof_dc;
     if (!stringp(tpprooflevel) || tpprooflevel == "" || tpprooflevel == " ") {
-        tpprooflevel = "average";
+        tpprooflevel = "common";
     }
     tpprooflevel = lower_case(tpprooflevel);
     switch (tpprooflevel) {
@@ -749,23 +749,23 @@ int get_phouse_tp_proof(string tpprooflevel) //function to standardize tp proof 
         break;
 
     case "common":
-        tp_proof_dc += 3;
+        tp_proof_dc += 10;
         break;
 
     case "good":
-        tp_proof_dc += 13;
+        tp_proof_dc += 20;
         break;
 
     case "rare":
-        tp_proof_dc += 23;
+        tp_proof_dc += 30;
         break;
 
     case "epic":
-        tp_proof_dc += 33;
+        tp_proof_dc += 40;
         break;
 
     case "legendary":
-        tp_proof_dc += 43;
+        tp_proof_dc += 50;
         break;
 
     default:
@@ -778,10 +778,10 @@ int get_phouse_tp_proof(string tpprooflevel) //function to standardize tp proof 
 int get_phouse_scry_proof(string scryprooflevel) //function to standardize scry proof levels across player houses, six levels available
 {
     int scry_proof_dc, base_scry_proof_dc;
-    base_scry_proof_dc = 20;
+    base_scry_proof_dc = 13;
     scry_proof_dc = base_scry_proof_dc;
     if (!stringp(scryprooflevel) || scryprooflevel == "" || scryprooflevel == " ") {
-        scryprooflevel = "average";
+        scryprooflevel = "common";
     }
     scryprooflevel = lower_case(scryprooflevel);
     switch (scryprooflevel) {
@@ -806,7 +806,7 @@ int get_phouse_scry_proof(string scryprooflevel) //function to standardize scry 
         break;
 
     case "legendary":
-        scry_proof_dc += 46;
+        scry_proof_dc += 50;
         break;
 
     default:

@@ -2482,14 +2482,14 @@ int check_avoidance(object who, object victim, object* weapons)
     }
 
 //  Avoidance Roll
-    attack = (int)BONUS_D->new_bab(1,who);
-    attack += (int)who->query_skill("athletics")/5;
-    defend = (int)BONUS_D->new_bab(1,victim);
-    defend += (int)victim->query_skill("athletics")/5;
+    attack = (int)who->query_highest_level(); //changed to highest level rather than BAB.  Doesn't nerf SC thieves.
+    attack += (int)who->query_skill("athletics")/2; //athletics/2 to improve dex but not make it a god stat.
+    defend = (int)who->query_highest_level();
+    defend += (int)victim->query_skill("athletics")/2;
     defend *= mod; // mod is a multiplier for fraction method
     chance = (int) 1.0*defend/(attack + defend) * 1000;
     roll = roll_dice(1,1000);
-    if (roll <= chance) {
+    if (roll <= chance) { //tie goes to defender
          avoidance = 1;
     }
 /* Debug Code

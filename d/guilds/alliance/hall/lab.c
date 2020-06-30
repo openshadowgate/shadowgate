@@ -1,4 +1,4 @@
-//Minor updates to description to add in past tense, reconnected up to 
+//Minor updates to description to add in past tense, reconnected up to
 //Alliance guild hall for shits and giggles.  Last change 10/17/01 - Octothorpe 1/2/09
 // /d/guilds/alliance/lab.c
 
@@ -12,8 +12,8 @@ void create(){
     set_indoors(1);
     set_light(2);
     set_terrain(STONE_BUILDING);
-    set_travel(PAVED_ROAD);	
-    set_property("teleport proof", 67);
+    set_travel(PAVED_ROAD);
+    set_property("teleport proof", get_phouse_tp_proof("epic"));
     set_short("Mage Lab of the Alliance");
     set_long("%^CYAN%^BOLD%^Mage Lab of the Alliance%^RESET%^\n "+
        "%^BOLD%^This room looks like nothing you have ever seen "+

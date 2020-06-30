@@ -72,6 +72,7 @@ void execute_feat() {
 
 void execute_attack() {
     int chamod, i, dmg;
+    clevel = caster->query_guild_level("paladin"); //bring in line with rally and scramble stabs
     object *targets;
 
     if(!objectp(caster)) {
