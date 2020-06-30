@@ -778,10 +778,10 @@ int get_phouse_tp_proof(string tpprooflevel) //function to standardize tp proof 
 int get_phouse_scry_proof(string scryprooflevel) //function to standardize scry proof levels across player houses, six levels available
 {
     int scry_proof_dc, base_scry_proof_dc;
-    base_scry_proof_dc = 20;
+    base_scry_proof_dc = 13;
     scry_proof_dc = base_scry_proof_dc;
     if (!stringp(scryprooflevel) || scryprooflevel == "" || scryprooflevel == " ") {
-        scryprooflevel = "average";
+        scryprooflevel = "common";
     }
     scryprooflevel = lower_case(scryprooflevel);
     switch (scryprooflevel) {
@@ -806,7 +806,7 @@ int get_phouse_scry_proof(string scryprooflevel) //function to standardize scry 
         break;
 
     case "legendary":
-        scry_proof_dc += 46;
+        scry_proof_dc += 50;
         break;
 
     default:
