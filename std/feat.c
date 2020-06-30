@@ -7,52 +7,6 @@
 
 inherit DAEMON;
 
-
-int prerequisites(object ob);
-void set_caster(object obj);
-object query_caster();
-void set_place(object obj);
-object query_place();
-void set_target(object obj);
-object query_target();
-void set_clevel(int num);
-int query_clevel();
-void set_arg_required(int num);
-int arg_required();
-void set_target_required(int num);
-int target_required();
-void feat_type(string str);
-string query_feat_type();
-void feat_name(string str);
-string query_feat_name();
-void feat_category(string str);
-string query_feat_category();
-void permanent(int num);
-int is_permanent_feat();
-void psionic(int num);
-int is_psionic_feat();
-void permanent_effects(object ob);
-void reverse_permanent_effects(object ob);
-void set_active(object feat);
-int is_active();
-void remove_feat(object feat);
-int can_use();
-varargs void setup_feat(object ob,string str);
-void execute_feat();
-void define_clevel();
-void use_feat(object ob,object targ,string feat,int level);
-void execute_attack();
-void dest_effect();
-int status_check();
-int spell_kill(object victim, object cast);
-int get_thaco(int level, string myclass,object obj);
-varargs int thaco(object obj,int mod);
-void set_obsolete(int num);
-int is_obsolete();
-void allow_tripped(int num);
-int is_tripped_allowed();
-void set_replace_feat(mixed feat);
-
 string feat_category,
     feat_name,
     feat_type,
@@ -62,7 +16,8 @@ string feat_category,
     arg,
     save_type,
     *required_for=({}),
-    *replaced_by=({});
+    *replaced_by=({}),
+    *feat_clss;
 
 object caster,
     target,
@@ -70,6 +25,7 @@ object caster,
 
 int permanent,
     clevel,
+    flevel,
     arg_required,
     target_required,
     obsolete,
@@ -196,6 +152,16 @@ void set_target_required(int num)
 {
     if(num) { target_required = num; }
     return;
+}
+
+void feat_classes(string *myclasses)
+{
+    feat_clss = myclasses;
+}
+
+string *query_feat_classes()
+{
+    return feat_clss;
 }
 
 int target_required() { return target_required; }
@@ -430,6 +396,7 @@ void execute_feat()
     }
 
     define_clevel();
+    define_flevel();
 
     if(!can_use())
     {
@@ -554,12 +521,50 @@ varargs int do_save(object ob,int mod)
     return num;
 }
 
+/**
+ * Defines character level
+ */
 void define_clevel()
 {
-    if(!objectp(caster)) { return; }
-    if(clevel) { return; }
-    clevel = (int)caster->query_highest_level();
+    if (!objectp(caster)) {
+        return;
+    }
+    if (clevel) {
+        return;
+    }
+    clevel = (int)caster->query_level();
     return;
+}
+
+/**
+ * Defines myclass level
+ */
+void define_flevel()
+{
+    if (!objectp(caster)) {
+        return;
+    }
+    if (flevel) {
+        return;
+    }
+
+    if (!feat_clss || !sizeof(feat_clss)) {
+        flevel = clevel;
+    } else {
+        string s;
+        int mlvl;
+
+        flevel = 0;
+        foreach(s in feat_clss) {
+            mlvl = caster->query_guild_level(s);
+            if (mlvl > flevel) {
+                flevel = mlvl;
+            }
+        }
+        if (!flevel) {
+            flevel = clevel;
+        }
+    }
 }
 
 void use_feat(object ob,object targ,string feat,int level)
