@@ -25,7 +25,7 @@ The monk is an enlightened warrior, able to transcend many of the bodily limits 
 
 They despise most tradional armor, finding that it gets in the way of their ability to perfect their inner self. Which is something that they dedicate their lives to. Most have an amazing ability to manipulate their own energies and that of others, which they refer to simply as "Ki", in profound ways, especially as they grow wiser.
 
-Some monks are known to use small weapons, almost as if they were an extension of themselves. Others prefer the feel of battle and thus limit themselves to using their bare hands. All monks are experts at using their body as a weapon. Some are very quick, using their dexterity in combat to both hit and deal damage, others are very strong and benefit from a higher strength stat.
+Some monks are known to use small weapons. Others limit themselves to using their bare hands. All monks are experts at using their body as a weapon. Some are very quick, using their dexterity in combat to both hit and deal damage, others are very strong and benefit from a higher strength stat.
 
 Unarmed monks use the following damage table:
  Levels  1-10 : 1d6 damage
@@ -48,8 +48,6 @@ Starting at level 3 you may dedicate to a particular emphasis of Ki, in any chur
 Monk feats, abilities, and spells require ki. Most monks receive 1 ki point per level starting at level 2. Ki regenerates passively. Ki regeneration rate is 1-2 every 10-20 seconds. A higher wisdom score reduces this time but never below 5 seconds.
 
 The %^ORANGE%^<ki>%^RESET%^ command is a command showing the abilities imparted to you by your dedication, your total and available ki, and how long until you passively regenerate more.
-
-Flurry of blows, which is a very unique monk feature allowing extra attacks, functions somewhat differently depending on the particular dedication of any given monk.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, ki, way of the fist, way of the shadow, way of the elements, ki, prestige classes
 
