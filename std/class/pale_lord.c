@@ -14,10 +14,10 @@ void create()
 object base_class_ob(object ob)
 {
     object class_ob;
-    if(!objectp(ob) || !ob->query("pale_master_base_class"))
+    if(!objectp(ob) || !ob->query("base_class"))
         class_ob = find_object_or_load(DIR_CLASSES+"/fighter.c");
     else
-        class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("pale_master_base_class")+".c");
+        class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("base_class")+".c");
     if(!objectp(class_ob))
         class_ob = find_object_or_load(DIR_CLASSES+"/fighter.c");
     return
@@ -30,7 +30,7 @@ string *query_base_classes(object obj)
     string base;
     if(!objectp(obj))
         return ({});
-    base = obj->query("pale_master_base_class");
+    base = obj->query("base_class");
     if(!base)
         return ({});
     return
@@ -42,7 +42,7 @@ void remove_base_class(object obj)
 {
     if(!objectp(obj))
         return;
-    obj->delete("pale_master_base_class");
+    obj->delete("base_class");
     return;
 }
 
@@ -51,7 +51,7 @@ int has_base_class_set(object obj)
 {
     if(!objectp(obj))
         return 0;
-    if(obj->query("pale_master_base_class"))
+    if(obj->query("base_class"))
         return 1;
     return 0;
 }
@@ -64,7 +64,7 @@ int set_base_class(object obj, string choice)
         return 0;
     if(choice == 0)
     {
-        obj->delete("pale_master_base_class");
+        obj->delete("base_class");
         return 1;
     }
     classes = obj->query_classes();
@@ -72,7 +72,7 @@ int set_base_class(object obj, string choice)
         return 0;
     if(member_array(choice,classes) == -1)
         return 0;
-    obj->set("pale_master_base_class",choice);
+    obj->set("base_class",choice);
     return 1;
 }
 
@@ -118,7 +118,7 @@ int prerequisites(object player)
     if (!objectp(race_ob)) {
         return 0;
     }
-    base = player->query("pale_master_base_class");
+    base = player->query("base_class");
     if (player->is_undead()) {
         return 0;
     }

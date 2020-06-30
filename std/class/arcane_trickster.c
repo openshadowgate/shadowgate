@@ -18,8 +18,8 @@ void create()
 object base_class_ob(object ob)
 {
     object class_ob;
-    if(!objectp(ob) || !ob->query("arcane_trickster_base_class")) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
-    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("arcane_trickster_base_class")+".c"); }
+    if(!objectp(ob) || !ob->query("base_class")) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
+    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("base_class")+".c"); }
     if(!objectp(class_ob)) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
     return class_ob;
 }
@@ -28,7 +28,7 @@ string *query_base_classes(object obj)
 {
     string base;
     if(!objectp(obj)) { return ({}); }
-    base = obj->query("arcane_trickster_base_class");
+    base = obj->query("base_class");
     if(!base) { return ({}); }
     return ({ base });
 }
@@ -36,14 +36,14 @@ string *query_base_classes(object obj)
 int has_base_class_set(object obj)
 {
     if(!objectp(obj)) { return 0; }
-    if(obj->query("arcane_trickster_base_class")) { return 1; }
+    if(obj->query("base_class")) { return 1; }
     return 0;
 }
 
 void remove_base_class(object obj)
 {
     if(!objectp(obj)) { return; }
-    obj->delete("arcane_trickster_base_class");
+    obj->delete("base_class");
     return;
 }
 
@@ -53,14 +53,14 @@ int set_base_class(object obj, string choice)
     if(!objectp(obj)) { return 0; }
     if(choice == 0)
     {
-        obj->delete("arcane_trickster_base_class");
+        obj->delete("base_class");
         return 1;
     }
     classes = obj->query_classes();
     if(!sizeof(classes)) { return 0; }
     if(member_array(choice,classes) == -1) { return 0; }
     if(member_array(choice,({"mage","sorcerer","cleric","druid","bard","inquisitor"})) == -1) { return 0; }
-    obj->set("arcane_trickster_base_class",choice);
+    obj->set("base_class",choice);
     return 1;
 }
 
@@ -110,7 +110,7 @@ int prerequisites(object player)
     }
     skills = player->query_skills();
 
-    base = player->query("arcane_trickster_base_class");
+    base = player->query("base_class");
     if (!base) {
         return 0;
     }
@@ -145,7 +145,7 @@ int caster_level_calcs(object player, string the_class)
     int level;
     string base;
     if(!objectp(player)) { return 0; }
-    base = player->query("arcane_trickster_base_class");
+    base = player->query("base_class");
 
     level = player->query_class_level(base);
     level += player->query_class_level("arcane_trickster");

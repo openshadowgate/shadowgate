@@ -13,8 +13,8 @@ void create()
 object base_class_ob(object ob)
 {
     object class_ob;
-    if(!objectp(ob) || !ob->query("shadow_adept_base_class")) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
-    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("shadow_adept_base_class")+".c"); }
+    if(!objectp(ob) || !ob->query("base_class")) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
+    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("base_class")+".c"); }
     if(!objectp(class_ob)) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
     return class_ob;
 }
@@ -65,13 +65,13 @@ int prerequisites(object player)
     {
         if( (player->query_class_level("mage")) < 20) { return 0; }
         if(player->query_base_stats("intelligence") < 20) { return 0; }
-        player->set("shadow_adept_base_class","mage");
+        player->set("base_class","mage");
     }
     if(player->is_class("sorcerer"))
     {
         if( (player->query_class_level("sorcerer")) < 20) { return 0; }
         if(player->query_base_stats("charisma") < 20) { return 0; }
-        player->set("shadow_adept_base_class","sorcerer");
+        player->set("base_class","sorcerer");
     }
     return 1;
 }
