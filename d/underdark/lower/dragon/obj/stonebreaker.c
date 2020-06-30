@@ -46,6 +46,7 @@ void create() {
    set_wield((:TO,"wield_func":));
    set_unwield((:TO,"unwield_func":));
    set_hit((:TO,"hit_func":));
+   set_special_material_type("silver");
 }
 
 void init() {

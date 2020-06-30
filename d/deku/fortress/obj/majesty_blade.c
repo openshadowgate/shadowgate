@@ -7,7 +7,7 @@ void create() {
    set_id(({ "sword", "longsword", "long sword", "sword of dragon's majesty", "long","mithril sword","mithril longsword","mithril long sword","gilded longsword", }));
    set_name("gilded longsword");
    set_obvious_short("%^BOLD%^%^WHITE%^A%^YELLOW%^ gilded%^WHITE%^ mithril longsword%^RESET%^");
-   set_short("%^BOLD%^%^CYAN%^Sword of %^YELLOW%^Dragon's %^WHITE%^Majesty%^RESET%^"); 
+   set_short("%^BOLD%^%^CYAN%^Sword of %^YELLOW%^Dragon's %^WHITE%^Majesty%^RESET%^");
     set_long("%^BOLD%^%^CYAN%^Forged from %^WHITE%^mithril%^CYAN%^, the blade of "+
          "this sword is thicker than a typical long sword.  Both sides of the blade"+
          " have been sharpened, up to the kite shaped tip of the blade.  Etched into"+
@@ -37,7 +37,7 @@ void create() {
          " blades were said to have been a cherished gift for each child, as well as "+
          "claim to their noble herritage.  The Jalimpar crest was that of a mithril dragon"+
          " ringed by golden mist.");
-    set_property("lore",13); 
+    set_property("lore",13);
     //set_weight(7);
     //set_size(2);
     set_value(1500);
@@ -48,6 +48,7 @@ void create() {
     set_item_bonus("armor bonus", 1);
     set_wield((:TO,"extra_wield":));
     set_hit((:TO,"extra_hit":));
+    set_special_material_type("silver");
 }
 int extra_wield(){
     if(!ETO) return 0;
@@ -66,7 +67,7 @@ int extra_hit(object victim) {
    if(!objectp(TO)) return 1;
    if(!objectp(ETO)) return 1;
    if(!objectp(victim)) return 1;
-        
+
         if(!random(8)) {
                 tell_object(ETO,"%^BOLD%^%^CYAN%^You follow through your slash, whipping the"+
                    " mithril blade back through "+victim->QCN+".");
@@ -75,7 +76,7 @@ int extra_hit(object victim) {
         tell_room(EETO,"%^BOLD%^%^CYAN%^"+ETO->QCN+" follows "+
                    "through "+ETO->QP+" attack on "+victim->QCN+".",({ETO,victim}));
                         victim->do_damage("torso",random(4)+2);
-                return 1;       
+                return 1;
         }
         if(!random(16)) {
         tell_object(ETO,"%^BOLD%^Your heart starts to race as the silvery scale"+
@@ -90,4 +91,3 @@ int extra_hit(object victim) {
         return 1;
         }
 }
-

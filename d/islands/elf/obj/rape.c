@@ -1,6 +1,6 @@
 // fancy fan for blade songstress
 #include <std.h>
-inherit "/d/common/obj/weapon/fan";
+inherit "/d/common/obj/weapon/rapier";
 
 void create() {
     ::create();
@@ -23,11 +23,12 @@ void create() {
    " artifacts that favored the moon elves.");
    set_property("lore difficulty",35);
    set_value(9000);
-   set_property("enchantment",5);  
+   set_property("enchantment",5);
    set_wield((:TO,"wield_func":));
    set_unwield((:TO,"unwield_func":));
    set_hit((:TO,"hit_func":));
    set_item_bonus("sight bonus",2);
+   set_special_material_type("silver");
 }
 
 int wield_func(){
@@ -81,7 +82,7 @@ int hit_func(object target) {
 			target->set_paralyzed(5+random(5),"Your ears are ringing.");
 			return roll_dice(1,4)+1;
 		case 6:
-  
+
             tell_object(ETO,"%^BOLD%^As you pierce into"+target->QCN+
 			" words to a spell enter your head..");
 			new("/cmds/spells/s/_searing_light")->use_spell(ETO,target,15,100,"cleric");
