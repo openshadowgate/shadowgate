@@ -11,6 +11,7 @@ void create()
     feat_name("quivering palm");
     feat_syntax("quivering_palm [TARGET]");
     feat_prereq("Monk L17, Way of The Fist or Grandmaster of The Way");
+    feat_classes("monk");
     feat_desc("A monk specialized in the way of the fist, that is unarmored and unarmed, or wielding small weapons, may attempt a quivering palm attack on a target. In order for the attempt to be successful the monk must have at least 3 available Ki and must land a touch attack on the target. If successful a brief period of time later the target must roll a successful fortitude saving throw or be set to 0 health. Against certain monsters or if the saving throw is successful the target will take 1d8 damage per monk level.
 
 If used without an argument this feat will pick up a random attacker.");
@@ -265,8 +266,8 @@ void execute_attack()
     }
 
     qob = new("/cmds/feats/obj/quivering_object");
-    DC = (int)caster->query_class_level("monk");
-    DC += (int)"/daemon/bonus_d.c"->query_stat_bonus(caster, "wisdom");
+    DC = flevel;
+    DC += "/daemon/bonus_d.c"->query_stat_bonus(caster, "wisdom");
     DC += 10;
     qob->set_dc(DC);
     qob->set_caster(caster);
