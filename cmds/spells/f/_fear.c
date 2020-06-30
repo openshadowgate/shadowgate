@@ -102,7 +102,7 @@ void spell_effect(int prof)
             tell_room(place,"%^BLUE%^You see "+inven[i]->QCN+" wince and shudder, "
                       "before regaining composure.",inven[i]);
 
-            "/std/effect/status/sickened"->apply_effect(inven[i],2);
+            "/std/effect/status/shaken"->apply_effect(inven[i],2);
 
         }
         else
