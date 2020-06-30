@@ -13,6 +13,7 @@ void create()
     feat_name("radiant aura");
     feat_syntax("radiant_aura");
     feat_prereq("Radiant Servant L4");
+    feat_classes("base_class");
     feat_desc("The radiant aura feat projects an aura of healing positive energy around the caster, healing the caster and all of her allies. As the aura projects positive energy, it is dangerous to undead that have been summoned by members of the party. Unlike the aura of healing spell, radiant aura requires no spell slots to use and will remain active until the caster is killed or logs off.");
     set_target_required(0);
     set_required_for(({"supreme healer"}));
@@ -60,8 +61,6 @@ void execute_feat()
         return;
     }
     ::execute_feat();
-
-    clevel = caster->query_guild_level("cleric");
 
     tell_object(caster,"%^RESET%^%^BOLD%^%^BLUE%^You close your eyes and open your mind, channeling energy directly from "+capitalize(caster->query_diety()));
     caster->set_property("active_feats",({TO}));
@@ -113,7 +112,7 @@ void execute_attack()
             continue;
         }
 
-        damage = roll_dice(clevel, 2);
+        damage = roll_dice(flevel, 2);
 
         party[i]->cause_typed_damage(party[i], party[i]->return_target_limb(), damage, "positive energy");
         if (party[i] != caster) {

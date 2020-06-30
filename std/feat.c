@@ -154,9 +154,15 @@ void set_target_required(int num)
     return;
 }
 
-void feat_classes(string *myclasses)
+void feat_classes(mixed myclasses)
 {
-    feat_clss = myclasses;
+    if (arrayp(myclasses)) {
+        feat_clss = myclasses;
+        return;
+    }
+    if (stringp(myclasses)) {
+        feat_clss = ({myclasses});
+    }
 }
 
 string *query_feat_classes()
@@ -555,15 +561,22 @@ void define_flevel()
         int mlvl;
 
         flevel = 0;
-        foreach(s in feat_clss) {
-            mlvl = caster->query_guild_level(s);
-            if (mlvl > flevel) {
-                flevel = mlvl;
+
+        if (feat_clss[0] == "base_class") {
+            flevel = caster->query_guild_level(caster->query("base_class"));
+        } else {
+            foreach(s in feat_clss)
+            {
+                mlvl = caster->query_guild_level(s);
+                if (mlvl > flevel) {
+                    flevel = mlvl;
+                }
             }
         }
         if (!flevel) {
             flevel = clevel;
         }
+
     }
 }
 

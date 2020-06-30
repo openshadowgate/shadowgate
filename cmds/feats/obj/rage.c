@@ -19,7 +19,6 @@ string * JUDGEMENT_TYPES = ({
 });
 
 object caster;
-int clevel;
 int duration;
 
 void create()
@@ -37,7 +36,6 @@ void create()
 void setup_rage(object mycaster)
 {
     caster = mycaster;
-    clevel = caster->query_guild_level("barbarian");
 }
 
 void activate_rage()

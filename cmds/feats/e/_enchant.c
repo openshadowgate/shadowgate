@@ -19,6 +19,7 @@ void create()
     feat_category("ArcaneSpellcraft");
     feat_name("enchant");
     feat_syntax("enchant ITEM");
+    feat_classes(({"mage", "sorcerer", "oracle", "druid", "cleric", "psion"}));
     feat_desc("This feat allows a caster to enchant items with charges of spells they already know. The enchanted item can be used as easily by the caster themselves, as those without training. Creating such an item drains the essence of the mage, however, and should not be taken lightly.
 
 Enchanting uses gems as material components. Any gem would do, but it will be destroyed on use.");
@@ -176,13 +177,7 @@ void select_spell(string str, object ob)
  */
 int maximum_enchant_level()
 {
-    return max(({ caster->query_guild_level("mage"),
-                  caster->query_guild_level("sorcerer"),
-                  caster->query_guild_level("oracle"),
-                  caster->query_guild_level("druid"),
-                  caster->query_guild_level("cleric"),
-                  caster->query_guild_level("psion") })) +
-           (int)caster->query_property("empowered");
+    return flevel + caster->query_property("empowered");
 }
 
 void spell_charges(string str, object ob, string spell, string file)

@@ -13,6 +13,7 @@ void create()
     feat_name("judgement");
     feat_syntax("judgement FIRST [SECOND [THIRD]]");
     feat_prereq("Inquisitor L1");
+    feat_classes("inquisitor");
     feat_desc("Inquisitors have an unusual affinity to pronounce a judgement on their foes, to strengthen themselves with channeled power. At the beginning they can choose just one power to pronounce, but as inquisitor grows in power he learns to control up to three such powers. Changing the power is a free action, but any powers an inquisitor has will retreat after the combat and can not be summoned unless already in the combat.
 
 The list of judgements to choose from:
@@ -72,7 +73,6 @@ int cmd_judgement(string args)
     }
 
     argss = explode(args, " ");
-    clevel = TP->query_guild_level("inquisitor");
     JUDGEMENT_TYPES = "/cmds/feats/obj/judgement"->query_judgement_types();
 
     if (FEATS_D->usable_feat(TP, "third judgement")) {
@@ -100,8 +100,7 @@ int cmd_judgement(string args)
         controller = present("judgement_obj", TP);
     }else {
         controller = new("/cmds/feats/obj/judgement");
-        controller->setup_judgement(TP, clevel);
-// controller->move(TP);
+        controller->setup_judgement(TP, flevel);
     }
     jtoactivate = distinct_array(jtoactivate);
     controller->activate_judgements(jtoactivate);

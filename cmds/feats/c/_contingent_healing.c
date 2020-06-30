@@ -14,6 +14,7 @@ void create()
     feat_name("contingent healing");
     feat_syntax("contingent_healing");
     feat_prereq("Radiant Servant L1");
+    feat_classes("base_class");
     feat_desc("The Contingent Healing feat will allow the user to automatically cast a heal spell on whichever party member is hurt the most if they are sufficiently injured. This healing happens in addition to any other actions that the user takes in the round, including casting another spell or using a feat or attacking.");
     set_target_required(0);
     set_required_for(({"radiant aura","supreme healer"}));
@@ -62,10 +63,6 @@ void execute_feat()
 
     tell_object(caster,"%^RESET%^%^BOLD%^%^CYAN%^You take a deep breath and focus, preparing to heal any ally who is "
         "badly hurt.%^RESET%^");
-
-    clevel = max(({caster->query_guild_level("cleric"),
-                    caster->query_guild_level("druid"),
-                    caster->query_guild_level("oracle")}));
 
     caster->set_property("active_feats",({TO}));
 
@@ -120,7 +117,7 @@ void execute_attack()
     {
         casting = caster->query_casting();
         caster->set_casting(0);
-        new("/cmds/spells/h/_heal.c")->use_spell(caster, targ, clevel, 100, "cleric");
+        new("/cmds/spells/h/_heal.c")->use_spell(caster, targ, flevel, 100, "cleric");
         caster->set_casting(casting);
     }
 

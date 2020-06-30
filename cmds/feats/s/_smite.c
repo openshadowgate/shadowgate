@@ -12,6 +12,7 @@ void create() {
     feat_category("Presence");
     feat_syntax("smite");
     feat_prereq("Paladin L2");
+    feat_classes("paladin");
     feat_desc("Drawing on the divine energy that infuses every holy knight, the paladin can smite the evil or good that lies in the hearts of men, beasts, and monsters alike. A successful attempt will strike any creature audacious enough to attack the paladin, causing vicious damage.");
     feat_name("smite");
 }
@@ -72,7 +73,6 @@ void execute_feat() {
 
 void execute_attack() {
     int chamod, i, dmg;
-    clevel = caster->query_guild_level("paladin"); //bring in line with rally and scramble stabs
     object *targets;
 
     if(!objectp(caster)) {
@@ -108,7 +108,7 @@ void execute_attack() {
         if(targets[i] == caster) continue;
         if(!objectp(targets[i])) continue;
    	  tell_object(targets[i],"%^BOLD%^%^WHITE%^The energy washes over you, burning like fire!%^RESET%^");
-        dmg = roll_dice(clevel + chamod,8);
+        dmg = roll_dice(flevel + chamod,8);
         caster->cause_typed_damage(targets[i],"head",dmg,"divine");
         caster->add_attacker(targets[i]);
         targets[i]->add_attacker(caster);

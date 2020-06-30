@@ -15,6 +15,7 @@ void create()
     feat_name("combatprescience");
     feat_prereq("Psywarrior L1");
     feat_syntax("combatprescience");
+    feat_classes("psywarrior");
     feat_desc("This feat allows the psywarrior to use her mental prowess to gain insight into battle, granting her bonuses to attack and damage rolls and giving her a chance to slip in extra attacks. The feat grows in both strength and opportunities for extra attacks as the psywarrior gains levels and intelligence.");
     set_target_required(0);
     allow_blind(1);
@@ -72,7 +73,7 @@ void execute_feat()
     tell_room(place,"%^RESET%^%^ORANGE%^Strange symbols flash in "
         ""+caster->QCN+"'s eyes as "+caster->QS+" gives a warcry.%^RESET%^",caster);
 
-    mod = ((int)caster->query_guild_level("psywarrior") +9)/10;
+    mod = (flevel + 9) / 10;
 
     intelligence = (int)caster->query_stats("intelligence");
     if(intelligence < 1) intelligence = 1; //shouldn't be possible, but you never know
@@ -90,7 +91,7 @@ void execute_feat()
     caster->add_attack_bonus(mod + extra);
     caster->add_damage_bonus(mod + extra);
 
-    duration = (int)caster->query_guild_level("psywarrior")/10;
+    duration = flevel/10;
     if(duration < 1) duration = 1;
     duration += 5;
     if(extra) { duration = duration * extra; }
@@ -125,7 +126,7 @@ void check()
 //    tell_object(caster,"%^B_BLUE%^%^BOLD%^%^GREEN%^Check has been called!%^RESET%^");
 // above message was for debugging. Leaving commented out for now, just in case it's needed later.
 
-    mylvl = caster->query_guild_level("psywarrior");
+    mylvl = flevel;
     ::execute_attack();
     if(sizeof(caster->query_attackers()))
     {
