@@ -36,7 +36,8 @@ void create() {
 "when they wander the planes. It is said that when a githyanki loses their sword"+
 ", they must retreieve it, so those who take the swords of the githyanki do not "+
 "tend to hold them for long without a band of hunters coming to find it again.%^RESET%^");
- 
+set_special_material_type("silver");
+
 }
 
 int wield_func(object targ){
@@ -47,9 +48,9 @@ int wield_func(object targ){
 "%^BOLD%^and you hear a strange voice in your head.. It seems to be calling to you."+
 "%^RESET%^");
         return 1;
-}   
+}
 
-int unwield_func(object targ) { 
+int unwield_func(object targ) {
         tell_room(EETO,"%^RESET%^%^RED%^"+ETOQCN+"%^RESET%^%^RED%^ sets the blade "+
 "aside, the pommel stone flashes then goes dead.%^RESET%^",({ETO,targ}));
         tell_object(ETO,"%^RESET%^%^RED%^As you set the "+query_short()+" %^RESET%^"+
@@ -66,26 +67,25 @@ int hit_func(object targ){
 			tell_room(EETO,"%^RESET%^%^CYAN%^"+ETOQCN+" %^RESET%^%^CYAN%^holds the "+
 "sword out in front of "+targ->QCN+"%^RESET%^%^CYAN%^.%^RESET%^",({ETO,targ}));
 			tell_object(ETO,"%^RESET%^%^CYAN%^You hold out the sword in front"+
-" of "+targ->QCN+"%^RESET%^%^CYAN%^.%^RESET%^"); 
+" of "+targ->QCN+"%^RESET%^%^CYAN%^.%^RESET%^");
 			tell_object(targ,"%^RESET%^%^CYAN%^"+ETOQCN+" %^RESET%^%^CYAN%^holds out"+
 " the sword in front of you.%^RESET%^");
 	new("/cmds/spells/d/_dispel_psionics.c")->use_spell(ETO,targ,15,100,"psion");
-		
+
         break;
-			
+
 		default:
 			tell_room(EETO,"%^BOLD%^%^RED%^"+ETOQCN+"%^BOLD%^%^RED%^'s sword slashes"+
 " deeply into "+targ->QCN+"%^BOLD%^%^RED%^.%^RESET%^",({ETO,targ}));
 			tell_object(ETO,"%^BOLD%^%^RED%^You score a wicked slash against %^BOLD%^"+
-"%^RED%^"+targ->QCN+"%^BOLD%^%^RED%^.%^RESET%^"); 
+"%^RED%^"+targ->QCN+"%^BOLD%^%^RED%^.%^RESET%^");
 			tell_object(targ,"%^BOLD%^%^RED%^"+ETOQCN+"%^BOLD%^%^RED%^ slashes you "+
 "horribly with the sword.%^RESET%^");
 			return roll_dice(3,4)+-1;
-		
+
 		break;
-		
-        return 0;       
+
+        return 0;
 		}
     }
 }
-

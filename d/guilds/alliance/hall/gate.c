@@ -9,7 +9,7 @@ void create()
     ::create();
     set_indoors(1);
     set_light(2);
-    set_property("teleport proof", get_phouse_tp_proof("epic"));
+    set_property("teleport proof", "/daemon/player_housing"->get_phouse_tp_proof("epic"));
     set_property("no phase", 1);
     set_short("At the Drawbridge gate");
     set_long("%^CYAN%^At the Drawbridge Gate%^RESET%^BOLD%^\nYou are walking past the gate that secures the castle and controls the drawbridge. You see the iron gates hanging above  your head. On each side you see a door that leads to the  drawbridge control. In the ceiling you see a hole where archers can send arrows or rocks down at attacking troops. You also see a few torches on the wall.");

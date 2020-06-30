@@ -1,4 +1,4 @@
-//Updated by saide to re-adjust damage and give the weapon more value and uniqueness.  
+//Updated by saide to re-adjust damage and give the weapon more value and uniqueness.
 //Saide - 12/18/03
 #include <std.h>
 #include <daemons.h>
@@ -30,20 +30,21 @@ create() {
   set_wield( (: TO, "extra_wield" :) );
   set_unwield((: TO,"unwield_me":));
   set_hit((:TO,"hit_em":));
+  set_special_material_type("silver");
 }
 
 //added to give the sword a bit of flavor - Saide - 12/18/03
 int hit_em(object targ) {
   int dam, len;
   if(!objectp(targ)) return 0;
-  if(random(1000) < 200) { 
+  if(random(1000) < 200) {
     switch(random(20)) {
      case 0..11:
       tell_object(ETO,targ->QCN+"%^BOLD%^%^WHITE%^ screams in pain as the mithril blade flashes a %^RESET%^%^RED%^crimson%^BOLD%^%^WHITE%^ hue upon contact with "+targ->QP+"%^BOLD%^%^WHITE%^ flesh!%^RESET%^");
       tell_object(targ,"%^BOLD%^%^WHITE%^The mithril blade of the sword wielded by "+ETO->QCN+"%^BOLD%^%^WHITE%^ flashes a %^RESET%^%^RED%^crimson%^BOLD%^%^WHITE%^ hue as it sears your flesh, causing you to scream out in pain!%^RESET%^");
       tell_room(EETO,targ->QCN+"%^BOLD%^%^WHITE%^ screams out in pain, as the mithril blade of "+ETO->QCN+"%^BOLD%^%^WHITE%^'s sword flashes a %^RESET%^%^RED%^crimson%^BOLD%^%^WHITE%^ hue upon contact with "+targ->QP+"%^BOLD%^%^WHITE%^ flesh!%^RESET%^",({targ,ETO}));
       ETO->set_property("magic",1);
-      targ->do_damage(targ->return_target_limb(),roll_dice(1,6)); 
+      targ->do_damage(targ->return_target_limb(),roll_dice(1,6));
       ETO->set_property("magic",-1);
       break;
      case 12..18:
@@ -62,7 +63,7 @@ int hit_em(object targ) {
       return targ->set_paralyzed(len,"%^RED%^Your body is rigid!%^RESET%^");
     }
    }
-} 
+}
 
 
 int extra_wield(object ob) {
