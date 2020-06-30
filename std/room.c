@@ -33,27 +33,6 @@ nosave string climate;
 mapping coords = ([]);
 string* roomfuncs, * roomverbs;
 
-void reset();
-void reinitiate();
-void set_short(string str);
-void set_long(string str);
-void set_climate(string str);
-string query_short();
-string query_long(string str);
-string query_extra_long();
-int move(mixed dest);
-int query_reset_number();
-void set_sneak_func(mixed val);
-int do_sneak_func();
-void set_peer_message(string str);
-void set_mcharge_message(string str);
-string query_peer_message();
-string query_mcharge_message();
-int add_action(string thisfunc, string thisverb);
-string* query_actions();
-int get_phouse_tp_proof(string tpprooflevel); //helper function to standardize tp proof property for player houses
-int get_phouse_scry_proof(string scryprooflevel); //see above
-
 string getSaveFileName()
 {
     string fn = base_name(TO);

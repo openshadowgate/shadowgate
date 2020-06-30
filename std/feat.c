@@ -565,8 +565,7 @@ void define_flevel()
         if (feat_clss[0] == "base_class") {
             flevel = caster->query_guild_level(caster->query("base_class"));
         } else {
-            foreach(s in feat_clss)
-            {
+            foreach(s in feat_clss) {
                 mlvl = caster->query_guild_level(s);
                 if (mlvl > flevel) {
                     flevel = mlvl;
@@ -576,7 +575,6 @@ void define_flevel()
         if (!flevel) {
             flevel = clevel;
         }
-
     }
 }
 

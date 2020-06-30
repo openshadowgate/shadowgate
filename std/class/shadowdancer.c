@@ -23,10 +23,10 @@ object base_class_ob(object ob)
                 ob->set("base_class", ob->query("shadowdancer_base_class"));
                 ob->delete("shadowdancer_base_class");
             }
-            else if(ob->is_class("cleric"))
-                ob->set("base_class", "cleric");
+            else if(ob->is_class("thief"))
+                ob->set("base_class", "thief");
             else if(ob->is_class("oracle"))
-                ob->set("base_class", "oracle");
+                ob->set("base_class", "ranger");
         }
     }
 
