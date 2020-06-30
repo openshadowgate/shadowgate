@@ -38,7 +38,7 @@ void create(){
                 "spike gauntlets, making them far more deadlier.");
       set_property("lore difficulty",23);
       set_property("enchantment",4);
-      set_item_bonus("bonus spell slots",1);
+      set_item_bonus("bonus_spell_slots",1);
         set_item_bonus("fire resistance",2);
       set_value(3000);
       set_ac(1);
@@ -62,17 +62,17 @@ int unwield_func(string str) {
                         ETO->set_property("evil item",-1);
                   return 1;
 }
-int hit_func(object victim) 
+int hit_func(object victim)
 {
     object ob2;
     if(!objectp(TO)) return 1;
     if(!objectp(ETO)) return 1;
     if(!objectp(victim)) return 1;
-    
+
     if(random(1000) < 220)
     {
         switch(random(50))
-        {       
+        {
         case 0..34:
             tell_object(ETO,"%^RED%^You slam the spikes of your coiled "+
                 "gauntlet into "+victim->QCN+"'s chest, violently "+
@@ -86,7 +86,7 @@ int hit_func(object victim)
                 " "+victim->QO+".",({ETO,victim}));
             victim->cause_typed_damage(victim,0,roll_dice(1,8)+3,"piercing");
             break;
-        
+
         case 35..46:
             tell_object(ETO,"%^BOLD%^%^RED%^Time seems to slow down for you,"+
                 " allowing you to hammer into "+victim->QCN+" "+
@@ -124,14 +124,14 @@ int hit_func(object victim)
             ETO->add_follower(ob2);
             break;
 
-        default:  
+        default:
             tell_object(ETO,"%^BOLD%^%^RED%^Congrats, Turbo.  You get"+
                 " the special screwed up message.  Please bug report this"+
                 " and what you were doing/fighting when you got this message.");
             break;
-                
+
         }
-                
+
     return 1;
     }
 }
