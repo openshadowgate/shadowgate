@@ -18,7 +18,7 @@ void create() {
     set_max_hp(150);
     set_max_mp(400);
     set_exp(10);
-    set_lang_prof("human",7);
+    //set_lang_prof("human",7);
     set_stats("strength",18);
     set_stats("constitution", 18);
     set_stats("intelligence", 18);
@@ -46,6 +46,6 @@ void reply_back(){
       "says%^RESET%^: "+
       "Hello, great adventurer.\n The wizard who hired me asked me "+
       "to inform everyone who passes this trail that : in near "+
-      "future, a lot of new rooms will be added to this place.", 
-      this_object() ); 
+      "future, a lot of new rooms will be added to this place.",
+      this_object() );
 }
