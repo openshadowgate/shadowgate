@@ -15,7 +15,7 @@ void create(){
    set_indoors(1);
    set_light(2);
    //set_property("no teleport",1);
-    set_property("teleport proof", get_phouse_tp_proof("epic"));
+    set_property("teleport proof", "/daemon/player_housing"->get_phouse_tp_proof("epic"));
    set_short("Main Hall in the Castle of the Alliance");
    set_long("%^CYAN%^Main Hall in the Castle of the Alliance%^RESET%^\n "+
       "%^BOLD%^This is the main hall of a once magnificent castle, on "+
