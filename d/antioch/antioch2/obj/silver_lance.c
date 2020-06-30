@@ -25,6 +25,7 @@ void create()
        set("no curse",1);
       set_property("enchantment",1);
    }
+   set_special_material_type("silver");
 }
 
 int check(object targ)

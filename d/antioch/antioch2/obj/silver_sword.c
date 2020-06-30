@@ -23,4 +23,5 @@ void create()
 	set_weapon_speed(4);
         set("no curse",1);
 	set_property("enchantment",1);
+	set_special_material_type("silver");
 }
