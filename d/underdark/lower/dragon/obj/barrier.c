@@ -31,7 +31,6 @@ void create(){
      TO->set_property("enchantment",5);
    }
    set_item_bonus("spell damage resistance",30);
-   set_item_bonus("psionic resistance",30);
    set_wear((:TO,"wear_fun":));
    set_remove((:TO,"remove_fun":));
    set_struck((:TO,"struck_fun":));
