@@ -69,7 +69,7 @@ void spell_effect(int prof) {
     for(i=0;i<sizeof(targets);i++) {
       targets[i]->set_property("faerie fire",1);
       targets[i]->set_property("spelled",({TO}));
-      targets[i]->set_property("added short",({"%^YELLOW%^ (sparkling)"}));
+      targets[i]->set_property("added short",({"%^YELLOW%^ (sparkling)%^RESET%^"}));
     }
     call_out("dest_effect",duration);
 }
@@ -82,7 +82,7 @@ void dest_effect(){
         tell_room(place,"%^YELLOW%^The sparkling dust finally fades from "+targets[i]->QCN+"'s skin.",targets[i]);
         tell_object(targets[i],"%^YELLOW%^The sparkling dust finally fades from your skin.");
         targets[i]->remove_property("faerie fire");
-        targets[i]->remove_property_value("added short",({"%^YELLOW%^ (sparkling)"}));
+        targets[i]->remove_property_value("added short",({"%^YELLOW%^ (sparkling)%^RESET%^"}));
       }
     }
     ::dest_effect();
