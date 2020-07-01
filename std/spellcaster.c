@@ -813,7 +813,7 @@ mapping query_mastered_bonus()
 
     if (TO->is_class("shadow_adept")) {
         if (FEATS_D->usable_feat(TO, "gift of the shadows")) {
-            string baseclass = TO->query("shadow_adept_base_class");
+            string baseclass = TO->query("base_class");
             if (!arrayp(tmp[baseclass])) {
                 tmp[baseclass] = ({});
             }
