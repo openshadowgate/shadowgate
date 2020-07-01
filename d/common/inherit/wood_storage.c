@@ -14,11 +14,10 @@ void reset(){
    int i;
    int j;
    ::reset();
-   j = roll_dice(1,20);
+   j = roll_dice(1,20) + 10;
    for(i=0;i<j;i++){
       if (!present("wood "+i)) {
          new("/std/obj/wood")->move(TO);
       }
    }
 }
-
