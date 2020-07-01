@@ -70,7 +70,7 @@ int light_func(string str) {
        return notify_fail(ETO->query_paralyze_message()+"\n");
     destination = find_object_or_load(baseroom);
     if(EETO->query_property("teleport proof")){
-	   if((int)EETO->query_property("teleport proof") > (ETO->query_highest_level() + random(20)){
+	   if((int)EETO->query_property("teleport proof") > (ETO->query_highest_level() + random(20))) {
 	      tell_object(ETO,"You strike a %^YELLOW%^light %^RESET%^to the end of the "
 "fuse and cast it down before you as it starts spewing %^BOLD%^%^BLACK%^thick "
 "smoke%^RESET%^.  But when the smoke clears... you are still standing there.  "
