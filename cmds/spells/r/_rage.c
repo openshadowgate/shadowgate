@@ -19,7 +19,7 @@ void create() {
     set_syntax("cast CLASS rage");
     set_description("%^RESET%^This spell allows the caster to enter a fit of furious rage, making them deadly in combat for the duration. The ability will last longer, and grow stronger, as the caster gains levels.
 
-%^RED%^%^BOLD%^N.B.%^RESET%^ Being enraged means that you are maddened uncontrollably. This is *not* a state in which you can calmly participate in a normal conversation, undertake delicate tasks, cast offensive spells, solve problems, or pretty much do anything other than shout obscenities andkill things. This spell won't work in conjunction with wimilar magical effects, such as rally, transformation, rage, berserker and fell flight.
+%^RED%^%^BOLD%^N.B.%^RESET%^ Being enraged means that you are maddened uncontrollably. This is *not* a state in which you can calmly participate in a normal conversation, undertake delicate tasks, cast offensive spells, solve problems, or pretty much do anything other than shout obscenities and kill things. This spell won't work in conjunction with similar magical effects, such as rally, transformation, rage, berserker and fell flight.
 
 %^RED%^%^BOLD%^See also:%^RESET%^ rage *feats");
     set_components(([
