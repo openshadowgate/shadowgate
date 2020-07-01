@@ -8,8 +8,7 @@ void create() {
     set_spell_level(([ "cleric" : 5 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS kiss of torment on TARGET");
-    set_description("A simple touch from this spell will deal extreme torment to the victim, leaving them in agony and "
-"distress.");
+    set_description("A simple touch from this spell will deal extreme torment to the victim, leaving them in agony and distress.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -39,8 +38,6 @@ void spell_effect(int prof) {
         damage_targ(target, "torso",sdamage,"divine");
         if (!objectp(target)) return;
         target->set_paralyzed(12,"%^RED%^You are writhing in pain.");
-// this really seems counter-intuitive; yanking it. N, 12/18.
-//        caster->set_paralyzed(5, "You are stunned from the caress.");
         call_out("next_damage",9,target,1);
 
 
@@ -56,7 +53,6 @@ void spell_effect(int prof) {
 void next_damage(object targ, int count)
 {
     if(do_save(targ,-1)) {
-    //if ("daemon/saving_d"->saving_throw(targ,"spell", -1)) {
         dest_effect();
         return;
     }
@@ -74,8 +70,6 @@ void next_damage(object targ, int count)
         return;
     }
 
-
-    targ->set_paralyzed(10,"%^RED%^You are writhing in pain.");
     call_out("next_damage",9,targ,count++);
 }
 
