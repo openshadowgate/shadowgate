@@ -87,7 +87,6 @@ void execute_attack() {
         return;
     }
     chamod = ((int)caster->query_stats("charisma") - 10)/2;
-    chamod++; //charisma mod on our system = d3 to d8. -N, 9/10.
 
     targets = caster->query_attackers();
     if(!sizeof(targets)) {

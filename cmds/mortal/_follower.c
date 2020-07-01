@@ -131,7 +131,7 @@ object makeFollower(mapping map){
         follower->set_stats("constitution",14);
         follower->set_stats("dexterity",13);
         follower->set_stats("intelligence",15);
-        follower->set_stats("wisdom",18);
+        follower->set_stats("wisdom",20);
         follower->set_stats("charisma",13);
     } else if (c == "mage") {
         //these races do not have mages!
@@ -149,7 +149,7 @@ object makeFollower(mapping map){
         follower->set_stats("strength",12);
         follower->set_stats("constitution",14);
         follower->set_stats("dexterity",16);
-        follower->set_stats("intelligence",18);
+        follower->set_stats("intelligence",20);
         follower->set_stats("wisdom",15);
         follower->set_stats("charisma",13);
     } else if(c == "thief"){
@@ -157,12 +157,12 @@ object makeFollower(mapping map){
         if(race == "ogre") follower->set_race("goblin");
         follower->set_stats("strength",15);
         follower->set_stats("constitution",14);
-        follower->set_stats("dexterity",18);
+        follower->set_stats("dexterity",20);
         follower->set_stats("intelligence",14);
         follower->set_stats("wisdom",15);
         follower->set_stats("charisma",13);
     } else if(c == "fighter"){
-        follower->set_stats("strength",18);
+        follower->set_stats("strength",20);
         follower->set_stats("constitution",16);
         follower->set_stats("dexterity",14);
         follower->set_stats("intelligence",10);
@@ -173,7 +173,7 @@ object makeFollower(mapping map){
         follower->set_stats("strength",12);
         follower->set_stats("constitution",14);
         follower->set_stats("dexterity",16);
-        follower->set_stats("intelligence",18);
+        follower->set_stats("intelligence",20);
         follower->set_stats("wisdom",13);
         follower->set_stats("charisma",15);
     } else if(c == "bard"){
@@ -182,7 +182,7 @@ object makeFollower(mapping map){
         follower->set_stats("dexterity",16);
         follower->set_stats("intelligence",15);
         follower->set_stats("wisdom",13);
-        follower->set_stats("charisma",18);
+        follower->set_stats("charisma",20);
     }
     return follower;
 }
