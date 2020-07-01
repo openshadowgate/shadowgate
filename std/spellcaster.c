@@ -281,7 +281,7 @@ varargs int forget_memorized(string myclass, string spell, int forced)
             TO->is_class("archdruid")) {
             if (FEATS_D->usable_feat(TO, "natural perfection") ||
                 FEATS_D->usable_feat(TO, "theurgic perfection")) {
-                if (TO->is_class("oracle")) { //this is a workaround for now. assuming that oracles do not multiclass with druids or clerics.  Will figure more specifics out later - Odin 3/22/2020
+                if (TO->query("base_class") == "oracle") { //this is a workaround for now. assuming that oracles do not multiclass with druids or clerics.  Will figure more specifics out later - Odin 3/22/2020
                     stat = TO->query_stats("charisma");
                 }else {
                     stat = TO->query_stats("wisdom");

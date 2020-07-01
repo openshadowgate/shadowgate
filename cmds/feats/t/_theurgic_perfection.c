@@ -10,7 +10,7 @@ void create()
     feat_category("Hierophant");
     feat_name("theurgic perfection");
     feat_prereq("Hierophant L7");
-    feat_desc("As experienced theurgist, Hierophant gains ability to keep any cast spell in memory, with a chance based on her wisdom for clerics and druids, or charisma for oracle.  If you have both classes...actually I don't know what will happen.");
+    feat_desc("As experienced theurgist, Hierophant gains ability to keep any cast spell in memory, with a chance based on her wisdom for clerics and druids, or charisma for oracle.");
     permanent(1);
 }
 
