@@ -33,7 +33,7 @@ string long_desc() {
 "except at what must be the top and underside.  At the top, a small hole allows "
 "%^ORANGE%^slender braided threads %^RESET%^to protrude, woven together and "
 "coated in some kind of resin or oil.";
-    if(TP->is_class("thief")) {
+    if(TP->is_class("thief") || TP->is_class("bard")) {
       mydesc += "  Upon the underside are %^GREEN%^letters %^RESET%^scrawled "
 "to represent the "+baseloc+" thieves guild.\n";
       if(TP->is_singleClass())
