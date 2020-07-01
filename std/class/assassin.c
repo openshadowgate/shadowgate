@@ -11,15 +11,15 @@ void create()
 
 
 /*
- * assassin_base_class is used in _crit.c and for clevel calculations
+ * base_class is used in _crit.c and for clevel calculations
  */
 object base_class_ob(object ob)
 {
     object class_ob;
-    if (!objectp(ob) || !ob->query("assassin_base_class")) {
+    if (!objectp(ob) || !ob->query("base_class")) {
         class_ob = find_object_or_load(DIR_CLASSES + "/fighter.c");
     }else {
-        class_ob = find_object_or_load(DIR_CLASSES + "/" + ob->query("assassin_base_class") + ".c");
+        class_ob = find_object_or_load(DIR_CLASSES + "/" + ob->query("base_class") + ".c");
     }
     if (!objectp(class_ob)) {
         class_ob = find_object_or_load(DIR_CLASSES + "/thief.c");
@@ -34,7 +34,7 @@ string* query_base_classes(object obj)
     if (!objectp(obj)) {
         return ({});
     }
-    base = obj->query("assassin_base_class");
+    base = obj->query("base_class");
     if (!base) {
         return ({});
     }
@@ -46,7 +46,7 @@ void remove_base_class(object obj)
     if (!objectp(obj)) {
         return;
     }
-    obj->delete("assassin_base_class");
+    obj->delete("base_class");
     return;
 }
 
@@ -55,7 +55,7 @@ int has_base_class_set(object obj)
     if (!objectp(obj)) {
         return 0;
     }
-    if (obj->query("assassin_base_class")) {
+    if (obj->query("base_class")) {
         return 1;
     }
     return 0;
@@ -69,7 +69,7 @@ int set_base_class(object obj, string choice)
         return 0;
     }
     if (choice == 0) {
-        obj->delete("assassin_base_class");
+        obj->delete("base_class");
         return 1;
     }
     classes = obj->query_classes();
@@ -82,7 +82,7 @@ int set_base_class(object obj, string choice)
     if (member_array(choice, ({"psion", "psywarrior"})) != -1) {
         return 0;
     }
-    obj->set("assassin_base_class", choice);
+    obj->set("base_class", choice);
     return 1;
 }
 
@@ -141,7 +141,7 @@ int prerequisites(object player)
         write("failed int");
         return 0;
     }
-    base = player->query("assassin_base_class");
+    base = player->query("base_class");
     if (!base) {
         write("failed base class");
         return 0;
@@ -165,7 +165,7 @@ int caster_level_calcs(object player, string the_class)
     int level;
     string base;
     if(!objectp(player)) { return 0; }
-    base = player->query("assassin_base_class");
+    base = player->query("base_class");
 
     level = player->query_class_level(base);
     level += player->query_class_level("assassin");
