@@ -11,6 +11,7 @@ void create()
     feat_name("crit");
     feat_syntax("crit [TARGET]");
     feat_prereq("Assassin L1");
+    feat_classes("base_class");
     feat_desc("You perform a devastating attack that has a chance to kill your enemy instantly. The save throw gets a bonus from your intelligence score. If your target succeeds the save, either by being warded against death ot by being studry, thay will still suffer greatly.
 
 If used without an argument this feat will pick up a random attacker.");
@@ -49,8 +50,6 @@ void execute_feat()
     int damage, timerz, i, bonusdc;
     object *keyz, qob;
     ::execute_feat();
-
-    clevel = caster->query_guild_level(caster->query("base_class"));
 
     tempmap = caster->query_property("using crit");
     if (!objectp(target)) {
@@ -139,7 +138,7 @@ void execute_feat()
 
     tell_object(caster, "%^RESET%^You find vulnerable spot to attack "+target->QCN+" at.%^RESET%^");
 
-    bonusdc = clevel+10;
+    bonusdc = flevel+10;
     bonusdc += BONUS_D->query_stat_bonus(caster, "intelligence");
 
     spell_kill(target, caster);
@@ -151,9 +150,9 @@ void execute_feat()
         tell_room(place, "%^BOLD%^%^WHITE%^You almost didn't see a shadow behind " + target->QCN + "'s back!", ({ target, caster }));
         tell_object(caster, "%^BOLD%^%^WHITE%^You phase quickly behind " + target->QCN + ", but " + target->QS + " withstands your assault.");
         if (target->query_max_hp() < caster->query_max_hp()) {
-            todamage = roll_dice(clevel, 10);
+            todamage = roll_dice(flevel, 10);
         } else{
-            todamage = roll_dice(clevel + BONUS_D->query_stat_bonus(caster, "intelligence"), 10);
+            todamage = roll_dice(flevel + BONUS_D->query_stat_bonus(caster, "intelligence"), 10);
         }
         target->cause_typed_damage(target, target->query_target_limb(), todamage, "untyped");
     } else {
