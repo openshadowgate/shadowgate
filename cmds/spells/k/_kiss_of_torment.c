@@ -41,7 +41,7 @@ void spell_effect(int prof) {
         target->set_paralyzed(12,"%^RED%^You are writhing in pain.");
 // this really seems counter-intuitive; yanking it. N, 12/18.
 //        caster->set_paralyzed(5, "You are stunned from the caress.");
-        call_out("next_damgae",9,target,1);
+        call_out("next_damage",9,target,1);
 
 
     } else {
@@ -76,7 +76,7 @@ void next_damage(object targ, int count)
 
 
     targ->set_paralyzed(10,"%^RED%^You are writhing in pain.");
-    call_out("next_damge",9,targ,count++);
+    call_out("next_damage",9,targ,count++);
 }
 
 void dest_effect(){
