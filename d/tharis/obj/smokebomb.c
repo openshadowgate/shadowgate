@@ -6,7 +6,7 @@ inherit OBJECT;
 string baseloc, baseroom;
 void set_origin(string str);
 
-void create() 
+void create()
 {
     ::create();
     set_name("black orb");
@@ -70,7 +70,7 @@ int light_func(string str) {
        return notify_fail(ETO->query_paralyze_message()+"\n");
     destination = find_object_or_load(baseroom);
     if(EETO->query_property("teleport proof")){
-	   if((int)EETO->query_property("teleport proof") > (random(10)+60)){
+	   if((int)EETO->query_property("teleport proof") > (ETO->query_highest_level() + random(20)){
 	      tell_object(ETO,"You strike a %^YELLOW%^light %^RESET%^to the end of the "
 "fuse and cast it down before you as it starts spewing %^BOLD%^%^BLACK%^thick "
 "smoke%^RESET%^.  But when the smoke clears... you are still standing there.  "
@@ -81,7 +81,7 @@ int light_func(string str) {
       TO->remove();
 	  return 1;
 	   }
-	}   
+	}
     if(EETO->query_property("no teleport") || destination->query_property("no teleport")) {
       tell_object(ETO,"You strike a %^YELLOW%^light %^RESET%^to the end of the "
 "fuse and cast it down before you as it starts spewing %^BOLD%^%^BLACK%^thick "
@@ -114,7 +114,7 @@ void set_origin(string str) {
    baseloc = str;
    switch(baseloc) {
      case "torm": baseroom = "/d/dagger/Torm/city/warehouse"; break;
-      case "tharis": baseroom = "/d/tharis/newtharis/rooms/thief_tailor"; break; //not sure if this is correct - was pointing to tea shop that no longer exists. 
+      case "tharis": baseroom = "/d/tharis/newtharis/rooms/thief_tailor"; break; //not sure if this is correct - was pointing to tea shop that no longer exists.
       case "juran": baseroom = "/d/shadow/juran/city/a3"; break;
    }
 }
