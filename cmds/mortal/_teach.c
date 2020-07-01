@@ -101,7 +101,7 @@ int cmd_teach(string str)
     TP->force_me("emote attempts to show you some common phrases.");
     TP->set_property("teaching", 1);
     targ->set_property("taught", 1);
-    call_out("step", 10, 1, TP, targ, lang);
+    call_out("step", 5, 1, TP, targ, lang);
     return 1;
 }
 
@@ -166,10 +166,10 @@ void step(int when, object who, object targ, string what)
 
             targ->force_me("emote brightens with some limited understanding.");
 
-            // base 5% increase + bonuses
+            // base 5% increase + bonuses, this doesn't appear to work even when I up the 5% base to 50% base, something with add_grammar is off - Odin 7/1/2020
             targ->add_grammar(what,
                               BONUS_D->query_stat_bonus(who,"intelligence") * 75 +
-                              BONUS_D->query_stat_bonus(targ, "intelligence") * 75 + 500);
+                              BONUS_D->query_stat_bonus(targ, "intelligence") * 75 + 50000);
 
             who->remove_property("teaching");
             targ->remove_property("taught");
@@ -178,10 +178,10 @@ void step(int when, object who, object targ, string what)
         targ->force_me("emote seems to have gained a little more knowledge.");
         who->force_me("shrug");
 
-        // base 5% increase + bonuses,
+        // base 5% increase + bonuses, this doesn't appear to work even when I up the 5% base to 50% base, something with add_grammar is off - Odin 7/1/2020
         targ->add_grammar(what,
                           BONUS_D->query_stat_bonus(who, "intelligence") * 75 +
-                          BONUS_D->query_stat_bonus(targ, "intelligence") * 75 + 500);
+                          BONUS_D->query_stat_bonus(targ, "intelligence") * 75 + 50000);
 
         who->remove_property("teaching");
         targ->remove_property("taught");
