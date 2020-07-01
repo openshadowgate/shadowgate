@@ -13,9 +13,9 @@ void create()
     set_spell_sphere("divination");
     set_syntax("cast CLASS precognitive perception on TARGET");
     set_damage_desc("half of clevel perception skill");
-    set_description("You share some insigts into the future with target, allowing them to better perceive the surroundings. This spell gives an exceptional defence against stabs and won't last long.");
+    set_description("You share some insights into the future with target, allowing them to better perceive the surroundings. This spell gives an exceptional defence against stabs and won't last long.");
     set_arg_needed();
-	set_helpful_spell(1);
+	  set_helpful_spell(1);
 }
 
 int preSpell()
