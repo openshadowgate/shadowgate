@@ -166,7 +166,7 @@ void add_grammar(string type, int level)
        if ((query_lang(type) > 90) && random(25 - intel)) {
         return;
        }*/
-    needed = query_lang(type) - intel;
+    needed = query_lang(type);
     if (needed < 1) {
         needed = 1;
     }
