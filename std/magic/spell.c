@@ -2096,7 +2096,7 @@ void define_clevel()
     clevel = caster->query_guild_level(spell_type);
 
     if (spell_type == "assassin") {
-        clevel = caster->query_guild_level(caster->query("assassin_base_class"));
+        clevel = caster->query_guild_level(caster->query("base_class"));
     }
 
     if (spell_type == "psion" || spell_type == "psywarrior") {
@@ -2157,7 +2157,7 @@ void define_clevel()
     }
 
     if (caster->is_class("hierophant")) {
-        if (caster->query("hierophant_base_class") == spell_type) {
+        if (caster->query("base_class") == spell_type) {
             if (FEATS_D->usable_feat(caster, "mastery of power")) {
                 clevel += 2;
             }
