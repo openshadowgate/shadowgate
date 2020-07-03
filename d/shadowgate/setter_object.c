@@ -501,7 +501,13 @@ display_stats()
         tadjust = race_stats[i];
         tadjust += age_to_adjust(char_sheet["age"], i, char_sheet["race"]);
 
-        write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]) + (tadjust ? ((tadjust > 0 ? "%^BOLD%^%^CYAN%^ +" : "%^BOLD%^%^RED%^ ") + tadjust) : ""));
+        if (i == "constitution" &&
+            (char_sheet["template"] == "undead" || char_sheet["template"] == "vampire")) {
+            write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^BLACK%^--");
+        } else {
+            write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]) + (tadjust ? ((tadjust > 0 ? "%^BOLD%^%^CYAN%^ +" : "%^BOLD%^%^RED%^ ") + tadjust) : ""));
+        }
+
         sum += char_sheet["stats"][i];
     }
 
