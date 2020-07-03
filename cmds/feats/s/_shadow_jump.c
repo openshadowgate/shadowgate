@@ -1,6 +1,3 @@
-// originally a ranger command
-// reverted to a feat with damage realigned roughly to tabletop as ranger-levels are now irrelevant
-// Nienne, 04/10.
 #include <std.h>
 #include <daemons.h>
 #include <teleport.h>
@@ -16,7 +13,7 @@ void create()
     feat_name("shadow jump");
     feat_syntax("shadow_jump DESTINATION");
     feat_prereq("Shadowdancer L7");
-    feat_desc("A shadowdancer is able to jump into the shadows at one location in the world and reappear at another location in a completely different part of the world. He is able to travel flawlessly through the shadows and needs only a short time to recover before he can jump again.
+    feat_desc("A shadowdancer is able to jump into the shadows at one location in the world and reappear at another location in a completely different part of the world. He is able to travel flawlessly through the shadows and needs only a very short time to recover before he can jump again. These jumps are almost effortless and require no concentration, thus can be made out of combat..
 
 %^BOLD%^See also:%^RESET%^ remember, recall");
     set_arg_required(1);
@@ -120,7 +117,7 @@ void execute_feat()
         return;
     }
 
-    if(!TELEPORT->object_can_be_teleported(caster,destination_room,clevel))
+    if(!TELEPORT->object_can_be_teleported(caster,destination_room,clevel + roll_dice(1, 20)))
     {
         tell_object(caster,"You notice some kind of interference preventing you from shadow jumping.");
         dest_effect();
@@ -137,7 +134,7 @@ void execute_feat()
 
     tell_room(destination_room,"There's a faint flicker of the shadows.",caster);
 
-    call_out("move_caster",0.8, destination_room); // happens pretty quickly since it's top tier prestige class feat
+    call_out("move_caster",1, destination_room);
     return;
 
 }
