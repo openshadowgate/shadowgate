@@ -92,41 +92,46 @@ void dispel(object ob) {
     object *spells;
     int i;
 
-    if(!objectp(ob)) { return; }
-
-    if(!ob->query_property("spelled") )
-        return;
-    if(ob->query_true_invis()) {
+    if (!objectp(ob)) {
         return;
     }
 
-    if (pointerp(ob->query_property("spelled")))
-        spells = ob->query_property("spelled");
-    else
-        spells = ({ob->query_property("spelled")});
-
-    if (spells == ({}))
+    if (!ob->query_property("spelled")) {
         return;
+    }
+    if (ob->query_true_invis()) {
+        return;
+    }
 
-    for (i = 0; i < sizeof(spells); i++)
-    {
+    if (pointerp(ob->query_property("spelled"))) {
+        spells = ob->query_property("spelled");
+    }else {
+        spells = ({ ob->query_property("spelled") });
+    }
+
+    if (!sizeof(spells)) {
+        return;
+    }
+
+    shuffle(spells);
+
+    for (i = 0; i < sizeof(spells); i++) {
         if (!objectp(ob)) {
             continue;
         }
-        if (!objectp(spells[i]))
-            continue;
-        if(i>clevel/12+1)
-        {
-            tell_object(caster, "You fail to dispel the "+spells[i]->query_spell_name());
+        if (!objectp(spells[i])) {
             continue;
         }
-        if (!checkDispel(spells[i]))
-        {
-            tell_object(caster, "You fail to dispel the "+spells[i]->query_spell_name());
+        if (i > clevel / 12 + 1) {
+            tell_object(caster, "You fail to dispel the " + spells[i]->query_spell_name());
             continue;
         }
-        tell_object(caster, "You dispel the "+spells[i]->query_spell_name());
-        ob->remove_property_value("spelled", ({spells[i]}) );
+        if (!checkDispel(spells[i])) {
+            tell_object(caster, "You fail to dispel the " + spells[i]->query_spell_name());
+            continue;
+        }
+        tell_object(caster, "You dispel the " + spells[i]->query_spell_name());
+        ob->remove_property_value("spelled", ({ spells[i] }));
         spells[i]->dest_effect();
     }
 

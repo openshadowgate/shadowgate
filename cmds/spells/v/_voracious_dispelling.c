@@ -81,15 +81,28 @@ void dispel(object ob) {
     int i, dmg, mylvl;
     string mytype;
 
-    if(!objectp(ob)) { return; }
+    if (!objectp(ob)) {
+        return;
+    }
 
-    if(!ob->query_property("spelled")) return;
-    if(ob->query_true_invis()) return;
+    if (!ob->query_property("spelled")) {
+        return;
+    }
+    if (ob->query_true_invis()) {
+        return;
+    }
 
-    if (pointerp(ob->query_property("spelled"))) spells = ob->query_property("spelled");
-    else spells = ({ob->query_property("spelled")});
+    if (pointerp(ob->query_property("spelled"))) {
+        spells = ob->query_property("spelled");
+    }else {
+        spells = ({ ob->query_property("spelled") });
+    }
 
-    if (spells == ({})) return;
+    if (!sizeof(spells)) {
+        return;
+    }
+
+    shuffle(spells);
 
     dmg = 0;
     for (i = 0;i<sizeof(spells);i++) {
