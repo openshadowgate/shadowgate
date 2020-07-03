@@ -1,7 +1,7 @@
 //dancing dress summoned by weapon
 #include <std.h>
 inherit "/std/monster";
-string *dances; 
+string *dances;
 create() {
     ::create();
     set_name("dress");
@@ -11,7 +11,7 @@ create() {
       set("long", "This glowing white dress dances about."+
 	     "  It looks to be formed from a collection of ribbons.");
 	  dances = ({
-       "%^BOLD%^%^WHITE%^The empty dress dances about.",   
+       "%^BOLD%^%^WHITE%^The empty dress dances about.",
        "%^BOLD%^%^WHITE%^The dress spins about elegantly.",
 	   "%^BOLD%^%^WHITE%^The dress bows in an graceful dip.",});
 	}
@@ -20,7 +20,7 @@ create() {
       set("long", "This glowing black dress dances about. "+
 	  " It looks to be formed from a collection of ribbons.");
 	  dances = ({
-       "%^BOLD%^%^BLACK%^The empty dress dances about.",   
+       "%^BOLD%^%^BLACK%^The empty dress dances about.",
        "%^BOLD%^%^BLACK%^The dress spins about elegantly.",
 	   "%^BOLD%^%^BLACK%^The dress bows in an graceful dip.",});
 	}
@@ -33,7 +33,7 @@ create() {
     set_stats("constitution", 3);
 	set_hd(2,1);
     set_level(1);
-    set_class("theif");
+    set_class("thief");
     set_body_type("humanoid");
     set_alignment(5);
     set("race", "dress");
