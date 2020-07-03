@@ -10,6 +10,8 @@
 
 int object_can_be_teleported(object teleportee, object destination, int clevel)
 {
+    int roll;
+
     if (!objectp(destination)) {
         return 0;
     }
@@ -26,6 +28,16 @@ int object_can_be_teleported(object teleportee, object destination, int clevel)
     if (destination->query_property("no teleport") ||
         environment(teleportee)->query_property("no teleport")) {
         return 0;
+    }
+
+    roll = roll_dice(1, 20);
+
+    if (roll == 1) {
+        return 0;
+    }
+
+    if (roll == 20) {
+        return 1;
     }
 
     {
