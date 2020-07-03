@@ -16,7 +16,7 @@ void create() {
    set_id(({"eldritch bow","bow","energy bow","bow of energy","eldritch_weapon_xxx","%^BOLD%^%^CYAN%^b%^RESET%^%^CYAN%^ol%^BOLD%^t %^RESET%^%^CYAN%^of %^BOLD%^e%^RESET%^%^CYAN%^nerg%^BOLD%^y%^RESET%^%^CYAN%^"}));
    set_short("%^RESET%^%^CYAN%^ra%^BOLD%^%^CYAN%^d%^RESET%^%^CYAN%^ia%^BOLD%^%^CYAN%^n%^RESET%^%^CYAN%^t ene%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^gy %^CYAN%^b%^BOLD%^%^CYAN%^o%^RESET%^%^CYAN%^w%^RESET%^");
    set_long("%^BOLD%^%^WHITE%^This magical construct looks as though it would serve as a weapon of considerable %^RESET%^%^RED%^potency%^BOLD%^%^WHITE%^. Instead of wood or metal, however, it is made purely of %^RESET%^%^CYAN%^e%^BOLD%^%^CYAN%^n%^RESET%^%^CYAN%^e%^BOLD%^%^WHITE%^r%^BOLD%^%^CYAN%^g%^RESET%^%^CYAN%^y%^BOLD%^%^WHITE%^. Its curved like a bow, with thin, %^RESET%^%^CYAN%^translucent%^RESET%^ string connecting the arms.");
-   set_weapon_prof("simple");   
+   set_weapon_prof("simple");
    set_value(0);
    set_weight(0);
    set_wield((:TO,"wield_func":));
@@ -26,7 +26,7 @@ void create() {
    set_property("able to cast",1);
    powerlevel = 1;
    tier = 1;
-   set_ammo("%^BOLD%^%^CYAN%^b%^RESET%^%^CYAN%^ol%^BOLD%^t %^RESET%^%^CYAN%^of %^BOLD%^e%^RESET%^%^CYAN%^nerg%^BOLD%^y%^RESET%^%^CYAN%^");   
+   set_ammo("%^BOLD%^%^CYAN%^b%^RESET%^%^CYAN%^ol%^BOLD%^t %^RESET%^%^CYAN%^of %^BOLD%^e%^RESET%^%^CYAN%^nerg%^BOLD%^y%^RESET%^%^CYAN%^");
 }
 
 int use_shots(){ return 1; }
@@ -41,7 +41,7 @@ void weapon_setup(object caster,int clevel) {
     mysize = (int)caster->query_size()+1;
     set_size(mysize);
     if(powerlevel < 100) powerlevel = 100; // 10% minimum proc rate
-    if(powerlevel < 350) powerlevel = 350; // 10% minimum proc rate    
+    if(powerlevel < 350) powerlevel = 350; // 10% minimum proc rate
     mychant = clevel;
     if(mychant < 1) mychant = 1;
     if(mychant > (int)caster->query_level()) mychant = (int)caster->query_level(); // let's not let the weapon enchant & bonuses exceed what they can reasonably wield!
@@ -128,5 +128,6 @@ int is_ok_wield() { return 1; }
 void __ActuallyUnwield() {
    ::__ActuallyUnwield();
    tell_room(EETO,"%^RESET%^%^CYAN%^The radiant bow shimmers and disappears.%^RESET%^");
-   TO->remove();
+   TO->move("/d/shadowgate/void");
+   call_out("remove", 60);
 }
