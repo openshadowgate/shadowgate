@@ -9,13 +9,11 @@ void create(){
    set_id(({"rhoc","rhoc tord","tord","ranger"}));
    set_short("%^RESET%^%^GREEN%^Rhoc Tord, retired ranger%^RESET%^");
    set_long("%^RESET%^%^GREEN%^This gangly old ranger sits in the archery, "
-"observing and occasionally taking part in a challenge.  His leathered face and "
-"deep wrinkles show his age.  He sits and makes arrows with most of his spare "
+"observing and occasionally taking part in a challenge. His leathered face and "
+"deep wrinkles show his age. He sits and makes arrows with most of his spare "
 "time, his hands constantly in motion as he whittles the slender shafts of wood"
-".  When he is not caught up in his fletching, he can often be seen instructing "
-"the younger rangers of the guild in combat.  He will show you how to "
-"%^YELLOW%^apply %^RESET%^%^GREEN%^proficiencies, but he is much to old to "
-"train against.  He will also gladly sell to you the arrows he makes, only "
+". When he is not caught up in his fletching, he can often be seen instructing "
+"the younger rangers of the guild in combat. He will gladly sell to you the arrows he makes, only "
 "asking enough money for the materials and a drink.%^RESET%^");
    set_hd(50,10);
    set_hp(2000);
