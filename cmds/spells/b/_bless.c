@@ -16,6 +16,7 @@ void create() {
     set_domains("renewal");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS bless on TARGET");
+    set_damage_desc("clevel / 24 + 1 to damage and attack bonus, but no more than 2");
     set_description("This spell will bless the target, giving them a slightly better chance to hit in combat as well as "
 "allowing them to do a small amount more damage.");
     set_verbal_comp();

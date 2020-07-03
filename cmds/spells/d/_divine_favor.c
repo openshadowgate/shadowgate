@@ -12,6 +12,7 @@ void create()
     set_domains(({"protection", "vigilance"}));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS divine favor");
+    set_damage_desc("clevel / 24 + 1 to damage and attack bonus");
     set_description("Calling upon the strength of their patron, a holy knight can gain a bonus to their attack and damage rolls. This spell does not stack with fighter feats for bonus attack and damage rolls.");
     set_verbal_comp();
     set_somatic_comp();
