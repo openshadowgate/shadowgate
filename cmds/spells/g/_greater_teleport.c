@@ -38,7 +38,8 @@ void spell_effect(int prof)
 
     if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))
     {
-        tell_object(caster,"You sense something is wrong with your spell and loose concentration.");
+        tell_object(caster,"You sense something is wrong with your spell and it backfires.");
+        damage_targ(caster, caster->query_target_limb(), sdamage, "mental");
         tell_room(place,caster->QCN+" "+
                   "looks startled.",caster);
         dest_effect();
