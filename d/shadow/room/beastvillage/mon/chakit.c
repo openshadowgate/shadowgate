@@ -4,10 +4,10 @@ inherit NPC;
 
 #define TIER1 ({ "camel","spider","fish" }) // sustenance, spider climb, water breathing
 #define TIER2 ({ "hare","owl","crow" }) // evasion, illumination, insight
-#define TIER3 ({ "bull","salamander","chameleon"}) // mind shielding, regeneration,stealth 
+#define TIER3 ({ "bull","salamander","chameleon"}) // mind shielding, regeneration,stealth
 #define TIER4 ({ "air","earth","water","fire" }) // detection, reflection, freedom, energy -> not yet in
 #define TRADE1 ({ "/d/shadow/room/kildare/obj/hornblade","/d/darkwood/yntala/obj/vinewhip","/d/antioch/valley/obj/spear" }) // peryton talon, yntala whip, dark trail ogrespear
-#define TRADE2 ({ "/d/barriermnts/ruins/obj/bladestaff","/d/laerad/lgnolls/obj/warbow","d/islands/coralsea/obj/sharkskinwhip" }) // archie's bladestaff, gnoll comp bow, coral sea whip
+#define TRADE2 ({ "/d/barriermnts/ruins/obj/bladestaff","/d/laerad/lgnolls/obj/warbow","/d/islands/coralsea/obj/sharkskinwhip" }) // archie's bladestaff, gnoll comp bow, coral sea whip
 #define TRADE3 ({ "/d/antioch/ruins/obj/fire_spear","/d/islands/dreams/obj/yewbow","/d/deku/weapons/fire_dagger" }) // fireplanes fire spear, dreams yewbow, kinorda fire dagger
 #define TRADE4 ({ "/d/underdark/lower/dragon/obj/sheoldagger","/d/attaya/obj/cal_crysknife","/d/islands/argentrock/obj/bonebow" }) // arkhon's dagger, callista's crysknife, dragonbone bow
 string ring1, ring2, ring3, ring4;
@@ -75,7 +75,7 @@ void do_stuff(string msg, object ob){
    }
 
 // messages to pick up conversation
-   if(strsrch(msg, "hello") != -1 || strsrch(msg,"greeting") != -1 || 
+   if(strsrch(msg, "hello") != -1 || strsrch(msg,"greeting") != -1 ||
        strsrch(msg,"Hello") != -1 || strsrch(msg,"Greeting") != -1) {
      force_me("say Hi-hi! What's here for? Come to learn from best at carving? But never as good as ChaKit!");
      force_me("emote preens, clearly impressed with his own skill.");
@@ -164,7 +164,7 @@ void do_stuff(string msg, object ob){
 // messages if nothing in their convo matches trigger words!
    if(random(4)) return;
    switch(random(5)) {
-     case 0:  
+     case 0:
        force_me("say ChaKit knows spirits. Can feel them in world, all around.");
        break;
      case 1:
@@ -182,7 +182,7 @@ void do_stuff(string msg, object ob){
    }
    return;
 }
- 
+
 void receive_given_item(object ob){
    int oktogive;
    if(member_array(base_name(ob),TRADE1) != -1) { // tier 1
