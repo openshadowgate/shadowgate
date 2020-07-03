@@ -3,14 +3,14 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("Shadowdancer");
     feat_name("shadow master");
     feat_prereq("Shadowdance L4");
-    feat_desc("A shadowdancer's weapon strikes have a chance on critical hit to blind the target temporarily.");
+    feat_desc("A shadowdancer's weapon strikes have a chance on critical hit to blind the target temporarily. Whenever a shadowdancer is in an area of dim light, her body becomes partially of that shadow, and she gains bonus to all saving throws.");
     permanent(1);
 }
 
@@ -54,4 +54,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
