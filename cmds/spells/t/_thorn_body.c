@@ -20,7 +20,7 @@ void create()
 int preSpell()
 {
     if (caster->query_property("thorn body")) {
-        tell_object(caster, "You are already protected by this spell.");
+        tell_object(caster, "You are already protected by thorns.");
         return 0;
     }
     return 1;
@@ -30,7 +30,7 @@ void spell_effect(int prof)
     int duration;
     duration = (ROUND_LENGTH * 6) * clevel;
     tell_room(place, "%^GREEN%^" + caster->QCN + "'s skin grows in a multitude of thorns.", caster);
-    tell_object(caster, "%^GREEN%^Your skin grows numerous thorn, and you look like a green hedgehog!");
+    tell_object(caster, "%^GREEN%^Your skin grows numerous thorns, and you look like a green hedgehog!");
     caster->set_property("thorn body", 1);
     caster->set_property("spelled", ({ TO }));
     caster->set_property("added short", ({ "%^RESET%^%^GREEN%^ (%^BOLD%^%^BLACK%^c%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^v%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^r%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^d %^RESET%^%^GREEN%^i%^BOLD%^%^BLACK%^n th%^RESET%^%^GREEN%^o%^BOLD%^%^BLACK%^rns%^RESET%^%^GREEN%^)%^RESET%^" }));
@@ -80,7 +80,7 @@ void execute_attack()
         return;
     }
 
-    attackers = caster->query_attackers();
+    attackers = target_selector();
 
     if (sizeof(attackers)) {
         define_base_damage(0);
