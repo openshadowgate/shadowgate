@@ -584,7 +584,7 @@ int explain_act(string str)
     else if(strsrch(str, "description") != -1 && myTask >= 6)
     {
         tell_object(ETO, "\n"+WE+" Your description is what other players will see when looking you over. If "+
-        "you have not already you should read %^YELLOW%^help description%^RESET%^. \n\n"+WE+" Keep in mind that "+
+        "you have not already you should read %^YELLOW%^help describe%^RESET%^. \n\n"+WE+" Keep in mind that "+
         "you need to set a description that adequately conveys to other players what your character looks like. "+
         "You must do this before leaving the newbie area - in just a few moments - if you have not already. \n\n"+WE+
         " Your description should also consider your statistics available via the %^YELLOW%^stats%^RESET%^ "+
