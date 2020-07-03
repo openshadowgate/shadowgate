@@ -359,7 +359,7 @@ void setup_rp_flag(object who)
     if(!mapp(RP_FLAGS) || !sizeof(keys(RP_FLAGS))) RP_FLAGS = ([]);
     if(!objectp(environment(who))) return;
     clean_up_old_flags();
-    rname = base_name(environment(who));
+    rname = file_name(environment(who));
     cur_flags = keys(RP_FLAGS);
     myName = who->query_true_name();
     message("info","%^BOLD%^%^WHITE%^RP Spears impale the ground of "+rname->query_short()+"\n",users());
