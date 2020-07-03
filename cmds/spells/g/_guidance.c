@@ -17,7 +17,7 @@ void create() {
     set_syntax ("cast CLASS guidance on TARGET");
     set_description("This spell will offer guidance to the target, "
        "giving him a slightly better chance to hit in combat as "
-       "well as allowing him to do a small amount more damage.");
+       "well as allowing him to do a small amount more damage. This spell won't work with bless kind of spells.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
