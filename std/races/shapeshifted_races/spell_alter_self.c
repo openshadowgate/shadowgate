@@ -68,8 +68,11 @@ int init_shape(object obj,string str){
 
     // Although allowing players to set height/weight would be nice not many will use this feature.
     // Using base race values and current player weight/height instead.
-    shape->set_shape_weight(("/std/race/" + str)->weight_base() + (obj->query_player_weight() % 10));
-    shape->set_shape_height(("/std/race/" + str)->height_base() + (obj->query_player_height() % 12));
+
+    if (str && file_exists("/std/race/" + str + ".c")) {
+        shape->set_shape_weight(("/std/race/" + str)->weight_base() + (obj->query_player_weight() % 10));
+        shape->set_shape_height(("/std/race/" + str)->height_base() + (obj->query_player_height() % 12));
+    }
 
     shape->set_shape_race(str);
     obj->set("relationship_profile",shape->query_shape_profile());
