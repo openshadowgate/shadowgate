@@ -54,7 +54,7 @@ Available codes:
   %^MAGENTA%^$T%^WHITE%^ time of day (word)
   %^MAGENTA%^$t%^WHITE%^ time of day (clock)
 
-Addicional codes:
+Additional codes:
   %^MAGENTA%^$_EW%^WHITE%^ Eldritch Warfare
   %^MAGENTA%^$r%^WHITE%^ rage status
   %^MAGENTA%^$E%^WHITE%^ eldritch essence
