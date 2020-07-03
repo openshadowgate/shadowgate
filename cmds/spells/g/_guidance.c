@@ -27,7 +27,7 @@ void create() {
 int preSpell(){
     if(!target) { target = caster; }
     if(target->query_property("blessed")){
-     tell_object(caster,"%^ORANGE%^Your target has already received guidance.");
+     tell_object(caster,"%^ORANGE%^Your target has already blessed.");
         return 0;
     }
     if(target->query_property("blighted")){
