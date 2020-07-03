@@ -78,14 +78,21 @@ int init_shape(object obj,string str){
     return 1;
 }
 
-int reverse_shape(object obj){
-    if(!objectp(obj)) { return 3; }
-    if(!objectp(shape = obj->query_property("altered"))) { return 5; }
-    obj->set("relationship_profile",shape->query_base_profile());
-    obj->remove_id(shape->query_shape_race());
-    if(objectp(to_object(DESC_D))) {
+int reverse_shape(object obj)
+{
+    if (!objectp(obj)) {
+        return 3;
+    }
+    if (!objectp(shape = obj->query_property("altered"))) {
+        return 5;
+    }
+    obj->set("relationship_profile", shape->query_base_profile());
+    if (obj->query_race() != shape->query_shape_race()) {
+        obj->remove_id(shape->query_shape_race());
+    }
+    if (objectp(to_object(DESC_D))) {
         desc = new(DESC_D);
-        desc->restore_profile_settings(obj,shape->query_base_profile());
+        desc->restore_profile_settings(obj, shape->query_base_profile());
     }
     shape->change_outof_message(obj);
     shape->set_owner(0);
