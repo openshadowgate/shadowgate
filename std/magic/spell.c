@@ -3448,9 +3448,6 @@ void help()
     if (aoe_spell) {
         write("%^BOLD%^%^RED%^This spell affects current area.");
     }
-    if (traveling_aoe_spell || traveling_spell) {
-        write("%^BOLD%^%^RED%^This spell's effect will move with the caster.");
-    }
     if (splash_spell == 1) {
         write("%^BOLD%^%^RED%^This spell can affect multiple targets.");
     }
