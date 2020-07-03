@@ -21,6 +21,7 @@ void create()
     set_somatic_comp();
     set_target_required(1);
     set_helpful_spell(1);
+    splash_spell(1);
 }
 
 
@@ -53,7 +54,7 @@ void spell_effect(int prof)
 
     set_helpful_spell(1);
     party_members = ob_party(caster);
-    attackers = caster->query_attackers();
+    attackers = target_selector();
     followers = caster->query_followers();
     living = all_living(place);
 
