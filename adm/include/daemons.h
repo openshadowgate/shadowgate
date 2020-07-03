@@ -59,7 +59,6 @@
 #define MAGIC_SS_D              (DIR_DAEMONS+"/magic_ss_d")
 #define MESSAGING_D  (DIR_DAEMONS+"/messaging_d")
 #define MONSTER_FEAT_D       (DIR_DAEMONS+"/monster_feat_d")
-#define MULTI_ALT_D          (DIR_DAEMONS+"/multi_alt_d")
 #define MULTI_D              (DIR_DAEMONS+"/multi_d")
 #define NEWSSERVER           (DIR_DAEMONS+"/news_d")
 #define NEWS_D               (DIR_DAEMONS+"/news")
