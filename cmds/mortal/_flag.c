@@ -292,7 +292,7 @@ flag player kill as on
 This command lets you adjust some various flags about your character. %^ORANGE%^<flag>%^RESET%^ by itself will show all flags and their current settings.
 
 %^CYAN%^scaled level%^RESET%^
-  Will allow you to scale your level down to the specified %^ORANGE%^<level>%^RESET%^in order to adventure with or take part in plots with lower level characters. Use at your own risk, it is likely that it will tweaked as issues becomeapparent. You cannot go below level 6 or above your own base character level. Using%^ORANGE%^<normal>%^RESET%^ instead of a level will revert you back to your normal non scaled level.
+  Will allow you to scale your level down to the specified %^ORANGE%^<level>%^RESET%^in order to adventure with or take part in plots with lower level characters. Use at your own risk. You cannot go below level 6 or above your own base character level. Using%^ORANGE%^<normal>%^RESET%^ instead of a level will revert you back to your normal non scaled level.
 
 %^CYAN%^roleplay flag %^RESET%^
   Will fly a RP flag in your current environment. This will causeyour current room to show up on the who list as a RP FLAG and will show up in the rumorscommand.
