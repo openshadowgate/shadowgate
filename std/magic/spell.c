@@ -3038,6 +3038,10 @@ object* target_filter(object* targets)
     return targets;
 }
 
+/**
+ * Hostile target selector.
+ * Only for hostile effects!
+ */
 object *target_selector()
 {
     object * foes = caster->query_attackers();
@@ -3059,6 +3063,10 @@ object *target_selector()
         aff = random(slevel) + 1;
         aff = aff > 8 ? 8 : aff;
         slctd += everyone[0..aff];
+    } else if (traveling_spell || traveling_aoe_spell) {
+        aff = random(slevel) + 1;
+        aff = aff > 6 ? 6 : aff;
+        slctd += foes[0..aff];
     } else {
         aff = random(slevel) + 1;
         aff = aff > 4 ? 4 : aff;
