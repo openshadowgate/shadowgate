@@ -52,6 +52,7 @@ int shape_attack(object tp, object targ) { return 0; }
 
 int init_shape(object obj,string str){
     string alter_profile;
+
     if(!objectp(obj)) { return 0; } //
     if(member_array(str,RACE_D->query_races())==-1)
        return 0;
@@ -64,6 +65,12 @@ int init_shape(object obj,string str){
     shape->set_owner(obj);
     shape->change_into_message(obj);
     shape->set_base_profile((string)obj->query("relationship_profile"));
+
+    // Although allowing players to set height/weight would be nice not many will use this feature.
+    // Using base race values and current player weight/height instead.
+    shape->set_shape_weight(("/std/race/" + str)->weight_base() + (obj->query_player_weight() % 10));
+    shape->set_shape_height(("/std/race/" + str)->height_base() + (obj->query_player_height() % 12));
+
     shape->set_shape_race(str);
     obj->set("relationship_profile",shape->query_shape_profile());
     obj->add_id(shape->query_shape_race());
