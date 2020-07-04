@@ -157,24 +157,7 @@ void add_grammar(string type, int level)
     if (!subgrammar[type]) {
         subgrammar[type] = 1;
     }
-    /*intel = TO->query_stats("intelligence");  //lines should be no longer relevant
-
-       if (intel < 9) {
-        return; // can't get over their original in common per discussion *Styx* 9/06
-       }
-
-       if ((query_lang(type) > 90) && random(25 - intel)) {
-        return;
-       }*/
-    needed = query_lang(type);
-    if (needed < 1) {
-        needed = 1;
-    }
-    subgrammar[type] += level;
-    while (subgrammar[type] > needed) {
-        _grammar[type] += 1;
-        subgrammar[type] -= needed;
-    }
+    _grammar[type] += level;
     while (_grammar[type] > 99) {
         __Lang[type] += 1;
         _grammar[type] -= 99;

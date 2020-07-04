@@ -168,8 +168,8 @@ void step(int when, object who, object targ, string what)
 
             // base 5% increase + bonuses, this doesn't appear to work even when I up the 5% base to 50% base, something with add_grammar is off - Odin 7/1/2020
             targ->add_grammar(what,
-                              BONUS_D->query_stat_bonus(who,"intelligence") * 750 +
-                              BONUS_D->query_stat_bonus(targ, "intelligence") * 750 + 5000);
+                              BONUS_D->query_stat_bonus(who,"intelligence") * 75 +
+                              BONUS_D->query_stat_bonus(targ, "intelligence") * 75 + 500);
 
             who->remove_property("teaching");
             targ->remove_property("taught");
@@ -180,8 +180,8 @@ void step(int when, object who, object targ, string what)
 
         // base 5% increase + bonuses, this doesn't appear to work even when I up the 5% base to 50% base, something with add_grammar is off - Odin 7/1/2020
         targ->add_grammar(what,
-                          BONUS_D->query_stat_bonus(who, "intelligence") * 750 +
-                          BONUS_D->query_stat_bonus(targ, "intelligence") * 750 + 5000);
+                          BONUS_D->query_stat_bonus(who, "intelligence") * 75 +
+                          BONUS_D->query_stat_bonus(targ, "intelligence") * 75 + 500);
 
         who->remove_property("teaching");
         targ->remove_property("taught");
