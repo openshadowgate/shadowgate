@@ -1,6 +1,6 @@
 // A mirror [meant as a target for the magic mirror spell]
 // Place this in mage towers, and other places of magical
-// artifice.  
+// artifice.
 // Thorn@ShadowGate
 // 010103
 // mirror.c
@@ -22,7 +22,7 @@ create() {
   This is a rather plain, but finely made mirror.  The reflective
 surface appears to be silver polished to an incredible lustre.  The
 surface is large and with the stout frame, this mirror looks to weigh
-quite a bit, and is even bulkier than it is heavy.  
+quite a bit, and is even bulkier than it is heavy.
 MAGES
 	);
 	set("value", 1001);
@@ -33,3 +33,8 @@ MAGES
 int get() { return 0; }
 
 int drop() { return 1; }
+
+int is_scrying_mirror()
+{
+	return 1;
+}
