@@ -66,16 +66,9 @@ void execute_attack()
             continue;
         }
 
-        // Death effect here is just for flavour.
-        if (!(targ->query("no death") ||
-              random(10000))) {
-            tell_object(targ, "%^BOLD%^%^BLACK%^YOU ARE MINE.%^RESET%^");
-            tell_room(place, "%^BOLD%^%^BLACK%^The grim reaper claims " + targ->QCN + "!", targ);
-            damage_targ(targ, targ->return_target_limb(), targ->query_max_hp() * 2, "untyped");
-        } else {
-            tell_object(targ, "%^BOLD%^%^BLACK%^You feel at an ebb as you slowly die.%^RESET%^");
-            damage_targ(targ, targ->return_target_limb(), sdamage, "untyped");
-        }
+        tell_object(targ, "%^BOLD%^%^BLACK%^You feel at an ebb as you slowly die.%^RESET%^");
+        damage_targ(targ, targ->return_target_limb(), sdamage, "untyped");
+
     }
     counter--;
     place->addObjectToCombatCycle(TO,1);
