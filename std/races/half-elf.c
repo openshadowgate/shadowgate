@@ -16,8 +16,15 @@ string *restricted_classes(string subrace) { return ({  "paladin" }); }
 
 string *restricted_deities(string subrace) { return ({}); }
 
-int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
-    if(!subrace || subrace == "") return ({ 0, 0, 2, 0, 0, 0 }); //temporary until +2 stat of choice is available
+// stats in order: str, dex, con, int, wis, cha
+int* stat_mods(string subrace)
+{
+        return ({ 0, 0, 0, 0, 0, 0 });
+}
+
+int is_statmod_race(string subrace)
+{
+    return 1;
 }
 
 mapping skill_mods(string subrace) {
@@ -139,11 +146,13 @@ mapping weight_values(string gender, int height){
 
 int is_pk_race(string subrace)
 {
-    if(!subrace || subrace == "")
+    if (!subrace || subrace == "") {
         return 0;
-    if(subrace == "fey'ri" ||
-       subrace == "szarkai")
+    }
+    if (subrace == "fey'ri" ||
+        subrace == "szarkai") {
         return 1;
+    }
 }
 
 string *query_languages(string subrace)

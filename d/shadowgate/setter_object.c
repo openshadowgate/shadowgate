@@ -7,7 +7,7 @@ inherit OBJECT;
 
 // Skip to MODULES section to write new module.
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age", "stats", "height", "weight", "body_type", "hair_color", "eye_color", "language", "alignment", "deity", "class_special"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age","stat_mod", "stats", "height", "weight", "body_type", "hair_color", "eye_color", "language", "alignment", "deity", "class_special"});
 
 /**
  * @file
@@ -295,7 +295,7 @@ display_common()
         write("\n%^BOLD%^%^WHITE%^To review all your choices and view your current character sheet use %^ORANGE%^<sheet>%^WHITE%^.");
         write("%^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example. %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.\n");
         write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random value.");
-
+        write("%^BOLD%^%^WHITE%^To view current character sheet type %^ORANGE%^<sheet>%^WHITE%^.");
 
     } else if (sizeof(choices) == 1) {
         select_common(choices[0]);
@@ -315,7 +315,7 @@ reset_common(string str)
         return 1;
     }
 
-    str = replace_string(str, " ", " ");
+    str = replace_string(str, " ", "_");
     str = lower_case(str);
 
     rstpos = member_array(str, ROLL_CHAIN);
@@ -496,10 +496,16 @@ display_stats()
     }
 
     write("%^RESET%^--==%^BOLD%^< %^GREEN%^You must now assign your %^CYAN%^character stats %^WHITE%^>%^RESET%^==--\n");
+
+    if (char_sheet["stat_mod"]) {
+        race_stats[STATS[char_sheet["stat_mod"]]] += 2;
+    }
+
     foreach(i in STATS) {
 
         tadjust = race_stats[i];
         tadjust += age_to_adjust(char_sheet["age"], i, char_sheet["race"]);
+
 
         if (i == "constitution" &&
             (char_sheet["template"] == "undead" || char_sheet["template"] == "vampire")) {
@@ -860,6 +866,60 @@ synopsis_age()
     write("%^BOLD%^%^WHITE%^You may also %^ORANGE%^<select random>%^WHITE%^ to select a random age.");
 }
 
+string *generate_stat_mod()
+{
+    if (("/std/races/" + char_sheet["race"])->is_statmod_race(char_sheet["subrace"])) {
+        return STATS;
+    } else {
+        return;
+    }
+}
+
+select_stat_mod(string str)
+{
+    int smod;
+
+    str = lower_case(str);
+
+    switch (str) {
+    case "strength":case "str":
+        smod = 0;
+        break;
+    case "dexterity":case "dex":
+        smod = 1;
+        break;
+    case "constitution":case "con":
+        smod = 2;
+        break;
+    case "intelligence":case "int":
+        smod = 3;
+        break;
+    case "wisdom":case "wis":
+        smod = 4;
+        break;
+    case "charisma":case "cha":
+        smod = 5;
+        break;
+    }
+
+    if (str == "random") {
+        smod = random(6);
+    }
+
+    if (!undefinedp(smod) && smod > -1 && smod < 5) {
+        char_sheet["stat_mod"] = smod;
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
+hint_stat_mod()
+{
+    write("
+%^BOLD%^Your race allows flexible stat modifier, so you can freely assign stat you desire to have an increased value. It will receive then a modification to %^CYAN%^+2%^WHITE%^ in value.");
+}
+
 string *generate_alignment()
 {
     string racefile = "/std/races/" + char_sheet["race"];
@@ -916,6 +976,8 @@ display_deity()
 
     write("
 %^BOLD%^%^WHITE%^To choose type %^ORANGE%^<select %^ULINE%^OPTION%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<select " + choices[0] + ">%^WHITE%^.");
+
+    hint_deity();
 }
 
 hint_deity()
@@ -1058,6 +1120,11 @@ build_template()
 build_age()
 {
     ETO->set_start_age(char_sheet["age"]);
+}
+
+build_stat_mod()
+{
+    ETO->set("stat_mod", char_sheet["stat_mod"]);
 }
 
 build_stats()

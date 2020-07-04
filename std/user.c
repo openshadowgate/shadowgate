@@ -4886,29 +4886,70 @@ int age_mod(string stat) {
    }
 }
 
-int race_mod(string stat) {
-   int *mystats;
-   string myfile, myrace, mysubrace;
+int race_mod(string stat)
+{
+    int* mystats;
+    string myfile, myrace, mysubrace;
+
 // these go as per /std/races: str, dex, con, int, wis, cha. Arrays list cumulative modifiers.
+    if (avatarp(TO)) {
+        return 0;
+    }
 
-   if(avatarp(TO)) return 0;
-   myrace = (string)TO->query_race();
-   if(!myrace) return 0;
-   mysubrace = (string)TO->query("subrace");
-   myfile = "/std/races/"+myrace+".c";
-   if(!file_exists(myfile)) return 0;
-   mystats = (int *)myfile->stat_mods(mysubrace);
-   if(sizeof(mystats) != 6) return 0;
+    myrace = TO->query_race();
 
-   switch(stat) {
-     case "strength": return mystats[0]; break;
-     case "dexterity": return mystats[1]; break;
-     case "constitution": return mystats[2]; break;
-     case "intelligence": return mystats[3]; break;
-     case "wisdom": return mystats[4]; break;
-     case "charisma": return mystats[5]; break;
-     default: return 0; break;
-   }
+    if (!myrace) {
+        return 0;
+    }
+
+    mysubrace = TO->query("subrace");
+    myfile = "/std/races/" + myrace + ".c";
+
+    if (!file_exists(myfile)) {
+        return 0;
+    }
+
+    mystats = myfile->stat_mods(mysubrace, TO);
+
+    if (sizeof(mystats) != 6) {
+        return 0;
+    }
+
+    if (myfile->is_statmod_race(mysubrace)) {
+        int smod;
+
+        smod = TO->query("stat_mod");
+
+        if (intp(smod) && smod > -1 && smod < 6) {
+            mystats[smod] += 2;
+        } else {
+            mystats[2] += 2;
+        }
+    }
+
+    switch (stat) {
+    case "strength":
+        return mystats[0];
+        break;
+    case "dexterity":
+        return mystats[1];
+        break;
+    case "constitution":
+        return mystats[2];
+        break;
+    case "intelligence":
+        return mystats[3];
+        break;
+    case "wisdom":
+        return mystats[4];
+        break;
+    case "charisma":
+        return mystats[5];
+        break;
+    default:
+        return 0;
+        break;
+    }
 }
 
 int is_good(object obj)

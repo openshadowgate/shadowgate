@@ -51,8 +51,16 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
       case "tiefling": return ({ 0, 2, 0, 2, 0, -2 }); break;
       case "water genasi": return ({ 0, 0, 2, 0, 2, -2 }); break;
       case "dhampir": return ({ 0, 2, -2, 0, 0, 2 }); break;
-      default: return ({ 0, 0, 2, 0, 0, 0 }); break;
+      default: return ({ 0, 0, 0, 0, 0, 0 }); break;
     }
+}
+
+int is_statmod_race(string subrace)
+{
+    if (member_array(subrace, ({ "heartlander", "zin'charu", "aesatri", "attayan", "tsarven", "morinnen", "tonaz'tlacar", "senzokuan", "maalish" })) == -1) {
+        return 0;
+    }
+    return 1;
 }
 
 mapping skill_mods(string subrace) {
@@ -366,16 +374,15 @@ string *query_eye_colors(string subrace) {
     return choices;
 }
 
-string *query_subraces(object who)
+string* query_subraces(object who)
 {
-    string *subraces;
-    subraces = ({"heartlander","zin'charu","aesatri","attayan","tsarven","morinnen","tonaz'tlacar","senzokuan","maalish"});
-    if(OB_ACCOUNT->is_experienced(who->query_true_name()) ||
-       OB_ACCOUNT->is_high_mortal(who->query_true_name()) ||
-       avatarp(who) ||
-       who->query("is_valid_npc"))
-    {
-        subraces += ({ "tiefling","aasimar","feytouched","air genasi","earth genasi","fire genasi","water genasi" ,"dhampir"});
+    string* subraces;
+    subraces = ({ "heartlander", "zin'charu", "aesatri", "attayan", "tsarven", "morinnen", "tonaz'tlacar", "senzokuan", "maalish" });
+    if (OB_ACCOUNT->is_experienced(who->query_true_name()) ||
+        OB_ACCOUNT->is_high_mortal(who->query_true_name()) ||
+        avatarp(who) ||
+        who->query("is_valid_npc")) {
+        subraces += ({ "tiefling", "aasimar", "feytouched", "air genasi", "earth genasi", "fire genasi", "water genasi", "dhampir" });
     }
     return subraces;
 }
