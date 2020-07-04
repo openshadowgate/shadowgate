@@ -15,6 +15,10 @@ int high_thaco(int level)
     return (level - 20);
 }
 
+/**
+ * This used to calculate number of attacks with old style compat,
+ * used in attack_bonus() and some feats/items.x
+ */
 varargs int thaco(int level, string myclass, object ob)
 {
     string file, * classes, myrace, mysubrace;
@@ -88,7 +92,10 @@ varargs int thaco(int level, string myclass, object ob)
     return ret;
 }
 
-// 3rd edition style attack bonus.. 1 at level 2 fighter, 39 at level 40 fighter
+/**
+ * This returns _number_ of attacks one gets every round in
+ * /std/battle.c and has nothing to do with attack bonus.
+ */
 int attack_bonus(string myclass, int level, object player)
 {
     int num;
