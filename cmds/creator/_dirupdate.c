@@ -40,11 +40,11 @@ int cmd_dirupdate(string str)
 
 int help()
 {
-    write(@EndText
-          Syntax: dirupdate < directory >
-          Effect: updates all objects in < directory >
-          See also: update, dir
-          EndText
+    write(
+"Syntax: dirupdate < directory >
+Effect: updates all objects in < directory >
+See also: update, dir
+"
           );
     return 1;
 }
