@@ -87,8 +87,8 @@ int cmd_teach(string str)
         return notify_fail(targ->query_cap_name() + " is already being taught.\n");
     }
 
-    if ((int)targ->query_base_lang(lang) > (int)TP->query_base_lang(lang)) {
-        return notify_fail("Ask that one to teach you...\n");
+    if ((int)targ->query_base_lang(lang) >= (int)TP->query_base_lang(lang)) {
+        return notify_fail("That one knows as much, if not more than you.\n");
     }
 
     seteuid("UID_LOG");
@@ -101,7 +101,7 @@ int cmd_teach(string str)
     TP->force_me("emote attempts to show you some common phrases.");
     TP->set_property("teaching", 1);
     targ->set_property("taught", 1);
-    call_out("step", 5, 1, TP, targ, lang);
+    call_out("step", 10, 1, TP, targ, lang);
     return 1;
 }
 

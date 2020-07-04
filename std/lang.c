@@ -162,6 +162,10 @@ void add_grammar(string type, int level)
         __Lang[type] += 1;
         _grammar[type] -= 99;
     }
+    if(__Lang[type] > 100)
+    {
+      __Lang[type] = 100;
+    }
 }
 
 int set_spoken(string str)
