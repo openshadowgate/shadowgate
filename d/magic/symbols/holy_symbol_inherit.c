@@ -150,18 +150,21 @@ void refresh()
 }
 
 
-void init() {
+void init()
+{
     ::init();
-    if(!living(ETO)) return;
-    if (!owner) set_owner();
-    if (!query_sphere()) set_sphere((string)(ETO->query_sphere()));
-    if (!query_diety()) set_diety((string)(ETO->query_diety()));
-    if(((string)ETO->query_name() == owner ||
-    (string)ETO->QCN == owner)
-    && valid_has_cleric_spells()) {
-        add_action("report_spells","reportspells");
+    if (!living(ETO)) {
+        return;
     }
-    add_action("help","help");
+    if (!owner) {
+        set_owner();
+    }
+    if (!query_sphere()) {
+        set_sphere((string)(ETO->query_sphere()));
+    }
+    if (!query_diety()) {
+        set_diety((string)(ETO->query_diety()));
+    }
 }
 
 int add_all() {
