@@ -1,6 +1,6 @@
 %^BOLD%^%^BLUE%^Half-elf:
 
-%^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 to stat of choice*
+%^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 to stat of choice* (temporarily defaults to con until code is written)
 %^BOLD%^%^BLUE%^Skill adjustments: %^RESET%^+2 influence
 %^BOLD%^%^BLUE%^Misc bonuses: %^RESET%^+2 saves vs charm spells, sleep immunity, low light vision 2
 %^BOLD%^%^BLUE%^Innate spells: %^RESET%^none

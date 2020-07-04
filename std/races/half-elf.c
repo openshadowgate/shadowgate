@@ -17,7 +17,7 @@ string *restricted_classes(string subrace) { return ({  "paladin" }); }
 string *restricted_deities(string subrace) { return ({}); }
 
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
-    if(!subrace || subrace == "") return ({ 0, 0, 0, 0, 0, 0 });
+    if(!subrace || subrace == "") return ({ 0, 0, 2, 0, 0, 0 }); //temporary until +2 stat of choice is available
 }
 
 mapping skill_mods(string subrace) {
