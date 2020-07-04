@@ -165,6 +165,7 @@ void add_grammar(string type, int level)
     if(__Lang[type] > 100)
     {
       __Lang[type] = 100;
+      _grammar[type] = 0;
     }
 }
 
