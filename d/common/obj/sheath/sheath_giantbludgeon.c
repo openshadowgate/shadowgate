@@ -9,7 +9,7 @@ inherit SHEATH_INHERIT;
 mixed query_property(string str) { return ::query_property(str); }
 
 void create(){
-  ::create(); 
+  ::create();
   remove_property("can_hold");
   set_property("can_hold",({ "giant axe", "giant clublike", "giant hammer", "large hammer", "crossbow", "large clublike", "large axe" }));
   remove_property("can_wear_limbs");
@@ -17,7 +17,7 @@ void create(){
   remove_property("sheath_size");
   remove_property("original_weight");
   set_property("sheath_size",3);
-  set_property("original_weight",8);
+  set_property("original_weight",4);
   set_name("giant weapon holster");
   set_id(({"holster", "giant holster", "Giant holster", "weapsheath" }));
   set_short("A giant weapon holster");
@@ -32,7 +32,7 @@ set_max_internal_encumbrance(50);
 int will_work(object ths, object tht) {
   string trash;
   string *allowed;
-  
+
   allowed = tht->query_property("can_hold");
 
   // Allow for explicit cases first...

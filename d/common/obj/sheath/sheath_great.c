@@ -9,7 +9,7 @@ mixed query_property(string str) { return ::query_property(str); }
 int query_size() {return 3;}
 
 void create(){
-  ::create(); 
+  ::create();
   remove_property("can_hold");
   set_property("can_hold",({ "great blades", "giant blades" }));
   remove_property("can_wear_limbs");
@@ -17,7 +17,7 @@ void create(){
   remove_property("sheath_size");
   remove_property("original_weight");
   set_property("sheath_size",4);
-  set_property("original_weight",10);
+  set_property("original_weight",4);
   set_name("great blade sheath");
   set_id(({"sheath","extra-large sheath", "extra-large sheaths", "great sheath","great sheaths","great Sheaths","great Sheath" , "weapsheath"}));
 
@@ -34,5 +34,3 @@ GARRETT
 
   set_max_internal_encumbrance(60);
 }
-
-
