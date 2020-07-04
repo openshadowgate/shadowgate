@@ -41,7 +41,7 @@ string *restricted_classes(string subrace) {
 string *restricted_deities(string subrace) { return ({}); }
 
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
-    if(!subrace || subrace == "") return ({ 0, 0, 0, 0, 0, 0 });
+    if(!subrace || subrace == "") return ({ 0, 0, 2, 0, 0, 0 }); //temporary until +2 stat of choice is written
     switch(subrace) {
       case "aasimar": return ({ 0, 0, 0, -2, 2, 2 }); break;
       case "air genasi": return ({ 0, 2, 0, 2, 0, -2 }); break;
@@ -51,7 +51,7 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
       case "tiefling": return ({ 0, 2, 0, 2, 0, -2 }); break;
       case "water genasi": return ({ 0, 0, 2, 0, 2, -2 }); break;
       case "dhampir": return ({ 0, 2, -2, 0, 0, 2 }); break;
-      default: return ({ 0, 0, 0, 0, 0, 0 }); break;
+      default: return ({ 0, 0, 2, 0, 0, 0 }); break;
     }
 }
 
