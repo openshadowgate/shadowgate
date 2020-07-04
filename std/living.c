@@ -420,8 +420,7 @@ void heart_beat()
 
     if (!(living_ticker % 3)) {
         // change help status effects when adjusting this
-        if (FEATS_D->usable_feat(TO, "regeneration")
-            || query_race() == "shade") {
+        if (FEATS_D->usable_feat(TO, "regeneration")) {
             if (query_hp() < query_max_hp()) {
                 add_hp(roll_dice(1, TO->query_level()) / 2 + 1);
             }

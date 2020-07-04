@@ -695,6 +695,12 @@ int query_resistance(string res)
         }
     }
 
+    if (TO->query_race() == "shade") {
+        if (res == "cold" || res == "electricity") {
+            myres += 5;
+        }
+    }
+
     if (FEATS_D->usable_feat(TO, "no fear of the flame") && res == "fire") {
         myres += 10;
     }

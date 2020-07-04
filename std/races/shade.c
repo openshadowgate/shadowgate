@@ -23,7 +23,7 @@ int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
     return ({ 0, 2, 0, 0, -2, 2 });
 }
 
-mapping skill_mods(string subrace) { return ([ "stealth" : 2, ]); }
+mapping skill_mods(string subrace) { return ([ "stealth" : 2, "academics":2]); }
 
 int level_adjustment(string subrace) { return 0; }
 
@@ -31,13 +31,14 @@ int natural_AC(string subrace) { return 0; }
 
 int sight_bonus(string subrace) { return 3; }
 
-mapping daily_uses(string subrace) { return ([ "darkness" : 1]); }
+mapping daily_uses(string subrace) { return ([ "shadow travel" : 1,]); }
 
 mapping query_racial_innate(string subrace) {
-	return (["darkness" : (["type" : "spell", "casting level" : 0.5,
-				   "daily uses" : 1, "delay" : 1, "uses left" : 1,
-				   "refresh time" : -1, "level required" : 0,
-				   "class specific" : 0])]);
+	return ([
+                    "shadow travel" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                    "shadow stride" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                    "alter self" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                    ]);
 }
 
 int misc_bonuses(string subrace, string bonus) { return 0; }

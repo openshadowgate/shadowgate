@@ -643,9 +643,6 @@ mixed query_property(string prop)
                 }
             }
         }
-        if ((string)TO->query_race() == "shade") {
-            num += 1;
-        }
         if ((string)TO->query_race() == "deva") {
             num += 1;
         }
