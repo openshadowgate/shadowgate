@@ -1,4 +1,4 @@
-//This way we can do TP->is_valid_skill(skillname) 
+//This way we can do TP->is_valid_skill(skillname)
 //to see if something is actually a valid skill or not - Saide
 int is_valid_skill(string str);
 
@@ -17,68 +17,68 @@ int general_exp_adjust_perc(int perc);
 int class_exp_adjust_perc(string myclass, int perc);
 
 
-int use_XP_tax(object who, int exp) 
+int use_XP_tax(object who, int exp)
 {
     mapping _IRS;
     float adjustment;
     int percent, antimeter;
     if(!objectp(who)) return exp;
-    
+
     _IRS = who->query_XP_tax();
     if(!mapp(_IRS)) return exp;
     if (exp < 0) return exp;
     // No tax on negative XP.
     adjustment = to_float(exp);
 
-    if ( (percent = _IRS["tax"]["general"]) >= 100) 
+    if ( (percent = _IRS["tax"]["general"]) >= 100)
     {
         log_file("tax",TO->query_cap_name()+": General XP taxed to 1.");
         return 1;
-    } 
-    else if (percent) 
+    }
+    else if (percent)
     {
         adjustment -= adjustment * to_float(percent)/100;
     }
 
-    if (_IRS["tax"]["leveled"]["level"] > query_lowest_level() ) 
+    if (_IRS["tax"]["leveled"]["level"] > query_lowest_level() )
     {
-        if ( (percent = _IRS["tax"]["leveled"]["percent"] ) >= 100) 
+        if ( (percent = _IRS["tax"]["leveled"]["percent"] ) >= 100)
         {
             log_file("tax",TO->query_cap_name()+": XP taxed (level-based) to 1.");
             return 1;
-        } 
-        else if (percent) 
+        }
+        else if (percent)
         {
-            adjustment -= adjustment * to_float(percent)/100; 
+            adjustment -= adjustment * to_float(percent)/100;
         }
     }
 
-    if ( (antimeter = _IRS["tax"]["metered"]["meter"]) > 0) 
-    { 
-        if ((percent = _IRS["tax"]["metered"]["percent"]) >= 100) 
+    if ( (antimeter = _IRS["tax"]["metered"]["meter"]) > 0)
+    {
+        if ((percent = _IRS["tax"]["metered"]["percent"]) >= 100)
         {
             _IRS["tax"]["metered"]["meter"] -= 1;
             log_file("tax",TO->query_cap_name()+": XP taxed (meter-based) to 1.");
             return 1;
-        } 
-        else 
+        }
+        else
         {
-            if (percent >= 0) 
+            if (percent >= 0)
             { // Tax
-                if (antimeter >=  (adjustment * to_float(percent)/100) ) 
+                if (antimeter >=  (adjustment * to_float(percent)/100) )
                 {
                     antimeter = adjustment * to_float(percent)/100;
                     adjustment -= to_float(antimeter);
                     _IRS["tax"]["metered"]["meter"] -= antimeter;
-                } 
-                else 
+                }
+                else
                 {
                     _IRS["tax"]["metered"]["meter"] = 0;
                     adjustment -= antimeter * 100 / to_float(percent);
                     adjustment += to_float(antimeter);
                 }
-            } 
-            else 
+            }
+            else
             { // rebate, just give them the benefit of the whole thing.
                 _IRS["tax"]["metered"]["meter"] -= antimeter;
                 adjustment += adjustment * to_float(percent)/100;
@@ -88,22 +88,22 @@ int use_XP_tax(object who, int exp)
     return to_int(adjustment);
 }
 
-int use_XP_rest(int exp) 
+int use_XP_rest(int exp)
 {
     float adjustment;
     int percent;
-    
+
     if(percent = _IRS["tax"]["timed"]["percent"])
-    
+
   return exp;
   // temporary ;
 }
 
-void log_exp(int x, string type, object tmp, object who) 
+void log_exp(int x, string type, object tmp, object who)
 {
     if(!objectp(who)) return;
     if(!userp(who)) return;
-    if((x > 1000 || x < -1000)) 
+    if((x > 1000 || x < -1000))
     {
         log_file("exp", "<<<"+
             (string)who->QN+" received "+x+" ("+type+")exp from "+ (string)previous_object()->query_name()+"\n");
@@ -155,10 +155,10 @@ int resolve_auto_tax(object who, int exp)
 
     //going back to non-reverse-tax calcs, for normal or taxed exp.
     limit = limit + 1; // was +5; not sure why we were adding an extra 5 hours to each level's PT reqs?
-    
+
     // if this is set here, it will not clear an autotax once a person catches up -Ares
     //if(hours > limit) { return exp; }
-    
+
     // eg player has only 18 hours ptime
     // 11 =  29  -   18
 
@@ -186,13 +186,13 @@ int resolve_auto_tax(object who, int exp)
     return to_int(exp * (mod *0.01));
 }
 
-void add_exp(int exp) 
+void add_exp(int exp)
 {
 // adding to stop mobs from getting out of control fighting each other *Styx* 12/25/05
     if(!objectp(who)) return;
     if(!userp(who)) return;
-        
-    if(userp(who) && (exp >0) && who->query_party()) 
+
+    if(userp(who) && (exp >0) && who->query_party())
     {
         PARTY_OB->calculate_exp(who->query_party(), exp, previous_object());
         return;
@@ -210,7 +210,7 @@ void add_exp(int exp)
 
     log_exp(exp,"add",0);
     who->__internal_add_exp(exp);
-  
+
 }
 
 void party_exp(int exp, object tmp){
@@ -332,7 +332,7 @@ int general_exp_adjust_perc(int perc) {
   if (class = get_dual_class()) {
       classes = ({class});
   } else {
-      classes = TO->query_classes(); 
+      classes = TO->query_classes();
   }
   tmp = PO;
   oldexp = TO->query_exp();
@@ -375,7 +375,7 @@ void set_XP_tax(int percent, int duration) {
     duration *= -1;
     _IRS["tax"]["leveled"]["percent"]=percent;
     _IRS["tax"]["leveled"]["level"]=query_lowest_level()+duration;
-  }    
+  }
 }
 
 void remove_XP_tax(string which){
@@ -524,7 +524,7 @@ int query_highest_level(){
 
   return hold;
 
-  //} 
+  //}
   //return du;
 }
 
@@ -535,7 +535,7 @@ int query_class_level(string str){
 }
 
 //Added for advance - so that drow and other races
-//dont count their level_adjustment in the advance 
+//dont count their level_adjustment in the advance
 //command - Saide
 int query_base_character_level()
 {
@@ -623,14 +623,14 @@ int query_true_guild_level(string str)
     return guilds[str];
 }
 
-int query_guild_level(string str) 
+int query_guild_level(string str)
 {
     string *classes;
     int i,num = 0;
 
     if(!str) { return 0; }
-    if(!guilds) 
-    { 
+    if(!guilds)
+    {
         guilds = ([]);
         return 0;
     }
@@ -655,7 +655,7 @@ int query_guild_level(string str)
 }
 
 
-int query_max_skills() 
+int query_max_skills()
 {
 // revised since odd-numbered LAs were glitching. Need to tally all levels separately (4 and 6 skill-bracket types) and then collate. N, 5/15.
     int num=0, i, mylevel, lvladj, lowskill=0, highskill=0;
@@ -676,10 +676,6 @@ int query_max_skills()
     myrace = (string)TO->query_race();
     subrace = (string)TO->query("subrace");
     file = DIR_RACES+"/"+myrace+".c";
-    if(file_exists(file)) {
-      lvladj = (int)file->level_adjustment(subrace);
-      if(lvladj) lowskill += lvladj; // LA races should give skills at the same rate as 4-point classes. N, 8/12.
-    }
 
 // put in a safeguard for high-skill classes with an odd LA; eg/ L39 thief LA1 race would miss out on last skill bracket.
 // instead they should get up to L38 at 6x points, and the last two levels at 4x points.
@@ -693,18 +689,19 @@ int query_max_skills()
 
 // finally if necessary, add in human bonus of 4 skillpoints if not planetouched.
     if(myrace == "human") {
-      if(!subrace || subrace == "" || (subrace != "tiefling" && subrace != "aasimar" && (strsrch(subrace,"genasi") == -1)))
+      if(!subrace || subrace == "" ||
+         (subrace != "tiefling" && subrace != "aasimar" && subrace != "dhampir" && subrace != "feytouched" && (strsrch(subrace,"genasi") == -1)))
         num = num+4; //extra 4 skill points at L1 for human non-plane-touched
     }
     return num;
 }
 
-int skill_armor_mod(string *myworn) 
+int skill_armor_mod(string *myworn)
 {
    int i, modifier;
    string thetype;
    modifier = 0;
-   for(i = 0;i< sizeof(myworn);i++) 
+   for(i = 0;i< sizeof(myworn);i++)
    {
         thetype = (string)myworn[i]->query_type();
         if(thetype == "armor" || thetype == "armour") modifier = -15;
