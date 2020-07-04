@@ -420,6 +420,7 @@ int recall_spells(string type, object who) {
             int y, z;
             int columns;
             int scrw = atoi(TP->getenv("SCREEN"));
+            int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
 
             scrw = scrw > 34 ? scrw : 72;
 
@@ -438,7 +439,7 @@ int recall_spells(string type, object who) {
                 {
 
                     if (sizeof(obuff)) {
-                        tell_object(TP,format_page(obuff, columns, scrw));
+                        tell_object(TP,format_page(obuff, columns, scrw, vertical));
                     }
                     obuff=({});
                     tell_object(TP,oline);
