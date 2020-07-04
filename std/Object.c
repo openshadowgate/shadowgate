@@ -553,6 +553,9 @@ mixed query_property(string prop)
                 return num < 0 ? 0 : num;
             }
         }
+        if (TO->query_race() == "shade") {
+            num += 1;
+        }
     }
 
 // we want this to pick up item "empowered" bonuses only, without spell power feats. Manually applied.
