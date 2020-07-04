@@ -84,8 +84,8 @@ int gain_stat(object ob, string stat)
         return 0;
     }
 
-    if (who->is_undead() && stat == "constitution") {
-        tell_object(who,"As an undead you can't manipulate your constitution.");
+    if (ob->is_undead() && stat == "constitution") {
+        tell_object(ob,"As an undead you can't manipulate your constitution.");
         return 0;
     }
 
