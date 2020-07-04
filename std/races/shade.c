@@ -20,7 +20,7 @@ string *restricted_deities(string subrace) {
 }
 
 int *stat_mods(string subrace) { // stats in order: str, dex, con, int, wis, cha
-    return ({ 0, 0, 2, 0, 0, 0 });
+    return ({ 0, 2, 0, 0, -2, 2 });
 }
 
 mapping skill_mods(string subrace) { return ([ "stealth" : 2, ]); }
