@@ -21,7 +21,7 @@ int high_thaco(int level)
  */
 varargs int thaco(int level, string myclass, object ob)
 {
-    string file, * classes, myrace, mysubrace;
+    string file, * classes;
     int ret, i;
 
     if (!intp(level)) {
@@ -34,7 +34,8 @@ varargs int thaco(int level, string myclass, object ob)
     if (objectp(ob)) {
         if (ob->query("new_class_type")) {
             ret = 0;
-            if ((int)ob->query_property("transformed") || (int)ob->query_property("dance-of-cuts")) { // fighter BAB under transformation/dance.
+            // fighter number of attacs
+            if ((int)ob->query_property("transformed") || (int)ob->query_property("dance-of-cuts")) {
                 ret = (int)ob->query_level();
                 ret = ret - 20;
                 ret = ret * -1;
@@ -50,13 +51,6 @@ varargs int thaco(int level, string myclass, object ob)
                     continue;
                 }
                 ret += file->attack_bonus(ob);
-            }
-            // our LAs work as monster levels, so should give BAB per LA also
-            myrace = (string)ob->query_race();
-            mysubrace = (string)ob->query("subrace");
-            file = DIR_RACES + "/" + myrace + ".c";
-            if (file_exists(file)) {
-                ret += file->level_adjustment(mysubrace);
             }
 
             ret = ret - 20;
@@ -189,7 +183,7 @@ int query_stance_bonus(object victim)
 //adding that up, diving by the number of classes * total level - Saide
 int new_bab(int level, object ob)
 {
-    string* classes, file, myrace, mysubrace;
+    string* classes, file;
     int i, ret = 0;
     if (objectp(ob)) {
         if ((int)ob->query_property("transformed") || (int)ob->query_property("dance-of-cuts")) { // fighter BAB under transformation/dance.
@@ -213,14 +207,7 @@ int new_bab(int level, object ob)
                 return ret;
             }
         }
-        // ret /= sizeof(classes);  // don't think there should be division here?  Attack bonus from each class should be adding -Ares
-        // our LAs work as monster levels, so should give BAB per LA also
-        myrace = (string)ob->query_race();
-        mysubrace = (string)ob->query("subrace");
-        file = DIR_RACES + "/" + myrace + ".c";
-        if (file_exists(file)) {
-            ret += file->level_adjustment(mysubrace);
-        }
+
         return ret;
     }
     return ret;
