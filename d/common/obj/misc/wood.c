@@ -12,12 +12,11 @@ int lit, fuel;
 object meat;
 
 void init() {
-	::init(); 
-//	add_action("make_fire","make"); Removed as this was causing issues for thieves and make thief sign - Loki 5/22/08
+	::init();
 	add_action("make_fire","start");
 	add_action("douse_fire","douse");
 	add_action("fuel_fire","fuel");
-      add_action("cook_em","cook");
+	add_action("cook_em","cook");
 }
 
 void create() {
@@ -126,8 +125,6 @@ void heart_beat() {
 
 int make_fire(string str) {
     object ob;
-// These lines added to deal with a conflict with the thief sign 'make' command.
-// Lujke, 14th March 2008
     string * classes;
     if (query_verb()=="make"){
       classes = TP->query_classes();
@@ -136,12 +133,12 @@ int make_fire(string str) {
         return 0;
       }
     }
-// End of additions by Lujke
+
     if(ETP->query_property("indoors")){
 	  write("You need to be outdoors to build a fire!");
 	  return(1);
 	}
-    
+
     if(present("fire",ETP)){
 	    write("You already have a fire lit!");
 	    return(1);
@@ -156,18 +153,19 @@ int make_fire(string str) {
  	   write("You strike the flint and steel to start a fire with the wood.");
 	   tell_room(ETO, TPQCN+" strikes a flint to steel over some firewood.", TP);
 	   tell_room(ETO,"After a few tries and some attention, a small "
-		"campfire %^BOLD%^%^RED%^blazes %^RESET%^up."); 
+		"campfire %^BOLD%^%^RED%^blazes %^RESET%^up.");
 	   lit=(random(2)+1);
-	   set_id(({"fire", "campfire"}));
+	   set_id(({"fire", "campfire", "mirror"}));
 	   set_name("fire");
+	   set_value(1001);
 	   check_fire(TO);
-       set_weight(500);    // don't want them carrying it around
+       set_weight(100000); // don't want them carrying it around
        set_heart_beat(1);
 	   ETO->set_property("light", lit);
 	   set_property("no animate", 1);
 	   //call_out("remove",fuel);
        return(1);
-	}	
+	}
 	write("You have no flint and steel.");
 	return(1);
 }
@@ -189,7 +187,7 @@ void reset() {
             default:  return;
         }
     }
-}	  
+}
 
 void go_out() {
     if(!objectp(TO))  return;
@@ -238,16 +236,16 @@ void fuel_msg(object fire, object vic) {
         "back in time as the %^RED%^flames%^RESET%^ "+
         "begin burning out of control!",vic);
         return;
-    }          
+    }
     if((int)fire->query_fuel() >= 6000) {
         tell_object(vic,"You feed the already out of control %^RED%^"+
         "fire%^RESET%^ and your arm is burned before you "+
         "can pull away!");
-                
+
         tell_room(eto,vic->QCN+" feeds the already out of control "+
         "%^RED%^fire and is burned by its dangerous flames before "+
         vic->QS+ " can pull "+vic->QP+" arm away!",vic);
-        
+
         set_property("magic",1);
         vic->do_damage("left arm",roll_dice(5,6));
         vic->add_attacker(TO);
@@ -269,9 +267,9 @@ int fuel_fire(string str) {
             check_fire(present("fire",ETP));
             if(ETP->query_property("light") < 3) {
                 present("fire",ETP)->adj_lit(1);
-                ETP->set_property("light",1);               
+                ETP->set_property("light",1);
             }
-            present("wood",TP)->remove();          
+            present("wood",TP)->remove();
 	        return(1);
 	    }
 	    write("There is no fire! You need to make one first!");
@@ -369,7 +367,7 @@ int cook_em(string str) {
           meat->set_property("cooked",1);
           TP->remove_property("cooking food");
           return 1;
-       }          
+       }
        switch(random(7)){
          case 0:  tell_room(ETO,"%^RED%^Flames leap up from the fire, "+
                      "encasing the cooking "+str+" for a moment.");
