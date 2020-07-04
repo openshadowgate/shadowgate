@@ -657,41 +657,40 @@ int query_guild_level(string str)
 
 int query_max_skills()
 {
-// revised since odd-numbered LAs were glitching. Need to tally all levels separately (4 and 6 skill-bracket types) and then collate. N, 5/15.
     int num=0, i, mylevel, lvladj, lowskill=0, highskill=0;
     string *myclasses, file, myrace, subrace;
 
-// first, count up class levels in 2 batches - high skill (rogue types, 6pts/2lvls) and low skill (the rest, 4pts/2lvls)
     myclasses = this_object()->query_classes();
-    for(i = 0;i<sizeof(myclasses);i++) {
-      mylevel = ((int)TO->query_class_level(myclasses[i]));
-      file = DIR_CLASSES+"/"+myclasses[i]+".c";
-      if(file_exists(file)) {
-        if((int)file->skill_points() == 6) highskill += mylevel;
-        else lowskill += mylevel;
-      }
+
+    for (i = 0; i < sizeof(myclasses); i++) {
+        mylevel = ((int)TO->query_class_level(myclasses[i]));
+        file = DIR_CLASSES + "/" + myclasses[i] + ".c";
+        if (file_exists(file)) {
+            if ((int)file->skill_points() == 6) {
+                highskill += mylevel;
+            }else {
+                lowskill += mylevel;
+            }
+        }
     }
 
-// if applicable, tally any LA into the low skill batch as well. Eg/ drow fighter L8 should have skills as a L10 low-skill type.
     myrace = (string)TO->query_race();
     subrace = (string)TO->query("subrace");
     file = DIR_RACES+"/"+myrace+".c";
 
-// put in a safeguard for high-skill classes with an odd LA; eg/ L39 thief LA1 race would miss out on last skill bracket.
-// instead they should get up to L38 at 6x points, and the last two levels at 4x points.
-// This should only ever occur with odd-number LA races.
-    if((lowskill%2) && (highskill%2)) {
-      lowskill++;
-      highskill--;
+    if ((lowskill % 2) && (highskill % 2)) {
+        lowskill++;
+        highskill--;
     }
+
     num += ((lowskill/2)*4);
     num += ((highskill/2)*6);
 
-// finally if necessary, add in human bonus of 4 skillpoints if not planetouched.
-    if(myrace == "human") {
-      if(!subrace || subrace == "" ||
-         (subrace != "tiefling" && subrace != "aasimar" && subrace != "dhampir" && subrace != "feytouched" && (strsrch(subrace,"genasi") == -1)))
-        num = num+4; //extra 4 skill points at L1 for human non-plane-touched
+    if (myrace == "human") {
+        if (!subrace || subrace == "" ||
+            (subrace != "tiefling" && subrace != "aasimar" && subrace != "dhampir" && subrace != "feytouched")) {
+            num = num + 4;
+        }
     }
     return num;
 }
@@ -701,12 +700,17 @@ int skill_armor_mod(string *myworn)
    int i, modifier;
    string thetype;
    modifier = 0;
-   for(i = 0;i< sizeof(myworn);i++)
-   {
-        thetype = (string)myworn[i]->query_type();
-        if(thetype == "armor" || thetype == "armour") modifier = -15;
-        if(thetype == "chain" && modifier > -4) modifier = -10;
-        if(thetype == "leather" && !modifier) modifier = -5;
+   for (i = 0; i < sizeof(myworn); i++) {
+       thetype = (string)myworn[i]->query_type();
+       if (thetype == "armor" || thetype == "armour") {
+           modifier = -15;
+       }
+       if (thetype == "chain" && modifier > -4) {
+           modifier = -10;
+       }
+       if (thetype == "leather" && !modifier) {
+           modifier = -5;
+       }
    }
    return modifier;
 }
