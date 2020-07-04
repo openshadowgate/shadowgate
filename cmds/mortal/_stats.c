@@ -143,6 +143,11 @@ int is_valid_stat_move(object who, string stat, string stat_two)
         return 0;
     }
 
+    if (who->is_undead() && (stat == "constitution" || stat_two == "constitution")) {
+        tell_object(who,"As an undead you can't manipulate your constitution.");
+        return 0;
+    }
+
     StatTotals = 0;
     MyStats = ([]);
     if ((CurStat = (int)who->query_rolled_stats("strength")) >= 18) {
