@@ -6,7 +6,7 @@
 %^BOLD%^%^BLACK%^Features:%^RESET%^%^ORANGE%^
 %^ORANGE%^ * Undead body:
 %^ORANGE%^   * No constitution stat, charisma used for hp calculations
-%^ORANGE%^   * No aging, age cathegory is always normal
+%^ORANGE%^   * No aging, age category is always normal
 %^ORANGE%^   * No hunger or thirst
 %^ORANGE%^   * No diseases
 %^ORANGE%^   * No stamina
