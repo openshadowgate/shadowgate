@@ -224,9 +224,9 @@ void heart_beat()
             busy+=({combatants[i]});
             if(debug) { tell_room(TO,"DEBUG: Busy: "+identify(combatants[i])); }
 	    }
-        else if((interactive(combatants[i]) || combatants[i]->query_property("full attacks")))
+        else if((userp(combatants[i]) || combatants[i]->query_property("full attacks")))
         {
-            if(interactive(combatants[i]))
+            if(userp(combatants[i]))
             {
                 if(sizeof(weapons) > 1)
                 {
@@ -267,7 +267,7 @@ void heart_beat()
 
             fighter_attacks = num;
 
-            if(interactive(combatants[i]))
+            if(userp(combatants[i]))
             {
                 if(FEATS_D->usable_feat(combatants[i],"shieldwall"))
                 {
@@ -316,7 +316,7 @@ void heart_beat()
 
         if (debug) { tell_room(TO,"DEBUG: num attacks = "+num_attacks); }
 
-        if (combatants[i]->is_weaponless() && !interactive(combatants[i]))
+        if (combatants[i]->is_weaponless() && !userp(combatants[i]))
         {
             num_attacks = combatants[i]->query_attacks_num();
         }
@@ -346,7 +346,7 @@ void heart_beat()
 
         //    test = round[roll];
 
-        if (combatants[i]->is_weaponless() && !interactive(combatants[i]))
+        if (combatants[i]->is_weaponless() && !userp(combatants[i]))
         {
             for (l=0;(l<combatants[i]->query_num_natural_attacks()) && num_attacks;l++)
             {
