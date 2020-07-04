@@ -133,6 +133,11 @@ string *query_hair_colors(string subrace) {
     return choices;
 }
 
+string* query_subraces(object who)
+{
+    return "/std/races/human"->query_subraces(who);
+}
+
 string *query_eye_colors(string who) { return ({"blue", "brown", "gray"}); }
 
 string *query_languages(string subrace)

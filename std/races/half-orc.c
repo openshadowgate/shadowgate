@@ -122,6 +122,11 @@ mapping weight_values(string gender, int height) {
     return map;
 }
 
+string* query_subraces(object who)
+{
+    return "/std/races/human"->query_subraces(who) + "/std/races/orc"->query_subraces(who);
+}
+
 string *query_languages(string subrace)
 {
     return (["required":({"common","orcish",}),"optional":({"giant","undercommon","dwarvish","gnomish",})]);

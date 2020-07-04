@@ -144,6 +144,11 @@ mapping weight_values(string gender, int height){
     return map;
 }
 
+string* query_subraces(object who)
+{
+    return "/std/races/human"->query_subraces(who) + "/std/races/elf"->query_subraces(who);
+}
+
 int is_pk_race(string subrace)
 {
     if (!subrace || subrace == "") {

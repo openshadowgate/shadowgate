@@ -147,6 +147,11 @@ int is_pk_race()
     return 1;
 }
 
+string* query_subraces(object who)
+{
+    return "/std/races/human"->query_subraces(who);
+}
+
 string *query_languages(string subrace)
 {
     return (["required":({"common","undercommon"}),"optional":({"drow","goblin","giant","orcish","elven",})]);
