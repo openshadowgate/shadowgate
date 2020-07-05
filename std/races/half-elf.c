@@ -9,7 +9,7 @@ void create() { ::create(); }
 int *age_brackets() { return ({ 18, 45, 60, 90 }); }
 
 int *restricted_alignments(string subrace) {
-    if(!subrace || subrace == "") return ({});
+    return ({});
 }
 
 string *restricted_classes(string subrace) { return ({  "paladin" }); }
