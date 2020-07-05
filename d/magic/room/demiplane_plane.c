@@ -170,12 +170,12 @@ int set_plane_property(string str)
         if(cargs == "on")
         {
             TO->set_property("teleport proof",clevel);
-            write("The plane had been locked from inter dimensional travel.");
+            write("The plane has been locked from interdimensional travel.");
         }
         if(cargs == "off")
         {
             TO->remove_property("teleport proof");
-            write("The plane had been unlocked to inter dimensional travel.");
+            write("The plane has been unlocked to interdimensional travel.");
         }
         save_space();
     }

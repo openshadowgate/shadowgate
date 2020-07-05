@@ -1,4 +1,4 @@
-//A crystal ball to be used as the target for remote 
+//A crystal ball to be used as the target for remote
 //viewing.  Place in enclaves and such.
 //~Circe~ 7/31/05
 
@@ -30,3 +30,8 @@ void create() {
 int get() { return 0; }
 
 int drop() { return 1; }
+
+int is_crystal_ball()
+{
+	return 1;
+}
