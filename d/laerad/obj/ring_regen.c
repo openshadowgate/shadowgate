@@ -23,7 +23,7 @@ void create()
 	//set_long("This is a beautiful golden ring that has a large rectangularly cut emerald set in the very center of it.");
     set_value(7000);
     set_property("enchantment",4);
-    set_item_bonus("fast healing,2");
+    set_item_bonus("fast healing",2);
     set_wear((:TO,"wer_me":));
     set_remove((:TO,"remov_me":));
 }
