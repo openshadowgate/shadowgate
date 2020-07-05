@@ -555,8 +555,9 @@ mixed query_property(string prop)
         }
         if (TO->query_race() == "shade") {
             num += 1;
-            return num;
         }
+        num += props[prop];
+        return (num + EQ_D->gear_bonus(TO, "fast healing"));
     }
 
 // we want this to pick up item "empowered" bonuses only, without spell power feats. Manually applied.
