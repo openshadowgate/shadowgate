@@ -8,9 +8,9 @@ void create()
 {
     ::create();
     set_id(({"ring","ring of regeneration","regen ring"}));
-    set_name("Ring of Regeneration");
+    set_name("Ring of Fast Healing");
     set_obvious_short("%^BOLD%^%^GREEN%^An emerald ring%^RESET%^");
-    set_short("%^BOLD%^%^GREEN%^A ring of regeneration%^RESET%^");
+    set_short("%^BOLD%^%^GREEN%^A ring of fast healing%^RESET%^");
     set("lore",
 	"This is a beautiful emerald ring.  It is known to most as a "+
 	"ring of regeneration.  Wear this powerful ring and you will heal "+
@@ -22,19 +22,17 @@ void create()
 		"of its golden band.%^RESET%^");
 	//set_long("This is a beautiful golden ring that has a large rectangularly cut emerald set in the very center of it.");
     set_value(7000);
+    set_property("enchantment",4);
+    set_item_bonus("fast healing,2");
     set_wear((:TO,"wer_me":));
     set_remove((:TO,"remov_me":));
-    set_heart_beat(6);
-    uses = 0;
 }
 void wer_me()
 {
     tell_object(ETO,"Your skin begins to tingle and revitalize.");
-    ETO->set_property("fast healing", 1);
     return 1;
 }
 void remov_me(){
     tell_object(ETO,"Your skin begins feels dry and normal again.");
-    ETO->set_property("fast healing", -1);
     return 1;
 }
