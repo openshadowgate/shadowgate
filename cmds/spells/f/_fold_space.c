@@ -45,7 +45,7 @@ void spell_effect(int prof) {
     if(!(endplace="/std/magic/teleport"->teleport_object(caster,caster,arg,clevel)))
     {
          tell_object(caster,"You sense something blocking your "+
-                    "passage and lose concentration on your power.");
+                    "passage and the power backfires.");
         tell_room(place,caster->QCN+" "+
                   "looks startled.",caster);
         damage_targ(caster, caster->query_target_limb(), sdamage, "mental");
