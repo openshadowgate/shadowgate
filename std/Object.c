@@ -555,6 +555,7 @@ mixed query_property(string prop)
         }
         if (TO->query_race() == "shade") {
             num += 1;
+            return num;
         }
     }
 
