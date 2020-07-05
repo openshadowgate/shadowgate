@@ -127,6 +127,16 @@ string* query_subraces(object who)
     return "/std/races/human"->query_subraces(who) + "/std/races/orc"->query_subraces(who);
 }
 
+string* query_hair_colors(string subrace)
+{
+    return distinct_array("/std/races/human"->query_hair_colors(subrace) + "/std/races/orc"->query_hair_colors(subrace));
+}
+
+string* query_eye_colors(string subrace)
+{
+    return distinct_array("/std/races/human"->query_eye_colors(subrace) + "/std/races/orc"->query_eye_colors(subrace));
+}
+
 string *query_languages(string subrace)
 {
     return (["required":({"common","orcish",}),"optional":({"giant","undercommon","dwarvish","gnomish",})]);
