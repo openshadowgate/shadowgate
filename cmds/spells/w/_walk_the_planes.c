@@ -37,61 +37,19 @@ void spell_effect(int prof) {
     string destination,a,file;
     int mypower,startpower,endpower,bonus;
     mapping tmp;
-    if (!objectp(caster)) {
-     	TO->remove();
-     	return;
-    }
-    if (!stringp(arg)) {
-      tell_object(caster,"Your invocation fails without a target location.");
-      tell_room(place,caster->QCN+" apparently looks confused.",caster);
-     	TO->remove();
-     	return;
-    }
-    destination = lower_case(arg);
 
-    if(!sscanf(destination,"%s",a)){
-       tell_object(caster,"Your invocation fails without a target location.");
-       tell_room(place,caster->QCN+" apparently looks confused.",caster);
-       TO->remove();
-       return;
-    }
-    if(member_array(destination,caster->query_rem_rooms_sort()) == -1) {
-     	tell_object(caster,"The invocation fails as you realize you can't remember a place like "+destination+".");
-     	tell_room(place,caster->QCN+" pauses and looks a little disoriented.",caster);
-     	TO->remove();
-     	return;
-    }
+    endplace = caster->query_rem_room(arg);
 
-    tmp = caster->query_rem_rooms();
-    file = tmp[destination];
+    spell_successful();
 
-    if(!file || !stringp(file)) {
-     	tell_object(caster,"Your invocation fails as you realize you can't remember a place like "+destination+".");
-     	tell_room(place,caster->QCN+" pauses and looks a little disoriented.",caster);
-     	TO->remove();
-     	return;
-    }
+    if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))
+    {
+        tell_object(caster,"You sense something is wrong with your spell and it backfires.");
+        damage_targ(caster, caster->query_target_limb(), sdamage, "mental");
+        tell_room(place,caster->QCN+" "+
+                  "looks startled.",caster);
+        dest_effect();
 
-    if(file){
-      if(!(endplace = find_object_or_load(file))) file = 0;
-    }
-    if(endplace && (endplace->query_property("no teleport") || place->query_property("no teleport") || !endplace->is_room())) file = 0;
-
-    if(endplace && (endplace->query_property("teleport proof") || place->query_property("teleport proof"))) {
-     	startpower = place->query_property("teleport proof");
-     	endpower = endplace->query_property("teleport proof");
-     	bonus = caster->query_stats("charisma");
-     	bonus = bonus -10;
-     	if(sizeof(caster->query_attackers())) mypower = clevel + bonus + random(6);
-     	else mypower = clevel + bonus + random(6) + 5;
-     	if((mypower < startpower) || (mypower < endpower)) file = 0;
-    }
-
-    if(!file || endplace->is_flight_room()) {
-     	tell_object(caster,"Something interferes with the invocation, and it fails.");
-     	tell_room(place,caster->QCN+" pauses and looks a little disoriented.",caster);
-     	TO->remove();
-     	return;
     }
     heritage = (string)caster->query("warlock heritage");
 
@@ -131,7 +89,7 @@ void spell_effect(int prof) {
 
     spell_successful();
     caster->setAdminBlock();
-    call_out("move_caster",3, endplace, prof);
+    call_out("move_caster", ROUND_LENGTH, endplace, prof);
 }
 
 void move_caster(object endplace, int prof) {
