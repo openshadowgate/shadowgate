@@ -21,7 +21,7 @@ int cmd_dirupdate(string str)
     }
 
     if (!regexp(file, "^(/d/|/realms/)")) {
-        write("You're not allowed to use dirupdate outside of /d/ and /realms/");
+        write("dirupdate win't work outside of /d/ and /realms/ because of reasons.");
         return 1;
     }
 
