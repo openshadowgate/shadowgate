@@ -906,7 +906,7 @@ select_stat_mod(string str)
         smod = random(6);
     }
 
-    if (!undefinedp(smod) && smod > -1 && smod < 5) {
+    if (!undefinedp(smod) && smod > -1 && smod < 6) {
         char_sheet["stat_mod"] = smod;
         return 1;
     } else {
