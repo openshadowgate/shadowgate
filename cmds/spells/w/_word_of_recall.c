@@ -45,6 +45,7 @@ void spell_effect(int prof) {
         tell_object(caster,"You sense something is wrong with your spell and loose concentration.");
         tell_room(place,caster->QCN+" "+
                   "looks startled.",caster);
+        damage_targ(caster, caster->query_target_limb(), sdamage, "mental");
         dest_effect();
 
     }

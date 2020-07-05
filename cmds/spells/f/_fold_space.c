@@ -22,7 +22,7 @@ void create() {
     set_helpful_spell(1);
 }
 
-string check_error(string file, int prof) { 
+string check_error(string file, int prof) {
     return file;
 }
 
@@ -48,10 +48,11 @@ void spell_effect(int prof) {
                     "passage and lose concentration on your power.");
         tell_room(place,caster->QCN+" "+
                   "looks startled.",caster);
+        damage_targ(caster, caster->query_target_limb(), sdamage, "mental");
         dest_effect();
         return;
     }
-   
+
     spell_successful();
 
     caster->clear_followers();
@@ -60,7 +61,7 @@ void spell_effect(int prof) {
        "on a faraway look as "+caster->QS+" seems to grow a bit "+
        "insubstantial!",caster);
     tell_room(endplace,"%^RESET%^%^GREEN%^An outline of a figure appears near you.");
-    dest_effect();    
+    dest_effect();
     return;
 }
 
@@ -68,4 +69,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
