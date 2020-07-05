@@ -102,7 +102,7 @@ void spell_effect(int prof) {
         return;
     }
     ids = target->query_id();
-    if(member_array("mirror", ids)== -1) {
+    if(target->is_scrying_mirror() != 1) {
         tell_room(place,"%^BOLD%^RED%^"+caster->QCN+" abruptly "
             "stops chanting and shrugs.",caster);
         tell_object(caster,"%^BOLD%^RED%^The target of your spell is not a "

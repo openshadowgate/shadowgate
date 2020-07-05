@@ -399,3 +399,12 @@ int cook_em(string str) {
    TP->remove_property("cooking food");
    return 1;
 }
+
+int is_scrying_mirror()
+{
+	if(lit)
+	{
+		return 1;
+	}
+	return 0;
+}

@@ -79,7 +79,7 @@ void spell_effect(int prof) {
     mylevel = clevel;
 
     ids = target->query_id();
-    if(member_array("crystal ball", ids)== -1) {
+    if(target->is_crystal_ball() != 1) {
         tell_room(place,"%^BOLD%^RED%^The stones fall to the floor "+
            "as "+caster->QCN+" looks around, confused.",caster);
         tell_object(caster,"%^BOLD%^RED%^The focus of your power "+
@@ -96,7 +96,7 @@ void spell_effect(int prof) {
         return;
     }
     myname = "mirror";
-    if(member_array("crystal ball", ids) != -1) myname = "crystal ball";
+    if(target->is_crystal_ball() == 1) myname = "crystal ball";
     tell_room(place,"%^BOLD%^BLUE%^The gems spin faster before "+
        ""+caster->QCN+", and the "+myname+" begins to %^CYAN%^glow "+
        "%^BLUE%^faintly in response.",caster);
