@@ -30,11 +30,11 @@ void create()
 void wer_me()
 {
     tell_object(ETO,"Your skin begins to tingle and revitalize.");
-    ETO->set_property("fast healing", 2);
+    ETO->set_property("fast healing", 1);
     return 1;
 }
 void remov_me(){
     tell_object(ETO,"Your skin begins feels dry and normal again.");
-    ETO->set_property("fast healing", -2);
+    ETO->set_property("fast healing", -1);
     return 1;
 }
