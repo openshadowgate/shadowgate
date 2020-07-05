@@ -73,21 +73,26 @@ void create(){
 int blood_drain(object targ)
 {
     string what;
-    if(!objectp(targ))
+    if (!objectp(targ)) {
         return 0;
-    if(!objectp(TO))
+    }
+    if (!objectp(TO)) {
         return 0;
-    if(!objectp(ETO))
+    }
+    if (!objectp(ETO)) {
         return 0;
-    if(targ->is_undead())
+    }
+    if (targ->is_undead()) {
         return 0;
-    if(targ->query_property("garlic_scent"))
-       return 0;
+    }
+    if (targ->query_property("garlic_scent")) {
+        return 0;
+    }
     what = (!random(2))?"%^BOLD%^bite":"%^BOLD%^%^BLUE%^claw";
-    tell_room(ETO,"%^RED%^A vampire spawn violently "+what+"s%^RESET%^%^RED%^ "+targ->QCN+"!",targ);
-    tell_object(targ,"%^RED%^You feel your life draining away as vampire spawn "+what+"s%^RESET%^%^RED%^ you "+targ->QCN+"!",targ);
-    targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(query_level(),8), "negative energy");
-    targ->cause_typed_damage(TO, "torso", -roll_dice(query_level(),12)*2, "negative energy");
+    tell_room(ETO, "%^RED%^A vampire spawn violently " + what + "s%^RESET%^%^RED%^ " + targ->QCN + "!", targ);
+    tell_object(targ, "%^RED%^You feel your life draining away as vampire spawn " + what + "s%^RESET%^%^RED%^ you " + targ->QCN + "!", targ);
+    targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(query_level(), 8), "negative energy");
+    targ->cause_typed_damage(TO, "torso", -roll_dice(query_level(), 16) * 2, "negative energy");
 }
 
 void init()
