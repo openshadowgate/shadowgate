@@ -39,7 +39,7 @@ int now(string str){
       dest_effect();
       return 0;
    }
-   if (environment(TP)->query_property("no teleport")) {
+   if (environment(TP)->query_property("no teleport") || environment(TP)->query_property("teleport proof")) {
       tell_object(TP,"Even "+TP->query_diety()+" is unable to save you from here.");
       dest_effect();
       return 0;
@@ -53,5 +53,3 @@ int now(string str){
 void dest_effect(){
    TO->remove();
 }
-
-
