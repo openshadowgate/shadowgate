@@ -83,20 +83,18 @@ string user_finger_display(string who) {
     desc->initialize_profile(TO);
     mail_stat = (mapping)LOCALPOST_D->mail_status(tmp);
     if (ob) {
-        finger =""+query_title()+"\n";
-        if (file_exists("/d/save/background/"+query_true_name()+".htm"))
+        finger = "Name: " + query_true_name() + "\n";
+        if (file_exists("/d/save/background/" + query_true_name() + ".htm")) {
             finger += "Background on file.\n";
-        else
+        }else {
             finger += "No background on file.\n";
-        if(pointerp(tmp9 = (string *)ob->query_shguild()) && sizeof(tmp9)){
+        }
+        if (pointerp(tmp9 = (string*)ob->query_shguild()) && sizeof(tmp9)) {
             finger += "Member of:\n";
-            for(gi=0;gi<sizeof(tmp9);gi++){
+            for (gi = 0; gi < sizeof(tmp9); gi++) {
                 finger += "  " + tmp9[gi] + "\n";
             }
         }
-        uh_oh = capitalize((string)ob->query_gender()) + " ";
-        uh_oh += (string)ob->query_race() + " ";
-        finger += alig_str(uh_oh, 45);
         position = ob->query_position();
         if (wizardp(ob)) {
             switch (position) {
@@ -104,14 +102,6 @@ string user_finger_display(string who) {
                 level = "Apprentice"; break;
             case "creator":
                 level = "Creator"; break;
-            case "developer":
-                level = "Developer"; break;
-            case "Developer":
-                level = "Developer"; break;
-            case "overseer":
-                level = "Overseer"; break;
-            case "Overseer":
-                level = "Overseer"; break;
             case "Admin":
                 level = "Game Admin"; break;
             default:
@@ -121,18 +111,17 @@ string user_finger_display(string who) {
         if (!wizardp(ob)) {
             level = "" + (int)ob->query_level() + "";
         }
-        if (wizardp(ob))
-            finger += "Level: "+level;
+        if (wizardp(ob)) {
+            finger += "Position: " + level;
+        }
         finger += "\n";
-        //finger += "In real life: ";
-        //finger += alig_str((string)ob->query_rname(), 31);
-// making marriage info. avatar only *Styx* 11/25/06
-        if(avatarp(TP)) {
-          if (!ob->query_married())
-            finger += "Single\n";
-          else
-            finger += "Married to " + capitalize((string)ob->query_married()) +"\n";
-	}
+        if (avatarp(TP)) {
+            if (!ob->query_married()) {
+                finger += "Single\n";
+            }else {
+                finger += "Married to " + capitalize((string)ob->query_married()) + "\n";
+            }
+        }
         birth = (int)ob->query_birthday();
         birth2 = birth - (int)ob->query_start_age() * YEAR;
         invis = (int)ob->query_invis();
@@ -143,25 +132,23 @@ string user_finger_display(string who) {
         finger += "Last on: ";
         finger += query_last_on() + "\n";
 
-        /* if (this_player() && archp(this_player())) */
-        /*         finger += " from:  " + (string)ob->query_ip() + "\n"; */
-        /*     else */
-        /*         finger += "\n";    */
-
-        if (!mail_stat["unread"])
+        if (!mail_stat["unread"]) {
             finger += "No unread mail.\n";
-        else if (mail_stat["unread"] == 1)
+        }else if (mail_stat["unread"] == 1) {
             finger += "1 unread piece of mail.\n";
-        else
+        }else {
             finger += mail_stat["unread"] + " unread pieces of mail.\n";
-        if(wizardp(ob)) {
-          tmp = user_path(tmp);
-          if (file_size(tmp + ".project") >= 0)
-            finger += "Project: "+read_file(tmp+".project");
-          if (file_size(tmp+".plan") >= 0)
-            finger += "Plan:\n"+read_file(tmp+".plan");
-          else
-            finger += "No plan.\n";
+        }
+        if (wizardp(ob)) {
+            tmp = user_path(tmp);
+            if (file_size(tmp + ".project") >= 0) {
+                finger += "Project: " + read_file(tmp + ".project");
+            }
+            if (file_size(tmp + ".plan") >= 0) {
+                finger += "Plan:\n" + read_file(tmp + ".plan");
+            }else {
+                finger += "No plan.\n";
+            }
         }
     } else {
         complete_variables();
@@ -179,10 +166,6 @@ string user_finger_display(string who) {
                 finger += "  " + tmp9[gi] + "\n";
             }
         }
-        uh_oh = capitalize(query_gender());
-        uh_oh += " " + query_race() + " ";
-        //if (query_guild_string() && query("show guild"))
-        finger += alig_str(uh_oh, 45);
         if (member_array(query_position(), MORTAL_POSITIONS)==-1) {
             position = query_position();
             switch (position) {
@@ -201,8 +184,8 @@ string user_finger_display(string who) {
             default:
                 level = "Wizard"; break;
             }
-            finger += "Level: "+level+"\n";   // 1 nov 93 for offline
-        } else finger += "Level: Unknown\n";
+            finger += "Position: "+level+"\n";   // 1 nov 93 for offline
+        } else finger += "Position: Unknown\n";
         //finger += "In real life: ";
         //finger += alig_str(query_rname(), 31);
 // making marriage info. avatar only *Styx* 11/25/06
@@ -286,12 +269,25 @@ void save_player(string file) {
 }
 
 protected void complete_variables() {
-    if (!true_name) true_name = "";
-    if (!real_name) real_name = "???";
-    if (!myclass) myclass = "child";
-        if (!last_on) last_on = "no record";
-    if (!ip) ip = "nowhere";
-    if (!level) level = -1;
-    //if (!race) race = "Unborn";
-    if (!player_age) player_age = 0;
+    if (!true_name) {
+        true_name = "";
+    }
+    if (!real_name) {
+        real_name = "???";
+    }
+    if (!myclass) {
+        myclass = "child";
+    }
+    if (!last_on) {
+        last_on = "no record";
+    }
+    if (!ip) {
+        ip = "nowhere";
+    }
+    if (!level) {
+        level = -1;
+    }
+    if (!player_age) {
+        player_age = 0;
+    }
 }
