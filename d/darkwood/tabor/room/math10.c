@@ -1,10 +1,3 @@
-//updated by Circe 6/2/04 with color, etc.
-// Mathowvy Road, Tabor
-// Thorn@ShadowGate
-// 000922
-// Tabor
-// math10.c
-
 #include <std.h>
 #include "../include/tabor.h"
 
@@ -22,8 +15,8 @@ void create() {
 %^BOLD%^Mathowvy Road, Tabor%^RESET%^
 You are on a fairly steep upward slope on Mount Tabor, approaching the
 fortress of %^YELLOW%^Caer Tabor%^RESET%^.  The road is starting to narrow here and
-you see it curve around a bend to the northwest.  Directly east 
-is a large, rounded building made of what looks to be crystalline 
+you see it curve around a bend to the northwest.  Directly east
+is a large, rounded building made of what looks to be crystalline
 walls.  To the west is a small empty lot that appears to be a work in progress.  To the south, you see the slope become gentler and the
 road get wider as it leads straight into town.
 
@@ -32,9 +25,6 @@ DAI
     );
   set_exits(([
    "south" : ROOMDIR+"math9",
-//    "west" : ROOMDIR+"potion1",
-// For LoKi plot
-   "west" : "/realms/loki/merc/rooms/merc_hall",
     "northwest" : ROOMDIR+"math11",
     "enter" : ROOMDIR+"psientry"
   ]));
@@ -64,11 +54,5 @@ int GoThroughDoor(){
          "as "+TPQCN+" passes through it.", TP);
         return 1;
    }
-/* removing the restrictions to others per discussions *Styx* 12/26/05
-   tell_object(TP,"You try to step through the archway, but feel an "+
-      "unseen force block your path.\n");
-   tell_room(TO,TPQCN+" moves to go through the archway but stops short.",TP);
-   return 0;
-*/
    return 1;
 }
