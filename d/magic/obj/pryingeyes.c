@@ -25,8 +25,8 @@ void create(){
 
     set_property("untrackable",1);
     set_hd(1,2);
-    set_hp(10);
-    set_max_hp(10);
+    set_hp(10000000000);
+    set_max_hp(10000000000);
     set_new_exp(1, "very low");
     set_race("eye");
     set_body_type("eye");
