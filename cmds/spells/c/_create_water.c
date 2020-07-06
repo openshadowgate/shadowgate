@@ -5,7 +5,7 @@
 #include <priest.h>
 inherit SPELL;
 
-object drinks;
+object drinks, where;
 
 
 create()
@@ -36,7 +36,6 @@ int preSpell()
 
 void spell_effect(int prof)
 {
-    object where;
     int d1,d2,duration, amount;
 
     d1 = 1;
@@ -59,16 +58,18 @@ void spell_effect(int prof)
     }
     d1 = (int)caster->query_stats("wisdom");
     d2 = (int)caster->query_stats("constitution");
-    // The time the pool of water will be here
+
     amount = clevel/2;
     amount++;
     drinks->set_drinks(amount);
     drinks->move(where);
     drinks->set_property("spelled", ({TO}) );
+    where->set_property("fill waterskin", 1);
     duration = (( (d1 / d2 ) * clevel ) * 60);
-    // To prevent that one gets no water
+
     if ( duration < 90 ) duration=90;
     spell_successful();
+    addSpellToCaster();
     call_out("dest_effect",duration);
 }
 
@@ -79,6 +80,9 @@ void dest_effect()
     {
         drinks->remove();
         tell_room(ROOM,"The pool of water just vanishes!");
+    }
+    if(objectp(where)) {
+        where->set_property("fill waterskin", -1);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
