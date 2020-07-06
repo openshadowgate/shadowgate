@@ -25,7 +25,7 @@ void spell_effect()
     int duration;
     int roll;
     duration = ROUND_LENGTH * (clevel/6 + 1);
-    target->set_property("teleport proof",clevel);
+
 
     roll = BONUS_D->process_hit(caster, target, 1, 0, 0, 1);
 
@@ -41,6 +41,7 @@ void spell_effect()
     tell_object(caster,"%^GREEN%^%^BOLD%^You extend your hand and a ray of green sprays out of it, covering "+target->QCN+" in a green emerald field.%^RESET%^");
     tell_object(target,"%^GREEN%^%^BOLD%^"+caster->QCN+" extends "+caster->QP+" hand and a ray of green sprays out of it, covering you in a green emerald field.%^RESET%^");
     tell_room(place,"%^GREEN%^%^BOLD%^"+caster->QCN+" extends "+caster->QP+" hand and a ray of green sprays out of it, covering "+target->QCN+" in a green emerald field.%^RESET%^",({caster,target}));
+    target->set_property("teleport proof",clevel);
 
     call_out("dest_effect",duration);
     spell_successful();
