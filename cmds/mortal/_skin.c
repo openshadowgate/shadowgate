@@ -17,7 +17,7 @@ skin - gather biomass
 
 %^CYAN%^SYNTAX%^RESET%^
 
-skin %^ORANGE%^CORPSE%RESET%^
+skin %^ORANGE%^CORPSE%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
