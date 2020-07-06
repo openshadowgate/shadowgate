@@ -24,7 +24,7 @@ void create() {
     set_id( ({"wood", "firewood"}) );
     set_name("wood");
     set_short("Some firewood");
-    set_weight(5);
+    set_weight(20);
     set_long("A bundle of firewood.  If you had something to create a spark, "
 	"you could probably %^BOLD%^%^RED%^<%^WHITE%^start fire%^RED%^>%^RESET%^ with it.\n");
     set_value(0);
@@ -150,24 +150,34 @@ int make_fire(string str) {
 	}
 
 	if(ob=present("flint",TP)) {
- 	   write("You strike the flint and steel to start a fire with the wood.");
+ 	   write("You strike the flint and steel over some firewood.");
 	   tell_room(ETO, TPQCN+" strikes a flint to steel over some firewood.", TP);
-	   tell_room(ETO,"After a few tries and some attention, a small "
-		"campfire %^BOLD%^%^RED%^blazes %^RESET%^up.");
-	   lit=(random(2)+1);
-	   set_id(({"fire", "campfire", "mirror"}));
-	   set_name("fire");
-	   set_value(1001);
-	   check_fire(TO);
-       set_weight(100000); // don't want them carrying it around
-       set_heart_beat(1);
-	   ETO->set_property("light", lit);
-	   set_property("no animate", 1);
-	   //call_out("remove",fuel);
+	   TP->set_paralyzed(12, "%^BOLD%^%^RED%^You are busy starting the fire!%^RESET%^");
+	   call_out("fire_started", 8);
        return(1);
 	}
 	write("You have no flint and steel.");
 	return(1);
+}
+
+void fire_started() {
+	if(!objectp(ETO)) return;
+	if(!ETO->is_room()) {
+		tell_object(TP, "The wood is no longer on the ground!");
+		return;
+	}
+	tell_room(ETO,"After a few tries and some attention, a small "
+	 "campfire %^BOLD%^%^RED%^blazes %^RESET%^up.");
+	lit=(random(2)+1);
+	set_id(({"fire", "campfire", "mirror"}));
+	set_name("fire");
+	set_value(1001);
+	check_fire(TO);
+	set_weight(100000); // don't want them carrying it around
+	set_heart_beat(1);
+	ETO->set_property("light", lit);
+	set_property("no animate", 1);
+	//call_out("remove",fuel);
 }
 
 void reset() {
