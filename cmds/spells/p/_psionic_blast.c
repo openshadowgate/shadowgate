@@ -40,7 +40,7 @@ void spell_effect(int prof)
     tell_room(place, "%^CYAN%^" + sprintf("%s places %s fingers to the side of %s head and concentrates!", myname, caster->query_possessive(), caster->query_possessive()) + "%^RESET%^", ({ caster }));
 
     victims = target_selector();
-    victims = target_filter(attackers);
+    victims = target_filter(victims);
 
     if(!sizeof(victims))
     {
@@ -62,6 +62,7 @@ void spell_effect(int prof)
             tell_object(caster, "%^BOLD%^The psionic energy slams into " + ob->QCN + ", leaving them stunned!");
             ob->set_paralyzed(roll_dice(2,4) * 8, "%^BOLD%^You are stunned by the psychic blast!");
         }
+        spell_kill(ob,caster);
     }
 
     spell_successful();
