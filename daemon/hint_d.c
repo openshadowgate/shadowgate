@@ -1,7 +1,7 @@
 #include <std.h>
 #include <security.h>
 
-#define HFILE "/d/common/text/hints"
+#define HFILE "/doc/help/user/hints"
 #define FREQ 1260
 
 inherit DAEMON;
