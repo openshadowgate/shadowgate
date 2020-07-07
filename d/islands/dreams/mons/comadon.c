@@ -27,7 +27,6 @@ void create(){
   command("wield sword");
   new("/d/shadow/obj/armor/mshield")->move(TO);
   command("wear shield");
-  new("/d/magic/symbols/helm_symbol")->move(TO);
   set_unique(1);
   set_alignment(1);
   remove_std_db();
@@ -41,11 +40,11 @@ init()
   add_action("awaken","awaken");
 	if(interactive(TP) && !TP->query_invis()) {
 		  call_out("greet",1,TP);
-	}	
+	}
 }
 void greet()
 {
-	
+
    force_me("say Spare me a moment of your time, "+
 	""+TP->query_race()+"?  I believe I may have some "+
 	"%^CYAN%^information %^RESET%^that can help you here.");
@@ -67,12 +66,12 @@ void catch_say(string message)
     call_out("do_information",1,TP);
     return 1;
   }
-  else if(strsrch(message,"wake") != -1) 
+  else if(strsrch(message,"wake") != -1)
   {
     call_out("do_wake",1,TP);
     return 1;
   }
-  else if(strsrch(message,"teleport") != -1) 
+  else if(strsrch(message,"teleport") != -1)
   {
     call_out("do_teleport",1,TP);
     return 1;
