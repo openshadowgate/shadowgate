@@ -26,16 +26,5 @@ void create()
       "grants entry to the city.  It has a very small window with "+
       "%^BOLD%^%^BLACK%^iron bars %^RESET%^%^ORANGE%^but is otherwise "+
       "solid.%^RESET%^");
-   if(!present("shopkeeper"))   new("/d/token_hunt/high_vendor")->move(TO);
-   if(!present("dino"))         new("/d/token_hunt/high_dino")->move(TO);
-   if(!present("wagon"))        new("/d/token_hunt/wagon")->move(TO);
 
-}
-
-void reset()
-{
-    ::reset();
-   if(!present("shopkeeper"))   new("/d/token_hunt/high_vendor")->move(TO);
-   if(!present("dino"))         new("/d/token_hunt/high_dino")->move(TO);
-   if(!present("wagon"))        new("/d/token_hunt/wagon")->move(TO);
 }

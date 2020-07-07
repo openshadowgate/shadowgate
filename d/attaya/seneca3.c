@@ -41,7 +41,7 @@ void create() {
       ({"boardwalk","wooden boardwalk"}) : "%^ORANGE%^The boardwalk is "+
          "made of wooden slats and supports and is very well-maintained.  "+
 		 "It runs between the wilder regions of Attaya over a chasm to "+
-		 "the walled city of %^BOLD%^%^WHITE%^Seneca%^RESET%^%^ORANGE%^.%^RESET%^",	  
+		 "the walled city of %^BOLD%^%^WHITE%^Seneca%^RESET%^%^ORANGE%^.%^RESET%^",
 	  ({"town","city","Seneca","seneca"}) : "More properly called a city "+
           "than a town, Seneca has grown over the past several hundred years "+
           "despite the menace of the one called Intruder.  From here, you "+
@@ -68,4 +68,16 @@ void create() {
       "bluff" : "This bluff rises above the beach below and is covered "+
 	     "by a smattering of grasses and sea oats."
    ]));
+   if(!present("shopkeeper"))   new("/d/token_hunt/high_vendor")->move(TO);
+   if(!present("dino"))         new("/d/token_hunt/high_dino")->move(TO);
+   if(!present("wagon"))        new("/d/token_hunt/wagon")->move(TO);
+}
+
+
+void reset()
+{
+    ::reset();
+   if(!present("shopkeeper"))   new("/d/token_hunt/high_vendor")->move(TO);
+   if(!present("dino"))         new("/d/token_hunt/high_dino")->move(TO);
+   if(!present("wagon"))        new("/d/token_hunt/wagon")->move(TO);
 }
