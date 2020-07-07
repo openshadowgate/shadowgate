@@ -62,7 +62,7 @@ void execute_feat()
 
     if (FEATS_D->is_active(caster, "lifeless shroud")) {
         obj = query_active_feat("lifeless shroud");
-        tell_object(caster, cm("With a swift though you release the cold within."));
+        tell_object(caster, cm("With a swift thought you release the cold within."));
         tell_room(place, cm("" + caster->QCN + "'s eyes briefly turn to glass as the air around looses its coldness."), caster);
         obj->dest_effect();
         dest_effect();
