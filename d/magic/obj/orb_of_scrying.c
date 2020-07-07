@@ -301,3 +301,8 @@ void control_failure()
     }
     return;
 }
+
+int is_crystal_ball()
+{
+	return 1;
+}

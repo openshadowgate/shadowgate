@@ -17,15 +17,15 @@ skin - gather biomass
 
 %^CYAN%^SYNTAX%^RESET%^
 
-skin CORPSE
+skin %^ORANGE%^CORPSE%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-With this command you skin a CORPSE. The skinning process will be based on your skill in survival. The larger the corpse and the more difficult the creature the harder the skinning. As skill increases, the time to skin will decrease, and you will get better quality results.
+With this command you skin a %^ORANGE%^CORPSE%^RESET%^. The skinning process will be based on your skill in %^BOLD%^survival%^RESET%^. The larger the corpse and the more difficult the creature the harder the skinning. As skill increases, the time to skin will decrease, and you will get better quality results.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-hunt, kill, craft
+hunt, kill, craft, survival
 OLI
     );
     return 1;
@@ -52,7 +52,7 @@ int cmd_skin(string str){
     return notify_fail("You can't see to work!\n");
   }
 //added checks for hidden after bug reports.  Circe 11/21/04
-//none of the craft NWPs allow you to work while hidden, so 
+//none of the craft NWPs allow you to work while hidden, so
 //it only made sense that you couldn't use a knife to skin
 //while hidden
     if (TP->query_property("working")) {
@@ -148,5 +148,3 @@ void skinning(object tp,object skin,object corpse, object env, int prof){
     return;
 
 }
-
-

@@ -1,34 +1,33 @@
 // Revised by Pator@ShadowGate
 #include <std.h>
 
-inherit OBJECT;
+inherit "/d/magic/obj/mirror.c";
 
 int drinks;
 int set_drinks(int i);
 
 void create() {
     ::create();
-    set_id( ({ "water","pool" , "pool of water" }) );
+    set_id( ({ "water", "pool" , "pool of water", "mirror" }) );
     set_name("water");
     set_short("A pool of clear water");
-    set_long( "A pool of clear water. Looks like it is drinkable.");
-    set_weight(100000);
-    set("value", 0);
+    set_long( "A pool of clear water. Looks like it is drinkable and highly reflective.");
     set_drinks(random(20));
-  set_property("no animate",1);
-   set_property("no offer",1);
+    set_property("no animate",1);
+    set_property("no offer",1);
 }
 
 
 int set_drinks(int i) {
-  if ( i < 5  ) i = 5;
-  if ( i > 20 ) i = 20;
-  drinks = i;
-  drinks *= 3;
-  return 1; }
+    if ( i < 5  ) i = 5;
+    if ( i > 20 ) i = 20;
+    drinks = i;
+    drinks *= 3;
+    return 1;
+}
 
 void init(){
-    ::init();        
+    ::init();
 	add_action("drink_some","drink");
 }
 
