@@ -15,6 +15,7 @@
 
 (/include): (all)[r] (assist)[rw] (superuser)[rw] (area)[rw]
 
+
 (/cmds): (all)[r] (assist)[rw] (superuser)[rw] (classcoding)[rw]
 (/cmds/adm): (all)[r] (assist)[r] (mudlib)[rw] (superuser)[rw]
 (/cmds/avatar): (all)[r] (wizard-coding)[rw] (superuser)[rw] (assist)[rw]
@@ -27,7 +28,6 @@
 (/cmds/system): (all)[r] (assist)[r] (mudlib)[rw] (superuser)[rw]
 
 (/d): (all)[r] (assist)[rw] (superuser)[rw] (area)[rw]
-(/d/token_hunt/token_storage): (all)[rw] (Token_hunt)[rw]
 (/d/av_rooms): (all)[rw]
 (/d/avatars): (all)[rw]
 (/d/common): (all)[r] (area)[rw] (superuser)[rw] (assist)[rw] (common)[rw]
@@ -52,9 +52,12 @@
 (/d/sglib/strong/save): (all)[r] (mudlib)[rw] (superuser)[rw] (Stronghold)[rw]
 (/d/sglib/strong/save/data): (all)[r] (mudlib)[rw] (superuser)[rw] (Stronghold)[rw]
 (/d/sglib/strong/save/markers): (all)[r] (mudlib)[rw] (superuser)[rw] (Stronghold)[rw]
+(/d/shadow/virtual/sea/obj/boats): (all)[rw]
 (/d/shadowgate/death): (superuser)[rw] (assist)[rw] (area)[rw] (mudlib)[rw] (all)[r]
 (/d/shadowgate/masters): (superuser)[rw] (assist)[rw] (area)[rw] (mudlib)[rw] (all)[r]
 (/d/standard): (all)[r] (standard)[rw] (area)[rw] (assist)[rw] (superuser)[rw]
+(/d/token_hunt/token_storage): (all)[rw] (Token_hunt)[rw]
+(/d/verhedin/virtual/wadi/obj/boats): (all)[rw]
 
 (/daemon): (all)[r] (mudlib)[rw] (superuser)[rw] (assist)[rw] (daemon)[rw] (daemonassist)[rw]
 (/daemon/destinations_d.c): (all)[r] (mudlib)[rw] (superuser)[rw] (assist)[rw] (daemon)[rw] (classcoding)[rw]
