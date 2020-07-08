@@ -13,6 +13,6 @@ void create() {
     set_exits(([
                "north":"/d/shadow/city/room/dock1"
                ]));
-    find_object_or_load("d/shadow/virtual/sea/obj/ferryboat")->move(TO);
+    find_object_or_load("/d/shadow/virtual/sea/obj/ferryboat")->move(TO);
 }
 

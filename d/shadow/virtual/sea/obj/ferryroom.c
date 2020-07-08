@@ -50,7 +50,7 @@ void init(){
 Travel(){
     object loc;
   	remove_exit("out");
-  	ob = find_object_or_load("d/shadow/virtual/sea/obj/ferryboat");
+  	ob = find_object_or_load("/d/shadow/virtual/sea/obj/ferryboat");
 
   	if(!in_dock){
 	   switch (dir){
@@ -100,7 +100,7 @@ Docking(){
 
     in_dock = 1;
 
-  	ob = find_object_or_load("d/shadow/virtual/sea/obj/ferryboat");
+  	ob = find_object_or_load("/d/shadow/virtual/sea/obj/ferryboat");
 
     tell_room(environment(ob),"%^BOLD%^%^YELLOW%^A ferry boat leaves the area.");
   	tell_room(TO,"%^BOLD%^%^MAGENTA%^The ferry sails across the sea.\n%^BOLD%^%^YELLOW%^Beyond the ferry, you can see this:\n" );

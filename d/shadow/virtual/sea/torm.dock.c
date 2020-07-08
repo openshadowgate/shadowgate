@@ -43,5 +43,5 @@ set_exits(([
   set_smell("default","You smell salt in the air from the Dagger Sea.");
   set_listen("default","The waves of the sea wash against the docks.");
 // per T we don't want the ferry here - Styx 8/24/01
-// find_object_or_load("d/shadow/virtual/sea/obj/ferryboat")->move(TO);
+// find_object_or_load("/d/shadow/virtual/sea/obj/ferryboat")->move(TO);
 }
