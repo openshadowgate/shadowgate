@@ -3,7 +3,7 @@
 #include <std.h>
 #include <daemons.h>
 #define BOAT "/d/shadow/virtual/sea/obj/boat.c"
-#define BOAT_DIR "/d/shadow/virtual/sea/obj/boats/"
+#define BOAT_DIR "/d/save/boats/saakrune/"
 inherit ROOM;
 
 int is_virtual()

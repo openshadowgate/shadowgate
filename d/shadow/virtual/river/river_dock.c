@@ -4,7 +4,7 @@
 #include <daemons.h>
 // don't need these since it will only be ferries running on this
 // #define BOAT "/d/shadow/virtual/sea/obj/boat.c"
-// #define BOAT_DIR "/d/shadow/virtual/sea/obj/boats/"
+// #define BOAT_DIR "/d/save/boats/saakrune/"
 inherit ROOM;
 
 int is_virtual() { return 1; }

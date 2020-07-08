@@ -2,7 +2,7 @@
 #include <std.h>
 #include <security.h>
 #include <dirs.h>
-#define BOAT_DIR "/d/shadow/virtual/sea/obj/boats/"
+#define BOAT_DIR "/d/save/boats/saakrune/"
 
 inherit DAEMON;
 
