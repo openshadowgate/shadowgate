@@ -16,3 +16,8 @@ string query_long(string str){
     }
     return hold;
 }
+
+int is_parchment()
+{
+	return 1;
+}
