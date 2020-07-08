@@ -52,7 +52,7 @@
 (/d/sglib/strong/save): (all)[r] (mudlib)[rw] (superuser)[rw] (Stronghold)[rw]
 (/d/sglib/strong/save/data): (all)[r] (mudlib)[rw] (superuser)[rw] (Stronghold)[rw]
 (/d/sglib/strong/save/markers): (all)[r] (mudlib)[rw] (superuser)[rw] (Stronghold)[rw]
-(/d/shadow/virtual/sea/obj/boats): all[rw]
+(/d/shadow/virtual/sea/obj/boats): (all)[rw]
 (/d/shadowgate/death): (superuser)[rw] (assist)[rw] (area)[rw] (mudlib)[rw] (all)[r]
 (/d/shadowgate/masters): (superuser)[rw] (assist)[rw] (area)[rw] (mudlib)[rw] (all)[r]
 (/d/standard): (all)[r] (standard)[rw] (area)[rw] (assist)[rw] (superuser)[rw]
