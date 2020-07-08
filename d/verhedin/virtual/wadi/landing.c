@@ -10,7 +10,7 @@
 #include <std.h>
 #include <daemons.h>
 #define BOAT "/d/verhedin/virtual/wadi/obj/boat.c"
-#define BOAT_DIR "/d/verhedin/virtual/wadi/obj/boats/"
+#define BOAT_DIR "/d/save/boats/wadi_al-emir/"
 inherit ROOM;
 
 int is_virtual() { return 1; }
