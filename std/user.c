@@ -4918,9 +4918,9 @@ int race_mod(string stat)
     if (myfile->is_statmod_race(mysubrace)) {
         int smod;
 
-        smod = TO->query("stat_mod");
+        smod = query("stat_mod");
 
-        if (intp(smod) && smod > -1 && smod < 6) {
+        if (!undefinedp(query("stat_mod")) && smod > -1 && smod < 6) {
             mystats[smod] += 2;
         } else {
             mystats[2] += 2;
