@@ -38,13 +38,13 @@ void create(){
 void init(){
   ::init();
 
-  tell_room(TO,"%^BOLD%^%^BLUE%^SPOOOOOOOOOOSH!!!!!");
+  /*tell_room(TO,"%^BOLD%^%^BLUE%^SPOOOOOOOOOOSH!!!!!");
   write("%^BOLD%^%^YELLOW%^You land heavily in "+water_level+" feet of water.");
   tell_room(TO,"%^BOLD%^"+TPQCN+" lands heavily next to you!",TP);
   TP->add_attacker(TO);
   TP->do_damage("torso",random(20));
   TP->continue_attack();
-  TP->remove_attack(TO);
+  TP->remove_attack(TO);*/
   add_action("swim","swim");
   add_action("block","block");
   add_action("block","stop");
@@ -172,4 +172,3 @@ void fill(){
   remove_property("surface");
   call_out("fill",4);
 }
-
