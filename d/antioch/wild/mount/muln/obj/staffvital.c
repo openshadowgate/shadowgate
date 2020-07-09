@@ -47,7 +47,7 @@ void create()
 
     set_value(5000);
     set_property("enchantment",4);
-	set_item_bonus("empowered",2);
+	set_item_bonus("caster level",2);
     set_hit((:TO,"hitme":));
     set_wield((:TO,"wieldme":));
     set_unwield((:TO,"unwieldme":));

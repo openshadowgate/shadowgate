@@ -38,7 +38,7 @@ void create()
     set_property("lore difficulty",25);    
     set_size(1);
     set_property("enchantment",3);
-    set_item_bonus("empowered", 1);
+    set_item_bonus("caster level", 1);
     set_item_bonus("perception", 2);
     set_wear((:TO,"wear_me":));
     set_remove("%^BOLD%^%^BLUE%^You remove the greaves and feel "+

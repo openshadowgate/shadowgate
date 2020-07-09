@@ -54,7 +54,7 @@ void create() {
     set_property("lore difficulty", 25);
     set_property("enchantment", 4);
     set_item_bonus("mental resistance", 10);
-    set_item_bonus("empowered",1);
+    set_item_bonus("caster level",1);
     psion_name = 0;
     stored = 0;
 }

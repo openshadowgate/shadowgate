@@ -130,15 +130,15 @@ void adjust_sash(object who)
     switch (myClass) {
     case "druid": case "cleric":
         set_item_bonus("wisdom", 2);
-        set_item_bonus("empowered", 1);
+        set_item_bonus("caster level", 1);
         break;
     case "mage": case "psion": case "psywarrior":
         set_item_bonus("intelligence", 2);
-        set_item_bonus("empowered", 1);
+        set_item_bonus("caster level", 1);
         break;
     case "sorcerer": case "paladin": case "cavalier": case "bard": case "warlock": case "oracle":
         set_item_bonus("charisma", 2);
-        set_item_bonus("empowered", 1);
+        set_item_bonus("caster level", 1);
         break;
     case "fighter":
         set_item_bonus("strength", 2);

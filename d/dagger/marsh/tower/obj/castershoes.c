@@ -45,7 +45,7 @@ void create(){
    set_type("clothing");
    set_limbs(({"right foot","left foot"}));
    set_size(-1);
-   set_item_bonus("empowered",2);
+   set_item_bonus("caster level",2);
    set_item_bonus("bonus_spell_slots", 2);
    set_property("enchantment",5);
 set_wear((:TO,"wear_func":));

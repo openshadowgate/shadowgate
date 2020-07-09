@@ -32,7 +32,7 @@ void create()
         TO->set_property("enchantment", 5);
     }
     set_item_bonus("spell penetration", 3);
-    set_item_bonus("empowered", 2);
+    set_item_bonus("caster level", 2);
     set_item_bonus("damage resistance", 15);
     set_wear((: TO, "wear_func" :));
     set_remove((: TO, "remove_func" :));

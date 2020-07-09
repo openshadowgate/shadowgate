@@ -20,7 +20,7 @@ void create(){
       TO->remove_property("enchantment");
       TO->set_property("enchantment",4);
    }
-   set_item_bonus("empowered",1);
+   set_item_bonus("caster level",1);
    set_item_bonus("attack bonus",2);
    set_value(3000);
    set_wield((:TO,"wieldme":));

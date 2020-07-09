@@ -50,7 +50,7 @@ void create()
     set_hit((: TO, "hit_func" :));
     set_special_material_type("silver");
     set_item_bonus("magic resistance", 1);
-    set_item_bonus("empowered", 1);
+    set_item_bonus("caster level", 1);
     set_item_bonus("fire resistance", 20);
 }
 

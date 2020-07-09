@@ -79,7 +79,7 @@ void create(){
 
 	set("no curse", 1);
     set_property("enchantment",2);
-    set_item_bonus("empowered", 1);
+    set_item_bonus("caster level", 1);
     set_wield((:TO,"wield_func":));
     set_unwield((:TO,"unwield_func":));
     set_hit((:TO,"hit_func":));

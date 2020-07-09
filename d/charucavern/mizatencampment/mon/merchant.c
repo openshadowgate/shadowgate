@@ -52,7 +52,7 @@ void create()
     ob = new("/d/common/obj/armour/srobe.c");
     ob->set_property("enchantment", 3);
     ob->move(TO);
-    ob->set_item_bonus("empowered", 1);
+    ob->set_item_bonus("caster level", 1);
 
     if(random(4)) ob->set_property("monsterweapon", 1);
 

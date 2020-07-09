@@ -86,7 +86,7 @@ void create()
 
     case 4:
         //sun god
-        set_item_bonus("empowered", 3);
+        set_item_bonus("caster level", 3);
         break;
     }
     switch (head2) {
@@ -112,7 +112,7 @@ void create()
 
     case 4:
         //sun god
-        set_item_bonus("empowered", 3);
+        set_item_bonus("caster level", 3);
         break;
     }
     set_value(0);

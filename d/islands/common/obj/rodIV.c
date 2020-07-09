@@ -45,7 +45,7 @@ void create()
     set_size(1);
     set_prof_type("rod");
     set_item_bonus("spell penetration", 3);
-    set_item_bonus("empowered", 3);
+    set_item_bonus("caster level", 3);
     set_property("able to cast", 1);
     set_property("enchantment", 6);
     //set_weight(12);

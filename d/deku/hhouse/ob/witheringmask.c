@@ -56,7 +56,7 @@ void create()
 
     set_property("lore difficulty", 24);
     set_item_bonus("sight bonus", 2);
-    set_item_bonus("empowered", 2);
+    set_item_bonus("caster level", 2);
     set_type("clothing");
     set_limbs(({"head"}));
     set_property("no curse", 1);
