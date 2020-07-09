@@ -35,7 +35,7 @@ string query_cast_string()
 
 void spell_effect(int prof)
 {
-    object *attackers;
+    object *attackers, room;
     int damage;
 
     attackers = target_selector();
@@ -43,6 +43,7 @@ void spell_effect(int prof)
     attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     attackers = target_filter(attackers);
     attackers = distinct_array(attackers);
+    room = environment(caster);
 
     if(!sizeof(attackers))
     {
@@ -62,7 +63,7 @@ void spell_effect(int prof)
 
         tell_object(caster, "%^BOLD%^Your crystal shrapnel tears into " + ob->QCN);
         tell_object(ob, "%^BOLD%^The crystal shrapnel tears into you!");
-        say("%^BOLD%^The crystal shrapnel tears into " + ob->QCN + "!", ({ ob, caster }));
+        room && tell_room(room, "%^BOLD%^The crystal shrapnel tears into " + ob->QCN + "!", ({ ob, caster }));
         damage_targ(ob, "torso", damage, "piercing");
         spell_kill(ob, caster);
     }
