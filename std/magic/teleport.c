@@ -4,6 +4,8 @@
  * Note that stric types are enabled for this object
  */
 
+#pragma types
+
 #include <std.h>
 
 #pragma strict_types
