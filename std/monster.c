@@ -1801,15 +1801,15 @@ void set_mob_magic_resistance(string perc)
         break;
 
     case "extremely low":
-        modifier = base_level * 85 / 100;
+        modifier = base_level * 70 / 100;
         break;
 
     case "very low":
-        modifier = base_level * 90 / 100;
+        modifier = base_level * 80 / 100;
         break;
 
     case "low":
-        modifier = base_level * 95 / 100;
+        modifier = base_level * 90 / 100;
         break;
 
     case "average":

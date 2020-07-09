@@ -66,7 +66,7 @@ void create(){
    set_hp(query_max_hp());
    set_overall_ac(-20);
    set_exp(1000000);
-   set_mob_magic_resistance("very low");
+   set_mob_magic_resistance("extremely low");
    set_property("spell penetration",50);
    set_property("weapon resistance",4);
    set_property("full attacks",1);
