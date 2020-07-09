@@ -52,7 +52,7 @@ void spell_effect(int prof)
     }
 
     tell_object(caster, "%^BOLD%^You focus your psychic energies and crystalline shrapnel explodes outwards from you!");
-    say(sprintf("%s focuses on %s psychic energies and crystalline shrapnel explodes outwards from %s!",caster->QCN,caster->query_possessive(),caster->query_subjective()));
+    room && tell_room(room, sprintf("%s focuses on %s psychic energies and crystalline shrapnel explodes outwards from %s!",caster->QCN,caster->query_possessive(),caster->query_subjective()), ({ caster }));
 
     damage = sdamage;
 
@@ -61,7 +61,7 @@ void spell_effect(int prof)
         if(do_save(target, 0))
             damage /= 2;
 
-        tell_object(caster, "%^BOLD%^Your crystal shrapnel tears into " + ob->QCN);
+        tell_object(caster, "%^BOLD%^Your crystal shrapnel tears into " + ob->QCN + "!");
         tell_object(ob, "%^BOLD%^The crystal shrapnel tears into you!");
         room && tell_room(room, "%^BOLD%^The crystal shrapnel tears into " + ob->QCN + "!", ({ ob, caster }));
         damage_targ(ob, "torso", damage, "piercing");
