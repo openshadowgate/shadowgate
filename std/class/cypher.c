@@ -98,7 +98,7 @@ string *search_paths(object ob)
 
 int caster_class()
 {
-    return 0;
+    return 1;
 }
 
 string *restricted_races(object ob)
