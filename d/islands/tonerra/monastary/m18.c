@@ -31,11 +31,10 @@ OLI
 
       ]));
    set_exits(([
-      "west":MONASTERY+"m18",
+      "west":MONASTERY+"m4",
       "north":MONASTERY+"m19",
       "south":MONASTERY+"m20",
       ]));
    set_smell("default","An odor of must and dust is dominant here.");
    set_listen("default","You seem to hear long dead whispers.");
 }
-
