@@ -3,7 +3,7 @@
 
 inherit "std/monster";
       void create(){
-      object obj; 
+      object obj;
       ::create();
 	set_name("cleric marionette");
 	set_id(({"marionette","cleric","cleric marionette","+
@@ -54,7 +54,6 @@ inherit "std/monster";
 	obj->set_property("monsterweapon",1);
 	obj->set_property("enchantment",4);
 	obj->move(TO);
-	new("/d/magic/symbols/loviatar_symbol.c")->move(TO);
 	obj=new(OBJ"chessflail");
 	obj->set_property("monsterweapon",1);
 	obj->move(TO);

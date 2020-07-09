@@ -27,7 +27,6 @@ void create() {
    set_class("thief");
    set_race("human");
    set_diety("mask");
-   new("/d/magic/symbols/mask_symbol")->move(TO);
    add_money("gold", random(500));
    set_property("no bump", 1);
    set_hd(19,3);

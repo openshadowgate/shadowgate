@@ -42,9 +42,6 @@ void create(){
 	set_stats("strength",9);
 	set_stats("constitution",8);
 	set_stats("dexterity",14);
-	set_diety("tymora");
-	new("/d/magic/symbols/tymora_symbol.c")->move(TO);
-      force_me("wear symbol");
 	set_spells(({
 	"meteor swarm",
 	"flame strike",

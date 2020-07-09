@@ -46,7 +46,6 @@ void create()
 	set_stats("constitution",8);
 	set_stats("dexterity",14);
 	set_diety("tymora");
-	new("/d/magic/symbols/tymora_symbol.c")->move(TO);
 	set_spells(({
 	"meteor swarm",
 	"flame strike",

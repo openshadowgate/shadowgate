@@ -26,7 +26,6 @@ void create()
   set_diety("selune");
   new("/d/shadow/obj/armor/robe")->move(TO);
   command("wear robe");
-  new("/d/magic/symbols/selune_symbol")->move(TO);
   set_unique(1);
   set_alignment(4);
   remove_std_db();
@@ -57,17 +56,17 @@ void catch_say(string message)
     call_out("do_information",1,TP);
     return 1;
   }
-  else if(strsrch(message,"portals") != -1) 
+  else if(strsrch(message,"portals") != -1)
   {
     call_out("do_portal",1,TP);
     return 1;
   }
-  else if(strsrch(message,"pedestal") != -1) 
+  else if(strsrch(message,"pedestal") != -1)
   {
     call_out("do_ped",1,TP);
     return 1;
   }
-  else if(strsrch(message,"place") != -1) 
+  else if(strsrch(message,"place") != -1)
   {
     call_out("do_place",1,TP);
     return 1;
@@ -214,7 +213,7 @@ void crysin()
 }
 
 void crysin2()
-{ 
+{
   force_me("say Yes!  That's it.  It would appear that you need to "+
 	"%^GREEN%^press%^RESET%^ the crystals until all of them are "+
 	"lit.");
@@ -223,7 +222,7 @@ void crysin2()
 }
 
 void crysin3()
-{ 
+{
   force_me("say That may be easier said than done.  I sense more "+
 	"magics coming from that pedestal...I believe I can make them "+
 	"dim again, but you will have to figure out how to brighten "+

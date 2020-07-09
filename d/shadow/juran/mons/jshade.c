@@ -23,7 +23,6 @@ void create(){
    	set_diety("loviatar");
    	new("/d/shadow/obj/armor/robe")->move(TO);
    	command("wear robe");
-   	new("/d/magic/symbols/loviatar_symbol")->move(TO);
    	set_unique(1);
      	set_alignment(3);
     	remove_std_db();
@@ -40,4 +39,3 @@ void whisper_dead(object who){
    	command("whisper "+who->query_name()+" %^YELLOW%^Pray %^RESET%^ or %^YELLOW%^return%^RESET%^ to get a new body, "
 "and stop your incessant wailing!");
 }
-

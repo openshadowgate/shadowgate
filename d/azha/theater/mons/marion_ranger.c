@@ -3,7 +3,7 @@
 
 inherit "std/monster";
      	void create(){
-      object obj; 
+      object obj;
       ::create();
 	set_name("ranger marionette");
 	set_id(({"marionette","ranger","ranger marionette","+
@@ -52,7 +52,6 @@ inherit "std/monster";
 	obj->set_property("monsterweapon",1);
 	obj->set_property("enchantment",3);
 	obj->move(TO);
-	new("/d/magic/symbols/silvanus_symbol.c")->move(TO);
 	obj=new(OBJ"jadeclaws");
 	obj->set_property("monsterweapon",1);
 	obj->move(TO);
@@ -73,7 +72,7 @@ case 0..3:
 	obj->move(TO);
 	command("wear mask");
 break;
-default: 
+default:
 	obj=new(OBJ"griffonmask");
 	obj->move(TO);
 	command("wear mask");

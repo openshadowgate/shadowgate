@@ -25,9 +25,6 @@ void create(){
    command("wear robe");
    new(OBJ"hand")->move(TO);
    command("wear hand");
-   new("/d/magic/symbols/talos_symbol")->move(TO);
-   present("symbol",TO)->set_property("monsterweapon",1);
-   command("wear symbol");
    set_alignment(9);
    set_gender("female");
    set_spoken("undercommon");
