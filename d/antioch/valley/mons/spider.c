@@ -81,80 +81,14 @@ int bite(object targ)
 
 void web(object targ)
 {
-	int dex, roll, strn, TIME;
-
-	dex = targ->query_stats("dexterity");
-	roll = random(20);
-	strn = targ->query_stats("strength");
-	TIME = 19 - strn;
-
-	if(roll > dex) {
+	if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-11)) {
 		tell_object(targ,"%^BOLD%^%^BLACK%^The spider pushes you"+
 		" into her web!");
 		tell_room(ETO,"%^BOLD%^%^BLACK%^The spider"+
 		" pushes "+targ->query_cap_name()+" into her web!",targ);
-		switch(TIME) {
-			case 1:
-				targ->set_paralyzed(25,"You are stuck in the web!");
-				break;
-			case 2:
-				targ->set_paralyzed(40,"You are stuck in the web!");
-				break;
-			case 3:
-				targ->set_paralyzed(65,"You are stuck in the web!");
-				break;
-			case 4:
-				targ->set_paralyzed(80,"You are stuck in the web!");
-				break;
-			case 5:
-				targ->set_paralyzed(100,"You are stuck in the web!");
-				break;
-			case 6:
-				targ->set_paralyzed(125,"You are stuck in the web!");
-				break;
-			case 7:
-				targ->set_paralyzed(140,"You are stuck in the web!");
-				break;
-			case 8:
-				targ->set_paralyzed(165,"You are stuck in the web!");
-				break;
-			case 9:
-				targ->set_paralyzed(180,"You are stuck in the web!");
-				break;
-			case 10:
-				targ->set_paralyzed(200,"You are stuck in the web!");
-				break;
-			case 11:
-				targ->set_paralyzed(225,"You are stuck in the web!");
-				break;
-			case 12:
-				targ->set_paralyzed(240,"You are stuck in the web!");
-				break;
-			case 13:
-				targ->set_paralyzed(265,"You are stuck in the web!");
-				break;
-			case 14:
-				targ->set_paralyzed(280,"You are stuck in the web!");
-				break;
-			case 15:
-				targ->set_paralyzed(300,"You are stuck in the web!");
-				break;
-			case 16:
-				targ->set_paralyzed(325,"You are stuck in the web!");
-				break;
-			case 17:
-				targ->set_paralyzed(340,"You are stuck in the web!");
-				break;
-			case 18:
-				targ->set_paralyzed(365,"You are stuck in the web!");
-				break;
-			default:
-				targ->set_paralyzed(25,"You are stuck in the web!");
-				break;
-
-			return 1;
+		targ->set_paralyzed(5,"You are stuck in the web!");
+		return 1;
 		}
-	}
 	else {
 		tell_object(targ,"%^BOLD%^You avoid the spider's attempts"+
 		" to stick you in her web.");
