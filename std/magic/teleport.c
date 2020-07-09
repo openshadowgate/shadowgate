@@ -13,9 +13,13 @@
  *
  * To disable rolls use noroll options.
  */
-int object_can_be_teleported(object teleportee, object destination, int clevel, int noroll)
+varargs int object_can_be_teleported(object teleportee, object destination, int clevel, int noroll)
 {
     int roll;
+
+    if (!(teleportee && destination && clevel)) {
+        return 0;
+    }
 
     if (!objectp(destination)) {
         return 0;
