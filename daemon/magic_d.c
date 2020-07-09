@@ -18,6 +18,7 @@
 #include <daemons.h>
 #include <security.h>
 #include <schoolspells.h>
+#include <master_limits.h>
 
 #define CQCN spell->query_caster()->query_cap_name()
 #define VCASTERS ({"bard", "mage", "psion", "cleric", "ranger", "sorcerer", "paladin", "druid", "psywarrior"})
@@ -122,6 +123,10 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
     if (x < 1) {
         return 0;
     }
+    
+    //Checking if discipline spells could actually be cast at current level
+    if(spell_type == "psion" && !PSIONKNOWN[target->query_prestige_level("psion")][spell_level])
+        return 0;
 
     if (spell_type == "monk") {
         if (x >= spell_level) {
