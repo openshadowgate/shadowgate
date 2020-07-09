@@ -4920,10 +4920,10 @@ int race_mod(string stat)
 
         smod = query("stat_mod");
 
-        if (!undefinedp(query("stat_mod")) && smod > -1 && smod < 6) {
+        if (smod > -1 && smod < 6) {
             mystats[smod] += 2;
         } else {
-            mystats[2] += 2;
+            mystats[0] += 2;
         }
     }
 
