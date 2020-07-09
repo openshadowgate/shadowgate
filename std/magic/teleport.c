@@ -8,7 +8,7 @@
 
 #pragma strict_types
 
-int object_can_be_teleported(object teleportee, object destination, int clevel)
+int object_can_be_teleported(object teleportee, object destination, int clevel, int noroll)
 {
     int roll;
 
@@ -30,14 +30,16 @@ int object_can_be_teleported(object teleportee, object destination, int clevel)
         return 0;
     }
 
-    roll = roll_dice(1, 20);
+    if (!noroll) {
+        roll = roll_dice(1, 20);
 
-    if (roll == 1) {
-        return 0;
-    }
+        if (roll == 1) {
+            return 0;
+        }
 
-    if (roll == 20) {
-        return 1;
+        if (roll == 20) {
+            return 1;
+        }
     }
 
     {
@@ -106,9 +108,9 @@ mixed teleport_object(object invoker, mixed teleportee, mixed destination, int c
         return 0;
     }
 
-    /*if (!object_can_be_teleported(tped, destroom, clevel)) { //we don't need to check twice for this
+    if (!object_can_be_teleported(tped, destroom, clevel, 1)) {
         return 0;
-    }*/
+    }
 
     destroom->set_property("recent teleport", ENV(tped));
     ENV(tped)->set_property("recent teleport", destroom);
