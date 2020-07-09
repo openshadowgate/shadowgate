@@ -124,8 +124,8 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
         return 0;
     }
     
-    //Checking if discipline spells could actually be cast at current level
-    if(spell_type == "psion" && !PSIONKNOWN[target->query_prestige_level("psion")][spell_level])
+    //Checking if discipline spells could actually be mastered and cast at current level
+    if(spell_type == "psion" && spell_level > to_int(ceil(to_float(target->query_prestige_level("psion")) / 2.00)))
         return 0;
 
     if (spell_type == "monk") {
