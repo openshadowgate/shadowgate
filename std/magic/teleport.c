@@ -106,9 +106,9 @@ mixed teleport_object(object invoker, mixed teleportee, mixed destination, int c
         return 0;
     }
 
-    if (!object_can_be_teleported(tped, destroom, clevel)) {
+    /*if (!object_can_be_teleported(tped, destroom, clevel)) { //we don't need to check twice for this
         return 0;
-    }
+    }*/
 
     destroom->set_property("recent teleport", ENV(tped));
     ENV(tped)->set_property("recent teleport", destroom);
