@@ -47,8 +47,6 @@ void create(){
    set_stats("constitution",8);
    set_stats("dexterity",14);
    set_property("full attacks",1);
-   set_diety("akadi");
-   new("/d/magic/symbols/akadi_symbol.c")->move(TO);
    set_spells(({
       "meteor swarm",
 	"monster summoning vii",
