@@ -8,6 +8,11 @@
 
 #pragma strict_types
 
+/**
+ * Checks whether object can be teleported, checking against environment and randomness.
+ *
+ * To disable rolls use noroll options.
+ */
 int object_can_be_teleported(object teleportee, object destination, int clevel, int noroll)
 {
     int roll;
@@ -21,7 +26,7 @@ int object_can_be_teleported(object teleportee, object destination, int clevel, 
     if (destination->is_flight_room()) {
         return 0;
     }
-    if (teleportee->query_property("teleport proof") - 9 + random(20) > clevel) {
+    if (teleportee->query_property("teleport proof") - noroll ? 0 : (9 + random(20)) > clevel) {
         return 0;
     }
 
@@ -46,14 +51,17 @@ int object_can_be_teleported(object teleportee, object destination, int clevel, 
         int startpower, endpower;
         startpower = environment(teleportee)->query_property("teleport proof");
         endpower = destination->query_property("teleport proof");
-        if ((clevel - 9 + random(20) < startpower) ||
-            (clevel - 9 + random(20) < endpower)) {
+        if ((clevel - noroll ? 0 : (9 + random(20)) < startpower) ||
+            (clevel - noroll ? 0 : (9 + random(20)) < endpower)) {
             return 0;
         }
     }
     return 1;
 }
 
+/**
+ * Looks for rooms in the same directory.
+ */
 object scatter_destination(mixed destination)
 {
     string fname;
@@ -81,6 +89,9 @@ object scatter_destination(mixed destination)
     return destobj;
 }
 
+/**
+ * Performs teleportation and is bare minimum needed to teleport a player.
+ */
 mixed teleport_object(object invoker, mixed teleportee, mixed destination, int clevel)
 {
     object tped, destroom;
