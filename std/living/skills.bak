@@ -345,11 +345,6 @@ int query_skill(string skill)
         x += 5;
     }
 
-    if(skill == "endurance" && FEATS_D->usable_feat(TO, "rangers endurance"))
-    {
-        x += 10;
-    }
-
     mymod = ((int)this_object()->query_stats(mystat) - 10) / 2;
     x += mymod;
     x += query_skill_bonus(skill);
