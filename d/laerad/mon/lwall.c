@@ -19,7 +19,7 @@ void create()
         );
     set_body_type("human");
     set_size(3);
-    set_race("wall");
+    set_race("construct");
     set_gender("neuter");
     hitd = 14;
     set_hd(hitd, 2);
