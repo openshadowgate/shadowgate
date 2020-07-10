@@ -107,6 +107,10 @@ mixed* genoutput(object targ)
             output += ({ ({ "Monk Way", "%^BOLD%^%^CYAN%^" + capitalize(targ->query("monk way")) }) });
         }
     }
+    if(targ->is_class("ranger")) {
+        output += ({ ({ "Favored Enemy", implode(targ->query_favored_enemies(), "/") }) });
+        output += ({ ({ "Favored Terrain", implode(targ->query_favored_terrains(), "/") }) });
+    }   
 
     if (sizeof(targ->query_divine_domain())) {
         output += ({ ({ "Divine Domain", "%^BOLD%^%^WHITE%^" + implode(targ->query_divine_domain(), "/") }) });

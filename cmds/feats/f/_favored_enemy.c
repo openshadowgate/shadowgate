@@ -31,7 +31,7 @@ void create()
 fighting an enemy type of their choice. The ranger will recieve a +2 bonus to\
 attack and damage rolls while fighting their favored enemy.\
 You can select from the following favored enemies: \n\n" + implode(valid_choices, "\n") +
-"\n\To start selection process type <favored enemy>.");
+"\n\n\To start selection process type <favored enemy>.");
     allow_tripped(1);
 }
 
@@ -60,7 +60,7 @@ int execute_feat()
 {
     ::execute_feat();
     
-    if(!arg && this_player()->query_favored_enemy(1))
+    if(!arg)
     {
         write("Your first favored enemy is: " + this_player()->query_favored_enemy(1));
         return 1;
