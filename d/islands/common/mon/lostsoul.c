@@ -19,7 +19,7 @@ void create() {
     set_hp(140);
     set_wielding_limbs(({"right hand","left hand"}));
     set_body_type("humanoid");
-    set_race("entity");
+    set_race("undead");
     set_property("full attacks",1);
     set_property("swarm",1);
     set_moving( 1 );
@@ -57,12 +57,12 @@ void init(){
         kill_ob(TP,1);
     }
 }
-void die(object ob) 
+void die(object ob)
 {
     string area;
-    
+
     if(objectp(ETO)) tell_room(ETO, "Lost soul collapses.\n%^BOLD%^A brilliant light speeds upwards from the center of the entity.");
-    
+
     if(objectp(ETO))
     {
         area = base_name(ETO);
@@ -70,7 +70,7 @@ void die(object ob)
         {
             "/d/islands/common/eldebaro/kill_tracker_d.c"->register_death(all_living(ETO));
         }
-    }    
+    }
     ::die(ob);
 }
 void desoul(object targ) {
