@@ -30,8 +30,8 @@ void create()
     feat_desc("This feat allows a ranger to focus their knowledge and training\
 fighting an enemy type of their choice. The ranger will recieve a +2 bonus to\
 attack and damage rolls while fighting their favored enemy.\
-You can select from the following favored enemies: \n" + implode(valid_choices, "\n") +
-"To start selection process type <favored enemy>.");
+You can select from the following favored enemies: \n\n" + implode(valid_choices, "\n") +
+"\n\To start selection process type <favored enemy>.");
     allow_tripped(1);
 }
 
@@ -60,7 +60,7 @@ int execute_feat()
 {
     ::execute_feat();
     
-    if(!arg)
+    if(!arg && this_player()->query_favored_enemy(1))
     {
         write("Your first favored enemy is: " + this_player()->query_favored_enemy(1));
         return 1;
@@ -78,8 +78,7 @@ int execute_feat()
         return 1;
     }
     
-    write("You have selected " + arg + " as a favored enemy. Type <yes> to confirm.
-Anything else will abort.");
+    write("You have selected " + arg + " as a favored enemy. Type <yes> to confirm. Anything else will abort.");
     input_to("confirm_selection", 0);
     
     return 1;
