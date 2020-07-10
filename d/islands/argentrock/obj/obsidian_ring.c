@@ -2,7 +2,7 @@
 
 #include <std.h>
 
-inherit ARMOUR;
+inherit "/d/common/obj/jewelry/ring.c";
 
 int used,max_uses,ok_to_use,current_hp;
 
@@ -14,10 +14,7 @@ void create(){
    set("long","This is a glassy black ring. It is made of volcanic glass "+
        "hardly seen in this realm. A small aura of magic radiates from the "+
       "ring. A small inscription is carved inside the band.");
-   set_type("clothing");
-   set_ac(0);
    set_limbs( ({"left hand","right hand"}) );
-   set_weight(5);
    set_value(6000);
    set_wear( (: TO,"more_wear" :) );
    set_remove( (: TO,"more_remove" :) );
@@ -26,7 +23,7 @@ void create(){
    ok_to_use = 0;
    used = 0;
    call_out("set_max_uses",1);
-   set_property("empowered",1);
+   set_item_bonus("empowered",2);
 }
 
 void set_max_uses() {
