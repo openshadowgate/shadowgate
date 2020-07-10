@@ -7,7 +7,8 @@
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/reflex strong, will weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, endurance, stealth, survival
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
- %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon proficiency, shield proficiency, track
+ %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon proficiency, shield proficiency, track, favored enemy
+ %^RESET%^L3: rangers endurance, favored terrain
  %^RESET%^L4: animal companion
  %^RESET%^L9: evasion
  %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter

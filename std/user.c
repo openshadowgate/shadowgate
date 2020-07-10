@@ -5159,10 +5159,13 @@ int is_favored_enemy(object ob)
     
     foreach(string favored_type in favored_enemy)
     {
-        foreach(string id in ids)
+        if(strlen(favored_type) && favored_type != "none")
         {
-            if(member_array(id, VALID_ENEMY[favored_type]) > -1)
-                return 1;
+            foreach(string id in ids)
+            {
+                if(member_array(id, VALID_ENEMY[favored_type]) > -1)
+                    return 1;
+            }
         }
     }
     
@@ -5183,8 +5186,11 @@ int is_favored_terrain(object room)
     
     foreach(string terrain in favored_terrain)
     {
-        if(member_array(type, VALID_TERRAIN[terrain]) > -1)
-            return 1;
+        if(strlen(terrain) && terrain != "none")
+        {
+            if(member_array(type, VALID_TERRAIN[terrain]) > -1)
+                return 1;
+        }
     }
     
     return 0;
