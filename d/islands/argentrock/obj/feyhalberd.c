@@ -87,15 +87,15 @@ int extra_hit(object targ)
                                 }
         return roll_dice(2,6);
   }
-  // possess a tree
+  // fey spirit comes and helps 
     if (member_array(EETO->query_terrain(),({"heavy forest",
     "lightforest","jungle","branches"})) != -1 &&
-        !present("tree",EETO))
-        {  tell_room(EETO,"A blue haze shoots from one of the sapphires in "
-           +ETO->QCN+"'s glaive into a nearby tree",({ETO}));
-        tell_object(ETO,"A soul comes out from one"+
-         " of the saphires on your weapon and posseses a tree.");
-        tree =new(MON+"tree");
+        !present("feyspirit",EETO))
+        {  tell_room(EETO,"A blue haze shoots from"
+           +ETO->QCN+"'s halberd and a glowing light comes to aid you.",({ETO}));
+        tell_object(ETO,"A fey spirit "+
+         " comes to your aid.");
+        tree =new(MON+"feyspirit");
         tree ->move(environment(ETO));
         ETO->add_protector(tree);
         tree ->force_me("kill "+targ->query_name());
