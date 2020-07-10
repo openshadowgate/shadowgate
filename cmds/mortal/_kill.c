@@ -1,4 +1,5 @@
 #include <std.h>
+#include <daemons.h>
 
 inherit DAEMON;
 
@@ -7,7 +8,7 @@ int help();
 int cmd_kill(string str)
 {
     object victim;
-    int retvalue;   /* return value */
+    int retvalue;   /* return value * / /* ORLY? */
     int i;
 
     if (this_player()->query_ghost()) {
@@ -21,7 +22,18 @@ int cmd_kill(string str)
     }
 
     if (!str) {
-        object * livings = all_living(ETP) - ({TP}) - TP->query_followers();
+        object * livings;
+
+        livings = all_living(ETP);
+        livings -= ({TP}) - TP->query_followers();
+
+        if (TP->query_party()) {
+            object * party;
+
+            party = PARTY_D->query_party_members(TP->query_party());
+            livings -= party;
+            livings -= collapse_array(party->query_followers());
+        }
 
         if (sizeof(livings)) {
             victim = livings[random(sizeof(livings))];
