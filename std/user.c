@@ -66,7 +66,7 @@ int start_age, pheight, pweight;
 private string position, primary_start;
 //private nosave string *channels;
 string *restricted_channels;
-string *favored_enemies, *favored_terrain;
+mapping favored_enemy, favored_terrain;
 mapping mini_quests;
 string *quests;
 string *mysites;
@@ -161,10 +161,10 @@ int advance_death_time()
 //Favored Ranger stuff
 int is_favored_enemy(object ob);
 int is_favored_terrain(object room);
-int add_favored_enemy(string str);
-int remove_favored_enemy(string str);
-int add_favored_terrain(string str);
-int remove_favored_terrain(string str);
+int add_favored_enemy(int x, string str);
+int remove_favored_enemy(int x);
+int add_favored_terrain(int x, string str);
+int remove_favored_terrain(int x);
 
 // *** END OF PROTOTYPING ** (gar)
 
@@ -5072,52 +5072,59 @@ int test_passive_perception()
     return 1;
 }
 
-int add_favored_enemy(string str)
+int set_favored_enemy(int x, string str)
 {
     if(member(str, keys(VALID_ENEMY) < -1))
         return 0;
     
-    favored_enemies += ({ str });
+    x = min( ({ x, 3 }) );
+    
+    if(!favored_enemy[x])
+        favored_enemy += ([ x : str, ]);
+    else
+        favored_enemy[x] = str;
     
     return 1;
 }
 
-int remove_favored_enemy(string str)
-{
-    if(member(str, favored_enemies < -1))
-        return 0;
-    
-    favored_enemies -= ({ str });
-    
+int remove_favored_enemy(int x)
+{      
+    map_delete(favored_enemy, x);
     return 1;
 }
 
-int add_favored_terrain(string str)
+int set_favored_terrain(int x, string str)
 {
     if(member(str, keys(VALID_TERRAIN) < -1))
         return 0;
+
+    x = max( ({ min( ({ x, 3 }) ), 1 }) );
     
-    favored_terrain += ({ str });
+    if(!favored_terrain[x])
+        favored_terrain += ([ x : str, ]);
+    else
+        favored_terrain[x] = str;
     
     return 1;
 }
 
-int remove_favored_terrain(string str)
+int remove_favored_terrain(int x)
 {
-    if(member(str, favored_terrain < -1))
-        return 0;
-    
-    favored_terrain -= ({ str });
-    
+    map_delete(favored_enemy, x);
     return 1;
 }
 
 int is_favored_enemy(object ob)
 {
-    string *ids;
+    string *ids, *favored_enemies;
     
     if(!ob && !objectp(ob))
         return 0;
+    
+    favored_enemies = ({ });
+    favored_enemies += ({ favored_enemy[1] });
+    favored_enemies += ({ favored_enemy[2] });
+    favored_enemies += ({ favored_enemy[3] });
     
     ids = ob->query_id();
     ob->query_race() && ids += ({ ob->query_race() });
@@ -5139,9 +5146,14 @@ int is_favored_enemy(object ob)
 int is_favored_terrain(object room)
 {
     string type;
+    string *favored_terrains = ({  });
     
     if(!room || !objectp(room))
         return 0;
+    
+    favored_terrains += ({ favored_terrain[1] });
+    favored_terrains += ({ favored_terrain[2] });
+    favored_terrains += ({ favored_terrain[3] });
     
     type = room->query_terrain();
     
