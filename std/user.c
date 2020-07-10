@@ -5075,7 +5075,7 @@ int test_passive_perception()
 
 int set_favored_enemy(int x, string str)
 {
-    if(member(str, keys(VALID_ENEMY) < -1))
+    if(member_array(str, keys(VALID_ENEMY)) < 0)
         return 0;
     
     if(x < 1 || x > 3)
@@ -5096,7 +5096,7 @@ int remove_favored_enemy(int x)
 
 int set_favored_terrain(int x, string str)
 {
-    if(member(str, keys(VALID_TERRAIN) < -1))
+    if(member_array(str, keys(VALID_TERRAIN)) < 0)
         return 0;
 
     if(x > 3 || x < 1)
@@ -5131,8 +5131,19 @@ string query_favored_terrain(int x)
     return favored_terrain[x - 1];
 }
 
-string *query_favored_enemies() { return favored_enemy; }
-string *query_favored_terrains() { return favored_terrain; }
+string *query_favored_enemies() { 
+    if(!sizeof(favored_enemy))
+        favored_enemy = ({ "none", "none", "none" });
+    
+    return favored_enemy;
+}
+
+string *query_favored_terrains() {
+    if(!sizeof(favored_terrain))
+        favored_terrain = ({ "none", "none", "none" });
+    
+    return favored_terrain;
+}
 
 int is_favored_enemy(object ob)
 {

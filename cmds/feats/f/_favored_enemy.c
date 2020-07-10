@@ -26,7 +26,7 @@ void create()
     feat_category("WildernessLore");
     feat_name("favored enemy");
     feat_prereq("Ranger L1");
-    feat_syntax("favored enemy [TYPE]");
+    feat_syntax("favored_enemy [TYPE]");
     feat_desc("This feat allows a ranger to focus their knowledge and training\
 fighting an enemy type of their choice. The ranger will recieve a +2 bonus to\
 attack and damage rolls while fighting their favored enemy.\

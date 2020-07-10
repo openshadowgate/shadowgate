@@ -108,8 +108,8 @@ mixed* genoutput(object targ)
         }
     }
     if(targ->is_class("ranger")) {
-        output += ({ ({ "Favored Enemy", implode(targ->query_favored_enemies(), "/") }) });
-        output += ({ ({ "Favored Terrain", implode(targ->query_favored_terrains(), "/") }) });
+        output += ({ ({ "Favored Enemy", "%^BOLD%^CYAN%^" + implode(targ->query_favored_enemies(), "/") }) });
+        output += ({ ({ "Favored Terrain", "%^BOLD%^CYAN%^" + implode(targ->query_favored_terrains(), "/") }) });
     }   
 
     if (sizeof(targ->query_divine_domain())) {
