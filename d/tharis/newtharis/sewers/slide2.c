@@ -39,13 +39,13 @@ void init()
 {
     ::init();
 
-    /*tell_room(TO, "%^BOLD%^%^BLUE%^SPOOOOOOOOOOSH!!!!!");
-       write("%^BOLD%^%^YELLOW%^You land heavily in " + water_level + " feet of water.");
-       tell_room(TO, "%^BOLD%^" + TPQCN + " lands heavily next to you!", TP);
-       TP->add_attacker(TO);
-       TP->do_damage("torso", random(20));
-       TP->continue_attack();
-       TP->remove_attack(TO);*/
+    tell_room(TO, "%^BOLD%^%^BLUE%^SPOOOOOOOOOOSH!!!!!");
+    write("%^BOLD%^%^YELLOW%^You land heavily in " + water_level + " feet of water.");
+    tell_room(TO, "%^BOLD%^" + TPQCN + " lands heavily next to you!", TP);
+    TP->add_attacker(TO);
+    TP->do_damage("torso", random(20));
+    TP->continue_attack();
+    TP->remove_attack(TO);
     add_action("swim", "swim");
     add_action("plugem", "plug");
     add_action("get_stop", "get");
