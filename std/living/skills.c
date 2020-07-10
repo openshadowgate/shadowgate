@@ -349,6 +349,16 @@ int query_skill(string skill)
     {
         x += 10;
     }
+    
+    if( (skill == "perception" || skill == "survival" || skill == "stealth") && FEATS_D->usable_feat(TO, "favored terrain") )
+    {
+        if(TO->is_favored_terrain(environment(TO)))
+        {
+            x += 2;
+            x += (FEATS_D->usable_feat(TO, "second favored terrain") * 2);
+            x += (FEATS_D->usable_feat(TO, "third favored terrain") * 2);
+        }
+    }
 
     mymod = ((int)this_object()->query_stats(mystat) - 10) / 2;
     x += mymod;
