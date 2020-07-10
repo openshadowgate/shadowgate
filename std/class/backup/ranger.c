@@ -46,21 +46,21 @@ string *class_feats(string myspec) {
 mapping class_featmap(string myspec)   // "dual wield" is default setting
 {
     if (!myspec || myspec == "") {
-        return ([ 1 : ({ "favored enemy", "ambidexterity", "light armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }), ]);
+        return ([ 1 : ({ "ambidexterity", "light armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }), ]);
     }
 
     switch (myspec) {
     case "archery":
-        return ([ 1 : ({ "favored enemy", "point blank shot", "light armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance" }), 4 : ({ "animal companion" }), 5 : ({ "manyshot" }), 9 : ({ "deadeye", "evasion" }), 13 : ({ "preciseshot" }), 17 : ({ "shot on the run" }), ]);
+        return ([ 1 : ({ "point blank shot", "light armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance" }), 4 : ({ "animal companion" }), 5 : ({ "manyshot" }), 9 : ({ "deadeye", "evasion" }), 13 : ({ "preciseshot" }), 17 : ({ "shot on the run" }), ]);
         break;
     case "twohanded":
-        return ([ 1 : ({ "favored enemy", "sweepingblow", "light armor proficiency","shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance" }), 4 : ({ "animal companion" }), 5 : ({ "blade block" }), 9 : ({ "impale", "evasion" }), 13 : ({ "light weapon" }), 17 : ({ "strength of arm" }), ]);
+        return ([ 1 : ({ "sweepingblow", "light armor proficiency","shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance" }), 4 : ({ "animal companion" }), 5 : ({ "blade block" }), 9 : ({ "impale", "evasion" }), 13 : ({ "light weapon" }), 17 : ({ "strength of arm" }), ]);
         break;
     case "mounted":
-        return ([ 1 : ({ "favored enemy", "mounted combat", "light armor proficiency","shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance" }), 4 : ({ "animal companion" }), 5 : ({ "ride-by attack" }), 9 : ({ "charge", "evasion" }), 13 : ({ "trample" }), 17 : ({  }), ]);
+        return ([ 1 : ({ "mounted combat", "light armor proficiency","shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance" }), 4 : ({ "animal companion" }), 5 : ({ "ride-by attack" }), 9 : ({ "charge", "evasion" }), 13 : ({ "trample" }), 17 : ({  }), ]);
         break;
     default:
-        return ([ 1 : ({ "favored enemy", "ambidexterity", "light armor proficiency","shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }), ]);
+        return ([ 1 : ({ "ambidexterity", "light armor proficiency","shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 9 : ({ "two weapon fighting", "evasion" }), 13 : ({ "improved two weapon fighting" }), 17 : ({ "unassailable parry" }), ]);
         break;
     }
 }
