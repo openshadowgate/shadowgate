@@ -1714,9 +1714,8 @@ void add_damage_bonus(int a)
 int query_attack_bonus()
 {
     int enc, bonus;
-    int ret, x, favored;
+    int ret, x;
     object* weap;
-    object attacker;
 
     weap = TO->query_wielded();
     for (x = 0; x < sizeof(weap); x++) {
@@ -1743,22 +1742,6 @@ int query_attack_bonus()
     if (FEATS_D->usable_feat(TO, "epic weapon focus")) {
         ret += 2;
     }
-    
-    //Added by Tlaloc to handle favored enemies for Rangers
-    if (FEATS_D->usable_feat(TO, "favored enemy"))
-    {
-        attacker = TO->query_current_attacker();
-        attacker && favored = TO->is_favored_enemy(attacker);
-        
-        if(favored)
-        {
-            ret += 2;
-            
-            //Favored enemy improves with additional feats
-            FEATS_D->usable_feat(TO, "second favored enemy") && ret += 2;
-            FEATS_D->usable_feat(TO, "third favored enemy") && ret += 2;
-        }
-    }
 
     if (FEATS_D->usable_feat(TO, "true strikes") &&
         sizeof(TO->query_wielded()) == 1) {
@@ -1770,9 +1753,8 @@ int query_attack_bonus()
 int query_damage_bonus()
 {
     int enc, bonus;
-    int ret, x, favored;
+    int ret, x;
     object* weap;
-    object attacker;
 
     bonus = dbonus;
     ret = bonus;// + enc;
@@ -1791,22 +1773,6 @@ int query_damage_bonus()
 
     if (FEATS_D->usable_feat(TO, "epic weapon specialization")) {
         ret += 4;
-    }
-    
-    //Added by Tlaloc to handle favored enemies for Rangers
-    if (FEATS_D->usable_feat(TO, "favored enemy"))
-    {
-        attacker = TO->query_current_attacker();
-        attacker && favored = TO->is_favored_enemy(attacker);
-        
-        if(favored)
-        {
-            ret += 2;
-            
-            //Favored enemy improves with additional feats
-            FEATS_D->usable_feat(TO, "second favored enemy") && ret += 2;
-            FEATS_D->usable_feat(TO, "third favored enemy") && ret += 2;
-        }
     }
 
     return ret;
