@@ -5178,6 +5178,9 @@ int is_favored_terrain(object room)
     
     type = room->query_terrain();
     
+    if(!type || !strlen(type))
+        return 0;
+    
     foreach(string terrain in favored_terrain)
     {
         if(member_array(type, VALID_TERRAIN[terrain]) > -1)
