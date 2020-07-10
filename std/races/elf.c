@@ -42,17 +42,12 @@ string* restricted_classes(string subrace)
     }
     switch (subrace) {
     case "aquatic elf": return ({ "paladin", "inquisitor", "cleric" }); break;
-
     case "fey'ri": return ({ "psion", "psywarrior", "monk", "druid" }); break;
-
     case "sun elf": return ({ "psion", "psywarrior", "monk", "druid" }); break;
-
+    case "sildruath": return ({ "psion", "psywarrior", "paladin", "monk", "barbarian", "paladin"}); break;
     case "szarkai": return ({ "psion", "psywarrior", "paladin", "monk", "druid" }); break;
-
     case "wild elf": return ({ "bard", "mage", "psion", "psywarrior", "paladin", "monk", "inquisitor" }); break;
-
     case "wood elf": return ({ "mage", "psion", "psywarrior", "paladin", "monk" }); break;
-
     default: return ({ "psion", "psywarrior", "paladin", "monk" }); break;
     }
 }
@@ -60,16 +55,7 @@ string* restricted_classes(string subrace)
 // this only affects rolling in creation; does not prevent dedication to a deity in-game, to allow for character evolution. N, 3/16.
 string* restricted_deities(string subrace)
 {
-    if (!subrace || subrace == "") {
-        return ({ "shar", "mask", "bane", "beshaba", "cyric", "auril", "talos" });
-    }
-    switch (subrace) {
-    case "fey'ri": return ({ "anhur", "helm", "lathander", "mielikki", "oghma", "selune", "sune", "torm", "tymora", "tyr" }); break;
-
-    case "szarkai": return ({ "anhur", "helm", "lathander", "mielikki", "oghma", "sune", "torm", "tymora", "tyr" }); break;
-
-    default: return ({ "shar", "mask", "bane", "beshaba", "cyric", "auril", "talos" }); break;
-    }
+    return ({});
 }
 
 int* stat_mods(string subrace)   // stats in order: str, dex, con, int, wis, cha
@@ -81,13 +67,10 @@ int* stat_mods(string subrace)   // stats in order: str, dex, con, int, wis, cha
     case "aquatic elf": return ({ 0, 2, -2, 2, 0, 0 }); break;
 
     case "fey'ri": return ({ 0, 2, -2, 2, 0, 0 }); break;
-
     case "sun elf": return ({ 0, 0, -2, 2, 0, 2 }); break;
-
+    case "sildruath": return ({ 0, 4, -4, 0, 2, 0 }); break;
     case "szarkai": return ({ 0, 2, -2, 2, 0, 0 }); break;
-
     case "wild elf": return ({ 2, 2, 0, 0, 0, -2 }); break;
-
     case "wood elf": return ({ 2, 2, 0, -2, 0, 0 }); break;
 
     default: return ({ 0, 2, -2, 2, 0, 0 }); break;   //moon elf default
@@ -101,29 +84,16 @@ mapping skill_mods(string subrace)
     }
     switch (subrace) {
     case "aquatic elf": return ([ "perception" : 2]); break;
-
     case "fey'ri": return ([ "perception" : 2]); break;
-
     case "szarkai": return ([ "perception" : 2]); break;
-
+    case "sildruath":return (["perception":2, "athletics":2]);break;
     default: return ([ "perception" : 2 ]); break;
     }
 }
 
 int level_adjustment(string subrace)
 {
-    if (!subrace || subrace == "") {
-        return 0;
-    }
-    switch (subrace) {
-    case "aquatic elf": return 0; break;
-
-    case "szarkai": return 0; break;
-
-    case "fey'ri": return 0; break;
-
-    default: return 0; break;
-    }
+    return 0;
 }
 
 int natural_AC(string subrace)
@@ -367,6 +337,9 @@ string* query_hair_colors(string subrace)
     if (subrace == "szarkai") {
         choices += ({ "white", "silver", "bald" });
     }
+    if (subrace == "sildruath") {
+        choices += ({ "white", "silver", "bald", "cyan", "black", "ebony", "red"});
+    }
     if (subrace == "wood elf" || subrace == "wild elf") {
         choices += ({ "golden", "crimson", "scarlet", "auburn", "ebony" });
         choices += ({ "red", "blonde", "sable" });
@@ -391,7 +364,12 @@ string* query_eye_colors(string subrace, int cha)
     if (subrace == "szarkai") {
         choices += ({ "violet", "purple" });
         choices += ({ "red" });
-    }else if (subrace == "wood elf" || subrace == "wild elf") {
+    }
+    if (subrace == "sildruath") {
+        choices += ({ "silver", "blue" });
+        choices += ({ "emerald", "sapphire", "azure", "cyan"});
+    }
+    if (subrace == "wood elf" || subrace == "wild elf") {
         choices += ({ "emerald", "sable" });
         choices += ({ "brown", "green", "hazel" });
     }
@@ -406,7 +384,7 @@ string* query_subraces(object who)
         OB_ACCOUNT->is_high_mortal(who->query_true_name()) ||
         avatarp(who) ||
         who->query("is_valid_npc")) {
-        subraces += ({ "wild elf", "fey'ri", "szarkai", "aquatic elf" });
+        subraces += ({ "wild elf", "fey'ri", "szarkai", "aquatic elf", "sildruath"});
     }
     return subraces;
 }
@@ -417,6 +395,7 @@ int is_pk_race(string subrace)
         return 0;
     }
     if (subrace == "fey'ri" ||
+        subrace == "sildruath" ||
         subrace == "szarkai") {
         return 1;
     }
@@ -427,22 +406,22 @@ string* query_languages(string subrace)
     switch (subrace) {
     case "szarkai":
         return (["required" : ({ "drow", "undercommon" }), "optional" : ({ "elven", "common", "orcish", })]);
-
         break;
 
     case "fey'ri":
         return (["required" : ({ "abyssal", "common" }), "optional" : ({ "drow", "undercommon", "orcish", "elven" })]);
+        break;
 
+    case "sildruath":
+        return (["required" : ({ "auran", "common"}), "optional" : ({ "sylvan", "elven", "drow", "celestial", "orcish", "giant"})]);
         break;
 
     case "aquatic elf":
         return (["required" : ({ "aquan", "common" }), "optional" : ({ "elven", "drow", })]);
-
         break;
 
     default:
         return (["required" : ({ "elven", "common" }), "optional" : ({ "halfling", "gnomish", "orcish", })]);
-
         break;
     }
 }
