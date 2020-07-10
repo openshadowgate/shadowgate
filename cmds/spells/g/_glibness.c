@@ -35,8 +35,6 @@ int preSpell()
 
 spell_effect()
 {
-    target = caster;
-
     spell_successful();
     tell_object(target, "%^MAGENTA%^You feel insight into the desires of others fill your mind.%^RESET%^");
     tell_room(place, "%^MAGENTA%^" + caster->QCN + " touches " + caster->QP + " temples, chanting in low undertones.%^RESET%^");
