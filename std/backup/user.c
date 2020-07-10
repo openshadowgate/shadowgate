@@ -22,7 +22,6 @@
 #include <class_types.h>
 #include <domination.h>
 #include <dieties.h>
-#include <favored_types.h>
 
 inherit "/std/user/more";
 
@@ -66,7 +65,6 @@ int start_age, pheight, pweight;
 private string position, primary_start;
 //private nosave string *channels;
 string *restricted_channels;
-string *favored_enemies, *favored_terrain;
 mapping mini_quests;
 string *quests;
 string *mysites;
@@ -157,14 +155,6 @@ int advance_death_time()
     death_time = time() + PK_DEATH_RL_TIME;
     return 1;
 }
-
-//Favored Ranger stuff
-int is_favored_enemy(object ob);
-int is_favored_terrain(object room);
-int add_favored_enemy(string str);
-int remove_favored_enemy(string str);
-int add_favored_terrain(string str);
-int remove_favored_terrain(string str);
 
 // *** END OF PROTOTYPING ** (gar)
 
@@ -5071,87 +5061,3 @@ int test_passive_perception()
     }
     return 1;
 }
-
-int add_favored_enemy(string str)
-{
-    if(member(str, keys(VALID_ENEMY) < -1))
-        return 0;
-    
-    favored_enemies += ({ str });
-    
-    return 1;
-}
-
-int remove_favored_enemy(string str)
-{
-    if(member(str, favored_enemies < -1))
-        return 0;
-    
-    favored_enemies -= ({ str });
-    
-    return 1;
-}
-
-int add_favored_terrain(string str)
-{
-    if(member(str, keys(VALID_TERRAIN) < -1))
-        return 0;
-    
-    favored_terrain += ({ str });
-    
-    return 1;
-}
-
-int remove_favored_terrain(string str)
-{
-    if(member(str, favored_terrain < -1))
-        return 0;
-    
-    favored_terrain -= ({ str });
-    
-    return 1;
-}
-
-int is_favored_enemy(object ob)
-{
-    string *ids;
-    
-    if(!ob && !objectp(ob))
-        return 0;
-    
-    ids = ob->query_id();
-    ob->query_race() && ids += ({ ob->query_race() });
-    if(ob->is_undead())
-        ids += ({ "undead" });
-    
-    foreach(string favored_type in favored_enemies)
-    {
-        foreach(string id in ids)
-        {
-            if(member_array(id, VALID_ENEMY[favored_type] > -1))
-                return 1;
-        }
-    }
-    
-    return 0;
-}
-
-int is_favored_terrain(object room)
-{
-    string type;
-    
-    if(!room || !objectp(room))
-        return 0;
-    
-    type = room->query_terrain();
-    
-    foreach(string terrain in favored_terrain)
-    {
-        if(member_array(type, VALID_TERRAIN[terrain]) > -1)
-            return 1;
-    }
-    
-    return 0;
-}
-    
-    
