@@ -5152,6 +5152,9 @@ int is_favored_enemy(object ob)
     if(!ob && !objectp(ob))
         return 0;
     
+    if(!sizeof(favored_enemy))
+        return 0;
+    
     ids = ob->query_id();
     ob->query_race() && ids += ({ ob->query_race() });
     if(ob->is_undead())
@@ -5176,7 +5179,7 @@ int is_favored_terrain(object room)
 {
     string type;
     
-    if(!room || !objectp(room))
+    if(!room || !objectp(room) || !sizeof(favored_terrain))
         return 0;
     
     type = room->query_terrain();
