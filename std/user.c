@@ -5161,7 +5161,7 @@ int is_favored_enemy(object ob)
     {
         foreach(string id in ids)
         {
-            if(member_array(id, VALID_ENEMY[favored_type] > -1))
+            if(member_array(id, VALID_ENEMY[favored_type]) > -1)
                 return 1;
         }
     }
