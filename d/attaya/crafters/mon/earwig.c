@@ -67,7 +67,7 @@ void sting(object targ) {
         targ->add_poisoning(50);
         tell_object(targ,
    "You feel a horrible numbness in your body as the poison takes effect.");
-        targ->set_paralyzed(random(30)+10,
+        //targ->set_paralyzed(random(30)+10,
    "You are paralyzed.");
    } else {
         targ->do_damage("torso",roll_dice(2,6));
