@@ -188,7 +188,7 @@ int extra_wield() { // only part elven
 	   "  \n %^RED%^They cut into you terribly.");
 	   ETO->set_paralyzed(10,"You can't move!");
        ETO->set_bound(50,"Brambles bind you fast.");
-	   ETO->do_damage(100);
+	   ETO->cause_typed_damage(ETO, ETO->return_target_limb(),200, "piercing");
 	   return 0;
 	   }
     return 1;
