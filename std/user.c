@@ -5110,8 +5110,18 @@ int set_favored_terrain(int x, string str)
 
 int remove_favored_terrain(int x)
 {
-    map_delete(favored_enemy, x);
+    map_delete(favored_terrain, x);
     return 1;
+}
+
+string query_favored_enemy(int x)
+{
+    return favored_enemy[x];
+}
+
+string query_favored_terrain(int x)
+{
+    return favored_terrain[x];
 }
 
 int is_favored_enemy(object ob)
