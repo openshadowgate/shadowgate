@@ -30,7 +30,7 @@ void create(){
     set_unwield((: TO, "extra_unwield" :));
     set_property("enchantment",5);
     set_item_bonus("attack bonus",3);
-    set_item_bonus("negative energy resistance", 20)
+    set_item_bonus("negative energy resistance", 20);
 }
 
 void mess() {
@@ -98,7 +98,6 @@ int extra_hit(object targ)
         tree =new(MON+"feyspirit");
         tree ->move(environment(ETO));
         ETO->add_protector(tree);
-        tree ->force_me("kill "+targ->query_name());
         ETO->add_follower(tree);
          return 1;
         }
@@ -129,11 +128,13 @@ new("/cmds/spells/t/_thorn_spray")->use_spell(ETO,targ,15,100,"cleric");
 
 
 int extra_wield() { // only part elven
-    int racey;
+    int myalign;
+    //if(!interactive(ETO) || avatarp(ETO) )
+    //  return 1;
+
     if (!ETO) return 0;
-        racey=ETO->query_race();
- if(member_array(racey,({"elf","half-elf","drow",
-        "half-drow", "voadkyn" })) != -1){
+    myalign = (int)ETO->query_alignment();
+    if((myalign % 3) == 1) {
                 write(
             "As you wield the glaive, visions "+
             "of a desperate battle fill your head,"+
@@ -155,9 +156,11 @@ tightly.");
            write("The glaive juts out brambles that bind"+
            " you fast when you place your hand on it."+
            "  \n They cut into you terribly.");
-           ETO->set_paralyzed(10,"You can't move!");
+       ETO->set_paralyzed(10,"You can't move!");
        ETO->set_bound(150,"Brambles bind you fast.");
-           ETO->do_damage(100);
+       ETO->cause_typed_damage(ETO, ETO->return_target_limb(),200, "piercing");
+
+       ETO->do_damage(100);
            return 0;
            }
     return 1;
