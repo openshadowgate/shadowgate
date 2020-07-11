@@ -26,7 +26,7 @@ void create() {
 "It is impossible to tell what wood the shaft is made of "+
 "from because the ribbons fit so perfectly.%^RESET%^");
     set_lore(
-"It is said that there was a group of sunites that turned "+
+"It is said that there was a group of Jarmilans that turned "+
 "themselves into weapons.  They were so obsessed with "+
 "beauty that they often killed the ugly or poor.  "+
 "The reasoning was to create a world that was a beautiful "+

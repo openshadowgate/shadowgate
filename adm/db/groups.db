@@ -23,13 +23,12 @@
 (tutor): garrett
 
 #       Teams
-(area): chernobog circe ergo essyllis garrett lujke nienne octothorpe odin titania tlaloc uriel tsera yves
-(daemonassist): lujke nienne
+(area): chernobog circe ergo essyllis garrett lujke nienne octothorpe odin titania tlaloc uriel tsera yves hades
 (help): chernobog kismet titania
 
 #	Class coding teams
 #       (with write access to certain /cmds and /std dirs)
-(usercmd): garrett nienne lujke tlaloc odin titania
+(usercmd): garrett nienne lujke tlaloc odin titania hades
 
 #       Areas of the game (/d)
 (attaya): lujke
