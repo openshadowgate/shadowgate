@@ -16,6 +16,7 @@ void create(){
         set_attacks_num(1);
         set_alignment(6);
         set_mob_magic_resistance("high");
+        set_heart_beat(3);
 
         }
 
