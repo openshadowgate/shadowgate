@@ -37,9 +37,9 @@ void mess() {
     int i;
     object *msgs;
     if(!query_wielded() || !ETO) return;
-        msgs = ({"Fey'ri are not to be trusted.",  
-"What villains would harvest the souls of their companions to try to imitate the power of a moonblade?",
-"The evils of this world would do anything for power.  ",
+        msgs = ({"Fey'ri are not to be trusted.",
+        "What villains would harvest the souls of their companions to try to imitate the power of a moonblade?",
+"The evils of this world would do anything for power.  ",
 "Protecting the pure against those who would defile the forest that is our goal.",
 "The Fey'ri abandoned the gods when they chastised them and sought favor with the demons.",
 "Kill any Fey'ri that you see.",
@@ -49,9 +49,9 @@ void mess() {
 "Seek to purify demonic corruption wherever you see it.",
 "Gathering power for the sake of becoming powerful only is what lead the fey'ri into the hands of the demons.",
 "The Fey'ri are an example of history repeating itself.",
-"Fey'ri should have learned from the drow's mistakes but instead repeated them.  Bathing souls in malice and forcing them into a gem to be used as a weapon.",
+"Fey'ri should have learned from the drow's mistakes but instead repeated them."+
+"Bathing souls in malice and forcing them into a gem to be used as a weapon.",
 "The fey'ri will stop at nothing.",
-
         });
 write("%^BOLD%^%^RED%^The Halberd tells you: %^RESET%^"
    +msgs[random(sizeof(msgs))]);
@@ -97,7 +97,7 @@ int extra_hit(object targ)
          " comes to your aid.");
         tree =new(MON+"fey_spirit");
         tree ->move(environment(ETO));
-        tree ->ownerz(ETO)
+        tree ->ownerz(ETO);
         ETO->add_protector(tree);
         ETO->add_follower(tree);
          return 1;
