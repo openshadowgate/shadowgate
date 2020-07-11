@@ -23,7 +23,7 @@
                          "ogres"      : ({ "ogre", "ogre-mage", "half-ogre" }), \
                          "elves"      : ({ "elf", "half-elf", "drow", "half-drow", "szarkai" }), \
                          "goblins"    : ({ "goblin", "bugbear", "hobgoblin" }), \
-                         "fey"        : ({ "nymph", "satyr", "dryad" }), \
+                         "fey"        : ({ "nymph", "satyr", "dryad", "pixie" }), \
                          "orcs"       : ({ "orc", "half-orc" }), \
                          "beastmen"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "pegataur", "alaghi" }), \
                          "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow" }), \
