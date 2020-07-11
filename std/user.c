@@ -66,7 +66,8 @@ int start_age, pheight, pweight;
 private string position, primary_start;
 //private nosave string *channels;
 string *restricted_channels;
-mapping favored_enemy, favored_terrain;
+string *favored_enemy = ({ "none", "none", "none" }),
+       *favored_terrain = ({ "none", "none", "none" });
 mapping mini_quests;
 string *quests;
 string *mysites;
@@ -5074,79 +5075,100 @@ int test_passive_perception()
 
 int set_favored_enemy(int x, string str)
 {
-    if(member(str, keys(VALID_ENEMY) < -1))
+    if(member_array(str, keys(VALID_ENEMY)) < 0)
         return 0;
     
-    x = min( ({ x, 3 }) );
+    if(x < 1 || x > 3)
+        return 0;
     
-    if(!favored_enemy[x])
-        favored_enemy += ([ x : str, ]);
-    else
-        favored_enemy[x] = str;
+    x--;
+
+    favored_enemy[x] = str;
     
     return 1;
 }
 
 int remove_favored_enemy(int x)
 {      
-    map_delete(favored_enemy, x);
+    favored_enemy[x - 1] = "none";
     return 1;
 }
 
 int set_favored_terrain(int x, string str)
 {
-    if(member(str, keys(VALID_TERRAIN) < -1))
+    if(member_array(str, keys(VALID_TERRAIN)) < 0)
         return 0;
 
-    x = max( ({ min( ({ x, 3 }) ), 1 }) );
+    if(x > 3 || x < 1)
+        return 0;
     
-    if(!favored_terrain[x])
-        favored_terrain += ([ x : str, ]);
-    else
-        favored_terrain[x] = str;
+    x--;
+    
+    favored_terrain[x] = str;
     
     return 1;
 }
 
 int remove_favored_terrain(int x)
 {
-    map_delete(favored_terrain, x);
+    favored_terrain[x - 1] = "none";
     return 1;
 }
 
 string query_favored_enemy(int x)
 {
-    return favored_enemy[x];
+    if(!sizeof(favored_enemy))
+        favored_enemy = ({ "none", "none", "none" });
+    
+    return favored_enemy[x - 1];
 }
 
 string query_favored_terrain(int x)
 {
-    return favored_terrain[x];
+    if(!sizeof(favored_terrain))
+        favored_terrain = ({ "none", "none", "none" });
+    
+    return favored_terrain[x - 1];
+}
+
+string *query_favored_enemies() { 
+    if(!sizeof(favored_enemy))
+        favored_enemy = ({ "none", "none", "none" });
+    
+    return favored_enemy;
+}
+
+string *query_favored_terrains() {
+    if(!sizeof(favored_terrain))
+        favored_terrain = ({ "none", "none", "none" });
+    
+    return favored_terrain;
 }
 
 int is_favored_enemy(object ob)
 {
-    string *ids, *favored_enemies;
+    string *ids;
     
     if(!ob && !objectp(ob))
         return 0;
     
-    favored_enemies = ({ });
-    favored_enemies += ({ favored_enemy[1] });
-    favored_enemies += ({ favored_enemy[2] });
-    favored_enemies += ({ favored_enemy[3] });
+    if(!sizeof(favored_enemy))
+        return 0;
     
     ids = ob->query_id();
     ob->query_race() && ids += ({ ob->query_race() });
     if(ob->is_undead())
         ids += ({ "undead" });
     
-    foreach(string favored_type in favored_enemies)
+    foreach(string favored_type in favored_enemy)
     {
-        foreach(string id in ids)
+        if(strlen(favored_type) && favored_type != "none")
         {
-            if(member_array(id, VALID_ENEMY[favored_type] > -1))
-                return 1;
+            foreach(string id in ids)
+            {
+                if(member_array(id, VALID_ENEMY[favored_type]) > -1)
+                    return 1;
+            }
         }
     }
     
@@ -5156,21 +5178,22 @@ int is_favored_enemy(object ob)
 int is_favored_terrain(object room)
 {
     string type;
-    string *favored_terrains = ({  });
     
-    if(!room || !objectp(room))
+    if(!room || !objectp(room) || !sizeof(favored_terrain))
         return 0;
-    
-    favored_terrains += ({ favored_terrain[1] });
-    favored_terrains += ({ favored_terrain[2] });
-    favored_terrains += ({ favored_terrain[3] });
     
     type = room->query_terrain();
     
+    if(!type || !strlen(type))
+        return 0;
+    
     foreach(string terrain in favored_terrain)
     {
-        if(member_array(type, VALID_TERRAIN[terrain]) > -1)
-            return 1;
+        if(strlen(terrain) && terrain != "none")
+        {
+            if(member_array(type, VALID_TERRAIN[terrain]) > -1)
+                return 1;
+        }
     }
     
     return 0;

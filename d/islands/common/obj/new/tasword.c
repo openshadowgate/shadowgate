@@ -35,7 +35,6 @@ create()
 
     set_value(375000);
 
-    set_weapon_prof("exotic");
     set_property("no curse",1);
 
 

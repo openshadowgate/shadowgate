@@ -1748,9 +1748,8 @@ int query_attack_bonus()
     if (FEATS_D->usable_feat(TO, "favored enemy"))
     {
         attacker = TO->query_current_attacker();
-        attacker && favored = TO->is_favored_enemy(attacker);
         
-        if(favored)
+        if(TO->is_favored_enemy(attacker))
         {
             ret += 2;
             
@@ -1797,9 +1796,8 @@ int query_damage_bonus()
     if (FEATS_D->usable_feat(TO, "favored enemy"))
     {
         attacker = TO->query_current_attacker();
-        attacker && favored = TO->is_favored_enemy(attacker);
         
-        if(favored)
+        if(TO->is_favored_enemy(attacker))
         {
             ret += 2;
             

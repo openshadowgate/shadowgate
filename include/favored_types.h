@@ -7,7 +7,6 @@
  */
 
 #define VALID_TERRAIN ([ \
-                           "road"   : ({ "paved road", "dirt road", "foot path", "rutted track", "game track" }), \
                            "jungle" : ({ "jungle", "dense jungle" }), \
                            "forest" : ({ "heavy forest", "light forest", "branches" }), \
                            "plains" : ({ "scrub lands", "grasslands", "savannah", "meadows" }), \
@@ -15,9 +14,9 @@
                            "swamp"  : ({ "swamp", "marsh" }), \
                            "snow"   : ({ "snow", "ice", "glacier" }), \
                            "water"  : ({ "shallow water", "deep water", "beach", "shore", "boats" }), \
-                           "city"   : ({ "back alley", "stairway", "ledge", "ruins", "city", "cemetary", "garden", "stone building", "wood building", "hut" }), \
+                           "city"   : ({ "ruins", "city", "cemetary", "garden", "stone building", "wood building", "hut" }), \
                            "caves"  : ({ "nat cave", "built cave", "built tunnel", "nat tunnel" }), \
-                           "hills"  : ({ "hills", "rocky" }), \
+                           "hills"  : ({ "hills", "rocky", "old mounts", "new mounts" }), \
                        ])
 
 #define VALID_ENEMY ([ \
@@ -27,15 +26,16 @@
                          "fey"        : ({ "nymph", "satyr", "dryad" }), \
                          "orcs"       : ({ "orc", "half-orc" }), \
                          "beastmen"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "pegataur", "alaghi" }), \
-                         "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre" }), \
+                         "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow" }), \
                          "lizardfolk" : ({ "yuan-ti", "saurian" }), \
                          "undead"     : ({ "ghost", "skeleton", "lich", "zombie", "ghast", "entity", "spirit" }), \
-                         "celestials" : ({ "deva" }), \
+                         "celestials" : ({ "deva", "solar" }), \
                          "abyssals"   : ({ "demon", "devil" }), \
-                         "dragonkin"  : ({ "kobold", "draconian", "dragon", "elven-dragon", "dragonet" }), \
+                         "dragonkin"  : ({ "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon" }), \
                          "giants"     : ({ "voadkyn", "firbolg", "giant", "titan" }), \
                          "smallfolk"  : ({ "gnome", "halfling", "kender", "dwarf" }), \
-                         "elementals" : ({ "elemental", "golem" }), \
+                         "elementals" : ({ "elemental" }), \
                          "aberations" : ({ "beholder", "illithid", "mind flayer" }), \
                          "magical beasts" : ({ "owlbear" }), \
+                         "constructs" : ({ "construct", "golem" }), \
                      ])

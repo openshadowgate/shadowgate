@@ -1,7 +1,7 @@
 /*
-  _favored_enemy.c
+  _favored_terrain.c
   
-  Allows the ranger to set their favored enemy
+  Allows the ranger to set their favored terrain
   
   -- Tlaloc -- 7.9.20
 */
@@ -19,33 +19,33 @@ void create()
 {
     ::create();
     
-    valid_choices = keys(VALID_ENEMY);
+    valid_choices = keys(VALID_TERRAIN);
     
     set_author("tlaloc");
     feat_type("instant");
     feat_category("WildernessLore");
-    feat_name("favored enemy");
-    feat_prereq("Ranger L1");
-    feat_syntax("favored_enemy [TYPE]");
+    feat_name("favored terrain");
+    feat_prereq("Ranger L3");
+    feat_syntax("favored_terrain [TYPE]");
     feat_desc("This feat allows a ranger to focus their knowledge and training\
-fighting an enemy type of their choice. The ranger will recieve a +2 bonus to\
-attack and damage rolls while fighting their favored enemy.\
-You can select from the following favored enemies: \n\n" + "%^GREEN%^" + implode(valid_choices, "\n") +
-"\n\n\To start selection process type <favored enemy>.");
+for operating a favored terrain of their choice. While within their favored\
+terrain, the ranger gains +2 to stealth, perception, and survival skills.\
+You can select from the following favored terrain: \n\n" + "%^GREEN%^" + implode(valid_choices, "\n") +
+"%^RESET%^\n\n\To start selection process type <favored terrain> [TYPE].");
     allow_tripped(1);
-    set_required_for(({ "second favored enemy" }));
+    set_required_for(({ "second favored terrain" }));
 }
 
 int allow_shifted() { return 1; }
 
-int cmd_favored_enemy(string str)
+int cmd_favored_terrain(string str)
 {
     object feat;
     
     if(!objectp(this_player()))
         return 0;
     
-    if(this_player()->query_class_level("ranger") < 1)
+    if(this_player()->query_class_level("ranger") < 3)
     {
         dest_effect();
         return 0;
@@ -63,13 +63,13 @@ int execute_feat()
     
     if(!arg)
     {
-        write("Your first favored enemy is: " + this_player()->query_favored_enemy(1));
+        write("Your first favored terrain is: " + this_player()->query_favored_terrain(1));
         return 1;
     }
     
-    if(this_player()->query_property("favored_enemy_change") > time() - 259200)
+    if(this_player()->query_property("favored_terrain_change") > time() - 259200)
     {
-        write("You may only change your favored enemy once every three weeks.");
+        write("You may only change your favored terrain once every three weeks.");
         return 1;
     }
     
@@ -79,7 +79,7 @@ int execute_feat()
         return 1;
     }
     
-    write("You have selected " + arg + " as a favored enemy. Type <yes> to confirm. Anything else will abort.");
+    write("You have selected " + arg + " as a favored terrain. Type <yes> to confirm. Anything else will abort.");
     input_to("confirm_selection", 0);
     
     return 1;
@@ -92,9 +92,9 @@ void confirm_selection(string str)
         return;
     }
 
-    write("You declare your favored enemy as : " + arg + ".");
-    this_player()->set_favored_enemy(1, arg);
-    this_player()->set_property("favored_enemy_change", time());
+    write("You declare your favored terrain as : " + arg + ".");
+    this_player()->set_favored_terrain(1, arg);
+    this_player()->set_property("favored_terrain_change", time());
     dest_effect();
     return;
 }

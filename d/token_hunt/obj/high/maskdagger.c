@@ -28,10 +28,10 @@ void create() {
    set_overallStatus(220);
 }
 int wield_func(){
-      int enchantnum; 
+      int enchantnum;
       tell_room(environment(ETO),"%^BOLD%^%^BLACK%^A quiet hush falls over the room as "+ETOQCN+" wraps "+ETO->query_possessive()+" fingers around the beautiful dagger.%^RESET%^",ETO);
       tell_object(ETO,"%^BOLD%^%^BLACK%^You are overcome by a strange sense of calm as you wrap your fingers around the dagger.%^RESET%^");
- enchantnum = (int)ETO->query_highest_level()/6;
+ enchantnum = (int)ETO->query_character_level()/6;
       set_property("enchantment",enchantnum);
       while(TO->query_property("enchantment")< enchantnum){
       remove_property("enchantment");
@@ -54,7 +54,7 @@ int hit_func(object target) {
             target->do_damage("torso",random(4)+1);
          break ;
  	   case 2..3:
-            if(ETO->query_highest_level()<5) return 0;
+            if(ETO->query_character_level()<5) return 0;
   	      tell_room(environment(ETO),"%^BOLD%^%^BLACK%^The leading edge of the dagger "+ETO->query_cap_name()+" holds %^WHITE%^glows brightly %^BLACK%^as "+ETO->query_subjective()+" slices it cleanly through "+target->query_cap_name()+"'s flesh!%^RESET%^",({target,ETO}));
             tell_object(ETO,"%^BOLD%^%^BLACK%^The leading edge of the dagger %^WHITE%^glows brightly %^BLACK%^as you slice it cleanly through "+target->query_cap_name()+"'s flesh, leaving "+target->query_objective()+" looking completely subdued!%^RESET%^");
             tell_object(target,"%^BOLD%^%^BLACK%^The leading edge of the dagger in "+ETO->query_cap_name()+"'s hand %^WHITE%^glows brightly %^BLACK%^as "+ETO->query_subjective()+" slices it cleanly through your flesh, making you feel strangely subdued!%^RESET%^");
@@ -62,7 +62,7 @@ int hit_func(object target) {
             target->do_damage("torso",random(5)+1);
             break;
          case 4..5:
-            if(ETO->query_highest_level()<10) return 0;
+            if(ETO->query_character_level()<10) return 0;
             ETO->execute_attack();
   	      tell_room(environment(ETO),"%^RESET%^%^MAGENTA%^"+ETO->query_cap_name()+" dances deftly around "+target->query_cap_name()+", making use of the shadows for an extra attack!",({target,ETO}));
             tell_object(ETO,"%^RESET%^%^MAGENTA%^You dance with agility around "+target->query_cap_name()+" as you suddenly become one with the shadows and make use of them for another attack!%^RESET%^");
@@ -70,7 +70,7 @@ int hit_func(object target) {
               target->do_damage("torso",roll_dice(2,8)+1);
               break;
          case 6..7:
-            if(ETO->query_highest_level()<20) return 0;
+            if(ETO->query_character_level()<20) return 0;
             tell_room(environment(ETO),"%^BOLD%^%^BLACK%^The blade in "+ETO->query_cap_name()+"'s hand suddenly darkens as the shadows begin to swirl and take on a humanoid form!");
             ob=new("/d/islands/common/new/smon.c");
             ob->move(environment(ETO));
@@ -78,14 +78,14 @@ int hit_func(object target) {
             ETO->add_follower(ob);
             break;
          case 8..9:
-            if(ETO->query_highest_level()<25) return 0;
+            if(ETO->query_character_level()<25) return 0;
             tell_room(environment(ETO),"%^BOLD%^%^BLACK%^The dagger sucks in the darkness from around it and hurtles it at "+target->query_cap_name()+"!",({target,ETO}));
             tell_object(ETO,"%^BOLD%^%^BLACK%^The dagger sucks in the darkness from around it and hurtles it at "+target->query_cap_name()+"!%^RESET%^");
             tell_object(target,"%^BOLD%^%^BLACK%^The dagger in "+ETO->query_cap_name()+" hand sucks up the darkness from around it and hurtles it at you!");
             target->set_paralyzed(20,"You are trying to get to your feet.");
             if(!random(5)) target->set_blind(1);
             else target->set_paralyzed(3+random(4),"%^BOLD%^%^BLACK%^You are trying to remove the orb of darkness from around you!");
-            break;   
+            break;
 
       }
    }
