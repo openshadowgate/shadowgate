@@ -6,7 +6,7 @@ create() {
     ::create();
     set_author("pator");
     set_spell_name("cure critical wounds");
-    set_spell_level(([ "cleric" : 4, "bard" : 4,"druid" : 5, "paladin" : 4, "inquisitor" : 4, "ranger" : 4 ]));
+    set_spell_level(([ "cleric" : 4, "bard" : 4, "druid" : 5, "paladin" : 4, "inquisitor" : 4 ]));
     set_affixed_spell_level(4);
     set_spell_sphere("healing");
     set_syntax("cast CLASS cure critical wounds on TARGET");
