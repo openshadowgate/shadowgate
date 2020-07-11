@@ -21,7 +21,7 @@ void create(){
     " able to find a way to release the souls trapped within."+
     "  Some of the spirits were so grateful to be purified that even "+
     "though they were free to leave they banded together to create"+
-    " this blessed weapon.  The weapon seems alive and could <grow>"+
+    " this blessed weapon.  The weapon seems alive and could %^GREEN%^<grow>%^RESET%^"+
     " a rope from the vines.");
     set_property("lore difficulty",60);
     set_value(9000);
@@ -102,24 +102,24 @@ int extra_hit(object targ)
          return 1;
         }
    if(!random(16)) {
-      tell_object(ETO,"You drive the glaive across"+
+      tell_object(ETO,"%^GREEN%^You drive the halberd across"+
                 " "+targ->QCN+", leaving a thorn filled wound.");
-      tell_object(targ,""+ETO->QCN+"'s"+
-                " glaive slashes into you leaving a thorn filled wound.");
-      tell_room(EETO,""+ETO->QCN+"'s glaive slashes "+targ->QCN+"'s"+
+      tell_object(targ,"%^GREEN%^"+ETO->QCN+"'s"+
+                " halberd slashes into you leaving a thorn filled wound.");
+      tell_room(EETO,"%^GREEN%^"+ETO->QCN+"'s halberd slashes "+targ->QCN+"'s"+
                 " body, leaving a thorn filled wound.",({ETO,targ}));
 
         return roll_dice(2,6)+2;}
    if(!random(50)) {
 
 
-     tell_object(ETO,"You slash into "+targ->QCN+
+     tell_object(ETO,"%^GREEN%^You slash into "+targ->QCN+
          " and your weapon sprays thorns into the wound..");
-     tell_room(EETO,""+ETO->QCN+"'s"+
-          " glaive sprays thorns at "+
+     tell_room(EETO,"%^GREEN%^"+ETO->QCN+"'s"+
+          " halberd sprays thorns at "+
                   targ->QCN+".",({ETO,targ}));
          tell_object(targ,""+ETO->QCN+"'s"+
-                " glaive slashes you then begins spraying thorns.");
+                " halberd slashes you then begins spraying thorns.");
     
 new("/cmds/spells/t/_thorn_spray")->use_spell(ETO,targ,15,100,"cleric");
         return 1;
@@ -149,7 +149,7 @@ int extra_wield() { // only goodly
            say("%^GREEN%^"+ETOQCN+" holds the halberd but jerks violently"+
              " as brambles lash out from it, wrapping "+ETO->QO+"
 tightly.");
-           write("The glaive juts out brambles that bind"+
+           write("%^ORANGE%^The halberd juts out brambles that bind"+
            " you fast when you place your hand on it."+
            "  \n They cut into you terribly.");
        ETO->set_paralyzed(10,"Brambles bind you fast!");
@@ -183,10 +183,10 @@ int grow(string str) {
      ETO->send_paralyzed_message("info",ETO);
          return 1;}
    if(!query_wielded()){
-     write("You must wield the halberd to use this power.");
+     write("%^ORANGE%^You must wield the halberd to use this power.");
      return 1; }
 
-       tell_object(ETO,"Your weapon grows a rope-like vine."+
+       tell_object(ETO,"%^GREEN%^Your weapon grows a rope-like vine."+
              "  The action drains your energy.");
        tell_room(EETO,""+ETO->QCN+"'s weapon grows a rope-like vine.",ETO);
        rope = new("/d/common/obj/misc/rope");
@@ -196,6 +196,6 @@ int grow(string str) {
                 " and could bind a person very well.");
        rope->move(ETO);
        ETO->use_stamina(50);
-       ETO->set_paralyzed(5,"The weapon drains your stamina.");
+       ETO->set_paralyzed(5,"%^ORANGE%^The weapon drains your stamina.");
        return 1;
 }
