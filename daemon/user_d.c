@@ -643,24 +643,29 @@ varargs mapping myTerm(object who, int flag)
     return TERMINAL_D->query_term_info(term);
 }
 
-string *determine_lines(object who)
+string* determine_lines(object who)
 {
     int i;
-    string *gstore, *mychannels = ({}), *restricted_channels = ({}), myclasses = ({});
-    if(!objectp(who)) return ({});
+    string* gstore, * mychannels = ({}), * restricted_channels = ({}), myclasses = ({});
+    if (!objectp(who)) {
+        return ({});
+    }
     restricted_channels = who->query_restricted_channels();
 
-    mychannels = ({"inform", "newbie", "ooc", "rp", "wiz"});
+    mychannels = ({ "newbie", "ooc", "rp", "wiz" });
 
-    if (avatarp(who))
+    if (avatarp(who)) {
         mychannels += ({ "discuss", });
+    }
 
-    if(avatarp(who) &&
-       !wizardp(who))
-        mychannels += ({ "telepathy", "petition", "plot"});
+    if (avatarp(who) &&
+        !wizardp(who)) {
+        mychannels += ({ "telepathy", "petition", "plot" });
+    }
 
-    if (member_group(who->query_true_name(),"law_c"))
+    if (member_group(who->query_true_name(), "law_c")) {
         mychannels += ({ "law" });
+    }
     CHAT_D->add_user(mychannels, who);
     return mychannels;
 }
