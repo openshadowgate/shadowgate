@@ -43,7 +43,7 @@ void create()
     set_value(125);
     set_wear((:TO,"do_wear":));
     set_remove((:TO,"takeoff":));
-    uses = roll_dice(1,12)+3;
+    uses = roll_dice(1,12)+10;
 }
 
 int do_wear()
