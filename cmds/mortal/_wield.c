@@ -296,7 +296,7 @@ void help()
 
 wield - hold a thing or weapon
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 wield %^ORANGE%^%^ULINE%^ITEM%^RESET%^
 

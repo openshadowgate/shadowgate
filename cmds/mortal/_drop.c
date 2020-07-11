@@ -155,7 +155,7 @@ void help()
 
 drop - put things on the ground
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 drop %^ORANGE%^%^ULINE%^ITEM%^RESET%^
 drop all

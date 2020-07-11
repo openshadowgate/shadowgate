@@ -163,7 +163,7 @@ int
 
 dispell - display and manage active spells
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 dispell [%^ORANGE%^%^ULINE%^NUM%^RESET%^|%^ORANGE%^%^ULINE%^NAME%^RESET%^]
 

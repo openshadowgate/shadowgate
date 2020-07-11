@@ -131,7 +131,7 @@ int help(){
 
 ki - monks spells
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 ki
 ki focus %^ORANGE%^%^ULINE%^ELEMENT%^RESET%^

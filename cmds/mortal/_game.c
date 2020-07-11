@@ -166,7 +166,7 @@ int help()
 
 game - help the game
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 game bug here|%^ORANGE%^%^ULINE%^TARGET%^RESET%^|%^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^
 game typo here|%^ORANGE%^%^ULINE%^TARGET%^RESET%^|%^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^

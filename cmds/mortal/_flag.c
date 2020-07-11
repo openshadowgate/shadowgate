@@ -276,7 +276,7 @@ void help()
 
 flag - manipulate player flags
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 flag
 flag scaled level as %^ORANGE%^%^ULINE%^LEVEL%^RESET%^|normal

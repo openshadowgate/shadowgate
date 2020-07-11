@@ -178,7 +178,7 @@ void help()
 
 con - check out condition of a being
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 con [%^ORANGE%^%^ULINE%^BEING%^RESET%^|party|all]
 

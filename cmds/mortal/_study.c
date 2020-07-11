@@ -476,7 +476,7 @@ void help()
 
 study - learn some lore
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 study [%^ORANGE%^%^ULINE%^ITEM%^RESET%^|room]
 

@@ -1,7 +1,7 @@
 #include <std.h>
 #include <daemons.h>
 
-#define SYNTAX "Syntax:  forget <classtype> <spellname>\n"
+#define SYNOPSIS "Syntax:  forget <classtype> <spellname>\n"
 
 inherit DAEMON;
 
@@ -55,7 +55,7 @@ void help()
 
 forget - forget a spell
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 forget %^ORANGE%^[%^ULINE%^CLASS%^RESET%^%^ORANGE%^]%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^
 

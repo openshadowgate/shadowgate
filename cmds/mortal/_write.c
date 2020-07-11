@@ -19,7 +19,7 @@ int help(){
 
 write - write on something
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 write in %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^
 

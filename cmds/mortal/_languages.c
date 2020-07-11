@@ -66,7 +66,7 @@ void help()
 
 languages - manage your languages
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 languages add %^ORANGE%^%^ULINE%^NUM%^RESET%^ to %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^
 

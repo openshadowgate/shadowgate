@@ -62,7 +62,7 @@ void help(){
 
 gag - gag someone 
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 gag %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

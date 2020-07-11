@@ -104,7 +104,7 @@ int help()
 
 seal - seal letters with wax
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 seal %^ORANGE%^%^ULINE%^PAPER%^RESET%^ with %^ORANGE%^%^ULINE%^DEVICE%^RESET%^ and %^ORANGE%^%^ULINE%^WAX%^RESET%^
 seal break %^ORANGE%^%^ULINE%^PAPER%^RESET%^

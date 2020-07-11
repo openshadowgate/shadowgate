@@ -265,7 +265,7 @@ int help(){
 
 skills - display and manage your skills
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 skills
 skills add %^ORANGE%^%^ULINE%^NUMBER%^RESET%^ to %^ORANGE%^%^ULINE%^SKILL%^RESET%^

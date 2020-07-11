@@ -269,7 +269,7 @@ void help()
 
 master - manage spells you know
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 master
 master list

@@ -221,7 +221,7 @@ void help() {
 
 steal - optimize someone's intentory
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 steal %^ORANGE%^%^ULINE%^ITEM%^RESET%^ from %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

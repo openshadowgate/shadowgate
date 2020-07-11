@@ -85,7 +85,7 @@ void help(){
 
 combatstyle - change your class combat style
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 combatstyle %^ORANGE%^%^ULINE%^CLASS%^RESET%^ [%^ORANGE%^%^ULINE%^STYLE%^RESET%^]
 

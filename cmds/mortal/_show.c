@@ -32,7 +32,7 @@ void help(){
 
 show - show something to someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 show %^ORANGE%^%^ULINE%^ITEM%^RESET%^ to %^ORANGE%^%^ULINE%^PERSON%^RESET%^
 

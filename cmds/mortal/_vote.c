@@ -38,7 +38,7 @@ void help()
 
 vote - display voting information to help the game
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 vote [social]
 

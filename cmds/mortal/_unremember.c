@@ -1,5 +1,5 @@
 #include <std.h>
-#define SYNTAX "Syntax:  unremember <location|object> <remembered label>\n"
+#define SYNOPSIS "Syntax:  unremember <location|object> <remembered label>\n"
 
 inherit DAEMON;
 
@@ -11,9 +11,9 @@ int cmd_unremember(string str){
     if(!str)
         return notify_fail("Unremember what?\n");
     if(sscanf(str, "%s %s", what, where) != 2)
-        return notify_fail(SYNTAX);
+        return notify_fail(SYNOPSIS);
     if(what != "location" && what != "object")
-        return notify_fail(SYNTAX);
+        return notify_fail(SYNOPSIS);
 
     if(what == "location"){
        if(!remmap = TP->query_rem_rooms())
@@ -60,7 +60,7 @@ void help() {
 
 unremember - forget something
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 unremember location|object %^ORANGE%^%^ULINE%^NAME%^RESET%^
 

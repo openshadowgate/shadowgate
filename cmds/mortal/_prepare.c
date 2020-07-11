@@ -1120,7 +1120,7 @@ void help()
 
 prepare - prepare a casting
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 Normal casters (mage, cleric, druid, paladin, ranger):
     prepare %^ORANGE%^%^ULINE%^CLASS%^RESET%^ %^ORANGE%^%^ULINE%^SPELL%^RESET%^ [times %^ORANGE%^%^ULINE%^NUMBER%^RESET%^]

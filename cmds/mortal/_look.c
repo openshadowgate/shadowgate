@@ -328,7 +328,7 @@ int help()
 
 look - look at something
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 look %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [%^ORANGE%^%^ULINE%^NUMBER%^RESET%^]
 look %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [%^ORANGE%^%^ULINE%^NUMBER%^RESET%^] on ground

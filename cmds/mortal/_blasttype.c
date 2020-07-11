@@ -69,7 +69,7 @@ int help()
 
 blasttype - change warlock blast essence
 
-%^CYN%^SYNTAX%^RESET%^
+%^CYN%^SYNOPSIS%^RESET%^
 
 blasttype [TYPE] | none
      OR

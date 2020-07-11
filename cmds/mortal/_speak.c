@@ -30,7 +30,7 @@ int help()
 
 speak - choose spoken language
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 speak %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^
 

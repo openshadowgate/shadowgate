@@ -923,7 +923,7 @@ void help()
 
 advance - increase your level
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 advance [%^ORANGE%^%^ULINE%^CLASS_NAME%^RESET%^]
 advance class special

@@ -39,7 +39,7 @@ void help()
 
 colors - set color of direct speech
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 colors start|end COLOR
 

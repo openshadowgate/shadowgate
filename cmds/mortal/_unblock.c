@@ -40,7 +40,7 @@ void help()
 
 unblock - unblock exit
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 unblock %^ORANGE%^%^ULINE%^EXIT%^RESET%^
 

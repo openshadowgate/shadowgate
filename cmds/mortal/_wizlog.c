@@ -35,7 +35,7 @@ void help(){
 
 wizlog - review activity of creators and above
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 wizlog %^ORANGE%^%^ULINE%^NAME%^RESET%^ [%^ORANGE%^%^ULINE%^BYTES%^RESET%^]
 

@@ -35,7 +35,7 @@ void help(){
 
 last - show last messages
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 last %^ORANGE%^%^ULINE%^CHANNEL%^RESET%^|say|tell|emote
 

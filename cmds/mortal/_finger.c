@@ -53,7 +53,7 @@ void help() {
 
 finger - display info about another player
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 finger %^ORANGE%^%^ULINE%^NAME%^RESET%^
 

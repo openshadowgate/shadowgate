@@ -82,11 +82,11 @@ int help(){
 
 bind - use ropes on someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 bind %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 This command will bind %^ORANGE%^%^ULINE%^TARGET%^RESET%^ with rope in your inventory. You can then %^ORANGE%^<drag>%^RESET%^ them.
 

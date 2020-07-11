@@ -158,7 +158,7 @@ void help()
 
 say - speak up
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 say %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
 

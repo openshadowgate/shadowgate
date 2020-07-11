@@ -58,7 +58,7 @@ void help() {
 
 nickname - manage nicknames
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 nickname %^ORANGE%^%^ULINE%^NICKNAME%^RESET%^ %^ORANGE%^%^ULINE%^SUBSTITUTE%^RESET%^
 nickname [reset|%^ORANGE%^%^ULINE%^NICKNAME%^RESET%^]

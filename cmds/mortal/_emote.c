@@ -147,7 +147,7 @@ void help() {
 
 emote - Describe what your character does
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 emote %^ORANGE%^%^ULINE%^STRING%^RESET%^
 

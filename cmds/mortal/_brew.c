@@ -399,7 +399,7 @@ void help()
 
 brew - make a potion
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 brew list kits|potions|elixirs|oils|powders|misc
 brew materials %^ORANGE%^%^ULINE%^POTION%^RESET%^

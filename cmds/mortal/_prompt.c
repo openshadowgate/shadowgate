@@ -26,7 +26,7 @@ void help(){
 
 prompt - change your prompt appearance
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 prompt [LINE]
 

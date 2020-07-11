@@ -79,7 +79,7 @@ void help(){
 
 hit - end a being
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 hit %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

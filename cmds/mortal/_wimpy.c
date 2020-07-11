@@ -67,7 +67,7 @@ void help() {
 
 wimpy - manage automatic fleeing
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 wimpy [on [%^ORANGE%^%^ULINE%^PERCENT%^RESET%^]]
 wimpy off

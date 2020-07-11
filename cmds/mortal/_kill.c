@@ -90,7 +90,7 @@ void help()
 
 kill - turn combat on
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 kill [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]
 

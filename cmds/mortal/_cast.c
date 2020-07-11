@@ -292,7 +292,7 @@ void help()
 
 cast
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 cast [%^ORANGE%^%^ULINE%^CLASS%^RESET%^] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ [as %^ORANGE%^%^ULINE%^DOMAIN_NAME%^RESET%^ domain] [on self|here|rand|%^ORANGE%^%^ULINE%^SPELL_ARGS%^RESET%^]
 cast [cleric] %^ORANGE%^%^ULINE%^SPELL%^RESET%^ as healing|harming on %^ORANGE%^%^ULINE%^TARGET%^RESET%^

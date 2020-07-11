@@ -30,7 +30,7 @@ void help(){
 
 dig - dig out buried exit
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 dig %^ORANGE%^%^ULINE%^EXI%^RESET%^T
 

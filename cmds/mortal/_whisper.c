@@ -191,7 +191,7 @@ void help() {
 
 whisper - convey something discreetly
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 whisper %^ORANGE%^%^ULINE%^TARGET%^RESET%^ %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
 

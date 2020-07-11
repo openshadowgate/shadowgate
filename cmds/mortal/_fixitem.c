@@ -134,7 +134,7 @@ void help() {
 
 fixitem - remove extra bonuses from crafted legacy items
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 fixitem %^ORANGE%^%^ULINE%^ITEM%^RESET%^
 fixitem %^ORANGE%^%^ULINE%^ITEM%^RESET%^ with %^ORANGE%^%^ULINE%^BONUS%^RESET%^|all

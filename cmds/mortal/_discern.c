@@ -247,7 +247,7 @@ void help()
 
 discern - lists armor and weapon properties
 
-%^CYAN%^%^SYNTAX%^RESET%^
+%^CYAN%^%^SYNOPSIS%^RESET%^
 
 discern %^ORANGE%^%^ULINE%^ITE%^RESET%^M
 

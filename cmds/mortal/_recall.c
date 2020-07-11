@@ -468,7 +468,7 @@ void help()
 
 recall - recall knowledge
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 recall locations
 recall %^ORANGE%^%^ULINE%^CLASS%^RESET%^ spells [%^ORANGE%^%^ULINE%^LEVEL%^RESET%^]

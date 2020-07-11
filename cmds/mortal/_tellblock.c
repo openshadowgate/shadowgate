@@ -24,7 +24,7 @@ void help() {
 
 tellblock - block incoming tells
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 tellblock on|off
 

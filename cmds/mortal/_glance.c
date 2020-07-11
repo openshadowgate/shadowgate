@@ -129,7 +129,7 @@ int help() {
 
 glance - glance at something
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 glance [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]
 

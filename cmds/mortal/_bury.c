@@ -53,7 +53,7 @@ void help()
 
 bury - bury a corpse for tiny amout of hp
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 bury [all|CORPSE]
 

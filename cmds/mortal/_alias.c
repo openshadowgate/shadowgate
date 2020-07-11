@@ -130,7 +130,7 @@ int help()
 
 alias - define server-side command aliases
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 alias
 alias %^ORANGE%^%^ULINE%^ALIAS%^RESET%^ [%^ORANGE%^%^ULINE%^COMMAND%^RESET%^]

@@ -13,7 +13,7 @@ int help(){
 
 sign - sign objects
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 sign OBJECT [as NAME]
 

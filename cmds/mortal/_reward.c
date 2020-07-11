@@ -69,7 +69,7 @@ void help()
 
 reward - reward someone with exp
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 reward %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

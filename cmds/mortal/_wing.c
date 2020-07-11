@@ -103,7 +103,7 @@ void help()
 
 wing - spread your wings and fly away
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 wing %^ORANGE%^%^ULINE%^DESTINATION%^RESET%^
 

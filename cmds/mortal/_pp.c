@@ -172,7 +172,7 @@ void help() {
 
 pp - pickpocket someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 pp %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

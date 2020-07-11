@@ -160,7 +160,7 @@ void help()
 
 name - heal something
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 heal %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

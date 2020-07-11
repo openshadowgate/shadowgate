@@ -1324,7 +1324,7 @@ int help()
 
 feats - manipulate or view your feats
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 feats allowed
 feats check|add|remove %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^

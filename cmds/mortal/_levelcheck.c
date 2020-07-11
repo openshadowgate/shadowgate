@@ -43,7 +43,7 @@ void help(){
 
 levelcheck - check if you're within level range
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 levelcheck %^ULINE%^%^ORANGE%^TARGET%^RESET%^
 

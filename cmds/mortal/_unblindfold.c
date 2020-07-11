@@ -95,7 +95,7 @@ void help(){
 
 unblindfold - remove a blindfold
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 unblindfold %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

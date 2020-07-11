@@ -246,7 +246,7 @@ void help(){
 
 pcnote - manage notes about character
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 Players:
 

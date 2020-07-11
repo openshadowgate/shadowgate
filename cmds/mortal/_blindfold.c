@@ -61,11 +61,11 @@ void help(){
 
 blindfold - deprive someone of sight
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 blindfold %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 This command will blindfold %^ORANGE%^%^ULINE%^TARGET%^RESET%^.
 

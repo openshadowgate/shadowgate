@@ -304,7 +304,7 @@ void help()
 
 spells - list spells
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 spells %^ORANGE%^%^ULINE%^CLASS%^RESET%^ [by level] [by school]
 spells %^ORANGE%^%^ULINE%^CLASS%^RESET%^ [of level %^ORANGE%^%^ULINE%^NUM%^RESET%^|expanded knowledge]

@@ -38,7 +38,7 @@ void help() {
 
 mail - send someone a mail
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 mail [%^ORANGE%^%^ULINE%^NAME%^RESET%^]
 

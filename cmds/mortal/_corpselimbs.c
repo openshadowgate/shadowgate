@@ -37,7 +37,7 @@ void help() {
 
 corpselimbs - list corpse limbs
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 corpselimbs %^ORANGE%^%^ULINE%^CORPS%^RESET%^E
 

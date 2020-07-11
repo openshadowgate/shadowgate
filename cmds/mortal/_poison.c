@@ -215,7 +215,7 @@ int help()
 
 poison - add poison to objects
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 poison OBJECT with POISON
 

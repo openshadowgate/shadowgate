@@ -44,7 +44,7 @@ int help(){
 
 speech - set your speech verb
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 speech %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^
 

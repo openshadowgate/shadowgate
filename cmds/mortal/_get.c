@@ -183,7 +183,7 @@ void help() {
 
 get - get stuff
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 get %^ORANGE%^%^ULINE%^ITEM%^RESET%^ [%^ULINE%^%^ORANGE%^%^ORANGE%^%^ULINE%^NUMBER%^RESET%^%^RESET%^] [from %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [%^ORANGE%^%^ULINE%^NUMBER%^RESET%^%^RESET%^]]
 get all [from %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [%^ORANGE%^%^ULINE%^NUMBER%^RESET%^%^RESET%^]]

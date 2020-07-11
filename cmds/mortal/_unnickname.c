@@ -29,7 +29,7 @@ void help()
 
 unnickname - remove a nickname
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 unnickname %^ORANGE%^%^ULINE%^NICKNAME%^RESET%^
 

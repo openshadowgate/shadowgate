@@ -42,7 +42,7 @@ int help()
 
 ditch - ditch one of your followers
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 ditch %^ORANGE%^%^ULINE%^NAM%^RESET%^E
 

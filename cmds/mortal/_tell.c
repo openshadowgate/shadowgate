@@ -187,7 +187,7 @@ void help()
 
 tell - tell something someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 tell %^ORANGE%^%^ULINE%^PLAYER%^RESET%^ %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
 

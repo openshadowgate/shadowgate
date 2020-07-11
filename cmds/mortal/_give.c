@@ -118,7 +118,7 @@ help() {
 
 give - give something to someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 give %^ORANGE%^%^ULINE%^ITEM%^RESET%^ to %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 give %^ORANGE%^%^ULINE%^AMOUNT%^RESET%^ %^ORANGE%^%^ULINE%^TYPE%^RESET%^ coins to %^ORANGE%^%^ULINE%^TARGET%^RESET%^

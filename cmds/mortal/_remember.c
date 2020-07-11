@@ -99,7 +99,7 @@ void help() {
 
 remember - memorize things
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 remember here as %^ORANGE%^%^ULINE%^NAME%^RESET%^
 remember %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ as %^ORANGE%^%^ULINE%^NAME%^RESET%^

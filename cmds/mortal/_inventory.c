@@ -93,7 +93,7 @@ void help()
 
 inventory - wiew your inventory
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 inventory
 

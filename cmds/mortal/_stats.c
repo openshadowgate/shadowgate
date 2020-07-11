@@ -432,7 +432,7 @@ void help()
 
 stats - display and manipulate your stats
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 stats [gain %^ORANGE%^%^ULINE%^STAT%^RESET%^]|[move %^ORANGE%^%^ULINE%^STAT1%^RESET%^ to %^ORANGE%^%^ULINE%^STAT2%^RESET%^]
 

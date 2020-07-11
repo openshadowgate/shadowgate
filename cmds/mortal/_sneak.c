@@ -152,7 +152,7 @@ void help()
 
 sneak - attempt to sneak
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 sneak %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^
 

@@ -55,7 +55,7 @@ void help()
 
 ignore - ignore someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 ignore [%^ORANGE%^%^ULINE%^TARGET%^RESET%^|clear]
 

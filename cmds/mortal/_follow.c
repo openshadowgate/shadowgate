@@ -91,7 +91,7 @@ void help() {
 
 follow - follow someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 follow %^ORANGE%^%^ULINE%^NAME%^RESET%^
 follow allow [%^ORANGE%^%^ULINE%^NAME%^RESET%^|all]
