@@ -190,8 +190,8 @@ int grow(string str) {
              "  The action drains your energy.");
        tell_room(EETO,""+ETO->QCN+"'s weapon grows a rope-like vine.",ETO);
        rope = new("/d/common/obj/misc/rope");
-       rope->set_short("A vine rope");
-       rope->set_long("This rope looks more like a "+
+       rope->set_short("%^GREEN%^A vine rope");
+       rope->set_long("%^GREEN%^This rope looks more like a "+
             "jungle vine than a rope.  It is quite flexable"+
                 " and could bind a person very well.");
        rope->move(ETO);
