@@ -7,7 +7,7 @@ inherit "/d/common/obj/weapon/glaive.c";
 void create(){
     ::create();
 
-    set_name("Glaive");
+    set_name("watcher glaive");
     set_id(({"glaive","sapphire glaive","glaive of the exterminated"}));
     set_short("%^RESET%^%^BLUE%^gla%^BOLD%^%^BLUE%^i%^RESET%^%^BLUE%^ve "+
 	"of the e%^BOLD%^x%^RESET%^%^BLUE%^termin%^BOLD%^a%^RESET%^%^BLUE%^ted%^RESET%^");

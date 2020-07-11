@@ -103,6 +103,10 @@ void receive_given_item(object obj) {
         obj2 = new(OBJ+"lion_plate");
         trade_em(obj, obj2);
         break;
+    case "watcher glaive": // => hey halberd
+        obj2 = new(OBJ+"feyhalberd");
+        trade_em(obj, obj2);
+        break;
     default:
       ids = obj->query_id();
       force_me("say We have no need of this item.\n");
