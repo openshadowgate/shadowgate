@@ -7,10 +7,16 @@
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/reflex strong, will weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ athletics, endurance, stealth, survival
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
- %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon proficiency, shield proficiency, track, favored enemy
- %^RESET%^L3: rangers endurance, favored terrain
- %^RESET%^L4: animal companion
- %^RESET%^L9: evasion
+ %^RESET%^L1:  light armor proficiency, simple weapon proficiency, martial weapon proficiency, shield proficiency, track, favored enemy
+ %^RESET%^L3:  rangers endurance, favored terrain
+ %^RESET%^L4:  animal companion
+ %^RESET%^L7:  hunters bond
+ %^RESET%^L9:  evasion
+ %^RESET%^L11: second favored enemy
+ %^RESET%^L13: second favored terrain
+ %^RESET%^L17: third favored enemy
+ %^RESET%^L19: third favored terrain
+ %^RESET%^L21: seen it before
  %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
 In addition to that, rangers use different pre-set combat styles they can choose with %^ORANGE%^<combatstyle>%^RESET%^ command.
 %^CYAN%^Dual wield combat style:
