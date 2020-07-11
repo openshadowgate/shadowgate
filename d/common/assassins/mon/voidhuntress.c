@@ -16,6 +16,7 @@ void create()
     set_gender("female");
     set_class("fighter");
     set_mlevel("fighter", 50);
+    set("base_class", "fighter");
     set_mlevel("assassin", 10);
     add_search_path("/cmds/feats");
     set_hd(60, 10);
