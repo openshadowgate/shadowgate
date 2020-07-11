@@ -1,8 +1,8 @@
 /*
   _aspect_of_the_falcon.c
-  
+
   Half CL to Perception Skill
-  
+
   -- Tlaloc -- 7.11.20
 */
 
@@ -16,7 +16,7 @@ int bonus;
 void create()
 {
     ::create();
-    
+
     set_spell_name("aspect of the falcon");
     set_spell_level( ([ "ranger" : 1, ]) );
     set_spell_sphere("divination");
@@ -32,33 +32,33 @@ void create()
 int preSpell()
 {
     target = caster;
-    
+
     if(target->query_property("aspect_of_the_falcon"))
     {
         tell_object(target, "You are already under the influence of Aspect of the Falcon.");
         return 0;
     }
-    
+
     return 1;
 }
 
 void spell_effect()
 {
     target = caster;
-    
+
     spell_successful();
-    
+
     tell_object(caster, "%^GREEN%^You close your eyes and attune yourself to the skies above.%^RESET%^");
     tell_room(place, "%^GREEN%^" + sprintf("%s closes %s eyes and seems to meditate.",caster->query_name(),caster->query_possessive()) + "%^RESET%^", caster);
-    
+
     bonus = clevel / 2 + 1;
     caster->add_skill_bonus("perception", bonus);
-    
+
     caster->set_property("spelled", ({ this_object() }) );
     caster->set_property("aspect_of_the_falcon", 1);
     addSpellToCaster();
-    
-    call_out("dest_effect", ROUND_LENGTH * clevel * 2);
+
+    call_out("dest_effect",ROUND_LENGTH*(clevel/8+1));
 }
 
 void dest_effect()
