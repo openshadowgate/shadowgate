@@ -12,6 +12,7 @@ void create(){
         set("long","This transparent light appears to be some"+
         " kind of a fey spirit.   It pulses light blue and"+
         " radiates positive energy.  ");
+        set_race("fey")
         set_overall_ac(0);
         set_attacks_num(1);
         set_alignment(6);
