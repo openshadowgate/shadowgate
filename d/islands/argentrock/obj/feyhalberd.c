@@ -9,8 +9,8 @@ void create(){
 
     set_name("Halberd");
     set_id(({"halberd","fey halberd","leaf","leaf covered halberd"}));
-    set_short("Fey Halberd ");
-    set_obvious_short("leaf covered halberd");
+    set_short("%^CYAN%^F%^GREEN%^e%^CYAN%^y Halberd ");
+    set_obvious_short("%^GREEN%^leaf c%^CYAN%^o%^GREEN%^vered halberd");
     set_long("%^GREEN%^This large polearm consists of a large wooden pole"+
     " that is covered with green leaves and a %^RESET%^silver axe head%^GREEN%^ on the end."+
     "  Above the axe there is a pointed spike.  All of the metal parts"+
@@ -66,17 +66,17 @@ int extra_hit(object targ)
  if(!objectp(targ)) return 1;
  //brambles around head
  if((string)targ->return_target_limb()=="head") {
-    tell_room(EETO,""+ETO->QCN+" slices the blade into "
+    tell_room(EETO,"%^CYAN%^"+ETO->QCN+" slices the blade into "
         +targ->QCN+"'s head and brambles tighten around "+ETO->QP+" neck."
         ,({ETO,targ}));
-        tell_object(ETO,"You slice the weapon into "+
+        tell_object(ETO,"%^CYAN%^You slice the weapon into "+
         targ->QCN+"'s head and brambles tighten around "+
         ETO->QP+"neck.");
-        tell_object(targ,""+ETO->QCN+" slices you in the"+
+        tell_object(targ,"%^CYAN%^"+ETO->QCN+" slices you in the"+
         " head and brambles slide from the blade around your neck.  "+
         "Your airway slowly gets cut off!.");
         if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-40))
-          targ->set_paralyzed(5,"The brambles around your neck "+
+          targ->set_paralyzed(5,"%^ORANGE%^The brambles around your neck "+
           "stop you from breathing.");
 
                 if(!present("brambobj",targ)){
@@ -91,9 +91,9 @@ int extra_hit(object targ)
     if (member_array(EETO->query_terrain(),({"heavy forest",
     "light forest","jungle","scrub lands","grasslands"})) != -1 &&
         !present("feyspirit",EETO))
-        {  tell_room(EETO,"A blue haze shoots from"
+        {  tell_room(EETO,"%^CYAN%^A blue haze shoots from"
            +ETO->QCN+"'s halberd and a glowing light comes to aid you.",({ETO}));
-        tell_object(ETO,"A fey spirit "+
+        tell_object(ETO,"%^CYAN%^A fey spirit "+
          " comes to your aid.");
         tree =new(MON+"fey_spirit");
         tree ->move(environment(ETO));
@@ -119,7 +119,7 @@ int extra_hit(object targ)
      tell_room(EETO,"%^GREEN%^"+ETO->QCN+"'s"+
           " halberd sprays thorns at "+
                   targ->QCN+".",({ETO,targ}));
-         tell_object(targ,""+ETO->QCN+"'s"+
+         tell_object(targ,"%^GREEN%^"+ETO->QCN+"'s"+
                 " halberd slashes you then begins spraying thorns.");
     
 new("/cmds/spells/t/_thorn_spray")->use_spell(ETO,targ,15,100,"cleric");
