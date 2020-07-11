@@ -5152,6 +5152,9 @@ int is_favored_enemy(object ob)
     if(!ob && !objectp(ob))
         return 0;
     
+    if(!sizeof(favored_enemy))
+        return 0;
+    
     ids = ob->query_id();
     ob->query_race() && ids += ({ ob->query_race() });
     if(ob->is_undead())
@@ -5159,10 +5162,13 @@ int is_favored_enemy(object ob)
     
     foreach(string favored_type in favored_enemy)
     {
-        foreach(string id in ids)
+        if(strlen(favored_type) && favored_type != "none")
         {
-            if(member_array(id, VALID_ENEMY[favored_type]) > -1)
-                return 1;
+            foreach(string id in ids)
+            {
+                if(member_array(id, VALID_ENEMY[favored_type]) > -1)
+                    return 1;
+            }
         }
     }
     
@@ -5173,15 +5179,21 @@ int is_favored_terrain(object room)
 {
     string type;
     
-    if(!room || !objectp(room))
+    if(!room || !objectp(room) || !sizeof(favored_terrain))
         return 0;
     
     type = room->query_terrain();
     
+    if(!type || !strlen(type))
+        return 0;
+    
     foreach(string terrain in favored_terrain)
     {
-        if(member_array(type, VALID_TERRAIN[terrain]) > -1)
-            return 1;
+        if(strlen(terrain) && terrain != "none")
+        {
+            if(member_array(type, VALID_TERRAIN[terrain]) > -1)
+                return 1;
+        }
     }
     
     return 0;

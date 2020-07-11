@@ -1,9 +1,9 @@
 /*
-  _favored_enemy.c
+  _second_favored_enemy.c
   
   Allows the ranger to set their favored enemy
   
-  -- Tlaloc -- 7.9.20
+  -- Tlaloc -- 7.10.20
 */
 
 #include <std.h>
@@ -24,28 +24,28 @@ void create()
     set_author("tlaloc");
     feat_type("instant");
     feat_category("WildernessLore");
-    feat_name("favored enemy");
-    feat_prereq("Ranger L1");
-    feat_syntax("favored_enemy [TYPE]");
+    feat_name("second favored enemy");
+    feat_prereq("Ranger L11");
+    feat_syntax("second_favored_enemy [TYPE]");
     feat_desc("This feat allows a ranger to focus their knowledge and training\
-fighting an enemy type of their choice. The ranger will recieve a +2 bonus to\
-attack and damage rolls while fighting their favored enemy.\
+fighting a second enemy type of their choice. The ranger will recieve an\
+addiional +2 bonus to attack and damage rolls while fighting their favored enemy.\
 You can select from the following favored enemies: \n\n" + "%^GREEN%^" + implode(valid_choices, "\n") +
-"\n\n\To start selection process type <favored enemy>.");
+"%^RESET%^\n\n\To start selection process type <favored enemy> [TYPE].");
     allow_tripped(1);
-    set_required_for(({ "second favored enemy" }));
+    set_required_for(({ "third favored enemy" }));
 }
 
 int allow_shifted() { return 1; }
 
-int cmd_favored_enemy(string str)
+int cmd_second_favored_enemy(string str)
 {
     object feat;
     
     if(!objectp(this_player()))
         return 0;
     
-    if(this_player()->query_class_level("ranger") < 1)
+    if(this_player()->query_class_level("ranger") < 11)
     {
         dest_effect();
         return 0;
@@ -63,13 +63,13 @@ int execute_feat()
     
     if(!arg)
     {
-        write("Your first favored enemy is: " + this_player()->query_favored_enemy(1));
+        write("Your second favored enemy is: " + this_player()->query_favored_enemy(2));
         return 1;
     }
     
-    if(this_player()->query_property("favored_enemy_change") > time() - 259200)
+    if(this_player()->query_property("second_favored_enemy_change") > time() - 259200)
     {
-        write("You may only change your favored enemy once every three weeks.");
+        write("You may only change your second favored enemy once every three weeks.");
         return 1;
     }
     
@@ -93,8 +93,8 @@ void confirm_selection(string str)
     }
 
     write("You declare your favored enemy as : " + arg + ".");
-    this_player()->set_favored_enemy(1, arg);
-    this_player()->set_property("favored_enemy_change", time());
+    this_player()->set_favored_enemy(2, arg);
+    this_player()->set_property("second_favored_enemy_change", time());
     dest_effect();
     return;
 }

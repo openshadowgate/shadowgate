@@ -69,7 +69,7 @@
 #define PATHFINDER_D	(DIR_DAEMONS+"/pathfinder_d")
 #define PERMA_DEATH_D            (DIR_SECURE_DAEMONS+"/perma_d")
 #define PLAYER_D             (DIR_DAEMONS+"/player_d")
-#define PLAYER_HOUSING       (DIR_DAEMONS+"player_housing")
+#define PLAYER_HOUSING       (DIR_DAEMONS+"/player_housing")
 #define POISON_D             (DIR_DAEMONS+"/poison_d")
 #define PRISON_D             (DIR_SECURE_DAEMONS+"/prison_d")
 #define PSION_CALCS            (DIR_DAEMONS+"/psion_calcs")

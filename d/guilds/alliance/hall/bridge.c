@@ -12,7 +12,7 @@ void create()
     ::create();
     set_indoors(0);
     set_light(2);
-    set_property("teleport proof", "/daemon/player_housing"->get_phouse_tp_proof("epic"));
+    set_property("teleport proof", "/daemon/player_housing"->get_phouse_tp_proof("legendary"));
     set_short("On the Drawbridge");
     set_long("%^CYAN%^On the Drawbridge%^RESET%^\n%^BOLD%^%^WHITE%^You find yourself walking on a massive drawbridge that leads across the dark%^RESET%^ %^ORANGE%^moat%^RESET%^%^BOLD%^%^WHITE%^ that surrounds the castle. The drawbridge is  made of strong oak reinforced with iron. On it you see a large symbol that looks like two gauntlets shaking hands.%^RESET%^");
     set_listen("default", "You hear many different sounds from within the castle but they still seem distant.");

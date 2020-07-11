@@ -11,10 +11,10 @@ void create(){
     set_id(({"halberd","sapphire glaive","glaive of the exterminated"}));
     set_short("Fey Halberd ");
     set_obvious_short("leaf covered halberd");
-    set_long("This large polearm consists of a large wooden pole"+
-    " that is covered with green leaves and a silver axe head on the end."+
+    set_long("%^GREEN%^This large polearm consists of a large wooden pole"+
+    " that is covered with green leaves and a %^RESET%^silver axe head%^GREEN%^ on the end."+
     "  Above the axe there is a pointed spike.  All of the metal parts"+
-    " of this weapon seem to be created with a hardened silver alloy.");
+    " of this weapon seem to be created with a hardened %^RESET%^silver%^GREEN%^ alloy.%^RESET%^");
     set_lore("An adventurer brought this strange weapon to the elves "+
     "leading the revolt against the fey'ri on Argentrock.  They didn't"+
     " know what to do with it and it took years before an oracle was"+
@@ -127,40 +127,35 @@ new("/cmds/spells/t/_thorn_spray")->use_spell(ETO,targ,15,100,"cleric");
 }
 
 
-int extra_wield() { // only part elven
+int extra_wield() { // only goodly
     int myalign;
-    //if(!interactive(ETO) || avatarp(ETO) )
-    //  return 1;
+    if(!interactive(ETO) || avatarp(ETO) )
+      return 1;
 
     if (!ETO) return 0;
     myalign = (int)ETO->query_alignment();
     if((myalign % 3) == 1) {
                 write(
-            "As you wield the glaive, visions "+
-            "of a desperate battle fill your head,"+
-            " your companions are slain left and right
-alongside you.");
+            "%^GREEN%^You wield the halberd and feel accepted.");
         say(
-            ""+ETOQCN+" wields a glaive and gets a far "+
-            "away look in "+ETO->QP+" eyes.\n"+
-            "Blinking, "+ETO->QS+" looks quite disturbed. ");
+            "%^GREEN%^"+ETOQCN+" wields a halberd and gets a far "+
+            "away look in "+ETO->QP+" eyes.");
 
                 ETO->set_property("good item",1);
          if(find_call_out("mess")==-1)
            call_out("mess",120+random(1000));
                 }
         else{
-           say(""+ETOQCN+" holds the glaive but jerks violently"+
+           say("%^GREEN%^"+ETOQCN+" holds the halberd but jerks violently"+
              " as brambles lash out from it, wrapping "+ETO->QO+"
 tightly.");
            write("The glaive juts out brambles that bind"+
            " you fast when you place your hand on it."+
            "  \n They cut into you terribly.");
-       ETO->set_paralyzed(10,"You can't move!");
+       ETO->set_paralyzed(10,"Brambles bind you fast!");
        ETO->set_bound(150,"Brambles bind you fast.");
        ETO->cause_typed_damage(ETO, ETO->return_target_limb(),200, "piercing");
 
-       ETO->do_damage(100);
            return 0;
            }
     return 1;
@@ -168,7 +163,7 @@ tightly.");
 int extra_unwield() {
     if (!ETO) return 0;
     tell_object(ETO,
-    "You release the "+
+    "%^GREEN%^You release the "+
          "Halberd and sigh.");
         ETO->set_property("good item",-1);
    return 1;

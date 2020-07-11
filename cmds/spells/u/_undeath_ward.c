@@ -12,7 +12,7 @@ void create()
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS repulsion");
     set_damage_desc("removes undead from combat or damages them");
-    set_description("This spell pushes undead creatures away from you, removing them form combat. Undead that makes the save will take damage instead.");
+    set_description("This spell pushes undead creatures away from you, removing them from combat. Undead that makes the save will take damage instead.");
     set_save("will");
     traveling_aoe_spell(1);
 }
