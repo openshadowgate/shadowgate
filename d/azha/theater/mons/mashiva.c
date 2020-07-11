@@ -3,7 +3,7 @@
 
 inherit "std/monster";
     void create(){
-      object obj; 
+      object obj;
       ::create();
 	set_name("mashiva");
 	set_id(({"mashiva", "devil","eryines"}));
@@ -26,7 +26,7 @@ inherit "std/monster";
 		"Dressed in a tight outfit that is barely there, there is "+
 		"little left to imagination with this devil.  Though being"+
 		" an eryines, it's hard to say if this is her true form.%^RESET%^");
-	set_race("eryines");
+	set_race("devil");
 	set_gender("female");
 	set_body_type("human");
 	set_overall_ac(8);
@@ -140,7 +140,7 @@ break;
 	  "shatter",
 	  "sunder",
 	  "rush"
-   }));	  
+   }));
 }
 void rushit(object targ) {
   	TO->force_me("rush" +targ->query_name());
@@ -165,7 +165,7 @@ else {
     	tell_object(targ,"%^CYAN%^Mashiva takes a deep breath before she"+
 		" lets loose an ear piercing scream that knocks you back just slightly.");
      	tell_room(ETO,"%^CYAN%^Mashiva takes a deep breath before she "+
-		"lets loose an ear piercing scream that knocks "+ 
+		"lets loose an ear piercing scream that knocks "+
       	" "+targ->QCN+" back slightly",targ);
     	return 1;
 	}

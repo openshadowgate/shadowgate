@@ -20,7 +20,7 @@ inherit "std/monster";
 		" their bodies, this one is oddly without any.  His wooden fi"+
 		"ngers and hands are wrapped around a large axe that is nea"+
 		"rly twice his size. %^RESET%^");
-	set_race("marionnette");
+	set_race("construct");
 	set_gender("male");
 	set_body_type("human");
 	set_overall_ac(7);

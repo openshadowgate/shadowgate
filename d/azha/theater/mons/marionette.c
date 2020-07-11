@@ -3,7 +3,7 @@
 
 inherit "std/monster";
       void create(){
-      object obj; 
+      object obj;
       ::create();
 	set_name("giant marionette");
 	set_id(({"giant marionette", "marionette","giant","theater_mon"}));
@@ -23,7 +23,7 @@ inherit "std/monster";
 		"of its hands, while the other two are left unarmed.  Supported by two"+
 		" feet with what looks to be seven smaller feet on each foot where the "+
 		"toes should be, this monstrosity doesn't seem to friendly.%^RESET%^");
-	set_race("marionette");
+	set_race("construct");
 	set_gender("neuter");
 	set_body_type("human");
 	set_overall_ac(-5);
@@ -116,7 +116,7 @@ void whirlit(object targ){
 }
 
 void die(object obj) {
-	obj=new("/d/azha/obj/rift_key")->move(TO); 
+	obj=new("/d/azha/obj/rift_key")->move(TO);
 		tell_room(ETO,"%^ORANGE%^As the giant marionette falls to the "+
 			"floor with a thunderous crash, something falls out of "+
 			"one of the mouths.\n\n"+

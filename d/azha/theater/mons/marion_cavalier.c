@@ -25,7 +25,7 @@ inherit "std/monster";
 		" a shield in one hand and a flail in the other, th"+
 		"is little marionette looks majestic upon his woode"+
 		"n horse. %^RESET%^");
-	set_race("marionnette");
+	set_race("construct");
 	set_gender("male");
 	set_body_type("human");
 	set_overall_ac(9);

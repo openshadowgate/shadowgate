@@ -20,7 +20,7 @@ void create (){
 " it is pulled into a constant frown and his jowels hang low.  His hairy arms look"
 " almost uproportionally long and end in very large hands that are dirty from"
 " constantly handling dirt and rocks.%^RESET%^");
-   set_race("hill giant");
+   set_race("giant");
    set_gender("male");
    set_body_type("humanoid");
    set_hd(21,2);

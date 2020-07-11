@@ -19,7 +19,7 @@ void create (){
 " almost uproportionally long and end in very large hands.  He wears several layers"
 " of dirty hide armor, alot of it still has tufts of fur attached in odd places here"
 " and there.%^RESET%^");
-   set_race("hill giant");
+   set_race("giant");
    set_gender("male");
    set_body_type("humanoid");
    set_hd(25,2);
