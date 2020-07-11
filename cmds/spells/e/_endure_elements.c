@@ -1,7 +1,7 @@
 /*
   _endure_elementa.c
   
-  Ranger gains +10 Fire and Cold resistance
+  Gains +10 Fire and Cold resistance
   
   -- Tlaloc -- 7.11.20
 */
@@ -36,7 +36,7 @@ void create()
     
     set_author("tlaloc");
     set_spell_name("endure elements");
-    set_spell_level( ([ "ranger" : 1 ]) );
+    set_spell_level( ([ "ranger" : 1, "druid" : 1, "cleric" : 1, "paladin" : 1, "mage" : 1 ]) );
     set_spell_sphere("alteration");
     set_syntax("cast CLASS endure elements");
     set_damage_desc("+10 to fire and cold resistance.");
@@ -58,7 +58,7 @@ int preSpell()
 
 string query_cast_string()
 {
-    return "%^GREEN%^" + sprintf("%s concentrates on %s woodland powers", caster->QCN, caster->query_possessive());
+    return "%^GREEN%^" + sprintf("%s concentrates on %s protective powers", caster->QCN, caster->query_possessive());
 }
 
 void spell_effect(int prof)
