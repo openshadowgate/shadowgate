@@ -50,7 +50,7 @@ int help(){
 
 pkmail - report a pk event
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 pkmail TITLE
 

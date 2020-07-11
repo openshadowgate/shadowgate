@@ -243,7 +243,7 @@ void help()
 
 wear - put something on
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 wear %^ORANGE%^%^ULINE%^ITEM%^RESET%^
 

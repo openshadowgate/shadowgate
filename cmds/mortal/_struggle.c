@@ -184,7 +184,7 @@ int help(){
 
 struggle - get out of binding
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 struggle
 struggle gag | blindfold

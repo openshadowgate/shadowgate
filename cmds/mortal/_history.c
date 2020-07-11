@@ -30,7 +30,7 @@ void help(){
 
 history - display your command history
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 history [all]
 

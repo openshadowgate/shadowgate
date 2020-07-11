@@ -200,7 +200,7 @@ void help()
 
 rumors - display areas appropriate to your level
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 rumors [all]
 

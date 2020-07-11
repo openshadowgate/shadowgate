@@ -10,7 +10,7 @@ void create()
 {
     ::create();
     set_spell_name("kiss of feywild");
-    set_spell_level(([ "druid" : 4, "bard" : 4 ]));
+    set_spell_level(([ "druid" : 4, "bard" : 4, "ranger" : 4 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS kiss of feywild [on TARGET]");
     set_damage_desc("on living, fast healing 2");

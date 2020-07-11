@@ -38,7 +38,7 @@ void help() {
 
 elementalist - set damage element for versatile arcanist prestige class
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 elementalist %^ORANGE%^%^ULINE%^TYPE%^RESET%^|reset
 

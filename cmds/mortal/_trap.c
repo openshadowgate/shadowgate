@@ -1157,7 +1157,7 @@ int help()
 
 trap - deal with traps
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 trap detect on|off
 trap find|disarm|remove|recover on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^

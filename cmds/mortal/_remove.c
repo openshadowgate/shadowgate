@@ -36,7 +36,7 @@ void help()
 
 remove - undress *blush*
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 remove %^ORANGE%^%^ULINE%^ITEM%^RESET%^
 

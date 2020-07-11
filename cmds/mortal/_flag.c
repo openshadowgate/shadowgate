@@ -225,36 +225,32 @@ int cmd_flag(string str)
                 return 1;
                 break;
             case "scaled level":
-                //tell_object(TP, "This is temporarily disabled, pending finishing the code that "+
-                //"manipulates items to scale down with you.");
-               // return 1;
-                if(!ETP->query_property("training"))
-                {
-                    tell_object(TP, "You must be in a place that allows you to advance in order to use "+
-                    "level scaling.");
+
+                tell_object(TP, "This is temporarily disabled.");
+                return 1;
+
+                if (!ETP->query_property("training")) {
+                    tell_object(TP, "You must be in a place that allows you to advance in order to use " +
+                                "level scaling.");
                     return 1;
                 }
                 base = TP->query_base_character_level();
-                if(arg == "revert" || arg == "normal")
-                {
+                if (arg == "revert" || arg == "normal") {
                     "/daemon/user_d.c"->scale_level_to(TP, base);
                     return 1;
                 }
                 perc = to_int(arg);
-                if(perc < 6)
-                {
+                if (perc < 6) {
                     tell_object(TP, "You cannot currently scale your level below level 6.");
                     return 1;
                 }
-                if(perc > base)
-                {
-                    tell_object(TP, "You cannot currently scale your level above your total "+
-                    "character level of "+base+ " (please note: this does not include level adjusted "+
-                    "races).");
+                if (perc > base) {
+                    tell_object(TP, "You cannot currently scale your level above your total " +
+                                "character level of " + base + " (please note: this does not include level adjusted " +
+                                "races).");
                     return 1;
                 }
-                if(perc == base)
-                {
+                if (perc == base) {
                     "/daemon/user_d.c"->scale_level_to(TP, base);
                     return 1;
                 }
@@ -280,7 +276,7 @@ void help()
 
 flag - manipulate player flags
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 flag
 flag scaled level as %^ORANGE%^%^ULINE%^LEVEL%^RESET%^|normal

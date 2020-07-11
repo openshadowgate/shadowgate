@@ -83,7 +83,7 @@ int help() {
 
 pose - change a pose, active class
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 pose %^ORANGE%^%^ULINE%^DESCRIPTION%^RESET%^
 pose clear|show

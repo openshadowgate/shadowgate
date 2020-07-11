@@ -159,7 +159,7 @@ void help()
 
 hide - hide something
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 hide %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [in %^ORANGE%^%^ULINE%^CONTAINER%^RESET%^|on me]
 

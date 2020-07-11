@@ -53,7 +53,7 @@ int help(){
 
 recognize - recognize someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 recognize %^ORANGE%^%^ULINE%^WHO%^RESET%^ as %^ORANGE%^%^ULINE%^NAME%^RESET%^
 

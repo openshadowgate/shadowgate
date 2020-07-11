@@ -248,7 +248,7 @@ int help(){
 
 bboard - read and access boards
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 bboard %^ORANGE%^%^ULINE%^NAME%^RESET%^ post %^ORANGE%^%^ULINE%^TITLE%^RESET%^
 bboard %^ORANGE%^%^ULINE%^NAME%^RESET%^ [read|answer|remove|view] [%^ORANGE%^%^ULINE%^POST_NUMBER%^RESET%^]

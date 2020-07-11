@@ -203,7 +203,7 @@ void help()
 
 drain - drain someone's blood
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 drain %^ORANGE%^%^ULINE%^TARGET%^RESET%^ [for life|health]
 drain nullify

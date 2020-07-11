@@ -79,7 +79,7 @@ void help(){
 
 unbind - unbind someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 unbind %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

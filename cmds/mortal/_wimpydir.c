@@ -34,7 +34,7 @@ void help() {
 
 wimpydir - choose where to run
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 wimpydir [%^ORANGE%^%^ULINE%^DIRECTION%^RESET%^|retreat]
 

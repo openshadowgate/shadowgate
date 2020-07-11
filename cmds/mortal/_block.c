@@ -39,7 +39,7 @@ int help(){
 
 block - block an exit
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 block %^ORANGE%^%^ULINE%^EXIT%^RESET%^ 
 

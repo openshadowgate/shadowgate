@@ -149,7 +149,7 @@ void help() {
 
 hp - show your condition");
     if(avatarp(TP)) write("
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 hp [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]");
     write(

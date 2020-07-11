@@ -39,7 +39,7 @@ void help() {
 
 lines - toggle lines off or on
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 lines [on|off]
 

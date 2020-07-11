@@ -42,7 +42,7 @@ int help(){
 
 shoo - shoo a thing
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 shoo MOUNT
 

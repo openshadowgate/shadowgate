@@ -92,7 +92,7 @@ void help(){
 
 ungag - ungag someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 ungag %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

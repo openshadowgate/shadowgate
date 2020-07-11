@@ -315,7 +315,7 @@ void help()
 
 buff - cast stored list of spells
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 buff
 buff list|diff

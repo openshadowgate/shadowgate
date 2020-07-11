@@ -64,7 +64,7 @@ void help() {
 
 describe - describe yourself
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 describe %^ORANGE%^%^ULINE%^TEXT%^RESET%^
 

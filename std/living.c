@@ -1840,13 +1840,24 @@ void add_saving_bonus(string throw, int bonus)
 
 int query_saving_bonus(string throw)
 {
+    int x;
+    
     if ((!query_property("saving_init")) || (!save_bonus)) {
         init_saving_bonus();
     }
     if (member_array(throw, SAVING_THROW) != -1) {
         return save_bonus[throw] + EQ_D->gear_bonus(TO, throw);
     }
-    return EQ_D->gear_bonus(TO, throw);
+    
+    x = EQ_D->gear_bonus(TO, throw);
+    
+    if(FEATS_D->usable_feat(TO, "seen it before"))
+    {   
+        if(TO->is_favored_enemy(TO->query_current_attacker()))
+            x += 6;
+    }
+    
+    return x;
 }
 
 void remove_stat_bonuses()

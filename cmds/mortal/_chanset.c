@@ -47,7 +47,7 @@ void help(){
 
 chanset - set message style on all channels you occupy
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 chanset [emote] %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
 

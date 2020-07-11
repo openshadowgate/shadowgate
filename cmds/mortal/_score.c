@@ -186,7 +186,7 @@ void help()
 
 score - show your characters score sheet
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 score [%^ORANGE%^%^ULINE%^NUM%^RESET%^]
 Avatars: score [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]

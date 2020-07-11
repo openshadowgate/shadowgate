@@ -34,7 +34,7 @@ void help(){
 
 unfollow - stop following someone
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 unfollow %^ORANGE%^%^ULINE%^NAM%^RESET%^E
 

@@ -79,7 +79,7 @@ void help() {
 
 submit - allow someone to do something to you
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 submit to binding by %^ORANGE%^%^ULINE%^NAME%^RESET%^
 

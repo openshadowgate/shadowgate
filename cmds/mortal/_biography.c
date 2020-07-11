@@ -229,7 +229,7 @@ int help() {
 
 biography - display your life
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 biography [kills|deaths|quests]
 

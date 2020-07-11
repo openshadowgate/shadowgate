@@ -58,7 +58,7 @@ void help()
 
 fixrecognized - remove suicied, rid or vanished players from your memory
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 fixrecognized [all]
 

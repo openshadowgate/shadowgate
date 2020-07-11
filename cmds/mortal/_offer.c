@@ -84,7 +84,7 @@ int help() {
 
 offer - dispose of something
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 offer %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [to %^ORANGE%^%^ULINE%^GOD%^RESET%^]
 

@@ -424,7 +424,7 @@ void help(){
 
 alterobj - change long and short description of an item
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 alterobj %^ORANGE%^%^ULINE%^ITEM%^RESET%^
 

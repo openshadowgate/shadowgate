@@ -59,7 +59,7 @@ int help(){
 
 flee - escape the combat
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 flee [%^ULINE%^%^ORANGE%^stop%^RESET%^]
 

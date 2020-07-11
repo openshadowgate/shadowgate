@@ -142,7 +142,7 @@ void help(){
 
 emoteat - directs an emote towards a living target.
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 %^ORANGE%^emoteat %^ORANGE%^%^ULINE%^TARGET%^RESET%^ %^ORANGE%^%^ULINE%^STRING%^RESET%^
 

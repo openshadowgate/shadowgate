@@ -46,7 +46,7 @@ void help()
 
 unignore - remove people form ignore list
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 unignore [clear|%^ORANGE%^%^ULINE%^NAME%^RESET%^]
 

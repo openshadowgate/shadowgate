@@ -46,7 +46,7 @@ int help(){
 
 wake - wake someone up
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 wake %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

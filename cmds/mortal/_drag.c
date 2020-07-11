@@ -67,7 +67,7 @@ int help(){
 
 drag - drag something
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 drag %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

@@ -23,7 +23,7 @@ void help()
 
 thought - think something
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 thought %^ORANGE%^%^ULINE%^THOUGHT%^RESET%^
 

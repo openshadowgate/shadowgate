@@ -85,7 +85,7 @@ void help() {
 
 yell - convey a message to nearby rooms
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 yell %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
 

@@ -33,7 +33,7 @@ void help() {
 
 help - get a helpfile to read
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 help [%^ULINE%^%^ORANGE%^TOPIC%^RESET%^] [%^ULINE%^%^ORANGE%^*CATEGORY%^RESET%^]
 
@@ -45,7 +45,7 @@ If you pass a topic or topic with category you will be given help file on that t
 
 If you pass a category alone, you'll be given help menu on that category.
 
-%^CYAN%^COMMAND SYNTAX%^RESET%^
+%^CYAN%^COMMAND SYNOPSIS%^RESET%^
 
 When presented, a syntax %^ORANGE%^<>%^RESET%^ denotes a command is to be used within a paragraph of a help file, like %^ORANGE%^<help help>%^RESET%^ does in this very sentence.
 

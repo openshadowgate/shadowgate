@@ -41,7 +41,7 @@ int help(){
 
 avatarmail - commune with avatars
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 avatarmail %^ORANGE%^%^ULINE%^TITLE%^RESET%^
 

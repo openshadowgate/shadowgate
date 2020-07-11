@@ -126,7 +126,7 @@ void help()
 
 spy - alternative to looking
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 spy TARGET
 

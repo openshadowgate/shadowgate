@@ -42,7 +42,7 @@ score, stats, enchant, spellcraft
 
     if(avatarp(TP))
         write("
-%^CYAN%^IMMORTALS SYNTAX%^RESET%^
+%^CYAN%^IMMORTALS SYNOPSIS%^RESET%^
 
 bonuses [%^ORANGE%^%^ULINE%^PLAYER%^RESET%^]
 

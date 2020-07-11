@@ -15,7 +15,7 @@ int help(){
 
 skin - gather biomass
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 skin %^ORANGE%^CORPSE%^RESET%^
 

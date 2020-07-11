@@ -158,7 +158,7 @@ void help()
 
 mmap - look around
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 mmap %^ORANGE%^%^ULINE%^DISTANCE%^RESET%^
 

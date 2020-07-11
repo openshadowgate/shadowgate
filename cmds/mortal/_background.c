@@ -26,7 +26,7 @@ void help() {
 
 background - edit or remove your in character background
 
-%^CYAN%^%^SYNTAX%^%^RESET%^
+%^CYAN%^%^SYNOPSIS%^%^RESET%^
 
 background
 background remove

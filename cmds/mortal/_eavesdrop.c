@@ -183,7 +183,7 @@ void help(){
 
 eavesdrop - tap onto conversation
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 eavesdrop [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]");
     if(avatarp(TP))

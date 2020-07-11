@@ -204,7 +204,7 @@ void help()
 
 peer - peer through multiple rooms
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 peer %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^ [%^ULINE%^%^ORANGE%^DISTANCE%^RESET%^]
 

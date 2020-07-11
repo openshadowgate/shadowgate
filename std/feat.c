@@ -554,7 +554,7 @@ void define_flevel()
         return;
     }
 
-    if (!feat_clss || !sizeof(feat_clss)) {
+    if (!feat_clss || !sizeof(feat_clss) || !userp(caster)) {
         flevel = clevel;
     } else {
         string s;

@@ -10,7 +10,7 @@
 inherit WEAPONLESS;
 
 #include <daemons.h>
-#include "summoned_monster.h"
+#include "/d/magic/mon/summoned_monster.h"
 
 #define SAVEDIR "/d/save/summons/" + owner->query_name() + "/animal/"
 
@@ -19,7 +19,8 @@ object owner;
 string saved_short,
        saved_long;
 
-int setup;
+int setup,
+    bonus;
 
 int set_owner(object ob) { owner = ob; return 1; }
 object query_owner()     { return owner; }
@@ -144,13 +145,30 @@ void heart_beat()
     
     attackers = owner->query_attackers();
     
+    this_object()->add_damage_bonus(-bonus);
+    this_object()->add_attack_bonus(-bonus);
+    
     if(sizeof(attackers))
     {
         foreach(object ob in attackers)
             this_object()->kill_ob(ob);
+            
+        if(FEATS_D->usable_feat(owner, "hunters bond") &&
+        owner->is_favored_enemy(this_object()->query_current_attacker()))
+        {
+            bonus = 2 + (FEATS_D->usable_feat(owner, "second favored enemy") * 2) + (FEATS_D->usable_feat(owner, "third favored enemy") * 2);
+        }
+        else
+            bonus = 0;
     }
     else
+    {
         add_hp(query_max_hp() / 25);
+        bonus = 0;
+    }
+    
+    this_object()->add_damage_bonus(bonus);
+    this_object()->add_attack_bonus(bonus);
 }
 
 void special_attack(object target)

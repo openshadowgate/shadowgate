@@ -16,7 +16,7 @@ int help()
 
 teach - teach someone a tongue
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 teach %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ to %^ORANGE%^%^ULINE%^SOMEONE%^RESET%^
 

@@ -178,7 +178,7 @@ void help() {
 
 plant - plant something
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 plant %^ORANGE%^%^ULINE%^ITEM%^RESET%^ on %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 

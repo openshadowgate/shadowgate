@@ -153,7 +153,7 @@ void help()
 
 reply - reply to a tell
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 reply %^ORANGE%^%^ULINE%^MESSAGE%^RESET%^
 

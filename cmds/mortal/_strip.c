@@ -186,7 +186,7 @@ void help() {
 
 strip - make someone naked
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 strip %^ORANGE%^%^ULINE%^TARGET%^RESET%^ [of %^ORANGE%^%^ULINE%^ITEM%^RESET%^|money]
 

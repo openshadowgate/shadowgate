@@ -38,7 +38,7 @@ void help()
 
 unwield - remove something from your hand
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 unwield %^ORANGE%^%^ULINE%^ITEM%^RESET%^
 

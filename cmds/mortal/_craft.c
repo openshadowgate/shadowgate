@@ -482,7 +482,7 @@ varargs void help(string str)
 
 craft - crafting central hub
 
-%^CYAN%^SYNTAX%^RESET%^
+%^CYAN%^SYNOPSIS%^RESET%^
 
 craft %^ORANGE%^%^ULINE%^ITEM%^RESET%^ [with %^ORANGE%^%^ULINE%^SKILL%^RESET%^]
 craft items %^ORANGE%^%^ULINE%^SKILL%^RESET%^
