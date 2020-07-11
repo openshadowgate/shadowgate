@@ -97,6 +97,7 @@ int extra_hit(object targ)
          " comes to your aid.");
         tree =new(MON+"fey_spirit");
         tree ->move(environment(ETO));
+        tree ->ownerz(ETO)
         ETO->add_protector(tree);
         ETO->add_follower(tree);
          return 1;

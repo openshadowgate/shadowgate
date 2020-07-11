@@ -32,7 +32,7 @@ void heart_beat(){
     "light forest","jungle","scrub lands","grasslands"})) == -1)
     die();
 	
-    if(owner->query_hp() < owner->query_max_hp() )
+    if((int)owner->query_hp() < (int)owner->query_max_hp() )
     new("/cmds/spells/c/_cure_moderate_wounds")->use_spell(TO,owner,15,100,"cleric");
 }
 
