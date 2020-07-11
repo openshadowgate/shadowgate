@@ -1,4 +1,4 @@
-//halberd for trade from fey'ri glaive hades 7-6/20
+//halberd for trade from fey'ri glaive hades 7-6-20
 #include <std.h>
 #include <daemons.h>
 #include "../argabbr.h"
@@ -8,7 +8,7 @@ void create(){
     ::create();
 
     set_name("Halberd");
-    set_id(({"halberd","sapphire glaive","glaive of the exterminated"}));
+    set_id(({"halberd","fey halberd","leaf","leaf covered halberd"}));
     set_short("Fey Halberd ");
     set_obvious_short("leaf covered halberd");
     set_long("%^GREEN%^This large polearm consists of a large wooden pole"+
@@ -89,13 +89,13 @@ int extra_hit(object targ)
   }
   // fey spirit comes and helps 
     if (member_array(EETO->query_terrain(),({"heavy forest",
-    "lightforest","jungle","branches"})) != -1 &&
+    "light forest","jungle","scrub lands","grasslands"})) != -1 &&
         !present("feyspirit",EETO))
         {  tell_room(EETO,"A blue haze shoots from"
            +ETO->QCN+"'s halberd and a glowing light comes to aid you.",({ETO}));
         tell_object(ETO,"A fey spirit "+
          " comes to your aid.");
-        tree =new(MON+"feyspirit");
+        tree =new(MON+"fey_spirit");
         tree ->move(environment(ETO));
         ETO->add_protector(tree);
         ETO->add_follower(tree);
