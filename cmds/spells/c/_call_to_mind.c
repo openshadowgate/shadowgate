@@ -55,7 +55,7 @@ void spell_effect()
     caster->add_skill_bonus("academics", bonus);
     
     caster->set_property("spelled", ({ this_object() }) );
-    caster->set_property("call to mind", 1);
+    caster->set_property("call_to_mind", 1);
     addSpellToCaster();
     
     call_out("dest_effect", ROUND_LENGTH * clevel * 2);
@@ -68,7 +68,7 @@ void dest_effect()
         target->add_skill_bonus("academics", -bonus);
         target->remove_property("spelled", ({ this_object() }) );
         tell_object(target, "%^CYAN%^You feel your academic insights slipping away.%^RESET%^");
-        target->remove_property("call to mind");
+        target->remove_property("call_to_mind");
     }
     ::dest_effect();
     if(objectp(this_object()))
