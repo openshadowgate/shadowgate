@@ -19,7 +19,7 @@ void create (){
 "  She is a little shorter than the males of the tribe, but"
 " what she deesn't have in height, she makes up for in weight.  It is fairly"
 " obvious that she does not go out on the raiding parties with the rest.%^RESET%^");
-   set_race("hill giant");
+   set_race("giant");
    set_gender("female");
    set_body_type("humanoid");
    set_overall_ac(-6);

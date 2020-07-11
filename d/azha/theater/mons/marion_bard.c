@@ -2,7 +2,7 @@
 #include "../theater.h"
 inherit "std/monster";
         void create(){
-          object obj; 
+          object obj;
         ::create();
 	set_name("bard marionette");
 	set_id(({"marionette","bard","bard marionette","+
@@ -19,7 +19,7 @@ inherit "std/monster";
 		"e.  While most marionettes have strings attached to th"+
 		"eir bodies, this one is oddly without any.  In her woo"+
 		"den hand she holds a darksteel rapier. %^RESET%^");
-	set_race("marionnette");
+	set_race("construct");
 	set_gender("female");
 	set_body_type("human");
 	set_hd(21,0);
@@ -93,7 +93,7 @@ if(random(3))
 	}
 int aggfunc() {
 	if(!TP->query_true_invis()) kill_ob(TP,1);
-		call_out("spell_effect",1); 
+		call_out("spell_effect",1);
 		force_me("kill "+TPQN+"");
 }
 int spell_effect(){
@@ -101,7 +101,7 @@ int spell_effect(){
    		command("cast blink");
    		command("cast stoneskin on marionette");
    		command("cast monster summoning ii");
-		return 1; 
+		return 1;
 }
 
 void die(object ob) {

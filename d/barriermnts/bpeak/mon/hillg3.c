@@ -19,7 +19,7 @@ void create (){
 " on his large forehead, shadowing his dark brown eyes.  His face looks as though"
 " it is pulled into a constant frown and his jowels hang low.  His hairy arms look"
 " almost uproportionally long compared to the rest of his body.%^RESET%^");
-   set_race("hill giant");
+   set_race("giant");
    set_gender("male");
    set_body_type("humanoid");
    set_overall_ac(-5);

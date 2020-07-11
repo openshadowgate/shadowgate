@@ -17,7 +17,7 @@ inherit "std/monster";
 		" most marionettes have strings attached to their bodies, this one"+
 		" is oddly without any.  A pair of jade claws are strapped to each"+
 		" arm.%^RESET%^");
-	set_race("marionnette");
+	set_race("construct");
 	set_gender("male");
 	set_body_type("human");
 	set_hd(21,0);

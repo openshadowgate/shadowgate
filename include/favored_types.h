@@ -23,19 +23,19 @@
                          "ogres"      : ({ "ogre", "ogre-mage", "half-ogre" }), \
                          "elves"      : ({ "elf", "half-elf", "drow", "half-drow", "szarkai" }), \
                          "goblins"    : ({ "goblin", "bugbear", "hobgoblin" }), \
-                         "fey"        : ({ "nymph", "satyr", "dryad", "pixie" }), \
-                         "orcs"       : ({ "orc", "half-orc" }), \
+                         "fey"        : ({ "nymph", "satyr", "dryad", "pixie", "brownie" }), \
+                         "orcs"       : ({ "orc", "half-orc", "orog" }), \
                          "beastmen"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "pegataur", "alaghi" }), \
                          "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow" }), \
-                         "lizardfolk" : ({ "yuan-ti", "saurian", "serpent" }), \
+                         "reptiles" : ({ "yuan-ti", "saurian", "serpent", "salamander" }), \
                          "undead"     : ({ "ghost", "skeleton", "lich", "zombie", "ghast", "entity", "spirit" }), \
                          "celestials" : ({ "deva", "solar" }), \
-                         "abyssals"   : ({ "demon", "devil" }), \
-                         "dragonkin"  : ({ "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon" }), \
+                         "abyssals"   : ({ "demon", "devil", "imp" }), \
+                         "dragonkin"  : ({ "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon", "drake", "wyvern" }), \
                          "giants"     : ({ "voadkyn", "firbolg", "giant", "titan" }), \
                          "smallfolk"  : ({ "gnome", "halfling", "kender", "dwarf" }), \
                          "elementals" : ({ "elemental" }), \
                          "aberations" : ({ "beholder", "illithid", "mind flayer" }), \
-                         "magical beasts" : ({ "owlbear" }), \
-                         "constructs" : ({ "construct", "golem" }), \
+                         "magical beasts" : ({ "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm" }), \
+                         "constructs" : ({ "construct", "golem", "sandman", "sandling" }), \
                      ])

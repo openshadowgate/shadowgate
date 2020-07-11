@@ -20,7 +20,7 @@ inherit "std/monster";
 		"st marionettes have strings attached to their bodies, thi"+
 		"s one is oddly without any.  In her wooden hand and finge"+
 		"rs she holds a colorful %^RESET%^");
-	set_race("marionnette");
+	set_race("construct");
 	set_gender("female");
 	set_body_type("human");
 	set_hd(21,0);

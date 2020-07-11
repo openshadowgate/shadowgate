@@ -18,7 +18,7 @@ inherit "std/monster";
 		" gaze out at the world with a sour look on her face.  While most mari"+
 		"onettes have strings attached to their bodies, this one is oddly with"+
 		"out any.  An ebony and ivory flail is clutched in her hands.%^RESET%^");
-	set_race("marionnette");
+	set_race("construct");
 	set_gender("female");
 	set_body_type("human");
 	set_hd(21,0);

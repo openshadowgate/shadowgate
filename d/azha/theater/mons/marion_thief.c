@@ -18,7 +18,7 @@ inherit "std/monster";
 		"%^GREEN%^eyes, his smirk seems charming.  While most marionettes"+
 		" have strings attached to their bodies, this one is oddly withou"+
 		"t any.  A pair of daggers are clutched in his wooden hands.%^RESET%^");
-	set_race("marionnette");
+	set_race("construct");
 	set_gender("male");
 	set_body_type("human");
 	set_hd(18,4);

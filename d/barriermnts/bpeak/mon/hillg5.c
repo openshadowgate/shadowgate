@@ -22,7 +22,7 @@ void create (){
 " anything sharp and is terribly messy.  His muscular body is simply huge and"
 " disporportioned with large arms that hang low, giving him an almost ape-like,"
 " primitive appearance.%^RESET%^");
-   set_race("hill giant");
+   set_race("giant");
    set_gender("male");
    set_body_type("humanoid");
    set_overall_ac(-5);
