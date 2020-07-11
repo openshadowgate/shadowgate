@@ -31,9 +31,11 @@ void heart_beat(){
     if (member_array(ETO->query_terrain(),({"heavy forest",
     "light forest","jungle","scrub lands","grasslands"})) == -1)
     die();
-	
-    if((int)owner->query_hp() < (int)owner->query_max_hp() )
-    new("/cmds/spells/c/_cure_moderate_wounds")->use_spell(TO,owner,15,100,"cleric");
+	//heal if owner is not at full hp
+    if(owner->query_hp() < owner->query_max_hp())
+    {
+        new("/cmds/spells/c/_cure_moderate_wounds")->use_spell(TO,owner,15,100,"cleric");
+    }
 }
 
 void die(object ob){
