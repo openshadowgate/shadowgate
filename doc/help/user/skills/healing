@@ -2,7 +2,7 @@
 
 %^BOLD%^%^WHITE%^A character's healing skill indicates their ability to mend injuries and illnesses. It involves the full range of abilities, from simple first aid to complex surgery. Healing attempts can also be made upon various mounts. This skill also answers for actions opposite to healing, such as torture or recovery prevention. A character knowledge of potion brewing can extend their knowledge of healing into the field of alchemy, creating mixtures to aid or hinder.
 
-%^BOLD%^%^CYAN%^Stat basis: %^WHITE%^intelligence
+%^BOLD%^%^CYAN%^Stat basis: %^WHITE%^wisdom
 %^BOLD%^%^CYAN%^Current areas of influence: %^WHITE%^healing, healing mount, brewing
 
 %^BOLD%^%^CYAN%^Related helpfiles: %^WHITE%^skills, heal, brew potion
