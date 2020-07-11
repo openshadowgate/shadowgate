@@ -27,7 +27,7 @@
                          "orcs"       : ({ "orc", "half-orc" }), \
                          "beastmen"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "pegataur", "alaghi" }), \
                          "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow" }), \
-                         "lizardfolk" : ({ "yuan-ti", "saurian" }), \
+                         "lizardfolk" : ({ "yuan-ti", "saurian", "serpent" }), \
                          "undead"     : ({ "ghost", "skeleton", "lich", "zombie", "ghast", "entity", "spirit" }), \
                          "celestials" : ({ "deva", "solar" }), \
                          "abyssals"   : ({ "demon", "devil" }), \
