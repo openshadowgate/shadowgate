@@ -7,7 +7,7 @@ void create(){
         ::create();
 
         set_name("fey spirit");
-        set_id(({"fee","spirit","fey spirit"}));
+        set_id(({"fee","spirit","fey spirit","feyspirit"}));
         set("short","%^RESET%^%^CYAN%^Fey Spirit%^RESET%^");
         set("long","This transparent light appears to be some"+
         " kind of a fey spirit.   It pulses light blue and"+
