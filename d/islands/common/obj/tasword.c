@@ -1,37 +1,41 @@
+//bumped the enchantment range and special damage to bring it more competitive with other Klauth weapons that can be brought to +10 - Yves 7/30/19
+//added call to setup_shadow on summon special - Yves 8/9/19
+
+
 #include <std.h>
 #include <daemons.h>
-inherit "/std/weapon";
+inherit "/d/common/obj/weapon/falcata.c";
 
 int firstwield, burn, charm;
 
-create() {
-   ::create();
-   set_id(({ "scimitar","sword","scimitar sword","Akra Mashul","akra mashul","Akra mashul","akra Mashul","Akra'Mashul","akra'mashul"}));
-   set_name("%^BOLD%^%^BLACK%^Akra'Mashul%^RESET%^");
-   set_short("%^BOLD%^%^BLACK%^Akra'Mashul%^RESET%^");
-   set_obvious_short("%^BOLD%^%^BLACK%^A dark %^RESET%^s%^BOLD%^%^WHITE%^i%^RESET%^l%^BOLD%^%^BLACK%^v%^RESET%^e%^BOLD%^%^WHITE%^r %^RESET%^and %^BOLD%^%^BLACK%^ebony s%^RESET%^c%^BOLD%^%^BLACK%^imi%^RESET%^t%^BOLD%^%^BLACK%^ar%^RESET%^");
-   set_long("%^BOLD%^%^BLACK%^This beautifully crafted scimitar yields a softly glowing light around its"
-" %^RESET%^s%^BOLD%^%^WHITE%^i%^RESET%^l%^BOLD%^%^BLACK%^v%^RESET%^e%^BOLD%^%^WHITE%^r %^RESET%^blade"
-" %^BOLD%^%^BLACK%^while the obsidian hilt stands in a dark and foreboding contrast.  %^RESET%^%^CYAN%^Runes"
-" %^BOLD%^%^BLACK%^freely float within the %^RESET%^crystal %^BOLD%^%^BLACK%^pommel of the sword, surrounding"
-" two darkly peering %^RESET%^%^MAGENTA%^eyes %^BOLD%^%^BLACK%^that shift with your movements as to never remove"
-" their sultry gaze from you.  The sword is amazingly light weight and the elegantly curved %^RESET%^blade"
-" %^BOLD%^%^BLACK%^is honed to a paper fine edge.%^RESET%^");
-   set_lore("%^BOLD%^%^BLACK%^This dark weapon is rumored to be of drow make.  Hidden deep within the underdark,"
-" it was embued with the dark magics known only to their kind.  It is known to have been given the name"
-" Akra'Mashul, but little else can be said of it... None know for sure if the drow made it, or if they are"
-" only the ones to have found it and given it the name.  In fact, none are even sure why it was hidden, was"
-" it because even they were afraid of the awesome power that could be yielded from such a weapon?  Few creations"
-" can be called evil, despite who made it.  This sword however, is said to embody the very presence of evil.");
-   set_weight(7);
-   set_size(2);
-   set("value",75000);
-   set_wc(1,12);
-   set_large_wc(1,8);
-   set_type("slashing");
-   set_prof_type("medium blades");
-   set_weapon_prof("exotic");
-   set_weapon_speed(5);
+
+create()
+{
+    ::create();
+    set_id(({ "falcata","sword","falcata sword","Akra Mashul","akra mashul","Akra mashul","akra Mashul","Akra'Mashul","akra'mashul"}));
+    set_name("%^BOLD%^%^BLACK%^Akra'Mashul%^RESET%^");
+    set_short("%^BOLD%^%^BLACK%^Akra'Mashul%^RESET%^");
+
+    set_obvious_short("%^BOLD%^%^BLACK%^A dark %^RESET%^s%^BOLD%^%^WHITE%^i%^RESET%^l%^BOLD%^%^BLACK%^v%^RESET%^e%^BOLD%^%^WHITE%^r %^RESET%^and %^BOLD%^%^BLACK%^ebony f%^RESET%^a%^BOLD%^%^BLACK%^lca%^RESET%^t%^BOLD%^%^BLACK%^a%^RESET%^");
+
+    set_long("%^BOLD%^%^BLACK%^This beautifully crafted falcata yields a softly glowing light around its"
+        " %^RESET%^s%^BOLD%^%^WHITE%^i%^RESET%^l%^BOLD%^%^BLACK%^v%^RESET%^e%^BOLD%^%^WHITE%^r %^RESET%^blade"
+        " %^BOLD%^%^BLACK%^while the obsidian hilt stands in a dark and foreboding contrast.  %^RESET%^%^CYAN%^Runes"
+        " %^BOLD%^%^BLACK%^freely float within the %^RESET%^crystal %^BOLD%^%^BLACK%^pommel of the sword, surrounding"
+        " two darkly peering %^RESET%^%^MAGENTA%^eyes %^BOLD%^%^BLACK%^that shift with your movements as to never remove"
+        " their sultry gaze from you.  The sword is amazingly light weight and the elegantly curved %^RESET%^blade"
+        " %^BOLD%^%^BLACK%^is honed to a paper fine edge.%^RESET%^");
+
+    set_lore("%^BOLD%^%^BLACK%^This dark weapon is rumored to be of drow make.  Hidden deep within the underdark,"
+        " it was embued with the dark magics known only to their kind.  It is known to have been given the name"
+        " Akra'Mashul, but little else can be said of it... None know for sure if the drow made it, or if they are"
+        " only the ones to have found it and given it the name.  In fact, none are even sure why it was hidden, was"
+        " it because even they were afraid of the awesome power that could be yielded from such a weapon?  Few creations"
+        " can be called evil, despite who made it.  This sword however, is said to embody the very presence of evil.");
+
+    set_value(375000);
+
+    set_property("no curse",1);
    set_hit((:TO,"hit_func":));
    set_wield((:TO,"wield_func":));
    set_unwield((:TO,"unwield_func":));
