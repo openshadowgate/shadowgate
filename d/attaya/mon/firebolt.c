@@ -8,7 +8,7 @@ void create() {
     set_long(
       "The Firebolt Influence is a mysterious living flame.  It has been rumored that such influences are created when a person is incinerated by lava so quickly that the soul has no chance to escape the body!  It has a shifting shape, but can compress itself to a humanoid appearance where the fires inside whip around like tornados."
     );
-    set_race("influence");
+    set_race("elemental");
     set_hd(20,30);
     set_level(20);
     set_property("magic",1);
