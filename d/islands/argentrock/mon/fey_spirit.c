@@ -31,7 +31,7 @@ void heart_beat(){
     die();
 	
     if(owner->query_hp() < owner->query_max_hp() )
-    new(/cmds/spells/c/_cure_moderate_wounds.c)->use_spell(TO,owner,15,100,"cleric");
+    new("/cmds/spells/c/_cure_moderate_wounds")->use_spell(TO,owner,15,100,"cleric");
 }
 
 void die(object ob){
