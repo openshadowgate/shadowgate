@@ -1,3 +1,9 @@
+//  from the Nightmare mudlib
+//  code for the Nightmare skill system
+//  created by Descartes of Borg 1september 1992
+//  recoded 14 february 1993
+// removed alchemy skill as it is to be rolled in under healing via the 'brew potion' feat instead. -N, 3/11.
+
 #include <daemons.h>
 #include <party.h>
 #include <std.h>
@@ -336,14 +342,14 @@ int query_skill(string skill)
     // override various stats for epic feats
 
     if ((skill == "perception" || skill == "stealth") && FEATS_D->usable_feat(TO, "shadow perception")) {
-        x += 4;
+        x += 5;
     }
 
     if(skill == "endurance" && FEATS_D->usable_feat(TO, "rangers endurance"))
     {
-        x += 8;
+        x += 10;
     }
-
+    
     if( (skill == "perception" || skill == "survival" || skill == "stealth") && FEATS_D->usable_feat(TO, "favored terrain") )
     {
         if(TO->is_favored_terrain(environment(TO)))
@@ -351,6 +357,7 @@ int query_skill(string skill)
             x += 2;
             x += (FEATS_D->usable_feat(TO, "second favored terrain") * 2);
             x += (FEATS_D->usable_feat(TO, "third favored terrain") * 2);
+            x += (FEATS_D->usable_feat(TO, "resist undead") * 2);
         }
     }
 
