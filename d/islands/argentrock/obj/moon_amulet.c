@@ -1,37 +1,33 @@
+// this one is a trade for the bloodstone amulet from the watcher
+//hades 7-12-20
 #include <std.h>
 inherit "/d/common/obj/jewelry/necklace";
 
 void create()
 {
     ::create();
-    set_name("amulet");
-    set_id(({ "amulet", "bloodstone amulet", "amulet of the abyss" }));
-    set_short("%^RESET%^%^RED%^am%^BOLD%^u%^RESET%^%^RED%^let of the a%^BOLD%^b%^RESET%^%^RED%^yss%^RESET%^");
-    set_obvious_short("%^RESET%^%^RED%^blo%^BOLD%^o%^RESET%^%^RED%^dstone a%^BOLD%^m%^RESET%^%^RED%^ulet%^RESET%^");
-    set_lore("The new rulers of argentrock, the fey'ri give these" +
-             " amulets to fighters that have proven themselves by deed as" +
-             " well as word.  The dracophoenix is the symbol of a clan" +
-             " of fey'ri.  The fires of hell are used to create these" +
-             " amulets.  Woe to those that encounter someone gifted with such a thing. ");
+    set_name("Moonstone Amulet");
+    set_id(({ "amulet", "moonstone amulet", "amulet of the moon" }));
+    set_short("%^RESET%^%^CYAN%^Amu%^BLUE%^l%^CYAN%^et of the M%^BLUE%^o%^CYAN%^on%^RESET%^");
+    set_obvious_short("%^RESET%^%^CYAN%^mo%^BLUE%^o%^CYAN%^nstone a%^BLUE%^m%^CYAN%^ulet%^RESET%^");
+    set_lore("The elves in their fight against the fey'ri crafted "+
+    "these amulets to protect them from the hellish power of the "+
+    "fey'ri.  They are created by purifying the bloodstones that "+
+    "the fey'ri create with infernal magic.");
     set_property("lore difficulty", 30);
-    set_long("%^RED%^This is an amulet on a %^RESET%^silver chain." +
-             "%^RED%^  The amulet is a %^BOLD%^bloodstone%^RESET%^%^RED%^ that has been carved into " +
-             "the shape of a %^BOLD%^dracophoenix%^RESET%^%^RED%^.  It has several rubies for" +
-             " eyes and seems to pulsate with a hellish magic.%^RESET%^");
+    set_long("%^CYAN%^This is an amulet on a braided hemp cord.   A half-moon"+
+    " shaped moonstone hangs from the cord which can be tied around "+
+    "the neck.   It glows with %^BOLD%^fey magic.");
 
     set_size(-1);
     set_value(5000);
     set_wear((: TO, "wear_me" :));
-    set_property("enchantment", 4 + random(1));
-    set_item_bonus("fire resistance", 40);
-    set_item_bonus("divine resistance", -20); //this was light resistance, which does nothing, changing it to divine and upping it - Odin 3/27/2020
-    set_item_bonus("negative energy resistance", 40);
-    set_item_bonus("positive energy resistance", 20); //negative poisitive energy resistance is actually, as it makes you easier to heal, going to change to positive so it eats the first 20 points of a heal you take - Odin 3/27/2020
+    set_item_bonus("fire resistance", 10);
+    set_item_bonus("cold iron resistance", -10); 
+    set_item_bonus("positive energy resistance", -5); 
 }
-
 int wear_me()
 {
-    tell_object(ETO, "%^RED%^You secure the amulet around your neck and feel the evil power fill you");
-    ETO->set_property("evil item", 1);
+    tell_object(ETO, "%^CYAN%^You secure the amulet around your neck and fey power fills you");
     return 1;
 }
