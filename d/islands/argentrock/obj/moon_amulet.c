@@ -31,4 +31,7 @@ int wear_me()
     tell_object(ETO, "%^CYAN%^You secure the amulet around your neck and fey power fills you");
     return 1;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6c2826a4b1eef2d0ad2001bfea849e658d58492c
