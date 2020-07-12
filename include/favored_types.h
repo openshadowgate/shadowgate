@@ -33,7 +33,7 @@
                          "evil outsiders"   : ({ "demon", "devil", "imp", "tiefling" }), \
                          "dragonkin"  : ({ "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon", "drake", "wyvern" }), \
                          "giants"     : ({ "voadkyn", "firbolg", "giant", "titan" }), \
-                         "smallfolk"  : ({ "gnome", "halfling", "kender", "dwarf" }), \
+                         "smallfolk"  : ({ "gnome", "halfling", "kender", "dwarf", "derro" }), \
                          "elementals" : ({ "elemental", "genasi", "earth genasi", "air genasi", "water genasi", "air genasi", "efreet", "djinn", "marid" }), \
                          "aberrations" : ({ "beholder", "illithid", "mind flayer" }), \
                          "magical beasts" : ({ "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm", "pegataur", "griffon", "hydra" }), \
