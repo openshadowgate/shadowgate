@@ -27,10 +27,10 @@
                          "orcs"       : ({ "orc", "half-orc", "orog" }), \
                          "beastmen"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "pegataur", "alaghi" }), \
                          "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow" }), \
-                         "reptiles" : ({ "yuan-ti", "saurian", "serpent", "salamander" }), \
+                         "reptiles" : ({ "yuan-ti", "saurian", "serpent", "salamander", "lizardman", "firenewt", "reptile" }), \
                          "undead"     : ({ "ghost", "skeleton", "lich", "zombie", "ghast", "entity", "spirit" }), \
-                         "celestials" : ({ "deva", "solar", "aasimar" }), \
-                         "abyssals"   : ({ "demon", "devil", "imp", "tiefling" }), \
+                         "good outsiders" : ({ "deva", "solar", "aasimar" }), \
+                         "evil outsiders"   : ({ "demon", "devil", "imp", "tiefling" }), \
                          "dragonkin"  : ({ "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon", "drake", "wyvern" }), \
                          "giants"     : ({ "voadkyn", "firbolg", "giant", "titan" }), \
                          "smallfolk"  : ({ "gnome", "halfling", "kender", "dwarf" }), \
