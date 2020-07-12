@@ -5,7 +5,7 @@ inherit WEAPONLESS;
 void create(){
     int level;
     ::create();
-    set_id(({"bear","ghost","Ghost Bear","Bear", "forestmon"}));
+    set_id(({"bear","ghost","Ghost Bear","Bear", "forestmon","animal"}));
     set_name("Ghost Bear");
     set_short("A Ghost Bear");
     set_long(
@@ -37,6 +37,5 @@ void create(){
     set_speed(120);
     set_max_level(35); //added by Ares 3-31-05, they should be moving on long before now, but just in case
 
-   
-}
 
+}

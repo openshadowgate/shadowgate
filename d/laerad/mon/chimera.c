@@ -6,7 +6,7 @@
 inherit "/d/laerad/mon/wander/wander.c";
 void create(){
     ::create();
-    set_id(({"chimera","Chimera"}));
+    set_id(({"chimera","Chimera","magical beast"}));
     set_name("Chimera");
     set_short("A monstrous Chimera");
     set_long(

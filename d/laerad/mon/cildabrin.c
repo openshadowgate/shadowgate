@@ -7,7 +7,7 @@ inherit WEAPONLESS;
 
 void create(){
     ::create();
-    set_id(({"cildabrin","Cildabrin","laeradmon"}));
+    set_id(({"cildabrin","Cildabrin","laeradmon","magical beast"}));
     set_name("cildabrin");
     set_short("%^BOLD%^%^BLACK%^sc%^RESET%^%^CYAN%^o%^BOLD%^%^BLACK%^"+
 	   "rp%^RESET%^%^CYAN%^io%^BOLD%^%^BLACK%^n%^RESET%^%^CYAN%^i"+
@@ -51,7 +51,7 @@ void create(){
     set_stats("charisma",6);
 	set_moving(1);
 	set_speed(55);
-	set_nogo(({"/d/laerad/wasteland/waste1"}));		
+	set_nogo(({"/d/laerad/wasteland/waste1"}));
 }
 
 void poison(object targ){
