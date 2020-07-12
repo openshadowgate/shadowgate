@@ -95,6 +95,47 @@ int get_phouse_scry_proof(string scryprooflevel)
     return scry_proof_dc;
 }
 
+int get_phouse_lock_dc(string locklevel) //function to standardize lock levels across player houses, six levels available
+{
+    int lockdc, baselockdc;
+    baselockdc = 25; //this is a poor quality lock
+    lockdc = baselockdc; //probably redundant, but I'm paranoid
+    if (!stringp(locklevel) || locklevel == "" || locklevel == " ") {
+        locklevel = "average";
+    }
+    locklevel = lower_case(locklevel);
+    switch (locklevel) {
+    case "poor":
+        lockdc += 0;
+        break;
+
+    case "common":
+        lockdc += 10;
+        break;
+
+    case "good":
+        lockdc += 20;
+        break;
+
+    case "rare":
+        lockdc += 30;
+        break;
+
+    case "epic":
+        lockdc += 40;
+        break;
+
+    case "legendary":
+        lockdc += 50;
+        break;
+
+    default:
+        lockdc += 0;
+        break;
+    }
+    return lockdc;
+}
+
 remove()
 {
     destruct(this_object());
