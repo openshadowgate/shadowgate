@@ -36,6 +36,6 @@
                          "smallfolk"  : ({ "gnome", "halfling", "kender", "dwarf", "derro" }), \
                          "elementals" : ({ "elemental", "genasi", "earth genasi", "air genasi", "water genasi", "air genasi", "efreet", "djinn", "marid" }), \
                          "aberrations" : ({ "beholder", "illithid", "mind flayer" }), \
-                         "magical beasts" : ({ "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm", "pegataur", "griffon", "hydra" }), \
+                         "magical beasts" : ({ "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm", "pegataur", "griffon", "hydra", "shadow", "shambling mound", "shambler" }), \
                          "constructs" : ({ "construct", "golem", "sandman", "sandling" }), \
                      ])
