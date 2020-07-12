@@ -4,7 +4,7 @@ inherit "/d/common/obj/jewelry/necklace";
 void create()
 {
     ::create();
-    set_name("amulet");
+    set_name("bloodstone amulet");
     set_id(({ "amulet", "bloodstone amulet", "amulet of the abyss" }));
     set_short("%^RESET%^%^RED%^am%^BOLD%^u%^RESET%^%^RED%^let of the a%^BOLD%^b%^RESET%^%^RED%^yss%^RESET%^");
     set_obvious_short("%^RESET%^%^RED%^blo%^BOLD%^o%^RESET%^%^RED%^dstone a%^BOLD%^m%^RESET%^%^RED%^ulet%^RESET%^");
