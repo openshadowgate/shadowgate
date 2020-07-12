@@ -14,7 +14,7 @@ void create()
     ::create();
     set_author("saide");
     set_spell_name("searing light");
-    set_spell_level(([ "cleric" : 3, "inquisitor" : 3 ]));
+    set_spell_level(([ "cleric" : 3, "inquisitor" : 3, "innate" : 3 ]));
     set_spell_sphere("invocation_evocation");
     set_domains("sun");
     set_syntax("cast CLASS searing light on TARGET");

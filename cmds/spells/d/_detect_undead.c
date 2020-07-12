@@ -5,7 +5,7 @@
 void create() {
     ::create();
     set_spell_name("detect undead");
-    set_spell_level(([ "innate" : 4 ]));
+    set_spell_level(([ "innate" : 1 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS detect undead on TARGET || <room>");
     set_description("Detect undead will detect the presence of undeath in players or monsters.");
