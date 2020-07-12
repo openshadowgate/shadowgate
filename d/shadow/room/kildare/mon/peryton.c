@@ -6,7 +6,7 @@ void create() {
    ::create();
    set_name("peryton");
    set_short("Peryton");
-   set_id(({"monster","peryton"}));
+   set_id(({"monster","peryton","magical beast"}));
    set_long(
       "This twisted creature is surely the stuff of nightmares.  Seemingly "+
       "a giant, %^RESET%^%^GREEN%^dark green %^CYAN%^eagle with a twenty foot "+
@@ -41,7 +41,7 @@ void create() {
    set("aggressive",18);
    set_stats("strength",17);
    set_max_level(15);  // added by *Styx* 9/24/06
-   set_exp(3500);   
+   set_exp(3500);
    add_money("gold",random(150)+25);
    set_mob_magic_resistance("average");
    set_funcs(({"gore","rend","rend","rend"}));
@@ -64,7 +64,7 @@ int rend(object victim){
    if(!random(2)) {
       tell_object(victim,"%^BOLD%^%^GREEN%^The peryton's %^RED%^eyes %^GREEN%^flash as he "+
          "tears into you with both claws!%^RESET%^");
-      tell_room(ETO,"%^BOLD%^%^GREEN%^The peryton's %^RED%^eyes %^GREEN%^flash "+ 
+      tell_room(ETO,"%^BOLD%^%^GREEN%^The peryton's %^RED%^eyes %^GREEN%^flash "+
          "as he tears into "+victim->query_cap_name()+" with both claws!%^RESET%^", ({victim}));
       victim->do_damage("torso",random(10)+5);
       return 0;
@@ -74,7 +74,7 @@ int rend(object victim){
 
 void gore(object targ)
 {
-switch(random(20)) 
+switch(random(20))
   {
     case 0..4:
       tell_object(targ,"%^CYAN%^The peryton dives at you, but you manage to jump aside!%^RESET%^");
@@ -96,6 +96,6 @@ switch(random(20))
          ""+targ->query_objective()+" with his horns!%^RESET%^",targ);
     targ->set_paralyzed(2+random(2),"You're recovering from your chest being impaled!");
     targ->do_damage("torso",roll_dice(3,6));
-    break;      
+    break;
   }
 }

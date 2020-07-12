@@ -8,7 +8,7 @@ void create (){
 
 ::create ();
    set_name("leprechaun");
-   set_id(({"leprechaun","leprachaun"}));
+   set_id(({"leprechaun","leprachaun","fey"}));
    set_short("%^RESET%^%^GREEN%^A small little leprechaun%^RESET%^");
    set_long("%^RESET%^%^GREEN%^This is a small little creature"
 " most commonly known as a leprechaun.  He wears a small green"
@@ -39,7 +39,7 @@ void create (){
    set_max_level(15);
    set_alignment(9);
      set_hp(random(250)+150);
-   set_max_hp(query_hp());  
+   set_max_hp(query_hp());
    set_property("full attacks",1);
    set("aggressive","aggfunc");
    set_mlevel("mage",11);
@@ -51,7 +51,7 @@ void create (){
       ob = new("/d/magic/scroll");
       ob->set_av_spell(5-random(3));
       ob->move(TO);
-   } 
+   }
    if(random(10) < 1){
       new(OBJD+"amulet1.c")->move(TO);
       command("wear amulet");
@@ -93,4 +93,3 @@ int aggfunc() {
    }
       return 1;
 }
-

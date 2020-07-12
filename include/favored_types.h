@@ -22,10 +22,10 @@
 #define VALID_ENEMY ([ \
                          "ogres"      : ({ "ogre", "ogre-mage", "half-ogre" }), \
                          "elves"      : ({ "elf", "half-elf", "drow", "half-drow", "szarkai" }), \
-                         "goblins"    : ({ "goblin", "bugbear", "hobgoblin" }), \
+                         "goblins"    : ({ "goblin", "bugbear", "hobgoblin", "goblinoid" }), \
                          "fey"        : ({ "nymph", "satyr", "dryad", "pixie", "brownie", "feytouched", "fey" }), \
                          "orcs"       : ({ "orc", "half-orc", "orog" }), \
-                         "beastmen"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "werewolf", "wererat", "weretiger", "alaghi", "monstrous humanoid", "peryton" }), \
+                         "monstrous humanoids"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "werewolf", "wererat", "weretiger", "alaghi", "monstrous humanoid"}), \
                          "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow" }), \
                          "lizardfolk" : ({ "yuan-ti", "saurian", "salamander", "lizardman", "firenewt"}), \
                          "undead"     : ({ "ghost", "skeleton", "lich", "zombie", "ghast", "entity", "spirit" }), \
@@ -33,7 +33,7 @@
                          "evil outsiders"   : ({ "demon", "devil", "imp", "tiefling" }), \
                          "dragonkin"  : ({ "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon", "drake", "wyvern" }), \
                          "giants"     : ({ "voadkyn", "firbolg", "giant", "titan" }), \
-                         "smallfolk"  : ({ "gnome", "halfling", "kender", "dwarf", "derro" }), \
+                         "smallfolk"  : ({ "gnome", "halfling", "kender", "dwarf", "derro", "duergar" }), \
                          "elementals" : ({ "elemental", "genasi", "earth genasi", "air genasi", "water genasi", "air genasi", "efreet", "djinn", "marid", "genie" }), \
                          "aberrations" : ({ "beholder", "illithid", "mind flayer" }), \
                          "magical beasts" : ({ "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm", "pegataur", "griffon", "hydra", "shadow", "magical beast" }), \

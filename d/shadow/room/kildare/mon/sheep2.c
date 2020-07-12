@@ -6,7 +6,7 @@ void create()
    ::create();
    set_name("sheep");
    set_short("A small spotted lamb");
-   set_id(({"sheep","spotted sheep","fluffy sheep","lamb","small lamb","spotted lamb"}));
+   set_id(({"sheep","spotted sheep","fluffy sheep","lamb","small lamb","spotted lamb", "animal"}));
    set_long(
       "The small lamb has a thick woolen coat that is spotted black "+
       "and white.  Not quite as handsome as his parents, the lamb is "+

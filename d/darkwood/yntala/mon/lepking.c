@@ -7,7 +7,7 @@ void create (){
 
 ::create ();
    set_name("Maklakia, King of the Leprechauns");
-   set_id(({"leprechaun","leprachaun","Maklakia","maklakia","king","king of the leprechauns"}));
+   set_id(({"leprechaun","leprachaun","Maklakia","maklakia","king","king of the leprechauns","fey"}));
    set_short("%^RESET%^%^GREEN%^A portly leprechaun wearing a %^YELLOW%^golden crown%^RESET%^");
    set_long("%^RESET%^%^GREEN%^This is a small little creature"
 " most commonly known as a leprechaun.  He wears a small green"
@@ -41,7 +41,7 @@ void create (){
    set_max_level(14);
    set_alignment(8);
    set_hp(random(200)+300);
-   set_max_hp(query_hp());  
+   set_max_hp(query_hp());
    set_property("full attacks",1);
    set_func_chance(60);
    set_funcs(({"cointoss","jig","cloverspin","rainbow"}));
@@ -102,7 +102,7 @@ void jig(object target) {
    tell_object(target, "%^RESET%^%^GREEN%^The leprechaun begins dancing a funny little jig and you are compelled to join him!");
    target->set_paralyzed(15,"You are having to much fun dancing!");
    return 1;
-   } 
+   }
    tell_room(ETO,"%^RESET%^%^GREEN%^The leprechaun begins to do a funny little dance but "+target->query_cap_name()+" turns away!",target);
    tell_object(target, "%^RESET%^%^GREEN%^You turn away just as the leprechaun begins to do a funny little dance!");
 }
@@ -133,5 +133,3 @@ int spell_effect(){
    new("/cmds/spells/b/_blink.c")->use_spell(TO, TO,25,100,"mage");
    new("/cmds/spells/s/_stoneskin.c")->use_spell(TO, TO,25,100,"mage");
 }
-
-
