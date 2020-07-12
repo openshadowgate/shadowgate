@@ -5187,6 +5187,9 @@ int is_favored_terrain(object room)
     if(!type || !strlen(type))
         return 0;
     
+    if(FEATS_D->usable_feat(TO, "resist undead") && member_array(type, VALID_TERRAIN["caves"]) > -1)
+        return 1;
+    
     foreach(string terrain in favored_terrain)
     {
         if(strlen(terrain) && terrain != "none")

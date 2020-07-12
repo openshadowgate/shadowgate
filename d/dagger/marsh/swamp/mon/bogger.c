@@ -18,7 +18,7 @@ create()
              "in the air above you gazing around looking for food with its "
              "haunting %^RED%^eerie red eyes.%^RESET%^");
     set_class("fighter");
-    set("race", "humanoid");
+    set_race("monstrous humanoid");
     set_body_type("human");
     set_attacks_num(my_hd / 3 + 1);
     set_damage(3, my_hd / 2);

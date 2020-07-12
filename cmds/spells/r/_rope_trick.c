@@ -19,7 +19,7 @@ object o_rope;
 create() {
     ::create();
     set_spell_name("rope trick");
-    set_spell_level(([ "mage" : 2 ]));
+    set_spell_level(([ "mage" : 2, "innate" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS rope trick");
     set_description("When rope trick is cast, a rope will leap up and stiffen, leading to a magic room in a pocket of "

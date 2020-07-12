@@ -514,6 +514,21 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped"); //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
         //attempting to debug to see if it's multiplied - Odin
     }
+    //Handles Crypststalker feat
+    if (target && FEATS_D->usable_feat(attacker, "smite the lifeless") && target->is_undead() && target->query_hp_percent() > 0 && crit_hit)
+    {
+        if(!FEATS_D->usable_feat(target, "death ward") && !target->query_property("no death") && target->query_hp_percent() < 50)
+        {
+            if (!target->fort_save(attacker->query_highest_level()))
+            {
+                tell_object(attacker, "%^BOLD%^You unleash a flash of blinding white energy as you destroy " + target->QCN + "'s undead energy and end them!%^RESET%^");
+                tell_object(target, "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends your undead existence!%^RESET%^");
+                tell_room(environment(attacker), "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends " + target->QCN + "'s undead existence!%^RESET%^");
+                target->set_hp(-100);
+            }
+        }
+    }          
+        
     if (weapon->is_lrweapon() &&
         FEATS_D->usable_feat(attacker, "arcane arrows") &&
         crit_hit) {

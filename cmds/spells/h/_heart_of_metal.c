@@ -15,7 +15,7 @@ void create()
 {
     ::create();
     set_spell_name("heart of metal");
-    set_spell_level(([ "mage" : 3, "cleric" : 3, "inquisitor" : 3 ]));
+    set_spell_level(([ "mage" : 3, "cleric" : 3, "inquisitor" : 3, "innate" : 3 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS heart of metal on <weapon> with <type>");
     set_description("Using this spell, you temporarily lend the powers of either silver or cold iron to the target weapon.  This will change its base damage type for the duration of the spell.  It will last a number of rounds equal to twice your caster level.");

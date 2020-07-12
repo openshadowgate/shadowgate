@@ -15,7 +15,7 @@ create()
     set_level(my_hd);
     set_long("%^GREEN%^This creature looks like a collection of slowly moving, covered in spikes rotten vines roughly resembling a humanoid form.%^RESET%^");
     set_class("fighter");
-    set("race", "humanoid");
+    set_race("monstrous humanoid");
     set_body_type("human");
     set_attacks_num(my_hd/5+1);
     set_damage(3,my_hd);

@@ -27,7 +27,7 @@ void create()
     set_overall_ac(5 - my_hd);
     set_stats("strength", my_hd + 4);
     set_alignment(6);
-    set("race", "humanoid");
+    set_race("shambler");
     set_body_type("humanoid");
     set_class("fighter");
     this_object()->add_money("gold", roll_dice(10, my_hd) + 200);

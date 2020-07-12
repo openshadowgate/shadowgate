@@ -98,6 +98,16 @@ void InitInnate()
             "conjure elemental" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
             ]);
     }
+    if(FEATS_D->usable_feat(TO, "slay the undead"))
+    {
+        feat_spells += ([
+            "rope trick" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            "detect undead" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            "heart of metal" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            "disrupting weapon" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            "searing light" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            ]);
+    }
 
     // to add new classes or reasons for innates, simply add to feat_spells here before this line.
     newmap = keys(feat_spells);

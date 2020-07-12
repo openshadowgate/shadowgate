@@ -1743,11 +1743,12 @@ int query_attack_bonus()
     if (FEATS_D->usable_feat(TO, "epic weapon focus")) {
         ret += 2;
     }
+
+    attacker = TO->query_current_attacker();
     
     //Added by Tlaloc to handle favored enemies for Rangers
     if (FEATS_D->usable_feat(TO, "favored enemy"))
     {
-        attacker = TO->query_current_attacker();
         
         if(TO->is_favored_enemy(attacker))
         {
@@ -1763,6 +1764,10 @@ int query_attack_bonus()
         sizeof(TO->query_wielded()) == 1) {
         ret += 3;
     }
+    
+    if(FEATS_D->usable_feat(TO, "slay the undead") && attacker && attacker->is_undead())
+        ret += 2;
+    
     return ret;
 }
 
@@ -1791,11 +1796,12 @@ int query_damage_bonus()
     if (FEATS_D->usable_feat(TO, "epic weapon specialization")) {
         ret += 4;
     }
+
+    attacker = TO->query_current_attacker();
     
     //Added by Tlaloc to handle favored enemies for Rangers
     if (FEATS_D->usable_feat(TO, "favored enemy"))
     {
-        attacker = TO->query_current_attacker();
         
         if(TO->is_favored_enemy(attacker))
         {
@@ -1806,6 +1812,9 @@ int query_damage_bonus()
             FEATS_D->usable_feat(TO, "third favored enemy") && ret += 2;
         }
     }
+    
+    if(FEATS_D->usable_feat(TO, "slay the undead") && attacker && attacker->is_undead())
+        ret += 2;
 
     return ret;
 }
@@ -1841,6 +1850,7 @@ void add_saving_bonus(string throw, int bonus)
 int query_saving_bonus(string throw)
 {
     int x;
+    object attacker;
     
     if ((!query_property("saving_init")) || (!save_bonus)) {
         init_saving_bonus();
@@ -1851,11 +1861,16 @@ int query_saving_bonus(string throw)
     
     x = EQ_D->gear_bonus(TO, throw);
     
-    if(FEATS_D->usable_feat(TO, "seen it before"))
+    attacker = TO->query_current_attacker();
+    
+    if(FEATS_D->usable_feat(TO, "seen it before") && attacker)
     {   
-        if(TO->is_favored_enemy(TO->query_current_attacker()))
+        if(TO->is_favored_enemy(attacker))
             x += 6;
     }
+    
+    if(FEATS_D->usable_feat(TO, "resist undead") && attacker && attacker->is_undead() && (throw == "fortitude" || throw == "will"))
+        x += 4;
     
     return x;
 }

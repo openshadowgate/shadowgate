@@ -44,7 +44,7 @@ void create()
     set_attacks_num(3);
     set_alignment(5);
     set_gender("male");
-    set_race("gargantua");
+    set_race("reptile");
     add_money("silver", random(5000));
     set_base_damage_type("slashing");
     set_funcs(({ "trample" }));
