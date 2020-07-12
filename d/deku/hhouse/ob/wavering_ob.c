@@ -222,6 +222,7 @@ void transform(object ob, string form)
     ob->set_critical_threat_range(myOb->query_critical_threat_range());
     ob->set_critical_hit_multiplier(myOb->query_criticial_hit_multiplier());
     ob->set_damage_type(myOb->query_damage_type());
+    ob->set_repair_type(myOb->query_repair_type())
     ob->set_size(myOb->query_size());
     if (objectp(myOb)) {
         myOb->remove();
