@@ -49,9 +49,9 @@ void spell_effect(int prof) {
 
         tell_room(place, caster->QCN+ " causes the room to darken.",caster);
     }
-    if(level > 20) level = 20;
+
     ob = new("/d/magic/obj/darkness");
-    call_out("dest_effect", 1800 + (level * 10));
+    call_out("dest_effect", MINUTE * level * 10);
     if(objectp(ob))
     {
         ob->set_property("spell", TO);
