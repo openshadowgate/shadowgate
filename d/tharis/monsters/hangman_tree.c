@@ -16,14 +16,14 @@ void init(){
 	int i,j;
 	::init();
 	if(!objectp(TO) || !objectp(ETO) || !objectp(TP)) { return; }
-	
+
 	exits = ETO->query_exits();
-	
+
 	j = sizeof(exits);
 	for(i=0;i<j;i++)
 		add_action("screw_over",exits[i]);
-	
-	
+
+
        if((int)TP->query_alignment() == 1 || (int)TP->query_alignment() == 4 || (int)TP->query_alignment() == 7){
                if(TO->query_invis()){
                        tell_room(ETO,"%^BOLD%^%^GREEN%^You see a Hangman tree rise from the forest and attack!");
@@ -60,7 +60,7 @@ void create(){
     set_property("alignment adjustment",5);
         set_property("no bows",1);
         set_short("A gnarled hangman tree");
-        set_id(({"tree","hangman","hangman tree","hangman_tree"}));
+        set_id(({"tree","hangman","hangman tree","hangman_tree","plant"}));
         set_long(
 @OLI
         This gnarled old oak has many long vines hanging from the heights
@@ -125,7 +125,7 @@ void die(object dohicky){
         i = sizeof(inven);
         if(i){
                 for(j = 0;j<i;j++){
-					if(!objectp(inven[j]) || !objectp(TO) || !objectp(ETO)) { continue; }					
+					if(!objectp(inven[j]) || !objectp(TO) || !objectp(ETO)) { continue; }
                         inven[j]->move(ETO);
                         if(objectp(inven[j]) && interactive(inven[j])){
                         	inven[j]->describe_current_room(1);
@@ -229,7 +229,7 @@ void do_damages(object targ, int flag, string vine){
 				if(!objectp(trunk)) { trunk = new("/d/tharis/obj/trunk"); }
 		    trunk->set_owner(TO);
                 targ->move(trunk);
-		    //Added by Saide as a failsafe so this no longer screws you over 
+		    //Added by Saide as a failsafe so this no longer screws you over
 		    trunk->set_owner_area(ETO);
             targ->remove_property("whereiwaseaten");
 		    targ->set_property("whereiwaseaten", environment(targ));
@@ -249,10 +249,10 @@ void do_damages(object targ, int flag, string vine){
 int do_damage(string limb, int damage){
         int num;
         string thing, *vines;
-        
+
         if(member_array(TP, keys(caught)) != -1 && random(100) < 50)
         	limb = caught[TP];
-     if(!stringp(limb)) limb = "trunk";   
+     if(!stringp(limb)) limb = "trunk";
         if(strlen(limb)<4) return ::do_damage(limb, damage);
         if(limb[0..3] == "vine"){
                 if(sscanf(limb,"%s %d",thing, num) != 2)

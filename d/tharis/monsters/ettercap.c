@@ -6,13 +6,13 @@ inherit WEAPONLESS;
 
 void create(){
 	::create();
-	
+
 	set_name("ettercap");
-	set_id(({"ettercap","Ettercap"}));
+	set_id(({"ettercap","Ettercap","magical beast"}));
 	set_short("An Ettercap");
 	set_long(
 @OLI
-	This mostly black humanoid has a dark brown abdomen with black 
+	This mostly black humanoid has a dark brown abdomen with black
 spots. The body of this creature is covered in a spike like hair.
 Four extemely long fingers extend from each hand. Its jewel like
 eyes are black with a hate for you. You take note of two great fangs
@@ -37,7 +37,7 @@ OLI
 	set_stats("wisdom",19);
 	set_stats("constitution",18);
 	set_alignment(3);
-	
+
 }
 
 int poison(object targ){
@@ -46,7 +46,7 @@ int poison(object targ){
 		tell_object(targ,"%^BOLD%^%^CYAN%^You feel your body fighting off the poison!");
 		return 0;
 	}
-	
+
 	tell_object(targ,"%^BOLD%^%^RED%^You feel the poison racing toward your heart. You need to have the poison neutralized FAST.");
 	targ->add_poisoning(query_hp()/4);
 	return 5;
