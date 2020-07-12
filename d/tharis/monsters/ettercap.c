@@ -8,7 +8,7 @@ void create(){
 	::create();
 
 	set_name("ettercap");
-	set_id(({"ettercap","Ettercap","magical beast"}));
+	set_id(({"ettercap","Ettercap","aberration"}));
 	set_short("An Ettercap");
 	set_long(
 @OLI

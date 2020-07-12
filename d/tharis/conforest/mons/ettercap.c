@@ -7,7 +7,7 @@ void create()
     ::create();
 
     set_name("ettercap");
-    set_id(({ "ettercap", "Ettercap", "monster" }));
+    set_id(({ "ettercap", "Ettercap", "monster","aberration" }));
     set_short("An Ettercap");
     set_long("This mostly black humanoid has a dark brown abdomen with black spots. The body of this creature is covered in a spike like hair. Four extemely long fingers extend from each hand. Its jewel like eyes are black with a hate for you. You take note of two great fangs protruding from its mouth. This creature reminds you for some reason of a spider.");
     set_body_type("human");
