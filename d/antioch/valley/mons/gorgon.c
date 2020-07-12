@@ -10,7 +10,7 @@ void add_stuff();
 void create(){
 	::create();
 	set_name("gorgon");
-	set_id(({"gorgon","monster","bull"}));
+	set_id(({"gorgon","monster","bull","magical beast"}));
 	set_short("A huge gorgon");
 	set_long(
 	"The gorgon stomps restlessly in front of you. He is"+
