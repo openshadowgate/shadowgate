@@ -39,5 +39,5 @@
                          "magical beasts" : ({ "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm", "pegataur", "griffon", "hydra", "shadow", "magical beast" }), \
                          "constructs" : ({ "construct", "golem", "sandman", "sandling" }), \
                          "plants" : ({ "shambler", "shambling mound", "tree", "vine", "plant" }), \
-                         "animals" : ({ "snake", "serpent", "warthog", "jaguar", "wolf", "rat", "tiger", "serpent", "reptile", "dinosaur", "dino" }), \
+                         "animals" : ({ "snake", "serpent", "warthog", "jaguar", "wolf", "rat", "tiger", "reptile", "dinosaur", "dino", "spider", "deer", "snake" }), \
                      ])
