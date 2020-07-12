@@ -39,6 +39,6 @@
                          "ogres"      : ({ "ogre", "ogre-mage", "half-ogre", "ogroid" }), \
                          "orcs"       : ({ "orc", "half-orc", "orog", "tanarukk", "orcoid" }), \
                          "plants" : ({ "shambler", "shambling mound", "tree", "vine", "plant" }), \
-                         "smallfolk"  : ({ "gnome", "halfling", "kender", "derro", }), \
+                         "smallfolk"  : ({ "gnome", "halfling", "kender", "derro", "pech", }), \
                          "undead"     : ({ "ghost", "skeleton", "lich", "zombie", "ghast", "entity", "spirit", "wraith", "wight" }), \
                      ])
