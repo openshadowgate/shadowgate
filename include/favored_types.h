@@ -23,7 +23,7 @@
                          "aberrations" : ({ "beholder", "illithid", "mind flayer" }), \
                          "animals" : ({ "snake", "serpent", "warthog", "jaguar", "wolf", "rat", "tiger", "reptile", "dinosaur", "dino", "spider", "deer", "snake", "horse", "mare", "stallion" }), \
                          "constructs" : ({ "construct", "golem", "sandman", "sandling" }), \
-                         "dwarves"  : ({ "dwarf", "duergar" }),
+                         "dwarves"  : ({ "dwarf", "duergar" }), \
                          "dragonkin"  : ({ "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon", "drake", "wyvern" }), \
                          "elementals" : ({ "elemental", "genasi", "earth genasi", "air genasi", "water genasi", "air genasi", "efreet", "djinn", "marid", "genie" }), \
                          "elves"      : ({ "elf", "half-elf", "drow", "half-drow", "szarkai" }), \
