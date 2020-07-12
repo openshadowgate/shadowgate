@@ -25,7 +25,7 @@
                          "goblins"    : ({ "goblin", "bugbear", "hobgoblin" }), \
                          "fey"        : ({ "nymph", "satyr", "dryad", "pixie", "brownie", "feytouched" }), \
                          "orcs"       : ({ "orc", "half-orc", "orog" }), \
-                         "beastmen"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "pegataur", "alaghi" }), \
+                         "beastmen"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "werewolf", "wererat", "weretiger", "alaghi" }), \
                          "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow" }), \
                          "reptiles" : ({ "yuan-ti", "saurian", "serpent", "salamander", "lizardman", "firenewt", "reptile" }), \
                          "undead"     : ({ "ghost", "skeleton", "lich", "zombie", "ghast", "entity", "spirit" }), \
