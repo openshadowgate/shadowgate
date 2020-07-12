@@ -46,7 +46,7 @@ void create(){
       set_item_bonus("charisma",2);
 	set_wear((:TO,"wear_func":));
 	set_remove((:TO,"remove_func":));
-    set_item_bonus("charisma",4);
+    set_item_bonus("charisma",2);
    set_overallStatus(220);
 }
 
