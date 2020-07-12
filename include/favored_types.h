@@ -29,7 +29,7 @@
                          "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow" }), \
                          "lizardfolk" : ({ "yuan-ti", "saurian", "salamander", "lizardman", "firenewt"}), \
                          "undead"     : ({ "ghost", "skeleton", "lich", "zombie", "ghast", "entity", "spirit" }), \
-                         "good outsiders" : ({ "deva", "solar", "aasimar" }), \
+                         "good outsiders" : ({ "deva", "solar", "aasimar", "angel" }), \
                          "evil outsiders"   : ({ "demon", "devil", "imp", "tiefling" }), \
                          "dragonkin"  : ({ "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon", "drake", "wyvern" }), \
                          "giants"     : ({ "voadkyn", "firbolg", "giant", "titan" }), \
