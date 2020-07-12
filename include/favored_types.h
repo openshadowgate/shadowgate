@@ -35,7 +35,7 @@
                          "giants"     : ({ "voadkyn", "firbolg", "giant", "titan" }), \
                          "smallfolk"  : ({ "gnome", "halfling", "kender", "dwarf" }), \
                          "elementals" : ({ "elemental" }), \
-                         "aberations" : ({ "beholder", "illithid", "mind flayer" }), \
+                         "aberrations" : ({ "beholder", "illithid", "mind flayer" }), \
                          "magical beasts" : ({ "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm" }), \
                          "constructs" : ({ "construct", "golem", "sandman", "sandling" }), \
                      ])
