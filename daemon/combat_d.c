@@ -517,7 +517,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
     //Handles Crypststalker feat
     if (target && FEATS_D->usable_feat(attacker, "smite the lifeless") && target->is_undead() && target->query_hp_percent() > 0 && crit_hit)
     {
-        if(target->query_hp_percent() < 50)
+        if(target->query_hp_percent() < 50 && attacker->query_level() >= target->query_level())
         {
             if (!target->fort_save(attacker->query_highest_level()))
             {
