@@ -39,6 +39,7 @@ void create()
   set_stats("constitution",19);
   add_money("gold",random(2000));
   set_property("full attacks",1);
+  set_property("no death", 1);  //added per aevar's suggestion
   set_mob_magic_resistance("low");
   set_resistance("fire",50);
   set_monster_feats(({"power attack","rush","combat reflexes",
@@ -61,6 +62,7 @@ void create()
   command("wearall");
   command("speech whisper coldly");
   set_new_exp(39,"boss");
+  add_money("gold",random(5000));
 }
 void aggfunc()
 {  //he didn't seem to agro, so added this.
