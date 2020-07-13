@@ -499,39 +499,39 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         return;
     }
 
-    if (FEATS_D->usable_feat(attacker, "shadow master")
-        && !attacker->query_property("shapeshifted") && objectp(weapon) && crit_hit) {
-        if (!random(3)) {
-            tell_object(attacker, "%^BLUE%^You strike " + target->QCN + " with precision as you channel your command of the shadows, and " + target->QS + " blinks sightlessly!%^RESET%^");
-            tell_object(target, "%^BLUE%^As " + attacker->QCN + " strikes you, your vision grows momentarily clouded!%^RESET%^");
-            target->set_temporary_blinded(1, "Your vision is clouded!");
-        }
+    if (crit_hit &&
+        !attacker->query_property("shapeshifted") &&
+        objectp(weapon) &&
+        !random(3) &&
+        FEATS_D->usable_feat(attacker, "shadow master") ) {
+        tell_object(attacker, "%^BLUE%^You strike " + target->QCN + " with precision as you channel your command of the shadows, and " + target->QS + " blinks sightlessly!%^RESET%^");
+        tell_object(target, "%^BLUE%^As " + attacker->QCN + " strikes you, your vision grows momentarily clouded!%^RESET%^");
+        target->set_temporary_blinded(1, "Your vision is clouded!");
     }
-    if (FEATS_D->usable_feat(attacker, "spell critical") && crit_hit) {
+    if (crit_hit && FEATS_D->usable_feat(attacker, "spell critical")) {
         tell_object(attacker, "%^CYAN%^You cry a brief warsong and unleash wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^");
         tell_object(target, "%^CYAN%^" + attacker->QCN + " shouts a brief warsong, and %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ burns through you!%^RESET%^");
         tell_room(environment(attacker), "%^CYAN%^" + attacker->QCN + " shouts a brief warsong and unleashes wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^", ({ target, attacker }));
-        target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped"); //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
+        target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped");     //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
         //attempting to debug to see if it's multiplied - Odin
     }
     //Handles Crypststalker feat
-    if (target && FEATS_D->usable_feat(attacker, "smite the lifeless") && target->is_undead() && target->query_hp_percent() > 0 && crit_hit)
-    {
-        if(target->query_hp_percent() < 50 && attacker->query_level() >= target->query_level())
-        {
-            if (!target->fort_save(attacker->query_highest_level()))
-            {
+    if (crit_hit &&
+        target &&
+        target->is_undead() &&
+        target->query_hp_percent() > 0 &&
+        FEATS_D->usable_feat(attacker, "smite the lifeless") ) {
+        if (target->query_hp_percent() < 50 && attacker->query_level() >= target->query_level()) {
+            if (!target->fort_save(attacker->query_level())) {
                 tell_object(attacker, "%^BOLD%^You unleash a flash of blinding white energy as you destroy " + target->QCN + "'s undead energy and end them!%^RESET%^");
                 tell_object(target, "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends your undead existence!%^RESET%^");
                 tell_room(environment(attacker), "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends " + target->QCN + "'s undead existence!%^RESET%^");
                 target->set_hp(-100);
             }
         }
-    }          
-        
-    if (weapon->is_lrweapon() &&
-        FEATS_D->usable_feat(attacker, "arcane arrows") &&
-        crit_hit) {
+    }
+    if (crit_hit && weapon->is_lrweapon() &&
+        FEATS_D->usable_feat(attacker, "arcane arrows")) {
         string element;
         element = attacker->query_property("arcane arrows");
         switch (element) {
@@ -570,7 +570,8 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         }
     }
     //monster feat stuff
-    if (attacker->query("combat_feats_enabled") && !attacker->query_property("using instant feat")) {
+    if (attacker->query("combat_feats_enabled") &&
+        !attacker->query_property("using instant feat")) {
         effect_chance = attacker->query_property("feat chance");
         if (!intp(effect_chance)) {
             effect_chance = 15;
