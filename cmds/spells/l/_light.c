@@ -39,7 +39,7 @@ spell_effect(int prof) {
     } else {
         tell_room(place, caster->QCN+ " creates a mystical light source.",caster);
     }
-
+    level = clevel;
     if(level > 20) level = 20;
     ob = new("/d/magic/obj/light");
     call_out("dest_effect", 1800 + (level * 10));
