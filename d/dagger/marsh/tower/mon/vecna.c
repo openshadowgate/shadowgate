@@ -1,4 +1,3 @@
-//Added kits to increase average fight length Octothorpe 5/25/09
 #include <std.h>
 #include <daemons.h>
 #define VHAND "/d/dagger/marsh/tower/obj/hand.c"
@@ -26,7 +25,6 @@ void create() {
     set_class("mage");
     set_mlevel("mage",60);
     set_guild_level("mage",60);
-//added mage to him so he could wear his bracers ~Circe~ 12/1/07
     set_gender("male");
     set("aggressive",200);
     add_money("gold",random(15000)+15000);
@@ -48,10 +46,8 @@ void create() {
     force_me("wearall");
     set_funcs( ({"special", "use_hand", "cast_spells","cast_spells","cast_spells","use_hand"}) );
     set_property("add kits",75);
-    //set_funcs( ({"use_hand"}) );
     set_func_chance(100);
     set_exp(500000);
-    //set_max_level(36);
     set_property("full attacks", 1);
     set_attacks_num(6);
     set_property("weapon resistance", 1);
@@ -129,7 +125,7 @@ void special(object targ){
     TO->force_me("watch");
     tell_object(targ, "%^BOLD%^%^BLUE%^Vecna drains the life force of your soul!%^RESET%^");
     tell_room(ETO, "%^BOLD%^%^BLUE%^Vecna drains the life force of "+targ->query_cap_name()+"'s soul!%^RESET%^", targ);
-    dam = to_int(targ->query_max_hp() / 3);
+    dam = to_int(targ->query_max_hp() * 0.45);
     set_property("noMissChance",1);
     targ->do_damage("torso",dam);
     set_property("noMissChance",-1);
@@ -194,7 +190,7 @@ void cast_spells(object targ){
 
     if(objectp(merc = present("merc",ETO)))
     {
-        new("/cmds/spells/f/_finger_of_death")->use_spell(TO,targ,65,100,"mage");
+        new("/cmds/spells/f/_finger_of_death")->use_spell(TO,merc,65,100,"mage");
     }
 
     if(objectp(present("corpse",ETO)))
