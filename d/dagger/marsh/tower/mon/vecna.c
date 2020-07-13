@@ -125,7 +125,7 @@ void special(object targ){
     TO->force_me("watch");
     tell_object(targ, "%^BOLD%^%^BLUE%^Vecna drains the life force of your soul!%^RESET%^");
     tell_room(ETO, "%^BOLD%^%^BLUE%^Vecna drains the life force of "+targ->query_cap_name()+"'s soul!%^RESET%^", targ);
-    dam = to_int(targ->query_max_hp() * 0.45);
+    dam = to_int(targ->query_max_hp() * 0.55);
     set_property("noMissChance",1);
     targ->do_damage("torso",dam);
     set_property("noMissChance",-1);
