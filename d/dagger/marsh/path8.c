@@ -36,7 +36,7 @@ set_listen("default", "%^BOLD%^%^BLUE%^You can hear loud frogs chirping and croa
 ]));
 
   set_exits(([
-        "northwest":"/d/dagger/marsh/swamp/rooms/m1",
+        "northwest":"/d/dagger/marsh/swamp/rooms/m_p009_n007",
         "northeast":"/d/guilds/pack/hall/firedock",
      "south" : "/d/dagger/marsh/path7",
 ]));
