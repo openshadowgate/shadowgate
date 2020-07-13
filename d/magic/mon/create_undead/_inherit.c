@@ -9,6 +9,7 @@ object weapon;
 
 void create()
 {
+    ::create();
     set_money("gold", 0);
     set_money("silver", 0);
     set_money("copper", 0);
