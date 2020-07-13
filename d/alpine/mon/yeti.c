@@ -8,7 +8,7 @@ int i, count;
 void create()
 {
 	::create();
-	set_id(({ "yeti", "snowman", "abomidable snowman" }));
+	set_id(({ "yeti", "snowman", "abomidable snowman","monstrous humanoid" }));
 	set_name("Yeti");
 	set_short("A large Yeti");
 	set_long(

@@ -40,7 +40,7 @@ int *stat_adj() { return ({ 2, 0, 0, 0, 0, -2 }); }
 
 // Stuff needed to replace what was in the old race database
 
-string race_name() { return "firbolg"; }
+string race_name() { return "troll"; }
 
 // gets used in a forumla based on con to determine actual weight
 int weight() { return 10000; }

@@ -15,7 +15,7 @@ void create()
 {
       ::create();
   	set_name("giant anaconda");
-  	set_id(({"anaconda","giant anaconda","snake","giant snake"}));
+  	set_id(({"anaconda","giant anaconda","snake","giant snake","animal"}));
   	set_short("%^BOLD%^%^GREEN%^g%^RESET%^%^GREEN%^ia%^BOLD%^nt %^RESET%^"
         +"%^GREEN%^an%^ORANGE%^a%^GREEN%^c%^BOLD%^o%^RESET%^%^GREEN%^n%^ORANGE%^d"
         +"%^GREEN%^a");
@@ -44,7 +44,7 @@ void create()
       set_monster_feats(({
         "power attack",
         "damage resistance",
-    })); 
+    }));
 
     set_level(55);
     set_class("fighter");
@@ -71,7 +71,7 @@ void create()
       set_new_exp(55, "normal");
   	set_overall_ac(-60);
       set_size(2);
-      add_attack_bonus(70); 
+      add_attack_bonus(70);
   	set_alignment(4);
       set_property("full attacks",1);
       set_funcs(({"seize", }));
@@ -83,7 +83,7 @@ void create()
         "The anaconda tastes the air with its tongue",
         "The anaconda winds around a low branch, dangling a loop of its body down toward the ground",
         "The snake slithers silently forward"
-            
+
     	}),0);
       set_property("no random treasure", 1);
       BEAT = 0;
@@ -105,7 +105,7 @@ int break_free(string str)
   if ("str"[0..2] != "out" && str[0..3] != "free" && str[0..4] != "loose")
   {
     return 0;
-  } 
+  }
   return struggle(str);
 }
 
@@ -153,14 +153,14 @@ int struggle(string str)
   last_struggle = TP->query_property("last_struggle");
   if (last_struggle > time()-5){
     tell_object(TP, "You need a bit more time before you try again");
-    return 1;    
+    return 1;
   }
   new_freedom = TP->query_stats("strength");
   new_freedom += TP->query_stats("dexterity");
   new_freedom += random(60);
   new_freedom -= 30;
   new_freedom = 2 * new_freedom / 5;
-  if (freedom_percent>99) 
+  if (freedom_percent>99)
   {
     break_loose(TP);
     return 1;
@@ -289,7 +289,7 @@ void digest(object stomach){
     if (critters[i]->query_hp()>0)
     {
       if (critters[i]->query_unconscious() && critters[i]->fort_save(30)){
-        
+
         tell_object(critters[i], "%^BOLD%^%^GREEN%^A terrible, searing %^RED%^pain%^GREEN%^ brings you back to your senses!");
         critters[i]->set_condition(0);
       }
@@ -315,7 +315,7 @@ void swallow3(object meal)
   }
   swallowing  = 1;
   set_attackers(({}));
-  tell_object(meal, "%^BOLD%^%^GREEN%^The snake swallows you whole!"); 
+  tell_object(meal, "%^BOLD%^%^GREEN%^The snake swallows you whole!");
   weapons = meal->query_wielded();
   count = sizeof(weapons);
   if (count>0)
@@ -333,14 +333,14 @@ void swallow3(object meal)
       ob->__ActuallyUnwield();
     }
   }
-  tell_room(ETO, "%^BOLD%^%^GREEN%^The snake swallows "+ meal->QCN 
+  tell_room(ETO, "%^BOLD%^%^GREEN%^The snake swallows "+ meal->QCN
    + " %^BOLD%^%^GREEN%^whole!", meal);
   stomach = find_object_or_load(ROOMS + "snakestomach");
   for (i=2;i<5;i++)
   {
     if (objectp(stomach->query_snake()) && stomach->query_snake()!=TO)
     {
-      stomach = find_object_or_load(ROOMS + "snakestomach" + i);  
+      stomach = find_object_or_load(ROOMS + "snakestomach" + i);
     } else {
       break;
     }
@@ -363,8 +363,8 @@ void swallow2(object meal)
   swallowing = 1;
   set_attackers(({}));
   tell_object(meal, "%^BOLD%^%^GREEN%^The snake fits its mouth"
-    +" over your head and begins to swallow"); 
-  tell_room(ETO, "%^BOLD%^%^GREEN%^The snake fits its mouth over" 
+    +" over your head and begins to swallow");
+  tell_room(ETO, "%^BOLD%^%^GREEN%^The snake fits its mouth over"
     + meal->QCN + "%^BOLD%^%^GREEN%^'s head and begins to swallow.", meal);
   call_out("swallow3", 2, meal);
   return;
@@ -380,9 +380,9 @@ void swallow(object meal){
   set_attackers(({}));
   tell_object(meal, "%^BOLD%^%^GREEN%^The snake stretches its mouth"
     +" open, dislocating its jaw as it begins an attempt to swallow"
-    +" %^RESET%^you %^BOLD%^%^GREEN%^whole!"); 
+    +" %^RESET%^you %^BOLD%^%^GREEN%^whole!");
   tell_room(ETO, "%^BOLD%^%^GREEN%^The snake stretches its mouth open,"
-    +" dislocating its jaw as it begins an attempt to swallow %^RESET%^" 
+    +" dislocating its jaw as it begins an attempt to swallow %^RESET%^"
     + meal->QCN + " %^BOLD%^%^GREEN%^whole!", meal);
   call_out("swallow2", 2, meal);
   return;
@@ -402,7 +402,7 @@ void constrict(){
     +" %^GREEN%^an%^ORANGE%^a%^GREEN%^c%^ORANGE%^o%^GREEN%^nd%^ORANGE%^a%^RESET%^!");
   report ("Constricting " + seizee->query_name());
   foes = query_attackers();
-  if (sizeof(foes)>0 && member_array(seizee, foes)!=-1) 
+  if (sizeof(foes)>0 && member_array(seizee, foes)!=-1)
   {  //It won't continue biting something that it's busy constricting. It will wait for them to go unconscious then swallow them whole. Muahahaha
     foes -=({seizee});
     set_attackers(foes);
@@ -451,10 +451,10 @@ void seize(object targ){
   object room;
   room = ETO;
   if (seizee !=0){return;}
-  if (!objectp(targ)||!objectp(room)) { return; }  
+  if (!objectp(targ)||!objectp(room)) { return; }
   //add in a saving throw
   if (targ->reflex_save(50))
-  { 
+  {
     tell_object(targ, "You %^BOLD%^%^GREEN%^dodge%^RESET%^ aside as the"
       +" %^GREEN%^snake%^RESET%^ attempts to catch you in one of its"
       +" %^BOLD%^%^GREEN%^c%^RESET%^%^GREEN%^o%^ORANGE%^i%^BOLD%^"
@@ -471,7 +471,7 @@ void seize(object targ){
     +"%^RESET%^ around you, trapping you tight!");
   tell_room(room, TO->QCN + "%^BOLD%^%^GREEN%^ loops one if its"
     +" %^BOLD%^%^GREEN%^c%^RESET%^%^GREEN%^oi%^BOLD%^l%^RESET%^%^GREEN%^s"
-    +" %^RESET%^around " + targ->QCN +"%^RESET%^, trapping " 
+    +" %^RESET%^around " + targ->QCN +"%^RESET%^, trapping "
     + targ->QO + " tight!", targ);
   targ->set_paralyzed(40, "You are trapped within the %^GREEN%^co%^BOLD%^i"
     +"%^RESET%^%^ORANGE%^l%^GREEN%^s%^RESET%^ of a giant"

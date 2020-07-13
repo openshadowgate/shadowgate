@@ -13,7 +13,7 @@ void create()
 {
       ::create();
   	set_name("dire warthog alpha");
-  	set_id(({"warthog","dire warthog","boar","giant boar", "alpha", "alpha warthog", "dire warthog alpha", "warthog alpha"}));
+  	set_id(({"warthog","dire warthog","boar","giant boar", "alpha", "alpha warthog", "dire warthog alpha", "warthog alpha","animal"}));
   	set_short("%^ORANGE%^Alpha %^BOLD%^%^BLACK%^Dire %^RESET%^%^ORANGE%^warthog");
   	set_long("This huge, fearsome omnivore is the leader of its group, or sounder. It is about 18 feet in length and 12 feet high at the shoulder, and keeps watch over the lesser members of the sounder. Its physical size and greater aggression set it apart and make it even more dangerous. Dangerous hooves and powerful tusks are equally useful for digging up deep tubers or ripping apart adversaries, and its hide is thick enough to keep it safe from most attacks.");
     set_race("warthog");
