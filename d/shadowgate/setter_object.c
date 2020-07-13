@@ -985,7 +985,7 @@ hint_deity()
     write("
 %^BOLD%^You're about to select divine power to follow. If you're a %^CYAN%^cleric%^WHITE%^, %^CYAN%^paladin%^WHITE%^ or otherwise divine engaged character, it is highly recommended you read deity help file prior to selection.%^WHITE%^.
 
-%^BOLD%^Refer to %^ORANGE%^<help help deities>%^WHITE%^ to overview selection.");
+%^BOLD%^Refer to %^ORANGE%^<help deities>%^WHITE%^ to overview selection.");
 }
 
 
