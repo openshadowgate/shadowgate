@@ -151,7 +151,7 @@ void create() {
 void set_guard_stuff() {
     set_jail_location("/d/shadow/city/room/jail_main");
     set_guarding("Shadow");
-    set_bad_races(({ "drow", "half-drow", "goblin", "hobgoblin", "kobold", "ogre", "orc", "gnoll", "bugbear", "minotaur", "fey'ri", "dragon", "ratkin", "wererat" }));
+    set_bad_races(({ "drow", "half-drow", "goblin", "hobgoblin", "kobold", "ogre", "orc", "gnoll", "bugbear", "minotaur", "fey'ri", "dragon", "ratkin", "wererat","troll" }));
     set_race_action("capture");
     set_race_messages(([
                            "drow"      : "Arg, its a drow, sound the horn, stop it before it starts killing children.",
