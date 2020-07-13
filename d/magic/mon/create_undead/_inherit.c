@@ -7,6 +7,14 @@ inherit WEAPONLESS;
 object master;
 object weapon;
 
+void create()
+{
+    set_money("gold", 0);
+    set_money("silver", 0);
+    set_money("copper", 0);
+    set_money("platinum", 0);
+}
+
 void control(object caster)
 {
     if(!objectp(caster))

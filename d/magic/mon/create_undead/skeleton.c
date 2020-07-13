@@ -33,7 +33,7 @@ void create(){
     set_stats("constitution",12);
     set_stats("intelligence",4);
     set_stats("wisdom",4);
-    set_stats("charisma",4);
+    set_stats("charisma",8);
 
     set_alignment(9);
 
