@@ -17,8 +17,8 @@ void create(){
     set_long(
       "%^ORANGE%^A heavy brick of pure gold"
     );
-    set_weight(75);
-    set_value(10000+random(100000));
+    set_weight(10); //three per sack
+    set_value(10000);
 }
 
 int read(string str){
@@ -28,4 +28,3 @@ int read(string str){
     write("\n\n\t\%^BOLD%^%^YELLOW%^99% PURE GOLD BY WEIGHT.  Certified by T.G.D.");
     return 1;
 }
-
