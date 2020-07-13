@@ -1670,7 +1670,7 @@ void heart_beat()
         do_healing(calculate_healing());
     else
         calculate_healing();
-    if (interactive(TO))
+    if (userp(TO) && objectp(TO))
     {
         if ( (query_idle(TO) > 7260) &&
              !avatarp(TO) &&
@@ -5077,19 +5077,19 @@ int set_favored_enemy(int x, string str)
 {
     if(member_array(str, keys(VALID_ENEMY)) < 0)
         return 0;
-    
+
     if(x < 1 || x > 3)
         return 0;
-    
+
     x--;
 
     favored_enemy[x] = str;
-    
+
     return 1;
 }
 
 int remove_favored_enemy(int x)
-{      
+{
     favored_enemy[x - 1] = "none";
     return 1;
 }
@@ -5101,11 +5101,11 @@ int set_favored_terrain(int x, string str)
 
     if(x > 3 || x < 1)
         return 0;
-    
+
     x--;
-    
+
     favored_terrain[x] = str;
-    
+
     return 1;
 }
 
@@ -5119,7 +5119,7 @@ string query_favored_enemy(int x)
 {
     if(!sizeof(favored_enemy))
         favored_enemy = ({ "none", "none", "none" });
-    
+
     return favored_enemy[x - 1];
 }
 
@@ -5127,39 +5127,39 @@ string query_favored_terrain(int x)
 {
     if(!sizeof(favored_terrain))
         favored_terrain = ({ "none", "none", "none" });
-    
+
     return favored_terrain[x - 1];
 }
 
-string *query_favored_enemies() { 
+string *query_favored_enemies() {
     if(!sizeof(favored_enemy))
         favored_enemy = ({ "none", "none", "none" });
-    
+
     return favored_enemy;
 }
 
 string *query_favored_terrains() {
     if(!sizeof(favored_terrain))
         favored_terrain = ({ "none", "none", "none" });
-    
+
     return favored_terrain;
 }
 
 int is_favored_enemy(object ob)
 {
     string *ids;
-    
+
     if(!ob && !objectp(ob))
         return 0;
-    
+
     if(!sizeof(favored_enemy))
         return 0;
-    
+
     ids = ob->query_id();
     ob->query_race() && ids += ({ ob->query_race() });
     if(ob->is_undead())
         ids += ({ "undead" });
-    
+
     foreach(string favored_type in favored_enemy)
     {
         if(strlen(favored_type) && favored_type != "none")
@@ -5171,25 +5171,25 @@ int is_favored_enemy(object ob)
             }
         }
     }
-    
+
     return 0;
 }
 
 int is_favored_terrain(object room)
 {
     string type;
-    
+
     if(!room || !objectp(room) || !sizeof(favored_terrain))
         return 0;
-    
+
     type = room->query_terrain();
-    
+
     if(!type || !strlen(type))
         return 0;
-    
+
     if(FEATS_D->usable_feat(TO, "resist undead") && member_array(type, VALID_TERRAIN["caves"]) > -1)
         return 1;
-    
+
     foreach(string terrain in favored_terrain)
     {
         if(strlen(terrain) && terrain != "none")
@@ -5198,8 +5198,6 @@ int is_favored_terrain(object room)
                 return 1;
         }
     }
-    
+
     return 0;
 }
-    
-    
