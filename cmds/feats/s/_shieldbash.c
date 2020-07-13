@@ -191,7 +191,7 @@ void execute_attack()
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target:timerz ]);
-    delay_subject_msg(target, 25, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^shieldbashed%^WHITE%^ again.%^RESET%^");
+    delay_subject_msg(target, FEATTIMER, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^shieldbashed%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using shieldbash");
     caster->set_property("using shieldbash", newmap);
 
