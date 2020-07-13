@@ -9,7 +9,7 @@ void create()
    ::create();
    set_name("doe");
    set_short("A gentle doe");
-   set_id(({"monster","doe","gentle doe"}));
+   set_id(({"monster","doe","gentle doe","animal"}));
    set_long("This is a very docile doe that is probably at least two"+
    " or three years old, although you don't see any young near her"+
    " at the moment. She has a spotted rump and a cute little white"+

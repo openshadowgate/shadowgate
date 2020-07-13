@@ -9,7 +9,7 @@ void create(){
    ::create();
    set_name("bobcat");
    set_short("A sleek bobcat");
-   set_id(({"monster","cat","sleek bobcat","bobcat"}));
+   set_id(({"monster","cat","sleek bobcat","bobcat","animal"}));
    set_long("The bobcat is a truly remarkable predator. It is the"+
    " ancestor of the common cat and is somewhat larger and much"+
    " more fierce. It has two black tufts extending from the tips of"+

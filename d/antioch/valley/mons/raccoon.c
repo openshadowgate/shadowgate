@@ -8,7 +8,7 @@ void create(){
    ::create();
    set_name("raccoon");
    set_short("A sneaky raccoon");
-   set_id(({"raccoon","monster","sneaky raccoon"}));
+   set_id(({"raccoon","monster","sneaky raccoon","animal"}));
    set_long("This raccoon obviously thinks it's quite sneaky as it"+
    " carefully moves about, scrounging for food. Its fur is mostly"+
    " a greyish color and it has black stripes down its back and"+

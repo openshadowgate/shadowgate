@@ -9,7 +9,7 @@ void create(){
       object ob;
 	::create();
 	set_name("al-mi'raj");
-	set_id(({"al-mi'raj","al-mi`raj","al mi raj","bunny","monster","rabbit","al mi`raj","al mi'raj","al-mi raj","hare","almiraj"}));
+	set_id(({"al-mi'raj","al-mi`raj","al mi raj","bunny","monster","rabbit","aberration","al mi`raj","al mi'raj","al-mi raj","hare","almiraj"}));
 	set_short("A cute little al-mi'raj");
 	set_long(
 	"This odd looking creature looks like a strange cross between"+

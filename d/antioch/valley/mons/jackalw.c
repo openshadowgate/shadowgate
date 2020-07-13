@@ -10,7 +10,7 @@ int gaze = 0;
 void create(){
 	::create();
 	set_name("jackalwere");
-	set_id(({"jackalwere","jackal","were jackal","monster"}));
+	set_id(({"jackalwere","jackal","were jackal","monster","magical beast"}));
 	set_short("A tricky jackalwere");
 	set_long(
 	"The creature before you is a jackalwere, a hybrid between"+
