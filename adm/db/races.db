@@ -43,6 +43,7 @@ satyr:2:10000:5:right hand;left hand:0:0:0:0:0:0:minotaur:2:4
 saurian:2:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:2
 shade:3:9999:5:right hand;left hand:0:2:0:0:0:2:human:2:0
 squole:2:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:2
+troll:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:3:7
 voadkyn:2:10000:5:right hand;left hand:1:-1:0:0:2:-2:human:3:2
 wemic:2:10000:5:right hand;left hand:2:2:0:0:2:-2:wemic:3:4
 yuan-ti:2:10000:5:right hand;left hand:0:0:0:0:0:0:human:2:0

@@ -555,6 +555,8 @@ mixed query_property(string prop)
         }
         if (TO->query_race() == "shade") {
             num += 1;
+        } else if (TO->query_race() == "troll") {
+            num += 2;
         }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "fast healing"));

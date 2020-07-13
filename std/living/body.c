@@ -733,6 +733,11 @@ int query_resistance_percent(string res)
             }
         }
     }
+
+    if (res == "fire" && TO->query_race() == "troll") {
+            mod += -15;
+    }
+
     return resistances["resistance percents"][res] + mod;
 }
 
@@ -946,12 +951,12 @@ int query_ac()
     if (TO->query_blind() || TO->query_temporary_blinded()) {
         myac -= TO->query_level() / 12 + 1;
     }
-    
+
     attacker = TO->query_current_attacker();
-    
+
     if(attacker && FEATS_D->usable_feat(TO, "resist undead") && attacker->is_undead())
         myac += 8;
-    
+
     if (!userp(TO)) {
         return ac - myac;
     }
