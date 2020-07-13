@@ -1,5 +1,5 @@
 //behir.c
-//corrected typo on strength, it was only getting 18 when it was supposed 
+//corrected typo on strength, it was only getting 18 when it was supposed
 //to get 20 so changed it to 19 after fixing the typo to keep from making a
 //huge change to the monster - Styx 12/22/01
 
@@ -14,19 +14,19 @@ void set_caught(object targ);
 
 void create(){
 	::create();
-	
+
 	set_property("strength","electricity");
 	set_property("strength","poison");
 	set("aggressive",19);
 	set_name("Behir");
-	set_id(({"Behir","behir","monster"}));
+	set_id(({"Behir","behir","monster","magical beast"}));
 	set("short","A Behir");
 	set("long",
 @OLI
 	This is a long snake like creature. It has a dozen legs protruding from
-its sinuous reptilian body. This crocodilian-headed creature has a blue 
+its sinuous reptilian body. This crocodilian-headed creature has a blue
 under-belly. There are two large horns bending over the head. The extremely
-hard scales are of a dusty blue color. An extremely fast animal, it lunges 
+hard scales are of a dusty blue color. An extremely fast animal, it lunges
 quickly to kill you.
 OLI
 	);
@@ -68,7 +68,7 @@ OLI
 
 
 void attack(object targ){
-	
+
 		if(!cast){
 			tell_room(ETO,"%^BOLD%^%^YELLOW%^A 20' bolt of lightning"+
 					" shoots from the Behir at "+targ->query_cap_name()+"!",targ);
@@ -90,7 +90,7 @@ void attack(object targ){
 			}
 			return;
 			}
-		
+
 		if(random(20) == 0){
 			if(targ->query_size() < 3){
 				tell_room(ETO,"%^BOLD%^%^RED%^The Behir rushes at "+targ->query_cap_name()+" and "+
@@ -105,7 +105,7 @@ void attack(object targ){
 		}
 		if(caught){
 			if(targ != caught)
-				tell_object(targ,"%^BOLD%^The Behir hisses at you as it continues to squeeze "+caught->query_cap_name()+"!\n");	
+				tell_object(targ,"%^BOLD%^The Behir hisses at you as it continues to squeeze "+caught->query_cap_name()+"!\n");
 			tell_object(caught,"%^BOLD%^The behir continues to squeeze the spikes of it underbelly into you!!\n");
 			tell_room(ETO,"%^BOLD%^%^RED%^The behir continues to squeeze "+caught->query_cap_name()+"!",caught);
 			caught->do_damage(caught->return_target_limb(),random(6)+1);
@@ -134,7 +134,7 @@ void set_caught(object targ){caught = targ;}
 void heart_beat(){
 	object *inven;
 	int i,j;
-	
+
 
 	if(query_hp() < 1){
 		if(stomach){
@@ -156,7 +156,7 @@ void heart_beat(){
 	}
 		::heart_beat();
 }
-		
+
 void reset_cast(){cast = 0;}
 
 object query_caught(){ return caught;}

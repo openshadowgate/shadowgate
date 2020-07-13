@@ -13,7 +13,7 @@ void create()
 {
 	::create();
 	set_name("Behir");
-	set_id(({"Behir","behir","monster"}));
+	set_id(({"Behir","behir","monster","magical beast"}));
 	set_short("A Behir");
 	set_long("This is a long snake like creature. It has a dozen legs protruding from "
         "it's sinuous reptilian body. This crodilian-headed creature has a blue "
@@ -62,16 +62,16 @@ void create()
 }
 
 void attack(object targ)
-{	
+{
     if(!cast)
     {
         tell_object(targ,"%^BOLD%^%^YELLOW%^A bolt of lightning shoots from the "
-		    "Behir toward you!\n");            
+		    "Behir toward you!\n");
         tell_room(ETO,"%^BOLD%^%^YELLOW%^A 20' bolt of lightning "
 		    "shoots from the Behir at "+targ->QCN+"!",targ);
         tell_room(ETO,"%^BOLD%^%^YELLOW%^The bolt slams into "+targ->QCN+"!",targ);
         tell_object(targ,"%^BOLD%^%^YELLOW%^The bolt slams into you!\n");
-			
+
         if(ROLLSAVE(targ,SP))
         {
             set_property("magic",1);
@@ -101,8 +101,8 @@ void attack(object targ)
 			tell_object(targ,"%^BOLD%^%^RED%^You feel that survival in here will not be long!\n");
 			return;
 		}
-		
-    
+
+
         if(caught)
         {
 			if(targ != caught)
@@ -110,7 +110,7 @@ void attack(object targ)
                 tell_object(caught,"%^BOLD%^The behir continues to squeeze the "
                     "spikes of it underbelly into you!!\n");
                 tell_object(targ,"%^BOLD%^The Behir hisses at you as it continues to "
-                    "squeeze "+caught->QCN+"!\n");	
+                    "squeeze "+caught->QCN+"!\n");
 			    tell_room(ETO,"%^BOLD%^%^RED%^The behir continues to squeeze "
                     ""+caught->QCN+"!",caught);
             }
@@ -157,8 +157,8 @@ void heart_beat()
 					inven[j]->move_player(ETO);
 					inven[j]->add_attacker(TO);
 					TO->add_attacker(inven[j]);
-				} 
-                else 
+				}
+                else
                 {
 					tell_room(ETO,"%^BOLD%^"+inven[j]->query_short()+" falls from the stomach of the behir!");
 					inven[j]->move(ETO);
@@ -169,7 +169,7 @@ void heart_beat()
 	}
 		::heart_beat();
 }
-		
+
 void reset_cast()               { cast = 0; }
 
 void set_caught(object targ)    { caught = targ; return; }
