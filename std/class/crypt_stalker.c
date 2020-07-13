@@ -10,7 +10,7 @@ void create()
     ::create();
 }
 
-string *query_base_classes() { return ({ "bard" }); }
+string *query_base_classes() { return ({ "ranger" }); }
 
 int is_prestige_class() { return 1; }
 

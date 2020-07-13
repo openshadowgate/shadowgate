@@ -28,12 +28,12 @@
                          "elementals" : ({ "elemental", "genasi", "earth genasi", "air genasi", "water genasi", "air genasi", "efreet", "djinn", "marid", "genie" }), \
                          "elves"      : ({ "elf", "half-elf", "drow", "half-drow", "szarkai" }), \
                          "fey"        : ({ "nymph", "satyr", "dryad", "pixie", "brownie", "feytouched", "fey" }), \
-                         "giants"     : ({ "voadkyn", "firbolg", "giant", "titan" }), \
+                         "giants"     : ({ "voadkyn", "firbolg", "giant", "titan", "troll" }), \
                          "goblins"    : ({ "goblin", "bugbear", "hobgoblin", "goblinoid" }), \
                          "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow", "genasi", "feytouched", "aasimar", "tiefling" }), \
                          "lizardfolk" : ({ "yuan-ti", "saurian", "salamander", "lizardman", "firenewt" }), \
                          "magical beasts" : ({ "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm", "pegataur", "griffon", "hydra", "shadow", "magical beast" }), \
-                         "monstrous humanoids"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "werewolf", "wererat", "weretiger", "alaghi", "monstrous humanoid", "troll" }), \
+                         "monstrous humanoids"   : ({ "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "werewolf", "wererat", "weretiger", "alaghi", "monstrous humanoid", }), \
                          "ogres"      : ({ "ogre", "ogre-mage", "half-ogre", "ogroid" }), \
                          "orcs"       : ({ "orc", "half-orc", "orog", "tanarukk", "orcoid" }), \
                          "outsiders"  : ({ "deva", "solar", "aasimar", "angel", "demon", "devil", "imp", "tiefling", "githyanki", "githzerai", "outsider"  }), \
