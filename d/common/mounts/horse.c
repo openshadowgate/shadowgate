@@ -4,7 +4,7 @@ inherit "/std/riding_animal";
 
 void create(){
   ::create();
-  set_id(({"horse"}));
+  set_id(({"horse","animal"}));
   set_name("horse");
   set_short("A horse");
   set_long("This is a riding horse.");
