@@ -9,7 +9,7 @@
 #define VALID_TERRAIN ([ \
                            "jungle" : ({ "jungle", "dense jungle" }), \
                            "forest" : ({ "heavy forest", "light forest", "branches" }), \
-                           "plains" : ({ "scrub lands", "grasslands", "savannah", "meadows" }), \
+                           "plains" : ({ "scrub lands", "grasslands", "savannah", "meadows", "barren" }), \
                            "desert" : ({ "desert", "desert dunes", "desert rocks" }), \
                            "swamp"  : ({ "swamp", "marsh" }), \
                            "cold"   : ({ "snow", "ice", "glacier" }), \

@@ -124,6 +124,7 @@ You can travel to well known cities and destinations:
   Lothwaite
   Nurval
   Seneca
+  Shadow
   Tabor
   Tharis
   Tonovi

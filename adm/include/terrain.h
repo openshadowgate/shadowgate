@@ -130,8 +130,8 @@
 #define BUILT_TUNNEL "built tunnel"
 #define NAT_TUNNEL "nat tunnel"
 
-// adding RUINS & WATER to be able to be inside also
-// underwater in a water room is special of course, but water can be inside
+// adding RUINS & WATER to be able to be inside also 
+// underwater in a water room is special of course, but water can be inside 
 //  a cave for instance as well as outdoors  *Styx* 12/02
 
 #define INSIDE ({ STONE_BUILDING, WOOD_BUILDING, HUT, NAT_CAVE , BUILT_CAVE, BUILT_TUNNEL, NAT_TUNNEL, BRANCHES, SHALLOW_WATER, DEEP_WATER, RUINS})+CIVILIZATION
@@ -151,7 +151,7 @@
    NOTE:  PLEASE do not add or remove any groups because some uses will
    rely on these being the only choices.
 Also:  Be sure to add any new terrain types to the mapping.
-
+ 
 *Styx*  7/2002
 */
 
@@ -179,3 +179,4 @@ Also:  Be sure to add any new terrain types to the mapping.
 "city":9, "village":9,\
 "stone building":10, "wood building":10, "hut":10,\
 "boats": 11,])
+

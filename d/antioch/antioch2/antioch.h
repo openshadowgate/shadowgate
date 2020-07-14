@@ -29,4 +29,4 @@
   "dragon",\
   "fey,ri",\
   "troll",\
-  "ratkin",\})
+  "ratkin"})
