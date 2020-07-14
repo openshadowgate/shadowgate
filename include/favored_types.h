@@ -12,7 +12,7 @@
                            "plains" : ({ "scrub lands", "grasslands", "savannah", "meadows" }), \
                            "desert" : ({ "desert", "desert dunes", "desert rocks" }), \
                            "swamp"  : ({ "swamp", "marsh" }), \
-                           "snow"   : ({ "snow", "ice", "glacier" }), \
+                           "cold"   : ({ "snow", "ice", "glacier" }), \
                            "water"  : ({ "shallow water", "deep water", "beach", "shore", "boats" }), \
                            "city"   : ({ "ruins", "city", "cemetary", "garden", "stone building", "wood building", "hut" }), \
                            "caves"  : ({ "nat cave", "built cave", "built tunnel", "nat tunnel" }), \
