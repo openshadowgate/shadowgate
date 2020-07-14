@@ -6,7 +6,7 @@ void create()
 {
 	::create();
 	set_name("megalo-centipede");
-	set_id(({"monster","centipede","megalo-centipede","huge centipede","mega centipede","megalo centipede"}));
+	set_id(({"monster","centipede","megalo-centipede","huge centipede","mega centipede","megalo centipede","animal"}));
 	set_short("Megalo-centipede");
 	set_long(
 	"The centipede is huge! It looks as though some mage has"+

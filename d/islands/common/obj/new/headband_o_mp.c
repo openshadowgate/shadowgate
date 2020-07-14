@@ -18,7 +18,7 @@ void create()
     set_remove((: TO, "remove_func" :));
     set_item_bonus("intelligence", 6);
     set_item_bonus("wisdom", 6);
-    set_item_bonus("will", 4);
+    set_item_bonus("will", 6);
 		set_property("quest required", "%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^");
 		set_property("level required", 35);
 }

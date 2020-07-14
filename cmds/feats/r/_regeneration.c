@@ -3,34 +3,35 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("DamageResistance");
-    feat_prereq("Damage resistance");
-    feat_desc("Regeneration is a passive feat that when taken will allow a character to regenerate a small amount of health per round.
-
-%^BOLD%^See also:%^RESET%^ regeneration *spells");
+    feat_prereq("Toughness");
+    feat_desc("Regeneration is a passive feat that when taken will allow a character to regenerate a small amount of health per round.");
     feat_name("regeneration");
     permanent(1);
 }
 
-int allow_shifted() { return 1; }
+int allow_shifted()
+{
+    return 1;
+}
 
 int prerequisites(object ob)
 {
-    if(!objectp(ob)) { return 0; }
+    if (!objectp(ob)) {
+        return 0;
+    }
 
-    if(!FEATS_D->has_feat(ob,"damage resistance"))
-    {
+    if (!FEATS_D->has_feat(ob, "toughness")) {
         dest_effect();
         return 0;
     }
 
     return ::prerequisites(ob);
 }
-
 
 void execute_feat()
 {
@@ -58,4 +59,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-

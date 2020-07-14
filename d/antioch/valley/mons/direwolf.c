@@ -10,7 +10,7 @@ void create()
       object ob;
 	::create();
 	set_name("dire wolf");
-	set_id(({"dire wolf","wolf","monster"}));
+	set_id(({"dire wolf","wolf","monster","animal"}));
 	set_short("A dire wolf");
 	set_long(
 	"This wolf looks just like many other wolves that you've heard"+

@@ -7,7 +7,7 @@ void create() {
     object eq;
     ::create();
     set_name("Drider Recluse");
-    set_id(({"drider","recluse","drider_recluse","drider recluse"}));
+    set_id(({"drider","recluse","drider_recluse","drider recluse","aberration"}));
     set_short(
         "%^RESET%^"
         "%^ORANGE%^a %^BOLD%^%^BLACK%^disheveled %^RESET%^%^ORANGE%^and "

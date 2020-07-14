@@ -9,7 +9,7 @@ void create()
     ::create();
     set_name("a young spectral purple worm");
 
-    set_id(({"worm", "purple worm", "young purple worm", "young spectral purple worm"}));
+    set_id(({"worm", "purple worm", "young purple worm", "young spectral purple worm", "magical beast"}));
 
     set_short("%^RESET%^%^MAGENTA%^young spectral p%^BOLD%^u%^RESET%^%^MAGENTA%^rpl%^BOLD%^"+
     "e%^RESET%^%^MAGENTA%^ w%^BOLD%^o%^RESET%^%^MAGENTA%^rm%^RESET%^");
@@ -64,10 +64,10 @@ int vicious_bite(object targ)
 {
     if(!objectp(targ)) return roll_dice(2,6);
     tell_object(targ, TO->QCN+"%^BOLD%^%^RED%^ sinks several of its fangs deep into you!%^RESET%^");
-    
+
     tell_room(ETO, TO->QCN+"%^BOLD%^%^RED%^ sinks several of its fangs into "+targ->QCN+
     "%^BOLD%^%^RED%^!%^RESET%^", targ);
-    
+
     targ->cause_typed_damage(targ, 0, roll_dice(2,6), "piercing");
 }
 
@@ -78,15 +78,15 @@ void swallow(object targ)
     if(!objectp(ETO)) return;
     if(!objectp(targ)) return;
     me = TO->query_short();
-    
-     
+
+
     if(targ->reflex_save(18))
     {
         tell_object(targ, me +"%^BOLD%^%^MAGENTA%^ strikes "+
         "quickly but you are able to move just in time and "+
         "its %^BOLD%^%^GREEN%^hideous mouth%^BOLD%^%^MAGENTA%^"+
         " seems to snarl at you!%^RESET%^");
-        
+
         tell_room(ETO, me +"%^BOLD%^%^MAGENTA%^ strikes quickly "+
         "at "+targ->QCN+"%^BOLD%^%^MAGENTA%^ but "+targ->QS+" is "+
         "able to move just in time and its %^BOLD%^%^GREEN%^"+
@@ -106,7 +106,7 @@ void swallow(object targ)
     me+" pulls "+targ->QO+" down its %^RED%^spiked%^RESET%^%^MAGENTA%^"+
     " throat!%^RESET%^", targ);
 
-    if(!objectp(stomach)) 
+    if(!objectp(stomach))
     {
         stomach = new(WOB+"worm_stomach");
         stomach->set_my_worm(TO, targ);
@@ -116,6 +116,3 @@ void swallow(object targ)
     targ->force_me("look");
     return;
 }
-
-
-

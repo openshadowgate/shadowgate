@@ -27,4 +27,6 @@
                   "shade", \
                   "ratkin", \
                   "wererat", \
-                  "werewolf" })
+                  "werewolf", \
+                  "troll", \
+                 })

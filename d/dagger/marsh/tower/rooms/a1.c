@@ -26,7 +26,7 @@ void create() {
 	"snarl permanently etched into the jaw of this fallen warrior. Upon "
 	"the west wall %^CYAN%^a message%^RED%^ has been engraved, perhaps "
 	"a final warning to those who try to tread here while still walking among "
-	"the living.%^RESET%^" 
+	"the living.%^RESET%^"
     );
     set_short("%^RED%^Tower Ante-chamber%^RESET%^");
     set_listen("default",
@@ -44,11 +44,11 @@ void create() {
 	"and pointing.",
 	"finger":"The skeleton seems to be pointing to the north.",
 	"claw":"The skeleton's claw of a hand remains closed into a fist, except "
-	"for one long bony finger which lays uncurled and pointing.",	
+	"for one long bony finger which lays uncurled and pointing.",
  	"message":"%^CYAN%^The message is a passage or verse. Try reading it.%^RESET%^"
     ]));
     set_exits(([
-        "south": "/d/dagger/marsh/swamp/rooms/f29.c",
+        "south": "/d/dagger/marsh/swamp/rooms/f_n010_p003",
         "northwest": RPATH "a2",
         "northeast": RPATH "a4",
         "north": RPATH "a3"

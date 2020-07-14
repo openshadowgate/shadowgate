@@ -11,14 +11,14 @@ void do_eyes(object targ);
 
 void create(){
 	::create();
-	
+
 	set_name("beholder");
-	set("id",({"beholder","Beholder","eye"}));
+	set("id",({"beholder","Beholder","eye","aberration"}));
 	set("short","Beholder, the Eye Tyrant");
 	set("long",
 @OLI
 	This spheroid hangs in the air before you. A large protuding
-eye dominates the front of the sphere. Ten sinuous eye stalks sit 
+eye dominates the front of the sphere. Ten sinuous eye stalks sit
 upon the top of the sphere. A large toothy maw gapes open at the bottom
 of the sphere. In a word you should be ....%^BOLD%^%^YELLOW%^AFRAID%^RESET%^
 OLI
@@ -49,10 +49,10 @@ OLI
 	set_funcs(({"attack"}));
 	set_func_chance(102);
 	}
-	
+
 void attack(object targ){
 	int damage;
-	
+
 	count++;
 	switch (count){
 		case 1:
@@ -76,7 +76,7 @@ void attack(object targ){
 
 			do_eyes(targ);
 			i--;
-			if(i) 
+			if(i)
 				execute_attack();
 		 	else {
 				count = 0;
@@ -84,11 +84,11 @@ void attack(object targ){
 			}
 			break;
 		default:
-			if(!present(targ->query_name(),environment(TO))) 
+			if(!present(targ->query_name(),environment(TO)))
 				break;
 			do_eyes(targ);
 			i--;
-			if(i) 
+			if(i)
 				execute_attack();
 		 	else {
 				count = 0;
@@ -101,7 +101,7 @@ void attack(object targ){
 
 void do_eyes(object targ){
 	int j;
-	
+
 	j = random(8);
 	switch (j){
 		case 0:

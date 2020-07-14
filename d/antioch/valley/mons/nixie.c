@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_name("nixie");
-    set_id(({ "nixie", "sprite", "monster" }));
+    set_id(({ "nixie", "sprite", "monster","fey" }));
     set_short("An attractive nixie");
     set_long(
         "The wide %^WHITE%^silver%^CYAN%^ eyes are the most fascinating thing about" +

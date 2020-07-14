@@ -6,8 +6,8 @@ inherit "/std/monster";
 void create() {
   ::create();
   set_name("behir");
-  set_id(({"behir","reptile","snake-like reptile"}));
-  set("race","dragon");
+  set_id(({"behir","magical beast","snake-like reptile"}));
+  set_race("behir");
   set_gender("male");
   set("short","Snake-like reptile");
   set("long","A behir is a snake-like reptilian monster with a dozen legs\n"+

@@ -9,7 +9,7 @@ inherit WEAPONLESS;
 void create()
 {
     ::create();
-    set_id(({ "tlincalli", "Tlincalli", "laeradmon" }));
+    set_id(({ "tlincalli", "Tlincalli", "laeradmon","monstrous humanoid" }));
     set_name("tlincalli");
     set_short("%^RESET%^%^RED%^b%^BOLD%^i%^RESET%^%^RED%^z%^BOLD%^a" +
               "%^RESET%^%^RED%^rr%^BOLD%^e %^RESET%^%^RED%^tl%^BOLD%^i%^RESET%^" +

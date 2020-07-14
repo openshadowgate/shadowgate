@@ -9,7 +9,7 @@ void create(){
    ::create();
    set_name("boar");
    set_short("An angry wild boar");
-   set_id(({"boar","monster","wild boar","angry boar","angry wild boar"}));
+   set_id(({"boar","monster","wild boar","angry boar","angry wild boar","animal"}));
    set_long("The boar is quite large with two sharp tusks protruding"+
    " from his mouth. He smells rather bad and is covered in course,"+
    " black hair. He is constantly tossing his head back and forth,"+

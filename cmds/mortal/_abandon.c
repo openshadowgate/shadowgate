@@ -155,7 +155,7 @@ int confirm_drop(string str, string theclass, int drop, int cost)
         tell_object(TP, "%^BOLD%^Clearing fighting style... if you still have class levels you may reassign this with <help advance>.");
         TP->set_fighter_style(0);
     }
-    if (theclass == "cleric") {
+    if (theclass == "cleric" || theclass == "druid") {
         tell_object(TP, "%^BOLD%^Clearing domains... you may reassign these at a church/temple if you still have class levels.");
         TP->set_divine_domain(({}));
     }
@@ -172,7 +172,7 @@ int confirm_drop(string str, string theclass, int drop, int cost)
         TP->set_posed(classes[i]);
     }
     if (theclass == "monk") {
-        tell_object(TP, "%^BOLD%^Resetting your monk way and ki spells. You may reassign these at a church/temple if you still have class levels.");        
+        tell_object(TP, "%^BOLD%^Resetting your monk way and ki spells. You may reassign these at a church/temple if you still have class levels.");
         TP->delete("monk way");
         TP->delete("ki spells");
         "/daemon/user_d.c"->init_ki_(TP);
@@ -239,7 +239,7 @@ int cmd_abandon(string str)
     }
     str = lower_case(str);
     str = replace_string(str, " ", "_");
-    
+
     if (TP->query("negative level")) {
         tell_object(TP, "%^BOLD%^%^RED%^You have incurred a negative level and must remove it " +
                     "before you are able to abandon.");

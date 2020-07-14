@@ -11,7 +11,7 @@ void create(){
    set_short("%^RESET%^%^RED%^Shimmering phantom soldier");
    set("not living",1);
 
-   set_id(({"soldier","phantom","phantom soldier"}));
+   set_id(({"soldier","phantom","phantom soldier","construct"}));
    set_long("%^CYAN%^This shimmering form is a soldier. Translucent in some form, it seems very real in another.");
    set_race("human");
    set_body_type("human");

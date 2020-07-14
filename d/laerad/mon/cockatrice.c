@@ -8,7 +8,7 @@ inherit WEAPONLESS;
 
 void create(){
     ::create();
-    set_id(({"cockatrice","Cockatrice", "laeradmon"}));
+    set_id(({"cockatrice","Cockatrice", "laeradmon", "magical beast"}));
     set_name("cockatrice");
     set_short("%^RESET%^%^GREEN%^repulsive cockatrice%^RESET%^");
     set_long("%^RESET%^%^GREEN%^This repulsive hybrid of lizard, "+
@@ -44,7 +44,7 @@ void create(){
     set_func_chance(50);
 	set_moving(1);
 	set_speed(60);
-	set_nogo(({"/d/laerad/wasteland/waste1"}));		
+	set_nogo(({"/d/laerad/wasteland/waste1"}));
     set_property("not random monster", 1);
 }
 

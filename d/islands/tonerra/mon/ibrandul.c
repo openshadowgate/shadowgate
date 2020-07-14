@@ -27,7 +27,7 @@ void create()
     ::create();
 
     set_name("The Dead God");
-    set_id(({ "the dead god", "avatar", "god", "dead god" }));
+    set_id(({ "the dead god", "avatar", "god", "dead god","outsider" }));
     set_short("The Dead God");
     set_long("This is a god's chosen form. Standing before you as a giant humanoid figure. The striations of his muscles ripple across his chest. His lean and thick arms flex and unflex before you. The powerful tail swishes back and forth across the floor. The long tongue tests the air. There is a %^RED%^Glow%^CYAN%^ about the creature. After all this is a GOD.");
     set_body_type("human");

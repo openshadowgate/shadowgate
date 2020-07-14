@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_name("brownie");
-    set_id(({ "brownie", "monster" }));
+    set_id(({ "brownie", "monster","fey" }));
     set_short("A peaceful brownie");
     set_long(
         "This is an adorable little brownie. He stands about two" +

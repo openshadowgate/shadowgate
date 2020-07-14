@@ -5,7 +5,7 @@ void create(){
     object ob;
     int level;
     ::create();
-    set_id(({"wolf","dire wolf","Wolf","Dire Wolf", "forestmon"}));
+    set_id(({"wolf","dire wolf","Wolf","Dire Wolf", "forestmon", "animal"}));
     set_name("Dire Wolf");
     set_short("A Dire Wolf");
     set_long(

@@ -11,7 +11,7 @@ void create()
 {
     ::create();
     set_name("sandman");
-    set_id(({ "sandman", "monster", "sand man" }));
+    set_id(({ "sandman", "monster", "sand man", "construct" }));
     set_short("A sandman");
     set_long(
         "The sandman has humanoid features, but is made entirely out" +

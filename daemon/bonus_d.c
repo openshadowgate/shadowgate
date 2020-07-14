@@ -203,7 +203,7 @@ int new_bab(int level, object ob)
             }
             ret += file->attack_bonus(ob);
             //since mobs are usually much higher level than players - Saide
-            if (!interactive(ob)) {
+            if (!userp(ob)) {
                 return ret;
             }
         }
@@ -441,7 +441,7 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
     }
     AC += ac_bonus(targ, who);
 
-    if (!interactive(who)) {
+    if (!userp(who)) {
         if (objectp(PlayerBoss = who->query_property("minion"))) {
             if (userp(PlayerBoss)) {
                 pFlag = 1;
@@ -462,19 +462,6 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
         bon += current;
     }
     attack_roll = roll_dice(1, 20);
-    //removing the 1 attack roll = automatic miss for now - perhaps it is
-    //overly punitive on our game? - Saide May 2016
-    /*if(attack_roll == 1 && interactive(who))
-       {
-        //essentially giving everyone the chance to reroll 1s, since they
-        //are a miss now - at least after their first one - Saide
-        if((int)who->query_property("rolled_a_1"))
-        {
-            who->remove_property("rolled_a_1");
-            attack_roll = roll_dice(1,20);
-        }
-        else who->set_property("rolled_a_1", 1);
-       }*/
 
     if (objectp(DebugOb)) {
         tell_object(DebugOb, "Attack roll = " + attack_roll);

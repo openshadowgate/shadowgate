@@ -129,7 +129,7 @@ int GoThroughDoor()
     TP->move("/d/guilds/regents/rooms/hall1.c");
     return 1;
   }
-  if(member_array("Regents of the Silver Lore",TP->query_guild()) != -1){
+  /*if(member_array("Regents of the Silver Lore",TP->query_guild()) != -1){
     tell_object(TP,"You walk through the western wall.");
     TP->move("/d/guilds/regents/rooms/hall1.c");
     return 1;
@@ -137,7 +137,7 @@ int GoThroughDoor()
   else {
     tell_object(TP,"What?\n");
     return 0;
-  }
+  }*/
 }
 
 void sit(string str)

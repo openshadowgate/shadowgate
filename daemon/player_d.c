@@ -1726,7 +1726,7 @@ int* calc_weight(object play, int wpct)
 // 12/31/2003 - garrett
 string* night_races()
 {
-    return ({ "drow", "half-drow", "bugbear", "kobold", "hobgoblin", "gnoll", "orc", "lich", "ogre", "ogre-mage", "goblin", "minotaur", "ratkin" });
+    return ({ "drow", "half-drow", "bugbear", "kobold", "hobgoblin", "gnoll", "orc", "lich", "ogre", "ogre-mage", "goblin", "minotaur", "ratkin", "troll"});
 }
 
 string* list_base_classes()
@@ -1817,7 +1817,8 @@ int immunity_check(object obj, string type)
         switch (myrace) {
         case "halfling":
             return 1;
-
+        case "troll":
+            return 1;
         case "firbolg":
             return 1;
 

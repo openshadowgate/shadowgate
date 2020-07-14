@@ -5,7 +5,7 @@ create() {
   object ob;
   ::create();
   set_name("Drider");
-  set_id(({"drider","elf","drow","darkelf"}));
+  set_id(({"drider","elf","drow","darkelf","aberration"}));
   set_race("drider");
   set_gender("male");
   set_short("A drider");
@@ -54,7 +54,7 @@ create() {
 
 void web(object targ) {
   tell_object(targ, "%^GREEN%^The Drider throws you against his web! You struggle to free yourself.\n");
-  tell_room(ETO, "%^RED%^The Drider throws "+targ->query_cap_name()+" against his web!", targ);    
+  tell_room(ETO, "%^RED%^The Drider throws "+targ->query_cap_name()+" against his web!", targ);
   targ->do_damage("torso", roll_dice(2,6));
   targ->set_paralyzed(random(20) + 10);
   return 1;

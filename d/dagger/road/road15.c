@@ -15,20 +15,17 @@ void create(){
       "is Daggerdale, where the road turns inland and away from the cape of "
       "Gailden and the seaport Torm sitting within it.  To the northeast "
       "you can still see the emerald Yniam plains.  To the southeast, "
-      "the ruins of a grand temple stand upon an outcropping along the "
+      "a grand temple stands upon an outcropping along the "
       "cliffs and overlooking the sea.\n%^RESET%^");
    set_smell("default", "You can smell the salt of the sea on the cool breeze.");
    set_listen("default", "The sound of the waves on the cliffs below float up to your ears.");
    set_items(([
       "beaches" : "Golden sand lines the beaches along the Dagger Sea.",
       "sea" : "The great waves crash against the cliffs hundreds of feet below.",
-      ({"ruins","temple"}) : "Hugging the cliffside to the southeast are the ruins of a "
-         "grand temple. Broken walls of %^BOLD%^%^CYAN%^pale blue-veined %^WHITE%^white "
-         "marble %^RESET%^and toppled columns hide the rest of the ruins from view."
    ]));
    set_exits(([
       "northeast" : RPATH "road16",
       "southwest" : RPATH "road14",
-      "ruins" : "/d/magic/temples/selune"
+      "temple" : "/d/magic/temples/cevahir/cevahir"
    ]));
 }

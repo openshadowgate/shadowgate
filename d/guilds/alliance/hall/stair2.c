@@ -29,7 +29,7 @@ void create()
     set_door("cell door", "/d/guilds/alliance/hall/dungeon", "down", "alliance ring");
     set_open("cell door", 0);
     set_locked("cell door", 1);
-    lock_difficulty("cell door", get_phouse_lock_dc("epic"));
+    lock_difficulty("cell door", "/daemon/player_housing"->get_phouse_lock_dc("epic"));
     set_door_description("cell door", "This is a door made of three inch thick "
                          "oaken boards.  It has a section cut out and replaced with a grid of one "
                          "inch diameter iron bars so that some air can still get to the prisoners.");
