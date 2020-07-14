@@ -20,14 +20,14 @@
                        ])
 
 #define VALID_ENEMY ([ \
-                         "aberrations" : ({ "aberrations", "beholder", "illithid", "mind flayer", }), \
-                         "animals" : ({ "animals", "snake", "serpent", "warthog", "jaguar", "wolf", "rat", "tiger", "reptile", "dinosaur", "dino", "spider", "deer", "snake", "horse", "mare", "stallion" }), \
+                         "aberrations" : ({ "aberrations", "beholder", "illithid", "mind flayer", "aberration" }), \
+                         "animals" : ({ "animals", "snake", "serpent", "warthog", "jaguar", "wolf", "rat", "tiger", "reptile", "dinosaur", "dino", "spider", "deer", "snake", "horse", "mare", "stallion", "animal" }), \
                          "constructs" : ({ "constructs", "construct", "golem", "sandman", "sandling" }), \
-                         "dwarves"  : ({ "dwarf", "dwarves", "duergar" }), \
+                         "dwarves"  : ({ "dwarf", "dwarves", "duergar", "construct" }), \
                          "dragonkin"  : ({ "dragonkin", "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon", "drake", "wyvern" }), \
                          "elementals" : ({ "elementals", "elemental", "genasi", "earth genasi", "air genasi", "water genasi", "air genasi", "efreet", "djinn", "marid", "genie" }), \
                          "elves"      : ({ "elf", "elves", "half-elf", "drow", "half-drow", "szarkai" }), \
-                         "fey"        : ({ "fey", "nymph", "satyr", "dryad", "pixie", "brownie", "feytouched", "fey" }), \
+                         "fey"        : ({ "nymph", "satyr", "dryad", "pixie", "brownie", "feytouched", "fey" }), \
                          "giants"     : ({ "giants", "voadkyn", "firbolg", "giant", "titan", "troll" }), \
                          "goblins"    : ({ "goblins", "goblin", "bugbear", "hobgoblin", "goblinoid" }), \
                          "humans"     : ({ "humans", "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow", "genasi", "feytouched", "aasimar", "tiefling" }), \
@@ -36,8 +36,8 @@
                          "monstrous humanoids"   : ({ "monstrous humanoids", "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "werewolf", "wererat", "weretiger", "alaghi", "monstrous humanoid", }), \
                          "ogres"      : ({ "ogres", "ogre", "ogre-mage", "half-ogre", "ogroid", }), \
                          "orcs"       : ({ "orcs", "orc", "half-orc", "orog", "tanarukk", "orcoid", }), \
-                         "outsiders"  : ({ "outsider", "deva", "solar", "aasimar", "angel", "demon", "devil", "imp", "tiefling", "githyanki", "githzerai", "outsider"  }), \
-                         "plants" : ({ "shambler", "shambling mound", "tree", "vine", "plant", "plants", }), \
+                         "outsiders"  : ({ "outsiders", "deva", "solar", "aasimar", "angel", "demon", "devil", "imp", "tiefling", "githyanki", "githzerai", "outsider"  }), \
+                         "plants" : ({ "plants", "shambler", "shambling mound", "tree", "vine", "plant"}), \
                          "smallfolk"  : ({ "gnome", "halfling", "kender", "derro", "pech", "smallfolk", }), \
                          "undead"     : ({ "ghost", "skeleton", "lich", "zombie", "ghast", "entity", "spirit", "undead", "wraith", "wight" }), \
                      ])
