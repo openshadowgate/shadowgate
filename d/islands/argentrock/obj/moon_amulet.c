@@ -30,3 +30,4 @@ int wear_me()
 {
     tell_object(ETO, "%^CYAN%^You secure the amulet around your neck and fey power fills you");
     return 1;
+}
