@@ -18,7 +18,7 @@ void create(){
       "%^ORANGE%^A heavy brick of pure gold"
     );
     set_weight(10); //three per sack
-    set_value(10000);
+    set_value(10000 * (1+ random(3)));
 }
 
 int read(string str){
