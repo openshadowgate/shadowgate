@@ -6,7 +6,7 @@ int move_ok, prof;
 int go_vis();
 void show_up();
 
-#define val_terrains ({"desert rocks","rocky","old mounts","new mounts","ruins","stone building","nat cave","built cave","nat tunnel","built tunnel"})
+#define val_terrains ({"desert rocks","rocky","mountains","mountains","ruins","stone building","nat cave","built cave","natural tunnel","built tunnel"})
 
 void create() {
    ::create();

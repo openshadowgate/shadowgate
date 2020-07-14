@@ -31,7 +31,7 @@ void create()
 /* int terrain_filter() */
 /* { */
 /*     string *valid_terrains; */
-/*     valid_terrains = OUTSIDE - ({ "barren","desert rocks","old mounts","new mounts","snow","ice","shallow water","deep water","glacier","boats" }); */
+/*     valid_terrains = OUTSIDE - ({ "barren","desert rocks","mountains","mountains","snow","ice","shallow water","deep water","glacier","boats" }); */
 /*     valid_terrains += ({ "village","cemetery","garden" }); */
 
 /*     if(!objectp(place)) { return 0; } */

@@ -1,8 +1,8 @@
 /*
   I've commented a few places here to explain what I was thinking and hopefully
-  make it simple to understand the process of adding more messages.  I opted to 
+  make it simple to understand the process of adding more messages.  I opted to
   use switches after a discussion with Styx about them being more simple than
-  mappings and easier to maintain.  The player_func will require an extra set 
+  mappings and easier to maintain.  The player_func will require an extra set
   of arrays and messages.  They follow along the same lines though, so should
   be fairly easy to understand  -Ares 4/29/06
 
@@ -10,12 +10,12 @@ varargs string default_func(object player,string type,string search)
 {
     string *searches,*rand;
     *** This array must be added to each time a new item is added to the switch
-    *** It is used to pick the search at random between all of the different 
+    *** It is used to pick the search at random between all of the different
     *** searches in the terrain.
-    searches = ({ "default" });  
+    searches = ({ "default" });
     int pick;
     *** The first time the function is called, it will not have a search passed.
-    *** It will pick one at random from the searches array, and return it to 
+    *** It will pick one at random from the searches array, and return it to
     *** the calling function, this way your search will stay on the same item.
     *** IE, if you start searching a pile of junk, your messages will pertain
     *** to the pile of junk, and not some completely different item
@@ -24,7 +24,7 @@ varargs string default_func(object player,string type,string search)
     switch(search)
     {
     *** The cases of the first switch are the items that can be searched.
-    *** This is choosen at random before the start message, but will 
+    *** This is choosen at random before the start message, but will
     *** remain the same.
     case "default":
         switch(type)
@@ -36,7 +36,7 @@ varargs string default_func(object player,string type,string search)
             tell_room(EPL,""+PL->QCN+" starts digging through a bunch of random "
                 "junk,",PL);
             break;
-        *** This is where the random message goes.   The first message is what the 
+        *** This is where the random message goes.   The first message is what the
         *** player searching sees, and the second message is what the room sees and so
         *** forth.  Even indexes of the array will be seen by the player unless there
         *** is also a target.  Then index 0 and every 3 thereafter.
@@ -468,8 +468,8 @@ varargs string display_terrain_search_messages(object player,string type,string 
     case "rocky":           return rocky_func(player,type,search);
     case "hills":           return hills_func(player,type,search);
     case "branches":        return branches_func(player,type,search);
-    case "old mounts":      return old_mounts_func(player,type,search);
-    case "new mounts":      return new_mounts_func(player,type,search);
+    case "mountains":      return old_mounts_func(player,type,search);
+    case "mountains":      return new_mounts_func(player,type,search);
     case "swamp":           return swamp_func(player,type,search);
     case "marsh":           return marsh_func(player,type,search);
     case "snow":            return snow_func(player,type,search);
@@ -493,7 +493,7 @@ varargs string display_terrain_search_messages(object player,string type,string 
     case "nat cave":        return nat_cave_func(player,type,search);
     case "built cave":      return built_cave_func(player,type,search);
     case "built tunnel":    return built_tunnel_func(player,type,search);
-    case "nat tunnel":      return nat_tunnel_func(player,type,search);
+    case "natural tunnel":      return nat_tunnel_func(player,type,search);
     case "player":          return player_func(player,type,targ,search);
     case "default":
     default :               return default_func(player,type,search);
@@ -514,4 +514,3 @@ void send_random_messages(string *messages,object player,object targ)
     else { tell_room(EPL,messages[pick+1],PL); }
     return;
 }
-

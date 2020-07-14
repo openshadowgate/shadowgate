@@ -62,8 +62,9 @@
 #define ROCKY "rocky"
 #define HILLS "hills"
 #define BRANCHES "branches"
-#define OLD_MOUNTS "old mounts"
-#define NEW_MOUNTS "new mounts"
+#define MOUNTAINS "mountains"
+#define OLD_MOUNTS "mountains"
+#define NEW_MOUNTS "mountains"
 #define SWAMP "swamp"
 #define MARSH "marsh"
 #define SNOW "snow"
@@ -128,10 +129,10 @@
 #define NAT_CAVE "nat cave"
 #define BUILT_CAVE "built cave"
 #define BUILT_TUNNEL "built tunnel"
-#define NAT_TUNNEL "nat tunnel"
+#define NAT_TUNNEL "natural tunnel"
 
-// adding RUINS & WATER to be able to be inside also 
-// underwater in a water room is special of course, but water can be inside 
+// adding RUINS & WATER to be able to be inside also
+// underwater in a water room is special of course, but water can be inside
 //  a cave for instance as well as outdoors  *Styx* 12/02
 
 #define INSIDE ({ STONE_BUILDING, WOOD_BUILDING, HUT, NAT_CAVE , BUILT_CAVE, BUILT_TUNNEL, NAT_TUNNEL, BRANCHES, SHALLOW_WATER, DEEP_WATER, RUINS})+CIVILIZATION
@@ -151,7 +152,7 @@
    NOTE:  PLEASE do not add or remove any groups because some uses will
    rely on these being the only choices.
 Also:  Be sure to add any new terrain types to the mapping.
- 
+
 *Styx*  7/2002
 */
 
@@ -170,13 +171,12 @@ Also:  Be sure to add any new terrain types to the mapping.
 #define TERRAIN_GROUPS (["heavy forest":1, "light forest":1, \
 "jungle":1, "dense jungle":1,\
 "grasslands":2, "meadows": 2, "branches":2, "savannah":2, "garden":2,\
-"hills":3, "scrub lands":3, "old mounts":3, "new mounts":3, "cemetery":3,\
+"hills":3, "scrub lands":3, "mountains":3, "mountains":3, "cemetery":3,\
 "swamp":4, "marsh":4,\
 "rocky":5, "desert":5, "desert dunes":5, "desert rocks":5, "barren":5, \
 "snow":6, "ice":6, "glacier":6,\
-"nat cave":7, "built cave":7, "built tunnel":7, "nat tunnel":7,\
+"nat cave":7, "built cave":7, "built tunnel":7, "natural tunnel":7,\
 "shallow water":8, "deep water":8, "beach":8, "shore":8,\
 "city":9, "village":9,\
 "stone building":10, "wood building":10, "hut":10,\
 "boats": 11,])
-
