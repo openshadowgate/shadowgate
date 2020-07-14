@@ -10,7 +10,7 @@ void create()
     set_property("indoors",1);
     set_property("light",-1);
     set_property("no teleport",1);
-    set_terrain("natural tunnel");
+    set_terrain("nat tunnel");
     set_travel("game track");
     set_climate("temperate");
 

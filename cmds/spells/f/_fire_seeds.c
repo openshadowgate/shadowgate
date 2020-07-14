@@ -6,7 +6,7 @@
 #include <magic.h>
 #include <rooms.h>
 #include <daemons.h>
-#define WILD_TERRAINS ({"heavy forest","light forest","jungle","dense jungle","scrub lands","grasslands","savannah","desert","desert rocks","rocky","hills","branches","mountains","mountains","swamp","marsh","snow","meadows","beach","shore","nat cave","built cave","built tunnel","natural tunnel","cemetery","garden"})
+#define WILD_TERRAINS ({"heavy forest","light forest","jungle","dense jungle","scrub lands","grasslands","savannah","desert","desert rocks","rocky","hills","branches","old mounts","new mounts","swamp","marsh","snow","meadows","beach","shore","nat cave","built cave","built tunnel","nat tunnel","cemetery","garden"})
 
 inherit SPELL;
 

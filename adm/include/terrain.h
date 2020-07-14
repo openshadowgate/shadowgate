@@ -128,7 +128,7 @@
 #define NAT_CAVE "nat cave"
 #define BUILT_CAVE "built cave"
 #define BUILT_TUNNEL "built tunnel"
-#define NAT_TUNNEL "natural tunnel"
+#define NAT_TUNNEL "nat tunnel"
 
 // adding RUINS & WATER to be able to be inside also
 // underwater in a water room is special of course, but water can be inside
@@ -174,7 +174,7 @@ Also:  Be sure to add any new terrain types to the mapping.
 "swamp":4, "marsh":4,\
 "rocky":5, "desert":5, "desert dunes":5, "desert rocks":5, "barren":5, \
 "snow":6, "ice":6, "glacier":6,\
-"nat cave":7, "built cave":7, "built tunnel":7, "natural tunnel":7,\
+"nat cave":7, "built cave":7, "built tunnel":7, "nat tunnel":7,\
 "shallow water":8, "deep water":8, "beach":8, "shore":8,\
 "city":9, "village":9,\
 "stone building":10, "wood building":10, "hut":10,\
