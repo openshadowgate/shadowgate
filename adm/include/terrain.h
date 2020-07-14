@@ -170,7 +170,7 @@ Also:  Be sure to add any new terrain types to the mapping.
 #define TERRAIN_GROUPS (["heavy forest":1, "light forest":1, \
 "jungle":1, "dense jungle":1,\
 "grasslands":2, "meadows": 2, "branches":2, "savannah":2, "garden":2,\
-"hills":3, "scrub lands":3, "mountains":3, "mountains":3, "cemetery":3,\
+"hills":3, "scrub lands":3, "old mounts":3, "new mounts":3, "cemetery":3,\
 "swamp":4, "marsh":4,\
 "rocky":5, "desert":5, "desert dunes":5, "desert rocks":5, "barren":5, \
 "snow":6, "ice":6, "glacier":6,\

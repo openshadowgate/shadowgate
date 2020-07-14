@@ -15,7 +15,7 @@
                            "cold"   : ({ "snow", "ice", "glacier" }), \
                            "water"  : ({ "shallow water", "deep water", "beach", "shore", "boats" }), \
                            "city"   : ({ "ruins", "city", "cemetary", "garden", "stone building", "wood building", "hut" }), \
-                           "caves"  : ({ "nat cave", "built cave", "built tunnel", "natural tunnel" }), \
+                           "caves"  : ({ "nat cave", "built cave", "built tunnel", "nat tunnel" }), \
                            "hills"  : ({ "hills", "rocky", "old mounts", "new mounts" }), \
                        ])
 
