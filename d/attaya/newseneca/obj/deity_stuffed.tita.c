@@ -7,7 +7,7 @@ string mygod;
 
 void create(){
    ::create();
-   "/d/attaya/newseneca/obj/deity_animals"->create_animal(TO);
+   "/d/attaya/newseneca/obj/deity_animals.tita.c"->create_animal(TO);
    mygod = TO->query_property("deity");
 }
 

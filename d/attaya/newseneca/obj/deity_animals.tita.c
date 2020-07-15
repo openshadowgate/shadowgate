@@ -8,7 +8,7 @@
 
 inherit DAEMON;
 
-#define DEITIES ({"callamir","faceless","jarmila","kismet","krey","lordshadow","lysara","nilith","nimnavanon"})
+#define DEITIES ({"jarmila","kismet","krey","lordshadow","lysara","nilith"})
 
 string MYDEITY,myanimal,myshort,mylong;
 
@@ -16,8 +16,8 @@ void create_animal(object obj){
    ::create();
    MYDEITY = DEITIES[random(sizeof(DEITIES))];
    switch(MYDEITY){
-      case "anhur" : 
-         myanimal = "krey";
+      case "krey" : 
+         myanimal = "hawk";
          myshort = "A stuffed animal in the shape of a %^RESET%^%^ORANGE%^hawk%^RESET%^";
          mylong = "%^RESET%^This %^ORANGE%^gold %^RESET%^and "+
             "%^BOLD%^%^WHITE%^white %^RESET%^hawk is made from "+
@@ -118,8 +118,8 @@ void create_animal(object obj){
             "the left wing, near where the tail starts, a small "+
             "embroidered symbol can be seen.";
          break;
-      case "shar":
-         myanimal = "nilith";
+      case "nilith":
+         myanimal = "raven";
          myshort = "A stuffed animal in the shape of a "+
             "%^BOLD%^%^BLACK%^raven%^RESET%^";
          mylong = "%^RESET%^%^MAGENTA%^Shaped from %^BOLD%^"+
