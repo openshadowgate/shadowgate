@@ -16,7 +16,7 @@ void create_animal(object obj){
    ::create();
    MYDEITY = DEITIES[random(sizeof(DEITIES))];
    switch(MYDEITY){
-      case "krey" : 
+      case "krey": 
          myanimal = "hawk";
          myshort = "A stuffed animal in the shape of a %^RESET%^%^ORANGE%^hawk%^RESET%^";
          mylong = "%^RESET%^This %^ORANGE%^gold %^RESET%^and "+
