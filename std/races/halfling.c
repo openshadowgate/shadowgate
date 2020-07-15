@@ -214,5 +214,5 @@ string *query_subraces(object who) {
 
 string *query_languages(string subrace)
 {
-    return (["required":({"halfling","common"}),"optional":({"elven","gnomish","dwarvish",})]);
+    return (["required":({"halfling","common"}),"optional":({"elven","gnomish","dwarvish","goblin"})]);
 }
