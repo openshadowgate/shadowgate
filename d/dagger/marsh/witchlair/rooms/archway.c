@@ -59,7 +59,7 @@ void create() {
   ]));
  set_exits(([
    "archway":ROOMS"grove1",
-   "southwest":"/d/dagger/marsh/swamp/rooms/m7",
+   "southwest":"/d/dagger/marsh/swamp/rooms/m_p003_p003",
  ]));
    set_search("default","%^RESET%^%^BLUE%^That %^ORANGE%^archway"
 " %^BLUE%^is pretty conspicuous...");

@@ -1030,10 +1030,10 @@ void non_combat_action(string action)
         }
         break;
     case "regeneration":
-        if(!TO->query_property("regenerating"))
+        if(!TO->query_property("regeneration_spell"))
         {
             if(!cast_check(TO)) { break; }
-            new("/cmds/spells/r/_regeneration.c")->use_spell(TO,TO,num,100);
+            new("/cmds/spells/r/_regenerate.c")->use_spell(TO,TO,num,100);
         }
         break;
     case "precision":

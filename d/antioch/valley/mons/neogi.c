@@ -9,7 +9,7 @@ void create(){
       object ob;
 	::create();
 	set_name("neogi");
-	set_id(({"neogi","monster"}));
+	set_id(({"neogi","monster","aberration"}));
 	set_short("A neogi");
 	set_long(
 	"This odd creature is a strange cross between a wolf spider"+
@@ -57,7 +57,7 @@ void create(){
       ob->move(TO);
     }
 }
-	
+
 int poison(object targ)
 {
 	if(!random(8)) {

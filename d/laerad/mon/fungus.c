@@ -3,7 +3,7 @@
 inherit WEAPONLESS;
 void create(){
     ::create();
-    set_id(({"fungus"}));
+    set_id(({"fungus","plant"}));
     set_name("Fungus");
     set_short("A Fungus");
     set_long("The algae like fungus resembles a fibrous blob of decomposing "+

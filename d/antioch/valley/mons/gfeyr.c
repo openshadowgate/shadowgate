@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_name("great feyr");
-    set_id(({ "great feyr", "monster", "feyr" }));
+    set_id(({ "great feyr", "monster", "feyr","aberration" }));
     set_short("A terrible great feyr");
     set_long(
         "The great feyr is one of the most disgusting creatures" +

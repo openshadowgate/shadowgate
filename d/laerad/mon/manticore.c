@@ -7,7 +7,7 @@ inherit WEAPONLESS;
 
 void create(){
     ::create();
-    set_id(({"manticore","Manticore", "laeradmon"}));
+    set_id(({"manticore","Manticore", "laeradmon", "magical beast"}));
     set_name("manticore");
     set_short("%^RESET%^g%^BOLD%^r%^BOLD%^%^BLACK%^o%^RESET%^t%^BOLD%^"+
 	   "%^BLACK%^e%^RESET%^sq%^BOLD%^%^BLACK%^ue %^RESET%^m%^BOLD%^"+
@@ -47,7 +47,7 @@ void create(){
     set_stats("charisma",4);
     set_moving(1);
 	set_speed(60);
-	set_nogo(({"/d/laerad/wasteland/waste1"}));		
+	set_nogo(({"/d/laerad/wasteland/waste1"}));
 }
 
 void spikes(object targ){
@@ -55,7 +55,7 @@ void spikes(object targ){
     int roll, ac;
     roll=random(20);
     ac=targ->query_ac();
-    if(roll > 13-ac){ 
+    if(roll > 13-ac){
 */
 
     if( ((int)targ->query_stats("dexterity") - (int)targ->query_ac()) < random(40) ) {
@@ -80,7 +80,7 @@ void spikes(object targ){
 }
 
 void reset_spikes(){
-   if(!objectp(TO))  
+   if(!objectp(TO))
 	return;
    set_func_chance(102);
 }

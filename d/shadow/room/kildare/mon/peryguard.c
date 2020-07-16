@@ -5,7 +5,7 @@ void create(){
   set_name("peryton guard");
   setenv("MIN", "$N swoops in with a screech.");
   setenv("MOUT", "$N flies to the $D in a rush of wings.");
-  set_id(({"peryton","beast"}));
+  set_id(({"peryton","beast","magical beast" }));
   set_short("%^BOLD%^%^GREEN%^Peryton%^RESET%^");;
   set_long("%^RESET%^%^CYAN%^This large winged beast has feathers of "+
       "%^RESET%^%^GREEN%^dark green %^CYAN%^with a chest of %^BOLD%^bright "+
@@ -46,7 +46,7 @@ int rend(object victim){
    if(!random(2)) {
       tell_object(victim,"%^BOLD%^%^RED%^The peryton swoops down on you and "+
          "tears into you with both claws!%^RESET%^");
-      tell_room(environment(ETO),"%^BOLD%^%^RED%^The peryton swoops down on 
+      tell_room(environment(ETO),"%^BOLD%^%^RED%^The peryton swoops down on
          "+victim->query_cap_name()+" and tears into "+ETO->query_objective()+" "+
          "with both claws!%^RESET%^", ({ETO,victim}));
       victim->do_damage("torso",random(8)+2);

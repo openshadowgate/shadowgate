@@ -41,7 +41,7 @@ void create() {
    set_stats("dexterity",17);
    set_overall_ac(-21); 
    set_max_hp(query_hp());
-   set_storage_room(STORAGE"toy_storage.c");
+   set_storage_room(STORAGE"toy_storage.tita.c");
    force_me("speech say cheerfully");
    set_items_allowed("misc");
 }

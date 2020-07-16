@@ -9,7 +9,7 @@ void create(){
    ::create();
    set_name("bear");
    set_short("A brown bear");
-   set_id(({"monster","bear","brown bear"}));
+   set_id(({"monster","bear","brown bear","animal"}));
    set_long("This is a large, shaggy brown bear. His fur is long and"+
    " a bit unkempt, you can see berry juice and honey matted in some"+
    " places. His eyes are a gentle brown, and it is clear he just"+

@@ -7,7 +7,7 @@ void create()
     ::create();
     set_name("peryton");
     set_short("Peryton");
-    set_id(({ "monster", "peryton" }));
+    set_id(({ "monster", "peryton", "magical beast" }));
     set_long(
         "This twisted creature is surely the stuff of nightmares.  " +
         "Seemingly a giant, %^BOLD%^%^GREEN%^dark green %^RESET%^%^CYAN%^eagle with a " +

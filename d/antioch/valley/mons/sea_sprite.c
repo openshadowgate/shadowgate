@@ -9,7 +9,7 @@ inherit SM_WANDER;
 void create(){
 	::create();
 	set_name("sea sprite");
-	set_id(({"sea sprite","sprite","monster"}));
+	set_id(({"sea sprite","sprite","monster","fey"}));
 	set_short("A shy sea sprite");
 	set_long(
 	"The shy little sprite is rather cute. She has a very"+
@@ -53,7 +53,7 @@ void create(){
 	new(OBJ+"sspear")->move(TO);
 	command("wield spear");
 	new(OBJ+"sprite_arrows")->move(TO);
-}	
+}
 
 //invis at will\\
 
@@ -65,7 +65,7 @@ void init()
 	if(ALIGN->is_evil(TP) && !TP->query_invis()) {
 		kill_ob(TP,1);
 		return 1;
-	} 
+	}
 }
 
 void reset()

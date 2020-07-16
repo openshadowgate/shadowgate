@@ -9,7 +9,7 @@ void create(){
       object ob;
 	::create();
 	set_name("owlbear");
-	set_id(({"owlbear","monster","owl","bear"}));
+	set_id(({"owlbear","monster","owl","bear","magical beast"}));
 	set_short("An enormous owlbear");
 	set_long(
 	"Very well named, this beast looks exactly like a cross"+
@@ -125,4 +125,3 @@ void reset()
 		}
 	}
 }
-

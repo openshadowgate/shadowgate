@@ -5,7 +5,7 @@
 inherit WEAPONLESS;
 void create(){
     ::create();
-    set_id(({"boar","dire boar","dire","laeradmon"}));
+    set_id(({"boar","dire boar","dire","laeradmon","animal"}));
     set_name("dire boar");
     set_short("%^RESET%^%^ORANGE%^menancing dire boar%^RESET%^");
     set_long("%^RESET%^%^ORANGE%^This massive boar stands about "+
@@ -33,9 +33,9 @@ void create(){
     set_damage(3,6);
 	set_moving(1);
 	set_speed(45);
-	set_nogo(({"/d/laerad/wasteland/waste1"}));	
+	set_nogo(({"/d/laerad/wasteland/waste1"}));
     set_funcs(({"charge"}));
-    set_func_chance(20);	
+    set_func_chance(20);
 }
 
 void charge(object targ){

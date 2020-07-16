@@ -9,8 +9,9 @@ object ob;
 void create() {
     ::create();
     set_spell_name("darkness");
-    set_spell_level(([ "mage" : 2, "bard" : 2, "cleric" : 2, "monk" : 3, "assassin": 2, "paladin":2,"inquisitor":1]));
+    set_spell_level(([ "mage" : 2, "bard" : 2, "cleric" : 2, "monk" : 3, "assassin": 2, "paladin":2,"inquisitor":1, "monk":5]));
     set_spell_sphere("invocation_evocation");
+    set_monk_way("way of the shadow");
     set_monk_way("way of the shadow");
     set_syntax("cast CLASS darkness on TARGET");
     set_description("This will create a globe of darkness, which will overcome normal light sources. You can cast it on "
@@ -37,9 +38,8 @@ void spell_effect(int prof) {
     int power = set_darkness_power();
 
     level = clevel;
-    if (interactive(caster)) {
-        //if (level > 20) level = 20;
-
+    if (userp(caster)) {
+        if (level > 20) level = 20;
         tell_object(caster, "You create a darkness around you.");
         tell_room(place, caster->QCN+" causes the room to darken.", ({caster, target}) );
         if ( interactive(target) && !( caster == target ) )
@@ -49,7 +49,7 @@ void spell_effect(int prof) {
 
         tell_room(place, caster->QCN+ " causes the room to darken.",caster);
     }
-    if(level > 20) level = 20;
+
     ob = new("/d/magic/obj/darkness");
     call_out("dest_effect", 1800 + (level * 10));
     if(objectp(ob))

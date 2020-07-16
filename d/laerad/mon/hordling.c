@@ -9,7 +9,7 @@ void make_me();
 void create()
 {
     ::create();
-    set_id(({ "hordling", "Hordling", "laeradmon" }));
+    set_id(({ "hordling", "Hordling", "laeradmon","aberration" }));
     set_name("hordling");
     set_short("%^RESET%^%^CYAN%^horrifying hordling%^RESET%^");
     set_long("%^RESET%^%^CYAN%^Each hordling is an intrinsically unique " +

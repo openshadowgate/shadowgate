@@ -11,7 +11,12 @@ void create()
 // age at which each age cat starts: normal, middle, old, venerable
 int* age_brackets()
 {
-    return ({ 18, 500, 1450, 2000 });
+    return ({ 18, 500, 750, 1000 });
+}
+
+int query_unbound_age()
+{
+    return 1;
 }
 
 int* restricted_alignments(string subrace)

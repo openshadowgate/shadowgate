@@ -10,7 +10,7 @@ void create()
     ::create();
 }
 
-string *query_base_classes() { return ({ "bard" }); }
+string *query_base_classes() { return ({ "ranger" }); }
 
 int is_prestige_class() { return 1; }
 
@@ -33,6 +33,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
         "    20 Ranger levels\n"
         "    16 Wisdom Stat, before equipment modifiers\n";
         "    10 Ranks spent in Survival skill\n";
+        "    Undead Favored Enemy\n";
 
     return str;
 }
@@ -63,6 +64,9 @@ int prerequisites(object player)
     if (player->query_base_stats("wisdom") < 16) {
         return 0;
     }
+    
+    if(member_array("undead", player->query_favored_enemies()) < 0)
+        return 0;
     
     skills = player->query_skills();
     

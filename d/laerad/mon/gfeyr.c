@@ -3,7 +3,7 @@
 inherit "/d/laerad/mon/wander/swwander.c";
 void create(){
     ::create();
-    set_id(({"feyr","Great Feyr"}));
+    set_id(({"feyr","Great Feyr","magical beast"}));
     set_name("Great Feyr");
     set_short("A Great Feyr");
     set_long(

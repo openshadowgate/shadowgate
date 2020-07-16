@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_name("atomie");
-    set_id(({ "monster", "atomie", "sprite", "faerie", "fairy" }));
+    set_id(({ "monster", "atomie", "sprite", "faerie", "fairy","fey" }));
     set_short("An energetic atomie");
     set_long(
         "This is a lively little atomie, he is just under one foot" +

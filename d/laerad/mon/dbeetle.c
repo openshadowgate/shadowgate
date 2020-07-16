@@ -4,7 +4,7 @@
 inherit WEAPONLESS;
 void create(){
     ::create();
-    set_id(({"beetle","death beetle","Death Watch Beetle"}));
+    set_id(({"beetle","death beetle","Death Watch Beetle","animal"}));
     set_name("Death Watch Beetle");
     set_short("A Death Watch Beetle");
     set_long(
@@ -35,7 +35,7 @@ void rattle(){
     vars = all_living(ETO);
     for(i=0;i<sizeof(vars);i++){
     if(vars[i] == TO) continue;
-    	tell_object(vars[i],"%^BOLD%^RED%^The Death Beetle vibrates its carapace emitting a screeching noise!"); 
+    	tell_object(vars[i],"%^BOLD%^RED%^The Death Beetle vibrates its carapace emitting a screeching noise!");
         if(!vars[i]->will_save(10) && !FEATS_D->usable_feats(vars[i], "death watch")){
 	    tell_object(vars[i],"%^BOLD%^RED%^\nYour heart stops.");
        set_property("magic",1);

@@ -9,7 +9,7 @@ void create(){
       object ob;
 	::create();
 	set_name("bear");
-	set_id(({"bear","cave bear","monster"}));
+	set_id(({"bear","cave bear","monster","animal"}));
 	set_short("Cave bear");
 	set_long(
 	"The cave bear is very large and looks strong. His fur is"+

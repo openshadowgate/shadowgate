@@ -8,7 +8,7 @@ inherit WEAPONLESS;
 void create(){
 	::create();
 	set_name("slicer beetle");
-	set_id(({"slicer beetle","beetle","monster","slicer"}));
+	set_id(({"slicer beetle","beetle","monster","slicer","animal"}));
 	set_short("A slicer beetle");
 	set_long(
 	"This is a gigantic beetle with mandibles that look razor-sharp."+

@@ -17,6 +17,11 @@ string *races_allowed()
     return ({"human", "elf", "half-elf", "half-orc", "half-ogre", "ogre", "yuan-ti", "drow", "half-drow", "minotaur", "saurian"});
 }
 
+int query_unbound_age()
+{
+    return 1;
+}
+
 mapping* stat_requirements()
 {
     return (["constitution" : 18]);

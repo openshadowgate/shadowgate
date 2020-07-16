@@ -9,7 +9,7 @@ void create(){
    ::create();
    set_name("fox");
    set_short("A sly fox");
-   set_id(({"monster","fox","sly fox"}));
+   set_id(({"monster","fox","sly fox","animal"}));
    set_long("This sly little animal is covered in bright red fur,"+
    " making it hard to blend in with anything. Instead it relies on"+
    " its wits to hide itself from predators, often burrowing under"+

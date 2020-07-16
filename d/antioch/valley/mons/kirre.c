@@ -11,7 +11,7 @@ void create()
     object ob;
     ::create();
     set_name("kirre");
-    set_id(({ "kirre", "monster", "tiger" }));
+    set_id(({ "kirre", "monster", "tiger", "animal"}));
     set_short("A stealthy kirre");
     set_long(
         "At first glance, this eight foot long cat looks like a" +

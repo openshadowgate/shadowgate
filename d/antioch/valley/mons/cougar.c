@@ -9,7 +9,7 @@ void create(){
    ::create();
    set_name("cougar");
    set_short("A sleek hunting cat");
-   set_id(({"cat","monster","cougar","sleek cat","hunting cat","sleek hunting cat"}));
+   set_id(({"cat","monster","cougar","sleek cat","hunting cat","sleek hunting cat","animal"}));
    set_long("The cat is well muscled and in good shape. It has a sleek"+
    " tan coat with white on its face and chest. Hazel eyes stare at"+
    " you and its whiskers twitch as it sniffs the air. The cougar"+

@@ -15,7 +15,7 @@ void create(){
 	"undead transformation."
     );
     set_body_type("human");
-    set_race("ghast");
+    set_race("undead");
     set_gender("male");
     set_size(2);
     set_alignment(9);

@@ -71,7 +71,7 @@ int extra_hit(object targ)
         ,({ETO,targ}));
         tell_object(ETO,"%^CYAN%^You slice the weapon into "+
         targ->QCN+"'s head and brambles tighten around "+
-        ETO->QP+"neck.");
+        ETO->QP+" neck.");
         tell_object(targ,"%^CYAN%^"+ETO->QCN+" slices you in the"+
         " head and brambles slide from the blade around your neck.  "+
         "Your airway slowly gets cut off!.");

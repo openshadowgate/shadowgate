@@ -9,7 +9,7 @@ void create()
     ::create();
     set_name("an adult purple worm");
 
-    set_id(({"worm", "purple worm", "adult purple worm", "wormlairsaideguardxx"}));
+    set_id(({"worm", "purple worm", "adult purple worm", "wormlairsaideguardxx", "magical beast"}));
 
     set_short("%^RESET%^%^MAGENTA%^adult p%^BOLD%^u%^RESET%^%^MAGENTA%^rpl%^BOLD%^"+
     "e%^RESET%^%^MAGENTA%^ w%^BOLD%^o%^RESET%^%^MAGENTA%^rm%^RESET%^");
@@ -66,10 +66,10 @@ int vicious_bite(object targ)
 {
     if(!objectp(targ)) return roll_dice(2,6);
     tell_object(targ, TO->QCN+"%^BOLD%^%^RED%^ sinks several of its fangs deep into you!%^RESET%^");
-    
+
     tell_room(ETO, TO->QCN+"%^BOLD%^%^RED%^ sinks several of its fangs into "+targ->QCN+
     "%^BOLD%^%^RED%^!%^RESET%^", targ);
-    
+
     targ->cause_typed_damage(targ, 0, roll_dice(2,6), "piercing");
 }
 
@@ -80,7 +80,7 @@ void burrow()
     if(!objectp(ETO)) return;
     Trooms = get_dir(WROOMS+"wormtun*.c");
     Troom = WROOMS + Trooms[random(sizeof(Trooms))];
-    
+
     tell_room(ETO, TO->query_short()+"%^BOLD%^%^RED%^ burrows down "+
     "into the stone and earth, disappearing, and the tunnel it burrowed "+
     "collapses behind it!%^RESET%^");
@@ -88,7 +88,7 @@ void burrow()
     TO->move(Troom);
     tell_room(ETO, TO->query_short()+"%^BOLD%^%^RED%^ suddenly busts "+
     "through the stone and earth!%^RESET%^");
-    return;    
+    return;
 }
 
 void swallow(object targ)
@@ -99,21 +99,21 @@ void swallow(object targ)
     if(!objectp(targ)) return;
     me = TO->query_short();
 
-     
+
     if(targ->reflex_save(17) && !targ->id("saidewormkeeperhowne"))
     {
         tell_object(targ, me +"%^BOLD%^%^MAGENTA%^ strikes "+
         "quickly but you are able to move just in time and "+
         "its %^BOLD%^%^GREEN%^hideous mouth%^BOLD%^%^MAGENTA%^"+
         " seems to snarl at you!%^RESET%^");
-        
+
         tell_room(ETO, me +"%^BOLD%^%^MAGENTA%^ strikes quickly "+
         "at "+targ->QCN+"%^BOLD%^%^MAGENTA%^ but "+targ->QS+" is "+
         "able to move just in time and its %^BOLD%^%^GREEN%^"+
         "hideous mouth%^BOLD%^%^MAGENTA%^ seems to snarl!%^RESET%^", targ);
         return;
     }
-    
+
     tell_object(targ, me + "%^RESET%^%^MAGENTA%^ latches onto you "+
     "with several of its %^BOLD%^%^WHITE%^vicious fangs"+
     "%^RESET%^%^MAGENTA%^ and before you realize what "+
@@ -126,7 +126,7 @@ void swallow(object targ)
     me+" pulls "+targ->QO+" down its %^RED%^spiked%^RESET%^%^MAGENTA%^"+
     " throat!%^RESET%^", targ);
 
-    if(!objectp(stomach)) 
+    if(!objectp(stomach))
     {
         stomach = new(WOB+"worm_stomach");
         stomach->set_my_worm(TO, targ);
@@ -172,10 +172,10 @@ void heart_beat()
 {
     string me, *myExits, targExit;
     int x;
-    
-    
+
+
     if(!objectp(TO)) return;
-    if(!objectp(ETO)) return;  
+    if(!objectp(ETO)) return;
     if(TO->query_property("dying")) return;
     ::heart_beat();
     if(!objectp(TO)) return;
@@ -185,11 +185,11 @@ void heart_beat()
     targExit = myExits[random(sizeof(myExits))];
     if(!stringp(targExit)) return;
     me = TO->query_short();
-    
+
     tell_room(ETO, me +"%^BOLD%^%^RED%^ devours%^BOLD%^%^MAGENTA%^ the rubble blocking "+
     "the "+targExit+" exit!%^RESET%^", TO);
     if((int)TO->query_hp() < (int)TO->query_max_hp()) TO->set_hp((int)TO->query_hp() + 35 + random(30));
     ETO->open_buried_exit(targExit);
-        
+
     return;
 }

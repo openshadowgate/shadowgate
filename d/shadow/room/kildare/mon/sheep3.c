@@ -6,7 +6,7 @@ void create()
    ::create();
    set_name("sheep");
    set_short("A horned ram");
-   set_id(({"sheep","horned sheep","ram","horned ram"}));
+   set_id(({"sheep","horned sheep","ram","horned ram", "animal"}));
    set_long(
       "This large sheep is darker in color than the rest, his "+
       "wool being a deep gray.  He has long horns that curve "+

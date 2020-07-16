@@ -6,7 +6,7 @@ void create()
    ::create();
    set_name("sheep");
    set_short("A fluffy white sheep");
-   set_id(({"sheep","white sheep","fluffy sheep","ewe"}));
+   set_id(({"sheep","white sheep","fluffy sheep","ewe", "animal"}));
    set_long(
       "This sheep is fairly large and docile.  Her woolen "+
       "coat is fluffy white and looks very soft.  The sheep "+

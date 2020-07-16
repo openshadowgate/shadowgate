@@ -9,7 +9,7 @@ void create(){
    object ob;
    object ob1;
     ::create();
-    set_id(({"Thri-Kreen","thri","kreen","thri-kreen","thrikreen","laeradmon" }));
+    set_id(({"Thri-Kreen","thri","kreen","thri-kreen","thrikreen","laeradmon","magical beast" }));
     set_name("thri-kreen");
     set_short("%^ORANGE%^s%^YELLOW%^a%^RESET%^%^ORANGE%^nd%^YELLOW%^"+
 	   "y%^RESET%^%^ORANGE%^-h%^YELLOW%^ue%^RESET%^%^ORANGE%^d thr"+
@@ -27,7 +27,7 @@ void create(){
     set_body_type("human");
     set_race("thri-kreen");
     set_gender("male");
-    set_alignment(8);	
+    set_alignment(8);
     set_size(2);
     set_hd(17,5);
     set_max_level(22);
@@ -111,7 +111,7 @@ void bite(object targ){
 	     "poison that begins paralyzing your body!%^RESET%^");
 	  targ->add_poisoning(10);
 	  targ->set_paralyzed(random(6),"%^RED%^You are paralyzed from the poison!%^RESET%^");
-   }	  
+   }
    return;
 }
 

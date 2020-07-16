@@ -7,7 +7,7 @@ void create() {
     :: create();
     set_name("drider");
     set_id(({
-      "drider","spider"
+      "drider","spider","aberration"
       }));
     set_short("%^RESET%^%^RED%^Drider%^RESET%^");
     set_long(

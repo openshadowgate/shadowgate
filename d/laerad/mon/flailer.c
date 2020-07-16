@@ -7,7 +7,7 @@ inherit WEAPONLESS;
 
 void create(){
     ::create();
-    set_id(({"flailer","Flailer","laeradmon"}));
+    set_id(({"flailer","Flailer","laeradmon","magical beast"}));
     set_name("flailer");
     set_short("%^RESET%^c%^BOLD%^%^BLACK%^a%^RESET%^m%^BOLD%^%^BLACK%^"+
 	   "ou%^RESET%^fl%^BOLD%^%^BLACK%^a%^RESET%^g%^BOLD%^%^BLACK%^"+

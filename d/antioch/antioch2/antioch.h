@@ -13,7 +13,6 @@
 #define ABANNED "antioch_banned_names"
 #define ABDESCRIP   "antioch_banned_descriptions"
 #define RACIST ({"undead",\
-   "beastman",\
    "hobgoblin",\
    "half-ogre",\
    "goblin",\
@@ -28,4 +27,6 @@
   "half-drow",\
   "minotaur",\
   "dragon",\
-  "fey,ri" })
+  "fey,ri",\
+  "troll",\
+  "ratkin"})

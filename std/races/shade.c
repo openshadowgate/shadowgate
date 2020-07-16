@@ -10,6 +10,11 @@ void create() { ::create(); }
 // age at which each age cat starts: normal, middle, old, venerable
 int *age_brackets() { return ({ 18, 300, 450, 600 }); }
 
+int query_unbound_age()
+{
+    return 1;
+}
+
 int *restricted_alignments(string subrace) { return ({ 1, 2, 4, 5, 7, 8 }); }
 
 string *restricted_classes(string subrace) { return ({ "druid", "ranger" }); }

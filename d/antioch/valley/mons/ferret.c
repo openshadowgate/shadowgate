@@ -22,7 +22,7 @@ void create(){
 	set_hd(10,8);
 	set_max_level(20);
    set_size(1);
-   set_attack_limbs(({"right forepaw","left forepaw","mouth"}));
+   set_attack_limbs(({"right forepaw","left forepaw","mouth","animal"}));
    set_attacks_num(4);
    set_base_damage_type("slashing");
    set_damage(1,4);

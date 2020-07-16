@@ -3,7 +3,7 @@
 
 
 #define GUARD_D "/d/shadow/mon/guards/guard_d"
-#define BAD_RACES ({"drow","half-drow","goblin","hobgoblin","kobold","ogre","half-ogre","orc","half-orc","gnoll","bugbear"})
+#define BAD_RACES ({"drow","half-drow","goblin","hobgoblin","kobold","ogre","half-ogre","orc","half-orc","gnoll","bugbear","troll","ratkin"})
 
 inherit NPC;
 
@@ -202,7 +202,7 @@ int kill_ob(object ob, int i){
 }
 
 string randomRaceMessage(object x){
-    string msg;    
+    string msg;
     string race = (string)x->query_race();
     switch (race) {
     case "drow":
@@ -245,4 +245,3 @@ string randomRaceMessage(object x){
     return msg;
 
 }
-

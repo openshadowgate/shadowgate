@@ -21,15 +21,12 @@ create()
     set_spell_level(([ "mage" : 1, "bard" : 1, "cleric" : 1, "psion" : 1 ]));
     set_domains("charm");
     set_spell_sphere("enchantment_charm");
-    set_syntax("cast <classname> sleep on <target>");
+    set_syntax("cast CLASS sleep on TARGET");
     set_description("This spell will force your target or everyone in the room, excluding your party, to fall asleep. Attacks on the sleepers will awaken them; normal noise won't, however. Successful save will negate the effect. Immunity to mental attacks will cause damage instead. This is an agressive spell and victims will respond violently.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
     set_save("will");
-    set_components(([
-        "bard" : ([ "lullaby" : 1, ]),
-    ]));
 }
 
 
@@ -58,6 +55,9 @@ spell_effect(int prof)
     prospective = target_filter(prospective);
     prospective += ({target});
     prospective = distinct_array(prospective);
+    if (target != caster) {
+        prospective -= ({caster});
+    }
 
     counter = 0;
     targets = ({ target });
@@ -90,7 +90,7 @@ spell_effect(int prof)
             resisted = 0;
         }
 
-        if (resisted == 1) {
+        if (resisted == 1 && this_target != caster) {
            tell_room(environment(this_target),
                "%^YELLOW%^Outraged at "+caster->QCN+" for "+caster->QP+" mind control, "+
                target->QCN+" attacks "+caster->QO+"!", ({target, caster}) );

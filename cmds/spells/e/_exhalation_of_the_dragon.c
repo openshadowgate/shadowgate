@@ -37,14 +37,7 @@ void create()
 
 string query_cast_string()
 {
-    if(FEATS_D->usable_feat(caster,"eschew materials"))
-    {
         return caster->QCN+" inhales deeply, breathing in energy and air.";
-    }
-    else
-    {
-        return caster->QCN+" peers through a clear quartz crystal and inhales deeply, breathing in energy and air.";
-    }
 }
 
 

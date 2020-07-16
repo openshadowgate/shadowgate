@@ -72,7 +72,7 @@ void obsolete_feat(object ob) {
     object feat_ob;
 
     if(!objectp(ob)) return;
-    if(!interactive(ob)) return;
+    if(!userp(ob)) return;
     if(!userp(ob)) { return; }
 
     obsolete = ({ "greater spell focus","crushingstrike","lightning reflexes","iron will","great fortitude",
@@ -916,7 +916,7 @@ int usable_feat(object ob,string feat)
 
     if(!objectp(ob))                    { return 0; }
     if(!stringp(feat))                  { return 0; }
-    if(!interactive(ob))
+    if(!userp(ob))
     {
         tmp = (string *)ob->query_monster_feats();
         if(!sizeof(tmp)) { return 0; }
@@ -939,12 +939,25 @@ int usable_feat(object ob,string feat)
         }
     }
 
-    if(avatarp(ob) && !ob->query("persona") && !ob->query("testing"))  { return 1; }
-    if(!interactive(ob))                { return 1; }
-    if(!has_feat(ob,feat))              { return 0; }
-    if(!can_use_shifted(ob,feat))       { return 0; }
-    if(!can_use_feat(ob,feat))          { return 0; }
-    if(!level_to_use(ob,feat))          { return 0; }
+    if (avatarp(ob) && !ob->query("persona") && !ob->query("testing")) {
+        return 1;
+    }
+
+    if (!userp(ob)) {
+        return 1;
+    }
+    if (!has_feat(ob, feat)) {
+        return 0;
+    }
+    if (!can_use_shifted(ob, feat)) {
+        return 0;
+    }
+    if (!can_use_feat(ob, feat)) {
+        return 0;
+    }
+    if (!level_to_use(ob, feat)) {
+        return 0;
+    }
 
     if(!mapp(__USABLE_FEATS)) { __USABLE_FEATS = ([]); }
     if(!pointerp(__USABLE_FEATS[ob->query_name()])) { __USABLE_FEATS[ob->query_name()] = ({}); }
@@ -1026,21 +1039,30 @@ int level_of_feat(object ob,string feat)
 
 int has_feat(object ob, string feat)
 {
-    string *feats;
-    if(!objectp(ob))                    { return 0; }
-    if(!stringp(feat))                  { return 0; }
-    if(!is_feat(feat))                  { return 0; }
-    if(interactive(ob))
-    {
-        feats = ob->query_player_feats();
+    string* feats;
+    if (!objectp(ob)) {
+        return 0;
     }
-    else
-    {
+    if (!stringp(feat)) {
+        return 0;
+    }
+    if (!is_feat(feat)) {
+        return 0;
+    }
+    if (userp(ob)) {
+        feats = ob->query_player_feats();
+    }else {
         feats = ob->query_monster_feats();
     }
-    if(!pointerp(feats))                { return 0; }
-    if(!sizeof(feats))                  { return 0; }
-    if(member_array(feat,feats) == -1)  { return 0; }
+    if (!pointerp(feats)) {
+        return 0;
+    }
+    if (!sizeof(feats)) {
+        return 0;
+    }
+    if (member_array(feat, feats) == -1) {
+        return 0;
+    }
     return 1;
 }
 

@@ -9,7 +9,7 @@ void create(){
 
    set_name("phantom bat");
    set_short("%^RESET%^%^RED%^Shimmering phantom bat");
-   set_id(({"bat","phantom","phantom bat"}));
+   set_id(({"bat","phantom","phantom bat","construct"}));
    set("not living",1);
 
    set_long(

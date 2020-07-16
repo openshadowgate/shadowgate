@@ -566,8 +566,8 @@ int query_critical_threat_range()
 
 void set_critical_hit_multiplier(int num)
 {
-    if (!num || num < 1) {
-        crit_multiplier = 1;
+    if (!num || num < 2) {
+        crit_multiplier = 2;
     }else {
         crit_multiplier = num;
     }

@@ -49,7 +49,7 @@ void create()
     empress_moves = 0;
     power_absorbed = 0;
     set_name("unfettered");
-    set_id(({ "unfettered" }));
+    set_id(({ "unfettered","outsider" }));
     set_short("%^BLUE%^The %^RESET%^%^MAGENTA%^Un%^BLUE%^f"
               + "%^MAGENTA%^e%^BLUE%^tt%^MAGENTA%^e%^BLUE%^r%^MAGENTA%^"
               + "ed");

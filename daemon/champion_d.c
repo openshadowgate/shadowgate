@@ -270,7 +270,7 @@ void champion_monster(object mon)
     if(mon->query_property("champion_check")) return;
     mon->set_property("champion_check", 1);
     add_mob_to_level_list(mon);
-    if(interactive(mon)) return;
+    if(userp(mon)) return;
     if(!mon->query("aggressive")) return;
     if(mon->is_guardsman() || mon->is_townsman()) return;
     if(mon->query_level() < 15) return;
@@ -333,7 +333,7 @@ int verify_valid_mon(object mon, string llev)
     int lev;
     if(!objectp(mon)) return 0;
     if(mon->query_is_mount() || mon->is_merc() || mon->is_townsman() || mon->is_guardsman() ||
-    mon->query_property("minion") || mon->query_property("spell_creature") || interactive(mon) ||
+    mon->query_property("minion") || mon->query_property("spell_creature") || userp(mon) ||
     mon->is_vendor()) return 0;
     ffile = base_name(mon);
     if(strsrch(ffile, "/d/magic") != -1) return 0;

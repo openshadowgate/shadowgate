@@ -17,7 +17,7 @@ void create()
     set_indoors(1);
     set_light(1);
     set_short("The castle dungeon");
-    /*set_long("%^CYAN%^The castle dungeon\n "+ //commenting out original description for use as a plot element
+    set_long("%^CYAN%^The castle dungeon\n "+ //commenting out original description for use as a plot element
        "%^RED%^You are in the castle dungeon and the moist and cold "+
        "air chills your body. The dungeon is lit by a few torches but "+
        "vision is still a little blurry. There isn't much space down "+
@@ -25,18 +25,14 @@ void create()
        "creature to be comfortable.\n");
        set_listen("default","You can hear the sound of water dripping and the "
        "screams from a few rats hiding here.");
-       set_smell("default","You smell a strong mixture of dirt and burning torches.");*/
-
-    set_long("%^CYAN%^The castle dungeon\n" +
-             "%^RED%^For a holding cell, this is pretty nice! This twelve foot square room contains all the basic amenities.  A set of bunkbeds line one wall, while a toilet, sink, and shower line the opposite.  Across from the door, a basic writing desk and chair sit near a small bookcase filled with various books.  The entire area has been lit by magical lights attached to the ceiling.\n");
-    set_listen("default", "You hear very little down here, aside from the noise your own movement makes.");
+       set_smell("default","You smell a strong mixture of dirt and burning torches.");
     set_exits(([
                    "up" : "/d/guilds/alliance/hall/stair2.c",
                ]));
     set_door("cell door", "/d/guilds/alliance/hall/stair2", "up", "alliance ring");
     set_open("cell door", 0);
     set_locked("cell door", 1);
-    lock_difficulty("cell door", get_phouse_lock_dc("epic"));
+    lock_difficulty("cell door", "/daemon/player_housing"->get_phouse_lock_dc("epic"));
     set_door_description("cell door", "This is a door made of three inch thick "
                          "oaken boards.  It has a section cut out and replaced with a grid of one "
                          "inch diameter iron bars so that some air can still get to the prisoners.");
@@ -51,7 +47,7 @@ void reset()
 {
     ::reset();
     if (!present("jail food")) {
-        new("/d/common/obj/misc/jailfood/j_food_good.c")->move(this_object());
+        new("/d/common/obj/misc/jailfood/j_food_basic.c")->move(this_object());
     }
     /*if (!present("malory")) {
         new("/realms/kismet/mon/malorybody.c")->move(this_object());

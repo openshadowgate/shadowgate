@@ -175,5 +175,5 @@ int is_pk_race()
 
 string *query_languages(string subrace)
 {
-    return (["required":({"drow","undercommon"}),"optional":({"elven","common","orcish",})]);
+    return (["required":({"drow","undercommon"}),"optional":({"elven", "common", "draconic", "beast", "gnomish", "goblin", "orcish",})]);
 }

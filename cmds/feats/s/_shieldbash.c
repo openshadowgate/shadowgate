@@ -5,7 +5,7 @@ inherit FEAT;
 
 int FLAG;
 
-#define FEATTIMER 35; // circa six rounds wait equivalent per target at current speed. -N, 9/10.
+#define FEATTIMER 35
 
 // Three things are necessary to set in create in all feats.  First, the type of feat
 // either instant or duration or permanent.  The type of feat will tell the inherit
@@ -191,7 +191,7 @@ void execute_attack()
     }
     timerz = time() + FEATTIMER;
     newmap += ([ target:timerz ]);
-    delay_subject_msg(target, 25, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^shieldbashed%^WHITE%^ again.%^RESET%^");
+    delay_subject_msg(target, FEATTIMER, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^shieldbashed%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using shieldbash");
     caster->set_property("using shieldbash", newmap);
 

@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_name("sandling");
-    set_id(({ "sandling", "monster" }));
+    set_id(({ "sandling", "monster", "construct" }));
     set_short("Sandling");
     set_long(
         "This is a blob of moving and sliding sand. It has taken the" +

@@ -11,7 +11,12 @@
 
 string *races_allowed()
 {
-    return ({"human", "elf", "half-elf", "half-orc", "half-ogre", "ogre", "yuan-ti", "drow", "half-drow", "minotaur", "saurian", "goblin", "gnoll", "bugbear", "orc", "firbolg", "halfling", "dwarf", "beastkin",});
+    return ({ "human", "elf", "half-elf", "half-orc", "half-ogre", "ogre", "yuan-ti", "drow", "half-drow", "minotaur", "saurian", "goblin", "gnoll", "bugbear", "orc", "firbolg", "halfling", "dwarf", "beastkin", "troll" });
+}
+
+int query_unbound_age()
+{
+    return 1;
 }
 
 mapping* stat_requirements()
