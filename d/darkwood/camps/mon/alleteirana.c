@@ -46,7 +46,7 @@ void create() {
 	command("wearall");
    remove_std_db();
 //   set_random_act_db("austusrandom");
-//removing the above database because it is not only out of 
+//removing the above database because it is not only out of
 //date, but it also refers to the speaker as a he, which she
 //is clearly not :) ~Circe~ 12/1/07
    set_random_act_chance(5);
@@ -61,12 +61,12 @@ void create() {
       ({"water","soft drink","soft drink","soft drink",
         "alcoholic","alcoholic",
         "food","food","food","food","food","food","food","food","food"}),
-      ({1, 3, 3, 5, 225, 450, 5, 5, 18, 5, 7, 18, 20, 30, 40})
+      ({1, 3, 3, 5, 100, 200, 5, 5, 18, 5, 7, 18, 20, 30, 40})
     );
     set_my_mess(
     ({
        	"%^BOLD%^%^CYAN%^You drink a glass of water.%^RESET%^",
-      	"%^ORANGE%^The cool refreshing taste of the ice tea "+		
+      	"%^ORANGE%^The cool refreshing taste of the ice tea "+
 			"sooths your throat.%^RESET%^",
        	"%^YELLOW%^The fragrant nectar is sweetened with honey"+
 		" and flowers.%^RESET%^",

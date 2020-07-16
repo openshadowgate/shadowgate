@@ -25,7 +25,7 @@ int prerequisites(object ob)
         return 0;
     }
 
-    if (!FEATS_D->has_feat(ob, "toughness")) {
+    if (!FEATS_D->has_feat(ob, "toughness") && ob->query_class_level("warlock") < 17 ) {
         dest_effect();
         return 0;
     }

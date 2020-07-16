@@ -139,5 +139,5 @@ string* query_eye_colors(string subrace)
 
 string *query_languages(string subrace)
 {
-    return (["required":({"common","orcish",}),"optional":({"giant","undercommon","dwarvish","gnomish",})]);
+    return (["required":({"common","orcish",}),"optional":({"abyssal", "draconic", "giant", "beast", "goblin", "undercommon"})]);
 }

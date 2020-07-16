@@ -6,7 +6,7 @@ void create(){
    set_terrain(NEW_MOUNTS);
    set_travel(DIRT_ROAD);
 set_property("light", 2);
-set_short("Entrance to the cave of the ogre hordes.");
+set_short("Entrance to the cave of the ogre hordes");
   set("day long",
 @GIL
 %^BOLD%^This is small dirt road ending outside of a dark cave entrance.

@@ -16,7 +16,7 @@ set_long("%^ORANGE%^T%^BOLD%^%^BLACK%^r%^RESET%^%^ORANGE%^e%^BOLD%^%^BLACK%^asur
        set_exits(([
          "healer":"/d/attaya/healer"
 ]));
-	
+
       set_smell("default", "The air smells of rain and humidity");
       set_listen("default", "Around you everywhere, come the various sounds of the jungle fauna");
      set_items(([
@@ -33,9 +33,9 @@ void reset(){
 	::reset();
 	
 	if(!present("brick")){
-		num = random(16)+1;
+		num = random(6)+10; //between 10 and 15 bricks
 		for(i=0;i<num;i++)
 			new("/d/attaya/obj/goldbrick")->move(TO);
 	}
-	
+
 }

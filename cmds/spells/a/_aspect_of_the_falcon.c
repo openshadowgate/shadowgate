@@ -1,13 +1,14 @@
 /*
   _aspect_of_the_falcon.c
 
-  Half CL to Perception Skill
+  +3 to perception skill
 
   -- Tlaloc -- 7.11.20
 */
 
 #include <std.h>
 #include <magic.h>
+#include <clock.h>
 
 inherit SPELL;
 
@@ -22,7 +23,7 @@ void create()
     set_spell_sphere("divination");
     set_syntax("cast CLASS aspect of the falcon");
     set_damage_desc("half of clevel to perception skill");
-    set_description("By attuning yourself to the skies above, you gain a bonus to your perception.");
+    set_description("By attuning yourself to the skies above, you gain a +4 bonus to your perception.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -51,14 +52,14 @@ void spell_effect()
     tell_object(caster, "%^GREEN%^You close your eyes and attune yourself to the skies above.%^RESET%^");
     tell_room(place, "%^GREEN%^" + sprintf("%s closes %s eyes and seems to meditate.",caster->query_name(),caster->query_possessive()) + "%^RESET%^", caster);
 
-    bonus = clevel / 2 + 1;
+    bonus = 4;
     caster->add_skill_bonus("perception", bonus);
 
     caster->set_property("spelled", ({ this_object() }) );
     caster->set_property("aspect_of_the_falcon", 1);
     addSpellToCaster();
 
-    call_out("dest_effect",ROUND_LENGTH*(clevel/8+1));
+    call_out("dest_effect",MINUTE * clevel);
 }
 
 void dest_effect()

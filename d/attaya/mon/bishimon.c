@@ -110,7 +110,7 @@ void die(object ob){
       "towards the mirror, but falls short and drops to the ground "+
 	  "mere inches from it.\n"+
 	  "%^RESET%^%^RED%^You...are...powerful...avenge the fallen.  "+
-	  "Lathander...perd�neme...%^RESET%^",TP);
+	  "Jarmila...forgive me...%^RESET%^",TP);
    for(i=0;i<sizeof(attackers);i++){
       if(!objectp(attackers[i])) { continue; }
 	  if(member_array("Gained entry to the Crystal Tower, Defeated Bishimon",attackers[i]->query_mini_quests()) == -1){

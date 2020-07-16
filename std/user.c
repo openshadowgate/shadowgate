@@ -66,8 +66,10 @@ int start_age, pheight, pweight;
 private string position, primary_start;
 //private nosave string *channels;
 string *restricted_channels;
+//Favored/Mastered Terrain
 string *favored_enemy = ({ "none", "none", "none" }),
        *favored_terrain = ({ "none", "none", "none" });
+string mastered_terrain;
 mapping mini_quests;
 string *quests;
 string *mysites;
@@ -166,6 +168,8 @@ int add_favored_enemy(int x, string str);
 int remove_favored_enemy(int x);
 int add_favored_terrain(int x, string str);
 int remove_favored_terrain(int x);
+string set_mastered_terrain(string str);
+string query_mastered_terrain();
 
 // *** END OF PROTOTYPING ** (gar)
 
@@ -1516,7 +1520,7 @@ void heart_beat()
     ::heart_beat();
 
     if(!objectp(TO)) { return; }
-    if(!avatarp(TO) && interactive(TO))
+    if(!avatarp(TO) && userp(TO))
     {
         player_age += 2;
         TO->count_down_timed_tax();
@@ -1670,7 +1674,7 @@ void heart_beat()
         do_healing(calculate_healing());
     else
         calculate_healing();
-    if (userp(TO) && objectp(TO))
+    if (userp(TO))
     {
         if ( (query_idle(TO) > 7260) &&
              !avatarp(TO) &&
@@ -1748,7 +1752,7 @@ void heart_beat()
 void net_dead2() {
     object *exclude;
   if (!objectp(TO)) return;
-  if (!query_property("disc") && interactive(TO)) return;
+  if (!query_property("disc") && userp(TO)) return;
   CHAT_D->remove_user(static_user["channels"]);
   static_user["channels"] = ({});
   set_heart_beat(0);
@@ -1891,7 +1895,7 @@ nomask void die()
     }
     if (ETO->query_property("arena"))
     {
-        if (wizardp(klr) || !objectp(klr) || (!interactive(klr) && !klr->query_property("rabid mon") ) ||
+        if (wizardp(klr) || !objectp(klr) || (!userp(klr) && !klr->query_property("rabid mon") ) ||
         (TO->query_property("safe arena") && klr->query_property("safe arena")) ||
         environment(klr)->query_property("arena entrance") )
         {
@@ -2239,12 +2243,12 @@ string query_short() {
     int i;
 
   string descr = "";
-  if (interactive(TO) && static_user["disguised"]) {
+  if (userp(TO) && static_user["disguised"]) {
     descr = query_disguise();
   }
-  if (interactive(TO) && !static_user["disguised"])
+  if (userp(TO) && !static_user["disguised"])
     descr = query_title();
-  else if (!interactive(TO))
+  else if (!userp(TO))
     descr = (query_title() + " (link-dead)");
   if (query_unconscious() || query_bound() || query_tripped() || query_gagged() || query_asleep() || query_blindfolded()) {
     descr = descr + " (";
@@ -5077,19 +5081,19 @@ int set_favored_enemy(int x, string str)
 {
     if(member_array(str, keys(VALID_ENEMY)) < 0)
         return 0;
-
+    
     if(x < 1 || x > 3)
         return 0;
-
+    
     x--;
 
     favored_enemy[x] = str;
-
+    
     return 1;
 }
 
 int remove_favored_enemy(int x)
-{
+{      
     favored_enemy[x - 1] = "none";
     return 1;
 }
@@ -5101,11 +5105,11 @@ int set_favored_terrain(int x, string str)
 
     if(x > 3 || x < 1)
         return 0;
-
+    
     x--;
-
+    
     favored_terrain[x] = str;
-
+    
     return 1;
 }
 
@@ -5119,7 +5123,7 @@ string query_favored_enemy(int x)
 {
     if(!sizeof(favored_enemy))
         favored_enemy = ({ "none", "none", "none" });
-
+    
     return favored_enemy[x - 1];
 }
 
@@ -5127,39 +5131,42 @@ string query_favored_terrain(int x)
 {
     if(!sizeof(favored_terrain))
         favored_terrain = ({ "none", "none", "none" });
-
+    
     return favored_terrain[x - 1];
 }
 
-string *query_favored_enemies() {
+string *query_favored_enemies() { 
     if(!sizeof(favored_enemy))
         favored_enemy = ({ "none", "none", "none" });
-
+    
     return favored_enemy;
 }
 
 string *query_favored_terrains() {
     if(!sizeof(favored_terrain))
         favored_terrain = ({ "none", "none", "none" });
-
+    
     return favored_terrain;
 }
+
+string set_mastered_terrain(string str) { mastered_terrain = str; return mastered_terrain; }
+string query_mastered_terrain() { return mastered_terrain; }
 
 int is_favored_enemy(object ob)
 {
     string *ids;
-
+    
     if(!ob && !objectp(ob))
         return 0;
-
+    
     if(!sizeof(favored_enemy))
         return 0;
-
+    
     ids = ob->query_id();
     ob->query_race() && ids += ({ ob->query_race() });
-    if(ob->is_undead())
+    if(ob->is_undead() || ob->query_property("undead"))
         ids += ({ "undead" });
-
+    
     foreach(string favored_type in favored_enemy)
     {
         if(strlen(favored_type) && favored_type != "none")
@@ -5171,25 +5178,25 @@ int is_favored_enemy(object ob)
             }
         }
     }
-
+    
     return 0;
 }
 
 int is_favored_terrain(object room)
 {
     string type;
-
+    
     if(!room || !objectp(room) || !sizeof(favored_terrain))
         return 0;
-
+    
     type = room->query_terrain();
-
+    
     if(!type || !strlen(type))
         return 0;
-
+    
     if(FEATS_D->usable_feat(TO, "resist undead") && member_array(type, VALID_TERRAIN["caves"]) > -1)
         return 1;
-
+    
     foreach(string terrain in favored_terrain)
     {
         if(strlen(terrain) && terrain != "none")
@@ -5198,6 +5205,8 @@ int is_favored_terrain(object room)
                 return 1;
         }
     }
-
+    
     return 0;
 }
+    
+    

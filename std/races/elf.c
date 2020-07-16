@@ -405,11 +405,11 @@ string* query_languages(string subrace)
 {
     switch (subrace) {
     case "szarkai":
-        return (["required" : ({ "drow", "undercommon" }), "optional" : ({ "elven", "common", "orcish", })]);
+        return (["required" : ({ "drow", "undercommon" }), "optional" : ({ "elven", "common", "draconic", "beast", "gnomish", "goblin", "orcish", })]);
         break;
 
     case "fey'ri":
-        return (["required" : ({ "abyssal", "common" }), "optional" : ({ "drow", "undercommon", "orcish", "elven" })]);
+        return (["required" : ({ "abyssal", "common" }), "optional" : ({ "drow", "undercommon", "orcish", "elven", "infernal", "draconic" })]);
         break;
 
     case "sildruath":
@@ -417,11 +417,11 @@ string* query_languages(string subrace)
         break;
 
     case "aquatic elf":
-        return (["required" : ({ "aquan", "common" }), "optional" : ({ "elven", "drow", })]);
+        return (["required" : ({ "aquan", "common" }), "optional" : ({ "celestial", "draconic", "common", "gnomish", "goblin", "orcish", "sylvan", })]);
         break;
 
     default:
-        return (["required" : ({ "elven", "common" }), "optional" : ({ "halfling", "gnomish", "orcish", })]);
+        return (["required" : ({ "elven", "common" }), "optional" : ({ "celestial", "draconic", "beast", "gnomish", "goblin", "orcish", "sylvan", })]);
         break;
     }
 }

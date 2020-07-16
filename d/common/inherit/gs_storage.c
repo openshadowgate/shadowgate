@@ -178,6 +178,9 @@ void reset()
     if (!present("dark oil")) {
         new(CMISC "darkoil")->move(TO);
     }
+    if (!present("tent bag")) {
+        new("d/charucavern/mizatencampment/ob/tent")->move(TO);
+    }
     if (!random(3)) {
         while (!present("dart 3")) {
             new("/d/shadow/room/city/cguild/fighter/dart")->move(TO);
