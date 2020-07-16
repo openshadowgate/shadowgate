@@ -32,7 +32,8 @@ void create(){
 	" all their warriors in finding an inner calmness through nature and "+
 	"meditation. It was said that through meditation their minds were able "+
 	"to enter a state of perfect calm that nothing could shake them.");
-   set_property("lore",12); 
+   set_property("lore",12);
+   set_item_bonus("dexterity", 4); 
    set_weight(2);
    set_size(2);
    set_value(7500);

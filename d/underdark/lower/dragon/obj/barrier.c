@@ -1,6 +1,6 @@
 // updated bonuses to meet current standards. N, 24/1/20.
 #include <std.h>
-inherit "/d/common/obj/armour/mshield";
+inherit "/d/common/obj/armour/shield";
 
 int OWNED;
 string *owners;
@@ -31,6 +31,7 @@ void create(){
      TO->set_property("enchantment",5);
    }
    set_item_bonus("spell damage resistance",30);
+   set_item_bonus("shieldMisss",40)
    set_wear((:TO,"wear_fun":));
    set_remove((:TO,"remove_fun":));
    set_struck((:TO,"struck_fun":));
