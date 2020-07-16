@@ -152,7 +152,9 @@ int extra_wield() { // only goodly
 tightly.");
            write("%^ORANGE%^The halberd juts out brambles that bind"+
            " you fast when you place your hand on it."+
-           "  \n They cut into you terribly.");
+           "  \n They cut into you terribly."+
+           "%^BOLD%^Looks like you will have to <struggle> to get free.");
+           //adding this because a player was having trouble figuring out they were bound.
        ETO->set_paralyzed(10,"Brambles bind you fast!");
        ETO->set_bound(150,"Brambles bind you fast.");
        ETO->cause_typed_damage(ETO, ETO->return_target_limb(),200, "piercing");

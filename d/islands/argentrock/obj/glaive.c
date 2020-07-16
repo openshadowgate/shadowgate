@@ -185,7 +185,9 @@ int extra_wield() { // only part elven
 	     " as brambles lash out from it, wrapping "+ETO->QO+" tightly.");
 	   write("%^ORANGE%^The glaive juts out brambles that bind"+
 	   " you fast when you place your hand on it."+
-	   "  \n %^RED%^They cut into you terribly.");
+	   "  \n %^RED%^They cut into you terribly."+
+     "%^BOLD%^Looks like you'll have to <struggle> free"); 
+     //adding this to make it more obvious because a player was having trouble.
 	   ETO->set_paralyzed(10,"You can't move!");
        ETO->set_bound(50,"Brambles bind you fast.");
 	   ETO->cause_typed_damage(ETO, ETO->return_target_limb(),200, "piercing");
