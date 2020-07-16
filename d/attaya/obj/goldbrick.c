@@ -13,7 +13,7 @@ void create(){
 
     set_name("brick");
     set_id(({"gold brick","brick"}));
-    set_short("%^BOLD%^%^YELLOW%^gold brick");
+    set_short("%^BOLD%^%^YELLOW%^gold brick%^RESET%^");
     set_long(
       "%^ORANGE%^A heavy brick of pure gold"
     );
