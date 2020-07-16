@@ -8,7 +8,7 @@
 
 inherit DAEMON;
 
-#define DEITIES ({"jarmila","kismet","krey","lordshadow","lysara","nilith"})
+#define DEITIES({"jarmila","krey","kismet","lordshadow","lysara","nilith"})
 
 string MYDEITY,myanimal,myshort,mylong;
 
