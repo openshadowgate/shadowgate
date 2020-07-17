@@ -105,7 +105,7 @@ void InitInnate()
             "detect undead" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
             "heart of metal" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
             "disrupting weapon" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "searing light" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            "undeath ward" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
             ]);
     }
 
