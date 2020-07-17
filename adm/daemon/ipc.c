@@ -1,5 +1,6 @@
 #include <std.h>
 #include <socket_err.h>
+#include <daemons.h>
 
 #pragma strict_types
 #pragma warnings
@@ -13,6 +14,7 @@ int *ttys = ({});
 
 void debug(string s)
 {
+    log_file("ipc", s);
     return;
 }
 
@@ -87,14 +89,28 @@ void ipc_read(int fd, mixed data)
         return;
     }
 
-    debug(identify(data));
-
-    if (sizeof(data > 1024)) {
+    if (sizeof(data) > 1024) {
         debug("Error size");
         return;
     }
 
     // Messages handling here.
+
+    if (regexp(data, "^CHAT:")) {
+        string chan, pos, nick, msg;
+
+        debug(identify(data));
+
+        if (sscanf(data, "CHAT:%s:%s:%s:%s", chan, pos, nick, msg) != 4) {
+            debug("Malformed chat msg");
+            return;
+        }
+
+
+        CHAT_D->ipc_chat(chan, nick, msg);
+    }
+
+
 }
 
 int *query_ttys()
