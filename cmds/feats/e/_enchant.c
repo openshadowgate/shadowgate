@@ -177,7 +177,7 @@ void select_spell(string str, object ob)
  */
 int maximum_enchant_level()
 {
-    return flevel + caster->query_property("empowered");
+    return caster->query_guild_level(castclass) + caster->query_property("empowered");
 }
 
 void spell_charges(string str, object ob, string spell, string file)
@@ -195,7 +195,7 @@ void spell_charges(string str, object ob, string spell, string file)
         return;
     }
     if (charges > 15) {
-        write("You may only input a maximum of 10 charges to an item.");
+        write("You may only input a maximum of 15 charges to an item.");
         write("%^YELLOW%^Number of charges (15 max):");
         write("~q to cancel");
         input_to("spell_charges", 0, ob, spell, file);
