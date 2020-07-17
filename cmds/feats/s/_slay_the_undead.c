@@ -13,7 +13,7 @@ void create() {
 "he is able to seek out and strike the weakness of the undead like no other. The "
 "Crypt Stalker gains a greater ability to stalk and ambush its prey with the following "
 "innate spells:\n\
-Rope Trick, Detect Undead, Heart of Metal, Disrupting Weapon, Searing Light\n\
+Rope Trick, Detect Undead, Heart of Metal, Disrupting Weapon, Undeath Ward\n\
 Additionally, the Crypt Stalker gets a +2 bonus to Attack and Damage rolls when fighting "
 "undead enemies.");
     permanent(1);
