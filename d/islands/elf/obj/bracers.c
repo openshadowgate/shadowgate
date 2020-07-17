@@ -46,7 +46,8 @@ void recharge(string str){
   ETO->add_exp(-40000);
   uses +=1;
 }
-void imspect_em(string str){
+
+void inspect_em(string str){
     string tmp;
     if(!str && str != "bracer" && str != "bracers") 
 	return notify_fail("inspect what? Bracer?\n");
