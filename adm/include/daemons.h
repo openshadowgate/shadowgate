@@ -8,6 +8,7 @@
 #define ALT_WORLD_D          (DIR_DAEMONS+"/alternative_world_d.c")
 #define AREALISTS_D	     (DIR_DAEMONS+"/save_area_lists_d")
 #define ASTRONOMY_D          (DIR_SECURE_DAEMONS+"/astronomy_d")
+#define IPC                  (DIR_SECURE_DAEMONS+"/ipc")
 #define AVERAGE_AGE_D       (DIR_SECURE_DAEMONS+"/average_age_d")
 #define BANISH_D             (DIR_SECURE_DAEMONS+"/banish")
 #define BANK_D               (DIR_SECURE_DAEMONS+"/bank_d")
