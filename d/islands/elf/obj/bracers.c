@@ -22,7 +22,7 @@ void create(){
 	"with ice magic.  Even their bodies gave off an aura of cold"+
 	" that was obvious to anyone that saw them.  They are long "+
 	"gone from this realm but this creation proves they existed."+
-	"There is some writing on it that one could <read>.");
+	"There is some writing on it that one could %^BOLD%^<inspect>.");
     set_property("lore difficulty",30);
     set_value(5000);
     set_property("enchantment",4);
@@ -34,7 +34,7 @@ void create(){
 }
 void init(){
     ::init();
-    add_action("read","read");
+    add_action("inspect","inspect_em");
     add_action("cold","cold");
     add_action("recharge","recharge");
 
@@ -46,10 +46,10 @@ void recharge(string str){
   ETO->add_exp(-40000);
   uses +=1;
 }
-void read(string str){
+void imspect_em(string str){
     string tmp;
     if(!str && str != "bracer" && str != "bracers") 
-	return notify_fail("Read what? Bracer?\n");
+	return notify_fail("inspect what? Bracer?\n");
      
     write("These are bracers of cone of cold, it has the "+
 	 "following function:\n"
