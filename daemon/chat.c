@@ -52,12 +52,7 @@ void create()
 string format_chat(string chan,string name,string position,string message,int emote)
 {
     string chanprefix;
-    //It HAS TO BE either
-    //  '[channel] <.Name> message'
-    //or
-    //  '[channel] * Name action'
-    // if you wish continued support of IPC chats.
-    //Coloration is irrelevant.
+
     chanprefix = "%^RESET%^%^BLUE%^[%^BOLD%^%^CYAN%^" + chan +"%^RESET%^%^BLUE%^] " ;
     if(emote)
         return chanprefix+"%^RESET%^%^BOLD%^%^MAGENTA%^* %^RESET%^%^WHITE%^"+name+" "+message+"%^RESET%^";
