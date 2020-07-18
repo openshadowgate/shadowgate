@@ -1,19 +1,18 @@
 /**
  * @file
- * @brief User daemon
+ * @brief User library with user-related calculations.
  */
 
 #include <std.h>
 #include <daemons.h>
 #include <class_types.h>
 #include <monks.h>
+#include <favored_types.h>
 #define ANSI(p) sprintf("%c["+(p)+"m", 27)
 #define ESC(p) sprintf("%c"+(p), 27)
 
 inherit DAEMON;
 mapping RP_FLAGS;
-
-
 
 void process_pkill_input(object who, mixed arg)
 {
@@ -681,4 +680,40 @@ mixed query_mini_quest_info(object who, string quest, string qInfo)
     }
     if(qInfo == "time") return whoQuests[quest][0];
     return whoQuests[quest][1];
+}
+
+int is_valid_enemy_cat(string str)
+{
+    if (member_array(str, keys(VALID_ENEMY)) != -1) {
+        return 1;
+    }
+
+    return 0;
+}
+
+int is_valid_enemy(string id, string cat)
+{
+    if (member_array(id, VALID_ENEMY[cat]) != -1) {
+        return 1;
+    }
+
+    return 0;
+}
+
+int is_valid_terrain_cat(string str)
+{
+    if (member_array(str, keys(VALID_TERRAIN)) != -1) {
+        return 1;
+    }
+
+    return 0;
+}
+
+int is_valid_terrain(string id, string cat)
+{
+    if (member_array(id, VALID_TERRAIN[cat]) != -1) {
+        return 1;
+    }
+
+    return 0;
 }
