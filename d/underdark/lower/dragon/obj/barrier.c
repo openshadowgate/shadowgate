@@ -31,7 +31,7 @@ void create(){
      TO->set_property("enchantment",5);
    }
    set_item_bonus("spell damage resistance",30);
-   set_item_bonus("shieldMisss",40)
+   set_item_bonus("shieldMiss",40); //was shieldMisss, fixed -H
    set_wear((:TO,"wear_fun":));
    set_remove((:TO,"remove_fun":));
    set_struck((:TO,"struck_fun":));
