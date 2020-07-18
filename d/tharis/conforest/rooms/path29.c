@@ -9,6 +9,6 @@ void create()
     ([
     "east" : ROOMS+"path30",
     "west" : ROOMS+"path28",
-    "north": "/d/player_houses/rhyen/sapling"
+    "north": "/d/player_houses/rheyn/sapling"
     ]) );
 }
