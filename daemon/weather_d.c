@@ -51,8 +51,8 @@ void setup()
 
 void weather()
 {
-    string tempcondition;
-    tempcondition = "\n %^BOLD%^%^BLACK%^A chaotic elemental storm of %^RESET%^%^ORANGE%^Earth%^BOLD%^%^BLACK%^, %^BOLD%^%^WHITE%^Wind%^BOLD%^%^BLACK%^, %^BOLD%^%^RED%^Fire%^BOLD%^%^%^BLACK%^, and %^BOLD%^%^BLUE%^Water %^BOLD%^%^BLACK%^%^scorches the sky!%^RESET%^\n\n %^BOLD%^%^BLACK%^The world is plunged into eternal night!%^RESET%^";
+    //string tempcondition;
+    //tempcondition = "\n %^BOLD%^%^BLACK%^A chaotic elemental storm of %^RESET%^%^ORANGE%^Earth%^BOLD%^%^BLACK%^, %^BOLD%^%^WHITE%^Wind%^BOLD%^%^BLACK%^, %^BOLD%^%^RED%^Fire%^BOLD%^%^%^BLACK%^, and %^BOLD%^%^BLUE%^Water %^BOLD%^%^BLACK%^%^scorches the sky!%^RESET%^\n\n %^BOLD%^%^BLACK%^The world is plunged into eternal night!%^RESET%^";
     restore_object(SAVE_WEATHER);
 
     write("%^BOLD%^%^GREEN%^ Time of Day    %^RESET%^%^GREEN%^: %^YELLOW%^" + capitalize(TOD));
@@ -60,7 +60,7 @@ void weather()
     write("%^BOLD%^%^GREEN%^ Season         %^RESET%^%^GREEN%^: %^YELLOW%^" + capitalize(season(time())));
     write("%^BOLD%^%^GREEN%^ Weather        %^RESET%^%^GREEN%^: " + get_weather(TP));
     write("%^BOLD%^%^GREEN%^ Temperature    %^RESET%^%^GREEN%^: %^RED%^" + get_temp(TP));
-    write(tempcondition); //added for Kismet's climate change plot - Odin 4/1/2020
+    //write(tempcondition); //added for Kismet's climate change plot - Odin 4/1/2020
 
     return;
 }

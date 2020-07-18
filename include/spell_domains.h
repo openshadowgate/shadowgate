@@ -3,13 +3,16 @@
 // Must correspond to deities.h
 #define SPELL_DOMAINS (([\
     "callamir"         : ({ "good", "charm", "air", "trickery", "travel", "chaos",}), \
-    "jarmila"          : ({ "good", "renewal", "sun", "protection", "fire", "martyr"}) , \
+    "jarmila"          : ({ "good", "renewal", "sun", "protection", "fire", "martyr" }) ,\
     "kismet"           : ({ "creation", "knowledge", "mentalism", "magic", "law", "stars"}) , \
     "kreysneothosies"  : ({ "protection", "vigilance", "strength", "good", "war", "law"}) , \
     "lord shadow"      : ({ "evil", "cold", "tyranny", "suffering", "darkness", "law"}) , \
     "lysara"           : ({ "travel", "fate", "repose", "moon", "water", "void"}) , \
     "nilith"           : ({ "war", "strength", "destruction", "evil", "chaos", "undeath"}), \
-    "nimnavanon"       : ({ "storms", "plant", "animal", "earth", "destruction", "plague"}) , \
+    "nimnavanon"       : ({ "storms", "plant", "animal", "earth", "destruction", "good" }) , \
     "the faceless one" : ({ "trickery", "illusion", "cavern", "darkness", "evil", "madness"}) , \
     "dream"            : ({ "chaos", "madness", "void", "stars", "evil", "good"}),\
+    "cevahir"          : ({ "knowledge", "mentalism", "renewal", "strength", "war" }) , \
+    "khyron"           : ({ "fire", "storms", "destruction", "suffering", "evil", "plague" }) , \
+    "seija"            : ({ "elements", "sun", "moon", "cavern", "stars" }) , \
 ]))

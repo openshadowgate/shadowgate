@@ -33,7 +33,7 @@ void create() {
    ]));
    set_exits(([
       "northwest":ROAD+"path49",
-      "temple":"/d/magic/temples/ryorik/ryorik"
+      "temple":"/d/magic/temples/seija/seija"
    ]));
 
    set_listen("default","The area is rather serene with only the sound of waves and occasional seabirds.");
