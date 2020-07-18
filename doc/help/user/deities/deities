@@ -1,38 +1,60 @@
-%^BOLD%^%^CYAN%^DEITIES%^RESET%^
+%^BOLD%^%^BLUE%^The world of ShadowGate is pantheistic and includes many deities who may be worshipped by mortals.  While any mortal may make offerings to any deity to appease him or her, each mortal is also encouraged to choose a patron who will help guide the mortal's life.  These are the deities and their spheres of influence.
 
-The world of ShadowGate is pantheistic, it includes the next deities
-
-%^CYAN%^Kismet: Magic/Knowledge
-  %^CYAN%^Domains :%^CYAN%^%^CYAN%^ creation, knowledge, law, magic, mentalism, stars
-  %^CYAN%^Enemies :%^CYAN%^%^CYAN%^ none
-%^BOLD%^%^MAGENTA%^Lysara: Death/Fate
-  %^BOLD%^%^MAGENTA%^Domains :%^MAGENTA%^ fate, moon, repose, travel, void, water
-  %^BOLD%^%^MAGENTA%^Enemies :%^MAGENTA%^ Nilith, Lord Shadow
-%^GREEN%^Nimnavanon: Forests/Weather
-  %^GREEN%^Domains :%^GREEN%^%^GREEN%^ animal, destruction, earth, plant, storms
-  %^GREEN%^Enemies :%^GREEN%^%^GREEN%^ Nilith
-%^BOLD%^%^RED%^Jarmila: Light/Love
-  %^BOLD%^%^RED%^Domains :%^RED%^ fire, good, protection, renewal, sun
-  %^BOLD%^%^RED%^Enemies : Lord Shadow, Nilith, The Faceless One
-%^BOLD%^Kreysneothosies: Home/Protection
-  %^BOLD%^Domains : good, law, protection, strength, vigilance, war
-  %^BOLD%^Enemies : The Faceless One, Nilith
 %^BOLD%^%^BLUE%^Callamir: Luck/Trickery
-  %^BOLD%^%^BLUE%^Domains :%^BLUE%^ air, chaos, charm, good, travel, trickery
+  %^BOLD%^%^BLUE%^Domains :%^BLUE%^ good, charm, air, travel, trickery, chaos
+  %^BOLD%^%^BLUE%^Allies  :%^BLUE%^ Jarmila
   %^BOLD%^%^BLUE%^Enemies :%^BLUE%^ The Faceless One, Lord Shadow
+%^RESET%^%^MAGENTA%^Cevahir: War/Strategy
+  %^RESET%^%^MAGENTA%^Domains :%^RESET%^%^MAGENTA%^ knowledge, mentalism, renewal, strength, war
+  %^RESET%^%^MAGENTA%^Allies  :%^RESET%^%^MAGENTA%^ None
+  %^RESET%^%^MAGENTA%^Enemies :%^RESET%^%^MAGENTA%^ None
+%^BOLD%^%^RED%^Jarmila: Light/Love
+  %^BOLD%^%^RED%^Domains :%^RED%^ good, renewal, sun, protection, fire, martyr
+  %^BOLD%^%^RED%^Allies  :%^RED%^ Callamir, Kreysneothosies, Lysara
+  %^BOLD%^%^RED%^Enemies : Lord Shadow, Nilith, The Faceless One
+%^CYAN%^Kismet: Magic/Knowledge
+  %^CYAN%^Domains :%^CYAN%^%^CYAN%^ creation, knowledge, mentalism, magic, law
+  %^CYAN%^Allies  :%^CYAN%^%^CYAN%^ none
+  %^CYAN%^Enemies :%^CYAN%^%^CYAN%^ none
+%^BOLD%^%^RED%^Khyron: Storms/Destruction
+  %^BOLD%^%^RED%^Domains : fire, destruction, storms, suffering, evil, plague
+  %^BOLD%^%^RED%^Allies  : Nilith
+  %^BOLD%^%^RED%^Enemies : Seija, Nimnavanon, Kreysneothosies
+%^BOLD%^Kreysneothosies: Home/Protection
+  %^BOLD%^Domains : protection, vigilance, strength, earth, law, good
+  %^BOLD%^Allies  : Jarmila, Lysara
+  %^BOLD%^Enemies : The Faceless One, Nilith, Khyron
 %^BOLD%^%^BLACK%^Lord Shadow: Darkness/Tyranny
-  %^BOLD%^%^BLACK%^Domains :%^BOLD%^%^BLACK%^ cold, darkness, evil, law, suffering, tyranny
+  %^BOLD%^%^BLACK%^Domains :%^BOLD%^%^BLACK%^ evil, cold, tyranny, suffering, darkness, law
+  %^BOLD%^%^BLACK%^Allies  :%^BOLD%^%^BLACK%^ none
   %^BOLD%^%^BLACK%^Enemies :%^BOLD%^%^BLACK%^ Jarmila, Callamir, Lysara
-%^ORANGE%^Nilith: Undeath/War
-  %^ORANGE%^Domains :%^ORANGE%^%^ORANGE%^ chaos, destruction, evil, strength, war
+%^BOLD%^%^MAGENTA%^Lysara: Death/Fate
+  %^BOLD%^%^MAGENTA%^Domains :%^MAGENTA%^ travel, fate, repose, moon, water, void
+  %^BOLD%^%^MAGENTA%^Allies  :%^MAGENTA%^ Kreysneothosies, Jarmila
+  %^BOLD%^%^MAGENTA%^Enemies :%^MAGENTA%^ Nilith, Lord Shadow
+%^ORANGE%^Nilith: Undeath
+  %^ORANGE%^Domains :%^ORANGE%^%^ORANGE%^ strength, evil, destruction, chaos, undeath, war
+  %^ORANGE%^Allies  :%^ORANGE%^%^ORANGE%^ Khyron
   %^ORANGE%^Enemies :%^ORANGE%^%^ORANGE%^ Lysara, Kreysneothosies, Jarmila, Nimnavanon
+%^GREEN%^Nimnavanon: Forests/Weather
+  %^GREEN%^Domains :%^GREEN%^%^GREEN%^ storms, plant, animal, earth, destruction, good
+  %^GREEN%^Allies  :%^GREEN%^%^GREEN%^ none
+  %^GREEN%^Enemies :%^GREEN%^%^GREEN%^ Nilith, Khyron
+%^BOLD%^%^CYAN%^Seija: Elements/Balance
+  %^BOLD%^%^CYAN%^Domains : elements, sun, moon, cavern, stars
+  %^BOLD%^%^CYAN%^Allies  : Nimnavanon
+  %^BOLD%^%^CYAN%^Enemies : Khyron
 %^RED%^The Faceless One: Murder/Deception
-  %^RED%^Domains :%^RED%^ cavern, darkness, evil, illusion, madness, trickery
+  %^RED%^Domains :%^RED%^ trickery, illusion, madness, cavern, darkness, evil
+  %^RED%^Allies  :%^RED%^ none
   %^RED%^Enemies :%^RED%^ Jarmila, Callamir, Kreysneothosies
-%^BOLD%^%^CYAN%^Ryorik: Elements/Natural Disasters
-  %^BOLD%^%^CYAN%^Domains :%^BOLD%^%^CYAN%^ none
-  %^BOLD%^%^CYAN%^Enemies :%^BOLD%^%^CYAN%^ none
 
-You can choose to follow a god if your alignment is within two steps on the grid of deity's alignment, if you're a cleric that restriction increases to just one step.
+%^BOLD%^%^WHITE%^Each divinity has own set of allies and enemies. Being an ally or enemy does not necessarily mean you must aid or kill on sight. Determine the best course of action for your character based on your character's beliefs, the other individual(s) in question, and past actions and interactions with the individuals or their faith. Refer to their helpfiles for allies and enemies.
 
-%^CYAN%^See also: %^RESET%^domains, individual help files for each deity, alignments
+%^BOLD%^%^YELLOW%^In addition, the following primordial entities exist beyond space and time. Born from the endless void, two forces arose. The two sisters, dating from before creation of the world, are diametrically opposed. They have no clergy, and grant no spells to mortals who choose to worship them, but serve as the wellsprings for all divine power within the world of Shadowgate.
+
+%^BOLD%^%^BLACK%^Ashra, the Abyssal Darkness, the Primordial Evil, the Mother of Monsters, Lady of Nightmares, She Who Thirsts, the Creeping Corruption, and countless other appellations.
+
+%^BOLD%^%^WHITE%^Edea, the Celestial Light, the Primordial Good, the Protector of Civilization, She Who Brings Justice, the Giver of Law, the Glorybringer, and countless other appellations.
+
+%^BOLD%^%^BLUE%^See also: %^GREEN%^domains, individual help files for each deity

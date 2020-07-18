@@ -9,6 +9,6 @@ void create()
    set_exits(([
       "west" : ROADS"eroad05",
       "south" : ROADS"eroad07",
-        "temple" : "/d/magic/temples/shaundakul"
+        "temple" : "/d/magic/temples/khyron/khyron"
       ]));
 }

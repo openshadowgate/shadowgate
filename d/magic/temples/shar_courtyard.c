@@ -110,7 +110,7 @@ void create()
     set_exits(([
                    "northeast" : "/d/magic/temples/shar_path5",
                ]));
-    fruit = 0;     //temporarily disabled due to IC actions.  No fruit will appear for an IG year from 12 Colddays 750SG
+    fruit = 5;
 }
 
 void init()
@@ -143,14 +143,12 @@ int pick_fruit(string str)
         fruit--;
         return 1;
     }else {
-        /*tell_object(TP,"%^BOLD%^%^BLACK%^A nearby garden keeper "+ //Temporarly changed due to plot, see above comment
+        tell_object(TP,"%^BOLD%^%^BLACK%^A nearby garden keeper "+
            "waves you away muttering about that being enough for "+
            "today%^RESET%^.");
            tell_room(TO,"%^BOLD%^%^BLACK%^As "+TPQCN+" tries to pick "+
            "a fruit from the tree, a nearby gardener waves "+TP->QO+" "+
-           "away, muttering about that being enough for today.",TP);*/
-        tell_object(TP, "%^BOLD%^%^BLACK%^There are no fruits to be picked. The tree is entirely bare.%^RESET%^");
-        tell_room(TO, "%^BOLD%^%^BLACK%^" + TPQCN + " looks about the tree and finds it entirely bare.", TP);
+           "away, muttering about that being enough for today.",TP);
         return 1;
     }
 }

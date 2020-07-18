@@ -1,11 +1,6 @@
-/*
-   favored_types.h
-
-   Definitions for favored terrain and favored enemy.
-
-   -- Tlaloc -- 7.20
+/**
+ * Definitions for favored terrain and favored enemy.
  */
-
 #define VALID_TERRAIN ([ \
                            "jungle" : ({ "jungle", "dense jungle" }), \
                            "forest" : ({ "heavy forest", "light forest", "branches" }), \
@@ -19,24 +14,27 @@
                            "hills"  : ({ "hills", "rocky", "old mounts", "new mounts" }), \
                        ])
 
+/**
+ * Enemy types by cathegory.
+ */
 #define VALID_ENEMY ([ \
-                         "aberrations" : ({ "aberrations", "beholder", "illithid", "mind flayer", "aberration" }), \
-                         "animals" : ({ "animals", "snake", "serpent", "warthog", "jaguar", "wolf", "rat", "tiger", "reptile", "dinosaur", "dino", "spider", "deer", "snake", "horse", "mare", "stallion", "animal" }), \
-                         "constructs" : ({ "constructs", "construct", "golem", "sandman", "sandling" }), \
+                         "aberrations" : ({ "beholder", "illithid", "mind flayer", "aberration" }), \
+                         "animals" : ({ "snake", "serpent", "warthog", "jaguar", "wolf", "rat", "tiger", "reptile", "dinosaur", "dino", "spider", "deer", "snake", "horse", "mare", "stallion", "animal" }), \
+                         "constructs" : ({ "construct", "golem", "sandman", "sandling" }), \
                          "dwarves"  : ({ "dwarf", "dwarves", "duergar", "construct" }), \
                          "dragonkin"  : ({ "dragonkin", "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon", "drake", "wyvern" }), \
-                         "elementals" : ({ "elementals", "elemental", "genasi", "earth genasi", "air genasi", "water genasi", "air genasi", "efreet", "djinn", "marid", "genie" }), \
+                         "elementals" : ({ "elemental", "genasi", "earth genasi", "air genasi", "water genasi", "air genasi", "efreet", "djinn", "marid", "genie" }), \
                          "elves"      : ({ "elf", "elves", "half-elf", "drow", "half-drow", "szarkai" }), \
                          "fey"        : ({ "nymph", "satyr", "dryad", "pixie", "brownie", "feytouched", "fey" }), \
-                         "giants"     : ({ "giants", "voadkyn", "firbolg", "giant", "titan", "troll" }), \
-                         "goblins"    : ({ "goblins", "goblin", "bugbear", "hobgoblin", "goblinoid" }), \
-                         "humans"     : ({ "humans", "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow", "genasi", "feytouched", "aasimar", "tiefling" }), \
+                         "giants"     : ({ "voadkyn", "firbolg", "giant", "titan", "troll" }), \
+                         "goblins"    : ({ "goblin", "bugbear", "hobgoblin", "goblinoid" }), \
+                         "humans"     : ({ "human", "shade", "half-elf", "half-orc", "half-ogre", "half-drow", "genasi", "feytouched", "aasimar", "tiefling" }), \
                          "lizardfolk" : ({ "lizardfolk", "yuan-ti", "saurian", "salamander", "lizardman", "firenewt" }), \
-                         "magical beasts" : ({ "magical beasts", "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm", "pegataur", "griffon", "hydra", "shadow", "magical beast" }), \
+                         "magical beasts" : ({ "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm", "pegataur", "griffon", "hydra", "shadow", "magical beast" }), \
                          "monstrous humanoids"   : ({ "monstrous humanoids", "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "werewolf", "wererat", "weretiger", "alaghi", "monstrous humanoid", }), \
-                         "ogres"      : ({ "ogres", "ogre", "ogre-mage", "half-ogre", "ogroid", }), \
-                         "orcs"       : ({ "orcs", "orc", "half-orc", "orog", "tanarukk", "orcoid", }), \
-                         "outsiders"  : ({ "outsiders", "deva", "solar", "aasimar", "angel", "demon", "devil", "imp", "tiefling", "githyanki", "githzerai", "outsider"  }), \
+                         "ogres"      : ({ "ogre", "ogre-mage", "half-ogre", "ogroid", }), \
+                         "orcs"       : ({ "orc", "half-orc", "orog", "tanarukk", "orcoid", }), \
+                         "outsiders"  : ({ "deva", "solar", "aasimar", "angel", "demon", "devil", "imp", "tiefling", "githyanki", "githzerai", "outsider"  }), \
                          "plants" : ({ "plants", "shambler", "shambling mound", "tree", "vine", "plant"}), \
                          "smallfolk"  : ({ "gnome", "halfling", "kender", "derro", "pech", "smallfolk", }), \
                          "undead"     : ({ "ghost", "skeleton", "lich", "zombie", "ghast", "entity", "spirit", "undead", "wraith", "wight" }), \

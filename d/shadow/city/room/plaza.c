@@ -110,9 +110,6 @@ void reset(){
     if (objectp(sms_vendor = present("clerk", sms_store))) {
         sms_vendor->notify_players();
     }
-	    if (!present("shadowfeast")) {
-        new("/d/shadow/city/obj/shadowfeast.c")->move(this_object());
-    }
 }
 
 void map(){

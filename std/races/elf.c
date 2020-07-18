@@ -417,7 +417,7 @@ string* query_languages(string subrace)
         break;
 
     case "aquatic elf":
-        return (["required" : ({ "aquan", "common" }), "optional" : ({ "celestial", "draconic", "common", "gnomish", "goblin", "orcish", "sylvan", })]);
+        return (["required" : ({ "aquan", "common" }), "optional" : ({ "celestial", "draconic", "common", "elven", "drow", "sylvan", })]);
         break;
 
     default:
