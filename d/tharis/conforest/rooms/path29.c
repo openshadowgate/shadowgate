@@ -8,6 +8,7 @@ void create()
   set_exits(
     ([
     "east" : ROOMS+"path30",
-    "west" : ROOMS+"path28"
+    "west" : ROOMS+"path28",
+    "north": "/d/player_houses/rheyn/sapling" //spot where rheyn wants sapling grove
     ]) );
 }
