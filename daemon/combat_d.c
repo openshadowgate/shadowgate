@@ -3397,21 +3397,12 @@ varargs int check_death(object who, object pot)
                 }else {
                     log_file("kills", who->query_name() + " (" + (int)who->query_level() + ") was killed by " + identify(killedBy) + "
 (" + identify(killedBy) + ")\n");
-                    if (objectp(environment(who))) {
+                    if (objectp(environment(who)) && objectp(killedBy)) {
                         log_file("kills", "  " + file_name(killedBy) + "  (uid:" + getuid(killedBy) + ") \n  (creator = " + identify(killedBy) + ")
 [" + file_name(environment(who)) + "]\n");
                     }else {
                         log_file("kills", "  " + file_name(killedBy) + "  (uid:" + getuid(killedBy) + ") \n  (creator = " + identify(killedBy) + ")
 [" + identify(who) + "]\n");
-                    }
-                }
-            }
-            if (who->isPkill() || killedBy->query_property("bounty hunter")) {
-                if (!(environment(who)->query_property("arena")) || (!who->query_property("safe arena") || !killedBy->query_property("safe arena"))) {
-                    if (!wizardp(who) && !wizardp(killedBy)) {
-                        log_file("pkills", who->query_name() + " (" + (int)who->query_alignment() + ") was killed by " + killedBy->query_name() + "
-(" + (int)killedBy->query_alignment() + ")\n");
-                        KILLING_D->do_bad_pkill(killedBy, who);
                     }
                 }
             }
