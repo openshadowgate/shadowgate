@@ -1,11 +1,6 @@
-/*
-   favored_types.h
-
-   Definitions for favored terrain and favored enemy.
-
-   -- Tlaloc -- 7.20
+/**
+ * Definitions for favored terrain and favored enemy.
  */
-
 #define VALID_TERRAIN ([ \
                            "jungle" : ({ "jungle", "dense jungle" }), \
                            "forest" : ({ "heavy forest", "light forest", "branches" }), \
@@ -19,6 +14,9 @@
                            "hills"  : ({ "hills", "rocky", "old mounts", "new mounts" }), \
                        ])
 
+/**
+ * Enemy types by cathegory.
+ */
 #define VALID_ENEMY ([ \
                          "aberrations" : ({ "beholder", "illithid", "mind flayer", "aberration" }), \
                          "animals" : ({ "snake", "serpent", "warthog", "jaguar", "wolf", "rat", "tiger", "reptile", "dinosaur", "dino", "spider", "deer", "snake", "horse", "mare", "stallion", "animal" }), \
@@ -34,7 +32,7 @@
                          "lizardfolk" : ({ "lizardfolk", "yuan-ti", "saurian", "salamander", "lizardman", "firenewt" }), \
                          "magical beasts" : ({ "owlbear", "grimlock", "jackalwere", "wolfwere", "ooze", "worm", "pegataur", "griffon", "hydra", "shadow", "magical beast" }), \
                          "monstrous humanoids"   : ({ "monstrous humanoids", "beastkin", "wemic", "centaur", "ratkin", "minotaur", "gnoll", "kitsune", "werewolf", "wererat", "weretiger", "alaghi", "monstrous humanoid", }), \
-                         "ogres"      : ({ ""ogre", "ogre-mage", "half-ogre", "ogroid", }), \
+                         "ogres"      : ({ "ogre", "ogre-mage", "half-ogre", "ogroid", }), \
                          "orcs"       : ({ "orc", "half-orc", "orog", "tanarukk", "orcoid", }), \
                          "outsiders"  : ({ "deva", "solar", "aasimar", "angel", "demon", "devil", "imp", "tiefling", "githyanki", "githzerai", "outsider"  }), \
                          "plants" : ({ "plants", "shambler", "shambling mound", "tree", "vine", "plant"}), \
