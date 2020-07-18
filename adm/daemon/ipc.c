@@ -11,6 +11,7 @@
 inherit DAEMON;
 
 int *ttys = ({});
+int conn_fd;
 
 void debug(string s)
 {
@@ -20,8 +21,13 @@ void debug(string s)
 
 int create()
 {
+    ipc_setup_socket();
 
-    int conn_fd;
+    return 1;
+}
+
+void ipc_setup_socket()
+{
     int conn_stat;
 
     conn_fd = socket_create(SOCK_MODE,"ipc_read", "ipc_shutdown");
@@ -46,8 +52,6 @@ int create()
     }
 
     debug("Ok listen");
-
-    return 0;
 }
 
 void ipc_listen(int fd)
