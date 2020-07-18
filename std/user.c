@@ -5078,7 +5078,7 @@ int test_passive_perception()
 
 int set_favored_enemy(int x, string str)
 {
-    if (!USER_D->is_valid_enemy(str)) {
+    if (!USER_D->is_valid_enemy_cat(str)) {
         return 0;
     }
 
