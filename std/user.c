@@ -17,7 +17,6 @@
 #include <std.h>
 #include <new_exp_table.h>
 #include <langs.h>
-#include <schoolspells.h>
 #include <psions.h>
 #include <class_types.h>
 #include <domination.h>
