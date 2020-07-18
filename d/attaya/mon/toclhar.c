@@ -3,7 +3,7 @@ inherit WEAPONLESS;
 void create() {
     ::create();
     set_name("toc'lahar");
-    set_id(({"toc'lahar","toclahar","toc lahar"}));
+    set_id(({"toc'lahar","toclahar","toc lahar","aberration"}));
     set_short("A hideous Toc'lahar");
     set_long(
       "A spindley spider-like creature that attacks by launching barbs at it's opponent.  They ride upon tall legs that are very thin.\n The Toc'lahar is an intelligent creature, and it is an effective hunter.  The body of the Toc'lahar is covered in a thick exoskeleton."
