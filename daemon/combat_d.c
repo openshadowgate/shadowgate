@@ -3388,24 +3388,6 @@ varargs int check_death(object who, object pot)
                     continue;
                 }
             }
-            if (!environment(who)->query_property("arena") || (!who->query_property("safe arena") || !killedBy->query_property("safe arena"))) {
-                if (objectp(killedBy)) {
-                    log_file("kills", who->query_name() + " (" + (int)who->query_level() + ") was killed by " + killedBy->query_name() + "
-(" + (int)killedBy->query_level() + ")\n");
-                    log_file("kills", "  " + file_name(killedBy) + "  (uid:" + getuid(killedBy) + ") \n  (creator = " + killedBy->query_creator() + ")
-[" + file_name(environment(who)) + "]\n");
-                }else {
-                    log_file("kills", who->query_name() + " (" + (int)who->query_level() + ") was killed by " + identify(killedBy) + "
-(" + identify(killedBy) + ")\n");
-                    if (objectp(environment(who)) && objectp(killedBy)) {
-                        log_file("kills", "  " + file_name(killedBy) + "  (uid:" + getuid(killedBy) + ") \n  (creator = " + identify(killedBy) + ")
-[" + file_name(environment(who)) + "]\n");
-                    }else {
-                        log_file("kills", "  " + file_name(killedBy) + "  (uid:" + getuid(killedBy) + ") \n  (creator = " + identify(killedBy) + ")
-[" + identify(who) + "]\n");
-                    }
-                }
-            }
             if (who->isPkill()) {
                 log_file("killers", "       " + capitalize(who->query_name()) + " was killed by " + capitalize(killedBy->query_name()) + "\n");
                 who->set("no pk", 1);
