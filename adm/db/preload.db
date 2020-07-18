@@ -11,7 +11,6 @@
 /adm/daemon/lawbounty_d
 /adm/daemon/perma_d
 /adm/daemon/shutdown_d
-/adm/daemon/ipc
 /daemon/events_d
 /daemon/monster_d
 /daemon/placement_d
