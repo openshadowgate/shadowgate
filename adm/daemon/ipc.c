@@ -109,7 +109,7 @@ void ipc_read(int fd, mixed data)
         return;
     }
 
-    if (!regexp(socket_address(fd), "^127.0.0.1")) {
+    if (socket_address(fd)[0..8] != "127.0.0.1") {
         debug("Error non local: " + identify(socket_status(fd)));
         socket_close(fd);
         return;
@@ -122,7 +122,7 @@ void ipc_read(int fd, mixed data)
 
     // Messages handling here.
 
-    if (regexp(data, "^CHAT:")) {
+    if (data[0..4] == "CHAT:")) {
         string chan, pos, nick, msg;
 
         debug(identify(data));
