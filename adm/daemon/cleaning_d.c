@@ -34,30 +34,43 @@ int clean_filter(object obj)
     if (!objectp(obj)) {
         return 0;
     }
+
     if (strsrch(base_name(obj), "/daemon") == 0) {
         return 0;
     }
+
     if (strsrch(base_name(obj), "/adm/daemon") == 0) {
         return 0;
     }
+
+    if (strsrch(base_name(obj), "/d/magic") == 0) {
+        return 0;
+    }
+
     if (obj->query_noclean()) {
         return 0;
     }
+
     if ((clonep(obj) && !objectp(environment(obj))) && !obj->query_had_players()) {
         return 1;
     }
+
     if (!objectp(environment(obj)) && obj->is_monster()) {
         return 1;
     }
+
     if (obj->is_spell()) {
         return 1;
     }
+
     if (obj->is_feat()) {
         return 1;
     }
+
     if (!obj->is_room()) {
         return 0;
     }
+
     if (obj->query_had_players()) {
         return 0;
     }
