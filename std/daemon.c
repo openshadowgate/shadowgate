@@ -21,10 +21,10 @@ int remove()
 {
     if (!objectp(this_object())) {
         return 1;
-      }
-      destruct(this_object());
-      return 1;
-  }
+    }
+    destruct(this_object());
+    return 1;
+}
 
 // Needed for commands that read, write or load files.
 void create()
