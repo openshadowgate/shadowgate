@@ -82,7 +82,7 @@ void ipc_listen(int fd)
 
     this_conn_fd = socket_accept(fd, "ipc_read", "ipc_write");
 
-    debug("Accepted ipc: " + identify(socket_status(fd)));
+    debug("Accepted ipc: " + identify(socket_status(this_conn_fd)));
 
     if (this_conn_fd < 0) {
         debug("Error listen: " + this_conn_fd);
