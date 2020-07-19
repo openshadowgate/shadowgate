@@ -12,13 +12,8 @@ void create(){
    set_terrain(DEEP_WATER);
    set_travel(RUBBLE);
    set_climate("arctic");
-<<<<<<< HEAD
    set_name("underwater ruin");
    set_short("underwater ruin");
-=======
-   set_name("under water ruin");
-   set_short("under water ruin");
->>>>>>> 6d567c60d0f49d9fb6c20468cb6813cf921e24e8
    set_long((:TO,"long_desc":));
    set("night long",(:TO,"night_desc":));
    set_items(([
@@ -53,10 +48,6 @@ void reset(){
  switch(random(7)){
       case 0:  tell_room(TO,"%^CYAN%^Near freezing water chills your bones.");
                break;
-<<<<<<< HEAD
-=======
-
->>>>>>> 6d567c60d0f49d9fb6c20468cb6813cf921e24e8
       case 1:  tell_room(TO,"%^CYAN%^You hear a swoosh as water currents flow past you.");
                break;
       case 2:  tell_room(TO,"%^CYAN%^A thunderous crack rumbles"+
@@ -89,7 +80,3 @@ void pick_critters(){
 return;
 }
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 6d567c60d0f49d9fb6c20468cb6813cf921e24e8

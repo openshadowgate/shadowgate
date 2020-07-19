@@ -8,7 +8,8 @@ void create()
     set_name("crab");
     set_id(({"crab","dire crab","monster"}));
     set_short("Dire Crab");
-    set_long("");
+    set_long("This is a dire crab.  It is around 12 feet high and"+
+    " two giant pincers.  They wander the ocean floor looking for things to eat.");
     set_race("crab");
 
 
