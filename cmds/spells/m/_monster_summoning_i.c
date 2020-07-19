@@ -55,17 +55,15 @@ int spell_effect(int prof)
         monster->remove_property("swarm");
         monster->set_mlevel("fighter", clevel);
         monster->set_guild_level("fighter", clevel);
-        monster->set_attacks_num(2);
-        monster->set_hd(clevel, 2);
-        monster->set_p_desc(query_spell_level(spell_type) - 1);
+        monster->set_hd(clevel, query_spell_level(spell_type));
+        monster->set_attacks_num(1);
         monster->set_property("spelled", ({ TO }));
         monster->set_property("spell_creature", TO);
         monster->set_property("spell", TO);
         monster->add_id(caster->query_true_name() + "_monster");
-        monster->set_new_exp(1, "verylow");
+        monster->set_new_exp(1, "low");
         monster->set_property("minion", caster);
         monster->move(environment(caster));
-
         caster->add_follower(monster);
         caster->add_protector(monster);
 
