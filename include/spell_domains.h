@@ -7,7 +7,7 @@
 // unless someone looks at it.
 #define SPELL_DOMAINS (([\
     "callamir"         : ({ "good", "charm", "air", "trickery", "travel", "chaos",}), \
-    "cevahir"          : ({ "knowledge", "mentalism", "renewal", "strength", "war" }) , \
+    "cevahir"          : ({ "mentalism", "renewal", "strength", "war" }) , \
     "dream"            : ({ "chaos", "madness", "void", "stars", "evil", "good"}),\
     "jarmila"          : ({ "good", "renewal", "sun", "protection", "fire", "martyr" }) ,\
     "khyron"           : ({ "fire", "storms", "destruction", "suffering", "chaos", }) , \
