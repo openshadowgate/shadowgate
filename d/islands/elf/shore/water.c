@@ -13,16 +13,23 @@ void create(){
     set_name("freezing in the water");
     set_long("%^BOLD%^You are sinking deeper into the dark sea. \n"
     "%^RESET%^It is very dark.  At the sea floor there are the ruins of what "
-	"used to be a stone building.");
+	"used to be a stone %^CYAN%^building%^RESET%^.  Little light gets here as the ice "+
+  "flows above block the sky.  Hopefully this place is not soon to be you watery grave.");
     set_property("indoors",1);
     set_property("light",-2);
-        set_smell("default","You can't smell anything with"+
+    set_smell("default","You can't smell anything with"+
 		" all this water in your nose!");
     set_listen("default","You can hear yourself gurgle"+
 	" as you try to scream while you slowly suffocate!");
 	 set_exits(([
       "up" : ROOMS"shore/shore1",
    ]));
+    set_items(([
+      (({"ocean","water"})) :
+        "The ocean is littered with ice bergs.",
+      (({"building"})) : "Only stones show that there was a building here.  You could likely search the room.",
+	  (({"ice berg","berg"})) : "Large blocks of ice float in the ocean.",
+	   ]));
    set_search("room",(:TO,"search_room":));
 }
 void init(){
