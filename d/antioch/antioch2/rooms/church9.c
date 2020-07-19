@@ -20,10 +20,10 @@ void create()
 	"r%^RESET%^%^RED%^u%^BOLD%^b%^RESET%^%^RED%^i%^BOLD%^e%^RESET%^%^RED%^s"
       " %^RESET%^for the rose petals. The %^YELLOW%^shield %^RESET%^of the symbol has been "
       "gilded with gold leaf, making for an impressive door."
-      " Strangely enough there is no handle to it. %^RED%^The church is in ruins."
+      " Strangely enough there is no handle to it."
 	);
-	set_smell("default","It smells of death.");
-	set_listen("default","It is silent like the grave.");
+	set_smell("default","The room smells deliciously of spiced apples.");
+	set_listen("default","It is peacefully quiet here.");
 	set_items(([
 	({"rug","thin rug","floor"}) : "A thin rug stretches down the length of"+
 	" the hallway. It is decorated in concentric rectangular shapes"+

@@ -1,4 +1,3 @@
-// for fey'ri race & later other class use. N, 1/14.
 #include <priest.h>
 inherit SPELL;
 
@@ -13,7 +12,7 @@ void create()
 
 Adjective, description, speech, messages etc will be remembered across castings, so they will only need to be set once in your alternative form. Players will be able to recognise your 'other self' as a unique entity, separate from your usual self.
 
-You can have up to caster level / 12 + 1 alternate profiles. To switch between them use numbers from 1 to 9 as the spell argument. Default profile number is 1. The spell will also remember last profile used.");
+You can have up to caster level / 12 + 1 alternate profiles. To switch between them use numbers from 1 to 9 as the spell argument. Default profile number is 1. The spell will also remember last profile used and will use it by default.");
     set_verbal_comp();
     set_somatic_comp();
     set_peace_needed(1);

@@ -11,7 +11,16 @@ void create()
 	set_property("light",2);
 	set_short("A guard tower");
 	set_long(
-	"You stand upon a ruined platform, which was once the second floor of a guard tower."
+	"This is the second floor of a sturdy stone guard tower. A window"+
+	" on the southern side over looks the Antioch gates. There are"+
+	" several slits along the walls for archers to fire through. A"+
+	" small round wooden table takes up one corner of the room away"+
+	" from the windows and there are several tools near it that can"+
+	" be used to sharpen weapons. A large lantern hangs from a chain"+
+	" in the ceiling, shedding light on the room. A rack of bows"+
+	" is set up across the room from the table and a barrel full of"+
+	" arrows sits next to it. Large stone steps wind back down to"+
+	" the first floor, curving out of sight."
 	);
 	set_smell("default","You can smell the sweat from the guards who"+
 	" keep watch.");

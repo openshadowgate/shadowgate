@@ -11,10 +11,41 @@ void create()
 	set_property("light",2);
 	set_short("Cedar Street");
 	set_long(
-	"%^YELLOW%^This part of the city lies in ruins, covered in a black haze.%^RESET%^"
+	"You are on Cedar street.\n"+
+	"A wooden sign hanging over the doorway of the house on"+
+	" the east marks it as the shop of a tailor. The door is"+
+	" open for all and you can see many types of fabric and"+
+	" measuring instruments scattered about inside. To the north"+
+	" is the side of the inn. You can see a few windows on the"+
+	" second floor that overlook the city. To the west is the"+
+	" intersection of Cedar, Oak, and Apple. At the end of the"+
+	" street there appears to be a jeweler's shop. Cedar street"+
+	" runs to the southeast and turns south to intersect with"+
+	" Crescent and Cherry."
 	);
-	set_smell("default","It smells of death and decay.");
-	set_listen("default","The city is dead.");
+	set("night long",
+	"You are on Cedar street.\n"+
+	"The street lights to the west and southeast shed light"+
+	" on the area. The windows on the second floor of the"+
+	" building to the north are also brightly lit, and spill"+
+	" their light out onto this street. There is also a light"+
+	" coming from the house on the east. Above the doorway of"+
+	" the house is a wooden sign with the symbol of a tailor."+
+	" To the west Cedar intersects with Apple and Oak in a"+
+	" crossroads. At the end of the street to the west you can"+
+	" see a jeweler's shop. Cedar street runs to the southeast"+
+	" and turns south to intersect with Crescent and Cherry."
+	);
+	set_smell("default","The scents of various foods drift to"+
+	" you on the breeze.");
+	if(query_night() == 1) {
+		set_listen("default","You can hear the faint sounds of"+
+		" drunken laughter.");
+	}
+	else {
+		set_listen("default","A woman is humming a merry tune"+
+		" in the tailor's shop.");
+	}
 	set_items(([
 	({"street","cobblestones","cobbles","road","path"}) : "The"+
 	" street is paved with cobblestones.",

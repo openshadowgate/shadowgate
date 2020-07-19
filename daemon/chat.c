@@ -330,7 +330,10 @@ object* ignored_list(object obj)
  */
 int ipc_chat(string channel, string nick, string msg)
 {
+
     object* pllist;
+
+    msg = (explode(msg, "\n"))[0];
 
     if (previous_object() != find_object(IPC)) {
         return 0;

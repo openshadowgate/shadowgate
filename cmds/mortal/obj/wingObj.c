@@ -95,3 +95,8 @@ void flystep(string destination, object flyee)
     step++;
     call_out("flystep", 2, destination, flyee);
 }
+
+int query_noclean()
+{
+    return 1;
+}

@@ -11,10 +11,37 @@ void create()
 	set_property("light",2);
 	set_short("Crescent Street");
 	set_long(
-	"%^YELLOW%^This part of the city lies in ruins, covered in a black haze.%^RESET%^"
+	"You are on Crescent street.\n"+
+	"To the northeast Crescent street continues to join with"+
+	" Cherry and Cedar outside of the large church. It also"+
+	" continues to the southwest, meeting with Pine street not"+
+	" far from the Antioch gates. On the southern side of the"+
+	" road there is a small house with a brown roof. There"+
+	" appears to be an entrance to it a little further down this"+
+	" street."
 	);
-	set_smell("default","It smells of death and decay.");
-	set_listen("default","The city is dead.");
+	set("night long",
+	"You are on Crescent street.\n"+
+	"The street light here bathes this part of the street"+
+	" with warm yellow light. On the southern side of the road"+
+	" here there is a little house. It is probably a shop of"+
+	" some sort, and you can smell the faint scent of dried"+
+	" meat in the air. It looks like the entrance to it is"+
+	" just a bit further down on this street. Past the door to"+
+	" the shop Crescent joins with Pine, not very far from the"+
+	" Antioch gates. This street also runs to the northwest,"+
+	" leading you to the church."
+	);
+	set_smell("default","You smell the faint scent of dried"+
+	" food.");
+	if(query_night() == 1) {
+		set_listen("default","It's fairly quiet at this time of"+
+		" night.");
+	}
+	else {
+		set_listen("default","You can hear the sounds of a busy"+
+		" city.");
+	}
 	set_items(([
 	({"street","cobblestones","cobbles","road","path"}) : "The"+
 	" street is paved with cobblestones.",

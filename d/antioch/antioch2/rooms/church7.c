@@ -11,10 +11,18 @@ void create()
 	set_property("light",2);
 	set_short("%^BOLD%^Second floor of a Grand Church");
 	set_long(
-	"The church is in ruins, but you could make your way south if you wanted to."
+	"You are at the top of a stair case on the second floor of Antioch's"+
+	" Grand Church. The stair case continues to spiral upwards out of"+
+	" sight. On the eastern wall is a plain wooden door. It is engraved"+
+	" with the symbol of a novice acolyte. A thin rug covers the"+
+	" hallway here, leading to the south. You can see two more doors"+
+	" along the length of the hallway and at the end another set of"+
+	" stairs. Oil lamps hang from the ceiling in intervals, giving"+
+	" light to the hallway. Incense holders are spaced out on the"+
+	" western walls, they bring a scent of spiced apples."
 	);
-	set_smell("default","It smells of death.");
-	set_listen("default","It is silent like the grave.");
+	set_smell("default","The room smells deliciously of spiced apples.");
+	set_listen("default","It is peacefully quiet here.");
 	set_items(([
 	({"rug","thin rug","floor"}) : "A thin rug stretches down the length of"+
 	" the hallway. It is decorated in concentric rectangular shapes"+
@@ -39,8 +47,8 @@ void create()
 	set_exits(([
 	"down" : ROOMS+"church3",
 	"south" : ROOMS+"church8",
-	//"up" : ROOMS+"church13",
-	//"east" : ROOMS+"church12",
+	"up" : ROOMS+"church13",
+	"east" : ROOMS+"church12",
 	]));
 	set_door("door",ROOMS+"church12","east",0);
 }

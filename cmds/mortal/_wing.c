@@ -94,8 +94,6 @@ int cmd_wing(string args)
     return 1;
 }
 
-
-
 void help()
 {
     write(

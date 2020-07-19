@@ -11,10 +11,23 @@ void create()
 	set_property("light",2);
 	set_short("%^BOLD%^Entrance of Antioch's Grand Church");
 	set_long(
-	"The church has been destroyed. You see a treacherous stairway to the north."
+	"The inside of the church is even more impressive than the outside."+
+	" It is not lavish with expensive things, but the craftsmanship"+
+	" of the building itself is superb. The stone blocks fit together"+
+	" perfectly on the floor and are completely level. Mortar fills"+
+	" in the small gaps between each stone, and it has been dyed to"+
+	" a matching gray shade. The ceiling is flat and smooth and"+
+	" the walls look sturdy, supporting the architecture well. The"+
+	" great archway is just behind you and in front of you are some"+
+	" steps leading up to the main altar. Passageways lead to the"+
+	" left and right, the doorways are also arched. Just standing in"+
+	" the entrance of the church you feel a sense of peace wash over"+
+	" you."
 	);
-	set_smell("default","It smells of death and decay.");
-	set_listen("default","You hear the sounds of your worst nightmares.");
+	set_smell("default","The soothing scent of incense is in the"+
+	" air.");
+	set_listen("default","In the background you can hear the whispered"+
+	" sounds of prayers.");
 	set_items(([
 	({"stone","stones","blocks","stone blocks","stone block"}) : "The"+
 	" entire building is made out of perfectly made stone blocks. They"+
@@ -42,8 +55,8 @@ void create()
 	]));
 	set_exits(([
 	"west" : ROOMS+"street14",
-	//"south" : ROOMS+"church2",
-	"north" : ROOMS+"church3", //keeping this for the quest.
-	//"east" : ROOMS+"church4",
+	"south" : ROOMS+"church2",
+	"north" : ROOMS+"church3",
+	"east" : ROOMS+"church4",
 	]));
 }
