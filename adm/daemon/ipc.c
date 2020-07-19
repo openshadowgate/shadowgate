@@ -10,12 +10,25 @@
 
 private int* ttys = ({});
 int conn_fd;
+object debug_obj;
 
 void debug(string s)
 {
-    tell_object(FPL("ilmarinen"), ":" + s + "\n");
+    if (objectp(debug_obj)) {
+        tell_object(debug_obj,"IPC: " + s);
+    }
     log_file("ipc", s + "\n");
     return;
+}
+
+int set_debug_obj(object obj)
+{
+    if (objectp(obj)) {
+        debug_obj = obj;
+        return 1;
+    } else {
+        return 0;
+    }
 }
 
 int create()
@@ -68,6 +81,8 @@ void ipc_listen(int fd)
     int this_conn_fd;
 
     this_conn_fd = socket_accept(fd, "ipc_read", "ipc_write");
+
+    debug("Accepted ipc: " + identify(socket_status(fd)));
 
     if (this_conn_fd < 0) {
         debug("Error listen: " + this_conn_fd);
