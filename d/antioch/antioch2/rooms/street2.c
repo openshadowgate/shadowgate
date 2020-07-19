@@ -13,10 +13,30 @@ void create()
 	set_property("indoors",0);
 	set_property("light",2);
 	set_short("A cobbled street");
-	set_long("A cobbled street.\n"+
-	"%^BOLD%^%^BLACK%^The city lies in ruins, covered in a dark, black haze. To the southwest, a gaping hole has opened up into the abyss. Tendrils of darkness spew out from it, blanketing the world in shadows. %^RED%^Even here, you feel your skin begin to boil and your soul is slowly crushed by terrible nightmares. %^RESET%^");
-    set_smell("default","The smell of death hangs in the air.");
-    set_listen("default","You hear the sound of your worst nightmares to the west.");
+	set_long(
+	"You are standing at the intersection of Pine and Crescent."+
+	" Pine street runs up to the northwest and you can see at"+
+	" least one shop along it. Crescent street runs to the"+
+	" northeast and there is also a shop in that direction."+
+	" Immediately to the west appears to be a Healer, there is"+
+	" a sign with the Healer's symbol engraved on it hanging"+
+	" outside the door. To the east is the entrance to the"+
+        " guard tower and you can hear the guards talking and"+
+        " laughing inside. "
+	);
+	set("night long",
+	"A street light illuminates the intersection. To the"+
+	" northeast is Crescent street, it appears to have a shop"+
+	" along the way, as does Pine street, which runs to the"+
+	" northwest. A sign is hanging on the house to the west with"+
+	" the Healer's symbol engraved on it. Across the street from"+
+	" that is the guard tower with warm yellow light spilling"+
+	" out from the doorway. Even now you can hear guards talking"+
+	" and laughing inside."
+	);
+	set_smell("default","You smell a light scent of herbs mingled"+
+	" with the guards' sweat.");
+	set_listen("default","You hear the chatter of guards.");
 	set_items(([
 	"sign" : "There is a wooden sign here with the symbol of"+
 	" a Healer engraved on it. It hangs in front of little hut"+

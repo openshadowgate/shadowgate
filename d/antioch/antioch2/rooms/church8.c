@@ -11,10 +11,18 @@ void create()
 	set_property("light",2);
 	set_short("%^BOLD%^Second floor of a Grand Church");
 	set_long(
-	"The church is in ruins, but you could make your way south or north if you wanted to."
+	"You are in a quiet hallway on the second floor of Antioch's"+
+	" Grand Church. A colorful rug runs the length of the hallway"+
+	" and oil lamps are hung from the ceiling to shed light here."+
+	" There are no windows, so no real way to tell what time it is."+
+	" The hallway almost seems to be closed off from the rest of the"+
+	" world. On the eastern wall is a door with the symbol of the"+
+	" advanced acolytes. It must lead to their rooms. To the south"+
+	" you can see a stair case that spirals upwards. To the north"+
+	" is another stair case that can take you back to the first floor."
 	);
-	set_smell("default","It smells of death.");
-	set_listen("default","It is silent like the grave.");
+	set_smell("default","The room smells deliciously of spiced apples.");
+	set_listen("default","It is peacefully quiet here.");
 	set_items(([
 	({"rug","thin rug","floor"}) : "A thin rug stretches down the length of"+
 	" the hallway. It is decorated in concentric rectangular shapes"+
