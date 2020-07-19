@@ -1,6 +1,10 @@
 #include <std.h>
 
 // Must correspond to deities.h
+
+// Occult gods are in this file for multiclassing only. People that MC
+// with cleric will have to deal with domain disbalance on their own
+// unless someone looks at it.
 #define SPELL_DOMAINS (([\
     "callamir"         : ({ "good", "charm", "air", "trickery", "travel", "chaos",}), \
     "cevahir"          : ({ "knowledge", "mentalism", "renewal", "strength", "war" }) , \
