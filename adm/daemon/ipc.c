@@ -82,7 +82,13 @@ void ipc_listen(int fd)
 
     this_conn_fd = socket_accept(fd, "ipc_read", "ipc_write");
 
-    debug("Accepted ipc: " + identify(socket_status(this_conn_fd)));
+    debug("Conn attempt: " + identify(socket_status(this_conn_fd)));
+
+    if (socket_address(this_conn_fd)[0..8] != "127.0.0.1") {
+        debug("Rejected on conn: " + identify(socket_status(this_conn_fd)));
+        socket_close(this_conn_fd);
+        return;
+    }
 
     if (this_conn_fd < 0) {
         debug("Error listen: " + this_conn_fd);
@@ -94,9 +100,6 @@ void ipc_listen(int fd)
 
 /**
  * This function reads for IPC messages.
- *
- * As we can't bind to interfaces from LPC it is advised you either
- * implement auth, or deny connections in net filter.
  *
  * @param fd Socket's file descriptor.
  * @param data Recieved data,
@@ -110,7 +113,7 @@ void ipc_read(int fd, mixed data)
     }
 
     if (socket_address(fd)[0..8] != "127.0.0.1") {
-        debug("Error non local: " + identify(socket_status(fd)));
+        debug("Error non local spoof: " + identify(socket_status(fd)));
         socket_close(fd);
         return;
     }
@@ -122,13 +125,13 @@ void ipc_read(int fd, mixed data)
 
     // Messages handling here.
 
-    if (data[0..4] == "CHAT:")) {
+    if (data[0..4] == "CHAT:") {
         string chan, pos, nick, msg;
 
         debug(identify(data));
 
         if (sscanf(data, "CHAT:%s:%s:%s:%s", chan, pos, nick, msg) != 4) {
-            debug("Malformed chat msg: " + data);
+            debug("Malformed chat msg:" + socket_address(fd) + ":" + data);
             return;
         }
 
