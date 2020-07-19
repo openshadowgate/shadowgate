@@ -17,6 +17,7 @@ void create(){
     ]) );
     set_exits( ([
       "southeast" : "/d/shadow/room/city/cguild/ranger/rooms/path2",
+      "hole" : "/d/shadow/room/city/cguild/ranger/rooms/edea",
     ]) );
     set_smell("default", "You can smell the forest all around you.");
     set_listen("default", "What you thought was the wind through the trees sounds more like voices within the tree.");
