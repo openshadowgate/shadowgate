@@ -1,17 +1,18 @@
 #include <std.h>
+#include <daemons.h>
 #include "../elf.h"
 inherit MONSTER;
+#define PDIR "/d/common/obj/poisons/base/"
 
 void create()
 {
     ::create();
-    set_name("lobster");
-    set_id(({"lobster","dire lobster","monster","animal"}));
-    set_short("Dire lobster");
-    set_long("This is a dire lobster.  It is about 6 feet"+
-    " high and 15 feet long.  It has two large claws and a "+
-    "really big tail that looks like it could push a lot of water.");
-    set_race("lobster");
+    set_name("stingray");
+    set_id(({"stingray","dire stingray","monster","animal"}));
+    set_short("Dire Stingray");
+    set_long("This is a dire stingray.  It is 12 feet long,"+
+    " has a flat body and a pointy tail with a stinger on the end.");
+    set_race("stingray");
 
 
 
@@ -22,8 +23,8 @@ void create()
     set_max_level(47);
     set_property("swarm",1);
     set_monster_feats(({
-        "scramble",
-        "unarmed parry",
+        "regeneration",
+        "damage resistance",
       })); 
     set_resistance_percent("slashing", 50);
     set_resistance_percent("bludgeoning", 50);
@@ -46,7 +47,7 @@ void create()
     add_attack_bonus(64); 
     set_alignment(4);
     set_property("full attacks",1);
-    set_funcs(({"snip", "sweep"}));
+    set_funcs(({"sting"}));
     set_func_chance(75);
     set_skill("perception", 70);
     set_property("no knockdown", 1);
@@ -54,29 +55,21 @@ void create()
     set_skill("perception",50); 
     set("aggressive",25);
 }
-
-void sweep(object targ){
-  object * critters;
-  critters = query_attackers();
-  if (sizeof(critters)<1) return;
-  tell_room(ETO,"%^ORANGE%^Dire lobster sweeps a claw across the room!");
-  foreach(object ob in critters){
-      tell_object(ob, "%^ORANGE%^The lobster sweeps a claw across the room hitting you hard." );
-      ob->cause_typed_damwizage(ob, ob->return_target_limb(),random(200),"bludgeoning");
-  }
-  
-}
 void snip(object targ){
+    string poisonf;
+    poisonf = PDIR+POISONS[random(sizeof(POISONS))];
     if(userp(targ)){
-        tell_room(ETO, "%^ORANGE%^Dire lobster snips at "+targ->query_cap_name()+" and catches them in the giant claw!");
-        tell_object(targ,"%^ORANGE%^The Dire lobster's claw snap shut with you in them!");
-        if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-30))
-          targ->set_paralyzed(10 + random(10),"%^RED%^You are held by lobster claw.");
+        tell_room(ETO, "%^ORANGE%^Dire stingray's tail stabs "+targ->query_cap_name()+
+        ".");
+        tell_object(targ,"%^ORANGE%^Stingray's tail stabs you!");
+        if(!"/daemon/saving_throw_d.c"->fort_save(targ,-30))
+           POISON_D->ApplyPoison(targ,"large_scorpion_venom",TO,"injury");
         targ->cause_typed_damage(targ, targ->return_target_limb(),random(250),"bludgeoning");
     }
     //insta ded for fodder
     else {
-        tell_room(ETO,"%^ORANGE%^The lobster slices "+targ->query_cap_name()+" in half!");
+        tell_room(ETO,"%^ORANGE%^Stingray's tail stabs "+
+        targ->query_cap_name()+" and they fall to the ground dead.");
         targ->die();
     }
 
