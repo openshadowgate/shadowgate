@@ -30,9 +30,4 @@ void create(){
     ]) );
     set_smell("default", "This place smells pure like the coming of dawn.");
     set_listen("default", "You can almost hear the voices of the divine here.");
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> e82ec7e38bcfbe30134f278b6a91c89db3b5603f
