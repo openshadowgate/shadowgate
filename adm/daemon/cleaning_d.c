@@ -21,7 +21,7 @@ inherit DAEMON;
 #define TIME_DELAY 20   // delay between checking if objects can be cleaned
 
 int test_counter, cleaning;
-object debug_object;
+nosave object debug_object;
 
 void create()
 {
