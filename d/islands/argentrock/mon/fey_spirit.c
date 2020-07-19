@@ -41,7 +41,6 @@ void heart_beat(){
 void die(object ob){
 	tell_room(ETO,"%^CYAN%^The spirit blinks out of existance.");
     TO->move("/d/shadowgate/void");
-    return ::die(ob);
 }
 
 
