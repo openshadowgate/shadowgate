@@ -4,7 +4,7 @@ inherit "/std/riding_animal";
 
 void create(){
   ::create();
-  set_id(({"leopard","snow leopard"}));
+  set_id(({"leopard","snow leopard","animal"}));
   set_name("snow leopard");
   set_short("A snow leopard");
   set_long("This is a large white stripped cat."+

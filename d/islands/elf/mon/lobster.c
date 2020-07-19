@@ -5,12 +5,13 @@ inherit MONSTER;
 void create()
 {
     ::create();
-    set_name("crab");
-    set_id(({"crab","dire crab","monster"}));
-    set_short("Dire Crab");
-    set_long("This is a dire crab.  It is around 12 feet high and"+
-    " two giant pincers.  They wander the ocean floor looking for things to eat.");
-    set_race("crab");
+    set_name("lobster");
+    set_id(({"lobster","dire lobster","monster"}));
+    set_short("Dire lobster");
+    set_long("This is a dire lobster.  It is about 6 feet"+
+    " high and 15 feet long.  It has two large claws and a "+
+    "really big tail that looks like it could push a lot of water.");
+    set_race("lobster");
 
 
 
@@ -21,8 +22,8 @@ void create()
     set_max_level(47);
     set_property("swarm",1);
     set_monster_feats(({
-        "regeneration",
-        "damage resistance",
+        "scramble",
+        "unarmed parry",
       })); 
     set_resistance_percent("slashing", 50);
     set_resistance_percent("bludgeoning", 50);
@@ -59,9 +60,9 @@ void sweep(object targ){
   object * critters;
   critters = query_attackers();
   if (sizeof(critters)<1) return;
-  tell_room(ETO,"%^ORANGE%^Dire Crab sweeps a claw across the room!");
+  tell_room(ETO,"%^ORANGE%^Dire lobster sweeps a claw across the room!");
   foreach(object ob in critters){
-      tell_object(ob, "%^ORANGE%^The crab sweeps a claw across the room hitting you hard." );
+      tell_object(ob, "%^ORANGE%^The lobste sweeps a claw across the room hitting you hard." );
       ob->cause_typed_damwizage(ob, ob->return_target_limb(),random(200),"bludgeoning");
   }
   

@@ -7,7 +7,7 @@ inherit WEAPONLESS;
 create() {
    ::create();
    set_name("ice worm");
-   set_id( ({"worm","ice worm","monster"}) );
+   set_id( ({"worm","ice worm","monster","animal"}) );
    set("short","%^CYAN%^i%^RESET%^c%^CYAN%^e w%^RESET%^o%^CYAN%^rm%^RESET%^");
     set("long","This dog-sized worm uses toxic excretions"+
 	" to tunnel its way through the ice.  It stinks like"+
