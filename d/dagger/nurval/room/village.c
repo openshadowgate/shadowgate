@@ -49,6 +49,10 @@ void reset()
         new(MONS + "/necroknight")->move(TO);
     if (!present("guard 3"))
         new(MONS + "/necroknight")->move(TO);
+    if (!present("banshee"))
+        new(MONS + "/banshee")->move(TO);
+    if (!present("banshee 2"))
+        new(MONS + "/banshee")->move(TO);
     if(!present("nightwalker"))
         new("/realms/tlaloc/mon/nightwalker")->move(TO);
 }

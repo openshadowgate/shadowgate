@@ -40,4 +40,6 @@ void reset()
         new(MONS + "/necroknight")->move(TO);
     if (!present("guard 5"))
         new(MONS + "/necroknight")->move(TO);
+    if (!present("banshee"))
+        new(MONS + "/banshee")->move(TO);
 }
