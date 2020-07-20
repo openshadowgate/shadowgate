@@ -57,7 +57,7 @@ void spell_effect(int prof)
     }
 
     ob = new("/d/magic/obj/darkness");
-    call_out("dest_effect", 300 + (level * 10));
+    call_out("dest_effect", (30 + roll_dice(1, 20)) * clevel);
     if (objectp(ob)) {
         ob->set_property("spell", TO);
         ob->set_property("spelled", ({ TO }));
