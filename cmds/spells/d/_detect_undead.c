@@ -36,7 +36,7 @@ void spell_effect(int prof)
     }
     
     foreach(object ob in targets)
-        tell_object(caster, "%^RED%^" + sprintf("You sense undeath in %s!", ob->query_name()));       
+        tell_object(caster, "%^BOLD%^RED%^You sense undead in %^CYAN%^" + ob->QCN + "%^RESET%^!");       
 }
 
 int check_undead(object ob)
