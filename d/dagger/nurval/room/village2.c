@@ -32,4 +32,14 @@ void reset()
         new("/d/common/obj/misc/street_light")->move(TO);
     if (!present("guard"))
         new(MONS + "/necroknight")->move(TO);
+    if (!present("guard 2"))
+        new(MONS + "/necroknight")->move(TO);
+    if (!present("guard 3"))
+        new(MONS + "/necroknight")->move(TO);
+    if (!present("guard 4"))
+        new(MONS + "/necroknight")->move(TO);
+    if (!present("guard 5"))
+        new(MONS + "/necroknight")->move(TO);
+    if (!present("banshee"))
+        new(MONS + "/banshee")->move(TO);
 }

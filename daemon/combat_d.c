@@ -522,7 +522,8 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             target->is_undead() &&
             target->query_hp_percent() > 0 &&
             FEATS_D->usable_feat(attacker, "smite the lifeless")) {
-            if (target->query_hp_percent() < 50 && attacker->query_level() >= target->query_level()) {
+            //Needs adjusting to not one-shot Vecna/intruder but also be effective against smaller bosses
+            if (target->query_hp_percent() < 80 && (userp(target) ? target->query_level() <= attacker->query_level() : target->query_level() < 56)) {
                 if (!target->fort_save(attacker->query_level())) {
                     tell_object(attacker, "%^BOLD%^You unleash a flash of blinding white energy as you destroy " + target->QCN + "'s undead energy and end them!%^RESET%^");
                     tell_object(target, "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends your undead existence!%^RESET%^");

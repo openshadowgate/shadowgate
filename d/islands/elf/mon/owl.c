@@ -4,7 +4,7 @@ inherit "/std/flying_mount.c";
 void create() {    
     ::create();
     set_name("dire owl");
-    set_id( ({"owl","dire owl","mount"}) );
+    set_id( ({"owl","dire owl","mount","animal"}) );
     set_short("%^RESET%^%^BOLD%^Dire Owl%^RESET%^");
     set_long("%^RESET%^%^BOLD%^This owl is huge.  It is obviously a "+
 	"dire owl and the head of this winged creature sits nearly six "+

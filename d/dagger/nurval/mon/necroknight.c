@@ -8,7 +8,7 @@ inherit "/std/monster";
 void create()
 {
     object weapon;
-    int level = 40;
+    int level = 50;
 
     ::create();
     set_name("knight");
@@ -37,7 +37,7 @@ void create()
     set_mlevel("mage", level);
     set_hd(level, 10);
 
-    set_max_hp(level * 12 + 100);
+    set_max_hp(level * 20 + 100);
     set_hp(query_max_hp());
 
     set("aggressive", 0);
