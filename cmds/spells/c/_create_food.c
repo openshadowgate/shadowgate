@@ -30,9 +30,8 @@ int preSpell() {
 
 void spell_effect(int prof) {
     object  where;
-    int d1,d2,duration, amount,clevel;
+    int d1,d2,duration, amount;
 
-    clevel = CLEVEL;
     d1 = 1;
     d2 = 1;
     duration = 1;
@@ -46,22 +45,23 @@ void spell_effect(int prof) {
         food = new("/cmds/priest/obj/food.c");
         where = place;
     }
-    d1 = (int)CASTER->query_stats("wisdom");
+    d1 = (int)CASTER->query_stats(TO->get_casting_stat());
     d2 = (int)CASTER->query_stats("constitution");
     amount = clevel/2;
     amount++;
     food->set_eats(amount);
     food->move(where);
-    food->set_property("spelled", ({TO}) );    // The time the pile of food will be here
+    food->set_property("spelled", ({TO}) );
+
     duration = (( (d1 / d2 ) * clevel ) * 60);
-    // To prevent one gets no food
-    if (duration < 90) duration = 90;
+
     spell_successful();
+    addSpellToCaster();
     call_out("dest_effect",duration);
 }
 
 void dest_effect() {
-     if (objectp(food)) {
+    if (objectp(food)) {
         food->remove();
         tell_room(HERE,"The pile of food vanishes into nothingness!");
     }

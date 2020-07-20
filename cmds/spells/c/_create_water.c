@@ -56,7 +56,7 @@ void spell_effect(int prof)
         drinks= new("/cmds/priest/obj/water.c");
         where = place;
     }
-    d1 = (int)caster->query_stats("wisdom");
+    d1 = (int)caster->query_stats(TO->get_casting_stat());
     d2 = (int)caster->query_stats("constitution");
 
     amount = clevel/2;
@@ -65,9 +65,9 @@ void spell_effect(int prof)
     drinks->move(where);
     drinks->set_property("spelled", ({TO}) );
     where->set_property("fill waterskin", 1);
+
     duration = (( (d1 / d2 ) * clevel ) * 60);
 
-    if ( duration < 90 ) duration=90;
     spell_successful();
     addSpellToCaster();
     call_out("dest_effect",duration);
