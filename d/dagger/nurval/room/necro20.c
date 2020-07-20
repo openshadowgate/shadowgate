@@ -23,4 +23,10 @@ void reset(){
    ::reset();
    if(!present("street_light",TO))
        new("/d/common/obj/misc/street_light")->move(TO);
+    if (!present("guard"))
+        new(MONS + "/necroknight")->move(TO);
+    if (!present("guard 2"))
+        new(MONS + "/necroknight")->move(TO);
+    if (!present("guard 3"))
+        new(MONS + "/necroknight")->move(TO);
 }
