@@ -43,7 +43,6 @@ void create()
     set_wielding_limbs(({"right hand","left hand"}));
     set_property("undead", 1);
     set_body_type("human");
-    set_property("full attacks", 1);
 
     set_skill("perception", 50);
     set_skill("spellcraft", 50);
@@ -58,12 +57,14 @@ void create()
     set_new_exp("normal", 35);
 
     set_property("cast and attack", 1);
+    set_property("weapon resistance", 6);
+    set_property("damage resistance", 40);
     set_spells(({"oppression",
                  "wail of the banshee",
+                 "dispel magic",
                  "unholy orb",
-                 "visions from within",
-                 "wave of pain",
                  "horrid wilting"}));
+                 
     set_spell_chance(90);
 
     set_property("spellturning", 10);
