@@ -53,7 +53,7 @@ void reset(){
       case 2:  tell_room(TO,"%^CYAN%^A thunderous crack rumbles"+
 	  " through the area as a large block of ice breaks above.");
                break;
-      case 3:  tell_room(TO,"%^BOLD%^Several odd fish swim past");
+      case 3:  tell_room(TO,"%^BOLD%^Several odd fish swim past.");
                break;
       case 4:  tell_room(TO,"%^CYAN%^Some strange creature moves along the ocean floor.");
                break;
@@ -71,7 +71,7 @@ void pick_critters(){
                  break;
         case 2:  set_monsters( ({MON"lobster"}),({random(2)+1}));
                  break;
-        case 3:  set_monsters( ({MON"drowned"}),({1}));
+        case 3:  set_monsters( ({MON"rev"}),({1}));
                  break;
 		case 4:  set_monsters( ({MON"stingray"}),({random(3)+2}));
                  break;
