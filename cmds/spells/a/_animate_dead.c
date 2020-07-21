@@ -88,7 +88,7 @@ void spell_effect(int prof)
         undead = new(UNDEADDIR + "skeleton");
         lvl = clevel / 6;
 
-        if (num_mon > 6)) {
+        if (num_mon > 6) {
             undead->remove();
             tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^RAISING MORE IS %^WHITE%^BEYOND%^BLACK%^ YOUR PATHETIC %^BLACK%^M%^WHITE%^ASTERY!%^RESET%^%^RESET%^");
             tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);

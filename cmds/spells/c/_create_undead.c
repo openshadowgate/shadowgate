@@ -114,15 +114,15 @@ void spell_effect(int prof)
 
 void setup_undead_scaling(object undead)
 {
-    undead->set_guild_level("fighter",clevel);
-    undead->set_weap_enchant(clevel/12);
-    undead->set_skill("athletics",clevel);
-    undead->set_skill("perception",clevel - 10);
+    undead->set_guild_level("fighter", clevel);
+    undead->set_weap_enchant(clevel / 12);
+    undead->set_skill("athletics", clevel);
+    undead->set_skill("perception", clevel - 10);
     undead->set_level(clevel);
-    undead->set_hd(clevel,8);
-    undead->set_max_hp(clevel*12+100);
+    undead->set_hd(clevel, 6);
+    undead->set_max_hp(clevel * 14 + 100);
     undead->set_hp(undead->query_max_hp());
-    undead->set_overall_ac(10-clevel);
+    undead->set_overall_ac(10 - clevel);
 }
 
 void dest_effect()

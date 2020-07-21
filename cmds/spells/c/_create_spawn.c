@@ -34,11 +34,11 @@ string undead_to_raise()
 
 void setup_undead_scaling(object undead)
 {
-    undead->set_guild_level("fighter", clevel * 6 / 7);
-    undead->set_mlevel("fighter", clevel * 6 / 7);
+    undead->set_guild_level("fighter", clevel);
+    undead->set_mlevel("fighter", clevel);
     undead->set_skill("perception", clevel);
     undead->set_level(clevel);
-    undead->set_hd(clevel * 6 / 7, 18);
+    undead->set_hd(clevel, 8);
     undead->set_max_hp(clevel * 12);
     undead->set_attacks_num(clevel / 5 + 1);
     undead->set_hp(undead->query_max_hp());
