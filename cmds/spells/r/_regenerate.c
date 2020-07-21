@@ -14,7 +14,7 @@ void create() {
 
     // At the moment limb restoration/damage across the mud is very limited, so going with this effect.
 
-    set_damage_desc("positive energy over clevel / 8 rounds");
+    set_damage_desc("positive energy over clevel / 6 rounds");
     set_syntax("cast CLASS regenerate on TARGET");
     set_description("This spell cures substantial amount of damage over several rounds and removes all exhaustion, fatigue or confusion from the target. Targets with negative energy affinity, such as undead, can't be affected by this spell.");
     set_verbal_comp();
@@ -45,7 +45,7 @@ int preSpell(){
 
 void spell_effect(int prof) {
     // ticker in rounds
-    ticker = clevel / 8 + 1;
+    ticker = clevel / 6 + 1;
 
     if (!present(target, place)) {
         tell_object(caster, "Your target has left the area.");
