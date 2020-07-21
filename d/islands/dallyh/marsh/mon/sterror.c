@@ -31,8 +31,8 @@ void create()
     set_property("full attacks",1);
     set_size(2);
     set("aggressive", 100);
-    set_hd(55,54);
-    set_max_hp(1000+random(1000));
+    set_hd(58,8);
+    set_max_hp(800+random(1000));
     set_hp(query_max_hp());
     set_alignment(9);
     set_overall_ac(-25);

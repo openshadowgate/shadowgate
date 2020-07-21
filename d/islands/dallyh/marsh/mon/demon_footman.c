@@ -28,7 +28,7 @@ void create()
     set_body_type("arachnid");
     set_property("swarm", 1);
     set_overall_ac(-44);
-    set_hd(40);
+    set_hd(48);
     set_size(4);
     set_wielding_limbs(({ "left front claw", "right rear claw" }));
     set_attacks_num(6);

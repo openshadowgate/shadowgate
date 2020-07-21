@@ -25,7 +25,7 @@ void create()
     set_gender("neuter");
 
     set_level(45);
-    set_hd(55, 2);
+    set_hd(56, 4);
     set_new_exp(45, "high");
 
     set_alignment(9);
