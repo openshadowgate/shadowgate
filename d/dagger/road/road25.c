@@ -28,4 +28,12 @@ void reset()
     ::reset();
     if(!present("street_light",TO))
         new("/d/common/obj/misc/street_light")->move(TO);
+    if(!present("skeleton",TO))
+        new("/d/magic/mon/skeleton")->move(TO);
+    if(!present("skeleton 2",TO))
+        new("/d/magic/mon/skeleton")->move(TO);
+    if(!present("skeleton 3",TO))
+        new("/d/magic/mon/skeleton")->move(TO);
+    if(!present("skeleton 4",TO))
+        new("/d/magic/mon/skeleton")->move(TO);
 }

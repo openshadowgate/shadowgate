@@ -33,7 +33,7 @@ void spell_effect(int prof)
         level = 20;
     }
     ob = new("/d/magic/obj/dancinglights");
-    call_out("dest_effect", 300 + (level * 10 * roll_dice(1, 6)));
+    call_out("dest_effect", (30 + roll_dice(1, 20)) * clevel);
     ob->set_property("spell", TO);
     ob->set_property("spelled", ({ TO }));
     ob->move(caster);
