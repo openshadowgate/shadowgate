@@ -43,7 +43,7 @@ set_emotes(10,({
     "The Revenant says: so much death.",
     "Revenant says: The elves killed us all, women, children, elderly.",
     "Revenant says: Kill them all!  Kill all the elves!",
-    "The Revenant mumbles something about mountains of dead.",,
+    "The Revenant mumbles something about mountains of dead.",
     "The Revenant's eyes open wide!",
      "Revenant says: I had a child once...",
      "Revenant says: This hatred, it won't let me pass."
@@ -55,4 +55,17 @@ set_resistance("negative energy",10);
 set_resistance("positive energy",-10);
 set_resistance_percent("slashing", 50);
 set_resistance_percent("bludgeoning", 50);
+set_monster_feats(({
+    "rage",
+    "mobility",
+    "mighty rage",
+    "dodge",
+    "greater rage",
+    "spell reflection",
+      })); 
+}
+
+void init(){
+    ::init();
+    force_me("rage");
 }
