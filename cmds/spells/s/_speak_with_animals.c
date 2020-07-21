@@ -11,14 +11,13 @@ void create() {
     set_spell_name("speak with animals");
     set_spell_level(([ "druid" : 1, "bard" : 3, "ranger" : 1 ]));
     set_spell_sphere("divination");
-    set_syntax("cast CLASS speak with animals");
+    set_syntax("cast CLASS speak with animals [on TARGET]");
     set_description("This will give the caster the ability to understand, and speak sylvan tongue.");
     set_verbal_comp();
     set_components(([
       "mage" : ([ "clay model ziggurat" : 1, ]),
     ]));
 	set_helpful_spell(1);
-    set_target_required(1);
 }
 
 string query_cast_string() {
@@ -29,6 +28,10 @@ void spell_effect(int prof) {
     int i;
     string what, arg;
     object ob;
+
+    if (!objectp(target)) {
+        target = caster;
+    }
 
     theProf = prof;
     tell_object(caster,"%^CYAN%^You start to feel knowledge enter your mind that you lacked before.");
