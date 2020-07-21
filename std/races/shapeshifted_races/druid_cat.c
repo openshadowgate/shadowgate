@@ -10,11 +10,11 @@ void create()
     ::create();
 
     set_attack_limbs( ({ "fangs","right fore claw","left fore claw","right rear claw","left rear claw" }) );
-    set_new_damage_type("piercing");    
+    set_new_damage_type("piercing");
     set_limbs( ({ "fangs","head","torso","right fore claw", "left fore claw", "right rear claw","left rear claw","right foreleg","right forepaw","left foreleg","left forepaw","right rear leg","right rear paw","left rear leg","left rear paw","tail" }) );
     set_attack_functions( ([ "fangs" : (:TO,"bite_attack":), "right fore claw" : (:TO,"claw_attack":), "left fore claw" : (:TO,"claw_attack":), "right rear claw": (:TO,"grab_attack":),"left rear claw" : (:TO,"grab_attack":)   ]) );
     set_ac_bonus(-5); // ac bonus is different from the other bonuses because of the way ac is calculated with different body types -Ares
-    set_base_attack_num(4); 
+    set_base_attack_num(4);
     set_castable(0);
     set_can_talk(0);
     set_shape_race("cat");
@@ -23,7 +23,7 @@ void create()
     set_shape_bonus("perception",2);
     set_shape_bonus("survival",4);
     set_shape_bonus("athletics",2);
-    set_shape_bonus("stealth",2); 
+    set_shape_bonus("stealth",2);
     set_shape_bonus("sight bonus",5);
     set_shape_bonus("damage bonus",2);
     set_shape_bonus("attack bonus",2);
@@ -45,7 +45,7 @@ int default_descriptions(object obj)
         ""+obj->QP+" long tail.  The graceful movements of "+obj->QP+" body show "+obj->QS+" to be a "
         "dangerous predator.");
 
-    obj->setDescriptivePhrase("agile cat $R with predatory eyes");
+    obj->setDescriptivePhrase("agile $R with predatory eyes");
 
     obj->set("speech string","growl");
     obj->set("describe string","angrily");
@@ -87,15 +87,15 @@ int change_outof_message(object obj)
     tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+"'s muscles slacken and "+obj->QS+" gets a far-away look in "+obj->QP+" eyes.",obj);
     tell_room(environment(obj),"%^RESET%^%^BLUE%^"+obj->QCN+"'s body begins to change shape, shrinking and quickly loosing fur!",obj);
     tell_room(environment(obj),"%^RESET%^%^GREEN%^Where "+obj->QCN+" once stood, now stands a "+obj->query_race()+"!",obj);
-    
+
     return 1;
 }
 
-int can_cast() 
-{ 
+int can_cast()
+{
     if(!objectp(query_owner())) { return 0; }
     if(FEATS_D->usable_feat(query_owner(),"wild spellcraft")) { return 1; }
-    return can_cast_spells; 
+    return can_cast_spells;
 }
 
 
@@ -104,11 +104,11 @@ int bite_attack(object tp, object targ)
     object etp,*attackers;
     string *specials=({}),*active_specials=({});
     int i,chance,dice;
- 
+
     etp = environment(tp);
 
     if(!objectp(tp)) { return 0; }
-    attackers = (object*)tp->query_attackers();    
+    attackers = (object*)tp->query_attackers();
     if(!objectp(targ) && !sizeof(attackers)) { return 0; }
 
     chance = (int)tp->query_guild_level("druid");
@@ -119,16 +119,16 @@ int bite_attack(object tp, object targ)
     if(chance > 9 && !FEATS_D->usable_feat(TP,"savage instincts i")) { chance = 9; }
 
     dice = ( chance / 4) + 2;
-    
-    if(FEATS_D->usable_feat(tp,"perfect predator")) 
-    { 
-        dice += 3; 
+
+    if(FEATS_D->usable_feat(tp,"perfect predator"))
+    {
+        dice += 3;
         tp->add_hp(dice);
     }
 
     if(roll_dice(1,100) > chance) { return roll_dice(2,dice); }
-    
-    // switch falls through intentionally 
+
+    // switch falls through intentionally
     switch(chance)
     {
         case 35..60: specials += ({ "blind" });
@@ -152,7 +152,7 @@ int bite_attack(object tp, object targ)
     //////////////
 
     set_new_damage_type("piercing");
-  
+
     for(i=0;i<sizeof(active_specials);i++)
     {
         if(!objectp(tp) || !objectp(targ)) { return 0; }
@@ -170,8 +170,8 @@ int bite_attack(object tp, object targ)
             tell_room(etp,"%^GREEN%^"+tp->QCN+" clamps "+tp->QP+" fangs into "+targ->QCN+"'s forehead, blinding "+targ->QO+"!",({tp,targ}));
 
             if(!targ->fort_save(chance)) { targ->set_temporary_blinded(dice/6); }
-            break; 
-            }           
+            break;
+            }
 
         case "high damage":
 
@@ -212,11 +212,11 @@ int claw_attack(object tp, object targ)
     object etp,*attackers;
     string *specials=({}),*active_specials=({});
     int i,chance,dice;
- 
+
     etp = environment(tp);
 
     if(!objectp(tp)) { return 0; }
-    attackers = (object*)tp->query_attackers();    
+    attackers = (object*)tp->query_attackers();
     if(!objectp(targ) && !sizeof(attackers)) { return 0; }
 
     chance = (int)tp->query_guild_level("druid");
@@ -229,8 +229,8 @@ int claw_attack(object tp, object targ)
     dice = ( chance / 4) + 2;
 
     if(roll_dice(1,100) > chance) { return roll_dice(2,dice); }
-    
-    // switch falls through intentionally 
+
+    // switch falls through intentionally
     switch(chance)
     {
         case 35..60: specials += ({ "blind" });
@@ -254,7 +254,7 @@ int claw_attack(object tp, object targ)
     //////////////
 
     set_new_damage_type("slashing");
-  
+
     for(i=0;i<sizeof(active_specials);i++)
     {
         if(!objectp(tp) || !objectp(targ)) { return 0; }
@@ -274,7 +274,7 @@ int claw_attack(object tp, object targ)
 
             if(!targ->reflex_save(chance)) { targ->set_temporary_blinded(dice/6); }
             break;
-            }            
+            }
 
         case "high damage":
 
@@ -316,11 +316,11 @@ int grab_attack(object tp, object targ)
     object etp,*attackers;
     string *specials=({}),*active_specials=({}),my_limb;
     int i,chance,dice;
- 
+
     etp = environment(tp);
 
     if(!objectp(tp)) { return 0; }
-    attackers = (object*)tp->query_attackers();    
+    attackers = (object*)tp->query_attackers();
     if(!objectp(targ) && !sizeof(attackers)) { return 0; }
 
     chance = (int)tp->query_guild_level("druid");
@@ -333,8 +333,8 @@ int grab_attack(object tp, object targ)
     dice = ( chance / 4) + 2;
 
     if(roll_dice(1,100) > chance) { return roll_dice(2,dice); }
-    
-    // switch falls through intentionally 
+
+    // switch falls through intentionally
     switch(chance)
     {
         case 35..60: specials += ({ "blind" });
@@ -358,7 +358,7 @@ int grab_attack(object tp, object targ)
     //////////////
 
     set_new_damage_type("slashing");
-  
+
     for(i=0;i<sizeof(active_specials);i++)
     {
         if(!objectp(tp) || !objectp(targ)) { return 0; }
@@ -378,7 +378,7 @@ int grab_attack(object tp, object targ)
 
             if(!targ->fort_save(chance)) { targ->set_temporary_blinded(dice/6); }
             break;
-            }            
+            }
 
         case "trip":
 
@@ -404,7 +404,7 @@ int grab_attack(object tp, object targ)
             tell_object(tp,"%^BOLD%^%^CYAN%^You dig your rear claws into "+targ->QCN+" and push off, launching yourself into the air!  On the way by "+targ->QP+" face, you quickly lash out and strike "+targ->QO+" again!");
             tell_object(targ,"%^BOLD%^%^CYAN%^"+tp->QCN+" digs "+tp->QP+" rear claws into you and launches into the air!  On the way by "+tp->QS+" your face, "+tp->QS+" quickly lashes out and strikes you again!");
             tell_room(etp,"%^BOLD%^%^CYAN%^"+tp->QCN+" digs "+tp->QP+" rear claws into "+targ->QCN+" and launches "+tp->QO+"self into the air!  On the way by "+targ->QP+" face, "+tp->QS+" lashes out and quickly strikes "+targ->QO+" again!",({tp,targ}));
-            
+
             tp->execute_attack();
             break;
 
