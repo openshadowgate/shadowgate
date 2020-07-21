@@ -57,7 +57,7 @@ void heart_beat()
 
     tell_room(EETO, "%^RED%^An assassin steps out of shadows and attacks "+ ETO->QCN + "!");
 
-    level = ETO->query_base_character_level() + 10; //ten levels above trackee
+    level = ETO->query_base_character_level(); //ten levels above trackee when accounting for fighter levels
 
     creature->set_property("fighter_attacks_mod",level/4);
     creature->set_property("spell damage resistance",level);
