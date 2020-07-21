@@ -44,7 +44,7 @@ init()
 void greet()
 {
   force_me("say You have done well to make it this far, "+
-	""+TP->query_race()+".  I may be able to help guide "+
+	""+TP->query_visual_race()+".  I may be able to help guide "+
 	"you through your journey.  I have acquired much "+
 	"%^CYAN%^information %^RESET%^that may help you here.");
 }
