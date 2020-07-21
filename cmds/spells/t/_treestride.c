@@ -35,7 +35,7 @@ int preSpell(){
     myterrain = locale->query_terrain();
     if(locale->query_property("treestride_possible")) return 1;
     if(myterrain != "heavy forest" && myterrain != "light forest" && myterrain != "jungle" && myterrain != "dense jungle" && myterrain != "branches" && myterrain != "swamp" && myterrain != "marsh" && myterrain != "scrub lands" && myterrain != "savannah") {
-      tell_object(caster,"%^BOLD%^%^GREEN%^You cannot see any trees nearby, how could you use this spell?");
+      tell_object(caster,"%^BOLD%^%^GREEN%^You cannot see any suitable trees nearby, how could you use this spell?");
       return 0;
     }
     return 1;
@@ -59,10 +59,10 @@ void spell_effect(int prof){
         return;
     }
 //teleport proof stuff by ~Circe~ 6/20/08
-//new property to be used for areas protected from teleport 
+//new property to be used for areas protected from teleport
 //but not foolproof
    endplace = "/d/shadow/room/city/cguild/ranger/rooms/hall1";
-   if(endplace && 
+   if(endplace &&
       (endplace->query_property("teleport proof") ||
       place->query_property("teleport proof") ||
       !endplace->is_room())){
