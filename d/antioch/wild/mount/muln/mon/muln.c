@@ -20,7 +20,7 @@ void create()
 
     ::create();
     set_id(({ "dragon", "white", "white dragon", "wyrm", "great wyrm", "muln", "anicent wyrm", "ancient dragon" }));
-    set_name("muln");
+    set_name("dragon");
     set_short("%^BOLD%^%^WHITE%^An a%^CYAN%^n%^WHITE%^c%^CYAN%^i%^WHITE%^e%^CYAN%^n%^WHITE%^t w%^CYAN%^h%^WHITE%^i%^CYAN%^t%^WHITE%^e d%^CYAN%^r%^WHITE%^a%^CYAN%^g%^WHITE%^o%^CYAN%^n%^RESET%^");
     set_long("%^BOLD%^%^WHITE%^This %^CYAN%^a%^WHITE%^n%^CYAN%^c%^WHITE%^i%^CYAN%^e%^WHITE%^n%^CYAN%^t %^WHITE%^w%^CYAN%^h%^WHITE%^i%^CYAN%^t%^WHITE%^e %^CYAN%^d%^WHITE%^r%^CYAN%^a%^WHITE%^g%^CYAN%^o" +
              "%^WHITE%^n is roughly sixty-five feet long, and with a %^RESET%^%^CYAN%^wingspan %^BOLD%^%^WHITE%^easily twice that. She must be the %^BLUE%^legendary %^WHITE%^white dragon known as %^CYAN%^" +
