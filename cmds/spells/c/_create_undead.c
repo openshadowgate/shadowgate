@@ -48,9 +48,8 @@ void spell_effect(int prof)
     object controller, undead, corpse, *corpses=({}), *undeadl;
     int lvl;
 
-    if((int)caster->query_property("raised")>clevel)
-    {
-        tell_object(caster,"%^BOLD%^%^BLACK%^A PATHETIC WEAKLING SUCH AS YOURSELF SHALL NOT RAISE MORE!%^RESET%^");
+    if ((int)caster->query_property("raised") > 6) {
+        tell_object(caster, "%^BOLD%^%^BLACK%^A PATHETIC WEAKLING SUCH AS YOURSELF SHALL NOT RAISE MORE!%^RESET%^");
         TO->remove();
         return;
     }
