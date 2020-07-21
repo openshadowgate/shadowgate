@@ -64,7 +64,7 @@ fixrecognized [all]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-The command runs through the list of recognized names that the player has and deletes any from the list who have been rid or used suicide comman.
+The command runs through the list of recognized names that the player has and deletes any from the list who have been rid or used suicide command.
 
 With argument all it allow you to forget everyone.
 
