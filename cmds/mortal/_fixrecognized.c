@@ -56,7 +56,7 @@ void help()
     write("
 %^CYAN%^NAME%^RESET%^
 
-fixrecognized - remove suicied, rid or vanished players from your memory
+fixrecognized - remove suicide, rid or vanished players from your memory
 
 %^CYAN%^SYNOPSIS%^RESET%^
 
