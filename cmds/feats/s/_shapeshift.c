@@ -21,6 +21,8 @@ void create() {
   L14 Bird. Variants: crow, eagle, falcon, hawk, owl, raven, vulture, goose
   L17 Cat. Variants: cheetah, jaguar, leopard, lion, lynx, ocelot, panther, tiger
 
+You will be able to set descriptions, speech messages for each form, but it will be shared between variants, and for many descriptions it means you can have just one variant of each form. For descriptions variants work as subraces and you can refer to them in adjectives with $SR keyword.
+
 Dragon: refer to <help wild shape dragon>
 Elemental: refer to <help wild shape elemental>");
     set_target_required(0);

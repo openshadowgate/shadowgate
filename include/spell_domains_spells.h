@@ -37,7 +37,7 @@ DOMAIN_SPELLS = ([
 "repose" : ({ "spectral touch", "gentle repose", "phantom steed", "deathward", "slay living", "undeath is death", "waves of exhaustion", "destruction", "wail of the banshee" }),
 "stars":({"dancing lights", "levitate", "hypnotic pattern", "dimension door", "prying eyes", "sunbeam",  "reverse gravity", "sunburst", "meteor swarm"}),
 "storms" : ({ "snowball", "lightning touch", "sleet storm", "ice storm", "stormwinds", "sirocco", "acid fog", "stormrage", "storm of vengeance" }),
-"strength" : ({ "enlarge person", "distressing tone", "magic vestments", "lesser globe of invulnerability", "righteous might", "stoneskin", "placeholder", "placeholder", "crushing hand" }),
+"strength" : ({ "enlarge person", "distressing tone", "magic vestments", "globe of invulnerability", "righteous might", "stoneskin", "placeholder", "placeholder", "crushing hand" }),
 "suffering":({"touch of sickening", "body blades", "wave of pain", "purge spirit", "kiss of torment", "eyebite", "finger of death", "nightmare maw", "ray of ending"}),
 "sun" : ({ "faerie fire", "detect invisibility", "searing light", "nimbus of light", "flame strike", "fire seeds", "sunbeam", "sunburst", "prismatic burst" }),
 "travel" : ({ "skate", "clairvoyance", "faithful mount", "dimension door", "teleport", "pass portal", "create portal", "phase door", "astral projection" }),

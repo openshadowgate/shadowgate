@@ -10,7 +10,7 @@ void create()
     feat_category("Cypher");
     feat_name("insightful scroll");
     feat_prereq("Cypher L4");
-    feat_desc("This feat gives cypher a cance equal of thrice her intelligence percent to preserve a scroll read.");
+    feat_desc("With this ability cypher learns to read scrolls withour destroying them.");
     permanent(1);
     allow_blind(1);
 }

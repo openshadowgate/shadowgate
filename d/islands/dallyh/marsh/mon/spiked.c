@@ -44,7 +44,7 @@ void create()
     set_class("fighter");
     add_search_path("/cmds/fighter");
     set_mlevel("fighter", 42 + random(7));
-    set_hd(55, 180);
+    set_hd(58, 12);
     set_hp(1000 + random(1000));
     set_new_exp(48, "high");
     set_spells(({

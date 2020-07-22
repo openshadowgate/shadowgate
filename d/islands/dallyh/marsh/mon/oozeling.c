@@ -23,7 +23,7 @@ void create()
     "that affords it awareness of its surroundings. However, it moves purposefully as if "+
     "guided by something, you are just not sure of what that might be.%^RESET%^");
 
-    set_hd(55,2);
+    set_hd(56,2);
     set_hp(1000+random(2000));
     set_max_hp(query_hp());
     set_body_type("ooze");

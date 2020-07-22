@@ -41,7 +41,13 @@ int dest_effect()
 {
     int i;
     if (objectp(target)) {
-        tell_object(target, "%^BLUE%^You no longer feel sickened.%^RESET%^");
+        target->set_property("effect_sickened", -1);
+
+        if (target->query_property("effect_sickened")) {
+            tell_object(target,"%^BLUE%^You feel less sickened.");
+        } else {
+            tell_object(target, "%^BLUE%^You no longer feel sickened.%^RESET%^");
+        }
         tell_room(ENV(target), "%^BLUE%^" + target->QCN + " no longer looks sickened.", target);
         for (i = 0; i < sizeof(CORE_SKILLS); i++) {
             target->add_skill_bonus(CORE_SKILLS[i], power);
@@ -49,7 +55,7 @@ int dest_effect()
         target->add_attack_bonus(power);
         target->add_damage_bonus(power);
         target->add_saving_bonus("all", power);
-        target->set_property("effect_sickened", -1);
+
     }
     ::dest_effect();
     return 1;
