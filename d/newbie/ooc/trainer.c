@@ -62,7 +62,7 @@ void create()
 	set_listen("default","A stillness hangs over the area.");
 	set_property("Specialist",1);
     set_property("no teleport",1);
-	set_property("indoors",1);
+        //set_property("indoors",1);
 	set_property("training",1);
     set_property("no sticks",1);
     set_property("no starve",1);
