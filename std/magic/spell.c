@@ -2720,49 +2720,7 @@ varargs int do_save(object targ, int mod)
         casting_level = 6;
     }
 
-    switch (spell_type) {
-    case "wizard":
-    case "mage":
-    case "psion":
-    case "psionics":
-    case "psywarrior":
-        if (save_debug) {
-            tell_object(caster, "Caster's casting stat:  Intelligence");
-        }
-        stat = "intelligence";
-        break;
-
-    case "priest":
-    case "cleric":
-    case "ranger":
-    case "paladin":
-    case "inquisitor":
-    case "antipaladin":
-    case "druid":
-    case "monk":
-        if (save_debug) {
-            tell_object(caster, "Caster's casting stat:  Wisdom");
-        }
-        stat = "wisdom";
-        break;
-
-    case "bard":
-    case "sorcerer":
-    case "oracle":
-    case "warlock":
-        if (save_debug) {
-            tell_object(caster, "Caster's casting stat:  Charisma");
-        }
-        stat = "charisma";
-        break;
-
-    default:
-        if (save_debug) {
-            tell_object(caster, "Caster's casting stat:  Intelligence");
-        }
-        stat = "intelligence";
-        break;
-    }
+    stat = get_casting_stat();
 
     type = get_save();
     if (save_debug) {
@@ -2821,48 +2779,25 @@ varargs int do_save(object targ, int mod)
     caster_bonus += num;
     num = 0;
 
+// racial saves from magic here
+
+    caster_bonus = SAVING_THROW_D->magic_save_throw_adjust(targ, caster, );
+
 // racial saves from spells here
-    if ((string)targ->query_race() == "dwarf") {    //shield & gold dwarf, +2 on saves vs spells
-        if ((string)targ->query("subrace") == "shield dwarf" || (string)targ->query("subrace") == "gold dwarf") {
-            caster_bonus -= 2;
-        }
-    }
-    if ((string)targ->query_race() == "orc" || (string)targ->query_race() == "half-orc") {
-        caster_bonus -= 1;   //orc and half-orc, +1 on saves vs spells
-    }
-    if ((string)targ->query_race() == "human") {    // human ethnicity 'heartlander'
-        if ((string)targ->query("subrace") == "heartlander") {
-            caster_bonus -= 1;
-        }
-    }
 
-    if ((string)targ->query_race() == "gnome" && spell_sphere == "illusion") {    // all gnomes +2 vs illusions
-            caster_bonus -= 2;
-    }
-
-    if ((string)targ->query_race() == "elf" || (string)targ->query_race() == "half-elf") {
-        if (spell_sphere == "enchantment_charm") {
-            caster_bonus -= 2;                                       //elves & half-elves, +2 vs charm
-        }
-    }
-    if ((string)targ->query_race() == "drow" || (string)targ->query_race() == "half-drow") {
-        if (spell_sphere == "enchantment_charm") {
-            caster_bonus -= 2;                                       //drow & half-drow, +2 vs charm
-        }
-    }
-
-    if (arrayp(targ->query_property("protection_from_alignment"))) {
-        if (member_array(caster->query_alignment(), targ->query_property("protection_from_alignment")) != -1) {
-            caster_bonus -= 2;
-        }
-    }
-
-    if (FEATS_D->usable_feat(targ, "disruptive")) {
-        caster_bonus -= 4;
-    }
-
-    if (FEATS_D->usable_feat(targ, "closed mind")) {
+    if (targ->query_race() == "gnome" && spell_sphere == "illusion") {
         caster_bonus -= 2;
+    }
+
+    if (targ->query_race() == "elf" || targ->query_race() == "half-elf") {
+        if (spell_sphere == "enchantment_charm") {
+            caster_bonus -= 2;
+        }
+    }
+    if (targ->query_race() == "drow" || targ->query_race() == "half-drow") {
+        if (spell_sphere == "enchantment_charm") {
+            caster_bonus -= 2;
+        }
     }
 
     if (save_debug) {
@@ -2926,51 +2861,6 @@ varargs int do_save(object targ, int mod)
         tell_object(caster, "Save result (1 pass, 0 fail): " + debug_map["save_result"] + "");
         tell_object(caster, "Throw passed or failed by: " + debug_map["pass_or_fail_by"] + "");
     }
-
-    // one reroll chance for shadowdancers if they fail an enchantment spell save
-    /*if ((FEATS_D->usable_feat(caster, "shadowdancer") || caster->is_class("shadowdancer")) && !num && spell_sphere == "enchantment_charm") {
-        // this is a direct copy of the above - if anything changed there, change here too plz!
-        switch (lower_case(type)) {
-        case "fortitude":
-        case "fort":
-            if (save_debug) {
-                debug_map = "/daemon/saving_throw_d"->debug_fort_save(targ, caster_bonus);
-            }else {
-                num = "/daemon/saving_throw_d"->fort_save(targ, caster_bonus);
-            }
-            break;
-
-        case "reflex":
-            if (save_debug) {
-                debug_map = "/daemon/saving_throw_d"->debug_reflex_save(targ, caster_bonus);
-            }else {
-                num = "/daemon/saving_throw_d"->reflex_save(targ, caster_bonus);
-            }
-            break;
-
-        case "willpower":
-        case "will":
-            if (save_debug) {
-                debug_map = "/daemon/saving_throw_d"->debug_will_save(targ, caster_bonus);
-            }else {
-                num = "/daemon/saving_throw_d"->will_save(targ, caster_bonus);
-            }
-            break;
-
-        default:
-            num = 0;
-            break;
-        }
-    }*/
-
-    /*if (save_debug) {
-        tell_object(caster, "Shadowdancer reroll on failed enchantment-sphere save!");
-        tell_object(caster, "Type of save actually used in daemon: " + debug_map["save_type"] + "");
-        tell_object(caster, "Saving throw number before any rolls: " + debug_map["final_saving_throw"] + "");
-        tell_object(caster, "DC of saving throw: " + debug_map["dc"] + "");
-        tell_object(caster, "Save result (1 pass, 0 fail): " + debug_map["save_result"] + "");
-        tell_object(caster, "Throw passed or failed by: " + debug_map["pass_or_fail_by"] + "");
-    }*/
 
     if (save_debug) {
         return debug_map["save_result"];
@@ -3153,61 +3043,26 @@ int perfect_filter(object obj)
     return 1;
 }
 
-void get_casting_stat()
+string get_casting_stat()
 {
     string mycastingstat;
+    string fname;
 
     if (!objectp(caster)) {
         return;
     }
-    if (!interactive(caster)) {
+
+    fname = "/std/class/" + spell_type + ".c";
+
+    if (!file_exists(fname)) {
         mycastingstat = "intelligence";
-        return mycastingstat;
+    } else {
+        mycastingstat = fname->query_casting_stat(caster);
+        if (!mycastingstat) {
+            mycastingstat = "intelligence";
+        }
     }
-    switch (spell_type) {
-    case "wizard":
-    case "mage":
-        mycastingstat = "/std/class/mage.c"->query_casting_stat(caster); break;
 
-    case "psion":
-    case "psionics":
-        mycastingstat = "/std/class/psion.c"->query_casting_stat(caster); break;
-
-    case "priest":
-    case "cleric":
-        mycastingstat = "/std/class/cleric.c"->query_casting_stat(caster); break;
-
-    case "ranger":
-        mycastingstat = "/std/class/ranger.c"->query_casting_stat(caster); break;
-
-    case "paladin":
-    case "antipaladin":
-        mycastingstat = "/std/class/paladin.c"->query_casting_stat(caster); break;
-
-    case "druid":
-        mycastingstat = "/std/class/druid.c"->query_casting_stat(caster); break;
-
-    case "bard":
-        mycastingstat = "/std/class/bard.c"->query_casting_stat(caster); break;
-
-    case "sorcerer":
-        mycastingstat = "/std/class/sorcerer.c"->query_casting_stat(caster); break;
-
-    case "inquisitor":
-        mycastingstat = "/std/class/inquisitor.c"->query_casting_stat(caster); break;
-
-    case "oracle":
-        mycastingstat = "/std/class/oracle.c"->query_casting_stat(caster); break;
-
-    case "warlock":
-        mycastingstat = "/std/class/warlock.c"->query_casting_stat(caster); break;
-
-    case "psywarrior":
-        mycastingstat = "/std/class/psywarrior.c"->query_casting_stat(caster); break;
-
-    default:
-        mycastingstat = "intelligence"; break;
-    }
     casting_stat = mycastingstat;
     return mycastingstat;
 }
