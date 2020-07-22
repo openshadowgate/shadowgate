@@ -12,9 +12,6 @@ void create()
     " high and 15 feet long.  It has two large claws and a "+
     "really big tail that looks like it could push a lot of water.");
     set_race("lobster");
-
-
-
     set_class("barbarian");
     set_mlevel("barbarian",46);
     level = 46;
@@ -39,7 +36,7 @@ void create()
     set_stats("constitution",30);
     set_stats("charisma",5);
     set_attacks_num(5);
-    set_damage(3,9);
+    set_damage(3,10);
     set_property("swarm", 1);
     set_new_exp(level, "normal");
     set_size(3);
@@ -59,9 +56,9 @@ void sweep(object targ){
   object * critters;
   critters = query_attackers();
   if (sizeof(critters)<1) return;
-  tell_room(ETO,"%^ORANGE%^Dire lobster sweeps a claw across the room!");
+  tell_room(ETO,"%^ORANGE%^Dire lobster sweeps a %^RED%^claw%^ORANGE%^ across the room!");
   foreach(object ob in critters){
-      tell_object(ob, "%^ORANGE%^The lobster sweeps a claw across the room hitting you hard." );
+      tell_object(ob, "%^ORANGE%^The lobster sweeps a %^RED%^claw%^ORANGE%^ across the room hitting you hard." );
       ob->cause_typed_damwizage(ob, ob->return_target_limb(),random(200),"bludgeoning");
   }
   
@@ -72,7 +69,7 @@ void snip(object targ){
         tell_object(targ,"%^ORANGE%^The Dire lobster's claw snap shut with you in them!");
         if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-30))
           targ->set_paralyzed(10 + random(10),"%^RED%^You are held by lobster claw.");
-        targ->cause_typed_damage(targ, targ->return_target_limb(),random(250),"bludgeoning");
+        targ->cause_typed_damage(targ, targ->return_target_limb(),random(250),"slashing");
     }
     //insta ded for fodder
     else {
