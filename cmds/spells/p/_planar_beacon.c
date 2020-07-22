@@ -77,6 +77,8 @@ void do_summon(object target)
 
     endplace = environment(target);
     startplace = environment(caster);
+    bonus = caster->get_casting_stat();
+    bonus = (bonus - 10) / 2;
 
     if (!objectp(place) || !objectp(endplace)) {
         tell_object(caster, "The summoning has failed.");
@@ -99,6 +101,7 @@ void do_summon(object target)
 
     caster->set_property("spell summon time", time());
     success = 0;
+    fail = 0;
 
     if (!do_save(target, -2)) {
         success = 1;
