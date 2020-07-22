@@ -75,7 +75,8 @@ void spell_effect(int prof)
     if (!intp(num_mon)) {
         num_mon = 0;
     }
-    if (num_mon > 6) {
+    //Up to 8
+    if (num_mon > 32) {
         tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^YOU ARE %^WHITE%^NOT %^WHITE%^WORTHY%^BLACK%^ TO RAISE MORE!%^RESET%^%^RESET%^");
         tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
         TO->remove();
@@ -88,7 +89,7 @@ void spell_effect(int prof)
         undead = new(UNDEADDIR + "skeleton");
         lvl = clevel / 6;
 
-        if (num_mon > 6) {
+        if (num_mon > 32) {
             undead->remove();
             tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^RAISING MORE IS %^WHITE%^BEYOND%^BLACK%^ YOUR PATHETIC %^BLACK%^M%^WHITE%^ASTERY!%^RESET%^%^RESET%^");
             tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
