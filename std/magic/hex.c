@@ -11,7 +11,8 @@ object place;
 
 string hex_desc,
     hex_syntax,
-    hex_effect;
+    hex_effect,
+    hex_name;
 string save_type;
 string arg;
 
@@ -19,9 +20,49 @@ int clevel;
 int arg_needed;
 int non_living_ok;
 
+void set_hex_save(string val)
+{
+    hex_save = val;
+}
+
+string query_hex_save()
+{
+    return hex_save;
+}
+
+void set_hex_syntax(string val)
+{
+    hex_syntax = val;
+}
+
+string query_hex_syntax()
+{
+    return hex_syntax;
+}
+
+void set_hex_effet(string  val)
+{
+    hex_effet = val;
+}
+
+string query_hex_effet()
+{
+    return hex_effet;
+}
+
 int set_save(string str)
 {
     save_type = str;
+}
+
+void set_hex_name(string str)
+{
+    hex_name = str;
+}
+
+string query_hex_name()
+{
+    return hex_name;
 }
 
 string query_save()
@@ -92,8 +133,7 @@ void use_hex(object user, string targ, int cast_level)
         }
     }
 
-
-
+    TO->hex_effect();
 }
 
 int do_save(object targ, int mod)
