@@ -47,7 +47,7 @@ In all matters, uphold what is just and fair, and never betray your trust. Seek 
 
 %^BOLD%^Kreysneothosies has developed the following relationships:
 %^RESET%^%^CYAN%^Allies: %^RESET%^Jarmila, Lysara
-%^CYAN%^Enemies: %^RESET%^The Faceless One, Nilith
+%^CYAN%^Enemies: %^RESET%^The Faceless One, Nilith, Khyron
 
 %^CYAN%^*NOTE:%^WHITE%^ Being an ally or enemy does not necessarily mean you must aid or kill on sight. Determine the best course of action for your character based on your character's beliefs, the other individual(s) in question, and past actions/interactions with the individual(s) and/or their faith.
 
@@ -60,7 +60,7 @@ void purge_sequence(int step){
     object ob;
     if(!objectp(TO)) return;
 
-    switch(step) {		
+    switch(step) {
       case 1:
         tell_room(TO,"%^BOLD%^%^BLACK%^A priest steps forward, coming to pause behind the altar.  He extends his hands to hover only an inch above the spear, and closing his eyes, he begins to pray fervently.\n%^RESET%^");
       break;
