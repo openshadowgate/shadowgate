@@ -21,28 +21,10 @@ inherit OB_USER;
 
 int cmd_passwd(string str)
 {
-    
-    string acct, pwd;
-    
+
     if (TP->query_forced()) {
         log_file("illegal", "passwd: (forced): "+ctime(time())+" "+this_player()->query_name()+"\n");
         notify_fail("You must act of your own free will.\n");
-        return 1;
-    }
-    
-    if(archp(this_player()) && strlen(str))
-    {
-        if(sscanf(str, "%s %s", acct, pwd) != 2)
-            return notify_fail("Syntax : 'passwd <player name> <new passwd>'");
-        
-        if(load_object("/adm/obj/user_account")->law_set_password(this_player(), acct, pwd))
-        {
-            printf("Successfully set password for account < %s > to < %s >.\n", acct, pwd);
-            return 1;
-        }
-        else
-            return notify_fail("Account password set failed.");
-        
         return 1;
     }
 
