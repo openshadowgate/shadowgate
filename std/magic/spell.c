@@ -2703,8 +2703,6 @@ varargs int do_save(object targ, int mod)
     }
 
     caster_bonus += (int)caster->query_property("spell dcs");
-//    if(FEATS_D->usable_feat(caster,"spell focus"))          { caster_bonus += 2; }
-// spell focus feat & item "empowered" prop is now picked up together in the "spell dcs" property.
 
     if (save_debug) {
         tell_object(caster, "Presenting saving throw debug info:\n");
