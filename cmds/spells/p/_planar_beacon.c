@@ -77,7 +77,7 @@ void do_summon(object target)
 
     endplace = environment(target);
     startplace = environment(caster);
-    bonus = caster->get_casting_stat();
+    bonus = TO->get_casting_stat();
     bonus = (bonus - 10) / 2;
 
     if (!objectp(place) || !objectp(endplace)) {

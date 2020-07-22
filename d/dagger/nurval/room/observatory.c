@@ -29,3 +29,11 @@ int soulwell_trav()
         TP->cause_typed_damage(TP,TP->return_target_limb(),TP->query_max_hp()/3,"negative energy");
     return 1;
 }
+
+void reset()
+{
+    ::reset();
+
+    if(!present("reaver", TP))
+        new("/realms/kismet/mon/ashraplot/d_priest")->move(TO);
+}
