@@ -10,7 +10,7 @@ void create(){
     set_travel(GAME_TRACK);
     set_climate("mountain");
     set_name("water garden");
-    set_short("water garden");
+    set_short("%^BOLD%^%^CYAN%^water garden%^RESET%^");
     set_long((:TO,"long_desc":));
 	set("night long",(:TO,"night_desc":));
     set_exits(([
@@ -78,7 +78,8 @@ int GoThroughDoor() {
 }
 string long_desc(){
   
-   return("%^CYAN%^This is an exotic water garden%^BOLD%^%^BLUE%^.  "+
+   return(query_short() + "\n"+
+   "%^CYAN%^This is an exotic water garden%^BOLD%^%^BLUE%^.  "+
    "%^RESET%^%^CYAN%^The keep is directly above the water shadowing the area%^BOLD%^%^BLUE%^.  "+
    "%^RESET%^%^CYAN%^Few plants are growing here due to the lack of light%^BOLD%^%^BLUE%^.  "+
    "%^RESET%^%^CYAN%^Instead%^BOLD%^%^BLUE%^,%^RESET%^%^CYAN%^ stone pathways curve around "+
@@ -92,7 +93,8 @@ string long_desc(){
  
 }
 string night_desc() {
-   return("%^BLUE%^This appears to be some kind of exotic water garden%^CYAN%^.  "+
+   return(query_short() + "\n"+
+   "%^BLUE%^This appears to be some kind of exotic water garden%^CYAN%^.  "+
    "%^BLUE%^The keep is directly above the water shadowing the area%^CYAN%^.  "+
    "%^BLUE%^Few plants are growing here due to the lack of light%^CYAN%^.  "+
    "%^BLUE%^Instead, stone pathways curve around "+
