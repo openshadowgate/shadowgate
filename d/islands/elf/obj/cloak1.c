@@ -21,8 +21,8 @@ set_lore("The craftsmanship of this piece of clothing seems "+
 set_property("lore difficulty",34);
 set_value(500);
 set_size(2);
-set_property("enchantment",3);
-set_item_bonus("influence",1);
+set_property("enchantment",4);
+set_item_bonus("influence",2);
 set_wear((:TO,"wear_fun":));
 set_remove((:TO,"remove_fun":));
 }
