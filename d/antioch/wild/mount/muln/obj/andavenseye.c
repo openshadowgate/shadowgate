@@ -1,5 +1,5 @@
 #include <std.h>
-inherit "/d/common/obj/jewelry/circlet";
+inherit "/d/common/obj/clothing/hat";
 
 void create(){
    ::create();
@@ -20,7 +20,6 @@ void create(){
    " of this eye-patch, none having the magical abilities of the original, but still quite useful. This appears to be"
    " a copy, because the original is known to offer sight into different %^BOLD%^%^WHITE%^planes of existence%^BLACK%^.%^RESET%^\n");
    set_property("lore difficulty",30);
-   set_weight(8);
    set_size(2);
    set_value(5000);
    set_property("enchantment",4);

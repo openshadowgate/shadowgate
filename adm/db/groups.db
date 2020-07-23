@@ -9,7 +9,7 @@
 # note... a creator's name is the euid for that creator
 # -------------------------------------------------------------
 
-(superuser): nienne eris ilmarinen nuwisha
+(superuser): nienne eris ilmarinen nuwisha yves
 (assist): Restore eris garrett ilmarinen lujke circe tlaloc tsera yves
 
 (mudlib): lujke ilmarinen
@@ -23,12 +23,12 @@
 (tutor): garrett
 
 #       Teams
-(area): chernobog circe ergo essyllis garrett lujke nienne octothorpe odin titania tlaloc uriel tsera yves hades
+(area): chernobog circe ergo essyllis garrett lujke nienne octothorpe titania tlaloc uriel tsera yves hades
 (help): chernobog kismet titania
 
 #	Class coding teams
 #       (with write access to certain /cmds and /std dirs)
-(usercmd): garrett nienne lujke tlaloc odin titania hades
+(usercmd): garrett nienne lujke tlaloc titania hades
 
 #       Areas of the game (/d)
 (attaya): lujke

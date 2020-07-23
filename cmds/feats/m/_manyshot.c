@@ -95,7 +95,7 @@ void execute_feat()
     if (weapons[0]->is_lrweapon()) {
         ammo = present(weapons[0]->query_ammo(), caster);
     }
-    if (weapons[1]->is_lrweapon()) {
+    if (sizeof(weapons) > 1 && weapons[1]->is_lrweapon()) {
         ammo = present(weapons[1]->query_ammo(), caster);
     }
     if (!ammo) {
