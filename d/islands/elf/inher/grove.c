@@ -42,7 +42,7 @@ void create(){
     set_repop(40);
     set_climate("mountain");
     set_name("Grove");
-    set_short("Grove");
+    set_short("%^BOLD%^%^GREEN%^Ashta'Rathai Grove%^RESET%^");
     set_long((:TO,"long_desc":));
         set("night long",(:TO,"night_desc":));
         set_items(([
@@ -75,7 +75,8 @@ void create(){
 
 string long_desc(){
   if (season(time()) == "winter") 
-   return("%^CYAN%^In the winter this elven meadow has"+
+   return(query_short() + "\n"+
+   "%^CYAN%^In the winter this elven meadow has"+
    " a %^BOLD%^chill breeze%^RESET%^.  %^CYAN%^The grove is "+
    "filled with a thick mist%^RESET%^.%^CYAN%^  Many "+
    "%^RESET%^beautiful plants%^CYAN%^ adorn the grove "+
@@ -90,7 +91,8 @@ string long_desc(){
 "\n");
    
    if (season(time()) == "autumn") 
-     return("%^ORANGE%^In the autumn%^GREEN%^,%^ORANGE%^ this elven meadow changes"+
+     return(query_short() + "\n"+
+     "%^ORANGE%^In the autumn%^GREEN%^,%^ORANGE%^ this elven meadow changes"+
          " to shades of orange and red as trees prepare "+
          "for the winter%^GREEN%^.%^ORANGE%^  It is filled with a %^CYAN%^cool mist%^GREEN%^."+
          "  %^ORANGE%^Many beautiful and mystical plants shed their "+
@@ -100,7 +102,8 @@ string long_desc(){
          "%^CYAN%^water%^ORANGE%^ falling down from a steep cliff%^GREEN%^.  "+
          "%^ORANGE%^Beautiful streams flow through the groves%^GREEN%^."+
          "  %^ORANGE%^The water warms the grove.");
-  return ("%^GREEN%^"+
+  return (query_short() + "\n"+
+  "%^GREEN%^"+
     "This %^BOLD%^elven meadow%^RESET%^%^GREEN%^ is lush and filled with a pleasantly cool "+
         "mist%^BOLD%^%^BLUE%^.  %^RESET%^%^GREEN%^Many beautiful and %^CYAN%^mystical plants%^GREEN%^ adorn the grove%^BLUE%^%^BOLD%^."+
         "  %^RESET%^%^GREEN%^Several huts can be seen high in the trees%^BOLD%^%^BLUE%^.  "+
@@ -114,7 +117,8 @@ string long_desc(){
 
 }
 string night_desc() {
-  return ("%^BLUE%^At night%^CYAN%^, the elven grove is quite dark%^CYAN%^."+
+  return (query_short() + "\n"+
+  "%^BLUE%^At night%^CYAN%^, the elven grove is quite dark%^CYAN%^."+
   "%^BLUE%^  It is cool and %^CYAN%^mist%^BLUE%^ fills the area%^CYAN%^.%^BLUE%^  Many beautiful"+
   " and %^CYAN%^mystical plants%^BLUE%^ adorn the grove%^CYAN%^.%^BLUE%^  Several trees "+
   "cast shadows from the limited starlight and moonlight "+
