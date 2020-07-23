@@ -10,7 +10,8 @@ void create()
 {
     ::create();
     set_spell_name("litany of madness");
-    set_spell_level(([ "paladin" : 4,"inquisitor":6 ]));
+    set_spell_level(([ "paladin" : 4,"inquisitor":6, "oracle" : 6 ]));
+    set_mystery("lunar");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS litany of madness TARGET");
     set_damage_desc("continuously confuses target");

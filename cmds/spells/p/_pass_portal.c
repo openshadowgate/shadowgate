@@ -11,7 +11,8 @@ object dest;
 void create() {
     ::create();
     set_spell_name("pass portal");
-    set_spell_level(([ "cleric" : 6 ]));
+    set_spell_level(([ "cleric" : 6, "oracle" : 6 ]));
+    set_mystery("waves");
     set_spell_sphere("alteration");
     set_domains("travel");
     set_syntax("cast CLASS pass portal on <direction>");
