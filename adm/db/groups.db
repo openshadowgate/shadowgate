@@ -9,8 +9,8 @@
 # note... a creator's name is the euid for that creator
 # -------------------------------------------------------------
 
-(superuser): nienne eris ilmarinen nuwisha yves
-(assist): Restore eris garrett ilmarinen lujke circe tlaloc tsera yves
+(superuser): nienne eris ilmarinen nuwisha yves circe
+(assist): Restore eris garrett ilmarinen lujke circe tlaloc tsera yves odin
 
 (mudlib): lujke ilmarinen
 (daemon): ilmarinen lujke circe tsera yves
