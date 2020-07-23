@@ -47,7 +47,7 @@ Let the world burn and the seas roil with the fury of the Ravager. Strike out li
 
 %^BOLD%^Khyron has developed the following relationships:
 %^RESET%^%^CYAN%^Allies: %^RESET%^Nilith
-%^CYAN%^Enemies: %^RESET%^Ryorik, Nimnavanon, Kreysneothosies
+%^CYAN%^Enemies: %^RESET%^Nimnavanon, Kreysneothosies, Seija
 
 %^CYAN%^*NOTE:%^WHITE%^ Being an ally or enemy does not necessarily mean you must aid or kill on sight. Determine the best course of action for your character based on your character's beliefs, the other individual(s) in question, and past actions/interactions with the individual(s) and/or their faith.
 CHARGE

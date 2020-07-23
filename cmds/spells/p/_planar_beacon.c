@@ -15,7 +15,7 @@ void create()
     set_spell_level(([ "mage" : 9, "cleric" : 9]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS planar beacon on TARGET");
-    set_description("This spell pinpoints a foe, regardless of what plane they are on, making them glow like a beacon within the weave. They can then attempt to draw this beacon to their current location. However, a foe with the strength of mind to resist may cause the spell to backfire, instead sending the caster to his or her target. Once this spell is used, the caster must rest for a short while before attempting its use again.");
+    set_description("This spell pinpoints a foe, regardless of what plane they are on, making them glow like a beacon within the weave. They can then attempt to draw this beacon to their current location. However, a foe with the strength of mind to resist may cause the spell to backfire, instead sending the caster to his or her target. Once this spell is used, the caster must rest for a short while before attempting its use again.  Note this spell will automatically fail if either the caster or target are within the protection of a temple.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -66,7 +66,7 @@ void spell_effect(int prof)
 
 void do_summon(object target)
 {
-    object* party, endplace;
+    object* party, endplace, target_room, startplace;
     int i, success, fail, targlevel, mylevel;
     int mypower, startpower, endpower, bonus;
 
@@ -74,29 +74,26 @@ void do_summon(object target)
         dest_effect();
         return;
     }
-    if (!objectp(environment(caster)) || !objectp(environment(target))) {
+
+    endplace = environment(target);
+    startplace = environment(caster);
+    bonus = TO->get_casting_stat();
+    bonus = (bonus - 10) / 2;
+
+    if (!objectp(place) || !objectp(endplace)) {
         tell_object(caster, "The summoning has failed.");
         dest_effect();
         return;
     }
-    if ((int)environment(caster)->query_property("no teleport") || (int)environment(target)->query_property("no teleport")) {
-        tell_object(caster, "You try to tug the beacon through the weave to you, but interference causes you to fail.");
-        dest_effect();
-        return;
-    }
-    endplace = environment(target);
-    if (endplace &&
-        (endplace->query_property("teleport proof") || place->query_property("teleport proof") || !endplace->is_room())) {
-        startpower = place->query_property("teleport proof");
-        endpower = endplace->query_property("teleport proof");
-        bonus = caster->get_casting_stat();
-        bonus = (bonus - 10) / 2;
-        mypower = CLEVEL + bonus + random(6) + 5;
-        if ((mypower < startpower) || (mypower < endpower)) {
-            tell_object(caster, "You try to tug the beacon through the weave to you, but interference causes you to fail.");
-            dest_effect();
-            return;
-        }
+
+    if(endplace->is_temple() || startplace->is_temple() )
+        return notify_fail("You feel a divine intervention disrupt your beacon.");
+
+    if(!TELEPORT->object_can_be_teleported(target,endplace,clevel))
+    {
+      tell_object(caster, "You try to tug the beacon through the weave to you, but interference causes you to fail.");
+      dest_effect();
+      return;
     }
 
     // This increments intentionally. Player has about two chances to
@@ -104,6 +101,7 @@ void do_summon(object target)
 
     caster->set_property("spell summon time", time());
     success = 0;
+    fail = 0;
 
     if (!do_save(target, -2)) {
         success = 1;
@@ -135,7 +133,7 @@ void do_summon(object target)
         tell_object(caster, "%^BOLD%^%^BLUE%^You try to forcefully drag " + target->QCN + " through the weave to you, but the "
                     "spell backfires and you are thrown forward to appear before " + target->QO + "!");
         tell_object(caster, "%^BOLD%^You are transported to another place!");
-        tell_room(ENV(caster), "%^BOLD%^%^CYAN%^" + target->QCN + " disappears in a flash!.");
+        tell_room(place, "%^BOLD%^%^CYAN%^" + target->QCN + " disappears in a flash!.");
         TELEPORT->teleport_object(caster, caster, ENV(target), clevel);
         dest_effect();
         return;

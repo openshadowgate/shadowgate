@@ -18,7 +18,7 @@ void create()
     set_syntax("cast CLASS create undead");
     set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something more potent and powerful that can serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel the new shell is twisted and changed forever.
 
-Unlike the animate dead spell, this spell allows you to go over your undead poolsize unless you already exhausted it.
+Unlike the animate dead spell, these undead will use 2 levels of poolsize each (of a maximum 6).
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
@@ -48,7 +48,7 @@ void spell_effect(int prof)
     object controller, undead, corpse, *corpses=({}), *undeadl;
     int lvl;
 
-    if ((int)caster->query_property("raised") > 6) {
+    if ((int)caster->query_property("raised") >= 6) {
         tell_object(caster, "%^BOLD%^%^BLACK%^A PATHETIC WEAKLING SUCH AS YOURSELF SHALL NOT RAISE MORE!%^RESET%^");
         TO->remove();
         return;
@@ -88,7 +88,7 @@ void spell_effect(int prof)
         controller->move(caster);
     }
 
-    lvl = clevel/4;
+    lvl = 2;
     undead->set_property("raised",lvl);
     undead->set_property("minion",caster);
 

@@ -19,8 +19,9 @@
 
 inherit OB_USER;
 
-int cmd_passwd()
+int cmd_passwd(string str)
 {
+
     if (TP->query_forced()) {
         log_file("illegal", "passwd: (forced): "+ctime(time())+" "+this_player()->query_name()+"\n");
         notify_fail("You must act of your own free will.\n");

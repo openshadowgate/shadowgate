@@ -1,6 +1,8 @@
 #PI
 /daemon/save
 /adm/db/groups.db
+/adm/db/access.db
+/adm/db/privs.db
 /adm/save
 /log
 /realms

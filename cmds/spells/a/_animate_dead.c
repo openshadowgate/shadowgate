@@ -18,7 +18,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animate dead [on TARGET]");
     set_damage_desc("raises no more than four skeletal champions");
-    set_description("%^RESET%^With this spell, the caster uses remnants of the negative energy released upon a recent death in order to bend the deceased to the will of the caster. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of this spell are known to be inherently evil.
+    set_description("%^RESET%^With this spell, the caster uses remnants of the negative energy released upon a recent death in order to bend the deceased to the will of the caster. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of this spell are known to be inherently evil. Each skeleton will use 1 pool level (of a maximum 6).
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
@@ -75,7 +75,7 @@ void spell_effect(int prof)
     if (!intp(num_mon)) {
         num_mon = 0;
     }
-    if (num_mon > 6) {
+    if (num_mon >= 6) {
         tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^YOU ARE %^WHITE%^NOT %^WHITE%^WORTHY%^BLACK%^ TO RAISE MORE!%^RESET%^%^RESET%^");
         tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
         TO->remove();
@@ -86,9 +86,9 @@ void spell_effect(int prof)
 
     for (i = 0; i < sizeof(targs) && i < 4; i++) {
         undead = new(UNDEADDIR + "skeleton");
-        lvl = clevel / 6;
+        lvl = 1;
 
-        if (num_mon > 6) {
+        if (num_mon >= 6) {
             undead->remove();
             tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^RAISING MORE IS %^WHITE%^BEYOND%^BLACK%^ YOUR PATHETIC %^BLACK%^M%^WHITE%^ASTERY!%^RESET%^%^RESET%^");
             tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
