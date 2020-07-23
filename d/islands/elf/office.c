@@ -10,8 +10,8 @@ void create(){
     set_travel(PAVED_ROAD);
 	set_property("light",2);
     set_name("office");
-    set_short("office");
-    set_long(
+    set_short("minister's office");
+    set_long("%^BOLD%^%^GREEN%^Minister's office \n\n%^RESET%^"
 "%^GREEN%^This is a bit of a tree house that has been made "+
 "into a large office and storage area.  Unlike a "+
 "conventional tree house the area looks to be formed"+
@@ -41,5 +41,5 @@ void reset() {
   ::reset();
   if(!present("minister"))new(MON"minister")->move(TO);
   if(!present("sign"))new(OBJ"sign1")->move(TO);
-  
+  //sign shows a log of recent attacks in city.
 }
