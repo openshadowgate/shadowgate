@@ -13,7 +13,7 @@ void create(){
    set_travel(RUBBLE);
    set_climate("arctic");
    set_name("underwater ruin");
-   set_short("underwater ruin");
+   set_short("%^BOLD%^%^CYAN%^underwater ruin%^RESET%^");
    set_long((:TO,"long_desc":));
    set("night long",(:TO,"night_desc":));
    set_items(([
@@ -28,7 +28,8 @@ void create(){
 
 string long_desc(){
   
-   return("%^CYAN%^This is an ruined road on the sea floor."+
+   return(query_short() + "\n"+
+      "%^CYAN%^This is a ruined road on the sea floor."+
    "  The ocean swirls all around and above are ice bergs "+
    "floating on the water surface.  The road is little more "+
    "than dislodged bricks mixed with gray mud of the sea floor."+
@@ -36,10 +37,11 @@ string long_desc(){
  
 }
 string night_desc() {
-   return("%^BLUE%^At night there is barely any light on this"+
+   return(query_short() + "\n"+
+      "%^BLUE%^At night there is barely any light on this"+
    " ruined road.  The road is in a terrible state like an "+
    "earthquake destroyed it.  The years of being under water"+
-   " and sediment make it more of a ruin than a road."+
+   " and sediment make it more of a muddy ruin than a road."+
 "\n");
 }
 
