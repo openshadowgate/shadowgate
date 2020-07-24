@@ -77,8 +77,6 @@ void do_summon(object target)
 
     endplace = environment(target);
     startplace = environment(caster);
-    bonus = TO->get_casting_stat();
-    bonus = to_int( (bonus - 10) / 2 );
 
     if (!objectp(place) || !objectp(endplace)) {
         tell_object(caster, "The summoning has failed.");
