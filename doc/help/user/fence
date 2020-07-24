@@ -1,0 +1,29 @@
+Fencing:
+
+Thieves and bards have the ability to steal items and gold, through past 
+experience exp can not be directly gained from the use of these skills.
+The ability to fence is a way for thieves to actually begin using the
+thieving skills effectively and gain the experience they deserve. 
+
+In each thief's guild there will be a fence. That fence will look
+much like a shop keeper. Except you will be able to <launder amount gold>.
+Only gold you've stolen can be laundered. You will be able to <fence item>.
+Only items you've stolen can be fenced. You will get some amount of the 
+value back. It will be put into your thief account. This will be credit
+usable at a thief store. So say you have stolen 1000 gold and laundered it
+and the fence has given you 50% credit. That means you have 500 gold on 
+account. You can then use that to purchase things from the fences store.
+Items fenced will appear over time back in stores. So thieves are
+encouraged to use these accounts to get rare items. You will also receive
+exp for money you launder and items you fence. This is mostly level
+relative. However, difficulty is taken into consideration. Also
+note that as a fence gets to know you better, their fees drop. So the more
+you steal the more you get...
+
+Commands of interest with the fence.
+fence
+launder
+account
+buy
+value
+
