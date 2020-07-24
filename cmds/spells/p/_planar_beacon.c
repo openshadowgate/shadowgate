@@ -68,7 +68,7 @@ void do_summon(object target)
 {
     object* party, endplace, target_room, startplace;
     int i, success, fail, targlevel, mylevel;
-    int mypower, startpower, endpower, bonus;
+    int mypower, startpower, endpower, bonus = 0;
 
     if (!objectp(caster) || !objectp(target)) {
         dest_effect();

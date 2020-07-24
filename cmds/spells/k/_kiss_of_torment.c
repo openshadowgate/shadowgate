@@ -52,7 +52,7 @@ void spell_effect(int prof) {
 
 void next_damage(object targ, int count)
 {
-    if(do_save(targ,-1)) {
+    if(do_save(targ,-1) || count > 2) {
         dest_effect();
         return;
     }
@@ -67,7 +67,6 @@ void next_damage(object targ, int count)
         break;
 
     default:
-        dest_effect();
         return;
     }
 
