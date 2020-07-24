@@ -74,7 +74,7 @@ void spell_effect(int prof) {
     }
 
     target->set_property("spelled", ({TO}));
-    target->set_property("regeneration_spell");
+    target->set_property("regeneration_spell", 1);
     addSpellToCaster();
     spell_successful();
 
