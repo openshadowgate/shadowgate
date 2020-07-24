@@ -55,7 +55,7 @@ void spell_effect(int prof)
     }
     arg = lower_case(arg);
     if (!(targ = find_player(caster->realNameVsProfile(arg)))) {
-        tell_object(CASTER, capitalize(targ) + " cannot be found to establish a link.\n");
+        tell_object(CASTER, targ->QCN + " cannot be found to establish a link.\n");
         TO->remove();
         return;
     }
@@ -78,7 +78,7 @@ void do_summon(object target)
     endplace = environment(target);
     startplace = environment(caster);
     bonus = TO->get_casting_stat();
-    bonus = (bonus - 10) / 2;
+    bonus = to_int( (bonus - 10) / 2 );
 
     if (!objectp(place) || !objectp(endplace)) {
         tell_object(caster, "The summoning has failed.");
