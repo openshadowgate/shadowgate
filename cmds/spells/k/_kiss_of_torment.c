@@ -67,6 +67,7 @@ void next_damage(object targ, int count)
         break;
 
     default:
+        dest_effect();
         return;
     }
 
