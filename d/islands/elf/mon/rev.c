@@ -1,4 +1,5 @@
 #include <std.h>
+#include "../elf.h"
 inherit MONSTER;
 
 create (){
@@ -63,6 +64,9 @@ set_monster_feats(({
     "greater rage",
     "spell reflection",
       })); 
+
+new(obj+"weed_cloak")->move(TO);
+force_me("wearall");
 }
 
 void init(){
