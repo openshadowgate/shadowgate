@@ -4,7 +4,10 @@
 
 inherit SPELL;
 
+#define SECONDARYOBS "/d/magic/obj/eldritch_effects/"
+
 string blasttype, element;
+int lifesteal, washealed;
 
 void create() {
     ::create();
@@ -65,7 +68,7 @@ string query_cast_string() {
 }
 
 void spell_effect(int prof) {
-    int damage, i, hellfire, lifesteal;
+    int damage, i, hellfire;
     string descriptor;
     object *attackers;
 
@@ -120,6 +123,91 @@ void spell_effect(int prof) {
         }
     }
     dest_effect();
+}
+
+void do_secondary(object victim) {
+    int duration;
+    object secondary;
+    if(!objectp(victim)) return;
+
+    switch(blasttype) { // secondary effects! These will be tracked & maintained by objects on the target, to prevent glitches.
+      case "frightful":
+        set_save("will");
+        if(!do_save(victim,0)) {
+          tell_object(victim,"%^BOLD%^%^WHITE%^The impact of the blast leaves you shaking and fearful!%^RESET%^");
+          tell_room(environment(victim),"%^BOLD%^%^WHITE%^The impact of the blast leaves "+victim->QCN+" shaking!%^RESET%^",victim);
+          duration = 60/ROUND_LENGTH; // shaken, 1min
+          secondary = present("eldritch_frightful_xxx",victim);
+          if(!objectp(secondary)) {
+            secondary = new(SECONDARYOBS"eldritch_frightful");
+            secondary->move(victim);
+          }
+          secondary->activate(duration);
+        }
+      break;
+      case "glacial":
+        set_save("fort");
+        if(!do_save(victim,0)) {
+          tell_object(victim,"%^BOLD%^%^CYAN%^The icy blast chills you to the bone, slowing your movements!%^RESET%^");
+          tell_room(environment(victim),"%^BOLD%^%^CYAN%^The icy blast chills "+victim->QCN+" and slows "+victim->QP+" movements!%^RESET%^",victim);
+          duration = 600/ROUND_LENGTH; // -4 dex, 10min
+          secondary = present("eldritch_glacial_xxx",victim);
+          if(!objectp(secondary)) {
+            secondary = new(SECONDARYOBS"eldritch_glacial");
+            secondary->move(victim);
+          }
+          secondary->activate(duration);
+        }
+      break;
+      case "brimstone":
+        set_save("reflex");
+        if(!do_save(victim,0)) {
+          tell_object(victim,"%^BOLD%^%^RED%^The searing blast sets you aflame!%^RESET%^");
+          tell_room(environment(victim),"%^BOLD%^%^RED%^The searing blast sets "+victim->QCN+" aflame!%^RESET%^",victim);
+          duration = (clevel/5)+1; // 2d6 dmg, 1 round per 5 lvls of warlock
+          secondary = present("eldritch_brimstone_xxx",victim);
+          if(!objectp(secondary)) {
+            secondary = new(SECONDARYOBS"eldritch_brimstone");
+            secondary->move(victim);
+          }
+          secondary->activate(duration,clevel);
+        }
+      break;
+      case "lifedrinker":
+        if(!washealed) { // need this to only trigger once per cast. Else it will be off the charts!!
+          tell_object(caster,"%^BOLD%^%^GREEN%^The blast leeches the life of its target, restoring your health!%^RESET%^");
+          damage_targ(caster,"torso",lifesteal,"untyped");
+          washealed = 1;
+        }
+      break;
+      case "vitriolic":
+        tell_object(victim,"%^BOLD%^%^GREEN%^The noxious blast burns into your skin!%^RESET%^");
+        tell_room(environment(victim),"%^BOLD%^%^GREEN%^The noxious blast burns into "+victim->QCN+"'s skin!%^RESET%^",victim);
+        duration = (clevel/5)+1; // 2d6 dmg, 1 round per 5 lvls of warlock
+        secondary = present("eldritch_vitriolic_xxx",victim);
+        if(!objectp(secondary)) {
+          secondary = new(SECONDARYOBS"eldritch_vitriolic");
+          secondary->move(victim);
+        }
+        secondary->activate(duration,clevel);
+      break;
+      case "beshadowed":
+        set_save("fort");
+        if(!do_save(victim,0)) {
+          tell_object(victim,"%^BOLD%^%^WHITE%^The blast of shadowy energy washes over your vision, blacking out the world around you!%^RESET%^");
+          tell_room(environment(victim),"%^BOLD%^%^WHITE%^"+victim->QCN+" blinks and stares about sightlessly!%^RESET%^",victim);
+          victim->set_temporary_blinded(1); // blinded, 1 round
+        }
+      break;
+      case "binding":
+        set_save("will");
+        if(!do_save(victim,0)) {
+          tell_object(victim,"%^BOLD%^%^WHITE%^Your limbs sieze up as the blast impacts you!%^RESET%^");
+          tell_room(environment(victim),"%^BOLD%^%^WHITE%^"+victim->QCN+"'s limbs appear to sieze up as the blast impacts "+victim->QO+"!%^RESET%^",victim);
+          victim->set_paralyzed(((ROUND_LENGTH-1) * 2),"You can't get your body to move!"); // stunned, 1 round - paralyze is x/2+1 duration in seconds.
+        }
+      break;
+    }
 }
 
 string get_descript() {
