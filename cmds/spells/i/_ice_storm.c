@@ -14,7 +14,7 @@ void create() {
     ::create();
     set_spell_name("ice storm");
     set_spell_level(([ "mage" : 4, "druid" : 4, "oracle" : 4,]));
-    set_mystery("apocalypse");
+    set_mystery( ({ "apocalypse", "winter", "waves" }) );
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS ice storm");
     set_domains(({"water", "storms"}));

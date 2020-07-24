@@ -12,7 +12,8 @@ void create()
 {
     ::create();
     set_spell_name("cone of cold");
-    set_spell_level(([ "mage" : 5, "monk" : 15]));
+    set_spell_level(([ "mage" : 5, "monk" : 15, "oracle" : 5 ]));
+    set_mystery("winter");
     set_spell_sphere("invocation_evocation");
     set_monk_way("way of the elements");
     set_domains(({"water", "cold"}));

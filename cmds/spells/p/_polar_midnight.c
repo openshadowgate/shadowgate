@@ -15,7 +15,7 @@ void create()
     set_spell_name("polar midnight");
     set_spell_level(([ "druid":9,"oracle":9, "cleric":9]));
     set_spell_sphere("alteration");
-    set_mystery("darkness");
+    set_mystery( ({ "darkness", "lunar", "winter" }) );
     set_syntax("cast CLASS polar midnight");
     set_damage_desc("cold, exhaustion");
     set_description("You plunge an area into the brutal chill of the arctic night. Illumination conditions are dropped by to negative level, and all creatures in the area take cold damage. A failed save each round causes them to become exhausted.");

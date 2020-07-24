@@ -15,7 +15,8 @@ void create() {
     ::create();
     set_author("circe");
     set_spell_name("heat metal");
-    set_spell_level(([ "druid" : 2 ]));
+    set_spell_level(([ "druid" : 2, "oracle" : 2 ]));
+    set_mystery("metal");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS heat metal on TARGET");
     set_description("Upon casting this spell, the caster sends forth "

@@ -11,7 +11,8 @@ void create()
 {
     ::create();
     set_spell_name("eclipse");
-    set_spell_level(([ "mage" : 9,]));
+    set_spell_level(([ "mage" : 9, "oracle" : 8 ]));
+    set_mystery("lunar");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS eclipse");
 

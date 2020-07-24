@@ -14,7 +14,7 @@ void create()
     set_spell_name("sleet storm");
     set_spell_level(([ "druid" : 3, "mage" :3,"oracle":3,]));
     set_domains("storms");
-    set_mystery("apocalypse");
+    set_mystery( ({ "apocalypse", "winter" }) );
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sleet storm");
     set_description("The spell sleet storm only works outdoors.  When it is cast, the skies will open up and begin pouring freezing rain on the area.  Within a few moments, howling winds and freezing rain will turn the ground into ice. Movement through the area is difficult and sometimes visibility is obstructed to the point of virtual blindness.");

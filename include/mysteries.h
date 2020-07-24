@@ -20,4 +20,9 @@
 "lore":({"influence","academics","perception"}),\
 "nature":({"survival","healing","perception"}),\
 "stone":({"survival","influence","athletics"}),\
+"metal":({"influence","athletics","endurance"}),\
+"lunar":({"survival","endurance","athletics"}),\
+"waves":({"endurance","healing","academics"}),\
+"wind":({"healing","influence","endurance"}),\
+"winter":({"academics","endurance","survival"}),\
 ])

@@ -13,7 +13,8 @@ void create()
     ::create();
     set_author("ares");
     set_spell_name("air walk");
-    set_spell_level(([ "druid" : 4, "cleric":4, "ranger" : 2 ]));
+    set_spell_level(([ "druid" : 4, "cleric":4, "ranger" : 2, "oracle" : 4 ]));
+    set_mystery("wind");
     set_domains("air");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS air walk on TARGET");

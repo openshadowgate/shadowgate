@@ -11,8 +11,9 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("iron body");
-    set_spell_level(([ "psion" : 8, "mage" : 8 ]));
+    set_spell_level(([ "psion" : 8, "mage" : 8, "oracle" : 9 ]));
     set_spell_sphere("alteration");
+    set_mystery("metal");
     set_syntax("cast CLASS iron body");
     set_description("By using this power, the caster lends some of his psychic energy or arcane spellcraft to "
 "protect himself. It causes the caster to gain a strong resistance to physical attacks, as well as immunity "
