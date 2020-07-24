@@ -31,7 +31,7 @@ void effect(int direction)
 void create(){
     ::create();
     set_spell_name("fiery body");
-    set_spell_level(([ "mage": 9, "oracle" : 9 ]));
+    set_spell_level(([ "mage": 9, "oracle" : 9, "warlock" : 4 ]));
     set_mystery("flame");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS fiery body");
@@ -40,6 +40,7 @@ void create(){
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
+    set_feats_required(([ "warlock" : "infernal practitioner"]));
 }
 
 int preSpell()

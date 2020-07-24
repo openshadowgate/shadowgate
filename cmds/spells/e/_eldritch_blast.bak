@@ -4,25 +4,26 @@
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
-
 inherit SPELL;
 
 #define SECONDARYOBS "/d/magic/obj/eldritch_effects/"
-
 string blasttype, element;
 int lifesteal, washealed;
+void do_secondary(object victim);
+void do_hellfire_damage(object victim, string potency);
+string get_descript();
 
 void create() {
     ::create();
     set_author("nienne");
-    set_spell_name("eldritch chain");
-    set_spell_level(([ "warlock" : 2 ]));
-    set_syntax("cast CLASS eldritch chain on TARGET");
-    set_description("This is an extension of the core spell-like ability of the warlock - the "
-"ability to invoke pure planar energy and hurl it at a foe. Unlike its primary form, the "
-"invocation will leap to secondary targets if they are present, more so as the warlock gains in "
-"strength. As with the eldritch blast, it can be imbued with various essences.\nSee also: <help "
-"blasttype>.");
+    set_spell_name("eldritch blast");
+    set_spell_level(([ "warlock" : 1 ]));
+    set_syntax("cast CLASS eldritch blast on TARGET");
+    set_description("This is the core spell-like ability of the warlock - the ability to invoke "
+"pure planar energy and hurl it at a foe. As it is cast as a ray, it requires a successful ranged "
+"touch attack to hit, and is subject to the usual restrictions of spells and spell-like abilities "
+"(eg/ magic resistance). While initially unremarkable, an accomplished warlock can learn to reshape "
+"such a blast, or to imbue it with various essences.\nSee also: <help blasttype>.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -69,9 +70,8 @@ string query_cast_string() {
 }
 
 void spell_effect(int prof) {
-    int damage, targs, i, j, hellfire;
+    int damage;
     string descriptor;
-    object *foes, *hits;
 
     if(!objectp(target)) {
         tell_object(caster,"Your target has eluded you!");
@@ -83,9 +83,6 @@ void spell_effect(int prof) {
         dest_effect();
         return;
     }
-
-    blasttype = (string)caster->query("warlock_blast_type");
-    
     spell_successful();
     damage = sdamage;
     lifesteal = damage*2/3;
@@ -102,64 +99,19 @@ void spell_effect(int prof) {
 // we're not using this for now as it makes the class incredibly difficult to balance against the rest.
 // we can maybe sub this out for the rangedTouchAC(target) function once it's working pl0x!
 
-    tell_object(caster,"%^MAGENTA%^In a single motion you direct a blast of "+descriptor+" to strike "+target->QCN+" squarely!%^RESET%^");
-    tell_object(target,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" to strike you!%^RESET%^");
-    tell_room(place,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" to strike "+target->QCN+" squarely!%^RESET%^",({ caster, target }));
+      tell_object(caster,"%^MAGENTA%^In a single motion you direct a blast of "+descriptor+" to strike "+target->QCN+" squarely!%^RESET%^");
+      tell_object(target,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" to strike you!%^RESET%^");
+      tell_room(place,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" to strike "+target->QCN+" squarely!%^RESET%^",({ caster, target}) );
 
-    hellfire = FEATS_D->usable_feat(caster, "hellfire blast");
-    
-    if(hellfire)
-    {
-        tell_room(environment(target),"%^BOLD%^%^BLACK%^The eldritch blast blazes with %^RESET%^%^RED%^in%^BOLD%^%^RED%^f%^RESET%^%^RED%^ern%^BOLD%^%^RED%^a%^RESET%^%^RED%^l %^BOLD%^%^BLACK%^power!%^RESET%^");
-        damage_targ(target, target->return_target_limb(), roll_dice(10,6) + damage, "untyped");
-    }
-    else
       damage_targ(target, target->return_target_limb(), damage, element);
-  
-    do_secondary(target);
-/*    }
-    else {
-      tell_object(caster,"%^MAGENTA%^In a single motion you direct a blast of "+descriptor+" at "+target->QCN+", but it misses!%^RESET%^");
-      tell_object(target,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" at you, but it misses!%^RESET%^");
-      tell_room(place,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" at "+target->QCN+", but it misses!%^RESET%^",({ caster, target }));
-      dest_effect(); // chain effect ends if you miss someone!
-      return;
-    } */
-
-// now let's chain to other targets!
-    targs = clevel/5; // 1 extra target per 5 levels can be hit
-// this was making it do less damage than a fireball. That seems unreasonable! So full damage also to splash targets pl0x.
-//    damage = damage/2; // secondary targets take half damage
-
-    foes = all_living(environment(target));
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
-    if (member_array(target,foes) != -1) foes -= ({ target });
-    if (member_array(caster,foes) != -1) foes -= ({ caster });
-    if(FEATS_D->usable_feat(caster,"perfect caster")) foes = filter_array(foes,"perfect_filter",TO);
-    foes = distinct_array(foes);
-    hits = ({});
-
-    for(i=0;i<targs;i++) { // picking up an array of potential targets
-      if(sizeof(foes)) {
-        j = random(sizeof(foes));
-        hits += ({ foes[j] });
-        foes -= ({ foes[j] });
-      }
-    }
-
-    for(i=0;i<sizeof(hits);i++) {
-        tell_object(hits[i],"%^MAGENTA%^The blast of "+descriptor+" arcs to hit you!%^RESET%^");
-        tell_room(place,"%^MAGENTA%^The blast of "+descriptor+" arcs to hit "+hits[i]->QCN+"!%^RESET%^",hits[i]);
-        if(hellfire)
-        {
-            damage_targ(target, target->return_target_limb(), roll_dice(10,6) + damage, "untyped");
-            tell_room(place,"%^BOLD%^%^BLACK%^The eldritch chain blazes with %^RESET%^%^RED%^in%^BOLD%^%^RED%^f%^RESET%^%^RED%^ern%^BOLD%^%^RED%^a%^RESET%^%^RED%^l %^BOLD%^%^BLACK%^power!%^RESET%^");
-        }
-        else
-            damage_targ(hits[i], hits[i]->return_target_limb(), damage, element);
-        do_secondary(hits[i]);
-    }
+      if(FEATS_D->usable_feat(caster,"hellfire blast")) do_hellfire_damage(target,"full");
+      do_secondary(target);
     dest_effect();
+}
+
+void dest_effect() {
+    ::dest_effect();
+    if(objectp(TO)) TO->remove();
 }
 
 void do_secondary(object victim) {
@@ -247,6 +199,14 @@ void do_secondary(object victim) {
     }
 }
 
+void do_hellfire_damage(object victim, string potency) {
+    if(!objectp(victim)) return;
+
+    tell_room(environment(victim),"%^BOLD%^%^BLACK%^The eldritch blast blazes with %^RESET%^%^RED%^in%^BOLD%^%^RED%^f%^RESET%^%^RED%^ern%^BOLD%^%^RED%^a%^RESET%^%^RED%^l %^BOLD%^%^BLACK%^power!%^RESET%^");
+    if(potency == "full") damage_targ(victim, victim->return_target_limb(), roll_dice(10,6), "untyped");
+    else damage_targ(victim, victim->return_target_limb(), roll_dice(5,6), "untyped");
+}
+
 string get_descript() {
     string myreturn;
     switch(blasttype) {
@@ -261,10 +221,4 @@ string get_descript() {
       default: myreturn = "e%^BOLD%^%^MAGENTA%^n%^RESET%^%^MAGENTA%^e%^BOLD%^%^WHITE%^r%^BOLD%^%^MAGENTA%^g%^RESET%^%^MAGENTA%^y"; break;
     }
     return myreturn;
-}
-
-
-void dest_effect() {
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
 }

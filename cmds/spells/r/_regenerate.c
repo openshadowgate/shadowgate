@@ -39,6 +39,7 @@ int preSpell(){
     if (target->query_property("regeneration_spell") ||
         target->query_property("negative energy affinity")) {
         tell_object(caster,"%^BOLD%^%^GREEN%^The spell is forcefully repelled.");
+        return 0;
     }
     return 1;
 }
@@ -56,6 +57,8 @@ void spell_effect(int prof) {
     if (target->query_property("regeneration_spell") ||
         target->query_property("negative energy affinity")) {
         tell_object(caster,"%^BOLD%^%^GREEN%^The spell is forcefully repelled.");
+        dest_effect();
+        return;
     }
 
     if (caster == target) {
@@ -71,7 +74,7 @@ void spell_effect(int prof) {
     }
 
     target->set_property("spelled", ({TO}));
-    target->set_property("regeneration_spell");
+    target->set_property("regeneration_spell", 1);
     addSpellToCaster();
     spell_successful();
 
