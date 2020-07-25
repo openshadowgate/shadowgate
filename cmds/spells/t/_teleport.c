@@ -52,12 +52,13 @@ void spell_effect(int prof) {
                 "in your mind, focusing to bring yourself to it.");
 
     spell_successful();
-
+    
+    //sdamage / 4 because it was killing people - Tlaloc 7.25.20
     if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))
     {
         tell_object(caster,"You sense something is wrong with your spell and it backfires.");
         tell_room(place,caster->QCN+" "+"looks startled.",caster);
-        damage_targ(caster, caster->query_target_limb(), sdamage, "mental");
+        damage_targ(caster, caster->query_target_limb(), sdamage / 4, "mental");
         dest_effect();
 
     }

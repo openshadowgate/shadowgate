@@ -13,7 +13,9 @@ void create() {
     feat_syntax("invisible_thief, step");
     feat_desc("An arcane trickster continues to merge her understanding of stealthy and arcane arts. She learns to become invisible like under greater invisibility spell as a free action.
 
-To become visible again she must use the %^ORANGE%^<step>%^RESET%^ command.");
+To become visible again she must use the %^ORANGE%^<step>%^RESET%^ command.
+
+In addition, this feat gives the Arcane Trickster a passive +5 adjustment to their stab levels.");
     set_target_required(0);
 }
 

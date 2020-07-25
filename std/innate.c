@@ -108,7 +108,14 @@ void InitInnate()
             "undeath ward" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
             ]);
     }
-
+    
+    if(FEATS_D->usable_feat("tricky spells"))
+    {
+        feat_spells += ([
+            "spectral hand" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            ]);
+    }
+    
     // to add new classes or reasons for innates, simply add to feat_spells here before this line.
     newmap = keys(feat_spells);
 
