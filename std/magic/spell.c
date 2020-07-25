@@ -2821,6 +2821,10 @@ varargs int do_save(object targ, int mod)
     caster_bonus += num;
     num = 0;
 
+    //Arcane Trickster gets spell DC bonus when hidden
+    if(FEATS_D->usable_feat(caster, "surprise spells") && (caster->query_invis() || caster->query_hidden()))
+        caster_bonus += 4;
+
 // racial saves from spells here
     if ((string)targ->query_race() == "dwarf") {    //shield & gold dwarf, +2 on saves vs spells
         if ((string)targ->query("subrace") == "shield dwarf" || (string)targ->query("subrace") == "gold dwarf") {
