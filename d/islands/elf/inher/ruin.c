@@ -19,7 +19,7 @@ void create(){
    set("night long",(:TO,"night_desc":));
    set_items(([
       (({"ocean","water"})) :
-        "The ocean is littered with ice bergs.",
+        "The ocean is littered with ice bergs.  You could _swim_ to the surface but the currents are rather wild.",
 	  (({"ice berg","berg"})) : "Large blocks of ice float in the ocean.",
 	   ]));
     set_smell("default","Near freezing water fills your nose.");
@@ -105,4 +105,14 @@ int search_mud(string str){
       obj->kill_ob(TP);
    }
       return 1;
+}
+void init(){
+  ::init();
+  add_action("swim","swim_em");
+}
+int swim_em(){
+   write("%^CYAN%^You swim towards the surface and get pushed by the currents until you are able to grab hold of the ice and pull yourself on top of it.");
+   TP->force_me("emote swims towards the surface and the currents pull them out of sight.");
+   TP->move(ROOMS"shore/flow"+roll_dice(1,5));
+   return 1;
 }

@@ -48,8 +48,9 @@ int touch(object vic) {
 	    if(vic->query_stats("constitution") > 10);
           vic->add_stat_bonus("constitution",-1);
 	    }
-    } 
-	vic->cause_typed_damage(vic,0,roll_dice(10,10),"cold");
+     
+	    vic->cause_typed_damage(vic,0,roll_dice(10,10)+50,"cold");
+    }
     else {
         tell_room(ETO,"%^CYAN%^The sprite %^BLUE%^freezes %^CYAN%^"+VQCN+" solid!");
         vic->die();
