@@ -12,6 +12,8 @@ set_long("This is an undead person who is wearing "+
 " partly detached and waver in the water. "+
 "  It's eye glow red with hatred.");
 set_gender("male");
+set_hd(35,10);
+set_hp(750+random(1000));
 set("race", "undead");
 set_body_type("human");
 set_property("swarm",1);
@@ -30,7 +32,6 @@ set_stats("charisma", 6);
 set_stats("wisdom", 5);
 set("aggressive", 25);
 set_alignment(4);
-set_hp(random(500)+390);
 set_emotes(10,({
     "Revenant says: All dead.",
     "A small fish chews on Revenants flesh",
@@ -49,6 +50,7 @@ set_emotes(10,({
      "Revenant says: I had a child once...",
      "Revenant says: This hatred, it won't let me pass."
 }),0);
+set_hp(query_max_hp());
 set_func_chance(40);
 set_wielding_limbs( ({"left hand","right hand"}) );
 add_money("gold", 20 + random(140));
@@ -64,7 +66,7 @@ set_monster_feats(({
     "greater rage",
     "spell reflection",
       })); 
-
+set_property("water breather", 1);
 new(obj+"weed_cloak")->move(TO);
 force_me("wearall");
 }

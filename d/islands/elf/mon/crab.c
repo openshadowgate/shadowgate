@@ -11,7 +11,8 @@ void create()
     set_long("This is a dire crab.  It is around 12 feet high and"+
     " two giant pincers.  They wander the ocean floor looking for things to eat.");
     set_race("crab");
-
+    set_hd(35,10);
+    set_hp(750+random(1000));
 
 
     set_class("barbarian");

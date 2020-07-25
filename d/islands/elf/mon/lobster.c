@@ -24,7 +24,8 @@ void create()
       })); 
     set_resistance_percent("slashing", 50);
     set_resistance_percent("bludgeoning", 50);
-    set_hp(query_max_hp());
+    set_hd(35,10);
+    set_hp(750+random(1000));
     set_property("swarm", 1);
     set_overall_ac(-35);
     set_size(3);
@@ -50,6 +51,7 @@ void create()
     set_property("water breather", 1);
     set_skill("perception",50); 
     set("aggressive",25);
+    set_hp(query_max_hp());
 }
 
 void sweep(object targ){

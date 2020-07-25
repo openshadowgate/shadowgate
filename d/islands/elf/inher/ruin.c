@@ -23,7 +23,7 @@ void create(){
 	   ]));
     set_smell("default","Near freezing water fills your nose.");
     set_listen("default","You hear swooshing of water currents.");
- 
+   set_property("wild magic", 60);
 }
 
 string long_desc(){
