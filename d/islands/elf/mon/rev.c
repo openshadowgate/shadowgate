@@ -69,7 +69,7 @@ set_monster_feats(({
 set_property("water breather", 1);
 new(OBJ"weed_cloak")->move(TO);
 new(OBJ"ank")->move(TO);
-force_me("wield anchor")
+force_me("wield anchor");
 force_me("wearall");
 }
 
