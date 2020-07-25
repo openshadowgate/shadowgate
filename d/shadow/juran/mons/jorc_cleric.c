@@ -67,10 +67,7 @@ create() {
     	command("speech whisper");
    	set_property("full attacks",1);
     	add_search_path("/cmds/priest");
-   	set_diety("talos");
-   	ob=new("/d/magic/symbols/talos_symbol");
-    		ob->set_property("monsterweapon", 1);
-   		ob->move(TO);
+ 
   	set_spells(({"flame strike",
   		"cause serious wounds",
   		"cause blindness",
