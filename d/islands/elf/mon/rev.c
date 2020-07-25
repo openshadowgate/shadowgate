@@ -67,7 +67,9 @@ set_monster_feats(({
     "spell reflection",
       })); 
 set_property("water breather", 1);
-new(obj+"weed_cloak")->move(TO);
+new(OBJ"weed_cloak")->move(TO);
+new(OBJ"ank")->move(TO);
+force_me("wield anchor")
 force_me("wearall");
 }
 
