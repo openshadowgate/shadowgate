@@ -2822,7 +2822,10 @@ varargs int do_save(object targ, int mod)
     num = 0;
 
     //Arcane Trickster gets spell DC bonus when hidden
-    if(FEATS_D->usable_feat(caster, "surprise spells") && (caster->query_invis() || caster->query_hidden()))
+    //Added check for target in same room
+    if(FEATS_D->usable_feat(caster, "surprise spells") &&
+      (caster->query_invis() || caster->query_hidden()) &&
+      environment(caster) == environment(targ))
         caster_bonus += 4;
 
 // racial saves from spells here
