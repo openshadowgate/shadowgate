@@ -10,7 +10,7 @@ void create()
     feat_category("ArcaneTrickster");
     feat_name("tricky spells");
     feat_prereq("Arcane Trickster L1");
-    feat_desc("An arcane trickster learns how to cast from shadows, therefore learns more both about shadows and casting. Her spellcraft and stealth skills become focused.");
+    feat_desc("An arcane trickster learns how to cast from shadows, therefore learns more both about shadows and casting. Her spellcraft and stealth skills become focused. In addition, the Arcane Trickster gains 'spectral hand' as an innate spell.");
     permanent(1);
 }
 
