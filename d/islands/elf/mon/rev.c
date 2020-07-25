@@ -75,5 +75,6 @@ force_me("wearall");
 
 void init(){
     ::init();
-    force_me("rage");
+    if(!query_property("raged"))
+        force_me("rage");
 }
