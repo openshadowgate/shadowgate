@@ -2,6 +2,7 @@
 #include <std.h>
 #include "../elf.h"
 inherit WATER;
+int items = 1; //has items
 
 void pick_critters();
 
@@ -23,7 +24,9 @@ void create(){
 	   ]));
     set_smell("default","Near freezing water fills your nose.");
     set_listen("default","You hear swooshing of water currents.");
-   set_property("wild magic", 60);
+    set_property("wild magic", 60);
+    set_search("default","Where do you want to search?  The mud maybe?");
+    set_search("mud",(:TO,"search_mud":));  
 }
 
 string long_desc(){
@@ -81,4 +84,25 @@ void pick_critters(){
       }
 return;
 }
-
+int search_mud(string str){
+     object obj;
+     if (!items) {
+     tell_object(TP,"It seems like someone has"+
+      " searched around here already.");
+      return 1;}
+      if(!random(2)){}
+     obj = new("/d/antioch/valley/obj/gem");
+     obj->move(TO);
+     tell_object(TP,"%^CYAN%^Fortune smiles upon you "+
+      "and you find a gem.");
+     items=0;
+   }
+   else{
+      tell_room(TO,"%^RED%^"+TPQCN+
+      " searches the mud and disturbs a long dead corpse who rises in anger.");
+      tell_object(TP,"%^RED%^You search the mud and disturb the resting place of a long dead human.")
+      obj = new(MON"rev");
+      obj->kill_ob(TP);
+   }
+      return 1;
+}
