@@ -199,7 +199,7 @@ int __PayFine(string str) {
    TP->add_money("gold", -fine);
    TP->force_me("save");
    AREALISTS_D->remove_fine(TP, JailLoc, TO);
-   log_file("ICjails", "Fines - "+JailLoc+":  "+TPQCN+" paid "
+   log_file("ICjails", "Fines - "+JailLoc+":  "+TP->query_name()+" paid "
 	"a fine of "+fine+" on "+ctime(time())+".\n");
    write("You slip the pouch full of "+fine+" gold coins successfully into "
 	"the proper slot and hear the jingle as they are counted and "
@@ -255,39 +255,39 @@ int __RemoveName(string str) {
 		"jailer for "+JailLoc+".");
    	"/cmds/avatar/_note.c"->cmd_note("add "+realname+" was %^BOLD%^removed "
          	"from the list of jailers for the "+JailLoc+" jail.%^RESET%^");
-	log_file("ICjails", "Jailers - "+JailLoc+":  "+TPQCN+" removed "
+	log_file("ICjails", "Jailers - "+JailLoc+":  "+TP->query_name()+" removed "
 		+capitalize(realname)+" from the jailers list on "+ctime(time())+".\n");
         break;
       case "prisoners" :
 	AREALISTS_D->remove_prisoner(name, JailLoc, TP);
-   	log_file("ICjails", "Prisoners - "+JailLoc+":  "+TPQCN+" removed "
+   	log_file("ICjails", "Prisoners - "+JailLoc+":  "+TP->query_name()+" removed "
 	    +capitalize(name)+" from the prisoners list on "+ctime(time())+".\n");
 	write("You have removed "+capitalize(name)+" from the "+JailLoc+
 	    " prisoners list.");
 	break;
       case "wanted" :
 	AREALISTS_D->remove_wanted(name, JailLoc, TP);
-   	log_file("ICjails", "Wanted - "+JailLoc+":  "+TPQCN+" removed "
+   	log_file("ICjails", "Wanted - "+JailLoc+":  "+TP->query_name()+" removed "
 	    +capitalize(name)+" from the wanted list on "+ctime(time())+".\n");
 	write("You have removed "+capitalize(name)+" from the "+JailLoc+" wanted list.");
 	write("Please do <list wanted> to confirm you were successful.");
 	break;
       case "banned" :
 	AREALISTS_D->remove_banned(name, JailLoc, TP);
-   	log_file("ICjails", "Banned - "+JailLoc+":  "+TPQCN+" removed "
+   	log_file("ICjails", "Banned - "+JailLoc+":  "+TP->query_name()+" removed "
 	    +capitalize(name)+" from the banned list on "+ctime(time())+".\n");
 	write("You have removed "+capitalize(name)+" from the "+JailLoc+" banned list.");
 	write("Please do <list banned> to confirm you were successful.");
 	break;
       case "fines" :
 	AREALISTS_D->remove_fine(name, JailLoc, TP);
-   	log_file("ICjails", "Fines - "+JailLoc+":  "+TPQCN+" removed the "
+   	log_file("ICjails", "Fines - "+JailLoc+":  "+TP->query_name()+" removed the "
 	    "fine on "+capitalize(name)+" on "+ctime(time())+".\n");
 	write("Please do <list fines> to confirm you were successful.");
 	break;
       case "bounties" :
 	AREALISTS_D->remove_bounty(name, JailLoc, TP);
-   	log_file("ICjails", "Bounties - "+JailLoc+":  "+TPQCN+" removed the "
+   	log_file("ICjails", "Bounties - "+JailLoc+":  "+TP->query_name()+" removed the "
 	    "bounty on "+capitalize(name)+" on "+ctime(time())+".\n");
 	write("You have removed the bounty for "+capitalize(name)+" in "+JailLoc+".");
 	write("Please do <list wanted> to confirm you were successful.");
@@ -348,7 +348,7 @@ int __AddName(string str) {
 	   AREALISTS_D->add_jailer_alias(name, newalias, JailLoc, TP);
 	if(type == "banned")
 	   AREALISTS_D->add_banned_alias(name, newalias, JailLoc, TP);
-   	log_file("ICjails", "Aliases - "+JailLoc+":  "+TPQCN+" added "
+   	log_file("ICjails", "Aliases - "+JailLoc+":  "+TP->query_name()+" added "
 	    +capitalize(newalias)+" for the "+type+" alias list for "
 	    +capitalize(name)+" on "+ctime(time())+".\n");
 	break;
@@ -363,24 +363,24 @@ int __AddName(string str) {
         if(realname == "")  realname = name;  // fix for not having them recognized
         "/cmds/avatar/_note.c"->cmd_note("add "+realname+" was added to the "
             "%^BOLD%^the list of "+JailLoc+" jailers.");
-   	log_file("ICjails", "Jailers - "+JailLoc+":  "+TPQCN+" added "
+   	log_file("ICjails", "Jailers - "+JailLoc+":  "+TP->query_name()+" added "
 	    +capitalize(realname)+" as an authorized jailer on "+ctime(time())+".\n");
         break;
       case "wanted" :
 	AREALISTS_D->add_wanted(name, JailLoc, TP);
-   	log_file("ICjails", "Wanted - "+JailLoc+":  "+TPQCN+" added "
+   	log_file("ICjails", "Wanted - "+JailLoc+":  "+TP->query_name()+" added "
 	    +capitalize(name)+" to the wanted list on "+ctime(time())+".\n");
 	write("You have added "+capitalize(name)+" to the "+JailLoc+" wanted list.");
         break;
       case "banned" :
 	AREALISTS_D->add_banned(name, JailLoc, TP);
-   	log_file("ICjails", "Banned - "+JailLoc+":  "+TPQCN+" added "
+   	log_file("ICjails", "Banned - "+JailLoc+":  "+TP->query_name()+" added "
 	    +capitalize(name)+" to the banned list on "+ctime(time())+".\n");
 	write("You have added "+capitalize(name)+" to the "+JailLoc+" banned list.");
         break;
       case "fine" :
 	AREALISTS_D->add_fine(name, JailLoc, amount, TP);
-   	log_file("ICjails", "Fines - "+JailLoc+":  "+TPQCN+" added "
+   	log_file("ICjails", "Fines - "+JailLoc+":  "+TP->query_name()+" added "
 	    "a fine of "+amount+" for "+capitalize(name)+" on "+ctime(time())+".\n");
 	break;
       case "bounty":
@@ -394,7 +394,7 @@ int __AddName(string str) {
 		return notify_fail("You need "+amount+" gold to put up for the bounty.\n");
 	   TP->add_money("gold", -amount);
 	   TP->force_me("save");
-	   log_file("ICjails", "Bounties - "+JailLoc+":  "+TPQCN+" funded a "
+	   log_file("ICjails", "Bounties - "+JailLoc+":  "+TP->query_name()+" funded a "
 		"bounty of "+amount+" on "+capitalize(name)+" on "
 		+ctime(time())+".\n");
    	   write("You slip the pouch full of "+amount+" gold coins into "
@@ -408,7 +408,7 @@ int __AddName(string str) {
 	   write("You are adding the bounty of "+amount+" to the current bounty "
 	      "of "+currBounty+" for a new total of "+(amount + currBounty)+".");
 	AREALISTS_D->add_bounty(name, JailLoc, amount+currBounty, TP);
-   	log_file("ICjails", "Bounties - "+JailLoc+":  "+TPQCN+" added "
+   	log_file("ICjails", "Bounties - "+JailLoc+":  "+TP->query_name()+" added "
 	    "a bounty of "+amount+" for "+capitalize(name)+" on "+ctime(time())+".\n");
 	break;
      default : write(syntax_msg);
@@ -664,7 +664,7 @@ int __Help(string str) {
      }
      if(avatarp(TP)) {
 	write("%^BOLD%^%^BLUE%^Immortals adding names will have them show up "
-	  "as 'Unkown' to avoid putting real names out there that shouldn't "
+	  "as 'Unknown' to avoid putting real names out there that shouldn't "
 	  "be.  So, you will need to add an alias for the name(s) you know "
 	  "the person goes by even if it's their real name.\n");
      }
