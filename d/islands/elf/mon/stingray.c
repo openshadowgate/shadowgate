@@ -56,13 +56,13 @@ void create()
     set("aggressive",25);
 }
 void snip(object targ){
-    string poisonf;
-    poisonf = PDIR+POISONS[random(sizeof(POISONS))];
+    //string poisonf;
+    //poisonf = PDIR+POISONS[random(sizeof(POISONS))];
     if(userp(targ)){
         tell_room(ETO, "%^ORANGE%^Dire stingray's tail stabs "+targ->query_cap_name()+
         ".");
         tell_object(targ,"%^ORANGE%^Stingray's tail stabs you!");
-        if(!"/daemon/saving_throw_d.c"->fort_save(targ,-30))
+        if(!"/daemon/saving_throw_d.c"->fort_save(targ,-40))
            POISON_D->ApplyPoison(targ,"large_scorpion_venom",TO,"injury");
         targ->cause_typed_damage(targ, targ->return_target_limb(),random(250),"bludgeoning");
     }
