@@ -77,7 +77,7 @@ void reset(){
 void pick_critters(){
       switch(random(8)) {     
         case 0:  break;
-        case 2:  set_monsters( ({MON"bear"}),({1}));
+        case 2:  set_monsters( ({MON"sprite"}),({1}));
                  break;
         case 3:  set_monsters( ({MON"frostgirl"}),({1}));
                  break;
