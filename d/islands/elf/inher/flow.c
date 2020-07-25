@@ -71,7 +71,8 @@ void reset(){
                break;	
       case 6:  tell_room(TO,"%^CYAN%^The wind dies down,"+
 	  " leaving a cold hush.");
-               break;				   }
+               break;				   
+    }
  return;
 }
 void pick_critters(){
@@ -100,8 +101,8 @@ void slippy() {
          tell_room(TO,"%^BLUE%^"+TPQCN+" sinks quickly into the water and disappears!",TP); 
  		 TP->cause_typed_damage(TP,0,roll_dice(1,8+20),"cold"); 
          TP->move(ROOMS"/shore/ruin"+(string)roll_dice(1,10)); 
-         return 0; */
-     } */
+         return 0; 
+     } 
      write("%^CYAN%^You are glad you catch yourself before falling into the sea."); 
  return;    
 }
