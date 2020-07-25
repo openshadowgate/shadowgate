@@ -1,4 +1,4 @@
-include <std.h>
+#include <std.h>
 #include "../elf.h"
 inherit INH"ruin";
 
