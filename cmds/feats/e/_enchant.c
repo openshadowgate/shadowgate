@@ -66,6 +66,7 @@ int cmd_enchant(string str)
 void execute_feat()
 {
     object ob;
+    ::execute_feat();
 
     if (!arg) {
         return help();
@@ -177,13 +178,7 @@ void select_spell(string str, object ob)
  */
 int maximum_enchant_level()
 {
-    return max(({ caster->query_guild_level("mage"),
-                  caster->query_guild_level("sorcerer"),
-                  caster->query_guild_level("oracle"),
-                  caster->query_guild_level("druid"),
-                  caster->query_guild_level("cleric"),
-                  caster->query_guild_level("psion") })) +
-           (int)caster->query_property("empowered");
+    return flevel + caster->query_property("empowered");
 }
 
 void spell_charges(string str, object ob, string spell, string file)
