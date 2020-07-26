@@ -53,6 +53,9 @@ void spell_effect(int prof)
     targets = target_selector();
     targets = target_filter(targets);
     
+    if(member_array(target, target) < 0)
+        targets += ({ target });
+    
     if(!sizeof(targets))
     {
         tell_object(caster, "With no targets, your spell fizzles.");
