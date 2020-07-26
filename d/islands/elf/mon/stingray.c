@@ -52,19 +52,19 @@ void create()
     set_skill("perception", 70);
     set_property("no knockdown", 1);
     set_property("water breather", 1);
+    set_property("function and attack",1);
     set_skill("perception",50); 
     set("aggressive",25);
 }
 void snip(object targ){
-    //string poisonf;
-    //poisonf = PDIR+POISONS[random(sizeof(POISONS))];
+
     if(userp(targ)){
         tell_room(ETO, "%^ORANGE%^Dire stingray's tail stabs "+targ->query_cap_name()+
         ".");
         tell_object(targ,"%^ORANGE%^Stingray's tail stabs you!");
         if(!"/daemon/saving_throw_d.c"->fort_save(targ,-40))
            POISON_D->ApplyPoison(targ,"large_scorpion_venom",TO,"injury");
-        targ->cause_typed_damage(targ, targ->return_target_limb(),random(250),"bludgeoning");
+        targ->cause_typed_damage(targ, targ->return_target_limb(),random(250)+50,"bludgeoning");
     }
     //insta ded for fodder
     else {

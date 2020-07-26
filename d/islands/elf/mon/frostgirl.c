@@ -41,6 +41,7 @@ create() {
    set_new_exp(30,"normal");
    set_max_level(35);
    set_base_damage_type("cold");
+   set_property("function and attack",1);
    set("aggressive",25);
  
 }

@@ -23,9 +23,9 @@ void create()
         "unarmed parry",
       })); 
     set_resistance_percent("slashing", 50);
-    set_resistance_percent("bludgeoning", 50);
+    set_resistance_percent("bludgeoning", 70);
     set_hd(35,10);
-    set_hp(750+random(1000));
+    set_hp(750+random(1500));
     set_property("swarm", 1);
     set_overall_ac(-35);
     set_size(3);
@@ -44,6 +44,7 @@ void create()
     add_attack_bonus(64); 
     set_alignment(4);
     set_property("full attacks",1);
+    set_property("no knockdown", 1);
     set_funcs(({"snip", "sweep"}));
     set_func_chance(75);
     set_skill("perception", 70);
@@ -52,6 +53,7 @@ void create()
     set_skill("perception",50); 
     set("aggressive",25);
     set_hp(query_max_hp());
+    set_property("function and attack",1);
 }
 
 void sweep(object targ){
@@ -71,7 +73,7 @@ void snip(object targ){
         tell_object(targ,"%^ORANGE%^The Dire lobster's claw snap shut with you in them!");
         if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-30))
           targ->set_paralyzed(10 + random(10),"%^RED%^You are held by lobster claw.");
-        targ->cause_typed_damage(targ, targ->return_target_limb(),random(250),"slashing");
+        targ->cause_typed_damage(targ, targ->return_target_limb(),random(250)+50,"slashing");
     }
     //insta ded for fodder
     else {
