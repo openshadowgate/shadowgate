@@ -57,7 +57,7 @@ void reset(){
                break;
       case 2:  tell_room(TO,"%^CYAN%^A thunderous crack rumbles"+
 	  " through the area as a large block of ice breaks above.");
-               break;
+              break;
       case 3:  tell_room(TO,"%^BOLD%^Several odd fish swim past.");
                break;
       case 4:  tell_room(TO,"%^CYAN%^Some strange creature moves along the ocean floor.");
@@ -100,7 +100,7 @@ int search_mud(string str){
    else{
       tell_room(TO,"%^RED%^"+TPQCN+
       " searches the mud and disturbs a long dead corpse who rises in anger.");
-      tell_object(TP,"%^RED%^You search the mud and disturb the resting place of a long dead human.")
+      tell_object(TP,"%^RED%^You search the mud and disturb the resting place of a long dead human.");
       obj = new(MON"rev");
       obj->kill_ob(TP);
    }
