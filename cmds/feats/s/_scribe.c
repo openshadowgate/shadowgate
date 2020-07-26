@@ -66,6 +66,7 @@ void execute_feat()
     object ob, tp;
     int level, number;
     string tmp, str, levelstring;
+    ::execute_feat();
 
     if (!arg) {
         return help();
