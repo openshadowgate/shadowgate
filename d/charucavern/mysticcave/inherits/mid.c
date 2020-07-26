@@ -74,7 +74,7 @@ void create()
     "%^BOLD%^%^RED%^i%^BOLD%^%^BLACK%^ng%^BOLD%^%^CYAN%^ of a heart as it occasionally %^BOLD%^%^YELLOW%^pulsates"+
     "%^BOLD%^%^CYAN%^. The walls of the cavern look veiny, as several different %^BOLD%^%^WHITE%^"+
     "c%^BOLD%^%^YELLOW%^o%^BOLD%^%^WHITE%^l%^BOLD%^%^YELLOW%^o%^BOLD%^%^WHITE%^r%^BOLD%^%^YELLOW%^"+
-    "e%^BOLD%^%^WHITE%^d%^RESET%^%^BOLD%^%^CYAN%^ mineral vines shine through the glow. "+
+    "e%^BOLD%^%^WHITE%^d%^RESET%^%^BOLD%^%^CYAN%^ mineral veins shine through the glow. "+
     "There are no visible cracks in this portion of the cavern and it looks "+
     "even sturdier. The floor and the ceiling %^BOLD%^%^YELLOW%^pulsate%^BOLD%^%^CYAN%^ "+
     "quickly but the hum is much quieter. "+
