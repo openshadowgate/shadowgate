@@ -4105,7 +4105,7 @@ string knownAs(string who)
 string realName(string who)
 {
     foreach(string str in keys(relationships))
-        if(relationships[str, 0] == lower_case(who))
+        if(relationships[str]["default"] == lower_case(who))
             return str;
 }
     
