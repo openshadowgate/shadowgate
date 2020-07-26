@@ -28,6 +28,8 @@ void create()
       })); 
     set_resistance_percent("slashing", 50);
     set_resistance_percent("bludgeoning", 50);
+    set_hd(35,10);
+    set_hp(750+random(1500));
     set_hp(query_max_hp());
     set_property("swarm", 1);
     set_overall_ac(-35);
@@ -40,7 +42,7 @@ void create()
     set_stats("constitution",30);
     set_stats("charisma",5);
     set_attacks_num(5);
-    set_damage(3,9);
+    set_damage(4,9);
     set_property("swarm", 1);
     set_new_exp(level, "normal");
     set_size(3);

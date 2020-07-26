@@ -39,7 +39,7 @@ void create()
     set_stats("constitution",30);
     set_stats("charisma",5);
     set_attacks_num(5);
-    set_damage(3,9);
+    set_damage(4,9);
     set_property("swarm", 1);
     set("aggressive", 6);
     set_new_exp(level, "normal");
