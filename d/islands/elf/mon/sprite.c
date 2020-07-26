@@ -24,7 +24,7 @@ create() {
    set_guild_level("fighter",40);
    set_alignment(8);
    set_funcs( ({"touch"}) );
-   set_func_chance(20);
+   set_func_chance(50);
    set_property("weapon resistance",20);
    set_resistance_percent("cold", 100);
    set_mob_magic_resistance("high");
@@ -38,7 +38,7 @@ create() {
    set_base_damage_type("cold");
  
 }
-int touch(object vic) {
+void touch(object vic) {
     if(userp(vic)){
         tell_object(vic,"%^CYAN%^The sprite's hand chills your soul!");
         tell_room(ETO,"%^CYAN%^The sprite's hand passes into "+VQCN+".",vic);
@@ -56,6 +56,6 @@ int touch(object vic) {
         tell_room(ETO,"%^CYAN%^The sprite %^BLUE%^freezes %^CYAN%^"+VQCN+" solid!");
         vic->die();
     }
-   return 1;
+   return ;
 }
 
