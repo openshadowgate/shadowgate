@@ -9,13 +9,14 @@ int flag;
 create() {
    ::create();
    set_name("%^CYAN%^Ice Sprite%^RESET%^");
-   set_id( ({"ice","ice sprite","monster"}) );
+   set_id( ({"ice","sprite","ice sprite","monster"}) );
    set("short","%^RESET%^%^CYAN%^Ice Sprite%^RESET%^");
     set("long","This is an ice sprite.  It is a swirling mass of snow that floats in the air.  It is vaguely humanoid shaped and gives of a constant power that freezes anything that gets close to it.   Better be careful if you don't want to be frozen by it.");
 
    set_attacks_num(4);
    set_damage(3,8);
    set_hd(40,10);
+   set_race("sprite")
    set_hp(1550+random(1000));
    set_max_hp( query_hp() );
    set_class("fighter");
