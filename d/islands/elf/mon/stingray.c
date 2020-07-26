@@ -33,7 +33,7 @@ void create()
     set_hp(query_max_hp());
     set_property("swarm", 1);
     set_overall_ac(-35);
-    set_size(3);
+    set_body_type("snake");
     add_attack_bonus(65);
     set_stats("strength",28);
     set_stats("dexterity",16);
@@ -41,13 +41,15 @@ void create()
     set_stats("wisdom",12);
     set_stats("constitution",30);
     set_stats("charisma",5);
-    set_attacks_num(5);
+    set_attacks_num(3);
     set_damage(4,9);
     set_property("swarm", 1);
     set_new_exp(level, "normal");
     set_size(3);
     add_attack_bonus(64); 
     set_alignment(4);
+    add_limb("stinger", "head", 0, 0, 0);
+    set_attack_limbs(({"stinger","head"}));
     set_property("full attacks",1);
     set_funcs(({"sting"}));
     set_func_chance(75);
@@ -57,8 +59,11 @@ void create()
     set_property("function and attack",1);
     set_skill("perception",50); 
     set("aggressive",25);
+    set_hit_funcs((["tail":(:TO,"snip":)]));
 }
 void snip(object targ){
+    if(!objectp(targ)) return;
+    if(!objectp(TO)) return;
 
     if(userp(targ)){
         tell_room(ETO, "%^ORANGE%^Dire stingray's tail stabs "+targ->query_cap_name()+

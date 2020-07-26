@@ -18,6 +18,8 @@ void create()
     set_guild_level("barbarian",46);
     set_max_level(47);
     set_property("swarm",1);
+    set_body_type("arachnid");
+    set_attack_limbs(({"tail","right pincer","left pincer"}));
     set_monster_feats(({
         "scramble",
         "unarmed parry",

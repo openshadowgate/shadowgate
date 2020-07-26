@@ -30,7 +30,8 @@ void create()
     set_hp(query_max_hp());
     set_property("swarm", 1);
     set_overall_ac(-35);
-    set_size(3);
+    set_body_type("arachnid");
+    set_attack_limbs(({"right pincer","left pincer"}));
     add_attack_bonus(65);
     set_stats("strength",28);
     set_stats("dexterity",16);
