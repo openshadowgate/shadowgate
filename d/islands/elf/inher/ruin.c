@@ -70,7 +70,7 @@ void reset(){
  return;
 }
 void pick_critters(){
-      switch(random(11)) {     
+      switch(random(10)) {     
         case 0:  break;
         case 1:  set_monsters( ({MON"crab"}),({random(4)+1}));
                  break;
