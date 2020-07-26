@@ -4,7 +4,7 @@ inherit INH"flow";
 
 void create(){
    ::create();
-   set_exits(([ "north": ROOMS"shore/flow9", 
+   set_exits(([ "north": ROOMS"shore/flow10", 
        ]));
 
 }
