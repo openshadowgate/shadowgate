@@ -1674,7 +1674,7 @@ void heart_beat()
         do_healing(calculate_healing());
     else
         calculate_healing();
-    if (userp(TO))
+    if (userp(TO) && interactive(TO))
     {
         if ( (query_idle(TO) > 7260) &&
              !avatarp(TO) &&
