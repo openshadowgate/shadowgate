@@ -6,6 +6,7 @@ void create(){
    ::create();
    set_exits(([ "north": ROOMS"shore/flow2", 
    "south": ROOMS"shore/flow4",
+   "west": ROOMS"shore/flow7",
      ]));
 
 }
