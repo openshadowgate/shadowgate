@@ -65,11 +65,12 @@ void spell_effect(int prof)
         "darkness flows forth towards your enemies.");
     tell_room(place,"%^BOLD%^%^BLACK%^"+ caster->QCN+" hurls "+caster->QP+" fist forth and a beam "
         "of darkness flows towards "+target->QP+" enemies!",({ caster }) );
-    
-    dam = sdamage;    
+        
     
     foreach(object ob in targets)
     {
+        dam = sdamage;
+        
         if(objectp(ob) && environment(ob) == room)
         {
             if(do_save(ob, 0))
