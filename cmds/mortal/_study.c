@@ -392,7 +392,7 @@ int do_id(object myplayer,object obj,string str) {
         return 1;
     }
     if((string)obj->query("effect") == "spell_effect") {
-        if((int)obj->query("level") < (int)myplayer->query_skill("spellcraft")) {
+        if((int)obj->query("level") / 2 < (int)myplayer->query_skill("spellcraft")) {
             myaura = (string)obj->query("spell");
             charges = (string)obj->query("uses");
             write("%^BOLD%^%^YELLOW%^You can detect an enchantment of "+myaura+" with "+charges+
