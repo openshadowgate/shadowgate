@@ -4101,16 +4101,6 @@ string knownAs(string who)
     }
 }
 
-//Replaces commented code below - Tlaloc 7.25.20
-string realName(string who)
-{
-    foreach(string str in keys(relationships))
-        if(relationships[str]["default"] == lower_case(who))
-            return str;
-}
-    
-/*
-//Takes a recognized name and returns the real name 
 string realName(string who)
 {
     mapping temp = ([]);
@@ -4120,14 +4110,10 @@ string realName(string who)
     if (!sizeof(keys(relationships))) {
         return "";
     }
-    //([ who i know : my name for them, ])
-    
-    //({ who knows me })
+
     names = keys(relationships);
 
     for (i = 0; i < sizeof(names); i++) {
-        
-        //temp = how they know me (str)
         temp = relationships[names[i]];
         if (temp == "victim") {
           log_file("user_relationships", ctime(time())+": "+this_object()->query_name()+" tried to pull relationships mapping and pulled victim. PO="+previous_object()+".\n");
@@ -4148,7 +4134,6 @@ string realName(string who)
 
     return "";
 }
-*/
 
 string realNameVsProfile(string who)
 {
