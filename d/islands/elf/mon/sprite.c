@@ -38,7 +38,7 @@ create() {
  
 }
 int touch(object vic) {
-    if(userp(targ)){
+    if(userp(vic)){
         tell_object(vic,"%^CYAN%^The sprite's hand chills your soul!");
         tell_room(ETO,"%^CYAN%^The sprite's hand passes into "+VQCN+".",vic);
 
