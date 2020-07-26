@@ -90,7 +90,7 @@ int search_mud(string str){
      tell_object(TP,"It seems like someone has"+
       " searched around here already.");
       return 1;}
-      if(!random(2)){}
+      if(!random(2)){
      obj = new("/d/antioch/valley/obj/gem");
      obj->move(TO);
      tell_object(TP,"%^CYAN%^Fortune smiles upon you "+
