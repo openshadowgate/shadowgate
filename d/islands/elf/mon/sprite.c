@@ -16,7 +16,7 @@ create() {
    set_attacks_num(4);
    set_damage(3,8);
    set_hd(40,10);
-   set_race("sprite")
+   set_race("sprite");
    set_hp(1550+random(1000));
    set_max_hp( query_hp() );
    set_class("fighter");
