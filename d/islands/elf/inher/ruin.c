@@ -57,7 +57,7 @@ void reset(){
                break;
       case 2:  tell_room(TO,"%^CYAN%^A thunderous crack rumbles"+
 	  " through the area as a large block of ice breaks above.");
-               break;
+              break;
       case 3:  tell_room(TO,"%^BOLD%^Several odd fish swim past.");
                break;
       case 4:  tell_room(TO,"%^CYAN%^Some strange creature moves along the ocean floor.");
