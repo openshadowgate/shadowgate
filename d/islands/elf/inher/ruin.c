@@ -100,15 +100,16 @@ int search_mud(string str){
    else{
       tell_room(TO,"%^RED%^"+TPQCN+
       " searches the mud and disturbs a long dead corpse who rises in anger.");
-      tell_object(TP,"%^RED%^You search the mud and disturb the resting place of a long dead human.")
+      tell_object(TP,"%^RED%^You search the mud and disturb the resting place of a long dead human.");
       obj = new(MON"rev");
+      obj->move(TO);
       obj->kill_ob(TP);
    }
       return 1;
 }
 void init(){
   ::init();
-  add_action("swim","swim_em");
+  add_action("swim_em","swim");
 }
 int swim_em(){
    write("%^CYAN%^You swim towards the surface and get pushed by the currents until you are able to grab hold of the ice and pull yourself on top of it.");
