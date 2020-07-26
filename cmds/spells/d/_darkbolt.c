@@ -1,6 +1,7 @@
 // Darkbolt
 //Minor chages by ~Circe~ and switched to level 5
 //with the domain rebalancing 4/25/08
+//Rewrite - Tlaloc 7.26.20
 #include <std.h>
 #include <daemons.h>
 
@@ -23,15 +24,18 @@ void create() {
     set_save("reflex");
 }
 
-int preSpell(){
-    if(!objectp(target)){
+int preSpell()
+{
+    if(!objectp(target))
+    {
         tell_object(caster,"This spell requires a target.");
         return 0;
     }
     return 1;
 }
 
-string query_cast_string(){
+string query_cast_string()
+{
     tell_object(caster,"%^BOLD%^%^BLACK%^%^You chant in a secretive whisper,"+
 		" and the shadows swirl around you, congregating in your palms.");
     tell_room(place,"%^BOLD%^%^BLACK%^The shadows swirl around "+caster->QCN+","+
@@ -39,75 +43,55 @@ string query_cast_string(){
     return "display";
 }
 
-void spell_effect(int prof){
-    int damage,i;
-    object *attackers;
-
-    if(!present(target,place)){
-        tell_object(caster,"Your target has left.");
-        dest_effect();
+void spell_effect(int prof)
+{
+    object *targets,
+           room;
+           
+    int dam;
+    
+    targets = target_selector();
+    targets = target_filter(targets);
+    
+    if(!sizeof(targets))
+    {
+        tell_object(caster, "With no targets, your spell fizzles.");
         return;
     }
-
-    attackers = target_selector();
-    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
-    attackers += ({ target });
-    attackers = distinct_array(attackers);
-
-    damage = sdamage;
-
+    
+    room = environment(caster);
+    
     tell_object(caster,"%^BOLD%^%^BLACK%^You hurl your fist towards "+target->QCN+" and a beam of "
-        "darkness flows forth towards "+target->QO+".");
-    tell_object(target,"%^BOLD%^%^BLACK%^A beam of darkness flows forth from "+caster->QCN+"'s "
-        "hand towards you!");
+        "darkness flows forth towards your enemies.");
     tell_room(place,"%^BOLD%^%^BLACK%^"+ caster->QCN+" hurls "+caster->QP+" fist forth and a beam "
-        "of darkness flows towards "+target->QCN+"!",({ caster, target}) );
-    if(sizeof(attackers)){
-        for(i=0;i<sizeof(attackers);i++){
-            if(!objectp(attackers[i])) { continue; }
-            if(attackers[i] == target){
-                if(!do_save(target,0)) {
-               //if (!SAVING_D->saving_throw(target, "spell")){
-                  tell_object(target,"%^BLUE%^The beam of darkness strikes you, ravaging your mind.");
-                  tell_room(environment(target),"%^BLUE%^The beam of darkness strikes "+target->QCN+".", target);
-                  damage_targ(target, "torso", damage/2,"cold");
-                  damage_targ(target, "torso", damage/2,"electricity");
-                  spell_kill(target,caster);
-              }else{
-                  tell_object(target,"%^BLUE%^The beam grazes you.");
-                  tell_room(environment(caster),"%^BLUE%^The beam almost misses "+target->QCN+".",target);
-                  damage_targ(target, "torso", damage/2,"cold");
-                  spell_kill(target,caster);
-              }
-           }else{
-               if(!do_save(target,0)) {
-              //if(!SAVING_D->saving_throw(target,"spell")){
-                 tell_object(attackers[i],"%^BLUE%^The beam of darkness "+
-                    "aimed at "+target->QCN+" tears through you!%^RESET%^");
-                 tell_room(environment(caster),"%^BLUE%^The beam of "+
-                    "darkness tears through "+
-                    ""+attackers[i]->QCN+"!%^RESET%^",attackers[i]);
-                  damage_targ(target, "torso", damage/2,"cold");
-                  damage_targ(target, "torso", damage/2,"electricity");
-                 spell_kill(target,caster);
-              }else{
-                 tell_object(attackers[i],"%^BLUE%^The beam of darkness "+
-                    "aimed at "+target->QCN+" grazes you!%^RESET%^");
-                 tell_room(environment(caster),"%^BLUE%^The beam of "+
-                    "darkness grazes "+
-                    ""+attackers[i]->QCN+"!%^RESET%^",attackers[i]);
-                  damage_targ(target, "torso", damage/2,"cold");
-                 spell_kill(target,caster);
-              }
-           }
+        "of darkness flows towards "+target->QP+" enemies!",({ caster }) );
+        
+    
+    foreach(object ob in targets)
+    {
+        dam = sdamage;
+        
+        if(objectp(ob) && environment(ob) == room)
+        {
+            if(do_save(ob, 0))
+            {
+                dam /= 2;
+                tell_room(room, "%^BLUE%^" + sprintf("The beam of darkness grazes %s.", ob->QCN));               
+            }
+            else
+                tell_room(room, "%^BLUE%^" + sprint("The beam of darkness strikes %s!", ob->QCN));
+            
+            damage_targ(ob, ob->return_target_limb(), dam / 2, "cold");
+            damage_targ(ob, ob->return_target_limb(), dam / 2, "electricity");
         }
     }
+    
     spell_successful();
     dest_effect();
 }
 
-void dest_effect(){
+void dest_effect()
+{
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 
