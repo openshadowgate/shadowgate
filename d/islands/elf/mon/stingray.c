@@ -59,7 +59,7 @@ void create()
     set_property("function and attack",1);
     set_skill("perception",50); 
     set("aggressive",25);
-    set_hit_funcs((["tail":(:TO,"snip":)]));
+    set_hit_funcs((["stinger":(:TO,"snip":)]));
 }
 void snip(object targ){
     if(!objectp(targ)) return;
