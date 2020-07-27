@@ -16,7 +16,7 @@ void create()
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
 To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
+To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
     evil_spell(1);
     set_helpful_spell(1);
     set_arg_needed();
@@ -29,6 +29,10 @@ string query_cast_string()
 
 string undead_to_raise()
 {
+    if (caster->is_class("vampire_lord")) {
+        return "vampire_knight";
+    }
+
     return "vampire_spawn";
 }
 

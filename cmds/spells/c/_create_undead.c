@@ -23,7 +23,7 @@ Unlike the animate dead spell, these undead will use 2 levels of poolsize each (
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
 To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
+To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
     evil_spell(1);
     set_components(([
       "mage" : ([ "drop of blood" : 1, ]),
