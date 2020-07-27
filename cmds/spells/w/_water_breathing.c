@@ -9,7 +9,8 @@ object breathob;
 void create(){
     ::create();
     set_spell_name("water breathing");
-    set_spell_level(([ "mage" : 3, "cleric" : 3,"druid" : 3, "psywarrior" : 1, "psion" : 1 ]));
+    set_spell_level(([ "mage" : 3, "cleric" : 3, "oracle" : 3, "druid" : 3, "psywarrior" : 1, "psion" : 1 ]));
+    set_mystery("waves");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS water breathing on TARGET");
     set_description("This spell allows the target to breathe water for a limited period of time.");

@@ -79,7 +79,8 @@ void create()
                   "waves of exhaustion",
                   "prismatic burst",
                   "sunburst",
-                  "sleet storm" }));
+                  "sleet storm",
+		  "greater dispel magic" })); //mad mage should be smart enough to dispel -Ts
 
     set_spell_chance(90);
 

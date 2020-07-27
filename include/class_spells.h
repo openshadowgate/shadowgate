@@ -56,6 +56,16 @@ class_spell_storage =
         ({"entangle", "barkskin", "charm monster", "polymorph self", "wall of thorns", "summon natures ally vi", "animate plants", "shapechange", "shambler"}),
     "stone":
         ({"stone throw", "soften earth", "meld into stone", "obsidian flow", "earth reaver", "wall of stone", "statue", "stone body", "clashing rocks"}),
+    "metal":
+        ({"mending", "heat metal", "heart of metal", "keen edge", "greater magic weapon", "blade barrier", "statue", "silver sight", "iron body"}),
+    "lunar":
+        ({"sleep", "dust of twilight", "rage", "moonbeam", "aspect of the wolf", "litany of madness", "eclipse", "polar midnight"}),
+    "waves":
+        ({"endure elements", "fog cloud", "water breathing", "ice storm", "conjure elemental", "pass portal", "vortex", "seamantle", "tidal surge"}),
+    "wind":
+        ({"biting wind", "gust of wind", "cloak of winds", "air walk", "stormwinds", "sirocco", "repulsion", "windstorm", "storm of vengeance"}),
+    "winter":
+        ({"endure elements", "frostfield", "sleet storm", "ice storm", "cone of cold", "frost breath", "hypothermia", "ice mirror", "polar midnight"}),
 ]),
 
 "sorcerer":

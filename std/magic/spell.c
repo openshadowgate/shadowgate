@@ -2781,6 +2781,7 @@ varargs int do_save(object targ, int mod)
 
     caster_bonus = SAVING_THROW_D->magic_save_throw_adjust(targ, caster, );
 
+
 // racial saves from spells here
 
     if (targ->query_race() == "gnome" && spell_sphere == "illusion") {
@@ -2797,6 +2798,15 @@ varargs int do_save(object targ, int mod)
             caster_bonus -= 2;
         }
     }
+
+// Class and feat specific stuff here
+
+    if (FEATS_D->usable_feat(caster, "surprise spells") &&
+        (caster->query_invis() || caster->query_hidden()) &&
+        environment(caster) == environment(targ)) {
+        caster_bonus += 4;
+    }
+
 
     if (save_debug) {
         tell_object(caster, "Level of spell: " + casting_level + "");

@@ -26,7 +26,7 @@ void create()
   add_search_path("/cmds/mage");
   set_hd(40,10);
   set_level(40);
-  set_hp(random(1000)+1000);
+  set_hp(random(2000)+1000);
   set_overall_ac(-30);
   set_alignment(1);
   set_stats("intelligence",19);

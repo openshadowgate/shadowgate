@@ -1,4 +1,5 @@
 #include <std.h>
+#include "../elf.h"
 inherit MONSTER;
 
 create (){
@@ -11,6 +12,8 @@ set_long("This is an undead person who is wearing "+
 " partly detached and waver in the water. "+
 "  It's eye glow red with hatred.");
 set_gender("male");
+set_hd(35,10);
+set_hp(750+random(1000));
 set("race", "undead");
 set_body_type("human");
 set_property("swarm",1);
@@ -20,16 +23,15 @@ set_mlevel("barbarian",46);
 set_guild_level("barbarian",46);
 set_max_level(47);
 set_property("full attacks",1);
-set_overall_ac(-28);
+set_overall_ac(-30);
 set_size(2);
-set_stats("strength", 19);
+set_stats("strength", 25);
 set_stats("intelligence", 6);
 set_stats("dexterity", 19);
 set_stats("charisma", 6);
 set_stats("wisdom", 5);
 set("aggressive", 25);
 set_alignment(4);
-set_hp(random(500)+390);
 set_emotes(10,({
     "Revenant says: All dead.",
     "A small fish chews on Revenants flesh",
@@ -48,13 +50,15 @@ set_emotes(10,({
      "Revenant says: I had a child once...",
      "Revenant says: This hatred, it won't let me pass."
 }),0);
-set_func_chance(40);
+set_attacks_num(5);
+set_hp(query_max_hp());
 set_wielding_limbs( ({"left hand","right hand"}) );
-add_money("gold", 20 + random(140));
+add_money("copper", 200 + random(140));
 set_resistance("negative energy",10);
 set_resistance("positive energy",-10);
-set_resistance_percent("slashing", 50);
-set_resistance_percent("bludgeoning", 50);
+set_resistance_percent("slashing", 70);
+set_resistance_percent("bludgeoning", 70);
+set_mob_magic_resistance("average");
 set_monster_feats(({
     "rage",
     "mobility",
@@ -62,10 +66,20 @@ set_monster_feats(({
     "dodge",
     "greater rage",
     "spell reflection",
+    "mobility",
+    "damage resistance",
+    "blade block",
       })); 
+set_property("water breather", 1);
+set_property("function and attack",1);
+new(OBJ"weed_cloak")->move(TO);
+new(OBJ"ank")->move(TO);
+force_me("wield anchor");
+force_me("wearall");
 }
 
 void init(){
     ::init();
-    force_me("rage");
+    if(!query_property("raged"))
+        force_me("rage");
 }

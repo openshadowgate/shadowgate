@@ -103,9 +103,15 @@ void spell_effect(int prof) {
       tell_object(target,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" to strike you!%^RESET%^");
       tell_room(place,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" to strike "+target->QCN+" squarely!%^RESET%^",({ caster, target}) );
 
+    if(FEATS_D->usable_feat(caster,"hellfire blast"))
+    {
+        tell_room(environment(target),"%^BOLD%^%^BLACK%^The eldritch blast blazes with %^RESET%^%^RED%^in%^BOLD%^%^RED%^f%^RESET%^%^RED%^ern%^BOLD%^%^RED%^a%^RESET%^%^RED%^l %^BOLD%^%^BLACK%^power!%^RESET%^");
+        damage_targ(target, target->return_target_limb(), roll_dice(10,6) + damage, "untyped");
+    }
+    else
       damage_targ(target, target->return_target_limb(), damage, element);
-      if(FEATS_D->usable_feat(caster,"hellfire blast")) do_hellfire_damage(target,"full");
-      do_secondary(target);
+        
+    do_secondary(target);
     dest_effect();
 }
 
@@ -199,6 +205,7 @@ void do_secondary(object victim) {
     }
 }
 
+/*
 void do_hellfire_damage(object victim, string potency) {
     if(!objectp(victim)) return;
 
@@ -206,6 +213,7 @@ void do_hellfire_damage(object victim, string potency) {
     if(potency == "full") damage_targ(victim, victim->return_target_limb(), roll_dice(10,6), "untyped");
     else damage_targ(victim, victim->return_target_limb(), roll_dice(5,6), "untyped");
 }
+*/
 
 string get_descript() {
     string myreturn;

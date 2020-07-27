@@ -41,10 +41,11 @@ create() {
    set_new_exp(30,"normal");
    set_max_level(35);
    set_base_damage_type("cold");
+   set_property("function and attack",1);
    set("aggressive",25);
  
 }
-int touch(object vic) {
+void touch(object vic) {
    tell_object(vic,"%^CYAN%^The woman's hand chills your soul!");
    tell_room(ETO,"%^CYAN%^The figure's hand passes into "+VQCN+".",vic);
    vic->add_exp(-5000);
@@ -55,7 +56,7 @@ int touch(object vic) {
                  vic->add_stat_bonus("constitution",-1);
 	} 
 	vic->cause_typed_damage(vic,0,roll_dice(5,10),"cold");
-   return 1;
+   return ;
 }
 void die(object ob) {
    tell_room(ETO,"%^RED%^The girl vanishes into a flurry of frost.");

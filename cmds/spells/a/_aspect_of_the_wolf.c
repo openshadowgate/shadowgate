@@ -8,7 +8,8 @@ void create()
 {
     ::create();
     set_spell_name("aspect of the wolf");
-    set_spell_level(([ "druid" : 5, "ranger" : 4]));
+    set_spell_level(([ "druid" : 5, "ranger" : 4, "oracle" : 5 ]));
+    set_mystery("lunar");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS aspect of the wolf");
     set_damage_desc("+4 to str and dex, knockdown feat");

@@ -21,7 +21,7 @@
 #include <std.h>
 #include <daemons.h>
 
-inherit WEAPONLESS;
+inherit NPC;
 
 void set_jail_location(string loc); // must match the jail room's location
 void set_jail(string filename);     // main jail filename for the area

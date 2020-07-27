@@ -8,7 +8,8 @@ void create()
 {
     ::create();
     set_spell_name("repulsion");
-    set_spell_level(([ "cleric" : 7, "inquisitor" : 6, "mage" : 6]));
+    set_spell_level(([ "cleric" : 7, "inquisitor" : 6, "mage" : 6, "oracle" : 7 ]));
+    set_mystery("wind");
     set_spell_sphere("abjuration");
     set_domains(({"protection", "law"}));
     set_syntax("cast CLASS repulsion");

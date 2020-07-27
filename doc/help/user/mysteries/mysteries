@@ -16,18 +16,18 @@ Each oracle draws upon a divine mystery to grant her spells and powers. This mys
  * %^BOLD%^%^ORANGE%^Heavens
  * %^BOLD%^%^WHITE%^Life
  * %^BOLD%^%^CYAN%^Lore
- - %^WHITE%^Lunar
- - %^CYAN%^Metal
+ * %^WHITE%^Lunar
+ * %^CYAN%^Metal
  * %^GREEN%^Nature
  * %^BLUE%^Reaper
  * %^MAGENTA%^Shadow
  * %^BOLD%^%^ORANGE%^Solar
  * %^BOLD%^%^MAGENTA%^Spellscar
  * %^ORANGE%^Stone
- - %^BOLD%^%^BLUE%^Waves
+ * %^BOLD%^%^BLUE%^Waves
  * %^MAGENTA%^Whimsy
- - %^CYAN%^Wind
- - %^WHITE%^Winter
+ * %^CYAN%^Wind
+ * %^WHITE%^Winter
 
 To see individual mystery file type, for example, %^ORANGE%^<help flame mystery>%^RESET%^.
 

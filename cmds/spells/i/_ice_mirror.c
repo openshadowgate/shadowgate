@@ -5,7 +5,8 @@ void create()
 {
     ::create();
     set_spell_name("ice mirror");
-    set_spell_level(([ "druid" : 8, "cleric" : 8,]));
+    set_spell_level(([ "druid" : 8, "cleric" : 8, "oracle" : 8 ]));
+    set_mystery("winter");
     set_spell_sphere("divination");
     set_domains("cold");
     set_syntax("cast CLASS ice mirror on TARGET");

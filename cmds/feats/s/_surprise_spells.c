@@ -10,7 +10,7 @@ void create()
     feat_category("ArcaneTrickster");
     feat_name("surprise spells");
     feat_prereq("Arcane Trickster L7");
-    feat_desc("An arcane trickster knows when to cast her spells. Spells she casts on prone, paralyzed or incapacitated opponents will always deal half of the damage more. In addition, all cast spells will be silenced.");
+    feat_desc("An arcane trickster knows when to cast her spells. Spells she casts on prone, paralyzed or incapacitated opponents will always deal half of the damage more. In addition, all cast spells will be silenced. Finally, while invisible or hidden, the Arcane Trickster gets a +4 to spell DC against targets in the same room with them.");
     permanent(1);
 }
 

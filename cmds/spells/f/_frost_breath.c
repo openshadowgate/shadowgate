@@ -11,7 +11,8 @@ inherit SPELL;
 void create(){
     ::create();
     set_spell_name("frost breath");
-    set_spell_level(([ "druid":6]));
+    set_spell_level(([ "druid":6, "oracle" : 6 ]));
+    set_mystery("winter");
     set_spell_sphere("invocation_evocation");
     set_domains("cold");
     set_syntax("cast CLASS frost breath on TARGET");

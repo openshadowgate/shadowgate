@@ -14,6 +14,10 @@ int cmd_bury(string str)
     }
 
     if (str == "all") {
+        if(!present("corpse", ETP)) {
+            write("There are no corpses here.");
+            return 1;
+        }
         while (objectp(ob = present("corpse", ETP))) {
             ob->remove();
         }

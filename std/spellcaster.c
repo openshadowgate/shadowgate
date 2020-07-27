@@ -868,9 +868,11 @@ mapping query_mastered_bonus()
             tmp["warlock"] += ({ "brimstone blast" });
         }
         if (FEATS_D->usable_feat(TO, "infernal practitioner")) {
-            tmp["warlock"] += ({ "hellfire shield", "infernal rain" });
+            tmp["warlock"] += ({ "hellfire shield", "infernal rain", "fiery body", "fire storm", "infernal healing" });
         }
     }
+    
+        
 
     return tmp ? tmp : ([]);
 }

@@ -10,7 +10,7 @@ create() {
    ::create();
    set_name("%^CYAN%^Frost Spirit%^RESET%^");
    set_id( ({"spirit","frost spirit","greater frost spirit","monster"}) );
-   set("short","%^RESET%^%^CYAN%^Greater Frost Spirit%^RESET%^");
+   set("short","%^RESET%^%^CYAN%^Gre%^RESET%^a%^CYAN%^ter Fr%^RESET%^o%^CYAN%^st S%^RESET%^p%^CYAN%^irit%^RESET%^");
     set("long","%^CYAN%^This looks like a blue-white hued"+
 	" female ghost.  An extreme aura of cold emanates"+
 	" from her.   Small flakes of snow fall in her"+
@@ -34,9 +34,6 @@ create() {
    //only fire damages
    set_property("weapon resistance",5);
    set_resistance_percent("cold", 200);
-   set_resistance_percent("water", 100);
-   set_resistance_percent("air", 100);
-   set_resistance_percent("earth", 100);
    set_resistance_percent("bludgeoning", 100);
    set_resistance_percent("piercing", 100);
    set_resistance_percent("slashing", 100);
@@ -52,8 +49,6 @@ create() {
    set_resistance_percent("untyped", 100);
    set_resistance_percent("mental", 100);
    set_resistance_percent("light", 100);
-   set_resistance_percent("darkness", 100);
-   set_resistance_percent("nature", 100);
    set_property("no death",1);
    set_property("magic",1);
    set_overall_ac(-18);

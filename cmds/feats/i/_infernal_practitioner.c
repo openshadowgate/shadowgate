@@ -10,7 +10,7 @@ void create()
     feat_category("HellfireWarlock");
     feat_name("infernal practitioner");
     feat_prereq("Hellfire warlock L4, No Fear of The Flame");
-    feat_desc("The warlock gains several new invocations which harness his or her command of hellfire. The invocations 'hellfire shield' and 'infernal rain' are added to the known spell list.");
+    feat_desc("The warlock gains several new invocations which harness his or her command of hellfire. The invocations 'hellfire shield', 'infernal rain', 'infernal healing', 'fire storm' and 'fiery body' are added to the known spell list.");
     permanent(1);
     set_required_for(({"hellfire blast"}));
 }

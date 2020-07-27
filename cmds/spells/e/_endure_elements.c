@@ -36,7 +36,8 @@ void create()
     
     set_author("tlaloc");
     set_spell_name("endure elements");
-    set_spell_level( ([ "ranger" : 1, "druid" : 1, "cleric" : 1, "paladin" : 1, "mage" : 1 ]) );
+    set_spell_level( ([ "ranger" : 1, "druid" : 1, "cleric" : 1, "paladin" : 1, "mage" : 1, "oracle" : 1, ]) );
+    set_mystery( ({ "waves", "winter" }) );
     set_spell_sphere("alteration");
     set_syntax("cast CLASS endure elements");
     set_damage_desc("+10 to fire and cold resistance.");

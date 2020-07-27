@@ -8,7 +8,8 @@ void create()
 {
     ::create();
     set_spell_name("cloak of winds");
-    set_spell_level(([ "druid" : 3, "mage" : 3, "ranger" : 3,]));
+    set_spell_level(([ "druid" : 3, "mage" : 3, "ranger" : 3, "oracle" : 3 ]));
+    set_mystery("wind");
     set_domains("air");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS cloak of winds");

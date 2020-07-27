@@ -23,7 +23,7 @@
                          "constructs" : ({ "construct", "golem", "sandman", "sandling" }), \
                          "dwarves"  : ({ "dwarf", "dwarves", "duergar", "construct" }), \
                          "dragonkin"  : ({ "dragonkin", "kobold", "draconian", "dragon", "elven-dragon", "dragonet", "pseudodragon", "drake", "wyvern" }), \
-                         "elementals" : ({ "elemental", "genasi", "earth genasi", "air genasi", "water genasi", "air genasi", "efreet", "djinn", "marid", "genie" }), \
+                         "elementals" : ({ "elemental", "genasi", "earth genasi", "air genasi", "water genasi", "fire genasi", "efreet", "djinn", "marid", "genie" }), \
                          "elves"      : ({ "elf", "elves", "half-elf", "drow", "half-drow", "szarkai" }), \
                          "fey"        : ({ "nymph", "satyr", "dryad", "pixie", "brownie", "feytouched", "fey" }), \
                          "giants"     : ({ "voadkyn", "firbolg", "giant", "titan", "troll" }), \

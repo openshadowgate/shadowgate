@@ -25,7 +25,8 @@ void create(){
    set_travel(PAVED_ROAD);
    set_name("Ashta'Rathai jail");
    set_short("The Ashta'Rathai jail tree");
-   set_long("%^GREEN%^This is a rather large tree with several"+
+   set_long("%^BOLD%^%^GREEN%^Jailer's Office \n\n%^RESET%^"+
+      "%^GREEN%^This is a rather large tree with several"+
    " cages hanging from the branches where criminals are checked"+
    " in before being caged while their fate is decided.  "+
    "There is a simple desk in one corner and several chairs"+

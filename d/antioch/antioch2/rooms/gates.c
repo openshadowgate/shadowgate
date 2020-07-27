@@ -48,10 +48,10 @@ void create()
 void reset()
 {
 	::reset();
-	/*if(!present("guard")) { //commented out due to Ashra plot.  Remove when done.
+        if(!present("guard")) {
 		new(MONS+"paladin")->move(TO);
 		new(MONS+"kyra")->move(TO);
-	}*/
+        }
 }
 
 int go_west()

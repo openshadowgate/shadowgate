@@ -87,10 +87,6 @@ void create(){
 
    	set_property("swarm",1);
      	add_search_path("/cmds/priest");
-   	set_diety("shar");
-   	ob=new("/d/magic/symbols/shar_symbol");
-    		ob->set_property("monsterweapon", 1);
-   		ob->move(TO);
       if(!random(8)){
          new("/d/shadow/juran/weaps/jet_ring")->move(TO);
          force_me("wear ring");
