@@ -7,10 +7,10 @@ void raise_ghosts(int clevel, int limit, object caster, object controller)
     string undeadtype, myrace;
 
     if(objectp(caster))
-        nummon = (int)caster->query_property("raised");
+        nummon = (int)caster->query_property("animus raised");
     else
         nummon = 0;
-    if (nummon > clevel)
+    if (nummon >= 6)
         return 0;
 
     temp=({});
@@ -69,7 +69,7 @@ void raise_ghosts(int clevel, int limit, object caster, object controller)
 
         lvl=clevel;
         nummon += lvl;
-        undead->set_property("raised",lvl/6);
+        undead->set_property("animus raised",1);
         undead->set_property("minion",caster);
         undead->move(environment(caster));
         undead->serve(caster);
