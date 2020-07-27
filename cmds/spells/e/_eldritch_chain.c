@@ -10,7 +10,7 @@ inherit SPELL;
 #define SECONDARYOBS "/d/magic/obj/eldritch_effects/"
 
 string blasttype, element;
-int lifesteal, washealed;
+int lifesteal, washealed, agonize;
 
 void create() {
     ::create();
@@ -105,6 +105,13 @@ void spell_effect(int prof) {
     tell_object(caster,"%^MAGENTA%^In a single motion you direct a blast of "+descriptor+" to strike "+target->QCN+" squarely!%^RESET%^");
     tell_object(target,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" to strike you!%^RESET%^");
     tell_room(place,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" to strike "+target->QCN+" squarely!%^RESET%^",({ caster, target }));
+
+    if(FEATS_D->usable_feat(caster, "mystic arcana"))
+    {
+        agonize = ( caster->query_stats("charisma") - 10 ) / 2;
+        agonize *= ( ( clevel / 18 ) + 1 );
+        damage += agonize;
+    }
 
     hellfire = FEATS_D->usable_feat(caster, "hellfire blast");
     

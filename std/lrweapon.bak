@@ -91,9 +91,6 @@ int __Shoot(string str) {
     int distance,inc,to_hit,tohitroll,damage, hit,perfect, x;
     int thaco, flag, autoAim;
     object current,alt_foe,foe,ammo,env, *roomList;
-    
-    if(this_player()->query_property("minion"))
-        return 1;
 
     if(!str)
         return notify_fail("Syntax: shoot [target] [dir] [distance] || shoot [target] [dir]\n");
@@ -220,10 +217,6 @@ int __Shoot(string str) {
         return 1;
     }
     foe = present(target,current);
-    
-    if(!objectp(foe) || foe->query_unconscious())
-        foe = present(target + " 2", current);
-    
     if(!objectp(foe))
         return notify_fail("There is no "+target+" there!\n");
     if(!TP->ok_to_kill(foe))
