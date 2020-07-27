@@ -42,7 +42,7 @@ void create()
     set_stats("constitution",30);
     set_stats("charisma",5);
     set_attacks_num(3);
-    set_damage(4,9);
+    set_damage(4,10);
     set_property("swarm", 1);
     set_new_exp(level, "normal");
     set_size(3);
@@ -71,7 +71,7 @@ void snip(object targ){
         tell_object(targ,"%^ORANGE%^Stingray's tail stabs you!");
         if(!"/daemon/saving_throw_d.c"->fort_save(targ,-40))
            POISON_D->ApplyPoison(targ,"large_scorpion_venom",TO,"injury");
-        targ->cause_typed_damage(targ, targ->return_target_limb(),random(250)+50,"bludgeoning");
+        targ->cause_typed_damage(targ, targ->return_target_limb(),random(300)+50,"bludgeoning");
     }
     //insta ded for fodder
     else {

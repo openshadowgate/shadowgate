@@ -68,6 +68,7 @@ set_monster_feats(({
     "spell reflection",
     "mobility",
     "damage resistance",
+    "blade block",
       })); 
 set_property("water breather", 1);
 set_property("function and attack",1);

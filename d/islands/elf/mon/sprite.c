@@ -14,7 +14,7 @@ create() {
     set("long","This is an ice sprite.  It is a swirling mass of snow that floats in the air.  It is vaguely humanoid shaped and gives of a constant power that freezes anything that gets close to it.   Better be careful if you don't want to be frozen by it.");
 
    set_attacks_num(4);
-   set_damage(3,8);
+   set_damage(5,8);
    set_hd(40,10);
    set_race("sprite");
    set_hp(1550+random(1000));
@@ -36,6 +36,7 @@ create() {
    set_new_exp(40,"normal");
    set_max_level(45);
    set_base_damage_type("cold");
+   set_skill("perception", 70);
  
 }
 void touch(object vic) {
@@ -50,7 +51,7 @@ void touch(object vic) {
           vic->add_stat_bonus("constitution",-1);
 	    }
      
-	    vic->cause_typed_damage(vic,0,roll_dice(10,10)+50,"cold");
+	    vic->cause_typed_damage(vic,0,roll_dice(10,10)+100,"cold");
     }
     else {
         tell_room(ETO,"%^CYAN%^The sprite %^BLUE%^freezes %^CYAN%^"+VQCN+" solid!");
