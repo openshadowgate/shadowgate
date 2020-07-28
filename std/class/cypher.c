@@ -207,7 +207,7 @@ int caster_level_calcs(object player, string the_class)
 
 mapping class_featmap(string myspec)
 {
-    return ([ 1 : ({ "enhance scroll" }), 4 : ({ "insightful scroll" }), 7 : ({ "clone scroll" }), ]);
+    return ([ 1 : ({ "enhance scroll", "scribe" }), 4 : ({ "insightful scroll" }), 7 : ({ "clone scroll" }), ]);
 }
 
 string* class_skills(object ob)
