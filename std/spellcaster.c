@@ -870,9 +870,9 @@ mapping query_mastered_bonus()
         if (FEATS_D->usable_feat(TO, "infernal practitioner")) {
             tmp["warlock"] += ({ "hellfire shield", "infernal rain", "fiery body", "fire storm", "infernal healing" });
         }
-    }
-    
-        
+        if(FEATS_D->usable_feat(TO, "book of shadows"))
+            tmp["warlock"] += ({ "mending", "minor creation", "tongues", "clairvoyance", "rope trick", "unseen servant" });
+    }       
 
     return tmp ? tmp : ([]);
 }

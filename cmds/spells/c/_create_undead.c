@@ -23,7 +23,7 @@ Unlike the animate dead spell, these undead will use 2 levels of poolsize each (
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
 To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
+To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
     evil_spell(1);
     set_components(([
       "mage" : ([ "drop of blood" : 1, ]),
@@ -48,7 +48,7 @@ void spell_effect(int prof)
     object controller, undead, corpse, *corpses=({}), *undeadl;
     int lvl;
 
-    if ((int)caster->query_property("raised") >= 6) {
+    if ((int)caster->query_property("raised") >= 8) {
         tell_object(caster, "%^BOLD%^%^BLACK%^A PATHETIC WEAKLING SUCH AS YOURSELF SHALL NOT RAISE MORE!%^RESET%^");
         TO->remove();
         return;
@@ -88,8 +88,7 @@ void spell_effect(int prof)
         controller->move(caster);
     }
 
-    lvl = 2;
-    undead->set_property("raised",lvl);
+    undead->set_property("raised", 1);
     undead->set_property("minion",caster);
 
     undead->move(environment(caster));
@@ -105,7 +104,7 @@ void spell_effect(int prof)
     caster->add_follower(undead);
     controller->add_monster(undead);
 
-    caster->set_property("raised", lvl);
+    caster->set_property("raised", 1);
 
     dest_effect();
     spell_successful();

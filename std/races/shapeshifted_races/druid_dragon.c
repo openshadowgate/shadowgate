@@ -16,20 +16,20 @@ void create()
     set_new_damage_type("piercing");    
     set_limbs( ({ "maw","head","torso","right claw", "left claw", "right arm","right arm","left leg","left rear claw","right leg","right rear claw","tail","right wing","left wing" }) );
     set_attack_functions(([ "maw" : (:TO,"bite_attack":), "right claw" : (:TO,"claw_attack":), "left claw" : (:TO,"claw_attack":), "tail" : (:TO,"tail_attack":) ]));
-    set_ac_bonus(-5); // ac bonus is different from the other bonuses because of the way ac is calculated with different body types -Ares
-    set_base_attack_num(2); 
+    set_ac_bonus(-20); // ac bonus is different from the other bonuses because of the way ac is calculated with different body types -Ares
+    set_base_attack_num(6); 
     set_castable(0);
     set_can_talk(0);
     set_shape_race("dragon");
-    set_shape_language("sylvan");
+    set_shape_language("draconic");
     set_shape_profile("druid_dragon_999"); // needs to be something the player is unlikely to name one of their profiles when disguise goes in
     set_shape_bonus("perception",2);
     set_shape_bonus("survival",4);
     set_shape_bonus("sight bonus",3);
     set_shape_bonus("damage bonus",3);
     set_shape_bonus("attack bonus",3);
-    set_shape_bonus("damage resistance",10);
-    set_shape_bonus("magic resistance",10);
+    set_shape_bonus("damage resistance",20);
+    set_shape_bonus("magic resistance",20);
     set_shape_height(200+random(100));
     set_shape_weight(11000+random(5000));
     set_shape_mastery_feat("impale");
@@ -126,7 +126,7 @@ int bite_attack(object tp, object targ)
     if(FEATS_D->usable_feat(tp,"perfect predator")) 
     { 
         dice += 3; 
-        tp->add_hp((dice*3)/2);
+        tp->add_hp(20 + (dice*3)/2 + tp->query_guild_level("druid"));
     }
 
     if(roll_dice(1,100) > chance) { return roll_dice(dice,3); }
@@ -235,7 +235,7 @@ int bite_attack(object tp, object targ)
                     tell_object(targ,"%^BLUE%^"+tp->QCN+" snaps "+tp->QP+" powerful jaws down at your head but you dodge aside at the last instant and "+tp->QS+" hits your shoulder instead!");
                     tell_room(etp,"%^BLUE%^"+tp->QCN+" snaps "+tp->QP+" powerful jaws down at "+targ->QCN+"'s head, but "+targ->QS+" dodges aside at the last instant and "+tp->QS+" hits "+targ->QP+" shoulder instead!",({tp,targ}));
                    
-                    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,6),get_new_damage_type());                    
+                    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,8),get_new_damage_type());                    
                 }
 
                 break;
@@ -518,7 +518,7 @@ int tail_attack(object tp, object targ)
                         tell_object(att,"%^YELLOW%^"+tp->QCN+" catches you with "+tp->QP+" tail, knocking you from your feet!");
                         tell_room(etp,"%^YELLOW%^"+tp->QCN+" catches "+att->QCN+" with "+tp->QP+" tail, knocking "+att->QO+" from "+att->QP+" feet!",({tp,att}));
 
-                        att->cause_typed_damage(att,att->return_target_limb(),roll_dice(dice,6),get_new_damage_type());
+                        att->cause_typed_damage(att,att->return_target_limb(),roll_dice(dice,8),get_new_damage_type());
                         att->set_tripped(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You are struggling to get your feet back under you!"); 
                     }
                     else
@@ -553,8 +553,8 @@ int tail_attack(object tp, object targ)
                 if(!targ->fort_save(chance)) { targ->set_paralyzed(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You're struggling to move!"); }
                 if(!att->fort_save(chance))  { att->set_paralyzed(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You're struggling to move!"); }
 
-                targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,6),get_new_damage_type());
-                att->cause_typed_damage(targ,att->return_target_limb(),roll_dice(dice,6),get_new_damage_type());
+                targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,8),get_new_damage_type());
+                att->cause_typed_damage(targ,att->return_target_limb(),roll_dice(dice,8),get_new_damage_type());
 
             }
             else
@@ -568,7 +568,7 @@ int tail_attack(object tp, object targ)
                 tell_room(etp,"%^BOLD%^"+tp->QCN+"'s tail drags a deep gash through "+targ->QCN+"'s side!",({tp,targ}));
 
                 if(!targ->fort_save(chance)) { targ->set_paralyzed(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You're struggling to move!"); }
-                targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,6),get_new_damage_type());
+                targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,8),get_new_damage_type());
             }
 
             break;            
@@ -579,7 +579,7 @@ int tail_attack(object tp, object targ)
             tell_object(targ,"%^RED%^"+tp->QCN+" flicks "+tp->QP+" tail in a wide arc and it smashes into you!");
             tell_room(etp,"%^RED%^"+tp->QCN+" flicks "+tp->QP+" tail in a wide arc and it smashes into "+targ->QCN+"!",({tp,targ}));
 
-            targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,6),get_new_damage_type());
+            targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,8),get_new_damage_type());
             break;
 
         }
