@@ -51,7 +51,7 @@ create() {
 	  "dispel magic"
    }));
    set_spell_chance(100);
- 
+   set_missChance(75);
 }
 void touch(object vic) {
     if(userp(vic)){

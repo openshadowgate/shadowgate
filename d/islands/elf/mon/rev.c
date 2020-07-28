@@ -76,9 +76,9 @@ new(OBJ"weed_cloak")->move(TO);
 new(OBJ"ank")->move(TO);
 force_me("wield anchor");
 force_me("wearall");
-
 set_funcs(({"sweep"}));
 set_func_chance(75);
+set_missChance(25);
 }
 
 void init(){
