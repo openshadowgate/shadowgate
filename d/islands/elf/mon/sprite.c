@@ -21,7 +21,7 @@ create() {
    set_damage(5,8);
    set_hd(40,10);
    set_race("sprite");
-   set_hp(1550+random(1000));
+   set_hp(1550+random(1500));
    set_max_hp( query_hp() );
    set_class("fighter");
    set_mlevel("fighter",40);
@@ -30,8 +30,8 @@ create() {
    set_guild_level("fighter",40);
    set_alignment(8);
    set_funcs( ({"touch"}) );
-   set_func_chance(50);
-   set_property("weapon resistance",20);
+   set_func_chance(100);
+   set_property("weapon resistance",30);
    set_property("function and attack",1);
    set_resistance_percent("cold", 100);
    set_mob_magic_resistance("high");
@@ -48,7 +48,7 @@ create() {
       "polar ray",
       "cone of cold",
 	  "chill touch",
-	  "dispel magic"
+	  "greater dispel magic"
    }));
    set_spell_chance(100);
    set_missChance(75);
@@ -70,6 +70,8 @@ void touch(object vic) {
     else {
         tell_room(ETO,"%^CYAN%^The sprite %^BLUE%^freezes %^CYAN%^"+VQCN+" solid!");
         vic->die();
+        set_max_hp( query_hp() );
+        tell_room(ETO,"%^CYAN%^The life force of the dying creature restores the sprite!")
     }
    return ;
 }
