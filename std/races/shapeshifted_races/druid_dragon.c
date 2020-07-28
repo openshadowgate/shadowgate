@@ -16,20 +16,20 @@ void create()
     set_new_damage_type("piercing");    
     set_limbs( ({ "maw","head","torso","right claw", "left claw", "right arm","right arm","left leg","left rear claw","right leg","right rear claw","tail","right wing","left wing" }) );
     set_attack_functions(([ "maw" : (:TO,"bite_attack":), "right claw" : (:TO,"claw_attack":), "left claw" : (:TO,"claw_attack":), "tail" : (:TO,"tail_attack":) ]));
-    set_ac_bonus(-5); // ac bonus is different from the other bonuses because of the way ac is calculated with different body types -Ares
-    set_base_attack_num(2); 
+    set_ac_bonus(-20); // ac bonus is different from the other bonuses because of the way ac is calculated with different body types -Ares
+    set_base_attack_num(6); 
     set_castable(0);
     set_can_talk(0);
     set_shape_race("dragon");
-    set_shape_language("sylvan");
+    set_shape_language("draconic");
     set_shape_profile("druid_dragon_999"); // needs to be something the player is unlikely to name one of their profiles when disguise goes in
     set_shape_bonus("perception",2);
     set_shape_bonus("survival",4);
     set_shape_bonus("sight bonus",3);
     set_shape_bonus("damage bonus",3);
     set_shape_bonus("attack bonus",3);
-    set_shape_bonus("damage resistance",10);
-    set_shape_bonus("magic resistance",10);
+    set_shape_bonus("damage resistance",20);
+    set_shape_bonus("magic resistance",20);
     set_shape_height(200+random(100));
     set_shape_weight(11000+random(5000));
     set_shape_mastery_feat("impale");
@@ -126,7 +126,7 @@ int bite_attack(object tp, object targ)
     if(FEATS_D->usable_feat(tp,"perfect predator")) 
     { 
         dice += 3; 
-        tp->add_hp((dice*3)/2);
+        tp->add_hp(20 + (dice*3)/2 + tp->query_guild_level("druid"));
     }
 
     if(roll_dice(1,100) > chance) { return roll_dice(dice,3); }
