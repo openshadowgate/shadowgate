@@ -71,7 +71,7 @@ void touch(object vic) {
         tell_room(ETO,"%^CYAN%^The sprite %^BLUE%^freezes %^CYAN%^"+VQCN+" solid!");
         vic->die();
         set_max_hp( query_hp() );
-        tell_room(ETO,"%^CYAN%^The life force of the dying creature restores the sprite!")
+        tell_room(ETO,"%^CYAN%^The life force of the dying creature restores the sprite!");
     }
    return ;
 }
