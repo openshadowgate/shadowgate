@@ -76,10 +76,25 @@ new(OBJ"weed_cloak")->move(TO);
 new(OBJ"ank")->move(TO);
 force_me("wield anchor");
 force_me("wearall");
+
+set_funcs(({"sweep"}));
+set_func_chance(75);
 }
 
 void init(){
     ::init();
     if(!query_property("raged"))
         force_me("rage");
+}
+
+void sweep(object targ){
+  object * critters;
+  critters = query_attackers();
+  if (sizeof(critters)<1) return;
+  tell_room(ETO,"%^RED%^Revenant lets out a %^BLUE%^drowning%^RED%^ gurgle!");
+  foreach(object ob in critters){
+      tell_object(ob, "%^BLUE%^The noise makes you feel like you are drowning!." );
+      ob->cause_typed_damwizage(ob, ob->return_target_limb(),random(200),"mental");
+  }
+  
 }
