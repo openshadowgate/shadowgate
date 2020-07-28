@@ -11,7 +11,11 @@ create() {
    set_name("%^CYAN%^Ice Sprite%^RESET%^");
    set_id( ({"ice","sprite","ice sprite","monster"}) );
    set("short","%^RESET%^%^CYAN%^Ice Sprite%^RESET%^");
-    set("long","This is an ice sprite.  It is a swirling mass of snow that floats in the air.  It is vaguely humanoid shaped and gives of a constant power that freezes anything that gets close to it.   Better be careful if you don't want to be frozen by it.");
+    set("long","This is an ice sprite.  It is a swirling"+
+    " mass of snow that floats in the air.  It is vaguely "+
+    "humanoid shaped and gives of a constant power that "+
+    "freezes anything that gets close to it. "+
+    "  Better be careful if you don't want to be frozen by it.");
 
    set_attacks_num(4);
    set_damage(5,8);
@@ -21,11 +25,14 @@ create() {
    set_max_hp( query_hp() );
    set_class("fighter");
    set_mlevel("fighter",40);
+   set_class("mage");
+   set_mlevel("mage",40);
    set_guild_level("fighter",40);
    set_alignment(8);
    set_funcs( ({"touch"}) );
    set_func_chance(50);
    set_property("weapon resistance",20);
+   set_property("function and attack",1);
    set_resistance_percent("cold", 100);
    set_mob_magic_resistance("high");
    set_property("no death",1);
@@ -37,6 +44,13 @@ create() {
    set_max_level(45);
    set_base_damage_type("cold");
    set_skill("perception", 70);
+   set_spells(({
+      "polar ray",
+      "cone of cold",
+	  "chill touch",
+	  "dispel magic"
+   }));
+   set_spell_chance(100);
  
 }
 void touch(object vic) {
