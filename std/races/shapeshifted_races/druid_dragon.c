@@ -235,7 +235,7 @@ int bite_attack(object tp, object targ)
                     tell_object(targ,"%^BLUE%^"+tp->QCN+" snaps "+tp->QP+" powerful jaws down at your head but you dodge aside at the last instant and "+tp->QS+" hits your shoulder instead!");
                     tell_room(etp,"%^BLUE%^"+tp->QCN+" snaps "+tp->QP+" powerful jaws down at "+targ->QCN+"'s head, but "+targ->QS+" dodges aside at the last instant and "+tp->QS+" hits "+targ->QP+" shoulder instead!",({tp,targ}));
                    
-                    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,6),get_new_damage_type());                    
+                    targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,8),get_new_damage_type());                    
                 }
 
                 break;
@@ -518,7 +518,7 @@ int tail_attack(object tp, object targ)
                         tell_object(att,"%^YELLOW%^"+tp->QCN+" catches you with "+tp->QP+" tail, knocking you from your feet!");
                         tell_room(etp,"%^YELLOW%^"+tp->QCN+" catches "+att->QCN+" with "+tp->QP+" tail, knocking "+att->QO+" from "+att->QP+" feet!",({tp,att}));
 
-                        att->cause_typed_damage(att,att->return_target_limb(),roll_dice(dice,6),get_new_damage_type());
+                        att->cause_typed_damage(att,att->return_target_limb(),roll_dice(dice,8),get_new_damage_type());
                         att->set_tripped(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You are struggling to get your feet back under you!"); 
                     }
                     else
@@ -553,8 +553,8 @@ int tail_attack(object tp, object targ)
                 if(!targ->fort_save(chance)) { targ->set_paralyzed(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You're struggling to move!"); }
                 if(!att->fort_save(chance))  { att->set_paralyzed(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You're struggling to move!"); }
 
-                targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,6),get_new_damage_type());
-                att->cause_typed_damage(targ,att->return_target_limb(),roll_dice(dice,6),get_new_damage_type());
+                targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,8),get_new_damage_type());
+                att->cause_typed_damage(targ,att->return_target_limb(),roll_dice(dice,8),get_new_damage_type());
 
             }
             else
@@ -568,7 +568,7 @@ int tail_attack(object tp, object targ)
                 tell_room(etp,"%^BOLD%^"+tp->QCN+"'s tail drags a deep gash through "+targ->QCN+"'s side!",({tp,targ}));
 
                 if(!targ->fort_save(chance)) { targ->set_paralyzed(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You're struggling to move!"); }
-                targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,6),get_new_damage_type());
+                targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,8),get_new_damage_type());
             }
 
             break;            
@@ -579,7 +579,7 @@ int tail_attack(object tp, object targ)
             tell_object(targ,"%^RED%^"+tp->QCN+" flicks "+tp->QP+" tail in a wide arc and it smashes into you!");
             tell_room(etp,"%^RED%^"+tp->QCN+" flicks "+tp->QP+" tail in a wide arc and it smashes into "+targ->QCN+"!",({tp,targ}));
 
-            targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,6),get_new_damage_type());
+            targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(dice,8),get_new_damage_type());
             break;
 
         }
