@@ -106,11 +106,12 @@ string *query_newbie_stuff(int align)
     if(!intp(align)) return ({});
     switch(align)
     {
-        case 7: return ({ "celestial", "fey" }); break;
-        case 8: return ({ "celestial", "fey", "abyssal" }); break;
-        case 9: return ({ "fey", "abyssal", "gloom" }); break;
-        case 6: return ({ "abyssal", "gloom", "infernal" }); break;
-        case 3: return ({ "gloom", "infernal" }); break;
+       case 7: heritages = (({ "celestial", "fey" })); break;
+       case 8: heritages = (({ "celestial", "fey", "abyssal", "star" })); break;
+       case 9: heritages = (({ "fey", "abyssal", "gloom" })); break;
+       case 5: heritages = (({ "star", "gloom", "fey" })); break;
+       case 6: heritages = (({ "abyssal", "gloom", "infernal", "star" })); break;
+       case 3: heritages = (({ "gloom", "infernal" })); break;
     }
 }
 void process_newbie_choice(object who, string str)

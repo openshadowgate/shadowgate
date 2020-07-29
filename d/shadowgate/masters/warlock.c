@@ -55,7 +55,7 @@ void done(){
 void pick_school(){
   int i, align;
 // these are reliant on alignment, and must be within one step of base align
-// CG: celestial; CN: fey; CE: abyssal; NE: gloom; LE: infernal.
+// CG: celestial; CN: fey; CE: abyssal; NE: gloom; LE: infernal; TN: star.
 
   write("%^YELLOW%^Warlock Heritage");
   write("%^BLUE%^-------------");
