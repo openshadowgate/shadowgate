@@ -14,7 +14,14 @@ void create() {
 "beings. This feat expands the invocations lists of the warlock, increasing the pool of "
 "masterable spells they can choose from. This feat does not automatically grant these "
 "spells, only expands the pool of spells to choose from. In addition, the Warlock is "
-"given two bonus mastery points (stacks with spell knowledge feat).");
+"given two bonus mastery points (stacks with spell knowledge feat)."
+"\
+\
+The new invocations added to the list are as follows:\
+  Level 1 : Cocoon of Refuse, Cold Comfort, All Seeing Eyes\
+  Level 2 : Path of Shadow, Caustic Mire, Polymorph Self\
+  Level 3 : Black Tentacles, Tenacious Plague, Waves of Fatigue\
+  Level 4 : Dark Foresight, Mayhem");
     permanent(1);
     set_required_for(({ "tome of ancient secrets" }));
 }
