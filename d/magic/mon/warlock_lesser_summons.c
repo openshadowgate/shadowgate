@@ -63,6 +63,19 @@ void set_mytype(string heritage) {
         set_attack_limbs(({"claws","teeth"}));
         break;
 
+case "star":
+        set_short("%^RESET%^%^CYAN%^strange flumph%^RESET%^");
+        set_name("strange flumph");
+        set_id(({"outsider","strange flumph","flumph"}));
+        set_long("%^BOLD%^%^CYAN%^This abberant creature looks in some ways very much like an %^BLUE%^jellyfish%^CYAN%^, although jellyfish lack staring %^WHITE%^eyestalks%^CYAN%^ "
+"and %^GREEN%^acidic spikes%^CYAN%^. Its body is a disc, or perhaps a flattened dome. %^WHITE%^Pale, pallid skin^&CYAN%^ covers the body and it's %^WHITE%^eyestalks%^CYAN%^, which"
+" end in unblinking eyes that have the %^RESET%^GREEN%^eldritch^&BOLD%^%^CYAN%^ horizontal %^RESET%^%^BLUE%^pupils%^BOLD%^%^CYAN%^ of a %^RESET%^%^BROWN%^goat%^BOLD%^%^CYAN%^. "
+"Their underside is a crystaline collection of hollow, needle-like %^GREEN%^spikes%^CYAN%^. Surrounding these are tentacles easily as long or longer than the several feet of "
+"its body's length. It floats along with flumphing noise from the many tiny pores that suck in and release air in a steady rhythm.%^RESET%^");
+        set_fake_limbs(({"torso","eyestalk","tentacle"}));
+        set_attack_limbs(({"tentacle","spike"}));
+        break;
+		
     case "gloom":
         set_short("%^RESET%^%^BLUE%^winged shadow%^RESET%^");
         set_name("winged shadow");
@@ -95,7 +108,8 @@ void die(object ob) {
      case "celestial": tell_room(ETO,"%^YELLOW%^The coure blinks out of existence in a flash of bright light!%^RESET%^"); break;
      case "fey": tell_room(ETO,"%^BOLD%^%^CYAN%^The sprite flits unsteadily left, right, and quite suddenly vanishes!%^RESET%^"); break;
      case "abyssal": tell_room(ETO,"%^BOLD%^%^GREEN%^The quasit hisses, flits backwards and pops quite suddenly out of existence!%^RESET%^"); break;
-     case "gloom": tell_room(ETO,"%^BOLD%^%^BLACK%^The shadow flutters, whirls and disappears!%^RESET%^"); break;
+     case "star": tell_room(ETO,"%^BOLD%^%^CYAN%^The flumph blinks and fades out of this plane.%^RESET%^"); break;
+	 case "gloom": tell_room(ETO,"%^BOLD%^%^BLACK%^The shadow flutters, whirls and disappears!%^RESET%^"); break;
      case "infernal": tell_room(ETO,"%^BOLD%^%^RED%^The imp shrieks and blinks out of existence!%^RESET%^"); break;
      default: tell_room(ETO,"The spirit shrieks and disappears!"); break;
    }
