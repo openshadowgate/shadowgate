@@ -5,7 +5,7 @@ inherit MONSTER;
 void create()
 {
     ::create();
-    set_name("lobster");
+    set_name("Dire Lobster");
     set_id(({"lobster","dire lobster","monster","animal"}));
     set_short("Dire lobster");
     set_long("This is a dire lobster.  It is about 6 feet"+

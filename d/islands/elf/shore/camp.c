@@ -49,6 +49,8 @@ string night_desc() {
 
 void reset(){
  ::reset();
+  if(!present("sea elf")) new(MON"sea_elf")->move(TO);
+  new("")
   set_locked("gate",0);
   set_open("gate", 0);
  switch(random(7)){
