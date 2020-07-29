@@ -1,2 +1,0 @@
-We have a good selection so let me know what you want after you read the menu.+?race == drow || race == half-drow || race == orc || race == half-orc+|speech hint+You'll be wanting to take that with you right?+?+?race == gnoll || race == ogre || race == goblin || race == hobgoblin || race == kobold || race == half-ogre+$glances around the room at the other guests.+#You're going to just pick it up and be on your way aren't you?+?
-|emote looks up and over at $N+|say No, you look okay.  You don't seem to be sick.
