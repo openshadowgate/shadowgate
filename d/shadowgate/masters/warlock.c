@@ -62,9 +62,10 @@ void pick_school(){
   align = TP->query_alignment();
   switch(align) {
     case 7: heritages = (({ "celestial", "fey" })); break;
-    case 8: heritages = (({ "celestial", "fey", "abyssal" })); break;
+    case 8: heritages = (({ "celestial", "fey", "abyssal", "star" })); break;
     case 9: heritages = (({ "fey", "abyssal", "gloom" })); break;
-    case 6: heritages = (({ "abyssal", "gloom", "infernal" })); break;
+    case 5: heritages = (({ "star", "gloom", "fey" })); break;
+    case 6: heritages = (({ "abyssal", "gloom", "infernal", "star" })); break;
     case 3: heritages = (({ "gloom", "infernal" })); break;
     default: tell_object(TP,"You have an alignment that does not work for a warlock! Please contact a wiz or reroll."); return; break;
   }
