@@ -9,7 +9,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("waves of fatigue");
-    set_spell_level(([ "mage" : 5,"cleric":5]));
+    set_spell_level(([ "mage" : 5,"cleric":5,"warlock" : 3 ]));
     set_domains("renewal");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS waves of fatigue");
@@ -18,6 +18,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(3);
+    set_feats_required(([ "warlock" : "tome of ancient secrets"]));
 }
 
 string query_cast_string() {

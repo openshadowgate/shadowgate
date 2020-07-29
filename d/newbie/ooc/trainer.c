@@ -6,7 +6,7 @@ inherit "/std/quest_room.c";
 string myPlayer;
 object myTrainer;
 int isSetup;
-string *bad_races = ({"drow", "half-drow", "goblin", "hobgoblin", "kobold", "ogre", "half-ogre", "orc", "gnoll", "bugbear", "minotaur", "yuan-ti", "ratkin"});
+string *bad_races = ({"drow", "half-drow", "goblin", "hobgoblin", "kobold", "ogre", "half-ogre", "orc", "gnoll", "bugbear", "minotaur", "yuan-ti", "ratkin", "troll"});
 string BAD;
 
 

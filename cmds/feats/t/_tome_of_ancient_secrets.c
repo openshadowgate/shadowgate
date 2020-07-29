@@ -6,17 +6,17 @@ void create() {
     ::create();
     feat_type("permanent");
     feat_category("TomeBoundMaster");
-    feat_name("book of shadows");
-    feat_prereq("Tome Bound Master L1");
+    feat_name("tome of ancient secrets");
+    feat_prereq("Tome Bound Master L7");
     feat_desc(""
-"Warlocks who show greater dedication to their pact can deepen that pact "
-"in pursuit of arcane and forbidden knowledge. The warlock is gifted a Book "
-"of Shadows, which not only gives the warlock an understanding of the arcane "  
-"but also promises further secrets, should they continue their devotion. "
-"This feat grants the warlock the 'mending', 'unseen servant', 'rope trick', "
-"'command', 'minor creation', and 'clairvoyance' spells as known invocations.");
+"With this feat, the Tome Bound Master has achieved what they originally sought "
+"out to do : unlock access to ancient and powerful invocations, unknown to most lesser "
+"beings. This feat expands the invocations lists of the warlock, increasing the pool of "
+"masterable spells they can choose from. This feat does not automatically grant these "
+"spells, only expands the pool of spells to choose from. In addition, the Warlock is "
+"given two bonus mastery points (stacks with spell knowledge feat).");
     permanent(1);
-    set_required_for(({ "mystic arcana" }));
+    set_required_for(({ "tome of ancient secrets" }));
 }
 
 int prerequisites(object ob)
@@ -26,7 +26,7 @@ int prerequisites(object ob)
         return 0;
     }
 
-    if ((int)ob->query_class_level("tome_bound_master") < 1)
+    if ((int)ob->query_class_level("tome_bound_master") < 7)
     {
         dest_effect();
         return 0;

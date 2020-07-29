@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("polymorph self");
-    set_spell_level(([ "mage" : 4, "ranger" : 4, "assassin":4, "oracle":4]));
+    set_spell_level(([ "mage" : 4, "ranger" : 4, "assassin":4, "oracle":4, "warlock" : 2 ]));
     set_domains("animal");
     set_mystery("nature");
     set_spell_sphere("alteration");
@@ -18,4 +18,5 @@ void create()
     set_somatic_comp();
     set_arg_needed();
     set_helpful_spell(1);
+    set_feats_required(([ "warlock" : "tome of ancient secrets"]));
 }

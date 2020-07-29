@@ -76,7 +76,6 @@ void dest_effect()
     if (find_call_out("dest_effect") != -1) {
         remove_call_out("dest_effect");
     }
-    tell_room(place, "%^YELLOW%^The room is suddenly brighter.");
     if (objectp(ob)) {
         ob->remove();
     }
