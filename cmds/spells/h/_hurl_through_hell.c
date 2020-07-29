@@ -72,9 +72,9 @@ void spell_effect(int prof)
         return;
     }
     
-    spell_successful();  
+    spell_successful();
     
-    if(do_save(target, -8))
+    if(do_save(target, -clevel))
     {
         tell_object(caster, sprintf("%s resists your attempts to throw them through the nine hells.", target->QCN));
         tell_object(target, "You shake off the effects of the spell.");
