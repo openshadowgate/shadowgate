@@ -28,6 +28,7 @@ void create()
     "blind and shaken from the horrors they've witnessed.");
     set_verbal_comp();
     set_somatic_comp();
+    debug_saves(1);
     set_target_required(1);
     set_property("keywords", ({ "offensive", "targeted", }));
     set_save("will");
@@ -73,11 +74,10 @@ void spell_effect(int prof)
     
     spell_successful();
     
-    if(do_save(target, 0))
+    if(do_save(target, -8))
     {
         tell_object(caster, sprintf("%s resists your attempts to throw them through the nine hells.", target->QCN));
         tell_object(target, "You shake off the effects of the spell.");
-        spell_kill(target,caster);
         return;
     }
     
@@ -87,10 +87,10 @@ void spell_effect(int prof)
     
     target->move(hell_room);
     
-    call_out("hurl_effect", DUR, room, target, sdamage, DUR);
+    call_out("hurl_effect", DUR, room, target, sdamage);
 }
 
-void hurl_effect(object room, object victim, int dam, int dur)
+void hurl_effect(int dur, object room, object victim, int dam)
 {
     if(!living(victim))
     {
@@ -127,7 +127,6 @@ void hurl_effect(object room, object victim, int dam, int dur)
         victim->move(room);
         victim->set_temporary_blinded(roll_dice(1,6));
         "/std/effect/status/sickened"->apply_effect(victim,roll_dice(1,6));
-        spell_kill(victim,caster);
         dest_effect();
         return;
     }
