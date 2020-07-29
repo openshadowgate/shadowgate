@@ -4495,6 +4495,7 @@ void clear_feats()
     __FEAT_DATA = ([]);
     set_player_feats(({}));
     set_class_feats_gained(0);
+    set_racial_feats_gained(0);
     set_bonus_feats_gained(0);
     set_magic_feats_gained(0);
     set_hybrid_feats_gained(0);
@@ -4513,6 +4514,18 @@ int query_class_feats_gained()
 {
     if(!intp(__FEAT_DATA["class_feats_gained"])) { __FEAT_DATA["class_feats_gained"] = 0; }
     return __FEAT_DATA["class_feats_gained"];
+}
+
+void set_racial_feats_gained(int num)
+{
+    __FEAT_DATA["racial_feats_gained"] = num;
+    return;
+}
+
+int query_racial_feats_gained()
+{
+    if(!intp(__FEAT_DATA["racial_feats_gained"])) { __FEAT_DATA["racial_feats_gained"] = 0; }
+    return __FEAT_DATA["racial_feats_gained"];
 }
 
 void set_bonus_feats_gained(int num)
@@ -4588,6 +4601,22 @@ mapping query_class_feats()
 {
     if(!mapp(__FEAT_DATA["class"])) { __FEAT_DATA["class"] = ([]); }
     return __FEAT_DATA["class"];
+}
+
+void set_racial_feats(mapping feats)
+{
+    if(!mapp(__FEAT_DATA["racial"])) { __FEAT_DATA["racial"] = ([]); }
+    if(mapp(feats))
+    {
+        __FEAT_DATA["racial"] = feats;
+    }
+    return;
+}
+
+mapping query_racial_feats()
+{
+    if(!mapp(__FEAT_DATA["racial"])) { __FEAT_DATA["racial"] = ([]); }
+    return __FEAT_DATA["racial"];
 }
 
 void set_bonus_feats(mapping feats)
@@ -4698,6 +4727,14 @@ string *query_player_feats() {
 
     if(mapp(__FEAT_DATA["class"])) {
       testmap = __FEAT_DATA["class"];
+      mykeys = keys(testmap);
+      if(sizeof(mykeys)) {
+        for(i=0;i<sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];
+      }
+      testmap = ([]);
+    }
+    if(mapp(__FEAT_DATA["racial"])) {
+      testmap = __FEAT_DATA["racial"];
       mykeys = keys(testmap);
       if(sizeof(mykeys)) {
         for(i=0;i<sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];
