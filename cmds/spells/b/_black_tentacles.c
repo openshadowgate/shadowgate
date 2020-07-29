@@ -13,7 +13,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("black tentacles");
-    set_spell_level(([ "mage" : 4 ]));
+    set_spell_level(([ "mage" : 4, "warlock" : 3 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS black tentacles");
     set_description("This spell summons up a mass of writhing black "+
@@ -27,6 +27,7 @@ void create() {
     set_components(([
       "mage" : ([ "carbon" : 1, ]),
     ]));
+    set_feats_required(([ "warlock" : "tome of ancient secrets"]));
 }
 
 int preSpell()
