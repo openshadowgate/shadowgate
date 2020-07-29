@@ -17,7 +17,7 @@ void create()
     set_spell_name("hurl through hell");
     set_spell_level(([ "warlock" : 4 ]));
     set_syntax("cast CLASS hurl through hell on TARGET");
-    set_damage_desc("Untyped Damage over several rounds and blind  and shaken upon return.");
+    set_damage_desc("Untyped Damage over several rounds and blind and shaken upon return.");
     set_description(""
     "This invocation represents the highest level of dominance that a "
     "powerful hellfire warlock can assert over an opponent. This "
@@ -28,6 +28,7 @@ void create()
     "blind and shaken from the horrors they've witnessed.");
     set_verbal_comp();
     set_somatic_comp();
+    debug_saves(1);
     set_target_required(1);
     set_property("keywords", ({ "offensive", "targeted", }));
     set_save("will");
@@ -71,19 +72,20 @@ void spell_effect(int prof)
         return;
     }
     
-    if(do_save(target, 0))
+    spell_successful();
+    
+    if(do_save(target, -clevel))
     {
         tell_object(caster, sprintf("%s resists your attempts to throw them through the nine hells.", target->QCN));
         tell_object(target, "You shake off the effects of the spell.");
         return;
     }
     
-    tell_object(caster, "%^RESET%^%^RED%^You focus your %^BOLD%^will %^RESET%^%^RED%^forward as you %^MAGENTA%^lash out%^RED%^, sending TARGET falling backwards into the awaiting %^BOLD%^%^BLACK%^m%^RESET%^a%^BOLD%^%^BLACK%^w %^RESET%^%^RED%^of the %^BOLD%^p%^MAGENTA%^l%^RED%^a%^BLACK%^n%^MAGENTA%^a%^RED%^r r%^BLACK%^i%^MAGENTA%^f%^RED%^t%^RESET%^%^RED%^!%^RESET%^");
+    tell_object(caster, "%^RESET%^%^RED%^You focus your %^BOLD%^will %^RESET%^%^RED%^forward as you %^MAGENTA%^lash out%^RED%^, sending " + target->QCN + " falling backwards into the awaiting %^BOLD%^%^BLACK%^m%^RESET%^a%^BOLD%^%^BLACK%^w %^RESET%^%^RED%^of the %^BOLD%^p%^MAGENTA%^l%^RED%^a%^BLACK%^n%^MAGENTA%^a%^RED%^r r%^BLACK%^i%^MAGENTA%^f%^RED%^t%^RESET%^%^RED%^!%^RESET%^");
     tell_object(target, "%^RESET%^%^RED%^CASTER %^MAGENTA%^thrusts %^RED%^an outstretched %^WHITE%^palm %^RED%^towards you, and you feel yourself falling backwards into a %^BOLD%^%^BLACK%^fo%^WHITE%^r%^BLACK%^eb%^RESET%^o%^BOLD%^%^BLACK%^d%^RESET%^i%^BOLD%^n%^BLACK%^g %^MAGENTA%^p%^RED%^l%^BLACK%^a%^RED%^n%^MAGENTA%^a%^RED%^r r%^BLACK%^i%^MAGENTA%^f%^RED%^t%^RESET%^%^RED%^...%^RESET%^");
     tell_room(room, "%^RESET%^%^RED%^With the %^MAGENTA%^thrust %^RED%^of an outstretched %^WHITE%^palm%^RED%^, CASTER sends TARGET back through a %^BOLD%^r%^BLACK%^i%^MAGENTA%^f%^RED%^t %^RESET%^%^RED%^torn in %^BOLD%^%^BLACK%^re%^WHITE%^a%^BLACK%^l%^RESET%^i%^BOLD%^t%^BLACK%^y%^RESET%^%^RED%^!%^RESET%^", ({ caster, target }));
     
     target->move(hell_room);
-    spell_successful();
     
     call_out("hurl_effect", DUR, room, target, sdamage);
 }
@@ -120,8 +122,10 @@ void hurl_effect(int dur, object room, object victim, int dam)
     if(dur < 1)
     {
         tell_object(victim, "You fall back through a portal to the prime material.");
+        tell_room(room, victim->QCN + " falls through a portal back into the room.", victim);
         victim->move(room);
-        victim->set_temporary_blinded(2);
+        victim->set_temporary_blinded(roll_dice(1,6));
+        "/std/effect/status/sickened"->apply_effect(victim,roll_dice(1,6));
         dest_effect();
         return;
     }
