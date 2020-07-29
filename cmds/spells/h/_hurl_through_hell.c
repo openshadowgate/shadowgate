@@ -17,15 +17,15 @@ void create()
     set_spell_name("hurl through hell");
     set_spell_level(([ "warlock" : 4 ]));
     set_syntax("cast CLASS hurl through hell on TARGET");
-    set_damage_desc("Untyped Damage over several rounds and blind upon return.");
+    set_damage_desc("Untyped Damage over several rounds and blind  and shaken upon return.");
     set_description(""
     "This invocation represents the highest level of dominance that a "
     "powerful hellfire warlock can assert over an opponent. This "
     "invocation will cause the victim to be thrown through a portal to "
     "the Nine Hells, where they will suffer the most intense physical "
     "and psychological trauma. Even though the visit is brief, the effects "
-    "will be severe, causing a large amount of damage and leaving the victim"
-    "shaken and blind.");
+    "will be severe, causing a large amount of damage and leaving the victim "
+    "blind and shaken from the horrors they've witnessed.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -46,7 +46,7 @@ int preSpell()
 }
 string query_cast_string()
 {
-    tell_object(caster, "%^RESET%^%^MAGENTA%^Your eyes beging to %^BOLD%^" + "%^RED%^glow%^RESET%^%^MAGENTA%^ as you focus on your %^RED%^" + "pact. %^MAGENTA%^Gesturing towards " + target->QCN + ", you attempt to rip " + "the walls of reality and bridge a path to the %^BOLD%^%^RED%^N%^BLACK%^i" + "%^RED%^n%^MAGENTA%^e %^RED%^H%^MAGENTA%^e%^RED%^l" + "%^BLACK%^l%^RED%^s%^RESET%^%^MAGENTA%^!%^RESET%^");
+    tell_object(caster, "%^RESET%^%^MAGENTA%^Your eyes begin to %^BOLD%^" + "%^RED%^glow%^RESET%^%^MAGENTA%^ as you focus on your %^RED%^" + "pact. %^MAGENTA%^Gesturing towards " + target->QCN + ", you attempt to rip " + "the walls of reality and bridge a path to the %^BOLD%^%^RED%^N%^BLACK%^i" + "%^RED%^n%^MAGENTA%^e %^RED%^H%^MAGENTA%^e%^RED%^l" + "%^BLACK%^l%^RED%^s%^RESET%^%^MAGENTA%^!%^RESET%^");
     tell_room(environment(caster), "%^MAGENTA%^With an %^BOLD%^%^RED%^i" + "%^BLACK%^n%^RED%^f%^MAGENTA%^e%^RED%^r%^BLACK%^n" + "%^RED%^al %^BLACK%^g%^RED%^l%^MAGENTA%^o%^RED%^w " + "%^RESET%^%^MAGENTA%^filling " + caster->QP + " eyes,"  + caster->QCN + " points towards " + target->QCN + "... and the %^BOLD%^%^WHITE%^fa" + "%^RESET%^i%^BOLD%^%^BLACK%^nt %^WHITE%^ec%^RESET%^h" + "%^BOLD%^%^BLACK%^oes %^RESET%^%^MAGENTA%^of %^RED%^" + "pain %^MAGENTA%^and %^RED%^torment %^MAGENTA%^sound from all " + "around.%^WHITE%^", ({ caster }));
     return "display";
 }

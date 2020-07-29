@@ -14,7 +14,7 @@ void create() {
 "of Shadows, which not only gives the warlock an understanding of the arcane "  
 "but also promises further secrets, should they continue their devotion. "
 "This feat grants the warlock the 'mending', 'unseen servant', 'rope trick', "
-"'tongues', 'minor creation', and 'clairvoyance' spells as known invocations.");
+"'command', 'minor creation', and 'clairvoyance' spells as known invocations.");
     permanent(1);
     set_required_for(({ "mystic arcana" }));
 }
