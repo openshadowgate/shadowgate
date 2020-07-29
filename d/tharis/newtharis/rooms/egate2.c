@@ -18,7 +18,7 @@ void create(){
 "%^BOLD%^%^BLACK%^ than others. A narrow %^RESET%^%^ORANGE%^path %^BOLD%^%^BLACK%^"
 "runs along the wall, most likely used by guards on patrol or those who want to avoid "
 "the bustle of the city. %^RESET%^%^GREEN%^Spar%^BOLD%^%^GREEN%^s%^RESET%^%^GREEN%^e "
-"v%^BOLD%^%^GREEN%^e%^RESET%^%^GREEN%^getation %^BOLD%^%^BLACK%^fights for survival"
+"v%^BOLD%^%^GREEN%^e%^RESET%^%^GREEN%^getation %^BOLD%^%^BLACK%^fights for survival "
 "along the base of the wall. A giant %^RESET%^%^ORANGE%^set of gates%^BOLD%^%^BLACK%^ "
 "lead into the city.%^RESET%^\n");
     set_smell("default","%^RESET%^%^ORANGE%^The air carries a thousand scents of a busy city.%^RESET%^");

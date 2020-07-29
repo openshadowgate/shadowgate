@@ -15,7 +15,7 @@ void create()
 {
     ::create();
     set_spell_name("spectral hand");
-    set_spell_level(([ "mage" : 2, "oracle" : 2 ]));
+    set_spell_level(([ "mage" : 2, "oracle" : 2, "innate" : 1 ]));
     set_mystery("reaper");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS spectral hand");

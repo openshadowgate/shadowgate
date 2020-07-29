@@ -109,7 +109,7 @@ void InitInnate()
             ]);
     }
     
-    if(FEATS_D->usable_feat("tricky spells"))
+    if(FEATS_D->usable_feat(TO, "tricky spells"))
     {
         feat_spells += ([
             "spectral hand" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),

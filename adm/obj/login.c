@@ -51,10 +51,8 @@ protected void logon()
         return;
     }
 
-    Z = random(5)+1;
-    //message("logon", read_file(WELCOME+Z),this_object());
+    message("logon", read_file(WELCOME), this_object());
     message("logon", "\n", this_object());
-    message("logon", "/daemon/welcome_d.c"->get_welcome(), this_object());
     if ("/adm/daemon/shutdown_d.c"->shuttingDown()) {
         ttl = "/adm/daemon/shutdown_d.c"->query_time_left();
         if(ttl > 0)
@@ -64,8 +62,10 @@ protected void logon()
             message("logon", "\n<<< Please consider waiting for a minute for the game to boot properly!!! >>>\n", this_object());
         }
     }
-    message("logon", "  E-mail: law@shadowgate.org\n  Website: https://shadowgate.org/\n", this_object());
-    message("logon", "  Host: shadowgate.org\n  Ports: 8080, 8443 (SSL)", this_object());
+
+    message("logon", "  Host: shadowgate.org\n  Ports: 8080, 8443 (SSL)\n", this_object());
+    message("logon", "  E-mail: law@shadowgate.org\n", this_object());
+    message("logon", "  This game is for adults (18+)", this_object());
     message("logon", "\n",this_object());
     message("logon", "\nWhat name do you choose? ", this_object());
     input_to("get_name");
@@ -161,9 +161,6 @@ void get_password(string str) {
         input_to("get_password", I_NOECHO | I_NOESC);
         return;
     }
-    if (str[0..2] != "$6$") {
-        message("logon", "\nYour password is too old. Upgrade it as soon as you can.\n", this_object());
-    }
     str = 0;
     master()->load_player_from_file(__Name, __Player);
     seteuid(UID_LOG);
@@ -195,6 +192,11 @@ protected int check_password(string str)
     if ((pass = (string)__Player->query_password()) != crypt(str, pass)) {
         return 0;
     }
+
+    if ((__Player->query_password())[0..2] != "$6$") {
+        message("logon", "\n\n  Your password is too old, upgrade it as soon as you can.\n\n", this_object());
+    }
+
     return valid_site(query_ip_number());
     __Player->remove();
 }
