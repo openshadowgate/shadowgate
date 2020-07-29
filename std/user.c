@@ -1204,250 +1204,246 @@ void check_guilds(){
   }
 }
 
-void setup() {
-  int holder1,holder2, tempage,age, hp, i,j, feats;
-  string tmp, *classes,*myknown;
-  object ob;
+/**
+ * This function cofigures logged in users, including new users. Add
+ * conversion functions here, closer to the end.
+ */
+void setup()
+{
+    int holder1, holder2, tempage, age, hp, i, j, feats;
+    string tmp, * classes, * myknown;
+    object ob;
 
-  set_living_name(query_name());
-  seteuid(getuid());
-  set_heart_beat(1);
-  if (!stats) init_stats();
-  if (!skills) init_skills(0);
-  if (member_array(query_position(), MORTAL_POSITIONS) == -1)
-    enable_wizard();
-  init_living();
-  basic_commands();
-
-  ip = "127.0.0.1";
-  last_on = ctime(time());
-  real_last_on = ctime(time());
-  static_user["time_of_login"] = time();
-  static_user["time_of_last_logout"]=query_quit_time();
-  if(!avatarp(TO))
-  {
-    static_user["down_time"]=down_time;
-    if (query_quit_time() + _TWO_WEEKS_IN_SECONDS_ < time() )
-    {
-       down_time = time() + 7200;
-       TO->set("down_time_age", TO->query_age());
+    set_living_name(query_name());
+    seteuid(getuid());
+    set_heart_beat(1);
+    if (!stats) {
+        init_stats();
     }
-    if (down_time < time() && (int)TO->query_age() > ((int)TO->query("down_time_age") + 7200))
-    {
-        down_time = 0;
-        TO->delete("down_time_age");
+    if (!skills) {
+        init_skills(0);
     }
-  }
-  if (!body) new_body();
-  if (!birth) birth = time();
-  do_encumbrance();
-  set_id(({"player"}));
-  fix_limbs();
-  tsh::initialize();
-  if (!primary_start) {
-      primary_start = getenv("start");
-  }
+    if (member_array(query_position(), MORTAL_POSITIONS) == -1) {
+        enable_wizard();
+    }
+    init_living();
+    basic_commands();
 
-  if (PERMA_DEATH_D->is_perma_deathed(query_name()) ||
-      (int)TO->query("in_the_afterlife")) {
-      tmp = new(DEATH_ROOM);
-      set_property("death_room", tmp);
-      move(tmp);
-
-      tell_room(ETO, query_cap_name() + " joins in the afterlife", TO);
-      NOTIFY_D->mud_notify("joined", this_player(), " in the afterlife");
-  }    else if (PRISON_D->is_imprisoned(query_name())) {
-      move(JAIL);
-      tell_room(ETO, query_cap_name() + " joins in JAIL.", TO);
-      NOTIFY_D->mud_notify("joined", this_player(), " (IN OOC JAIL)");
-  }else {
-      if ((string)TO->query("my_virtual_room")) {
-          if (objectp(ob = "/daemon/virtual_room_d.c"->restore_virtual_room((string)TO->query("my_virtual_room")))) {
-              if (move(ob) != MOVE_OK) {
-                  TO->delete("my_virtual_room");
-                  if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp) == MOVE_OK)) {
-                      move(ROOM_START);
-                  }
-                  setenv("start", primary_start);
-                  TO->delete("my_virtual_room");
-              }
-          }else {
-              TO->delete("my_virtual_room");
-              // tell_object(TO, "ob is NOT a valid object.");
-              if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp) == MOVE_OK)) {
-                  move(ROOM_START);
-              }
-              setenv("start", primary_start);
-          }
-      }else {
-          if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp) == MOVE_OK)) {
-              move(ROOM_START);
-          }
-          setenv("start", primary_start);
-      }
-  }
-
-  {
-      string racefile = "/std/races/" + query("race") + ".c";
-
-      if (file_exists(racefile)) {
-          if (query("no pk")) {
-              if (racefile->is_pk_race(query("subrace")) ||
-                  TO->is_undead()) {
-                  delete("no pk");
-                  tell_object(TO, "%^YELLOW%^As a player of PK race, you are no longer flagged for PK immunity.%^RESET");
-              }
-          }
-      }
-  }
-
-   register_channels();
-   if (!sizeof(query_aliases())) {
-       message("environment", "Resetting alias data.", TO);
-       init_aliases();
-       force_me("alias -reset");
-   }
-   set_property("light", -query_property("light"));
-   if (!query("race")) {
-       set_logon_notify(1);   /* default login/out messages turned on */
-       move(ROOM_SETTER);
-       tell_room(ETO, query_cap_name() + " is a new adventurer", TO);
-       NOTIFY_D->logon_notify("%^YELLOW%^" + capitalize(query_name()) + " is a new adventurer%^RESET%^", this_player());
-   } else {
-     if (member_array(query("race"),query("id")) == -1) {
-       add_id(query_race());
-     }
-     if(query("subrace")){
-       if (member_array(query("subrace"),query("id")) == -1) {
-         add_id(query("subrace"));
-       }
-     }
-     sight_bonus = (int)RACE_D->query_sight_bonus(query("race"));
-     if (query_property("spell_points")) holder1 = query_property("spell_points");
-     if (query_property("where block")) holder2 = query_property("where block");
-     remove_all_properties();
-     set_property("where block",holder2);
-     set_property("spell_points",holder1);
-     set("reply",0);
-
-     if (!stringp(tmp = getenv("TERM"))) {
-         setenv("TERM", tmp = "dumb");
-     }
-     static_user["term_info"] = (mapping)TERMINAL_D->query_term_info(tmp);
-
-     write_messages();
-
-     set_overall_ac(10 - (int)RACE_D->query_ac(TO->query_race()));
-     set_max_internal_encumbrance(1000); // Letting players hold ungodly amounts of shit until they get real.
-     add_extra_hp((int)TO->query_extra_hp() * -1); // reset this before we do autowear/curses.
-     YUCK_D->load_inventory(TO);
-     do_autowear();
-     cull_levels();
-
-    if(TO->query("new_class_type"))
-      make_new_hitpoint_rolls(TO);
-
-    convert_to_new_class_type();
-    redo_my_languages();
-    convert_relationships();
-
-    redo_active_class();
-
-    if (TO->query("relationship_profile")) {
-        if (objectp(to_object("/daemon/description_d"))) {
-            ob = new("/daemon/description_d");
-            TO->set("relationship_profile", "default");
-            if (!ob->restore_profile_settings(TO, "default")) { // restore description of default profile on login
-                ob->initialize_profile(TO);
-            }
+    ip = "127.0.0.1";
+    last_on = ctime(time());
+    real_last_on = ctime(time());
+    static_user["time_of_login"] = time();
+    static_user["time_of_last_logout"] = query_quit_time();
+    if (!avatarp(TO)) {
+        static_user["down_time"] = down_time;
+        if (query_quit_time() + _TWO_WEEKS_IN_SECONDS_ < time()) {
+            down_time = time() + 7200;
+            TO->set("down_time_age", TO->query_age());
+        }
+        if (down_time < time() && (int)TO->query_age() > ((int)TO->query("down_time_age") + 7200)) {
+            down_time = 0;
+            TO->delete("down_time_age");
         }
     }
-
-    if (objectp(find_object_or_load("/daemon/feat_d.c"))) {
-        if (TO->query("new_class_type")) {
-            if (objectp(TO)) {
-                FEATS_D->validate_class_feats(TO);
-                FEATS_D->obsolete_feat(TO);
-            }
-        }
+    if (!body) {
+        new_body();
     }
-
-    init_feats();
-    load_autoload_obj();
-
-    if (!TO->query("true_quietness")) {
-        tell_room(ETO, TOQCN + " joins", TO);
-        NOTIFY_D->mud_notify("joined", this_player());
+    if (!birth) {
+        birth = time();
     }
     do_encumbrance();
-    if (environment()->query_inn())
-      environment()->remove_tenant(query_name());
-   }
-   age = time() - (int)TO->query_birthday();
-   PLAYER_D->add_player_info();
-   if (!(PRISON_D->is_imprisoned(query_name()))) {
-       if (!query_body_type() && query_race() != "unborn") {
-           move_player("/d/dagger/bodyhold");
-       } else if (!query_eye_color() && query_race() != "unborn") {
-           move_player("/d/dagger/colorhold");
-       } else {
-           load_pets();
-       }
-   }
-   convert_kills();
-   if (query_property("inactive")) {
-       remove_property("inactive");
-   }
-   if (query_invis() && !wizardp(TO)) {
-       set_invis();
-   }
-   setup_messages();
-   init_mud_guilds();
-   init_spellcaster();
+    set_id(({ "player" }));
+    fix_limbs();
+    tsh::initialize();
+    if (!primary_start) {
+        primary_start = getenv("start");
+    }
 
-   if (query_condition() < -100) {
-       used_stamina = query_max_stamina() + 100;
-   }
+    if (PERMA_DEATH_D->is_perma_deathed(query_name()) ||
+        (int)TO->query("in_the_afterlife")) {
+        tmp = new(DEATH_ROOM);
+        set_property("death_room", tmp);
+        move(tmp);
 
-   // Migration code to standardize acquired templates
-   {
-       //Some parts of the game still refer to property "undead" in
-       //determining whether target is an undead.
-       if (query("undead")) {
-           set_property("undead", 1);
-           set_acquired_template("undead");
-           delete("undead");
-       }
-       if (query("vampire")) {
-           set_acquired_template("vampire");
-           delete("vampire");
-       }
-       if (query("wererat")) {
-           set_acquired_template("wererat");
-           delete("wererat");
-       }
-       if (query("werewolf")) {
-           set_acquired_template("werewolf");
-           delete("werewolf");
-       }
-   }
+        tell_room(ETO, query_cap_name() + " joins in the afterlife", TO);
+        NOTIFY_D->mud_notify("joined", this_player(), " in the afterlife");
+    }    else if (PRISON_D->is_imprisoned(query_name())) {
+        move(JAIL);
+        tell_room(ETO, query_cap_name() + " joins in JAIL.", TO);
+        NOTIFY_D->mud_notify("joined", this_player(), " (IN OOC JAIL)");
+    }else {
+        if ((string)TO->query("my_virtual_room")) {
+            if (objectp(ob = "/daemon/virtual_room_d.c"->restore_virtual_room((string)TO->query("my_virtual_room")))) {
+                if (move(ob) != MOVE_OK) {
+                    TO->delete("my_virtual_room");
+                    if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp) == MOVE_OK)) {
+                        move(ROOM_START);
+                    }
+                    setenv("start", primary_start);
+                    TO->delete("my_virtual_room");
+                }
+            }else {
+                TO->delete("my_virtual_room");
+                // tell_object(TO, "ob is NOT a valid object.");
+                if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp) == MOVE_OK)) {
+                    move(ROOM_START);
+                }
+                setenv("start", primary_start);
+            }
+        }else {
+            if (!((tmp = getenv("start")) && stringp(tmp) && move(tmp) == MOVE_OK)) {
+                move(ROOM_START);
+            }
+            setenv("start", primary_start);
+        }
+    }
 
-   InitInnate();
-   TO->update_channels();
-   if (avatarp(TO) && (int)TO->query_level() > 100) {
-       if (!TO->query_true_invis()) {
-           TO->set_true_invis();
-       }
-   }
-   static_user["verbose_moves"] = 1;
-   "/adm/daemon/average_age_d.c"->register_player(TO);
+    {
+        string racefile = "/std/races/" + query("race") + ".c";
 
-   if (member_array((string)TO->query_diety(), keys(PANTHEON)) == -1 && (string)TO->query_diety() != "godless") {
-       TO->set_diety(0);
-       TO->set_sphere(0);
-       TO->set_divine_domain(({}));
-   }
-   force_me("look");
+        if (file_exists(racefile)) {
+            if (query("no pk")) {
+                if (racefile->is_pk_race(query("subrace")) ||
+                    TO->is_undead()) {
+                    delete("no pk");
+                    tell_object(TO, "%^YELLOW%^As a player of PK race, you are no longer flagged for PK immunity.%^RESET");
+                }
+            }
+        }
+    }
+
+    register_channels();
+    if (!sizeof(query_aliases())) {
+        message("environment", "Resetting alias data.", TO);
+        init_aliases();
+        force_me("alias -reset");
+    }
+    set_property("light", -query_property("light"));
+    if (!query("race")) {
+        set_logon_notify(1);  /* default login/out messages turned on */
+        move(ROOM_SETTER);
+        tell_room(ETO, query_cap_name() + " is a new adventurer", TO);
+        set_blocked("wiz");
+        NOTIFY_D->logon_notify("%^YELLOW%^" + capitalize(query_name()) + " is a new adventurer%^RESET%^", this_player());
+    } else {
+        if (member_array(query("race"), query("id")) == -1) {
+            add_id(query_race());
+        }
+        if (query("subrace")) {
+            if (member_array(query("subrace"), query("id")) == -1) {
+                add_id(query("subrace"));
+            }
+        }
+        sight_bonus = (int)RACE_D->query_sight_bonus(query("race"));
+        if (query_property("spell_points")) {
+            holder1 = query_property("spell_points");
+        }
+        if (query_property("where block")) {
+            holder2 = query_property("where block");
+        }
+        remove_all_properties();
+        set_property("where block", holder2);
+        set_property("spell_points", holder1);
+        set("reply", 0);
+
+        if (!stringp(tmp = getenv("TERM"))) {
+            setenv("TERM", tmp = "dumb");
+        }
+        static_user["term_info"] = (mapping)TERMINAL_D->query_term_info(tmp);
+
+        write_messages();
+
+        set_overall_ac(10 - (int)RACE_D->query_ac(TO->query_race()));
+        set_max_internal_encumbrance(1000); // Letting players hold ungodly amounts of shit until they get real.
+        add_extra_hp((int)TO->query_extra_hp() * -1); // reset this before we do autowear/curses.
+        YUCK_D->load_inventory(TO);
+        do_autowear();
+        cull_levels();
+
+        if (TO->query("new_class_type")) {
+            make_new_hitpoint_rolls(TO);
+        }
+
+        convert_to_new_class_type();
+        redo_my_languages();
+        convert_relationships();
+
+        redo_active_class();
+
+        if (TO->query("relationship_profile")) {
+            if (objectp(to_object("/daemon/description_d"))) {
+                ob = new("/daemon/description_d");
+                TO->set("relationship_profile", "default");
+                if (!ob->restore_profile_settings(TO, "default")) { // restore description of default profile on login
+                    ob->initialize_profile(TO);
+                }
+            }
+        }
+
+        if (objectp(find_object_or_load("/daemon/feat_d.c"))) {
+            if (TO->query("new_class_type")) {
+                if (objectp(TO)) {
+                    FEATS_D->validate_class_feats(TO);
+                    FEATS_D->obsolete_feat(TO);
+                }
+            }
+        }
+
+        init_feats();
+        load_autoload_obj();
+
+        if (!TO->query("true_quietness")) {
+            tell_room(ETO, TOQCN + " joins", TO);
+            NOTIFY_D->mud_notify("joined", this_player());
+        }
+        do_encumbrance();
+        if (environment()->query_inn()) {
+            environment()->remove_tenant(query_name());
+        }
+    }
+    age = time() - (int)TO->query_birthday();
+    PLAYER_D->add_player_info();
+    if (!(PRISON_D->is_imprisoned(query_name()))) {
+        if (!query_body_type() && query_race() != "unborn") {
+            move_player("/d/dagger/bodyhold");
+        } else if (!query_eye_color() && query_race() != "unborn") {
+            move_player("/d/dagger/colorhold");
+        } else {
+            load_pets();
+        }
+    }
+    convert_kills();
+    if (query_property("inactive")) {
+        remove_property("inactive");
+    }
+    if (query_invis() && !wizardp(TO)) {
+        set_invis();
+    }
+    setup_messages();
+    init_mud_guilds();
+    init_spellcaster();
+
+    if (query_condition() < -100) {
+        used_stamina = query_max_stamina() + 100;
+    }
+
+    InitInnate();
+    TO->update_channels();
+    if (avatarp(TO) && (int)TO->query_level() > 100) {
+        if (!TO->query_true_invis()) {
+            TO->set_true_invis();
+        }
+    }
+
+    static_user["verbose_moves"] = 1;
+    "/adm/daemon/average_age_d.c"->register_player(TO);
+
+    if (member_array((string)TO->query_diety(), keys(PANTHEON)) == -1 && (string)TO->query_diety() != "godless") {
+        TO->set_diety(0);
+        TO->set_sphere(0);
+        TO->set_divine_domain(({}));
+    }
+    force_me("look");
 }
 
 void init_mud_guilds(){
@@ -4495,6 +4491,7 @@ void clear_feats()
     __FEAT_DATA = ([]);
     set_player_feats(({}));
     set_class_feats_gained(0);
+    set_racial_feats_gained(0);
     set_bonus_feats_gained(0);
     set_magic_feats_gained(0);
     set_hybrid_feats_gained(0);
@@ -4513,6 +4510,18 @@ int query_class_feats_gained()
 {
     if(!intp(__FEAT_DATA["class_feats_gained"])) { __FEAT_DATA["class_feats_gained"] = 0; }
     return __FEAT_DATA["class_feats_gained"];
+}
+
+void set_racial_feats_gained(int num)
+{
+    __FEAT_DATA["racial_feats_gained"] = num;
+    return;
+}
+
+int query_racial_feats_gained()
+{
+    if(!intp(__FEAT_DATA["racial_feats_gained"])) { __FEAT_DATA["racial_feats_gained"] = 0; }
+    return __FEAT_DATA["racial_feats_gained"];
 }
 
 void set_bonus_feats_gained(int num)
@@ -4588,6 +4597,22 @@ mapping query_class_feats()
 {
     if(!mapp(__FEAT_DATA["class"])) { __FEAT_DATA["class"] = ([]); }
     return __FEAT_DATA["class"];
+}
+
+void set_racial_feats(mapping feats)
+{
+    if(!mapp(__FEAT_DATA["racial"])) { __FEAT_DATA["racial"] = ([]); }
+    if(mapp(feats))
+    {
+        __FEAT_DATA["racial"] = feats;
+    }
+    return;
+}
+
+mapping query_racial_feats()
+{
+    if(!mapp(__FEAT_DATA["racial"])) { __FEAT_DATA["racial"] = ([]); }
+    return __FEAT_DATA["racial"];
 }
 
 void set_bonus_feats(mapping feats)
@@ -4698,6 +4723,14 @@ string *query_player_feats() {
 
     if(mapp(__FEAT_DATA["class"])) {
       testmap = __FEAT_DATA["class"];
+      mykeys = keys(testmap);
+      if(sizeof(mykeys)) {
+        for(i=0;i<sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];
+      }
+      testmap = ([]);
+    }
+    if(mapp(__FEAT_DATA["racial"])) {
+      testmap = __FEAT_DATA["racial"];
       mykeys = keys(testmap);
       if(sizeof(mykeys)) {
         for(i=0;i<sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];

@@ -2,7 +2,7 @@
 
 %^BOLD%^%^BLUE%^Stat adjustments: %^RESET%^+2 to stat of choice
 %^BOLD%^%^BLUE%^Skill adjustments: %^RESET%^+4 at first level
-%^BOLD%^%^BLUE%^Misc bonuses: %^RESET%^per ethnicity, bonus feat at first level*
+%^BOLD%^%^BLUE%^Misc bonuses: %^RESET%^per ethnicity, bonus feat at first level
 %^BOLD%^%^BLUE%^Innate spells: %^RESET%^none
 %^BOLD%^%^BLUE%^Size: %^RESET%^medium
 
@@ -18,7 +18,5 @@ Human form is where the term "humanoid" comes from. Humans have two arms, two le
 Regional ethnicities: please see <help human ethnicities>
 
 Planetouched: Creatures referred to as 'planetouched' are human, but have some kind of planar ancestor at some point in their history. These consist of tieflings (fiendish blood), aasimar (celestial blood), feytouched (fey blood), and genasi (elemental blood). These should not be confused with half-bloods, who bear a direct planar parent.
-
-*not yet implemented
 
 %^BOLD%^%^BLUE%^See also:%^RESET%^ request characters, human ethnicities, tiefling, dhampir, aasimar, feytouched, genasi, air genasi, earth genasi, fire genasi, water genasi

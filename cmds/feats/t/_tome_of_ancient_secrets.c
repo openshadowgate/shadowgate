@@ -13,7 +13,8 @@ void create() {
 "out to do : unlock access to ancient and powerful invocations, unknown to most lesser "
 "beings. This feat expands the invocations lists of the warlock, increasing the pool of "
 "masterable spells they can choose from. This feat does not automatically grant these "
-"spells, only expands the pool of spells to choose from.");
+"spells, only expands the pool of spells to choose from. In addition, the Warlock is "
+"given two bonus mastery points (stacks with spell knowledge feat).");
     permanent(1);
     set_required_for(({ "tome of ancient secrets" }));
 }

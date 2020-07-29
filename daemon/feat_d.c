@@ -418,6 +418,19 @@ int can_gain_feat(object ob,string feat)
     return 1;
 }
 
+int can_gain_racial_feat(object ob,string feat)
+{
+    int MAX_ALLOWED;
+    if(!objectp(ob)) { return 0; }
+    if(!stringp(feat)) { return 0; }
+    if(has_feat(ob,feat)) { return 0; }
+    if(!meets_requirements(ob,feat)) { return 0; }
+    MAX_ALLOWED = racial_bonus_feats(ob);
+
+    if((int)ob->query_racial_feats_gained() >= MAX_ALLOWED) { return 0; }
+    return 1;
+}
+
 int can_gain_bonus_feat(object ob,string feat)
 {
     int MAX_ALLOWED, i;
@@ -545,6 +558,19 @@ int add_my_feat(object ob,string type,string feat)
             return 1;
         }
         else return 0;
+    case "racial":
+        num = 1;
+
+        if(gain_feat(ob,type,feat,num))
+        {
+            num = 0;
+            num = (int)ob->query_racial_feats_gained();
+            num += 1;
+            ob->set_racial_feats_gained(num);
+            update_usable(ob);
+            return 1;
+        }
+        else return 0;
     case "bonus":
         num = 1;
 
@@ -618,6 +644,13 @@ int remove_my_feat(object ob,string feat,int bypass)
     remove_feat(ob,type,feat);
     switch(type)
     {
+    case "racial":
+        num = (int)ob->query_racial_feats_gained();
+        if(!num) num = 0;
+        num -= 1;
+        ob->set_racial_feats_gained(num);
+        update_usable(ob);
+        return 1;
     case "bonus":
         num = (int)ob->query_bonus_feats_gained();
         if(!num) num = 0;
@@ -759,7 +792,7 @@ varargs int gain_feat(object ob, string type, string feat,int level)
         tell_object(ob,"You have already bought one epic feat, you can't buy another.");
         return 0;
     }
-    if(member_array(type,({"class","bonus","magic","other","hybrid"})) == -1) { return 0; }
+    if(member_array(type,({"class","racial","bonus","magic","other","hybrid"})) == -1) { return 0; }
 
     add_feat(ob,type,feat,level);
 
@@ -1111,7 +1144,7 @@ string get_feat_type(object ob,string feat)
     if(!stringp(feat))      { return 0; }
     if(!has_feat(ob,feat))  { return 0; }
     if(!is_feat(feat))      { return 0; }
-    tmp = ({ "class","bonus","magic","other","hybrid" });
+    tmp = ({ "class","racial","bonus","magic","other","hybrid" });
     for(i=0;i<sizeof(tmp);i++)
     {
         feats = get_feats(ob,tmp[i]);
@@ -1226,6 +1259,9 @@ void set_feats(object ob,string type,mapping feats)
     case "class":
         ob->set_class_feats(feats);
         break;
+    case "racial":
+        ob->set_racial_feats(feats);
+        break;
     case "bonus":
         ob->set_bonus_feats(feats);
         break;
@@ -1250,6 +1286,9 @@ mapping get_feats(object ob,string type)
     {
     case "class":
         feats = ob->query_class_feats();
+        break;
+    case "racial":
+        feats = ob->query_racial_feats();
         break;
     case "bonus":
         feats = ob->query_bonus_feats();
@@ -1438,6 +1477,8 @@ string format_feat(string feat,object targ) {
         tmp = "%^BOLD%^%^RED%^" + level + "%^RESET%^";
     } else if (bought_as_class_feat(feat, targ)) {
         tmp = "%^BOLD%^%^MAGENTA%^" + level + "%^RESET%^";
+    } else if (bought_as_racial_feat(feat, targ)) {
+        tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
     } else if (bought_as_bonus_feat(feat, targ)) {
         tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
     } else if (bought_as_magic_feat(feat, targ)) {
@@ -1653,6 +1694,25 @@ int bought_as_class_feat(string feat,object targ) {
     return 1;
 }
 
+int bought_as_racial_feat(string feat,object targ) {
+    string *feat_array;
+    mapping racial_feats;
+    int *featkeys, i;
+
+    feat = lower_case(feat);
+    if(!has_feat(targ,feat)) return 0;
+    racial_feats = targ->query_racial_feats();
+    if(!mapp(racial_feats)) return 0;
+    featkeys = keys(racial_feats);
+    if(!sizeof(featkeys)) return 0;
+
+    feat_array = ({});
+    for(i=0;i<sizeof(featkeys);i++) feat_array += racial_feats[featkeys[i]];
+    if(!sizeof(feat_array)) return 0;
+    if(member_array(feat,feat_array) == -1) return 0;
+    return 1;
+}
+
 int bought_as_bonus_feat(string feat,object targ) {
     string *feat_array;
     mapping bonus_feats;
@@ -1710,16 +1770,16 @@ int bought_as_hybrid_feat(string feat,object targ) {
     return 1;
 }
 
-int human_bonus_feat(object ob)
-{
+int racial_bonus_feats(object ob) {
+    int num = 0;
     string myrace, subrace;
     myrace = ob->query_race();
     subrace = (string)ob->query("subrace");
 
-    if (myrace == "human") {
+    if (myrace == "human") { //bonus feat for baseline humans
         if (!subrace || subrace == "" || (subrace != "tiefling" && subrace != "aasimar" && subrace != "feytouched" && (strsrch(subrace, "genasi") == -1))) {
-            return 1; //bonus feat for baseline humans
+            num++;
         }
     }
-    return 0;
+    return num;
 }
