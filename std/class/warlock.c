@@ -103,6 +103,7 @@ mapping query_class_spells()
 string newbie_choice() { return "Warlock Heritage"; }
 string *query_newbie_stuff(int align)
 {
+    string * heritages = ({});
     if(!intp(align)) return ({});
     switch(align)
     {
@@ -113,6 +114,7 @@ string *query_newbie_stuff(int align)
        case 6: heritages = (({ "abyssal", "gloom", "infernal", "star" })); break;
        case 3: heritages = (({ "gloom", "infernal" })); break;
     }
+    return heritages;
 }
 void process_newbie_choice(object who, string str)
 {
