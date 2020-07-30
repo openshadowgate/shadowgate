@@ -123,7 +123,7 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
     if (x < 1) {
         return 0;
     }
-    
+
     //Checking if discipline spells could actually be mastered and cast at current level
     if(spell_type == "psion" && spell_level > to_int(ceil(to_float(target->query_prestige_level("psion")) / 2.00)))
         return 0;
@@ -333,32 +333,43 @@ mapping index_spells_for_player(object player, string myclass)
     // Pseudoclass for classes that use other classes spell lists, such as sorcerers.
     // Myclass -- player's real class.
     pclass = myclass;
-    if (myclass == "sorcerer")
+    if (myclass == "sorcerer") {
         pclass = "mage";
-    if (myclass == "oracle")
+    }
+
+    if (myclass == "oracle") {
         pclass = "cleric";
+    }
 
     all_spells = query_index(pclass);
-    if(!sizeof(all_spells))
+
+    if (!sizeof(all_spells)) {
         return ([]);
-    all_spell_names=keys(all_spells);
-    all_spell_names=keys(spellIndex);
-    all_spells= ([]);
-    tmp=([]);
+    }
+
+    all_spell_names = keys(all_spells);
+    all_spell_names = keys(spellIndex);
+    all_spells = ([]);
+    tmp = ([]);
+
     foreach(spellfile in all_spell_names)
     {
-        if (!(lvl = spellIndex[spellfile]["levels"][pclass]))
+        if (!(lvl = spellIndex[spellfile]["levels"][pclass])) {
             continue;
+        }
 
         featneeded = spellIndex[spellfile]["feats"][pclass];
-        if (featneeded != "me" && stringp(featneeded) && !FEATS_D->usable_feat(player, featneeded))
+        if (featneeded != "me" && stringp(featneeded) && !FEATS_D->usable_feat(player, featneeded)) {
             continue;
+        }
+
         if (pclass == "psion") {
             domain = spellIndex[spellfile]["discipline"];
             if (domain &&
                 domain != "me" &&
-                domain != playerdisc)
+                domain != playerdisc) {
                 continue;
+            }
         }
 
         if (pclass == "monk" &&
@@ -366,8 +377,9 @@ mapping index_spells_for_player(object player, string myclass)
             domain = spellIndex[spellfile]["way"];
             if (domain &&
                 domain != "" &&
-                domain != playerway)
+                domain != playerway) {
                 continue;
+            }
         }
         tmp[spellfile] = lvl;
     }
@@ -375,46 +387,53 @@ mapping index_spells_for_player(object player, string myclass)
 }
 
 /**
- * Filters index by unrestricted spells only
+ * Filters index by unrestricted spells only, spells one can master.
  */
-mapping index_unrestricted_spells(string myclass)
+mapping index_unrestricted_spells(object player, string myclass)
 {
-    mapping all_spells,tmp;
-    string *all_spell_names, spellfile, featneeded,domain, pclass;
-    int lvl,i,j,k;
+    mapping all_spells, tmp;
+    string* all_spell_names, spellfile, featneeded, domain, pclass;
+    int lvl, i, j, k;
     object spell;
 
     pclass = myclass;
-    if (pclass == "sorcerer")
+    if (pclass == "sorcerer") {
         pclass = "mage";
-    if (pclass == "oracle")
+    }
+    if (pclass == "oracle") {
         pclass = "cleric";
+    }
 
     all_spells = query_index(pclass);
-    if(!sizeof(all_spells))
+    if (!sizeof(all_spells)) {
         return ([]);
-    all_spell_names=keys(all_spells);
-    all_spell_names=keys(spellIndex);
-    all_spells= ([]);
-    tmp=([]);
+    }
+
+    all_spell_names = keys(all_spells);
+    all_spell_names = keys(spellIndex);
+    all_spells = ([]);
+    tmp = ([]);
+
     foreach(spellfile in all_spell_names)
     {
-
-        if(!(lvl = spellIndex[spellfile]["levels"][pclass]))
+        if (!(lvl = spellIndex[spellfile]["levels"][pclass])) {
             continue;
-
-        featneeded = spellIndex[spellfile]["feats"][pclass];
-        if(featneeded != "me" && stringp(featneeded))
-            continue;
-        if(pclass=="psion")
-        {
-            domain = spellIndex[spellfile]["discipline"];
-            if(domain &&
-               domain != "me")
-                continue;
         }
 
-        tmp[spellfile]=lvl;;
+        featneeded = spellIndex[spellfile]["feats"][pclass];
+        if (featneeded != "me" && stringp(featneeded) && !FEATS_D->usable_feat(player, featneeded)) {
+            continue;
+        }
+
+        if (pclass == "psion") {
+            domain = spellIndex[spellfile]["discipline"];
+            if (domain &&
+                domain != "me") {
+                continue;
+            }
+        }
+
+        tmp[spellfile] = lvl;;
     }
     return tmp;
 }

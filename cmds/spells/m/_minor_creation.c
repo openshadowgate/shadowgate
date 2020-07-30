@@ -12,7 +12,7 @@ void create() {
     string stufflist, *tmp = ({});
     ::create();
     set_spell_name("minor creation");
-    set_spell_level(([ "cleric" : 1, "mage" : 4, "inquisitor" : 1, "psion" : 1 ]));
+    set_spell_level(([ "cleric" : 1, "mage" : 4, "inquisitor" : 1, "psion" : 1, "warlock" : 1 ]));
     set_spell_sphere("conjuration_summoning");
     set_discipline("shaper");
     set_spell_domain("creation");
@@ -27,6 +27,7 @@ void create() {
     set_somatic_comp();
     set_arg_needed();
     set_helpful_spell(1);
+    set_feats_required(([ "warlock" : "book of shadows"]));
 }
 
 string query_cast_string(){
