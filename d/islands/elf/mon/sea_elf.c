@@ -1,17 +1,15 @@
-// Gnome that needs his machine fixed
+// sea elf wants fish
 #include <std.h>
 #include <daemons.h>
-#include "../deep_echo.h"
+#include "../elf.h"
 inherit "/std/monster";
-int hasdrill, hascog;
-
 
 create() {
   ::create();
   set_name("sea elf");
   set_id(({"elf","monster","sea elf"}));
   set_gender("female");
-  set_race("gnome");
+  set_race("elf");
   set_short("Sea Elf Fisher");
   set_long("This elf is dressed in some large "+
   "fish hides to fight the cold.  She has an "+
@@ -35,6 +33,8 @@ create() {
    "Sea Elf sharpens a small knife.",
    "Sea Elf puts some crab parts in a box.",
    "%^MAGENTA%^Sea Elf says:%^RESET%^ I want lots of lobster.",
+   "%^MAGENTA%^Sea Elf says:%^RESET%^ Crabs eat dead things  I bet there are lots of dead things under the ice.",
+   "%^MAGENTA%^Sea Elf says:%^RESET%^ The heart of water was moved and weird things started happening in the sea.",
    "%^MAGENTA%^Sea Elf says:%^RESET%^ If you get me a lobster or a crab I will pay you for it.",
    "Sea Elf throws some firewood on the fire.",
    "%^MAGENTA%^Sea Elf says:%^RESET%^ Imagine going to dinner and getting served a six foot lobster!",
@@ -57,15 +57,15 @@ void receive_given_item(object obj){
 	  }
 
    switch (item){
-     case "Dire Crab" :
+     case "Dire Crab" :{
 	     force_me("say Thank you for the Crab!");
-		 }
+   }
 	 break;
 	 
-	 case "Dire Lobster":
+	 case "Dire Lobster":{
 
 	     force_me("say Thank you for the Lobster.");
-		 }
+    }
 	 break;}
 	 
    tell_room(ETO,"The Sea Elf puts the meat away and hands you some money.");
