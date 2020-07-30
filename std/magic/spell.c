@@ -2779,7 +2779,7 @@ varargs int do_save(object targ, int mod)
 
 // racial saves from magic here
 
-    caster_bonus = SAVING_THROW_D->magic_save_throw_adjust(targ, caster, );
+    caster_bonus += SAVING_THROW_D->magic_save_throw_adjust(targ, caster, );
 
 
 // racial saves from spells here
