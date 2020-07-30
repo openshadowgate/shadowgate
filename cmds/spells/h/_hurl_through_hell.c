@@ -80,7 +80,7 @@ void spell_effect(int prof)
     spell_successful();
     caster->set_property("spell hurl hell time", time());
     
-    if(do_save(target, clevel))
+    if(do_save(target, 0))
     {
         tell_object(caster, sprintf("%s resists your attempts to throw them through the nine hells.", target->QCN));
         tell_object(target, "You shake off the effects of the spell.");
