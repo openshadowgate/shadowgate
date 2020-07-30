@@ -135,7 +135,7 @@ int confirm_drop(string str, string theclass, int drop, int cost)
 // moved all of the next section out of the above subquery; N, 6/16
 // these should be run regardless of 1/0 level in the abandoned class
 // allows players to reset certain attributes, and mastered spells should be cleared by default
-    if (theclass == "mage" || theclass == "sorcerer" || theclass == "psywarrior" || theclass == "warlock" || theclass == "psion" || theclass == "inquisitor" || theclass == "bard") {
+    if (sizeof(TP->query_mastered_spells())) {
         tell_object(TP, "%^BOLD%^Clearing mastered spells... please reassign your spell slots if you still have class levels.");
         TP->reset_mastered();
     }
