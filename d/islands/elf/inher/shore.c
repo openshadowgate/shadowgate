@@ -42,7 +42,7 @@ string long_desc(){
 string night_desc() {
    return("%^BLUE%^This is an ice shelf that juts "+
    "out over the %^CYAN%^ocean%^BLUE%^.  The glacier meets the %^CYAN%^water%^BLUE%^"+
-   " here and breaks apart into the water forming %^CYAN%^ice "+
+   " here and breaks apart into the water forming %^CYAN%^ice"+
    " bergs%^BLUE%^ that float away.  There isn't anything "+
    "growing here.  It is just snow and ice and a piercing"+
    " wind.  One must watch one's footing - a slip could "+

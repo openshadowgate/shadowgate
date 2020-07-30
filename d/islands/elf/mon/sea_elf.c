@@ -70,11 +70,11 @@ void receive_given_item(object obj){
 	 
    tell_room(ETO,"The Sea Elf puts the meat away and hands you some money.");
    
-   force_me("say Thanks for helping.  Trying to get those things caught in a trap is proving to be impossible but they look really tasty");
+   force_me("say Thanks for helping.  Trying to get those things caught in a trap is proving to be impossible but they look really tasty!");
   
    force_me("emote gets a sack of gold.");
 
-   tell_object(TP,"Sea Elf give you 1000 gold coins.");
+   tell_object(TP,"Sea Elf gives you 1000 gold coins.");
    TP->add_money("gold",1000);
 }
 void catch_say(string msg){
