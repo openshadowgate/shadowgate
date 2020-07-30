@@ -15,9 +15,9 @@ void create() {
    set_name("wall of fire");
    set_short("%^BOLD%^%^RED%^A %^RESET%^%^MAGENTA%^w%^BOLD%^%^RED%^all %^RESET%^%^MAGENTA%^o%^BOLD%^%^RED%^f %^RESET%^%^MAGENTA%^f%^BOLD%^%^RED%^ire%^RESET%^");
    set_long("%^BOLD%^%^RED%^You see a massive opaque sheet of fire raging wildly upward in shades of %^MAGENTA%^violet %^RED%^and red.");
-   set_id( ({"wall","wall of fire","firewall","fire"}) );
+   set_id( ({"wall","wall of fire","firewall","fire","mirror"}) );
    set_weight(10000);
-   set_value(0);
+   set_value(10000);
    set_property("no animate",1);
  }
 
@@ -189,4 +189,8 @@ int end_walls(string str) {
 
 int query_blocking(){
     return blocking;
+}
+
+int is_scrying_mirror() {
+	return 1;
 }
