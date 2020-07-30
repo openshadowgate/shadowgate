@@ -89,7 +89,7 @@ int caster_level_calcs(object player, string the_class)
     if(!objectp(player)) { return 0; }
     switch(the_class)
     {
-        case "hellfire_warlock":
+        case "tome_bound_master":
         case "warlock":
             level = player->query_class_level("warlock");
             level += player->query_class_level("tome_bound_master");
