@@ -112,6 +112,10 @@ void reply_func(string msg, object who){
    object current;
    object obj;
    string name;
+
+   if (!objectp(who)) {
+       return;
+   }
    set_spoken("wizish");
    name = who->query_name();
    if(!msg || !objectp(who)) return;

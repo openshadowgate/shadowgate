@@ -56,6 +56,8 @@ int cmd_master(string args)
                 write("%^CYAN%^Level "+(i+1)+": %^RESET%^"+spelllevels[i]+" of "+CLASSMAP[myclass][mylvl][i]);
         if(FEATS_D->usable_feat(TP,"spell knowledge"))
             bonuslimit+=2;
+        if(FEATS_D->usable_feat(TP,"tome of ancient secrets"))
+            bonuslimit+=2;
         if(FEATS_D->usable_feat(TP,"greater spell knowledge"))
             bonuslimit+=5;
         if(bonuslimit)

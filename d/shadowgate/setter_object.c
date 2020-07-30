@@ -942,7 +942,7 @@ hint_alignment()
     write("
 %^BOLD%^Many ages of arguing have been dedicated to this selection. In the end, your alignment determines your disposition to the law and actions you tend to take. It also restricts %^CYAN%^deities%^WHITE%^ you will be able to select later, and for some classes it restricts %^CYAN%^class special%^WHITE%^ choices.%^WHITE%^.
 
-%^BOLD%^Refer to %^ORANGE%^<help alignment>%^WHITE%^ if you want to know more about alignments on ShadowGate.");
+%^BOLD%^Refer to %^ORANGE%^<help alignments>%^WHITE%^ if you want to know more about alignments on ShadowGate.");
 }
 
 string *generate_deity()

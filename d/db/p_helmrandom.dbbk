@@ -1,3 +1,0 @@
-|speech ask+Do you come to pay homage or learn to be a guardian?+@eye++|speech state firmly+Helmite trained guardians are counted among the most vigilant and worthy.+If you choose this path you must never waver in that duty.+|speech
-$glances around the temple and then looks squarely at you.+|speech state firmly+All should pay homage to Helm often and support his clergy.+Only then when there is need of a guardian will you find one properly trained and vigilant.+|speech
-|speech say with fervor+They also serve who stand and wait and watch carefully.+To wait and watch diligently are virtues all should learn from Helm's teachings.++$pauses emphatically.++Even moreso, careful planning always defeats rushed actions in the end.+|speech

@@ -676,6 +676,9 @@ int query_resistance(string res)
         if ((string)TO->query("warlock heritage") == "demonic" && res == "electricity") {
             myres += 10;
         }
+		if((string)TO->query("warlock heritage") == "star" && res == "psychic") {
+            myres += 10;
+        }
         if ((string)TO->query("warlock heritage") == "gloom" && res == "cold") {
             myres += 10;
         }

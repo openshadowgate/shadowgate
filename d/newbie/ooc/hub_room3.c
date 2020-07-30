@@ -59,10 +59,7 @@ int bypass_func(string str)
     NEWB_D->spawn_eq(TP, 4);
     NEWB_D->advance_level(TP);
     NEWB_D->spawn_eq(TP, 5);
-    NEWB_D->advance_level(TP);
-    //NEWB_D->spawn_eq(TP, 6);
-    NEWB_D->advance_level(TP);
-    NEWB_D->advance_level(TP);
+
     TP->add_money("gold",10000);
     if(objectp(ob = present("newbiemassobject", TP))) ob->remove();
     tell_object(TP, "\n%^BOLD%^%^WHITE%^You feel the world around you "+
