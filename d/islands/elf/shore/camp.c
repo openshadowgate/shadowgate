@@ -1,6 +1,6 @@
 #include <std.h>
 #include "../elf.h"
-inherit CROOM;
+inherit CVAULT;
 
 
 void create(){
@@ -23,10 +23,11 @@ void create(){
    "Cracks like thunder echo through the place as the ice shifts.");
    set_smell("default",
    "Your nose is freezing.");
-   set_exits(([ "out" : ROOMS"shore6", 
+   set_exits(([ "out" : ROOMS"shore/shore6", 
       ]));
-       set_door_description("gate","The gates are made of driftwood and rope.");
-       set_door("gate",ROOMS"/shore/shore6","out","elfkey");
+   set_door("gate",ROOMS"/shore/shore6","out","elfkey");
+   set_door_description("gate","The gates are made of driftwood and rope.");
+       
 }
 
 string long_desc(){
@@ -73,6 +74,7 @@ void reset(){
                break;	
       case 6:  tell_room(TO,"%^CYAN%^The wind dies down,"+
 	  " leaving a cold hush.");
-               break;				   }
+               break;				   
+               }
  return;
 }
