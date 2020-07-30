@@ -230,6 +230,13 @@ int pray()
         log_file("deathlexp", TPQN + " lost " + exploss + " in resurrection at a church.\n");
 
         if (TP->query("hardcore")) {
+            if (sizeof(classes) > 1) {
+                for (i = 1; i < sizeof(classes); i++) {
+                    TP->set_guild_level(classes[i], 0);
+                    TP->set_mlevel(classes[i], 0);
+                    TP->remove_class(classes[i]);
+                }
+            }
             TP->set_general_exp(myclass, total_exp_for_level(6));
         } else if (TP->query("pk_trial")) {
             if (thelevel > 11) {
