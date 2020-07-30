@@ -237,6 +237,14 @@ int pray()
                     TP->remove_class(classes[i]);
                 }
             }
+            TP->set_posed(classes[0]);
+            TP->set("active_class", classes[0]);
+            TP->force_me("fixspells");
+            TP->set("hp_array", 0);
+            TP->make_new_hitpoint_rolls(TP);
+            TP->InitInnate();
+            TP->clear_feats();
+            TP->delete("free_feat_wipe");
             TP->set_general_exp(myclass, total_exp_for_level(6));
         } else if (TP->query("pk_trial")) {
             if (thelevel > 11) {
