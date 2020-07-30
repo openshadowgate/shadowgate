@@ -224,6 +224,8 @@ int pray()
         exp = (int)TP->query_exp();
 
         expdelta = exp_for_level(thelevel);
+
+        // Weak punishment for low levels, but starting from L40 it will always take a level.
         exploss = expdelta * (7 * thelevel * thelevel - 30 * thelevel + 2000) / 12000;
         log_file("deathlexp", TPQN + " lost " + exploss + " in resurrection at a church.\n");
 
@@ -237,6 +239,7 @@ int pray()
         } else {
             if (exp > total_exp_for_level(thelevel + 1)) {
                 exploss *= 2;
+                exploss += (exp - total_exp_for_level(thelevel + 1));
             }
             if (exp - exploss <= total_exp_for_level(6)) {
                 exploss = exp - total_exp_for_level(6);
