@@ -27,7 +27,7 @@ void create()
     set_somatic_comp();
     set_save("reflex");
     splash_spell(3);
-    debug_saves(1);
+    //debug_saves(1);
 }
 
 void spell_effect(int prof)
