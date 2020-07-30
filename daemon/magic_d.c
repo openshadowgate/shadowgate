@@ -123,7 +123,7 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
     if (x < 1) {
         return 0;
     }
-    
+
     //Checking if discipline spells could actually be mastered and cast at current level
     if(spell_type == "psion" && spell_level > to_int(ceil(to_float(target->query_prestige_level("psion")) / 2.00)))
         return 0;
@@ -377,7 +377,7 @@ mapping index_spells_for_player(object player, string myclass)
 /**
  * Filters index by unrestricted spells only
  */
-mapping index_unrestricted_spells(string myclass)
+mapping index_unrestricted_spells(object player, string myclass)
 {
     mapping all_spells,tmp;
     string *all_spell_names, spellfile, featneeded,domain, pclass;
@@ -404,8 +404,9 @@ mapping index_unrestricted_spells(string myclass)
             continue;
 
         featneeded = spellIndex[spellfile]["feats"][pclass];
-        if(featneeded != "me" && stringp(featneeded))
+        if (featneeded != "me" && stringp(featneeded) && !FEATS_D->usable_feat(player, featneeded))
             continue;
+
         if(pclass=="psion")
         {
             domain = spellIndex[spellfile]["discipline"];
