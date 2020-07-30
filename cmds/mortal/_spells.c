@@ -176,7 +176,7 @@ void CleanUpSpellObjects()
 
 int get_spells(object player, string myclass)
 {
-    spells=MAGIC_D->index_spells_for_player(player,myclass);
+    spells=MAGIC_D->index_castable_spells(player,myclass);
 }
 
 int full_list(object player, string myclass)

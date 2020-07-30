@@ -122,7 +122,7 @@ int cmd_master(string args)
 
     if (sscanf(args, "level %d", slvl) == 1) {
         string* myspells = TP->query_mastered_base()[myclass];
-        mapping spell_index = MAGIC_D->index_unrestricted_spells(TP, myclass);
+        mapping spell_index = MAGIC_D->index_masterable_spells(TP, myclass);
         string* savail;
 
         savail = keys(filter_mapping(spell_index, (: $2 == $3:), slvl));
@@ -140,7 +140,7 @@ int cmd_master(string args)
     }
 
     if (sscanf(args, "forget %s", sarg) == 1) {
-        mapping spell_index = MAGIC_D->index_unrestricted_spells(TP, myclass);
+        mapping spell_index = MAGIC_D->index_masterable_spells(TP, myclass);
         string* myspells = TP->query_mastered_base()[myclass];
         int forgettime = (int)TP->query("last_master_forget");
 
@@ -169,7 +169,7 @@ int cmd_master(string args)
     }
 
     {
-        mapping spell_index = MAGIC_D->index_unrestricted_spells(TP, myclass);
+        mapping spell_index = MAGIC_D->index_masterable_spells(TP, myclass);
         int mylvl = TP->query_prestige_level(myclass);
         int bonuslimit = 0;
         int *knownperlevel = allocate(9);
@@ -253,7 +253,7 @@ void validate_mastered()
         {
             string* spell_index;
             mapping index_map = MAGIC_D->query_index(myclass);
-            mapping myunrestricted = MAGIC_D->index_unrestricted_spells(TP, myclass);
+            mapping myunrestricted = MAGIC_D->index_masterable_spells(TP, myclass);
 
             if (!sizeof(index_map)) {
                 spell_index = ({});
