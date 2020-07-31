@@ -5,13 +5,15 @@
 inherit SHAPESHIFT;
 
 //Attack interval to perform these moves
-#define SWIPE_COUNT  5   //Every X claws is a swipe
+#define SWIPE_COUNT  5  //Every X claws is a swipe
 #define SWEEP_COUNT  5  //Every X tails is a sweep
 #define BREATH_COUNT 8  //Every X bites is a breath
+#define DEATH_COUNT  9
 
 int breath_count,
     swipe_count,
-    sweep_count;
+    sweep_count,
+    death_count;
 
 //Prototyping    
 void breath_attack(object player, object target, int clevel);
@@ -135,9 +137,13 @@ int bite_attack(object player, object target)
     }
     
     breath_count++;
+    death_count++;
     
     if(breath_count >= BREATH_COUNT)
         breath_attack(player, target, level * 2);
+    if(death_count >= DEATH_COUNT)
+        death_attack(player, target, level);
+        
     
     return roll_dice(1 + (level / 2), 6);   
 }
@@ -241,6 +247,53 @@ void breath_attack(object player, object target, int clevel)
             tell_room(room,"%^BOLD%^%^RED%^"+ob->QCN+" is seared horribly by the flames!",({ player, ob}));
             ob->cause_typed_damage(ob,ob->return_target_limb(),dam,"fire");
         }
+    }
+}
+
+void death_attack(object player, object target, int clevel)
+{
+    object room,
+           head;
+           
+    int dam;
+    
+    if(!player || !target)
+        return;
+    
+    room = environment(player);
+    
+    if(room != environment(target))
+        return;
+    
+    death_count = 0;
+    
+    if(!target->query_property("no death"))
+    {
+        head = new("/std/obj/body_part.c");
+        head->set_limb(target->query("short"),"head");
+        head->move(room);
+
+        tell_object(player,"%^BOLD%^%^BLUE%^You clamp your razor-like jaws onto "+target->QCN+"'s head and grab onto "+target->QO+" with both powerful clawed fists!");
+        tell_object(target,"%^BOLD%^%^BLUE%^"+player->QCN+" clamps "+player->QP+" jaws onto your head and grabs your body in "+player->QP+" powerful claws!");
+        tell_room(room,"%^BOLD%^%^BLUE%^"+player->QCN+" clamps "+player->QP+" jaws onto "+target->QCN+"'s head and grabs "+target->QP+" body in "+player->QP+" powerful claws!",({ player,target }));
+
+        tell_object(player,"%^RESET%^%^BOLD%^With a mighty heave, you draw your muscular neck back.  You can hear the sound of popping tendons and cracking bones as you %^RED%^pull "
+        ""+target->QCN+"'s head free of "+target->QP+" neck%^RESET%^%^BOLD%^!");
+        tell_object(target,"%^RESET%^%^BOLD%^You realize in horror as "+player->QCN+" begins to wrench "+player->QP+" neck back, that there's nothing you can do!");
+        tell_object(target,"%^RESET%^%^BOLD%^%^RED%^You feel incredible agony in your neck as your spine breaks, and then the world fades into blackness, your life snuffed out!");
+        tell_room(room,"%^RESET%^%^BOLD%^You can hear the sound of popping tendons and cracking bones as "+player->QCN+" draws "+player->QP+" powerful neck back, %^RED%^pulling "+target->QCN+"'s "
+        "head off of "+target->QP+" shoulders!%^RESET%^",({ player, target }));                                   
+        tell_object(player,"%^RESET%^%^BOLD%^%^GREEN%^You toss "+target->QCN+"'s lifeless body aside and crunch the head one final time before spitting it onto the ground!");
+        tell_room(room,"%^RESET%^%^BOLD%^%^GREEN%^"+player->QCN+" tosses "+target->QCN+"'s lifeless body aside and crunches "+target->QP+" head before spitting it out on the ground!",({ player, target }));
+        target->cause_typed_damage(target,target->return_target_limb(),target->query_max_hp()+400,"untyped");
+        target->die();
+    }
+    else
+    {
+        tell_object(player,"%^BLUE%^You snap your powerful jaws down at "+target->QCN+"'s head, but "+target->QS+" dodges aside at the last instant, you hit "+target->QP+" shoulder instead!");
+        tell_object(target,"%^BLUE%^"+player->QCN+" snaps "+player->QP+" powerful jaws down at your head but you dodge aside at the last instant and "+player->QS+" hits your shoulder instead!");
+        tell_room(room,"%^BLUE%^"+player->QCN+" snaps "+player->QP+" powerful jaws down at "+target->QCN+"'s head, but "+target->QS+" dodges aside at the last instant and "+player->QS+" hits "+target->QP+" shoulder instead!",({ player, target }));
+        target->cause_typed_damage(target,target->return_target_limb(),roll_dice(clevel,10),get_new_damage_type());                    
     }
 }
 
