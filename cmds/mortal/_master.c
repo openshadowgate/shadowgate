@@ -74,13 +74,6 @@ int cmd_master(string args)
             write("%^CYAN%^You can learn " + bonuslimit + " spells above limit due to your spell knowledge feat.");
         }
 
-        {
-            string* bonusspells = TP->query_mastered_bonus()[myclass];
-            if (sizeof(bonusspells)) {
-                write("%^CYAN%^You know " +sizeof(bonusspells)+" extra spells.%^RESET%^");
-            }
-        }
-
         return 1;
     }
 
