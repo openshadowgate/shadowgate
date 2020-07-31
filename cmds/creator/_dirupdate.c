@@ -20,8 +20,8 @@ int cmd_dirupdate(string str)
         return 1;
     }
 
-    if (!regexp(file, "^(/d/|/realms/)")) {
-        write("dirupdate win't work outside of /d/ and /realms/ because of reasons.");
+    if (!regexp(file, "^(/d/|/realms/|/cmds/)")) {
+        write("dirupdate win't work outside of /d/, /cmds/ and /realms/ because of reasons.");
         return 1;
     }
 

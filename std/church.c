@@ -224,10 +224,27 @@ int pray()
         exp = (int)TP->query_exp();
 
         expdelta = exp_for_level(thelevel);
+
+        // Weak punishment for low levels, but starting from L40 it will always take a level.
         exploss = expdelta * (7 * thelevel * thelevel - 30 * thelevel + 2000) / 12000;
         log_file("deathlexp", TPQN + " lost " + exploss + " in resurrection at a church.\n");
 
         if (TP->query("hardcore")) {
+            if (sizeof(classes) > 1) {
+                for (i = 1; i < sizeof(classes); i++) {
+                    TP->set_guild_level(classes[i], 0);
+                    TP->set_mlevel(classes[i], 0);
+                    TP->remove_class(classes[i]);
+                }
+            }
+            TP->set_posed(classes[0]);
+            TP->set("active_class", classes[0]);
+            TP->force_me("fixspells");
+            TP->set("hp_array", 0);
+            TP->make_new_hitpoint_rolls(TP);
+            TP->InitInnate();
+            TP->clear_feats();
+            TP->delete("free_feat_wipe");
             TP->set_general_exp(myclass, total_exp_for_level(6));
         } else if (TP->query("pk_trial")) {
             if (thelevel > 11) {
@@ -237,6 +254,7 @@ int pray()
         } else {
             if (exp > total_exp_for_level(thelevel + 1)) {
                 exploss *= 2;
+                exploss += (exp - total_exp_for_level(thelevel + 1));
             }
             if (exp - exploss <= total_exp_for_level(6)) {
                 exploss = exp - total_exp_for_level(6);

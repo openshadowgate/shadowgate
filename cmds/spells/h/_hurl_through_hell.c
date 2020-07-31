@@ -42,12 +42,12 @@ int preSpell()
         tell_object(caster, "That is not a valid target.");
         return 0;
     }
-/*   
+   
     if ((int)caster->query_property("spell hurl hell time") + DELAY > time()) {
         tell_object(caster, "You cannot use hurl through hell yet.");
         return 0;
     }
-*/  
+  
     return 1;
 }
 string query_cast_string()

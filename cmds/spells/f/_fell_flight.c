@@ -77,7 +77,7 @@ void spell_effect(int prof) {
 	   case "star":
         tell_room(caster,"%^RESET%^%^ORANGE%^You straighten your shoulders as starry wings of %^BLUE%^e%^WHITE%^n%^BLUE%^d%^BOLD%^%^WHITE%^l%^RESET%^%^BLUE%^e%^WHITE%^s%^BLUE%^s%^WHITE%^ cosmos %^RESET%^ %^ORANGE%^unfurl from them!%^RESET%^");
         tell_room(place,"%^RESET%^%^ORANGE%^"+caster->QCN+" straightens "+caster->QP+" shoulders as starry wings of %^BLUE%^e%^WHITE%^n%^BLUE%^d%^BOLD%^%^WHITE%^l%^RESET%^%^BLUE%^e%^WHITE%^s%^BLUE%^s%^WHITE%^ cosmos %^RESET%^ %^ORANGE%^unfurl from them!%^RESET%^",caster);
-        caster->set_property("added short",({"%^BOLD%^%^CYAN%^ (trailed by %^BLUE%^s%^WHITE%^t%^BLUE%^a%^BOLD%^%^WHITE%^r%^RESET%^%^BLUE%^r%^WHITE%^y wings)%^RESET%^"}));
+        caster->set_property("added short",({"%^BOLD%^%^MAGENTA%^ (trailed by %^BLUE%^s%^WHITE%^t%^BLUE%^a%^BOLD%^%^WHITE%^r%^RESET%^%^BLUE%^r%^WHITE%^y wings)%^RESET%^"}));
       break;
       case "gloom":
         tell_room(caster,"%^RESET%^%^ORANGE%^You straighten your shoulders as hazy wings of %^BOLD%^%^BLACK%^s%^RESET%^h%^BOLD%^%^BLACK%^a%^RESET%^do%^BOLD%^%^BLACK%^w %^RESET%^%^ORANGE%^unfurl from them!%^RESET%^");

@@ -317,7 +317,7 @@ mapping query_index_row(string spell)
 /**
  * Filters spellist based on player class and feats and returns it.
  */
-mapping index_spells_for_player(object player, string myclass)
+mapping index_castable_spells(object player, string myclass)
 {
     mapping all_spells, tmp;
     string* all_spell_names, spellfile, featneeded, domain, pclass;
@@ -389,7 +389,7 @@ mapping index_spells_for_player(object player, string myclass)
 /**
  * Filters index by unrestricted spells only, spells one can master.
  */
-mapping index_unrestricted_spells(object player, string myclass)
+mapping index_masterable_spells(object player, string myclass)
 {
     mapping all_spells, tmp;
     string* all_spell_names, spellfile, featneeded, domain, pclass;
@@ -447,17 +447,25 @@ mapping index_unrestricted_spells(object player, string myclass)
 mapping index_ki_spells_by_level(object player)
 {
     mapping tmp = ([]);
-    mapping sindex = index_spells_for_player(player, "monk");
+    mapping sindex = index_castable_spells(player, "monk");
     string key;
     foreach(key in keys(sindex))
     {
-        if (!pointerp(tmp[sindex[key]]))
+        if (!pointerp(tmp[sindex[key]])) {
             tmp += ([sindex[key] : ({})]);
+        }
         tmp[sindex[key]] += ({ key });
     }
     return tmp;
 }
 
+/**
+ * Returns random spell from the db, available filters are level (except for monk levels) and class.
+ *
+ * @param myclass class to choose spell from. Optional. If not chosen selects random class
+ * @param lev level to choose spell from, between 1 and 9. Optional. If not chosen selects random level
+ * @return random spell row
+ */
 mixed query_random_spell(string myclass, int lev)
 {
     string ctype, cspell, * rspell;
@@ -492,7 +500,7 @@ mixed query_random_spell(string myclass, int lev)
         if (lev > 6) {
             lev = 6;
         }
-    case "psion": case "mage": case "cleric": case "sorcerer": case "druid": case "oracle":
+    default:
         if (lev > 9) {
             lev = 9;
         }
