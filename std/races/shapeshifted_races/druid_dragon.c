@@ -5,9 +5,9 @@
 inherit SHAPESHIFT;
 
 //Attack interval to perform these moves
-#define SWIPE_COUNT  5
-#define SWEEP_COUNT  10
-#define BREATH_COUNT 10
+#define SWIPE_COUNT  5   //Every X claws is a swipe
+#define SWEEP_COUNT  5  //Every X tails is a sweep
+#define BREATH_COUNT 8  //Every X bites is a breath
 
 int breath_count,
     swipe_count,
@@ -38,8 +38,8 @@ void create()
     set_shape_bonus("perception",4);
     set_shape_bonus("survival",4);
     set_shape_bonus("sight bonus",4);
-    set_shape_bonus("damage bonus",4);
-    set_shape_bonus("attack bonus",4);
+    set_shape_bonus("damage bonus",5);
+    set_shape_bonus("attack bonus",5);
     set_shape_bonus("damage resistance",20);
     set_shape_bonus("magic resistance",20);
     set_shape_height(200+random(100));
@@ -131,15 +131,15 @@ int bite_attack(object player, object target)
     if(FEATS_D->usable_feat(TP,"perfect predator"))
     {
         level += 2;
-        player->add_hp(10 + roll_dice(level, dice) / 2);
+        player->add_hp(10 + roll_dice(level, 8) / 2);
     }
     
     breath_count++;
     
     if(breath_count >= BREATH_COUNT)
-        breath_attack(player, target, level);
+        breath_attack(player, target, level * 2);
     
-    return roll_dice(1 + (level / 2), 4);   
+    return roll_dice(1 + (level / 2), 6);   
 }
 
 int claw_attack(object player, object target)
@@ -160,7 +160,7 @@ int claw_attack(object player, object target)
     if(FEATS_D->usable_feat(TP,"perfect predator"))
     {
         level += 2;
-        player->add_hp(10 + roll_dice(level, dice) / 2);
+        player->add_hp(10 + roll_dice(level, 8) / 4);
     }
     
     swipe_count++;
@@ -168,7 +168,7 @@ int claw_attack(object player, object target)
     if(swipe_count >= SWIPE_COUNT)
         swipe_attack(player, target, level);
     
-    return roll_dice(1 + (level / 2), 4);
+    return roll_dice(1 + (level / 2), 6);
 }
 
 int tail_attack(object player, object target)
@@ -189,7 +189,7 @@ int tail_attack(object player, object target)
     if(FEATS_D->usable_feat(TP,"perfect predator"))
     {
         level += 2;
-        player->add_hp(10 + roll_dice(level, dice) / 2);
+        player->add_hp(10 + roll_dice(level, 8) / 2);
     }
     
     sweep_count++;
@@ -197,7 +197,7 @@ int tail_attack(object player, object target)
     if(sweep_count >= SWEEP_COUNT)
         sweep_attack(player, target, level);
     
-    return roll_dice(1 + (level / 2), 4);
+    return roll_dice(1 + (level / 2), 6);
 }
 
 void breath_attack(object player, object target, int clevel)
@@ -223,7 +223,7 @@ void breath_attack(object player, object target, int clevel)
     tell_room(room,"%^RED%^"+player->QCN+"'s mouth opens and a withering torrent of fire pours forth!",player);
     
     attackers = player->query_attackers();
-    dam = roll_dice(clevel, 15);  
+    dam = roll_dice(clevel, 12);  
     
     foreach(object ob in attackers)
     {
