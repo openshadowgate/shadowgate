@@ -16,6 +16,8 @@ as a permanent effect.");
     set_required_for(({}));
 }
 
+int allow_shifted() { return 1; }
+
 int prerequisites(object ob)
 {
     if (!objectp(ob))
