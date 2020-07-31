@@ -24,20 +24,20 @@ int clean_up()
  */
 void display_hint()
 {
-    object *people, peep;
-    people = filter_array(users(),(:!$1->query("no hints"):));
-    if(sizeof(people))
-    {
-        string *hints;
+    object* people, peep;
+    people = filter_array(users(), (: !$1->query("no hints") :));
+    if (sizeof(people)) {
+        string* hints;
         string hint;
-        if(!file_exists(HFILE))
+        if (!file_exists(HFILE)) {
             return;
-        hints = explode(read_file(HFILE),"\n"); // If hint file grows too big replace this one with line-by line read like in _grep
+        }
+        hints = explode(read_file(HFILE), "\n"); // If hint file grows too big replace this one with line-by line read like in _grep
         hint = hints[random(sizeof(hints))];
         foreach(peep in people)
         {
-            message("hint","%^BOLD%^%^CYAN%^[%^RESET%^%^BLUE%^HINT%^BOLD%^%^CYAN%^]%^RESET%^ "+hint+"%^RESET%^", peep);
+            message("hint", "%^CYAN%^Hint fairy %^BLUE%^whispers%^CYAN%^: %^RESET%^" + hint + "%^RESET%^", peep);
         }
     }
-    call_out("display_hint",FREQ);
+    call_out("display_hint", FREQ);
 }
