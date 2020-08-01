@@ -5,7 +5,7 @@ inherit MONSTER;
 create (){
 ::create ();
 set_name("Captain Rev");
-set_id( ({"revenant","undead","fish eaten undead"}) );
+set_id( ({"rev","undead","captian rev","noble","decayed noble"}) );
 set_short("Decayed Noble");
 set_long("This is an undead person who is wearing "+
 "tattered rags from a bygone era.  Bit of flesh are"+
@@ -76,7 +76,28 @@ void init(){
     if(!query_property("raged"))
         force_me("rage");
 }
+void heart_beat()
+{
+    object rev;
+    ::heart_beat();
+    if (!objectp(TO)) {
+        return;
+    }
+    if (!objectp(ETO)) {
+        return;
+    }
+    if (sizeof query_attackers()<1) return;
+    if(!present("revenant", ETO)){
+    force_me("say To me men!  Your war doesn't end until I say so!");
+    tell_room(ETO,"%^BOLD%^%^BLACK%^A nearby dead body rises and attacks!");
+    rev = new(MON"rev");
+	rev->move(ETO);
+	TO->add_protector(rev);
+	TO->add_follower(rev);
+    }
 
+
+)
 void sweep(object targ){
   object * critters;
   critters = query_attackers();
