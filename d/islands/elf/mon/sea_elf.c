@@ -7,7 +7,7 @@ inherit "/std/monster";
 create() {
   ::create();
   set_name("sea elf");
-  set_id(({"elf","monster","sea elf"}));
+  set_id(({"elf","monster","sea elf","fisher"}));
   set_gender("female");
   set_race("elf");
   set_short("Sea Elf Fisher");
@@ -23,7 +23,7 @@ create() {
   set_stats("wisdom", 6);
   set_stats("charisma",10);
   set_stats("dexterity",10);
-   set_property("swarm",0);
+  set_property("swarm",0);
   set_wielding_limbs(({"right hand","left hand"}));
   set_overall_ac(12);
   set_hp(random(50)+10);
@@ -52,7 +52,7 @@ void receive_given_item(object obj){
    if((string)obj->query_name() != "Dire Crab"
      && (string)obj->query_name() != "Dire Lobster") {
       force_me("say Ummm thanks, but this won't help.");
-	  force_me("give "+obj->query_name()+" to "+name+"");
+	   force_me("give "+obj->query_name()+" to "+name+"");
       return;
 	  }
 
