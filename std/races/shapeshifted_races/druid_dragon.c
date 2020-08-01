@@ -267,7 +267,7 @@ void death_attack(object player, object target, int clevel)
     
     death_count = 0;
     
-    if(!target->query_property("no death") || target->fort_save(clevel))
+    if(!target->query_property("no death") || target->fort_save(clevel) || target->query_level() >= ( player->query_level() + 10 ))
     {
         head = new("/std/obj/body_part.c");
         head->set_limb(target->query("short"),"head");
