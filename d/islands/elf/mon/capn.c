@@ -33,9 +33,7 @@ set_stats("intelligence", 6);
 set_stats("dexterity", 19);
 set_stats("charisma", 6);
 set_stats("wisdom", 5);
-set("aggressive", 50);
 set_alignment(4);
-
 set_attacks_num(6);
 set_hp(query_max_hp());
 set_wielding_limbs( ({"left hand","right hand"}) );
@@ -53,43 +51,20 @@ set_monster_feats(({
     "greater rage",
     "spell reflection",
     "mobility",
-    "damage resistance",
-    "improved resistance",
       })); 
-set_property("water breather", 1);
-set_property("function and attack",1);
-new(OBJ"weed_cloak")->move(TO);
-new(OBJ"weed_belt")->move(TO);
-new(OBJ"shield")->move(TO);
-new(OBJ"ray_spear")->move(TO);
-force_me("wield spear");
-force_me("wearall");
-set_funcs(({"sweep"}));
-set_func_chance(75);
-set_missChance(25);
-add_attack_bonus(20);
-add_damage_bonus(20);
-}
-
 void init(){
     ::init();
     if(!query_property("raged"))
         force_me("rage");
+    return;
 }
-void heart_beat()
-{
+void heart_beat(){
     object rev;
-    object *ppl;
     ::heart_beat();
-    if (!objectp(TO)) {
-        return;
-    }
-    if (!objectp(ETO)) {
-        return;
-    }
-    ppl = query_attackers();
-    if (sizeof(ppl)<1) return;
-    
+    if(!objectp(TO))return;
+    if(!objectp(query_current_attacker())) { return ; }
+    if(query_attackers()==({ })) return;
+   
     if(!present("revenant", ETO)){
     force_me("say To me men!  Your war doesn't end until I say so!");
     tell_room(ETO,"%^BOLD%^%^BLACK%^A nearby dead body rises and attacks!");
@@ -98,17 +73,17 @@ void heart_beat()
 	TO->add_protector(rev);
 	TO->add_follower(rev);
     }
-
+    return;
 }
-
 void sweep(object targ){
   object * critters;
   critters = query_attackers();
-  if (sizeof(critters)<1) return;
+    if(!objectp(TO))return;
+    if(!objectp(query_current_attacker())) { return ; }
+    if(query_attackers()==({ })) return;
   tell_room(ETO,"%^RED%^The dead captain lets out a %^BLUE%^drowning%^RED%^ gurgle!");
   foreach(object ob in critters){
       tell_object(ob, "%^BLUE%^The noise makes you feel like you are drowning!." );
       ob->cause_typed_damage(ob, ob->return_target_limb(),random(200),"mental");
   }
-  
 }
