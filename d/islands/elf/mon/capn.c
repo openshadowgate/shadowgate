@@ -3,7 +3,7 @@
 inherit MONSTER;
 
 create (){
-::create ();
+create ();
 set_name("Captain Rev");
 set_id( ({"rev","undead","captian rev","noble","decayed noble"}) );
 set_short("Decayed Noble");
@@ -88,7 +88,7 @@ void heart_beat()
         return;
     }
     ppl = query_attackers();
-    if (sizeof ppl<1) return;
+    if (sizeof(ppl)<1) return;
     
     if(!present("revenant", ETO)){
     force_me("say To me men!  Your war doesn't end until I say so!");
@@ -99,8 +99,8 @@ void heart_beat()
 	TO->add_follower(rev);
     }
 
+}
 
-)
 void sweep(object targ){
   object * critters;
   critters = query_attackers();
@@ -108,7 +108,7 @@ void sweep(object targ){
   tell_room(ETO,"%^RED%^The dead captain lets out a %^BLUE%^drowning%^RED%^ gurgle!");
   foreach(object ob in critters){
       tell_object(ob, "%^BLUE%^The noise makes you feel like you are drowning!." );
-      ob->cause_typed_damwizage(ob, ob->return_target_limb(),random(200),"mental");
+      ob->cause_typed_damage(ob, ob->return_target_limb(),random(200),"mental");
   }
   
 }
