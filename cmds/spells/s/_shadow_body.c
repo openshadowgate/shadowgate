@@ -27,7 +27,7 @@ void effect(int direction)
     }
     else
     {
-        caster->remove_property("flying");
+        caster->set_property("flying", -1);
         caster->remove_property("iron body");
         caster->remove_property("disease immunity");
         caster->remove_property("poison immunity");
