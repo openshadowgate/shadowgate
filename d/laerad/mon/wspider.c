@@ -7,7 +7,7 @@ void create()
     ::create();
     set_id(({ "spider", "whisper", "Whisper Spider", "forestmon" }));
     set_name("Whisper Spider");
-    set_short("A Whisper Spider");
+    set_short("%^RESET%^A %^BLUE%^Whisper%^WHITE%^ Spider");
     set_long(
         "This Spider has a large plump abdomen, multiple eyes, and four "
         "pairs of segmented legs. Its body is covered with short, black "
@@ -41,24 +41,25 @@ void create()
 }
 void poison(object targ)
 {
-    if (!"daemon/saving_d"->saving_throw(targ, "paralyzation_poison_death")) {
+    if (!"/daemon/saving_throw_d.c"->fort_save(targ, -(TO->query_level()))) {
         tell_object(targ, "%^BOLD%^RED%^The Spider's poison binds you tight!");
         tell_room(ETO, "%^BOLD%^RED%^The Spider sinks its jaws into " + targ->query_cap_name() + " binding " + targ->query_objective() + " tight!", targ);
-        targ->set_paralyzed(8 * roll_dice(1, 4), "The poison holds you still.");
+        targ->set_paralyzed(8 * roll_dice(1, 4), "The spider holds you still.");
         return 1;
     }
     tell_object(targ, "%^BOLD%^RED%^The Spider's poison stiffens you a bit!");
     tell_room(ETO, "%^BOLD%^RED%^The Spider sinks its jaws into " + targ->query_cap_name() + " shaking " + targ->query_objective() + " up a bit!", targ);
     return 1;
 }
+
 void web(object targ)
 {
     tell_object(targ, "%^BOLD%^BLUE%^The Spider fires a strand of web at you!");
     tell_room(ETO, "%^BOLD%^BLUE%^The Spider fires a strand of web at " + targ->query_cap_name() + "!", targ);
-    if (!"daemon/saving_d"->saving_throw(targ, "breath_weapon")) {
+    if (!"/daemon/saving_throw_d.c"->reflex_save(targ, -(TO->query_level()))) {
         tell_object(targ, "\n%^BOLD%^BLUE%^You get caught in the Spider's web!");
         tell_room(ETO, "\n%^BOLD%^BLUE%^" + targ->query_cap_name() + " gets caught in the Spider's web!", targ);
-        targ->set_paralyzed(8 * roll_dice(1, 4), "You are stuck in the Spider's web.");
+        targ->set_tripped(roll_dice(1, 4));
         return 1;
     }
     tell_object(targ, "\n%^BOLD%^BLUE%^The strand of web flies past you!");
