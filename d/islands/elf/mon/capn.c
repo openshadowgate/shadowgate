@@ -79,6 +79,7 @@ void init(){
 void heart_beat()
 {
     object rev;
+    object *ppl;
     ::heart_beat();
     if (!objectp(TO)) {
         return;
@@ -86,7 +87,9 @@ void heart_beat()
     if (!objectp(ETO)) {
         return;
     }
-    if (sizeof query_attackers()<1) return;
+    ppl = query_attackers();
+    if (sizeof ppl<1) return;
+    
     if(!present("revenant", ETO)){
     force_me("say To me men!  Your war doesn't end until I say so!");
     tell_room(ETO,"%^BOLD%^%^BLACK%^A nearby dead body rises and attacks!");
