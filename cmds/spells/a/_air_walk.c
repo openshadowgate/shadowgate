@@ -99,7 +99,7 @@ void dest_effect()
     {
         tell_object(target,"%^BOLD%^%^CYAN%^The strength of the air supporting you begins to lessen and you are slowly lowered back to the ground.");
         tell_room(environment(target),"%^BOLD%^%^CYAN%^The strength of the air supporting "+target->QCN+" begins to lessen and "+target->QS+" lowers slowly back to the ground.",target);
-        target->remove_property("flying");
+        target->set_property("flying", -1);
         target->set_property("endurance",(-1*(clevel/10)));
         //if(message_in) { target->force_me("message "+message_in); }
         //else { target->force_me("message in enters"); }
