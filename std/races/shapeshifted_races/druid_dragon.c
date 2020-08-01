@@ -133,7 +133,7 @@ int bite_attack(object player, object target)
     if(FEATS_D->usable_feat(TP,"perfect predator"))
     {
         level += 2;
-        player->add_hp(10 + roll_dice(level, 8) / 2);
+        player->add_hp(10 + roll_dice(level, 8) / 8);
     }
     
     breath_count++;
@@ -166,7 +166,7 @@ int claw_attack(object player, object target)
     if(FEATS_D->usable_feat(TP,"perfect predator"))
     {
         level += 2;
-        player->add_hp(10 + roll_dice(level, 8) / 4);
+        player->add_hp(10 + roll_dice(level, 8) / 15);
     }
     
     swipe_count++;
@@ -195,7 +195,7 @@ int tail_attack(object player, object target)
     if(FEATS_D->usable_feat(TP,"perfect predator"))
     {
         level += 2;
-        player->add_hp(10 + roll_dice(level, 8) / 2);
+        player->add_hp(10 + roll_dice(level, 8) / 10);
     }
     
     sweep_count++;
@@ -267,7 +267,7 @@ void death_attack(object player, object target, int clevel)
     
     death_count = 0;
     
-    if(!target->query_property("no death") || target->fort_save(clevel))
+    if(!target->query_property("no death") && !target->fort_save(clevel) && target->query_level() < ( player->query_level() + 10 ))
     {
         head = new("/std/obj/body_part.c");
         head->set_limb(target->query("short"),"head");
