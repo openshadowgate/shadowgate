@@ -6,7 +6,8 @@
 
 inherit SPELL;
 
-void create() {
+void create()
+{
     ::create();
     set_spell_name("scintillating pattern");
     set_spell_level(([ "mage" : 8 ]));
@@ -17,25 +18,26 @@ void create() {
     splash_spell(2);
 }
 
-void spell_effect(int prof){
-    object *attackers;
-    int i,admg;
+void spell_effect(int prof)
+{
+    object* attackers;
+    int i, admg;
     attackers = target_selector();
     attackers = target_filter(attackers);
 
-    tell_room(place,"%^MAGENTA%^%^BOLD%^Spirals of scintillating patterns appear in the air!%^RESET%^");
-    if(!sizeof(attackers)){
+    tell_room(place, "%^MAGENTA%^%^BOLD%^Spirals of scintillating patterns appear in the air!%^RESET%^");
+    if (!sizeof(attackers)) {
         dest_effect();
         return;
     }
 
-    for(i=0;i<sizeof(attackers);i++){
-        if(!objectp(attackers[i]))
+    for (i = 0; i < sizeof(attackers); i++) {
+        if (!objectp(attackers[i])) {
             continue;
-        if(attackers[i]->query_level()<clevel && !mind_immunity_damage(attackers[i]))
-        {
-            tell_room(place,"%^MAGENTA%^Spirals capitvate "+attackers[i]+"!");
-            "/std/effect/status/confused"->apply_effect(target,clevel/5 + 1,caster);
+        }
+        if (attackers[i]->query_level() < clevel && !mind_immunity_damage(attackers[i])) {
+            tell_room(place, "%^MAGENTA%^Spirals capitvate " + attackers[i]->QCN + "!");
+            "/std/effect/status/confused"->apply_effect(target, clevel / 5 + 1, caster);
         }
     }
     spell_successful();
