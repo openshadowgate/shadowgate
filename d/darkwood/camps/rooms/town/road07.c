@@ -34,6 +34,6 @@ void create() {
 void reset() {
    ::reset();
    if(!present("statue"))
-new("/realms/dinji/coolstuff/statue.c")->move(TO);
+new("/d/darkwood/camps/obj/statue.c")->move(TO);
 }
 
