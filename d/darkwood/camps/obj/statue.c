@@ -42,7 +42,11 @@ int read_symbols(string str) {
    }
    if( (string)TP->query_race() != "elf") {
       tell_object(TP,"The symbols are only gibberish.");
+<<<<<<< HEAD
       tel_room(ETP,""+TPQCN+" reads the symbols.",TP);
+=======
+      tell_room(ETP,""+TPQCN+" reads the symbols.",TP);
+>>>>>>> 5482796953f4dec2fcd484a3a3bba844569b88f3
       return 1;
    }
    tell_object(TP,
@@ -50,4 +54,8 @@ int read_symbols(string str) {
         "%^YELLOW%^Together in faith we unite.");
    tell_room(ETP,""+TPQCN+" reads the symbols.",TP);
    return 1;
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 5482796953f4dec2fcd484a3a3bba844569b88f3

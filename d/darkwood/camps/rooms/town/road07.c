@@ -20,7 +20,7 @@ void create() {
    set_items( ([
       "pond":"This pond is fairly large, but could not be considered a lake.",
       "bridges":"There are many trees linked to one another up above your head.",
-      "benches":"Solid oak benches have been placed here for anyone to rest and enjoy the view."
+      "benches":"Solid oak benches have been placed here for anyone to rest and enjoy the view." 
    ]) );
    set_max_fishing(4);
    set_chance(17);
@@ -30,3 +30,10 @@ void create() {
       "east" : TOWN+"center",
    ]) );
 }
+
+void reset() {
+   ::reset();
+   if(!present("statue"))
+new("/d/darkwood/camps/obj/statue.c")->move(TO);
+}
+
