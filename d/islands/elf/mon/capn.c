@@ -52,6 +52,8 @@ set_monster_feats(({
     "spell reflection",
     "mobility",
       })); 
+<<<<<<< HEAD
+=======
 set_property("water breather", 1);
 set_property("function and attack",1);
 new(OBJ"weed_cloak")->move(TO);
@@ -66,6 +68,7 @@ set_missChance(25);
 add_attack_bonus(20);
 add_damage_bonus(20);
 }
+>>>>>>> 719c987e60d700990204a319732daaa3da403cff
 void init(){
     ::init();
     if(!query_property("raged"))
