@@ -52,8 +52,6 @@ set_monster_feats(({
     "spell reflection",
     "mobility",
       })); 
-<<<<<<< HEAD
-=======
 set_property("water breather", 1);
 set_property("function and attack",1);
 new(OBJ"weed_cloak")->move(TO);
@@ -68,7 +66,6 @@ set_missChance(25);
 add_attack_bonus(20);
 add_damage_bonus(20);
 }
->>>>>>> 719c987e60d700990204a319732daaa3da403cff
 void init(){
     ::init();
     if(!query_property("raged"))
@@ -76,7 +73,7 @@ void init(){
     return;
 }
 void heart_beat(){
-    object rev;
+    object rev, rev0;
     object some_guys;
     ::heart_beat();
     if(!objectp(TO))return;
@@ -89,6 +86,12 @@ void heart_beat(){
     rev = new(MON"rev");
 	rev->move(ETO);
 	TO->add_protector(rev);
+    if(present("corpse of revenant",ETO)){
+        rev0 = present("corpse of revenant");
+        rev0 -> move("/d/shadowgate/void");
+        rev0 ->remove();
+
+    }
     some_guys = query_attackers();
     foreach(object ob in some_guys){
                rev->kill_ob(ob,0);
