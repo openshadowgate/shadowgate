@@ -332,7 +332,7 @@ int cmd_prepare(string str)
 
 int get_spells(object player, string myclass)
 {
-    spells=MAGIC_D->index_spells_for_player(player,myclass);
+    spells=MAGIC_D->index_castable_spells(player,myclass);
 }
 
 int prep_power_points(string myclass, int times)

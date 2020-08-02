@@ -1,5 +1,5 @@
 #include <std.h>
-#include "../elf.h"
+#include "/d/islands/elf/elf.h"
 inherit MONSTER;
 
 create (){
@@ -73,6 +73,7 @@ set_monster_feats(({
 set_property("water breather", 1);
 set_property("function and attack",1);
 new(OBJ"weed_cloak")->move(TO);
+new(OBJ"weed_belt")->move(TO);
 new(OBJ"ank")->move(TO);
 force_me("wield anchor");
 force_me("wearall");

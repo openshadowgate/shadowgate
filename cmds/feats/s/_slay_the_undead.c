@@ -20,6 +20,8 @@ Additionally, the Crypt Stalker gets a +2 bonus to Attack and Damage rolls when 
     set_required_for(({}));
 }
 
+int allow_shifted() { return 1; }
+
 int prerequisites(object ob)
 {
     if (!objectp(ob))

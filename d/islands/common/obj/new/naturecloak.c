@@ -73,7 +73,7 @@ void create()
 	         " %^YELLOW%^grace%^RESET%^%^GREEN%^, will find %^CYAN%^r%^BOLD%^elie%^RESET%^%^CYAN%^f %^GREEN%^in my %^RED"
 			 "%^e%^BOLD%^m%^ORANGE%^bra%^RED%^c%^RESET%^%^RED%^e%^GREEN%^-.%^RESET%^");
         
-    set_property("quest required","%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^");
+    //set_property("quest required","%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^");
     set_property("level required",35);
 }
 

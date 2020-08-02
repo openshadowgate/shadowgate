@@ -10,7 +10,7 @@ int amount;
 void create() {
     ::create();
     set_spell_name("unseen servant");
-    set_spell_level(([ "mage" : 1,"bard":1,"oracle":1 ]));
+    set_spell_level(([ "mage" : 1,"bard":1,"oracle":1, "warlock":1 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS unseen servant");
     set_mystery("ancestor");
@@ -22,6 +22,7 @@ To force lost servant to follow use %^ORANGE%^<command servant to follow>%^RESET
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
+    set_feats_required(([ "warlock" : "book of shadows"]));
 }
 
 int preSpell(){

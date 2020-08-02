@@ -1,9 +1,9 @@
 /*
   acompanion.c
-  
+
   Animal companion for rangers. Will be fleshed
   out more over time.
-  
+
   -- Tlaloc --
 */
 
@@ -43,13 +43,13 @@ void create(){
 void init()
 {
     ::init();
-    
+
     if(this_player() != owner)
         return;
-    
+
     saved_short = read_file(SAVEDIR + "short");
     saved_long = read_file(SAVEDIR + "long");
-    
+
     //Used read_file here - don't want to save whole object for 2 variables
     if(!strlen(saved_short) && !strlen(saved_long))
     {
@@ -62,25 +62,25 @@ void init()
         set_long(saved_long);
         //"/daemon/yuck_d"->load_inventory(this_object(), SAVEDIR + "acompanion");
     }
-    
+
     add_action("animal_command", "animal");
 }
 
 int animal_command(string str)
 {
     string *input;
-    
+
     if(this_player() != owner)
         return 0;
-    
+
     input = explode(str, " ");
-    
+
     if(sizeof(input) < 2)
     {
         tell_object(this_player(), "Syntax : animal [long/short] [input].");
         return 1;
     }
-    
+
     switch(input[0])
     {
         case "short":
@@ -103,31 +103,35 @@ int animal_command(string str)
         return 1;
         break;
     }
-    
+
     return 1;
 }
-    
+
 
 void heart_beat()
 {
 
     object *attackers,
            room;
-           
+
     ::heart_beat();
-    
+
+    if (!objectp(TO)) {
+        destruct(TO);
+    }
+
     room = environment(this_object());
-    
+
     if(!objectp(owner) || owner->query_property("animal_companion") != this_object())
     {
         this_object()->remove();
         return;
     }
-    
+
     //Faithful companion finds his master
     if(objectp(owner) && room != environment(owner))
         this_object()->move(environment(owner));
-    
+
     //Companion hides if master is hiding
     if(!this_object()->query_invis())
     {
@@ -142,17 +146,17 @@ void heart_beat()
         if(!owner->query_hidden() && !owner->query_invis())
             this_object()->set_invis(0);
     }
-    
+
     attackers = owner->query_attackers();
-    
+
     this_object()->add_damage_bonus(-bonus);
     this_object()->add_attack_bonus(-bonus);
-    
+
     if(sizeof(attackers))
     {
         foreach(object ob in attackers)
             this_object()->kill_ob(ob);
-            
+
         if(FEATS_D->usable_feat(owner, "hunters bond") &&
         owner->is_favored_enemy(this_object()->query_current_attacker()))
         {
@@ -166,7 +170,7 @@ void heart_beat()
         add_hp(query_max_hp() / 25);
         bonus = 0;
     }
-    
+
     this_object()->add_damage_bonus(bonus);
     this_object()->add_attack_bonus(bonus);
 }
@@ -175,17 +179,17 @@ void special_attack(object target)
 {
     string tname, aname, mess;
     object room;
-    
+
     if(!target || !objectp(target))
         return;
-    
+
     tname = target->query_name();
     aname = capitalize(this_object()->query_name());
     room = environment(this_object());
-    
+
     if(environment(target) != room)
         return;
-    
+
     switch(query_name())
     {
         case "ape":
@@ -258,11 +262,11 @@ void special_attack(object target)
         target->do_damage("torso", roll_dice(1, 6));
         target && target->set_tripped(1, "%^WHITE%^You are struggling to regain your footing! %^RESET%^");
         break;
-    }   
-    
+    }
+
     return;
 }
-    
+
 void die(object ob)
 {
     //"/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");

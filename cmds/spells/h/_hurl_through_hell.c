@@ -6,6 +6,7 @@
 
 //How many rounds they spend in the hellscape
 #define DUR 5
+#define DELAY 300
 
 inherit SPELL;
 
@@ -41,7 +42,12 @@ int preSpell()
         tell_object(caster, "That is not a valid target.");
         return 0;
     }
-    
+   
+    if ((int)caster->query_property("spell hurl hell time") + DELAY > time()) {
+        tell_object(caster, "You cannot use hurl through hell yet.");
+        return 0;
+    }
+  
     return 1;
 }
 string query_cast_string()
@@ -72,6 +78,7 @@ void spell_effect(int prof)
     }
     
     spell_successful();
+    caster->set_property("spell hurl hell time", time());
     
     if(do_save(target, 0))
     {
@@ -132,5 +139,5 @@ void hurl_effect(object room, object victim, int dam, int dur)
         return;
     }
     
-    call_out("hurl_effect", dur, room, victim, dam);
+    call_out("hurl_effect", dur, room, victim, dam, dur);
 }

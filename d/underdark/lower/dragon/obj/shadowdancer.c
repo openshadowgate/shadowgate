@@ -49,10 +49,12 @@ void create(){
 }
 
 int wear_fun() {
+/*
    if(member_array("%^BOLD%^%^BLACK%^Vanquished Arkhon Bloodscale, ancient dragon of the deep!%^RESET%^",ETO->query_mini_quests())== -1) {
      tell_object(ETO,"%^BOLD%^%^WHITE%^You have not earned the right to make use of this item.%^RESET%^");
      return 0;
    }
+*/
    if(ETO->query_level() < 35) {
      tell_object(ETO,"You are not experienced enough to use this armor.");
      return 0;

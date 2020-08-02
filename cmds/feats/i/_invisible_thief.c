@@ -42,11 +42,13 @@ int cmd_invisible_thief(string str) {
 void execute_feat()
 {
     object invisob;
+    int total;
     ::execute_feat();
-    tell_object(caster,"%^CYAN%^You simply disappear.%^RESET%^");
+    tell_object(caster,"%^CYAN%^You simply disappear from plain sight!%^RESET%^");
+    total = caster->query_skill("spellcraft") + caster->query_skill("stealth");
     invisob=new("/d/magic/obj/invisobgreater.c");
     invisob->set_player_name(caster->query_name());
-    invisob->set_mychance(clevel);
+    invisob->set_mychance(total);
     invisob->move(caster);
     dest_effect();
     return;

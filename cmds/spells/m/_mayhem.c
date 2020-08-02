@@ -86,7 +86,7 @@ void execute_attack(int prof)
     
     foreach(object ob in foes)
     {
-        if(!do_save(ob, 0))
+        if(!do_save(ob, clevel))
         {
             "/std/effect/status/confused"->apply_effect(target,clevel/5+1,caster);
             tell_object(ob, "%^BOLD%^MAGENTA%^Your mind is filled with madness!%^RESET%^");

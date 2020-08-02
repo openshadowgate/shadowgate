@@ -2689,7 +2689,7 @@ void debug_saves(int num)
 varargs int do_save(object targ, int mod)
 {
     string type, stat, * myclasses;
-    int caster_bonus, target_level, num, casting_level, classbonus, i, classlvl;
+    int caster_bonus, target_level, num, casting_level, classbonus, i, classlvl, stat_bonus;
     mapping debug_map = ([]);
 
     if (!objectp(caster)) {
@@ -2702,14 +2702,17 @@ varargs int do_save(object targ, int mod)
         mod = 0;
     }
 
+    type = get_save();
+    target_level = (int)targ->query_level();
     caster_bonus += (int)caster->query_property("spell dcs");
 
     if (save_debug) {
         tell_object(caster, "Presenting saving throw debug info:\n");
+        tell_object(caster, "Save type: " + type + "");
         tell_object(caster, "Caster name: " + caster->query_true_name() + "");
         tell_object(caster, "Target name: " + targ->query_true_name() + "");
-        tell_object(caster, "Pre calculation modifier (mod): " + mod + "");
-        tell_object(caster, "Adding 10 to the DC initial DC check as per 3.xx rules.");
+        tell_object(caster, "Target's level: " + target_level + "");
+        tell_object(caster, "Bonus from spell dcs property: " + caster_bonus + "");
     }
 
     casting_level = query_spell_level(spell_type);
@@ -2718,25 +2721,21 @@ varargs int do_save(object targ, int mod)
         casting_level = 6;
     }
 
-    stat = get_casting_stat();
-
-    type = get_save();
-    if (save_debug) {
-        tell_object(caster, "Save type: " + type + "");
-    }
-
-    target_level = (int)targ->query_level();
-    if (save_debug) {
-        tell_object(caster, "Target's level: " + target_level + "");
-    }
-
     caster_bonus += 10; // initial DC of 10 for opposed spells, all the other caster mods gets added to this
-    caster_bonus += calculate_bonus((int)caster->query_stats(stat));
-
     if (save_debug) {
-        tell_object(caster, "Bonus from caster's casting stat: " + caster_bonus + "");
+        tell_object(caster, "%^BOLD%^%^RED%^Bonus per 3.xx rules for d20 roll: 10");
     }
 
+    stat = get_casting_stat();
+    stat_bonus = calculate_bonus((int)caster->query_stats(stat));
+    if (save_debug) {
+        tell_object(caster, "Bonus from caster's casting stat: " + stat_bonus + "");
+    }
+    caster_bonus += stat_bonus;
+
+    if (save_debug) {
+        tell_object(caster, "Bonus from level of spell: " + casting_level + "");
+    }
     caster_bonus += casting_level;
 
     myclasses = caster->query_classes();
@@ -2777,13 +2776,22 @@ varargs int do_save(object targ, int mod)
     caster_bonus += num;
     num = 0;
 
-// racial saves from magic here
+    // Class and feat specific stuff here
+    if (FEATS_D->usable_feat(caster, "surprise spells") &&
+        (caster->query_invis() || caster->query_hidden()) &&
+        environment(caster) == environment(targ)) {
+        caster_bonus += 4;
+    }
 
-    caster_bonus = SAVING_THROW_D->magic_save_throw_adjust(targ, caster, );
+    if (save_debug) {
+        tell_object(caster, "%^RESET%^%^BOLD%^Total after caster bonuses: " + caster_bonus + "%^RESET%^");
+    }
+
+    // racial saves from magic here
+    caster_bonus += SAVING_THROW_D->magic_save_throw_adjust(targ, caster, );
 
 
-// racial saves from spells here
-
+    // racial saves from spells here
     if (targ->query_race() == "gnome" && spell_sphere == "illusion") {
         caster_bonus -= 2;
     }
@@ -2799,28 +2807,22 @@ varargs int do_save(object targ, int mod)
         }
     }
 
-// Class and feat specific stuff here
-
-    if (FEATS_D->usable_feat(caster, "surprise spells") &&
-        (caster->query_invis() || caster->query_hidden()) &&
-        environment(caster) == environment(targ)) {
-        caster_bonus += 4;
-    }
-
-
     if (save_debug) {
-        tell_object(caster, "Level of spell: " + casting_level + "");
+        tell_object(caster, "%^RESET%^%^BOLD%^Total after racial save bonuses: " + caster_bonus + "%^RESET%^");
     }
 
     caster_bonus = -caster_bonus;
+    if (save_debug) {
+        tell_object(caster, "Flip the sign for save calculations: " + caster_bonus + "");
+    }
 
     if (intp(mod)) {
         caster_bonus += mod;
     }
 
     if (save_debug) {
-        tell_object(caster, "%^RESET%^%^BOLD%^Total modifiers from caster's side "
-                    "BEFORE d20 roll: " + caster_bonus + "%^RESET%^");
+        tell_object(caster, "Final modifier to do_save (mod): " + mod + "");
+        tell_object(caster, "%^RESET%^%^BOLD%^Total modifiers BEFORE d20 roll: " + caster_bonus + "%^RESET%^");
     }
 
     if (shadow_spell) {
@@ -2866,6 +2868,7 @@ varargs int do_save(object targ, int mod)
         tell_object(caster, "Type of save actually used in daemon: " + debug_map["save_type"] + "");
         tell_object(caster, "Saving throw number before any rolls: " + debug_map["final_saving_throw"] + "");
         tell_object(caster, "DC of saving throw: " + debug_map["dc"] + "");
+        tell_object(caster, "Roll: " + debug_map["saving_throw_roll"] + "");
         tell_object(caster, "Save result (1 pass, 0 fail): " + debug_map["save_result"] + "");
         tell_object(caster, "Throw passed or failed by: " + debug_map["pass_or_fail_by"] + "");
     }

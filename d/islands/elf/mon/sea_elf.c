@@ -1,17 +1,15 @@
-// Gnome that needs his machine fixed
+// sea elf wants fish
 #include <std.h>
 #include <daemons.h>
-#include "../deep_echo.h"
+#include "../elf.h"
 inherit "/std/monster";
-int hasdrill, hascog;
-
 
 create() {
   ::create();
   set_name("sea elf");
-  set_id(({"elf","monster","sea elf"}));
+  set_id(({"elf","monster","sea elf","fisher"}));
   set_gender("female");
-  set_race("gnome");
+  set_race("elf");
   set_short("Sea Elf Fisher");
   set_long("This elf is dressed in some large "+
   "fish hides to fight the cold.  She has an "+
@@ -25,7 +23,7 @@ create() {
   set_stats("wisdom", 6);
   set_stats("charisma",10);
   set_stats("dexterity",10);
-   set_property("swarm",0);
+  set_property("swarm",0);
   set_wielding_limbs(({"right hand","left hand"}));
   set_overall_ac(12);
   set_hp(random(50)+10);
@@ -35,6 +33,8 @@ create() {
    "Sea Elf sharpens a small knife.",
    "Sea Elf puts some crab parts in a box.",
    "%^MAGENTA%^Sea Elf says:%^RESET%^ I want lots of lobster.",
+   "%^MAGENTA%^Sea Elf says:%^RESET%^ Crabs eat dead things  I bet there are lots of dead things under the ice.",
+   "%^MAGENTA%^Sea Elf says:%^RESET%^ The heart of water was moved and weird things started happening in the sea.",
    "%^MAGENTA%^Sea Elf says:%^RESET%^ If you get me a lobster or a crab I will pay you for it.",
    "Sea Elf throws some firewood on the fire.",
    "%^MAGENTA%^Sea Elf says:%^RESET%^ Imagine going to dinner and getting served a six foot lobster!",
@@ -52,29 +52,29 @@ void receive_given_item(object obj){
    if((string)obj->query_name() != "Dire Crab"
      && (string)obj->query_name() != "Dire Lobster") {
       force_me("say Ummm thanks, but this won't help.");
-	  force_me("give "+obj->query_name()+" to "+name+"");
+	   force_me("give "+obj->query_name()+" to "+name+"");
       return;
 	  }
 
    switch (item){
-     case "Dire Crab" :
+     case "Dire Crab" :{
 	     force_me("say Thank you for the Crab!");
-		 }
+   }
 	 break;
 	 
-	 case "Dire Lobster":
+	 case "Dire Lobster":{
 
 	     force_me("say Thank you for the Lobster.");
-		 }
+    }
 	 break;}
 	 
    tell_room(ETO,"The Sea Elf puts the meat away and hands you some money.");
    
-   force_me("say Thanks for helping.  Trying to get those things caught in a trap is proving to be impossible but they look really tasty");
+   force_me("say Thanks for helping.  Trying to get those things caught in a trap is proving to be impossible but they look really tasty!");
   
    force_me("emote gets a sack of gold.");
 
-   tell_object(TP,"Sea Elf give you 1000 gold coins.");
+   tell_object(TP,"Sea Elf gives you 1000 gold coins.");
    TP->add_money("gold",1000);
 }
 void catch_say(string msg){

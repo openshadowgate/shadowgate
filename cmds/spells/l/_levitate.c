@@ -96,7 +96,7 @@ void dest_effect()
                     " descend back to the ground!");
         tell_room(environment(target), "%^BOLD%^%^BLUE%^As the magic fades from" +
                   " " + target->QCN + ", " + target->QS + " rapidly descends back to the ground!", target);
-        target->remove_property("flying");
+        target->set_property("flying", -1);
         target->set_property("endurance", (-(clevel / 8)));
         //see above
         //target->remove_property("MIN");

@@ -167,6 +167,7 @@ void heart_beat()
                         master = ETO->query_name();
                         break;
                 }
+                break;
             default:
                 switch(random(75))
                 {
@@ -207,6 +208,7 @@ void heart_beat()
                         GaveUp = 1;
                         break;
                 }
+                break;
         }
     }
     if(stringp(master))

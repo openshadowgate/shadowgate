@@ -18,7 +18,7 @@ void create() {
     set_required_for(({"weapon focus","weapon specialization","greater weapon focus","greater weapon specialization"}));
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob) {
     if(!objectp(ob)) { return 0; }

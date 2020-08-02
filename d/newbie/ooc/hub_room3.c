@@ -16,7 +16,7 @@ void create() {
         set_property("no sticks",1);
 	set_property("ooc room", 1);
         set_short("%^MAGENTA%^OOC area hub to tutorial/info. rooms");
-        set_long("This room leads to the %^BOLD%^<tutorial>%^RESET%^ and a series of %^BOLD%^<info>%^RESET%^ rooms to help answer player's questions about how to get started and get the most from playing in ShadowGate.  When you have been through those and are ready to begin your adventure, the exit to the %^BOLD%^<city>%^RESET%^ will take you to the town square of Offestry.  You can return here anytime to look for answers to other questions you may have or refresh your memory.
+        set_long("This room leads to the %^BOLD%^<tutorial>%^RESET%^ and a series of %^BOLD%^<info>%^RESET%^ rooms to help answer player's questions about how to get started and get the most from playing in ShadowGate.  When you have been through those and are ready to begin your adventure, the exit to the %^BOLD%^<city>%^RESET%^ will take you to the town square of Offestry.  You can return here anytime to look for answers to other questions you may have or to refresh your memory, or type %^BOLD%^%^GREEN%^<help hints>%^RESET%^ while anywhere in the game world for additional helpful hints.
 
 There is also a special exit %^CYAN%^%^BOLD%^<portal>%^RESET%^ here, closed to common players.
 

@@ -151,6 +151,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         dc *= -1;
     }
     roll1 = roll_dice(1, 20);
+    save_info["saving_throw_roll"] = roll1;
     save_info["pass_or_fail_by"] = roll1 + save + dc;
 
     if (roll1 == 1) {

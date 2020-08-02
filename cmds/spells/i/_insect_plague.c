@@ -58,7 +58,7 @@ spell_effect(int prof) {
         swarm=new("/d/magic/mon/swarm.c");
         swarm->setup_swarm(caster,clevel);
         swarm->move(environment(caster));
-        caster->set_property("swarm",1);
+        //caster->set_property("swarm",1); side affects likely not realized -ts
         tell_object(caster,"%^BOLD%^%^GREEN%^The swarm begins to bite and sting everything in the area but you!%^RESET%^");
          tell_room(place,"%^BOLD%^%^GREEN%^The swarm fills the area stinging and biting everything in its path but "+caster->QCN+"!%^RESET%^",caster);
         dest_effect();

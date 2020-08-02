@@ -25,7 +25,8 @@ void create(){
       "blocked on both sides by the shops. South of the bridge "+
       "%^RESET%^%^CYAN%^Melistel Avenue %^BOLD%^%^WHITE%^leads toward "+
       "the city's southern gate. The bridge continues to the north "+
-      "over its center span.%^RESET%^\n");
+      "over its center span. %^YELLOW%^Curiously, there seems to be some construction " +
+      "occuring here; a path being built to the east.%^RESET%^\n");
    set_smell("default","Your nose catches a whiff of unusual scents "+
       "from the shops.");
    set_listen("default","The sound of the flowing river beneath you "+

@@ -1,18 +1,3 @@
-//ibrandul.c
-//2-24-2011  Halved his ac, doubled his hp, set his spell chance up by 10, gave him more mr.
-//added a switch to go to aoe spells if blinded or powdered - was double the xp of klauth for not
-//even an eigth of the fight
-//-----------------------------------------------
-// Adjusted init function - can see it's trying to scale ibby with party
-// size, but as init runs every time something enters the room, it's
-// resetting his hp to full every time he summons a minion.
-// Have added a global variable to track the party (users) size each
-// time init has run, and only re-run his hp if the number of users
-// increases (to prevent cheating by sending one or two guys in first).
-// If users decrease from original (people die, even if ressed), no
-// change. Heartbeat will reactivate overall count if no attackers.
-// N, 29 Feb 2020
-
 #include <std.h>
 #include <daemons.h>
 #include "/d/islands/tonerra/areadefs.h"
@@ -28,7 +13,7 @@ void create()
 
     set_name("The Dead God");
     set_id(({ "the dead god", "avatar", "god", "dead god","outsider" }));
-    set_short("The Dead God");
+    set_short("%^BOLD%^%^WHITE%^The Dead God");
     set_long("This is a god's chosen form. Standing before you as a giant humanoid figure. The striations of his muscles ripple across his chest. His lean and thick arms flex and unflex before you. The powerful tail swishes back and forth across the floor. The long tongue tests the air. There is a %^RED%^Glow%^CYAN%^ about the creature. After all this is a GOD.");
     set_body_type("human");
     add_limb("tail", "", 0, 0, 0);
@@ -51,12 +36,12 @@ void create()
     set_property("no death", 1);
     set_property("no bows", 1);
     set_mob_magic_resistance("average");
-    set_overall_ac(-75);
+    set_overall_ac(-70);
     set_max_hp(50000);
     set_hp(query_max_hp());
     set_property("add kits", 40);
     set_new_exp(50, "boss");
-    set_max_level(45);
+
     set_emotes(30, ({ "%^MAGENTA%^The Dead God growls%^RESET%^: I SHALL RETURN TO MORTAL PLANE AND HAVE MY REVENGE ON ALL OF YOU..", "%^MAGENTA%^The Dead God gorwls%^RESET%^: YOU SHALL FEEL MY PAIN AND PAIN OF MY SUBJECTS." }), 20);
     set_funcs(({ "summoning" }));
     set_func_chance(40);
@@ -79,13 +64,16 @@ void create()
                   "meteor swarm",
                   "shadow nova",
                   "prismatic burst" }));
-    set_spell_chance(85);
+    set_spell_chance(100);
     add_money("platinum", random(100000));
     set_property("no paralyze", 1);
     ob = new("/d/common/obj/brewing/herb_special_inherit");
     ob->set_herb_name("divine essence");
     ob->move(TO);
     set_resistance_percent("divine", 100);
+    set_resistance_percent("negative energy", 100);
+    set_resistance_percent("fire", 50);
+    set_resistance_percent("lightning", 50);
     coreparty = 0;
 }
 

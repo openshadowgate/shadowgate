@@ -1,8 +1,7 @@
 #include <std.h>
 #include "../elf.h"
-inherit CROOM;
+inherit CVAULT;
 
-void pick_critters();
 
 void create(){
    ::create();
@@ -24,10 +23,11 @@ void create(){
    "Cracks like thunder echo through the place as the ice shifts.");
    set_smell("default",
    "Your nose is freezing.");
-   set_exits(([ "out" : ROOMS"shore6", 
+   set_exits(([ "out" : ROOMS"shore/shore6", 
       ]));
-       set_door_description("gate","The gates are made of driftwood and rope.");
-       set_door("gate",ROOMS"/shore/shore6","out","elfkey");
+   set_door("gate",ROOMS"shore/shore6","out","elfkey");
+   set_door_description("gate","The gates are made of driftwood and rope.");
+       
 }
 
 string long_desc(){
@@ -50,7 +50,7 @@ string night_desc() {
 void reset(){
  ::reset();
   if(!present("sea elf")) new(MON"sea_elf")->move(TO);
-  new("")
+  
   set_locked("gate",0);
   set_open("gate", 0);
  switch(random(7)){
@@ -74,6 +74,7 @@ void reset(){
                break;	
       case 6:  tell_room(TO,"%^CYAN%^The wind dies down,"+
 	  " leaving a cold hush.");
-               break;				   }
+               break;				   
+               }
  return;
 }
