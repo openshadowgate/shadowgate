@@ -5,6 +5,7 @@
 %^CYAN%^Coloring the text that appears when your character speaks is popular among our players, but did you know colored 'says' can cause problems when interacting with coded npcs? To avoid this, make a separate alias for say with no colors.
 %^CYAN%^Crafters rejoice! Material vendors are out and about to sell you whatever sort of fabric, metal, wood, etc., that you need. You might even find a settled shop or two to buy quality materials to complete your projects.
 %^CYAN%^Customize your prompt however you would like! See %^GREEN%^<help prompt> %^CYAN%^to learn how!
+%^CYAN%^Do you want to see all of the available hints at once? Just type in %^GREEN%^<help hints>%^CYAN%^, and you can look over them all at your convinience. This is great for if you missed a message or have a question that you think that a hint might cover!
 %^CYAN%^Did you know there's a visual color editor to make adding colors to your descriptions easier? Find it here: %^GREEN%^http://shadowgate.org/wiki/color_editor
 %^CYAN%^Don't forget to apply your skill points! Check %^GREEN%^<help skills>%^CYAN%^.
 %^CYAN%^Find a typo or a bug or you simply wish to offer an idea or a praise? Type %^GREEN%^<help game> %^CYAN%^to see your options!
@@ -12,23 +13,27 @@
 %^CYAN%^Found a cool piece of gear only to realize it doesn't fit? No matter! Certain shopkeepers will resize it. Be warned, it isn't cheap!
 %^CYAN%^Have an amazing plot idea you want to suggest to the avatars, or require their assistance is some manner? Use %^GREEN%^<avatarmail> %^CYAN%^to send them a direct message.
 %^CYAN%^If you find yourself stuck in a broken room, try %^GREEN%^<fixroom> %^CYAN%^or %^GREEN%^<fixmore> %^CYAN%^to reset the room.
+%^CYAN%^Do you want to see all of the available hints at once? Just type in %^GREEN%^<help hints>%^CYAN%^, and you can look over them all at your convinience. This is great for if you missed a message or have a question that you think that a hint might cover!
 %^CYAN%^If you find yourself wearing a cursed magical item, a church will remove it for a fee. Many casters also have the power to break a curse, so it doesn't hurt to ask around.
 %^CYAN%^Knocked out a bad guy (or a good guy, if YOU are the bad guy)? Use some rope to %^GREEN%^<bind> %^CYAN%^them before they regain consciousness! See %^GREEN%^<help bind> %^CYAN%^for more information and inspiration!
 %^CYAN%^Love ShadowGate and want to help us grow and thrive??! Please vote for us! Type %^GREEN%^<vote> %^RESET%^%^CYAN%^for information on how you can help. We truly appreciate it!
 %^CYAN%^Low on funds and can't afford to rent or buy a boat? Sea ferries are available with stops at the Mainland, Laerad, Deku and Graez. Look for the local seaports to view your options.
 %^CYAN%^Magical equipment has a chance of being cursed! Be sure to have it identified or evaluated at any of the local churches.
 %^CYAN%^Make your own maps using the %^GREEN%^<map> %^RESET%^%^CYAN%^command! See %^GREEN%^<help map> %^CYAN%^to learn more.
+%^CYAN%^Do you want to see all of the available hints at once? Just type in %^GREEN%^<help hints>%^CYAN%^, and you can look over them all at your convinience. This is great for if you missed a message or have a question that you think that a hint might cover!
 %^CYAN%^Many major cities have portal service in psionic guilds that allow you to travel quickly between the cities and islands!
 %^CYAN%^Most quest givers will be prompted by simply saying 'hello'. If this does not work, try looking at them. Usually their description will hint at the appropriate action.
 %^CYAN%^Need a little extra help in combat, or just feeling a little lonely? Visit the mercenary camp west of Shadow, and tell Sault you need to hire a mercenary.
 %^CYAN%^Need to slander someone's good name, or let the world know of your heroic deeds? Try out the %^GREEN%^<gossip>  %^RESET%^%^CYAN%^command to learn how to spread some dirt.
 %^CYAN%^People die if you kill them.
 %^CYAN%^Please join us on Discord! %^ULINE%^%^GREEN%^https://bit.ly/discord-sg
+%^CYAN%^Do you want to see all of the available hints at once? Just type in %^GREEN%^<help hints>%^CYAN%^, and you can look over them all at your convinience. This is great for if you missed a message or have a question that you think that a hint might cover!
 %^CYAN%^River ferries for the less walking-inclined connect Shadow and Tabor, and Tharis and Tabor. Docks can be found near their respective cities.
 %^CYAN%^Tabor offers maps of its surrounding areas. Quite helpful for the well-prepared adventurer.
 %^CYAN%^Tabor, Shadow and Verbobone have hired local wizards who will study or identify your gear for a small fee! Find them for more information.
 %^CYAN%^Telepaths are employed by major cities across the realms, should you need to communicate with someone across a distance. Just tell them who you need to speak to, and they will happily oblige - for a fee!
 %^CYAN%^The %^GREEN%^<bonuses> %^RESET%^%^CYAN%^command will show you the things currently affecting your stats and rolls. Give it a try!
+%^CYAN%^Do you want to see all of the available hints at once? Just type in %^GREEN%^<help hints>%^CYAN%^, and you can look over them all at your convinience. This is great for if you missed a message or have a question that you think that a hint might cover!
 %^CYAN%^The %^GREEN%^<hit> %^RESET%^%^CYAN%^command allows you to kill something instantly that has fallen below 0 hps.
 %^CYAN%^The %^GREEN%^<limbs> %^RESET%^%^CYAN%^command allows you to see what gear is where on your body.
 %^CYAN%^The %^GREEN%^<peer> %^RESET%^%^CYAN%^command allows you to look ahead for any dangers. Check %^GREEN%^<help peer>%^RESET%^
@@ -36,6 +41,7 @@
 %^CYAN%^The %^GREEN%^<thought> %^RESET%^%^CYAN%^command lets you communicate your character's thoughts so that only the immortals and avatars will know them! Just type %^GREEN%^<thought %^ULINE%^MESSAGE%^RESET%^%^GREEN%^>%^CYAN%^.
 %^CYAN%^If combat is looking a bit dull, shut off brief mode. Try %^GREEN%^<set brief_combat on> %^RESET%^%^CYAN%^to see what happens.
 %^CYAN%^Typing %^GREEN%^<flag> %^CYAN%^will show you your current flagged settings as well as any current bonus events happening!
+%^CYAN%^Do you want to see all of the available hints at once? Just type in %^GREEN%^<help hints>%^CYAN%^, and you can look over them all at your convinience. This is great for if you missed a message or have a question that you think that a hint might cover!
 %^CYAN%^Typing %^GREEN%^<rumors> %^RESET%^%^CYAN%^shows you places appropriate for you to adventure, as well as if anyone is hanging out in the major cities or inns!
 %^CYAN%^Upset your new boots don't match the color of your eyes? Have no fear! %^GREEN%^<alterobj> %^RESET%^%^CYAN%^allows you to customize everything to your personal satisfaction. See %^GREEN%^<help alterobj> %^CYAN%^for more information.
 %^CYAN%^Use %^GREEN%^<get all coins> %^CYAN%^instead of %^GREEN%^<get coins> %^CYAN%^to pick all your piles up at once.
@@ -43,6 +49,7 @@
 %^CYAN%^Using %^GREEN%^<block %^ULINE%^DIRECTION%^RESET%^%^GREEN%^> %^CYAN%^can make it harder for your foes to flee.
 %^CYAN%^Using the %^GREEN%^<buff> %^RESET%^%^CYAN%^command allows casters to refresh their defensive spells in a single command. See %^GREEN%^<help buff> %^CYAN%^for more information!
 %^CYAN%^Want to pass through an area without being seen or heard? Trying using %^GREEN%^<sneak %^ULINE%^DIRECTION%^RESET%^%^GREEN%^>%^CYAN%^. The more stealthy you are, the better chance you will have.
+%^CYAN%^Do you want to see all of the available hints at once? Just type in %^GREEN%^<help hints>%^CYAN%^, and you can look over them all at your convinience. This is great for if you missed a message or have a question that you think that a hint might cover!
 %^CYAN%^You can disable these messages with %^GREEN%^<set hints off>%^CYAN%^.
 %^CYAN%^You can track your own progress or keep character notes by using pcnotes. See %^GREEN%^<help pcnote> %^CYAN%^for more information!
 %^CYAN%^You can use the %^GREEN%^<forage> %^RESET%^%^CYAN%^command to find food in the wilderness. You can also drink from some ponds and fountains.
@@ -51,6 +58,7 @@
 %^CYAN%^Maps of the areas surrounding Shadow and Tabor can be found in the cities where the item collectors loiter.
 %^CYAN%^If you need to review the last round of a line conversations, or emotes, says, or tells, use %^GREEN%^<last>%^CYAN%^.
 %^CYAN%^Command %^ORANGE%^<con>%^CYAN%^ can display condition of all your attackers if entered without arguments, %^ORANGE%^<con party>%^CYAN%^ will display condition of your party members, and %^ORANGE%^<con all>%^CYAN%^ will display everything.
+%^CYAN%^Do you want to see all of the available hints at once? Just type in %^GREEN%^<help hints>%^CYAN%^, and you can look over them all at your convinience. This is great for if you missed a message or have a question that you think that a hint might cover!
 %^CYAN%^A map of the entire mainland is available at: %^ULINE%^%^GREEN%^https://shadowgate.org/files/mainland.jpg%^RESET%^
 %^CYAN%^Bonuses of the same type usually don't stack.
 %^CYAN%^Stuck in a dungeon and see no way out? Break a bloodshard, which can be bought at any general store. And if you don't have one? Well, there is always a final option... You can kill yourself with %^ORANGE%^<kill %^ORANGE%^%^ULINE%^YOURNAME%^RESET%^%^ORANGE%^>%^CYAN%^.%^RESET%^
@@ -60,3 +68,4 @@
 %^CYAN%^You can manipulate your mood with %^GREEN%^<fortune>%^CYAN%^ command.
 %^CYAN%^You will die. A lot. (You should die in Shadowgate, it means you're experiencing danger!) Learn about death in %^GREEN%^<help death>%^CYAN%^.
 %^CYAN%^Using the %^GREEN%^<actions>%^CYAN%^ command is an easy way to see what actions are able to be performed in a room.
+%^CYAN%^Do you want to see all of the available hints at once? Just type in %^GREEN%^<help hints>%^CYAN%^, and you can look over them all at your convinience. This is great for if you missed a message or have a question that you think that a hint might cover!
