@@ -130,7 +130,7 @@ int bite_attack(object player, object target)
     level += FEATS_D->usable_feat(TP,"savage instincts ii") * 2;
     level += FEATS_D->usable_feat(TP,"savage instincts iii") * 2;
     
-    if(FEATS_D->usable_feat(TP,"perfect predator"))
+    if(FEATS_D->usable_feat(player,"perfect predator"))
     {
         level += 2;
         player->add_hp(10 + roll_dice(level, 8) / 8);
@@ -163,7 +163,7 @@ int claw_attack(object player, object target)
     level += FEATS_D->usable_feat(TP,"savage instincts ii") * 2;
     level += FEATS_D->usable_feat(TP,"savage instincts iii") * 2;
     
-    if(FEATS_D->usable_feat(TP,"perfect predator"))
+    if(FEATS_D->usable_feat(player,"perfect predator"))
     {
         level += 2;
         player->add_hp(10 + roll_dice(level, 8) / 15);
@@ -192,7 +192,7 @@ int tail_attack(object player, object target)
     level += FEATS_D->usable_feat(TP,"savage instincts ii") * 2;
     level += FEATS_D->usable_feat(TP,"savage instincts iii") * 2;
     
-    if(FEATS_D->usable_feat(TP,"perfect predator"))
+    if(FEATS_D->usable_feat(player,"perfect predator"))
     {
         level += 2;
         player->add_hp(10 + roll_dice(level, 8) / 10);
