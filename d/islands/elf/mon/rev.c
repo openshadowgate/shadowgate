@@ -1,5 +1,5 @@
 #include <std.h>
-#include "../elf.h"
+#include "/d/islands/elf/elf.h"
 inherit MONSTER;
 
 create (){

@@ -1,5 +1,5 @@
 #include <std.h>
-#include "../elf.h"
+#include "/d/islands/elf/elf.h"
 inherit MONSTER;
 
 create (){
@@ -15,7 +15,7 @@ set_long("This is an undead person who is wearing "+
 " fancier clothing.  He might have been someone "+
 "important when he was still alive.");
 set_gender("male");
-set_hd(40,10);
+set_hd(45,10);
 set_hp(750+random(3000));
 set("race", "undead");
 set_body_type("human");
@@ -74,29 +74,33 @@ void init(){
 }
 void heart_beat(){
     object rev;
+    object some_guys;
     ::heart_beat();
     if(!objectp(TO))return;
     if(!objectp(query_current_attacker())) { return ; }
     if(query_attackers()==({ })) return;
    
-    if(!present("revenant", ETO)){
+    if(!present("revenant 2", ETO) || present("corpse of revenant",ETO)){
     force_me("say To me men!  Your war doesn't end until I say so!");
     tell_room(ETO,"%^BOLD%^%^BLACK%^A nearby dead body rises and attacks!");
     rev = new(MON"rev");
 	rev->move(ETO);
 	TO->add_protector(rev);
-	TO->add_follower(rev);
+    some_guys = query_attackers();
+    foreach(object ob in some_guys){
+               rev->kill_ob(ob,0);
+      }
     }
     return;
 }
 void sweep(object targ){
-  object * critters;
-  critters = query_attackers();
+    object * critters;
     if(!objectp(TO))return;
     if(!objectp(query_current_attacker())) { return ; }
     if(query_attackers()==({ })) return;
-  tell_room(ETO,"%^RED%^The dead captain lets out a %^BLUE%^drowning%^RED%^ gurgle!");
-  foreach(object ob in critters){
+    critters = query_attackers();
+    tell_room(ETO,"%^RED%^The dead captain lets out a %^BLUE%^drowning%^RED%^ gurgle!");
+    foreach(object ob in critters){
       tell_object(ob, "%^BLUE%^The noise makes you feel like you are drowning!." );
       ob->cause_typed_damage(ob, ob->return_target_limb(),random(200),"mental");
   }
