@@ -3,7 +3,7 @@
 inherit MONSTER;
 
 create (){
-create ();
+::create ();
 set_name("Captain Rev");
 set_id( ({"rev","undead","captian rev","noble","decayed noble"}) );
 set_short("Decayed Noble");
@@ -52,6 +52,23 @@ set_monster_feats(({
     "spell reflection",
     "mobility",
       })); 
+<<<<<<< HEAD
+=======
+set_property("water breather", 1);
+set_property("function and attack",1);
+new(OBJ"weed_cloak")->move(TO);
+new(OBJ"weed_belt")->move(TO);
+new(OBJ"shield")->move(TO);
+new(OBJ"ray_spear")->move(TO);
+force_me("wield spear");
+force_me("wearall");
+set_funcs(({"sweep"}));
+set_func_chance(75);
+set_missChance(25);
+add_attack_bonus(20);
+add_damage_bonus(20);
+}
+>>>>>>> 719c987e60d700990204a319732daaa3da403cff
 void init(){
     ::init();
     if(!query_property("raged"))
