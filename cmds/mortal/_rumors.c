@@ -162,7 +162,7 @@ int cmd_rumors(string args)
             if(!sizeof(places))
                 tell_object(TP,"%^BOLD%^%^CYAN%^There are no rumors of adventurers passing through cities.%^RESET%^\n");
             else
-                tell_object(TP, "%^BOLD%^%^CYAN%^There are rumors of adventurers recently passing through "+implode(places,", ")+".%^RESET%^\n");
+                tell_object(TP, "%^BOLD%^%^CYAN%^There are rumors of %^MAGENTA%^adventurers%^CYAN%^ recently passing through %^YELLOW%^"+implode(places,", ")+".%^RESET%^\n");
         }
     }
 
