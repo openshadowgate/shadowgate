@@ -17,9 +17,9 @@ inherit DAEMON;
 
 #define MED_H1 ({"/d/attaya", "/d/islands/tonerra/path/", "/d/islands/tonerra/mountain/", "/d/dagger/marsh/swamp/rooms/m", "/d/dagger/arctic/rooms/lake/", "/d/dagger/arctic/rooms/cave/", })
 
-#define MED_H2 ({"/d/attaya", "/d/islands/common/aramanth/room", "/d/islands/argentrock/rooms/", "/d/laerad/cavern1/", "/d/dagger/marsh/swamp/rooms/f", "/d/dagger/arctic/rooms/cave/" })
+#define MED_H2 ({"/d/attaya", "/d/islands/common/aramanth/room", "/d/islands/argentrock/rooms/", "/d/laerad/cavern1/", "/d/dagger/marsh/swamp/rooms/f", "/d/dagger/arctic/rooms/cave/","/d/islands/elf/ice/"})
 
-#define HIGH ({"/d/islands/tonerra/monastary/m", "/d/attaya/base/", "/d/dagger/ogres/rooms/", "/d/deku/hhouse/rooms/","/d/dagger/marsh/tower/rooms/", "/d/antioch/ruins/portal/", "/d/laerad/cavern2/" })
+#define HIGH ({"/d/islands/tonerra/monastary/m", "/d/attaya/base/", "/d/dagger/ogres/rooms/", "/d/deku/hhouse/rooms/","/d/dagger/marsh/tower/rooms/", "/d/antioch/ruins/portal/", "/d/laerad/cavern2/","/d/island/elf/shore/" })
 
 
 #define UMM ({"/d/attaya/tower/", "/d/islands/tonerra/lava/","/d/islands/common/eldebaro/newrooms/tomb*","/d/islands/common/aramanth/d"})
@@ -43,6 +43,7 @@ inherit DAEMON;
 #define DERRO "/d/dagger/derro/"+
 #define SENUND "/d/attaya/senund/"+
 #define DEKU "/d/deku/hhouse/mon/"+
+#define ICE "/d/islands/elf/mon"+
 
 #define MONSTERS ([\
                         ANTIOCH "ruins/mons/demon.c" : 556000 ,\
@@ -91,6 +92,8 @@ inherit DAEMON;
                         DEKU "bandit_l.c" : 640000 ,\
                         DEKU "black_beast.c" : 360000 ,\
                         DEKU "aurus_devar_bones.c" : 2000000 ,\
+                        ICE "squid.c" : 1000000 ,\
+                        ICE "capn.c" : 1000000 ,\
                         ])
 
 mapping __Quests, __Rooms, __Monsters;
