@@ -3327,6 +3327,9 @@ void help()
     if (TO->is_curse()) {
         write("%^BOLD%^%^RED%^This spell is a curse.");
     }
+    if (traveling_aoe_spell) {
+        write("%^BOLD%^%^RED%^This is a traveling AOE spell.");
+    }
     if (aoe_spell) {
         write("%^BOLD%^%^RED%^This spell affects current area.");
     }
