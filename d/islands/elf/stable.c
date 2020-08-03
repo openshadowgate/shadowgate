@@ -31,7 +31,8 @@ void create(){
   ::fill_stalls();
    set_exits( ([
         "down":ROOMS"cliff2",
-		"west":ROOMS"arch"
+		"west":ROOMS"arch",
+        "north": ROOMS"quest"
     ]) );
 }
 
