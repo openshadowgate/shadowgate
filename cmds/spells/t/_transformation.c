@@ -28,7 +28,7 @@ void create() {
 }
 
 int preSpell(){
-   if((int)CASTER->query_property("raged") || (int)CASTER->query_property("transformed") || (int)CASTER->query_property("dance-of-cuts")){
+   if((int)CASTER->query_property("raged") || (int)CASTER->query_property("transformed") || (int)CASTER->query_property("dance-of-cuts") || caster->query_property("shapeshifted")){
       tell_object(CASTER,"You are already under the influence of such a spell.");
       return 0;
    }
