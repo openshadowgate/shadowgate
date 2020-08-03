@@ -26,12 +26,11 @@ void create(){
         "The castle is just rubble.  There should be hallways and windows but everything has fallen down.",
       (({"desk"})) : "The desk is broken.  It is mostly decayed and laying crooked on the ground.",
       (({"chair"})) : "This chair is ruined. Three of the four legs are broken it is just leaning against a rock to stand up.",
- 	   ]));
-}
+   ]));
 }
 
 void reset(){
    ::reset();
    if(!present("noble",TO))
-   new(MON"capn")->move(TO);
+      new(MON"capn")->move(TO);
 }
