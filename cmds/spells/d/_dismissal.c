@@ -33,8 +33,8 @@ void spell_effect(int prof)
         spelled = ob->query_property("spell_creature");
         
         if(spelled &&
-        (spelled || ob->is_undead()) && 
-        ((clevel + roll_dice(1, 6)) > (spelled->query_clevel() + roll_dice(1, 6))))
+        (spelled || ob->is_undead()) &&
+        ((clevel + roll_dice(1, 6)) > (spelled->query_caster_level())))
         {
             tell_room(place,"%^CYAN%^BOLD%^" + ob->QCN + " disappears in a flash.");
             ob->move("/d/shadowgate/void");
