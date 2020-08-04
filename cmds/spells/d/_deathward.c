@@ -1,8 +1,7 @@
-#include <priest.h>
-#include <daemons.h>
-inherit SPELL;
+#include <std.h>
+#include <magic.h>
 
-object skin;
+inherit SPELL;
 
 void create()
 {
@@ -22,7 +21,10 @@ void create()
 
 int preSpell()
 {
-    if (!objectp(target)) {
+    tell_object(FPL("ilmarinen"),":"+typeof(target));
+    tell_object(FPL("ilmarinen"),":"+typeof(caster));
+
+    if (!target) {
         target = caster;
     }
 
