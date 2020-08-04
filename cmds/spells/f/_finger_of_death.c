@@ -4,10 +4,11 @@
 #include <spell.h>
 inherit SPELL;
 
-void create() {
+void create()
+{
     ::create();
     set_spell_name("finger of death");
-    set_spell_level(([ "mage" : 7, "druid" : 8,]));
+    set_spell_level(([ "mage" : 7, "druid" : 8, ]));
     set_domains("destruction");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS finger of death on TARGET");
@@ -18,15 +19,19 @@ void create() {
     set_save("fort");
 }
 
-string query_cast_string() {
-    return "%^BOLD%^%^BLACK%^"+caster->QCN+"'s face goes blank, then white. You feel eerie cold flowing through the area.%^RESET%^";
+string query_cast_string()
+{
+    return "%^BOLD%^%^BLACK%^" + caster->QCN + "'s face goes blank, then white. You feel eerie cold flowing through the area.%^RESET%^";
 }
 
-void spell_effect(int prof) {
+void spell_effect(int prof)
+{
     int x;
 
-    if (!objectp(target) || !objectp(caster)){
-        if(objectp(TO)) TO->remove();
+    if (!objectp(target) || !objectp(caster)) {
+        if (objectp(TO)) {
+            TO->remove();
+        }
         return;
     }
     define_base_damage(-5);
@@ -34,28 +39,25 @@ void spell_effect(int prof) {
 
     spell_successful();
 
-    if(pointerp(target->query_property("no_slay")))
-        if(member_array(caster->query_name(),target->query_property("no_slay")) != -1)
-            x = 1;
-
-    if((string)target->query_property("no death") || x || do_save(target,6))
-    {
-        tell_object(target,"%^BOLD%^The struggle is won, yet at a price.");
-        tell_room(place,"%^BOLD%^The soul survives, yet at a price.",target);
-        damage_targ(target, target->query_target_limb(),sdamage,"negative energy");
-        target->set_property("no_slay",({caster->query_name()}));
+    if ((string)target->query_property("no death") || x || do_save(target, 6)) {
+        tell_object(target, "%^BOLD%^The struggle is won, yet at a price.");
+        tell_room(place, "%^BOLD%^The soul survives, yet at a price.", target);
+        damage_targ(target, target->query_target_limb(), sdamage, "negative energy");
+        target->set_property("no_slay", ({ caster->query_name() }));
     } else {
-        tell_room(place,"%^BOLD%^%^BLUE%^The soul is cleaved from its body and left to drift homelessly!");
-        tell_room(place,"%^BOLD%^%^MAGENTA%^The lifeless, soulless, body of "+target->QCN+" drops to the ground!",target);
-        tell_object(target,"%^BOLD%^%^RED%^You sense a few last things as your soul is ripped from you body!\n");
-        damage_targ(target, target->query_target_limb(),target->query_max_hp()*2,"negative energy");
+        tell_room(place, "%^BOLD%^%^BLUE%^The soul is cleaved from its body and left to drift homelessly!");
+        tell_room(place, "%^BOLD%^%^MAGENTA%^The lifeless, soulless, body of " + target->QCN + " drops to the ground!", target);
+        tell_object(target, "%^BOLD%^%^RED%^You sense a few last things as your soul is ripped from you body!\n");
+        damage_targ(target, target->query_target_limb(), target->query_max_hp() * 2, "negative energy");
         target->die();
     }
     dest_effect();
 }
 
-void dest_effect(){
+void dest_effect()
+{
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
-
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }
