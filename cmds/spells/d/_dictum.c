@@ -52,8 +52,7 @@ void spell_effect()
     }
 
     if (ldiff > 9) {
-        if (!(do_save(target, 4) ||
-              target->query_property("no death"))) {
+        if (!combat_death_save(target, 6)) {
             tell_room(place, "%^BOLD%^Upon hearing the words, " + target->QCN + " simply dies!", target);
             tell_object(target, "%^BOLD%^YOU OBEY AND DIE.");
             damage_targ(target, target->query_target_limb(), target->query_max_hp() * 2, "mental");

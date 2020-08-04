@@ -2880,6 +2880,15 @@ varargs int do_save(object targ, int mod)
     }
 }
 
+int combat_death_save(object foe, int casters_disadvantage)
+{
+    return do_save(foe, casters_disadvantage) ||
+        foe->query_property("no death") ||
+        foe->query_level() > caster->query_level() ||
+        foe->query_level() > clevel ||
+        random(2);
+}
+
 object* ob_party(object obj)
 {
     string party_name;
@@ -3291,7 +3300,7 @@ void help()
     if (sizeof(divine_domains)) {
         write("%^BOLD%^%^RED%^Domains:%^RESET%^ " + implode(divine_domains, ", "));
     }
-    
+
     if (sizeof(oracle_mystery)) {
         write("%^BOLD%^%^RED%^Mysteries:%^RESET%^ " + implode(oracle_mystery, ", "));
     }

@@ -34,12 +34,13 @@ void spell_effect(int prof)
         }
         return;
     }
+
     define_base_damage(-5);
     place = environment(caster);
 
     spell_successful();
 
-    if ((string)target->query_property("no death") || x || do_save(target, 6)) {
+    if (combat_death_save(target, 6)) {
         tell_object(target, "%^BOLD%^The struggle is won, yet at a price.");
         tell_room(place, "%^BOLD%^The soul survives, yet at a price.", target);
         damage_targ(target, target->query_target_limb(), sdamage, "negative energy");

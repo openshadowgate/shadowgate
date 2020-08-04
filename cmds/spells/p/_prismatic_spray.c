@@ -179,18 +179,19 @@ void ray3(object targ)
 //changed this ray to half dmg, blue is already instakill with a save so they don't need two!
 void ray4(object targ)
 {
-    if(!objectp(targ)) return;
-    tell_object(targ,"%^BOLD%^%^GREEN%^A blinding green light burns into you!");
-    tell_room(place,"%^BOLD%^%^GREEN%^A blinding green light burns into "+targ->QCN+"!",targ);
+    if (!objectp(targ)) {
+        return;
+    }
+    tell_object(targ, "%^BOLD%^%^GREEN%^A blinding green light burns into you!");
+    tell_room(place, "%^BOLD%^%^GREEN%^A blinding green light burns into " + targ->QCN + "!", targ);
     set_save("fort");
 
-    if(!do_save(targ))
-    {
-        if(targ->query_property("no death"))
-        {
-            tell_object(caster,""+targ->QCN+" seems to struggle for a minute but recovers quickly.");
-            tell_object(targ,"You struggle for a minute but recover quickly.");
-            tell_room(place,""+targ->QCN+" struggles for a minute but recovers quickly.",({targ,caster}));
+    if (!do_save(targ)) {
+        // Disadvantage should be the same as in FOD.
+        if (combat_death_save(targ, 6)) {
+            tell_object(caster, "" + targ->QCN + " seems to struggle for a minute but recovers quickly.");
+            tell_object(targ, "You struggle for a minute but recover quickly.");
+            tell_room(place, "" + targ->QCN + " struggles for a minute but recovers quickly.", ({ targ, caster }));
             return;
         }
         POISON_D->ApplyPoison(targ, "deathblade", caster, "injury");

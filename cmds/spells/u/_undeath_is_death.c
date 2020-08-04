@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("undeath is death");
-    set_spell_level(([ "mage" : 6, "cleric" : 6,"inquisitor":6, ]));
+    set_spell_level(([ "mage" : 6, "cleric" : 6, "inquisitor" : 6, ]));
     set_spell_sphere("necromancy");
     set_mystery("reaper");
     set_domains("repose");
@@ -22,8 +22,9 @@ void create()
     splash_spell(3);
 }
 
-string query_cast_string() {
-    return "%^BOLD%^%^ORANGE%^"+caster->QCN+" draws a circle of light around "+caster->QP+"self.";
+string query_cast_string()
+{
+    return "%^BOLD%^%^ORANGE%^" + caster->QCN + " draws a circle of light around " + caster->QP + "self.";
 }
 
 void spell_effect(int prof)
@@ -48,8 +49,7 @@ void spell_effect(int prof)
 
         if (do_save(foe, 2) ||
             foe->query_level() > caster->query_level() ||
-            foe->query_level() > clevel
-            ) {
+            foe->query_level() > clevel) {
             tell_object(foe, "%^ORANGE%^%^BOLD%^The light washes over you, but nothing happens!");
             continue;
         }
@@ -64,6 +64,7 @@ void spell_effect(int prof)
     spell_successful();
     dest_effect();
 }
+
 void dest_effect()
 {
     ::dest_effect();
