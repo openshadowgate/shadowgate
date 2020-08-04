@@ -280,7 +280,7 @@ int skill_focus_setting(string str, object ob, string feat)
     for (i = 0; i < sizeof(myclasses); i++) {
         file = DIR_CLASSES + "/" + myclasses[i] + ".c";
         if (file_exists(file)) {
-            myclassskills = (string*)file->class_skills();
+            myclassskills = (string*)file->class_skills(TP);
             if (member_array(str, myclassskills) != -1) {
                 tell_object(ob, "%^RED%^Warning:%^YELLOW%^ you already have %^BLUE%^" + str + " %^YELLOW%^as a class skill from one or more of your existing classes.%^RESET%^");
             }
