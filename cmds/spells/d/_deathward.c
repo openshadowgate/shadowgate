@@ -21,9 +21,6 @@ void create()
 
 int preSpell()
 {
-    tell_object(FPL("ilmarinen"),":"+typeof(target));
-    tell_object(FPL("ilmarinen"),":"+typeof(caster));
-
     if (!target) {
         target = caster;
     }
