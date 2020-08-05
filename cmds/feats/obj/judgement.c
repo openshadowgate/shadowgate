@@ -100,7 +100,9 @@ void apply_judgements(string* judgements, int direction)
                     power += 5;
                 }
             }
-            call_other(TO, "judgement_" + j, caster, direction, power);
+            if (function_exists("judgement_" + j, TO)) {
+                call_other(TO, "judgement_" + j, caster, direction, power);
+            }
         }
     }
 }
