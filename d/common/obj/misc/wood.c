@@ -274,7 +274,7 @@ int fuel_fire(string str)
     object fire;
     if (present("wood", TP)) {
         if (fire = present(str, ETP)) {
-            if (basename(fire) != "/d/common/obj/misc/wood") {
+            if (base_name(fire) != "/d/common/obj/misc/wood") {
                 write("This is not the fire you're looking for.");
                 return 1;
             }
