@@ -174,3 +174,8 @@ void check()
     }
     call_out("check", ROUND_LENGTH);
 }
+
+void save_me()
+{
+    TO->remove();
+}
