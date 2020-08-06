@@ -198,9 +198,9 @@ string user_finger_display(string who) {
         birth = query_birthday();
         birth2 = birth - query_start_age()*YEAR;
         /* finger += "Birthday: "+date(birth)+" "+capitalize(month(birth))+", "+year(birth2)+" SG\n"; */
-        if (this_player() && archp(this_player()))
-            if ((uh_oh = query_email()) != "")
-                finger += "Email: " + uh_oh + "\n";
+        /* if (this_player() && archp(this_player())) */
+        /*     if ((uh_oh = query_email()) != "") */
+        /*         finger += "Email: " + uh_oh + "\n"; */
         if (this_player() && archp(this_player()))
             finger += "Last on: " + query_last_on() + "\n";
         else finger += "Last on: "+query_last_on()+"\n";

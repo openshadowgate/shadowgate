@@ -9,9 +9,9 @@ void create()
 {
     ::create();
     set_spell_name("circle of death");
-    set_spell_level(([ "mage" : 6, "cleric" : 6, "inquisitor":6,]));
+    set_spell_level(([ "mage" : 6, "cleric" : 6, "inquisitor" : 6, ]));
     set_spell_sphere("necromancy");
-    set_mystery(({"bones","apocalypse"}));
+    set_mystery(({ "bones", "apocalypse" }));
     set_syntax("cast CLASS circle of death");
     set_damage_desc("negative energy");
     set_description("The caster draws a circle around herself and channels negative energy outwards, destroying living creatures that are not able to withstand it, but not affecting at all those of the strong will. The spell won't affect targets stronger than your caster level.");
@@ -21,8 +21,9 @@ void create()
     splash_spell(3);
 }
 
-string query_cast_string() {
-    return "%^BOLD%^%^BLUE%^"+caster->QCN+" draws a circle of darkness around "+caster->QP+"self.";
+string query_cast_string()
+{
+    return "%^BOLD%^%^BLUE%^" + caster->QCN + " draws a circle of darkness around " + caster->QP + "self.";
 }
 
 void spell_effect(int prof)
@@ -41,11 +42,7 @@ void spell_effect(int prof)
 
     foreach(foe in foes)
     {
-        if (do_save(foe, 4) ||
-            foe->query_property("no death") ||
-            foe->query_level() > caster->query_level() ||
-            foe->query_level() > clevel
-            ) {
+        if (combat_death_save(foe, 0)) {
             tell_object(foe, "%^BLUE%^%^BOLD%^The darkness washes over you, but nothing happens!");
             continue;
         }
@@ -59,6 +56,7 @@ void spell_effect(int prof)
     spell_successful();
     dest_effect();
 }
+
 void dest_effect()
 {
     ::dest_effect();

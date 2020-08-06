@@ -46,9 +46,8 @@ void create()
 }
 
 int can_cast(object target, int spell_level, string spell_type, string spell_name, int spell_delay) {
-    string str,cl,cl1,cl2,myexp;
-    object book;
-    int i,x,y;
+    string myexp;
+    int x;
     string *supreme_healer_spells,
         *raging_healer_spells,
         *natures_gift_spells;
@@ -142,6 +141,14 @@ string *query_opposite_sphere(string str) {
     return SCHOOL_OPPOSITION[str];
 }
 
+string *query_mastering_classes() {
+    return ({ "bard", "sorcerer", "inquisitor", "oracle", "psion", "psywarrior" });
+}
+
+int is_mastering_class(string str) {
+    return member_array(str, query_mastering_classes()) > -1;
+}
+
 int query_spell_cost(int x, string player_sphere, string spell_sphere) {
     mixed* ret;
     int i;
@@ -165,7 +172,7 @@ int query_spell_cost(int x, string player_sphere, string spell_sphere) {
 
 int cast_spell(string spell_name, object caster, string target, int ob_level) {
     string spell_file;
-    object spell;
+
     seteuid(getuid());
     if (!file_exists(spell_file = "/cmds/spells/" + spell_name[0..0] + "/_" + replace_string(spell_name, " ", "_") + ".c")) {
         return 0;
@@ -231,7 +238,7 @@ object get_spell_from_array(object* spellary, string spellname)
  */
 void index_spells()
 {
-    string key, tclass, tdomain;
+    string key, tclass;
 
     build_index();
 
@@ -265,8 +272,8 @@ void index_spells()
 void build_index()
 {
     string* all_spells, str2, * dirset;
-    int x, i, j;
-    mapping level, spelltable, featmap;
+    int x, i;
+    mapping level, spelltable;
 
     spellIndex = ([]);
 
@@ -321,14 +328,9 @@ mapping index_castable_spells(object player, string myclass)
 {
     mapping all_spells, tmp;
     string* all_spell_names, spellfile, featneeded, domain, pclass;
-    string* domains;
-    int lvl, i, j, k;
-    int has_domain;
-    object spell;
+    int lvl;
     string playerdisc = player->query_discipline();
     string playerway = player->query("monk way");
-    string* playerdom = player->query_divine_domain();
-    string tmpdom;
 
     // Pseudoclass for classes that use other classes spell lists, such as sorcerers.
     // Myclass -- player's real class.
@@ -393,8 +395,7 @@ mapping index_masterable_spells(object player, string myclass)
 {
     mapping all_spells, tmp;
     string* all_spell_names, spellfile, featneeded, domain, pclass;
-    int lvl, i, j, k;
-    object spell;
+    int lvl;
 
     pclass = myclass;
     if (pclass == "sorcerer") {
@@ -468,7 +469,7 @@ mapping index_ki_spells_by_level(object player)
  */
 mixed query_random_spell(string myclass, int lev)
 {
-    string ctype, cspell, * rspell;
+    string cspell, * rspell;
     int x;
     if (!myclass) {
         myclass = "random";

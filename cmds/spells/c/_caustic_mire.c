@@ -27,14 +27,14 @@ void create()
 
 string query_cast_string()
 {
-    return "%^BLACK%^BOLD%^" + sprintf("%^BOLD%^%^BLACK%^%s puts %s hands together where e%^RESET%^%^GREEN%^l%^BOLD%^d%^RESET%^r%^BOLD%^i%^BLACK%^tch e%^RESET%^%^GREEN%^n%^BOLD%^e%^RESET%^r%^BOLD%^g%^BLACK%^y f%^RESET%^%^GREEN%^o%^BOLD%^r%^RESET%^m%^BOLD%^s%^BLACK%^.%^RESET%^", caster->QCN, caster->query_possessive());
+    return "%^BLACK%^BOLD%^" + caster->QCN + " puts " + caster->QP + " hands together where e%^RESET%^%^GREEN%^l%^BOLD%^d%^RESET%^r%^BOLD%^i%^BLACK%^tch e%^RESET%^%^GREEN%^n%^BOLD%^e%^RESET%^r%^BOLD%^g%^BLACK%^y f%^RESET%^%^GREEN%^o%^BOLD%^r%^RESET%^m%^BOLD%^s%^BLACK%^.%^RESET%^";
 }
 
 void spell_effect(int prof)
 {
     tell_object(caster,"%^BOLD%^GREEN%^You raise your hands to the air and the dark e%^RESET%^%^GREEN%^n%^BOLD%^%^BLACK%^e%^GREEN%^r%^RESET%^%^GREEN%^g%^BOLD%^%^BLACK%^y %^GREEN%^spreads throughout the area, forming into a sticky, a%^RESET%^%^GREEN%^c%^BOLD%^%^BLACK%^i%^GREEN%^dic m%^RESET%^%^GREEN%^u%^BOLD%^%^BLACK%^d%^GREEN%^!%^RESET%^");
     tell_room(place,"%^GREEN%^BOLD%^"+caster->QCN+" puts "+caster->QP+" hands to the air and the dark e%^RESET%^%^GREEN%^n%^BOLD%^%^BLACK%^e%^GREEN%^r%^RESET%^%^GREEN%^g%^BOLD%^%^BLACK%^y %^GREEN%^spreads throughout the area, forming into a sticky, a%^RESET%^%^GREEN%^c%^BOLD%^%^BLACK%^i%^GREEN%^dic m%^RESET%^%^GREEN%^u%^BOLD%^%^BLACK%^d%^GREEN%^!%^RESET%^",caster);
-    counter = clevel/10 + 1;
+    counter = clevel/8 + 2;
     addSpellToCaster();
     spell_successful();
     execute_attack();

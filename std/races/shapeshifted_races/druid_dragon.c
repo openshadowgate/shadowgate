@@ -133,7 +133,7 @@ int bite_attack(object player, object target)
     if(FEATS_D->usable_feat(player,"perfect predator"))
     {
         level += 2;
-        player->add_hp(10 + roll_dice(level, 8) / 8);
+        player->add_hp(10 + roll_dice(level, 4));
     }
     
     breath_count++;
@@ -166,7 +166,7 @@ int claw_attack(object player, object target)
     if(FEATS_D->usable_feat(player,"perfect predator"))
     {
         level += 2;
-        player->add_hp(10 + roll_dice(level, 8) / 15);
+        player->add_hp(10 + roll_dice(level, 4));
     }
     
     swipe_count++;
@@ -195,7 +195,7 @@ int tail_attack(object player, object target)
     if(FEATS_D->usable_feat(player,"perfect predator"))
     {
         level += 2;
-        player->add_hp(10 + roll_dice(level, 8) / 10);
+        player->add_hp(10 + roll_dice(level, 4));
     }
     
     sweep_count++;

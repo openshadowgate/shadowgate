@@ -30,6 +30,8 @@ int preSpell()
 {
     object shape;
     if(objectp(shape = caster->query_property("shapeshifted")) ||
+       objectp(shape = caster->query_property("transformed")) ||
+       objectp(shape = caster->query_property("dance-of-cuts")) ||
        objectp(shape = caster->query_property("altered")))
     {
         tell_object(caster,"You are already in an alternative form!");

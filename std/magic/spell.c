@@ -2880,6 +2880,15 @@ varargs int do_save(object targ, int mod)
     }
 }
 
+int combat_death_save(object foe, int casters_disadvantage)
+{
+    return do_save(foe, casters_disadvantage) ||
+        foe->query_property("no death") ||
+        foe->query_level() > caster->query_level() ||
+        foe->query_level() > clevel ||
+        random(2);
+}
+
 object* ob_party(object obj)
 {
     string party_name;
@@ -3288,6 +3297,14 @@ void help()
         write("%^BOLD%^%^RED%^Sphere:%^RESET%^ " + spell_sphere + (spell_domain ? (" [" + spell_domain + "]") : "") + (evil_spell ? " [evil]" : "") + (mental_spell ? " [mind-affecting]" : ""));
     }
 
+    if (sizeof(divine_domains)) {
+        write("%^BOLD%^%^RED%^Domains:%^RESET%^ " + implode(divine_domains, ", "));
+    }
+
+    if (sizeof(oracle_mystery)) {
+        write("%^BOLD%^%^RED%^Mysteries:%^RESET%^ " + implode(oracle_mystery, ", "));
+    }
+
     if (verbal_comp || somatic_comp) {
         write("%^BOLD%^%^RED%^Components:%^RESET%^ " + (verbal_comp ? "Verbal " : "") + (somatic_comp ? "Somatic " : ""));
     }
@@ -3318,6 +3335,9 @@ void help()
     }
     if (TO->is_curse()) {
         write("%^BOLD%^%^RED%^This spell is a curse.");
+    }
+    if (traveling_aoe_spell) {
+        write("%^BOLD%^%^RED%^This is a traveling AOE spell.");
     }
     if (aoe_spell) {
         write("%^BOLD%^%^RED%^This spell affects current area.");

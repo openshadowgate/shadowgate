@@ -21,6 +21,8 @@ object caster;
 int clevel;
 object lendingto;
 
+int ticker = 0;
+
 void create()
 {
     ::create();
@@ -100,7 +102,9 @@ void apply_judgements(string* judgements, int direction)
                     power += 5;
                 }
             }
-            call_other(TO, "judgement_" + j, caster, direction, power);
+            if (function_exists("judgement_" + j, TO)) {
+                call_other(TO, "judgement_" + j, caster, direction, power);
+            }
         }
     }
 }
@@ -159,7 +163,14 @@ void check()
         TO->remove();
         return;
     }
+
     if (!sizeof(caster->query_attackers())) {
+        ticker++;
+    } else {
+        ticker = 0;
+    }
+
+    if (!sizeof(caster->query_attackers()) && ticker > 5) {
         tell_object(caster, "%^BOLD%^%^CYAN%^As the battle comes to an end your arcane zeal recedes.%^RESET%^");
         apply_judgements(active_judgements, -1);
         TO->remove();
@@ -173,4 +184,18 @@ void check()
         return;
     }
     call_out("check", ROUND_LENGTH);
+}
+
+void remove()
+{
+    if (sizeof(active_judgements)) {
+        apply_judgements(active_judgements, -1);
+    }
+
+    ::remove();
+}
+
+void save_me()
+{
+    TO->remove();
 }
