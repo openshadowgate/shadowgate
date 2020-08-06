@@ -140,16 +140,31 @@ void select_spell(string str, object ob)
     if (caster->is_class("sorcerer")) {
         myclasses += ({ "mage" });                              // patch to pick up mage spell list for sorcs
     }
-    if (caster->is_class("oracle")) {
-        myclasses += ({ "cleric" });                            // patch to pick up cleric spell list for oracles
-    }
+
+    castclass = "";
     for (i = 0; i < sizeof(myclasses); i++) {
-        if (filename->query_spell_level(myclasses[i])) {
-            castclass = myclasses[i];
+        string tmpclass = myclasses[i];
+        int castable = 0;
+
+        //TODO: Cleric domain specific spells
+        if (filename->query_spell_level(tmpclass) && TP->query_memorized(tmpclass, str)) {
+
+            if (MAGIC_D->is_mastering_class(tmpclass)) {
+                if (member_array(str, TP->query_mastered_spells(tmpclass)) > -1) {
+                    castable = 1;
+                }
+            }
+            else {
+                castable = 1;
+            }
+        }
+
+        if (castable && TP->query_guild_level(tmpclass) > TP->query_guild_level(castclass)) {
+            castclass = tmpclass;
         }
     }
     if (castclass == "") {
-        tell_object(caster, "Your class can't cast that spell, please try again.");
+        tell_object(caster, "You cannot cast that spell or it is not prepared, please try again.");
         write("%^BOLD%^%^RED%^You start the process of enchanting the " + ob->query_short() + ".");
         write("%^YELLOW%^Enter spell name:");
         write("~q to cancel");
