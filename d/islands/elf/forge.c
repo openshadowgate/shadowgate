@@ -19,8 +19,7 @@ void create()
    " rock walls.   In the floor an ever-burning fire seems to "+
    "dance with a life of it's own.");
    set_smell("default", "It smells of a mix of thin air and fire.");
-   set_listen("default", "The everburning flame roars like a living creature.");*/
- 
+   set_listen("default", "The everburning flame roars like a living creature.");
    set_exits(([
       "northeast" : ROOMS"armor",
  
