@@ -142,6 +142,14 @@ string *query_opposite_sphere(string str) {
     return SCHOOL_OPPOSITION[str];
 }
 
+string *query_mastering_classes() {
+    return ({ "bard", "sorcerer", "inquisitor", "oracle", "psion", "psywarrior" });
+}
+
+int is_mastering_class(string str) {
+    return member_array(str, query_mastering_classes()) > -1;
+}
+
 int query_spell_cost(int x, string player_sphere, string spell_sphere) {
     mixed* ret;
     int i;
