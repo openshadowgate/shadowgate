@@ -32,7 +32,8 @@ void create(){
    set_exits( ([
         "down":ROOMS"cliff2",
 		"west":ROOMS"arch",
-        "north": ROOMS"quest"
+        "north": ROOMS"quest",
+        "southwest": ROOMS"forge",
     ]) );
 }
 

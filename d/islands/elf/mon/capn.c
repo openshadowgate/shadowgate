@@ -58,6 +58,7 @@ new(OBJ"weed_cloak")->move(TO);
 new(OBJ"weed_belt")->move(TO);
 new(OBJ"shield")->move(TO);
 new(OBJ"ray_spear")->move(TO);
+new(OBJ"bottoms")->move(TO);
 force_me("wield spear");
 force_me("wearall");
 set_funcs(({"sweep"}));
