@@ -1729,7 +1729,7 @@ int query_attack_bonus()
         ret += 2;
     }
     if (FEATS_D->usable_feat(TO, "weapon training")) {
-        ret += TO->query_prestige_level("fighter") / 5 + 1;
+        ret += TO->query_prestige_level("fighter") / 12 + 1;
     }
 
     if (FEATS_D->usable_feat(TO, "weapon focus")) {
@@ -1745,15 +1745,15 @@ int query_attack_bonus()
     }
 
     attacker = TO->query_current_attacker();
-    
+
     //Added by Tlaloc to handle favored enemies for Rangers
     if (FEATS_D->usable_feat(TO, "favored enemy"))
     {
-        
+
         if(TO->is_favored_enemy(attacker))
         {
             ret += 2;
-            
+
             //Favored enemy improves with additional feats
             FEATS_D->usable_feat(TO, "second favored enemy") && ret += 2;
             FEATS_D->usable_feat(TO, "third favored enemy") && ret += 2;
@@ -1764,10 +1764,10 @@ int query_attack_bonus()
         sizeof(TO->query_wielded()) == 1) {
         ret += 3;
     }
-    
+
     if(FEATS_D->usable_feat(TO, "slay the undead") && attacker && attacker->is_undead())
         ret += 2;
-    
+
     return ret;
 }
 
@@ -1782,7 +1782,7 @@ int query_damage_bonus()
     ret = bonus;// + enc;
     ret += EQ_D->gear_bonus(TO, "damage bonus");
     if (FEATS_D->usable_feat(TO, "weapon training")) {
-        ret += TO->query_prestige_level("fighter") / 5 + 1;
+        ret += TO->query_prestige_level("fighter") / 12 + 1;
     }
 
     if (FEATS_D->usable_feat(TO, "weapon specialization")) {
@@ -1798,21 +1798,21 @@ int query_damage_bonus()
     }
 
     attacker = TO->query_current_attacker();
-    
+
     //Added by Tlaloc to handle favored enemies for Rangers
     if (FEATS_D->usable_feat(TO, "favored enemy"))
     {
-        
+
         if(TO->is_favored_enemy(attacker))
         {
             ret += 2;
-            
+
             //Favored enemy improves with additional feats
             FEATS_D->usable_feat(TO, "second favored enemy") && ret += 2;
             FEATS_D->usable_feat(TO, "third favored enemy") && ret += 2;
         }
     }
-    
+
     if(FEATS_D->usable_feat(TO, "slay the undead") && attacker && attacker->is_undead())
         ret += 2;
 
@@ -1851,27 +1851,27 @@ int query_saving_bonus(string throw)
 {
     int x;
     object attacker;
-    
+
     if ((!query_property("saving_init")) || (!save_bonus)) {
         init_saving_bonus();
     }
     if (member_array(throw, SAVING_THROW) != -1) {
         return save_bonus[throw] + EQ_D->gear_bonus(TO, throw);
     }
-    
+
     x = EQ_D->gear_bonus(TO, throw);
-    
+
     attacker = TO->query_current_attacker();
-    
+
     if(FEATS_D->usable_feat(TO, "seen it before") && attacker)
-    {   
+    {
         if(TO->is_favored_enemy(attacker))
             x += 6;
     }
-    
+
     if(FEATS_D->usable_feat(TO, "resist undead") && attacker && attacker->is_undead() && (throw == "fortitude" || throw == "will"))
         x += 4;
-    
+
     return x;
 }
 
