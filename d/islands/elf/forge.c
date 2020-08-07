@@ -21,7 +21,7 @@ void create()
    set_smell("default", "It smells of a mix of thin air and fire.");
    set_listen("default", "The everburning flame roars like a living creature.");
    set_exits(([
-      "northeast" : ROOMS"armor",
+      "northeast" : ROOMS"stable",
  
    ]));
    set_items(([
