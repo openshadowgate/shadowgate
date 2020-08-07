@@ -60,7 +60,7 @@ The Animal Companion can also be customized through several commands, which will
     set_target_required(0);
 }
 
-int allow_shifted() { return 0; }
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {
