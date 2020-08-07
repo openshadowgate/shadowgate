@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("word of recall");
-    set_spell_level(([ "druid" : 8, "cleric":6]));
+    set_spell_level(([ "druid" : 8, "cleric" : 6, "inquisitor" : 6]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS word of recall to LOCATION");
     set_description("The word of recall spell will allow to travel to a location that she has previously "
