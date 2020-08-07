@@ -1741,7 +1741,7 @@ int query_attack_bonus()
     }
 
     if (FEATS_D->usable_feat(TO, "epic weapon focus")) {
-        ret += 2;
+        ret += 1;
     }
 
     attacker = TO->query_current_attacker();
@@ -1794,7 +1794,7 @@ int query_damage_bonus()
     }
 
     if (FEATS_D->usable_feat(TO, "epic weapon specialization")) {
-        ret += 4;
+        ret += 2;
     }
 
     attacker = TO->query_current_attacker();

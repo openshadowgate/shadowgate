@@ -10,7 +10,7 @@ void create()
     feat_category("WeaponMastery");
     feat_name("epic weapon focus");
     feat_prereq("Greater Weapon Focus");
-    feat_desc("This feat, available only as a class skill to trained fighters, further increases the accuracy of all attacks with weapons by +2.");
+    feat_desc("This feat, available only as a class skill to trained fighters, further increases the accuracy of all attacks with weapons by +1.");
     permanent(1);
 }
 

@@ -145,7 +145,7 @@ int bite_attack(object player, object target)
         death_attack(player, target, level);
         
     
-    return roll_dice(1 + (level / 2), 6);   
+    return roll_dice(1 + (level / 3), 6);   
 }
 
 int claw_attack(object player, object target)
@@ -174,7 +174,7 @@ int claw_attack(object player, object target)
     if(swipe_count >= SWIPE_COUNT)
         swipe_attack(player, target, level);
     
-    return roll_dice(1 + (level / 2), 6);
+    return roll_dice(1 + (level / 3), 6);
 }
 
 int tail_attack(object player, object target)
@@ -203,7 +203,7 @@ int tail_attack(object player, object target)
     if(sweep_count >= SWEEP_COUNT)
         sweep_attack(player, target, level);
     
-    return roll_dice(1 + (level / 2), 6);
+    return roll_dice(1 + (level / 3), 6);
 }
 
 void breath_attack(object player, object target, int clevel)
@@ -229,7 +229,7 @@ void breath_attack(object player, object target, int clevel)
     tell_room(room,"%^RED%^"+player->QCN+"'s mouth opens and a withering torrent of fire pours forth!",player);
     
     attackers = player->query_attackers();
-    dam = roll_dice(clevel, 12);  
+    dam = roll_dice(clevel, 10);  
     
     foreach(object ob in attackers)
     {
@@ -318,7 +318,7 @@ void swipe_attack(object player, object target, int clevel)
     tell_room(room,"%^BOLD%^%^GREEN%^"+player->QCN+" rakes "+player->QP+" large claw in a wide arc, striking at "+player->QP+" enemies!",player);
 
     attackers = player->query_attackers();
-    dam = roll_dice(clevel, 8);
+    dam = roll_dice(clevel, 6);
     
     foreach(object ob in attackers)
     {
@@ -353,7 +353,7 @@ void sweep_attack(object player, object target, int clevel)
     tell_room(room,"%^ORANGE%^"+player->QCN+" whips "+player->QP+" tail around, trying to sweep the feet from under "+player->QP+" enemies!",player);
 
     attackers = player->query_attackers();
-    dam = roll_dice(clevel, 10);
+    dam = roll_dice(clevel, 8);
     
     foreach(object ob in attackers)
     {

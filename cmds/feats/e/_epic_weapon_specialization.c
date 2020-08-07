@@ -10,7 +10,7 @@ void create()
     feat_category("WeaponMastery");
     feat_name("epic weapon specialization");
     feat_prereq("Epic Weapon Focus, Greater Weapon Specialization");
-    feat_desc("This feat, available only as a class skill to trained fighters, further increases the damage of all attacks with weapons further by +4.");
+    feat_desc("This feat, available only as a class skill to trained fighters, further increases the damage of all attacks with weapons further by +2.");
     permanent(1);
 }
 
