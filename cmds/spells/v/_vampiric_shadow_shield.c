@@ -97,6 +97,7 @@ void execute_attack()
     }
 
     attackers = caster->query_attackers();
+    attackers = filter_array(attackers, (:!$1->query_property("negative energy affinity"):));
 
     if(sizeof(attackers))
     {
@@ -109,8 +110,6 @@ void execute_attack()
             if(!objectp(attackers[i]))
                 continue;
             if(do_save(attackers[i],0))
-                continue;
-            if(attackers[i]->is_undead())
                 continue;
 
             tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are caressed by the shield of shadows as you strike "+caster->QCN+"!");
