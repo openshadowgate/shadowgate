@@ -164,13 +164,13 @@ void check()
         return;
     }
 
-    if (!sizeof(caster->query_attackers())) {
-        ticker++;
-    } else {
-        ticker = 0;
-    }
+    /* if (!sizeof(caster->query_attackers())) { */
+    /*     ticker++; */
+    /* } else { */
+    /*     ticker = 0; */
+    /* } */
 
-    if (!sizeof(caster->query_attackers()) && ticker > 5) {
+    if (!sizeof(caster->query_attackers())) {
         tell_object(caster, "%^BOLD%^%^CYAN%^As the battle comes to an end your arcane zeal recedes.%^RESET%^");
         apply_judgements(active_judgements, -1);
         TO->remove();
