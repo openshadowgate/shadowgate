@@ -55,7 +55,7 @@ void spell_effect(int prof) {
       	target->subtract_lang_overload(ALL_LANGS[i],prof);
     	}
     	addSpellToCaster();
-    	caster->set_property("spelled",({TO}));
+    	target->set_property("spelled",({TO}));
     	call_out("dest_effect",clevel*16);
 }
 
