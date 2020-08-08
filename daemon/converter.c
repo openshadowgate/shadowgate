@@ -19,6 +19,7 @@ public string convertFromInput(string str){
    str = replace_string(str,"%^MAGENTA%^","</font><font color=\"#EE00EE\">");
    str = replace_string(str,"%^CYAN%^","</font><font color=\"#00BBBB\">");
    str = replace_string(str,"%^BOLD%^","<b>");
+   str = replace_string(str,"%^ULINE%^","<u>");
    str = replace_string(str,"%^B_BLUE%^","");
    str = replace_string(str,"%^B_CYAN%^","");
    str = replace_string(str,"%^B_YELLOW%^","");
@@ -38,7 +39,7 @@ public string convertToInput(string str){
 
    if(!stringp(str)) return str;
 
-   str = replace_string(str,"</font></b>","%^RESET%^");
+   str = replace_string(str,"</font></b></b>","%^RESET%^");
    str = replace_string(str,"</font><font color=\"#FF0000\">","%^RED%^");
    str = replace_string(str,"</font><font color=\"#00FF00\">","%^GREEN%^");
    str = replace_string(str,"</font><font color=\"#0088FF\">","%^BLUE%^");
