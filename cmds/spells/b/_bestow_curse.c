@@ -57,7 +57,7 @@ void spell_effect(int prof) {
         return;
     }
     bonus = clevel / 6 + 1;
-    duration = (ROUND_LENGTH * 5 + roll_dice(1, 20)) * clevel;
+    duration = (ROUND_LENGTH * 4 + roll_dice(1, 20)) * clevel;
 
     tell_object(target,"%^BLUE%^A mirroring aura starts to grow around you, seeping into your skin to taint it a %^RESET%^sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.  An overwhelming feeling of weakness comes over you.%^RESET%^");
     tell_room(place,"%^BLUE%^A mirroring aura starts to grow around "+target->QCN+", seeping into "+target->QP+" skin to taint it a %^RESET%^sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.%^RESET%^",target);
