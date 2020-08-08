@@ -8,7 +8,7 @@
  */
 public string convertFromInput(string str){
    if(!stringp(str)) return str;
-   str = replace_string(str,"%^RESET%^","</font></b></font><font color=\"#FFFFFF\">");
+   str = replace_string(str,"%^RESET%^","</font></b></u></font><font color=\"#FFFFFF\">");
    str = replace_string(str,"%^RED%^","</font><font color=\"#FF0000\">");
    str = replace_string(str,"%^GREEN%^","</font><font color=\"#00FF00\">");
    str = replace_string(str,"%^BLUE%^","</font><font color=\"#0088FF\">");
