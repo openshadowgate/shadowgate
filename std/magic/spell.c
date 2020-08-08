@@ -2341,6 +2341,12 @@ int spell_kill(object victim, object caster)
     if (victim == caster) {
         return 0;
     }
+
+    // Non link-dead users have to excercise their own judgement.
+    if (interactive(victim)) {
+        return 0;
+    }
+
     if (!swarm) {
         if (interactive(caster)) {
             inven = all_living(environment(victim));
