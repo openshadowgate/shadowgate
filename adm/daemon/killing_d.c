@@ -761,7 +761,6 @@ void check_class_change(object who) {
                 who->remove_class("fighter");
                 who->set_mlevel("cavalier", level);
                 who->update_channels();
-                who->add_search_path("/cmds/cavalier");
                 who->set_posed("cavalier");
                 who->set_class_change(cl2);
                 seteuid(UID_LOG);
@@ -780,7 +779,6 @@ void check_class_change(object who) {
                     who->remove_class("fighter");
                     who->set_mlevel("cavalier", level);
                     who->update_channels();
-                    who->add_search_path("/cmds/cavalier");
                     who->set_posed("cavalier");
                     who->set_class_change("");
                     seteuid(UID_LOG);
@@ -794,7 +792,6 @@ void check_class_change(object who) {
                     who->remove_class("fighter");
                     who->set_mlevel("ranger", level);
                     who->update_channels();
-                    who->add_search_path("/cmds/ranger");
                     who->set_posed("ranger");
                     who->set_class_change("");
                     seteuid(UID_LOG);

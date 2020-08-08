@@ -154,12 +154,10 @@ void set_length()
     default:   length -= int_adjust;
     }
 
-    if ((int)target->query_level()>clevel)
-    {
-        length -= (clevel - (int)target->query_level())/4;
+    if (target->query_level() > clevel) {
+        length -= (clevel - (int)target->query_level()) / 4;
     }
-    if (length<1)
-    {
+    if (length < 1) {
         length = 1;
     }
 }

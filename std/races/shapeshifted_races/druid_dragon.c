@@ -229,6 +229,9 @@ void breath_attack(object player, object target, int clevel)
     tell_room(room,"%^RED%^"+player->QCN+"'s mouth opens and a withering torrent of fire pours forth!",player);
     
     attackers = player->query_attackers();
+    attackers = shuffle(attackers);
+    attackers = sizeof(attackers) > 8 ? attackers[0..7] : attackers; 
+    
     dam = roll_dice(clevel, 10);  
     
     foreach(object ob in attackers)
@@ -318,6 +321,9 @@ void swipe_attack(object player, object target, int clevel)
     tell_room(room,"%^BOLD%^%^GREEN%^"+player->QCN+" rakes "+player->QP+" large claw in a wide arc, striking at "+player->QP+" enemies!",player);
 
     attackers = player->query_attackers();
+    attackers = shuffle(attackers);
+    attackers = sizeof(attackers) > 8 ? attackers[0..7] : attackers;
+    
     dam = roll_dice(clevel, 6);
     
     foreach(object ob in attackers)
@@ -353,6 +359,9 @@ void sweep_attack(object player, object target, int clevel)
     tell_room(room,"%^ORANGE%^"+player->QCN+" whips "+player->QP+" tail around, trying to sweep the feet from under "+player->QP+" enemies!",player);
 
     attackers = player->query_attackers();
+    attackers = shuffle(attackers);
+    attackers = sizeof(attackers) > 8 ? attackers[0..7] : attackers;
+    
     dam = roll_dice(clevel, 8);
     
     foreach(object ob in attackers)

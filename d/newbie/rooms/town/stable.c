@@ -31,7 +31,7 @@ void create() {
 	" appear quite content to just munch on oats and hay all day long.",
 	"stalls" : "The stalls are quite tall, and made of sturdy wood. They have"+
 	" a top and bottom door, so that one can remain open during the day while"+
-	" the horse still can't escape. The upper doors to the fiesties most vicious"+
+	" the horse still can't escape. The upper doors to the feistiest, most vicious"+
 	" horses are closed so that they will not bite anyone passing by.",
 	"floor" : "The floor is made of cobblestones, and littered with straw"+
 	" from the horses. The floor of each stall, however, appears to be soft"+

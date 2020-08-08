@@ -30,7 +30,12 @@ void spell_effect()
     string poisonf;
     object targ;
 
+    if (!objectp(place)) {
+        return;
+    }
+
     poisonf = PDIR+POISONS[random(sizeof(POISONS))];
+
     targ = present(arg,place);
 
     if(objectp(targ) &&

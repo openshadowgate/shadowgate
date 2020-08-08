@@ -18,7 +18,7 @@ void create()
 
 The list of judgements to choose from:
 
-%^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them a damage bonus point plus an additional damage bonus point per every nine levels.
+%^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them a damage bonus point plus an additional damage bonus point per every six levels.
 
 %^BOLD%^Healing:%^RESET%^ The inquisitor is surrounded by a healing light, gaining a fast healing pointplus an additional fast healing point per every eighteen levels.
 
@@ -67,9 +67,8 @@ int cmd_judgement(string args)
         return 0;
     }
 
-    if (!prerequisites(TP)) {
-        tell_object(TP, "You can't use this feat.");
-        return 1;
+    if (!FEATS_D->usable_feat(TP, query_feat_name())) {
+        return 0;
     }
 
     argss = explode(args, " ");
@@ -96,14 +95,23 @@ int cmd_judgement(string args)
         }
     }
 
-    if (present("judgement_obj", TP)) {
-        controller = present("judgement_obj", TP);
-    }else {
-        controller = new("/cmds/feats/obj/judgement");
-        controller->setup_judgement(TP, flevel);
+    {
+        object inv;
+
+        inv = all_inventory(TP);
+        inv = filter_array(inv, (:$1->is_judgement():));
+
+        if (sizeof(inv)) {
+            controller = inv[0];
+        }else {
+            controller = new("/cmds/feats/obj/judgement");
+            controller->move(TP);
+            controller->setup_judgement(TP, flevel);
+        }
+        jtoactivate = distinct_array(jtoactivate);
+        controller->activate_judgements(jtoactivate);
+
     }
-    jtoactivate = distinct_array(jtoactivate);
-    controller->activate_judgements(jtoactivate);
 
     return 1;
 }

@@ -5,7 +5,7 @@
 #include <skills.h>
 inherit SPELL;
 
-int clevel,bonus,i;
+int bonus,i;
 
 void create()
 {

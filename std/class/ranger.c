@@ -3,7 +3,7 @@ inherit DAEMON;
 
 void create() { ::create(); }
 
-string *search_paths() { return ({ "/cmds/ranger" }); } // temporary
+string *search_paths() { return ({ }); } // temporary
 
 int caster_class() { return 1; }
 

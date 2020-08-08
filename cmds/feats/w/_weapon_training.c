@@ -10,7 +10,7 @@ void create()
     feat_category("WeaponMastery");
     feat_name("weapon training");
     feat_prereq("Fighter L5"); // weapon training
-    feat_desc("This feat, available only as a class skill to trained fighters, increases the accuracy of all attacks with weapons. It provides +1 to attack and damage bonuses for every twelve levels in the fighter class.");
+    feat_desc("This feat, available only as a class skill to trained fighters, increases the accuracy of all attacks with weapons. It provides +1 to attack and damage bonuses for every ten levels in the fighter class.");
     permanent(1);
 }
 
