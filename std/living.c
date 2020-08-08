@@ -606,6 +606,13 @@ nomask protected int cmd_hook(string cmd)
             return 1;
         }
     }
+
+    if (strsrch(file, "/cmds/feats/") == 0) {
+        if (!FEATS_D->usable_feat(TO, file->query_feat_name())) {
+            return 0;
+        }
+    }
+
     if (TO->query_ghost() && !avatarp(TO)) {
         if (objectp(ETO)) {
             if (base_name(ETO) == DEATH_ROOM) {
