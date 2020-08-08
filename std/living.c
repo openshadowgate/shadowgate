@@ -1729,7 +1729,7 @@ int query_attack_bonus()
         ret += 2;
     }
     if (FEATS_D->usable_feat(TO, "weapon training")) {
-        ret += TO->query_prestige_level("fighter") / 12 + 1;
+        ret += TO->query_prestige_level("fighter") / 8 + 1;
     }
 
     if (FEATS_D->usable_feat(TO, "weapon focus")) {
@@ -1782,7 +1782,7 @@ int query_damage_bonus()
     ret = bonus;// + enc;
     ret += EQ_D->gear_bonus(TO, "damage bonus");
     if (FEATS_D->usable_feat(TO, "weapon training")) {
-        ret += TO->query_prestige_level("fighter") / 12 + 1;
+        ret += TO->query_prestige_level("fighter") / 10 + 1;
     }
 
     if (FEATS_D->usable_feat(TO, "weapon specialization")) {

@@ -1,13 +1,14 @@
 /**
  * @file
-   8 @brief Various combat subroutines
+ * @brief Various combat subroutines
+ *
+ * Daemon that handles Combat related stuff
+ * Currently handling checks for shieldmiss/concealing amorpha
+ * damage modifications from body.c - including stoneskin checks, typed damage modifications, etc.
+ * my intention was to make all of this easier to modify on the fly - Saide
  */
 
 
-//Daemon that handles Combat related stuff
-//Currently handling checks for shieldmiss/concealing amorpha
-//damage modifications from body.c - including stoneskin checks, typed damage modifications, etc.
-//my intention was to make all of this easier to modify on the fly - Saide
 #include <std.h>
 #include <dirs.h>
 #include <daemons.h>
@@ -23,29 +24,8 @@
 
 mapping DAMAGE_TRACKING;
 
-//***** FUNCTIONS DEFINED IN THIS FILE *****//
-
-void save_damage_tracker();
-void restore_damage_tracker();
-varargs int extra_hit_calcs(object attacker, object victim, object weapon, string limb);
-void track_damage(object attacker, object victim, int damage);
-varargs int damage_adjustment(object attacker, object victim, int damage);
-varargs int typed_damage_modification(object attacker, object targ, string limb, int damage, string type);
-void check_extra_abilities(object attacker, object target, object weapon, int crit_hit);
-varargs void calculate_damage(object attacker, object targ, object weapon, string target_thing, int critical_hit);
-int damage_done(object attacker, object weap, int damage, int isranged);
-varargs int get_damage(object attacker, object weap, object targ);
-varargs int get_lrdamage(object attacker, object weap, object targ);
-int get_hand_damage(object attacker, string limb1, int damage, object attacked);
-void send_messages(object attacker, int magic, object weapon, string what, int x, object victim, int fired, string ammo, int critical_message);
-void new_struck(int damage, object weapon, object attacker, string limb, object victim, int fired, string ammo, int critical_hit);
-void do_fumble(object attacker, object weapon);
-void miss(object attacker, int magic, object target, string type, string target_thing);
-int calculate_unarmed_damage(object attacker);
 int critical_roll = 0;
 
-
-//****** END OF FUNCTION DEFINITIONS ******//
 void save_damage_tracker()
 {
     seteuid(UID_RESTORE);
@@ -605,56 +585,44 @@ int crit_damage(object attacker, object targ, object weapon, int size, int damag
     }
     if (objectp(weapon) && !attacker->query_property("shapeshifted") && weapon != attacker) {
         mult = (int)weapon->query_critical_hit_multiplier();
-        if (FEATS_D->usable_feat(attacker, "skull collector") && attacker->is_wielding("two handed")) {
-            if (objectp(targ)) {
-                perc = 25 + roll_dice(1, 25);
-                if ((targ->query_hp_percent() < perc) && (targ->query_hp_percent() > 0)) {
-                    if (!FEATS_D->usable_feat(targ, "death ward") && !targ->query_property("no death")) {
-                        if (!targ->fort_save(attacker->query_highest_level())) {
-                            tell_object(targ, "%^BOLD%^%^RED%^" + attacker->QCN + " swings " + attacker->QP + " " + weapon->query_short() + " in a brutal
-swipe, hitting you in the head!\nEverything goes black...");
-                            tell_object(attacker, "%^BOLD%^%^RED%^You swing your " + weapon->query_short() + " in a brutal swipe, hitting
-" + targ->QCN + " in the head with a certainly fatal strike!");
-                            tell_room(environment(targ), "%^BOLD%^%^RED%^" + attacker->QCN + " swings " + attacker->QP + " " + weapon->query_short() + " in
-a brutal swipe, hitting " + targ->QCN + " in the head "
-                                      "with what must cetainly be a fatal strike!", ({ attacker, targ }));
-                            targ->set_hp(-100);
-                        }
-                    }
-                }
-            }
+        if (objectp(targ) &&
+            attacker->is_class("warmaster") &&
+            FEATS_D->usable_feat(attacker, "skull collector") &&
+            attacker->is_wielding("two handed") &&
+            targ->query_hp_percent() < roll_dice(3, 6) &&
+            targ->query_hp_percent() > 0 &&
+            !targ->query_property("no death") &&
+            targ->fort_save(attacker->query_level())
+            ) {
+            tell_object(targ, "%^BOLD%^%^RED%^" + attacker->QCN + " swings " + attacker->QP + " " + weapon->query_short() + " in a brutal swipe, hitting you in the head!\nEverything goes black...");
+            tell_object(attacker, "%^BOLD%^%^RED%^You swing your " + weapon->query_short() + " in a brutal swipe, hitting" + targ->QCN + " in the head with a certainly fatal strike!");
+            tell_room(environment(targ), "%^BOLD%^%^RED%^" + attacker->QCN + " swings " + attacker->QP + " " + weapon->query_short() + " in a brutal swipe, hitting " + targ->QCN + " in the head with what must cetainly be a fatal strike!", ({ attacker, targ }));
+            targ->set_hp(-100);
         }
     }else {
-        mult = 2; // currently all unarmed attacks have x2 multiplier
+        mult = 2;     // currently all unarmed attacks have x2 multiplier
         if (attacker->is_class("monk")) {
             mult += (int)"/std/class/monk.c"->critical_multiplier(attacker);
 
-            if (FEATS_D->usable_feat(attacker, "way of the merciful soul")) {
-                if (objectp(targ)) {
-                    if (targ->query_hp_percent() < 26 && targ->query_hp_percent() > 0) {
-                        if (!FEATS_D->usable_feat(targ, "death ward") && !targ->query_property("no death")) {
-                            if (!targ->fort_save(attacker->query_prestige_level("monk")) && USER_D->can_spend_ki(attacker, 3)) {
-                                tell_object(targ, "%^BOLD%^%^BLUE%^" + attacker->QCN + " strikes you swiftly on the forehead and everthing goes
-black!%^RESET%^");
-                                tell_object(attacker, "%^BOLD%^%^BLUE%^You strike " + targ->QCN + " precisely on the forehead and release pure ki
-into " + targ->QP + " mind, "
-                                            "granting " + targ->QO + " the mercy of a painless death.");
-                                tell_room(environment(targ), "" + attacker->QCN + " strikes " + targ->QCN + " swiftly on the head and " + targ->QS + " drops
-instantly to the "
-                                          "ground!", ({ attacker, targ }));
-                                USER_D->spend_ki(attacker, 3);
-                                targ->set_hp(-100);
-                            }
-                        }
-                    }
-                }
+            if (objectp(targ) &&
+                FEATS_D->usable_feat(attacker, "way of the merciful soul") &&
+                targ->query_hp_percent() < roll_dice(6, 6) &&
+                targ->query_hp_percent() > 0 &&
+                !targ->query_property("no death") &&
+                !targ->fort_save(attacker->query_guild_level("monk"))
+                ) {
+                tell_object(targ, "%^BOLD%^%^BLUE%^" + attacker->QCN + " strikes you swiftly on the forehead and everthing goes black!%^RESET%^");
+                tell_object(attacker, "%^BOLD%^%^BLUE%^You strike " + targ->QCN + " precisely on the forehead and release pure ki into " + targ->QP + " mind, granting " + targ->QO + " the mercy of a painless death.");
+                tell_room(environment(targ), "" + attacker->QCN + " strikes " + targ->QCN + " swiftly on the head and " + targ->QS + " drops instantly to the ground!", ({ attacker, targ }));
+                USER_D->spend_ki(attacker, 3);
+                targ->set_hp(-100);
             }
         }
     }
 
-    mult -= 1;
+mult -= 1;
 
-    //Odin's note that we already dealt normal damage and need to reduce multiplier by one
+//Odin's note that we already dealt normal damage and need to reduce multiplier by one
 
     if (!attacker->query_property("shapeshifted")) {
         if (FEATS_D->usable_feat(attacker, "exploit weakness")) {
@@ -815,9 +783,10 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
 
     if (critical_hit) {
-        damage = crit_damage(attacker, targ, weapon, attacker_size, damage); //I have no clue why I had to change this to += from = for crit damage to work properly, since crit_damage already returns damage + crit_damage, but this kluge seems to be working properly after numerous tests - Odin 5/19/2020
+        damage = crit_damage(attacker, targ, weapon, attacker_size, damage);
     }
-    damage += bonus_hit_damage; //pulling it in here so it's not multiplied by a critical hit
+
+    damage += bonus_hit_damage;
     new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit);
 
     if (!objectp(weapon) || attacker->query_property("shapeshifted")) {
