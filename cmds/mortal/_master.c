@@ -114,7 +114,7 @@ int cmd_master(string args)
     }
 
     if (sscanf(args, "level %d", slvl) == 1) {
-        string* myspells = TP->query_mastered_base()[myclass] + TP->query_mastered_bonus()[myclass];
+        string* myspells = TP->query_mastered_spells(myclass);
         mapping spell_index = MAGIC_D->index_masterable_spells(TP, myclass);
         string* savail;
 
