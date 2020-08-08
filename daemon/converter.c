@@ -38,17 +38,17 @@ public string convertToInput(string str){
 
    if(!stringp(str)) return str;
 
-   str = replace_string(str,"</font></b>","\%^RESET\%^");
-   str = replace_string(str,"</font><font color=\"#FF0000\">","\%^RED\%^");
-   str = replace_string(str,"</font><font color=\"#00FF00\">","\%^GREEN\%^");
-   str = replace_string(str,"</font><font color=\"#0088FF\">","\%^BLUE\%^");
-   str = replace_string(str,"</font><font color=\"#FFFF33\">","\%^YELLOW\%^");
-   str = replace_string(str,"</font><font color=\"#555555\">","\%^BLACK\%^");
-   str = replace_string(str,"</font><font color=\"#FFFFFF\">","\%^WHITE\%^");
-   str = replace_string(str,"</font><font color=\"#EEEE00\">","\%^ORANGE\%^");
-   str = replace_string(str,"</font><font color=\"#EE00EE\">","\%^MAGENTA\%^");
-   str = replace_string(str,"</font><font color=\"#00BBBB\">","\%^CYAN\%^");
-   str = replace_string(str,"<b>","\%^BOLD\%^");
+   str = replace_string(str,"</font></b>","%^RESET%^");
+   str = replace_string(str,"</font><font color=\"#FF0000\">","%^RED%^");
+   str = replace_string(str,"</font><font color=\"#00FF00\">","%^GREEN%^");
+   str = replace_string(str,"</font><font color=\"#0088FF\">","%^BLUE%^");
+   str = replace_string(str,"</font><font color=\"#FFFF33\">","%^YELLOW%^");
+   str = replace_string(str,"</font><font color=\"#555555\">","%^BLACK%^");
+   str = replace_string(str,"</font><font color=\"#FFFFFF\">","%^WHITE%^");
+   str = replace_string(str,"</font><font color=\"#EEEE00\">","%^ORANGE%^");
+   str = replace_string(str,"</font><font color=\"#EE00EE\">","%^MAGENTA%^");
+   str = replace_string(str,"</font><font color=\"#00BBBB\">","%^CYAN%^");
+   str = replace_string(str,"<b>","%^BOLD%^");
    str = replace_string(str,"\n<br>","\n\n");
 
    return str;
