@@ -67,9 +67,8 @@ int cmd_judgement(string args)
         return 0;
     }
 
-    if (!prerequisites(TP)) {
-        tell_object(TP, "You can't use this feat.");
-        return 1;
+    if (!FEATS_D->usable_feat(TP, query_feat_name())) {
+        return 0;
     }
 
     argss = explode(args, " ");

@@ -5,7 +5,8 @@ inherit FEAT;
 
 int help();
 
-void create() {
+void create()
+{
     ::create();
     feat_type("instant");
     feat_category("Assassin");
@@ -16,26 +17,38 @@ void create() {
     set_target_required(0);
 }
 
-int allow_shifted() { return 1; }
+int allow_shifted()
+{
+    return 1;
+}
 
-int prerequisites(object ob) {
-    if(!objectp(ob)) { return 0; }
+int prerequisites(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
 
-    if((int)ob->query_class_level("assassin") < 4) {
+    if ((int)ob->query_class_level("assassin") < 4) {
         dest_effect();
         return 0;
     }
     return ::prerequisites(ob);
 }
 
-int cmd_hide_in_plain_sight(string str) {
+int cmd_hide_in_plain_sight(string str)
+{
     object obj;
-    object * attackers, attacker;
-    if(!objectp(TP))
+    object* attackers, attacker;
+    if (!objectp(TP)) {
         return;
-    if(TP->query_property("hide_in_plain_sight")>time())
-    {
-        tell_object(TP,"Hide in plain sight only once per round.");
+    }
+
+    if (!FEATS_D->usable_feat(TP, query_feat_name())) {
+        return 0;
+    }
+
+    if (TP->query_property("hide_in_plain_sight") > time()) {
+        tell_object(TP, "Hide in plain sight only once per round.");
         dest_effect();
         return 1;
     }
@@ -46,18 +59,20 @@ int cmd_hide_in_plain_sight(string str) {
     {
         TP->remove_attacker(attacker);
     }
-    tell_object(TP,"You disappear.");
+    tell_object(TP, "You disappear.");
     obj = new("/cmds/mortal/hide.c");
     obj->set_player(TP);
     obj->move(TP);
-    if(TP->query_property("hide_in_plain_sight"))
+    if (TP->query_property("hide_in_plain_sight")) {
         TP->remove_property("hide_in_plain_sight");
-    TP->set_property("hide_in_plain_sight",time()+ROUND_LENGTH);
+    }
+    TP->set_property("hide_in_plain_sight", time() + ROUND_LENGTH);
     dest_effect();
     return 1;
 }
 
-void dest_effect() {
+void dest_effect()
+{
     ::dest_effect();
     remove_feat(TO);
     return;
