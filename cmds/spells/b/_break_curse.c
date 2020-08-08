@@ -20,26 +20,12 @@ void create() {
     set_helpful_spell(1);
 }
 
-string query_casting_string() {
-    if(spell_type == "cleric") {
-      if((string)caster->query_diety() == "mystra") {
-        return "%^BLUE%^"+caster->QCN+" begins to glow with a blue "+
-            "radiance as "+caster->QS+" chants words filled "+
-            "with power.";
-      }
-      if((string)caster->query_diety() == "shar") {
-        return "%^MAGENTA%^Tendrils composed of shadow extend out of"+
-            " "+caster->QCN+" as "+caster->QS+" begins to chant "+
-            "words filled with power.";
-      }
-      if((string)caster->query_diety() == "cyric") {
-        return "%^BOLD%^%^BLACK%^Black flames flare outwards from "+
-            "around "+caster->QCN+" as "+caster->QS+" begins to "+
-            "chant words filled with power.";
-      }
+string query_casting_string()
+{
+    if (spell_type == "cleric") {
+        return "%^BLUE%^" + caster->QCN + " begins to glow with a blue " + "radiance as " + caster->QS + " chants words filled with power.";
     }
-    return "%^BLUE%^"+caster->QCN+" begins to glow with a blue radiance as "+caster->QS+" utters words filled "+
-    "with power.";
+    return "%^BLUE%^" + caster->QCN + " begins to glow with a blue radiance as " + caster->QS + " utters words filled " + "with power.";
 }
 
 int preSpell() {
@@ -92,35 +78,32 @@ void spell_effect(int prof) {
         object i;
 
         all_spells = ob->query_property("spelled");
+        all_spells = filter_array(all_spells, (:objectp($1):));
+        all_spells = filter_array(all_spells, (:$1->is_curse():));
 
         if(sizeof(all_spells))
         {
             foreach(i in all_spells)
             {
-                if(!objectp(i))
-                    continue;
-
-                if(i->is_curse())
+                if(clevel + roll_dice(1, 20)>= i->query_clevel())
                 {
-                    if(clevel >= i->query_clevel())
-                    {
-                        tell_object(caster,"%^BOLD%^You dispel " + i->query_spell_name());
-                        i->dest_effect();
-                    }
-                    else
-                    {
-                        tell_object(caster,"%^BOLD%^%^RED%^You failed to dispel " + i->query_spell_name());
-                    }
+                    tell_object(caster,"%^BOLD%^You dispel " + i->query_spell_name());
+                    i->dest_effect();
+                }
+                else
+                {
+                    tell_object(caster,"%^BOLD%^%^RED%^You failed to dispel " + i->query_spell_name());
                 }
             }
         }
         else
         {
-            tell_object(caster,"%^BOLD%^Your spell fails to hit any curses.");
+            tell_object(caster,"%^BOLD%^%^CYAN%^Your spell fails to hit any curses.");
         }
 
         spell_successful();
         dest_effect();
+        return;
     }
 
     ench = ob->query_property("enchantment");

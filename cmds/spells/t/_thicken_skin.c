@@ -1,12 +1,7 @@
-//  Modified from the wizard armor spell
-//This one is 2nd level because its benefits stack with 
-//mage armor or inertial armor
-//  ~Circe~ 7/26/05
 #include <spell.h>
 #include <daemons.h>
 inherit SPELL;
 
-int clevel;
 void dest_effect();
 
 void create() {
@@ -61,18 +56,18 @@ void spell_effect(int prof) {
 }
 
 void test(){
-    
+
     int max_damage, add_tally, thp;
     if (!objectp(target))    // To avoid errors when player quits - Thorn
         dest_effect();
-   
-    if (!target->is_ok_armour("mage")) 
+
+    if (!target->is_ok_armour("mage"))
     {
         tell_object(caster,"The power cannot offer protection to those wearing armor.");
         dest_effect();
         return;
     }
-  
+
     call_out("test", 7);
     return 0;
 }
@@ -80,7 +75,7 @@ void test(){
 void dest_effect() {
 
     if(!objectp(target)) return;
-    if(objectp(target)) 
+    if(objectp(target))
     {
         target->add_ac_bonus(-2);
         target->remove_property_value("spelled", ({TO}) );

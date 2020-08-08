@@ -167,7 +167,7 @@ void do_tentacles()
         for(i=0;sizeof(caught) > 0,i<sizeof(caught);i++)
 		{
             if(!objectp(caught[i])) { continue; }
-            if(random((int)caught[i]->query_stats("strength") + roll_dice(1,20)) < random(clevel+8))
+            if(random(caught[i]->query_stats("strength") + roll_dice(1,20)) < random(clevel+8))
 			{
                 tell_object(caught[i],"%^CYAN%^The tentacle squeezes the life from you!");
                 tell_room(place,"%^CYAN%^The tentacle squeezes around "+caught[i]->QCN+"!",caught[i]);

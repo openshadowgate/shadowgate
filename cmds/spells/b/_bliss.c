@@ -46,7 +46,7 @@ string query_cast_string()
 
 void spell_effect(int prof)
 {
-    int clevel,effect, bonus;
+    int effect, bonus;
 
     if(!present(target,place))
     {

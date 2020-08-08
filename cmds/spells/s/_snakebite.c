@@ -34,7 +34,7 @@ string query_cast_string(){
 }
 
 void spell_effect(int prof) {
-    int clevel,effect;
+    int effect;
 
     if(!objectp(caster) || !objectp(target)){
         dest_effect();

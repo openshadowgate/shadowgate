@@ -73,7 +73,7 @@ void spell_effect(int prof)
     }
 
     target_limb = target->return_target_limb();
-    need = (int)"/daemon/bonus_d.c"->thaco(clevel,"fighter") - ((int)target->query_ac());
+    need = "/daemon/bonus_d.c"->thaco(clevel,"fighter") - ((int)target->query_ac());
     roll = random(20) + 1;
 
     switch(element)
