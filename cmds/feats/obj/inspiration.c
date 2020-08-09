@@ -241,7 +241,15 @@ void inspire_courage(object ally, int direction)
 
     ally->add_attack_bonus(power * direction);
     ally->add_damage_bonus(power * direction);
+
+    if (direction == 1) {
+        ally->set_property("fear_immunity", 1);
+    } else {
+        ally->remove_property("fear_immunity");
+    }
 }
+
+
 
 object *get_present_allies()
 {

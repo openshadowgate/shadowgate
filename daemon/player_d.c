@@ -1791,7 +1791,7 @@ int immunity_check(object obj, string type)
     case "sleep":
     {
         if (obj->is_undead()) {
-            return 0;
+            return 1;
         }
         switch (myrace) {
         case "elf":
@@ -1812,6 +1812,10 @@ int immunity_check(object obj, string type)
             return 1;
         }
         if (FEATS_D->usable_feat(obj, "bravery")) {
+            return 1;
+        }
+
+        if (obj->query_property("fear_immunity")) {
             return 1;
         }
         switch (myrace) {
