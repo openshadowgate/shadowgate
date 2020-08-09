@@ -11,10 +11,10 @@ void create()
     feat_type("instant");
     feat_category("Performance");
     feat_name("inspire");
-    feat_syntax("inspire courage");
+    feat_syntax("inspire nothing|courage|competence|greatness|heroics");
     feat_prereq("Bard L1");
     feat_classes("bard");
-    feat_desc("");
+    feat_desc("This feats gives you access to songs of inspiration. These songs affect every ally present and grant them various bonuses. These songs, hovewer, can be disharmonized with a countersong. To see what inspiration grants which effect refer to their feat help files. With <inspire nothing> command you can cease your current songs.");
     set_target_required(0);
     allow_blind(1);
 }
