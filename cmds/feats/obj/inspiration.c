@@ -234,7 +234,7 @@ void remove_ally(object ally)
 void inspire_courage(object ally, int direction)
 {
     int power;
-    power = clevel / 12 + 1;
+    power = clevel / 6 + 1;
     power = power > 6 ? 6 : power;
 
     ally->add_attack_bonus(power * direction);
@@ -253,7 +253,7 @@ void inspire_competence(object ally, int direction)
 
     int i;
 
-    power = clevel / 12 + 1;
+    power = clevel / 8 + 1;
     power = power > 6 ? 6 : power;
 
     for (i = 0; i < sizeof(CORE_SKILLS); i++) {
@@ -265,10 +265,10 @@ void inspire_greatness(object ally, int direction)
 {
     int power;
 
-    power = clevel / 12 + 1;
+    power = clevel / 8 + 1;
     power = power > 6 ? 6 : power;
 
-    ally->add_max_hp_bonus(clevel * direction);
+    ally->add_max_hp_bonus((clevel * 3 / 2) * direction);
     ally->add_attack_bonus(power * direction);
     ally->add_saving_bonus("fortitude", power * direction);
 }
