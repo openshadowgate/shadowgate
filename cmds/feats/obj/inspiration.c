@@ -322,7 +322,7 @@ int countersong(int lvl)
 {
     int roll = roll_dice(1, 20);
 
-    if (lvl > clevel + roll || roll == 20 && roll != 1) {
+    if (lvl + roll> clevel || roll == 20 && roll != 1) {
         if (objectp(caster)) {
             tell_object(caster,"%^BOLD%^%^BLACK%^Hostile c%^RESET%^%^RED%^ou%^BOLD%^%^BLACK%^nt%^RESET%^%^RED%^e%^BOLD%^%^BLACK%^rs%^RESET%^%^RED%^o%^BOLD%^%^BLACK%^ng d%^RESET%^%^RED%^i%^BOLD%^%^BLACK%^sr%^RESET%^%^RED%^u%^BOLD%^%^BLACK%^pts the harmony of your melodies.%^RESET%^");
         }
