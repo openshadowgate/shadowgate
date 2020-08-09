@@ -9,6 +9,7 @@ void create(){
 
    set_exits(([ "east": ROOMS"grove5",  
   "south": ROOMS"cliff2",
+  "up": ROOMS"quest",
   "northeast": ROOMS"cliff4",   ]));
 
 
