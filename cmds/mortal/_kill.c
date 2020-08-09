@@ -100,7 +100,7 @@ This sommand turns combat on for you and %^ORANGE%^%^ULINE%^TARGET%^RESET%^.
 
 To kill yourself just use %^ORANGE%^<kill %^ORANGE%^%^ULINE%^YOURNAME%^RESET%^%^ORANGE%^>%^RESET%^.
 
-Without an argument this command will start combat with random non-hostile target.
+Without an argument this command will start combat with random non-hostile non-ally.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

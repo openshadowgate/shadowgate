@@ -29,13 +29,13 @@ void reset()
     ::reset();
     if(!objectp(room))
     {
-        if(query_property("ankeg_room")) 
+        if(query_property("ankeg_room"))
         {
             remove_property("ankeg_room");
             remove_exit("down");
         }
     }
-  
+
     if(!pointerp(TO->query_exits()) || !sizeof(TO->query_exits()))
     {
         flag =1;
@@ -44,30 +44,30 @@ void reset()
     if(!present("bad boy") && !TO->query_traps() && !random(2))
     {
 
-            
+
         str = (string *)TO->query_exits();
         str -= ({"down"});
         dir = str[random(sizeof(str))];
-            
-        switch (random(50)) 
+
+        switch (random(50))
             {
 
-            case 0..5:                      
+            case 0..5:
             if(objectp(room))
                 break;
             set_trap_functions(({dir}),({"ankheg"}),({dir}));
             ank_dir = dir;
-            add_item("ground","The ground to the "+dir+" seems weak.");     
+            add_item("ground","The ground to the "+dir+" seems weak.");
             what = "ankheg&"+dir;
-            break;                  
+            break;
             case 6..9:
             set_trap_functions(({dir}),({"tasloi"}),({dir}));
             add_item("trees","There seems to be something hidden in the trees toward the "+dir+".");
             what = "tasloi&"+dir;
             break;
             case 10..17:
-            set_trap_functions(({dir}),({"native"}),({dir}));       
-            add_item("bushes","There seems to be something hidden in the bushes toward the "+dir+".");                  
+            set_trap_functions(({dir}),({"native"}),({dir}));
+            add_item("bushes","There seems to be something hidden in the bushes toward the "+dir+".");
             what = "native&"+dir;
             break;
             case 18..20:
@@ -89,7 +89,7 @@ void reset()
 }
 
 
-void set_ankheg_room(object myroom) 
+void set_ankheg_room(object myroom)
 {
     if(!objectp(myroom)) return;
     room = myroom;
@@ -98,36 +98,36 @@ void set_ankheg_room(object myroom)
 int ankheg(){
         string verb;
         object ob;
-        
+
         verb = query_verb();
-        
+
         tell_room(TO,"As "+TPQCN+" wanders "+verb+" the ground below "+TP->query_objective()+"
 shudders and opens.",TP);
         tell_object(TP,"As you walk "+verb+" the ground shudders and opens under you.");
         if(!objectp(room))
     {
-        
+
         room = new(PATH+"ankheghouse");
 //       room->add_exit(TO->query_exit(verb),"up"); - This is what it was.
 //Changing to below to try to fix a bug.  Circe 6/14/07
         room->add_exit(TO->query_exit(ank_dir),"up");
         }
-    TO->query_exit(ank_dir)->add_exit(room, "down");
-    TO->query_exit(ank_dir)->set_property("ankeg_room", 1);
-    TO->query_exit(ank_dir)->set_ankheg_room(room);
+        TO->query_exit(ank_dir)->add_exit(file_name(room), "down");
+        TO->query_exit(ank_dir)->set_property("ankeg_room", 1);
+        TO->query_exit(ank_dir)->set_ankheg_room(room);
         TP->move_player(room);
         //toggle_trap(verb);
         return 1;
 }
-        
+
 
 int tasloi(){
         string verb;
         object ob,*inven,*tmp;
         int i,j,k,l;
-        
+
         verb = query_verb();
-        if(TP->query_invis()) return 0; 
+        if(TP->query_invis()) return 0;
         tell_room(TO,"As "+TPQCN+" wanders "+verb+" the trees above "+TP->query_objective()+" come
 alive as a net is thrown down.",TP);
         tell_object(TP,"As you walk "+verb+" the trees above you seem to come alive and a net is
@@ -158,10 +158,10 @@ thrown down upon you.");
                         ob->kill_ob(tmp[k],1);
                 }
         }
-        
-        
+
+
         tell_room(TO,"An Army of tasloi drop from the trees and attack the captured.");
-                        
+
         toggle_trap(verb);
         return 1;
 }
@@ -176,9 +176,9 @@ int native()
     string verb;
     object ob,*inven,*inven2,tmp;
     int i,j,k,l;
-        
+
     verb = query_verb();
-    if(TP->query_invis()) return 0; 
+    if(TP->query_invis()) return 0;
     tell_room(TO,"As "+TPQCN+" wanders "+verb+" the bushes around "+TP->query_objective()+" come alive and spears fly through the air.",TP);
     tell_object(TP,"As you walk "+verb+" the bushes around you come alive and spears fly through the air!");
     inven2 = all_living(TO);
@@ -201,7 +201,7 @@ int native()
     ob->move(TO);
     for(k=0;k<l;k++)
         ob->kill_ob(inven[k],1);
-    
+
     tmp = new("/d/common/obj/weapon/spear_lg");
     tmp->set_property("enchantment",3);
     if(ob->Thaco(1,TP,tmp) < (random(20)+4))
@@ -233,7 +233,7 @@ int native()
     if(objectp(TP))  TP->remove_attacker(ob);
     tmp->remove();    // added by Styx 11/03/02 to clean up objects w/no environment
     tell_room(TO,"Natives appear from the bushes and attack.");
-                        
+
     toggle_trap(verb);
     return 1;
 }
@@ -250,14 +250,14 @@ void init(){
 string query_long(string str)
 {
     string hold,one,two;
-        
+
     hold = ::query_long(str);
-        
+
     if(!what) return hold;
-        
+
     sscanf(what,"%s&%s",one,two);
     if(!one || !trapped(two)) return hold;
-        
+
     switch (one)
     {
         case "native":

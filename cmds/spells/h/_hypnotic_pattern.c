@@ -39,7 +39,7 @@ int preSpell()
 
 void spell_effect(int prof)
 {
-    int duration = clevel/12+1;
+    int duration = clevel / 12 + 1;
 
     tell_object(caster,"%^MAGENTA%^You wave your hand and send hypnotic patterns to dance in front of "+target->QCN+"'s eyes");
     tell_room(place,"%^MAGENTA%^"+caster->QCN+" waves "+caster->QP+" hand and sends hypnotic pattern to dance in front of "+target->QCN+"'s eyes",caster);

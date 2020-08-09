@@ -32,7 +32,7 @@ string query_cast_string() {
 }
 
 void spell_effect(int prof) {
-    int clevel,change=-2;
+    int change=-2;
     int duration,level;
 
     //if (clevel >20) clevel = 20;

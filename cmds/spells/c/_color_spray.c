@@ -42,7 +42,7 @@ string query_cast_string() {
 
 int bonus;
 void spell_effect(int prof) {
-    int x, affected, clevel;
+    int x, affected;
     object *prospective, place, *ownparty, target;
 
     bonus = prof/10-10;

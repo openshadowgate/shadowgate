@@ -6,7 +6,7 @@
 #include <daemons.h>
 inherit SPELL;
 
-int clevel,bonus,i;
+int bonus,i;
 
 void create() {
     ::create();

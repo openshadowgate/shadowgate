@@ -27,11 +27,9 @@ void create()
 {
     ::create();
     set_name("judgement_obj");
-    set("id", ({ "judgement_obj" }));
-    set("short", "");
-    set("long", "");
-
+    set_id(({"judgement_obj"}));
     set_property("no animate", 1);
+    set_hide(1);
     set_weight(0);
 }
 
@@ -105,6 +103,9 @@ void apply_judgements(string* judgements, int direction)
             if (function_exists("judgement_" + j, TO)) {
                 call_other(TO, "judgement_" + j, caster, direction, power);
             }
+            if (direction == -1) {
+                active_judgements -= ({j});
+            }
         }
     }
 }
@@ -112,7 +113,7 @@ void apply_judgements(string* judgements, int direction)
 void judgement_destruction(object targ, int direction, int power)
 {
     int bonus;
-    bonus = power / 3 / 3 + 1;
+    bonus = power / 6 + 1;
     targ->add_damage_bonus(bonus * direction);
 }
 
@@ -164,13 +165,17 @@ void check()
         return;
     }
 
-    if (!sizeof(caster->query_attackers())) {
-        ticker++;
-    } else {
+    if (sizeof(caster->query_attackers())) {
         ticker = 0;
     }
 
-    if (!sizeof(caster->query_attackers()) && ticker > 5) {
+    ticker++;
+
+    if (ticker == 2) {
+        tell_object(caster,"%^BOLD%^%^WHITE%^You sense you begin to loose the grip on your arcane zeal.%^RESET%^");
+    }
+
+    if (!sizeof(caster->query_attackers()) && ticker > 3) {
         tell_object(caster, "%^BOLD%^%^CYAN%^As the battle comes to an end your arcane zeal recedes.%^RESET%^");
         apply_judgements(active_judgements, -1);
         TO->remove();
@@ -191,11 +196,15 @@ void remove()
     if (sizeof(active_judgements)) {
         apply_judgements(active_judgements, -1);
     }
-
     ::remove();
+}
+
+int is_judgement()
+{
+    return 1;
 }
 
 void save_me()
 {
-    TO->remove();
+    return;
 }

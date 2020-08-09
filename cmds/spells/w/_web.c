@@ -6,7 +6,7 @@
 inherit SPELL;
 
 object oldenv, web, mass;
-int waittime, clevel;
+int waittime;
 
 void dest_effect();
 void waiter(int num);
