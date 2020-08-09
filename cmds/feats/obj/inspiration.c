@@ -270,6 +270,7 @@ void inspire_greatness(object ally, int direction)
 
     ally->add_max_hp_bonus((clevel * 3 / 2) * direction);
     ally->add_attack_bonus(power * direction);
+    ally->set_property("spell penetration", power * direction);
     ally->add_saving_bonus("fortitude", power * direction);
 }
 
@@ -277,12 +278,11 @@ void inspire_heroics(object ally, int direction)
 {
     int power;
 
-    power = clevel / 12 + 1;
-    power = power > 6 ? 6 : power;
+    power = clevel / 4 + 1;
+    power = power > 8 ? 8 : power;
 
     ally->add_saving_bonus("all", power * direction);
     ally->add_ac_bonus(power * direction);
-
 }
 
 object *get_present_allies()
