@@ -59,6 +59,7 @@ new(OBJ"weed_belt")->move(TO);
 new(OBJ"shield")->move(TO);
 new(OBJ"ray_spear")->move(TO);
 new(OBJ"bottoms")->move(TO);
+new(OBJ"scale_mail")->move(TO);
 force_me("wearall"); //need wear first, otherwise shield unequiped
 force_me("wield spear");
 set_funcs(({"sweep"}));
