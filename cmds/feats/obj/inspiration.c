@@ -83,8 +83,6 @@ void activate_inspiration(object mycaster, int myclevel, string inspiration)
         return;
     }
 
-    // insert feat checks here
-
     allies = ({});
 
     active_inspiration = inspiration;
