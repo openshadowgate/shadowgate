@@ -43,14 +43,12 @@ string *class_feats(string myspec)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "simple weapon proficiency", "martial weapon proficiency", "light armor proficiency", "medium armor proficiency","shield proficiency", "spell focus","rally","dodge" }), 5 : ({ "indomitable" }), 8 : ({ "anger" }), 10 : ({ "tools of the trade" }), 11 : ({ "calm" }),  14 : ({ "force of personality" }), 17 : ({ "charm" }), ]);
+    return ([ 1 : ({ "simple weapon proficiency", "martial weapon proficiency", "light armor proficiency","shield proficiency", "spell focus","inspire","inspire courage", "dodge"}), 3:({"inspire competence"}), 9:({"inspire greatness"}), 10 : ({ "tools of the trade" }), 15:({"inspire heroics"})]);
 }
 
 string *class_skills()
 {
-// disguise temporarily disabled, please restore the first line when the command is installed. N, 1/14.
-//    return ({ "academics","disguise","influence","spellcraft","athletics"});
-    return ({ "academics","thievery","influence","spellcraft","athletics" });  //adding in athletics as tumble is a class skill
+    return ({ "academics","thievery","influence","spellcraft","athletics" });
 }
 
 int skill_points() { return 6; }
