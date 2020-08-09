@@ -91,8 +91,7 @@ void activate_inspiration(object mycaster, int myclevel, string inspiration)
 
     tell_room(ENV(caster), "%^CYAN%^The r%^BOLD%^%^BLACK%^a%^RESET%^%^CYAN%^p%^BOLD%^t%^WHITE%^u%^CYAN%^r%^BLACK%^e %^RESET%^%^MAGENTA%^o%^BOLD%^f %^WHITE%^m%^MAGENTA%^u%^RESET%^%^MAGENTA%^s%^BOLD%^i%^WHITE%^c %^MAGENTA%^f%^RESET%^%^MAGENTA%^ills %^CYAN%^the a%^BOLD%^i%^RESET%^%^CYAN%^r %^BOLD%^%^BLACK%^a%^RESET%^%^CYAN%^r%^BOLD%^%^BLACK%^o%^RESET%^%^CYAN%^u%^BOLD%^%^BLACK%^n%^RESET%^%^CYAN%^d%^CYAN%^%^BOLD%^ " + caster->QCN + "%^RESET%^%^CYAN%^.");
 
-    call_out("allies_watch", ROUND_LENGTH);
-
+    allies_watch();
 }
 
 void change_inspiration(string inspiration)
@@ -117,7 +116,7 @@ void change_inspiration(string inspiration)
 
     tell_room(ENV(caster),"%^BOLD%^%^MAGENTA%^T%^RESET%^%^MAGENTA%^he %^BOLD%^%^BLACK%^t%^MAGENTA%^o%^WHITE%^n%^MAGENTA%^e %^RESET%^%^MAGENTA%^of " +caster->QCN + "'s %^BOLD%^%^WHITE%^m%^MAGENTA%^e%^WHITE%^l%^MAGENTA%^o%^WHITE%^d%^MAGENTA%^y %^RESET%^%^MAGENTA%^changes.%^WHITE%^");
 
-    call_out("allies_watch", ROUND_LENGTH);
+    allies_watch();
 }
 
 void allies_watch()
