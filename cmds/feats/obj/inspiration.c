@@ -26,6 +26,11 @@ void create()
     set_weight(0);
 }
 
+int is_inspiration()
+{
+    return 1;
+}
+
 object setup_inspiration(object mycaster, int myclevel, string inspiration)
 {
     object insprtion;
@@ -36,6 +41,28 @@ object setup_inspiration(object mycaster, int myclevel, string inspiration)
         return;
     }
 
+    if (!objectp(mycaster)) {
+        return;
+    }
+
+    {
+        object* inv;
+
+        inv = all_inventory(mycaster);
+        inv = filter_array(inv, (: $1->is_inspiration() :));
+
+        if (sizeof(inv)) {
+            if (inspiration == "nothing") {
+                inv[0]->dest_all_effects();
+            } else if (inspiration && inspiration != inv[0]->query_active_inspiration()) {
+                inv[0]->change_inspiration(inspiration);
+            }
+
+            return 0;
+        }
+    }
+
+    insprtion->move(mycaster);
     insprtion->activate_inspiration(mycaster, myclevel, inspiration);
     return insprtion;
 }
@@ -57,14 +84,39 @@ void activate_inspiration(object mycaster, int myclevel, string inspiration)
 
     // insert feat checks here
 
-    allies = get_present_allies();
+    allies = ({});
 
     active_inspiration = inspiration;
 
-    tell_room(ENV(caster), "%^CYAN%^T%^MAGENTA%^h%^BOLD%^%^CYAN%^e %^RESET%^%^CYAN%^r%^MAGENTA%^a%^CYAN%^p%^BOLD%^t%^WHITE%^ur%^RESET%^%^MAGENTA%^e %^CYAN%^of %^MAGENTA%^m%^CYAN%^us%^MAGENTA%^i%^BOLD%^%^BLACK%^c %^RESET%^%^CYAN%^f%^MAGENTA%^i%^BOLD%^l%^WHITE%^l%^RESET%^%^MAGENTA%^s %^BOLD%^%^BLACK%^t%^RESET%^%^CYAN%^h%^MAGENTA%^e air %^BOLD%^%^BLACK%^a%^RESET%^%^CYAN%^ro%^BOLD%^u%^RESET%^%^CYAN%^nd %^WHITE%^%^BOLD%^" + caster->QCN + ".");
+    tell_room(ENV(caster), "%^CYAN%^The r%^BOLD%^%^BLACK%^a%^RESET%^%^CYAN%^p%^BOLD%^t%^WHITE%^u%^CYAN%^r%^BLACK%^e %^RESET%^%^MAGENTA%^o%^BOLD%^f %^WHITE%^m%^MAGENTA%^u%^RESET%^%^MAGENTA%^s%^BOLD%^i%^WHITE%^c %^MAGENTA%^f%^RESET%^%^MAGENTA%^ills %^CYAN%^the a%^BOLD%^i%^RESET%^%^CYAN%^r %^BOLD%^%^BLACK%^a%^RESET%^%^CYAN%^r%^BOLD%^%^BLACK%^o%^RESET%^%^CYAN%^u%^BOLD%^%^BLACK%^n%^RESET%^%^CYAN%^d%^CYAN%^%^BOLD%^ " + caster->QCN + "%^RESET%^%^CYAN%^.");
 
     call_out("allies_watch", ROUND_LENGTH);
 
+}
+
+void change_inspiration(string inspiration)
+{
+    object ally;
+
+    remove_call_out("allies_watch");
+
+    if (!objectp(caster)) {
+        dest_all_effects();
+    }
+
+    if (sizeof(allies)) {
+        foreach(ally in allies) {
+            inspire_ally(ally, -1, 1);
+        }
+    }
+
+    allies = ({});
+
+    active_inspiration = inspiration;
+
+    tell_room(ENV(caster),"%^BOLD%^%^MAGENTA%^T%^RESET%^%^MAGENTA%^he %^BOLD%^%^BLACK%^t%^MAGENTA%^o%^WHITE%^n%^MAGENTA%^e %^RESET%^%^MAGENTA%^of " +caster->QCN + "'s %^BOLD%^%^WHITE%^m%^MAGENTA%^e%^WHITE%^l%^MAGENTA%^o%^WHITE%^d%^MAGENTA%^y %^RESET%^%^MAGENTA%^changes.%^WHITE%^");
+
+    call_out("allies_watch", ROUND_LENGTH);
 }
 
 void allies_watch()
@@ -107,7 +159,7 @@ void allies_watch()
     call_out("allies_watch", ROUND_LENGTH);
 }
 
-void inspire_ally(object ally, int direction)
+void inspire_ally(object ally, int direction, int changeflag)
 {
     if (!objectp(ally)) {
         return;
@@ -127,10 +179,11 @@ void inspire_ally(object ally, int direction)
     }
 
     if (direction == 1) {
-        tell_object(ally,"%^MAGENTA%^T%^BOLD%^h%^BLACK%^e %^RESET%^%^CYAN%^p%^MAGENTA%^er%^BOLD%^m%^WHITE%^u%^RESET%^%^MAGENTA%^t%^BOLD%^%^BLACK%^a%^RESET%^%^MAGENTA%^t%^WHITE%^io%^BOLD%^%^BLACK%^n %^CYAN%^o%^RESET%^%^CYAN%^f %^BOLD%^%^MAGENTA%^m%^BLACK%^u%^MAGENTA%^s%^RESET%^%^MAGENTA%^i%^CYAN%^c %^MAGENTA%^e%^WHITE%^l%^BOLD%^%^BLACK%^a%^RESET%^%^MAGENTA%^t%^WHITE%^e%^BOLD%^%^BLACK%^s %^MAGENTA%^y%^RESET%^%^MAGENTA%^ou.%^RESET%^");
+        tell_object(ally, "%^MAGENTA%^The p%^BOLD%^e%^RESET%^%^MAGENTA%^r%^BOLD%^m%^RESET%^%^MAGENTA%^u%^BOLD%^t%^RESET%^%^MAGENTA%^a%^BOLD%^t%^RESET%^%^MAGENTA%^i%^BOLD%^o%^RESET%^%^MAGENTA%^n of music e%^BOLD%^l%^WHITE%^at%^MAGENTA%^e%^RESET%^%^MAGENTA%^s you with " +active_inspiration+".%^WHITE%^");
         ally->add_property("inspiration", TO);
-    } else {
-        tell_object(ally,"%^MAGENTA%^C%^BOLD%^%^BLACK%^o%^RESET%^%^MAGENTA%^l%^CYAN%^o%^MAGENTA%^rs %^BOLD%^%^BLACK%^o%^RESET%^%^MAGENTA%^f %^CYAN%^t%^MAGENTA%^he wo%^BOLD%^%^BLACK%^r%^RESET%^%^MAGENTA%^ld t%^CYAN%^u%^MAGENTA%^rn %^CYAN%^du%^BOLD%^%^BLACK%^l%^RESET%^%^CYAN%^l %^BOLD%^%^BLACK%^as %^RESET%^%^MAGENTA%^m%^BOLD%^%^BLACK%^us%^RESET%^%^MAGENTA%^ic l%^BOLD%^%^BLACK%^e%^RESET%^%^CYAN%^a%^MAGENTA%^v%^CYAN%^e%^MAGENTA%^s %^BOLD%^%^BLACK%^y%^RESET%^%^MAGENTA%^ou.%^RESET%^");
+    }
+    if (direction == -1 && !changeflag) {
+        tell_object(ally, "%^BOLD%^%^BLACK%^Colors of the world turn d%^RESET%^%^CYAN%^u%^BOLD%^%^BLACK%^ll as the m%^RESET%^%^MAGENTA%^u%^BOLD%^%^BLACK%^s%^RESET%^%^MAGENTA%^i%^BOLD%^%^BLACK%^c l%^RESET%^%^MAGENTA%^ea%^BOLD%^%^BLACK%^v%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^s you.%^RESET%^");
         ally->remove_property("inspiration");
     }
 
@@ -144,11 +197,23 @@ void dest_all_effects()
 {
     object ally;
 
+    remove_call_out("allies_watch");
+
     if (sizeof(allies)) {
-        foreach(ally in allies) {
-            remove_ally(ally);
+        foreach(ally in allies)
+        {
+            if (!objectp(ally)) {
+                continue;
+            }
+
+            inspire_ally(ally, -1);
         }
     }
+
+    if (objectp(caster) && objectp(ENV(caster))) {
+        tell_room(ENV(caster), "%^BOLD%^%^BLACK%^The s%^RESET%^i%^BOLD%^%^BLACK%^l%^RESET%^e%^BOLD%^%^BLACK%^nc%^RESET%^e %^BOLD%^%^BLACK%^d%^RESET%^ea%^BOLD%^%^BLACK%^f%^RESET%^e%^BOLD%^%^BLACK%^ns as " +caster->QCN+"'s m%^RESET%^u%^BOLD%^%^BLACK%^s%^RESET%^i%^BOLD%^%^BLACK%^c comes to an %^RESET%^e%^BOLD%^%^BLACK%^nd.%^RESET%^");
+    }
+
     TO->remove();
 }
 
@@ -209,7 +274,18 @@ object *get_present_allies()
     pa = distinct_array(pa);
 
     return pa;
+}
 
+int countersong(int lvl)
+{
+    int roll = roll_dice(1, 20);
+
+    if (lvl > clevel + roll || roll == 20 && roll != 1) {
+        if (objectp(caster)) {
+            tell_object(caster,"%^BOLD%^%^BLACK%^Hostile c%^RESET%^%^RED%^ou%^BOLD%^%^BLACK%^nt%^RESET%^%^RED%^e%^BOLD%^%^BLACK%^rs%^RESET%^%^RED%^o%^BOLD%^%^BLACK%^ng d%^RESET%^%^RED%^i%^BOLD%^%^BLACK%^sr%^RESET%^%^RED%^u%^BOLD%^%^BLACK%^pts the harmony of your melodies.%^RESET%^");
+        }
+        dest_all_effects();
+    }
 }
 
 string *query_inspiration_types()
@@ -222,9 +298,14 @@ int query_clevel()
     return clevel;
 }
 
+void remove()
+{
+    ::remove();
+}
+
 void save_me()
 {
-    TO->remove();
+    return;
 }
 
 string query_active_inspiration()
