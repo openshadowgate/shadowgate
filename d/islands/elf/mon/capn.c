@@ -59,8 +59,8 @@ new(OBJ"weed_belt")->move(TO);
 new(OBJ"shield")->move(TO);
 new(OBJ"ray_spear")->move(TO);
 new(OBJ"bottoms")->move(TO);
+force_me("wearall"); //need wear first, otherwise shield unequiped
 force_me("wield spear");
-force_me("wearall");
 set_funcs(({"sweep"}));
 set_func_chance(75);
 set_missChance(25);
