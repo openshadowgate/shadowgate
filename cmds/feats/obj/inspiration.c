@@ -275,6 +275,18 @@ void inspire_greatness(object ally, int direction)
     ally->add_saving_bonus("fortitude", power * direction);
 }
 
+void inspire_heroics(object ally, int direction)
+{
+    int power;
+
+    power = clevel / 12 + 1;
+    power = power > 6 ? 6 : power;
+
+    ally->add_saving_bonus("all", power * direction);
+    ally->add_ac_bonus(power * direction);
+
+}
+
 object *get_present_allies()
 {
     object * pa;
