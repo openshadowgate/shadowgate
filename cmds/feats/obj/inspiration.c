@@ -1,6 +1,7 @@
 #include <std.h>
 #include <magic.h>
 #include <daemons.h>
+#include <skills.h>
 
 inherit OBJECT;
 
@@ -236,7 +237,7 @@ void remove_ally(object ally)
 void inspire_courage(object ally, int direction)
 {
     int power;
-    power = clevel / 6 + 1;
+    power = clevel / 12 + 1;
     power = power > 6 ? 6 : power;
 
     ally->add_attack_bonus(power * direction);
@@ -249,7 +250,19 @@ void inspire_courage(object ally, int direction)
     }
 }
 
+void inspire_competence(object ally, int direction)
+{
+    int power;
 
+    int i;
+
+    power = clevel / 12 + 1;
+    power = power > 6 ? 6 : power;
+
+    for (i = 0; i < sizeof(CORE_SKILLS); i++) {
+        ally->add_skill_bonus(CORE_SKILLS[i], power * direction);
+    }
+}
 
 object *get_present_allies()
 {
