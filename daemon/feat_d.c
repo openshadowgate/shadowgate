@@ -1777,7 +1777,7 @@ int racial_bonus_feats(object ob) {
     subrace = (string)ob->query("subrace");
 
     if (myrace == "human") { //bonus feat for baseline humans
-        if (!subrace || subrace == "" || (subrace != "tiefling" && subrace != "aasimar" && subrace != "feytouched" && (strsrch(subrace, "genasi") == -1))) {
+        if (!subrace || subrace == "" || (subrace != "dhampir" && subrace != "tiefling" && subrace != "aasimar" && subrace != "feytouched" && (strsrch(subrace, "genasi") == -1))) {
             num++;
         }
     }
