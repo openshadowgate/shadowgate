@@ -30,6 +30,6 @@ void create() {
   set_hd(22,3);
   set_max_hp(query_hp());
   set_storage_room(STORAGE"smithy_storage");
-  set("items_allowed","weapon");
-  set("items_allowed","armor");
+  //set("items_allowed","weapon");
+  //set("items_allowed","armor"); don't think you can be both, leaving it blank for selling everything to him. -hades
 }
