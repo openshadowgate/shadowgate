@@ -8,7 +8,7 @@ void create(){
    ::create();
     set_short("%^BOLD%^BLUE%^Castle Ruins%^RESET%^");
     set_long(query_short()+"\nThis is the underwater ruins"+
-    " outside a %^CYAN%^castle.  Everything is mostly"+
+    " outside a %^CYAN%^castle%^RESET%^.  Everything is mostly"+
     " bricks half burried in the sea %^CYAN%^floor%^RESET%^.  "+
     "There is a gate leaning into the crumpled keep to the south."+
     "Maybe at one time this was the entrance to a powerful fort.");
