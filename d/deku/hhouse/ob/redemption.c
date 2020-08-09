@@ -428,7 +428,7 @@ int hit_func(object targ)
             "L%^RESET%^I%^BOLD%^%^YELLOW%^GHT%^BOLD%^%^WHITE%^ erupts %^BOLD%^%^YELLOW%^"+
             "VIOLENTLY%^BOLD%^%^WHITE%^ from "+ETOQCN+"%^BOLD%^%^WHITE%^'s blade and slams into "+
             targ->QCN+"%^BOLD%^%^WHITE%^ with tremendous force, knocking "+ETO->QO+
-            " to the ground!%^RESET%^");
+            " to the ground!%^RESET%^",({ETO, targ}));
             dam = MyPower;
             if(!random(25)) dam = MyPower * 2;
             MyPower = 0;
