@@ -16,7 +16,7 @@ set_long("This is an undead person who is wearing "+
 "important when he was still alive.");
 set_gender("male");
 set_hd(45,10);
-set_hp(750+random(3000));
+set_hp(750+random(5000));
 set("race", "undead");
 set_body_type("human");
 set_property("swarm",1);
