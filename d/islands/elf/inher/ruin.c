@@ -85,7 +85,7 @@ void pick_critters(){
                  break;
 		  case 4:  set_monsters( ({MON"stingray"}),({random(3)+2}));
                  break;
-        case 5:  set_monsters( ({MON"stingray",MON"crab",MON"lobster"}),({random(3)+1,random(2)+1,random(2)+1)});
+        case 5:  set_monsters( ({MON"stingray",MON"crab",MON"lobster"}),({random(3)+1,random(2)+1,random(2)+1});
                  break;
         default: break;  
       }
