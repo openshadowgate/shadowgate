@@ -91,6 +91,10 @@ void execute_feat()
         write("This object already has magic instilled in it.");
         return 1;
     }
+    if (ob->query_worn() || ob->query_wielded()) {
+        write("This object is worn or wielded, you'll need to unencumber it first.")
+        return 1;
+    }
     if (max(all_inventory(caster)->id("gem")) < 1) {
         write("%^BOLD%^%^RED%^You need a gem in your inventory to focus your magic through.");
         return;
