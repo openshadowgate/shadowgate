@@ -9,7 +9,6 @@ inherit "/std/innate";
  * @file
  */
 
-
 void set_cast_type(string str);
 
 int set_memorized(string myclass, string spell, int num);
@@ -955,7 +954,7 @@ void reset_mastered()
     mastered = ([]);
 }
 
-void prepare(string str, int temp, string myclass, int num)
+void prepare(string str, int duration, string myclass, int num)
 {
     object obt;
     if (!objectp(obt = TO->query_property("memorizing")) && (obt != TO)) {
@@ -997,7 +996,7 @@ void prepare(string str, int temp, string myclass, int num)
             break;
         }
     }
-    temp -= 2;
+    duration -= 2;
 
     if (myclass == "psywarrior" || myclass == "psion") {
         mymax = TO->query_max_mp();
@@ -1019,10 +1018,10 @@ void prepare(string str, int temp, string myclass, int num)
         if (num > myneeded) {
             num = myneeded;
         }
-        if (num > 5) {
-            TO->add_mp(5); // began as 17 (points required for 9th level power), was way too fast. Trying 5, may need to be adjusted
-            num = num - 5;
-            call_out("prepare", 2, str, temp, myclass, num);
+        if (num > PSI_MP_PER_CYCLE) { // Not sure if 5 was too fast. Change in #define. Also #FuckYouPleaseUseDefines.
+            TO->add_mp(PSI_MP_PER_CYCLE); // began as 17 (points required for 9th level power), was way too fast. Trying 5, may need to be adjusted
+            num = num - PSI_MP_PER_CYCLE;
+            call_out("prepare", 2, str, duration, myclass, num);
             return 1;
         }else {
             TO->add_mp(num);
@@ -1031,13 +1030,13 @@ void prepare(string str, int temp, string myclass, int num)
         }
     }
 
-    if (temp > 0 && (can_memorize(myclass, str) == MEM_OK)) {
+    if (duration > 0 && (can_memorize(myclass, str) == MEM_OK)) {
         if (num > 1 && !random(3)) {
             set_memorized(myclass, str, 1);
             num--;
         }
         call_out("prepare", 2, str, temp, myclass, num);
-    }else {
+    } else {
         if (num > 1) {
             while (num--) {
                 if (can_memorize(myclass, str) == MEM_OK) {
