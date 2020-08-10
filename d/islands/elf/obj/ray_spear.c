@@ -14,7 +14,7 @@ void create(){
     " stingray tail mounted on a barnicle covered"+
     " metal shaft.   The tip is dark with poison."+
     "  Some force keeps the tail producing poison"+
-    " even while seperated from a living stingray. ");
+    " even while seperated from a living stingray.");
     
     set_lore("The spear at one point was a normal"+
     " weapon.  The style is old.  Likely crafted "+
