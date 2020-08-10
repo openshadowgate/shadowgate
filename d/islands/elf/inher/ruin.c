@@ -50,7 +50,7 @@ string night_desc() {
 
 void reset(){
  ::reset();
- switch(random(7)){
+ switch(random(9)){
       case 0:  tell_room(TO,"%^CYAN%^Near freezing water chills your bones.");
                break;
       case 1:  tell_room(TO,"%^CYAN%^You hear a swoosh as water currents flow past you.");
@@ -65,8 +65,13 @@ void reset(){
       case 5:  tell_room(TO,"%^BOLD%^There is a crack and a splash "+
 	  "as a berg of ice cavs into the sea.");
                break;	
-      case 6:  tell_room(TO,"%^CYAN%^Several bubbles pop up from the ruins");
-               break;				   }
+      case 6:  tell_room(TO,"%^CYAN%^Several bubbles pop up from the ruins.");
+               break;		
+      case 7:  tell_room(TO,"%^CYAN%^Your feet feel numb as if they were going to freeze into the mud.");
+               break;		
+      case 8:  tell_room(TO,"%^BOLD%^Several ice crystals form in the water and begin to float upward.");
+               break;	             
+               	   }
  return;
 }
 void pick_critters(){
@@ -78,7 +83,9 @@ void pick_critters(){
                  break;
         case 3:  set_monsters( ({MON"rev"}),({1}));
                  break;
-		case 4:  set_monsters( ({MON"stingray"}),({random(3)+2}));
+		  case 4:  set_monsters( ({MON"stingray"}),({random(3)+2}));
+                 break;
+        case 5:  set_monsters( ({MON"stingray",MON"crab",MON"lobster"}),({random(3)+1,random(2)+1,random(2)+1)});
                  break;
         default: break;  
       }
