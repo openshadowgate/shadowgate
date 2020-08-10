@@ -16,6 +16,7 @@ void create(){
       "north" : ROOMS"/shore/castle0",
      
    ]));
+   set_property("no teleport",1);
    set_door("gate",ROOMS"/shore/castle1","north","nokey");
    set_open("gate",0);
    set_locked("gate",0);
