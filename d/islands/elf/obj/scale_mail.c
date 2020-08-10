@@ -5,7 +5,7 @@ inherit "/d/common/obj/armour/scale.c";
 void create(){
   ::create();
 
-  set_id(({"scale","armor","scale mail","tarnished scale mail"}));
+  set_id(({"scale","armor","scale mail","tarnished scale mail","mail"}));
   set_obvious_short("%^BLUE%^t%^CYAN%^a%^BLUE%^rnished scale mail%^RESET%^");
   set_short("%^BLUE%^s%^CYAN%^c%^BLUE%^ales of the d%^CYAN%^e%^BLUE%^ep%^RESET%^");
   set_long("Long ago this scale mail used"+
