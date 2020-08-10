@@ -116,8 +116,12 @@ void start_exam(string str) {
       remove();
       return;
    }
-   if(((string)TP->query_race() != "elf")) {
-      reply_snarl("I will only open the gate for elves.  Go back the way you came.");
+   if((string)TP->query_race() != "elf" &&
+       (string)ob->query_race() != "nymph" &&
+       (string)ob->query_race() != "voadkyn" &&
+       (string)ob->query_race() != "dryad" &&
+       (string)ob->query("subrace") != "szarkai") {
+      reply_snarl("I will only open the gate for elves and fey.  Go back the way you came.");
       tell_room(ETO,"The elf turns around and "
                 "heads back into the gatehouse, locking it behind him.");
       move("/d/shadowgate/void");
