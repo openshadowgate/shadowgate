@@ -145,7 +145,7 @@ int say_stuff(string str) {
 	  +TPQCN+" to pass.",TP);
       tell_object(TP,"The elf unlocks the gate and allows"+
 	  " you to pass on into Ashta'Rathai.");
-	   force_me("say Welcome to our remote keep cousin.")
+	   force_me("say Welcome to our remote keep cousin.");
       force_me("unlock gate with key");
       tell_room(ETO,"The elf then turns on his "
             "heels and goes back inside the gatehouse."+
