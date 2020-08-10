@@ -7,7 +7,7 @@ inherit "/d/common/obj/weapon/mspear.c";
 void create(){
     ::create();
     set_name("Stingray spear");
-    set_id( ({"spear", "stingray spear", "stingray stinger"}) );
+    set_id( ({"spear", "stingray spear", "stingray stinger","stinger"}) );
     set_short("%^CYAN%^Stingray Spear%^RESET%^");
     set_obvious_short("Stingray stinger");
     set_long("This spear appears to be a giant"+
