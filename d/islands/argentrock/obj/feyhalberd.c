@@ -9,8 +9,8 @@ void create(){
 
     set_name("Halberd");
     set_id(({"halberd","fey halberd","leaf","leaf covered halberd"}));
-    set_short("%^CYAN%^F%^GREEN%^e%^CYAN%^y Halberd ");
-    set_obvious_short("%^GREEN%^leaf c%^CYAN%^o%^GREEN%^vered halberd");
+    set_short("%^CYAN%^F%^GREEN%^e%^CYAN%^y Halberd%^RESET%^");
+    set_obvious_short("%^GREEN%^leaf c%^CYAN%^o%^GREEN%^vered halberd%^RESET%^");
     set_long("%^GREEN%^This large polearm consists of a large wooden pole"+
     " that is covered with green leaves and a %^RESET%^silver axe head%^GREEN%^ on the end."+
     "  Above the axe there is a pointed spike.  All of the metal parts"+
@@ -52,6 +52,9 @@ void mess() {
 "Fey'ri should have learned from the drow's mistakes but instead repeated them."+
 "Bathing souls in malice and forcing them into a gem to be used as a weapon.",
 "The fey'ri will stop at nothing.",
+"What kind of a person will you be?",
+"The main emblem of the head fey'ri house is a draco phoenix.",
+"Making deals with demons never ends well.  Don't be tempted by their offers.",
         });
 write("%^BOLD%^%^RED%^The Halberd tells you: %^RESET%^"
    +msgs[random(sizeof(msgs))]);
@@ -67,17 +70,17 @@ int extra_hit(object targ)
  //brambles around head
  if((string)targ->return_target_limb()=="head") {
     tell_room(EETO,"%^CYAN%^"+ETO->QCN+" slices the blade into "
-        +targ->QCN+"'s head and brambles tighten around "+ETO->QP+" neck."
+        +targ->QCN+"'s %^ORANGE%^head%^CYAN%^ and brambles tighten around "+ETO->QP+" %^RED%^neck."
         ,({ETO,targ}));
         tell_object(ETO,"%^CYAN%^You slice the weapon into "+
-        targ->QCN+"'s head and brambles tighten around "+
-        ETO->QP+" neck.");
+        targ->QCN+"'s %^ORANGE%^head%^CYAN%^ and brambles tighten around "+
+        ETO->QP+" %^RED%^neck.");
         tell_object(targ,"%^CYAN%^"+ETO->QCN+" slices you in the"+
-        " head and brambles slide from the blade around your neck.  "+
+        " %^ORANGE%^head%^CYAN%^ and brambles slide from the blade around your %^RED%^neck.  "+
         "Your airway slowly gets cut off!.");
         if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-40))
           targ->set_paralyzed(5,"%^ORANGE%^The brambles around your neck "+
-          "stop you from breathing.");
+          "stop you from %^RED%^breathing.");
 
                 if(!present("brambobj",targ)){
                 ob = new(OBJ+"bram");
@@ -104,25 +107,25 @@ int extra_hit(object targ)
         }
    if(!random(16)) {
       tell_object(ETO,"%^GREEN%^You drive the halberd across"+
-                " "+targ->QCN+", leaving a thorn filled wound.");
+                " "+targ->QCN+", leaving a %^ORANGE%^thorn filled wound.");
       tell_object(targ,"%^GREEN%^"+ETO->QCN+"'s"+
-                " halberd slashes into you leaving a thorn filled wound.");
+                " halberd slashes into you leaving a %^ORANGE%^thorn filled wound.");
       tell_room(EETO,"%^GREEN%^"+ETO->QCN+"'s halberd slashes "+targ->QCN+"'s"+
-                " body, leaving a thorn filled wound.",({ETO,targ}));
+                " body, leaving a %^ORANGE%^thorn filled wound.",({ETO,targ}));
 
         return roll_dice(2,6)+2;}
    if(!random(50)) {
 
 
      tell_object(ETO,"%^GREEN%^You slash into "+targ->QCN+
-         " and your weapon sprays thorns into the wound..");
+         " and your weapon sprays %^ORANGE%^thorns%^GREEN%^ into the wound.");
      tell_room(EETO,"%^GREEN%^"+ETO->QCN+"'s"+
-          " halberd sprays thorns at "+
+          " halberd sprays %^ORANGE%^thorns%^GREEN%^ at "+
                   targ->QCN+".",({ETO,targ}));
          tell_object(targ,"%^GREEN%^"+ETO->QCN+"'s"+
                 " halberd slashes you then begins spraying thorns.");
     
-new("/cmds/spells/t/_thorn_spray")->use_spell(ETO,targ,15,100,"cleric");
+new("/cmds/spells/t/_thorn_spray")->use_spell(ETO,targ,20,100,"cleric");
         return 1;
    }
 }

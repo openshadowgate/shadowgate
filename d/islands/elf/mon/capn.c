@@ -16,7 +16,7 @@ set_long("This is an undead person who is wearing "+
 "important when he was still alive.");
 set_gender("male");
 set_hd(45,10);
-set_hp(750+random(3000));
+set_hp(750+random(5000));
 set("race", "undead");
 set_body_type("human");
 set_property("swarm",1);
@@ -59,8 +59,9 @@ new(OBJ"weed_belt")->move(TO);
 new(OBJ"shield")->move(TO);
 new(OBJ"ray_spear")->move(TO);
 new(OBJ"bottoms")->move(TO);
+new(OBJ"scale_mail")->move(TO);
+force_me("wearall"); //need wear first, otherwise shield unequiped
 force_me("wield spear");
-force_me("wearall");
 set_funcs(({"sweep"}));
 set_func_chance(75);
 set_missChance(25);

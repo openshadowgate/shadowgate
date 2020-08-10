@@ -15,15 +15,16 @@ void create() {
     "room of the animal ranch.  A stall has"+
     " been set up for a strange sort of "+
     "character here.   There are some boxes"+
-    " and a simple desk with a stool behind it."
+    " and a simple desk with a stool behind it."+
+    "There is a rope ladder hanging out the side"+
+    " that goes back down to the grove."
     );
     set_smell("default","The room smells of animals and grass.");
     set_listen("default","You can hear the strange sounds of exotic animals.");
     set_exits(([
        "south" : ROOMS"stable",
+       "down" : ROOMS"cliff3",
 
     ] ));
-
-    set_quest_daemon("/daemon/quests_high");
-   
+    set_quest_daemon("/daemon/quests_high");  
 }

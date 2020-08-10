@@ -62,8 +62,12 @@ int should_interact(object ob)
                 return 0;
         }
 
-        if((string)ob->query_race() != "elf" ) {
-                force_me("say Sorry, but we don't serve your kind here.");
+        if((string)ob->query_race() != "elf" &&
+           (string)ob->query_race() != "nymph" &&
+           (string)ob->query_race() != "voadkyn" &&
+           (string)ob->query_race() != "dryad" &&
+           (string)ob->query("subrace") != "szarkai") {
+                force_me("say Sorry, but we don't serve your kind here.  Only fey are welcome in Ashta.");
                 return 0;
         }
 

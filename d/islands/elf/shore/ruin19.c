@@ -4,8 +4,8 @@ inherit INH"ruin";
 
 void create(){
    ::create();
-   set_exits(([ "west": ROOMS"shore/ruin2", 
-   "east": ROOMS"shore/ruin17",
+   set_exits(([ "north": ROOMS"shore/ruin18", 
+   "south": ROOMS"shore/ruin16",
 
      ]));
 

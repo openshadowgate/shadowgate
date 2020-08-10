@@ -1,5 +1,3 @@
-// Mind Thrust
-// ~Circe~ 7/19/05
 #include <spell.h>
 inherit SPELL;
 
@@ -21,7 +19,7 @@ spell_effect(int prof) {
     spell_successful();
     if (interactive(caster)) {
         tell_object(caster,"%^BOLD%^%^GREEN%^You open a portal above "+target->QCN+" and some acid splashes through it!");
-        tell_room(place,"%^BOLD%^%^GREEN%^A portal opens above"+target->QCN+" and some acid pours through it!", ({caster}) );
+        tell_room(place,"%^BOLD%^%^GREEN%^A portal opens above "+target->QCN+" and some acid pours through it!", ({caster}) );
     }
     damage_targ(target, target->query_target_limb(), sdamage,"acid");
     TO->dest_effect();

@@ -13,3 +13,8 @@ void create(){
 
 
 }
+reset(){
+    ::reset();
+    if(!present("celisse"))
+    new(MON"cilesse")->move(TO);
+}

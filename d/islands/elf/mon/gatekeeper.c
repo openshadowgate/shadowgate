@@ -116,10 +116,14 @@ void start_exam(string str) {
       remove();
       return;
    }
-   if(((string)TP->query_race() != "elf")) {
-      reply_snarl("I will only open the gate for elves.  Go back the way you came.");
+   if((string)TP->query_race() != "elf" &&
+       (string)TP->query_race() != "nymph" &&
+       (string)TP->query_race() != "voadkyn" &&
+       (string)TP->query_race() != "dryad" &&
+       (string)TP->query("subrace") != "szarkai") {
+      reply_snarl("I will only open the gate for elves and fey.  Go back the way you came.");
       tell_room(ETO,"The elf turns around and "
-                "heads back into the gatehouse, locking it behind him.");
+       "heads back into the gatehouse, locking it behind him.");
       move("/d/shadowgate/void");
       remove();
       return;
@@ -141,7 +145,7 @@ int say_stuff(string str) {
 	  +TPQCN+" to pass.",TP);
       tell_object(TP,"The elf unlocks the gate and allows"+
 	  " you to pass on into Ashta'Rathai.");
-	  //roomy->set_locked("gate",0);
+	   force_me("say Welcome to our remote keep cousin.");
       force_me("unlock gate with key");
       tell_room(ETO,"The elf then turns on his "
             "heels and goes back inside the gatehouse."+
