@@ -1,6 +1,7 @@
 #include <std.h>
 #include "../elf.h"
 inherit WATER;
+int flag;
 
 void create(){
    ::create();
@@ -27,9 +28,24 @@ void create(){
       (({"bodies"})) : "Bits of bodies can be seen partly sticking out of the mud.  Some of the flesh has been picked clean by fish and only bones remain.",
       (({"chair"})) : "This chair is ruined. Three of the four legs are broken it is just leaning against a rock to stand up.",
    ]));
+   set_search("room",(:TO,"search_room":));
 }
 void reset(){
    ::reset();
    if(!present("noble",TO))
       new(MON"capn")->move(TO);
+   flag = 0;
+}
+int search_room(string str){
+  
+  if (flag == 1) {
+  tell_object(TP,"It seems like someone has"+
+      " searched around here already.");
+  return 1;
+  }
+  new(OBJ"agechains")->move(TO);
+  tell_object(TP,"You search the room and find"+
+   " some strange chains in the broken desk.");
+  flag =1;
+  return 1;
 }
