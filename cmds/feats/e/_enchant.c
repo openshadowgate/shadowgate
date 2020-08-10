@@ -92,7 +92,7 @@ void execute_feat()
         return 1;
     }
     if (ob->query_worn() || ob->query_wielded()) {
-        write("This object is worn or wielded, you'll need to unencumber it first.")
+        write("This object is worn or wielded, you'll need to unencumber it first.");
         return 1;
     }
     if (max(all_inventory(caster)->id("gem")) < 1) {
