@@ -17,7 +17,7 @@ void create()
     set_hd(20,50);
     set_name("Celisse");
     set_short("Celisse, a herb merchant");
-    set_id(({"merchant","elf","silisse","shop keep"}));
+    set_id(({"merchant","elf","celisse","shop keep"}));
     set_long(
     "Celisse is a young wild elf.  She used to live "+
     "in tharis but when her cousin was turned into a"+
