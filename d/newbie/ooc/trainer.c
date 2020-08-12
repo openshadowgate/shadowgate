@@ -18,25 +18,26 @@ int query_light()
 
 void set_for(object who)
 {
-    if(!objectp(who)) return;
-    if(!userp(who)) return;
+    if (!objectp(who)) {
+        return;
+    }
+    if (!userp(who)) {
+        return;
+    }
     myTrainer = who;
     myPlayer = (string)who->query_name();
     set_player(myPlayer);
-    if(member_array((string)who->query_race(), bad_races) != -1)
-    {
+    if (member_array((string)who->query_race(), bad_races) != -1) {
         TO->add_exit("/d/shadow/room/muuldaan/rooms/cavern1", "portal");
-        //TO->set_light(-2); // this was stacking for some reason
+        TO->set_light(-1);
         BAD = 1;
         isSetup = 1;
-    }
-    else
-    {
+    }else {
         TO->add_exit("/d/darkwood/tabor/room/math4", "portal");
-        //TO->set_light(2);
+        TO->set_light(1);
         isSetup = 1;
     }
-    set_pre_exit_functions(({"portal"}),({"GoThroughDoor"}));
+    set_pre_exit_functions(({ "portal" }), ({ "GoThroughDoor" }));
     return;
 }
 
@@ -62,7 +63,7 @@ void create()
 	set_listen("default","A stillness hangs over the area.");
 	set_property("Specialist",1);
     set_property("no teleport",1);
-        //set_property("indoors",1);
+        set_property("indoors",1);
 	set_property("training",1);
     set_property("no sticks",1);
     set_property("no starve",1);
