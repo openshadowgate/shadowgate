@@ -1788,10 +1788,14 @@ varargs int set_new_exp(int level, string perc)
 void set_mob_magic_resistance(string perc)
 {
     int base_level, modifier;
+
     base_level = TO->query_highest_level();
+    base_level = base_level > 50 ? 50 : base_level;
+
     if (!stringp(perc) || perc == "" || perc == " ") {
         perc = "average";
     }
+
 
     perc = lower_case(perc);
 
