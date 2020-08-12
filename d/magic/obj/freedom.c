@@ -8,7 +8,7 @@ void end_it();
 
 object mycaster, myspellob;
 int mylevel, FLAG;
-int charges = 5;
+int charges = 3;
 
 void create()
 {
@@ -29,7 +29,7 @@ void init()
     add_action("freeme", "freeme");
 }
 
-void freeme()
+int freeme()
 {
     if (!objectp(ETO)) {
         return;
@@ -49,7 +49,7 @@ void freeme()
     if (charges < 0) {
         call_out("end_it", 1);
     }
-    return;
+    return 1;
 }
 
 void set_mycaster(object obj)
