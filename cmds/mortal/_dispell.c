@@ -18,7 +18,7 @@ int cmd_dispell(string str)
         return 1;
     }
 
-    if (!str) {
+    if (!strlen(str)) {
         int i;
         message("info", "%^RESET%^%^BOLD%^%^BLUE%^--==%^RESET%^%^BOLD%^%^CYAN%^< %^RESET%^%^BOLD%^Spells you maintain %^RESET%^%^BOLD%^%^CYAN%^>%^RESET%^%^BOLD%^%^BLUE%^==--%^RESET%^", TP);
         for (i = 0; i < sizeof(spells); i++) {
