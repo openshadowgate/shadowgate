@@ -129,7 +129,7 @@ dispell - display and manage active spells
 dispell
 dispell [%^ORANGE%^%^ULINE%^NUM%^RESET%^]
 dispell [all] [%^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^]
-dispell all|%^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ on %^ORANGE%^%^ULINE%^TARGET_NAME%^RESET%^
+dispell all | %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ on %^ORANGE%^%^ULINE%^TARGET_NAME%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
