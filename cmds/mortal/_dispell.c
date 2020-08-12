@@ -141,7 +141,7 @@ Provide %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ and y
 
 Provide keyword all and you will dispell all spells. If you follow keyword 'all' by %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^, you will dispell all spells with that %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^
 
-Provide keyword all or %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ followed by %^ORANGE%^%^ULINE%^TARGET%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ and you will dispell all effects caused by %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ on said %^ORANGE%^%^ULINE%^TARGET%^RESET%^. TARGET NAME can be either the same as on dispell list or just any of target identifiers.
+Provide keyword all or %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ followed by %^ORANGE%^%^ULINE%^TARGET%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ and you will dispell all effects caused by %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ on said %^ORANGE%^%^ULINE%^TARGET%^RESET%^. %^ORANGE%^%^ULINE%^TARGET%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ can use any of target's valid ids.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
