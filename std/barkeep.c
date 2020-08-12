@@ -168,21 +168,36 @@ void set_up_ids(object ob, string myName, string type)
 int buy(string str) {
     int i, cost;
     object ob;
-    if(!objectp(TP) || !objectp(TO)) return 0;
-    if(!str)
-    {
-        tell_object(TP, query_cap_name()+" says: What is it you would like?\n");
+    if (!objectp(TP) || !objectp(TO)) {
         return 0;
     }
-    if(!should_interact(TP)){
-       force_me("emote taps on the bar and shakes "+query_possessive()+" head in refusal.");
-       force_me("say I will not serve you here");
-       return 1;
+    if (!sizeof(str)) {
+        tell_object(TP, query_cap_name() + " says: What is it you would like?\n");
+        return 0;
+    }
+    if (!should_interact(TP)) {
+        force_me("emote taps on the bar and shakes " + query_possessive() + " head in refusal.");
+        force_me("say I will not serve you here");
+        return 1;
     }
     str = lower_case(str);
-    if(member_array(str, menu_items) == -1) {
-	tell_object(TP, "%^MAGENTA%^" + query_cap_name()+" says:%^RESET%^ I don't serve that.\n");
-	return 1;
+
+    if (str == "food" ||
+        str == "drink") {
+        mapping submap;
+        if (str == "drink") {
+            str = "water";
+        }
+
+        submap = filter_mapping(menu, (:$2["type"] == $3:), str);
+        if (sizeof(submap)) {
+            str = (keys(submap))[random(sizeof(submap))];
+        }
+    }
+
+    if (member_array(str, menu_items) == -1) {
+        tell_object(TP, "%^MAGENTA%^" + query_cap_name() + " says:%^RESET%^ I don't serve that.\n");
+        return 1;
     }
     if(!(cost = price(this_player(), menu[str]["strength"]))) {
 	write(query_cap_name()+" says: You do not have enough "+currency+" for that!\n");
