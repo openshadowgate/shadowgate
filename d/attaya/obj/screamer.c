@@ -1,11 +1,5 @@
-// Fixed several syntax errors ~Circe~ 11/05/07
-// modified to run off new through-stoneskin code. Nienne, 02/08.
-//Changed to level 20 wield, down from level 25.  I figure that cutting thru SS should count as a +1, thus +4 wield levels.  Octothorpe 5/6/09
-// changed to only hit thru stoneskin on specials, but v high special rate. Moved wield level back to 25, as special is pretty badass. Nienne, 08/09.
-//Getting rid of damage override and type override. It's a dagger.  If we want it to be a different type of weapon, so be it, but it's change base type ~ Odin
 #include <std.h>
 
-//inherit WEAPON;
 inherit "/d/common/obj/weapon/dagger.c";
 
 string OWNER;
@@ -21,15 +15,6 @@ void create(){
     set_id( ({"dagger","horrible screaming dagger","screaming dagger","dagger","horrible dagger","screamer"}) );
     set_short("%^BOLD%^%^RED%^Horrible screaming dagger%^RESET%^");
     set_obvious_short("%^RED%^an engraved dagger%^RESET%^");
-/*    set_long(
-      "A horrible dagger with an engraved blade.  The detail is magnificent "
-      +"yet the scene depicted upon it's wicked blade is a gruesome one. "
-      +"A young girl is lying beneath a dead tree, bleeding from numerous "
-      +"wounds in her chest.  The blood has pooled around a glowing dagger with "
-      +"it's blade planted in the earth."
-    );
-Old description - updated by Circe
-*/
     set_long(
        "%^RED%^This wicked dagger is fashioned wholly from a "+
        "%^BOLD%^blood red gemstone%^RESET%^%^RED%^ that seems to soak up the "+
@@ -60,14 +45,8 @@ Old description - updated by Circe
        "in torment.  A vile weapon indeed, wielded only by those "+
        "most corrupt.  - A History of Daggers, by H.L. Reinault.");
     set_property("lore difficulty",20);
-    //set_weight(5);
     set_value(1000);
-    //set_wc(1,6);
-    //set_large_wc(1,8);
     set_size(1);
-    //set_weapon_prof("exotic");
-    //set_prof_type("screamer");
-    //set_type("slashing");
     set_property("enchantment",4);
     set_wield((:TO,"extra_wield":));
     set_unwield((:TO,"removeme":));
@@ -76,17 +55,6 @@ Old description - updated by Circe
 
 int extra_wield(){
    if(ETO->is_player()){
-//added because monsters weren't wielding their weapons ~Circe~ 5/4/11
-      if((int)ETO->query_level() < 25){
-         tell_object(ETO,"%^BOLD%^%^RED%^A shadowy presence tells "+
-            "you: %^RESET%^You pathetic little fool, you cannot "+
-            "handle such power!");
-         return 0;
-      }
-      if(!ETO->is_class("thief")){
-         tell_object(ETO,"%^BLUE%^The dagger flies out of your hand!");
-         return 0;
-      }
       if(interactive(ETO) && (string)ETO->query_name() != OWNER){
          tell_object(ETO,"%^MAGENTA%^You are not chosen by the gods to wield such power.");
          return 0;
