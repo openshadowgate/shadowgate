@@ -72,6 +72,7 @@ inherit DAEMON;
                         ISLANDS "tonerra/mon/ibrandul.c" : 4800000 ,\
                         ISLANDS "tonerra/mon/nativek.c" : 1100000 ,\
                         ISLANDS "tonerra/mon/nativewd.c" : 292000 ,\
+                        ISLANDS "dinosaur/mon/bmong.c" : 292000 ,\
                         LAERAD "mon/dragon.c" : 1120000 ,\
                         D_MARSH "tower/mon/dragon.c" : 2176000 ,\
                         D_MARSH "tower/mon/knight.c" : 1200000 ,\
