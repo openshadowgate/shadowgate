@@ -13,8 +13,8 @@ void create(){
    set_terrain(DEEP_WATER);
    set_travel(RUBBLE);
    set_climate("arctic");
-   set_name("underwater ruin");
-   set_short("%^BOLD%^%^CYAN%^underwater ruin%^RESET%^");
+   set_name("Underwater Ruin");
+   set_short("%^BOLD%^%^CYAN%^Underwater Ruin%^RESET%^");
    set_long((:TO,"long_desc":));
    set("night long",(:TO,"night_desc":));
    set_items(([
