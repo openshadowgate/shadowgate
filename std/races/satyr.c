@@ -33,7 +33,10 @@ int natural_AC(string subrace) { return 2; }
 
 int sight_bonus(string subrace) { return 2; }
 
-mapping daily_uses(string subrace) { return (["dancing lights":1,"headbutt":1,"faerie fire":1]); }
+mapping daily_uses(string subrace)
+{
+    return (["dancing lights" : 1, "faerie fire" : 1]);
+}
 
 mapping query_racial_innate(string subrace) {
 	return (["dancing lights" : (["type" : "spell", "casting level" : 0.5,
@@ -44,10 +47,7 @@ mapping query_racial_innate(string subrace) {
 		"daily uses" : 1, "delay" : 1, "uses left" : 1,
 		"refresh time" : -1, "level required" : 0,
 		"class specific" : 0]),
-	"headbutt" : (["type" : "spell", "casting level" : 1,
-		"daily uses" : 1, "delay" : 1, "uses left" : 1,
-		"refresh time" : -1, "level required" : 0,
-		"class specific" : 0]),]);
+                    ]);
 }
 
 
