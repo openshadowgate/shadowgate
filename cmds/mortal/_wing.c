@@ -6,10 +6,6 @@ inherit DAEMON;
 
 #define WING_DELAY 120
 
-string* flyraces = ({ "deva" });
-string* flysubraces = ({ "fey'ri", "rock gnome", "trixie", "sildruath" });
-string* flyprofiles = ({ "druid_bird_999", "druid_dragon_999", "mage_red_dragon_999", "mage_demon_999", "vampire_bat_999", "vampire_lord_999", "mage_pixie_999" });
-
 string WINGO = "/cmds/mortal/obj/wingObj.c";
 
 #include <common_destinations.h>
@@ -29,9 +25,7 @@ int cmd_wing(string args)
         return 1;
     }
 
-    if (!((member_array(TP->query_race(), flyraces) != -1) ||
-          (member_array(TP->query("subrace"), flysubraces) != -1) ||
-          (member_array(TP->query("relationship_profile"), flyprofiles) != -1) ||
+    if (!(RACE_D->can_fly(TP)||
           (TP->query_property("flying")))) {
         tell_object(TP, "You can not fly.");
         return 1;

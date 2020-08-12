@@ -1,24 +1,9 @@
-//      /adm/daemon/race_d.c
-//      the daemon for setting up race info
-//      from the Nightmare Mudlib
-//      created by Descartes of Borg 10 june 1993
-
 #include <databases.h>
 
 #define LIMB_DIR "/adm/db/races/"
 #define MON_DIR "/adm/db/mon_races/"
 
 mapping races, limbs;
-
-int query_wieght(string res, int con);
-int query_fingers(string res);
-int query_sight_bonus(string res);
-string *query_wielding_limbs(string res);
-int is_race(string res);
-int query_max_dam(string limb, string res);
-string *query_limbs(string res);
-int query_size(string res);
-int is_limb(string limb, string res);
 
 void load_races() {
     string *lines, *data, *w_limbs, *borg, *b_types;
@@ -33,7 +18,7 @@ void load_races() {
         races[data[0]] =
           ([ "sight":atoi(data[1]), "weight":atoi(data[2]), "fingers":atoi(data[3]), "size":atoi(data[12]), "ac":atoi(data[13]) ]);
         races[data[0]]["wielding"] = ({});
-        for(j=0, tmp2=sizeof(w_limbs=explode(data[4], ";")); j<tmp2; j++) 
+        for(j=0, tmp2=sizeof(w_limbs=explode(data[4], ";")); j<tmp2; j++)
             races[data[0]]["wielding"] += ({ w_limbs[j] });
         races[data[0]]["str"] = atoi(data[5]);
         races[data[0]]["con"] = atoi(data[6]);
@@ -56,9 +41,9 @@ void load_races() {
           j<tmp2; j++) {
             if(lines[j][0] == '#')
 	      continue;
-            if(sizeof(data = explode(lines[j], ":")) != 4) 
+            if(sizeof(data = explode(lines[j], ":")) != 4)
 	      continue;
-            if(data[1] == "0") 
+            if(data[1] == "0")
 	      data[1] = "";
             limbs[b_types[i]][data[0]] =
               ([ "ref":data[1], "max":atoi(data[2]), "attach":data[3] ]);
@@ -93,10 +78,10 @@ int query_ac(string res) {
 //	if(!res || !races[res]) return 0;
 //    else return races[res]["ac"];
     return 0;
-} 
+}
 
 int query_stat_adjustment(string stat, string res);
-int query_sight_bonus(string res) { 
+int query_sight_bonus(string res) {
     if(!res || !races[res]) return 0;
     else return races[res]["sight"];
 }
@@ -108,10 +93,10 @@ string *query_wielding_limbs(string res) {
     else return races[res]["wielding"];
 }*/
 
-string *query_wielding_limbs(string res) 
+string *query_wielding_limbs(string res)
 {
     object race;
-    string file;    
+    string file;
     if(!res || !races[res])
         return ({ "right hand", "left hand" });
     file = "/std/races/"+res+".c";
@@ -126,7 +111,7 @@ int is_race(string res) {
 }
 
 int query_max_dam(string limb, string res) {
-    if(!limb || !res || !races[res] || !limbs[races[res]["body type"]]) 
+    if(!limb || !res || !races[res] || !limbs[races[res]["body type"]])
       return 2;
     if(limb == "torso") return 1;
     else if(!limbs[races[res]["body type"]][limb]) return 0;
@@ -142,7 +127,7 @@ string *query_races() { return keys(races); }
 
 int is_limb(string limb, string res) {
     if(!limb || !res || !limbs[races[res]["body type"]]) return 0;
-    else 
+    else
       return (member_array(limb, keys(limbs[races[res]["body type"]])) != -1);
 }
 
@@ -154,11 +139,11 @@ mapping body(object ob) {
 
     borg = ([]);
     res = (string)ob->query_race();
-    if(!res) 
+    if(!res)
       res = "human";
      if (member_array(res,keys(races)) == -1) res = "human";
     max = (int)ob->query_max_hp();
-    borg["torso"] = 
+    borg["torso"] =
       ([ "limb_ref": "FATAL", "max_dam": max+1, "damage":0, "ac":0 ]);
     if(!limbs || limbs == ([]) ){
 		load_races();
@@ -222,7 +207,7 @@ int is_monster_race(string str)
   return (member_array(str, get_dir(MON_DIR)) != -1);
 }
 
-mapping monster_body(string mon_race, int max) 
+mapping monster_body(string mon_race, int max)
 {
     mapping borg;
     string *what, *lines, *data;
@@ -230,10 +215,10 @@ mapping monster_body(string mon_race, int max)
 
     borg = ([]);
     if(!mon_race || !is_monster_race(mon_race)) mon_race = "human";
-    borg["torso"] = 
+    borg["torso"] =
       ([ "limb_ref": "FATAL", "max_dam": max+1, "damage":0, "ac":0 ]);
     if (is_race(mon_race))
-      for(i=0, tmp = sizeof(what=keys(limbs[races[mon_race]["body type"]])); 
+      for(i=0, tmp = sizeof(what=keys(limbs[races[mon_race]["body type"]]));
 	  i < tmp; i++)
         borg[what[i]] =
 	  (["limb_ref":limbs[races[mon_race]["body type"]][what[i]]["ref"],
@@ -241,7 +226,7 @@ mapping monster_body(string mon_race, int max)
 	    "damage":0, "ac":0
 	    ]);
     else
-    {      
+    {
       for(i = 1, tmp = sizeof(lines = explode(read_file(MON_DIR + mon_race),
 					      "\n")); i < tmp; i++) {
 	if(sizeof(data=explode(lines[i], ":")) != 4) continue;
@@ -304,4 +289,20 @@ int query_max_mon_dam(string limb, string b_type) {
   }
   else if(!limbs[b_type][limb]) return 2;
   else return limbs[b_type][limb]["max"];
+}
+
+int can_fly(object ob)
+{
+
+    string* flyraces = ({ "deva" });
+    string* flysubraces = ({ "fey'ri", "rock gnome", "trixie", "sildruath" });
+    string* flyprofiles = ({ "druid_bird_999", "druid_dragon_999", "mage_red_dragon_999", "mage_demon_999", "vampire_bat_999", "vampire_lord_999", "mage_pixie_999" });
+
+    if (!objectp(ob)) {
+        return;
+    }
+
+    return (member_array(TP->query_race(), flyraces) != -1) ||
+        (member_array(TP->query("subrace"), flysubraces) != -1) ||
+        (member_array(TP->query("relationship_profile"), flyprofiles) != -1);
 }
