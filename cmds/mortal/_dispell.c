@@ -51,24 +51,55 @@ int cmd_dispell(string str)
     }
 
     {
-        int allflag;
-        object spell;
+        int allflag, tflag;
+        object spell, target;
         string sname;
+        string tname, targ;
 
         if (regexp(str, "all")) {
             allflag = 1;
         }
 
+        if (regexp(str, " on ")) {
+            tflag = 1;
+        }
+
+
         sname = str;
 
-        if (allflag && sscanf(str, "all %s", sname) != 1) {
+        if (allflag && !tflag && sscanf(str, "all %s", sname) != 1) {
             write("%^BOLD%^%^CYAN%^You must provide the spell name.");
+            return;
+        }
+
+        if (tflag && allflag && sscanf(str, "all on %s", tname) != 1) {
+            write("%^BOLD%^%^CYAN%^You must provide the target.");
+            return;
+        }
+
+        if (tflag && !allflag && sscanf(str, "%s on %s", sname, tname) != 2) {
+            write("%^BOLD%^%^CYAN%^You must provide both spell name and target.");
+            return;
         }
 
         foreach(spell in spells)
         {
             if (objectp(spell)) {
-                if (spell->query_spell_name() == sname) {
+
+                if (sizeof(tname)) {
+                    if (objectp(target = spell->query_target_object())) {
+                        targ = lower_case(target->getParsableName());
+                    } else {
+                        targ = "";
+                    }
+
+                    if (objectp(present(tname, TP))) {
+                        targ = tname;
+                    }
+                }
+
+                if (spell->query_spell_name() == sname ||
+                    tname = targ) {
                     write("%^BOLD%^%^CYAN%^You dispell " + spell->querySpellDisplay());
                     spell->dest_effect();
                     if (!allflag) {
@@ -98,12 +129,19 @@ dispell - display and manage active spells
 dispell
 dispell [%^ORANGE%^%^ULINE%^NUM%^RESET%^]
 dispell [all] [%^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^]
+dispell all|%^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ on %^ORANGE%^%^ULINE%^TARGET_NAME%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 Without an argument, this command will list all spells you have casted and that are currently active. The list will update as spells go up and down. It won't list, however, spells someone casted on you.
 
-If you provide optional %^ORANGE%^%^ULINE%^NUM%^RESET%^ argument or a %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^, you'll cancel that spell's effect. Note, after you do so the list will be renewed. Keyword all will dispell all spells, if followed by %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ it will dispell all spells with that name.
+Provide %^ORANGE%^%^ULINE%^NUM%^RESET%^ as an argument and spell on that list under that %^ORANGE%^%^ULINE%^NUM%^RESET%^ will be dispelled. Note that list numbering will be renewed after that.
+
+Provide %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ and you will cancel effects of first spell with that name.
+
+Provide keyword all and you will dispell all spells. If you follow keyword 'all' by %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^, you will dispell all spells with that %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^
+
+Provide keyword all or %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ followed by %^ORANGE%^%^ULINE%^TARGET%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ and you will dispell all effects caused by %^ORANGE%^%^ULINE%^SPELL%^RESET%^ %^ORANGE%^%^ULINE%^NAME%^RESET%^ on said %^ORANGE%^%^ULINE%^TARGET%^RESET%^. TARGET NAME can be either the same as on dispell list or just any of target identifiers.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
