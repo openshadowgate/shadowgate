@@ -50,7 +50,7 @@ void move_rubble(string ext, object tp){
   mapping buried_exit_map;
   object etp,otp;
   int i;
-  
+
   buried_exit_map = (mapping) environment(tp)->query_buried_exits();
   buried_exits = keys(buried_exit_map);
   if(tp->query_unconscious()){
@@ -66,16 +66,16 @@ void move_rubble(string ext, object tp){
     TO->remove();
     return;
   }
-  
+
   if(tp->query_stats("constitution") < random(25)){
     tell_object(tp, "You hurt your back moving the stone.");
     tp->do_damage("torso", random(5)+1);
   }
-  
+
   tell_object(tp, "You slowly move the rubble out of the way.");
   tell_room(environment(tp), tp->query_cap_name() +" moves the rubble away from the exit.", tp);
   i = environment(tp)->dig_exit(ext, (int)tp->query_stats("strength"));
-  if(i <= 0) 
+  if(i <= 0)
   {
       etp = environment(tp);
     tell_object(tp, "You break through the rubble.");
@@ -88,8 +88,15 @@ void move_rubble(string ext, object tp){
 
     return;
   }
-  
-  call_out("move_rubble", (25 - (int)tp->query_stats("dexterity")), ext, tp);
+
+  {
+      int tim;
+
+      tim = (tp->query_stats("dexterity") - 10) / 2;
+      tim = tim < 1 ? 1 : tim;
+      tim = tim > 10 ? 10 : tim;
+      tim = 10 / tim;
+      call_out("move_rubble", tim, ext, tp);
+  }
+
 }
-
-
