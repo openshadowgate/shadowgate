@@ -30,7 +30,9 @@ int cmd_dispell(string str)
     }
 
     if (regexp(str, "^[0-9]+")) {
-        if (objectp(spells[atoi(str)])) {
+        if (atoi(str) < sizeof(spells)) {
+            write("%^BOLD%^%^CYAN%^No spell under this unmber.");
+        } else if (objectp(spells[atoi(str)])) {
             write("BOLD%^%^CYAN%^You dispell " + spells[atoi(str)]->querySpellDisplay());
             spells[atoi(str)]->dest_effect();
         } else {
