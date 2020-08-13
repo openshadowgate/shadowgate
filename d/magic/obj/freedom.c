@@ -29,7 +29,7 @@ void init()
     add_action("freeme", "freeme");
 }
 
-void freeme()
+int freeme()
 {
     if (!objectp(ETO)) {
         return;
@@ -42,14 +42,14 @@ void freeme()
                 "refusing to bow to the force that tries to contain you!%^RESET%^");
     tell_room(EETO, "%^BOLD%^With a resolute expression, " + ETOQCN + " casts off "
               "the forces that try to contain " + ETO->QO + "!%^RESET%^", ETO);
-    ETO->remove_paralyzed();
+    /* ETO->remove_paralyzed(); */
     ETO->set_tripped(0);
 
     charges--;
     if (charges < 0) {
         call_out("end_it", 1);
     }
-    return;
+    return 1;
 }
 
 void set_mycaster(object obj)

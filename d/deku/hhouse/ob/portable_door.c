@@ -5,20 +5,20 @@ inherit OBJECT;
 int delay;
 object myRoom;
 
-void create() 
+void create()
 {
     ::create();
     set_name("portable door");
     set_value(5000);
     set_weight(5);
-	
+
     set_id(({"doorway", "portable doorway", "door", "portable door"}));
 
     set_property("no animate", 1);
 
     set_obvious_short("%^BOLD%^%^MAGENTA%^portable door%^RESET%^");
 
-    set_short("%^BOLD%^%^CYAN%^Ao%^BOLD%^%^WHITE%^r'%^BOLD%^%^CYAN%^u"+
+    set_short("%^BOLD%^%^CYAN%^Au%^BOLD%^%^WHITE%^r'%^BOLD%^%^CYAN%^u"+
     "%^BOLD%^%^WHITE%^s D%^BOLD%^%^CYAN%^e%^BOLD%^%^WHITE%^v%^BOLD%^%^CYAN%^"+
     "a%^BOLD%^%^WHITE%^r's%^BOLD%^%^MAGENTA%^ portable door%^RESET%^");
 
@@ -52,7 +52,7 @@ void heart_beat()
     if(!objectp(ETO)) return;
     if(delay <= 0) return;
     delay--;
-    if(delay < 0) 
+    if(delay < 0)
     {
         delay = 0;
         tell_object(ETO, "%^BOLD%^%^CYAN%^You feel a %^BOLD%^%^RED%^warmth"+
@@ -68,7 +68,7 @@ void init()
     add_action("entry_function", "crawl");
 }
 
-int entry_function(string what) 
+int entry_function(string what)
 {
     int dam;
     if(!objectp(TO)) return 0;
@@ -77,21 +77,21 @@ int entry_function(string what)
     if(!stringp(what)) return 0;
     if(!living(ETO)) return 0;
     if(TO != present(what, ETO)) return 0;
-    if (ETO->query_bound() || 
-    ETO->query_unconscious() || 
-    ETO->query_paralyzed()) 
+    if (ETO->query_bound() ||
+    ETO->query_unconscious() ||
+    ETO->query_paralyzed())
     {
         ETO->send_paralyzed_message("info", ETO);
         return 1;
     }
-    if(delay) 
+    if(delay)
     {
         tell_object(ETO, "%^BOLD%^%^CYAN%^The door fails to respond to your urging "+
         "and you are unable to crawl into it!%^RESET%^");
         return 1;
     }
-    if(EETO->query_property("no teleport") || 
-    ETO->query_property("teleport proof") > 40 + random(30)) 
+    if(EETO->query_property("no teleport") ||
+    ETO->query_property("teleport proof") > 40 + random(30))
     {
         tell_object(ETO, "%^BOLD%^%^RED%^Magical forces bar your entry into the door!%^RESET%^");
         return 1;
@@ -101,16 +101,16 @@ int entry_function(string what)
 
     tell_room(EETO, "%^BOLD%^%^WHITE%^You watch in amazement as "+ETOQCN+"%^BOLD%^%^WHITE%^ "+
     "squeezes "+ETO->QO+"self into a tiny "+TO->query_name()+"!%^RESET%^", ETO);
-	
-    if(!objectp(myRoom)) 
-    {		
+
+    if(!objectp(myRoom))
+    {
         myRoom = new(DOORROOM);
     }
     myRoom->setup_room(ETO);
     ETO->move(myRoom);
     ETO->force_me("look");
-	//upping to approximately every 30 minutes 
+	//upping to approximately every 30 minutes
     delay = 900;
 
     return 1;
-}		
+}

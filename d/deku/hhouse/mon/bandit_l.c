@@ -1,5 +1,5 @@
-//He's no longer a halfling - I have in mind for him to be some 
-//very evil, very charismatic, intelligent, human/small devil/small 
+//He's no longer a halfling - I have in mind for him to be some
+//very evil, very charismatic, intelligent, human/small devil/small
 //demon mix or maybe some type of experiment gone horribly
 //wrong - Saide 01/02/04
 
@@ -10,7 +10,7 @@ inherit MONSTER;
 int has_robe;
 string robe_desc;
 
-void create() 
+void create()
 {
     object ob, money;
     ::create();
@@ -21,16 +21,16 @@ void create()
     set_size(1);
     set_short("A slight humanoid with tanned flesh");
     set_class("fighter");
-    set_guild_level("fighter",32);
+    set_guild_level("fighter",34);
     set_mlevel("fighter",query_guild_level("fighter"));
     set_class("thief");
-    set_guild_level("thief",32);
+    set_guild_level("thief",34);
     set_mlevel("thief",query_guild_level("thief"));
     add_search_path("/cmds/thief");
     set("aggressive", "stab_them");
     set_alignment(7);
     set_stats("strength",20);
-    set_stats("intelligence",17);
+    set_stats("intelligence",18);
     set_stats("wisdom",15);
     set_stats("dexterity",20);
     set_stats("charisma",17);
@@ -41,13 +41,13 @@ void create()
     ob = new("/d/common/obj/weapon/shortsword");
     ob->set_property("enchantment", 5);
     ob->move(TO);
-    command("wield sword");   
+    command("wield sword");
     command("wear leather");
     ob = new("/d/common/obj/weapon/dagger");
     ob->set_property("enchantment", 5);
     ob->move(TO);
     command("wield dagger");
-    switch(random(3)) 
+    switch(random(3))
     {
         case 0:
             ob = new("/d/deku/armours/ring_p");
@@ -55,7 +55,7 @@ void create()
             ob->set_property("enchantment", 3);
             command("wear ring");
             break;
-        case 1: 
+        case 1:
             ob = new("/d/deku/armours/brobe.c");
             ob->set_property("enchantment", 2);
             ob->move(TO);
@@ -74,7 +74,7 @@ void create()
     }
     if(has_robe == 0)
     {
-        if(!random(3)) 
+        if(!random(3))
         {
             ob = new("/d/deku/armours/leather");
             ob->move(TO);
@@ -82,11 +82,11 @@ void create()
             ob->set_item_bonus("stealth", 4);
             ob->set_size(1);
         }
-        else 
+        else
         {
             ob = new("/d/common/obj/armour/leather");
             ob->set_property("enchantment", 5);
-            ob->set_size(1);    
+            ob->set_size(1);
             ob->move(TO);
         }
         command("wear armor");
@@ -110,12 +110,12 @@ void create()
 
     add_money("silver",random(2000));
     add_money("gold",random(3250)+1500);
-    if(!random(2)) 
+    if(!random(2))
     {
         ob = new(HHOB+"narameons_gauntlet");
         ob->move(TO);
     }
-       
+
     set_overall_ac(-24);
     set_property("no paralyze",1);
     set_property("no death",1);
@@ -138,13 +138,13 @@ void create()
     set_property("no tripped", 1);
 }
 
-void heart_beat() 
+void heart_beat()
 {
     ::heart_beat();
     if(!objectp(TO) || !objectp(ETO)) return;
-    if(TO->query_hp() < ((int)TO->query_max_hp() / 4)) 
+    if(TO->query_hp() < ((int)TO->query_max_hp() / 4))
     {
-        if(present("kit",TO)) 
+        if(present("kit",TO))
         {
             command("open vial");
             command("drink vial");
@@ -155,10 +155,10 @@ void heart_beat()
     }
 }
 
-void attack(object targ) 
+void attack(object targ)
 {
     if(!objectp(targ) || !objectp(TO)) return;
-    switch(random(8)) 	
+    switch(random(8))
     {
         case 0..6:
             tell_object(targ,"%^YELLOW%^The humanoid stabs into your "+
@@ -181,8 +181,8 @@ void attack(object targ)
             set_property("magic",1);
             targ->cause_typed_damage(targ, "head",roll_dice(14,6), "acid");
             set_property("magic",-1);
-            if(!targ->fort_save(30)) 
-            { 
+            if(!targ->fort_save(30))
+            {
                 tell_object(targ,"%^RED%^You scream in pain as "+
                 "the %^BOLD%^%^GREEN%^goo%^RESET%^%^RED%^ burns "+
                 "into your eyes!%^RESET%^");
@@ -193,7 +193,7 @@ void attack(object targ)
                 "The goo has burned your eyes!%^RESET%^");
                 break;
             }
-            else 
+            else
             {
                 tell_object(targ,"%^RED%^You scream in pain as "+
                 "the %^BOLD%^%^GREEN%^goo%^RESET%^%^RED%^ begins "+
@@ -207,11 +207,11 @@ void attack(object targ)
             break;
     }
 }
-       
 
-void stab_them() 
+
+void stab_them()
 {
-    if(objectp(TP) && !TP->query_true_invis()) 
+    if(objectp(TP) && !TP->query_true_invis())
     {
         command("speech say without emotion");
         command("say you have stepped into something "+
@@ -223,4 +223,3 @@ void stab_them()
         command("kill "+TPQN);
     }
 }
-

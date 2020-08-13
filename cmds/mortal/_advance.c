@@ -873,9 +873,17 @@ int cmd_advance(string myclass){
 	      return 1;
          }
       }
-      write("%^BOLD%^You are not yet experienced enough to gain next level of "+myclass+".\n");
+
       if((int)TP->query_class_level(myclass) == 0) { TP->remove_class(myclass); }
       TP->remove_property("multiclassing");
+
+      if (ETP->query_level() < 6) {
+          if (strsrch(base_name(ETP), "/d/newbie/ooc/hub_room") == 0) {
+              return 1;
+          }
+      }
+
+      write("%^BOLD%^You are not yet experienced enough to gain next level of "+myclass+".\n");
       return 1;
    }
 }
