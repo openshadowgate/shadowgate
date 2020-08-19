@@ -59,7 +59,7 @@ void spell_effect(int prof)
 
     ob = new("/d/magic/obj/darkness");
     duration = 60 * clevel + 180;
-    duration = duration > 540 ? 540;
+    duration = duration > 540 ? duration : 540;
     call_out("dest_effect", (duration));
     if (objectp(ob)) {
         ob->set_property("spell", TO);

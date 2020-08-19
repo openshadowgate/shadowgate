@@ -50,7 +50,7 @@ spell_effect(int prof)
     }
     ob = new("/d/magic/obj/light");
     duration = 60 * clevel + 180;
-    duration = duration > 540 ? 540;
+    duration = duration > 540 ? duration : 540;
     call_out("dest_effect", (duration));
     ob->set_property("spell", TO);
     ob->set_property("spelled", ({ TO }));
