@@ -872,7 +872,7 @@ mapping query_mastered_bonus()
         }
         if(FEATS_D->usable_feat(TO, "book of shadows"))
             tmp["warlock"] += ({ "mending", "minor creation", "command", "clairvoyance", "rope trick", "unseen servant" });
-    }       
+    }
 
     return tmp ? tmp : ([]);
 }
@@ -1103,6 +1103,10 @@ void clear_targeted_spells()
     object * spells, spell;
 
     spells = TO->query_property("dispellable spells");
+
+    if (!sizeof(spells)) {
+        return;
+    }
 
     foreach(spell in spells) {
         if (objectp(spell)) {
