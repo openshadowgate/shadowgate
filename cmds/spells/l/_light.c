@@ -33,6 +33,7 @@ string query_cast_string()
 spell_effect(int prof)
 {
     int level;
+    int duration;
 
     if (interactive(caster)) {
         tell_object(caster, "You create a mystical light source.");
@@ -48,7 +49,9 @@ spell_effect(int prof)
         level = 20;
     }
     ob = new("/d/magic/obj/light");
-    call_out("dest_effect", (30 + roll_dice(1, 20)) * clevel);
+    duration = 60 * clevel + 180;
+    duration = duration > 540 ? 540;
+    call_out("dest_effect", (duration));
     ob->set_property("spell", TO);
     ob->set_property("spelled", ({ TO }));
 

@@ -39,6 +39,7 @@ void spell_effect(int prof)
 {
     int level;
     int power = set_darkness_power();
+    int duration;
 
     level = clevel;
     if (userp(caster)) {
@@ -57,7 +58,9 @@ void spell_effect(int prof)
     }
 
     ob = new("/d/magic/obj/darkness");
-    call_out("dest_effect", (30 + roll_dice(1, 20)) * clevel);
+    duration = 60 * clevel + 180;
+    duration = duration > 540 ? 540;
+    call_out("dest_effect", (duration));
     if (objectp(ob)) {
         ob->set_property("spell", TO);
         ob->set_property("spelled", ({ TO }));
