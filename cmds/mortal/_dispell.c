@@ -20,6 +20,13 @@ int cmd_dispell(string str)
 
     if (!strlen(str)) {
         int i;
+
+        if (!sizeof(spells)) {
+            tell_object(TP,"%^BOLD%^%^WHITE%^You have no spells yo maintain consciously.");
+            return 1;
+        }
+
+
         message("info", "%^RESET%^%^BOLD%^%^BLUE%^--==%^RESET%^%^BOLD%^%^CYAN%^< %^RESET%^%^BOLD%^Spells you maintain %^RESET%^%^BOLD%^%^CYAN%^>%^RESET%^%^BOLD%^%^BLUE%^==--%^RESET%^", TP);
         for (i = 0; i < sizeof(spells); i++) {
             if (objectp(spells[i])) {
@@ -30,13 +37,13 @@ int cmd_dispell(string str)
     }
 
     if (regexp(str, "^[0-9]+")) {
-        if (atoi(str) < sizeof(spells)) {
-            write("%^BOLD%^%^CYAN%^No spell under this unmber.");
+        if (atoi(str) > (sizeof(spells) - 1)) {
+            write("%^BOLD%^%^CYAN%^No spell under this number.");
         } else if (objectp(spells[atoi(str)])) {
             write("BOLD%^%^CYAN%^You dispell " + spells[atoi(str)]->querySpellDisplay());
             spells[atoi(str)]->dest_effect();
         } else {
-            write("%^BOLD%^%^CYAN%^No spell under this unmber.");
+            write("%^BOLD%^%^CYAN%^No spell under this number.");
         }
         return 1;
     }
