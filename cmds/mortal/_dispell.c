@@ -22,7 +22,7 @@ int cmd_dispell(string str)
         int i;
 
         if (!sizeof(spells)) {
-            tell_object(TP,"%^BOLD%^%^WHITE%^You have no spells yo maintain consciously.");
+            tell_object(TP,"%^BOLD%^%^WHITE%^You have no spells you maintain consciously.");
             return 1;
         }
 
