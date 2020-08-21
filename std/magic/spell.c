@@ -1380,6 +1380,13 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         return;
     }
 
+    if(member_array("cleric", myclasses) != -1 && member_array("oracle", myclasses) == -1) {
+        myclasses += ({ "oracle" });
+    }
+    if(member_array("mage", myclasses) != -1 && member_array("sorcerer", myclasses) == -1) {
+        myclasses += ({ "sorcerer" });
+    }
+
     if (stringp(classtype)) {
         spell_type = classtype;
     } else {
