@@ -1,6 +1,6 @@
 #include <std.h>
 
-inherit OBJECT;
+inherit "/d/common/obj/weapon/club";
 
 nosave int lit;
 int fuel, light_time;
