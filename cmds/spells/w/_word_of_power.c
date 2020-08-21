@@ -138,8 +138,16 @@ void spell_effect(int prof)
             break;
         }
     }
-    if (environment(CASTER)->query_property("no teleport") || where->query_property("no teleport")) {
-        tell_object(CASTER, "Nothing happens.");
+
+    if (!objectp(find_object_or_load(where))) {
+        tell_object(caster, "Nothing happens.");
+        dest_effect();
+        return;
+    }
+
+    if (environment(caster)->query_property("no teleport") ||
+        where->query_property("no teleport")) {
+        tell_object(caster, "Nothing happens.");
         dest_effect();
         return;
     }
