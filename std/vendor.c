@@ -267,7 +267,9 @@ int __Sell(string str)
         return 1;
     }
     if (check_allowed(ob) == 0) {
-        tell_room(ETO, response + "Sorry, I don't deal in " + str + "s!");
+        if (sizeof(str)) {
+            tell_room(ETO, response + "Sorry, I don't deal in " + str + "s!");
+        }
         return 1;
     }
     if (ob->query_property("no_profit") || ob->query_property("plot_item") || ob->query_property("soulbound")) {
@@ -583,7 +585,9 @@ int __Value(string str)
         return 1;
     }
     if (check_allowed(ob) == 0) {
-        tell_room(ETO, response + "Sorry, I don't deal in " + str + "s!");
+        if (sizeof(str)) {
+            tell_room(ETO, response + "Sorry, I don't deal in " + str + "s!");
+        }
         return 1;
     }
 //    message("other_action", TPQCN+" asks for an appraisal.", ETO, ({TO,TP}));
@@ -1100,7 +1104,9 @@ int repair_obj(object ob)
     response = "%^MAGENTA%^" + TOQCN + " says:  %^RESET%^";
 
     if (check_allowed(ob) == 0) {
-        tell_room(ETO, response + "Sorry, I don't deal in " + str + "!");
+        if (sizeof(str)) {
+            tell_room(ETO, response + "Sorry, I don't deal in " + str + "!");
+        }
         return 1;
     }
 
@@ -1318,7 +1324,10 @@ int __Resize(string str)
     }
 
     if (check_allowed(ob) == 0) {
-        tell_room(ETO, response + "Sorry, I don't deal in " + str + "s!");
+        if (sizeof(str)) {
+            tell_room(ETO, response + "Sorry, I don't deal in " + str + "s!");
+        }
+
         return 1;
     }
     if (ob->query_property("no resize")) {
