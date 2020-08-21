@@ -237,7 +237,7 @@ int new_symbol(string str) {
         return notify_fail("You already have one of "+capitalize(diety)+"'s holy symbols.\n");
     symbol = new("/d/magic/symbols/"+diety+"_symbol.c");
     if(!objectp(symbol))
-        return notify_fail("There has been an error with the new holy symbol, please contact a WIZ to get help.\n");
+        return notify_fail("Your deity has no fancy symbol yet. Perhaps you could try to <request> a common one meanwhile.\n");
     ob->remove();
     symbol->move(TP);
     symbol->set_owner();
