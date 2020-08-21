@@ -54,7 +54,7 @@ int cmd_wear(string str)
                 if(obs[i]->query_type() != "ring") continue;
                 if((member_array("left hand",obs[i]->query_limbs()) == -1) && (member_array("right hand",obs[i]->query_limbs()) == -1)) continue;
                 if(obs[i]->query_property("enchantment") || obs[i]->query_property("ring of protection") || obs[i]->id("ring of protection")) {
-                    tell_object(TP,"You are already wearing a ring of protection and can not wear another one.");
+                    tell_object(TP,"You are already wearing enchanted gear on your hand and can not wear another one.");
                     return 1;
                 }
             }
