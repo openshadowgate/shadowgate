@@ -10,7 +10,7 @@ void create() {
     set_name("torch");
     set_id( ({ "torch" }) );
     set_short("A torch");
-    set_long("A torch to light up the dark parts of your life.\n");
+    set_long("A torch to light up the dark parts of your life. You can <light>, you can <extinguish> or <douse> it.\n");
     set_weight(1);
     set("coin_type","copper");
     set_value(5);
