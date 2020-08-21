@@ -13,7 +13,7 @@ void create()
     set_spell_sphere("alteration");
     set_domains("strength");
     set_mystery("battle");
-    set_syntax("cast CLASS enlarge person [on TARGET]");
+    set_syntax("cast CLASS enlarge person");
     set_description("When this spell is cast, the humanoid caster will grow twice in size. This spell will turn halflings into humans, humans into firbolgs, and firbolgs into mountains.
 
 With this spell you gain a bonus to constitution and strength, and a penalty to AC and dexterity.");
@@ -25,8 +25,7 @@ With this spell you gain a bonus to constitution and strength, and a penalty to 
 
 void spell_effect(int prof)
 {
-    if(!target)
-        target = caster;
+    target = caster;
 
     if (target->query_property("enlarged"))
     {

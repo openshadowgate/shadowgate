@@ -24,8 +24,7 @@ With this spell you gain size AC bonus, bonus to dexterity and penalty to streng
 
 void spell_effect(int prof)
 {
-    if(!target)
-        target = caster;
+    target = caster;
 
     if (target->query_property("enlarged"))
     {
