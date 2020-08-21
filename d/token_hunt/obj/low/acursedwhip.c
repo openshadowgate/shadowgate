@@ -71,3 +71,4 @@ int hit_func(object targ)
         targ->set_paralyzed(roll_dice(1, 2) * 4, "%^BOLD%^%^RED%^You are dazed.%^RESET%^");
         return 0;
     }
+}
