@@ -58,6 +58,6 @@ int hit_func(object targ){
 	tell_room(environment(query_wielded()),"%^BOLD%^%^MAGENTA%^"+ETOQCN+"'s "+query_short()+" %^MAGENTA%^%^BOLD%^cuts through the air, striking into "+targ->QCN+" as a burst of raw power sparks across "+targ->QCN+"'s body!  "+targ->QCN+" staggers and seems dazed by their inability to escape the attack!%^RESET%^",({ETO,targ}));
 	tell_object(ETO,"%^BOLD%^%^MAGENTA%^Suddenly, you draw your hand back and crack the "+query_short()+" %^MAGENTA%^%^BOLD%^forward!  The %^BLACK%^barbs %^MAGENTA%^gleam as they cut through the air and %^RED%^spark %^MAGENTA%^with a burst of raw power when they strike "+targ->QCN+"!%^RESET%^");
 	tell_object(targ,"%^BOLD%^%^MAGENTA%^"+ETOQCN+"'s "+query_short()+" %^MAGENTA%^%^BOLD%^cuts through the air, striking into you with a burst of raw power!  Staggered, you are dazed by your inability to escape the attack!%^RESET%^");
-		targ->set_paralyzed(roll_dice(6,0)+0);
-return 0;	}
+        targ->set_paralyzed(roll_dice(1,2) * 4, "%^BOLD%^%^RED%^You are dazed.%^RESET%^");
+        return 0;
 }
