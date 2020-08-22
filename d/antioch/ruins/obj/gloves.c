@@ -1,6 +1,6 @@
 #include <std.h>
 #include "../ruins.h"
-inherit "/d/clothing/gloves";
+inherit "/d/common/obj/clothing/gloves";
 
 void create()
 {
