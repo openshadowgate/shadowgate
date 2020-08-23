@@ -1,7 +1,8 @@
 // Gave it lore and the ability to change its colours (since syntax is in the lore). Nienne, 10/04. //
 // Moved the hidden AC points over to the enchantment for better transparency of bonuses. Nienne, 02/07
 #include <std.h>
-inherit ARMOUR;
+//inherit ARMOUR;
+inherit "/d/common/obj/clothing/cloak.c";
 
 void create(){
    ::create();
@@ -17,8 +18,8 @@ void create(){
 "perfectly.");
    set_weight(2);
    set_size(-1);
-   set_type("clothing");
-   set_limbs(({"neck",}));
+   //set_type("clothing");
+   //set_limbs(({"neck",}));
    set_property("enchantment",5);
    set_value(10000);
    set_lore("%^WHITE%^%^BOLD%^Garments of this distinctive style of cape were imbued with a rather "
