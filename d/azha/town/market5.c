@@ -17,8 +17,16 @@ void create()
     set_light(2);
     set_indoors(0);
     set_long(
-        "%^BOLD%^Market Gate, Inside Market Square%^RESET%^
-%^ORANGE%^Here merchants and wagoneers cluster right by the gate to Market Square as loads of %BOLD%^cargo%^RESET%^%^ORANGE%^ are unloaded from their %^BOLD%^%^BLACK%^wagons%^RESET%^%^ORANGE%^ anddistributed to the booths of their merchants by workers. You areastounded by the array of strange and wonderful things you see here.Market Square spreads out before you in all directions, filled witheverything you can possibly imagine."
+        "%^BOLD%^Market Gate, Inside Market Square%^RESET%^\n"+
+        "%^ORANGE%^Here merchants and wagoneers cluster right"+
+        " by the gate to Market Square as loads of "+
+        "%^BOLD%^cargo%^RESET%^%^ORANGE%^ are unloaded from "+
+        "their %^BOLD%^%^BLACK%^wagons%^RESET%^%^ORANGE%^ and "+
+        "distributed to the booths of their merchants by "+
+        "workers. You are astounded by the array of strange"+
+        " and wonderful things you see here.  Market Square "+
+        "spreads out before you in all directions, "+
+        "filled with everything you can possibly imagine."
         );
     set_exits(([
                    "north" : "/d/azha/town/high3",
