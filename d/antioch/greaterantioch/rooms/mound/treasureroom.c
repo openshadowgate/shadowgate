@@ -12,11 +12,10 @@ int step1;
 void create(){
     pile = 1;
     ::create();
-    //set_storage(1);
-    //restore_room();
+
     set_name("treasureroom");
     set_property("indoors",1);
-    set_property("light",3);
+    set_property("light",2);
     set_property("no teleport",1);
     set_short("%^BOLD%^%^YELLOW%^Inside a Treasure Room%^RESET%^");
 

@@ -290,8 +290,6 @@ protected void crash(string err) {
     shout("
 %^BOLD%^%^BLUE%^Server is shutting down with reason: "+err);
     shout("%^BOLD%^%^%^BLUE%^Be back shortly!");
-    shout("%^YELLOW%^Forcing players to quit.%^RESET%^");
-    users()->force_me("quit");
 }
 
 int valid_shutdown(string euid) {

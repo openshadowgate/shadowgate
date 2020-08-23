@@ -10,7 +10,7 @@ void create()
     feat_category("ArmorMastery");
     feat_name("armor training");
     feat_prereq("Fighter L3");
-    feat_desc("You lear to be more maneuverable while wearing armor of any type. Your dexterity bonus is no longer capped by armor type you wear.");
+    feat_desc("You learn to be more maneuverable while wearing armor of any type. Your dexterity bonus is no longer capped by armor type you wear.");
     permanent(1);
 }
 

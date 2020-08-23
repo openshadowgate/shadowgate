@@ -31,6 +31,7 @@ void create(){
    set_struck((:TO,"struck":));
 }
 
+
 void init() {
    ::init();
    add_action("changeme","will");
@@ -73,7 +74,7 @@ int changeme(string str) {
      case "green":
        tell_object(TP,"The cloak shimmers and takes on a myriad of %^GREEN%^gre%^BOLD%^e%^RESET%^%^GREEN%^n%^RESET%^ shades.");
        if(!TP->query_invis()) { tell_room(ETP,""+TP->QCN+"'s cloak shimmers and takes on a myriad of %^GREEN%^gre%^BOLD%^e%^RESET%^%^GREEN%^n%^RESET%^ shades.",TP); }
-       TO->docolour(str);
+      TO->docolour(str);
      break;
      case "red":
        tell_object(TP,"The cloak shimmers and takes on a myriad of %^RED%^r%^BOLD%^e%^RESET%^%^RED%^d%^RESET%^ shades.");
@@ -102,7 +103,7 @@ int changeme(string str) {
      break;
      case "gold":
        tell_object(TP,"The cloak shimmers and takes on a myriad of %^ORANGE%^gol%^BOLD%^d%^RESET%^%^ORANGE%^en%^RESET%^ shades.");
-       if(!TP->query_invis()) { tell_room(ETP,""+TP->QCN+"'s cloak shimmers and takes on a myriad of %^ORANGE%^gol%^BOLD%^d%^RESET%^%^ORANGE%^en%^RESET%^ shades.",TP); }
+       if(!TP->query_invs()) { tell_room(ETP,""+TP->QCN+"'s cloak shimmers and takes on a myriad of %^ORANGE%^gol%^BOLD%^d%^RESET%^%^ORANGE%^en%^RESET%^ shades.",TP); }
        TO->docolour(str);
      break;
      default:
@@ -144,12 +145,12 @@ void docolour(string str) {
        colour = "%^MAGENTA%^vio%^BOLD%^l%^RESET%^%^MAGENTA%^et%^RESET%^";
      break;
      case "white":
-       TO->set_short("%^WHITE%^%^BOLD%^Min%^RESET%^%^WHITE%^o%^BOLD%^r Ca%^RESET%^%^WHITE%^p%^BOLD%^e of %^RESET%^%^WHITE%^D%^BOLD%^isp%^RESET%^%^WHITE%^l%^BOLD%^ace%^RESET%^%^WHITE%^m%^BOLD%^ent%^RESET%^");
+       TO->set_short("%^WHITE%^%^BOLD%^Min%^RESET%^%^WHITE%^o%^BOLD%^r Ca%^RESET%^%^WHITE%^p%^BOLD%^e of %^RESET%^%^WHITE%^D%^BOLD%^isp%^RESET%^%^WHITE%^l%^BOLD%^ace%^RESET%^%^WHITE%^m%^BOL%^ent%^RESET%^");
        TO->set_obvious_short("%^WHITE%^%^BOLD%^Shi%^RESET%^%^WHITE%^m%^BOLD%^mer%^RESET%^%^WHITE%^i%^BOLD%^ng C%^RESET%^%^WHITE%^a%^BOLD%^pe%^RESET%^");
        colour = "%^WHITE%^%^BOLD%^wh%^RESET%^%^WHITE%^i%^BOLD%^te%^RESET%^";
      break;
      case "black":
-       TO->set_short("%^BLACK%^%^BOLD%^Min%^RESET%^%^WHITE%^o%^BLACK%^%^BOLD%^r Ca%^RESET%^%^WHITE%^p%^BLACK%^%^BOLD%^e of %^RESET%^%^WHITE%^D%^BLACK%^%^BOLD%^isp%^RESET%^%^WHITE%^l%^BLACK%^%^BOLD%^ace%^RESET%^%^WHITE%^m%^BLACK%^%^BOLD%^ent%^RESET%^");
+       TO->set_short("%^BLACK%^%^BOLD%^Min%^RESET%^%^WHITE%^o%^BLACK%^%^BOLD%^r C%^RESET%^%^WHITE%^p%^BLACK%^%^BOLD%^e of %^RESET%^%^WHITE%^D%^BLACK%^%^BOLD%^isp%^RESET%^%^WHITE%^l%^BLACK%^%^BOLD%^ace%^RESET%^%^WHITE%^m%^BLACK%^%^BOLD%^ent%^RESET%^");
        TO->set_obvious_short("%^BLACK%^%^BOLD%^Shi%^RESET%^%^WHITE%^m%^BLACK%^%^BOLD%^mer%^RESET%^%^WHITE%^i%^BLACK%^%^BOLD%^ng C%^RESET%^%^WHITE%^a%^BLACK%^%^BOLD%^pe%^RESET%^");
        colour = "%^BLACK%^%^BOLD%^bla%^RESET%^%^WHITE%^c%^BLACK%^%^BOLD%^k%^RESET%^";
      break;
@@ -168,3 +169,4 @@ void docolour(string str) {
 "perhaps that is only a trick of the light.  The patterns are cut in everything from odd to normal shapes, "
 "but the border of the cape is smooth and lined perfectly.");
 }
+

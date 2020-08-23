@@ -39,12 +39,10 @@ void spell_effect(int prof)
 {
     int level;
     int power = set_darkness_power();
+    int duration;
 
     level = clevel;
     if (userp(caster)) {
-        if (level > 20) {
-            level = 20;
-        }
         tell_object(caster, "You create a darkness around you.");
         tell_room(place, caster->QCN + " causes the room to darken.", ({ caster, target }));
         if (interactive(target) && !(caster == target)) {
@@ -57,7 +55,9 @@ void spell_effect(int prof)
     }
 
     ob = new("/d/magic/obj/darkness");
-    call_out("dest_effect", (30 + roll_dice(1, 20)) * clevel);
+    duration = 60 * clevel + 180;
+    duration = duration > 540 ? 540 : duration;
+    call_out("dest_effect", (duration));
     if (objectp(ob)) {
         ob->set_property("spell", TO);
         ob->set_property("spelled", ({ TO }));

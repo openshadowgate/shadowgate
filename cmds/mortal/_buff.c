@@ -99,6 +99,12 @@ int cmd_buff(string str)
         normal_buffs -= myspells;
         normal_buffs = sort_array(normal_buffs, 1);
 
+        if (!sizeof(normal_buffs)) {
+            tell_object(TP,"%^BOLD%^%^WHITE%^All spells on your buff list are active.");
+            return 1;
+        }
+
+
         display += ({ "%^RESET%^%^BOLD%^%^BLUE%^--==%^RESET%^%^BOLD%^%^CYAN%^< %^RESET%^%^BOLD%^Buffs missing %^RESET%^%^BOLD%^%^CYAN%^>%^RESET%^%^BOLD%^%^BLUE%^==--%^RESET%^" });
 
         display += map_array(normal_buffs, (:"%^GREEN%^%^BOLD%^  " + $1:));

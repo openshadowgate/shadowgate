@@ -251,7 +251,7 @@ void healing(object ob)
     live -= ({ TO });
     live = filter_array(live, "is_non_immortal", FILTERS_D);
     count = sizeof(live);
-
+    count = count > 5 ? 5 : count;
 
     tell_room(ETO, "%^MAGENTA%^Cruiser Tetron says:%^BOLD%^%^RED%^ I did not sleep for five thousand years to be taken down that easily..%^RESET%^");
     tell_room(ETO, "%^GREEN%^Cruiser Tetron touches his fingers to his forehead and mutters a chant.");

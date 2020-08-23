@@ -34,7 +34,7 @@ void spell_effect()
     {
         place->remove_property("wild magic");
         place->remove_property("wild magic affect");
-        tell_room(place,"%^BOLD%^%^CYAN%^The %^MAGENTA%^We%^GREEN%^a%^BLUE%^v%^RED%^e%^CYAN%^ had been completely repaired.%^RESET%^");
+        tell_room(place,"%^BOLD%^%^CYAN%^The %^MAGENTA%^We%^GREEN%^a%^BLUE%^v%^RED%^e%^CYAN%^ has been completely repaired.%^RESET%^");
     }
 
     spell_successful();

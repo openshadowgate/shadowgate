@@ -79,7 +79,7 @@ void dest_effect()
     object sword;
 
     if (objectp(caster)) {
-        tell_object(caster, "%^GREEN%^Shambling mound withers away.%^RESET%^");
+        tell_object(caster, "%^GREEN%^Shambling mound shambles away.%^RESET%^");
     }
 
     if (objectp(control)) {

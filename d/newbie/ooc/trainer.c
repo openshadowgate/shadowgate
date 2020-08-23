@@ -46,11 +46,7 @@ void create()
     ::create();
 
     set_short("The First Training Camp");
-    set_long("%^BOLD%^%^WHITE%^This place exists outside of the normal "+
-    "reality of ShadowGate. It is much like the training camps that "+
-    "those adventuring through the realms must seek out and find as they "+
-    "grow in power. However, this particular camp has been designed for "+
-    "those who are newbies in the world of ShadowGate.\n\nBefore you are able to "+
+    set_long("%^BOLD%^%^WHITE%^Before you are able to "+
     "leave this room you must set a describe and an adjective. You must also "+
     "advance to non-newbie status, you should have enough experience now to do so.\n\n"+
     "You may see %^YELLOW%^help describe%^BOLD%^%^WHITE%^ and "+
@@ -144,10 +140,14 @@ int GoThroughDoor()
             tell_object(TP, "\n\n%^BOLD%^%^CYAN%^A map of the town of tabor appears "+
             "in your inventory!%^RESET%^");
             new("/d/darkwood/tabor/obj/map.c")->move(TP);
+            new("/d/common/obj/special/bloodshard")->move(TP);
+            new("/d/common/obj/special/bloodshard")->move(TP);
+            new("/d/common/obj/special/bloodshard")->move(TP);
         }
+
         tell_object(TP, "%^BOLD%^%^YELLOW%^\n\nYou are now entering the large world of "+
         "ShadowGate. There are many commands and help files that have not been covered by "+
-        "this tutorial. \n\nFeel free to ask over the lines, particularly the 'ooc' line, if "+
+        "this tutorial. \n\nFeel free to ask over the lines, particularly the %^CYAN%^<ooc>%^ORANGE%^ line, if "+
         "you find something that you do not understand. "+
         "\n\nThere are also nuances of the game that you will only learn in time and with "+
         "experience. A good many players who give the game time learn that they love it, "+
