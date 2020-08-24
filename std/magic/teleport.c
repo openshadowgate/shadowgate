@@ -29,9 +29,11 @@ varargs int object_can_be_teleported(object teleportee, object destination, int 
     if (!destination->is_room()) {
         return 0;
     }
+    /*
     if (destination->is_flight_room()) {
         return 0;
     }
+    */
     if (teleportee->query_property("teleport proof") - noroll ? 0 : (9 + random(20)) > clevel) {
         return 0;
     }
