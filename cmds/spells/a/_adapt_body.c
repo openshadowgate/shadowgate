@@ -41,7 +41,7 @@ void create()
     
     set_author("tlaloc");
     set_spell_name("adapt body");
-    set_spell_level( ([ "psion" : 5 ]) );
+    set_spell_level( ([ "psion" : 5, "psywarrior" : 5 ]) );
     set_spell_sphere("alteration");
     set_syntax("cast CLASS adapt body");
     set_damage_desc("+10 to fire, cold, electricity, acid, and sonic resistance.");
