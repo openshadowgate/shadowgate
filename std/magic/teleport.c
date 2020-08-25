@@ -34,9 +34,6 @@ varargs int object_can_be_teleported(object teleportee, object destination, int 
         return 0;
     }
     */
-    if (teleportee->query_property("teleport proof") - noroll ? 0 : (9 + random(20)) > clevel) {
-        return 0;
-    }
 
     if (destination->query_property("no teleport") ||
         environment(teleportee)->query_property("no teleport")) {
@@ -53,17 +50,22 @@ varargs int object_can_be_teleported(object teleportee, object destination, int 
         if (roll == 20) {
             return 1;
         }
-    }
 
-    {
-        int startpower, endpower;
-        startpower = environment(teleportee)->query_property("teleport proof");
-        endpower = destination->query_property("teleport proof");
-        if ((clevel - noroll ? 0 : (9 + random(20)) < startpower) ||
-            (clevel - noroll ? 0 : (9 + random(20)) < endpower)) {
+        if (teleportee->query_property("teleport proof") && (teleportee->query_property("teleport proof") - 9 + random(20) > clevel)) {
             return 0;
         }
+
+        {
+            int startpower, endpower;
+            startpower = environment(teleportee)->query_property("teleport proof");
+            endpower = destination->query_property("teleport proof");
+            if ((startpower && (clevel - 9 + random(20) < startpower)) ||
+                (endpower && (clevel - 9 + random(20) < endpower))) {
+                return 0;
+            }
+        }
     }
+
     return 1;
 }
 
