@@ -11,9 +11,10 @@ int cmd_dispell(string str)
     TP->clear_targeted_spells();
 
     spells = TP->query_property("dispellable spells");
-    spells = filter_array(spells, (: objectp($1) :));
 
-    if (!pointerp(spells)) {
+    if (pointerp(spells)) {
+        spells = filter_array(spells, (: objectp($1) :));
+    } else {
         message("info", "%^BOLD%^%^WHITE%^You have nothing listed as effecting you.", TP);
         return 1;
     }
