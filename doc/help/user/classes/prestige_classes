@@ -34,7 +34,7 @@
 
 Prestige classes are similar to standard classes, but their abilities are more specialized and often more powerful. Some prestige classes have steep requirements, such a minimum amount of levels in a base class, a certain feat, skill or similar.
 
-To acquire a prestige class when you advance, simply type %^ORANGE%^<advance %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^. You can choose only one prestige class to multiclass into. Only one set of 10 levels in a single prestige class is allowed per character.
+To acquire a prestige class when you advance, simply type %^ORANGE%^<advance %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^. Only one set of 10 levels in a single prestige class is allowed per character.
 
 If you were to type %^ORANGE%^<advance shadow_adept>%^RESET%^ for example, you would become a 20th level mage/1st level shadow adept. The class feats listed for prestige classes at level 1, level 4 and level 7 are automatically granted when you attain the correct level in the prestige class. They are free feats and you don't need to add them yourself. In almost all cases, when you advance in a prestige class, you also gain spells per day and spells known as if you had advanced in the base class required for the prestige class.
 
