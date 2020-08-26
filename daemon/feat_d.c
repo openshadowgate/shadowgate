@@ -78,7 +78,7 @@ void obsolete_feat(object ob) {
     obsolete = ({ "greater spell focus","crushingstrike","lightning reflexes","iron will","great fortitude",
         "blade block","unassailable parry","greater two weapon fighting","two weapon defense","calm","rapid shot",
         "wild shape dragon","hardenedminions","slippery caster","thick skinned caster","wild shape wolf",
-        "archmage","body cognition","chronicler","presence of mind","shadow adept","shadowdancer","stalwart"
+                "archmage","body cognition","chronicler","presence of mind","shadow adept","shadowdancer","stalwart",
         "versatile arcanist","wild shape dragon","wild shape elemental","eschew materials","fated",
          });
 
