@@ -15,8 +15,7 @@ inherit DAEMON;
  */
 public string levelcheck_string(object first, object second)
 {
-    switch(levelcheck(first,second))
-    {
+    switch (levelcheck(first, second)) {
     case 0: return " %^RESET%^%^BOLD%^%^RED%^F%^RESET%^";
     case 1: return " %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^";
     case 2: return " %^RESET%^%^BOLD%^%^BLUE%^P%^RESET%^";
@@ -43,46 +42,69 @@ public int levelcheck(object first, object second)
     int diff;
     int range;
     int low;
-    int result=0;
+    int result = 0;
 
-    if(!objectp(first)) return 0;
-    if(!objectp(second)) return 0;
+    if (!objectp(first)) {
+        return 0;
+    }
+    if (!objectp(second)) {
+        return 0;
+    }
 
-    if(first == second) return 3;
+    if (first == second) {
+        return 3;
+    }
 
     lvl = (int)first->query_base_character_level();
     lvl2 = (int)second->query_base_character_level();
 
-    if(lvl2 > lvl) { low = lvl; }
-    else { low = lvl2; }
+    if (lvl2 > lvl) {
+        low = lvl;
+    }else {
+        low = lvl2;
+    }
 
     diff = lvl - lvl2;
     diff = absolute_value(diff);
 
-    switch(low)
-    {
+    switch (low) {
     case 1..50: range = 11; break;
     default: range = 6;
     }
 
     //First bit -- kill, second -- adventure
-    if(diff < range)
-        result = result|3;
+    if (diff < range) {
+        result = result | 3;
+    }
 
-    if(lvl<lvl2)
-        result = result|2;
+    if (lvl < lvl2) {
+        result = result | 2;
+    }
 
-    if(second->query("no_levelcheck"))
-        result = result|2;
+    if (second->query("no_levelcheck")) {
+        result = result | 2;
+    }
 
-    if(first->query_death_flag()) result=result&1;
-    if(second->query_death_flag()) result=result&1;
+    if (first->query_death_flag()) {
+        result = result & 1;
+    }
+    if (second->query_death_flag()) {
+        result = result & 1;
+    }
 
-    if(first->get_pk_death_flag()) result=result&1;
-    if(second->get_pk_death_flag()) result=result&1;
+    if (first->get_pk_death_flag()) {
+        result = result & 1;
+    }
+    if (second->get_pk_death_flag()) {
+        result = result & 1;
+    }
 
-    if(first->query("no pk")) result=result&1;
-    if(second->query("no pk")) result=result&1;
+    if (first->query("no pk")) {
+        result = result & 1;
+    }
+    if (second->query("no pk")) {
+        result = result & 1;
+    }
 
     return result;
 }
