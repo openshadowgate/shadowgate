@@ -78,7 +78,7 @@ void obsolete_feat(object ob) {
     obsolete = ({ "greater spell focus","crushingstrike","lightning reflexes","iron will","great fortitude",
         "blade block","unassailable parry","greater two weapon fighting","two weapon defense","calm","rapid shot",
         "wild shape dragon","hardenedminions","slippery caster","thick skinned caster","wild shape wolf",
-        "archmage","body cognition","chronicler","presence of mind","shadow adept","shadowdancer",
+        "archmage","body cognition","chronicler","presence of mind","shadow adept","shadowdancer","stalwart"
         "versatile arcanist","wild shape dragon","wild shape elemental","eschew materials","fated",
          });
 
@@ -227,6 +227,22 @@ void obsolete_feat(object ob) {
                     "Please type <feats allowed> for more information.%^RESET%^");
               ob->set("free_feats",num);
             }
+            freebs = num;
+            break;
+
+        case "stalwart": //revoking feat from non-inquises
+
+            if (has_feat(ob, "stalwart") && !ob->is_class("inquisitor")) {
+                mytype = get_feat_type(ob, "stalwart");
+                if (mytype == "other") {
+                    num++;
+                }
+                remove_my_feat(ob, "stalwart", 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^stalwart");
+                tell_object(ob, "%^B_RED%^%^BOLD%^%^CYAN%^The feat stalwart has been removed from your list as it is restricted to the inquisitor class only. You have been refunded a free feat to spend that will cost you no experience points. Type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
+            }
+
             freebs = num;
             break;
 
