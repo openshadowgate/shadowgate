@@ -77,19 +77,19 @@ int cmd_dispell(string str)
 
         sname = str;
 
-        if (allflag && !tflag && sscanf(str, "all %s", sname) != 1) {
+        if (allflag && !tflag && strsrch(str, "all") == 0 && sscanf(str, "all %s", sname) != 1) {
             write("%^BOLD%^%^CYAN%^You must provide the spell name.");
-            return;
+            return 1;
         }
 
-        if (tflag && allflag && sscanf(str, "all on %s", tname) != 1) {
+        if (tflag && allflag && strsrch(str, "all on") == 0 && sscanf(str, "all on %s", tname) != 1) {
             write("%^BOLD%^%^CYAN%^You must provide the target.");
-            return;
+            return 1;
         }
 
         if (tflag && !allflag && sscanf(str, "%s on %s", sname, tname) != 2) {
             write("%^BOLD%^%^CYAN%^You must provide both spell name and target.");
-            return;
+            return 1;
         }
 
         foreach(spell in spells)
