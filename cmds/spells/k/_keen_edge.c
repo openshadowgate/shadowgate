@@ -6,7 +6,7 @@ int trackera, trackerb;
 void create() {
     ::create();
     set_spell_name("keen edge");
-    set_spell_level(([ "inquisitor" : 3, "mage" : 3, "psion": 3, "oracle" : 4 ]));
+    set_spell_level(([ "inquisitor" : 3, "mage" : 3, "psion": 3, "oracle" : 4, "psywarrior" : 3 ]));
     set_mystery("metal");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS keen edge");
