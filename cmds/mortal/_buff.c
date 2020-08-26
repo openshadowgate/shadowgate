@@ -348,6 +348,15 @@ The command will allow player to store a list of buff spells they can start cast
 %^ORANGE%^<buff clear>%^RESET%^
   Will clear your buff list.
 
+%^CYAN%^SHADOW SPELLS%^RESET%^
+
+N.b., to add buffs cast through shadow spells you have to use special cast string on the spell you want to cast.
+
+E.g., to add blink and elemental body as a mage cast through shadow alteration, you'll have to run these commands:
+
+%^ORANGE%^<buff add blink | cast mage shadow alteration on blink>%^RESET%^
+%^ORANGE%^<buff add elemental body i | cast mage shadow alteration on cast mage elemental body i on fire>%^RESET%^
+
 %^CYAN%^SEE ALSO%^RESET%^
 
 dispell, prepare, cast
