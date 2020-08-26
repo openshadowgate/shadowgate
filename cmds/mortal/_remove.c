@@ -8,6 +8,20 @@ int cmd_remove(string str)
         return notify_fail("Remove what?\n");
     }
 
+    if (str == "all") {
+
+        object * worn;
+
+        worn = all_inventory(TP);
+
+        sizeof(worn) && filter_array(worn, (:$1->query_worn():));
+        sizeof(worn) && filter_array(worn, (:$1->query_property("enchantment") && $1->query_property("enchantment") > 0:));
+        sizeof(worn) && worn->unwear();
+        sizeof(worn) && remove_property("wear_order");
+
+        return 1;
+    }
+
     if (TP->query_bound()) {
         TP->send_paralyzed_message("info", TP);
         return 1;
@@ -40,11 +54,13 @@ remove - undress *blush*
 
 %^CYAN%^SYNOPSIS%^RESET%^
 
-remove %^ORANGE%^%^ULINE%^ITEM%^RESET%^
+remove %^ORANGE%^%^ULINE%^ITEM%^RESET%^|all
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command will remove ITEM from whatever limb it is currently being worn on.
+
+With argument all you'll remove all worn items.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
