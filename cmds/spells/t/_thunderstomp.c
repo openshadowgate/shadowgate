@@ -1,8 +1,8 @@
 /*
   _thunderstomp.c
-  
+
   reskin of stomp from psywarrior
-  
+
   -- Tlaloc --
 */
 
