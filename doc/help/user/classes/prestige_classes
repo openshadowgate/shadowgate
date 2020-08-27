@@ -27,17 +27,16 @@
 %^RESET%^%^CYAN%^Shadow Adept           %^RESET%^Mage or Sorcerer
 %^RESET%^%^CYAN%^Shadowdancer           %^RESET%^Any
 %^RESET%^%^CYAN%^Stonelord              %^RESET%^Any
+%^RESET%^%^CYAN%^Tome Bound Master      %^RESET%^Warlock
 %^RESET%^%^CYAN%^Versatile Arcanist     %^RESET%^Sorcerer
 %^RESET%^%^CYAN%^Warmaster              %^RESET%^Any
 %^RESET%^%^CYAN%^Warmind                %^RESET%^Psywarrior
 
 Prestige classes are similar to standard classes, but their abilities are more specialized and often more powerful. Some prestige classes have steep requirements, such a minimum amount of levels in a base class, a certain feat, skill or similar.
 
-To acquire a prestige class when you advance, simply type %^ORANGE%^<advance %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^. You can choose only one prestige class to multiclass into.
+To acquire a prestige class when you advance, simply type %^ORANGE%^<advance %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^. Only one set of 10 levels in a single prestige class is allowed per character.
 
-If you were to type %^ORANGE%^<advance shadow_adept>%^RESET%^ for example, you would become a 20th level mage/1st level shadow adept. The class feats listed for prestige classes at level 1, level 4 and level 7 are automatically granted when you attain the correct level in the prestige class. They are free feats and you don't need to add them yourself. In almost all cases, when you advance in a prestige class, you also gain spells per day and spells known as if you had advanced in the base class required for the prestige class.
-
-Only one set of 10 levels in a single prestige class is allowed per character.
+%^ORANGE%^For example, %^WHITE%^if you were to type %^ORANGE%^<advance shadow_adept>%^RESET%^, you would become a 20th level mage and 1st level shadow adept. The class feats listed for prestige classes are automatically granted when you attain the correct level in the prestige class. They are free feats and you don't need to add them yourself. In almost all cases, when you advance in a prestige class, you also gain spells per day and spells known as if you had advanced in the base class required for the prestige class.
 
 %^RESET%^%^CYAN%^To get more information on a class, type %^ORANGE%^<help %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^%^CYAN%^.
 

@@ -13,7 +13,7 @@ void create()
     feat_name("shield charge");
     feat_prereq("Immortal defender L4");
     feat_syntax("shield_charge [DIRECTION]");
-    feat_desc("he immortal defender gets behind her shield and charges  her enemies, using the shield and her body as a battering ram. She is even  able to charge through some doors or to other rooms with her shield leading  the way.
+    feat_desc("The immortal defender gets behind her shield and charges  her enemies, using the shield and her body as a battering ram. She is even  able to charge through some doors or to other rooms with her shield leading  the way.
 
 This feat affects all attackers.");
     set_required_for(({ "shield master"}));

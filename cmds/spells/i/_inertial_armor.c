@@ -44,7 +44,7 @@ void spell_effect(int prof) {
            "another armor effect.");
         TO->remove();
     }
-    if (!target->is_ok_armour("mage")) 
+    if (!target->is_ok_armour("mage") && target->query_class() != "psywarrior") 
     {
         tell_object(caster,"The spell can not offer protection to those wearing armor.");
         if(!objectp(TO)) return;
@@ -93,7 +93,7 @@ void test() {
         return;
     }
 
-    if (!target->is_ok_armour("mage")) 
+    if (!target->is_ok_armour("mage") && target->query_class() != "psywarrior") 
     {
         tell_object(caster,"The spell can not offer protection to those wearing armor.");
         TO->dest_effect();

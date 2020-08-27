@@ -17,7 +17,7 @@ void create(){
 "just below her ears, swaying in an %^BOLD%^%^BLACK%^ebon wave %^RESET%^%^CYAN%^"
 "any time she moves her head.  Her vivid %^BOLD%^azure eyes %^RESET%^%^CYAN%^"
 "survey all passersby, watching each with interest.  Perhaps you could attract "
-"her attention with a greeting?%^RESET%^");
+"her attention with a greeting by saying %^YELLOW%^hello%^RESET%^%^CYAN%^?%^RESET%^");
    set_gender("female");
    set_race("human");
    set_body_type("human");

@@ -13,11 +13,11 @@ void create()
     int mylevel = 65;
     ::create();
     SUMMON = 0;
-    set_name("Cerviel Kii Ra");
+    set_name("Cerviel");
     set_id(({ "paladin", "guard", "paladin guard", "pguard", "Paladin", "guardian", "gate guard", "knight", "cerviel", "captain", "cerviel", }));
     set_short("%^BOLD%^%^WHITE%^Cerviel, %^ORANGE%^a divine knight of %^WHITE%^Jarmila%^RESET%^");
     set_long(
-        "%^BOLD%^%^WHITE%^This is Kii Ra, captain deva of the Guard and a strong paladin of Jarmila. She is just shy of six feet tall and is very fit. She's taken her helmet off and long blonde hair is kept in a braid to keep it out of her face. Blue eyes twinkle with happiness and a smile seems to be permanent on her lips. Her plate armor is spotless and practically glows in the light. Two sets of huge feathery wings trail behind her back."
+        "%^BOLD%^%^WHITE%^This is Cerviel, captain deva of the Guard and a strong paladin of Jarmila. She is just shy of six feet tall and is very fit. She's taken her helmet off and long blonde hair is kept in a braid to keep it out of her face. Blue eyes twinkle with happiness and a smile seems to be permanent on her lips. Her plate armor is spotless and practically glows in the light. Two sets of huge feathery wings trail behind her back."
         );
     set_race("deva");
     set_gender("female");
