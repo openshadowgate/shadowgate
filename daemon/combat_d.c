@@ -2370,9 +2370,9 @@ string query_paralyze_message(object who)
 //Rewritten so remove multiple sequential avoidance rolls
 //Uriel - 06/09/2020
 
-int check_avoidance(object who, object victim, object* weapons)
+int check_avoidance(object who, object victim)
 {
-    object EWHO, rider;
+    object EWHO, rider, *weapons = ({});
     int attack, defend, roll, chance;
     int parry = 0, scramble = 0, ride_by_attack = 0;
     int shot_on_the_run = 0, mount = 0;
@@ -2425,7 +2425,7 @@ int check_avoidance(object who, object victim, object* weapons)
        avoid += ({"TYPE_RIDDEN"});
     }
     if (FEATS_D->usable_feat(victim,"shot on the run")
-       && sizeof(weapons)) {
+       && sizeof(weapons = victim->query_wielded())) {
        if(weapons[0]->is_lrweapon())
        {
        shot_on_the_run = 1;
@@ -2802,7 +2802,7 @@ void internal_execute_attack(object who)
         // end crit stuff
         if (roll && fumble == 0) {
             if (!victim->query_unconscious() && !victim->query_ghost() && !victim->query_bound()) {
-                if (!extra_hit_calcs(who, victim, current, target_thing) || check_avoidance(who, victim, weapons)) {
+                if (!extra_hit_calcs(who, victim, current, target_thing) || check_avoidance(who, victim)) {
                     if (!objectp(who)) {
                         return;
                     }
