@@ -256,6 +256,19 @@ int __Shoot(string str) {
         tohitroll -= 2;
     if(distance >= query_range(1))
         tohitroll -= 5;
+    
+    if(TP->query_class() == "ranger")
+    {
+        if(TP->is_favored_enemy(foe))
+        {
+            tohitroll += 2;
+            tohitroll += (FEATS_D->usable_feat(TP, "second favored enemy") * 2);
+            tohitroll += (FEATS_D->usable_feat(TP, "third favored enemy") * 2);
+            
+            if(foe->is_undead() && FEATS_D->usable_feat("slay the undead"))
+                tohitroll += 2;
+        }
+    }
 
     tohitroll = adjust_to_hit(tohitroll);
     thaco = ETO->Thaco(1,foe,TO);
