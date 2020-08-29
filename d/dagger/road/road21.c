@@ -25,10 +25,4 @@ void create() {
 void reset()
 {
     ::reset();
-    if(!present("skeleton",TO))
-        new("/d/magic/mon/skeleton")->move(TO);
-    if(!present("skeleton 2",TO))
-        new("/d/magic/mon/skeleton")->move(TO);
-    if(!present("skeleton 3",TO))
-        new("/d/magic/mon/skeleton")->move(TO);
 }

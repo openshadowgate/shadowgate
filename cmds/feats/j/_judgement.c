@@ -56,12 +56,24 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_judgement(string args)
+int cmd_judgement(string str)
+{
+    object feat;
+    if (!objectp(TP)) {
+        return 0;
+    }
+    feat = new(base_name(TO));
+    feat->setup_feat(TP, str);
+    return 1;
+}
+
+void execute_feat()
 {
     object controller;
     int i;
     string j;
-    string* jtoactivate = ({}), * argss;
+    string* jtoactivate = ({}), * args;
+    ::execute_feat();
 
     if (!objectp(TP)) {
         return 0;
@@ -71,7 +83,11 @@ int cmd_judgement(string args)
         return 0;
     }
 
-    argss = explode(args, " ");
+    if (!arg) {
+        return help();
+    }
+
+    args = explode(arg, " ");
     JUDGEMENT_TYPES = "/cmds/feats/obj/judgement"->query_judgement_types();
 
     if (FEATS_D->usable_feat(TP, "third judgement")) {
@@ -82,7 +98,7 @@ int cmd_judgement(string args)
         i = 1;
     }
 
-    foreach(j in argss)
+    foreach(j in args)
     {
         if (member_array(j, JUDGEMENT_TYPES) != -1) {
             jtoactivate += ({ j });
@@ -112,8 +128,6 @@ int cmd_judgement(string args)
         controller->activate_judgements(jtoactivate);
 
     }
-
-    return 1;
 }
 
 void dest_effect()

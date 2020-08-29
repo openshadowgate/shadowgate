@@ -19,7 +19,7 @@ mapping valid_types = ([
                          "badger" :    ({ 10, 17, 15, 2, 12, 10, 2, 4, }),
                          "bear" :      ({ 15, 15, 13, 2, 12, 6, 3, 4,  }),
                          "bird" :      ({ 15, 15, 13, 2, 14, 6, 1, 2,  }),
-                         "boar" :      ({ 13, 12, 15, 2, 13, 4, 2, 12,  }),
+                         "boar" :      ({ 13, 12, 15, 2, 13, 4, 2, 12, }),
                          "camel" :     ({ 18, 16, 14, 2, 11, 4, 3, 2,  }),
                          "cheetah" :   ({ 12, 21, 13, 2, 12, 6, 2, 2,  }),
                          "crocodile" : ({ 15, 14, 15, 1, 12, 2, 2, 8,  }),
@@ -45,7 +45,7 @@ void create()
 
   LEVEL  3 - Evasion
   LEVEL  6 - Resistance
-  LEVEL  9 - Rapid Strikes
+  LEVEL  9 - Precise Strikes
   LEVEL 15 - Stalwart
   
 The Animal Companion will hide if you use the 'hide_in_shadows' command, allowing you to effectively sneak about with your faithful friend.
@@ -135,8 +135,8 @@ void execute_feat()
     tell_object(caster, sprintf("You summon your trusty %s companion to your side.", arg));
     
     class_level = caster->query_guild_level("ranger");
-    comp_hd = class_level + 1;
-    comp_ac = class_level + 5;
+    comp_hd = class_level + 2;
+    comp_ac = class_level + 10;
     
     companion = new("/d/magic/mon/acompanion");
     companion->set_race(arg);
@@ -147,22 +147,14 @@ void execute_feat()
     companion->set_hd(comp_hd, 14);
     companion->set_attacks_num(2 + class_level / 8);
     companion->set_mlevel("fighter", comp_hd);
-    companion->set_max_hp(10 + (10 * comp_hd));
-    companion->set_hp(14 * comp_hd + 10);
+    companion->set_max_hp(14 + (14 * comp_hd));
+    companion->set_hp(14 * comp_hd + 14);
     companion->set_alignment(caster->query_alignment());
     companion->set_owner(caster);
        
     caster->set_property("animal_companion", companion);
     caster->add_follower(companion);
     caster->add_protector(companion);
-
-/*
-    control = new("/d/magic/obj/holder");
-    control->set_caster(caster);
-    control->move(caster);
-    control->set_property("spell",TO);
-    control->set_property("spelled", ({TO}) );
-*/
 
     companion->set_property("minion", caster);
     companion->move(environment(caster));
@@ -176,7 +168,7 @@ void execute_feat()
     companion->set_stats("wisdom", valid_types[arg][4]);
     companion->set_stats("charisma", valid_types[arg][5]);
     companion->set_size(valid_types[arg][6]);
-    companion->set_overall_ac(-comp_ac - valid_types[arg][7]);
+    companion->set_overall_ac(0 - comp_ac - valid_types[arg][7]);
   
     //Based on SRD - companion gets "specials" at certain caster levels
     if(class_level >= 3)
@@ -184,16 +176,15 @@ void execute_feat()
     if(class_level >= 6)
         companion->set_monster_feats( ({ "evasion", "resistance" }) );
     if(class_level >= 9)
-        companion->set_monster_feats( ({ "evasion", "resistance", "rapid strikes" }) );
+        companion->set_monster_feats( ({ "evasion", "resistance", "precise strikes" }) );
     if(class_level >= 15)
-        companion->set_monster_feats( ({ "evasion", "resistance", "rapid_strikes", "stalwart" }) );
+        companion->set_monster_feats( ({ "evasion", "resistance", "precise strikes", "stalwart" }) );
        
     return;
 }
 
 void dest_effect()
 {
-    //control && control->remove();
     remove_feat(this_object());
     ::dest_effect();
     return;
