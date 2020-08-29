@@ -53,6 +53,4 @@ void reset()
         new(MONS + "/banshee")->move(TO);
     if (!present("banshee 2"))
         new(MONS + "/banshee")->move(TO);
-    if(!present("nightwalker"))
-        new("/realms/tlaloc/mon/nightwalker")->move(TO);
 }
