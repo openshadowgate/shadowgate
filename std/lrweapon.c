@@ -311,6 +311,19 @@ int __Shoot(string str) {
         damage = damage_done(foe, damage);
 
         damage += TP->query_property("damage bonus");
+        
+        if(TP->query_class() == "ranger")
+        {
+            if(TP->is_favored_enemy(foe))
+            {
+                damage += 2;
+                damage += (FEATS_D->usable_feat(TP, "second favored enemy") * 2);
+                damage += (FEATS_D->usable_feat(TP, "third favored enemy") * 2);
+            
+                if(foe->is_undead() && FEATS_D->usable_feat("slay the undead"))
+                    damage += 2;
+            }
+        }
 
         if (perfect || mPerfect) {
             damage=damage*4;
