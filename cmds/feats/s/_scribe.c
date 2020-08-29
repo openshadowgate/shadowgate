@@ -81,8 +81,8 @@ void execute_feat()
     }
     level = tmp->query_spell_level(TP->query_class());
 
-    if ((MAGIC_D->is_mastering_class(TP->query_class()) && member_array(str, TP->query_mastered_spells(TP->query_class())) == -1) ||
-        (FEATS_D->usable_feat(caster, "clone scroll") && present(str, caster)->is_scroll())) {
+    if ((MAGIC_D->is_mastering_class(TP->query_class()) && member_array(str, TP->query_mastered_spells(TP->query_class())) == -1) &&
+        (!FEATS_D->usable_feat(caster, "clone scroll") || !present(str, caster)->is_scroll())) {
         tell_object(caster, "You don't have that spell mastered with your posed class.\n");
         return 1;
     }
