@@ -336,7 +336,8 @@ int __Shoot(string str) {
         tell_object(foe,"A "+ capitalize(query_ammo())+" from "+fdir+" hits you!");
 
         foe->add_attacker(ETO);
-        hit = (int)foe->do_damage(foe->return_target_limb(),damage);
+        //hit = (int)foe->do_damage(foe->return_target_limb(),damage);
+        damage = foe->do_typed_damage_effects(TP, "body", damage, "piercing");
         if(objectp(current_ammo)) {
             foe->add_poisoning(current_ammo->query_poisoning());
         }
@@ -519,6 +520,7 @@ object get_current_ammo() {
     return current_ammo;
 }
 
+/*
 int calc_speed() {
     int prof;
     int speed = 1;
@@ -534,7 +536,24 @@ int calc_speed() {
     }
     return speed;
 }
+*/
 
+int calc_speed()
+{
+    int speed,
+        ranger,
+        fighter,
+        arcane;
+    
+    ranger  = ETO->query_class_level("ranger");
+    arcane  = ETO->query_class_level("arcane_archer");
+    fighter = ETO->query_class_level("fighter");
+    
+    speed = 1 + max( ({ ranger / 20, arcane / 10, fighter / 40 }) );
+    
+    return speed;
+}
+    
 void set_lr_type(string type){
     lr_type = type;
 }
