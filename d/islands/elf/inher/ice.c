@@ -34,7 +34,7 @@ void create(){
 
 string long_desc(){
   
-   return(query_short()+"n%^CYAN%^Cracks in the %^BOLD%^glacial ice%^RESET%^%^CYAN%^ form a narrow pathway"+
+   return(query_short()+"\n%^CYAN%^Cracks in the %^BOLD%^glacial ice%^RESET%^%^CYAN%^ form a narrow pathway"+
    " some twenty feet down from the surface.  The %^BOLD%^%^CYAN%^sky%^RESET%^%^CYAN%^ above is whiteout"+
    " and the light below reflects off the ice, leaving a blue tint"+
    " to everything.  The going is extremely difficult as the %^BOLD%^%^CYAN%^ground%^RESET%^%^CYAN%^"+

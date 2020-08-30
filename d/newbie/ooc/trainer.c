@@ -18,25 +18,26 @@ int query_light()
 
 void set_for(object who)
 {
-    if(!objectp(who)) return;
-    if(!userp(who)) return;
+    if (!objectp(who)) {
+        return;
+    }
+    if (!userp(who)) {
+        return;
+    }
     myTrainer = who;
     myPlayer = (string)who->query_name();
     set_player(myPlayer);
-    if(member_array((string)who->query_race(), bad_races) != -1)
-    {
+    if (member_array((string)who->query_race(), bad_races) != -1) {
         TO->add_exit("/d/shadow/room/muuldaan/rooms/cavern1", "portal");
-        //TO->set_light(-2); // this was stacking for some reason
+        TO->set_light(-1);
         BAD = 1;
         isSetup = 1;
-    }
-    else
-    {
+    }else {
         TO->add_exit("/d/darkwood/tabor/room/math4", "portal");
-        //TO->set_light(2);
+        TO->set_light(1);
         isSetup = 1;
     }
-    set_pre_exit_functions(({"portal"}),({"GoThroughDoor"}));
+    set_pre_exit_functions(({ "portal" }), ({ "GoThroughDoor" }));
     return;
 }
 
@@ -45,11 +46,7 @@ void create()
     ::create();
 
     set_short("The First Training Camp");
-    set_long("%^BOLD%^%^WHITE%^This place exists outside of the normal "+
-    "reality of ShadowGate. It is much like the training camps that "+
-    "those adventuring through the realms must seek out and find as they "+
-    "grow in power. However, this particular camp has been designed for "+
-    "those who are newbies in the world of ShadowGate.\n\nBefore you are able to "+
+    set_long("%^BOLD%^%^WHITE%^Before you are able to "+
     "leave this room you must set a describe and an adjective. You must also "+
     "advance to non-newbie status, you should have enough experience now to do so.\n\n"+
     "You may see %^YELLOW%^help describe%^BOLD%^%^WHITE%^ and "+
@@ -62,7 +59,7 @@ void create()
 	set_listen("default","A stillness hangs over the area.");
 	set_property("Specialist",1);
     set_property("no teleport",1);
-        //set_property("indoors",1);
+        set_property("indoors",1);
 	set_property("training",1);
     set_property("no sticks",1);
     set_property("no starve",1);
@@ -143,10 +140,14 @@ int GoThroughDoor()
             tell_object(TP, "\n\n%^BOLD%^%^CYAN%^A map of the town of tabor appears "+
             "in your inventory!%^RESET%^");
             new("/d/darkwood/tabor/obj/map.c")->move(TP);
+            new("/d/common/obj/special/bloodshard")->move(TP);
+            new("/d/common/obj/special/bloodshard")->move(TP);
+            new("/d/common/obj/special/bloodshard")->move(TP);
         }
+
         tell_object(TP, "%^BOLD%^%^YELLOW%^\n\nYou are now entering the large world of "+
         "ShadowGate. There are many commands and help files that have not been covered by "+
-        "this tutorial. \n\nFeel free to ask over the lines, particularly the 'ooc' line, if "+
+        "this tutorial. \n\nFeel free to ask over the lines, particularly the %^CYAN%^<ooc>%^ORANGE%^ line, if "+
         "you find something that you do not understand. "+
         "\n\nThere are also nuances of the game that you will only learn in time and with "+
         "experience. A good many players who give the game time learn that they love it, "+

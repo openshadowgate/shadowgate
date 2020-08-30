@@ -48,7 +48,6 @@ int cmd_prepare(string str)
     int i, validfocus, times, spell_level, class_level, rst, lvadj, temp;
     object *inven;
 
-    tell_object(TP,identify(TO));
     if(TP->query_bound() || TP->query_unconscious())
     {
         TP->send_paralyzed_message("info",TP);

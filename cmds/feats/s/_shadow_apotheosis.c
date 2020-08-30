@@ -6,11 +6,6 @@ inherit FEAT;
 
 object* exclude = ({});
 
-// might eventually make this a shadow form they shapeshift into that gives the
-// bonuses, but would have dig into the whole lib to find all the instances of
-// shapeshift so I could allow commands and such for a humanoid shapeshift that
-// didn't have the restrictions of animal form.  Want to do it some day, just
-// not this day.
 void create()
 {
     ::create();

@@ -217,6 +217,7 @@ seen. It seems to be dormant at the time.");
     ETO->force_me("save");
 
     ETO->add_money("gold", 200 + roll_dice(5, 20));
+    ETO->set_sight_bonus(RACE_D->query_sight_bonus(ETO->query("race")));
 
     final_set = 1;
 

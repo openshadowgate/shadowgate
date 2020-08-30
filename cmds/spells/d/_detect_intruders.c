@@ -16,7 +16,7 @@ void create()
     
     set_author("tlaloc");
     set_spell_name("detect intruders");
-    set_spell_level(([ "psion" : 2 ]));
+    set_spell_level(([ "psion" : 2, "psywarrior" : 2 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS detect intruders");
     set_description("With this ability, the psion can detect nearby psychic energy, allowing them to pinpoint living entities in the vicinity");

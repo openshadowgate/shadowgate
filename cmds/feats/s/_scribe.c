@@ -81,15 +81,16 @@ void execute_feat()
     }
     level = tmp->query_spell_level(TP->query_class());
 
-    if (MAGIC_D->is_mastering_class(TP->query_class()) && member_array(str, TP->query_mastered_spells(TP->query_class())) == -1) {
-        tell_object(caster, "You don't have that spell mastered with your posed class.\n");
-        return 1;
-    }
+    if (!FEATS_D->usable_feat(caster, "clone scroll") || (FEATS_D->usable_feat(caster, "clone scroll")  && (!present(str, caster) || !present(str, caster)->is_scroll()))) {
+        if (MAGIC_D->is_mastering_class(TP->query_class()) && member_array(str, TP->query_mastered_spells(TP->query_class())) == -1) {
+            tell_object(caster, "You don't have that spell mastered with your posed class.\n");
+            return 1;
+        }
 
-    if (!(caster->query_memorized(TP->query_class(), str) ||
-          (FEATS_D->usable_feat(caster, "clone scroll") && present(str, caster)->is_scroll()))) {
-        tell_object(caster, "That spell isn't in your memory.\n");
-        return 1;
+        if (!(caster->query_memorized(TP->query_class(), str))) {
+            tell_object(caster, "That spell isn't in your memory.\n");
+            return 1;
+        }
     }
 
     ob = present("parchment11", caster);

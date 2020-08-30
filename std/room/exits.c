@@ -702,59 +702,57 @@ string query_post_exit_function(string sortie) {
     else return post_exit_func[sortie];
 }
 
-int climb_ok(string verb) {
-    int success,damage,inc,inc2,loop;
-    string dir,opp;
-/*  removing until T agrees and we make it reasonable to have this restriction
-// adding to preclude climbing climb exits if mounted
-    if (TP->query_in_vehicle()) {
-	write("You aren't going to be able to do that while mounted.");
-        return 0;
-    }
-*/
-/*    if (!TP->is_class("thief") && !TP->is_class("assassin") && !TP->is_class("bard") &&
-        (!present("climbing tool",this_player())) ) {
-        write("Only thieves and bards can climb, un-aided.");
-        return 0;
-    } */
+int climb_ok(string verb)
+{
+    int success, damage, inc, inc2, loop;
+    string dir, opp;
     if (verb == "climb") {
         dir = "up"; opp = "down";
     } else {
         dir = "down"; opp = "up";
     }
     loop = climb_exits[verb][3] / 100;
-    if (loop  <= 0 ) loop = 1;
-    tell_room(this_object(),this_player()->query_cap_name()+" attempts to "+verb+" "+dir+".",this_player());
-    for (inc = 0; inc < loop; inc ++) {
-        success = CLIMB_D->check_climb(climb_exits[verb][1],this_player());
+    if (loop <= 0) {
+        loop = 1;
+    }
+    tell_room(this_object(), this_player()->query_cap_name() + " attempts to " + verb + " " + dir + ".", this_player());
+    for (inc = 0; inc < loop; inc++) {
+        success = CLIMB_D->check_climb(climb_exits[verb][1], this_player());
         if (success == -1) {
-            tell_room(this_object(),this_player()->query_cap_name()+" falls.",this_player());
+            tell_room(this_object(), this_player()->query_cap_name() + " falls.", this_player());
             write("You have fallen!!");
-            if (fall_desc) write(fall_desc);
+            if (fall_desc) {
+                write(fall_desc);
+            }
             damage = 0;
-            for (inc2 = loop;inc2 > inc; inc2 --)
+            for (inc2 = loop; inc2 > inc; inc2--) {
                 damage += random(climb_exits[verb][2]);
+            }
             damage += random(climb_exits[verb][2]) + 1;
-            this_player()->do_damage(this_player()->return_target_limb(),damage);
+            this_player()->do_damage(this_player()->return_target_limb(), damage);
             this_player()->add_attacker(this_object());
             this_player()->continue_attack();
             this_player()->remove_attacker(this_object());
-            if (verb == "climb") return 0;
-            else return 1;
+            if (verb == "climb") {
+                return 0;
+            }else {
+                return 1;
+            }
         }
         if (success == 0) {
             if (inc < 1) {
-                tell_room(this_object(),this_player()->query_cap_name()+" fails to "+verb+" "+dir+".",this_player());
+                tell_room(this_object(), this_player()->query_cap_name() + " fails to " + verb + " " + dir + ".", this_player());
                 write("You can't even get started!");
             } else {
-                tell_room(this_object(),this_player()->query_cap_name()+" gets part way "+dir+", and gets stuck, so "+nominative(this_player())+" climbs back "+opp+".",this_player());
-                write("You get "+dir+" part way, and get stuck, so you climb back "+opp+".");
+                tell_room(this_object(), this_player()->query_cap_name() + " gets part way " + dir + ", and gets stuck, so " + nominative(this_player()) + " climbs back " + opp + ".", this_player());
+                write("You get " + dir + " part way, and get stuck, so you climb back " + opp + ".");
             }
             return 0;
         }
     }
     return 1;
 }
+
 void set_fall_desc(string str) {
     fall_desc = str;
 }

@@ -80,8 +80,14 @@ void reset()
     if (!present("sbasket") && !random(4)) {
         new(CMISC "sbasket")->move(TO);
     }
-    if (!present("torch") && !random(3)) {
+    if (!present("torch")) {
         new(CMISC "torch")->move(TO);
+    }
+    if (!present("torch 2") && !random(2)) {
+        new(CMISC "torch")->move(TO);
+    }
+    if (!present("flint")) {
+        new(CMISC "flint")->move(TO);
     }
     if (!present("lantern")) {
         new(CMISC "lantern")->move(TO);

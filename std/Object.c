@@ -2306,7 +2306,7 @@ void add_the_bonus(object myplayer, string bonustype, int bonusvalue)
 
     case "sight bonus":
         if (member_array((string)myplayer->query_race(), PLAYER_D->night_races()) != -1) {
-            myplayer->add_sight_bonus((-1) * bonusvalue);
+            myplayer->add_sight_bonus(-bonusvalue);
         }else {
             myplayer->add_sight_bonus(bonusvalue);
         }

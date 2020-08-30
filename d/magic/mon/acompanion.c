@@ -60,7 +60,6 @@ void init()
     {
         set_short(saved_short);
         set_long(saved_long);
-        //"/daemon/yuck_d"->load_inventory(this_object(), SAVEDIR + "acompanion");
     }
     
     add_action("animal_command", "animal");
@@ -166,6 +165,9 @@ void heart_beat()
         add_hp(query_max_hp() / 20);
         bonus = 0;
     }
+    
+    if(query_hp() < query_max_hp() / 2 && present("vial", this_object()))
+        command("drink vial");
     
     this_object()->add_damage_bonus(bonus);
     this_object()->add_attack_bonus(bonus);

@@ -1024,6 +1024,11 @@ void add_sight_bonus(int x)
     sight_bonus += x;
 }
 
+void set_sight_bonus(int x)
+{
+    sight_bonus = x;
+}
+
 void add_search_path(string dir)
 {
     if (member_array(dir, search_path) == -1) {

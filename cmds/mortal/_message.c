@@ -42,20 +42,20 @@ int cmd_message(string str)
     {
         this_player()->setenv("MIN", "$N "+msg);
         desc->set_profile_stuff(msg,"message in",TP);
-        if(profile) { profile_stuff(TP,profile,"in",str); }
+        if(profile) { profile_stuff(TP,profile,"in",msg); }
     }
     else if(strsrch(msg,"$D") != -1)
     {
         TP->setenv("MOUT","$N "+msg+"");
         desc->set_profile_stuff(msg,"message out",TP);
-        if(profile) { profile_stuff(TP,profile,"out",str); }
+        if(profile) { profile_stuff(TP,profile,"out",msg); }
         return 1;
     }
     else
     {
         TP->setenv("MOUT","$N "+msg+" $D");
         desc->set_profile_stuff(msg,"message out",TP);
-        if(profile) { profile_stuff(TP,profile,"out",str); }
+        if(profile) { profile_stuff(TP,profile,"out",msg); }
     }
 
     return 1;

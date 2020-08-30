@@ -13,7 +13,7 @@ inherit DAEMON;
 
 #define OBJECTS ({"chalice","parchment","tunic","boots","cup","bowl", "knife", "scroll", "tablet","hat","tome","rod","statue","figurine","amulet", "talisman", "slippers", "flask","candle","mirror","rug","brooch","egg","scarf", "sphere", "cube", "stone", "crown", "amulet"})
 
-#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good", "neutrality", "the sun","the earth","the moon","the land","the sky", "force", "darkness", "light", "control", "destiny", "fortitude", "cowardice","death","health", "life", "shielding", "the universe", "horror", "beauty", "comeliness","humility","pride", "truth", "lies", "weakness", "strength", "nature", "terror", "fear", "courage", "wonder", "kittens"})
+#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good", "neutrality", "the sun","the earth","the moon","the land","the sky", "force", "darkness", "light", "control", "destiny", "fortitude", "cowardice","death","health", "life", "shielding", "the universe", "horror", "beauty", "comeliness","humility","pride", "truth", "lies", "weakness", "strength", "nature", "terror", "fear", "courage", "wonder", "kittens","hounds"})
 
 #define SAVE_QUESTS "/daemon/save/quests_mid"
 
@@ -21,12 +21,12 @@ inherit DAEMON;
 
 #define LMID2 ({"/d/tharis/newtharis/sewers", "/d/barriermnts/ruins/room/", "/d/deku/sanctuary/sewer/", "/d/azha/theater/rooms/", "/d/deku/forest/fire_tunnel/rooms/"})
 
-#define MED ({"/d/deku/keep/rooms/blacktonguelair", "/d/laerad/parnelli/asgard/sewer/rooms/", "/d/islands/pirates/cove/boat", "/d/underdark/mines/room/", "/d/islands/pirates/caves/", "/d/antioch/valley/rooms/e", "/d/antioch/valley/rooms/dt"})
+#define MED ({"/d/deku/keep/rooms/blacktonguelair", "/d/laerad/parnelli/asgard/sewer/rooms/", "/d/islands/pirates/cove/boat", "/d/underdark/mines/room/", "/d/islands/pirates/caves/", "/d/antioch/valley/rooms/e", "/d/antioch/valley/rooms/dt","/d/islands/coralsea/rooms/"})
 
 #define HMID1 ({"/d/laerad/plains/", "/d/laerad/swamp/", "/d/laerad/parnelli/forest/", "/d/laerad/wasteland/", "/d/tharis/forest/", "/d/deku/sanctuary/tower/", "/d/deku/keep/rooms/dungeon"})
 
 #define HMID2 ({"/d/laerad/parnelli/systyquah/", "/d/antioch/valley/rooms/v", "/d/antioch/valley/rooms/g", "/d/islands/dallyh/forest/rooms/", "/d/tharis/barrow/rooms/mound", "/d/barriermnts/bpeak/rooms/",\
-"/d/barriermnts/lothwaite/rooms/bt", "/d/dagger/derro/rooms/c", "/d/deku/mausoleum/rooms/"})
+"/d/barriermnts/lothwaite/rooms/bt", "/d/dagger/derro/rooms/c", "/d/deku/mausoleum/rooms/","/d/shadow/room/deep_echos/"})
 
 #define AREAS ({ LMID1, LMID2, MED, HMID1, HMID2})
 #define AREA_VALUE ({60000, 80000, 100000, 120000, 140000})
@@ -52,6 +52,9 @@ inherit DAEMON;
 
 #define MONSTERS ([\
                         ANTIOCH "valley/mons/bear.c": 75000,\
+                        ANTIOCH "valley/mons/creeper.c": 75000,\
+                        ANTIOCH "greaterantioch/mon/faris.c": 90000,\
+                        ANTIOCH "greaterantioch/mon/gnollchieftain.c": 80000,\
                         DEKU "monster/jarrow.c":75000,\
                         DEKU "monster/lord.c":75000,\
                         DEKU "monster/serpent.c":78000,\

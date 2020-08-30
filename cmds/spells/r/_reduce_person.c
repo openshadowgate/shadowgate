@@ -24,8 +24,7 @@ With this spell you gain size AC bonus, bonus to dexterity and penalty to streng
 
 void spell_effect(int prof)
 {
-    if(!target)
-        target = caster;
+    target = caster;
 
     if (target->query_property("enlarged"))
     {
@@ -41,7 +40,7 @@ void spell_effect(int prof)
 
     spell_successful();
 
-    tell_object(caster,"%^YELLOW%^You shring twice in size!");
+    tell_object(caster,"%^YELLOW%^You shrink twice in size!");
     tell_room(place,"%^YELLOW%^"+target->QCN+" shrinks twice in size!", caster );
 
     target->set_property("added short",({"%^YELLOW%^ (absurdly tiny)%^RESET%^"}));

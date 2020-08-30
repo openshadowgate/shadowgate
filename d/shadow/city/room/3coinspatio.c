@@ -32,7 +32,11 @@ void create()
       "the center of each table burns a small ring of %^RED%^fi%^BLACK%^"+
       "r%^RED%^e%^WHITE%^, providing light and warmth when it is needed. "+
       "%^GREEN%^Rugs %^WHITE%^break up the space and add an element of "+
-      "design to the tiled floor.\n");
+      "design to the tiled floor.\n"+
+      "%^RESET%^%^GREEN%^Some strange mass of plants has"+
+      " grown off to one corner.  It looks like a booth of"+
+      " some sorts with a table in it.   How the plants were"+
+      " made to grow in such a way seems odd.");
    set_smell("default","%^CYAN%^The %^WHITE%^enticing %^CYAN%^smell of "+
       "food makes your mouth water.%^RESET%^");
    set_listen("default","%^BOLD%^%^CYAN%^Soft piano music provides a "+
@@ -70,7 +74,12 @@ void create()
          "i%^WHITE%^ng r%^ORANGE%^i%^RESET%^%^ORANGE%^n%^BOLD%^g"+
          "%^WHITE%^s%^RESET%^%^CYAN%^. Small square marble tiles, "+
          "%^BOLD%^%^BLACK%^darkly colored%^RESET%^%^CYAN%^, add a "+
-         "nice touch to the patio floor.%^RESET%^"
+         "nice touch to the patio floor.%^RESET%^",
+      ({"plants","booth"}) : "The plants growing almost seem"+
+      " like a shelter of some sort.  A person or two could "+
+      "hide in here and have a private meal.  The owner looked"+
+      " to have added a small table an a couple of chairs "+
+      "with that in mind."     
    ]));
    set_exits(([
       "south" : ROOMS"3coinsrest"

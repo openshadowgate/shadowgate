@@ -193,7 +193,7 @@ int hit_func(object target)
 
         case 3:
             tell_room(EETO,"%^BOLD%^%^BLACK%^The sword darkens as the shadows begin to swirl and take on a humanoid form!");
-            ob2 = new("/d/islands/common/new/obj/smon.c");
+            ob2 = new("/d/islands/common/obj/new/smon.c");
             ob2->setup_shadow(ETO);
             ob2->move(EETO);
             break;

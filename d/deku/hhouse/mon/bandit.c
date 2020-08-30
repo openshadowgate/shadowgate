@@ -4,7 +4,7 @@
 inherit MONSTER;
 int attacked;
 
-void create() 
+void create()
 {
     object ob;
     ::create();
@@ -22,9 +22,9 @@ void create()
     "clean, and	littered with "+
     "nicks and scratches, some of which have already "+
     "began to scab over.  He carries a "+
-    "short sword in each hand.");    
+    "short sword in each hand.");
     set_class(!random(2) ? "thief" : "fighter");
-    set_guild_level(query_class(),25);
+    set_guild_level(query_class(),34);
     set_mlevel(query_class(),query_guild_level(query_class()));
     set("aggressive","kill_em");
     set_alignment(7);
@@ -65,14 +65,14 @@ void create()
     set_nogo(({FFROOMS+"iw20", BROOMS+"rr1", BROOMS+"rr2", BROOMS+"rr3", RROOMS+"3"}));
 }
 
-void stab_them() 
+void stab_them()
 {
     if(!objectp(TO)) return;
     if(!objectp(TP)) return;
-    if(!TP->query_invis() && objectp(TP) && attacked != 1) 
+    if(!TP->query_invis() && objectp(TP) && attacked != 1)
     {
         command("say I'll have my share!");
-        if(TO->is_class("fighter")) 
+        if(TO->is_class("fighter"))
         {
             command(!random(2) ? "rush "+TPQN : "kill "+TPQN);
         }
@@ -84,24 +84,24 @@ void stab_them()
     }
 }
 
-void flash_em(object targ) 
+void flash_em(object targ)
 {
     command("flash");
 }
 
-void heart_beat() 
+void heart_beat()
 {
     ::heart_beat();
     if(!objectp(TO)) return;
     if(!objectp(ETO)) return;
-    if(sizeof(TO->query_current_attackers()) < 1 && attacked == 1) 
+    if(sizeof(TO->query_current_attackers()) < 1 && attacked == 1)
     {
         attacked = 0;
         return;
     }
 }
 
-void kill_em() 
+void kill_em()
 {
     string msg;
     if(!objectp(TO)) return;
@@ -111,9 +111,9 @@ void kill_em()
     if(strsrch(base_name(TP), HHMON) != -1) return;
     if(TP->query_invis()) return;
     if(attacked) return;
-    switch(random(4)) 
+    switch(random(4))
     {
-        case 0: 
+        case 0:
             msg = "die ya damned abomination!!";
             break;
         case 1:
@@ -125,7 +125,7 @@ void kill_em()
         case 3:
             msg = "Time fer ya to get outta here!";
             break;
-    }	
+    }
     command("say "+msg);
     if(!objectp(TP)) return;
     command("stab "+TPQN);
