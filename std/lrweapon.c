@@ -18,6 +18,7 @@ nosave int mPerfect;
 void create() {
     ::create();
     set_rate_of_fire(2);
+    set_property("flrhit", 1);
 }
 
 void heart_beat() {
@@ -501,6 +502,9 @@ string query_lr_prof_type() {
 }
 
 int damage_done(object foe,int damage) {
+    
+    damage += COMBAT_D->get_lrdamage(TP, TO, foe);
+    
     return damage;
 }
 
