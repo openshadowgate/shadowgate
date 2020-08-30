@@ -69,6 +69,13 @@ void execute_attack(){
     int i;
 
     ::execute_attack();
+
+
+    if (!objectp(caster) || !objectp(ENV(castter))) {
+        dest_effect();
+        return;
+    }
+
     counter = 0;
     room  = environment(caster);
     party = (string)caster->query_party();
