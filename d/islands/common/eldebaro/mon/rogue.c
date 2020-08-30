@@ -88,6 +88,7 @@ void heart_beat()
     {
         exits = ETO->query_exits();
         i = sizeof(exits);
+        if(!i) return;
         j = random(i);
         exitn = (string)ETO->query_exit(exits[j]);
         if(exitn != "/d/shadow/room/forest/road3")
