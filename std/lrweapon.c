@@ -18,7 +18,6 @@ nosave int mPerfect;
 void create() {
     ::create();
     set_rate_of_fire(2);
-    set_property("flrhit", 1);
 }
 
 void heart_beat() {
@@ -92,7 +91,7 @@ int __Shoot(string str) {
     int distance,inc,to_hit,tohitroll,damage, hit,perfect, x;
     int thaco, flag, autoAim;
     object current,alt_foe,foe,ammo,env, *roomList;
-    
+
     if(this_player()->query_property("minion"))
         return 1;
 
@@ -221,10 +220,10 @@ int __Shoot(string str) {
         return 1;
     }
     foe = present(target,current);
-    
+
     if(!objectp(foe) || foe->query_unconscious())
         foe = present(target + " 2", current);
-    
+
     if(!objectp(foe))
         return notify_fail("There is no "+target+" there!\n");
     if(!TP->ok_to_kill(foe))
@@ -257,7 +256,7 @@ int __Shoot(string str) {
         tohitroll -= 2;
     if(distance >= query_range(1))
         tohitroll -= 5;
-    
+
     if(TP->query_class() == "ranger")
     {
         if(TP->is_favored_enemy(foe))
@@ -265,7 +264,7 @@ int __Shoot(string str) {
             tohitroll += 2;
             tohitroll += (FEATS_D->usable_feat(TP, "second favored enemy") * 2);
             tohitroll += (FEATS_D->usable_feat(TP, "third favored enemy") * 2);
-            
+
             if(foe->is_undead() && FEATS_D->usable_feat("slay the undead"))
                 tohitroll += 2;
         }
@@ -312,7 +311,7 @@ int __Shoot(string str) {
         damage = damage_done(foe, damage);
 
         damage += TP->query_property("damage bonus");
-        
+
         if(TP->query_class() == "ranger")
         {
             if(TP->is_favored_enemy(foe))
@@ -320,7 +319,7 @@ int __Shoot(string str) {
                 damage += 2;
                 damage += (FEATS_D->usable_feat(TP, "second favored enemy") * 2);
                 damage += (FEATS_D->usable_feat(TP, "third favored enemy") * 2);
-            
+
                 if(foe->is_undead() && FEATS_D->usable_feat("slay the undead"))
                     damage += 2;
             }
@@ -502,9 +501,9 @@ string query_lr_prof_type() {
 }
 
 int damage_done(object foe,int damage) {
-    
+
     damage += COMBAT_D->get_lrdamage(TP, TO, foe);
-    
+
     return damage;
 }
 
@@ -548,16 +547,16 @@ int calc_speed()
         ranger,
         fighter,
         arcane;
-    
+
     ranger  = ETO->query_class_level("ranger");
     arcane  = ETO->query_class_level("arcane_archer");
     fighter = ETO->query_class_level("fighter");
-    
+
     speed = 1 + max( ({ ranger / 20, arcane / 10, fighter / 40 }) );
-    
+
     return speed;
 }
-    
+
 void set_lr_type(string type){
     lr_type = type;
 }

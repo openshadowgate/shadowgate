@@ -692,7 +692,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
                 fired = 1;
             }
             if (fired) {
-                bonus_hit_damage = get_damage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
+                bonus_hit_damage = get_lrdamage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
                 if (FEATS_D->usable_feat(attacker, "point blank shot")) {
                     damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("dexterity"));
                 }
