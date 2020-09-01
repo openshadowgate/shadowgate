@@ -13,7 +13,7 @@ object sword;
 void create() {
     ::create();
     set_spell_name("earth reaver");
-    set_spell_level(([ "cleric" : 5 ]));
+    set_spell_level(([ "cleric" : 5, "innate" : 5 ]));
     set_spell_sphere("alteration");
     set_domains("earth");
     set_mystery("stone");
