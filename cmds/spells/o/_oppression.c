@@ -71,7 +71,7 @@ void execute_attack(){
     ::execute_attack();
 
 
-    if (!objectp(caster) || !objectp(ENV(castter))) {
+    if (!objectp(caster) || !objectp(ENV(caster))) {
         dest_effect();
         return;
     }
