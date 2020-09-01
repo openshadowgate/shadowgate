@@ -92,12 +92,15 @@ void InitInnate()
     if(FEATS_D->usable_feat(TO,"command the stone")) // meld into stone -1, stoneskin 1, earthquake 2, conjure elemental -1
     {
         feat_spells += ([
+            "strength of stone" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
             "meld into stone"   : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
             "stone body"        : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),
+            "wall of stone"     : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),
+            "statue"            : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),            
             "earthquake"        : (["type" : "spell", "daily uses" : 4, "level required" : 0 ]),
             "conjure elemental" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
             "earth reaver"      : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            "elemental body iv" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+            "shapechange"       : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
             ]);
     }
     if(FEATS_D->usable_feat(TO, "slay the undead"))

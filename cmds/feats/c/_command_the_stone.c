@@ -11,12 +11,15 @@ void create() {
     feat_desc("So strong becomes the Stonelord's bond with the earth, that he or she can command
 it by magical means. Several new spells are learned as innate abilities:
 
+  strength of stone,
   meld into stone,
-  stone body, 
-  earthquake,
-  conjure elemental (at will - earth only),
   earth reaver,
-  elemental body iv");
+  conjure elemental (earth only),
+  wall of stone,
+  statue,
+  stone body,
+  earthquake,
+  shapechange (golem only)");
     permanent(1);
 }
 
