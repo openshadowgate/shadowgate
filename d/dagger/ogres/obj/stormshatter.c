@@ -89,10 +89,10 @@ int weapon_hit(object target)
     //10% Chance to do an extra weapon hit
     if(!random(10))
     {
-        damage = roll_dice(1, 4);
-        tell_object(player, "Your arrow hits with a burst of electricity, frying your opponent's tissue.");
+        damage = roll_dice(1, 6);
+        tell_object(player, "%^BOLD%^%^BLACK%^Y%^RESET%^%^ORANGE%^o%^BOLD%^u%^WHITE%^r %^BLACK%^a%^RESET%^%^ORANGE%^r%^BOLD%^r%^WHITE%^o%^BLACK%^w hits with a b%^RESET%^%^ORANGE%^u%^BOLD%^r%^WHITE%^s%^BLACK%^t of e%^RESET%^%^ORANGE%^l%^BOLD%^e%^WHITE%^c%^BLACK%^t%^RESET%^%^ORANGE%^r%^BOLD%^i%^WHITE%^c%^BLACK%^i%^RESET%^%^ORANGE%^t%^BOLD%^y%^BLACK%^, frying your opponent's tissue.%^RESET%^");
         tell_room(room, sprintf("%s's arrow hits %s with a burst of electricity.", player->query_name(), target->query_name()), player);
-        target && target->do_damage("chest", damage);
+        target && target->cause_typed_damage(target, "body", damage, "electricity");
     }
     
     //Every HIT_INTERVAL hits, we do a splash damage effect
@@ -103,7 +103,7 @@ int weapon_hit(object target)
     
     hit_count = 0;
     
-    tell_object(player, "%^BOLD%^Your arrow explodes into a shower of electrical discharge.%^RESET%^");
+    tell_object(player, "%^BOLD%^%^BLACK%^Your arrow e%^RESET%^%^ORANGE%^x%^BOLD%^p%^WHITE%^l%^BLACK%^o%^RESET%^%^ORANGE%^d%^BOLD%^e%^WHITE%^s %^BLACK%^into a s%^RESET%^%^ORANGE%^h%^BOLD%^o%^WHITE%^w%^BLACK%^er of e%^RESET%^%^ORANGE%^l%^BOLD%^e%^WHITE%^c%^BLACK%^trical d%^RESET%^%^ORANGE%^i%^BOLD%^s%^WHITE%^c%^BLACK%^harge.%^RESET%^");
     attackers = player->query_attackers();
     
     foreach(object ob in attackers)
@@ -112,11 +112,11 @@ int weapon_hit(object target)
         //ob or player might be killed during this loop due to damage or reflect shields.
         if(ob && player)
         {
-            tell_object(player, sprintf("The electricity hits %s, causing massive burns!", ob->query_name()));
+            tell_object(player, sprintf("%^YELLOW%^BOLD%^The electricity hits %^WHITE%^%s%^YELLOW%^, causing massive burns!%^RESET%^", ob->query_name()));
             tell_room(room, sprintf("The electricity hits %s, causing massive burns!", ob->query_name()), player);
             damage = roll_dice(1, 10);
             ob->set_paralyzed(1, "%^BOLD%^You are shocked and can't move!%^RESET%^");
-            ob->do_damage("torso", damage);
+            ob->cause_typed_damage(ob, "body", damage, "electricity");
         }
     }
     
