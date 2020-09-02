@@ -327,7 +327,7 @@ int __Shoot(string str) {
 
         if (perfect || mPerfect) {
             damage=damage*4;
-            if(FEATS_D->usable_feat(TP, "smite the lifeless") && foe->is_undead() && (foe->query_level() < TP->query_level() + 10 ))
+            if(FEATS_D->usable_feat(TP, "smite the lifeless") && foe->is_undead() && (foe->query_level() < TP->query_level() + 7 ))
             {
                 if(!foe->fort_save(TP->query_level()))
                 {
