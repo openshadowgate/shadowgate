@@ -327,6 +327,14 @@ int __Shoot(string str) {
 
         if (perfect || mPerfect) {
             damage=damage*4;
+            if(FEATS_D->usable_feat(TP, "smite the lifeless") && foe->is_undead() && (foe->query_level() < TP->query_level() + 10 ))
+            {
+                if(!foe->fort_save(TP->query_level()))
+                {
+                    write("Your shot smites your undead foe into dust!");
+                    foe->cause_typed_damage(foe, "body", foe->query_max_hp() + 500, "divine");
+                }
+            }       
         }
         tell_room(current,"A "+ capitalize(query_ammo())+" from "+fdir+" hits "+whom+"!",foe);
 //Bows are erroring all over the place on the line about querying a hit message, and I can't
@@ -337,7 +345,7 @@ int __Shoot(string str) {
 
         foe->add_attacker(ETO);
         //hit = (int)foe->do_damage(foe->return_target_limb(),damage);
-        damage = foe->do_typed_damage_effects(TP, "body", damage, "piercing");
+        foe->cause_typed_damage(foe, "body", damage, "piercing");
         if(objectp(current_ammo)) {
             foe->add_poisoning(current_ammo->query_poisoning());
         }

@@ -509,7 +509,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
                 if (!target->fort_save(attacker->query_level())) {
                     tell_object(attacker, "%^BOLD%^You unleash a flash of blinding white energy as you destroy " + target->QCN + "'s undead energy and end them!%^RESET%^");
                     tell_object(target, "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends your undead existence!%^RESET%^");
-                    tell_room(environment(attacker), "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends " + target->QCN + "'s undead existence!%^RESET%^");
+                    tell_room(environment(attacker), "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends " + target->QCN + "'s undead existence!%^RESET%^", ({ target, attacker }));
                     target->set_hp(-100);
                 }
             }
