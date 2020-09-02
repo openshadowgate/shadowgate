@@ -25,7 +25,7 @@ void create()
     ::create();
     
     set_name("longbow");
-    set_short("%^BOLD%^%^BLACK%^Sto%^RESET%^%^ORANGE%^r%^BOLD%^m%^WHITE%^s%^ORANGE%^h%^RESET%^%^ORANGE%^a%^BOLD%^%^BLACK%^t%^RESET%^%^ORANGE%^t%^BOLD%^e%^WHITE%^r %^RESET%^");
+    set_short("%^BOLD%^%^BLACK%^Sto%^RESET%^%^ORANGE%^r%^BOLD%^m%^WHITE%^s%^ORANGE%^h%^RESET%^%^ORANGE%^a%^BOLD%^%^BLACK%^t%^RESET%^%^ORANGE%^t%^BOLD%^e%^WHITE%^r%^RESET%^");
     set_long("\
 This massive bow seems to be out of a single large bone from some sort of animal. The bone has 
 been strenghened by sinews tanned and wrapped around it tightly. The tip of the bow has been
@@ -73,7 +73,7 @@ int weapon_hit(object target)
     object room,
            *attackers;
            
-    int damage;
+    int damage, max;
     
     //Should only be one environment call per function call
     //environment() is a very costly process in terms of comp lines/sec
@@ -105,17 +105,21 @@ int weapon_hit(object target)
     
     tell_object(player, "%^BOLD%^%^BLACK%^Your arrow e%^RESET%^%^ORANGE%^x%^BOLD%^p%^WHITE%^l%^BLACK%^o%^RESET%^%^ORANGE%^d%^BOLD%^e%^WHITE%^s %^BLACK%^into a s%^RESET%^%^ORANGE%^h%^BOLD%^o%^WHITE%^w%^BLACK%^er of e%^RESET%^%^ORANGE%^l%^BOLD%^e%^WHITE%^c%^BLACK%^trical d%^RESET%^%^ORANGE%^i%^BOLD%^s%^WHITE%^c%^BLACK%^harge.%^RESET%^");
     attackers = player->query_attackers();
+    attackers = shuffle(attackers);
+    max = min( ({ sizeof(attackers), 8 }) );
+    attackers = attackers[0..max];
+    
     
     foreach(object ob in attackers)
     {
         //Essential to check for existence of ob and player for each iteration.
         //ob or player might be killed during this loop due to damage or reflect shields.
-        if(ob && player)
+        if(ob && player && !ob->reflex_save(player->query_level()))
         {
-            tell_object(player, sprintf("%^YELLOW%^BOLD%^The electricity hits %^WHITE%^%s%^YELLOW%^, causing massive burns!%^RESET%^", ob->query_name()));
-            tell_room(room, sprintf("The electricity hits %s, causing massive burns!", ob->query_name()), player);
+            tell_object(player, "%^YELLOW%^BOLD%^The electricity hits %^WHITE%^"+ob->query_name()+"%^YELLOW%^, causing massive burns!%^RESET%^");
+            tell_room(room, "%^BOLD%^The electricity hits %^YELLOW%^"+ob->query_name()+"%^WHITE%^, causing massive burns!", player);
             damage = roll_dice(1, 10);
-            ob->set_paralyzed(1, "%^BOLD%^You are shocked and can't move!%^RESET%^");
+            ob->set_paralyzed(roll_dice(1,4) * 8, "%^BOLD%^You are shocked and can't move!%^RESET%^");
             ob->cause_typed_damage(ob, "body", damage, "electricity");
         }
     }
