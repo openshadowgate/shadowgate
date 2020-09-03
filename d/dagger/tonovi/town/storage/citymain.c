@@ -11,7 +11,9 @@ int get_mobs;
 void create(){
    set_repop(40);
    if(!random(3))  get_mobs = 1;
-   if(get_mobs)   pick_critters();
+   //if(get_mobs)   pick_critters();
+   if(get_mobs)
+       set_monsters(({ "/d/dagger/tonovi/guards/guard" }),({1+random(2)}));
    ::create();
    set_terrain(CITY);
    set_travel(PAVED_ROAD);
@@ -26,7 +28,7 @@ void reset() {
    if(get_mobs) {
      if(!active = has_mobs()) {
        if(mons) mons = ([]);
-       pick_critters();
+       set_monsters(({ "/d/dagger/tonovi/guards/guard" }),({1+random(2)}));
      }
    }
    ::reset();
@@ -47,7 +49,7 @@ void reset() {
                break;
    }
 }
-
+/*
 void pick_critters() {
       switch(random(6)){
          case 0:   set_monsters(({MPATH"guard1_city"}),({1}));
@@ -71,3 +73,4 @@ void pick_critters() {
          default:  break;
       }
 }
+*/

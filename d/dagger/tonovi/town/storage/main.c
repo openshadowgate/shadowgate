@@ -2,7 +2,7 @@
 
 #include "/d/dagger/tonovi/town/short.h"
 
-inherit ROOM;
+inherit CROOM;
 
 string GRtype;
 int citmax, gd1max, gd2max;
@@ -12,6 +12,7 @@ void set_room_type(string str);
 string query_room_type();
 
 void create(){
+    set_monsters(({ "/d/dagger/tonovi/guards/guard" }),({ random(2)}));
     ::create();
    set_terrain(WOOD_BUILDING);
    set_travel(DIRT_ROAD);
@@ -50,7 +51,7 @@ void reset(){
     string rmtype;
     object ob;
     ::reset();
-    if(base_name(TO) == MAIN)       check_critters();
+    //if(base_name(TO) == MAIN)       check_critters();
     if(present("Gtonovimon"))       return;
     if(citmax && gd1max && gd2max)  return;
     if(random(2))                   return;
@@ -61,12 +62,13 @@ void reset(){
       if(objectp(ob)) ob->move(TO);
     return;
 }
-
+/*
 void check_critters() {
    if(sizeof(children("/d/dagger/tonovi/mon/citizen")) > 15)
       citmax = 1;
-   if(sizeof(children("/d/dagger/tonovi/mon/guard1_city")) > 25)
+   if(sizeof(children("/d/dagger/tonovi/guards/guard")) > 25)
       gd1max = 1;
    if(sizeof(children("/d/dagger/tonovi/mon/guard2_city")) > 20)
       gd2max = 1;
 }
+*/
