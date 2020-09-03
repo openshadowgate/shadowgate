@@ -273,7 +273,7 @@ void blow_horn(object ob)
     if (horn) {
         return;
     }
-    broadcast_area("/d/shadow/city", "%^BOLD%^%^RED%^The warning horn blows, alerting the city guards!");
+    broadcast_area("/d/tonovi/town", "%^BOLD%^%^RED%^The warning horn blows, alerting the city guards!");
     horn = 1;
 }
 
