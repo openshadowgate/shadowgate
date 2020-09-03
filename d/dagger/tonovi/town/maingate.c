@@ -4,7 +4,7 @@
 inherit CROOM;
 
 void create(){
-    set_monsters(({MPATH"guardcapt"}),({1+random(2)}));
+    set_monsters(({ "/d/dagger/tonovi/town/guards/guard" }),({1+random(2)}));
     ::create();
     set_light(2);
     set_terrain(CITY);
