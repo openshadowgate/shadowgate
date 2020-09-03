@@ -56,10 +56,10 @@ void reset(){
     if(citmax && gd1max && gd2max)  return;
     if(random(2))                   return;
     rmtype = TO->query_room_type();
-    if((rmtype == "bazaar" || rmtype == "street") && (citmax || gd1max))
-       return;
-    if(ob = OVER->get_room_monster(rmtype))
-      if(objectp(ob)) ob->move(TO);
+    //if((rmtype == "bazaar" || rmtype == "street") && (citmax || gd1max))
+    //   return;
+    //if(ob = OVER->get_room_monster(rmtype))
+    //  if(objectp(ob)) ob->move(TO);
     return;
 }
 /*

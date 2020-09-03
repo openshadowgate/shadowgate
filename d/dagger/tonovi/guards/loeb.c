@@ -15,13 +15,13 @@ void create()
     string rank;
     ::create();
     will_open_doors(1);
-    set_nogo(({ "/d/dagger/tonovi/road2", }));
+    set_nogo(({ "/d/dagger/tonovi/road2", "/d/dagger/tonovi/town/street1", "/d/dagger/tonovi/town/wall1", "/d/dagger/tonovi/town/wall3" }));
     set_name("Marvin Loeb");
     set_id(({ "marvin", "marvin loeb", "loeb", "guard", "Marvin Loeb", "Marvin", "Loeb", "champion", CITYLAW }));
     set_short("%^CYAN%^Marvin Loeb%^BLACK%^, C%^RESET%^%^CYAN%^h%^BOLD%^a%^WHITE%^m%^BLACK%^pion of the C%^RESET%^%^CYAN%^i%^BOLD%^t%^WHITE%^y %^BLACK%^G%^RESET%^%^CYAN%^u%^BOLD%^a%^WHITE%^r%^BLACK%^d%^RESET%^");
     set_gender(1);
     set_race("human");
-    set_hd(70 + random(10), 10);
+    set_hd(70 + random(10), 1);
     set_hp(TO->query_max_hp());
     set_new_exp(20, "normal");
     set_class("fighter");
@@ -74,7 +74,7 @@ void create()
     set_func_chance(35);
     set_property("full attacks", 1);
     set_property("magic resistance", random(60) + 10);
-    set_ac(-10 - random(10));
+    set_ac(-50 - random(10));
     set_detecting_invis(1);
     set_exp(1);
     set_long("This " + query_gender() + " guard wears the standard uniform of "
