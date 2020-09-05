@@ -1,4 +1,6 @@
+//elf vampire coded by hades 9/5/20
 #include <std.h>
+#include "../elf.h"
 inherit MONSTER;
 
 int FLAG = 0;
@@ -45,7 +47,7 @@ void create()
     set_spells(({
         "eyebite",
         "dispel magic",
-        "exhume corpses",
+        "vampiric touch",
         "necrophage",
         "powerword stun"
     }));
@@ -89,6 +91,8 @@ void create()
         ob->set_spell(9);
         break;
     }
+    new(OBJ"knife")->move(TO);
+    force_me("wield knife");
 }
 
 
@@ -119,6 +123,10 @@ void heart_beat()
         TO->force_me("say %^BOLD%^%^RED%^I HAVEN'T BEEN HERE FOR CENTURIES TO DIE LIKE THIS!");
         new("/cmds/spells/b/_blink")->use_spell(TO, TO, 50, 100, "mage");
         TO->add_hp(random(500) + 675);
+    }
+    if (!present(TO->query_name() + "_monster 3", ETO)) {
+        new("/cmds/spells/m/_monster summoning vii")->use_spell(TO, TO, 50, 100, "mage");
+        return 0;
     }
     if(present("corpse",ETO))
     new("/cmds/spells/mage/c/_create_greater_undead")->use_spell(TO, TO, 50, 100, "mage");
