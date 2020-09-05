@@ -19,15 +19,9 @@ void create()
     " to become an evil vampire thrall.");
     set_race("elf");
     set_alignment(3);
-    set_hd(59, 1000);
-    set_class("mage");
-    set_mlevel("mage", 50);
-    set_mlevel("thief", 50);
-    set_guild_level("mage", 50);
-    set_guild_level("thief", 50);
+    set_hd(50, 1000);
     set_gender("male");
     add_search_path("/cmds/wizard");
-    set("aggressive", 20);
     add_money("gold", random(10000) + 50000);
     set_stats("strength", 12);
     set_stats("constitution", 15);
@@ -51,7 +45,10 @@ void create()
         "necrophage",
         "powerword stun"
     }));
-
+    set_class("mage");
+    set_class("thief");
+    set_mlevel("mage", 50);
+    set_mlevel("thief", 50);
     set_property("water breather", 1);
     set_property("full attacks", 1);
     set_property("weapon resistance", 5);
@@ -136,6 +133,6 @@ void heart_beat()
         new("/cmds/spells/g/_gate")->use_spell(TO, "summoning", 50, 100, "mage"); 
     }
     if(present("corpse",ETO))
-    new("/cmds/spells/c/_create_greater_undead")->use_spell(TO, TO, 50, 100, "mage");
+    new("/cmds/spells/c/_create_greater_undead")->use_spell(TO, 0, 50, 100, "mage");
     return;
 }
