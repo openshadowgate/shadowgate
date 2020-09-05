@@ -135,6 +135,6 @@ void heart_beat()
         new("/cmds/spells/g/_gate")->use_spell(TO, "summoning", 50, 100, "mage"); 
     }
     if(present("corpse",ETO))
-    new("/cmds/spells/mage/c/_create_greater_undead")->use_spell(TO, "", 50, 100, "mage");
+    new("/cmds/spells/c/_create_greater_undead")->use_spell(TO, TO, 50, 100, "mage");
     return;
 }
