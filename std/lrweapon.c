@@ -91,7 +91,7 @@ int __Shoot(string str) {
     int distance,inc,to_hit,tohitroll,damage, hit,perfect, x;
     int thaco, flag, autoAim;
     object current,alt_foe,foe,ammo,env, *roomList;
-    
+
     if(this_player()->query_property("minion"))
         return 1;
 
@@ -220,10 +220,10 @@ int __Shoot(string str) {
         return 1;
     }
     foe = present(target,current);
-    
+
     if(!objectp(foe) || foe->query_unconscious())
         foe = present(target + " 2", current);
-    
+
     if(!objectp(foe))
         return notify_fail("There is no "+target+" there!\n");
     if(!TP->ok_to_kill(foe))
@@ -256,7 +256,7 @@ int __Shoot(string str) {
         tohitroll -= 2;
     if(distance >= query_range(1))
         tohitroll -= 5;
-    
+
     if(TP->query_class() == "ranger")
     {
         if(TP->is_favored_enemy(foe))
@@ -264,7 +264,7 @@ int __Shoot(string str) {
             tohitroll += 2;
             tohitroll += (FEATS_D->usable_feat(TP, "second favored enemy") * 2);
             tohitroll += (FEATS_D->usable_feat(TP, "third favored enemy") * 2);
-            
+
             if(foe->is_undead() && FEATS_D->usable_feat("slay the undead"))
                 tohitroll += 2;
         }
@@ -311,7 +311,7 @@ int __Shoot(string str) {
         damage = damage_done(foe, damage);
 
         damage += TP->query_property("damage bonus");
-        
+
         if(TP->query_class() == "ranger")
         {
             if(TP->is_favored_enemy(foe))
@@ -319,7 +319,7 @@ int __Shoot(string str) {
                 damage += 2;
                 damage += (FEATS_D->usable_feat(TP, "second favored enemy") * 2);
                 damage += (FEATS_D->usable_feat(TP, "third favored enemy") * 2);
-            
+
                 if(foe->is_undead() && FEATS_D->usable_feat("slay the undead"))
                     damage += 2;
             }
@@ -327,6 +327,14 @@ int __Shoot(string str) {
 
         if (perfect || mPerfect) {
             damage=damage*4;
+            if(FEATS_D->usable_feat(TP, "smite the lifeless") && foe->is_undead() && (foe->query_level() < TP->query_level() + 7 ))
+            {
+                if(!foe->fort_save(TP->query_level()))
+                {
+                    write("Your shot smites your undead foe into dust!");
+                    foe->cause_typed_damage(foe, "body", foe->query_max_hp() + 500, "divine");
+                }
+            }       
         }
         tell_room(current,"A "+ capitalize(query_ammo())+" from "+fdir+" hits "+whom+"!",foe);
 //Bows are erroring all over the place on the line about querying a hit message, and I can't
@@ -336,7 +344,8 @@ int __Shoot(string str) {
         tell_object(foe,"A "+ capitalize(query_ammo())+" from "+fdir+" hits you!");
 
         foe->add_attacker(ETO);
-        hit = (int)foe->do_damage(foe->return_target_limb(),damage);
+        //hit = (int)foe->do_damage(foe->return_target_limb(),damage);
+        foe->cause_typed_damage(foe, "body", damage, "piercing");
         if(objectp(current_ammo)) {
             foe->add_poisoning(current_ammo->query_poisoning());
         }
@@ -500,6 +509,9 @@ string query_lr_prof_type() {
 }
 
 int damage_done(object foe,int damage) {
+
+    damage += COMBAT_D->get_lrdamage(TP, TO, foe);
+
     return damage;
 }
 
@@ -519,6 +531,7 @@ object get_current_ammo() {
     return current_ammo;
 }
 
+/*
 int calc_speed() {
     int prof;
     int speed = 1;
@@ -532,6 +545,23 @@ int calc_speed() {
         speed++;
         prof -= 15;
     }
+    return speed;
+}
+*/
+
+int calc_speed()
+{
+    int speed,
+        ranger,
+        fighter,
+        arcane;
+
+    ranger  = ETO->query_class_level("ranger");
+    arcane  = ETO->query_class_level("arcane_archer");
+    fighter = ETO->query_class_level("fighter");
+
+    speed = 1 + max( ({ ranger / 20, arcane / 10, fighter / 40 }) );
+
     return speed;
 }
 

@@ -50,9 +50,7 @@ void activate_judgements(string* judgements)
     }
     active_judgements = judgements;
 
-    if (caster->query_property("lend_judgement")) {
-        lendingto = caster->query_property("lend_judgement");
-    }
+    lendingto = caster->query_property("lend_judgement");
 
     apply_judgements(judgements, 1);
     tell_object(caster, "%^BOLD%^%^WHITE%^You with a mere will you call out to the arcane for the strength.");
@@ -73,19 +71,19 @@ void apply_judgements(string* judgements, int direction)
 {
     string j;
     int power;
-    object lendingto;
     int maxtolend, i;
 
     if (objectp(lendingto)) {
+        power = clevel;
         maxtolend = caster->query_property("greater_lend_judgement") ? 3 : 1;
+        if (direction > 0) {
+            tell_object(caster, "%^BOLD%^%^WHITE%^" + lendingto->QCN + " is infused with your zeal.");
+            tell_object(lendingto, "%^BOLD%^%^WHITE%^You are infused with power of the zeal!");
+        }
 
         for (i = 0; i < maxtolend; i++) {
             if (member_array(judgements[i], JUDGEMENT_TYPES) != -1) {
                 call_other(TO, "judgement_" + judgements[i], lendingto, direction, power);
-                if (direction > 0) {
-                    tell_object(caster, "%^BOLD%^%^WHITE%^" + lendingto->QCN + " is infused with your zeal.");
-                    tell_object(lendingto, "%^BOLD%^%^WHITE%^You are infused with power of the zeal!");
-                }
             }
         }
     }

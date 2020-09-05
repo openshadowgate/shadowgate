@@ -63,12 +63,12 @@ dest_effect()
 
     if(objectp(caster))
     {
+        caster->remove_property("lend_judgement");
         if(present("judgement_obj",caster))
         {
             controller = present("judgement_obj",caster);
             controller->activate_judgements(controller->query_active_judgements());
         }
-        caster->remove_property("lend_judgement");
         caster->remove_property("greater_lend_judgement");
         tell_object(caster,"%^RED%^%^BOLD%^You are no longer lending judgement!");
     }

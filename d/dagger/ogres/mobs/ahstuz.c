@@ -61,6 +61,7 @@ void create() {
     set_stats("charisma", 10);
        new(OBJ"doubletflames")->move(TO);
        new(OBJ"flesh_dagger")->move(TO);
+       new(OBJ"stormshatter")->move(TO);
        command("wield dagger");
      command("wear doublet");
     set("aggressive", 20);
@@ -141,7 +142,8 @@ void rip(object targ){
     } else {
 	tell_room(environment(targ), "%^BOLD%^%^RED%^Ahstuz raises his arms "+
          "to the air and roars at the top of his lungs!%^RESET%^");
-    "/std/effect/status/panicked"->apply_effect(targ,roll_dice(1,6));
+    if(!targ->will_save(query_level()))
+        "/std/effect/status/panicked"->apply_effect(targ,roll_dice(1,6));
     }
 }
 

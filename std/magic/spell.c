@@ -987,7 +987,8 @@ void wizard_interface(object user, string type, string targ)
                     TO->remove();
                     return;
                 }
-                if (!help_or_harm) {
+// Removing the limitations on which spells work in shift, to make wild spellcraft match natural spell feat (3.5/5e). N, 8/20.
+/*                if (!help_or_harm) {
                     tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
                     TO->remove();
                     return;
@@ -996,7 +997,7 @@ void wizard_interface(object user, string type, string targ)
                     tell_object(caster, "That spell is far too complex for you to cast successfully in your current state!");
                     TO->remove();
                     return;
-                }
+                } */
             }
         }
         if (!shapeob->can_cast()) {

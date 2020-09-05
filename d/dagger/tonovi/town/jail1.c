@@ -133,7 +133,7 @@ void reset() {
    if(!present("waynon"))
       new(MPATH"jail_guard")->move(TO);
    if(!present("tonovi guard"))
-      new(MPATH"guard2_city")->move(TO);
+      new("/d/dagger/tonovi/guards/guard")->move(TO);
 }
 
 int peer_out(string str) {
