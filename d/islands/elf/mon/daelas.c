@@ -130,7 +130,7 @@ void heart_beat()
         TO->add_hp(random(500) + 675);
     }
     if (!TO->query_property("has_elemental")  {
-        new("/cmds/spells/g/_gate")->use_spell(TO, TO, 50, 100, "mage"); 
+        new("/cmds/spells/g/_gate")->use_spell(TO, "summoning", 50, 100, "mage"); 
     }
     if(present("corpse",ETO))
     new("/cmds/spells/mage/c/_create_greater_undead")->use_spell(TO, TO, 50, 100, "mage");
