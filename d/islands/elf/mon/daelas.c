@@ -22,9 +22,9 @@ void create()
     set_hd(59, 1000);
     set_class("mage");
     set_mlevel("mage", 50);
-    set_mlevel("theif", 50);
+    set_mlevel("thief", 50);
     set_guild_level("mage", 50);
-    set_guild_level("theif", 50);
+    set_guild_level("thief", 50);
     set_gender("male");
     add_search_path("/cmds/wizard");
     set("aggressive", 20);
@@ -72,6 +72,7 @@ void create()
         "%^MAGENTA%^Daelas says%^RESET%^: They made me kill the prince and princess.  I had to obey... ",
         "Daelas wavers, like he has some great burden he is carrying.",
         "%^MAGENTA%^Daelas says%^RESET%^: The heart of water sealed us for centuries... was it move?",
+        "%^MAGENTA%^Daelas says%^RESET%^: Leave me now...I don't want your death on my hands as well.",
     }), 0);
     set_property("function and attack",1);
     add_attack_bonus(20);
