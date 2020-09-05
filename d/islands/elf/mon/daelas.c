@@ -22,6 +22,7 @@ void create()
     set_hd(50, 1000);
     set_gender("male");
     add_search_path("/cmds/wizard");
+    add_search_path("/cmds/thief");
     add_money("gold", random(10000) + 50000);
     set_stats("strength", 12);
     set_stats("constitution", 15);
@@ -58,7 +59,7 @@ void create()
     set_monster_feats(({
         "spell penetration", "greater spell penetration",
         "scramble", "evasion","combat reflexes",
-        "dodge","mobility",
+        "dodge","mobility","blindfighting"
     }));
     set_mob_magic_resistance("high");
     set_emotes(5, ({
@@ -136,3 +137,33 @@ void heart_beat()
     new("/cmds/spells/c/_create_greater_undead")->use_spell(TO, 0, 50, 100, "mage");
     return;
 }
+init()
+{
+  ::init();
+  add_action("xlook", "look");
+
+}
+
+int xlook(string str)
+{
+  object ob;
+  if(!str) return 0;
+  if((member_array(str, query_id()) != -1) &&
+
+  ((int)TP->query_level() > 15) &&
+  ((int)TP->query_stats("charisma") < 25))
+  {
+    force_me("say Stop looking at me, "+TPQCN+
+    "...Nnnnn...I can't stand being judged by those condeming eyes!");
+    TO->force_me("stab "+TPQN);
+
+    return 0;
+  }
+  else if(member_array(str, query_id()) != -1)
+  {
+    force_me("say Excuse me, "+TPQCN+", I normally "+
+    "kill anyone that looks at me.  Just leave if "+
+    "you don't want to die here.");
+
+    return 0;
+  }

@@ -22,11 +22,13 @@ void create(){
     "were left to fend for themselves after.");
     set_property("lore difficulty",35);
     set_value(1000);
-    set_size(1);
     set_property("enchantment",3+random(3));
     set_wield((:TO,"extra_wield":));
     set_unwield((:TO,"removeme":));
     set_hit((:TO,"extra_hit":));
+    set_item_bonus("stealth", 4);
+    set_item_bonus("reflex", 4);  
+    set_item_bonus("perception", 4);  
 }
 
 int extra_wield(){

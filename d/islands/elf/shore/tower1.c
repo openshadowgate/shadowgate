@@ -22,4 +22,7 @@ void create(){
         "This is the remains of a tower.  It is tilted and sticking out of the gray mud.",
  	   ]));
 }
-
+void reset(){
+   if(!present("daelas",TO))
+     new(MON"daelas")->move(TO);
+}
