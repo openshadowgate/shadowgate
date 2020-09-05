@@ -46,7 +46,7 @@ void create()
     set_spell_chance(60);
     set_spells(({
         "eyebite",
-        "dispel magic",
+        "animus blast",
         "vampiric touch",
         "necrophage",
         "powerword stun"
@@ -65,17 +65,19 @@ void create()
     }));
     set_mob_magic_resistance("high");
     set_emotes(5, ({
-        "Daelas says: I can't be blamed...I had no choice. " ,
-        "Daelas says: I died for my people only to be brought back and forced to obey.",
-        "Daelas says: The master vampire...the things I was forced to do.",
-        "Daelas says: I don't even know how many years have passed.  Hundreds?  Thousands?",
-        "Daelas says: They made me kill the prince and princess.  I had to obey... ",
+        "%^MAGENTA%^Daelas says%^RESET%^: I can't be blamed...I had no choice. " ,
+        "%^MAGENTA%^Daelas says%^RESET%^: I died for my people only to be brought back and forced to obey.",
+        "%^MAGENTA%^Daelas says%^RESET%^: The master vampire...the things I was forced to do.",
+        "%^MAGENTA%^Daelas says%^RESET%^: I don't even know how many years have passed.  Hundreds?  Thousands?",
+        "%^MAGENTA%^Daelas says%^RESET%^: They made me kill the prince and princess.  I had to obey... ",
         "Daelas wavers, like he has some great burden he is carrying.",
-        "Daelas says: The heart of water sealed us for centuries... was it move?",
+        "%^MAGENTA%^Daelas says%^RESET%^: The heart of water sealed us for centuries... was it move?",
     }), 0);
     set_property("function and attack",1);
     add_attack_bonus(20);
     add_damage_bonus(20);
+    set_skill("perception",50); 
+    set_skill("stealth",50); 
 
 
     ob = new("/d/magic/scroll");
@@ -133,6 +135,6 @@ void heart_beat()
         new("/cmds/spells/g/_gate")->use_spell(TO, "summoning", 50, 100, "mage"); 
     }
     if(present("corpse",ETO))
-    new("/cmds/spells/mage/c/_create_greater_undead")->use_spell(TO, TO, 50, 100, "mage");
+    new("/cmds/spells/mage/c/_create_greater_undead")->use_spell(TO, "", 50, 100, "mage");
     return;
 }
