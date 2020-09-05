@@ -60,7 +60,8 @@ void create()
     set_property("no death", 1);
     set_monster_feats(({
         "spell penetration", "greater spell penetration",
-        "scramble",
+        "scramble", "evasion","combat reflexes",
+        "dodge","mobility",
     }));
     set_mob_magic_resistance("high");
     set_emotes(5, ({
@@ -69,8 +70,12 @@ void create()
         "Daelas says: The master vampire...the things I was forced to do.",
         "Daelas says: I don't even know how many years have passed.  Hundreds?  Thousands?",
         "Daelas says: They made me kill the prince and princess.  I had to obey... ",
-        "Daelas wavers, like he has some great burden he is carrying."
+        "Daelas wavers, like he has some great burden he is carrying.",
+        "Daelas says: The heart of water sealed us for centuries... was it move?",
     }), 0);
+    set_property("function and attack",1);
+    add_attack_bonus(20);
+    add_damage_bonus(20);
 
 
     ob = new("/d/magic/scroll");
@@ -124,9 +129,8 @@ void heart_beat()
         new("/cmds/spells/b/_blink")->use_spell(TO, TO, 50, 100, "mage");
         TO->add_hp(random(500) + 675);
     }
-    if (!present(TO->query_name() + "_monster 3", ETO)) {
-        new("/cmds/spells/m/_monster summoning vii")->use_spell(TO, TO, 50, 100, "mage");
-        return 0;
+    if (!TO->query_property("has_elemental")  {
+        new("/cmds/spells/g/_gate")->use_spell(TO, TO, 50, 100, "mage"); 
     }
     if(present("corpse",ETO))
     new("/cmds/spells/mage/c/_create_greater_undead")->use_spell(TO, TO, 50, 100, "mage");
