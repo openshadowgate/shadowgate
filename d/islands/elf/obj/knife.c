@@ -33,7 +33,10 @@ void create(){
 }
 
 int extra_wield(){
- 
+    if (ETO->query_property("good item")) {
+        tell_object(ETO, "The knife rejects you while you are using such goodly items!");
+        return 0;
+    }
    
    tell_object(ETO,"%^BLUE%^The knife glows with a pale light.");
    tell_room(EETO,"%^RED%^"+ETOQCN+" looks sinister "+
