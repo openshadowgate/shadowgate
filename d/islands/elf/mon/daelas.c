@@ -165,4 +165,8 @@ int xlook(string str)
 
     return 0;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c206178931b00ce1876fb590b29c449d9f7b396d
