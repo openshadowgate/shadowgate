@@ -63,7 +63,7 @@ void create()
     }));
     set_mob_magic_resistance("high");
     set_emotes(5, ({
-        "%^MAGENTA%^Daelas says%^RESET%^: I can't be blamed...I had no choice. " ,
+        "%^MAGENTA%^Daelas says%^RESET%^: I can't e blamed...I had no choice. " ,
         "%^MAGENTA%^Daelas says%^RESET%^: I died for my people only to be brought back and forced to obey.",
         "%^MAGENTA%^Daelas says%^RESET%^: The master vampire...the things I was forced to do.",
         "%^MAGENTA%^Daelas says%^RESET%^: I don't even know how many years have passed.  Hundreds?  Thousands?",
@@ -102,7 +102,6 @@ void create()
     force_me("wield knife");
     force_me("wearall");
 }
-
 
 void special1(object targ)
 {
@@ -168,4 +167,8 @@ int xlook(string str)
 
     return 0;
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> c206178931b00ce1876fb590b29c449d9f7b396d
