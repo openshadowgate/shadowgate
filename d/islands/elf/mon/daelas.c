@@ -167,3 +167,4 @@ int xlook(string str)
 
     return 0;
   }
+}
