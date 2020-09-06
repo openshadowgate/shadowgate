@@ -97,8 +97,10 @@ void create()
         ob->set_spell(9);
         break;
     }
+    new(OBJ"vamp_gloves")->move(TO);
     new(OBJ"knife")->move(TO);
     force_me("wield knife");
+    force_me("wearall");
 }
 
 
@@ -141,12 +143,10 @@ init()
 {
   ::init();
   add_action("xlook", "look");
-
 }
 
 int xlook(string str)
 {
-  object ob;
   if(!str) return 0;
   if((member_array(str, query_id()) != -1) &&
 
@@ -155,7 +155,8 @@ int xlook(string str)
   {
     force_me("say Stop looking at me, "+TPQCN+
     "...Nnnnn...I can't stand being judged by those condeming eyes!");
-    TO->force_me("stab "+TPQN);
+    force_me("hide in shadows");
+    force_me("stab "+TPQN);
 
     return 0;
   }

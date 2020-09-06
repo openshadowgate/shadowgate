@@ -29,6 +29,7 @@ void create(){
     set_item_bonus("stealth", 4);
     set_item_bonus("reflex", 4);  
     set_item_bonus("perception", 4);  
+    set_item_bonus("bonus_spell_slots_5",1);
 }
 
 int extra_wield(){
