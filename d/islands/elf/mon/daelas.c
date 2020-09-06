@@ -32,6 +32,7 @@ void create()
     set_stats("charisma", 17);
     set_body_type("human");
     set_max_hp(6500);
+    set_new_exp(45,"high");
     set_max_level(47);
     set_hp(query_max_hp());
     set_size(2);
@@ -69,9 +70,15 @@ void create()
         "%^MAGENTA%^Daelas says%^RESET%^: I don't even know how many years have passed.  Hundreds?  Thousands?",
         "%^MAGENTA%^Daelas says%^RESET%^: They made me kill the prince and princess.  I had to obey... ",
         "Daelas wavers, like he has some great burden he is carrying.",
-        "%^MAGENTA%^Daelas says%^RESET%^: The heart of water sealed us for centuries... was it move?",
+        "%^MAGENTA%^Daelas says%^RESET%^: The heart of water sealed us for centuries... was it moved?",
         "%^MAGENTA%^Daelas says%^RESET%^: Leave me now...I don't want your death on my hands as well.",
     }), 0);
+    set_achats(2, ({
+        "%^MAGENTA%^Daelas says%^RESET%^:I see you have chosen death.",
+        "%^MAGENTA%^Daelas says%^RESET%^:You should run.  Prove you are the coward.",
+        "%^MAGENTA%^Daelas sasy%^RESET%^:I hate fighting. Let us finish this quickly.",
+        "%^MAGENTA%^Daelas sasy%^RESET%^:Looks like you have resolved to die here."
+     }) );
     set_property("function and attack",1);
     add_attack_bonus(20);
     add_damage_bonus(20);
