@@ -1,5 +1,5 @@
 #include <std.h>
-#include "../ruins.h"
+#include "../elf.h"
 inherit "/d/common/obj/clothing/gloves";
 
 void create()
