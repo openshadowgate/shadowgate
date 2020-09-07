@@ -9,7 +9,7 @@ void create()
     feat_type("permanent");
     feat_category("MagicResistance");
     feat_name("death ward");
-    feat_prereq("Improved resistance");
+    feat_prereq("None");
     feat_desc("Death Ward reflects a character's hardiness against death spells and spell-like abilities, which will have no effect on the character.");
     permanent(1);
 }
@@ -19,12 +19,6 @@ int allow_shifted() { return 1; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
-
-    if(!FEATS_D->has_feat(ob,"improved resistance"))
-    {
-        dest_effect();
-        return 0;
-    }
 
     return ::prerequisites(ob);
 }
