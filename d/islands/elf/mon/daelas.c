@@ -106,6 +106,7 @@ void create()
     }
     new(OBJ"vamp_gloves")->move(TO);
     new(OBJ"knife")->move(TO);
+    new(OBJ"pants")->move(TO);
     force_me("wield knife");
     force_me("wearall");
 }
