@@ -49,6 +49,7 @@ void spell_effect(int prof)
     bonus = clevel / 24 + 1;
     caster->add_damage_bonus(bonus);
     caster->add_attack_bonus(bonus);
+    caster->set_property("blessed", 1);
     spell_successful();
     addSpellToCaster();
     call_out("dest_effect", ((ROUND_LENGTH * 5 + roll_dice(1, 20)) * clevel));
@@ -60,6 +61,7 @@ void dest_effect()
         tell_object(caster, "%^BOLD%^%^CYAN%^The blazing inspiration of your deity fades from you.%^RESET%^");
         caster->add_damage_bonus(-bonus);
         caster->add_attack_bonus(-bonus);
+        caster->remove_property("blessed");
     }
     ::dest_effect();
     if (objectp(TO)) {
