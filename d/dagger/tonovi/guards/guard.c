@@ -27,7 +27,7 @@ void create()
     hairColor();
     eyeColor();
     set_race("guard");
-    set_hd(60 + random(10), 1);
+    set_hd(60 + random(10), 10);
     set_hp(TO->query_max_hp());
     set_new_exp(20, "normal");
     set_class("fighter");
@@ -142,12 +142,11 @@ void set_guard_stuff()
 {
     set_jail_location("/d/dagger/tonovi/town/jail_main");
     set_guarding("Tonovi");
-    set_bad_races(({ "elf", "half-elf", "hobgoblin", "goblin", "hobgoblin", "kobold", "ogre", "orc", "gnoll", "bugbear", "minotaur", "dragon", "ratkin", "wererat", "undead", "troll" }));
+    set_bad_races(({ "elf", "half-elf", "hobgoblin", "hobgoblin", "kobold", "ogre", "orc", "gnoll", "bugbear", "minotaur", "dragon", "ratkin", "wererat", "undead", "troll" }));
     set_race_action("capture");
     set_race_messages(([
                            "elf"       : "Stop that elf and put it back in chains!",
                            "half-elf"  : "Grab that half-elf and put it back in chains",
-                           "goblin"    : "Stop that miserable little goblin, and look around for more.",
                            "hobgoblin" : "Careful folks, it's a hobgoblin, I'll take care of it.",
                            "kobold"    : "Dog faced rat!  Get that kobold!!",
                            "ogre"      : "Gods help us, its an ogre, how did it get past the gate?",

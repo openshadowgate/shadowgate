@@ -2062,7 +2062,7 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
     if (!stringp(damage_type) || damage_type == "" || damage_type == " ") {
         damage_type = "untyped";
     }
-
+/*
     if (FEATS_D->usable_feat(caster, "surprise spells")) {
         if (victim->query_tripped() ||
             victim->query_paralyzed() ||
@@ -2072,6 +2072,7 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
             wound *= 3 / 2;
         }
     }
+*/
 
     wound = (int)COMBAT_D->typed_damage_modification(caster, victim, hit_limb, wound, damage_type);
 
@@ -2177,6 +2178,11 @@ void define_clevel()
         if (caster->query_property("raged")) {
             clevel += 3;
         }
+    }
+
+    if (FEATS_D->usable_feat(caster, "tricky spells")) {
+        if(spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "alteration")
+            clevel = caster->query_base_character_level();
     }
 
     if ((int)caster->query_property("empowered")) {
@@ -2794,7 +2800,7 @@ varargs int do_save(object targ, int mod)
     if (FEATS_D->usable_feat(caster, "surprise spells") &&
         (caster->query_invis() || caster->query_hidden()) &&
         environment(caster) == environment(targ)) {
-        caster_bonus += 4;
+        caster_bonus += 3;
     }
 
     if (save_debug) {
