@@ -87,6 +87,7 @@ void InitInnate()
                                 "greater shadow conjuration" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "shadow evocation" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "shadow necromancy" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "shadow body" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
             ]);
     }
     if(FEATS_D->usable_feat(TO,"command the stone")) // meld into stone -1, stoneskin 1, earthquake 2, conjure elemental -1

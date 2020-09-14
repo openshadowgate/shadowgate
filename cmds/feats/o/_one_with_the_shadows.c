@@ -12,7 +12,7 @@ void create()
     feat_prereq("Shadowdancer L1");
     feat_desc("A shadowdancer gains the use of several new spells as innate abilities:
 
-shadow stride, darkvision, shadow double, greater shadow conjuration, shadow evocation, shadow necromancy");
+shadow stride, darkvision, shadow double, greater shadow conjuration, shadow evocation, shadow necromancy, shadow body");
     permanent(1);
     set_required_for(({"shadow master",}));
 }
