@@ -1883,6 +1883,9 @@ int query_saving_bonus(string throw)
 
     if(FEATS_D->usable_feat(TO, "resist undead") && attacker && attacker->is_undead() && (throw == "fortitude" || throw == "will"))
         x += 4;
+    
+    if(FEATS_D->usable_feat(TO, "canny defense") && throw == "reflex")
+        x += 4;
 
     return x;
 }
