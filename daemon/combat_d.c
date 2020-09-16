@@ -491,13 +491,14 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             tell_object(target, "%^BLUE%^As " + attacker->QCN + " strikes you, your vision grows momentarily clouded!%^RESET%^");
             target->set_temporary_blinded(1, "Your vision is clouded!");
         }
-        if (crit_hit && FEATS_D->usable_feat(attacker, "spell critical")) {
+        if (FEATS_D->usable_feat(attacker, "spell critical")) {
             tell_object(attacker, "%^CYAN%^You cry a brief warsong and unleash wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^");
             tell_object(target, "%^CYAN%^" + attacker->QCN + " shouts a brief warsong, and %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ burns through you!%^RESET%^");
             tell_room(environment(attacker), "%^CYAN%^" + attacker->QCN + " shouts a brief warsong and unleashes wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^", ({ target, attacker }));
             target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped");     //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
             //attempting to debug to see if it's multiplied - Odin
         }
+            
         //Handles Crypststalker feat
         if (
             target &&
@@ -873,8 +874,10 @@ int damage_done(object attacker, object weap, int damage, int isranged)
                     prof = to_int(prof * (1.25 + ((int)attacker->query_property("shieldwall") * 0.10)));
                 }
                 if (FEATS_D->usable_feat(attacker, "opportunity strikes")) {
-                    prof = to_int(prof * 1.6);
+                    prof = to_int(prof * 1.60);
                 }
+                if(FEATS_D->usable_feat(attacker, "artful precision"))
+                    prof = to_int(prof * 1.10);
             }
         }
     }
@@ -2409,6 +2412,9 @@ int check_avoidance(object who, object victim)
                counterAttack = 1;
            }
        }
+       if(FEATS_D->usable_feat(victim, "elaborate parry")
+          && victim->is_wielding("one handed") && random(3))
+          counterAttack = 1;
     }
     if (victim->query_scrambling()) {
        //dependencies checked in living.c
