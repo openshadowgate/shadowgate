@@ -5,7 +5,7 @@ inherit FEAT;
 void create() {
     ::create();
     feat_type("permanent");
-    feat_category("Duelist");
+    feat_category("PrestigeDuelist");
     feat_name("artful precision");
     feat_prereq("Duelist L4");
     feat_desc(""

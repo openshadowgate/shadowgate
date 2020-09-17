@@ -6,16 +6,14 @@ void create() {
     ::create();
     feat_type("permanent");
     feat_category("PrestigeDuelist");
-    feat_name("canny defense");
-    feat_prereq("Duelist L1");
+    feat_name("elaborate parry");
+    feat_prereq("Duelist L7");
     feat_desc(""
-"It is said that knowing your self and knowing your enemy will lead "
-"to victory in a thousand battles. The duelist relies not only on the "
-"quickness of their arm, or the discipline of their form, but also on "
-"the sharpness of the mind to anticipate their opponents' moves. "
-"This feat adds your intelligence modifier to your passive armor class "
-"while wearing light or no armor and while not incapacitated. In addition "
-"The duelist gains +4 to their reflex saves.");
+"Anyone who strikes at the trained duelist had better be prepared for the "
+"inevitable repercussions. The duelist is trained to punish anyone who attacks "
+"without thinking of their own defenses. This feat adds counter attacks to "
+"your parries. (Parry or Opportunistic Parry). This feat only works in light or "
+"no armor.");
     permanent(1);
     set_required_for(({}));
 }
@@ -27,7 +25,7 @@ int prerequisites(object ob)
         return 0;
     }
 
-    if ((int)ob->query_class_level("duelist") < 1)
+    if ((int)ob->query_class_level("duelist") < 7)
     {
         dest_effect();
         return 0;
