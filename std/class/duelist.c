@@ -100,7 +100,6 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
     string str;
     str = "Prerequisites:\n"
         "    Level 20 Fighter, Barbarian, Thief, Paladin, Inquisitor, Bard\n"
-        "    20 Base Dexterity\n"
         "    14 Base Intelligence\n"
         "    10 Ranks spent in Athletics Skill\n";
 
@@ -146,11 +145,6 @@ int prerequisites(object player)
        
     if ((player->query_class_level(base)) < 20) {
         write("fail level");
-        return 0;
-    }
-
-    if ((player->query_stats("dexterity")) < 20) {
-        write("fail dexterity");
         return 0;
     }
     
