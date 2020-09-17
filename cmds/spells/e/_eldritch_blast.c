@@ -8,7 +8,7 @@ inherit SPELL;
 
 #define SECONDARYOBS "/d/magic/obj/eldritch_effects/"
 string blasttype, element;
-int lifesteal, washealed;
+int lifesteal, washealed, agonize;
 void do_secondary(object victim);
 void do_hellfire_damage(object victim, string potency);
 string get_descript();
@@ -103,6 +103,12 @@ void spell_effect(int prof) {
       tell_object(target,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" to strike you!%^RESET%^");
       tell_room(place,"%^MAGENTA%^"+caster->QCN+" directs a blast of "+descriptor+" to strike "+target->QCN+" squarely!%^RESET%^",({ caster, target}) );
 
+    if(FEATS_D->usable_feat(caster, "mystic arcana"))
+    {
+        agonize = ( caster->query_stats("charisma") - 10 ) / 2;
+        agonize *= ( ( clevel / 18 ) + 1 );
+        damage += agonize;
+    }
     if(FEATS_D->usable_feat(caster,"hellfire blast"))
     {
         tell_room(environment(target),"%^BOLD%^%^BLACK%^The eldritch blast blazes with %^RESET%^%^RED%^in%^BOLD%^%^RED%^f%^RESET%^%^RED%^ern%^BOLD%^%^RED%^a%^RESET%^%^RED%^l %^BOLD%^%^BLACK%^power!%^RESET%^");
@@ -204,16 +210,6 @@ void do_secondary(object victim) {
       break;
     }
 }
-
-/*
-void do_hellfire_damage(object victim, string potency) {
-    if(!objectp(victim)) return;
-
-    tell_room(environment(victim),"%^BOLD%^%^BLACK%^The eldritch blast blazes with %^RESET%^%^RED%^in%^BOLD%^%^RED%^f%^RESET%^%^RED%^ern%^BOLD%^%^RED%^a%^RESET%^%^RED%^l %^BOLD%^%^BLACK%^power!%^RESET%^");
-    if(potency == "full") damage_targ(victim, victim->return_target_limb(), roll_dice(10,6), "untyped");
-    else damage_targ(victim, victim->return_target_limb(), roll_dice(5,6), "untyped");
-}
-*/
 
 string get_descript() {
     string myreturn;

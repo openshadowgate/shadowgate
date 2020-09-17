@@ -145,6 +145,8 @@ void reset() // turning up the frequency of the demons so people don't have to c
    //if(find_object("/d/antioch/ruins/portal/throne2.c") && find_object("/d/antioch/ruins/portal/throne1.c")) {
    //   find_object_or_load("/d/antioch/ruins/mons/demon.c")->move(TO);
    //}
+   // allowing the escape items to actually respawn and not lock people in here! N, 8/20
+   if(FOUND) FOUND = 0;
    if(random(5)) 
    {
       new("/d/antioch/ruins/mons/demon.c")->move(TO);

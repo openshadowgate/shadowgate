@@ -220,6 +220,7 @@ int move(mixed dest) {
 void fuel_msg(object fire, object vic) {
     object eto;
     eto = environment(vic);
+
     if((int)fire->query_fuel() < 1800) {
         tell_object(vic,"You add the wood to the fire and it %^RED%^blazes%^RESET%^ up.");
 	    tell_room(eto, vic->QCN+" adds some wood to the fire and it %^RED%^blazes%^RESET%^ up.", vic);
@@ -268,22 +269,27 @@ void fuel_msg(object fire, object vic) {
     }
 }
 
-int fuel_fire(string str) {
+int fuel_fire(string str)
+{
     object fire;
-    if(present("wood",TP)){
-        if(fire = present("fire",ETP)){
-	        fire->add_fuel(present("wood",TP)->query_fuel());
-	        fuel_msg(fire,TP);
-            check_fire(present("fire",ETP));
-            if(ETP->query_property("light") < 3) {
-                present("fire",ETP)->adj_lit(1);
-                ETP->set_property("light",1);
+    if (present("wood", TP)) {
+        if (fire = present(str, ETP)) {
+            if (base_name(fire) != "/d/common/obj/misc/wood") {
+                write("This is not the fire you're looking for.");
+                return 1;
             }
-            present("wood",TP)->remove();
-	        return(1);
-	    }
-	    write("There is no fire! You need to make one first!");
-	    return 1;
+            fire->add_fuel(present("wood", TP)->query_fuel());
+            fuel_msg(fire, TP);
+            check_fire(present("fire", ETP));
+            if (ETP->query_property("light") < 3) {
+                present("fire", ETP)->adj_lit(1);
+                ETP->set_property("light", 1);
+            }
+            present("wood", TP)->remove();
+            return (1);
+        }
+        write("There is no fire! You need to make one first!");
+        return 1;
     }
     write("You need wood in hand to fuel the fire. Try gathering some!");
     return 1;

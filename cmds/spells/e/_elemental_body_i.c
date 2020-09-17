@@ -56,7 +56,7 @@ void create()
 {
     ::create();
     set_spell_name("elemental body i");
-    set_spell_level(([ "mage" : 4,"oracle":4]));
+    set_spell_level(([ "mage" : 4,"oracle":4 ]));
     set_mystery("elemental");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS "+query_spell_name()+" on fire|air|earth|water");
@@ -88,6 +88,10 @@ int preSpell()
     }
     if (caster->query_property("augmentation")) {
         tell_object(caster, "%^YELLOW%^You are already under the influence of a similar spell.");
+        return 0;
+    }
+    if(spell_type == "innate" && FEATS_D->usable_feat(caster,"command the stone") && arg != "earth") {
+        tell_object(caster,"You can only take on the form of an EARTH elemental!");
         return 0;
     }
     return 1;

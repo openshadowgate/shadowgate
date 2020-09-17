@@ -46,25 +46,36 @@ int cmd_knockdown(string str)
 void execute_feat()
 {
     object ammo, *weapons;
-    if((int)caster->query_property("using knockdown") > time())
-    {
-        tell_object(caster,"You can't try to knock someone down yet!");
+
+    if ((int)caster->query_property("using knockdown") > time()) {
+        tell_object(caster, "You can't try to knock someone down yet!");
         dest_effect();
         return;
     }
     ::execute_feat();
-    if(!objectp(target))
-    {
+    if ((int)caster->query_property("using instant feat")) {
+        tell_object(caster, "You are already in the middle of using a feat!");
         dest_effect();
         return;
     }
-    if((int)caster->query_property("using instant feat")) {
-        tell_object(caster,"You are already in the middle of using a feat!");
+    if (!objectp(target)) {
+        object* attackers = caster->query_attackers();
+        if (!sizeof(attackers)) {
+            tell_object(caster, "%^BOLD%^Nobody to affect.%^RESET%^");
+            dest_effect();
+            return;
+        }
+        target = attackers[random(sizeof(attackers))];
+    }
+    if (!objectp(target)) {
         dest_effect();
         return;
     }
-    if(caster->query_property("shapeshifted") && !caster->query_property("altered")) in_shapeshift = 1;
-    else in_shapeshift = 0;
+    if (caster->query_property("shapeshifted") && !caster->query_property("altered")) {
+        in_shapeshift = 1;
+    }else {
+        in_shapeshift = 0;
+    }
 
     weapons = caster->query_wielded();
     if(sizeof(weapons) && weapons[0]->is_lrweapon() && !in_shapeshift) {

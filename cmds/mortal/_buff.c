@@ -99,6 +99,12 @@ int cmd_buff(string str)
         normal_buffs -= myspells;
         normal_buffs = sort_array(normal_buffs, 1);
 
+        if (!sizeof(normal_buffs)) {
+            tell_object(TP,"%^BOLD%^%^WHITE%^All spells on your buff list are active.");
+            return 1;
+        }
+
+
         display += ({ "%^RESET%^%^BOLD%^%^BLUE%^--==%^RESET%^%^BOLD%^%^CYAN%^< %^RESET%^%^BOLD%^Buffs missing %^RESET%^%^BOLD%^%^CYAN%^>%^RESET%^%^BOLD%^%^BLUE%^==--%^RESET%^" });
 
         display += map_array(normal_buffs, (:"%^GREEN%^%^BOLD%^  " + $1:));
@@ -341,6 +347,15 @@ The command will allow player to store a list of buff spells they can start cast
 
 %^ORANGE%^<buff clear>%^RESET%^
   Will clear your buff list.
+
+%^CYAN%^SHADOW SPELLS%^RESET%^
+
+N.b., to add buffs cast through shadow spells you have to use special cast string on the spell you want to cast.
+
+E.g., to add blink and elemental body as a mage cast through shadow alteration, you'll have to run these commands:
+
+%^ORANGE%^<buff add blink | cast mage shadow alteration on blink>%^RESET%^
+%^ORANGE%^<buff add elemental body i | cast mage shadow alteration on cast mage elemental body i on fire>%^RESET%^
 
 %^CYAN%^SEE ALSO%^RESET%^
 

@@ -12,8 +12,8 @@ void create(){
    set_terrain(GLACIER);
    set_travel(RUBBLE);
    set_climate("arctic");
-   set_name("Glacier Crevasse");
-   set_short("Glacier Crevasse");
+   set_name("%^%BOLD%^Glacial Crevasse%^RESET%^");
+   set_short("%^BOLD%^Glacial Crevasse%^RESET%^");
    set_long((:TO,"long_desc":));
    set("night long",(:TO,"night_desc":));
    set_items(([
@@ -34,7 +34,7 @@ void create(){
 
 string long_desc(){
   
-   return("%^CYAN%^Cracks in the %^BOLD%^glacial ice%^RESET%^%^CYAN%^ form a narrow pathway"+
+   return(query_short()+"\n%^CYAN%^Cracks in the %^BOLD%^glacial ice%^RESET%^%^CYAN%^ form a narrow pathway"+
    " some twenty feet down from the surface.  The %^BOLD%^%^CYAN%^sky%^RESET%^%^CYAN%^ above is whiteout"+
    " and the light below reflects off the ice, leaving a blue tint"+
    " to everything.  The going is extremely difficult as the %^BOLD%^%^CYAN%^ground%^RESET%^%^CYAN%^"+
@@ -45,7 +45,7 @@ string long_desc(){
  
 }
 string night_desc() {
-   return("%^BLUE%^Cracks in the %^CYAN%^glacial ice%^RESET%^%^BLUE%^ form a narrow pathway"+
+   return(query_short()+"\n%^BLUE%^Cracks in the %^CYAN%^glacial ice%^RESET%^%^BLUE%^ form a narrow pathway"+
    " some twenty feet down from the surface.  The %^CYAN%^sky%^RESET%^%^BLUE%^ above is whiteout"+
    " and the light below reflects off the ice, leaving a blue tint"+
    " to everything.  The going is extremely difficult as the %^CYAN%^ground%^RESET%^%^BLUE%^"+
@@ -87,7 +87,7 @@ void pick_critters(){
         case 0:  break;
         case 1:  set_monsters( ({MON"ooze"}),({random(3)+1}));
                  break;
-        case 2:  set_monsters( ({MON"worm"}),({random(2)+1}));
+        case 2:  set_monsters( ({MON"worm"}),({random(3)+1}));
                  break;
         case 3:  set_monsters( ({MON"frostgirl"}),({1}));
                  break;

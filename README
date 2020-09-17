@@ -1,5 +1,19 @@
-ShadowGate MUD lib
+# ShadowGate MUD lib #
 
 This is LPC code repository. You'll need fluffos (https://www.fluffos.info/) and world files to utilize it.
 
 As of 11.07.2019 this repository serves as a backup and tracking system only. The development happens from within metaprogramming environment of the game.
+
+## Running the game ##
+
+To compile fluffos for this lib you will need _conf/local_options.
+
+To run fluffos with our settings you fill need to customize _conf/fluffos.example.cfg for your environment.
+
+You will need to copy acl files to their location:
+
+_conf/access.example.db adm/db/access.db
+_conf/groups.example.db adm/db/groups.db
+_conf/privs.example.db adm/db/privs.db
+
+Only access.db might require an edit...

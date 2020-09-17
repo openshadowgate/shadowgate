@@ -9,7 +9,7 @@
                            "swamp"  : ({ "swamp", "marsh" }), \
                            "cold"   : ({ "snow", "ice", "glacier" }), \
                            "water"  : ({ "shallow water", "deep water", "beach", "shore", "boats" }), \
-                           "city"   : ({ "ruins", "city", "cemetary", "garden", "stone building", "wood building", "hut" }), \
+                           "city"   : ({ "ruins", "city", "cemetary", "garden", "stone building", "wood building", "hut", "paved road" }), \
                            "caves"  : ({ "nat cave", "built cave", "built tunnel", "nat tunnel" }), \
                            "hills"  : ({ "hills", "rocky", "old mounts", "new mounts" }), \
                        ])

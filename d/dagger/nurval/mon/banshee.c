@@ -8,7 +8,7 @@ inherit "/std/monster";
 void create()
 {
     object weapon;
-    int level = 55;
+    int level = 60;
 
     ::create();
     set_name("banshee");

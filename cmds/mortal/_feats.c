@@ -280,7 +280,7 @@ int skill_focus_setting(string str, object ob, string feat)
     for (i = 0; i < sizeof(myclasses); i++) {
         file = DIR_CLASSES + "/" + myclasses[i] + ".c";
         if (file_exists(file)) {
-            myclassskills = (string*)file->class_skills();
+            myclassskills = (string*)file->class_skills(TP);
             if (member_array(str, myclassskills) != -1) {
                 tell_object(ob, "%^RED%^Warning:%^YELLOW%^ you already have %^BLUE%^" + str + " %^YELLOW%^as a class skill from one or more of your existing classes.%^RESET%^");
             }
@@ -358,6 +358,27 @@ int confirm_add(string str, object ob, string feat, string extradata)
     tell_object(ob, "%^YELLOW%^Congratulations, you have successfully added "
                 "the feat %^BLUE%^" + feat + "%^YELLOW%^!%^RESET%^");
     free = 0;
+    return 1;
+}
+
+int confirm_add_racial(string str, object ob, string feat)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!stringp(feat)) {
+        return 0;
+    }
+
+    if (str != "yes") {
+        tell_object(TP, "Aborting...");
+        return 1;
+    }
+
+    FEATS_D->add_my_feat(ob, "racial", feat);
+    log_file("added_feats", "" + ob->QCN + " added racial bonus feat " + feat + " on " + ctime(time()) + ".\n");
+    tell_object(ob, "%^YELLOW%^Congratulations, you have successfully added "
+                "the bonus racial feat %^BLUE%^" + feat + "%^YELLOW%^!%^RESET%^");
     return 1;
 }
 
@@ -514,6 +535,7 @@ int cmd_feats(string str)
         return 1;
     }
 
+    MAX_ALLOWED = ((int)TP->query_highest_level() / 3) + 1;
     free = 0;
 
     info = explode(str, " ");
@@ -670,7 +692,6 @@ int cmd_feats(string str)
         return 1;
 
     case "allowed":
-        MAX_ALLOWED = ((int)TP->query_highest_level() / 3) + 1;
         num_feats = (int)TP->query_other_feats_gained();
         allowed = MAX_ALLOWED - num_feats;
         if (allowed < 0) {
@@ -685,6 +706,18 @@ int cmd_feats(string str)
         tell_object(TP, "%^WHITE%^You are allowed %^BOLD%^%^BLUE%^" + MAX_ALLOWED + "%^RESET%^ "
                     "feats. You have used %^BOLD%^%^BLUE%^" + num_feats + " %^RESET%^and you now have "
                     "%^BOLD%^%^BLUE%^" + allowed + "%^RESET%^ left.%^RESET%^");
+
+        // racial feat allocation here
+        BONUS_ALLOWED = FEATS_D->racial_bonus_feats(TP);
+
+        num_bonus = (int)TP->query_racial_feats_gained();
+        bonus = BONUS_ALLOWED - num_bonus;
+
+        if (BONUS_ALLOWED) {
+            tell_object(TP, "You have %^BOLD%^%^BLUE%^" + BONUS_ALLOWED + "%^RESET%^ free racial "
+                        "bonus feats. You have used %^BOLD%^%^BLUE%^" + num_bonus + " %^RESET%^and you now have "
+                        "%^BOLD%^%^BLUE%^" + bonus + "%^RESET%^ left.%^RESET%^");
+        }
 
 // combat feat allocation here
         BONUS_ALLOWED = 0;
@@ -797,7 +830,6 @@ int cmd_feats(string str)
 
 //        if(sizeof(info)) { tmp = implode(info," "); }
 
-        MAX_ALLOWED = ((int)TP->query_highest_level() / 3) + 1;
         num_feats = (int)TP->query_other_feats_gained();
         if (num_feats >= MAX_ALLOWED) {
             tell_object(TP, "%^RESET%^%^BOLD%^You are not able to add "
@@ -908,6 +940,61 @@ int cmd_feats(string str)
         }
         tell_object(TP, "Enter <yes> to add the feat, anything else to abort.");
         input_to("confirm_add", TP, tmp, "");
+        return 1;
+
+    case "racial":
+        if (sscanf(str, "%s %s", category, tmp) != 2) {
+            tell_object(TP, "See <help feats> for syntax.");
+            return 1;
+        }
+
+        BONUS_ALLOWED = FEATS_D->racial_bonus_feats(TP);
+
+        num_bonus = (int)TP->query_racial_feats_gained();
+        if (num_bonus >= BONUS_ALLOWED) {
+            tell_object(TP, "%^RESET%^%^BOLD%^You are not able to add "
+                        "any more bonus racial feats at your current level.%^RESET%^");
+            return 1;
+        }
+        if (FEATS_D->has_feat(TP, tmp)) {
+            tell_object(TP, "%^RESET%^%^BOLD%^You already have that "
+                        "feat.");
+            return 1;
+        }
+        if (TP->query("negative level")) {
+            tell_object(TP, "You have a negative level and must have it removed before " +
+                        "you can add any feats!");
+            return 1;
+        }
+        if (intp("/daemon/user_d.c"->get_scaled_level(TP))) {
+            tell_object(TP, "You have scaled your level down and must revert it back to " +
+                        "normal before you can add any feats!");
+            return 1;
+        }
+        if ((string)FEATS_D->get_category(tmp) == "EpicFeats") {
+            tell_object(TP, "%^RESET%^%^BOLD%^You can't buy epic feats "
+                        "with racial bonus slots.%^RESET%^");
+            return 1;
+        }
+
+        my_tmp_feats = (string*)TP->query_temporary_feats();
+        TP->clear_temporary_feats();
+
+        if (!FEATS_D->can_gain_racial_feat(TP, tmp)) {
+            tell_object(TP, "%^RESET%^%^BOLD%^You are not able to add the "
+                        "feat " + tmp + ", please make sure you meet all of the "
+                        "requirements.%^RESET%^");
+            TP->set_temporary_feats(my_tmp_feats);
+            return 1;
+        }
+
+        TP->set_temporary_feats(my_tmp_feats);
+
+        tell_object(TP, "%^YELLOW%^Are you sure you want to add the feat " + tmp + " as one of "
+                    "your free bonus racial feats?  It will cost nothing to add, but you will have "
+                    "to spend exp to remove it later if you change your mind.%^RESET%^");
+        tell_object(TP, "Enter <yes> to add the feat, anything else to abort.");
+        input_to("confirm_add_racial", TP, tmp);
         return 1;
 
     case "martial":
@@ -1038,7 +1125,6 @@ int cmd_feats(string str)
         }
         //changing this to use "magic" feats instead of bonus - Saide
         num_bonus = (int)TP->query_magic_feats_gained();
-        //num_bonus   = (int)TP->query_bonus_feats_gained();
         if (num_bonus >= BONUS_ALLOWED) {
             tell_object(TP, "%^RESET%^%^BOLD%^You are not able to add "
                         "any more bonus magic feats at your current level.%^RESET%^");
@@ -1303,20 +1389,6 @@ int cmd_feats(string str)
     return 1;
 }
 
-int human_bonus_feat()
-{
-    string myrace, subrace;
-    myrace = TP->query_race();
-    subrace = (string)TP->query("subrace");
-
-    if (myrace == "human") {
-        if (!subrace || subrace == "" || (subrace != "tiefling" && subrace != "aasimar" && subrace != "feytouched" && (strsrch(subrace, "genasi") == -1))) {
-            return 1; //bonus feat for baseline humans
-        }
-    }
-    return 0;
-}
-
 int help()
 {
     write("
@@ -1328,7 +1400,7 @@ feats - manipulate or view your feats
 
 feats allowed
 feats check|add|remove %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
-feats martial|spellcraft|hybrid %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
+feats racial|martial|spellcraft|hybrid %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
 feats list [martial|spellcraft|hybrid|general]
 feats fix
 
@@ -1348,7 +1420,7 @@ The following commands apply:
     Will add the feat if you have any remaining levelling feats.
 %^ORANGE%^<feats remove %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
     Will remove the feat if you no longer want to retain it.
-%^ORANGE%^<feats martial|spellcraft|hybrid %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
+%^ORANGE%^<feats racial|martial|spellcraft|hybrid %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
     Will add the feat of given category if you have any bonus feats in it.
 %^ORANGE%^<feats list martial|spellcraft|hybrid|general|epic>%^RESET%^
     Displays the specified feat trees.
@@ -1369,7 +1441,7 @@ If your terminal supports color, you may benefit from color coding of the feats 
 The numbers listed before the feats indicate which level the feats were gained at:
   %^BOLD%^%^CYAN%^00%^RESET%^: The feat has been bought normally.
   %^BOLD%^%^MAGENTA%^00%^RESET%^: The feat has been granted for free (class feats).
-  %^YELLOW%^00%^RESET%^: The feat has been bought with bonus combat, magic or hybrid feats.
+  %^YELLOW%^00%^RESET%^: The feat has been bought with bonus racial, combat, magic or hybrid feats.
 
 Adding and removing normal feats will add to your character improvement tax (see %^ORANGE%^<help exp tax>%^RESET%^) and slow your level advancement. This is to simulate the extra training that it requires to learn the new abilities or to forget your previous training.
 

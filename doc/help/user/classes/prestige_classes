@@ -3,7 +3,7 @@
 %^RESET%^%^MAGENTA%^Prestige Class         Base Class
 
 %^RESET%^%^CYAN%^Arcane Archer          %^RESET%^Any caster of the weave
-%^RESET%^%^CYAN%^Arcane Tricster        %^RESET%^Thief+Any caster of the weave
+%^RESET%^%^CYAN%^Arcane Trickster       %^RESET%^Thief + Mage, Sorcerer or Bard
 %^RESET%^%^CYAN%^Archdruid              %^RESET%^Druid
 %^RESET%^%^CYAN%^Archmage               %^RESET%^Mage or Sorcerer
 %^RESET%^%^CYAN%^Archpsion              %^RESET%^Psion
@@ -12,30 +12,34 @@
 %^RESET%^%^CYAN%^Chronicler             %^RESET%^Bard
 %^RESET%^%^CYAN%^Cypher                 %^RESET%^Any
 %^RESET%^%^CYAN%^Crypt Stalker          %^RESET%^Ranger
-%^RESET%^%^CYAN%^Eldritch Knight        %^RESET%^Any caster of the weave
+%^RESET%^%^CYAN%^Duelist                %^RESET%^Fighter,Barbarian,Paladin,Thief,Bard,Inquisitor
+%^RESET%^%^CYAN%^Eldritch Knight        %^RESET%^Any Spellcaster
 %^RESET%^%^CYAN%^Grandmaster of the Way %^RESET%^Monk
-%^RESET%^%^CYAN%^Gravecaller            %^RESET%^Cleric, Mage or Sorcerer
+%^RESET%^%^CYAN%^Gravecaller            %^RESET%^Cleric, Oracle, Mage or Sorcerer
 %^RESET%^%^CYAN%^Hellfire Warlock       %^RESET%^Warlock
-%^RESET%^%^CYAN%^Hierophant             %^RESET%^Cleric or Druid
+%^RESET%^%^CYAN%^Hierophant             %^RESET%^Cleric, Oracle or Druid
 %^RESET%^%^CYAN%^Immortal Defender      %^RESET%^Any
 %^RESET%^%^CYAN%^Metamind               %^RESET%^Psywarrior
 %^RESET%^%^CYAN%^Mindblade              %^RESET%^Psion
 %^RESET%^%^CYAN%^Pale Lord              %^RESET%^Any but psionic
 %^RESET%^%^CYAN%^Primeval Champion      %^RESET%^Druid
 %^RESET%^%^CYAN%^Radiant Servant        %^RESET%^Cleric, Oracle, Druid or Inquisitor
-%^RESET%^%^CYAN%^Rage Prophet           %^RESET%^Barbarian+Any channeling caster
+%^RESET%^%^CYAN%^Rage Prophet           %^RESET%^Barbarian + Divine Spellcaster
 %^RESET%^%^CYAN%^Shadow Adept           %^RESET%^Mage or Sorcerer
 %^RESET%^%^CYAN%^Shadowdancer           %^RESET%^Any
-%^RESET%^%^CYAN%^Stonelord              %^RESET%^Any
+%^RESET%^%^CYAN%^Stonelord              %^RESET%^Any Dwarf or Earth Genasi
+%^RESET%^%^CYAN%^Tome Bound Master      %^RESET%^Warlock
 %^RESET%^%^CYAN%^Versatile Arcanist     %^RESET%^Sorcerer
 %^RESET%^%^CYAN%^Warmaster              %^RESET%^Any
 %^RESET%^%^CYAN%^Warmind                %^RESET%^Psywarrior
 
 Prestige classes are similar to standard classes, but their abilities are more specialized and often more powerful. Some prestige classes have steep requirements, such a minimum amount of levels in a base class, a certain feat, skill or similar.
 
-To acquire a prestige class when you advance, simply type %^ORANGE%^<advance %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^.
+To acquire a prestige class when you advance, simply type %^ORANGE%^<advance %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^. You can choose only one prestige class to multiclass into.
 
 If you were to type %^ORANGE%^<advance shadow_adept>%^RESET%^ for example, you would become a 20th level mage/1st level shadow adept. The class feats listed for prestige classes at level 1, level 4 and level 7 are automatically granted when you attain the correct level in the prestige class. They are free feats and you don't need to add them yourself. In almost all cases, when you advance in a prestige class, you also gain spells per day and spells known as if you had advanced in the base class required for the prestige class.
+
+Only one set of 10 levels in a single prestige class is allowed per character.
 
 %^RESET%^%^CYAN%^To get more information on a class, type %^ORANGE%^<help %^ULINE%^CLASS%^RESET%^%^ORANGE%^>%^RESET%^%^CYAN%^.
 

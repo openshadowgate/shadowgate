@@ -53,5 +53,8 @@ void create(){
     
 void reset(){
    ::reset();
-   if(!present("street_light",TO)) new("/d/common/obj/misc/street_light")->move(TO);
+   if (!present("street_light", TO)) {
+       // new("/d/common/obj/misc/street_light")->move(TO);
+       new(OBJ+"street_light")->move(TO);// blame jenna
+    }
 }    

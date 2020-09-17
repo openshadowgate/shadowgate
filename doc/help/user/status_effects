@@ -19,7 +19,7 @@ A frightened creature flees from the source of its fear as best it can. If unabl
 Frightened is like %^CYAN%^shaken%^RESET%^, except that the creature must flee if possible. %^CYAN%^Panicked%^RESET%^ is a more extreme state of fear.
 
 %^CYAN%^Panicked%^RESET%^
-A panicked creature must drop anything it holds and flee at top speed from the source of its fear, as well as any other dangers it encounters, along a random path. It can’t take any other actions. In addition, the creature takes a lvl/12+1 penalty on all saving throws, skill checks, and ability checks. If cornered, a panicked creature %^CYAN%^cowers%^RESET%^.
+A panicked creature must drop anything it holds and flee at top speed from the source of its fear, as well as any other dangers it encounters, along a random path. It can't take any other actions. In addition, the creature takes a lvl/12+1 penalty on all saving throws, skill checks, and ability checks. If cornered, a panicked creature %^CYAN%^cowers%^RESET%^.
 Panicked is a more extreme state of fear than %^CYAN%^shaken%^RESET%^ or %^CYAN%^frightened%^RESET%^.
 
 %^CYAN%^Shaken%^RESET%^
@@ -73,7 +73,7 @@ A creature gets 1d(lvl/2) health poins of regeneration per round as part of its 
 All core skills, attack, damage bonus, saves are reduced by lvl/12+1. The effect is cumulative but usually won't last for long.
 
 %^CYAN%^Sleeping%^RESET%^
-An asleep creature functions like under paralysis, but any attack directed at will %^ORANGE%^<wake>%^RESET%^ them and stop the effect. Aspeel creatures loose their dexterity bonus to armor class.
+An asleep creature functions like under paralysis, but any attack directed at will %^ORANGE%^<wake>%^RESET%^ them and stop the effect. Asleep creatures loose their dexterity bonus to armor class.
 
 %^CYAN%^Max health points bonus%^RESET%^
 This effect adds its power directly to maximum of your health points. Its value, however, can't exceed base value of your maximum health points.

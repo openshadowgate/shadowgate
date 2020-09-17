@@ -25,7 +25,7 @@ void create()
 void status_effect()
 {
     int i;
-    if (target->query_property("effect_confused")) {
+    if (target && target->query_property("effect_confused")) {
         TO->remove();
         return;
     }

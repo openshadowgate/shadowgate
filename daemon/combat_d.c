@@ -1,13 +1,14 @@
 /**
  * @file
-   8 @brief Various combat subroutines
+ * @brief Various combat subroutines
+ *
+ * Daemon that handles Combat related stuff
+ * Currently handling checks for shieldmiss/concealing amorpha
+ * damage modifications from body.c - including stoneskin checks, typed damage modifications, etc.
+ * my intention was to make all of this easier to modify on the fly - Saide
  */
 
 
-//Daemon that handles Combat related stuff
-//Currently handling checks for shieldmiss/concealing amorpha
-//damage modifications from body.c - including stoneskin checks, typed damage modifications, etc.
-//my intention was to make all of this easier to modify on the fly - Saide
 #include <std.h>
 #include <dirs.h>
 #include <daemons.h>
@@ -23,29 +24,8 @@
 
 mapping DAMAGE_TRACKING;
 
-//***** FUNCTIONS DEFINED IN THIS FILE *****//
-
-void save_damage_tracker();
-void restore_damage_tracker();
-varargs int extra_hit_calcs(object attacker, object victim, object weapon, string limb);
-void track_damage(object attacker, object victim, int damage);
-varargs int damage_adjustment(object attacker, object victim, int damage);
-varargs int typed_damage_modification(object attacker, object targ, string limb, int damage, string type);
-void check_extra_abilities(object attacker, object target, object weapon, int crit_hit);
-varargs void calculate_damage(object attacker, object targ, object weapon, string target_thing, int critical_hit);
-int damage_done(object attacker, object weap, int damage, int isranged);
-varargs int get_damage(object attacker, object weap, object targ);
-varargs int get_lrdamage(object attacker, object weap, object targ);
-int get_hand_damage(object attacker, string limb1, int damage, object attacked);
-void send_messages(object attacker, int magic, object weapon, string what, int x, object victim, int fired, string ammo, int critical_message);
-void new_struck(int damage, object weapon, object attacker, string limb, object victim, int fired, string ammo, int critical_hit);
-void do_fumble(object attacker, object weapon);
-void miss(object attacker, int magic, object target, string type, string target_thing);
-int calculate_unarmed_damage(object attacker);
 int critical_roll = 0;
 
-
-//****** END OF FUNCTION DEFINITIONS ******//
 void save_damage_tracker()
 {
     seteuid(UID_RESTORE);
@@ -392,11 +372,13 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
             }
             if (targ->query_property("shielded_by")) {
                 object shielder = targ->query_property("shielded_by");
-                if (objectp(targ->query_property("shielded_by")) && objectp(ENV(targ))) {
-                    if (present(shielder, ENV(targ)) && !shielder->query_property("shielded_by")) {
+                if (objectp(targ->query_property("shielded_by")) &&
+                    objectp(ENV(targ)) &&
+                    objectp(ENV(shielder)) &&
+                    ENV(shielder) == ENV(targ) &&
+                    !shielder->query_property("shielded_by")) {
                         damage /= 2;
                         shielder->cause_typed_damage(shielder, shielder->return_target_limb(), damage, type);
-                    }
                 } else {
                     targ->remove_property("shielded_by");
                 }
@@ -509,13 +491,14 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             tell_object(target, "%^BLUE%^As " + attacker->QCN + " strikes you, your vision grows momentarily clouded!%^RESET%^");
             target->set_temporary_blinded(1, "Your vision is clouded!");
         }
-        if (crit_hit && FEATS_D->usable_feat(attacker, "spell critical")) {
+        if (FEATS_D->usable_feat(attacker, "spell critical")) {
             tell_object(attacker, "%^CYAN%^You cry a brief warsong and unleash wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^");
             tell_object(target, "%^CYAN%^" + attacker->QCN + " shouts a brief warsong, and %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ burns through you!%^RESET%^");
             tell_room(environment(attacker), "%^CYAN%^" + attacker->QCN + " shouts a brief warsong and unleashes wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^", ({ target, attacker }));
             target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped");     //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
             //attempting to debug to see if it's multiplied - Odin
         }
+            
         //Handles Crypststalker feat
         if (
             target &&
@@ -524,10 +507,10 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             FEATS_D->usable_feat(attacker, "smite the lifeless")) {
             //Needs adjusting to not one-shot Vecna/intruder but also be effective against smaller bosses
             if (target->query_hp_percent() < 80 && (userp(target) ? target->query_level() <= attacker->query_level() : target->query_level() < 56)) {
-                if (!target->fort_save(attacker->query_level())) {
+                if (!target->fort_save(attacker->query_level() + 5)) {
                     tell_object(attacker, "%^BOLD%^You unleash a flash of blinding white energy as you destroy " + target->QCN + "'s undead energy and end them!%^RESET%^");
                     tell_object(target, "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends your undead existence!%^RESET%^");
-                    tell_room(environment(attacker), "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends " + target->QCN + "'s undead existence!%^RESET%^");
+                    tell_room(environment(attacker), "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends " + target->QCN + "'s undead existence!%^RESET%^", ({ target, attacker }));
                     target->set_hp(-100);
                 }
             }
@@ -605,56 +588,44 @@ int crit_damage(object attacker, object targ, object weapon, int size, int damag
     }
     if (objectp(weapon) && !attacker->query_property("shapeshifted") && weapon != attacker) {
         mult = (int)weapon->query_critical_hit_multiplier();
-        if (FEATS_D->usable_feat(attacker, "skull collector") && attacker->is_wielding("two handed")) {
-            if (objectp(targ)) {
-                perc = 25 + roll_dice(1, 25);
-                if ((targ->query_hp_percent() < perc) && (targ->query_hp_percent() > 0)) {
-                    if (!FEATS_D->usable_feat(targ, "death ward") && !targ->query_property("no death")) {
-                        if (!targ->fort_save(attacker->query_highest_level())) {
-                            tell_object(targ, "%^BOLD%^%^RED%^" + attacker->QCN + " swings " + attacker->QP + " " + weapon->query_short() + " in a brutal
-swipe, hitting you in the head!\nEverything goes black...");
-                            tell_object(attacker, "%^BOLD%^%^RED%^You swing your " + weapon->query_short() + " in a brutal swipe, hitting
-" + targ->QCN + " in the head with a certainly fatal strike!");
-                            tell_room(environment(targ), "%^BOLD%^%^RED%^" + attacker->QCN + " swings " + attacker->QP + " " + weapon->query_short() + " in
-a brutal swipe, hitting " + targ->QCN + " in the head "
-                                      "with what must cetainly be a fatal strike!", ({ attacker, targ }));
-                            targ->set_hp(-100);
-                        }
-                    }
-                }
-            }
+        if (objectp(targ) &&
+            attacker->is_class("warmaster") &&
+            FEATS_D->usable_feat(attacker, "skull collector") &&
+            attacker->is_wielding("two handed") &&
+            targ->query_hp_percent() < roll_dice(3, 6) &&
+            targ->query_hp_percent() > 0 &&
+            !targ->query_property("no death") &&
+            targ->fort_save(attacker->query_level())
+            ) {
+            tell_object(targ, "%^BOLD%^%^RED%^" + attacker->QCN + " swings " + attacker->QP + " " + weapon->query_short() + " in a brutal swipe, hitting you in the head!\nEverything goes black...");
+            tell_object(attacker, "%^BOLD%^%^RED%^You swing your " + weapon->query_short() + " in a brutal swipe, hitting" + targ->QCN + " in the head with a certainly fatal strike!");
+            tell_room(environment(targ), "%^BOLD%^%^RED%^" + attacker->QCN + " swings " + attacker->QP + " " + weapon->query_short() + " in a brutal swipe, hitting " + targ->QCN + " in the head with what must cetainly be a fatal strike!", ({ attacker, targ }));
+            targ->set_hp(-100);
         }
     }else {
-        mult = 2; // currently all unarmed attacks have x2 multiplier
+        mult = 2;     // currently all unarmed attacks have x2 multiplier
         if (attacker->is_class("monk")) {
             mult += (int)"/std/class/monk.c"->critical_multiplier(attacker);
 
-            if (FEATS_D->usable_feat(attacker, "way of the merciful soul")) {
-                if (objectp(targ)) {
-                    if (targ->query_hp_percent() < 26 && targ->query_hp_percent() > 0) {
-                        if (!FEATS_D->usable_feat(targ, "death ward") && !targ->query_property("no death")) {
-                            if (!targ->fort_save(attacker->query_prestige_level("monk")) && USER_D->can_spend_ki(attacker, 3)) {
-                                tell_object(targ, "%^BOLD%^%^BLUE%^" + attacker->QCN + " strikes you swiftly on the forehead and everthing goes
-black!%^RESET%^");
-                                tell_object(attacker, "%^BOLD%^%^BLUE%^You strike " + targ->QCN + " precisely on the forehead and release pure ki
-into " + targ->QP + " mind, "
-                                            "granting " + targ->QO + " the mercy of a painless death.");
-                                tell_room(environment(targ), "" + attacker->QCN + " strikes " + targ->QCN + " swiftly on the head and " + targ->QS + " drops
-instantly to the "
-                                          "ground!", ({ attacker, targ }));
-                                USER_D->spend_ki(attacker, 3);
-                                targ->set_hp(-100);
-                            }
-                        }
-                    }
-                }
+            if (objectp(targ) &&
+                FEATS_D->usable_feat(attacker, "way of the merciful soul") &&
+                targ->query_hp_percent() < roll_dice(6, 6) &&
+                targ->query_hp_percent() > 0 &&
+                !targ->query_property("no death") &&
+                !targ->fort_save(attacker->query_guild_level("monk"))
+                ) {
+                tell_object(targ, "%^BOLD%^%^BLUE%^" + attacker->QCN + " strikes you swiftly on the forehead and everthing goes black!%^RESET%^");
+                tell_object(attacker, "%^BOLD%^%^BLUE%^You strike " + targ->QCN + " precisely on the forehead and release pure ki into " + targ->QP + " mind, granting " + targ->QO + " the mercy of a painless death.");
+                tell_room(environment(targ), "" + attacker->QCN + " strikes " + targ->QCN + " swiftly on the head and " + targ->QS + " drops instantly to the ground!", ({ attacker, targ }));
+                USER_D->spend_ki(attacker, 3);
+                targ->set_hp(-100);
             }
         }
     }
 
-    mult -= 1;
+mult -= 1;
 
-    //Odin's note that we already dealt normal damage and need to reduce multiplier by one
+//Odin's note that we already dealt normal damage and need to reduce multiplier by one
 
     if (!attacker->query_property("shapeshifted")) {
         if (FEATS_D->usable_feat(attacker, "exploit weakness")) {
@@ -722,7 +693,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
                 fired = 1;
             }
             if (fired) {
-                bonus_hit_damage = get_damage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
+                bonus_hit_damage = get_lrdamage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
                 if (FEATS_D->usable_feat(attacker, "point blank shot")) {
                     damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("dexterity"));
                 }
@@ -815,9 +786,10 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
 
     if (critical_hit) {
-        damage = crit_damage(attacker, targ, weapon, attacker_size, damage); //I have no clue why I had to change this to += from = for crit damage to work properly, since crit_damage already returns damage + crit_damage, but this kluge seems to be working properly after numerous tests - Odin 5/19/2020
+        damage = crit_damage(attacker, targ, weapon, attacker_size, damage);
     }
-    damage += bonus_hit_damage; //pulling it in here so it's not multiplied by a critical hit
+
+    damage += bonus_hit_damage;
     new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit);
 
     if (!objectp(weapon) || attacker->query_property("shapeshifted")) {
@@ -902,8 +874,10 @@ int damage_done(object attacker, object weap, int damage, int isranged)
                     prof = to_int(prof * (1.25 + ((int)attacker->query_property("shieldwall") * 0.10)));
                 }
                 if (FEATS_D->usable_feat(attacker, "opportunity strikes")) {
-                    prof = to_int(prof * 1.6);
+                    prof = to_int(prof * 1.60);
                 }
+                if(FEATS_D->usable_feat(attacker, "artful precision"))
+                    prof = to_int(prof * 1.10);
             }
         }
     }
@@ -2399,9 +2373,9 @@ string query_paralyze_message(object who)
 //Rewritten so remove multiple sequential avoidance rolls
 //Uriel - 06/09/2020
 
-int check_avoidance(object who, object victim, object* weapons)
+int check_avoidance(object who, object victim)
 {
-    object EWHO, rider;
+    object EWHO, rider, *weapons = ({});
     int attack, defend, roll, chance;
     int parry = 0, scramble = 0, ride_by_attack = 0;
     int shot_on_the_run = 0, mount = 0;
@@ -2438,6 +2412,9 @@ int check_avoidance(object who, object victim, object* weapons)
                counterAttack = 1;
            }
        }
+       if(FEATS_D->usable_feat(victim, "elaborate parry")
+          && victim->is_wielding("one handed") && random(3))
+          counterAttack = 1;
     }
     if (victim->query_scrambling()) {
        //dependencies checked in living.c
@@ -2454,7 +2431,7 @@ int check_avoidance(object who, object victim, object* weapons)
        avoid += ({"TYPE_RIDDEN"});
     }
     if (FEATS_D->usable_feat(victim,"shot on the run")
-       && sizeof(weapons)) {
+       && sizeof(weapons = victim->query_wielded())) {
        if(weapons[0]->is_lrweapon())
        {
        shot_on_the_run = 1;
@@ -2831,7 +2808,7 @@ void internal_execute_attack(object who)
         // end crit stuff
         if (roll && fumble == 0) {
             if (!victim->query_unconscious() && !victim->query_ghost() && !victim->query_bound()) {
-                if (!extra_hit_calcs(who, victim, current, target_thing) || check_avoidance(who, victim, weapons)) {
+                if (!extra_hit_calcs(who, victim, current, target_thing) || check_avoidance(who, victim)) {
                     if (!objectp(who)) {
                         return;
                     }

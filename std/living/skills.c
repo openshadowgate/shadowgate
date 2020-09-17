@@ -316,7 +316,7 @@ int query_skill(string skill)
                 myclassskills = (string*)(DIR_CLASSES + "/oracle.c")->mystery_skills(mydisc);
             }
             if (member_array(skill, myclassskills) != -1 ||
-                (FEATS_D->usable_feat(TO, "tricky spells") && (skill == "spellcraft" || skill == "stealth")) ||
+                (FEATS_D->usable_feat(TO, "surprise spells") && (skill == "spellcraft" || skill == "stealth")) ||
                 (FEATS_D->usable_feat(TO, "skill focus") && ((string)this_object()->query("skill_focus") == skill))) {
                 x += (mylevel / 2);
             } else {

@@ -20,11 +20,11 @@ int cmd_seal(string str)
         return 1;
     }
     if (str == "break") {
-        tell_object(TP, "Try seal break <paper>.");
+        tell_object(TP, "Try <seal break on PAPER>");
         return 1;
     }
-    if (sscanf(str, "break %s", dest) == 1) {
-        if (sscanf(str, "break %s", dest) != 1) {
+    if (sscanf(str, "break on %s", dest) == 1) {
+        if (sscanf(str, "break on %s", dest) != 1) {
             help();
             return 1;
         }
@@ -107,7 +107,7 @@ seal - seal letters with wax
 %^CYAN%^SYNOPSIS%^RESET%^
 
 seal %^ORANGE%^%^ULINE%^PAPER%^RESET%^ with %^ORANGE%^%^ULINE%^DEVICE%^RESET%^ and %^ORANGE%^%^ULINE%^WAX%^RESET%^
-seal break %^ORANGE%^%^ULINE%^PAPER%^RESET%^
+seal break on %^ORANGE%^%^ULINE%^PAPER%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 

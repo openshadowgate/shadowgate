@@ -72,7 +72,7 @@ int cmd_spellmastery(string args)
     myclasses = TP->query_classes();
     foreach(myclass in myclasses)
     {
-        if(member_array(args,keys(MAGIC_D->index_spells_for_player(TP,myclass)))!=-1)
+        if(member_array(args,keys(MAGIC_D->index_castable_spells(TP,myclass)))!=-1)
             cancastflag++;
     }
 

@@ -167,6 +167,7 @@ void heart_beat()
                         master = ETO->query_name();
                         break;
                 }
+                break;
             default:
                 switch(random(75))
                 {
@@ -207,6 +208,7 @@ void heart_beat()
                         GaveUp = 1;
                         break;
                 }
+                break;
         }
     }
     if(stringp(master))
@@ -410,12 +412,6 @@ int hit_func(object targ)
             "I now UNLEASH a **%^BOLD%^%^RED%^FURY%^RESET%^%^WHITE%^** "+
             "that RIVALS anything witnessed before!!");
 
-            tell_object(ETO, "%^BOLD%^%^WHITE%^A brilliant explosion of pure %^BOLD%^%^YELLOW%^"+
-            "L%^RESET%^I%^BOLD%^%^YELLOW%^GHT%^BOLD%^%^WHITE%^ erupts %^BOLD%^%^YELLOW%^"+
-            "VIOLENTLY%^BOLD%^%^WHITE%^ from the blade and slams into "+targ->QCN+
-            "%^BOLD%^%^WHITE%^ with tremendous force, knocking "+targ->QO+
-            " to the ground!%^RESET%^");
-
             tell_object(targ, "%^BOLD%^%^WHITE%^A brilliant explosion of pure %^BOLD%^%^YELLOW%^"+
             "L%^RESET%^I%^BOLD%^%^YELLOW%^GHT%^BOLD%^%^WHITE%^ erupts %^BOLD%^%^YELLOW%^"+
             "VIOLENTLY%^BOLD%^%^WHITE%^ from "+ETOQCN+"%^BOLD%^%^WHITE%^'s blade and slams into "+
@@ -426,7 +422,7 @@ int hit_func(object targ)
             "L%^RESET%^I%^BOLD%^%^YELLOW%^GHT%^BOLD%^%^WHITE%^ erupts %^BOLD%^%^YELLOW%^"+
             "VIOLENTLY%^BOLD%^%^WHITE%^ from "+ETOQCN+"%^BOLD%^%^WHITE%^'s blade and slams into "+
             targ->QCN+"%^BOLD%^%^WHITE%^ with tremendous force, knocking "+ETO->QO+
-            " to the ground!%^RESET%^");
+            " to the ground!%^RESET%^",({ETO, targ}));
             dam = MyPower;
             if(!random(25)) dam = MyPower * 2;
             MyPower = 0;

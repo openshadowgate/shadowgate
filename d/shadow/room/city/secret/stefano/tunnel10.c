@@ -12,7 +12,7 @@ void create(){
    set_long(
    	"%^BOLD%^%^BLACK%^"+
    	"You are in a tunnel leading north and south."+
-   	"The tunnel itself looks to be of "+
+   	" The tunnel itself looks to be of "+
    	"recent construction and is made very well.  The walls, "+
    	"ceiling, and floor are made of native stone cut, "+
    	"and mortared, to fit perfectly.  The stonework is "+
@@ -38,7 +38,7 @@ void create(){
    		"builders for a purpose that only they can say.  Knowing "+
    		"dwarves it is probably the amount of minutes since their "+
    		"last ale.  This section of wall has three marks.",
-   	"stones" : "The stones here are carefully fitted to make the walls."   	
+   	"stones" : "The stones here are carefully fitted to make the walls."
   	]));
    set_exits(([
    	"north" : STEFANO+"tunnel9",

@@ -61,7 +61,11 @@ void create()
         "resistance",
         "improved resistance",
         "increased resistance",
-        "spring attack"
+        "spring attack",
+        "counter",
+        "deflection",
+        "shield proficiency",
+        "reflection"
     }));
     set_funcs(({
         "rushit",
@@ -113,17 +117,17 @@ void create()
     command("wear coif");
     switch (random(4)) {
     case 0:
-        RANDGEAR->arm_me(TO, "edgedm", 30, 2, 75);
-        RANDGEAR->arm_me(TO, "edgeds", 30, 2, 75);
+        RANDGEAR->arm_me(TO, "edgedm", 30, 3, 75);
+        RANDGEAR->arm_me(TO, "edgeds", 30, 3, 75);
         break;
 
     case 1:
-        RANDGEAR->arm_me(TO, "edgedl", 30, 2, 75);
+        RANDGEAR->arm_me(TO, "edgedl", 30, 3, 75);
         break;
 
     case 2:
-        RANDGEAR->arm_me(TO, "bluntm", 30, 2, 75);
-        RANDGEAR->arm_me(TO, "blunts", 30, 2, 75);
+        RANDGEAR->arm_me(TO, "bluntm", 30, 3, 75);
+        RANDGEAR->arm_me(TO, "blunts", 30, 3, 75);
         break;
 
     case 3:
@@ -150,6 +154,8 @@ void set_guard_stuff()
                            "bugbear"   : "A bugbear - it's gonna be mean but let's get it.",
                            "orc"       : "Don't let the orc escape!  You know it's spying for an invasion.",
                            "undead"    : "Fell undead, destroy it!",
+                           "minotaur"  : "Pray to your gods, a minotaur got past the gate!",
+                           "troll "    : "To arm!  Burn the troll!",
                        ]));
     ARREST_MSG = "%^BOLD%^%^CYAN%^Stop in the name of the law!";
     CAPTURE_MSG = "%^BOLD%^You are under arrest, criminal!";

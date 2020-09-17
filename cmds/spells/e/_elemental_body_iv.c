@@ -42,7 +42,7 @@ void create()
     ::create();
     set_spell_name("elemental body iv");
     set_domains(({"water", "earth", "air", "fire"}));
-    set_spell_level(([ "mage" : 7,"oracle": 7]));
+    set_spell_level(([ "mage" : 7,"oracle": 7, "innate" : 7 ]));
     set_mystery("elemental");
     set_description("When you cast this spell, you infuse yourself with the power of the element. Infusions give the next effects as follows:
 
@@ -52,6 +52,8 @@ void create()
   water: +8 constitution, +4 strength,     -2 dexterity,   +6 armor class
 
 This spell won't work together with other augmenting spells such as fox's cunning.
+
+Stone Lords may only gaint the augmentation of earth.
 
 Clerics of elemental domain can change into a specific domain form only.");
     set_syntax("cast CLASS "+query_spell_name()+" on fire|air|earth|water");

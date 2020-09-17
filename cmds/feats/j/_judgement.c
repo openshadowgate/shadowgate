@@ -18,7 +18,7 @@ void create()
 
 The list of judgements to choose from:
 
-%^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them a damage bonus point plus an additional damage bonus point per every nine levels.
+%^BOLD%^Destruction:%^RESET%^ The inquisitor is filled with divine wrath, giving them a damage bonus point plus an additional damage bonus point per every six levels.
 
 %^BOLD%^Healing:%^RESET%^ The inquisitor is surrounded by a healing light, gaining a fast healing pointplus an additional fast healing point per every eighteen levels.
 
@@ -56,23 +56,38 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_judgement(string args)
+int cmd_judgement(string str)
+{
+    object feat;
+    if (!objectp(TP)) {
+        return 0;
+    }
+    feat = new(base_name(TO));
+    feat->setup_feat(TP, str);
+    return 1;
+}
+
+void execute_feat()
 {
     object controller;
     int i;
     string j;
-    string* jtoactivate = ({}), * argss;
+    string* jtoactivate = ({}), * args;
+    ::execute_feat();
 
     if (!objectp(TP)) {
         return 0;
     }
 
-    if (!prerequisites(TP)) {
-        tell_object(TP, "You can't use this feat.");
-        return 1;
+    if (!FEATS_D->usable_feat(TP, query_feat_name())) {
+        return 0;
     }
 
-    argss = explode(args, " ");
+    if (!arg) {
+        return help();
+    }
+
+    args = explode(arg, " ");
     JUDGEMENT_TYPES = "/cmds/feats/obj/judgement"->query_judgement_types();
 
     if (FEATS_D->usable_feat(TP, "third judgement")) {
@@ -83,7 +98,7 @@ int cmd_judgement(string args)
         i = 1;
     }
 
-    foreach(j in argss)
+    foreach(j in args)
     {
         if (member_array(j, JUDGEMENT_TYPES) != -1) {
             jtoactivate += ({ j });
@@ -96,16 +111,23 @@ int cmd_judgement(string args)
         }
     }
 
-    if (present("judgement_obj", TP)) {
-        controller = present("judgement_obj", TP);
-    }else {
-        controller = new("/cmds/feats/obj/judgement");
-        controller->setup_judgement(TP, flevel);
-    }
-    jtoactivate = distinct_array(jtoactivate);
-    controller->activate_judgements(jtoactivate);
+    {
+        object inv;
 
-    return 1;
+        inv = all_inventory(TP);
+        inv = filter_array(inv, (:$1->is_judgement():));
+
+        if (sizeof(inv)) {
+            controller = inv[0];
+        }else {
+            controller = new("/cmds/feats/obj/judgement");
+            controller->move(TP);
+            controller->setup_judgement(TP, flevel);
+        }
+        jtoactivate = distinct_array(jtoactivate);
+        controller->activate_judgements(jtoactivate);
+
+    }
 }
 
 void dest_effect()

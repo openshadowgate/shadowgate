@@ -34,7 +34,7 @@ string myLong()
 
 
 void create()
-{ 
+{
    ::create();
    set_property("ooc room",1);
    set_property("light",2);
@@ -55,7 +55,7 @@ void create()
    set_pre_exit_functions(({"east"}),({"GoThroughDoor"}));
 }
 
-void init() 
+void init()
 {
     ::init();
     if (!present("tutorial1")) new(MON"tutorial1")->move(TO);
@@ -80,7 +80,6 @@ int bypass_func(string str)
     NEWB_D->advance_level(TP);
     NEWB_D->spawn_eq(TP, 5);
     NEWB_D->advance_level(TP);
-    //NEWB_D->spawn_eq(TP, 6);
     NEWB_D->advance_level(TP);
     NEWB_D->advance_level(TP);
     if(objectp(ob = present("newbiemassobject", TP))) ob->remove();
@@ -92,7 +91,7 @@ int bypass_func(string str)
     myRoom = new("/d/newbie/ooc/trainer");
     myRoom->set_for(TP);
     TP->move_player(myRoom);
-    return 1;    
+    return 1;
 }
 
 int quit_func(string str) {

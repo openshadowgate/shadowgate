@@ -21,15 +21,15 @@ object caster;
 int clevel;
 object lendingto;
 
+int ticker = 0;
+
 void create()
 {
     ::create();
     set_name("judgement_obj");
-    set("id", ({ "judgement_obj" }));
-    set("short", "");
-    set("long", "");
-
+    set_id(({"judgement_obj"}));
     set_property("no animate", 1);
+    set_hide(1);
     set_weight(0);
 }
 
@@ -50,9 +50,7 @@ void activate_judgements(string* judgements)
     }
     active_judgements = judgements;
 
-    if (caster->query_property("lend_judgement")) {
-        lendingto = caster->query_property("lend_judgement");
-    }
+    lendingto = caster->query_property("lend_judgement");
 
     apply_judgements(judgements, 1);
     tell_object(caster, "%^BOLD%^%^WHITE%^You with a mere will you call out to the arcane for the strength.");
@@ -73,19 +71,23 @@ void apply_judgements(string* judgements, int direction)
 {
     string j;
     int power;
-    object lendingto;
     int maxtolend, i;
 
     if (objectp(lendingto)) {
+        power = clevel;
         maxtolend = caster->query_property("greater_lend_judgement") ? 3 : 1;
+        if(maxtolend > sizeof(judgements)) {
+            maxtolend = sizeof(judgements);
+        }
+        
+        if (direction > 0) {
+            tell_object(caster, "%^BOLD%^%^WHITE%^" + lendingto->QCN + " is infused with your zeal.");
+            tell_object(lendingto, "%^BOLD%^%^WHITE%^You are infused with power of the zeal!");
+        }
 
         for (i = 0; i < maxtolend; i++) {
             if (member_array(judgements[i], JUDGEMENT_TYPES) != -1) {
                 call_other(TO, "judgement_" + judgements[i], lendingto, direction, power);
-                if (direction > 0) {
-                    tell_object(caster, "%^BOLD%^%^WHITE%^" + lendingto->QCN + " is infused with your zeal.");
-                    tell_object(lendingto, "%^BOLD%^%^WHITE%^You are infused with power of the zeal!");
-                }
             }
         }
     }
@@ -100,7 +102,12 @@ void apply_judgements(string* judgements, int direction)
                     power += 5;
                 }
             }
-            call_other(TO, "judgement_" + j, caster, direction, power);
+            if (function_exists("judgement_" + j, TO)) {
+                call_other(TO, "judgement_" + j, caster, direction, power);
+            }
+            if (direction == -1) {
+                active_judgements -= ({j});
+            }
         }
     }
 }
@@ -108,7 +115,7 @@ void apply_judgements(string* judgements, int direction)
 void judgement_destruction(object targ, int direction, int power)
 {
     int bonus;
-    bonus = power / 3 / 3 + 1;
+    bonus = power / 6 + 1;
     targ->add_damage_bonus(bonus * direction);
 }
 
@@ -159,7 +166,18 @@ void check()
         TO->remove();
         return;
     }
-    if (!sizeof(caster->query_attackers())) {
+
+    if (sizeof(caster->query_attackers())) {
+        ticker = 0;
+    }
+
+    ticker++;
+
+    if (ticker == 2) {
+        tell_object(caster,"%^BOLD%^%^WHITE%^You sense you begin to loose the grip on your arcane zeal.%^RESET%^");
+    }
+
+    if (!sizeof(caster->query_attackers()) && ticker > 3) {
         tell_object(caster, "%^BOLD%^%^CYAN%^As the battle comes to an end your arcane zeal recedes.%^RESET%^");
         apply_judgements(active_judgements, -1);
         TO->remove();
@@ -173,4 +191,22 @@ void check()
         return;
     }
     call_out("check", ROUND_LENGTH);
+}
+
+void remove()
+{
+    if (sizeof(active_judgements)) {
+        apply_judgements(active_judgements, -1);
+    }
+    ::remove();
+}
+
+int is_judgement()
+{
+    return 1;
+}
+
+void save_me()
+{
+    return;
 }

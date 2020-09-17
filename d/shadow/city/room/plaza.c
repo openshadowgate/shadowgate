@@ -104,7 +104,8 @@ void reset(){
     object sms_vendor;
    ::reset();
     if (!present("street_light", TO)) {
-        new("/d/common/obj/misc/street_light")->move(TO);
+       // new("/d/common/obj/misc/street_light")->move(TO);
+       new(OBJ+"street_light")->move(TO);// blame jenna
     }
     sms_store = find_object_or_load("/d/player_stores/poffices/shadow");
     if (objectp(sms_vendor = present("clerk", sms_store))) {

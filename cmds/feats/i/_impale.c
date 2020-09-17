@@ -389,7 +389,9 @@ void execute_attack()
     }
 
     if (objectp(target_two)) {
-        if (target_two->query_property("weapon resistance")) {
+        if(caster->query_property("shapeshifted") && caster->query_unarmed_wc() >= target_two->query_property("weapon resistance"))
+            target_two->cause_typed_damage(target_two, target_two->return_target_limb(), dam, "piercing");
+        else if (target_two->query_property("weapon resistance")) {
             if (enchant < (int)target_two->query_property("weapon resistance")) {
                 target_two->cause_typed_damage(target_two, target_two->return_target_limb(), 0, weapons[0]->query_damage_type());
             }

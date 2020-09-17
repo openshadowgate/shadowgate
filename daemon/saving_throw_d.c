@@ -20,7 +20,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     case "will":   num = 2; save_info["save_type"] = "will"; break;
     }
 
-    classes = (string)ob->query_classes();
+    classes = ob->query_classes();
     save = 0;
     for (i = 0; i < sizeof(classes); i++) {
         file = DIR_CLASSES + "/" + classes[i] + ".c";
@@ -32,7 +32,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         if (level > 20) {
             level = 20;
         }
-        saves = (string)file->saving_throws(ob);
+        saves = file->saving_throws(ob);
         if (!sizeof(saves)) {
             continue;
         }
@@ -80,34 +80,34 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         switch (type) {
         case "fort": case "fortitude":
             mod = (int)ob->query_saving_bonus("fortitude");
-            if ((string)ob->query_race() == "human" &&
-                (string)ob->query("subrace") == "aesatri") {
+            if (ob->query_race() == "human" &&
+                ob->query("subrace") == "aesatri") {
                 mod += 1;
             }
             break;
         case "reflex":
             mod = (int)ob->query_saving_bonus("reflex");
-            if ((string)ob->query_race() == "human" &&
-                (string)ob->query("subrace") == "senzokuan") {
+            if (ob->query_race() == "human" &&
+                ob->query("subrace") == "senzokuan") {
                 mod += 1;
             }
             break;
         case "will":
             mod = (int)ob->query_saving_bonus("will");
-            if ((string)ob->query_race() == "human" &&
-                (string)ob->query("subrace") == "maalish") {
+            if (ob->query_race() == "human" &&
+                ob->query("subrace") == "maalish") {
                 mod += 1;
             }
             break;
         }
 
-        if ((string)ob->query_race() == "halfling" &&
-            (string)ob->query("subrace") == "lightfoot halfling") {
+        if (ob->query_race() == "halfling" &&
+            ob->query("subrace") == "lightfoot halfling") {
             mod += 1;
         }
 
-        if ((string)ob->query_race() == "gnome" &&
-            ((string)ob->query("subrace") == "deep gnome" || (string)ob->query("subrace") == "svirfneblin")) {
+        if (ob->query_race() == "gnome" &&
+            (ob->query("subrace") == "deep gnome" || ob->query("subrace") == "svirfneblin")) {
             mod += 0;                                                                                                                                                // svirfneblin +2 saves racial - changed in racial update
         }
         if (FEATS_D->usable_feat(ob, "resistance")) {
@@ -151,6 +151,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         dc *= -1;
     }
     roll1 = roll_dice(1, 20);
+    save_info["saving_throw_roll"] = roll1;
     save_info["pass_or_fail_by"] = roll1 + save + dc;
 
     if (roll1 == 1) {
@@ -242,4 +243,40 @@ mapping debug_will_save(object ob, int dc)
 {
     do_save(ob, dc, "will");
     return save_info;
+}
+
+int magic_save_throw_adjust(object targ, object caster)
+{
+    int caster_bonus = 0;
+
+    if (targ->query_race() == "dwarf") {
+        if (targ->query("subrace") == "shield dwarf" || targ->query("subrace") == "gold dwarf") {
+            caster_bonus -= 2;
+        }
+    }
+    if (targ->query_race() == "orc" || targ->query_race() == "half-orc") {
+        caster_bonus -= 1;
+    }
+    if (targ->query_race() == "human") {
+        if (targ->query("subrace") == "heartlander") {
+            caster_bonus -= 1;
+        }
+    }
+
+
+    if (arrayp(targ->query_property("protection_from_alignment"))) {
+        if (member_array(caster->query_alignment(), targ->query_property("protection_from_alignment")) != -1) {
+            caster_bonus -= 2;
+        }
+    }
+
+    if (FEATS_D->usable_feat(targ, "disruptive")) {
+        caster_bonus -= 4;
+    }
+
+    if (FEATS_D->usable_feat(targ, "closed mind")) {
+        caster_bonus -= 2;
+    }
+
+    return caster_bonus;
 }

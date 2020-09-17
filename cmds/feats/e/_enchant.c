@@ -66,6 +66,7 @@ int cmd_enchant(string str)
 void execute_feat()
 {
     object ob;
+    ::execute_feat();
 
     if (!arg) {
         return help();
@@ -88,6 +89,10 @@ void execute_feat()
     }
     if (ob->query("uses")) {
         write("This object already has magic instilled in it.");
+        return 1;
+    }
+    if (ob->query_worn() || ob->query_wielded()) {
+        write("This object is worn or wielded, you'll need to unencumber it first.");
         return 1;
     }
     if (max(all_inventory(caster)->id("gem")) < 1) {
@@ -139,16 +144,31 @@ void select_spell(string str, object ob)
     if (caster->is_class("sorcerer")) {
         myclasses += ({ "mage" });                              // patch to pick up mage spell list for sorcs
     }
-    if (caster->is_class("oracle")) {
-        myclasses += ({ "cleric" });                            // patch to pick up cleric spell list for oracles
-    }
+
+    castclass = "";
     for (i = 0; i < sizeof(myclasses); i++) {
-        if (filename->query_spell_level(myclasses[i])) {
-            castclass = myclasses[i];
+        string tmpclass = myclasses[i];
+        int castable = 0;
+
+        //TODO: Cleric domain specific spells
+        if (filename->query_spell_level(tmpclass) && TP->query_memorized(tmpclass, str)) {
+
+            if (MAGIC_D->is_mastering_class(tmpclass)) {
+                if (member_array(str, TP->query_mastered_spells(tmpclass)) > -1) {
+                    castable = 1;
+                }
+            }
+            else {
+                castable = 1;
+            }
+        }
+
+        if (castable && TP->query_guild_level(tmpclass) > TP->query_guild_level(castclass)) {
+            castclass = tmpclass;
         }
     }
     if (castclass == "") {
-        tell_object(caster, "Your class can't cast that spell, please try again.");
+        tell_object(caster, "You cannot cast that spell or it is not prepared, please try again.");
         write("%^BOLD%^%^RED%^You start the process of enchanting the " + ob->query_short() + ".");
         write("%^YELLOW%^Enter spell name:");
         write("~q to cancel");
@@ -177,7 +197,7 @@ void select_spell(string str, object ob)
  */
 int maximum_enchant_level()
 {
-    return caster->query_guild_level(castclass) + caster->query_property("empowered");
+    return flevel + caster->query_property("empowered");
 }
 
 void spell_charges(string str, object ob, string spell, string file)
@@ -239,26 +259,28 @@ void do_enchant(string str, object ob, string spell, string file, int charges, i
         return;
     }
 
-    if (max(all_inventory(caster)->id("gem")) < 1) {
-        write("%^BOLD%^%^RED%^You need a gem in your inventory to focus your magic through.");
-        return;
-    }else {
-        (filter_array(all_inventory(caster), (: $1->id("gem") :))[0])->remove();
-    }
-
-    if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
-        caster->add_exp(expdrain * -1);
-        caster->resetLevelForExp(0);
-        tell_object(caster, "Subtracting " + expdrain + " experience points.");
-    }else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
-        if ((int)caster->set_XP_tax(expdrain, 0, "improvement") == -1) {
-            tell_object(caster, "Currently your character improvement tax is above the maximum allowed. " +
-                        "You must first reduce it before you can enchant this item.");
-            return 1;
+    if(!avatarp(caster)) {
+        if (max(all_inventory(caster)->id("gem")) < 1) {
+            write("%^BOLD%^%^RED%^You need a gem in your inventory to focus your magic through.");
+            return;
+        }else {
+            (filter_array(all_inventory(caster), (: $1->id("gem") :))[0])->remove();
         }
-        if (expdrain > 0) {
-            tell_object(caster, "Incuring character improvement tax of " + expdrain + ". All future experience gained will be " +
-                        "reduced by 50% until it is repaid.");
+
+        if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
+            caster->add_exp(expdrain * -1);
+            caster->resetLevelForExp(0);
+            tell_object(caster, "Subtracting " + expdrain + " experience points.");
+        }else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
+            if ((int)caster->set_XP_tax(expdrain, 0, "improvement") == -1) {
+                tell_object(caster, "Currently your character improvement tax is above the maximum allowed. " +
+                            "You must first reduce it before you can enchant this item.");
+                return 1;
+            }
+            if (expdrain > 0) {
+                tell_object(caster, "Incuring character improvement tax of " + expdrain + ". All future experience gained will be " +
+                            "reduced by 50% until it is repaid.");
+            }
         }
     }
 

@@ -516,6 +516,7 @@ void response(string msg, object ob)
     if ((strsrch(msg, "adventure") != -1
          || strsrch(msg, "Adventure") != -1
          || strsrch(msg, "yes") != -1 || strsrch(msg, "Yes") != -1
+         || strsrch(msg, "help") != -1 || strsrch(msg, "Help") != -1
          && already_helped != 1)) {
         command("emote smiles and claps her hands together.");
         command("speech speak quickly");

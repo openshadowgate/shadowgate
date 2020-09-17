@@ -51,9 +51,9 @@ int hit_func(object target) {
         tell_object(ETO,"%^BLUE%^Your anchor smashes "+target->query_cap_name()+
             ".",target);
         tell_object(target, "%^BLUE%^"
-         +ETO->QCN+"'s  penetrates into"+
-         " you as it shines with a bright light.");
-         return roll_dice(2,8)+2;
+         +ETO->QCN+"'s anchor penetrates into"+
+         " you.");
+         return roll_dice(2,8)+5;
 
      case 4:
             tell_room(EETO,"%^BLUE%^"+ETOQCN+" bashes the anchor into "

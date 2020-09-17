@@ -16,8 +16,10 @@ void create(){
 	  " a perpetual winter.  There is nothing"+
 	  " here but the chill touch of Lord Shadow.  "+
 	  "Turn back lest you end up a frozen corpse.\n\n"+
-	  "%^MAGENTA%^This area is designed for HMs and "+
-	  "parties close to 30. \n%^BOLD%^%^RED%^Characters lower than that will"+
+	  "%^MAGENTA%^This area is designed for "+
+	  "parties around level 30. Parts of it will be difficult"+
+	  " for characters in their 40s."+
+	  "\n%^BOLD%^%^RED%^Characters lower than that will"+
 	  " likely get to meet Lysara.");
       set_language("wizish");
       set_weight(10000);

@@ -1,23 +1,34 @@
 #include <std.h>
 
-inherit DAEMON;
-
 int cmd_unnickname(string arg)
 {
-    mapping nicknames;
-    object act_ob;
+    mapping nicknames = TP->query_nicknames();
+    string s, nickname;
 
-    act_ob = previous_object();
     if (!arg) {
-        notify_fail("usage: unnickname \\<nick_name>\n");
-        return 0;
+        notify_fail("usage: unnickname NICKNAME\n");
+        return 1;
     }
-    if (!act_ob->query_nickname(arg)) {
+
+    if (!sizeof(nicknames)) {
+        notify_fail("You don't have any nicknames defined!");
+        return 1;
+    }
+
+    foreach(s in keys(nicknames)) {
+        if (nicknames[s] == arg) {
+            nickname = s;
+            break;
+        }
+    }
+
+    if (!nickname) {
         notify_fail("No such nickname defined.\n");
         return 0;
     }
-    act_ob->remove_nickname(arg);
-    write("Nickname removed: " + arg + "\n");
+
+    TP->remove_nickname(nickname);
+    write("Nickname removed: " + nickname + " (" + arg + ") " "\n");
     return 1;
 }
 

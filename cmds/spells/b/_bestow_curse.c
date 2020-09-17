@@ -6,7 +6,7 @@
 #include <skills.h>
 inherit SPELL;
 
-int clevel,bonus,i;
+int bonus,i;
 
 int is_curse()
 {
@@ -48,7 +48,7 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-    if(do_save(target)){
+    if(do_save(target, -2)){
         tell_object(target,"%^CYAN%^You manage to shake off the dark aura that starts to grow around you, and it fades "
 "away to nothing!%^RESET%^");
         tell_room(place,"%^CYAN%^A mirroring aura starts to grow around "+target->QCN+", but then it fades away to "
@@ -56,30 +56,29 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-    bonus = clevel/6+1;
-    duration = (ROUND_LENGTH * 4) * clevel;
+    bonus = clevel / 6 + 1;
+    duration = (ROUND_LENGTH * 4 + roll_dice(1, 20)) * clevel;
 
-    tell_object(target,"%^BLUE%^A mirroring aura starts to grow around you, seeping into your skin to taint it a %^RESET%^"
-"sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.  An overwhelming feeling of weakness comes over you.%^RESET%^");
+    tell_object(target,"%^BLUE%^A mirroring aura starts to grow around you, seeping into your skin to taint it a %^RESET%^sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.  An overwhelming feeling of weakness comes over you.%^RESET%^");
     tell_room(place,"%^BLUE%^A mirroring aura starts to grow around "+target->QCN+", seeping into "+target->QP+" skin to taint it a %^RESET%^sic%^GREEN%^k%^RESET%^ly %^BLUE%^pallid hue.%^RESET%^",target);
-    target->add_damage_bonus((-1)*bonus);
-    target->add_attack_bonus((-1)*bonus);
-    target->set_property("empowered",(-1)*bonus);
-    for(i=0;i<sizeof(CORE_SKILLS);i++) target->add_skill_bonus(CORE_SKILLS[i],(-1)*bonus);
-    target->add_saving_bonus("all",(-1)*bonus);
-    target->set_property("spelled", ({TO}) );
-    target->set_property("cursed",1);
+    target->add_damage_bonus((-1) * bonus);
+    target->add_attack_bonus((-1) * bonus);
+    target->set_property("empowered", (-1) * bonus);
+    for (i = 0; i < sizeof(CORE_SKILLS); i++) {
+        target->add_skill_bonus(CORE_SKILLS[i], (-1) * bonus);
+    }
+    target->add_saving_bonus("all", (-1) * bonus);
+    target->set_property("spelled", ({ TO }));
+    target->set_property("cursed", 1);
     addSpellToCaster();
-    call_out("dest_effect",duration);
+    call_out("dest_effect", duration);
     spell_successful();
 }
 
 void dest_effect() {
     if(objectp(target)) {
-        tell_object(target,"%^CYAN%^The feeling of weakness finally lifts, and with it fades the sickly color of your "
-"skin.%^RESET%^");
-        tell_room(environment(target),"%^CYAN%^The sickly color of "+target->QCN+"'s skin fades back into a more healthy "
-"shade.%^RESET%^",target);
+        tell_object(target,"%^CYAN%^The feeling of weakness finally lifts, and with it fades the sickly color of your skin.%^RESET%^");
+        tell_room(environment(target),"%^CYAN%^The sickly color of "+target->QCN+"'s skin fades back into a more healthy shade.%^RESET%^",target);
         target->add_damage_bonus(bonus);
         target->add_attack_bonus(bonus);
         target->set_property("empowered",bonus);

@@ -250,7 +250,13 @@ varargs int get_stab_damage(object player,object target,object weapon)
 
 	if (player->is_class("thief"))
     {
-        if(userp(player)) { level = player->query_guild_level("thief"); }
+        if(userp(player))
+        {
+            level = player->query_guild_level("thief");
+            //If they're an arcane trickster, they gain +5 stab level (to be closer to SRD)
+            if(FEATS_D->usable_feat(player, "invisible thief"))
+                level += 5;
+        }
         else { level = player->query_class_level("thief"); }
     }
 

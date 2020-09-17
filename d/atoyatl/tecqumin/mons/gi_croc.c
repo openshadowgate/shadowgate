@@ -30,11 +30,11 @@ void create()
 	set_property("swarm",1);
   	set_overall_ac(-66);
       set_size(3);
-      add_attack_bonus(69); 
+      add_attack_bonus(69);
       set_property("magic",1);
       set_monster_feats(({
         "damage resistance",
-    })); 
+    }));
 
 
 
@@ -57,7 +57,7 @@ void create()
     set_emotes(10,({
             "%^BOLD%^%^GREEN%^The %^RESET%^%^GREEN%^croc%^BOLD%^%^GREEN%^"
            +" dives to attack from below",
-   
+
             "%^BOLD%^%^GREEN%^The %^RESET%^%^GREEN%^croc%^BOLD%^%^GREEN%^"
            +" gapes its mouth wide open, displaying rows of%^RESET%^"
            +" w%^BOLD%^%^WHITE%^i%^RESET%^cked teeth%^BOLD%^%^GREEN%^.",
@@ -113,7 +113,7 @@ void spin(int count){
                     +" with one of your limbs locked firmly in its mouth, nearly %^BOLD%^"
                     +"%^RED%^ripping%^BOLD%^%^GREEN%^ it off and leaving you damaged and"
                     +" disoriented.");
-  tell_room(ETO, TO->QCN + "%^BOLD%^%^GREEN%^ spins suddenly with one of " + (string)seized->QCN 
+  tell_room(ETO, TO->QCN + "%^BOLD%^%^GREEN%^ spins suddenly with one of " + (string)seized->QCN
                  +"'s %^BOLD%^%^GREEN%^ limbs in its mouth, trying to rip it off.", seized);
   seized->do_damage(100+random(100));
   call_out("spin", 2, count);
@@ -123,7 +123,7 @@ void breakout(object ob){
   if (!objectp(ob)) { return;}
   tell_object(ob, "You manage to break free from the croc's jaws");
   tell_room(ETO, (string)ob->QCN + "%^RESET%^ manages to break free of the croc's jaws!", ob);
-  ob->set_paralysed(0);
+  ob->set_paralyzed(0);
   seized = 0;
 }
 
@@ -133,9 +133,9 @@ void seize(object targ){
   if (seized !=0){return;}
   if (!objectp(targ)||!objectp(room)) { return; }
   tell_object(targ, TO->QCN + "%^BOLD%^%^GREEN%^ grabs you in its mouth and holds tight.");
-  tell_room(room, TO->QCN + "%^BOLD%^%^GREEN%^ seizes " + targ->QCN 
+  tell_room(room, TO->QCN + "%^BOLD%^%^GREEN%^ seizes " + targ->QCN
                  +"%^BOLD%^%^GREEN%^ in its mouth and holds tight.", targ);
-  targ->set_paralyzed(30, "You are locked in the powerful jaws of the %^GREEN%^crocodile%^RESET%^.");
+  targ->set_paralyzed(roll_dice(1, 4) * 8, "You are locked in the powerful jaws of the %^GREEN%^crocodile%^RESET%^.");
   seized = targ;
   call_out("spin", 2, 3 + random(3));
 }

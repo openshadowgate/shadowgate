@@ -6,7 +6,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("mending");
-    set_spell_level(([ "bard" : 1,"druid" : 1, "cleric" : 1, "mage" : 1, "oracle" : 1, "psion" : 1 ]));
+    set_spell_level(([ "bard" : 1,"druid" : 1, "cleric" : 1, "mage" : 1, "oracle" : 1, "psion" : 1, "warlock" : 1 ]));
     set_mystery( ({ "life", "metal" }) );
     set_spell_sphere("alteration");
     set_syntax(
@@ -17,6 +17,7 @@ void create() {
     set_somatic_comp();
     set_arg_needed();
 	set_helpful_spell(1);
+    set_feats_required(([ "warlock" : "book of shadows"]));
 }
 
 string query_casting_string() {

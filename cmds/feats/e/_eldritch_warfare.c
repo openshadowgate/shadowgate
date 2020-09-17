@@ -49,7 +49,6 @@ string cm(string str)
 
 void execute_feat()
 {
-    string YOU,YOUS;
     object obj;
 
     if(!objectp(caster))
@@ -62,8 +61,8 @@ void execute_feat()
     {
         obj = query_active_feat("eldritch warfare");
         tell_object(caster,cm("You release your concentration on the warsongs."));
+        tell_room(place,cm(""+caster->QCN+" releases "+caster->QP+" concentration on the warsongs."), caster);
         obj->dest_effect();
-        dest_effect();
         return;
     }
     ::execute_feat();
@@ -81,7 +80,7 @@ void dest_effect()
     {
         caster->remove_property_value("active_feats",({TO}));
         caster->remove_property("cast and attack");
-        tell_object(caster,"%^BOLD%^%^BLUE%^Your concentration on warsongs fades.");
+        tell_object(caster,"%^BOLD%^%^BLUE%^Your concentration on the warsongs fades.");
     }
     ::dest_effect();
     remove_feat(TO);

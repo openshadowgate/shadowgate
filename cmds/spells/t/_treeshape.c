@@ -54,6 +54,7 @@ spell_effect(int prof) {
 "of bark-like protection!",caster);
     }
     skin = new("/d/magic/obj/barkskin.c");
+    skin->set_property("enchantment", (clevel / 10) + 1);
     skin->move(caster);
     caster->remove_paralyzed();
     caster->force_me("wear barkskin");

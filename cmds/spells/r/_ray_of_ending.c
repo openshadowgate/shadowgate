@@ -47,10 +47,8 @@ void spell_effect(int prof)
         tell_room(place, "%^BOLD%^%^BLACK%^"+target->QCN+" is hit by a ray emanating from "+caster->QCN+".\n", ({ caster, target}));
         tell_object(caster, "%^BOLD%^%^BLACK%^Your ray of ending hits "+target->QCN+"!\n");
 
-        if (do_save(target, 0) ||
-            target->query_level() > caster->query_level() ||
-            target->query_level() > clevel ||
-            target->query_property("no death")) {
+        // WOK, clasing rocks and this one share disadvantage value.
+        if (combat_death_save(target, 0)) {
             tell_object(target,"%^BOLD%^%^BLACK%^You sigh with relief as you endure the unmaking.");
             damage_targ(target, target->query_target_limb(), sdamage, "untyped");
         } else {

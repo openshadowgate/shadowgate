@@ -6,7 +6,7 @@
 inherit SPELL;
 
 object oldenv, web, mass;
-int waittime, clevel;
+int waittime;
 
 void dest_effect();
 void waiter(int num);
@@ -48,6 +48,6 @@ spell_effect(int prof) {
         tell_object(caster,"%^BOLD%^%^RED%^Your mass of webs "+strength+" "+target->QCN+" trapping "+target->QP+" legs!");
         tell_object(target,"%^BOLD%^%^RED%^"+caster->QCN+"'s mass of webs "+strength+" you, trapping your legs!");
         tell_room(place,"%^BOLD%^%^RED%^"+caster->QCN+"'s mass of webs "+strength+" "+target->QCN+" trapping "+target->QP+" legs!", ({caster,target}) );
-        target->set_tripped(roll_dice(1,8));
+        target->set_tripped(roll_dice(3,4));
     }
 }

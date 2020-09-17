@@ -21,17 +21,10 @@ void create(){
 }
 
 void init(){
-   int clevel;
    ::init();
    if(stringp(owner)) return;
    if(interactive(TP) && TP == ETO){
        owner = TPQN;
-   }
-   clevel = ETO->query_guild_level("cleric");
-   set_property("enchantment",clevel/10);
-   while((int)(query_property("enchantment")) < 0){
-      remove_property("enchantment");
-      set_property("enchantment",clevel/10);
    }
 }
 

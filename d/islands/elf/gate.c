@@ -98,15 +98,15 @@ int go_east()
    if(!objectp(TP)) return 1;
    if(TP->query_true_invis()) return 1;
    if(ALIGN->is_evil(TP)) {
-                tell_object(TP,"%^RED%^You feel a pain so horrible rip through your body that"+
-                " you can't stifle the scream that swells within your throat!");
-                tell_room(ROOMS"gate","%^RED%^"+TP->QCN+
+       tell_object(TP,"%^RED%^You feel a pain so horrible rip through your body that"+
+       " you can't stifle the scream that swells within your throat!");
+       tell_room(ROOMS"gate","%^RED%^"+TP->QCN+
 			    " screams in agony as "+
 				TP->query_subjective()+" walks through the gate.",TP);
-                tell_room(ROOMS"gate1","%^RED%^"+TP->QCN+
+       tell_room(ROOMS"gate1","%^RED%^"+TP->QCN+
 				" screams in agony as "+TP->QS+
 				" exits through the gate.",TP);
-				TP->cause_typed_damage(TP,0,random(30)+30,"divine");
+				TP->cause_typed_damage(TP,0,random(100)+50,"divine");
   
 				
         }

@@ -39,7 +39,9 @@ void spell_effect(int prof) {
     tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" takes in a deep breath and screams the words, 'GRIMMUS MORRTES!!!'",({caster}));
     spell_successful();
     spell_kill(target, caster);
-    if (target->query_property("no death") || mind_immunity_damage(target)) {
+
+    // Ray of ending, clashing rocks and this one should share disadvantage value
+    if (combat_death_save(target, 0) || mind_immunity_damage(target)) {
         tell_object(target,"%^BOLD%^You feel a tug at your life force, but shrug it off easily!");
         tell_room(place,"%^BOLD%^"+target->QCN+" seems to shrug the spell off effortlessly.",({target}));
         dest_effect();

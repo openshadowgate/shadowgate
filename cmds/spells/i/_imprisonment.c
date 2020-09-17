@@ -52,6 +52,8 @@ spell_effect(int prof) {
     mass=new("/d/magic/obj/prison.c");
     mass->set_spell(TO);
     mass->move(oldenv);
+    mass->set_property("spelled", ({ TO }));
+    mass->set_long(target->query_long());
     web=new("/d/magic/room/in_prison.c");
     target->move(web);
     addSpellToCaster();

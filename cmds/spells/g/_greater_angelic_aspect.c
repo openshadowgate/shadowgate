@@ -13,7 +13,7 @@ void effect(int direction)
     }
     else
     {
-        caster->remove_property("flying");
+        caster->set_property("flying", -1);
         caster->remove_property("angelic_aspect");
     }
 

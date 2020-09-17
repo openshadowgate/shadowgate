@@ -1,8 +1,8 @@
 /*
   _thunderstomp.c
-  
+
   reskin of stomp from psywarrior
-  
+
   -- Tlaloc --
 */
 
@@ -17,7 +17,7 @@ void create()
     ::create();
     set_spell_name("thunderstomp");
     set_spell_level(([ "ranger" : 1, "druid" : 1, "mage" : 1, ]));
-    set_spell_sphere("combat");
+    set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS thunderstomp");
     set_description("Upon casting this spell, the caster "
        "releases a stream of magical energy to empower a stomp, creating a "

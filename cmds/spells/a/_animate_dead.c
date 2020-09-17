@@ -23,7 +23,7 @@ void create()
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
 To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check your undead pool size use %^ORANGE%^<poolsize>%^RESET%^");
+To check how many undead you have use %^ORANGE%^<poolsize>%^RESET%^");
     set_verbal_comp();
     set_somatic_comp();
     set_non_living_ok(1);
@@ -75,7 +75,7 @@ void spell_effect(int prof)
     if (!intp(num_mon)) {
         num_mon = 0;
     }
-    if (num_mon >= 6) {
+    if (num_mon >= 8) {
         tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^YOU ARE %^WHITE%^NOT %^WHITE%^WORTHY%^BLACK%^ TO RAISE MORE!%^RESET%^%^RESET%^");
         tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
         TO->remove();
@@ -88,7 +88,7 @@ void spell_effect(int prof)
         undead = new(UNDEADDIR + "skeleton");
         lvl = 1;
 
-        if (num_mon >= 6) {
+        if (num_mon >= 8) {
             undead->remove();
             tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^RAISING MORE IS %^WHITE%^BEYOND%^BLACK%^ YOUR PATHETIC %^BLACK%^M%^WHITE%^ASTERY!%^RESET%^%^RESET%^");
             tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
@@ -102,7 +102,7 @@ void spell_effect(int prof)
         targs[i]->remove();
         num_mon += lvl;
 
-        undead->set_property("raised", lvl);
+        undead->set_property("raised", 1);
         undead->set_property("minion", caster);
         undead->move(environment(caster));
 
@@ -124,7 +124,7 @@ void spell_effect(int prof)
         undead->set_property("spell_creature", TO);
         undead->set_property("minion", caster);
         controller->add_monster(undead);
-        caster->set_property("raised", lvl);
+        caster->set_property("raised", 1);
     }
     tell_object(caster, "%^BLUE%^You let your arms drop limply after completing the spell.");
     tell_room(place, "%^BOLD%^" + caster->QCN + " lets " + caster->QP + " arms drop limply.", caster);

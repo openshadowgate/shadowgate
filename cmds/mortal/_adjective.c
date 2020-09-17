@@ -11,19 +11,31 @@ int cmd_adjective(string str)
 
     desc = new(DESC_D);
 
-    if(!str) {
+    if (!interactive(TP)) {
+        if(!str) { }
+        else {
+            if (strsrch(str, "$N") == -1) {
+                str = "$N, "+str;
+            }
+            str = replace_string(str,"$N",capitalize(TP->query_name()));
+            TP->set_short(str);
+        }
+    }
+    else {
+
+        if(!str) {
+
+            write("You will now be seen as "+TP->getWholeDescriptivePhrase()+".");
+            return 1;
+        }
+
+        TP->setDescriptivePhrase(str);
+
+        desc->set_profile_stuff(str,"adjective",TP);
 
         write("You will now be seen as "+TP->getWholeDescriptivePhrase()+".");
-        return 1;
     }
-
-    TP->setDescriptivePhrase(str);
-
-    desc->set_profile_stuff(str,"adjective",TP);
-
-    write("You will now be seen as "+TP->getWholeDescriptivePhrase()+".");
     return 1;
-
 }
 
 int help(){
@@ -46,6 +58,8 @@ You are required to use automatic racial substitutions %^CYAN%^$R%^RESET%^, for 
 In addition to that, you can use %^CYAN%^$G%^RESET%^ to put in your gender.
 
 Your adjective should be something appropriate that someone could tell almost immediately about your character. It should also be fairly short and succinct as well as stable over reasonable periods of time.
+
+For summons that can be commanded, you can use %^CYAN%^$N%^RESET%^ to place their name in the adjective, otherwise it will be prepended to the beginning of their adjective.
 
 %^CYAN%^EXAMPLES%^RESET%^
 

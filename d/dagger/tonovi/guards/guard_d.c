@@ -59,7 +59,7 @@ void watch_party(object room){
     }
     while(count) {
         guard = new (WATCH);
-        guard->add_id("shadow law");
+        guard->add_id("tonovi law");
         watch += ({guard});
         if(!leader) {
             leader = guard;

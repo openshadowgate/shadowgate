@@ -72,11 +72,8 @@ void dest_effect(){
         tell_object(caster,"%^BOLD%^%^BLUE%^As your concentration wanes, "
            "your feet return to the ground.%^RESET%^");
         tell_room(environment(caster),"%^BOLD%^%^BLUE%^"+caster->QCN+"'s feet return to the ground.%^RESET%^", caster);
-        caster->remove_property("flying");
-        caster->set_property("endurance",(-1*(mylevel/10)));
-        //see above
-        //caster->remove_property("MIN");
-        //caster->remove_property("MOUT");
+        caster->set_property("flying", -1);
+        caster->set_property("endurance", (-1 * (mylevel / 10)));
         caster->remove_property_value("added short",({"%^BOLD%^%^BLUE%^ (hovering)%^RESET%^"}));
     }
     ::dest_effect();

@@ -20,28 +20,6 @@
 
 inherit OBJECT;
 
-void set_spellbook(string spell);
-string *query_spells();
-void set_spells(mapping spelllist);
-void remove_spellbook(string spell);
-int remove_spell(string spell);
-int query_spellbook(string spell);
-int look(string str);
-int memorize_spell(string str);
-int check_activity(string str);
-void flip(string str, int temp, object play, int num);
-void memorize2(string str, int temp, object play);
-int forget_spell(string str);
-int add_spell(string str);
-int help(string str);
-void line();
-void set_owner();
-int offer(string str);
-int add_all();
-string query_owner();
-private void swap(int i, int j);
-void cull_non_school_spells(object holder);
-
 nosave string *magic;
 mapping spells = ([]);
 
@@ -137,9 +115,6 @@ void cull_non_school_spells(object holder) {
 }
 
 void set_spellbook(string spell) {
-    string a_buggy_spell;
-    string spell_file;
-    int spell_level;
     mapping spell_index = MAGIC_D->query_index("mage");
 
     if (spell)
@@ -189,9 +164,11 @@ int query_spellbook(string spell) {
 int look(string str) {
     object ob;
     int x, y, z, columns;
-    string tmp, gtype, temp1;
+    int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
+    int bsize;
+    string tmp, gtype, pagebuff;
     string filter;
-    string * output = ({}), oline, obuff;
+    string * output = ({}), oline, *obuff;
 
 
     tmp = ({});
@@ -254,32 +231,41 @@ int look(string str) {
         output+=({"%^BOLD%^%^CYAN%^"+arrange_string(magic[x], 24)+"%^RESET%^%^CYAN%^ "+arrange_string(speccache[magic[x]]["sphere"],4)+" "+arrange_string(get_spell_level(magic[x]),2)});
     }
 
-    z=max(map_array(output,(:sizeof(strip_colors($1)):)))+2;
-    columns = atoi(TP->getenv("SCREEN"))/z;
-    columns = columns<1?1:columns;
+    // Columns interface is documented in _spells.c
+    z = max(map_array(output, (: sizeof(strip_colors($1)) :))) + 2;
+
+    columns = atoi(TP->getenv("SCREEN")) / z;
+    columns = columns < 1 ? 1 : columns;
+
     y = atoi(TP->getenv("COLUMNS"));
-    y = y<1?1:y;
-    columns = columns>y?y:columns;
-    obuff="%^CYAN%^";
+    y = y < 1 ? 1 : y;
+    columns = columns > y ? y : columns;
+    obuff=({});
     x=0;
+    bsize = 0;
+
     foreach(oline in output)
     {
-        obuff+=oline+"  ";
+        obuff += ({oline});
         x++;
-        if(!(x%columns))
-        {
-            if(sizeof(obuff)>2200)
-            {
-                tell_object(TP,obuff);
-                obuff="";
+        bsize += sizeof(oline);
+
+        if (!(x % columns)) {
+
+            if (bsize > 2200) {
+                pagebuff = format_page(obuff, columns, z * columns, vertical);
+                tell_object(TP, pagebuff);
+
+                if (vertical) {
+                    tell_object(TP," ");
+                }
+
+                obuff = ({});
+                bsize = 0;
             }
-            else
-                obuff+="\n";
         }
-        else
-            obuff+="";
     }
-    tell_object(TP,obuff);
+    tell_object(TP,format_page(obuff, columns, z * columns, vertical));
 
     if (avatarp(TP)) write(
 @GARRETT
@@ -295,7 +281,6 @@ GARRETT
 int memorize_spell(string str) {
     int sl, rst, temp, cl, lvadj, num;
     string splnm;
-    object ownr;
 
     if (TP->query_bound() || TP->query_unconscious()) {
         TP->send_paralyzed_message("info",TP);
@@ -453,10 +438,7 @@ int report_spells(string str){
 }
 
 int forget_spell(string str) {
-    int temp, sl, allowed_sl;
-    object ownr;
-    mapping memorized;
-    int *in_mind;
+    int sl;
 
     if (!sl = TP->query_memorized("mage",str))
         return notify_fail("You do not have that spell in your book to forget! ["+str+"]\n");
@@ -516,9 +498,6 @@ int *bonus_spell_slots(object ob, int *spells)
 }
 
 int help(string str) {
-    int x, calc;
-    int *in_mind;
-    string tmp;
 
     if (!str)
         return 0;
@@ -590,7 +569,7 @@ void set_owner() {
 
 int offer(string str) {
     if (id(str)) {
-        tell_object(TP, "%^BOLD%^No offering spell books.  If you don't want it sell it!");
+        tell_object(TP, "%^BOLD%^Nobody wants it. If you don't want it drop it!");
         return 1;
     }
     return 0;

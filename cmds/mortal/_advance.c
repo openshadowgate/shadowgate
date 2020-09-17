@@ -416,9 +416,10 @@ int pick_warlock_heritage(string str,object ob) {
     align = ob->query_alignment();
     switch(align) {
       case 7: heritages = (({ "celestial", "fey" })); break;
-      case 8: heritages = (({ "celestial", "fey", "abyssal" })); break;
+      case 8: heritages = (({ "celestial", "fey", "abyssal", "star" })); break;
       case 9: heritages = (({ "fey", "abyssal", "gloom" })); break;
-      case 6: heritages = (({ "abyssal", "gloom", "infernal" })); break;
+      case 5: heritages = (({ "star", "gloom", "fey" })); break;
+      case 6: heritages = (({ "abyssal", "gloom", "infernal", "star" })); break;
       case 3: heritages = (({ "gloom", "infernal" })); break;
       default: tell_object(ob,"You have an alignment that does not work for a warlock! Please contact a wiz."); return 1; break;
     }
@@ -426,6 +427,7 @@ int pick_warlock_heritage(string str,object ob) {
       case "celestial":  heritage = "celestial";  break;
       case "fey":        heritage = "fey";        break;
       case "abyssal":    heritage = "abyssal";    break;
+	  case "star":      heritage = "occult";      break;
       case "gloom":      heritage = "gloom";      break;
       case "infernal":   heritage = "infernal";   break;
       case "abort": return 1;
@@ -871,9 +873,17 @@ int cmd_advance(string myclass){
 	      return 1;
          }
       }
-      write("%^BOLD%^You are not yet experienced enough to gain next level of "+myclass+".\n");
+
       if((int)TP->query_class_level(myclass) == 0) { TP->remove_class(myclass); }
       TP->remove_property("multiclassing");
+
+      if (ETP->query_level() < 6) {
+          if (strsrch(base_name(ETP), "/d/newbie/ooc/hub_room") == 0) {
+              return 1;
+          }
+      }
+
+      write("%^BOLD%^You are not yet experienced enough to gain next level of "+myclass+".\n");
       return 1;
    }
 }

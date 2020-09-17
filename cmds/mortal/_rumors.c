@@ -86,7 +86,7 @@ arealist = ({
             ({"Devil Tunnels",30,35,}),
             ({"Geonslu's Lair (Tonerra)",30,35,}),
             ({"Haunted House (Deku)",30,35,}),
-            ({"Ice Island (30 16)",30,35,}),
+            ({"Ice Island (30 16)",30,45,}),
             ({"Kinaro Underdark (Beneath Kinaro)" ,30,35,}),
             ({"Muln's Lair (Charu Mountains)" ,30,35,}),
             ({"Oubliette (Crystal Tower)",30,35,}),
@@ -162,7 +162,7 @@ int cmd_rumors(string args)
             if(!sizeof(places))
                 tell_object(TP,"%^BOLD%^%^CYAN%^There are no rumors of adventurers passing through cities.%^RESET%^\n");
             else
-                tell_object(TP, "%^BOLD%^%^CYAN%^There are rumors of adventurers recently passing through "+implode(places,", ")+".%^RESET%^\n");
+                tell_object(TP, "%^BOLD%^%^CYAN%^There are rumors of %^MAGENTA%^adventurers%^CYAN%^ recently passing through %^YELLOW%^"+implode(places,", ")+".%^RESET%^\n");
         }
     }
 

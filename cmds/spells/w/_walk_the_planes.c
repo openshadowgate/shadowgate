@@ -45,7 +45,7 @@ void spell_effect(int prof) {
     if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))
     {
         tell_object(caster,"You sense something is wrong with your spell and it backfires.");
-        damage_targ(caster, caster->query_target_limb(), sdamage, "mental");
+        damage_targ(caster, caster->query_target_limb(), sdamage / 4, "mental");
         tell_room(place,caster->QCN+" "+
                   "looks startled.",caster);
         dest_effect();
@@ -73,6 +73,11 @@ void spell_effect(int prof) {
         tell_object(caster,"%^CYAN%^Sensing a weakness, you reach out and part reality to reveal a %^RESET%^hazy realm %^CYAN%^of %^BOLD%^%^BLACK%^drifting shadows %^RESET%^%^CYAN%^beyond.%^RESET%^");
         tell_room(place,"%^CYAN%^"+caster->QCN+" reaches out and somehow parts reality, opening a fissure in the air to revealing a %^RESET%^hazy realm %^CYAN%^of %^BOLD%^%^BLACK%^drifting shadows %^RESET%^%^CYAN%^beyond.%^RESET%^", caster);
         tell_room(endplace,"%^CYAN%^The air trembles and %^BLUE%^darkens %^CYAN%^perceptibly.%^RESET%^",caster);
+      break;
+	  case "star":
+        tell_object(caster,"%^CYAN%^Sensing a weakness, you reach out and part reality to reveal a %^RESET%^hazy realm %^CYAN%^of an %^BLUE%^endless cosmos %^CYAN%^beyond.%^RESET%^");
+        tell_room(place,"%^CYAN%^"+caster->QCN+" reaches out and somehow parts reality, opening a fissure in the air to revealing a %^RESET%^hazy realm %^CYAN%^of %^BLUE%^endless cosmos %^CYAN%^beyond.%^RESET%^", caster);
+        tell_room(endplace,"%^CYAN%^The air trembles and shimmers %^BLUE%^dreamily%^CYAN%^.%^RESET%^",caster);
       break;
       case "infernal":
         tell_object(caster,"%^CYAN%^Sensing a weakness, you reach out and part reality to reveal a %^RESET%^hazy realm %^CYAN%^of %^RED%^torrid smoke %^CYAN%^beyond.%^RESET%^");
@@ -155,6 +160,9 @@ void move_caster(object endplace, int prof) {
         case "abyssal":
           tell_room(endplace,"%^CYAN%^A rift suddenly parts reality in the air before you, revealing a %^RESET%^hazy realm %^CYAN%^of %^MAGENTA%^shifting fog %^CYAN%^from which "+caster->QCN+" steps. It snaps shut behind "+caster->QO+"!%^RESET%^",caster);
         break;
+		case "star":
+          tell_room(endplace,"%^CYAN%^A rift suddenly parts reality in the air before you, revealing a %^RESET%^hazy realm %^CYAN%^of %^MAGENTA%^endless cosmos %^CYAN%^from which "+caster->QCN+" steps. It snaps shut behind "+caster->QO+"!%^RESET%^",caster);
+        break;
         case "gloom":
           tell_room(endplace,"%^CYAN%^A rift suddenly parts reality in the air before you, revealing a %^RESET%^hazy realm %^CYAN%^of %^BOLD%^%^BLACK%^drifting shadows %^RESET%^%^CYAN%^from which "+caster->QCN+" steps. It snaps shut behind "+caster->QO+"!%^RESET%^",caster);
         break;
@@ -184,6 +192,9 @@ void move_caster(object endplace, int prof) {
           case "abyssal":
             tell_room(endplace,"%^CYAN%^A rift suddenly parts reality in the air before you, revealing a %^RESET%^hazy realm %^CYAN%^of %^MAGENTA%^shifting fog %^CYAN%^from which "+caster->QCN+" steps, followed by several others. It snaps shut behind them!%^RESET%^",caster);
           break;
+		  case "star":
+            tell_room(endplace,"%^CYAN%^A rift suddenly parts reality in the air before you, revealing a %^RESET%^hazy realm %^CYAN%^of %^BLUE%^endless cosmos %^CYAN%^from which "+caster->QCN+" steps, followed by several others. It snaps shut behind them!%^RESET%^",caster);
+          break;
           case "gloom":
             tell_room(endplace,"%^CYAN%^A rift suddenly parts reality in the air before you, revealing a %^RESET%^hazy realm %^CYAN%^of %^BOLD%^%^BLACK%^drifting shadows %^RESET%^%^CYAN%^from which "+caster->QCN+" steps, followed by several others. It snaps shut behind them!%^RESET%^");
           break;
@@ -205,6 +216,9 @@ void move_caster(object endplace, int prof) {
           break;
           case "abyssal":
             tell_room(endplace,"%^CYAN%^A rift suddenly parts reality in the air before you, revealing a %^RESET%^hazy realm %^CYAN%^of %^MAGENTA%^shifting fog %^CYAN%^from which "+caster->QCN+" steps, followed by another. It snaps shut behind them!%^RESET%^",caster);
+          break;
+		  case "star":
+            tell_room(endplace,"%^CYAN%^A rift suddenly parts reality in the air before you, revealing a %^RESET%^hazy realm %^CYAN%^of %^BLUE%^endless cosmos %^CYAN%^from which "+caster->QCN+" steps, followed by another. It snaps shut behind them!%^RESET%^",caster);
           break;
           case "gloom":
             tell_room(endplace,"%^CYAN%^A rift suddenly parts reality in the air before you, revealing a %^RESET%^hazy realm %^CYAN%^of %^BOLD%^%^BLACK%^drifting shadows %^RESET%^%^CYAN%^from which "+caster->QCN+" steps, followed by another. It snaps shut behind them!%^RESET%^");

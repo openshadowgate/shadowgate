@@ -111,30 +111,6 @@ void heart_beat(){
    if(!random(50) && objectp(query_worn())) tell_object(query_worn(),"%^MAGENTA%^A voice in your head hisses:%^RESET%^ we will see Ibrandul returned to his body and power!");
 }
 
-void init(){
-   object * armor;
-   int i; 
-   ::init();
-
-   if(TP == ETO){
-   armor = TP->query_armour("head");
-    for(i=0;i<sizeof(armor);i++) {
-      if( !armor[i]->query_property("no remove") ) {
-      tell_object(TP,"The "+armor[i]->query_name()+" you were wearing is destroyed by the mask.");
-    armor[i]->remove();
-      }
-    else {
-       tell_object(ETO, "The mask is unable to fasten itself to your head"
-                       +" and vanishes into the ether.");
-       TO->remove();
-       return;
-    }
-    }
-    TP->force_me("wear mask");
-
-   }
-
-}
 void set_property(string prop, mixed value){
    if(prop == "enchantment" && value > 0) return;
    ::set_property(prop, value);

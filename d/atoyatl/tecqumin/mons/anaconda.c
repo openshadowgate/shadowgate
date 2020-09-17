@@ -258,7 +258,7 @@ void breakout(object ob){
   if (!objectp(ob)) { return;}
   tell_object(ob, "You manage to break free of the preying mantis's grasp");
   tell_room(ETO, (string)ob->QCN + "%^RESET%^ manages to break free of the preying mantis's grasp!", ob);
-  ob->set_paralysed(0);
+  ob->set_paralyzed(0);
   seizee = 0;
 }
 

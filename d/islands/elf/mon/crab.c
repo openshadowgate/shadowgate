@@ -5,14 +5,14 @@ inherit MONSTER;
 void create()
 {
     ::create();
-    set_name("crab");
+    set_name("Dire Crab");
     set_id(({"crab","dire crab","monster"}));
     set_short("Dire Crab");
     set_long("This is a dire crab.  It is around 12 feet high and"+
     " two giant pincers.  They wander the ocean floor looking for things to eat.");
     set_race("crab");
     set_hd(35,10);
-    set_hp(750+random(1000));
+    set_hp(750+random(1500));
 
 
     set_class("barbarian");
@@ -26,11 +26,12 @@ void create()
         "damage resistance",
       })); 
     set_resistance_percent("slashing", 50);
-    set_resistance_percent("bludgeoning", 50);
+    set_resistance_percent("bludgeoning", 70);
     set_hp(query_max_hp());
     set_property("swarm", 1);
     set_overall_ac(-35);
-    set_size(3);
+    set_body_type("arachnid");
+    set_attack_limbs(({"right pincer","left pincer"}));
     add_attack_bonus(65);
     set_stats("strength",28);
     set_stats("dexterity",16);
@@ -39,7 +40,7 @@ void create()
     set_stats("constitution",30);
     set_stats("charisma",5);
     set_attacks_num(5);
-    set_damage(3,9);
+    set_damage(4,9);
     set_property("swarm", 1);
     set("aggressive", 6);
     set_new_exp(level, "normal");
@@ -52,6 +53,7 @@ void create()
     set_skill("perception", 70);
     set_property("no knockdown", 1);
     set_property("water breather", 1);
+    set_property("function and attack",1);
     set_skill("perception",50); 
     set("aggressive",25);
 }
@@ -73,7 +75,7 @@ void snip(object targ){
         tell_object(targ,"%^ORANGE%^The Dire crab's claw snap shut with you in them!");
         if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-30))
           targ->set_paralyzed(10 + random(10),"%^RED%^You are held by crab claw.");
-        targ->cause_typed_damage(targ, targ->return_target_limb(),random(250),"bludgeoning");
+        targ->cause_typed_damage(targ, targ->return_target_limb(),random(250)+50,"bludgeoning");
     }
     //insta ded for fodder
     else {

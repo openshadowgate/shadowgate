@@ -6,7 +6,7 @@
 #include <skills.h>
 inherit SPELL;
 
-int clevel,bonus,i;
+int bonus,i;
 
 int is_curse()
 {

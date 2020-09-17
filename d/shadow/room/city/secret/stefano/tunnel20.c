@@ -16,7 +16,7 @@ void create(){
    set_long(
    	"%^BOLD%^%^BLACK%^"+
    	"You are in a tunnel that leads east and ends in a bare wall to the west."+
-   	"The tunnel itself looks to be of "+
+   	" The tunnel itself looks to be of "+
    	"recent construction and is made very well.  The walls, "+
    	"ceiling, and floor are made of native stone cut, "+
    	"and mortared, to fit perfectly.  The stonework is "+

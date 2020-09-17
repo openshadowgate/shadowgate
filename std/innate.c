@@ -87,28 +87,41 @@ void InitInnate()
                                 "greater shadow conjuration" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "shadow evocation" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
                                 "shadow necromancy" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
+                                "shadow body" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
             ]);
     }
     if(FEATS_D->usable_feat(TO,"command the stone")) // meld into stone -1, stoneskin 1, earthquake 2, conjure elemental -1
     {
         feat_spells += ([
-            "meld into stone" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "stone body"    : (["type" : "spell", "casting level" : 1, "daily uses" : 1, "delay" : 1, "uses left" : 1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "earthquake" : (["type" : "spell", "casting level" : 1, "daily uses" : 4,  "delay" : 1, "uses left" : 2,  "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "conjure elemental" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            "strength of stone" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+            "meld into stone"   : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+            "stone body"        : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),
+            "wall of stone"     : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),
+            "statue"            : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),            
+            "earthquake"        : (["type" : "spell", "daily uses" : 4, "level required" : 0 ]),
+            "conjure elemental" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+            "earth reaver"      : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+            "shapechange"       : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
             ]);
     }
     if(FEATS_D->usable_feat(TO, "slay the undead"))
     {
         feat_spells += ([
-            "rope trick" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "detect undead" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "heart of metal" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "disrupting weapon" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
-            "undeath ward" : (["type" : "spell", "casting level" : 1, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),
+            "rope trick" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+            "detect undead" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+            "heart of metal" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+            "disrupting weapon" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+            "undeath ward" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
             ]);
     }
-
+    
+    if(FEATS_D->usable_feat(TO, "tricky spells"))
+    {
+        feat_spells += ([
+            "spectral hand" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+            ]);
+    }
+    
     // to add new classes or reasons for innates, simply add to feat_spells here before this line.
     newmap = keys(feat_spells);
 

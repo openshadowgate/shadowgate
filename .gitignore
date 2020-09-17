@@ -18,6 +18,7 @@
 /d/retired
 /d/player_houses
 
+*.bak
 #fixme
 *.o
 /.vs

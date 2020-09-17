@@ -24,16 +24,16 @@ string query_cast_string()
 void spell_effect(int prof)
 {
     int level;
+    int duration;
 
     tell_object(caster, "%^BOLD%^%^WHITE%^Gleaming trails of l%^CYAN%^i%^WHITE%^gh%^YELLOW%^t %^WHITE%^spring into existance, following the motion of your fingertips!");
     tell_room(place, "%^BOLD%^%^WHITE%^Gleaming trails of l%^CYAN%^i%^WHITE%^gh%^YELLOW%^t %^WHITE%^spring into existance, following the motion of " + caster->QCN + "'s fingertips!", caster);
 
     level = clevel;
-    if (level > 20) {
-        level = 20;
-    }
     ob = new("/d/magic/obj/dancinglights");
-    call_out("dest_effect", (30 + roll_dice(1, 20)) * clevel);
+    duration = 60 * clevel + 180;
+    duration = duration > 540 ? 540 : duration;
+    call_out("dest_effect", (duration));
     ob->set_property("spell", TO);
     ob->set_property("spelled", ({ TO }));
     ob->move(caster);

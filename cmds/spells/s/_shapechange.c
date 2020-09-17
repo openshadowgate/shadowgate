@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("shapechange");
-    set_spell_level(([ "mage" : 9,"oracle":8]));
+    set_spell_level(([ "mage" : 9,"oracle":8, "innate" : 9 ]));
     set_domains("animal");
     set_spell_sphere("alteration");
     set_mystery(({"dragon", "nature"}));
@@ -30,6 +30,8 @@ int preSpell()
 {
     object shape;
     if(objectp(shape = caster->query_property("shapeshifted")) ||
+       objectp(shape = caster->query_property("transformed")) ||
+       objectp(shape = caster->query_property("dance-of-cuts")) ||
        objectp(shape = caster->query_property("altered")))
     {
         tell_object(caster,"You are already in an alternative form!");
@@ -38,7 +40,11 @@ int preSpell()
     if(member_array(arg,valid_forms())==-1)
     {
         tell_object(caster,"Invalid form, valid forms are: "+implode(valid_forms(),", "));
-        return;
+        return 0;
+    }
+    if(spell_type == "innate" && FEATS_D->usable_feat(caster,"command the stone") && arg != "golem") {
+        tell_object(caster,"You can only take on the form of a GOLEM!");
+        return 0;
     }
     return 1;
 }

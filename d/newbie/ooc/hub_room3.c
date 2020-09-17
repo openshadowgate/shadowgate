@@ -16,7 +16,7 @@ void create() {
         set_property("no sticks",1);
 	set_property("ooc room", 1);
         set_short("%^MAGENTA%^OOC area hub to tutorial/info. rooms");
-        set_long("This room leads to the %^BOLD%^<tutorial>%^RESET%^ and a series of %^BOLD%^<info>%^RESET%^ rooms to help answer player's questions about how to get started and get the most from playing in ShadowGate.  When you have been through those and are ready to begin your adventure, the exit to the %^BOLD%^<city>%^RESET%^ will take you to the town square of Offestry.  You can return here anytime to look for answers to other questions you may have or refresh your memory.
+        set_long("This room leads to the %^BOLD%^<tutorial>%^RESET%^ and a series of %^BOLD%^<info>%^RESET%^ rooms to help answer player's questions about how to get started and get the most from playing in ShadowGate.  When you have been through those and are ready to begin your adventure, the exit to the %^BOLD%^<city>%^RESET%^ will take you to the town square of Offestry.  You can return here anytime to look for answers to other questions you may have or to refresh your memory, or you can type %^BOLD%^%^GREEN%^<help hints>%^RESET%^ while anywhere in the game world for additional helpful hints. Please also remember that if you are searching for roleplay, %^BOLD%^%^BLUE%^<rumors> %^RESET%^will tell you where people are currently congretating if you wish to try your hand at seeking them out, OR you can set an RP flag %^YELLOW%^<help flag> %^RESET%^to draw them to you.
 
 There is also a special exit %^CYAN%^%^BOLD%^<portal>%^RESET%^ here, closed to common players.
 
@@ -43,13 +43,7 @@ int bypass_func(string str)
     object myRoom, ob;
     if(!objectp(TO)) return 0;
     if(!objectp(TP)) return 0;
-    //tell_object(TP, "non newbie = " +(int)OB_ACCOUNT->is_non_newbie("lorath"));
-    /* if(!(int)OB_ACCOUNT->is_non_newbie((string)TP->query_true_name())) */
-    /* { */
-    /*     tell_object(TP,"%^B_BLUE%^If you are an experienced player, please associate this character with " */
-    /*         "your existing account in order to bypass Offestry."); */
-    /*     return 1; */
-    /* } */
+
     NEWB_D->spawn_eq(TP, 1);
     NEWB_D->advance_level(TP);
     NEWB_D->spawn_eq(TP, 2);
@@ -60,9 +54,9 @@ int bypass_func(string str)
     NEWB_D->advance_level(TP);
     NEWB_D->spawn_eq(TP, 5);
     NEWB_D->advance_level(TP);
-    //NEWB_D->spawn_eq(TP, 6);
     NEWB_D->advance_level(TP);
     NEWB_D->advance_level(TP);
+
     TP->add_money("gold",10000);
     if(objectp(ob = present("newbiemassobject", TP))) ob->remove();
     tell_object(TP, "\n%^BOLD%^%^WHITE%^You feel the world around you "+

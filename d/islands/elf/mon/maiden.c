@@ -23,7 +23,7 @@ create() {
    set_attacks_num(2);
    set_damage(3,8);
    set_hd(35,10);
-   set_hp(750+random(200));
+   set_hp(750+random(300));
    set_max_hp( query_hp() );
    set_class("cleric");
    set_mlevel("cleric",40);
@@ -84,6 +84,7 @@ create() {
     set_base_damage_type("cold");
     set_resistance_percent("cold",50);
     set_resistance_percent("fire",-50);
+    set_skill("perception",35); 
 
 }
 int touch(object vic) {

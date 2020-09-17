@@ -23,6 +23,7 @@ void create(){
 	" as you try to scream while you slowly suffocate!");
 	 set_exits(([
       "up" : ROOMS"shore/shore1",
+      "south" : ROOMS"shore/ruin1",
    ]));
     set_items(([
       (({"ocean","water"})) :
