@@ -3,7 +3,7 @@
 %^RESET%^%^MAGENTA%^Prestige Class         Base Class
 
 %^RESET%^%^CYAN%^Arcane Archer          %^RESET%^Any caster of the weave
-%^RESET%^%^CYAN%^Arcane Trickster       %^RESET%^Thief+Any caster of the weave
+%^RESET%^%^CYAN%^Arcane Trickster       %^RESET%^Thief + Mage, Sorcerer or Bard
 %^RESET%^%^CYAN%^Archdruid              %^RESET%^Druid
 %^RESET%^%^CYAN%^Archmage               %^RESET%^Mage or Sorcerer
 %^RESET%^%^CYAN%^Archpsion              %^RESET%^Psion
@@ -12,22 +12,22 @@
 %^RESET%^%^CYAN%^Chronicler             %^RESET%^Bard
 %^RESET%^%^CYAN%^Cypher                 %^RESET%^Any
 %^RESET%^%^CYAN%^Crypt Stalker          %^RESET%^Ranger
-%^RESET%^%^CYAN%^Duelist                %^RESET%^Fighter, Barbarian, Paladin, Thief, Bard, Inquisitor
-%^RESET%^%^CYAN%^Eldritch Knight        %^RESET%^Any caster of the weave
+%^RESET%^%^CYAN%^Duelist                %^RESET%^Fighter,Barbarian,Paladin,Thief,Bard,Inquisitor
+%^RESET%^%^CYAN%^Eldritch Knight        %^RESET%^Any Spellcaster
 %^RESET%^%^CYAN%^Grandmaster of the Way %^RESET%^Monk
-%^RESET%^%^CYAN%^Gravecaller            %^RESET%^Cleric, Mage or Sorcerer
+%^RESET%^%^CYAN%^Gravecaller            %^RESET%^Cleric, Oracle, Mage or Sorcerer
 %^RESET%^%^CYAN%^Hellfire Warlock       %^RESET%^Warlock
-%^RESET%^%^CYAN%^Hierophant             %^RESET%^Cleric or Druid
+%^RESET%^%^CYAN%^Hierophant             %^RESET%^Cleric, Oracle or Druid
 %^RESET%^%^CYAN%^Immortal Defender      %^RESET%^Any
 %^RESET%^%^CYAN%^Metamind               %^RESET%^Psywarrior
 %^RESET%^%^CYAN%^Mindblade              %^RESET%^Psion
 %^RESET%^%^CYAN%^Pale Lord              %^RESET%^Any but psionic
 %^RESET%^%^CYAN%^Primeval Champion      %^RESET%^Druid
 %^RESET%^%^CYAN%^Radiant Servant        %^RESET%^Cleric, Oracle, Druid or Inquisitor
-%^RESET%^%^CYAN%^Rage Prophet           %^RESET%^Barbarian+Any channeling caster
+%^RESET%^%^CYAN%^Rage Prophet           %^RESET%^Barbarian + Divine Spellcaster
 %^RESET%^%^CYAN%^Shadow Adept           %^RESET%^Mage or Sorcerer
 %^RESET%^%^CYAN%^Shadowdancer           %^RESET%^Any
-%^RESET%^%^CYAN%^Stonelord              %^RESET%^Any
+%^RESET%^%^CYAN%^Stonelord              %^RESET%^Any Dwarf or Earth Genasi
 %^RESET%^%^CYAN%^Tome Bound Master      %^RESET%^Warlock
 %^RESET%^%^CYAN%^Versatile Arcanist     %^RESET%^Sorcerer
 %^RESET%^%^CYAN%^Warmaster              %^RESET%^Any
