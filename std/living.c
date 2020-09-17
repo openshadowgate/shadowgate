@@ -298,18 +298,19 @@ int query_parrying()
         if (sizeof(weapons) && !weapons[0]->is_lrweapon()) {
             return 1;
         }
-        if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
-            weapons = TO->query_wielded();
-            if (sizeof(weapons) == 1 && !weapons[0]->is_lrweapon()) {
-                return 1;
-            }
+    }
+    if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
+        weapons = TO->query_wielded();
+        if (sizeof(weapons) == 1 && !weapons[0]->is_lrweapon()) {
+            return 1;
         }
-        if (FEATS_D->usable_feat(TO, "unassailable parry")) {
-            weapons = TO->query_wielded();
-            weapons = distinct_array(weapons);
-            if (sizeof(weapons) > 1 && !weapons[0]->is_lrweapon() && !weapons[1]->is_lrweapon()) {
-                return 1;
-            }
+    }
+    if (FEATS_D->usable_feat(TO, "unassailable parry")) {
+
+        weapons = TO->query_wielded();
+        weapons = distinct_array(weapons);
+        if (sizeof(weapons) > 1 && !weapons[0]->is_lrweapon() && !weapons[1]->is_lrweapon()) {
+            return 1;
         }
     }
     if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
@@ -1883,7 +1884,7 @@ int query_saving_bonus(string throw)
 
     if(FEATS_D->usable_feat(TO, "resist undead") && attacker && attacker->is_undead() && (throw == "fortitude" || throw == "will"))
         x += 4;
-    
+
     if(FEATS_D->usable_feat(TO, "canny defense") && throw == "reflex")
         x += 4;
 
