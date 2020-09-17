@@ -170,7 +170,6 @@ void execute_attack()
     dam = (clevel / 8 + 1) * dam;
     dam = roll_dice(2, dam);
 
-
     tell_object(caster, "%^RED%^You bring your " + weapons[0]->query_short() + " down in a brutal "
                 "strike, maiming " + target->QCN + "!%^RESET%^");
     tell_object(target, "%^RED%^" + caster->QCN + " brings " + caster->QP + " " + weapons[0]->query_short() + ""
@@ -178,7 +177,7 @@ void execute_attack()
     tell_room(place, "%^RED%^" + caster->QCN + " brings " + caster->QP + " " + weapons[0]->query_short() + " down "
               "on " + target->QCN + ", striking " + target->QO + " brutally!%^RESET%^", ({ target, caster }));
 
-    target->do_damage("head", dam);
+    target->cause_typed_damage(target, "head", dam, weapons[0]->query_damage_type());
 
     if (!objectp(target)) {
         dest_effect();

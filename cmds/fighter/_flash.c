@@ -145,9 +145,9 @@ int cmd_flash() {
          }
 //         ob->do_damage(ob->return_target_limb(),diff);
          if(level > 20){
-            TP->cause_damage_to(ob,ob->return_target_limb(),diff+random(16));
+            ob->cause_typed_damage(ob, ob->query_target_limb(), diff + random(16), weapon[0]->query_damage_type());
          }
-         TP->cause_damage_to(ob,ob->return_target_limb(),diff);
+         ob->cause_typed_damage(ob, ob->query_target_limb(), diff, weapon[0]->query_damage_type());
       }
       if(which == 1) {
          switch(mystyle){

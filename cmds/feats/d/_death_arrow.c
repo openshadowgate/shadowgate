@@ -186,12 +186,12 @@ void execute_attack()
     if ((string)target->query_property("no death") || do_save(target, -bonusdc)) {
         tell_object(target, "%^BOLD%^The struggle for your soul is won, yet at a %^BOLD%^%^BLUE%^price%^WHITE%^.");
         tell_room(place, "%^BOLD%^The soul survives, yet the coil %^BLACK%^suffers%^WHITE%^!", target);
-        target->do_damage(target->query_target_limb(), roll_dice(clevel, 8));
+        target->cause_typed_damage(target, target->query_target_limb(), roll_dice(clevel, 8), myweapon->query_damage_type());
     } else {
         tell_room(place, "%^BOLD%^%^WHITE%^The soul is pushed beyond %^MAGENTA%^the veil%^WHITE%^ from its coil!");
         tell_room(place, "%^BOLD%^%^WHITE%^The lifeless husk of " + target->QCN + " drops to the ground!", target);
         tell_object(target, "%^BOLD%^%^MAGENTA%^Your soul is ripped from you body!\n");
-        target->do_damage(target, target->query_target_limb(), target->query_max_hp() * 2);
+        target->cause_typed_damage(target, target->query_target_limb(), target->query_max_hp() * 2, myweapon->query_damage_type());
     }
 
     spell_kill(target, caster);
