@@ -951,6 +951,11 @@ int query_ac()
         !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief")) {
         myac += 4;
     }
+
+    if(FEATS_D->usable_feat(TO, "canny defense") && !TO->query_paralyzed() &&
+       !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief"))
+       myac += ( ( TO->query_stats("intelligence") - 10 ) / 2 );
+        
     if (TO->query_blind() || TO->query_temporary_blinded()) {
         myac -= TO->query_level() / 12 + 1;
     }
