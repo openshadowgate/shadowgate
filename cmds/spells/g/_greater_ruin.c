@@ -27,7 +27,7 @@ spell_effect(int prof)
         tell_object(caster,"%^BOLD%^%^WHITE%^You simply unmake some of "+target->QCN+"!");
         tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+" unmakes some of "+target->QCN+" with "+caster->QP+" spell!", ({caster}) );
     }
-    damage_targ(target, target->query_target_limb(), sdamage,"untyped");
+    damage_targ(target, target->return_target_limb(), sdamage,"untyped");
     TO->dest_effect();
 }
 

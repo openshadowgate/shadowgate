@@ -56,7 +56,7 @@ void spell_effect(int prof)
                     "/std/effect/status/panicked"->apply_effect(foe, clevel / 12 + 1);
                 }
             }
-            damage_targ(foe, foe->query_target_limb(), dam, "sonic");
+            damage_targ(foe, foe->return_target_limb(), dam, "sonic");
         }
     }
 

@@ -125,7 +125,7 @@ void execute_attack(){
             "light%^WHITE%^ beams from "+caster->QCN+"%^BOLD%^%^WHITE%^'s eyes, striking "
             "you!%^RESET%^");
       }
-      damage_targ(ppl,ppl->query_target_limb(),extra,"mental");
+      damage_targ(ppl,ppl->return_target_limb(),extra,"mental");
       counter++;
       if (counter > mylevel) {
           dest_effect();

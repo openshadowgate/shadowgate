@@ -78,8 +78,7 @@ void cmd_rush(string str){
 	  	write("%^BOLD%^You successfully slam your weapon with all your weight behind it into "+ob->query_cap_name()+"!");
 	  	tell_room(ETP,"%^BOLD%^"+TPQCN+" slams full force into "+ob->query_cap_name()+"!",({ob,TP}));
 	  	tell_object(ob,"%^BOLD%^"+TPQCN+" slams full force into you dealing damage and knocking the wind out of you!\n");
-	  	ob->do_damage(ob->return_target_limb(),damage);
-		ob->cause_typed_damage(ob, ob->query_target_limb(), damage, weapon[0]->query_damage_type());
+		ob->cause_typed_damage(ob, ob->return_target_limb(), damage, weapon[0]->query_damage_type());
 	  	ob->set_paralyzed(8,"Your recovering from that last hit");
 	  	return 1;
 	}

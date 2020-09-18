@@ -244,7 +244,7 @@ int cmd_throw(string str)
         damage+= distance;
         foe->add_attacker(TP);
         //foe->bow_hit(TO, damage);
-        foe->cause_typed_damage(foe, foe->query_target_limb(), damage, what_ob->query_damage_type());
+        foe->cause_typed_damage(foe, foe->return_target_limb(), damage, what_ob->query_damage_type());
         if(objectp(what_ob)) {
             if(objectp(foe)) {
                 if(what_ob->move(foe) != MOVE_OK){

@@ -27,7 +27,7 @@ void spell_effect(int prof)
     tell_object(target, "%^ORANGE%^Sharp thorns shoot from " + caster->QCN + "'s hand at you!");
     tell_room(place, "%^ORANGE%^Sharp thorns shoot from " + caster->QCN + "'s hand at " + target->QCN + "!", ({ caster, target }));
 
-    damage_targ(target, target->query_target_limb(), numdarts, "piercing");
+    damage_targ(target, target->return_target_limb(), numdarts, "piercing");
     spell_kill(target, caster);
     dest_effect();
 }

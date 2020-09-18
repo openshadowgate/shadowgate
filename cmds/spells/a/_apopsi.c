@@ -72,7 +72,7 @@ void spell_effect(int prof)
         tell_object(caster, "%^BOLD%^Your psychic attack causes your opponent intense mental pain!");
         tell_object(target, "%^BOLD%^You suffer intense mental pain from " + caster->QCN + "'s psychic assault!");
         amount = sdamage / 2;
-        damage_targ(target, target->query_target_limb(), amount, "mental");
+        damage_targ(target, target->return_target_limb(), amount, "mental");
     }
     
     spell_successful();

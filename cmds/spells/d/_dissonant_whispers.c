@@ -25,7 +25,7 @@ spell_effect(int prof)
         tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+" whispers a song towards "+target->QCN+".", ({target}) );
         tell_object(target,"%^BOLD%^%^WHITE%^"+caster->QCN+"'s whispers are just maddening, mean and hurtful!"+target->QCN+".", ({caster}) );        
     }
-    damage_targ(target, target->query_target_limb(), sdamage,"mental");
+    damage_targ(target, target->return_target_limb(), sdamage,"mental");
     TO->dest_effect();
 }
 

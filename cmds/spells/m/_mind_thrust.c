@@ -50,7 +50,7 @@ spell_effect(int prof) {
                "head snaps back suddenly, leaving "+target->QO+" "+
                "looking confused!",({caster, target}) );
     }
-    damage_targ(target, target->query_target_limb(), damage,"mental");
+    damage_targ(target, target->return_target_limb(), damage,"mental");
     TO->dest_effect();
 }
 

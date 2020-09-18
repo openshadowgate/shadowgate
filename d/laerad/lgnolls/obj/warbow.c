@@ -89,7 +89,7 @@ int extra_lrhit(object targi){
       tell_room(EETO,ETO->QCN+" %^ORANGE%^fires a p%^RED%^o%^ORANGE%^w%^RED%^e%^ORANGE%^rf%^RED%^u%^ORANGE%^l shot, burrowing the "+
 	  "%^BOLD%^%^BLACK%^arrows shaft %^RESET%^%^RED%^deep %^ORANGE%^in %^WHITE%^"+targi->QCN+"%^ORANGE%^'s body!",({ETO,targi}));
       set_property("magic",1);
-      targi->do_damage(targi->query_target_limb(),random(5)+5);
+      targi->do_damage(targi->return_target_limb(),random(5)+5);
       remove_property("magic");
       return 1; break;
 		   }
@@ -104,7 +104,7 @@ int extra_lrhit(object targi){
 	  "%^CYAN%^twists the bow and %^RED%^slashes %^WHITE%^"+targi->QCN+" %^CYAN%^with the "+
 	  "%^BOLD%^%^BLACK%^bow-blades%^RESET%^%^CYAN%^!%^WHITE%^%^RESET%^",ETO);
       set_property("magic",1);
-      targi->do_damage(targi->query_target_limb(),(random(8)+5));
+      targi->do_damage(targi->return_target_limb(),(random(8)+5));
       remove_property("magic");
       return 1;
 	  break;

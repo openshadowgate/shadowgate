@@ -83,7 +83,7 @@ void next_step(object caster, object target) {
     if (SAVING_D->saving_throw(target, "paralyzation_poison_death",0) ) {
         tell_object(target,"%^BOLD%^%^CYAN%^As the scythes slice into your flesh, you feel a cold chill attempt to\nstop your heart, but it fails to do so.\n%^RED%^The furtive figures vanish back to the land of the dead.%^RESET%^");
         tell_room(env,"%^BOLD%^%^CYAN%^The scythes slice deep into "+it+"'s flesh!\n%^RED%^However, the furtive figures vanish back to the land of \nthe dead leaving "+it+" standing among the living.%^RESET%^",target);
-        damage_targ(target, target->query_target_limb(),(roll_dice(2,8))+1);
+        damage_targ(target, target->return_target_limb(),(roll_dice(2,8))+1);
         if (!spell_kill(target, caster)) return 1;
         target->set_property("no death", 1);
         dest_effect();
@@ -92,7 +92,7 @@ void next_step(object caster, object target) {
     tell_room(env, "%^RESET%^%^RED%^The furtive figures slice their scythes deep into "+it+"'s flesh!\n%^BOLD%^%^WHITE%^"+him+" grins as the figures drag "+it+" into the land of the dead!%^RESET%^",({caster,target}));
     tell_object(target,"%^RESET%^%^RED%^The furtive figures slice their scythes deep into your flesh!\n%^BOLD%^%^WHITE%^"+him+" grins as the figures drag you into the land of the dead!%^RESET%^");
     tell_object(caster,"%^RESET%^%^RED%^The furtive figures slice their scythes deep into "+it+"'s flesh!\n%^BOLD%^%^WHITE%^You grin as the figures drag "+it+" into the land of the dead!%^RESET%^");
-    damage_targ(target,target->query_target_limb(),(int)target->query_max_hp() + 10);
+    damage_targ(target,target->return_target_limb(),(int)target->query_max_hp() + 10);
     if (objectp(target))
         if (!spell_kill(target, caster)) return 1;
     dest_effect();

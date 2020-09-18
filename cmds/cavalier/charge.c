@@ -268,7 +268,7 @@ void do_trample(int damage,object targ,object play) {
                 "towards "+targ->QCN+"!%^RESET%^");
             tell_room(environment(tp),"%^BOLD%^%^BLUE%^"+tp->QCN+" tramples over "+attackers[i]->QCN+" "
                 "as "+tp->QS+" charges towards "+targ->QCN+"!%^RESET%^",({targ,tp}));
-            attackers[i]->cause_typed_damage(attackers[i], attackers[i]->query_target_limb(), dam, weapon[0]->query_damage_type());
+            attackers[i]->cause_typed_damage(attackers[i], attackers[i]->return_target_limb(), dam, weapon[0]->query_damage_type());
         }
     }
 
