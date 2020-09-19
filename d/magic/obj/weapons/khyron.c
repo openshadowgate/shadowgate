@@ -15,17 +15,23 @@ void create()
 
 int hit_func(object targ)
 {
-    targ = ETO->query_current_attacker();
-    if (!objectp(ETO)) {
+    object player, room;
+    
+    player = environment(this_object());
+    player && room = environment(player);
+    
+    if(!objectp(player) || !room)
         return 1;
-    }
-    if (!objectp(targ)) {
+    
+    targ = player->query_current_attacker();
+    
+    if (!objectp(targ))
         return 1;
-    }
+    
     if (!random(10)) {
-        tell_room(EETO, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from " + ETO->EQN + "'s hammer shoots forth and scorches " + targ->QCN "!%^RESET%^", ({ ETO, targ }));
-        tell_object(ETO, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from your hammer shoots forth and scorches " + targ->QCN "!%^RESET%^");
-        tell_object(targ, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from " + ETO->EQN + "'s hammer shoots forth and scorches you!%^RESET%^");
+        tell_room(room, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from " + player->query_name() + "'s hammer shoots forth and scorches " + targ->QCN + "!%^RESET%^", ({ ETO, targ }));
+        tell_object(player, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from your hammer shoots forth and scorches " + targ->QCN + "!%^RESET%^");
+        tell_object(targ, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from " + player->query_name() + "'s hammer shoots forth and scorches you!%^RESET%^");
         targ->do_damage("torso", random(4) + 8);
         return 1;
     }
