@@ -15,17 +15,18 @@ void create()
 
 int hit_func(object targ)
 {
-    targ = ETO->query_current_attacker();
-    if (!objectp(ETO)) {
+    object room, player;
+    
+    player = environment(this_object());
+    player && room = environment(player);
+    
+    if(!player || !room || !targ)
         return 1;
-    }
-    if (!objectp(targ)) {
-        return 1;
-    }
+    
     if (!random(10)) {
-        tell_room(EETO, "%^BOLD%^%^BLUE%^A blast of primordial %^RED%^e%^BLUE%^l%^YELLOW%^e%^BLUE%^m%^WHITE%^e%^BLUE%^nt%^RESET%^%^ORANGE%^a%^BLUE%^l energy %^BOLD%^%^BLUE%^from " + ETO->EQN + "'s staff leaps forth and strikes " + targ->QCN "!%^RESET%^", ({ ETO, targ }));
-        tell_object(ETO, "%^BOLD%^%^BLUE%^A blast of primordial %^RED%^e%^BLUE%^l%^YELLOW%^e%^BLUE%^m%^WHITE%^e%^BLUE%^nt%^RESET%^%^ORANGE%^a%^BLUE%^l energy %^BOLD%^%^BLUE%^from your staff leaps forth and strikes " + targ->QCN "!%^RESET%^");
-        tell_object(targ, "%^BOLD%^%^BLUE%^A blast of primordial %^RED%^e%^BLUE%^l%^YELLOW%^e%^BLUE%^m%^WHITE%^e%^BLUE%^nt%^RESET%^%^ORANGE%^a%^BLUE%^l energy %^BOLD%^%^BLUE%^from " + ETO->EQN + "'s staff leaps forth and strikes you!%^RESET%^");
+        tell_room(room, "%^BOLD%^%^BLUE%^A blast of primordial %^RED%^e%^BLUE%^l%^YELLOW%^e%^BLUE%^m%^WHITE%^e%^BLUE%^nt%^RESET%^%^ORANGE%^a%^BLUE%^l energy %^BOLD%^%^BLUE%^from " + player->query_name() + "'s staff leaps forth and strikes " + targ->QCN + "!%^RESET%^", ({ player, targ }));
+        tell_object(player, "%^BOLD%^%^BLUE%^A blast of primordial %^RED%^e%^BLUE%^l%^YELLOW%^e%^BLUE%^m%^WHITE%^e%^BLUE%^nt%^RESET%^%^ORANGE%^a%^BLUE%^l energy %^BOLD%^%^BLUE%^from your staff leaps forth and strikes " + targ->QCN + "!%^RESET%^");
+        tell_object(targ, "%^BOLD%^%^BLUE%^A blast of primordial %^RED%^e%^BLUE%^l%^YELLOW%^e%^BLUE%^m%^WHITE%^e%^BLUE%^nt%^RESET%^%^ORANGE%^a%^BLUE%^l energy %^BOLD%^%^BLUE%^from " + player->query_name() + "'s staff leaps forth and strikes you!%^RESET%^");
         targ->do_damage("torso", random(4) + 8);
         return 1;
     }

@@ -76,6 +76,10 @@ void apply_judgements(string* judgements, int direction)
     if (objectp(lendingto)) {
         power = clevel;
         maxtolend = caster->query_property("greater_lend_judgement") ? 3 : 1;
+        if(maxtolend > sizeof(judgements)) {
+            maxtolend = sizeof(judgements);
+        }
+        
         if (direction > 0) {
             tell_object(caster, "%^BOLD%^%^WHITE%^" + lendingto->QCN + " is infused with your zeal.");
             tell_object(lendingto, "%^BOLD%^%^WHITE%^You are infused with power of the zeal!");

@@ -52,7 +52,51 @@ string long_desc()
         + " the tab of each divider, to allow the owner to quickly"
         + " seek out and withdraw a particular item from the bag."
         + " Instructions for using the index have been sewn into the"
-        + " material on the inside of the satchel.\n";
+        + " material on the inside of the satchel.%^RESET%^\n";
+}
+
+string query_long(string str)
+{
+    string desc, extra, tmp, * true_inv;
+    object* inv;
+    mapping myInv;
+    int j, i;
+
+    extra = "%^CYAN%^" + (query_closed() ? "The satchel is closed and buckled." : "The satchel is open.") + "\n%^RESET%^";
+    desc = long_desc() + extra;
+    inv = all_inventory(TO);
+    if (!sizeof(inv) || query_closed()) {
+        return desc;
+    }
+    myInv = ([]);
+    for (i = 0; i < sizeof(inv); i++) {
+        if (inv[i]->is_disease()) {
+            continue;
+        }
+        tmp = inv[i]->query_short();
+        if (member_array(tmp, keys(myInv)) != -1) {
+            myInv[tmp]["quantity"]++;
+        }else {
+            myInv += ([tmp:(["quantity" : 1, "short" : tmp]), ]);
+        }
+        continue;
+    }
+
+    if (!sizeof(keys(myInv))) {
+        return desc;
+    }
+    if (stringp(desc)) {
+        desc += arrange_string("It contains:", 50) + "Amount\n";
+    }else {
+        desc = "  It contains: \n";
+    }
+    true_inv = sort_array(keys(myInv), (: strcmp("/daemon/filters_d.c"->filter_colors($1),"/daemon/filters_d.c"->filter_colors($2)) :));
+    for (i = 0; i < sizeof(true_inv); i++) {
+        j = 55 - strlen("/daemon/filters_d.c"->filter_colors(myInv[true_inv[i]]["short"]));
+        desc += myInv[true_inv[i]]["short"] + arrange_string(" ", j) + myInv[true_inv[i]]["quantity"] + "\n";
+    }
+
+    return desc;
 }
 
 int order_scrolls(string str)

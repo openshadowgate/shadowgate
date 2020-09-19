@@ -59,7 +59,7 @@ int set_base_class(object obj, string choice)
     classes = obj->query_classes();
     if(!sizeof(classes)) { return 0; }
     if(member_array(choice,classes) == -1) { return 0; }
-    if(member_array(choice,({"mage","sorcerer","cleric","druid","bard","inquisitor"})) == -1) { return 0; }
+    if(member_array(choice,({"mage","sorcerer","bard" })) == -1) { return 0; }
     obj->set("base_class",choice);
     return 1;
 }
