@@ -86,7 +86,7 @@ int extra_hit(object ob){
 	if(align == 3 || align == 6 || align == 9){
 	    tell_object(ob,"%^BOLD%^RED%^The morning star singes your evil skin!");
 	    tell_room(environment(query_wielded()),"%^BOLD%^RED%^The morning star singes "+ob->query_cap_name()+"'s evil skin!",ob);
-	    ob->do_damge(ob->query_target_limb(),roll_dice(2,6));
+	    ob->do_damge(ob->return_target_limb(),roll_dice(2,6));
 	    if(!"daemon/saving_d"->saving_throw(ob,"spell")){
 		ob->set_paralyzed(10,"You are reeling in pain.");
 		return roll_dice(1,4);

@@ -52,7 +52,7 @@ void special_attack(object ob, object targ, string dam_type)
                     tell_room(EEOB, "%^BOLD%^%^GREEN%^As "+EOB->QCN+"%^BOLD%^%^GREEN%^ strikes "+targ->QCN+" with "+EOB->QP+ 
                     " " +tmp+" %^BOLD%^%^GREEN%^acid splashes from it, soaking "+targ->QO+"!%^RESET%^", ({EOB, targ}));
 
-                    targ->cause_type_damage(targ, limb, roll_dice(4,4), "acid");
+                    targ->cause_typed_damage(targ, limb, roll_dice(4,4), "acid");
                     break;
                 
                 case "cold":
