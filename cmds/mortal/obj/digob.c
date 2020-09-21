@@ -92,7 +92,7 @@ void move_rubble(string ext, object tp)
 
     if (tp->query_stats("constitution") < random(25)) {
         tell_object(tp, "You hurt your back moving the stone.");
-        tp->do_damage("torso", random(5) + 1);
+        tp->cause_typed_damage(tp, "torso", roll_dice(1, 5), "untyped");
     }
 
     tell_object(tp, "You slowly move the rubble out of the way.");
