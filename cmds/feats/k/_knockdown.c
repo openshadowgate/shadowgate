@@ -3,6 +3,7 @@
 inherit FEAT;
 
 int fired, in_shapeshift;
+string damtype;
 
 void timer(object tp);
 
@@ -88,6 +89,7 @@ void execute_feat()
             "at you!");
         tell_room(place,"%^GREEN%^"+caster->QCN+" exhales and releases a precisely aimed shot at "
             +target->QCN+"!%^RESET%^",({target,caster}));
+        damtype = weapons[0]->query_damage_type();
     }
     else {
         tell_object(caster,"%^RESET%^%^BOLD%^%^GREEN%^You slip inside "+target->QCN+"'s reach and try to "
@@ -96,6 +98,7 @@ void execute_feat()
             "tries to knock you to the ground!");
         tell_room(place,"%^GREEN%^"+caster->QCN+" slips inside "+target->QCN+"'s reach and tries to "
             "knock "+target->QO+" to the ground!%^RESET%^",({target,caster}));
+        damtype = "bludgeoning";
     }
     caster->use_stamina(roll_dice(1,6));
     caster->set_property("using instant feat",1);
@@ -169,7 +172,7 @@ void execute_attack()
 // put a heartbeat cap on the trip so people aren't chain-stunned - maximum duration half of the timer. Nienne, 08/09.
     target->set_tripped(1,"%^YELLOW%^You're scrambling to get your feet under you again!%^RESET%^",(random(3)+1));
 //changed duration of trip after discussions with Tsera, Ares, and Saide - was 15 ~Circe~ 4/9/13
-    target->do_damage("torso",roll_dice(1,clevel));
+    target->cause_typed_damage(target, "torso", roll_dice(1, clevel), damtype);
     timer(caster);
 //    dest_effect();
     return;

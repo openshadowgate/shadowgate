@@ -114,7 +114,7 @@ void execute_attack(){
       "%^RESET%^t%^BOLD%^%^BLACK%^a%^RESET%^c%^RED%^l%^BOLD%^e%^BLACK%^s surrounding "
          ""+caster->QCN+" lash out at you with a sickening %^RESET%^%^RED%^sm%^BOLD%^a"
          "%^RESET%^%^RED%^ck%^BOLD%^%^BLACK%^!%^RESET%^");
-      damage_targ(ppl,ppl->query_target_limb(),extra,"mental");
+      damage_targ(ppl,ppl->return_target_limb(),extra,"mental");
    }
    room  = environment(caster);
    party = (string)caster->query_party();

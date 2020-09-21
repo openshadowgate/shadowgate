@@ -30,7 +30,7 @@ spell_effect(int prof)
         tell_object(caster, "%^ORANGE%^You project the stone into direction of " + target->QCN + "!");
         tell_room(place, "%^ORANGE%^" + caster->QCN + " forcefully projects the stone at " + target->QCN + "!", ({ caster }));
     }
-    damage_targ(target, target->query_target_limb(), sdamage, "bludgeoning");
+    damage_targ(target, target->return_target_limb(), sdamage, "bludgeoning");
     TO->dest_effect();
 }
 

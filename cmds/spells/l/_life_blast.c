@@ -56,7 +56,7 @@ void spell_effect(int prof)
 
         tell_object(foe, "%^ORANGE%^%^BOLD%^Your unlife ends, as positive energy destroys your essence!");
         tell_room(place, "%^ORANGE%^%^BOLD%^" + foe->QCN + " crumbles to dust!", foe);
-        damage_targ(foe, foe->query_target_limb(), foe->query_max_hp() * 2, "positive energy");
+        damage_targ(foe, foe->return_target_limb(), foe->query_max_hp() * 2, "positive energy");
     }
 
     spell_successful();

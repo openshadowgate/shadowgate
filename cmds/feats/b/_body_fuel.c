@@ -90,7 +90,7 @@ void execute_attack()
     dmg = roll_dice(clevel, die);
 
     tell_object(caster,"%^BOLD%^%^WHITE%^A wave of pain pierces through your body as you extend your focus.");
-    caster->do_damage(caster, dmg);
+    caster->cause_typed_damage(caster, 0, dmg, "untyped");
     caster->add_mp(dmg / 10);
 
     caster->set_property("magic", -1);

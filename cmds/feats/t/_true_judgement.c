@@ -180,7 +180,7 @@ void execute_attack()
         tell_room(place,"%^BOLD%^%^MAGENTA%^The soul is pushed beyond %^MAGENTA%^the veil%^MAGENTA%^ from its coil!");
         tell_room(place,"%^BOLD%^%^MAGENTA%^The lifeless husk of "+target->QCN+" drops to the ground!",target);
         tell_object(target,"%^BOLD%^%^MAGENTA%^Your soul is ripped from you body!\n");
-        target->cause_typed_damage(target, target->query_target_limb(),target->query_max_hp()*2,"untyped");
+        target->cause_typed_damage(target, target->return_target_limb(),target->query_max_hp()*2,"untyped");
     }
 
     dest_effect();

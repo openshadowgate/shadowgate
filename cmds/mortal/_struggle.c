@@ -71,7 +71,7 @@ int cmd_struggle(string what) {
               break;
         case 1..10 :
            write("You fight against the gag but only manage to hurt yourself!");
-           TP->do_damage("head", random(3));
+           TP->cause_typed_damage(TP, "head", random(3), "untyped");
            break;
         default : break;
       }
@@ -104,7 +104,7 @@ int cmd_struggle(string what) {
                  message("my_environment",ETP->query_long(), ({TP}));
                  TP->set_blindfolded(blindwas);
              }
-           if(random(3))  TP->do_damage("head", random(3));
+           if(random(3))  TP->cause_typed_damage(TP, "head", random(3), "untyped");
            break;
         default : break;
       }
@@ -117,33 +117,33 @@ int cmd_struggle(string what) {
        case 0:  write("You pull a muscle trying to loosen your bonds.");
                 if(random(3))
                   tell_room(ETP,"You notice "+TPQCN+" wince in pain.", TP);
-                TP->do_damage("torso", random(4));
+                TP->cause_typed_damage(TP, "torso", random(4), "untyped");
                 break;
        case 1:  write("The ropes %^RED%^cut into your wrists %^RESET%^as you "
                       "struggle.");
                 if(random(3))
                   tell_room(ETP,"You notice "+TPQCN+"'s %^RED%^wrist bleeding"
                       "%^RESET%^ as "+TP->query_subjective()+" struggles.", TP);
-                TP->do_damage("right arm", random(5));
+                TP->cause_typed_damage(TP, "right arm", random(5), "untyped");
 		break;
        case 2:  write("The ropes cause %^BOLD%^blisters %^RESET%^as you struggle.");
                 if(random(2))
                   tell_room(ETP,TPQCN+" seems to be struggling against the "
                             "ropes.", TP);
-                TP->do_damage("left arm", random(3));
+                TP->cause_typed_damage(TP, "left arm", random(3), "untyped");
 		break;
        case 3:  write("%^ORANGE%^The ropes tighten around your neck and choke "
                       "you as you struggle to free yourself.");
                 if(random(2))
                   tell_room(ETP,TPQCN+" coughs and seems to be choking.", TP);
-                TP->do_damage("neck", random(5)+2);
+                TP->cause_typed_damage(TP, "neck", random(5)+2, "untyped");
 		break;
        case 4:  write("The ropes chafe against your skin as you struggle.  "
                       "Some of the blisters break open and begin to bleed.");
                 if(random(3))
                   tell_room(ETP,TPQCN+" winces as "+TP->query_subjective()+
                       " struggles against the ropes.", TP);
-                TP->do_damage("torso", random(4));
+                TP->cause_typed_damage(TP, "torso", random(4), "untyped");
 		break;
        case 10:  write("You pray your captors don't return or notice before "
                       "you manage to break free.");

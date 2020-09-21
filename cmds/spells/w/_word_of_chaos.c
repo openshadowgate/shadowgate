@@ -87,7 +87,7 @@ void spell_effect()
         {
             tell_room(place,"%^BOLD%^Upon hearing the words "+target->QCN+" simply explodes!",target);
             tell_object(target,"%^BOLD%^WHAT "+caster->QS+" DID JUST SAY");
-            damage_targ(target,target->query_target_limb(),target->query_max_hp()*2,"mental");
+            damage_targ(target,target->return_target_limb(),target->query_max_hp()*2,"mental");
         }
     }
 

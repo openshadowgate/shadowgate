@@ -30,7 +30,7 @@ spell_effect(int prof)
 
     tell_room(place,"%^BOLD%^%^BLACK%^As "+caster->QCN+" completes the chant, giant maw floats towards "+target->QCN+" and plunges its teeth into them.",target);
     tell_object(target,"%^BOLD%^%^BLACK%^As "+caster->QCN+" completes the chant, giant maw floats towards you and plunges its teeth into them.",target);
-    damage_targ(target, target->query_target_limb(), sdamage,"slashing");
+    damage_targ(target, target->return_target_limb(), sdamage,"slashing");
     num = clevel / 8 + 1;
     if(do_save(target,0))
         num/=2;
@@ -55,7 +55,7 @@ void bite_again()
     define_base_damage(0);
     tell_room(ENV(target),"%^BOLD%^%^BLACK%^The maw continues to nibble on "+target->QCN+"!%^RESET%^",target);
     tell_object(target,"%^BOLD%^%^BLACK%^The maw nibbles on you!%^RESET%^");
-    damage_targ(target, target->query_target_limb(), sdamage/6,"slashing");
+    damage_targ(target, target->return_target_limb(), sdamage/6,"slashing");
 
     if(num-- < 0)
     {

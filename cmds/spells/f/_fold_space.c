@@ -48,7 +48,7 @@ void spell_effect(int prof) {
                     "passage and the power backfires.");
         tell_room(place,caster->QCN+" "+
                   "looks startled.",caster);
-        damage_targ(caster, caster->query_target_limb(), sdamage, "mental");
+        damage_targ(caster, caster->return_target_limb(), sdamage, "mental");
         dest_effect();
         return;
     }

@@ -65,7 +65,7 @@ void spell_effect()
         {
             tell_room(place,sprintf("The psychic assault crushes %s's mind completely and %s drops dead!",target->QCN,target->query_subjective()));
             tell_object(target,"You die as your mind is crushed!");
-            damage_targ(target,target->query_target_limb(),target->query_max_hp()*2,"mental");
+            damage_targ(target,target->return_target_limb(),target->query_max_hp()*2,"mental");
         }
     }
 

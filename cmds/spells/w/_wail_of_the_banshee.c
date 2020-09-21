@@ -47,12 +47,12 @@ void spell_effect(int prof)
         {
             if (combat_death_save(foe, 3)) {
                 tell_object(foe, "%^BLUE%^You sigh with relief as your soul withstands a horrid scream!");
-                damage_targ(foe, foe->query_target_limb(), sdamage, "sonic");
+                damage_targ(foe, foe->return_target_limb(), sdamage, "sonic");
                 continue;
             }
             tell_object(foe, "%^BOLD%^%^BLUE%^You scream as your soul is carved out from the body!");
             tell_room(place, "%^BOLD%^%^BLUE%^" + foe->QCN + " screams as " + foe->QP + " soul is carved out from the body!", foe);
-            damage_targ(foe, foe->query_target_limb(), foe->query_max_hp() * 2, "sonic");
+            damage_targ(foe, foe->return_target_limb(), foe->query_max_hp() * 2, "sonic");
             max -= foe->query_level();
         }
     }
