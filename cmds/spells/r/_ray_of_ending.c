@@ -50,11 +50,11 @@ void spell_effect(int prof)
         // WOK, clasing rocks and this one share disadvantage value.
         if (combat_death_save(target, 0)) {
             tell_object(target,"%^BOLD%^%^BLACK%^You sigh with relief as you endure the unmaking.");
-            damage_targ(target, target->query_target_limb(), sdamage, "untyped");
+            damage_targ(target, target->return_target_limb(), sdamage, "untyped");
         } else {
             tell_object(target,"%^BOLD%^%^BLACK%^You are no more.");
             tell_room(place, "%^BOLD%^%^BLACK%^" + target->QCN + " turns into a black smoke.", target);
-            damage_targ(target, target->query_target_limb(), target->query_max_hp() * 2, "untyped");
+            damage_targ(target, target->return_target_limb(), target->query_max_hp() * 2, "untyped");
             target->die();
         }
     }

@@ -59,7 +59,7 @@ void spell_effect(int prof)
         "staggers back and clutches "+target->QP+" ears!");
     tell_object(target, "%^CYAN%^%^BOLD%^"+caster->QCN+" snaps "+caster->QP+" fingers clearly in a gesture towards you, "
         "and the sound echoes in your ears magnified a hundred times!");
-    damage_targ(target, target->query_target_limb(), damage,"sonic");
+    damage_targ(target, target->return_target_limb(), damage,"sonic");
 
     inven = all_inventory(environment(caster));
     inven = filter_array(inven, "is_non_immortal",FILTERS_D);
@@ -86,7 +86,7 @@ void spell_effect(int prof)
 
         tell_room(place,"%^CYAN%^"+hits[i]->QCN+" winces as echoes of the sound ring in "+hits[i]->QP+" ears!",hits[i]);
         tell_object(hits[i],"%^CYAN%^An echo of the snap rings in your ears, jarring your senses!");
-        damage_targ(hits[i], hits[i]->query_target_limb(), damage,"sonic");
+        damage_targ(hits[i], hits[i]->return_target_limb(), damage,"sonic");
         if (!size) break;
     }
     dest_effect();

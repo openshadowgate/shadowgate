@@ -67,7 +67,7 @@ int extra_hit(object ob) {
     	"%^RESET%^",(({ETO, ob})));       
     tell_object(ob,"%^BLUE%^The sword wielded by "+ETO->QCN+" cackles as it "+
     	"lashes yet again into your flesh!%^RESET%^");
-    ob->do_damage(ob->query_target_limb(),random(dam) + 3);
+    ob->do_damage(ob->return_target_limb(),random(dam) + 3);
   }
   return 1;
 }

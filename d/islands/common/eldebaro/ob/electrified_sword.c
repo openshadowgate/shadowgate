@@ -119,14 +119,14 @@ int hit_func(object targ)
             "the way just in time and is only struck by "+myBolts+ " of electricity!", targ);
             tell_object(targ, "%^BOLD%^%^WHITE%^You manage to move out of the way "+
             "just in time and are only struck by "+myBolts+" of electricity!");
-            targ->cause_type_damage(targ, "torso", roll_dice(bolts, 8), "electricity");
+            targ->cause_typed_damage(targ, "torso", roll_dice(bolts, 8), "electricity");
             return 0;
         }
         tell_room(EETO, targ->QCN+"%^BOLD%^%^YELLOW%^ is UNABLE to move out of the way "+
         "in time and is %^BOLD%^%^BLACK%^CHARRED%^BOLD%^%^YELLOW%^ by the electricity!%^RESET%^", targ);
         tell_object(targ, "%^BOLD%^%^YELLOW%^You are UNABLE to move out of the way in "+
         "time and are %^BOLD%^%^BLACK%^CHARRED%^BOLD%^%^YELLOW%^ by the electricity!%^RESET%^");
-        targ->cause_type_damage(targ, "torso", roll_dice(bolts, 8), "electricity");
+        targ->cause_typed_damage(targ, "torso", roll_dice(bolts, 8), "electricity");
         return 0;
     }
     return 0;

@@ -730,7 +730,7 @@ int climb_ok(string verb) {
             for (inc2 = loop;inc2 > inc; inc2 --)
                 damage += random(climb_exits[verb][2]);
             damage += random(climb_exits[verb][2]) + 1;
-            this_player()->do_damage(this_player()->return_target_limb(),damage);
+            this_player()->cause_typed_damage(this_player(), this_player()->return_target_limb(), damage, "bludgeoning");
             this_player()->add_attacker(this_object());
             this_player()->continue_attack();
             this_player()->remove_attacker(this_object());
