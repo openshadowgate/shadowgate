@@ -49,7 +49,7 @@ void spell_effect(int prof) {
                ""+target->QCN+"!",({caster, target}) );
         }
     //}
-    damage_targ(target, target->query_target_limb(), numdarts);
+    damage_targ(target, target->return_target_limb(), numdarts);
     dest_effect();
 }
 

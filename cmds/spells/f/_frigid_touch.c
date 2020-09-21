@@ -72,7 +72,7 @@ spell_effect(int prof)
     tell_room(place, "%^BOLD%^%^CYAN%^" + caster->QCN + " reaches out and touches " + target->QCN + "'s " + target_limb + "...", ({ caster, target }));
     spell_successful();
 
-    damage_targ(target, target->query_target_limb(), sdamage, "cold");
+    damage_targ(target, target->return_target_limb(), sdamage, "cold");
     target->set_tripped(roll_dice(1, 6), "%^BOLD%^%^CYAN%^You are staggered by the cold!%^RESET%^");
     target->use_stamina(sdamage / 6);
 

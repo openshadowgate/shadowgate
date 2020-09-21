@@ -32,6 +32,6 @@ spell_effect(int prof) {
         tell_room(place,"%^YELLOW%^"+caster->QCN+" chants sonorously and directs a ray of light at "+target->QCN+"!", ({caster}) );
     }
     tell_object(place,"%^YELLOW%^A ray of light scorches "+target->QP+"!");
-    damage_targ(target, target->query_target_limb(), sdamage,"positive energy");
+    damage_targ(target, target->return_target_limb(), sdamage,"positive energy");
     TO->dest_effect();
 }

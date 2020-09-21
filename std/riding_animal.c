@@ -538,7 +538,7 @@ int kill_intercept(string str)
         write("The " + orig_short + " throws you off!");
         tell_room(ETP, TPQCN + " is thrown off by " + TP->QP + " " + orig_short + "!", TP);
         exit(orig_short);
-        TP->do_damage("torso", query_stats("strength") / 2);
+        TP->cause_typed_damage(TP, "torso", query_stats("strength") / 2, "bludgeoning");
         return 0;
     }
     return 0;
@@ -797,7 +797,7 @@ int do_throw(int diff){
       tell_room(ETP,"%^BOLD%^The "+query_short()+" refuses to follow "+TPQCN+"'s commands. It rears up, bucks, and throws "+TP->query_objective()+" from the saddle.",TP);
       write("%^BOLD%^You hit the ground hard from being thrown.");
       exit(orig_short);
-      TP->do_damage("torso",random(((int)TP->query_max_hp())/4));
+      TP->cause_typed_damage(TP, "torso", random(((int)TP->query_max_hp()) / 4), "bludgeoning");
       TP->add_attacker(TO);
       TP->check_death();
       TP->remove_attacker(TO);
@@ -808,7 +808,7 @@ int do_throw(int diff){
       tell_room(ETP,"%^BOLD%^The "+query_short()+" refuses to follow "+TPQCN+"'s commands. It rears up, bucks and throws "+TP->query_objective()+" from the saddle.",TP);
       exit(orig_short);
       write("%^BOLD%^You hit the ground hard from being thrown.");
-      TP->do_damage("torso",random(((int)TP->query_max_hp())/4));
+      TP->cause_typed_damage(TP, "torso", random(((int)TP->query_max_hp()) / 4), "bludgeoning");
       write("%^BOLD%^The enraged animal turns and attacks you!");
       tell_room(ETO,"The enraged animal turns and attacks "+TPQCN+"!",TP);
       TO->kill_ob(TP,1);

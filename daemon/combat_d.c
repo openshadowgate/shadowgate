@@ -888,7 +888,7 @@ int damage_done(object attacker, object weap, int damage, int isranged)
     }
     if (prof < 0) {
         damage = absolute_value((damage * prof) / 100 + 1);
-        attacker->do_damage("torso", damage);
+        attacker->cause_typed_damage(attacker, "torso", damage, weap->query_damage_type());
         tell_object(attacker, "You hurt yourself with your weapon because of your inexperience.");
         tell_room(environment(attacker), attacker->QCN + " hurts " + attacker->QO + "self with " + attacker->QP + " weapon.", attacker);
         return 0;

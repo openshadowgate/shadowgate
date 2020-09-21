@@ -21,3 +21,5 @@
 *.bak
 #fixme
 *.o
+/.vs
+/cmds/.vs

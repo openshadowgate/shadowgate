@@ -46,7 +46,7 @@ void spell_effect(int prof)
     tell_object(target, "%^YELLOW%^You scream in pain as you feel your future and past pain all at once!%^RESET%^");
     tell_room(place, sprintf("%s screams in pain as %s feels pain, both past and future!", target->QCN, target->QP));
 
-    damage_targ(target, target->query_target_limb(), damage,"mental");
+    damage_targ(target, target->return_target_limb(), damage,"mental");
     this_object()->dest_effect();
 }
 

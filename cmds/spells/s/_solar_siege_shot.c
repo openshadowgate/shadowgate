@@ -28,7 +28,7 @@ spell_effect(int prof)
     spell_successful();
     tell_room(place,"%^BOLD%^%^WHITE%^The ballista makes a shot at "+target->QCN+" and then disappears!");
     tell_room(place,"%^BOLD%^%^ORANGE%^A bolt made of light pierces "+target->QCN+"!");
-    damage_targ(target, target->query_target_limb(), dam,"divine");
+    damage_targ(target, target->return_target_limb(), dam,"divine");
     TO->dest_effect();
 }
 

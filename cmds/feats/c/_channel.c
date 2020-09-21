@@ -135,7 +135,7 @@ void execute_attack()
             continue;
         }
 
-        ally->cause_typed_damage(ally, ally->query_target_limb(), dam, energy_type);
+        ally->cause_typed_damage(ally, ally->return_target_limb(), dam, energy_type);
         tell_object(ally, "%^BOLD%^" + color + "Waves of divine energy wash over you, healing your wounds!");
     }
 
@@ -155,7 +155,7 @@ void execute_attack()
             continue;
         }
 
-        attacker->cause_typed_damage(attacker, attacker->query_target_limb(), dam, energy_type);
+        attacker->cause_typed_damage(attacker, attacker->return_target_limb(), dam, energy_type);
         tell_object(attacker, "%^BOLD%^" + color + "Waves of divine energy wash over you, wounding you!");
     }
 

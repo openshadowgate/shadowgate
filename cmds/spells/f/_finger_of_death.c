@@ -43,13 +43,13 @@ void spell_effect(int prof)
     if (combat_death_save(target, 6)) {
         tell_object(target, "%^BOLD%^The struggle is won, yet at a price.");
         tell_room(place, "%^BOLD%^The soul survives, yet at a price.", target);
-        damage_targ(target, target->query_target_limb(), sdamage, "negative energy");
+        damage_targ(target, target->return_target_limb(), sdamage, "negative energy");
         target->set_property("no_slay", ({ caster->query_name() }));
     } else {
         tell_room(place, "%^BOLD%^%^BLUE%^The soul is cleaved from its body and left to drift homelessly!");
         tell_room(place, "%^BOLD%^%^MAGENTA%^The lifeless, soulless, body of " + target->QCN + " drops to the ground!", target);
         tell_object(target, "%^BOLD%^%^RED%^You sense a few last things as your soul is ripped from you body!\n");
-        damage_targ(target, target->query_target_limb(), target->query_max_hp() * 2, "negative energy");
+        damage_targ(target, target->return_target_limb(), target->query_max_hp() * 2, "negative energy");
         target->die();
     }
     dest_effect();

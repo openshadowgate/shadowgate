@@ -29,7 +29,7 @@ spell_effect()
         tell_object(caster,"%^BOLD%^%^BLUE%^You simply unmake some of "+target->QCN+"!");
         tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" unmakes some of "+target->QCN+" with "+caster->QP+" spell!", ({caster}) );
     }
-    damage_targ(target, target->query_target_limb(), sdamage,"divine");
+    damage_targ(target, target->return_target_limb(), sdamage,"divine");
     if(target->query_hp()<0)
         target->die();
     TO->dest_effect();

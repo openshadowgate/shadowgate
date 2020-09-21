@@ -208,7 +208,7 @@ void __Feed_em() {
          tell_room(TO, inven[i]->query_cap_name()+" doubles over in pain and "
             "begins to %^BOLD%^%^MAGENTA%^vomit %^RESET%^uncontrollably.  "
             "The sight and stench are sickening.",inven[i]);
-         inven[i]->do_damage("torso",roll_dice(4,4));
+         inven[i]->cause_typed_damage(inven[i], "torso", roll_dice(4, 4), "untyped");
          inven[i]->use_stamina(20);
       }
       if(!(temp1 < (temp2*3))) continue;

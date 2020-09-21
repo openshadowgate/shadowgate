@@ -92,7 +92,7 @@ void execute_attack()
         }
 
         tell_object(targ,"%^BOLD%^%^CYAN%^You are crushed by the strong wings of the typhoon!");
-        damage_targ(targ, targ->query_target_limb(), dam, "bludgeoning");
+        damage_targ(targ, targ->return_target_limb(), dam, "bludgeoning");
     }
 
     counter--;

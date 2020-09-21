@@ -31,8 +31,8 @@ spell_effect(int prof)
         tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+" opens "+caster->QP+" hands and releases %^RED%^ray of %^ORANGE%^hell%^BLACK%^fire%^WHITE%^ at "+caster->QP+"!", ({caster}) );
         tell_object(target,"%^BOLD%^%^WHITE%^It burns your very soul!%^RESET%^");
     }
-    damage_targ(target, target->query_target_limb(), sdamage/2,"fire");
-    damage_targ(target, target->query_target_limb(), sdamage/2,"divine");
+    damage_targ(target, target->return_target_limb(), sdamage/2,"fire");
+    damage_targ(target, target->return_target_limb(), sdamage/2,"divine");
     TO->dest_effect();
 }
 

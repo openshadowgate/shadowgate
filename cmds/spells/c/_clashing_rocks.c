@@ -59,11 +59,11 @@ void spell_effect(int prof)
         // Ray of ending, WOK and this one should share disadvantage value
         if (combat_death_save(target, 0)) {
             tell_object(target, "%^BOLD%^%^BLACK%^You barely make an escape from being crushed to dust!");
-            damage_targ(target, target->query_target_limb(), sdamage, "bludgeoning");
+            damage_targ(target, target->return_target_limb(), sdamage, "bludgeoning");
         } else {
             tell_object(target, "%^BOLD%^%^BLACK%^You are crushed by the rocks, and die.");
             tell_room(place, "%^BOLD%^%^BLACK%^" + target->QCN + " dies being crushed by the rocks.", target);
-            damage_targ(target, target->query_target_limb(), target->query_max_hp() * 2, "bludgeoning");
+            damage_targ(target, target->return_target_limb(), target->query_max_hp() * 2, "bludgeoning");
             target->die();
         }
     }
