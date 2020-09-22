@@ -53,7 +53,7 @@ int cut(object targ){
       "leaf tears your skin!");
    tell_room(ETO,"%^BOLD%^%^RED%^The serrated edge of the flower's "+
       "leaf tears "+targ->QCN+"'s skin!",targ);
-   targ->do_damage(targ->query_target_limb(),roll_dice(2,8));
+   targ->do_damage(targ->return_target_limb(),roll_dice(2,8));
    return 1;
 }
 

@@ -132,7 +132,7 @@ void spell_effect(int prof) {
             tell_room(place, "%^RED%^The fire blazes through "+hits[i]->QCN+"!",hits[i]);
           break;
         }
-        damage_targ(hits[i], hits[i]->query_target_limb(), sdamage,element);
+        damage_targ(hits[i], hits[i]->return_target_limb(), sdamage,element);
     }
 
     if(evade_splash(target)) { dest_effect(); return; }
@@ -158,7 +158,7 @@ void spell_effect(int prof) {
         tell_room(place,"%^BOLD%^%^RED%^The infernal blaze burns into "+HIM+", blanketing "+target->QO+" in flames!", target);
       break;
     }
-    damage_targ(target, target->query_target_limb(), sdamage,element);
+    damage_targ(target, target->return_target_limb(), sdamage,element);
         dest_effect();
 }
 

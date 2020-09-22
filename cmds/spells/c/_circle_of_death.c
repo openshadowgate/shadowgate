@@ -49,7 +49,7 @@ void spell_effect(int prof)
 
         tell_object(foe, "%^BLUE%^%^BOLD%^Your life ends, as negative energy destroys your very soul!");
         tell_room(place, "%^BLUE%^%^BOLD%^" + foe->QCN + " crumbles to dust!", foe);
-        damage_targ(foe, foe->query_target_limb(), foe->query_max_hp() * 2, "negative energy");
+        damage_targ(foe, foe->return_target_limb(), foe->query_max_hp() * 2, "negative energy");
         max -= foe->query_level();
     }
 

@@ -171,7 +171,7 @@ void do_tentacles()
 			{
                 tell_object(caught[i],"%^CYAN%^The tentacle squeezes the life from you!");
                 tell_room(place,"%^CYAN%^The tentacle squeezes around "+caught[i]->QCN+"!",caught[i]);
-                damage_targ(caught[i], caught[i]->query_target_limb(), mydam,"bludgeoning");
+                damage_targ(caught[i], caught[i]->return_target_limb(), mydam,"bludgeoning");
             }
             else
 			{

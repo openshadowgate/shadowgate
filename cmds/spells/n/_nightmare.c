@@ -35,7 +35,7 @@ spell_effect()
         "/std/effect/status/fatigued"->apply_effect(target, clevel / 4 + 1);
     }
 
-    damage_targ(target, target->query_target_limb(), sdamage, "mental");
+    damage_targ(target, target->return_target_limb(), sdamage, "mental");
 
     tell_object(target, "%^BLUE%^A heavy nightmarish vision descends upon you as " + caster->QCN + " completes the spell.");
     tell_room(ENV(target), "%^BLUE%^" + target->QCN + " shudders and staggers as feeling of dread swipes by the area.", target);

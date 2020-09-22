@@ -33,7 +33,7 @@ spell_effect(int prof)
 
     tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" completes the spell and releases acidic slime at "+target->QCN+".",target);
     tell_object(target,"%^BOLD%^%^GREEN%^"+caster->QCN+" and releases the acidic slime at.",target);
-    damage_targ(target, target->query_target_limb(), sdamage,"acid");
+    damage_targ(target, target->return_target_limb(), sdamage,"acid");
     if (target->is_undead()) {
         undeadt = 1;
     }
@@ -93,7 +93,7 @@ void rot_again()
     define_base_damage(0);
     tell_room(ENV(target),"%^BOLD%^%^GREEN%^The acidic slime continues to rot away "+target->QCN+"'s essence!%^RESET%^",target);
     tell_object(target,"%^BOLD%^%^GREEN%^The acidic slime burns through you!%^RESET%^");
-    damage_targ(target, target->query_target_limb(), dam,"acid");
+    damage_targ(target, target->return_target_limb(), dam,"acid");
 
     if(num-- < 0)
     {

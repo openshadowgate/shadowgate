@@ -48,7 +48,7 @@ void spell_effect(int prof)
     tell_object(caster,"%^BOLD%^The power of your voice manifests into three-dimensional grid and it slams into "+target->QCN+"!");
     tell_object(target,"%^BOLD%^The power of "+caster->QCN+" voice manifests into three-dimensional grid and it slams into you!");
     tell_room(place,"%^BOLD%^The power of your voice manifests into three-dimensional grid and it slams into "+target->QCN+"!",({caster,target}));
-    damage_targ(target, target->query_target_limb(), sdamage,"sonic" );
+    damage_targ(target, target->return_target_limb(), sdamage,"sonic" );
     dest_effect();
     return;
 }

@@ -84,7 +84,7 @@ spell_effect(int prof)
 		    "bolt!",({target,caster}));
         damage = roll_dice(clevel,6)/2;
     }
-    target->do_damage(target->return_target_limb(),damage);
+    damage_targ(target, target->return_target_limb(), damage, "divine");
     spell_kill(target,caster);
     dest_effect();
 }

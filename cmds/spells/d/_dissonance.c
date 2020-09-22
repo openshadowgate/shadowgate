@@ -42,7 +42,7 @@ void spell_effect(int prof)
     spell_successful();
     
     "/std/effect/status/sickened"->apply_effect(target,roll_dice(2,4));
-    damage_targ(target,target->query_target_limb(),sdamage,"mental");
+    damage_targ(target,target->return_target_limb(),sdamage,"mental");
     
     dest_effect();
 }

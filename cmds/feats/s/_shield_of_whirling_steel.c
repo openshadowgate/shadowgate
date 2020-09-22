@@ -120,8 +120,9 @@ void execute_feat()
 
 void execute_attack()
 {    
-    object *attackers = ({});
+    object* attackers;
     int i,count;
+    object* weapons;
 
     if(!objectp(caster) || !objectp(environment(caster)))
     {
@@ -131,6 +132,7 @@ void execute_attack()
     
     place = environment(caster);
     attackers = caster->query_attackers();
+    weapons = caster->query_wielded();
     
     if(!check_my_status(caster))
     {
@@ -170,7 +172,7 @@ void execute_attack()
             if(attackers[i]->is_wielding("lrweapon")) { continue; }
             
             tell_object(attackers[i], cm("As you get close to "+caster->QCN+", "+caster->QP+" spinning weapons strike you painfully!"));
-            attackers[i]->do_damage(attackers[i]->return_target_limb(), roll_dice(clevel,5));
+            attackers[i]->cause_typed_damage(attackers[i], attackers[i]->return_target_limb(), roll_dice(clevel, 5), weapons[0]->query_damage_type());
             count++;
         }
         

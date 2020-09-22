@@ -228,7 +228,7 @@ void headlock(object targ)
         tell_room(ETO, "%^BOLD%^BLUE%^The jailer slips in behind "
                   + targ->query_cap_name() + " and puts " + targ->query_objective() + " in "
                   "a headlock!", targ);
-        targ->do_damage(targ->return_target_limb(), roll_dice(3, 5) + 10);
+        targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(3, 5) + 10, "untyped");
         targ->set_paralyzed(50, "You are in a headlock.");
         return 1;
     }
@@ -250,7 +250,7 @@ void key_swipe(object targ)
                     "key across your throat, nearly crushing it!");
         tell_room(ETO, "%^BOLD%^RED%^The jailer deftly swings the heavy key "
                   "across " + targ->QCN + "'s throat, nearly crushing it!", targ);
-        targ->do_damage(targ->return_target_limb(), roll_dice(5, 10) + 10);
+        targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(5, 10) + 10, "bludgeoning");
         return 1;
     }
     tell_object(targ, "%^GREEN%^The jailer swings the heavy key at your "
@@ -258,7 +258,7 @@ void key_swipe(object targ)
     tell_room(ETO, "%^GREEN%^The jailer swings the heavy key at "
               + targ->QCN + "'s throat and " + targ->query_subjective() +
               " ducks but still gets badly bruised by it!", targ);
-    targ->do_damage(targ->return_target_limb(), roll_dice(3, 5) + 10);
+    targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(3, 5) + 10, "bludgeoning");
     return 1;
 }
 

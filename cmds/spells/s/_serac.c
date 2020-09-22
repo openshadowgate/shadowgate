@@ -25,7 +25,7 @@ spell_effect()
         tell_object(target, "%^BOLD%^%^CYAN%^A platform of ice appears by " + caster->QCN + "'s side and propels towards you with force.%^RESET%^");
         tell_object(target, "%^BOLD%^%^CYAN%^A platform of ice appears by " + caster->QCN + "'s side and propels towards " + target->QCN + " with force.%^RESET%^", ({ caster, target }));
     }
-    damage_targ(target, target->query_target_limb(), sdamage / 2, "cold");
-    damage_targ(target, target->query_target_limb(), sdamage / 2, "bludgeoning");
+    damage_targ(target, target->return_target_limb(), sdamage / 2, "cold");
+    damage_targ(target, target->return_target_limb(), sdamage / 2, "bludgeoning");
     dest_effect();
 }

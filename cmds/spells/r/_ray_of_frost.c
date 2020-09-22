@@ -28,7 +28,7 @@ spell_effect(int prof) {
         tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" opens "+caster->QP+" hands and directs a ray of frost at "+target->QCN+"!", ({caster}) );
     }
     tell_object(target,"%^BOLD%^%^CYAN%^You feel very cold!");
-    damage_targ(target, target->query_target_limb(), sdamage,"cold");
+    damage_targ(target, target->return_target_limb(), sdamage,"cold");
     TO->dest_effect();
 }
 

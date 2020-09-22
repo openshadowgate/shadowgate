@@ -76,9 +76,9 @@ void spell_effect(int prof){
           spell_kill(attackers[i],caster);
           if(!do_save(attackers[i],0))
             //if(!SAVING_D->saving_throw(attackers[i],"spell",0))
-            attackers[i]->do_damage(attackers[i]->return_target_limb(),damage,"cold");
+            damage_targ(attackers[i], attackers[i]->return_target_limb(), damage, "cold");
           else
-            attackers[i]->do_damage(attackers[i]->return_target_limb(),damage/2,"cold");
+              damage_targ(attackers[i], attackers[i]->return_target_limb(), damage/2, "cold");
         }
         else
         {
@@ -87,13 +87,13 @@ void spell_effect(int prof){
             tell_room(place,"%^BOLD%^%^CYAN%^"+attackers[i]->QCN+" is chilled by the "
                       "shards of ice!",attackers[i]);
             tell_object(attackers[i],"%^BOLD%^%^CYAN%^You are chilled by the ice.");
-            attackers[i]->do_damage(attackers[i]->return_target_limb(),damage,"cold");
+            damage_targ(attackers[i], attackers[i]->return_target_limb(), damage, "cold");
             spell_kill(attackers[i],caster);
           }else{
             tell_room(place,"%^CYAN%^"+attackers[i]->QCN+" jumps out of the way just"+
                       " as the frosty breath about to hit!",attackers[i]);
             tell_object(attackers[i],"%^CYAN%^You are only slightly chilled by the cold.");
-            attackers[i]->do_damage(attackers[i]->return_target_limb(),damage/2,"cold");
+            damage_targ(attackers[i], attackers[i]->return_target_limb(), damage/2, "cold");
             spell_kill(attackers[i],caster);
           }
         }

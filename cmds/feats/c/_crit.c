@@ -154,12 +154,12 @@ void execute_feat()
         } else{
             todamage = roll_dice(flevel + BONUS_D->query_stat_bonus(caster, "intelligence"), 10);
         }
-        target->cause_typed_damage(target, target->query_target_limb(), todamage, "untyped");
+        target->cause_typed_damage(target, target->return_target_limb(), todamage, "untyped");
     } else {
         tell_object(target, "%^BOLD%^%^WHITE%^Wait, what?! How did it happen?!%^RESET%^");
         tell_room(place, "%^BOLD%^%^WHITE%^You almost didn't see a shadow behind " + target->QCN + "'s back!", ({ target, caster }));
         tell_object(caster, "%^BOLD%^%^WHITE%^You phase quickly behind " + target->QCN + " and put an end to them with a swift motion.");
-        target->cause_typed_damage(target, target->query_target_limb(), target->query_max_hp() * 2, "untyped");
+        target->cause_typed_damage(target, target->return_target_limb(), target->query_max_hp() * 2, "untyped");
     }
     spell_kill(target,caster);
     return;
