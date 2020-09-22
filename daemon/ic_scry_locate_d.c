@@ -123,7 +123,7 @@ string item_scry(object observer, object target, object item, string *extra) {
 
     // Only one scry at a time!
     if(observer->query_property("scrying")) return "You are already scrying!";
-    
+
     // First check if the target is scryable.  No wizzes and avatars
     // also, check for block scrying.  Return a string error for any
     // error.
@@ -141,7 +141,7 @@ string item_scry(object observer, object target, object item, string *extra) {
     target->set_property("scryed_by",({control}));
     observer->set_property("scrying",1);
     // ADD: Check for detect scrying here...
-    
+
     // Send the control back to the client spell or object to place
     // it as required.
     return "An image begins to take shape!";
@@ -155,16 +155,16 @@ int stop_scry(object control, int early) {
     object scry_object, target, observer, parent;
 
     if(!objectp(control)) return 0;
-    
+
     observer = control->query_observer();
     target = control->query_target();
     scry_object = control->query_scry_object();
-    
+
     if(objectp(target)) target->remove_property_value("scryed_by",({control}));
     if(objectp(scry_object)) scry_object->remove();
 	if(parent = control->query_parent()) parent->control_failure();
     if(objectp(observer)) {
-		observer->remove_property("scrying");
+		observer->remove_property("remote scrying");
         tell_object(observer, "The image you were viewing quickly fades away.");
         tell_room(environment(observer), "The scried image quickly fades away.");
 	}
@@ -222,15 +222,15 @@ string error_msg(string str) {
 // Return the scry blocker object.
 object add_block_scrying(object target) {
 	object blocker;
-	
+
 	if(!objectp(target)) return 0;
 	blocker = new(BLOCKER);
 	blocker->set_target(target);
 /*
-Protection from scrying says that it will move with the 
-target, but it won't if it's set up this way.  I'm going to 
-try the below (move(target)) and see if everything still 
-works correctly.  If not, this can go back and I'll try 
+Protection from scrying says that it will move with the
+target, but it won't if it's set up this way.  I'm going to
+try the below (move(target)) and see if everything still
+works correctly.  If not, this can go back and I'll try
 something else.  ~Circe~ 9/27/05
 	if(target->is_room()) blocker->move(target);
 	else blocker->move(environment(target));
@@ -243,7 +243,7 @@ something else.  ~Circe~ 9/27/05
 // Return the scry blocker object.
 object add_detect_scrying(object target) {
 	object detector;
-	
+
 	if(!objectp(target)) return 0;
 	detector = new(DETECTOR);
 	detector->set_target(target);
