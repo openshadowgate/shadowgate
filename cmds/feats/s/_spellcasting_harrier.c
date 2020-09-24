@@ -31,7 +31,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (!FEATS_D->has_feat(ob,"cobat reflexes") &&
+    if (!FEATS_D->has_feat(ob,"combat reflexes") &&
         !FEATS_D->has_feat(ob,"spellbreaker")) {
         dest_effect();
         return 0;
