@@ -150,7 +150,7 @@ void pent_pulse(object targ)
 
 		dam = roll_dice(5, 10);
 		leech += dam;
-		vics[x]->do_damage(vics[x]->return_target_limb(), dam);
+		vics[x]->cause_typed_damage(vics[x], vics[x]->return_target_limb(), dam, "negative energy");
 		continue;
 	}
 	msg = "%^BOLD%^%^MAGENTA%^The "+TOQCN+ 

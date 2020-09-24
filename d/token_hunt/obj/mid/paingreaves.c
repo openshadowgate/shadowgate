@@ -31,7 +31,7 @@ void create(){
 int wear_func(){
 	tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETOQCN+" smiles darkly.%^RESET%^",ETO);
 	tell_object(ETO,"%^RESET%^%^RED%^A %^BOLD%^%^BLACK%^dark chorus%^RESET%^%^RED%^ of %^BOLD%^%^RED%^tortured screams%^RESET%^%^RED%^ fills your mind as you fasten the greaves.%^RESET%^");
-	ETO->do_damage("torso",random(5));
+	ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 5) - 1, "mental");
 	ETO->set_property("evil item",1);
 	return 1;
 }
@@ -46,7 +46,7 @@ int strike_func(int damage, object what, object who){
 	tell_room(environment(query_worn()),"%^BOLD%^%^RED%^The %^RESET%^silver spikes%^BOLD%^%^RED%^ of "+ETOQCN+"'s%^BOLD%^%^RED%^ "+query_short()+"%^BOLD%^%^RED%^ tears into "+who->QCN+"%^BOLD%^%^RED%^'s flesh, splattering %^RESET%^%^RED%^blood%^BOLD%^%^RED%^ everywhere!%^RESET%^",({ETO,who}));
 	tell_object(ETO,"%^BOLD%^%^RED%^You bash your knee into "+who->QCN+"%^RESET%^%^BOLD%^%^RED%^, ripping into the flesh.%^RESET%^");
 	tell_object(who,"%^BOLD%^%^RED%^You feel your flesh ripped asunder as "+ETOQCN+"%^BOLD%^%^RED%^ bashes you with "+query_short()+"%^BOLD%^%^RED%^.%^RESET%^");
-		who->do_damage("torso",random(7)+20);
+		who->cause_typed_damage(who, "torso", roll_dice(1, 7) + 19, "piercing");
 return damage;	}
 }
 

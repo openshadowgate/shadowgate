@@ -45,7 +45,7 @@ int wearme(){
      tell_object(ETO,"%^RED%^%^BOLD%^As you touch the armor, it becomes intensely hot and burns you!%^RESET%^");
      tell_room(EETO,"%^RED%^%^BOLD%^"+ETO->QCN+" jerks away as if burnt when "+ETO->QS+" tries to wear the armor.",ETO);
      set_property("magic",1);
-     ETO->do_damage("torso",random(20)+30);
+     ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 20) + 29, "fire");
      ETO->add_attacker(TO);
      ETO->continue_attack();
      ETO->remove_attacker(TO);

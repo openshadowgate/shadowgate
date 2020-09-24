@@ -50,7 +50,7 @@ void fireball(object targ){
     if(!SAVING_D->saving_throw(targ,"paralyzation_poison_death")){
 	tell_object(targ,"%^B_WHITE%^RED%^\nThe ball explodes into you!");
 	tell_room(ETO,"%^B_WHITE%^RED%^\nThe ball explodes into "+targ->query_cap_name()+"!",targ);
-	targ->do_damage(targ->return_target_limb(),roll_dice(8,6));
+    targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(8, 6), "fire");
 	return 1;
     }
     tell_room(ETO,"%^RED%^The ball flies off and slams into the ground exploding with a roar!");

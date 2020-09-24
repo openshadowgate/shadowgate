@@ -88,11 +88,14 @@ void set_paralyzed(int time,string message){return 1;}
 
 void eye_stalk_attack(object targ)
 {
-	string lim;
+	string lim, targname;
 	int dam;	
 	if(!objectp(TO)) return;
 	if(!objectp(ETO)) return;
-	if(!objectp(targ)) return;	
+	if(!objectp(targ)) return;
+
+	lim = targ->return_target_limb();
+	targname = targ->QCN;
 	switch(random(40)) 
 	{
 		case 0..24:
@@ -106,7 +109,7 @@ void eye_stalk_attack(object targ)
 			"from the eyestalk toward you!%^RESET%^");
 
 			tell_room(ETO, "%^BOLD%^%^RED%^A ray of fire blasts forth "+
-			"from one of Valshiiir's eyestalks toward "+targ->QCN+
+			"from one of Valshiiir's eyestalks toward "+ targname +
 			"%^BOLD%^%^RED%^!%^RESET%^", targ);
 
 			//less damage than a typical spell but not 
@@ -118,17 +121,17 @@ void eye_stalk_attack(object targ)
 				"avoid the full impact of the ray, but are "+
 				"still singed by it!%^RESET%^");
 
-				tell_room(ETO, targ->QCN+"%^BOLD%^%^RED%^ manages "+
+				tell_room(ETO, targname +"%^BOLD%^%^RED%^ manages "+
 				"to avoid the full impact of the ray!%^RESET%^", targ);
-				targ->do_damage(targ->return_target_limb(), dam/2);
+				targ->cause_typed_damage(targ, lim, dam/2, "fire");
 			}
 			else 
 			{
 				tell_object(targ, "%^BOLD%^%^RED%^The full impact of "+
 				"the ray SEARS your flesh!%^RESET%^");
-				tell_room(ETO, targ->QCN+"%^BOLD%^%^RED%^ is "+
+				tell_room(ETO, targname +"%^BOLD%^%^RED%^ is "+
 				"SEARED by the full impact of the ray!%^RESET%^", targ);
-				targ->do_damage(targ->return_target_limb(), dam);
+				targ->cause_typed_damage(targ, lim, dam, "fire");
 			}
 		case 36..38:
 			//paralyze for 40 on save fail
@@ -137,7 +140,7 @@ void eye_stalk_attack(object targ)
 			
 			tell_room(ETO, "%^BOLD%^%^GREEN%^A sickly green ray "+
 			"blasts forth from one of Valshiiir's eyestalks toward "+
-			targ->QCN+"%^BOLD%^%^GREEN%^!%^RESET%^", targ);
+			targname +"%^BOLD%^%^GREEN%^!%^RESET%^", targ);
 			
 			if("/daemon/saving_throw_d"->reflex_save(targ, -35))
 			{
@@ -145,7 +148,7 @@ void eye_stalk_attack(object targ)
 				"to move out of the way of the ray just in "+
 				"time!%^RESET%^");
 
-				tell_room(ETO, targ->QCN+"%^BOLD%^%^GREEN%^ "+
+				tell_room(ETO, targname +"%^BOLD%^%^GREEN%^ "+
 				"manages to move out of the way of the ray just in "+
 				"time!%^RESET%^", targ);
 			}
@@ -155,7 +158,7 @@ void eye_stalk_attack(object targ)
 				"slams into you and your body suddenly freezes "+
 				"up!%^RESET%^");	
 				
-				tell_room(ETO, targ->QCN+ "%^BOLD%^%^GREEN%^ is hit "+
+				tell_room(ETO, targname + "%^BOLD%^%^GREEN%^ is hit "+
 				"by the full impact of the ray and "+targ->QP+
 				" body seems to freeze up!%^RESET%^", targ);
 			
@@ -170,28 +173,27 @@ void eye_stalk_attack(object targ)
 
 			tell_room(ETO, "%^BOLD%^%^BLACK%^A dull black "+
 			"rays blasts forth from one of Valshiiir's eyestalks "+
-			"toward "+targ->QCN+"%^BOLD%^%^BLACK%^!%^RESET%^", targ);
+			"toward "+ targname +"%^BOLD%^%^BLACK%^!%^RESET%^", targ);
 
 			if("/daemon/saving_throw_d"->fort_save(targ, -35))
 			{
 				tell_object(targ, "%^BOLD%^%^BLACK%^You are struck by "+
 				"the ray but are able to resist its effect!%^RESET%^");
 
-				tell_room(ETO, targ->QCN+"%^BOLD%^%^BLACK%^ is struck by "+
+				tell_room(ETO, targname +"%^BOLD%^%^BLACK%^ is struck by "+
 				"the ray but seems to resist its effect!%^RESET%^", targ);	
 			}
 			else
 			{
-				lim = targ->return_target_limb();
 				tell_object(targ, "%^BOLD%^%^BLACK%^Your "+lim+
 				" is struck by the ray and begins to %^BOLD%^%^RED%^"+
 				"WILT%^BOLD%^%^BLACK%^!%^RESET%^");
 				
-				tell_room(ETO, targ->QCN+"%^BOLD%^%^BLACK%^'s "+lim+
+				tell_room(ETO, targname +"%^BOLD%^%^BLACK%^'s "+lim+
 				"is struck by the ray and begins to %^BOLD%^"+
 				"%^RED%^WILT%^BOLD%^%^BLACK%^!%^RESET%^", targ);
 			
-				targ->do_damage(lim, roll_dice(50, 6));
+				targ->cause_typed_damage(targ, lim, roll_dice(50, 6), "negative energy");
 			}
 	}
 	return;

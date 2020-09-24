@@ -55,7 +55,7 @@ void suck(object target) {
 	tell_room(environment(target),"The tick sticks its mouthtube deeply into "+tar->query_possessive() +" flesh!");
 	tell_object(tar,"The tick starts to suck out life giving blood.");
 	dam1 = (roll_dice(2,8)+2);
-	tar->do_damage("torso",dam1);
+	tar->cause_typed_damage(tar, tar->return_target_limb(), dam1, "piercing");
 	return 1;
 }
 

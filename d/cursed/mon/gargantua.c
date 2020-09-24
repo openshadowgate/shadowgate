@@ -2,7 +2,7 @@
 #define SAVE_D "/daemon/saving_d.c"
 inherit WEAPONLESS;
 
-int thaco, ac, trample, roll, bite, hit, lclaw, rclaw, tail, pain;
+int thaco, ac, roll, hit;
 string name, *limbs;
 create()
 {
@@ -52,64 +52,55 @@ void attack(object targ)
          thaco=5;
 	 roll=random(20)+1;
 	 hit= ac + roll;
-	 if(hit>=thaco || roll==20 && roll!=1)
-              { lclaw=random(28)+3;
+	 if((hit >= thaco || roll == 20) && roll != 1){
                 tell_object(targ,"%^BOLD%^%^RED%^Reptilian Gargantua scratches you"
 			+" with his left claw.%^RESET%^");
                 tell_room(environment(TO),"%^BOLD%^%^RED%^Reptilian Gargantua scratches "
 			+name+ " with his left claw.%^RESET%^", targ);
-
+                targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(1, 28) + 2, "slashing");
 	      }
-	 if(hit<thaco || roll==1 && roll!=1)
+	 if((hit < thaco || roll == 1) && roll != 20)
                 {tell_object(targ,"%^BOLD%^%^CYAN%^Reptilian Gargantua misses you"
 			+" with his left claw.%^RESET%^");
                 tell_room(environment(TO),"%^BOLD%^%^RED%^Gargantua misses "
-			+name+ " with his right claw.%^RESET%^", targ);
-		lclaw=0;
-
-		}
+			+name+ " with his left claw.%^RESET%^", targ);
+		 }
 	 roll=random(20)+1;
 	 hit = ac + roll;
-	 if(hit>=thaco || roll==20 && roll!=1)
-              { rclaw=random(28)+3;
+	 if((hit >= thaco || roll == 20) && roll != 1){
                 tell_object(targ,"%^BOLD%^%^RED%^Gargantua scratches you"
 			+" with his right claw.%^RESET%^");
                 tell_room(environment(TO),"%^BOLD%^%^RED%^Gargantua scratches "
 			+name+ " with his right claw.%^RESET%^", targ);
+                targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(1, 28) + 2, "slashing");
 	      }
-	 if(hit<thaco || roll==1 && roll!=1)
+	 if((hit < thaco || roll == 1) && roll != 20)
 		{tell_object(targ,"%^BOLD%^%^CYAN%^Manscopion misses you"
 			+" with his right claw.%^RESET%^");
                  tell_room(environment(TO),"%^BOLD%^%^RED%^Gargantua misses "
 			+name+ " with his right claw.%^RESET%^", targ);
-		 rclaw=0;
 
 		 }
 
 	 roll=random(20)+1;
 	 hit = ac + roll;
-	 if(hit>=thaco || roll==20 && roll!=1)
-             {  bite=random(55)+6;
+	 if((hit >= thaco || roll == 20) && roll != 1){  
                 tell_object(targ,"%^BOLD%^%^RED%^Reptilian Gargantua"
                         +" bites you viciously!%^RESET%^");
                         
                 tell_room(environment(TO),"%^BOLD%^%^RED%^Reptilian "
                         +"Gargantua bites "+name+"!%^RESET%^", targ);
 
+                targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(1, 55) + 5, "piercing");
 		
 	     }
-	 if(hit<thaco || roll==1 && roll!=1)
-                {tell_object(targ,"%^BOLD%^%^CYAN%^Reptilian Gargantua"
+	 if((hit < thaco || roll == 1) && roll != 20){
+                tell_object(targ,"%^BOLD%^%^CYAN%^Reptilian Gargantua"
                         +" fails to bite you!%^RESET%^");
                  tell_room(environment(TO),"%^BOLD%^%^RED%^Reptilian Gargantua"
                         +" fails to bite " +name+ "!%^RESET%^", targ);
-                bite=0;
-
 		}
-         pain = lclaw + rclaw + bite;
-	 
-	 if(pain>0)
-         { targ->do_damage(targ->return_target_limb(), pain);}  
+
          return;
 	 
 }
@@ -134,7 +125,10 @@ void trample(object targ)
                tell_object(current, "%^BOLD%^%^YELLOW%^The gargantua tramples"
                    +" over you!");
 
-               trample=random(91)+10;
+               if (member_array(current, query_attackers()) < 0)
+                   TO->kill_ob(current, 1);
+
+               current->cause_typed_damage(current, current->return_target_limb(), roll_dice(1, 91) + 9, "bludgeoning");
             }
             else
             {
@@ -145,13 +139,6 @@ void trample(object targ)
                         +" trampling towards you!\nBut luckily for you,"
                         +" you were fortunate enough to get out of its"
                         +" path! %^RESET%^");
-                 trample=0;
-            }
-            if(trample>0)
-            {
-                if(member_array(current,query_attackers()) < 0)
-                    TO->kill_ob(current, 1);
-                current->do_damage(current->return_target_limb(), trample);
             }
   
         }
@@ -175,7 +162,7 @@ void tail(object targ)
                         +" strikes " +name+ "!%^RESET%^", current);
                 tell_object(current, "%^BOLD%^%^RED%^The gargantua strikes"
                         +" you with his tail!%^RESET%^");
-                tail=random(73)+8;
+                current->cause_typed_damage(current, current->return_target_limb(), roll_dice(1, 73) + 7, "bludgeoning");
             }
             else
             {
@@ -185,11 +172,6 @@ void tail(object targ)
                 tell_object(current,"%^BOLD%^%^YELLOW%^You instinctively"
                         +" jump over the gargantua's tail as it sweeps"
                         +" under you!%^RESET%^");
-                tail=0;
-            }
-            if(tail>0)
-            {
-             current->do_damage(current->return_target_limb(), tail);  
             }
         }
         return;

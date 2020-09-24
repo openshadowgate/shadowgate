@@ -146,7 +146,7 @@ int valkyrja_fun()
                 "grabs you, and places you across her saddle.\nYou open your " +
                 "eyes and find yourself far from your previous fray, no worse " +
                 "for wear!%^RESET%^");
-    ETO->do_damage("torso", (int)ETO->query_hp() - ((int)ETO->query_max_hp()));
+    ETO->cause_typed_damage(ETO, "torso", (int)ETO->query_hp() - (int)ETO->query_max_hp(), "untyped");
     used_time = time();
     ETO->set_condition(0);
     switch (random(7)) {

@@ -159,7 +159,7 @@ void continue_acid(object targ, string lim)
     tell_room(ETO, "%^BOLD%^%^GREEN%^The acidic " +
               "goo continues to burn into " + targ->QCN +
               "%^BOLD%^%^GREEN%^'s " + lim + "%^RESET%^", targ);
-    targ->do_damage(lim, roll_dice(8, 8));
+    targ->cause_typed_damage(targ, lim, roll_dice(8, 8), "acid");
     if (!random(3)) {
         call_out("continue_acid", 8, targ, lim);
     }else {
@@ -207,7 +207,7 @@ void acid(object targ)
     tell_room(ETO, "%^BOLD%^%^GREEN%^The acidic green goo " +
               "sticks to " + targ->QCN + "%^BOLD%^%^GREEN%^'s " + tlim +
               "and begins eating away at it!%^RESET%^", targ);
-    targ->do_damage(tlim, roll_dice(8, 8));
+    targ->cause_typed_damage(targ, tlim, roll_dice(8, 8), "acid");
     if (!random(3)) {
         call_out("continue_acid", 8, targ, tlim);
     }else {

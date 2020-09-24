@@ -61,29 +61,33 @@ int unwield_func(){
    return 1;
 }
 int hit_func(object target){
+   string targname, targpos, attname;
    if(w==1){
       if(random(1000) < 155){
+          targname = target->query_cap_name();
+          targpos = target->query_possessive();
+          attname = ETO->query_cap_name();
           switch(random(100)){
-    case 0..60:
-            tell_room(environment(ETO),"%^RESET%^%^ORANGE%^"+ETO->query_cap_name()+" spins and boxes both sides of "+target->query_cap_name()+"'s head with a sai, leaving "+target->query_objective()+" in a daze!%^RESET%^",({target,ETO}));
-            tell_object(ETO,"%^RESET%^%^ORANGE%^You spin quickly and bring each sai up to slap against either side of "+target->query_cap_name()+"'s head, leaving "+target->query_objective()+" in a daze!%^RESET%^",({environment(ETO),target}));
-            tell_object(target,"%^RESET%^%^ORANGE%^"+ETO->query_cap_name()+" spins quickly and slaps a sai against either side of your head, leaving you in a daze!%^RESET%^",({environment(ETO),ETO}));
-	      return roll_dice(1,9)+1;
-            target->set_paralyzed(20,"You are still trying to stand!");
-            break;
-   case 61..98:
-            ETO->execute_attack();
-            tell_room(environment(ETO),"%^RESET%^%^RED%^"+ETO->query_cap_name()+" plunges one sai deep into "+target->query_cap_name()+"'s flesh and then quickly follows it up with a stab from the other!%^RESET%^",({target,ETO}));
-            tell_object(ETO,"%^RESET%^%^RED%^You plunge one sai deep into "+target->query_cap_name()+"'s flesh and follow it up with another quick stab from the other sai!%^RESET%^",({environment(ETO),target}));
-            tell_object(target,"%^RESET%^%^RED%^"+ETO->query_cap_name()+" plunges one sai deep into your flesh before quickly following it up with another quick stab from the second sai!%^RESET%^",({environment(ETO),ETO}));
-	      return roll_dice(1,9)+1;
-            break ;
-       case 99:
-            tell_room(environment(ETO),"%^RESET%^%^RED%^With one fluid, viscious movement, "+ETO->query_cap_name()+" plunges the tines of each sai deep into each of "+target->query_cap_name()+"'s ears, causing "+target->query_possessive()+" body to spasm before "+ETOQCN+" withdraws the bloodied blades and allows "+target->query_possessive()+" body to fall limply to the ground.%^RESET%^",({target,ETO}));
-            tell_object(ETO,"%^RESET%^%^RED%^With one fluid, viscious movement, you plunge the tines of each sai deep into each of "+target->query_cap_name()+"'s ears and watch "+target->query_possessive()+" body spasm before you pull out the blades and watch "+target->query_possessive()+" body fall limply to the ground!%^RESET%^",({environment(ETO),target}));
-            tell_object(target,"%^RESET%^%^RED%^Everything fades to black as "+ETO->query_cap_name()+" uses one fluid, viscious movement to plunge the tines of each sai deep into either side of your head.\n%^BOLD%^%^BLACK%^As your body falls limply to the ground you cannot help but think about how much more you had to do... How could it end like this?%^RESET%^",({environment(ETO),ETO}));
-            target->do_damage("torso",10000000);
-            break;
+              case 0..60:
+                tell_room(environment(ETO),"%^RESET%^%^ORANGE%^"+ attname +" spins and boxes both sides of "+ targname +"'s head with a sai, leaving "+target->query_objective()+" in a daze!%^RESET%^",({target,ETO}));
+                tell_object(ETO,"%^RESET%^%^ORANGE%^You spin quickly and bring each sai up to slap against either side of "+ targname +"'s head, leaving "+target->query_objective()+" in a daze!%^RESET%^",({environment(ETO),target}));
+                tell_object(target,"%^RESET%^%^ORANGE%^"+ attname +" spins quickly and slaps a sai against either side of your head, leaving you in a daze!%^RESET%^",({environment(ETO),ETO}));
+                target->set_paralyzed(20, "You are still trying to stand!");
+	          return roll_dice(1,9)+1;
+                break;
+              case 61..98:
+                ETO->execute_attack();
+                tell_room(environment(ETO),"%^RESET%^%^RED%^"+ attname +" plunges one sai deep into "+ targname +"'s flesh and then quickly follows it up with a stab from the other!%^RESET%^",({target,ETO}));
+                tell_object(ETO,"%^RESET%^%^RED%^You plunge one sai deep into "+ targname +"'s flesh and follow it up with another quick stab from the other sai!%^RESET%^",({environment(ETO),target}));
+                tell_object(target,"%^RESET%^%^RED%^"+ attname +" plunges one sai deep into your flesh before quickly following it up with another quick stab from the second sai!%^RESET%^",({environment(ETO),ETO}));
+	          return roll_dice(1,9)+1;
+                break ;
+              case 99:
+                tell_room(environment(ETO),"%^RESET%^%^RED%^With one fluid, viscious movement, "+ attname +" plunges the tines of each sai deep into each of "+ targname +"'s ears, causing "+ targpos +" body to spasm before "+ attname +" withdraws the bloodied blades and allows "+ targpos +" body to fall limply to the ground.%^RESET%^",({target,ETO}));
+                tell_object(ETO,"%^RESET%^%^RED%^With one fluid, viscious movement, you plunge the tines of each sai deep into each of "+ targname +"'s ears and watch "+ targpos +" body spasm before you pull out the blades and watch "+ targpos +" body fall limply to the ground!%^RESET%^",({environment(ETO),target}));
+                tell_object(target,"%^RESET%^%^RED%^Everything fades to black as "+ attname +" uses one fluid, viscious movement to plunge the tines of each sai deep into either side of your head.\n%^BOLD%^%^BLACK%^As your body falls limply to the ground you cannot help but think about how much more you had to do... How could it end like this?%^RESET%^",({environment(ETO),ETO}));
+                target->cause_typed_damage(target, "torso", 10000000, "piercing");
+                break;
          }
       }
    }

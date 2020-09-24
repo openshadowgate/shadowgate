@@ -36,7 +36,7 @@ void attack(object targ){
     if(thac - ac <= roll){
 	tell_object(targ,"%^BOLD%^RED%^The Will o' wisp shocks you with a jolt of electricity!");
 	tell_room(ETO,"%^BOLD%^RED%^The Will o' wisp shocks "+targ->query_cap_name()+" with a jolt of electricity!",targ);
-	targ->do_damage(targ->return_target_limb(),roll_dice(5,10));
+    targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(5, 10), "electricity");
 	return 1;
     }
     tell_object(targ,"%^BOLD%^RED%^The Will o' wisp misses you with a bolt of electricity!");

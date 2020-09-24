@@ -229,7 +229,7 @@ void complete_manipulation(object who, string where)
 			tell_object(who, "%^BOLD%^%^RED%^You are unable "+
 			"to avoid the knife and it jabs deep into your "+
 			"chest!%^RESET%^");
-			who->do_damage("torso", roll_dice(12, 8));
+			who->cause_typed_damage(who, "torso", roll_dice(12, 8), "piercing");
 			tell_room(TO, who->QCN+"%^BOLD%^%^RED%^ is "+
 			"unable to avoid the knife and it "+
 			"jabs deep into "+who->QP + " chest!%^RESET%^", ({who}));
@@ -240,7 +240,7 @@ void complete_manipulation(object who, string where)
 			"move away just in time and the knife only "+
 			"knicks your flesh!%^RESET%^");
 
-			who->do_damage("torso", roll_dice(6, 6));
+			who->cause_typed_damage(who, "torso", roll_dice(6, 6), "slashing");
 			
 			tell_room(TO, who->QCN+"%^BOLD%^%^RED%^ manages "+
 			"to move away just in time and is only knicked by "+

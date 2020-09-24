@@ -99,8 +99,8 @@ int hit_fun(object target) {
 " several times in quick succession!%^RESET%^");
        tell_object(target,"%^BLACK%^%^BOLD%^"+ETOQCN+" spins the whip with deadly precision, striking you "
 "several times in quick succession!%^RESET%^");
-       target->do_damage(target->return_target_limb(),random(4)+8);
-       target->do_damage(target->return_target_limb(),random(4)+8);
+       target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 4) + 7, "slashing");
+       target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 4) + 7, "slashing");
        return 1;
        break;
 

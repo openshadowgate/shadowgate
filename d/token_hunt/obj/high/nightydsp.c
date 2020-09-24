@@ -165,7 +165,7 @@ void heart_beat(){
                "%^RESET%^%^RED%^Perhaps you will remember your "+
 			   "obligation to the Obisdian Throne in the future, and "+
 			   "will provide sufficient supplication from now on...%^RESET%^");
-			ETO->do_damage("torso",(int)ETO->query_hp()/2);
+			ETO->cause_typed_damage(ETO, "torso", (int)ETO->query_hp() / 2, "untyped");
 			used_time = time();
             ETO->set_paralyzed(random(40)+20,"%^RED%^You are reeling "+
 			   "from the pain!%^RESET%^");
@@ -391,7 +391,7 @@ int supplicate(){
    tell_object(ETO,"%^BOLD%^%^BLACK%^The tendrils of shade "+
       "ripple as a voice conveys with cool confidence:\n"+
 	  "%^RESET%^%^RED%^So painfully delicious...%^RESET%^");
-   ETO->do_damage("torso",(int)ETO->query_hp()/4);
+   ETO->cause_typed_damage(ETO, "torso", (int)ETO->query_hp() / 4, "untyped");
    used_time = time();
    ETO->set_paralyzed(random(4)+4,"%^RED%^You are reeling "+
       "from the pain!%^RESET%^");

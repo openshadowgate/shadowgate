@@ -26,6 +26,6 @@ void heart_beat() {
       return;
    }
    tell_object(ETO,"%^RESET%^%^RED%^The torn wounds left from the rapier pulse with pain!%^RESET%^");
-   ETO->do_damage("torso",1);
+   ETO->cause_typed_damage(ETO, "torso", 1, "piercing");
    hits--;
 }
