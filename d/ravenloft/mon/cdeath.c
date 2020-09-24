@@ -99,6 +99,5 @@ void do_damages(object targ){
 	targ->cause_typed_damage(targ, "torso", roll_dice(num, 6), "bludgeoning");
 	targ->remove_paralyzed();
 	set_func_chance(20);
-    }
     num=0;
 }
