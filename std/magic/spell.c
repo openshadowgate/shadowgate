@@ -664,7 +664,7 @@ int check_reflection()
         turnperc = 85;
     }
 
-    if (turnperc > roll_dice(1, 100)) {
+    if (turnperc >= roll_dice(1, 100)) {
         if (!FEATS_D->usable_feat(target, "perfect caster")) {
             target->add_temporary_feat("perfect caster");
             target->set_property("temp_perfect_caster", 1);
