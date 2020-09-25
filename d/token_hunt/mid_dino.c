@@ -86,7 +86,7 @@ void trample()
         if(roll_dice(4,6) > (int)attackers[i]->query_stats("dexterity"))
         {
             tell_room(ETO,"%^MAGENTA%^The triceratops charges over "+attackers[i]->QCN+"!%^RESET%^",attackers[i]);
-            attackers[i]->do_damage(roll_dice(5,20));
+            attackers[i]->cause_typed_damage(attackers[i], attackers[i]->return_target_limb(), roll_dice(5, 20), "bludgeoning");
             tell_object(attackers[i],"%^MAGENTA%^The triceratops charges over you!%^RESET%^");
         }
         else

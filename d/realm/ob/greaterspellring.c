@@ -122,7 +122,7 @@ void do_catastrophic_damage(object vic)
 		"ball of fire, which %^BOLD%^%^BLACK%^ENGULFS%^BOLD%^%^RED%^ "+
 		vic->QO+"%^BOLD%^%^RED%^!%^RESET%^", vic);
 
-		vic->do_damage("torso", roll_dice(30, 20));		
+		vic->cause_typed_damage(vic, "torso", roll_dice(30, 20), "fire");
 		if(!hold->is_room()) 
 		{
 			hold->remove();
@@ -142,8 +142,8 @@ void do_catastrophic_damage(object vic)
 		"%^BOLD%^%^RED%^ as it explodes into a massive ball of fire, "+
 		"which %^BOLD%^%^BLACK%^ENGULFS%^BOLD%^%^RED%^ "+ETO->QO+
 		"%^BOLD%^%^RED%^!%^RESET%^", vic);
-		
-		vic->do_damage("torso", roll_dice(30, 20));
+
+		vic->cause_typed_damage(vic, "torso", roll_dice(30, 20), "fire");
 		TO->remove();
 		return;
 	}

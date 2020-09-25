@@ -214,8 +214,8 @@ void wall_attack(string wall_str)
 		"%^BLACK%^a%^BOLD%^%^RED%^c%^BOLD%^%^BLACK%^"+
 		"l%^BOLD%^%^RED%^e%^BOLD%^%^GREEN%^ lashes "+
 		vic->QP+" " +limb+"!%^RESET%^", ({vic}));
-			
-		vic->do_damage(limb, roll_dice(d, 8));
+		
+		vic->cause_typed_damage(vic, limb, roll_dice(d, 8), "bludgeoning");
 	}
 
 	call_out("wall_attack", 5 + random(4), wall_str);

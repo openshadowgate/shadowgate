@@ -86,7 +86,7 @@ int hit_fun(object targ) {
        tell_room(EETO,"%^WHITE%^%^BOLD%^A %^YELLOW%^rad%^WHITE%^ia%^YELLOW%^nt %^WHITE%^glow bursts forth from "
 +ETOQCN+"'s knuckle guard and envelopes "+ETO->QP+" body, leaving him looking %^RESET%^%^GREEN%^in%^CYAN%^vi"
 "%^GREEN%^gor%^CYAN%^at%^GREEN%^ed%^BOLD%^%^WHITE%^!%^RESET%^",ETO);
-       ETO->do_damage(targ->return_target_limb(),(random(8)+5)*(-1));
+       ETO->cause_typed_damage(targ, targ->return_target_limb(), - roll_dice(1, 8) - 4, "positive energy");
        return 0;
        break;
 

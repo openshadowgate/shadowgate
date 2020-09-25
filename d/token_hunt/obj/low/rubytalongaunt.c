@@ -35,6 +35,6 @@ int strike_func(int damage, object what, object who){
 	tell_room(environment(query_worn()),"%^BOLD%^%^RED%^As "+who->QCN+" lands a solid blow upon "+ETOQCN+", "+ETOQCN+" appears to come to life, retaliating with several lightning quick slashes to "+who->QCN+"'s arms and face!%^RESET%^",({ETO,who}));
 	tell_object(ETO,"%^BOLD%^%^RED%^As "+who->QCN+"'s blow lands you feel the muscles in your arms tighten and respond!  With lightning speed you strike out with your talon covered hands, ripping and tearing at any exposed area you can see in "+who->QCN+"'s guard!%^RESET%^");
 	tell_object(who,"%^BOLD%^%^RED%^You grin as you land a telling blow on "+ETOQCN+" only to be stunned as they appear to react not in pain but in aggression!  With a series of lightning fast strikes, they claw and tear at your arms and face, ripping gashes anywhere they land their "+query_short()+"%^BOLD%^%^RED%^!%^RESET%^");
-		who->do_damage("torso",roll_dice(3,3));
+	who->cause_typed_damage(who, "torso", roll_dice(3, 3), "slashing");
 return damage;	}
 }

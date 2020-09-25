@@ -44,7 +44,7 @@ void heart_beat() {
        tell_room(ETO, TOQCN+" shouts a command and an %^BOLD%^%^BLACK%^acrid smoke fills the room.");
        killers = query_attackers();
        for(i=0;i<sizeof(killers);i++) {
-          killers[i]->do_damage("head", roll_dice(1,5));
+		  killers[i]->cause_typed_damage(killers[i], "head", roll_dice(1, 5), "untyped");
        }
     tell_room(ETO, "%^ORANGE%^When the smoke clears, you find the clerk is gone.");
     TO->move("/d/Shadowgate/void");

@@ -41,7 +41,7 @@ void flame(object targ){
     if(!SAVING_D->saving_throw(targ,"breath_weapon")){
 	tell_object(targ,"%^RED%^The hell hound breathes a cone of flame burning you badly!");
 	tell_room(ETO,"%^RED%^The hell hound breathes a cone of flame burning "+targ->query_cap_name()+" badly!",targ);
-	targ->do_damage(targ->return_target_limb(),query_hd());
+    targ->cause_typed_damage(targ, targ->return_target_limb(), query_hd(), "fire");
 	set_func_chance(0);
 	execute_attack();
 	set_func_chance(102);

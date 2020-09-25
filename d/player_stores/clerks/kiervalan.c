@@ -46,7 +46,7 @@ void heart_beat() {
 "flash%^RESET%^%^RED%^!\n");
        killers = query_attackers();
        for(i=0;i<sizeof(killers);i++) {
-          killers[i]->do_damage("head", roll_dice(10,5));
+          killers[i]->cause_typed_damage(killers[i], "head", roll_dice(10, 5), "untyped");
        }
     tell_room(ETO, "%^BLACK%^%^BOLD%^When you regain your senses, "+
 "you find the clerk is gone.%^RESET%^");

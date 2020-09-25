@@ -8,7 +8,7 @@ string gone_msg, own_msg;
 void start_spinning();
 void gone();
 void set_owned(object who);
-void set_wnp(object ob);
+void set_wpn(object ob);
 void do_hit(object targ);
 mixed only_present(object *vics);
 
@@ -105,7 +105,7 @@ void gone()
 void do_hit(object targ)
 {
 	object where;
-	string limb, dam_desc, rmsg, tmsg, omsg;
+	string limb, dam_desc, rmsg, tmsg, omsg, targname;
 	int dam, mod;
 	if(!objectp(TO)) return;
 	if(!objectp(ETO)) 
@@ -141,6 +141,7 @@ void do_hit(object targ)
 		return;
 	}
 	limb = targ->return_target_limb();
+	targname = targ->QCN;
 
 	switch(wtype) 
 	{
@@ -189,7 +190,7 @@ void do_hit(object targ)
 			tell_room(where, "%^BOLD%^%^YELLOW%^A bolt of lightning "+
 			"blasts forth from the %^BOLD%^%^CYAN%^"+
 			"tiny glowing orb%^BOLD%^%^YELLOW%^ and streaks "+
-			"toward "+targ->QCN+"%^BOLD%^%^YELLOW%^!%^RESET%^", ({targ}));
+			"toward "+ targname +"%^BOLD%^%^YELLOW%^!%^RESET%^", ({targ}));
 
 			tell_object(targ, "%^BOLD%^%^YELLOW%^A bolt of lightning "+
 			"blasts forth from the %^BOLD%^%^CYAN%^"+
@@ -198,19 +199,20 @@ void do_hit(object targ)
 		
 		
 			tell_room(where, "%^BOLD%^%^YELLOW%^The bolt of "+
-			"lightning "+dam_desc + "%^BOLD%^%^YELLOW%^ "+targ->QCN+
+			"lightning "+dam_desc + "%^BOLD%^%^YELLOW%^ "+ targname +
 			"%^BOLD%^%^YELLOW%^'s "+limb+"!%^RESET%^", ({targ}));	
 
 			tell_object(targ, "%^BOLD%^%^YELLOW%^The bolt of "+
 			"lightning "+dam_desc+"%^BOLD%^%^YELLOW%^ "+
 			"your "+limb+"!%^RESET%^");
+			targ->cause_typed_damage(targ, limb, dam, "electricity");
 			break;
 		case 2:
 
 			tell_room(where, "%^BOLD%^%^BLACK%^A bolt of "+
 			"pure shadow erupts from the "+
 			"%^BOLD%^%^WHITE%^brilliant orb%^BOLD%^%^BLACK%^"+
-			" and zaps toward "+targ->QCN+"%^BOLD%^"+
+			" and zaps toward "+ targname +"%^BOLD%^"+
 			"%^BLACK%^!%^RESET%^", ({targ}));
 			
 			tell_object(targ, "%^BOLD%^%^BLACK%^A bolt of "+
@@ -219,14 +221,14 @@ void do_hit(object targ)
 			"you!%^RESET%^");
 
 			tell_room(where, "%^BOLD%^%^BLACK%^The bolt of "+
-			"shadow "+dam_desc+" %^BOLD%^%^BLACK%^"+targ->QCN+
+			"shadow "+dam_desc+" %^BOLD%^%^BLACK%^"+ targname +
 			"%^BOLD%^%^BLACK%^'s "+limb+"!%^RESET%^", ({targ}));
 
 			tell_object(targ, "%^BOLD%^%^BLACK%^The bolt of "+
 			"shadow "+dam_desc+ "%^BOLD%^%^BLACK%^ your "+limb+"!%^RESET%^");
+			targ->cause_typed_damage(targ, limb, dam, "negative energy");
 			break;
 	}
-	targ->do_damage(limb, dam);
 	start_spinning();
 	return;
 

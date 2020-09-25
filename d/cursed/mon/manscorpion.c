@@ -1,7 +1,7 @@
 #include "/d/shadow/mon/melnmarn.h";
 inherit WEAPONLESS;
 
-int thaco, ac, roll, hit, name, lclaw, rclaw, tail, pain;
+int thaco, ac, roll, hit, name;
 create()
 {
 	::create();
@@ -47,63 +47,48 @@ void attack(object targ)
 	 thaco=13;
 	 roll=random(20)+1;
 	 hit= ac + roll;
-	 if(hit>=thaco || roll==20 && roll!=1)
-	      { lclaw=random(4)+2;
+	 if((hit >= thaco || roll == 20) && roll != 1){
 		tell_object(targ,"%^BOLD%^%^RED%^Manscorpion scratches you"
 			+" with his left claw.%^RESET%^");
 		tell_room(environment(TO),"%^BOLD%^%^RED%^Manscorpion scratches "
 			+name+ " with his left claw.%^RESET%^", targ);
-
+		targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(1, 4) + 1, "slashing");
 	      }
-	 if(hit<thaco || roll==1 && roll!=1)
-		{tell_object(targ,"%^BOLD%^%^CYAN%^Manscopion misses you"
+	 if((hit < thaco || roll == 1) && roll != 20){
+		tell_object(targ,"%^BOLD%^%^CYAN%^Manscopion misses you"
 			+" with his left claw.%^RESET%^");
 		tell_room(environment(TO),"%^BOLD%^%^RED%^Manscorpion misses "
 			+name+ " with his right claw.%^RESET%^", targ);
-		lclaw=0;
-
 		}
 	 roll=random(20)+1;
 	 hit = ac + roll;
-	 if(hit>=thaco || roll==20 && roll!=1)
-	      { rclaw=random(4)+2;
+	 if((hit >= thaco || roll == 20) && roll != 1){
 		tell_object(targ,"%^BOLD%^%^RED%^Manscorpion scratches you"
 			+" with his right claw.%^RESET%^");
 		tell_room(environment(TO),"%^BOLD%^%^RED%^Manscorpion scratches "
 			+name+ " with his right claw.%^RESET%^", targ);
+		targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(1, 4) + 1, "slashing");
 	      }
-	 if(hit<thaco || roll==1 && roll!=1)
-		{tell_object(targ,"%^BOLD%^%^CYAN%^Manscopion misses you"
+	 if((hit < thaco || roll == 1) && roll != 20){
+		 tell_object(targ,"%^BOLD%^%^CYAN%^Manscopion misses you"
 			+" with his right claw.%^RESET%^");
 		 tell_room(environment(TO),"%^BOLD%^%^RED%^Manscorpion misses "
 			+name+ " with his right claw.%^RESET%^", targ);
-		 rclaw=0;
-
 		 }
 
 	 roll=random(20)+1;
 	 hit = ac + roll;
-	 if(hit>=thaco || roll==20 && roll!=1)
-	     {  tail=random(4)+1;
+	 if((hit >= thaco || roll == 20) && roll != 1){
 		tell_object(targ,"%^BOLD%^%^RED%^Manscorpion stings you"
 			+" with his tail.%^RESET%^");
 		tell_room(environment(TO),"%^BOLD%^%^RED%^Manscorpion stings "
 			+name+ " with his tail.%^RESET%^", targ);
-
-		
+		targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(1, 4), "piercing");
 	     }
-	 if(hit<thaco || roll==1 && roll!=1)
-		{tell_object(targ,"%^BOLD%^%^CYAN%^Manscopion misses you"
+	 if((hit < thaco || roll == 1) && roll != 20){
+		 tell_object(targ,"%^BOLD%^%^CYAN%^Manscopion misses you"
 			+" with his tail.%^RESET%^");
 		tell_room(environment(TO),"%^BOLD%^%^RED%^Manscorpion misses "
 			+name+ " with his misses.%^RESET%^", targ);
-		tail=0;
-
 		}
-	 pain = lclaw + rclaw + tail;
-	 
-	 if(pain>0)
-	 { targ->do_damage(targ->return_target_limb(), pain);}
-	 
-
 }

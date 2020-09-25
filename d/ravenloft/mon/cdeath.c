@@ -94,35 +94,10 @@ void telekinetic(object targ){
 }
 void do_damages(object targ){
     if(num > 4) num=4;
-    switch( num ){
-	case(1):
 	tell_object(targ,"%^BOLD%^RED%^The Crimson Death drops you to the ground!");
 	tell_room(ETO,"%^BOLD%^RED%^The Crimson Death drops "+targ->query_cap_name()+" to the ground!",targ);
-	targ->do_damage("torso",roll_dice(1,6));
+	targ->cause_typed_damage(targ, "torso", roll_dice(num, 6), "bludgeoning");
 	targ->remove_paralyzed();
 	set_func_chance(20);
-	break;
-	case(2):
-	tell_object(targ,"%^BOLD%^RED%^The Crimson Death drops you to the ground!");
-	tell_room(ETO,"%^BOLD%^RED%^The Crimson Death drops "+targ->query_cap_name()+" to the ground!",targ);
-	targ->do_damage("torso",roll_dice(2,6));
-	targ->remove_paralyzed();
-	set_func_chance(20);
-	break;
-	case(3):
-	tell_object(targ,"%^BOLD%^RED%^The Crimson Death drops you to the ground!");
-	tell_room(ETO,"%^BOLD%^RED%^The Crimson Death drops "+targ->query_cap_name()+" to the ground!",targ);
-	targ->do_damage("torso",roll_dice(3,6));
-	targ->remove_paralyzed();
-	set_func_chance(20);
-	break;
-	case(4):
-	tell_object(targ,"%^BOLD%^RED%^The Crimson Death drops you to the ground!");
-	tell_room(ETO,"%^BOLD%^RED%^The Crimson Death drops "+targ->query_cap_name()+" to the ground!",targ);
-	targ->do_damage("torso",roll_dice(4,6));
-	targ->remove_paralyzed();
-	set_func_chance(20);
-	break;
-    }
     num=0;
 }

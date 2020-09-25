@@ -60,7 +60,7 @@ void do_charge(object targ, int flag){
 		tell_object(targ,"%^BOLD%^You feel a flood of pain as the horn is run deply into you body.!\n");
 		tell_object(targ,"%^BOLD%^Your breath leaves you and you feel yourself go limp for a moment!\n");
 		targ->set_paralyzed(20,"You are recovering from the impact of the unicorn's charge!");
-		targ->do_damage(targ->return_target_limb(),roll_dice(3,12));
+		targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(3, 12), "piercing");
 		return;
 	} else {
 		tell_room(ETO,"%^BOLD%^"+targ->query_cap_name()+" barely manages to avoid the charge, diving out of the way!",targ);

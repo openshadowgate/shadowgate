@@ -71,7 +71,7 @@ int strike_func(int damage, object what, object who){
 	tell_object(who,"%^BOLD%^%^RED%^Flames erupt around "+ETOQCN+" "+
          " and %^B_RED%^%^YELLOW%^burn"+
          "%^BOLD%^%^RED%^ you!");
-		who->do_damage("torso",random(9)+1);
+	who->cause_typed_damage(who, "torso", roll_dice(1, 10), "fire");
   return 0;
      }
 }

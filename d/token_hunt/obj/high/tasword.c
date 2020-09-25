@@ -53,7 +53,7 @@ int wield_func(){
    if((string)ETO->query_gender()=="male"){
       if((int)ETO->query_highest_level()<20){
          tell_object(ETO,"%^BOLD%^%^BLACK%^Dark laughter echos through your head followed by the knowledge that you are not ready to wield such power as that possessed by Akra'Mashul!");
-         ETO->do_damage("torso",random(100)+20);
+         ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 100) + 19, "untyped");
          ETO->add_attacker(TO);
          ETO->continue_attack();
          ETO->remove_attacker(TO);
@@ -154,19 +154,16 @@ if((int)ETO->query_highest_level()>=30&&(int)ETO->query_highest_level()<35&&(fir
       }
    } 
    else {
-      tell_object(ETO,"%^BOLD%^%^BLACK%^A loud hiss can be heard as you try to wield the scimitar, followed by the sounds of a dark voice echoing through your mind: 
-%^RED%^You will never have me foolish Mortal!  
-Akra'Mashul was not meant for your type!");
+      tell_object(ETO,"%^BOLD%^%^BLACK%^A loud hiss can be heard as you try to wield the scimitar, followed by the sounds of a dark voice echoing through your mind: %^RED%^You will never have me foolish Mortal! Akra'Mashul was not meant for your type!");
       tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETO->query_cap_name()+" recoils in horror as "+ETO->query_subjective()+" grasps its hilt!",ETO);
-      ETO->do_damage("torso",random(50)+25);
+      ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 50) + 24, "untyped");
       ETO->force_me("drop Akra'Mashul");
    return 0;
    }
 }
 int unwield_func(){
    if(ETO->query_hp()<((int)ETO->query_max_hp())/3){
-      tell_object(ETO,"%^BOLD%^%^RED%^The voice of Akra'Mashul rings out in your head:
-%^BOLD%^%^BLACK%^You fool!  You have failed me, look how hurt you are!  How dare you unwield my might, get back up and fight!%^RESET%^");
+      tell_object(ETO,"%^BOLD%^%^RED%^The voice of Akra'Mashul rings out in your head: %^BOLD%^%^BLACK%^You fool!  You have failed me, look how hurt you are!  How dare you unwield my might, get back up and fight!%^RESET%^");
    remove_property("enchantment");
    return 1;
    }
@@ -184,9 +181,8 @@ int unwield_func(){
       tell_object(ETO,"%^RESET%^MAGENTA%^Akra'Mashul purrs to you, her hilt reluctant to leave your hands.");
       break ;
       case 41:
-      tell_object(ETO,"%^BOLD%^%^RED%^Akra'Mashul snarls angrily, her voice echoing in your head as pain floods through your body:
-%^BOLD%^%^BLACK%^You fool!  I was not done yet!  How dare you take my glory from me!");
-      ETO->do_damage("torso",random(50)+25);
+      tell_object(ETO,"%^BOLD%^%^RED%^Akra'Mashul snarls angrily, her voice echoing in your head as pain floods through your body: %^BOLD%^%^BLACK%^You fool!  I was not done yet!  How dare you take my glory from me!");
+      ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 50) + 24, "untyped");
       break ;
    }
    charm = 0;
@@ -195,22 +191,25 @@ int unwield_func(){
 }
 int hit_func(object target) {
    object ob, ob2;
+   string targetname, attname;
    if(!objectp(target)) return 0;
    if(!objectp(ETO)) return 0;
    if(random(1000) < 175){
+       targetname = target->query_cap_name();
+       attname = ETO->query_cap_name();
       switch(random(6)){
          case 0:
-            tell_room(environment(ETO),"%^BOLD%^BLACK%^The sword takes on a life of its own as it lashes out at "+target->query_cap_name()+"!%^RESET%^",({target,ETO}));
-            tell_object(ETO,"%^BOLD%^%^BLACK%^The sword takes on a life of its own as it lashes out at "+target->query_cap_name()+", its energy filling your mind with images of rage as the sword reaches for her mark!%^RESET%^");
-            tell_object(target,"%^BOLD%^%^BLACK%^The sword in "+ETO->query_cap_name()+"'s hand takes on a life of its own as it lashes out at you!%^RESET%^");
+            tell_room(environment(ETO),"%^BOLD%^BLACK%^The sword takes on a life of its own as it lashes out at "+ targetname +"!%^RESET%^",({target,ETO}));
+            tell_object(ETO,"%^BOLD%^%^BLACK%^The sword takes on a life of its own as it lashes out at "+ targetname +", its energy filling your mind with images of rage as the sword reaches for her mark!%^RESET%^");
+            tell_object(target,"%^BOLD%^%^BLACK%^The sword in "+ attname +"'s hand takes on a life of its own as it lashes out at you!%^RESET%^");
 		  return roll_dice(2,9)+2;
               break;
  	   case 1..2:
             ETO->execute_attack();
-  	      tell_room(environment(ETO),"%^RESET%^%^MAGENTA%^"+ETO->query_cap_name()+" dances deftly around "+target->query_cap_name()+" as the sword leads "+ETO->query_objective()+" in for another attack!",({target,ETO}));
-            tell_object(ETO,"%^RESET%^%^MAGENTA%^You dance with agility around "+target->query_cap_name()+" as the sword leads you in for another attack!%^RESET%^");
-            tell_object(target,"%^RESET%^%^MAGENTA%^"+ETO->query_cap_name()+" dances with ease around you as the sword leads "+ETO->query_objective()+" in for another attack!%^RESET%^");
-              target->do_damage("torso",roll_dice(2,8)+1);
+  	      tell_room(environment(ETO),"%^RESET%^%^MAGENTA%^"+ attname +" dances deftly around "+ targetname +" as the sword leads "+ETO->query_objective()+" in for another attack!",({target,ETO}));
+            tell_object(ETO,"%^RESET%^%^MAGENTA%^You dance with agility around "+ targetname +" as the sword leads you in for another attack!%^RESET%^");
+            tell_object(target,"%^RESET%^%^MAGENTA%^"+ attname +" dances with ease around you as the sword leads "+ETO->query_objective()+" in for another attack!%^RESET%^");
+            target->cause_typed_damage(target, "torso", roll_dice(2, 8) + 1, "untyped");
               break;
          case 3:
             tell_room(environment(ETO),"%^BOLD%^%^BLACK%^The sword darkens as the shadows begin to swirl and take on a humanoid form!");
@@ -219,15 +218,15 @@ int hit_func(object target) {
             ob2->force_me("protect "+ETO->query_name());
             break;
          case 4:
-            tell_room(environment(ETO),"%^BOLD%^%^BLACK%^The sword sucks in the darkness from around it and hurtles it at "+target->query_cap_name()+"!",({target,ETO}));
-            tell_object(ETO,"%^BOLD%^%^BLACK%^The sword sucks in the darkness from around it and hurtles it at "+target->query_cap_name()+"!%^RESET%^");
-            tell_object(target,"%^BOLD%^%^BLACK%^The sword in "+ETO->query_cap_name()+" hand sucks up the darkness from around it and hurtles it at you!");
+            tell_room(environment(ETO),"%^BOLD%^%^BLACK%^The sword sucks in the darkness from around it and hurtles it at "+ targetname +"!",({target,ETO}));
+            tell_object(ETO,"%^BOLD%^%^BLACK%^The sword sucks in the darkness from around it and hurtles it at "+ targetname +"!%^RESET%^");
+            tell_object(target,"%^BOLD%^%^BLACK%^The sword in "+ attname +" hand sucks up the darkness from around it and hurtles it at you!");
             target->set_paralyzed(20,"You are trying to get to your feet.");
             if(!random(5)) target->set_blind(1);
             else target->set_paralyzed(3+random(4),"%^BOLD%^%^BLACK%^You are trying to remove the orb of darkness from around you!");
             break;   
          case 5:
-            tell_object(ETO,"%^BOLD%^%^BLACK%^Akra'Mashul's voice cackles with glee in your mind as it and strikes out at "+target->query_cap_name()+"!%^RESET%^");
+            tell_object(ETO,"%^BOLD%^%^BLACK%^Akra'Mashul's voice cackles with glee in your mind as it and strikes out at "+ targetname +"!%^RESET%^");
 		return roll_dice(1,8)+1;
             break;         
       }
@@ -249,15 +248,15 @@ void heart_beat(){
    if(!ETO->id("akrasheath")&&EETO->is_player()&&burn==0){
       TO->move(EETO);
       tell_room(EETO,"%^BOLD%^%^RED%^The sword breaks free of its confines and appears back at "+ETO->query_cap_name()+"'s side!",ETO);
-      tell_object(ETO,"%^RESET%^%^MAGENTA%^The swords thoughts fill your mind: %^RED%^You'll not get rid of me so easily, do you think that will hold me?  Next time I shall burn whatever confines you place me in!%^RESET%^",EETO);
+      tell_object(ETO,"%^RESET%^%^MAGENTA%^The swords thoughts fill your mind: %^RED%^You'll not get rid of me so easily, do you think that will hold me? Next time I shall burn whatever confines you place me in!%^RESET%^",EETO);
       burn = 1;
       return ;
    }
    else if(EETO->is_player()&&burn==1){
       temp = ETO;
       TO->move(EETO);
-      tell_room(EETO,"%^RESET%^%^RED%^The "+temp->query_name()+" bursts into %^BOLD%^%^RED%^flames %^RESET%^%^RED%^as"
-" a %^BOLD%^%^BLACK%^darkly gl%^MAGENTA%^o%^BLACK%^w%^MAGENTA%^i%^BLACK%^ng sword %^RESET%^%^RED%^appears"
+      tell_room(EETO,"%^RESET%^%^RED%^The "+temp->query_name()+" bursts into %^BOLD%^%^RED%^flames %^RESET%^%^RED%^as" +
+" a %^BOLD%^%^BLACK%^darkly gl%^MAGENTA%^o%^BLACK%^w%^MAGENTA%^i%^BLACK%^ng sword %^RESET%^%^RED%^appears" +
 " at "+ETO->query_cap_name()+"'s side!",ETO);
       tell_object(ETO,"%^RESET%^%^RED%^The "+temp->query_name()+" bursts into %^BOLD%^%^RED%^flames %^RESET%^%^RED%^and disappears, leaving the sword back at your side!%^RESET%^",EETO);
       burn = 0;
@@ -308,14 +307,14 @@ void heart_beat(){
                case 0..2:
                   tell_room(livings[i],"%^BOLD%^%^BLACK%^The sword begins to glow darkly as %^RESET%^%^BLUE%^blue arcs %^BOLD%^%^BLACK%^are emmitted from it!",ETO);
                   tell_object(ETO,"%^BOLD%^%^BLACK%^The sword purrs to you: %^RED%^Grasp me now!  Let us begone with the female threat, I am your only true love... KILL HER..I WILL NOT REST UNTIL SHE IS DEAD!!!%^RESET%^",livings[i]);
-                  ETO->do_damage("torso",roll_dice(3,10));
+                  ETO->cause_typed_damage(ETO, "torso", roll_dice(3, 10), "untyped");
                   ETO->add_attacker(TO);
                   ETO->continue_attack();
                   break ;
                case 3:
                   tell_room(livings[i],"%^BOLD%^%^BLACK%^The sword at "+ETO->query_cap_name()+"'s side begins to shake violently!",ETO);
                   tell_object(ETO,"%^BOLD%^%^BLACK%^The sword at your side begins to shake violently as it screams to you: %^RED%^I will not let you rest until I am in your hands, kill the wench I sense!!!%^RESET%^",livings[i]);
-                  ETO->do_damage("torso",roll_dice(3,10));
+                  ETO->cause_typed_damage(ETO, "torso", roll_dice(3, 10), "untyped");
                   ETO->add_attacker(TO);
                   ETO->continue_attack();
                   break ;

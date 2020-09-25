@@ -351,7 +351,7 @@ int Bugga(string str) {
     limb = (string)ob->return_limb();
     if((string)ob->query_class() == "rogue") amount = 24 + random(30);
     else amount = 20 + random(20);
-    ob->do_damage(limb, amount);
+    ob->cause_typed_damage(ob, limb, amount, "bludgeoning");
         tell_object(ob, "The guard bashes your "+limb+" with his "
 		    "left fist!");
     tell_room(this_object(), "The guard bashes "+ob->query_cap_name()+"'s "+

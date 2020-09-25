@@ -33,7 +33,7 @@ void create(){
 int wield_func(){
 	tell_room(environment(ETO),"%^RESET%^%^RED%^"+ETOQCN+" grins %^RESET%^sadistically%^RESET%^%^RED%^.",ETO);
 	tell_object(ETO,"%^BOLD%^%^BLACK%^Glorius %^RESET%^%^RED%^pain %^BOLD%^%^BLACK%^courses through your veins as you wield the whip.");
-	ETO->do_damage("torso",random(1));
+	ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 2) -1, "slashing");
 	return 1;
 }
 int unwield_func(){

@@ -10,7 +10,7 @@ int eventPunch() {
     "%^BLUE%^%^BOLD%^The bandit sends "+
     (string)ob->query_cap_name()+" a vicious right hook!",
     environment(), ob);
-  ob->do_damage("head", random(10) + 5);
+  ob->cause_typed_damage(ob, "head", roll_dice(1, 10)+4, "bludgeoning");
   ob->check_on_limb("head");
   return 1;
 }

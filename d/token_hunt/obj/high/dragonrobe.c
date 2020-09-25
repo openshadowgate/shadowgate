@@ -101,7 +101,7 @@ int struck(int damage, object what, object who){
              ""+who->QS+" touches the robe!",who);
           tell_object(who,"%^BOLD%^%^BLACK%^A shadowed dragon's head "+
              "sinks its teeth into your flesh!");
-          who->do_damage("torso",random(25)+25);
+          who->cause_typed_damage(who, "torso", roll_dice(1, 25) + 24, "piercing");
        }
    return (damage*(1/2));
    }

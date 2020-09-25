@@ -53,7 +53,7 @@ void breath(object targ)
 	if (!"/daemon/saving_d"->saving_throw(targ, "breath_weapon", -4)) {
 		tell_object(targ, "%^BOLD%^WHITE%^The Yeti takes a deep breath and blows a freezing coud of icy air in your face!%^RESET%^");
 		tell_room(ETO, "%^BOLD%^WHITE%^The Yeti blows it's frosty breath on " + targ->query_cap_name() + " causing them to freeze in their tracks!%^RESET%^", targ);
-		targ->do_damage("torso", roll_dice(5, 10));
+		targ->cause_typed_damage(targ, "torso", roll_dice(5, 10), "cold");
 		targ->set_paralyzed(40, "You are frozen stiff");
 		return 1;
 	}
@@ -71,7 +71,7 @@ void snowball(object targ)
 	if (roll > 0 - ac) {
 		tell_object(targ, "%^BOLD%^CYAN%^The Yeti hits you with a massive snowball!%^RESET%^");
 		tell_room(ETO, "%^BOLD%^CYAN%^The Yeti hits " + targ->query_cap_name() + " with a giant snowball!%^RESET%^", targ);
-		targ->do_damage("torso", roll_dice(4, 12));
+		targ->cause_typed_damage(targ, "torso", roll_dice(4, 12), "bludgeoning");
 	} else {
 		tell_object(targ, "%^BOLD%^CYAN%^The Yeti throws a giant snowball at you but misses!%^RESET%^");
 		tell_room(ETO, "%^BOLD%^CYAN%^The Yeti throws a giant snowball at " + targ->query_cap_name() + "  but misses!%^RESET%^", targ);
@@ -120,10 +120,10 @@ void heart_beat()
 			tell_object(vars[i], "%^BOLD%^WHITE%^The Yeti tries to step on you!%^RESET%^");
 			if (!"/daemon/saving_d"->saving_throw(vars[i], "paralyzation_poison_death", -4)) {
 				tell_object(vars[i], "%^BOLD%^WHITE%^You are squished under the Yeti's massive foot!%^RESET%^");
-				vars[i]->do_damage("torso", roll_dice(3, 20));
+				vars[i]->cause_typed_damage(vars[i], "torso", roll_dice(3, 20), "bludgeoning");
 			} else {
 				tell_object(vars[i], "%^BOLD%^WHITE%^You only get a glancing blow from the descending foot!%^RESET%^");
-				vars[i]->do_damage("torso", roll_dice(3, 10));
+				vars[i]->cause_typed_damage(vars[i], "torso", roll_dice(3, 10), "bludgeoning");
 			}
 		}
 	}

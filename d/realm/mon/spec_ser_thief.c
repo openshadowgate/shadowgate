@@ -130,51 +130,55 @@ void die(object ob)
 void maim(object targ)
 {
 	int hit;
+	string wpname1, wpname2;
 	if(!objectp(targ)) return;
 	
+	wpname1 = wpn1->query_short();
+	wpname2 = wpn2->query_short();
+
 	tell_room(ETO, "%^BOLD%^%^GREEN%^The spectral humanoid cackles manically "+
 	"and its %^BOLD%^%^BLACK%^empty lifeless eyes%^BOLD%^%^GREEN%^"+
 	" flare to life momentarily as it jabs its "+
-	wpn1->query_short() + " at "+targ->QCN+"%^BOLD%^%^GREEN%^ chest!%^RESET%^", ({targ, TO}));
+	wpname1 + " at "+targ->QCN+"%^BOLD%^%^GREEN%^ chest!%^RESET%^", ({targ, TO}));
 
 	tell_object(targ, "%^BOLD%^%^GREEN%^The spectral humanoid cackles manically "+
 	"and its %^BOLD%^%^BLACK%^empy lifeless eyes%^BOLD%^%^GREEN%^"+
 	" flare to life momentarily as it jabs its "+
-	wpn1->query_short() + " at your chest!%^RESET%^");
+	wpname1 + " at your chest!%^RESET%^");
 	
 	if(!hit = "/daemon/saving_throw_d.c"->reflex_save(targ, -20)) 
 	{
 		tell_room(ETO, "%^BOLD%^%^BLACK%^With a sick hissing sound the "+
-		wpn1->query_short() + "%^BOLD%^%^BLACK%^ "+
+		wpname1 + "%^BOLD%^%^BLACK%^ "+
 		"sinks into "+targ->QCN+"%^BOLD%^%^BLACK%^'s chest!%^RESET%^", ({targ, TO}));
 		
 		tell_object(targ, "%^BOLD%^%^BLACK%^You are unable to move away in time and "+
-		"with a sick hissing sound "+wpn1->query_short() + "%^BOLD%^%^BLACK%^ "+
+		"with a sick hissing sound "+ wpname1 + "%^BOLD%^%^BLACK%^ "+
 		"sinks into your chest!%^RESET%^");
 
-		targ->do_damage("torso", 50 + random(50));
+		targ->cause_typed_damage(targ, "torso", roll_dice(1, 50) + 49, wpn1->query_damage_type());
 		return;
 	}
 	tell_room(ETO, "%^BOLD%^%^GREEN%^The spectral humanoid growls insanely as "+
 	"its jab misses "+targ->QCN+" - it suddenly "+
 	" stabs at "+targ->QP+"%^BOLD%^%^GREEN%^ %^BOLD%^%^WHITE%^face%^BOLD%^%^GREEN%^ "+
-	"with its "+wpn2->query_short()+"%^BOLD%^%^GREEN%^!%^RESET%^", ({targ, TO}));
+	"with its "+ wpname2 +"%^BOLD%^%^GREEN%^!%^RESET%^", ({targ, TO}));
 
 	tell_object(targ, "%^BOLD%^%^GREEN%^The spectral humanoid growls insanely as you "+
 	"avoid its jab - then it suddenly "+
-	"stabs at your face with its "+wpn2->query_short()+"%^BOLD%^%^GREEN%^!%^RESET%^");
+	"stabs at your face with its "+ wpname2 +"%^BOLD%^%^GREEN%^!%^RESET%^");
 	
 	if(!hit = "/daemon/saving_throw_d.c"->reflex_save(targ, -30)) 
 	{
 		tell_room(ETO, "%^BOLD%^%^BLUE%^With a vicious hiss the "+
-		wpn2->query_short() + "%^BOLD%^%^BLUE%^ penetrates "+
+		wpname2 + "%^BOLD%^%^BLUE%^ penetrates "+
 		targ->QCN+"%^BOLD%^%^BLUE%^'s face!%^RESET%^", ({targ, TO}));
 
 		tell_object(targ, "%^BOLD%^%^BLUE%^A sudden %^BOLD%^%^RED%^"+
 		"HISS%^BOLD%^%^BLUE%^ fills your ears as the "+
-		wpn2->query_short() + "%^BOLD%^%^BLUE%^ penetrates your face!%^RESET%^");
+		wpname2 + "%^BOLD%^%^BLUE%^ penetrates your face!%^RESET%^");
 	
-		targ->do_damage("head", 100 + random(50));
+		targ->cause_typed_damage(targ, "torso", roll_dice(1, 50) + 99, wpn2->query_damage_type());
 		return;
 	}
 	tell_room(ETO, targ->QCN +"%^BOLD%^%GREEN%^ manages to duck just in time, "+

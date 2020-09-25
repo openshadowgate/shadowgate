@@ -163,7 +163,7 @@ void summonphantomblade(object targ, int times)
 		"%^BOLD%^%^WHITE%^c blade and it only grazes "+
 		"you!%^RESET%^");
 		TO->set_property("magic", 1);
-		targ->do_damage(targ->return_target_limb(), roll_dice(6, 8));
+		targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(6, 8), "slashing");
 		TO->set_property("magic", -1);
 	}
 	else
@@ -184,7 +184,7 @@ void summonphantomblade(object targ, int times)
 		"%^BOLD%^%^WHITE%^c%^BOLD%^%^RED%^ blade "+
 		"slices deep into your flesh!%^RESET%^");
 		TO->set_property("magic", 1);
-		targ->do_damage(targ->return_target_limb(), roll_dice(12, 8));
+		targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(12, 8), "slashing");
 		TO->set_property("magic", -1);
 	}
 
@@ -263,7 +263,7 @@ void swiftattacks(object targ)
 			tell_object(vic, "%^BOLD%^%^RED%^A searing pain "+
 			"floods your body as the "+text_number(x)+ 	
 			" jab penetrates your flesh!%^RESET%^");
-			vic->do_damage(vic->return_target_limb(), roll_dice(10, 6));
+			vic->cause_typed_damage(vic, vic->return_target_limb(), roll_dice(10, 6), "piercing");
 			continue;
 		}
 	}

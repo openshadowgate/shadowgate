@@ -33,14 +33,14 @@ OLI
 }
 
 int kill_ob(object who, int i){
-    if(!objectp(who)) return 0;//corrected some issues with TP being invalid, and added a valid object check -Ares
+   if (!objectp(who)) return 0;//corrected some issues with TP being invalid, and added a valid object check -Ares
    ::kill_ob(who,i);
 
    force_me( "laugh "+who->QCN);
    force_me("emote tilts her head curiously at"+who->QCN+" and concentrates.");
    who->force_me("emote staggers back and struggles suddenly as "+who->query_possessive()+" clothing constricts.");
    who->force_me("emote grabs "+who->query_possessive()+" head and screams.");
-   who->do_damage("head",random(100));
+   who->cause_typed_damage(who, "head", random(100), "mental");
    who->force_me("fall");
    who->set_paralyzed(10,"Your head is pounding");
    who->set_bound(50,"Your clothes have tightened, binding you fast.");

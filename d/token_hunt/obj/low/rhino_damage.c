@@ -37,7 +37,7 @@ void pain()
         return;
     }
     tell_object(ETO,"%^RESET%^%^BOLD%^%^RED%^The black arrowhead throbs underneath your skin!%^RESET%^");
-    ETO->do_damage("torso",roll_dice(1,3));
+    ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 3), "piercing");
     hits--;
     call_out("pain",to_float("0."+(roll_dice(1,4)+5)));
 }

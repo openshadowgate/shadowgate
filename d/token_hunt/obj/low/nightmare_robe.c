@@ -90,6 +90,6 @@ int strike_func(int damage, object what, object who){
         "robe tries to escape, clawing at "+who->QCN+" for aid.");
 	tell_object(who,"%^BOLD%^%^BLACK%^A face fights to escape from"+
         " "+ETOQCN+"'s robe, clawing at you for aid.");
-			who->do_damage("torso",random(4)+6);
+    who->cause_typed_damage(who, "torso", roll_dice(1, 4)+5, "untyped");
 	}
 }

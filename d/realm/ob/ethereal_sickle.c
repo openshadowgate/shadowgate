@@ -115,51 +115,55 @@ void set_bolt_pos(int x)
 
 int special(object targ) 
 {
-    	int chance, dam = roll_dice(2, 6);
+    int chance, dam = roll_dice(2, 6);
+	string targname, attname, attpos;
 	if(!objectp(targ)) return 0;
-    	chance = random(8);
+    chance = random(8);
 	if(bolt_pos == -1) return 0;	
-    	if(!chance) 
+    if(!chance) 
 	{
+		targname = targ->QCN;
+		attname = ETO->QCN;
+		attpos = ETO->QP;
 		switch(bolt_pos)
 		{
 			case 0: case 1: case 2:
 				tell_object(ETO, "%^BOLD%^%^BLUE%^You slice into "+
-				targ->QCN+ "%^BOLD%^%^BLUE%^'s flesh with your "+
+				targname + "%^BOLD%^%^BLUE%^'s flesh with your "+
 				"sickle and the %^BOLD%^%^CYAN%^orb%^BOLD%^%^BLUE%^ "+
 				"creeps up the blade, as if propelled forward by "+
 				"the engraved %^RED%^sorcerer%^BOLD%^%^BLUE%^!.%^RESET%^");
 		
-				tell_room(EETO, ETOQCN + "%^BOLD%^%^BLUE%^ slices deep "+
-				"into "+targ->QCN+"%^BOLD%^%^BLUE%^ flesh with "+
-				ETO->QP+" sickle!%^RESET%^", ({ETO, targ}));
+				tell_room(EETO, attname + "%^BOLD%^%^BLUE%^ slices deep "+
+				"into "+ targname +"%^BOLD%^%^BLUE%^ flesh with "+
+				attpos +" sickle!%^RESET%^", ({ETO, targ}));
 				
-				tell_object(targ, ETOQCN+"%^BOLD%^%^BLUE%^ slices deep "+
-				"into your flesh with "+ETO->QP+" sickle!%^RESET%^");
+				tell_object(targ, attname +"%^BOLD%^%^BLUE%^ slices deep "+
+				"into your flesh with "+ attpos +" sickle!%^RESET%^");
 				bolt_pos++;
-				targ->do_damage(targ->return_target_limb(), dam);
+				targ->cause_typed_damage(targ, targ->return_target_limb(), dam, "slashing");
 				break;
 			case 3:
 				tell_object(ETO, "%^BOLD%^%^BLUE%^As you slice "+
-				"into "+targ->QCN+"%^BOLD%^%^BLUE%^'s flesh "+
+				"into "+ targname +"%^BOLD%^%^BLUE%^'s flesh "+
 				"with your sickle a %^BOLD%^%^CYAN%^tiny glowing "+
 				"orb%^BOLD%^%^BLUE%^ shoots out from the tip of "+
 				"its blade and settles "+
 				"in midair - %^BOLD%^%^RED%^SPINNING WILDLY"+
 				"%^BOLD%^%^BLUE%^!%^RESET%^");
 				
-				tell_room(EETO, "%^BOLD%^%^BLUE%^As "+ETO->QCN+
-				"%^BOLD%^%^BLUE%^ slices into "+targ->QCN+
-				"%^BOLD%^%^BLUE%^'s flesh with "+ETO->QP+
+				tell_room(EETO, "%^BOLD%^%^BLUE%^As "+ attname +
+				"%^BOLD%^%^BLUE%^ slices into "+ targname +
+				"%^BOLD%^%^BLUE%^'s flesh with "+ attpos +
 				" sickle a %^BOLD%^%^CYAN%^tiny glowing "+
 				"orb%^BOLD%^%^BLUE%^ shoots out from the tip "+
 				"of its blade and settles in "+
 				"midair - %^BOLD%^%^RED%^SPINNING WILDLY"+
 				"%^BOLD%^%^BLUE%^!%^RESET%^", ({targ, ETO}));
 			
-				tell_object(targ, "%^BOLD%^%^BLUE%^As "+ETO->QCN+
+				tell_object(targ, "%^BOLD%^%^BLUE%^As "+ attname +
 				"%^BOLD%^%^BLUE%^ slices into your flesh "+
-				"with "+ETO->QP+" sickle a %^BOLD%^%^CYAN%^"+
+				"with "+ attpos +" sickle a %^BOLD%^%^CYAN%^"+
 				"tiny glowing orb%^BOLD%^%^BLUE%^ shoots out from "+
 				"the tip of its blade and settles "+
 				"in midair - %^BOLD%^%^RED%^SPINNING WILDLY"+
@@ -171,7 +175,7 @@ int special(object targ)
 				orb->set_owned(ETO);
 				orb->move(EETO);
 				orb->start_spinning();
-				targ->do_damage(targ->return_target_limb(), dam);
+				targ->cause_typed_damage(targ, targ->return_target_limb(), dam, "slashing");
 				break;			
 		}
     	}
