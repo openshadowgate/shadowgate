@@ -28,7 +28,7 @@ void spell_effect()
     if (do_save(target, 0)) {
         tell_object(caster, "%^BOLD%^You will the true form of " + target->QCN + ", but nothing happens.%^RESET%^");
     }
-    if (objectp(shape = target->query_property("shapeshifted"))) {
+    else if (objectp(shape = target->query_property("shapeshifted"))) {
         shape->reverse_shape(target);
     }
 
