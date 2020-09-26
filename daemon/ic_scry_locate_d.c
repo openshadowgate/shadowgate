@@ -164,6 +164,7 @@ int stop_scry(object control, int early) {
     if(objectp(scry_object)) scry_object->remove();
 	if(parent = control->query_parent()) parent->control_failure();
     if(objectp(observer)) {
+        observer->remove_property("scrying");
 		observer->remove_property("remote scrying");
         tell_object(observer, "The image you were viewing quickly fades away.");
         tell_room(environment(observer), "The scried image quickly fades away.");
