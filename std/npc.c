@@ -114,14 +114,22 @@ void init() {
 //moved here from /std/vendor so avail. for comp_vend. & others *Styx*  1/26/03
 //modifying this so that cost will never be less than 1 - Saide - 5/16
 varargs int adjust_cost(int cost, int sell){
-    int mod, cha;
-
-    cha = TP->query_stats("charisma");
-
-    if(cha > 23) { cha = 23; }
-    mod = 13 - cha;
+   int mod, influ;
+   //int mod, cha;
+   // cha = TP->query_stats("charisma");
+   //if(cha > 23) { cha = 23; }
+   // mod = 13 - cha;
     //mod += racial stuff ---- Garrett.
-
+   influ = TP->query_skill("influence");
+   if (influ > 60) influ = 60;
+   if(!sell){
+      cost = cost + cost *(70.0/influ);
+   }
+   else {
+      cost = cost *(influ/70.0);
+   }
+   
+    /*
     if (!sell) {
      if(mod > 0)
         cost = cost+(cost *(mod*5))/100;
@@ -132,7 +140,7 @@ varargs int adjust_cost(int cost, int sell){
        cost = cost-(cost *(mod*5))/100;
      else
      cost = cost - (cost *(mod*2))/100;
-    }
+    }*/
     if(cost < 1) cost = 1;
     return cost;
 }
