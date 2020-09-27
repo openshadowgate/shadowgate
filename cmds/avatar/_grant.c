@@ -54,7 +54,7 @@ int cmd_grant(string str){
     if (!objectp(player)) {
         return notify_fail("That player isn't around.\n");
     }
-    write("%^BOLD%^You grant "+exp+" to "+capitalize(who)+".");
+    write("%^BOLD%^You grant "+exp+" to "+capitalize(who)+" for " +reason+".");
 
     player->set_property("ignore tax",1);
     player->add_general_exp("whatever",exp);

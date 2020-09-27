@@ -349,7 +349,7 @@ int query_skill(string skill)
     {
         x += 10;
     }
-    
+
     if( (skill == "perception" || skill == "survival" || skill == "stealth") && FEATS_D->usable_feat(TO, "favored terrain") )
     {
         if(TO->is_favored_terrain(environment(TO)))
@@ -936,12 +936,10 @@ int has_XP_levelcap()
     int levelcap;
     levelcap = query("no advance");
 
-    // Support for player-initiated levelcaps comes in here.
-    // Just check if levelcap is greater than PI_levelcap
-
-    if (OB_ACCOUNT->is_high_mortal((string)TO->query_true_name())) {
-        return 0;
+    if (query_exp() > total_exp_for_level(query_character_level() + 1) * 5 / 4) {
+        return 1;
     }
+
     if (levelcap < 0) {
         levelcap = 0;
     }

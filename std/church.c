@@ -252,10 +252,6 @@ int pray()
             }
             TP->delete("pk_trial");
         } else {
-            if (exp > total_exp_for_level(thelevel + 1)) {
-                exploss *= 2;
-                exploss += (exp - total_exp_for_level(thelevel + 1));
-            }
             if (exp - exploss <= total_exp_for_level(6)) {
                 exploss = exp - total_exp_for_level(6);
             }
