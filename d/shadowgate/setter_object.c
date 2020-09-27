@@ -214,6 +214,7 @@ seen. It seems to be dormant at the time.");
     ETO->make_new_hitpoint_rolls(ETO);
 
     ETO->force_me("fixspells");
+    ETO->force_me("feats fix");
     ETO->force_me("save");
 
     ETO->add_money("gold", 200 + roll_dice(5, 20));
