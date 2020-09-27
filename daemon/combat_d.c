@@ -1747,6 +1747,10 @@ void iterate_combat(object who)
     }
 
     if (combat_vars["unconscious"]) {
+        if (combat_vars["unconscious"] > 180) {
+            combat_vars["unconscious"] = 180;
+        }
+
         combat_vars["unconscious"]--;;
         vars = 1;
 
@@ -1769,6 +1773,10 @@ void iterate_combat(object who)
     }
 
     if (combat_vars["asleep"]) {
+        if (combat_vars["asleep"] > 180) {
+            combat_vars["asleep"] = 180;
+        }
+
         combat_vars["asleep"]--;
         vars = 1;
         combat_counters["asleep"] = 0;
