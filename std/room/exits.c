@@ -243,8 +243,8 @@ int use_exit()
 
 
     if ((paths = query_exit(verb)) == ROOM_VOID)
-        if ((paths = query_climb_exit(verb,0)) == ROOM_VOID) {
-            write("Error:  Set to VOID.  Notify creator of room.");
+        if ((paths = query_climb_exit(verb, 0)) == ROOM_VOID) {
+            write("That doesn't lead to anywhere.");
             return 1;
         }
 
