@@ -10,7 +10,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("hold monster");
-    set_spell_level(([ "cleric" : 4, "bard" : 4 ]));
+    set_spell_level(([ "mage" : 4, "bard" : 4 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS hold monster on TARGET");
     set_description("This will magically hold most types of monsters.  It will hold for longer, as your levels increase.  "
