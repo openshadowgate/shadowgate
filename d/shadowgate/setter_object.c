@@ -1053,6 +1053,12 @@ select_language(string str)
             return 0;
         }
 
+        if (sizeof(toselect) > maxbonus) {
+            write("%^BOLD%^%^WHITE%^You can't select that many languages.");
+            return 0;
+        }
+
+
     }
 
     char_sheet[ROLL_CHAIN[head]] = toselect;
