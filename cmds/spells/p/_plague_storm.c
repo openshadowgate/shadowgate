@@ -55,7 +55,6 @@ void execute_attack()
 
     message("info", "%^RESET%^%^BOLD%^%^GREEN%^Hideous cloud envelopes everyone in the area!", place);
     foes = target_selector();
-    foes = target_filter(foes);
     foes -= ({ caster });
 
     for (i = 0; i < sizeof(foes); i++) {

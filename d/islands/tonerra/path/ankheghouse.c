@@ -7,7 +7,7 @@ inherit ROOM;
 
 void create(){
 	::create();
-	
+
 	set_name("ankheghouse");
 	set_short("Ankheghouse");
 	set_property("indoors",1);
@@ -15,8 +15,8 @@ void create(){
 	set_long(
 @OLI
 	%^CYAN%^
-	This is a small tunnel that the ankhegs have burrowed under the 
-common paths of the jungle. They use it to capture prey. You smell 
+	This is a small tunnel that the ankhegs have burrowed under the
+common paths of the jungle. They use it to capture prey. You smell
 the dirt around you. The darkness is oppressive.
 OLI
 	);
@@ -36,7 +36,7 @@ int GoThroughDoor(){
 void reset(){
 	object ob;
 	::reset();
-		
+
 	if(!present("ankheg")){
 		ob = new(MON+"ankheg");
 		ob->move(TO);
@@ -71,4 +71,13 @@ void reset(){
 			ob->set_aggressive(25);
 		}
 	}
+}
+
+clean_up()
+{
+    if (member_array("up", query_exits()) != -1) {
+        (query_exit("up"))->remove_exit("down");
+    }
+
+    return 1;
 }

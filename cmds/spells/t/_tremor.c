@@ -35,7 +35,6 @@ void spell_effect(int prof){
     int i,damage;
 
     inven = target_selector();
-    inven = target_filter(inven);
 
     inven -= ({caster});
 

@@ -49,7 +49,6 @@ void spell_effect(int prof) {
     }
 
     targets = target_selector();
-    targets = target_filter(targets);
 
     targets -= ({target});
     targets -= ({caster});

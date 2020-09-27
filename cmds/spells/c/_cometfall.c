@@ -33,8 +33,6 @@ void spell_effect(int prof){
     object *attackers;
     int i,damage;
     attackers = target_selector();
-    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
 
     if(!sizeof(attackers)){
         tell_object(caster,"%^ORANGE%^A brilliant light fills the "+

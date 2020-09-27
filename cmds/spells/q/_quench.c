@@ -48,7 +48,6 @@ spell_effect(int prof)
     spell_successful();
 
     foes = target_selector();
-    foes = target_filter(foes);
     foes -= ({ caster });
 
     tell_object(caster,"%^BOLD%^%^BLUE%^You release the energy of your spell and send a huge ball of water hurling at "+target->QCN+"!%^RESET%^");

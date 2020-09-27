@@ -33,8 +33,6 @@ void spell_effect(int prof){
     object *attackers;
     int i,admg;
     attackers = target_selector();
-    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
 
     tell_room(place,"%^BLUE%^"+caster->QCN+" raises hand and releases wave of cold energy!%^RESET%^");
     if(!sizeof(attackers)){

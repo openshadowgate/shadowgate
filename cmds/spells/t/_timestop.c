@@ -35,7 +35,6 @@ void spell_effect(int prof) {
     duration = (ROUND_LENGTH * roll_dice(1,4) * 8); // d4 rounds, no +1
     mytargs = target_selector();
     mytargs -= ({ caster });
-    mytargs = target_filter(mytargs);
     myparty = ob_party(caster);
 
     tell_object(caster,"%^BOLD%^%^GREEN%^As you pick up and twist the weave energies around you, wrenching your arms "

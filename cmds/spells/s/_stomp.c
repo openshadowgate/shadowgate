@@ -35,7 +35,6 @@ void spell_effect(int prof) {
 
     mytargs = target_selector();
     mytargs -= ({caster});
-    mytargs = target_filter(mytargs);
 
     if (!sizeof(mytargs)) {
         tell_object(caster,"%^BOLD%^The spell fizzles and fades for lack of a target.\n");

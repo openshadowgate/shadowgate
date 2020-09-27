@@ -37,7 +37,6 @@ void spell_effect(int prof){
     object *attackers;
     int i,dmg;
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     if(!sizeof(attackers)){
         tell_object(caster,"%^BOLD%^The area is whitewashed with the brilliant light of the sun, but nothing else happens.");

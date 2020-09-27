@@ -56,7 +56,6 @@ void spell_effect(int prof)
     inven -= ({ target });
     inven -= ({ caster });
 
-    inven = target_filter(inven);
 
     tell_object(target, "%^YELLOW%^After " + cname + " releases chaotic power that leaps toward you!");
     tell_room(place, "%^YELLOW%^A surge of chaotic power leaps toward " + tname + "!", target);

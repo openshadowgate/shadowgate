@@ -36,8 +36,6 @@ void spell_effect(int prof)
     int i, dam;
 
     attackers = target_selector();
-    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
 
     if(!sizeof(attackers))
     {

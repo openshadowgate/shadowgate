@@ -38,8 +38,6 @@ void spell_effect(int prof){
     duration=duration<2?2:duration;
 
     foes = target_selector();
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
-    foes = target_filter(foes);
 
     tell_room(place,"%^BOLD%^%^WHITE%^Suddenly, everyone starts to float up!%^RESET%^");
 

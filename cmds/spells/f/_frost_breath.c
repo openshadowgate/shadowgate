@@ -56,7 +56,6 @@ void spell_effect(int prof){
     attackers = target_selector();
     attackers += ({ target });
     attackers = distinct_array(attackers);
-    attackers = target_filter(attackers);
 
     if(sizeof(attackers)){
       for(i=0;i<sizeof(attackers);i++)

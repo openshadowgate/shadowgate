@@ -60,7 +60,6 @@ spell_effect(int prof)
         return 1;
     }
     attackers = target_selector();
-    attackers = target_filter(attackers);
     attackers += ({ target });
     attackers = distinct_array(attackers);
 

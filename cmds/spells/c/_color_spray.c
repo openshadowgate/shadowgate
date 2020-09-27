@@ -57,7 +57,6 @@ void spell_effect(int prof) {
 
     prospective -= ownparty;
 
-    prospective = target_filter(prospective);
 
     tell_object(caster,"You wave your hand and a fan-shaped spray of vivid colors flares from your hand!");
     tell_room(place,"You see a fan-shaped spray of vivid colors flare from "+caster->QCN+"'s hands!\n", ({ caster}) );

@@ -34,8 +34,6 @@ void spell_effect(int prof)
     int i, dam;
 
     attackers = target_selector();
-    attackers = filter_array(attackers, "is_non_immortal", FILTERS_D);
-    attackers = target_filter(attackers);
 
     tell_room(place, "%^BOLD%^%^WHITE%^The power of c%^CYAN%^o%^WHITE%^l%^CYAN%^d e%^BLUE%^b%^WHITE%^b%^BLUE%^s %^WHITE%^from you into all directions.%^RESET%^");
 

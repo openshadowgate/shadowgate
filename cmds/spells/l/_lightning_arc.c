@@ -28,7 +28,6 @@ void spell_effect(int prof){
     object *attackers;
     int i,admg;
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     tell_room(place,"%^BOLD%^%^ORANGE%^"+caster->QCN+" waves hand and releases an arc of electricity!%^RESET%^");
     if(sizeof(attackers)<2)

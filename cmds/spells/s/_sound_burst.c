@@ -62,7 +62,6 @@ void spell_effect(int prof)
     damage_targ(target, target->return_target_limb(), damage,"sonic");
 
     inven = all_inventory(environment(caster));
-    inven = filter_array(inven, "is_non_immortal",FILTERS_D);
 
     attackers = target_selector();
     hits = ({});
@@ -71,7 +70,6 @@ void spell_effect(int prof)
     hits -= ({caster});
     hits -= ({ target });
 
-    hits = target_filter(hits);
 
     size = random(clevel);
     for (i = 0;i < sizeof(hits);i++) {

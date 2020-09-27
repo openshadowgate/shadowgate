@@ -53,7 +53,6 @@ void spell_effect(int prof)
     if (member_array(target, foes) != -1) {
         foes -= ({ target });
     }
-    foes = target_filter(foes);
 
     tmp = "";
     if (interactive(caster)) {

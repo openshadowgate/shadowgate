@@ -40,8 +40,6 @@ void spell_effect(int prof)
 
     attackers = target_selector();
     attackers += ({ target });
-    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
     attackers = distinct_array(attackers);
     room = environment(caster);
 

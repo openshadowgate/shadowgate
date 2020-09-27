@@ -112,7 +112,6 @@ void spell_effect(int prof){
                 break;
     }
     foes += target_selector();
-    foes = filter_array(foes, "is_non_immortal", FILTERS_D);
 
     if(!sizeof(foes))
     {
@@ -131,7 +130,6 @@ void spell_effect(int prof){
     }
 
     foes -= ({caster});
-    foes = target_filter(foes);
 
     if (caster->query_followers())
         foes -= caster->query_followers();

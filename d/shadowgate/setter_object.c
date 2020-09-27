@@ -214,6 +214,7 @@ seen. It seems to be dormant at the time.");
     ETO->make_new_hitpoint_rolls(ETO);
 
     ETO->force_me("fixspells");
+    ETO->force_me("feats fix");
     ETO->force_me("save");
 
     ETO->add_money("gold", 200 + roll_dice(5, 20));
@@ -1052,6 +1053,12 @@ select_language(string str)
             write("%^BOLD%^%^WHITE%^You can't select one of the languages you have entered: %^CYAN%^" + implode(tmp, "%^WHITE%^, %^CYAN%^"));
             return 0;
         }
+
+        if (sizeof(toselect) > maxbonus) {
+            write("%^BOLD%^%^WHITE%^You can't select that many languages.");
+            return 0;
+        }
+
 
     }
 

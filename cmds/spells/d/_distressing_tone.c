@@ -23,8 +23,6 @@ void spell_effect(int prof){
     object *attackers;
     int i,admg;
     attackers = target_selector();
-    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
 
 
     if(!sizeof(attackers)){

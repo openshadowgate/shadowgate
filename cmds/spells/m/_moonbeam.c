@@ -50,9 +50,7 @@ spell_effect(int prof){
         return 1;
     }
     attackers = target_selector();
-    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
     attackers += ({ target });
-    attackers = target_filter(attackers);
     attackers = distinct_array(attackers);
 
     if(sizeof(attackers)){

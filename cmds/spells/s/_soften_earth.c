@@ -31,7 +31,6 @@ void spell_effect(int prof)
     object* attackers;
     int i, dmg;
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     tell_room(place, "%^ORANGE%^The earth turns into a mud!%^RESET%^");
     if (!sizeof(attackers)) {

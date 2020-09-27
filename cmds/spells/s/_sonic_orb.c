@@ -48,7 +48,6 @@ spell_effect(int prof)
     foes = target_selector();
 
     foes -= ({ target });
-    foes = target_filter(foes);
 
     if(interactive(caster)) { tmp="'s finger"; }
 

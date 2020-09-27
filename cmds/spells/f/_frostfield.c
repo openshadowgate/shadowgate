@@ -33,7 +33,6 @@ void spell_effect(int prof)
     int i;
 
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     tell_room(place, "%^BOLD%^%^CYAN%^The power of c%^WHITE%^o%^CYAN%^l%^WHITE%^d e%^BLUE%^b%^CYAN%^b%^BLUE%^s %^CYAN%^from you, freezing the ground.%^RESET%^");
 

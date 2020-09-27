@@ -51,7 +51,6 @@ void spell_effect(int prof) {
     HIM=target->QCN;
     foes=target_selector();
     foes -= ({ target});
-    foes = target_filter(foes);
 
 
     tell_object(target,"%^BOLD%^%^CYAN%^A gust of chilling wind races toward you and engulfs you in frost!");

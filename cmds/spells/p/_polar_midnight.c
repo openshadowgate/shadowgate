@@ -63,7 +63,6 @@ void execute_attack()
     }
 
     foes = target_selector();
-    foes = target_filter(foes);
     foes -= ({ caster });
 
     define_base_damage(0);//reroll each turn

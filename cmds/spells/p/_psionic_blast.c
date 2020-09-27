@@ -40,7 +40,6 @@ void spell_effect(int prof)
     tell_room(place, "%^CYAN%^" + sprintf("%s places %s fingers to the side of %s head and concentrates!", myname, caster->query_possessive(), caster->query_possessive()) + "%^RESET%^", ({ caster }));
 
     victims = target_selector();
-    victims = target_filter(victims);
 
     if(!sizeof(victims))
     {

@@ -17,6 +17,7 @@ object base_class_ob(object ob)
 {
     object class_ob;
 
+    // compat code
     if (!ob->query("base_class") && ob->query("assassin_base_class")) {
         ob->set("base_class", ob->query("assassin_base_class"));
     }
