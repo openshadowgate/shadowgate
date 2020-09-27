@@ -68,7 +68,8 @@ void berserk()
     }
 
     if ((!caster->is_in_combat()) && (!random(10))) {
-        caster->do_damage("torso", random(2) + 1);
+        //caster->do_damage("torso", random(2) + 1);
+        damage_targ(caster, "torso", roll_dice(1,2), "untyped");
         tell_object(caster, "%^BOLD%^%^RED%^You hurt yourself in your lust for battle and victory.");
     }
     call_out("berserk", ROUND_LENGTH);

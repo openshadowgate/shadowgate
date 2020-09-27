@@ -50,7 +50,7 @@ void heart_beat() {
        tell_room(ETO, "%^BOLD%^There is a blinding flash and %^RED%^ear-splitting pop.\n");
        killers = query_attackers();
        for(i=0;i<sizeof(killers);i++) {
-          killers[i]->do_damage("head", roll_dice(3,5));
+          killers[i]->cause_typed_damage(killers[i], "head", roll_dice(3, 5), "untyped");
        }
     tell_room(ETO, "%^ORANGE%^When you regain your senses, you find the clerk is gone.");
     TO->move("/d/Shadowgate/void");

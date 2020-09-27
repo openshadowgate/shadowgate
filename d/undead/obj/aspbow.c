@@ -91,7 +91,7 @@ int extra_lrhit(object targi){
       tell_object(targi,ETO->QCN+"'s%^BOLD%^%^GREEN%^ arrow siphons the lifeforce from you!%^RESET%^");
       tell_room(EETO,ETO->QCN+"'s%^BOLD%^%^GREEN%^ bows tremors slightly as the arrow hits "+targi->QCN+"!",({ETO,targi}));
       set_property("magic",1);
-      targi->do_damage(targi->query_target_limb(),random(10)+5);
+      targi->do_damage(targi->return_target_limb(),random(10)+5);
 	  ETO->do_damage("torso",random(10)*(-1));
       remove_property("magic");
       return 1;

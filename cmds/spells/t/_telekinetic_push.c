@@ -36,6 +36,6 @@ spell_effect(int prof)
         dam /= 2;
     }
     tell_object(target,"%^BOLD%^%^WHITE%^Force of the push curshes you!");
-    damage_targ(target, target->query_target_limb(), dam,"force");
+    damage_targ(target, target->return_target_limb(), dam,"force");
     dest_effect();
 }

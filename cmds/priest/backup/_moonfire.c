@@ -65,7 +65,7 @@ void spell_effect(int prof)
             attackers[i]->set_paralyzed(roll_dice(2,6),"%^BOLD%^%^CYAN%^You are unable to move!");
         }
         spell_kill(attackers[i],caster);
-        attackers[i]->do_damage(attackers[i]->return_target_limb(),damage);
+        damage_targ(attackers[i], attackers[i]->return_target_limb(), damage, "divine");
     }
     spell_successful();
     dest_effect();

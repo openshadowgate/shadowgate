@@ -577,7 +577,7 @@ void do_flight(mapping info)
             rider->force_me("look");
             TO->set_property("magic",1);
             rider->add_attacker(TO);
-            rider->do_damage("torso",altitude);
+            rider->cause_typed_damage(rider, "torso", altitude, "bludgeoning");
             rider->continue_attack();
             rider->remove_attacker(TO);
             FLIGHT = "landed";

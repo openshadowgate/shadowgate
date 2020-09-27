@@ -87,7 +87,7 @@ void embrace(object targ)
        if(!targ) return 0;
 tell_room(environment(targ),"Branches reach out to grab at you, trapping you an
 d slowly crushing you.", targ);
-       targ->do_damage("torso", random(20)+5);
+       targ->cause_typed_damage(targ, "torso", roll_dice(1, 20) + 4, "bludgeoning");
        targ->set_paralyzed(random(7),"You are temporarily paralyzed by the pain
 ");
        tell_object(targ,"Branches reach out from the sirenflower to gather you

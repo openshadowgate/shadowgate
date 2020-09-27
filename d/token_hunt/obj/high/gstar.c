@@ -36,7 +36,7 @@ void create() {
 int wield_func(){
    if((int)ETO->query_level() < 25 ) {
       tell_object(ETO,"You drop the weapon on yourself.");
-      ETO->do_damage("torso",random(25)+25);
+      ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 25) + 24, "untyped");
       ETO->add_attacker(TO);
       ETO->continue_attack();
       ETO->remove_attacker(TO);

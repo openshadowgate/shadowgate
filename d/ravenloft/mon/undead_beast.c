@@ -49,7 +49,7 @@ void trample(object targ){
 	tell_object(targ,"%^BOLD%^RED%^The Undead Beast charges towards you and tramples you underneath it!");
 	tell_room(ETO,"%^BOLD%^RED%^The Undead Beast charges towards "+targ->query_cap_name()+" and tramples "+targ->query_objective()+" underneath it!",targ);
 	if(!"daemon/saving_d"->saving_throw(targ,"paralyzation_poison_death")){
-	    targ->do_damage("torso",roll_dice(3,8));
+		targ->cause_typed_damage(targ, "torso", roll_dice(3, 8), "bludgeoning");
 	    if(!"daemon/saving_d"->saving_throw(targ,"rod_staff_wand")){
 		tell_object(targ,"%^BOLD%^RED%^You are ensnared in the Beasts rib cage!");
 		tell_room(ETO,"%^BOLD%^RED%^"+targ->query_cap_name()+" is ensnared in the Beasts rib cage!",targ);
@@ -58,7 +58,7 @@ void trample(object targ){
 	    }
 	    return 1;
 	}
-	targ->do_damage("torso",roll_dice(1,8));
+	targ->cause_typed_damage(targ, "torso", roll_dice(1, 8), "bludgeoning");
 	return 1;
     }
     tell_object(targ,"%^BOLD%^RED%^The Undead Beast charges at you and runs right past!");
@@ -66,36 +66,17 @@ void trample(object targ){
     return 1;
 }
 void cage(object targ, int num){
-    switch( num ){
-	case(0):
-	tell_object(targ,"The Undead Beasts ribs tear into you!");
-	tell_room(ETO,""+targ->query_cap_name()+" struggles inside the Undead Beasts rib cage!",targ);
-	targ->do_damage(targ->return_target_limb(),roll_dice(1,8));
-	break;
-	case(1):
-	tell_object(targ,"The Undead Beasts ribs tear into you!");
-	tell_room(ETO,""+targ->query_cap_name()+" struggles inside the Undead Beasts rib cage!",targ);
-	targ->do_damage(targ->return_target_limb(),roll_dice(1,8));
-	break;
-	case(2):
-	tell_object(targ,"The Undead Beasts ribs tear into you!");
-	tell_room(ETO,""+targ->query_cap_name()+" struggles inside the Undead Beasts rib cage!",targ);
-	targ->do_damage(targ->return_target_limb(),roll_dice(1,8));
-	break;
-	case(3):
-	tell_object(targ,"The Undead Beasts ribs tear into you!");
-	tell_room(ETO,""+targ->query_cap_name()+" struggles inside the Undead Beasts rib cage!",targ);
-	targ->do_damage(targ->return_target_limb(),roll_dice(1,8));
-	break;
-	case(4):
-	tell_object(targ,"The Undead Beasts ribs tear into you!");
-	tell_room(ETO,""+targ->query_cap_name()+" struggles inside the Undead Beasts rib cage!",targ);
-	targ->do_damage(targ->return_target_limb(),roll_dice(1,8));
-	tell_object(targ,"You fall from the Beast's ribs.");
-	tell_room(ETO,""+targ->query_cap_name()+" falls from the Beast's ribs.",targ);
-    	set_func_chance(30);
-	return;
-    }
+    tell_object(targ, "The Undead Beasts ribs tear into you!");
+    tell_room(ETO, "" + targ->query_cap_name() + " struggles inside the Undead Beasts rib cage!", targ);
+    targ->cause_typed_damage(targ, targ->return_target_limb(), roll_dice(1, 8), "piercing");
+	
+    if (num=4) {
+		tell_object(targ, "You fall from the Beast's ribs.");
+		tell_room(ETO, "" + targ->query_cap_name() + " falls from the Beast's ribs.", targ);
+		set_func_chance(30);
+		return;	
+	}
+
     num++;
     call_out("cage",8,targ,num);
     return;

@@ -28,7 +28,7 @@ spell_effect(int prof)
         tell_object(caster, "%^BOLD%^%^WHITE%^You extend your hand and will to crush " + target->QCN + "!");
         tell_room(place, "%^BOLD%^%^WHITE%^" + caster->QCN + " extends hand and wills to crush " + target->QCN + " with " + caster->QP + " spell!", ({ caster }));
     }
-    damage_targ(target, target->query_target_limb(), sdamage, "untyped");
+    damage_targ(target, target->return_target_limb(), sdamage, "untyped");
     TO->dest_effect();
 }
 

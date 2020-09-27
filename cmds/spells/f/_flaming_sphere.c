@@ -93,14 +93,14 @@ spell_effect(int prof){
             effect = to_int(effect/2);
         tell_room(place, "%^RED%^The sphere scorches "+hits[i]->QCN+" as it passes!%^RESET%^",({hits[i]}) );
         tell_object(hits[i], "%^RED%^The burns you as it passes!%^RESET%^");
-        damage_targ(hits[i], hits[i]->query_target_limb(), effect,"fire");
+        damage_targ(hits[i], hits[i]->return_target_limb(), effect,"fire");
         if (!size) {
             break;
         }
     }
     tell_object(target,"%^YELLOW%^The sphere crashes into you, and you burn in agony!%^RESET%^");
     tell_room(place,"%^YELLOW%^The sphere crashes into "+HIM+", making "+target->QO+" writhe in agony!%^RESET%^", target);
-    damage_targ(target, target->query_target_limb(), sdamage,"fire");
+    damage_targ(target, target->return_target_limb(), sdamage,"fire");
     dest_effect();
 }
 

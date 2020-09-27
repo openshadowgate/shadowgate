@@ -498,7 +498,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped");     //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
             //attempting to debug to see if it's multiplied - Odin
         }
-            
+
         //Handles Crypststalker feat
         if (
             target &&
@@ -873,11 +873,12 @@ int damage_done(object attacker, object weap, int damage, int isranged)
                 if ((int)attacker->query_shieldMiss() && FEATS_D->usable_feat(attacker, "counter")) {
                     prof = to_int(prof * (1.25 + ((int)attacker->query_property("shieldwall") * 0.10)));
                 }
-                if (FEATS_D->usable_feat(attacker, "opportunity strikes")) {
+                if (FEATS_D->usable_feat(attacker, "opportunity strikes") && !attacker->is_wearing_type("shield")) {
                     prof = to_int(prof * 1.60);
                 }
-                if(FEATS_D->usable_feat(attacker, "artful precision"))
+                if(FEATS_D->usable_feat(attacker, "artful precision")) {
                     prof = to_int(prof * 1.10);
+                }
             }
         }
     }
@@ -888,7 +889,7 @@ int damage_done(object attacker, object weap, int damage, int isranged)
     }
     if (prof < 0) {
         damage = absolute_value((damage * prof) / 100 + 1);
-        attacker->do_damage("torso", damage);
+        attacker->cause_typed_damage(attacker, "torso", damage, weap->query_damage_type());
         tell_object(attacker, "You hurt yourself with your weapon because of your inexperience.");
         tell_room(environment(attacker), attacker->QCN + " hurts " + attacker->QO + "self with " + attacker->QP + " weapon.", attacker);
         return 0;

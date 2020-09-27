@@ -505,20 +505,22 @@ int validate(object ob)
     }
     bonus_names = keys(bonuses);
 
-    for (int i = 0; i < sizeof(bonus_names); i++) {
-        string bonus_name = bonus_names[i];
-        num = bonuses[bonus_name];
-        if (bonus_name != "special" &&
-            bonus_name != "hit" &&
-            bonus_name != "struck" &&
-            bonus_name != "shieldMiss") {
-            bonus_value = get_bonus_value(bonus_name, num, ob, TP);
+    if((ob->query_type() != "ring" || (member_array("left hand", ob->query_limbs()) == -1) && (member_array("right hand", ob->query_limbs()) == -1)) || ob->query_property("enchantment")) {
+        for (int i = 0; i < sizeof(bonus_names); i++) {
+            string bonus_name = bonus_names[i];
+            num = bonuses[bonus_name];
+            if (bonus_name != "special" &&
+                bonus_name != "hit" &&
+                bonus_name != "struck" &&
+                bonus_name != "shieldMiss") {
+                bonus_value = get_bonus_value(bonus_name, num, ob, TP);
 
-            if (bonus_value > flat_level) {
-                while (bonus_value > flat_level) {
-                    bonus_value = get_bonus_value(bonus_name, --num, ob, TP);
+                if (bonus_value > flat_level) {
+                    while (bonus_value > flat_level) {
+                        bonus_value = get_bonus_value(bonus_name, --num, ob, TP);
+                    }
+                    ob->set_item_bonus(bonus_name, num);
                 }
-                ob->set_item_bonus(bonus_name, num);
             }
         }
     }

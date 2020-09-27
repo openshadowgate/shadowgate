@@ -293,8 +293,8 @@ void acid_em()
 		tell_object(CA, "%^BOLD%^%^GREEN%^A thick acidic mist "+
 		"is sprayed over you as you get to close to "+
 		"the "+TOQCN+"!%^RESET%^");
-		
-		CA->do_damage(CA->return_target_limb(), roll_dice(10, 8));
+
+		CA->cause_typed_damage(CA, CA->return_target_limb(), roll_dice(10, 8), "acid");
 		continue;
 	}
 	return;

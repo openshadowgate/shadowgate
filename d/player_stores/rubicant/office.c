@@ -191,7 +191,7 @@ int arm_trap(string str)
 			"the glyph shoots a lightning bolt at you!");
 			tell_room(ETP,"%^YELLOW%^A lightning bolt shoots from the glyph as "
 	   		+TPQCN+" touches the runes around it.",TP);
-			TP->do_damage("torso",roll_dice(5,10));
+            TP->cause_typed_damage(TP, "torso", roll_dice(5, 10), "electricity");
 			TP->add_attacker(TO);
 			TP->continue_attack();
   			TP->remove_attacker(TO);

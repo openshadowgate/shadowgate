@@ -104,7 +104,7 @@ void brain_me1(object targ){
 	tell_object(targ,"The Vampire Illithid has withered your body to dust!");
 	tell_room(ETO,"The Vampire Illithid has withered "+targ->query_cap_name()+"'s body to dust!",targ);
         set_property("magic",1);
-	targ->do_damage(targ->return_target_limb(),targ->query_hp()+10);
+        targ->cause_typed_damage(targ, targ->return_target_limb(), targ->query_hp() + 10, "mental");
         remove_property("magic");
         } else {
         tell_object(targ,"You feel your life force drain away!");
@@ -146,12 +146,12 @@ void burrow1(object targ){
 	set_attack_limbs((string *)TO->query_attack_limbs() +({limb}));
 	num += 1;
 	set_attacks_num(num);
-	targ->do_damage(targ->return_target_limb(),roll_dice(1,6));
+    targ->cause_typed_damage(targ, "head", roll_dice(1, 6), "piercing");
 	return 1;
     }
     tell_object(targ,"%^BOLD%^The tentacle burrows deeper into your head!");
     tell_room(ETO,"%^BOLD%^"+targ->query_cap_name()+" cries out in pain as the tentacle tears into "+targ->query_possessive()+" head!",targ);
-    targ->do_damage(targ->return_target_limb(),roll_dice(1,6));
+    targ->cause_typed_damage(targ, "head", roll_dice(1, 6), "piercing");
     call_out("burrow1",5,targ);
     return 1;
 }

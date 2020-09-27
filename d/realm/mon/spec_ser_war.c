@@ -168,14 +168,14 @@ void sacrifice(object targ)
 			"%^BOLD%^%^CYAN%^!%^RESET%^", ({targs[x]}));
 			tell_object(targs[x], "%^BOLD%^%^CYAN%^The sonic "+
 			"wave slams full force into you!%^RESET%^");
-			targs[x]->do_damage("torso", dam);
+			targs[x]->cause_typed_damage(targs[x], "torso", dam, "sonic");
 			continue;
 		}
 		tell_room(ETO, targs[x]->QCN+"%^BOLD%^%^CYAN%^ " +
 		"manages to avoid the blunt of the sonic wave!%^RESET%^", ({targs[x]}));
 		tell_object(targs[x], "%^BOLD%^%^CYAN%^Miracously "+
 		"you manage to avoid the blunt of the sonic wave!%^RESET%^");
-		targs[x]->do_damage("torso", dam/2);
+		targs[x]->cause_typed_damage(targs[x], "torso", dam/2, "sonic");
 		continue;
 	}
 	TO->die();

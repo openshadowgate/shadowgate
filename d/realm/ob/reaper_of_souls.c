@@ -163,7 +163,7 @@ int unwield_me()
 
 int special(object targ) 
 {
-	string tlim;
+	string tlim, targname, attname;
 	int dam;
 	if(!objectp(ETO)) return 0;
 	if(!objectp(EETO)) return 0;
@@ -171,25 +171,27 @@ int special(object targ)
 	if(random(100) < 75) return 0;
 	if(souls <= 0) return 0;
 	tlim = targ->return_target_limb();
+	targname = targ->QCN;
+	attname = ETO->QCN;
 	if(souls < 20) 
 	{
 		tell_object(ETO, "%^BOLD%^%^RED%^Screams of "+
 		"immeasurable %^BOLD%^%^BLACK%^ANGER%^BOLD%^"+
 		"%^RED%^ erupt from the blade of your scythe "+
-		"as it sinks into "+targ->QCN+
+		"as it sinks into "+ targname +
 		"%^BOLD%^%^RED%^!%^RESET%^");
 		
 		tell_object(targ, "%^BOLD%^%^RED%^Screams of "+
 		"immeasurable %^BOLD%^%^BLACK%^ANGER%^BOLD%^"+
 		"%^RED%^ are suddenly directed at you from "+
-		"the blade of "+ETOQCN+"%^BOLD%^%^RED%^'s "+
+		"the blade of "+ attname +"%^BOLD%^%^RED%^'s "+
 		"scythe as it sinks into your flesh!%^RESET%^");
 
 		tell_room(EETO, "%^BOLD%^%^RED%^Screams of "+
 		"immeasurable %^BOLD%^%^BLACK%^ANGER%^BOLD%^"+
 		"%^RED%^ suddenly erupt from the blade of "+
-		ETO->QCN+"%^BOLD%^%^BED%^'s scythe as it "+
-		"sinks into "+targ->QCN+"%^BOLD%^%^RED%^'s "+
+		attname +"%^BOLD%^%^BED%^'s scythe as it "+
+		"sinks into "+ targname +"%^BOLD%^%^RED%^'s "+
 		"flesh!%^RESET%^", ({targ, ETO}));
 		
 		return roll_dice(3, 5);
@@ -198,25 +200,25 @@ int special(object targ)
 	{
 		tell_object(ETO, "%^BOLD%^%^BLACK%^A wave of "+
 		"pure energy shoots from the blade of your "+
-		"scythe as it sinks into "+targ->QCN+
+		"scythe as it sinks into "+ targname +
 		"%^BOLD%^%^BLACK%^'s flesh and "+
 		"slams into "+targ->QO+"%^BOLD%^"+
 		"%^BLACK%^!%^RESET%^");
 
 		tell_object(targ, "%^BOLD%^%^BLACK%^A wave of "+
 		"pure energy is released from the blade of "+
-		ETO->QCN+"%^BOLD%^%^BLACK%^'s scythe as it "+
+		attname +"%^BOLD%^%^BLACK%^'s scythe as it "+
 		"sinks into your flesh and slams into you!%^RESET%^");
 
 		tell_room(EETO, "%^BOLD%^%^BLACK%^A wave of "+
 		"pure energy is released from the blade of "+
-		ETO->QCN+"%^BOLD%^%^BLACK%^'s scythe as it "+
-		"sinks into "+targ->QCN+"%^BOLD%^BLACK%^'s "+
+		attname +"%^BOLD%^%^BLACK%^'s scythe as it "+
+		"sinks into "+ targname +"%^BOLD%^BLACK%^'s "+
 		"flesh and slams into "+targ->QO+"!%^RESET%^", 
 		({targ, ETO}));
 		souls = 0;
 		ETO->set_property("magic", 1);
-		targ->do_damage(tlim, roll_dice(20, 5));
+		targ->cause_typed_damage(targ, tlim, roll_dice(20, 5), "negative energy");
 		ETO->set_property("magic", -1);
 		return 0;	
 	}

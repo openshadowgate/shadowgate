@@ -74,7 +74,7 @@ int hit_func(object targ){
 "sharp tips of "+ETO->QP+" fan.%^RESET%^");
       tell_room(EETO,"%^BOLD%^%^WHITE%^Moving with fluid grace, "+ETOQCN+" slashes at "+targ->QCN+" with the "
 "razor-sharp tips of "+ETO->QP+" fan.",({ETO,targ}));
-      targ->do_damage("torso",random(4)+6);
+      targ->cause_typed_damage(targ, "torso", roll_dice(1, 4)+5, "slashing");
       return 1;
    }
 

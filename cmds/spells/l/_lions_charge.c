@@ -107,7 +107,7 @@ void spell_effect(int prof) {
           "into you, knocking you unconscious.\n");
       }
     }
-    damage_targ(target, target->query_target_limb(), damage, "force");
+    damage_targ(target, target->return_target_limb(), damage, "force");
     spell_successful();
     dest_effect();
     return;

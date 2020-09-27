@@ -25,7 +25,7 @@ void contact_poison() {
   } else {
     write("%^RED%^The mist engulfs you and you feel poison course through your veins!%^RESET%^");
     say("%^RED%^"+ob->query_cap_name()+" is engulfed by the mist!%^RESET%^");
-    ob->do_damage("torso", dmg);
+    ob->cause_typed_damage(ob, "torso", dmg, "untyped");
   }
   return 1;
 }
@@ -44,7 +44,7 @@ void wall_darts() {
   } else {
     write("%^RED%^You are hit by "+number+" wall darts!%^RESET%^");
     say("%^RED%^"+ob->query_cap_name()+" is hit by the wall darts!%^RESET%^");
-    ob->do_damage("torso", number);
+    ob->cause_typed_damage(ob, "torso", number, "piercing");
   }
   return 1;
 }

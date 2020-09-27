@@ -54,7 +54,7 @@ void hit_it(object ob){
 	if(!SAVING_D->saving_throw(ob,"rod_staff_wand")){
 	    tell_object(ob,"%^RED%^The Goblyn jumps up onto your chest clawing at your throat!");
 	    tell_room(ETO,"%^RED%^The Goblyn jumps up onto "+ob->query_cap_name()+" clawing away at "+ob->query_possessive()+" throat!",ob);
-	    ob->do_damage(ob->return_target_limb(),roll_dice(2,6));
+        ob->cause_typed_damage(ob, ob->return_target_limb(), roll_dice(2, 6), "slashing");
 	    return 1;
 	}
     }

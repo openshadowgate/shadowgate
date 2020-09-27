@@ -49,14 +49,14 @@ void create(){
 int wear_func(){
 	tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETOQCN+" screams out in pain as they wrap the "+query_short()+" %^BOLD%^%^BLACK%^around their head, driving the thin %^RESET%^spikes of bone %^BOLD%^%^BLACK%^into their own head!%^RESET%^",ETO);
 	tell_object(ETO,"%^RESET%^%^MAGENTA%^You set the skull bone against your brow and wrap the remaining portion of the "+query_short()+" %^RESET%^%^MAGENTA%^around your head, feeling the bones %^RED%^slide %^MAGENTA%^into your skull and %^RESET%^pierce %^MAGENTA%^your mind with shards of %^BOLD%^%^BLACK%^oblivion%^RESET%^%^MAGENTA%^.  As the pain passes, you realize your mind is filled with %^RED%^cunning knowledge %^MAGENTA%^you did not possess before.%^RESET%^");
-	ETO->do_damage("torso",random(10));
+	ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 10) - 1, "piercing");
 	ETO->set_property("evil item",1);
 	return 1;
 }
 int remove_func(){
 	tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETOQCN+" cries out and grips their %^RESET%^%^RED%^bloody head%^BOLD%^%^BLACK%^ as they pull the sharp %^RESET%^bone spikes %^BOLD%^%^BLACK%^of the "+query_short()+" %^BOLD%^%^BLACK%^away from their head.%^RESET%^",ETO);
 	tell_object(ETO,"%^RESET%^%^MAGENTA%^The piercing pain of drawing the "+query_short()+"'s %^RESET%^%^MAGENTA%^spikes from your head, nearly cause you to collapse.  A scream tears from your lips as both the sharp %^RESET%^spikes of bone %^MAGENTA%^and the %^BOLD%^%^BLACK%^secret knowledge %^RESET%^%^MAGENTA%^that had been granted are torn away.%^RESET%^");
-	ETO->do_damage("torso",random(10));
+	ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 10) - 1, "piercing");
 	ETO->set_property("evil item",-1);
 	return 1;
 }
@@ -65,6 +65,6 @@ int strike_func(int damage, object what, object who){
 	tell_room(environment(query_worn()),"%^BOLD%^%^BLACK%^"+ETOQCN+"'s eyes glow with a fathomless %^RESET%^%^MAGENTA%^purple aura %^BOLD%^%^BLACK%^as they move between "+who->QCN+"'s defenses and land a telling blow.%^RESET%^",({ETO,who}));
 	tell_object(ETO,"%^BOLD%^%^BLACK%^Knowledge fills your mind and the world seems to fade away as your focus narrows upon "+who->QCN+".  With a movement both %^RESET%^%^MAGENTA%^graceful %^BOLD%^%^BLACK%^and %^RESET%^cunning%^BOLD%^%^BLACK%^, you dart forward, turn and lay a devastating blow upon "+who->QCN+"'s body!%^RESET%^");
 	tell_object(who,"%^BOLD%^%^BLACK%^"+ETOQCN+"'s eyes glow with a fathomless %^RESET%^%^MAGENTA%^purple aura %^BOLD%^%^BLACK%^as they move between your defenses and land a telling blow.%^RESET%^");
-		who->do_damage("torso",roll_dice(12,2));
+		who->cause_typed_damage(who, "torso", roll_dice(12, 2), "untyped");
 return damage;	}
 }

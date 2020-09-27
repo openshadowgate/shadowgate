@@ -42,7 +42,7 @@ int do_trip() {
   tell_object(TP, "\n%^BOLD%^%^RED%^You scrape yourself on the cliff%^RESET%^\n");
   hurt = (int)TP->query_hp();
   hurt = (hurt > 10) ? 10 : (hurt -1);
-  TP->do_damage("torso", hurt); 
+  TP->cause_typed_damage(TP, "torso", hurt, "slashing");
   return 1; 
 } 
 

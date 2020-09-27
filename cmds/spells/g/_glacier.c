@@ -26,7 +26,7 @@ spell_effect()
         tell_object(target, "%^BOLD%^%^CYAN%^A humongous pl%^CYAN%^a%^BLUE%^t%^WHITE%^f%^CYAN%^o%^BLUE%^r%^CYAN%^m %^BLUE%^o%^WHITE%^f i%^CYAN%^c%^BLUE%^e%^WHITE%^ appears by " + caster->QCN + "'s side and propels towards " + target->QCN + " with force.%^RESET%^", ({ caster, target }));
     }
     define_base_damage(2);
-    damage_targ(target, target->query_target_limb(), sdamage / 2, "cold");
-    damage_targ(target, target->query_target_limb(), sdamage / 2, "bludgeoning");
+    damage_targ(target, target->return_target_limb(), sdamage / 2, "cold");
+    damage_targ(target, target->return_target_limb(), sdamage / 2, "bludgeoning");
     dest_effect();
 }

@@ -80,7 +80,7 @@ spell_effect(int prof) {
             tell_object(target,"%^BOLD%^%^RED%^A dart of energy shoots from "+caster->QCN+"'s hand and "+hardness+"s you!");
             tell_room(place,"%^BOLD%^%^RED%^A dart of energy shoots from "+caster->QCN+"'s hand and "+hardness+"s "+target->QO+"!",({caster, target}) );
         }
-    damage_targ(target, target->query_target_limb(), sdamage,"force");
+    damage_targ(target, target->return_target_limb(), sdamage,"force");
     spell_successful();
     dest_effect();
     return;

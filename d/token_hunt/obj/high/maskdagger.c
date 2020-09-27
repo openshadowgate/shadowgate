@@ -55,7 +55,7 @@ int hit_func(object target)
             tell_room(environment(ETO), "%^BOLD%^%^WHITE%^" + ETO->query_cap_name() + " quickly spins around and slashes deeply into " + target->query_cap_name() + "!%^RESET%^", ({ target, ETO }));
             tell_object(ETO, "%^WHITE%^With amazing quickness and agility, you spin around and slash deeply into  " + target->query_cap_name() + "'s flesh with the dagger!%^RESET%^", target);
             tell_object(target, "%^BOLD%^%^WHITE%^With quickness and agility rarely seen, " + ETO->query_cap_name() + " spins around and slashes deeply into your flesh with the dagger!%^RESET%^");
-            target->do_damage("torso", random(4) + 1);
+            target->cause_typed_damage(target, "torso", roll_dice(1, 4), "slashing");
             break;
         case 2..3:
             if (ETO->query_character_level() < 5) {
@@ -65,7 +65,7 @@ int hit_func(object target)
             tell_object(ETO, "%^BOLD%^%^BLACK%^The leading edge of the dagger %^WHITE%^glows brightly %^BLACK%^as you slice it cleanly through " + target->query_cap_name() + "'s flesh, leaving " + target->query_objective() + " looking completely subdued!%^RESET%^");
             tell_object(target, "%^BOLD%^%^BLACK%^The leading edge of the dagger in " + ETO->query_cap_name() + "'s hand %^WHITE%^glows brightly %^BLACK%^as " + ETO->query_subjective() + " slices it cleanly through your flesh, making you feel strangely subdued!%^RESET%^");
             target->set_paralyzed(15, "%^BOLD%^%^BLACK%^You simply cannot move yet.. strange%^RESET%^");
-            target->do_damage("torso", random(5) + 1);
+            target->cause_typed_damage(target, "torso", roll_dice(1, 5), "slashing");
             break;
         case 4..5:
             if (ETO->query_character_level() < 10) {
@@ -75,7 +75,7 @@ int hit_func(object target)
             tell_room(environment(ETO), "%^RESET%^%^MAGENTA%^" + ETO->query_cap_name() + " dances deftly around " + target->query_cap_name() + ", making use of the shadows for an extra attack!", ({ target, ETO }));
             tell_object(ETO, "%^RESET%^%^MAGENTA%^You dance with agility around " + target->query_cap_name() + " as you suddenly become one with the shadows and make use of them for another attack!%^RESET%^");
             tell_object(target, "%^RESET%^%^MAGENTA%^" + ETO->query_cap_name() + " dances with ease around you as " + ETO->query_subjective() + " makes use of the shadows for another attack!%^RESET%^");
-            target->do_damage("torso", roll_dice(2, 8) + 1);
+            target->cause_typed_damage(target, "torso", roll_dice(2, 8) + 1, "slashing");
             break;
         case 6..7:
             if (ETO->query_character_level() < 20) {

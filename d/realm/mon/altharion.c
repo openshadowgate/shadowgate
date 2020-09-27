@@ -137,7 +137,7 @@ void maim(object targ)
 		"your head as "+mn+"'s blow makes contact - your vision blurs - before "+
 		"%^BOLD%^%^RED%^FAILING%^BOLD%^%^GREEN%^ and you are"+
 		"temporarily stunned from the tremendous pain!%^RESET%^");
-		targ->do_damage("head", roll_dice(10, 12));
+		targ->cause_typed_damage(targ, "head", roll_dice(10, 12), "bludgeoning");
 		targ->set_temporary_blinded(1);
 		targ->set_paralyzed(20, "%^BOLD%^%^GREEN%^You are still recovering from "+
 		mn+"%^BOLD%^%^GREEN%^'s blow to your head!%^RESET%^");
@@ -154,7 +154,7 @@ void maim(object targ)
 	"shoulder!%^RESET%^");
 	targ->set_paralyzed(10, "%^BOLD%^%^GREEN%^You are still recovering from "+
 	mn+"%^BOLD%^%^GREEN%^'s blow to your shoulder!%^RESET%^");
-	targ->do_damage("torso", roll_dice(5, 12));
+	targ->cause_typed_damage(targ, "torso", roll_dice(5, 12), "bludgeoning");
 	return;
 }
 
@@ -194,7 +194,8 @@ void anger(object targ)
 		"%^BOLD%^%^BLACK%^ escapes "+mn+" as his "+
 		"vicious swinging weapons "+
 		"make contact with you!%^RESET%^");
-		vics[x]->do_damage(vics[x]->return_target_limb(), roll_dice(8, 12));
+		vics[x]->cause_typed_damage(vics[x], vics[x]->return_target_limb(), roll_dice(4, 12), "bludgeoning");
+		vics[x]->cause_typed_damage(vics[x], vics[x]->return_target_limb(), roll_dice(4, 12), "slashing");
 		continue;
 	}
 	tell_room(ETO, mn +" R%^BOLD%^%^BLACK%^O"+
@@ -236,7 +237,7 @@ void the_sky_is_falling()
 			"%^BOLD%^%^WHITE%^ stone slams into you, "+
 			"shattering on impact!%^RESET%^");
 			
-			vic->do_damage(vic->return_target_limb(), roll_dice(15, 10));
+			vic->cause_typed_damage(vic, vic->return_target_limb(), roll_dice(15, 10), "bludgeoning");
 		}
 		else
 		{

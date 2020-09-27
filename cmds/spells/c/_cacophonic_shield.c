@@ -61,7 +61,7 @@ void execute_attack(){
       tell_room(environment(caster),"%^YELLOW%^"+baddie+" gets a little too close and is knocked aside by the rippling barrier of sound surrounding "+caster->QCN+"!",({caster,ppl}));
       tell_object(caster,"%^YELLOW%^"+baddie+" gets a little too close to you, and is knocked aside by your defensive barrier of sonic!");
       tell_object(ppl,"%^YELLOW%^You get a little too close to "+caster->QCN+", and the rippling barrier of sound surrounding "+caster->QO+" knocks you aside!");
-      damage_targ(ppl,ppl->query_target_limb(),extra,"sonic");
+      damage_targ(ppl,ppl->return_target_limb(),extra,"sonic");
       counter++;
       if (counter > clevel) {
           dest_effect();

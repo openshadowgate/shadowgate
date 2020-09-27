@@ -84,7 +84,7 @@ void execute_attack(){
          "energy lashes out at "+baddie+"!");
       tell_object(ppl,"%^YELLOW%^A sudden surge of energy from "+
          ""+caster->QCN+" lashes out at you!");
-      damage_targ(ppl,ppl->query_target_limb(),sdamage,"mental");
+      damage_targ(ppl,ppl->return_target_limb(),sdamage,"mental");
       counter++;
       if (counter > clevel) {
           dest_effect();

@@ -25,7 +25,7 @@ void spell_effect(int prof)
     tell_object(caster,"%^BOLD%^%^WHITE%^You will the crushing of "+target->QCN+"'s internals!");
     tell_room(place,"%^BOLD%^%^WHITE%^"+target->QCN+" staggers in pain!", ({caster, target}) );
     tell_object(target,"%^BOLD%^%^WHITE%^Your bones ache painfully as the spell hits you!");
-    damage_targ(target, target->query_target_limb(), sdamage,"untyped");
+    damage_targ(target, target->return_target_limb(), sdamage,"untyped");
     spell_successful();
     TO->dest_effect();
 }

@@ -54,6 +54,6 @@ int strike_func(int damage, object what, object who){
         tell_object(who,"%^BOLD%^%^BLUE%^"+ETOQCN+" rips a %^WHITE%^star %^BLUE%^off "+ETO->QP+""+
         " robe that takes the shape of a %^WHITE%^s%^RESET%^i%^BOLD%^lver"+
          " shuriken %^BLUE%^which they hurl at you!");
-         who->do_damage("torso",random(8)+6);
+        who->cause_typed_damage(who, "torso", roll_dice(1, 8) + 5, "piercing");
    }
 }

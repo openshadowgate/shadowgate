@@ -37,7 +37,7 @@ spell_effect(int prof)
     {
         target->set_tripped(1, "You are staggered byt the painfully thrown snoball!");
     }
-    damage_targ(target, target->query_target_limb(), dam, "bludgeoning");
+    damage_targ(target, target->return_target_limb(), dam, "bludgeoning");
     TO->dest_effect();
 }
 
