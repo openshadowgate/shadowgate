@@ -121,7 +121,6 @@ void execute_attack(){
    if(party) { party_members = (object *)PARTY_OB->query_party_members(party); }
    inven = target_selector();
    inven -= ({caster});
-   inven = filter_array(inven,"is_non_immortal",FILTERS_D);
    inven = filter_array(inven,"party_filter",TO);
 
    if(caster->query_followers())

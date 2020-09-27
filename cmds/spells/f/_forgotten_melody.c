@@ -72,8 +72,6 @@ void spell_effect(int prof)
     spell_kill(target,caster);
 
     inven = target_selector();
-    inven += ({target});
-    inven = distinct_array(inven);
     targets = ({});
 
     for (i=0;i<sizeof(inven);i++)

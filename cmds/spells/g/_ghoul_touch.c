@@ -80,7 +80,6 @@ spell_effect(int prof) {
         tell_room(place,"%^BOLD%^%^CYAN%^"+target->QCN+" recks of rot.");
         //This spell must be evil.
         attackers = target_selector();
-        attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
         foreach(attacker in attackers)
         {
             if(!(do_save(attacker,0)||

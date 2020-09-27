@@ -37,9 +37,6 @@ void spell_effect(int prof)
 
     inven = target_selector();
     inven -= ({caster});
-    inven = filter_array(inven, "is_non_immortal",FILTERS_D);
-
-    inven = distinct_array(inven);
 
     hits = clevel / 5;
     if(hits < 1) hits = 1;

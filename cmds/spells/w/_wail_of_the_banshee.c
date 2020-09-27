@@ -37,7 +37,6 @@ void spell_effect(int prof)
     message("info", "%^BLUE%^You hear a horrible high-pitched scream.", nearbyRoom(place, 2));
 
     foes = target_selector();
-    foes = filter_array(foes, "is_non_immortal", FILTERS_D);
 
     max = clevel;
 

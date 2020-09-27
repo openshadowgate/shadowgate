@@ -69,7 +69,6 @@ spell_effect(int prof){
     tell_room(place, "%^RED%^%^BOLD%^"+YOU+" points "+caster->QP+" finger and utters an incantation, sending the sphere straight at "+HIM+"!",({caster,target}));
 
     inven = all_inventory(environment(caster));
-    inven = filter_array(inven, "is_non_immortal",FILTERS_D);
 
     attackers = target_selector();
     hits = ({});

@@ -40,7 +40,6 @@ void spell_effect()
     tell_room(place, "%^BOLD%^%^BLACK%^" + caster->QCN + " connects " + caster->QP + " hands with a loud clap, sickening waves of power spread with the sound.");
 
     attackers = target_selector();
-    attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
 
     if (!sizeof(attackers)) {
         tell_object(caster,"%^BOLD%^Your spell fails to infect anyone.");

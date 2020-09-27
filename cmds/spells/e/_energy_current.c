@@ -85,7 +85,6 @@ void execute_attack() {
         return;
     }
     foes = target_selector();
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
 
 
     j = sizeof(foes);

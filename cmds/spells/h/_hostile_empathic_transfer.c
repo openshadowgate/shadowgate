@@ -30,7 +30,6 @@ void spell_effect(int prof) {
     mylevel = clevel;
 
     foes = target_selector();
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
 
 
     if (member_array(caster,foes) != -1) foes -= ({ caster });
