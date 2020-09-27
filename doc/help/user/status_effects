@@ -75,7 +75,7 @@ All core skills, attack, damage bonus, saves are reduced by lvl/12+1. The effect
 %^CYAN%^Sleeping%^RESET%^
 An asleep creature functions like under paralysis, but any attack directed at will %^ORANGE%^<wake>%^RESET%^ them and stop the effect. Asleep creatures loose their dexterity bonus to armor class.
 
-%^CAN%^Unconscious%^RESET%^
+%^CYAN%^Unconscious%^RESET%^
 An unconscious creature won't able to act, attack or respond to any action. This status can be caused by various external conditions, including drastic loss of health, head damage or even special magical effects. There is no universal way to regain consciousness.
 
 %^CYAN%^Max health points bonus%^RESET%^
