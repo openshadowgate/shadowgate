@@ -67,7 +67,6 @@ void execute_attack() {
     if(caster->query_followers())
        foes -= caster->query_followers();
 
-    foes = target_filter(foes);
 
     j = sizeof(foes);
     if(time>mylevel){

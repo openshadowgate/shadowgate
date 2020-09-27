@@ -36,7 +36,6 @@ void spell_effect(int prof) {
     object * foes;
 
     foes = target_selector();
-    foes = target_filter(foes);
     foes += ({target});
 
     spell_successful();

@@ -62,7 +62,6 @@ void execute_attack()
     message("info", "%^RESET%^%^BOLD%^%^CYAN%^Howling winds and the pelting of heavy rain threaten to drown out all other sounds!", nearbyRoom(place,2));
 
     foes = target_selector();
-    foes = target_filter(foes);
     foes -= ({ caster });
 
     for(i=0;i<sizeof(foes);i++) {

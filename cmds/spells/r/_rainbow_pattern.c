@@ -40,7 +40,6 @@ void spell_effect(int prof)
 
     foes = target_selector();
     foes = filter_array(foes, "is_non_immortal",FILTERS_D);
-    foes = target_filter(foes);
     bonus = clevel/8+1;
 
     foreach(foe in foes)

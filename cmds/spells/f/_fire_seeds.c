@@ -78,7 +78,6 @@ void spell_effect(int prof) {
         }
     }
 
-    foes = target_filter(foes);
 
     if (interactive(caster))
         tell_object(target,"%^RESET%^%^ORANGE%^"+caster->QCN+" hurls the seeds directly at you!%^RESET%^");

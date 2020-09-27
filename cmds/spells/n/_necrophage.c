@@ -47,7 +47,6 @@ void explode()
     int i;
 
     attackers = target_selector();
-    attackers = target_filter(attackers);
     tell_room(place, "%^BOLD%^%^GREEN%^As acidic slime finally destroys the undead it explodes, spreading acid around.");
 
     for (i = 0; i < sizeof(attackers); i++) {

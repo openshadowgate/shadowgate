@@ -52,7 +52,6 @@ void spell_effect(int prof) {
     if(spell_type == "monk") { MAGIC_D->elemental_opportunist(caster, target); }
     targets = target_selector();
     targets = filter_array(targets, "is_non_immortal",FILTERS_D);
-    targets = target_filter(targets);
 
     targets -= ({target});
     //lets remove caster because that would mean the fire bonces straight back (assume the player is smart enough to move

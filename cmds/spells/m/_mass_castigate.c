@@ -40,7 +40,6 @@ void spell_effect(int prof){
     bonus = -bonus;//negative bonus is bonus to you, positive to them
 
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     foreach(target in attackers)
     {

@@ -52,7 +52,6 @@ void spell_effect(int prof)
     HIM=target->QCN;
     foes=target_selector();
 
-    foes = target_filter(foes);
 
     if (member_array(target,foes) != -1)
         foes -= ({ target});

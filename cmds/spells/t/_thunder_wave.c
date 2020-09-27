@@ -59,7 +59,6 @@ void spell_effect(int prof)
     {
         if(objectp(environment(environment(caster)))) foes += all_living(environment(caster));
     }
-    foes = target_filter(foes);
     if(member_array(caster,foes) != -1) foes -= ({caster});
 
     if(spell_type == "monk" && sizeof(foes)) { MAGIC_D->elemental_opportunist(caster, foes[0]); }

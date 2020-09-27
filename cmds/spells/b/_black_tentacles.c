@@ -57,7 +57,6 @@ void spell_effect(int prof)
     	inven = target_selector();
     	inven -= ({caster});
     	inven = filter_array(inven,"is_non_immortal",FILTERS_D);
-    inven = target_filter(inven);
 
     	if(!sizeof(inven))
 	{
@@ -130,7 +129,6 @@ void do_tentacles()
         return;
     }
     inven = filter_array(inven, "is_non_immortal",FILTERS_D);
-    inven = target_filter(inven);
     if(!sizeof(inven))
 	{
       	dest_effect();

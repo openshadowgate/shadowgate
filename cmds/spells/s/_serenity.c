@@ -24,7 +24,6 @@ void spell_effect(int prof){
     int i,admg;
     attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
 
     tell_object(caster,"%^MAGENTA%^You send a serene song into minds of everyone present.%^RESET%^");
     tell_room(place,"%^MAGENTA%^"+caster->QCN+" sends a serene song into your mind.%^RESET%^",({caster}));

@@ -63,7 +63,6 @@ void execute_attack()
     message("info", "%^RESET%^%^BOLD%^%^GREEN%^The mud seethes and hisses as it almost seems to grope at the living!", nearbyRoom(place,2));
 
     foes = target_selector();
-    foes = target_filter(foes);
     foes -= ({ caster });
 
     for(i=0;i<sizeof(foes);i++) {

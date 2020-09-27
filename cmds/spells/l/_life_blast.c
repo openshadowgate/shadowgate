@@ -33,7 +33,6 @@ void spell_effect(int prof)
     tell_room(place, "%^BOLD%^%^GREEN%^" + caster->QCN + " channels life energy outward.", caster);
 
     foes = target_selector();
-    foes = target_filter(foes);
     foes = shuffle(foes);
 
     max = clevel * 2;

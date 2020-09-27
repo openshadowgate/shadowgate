@@ -31,7 +31,6 @@ void spell_effect(int prof)
     int i,hits;
 
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     if(!sizeof(attackers))
     {

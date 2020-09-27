@@ -131,7 +131,6 @@ void spell_effect(int prof){
     }
 
     foes -= ({caster});
-    foes = target_filter(foes);
 
     if (caster->query_followers())
         foes -= caster->query_followers();

@@ -74,7 +74,6 @@ void spell_effect(int prof)
     inven = target_selector();
     inven += ({target});
     inven = distinct_array(inven);
-    inven = target_filter(inven);
     targets = ({});
 
     for (i=0;i<sizeof(inven);i++)

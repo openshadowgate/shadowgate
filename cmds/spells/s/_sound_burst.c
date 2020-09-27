@@ -71,7 +71,6 @@ void spell_effect(int prof)
     hits -= ({caster});
     hits -= ({ target });
 
-    hits = target_filter(hits);
 
     size = random(clevel);
     for (i = 0;i < sizeof(hits);i++) {

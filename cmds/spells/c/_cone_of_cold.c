@@ -164,7 +164,6 @@ void zapper()
     }
 
     inven = target_selector();
-    inven = target_filter(inven);
 
 
     if(sizeof(inven))

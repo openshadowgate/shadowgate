@@ -40,7 +40,6 @@ void spell_effect(int prof)
     inven = filter_array(inven, "is_non_immortal",FILTERS_D);
 
     inven = distinct_array(inven);
-    inven = target_filter(inven);
 
     hits = clevel / 5;
     if(hits < 1) hits = 1;

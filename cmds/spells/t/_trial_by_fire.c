@@ -28,7 +28,6 @@ void spell_effect(int prof){
     int i,admg;
     attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
     attackers = filter_array(attackers,(:$1->query_diety()!=$2->query_diety():),caster);
 
     tell_room(place,"%^RED%^"+caster->QCN+" raises hand and releases waves of holy fire!%^RESET%^");

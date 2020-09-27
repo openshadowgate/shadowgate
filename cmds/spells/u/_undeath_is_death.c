@@ -36,7 +36,6 @@ void spell_effect(int prof)
     tell_room(place, "%^BOLD%^%^ORANGE%^" + caster->QCN + " channels blinding energy out of the light circle.", caster);
 
     foes = target_selector();
-    foes = target_filter(foes);
     foes = shuffle(foes);
 
     max = clevel * 2;

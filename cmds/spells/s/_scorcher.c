@@ -102,7 +102,6 @@ void spell_effect(int prof) {
     if(pointerp(target->query_attackers())) hits += target->query_attackers();
     hits -= ({caster});
     hits -= ({ target });
-    hits = target_filter(hits);
 
     mod = clevel;
     if(mod > 10) mod = 10;

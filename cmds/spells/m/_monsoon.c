@@ -62,7 +62,6 @@ void do_storm()
     }
 
     foes = target_selector();
-    foes = target_filter(foes);
 
     if(time > clevel || !present(caster,place))
     {

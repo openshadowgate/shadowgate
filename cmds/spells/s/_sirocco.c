@@ -24,7 +24,6 @@ void spell_effect(int prof){
     object *attackers;
     int i,admg;
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     tell_room(place,"%^BLUE%^%^BOLD%^"+caster->QCN+" raises hand and releases waves of hot winds in all directions!%^RESET%^");
     if(!sizeof(attackers)){

@@ -43,7 +43,6 @@ spell_effect(int prof){
        "your hand as you begin to chant.%^RESET%^");
 
     attackers = target_selector();
-    attackers = target_filter(attackers);
     attackers += ({ target });
     attackers = distinct_array(attackers);
 

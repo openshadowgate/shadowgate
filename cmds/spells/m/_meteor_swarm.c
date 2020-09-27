@@ -104,7 +104,6 @@ void spell_effect(int prof)
     foes = target_selector();
     foes -= ({ target });
     foes -= ({ caster });
-    foes = target_filter(foes);
 
     if(!sizeof(foes))
     {

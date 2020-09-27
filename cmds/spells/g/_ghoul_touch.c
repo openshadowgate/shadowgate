@@ -81,7 +81,6 @@ spell_effect(int prof) {
         //This spell must be evil.
         attackers = target_selector();
         attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
-        attackers = target_filter(attackers);
         foreach(attacker in attackers)
         {
             if(!(do_save(attacker,0)||

@@ -30,7 +30,6 @@ void spell_effect(int prof){
     string mygod = caster->query_diety();
     attackers = target_selector();
     attackers = filter_array(attackers, "is_non_immortal",FILTERS_D);
-    attackers = target_filter(attackers);
 
     tell_room(place,"%^RED%^"+caster->QCN+"'s wrathful screams reach out to everyone in waves of power!%^RESET%^");
     if(!sizeof(attackers)){

@@ -2980,6 +2980,8 @@ object *target_selector()
     int aff;
     int slevel = query_spell_level(spell_type);
 
+    everyone = target_filter(everyone);
+
     shuffle(foes);
     shuffle(everyone);
 

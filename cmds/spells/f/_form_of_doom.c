@@ -123,7 +123,6 @@ void execute_attack(){
    inven -= ({caster});
    inven = filter_array(inven,"is_non_immortal",FILTERS_D);
    inven = filter_array(inven,"party_filter",TO);
-   inven = target_filter(inven);
 
    if(caster->query_followers())
       inven -= caster->query_followers();
