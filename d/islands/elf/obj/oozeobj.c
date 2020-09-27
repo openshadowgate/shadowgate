@@ -69,7 +69,7 @@ void damage_stuff(object target)
             ""+stuff[i]->query_short()+", damaging it!");
         tell_room(environment(target),"%^BOLD%^The ooze melts "
             "into "+target->QCN+"'s "+stuff[i]->query_short()+"!",target);
-        stuff[i]->repairMe(roll_dice(1,6) * -1);
+        stuff[i]->set_overallStatus(query_overallStatus()-1);
     }
 }
 void hurt(object targ){
