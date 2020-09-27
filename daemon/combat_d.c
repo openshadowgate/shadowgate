@@ -2139,7 +2139,7 @@ int ok_to_kill(object who, object targ)
     if (who == targ) {
         return 1;
     }
-    //if(ETO->query_property("no kill") || ETO->query_property("no attack")) return 0;
+
     if (interactive(who) && interactive(targ)) {
         if (newbiep(who) && (!avatarp(targ))) {
             tell_object(who, "%^YELLOW%^You are currently under " +
@@ -2153,20 +2153,6 @@ int ok_to_kill(object who, object targ)
                         "cannot be attacked by you.%^RESET%^");
             return 0;
         }
-        /*pk_age_limit = AVERAGE_AGE_D->return_age_needed((int)targ->query_character_level());
-           if((int)targ->query_age() < pk_age_limit)
-           {
-            tell_object(who, targ->QCN+"%^YELLOW%^ is currently "+
-            "time barred from being involved in pkill interactions.%^RESET%^");
-            return 0;
-           }
-           pk_age_limit = AVERAGE_AGE_D->return_age_needed((int)who->query_character_level());
-           if((int)who->query_age() < pk_age_limit)
-           {
-            tell_object(who, "%^YELLOW%^You are currently time "+
-            "barred from being involved in pkill interactions.%^RESET%^");
-            return 0;
-           } */
         if (targ->query("no pk")) {
             tell_object(who, targ->QCN + "%^YELLOW%^ is currently protected " +
                         "from pkill interactions.%^RESET%^");
@@ -2177,9 +2163,8 @@ int ok_to_kill(object who, object targ)
                         "interactions. See help flag in order to turn this off.%^RESET%^");
             return 0;
         }
-        if (in_edit(targ) || in_input(targ) && interactive(who)) {
-            tell_object(who, targ->QCN + "%^RED%^ is currently in " +
-                        "edit and cannot be attacked.%^RESET%^");
+        if (in_edit(targ) || in_input(targ) && userp(who)) {
+            tell_object(who, "%^BOLD%^%^RED%^"targ->QCN + " is currently daydreaming and cannot be attacked.%^RESET%^");
             return 0;
         }
         pkob = new(PK_OB);

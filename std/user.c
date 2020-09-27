@@ -2266,10 +2266,10 @@ string query_short() {
     descr = descr + ")";
   }
   if(query_property("inactive")) {
-    descr = descr + " %^BOLD%^%^RED%^*inactive*%^RESET%^";
+    descr = descr + " %^BOLD%^%^RED%^*slumbering*%^RESET%^";
   }
   if (in_edit() || in_input() && !query_property("inactive")) {
-      descr = descr + " %^BOLD%^%^CYAN%^*in edit*%^RESET%^";
+      descr = descr + " %^BOLD%^%^CYAN%^*daydreaming*%^RESET%^";
   }
   if (query_property("working")) {
       descr = descr + " %^CYAN%^(" + query_property("working") + ")%^RESET%^";

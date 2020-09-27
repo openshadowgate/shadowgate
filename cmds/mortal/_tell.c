@@ -174,8 +174,7 @@ int cmd_tell(string str)
               " is idle, and may not have been paying attention.");
     }
     if (in_edit(ob) || in_input(ob)) {
-        message("info", capitalize(who) + " is in edit and may " +
-                "not be in a position to respond.", this_player());
+        message("info", capitalize(who) + " is daydreaming and may not be in a position to respond.", this_player());
     }
     return 1;
 }
