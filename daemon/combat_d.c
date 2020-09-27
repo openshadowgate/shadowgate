@@ -1747,25 +1747,23 @@ void iterate_combat(object who)
     }
 
     if (combat_vars["unconscious"]) {
+        combat_vars["unconscious"]--;;
+        vars = 1;
+
         if (sizeof(who->query_attackers()) > 0) {
             combat_vars["unconscious"] = 0;
             combat_counters["unconscious"] = 0;
             message("combat", "%^BOLD%^%^BLUE%^You have regained consciousness.", who);
             if (!who->query_invis() && objectp(environment(who))) {
-                tell_room(environment(who), "%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
+                tell_room(environment(who), "%^BLUE%^%^BOLD%^You notice " + who->QCN + " regained consciousness.%^RESET%^", who);
+            }
+        } else if (!combat_vars["unconscious"]) {
+            message("combat", "%^BOLD%^%^BLUE%^You have regained consciousness.", who);
+            if (!who->query_invis() && objectp(EWHO)) {
+                tell_room(EWHO, "%^BLUE%^%^BOLD%^You notice " + who->QCN + " regained consciousness.%^RESET%^", who);
             }
         }
-        if (combat_counters["unconscious"] > (25 - (int)who->query_stats("constitution"))) {
-            combat_vars["unconscious"]--;;
-            vars = 1;
-            combat_counters["unconscious"] = 0;
-            if (!combat_vars["unconscious"]) {
-                message("combat", "%^BOLD%^%^BLUE%^You have regained consciousness.", who);
-                if (!who->query_invis() && objectp(EWHO)) {
-                    tell_room(EWHO, "%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
-                }
-            }
-        }
+
         combat_counters["unconscious"]++;
         counters = 1;
     }
@@ -1774,11 +1772,18 @@ void iterate_combat(object who)
         combat_vars["asleep"]--;
         vars = 1;
         combat_counters["asleep"] = 0;
-        if (!combat_vars["asleep"]) {
+
+        if (sizeof(who->query_attackers()) > 0) {
+            combat_vars["asleep"] = 0;
             if (!who->query_invis() && objectp(EWHO)) {
-                tell_room(EWHO, "%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
+                tell_room(EWHO, "%^BOLD%^%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
             }
-            message("combat", "%^BOLD%^%^BLUE%^You have awakened.", who);
+            message("combat", "\n%^BOLD%^%^GREEN%^You have awakened to the sounds of battle.\n", who);
+        } else if (!combat_vars["asleep"]) {
+            if (!who->query_invis() && objectp(EWHO)) {
+                tell_room(EWHO, "%^BOLD%^%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
+            }
+            message("combat", "%^BOLD%^%^GREEN%^You have awakened.", who);
         }
         combat_counters["asleep"]++;
         counters = 1;
@@ -1789,9 +1794,9 @@ void iterate_combat(object who)
             who->heal(random(2) + 1);
             combat_counters["healing"] = 0;
             if (!who->query_deaths_door()) {
-                message("combat", "%^BOLD%^%^BLUE%^You have healed sufficiently to regain consciousness.", who);
+                message("combat", "%^BOLD%^%^GREEN%^You have healed sufficiently to regain consciousness.", who);
                 if (!who->query_invis() && objectp(EWHO)) {
-                    tell_room(EWHO, "%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
+                    tell_room(EWHO, "%^BOLD%^%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
                 }
             }
         }
