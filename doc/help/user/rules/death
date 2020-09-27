@@ -4,7 +4,7 @@ When you die, you have a chance to choose a church to return to. To rejoin the l
 
 Returning to life at churches comes at a price:
 
-%^CYAN%^1.%^RESET%^ Loosing some experience. If you die, you loose some experience, a portion of experience amount needed to gain the next level. How much is lost exactly depends on your level.
+%^CYAN%^1.%^RESET%^ Loosing some experience. If you are ressurected at a church you loose a portion of experience amount needed to gain the next level. How much is lost exactly increases with levels you gain.
 %^CYAN%^2.%^RESET%^ Deterioration of enchanted items. In other words, all magical equipment will become severely damaged.
 
 %^CYAN%^%^ULINE%^Item deterioration%^RESET%^
