@@ -123,10 +123,10 @@ varargs int adjust_cost(int cost, int sell){
    influ = TP->query_skill("influence");
    if (influ > 60) influ = 60;
    if(!sell){
-      cost += (cost / 5 - influ / 5);
+      cost = cost + cost *(70.0/influ);
    }
    else {
-      cost -= (cost / 5 - influ / 5);
+      cost = cost *(influ/70.0);
    }
    
     /*
