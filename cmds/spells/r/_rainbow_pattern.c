@@ -39,8 +39,6 @@ void spell_effect(int prof)
     tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+" waves "+caster->QP+" hand and sends hypnotic pattern to dance in front of "+caster->QP+"enemies",caster);
 
     foes = target_selector();
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
-    foes = target_filter(foes);
     bonus = clevel/8+1;
 
     foreach(foe in foes)

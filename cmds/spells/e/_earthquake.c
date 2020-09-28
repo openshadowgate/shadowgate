@@ -87,7 +87,6 @@ void execute_attack()
     }
 
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     if(sizeof(attackers))
     {

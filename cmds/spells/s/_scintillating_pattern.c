@@ -23,7 +23,6 @@ void spell_effect(int prof)
     object* attackers;
     int i, admg;
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     tell_room(place, "%^MAGENTA%^%^BOLD%^Spirals of scintillating patterns appear in the air!%^RESET%^");
     if (!sizeof(attackers)) {

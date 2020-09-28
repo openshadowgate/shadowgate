@@ -65,7 +65,6 @@ void execute_attack(int prof)
     }
 
     foes = target_selector();
-    foes = target_filter(foes);
     foes -= ({ caster });
 
     if (time > clevel * 2 || !present(caster,place))

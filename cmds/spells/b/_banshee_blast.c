@@ -36,7 +36,6 @@ void spell_effect(int prof)
     message("info","%^BLUE%^You hear a horrible high-pitched scream.",nearbyRoom(place,2));
 
     foes = target_selector();
-    foes = target_filter(foes);
 
     if (sizeof(foes)) {
         foreach(foe in foes)

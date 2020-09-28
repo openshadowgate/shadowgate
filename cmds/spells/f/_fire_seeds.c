@@ -6,19 +6,20 @@
 #include <magic.h>
 #include <rooms.h>
 #include <daemons.h>
-#define WILD_TERRAINS ({"heavy forest","light forest","jungle","dense jungle","scrub lands","grasslands","savannah","desert","desert rocks","rocky","hills","branches","old mounts","new mounts","swamp","marsh","snow","meadows","beach","shore","nat cave","built cave","built tunnel","nat tunnel","cemetery","garden"})
+#define WILD_TERRAINS ({ "heavy forest", "light forest", "jungle", "dense jungle", "scrub lands", "grasslands", "savannah", "desert", "desert rocks", "rocky", "hills", "branches", "old mounts", "new mounts", "swamp", "marsh", "snow", "meadows", "beach", "shore", "nat cave", "built cave", "built tunnel", "nat tunnel", "cemetery", "garden" })
 
 inherit SPELL;
 
-int effect,x,i,y;
-object victim,tempob,*foes,*oldfoes,*allies;
+int effect, x, i, y;
+object victim, tempob, * foes, * oldfoes, * allies;
 void damage();
 
-void create() {
+void create()
+{
     ::create();
     set_spell_name("fire seeds");
-    set_spell_level(([ "druid" : 6, "oracle" : 6,]));
-    set_domains(({"fire", "sun"}));
+    set_spell_level(([ "druid" : 6, "oracle" : 6, ]));
+    set_domains(({ "fire", "sun" }));
     set_mystery("flame");
     set_spell_sphere("fire");
     set_syntax("cast CLASS fire seeds on TARGET");
@@ -36,7 +37,7 @@ void create() {
     set_somatic_comp();
     set_target_required(1);
     splash_spell(1);
-    set_immunities( ({"fire"}) );
+    set_immunities(({ "fire" }));
     set_save("reflex");
 }
 
@@ -50,88 +51,104 @@ void create() {
 /*     return 1; */
 /* } */
 
-string query_cast_string() {
-    return "%^RESET%^%^RED%^"+caster->QCN+" kneels, scooping a handful of seeds "
-        "from the ground as "+caster->QS+" chants, "+caster->QP+" eyes on "+target->QCN+".\%^RESET%^";
+string query_cast_string()
+{
+    return "%^RESET%^%^RED%^" + caster->QCN + " kneels, scooping a handful of seeds "
+        "from the ground as " + caster->QS + " chants, " + caster->QP + " eyes on " + target->QCN + ".\%^RESET%^";
 }
 
-void spell_effect(int prof) {
-
-    if(!present(target,caster->is_room()?caster:environment(caster))){
-        tell_object(caster,"%^BOLD%^Your target is not in this area.\n");
+void spell_effect(int prof)
+{
+    if (!present(target, caster->is_room()?caster:environment(caster))) {
+        tell_object(caster, "%^BOLD%^Your target is not in this area.\n");
         dest_effect();
         return;
     }
 
     spell_successful();
-    spell_kill(target,caster);
+    spell_kill(target, caster);
     if (!interactive(caster) && !caster->query_invis()) {
         foes = ({});
     }
-    if(!living(caster)) {
+    if (!living(caster)) {
         foes = target_selector();
     }
-    if(!objectp(target)) return;
-    if(sizeof(foes) > 0){
-        if (member_array(target,foes) != -1){
-            foes -= ({ target});
+    if (!objectp(target)) {
+        return;
+    }
+    if (sizeof(foes) > 0) {
+        if (member_array(target, foes) != -1) {
+            foes -= ({ target });
         }
     }
 
+
     foes = target_filter(foes);
 
-    if (interactive(caster))
-        tell_object(target,"%^RESET%^%^ORANGE%^"+caster->QCN+" hurls the seeds directly at you!%^RESET%^");
-    if(living(caster)) {
-        tell_object(caster,"%^RESET%^%^ORANGE%^You hurl the seeds at "+target->QCN+"!%^RESET%^");
+    if (interactive(caster)) {
+        tell_object(target, "%^RESET%^%^ORANGE%^" + caster->QCN + " hurls the seeds directly at you!%^RESET%^");
     }
-    tell_room(place, "%^BOLD%^%^RED%^"+caster->QCN+" hurls the seeds "
-              "at "+target->QCN+", and they explode in a riot of flames!%^RESET%^",({ caster, target}) );
-    tell_object(target,"%^BOLD%^%^RED%^The seeds explode, engulfing you in flames!%^RESET%^");
-    tell_object(caster,"%^BOLD%^%^RED%^The seeds explode, engulfing "
-                ""+target->QCN+" in sizzling flames!%^RESET%^");
-    oldfoes=foes;
+    if (living(caster)) {
+        tell_object(caster, "%^RESET%^%^ORANGE%^You hurl the seeds at " + target->QCN + "!%^RESET%^");
+    }
+    tell_room(place, "%^BOLD%^%^RED%^" + caster->QCN + " hurls the seeds "
+              "at " + target->QCN + ", and they explode in a riot of flames!%^RESET%^", ({ caster, target }));
+    tell_object(target, "%^BOLD%^%^RED%^The seeds explode, engulfing you in flames!%^RESET%^");
+    tell_object(caster, "%^BOLD%^%^RED%^The seeds explode, engulfing "
+                "" + target->QCN + " in sizzling flames!%^RESET%^");
+    oldfoes = foes;
     foes = ({});
     allies = ({});
-    y=2+to_int((clevel-5)/2);
-    if (sizeof(oldfoes) < y)
+    y = 2 + to_int((clevel - 5) / 2);
+    if (sizeof(oldfoes) < y) {
         y = sizeof(oldfoes);
-    for (x=0;x < y;x++) {
-        tempob=oldfoes[random(sizeof(oldfoes))];
-        if(do_save(tempob))
-            allies += ({ tempob});
-        else
-            foes += ({ tempob});
-        oldfoes -= ({ tempob});
     }
-    y=clevel;
-	if(do_save(target))
-        damage_targ(target, "torso", to_int(sdamage / 2),"fire" );
-    else
-        damage_targ(target, "torso", sdamage,"fire" );
-    for (x=0;x < sizeof(foes);x++) {
-        if (!objectp(foes[x])) continue;
-        tell_room(environment(foes[x]),"%^BOLD%^%^WHITE%^The fiery blast from the seeds slams into "+foes[x]->QCN+"!",foes[x]);
-        tell_object(foes[x],"%^BOLD%^%^WHITE%^The fiery blast from the seeds slams into you!");
-        if(do_save(foes[x]))
-            damage_targ(foes[x], "torso", to_int(sdamage / 2),"fire" );
-        else
-            damage_targ(foes[x], "torso", sdamage,"fire" );
+    for (x = 0; x < y; x++) {
+        tempob = oldfoes[random(sizeof(oldfoes))];
+        if (do_save(tempob)) {
+            allies += ({ tempob });
+        }else {
+            foes += ({ tempob });
+        }
+        oldfoes -= ({ tempob });
     }
-    for (x=0;x < sizeof(allies);x++) {
-        if (!objectp(allies[x])) continue;
-        tell_room(environment(allies[x]),"%^RESET%^%^ORANGE%^"+allies[x]->QCN+" is singed by the blast from the seeds!%^RESET%^",allies[x]);
-        tell_object(allies[x],"%^RESET%^%^ORANGE%^You are singed by the blast from the seeds!%^RESET%^");
-        if(do_save(allies[x]))
-            damage_targ(allies[x], "torso", to_int(sdamage / 4),"fire" );
-        else
-            damage_targ(allies[x], "torso", sdamage/2,"fire" );
+    y = clevel;
+    if (do_save(target)) {
+        damage_targ(target, "torso", to_int(sdamage / 2), "fire");
+    }else {
+        damage_targ(target, "torso", sdamage, "fire");
+    }
+    for (x = 0; x < sizeof(foes); x++) {
+        if (!objectp(foes[x])) {
+            continue;
+        }
+        tell_room(environment(foes[x]), "%^BOLD%^%^WHITE%^The fiery blast from the seeds slams into " + foes[x]->QCN + "!", foes[x]);
+        tell_object(foes[x], "%^BOLD%^%^WHITE%^The fiery blast from the seeds slams into you!");
+        if (do_save(foes[x])) {
+            damage_targ(foes[x], "torso", to_int(sdamage / 2), "fire");
+        }else {
+            damage_targ(foes[x], "torso", sdamage, "fire");
+        }
+    }
+    for (x = 0; x < sizeof(allies); x++) {
+        if (!objectp(allies[x])) {
+            continue;
+        }
+        tell_room(environment(allies[x]), "%^RESET%^%^ORANGE%^" + allies[x]->QCN + " is singed by the blast from the seeds!%^RESET%^", allies[x]);
+        tell_object(allies[x], "%^RESET%^%^ORANGE%^You are singed by the blast from the seeds!%^RESET%^");
+        if (do_save(allies[x])) {
+            damage_targ(allies[x], "torso", to_int(sdamage / 4), "fire");
+        }else {
+            damage_targ(allies[x], "torso", sdamage / 2, "fire");
+        }
     }
     dest_effect();
 }
 
-void dest_effect() {
+void dest_effect()
+{
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
-
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }

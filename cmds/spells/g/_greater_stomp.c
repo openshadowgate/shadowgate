@@ -75,8 +75,6 @@ void execute_attack(){
    }
    inven = target_selector();
    if(sizeof(inven) > 0){
-      foes = filter_array(inven,"is_non_immortal",FILTERS_D);
-      foes = target_filter(foes);
    }
 //   foes = caster->query_attackers();
    if(sizeof(foes)){

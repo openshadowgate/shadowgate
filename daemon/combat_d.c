@@ -1747,38 +1747,51 @@ void iterate_combat(object who)
     }
 
     if (combat_vars["unconscious"]) {
+        if (combat_vars["unconscious"] > 180) {
+            combat_vars["unconscious"] = 180;
+        }
+
+        combat_vars["unconscious"]--;;
+        vars = 1;
+
         if (sizeof(who->query_attackers()) > 0) {
             combat_vars["unconscious"] = 0;
             combat_counters["unconscious"] = 0;
             message("combat", "%^BOLD%^%^BLUE%^You have regained consciousness.", who);
             if (!who->query_invis() && objectp(environment(who))) {
-                tell_room(environment(who), "%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
+                tell_room(environment(who), "%^BLUE%^%^BOLD%^You notice " + who->QCN + " regained consciousness.%^RESET%^", who);
+            }
+        } else if (!combat_vars["unconscious"]) {
+            message("combat", "%^BOLD%^%^BLUE%^You have regained consciousness.", who);
+            if (!who->query_invis() && objectp(EWHO)) {
+                tell_room(EWHO, "%^BLUE%^%^BOLD%^You notice " + who->QCN + " regained consciousness.%^RESET%^", who);
             }
         }
-        if (combat_counters["unconscious"] > (25 - (int)who->query_stats("constitution"))) {
-            combat_vars["unconscious"]--;;
-            vars = 1;
-            combat_counters["unconscious"] = 0;
-            if (!combat_vars["unconscious"]) {
-                message("combat", "%^BOLD%^%^BLUE%^You have regained consciousness.", who);
-                if (!who->query_invis() && objectp(EWHO)) {
-                    tell_room(EWHO, "%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
-                }
-            }
-        }
+
         combat_counters["unconscious"]++;
         counters = 1;
     }
 
     if (combat_vars["asleep"]) {
+        if (combat_vars["asleep"] > 180) {
+            combat_vars["asleep"] = 180;
+        }
+
         combat_vars["asleep"]--;
         vars = 1;
         combat_counters["asleep"] = 0;
-        if (!combat_vars["asleep"]) {
+
+        if (sizeof(who->query_attackers()) > 0) {
+            combat_vars["asleep"] = 0;
             if (!who->query_invis() && objectp(EWHO)) {
-                tell_room(EWHO, "%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
+                tell_room(EWHO, "%^BOLD%^%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
             }
-            message("combat", "%^BOLD%^%^BLUE%^You have awakened.", who);
+            message("combat", "\n%^BOLD%^%^GREEN%^You have awakened to the sounds of battle.\n", who);
+        } else if (!combat_vars["asleep"]) {
+            if (!who->query_invis() && objectp(EWHO)) {
+                tell_room(EWHO, "%^BOLD%^%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
+            }
+            message("combat", "%^BOLD%^%^GREEN%^You have awakened.", who);
         }
         combat_counters["asleep"]++;
         counters = 1;
@@ -1789,9 +1802,9 @@ void iterate_combat(object who)
             who->heal(random(2) + 1);
             combat_counters["healing"] = 0;
             if (!who->query_deaths_door()) {
-                message("combat", "%^BOLD%^%^BLUE%^You have healed sufficiently to regain consciousness.", who);
+                message("combat", "%^BOLD%^%^GREEN%^You have healed sufficiently to regain consciousness.", who);
                 if (!who->query_invis() && objectp(EWHO)) {
-                    tell_room(EWHO, "%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
+                    tell_room(EWHO, "%^BOLD%^%^GREEN%^You notice " + who->QCN + " waking up.%^RESET%^", who);
                 }
             }
         }
@@ -2126,7 +2139,7 @@ int ok_to_kill(object who, object targ)
     if (who == targ) {
         return 1;
     }
-    //if(ETO->query_property("no kill") || ETO->query_property("no attack")) return 0;
+
     if (interactive(who) && interactive(targ)) {
         if (newbiep(who) && (!avatarp(targ))) {
             tell_object(who, "%^YELLOW%^You are currently under " +
@@ -2140,20 +2153,6 @@ int ok_to_kill(object who, object targ)
                         "cannot be attacked by you.%^RESET%^");
             return 0;
         }
-        /*pk_age_limit = AVERAGE_AGE_D->return_age_needed((int)targ->query_character_level());
-           if((int)targ->query_age() < pk_age_limit)
-           {
-            tell_object(who, targ->QCN+"%^YELLOW%^ is currently "+
-            "time barred from being involved in pkill interactions.%^RESET%^");
-            return 0;
-           }
-           pk_age_limit = AVERAGE_AGE_D->return_age_needed((int)who->query_character_level());
-           if((int)who->query_age() < pk_age_limit)
-           {
-            tell_object(who, "%^YELLOW%^You are currently time "+
-            "barred from being involved in pkill interactions.%^RESET%^");
-            return 0;
-           } */
         if (targ->query("no pk")) {
             tell_object(who, targ->QCN + "%^YELLOW%^ is currently protected " +
                         "from pkill interactions.%^RESET%^");
@@ -2164,9 +2163,8 @@ int ok_to_kill(object who, object targ)
                         "interactions. See help flag in order to turn this off.%^RESET%^");
             return 0;
         }
-        if (in_edit(targ) || in_input(targ) && interactive(who)) {
-            tell_object(who, targ->QCN + "%^RED%^ is currently in " +
-                        "edit and cannot be attacked.%^RESET%^");
+        if (in_edit(targ) || in_input(targ) && userp(who)) {
+            tell_object(who, "%^BOLD%^%^RED%^" + targ->QCN + " is currently daydreaming and cannot be attacked.%^RESET%^");
             return 0;
         }
         pkob = new(PK_OB);

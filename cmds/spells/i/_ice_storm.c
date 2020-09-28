@@ -75,9 +75,7 @@ void execute_attack() {
         return;
     }
     foes = target_selector();
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
 
-    foes = target_filter(foes);
 
     j = sizeof(foes);
     if (time > clevel * 3) {

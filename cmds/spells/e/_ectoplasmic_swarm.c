@@ -55,7 +55,6 @@ void execute_attack() {
     }
     mylevel = clevel;
     foes = target_selector();
-    foes = filter_array(foes, "is_non_immortal",FILTERS_D);
     ownparty = ({});
     if(userp(caster)){
        if (caster->query_party()){
@@ -67,7 +66,6 @@ void execute_attack() {
     if(caster->query_followers())
        foes -= caster->query_followers();
 
-    foes = target_filter(foes);
 
     j = sizeof(foes);
     if(time>mylevel){

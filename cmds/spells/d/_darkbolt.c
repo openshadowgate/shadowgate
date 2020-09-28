@@ -51,7 +51,6 @@ void spell_effect(int prof)
     int dam;
     
     targets = target_selector();
-    targets = target_filter(targets);
     
     if(member_array(target, target) < 0)
         targets += ({ target });

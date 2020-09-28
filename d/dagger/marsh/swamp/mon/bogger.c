@@ -10,7 +10,7 @@ create()
     ::create();
     set_name("bogger");
     set("id", ({ "bogger", "bog thing", "thing" }));
-    set("short", "%^RESET%^%^RED%^Bog thing");
+    set("short", "%^RESET%^%^RED%^Bog thing%^RESET%^");
     set("aggressive", random(8) + 5);
     set_level(my_hd);
     set_long("%^GREEN%^This creature appears to be composed of stony skin "

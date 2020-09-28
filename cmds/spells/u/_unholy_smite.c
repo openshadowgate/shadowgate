@@ -29,7 +29,6 @@ void spell_effect(int prof){
     object *attackers;
     int i,admg;
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" raises hand and dark flames burst out of "+caster->QO+" in all directions!%^RESET%^");
     if(!sizeof(attackers))

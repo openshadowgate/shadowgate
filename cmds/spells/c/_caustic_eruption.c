@@ -37,7 +37,6 @@ void spell_effect(int prof)
 {
     object peep;
     victims = target_selector();
-    victims = target_filter(victims);
 
     if (!sizeof(victims)) {
         tell_object(caster,"%^BOLD%^%^GREEN%^Your spell fails to connect to anyone.");

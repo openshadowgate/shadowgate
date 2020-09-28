@@ -12,7 +12,8 @@ void create(){
        "This is a sinister knife with a blackened blade."+
        "  It has a black hilt that has several dark "+
        "stones embeded into it.  The whole weapon "+
-       "pulses with negative energy."
+       "pulses with negative energy.  "+
+       "The iron is cold to the touch."
     );
     set_lore("This knife fits the murder weapon"+
     " description of a royal couple in a long "+
@@ -23,6 +24,7 @@ void create(){
     set_property("lore difficulty",35);
     set_value(1000);
     set_property("enchantment",3+random(3));
+    set_damage_type("cold iron");
     set_wield((:TO,"extra_wield":));
     set_unwield((:TO,"removeme":));
     set_hit((:TO,"extra_hit":));

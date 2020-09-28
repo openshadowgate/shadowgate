@@ -31,7 +31,6 @@ void spell_effect(int prof)
     object *attackers;
     int i,dmg;
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" utters a quick invocation and the ground under "+caster->QP+" enemies converts into hot layer of tar!%^RESET%^");
     if(!sizeof(attackers))

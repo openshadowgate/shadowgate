@@ -63,8 +63,6 @@ void test() {
 // let's see if we can make it more useful on attackers!
     temphere = target_selector();
     if(member_array(caster,temphere) != -1) temphere -= ({ caster });
-    temphere = filter_array(temphere, "is_non_immortal",FILTERS_D);
-    temphere = target_filter(temphere);
 
     if(sizeof(affected)) { // firstly, for any that were affected last round, if they've left, remove the effect
       for(i=0;i<sizeof(affected);i++) {

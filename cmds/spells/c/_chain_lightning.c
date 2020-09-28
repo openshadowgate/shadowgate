@@ -92,7 +92,6 @@ void spell_effect(int prof)
     inven -= ({ target }); // target already gets hit with initial damage!
     inven -= ({ caster }); // caster chooses targets within 30ft, so cannot be hit
 
-    inven = target_filter(inven);
 
     switch(element)
     {

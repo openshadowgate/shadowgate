@@ -89,13 +89,10 @@ void spell_effect(int prof) {
     inven = all_inventory(environment(caster));
 
     attackers = target_selector();
-    hits = ({});
-    if(pointerp(caster->query_attackers())) hits += caster->query_attackers();
-    if(pointerp(target->query_attackers())) hits += target->query_attackers();
+    hits = attackers;
     hits -= ({caster});
     hits -= ({ target });
 
-    hits = target_filter(hits);
 
     size = random(mylevel);
     for (i = 0;i < sizeof(hits);i++)

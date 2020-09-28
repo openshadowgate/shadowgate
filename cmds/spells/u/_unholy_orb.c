@@ -41,7 +41,6 @@ void spell_effect(int prof){
     object *party;
 
     foes = target_selector();
-   foes = target_filter(foes);
 
    if(caster->query_party()){
       party =  PARTY_D->query_party_members(caster->query_party());

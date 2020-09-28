@@ -33,7 +33,6 @@ void spell_effect(int prof)
     int i,j;
 
     inven = target_selector();
-    inven = target_filter(inven);
 
     inven -= ({caster});
 

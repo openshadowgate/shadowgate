@@ -27,7 +27,6 @@ void spell_effect(int prof){
     object *attackers;
     int i,admg, align;
     attackers = target_selector();
-    attackers = target_filter(attackers);
     attackers -= caster->query_followers();
 
     tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" raises hand and releases waves of unholy power!%^RESET%^");

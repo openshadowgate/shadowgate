@@ -70,7 +70,6 @@ void execute_attack()
     }
 
     foes = target_selector();
-    foes = target_filter(foes);
 
     if (time > clevel * 2 || !present(caster,place))
     {

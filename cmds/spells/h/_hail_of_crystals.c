@@ -57,7 +57,6 @@ void execute_attack()
     foes = target_selector();
     foes -= ({caster});
     if(caster->query_followers()) { foes -= caster->query_followers(); }
-    foes = target_filter(foes);
 
     if(time > clevel)
     {

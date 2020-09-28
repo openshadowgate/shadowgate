@@ -36,7 +36,6 @@ void spell_effect()
     object * attackers;
 
     attackers = target_selector();
-    attackers = target_filter(attackers);
 
     tell_room(place,"%^MAGENTA%^You watch as tendrils of darkness hit everyone attacking "+caster->QCN+".",({caster}));
     tell_object(caster,"%^MAGENTA%^Tendrils of darkness caress your enemies.");

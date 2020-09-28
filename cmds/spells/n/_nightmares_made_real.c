@@ -60,7 +60,6 @@ void execute_attack(){
    }
 //   attackers = caster->query_attackers();
    attackers = target_selector();
-   attackers = target_filter(attackers);
 
 
 // let's see about this just going regardless of present attackers? else can't be pre-cast.

@@ -40,7 +40,6 @@ void spell_effect(int prof)
     object *party;
 
     foes = target_selector();
-    foes = target_filter(foes);
     party = ob_party(caster);
 
     tell_room(place,"%^BOLD%^A sphere of power radiates out from "+

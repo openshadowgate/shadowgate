@@ -67,7 +67,6 @@ void spell_effect(int prof)
    tell_object(caster,"%^BOLD%^%^BLUE%^You point your finger at "+target->QCN+", unleashing the gale.%^RESET%^");
 
     attackers = target_selector();
-    attackers = target_filter(attackers);
     attackers += ({ target });
 
     attackers = distinct_array(attackers);

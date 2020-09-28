@@ -33,6 +33,8 @@ void create(){
    set_wear((:TO,"wear_fun":));
    set_remove((:TO,"remove_fun":));
    set_item_bonus("negative energy resistance",15);
+   set_item_bonus("mental energy resistance",-1);
+   set_item_bonus("charisma",1);
 }
 
 int wear_fun(){
