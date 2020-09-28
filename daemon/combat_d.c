@@ -2164,7 +2164,7 @@ int ok_to_kill(object who, object targ)
             return 0;
         }
         if (in_edit(targ) || in_input(targ) && userp(who)) {
-            tell_object(who, "%^BOLD%^%^RED%^"targ->QCN + " is currently daydreaming and cannot be attacked.%^RESET%^");
+            tell_object(who, "%^BOLD%^%^RED%^" + targ->QCN + " is currently daydreaming and cannot be attacked.%^RESET%^");
             return 0;
         }
         pkob = new(PK_OB);
