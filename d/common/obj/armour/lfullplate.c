@@ -14,7 +14,8 @@ void create()
 "distributed. The armor is hot and extremely expensive."
        );
 //    set_weight(50);
-    set("value", 15000);
+    set("value", 20000);
+    //idk why this is set manually;
 //    set_type("armour");
 //    set_limbs( ({ "torso" }) );
 //    set_ac(9);

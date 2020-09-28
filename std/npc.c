@@ -121,26 +121,23 @@ varargs int adjust_cost(int cost, int sell){
    // mod = 13 - cha;
     //mod += racial stuff ---- Garrett.
    influ = TP->query_skill("influence");
-   if (influ > 60) influ = 60;
-   if(!sell){
-      cost += (cost / 5 - influ / 5);
+   if (influ > 75) influ = 75;
+   if (influ < -10) influ = -10; // just in case, div/0 if influence is -38
+   influ += 38;
+   if (!sell) {
+       influ = 60 + 2300 / influ;
    }
    else {
-      cost -= (cost / 5 - influ / 5);
+       influ = 89 - 1475 / influ;
    }
-   
-    /*
-    if (!sell) {
-     if(mod > 0)
-        cost = cost+(cost *(mod*5))/100;
-     else
-     cost = cost + (cost *(mod*2))/100;
-    } else {
-    if(mod > 0)
-       cost = cost-(cost *(mod*5))/100;
-     else
-     cost = cost - (cost *(mod*2))/100;
-    }*/
+   cost *= influ;
+   cost /= 100;
+    //buy from 120% to 80% (negative influence is even higher than 120%)
+    //sell from 50% to 75% (negative influence is even lower than 50%)
+    //diminishing returns so the more influence you have the slower the increase/reduction
+    //lowest influence is -4: 6 base cha -4 cha racial total 2 -> -4 cha modifier
+    //influence hardcaped at 75
+
     if(cost < 1) cost = 1;
     return cost;
 }

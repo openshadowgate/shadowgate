@@ -6,7 +6,7 @@ void create() {
     set_armor_prof("heavy");
     set_name("plate");
     set("id", ({ "field", "armor", "field plate","plate" }) );
-      set("short", "A suit of Field Plate armor");
+      set("short", "A suit of field plate armor");
     set("long", 
 	"This is the most common version of full plate armor, consisting "
 	"of shaped and fitted metal plates rivited and interlocked to cover "
@@ -16,7 +16,7 @@ void create() {
 	"armor hampers movement only slightly."
        );
     set_weight(32);
-    set("value", 2000);
+    set("value", 1500);
     set_type("armour");
     set_limbs( ({ "torso" }) );
     set_ac(8);
