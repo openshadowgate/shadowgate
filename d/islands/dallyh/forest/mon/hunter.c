@@ -66,7 +66,8 @@ void create()
                 "preciseshot",
                 "shot on the run"
             }));
-            bow = new("/d/islands/dallyh/forest/obj/fbow")->move(TO);
+            bow = new("/d/islands/dallyh/forest/obj/fbow");
+            bow->move(TO);
             command("wield bow");
             if (random(20)) {
                 bow->set_property("monster weapon", 1);
