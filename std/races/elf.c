@@ -44,7 +44,7 @@ string* restricted_classes(string subrace)
     case "aquatic elf": return ({ "paladin", "inquisitor", "cleric" }); break;
     case "fey'ri": return ({ "psion", "psywarrior", "monk", "druid" }); break;
     case "sun elf": return ({ "psion", "psywarrior", "monk", "druid" }); break;
-    case "sildruath": return ({ "psion", "psywarrior", "paladin", "monk", "barbarian", "paladin"}); break;
+    case "sildruath": return ({ "barbarian", "monk", "paladin", "psion", "psywarrior",}); break;
     case "szarkai": return ({ "psion", "psywarrior", "paladin", "monk", "druid" }); break;
     case "wild elf": return ({ "bard", "mage", "psion", "psywarrior", "paladin", "monk", "inquisitor" }); break;
     case "wood elf": return ({ "mage", "psion", "psywarrior", "paladin", "monk" }); break;
