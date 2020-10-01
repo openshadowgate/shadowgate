@@ -6,12 +6,15 @@
 #include <dirs.h>
 inherit DAEMON;
 
+
 // stealing from the recall spells command -Ares
 #define LEV_AND_COLORS ([ 1 : "%^BOLD%^%^BLACK%^", 2 : "%^RED%^", 3 : "%^GREEN%^", 4 : "%^MAGENTA%^", 5 : "%^CYAN%^", 6 : "%^BOLD%^%^BLUE%^", 7 : "%^BOLD%^%^RED%^", 8 : "%^BOLD%^%^GREEN%^", 9 : "%^BOLD%^%^MAGENTA%^"])
+
 
 mapping spells;
 string *magic;
 int wait;
+
 
 // powerpoints info
 int prep_power_points(string myclass, int times);
@@ -36,16 +39,11 @@ mapping get_current_list(mapping lists, string list);
 void delete_list(object obj, mapping lists, string list);
 mapping get_lists(object obj);
 int save_lists(object obj, mapping lists);
-int get_spell_delay(object tp, int class_level, int spell_level);
-
-int get_spell_delay(object tp, int class_level = 1, int spell_level = 1 ) {
-
-}
 
 int cmd_prepare(string str)
 {
     string args, spellname, myclass, *arguments, *spell = ({}), first_list, second_list, first_class, second_class;
-    int i, validfocus, times, spell_level, class_level, rst, lvadj, temp;
+    int i, validfocus, times, sl, cl, rst, lvadj, temp;
     object *inven;
 
     if(TP->query_bound() || TP->query_unconscious())
@@ -177,7 +175,7 @@ int cmd_prepare(string str)
                 tell_object(TP,"You can't prepare more than once in a round.");
                 return 1;
             }
-            TP->remove_property("last_prepare");
+            TP->remove_property("last_prepare",time());
             TP->set_property("last_prepare",time());
             prepare_listed_spells(TP, arguments[1], arguments[2]);
             return 1;
@@ -202,7 +200,7 @@ int cmd_prepare(string str)
         tell_object(TP,"You can't prepare more than once in a round.");
         return 1;
     }
-    TP->remove_property("last_prepare");
+    TP->remove_property("last_prepare",time());
     TP->set_property("last_prepare",time());
 
     if (!TP->is_class(myclass) && !avatarp(TP)) { return notify_fail("You cannot cast spells as a " + myclass + "!\n"); }
@@ -244,7 +242,7 @@ int cmd_prepare(string str)
 
     if (!sizeof(magic)) { return notify_fail("There are no spells available to the " + myclass + " class!"); }
 
-    if (sscanf(args, "%s times %d", spellname, times) != 2) //(not)multi-memorisation of a spell
+    if (sscanf(args, "%s times %d", spellname, times) != 2) //multi-memorisation of a spell
     {
         spellname = args;
         times = 1;
@@ -259,7 +257,7 @@ int cmd_prepare(string str)
     }
     else
     {
-        if (sscanf(spellname, "level %d", spell_level) != 1) { return notify_fail("As a spontaneous caster, you need to <prepare myclass level x [times x]>.\n"); }
+        if (sscanf(spellname, "level %d", sl) != 1) { return notify_fail("As a spontaneous caster, you need to <prepare myclass level x [times x]>.\n"); }
     }
 
     if (times < 1) { return notify_fail("You need to memorize " + spellname + " at least once.\n"); }
@@ -267,7 +265,7 @@ int cmd_prepare(string str)
     if (myclass != "bard" &&
         myclass != "inquisitor" &&
         myclass != "oracle" &&
-        myclass != "sorcerer") { spell_level = spells[spellname]; }
+        myclass != "sorcerer") { sl = spells[spellname]; }
 
     rst = TP->can_memorize(myclass,spellname);
     if (rst == TOO_MANY)            { return notify_fail("You have prepared all of the spells that you are allowed at this level.\n"); }
@@ -276,13 +274,13 @@ int cmd_prepare(string str)
     if (rst != MEM_OK)              { return notify_fail("You cannot prepare that spell.\n"); }
 
 // start mem'ing the spell!
-    temp = spell_level * MEMORIZE_DELAY;
+    temp = sl * MEMORIZE_DELAY;
 
-    class_level = TP->query_guild_level(myclass);
+    cl = TP->query_guild_level(myclass);
 
-    if(class_level > 9)
+    if(cl > 9)
     {
-	    lvadj = 375/class_level; //was lvadj = 1000/class_level; lowering for testing - Octothorpe 10/5/17
+	    lvadj = 375/cl; //was lvadj = 1000/cl; lowering for testing - Octothorpe 10/5/17
 	    if(!lvadj) lvadj = 1;   // they say dividing by zero is reserved for god...
         {
             temp = temp - ((temp * 10) / lvadj);
@@ -299,7 +297,6 @@ int cmd_prepare(string str)
         if (!spell_in_grimoire(spellname, TP, "mage"))
             return 0;
 
-    temp = get_spell_delay(TP,class_level,spell_level) * times;
 
     switch (myclass)
     {
@@ -365,11 +362,10 @@ int prep_power_points(string myclass, int times)
         "focusing silently.", TP);
     TP->set_property("memorizing",TP);
 
-    if(TP->query_property("last_prepare") < time())
+    if(wait < time())
     {
-        TP->remove_property("last_prepare");
-        TP->set_property("last_prepare",time()+1);
         TP->prepare(spellname, temp, myclass, times);
+        wait = time() + 1;
     }
 
     return 1;
@@ -608,20 +604,13 @@ void prepare_list(object obj, string *spells, int delay, string myclass, int ind
         return;
     }
 
-    if(TP->query_property("last_prepare") < time())
+    if(wait < time())
     {
-        TP->remove_property("last_prepare");
-        TP->set_property("last_prepare",time()+1);
+        wait = time() + 1;
         if(spell_in_grimoire(spell,obj,myclass))
             obj->set_memorized(myclass, spell, 1);
+        index++;
     }
-    //if(wait < time())
-    //{
-    //    wait = time() + 1;
-    //    if(spell_in_grimoire(spell,obj,myclass))
-    //        obj->set_memorized(myclass, spell, 1);
-    //    index++;
-    //}
 
     delay = roll_dice(4, 2);
     call_out("prepare_list", delay, obj, spells, delay, myclass, index);

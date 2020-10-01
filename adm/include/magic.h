@@ -32,5 +32,3 @@
 #define NOT_WISE 5
 #define NOT_SMART 6
 //NOT_SMART for psions ~Circe~ 7/14/05
-
-#define PSI_MP_PER_CYCLE 5 // For spellcaster.c 
