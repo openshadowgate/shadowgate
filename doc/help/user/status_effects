@@ -30,6 +30,9 @@ All core skills, attack bonus, saves are reduced by lvl/12+1.
 %^CYAN%^Dazzled%^RESET%^
 You see some stars and your vision is restricted. You take lvl/18+1 penalty on perception, thievery skills and attack bonus.
 
+%^CYAN%^Staggered%^RESET%^
+A staggered creature can only take one base attack action each round, however class modifiers apply. It cannot cast or use feats.
+
 %^CYAN%^Sight bonus%^RESET%^
 This effects adds to the light value of the room, but only for the caster.
 

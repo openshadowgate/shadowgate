@@ -1346,6 +1346,11 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         return;
     }
 
+    // Item based casting should go through staggered effect
+    if (previous_object()->is_living() && previous_object()->query_property("effect_staggered")) {
+        return;
+    }
+
     set_caster(ob);
     clevel = ob_level;
     seteuid(getuid());

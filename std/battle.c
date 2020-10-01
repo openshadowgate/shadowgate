@@ -255,13 +255,17 @@ void heart_beat()
             classes = (string *)combatants[i]->query_classes();
             num = 0;
 
-            if(sizeof(classes))
-            {
-                for(x=0;x<sizeof(classes);x++)
-                {
-                    file = DIR_CLASSES+"/"+classes[x]+".c";
-                    if(!file_exists(file)) { num = 0; continue; }
-                    if((int)file->number_of_attacks(combatants[i]) > num) { num = (int)file->number_of_attacks(combatants[i]); }
+            if (combatants[i]->query_property("effect_staggered")) {
+                num = 1;
+            } else if (sizeof(classes)) {
+                for (x = 0; x < sizeof(classes); x++) {
+                    file = DIR_CLASSES + "/" + classes[x] + ".c";
+                    if (!file_exists(file)) {
+                        num = 0; continue;
+                    }
+                    if ((int)file->number_of_attacks(combatants[i]) > num) {
+                        num = (int)file->number_of_attacks(combatants[i]);
+                    }
                 }
             }
 

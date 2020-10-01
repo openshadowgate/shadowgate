@@ -58,6 +58,10 @@ int cmd_cast(string str)
         return notify_fail("You are already doing something!\n");
     }
 
+    if (TP->query_property("effect_staggered")) {
+        return notify_fail("You are staggered and can not cast\n");
+    }
+
     // clerical checks for spontaneous healing/harming casts
     if (strsrch(str, "as healing") != -1) {
         healharm = 1;
