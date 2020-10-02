@@ -36,11 +36,8 @@ int preSpell()
 
 void spell_effect(int prof)
 {
-    int d1,d2,duration, amount;
+    int duration, amount;
 
-    d1 = 1;
-    d2 = 1;
-    duration = 1;
     if( interactive(caster) )
     {
         set_verbal_comp();
@@ -56,8 +53,6 @@ void spell_effect(int prof)
         drinks= new("/cmds/priest/obj/water.c");
         where = place;
     }
-    d1 = (int)caster->query_stats(TO->get_casting_stat());
-    d2 = (int)caster->query_stats("constitution");
 
     amount = clevel/2;
     amount++;
@@ -66,7 +61,7 @@ void spell_effect(int prof)
     drinks->set_property("spelled", ({TO}) );
     where->set_property("fill waterskin", 1);
 
-    duration = (( (d1 / d2 ) * clevel ) * 60);
+    duration = clevel * 60;
 
     spell_successful();
     addSpellToCaster();
