@@ -10,7 +10,7 @@ void create() {
     set_spell_name("slow");
     set_spell_level((["bard":3, "mage":3, ]));
     set_spell_sphere("alteration");
-    set_damage_desc("clevel/25 + 1 to attack rolls, ac, and reflex for clevel rounds, staggered for clevel / 25 + 1 rounds");
+    set_damage_desc("clevel/20 + 1 to attack rolls, ac, and reflex damage, staggered for clevel / 25 + 1 rounds");
     set_syntax("cast CLASS slow on TARGET");
     set_description("An affected creature moves and attacks at a drastically slowed rate. Its number of accacs becomes reduced, it becomes staggered and slow to move.");
     set_save("will");
@@ -25,7 +25,7 @@ int preSpell()
 {
     if(target->query_property("slowed"))
     {
-        tell_object(caster,"Your target already staggered.");
+        tell_object(caster,"Your target is already slowed.");
         return 0;
     }
     return 1;
@@ -37,7 +37,9 @@ string query_cast_string() {
 
 spell_effect()
 {
-    power = clevel / 25 + 1;
+    int round_duration;
+
+    power = clevel / 20 + 1;
 
     if (do_save(target, -2)) {
         tell_object(caster,"%^ORANGE%^%^BOLD%^" + target->QCN + " shakes off your words of slow.");
@@ -50,7 +52,9 @@ spell_effect()
     tell_object(caster,"%^ORANGE%^As you complete the chant " +target->QCN+"'s motions become slowed.");
     tell_room(place, "%^ORANGE%^As " + caster->QCN + "completes the chant " + target->QCN + "'s motions become slowed.", ({caster, target}));
 
-    "/std/effect/status/staggered"->apply_effect(target, clevel / 25 + 1, caster);
+    round_duration = clevel / 25 + 1;
+
+    "/std/effect/status/staggered"->apply_effect(target, round_duration, caster);
 
     target->add_saving_bonus("reflex", -power);
     target->add_ac_bonus(-power);
@@ -61,7 +65,7 @@ spell_effect()
     spell_kill(target, caster);
 
     addSpellToCaster();
-    call_out("dest_effect", (clevel * ROUND_LENGTH));
+    call_out("dest_effect", ((round_duration) * ROUND_LENGTH));
     spell_successful();
 
 }
