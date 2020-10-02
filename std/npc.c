@@ -128,7 +128,7 @@ varargs int adjust_cost(int cost, int sell){
        influ = 60 + 2300 / influ;
    }
    else {
-       influ = 89 - 1475 / influ;
+       influ = 89 - 1475 / influ;//pushhh
    }
    cost *= influ;
    cost /= 100;
