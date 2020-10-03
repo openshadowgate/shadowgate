@@ -30,11 +30,8 @@ int preSpell() {
 
 void spell_effect(int prof) {
     object  where;
-    int d1,d2,duration, amount;
+    int duration, amount;
 
-    d1 = 1;
-    d2 = 1;
-    duration = 1;
     if (interactive(CASTER)) {
         tell_object(CASTER, "You create a pile of edible food.");
         tell_room(PLACE, YOU+" makes a pile of edible food.", ({ CASTER}) );
@@ -45,15 +42,14 @@ void spell_effect(int prof) {
         food = new("/cmds/priest/obj/food.c");
         where = place;
     }
-    d1 = (int)CASTER->query_stats(TO->get_casting_stat());
-    d2 = (int)CASTER->query_stats("constitution");
+
     amount = clevel/2;
     amount++;
     food->set_eats(amount);
     food->move(where);
     food->set_property("spelled", ({TO}) );
 
-    duration = (( (d1 / d2 ) * clevel ) * 60);
+    duration = clevel * 60;
 
     spell_successful();
     addSpellToCaster();

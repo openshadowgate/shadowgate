@@ -6,14 +6,14 @@ As of 11.07.2019 this repository serves as a backup and tracking system only. Th
 
 ## Running the game ##
 
-To compile fluffos for this lib you will need _conf/local_options.
+To compile fluffos for this lib you will need local_options. Example file is in the root of this repo.
 
-To run fluffos with our settings you fill need to customize _conf/fluffos.example.cfg for your environment.
+To run fluffos with our settings you fill need to customizefluffos.cfg.example for your environment.
 
-You will need to copy acl files to their location:
+You will need to edit and copy access control lists files to their location:
 
-_conf/access.example.db adm/db/access.db
-_conf/groups.example.db adm/db/groups.db
-_conf/privs.example.db adm/db/privs.db
+  adm/db/access.db.example adm/db/access.db
+  adm/db/groups.db.example adm/db/groups.db
+  adm/db/privs.db.example adm/db/privs.db
 
 Only access.db might require an edit...

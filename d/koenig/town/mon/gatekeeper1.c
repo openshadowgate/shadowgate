@@ -1,5 +1,5 @@
-//Garrett pointed out that he could be attacked to summon infinite guards.  
-//It was tough to come up with something that didn't screw up him being 
+//Garrett pointed out that he could be attacked to summon infinite guards.
+//It was tough to come up with something that didn't screw up him being
 //available, but hopefully this works well enough.  Styx  11/13/01
 
 #include <std.h>
@@ -50,7 +50,7 @@ void init() {
 void reset() {
    ::reset();
    guards = 0;
-//   if(!interactive(TP)) { 
+//   if(!interactive(TP)) {
 // that was bugging of course since reset isn't triggered by a player *Styx*  8/21/05
    if(objectp(ETO) && !present("player", ETO)) {
       tell_room(ETO,"The Gatekeeper shrugs and lumbers off.");
@@ -67,9 +67,9 @@ int kill(string str) {
      force_me("say I don't gotta take this outta nobody, I just go 'way.");
      tell_room(ETO,"The Gatekeeper scowls and leaves.");
      move("/d/koenig/town/room11");
-     force_me("say Stupid people think dey kill me, I just leave 'em out dere.");   
+     force_me("say Stupid people think dey kill me, I just leave 'em out dere.");
      return 1;
-   }     
+   }
    reply_snarl("Ya try attackin' me?!");
    reply_yell("%^BOLD%^GUARDS!!!!");
    tell_room(ETO,"The Gatekeeper leaves to get more "
@@ -140,7 +140,7 @@ void start_exam(string str) {
    }
    else {
       add_action("say_stuff","say");
-      reply_ask("Do you enter Muileann of your own free will, "+TP->query_race()+"?");
+      reply_ask("Do you enter Muileann of your own free will, "+TP->query_visual_race()+"?");
       step = 1;
    }
 }

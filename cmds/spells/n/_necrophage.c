@@ -14,10 +14,11 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS necrophage on TARGET");
     set_damage_desc("acid");
-    set_description("You create a pale yellow slime on the target. The slime begins to devour the target rapidly, causing them to suffer. An undead creature may attempt to save from the damage to reduce it, but if it dies while the spell is in affect, it may explode with acid. ");
+    set_description("You create a pale yellow slime on the target. The slime begins to devour the target rapidly, causing them to suffer. An undead creature may attempt to save from the damage to reduce it, but if it dies while the spell is in affect, it may explode with acid. If it is already a corpse, it will explode immediately");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
+    set_non_living_ok(1);
     set_save("fort");
     splash_spell(3);
 }
@@ -31,9 +32,23 @@ spell_effect(int prof)
 {
     spell_successful();
 
-    tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" completes the spell and releases acidic slime at "+target->QCN+".",target);
-    tell_object(target,"%^BOLD%^%^GREEN%^"+caster->QCN+" and releases the acidic slime at.",target);
-    damage_targ(target, target->return_target_limb(), sdamage,"acid");
+    if (target->is_living()) {
+        tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" completes the spell and releases acidic slime at "+target->QCN+".",target);
+        tell_object(target,"%^BOLD%^%^GREEN%^"+caster->QCN+" and releases the acidic slime at you.",target);
+    } else {
+        tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" completes the spell and releases acidic slime at "+target->query_short()+".");
+    }
+
+    if (target->is_living()) {
+        damage_targ(target, target->return_target_limb(), sdamage,"acid");
+    }
+
+    if (target->is_corpse()) {
+        TO->explode();
+        TO->remove();
+        return;
+    }
+
     if (target->is_undead()) {
         undeadt = 1;
     }
@@ -47,7 +62,7 @@ void explode()
     int i;
 
     attackers = target_selector();
-    tell_room(place, "%^BOLD%^%^GREEN%^As acidic slime finally destroys the undead it explodes, spreading acid around.");
+    tell_room(place, "%^BOLD%^%^GREEN%^As acidic slime finally destroys the corpse it explodes, spreading acid around.");
 
     for (i = 0; i < sizeof(attackers); i++) {
         if (!objectp(attackers[i])) {
@@ -65,7 +80,7 @@ void rot_again()
 
     if (!objectp(target)) {
         if (undeadt) {
-            explode();
+            TO->explode();
         }
         dest_effect();
         return;
@@ -73,7 +88,7 @@ void rot_again()
 
     if (target->query_hp() < 0) {
         if (undeadt) {
-            explode();
+            TO->explode();
         }
         dest_effect();
         return;

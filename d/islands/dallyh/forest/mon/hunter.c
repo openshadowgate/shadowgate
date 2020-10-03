@@ -57,6 +57,8 @@ void create()
             break;
 
         case 2:
+        {
+            object bow;
             set_monster_feats(({
                 "point blank shot",
                 "manyshot",
@@ -64,9 +66,14 @@ void create()
                 "preciseshot",
                 "shot on the run"
             }));
-            new("/d/common/obj/lrweapon/longbow")->move(TO);
+            bow = new("/d/islands/dallyh/forest/obj/fbow");
+            bow->move(TO);
             command("wield bow");
+            if (random(20)) {
+                bow->set_property("monster weapon", 1);
+            }
             new("/d/common/obj/lrweapon/larrows")->move(TO);
+        }
             break;
     }
     new(FOPATH "panther.c")->move(TO);

@@ -22,6 +22,7 @@ void create()
     set_gender(1);
     set_race("human");
     set_hd(70 + random(10), 1);
+    set_max_hp(20000);
     set_hp(TO->query_max_hp());
     set_new_exp(20, "normal");
     set_class("fighter");
