@@ -114,7 +114,7 @@ int hit_func(object targ)
                 "righer as "+ETO->QS+" tears into you with a savage blow.");
               tell_room(environment(ETO),"%^BOLD%^%^CYAN%^"+ETO->QCN+" deals a savage"+
                 " blow to "+targ->QCN+".", ({ETO,targ}));
-                        targ->do_damage("torso",random(4)+4);
+              targ->cause_typed_damage(targ, "torso", roll_dice(1, 4) + 3, "slashing");
             break;
         case 12..19:
                 tell_object(ETO,"%^BLUE%^You slash deep into "+targ->QCN+" and quickly bri"+
@@ -132,7 +132,7 @@ int hit_func(object targ)
                 " down into you!");
               tell_room(environment(ETO),"%^CYAN%^"+ETO->QCN+" leaps into the air, bringing"+
                 " "+ETO->QP+" sword crushing down onto "+targ->QCN+".", ({ETO,targ}));
-                        targ->do_damage("torso",random(6)+10);
+              targ->cause_typed_damage(targ, "torso", roll_dice(1, 6) + 9, "slashing");
 
         default:  
             break;

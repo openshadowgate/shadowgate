@@ -48,11 +48,11 @@ void heart_beat(){
     starved = all_living(TO);
     j = sizeof(starved);
     for(i=0;i<j;i++){
-	tell_object(starved[i],"%^BOLD%^%^RED%^The flames lick at your flesh torturing you endlessly.");
-	if(!wizardp(starved[i])){
-	      starved[i]->do_damage(starved[i]->return_target_limb(),roll_dice(5,5));
-	      starved[i]->add_attacker(TO);
-	      starved[i]->continue_attack();
-	  }
-      }
+	    tell_object(starved[i],"%^BOLD%^%^RED%^The flames lick at your flesh torturing you endlessly.");
+	    if(!wizardp(starved[i])){
+            starved[i]->cause_typed_damage(starved[i], starved[i]->return_target_limb(), roll_dice(5, 5), "fire");
+	        starved[i]->add_attacker(TO);
+	        starved[i]->continue_attack();
+	    }
     }
+}

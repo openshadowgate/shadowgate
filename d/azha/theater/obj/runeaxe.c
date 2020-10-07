@@ -107,7 +107,7 @@ int hit_func(object targ)
                 "blue%^CYAN%^ as "+ETO->QS+" tear into you.");
               tell_room(environment(ETO),"%^CYAN%^"+ETO->QCN+"'s axe glows"+
                 " %^BLUE%^blue%^CYAN%^ as they tear into "+targ->QCN+"", ({ETO,targ}));
-                    targ->do_damage("torso",random(8)+4);
+			  targ->cause_typed_damage(targ, "torso", roll_dice(1, 8) + 3, "slashing");
               break;
         case 12..47:
             tell_object(ETO,"%^BLUE%^Some of the runes on your axe glow"+
@@ -119,7 +119,7 @@ int hit_func(object targ)
               tell_room(EETO,"%^BLUE%^"+ETO->QCN+"'s axe glows %^BOLD%^"+
                         "%^WHITE%^white%^RESET%^%^BLUE%^ as "+ETO->QS+" tears into "+
                 ""+targ->QCN+".", ({ETO,targ}));
-                    targ->do_damage("torso",random(6)+2);
+			  targ->cause_typed_damage(targ, "torso", roll_dice(1, 6) + 1, "slashing");
             break;	
         case 48..49:
             tell_object(ETO,"%^BOLD%^%^BLUE%^All the runes on your axe light"+
@@ -128,7 +128,7 @@ int hit_func(object targ)
                 " a blaze as "+ETO->QS+" tear into you.");
             tell_room(EETO,"%^BOLD%^%^BLUE%^"+ETO->QCN+"'s axe lights up in a"+
                 " blaze as "+ETO->QS+" tear through "+targ->QCN+".",({ETO,targ}));
-                    targ->do_damage("torso",random(10)+8);
+			targ->cause_typed_damage(targ, "torso", roll_dice(1, 10) + 7, "slashing");
             break;
         
         default:

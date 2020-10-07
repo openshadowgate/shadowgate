@@ -42,7 +42,7 @@ int do_wear() {
    	if(interactive(ETO) && (string)ETO->query_name() != OWNER){
 	tell_object(ETO,"%^RESET%^%^ORANGE%^The armor rejects you forcefully!");
     		set_property("magic",1);
-    		ETO->do_damage("torso",random(40));
+			ETO->cause_typed_damage(ETO, "torso", random(40), "force");
     		set_property("magic",-1);
 		return 0;
 	}

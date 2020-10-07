@@ -120,7 +120,7 @@ void sing(object targ)
 			"ins to sing a cacophony of melodies directed "+
         		" at "+targ->query_cap_name()+", who winces in"+
 			" pain at the sonic attack.",targ);
-        			targ->do_damage("torso",random(10)+10);
+		targ->cause_typed_damage(targ, "torso", roll_dice(1, 10) + 9, "sonic");
         return 1;
 	}
 else {
@@ -131,7 +131,7 @@ else {
 		" to sing a cacophony of melodies at"+
         	" "+targ->query_cap_name()+", who seems to shrug most"+
 		" of it off",targ);
-             	targ->do_damage("torso",(random(10)+10)/2);
+	  targ->cause_typed_damage(targ, "torso", (roll_dice(1, 10) + 9)/2, "sonic");
     	return 1;
 }
 }

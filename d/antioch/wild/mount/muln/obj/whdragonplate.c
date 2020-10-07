@@ -57,7 +57,7 @@ int wearit()
         notify_fail("%^BLUE%^%^BOLD%^The plate mail armor " +
                     "rejects someone as weak as you!");
         set_property("magic", 1);
-        ETO->do_damage("torso", random(5) + 20);
+        ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 5) + 19, "cold");
         ETO->add_attacker(TO);
         ETO->continue_attack();
         ETO->remove_attacker(TO);

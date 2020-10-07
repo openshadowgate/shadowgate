@@ -52,7 +52,7 @@ void release(object targ){
 	if(flag){
 		if(caught && objectp(caught)){
 			tell_object(caught,"%^BOLD%^The constrictor squeezes you hard!\n");
-			caught->do_damage(caught->return_target_limb(),roll_dice(2,8));
+			caught->cause_typed_damage(caught, caught->return_target_limb(), roll_dice(2, 8), "bludgeoning");
 			str = caught->query_stats("strength");
 			switch (str){
 				case 1: case 2: 

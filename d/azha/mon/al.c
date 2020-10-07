@@ -228,7 +228,7 @@ int special_fcn(object targ){
 	    command("say Powder...how mundane.");
 	    tell_object(targ, "%^RED%^al-Radin delivers a stunning axe kick to your shoulder!");
 	    tell_room(ETO, "%^RED%^al-Radin raises his leg into the air and brings it down on "+targ->query_possessive()+" shoulder with great force!", ({targ}));
-	    targ->do_damage("head", roll_dice(9,8));
+	    targ->cause_typed_damage(targ, "head", roll_dice(9, 8), "bludgeoning");
 	} else {
 	    command("sneer");
 	    command("toss powder at "+targ->query_name());
@@ -243,7 +243,7 @@ int special_fcn(object targ){
 	} else {
 	    tell_object(targ, "al-Radin dives at you with his dagger, driving it deep into your leg!");
 	    tell_room(ETO, "al-Radin dives at "+targ->query_cap_name()+" driving his sword deep into "+targ->query_possessive()+" leg!", ({targ}));
-	    targ->do_damage("torso", roll_dice(8,10));
+        targ->cause_typed_damage(targ, "torso", roll_dice(8, 10), "piercing");
 	    command("say Die.");
 	}
 	return 1;

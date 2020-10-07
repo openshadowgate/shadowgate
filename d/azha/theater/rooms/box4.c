@@ -28,7 +28,7 @@ int dex;
 					TP->move(ROOMDIR"dso2");
             			TP->force_me("look");
             			TP->set_tripped(2,"%^YELLOW%^You are recovering from your fall!");
-					TP->do_damage("torso",random(24)+6);
+						TP->cause_typed_damage(TP, "torso", roll_dice(1, 24) + 5, "bludgeoning");
 	return 0;
 		}else
 			tell_object(TP,"%^MAGENTA%^With a groan and creak, "+

@@ -85,7 +85,7 @@ int GoThroughDoor()
             "/d/antioch/vale/rooms/sanctuary1"->remove_exit("south");
             tell_room("/d/antioch/vale/rooms/sanctuary1", "%^GREEN%^The wall" +
                       " closes as someone attempts to get through!");
-            TP->do_damage("torso", random(20) + 20);
+            TP->cause_typed_damage(TP, "torso", roll_dice(1, 20) + 19, "piercing");
             TP->add_attacker(TO);
             TP->continue_attack();
             TP->remove_attacker(TO);
@@ -96,7 +96,7 @@ int GoThroughDoor()
                     " but not without a few scrapes from the sharp thorns.%^RESET%^");
         tell_room(TP, "%^BOLD%^%^GREEN%^" + TPQCN + " barely manages to run" +
                   " through the brambles as the wall begins to close!%^RESET%^", TP);
-        TP->do_damage("torso", random(8) + 10);
+        TP->cause_typed_damage(TP, "torso", roll_dice(1, 8) + 9, "piercing");
         TP->add_attacker(TO);
         TP->continue_attack();
         TP->remove_attacker(TO);

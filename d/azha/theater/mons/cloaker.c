@@ -110,7 +110,8 @@ if(!"/daemon/saving_throw_d.c"->fort_save(targ,-15)){
       tell_room(ETO,"%^BOLD%^%^BLUE%^The cloaker opens it's fanged mouth"+
 		" to release a high pitched shriek in a creepy voice. "+targ->QCN+" "+
 		"winces from the pain of the high pitched noise.",targ);
-    			targ->do_damage("torso",random(5)+7);
+
+	  targ->cause_typed_damage(targ, "torso", roll_dice(1, 5) + 6, "sonic");
         			return 1;
 }
 else {
@@ -119,7 +120,7 @@ else {
      	tell_room(ETO,"%^BOLD%^%^BLUE%^The cloaker opens it's fanged mouth to "+
 		"release a high pitched shriek in a creepy voice.  "+targ->QCN+" winces"+
 		" from the pain of the high pitched noise.",targ);
-			targ->do_damage("torso",random(5)+7/2);
+		targ->cause_typed_damage(targ, "torso", roll_dice(1, 5) + 2, "sonic");
     				return 1;
 }
 }

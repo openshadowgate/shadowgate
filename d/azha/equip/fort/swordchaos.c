@@ -163,7 +163,7 @@ int extra_hit(object ob) {
     wrapit("%^CYAN%^BOLD%^Suddenly, a %^RESET%^BOLD%^pale white fire%^CYAN%^ leaps from the sword at you "
     "causing you to gnash your teeth in anguish!")
   ,ob);
-  vic->do_damage("head",random(10)+10);
+  vic->cause_typed_damage(vic, "head", roll_dice(1, 10) + 9, "fire");
   uses = uses - random(3)+1;
   return 1;
 

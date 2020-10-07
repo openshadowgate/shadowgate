@@ -72,7 +72,7 @@ int no_rush(string str) {
       "%^RED%^BOLD%^"+this_player()->query_cap_name()+" rushes into Stoker, and succeeds only in burning himself!",
       ({ targ }));
 	tell_object(targ, "%^RED%^BOLD%^As you try to rush Stoker, you run right through his flames, causing you to be burned!");
-    targ->do_damage("torso",roll_dice(2,6));
+    targ->cause_typed_damage(targ, "torso", roll_dice(2, 6), "fire");
 	targ->kill_ob(TO);
     return 1;
 }
@@ -86,7 +86,7 @@ int no_stab(string str) {
       "%^RED%^BOLD%^"+this_player()->query_cap_name()+" stabs at Stoker burning himself!",
       ({ targ }));
 	tell_object(targ, "%^RED%^BOLD%^You plunge your arm towards, causing you to be burned by his flame!");
-    targ->do_damage("torso",roll_dice(2,6));
+    targ->cause_typed_damage(targ, "torso", roll_dice(2, 6), "fire");
 	targ->kill_ob(TO);
 	if(random(100) > 10) return 0;
     return 1;

@@ -7,26 +7,33 @@ Classes on Shadowgate
 %^RESET%^%^BOLD%^%^WHITE%^The following classes are available:%^RESET%^
 
 %^MAGENTA%^%^ULINE%^Melee classes%^RESET%^
-%^CYAN%^Barbarian%^RESET%^   Tribal warriors that channel their rage to devastating effect.
-%^CYAN%^Fighter%^RESET%^     Diverse warriors with unrivaled martial prowess.
-%^CYAN%^Paladin%^RESET%^     Holy warriors and protectors, in service of a faith or cause.
-%^CYAN%^Ranger%^RESET%^      Hunters and warriors that gain divine powers from nature.
-%^CYAN%^Thief%^RESET%^       Masters of stealth and deceit that attack from the shadows.
+  %^CYAN%^Barbarian%^RESET%^   Tribal warriors that channel their rage to devastating effect.
+  %^CYAN%^Fighter%^RESET%^     Diverse warriors with unrivaled martial prowess.
+  %^CYAN%^Paladin%^RESET%^     Holy warriors and protectors, in service of a faith or cause.
+  %^CYAN%^Ranger%^RESET%^      Hunters and warriors that gain divine powers from nature.
+  %^CYAN%^Thief%^RESET%^       Masters of stealth and deceit that attack from the shadows.
 
 %^MAGENTA%^%^ULINE%^Hybrid classes%^RESET%^
-%^CYAN%^Bard%^RESET%^        Master entertainers that dabble in combat and the arcane arts.
-%^CYAN%^Druid%^RESET%^       Champions of nature with the ability to shape-shift.
-%^CYAN%^Inquisitor%^RESET%^  Grim agents of the gods, in service of a faith or cause.
-%^CYAN%^Monk%^RESET%^        Martial art masters that fight unarmored and often unarmed.
-%^CYAN%^Psywarrior%^RESET%^  Warriors gifted with limited psionic powers.
-%^CYAN%^Warlock%^RESET%^     Mysterious mortals whose soul is suffused with perilous magic.
+ %^CYAN%^%^ULINE%^Arcane Hybrid classes%^RESET%^
+  %^CYAN%^Bard%^RESET%^        Master entertainers that dabble in combat and the arcane arts.
+  %^CYAN%^Warlock%^RESET%^     Mysterious mortals whose soul is suffused with perilous magic.
+ %^CYAN%^%^ULINE%^Divine Hybrid classes%^RESET%^
+  %^CYAN%^Druid%^RESET%^       Champions of nature with the ability to shape-shift.
+  %^CYAN%^Inquisitor%^RESET%^  Grim agents of the gods, in service of a faith or cause.
+ %^CYAN%^%^ULINE%^Psionic Hybrid classes%^RESET%^
+  %^CYAN%^Psywarrior%^RESET%^  Warriors gifted with limited psionic powers.
+ %^CYAN%^%^ULINE%^Other Hybrid classes%^RESET%^
+  %^CYAN%^Monk%^RESET%^        Martial art masters that fight unarmored and often unarmed.
 
 %^MAGENTA%^%^ULINE%^Caster classes%^RESET%^
-%^CYAN%^Cleric%^RESET%^      Holy priests that draw power from their faith in a deity.
-%^CYAN%^Oracle%^RESET%^      These divine vessels are granted power without their choice.
-%^CYAN%^Mage%^RESET%^        Wizards that weave magic through relentless study.
-%^CYAN%^Psion%^RESET%^       Mortals that bend the world to their will with their mind.
-%^CYAN%^Sorcerer%^RESET%^    Mortals that master the art of magic through raw talent.
+ %^CYAN%^%^ULINE%^Arcane Caster classes%^RESET%^
+  %^CYAN%^Sorcerer%^RESET%^    Mortals that master the art of magic through raw talent.
+  %^CYAN%^Mage%^RESET%^        Wizards that weave magic through relentless study.
+ %^CYAN%^%^ULINE%^Divine Caster classes%^RESET%^
+  %^CYAN%^Cleric%^RESET%^      Holy priests that draw power from their faith in a deity.
+  %^CYAN%^Oracle%^RESET%^      These divine vessels are granted power without their choice.
+ %^CYAN%^%^ULINE%^Psionic Caster classes%^RESET%^
+  %^CYAN%^Psion%^RESET%^       Mortals that bend the world to their will with their mind.
 
 Each class has its own strengths and weaknesses, represented by a unique set of feats and abilities. Some classes are restricted based on race, alignment and/or stats.
 
