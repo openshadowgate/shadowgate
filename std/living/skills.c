@@ -136,9 +136,6 @@ int query_guild_level(string str)
             }
         }
 
-        if (intp(TO->query("negative levels", str))) {
-            return guilds[str] + num + (int)TO->query("negative level", str) + res;
-        }
         return guilds[str] + num + res;
     }
     return guilds[str] + res;
@@ -527,9 +524,6 @@ int query_class_level(string str)
         if (intp("/daemon/user_d.c"->get_scaled_class_level(TO))) {
             return "/daemon/user_d.c"->get_scaled_class_level(TO, str);
         }
-        if (intp(TO->query("negative levels", str))) {
-            return mlevels[str] + (int)TO->query("negative level", str);
-        }
         return mlevels[str];
     }
     return 0;
@@ -556,8 +550,6 @@ int query_base_character_level()
         return query_highest_level();
     }
     for (i = 0; i < sizeof(classes); i++) {
-        //changed this to allow hijacking of query_class_level for negative levels - Saide
-        //if(mlevels && mlevels != ([]) && mlevels[classes[i]]) num += mlevels[classes[i]];
         num += query_base_class_level(classes[i]);
     }
     return num;
@@ -580,8 +572,6 @@ int query_character_level()
     }
 
     for (i = 0; i < sizeof(classes); i++) {
-        //changed this to allow hijacking of query_class_level for negative levels - Saide
-        //if(mlevels && mlevels != ([]) && mlevels[classes[i]]) num += mlevels[classes[i]];
         num += query_base_class_level(classes[i]);
     }
 // adding LA adjustment here; this is the only place it should be needed. -N, 10/10
@@ -788,9 +778,6 @@ int query_lowest_level()
     }
 
     if (TO->query("new_class_type") && !avatarp(TO)) {
-        if (intp(TO->query("negative levels"))) {
-            return query_base_character_level() + (int)TO->query("negative level");
-        }
         return query_base_character_level();
     }
 
@@ -850,11 +837,7 @@ int query_highest_level()
     }
 
     if (TO->query("new_class_type") && !avatarp(TO)) {
-        if (intp(TO->query("negative levels"))) {
-            return query_base_character_level() + (int)TO->query("negative levels");
-        } else {
-            return query_base_character_level();
-        }
+        return query_base_character_level();
     }
 
     hold = mlevels[classes[0]];

@@ -2322,9 +2322,6 @@ void reset_all_status_effects()
             continue;
         }
     }
-    if (TO->query("negative level")) {
-        TO->delete("negative level");
-    }
     if (TO->query_invis()) {
         TO->set_magic_hidden(0);
         TO->set_invis();
