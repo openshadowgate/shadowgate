@@ -95,6 +95,9 @@ Magic resistance increases your chance to disperse spell targeted at you while s
 %^CYAN%^Spell damage resistance/damage resistance%^RESET%^
 These effects subtract their value from damage or spell damage received.
 
+%^CYAN%^Negative level%^RESET%^
+Temporary negative level reduces your skills, attack bonus, save throws and all effective spell caster level. It can't be applied if you already have five negative levels.
+
 %^ULINE%^%^CYAN%^MIND%^RESET%^
 
 %^CYAN%^Confused%^RESET%^
