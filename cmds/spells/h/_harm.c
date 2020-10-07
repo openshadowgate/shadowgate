@@ -15,7 +15,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS harm on TARGET");
     set_damage_desc("negative energy");
-    set_description("%^RESET%^This spell will channel huge amount of negative energy into target and will allow the caster to cause massive amount damage. This spell will cure status effects such as blinded, confused, dazzled, paralyzed, fatigued, exhausted, sickened and poisoned.");
+    set_description("%^RESET%^This spell will channel huge amount of negative energy into target and will allow the caster to cause massive amount damage. This spell will cure status effects such as blinded, confused, dazzled, paralyzed, fatigued, exhausted, sickened, poisoned and will clear negative levels.");
     set_save("will");
     set_target_required(1);
     set_helpful_spell(1);
