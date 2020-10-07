@@ -131,7 +131,7 @@ RIFT
 int open_rift(){
    if(!random(5)){
       write("The rift gate sputters and blows up in your hand.");
-      TP->do_damage("torso",random(25));
+      TP->cause_typed_damage(TP, "torso", random(25), "force");
       TO->remove();
    }
    tell_object(user, "You tap the air in front of you with the key and a shimmering rift portal appears out of nowhere.");

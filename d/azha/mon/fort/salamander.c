@@ -40,5 +40,5 @@ void do_hits(object targ, object current, string target_thing) {
 	tell_room(environment(current),
       "%^YELLOW%^BOLD%^As "+current->query_cap_name()+" hits the salamander, they are burned by the intense heat!%^RESET%^",
 	({ current }));
-	targ->do_damage("torso",roll_dice(1,8));
+	targ->cause_typed_damage(targ, "torso", roll_dice(1, 8), "fire");
 }

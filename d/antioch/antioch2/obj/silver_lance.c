@@ -42,7 +42,7 @@ int check(object targ)
       " "+ETO->query_possessive()+" silver lance deeply into "+targ->query_cap_name()+".",({ETO,targ}));
       tell_object(targ,"%^BOLD%^"+ETO->query_cap_name()+" drives "+ETO->query_possessive()+""+
       " silver lance deeply into you!");
-      targ->do_damage(random(4)+4);
+      targ->cause_typed_damage(targ, "torso", roll_dice(1, 4) + 3, "silver");
       return 1;
    }
 }

@@ -85,7 +85,7 @@ int hit_func(object targ){
                 " you with the mithril tips of "+ETO->QO+" fan.");
               tell_room(environment(ETO),"%^CYAN%^"+ETO->QCN+" swipes "+targ->QCN+""+
                 " with the mithril tips of "+ETO->QP+" fan.", ({ETO,targ}));
-                    targ->do_damage("torso",random(4)+2);
+              targ->cause_typed_damage(targ, "torso", roll_dice(1, 4) + 1, "slashing");
             break;
         case 41..49:
             tell_object(ETO,"%^BLUE%^Spinning your fan rapidly, a "+
@@ -98,9 +98,9 @@ int hit_func(object targ){
                 "fan rapidly.  A %^BOLD%^%^WHITE%^"+
                 "shooting star%^RESET%^%^BLUE%^ streaks through the air and"+
                 " into "+targ->QCN+".", ({ETO,targ}));
-                set_property("magic",1);
-                targ->do_damage("torso",random(5)+10);
-                set_property("magic",-1);
+            set_property("magic",1);
+            targ->cause_typed_damage(targ, "torso", roll_dice(1, 5) + 9, "divine");
+            set_property("magic",-1);
 
         default:  
             break;

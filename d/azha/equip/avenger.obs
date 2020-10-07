@@ -65,6 +65,9 @@ if(!objectp(ob)) return random(5);
 }
 
 int extra_wield() {
+
+    string wlimb, *wielder;
+
   if(!TP) return 0;
   if((int)TP->query_level() < 15) {
     notify_fail("You may not wield such a fine weapon!");
@@ -80,7 +83,9 @@ if(TP->is_class("paladin")) {
     return 1;
   }
   if(!((int)TP->query_alignment() % 3)) {
-    TP->do_damage(10);
+        wielder = TP->query_wielding_limbs();
+        rand_wlimb = wielder[random(sizeof(wielder))];
+        TP->cause_typed_damage(TP, rand_wlimb, roll_dice(1, 10), "divine");
     write("%^CYAN%^The Avenger blazes with holy power in your evil hands and "
     "burns your corrupt flesh!%^RESET%^");
     say("%^CYAN%^You hear "+TPQCN+" scream in pain as the Holy Avenger "

@@ -74,7 +74,7 @@ int no_rush(string str) {
       "%^RED%^BOLD%^"+this_player()->query_cap_name()+" rushes into Stoker, and succeeds only in burning himself!",
       ({ targ }));
 	tell_object(targ, "%^RED%^BOLD%^As you try to rush Stoker, you run right through his flames, causing you to be burned!");
-    targ->do_damage("torso",roll_dice(2,6));
+    targ->cause_typed_damage(targ, "torso", roll_dice(2, 6), "fire");
     return 1;
 }
 

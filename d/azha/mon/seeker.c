@@ -219,7 +219,7 @@ void flee() {
 int open_rift(){
    if(!random(5)){
       write("The rift gate sputters and blows up in your hand.");
-      TP->do_damage("torso",random(25));
+      TP->cause_typed_damage(TP, "torso", random(25), "force");
       TO->remove();
    }
    tell_room(from, TO->query_cap_name()+" taps thin air with a little key and a rift portal appears from nowhere!",({TO}));

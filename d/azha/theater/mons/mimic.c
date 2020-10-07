@@ -72,7 +72,7 @@ void lickit(object targ)
      		tell_room(ETO,"%^ORANGE%^The mimic rolls its long tongue"+
 			" across "+targ->QCN+"'s face, causing "+targ->QO+""+
 			" to sudder.",targ);
-    				targ->do_damage("torso",random(8)+7);
+			targ->cause_typed_damage(targ, "torso", roll_dice(1, 8) + 6, "acid");
         	return 1;
 	}
 else {

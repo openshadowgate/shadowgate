@@ -157,7 +157,7 @@ int extra_hit(object ob)
             +vic->query_cap_name()+"!"),environment(ob),(({environment(TO), ob})));
         message("my_action",wrapit("%^BLACK%^BOLD%^Suddenly, a %^BLACK%^BOLD%^black fire%^RED%^ leaps from the sword at you "
             "causing you to scream in pain!"),ob);
-        vic->do_damage("head",random(10)+10);
+        vic->cause_typed_damage(vic, "head", roll_dice(1, 10) + 9, "fire");
         uses = uses - random(3)+1;
         return 1;
 

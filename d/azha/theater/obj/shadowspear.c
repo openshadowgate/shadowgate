@@ -66,7 +66,7 @@ int hitme(object targ)
       	" of "+ETO->QP+" spear into you!");
       tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETO->QCN+" thrusts the"+
       	" quartz tip of "+ETO->QP+" spear into "+targ->QCN+".",({ETO,targ}));
-      		targ->do_damage("torso",random(2)+2);
+	  targ->cause_typed_damage(targ, "torso", roll_dice(1, 2) + 1, "piercing");
       return 1;
    }
    if(!random(16)) {
@@ -81,7 +81,7 @@ int hitme(object targ)
 		""+ETO->QCN+"'s glows with a %^BOLD%^%^BLACK%^dark aura"+
 		"%^RESET%^%^MAGENTA%^ just before it pierces "+targ->QCN+"'s"+
 		" flesh.",({ETO,targ}));
-      		targ->do_damage("torso",random(5)+2);
+	  targ->cause_typed_damage(targ, "torso", roll_dice(1, 5) + 1, "piercing");
   	return 1;
    }
 }

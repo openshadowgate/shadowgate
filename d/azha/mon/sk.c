@@ -354,7 +354,7 @@ int stab(string targ) {
       TP->query_cap_name()+"!%^RESET%^",
       ({ TO, TP }));
     write("%^BOLD%^RED%^The skirmisher turns rapidly and executes a vicious upper cut to your face!%^RESET%^");
-    TP->do_damage(1,20);
+    TP->cause_typed_damage(TP, "head", roll_dice(1, 20), "bludgeoning");
     command("unwield bow");
     command("wield scimitar in right hand");
     command("wield scimitar 2 in left hand");
@@ -390,7 +390,7 @@ int rush(string targ) {
       ({ TO, TP }));
     write("%^BOLD%^As you rush into the skirmisher, he steps aside and catches his foot between your legs!%^RESET%^");
     write("%^BOLD%^RED%^You trip and fall, hitting the ground hard.%^RESET%^");
-    TP->do_damage(1,5);
+    TP->cause_typed_damage(TP, "torso", roll_dice(1, 5), "bludgeoning");
     TP->set_paralyzed(10);
     command("unwield bow");
     command("wield scimitar in right hand");

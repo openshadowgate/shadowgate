@@ -89,7 +89,7 @@ int hit_func(object targ)
             "before the blast through"+
             " "+targ->QCN+"'s defenses.", ({ETO,targ}));
                 ETO->set_property("magic",1);
-                targ->do_damage("torso",random(4)+3);
+                targ->cause_typed_damage(targ, "torso", roll_dice(1, 4) + 2, "bludgeoning");
                 ETO->set_property("magic",-1);
         break;
         
@@ -104,7 +104,7 @@ int hit_func(object targ)
             ""+ETO->QCN+"'s flail transforms into a %^RED%^knight"+
             "%^BLACK%^ just before they strike a solid blow at "+
             ""+targ->QCN+".", ({ETO,targ}));
-                targ->do_damage("torso",random(6)+4);
+          targ->cause_typed_damage(targ, "torso", roll_dice(1, 6) + 3, "slashing");
         break;
         
     case 22..34:
@@ -118,7 +118,7 @@ int hit_func(object targ)
             ""+ETO->QCN+"'s flail transforms into a %^CYAN%^bishop"+
             "%^BLACK%^ allowing "+ETO->QO+" to bash a solid blow onto "+
             ""+targ->QCN+".", ({ETO,targ}));
-                targ->do_damage("torso",random(4)+6);
+          targ->cause_typed_damage(targ, "torso", roll_dice(1, 4) + 5, "divine");
             break;		
             
     case 35..45:
@@ -150,7 +150,7 @@ int hit_func(object targ)
             "%^BLACK%^ giving "+targ->QCN+" the chance strike out "+
             "at "+ETO->QCN+".", ({ETO,targ}));
                 ETO->set_property("magic",1);
-                            ETO->do_damage("torso",random(3)+2);
+                ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 3) + 1, "slashing");
                 ETO->set_property("magic",-1);
 
     default:

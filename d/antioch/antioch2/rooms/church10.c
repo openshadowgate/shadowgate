@@ -128,7 +128,7 @@ int GoThroughDoor()
 		tell_room(ROOMS+"church9","%^BOLD%^"+TP->query_cap_name()+" screams in agony as "+TP->query_subjective()+" walks through the door.",TP);
 		tell_room(ROOMS+"church10","%^BOLD%^"+TP->query_cap_name()+" screams in agony as "+TP->query_subjective()+" exits through the ivory door.",TP);
 		set_property("magic",1);
-		TP->do_damage("torso",random(20)+30);
+		TP->cause_typed_damage(TP, "torso", roll_dice(1, 20) + 29, "divine");
 		remove_property("magic");
 	}
     return ::GoThroughDoor();

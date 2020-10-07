@@ -41,6 +41,7 @@ void create(){
    set_wield((:TO,"wield_func":));
    set_unwield((:TO,"unwield_func":));
    set_hit((:TO,"hit_func":));
+   set_special_material_type("silver");
 }
 	int wield_func(string str) {
      		tell_object(ETO,"%^CYAN%^The crescent moons on the blade"+
@@ -72,7 +73,7 @@ int hit_func(object victim) {
             tell_room(environment(ETO),"%^BOLD%^%^WHITE%^Silver flames "+
                 "lick off the surface of "+ETO->QCN+"'s blade,"+
                 " burning "+victim->QCN+".",({ETO,victim}));
-            victim->do_damage(victim->return_target_limb(),random(4)+2);
+            victim->cause_typed_damage(victim, victim->return_target_limb(), roll_dice(1, 4) + 1, "fire");
         break;
         case 34..39:
             tell_object(ETO,"%^BOLD%^%^CYAN%^Silver light bathes you for"+
