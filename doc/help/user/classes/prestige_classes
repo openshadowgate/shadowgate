@@ -2,8 +2,8 @@
 
 %^RESET%^%^MAGENTA%^Prestige Class         Base Class
 
-%^RESET%^%^CYAN%^Arcane Archer          %^RESET%^Any Arcane Spellcaster
-%^RESET%^%^CYAN%^Arcane Trickster       %^RESET%^Thief + Any Arcane Spellcaster
+%^RESET%^%^CYAN%^Arcane Archer          %^RESET%^Any Arcane Caster
+%^RESET%^%^CYAN%^Arcane Trickster       %^RESET%^Thief + Any Arcane Caster
 %^RESET%^%^CYAN%^Archdruid              %^RESET%^Druid
 %^RESET%^%^CYAN%^Archmage               %^RESET%^Mage or Sorcerer
 %^RESET%^%^CYAN%^Archpsion              %^RESET%^Psion
@@ -13,18 +13,18 @@
 %^RESET%^%^CYAN%^Crypt Stalker          %^RESET%^Ranger
 %^RESET%^%^CYAN%^Cypher                 %^RESET%^Any
 %^RESET%^%^CYAN%^Duelist                %^RESET%^Any non-psionic Melee or Hybrid
-%^RESET%^%^CYAN%^Eldritch Knight        %^RESET%^Any Spellcaster
+%^RESET%^%^CYAN%^Eldritch Knight        %^RESET%^Any Caster
 %^RESET%^%^CYAN%^Grandmaster of the Way %^RESET%^Monk
-%^RESET%^%^CYAN%^Gravecaller            %^RESET%^Any Divine or Arcane Necromancer
+%^RESET%^%^CYAN%^Gravecaller            %^RESET%^Any Divine or Arcane Caster
 %^RESET%^%^CYAN%^Hellfire Warlock       %^RESET%^Warlock
-%^RESET%^%^CYAN%^Hierophant             %^RESET%^Any Divine Spellcaster
+%^RESET%^%^CYAN%^Hierophant             %^RESET%^Any Divine Caster
 %^RESET%^%^CYAN%^Immortal Defender      %^RESET%^Any
 %^RESET%^%^CYAN%^Metamind               %^RESET%^Psywarrior
 %^RESET%^%^CYAN%^Mindblade              %^RESET%^Psion
 %^RESET%^%^CYAN%^Pale Lord              %^RESET%^Any but psionic
 %^RESET%^%^CYAN%^Primeval Champion      %^RESET%^Druid
 %^RESET%^%^CYAN%^Radiant Servant        %^RESET%^Any Divine Healer
-%^RESET%^%^CYAN%^Rage Prophet           %^RESET%^Barbarian + Any Divine Spellcaster
+%^RESET%^%^CYAN%^Rage Prophet           %^RESET%^Barbarian + Any Divine Caster
 %^RESET%^%^CYAN%^Shadow Adept           %^RESET%^Mage or Sorcerer
 %^RESET%^%^CYAN%^Shadowdancer           %^RESET%^Any
 %^RESET%^%^CYAN%^Stonelord              %^RESET%^Any (Race restricted)

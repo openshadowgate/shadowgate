@@ -57,17 +57,17 @@ void make_creatures()
         switch(random(50))
         {
         case 0..9:
-            set_monsters(({MON"calf.c",MON"banshee.c"}), ({random(3),random(3)}));
+            set_monsters(({MON"calf.c",MON"banshee.c"}), ({random(4),random(2)}));
             break;
         case 10..19:
-            set_monsters(({MON"reaver.c",MON"banshee.c"}),({random(4),random(3)}));
+            set_monsters(({MON"reaver.c",MON"banshee.c"}),({random(4),random(2)}));
             break;
         case 20..29:
             set_monsters(({MON"bog.c",MON"calf.c"}),({random(3),random(3)}));
             break;
         case 30..47:
             set_monsters(({MON"reaver.c",MON"bog.c",MON"banshee.c",MON"calf.c"}),
-                    ({roll_dice(1,4),roll_dice(1,3),roll_dice(1,2),roll_dice(1,3)}));
+                         ({roll_dice(1,4),roll_dice(1,3),random(2),roll_dice(1,3)}));
             break;
         case 48..49:
             set_monsters(({MON"uncle.c"}),({1}));

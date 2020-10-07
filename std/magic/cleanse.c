@@ -26,6 +26,7 @@ void cleanse(object target)
                effect->query_name() == "effect_exhausted" ||
                effect->query_name() == "effect_dazzled" ||
                effect->query_name() == "effect_confused" ||
+               effect->query_name() == "effect_negative_level" ||
                effect->query_name() == "effect_sicken"
                 )
                 effect->dest_effect();
@@ -56,6 +57,7 @@ void restore(object target)
                 continue;
             if(effect->query_name() == "effect_fatigued" ||
                effect->query_name() == "effect_exhausted" ||
+               effect->query_name() == "effect_negative_level" ||
                effect->query_name() == "effect_confused"
                 )
                 effect->dest_effect();

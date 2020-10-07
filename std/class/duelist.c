@@ -134,20 +134,21 @@ int prerequisites(object player)
     if (!player->is_class(base)) {
         return 0;
     }
-    
+
     if(base != "fighter" &&
        base != "thief" &&
        base != "barbarian" &&
        base != "paladin" &&
        base != "bard" &&
-       base != "inquisitor")
+       base != "inquisitor" &&
+       base != "monk")
        return 0;
-       
+
     if ((player->query_class_level(base)) < 20) {
         write("fail level");
         return 0;
     }
-    
+
     if ((player->query_stats("intelligence")) < 14) {
         write("fail intelligence");
         return 0;

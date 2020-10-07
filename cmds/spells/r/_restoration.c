@@ -13,7 +13,7 @@ void create()
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS restoration on TARGET");
     set_damage_desc("removes fatigue, exhaustion, confusion");
-    set_description("This spell eliminates fatigue and exhaustion. It also clears target's confusion and restores their stamina.
+    set_description("This spell eliminates fatigue and exhaustion. It also clears target's confusion and restores their stamina. It will also remove any negative levels target has.
 
 %^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     set_verbal_comp();
