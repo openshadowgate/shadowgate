@@ -2937,7 +2937,7 @@ object* target_filter(object* targets)
     }
 
     if (sizeof(targets)) {
-        targets = filter_array(targets, "is_non_immortal", FILTERS_D);
+        targets = filter_array(targets, (:!wizardp( $1 ) :));
     }
 
     if (!query_helpful()) {
