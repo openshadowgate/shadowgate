@@ -36,6 +36,7 @@ void spell_effect(int prof)
         tell_object(target,"%^BOLD%^As the ray hits you, you feel empowered.");
     } else {
         "/std/effect/status/negative_level"->apply_effect(target, round_duration, power);
+        spell_kill(target, caster);
     }
 
 
