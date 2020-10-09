@@ -3338,13 +3338,19 @@ void help()
     if (stringp(damage_desc)) {
         write("%^BOLD%^%^RED%^Spell effect:%^RESET%^ " + damage_desc);
     }
-    if (!syntax) {
-        syntax = "file a bug report - not initialized";
-    }
     if (!description) {
         description = "file a bug report - not initialized";
     }
-    write("%^BOLD%^%^RED%^Syntax:%^RESET%^ " + syntax + "\n");
+
+    if (syntax) {
+        write("%^BOLD%^%^RED%^Syntax:%^RESET%^ " + syntax + "\n");
+    } else {
+        if (target_required) {
+            write("%^BOLD%^%^RED%^Syntax:%^RESET%^ cast CLASS " + spell_name + " on TARGET\n");
+        } else {
+            write("%^BOLD%^%^RED%^Syntax:%^RESET%^ cast CLASS " + spell_name + "\n");
+        }
+    }
 
     write(description + "\n");
 
