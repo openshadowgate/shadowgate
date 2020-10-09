@@ -203,9 +203,9 @@ int transcribe(string str)
 }
 
 int use_scroll(string str){
-    int lev, back,num;
+    int lev, back,num, valid;
     int stat;
-    string caster, targ, what,what2;
+    string caster, targ, what,what2, *classes;
     object ob;
 
     caster = TP->query_name();
@@ -239,8 +239,50 @@ int use_scroll(string str){
         tell_object(TP, "You can't properly use a scroll while gagged!");
         return 1;
     }
+    
+    lev = this_player()->query_skill("spellcraft");        
 
-    lev = (TP->query_skill("spellcraft")) * 5 / 6 + 1;
+    //lev = (TP->query_skill("spellcraft")) * 5 / 6 + 1;
+    //lev = this_player()->query_skill("spellcraft") * 3 / 4 + 1;
+    
+    classes = this_player()->query_classes();
+    valid = 0;
+    
+    //New setup checks if the scroll is a base spell for your classes.
+    //If it is, you cast at a greater power than otherwise.
+    foreach(string myclass in classes)
+    {
+        switch(myclass)
+        {
+            case "mage":
+            case "sorcerer":
+            if(MAGIC_D->query_spell_level("mage", spell))
+                valid = 1;
+            break;
+            case "cleric":
+            case "oracle":
+            if(MAGIC_D->query_spell_level("cleric", spell))
+                valid = 1;
+            break;
+            case "druid":
+            if(MAGIC_D->query_spell_level("druid", spell))
+                valid = 1;
+            break;
+            case "paladin":
+            if(MAGIC_D->query_spell_level("paladin", spell))
+                valid = 1;
+            break;
+            case "ranger":
+            if(MAGIC_D->query_spell_level("ranger", spell))
+                valid = 1;
+            break;
+        }
+    }
+    
+    if(valid)
+        lev = lev * 5 / 6;
+    else
+        lev = lev * 2 / 3;
 
     if (FEATS_D->usable_feat(TP, "enhance scroll")) {
         lev = TP->query_guild_level(TP->query("base_class"));
@@ -262,11 +304,10 @@ int use_scroll(string str){
     TP->set_property("spell_casting", ob);
     ob->use_spell(TP, targ, lev);
 
-    if (FEATS_D->usable_feat(TP, "insightful scroll")) {
-        if (roll_dice(1, 100) < (TP->query_stats("intelligence") + 15)) {
-            tell_object(TP, "%^RESET%^%^MAGENTA%^Your %^BOLD%^%^CYAN%^k%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^owledge%^RESET%^%^MAGENTA%^ of the %^BOLD%^%^CYAN%^Wea%^RESET%^%^CYAN%^v%^CYAN%^e%^MAGENTA%^ is so %^CYAN%^pe%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^f%^BOLD%^%^CYAN%^e%^RESET%^%^CYAN%^ct%^MAGENTA%^ that you %^BOLD%^%^CYAN%^preserve%^RESET%^%^MAGENTA%^ the scroll!%^RESET%^");
-            return 1;
-        }
+    if(FEATS_D->usable_feat(TP, "insightful scroll"))
+    {
+        tell_object(TO,"%^RESET%^%^MAGENTA%^Your %^BOLD%^%^CYAN%^k%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^owledge%^RESET%^%^MAGENTA%^ of the %^BOLD%^%^CYAN%^Wea%^RESET%^%^CYAN%^v%^CYAN%^e%^MAGENTA%^ is so %^CYAN%^pe%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^f%^BOLD%^%^CYAN%^e%^RESET%^%^CYAN%^ct%^MAGENTA%^ that you %^BOLD%^%^CYAN%^preserve%^RESET%^%^MAGENTA%^ the scroll!%^RESET%^");
+        return 1;
     }
 
     remove();
