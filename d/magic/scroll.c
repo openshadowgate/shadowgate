@@ -14,6 +14,13 @@ mapping readfailed;
  */
 
 int level, usable;
+void set_spell_name(string str);
+void set_spell(int level);
+void set_av_spell(int level);
+int do_back_fire(object myuser);
+void crumble(object targ);
+void set_is_newbie(int x);  //newbie stuff added by Circe 6/6/07
+int query_is_newbie();
 int is_newbie;
 
 int is_scroll()
@@ -268,6 +275,14 @@ int use_scroll(string str){
             case "ranger":
             if(MAGIC_D->query_spell_level("ranger", spell))
                 valid = 1;
+            break;
+            case "inquisitor":
+            if(MAGIC_D->query_spell_level("inquisitor", spell))
+                valid = 1;
+            break;
+            case "bard":
+            if(MAGIC_D->query_spell_level("bard", spell))
+                valid =1;
             break;
         }
     }
