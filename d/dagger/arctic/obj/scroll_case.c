@@ -16,7 +16,7 @@ void create()
         "items that could be rolled up to fit inside.  ");
     set_value(100);
     set_cointype("gold");
-    set_max_internal_encumbrance(75);
+    set_max_internal_encumbrance(30);
     set_open_long( ""+TO->query_long()+"%^CYAN%^The cap is open.\n%^RESET%^");
     set_closed_long( ""+TO->query_long()+"%^CYAN%^The cap is closed.\n%^RESET%^");
     set_possible_to_close(1);

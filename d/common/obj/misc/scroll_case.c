@@ -12,7 +12,7 @@ void create()
     set_long("This is a wooden scroll case you can put scrolls into.");
     set_value(100);
     set_cointype("gold");
-    set_max_internal_encumbrance(65);
+    set_max_internal_encumbrance(40);
     set_property("repairtype",({ "leatherwork","tailor","woodwork" }));
 }
 

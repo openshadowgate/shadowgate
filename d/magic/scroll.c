@@ -14,13 +14,6 @@ mapping readfailed;
  */
 
 int level, usable;
-void set_spell_name(string str);
-void set_spell(int level);
-void set_av_spell(int level);
-int do_back_fire(object myuser);
-void crumble(object targ);
-void set_is_newbie(int x);  //newbie stuff added by Circe 6/6/07
-int query_is_newbie();
 int is_newbie;
 
 int is_scroll()
