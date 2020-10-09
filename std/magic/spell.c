@@ -2937,7 +2937,7 @@ object* target_filter(object* targets)
     }
 
     if (sizeof(targets)) {
-        targets = filter_array(targets, (:!(avatarp($1) && $1->query_true_invis()):))
+        targets = filter_array(targets, (:!(avatarp($1) && $1->query_true_invis()):));
     }
 
     if (!query_helpful()) {
