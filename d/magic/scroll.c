@@ -239,15 +239,15 @@ int use_scroll(string str){
         tell_object(TP, "You can't properly use a scroll while gagged!");
         return 1;
     }
-    
-    lev = this_player()->query_skill("spellcraft");        
+
+    lev = this_player()->query_skill("spellcraft");
 
     //lev = (TP->query_skill("spellcraft")) * 5 / 6 + 1;
     //lev = this_player()->query_skill("spellcraft") * 3 / 4 + 1;
-    
+
     classes = this_player()->query_classes();
     valid = 0;
-    
+
     //New setup checks if the scroll is a base spell for your classes.
     //If it is, you cast at a greater power than otherwise.
     foreach(string myclass in classes)
@@ -286,7 +286,7 @@ int use_scroll(string str){
             break;
         }
     }
-    
+
     if(valid)
         lev = lev * 5 / 6;
     else
@@ -315,7 +315,7 @@ int use_scroll(string str){
     if(FEATS_D->usable_feat(TP, "insightful scroll"))
     {
         if (roll_dice(1, 100) < (TP->query_stats("intelligence") + 15)) {
-            tell_object(TO,"%^RESET%^%^MAGENTA%^Your %^BOLD%^%^CYAN%^k%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^owledge%^RESET%^%^MAGENTA%^ of the %^BOLD%^%^CYAN%^Wea%^RESET%^%^CYAN%^v%^CYAN%^e%^MAGENTA%^ is so %^CYAN%^pe%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^f%^BOLD%^%^CYAN%^e%^RESET%^%^CYAN%^ct%^MAGENTA%^ that you %^BOLD%^%^CYAN%^preserve%^RESET%^%^MAGENTA%^ the scroll!%^RESET%^");
+            tell_object(TP,"%^RESET%^%^MAGENTA%^Your %^BOLD%^%^CYAN%^k%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^owledge%^RESET%^%^MAGENTA%^ of the %^BOLD%^%^CYAN%^Wea%^RESET%^%^CYAN%^v%^CYAN%^e%^MAGENTA%^ is so %^CYAN%^pe%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^f%^BOLD%^%^CYAN%^e%^RESET%^%^CYAN%^ct%^MAGENTA%^ that you %^BOLD%^%^CYAN%^preserve%^RESET%^%^MAGENTA%^ the scroll!%^RESET%^");
             return 1;
         }
     }
