@@ -25,7 +25,7 @@ void create()
     set_property("lore difficulty", 25);
     set_value(1000);
     set_cointype("gold");
-    set_max_internal_encumbrance(150); // Full slot compliment
+    set_max_internal_encumbrance(50);
     set_open_long("" + TO->query_long() + "%^CYAN%^The satchel is open."
                   + "\n%^RESET%^");
     set_closed_long("" + TO->query_long() + "%^CYAN%^The satchel is closed"
