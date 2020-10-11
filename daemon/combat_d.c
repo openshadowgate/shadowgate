@@ -82,7 +82,7 @@ varargs int extra_hit_calcs(object attacker, object victim, object weapon, strin
     env = environment(attacker);
 
     if (!ShieldMissChance || MissChance > ShieldMissChance) {
-        if (MissChance > roll_dice(1, 100)) {
+        if (MissChance >= roll_dice(1, 100)) {
             tell_object(victim, attacker->QCN + "%^BOLD%^%^WHITE%^ cannot see you and misses!");
             tell_object(attacker, "%^BOLD%^%^WHITE%^You cannot see " + victim->QCN + " and miss " + victim->QO + "!");
             attacker->delete("featMiss");
@@ -97,7 +97,7 @@ varargs int extra_hit_calcs(object attacker, object victim, object weapon, strin
         if (victim->query_property("shapeshifted")) {
             return 1;
         }
-        if (ShieldMissChance > roll_dice(1, 100)) {
+        if (ShieldMissChance >= roll_dice(1, 100)) {
             if (living(attacker)) {
                 tell_object(attacker, "%^RESET%^%^BOLD%^Your attack is deflected off of " + victim->QCN + "'s "
                             "shield!%^RESET%^");
@@ -578,7 +578,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
 //condensing the do_hits() function from /std/living/combat.c
 //and the damage_done() function
 
-int crit_damage(object attacker, object targ, object weapon, int size, int damage)
+int crit_damage(object attacker, object targ, object weapon, int size, int damage, int cant_shot)
 {
     int mult, crit_dam, perc;
     string targRace;
@@ -587,7 +587,11 @@ int crit_damage(object attacker, object targ, object weapon, int size, int damag
         return 0;
     }
     if (objectp(weapon) && !attacker->query_property("shapeshifted") && weapon != attacker) {
-        mult = (int)weapon->query_critical_hit_multiplier();
+        if(cant_shot){ //Venger: swinging a ranged weapon with no ammo has x2 multiplier.
+			mult = 2;
+		}else{
+			mult = (int)weapon->query_critical_hit_multiplier();
+		}
         if (objectp(targ) &&
             attacker->is_class("warmaster") &&
             FEATS_D->usable_feat(attacker, "skull collector") &&
@@ -673,7 +677,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     int attacker_size, damage, mod;
     int res, eff_ench, ench;
     int i, j, mysize;
-    int speed, enchantment, fired = 0, bonus_hit_damage = 0;// added for new stamina formula -Ares
+    int speed, enchantment, fired = 0, cant_shot=0, bonus_hit_damage = 0;// added for new stamina formula -Ares
     object* armor, shape, ammo;
     string ammoname;
 
@@ -691,15 +695,21 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
             ammo = present(ammoname, attacker);
             if (FEATS_D->usable_feat(attacker, "point blank shot") && objectp(ammo) && ammo->use_shots()) {
                 fired = 1;
-            }
-            if (fired) {
                 bonus_hit_damage = get_lrdamage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
                 if (FEATS_D->usable_feat(attacker, "point blank shot")) {
                     damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("dexterity"));
                 }
-            }
-        }else {
-            bonus_hit_damage += get_damage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
+            }else {
+				cant_shot = 1; //Venger: it has no ammo.
+				tell_object(attacker, "Your " + weapon->query_name() + " has no ammo! You swing your "+ weapon->query_name() +".\n");
+				damage = (int)weapon->query_size();
+				damage = roll_dice(1, 2 + damage); //Venger: damage based on weapon size.
+			}
+        }
+		if (!fired){
+			if(!cant_shot){ //Venger: if not using the weapon as intended then dont use weapon specials.
+				bonus_hit_damage += get_damage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
+			}            
             mysize = (int)attacker->query_size();
             if (mysize == 1) {
                 mysize++;             //run small creatures as normal size please.
@@ -786,11 +796,11 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
 
     if (critical_hit) {
-        damage = crit_damage(attacker, targ, weapon, attacker_size, damage);
+        damage = crit_damage(attacker, targ, weapon, attacker_size, damage, cant_shot);
     }
 
     damage += bonus_hit_damage;
-    new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit);
+    new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit, cant_shot);
 
     if (!objectp(weapon) || attacker->query_property("shapeshifted")) {
         attacker->increment_stamina(1);
@@ -1002,7 +1012,7 @@ int get_hand_damage(object attacker, string limb1, int damage, object attacked)
     return (damage + (int)attacker->query_unarmed_damage());
 }
 
-void send_messages(object attacker, int magic, object weapon, string what, int x, object victim, int fired, string ammo, int critical_message)
+void send_messages(object attacker, int magic, object weapon, string what, int x, object victim, int fired, string ammo, int critical_message, int cant_shot)
 {
     string your_name, my_name, me, you, others, used, type, * verb, * adverb, * attack_limbs, * limbs;
     int i, verbose, num;
@@ -1030,7 +1040,11 @@ void send_messages(object attacker, int magic, object weapon, string what, int x
         if (fired) {
             type = "ranged";
         }else if (weapon) {
-            type = (string)weapon->query_type();
+			if(cant_shot){ //Venger: swinging a ranged weapon with no ammo is used as a club.
+				type = "bludgeon";
+			}else{
+				type = (string)weapon->query_type();
+			}
         }else {
             type = "melee";
         }
@@ -1175,7 +1189,7 @@ your " + used + "!%^RESET%^";
     }
 }
 
-void new_struck(int damage, object weapon, object attacker, string limb, object victim, int fired, string ammo, int critical_hit)
+void new_struck(int damage, object weapon, object attacker, string limb, object victim, int fired, string ammo, int critical_hit, int cant_shot)
 {
     string damage_type, tmp, type;
     object shape;
@@ -1212,7 +1226,11 @@ void new_struck(int damage, object weapon, object attacker, string limb, object 
     }
 
     if (objectp(weapon) && !attacker->query_property("shapeshifted") && attacker != weapon) {
-        damage_type = (string)weapon->query_damage_type();
+		if(cant_shot){ //Venger: swinging a ranged weapon with no ammo is used as a club.
+			damage_type = "bludgeoning";
+		}else{
+			damage_type = (string)weapon->query_damage_type();
+		}        
     }else if (objectp(attacker)) {
         damage_type = (string)attacker->query_base_damage_type();
     }
@@ -1232,7 +1250,7 @@ void new_struck(int damage, object weapon, object attacker, string limb, object 
     }
 
     if (objectp(attacker)) {
-        send_messages(attacker, 0, weapon, limb, damage_num, victim, fired, ammo, critical_hit);
+        send_messages(attacker, 0, weapon, limb, damage_num, victim, fired, ammo, critical_hit, cant_shot);
     }
     if (objectp(victim)) {
         victim->remove_property("beingDamagedBy");
@@ -2503,7 +2521,6 @@ int check_avoidance(object who, object victim)
    // Basically D&D is designed for up to 20 levels
    // and the math starts to get bad after that. For example
    // the chance of a L40 hitting a L60 and a L80 are the same.
-
 // Add bonuses for specific feats or avoidance combos
     if (combo) {
          mod += 2;
@@ -2511,7 +2528,6 @@ int check_avoidance(object who, object victim)
     if (victim->query_property("shield_of_whirling_steel")) {
          mod += 3;
     }
-
 //  Avoidance Roll
     attack = (int) BONUS_D->new_bab(1,who);
     attack += (int)who->query_skill("athletics")/10;

@@ -124,7 +124,7 @@ void execute_feat()
 int calculate_my_dam(object victim, int crit)
 {
     object myFB;
-    int dam;
+    int dam, mycrit_range=20;
     if(!objectp(caster))
     {
         return 0;
@@ -142,7 +142,10 @@ int calculate_my_dam(object victim, int crit)
     else dam += BONUS_D->query_stat_bonus(caster, "strength");
     dam += (int)caster->query_damage_bonus();
     if(caster->is_class("monk")) dam += "/std/class/monk.c"->effective_enchantment(caster);
-    if(crit == 20) dam = "/daemon/combat_d.c"->crit_damage(caster, victim, 0, (int)victim->query_size(), dam);
+	if(FEATS_D->usable_feat(caster, "lethal strikes")){
+		mycrit_range=19;
+	}
+	if(crit >= mycrit_range) dam = "/daemon/combat_d.c"->crit_damage(caster, victim, 0, (int)victim->query_size(), dam, 0);
     return dam;
 }
 
