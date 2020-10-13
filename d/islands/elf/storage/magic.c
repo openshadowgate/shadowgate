@@ -28,6 +28,8 @@ if(!present("brooch"))
  new(OBJ"sbrooch")->move(TO);
 if(!present("flower"))
  new(OBJ"flower")->move(TO);
+if(!present("case"))
+ new(OBJ"case")->move(TO);
 if(!present("potion of cure blindness"))
  new("/d/common/obj/potion/cure_blindness")->move(TO);
 if(!present("potion of detect invisibility"))
@@ -36,6 +38,8 @@ if(!present("seed of return"))
  new(OBJ"seed")->move(TO);
 if(!present("paper"))
  new("/d/common/obj/misc/paper")->move(TO);
+if(!present("parchment"))
+ new("/d/common/obj/misc/parchment")->move(TO);
 if(!present("canvas"))
  new("/d/common/obj/misc/canvas")->move(TO);
 if(!present("book"))
