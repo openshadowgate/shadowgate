@@ -65,7 +65,7 @@ void spell_effect()
     pposs = caster->query_possessive();
     
     tell_object(caster, "%^GREEN%^BOLD%^You focus your psychic energies onto your " + wname + " and it takes on a coat of acid.%^RESET%^");
-    place && tell_room(place, "%^GREEN%^BOLD%^" + pname + "focuses " + pposs + " psychic energies onto " + pposs + " weapon and it is soon coated with acid.%^RESET%^");
+    place && tell_room(place, "%^GREEN%^BOLD%^" + pname + "focuses " + pposs + " psychic energies onto " + pposs + " weapon and it is soon coated with acid.%^RESET%^", ({ caster }));
     caster->set_property("spelled", ({ this_object() }));
     weapon->set_property("added short", ({ "%^GREEN%^{acidic}%^RESET%^" }) );
     addSpellToCaster();

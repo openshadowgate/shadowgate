@@ -50,7 +50,7 @@ int acid_func(object ob)
     {
         tell_object(player, "%^GREEN%^Your weapon splashes acid on " + ename + ", dissolving their flesh!%^RESET%^");
         tell_object(enemy, "%^GREEN%^" + pname + "'s weapon splashes acid on you, dissolving your flesh!");
-        tell_room(room, "%^GREEN%^" + pname + "'s weapon splashes acid on " + ename + ", dissolving their flesh!");
+        tell_room(room, "%^GREEN%^" + pname + "'s weapon splashes acid on " + ename + ", dissolving their flesh!", ({ player, enemy }));
         damage_targ(enemy, enemy->return_target_limb(), amount, "acid");
     }
 }
