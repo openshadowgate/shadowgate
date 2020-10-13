@@ -57,7 +57,7 @@ int query_paralyzed();
 int query_casting();
 int clean_up_attackers();
 void run_away();
-void send_messages(int magic, object current, string what, int x, object attacker, int fired, string ammo);
+void send_messages(int magic, object current, string what, int x, object attacker, int fired, string ammo, int cant_shot);
 void set_wimpydir(string str);
 void set_wimpy(int x);
 string query_wimpydir();
@@ -181,9 +181,9 @@ void struck(int damage, object weapon, object attacker, string limb)
     else            { x = 0; }
     if(objectp(attacker)) { attacker->send_messages(0, weapon,limb, x, TO); }
 }
-void new_struck(int damage, object weapon, object attacker, string limb, object victim, int fired, string ammo)
+void new_struck(int damage, object weapon, object attacker, string limb, object victim, int fired, string ammo, int cant_shot)
 {
-    return COMBAT_D->new_struck(damage, weapon, attacker, limb, victim, fired, ammo, query_combat_mapps("static vars", "critical hit"));
+    return COMBAT_D->new_struck(damage, weapon, attacker, limb, victim, fired, ammo, query_combat_mapps("static vars", "critical hit"), cant_shot);
 }
 
 //use /daemon/combat_d.c->calculate_damage(attacker, target, weapon, target_thing, critical hit)
@@ -274,9 +274,9 @@ int valid_casting()
     return 0;
 }
 
-void send_messages(int magic, object current, string what, int x, object attacker, int fired, string ammo)
+void send_messages(int magic, object current, string what, int x, object attacker, int fired, string ammo, int cant_shot)
 {
-    return COMBAT_D->send_messages(TO, magic, current, what, x, attacker, fired, ammo, query_combat_mapps("static vars", "critical message"));
+    return COMBAT_D->send_messages(TO, magic, current, what, x, attacker, fired, ammo, query_combat_mapps("static vars", "critical message"), cant_shot);
 }
 object *query_hunted() { return query_combat_mapps("arrays", "hunters"); }
 object *query_attackers()
