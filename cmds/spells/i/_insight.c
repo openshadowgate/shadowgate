@@ -16,9 +16,10 @@ void create() {
     set_spell_level(([ "cleric" : 3 ]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS insight on TARGET");
+    set_damage_desc("+2 AC, Clevel/8 ATK Bonus.");
     set_description("This spell grants the target a second's insight into the future, allowing her to both avoid attacks "
 "better, and to hit her targets better.  The spell is more effective when used by a priest that is solely dedicated to "
-"her faith.");
+"her faith. This spell does not stack with the foresight spell.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -47,6 +48,7 @@ int preSpell()
             "foresight.");
         return 0;
     }
+
     return 1;
 }
 
