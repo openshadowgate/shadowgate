@@ -29,7 +29,7 @@ if(!present("brooch"))
 if(!present("flower"))
  new(OBJ"flower")->move(TO);
 if(!present("case"))
- new(OBJ"case")->move(TO);
+ new(OBJ"scroll_case")->move(TO);
 if(!present("potion of cure blindness"))
  new("/d/common/obj/potion/cure_blindness")->move(TO);
 if(!present("potion of detect invisibility"))
