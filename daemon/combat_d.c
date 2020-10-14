@@ -800,8 +800,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     }
     
     //Brutalize wounds causes victim to take extra damage from physical attacks.
-    if(this_object()->query_property("brutalized"))
-        bonus_hit_damage += ( 2 + attacker->query_guild_level("psywarrior") / 20 );        
+    bonus_hit_damage += this_object()->query_property("brutalized");       
 
     damage += bonus_hit_damage;
     new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit, cant_shot);
