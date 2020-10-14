@@ -23,7 +23,7 @@ void create(){
 		new("/d/antioch/valley/obj/gem")->move(TO);
 		set_new_exp(30,"very low");
         set_max_level(35);
-		set_base_damage_type("bludgeoning");
+		set_base_damage_type("acid");
  
 }
 
@@ -36,8 +36,8 @@ void my_hit(object targ){
                 tell_object(targ,"%^BOLD%^The ooze touches you!"+
 				" Its acids eats at you!\n");
 				targ->cause_typed_damage(targ,0,roll_dice(5,10),"acid");
-                if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-35)){
-                        targ->set_paralyzed(50+random(20),"You are paralyzed in the gray ooze.");
+                if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-30)){//easier because perma stun
+                        targ->set_paralyzed(40+random(30),"You are paralyzed in the gray ooze.");
                         tell_object(targ,"%^BOLD%^You are paralyzed by the ooze's touch!\n");
                         tell_object(targ,"%^BOLD%^Its acid eats at you.\n");
                         tell_room(ETO,"%^BOLD%^"+targ->QCN+
