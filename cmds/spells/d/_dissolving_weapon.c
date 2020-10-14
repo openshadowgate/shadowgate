@@ -55,7 +55,7 @@ void spell_effect()
     }
     
     info = ([  ]);
-    info["file"] = "/d/magic/obj/weapon_effects/acidic";
+    info["file"] = "/d/magic/obj/weap_effects/acidic";
     info["func name"] = "acid_func";
     info["spell"] = this_object();
     
@@ -67,14 +67,14 @@ void spell_effect()
     tell_object(caster, "%^GREEN%^BOLD%^You focus your psychic energies onto your " + wname + " and it takes on a coat of acid.%^RESET%^");
     place && tell_room(place, "%^GREEN%^BOLD%^" + pname + "focuses " + pposs + " psychic energies onto " + pposs + " weapon and it is soon coated with acid.%^RESET%^", ({ caster }));
     caster->set_property("spelled", ({ this_object() }));
-    weapon->set_property("added short", ({ "%^GREEN%^{acidic}%^RESET%^" }) );
+    weapon->set_property("added short", ({ "%^GREEN%^BOLD%^ {acidic}%^RESET%^" }) );
     addSpellToCaster();
 }
 
 void dest_effect()
 {
-    if(objectp(weapon))
-        load_object("/d/magic/obj/weapon_effects/acidic")->remove_prop(weapon);
+    if(weapon && objectp(weapon))
+        load_object("/d/magic/obj/weap_effects/acidic")->remove_prop(weapon);
     ::dest_effect();
     if(objectp(this_object()))
         this_object()->remove();

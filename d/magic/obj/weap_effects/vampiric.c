@@ -62,7 +62,7 @@ void remove_prop(object ob)
 {
     object player;
     
-    ob->remove_property_value("added short", ({ "%^GREEN%^{vampiric}%^RESET%^" }) );
+    ob->remove_property_value("added short", ({ "%^MAGENTA%^ {vampiric}%^RESET%^" }) );
     ob->remove_property("temp_hit_bonus");
     
     player = environment(this_object());

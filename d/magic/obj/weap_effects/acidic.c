@@ -45,6 +45,7 @@ int acid_func(object ob)
     pname = capitalize(player->query_name());
     ename = capitalize(enemy->query_name());
     amount = roll_dice(4, 6);
+    amount = min( ({ player->query_level(), amount }) );
     
     if(!random(10))
     {
@@ -59,7 +60,7 @@ void remove_prop(object ob)
 {
     object player;
     
-    ob->remove_property_value("added short", ({ "%^GREEN%^{acidic}%^RESET%^" }) );
+    ob->remove_property_value("added short", ({ "%^GREEN%^BOLD%^ {acidic}%^RESET%^" }) );
     ob->remove_property("temp_hit_bonus");
     
     player = environment(this_object());

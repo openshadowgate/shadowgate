@@ -55,7 +55,7 @@ void spell_effect()
     }
     
     info = ([  ]);
-    info["file"] = "/d/magic/obj/weapon_effects/vampiric";
+    info["file"] = "/d/magic/obj/weap_effects/vampiric";
     info["func name"] = "vampiric_func";
     info["spell"] = this_object();
     
@@ -67,14 +67,14 @@ void spell_effect()
     tell_object(caster, "%^CYAN%^BOLD%^You focus your psychic energies onto your " + wname + " and it begins to glow with an ominous glimmer.%^RESET%^");
     place && tell_room(place, "%^CYAN%^BOLD%^" + pname + "focuses " + pposs + " psychic energies onto " + pposs + " weapon and it begins to glow with an ominous glimmer.%^RESET%^", ({ caster }));
     caster->set_property("spelled", ({ this_object() }));
-    weapon->set_property("added short", ({ "%^GREEN%^{vampiric}%^RESET%^" }) );
+    weapon->set_property("added short", ({ "%^MAGENTA%^ {vampiric}%^RESET%^" }) );
     addSpellToCaster();
 }
 
 void dest_effect()
 {
     if(objectp(weapon))
-        load_object("/d/magic/obj/weapon_effects/vampiric")->remove_prop(weapon);
+        load_object("/d/magic/obj/weap_effects/vampiric")->remove_prop(weapon);
     ::dest_effect();
     if(objectp(this_object()))
         this_object()->remove();
