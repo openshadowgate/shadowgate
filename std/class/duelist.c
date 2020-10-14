@@ -99,7 +99,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    Level 20 Fighter, Barbarian, Thief, Paladin, Inquisitor, Bard\n"
+        "    Level 20 Martial or Hybrid except Druid\n"
         "    14 Base Intelligence\n"
         "    10 Ranks spent in Athletics Skill\n";
 
@@ -134,21 +134,24 @@ int prerequisites(object player)
     if (!player->is_class(base)) {
         return 0;
     }
-
+    
     if(base != "fighter" &&
        base != "thief" &&
        base != "barbarian" &&
        base != "paladin" &&
        base != "bard" &&
        base != "inquisitor" &&
-       base != "monk")
+       base != "monk" &&
+       base != "warlock" &&
+       base != "psywarrior" &&
+       base != "ranger")
        return 0;
-
+       
     if ((player->query_class_level(base)) < 20) {
         write("fail level");
         return 0;
     }
-
+    
     if ((player->query_stats("intelligence")) < 14) {
         write("fail intelligence");
         return 0;
