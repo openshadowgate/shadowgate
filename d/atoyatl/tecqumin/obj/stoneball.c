@@ -143,7 +143,7 @@ void roll(){
         }
       }
       ////////////////
-      all_living(ETO)[i]->do_damage(all_living(ETO)[i]->return_target_limb(),random(250)+ 150);
+      all_living(ETO)[i]->cause_typed_damage(all_living(ETO)[i], all_living(ETO)[i]->return_target_limb(), roll_dice(1, 250) + 149, "bludgeoning");
       all_living(ETO)[i]->add_attacker(TO);
       all_living(ETO)[i]->continue_attack();
       if(objectp(all_living(ETO)[i])){

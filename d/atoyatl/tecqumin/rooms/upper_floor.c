@@ -205,6 +205,7 @@ void jump2(object ob){
   tell_object(ob, "You hit the ground with an agonising thump!");
   hp = (int)ob->query_max_hp()/4;
   ob->do_damage(ob->return_target_limb(),hp + random(hp));
+  ob->cause_typed_damage(ob, ob->return_target_limb(), roll_dice(1, hp) + hp, "bludgeoning");
   ob->add_attacker(TO);
   ob->continue_attack();
   if(objectp(ob))    ob->remove_attacker(TO);  

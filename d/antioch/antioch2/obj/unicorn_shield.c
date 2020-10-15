@@ -43,7 +43,6 @@ int wearme()
 	if(ALIGN->is_evil(ETO)) {
 		tell_object(ETO,"%^BOLD%^The shield tightens its grip on your arm as"+
 		" you wear it, almost crushing your wrist.");
-		ETO->do_damage("torso",random(5)+10);
 		ETO->cause_typed_damage(ETO, "torso", roll_dice(1, 5) + 9, "divine");
 		return 1;
 	}

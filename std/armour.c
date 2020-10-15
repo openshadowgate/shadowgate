@@ -129,7 +129,7 @@ int decayMe() {
 void unwear() {
    function f;
    string catchbug;
-   int answer;
+   int answer, shieldwall;
    mapping itembonuses;
 
    if(!objectp(wornBy)) {       return;   }
@@ -160,6 +160,14 @@ void unwear() {
                message("my_action", "You notice your "+::query_short()+" is"+query_broken()+".",wornBy);
        }
        else message("my_action", "You remove your "+query_short()+".",wornBy);
+       shieldwall = (int)wornBy->query_property("shieldwall");
+       if (shieldwall && query_type() == "shield") {
+           message("my_action", "You can't benefit from shieldwall without a shield.", wornBy);
+           wornBy->set_property("shieldwall", -shieldwall);
+           wornBy->set_property("damage resistance", -shieldwall);
+           wornBy->set_property("shieldwall_bonus", -shieldwall);
+           wornBy->set_property("empowered", shieldwall);
+       }
    }
 
    if(itembonuses = TO->query_item_bonuses()) run_item_bonuses("remove",wornBy,itembonuses);

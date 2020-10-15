@@ -23,8 +23,7 @@ int allow_shifted() { return 0; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) return 0;
-    if(!FEATS_D->has_feat(ob,"opportunity strikes") ||
-       ob->is_wearing_type("shield"))
+    if(!FEATS_D->has_feat(ob,"opportunity strikes"))
     {
         dest_effect();
         return 0;
@@ -36,6 +35,17 @@ int cmd_swipe(string str)
 {
     object feat;
     if(!objectp(TP)) return 0;
+    if ((int)TP->is_wearing_type("shield"))
+    {
+        tell_object(TP, "%^RESET%^%^BOLD%^You can't be wearing a shield.%^RESET%^");
+        return 1;
+    }
+    wielded = (object*)TP->query_wielded();
+    if (!sizeof(wielded) == 1)
+    {
+        tell_object(TP, "%^RESET%^%^BOLD%^You must be wielding a single one-handed weapon.%^RESET%^");
+        return 1;
+    }
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;

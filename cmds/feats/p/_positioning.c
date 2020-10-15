@@ -13,10 +13,11 @@ void create()
     feat_category("Duelist");
     feat_name("positioning");
     feat_prereq("Swipe");
-    feat_syntax("positioning offensive|defensive|check");
-    feat_desc("This feat will allow characters to slightly shift between defensive and offensive combat, increasing or decreasing their accuracy and resistance.
-
-This feat shifts values between AC and attack bonus.");
+    feat_syntax("positioning offensive|defensive|min|max|check");
+    feat_desc("This feat will allow characters to slightly shift between defensive and offensive combat, increasing or decreasing their accuracy and resistance."
+        + "\n"
+        + "\nThis feat shift values between AC and attack bonuses."
+        + "\nYou can use this feat once in any direction and one aditional time for every 4 character levels to a max bonus of 5.");
     set_target_required(0);
     allow_blind(1);
 }
@@ -25,9 +26,8 @@ int allow_shifted() { return 0; }
 
 int prerequisites(object ob)
 {
-    if(!objectp(ob)) { return 0; }
-    if(!FEATS_D->has_feat(ob,"swipe") ||
-       ob->is_wearing_type("shield"))
+    if (!objectp(ob)) { return 0; }
+    if (!FEATS_D->has_feat(ob, "swipe"))
     {
         dest_effect();
         return 0;
@@ -37,22 +37,38 @@ int prerequisites(object ob)
 
 int cmd_positioning(string str)
 {
-    object feat;
-    if(!objectp(TP)) { return 0; }
-    if(str) str = lower_case(str);
-    if(str != "offensive" && str != "defensive") { str = "check"; }
+    object feat, *wielded;
+    if (!objectp(TP)) { return 0; }
+    if (str) str = lower_case(str);
+    if (str != "offensive" &&
+        str != "defensive" &&
+        str != "max" &&
+        str != "min") {
+        str = "check";
+    }	
+    if((int)TP->is_wearing_type("shield"))
+    {
+        tell_object(TP,"%^RESET%^%^BOLD%^You can't be wearing a shield.%^RESET%^");
+        return 1;
+    }	
+	wielded = (object*)TP->query_wielded();
+	if(!sizeof(wielded) == 1)
+    {
+        tell_object(TP,"%^RESET%^%^BOLD%^You must be wielding a single one-handed weapon.%^RESET%^");
+        return 1;
+    }	
     feat = new(base_name(TO));
-    feat->setup_feat(TP,str);
+    feat->setup_feat(TP, str);
     return 1;
 }
 
 int check_my_status(object ob)
 {
-    if(!objectp(ob)) { return 0; }
+    if (!objectp(ob)) { return 0; }
 
-    if(ob->query_bound() || ob->query_unconscious() || ob->query_tripped())
+    if (ob->query_bound() || ob->query_unconscious() || ob->query_tripped())
     {
-        tell_object(ob,"You are unable to move well enough to do that.");
+        tell_object(ob, "You are unable to move well enough to do that.");
         return 0;
     }
     return 1;
@@ -60,9 +76,9 @@ int check_my_status(object ob)
 
 void execute_feat()
 {
-    int bonus;
+    int bonus, maxbonus;
 
-    if(!check_my_status(caster))
+    if (!check_my_status(caster))
     {
         dest_effect();
         return;
@@ -71,45 +87,51 @@ void execute_feat()
     ::execute_feat();
 
     bonus = (int)caster->query_property("tactical_positioning");
+    maxbonus = (int)caster->query_base_character_level() / 4 + 1;
+    maxbonus = (maxbonus < 5 ? maxbonus : 5);
 
-    switch(arg)
+    switch (arg)
     {
 
     case "defensive":
-        if(bonus == 5)
+        if (bonus == maxbonus)
         {
-            tell_object(caster,"%^RESET%^%^MAGENTA%^Your can't fight any more defensive!%^RESET%^");
-            dest_effect();
-            return;
+            tell_object(caster, "%^RESET%^%^MAGENTA%^Your can't fight any more defensive!%^RESET%^");
+            break;
         }
-        caster->remove_property("tactical_positioning");
-        caster->set_property("tactical_positioning",bonus + 1);
+        caster->set_property("tactical_positioning", 1);
         caster->add_ac_bonus(1);
         caster->add_attack_bonus(-1);
-        tell_object(caster,"%^BOLD%^%^RED%^You shift your stance to better defend against attacks!%^RESET%^");
-        dest_effect();
-        return;
+        tell_object(caster, "%^BOLD%^%^RED%^You shift your stance to better defend against attacks!%^RESET%^");
+        break;
 
     case "offensive":
-        if(bonus == -5)
+        if (bonus == -maxbonus)
         {
-            tell_object(caster,"%^RESET%^%^MAGENTA%^Your can't fight any less defensive!%^RESET%^");
-            dest_effect();
-            return;
+            tell_object(caster, "%^RESET%^%^MAGENTA%^Your can't fight any less defensive!%^RESET%^");
+            break;
         }
-        caster->remove_property("tactical_positioning");
-        caster->set_property("tactical_positioning",bonus - 1);
+        caster->set_property("tactical_positioning", - 1);
         caster->add_ac_bonus(-1);
         caster->add_attack_bonus(1);
-        tell_object(caster,"%^BOLD%^%^CYAN%^You shift your stance to fight more aggressively!%^RESET%^");
-        dest_effect();
-        return;
-
+        tell_object(caster, "%^BOLD%^%^CYAN%^You shift your stance to fight more aggressively!%^RESET%^");
+        break;
+    case "max":
+        caster->set_property("tactical_positioning", maxbonus - bonus);
+        caster->add_ac_bonus(maxbonus - bonus);
+        caster->add_attack_bonus(bonus - maxbonus);
+        tell_object(caster, "%^BOLD%^%^RED%^You shift your stance to better defend against attacks!%^RESET%^");
+        break;
+    case "min":
+        caster->set_property("tactical_positioning", -maxbonus - bonus);
+        caster->add_ac_bonus(-maxbonus - bonus);
+        caster->add_attack_bonus(bonus + maxbonus);
+        tell_object(caster, "%^BOLD%^%^CYAN%^You shift your stance to fight more aggressively!%^RESET%^");
+        break;
     case "check":
-
-        tell_object(caster,"%^RESET%^%^GREEN%^You have shifted %^MAGENTA%^"+bonus+" %^RESET%^%^GREEN%^points into tactical positioning.%^RESET%^");
-        dest_effect();
-        return;
+        tell_object(caster, "%^RESET%^%^GREEN%^You have shifted %^MAGENTA%^" + bonus + " %^RESET%^%^GREEN%^points into "
+            + "tactical positioning.%^RESET%^");
+        break;
     }
 
     dest_effect();

@@ -1180,6 +1180,7 @@ string equip_weapon_to_limb(object weap, string limb1, string limb2)
         ApplyObjectBonuses(weap, TO, "add", "wield");
     }
     num_wielded++;
+    check_positioning(num_wielded);
     return 0;
 }
 
@@ -1200,10 +1201,22 @@ int remove_weapon_from_limb(object ob)
     }
     ac += (int)ob->query_ac();
     num_wielded--;
+    check_positioning(num_wielded);
     if (TO->is_player()) {
         ApplyObjectBonuses(ob, TO, "remove", "wield");
     }
     return 1;
+}
+
+void check_positioning(int numwielded) {
+    int positioning;
+    positioning = (int)TP->query_property("tactical_positioning");
+    if (positioning && numwielded != 1) {
+        message("my_action", "You can't benefit from positioning with a shield.", TP);
+        TP->set_property("tactical_positioning", -positioning);
+        TP->add_ac_bonus(-positioning);
+        TP->add_attack_bonus(positioning);
+    }
 }
 
 string size_ok(string type, object arm)

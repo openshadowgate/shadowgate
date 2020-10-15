@@ -66,7 +66,7 @@ void create(){
 void bite(object target){
    tell_room(ETO,"%^RESET%^%^GREEN%^The Yuan-ti sinks its %^RESET%^fangs %^GREEN%^deep into "+target->query_cap_name()+"'s neck.",target);
    tell_object(target, "%^RESET%^%^GREEN%^The Yuan-ti lunges forward and sinks its %^RESET%^fangs %^GREEN%^deep into your neck!");
-   target->do_damage("torso",roll_dice(2,8));
+   target->cause_typed_damage(target, "torso", roll_dice(2, 8), "piercing");
    if(!"daemon/saving_d"->saving_throw(target,"paralyzation_poison_death",-2)){
       tell_object(target,"%^BOLD%^%^RED%^You feel poison "+
          "burning through your veins!%^RESET%^");

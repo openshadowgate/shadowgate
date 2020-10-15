@@ -114,7 +114,7 @@ int extra_hit(object vic) {
                          "spins "+ETO->QP+" sword smoothly, cutting "+
                          ""+vic->QCN+" viciously!%^RESET%^",({ETO,vic}));
                        set_property("magic",1);
-                       vic->do_damage("torso",random(10)+8);
+                       vic->cause_typed_damage(vic, vic->return_target_limb(), roll_dice(1, 10) + 7, "slashing");
                        set_property("magic",-1);
                        break;
           case 12..17: tell_object(ETO,"%^BOLD%^%^GREEN%^The "+
@@ -129,7 +129,7 @@ int extra_hit(object vic) {
                           "spring to life and %^RED%^bite %^GREEN%^"+
                           ""+vic->QCN+"!",({ETO,vic}));
                        set_property("magic",1);
-                       vic->do_damage("torso",(random(4)+6));
+                       vic->cause_typed_damage(vic, vic->return_target_limb(), roll_dice(1, 4) + 5, "piercing");
                        set_property("magic",-1);
                        if(!"daemon/saving_d"->saving_throw(vic,"paralyzation_poison_death",-2)){
                           tell_object(vic,"%^BOLD%^%^RED%^You feel poison "+

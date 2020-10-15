@@ -10,7 +10,9 @@ void create()
     feat_category("WeaponMastery");
     feat_name("weapon mastery");
     feat_prereq("Fighter L20");
-    feat_desc("You learn to use your weapon better. Critical multiplier of any weapon you wield will be increased by 1. In addition, you can't be disarmed with Disarm feat.");
+    feat_desc("You learn to use your weapon better. Critical multiplier of any weapon you wield will be increased by 1. In addition, you can't be disarmed with Disarm feat.
+
+        %^ BOLD%^ N.B.%^ RESET%^ This feat does not stack with Exploit Weakness.");
     permanent(1);
 }
 

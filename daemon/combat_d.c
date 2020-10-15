@@ -586,10 +586,9 @@ int crit_damage(object attacker, object targ, object weapon, int size, int damag
     if (damage <= 0) {
         return 0;
     }
+    mult = 2;
     if (objectp(weapon) && !attacker->query_property("shapeshifted") && weapon != attacker) {
-        if(cant_shot){ //Venger: swinging a ranged weapon with no ammo has x2 multiplier.
-			mult = 2;
-		}else{
+        if(!cant_shot){ //Venger: swinging a ranged weapon with no ammo has x2 multiplier.
 			mult = (int)weapon->query_critical_hit_multiplier();
 		}
         if (objectp(targ) &&
@@ -607,7 +606,7 @@ int crit_damage(object attacker, object targ, object weapon, int size, int damag
             targ->set_hp(-100);
         }
     }else {
-        mult = 2;     // currently all unarmed attacks have x2 multiplier
+        // currently all unarmed attacks have x2 multiplier
         if (attacker->is_class("monk")) {
             mult += (int)"/std/class/monk.c"->critical_multiplier(attacker);
 
@@ -627,9 +626,8 @@ int crit_damage(object attacker, object targ, object weapon, int size, int damag
         }
     }
 
-mult -= 1;
-
-//Odin's note that we already dealt normal damage and need to reduce multiplier by one
+    mult -= 1;
+    //Odin's note that we already dealt normal damage and need to reduce multiplier by one
 
     if (!attacker->query_property("shapeshifted")) {
         if (FEATS_D->usable_feat(attacker, "exploit weakness")) {
@@ -639,11 +637,13 @@ mult -= 1;
         }
     }
     crit_dam = 0;
-
+    /*
     while (mult > 0) {
         mult--;
         crit_dam += damage;
-    }
+    }*/
+    //Venger: Why dont just multiply?
+    crit_dam = mult * damage;
 
     if (objectp(targ)) {
         targRace = (string)targ->query_race();

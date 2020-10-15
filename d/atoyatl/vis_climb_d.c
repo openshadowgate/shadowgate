@@ -3852,7 +3852,7 @@ void fall(string name, object room){
     loc = limbs[BODY];
     height = sizeof(wall) - loc/10000;
     climber->set_tripped(10);
-    climber->do_damage(height * height * 10);
+    climber->cause_typed_damage(climber, climber->return_target_limb(), height * height * 10, "bludgeoning");
     limbs[L_HAND] = -1;
     limbs[R_HAND] = -1;
     limbs[BODY] = loc + (height-5) * 10000;

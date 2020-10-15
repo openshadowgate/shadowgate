@@ -10,8 +10,11 @@ void create()
     feat_category("MeleeAccuracy");
     feat_name("expertise");
     feat_prereq("Intelligence 13");
-    feat_syntax("expertise offensive|defensive|check");
-    feat_desc("The Expertise feat will allow the character to shift  some of their focus from hitting a target to defending from it, making them  more difficult to hit with melee attacks.");
+    feat_syntax("expertise offensive|defensive|min|max|check");
+    feat_desc("The Expertise feat will allow the character to shift some of their focus from hitting a target to defending from it, making them more difficult to hit with melee attacks."
+        + "\n"
+        + "\nThis feat shift values between attack and AC bonuses."
+        + "\nYou can use this feat once and one aditional time for every 4 character levels to a max bonus of 5.");
     set_target_required(0);
     set_required_for(({"disarm","knockdown","daze"}));
 }
@@ -30,11 +33,16 @@ int prerequisites(object ob){
 int cmd_expertise(string str)
 {
     object feat;
-    if(!objectp(TP)) { return 0; }
-    if(str) str = lower_case(str);
-    if(str != "offensive" && str != "defensive") { str = "check"; }
+    if (!objectp(TP)) { return 0; }
+    if (str) str = lower_case(str);
+    if (str != "offensive" &&
+        str != "defensive" &&
+        str != "max" &&
+        str != "min") {
+        str = "check";
+    }
     feat = new(base_name(TO));
-    feat->setup_feat(TP,str);
+    feat->setup_feat(TP, str);
     return 1;
 }
 
@@ -52,7 +60,7 @@ int check_my_status(object ob)
 
 void execute_feat()
 {
-    int bonus;
+    int bonus, maxbonus;
 
     if(!check_my_status(caster))
     {
@@ -63,48 +71,53 @@ void execute_feat()
     ::execute_feat();
 
     bonus = (int)caster->query_property("combat_expertise");
+    maxbonus = (int)caster->query_base_character_level() / 4 + 1;
+    maxbonus = (maxbonus < 5 ? maxbonus : 5);
 
     switch(arg)
     {
 
     case "defensive":
-        if(bonus == 5)
+        if(bonus == maxbonus)
         {
             tell_object(caster,"%^RESET%^%^MAGENTA%^Your expertise can't make you fight any more defensive!%^RESET%^");
-            dest_effect();
-            return;
+            break;
         }
-        caster->remove_property("combat_expertise");
-        caster->set_property("combat_expertise",bonus + 1);
+        caster->set_property("combat_expertise", 1);
         caster->add_ac_bonus(1);
         caster->add_attack_bonus(-1);
         tell_object(caster,"%^BOLD%^%^RED%^You shift your stance to better defend against attacks!%^RESET%^");
-        tell_room(place,"%^BOLD%^%^RED%^"+caster->QCN+" shifts "+caster->QP+" stance to better "
-            "defend against attacks!%^RESET%^",caster);
-        dest_effect();
-        return;
+        break;
 
     case "offensive":
-        if(bonus == 0)
+        if(!bonus)
         {
             tell_object(caster,"%^RESET%^%^MAGENTA%^Your expertise can't make you fight any less defensive!%^RESET%^");
-            dest_effect();
-            return;
+            break;
         }
-        caster->remove_property("combat_expertise");
-        caster->set_property("combat_expertise",bonus - 1);
+        caster->set_property("combat_expertise", - 1);
         caster->add_ac_bonus(-1);
         caster->add_attack_bonus(1);
         tell_object(caster,"%^BOLD%^%^GREEN%^You shift your stance to fight more aggressively!%^RESET%^");
-        tell_room(place,"%^BOLD%^%^GREEN%^"+caster->QCN+" shifts "+caster->QP+" stance to fight "
-            "less defensively!%^RESET%^",caster);
+        break;
+    case "max":
+        caster->set_property("combat_expertise", maxbonus - bonus);
+        caster->add_ac_bonus(maxbonus - bonus);
+        caster->add_attack_bonus(bonus - maxbonus);
+        tell_object(caster, "%^BOLD%^%^RED%^You shift your stance to better defend against attacks!%^RESET%^");
         dest_effect();
-        return;
-
+        break;
+    case "min":
+        caster->set_property("combat_expertise", - bonus);
+        caster->add_ac_bonus(- bonus);
+        caster->add_attack_bonus(bonus);
+        tell_object(caster, "%^BOLD%^%^GREEN%^You shift your stance to fight more aggressively!%^RESET%^");
+        dest_effect();
+        break;
     case "check":
 
-        tell_object(caster,"%^RESET%^%^GREEN%^You have shifted %^MAGENTA%^"+bonus+" %^RESET%^%^GREEN%^points into "
-            "expertise.%^RESET%^");
+        tell_object(caster, "%^RESET%^%^GREEN%^You have shifted %^MAGENTA%^" + bonus + " %^RESET%^%^GREEN%^points into " +
+            "powerattack.%^RESET%^");
         dest_effect();
         return;
     }
