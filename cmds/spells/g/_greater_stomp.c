@@ -55,7 +55,7 @@ void spell_effect(int prof){
 }
 
 void execute_attack(){
-   object *foes,*inven = ({});
+   object *foes = ({});
    int i;
 
    ::execute_attack();
@@ -73,10 +73,8 @@ void execute_attack(){
       dest_effect();
       return;
    }
-   inven = target_selector();
-   if(sizeof(inven) > 0){
-   }
-//   foes = caster->query_attackers();
+
+   foes = target_selector();
    if(sizeof(foes)){
       tell_room(storm_room,"%^YELLOW%^The earth ripples beneath you, throwing "
          "up debris and making footing treacherous!%^RESET%^");

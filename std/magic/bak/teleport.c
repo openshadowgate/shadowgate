@@ -22,12 +22,6 @@ varargs int object_can_be_teleported(object teleportee, object destination, int 
     if (!(teleportee && destination && clevel)) {
         return 0;
     }
-    
-    if(catch(call_other(destination, "???")))
-    {
-        tell_object(teleportee, "Destination error.");
-        return 0;
-    }
 
     if (!objectp(destination)) {
         return 0;

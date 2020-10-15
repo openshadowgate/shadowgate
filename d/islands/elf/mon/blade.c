@@ -74,6 +74,7 @@ void create()
      new(OBJ"rape")->move(TO);
      force_me("wield rapier");
    }
+   new(OBJ"scroll_case")->move(TO);
   pap = new("/d/common/obj/misc/paper");
   pap->move(TO);
   pap->set("language","elven");

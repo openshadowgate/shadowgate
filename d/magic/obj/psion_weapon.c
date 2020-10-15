@@ -114,6 +114,8 @@ void make_me(string str)
         
     case "battleaxe": 
     
+        set_size(3);
+        set_wc(1,10);
         set_short("%^BOLD%^%^RED%^M%^CYAN%^i%^RED%^n"+
             "%^CYAN%^d %^RED%^C%^CYAN%^l%^RED%^e%^CYAN%^"+
             "a%^RED%^v%^CYAN%^e%^RED%^r%^RESET%^");
