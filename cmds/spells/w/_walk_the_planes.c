@@ -40,6 +40,12 @@ void spell_effect(int prof) {
 
     endplace = caster->query_rem_room(arg);
 
+    if(!endplace || catch(call_other(endplace, "???")))
+    {
+        tell_object(caster, "Destination invalid.");
+        return;
+    }
+
     spell_successful();
 
     if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))

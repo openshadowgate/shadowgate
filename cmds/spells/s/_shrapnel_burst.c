@@ -18,7 +18,7 @@ void create()
 
     set_author("tlaloc");
     set_spell_name("shrapnel burst");
-    set_spell_level( ([ "psion" : 5 ]) );
+    set_spell_level( ([ "psion" : 5, "psywarrior" : 4 ]) );
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shrapnel burst on TARGET");
     set_damage_desc("Piercing Damage to all attackers");
