@@ -14,7 +14,7 @@ inherit DAEMON;
 int empower_func(object ob)
 {
     object room, player, spell, enemy;
-    int amount;
+    int amount, power;
     string pname, ename;
     mapping info;
     
@@ -42,18 +42,23 @@ int empower_func(object ob)
     if(!objectp(enemy))
         return 0;
     
+    power = 1 + player->query_max_mp() / 50;
+    
+    if(player->query_mp() < power)
+        return 0;
+    
     pname = capitalize(player->query_name());
     ename = capitalize(enemy->query_name());
-    //SRD is WC / 2. This scales with level
-    amount = ob->query_wc() * (1 + player->query_guild_level("psywarrior") / 10);
+
+    amount = roll_dice(1, 8) + power * (player->query_guild_level("psywarrior") / 10);
     
     if(!random(10))
     {
-        tell_object(player, "%^GREEN%^Your weapon seems to draw upon " + ename + "'s life force!%^RESET%^");
-        tell_object(enemy, "%^GREEN%^" + pname + "'s weapon seems to draw upon your life force!");
-        tell_room(room, "%^GREEN%^" + pname + "'s weapon seems to draw upon " + ename + "'s life force!", ({ player, enemy }));
-        player->add_hp(amount);
-        enemy->cause_typed_damage(enemy, enemy->return_target_limb(), amount, "negative energy");
+        tell_object(player, "%^CYAN%^BOLD%^Your weapon strikes " + ename + " with a flare of psychic energy!%^RESET%^");
+        tell_object(enemy, "%^CYAN%^BOLD%^" + pname + "'s weapon strikes you with a flare of psychic energy!");
+        tell_room(room, "%^CYAN%^BOLD%^" + pname + "'s weapon strikes " + ename + " with a flare of psychic energy!", ({ player, enemy }));
+        enemy->cause_typed_damage(enemy, enemy->return_target_limb(), amount, "mental");
+        player->add_mp(-power);
     }
 }
 
@@ -65,7 +70,7 @@ void remove_prop(object ob)
     ob->remove_property("temp_hit_bonus");
     
     player = environment(this_object());
-    player && tell_object(player, "%^%^The vampiric energies fade from your weapon.%^RESET%^");
+    player && tell_object(player, "%^CYAN%^The psychic energies fade from your weapon.%^RESET%^");
 }
     
     
