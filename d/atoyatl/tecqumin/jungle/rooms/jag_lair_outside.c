@@ -94,7 +94,7 @@ void fall(object ob){
   }
   TP->set_property("untrackable", 1);
   ob->move(JUNG_ROOM + "jag_lair_ground");
-  ob->do_damage(ob->return_target_limb(),100 + random(50));
+  ob->cause_typed_damage(ob, ob->return_target_limb(), roll_dice(1, 50) + 99, "bludgeoning");
   ob->force_me("look");
   if (trackable >0){
     ob->set_property("untrackable", trackable);   

@@ -43,7 +43,7 @@ int pit_trap(string str)
                  +" disappears, the slab slams closed once more above "
                  + TP->QO + ", sealing the way shut.",TP);
     hp = (int)TP->query_max_hp()/4;
-    TP->do_damage(TP->return_target_limb(),(hp/2)+random(hp/2));
+    TP->cause_typed_damage(TP, TP->return_target_limb(), roll_dice(1, hp / 2) + hp / 2, "bludgeoning");
     TP->add_attacker(TO);
     TP->continue_attack();
     if(objectp(TP))    TP->remove_attacker(TO);

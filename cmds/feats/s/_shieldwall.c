@@ -25,7 +25,7 @@ int allow_shifted() { return 0; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
-    if(!FEATS_D->has_feat(ob,"shieldbash"))
+    if(!FEATS_D->has_feat(ob, "shieldbash"))
     {
         dest_effect();
         return 0;
@@ -78,16 +78,20 @@ void init_num_attacks(object ob)
 int cmd_shieldwall(string str)
 {
     object feat;
-    if(!objectp(TP)) { return 0; }
-    if(str) str = lower_case(str);
-    if(str != "offensive" && str != "defensive" && str != "min" && str != "max") { str = "check"; }
+    if (!objectp(TP)) { return 0; }
+    if (str) str = lower_case(str);
+    if (str != "offensive" &&
+		str != "defensive" &&
+		str != "min" &&
+		str != "max") {
+		str = "check";
+	}
 
     if(!(int)TP->is_wearing_type("shield"))
     {
         tell_object(TP,"%^RESET%^%^BOLD%^You must be wearing a shield first.%^RESET%^");
         return 1;
     }
-
 
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
@@ -127,7 +131,7 @@ void execute_feat()
 
     case "defensive":
 
-        if(bonus >= MAX)
+        if(bonus == MAX)
         {
             tell_object(caster,"%^RESET%^%^MAGENTA%^Your shield can give you no additional protection!%^RESET%^");
             break;
@@ -153,9 +157,9 @@ void execute_feat()
             break;
         }
 
-        tell_object(caster,"%^BOLD%^%^YELLOW%^You shift your stance, moving from behind your shield into "
+        tell_object(caster,"%^BOLD%^%^YELLOW%^You shift your stance, moving from behind your shield into " +
             "better position to attack!%^RESET%^");
-        tell_room(place,"%^BOLD%^%^YELLOW%^"+caster->QCN+" shifts "+caster->QP+" stance, moving from "
+        tell_room(place,"%^BOLD%^%^YELLOW%^"+caster->QCN+" shifts "+caster->QP+" stance, moving from " +
             "behind "+caster->QP+" shield and into a better position to attack!%^RESET%^", caster);
 
         caster->set_property("shieldwall",-1);
@@ -167,10 +171,10 @@ void execute_feat()
 		
 	case "max":
 	
-		tell_object(caster,"%^BOLD%^%^YELLOW%^You shift your stance, positioning your shield to better defend "
+		tell_object(caster,"%^BOLD%^%^YELLOW%^You shift your stance, positioning your shield to better defend " +
             "against all attacks!%^RESET%^");
         tell_room(place,"%^BOLD%^%^YELLOW%^"+caster->QCN+" shifts "+caster->QP+" stance, positioning "
-            ""+caster->QP+" shield to better defend against all attacks!%^RESET%^",caster);
+            + caster->QP + " shield to better defend against all attacks!%^RESET%^",caster);
 
         caster->set_property("shieldwall",MAX-bonus);
         caster->set_property("damage resistance",MAX-bonus);
@@ -180,11 +184,10 @@ void execute_feat()
 		
     case "min":
 	
-		tell_object(caster,"%^BOLD%^%^YELLOW%^You shift your stance, moving from behind your shield into "
+		tell_object(caster,"%^BOLD%^%^YELLOW%^You shift your stance, moving from behind your shield into " +
             "better position to attack!%^RESET%^");
-        tell_room(place,"%^BOLD%^%^YELLOW%^"+caster->QCN+" shifts "+caster->QP+" stance, moving from "
+        tell_room(place,"%^BOLD%^%^YELLOW%^"+caster->QCN+" shifts "+caster->QP+" stance, moving from " +
             "behind "+caster->QP+" shield and into a better position to attack!%^RESET%^", caster);
-
         caster->set_property("shieldwall",-bonus);
         caster->set_property("damage resistance",-bonus);
         caster->set_property("shieldwall_bonus",-bonus);
@@ -192,9 +195,8 @@ void execute_feat()
         break;
 
     case "check":
-
-        tell_object(caster,"%^RESET%^%^GREEN%^You have shifted %^MAGENTA%^"+caster->query_property("shieldwall")+" "
-            "%^RESET%^%^GREEN%^points into shieldwall.%^RESET%^");
+        tell_object(caster,"%^RESET%^%^GREEN%^You have shifted %^MAGENTA%^"+caster->query_property("shieldwall") +
+            " %^RESET%^%^GREEN%^points into shieldwall.%^RESET%^");
         break;
     }
 

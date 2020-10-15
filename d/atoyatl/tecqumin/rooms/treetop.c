@@ -264,7 +264,7 @@ int swing(string str){
                 +" the jungle floor.", TP);
     if (interactive(TP)||random(2)){
       hp = TP->query_max_hp();
-      TP->do_damage(TP->return_target_limb(),random(hp/2));
+      TP->cause_typed_damage(TP, TP->return_target_limb(), roll_dice(1, hp / 2), "bludgeoning");
       TP->add_attacker(TO);
       TP->continue_attack();
       if(objectp(TP)){  TP->remove_attacker(TO);}

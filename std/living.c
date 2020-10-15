@@ -293,36 +293,29 @@ void set_parrying(int i)
 int query_parrying()
 {
     object* weapons;
-    if (FEATS_D->usable_feat(TO, "parry")) {
-        weapons = TO->query_wielded();
-        if (sizeof(weapons) && !weapons[0]->is_lrweapon()) {
+    weapons = TO->query_wielded();
+    if (sizeof(weapons) && !weapons[0]->is_lrweapon() {
+        if (FEATS_D->usable_feat(TO, "parry")) {
             return 1;
         }
-    }
-    if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
-        weapons = TO->query_wielded();
-        if (sizeof(weapons) == 1 && !weapons[0]->is_lrweapon()) {
-            return 1;
+        if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
+            if (sizeof(weapons) == 1 && !TO->is_wearing_type("shield")) {
+                return 1;
+            }
         }
-    }
-    if (FEATS_D->usable_feat(TO, "unassailable parry")) {
-
-        weapons = TO->query_wielded();
-        weapons = distinct_array(weapons);
-        if (sizeof(weapons) > 1 && !weapons[0]->is_lrweapon() && !weapons[1]->is_lrweapon()) {
-            return 1;
+        if (FEATS_D->usable_feat(TO, "unassailable parry")) {
+            weapons = distinct_array(weapons);
+            if (sizeof(weapons) > 1 && !weapons[1]->is_lrweapon()) {
+                return 1;
+            }
         }
-    }
-    if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
-        weapons = TO->query_wielded();
-        if (sizeof(weapons) > 1) {
-            if (weapons[0] == weapons[1] && !weapons[0]->is_lrweapon()) {
+        if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
+            if (sizeof(weapons) > 1 && weapons[0] == weapons[1]) {
                 return 1;
             }
         }
     }
     if (FEATS_D->usable_feat(TO, "unarmed parry")) {
-        weapons = TO->query_wielded();
         if (!sizeof(weapons)) {
             return 1;
         }
@@ -1774,7 +1767,8 @@ int query_attack_bonus()
     }
 
     if (FEATS_D->usable_feat(TO, "true strikes") &&
-        sizeof(TO->query_wielded()) == 1) {
+        sizeof(TO->query_wielded()) == 1 &&
+        !(int)TO->is_wearing_type("shield")) {
         ret += 3;
     }
 

@@ -1725,8 +1725,7 @@ void land(object faller){
         +"f%^RESET%^%^MAGENTA%^f%^RED%^a%^BOLD%^%^MAGENTA%^l%^RESET%^%^BLUE%^"
         +" slamming into a %^RESET%^stone rockface.", faller);
       damage = (int)faller->query_max_hp() * (50 + random(25))/100;
-      faller->cause_typed_damage(faller, faller->return_target_limb(),damage/3 
-                                                         + random(damage), "physical");
+      faller->cause_typed_damage(faller, faller->return_target_limb(),damage/3 + random(damage), "bludgeoning");
       faller->add_attacker(TO);
       faller->continue_attack();
       break;
@@ -1739,7 +1738,7 @@ void land(object faller){
         +" process.");
       roll = 50 + random(25);
       damage = (int)faller->query_max_hp() * roll / 100;
-      faller->do_damage(damage);
+      faller->cause_typed_damage(faller, faller->return_target_limb(), damage, "bludgeoning");
       break;
     case 11..20:
       tell_bridge("%^BLUE%^" + faller->QCN + "%^RESET%^%^BLUE%^hits the water hard,"
@@ -1748,7 +1747,7 @@ void land(object faller){
         +" deal of %^RED%^pain%^BLUE%^.");
       roll = 10 + random(25);
       damage = (int)faller->query_max_hp() * roll / 100;
-      faller->do_damage(damage);
+      faller->cause_typed_damage(faller, faller->return_target_limb(), damage, "bludgeoning");
       break;
     case 21..30:
       tell_bridge("%^BLUE%^" + faller->QCN + " %^RESET%^%^BLUE%^converts "
@@ -1778,7 +1777,7 @@ void land(object faller){
         +"f%^RESET%^%^MAGENTA%^f%^BLUE%^a%^BOLD%^%^MAGENTA%^l%^RESET%^%^BLUE%^"
         +" slamming into a %^RESET%^stone rockface.", faller);
       damage = (int)faller->query_max_hp() * 95 / 100;
-      faller->do_damage(damage);
+      faller->cause_typed_damage(faller, faller->return_target_limb(), damage, "bludgeoning");
       break;
   }
   i = random(5)+1;

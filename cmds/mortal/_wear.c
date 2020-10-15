@@ -10,7 +10,7 @@ int cmd_wear(string str)
 {
     mixed* limbs;
     string ret, what, where, wear, unwear, ob_quest, * player_quests;
-    int i, j, level, quiet, ultimate;
+    int i, j, level, quiet, ultimate, positioning;
     object ob, * obs;
     mapping itembonuses;
 
@@ -205,6 +205,14 @@ int cmd_wear(string str)
         }else {
             message("my_action", "You wear " + ob->query_short() + ".", this_player());
         }
+    }
+
+    positioning = (int)TP->query_property("tactical_positioning");
+    if (positioning && ob->query_type() == "shield") {
+        message("my_action", "You can't benefit from positioning with a shield.", TP);
+        TP->set_property("tactical_positioning", -positioning);
+        TP->add_ac_bonus(-positioning);
+        TP->add_attack_bonus(positioning);
     }
 
     if (itembonuses = ob->query_item_bonuses()) {
