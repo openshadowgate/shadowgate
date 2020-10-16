@@ -54,7 +54,7 @@ int vampiric_func(object ob)
         tell_object(enemy, "%^GREEN%^" + pname + "'s weapon seems to draw upon your life force!");
         tell_room(room, "%^GREEN%^" + pname + "'s weapon seems to draw upon " + ename + "'s life force!", ({ player, enemy }));
         player->add_hp(amount);
-        damage_targ(enemy, enemy->return_target_limb(), ob->query_wc(), "negative energy");
+        enemy->cause_typed_damage(enemy, enemy->return_target_limb(), amount, "negative energy");
     }
 }
 
