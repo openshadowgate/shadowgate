@@ -1210,12 +1210,12 @@ int remove_weapon_from_limb(object ob)
 
 void check_positioning(int numwielded) {
     int positioning;
-    positioning = (int)TP->query_property("tactical_positioning");
+    positioning = (int)TO->query_property("tactical_positioning");
     if (positioning && numwielded != 1) {
-        message("my_action", "You can't benefit from positioning with a shield.", TP);
-        TP->set_property("tactical_positioning", -positioning);
-        TP->add_ac_bonus(-positioning);
-        TP->add_attack_bonus(positioning);
+        message("my_action", "You can't benefit from positioning with a shield.", TO);
+        TO->set_property("tactical_positioning", -positioning);
+        TO->add_ac_bonus(-positioning);
+        TO->add_attack_bonus(positioning);
     }
 }
 
