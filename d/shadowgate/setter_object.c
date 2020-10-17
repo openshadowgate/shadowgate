@@ -1309,5 +1309,5 @@ int age_to_adjust(int age, string stat, string race)
 
 int unrestricted_player(object plr)
 {
-    return OB_ACCOUNT->is_experienced(ETO->query_true_name()) || OB_ACCOUNT->is_high_mortal(ETO->query_true_name()) || avatarp(ETO);
+    return OB_ACCOUNT->is_experienced(ETO->query_true_name()) || OB_ACCOUNT->is_high_mortal(ETO->query_true_name()) || avatarp(ETO) || ETO->query("unrestricted_creation");
 }
