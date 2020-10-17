@@ -26,8 +26,7 @@ int cmd_revive(string str)
     targ->add_stuffed(25);
     targ->add_quenched(25);
     "/adm/daemon/perma_d.c"->remove_player(str);
-    tell_object(TP, "You revive " + str);    
-    log_file("revive",TPQN + " revived " +str+ " on "+ctime(time())+".\n");
+    tell_object(TP, "You revive " + str);
     return 1;
 }
 
@@ -52,4 +51,3 @@ slay
 "
   );
 }
-

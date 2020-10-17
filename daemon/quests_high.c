@@ -256,7 +256,6 @@ void newRoom()
     if(!sizeof(files))
     {
         seteuid(UID_LOG);
-        log_file("Misc_Errors", "Error finding files in chosen dir:  "+dir+" by "+TO->query_name()+" on "+ctime(time())+".\n");
         seteuid(getuid());
         return;
     }

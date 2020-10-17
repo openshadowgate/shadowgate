@@ -8,7 +8,7 @@ int cmd_factions(string str){
     string playername,profilename,factionname;
     int adjustment;
 
-    
+
     //find_object_or_load(FACTIONS_D);
     catch(call_other(FACTIONS_D,"??"));
 
@@ -30,7 +30,6 @@ int cmd_factions(string str){
                 return 1;
             }
             tell_object(TP,"You are attempting to adjust "+capitalize(playername)+"'s "+profilename+" profile with the "+factionname+" faction by "+adjustment+".");
-            log_file("factions", capitalize(TPQN)+" adjusted "+capitalize(playername)+"'s "+profilename+" profile with the "+capitalize(factionname)+" faction by "+adjustment+".\n");
             return 1;
         }
         if(sscanf(str,"%s %s",playername,profilename) == 2) {

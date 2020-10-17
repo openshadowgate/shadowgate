@@ -1,5 +1,5 @@
 // adapted from /cmds/mortal/_follow by Styx 10/2002
-   
+
 #include <std.h>
 
 inherit DAEMON;
@@ -14,12 +14,12 @@ int cmd_submit(string str) {
       TP->send_paralyzed_message("info",TP);
       return 1;
    }
-   if(!str || (sscanf(str, "to %s by %s",what,who) != 2) ) 
+   if(!str || (sscanf(str, "to %s by %s",what,who) != 2) )
       return notify_fail(syntax);
    if(what != "binding" && what != "attack")
       return notify_fail(syntax);
 
-   ob2 = present(who,ETP);     
+   ob2 = present(who,ETP);
 
    if(ob2 == TP) {        //need to exclude if who is them
       if(what == "binding")
@@ -31,12 +31,12 @@ int cmd_submit(string str) {
 
    if(!objectp(ob2))
       return notify_fail("You don't see "+capitalize(who)+" here.\n");
-   if(ob2->query_true_invis() || 
+   if(ob2->query_true_invis() ||
       (ob2->query_invis() && !TP->detecting_invis()) )
          return notify_fail("You don't see that person here now do you?\n");
 
 
-   if (!userp(ob2)) 
+   if (!userp(ob2))
       return notify_fail("You can only submit to other PC's.\n");
 
    if((ob2->query_invis() && !TP->detecting_invis()) || ob2->query_true_invis())
@@ -55,7 +55,7 @@ int cmd_submit(string str) {
 	       "risk and will last until you die, log out, or a reboot.");
          tell_object(ob2, TPQCN+" has submitted to allow you to "
               "attack "+TP->query_objective()+".\n");
-         TP->set_property("submitted_to",({ob2}) ); // added to prevent guards from protecting people who are sparring -Ares 09/13/05 
+         TP->set_property("submitted_to",({ob2}) ); // added to prevent guards from protecting people who are sparring -Ares 09/13/05
 // this is borrowed from stealing
 //        if (interactive(TP)) { this is assumed for this
          pkills = TP->query_pkilled();
@@ -65,9 +65,7 @@ int cmd_submit(string str) {
          }
 	 break;
    }
-   log_file("killers", TPQN+" submitted to "+what+" by "+ob2->query_name()+
-	    " on "+ctime(time())+"\n");
-   log_file("submit", TPQN+" submitted to "+what+" by "+ob2->query_name()+
+   log_file("player/kills", TPQN+" submitted to "+what+" by "+ob2->query_name()+
 	    " on "+ctime(time())+"\n");
    return 1;
 }
@@ -93,4 +91,3 @@ bind, unbing, gag, pkilling, rules, rope use
 "
    );
 }
-

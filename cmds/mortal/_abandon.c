@@ -80,10 +80,6 @@ int confirm_drop(string str, string theclass, int drop, int cost)
         return 1;
     }
 
-    log_file("abandoned_classes", "" + TP->query_true_name() + " abandoned " + TP->QP + " " + theclass + " class, loosing " + drop + " levels and " + (int)cost + " exp " + ctime(time()) + "\n");
-    if (TP->query_property("free_abandon")) {
-        log_file("abandoned_classes", ">>>" + TP->query_true_name() + " was granted a free abandon by: " + TP->query_propery("free_abandon") + ".\n");
-    }
     TP->remove_property("free_abandon");
 
     class_ob = find_object_or_load(DIR_CLASSES + "/" + theclass + ".c");

@@ -10,7 +10,7 @@ int cmd_echolist(string str)
     object * targets=({ }), current;
     int iter;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -31,7 +31,6 @@ int cmd_echolist(string str)
 	  }
       }
 	seteuid(UID_LOG);
-	log_file("shouts", geteuid(previous_object())+" (echolist):("+targs+") "+line+"\n");
 	seteuid(getuid());
 	line = replace_string(line,"%^NL%^","\n");
 	message("environment",line,targets);

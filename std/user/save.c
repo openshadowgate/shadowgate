@@ -33,19 +33,17 @@ nomask int restore_player(string name) {
         if(geteuid(previous_object()) != UID_ROOT &&
            geteuid(previous_object()) != UID_BACKBONE &&
            geteuid(previous_object()) != UID_USERACCESS) return 0;
-	
+
 	res = restore_object(save_file_name(name));
 	seteuid(0); // was seteuid(0);
 	return res;
 }
-	
+
 // Lars had a HORRENDOUS security hole here...
 
 void save_player(string name) {
 //  string olduid;
   if( name && name != (string)this_object()->query_name() ) {
-    log_file("ILLEGAL", "save_player: "+this_object()->query_name()+
-             " tried: "+name);
     return;
   }
   if(this_object()->query_level() < 1) return;
@@ -89,6 +87,6 @@ actually_save_player(string name) {
   assure_save_dir_exists(save_file_name(name));
   save_object(save_file_name(name));
 //  if (olduid) seteuid(olduid); // wasn't here before - g
-//  else 
+//  else
   seteuid(0); // was seteuid(0);
 }

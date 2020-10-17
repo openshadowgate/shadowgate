@@ -10,7 +10,7 @@ int cmd_echoto(string str)
 	object target;
 	string nme;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -28,7 +28,6 @@ int cmd_echoto(string str)
 		return notify_fail("Oh baby, that feels sooo good...freak.\n");
 	}
 	seteuid(UID_LOG);
-        log_file("shouts", geteuid(previous_object())+" (echoto):("+targ+") "+line+"\n");
 	seteuid(getuid());
   line = replace_string(line,"%^NL%^","\n");
         message("environment",line,target);

@@ -5,7 +5,7 @@
 #include <save.h>
 
 #define WATCHIPDIR "watch/iplogs/"
-#define BANISH_IP_LOG "watch/ip_banish"
+#define BANISH_IP_LOG "player/ip_denied"
 
 string *__Names, *__Sites, *__WatchNames, *__WatchSites, *__Block;
 string *__Allowed, *__Guests, *__IllegalSubStrings, *__Retired;

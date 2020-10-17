@@ -102,7 +102,7 @@ nomask private int really_suicide(string typed_password)
    }
    name = TP->query_true_name();
    TP->save_player(name);
-   log_file("suicide", name+" (level "+TP->query_level()+") at "+ctime(time())+" "+" from "+TP->query_ip()+" \n");
+   log_file("player/suicide", name+" (level "+TP->query_level()+") at "+ctime(time())+" "+" from "+TP->query_ip()+" \n");
    seteuid(UID_USERSAVE);
    if(file_exists(DIR_USERS+"/"+name[0..0]+"/"+name+".o"))
    rename(DIR_USERS+"/"+name[0..0]+"/"+name+".o", DIR_USERS+"/suicide/"+name+".o");

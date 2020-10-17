@@ -294,7 +294,7 @@ int query_parrying()
 {
     object* weapons;
     weapons = TO->query_wielded();
-    if (sizeof(weapons) && !weapons[0]->is_lrweapon() {
+    if (sizeof(weapons) && !weapons[0]->is_lrweapon()) {
         if (FEATS_D->usable_feat(TO, "parry")) {
             return 1;
         }
@@ -903,8 +903,6 @@ void add_poisoning(int x)
         return;
     }
     POISON_D->ApplyPoison(TO, "any", previous_object());
-    log_file("poisoning.log", ctime(time()) + " " + identify(previous_object()) +
-             " called add_poisoning on " + TO->query_name() + "\n");
 }
 
 void setPoisoner(object person)
@@ -921,12 +919,6 @@ object queryPoisoner()
 
 void set_stats(string str, int x)
 {
-    if (stats[str] && (stats[str] != x) && interactive(TO)) {
-        log_file("stats", query_name() + " went from " + stats[str] + " to " + x +
-                 " in " + str + " (" + ctime(time()) + ")\n");
-        log_file("stats", "uid: " + getuid(previous_object()) + " (" +
-                 file_name(previous_object()) + ")\n");
-    }
     if (x > 55 && str != "exceptional_strength") {
         x = 55;
     }
@@ -1042,81 +1034,15 @@ void delete_search_path(string dir)
 
 nosave private int traceFlag;
 
-/*****************
-   // Migrated to /std/living/skills.c for better centralization
-
- * void add_exp(int x) {
-   int mc,nmc,ret;
-   if (query("no advance") && x >0)
-      if (query("no advance") <= query_highest_level()) {
-         return;
-      }
-
-   if(x>0 && query_party()) {
-      PARTY_OB->calculate_exp(party, x, previous_object());
-      return;
-   }
-   //player_data["general"]["experience"] += x;
-   ::add_exp(x);
-   if((x > 1000 || x < -1000) && userp(TO)) {
-      log_file("exp",
-               query_name()+" received "+x+" exp from "+ (string)previous_object()->query_name()+"\n");
-      log_file("exp",
-               "  (creator = "+previous_object()->query_creator()+")\n"+
-               "  (uid: "+getuid(previous_object())+" "+file_name(previous_object())+"): "+
-               ctime(time())+"\n");
-   }
-   if(wizardp(this_object()) || !this_object()->is_player()) return;
- *}
-
- * void internal_add_exp(int x){
-   // irrelevant
-    //player_data["general"]["experience"] += x;
-    ::add_exp(x);
- *}
-
- * void fix_exp(int x, object tmp) {
-   // also migrated
-   int mc,nmc, ret;
-   //     if(getuid(previous_object()) != UID_ROOT) return;
-   if (!objectp(tmp)) tmp = previous_object();
-   if (query("no advance") && x >0)
-      if (query("no advance") <= query_highest_level()) {
-         return;
-      }
-   ::add_exp(x);
-   //player_data["general"]["experience"] += x;
-   //   do {
-   //         ret = ADVANCE_D->advance(this_object());
-   //   } while(ret != 0);
-
-   if(x > 1000 && userp(TO)) {
-      log_file("exp",">>> "+
-               query_name()+" received "+x+" exp from "+(string)tmp->query_name()+"\n");
-      log_file("exp",
-               "  (creator = "+tmp->query_creator()+")\n"+
-               "  (uid: "+getuid(tmp)+" "+file_name(tmp)+": "+
-               ctime(time())+"\n");
-   }
-   if (query_exp() < 0)
-       set_exp(sizeof(TO->query_classes()));
-   if(wizardp(this_object()) || !this_object()->is_player()) return;
- * }
- *********************/
 
 void add_alignment(int x)
 {
     return 1;
-//    if(x>40) x = 40;
-//    else if(x<-40) x = -40;
-//    player_data["general"]["alignment"] += x;
-//   if(query_alignment() > 1500) player_data["general"]["alignment"] = 1500;
-//   if(query_alignment()< -1500) player_data["general"]["alignment"] = -1500;
 }
 
 void adj_alignment(int x)
 {
-//    add_alignment(x/200-x/50);
+
 }
 
 void set_alignment(int x)
@@ -1647,9 +1573,9 @@ void remove()
 /* Some objects call remove() in drop() */
     }
     if (objectp(previous_object())) {
-        log_file("reports/remove.living", this_object()->query_name() + " removed " + file_name(previous_object()) + ".\n");
+        log_file("living/remove", this_object()->query_name() + " removed " + file_name(previous_object()) + ".\n");
     } else {
-        log_file("reports/remove.living", this_object()->query_name() + " removed " + file_name(this_object()) + ".\n");
+        log_file("living/remove", this_object()->query_name() + " removed " + file_name(this_object()) + ".\n");
     }
     ::remove();
 }

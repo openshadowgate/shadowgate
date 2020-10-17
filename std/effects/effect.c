@@ -864,7 +864,7 @@ int effect_kill(object victim, object caster) {
         if (member_array(caster, borg_people) == -1) {
             if (interactive(caster) && interactive(victim)) {
                 if (!avatarp(caster) && !avatarp(victim)) {
-                    log_file("killers","       ##"+caster->query_cap_name()+" attacked "+victim->query_cap_name()+" at "+ctime(time())+".\n");
+                    log_file("player/kills","       ##"+caster->query_cap_name()+" attacked "+victim->query_cap_name()+" at "+ctime(time())+".\n");
                 }
             }
         }

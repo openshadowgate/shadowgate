@@ -68,14 +68,13 @@ void SAVE() {
 
 void LOG(string msg) {
   seteuid(UID_LOG);
-  log_file("government", ctime(time())+": "+msg+"\n");
   seteuid(getuid());
 }
 
 int add_officer(string person, string office) {
     string juris;
     object dude;
-    
+
     if(!valid_office(office)) return 0;
     office_holders[office] = person;
     juris = positions[office][JURISDICTION];
@@ -89,7 +88,7 @@ int add_officer(string person, string office) {
 int remove_officer(string person, string office) {
     string juris;
     object dude;
-    
+
     if(!valid_office(office)) return 0;
     juris = positions[office][JURISDICTION];
     map_delete(office_holders, office);
@@ -123,21 +122,21 @@ private int holds_office(string person, string office) {
 
 string query_title(string office) {
     mixed *tmp;
-    
+
     tmp = positions[office];
     return tmp[TITLE];
 }
 
 int query_nobid(string office) {
     mixed *tmp;
-    
+
     tmp = positions[office];
     return tmp[NOBID];
 }
 
 int query_minpower(string office) {
     mixed *tmp;
-    
+
     tmp = positions[office];
     return tmp[MINPOWER];
 }
@@ -145,7 +144,7 @@ int query_minpower(string office) {
 string query_jurisdiction(string office) {
     mixed *tmp;
 
-	if(!valid_office(office)) return 0;   
+	if(!valid_office(office)) return 0;
     tmp = positions[office];
     return tmp[JURISDICTION];
 }
@@ -160,7 +159,7 @@ int set_jurisdiction_property (
         string property,
         mixed data
     ) {
-    
+
     if(!juris_props[jurisdiction]) juris_props[jurisdiction] = ([]);
     juris_props[jurisdiction][property] = data;
     SAVE();
@@ -190,7 +189,7 @@ int check_conflict(string person, string jurisdiction) {
 
 int valid_officer(string person, string office) {
     object poser;
-    
+
     poser = find_player(person);
 	if(!valid_office(office)) return 0;
     if(!holds_office(person, office)) return 0;
@@ -203,7 +202,7 @@ int valid_officer(string person, string office) {
 
 // Goes through the all of the positions and expires the term
 // of the officers where their position account has reached less than
-// the position minimum required.  Also removes officers who are 
+// the position minimum required.  Also removes officers who are
 // no longer in the game (rid, suicide, etc.) and opens their positions
 // to the public.
 int update_daemon() {
@@ -216,7 +215,7 @@ int update_daemon() {
   string initial;
   int now = time();
   string office;
-  
+
   for(inc=0;inc<numkeys;inc++) {
     office = ikeys[inc];
     owner = office_holders[office];
@@ -231,5 +230,3 @@ int update_daemon() {
   }
   SAVE();
 }
-
-

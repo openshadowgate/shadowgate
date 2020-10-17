@@ -127,7 +127,7 @@ report(string * lines)
 
     seteuid(UID_LOG);
 
-    log_file("reports/bugreports", rep + " " + title);
+    log_file("player/bugreports", rep + " " + title);
 
     message += "Date: " + ctime(time()) + "  \n";
     message += "From: " + TP->query_name() + "  \n";

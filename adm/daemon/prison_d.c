@@ -36,32 +36,32 @@ mapping query_prison_list() { return prison_list; }
 
 int query_release_time(string player) {
   mapping info;
-  
+
   info = prison_list[player];
   if (!info)
     return 0;
-  
+
   return info["release"];
 }
 
 string query_reason(string player) {
   mapping info;
-  
+
   info = prison_list[player];
-  
+
   if (!info)
     return "";
-  
+
   return info["reason"];
 }
 
 string query_by(string player) {
   mapping info;
-  
+
   info = prison_list[player];
   if (!info)
     return "";
-  
+
   return info["by"];
 }
 
@@ -79,7 +79,7 @@ find_next() {
   mixed *prison_keys;
   string key;
   int nprison_keys;
-  
+
   // remove_call_out("remove_player");
 
   prison_keys = keys(prison_list);
@@ -94,7 +94,7 @@ find_next() {
 
   nextcall -= time();
   if (nextcall < 10) nextcall = 10;
-  
+
   if (next_freed_player != "") {
     //    call_out("remove_player",nextcall,next_freed_player);
     write(next_freed_player);
@@ -122,7 +122,7 @@ int is_imprisoned(string player) {
   if (player_info == 0)
     return 0;
 
- 
+
   if (query_release_time(player) < time()) {
     //    if (objectp(find_player("garrett")))
     //      tell_object(find_player("garrett"),"first");
@@ -147,10 +147,10 @@ int is_in_jail(string luser) {
   if (!is_imprisoned(luser))
     return 0;
   else {
-    log_file("adm/jail/"+luser, capitalize(luser)+" logged on in Jail. ["+ctime(time())+"]\n");
+    log_file("adm/jail", capitalize(luser)+" logged on in Jail. ["+ctime(time())+"]\n");
     return 1;
   }
 }
-  
+
 
 int clean_up() {  return 0;  }

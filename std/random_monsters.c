@@ -86,11 +86,11 @@ void place_mobs()
                 {
                     if(catch_error = catch(CroomMon = new(aKeys[i])))
                     {
-                        log_file("croom.log", "Monster Failed to Load - Error was = "+identify(catch_error)+". Happened in "+file_name(TO)+" on file "+identify(aKeys[i])+". Attempting to "+
+                        log_file("errors/mob_load", "Monster Failed to Load - Error was = "+identify(catch_error)+". Happened in "+file_name(TO)+" on file "+identify(aKeys[i])+". Attempting to "+
                         "clone again.\n");
                         if(catch_error = catch(CroomMon = new(aKeys[i])))
                         {
-                            log_file("croom.log", "Monster failed to load - Error was = "+identify(catch_error)+". Happened in "+file_name(TO)+" on file "+identify(aKeys[i])+" twice.\n");
+                            log_file("errors/mob_load", "Monster failed to load - Error was = "+identify(catch_error)+". Happened in "+file_name(TO)+" on file "+identify(aKeys[i])+" twice.\n");
                             continue;
                         }
                     }
@@ -101,7 +101,7 @@ void place_mobs()
                         CroomMon->set_property("croom_track",1);
                         if(CroomMon->move(TO) != MOVE_OK)
                         {
-                            log_file("croom.log", base_name(TO) + " failed to move "+base_name(mons[aKeys[i][k]]) + " in reset.");
+                            log_file("errors/mob_load", base_name(TO) + " failed to move "+base_name(mons[aKeys[i][k]]) + " in reset.");
                         }
                         else pflag = 1;
                     }

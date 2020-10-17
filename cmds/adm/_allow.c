@@ -38,7 +38,6 @@ int cmd_allow(string str) {
       write("Error in letting in "+who+": "+res+"\n");
     seteuid(getuid());
     seteuid(UID_LOG);
-    log_file("watch/players", capitalize(who)+": "+email+" ("+ctime(time())+")\n");
     seteuid(getuid());
     return 1;
 }

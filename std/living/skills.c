@@ -1126,7 +1126,7 @@ int use_XP_tax(int exp)
         if ((duration = _IRS["tax"]["timed"]["fall off"])) {
             if (duration == -1 || duration > 0) {
                 if (percent >= 100) {
-                    log_file("tax", TO->query_cap_name() + ": Timed XP taxed to 1.");
+                    log_file("player/tax", TO->query_cap_name() + ": Timed XP taxed to 1.");
                     return 1;
                 }
                 adjustment -= adjustment * to_float(percent) / 100;
@@ -1213,18 +1213,18 @@ void log_exp(int x, string type, object tmp)
         if (!objectp(awardedFrom = TO->query_property("GainedExpFrom"))) {
             awardedFrom = previous_object();
         }
-        log_file("exp", "<<<" +
+        log_file("player/exp", "<<<" +
                  query_name() + " received " + x + " (" + type + ")exp from " + (string)awardedFrom->query_name() + "\n");
-        log_file("exp",
+        log_file("player/exp",
                  "  (creator = " + awardedFrom->query_creator() + ")\n" +
                  "  (uid: " + getuid(awardedFrom) + " " + file_name(awardedFrom) + ")\n");
         if (objectp(tmp) && (tmp != previous_object())) {
-            log_file("exp",
+            log_file("player/exp",
                      "  (creator = " + tmp->query_creator() + ")\n" +
                      "  (uid: " + getuid(tmp) + " " + file_name(tmp) + ")\n");
         }
 
-        log_file("exp", ctime(time()) + ">>>\n");
+        log_file("player/exp", ctime(time()) + ">>>\n");
     }
 }
 
@@ -1568,9 +1568,9 @@ int general_exp_adjust_perc(int perc)
     }
     tmp = PO;
     oldexp = TO->query_exp();
-    log_file("exp", ">>> " +
+    log_file("player/exp", ">>> " +
              query_name() + " adjusted " + perc + "% exp from " + (string)tmp->query_name() + "\n");
-    log_file("exp",
+    log_file("player/exp",
              "  (creator = " + tmp->query_creator() + ")\n" +
              "  (uid: " + getuid(tmp) + " " + file_name(tmp) + ": " +
              ctime(time()) + "\n");
@@ -1582,7 +1582,7 @@ int general_exp_adjust_perc(int perc)
         returnval += class_exp_adjust_perc(classes[0], perc);
     }
     returnval = returnval / sizeof(classes);
-    log_file("exp", "<<< " +
+    log_file("player/exp", "<<< " +
              query_name() + " adjusted " + ((int)TO->query_exp() - oldexp) + " exp. \n");
     return returnval;
 }

@@ -12,7 +12,6 @@ int cmd_stuck(string str)
     if((int)TP->query_property("used_stuck") > time())
     {
         tell_object(TP,"You can not use this command so soon.");
-        log_file("stuck",""+TP->QCN+" tried to use stuck too soon.\n");
         return 1;
     }
 
@@ -22,7 +21,7 @@ int cmd_stuck(string str)
     TP->set_property("used_stuck",time() + ROUND_LENGTH);
     tell_object(TP,"%^B_RED%^%^BOLD%^%^CYAN%^Unsticking you. Time is: "+ctime(time())+"  This command is for "
         "OOC game mechanic use only.");
-    log_file("stuck",""+TP->query_true_name()+" used stuck on "+ctime(time())+"\n");
+    log_file("player/stuck",""+TP->query_true_name()+" used stuck on "+ctime(time())+"\n");
 
     return 1;
 }

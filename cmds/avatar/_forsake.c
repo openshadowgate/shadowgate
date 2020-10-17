@@ -12,7 +12,7 @@ int cmd_forsake(string str) {
     int align,i,hp_loss;
     string curtheclass,*theclasses, diety;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -36,7 +36,7 @@ int cmd_forsake(string str) {
     symbol = present("holy symbol",who);
     if(!avatarp(who))
         ADVANCE_D->deity_news(diety,who->query_cap_name()+" has forsaken "+capitalize(diety)+" as "+who->query_possessive()+" diety!");
-    log_file("god_change", capitalize(who->query_name())+" was removed from "+capitalize(diety)+": "+ctime(time())+" by "+capitalize(TP->query_true_name())+"\n");
+    log_file("player/god_change", capitalize(who->query_name())+" was removed from "+capitalize(diety)+": "+ctime(time())+" by "+capitalize(TP->query_true_name())+"\n");
     tell_object(who,"%^YELLOW%^"+capitalize(diety)+" will no longer have you as a follower!");
     tell_object(who,"%^YELLOW%^A bolt of energy streaks toward you from above, exacting "+capitalize(diety)+"'s revenge.");
     tell_object(who,"%^YELLOW%^You must seek out a temple and choose another deity to follow.");
@@ -46,13 +46,6 @@ int cmd_forsake(string str) {
         who->set("last forsake",time());
     }
     who->forget_all_cl_spells();
-    if(who->is_theclass("paladin") || who->is_theclass("antipaladin")) {
-        log_file("theclass_change",who->query_cap_name()+" was changed from a "+who->query_theclass()+" to a cavalier at "+ctime(time())+" by "+capitalize(TP->query_true_name())+".\n");
-        who->set_theclass("cavalier");
-        who->set_mlevel("cavalier",who->query_level());
-        who->remove_theclass(who->query_theclass());
-        who->set_posed("cavalier");
-    }
     if(objectp(symbol)) symbol->remove();
     who->update_channels();
     if(avatarp(who)) {

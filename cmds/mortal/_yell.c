@@ -28,7 +28,6 @@ int cmd_yell(string str) {
       return notify_fail("You've been gagged and can't yell.\n");
    }
    env = ETP;
-//   log_file("shouts", TPQN+" (yell): "+str+"\n");
    primary = (string *)env->query_destinations();
    lang = TP->query_spoken();
    //str= "daemon/language_d"->translate(str,lang, TP);

@@ -5,7 +5,7 @@
 inherit DAEMON;
 
 void help() {
-  
+
     write("Syntax: discussc [add|remove] [player] [reason]>\n\n"
     "This will let you add or remove a player from the discuss "
     "line for the reason you specify.");
@@ -16,7 +16,7 @@ int cmd_discussc(string str) {
 	string opt, who, reason,people,*lines,*on_chan=({});
 	int i;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -39,7 +39,7 @@ int cmd_discussc(string str) {
 	for(i=0;i<sizeof(mortals);i++)
 	{
 		lines = mortals[i]->query_channels();
-		if(member_array("discuss",lines) != -1) 
+		if(member_array("discuss",lines) != -1)
 		{
 			on_chan += ({ mortals[i]->query_true_name() });
 		}
@@ -51,8 +51,6 @@ int cmd_discussc(string str) {
 		MESSAGING_D->avatars_message("my_mess","%^B_BLUE%^%^WHITE%^"+people+" %^RESET%^ is currently on discuss.");
 	}
 
-	log_file("channels",TPQN+" "+opt+" discuss "+who+" for "+reason+" "+ctime(time())+"\n");
-    
     if(!(ob = find_player(who = lower_case(who))))
 	return notify_fail("Either that player is not online or you have the name "
     "in the wrong order.\n");
@@ -74,5 +72,3 @@ int cmd_discussc(string str) {
     help();
     return 1;
 }
-
-

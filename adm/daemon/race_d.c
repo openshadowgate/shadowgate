@@ -32,7 +32,6 @@ void load_races() {
     }
     for(i = 0, tmp = sizeof(b_types); i < tmp; i++) {
         if(!file_exists(LIMB_DIR+b_types[i])) {
-            log_file("races", "Error: No such file "+LIMB_DIR+b_types[i]+"\n");
             map_delete(races, b_types[i]);
             continue;
         }

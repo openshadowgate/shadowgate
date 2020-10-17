@@ -53,9 +53,6 @@ int confirm_stat_gain(string str, object ob, string stat, int cost)
                     "You must first reduce it before you can gain this stat point.");
         return 1;
     }
-    log_file("stat_gain", "" + ob->QCN + " gained 1 point in " +
-             stat + " on " + ctime(time()) + " for a character improvement tax of " + cost + " exp\n");
-
     gained = (int)ob->query("stat_points_gained");
     gained += 1;
     ob->delete("stat_points_gained");
@@ -208,12 +205,6 @@ int confirm_move_stat(string str, object obj, string stat_one, string stat_two, 
                     "allowed, you must reduce it before moving stats.");
         return 1;
     }
-    log_file("stat_moves", "" + capitalize(obj->query_true_name()) + " moved 1 point from "
-             "" + stat_one + "(" + ((int)obj->query_base_stats(stat_one) + 1) + ") into " + stat_two + "("
-             "" + ((int)obj->query_base_stats(stat_two) - 1) + ") for a character improvement " +
-             "tax of " + cost + " experience points "
-             "" + ctime(time()) + "\n");
-
     obj->force_me("stats");
     obj->set_stats(stat_one, (int)obj->query_rolled_stats(stat_one) - 1);
     obj->set_stats(stat_two, (int)obj->query_rolled_stats(stat_two) + 1);

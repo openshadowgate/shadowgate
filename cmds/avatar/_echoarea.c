@@ -11,7 +11,7 @@ int cmd_echoarea(string str) {
    int i, j, tmp, tmp2;
    object env;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -27,7 +27,6 @@ int cmd_echoarea(string str) {
 	env = ETP;
    primary = (string *)env->query_destinations();
 	seteuid(UID_LOG);
-	log_file("shouts", geteuid(previous_object())+" (echoarea): "+str+"\n");
 	seteuid(getuid());
 	message("environment", str, ETP);
    for(i=0, tmp_arr = ({}), secondary=({}), tmp=sizeof(primary);i<tmp;i++) {

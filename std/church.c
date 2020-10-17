@@ -227,7 +227,7 @@ int pray()
 
         // Weak punishment for low levels, but starting from L40 it will always take a level.
         exploss = expdelta * (7 * thelevel * thelevel - 30 * thelevel + 2000) / 12000;
-        log_file("exp_loss", TPQN + " lost " + exploss + " in resurrection at a church.\n");
+        log_file("player/exp_loss", TPQN + " lost " + exploss + " in resurrection at a church.\n");
 
         if (TP->query("hardcore")) {
             if (sizeof(classes) > 1) {
@@ -624,7 +624,7 @@ int select_diety(string str)
     }
     TP->set("god changed", 1);
     TP->update_channels();
-    log_file("god_change", capitalize(TP->query_name()) + " joined " + capitalize(str) + ": " + ctime(time()) + "\n");
+    log_file("player/god_change", capitalize(TP->query_name()) + " joined " + capitalize(str) + ": " + ctime(time()) + "\n");
     "/cmds/avatar/_note.c"->cmd_note("ckpt " + TPQN + " %^BOLD%^%^CYAN%^chose to follow " + capitalize(str) + ".");
     return 1;
 }

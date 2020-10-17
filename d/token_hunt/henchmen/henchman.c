@@ -1002,7 +1002,6 @@ void process_speech_event(mapping map)
     if(!mapp(events) || !sizeof(keys(events)) || !mapp(event))
     {
         TALKING = 0;
-        log_file("henchman_dialogue","dialogue error: "+map["dialogue"]+"\n\n  events: "+identify(events)+"\n\n  event: "+identify(event))+"\n\n\nEnd of error\n\n";
         //tell_room(ETO,"ERROR: No dialogue event mapping for "+map["dialogue"]+".");
         return;
     }

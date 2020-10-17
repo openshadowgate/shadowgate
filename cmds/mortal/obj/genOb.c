@@ -872,7 +872,6 @@ void finish_object()
     }
 
     write_file(fileName, "}");
-    log_file(skill, capitalize(TPQN) + " " + ctime(time()) + " " + identify(keyMap) + "\n");
     if (member_array("~THESIZE~", keys(keyMap)) != -1) {
         materialObj->use(keyMap["~THESIZE~"] * (int)datamap[type]["units"]);
     }else {

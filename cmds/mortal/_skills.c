@@ -43,7 +43,6 @@ int confirm_remove(string str,object ob,string myskill,int points) {
             ob->add_exp(price * -1);
             ob->resetLevelForExp(0);
             ob->remove_XP_tax("improvement");
-            log_file("skills_removed",""+ob->QCN+" reduced their "+myskill+" by "+points+" points at "+ctime(time())+" for "+price+" exp.\n");
             tell_object(ob,"%^BOLD%^%^WHITE%^Subtracting "+price+" experience points.");
         }
         else if((int)"/daemon/config_d.c"->check_config("character improvement") == 1)
@@ -54,8 +53,6 @@ int confirm_remove(string str,object ob,string myskill,int points) {
                 "You must first reduce it before you can remove skill points.");
                 return 1;
             }
-            log_file("skills_removed",""+ob->QCN+" reduced their "+myskill+" by "+points+" points at "+ctime(time())+" for a character "+
-            "improvement tax of "+price+".\n");
             tell_object(ob,"%^BOLD%^%^WHITE%^Adding a character improvement tax of "+price+". This tax will reduce "+
             "all future experience gained by %^RED%^50%%^WHITE%^ until it is repaid.%^RESET%^");
         }

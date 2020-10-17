@@ -18,7 +18,7 @@ and released for: "+reason);
     who=capitalize(who);
     write(who+" has been pardoned.");
     seteuid(UID_LOG);
-    log_file("jail",who+" was pardoned at "+ctime(time())+" by "+
+    log_file("adm/jail",who+" was pardoned at "+ctime(time())+" by "+
              this_player()->query_true_name()+" for "+reason+"\n");
     seteuid(getuid());
     return 1;

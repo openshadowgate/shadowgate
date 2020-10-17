@@ -9,7 +9,7 @@ int cmd_dam(string str){
    int amount;
    string who;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -27,10 +27,6 @@ int cmd_dam(string str){
       return notify_fail("You can only use it on players who is online right now.\n");
    set_property("magic",1);
    obj->do_damage("torso",amount);
-   if(!wizardp(obj)) log_file("illegal",TP->query_name()+
-      " damaged "+amount+" HP on "+obj->query_name()+" at "+
-      ctime(time())+".\n");
-     write("%^RED%^WARNING: Improper use of this command will be punished!");
    write("%^YELLOW%^You damaged "+obj->query_cap_name()+" for "+amount+" HP.\n");
    return 1;
 }
