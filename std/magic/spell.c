@@ -2053,11 +2053,13 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
     }
 
     if (objectp(place)) {
-        if (place->query_property("antimagic field") - 10 + random(20) > clevel) {
-            tell_object(caster, "%^B_BLUE%^%^BOLD%^Your spell dissipates around " + victim->QCN + ".");
-            tell_room(place, "%^B_BLUE%^%^BOLD%^" + caster->QCN + "'s spell dissipates around " + victim->QCN + ".", caster);
-            TO->remove();
-            return 1;
+        if (place->query_property("antimagic field")) {
+            if (place->query_property("antimagic field") - 10 + random(20) > clevel) {
+                tell_object(caster, "%^B_BLUE%^%^BOLD%^Your spell dissipates around " + victim->QCN + ".");
+                tell_room(place, "%^B_BLUE%^%^BOLD%^" + caster->QCN + "'s spell dissipates around " + victim->QCN + ".", caster);
+                TO->remove();
+                return 1;
+            }
         }
     }
 
