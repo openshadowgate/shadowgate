@@ -294,7 +294,7 @@ int query_parrying()
 {
     object* weapons;
     weapons = TO->query_wielded();
-    if (sizeof(weapons) && !weapons[0]->is_lrweapon() {
+    if (sizeof(weapons) && !weapons[0]->is_lrweapon()) {
         if (FEATS_D->usable_feat(TO, "parry")) {
             return 1;
         }
