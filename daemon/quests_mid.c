@@ -235,7 +235,6 @@ void newRoom(){
 // adding check and log for bad file listing *Styx* 1/4/04, last change 12/13/03
    if(!sizeof(files)) {
       seteuid(UID_LOG);
-      log_file("Misc_Errors", "Error finding files in chosen dir:  "+dir+" by "+TO->query_name()+" on "+ctime(time())+".\n");
    seteuid(getuid());
       return;
    }
@@ -446,7 +445,7 @@ int claimExp(string name, object player, int level){
    rm(OBSTORE date+".c");
    tell_object(player,"%^BOLD%^%^BLUE%^You have claimed "+name+"!");
    seteuid(UID_LOG);
-  log_file("rquests",capitalize(player->query_name())+"("+player->query_highest_level()+") retrieved the "+name+" ["+file+"].\n");
+  log_file("player/rquests",capitalize(player->query_name())+"("+player->query_highest_level()+") retrieved the "+name+" ["+file+"].\n");
    seteuid(getuid());
    level2 = player->query_highest_level();
    if(level2 < level)
