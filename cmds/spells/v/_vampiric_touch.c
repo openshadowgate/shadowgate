@@ -59,9 +59,9 @@ spell_effect(int prof) {
             tell_object(target,"%^BOLD%^%^CYAN%^"+caster->QCN+" reaches out and touches your "+target_limb+" draining the very essence of your life from your veins!");
             tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" reaches out and touches "+target->QCN+" on the "+target_limb+" draining the very essence of "+target->QP+" life away!", ({target, caster}));
             tell_object(caster,"%^BOLD%^%^CYAN%^You touch "+target->QCN+"'s "+target_limb+" draining the very life essence from "+target->QP+" veins!");
-            damage_targ(target, target_limb, sdamage,"negative energy");
+            damage_targ(target, target_limb, sdamage, "negative energy");
             sdamage = sdamage*3/2;
-            damage_targ(caster, target_limb, (-sdamage),"untyped");
+            damage_targ(caster, target_limb, -sdamage, "untyped");
         }
     } else {
         tell_object(target,"%^BOLD%^%^CYAN%^"+caster->QCN+" fails to touch you!");

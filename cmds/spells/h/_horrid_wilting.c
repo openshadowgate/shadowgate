@@ -31,12 +31,12 @@ string query_cast_string() {
 
 void spell_effect(int prof){
     object *attackers;
-    int i,admg;
+    int i, admg;
     attackers = target_selector();
 
-    tell_room(place,"%^BLUE%^"+caster->QCN+" raises hand and releases wave of cold energy!%^RESET%^");
+    tell_room(place, "%^BLUE%^"+caster->QCN+" raises hand and releases wave of cold energy!%^RESET%^");
     if(!sizeof(attackers)){
-        tell_object(caster,"%^BOLD%^%^BLUE%^The area is washed in death energy but nothing else happens.%^RESET%^");
+        tell_object(caster, "%^BOLD%^%^BLUE%^The area is washed in death energy but nothing else happens.%^RESET%^");
         dest_effect();
         return;
     }
@@ -52,8 +52,8 @@ void spell_effect(int prof){
         {
             admg/=2;
         }
-        tell_object(attackers[i],"%^BLUE%^Your flesh is withered with fell power!%^RESET%^");
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"negative energy");
+        tell_object(attackers[i], "%^BLUE%^Your flesh is withered with fell power!%^RESET%^");
+        damage_targ(attackers[i], attackers[i]->return_target_limb(), admg, "negative energy");
     }
     spell_successful();
     dest_effect();

@@ -308,6 +308,21 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
     resist_perc = (int)targ->query_resistance_percent(type);
+    //Venger: living creatures are healed with positive energy
+    //undead and exceptions creatures are healed with negative energy
+    //now let's change all spells to "deal" damage
+    if (type == "positive energy") {
+        if (!targ->query_property("negative energy affinity")) {
+            resist_perc += 200;
+        }
+    }
+    if (type == "negative energy") {
+        if (targ->query_property("heart of darkness") ||
+            targ->query_property("negative energy affinity")) {
+            resist_perc += 200;
+        }
+    }
+
     resist = (int)targ->query_resistance(type);
 
     if (resist_perc > 500) {
@@ -317,19 +332,10 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         resist_perc = -500;
     }
 
-    switch (resist_perc) {
-    case (-500)..(-1): // resistance less than 0 equals more damage done
-        percentage = to_float((100 + absolute_value(resist_perc)) / to_float(100));
-        break;
-
-    case 0..100: // resistance between 0 and 100 equals reduced damage
-        percentage = to_float((100 - resist_perc) / to_float(100));
-        break;
-
-    case 101..500: // resistance greater than 100 equals healing
-        percentage = to_float((100 - resist_perc) / to_float(100));
-        break;
-    }
+    // resistance less than 0 equals more damage done
+    // resistance between 0 and 100 equals reduced damage
+    // resistance greater than 100 equals healing
+    percentage = to_float((100 - resist_perc) / to_float(100));
 
     damage = to_int(damage * percentage);
 
@@ -339,24 +345,6 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
             damage = 0;
         }
     }
-
-    if (type == "negative energy") {
-        if (targ->query_property("heart of darkness") ||
-            targ->query_property("negative energy affinity")) {
-            damage = -abs(damage);
-        }else {
-            damage = abs(damage);
-        }
-    }
-
-    if (type == "positive energy") {
-        if (targ->query_property("negative energy affinity")) {
-            damage = abs(damage);
-        }else {
-            damage = -abs(damage);
-        }
-    }
-
 
     if (damage > 0 && type != "force" && objectp(myEB = targ->query_property("empty body"))) {
         return 0;

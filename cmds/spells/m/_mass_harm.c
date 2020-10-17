@@ -61,13 +61,13 @@ void spell_effect(int prof)
     if(!objectp(target)) { target = caster; }
 
     if(target == caster ||
-       member_array(target,party_members) != -1 ||
-       member_array(target,followers) != -1)
+       member_array(target, party_members) != -1 ||
+       member_array(target, followers) != -1)
     {
         targets = filter_array(distinct_array(party_members+(followers-attackers))+({caster}),
                                (:!!$1->query_property("negative energy affinity"):));
     }
-    else if(member_array(target,attackers) != -1)
+    else if(member_array(target, attackers) != -1)
     {
         set_helpful_spell(0);
         targets = filter_array(attackers,(:!$1->query_property("negative energy affinity"):));
@@ -90,37 +90,36 @@ void spell_effect(int prof)
         for(i=0;i<sizeof(targets);i++)
         {
             if(!objectp(targets[i])) { continue; }
-            if(!present(targets[i],place)) { continue; }
-            if(!target->query_property("negative energy affinity"))
+            if(!present(targets[i], place)) { continue; }
+            if(!targets[i]->query_property("negative energy affinity") && !targets[i]->query_property("heart of darkness"))
             {
-                tell_room(place,"%^BOLD%^%^BLACK%^A fell wave moves through"+
-                    " "+targets[i]->QCN+" carrying with it the essence of "+
-                    "death, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
-                tell_object(caster,"%^BOLD%^%^BLACK%^A fell "+
-                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
-                tell_object(targets[i],"%^BOLD%^%^BLACK%^A fell "+
-                    "wave moves through you, carrying with it the essence of death.");
+                if (targets[i] == caster)
+                {
+                    continue;
+                    tell_object(targets[i], "You shouldn't do that to yourself.");
+                }
                 set_helpful_spell(0);
-                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"negative energy");
             }
-            else if(targets[i] == caster)
-            {
-                tell_object(targets[i],"%^BOLD%^%^BLACK%^A fell "+
-                    "wave moves through you, carrying with it the essence of death.");
-                damage_targ(targets[i],targets[i]->return_target_limb(),-healamnt,"negative energy");
-            }
-            else
-            {
-                tell_room(place,"%^BOLD%^%^BLACK%^A fell wave moves through"+
-                    " "+targets[i]->QCN+" carrying with it the essence of "+
-                    "death, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
-                tell_object(caster,"%^BOLD%^%^BLACK%^A fell "+
-                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
-                tell_object(targets[i],"%^BOLD%^%^BLACK%^A fell "+
-                    "wave moves through you, carrying with it the essence of death.");
+            else {
                 set_helpful_spell(1);
-                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"negative energy");
             }
+
+            if(targets[i] == caster)
+            {
+                tell_object(targets[i], "%^BOLD%^%^BLACK%^A fell " +
+                    "wave moves through you, carrying with it the essence of death.");
+            }
+            else {
+                tell_room(place, "%^BOLD%^%^BLACK%^A fell wave moves through" +
+                    " " + targets[i]->QCN + " carrying with it the essence of " +
+                    "death, as " + caster->QCN + " voice rings out.", ({ targets[i], caster }));
+                tell_object(caster, "%^BOLD%^%^BLACK%^A fell " +
+                    "wave moves through " + targets[i]->QCN + ", carrying with it the essence of death.");
+                tell_object(targets[i], "%^BOLD%^%^BLACK%^A fell " +
+                    "wave moves through you, carrying with it the essence of death.");
+            }
+            damage_targ(targets[i], targets[i]->return_target_limb(), healamnt, "negative energy");
+            
             if(query_spell_name()=="mass harm")
                 if(member_array(targets[i],caster->query_attackers())==-1)
                     "/std/magic/cleanse"->cleanse(targets[i]);
