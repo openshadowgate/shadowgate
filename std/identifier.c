@@ -2,14 +2,14 @@
 //important code for this mob - you will need to set_id_uses();
 //and set_detect_uses();, which will set the number of identify
 //and detect magic spells the mob has, respectively
-//You may also set_price() if you wish.  Price is altered based 
-//on the player's level and charisma.  Identify prices are set 
+//You may also set_price() if you wish.  Price is altered based
+//on the player's level and charisma.  Identify prices are set
 //up to be 5 times the price of detect, but you can change this
 //by doing set_highmod() on your particular mob if you want.
-//The base code as it is will make characters level 10 and under 
-//pay 70 gold for detect and 350 gold for identify.  Higher 
-//level characters will be charged much, much more.  With the 
-//current numbers in place, a level 20 would be charged 2800 for 
+//The base code as it is will make characters level 10 and under
+//pay 70 gold for detect and 350 gold for identify.  Higher
+//level characters will be charged much, much more.  With the
+//current numbers in place, a level 20 would be charged 2800 for
 //a detect magic and 8400 for an identify.
 //coded by ~Circe~ 6/12/05
 
@@ -20,10 +20,10 @@
 #include <std.h>
 inherit NPC;
 
-#define LOG "identifier_usage"
+#define LOG "player/identifier_npc"
 object current;
 object *failedStuff;
-//failedStuff defined here and initiated in create because 
+//failedStuff defined here and initiated in create because
 //local variables don't exist after the function is done
 int id_uses, detect_uses;
 int price = 35;
@@ -122,7 +122,7 @@ void determine_enchant(object thing){
       case -3: case 3:  myenchant = "a bright blue glow";
                break;
       case -4: case -5: case -6: case -7: case -8: case -9: case -10:
-      case 4: case 5: case 6: case 7: case 8: case 9: case 10:  
+      case 4: case 5: case 6: case 7: case 8: case 9: case 10:
                 myenchant = "a very bright blue glow";
                 break;
       default: myenchant = "no magical aura";
@@ -259,9 +259,6 @@ void do_interact(string str, object player){
                            force_me("say I detect "+myenchant+" on "+
                            "that "+stuff+".");
                            detect_uses--;
-                           log_file(LOG,""+(string)player->QCN+" had "+
-                           ""+(string)thing->query_short()+" %^BOLD%^%^CYAN%^detected for magic %^RESET%^"+
-                           "by "+TO->QCN+" at  "+ctime(time())+".\n");
                            call_out("endstuff",1);
                            break;
              case "identify": force_me("say Ahh,  you wish to know what "+
@@ -284,10 +281,6 @@ void do_interact(string str, object player){
                               if((int)thing->query_property("enchantment") < 0){
                                  failedStuff += ({thing});
                                  id_uses--;
-                                 log_file(LOG,""+TO->QCN+" %^BOLD%^%^RED%^failed to identify %^RESET%^"+
-                                 ""+(string)thing->query_short()+" for "+
-                                 ""+(string)player->QCN+" at "+ctime(time())+" "+
-                                 "(%^BOLD%^%^RED%^CURSE%^RESET%^).\n");
                                  failure(stuff);
                                  return;
                               }
@@ -303,9 +296,6 @@ void do_interact(string str, object player){
                                     thing->add_identified(ppl[i]->query_name());
                                  }
                               }
-                              log_file(LOG,""+(string)player->QCN+" had a "+
-                              ""+(string)thing->query_short()+" %^BOLD%^%^MAGENTA%^identified %^RESET%^by "+
-                              ""+TO->QCN+" at "+ctime(time())+".\n");
                               id_uses--;
                               call_out("endstuff",1);
                               break;
@@ -321,9 +311,6 @@ void do_interact(string str, object player){
                            }
                            force_me("emote studies the object carefully.");
                            force_me("say The story behind that "+stuff+" is: "+(string)thing->query_lore()+".");
-                           log_file(LOG,""+(string)player->QCN+" had "+
-                           ""+(string)thing->query_short()+" %^BOLD%^%^YELLOW%^studied for lore %^RESET%^"+
-                           "by "+TO->QCN+" at  "+ctime(time())+".\n");
                            call_out("endstuff",1);
                            break;
              default: tell_room(ETO,"Something seems to be wrong.  Please "+
@@ -368,21 +355,15 @@ int ask_em(string str){
       get_detect_price(TP);
       tell_object(TP,"It would cost "+truePrice+" gold for me to detect "+
          "magic for you.");
-      log_file(LOG,""+(string)TPQCN+" asked "+TO->QCN+" "+
-         "for a %^CYAN%^detect magic %^RESET%^price at "+ctime(time())+".\n");
    }
    if(str == "study"){
       get_detect_price(TP);
       tell_object(TP,"It would cost "+truePrice+" gold for me to study an object for you.");
-      log_file(LOG,""+(string)TPQCN+" asked "+TO->QCN+" "+
-         "for a %^YELLOW%^study lore %^RESET%^price at "+ctime(time())+".\n");
    }
    if(str == "identify"){
       get_id_price(TP);
       tell_object(TP,"It would cost "+truePrice+" gold for me to identify "+
          "an item for you.");
-      log_file(LOG,""+(string)TPQCN+" asked "+TO->QCN+" "+
-         "for an %^BOLD%^%^BLUE%^identify %^RESET%^price at "+ctime(time())+".\n");
    }
    tell_room(ETO,""+TPQCN+" seems to be discussing something with the mage.",TP);
    return 1;

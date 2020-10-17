@@ -24,15 +24,15 @@ inherit POTION;
 
 
 int uses, toggle;
-/* I can't see any actual use of the toggle variable doing anything, anyone 
+/* I can't see any actual use of the toggle variable doing anything, anyone
 *  see what I'm missing or can we take it out?  *Styx*  12/29/05
 */
 
 //newbie stuff to support newbie-only potions ~Circe~ 6/3/07
 //If a potion is going to be restricted, you simply do
 //set_newbie_restricted(1); in the create()
-//Right now, messages are hard-coded into this file.  If 
-//we decide to restrict other potions, we could always just 
+//Right now, messages are hard-coded into this file.  If
+//we decide to restrict other potions, we could always just
 //add an ability to set the message.
 void set_newbie_restricted(int x);
 int query_newbie_restricted();
@@ -43,7 +43,7 @@ string potion_visual_look = "clear liquid";
 
 string pot_visual() { return potion_visual_look;}
 
-void set_pot_visual(string newvis) { 
+void set_pot_visual(string newvis) {
   if (stringp(newvis))
     potion_visual_look = newvis;
   return;
@@ -100,12 +100,12 @@ int wear_off() {
 }
 
 int quaff_potion(string str, object doer, object target) {
-  
+
   object vial;
   int temp ;
   string pcolor;
   /* adding so it doesn't have to keep doing the query color as often as this runs *Styx* */
-  pcolor = "%^BOLD%^%^CYAN%^"+query("color"); 
+  pcolor = "%^BOLD%^%^CYAN%^"+query("color");
   /* and adding a failure message if they don't have a string */
   if(!str) {
     write("Try <drink kit> or <quaff kit> (or vial or potion in place of kit)");
@@ -163,18 +163,18 @@ break;
     }
 //Newbie code ends here
     if (target->query_property("stomached_kits") > 4) {
-      if (!interactive(doer)) {
-        log_file("kits",base_name(doer)+": using kits too fast on:"+identify(target)+"\n");
+      if (!userp(doer)) {
+        log_file("living/kits",base_name(doer)+": using kits too fast on:"+identify(target)+"\n");
         return 0; // So if it's an old-code monster,
       // spamming kits does not help it.
       } else {
-        log_file("PC_kits",doer->query_true_name()+":"+ctime(time())+":"+target->query_property("stomached_kits")+".\n");
+        log_file("player/kits",doer->query_true_name()+":"+ctime(time())+":"+target->query_property("stomached_kits")+".\n");
          return notify_fail("You're far too full for that!");
         // Later.... :)
           }
     }
     target->set_property("stomached_kits",1);
-   
+
     seteuid(getuid());
     if(doer == target) {
       tell_object(doer,"You quickly quaff a dose of the "+pcolor+" potion%^RESET%^.");
@@ -218,17 +218,17 @@ void set_uses(int num) {
 
 string query_short() {
   string holder;
-  
+
   holder = ::query_short();
    if (query_newbie_restricted()) holder += " (newbie)";
-  
+
   holder += " ["+uses+" left]";
   return holder;
 }
 
 string query_long(string str) {
   string holder;
-  
+
   holder = ::query_long(str);
   holder += GNOME+"\n" ;
    if (query_newbie_restricted()) holder += "(A newbie-only kit)";
@@ -238,9 +238,9 @@ string query_long(string str) {
 
 int restore_me(string file) {
   int holder;
-  
+
   holder = ::restore_me(file);
-  
+
   set_weight(uses *2);
   return holder;
 }
@@ -254,7 +254,7 @@ void toggle() {
 
 void init() {
   ::init();
-  
+
   if(TP == ETO) {
     add_action("split","take");
     add_action("split","split");
@@ -267,20 +267,20 @@ int split(string str) {
   object ob;
   int num;
   string word;
-  
+
   if(TP->query_bound() || TP->query_unconscious()) {
     TP->send_paralyzed_message("info",TP);
     return 1;
   }
   if(!str) return 0;
-  
+
   if(sscanf(str,"%d from %s",num,word) !=2)
     return notify_fail("Syntax: take # from kit\n");
   if(!id(word)) return 0; //added by Circe so it won't conflict with quivers
-  
+
   if(num >= uses || num <= 0)
     return notify_fail("You may take from 1 to "+(uses-1)+" vials from this kit!\n");
-  
+
   set_uses(uses-num);
   seteuid(getuid());
   ob=new(base_name(TO));
@@ -303,9 +303,9 @@ int combine(string str) {
   object ob;
   int num;
   string targ, dest;
-  
+
   if(!str) return 0;
-  
+
   if(TP->query_bound() || TP->query_unconscious()) {
     TP->send_paralyzed_message("info",TP);
     return 1;
@@ -313,7 +313,7 @@ int combine(string str) {
   if(sscanf(str,"%s with %s",targ,dest) !=2)
     //return notify_fail("Syntax: combine kit # with kit #\n");
     return notify_fail("Syntax: combine kit with kit\n");
-  
+
   if(!id(targ))
     return 0;
   if(!ob=present(dest,TP))
@@ -321,7 +321,7 @@ int combine(string str) {
   if(ob==TO)
     return notify_fail("You can't do that.\n");
   if(!id(dest)) return 0;
-  
+
   if (base_name(ob) != base_name(TO)) return notify_fail("They're not the same kind of kit!\n");
   if (!(int)ob->query_newbie_restricted() != !query_newbie_restricted()) return notify_fail("They're not the same kind of kit!\n");
   num = ob->query_uses();

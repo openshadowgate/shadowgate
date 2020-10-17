@@ -123,7 +123,6 @@ void check_bounty(object person) {
 // MC        message("bounty","%^BOLD%^%^YELLOW%^A good bounty has been issued!!",evil());
 // MC        message("bounty","%^BOLD%^%^YELLOW%^"+person->query_cap_name()+"'s good acts need to be stopped!",users());
         seteuid(UID_LOG);
-        log_file("bounties","Good bounty issued for "+capitalize(person->query_name())+" at "+ctime(time())+".\n");
         seteuid(getuid());
         __Good += ({(string)person->query_name()});
         __Good = distinct_array(__Good);
@@ -134,7 +133,6 @@ void check_bounty(object person) {
 // MC        message("bounty","%^BOLD%^%^YELLOW%^An evil bounty has been issued!!",good());
 // MC        message("bounty","%^BOLD%^%^YELLOW%^"+person->query_cap_name()+"'s evil acts need to be stopped!",users());
         seteuid(UID_LOG);
-        log_file("bounties","Evil bounty issued for "+capitalize(person->query_name())+" at "+ctime(time())+".\n");
         seteuid(getuid());
         __Evil += ({(string)person->query_name()});
         __Evil = distinct_array(__Evil);
@@ -164,7 +162,6 @@ protected int personal_bounty(object attacker, object victim) {
 
     // announce bounty collection, add money to attacker, set mini quest
     pbounty_shout((string)attacker->query_name(), (string)victim->query_name(), who);
-    log_file("bounties",">>>"+capitalize(attacker->query_name())+" collected the personal bounty on "+capitalize(victim->query_name())+" posted by "+capitalize(who)+" at "+ctime(time())+"!\n");
     attacker->add_money("gold",money);
     attacker->set_mini_quest("Captured "+capitalize(victim->query_name())+" for "+capitalize(who)+".",exp,"Captured "+capitalize(victim->query_name())+" for "+capitalize(who)+".");
 }
@@ -206,7 +203,6 @@ mixed add_personal_bounty(string name, object poster, int amount) {
     __Personal_Bounties[name]["alignment"] = (int)poster->query_alignment();
 
     SAVE();
-    log_file("bounties","Personal bounty placed on "+capitalize(name)+" for "+amount+" by "+capitalize(poster->query_name())+" at "+ctime(time())+".\n");
 }
 
 protected void pbounty_shout(string hunter, string hunted, string issued) {
@@ -248,7 +244,6 @@ protected int collect_law_bounty(object victim, object attacker, int dead){
         SAVE();
 //        message("bounty","%^BOLD%^%^YELLOW%^The bounty on "+capitalize(victim->query_name())+" has been collected by "+attacker->query_cap_name()+"!",users());
         seteuid(UID_LOG);
-        log_file("bounties",">>>"+capitalize(attacker->query_name())+" collected the legal bounty on "+capitalize(victim->query_name())+" at "+ctime(time())+"!\n");
         seteuid(getuid());
         attacker->set_mini_quest("Bounty collection on "+capitalize(victim->query_name()), 1000,"Bounty collection on "+capitalize(victim->query_cap_name()));
         attacker->add_money("gold",2000 * (int)victim->query_lowest_level());
@@ -298,7 +293,6 @@ protected int evil_bounty(object victim, object attacker) {
         SAVE();
 //        message("bounty","%^BOLD%^%^YELLOW%^"+attacker->query_cap_name()+" has stemmed the evil deeds of "+capitalize(victim->query_name())+"!",good());
         seteuid(UID_LOG);
-        log_file("bounties",">>>"+capitalize(attacker->query_name())+" collected the evil bounty on "+capitalize(victim->query_name())+" at "+ctime(time())+"!\n");
         seteuid(getuid());
         attacker->set_mini_quest("Evil bounty collection on "+capitalize(victim->query_name()), 2000 * (int)victim->query_lowest_level(),"Evil bounty collection on "+capitalize(victim->query_cap_name()));
         attacker->add_align_adjust(20);
@@ -315,7 +309,6 @@ protected int good_bounty(object victim, object attacker) {
         SAVE();
 //        message("bounty","%^BOLD%^%^YELLOW%^"+attacker->query_cap_name()+" has stemmed the good deeds of "+capitalize(victim->query_name())+"!",evil());
         seteuid(UID_LOG);
-        log_file("bounties",">>>"+capitalize(attacker->query_name())+" collected the good bounty on "+capitalize(victim->query_name())+" at "+ctime(time())+"!\n");
         seteuid(getuid());
         attacker->set_mini_quest("Good bounty collection on "+capitalize(victim->query_name()), 2000*(int)victim->query_lowest_level(),"Good bounty collection on "+capitalize(victim->query_cap_name()));
         attacker->add_align_adjust(5);
@@ -381,7 +374,7 @@ void check_diety_change(object who) {
     symbol = present("holy symbol",who);
     if (!diety || diety == "pan") return;
     if (member_array(align,DIETIES[diety][1])==-1) {
-        log_file("god_change",capitalize(who->query_name())+" has been rejected by "+capitalize(diety)+": "+ctime(time())+"\n");
+        log_file("player/god_change",capitalize(who->query_name())+" has been rejected by "+capitalize(diety)+": "+ctime(time())+"\n");
        "/cmds/avatar/_note.c"->cmd_note("ckpt "+who->query_name()+" was rejected by "+capitalize(diety)+"!");
         tell_object(who,"%^BOLD%^%^YELLOW%^"+capitalize(diety)+" will no longer accept you as a follower!");
         tell_object(who,"%^BOLD%^%^CYAN%^A bolt of energy streaks toward you from above, exacting "+capitalize(diety)+"'s revenge.");
@@ -414,7 +407,7 @@ void align_penalty(object person, int points, int law) {
    tell_object(person, "%^BOLD%^(ICly) Past deeds are flashing before your eyes and you feel dazed and overwhelmed by the realization you have betrayed your nature and life's path.\n");
    tell_object(person,"%^BOLD%^You feel an overwelming need to do some serious soul searching and atonement to whatever god/dess you serve or most influences your existence.");
    tell_room(environment(person), person->query_cap_name()+" seems to be having flashbacks of past deeds and be somewhat stunned for a few moments.", person);
-   log_file("align_change",capitalize(name)+" hit the alignment change threshold with "+points+" of evil/good adj. and "+law+" of law/chaos adj. - alignment is "+align+" on "+ctime(time())+"\n");
+   log_file("player/align_change",capitalize(name)+" hit the alignment change threshold with "+points+" of evil/good adj. and "+law+" of law/chaos adj. - alignment is "+align+" on "+ctime(time())+"\n");
    "/daemon/messaging_d"->avatars_message("alignment loss","%^BOLD%^Imm:  "+capitalize(name)+" hit an alignment change threshold and will need to atone.");
    "/cmds/avatar/_note.c"->cmd_note("ckpt "+name+" %^YELLOW%^hit the alignment change threshold (alignment is "+align+") with "+points+" and needs to atone.%^RESET%^");
    return;

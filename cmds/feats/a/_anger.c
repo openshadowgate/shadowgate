@@ -116,7 +116,6 @@ void execute_attack(){
         tell_room(environment(caster),"%^BOLD%^%^RED%^You see a transformation take place in "+target->QCN+" as "
 +target->QS+" %^BOLD%^%^GREEN%^becomes frenzied.",target);
         tell_object(target,"%^BOLD%^%^RED%^You suddenly feel enraged and attack everything in sight!");
-        if(!avatarp(caster)) log_file("anger", caster->query_name()+" angered "+target->query_name()+" on "+ctime(time())+"\n");
 
         inv = all_inventory(place);
         for(i = 0;i<sizeof(inv);i++){

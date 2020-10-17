@@ -2,7 +2,7 @@
 
 inherit DAEMON;
 
-int cmd_wizheal(string str) 
+int cmd_wizheal(string str)
 {
     object ob,*ppl;
     int i;
@@ -17,7 +17,6 @@ int cmd_wizheal(string str)
 
             ob->set_hp(ob->query_max_hp());
             ob->heal(1);
-            if(!wizardp(ob)) log_file("illegal", TPQCN + " wizhealed " + ob->QCN + " at " + ctime(time())+".\n");
             write("You heal "+ob->QCN+".\n");
             if(ob != this_player()) tell_object(ob, "You are healed by "+TPQCN+".\n");
         }
@@ -34,7 +33,6 @@ int cmd_wizheal(string str)
     tell_object(TP, "ob max_hp = "+ob->query_max_hp());
     ob->set_hp(ob->query_max_hp());
     ob->heal(1);
-    if(!wizardp(ob)) log_file("illegal", TPQCN + " wizhealed " + ob->QCN + " at " + ctime(time())+".\n");
     write("You heal "+ob->QCN+".\n");
     if(ob != this_player()) tell_object(ob, "You are healed by "+TPQCN+".\n");
     return 1;

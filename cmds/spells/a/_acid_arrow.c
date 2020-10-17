@@ -203,10 +203,4 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) { TO->remove(); }
 
-    else {
-        log_file("debug.log","ERROR - TO (this object) invalid "+
-        "object in dest_effect for Acid Arrow - By Saide to "+
-        "figure out bug.");
-        return;
-    }
 }

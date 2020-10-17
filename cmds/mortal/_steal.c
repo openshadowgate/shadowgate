@@ -188,7 +188,7 @@ int cmd_steal(string str) {
         }
         i = check_caught(x,victim,ob,steal);
         //if (interactive(victim))
-            log_file("stealing", TPQN+"("+TP->query_level()+") stole "+ob->query_short()+" from "+victim->query_name()+"("+victim->query_lowest_level()+") on "+ctime(time())+" with difficulty "+i+"\n");
+            log_file("player/theft", TPQN+"("+TP->query_level()+") stole "+ob->query_short()+" from "+victim->query_name()+"("+victim->query_lowest_level()+") on "+ctime(time())+" with difficulty "+i+"\n");
         flag_stolen(ob,i);//ob->set_property("stolen",([TPQN:(["difficulty":i,"max value":ob->query_value()])]));
         return 1;
 
@@ -274,7 +274,7 @@ int check_caught(int roll, object target, object ob, int sLevel){
 
         if (!interactive(target)) target->kill_ob(TP,0);
         else
-            log_file("stealing", TPQN+"("+sLevel+") was caught stealing "+ob->query_short()+" from "+target->query_name()+"("+target->query_lowest_level()+") on "+ctime(time())+"\n");
+            log_file("player/theft", TPQN+"("+sLevel+") was caught stealing "+ob->query_short()+" from "+target->query_name()+"("+target->query_lowest_level()+") on "+ctime(time())+"\n");
         if (ob->query_weight() < 1)
             weight = 1;
         else

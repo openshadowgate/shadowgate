@@ -10,7 +10,7 @@ inherit DAEMON;
 
 int cmd_echoall(string str) {
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -26,7 +26,6 @@ int cmd_echoall(string str) {
   str = replace_string(str,"%^NL%^","\n");
     message("environment", str, users());
     seteuid(UID_LOG);
-    log_file("shouts", geteuid(previous_object())+" (echoall): "+str+"\n");
     seteuid(getuid());
     return 1;
 }

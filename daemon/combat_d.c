@@ -227,10 +227,6 @@ varargs int damage_adjustment(object attacker, object victim, int damage)
             logdata = "/daemon/saving_throw_d.c"->debug_reflex_save(victim, ((-1) * num)); // logging success rate
 
             if (logdata["save_result"]) {
-                if (userp(victim)) {
-                    log_file("defensiveroll", "Player " + (string)victim->query_name() + " %^BOLD%^%^RED%^passed"
-                             "%^RESET%^. Character level was " + (int)victim->query_level() + ", DC was " + num + ", varied by " + logdata["final_roll"] + ".\n");
-                }
                 damage = damage / 2;
                 if (damage < 0) {
                     damage = 0;
@@ -246,11 +242,6 @@ attack, lessing its force!%^RESET%^");
                 if (damage <= 0) {
                     //track_damage(attacker, victim, damage);
                     return damage;
-                }
-            }else {
-                if (userp(victim)) {
-                    log_file("defensiveroll", "Player " + (string)victim->query_name() + " %^BOLD%^%^RED%^failed"
-                             "%^RESET%^. Character level was " + (int)victim->query_level() + ", DC was " + num + ", varied by " + logdata["final_roll"] + ".\n");
                 }
             }
         }
@@ -284,7 +275,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 
     if (!stringp(type) || !targ->valid_resistance(type)) {
         if (objectp(attacker)) {
-            log_file("invalid_damage_types", "" + ctime(time()) + " " + base_name(attacker) + " tried to use an invalid damage type:
+            log_file("errors/invalid_damage_types", "" + ctime(time()) + " " + base_name(attacker) + " tried to use an invalid damage type:
 " + type + "\n");
         }
         return damage;
@@ -709,7 +700,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
 		if (!fired){
 			if(!cant_shot){ //Venger: if not using the weapon as intended then dont use weapon specials.
 				bonus_hit_damage += get_damage(attacker, weapon, targ); //this is necessary so specials that return numbers are not multiplied in a critical hit.
-			}            
+			}
             mysize = (int)attacker->query_size();
             if (mysize == 1) {
                 mysize++;             //run small creatures as normal size please.
@@ -798,9 +789,9 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     if (critical_hit) {
         damage = crit_damage(attacker, targ, weapon, attacker_size, damage, cant_shot);
     }
-    
+
     //Brutalize wounds causes victim to take extra damage from physical attacks.
-    bonus_hit_damage += this_object()->query_property("brutalized");       
+    bonus_hit_damage += this_object()->query_property("brutalized");
 
     damage += bonus_hit_damage;
     new_struck(damage, weapon, attacker, target_thing, targ, fired, ammoname, critical_hit, cant_shot);
@@ -1233,7 +1224,7 @@ void new_struck(int damage, object weapon, object attacker, string limb, object 
 			damage_type = "bludgeoning";
 		}else{
 			damage_type = (string)weapon->query_damage_type();
-		}        
+		}
     }else if (objectp(attacker)) {
         damage_type = (string)attacker->query_base_damage_type();
     }
@@ -3385,16 +3376,12 @@ varargs int check_death(object who, object pot)
                 }
             }
             if (who->isPkill()) {
-                log_file("killers", "       " + capitalize(who->query_name()) + " was killed by " + capitalize(killedBy->query_name()) + "\n");
+                log_file("player/kills", "       " + capitalize(who->query_name()) + " was killed by " + capitalize(killedBy->query_name()) + "\n");
                 who->set("no pk", 1);
                 who->set("just_been_pkilled", 1);
                 who->set_pk_death_flag();
                 who->perma_death();
                 who->remove_property("to die");
-                if (!random(100)) {
-                    log_file("permaDeaths", "     " + capitalize(who->query_name()) + " was perma killed by " + capitalize(killedBy->query_name()) + "\n");
-                    tell_object(who, "%^BOLD%^%^FLASH%^This really would have been be a permadeath had the code been in.");
-                }
             }
             who->adjust_combat_mapps("static vars", "dead", 1);
             return 1;

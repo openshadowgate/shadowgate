@@ -10,7 +10,7 @@ inherit DAEMON;
 #define LIBRARY_SAVE_PATH   "/d/save/library_books/"
 #define BOOK_FILE           "/d/common/obj/misc/book"
 #define SAVE_FILE           "/daemon/save/library_info"
-#define LIBRARY_LOG         "library_log"
+#define LIBRARY_LOG         "libraries"
 #define REAL_WEEK           432000
 
 string *__Banned;
@@ -78,12 +78,12 @@ int review_book(string library_name, string book_title, string book_author,objec
 // if the book is approved, the librarian uses this command to add it to the library shelves
 int approve_book(string library_name, object book, object player);
 // if the book is denied for reasons other than blatant ooc, they use this command
-// the author or the person who submitted the book for review can then pick it up 
+// the author or the person who submitted the book for review can then pick it up
 // later and make any necessary changes before submitting it again
 int deny_book(string library_name, object book, object player);
 // this is the command used to retrieve books that have been denied by the librarian
 int retrieve_book(string library_name,string book_title,string book_author,object player);
-// this will be called the first time the library in question has any functions called to 
+// this will be called the first time the library in question has any functions called to
 // restock overdue books.  Should be more processor friendly than doing on reset or boot
 int restock_books(string library_name);
 // restricts a player from using a library, useful for people who cause damage, etc
@@ -164,7 +164,7 @@ int compare_titles(string title_one,string title_two)
 string build_file_name(object book)
 {
     string file,title,author_alias;
-    
+
     if(!objectp(book))               { return 0; }
     if(base_name(book) != BOOK_FILE) { return notify_fail("Wrong type of book.\n"); }
     title = book->query_book_title();
@@ -246,7 +246,7 @@ int give_book_to_player(string file,object player)
 int take_book_from_player(object book,object player)
 {
     if(!objectp(book))       { return 0; }
-    if(!objectp(player))     { return 0; }    
+    if(!objectp(player))     { return 0; }
     if(present(book,player)) { book->remove(); }
     return 1;
 }
@@ -255,10 +255,10 @@ int take_book_from_player(object book,object player)
 int collect_deposit(object player,int deposit,int due_date)
 {
     if(!objectp(player))                        { return 0; }
-    if(!player->query_funds("gold",deposit))    
-    { 
+    if(!player->query_funds("gold",deposit))
+    {
         tell_object(player,"You don't have "+deposit+" gold for the deposit.\n");
-        return 0; 
+        return 0;
     }
     tell_object(player,"%^RESET%^The library collects a "+deposit+" gold deposit.  "
         "If you do not return the book before "+ctime(due_date)+" you will not "
@@ -323,7 +323,7 @@ int make_librarian(string library_name,string name,string alias,object player)
     if(!library_exists(library_name))           { return 0; }
     if(!check_librarian(library_name,player))   { return 0; }
 
-    if((string)player->query_position() != "high mortal" && !avatarp(player)) { return 0; }    
+    if((string)player->query_position() != "high mortal" && !avatarp(player)) { return 0; }
 
     real_name = get_real_name(name,player);
 
@@ -359,13 +359,13 @@ string get_real_name(mixed live, object ob)
         if(!live->is_player()) { return notify_fail("get_real_name() Not a User"); }
         return live->query_name();
     }
-    
+
     if(!ob->is_player()) { return live; }
     if(avatarp(ob))
     {
         if(user_exists(live)) return live;
     }
-    if(user_exists(real_name=ob->realName(live))) { return real_name; } 
+    if(user_exists(real_name=ob->realName(live))) { return real_name; }
     if(user_exists(live)) { return live; }
     return notify_fail("You don't have that player recognized.");
 }
@@ -388,7 +388,7 @@ int put_book_in_library(string library_name,object book,object player)
     author_name = book->query_author_name();
     file_name = build_file_name(book);
 
-    book_info = ([ file_name : ([ "title": title, "author name" : author_name, "author alias" : author_alias, "copies" : 1 ]), ]);    
+    book_info = ([ file_name : ([ "title": title, "author name" : author_name, "author alias" : author_alias, "copies" : 1 ]), ]);
     __Libraries[library_name] += book_info;
     book->set_library_book(1);
 
@@ -435,7 +435,7 @@ int add_book(string library_name, string book_title, string book_author, int amo
     if(!stringp(book_title))            { return 0; }
     if(!stringp(book_author))           { return 0; }
     if(!intp(amount))                   { return 0; }
-    if(!library_exists(library_name))   { return 0; }    
+    if(!library_exists(library_name))   { return 0; }
     file = create_file_name(book_title,book_author);
     save_path = LIBRARY_SAVE_PATH+library_name+"/"+file+".o";
     if(!file_exists(save_path))         { return 0; }
@@ -467,24 +467,24 @@ int check_out_book(string library_name, string book_title, string book_author,ob
     file = create_file_name(book_title,book_author);
     save_path = LIBRARY_SAVE_PATH+library_name+"/"+file+".o";
     if(!file_exists(save_path))         { return 0; }
-    
+
     if(!__CheckedOut[library_name]) { __CheckedOut[library_name] = ([]); }
     books = __CheckedOut[library_name];
     name = (string)player->query_name();
-    if(books[name] && books[name] != ([]))  
-    { 
+    if(books[name] && books[name] != ([]))
+    {
         tell_object(player,"You already have a book checked out at this "
             "library, you may not have more than one at a time.\n");
-        return 0; 
+        return 0;
     }
 
     due_date = time() + REAL_WEEK;
 
     num_books = add_book(library_name, book_title, book_author,0);
-    if(!num_books) 
+    if(!num_books)
     {
         tell_object(player,"There are no copies of that book left in the library.\n");
-        return 0; 
+        return 0;
     }
     if(!collect_deposit(player,deposit,due_date)) { return 0; }
     add_book(library_name, book_title, book_author,-1);
@@ -544,14 +544,14 @@ int return_book_to_library(string library_name, object book, object player)
         take_book_from_player(book,player);
         log_file(LIBRARY_LOG,""+ctime(time())+" "+capitalize(name)+" returned "+book_title+" by "+book_author+" to "+library_name+"\n");
         SAVE();
-        if(time() < due_date) 
-        { 
+        if(time() < due_date)
+        {
             return_deposit(player,(int)book_info["deposit"]);
-            return 1; 
+            return 1;
         }
         tell_object(player,"Your book is late so you do not get your deposit back.");
         return -1;
-    }    
+    }
     return 0;
 }
 
@@ -568,7 +568,7 @@ int take_book(string library_name, string book_title, string book_author,object 
     if(!library_exists(library_name))   { return 0; }
     file = create_file_name(book_title,book_author);
     save_path = LIBRARY_SAVE_PATH+library_name+"/"+file+".o";
-    if(!file_exists(save_path))         { return 0; }    
+    if(!file_exists(save_path))         { return 0; }
 
     name = (string)player->query_name();
     num_books = add_book(library_name, book_title, book_author,0);
@@ -620,7 +620,7 @@ int spawn_book(string library_name, string book_title, string book_author,object
     if(!library_exists(library_name))   { return 0; }
     file = create_file_name(book_title,book_author);
     save_path = LIBRARY_SAVE_PATH+library_name+"/"+file+".o";
-    if(!file_exists(save_path))         { return 0; }  
+    if(!file_exists(save_path))         { return 0; }
     give_book_to_player(save_path,player);
     return 1;
 }
@@ -638,10 +638,10 @@ int update_book(string library_name, object book, object player)
     file = build_file_name(book);
     save_path = LIBRARY_SAVE_PATH+library_name+"/"+file+".o";
     if(!file_exists(save_path))                 { return 0; }
-    
+
     title = book->query_book_title();
     author_alias = book->query_author_alias();
-    author_name = book->query_author_name();    
+    author_name = book->query_author_name();
     book_info = __Libraries[library_name];
     books = book_info[file];
     copies = 1 + (int)books["copies"];
@@ -649,7 +649,7 @@ int update_book(string library_name, object book, object player)
     map_delete(__Libraries[library_name],file);
     rm(save_path);
 
-    book_info = ([ file : ([ "title": title, "author name" : author_name, "author alias" : author_alias, "copies" : copies ]), ]);    
+    book_info = ([ file : ([ "title": title, "author name" : author_name, "author alias" : author_alias, "copies" : copies ]), ]);
     __Libraries[library_name] += book_info;
     book->set_library_book(1);
 
@@ -668,7 +668,7 @@ int update_book(string library_name, object book, object player)
         if(mapp(by_player))
         {
             if(compare_titles((string)by_player["title"],title))
-            {        
+            {
                 map_delete(checked_out,(string)player->query_name());
             }
         }
@@ -677,7 +677,7 @@ int update_book(string library_name, object book, object player)
     return 1;
 }
 
-// submits a book to the library for review by a librarian before it goes into the game. 
+// submits a book to the library for review by a librarian before it goes into the game.
 int submit_book_to_library(string library_name,string alias,object book,object player)
 {
     string file_name,title,author_alias,author_name,player_name,player_alias;
@@ -699,7 +699,7 @@ int submit_book_to_library(string library_name,string alias,object book,object p
     player_alias = alias;
     player_name = (string)player->query_name();
 
-    book_info = ([ file_name : ([ "player name" : player_name, "player alias" : player_alias, "title": title, "author name" : author_name, "author alias" : author_alias, "date" : ctime(time()), ]), ]);    
+    book_info = ([ file_name : ([ "player name" : player_name, "player alias" : player_alias, "title": title, "author name" : author_name, "author alias" : author_alias, "date" : ctime(time()), ]), ]);
     __Submitted[library_name] += book_info;
 
     log_file(LIBRARY_LOG,""+ctime(time())+" "+capitalize(player_name)+" submitted "+title+" by "+author_alias+" to "+library_name+" for review.\n");
@@ -727,7 +727,7 @@ int review_book(string library_name, string book_title, string book_author,objec
     file = create_file_name(book_title,book_author);
     file = "submitted/"+file;
     save_path = LIBRARY_SAVE_PATH+library_name+"/"+file+".o";
-    if(!file_exists(save_path))         { return 0; }    
+    if(!file_exists(save_path))         { return 0; }
 
     name = (string)player->query_name();
     submitted = __Submitted[library_name];
@@ -736,10 +736,10 @@ int review_book(string library_name, string book_title, string book_author,objec
     give_book_to_player(save_path,player);
     book = present("book",player);
     book->set_property("submitted_by",book_stuff["player name"]);
-    
+
     map_delete(__Submitted[library_name],file);
     rm(save_path);
-    
+
     tell_object(player,"You are now reviewing "+book_title+" by "+book_author+".  This is the "
         "only copy of the book.  After reviewing it, please <accept book>, or <reject book>.  "
         "If it contains blatant ooc information, please contact an immortal.");
@@ -793,7 +793,7 @@ int deny_book(string library_name, object book, object player)
     submitted = (string)book->query_property("submitted_by");
     book->remove_property("submitted_by");
 
-    book_info = ([ file_name : ([ "title": book_title, "submitted by" : submitted, "author name" : book_author, "author alias" : book_author, "date" : ctime(time()), ]), ]);    
+    book_info = ([ file_name : ([ "title": book_title, "submitted by" : submitted, "author name" : book_author, "author alias" : book_author, "date" : ctime(time()), ]), ]);
     __Denied[library_name] += book_info;
 
     log_file(LIBRARY_LOG,""+ctime(time())+" "+capitalize(player_name)+" denied "+book_title+" by "+book_author+" for "+library_name+".\n");
@@ -819,18 +819,18 @@ int retrieve_book(string library_name,string book_title,string book_author,objec
     file = "denied/"+file;
     save_path = LIBRARY_SAVE_PATH+library_name+"/"+file+".o";
     if(!file_exists(save_path))                 { return 0; }
-    
+
     book_info = __Denied[library_name];
     stuff = book_info[file];
     submitted_by = stuff["submitted by"];
     author = stuff["author name"];
     player_name = (string)player->query_name();
 
-    if(player_name != submitted_by && player_name != author && !avatarp(player)) 
-    { 
+    if(player_name != submitted_by && player_name != author && !avatarp(player))
+    {
         tell_object(player,"You must be the author of the book or the person who originally "
             "submitted it for review to retrieve it.");
-        return 0; 
+        return 0;
     }
 
     log_file(LIBRARY_LOG,""+ctime(time())+" "+capitalize(player_name)+" retrieved "+book_title+" by "+book_author+" from "+library_name+" after it was denied.");
@@ -998,7 +998,7 @@ mapping get_books(string library_name)
     return __Libraries[library_name];
 }
 
-// returns a mapping of all the books checked out with names as keys    
+// returns a mapping of all the books checked out with names as keys
 mapping get_checked_out(string library_name)
 {
     if(!stringp(library_name))          { return 0; }
@@ -1127,7 +1127,7 @@ void SAVE()
 void SAVE_BOOK(string library_name, string file_name,object book)
 {
     string save_path;
-    
+
     if(!stringp(library_name))          { return 0; }
     if(!stringp(file_name))             { return 0; }
     if(!objectp(book))                  { return 0; }

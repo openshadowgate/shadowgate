@@ -38,7 +38,6 @@ void SAVE() {
 
 void LOG(string msg) {
   seteuid(UID_LOG);
-  log_file("data_lists", ctime(time())+": "+msg+"\n");
   seteuid(getuid());
 }
 

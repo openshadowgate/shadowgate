@@ -297,9 +297,6 @@ int party_emote(string str){
     }
     pl_name = capitalize((string)this_player()->query_name());
     if(avatarp(TP) && TP->query_disguised()) pl_name = capitalize(TP->query_vis_name());
-    if(!random(6)){
-       log_file("/log/emotes/parties/partyemotes.log","%^RESET%^"+pl_name+" "+str+"\n");
-    }
 
     PARTY_OB->party_emote(party, "%^RESET%^"+pl_name+" "+str);
     return 1;

@@ -4,36 +4,36 @@
 #include <levelcheck.h>
 inherit DAEMON;
 
-int cmd_threaten(string str) 
+int cmd_threaten(string str)
 {
     object targ;
     string player;
 
-    if(!str) 
+    if(!str)
     {
         notify_fail("You need to specify a player name.\n");
         return 0;
     }
-   
-    if(!(targ = find_player(TP->realName(str)))) 
+
+    if(!(targ = find_player(TP->realName(str))))
     {
         notify_fail("No such player found.\n");
         return 0;
     }
-   
-    if(!userp(targ)) 
+
+    if(!userp(targ))
     {
         notify_fail("This is not a player.\n");
         return 0;
     }
 
-    if(newbiep(TP)) 
+    if(newbiep(TP))
     {
         tell_object(TP,"%^YELLOW%^You can't PK as a newbie!%^RESET%^");
         return 1;
     }
-    
-    if(newbiep(targ)) 
+
+    if(newbiep(targ))
     {
         tell_object(TP,"%^YELLOW%^You can't PK newbies!%^RESET%^");
         return 1;
@@ -47,7 +47,7 @@ int cmd_threaten(string str)
 
         tell_object(targ,"%^BOLD%^%^CYAN%^"+TP->query_name()+" takes on a very threatening air towards you.\n%^YELLOW%^You get the impression that you are pushing your luck in provoking this character (see %^WHITE%^<help threaten>%^YELLOW%^). If you wish to continue to do so, you must be prepared to enter a pkill situation. Otherwise you will need to roleplay appropriate respect or fear of the player, or find an appropriate way to extract yourself from the situation.%^RESET%^");
         seteuid(UID_LOG);
-        log_file("threaten","%^BOLD%^%^CYAN%^"+ctime(time())+"%^RESET%^: Threaten "
+        log_file("player/threaten","%^BOLD%^%^CYAN%^"+ctime(time())+"%^RESET%^: Threaten "
                  "command used by "+TP->query_name()+" against "+player+".\n");
         seteuid(getuid());
         return 1;
@@ -62,7 +62,7 @@ int cmd_threaten(string str)
     return 1;
 }
 
-void help() 
+void help()
 {
     write("
 %^CYAN%^NAME%^RESET%^
@@ -87,4 +87,3 @@ pkilling, who, rules
 
 ");
 }
-

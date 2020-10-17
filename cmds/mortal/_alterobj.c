@@ -93,8 +93,6 @@ void enter_short(string str, object ob, int percent){
     if(!quality)  quality = "";
     ob->set("alterby", TPQN);
     ob->set_short(str);
-    log_file("alterobj",capitalize(TPQN)+" altered "+base_name(ob)+" on"
-             " "+ctime(time())+"\n");
     write("Please enter the new LONG description for the item and then "
           "<enter>.  The current long is: "
           "\n"+ob->query_long()+"%^RESET%^\n");

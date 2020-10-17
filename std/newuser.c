@@ -262,7 +262,7 @@ void remove()
     if(objectp(previous_object()))
     {
         if (geteuid(previous_object()) != UID_ROOT && previous_object() != TO && (query_verb() != "quit" && this_player() != TO)) return;
-        log_file("reports/remove.player","removed: "+TO->query_name()+
+        log_file("player/remove","removed: "+TO->query_name()+
         " "+file_name(previous_object())+".\n");
     }
     else if (query_verb() != "quit" && TP != TO) return;
@@ -419,7 +419,7 @@ void set_level(int lev)
     level = lev;
     set_mlevel(query_class(),lev);
     PLAYER_D->add_player_info();
-    log_file("advance", TO->query_name()+" advanced to level "+lev+".\n");
+    log_file("player/advance", TO->query_name()+" advanced to level "+lev+".\n");
     if (position == "high mortal" && level < 20)
     {
         position = "player";
@@ -633,7 +633,7 @@ int set_quest(string str) {
   if (member_array(str, quests) != -1) return 0;
 //player_data["general"]["quest points"] += (int)call_other(ROOM_QUEST,"query_quest_points",str);
   quests += ({ str});
-  log_file("quests", query_name()+" completed "+str+": "+ctime(time())+"\n");
+  log_file("player/quests", query_name()+" completed "+str+": "+ctime(time())+"\n");
   "/cmds/avatar/_note.c"->cmd_note("ckpt "+query_name()+" completed the "
 				   "%^YELLOW%^"+str+".");
   return 1;

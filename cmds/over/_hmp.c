@@ -12,7 +12,7 @@ int cmd_hmp(string str){
   string what;
   object ob;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -20,26 +20,24 @@ int cmd_hmp(string str){
        tell_object(TP,"You cannot use this command as a builder or apprentice.");
        return 1;
    }
-  
+
   if (!str) return notify_fail("Usage: hmp <who> <on/off> <reason>\n");
   if (sscanf(str,"%s %s %s", who, what, why) != 3) return notify_fail("Usage: hmp <who> <on/off> <reason>\n");
   ob = find_player(who);
   if (!ob) {
     if (!user_exists(who)) return notify_fail("The player "+who+" does not exist.\n");
-    //load the player  
+    //load the player
   } else {
     switch (what) {
     case "on":
       seteuid(UID_ADVANCE);
-      ob->set_position("high mortal"); 
+      ob->set_position("high mortal");
       seteuid(getuid());
       ob->add_search_path("/cmds/hm");
       ob->set("no advance",0);
 //added to get rid of levelcap to stop the problem of HMs still being capped.
 //Circe 11/20/04
       message("info","All hail "+capitalize(ob->query_name())+" the new high mortal!\n",users());
-      log_file("high_mortal", ob->query_name()+" gained high mortal status "+ctime(time())+" by: "+TP->query_name()+".\n");
-      log_file("high_mortal","\t\t "+why+"\n");
       CASTLE_D->enable_high_mortal(ob);
       TS->add_value_to_array("notes",ob->query_name(), capitalize(TP->query_name()) + ", " + ctime(time()) + " - recieved HM status because: "+why);
       ob->set_max_mp(2*((int) ob->query_stats("intelligence") + (int)ob->query_stats("wisdom")));
@@ -54,8 +52,6 @@ int cmd_hmp(string str){
       ob->remove_search_path("/cmds/hm");
       // message("info",capitalize(ob->query_name())+" has lost "+ob->query_possessive()+" hm status.",users());
       seteuid(UID_LOG);
-      log_file("high_mortal", ob->query_name()+" lost high mortal status "+ctime(time())+" by: "+TP->query_name()+".\n");
-      log_file("high_mortal","\t\t "+why+"\n");
       TS->add_value_to_array("notes",ob->query_name(), capitalize(TP->query_name()) + ", " + ctime(time()) + " - lost HM status because: "+why);
       ob->disable_high_mortal(ob);
       ob->update_channels();

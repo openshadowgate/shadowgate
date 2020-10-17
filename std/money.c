@@ -41,9 +41,9 @@ void add_money(string str, int amount) {
     if(!this_player() || this_player() == this_object())
       logging = "euid: "+geteuid(previous_object())+" ("+file_name(previous_object())+")";
     else logging = (string)this_player()->query_name();
-    log_file("money", this_object()->query_name()+" received "+
+
+    log_file("living/money", this_object()->query_name()+" received "+
       amount + " gold in "+str+" from "+logging+" at "+ctime(time())+"\n");
-    //log_file("money", ctime(time())+"\n");
 }
 
 void set_money(string type, int amount) {

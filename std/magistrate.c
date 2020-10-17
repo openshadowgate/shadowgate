@@ -87,7 +87,6 @@ int wiz_deny(string str){
     if(!LAWBOUNTY_D->kill_case(cse))
         return notify_fail("Case not killed.  Either does not exist or there was a problem.\n");
 
-    log_file("bounties","Law bounty killed by "+capitalize(cse)+" by "+capitalize(TPQN)+" on "+ctime(time())+".\n");
     tell_object(TP, "Case killed.  NO MAILS SENT.");
     return 1;
 }

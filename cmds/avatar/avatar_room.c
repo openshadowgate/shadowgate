@@ -15,8 +15,6 @@ int confirm(string str,object obj)
 	case "y":
 	case "Y":
 		tell_object(obj,"Confirmed, moving you to a new location.");
-		log_file("avatar_rooms",""+ctime(time())+" "+capitalize(TP->query_true_name())+" used the "
-			"oocescape command to leave "+base_name(environment(TP))+"\n");
 		TP->move("/d/shadow/room/pass/passn9");
 		TP->force_me("look");
 		return 1;
@@ -69,7 +67,7 @@ void init()
 {
 	string name;
     ::init();
-	
+
 	if(!objectp(TP)) { return; }
 	if(!interactive(TP)) { return; }
 	if(avatarp(TP)) { return; }

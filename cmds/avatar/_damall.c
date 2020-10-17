@@ -9,7 +9,7 @@ int cmd_damall(string str){
    int amount;
    string who;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -30,11 +30,6 @@ int cmd_damall(string str){
      return help();
    set_property("magic",1);
    objs->do_damage("torso",amount);
-   if(!wizardp(TP)) {
-     log_file("illegal",TP->query_name()+
-	      " damaged "+amount+" HP on "+identify(objs->query_name())+" at "+
-	      ctime(time())+".\n");
-   }
    write("%^RED%^WARNING: Improper use of this command will be punished!");
    write("%^YELLOW%^You damaged "+identify(objs->query_cap_name())+" for "+amount+" HP.\n");
    return 1;

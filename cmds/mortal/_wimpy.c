@@ -24,8 +24,6 @@ int cmd_wimpy(string arg) {
 		"may result in severe punishment for the offender.");
 	  "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" had wimpy set at "+setting+
 		", auto. set to "+max+".  Watch for abuse.");
-          log_file("wimpy", capitalize(TPQN)+" had wimpy set at "+setting+
-	 	", s/b set to "+max+" now.  "+ctime(time())+".\n");
           this_player()->set_wimpy(max);
         }
 	write("Wimpy = "+TP->query_wimpy());
@@ -51,7 +49,6 @@ int cmd_wimpy(string arg) {
 		"may result in severe punishment for the offender.");
 	  "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" deliberately tried to set wimpy "
               "at "+percent+" %.  Watch for abuse.");
-          log_file("wimpy", capitalize(TPQN)+" tried to set wimpy at "+percent+" % on "+ctime(time())+".\n");
 	    percent = max;
        }
        TP->set_wimpy(percent);
@@ -85,4 +82,3 @@ To choose where to flee by default use %^ORANGE%^<wimpydir>%^RESET%^ command.
 wimpydir, flee, kill
 ");
 }
-

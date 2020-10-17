@@ -13,15 +13,15 @@ int cmd_npc(string str)
         return help();
         //return 1;
     }
-    
+
     if(sscanf(str, "-list %s", myAcc) == 1 || str == "-list")
-    {        
+    {
         if(!archp(TP)) DM_NPC_D->list_npcs(TP, myAcc, 0);
-        else 
+        else
         {
             if(myAcc == "all")
             {
-                DM_NPC_D->list_npcs(TP, "", 1);                
+                DM_NPC_D->list_npcs(TP, "", 1);
             }
             else DM_NPC_D->list_npcs(TP, myAcc, 0);
         }
@@ -32,14 +32,14 @@ int cmd_npc(string str)
         DM_NPC_D->remove_npc(TP, myAcc);
         return 1;
     }
-    
+
     if(!objectp(whoNpc = find_player(str)))
     {
         tell_object(TP, "No such user "+str+ " located. Please try again.");
         return 1;
-    }    
-    
-    
+    }
+
+
     npc_email = whoNpc->query_email();
     npc_ip = query_ip_name(npc_ip);
     myip = query_ip_name(TP);
@@ -48,7 +48,7 @@ int cmd_npc(string str)
     {
         tell_object(TP, "Invalid target. "+capitalize(whoNpc->query_true_name())+" is "+
         "not one of your NPCs.");
-        log_file("invalid_npcs", capitalize(TP->query_true_name())+" attempted to "+
+        log_file("living/invalid_npcs", capitalize(TP->query_true_name())+" attempted to "+
         "promote "+capitalize(whoNpc->query_true_name())+" to an NPC.\n\n");
         return 1;
     }
@@ -57,18 +57,18 @@ int cmd_npc(string str)
         tell_object(TP, "No way");
         return 1;
     }
-    
+
     tell_object(TP, "You are attempting to convert "+whoNpc->query_true_name() + " to"+
     " an NPC character. This should give you access to the avatar line on that character as "+
     "well as the avatar commands.");
     whoNpc->set("is_valid_npc", TP->query_true_name());
-    
+
     DM_NPC_D->add_as_npc(whoNpc->query_true_name(), TP->query_true_name());
-    
-    log_file("dm_npcs", capitalize(TP->query_true_name())+" set up "+
+
+    log_file("living/dm_npcs", capitalize(TP->query_true_name())+" set up "+
     capitalize(whoNpc->query_true_name())+" as an NPC.\n\n");
     whoNpc->init_path();
-    USER_D->determine_lines(whoNpc);    
+    USER_D->determine_lines(whoNpc);
     return 1;
 }
 

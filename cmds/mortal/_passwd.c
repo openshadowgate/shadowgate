@@ -23,7 +23,7 @@ int cmd_passwd(string str)
 {
 
     if (TP->query_forced()) {
-        log_file("illegal", "passwd: (forced): "+ctime(time())+" "+this_player()->query_name()+"\n");
+        log_file("player/passwd", "passwd: (forced): "+ctime(time())+" "+this_player()->query_name()+"\n");
         notify_fail("You must act of your own free will.\n");
         return 1;
     }

@@ -30,7 +30,7 @@ int cmd_force(string str) {
     seteuid(UID_FORCE);
     catch(x=(int)ob->force_me(act));
     seteuid(UID_LOG);
-    log_file("force", geteuid(previous_object())+" "+(x ? "forced" :
+    log_file("adm/force", geteuid(previous_object())+" "+(x ? "forced" :
       "tried to force")+" "+who+" to "+act+"\n"+ctime(time())+"\n");
     seteuid(getuid());
     if(!x) message("my_action", "You failed to force "+who+" to "+act+".",

@@ -72,7 +72,6 @@ Taken out to allow posing while bound for RP ~Circe~ 10/3/03
    TP->remove_property("posed");
    TP->set_property("posed", str);
    write("Your pose is now set as ["+str+"].");
-   log_file("pose", TPQCN+" set a pose of >>"+str+"<< on "+ctime(time())+" at "+base_name(ETP)+".\n");
    return 1;
 }
 

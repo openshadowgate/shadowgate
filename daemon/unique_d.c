@@ -62,7 +62,6 @@ void SAVE() {
 
 void LOG(string msg) {
   seteuid(UID_LOG);
-  log_file("unique_items", ctime(time())+": "+msg+"\n");
   seteuid(getuid());
 }
 
@@ -72,20 +71,20 @@ int ok_to_clone(string unique_id, object requestor) {
   int lease_end;
   string owner;
   int now = time();
-  
-  
+
+
   if(sizeof(children(unique_id)) > 2) {
     if(DEBUG) {
       tell_object(find_player(DEBUGGER), "UD: Too many clones.\n");
     }
     return 0;
-  }  
+  }
   tmp = get_lease(unique_id);
   if(tmp == ({ 0 })) { return 1; }
-    
+
   lease_end = tmp[LEASE_END];
   owner = tmp[OWNER];
-  
+
   if(!lease_end) {
     if(DEBUG) {
 		//tell_object(find_player(DEBUGGER), "UD: Empty lease detected.\n");
@@ -109,13 +108,13 @@ int ok_to_clone(string unique_id, object requestor) {
   	if(base_name(requestor) != "/d/shadowgate/void") {
       if(DEBUG) {
 	    tell_object(find_player(DEBUGGER), "UD: Requestor is not userp().\n");
-	  }    
+	  }
       return 0;
 	}
 	if(DEBUG) {
 	  tell_object(find_player(DEBUGGER), "UD: Requestor is the Void.\n");
 	}
-	return 1;    
+	return 1;
   }
   if(((string)requestor->query_name() != owner) && userp(requestor)) {
     if(DEBUG) {
@@ -130,7 +129,7 @@ int ok_to_clone(string unique_id, object requestor) {
 // Return the owner name
 string query_owner(string unique_id) {
   mixed *tmp;
-  
+
   if(!is_registered(unique_id)) { return "No such item."; }
   tmp = item_data[unique_id];
   return tmp[OWNER];
@@ -139,7 +138,7 @@ string query_owner(string unique_id) {
 // Return the lease end date in seconds since the epoch
 int query_lease_end(string unique_id) {
   mixed *tmp;
-  
+
   if(!is_registered(unique_id)) { return -1; }
   tmp = item_data[unique_id];
   return tmp[LEASE_END];
@@ -149,7 +148,7 @@ varargs int issue_lease(string unique_id, string user_name, int custom_lease) {
   int this_lease;
   int lease_end;
   mixed *this_entry;
-  
+
   if(!unique_id || !user_name) {
     return notify_fail("Missing a required argument to: issue_lease()");
   }
@@ -183,7 +182,7 @@ int register_item(string unique_id) {
   if(is_registered(unique_id)) {
     return notify_fail("Item already registered error in: register_item()");
   }
-  item_data[unique_id] = EMPTY_LEASE;  
+  item_data[unique_id] = EMPTY_LEASE;
   LOG("Registered "+unique_id+" as a unique item.");
   SAVE();
   return 1;
@@ -212,14 +211,14 @@ string *list_unique_items() {
   string owner;
   string key;
   int lease_end;
-  
+
   update_daemon();
   ikeys = keys(item_data);
   numkeys = sizeof(ikeys);
   for(inc=0;inc<numkeys;inc++) {
     key = ikeys[inc];
     value = item_data[key];
-    
+
     lease_end = value[LEASE_END];
 	if(!lease_end) lease_end = "n/a";
 	else lease_end = ctime(lease_end);
@@ -233,7 +232,7 @@ int is_registered(string unique_id) {
   return !undefinedp(item_data[unique_id]);
 }
 
-mixed *get_lease(string unique_id) {  
+mixed *get_lease(string unique_id) {
   if(!is_registered(unique_id)) {
     register_item(unique_id);
   }
@@ -247,10 +246,10 @@ int num_unique_items() {
 // Goes through the all of the leases and expires the leases
 // of items that have passed their expiration date, expires
 // leases to rid or suicided players and unregisters any items
-// that no longer exist at the path indicated.  
+// that no longer exist at the path indicated.
 // Run this at create time to collect the garbage and also
 // run when listing the leases in order to give an up-to-date
-// listing of valid leases.  
+// listing of valid leases.
 int update_daemon() {
   int inc;
   string *ikeys = keys(item_data);
@@ -261,18 +260,18 @@ int update_daemon() {
   string *name;
   string initial;
   int now = time();
-  
+
   for(inc=0;inc<numkeys;inc++) {
-    
+
     if(!file_exists(ikeys[inc])) {
       unregister_item(ikeys[inc]);
       continue;
     }
     value = item_data[ikeys[inc]];
-    
+
     lease_end = value[LEASE_END];
     owner = value[OWNER];
-  
+
     if(now > lease_end) {
       clear_lease(ikeys[inc]);
       continue;
