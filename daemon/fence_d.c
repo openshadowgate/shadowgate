@@ -6,7 +6,7 @@
 
 #define SAVEOBJECT "/daemon/fence_d"
 #define INVDIR "/inv/fence/"
-#define LF(X) log_file("fencing",X);
+#define LF(X) log_file("player/fencing",X);
 #define DEBUG(X) TO->fnord(X);
 
 #define BASE_FEE_PERCENT 50

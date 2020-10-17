@@ -12,7 +12,7 @@ int cmd_echodeity(string str)
     object * targets=({ }),current,*ppl=({});
     int i;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -23,7 +23,7 @@ int cmd_echodeity(string str)
 
     if(!str) return help();
     if(sscanf(str,"%s %s", deity,line) != 2) return help();
-    
+
     ppl += users();
 
     for(i=0;i<sizeof(ppl);i++)
@@ -33,7 +33,6 @@ int cmd_echodeity(string str)
     }
 
 	seteuid(UID_LOG);
-	log_file("shouts", geteuid(previous_object())+" (echodeity):("+deity+") "+line+"\n");
 	seteuid(getuid());
 	line = replace_string(line,"%^NL%^","\n");
 	message("environment",line,targets);

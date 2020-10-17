@@ -32,7 +32,7 @@ int cmd_end(string str)
     }
     seteuid(getuid());
     write("Ok.\n");
-    log_file("game_log", "Manual Shutdown initiated by " +
+    log_file("adm/shutdown", "Manual Shutdown initiated by " +
              (this_player()->query_name()) + ": " + ctime(time()) + "\n");
     return 1;
 }

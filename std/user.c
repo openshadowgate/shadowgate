@@ -928,7 +928,7 @@ void remove()
   if(objectp(previous_object()))
   {
     if (geteuid(previous_object()) != UID_ROOT && previous_object() != TO && (query_verb() != "quit" && this_player() != TO)) return;
-    log_file("reports/remove.player","removed: "+TO->query_name()+
+    log_file("player/player_object_removal","removed: "+TO->query_name()+
 	" "+file_name(previous_object())+".\n");
   }
   else if (query_verb() != "quit" && TP != TO) return;
@@ -969,7 +969,7 @@ int quit()
     remove_stat_bonuses();
     save_player( query_name() );
     if(objectp(ETO)) { message("emote",TO->QCN+" has left the game.",ETO); }
-    log_file("enter", query_name()+" (quit): "+ctime(time())+"\n");
+    log_file("player/logon", query_name()+" (quit): "+ctime(time())+"\n");
 
     if(!TO->query("true_quietness"))
     {
@@ -1028,7 +1028,7 @@ int dead_quit()
     remove_stat_bonuses();
     save_player( query_name() );
     message("emote",QCN+"'s soul has truly left this world!",ETO);
-    log_file("enter", query_name()+" (dead): "+ctime(time())+"\n");
+    log_file("player/enter", query_name()+" (dead): "+ctime(time())+"\n");
     NOTIFY_D->logon_notify("%^YELLOW%^"+query_vis_cap_name()+"'s %^YELLOW%^soul has truly left this world!%^RESET%^",TO);
     PLAYER_D->add_player_info();
     LAWBOUNTY_D->add_hm_info(TO);
@@ -2365,7 +2365,7 @@ void set_position(string pos)
 
       	if(base_name(PO) != "/cmds/adm/_xmote" && base_name(PO) != "/cmds/adm/_avmaker")
         {
-            log_file("position_change","%^RED%^"+identify(PO)+" tried to change "+TO->query_true_name()+"'s "
+            log_file("player/position_change","%^RED%^"+identify(PO)+" tried to change "+TO->query_true_name()+"'s "
                 "position to "+pos+"\n");
             return notify_fail("You do not have permission to change "+TO->query_true_name()+"'s "
                 "position to "+pos+"\n");
@@ -2377,7 +2377,7 @@ void set_position(string pos)
     }
     if(objectp(PO))
     {
-        log_file("position_change",""+identify(PO)+" changed "+TO->query_true_name()+"'s position to "+pos+" on "+ctime(time())+"\n");
+        log_file("player/position_change",""+identify(PO)+" changed "+TO->query_true_name()+"'s position to "+pos+" on "+ctime(time())+"\n");
     }
     return;
 }
@@ -2855,7 +2855,7 @@ void clear_quests()
         quests = ({});
         return;
     }
-    log_file("quests", query_true_name() + "'s quests were reset. "+
+    log_file("player/quests", query_true_name() + "'s quests were reset. "+
     "Previous objects = " + identify(previous_object(-1))+". On "+ctime(time())+".%^RESET%^\n");
     quests = ({});
 }
@@ -2873,7 +2873,7 @@ int remove_quest(string str)
     if(!quests || !pointerp(quests)) quests = ({});
     if(!stringp(str) || member_array(str, quests) == -1) return 0;
     quests -= ({str});
-    log_file("quests", query_true_name() +" had "+str+" removed from "+TO->QP+
+    log_file("player/quests", query_true_name() +" had "+str+" removed from "+TO->QP+
     " quest list on "+ctime(time())+". Previous objects = "+identify(previous_object(-1))+
     ".%^RESET%^\n");
     return 1;
@@ -2886,7 +2886,7 @@ int set_quest(string str)
     if (!stringp(str) || member_array(str, quests) != -1) return 0;
     //player_data["general"]["quest points"] += (int)call_other(ROOM_QUEST,"query_quest_points",str);
     quests += ({ str});
-    log_file("quests", query_name()+" completed "+str+": "+ctime(time())+"\n");
+    log_file("player/quests", query_name()+" completed "+str+": "+ctime(time())+"\n");
     "/cmds/avatar/_note.c"->cmd_note("ckpt "+query_name()+" completed the "
 	"%^YELLOW%^"+str+"%^RESET%^.");
     return 1;
@@ -3104,7 +3104,7 @@ varargs int set_mini_quest(string str, int x, string desc)
         mini_quests[str] = ({ time(), desc});
 
     fix_exp(x,TO);
-    log_file("quests", query_name()+" completed mini-quest "+str+" "+ctime(time())+" for "+x+" exp.\n");
+    log_file("player/quests", query_name()+" completed mini-quest "+str+" "+ctime(time())+" for "+x+" exp.\n");
     if(ETP->query_property("no_ckpt"))
         return 1;
     "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" completed mini-quest/deed "

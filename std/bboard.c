@@ -194,9 +194,9 @@ int remove_message(string str) {
     else write("Error "+x+" in removing post.\n");
     seteuid(UID_LOG);
     if (x == BBOARD_OK) {
-        log_file("boards",capitalize(TPQN)+" removed a post "+(number+1)+"  titled '"+title+"' from "+query_short()+" on "+ctime(time())+".\n");
+        log_file("player/boards",capitalize(TPQN)+" removed a post "+(number+1)+"  titled '"+title+"' from "+query_short()+" on "+ctime(time())+".\n");
     } else {
-        log_file("boards",capitalize(TPQN)+" failed to remove a post "+(number+1)+"  titled '"+title+"' from "+query_short()+" on "+ctime(time())+".\n");
+        log_file("playerboards",capitalize(TPQN)+" failed to remove a post "+(number+1)+"  titled '"+title+"' from "+query_short()+" on "+ctime(time())+".\n");
     }
     return 1;
 }

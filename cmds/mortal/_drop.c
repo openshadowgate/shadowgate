@@ -131,7 +131,6 @@ int cmd_drop(string str)
     }
     if(ammount > 1000)
         seteuid(getuid());
-        log_file("money", TP->query_name()+" dropped "+ammount+" "+type+" ("+ctime(time())+")\n");
         seteuid(getuid(previous_object()));
         ob = present("pile of coins", ETP);
         if(!ob)

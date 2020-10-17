@@ -177,7 +177,7 @@ int deposit(string who, string bank, int amount, string type) {
     else account[bank][type] += amount;
     account[bank]["transaction"] = amount;
     account[bank]["time"] = time();
-    log_file("bank", who+" deposited "+amount+" coins in "+bank+": "+ctime(time())+"\n");
+    log_file("player/banking", who+" deposited "+amount+" coins in "+bank+": "+ctime(time())+"\n");
     save_object(DIR_ACCOUNTS+"/"+current);
     return TRANSACTION_OK;
 }
@@ -206,7 +206,7 @@ int withdraw(string who, string bank, int amount, string type) {
     else account[bank][type] -= amount;
     account[bank]["transaction"] = -amount;
     account[bank]["time"] = time();
-    log_file("bank", who+" withdrew "+amount+" coins in "+bank+": "+ctime(time())+"\n");
+    log_file("player/banking", who+" withdrew "+amount+" coins in "+bank+": "+ctime(time())+"\n");
     save_object(DIR_ACCOUNTS+"/"+current);
     return TRANSACTION_OK;
 }

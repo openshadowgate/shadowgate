@@ -109,7 +109,7 @@ protected void get_name(string str) {
             return;
         }
         if (!MULTI_D->is_allowed(__Name)) {
-            log_file("watch/linked_denial",sprintf("%s at %s from %s\n",__Name,ctime(time()),query_ip_number()));
+            log_file("adm/linked_denial",sprintf("%s at %s from %s\n",__Name,ctime(time()),query_ip_number()));
             message("logon", read_file("/news/_link"), this_object());
             internal_remove();
         }
@@ -129,7 +129,7 @@ protected void get_name(string str) {
         return;
     }
     if (!MULTI_D->is_allowed(__Name)) {
-        log_file("watch/linked_denial",sprintf("%s at %s from %s\n",__Name,ctime(time()),query_ip_number()));
+        log_file("adm/linked_denial",sprintf("%s at %s from %s\n",__Name,ctime(time()),query_ip_number()));
         message("logon", read_file("/news/_link"), this_object());
         internal_remove();
     }
@@ -148,7 +148,7 @@ void get_password(string str) {
     if (!check_password(str))
     {
         message("logon", "\nInvalid password.\n", this_object());
-        log_file("watch/bad_password",sprintf("%s at %s from %s\n",__Name,ctime(time()),query_ip_number()), 1);
+        log_file("player/bad_password",sprintf("%s at %s from %s\n",__Name,ctime(time()),query_ip_number()), 1);
         if (++__CrackCount > MAX_PASSWORD_TRIES) {
             message("logon", "No more attempts allowed.\n", this_object());
             internal_remove();
@@ -164,7 +164,7 @@ void get_password(string str) {
     str = 0;
     master()->load_player_from_file(__Name, __Player);
     seteuid(UID_LOG);
-    log_file("watch/logon", sprintf("%s from %s at %s\n",__Name,query_ip_number(),ctime(time())), 1);
+    log_file("player/logon", sprintf("%s from %s at %s\n",__Name,query_ip_number(),ctime(time())), 1);
     seteuid(getuid());
     if (!is_copy()) exec_user();
 }
@@ -227,7 +227,7 @@ protected int is_copy() {
         return 1;
     }
     seteuid(UID_LOG);
-    log_file("enter", sprintf("%s (exec): %s\n", __Name, ctime(time())));
+    log_file("player/enter", sprintf("%s (exec): %s\n", __Name, ctime(time())));
     seteuid(getuid());
     if (exec(ob, this_object())) ob->restart_heart();
     else message("logon", "Problem reconnecting.\n", this_object());
@@ -359,8 +359,8 @@ protected void enter_email(string str) {
     __Player->set_email(str);
     __Player->set_rname("Unknown");
     seteuid(UID_LOG);
-    log_file("enter", sprintf("%s (new player): %s\n", __Name, ctime(time())));
-    log_file("watch/new_players",sprintf("%s(%s) <%s> at %s from %s\n",__Name, str, __Player->query_email(),ctime(time()),query_ip_number()));
+    log_file("player/enter", sprintf("%s (new player): %s\n", __Name, ctime(time())));
+    log_file("player/new_players",sprintf("%s(%s) <%s> at %s from %s\n",__Name, str, __Player->query_email(),ctime(time()),query_ip_number()));
     seteuid(getuid());
     exec_user();
 }

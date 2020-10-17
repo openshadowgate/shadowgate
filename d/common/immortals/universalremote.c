@@ -855,7 +855,7 @@ int force_forsake(string str)
     ADVANCE_D->deity_news(deity,player->QCN+" has been forced to forsake "
         ""+capitalize(deity)+" as "+player->QP+" diety!");
 
-    log_file("god_change", player->QCN+" was forced to leave "+capitalize(deity)+" by "+TP->query_true_name()+": "+ctime(time())+"\n");
+    log_file("player/god_change", player->QCN+" was forced to leave "+capitalize(deity)+" by "+TP->query_true_name()+": "+ctime(time())+"\n");
 
     tell_object(player,""+capitalize(deity)+" will no longer have you as a follower!");
     tell_object(player,"A bolt of energy streaks toward you from above, exacting "+capitalize(deity)+"'s revenge.");

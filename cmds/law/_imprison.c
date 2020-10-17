@@ -57,7 +57,7 @@ private do_imprison(string who,int duration,string why,string bywho) {
      object ob;
      int i;
      seteuid(UID_LOG);
-     log_file("jail",capitalize(who)+" at "+ctime(time())+" by "+
+     log_file("adm/jail",capitalize(who)+" at "+ctime(time())+" by "+
                capitalize(bywho)+" for "+why+"\n");
      seteuid(getuid());
     JAIL->add_player(who,duration,why,bywho);

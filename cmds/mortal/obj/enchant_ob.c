@@ -170,12 +170,10 @@ int use_materials(object tp, int amt)
         if(count >= needed)
         {
             inv[i]->add_count(-1 * needed);
-            log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" used "+needed+" crafting materials.\n\n");
             break;
         }
         needed -= count;
         inv[i]->add_count(-1 * count);
-        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" used "+count+" crafting materials.\n\n");
     }
 
     tell_object(tp,"%^RESET%^%^BOLD%^%^GREEN%^Using %^RESET%^%^BOLD%^%^MAGENTA%^"+amt+" %^RESET%^%^BOLD%^%^GREEN%^crafting materials.\n");
@@ -514,7 +512,6 @@ void detail_log(object tp, object item)
 
     display += "\n";
 
-    log_file("crafting/"+tp->query_true_name(),display);
     return;
 }
 
@@ -550,7 +547,6 @@ int do_exp_cost(object tp, object item, int cost)
         db(tp,"\n%^RESET%^%^BOLD%^%^YELLOW%^Adding tax of %^RESET%^%^BOLD%^%^MAGENTA%^"+exp_cost+"%^RESET%^%^BOLD%^%^YELLOW%^ "
             "experience points to enchant your "+item->query_short()+"\n");
 
-        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" was taxed "+exp_cost+" to enchant "+base_name(item)+".\n\n");
     }
 
     return 1;
@@ -616,7 +612,6 @@ void do_add_bonus(object tp, object item, string bonus, int amt, int cost)
     if(!sizeof(bonus_names) || member_array(bonus,bonus_names) == -1)
     {
         item->set_item_bonus(bonus,amt);
-        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" enchanted "+base_name(item)+" with "+amt+" "+bonus+".\n\n");
     }
     else
     {
@@ -624,7 +619,6 @@ void do_add_bonus(object tp, object item, string bonus, int amt, int cost)
         current += amt;
 
         item->set_item_bonus(bonus, current);
-        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" enchanted "+base_name(item)+" with "+current+" "+bonus+".\n\n");
     }
 
     do_ring_of_protection_stuff(tp, item);
@@ -685,7 +679,6 @@ void do_add_enchantment(object tp, object item, string bonus, int amt, int cost)
     item->set_property("player enchanted",1); // want to exclude other means of increasing enchantment if this is set
     item->set_property("no curse",-1);
 
-    log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" enchanted "+base_name(item)+" with "+amt+" enchantment.\n\n");
 
     do_ring_of_protection_stuff(tp, item);
 
@@ -753,21 +746,16 @@ void do_add_special(object tp, object item, string bonus, int amt, int cost, map
     if(!item->query_property(special))
     {
         item->set_property(special,type);
-        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" enchanted "+base_name(item)+" with a "+special+" "+type+" special.\n\n");
     }
     else
     {
         item->set_property(special, ", "+type);
-        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" enchanted "+base_name(item)+" with a "+special+" "+type+" special.\n\n");
     }
 
     if(sizeof(keys(messages)))
     {
         item->set_property(type+" message",messages);
 
-        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" gave "+base_name(item)+" the "
-            "following special messages: \n"
-            ""+identify(messages)+".\n\n");
     }
 
     do_ring_of_protection_stuff(tp, item);
@@ -904,8 +892,6 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
             "some of your materials!");
         tell_room(etp,"\n%^RED%^"+tp->QCN+" curses the Lord of Hell's hairy arse!");
 
-        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" failed a enchanting DC of "+DC+" with a roll of "+roll+" and a skill of "+(skill-roll)+".\n\n");
-
         cost = cost / 8;
         cost += roll_dice(1,cost);
 
@@ -927,11 +913,9 @@ varargs int skill_check(object tp, object item, int DC, int cost, int flag)
         }
 
         tell_object(tp,"%^RESET%^%^BOLD%^%^MAGENTA%^"+cost+" %^RESET%^%^BOLD%^%^GREEN%^materials wasted!");
-        log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" wasted "+cost+" crafting materials.\n\n");
 
         return 0;
     }
-    log_file("crafting/"+tp->query_true_name(),""+tp->query_true_name()+" passed an enchanting DC of "+DC+" with a roll of "+roll+" and a skill of "+(skill-roll)+".\n\n");
     return 1;
 }
 

@@ -341,7 +341,6 @@ int confirm_add(string str, object ob, string feat, string extradata)
             ob->add_exp(price * -1);
             ob->resetLevelForExp(0);
             tell_object(ob, "Subtracting " + price + " experience points.");
-            log_file("added_feats", "" + ob->QCN + " added " + feat + " on " + ctime(time()) + " for " + price + " exp\n");
         }else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
             if ((int)ob->set_XP_tax(price, 0, "improvement") == -1) {
                 tell_object(ob, "Currently your character improvement tax is above the maximum allowed. " +
@@ -352,7 +351,6 @@ int confirm_add(string str, object ob, string feat, string extradata)
                 tell_object(ob, "Incuring character improvement tax of " + price + ". All future experience gained will be " +
                             "reduced by 50% until it is repaid.");
             }
-            log_file("added_feats", "" + ob->QCN + " added " + feat + " on " + ctime(time()) + " for a character improvement tax of " + price + ".\n");
         }
     }
     tell_object(ob, "%^YELLOW%^Congratulations, you have successfully added "
@@ -376,7 +374,6 @@ int confirm_add_racial(string str, object ob, string feat)
     }
 
     FEATS_D->add_my_feat(ob, "racial", feat);
-    log_file("added_feats", "" + ob->QCN + " added racial bonus feat " + feat + " on " + ctime(time()) + ".\n");
     tell_object(ob, "%^YELLOW%^Congratulations, you have successfully added "
                 "the bonus racial feat %^BLUE%^" + feat + "%^YELLOW%^!%^RESET%^");
     return 1;
@@ -397,7 +394,6 @@ int confirm_add_bonus(string str, object ob, string feat)
     }
 
     FEATS_D->add_my_feat(ob, "bonus", feat);
-    log_file("added_feats", "" + ob->QCN + " added combat bonus feat " + feat + " on " + ctime(time()) + ".\n");
     tell_object(ob, "%^YELLOW%^Congratulations, you have successfully added "
                 "the bonus combat feat %^BLUE%^" + feat + "%^YELLOW%^!%^RESET%^");
     return 1;
@@ -421,7 +417,6 @@ int confirm_add_magic(string str, object ob, string feat, string extradata)
         ob->set("spellmastery_spell", extradata);
     }
     FEATS_D->add_my_feat(ob, "magic", feat);
-    log_file("added_feats", "" + ob->QCN + " added magic bonus feat " + feat + " on " + ctime(time()) + ".\n");
     tell_object(ob, "%^YELLOW%^Congratulations, you have successfully added "
                 "the bonus magic feat %^BLUE%^" + feat + "%^YELLOW%^!%^RESET%^");
     free = 0;
@@ -446,7 +441,6 @@ int confirm_add_hybrid(string str, object ob, string feat, string extradata)
         ob->set("spellmastery_spell", extradata);
     }
     FEATS_D->add_my_feat(ob, "hybrid", feat);
-    log_file("added_feats", "" + ob->QCN + " added hybrid bonus feat " + feat + " on " + ctime(time()) + ".\n");
     tell_object(ob, "%^YELLOW%^Congratulations, you have successfully added "
                 "the bonus hybrid feat %^BLUE%^" + feat + "%^YELLOW%^!%^RESET%^");
     free = 0;
@@ -485,7 +479,6 @@ int confirm_remove(string str, object ob, string feat, string extradata)
             ob->add_exp(price * -1);
             ob->resetLevelForExp(0);
             tell_object(ob, "Subtracting " + price + " experience points.");
-            log_file("removed_feats", "" + ob->QCN + " removed " + feat + " on " + ctime(time()) + " for " + price + " exp\n");
         }else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
             if ((int)ob->set_XP_tax(price, 0, "improvement") == -1) {
                 tell_object(ob, "Currently your character improvement tax is above the maximum allowed. " +
@@ -496,7 +489,6 @@ int confirm_remove(string str, object ob, string feat, string extradata)
                 tell_object(ob, "Incuring character improvement tax of " + price + ". All future experience gained will be " +
                             "reduced by 50% until it is repaid.");
             }
-            log_file("removed_feats", "" + ob->QCN + " removed " + feat + " on " + ctime(time()) + " for a character improvement tax of " + price + ".\n");
         }
     }
     if ((int)ob->query("free_feats")) {

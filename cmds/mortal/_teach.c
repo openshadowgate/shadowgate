@@ -92,7 +92,6 @@ int cmd_teach(string str)
     }
 
     seteuid("UID_LOG");
-    log_file("language", ctime(time()) + ": " + TP->query_name() + " taught " + lang + " to " + targ->query_name() + ".\n");
     seteuid(getuid());
     TP->force_me("speak " + lang);
     TP->force_me("smile");

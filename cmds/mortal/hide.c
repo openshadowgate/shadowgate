@@ -132,7 +132,7 @@ int remove() {
   object temp;
   temp = find_object_or_load("/cmds/mortal/_sneak.c");
   if (PO != temp)
-    log_file("reports/hide","PO: "+identify(PO)+". At: "+ctime(time())+".\n");
+    log_file("player/hide","PO: "+identify(PO)+". At: "+ctime(time())+".\n");
     dest_fun();
     ::remove();
 }

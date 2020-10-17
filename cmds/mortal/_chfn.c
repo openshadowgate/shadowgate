@@ -87,7 +87,7 @@ protected void new_email(string e)
         this_player()->set_email(e);
         seteuid(getuid());
         seteuid(UID_LOG);
-        log_file("watch/chfn",this_player()->query_name()+":"+olde+" -> "+e+" .\n");
+        log_file("player/chfn",this_player()->query_name()+":"+olde+" -> "+e+" .\n");
         seteuid(getuid());
         warning_display();
         //write("OOG Contact Information:\n");

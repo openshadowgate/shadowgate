@@ -157,7 +157,7 @@ varargs int valid_limb_check(object item, object tp)
             if (avatarp(tp)) {
                 db(tp, "Limbs of item are not the same as limbs of base item: \nbase item limbs: " + identify(base_limbs) + "item limbs: " + identify(limbs));
             }
-            log_file("limbs", base_name(item) + " might have the wrong limbs set.\n\n");
+            log_file("errors/limbs", base_name(item) + " might have the wrong limbs set.\n\n");
             return 0;
         }
     }
@@ -188,11 +188,11 @@ void old_bonuses(object item, object tp)
     // getting set the old way, we should try to update them when possible
     for (i = 0; sizeof(lines), i < sizeof(lines); i++) {
         if (strsrch(lines[i], "TP->set") != -1) {
-            log_file("bonuses", file + " might have a bad bonus around line " + (i + 1) + "\n\n");
+            log_file("errors/bonuses", file + " might have a bad bonus around line " + (i + 1) + "\n\n");
             db(tp, "The " + item->query_short() + " might have a bad bonus");
         }
         if (strsrch(lines[i], "ETO->set") != -1) {
-            log_file("bonuses", file + " might have a bad bonus around line " + (i + 1) + "\n\n");
+            log_file("errors/bonuses", file + " might have a bad bonus around line " + (i + 1) + "\n\n");
             db(tp, "The " + item->query_short() + " might have a bad bonus");
         }
     }

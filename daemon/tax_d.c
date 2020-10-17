@@ -4,7 +4,7 @@ mapping query_XP_tax(){
   return _IRS["tax"];
 }
 
-int use_XP_tax(int exp) 
+int use_XP_tax(int exp)
 {
   float adjustment;
   int percent, antimeter;
@@ -14,7 +14,7 @@ int use_XP_tax(int exp)
   adjustment = to_float(exp);
 
   if ( (percent = _IRS["tax"]["general"]) >= 100) {
-      log_file("tax",TO->query_cap_name()+": General XP taxed to 1.");
+      log_file("player/tax",TO->query_cap_name()+": General XP taxed to 1.");
     return 1;
   } else if (percent) {
     adjustment -= adjustment * to_float(percent)/100;
@@ -22,16 +22,16 @@ int use_XP_tax(int exp)
 
   if (_IRS["tax"]["leveled"]["level"] > query_lowest_level() )
     if ( (percent = _IRS["tax"]["leveled"]["percent"] ) >= 100) {
-      log_file("tax",TO->query_cap_name()+": XP taxed (level-based) to 1.");
+      log_file("player/tax",TO->query_cap_name()+": XP taxed (level-based) to 1.");
       return 1;
     } else if (percent) {
-      adjustment -= adjustment * to_float(percent)/100; 
+      adjustment -= adjustment * to_float(percent)/100;
     }
 
-    if ( (antimeter = _IRS["tax"]["metered"]["meter"]) > 0) { 
+    if ( (antimeter = _IRS["tax"]["metered"]["meter"]) > 0) {
       if ((percent = _IRS["tax"]["metered"]["percent"]) >= 100) {
        _IRS["tax"]["metered"]["meter"] -= 1;
-      log_file("tax",TO->query_cap_name()+": XP taxed (meter-based) to 1.");
+      log_file("player/tax",TO->query_cap_name()+": XP taxed (meter-based) to 1.");
        return 1;
       } else {
         if (percent >= 0) { // Tax
@@ -53,7 +53,7 @@ int use_XP_tax(int exp)
     return to_int(adjustment);
 }
 
-int has_XP_tax() 
+int has_XP_tax()
 {
   init_IRS();
   if (_IRS["tax"]["general"])
@@ -67,7 +67,7 @@ int has_XP_tax()
   return 0;
 }
 
-int has_XP_rest() 
+int has_XP_rest()
 {
     int when;
     if(when = __IRS["tax"]["timed"]["fall off"])
@@ -78,13 +78,13 @@ int has_XP_rest()
     return 0;
 }
 
-int use_XP_rest(int exp) 
+int use_XP_rest(int exp)
 {
     float adjustment;
     int percent;
-    
+
     if(percent = _IRS["tax"]["timed"]["percent"])
-    
+
   return exp;
   // temporary ;
 }
@@ -157,10 +157,10 @@ int resolve_auto_tax(int exp)
 
     //going back to non-reverse-tax calcs, for normal or taxed exp.
     limit = limit + 1; // was +5; not sure why we were adding an extra 5 hours to each level's PT reqs?
-    
+
     // if this is set here, it will not clear an autotax once a person catches up -Ares
     //if(hours > limit) { return exp; }
-    
+
     // eg player has only 18 hours ptime
     // 11 =  29  -   18
 
@@ -188,12 +188,12 @@ int resolve_auto_tax(int exp)
     return to_int(exp * (mod *0.01));
 }
 
-void add_exp(int exp) 
+void add_exp(int exp)
 {
 // adding to stop mobs from getting out of control fighting each other *Styx* 12/25/05
   if(!userp(TO))
     return;
-  if(userp(TO) && (exp >0) && TO->query_party()) 
+  if(userp(TO) && (exp >0) && TO->query_party())
   {
     PARTY_OB->calculate_exp(TO->query_party(), exp, previous_object());
     return;
@@ -211,7 +211,7 @@ void add_exp(int exp)
 
   log_exp(exp,"add",0);
   __internal_add_exp(exp);
-  
+
 }
 
 void party_exp(int exp, object tmp){
@@ -333,7 +333,7 @@ int general_exp_adjust_perc(int perc) {
   if (class = get_dual_class()) {
       classes = ({class});
   } else {
-      classes = TO->query_classes(); 
+      classes = TO->query_classes();
   }
   tmp = PO;
   oldexp = TO->query_exp();

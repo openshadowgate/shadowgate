@@ -34,20 +34,20 @@ void BuildEffectsList()
 		tmpLevelRange = tmp->query_level_range();
 		oo = tmp->query_environment_required();
 		if(!stringp(tmpLevelRange)) tmpLevelRange = "NIL";
-		if(tmpType == "base") 
+		if(tmpType == "base")
 		{
 			tmp->remove();
 			continue;
 		}
-		if(!AllEffects[tmpType]) 
+		if(!AllEffects[tmpType])
 		{
-			AllEffects[tmpType] = ({ (["file" : EFFECTS_DIR+effectFiles[x], 
+			AllEffects[tmpType] = ({ (["file" : EFFECTS_DIR+effectFiles[x],
 			"lvl range" : tmpLevelRange, "environment required" : oo ]) });
 		}
-		else 
+		else
 		{
 			AllEffects[tmpType] += ({ (["file" : EFFECTS_DIR+effectFiles[x],
-			"lvl range" : tmpLevelRange, "environment required" : oo ]) }); 
+			"lvl range" : tmpLevelRange, "environment required" : oo ]) });
 		}
 		tmp->remove();
 		continue;
@@ -68,17 +68,17 @@ mixed query_all_effect_types()
 }
 
 //where is the room where the death effect will be
-//spawned, MyTarg should be the name or short 
-//description of the object spawning the effect 
-//MyLevel will be the level of the effect - this 
-//way we can have effects that scale to 
+//spawned, MyTarg should be the name or short
+//description of the object spawning the effect
+//MyLevel will be the level of the effect - this
+//way we can have effects that scale to
 //a certain level range - effects are going to be
 //actual objects that cause damage or some other
 //effect so that the daemon will simply
-//clone one of these objects, move it to 
-//"where", set up its level, and start 
+//clone one of these objects, move it to
+//"where", set up its level, and start
 //it
-//Type is the category of death effect that it will pick from 
+//Type is the category of death effect that it will pick from
 
 void get_death_effect(object Mob)
 {
@@ -88,13 +88,13 @@ void get_death_effect(object Mob)
 	string *MyTypes, Type, *effectLvlRange;
 
 	if(!objectp(Mob)) return;
-	
+
 	where = environment(Mob);
 	if(!objectp(where)) return;
-	
+
 	MyTarg = Mob->query_name();
 	if(!stringp(MyTarg)) return;
-	
+
 	MyLevel = Mob->query_level();
 
 	envT = where->query_property("indoors");
@@ -112,35 +112,31 @@ void get_death_effect(object Mob)
 		MyTypes = Mob->query_property("death effects");
 	}
 
-	if(!sizeof(MyTypes)) return;		
+	if(!sizeof(MyTypes)) return;
 	Type = MyTypes[random(sizeof(MyTypes))];
 
-	//is the death effect specifying a particular file?  
-	//if yes, then load that file - or load 
+	//is the death effect specifying a particular file?
+	//if yes, then load that file - or load
 	//a randomly picked file from that list - Saide
 
-	if(file_exists(Type + ".c") || file_exists(Type)) 
+	if(file_exists(Type + ".c") || file_exists(Type))
 	{
 			spawnEffect = new(Type);
 			if(!objectp(spawnEffect)) return;
 			spawnEffect->adjust_level(MyLevel);
 			spawnEffect->set_effectOrigin(Mob);
 			//spawnEffect->move(where);
-			spawnEffect->startEffect(where);	
-			return;		
+			spawnEffect->startEffect(where);
+			return;
 	}
 
 	if(!stringp(Type)) Type = "any";
 	if(!mapp(AllEffects)) return;
-	if(!sizeof(AllEffects)) 
+	if(!sizeof(AllEffects))
 	{
-		log_file("death_effects", MyTarg + " ( "+
-		base_name(Mob) + " ) failed to load a death "+
-		"effect of Type "+Type+" -  There are no valid Effects loaded "+
-		"in the daemon.\n  ");
 		return;
 	}
-	if(!AllEffects[Type]) 
+	if(!AllEffects[Type])
 	{
 		Type = "any";
 	}
@@ -148,14 +144,14 @@ void get_death_effect(object Mob)
 	effectKeys = keys(AllEffects);
 	while(!objectp(spawnEffect) && flag < 3)
 	{
-		if(ranEffect) 
+		if(ranEffect)
 		{
-			Type = effectKeys[random(sizeof(effectKeys))];			
+			Type = effectKeys[random(sizeof(effectKeys))];
 		}
 		effectNum = random(sizeof(AllEffects[Type]));
 
 		if(envT != AllEffects[Type][effectNum]["environment required"] &&
-		AllEffects[Type][effectNum]["environment required"] != -1) 
+		AllEffects[Type][effectNum]["environment required"] != -1)
 		{
 			flag++;
 			continue;
@@ -164,7 +160,7 @@ void get_death_effect(object Mob)
 		if(AllEffects[Type][effectNum]["lvl range"] != "NIL")
 		{
 			effectLvlRange = explode(AllEffects[Type][effectNum]["lvl range"], ", ");
-			if(!sizeof(effectLvlRange)) 
+			if(!sizeof(effectLvlRange))
 			{
 				flag++;
 				continue;
@@ -176,7 +172,7 @@ void get_death_effect(object Mob)
 				continue;
 			}
 		}
-		if(!file_exists(AllEffects[Type][effectNum]["file"])) 
+		if(!file_exists(AllEffects[Type][effectNum]["file"]))
 		{
 			flag++;
 			continue;
@@ -188,11 +184,8 @@ void get_death_effect(object Mob)
 		}
 		if(objectp(spawnEffect)) break;
 	}
-	if(!objectp(spawnEffect)) 
+	if(!objectp(spawnEffect))
 	{
-		log_file("death_effects", MyTarg + " ( "+
-		base_name(Mob) + " ) failed to load a death "+
-		"effect of Type "+Type+"  spawnEffect was not an Object. \n");
 		return;
 	}
 	spawnEffect->adjust_level(MyLevel);
@@ -203,9 +196,9 @@ void get_death_effect(object Mob)
 }
 
 //function that should notify needed objects
-//in the event of the death of a PC 
+//in the event of the death of a PC
 //lets have this call a function death_notify
-//in any object that needs to be notified 
+//in any object that needs to be notified
 //function shoud look like death_notify(object who, object killer)
 
 void death_notification(object __PC)
@@ -226,8 +219,3 @@ void death_notification(object __PC)
 	}
 	return;
 }
-
-
-
-
-

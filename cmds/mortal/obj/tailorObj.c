@@ -13,7 +13,7 @@ void finish_object(mapping keyMap, string template){
 
     keyMap["~TYPE~"] = "clothing";
     keyMap["~LIMBS~"] = CLOTHINGS[type]["limbs"];
-    
+
     percent = prof*10 - (random(40)-20);
     percent = percent - (10 - (int)materialObj[0]->query_quality_type())*10;
 
@@ -65,14 +65,13 @@ void finish_object(mapping keyMap, string template){
         break;
     case 125..151:
         l += "\nHigh quality";
-        break; 
+        break;
     default:
         l += "\nExcellent quality";
-        break; 
+        break;
     }
 
     keyMap["~LONG~"] = l;
-     log_file("tailor",capitalize(TPQN)+" "+ctime(time())+" "+identify(keyMap)+"\n");
 
      for (i=0;i<sizeof(materialObj);i++) {
          materialObj[i]->use(size*(int)CLOTHINGS[type]["units"]);
@@ -82,4 +81,3 @@ void finish_object(mapping keyMap, string template){
     tell_object(ETO,"You pause from working on the new piece of clothing.");
     ::finish_object(keyMap,"/cmds/mortal/templates/armor.tpl");
 }
-

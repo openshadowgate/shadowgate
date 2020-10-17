@@ -41,7 +41,7 @@ int cmd_reward(string str)
 
     {
         int expdelta;
-        int thelevel = target->query_adjusted_character_level(); 
+        int thelevel = target->query_adjusted_character_level();
         // garrett thinks adjusted is right for here, since this is a scaling award.
 
         expdelta = abs(EXP_NEEDED[thelevel + 1] - EXP_NEEDED[thelevel]) / 8;
@@ -55,7 +55,7 @@ int cmd_reward(string str)
         TP->delete("last_reward");
         TP->set("last_reward", time());
 
-        log_file("rewards", TP->query_name() + " awarded " + target->query_name() + " with " + english_number(expdelta) + " exp\n");
+        log_file("player/reward", TP->query_name() + " awarded " + target->query_name() + " with " + english_number(expdelta) + " exp\n");
     }
 
     return 1;

@@ -127,7 +127,7 @@ int cmd_plant(string str) {
    }
 
     if (ob->query_property("no steal")) {
-        write((string)victim->query_cap_name()+"'s "+(string)ob->query_name()+" cannot possibly be planted on.");                                       
+        write((string)victim->query_cap_name()+"'s "+(string)ob->query_name()+" cannot possibly be planted on.");
         return 1;
     }
 
@@ -157,7 +157,7 @@ int cmd_plant(string str) {
         }
         check_caught(x,victim,ob,steal);
         if (interactive(victim))
-            log_file("planting", TPQN+"("+TP->query_level()+") planted "+ob->query_short()+" on "+victim->query_name()+"("+victim->query_lowest_level()+") on "+ctime(time())+"\n");
+            log_file("player/theft", TPQN+"("+TP->query_level()+") planted "+ob->query_short()+" on "+victim->query_name()+"("+victim->query_lowest_level()+") on "+ctime(time())+"\n");
         return 1;
 
     } else {
@@ -166,7 +166,7 @@ int cmd_plant(string str) {
         }
         write("You fail to plant the "+ob->query_name()+" on "+victim->query_cap_name()+", but you are unsure if it went unnoticed.");
         check_caught(x,victim,ob,steal);
-        return 1;   
+        return 1;
     }
 
 }
@@ -200,7 +200,7 @@ void check_caught(int roll, object target, object ob, int sLevel){
 
     intox = (((int)target->query_intox())/35) - ((int)TP->query_intox())/35;
     condition = (100- (int)target->query_condition_percent()) - (100- (int)TP->query_condition_percent());
-    busy = (5 * ( sizeof(all_living(ETP)) -2) ) - 10; 
+    busy = (5 * ( sizeof(all_living(ETP)) -2) ) - 10;
     bonus = intox + condition + busy + sLevel;
     //write("bonus = "+bonus);
     test = 50 + ((int)target->query_highest_level() - bonus);
@@ -221,11 +221,13 @@ if ((int)target->query_stats("wisdom") > (random(INVIS_CHECK_DIE) + bonus))
         tell_object(target,"You catch "+TPQCN+" with "+TP->query_possessive()+" hand in your pocket.\n");
         //tell_object(target,capitalize(TP->query_subjective())+" was stealing from you.\n");
         tell_object(TP,"You get caught.");
-        tell_room(environment(TP),"You see "+target->query_cap_name()+" catch "+TPQCN+" with a hand in "+target->query_possessive()+" pocket.",({TP,target})); 
+        tell_room(environment(TP),"You see "+target->query_cap_name()+" catch "+TPQCN+" with a hand in "+target->query_possessive()+" pocket.",({TP,target}));
 
-        if (!interactive(target)) target->kill_ob(TP,0);
-        else
-            log_file("planting", TPQN+"("+sLevel+") was caught stealing "+ob->query_short()+" from "+target->query_name()+"("+target->query_lowest_level()+") on "+ctime(time())+"\n");
+        if (!interactive(target)) {
+            target->kill_ob(TP, 0);
+        }else {
+            log_file("player/theft", TPQN + "(" + sLevel + ") was caught stealing " + ob->query_short() + " from " + target->query_name() + "(" + target->query_lowest_level() + ") on " + ctime(time()) + "\n");
+        }
         if (ob->query_weight() < 1)
             weight = 1;
         else

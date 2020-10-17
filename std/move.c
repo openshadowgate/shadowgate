@@ -68,7 +68,6 @@ int move(mixed dest)
                 if(objectp(ETO)) { msg += " environment was "+identify(ETO); }
             }
             else msg = "Invalid object attempted to move into invalid object.";
-            log_file("invalid_moves", msg+"\n");
             return;
         }
     } else
@@ -139,10 +138,6 @@ int remove(){
 
     this_object()->set_property("combat_remove",1);
     this_object()->unequip();
-    /*
-      log_file("reports/remove.all",this_object()->query_name()+" "+
-      file_name(previous_object())+" "+ctime(time())+".\n");
-    */
     destruct(this_object());
     return 1;
 }
@@ -197,9 +192,6 @@ int clean_up(){
                         destruct(inv[i]);
                 }
 
-            // Commenting out this log to test.
-           //log_file("reports/clean_up"," "+ file_name(this_object())+" "+ctime(time())+".\n");
-
             if (ob)
                 ob->remove();
             if (ob)
@@ -216,9 +208,6 @@ int clean_up(){
                 if (interactive(inv[i]))
                     return 1;
 
-                //  Commenting out this log
-                //log_file("reports/clean_up"," "+ file_name(this_object())+" "+ctime(time())+".\n");
-        //if (i = sizeof(inv=all_inventory(TO)))
         if (i = sizeof(inv=deep_inventory(TO)))
             while (i--) {
                 inv[i]->move(VOID);

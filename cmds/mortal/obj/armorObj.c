@@ -15,7 +15,7 @@ void finish_object(mapping keyMap, string template){
     keyMap["~LIMBS~"] = ARMOURS[type]["limbs"];
 
 /* this was making numbers too high too early, changing to use roll_dice to give more of natural bell curve that creeps up *Styx*  9/27/03, last change was 7/6/03
-    percent = prof*10 - (random(40)-20);    
+    percent = prof*10 - (random(40)-20);
 */
     percent = roll_dice(prof+1, roll_dice(1,prof)) + (prof*5);
 // was *10 for reduction for lower quality, changing to be *15 *Styx* 9/27/03
@@ -53,7 +53,7 @@ void finish_object(mapping keyMap, string template){
 	weight = (ARMOURS[type]["weight"] / 3)*2;
     if (weight <= 0)
         weight = 1;
-    
+
     keyMap["~WEIGHT~"] = weight;
 
     NWP_D->perform_nwp(TP,"armorsmithing");
@@ -78,14 +78,13 @@ void finish_object(mapping keyMap, string template){
         break;
     case 125..151:
         l += "\nHigh quality";
-        break; 
+        break;
     default:
         l += "\nExcellent quality";
-        break; 
+        break;
     }
 
     keyMap["~LONG~"] = l;
-     log_file("armorsmith",capitalize(TPQN)+" "+ctime(time())+" "+identify(keyMap)+"\n");
 
      for (i=0;i<sizeof(materialObj);i++) {
          materialObj[i]->use(size*(int)ARMOURS[type]["units"]);

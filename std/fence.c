@@ -14,7 +14,7 @@ Also made it force step for thief hidden because they would have given away thei
 #include <std.h>
 
 #define STORE "/std/obj/fence_store.c"
-#define LF(X) log_file("fencing",X)
+#define LF(X) log_file("player/fencing",X)
 
 #define FENCE_D "/daemon/fence_d"
 
@@ -122,7 +122,7 @@ int __Buy(string str) {
     message("other_action", query_cap_name()+" hands "+TPQCN+" "+(string)ob->query_short()+".", ETO, ({ TP,TO}));
     message("other_action", query_cap_name()+" hands you "+(string)ob->query_short()+".", TP);
     TP->set("thief account",(int)TP->query("thief account") - cost);
-   if(FENCE_D->fence_item(ob)) log_file("fencedTo",ob->query_short()+" was fenced to "+TPQN+" for "+cost+" on "+ctime(time())+"\n"); // let's only log non-generic daemon stuff
+   if(FENCE_D->fence_item(ob)) log_file("player/fencing",ob->query_short()+" was fenced to "+TPQN+" for "+cost+" on "+ctime(time())+"\n"); // let's only log non-generic daemon stuff
     if(ob->move(TP)) {
         message("my_action", "You drop it as fast as you get it!", TP);
         message("other_action", TPQCN+" drops "+(string)ob->query_short()+".", ETO,({ TP}));

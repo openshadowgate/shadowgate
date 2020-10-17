@@ -1,4 +1,4 @@
-//Changed it where it won't set axes, hammers, and spears 
+//Changed it where it won't set axes, hammers, and spears
 //size profs - Cythera 9/07
 #include <std.h>
 #include <standards.h>
@@ -9,7 +9,7 @@ inherit "/cmds/mortal/obj/genObj.c";
 void finish_object(mapping keyMap, string template){
     int percent,i, base_weight, weight;
     string l;
-    
+
     keyMap["~TYPE~"] = WEAPON_BASICS[type]["type"];
     if (WEAPON_BASICS[type]["prof"]) {
      //   if (member_array(WEAPON_BASICS[type]["prof"], ({"axe","hammer","spear", "blades", "clublike"})) != -1 ) {
@@ -33,7 +33,7 @@ void finish_object(mapping keyMap, string template){
             keyMap["~PROF~"] = WEAPON_BASICS[type]["prof"];
         }
     }
-    
+
     percent = prof*10 - (random(40)-20);
     if (sizeof(materialObj) > 1) {
         percent = percent - (10 - (int)materialObj[1]->query_quality_type())*5;
@@ -86,14 +86,13 @@ void finish_object(mapping keyMap, string template){
         break;
     case 125..151:
         l += "\nHigh quality";
-        break; 
+        break;
     default:
         l += "\nExcellent quality";
-        break; 
+        break;
     }
 
     keyMap["~LONG~"] = l;
-     log_file("weaponsmith",capitalize(TPQN)+" "+ctime(time())+" "+identify(keyMap)+"\n");
 
      for (i=0;i<sizeof(materialObj);i++) {
          materialObj[i]->use(size*(int)WEAPON_MATERIALS[type]["units"][i]);
@@ -103,4 +102,3 @@ void finish_object(mapping keyMap, string template){
     tell_object(ETO,"You pause from working on the new weapon.");
     ::finish_object(keyMap,"/cmds/mortal/templates/weapon.tpl");
 }
-

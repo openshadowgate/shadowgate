@@ -217,8 +217,6 @@ int cmd_throw(string str)
         if (tohitroll == 20) perfect = 1;
         if (tohitroll == 1) perfect = -1;
         // added by Styx to log what bugged from not having a set_name() 4/17/03
-        if(!what_ob->query_name())
-            log_file("debug.info", base_name(what_ob)+" needs a set_name() because it's going to bug in /cmds/mortal/_throw and probably elsewhere sooner or later.\n");
         if(((tohitroll < thaco ) && (perfect != 1)) || perfect == -1) {
             if(objectp(alt_foe = errant_hit(foe)) && (random(20) > TP->Thaco(1,alt_foe,TO))) {
                 tell_room(current,capitalize(what_ob->query_name())+" flies by "+capitalize(target),foe);

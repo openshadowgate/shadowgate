@@ -259,7 +259,7 @@ int set_mobil_rooms(string room, string dest, string exit)
     if(!MobilRooms) MobilRooms = ([]);
 
     MobilRooms[room] = dest+"&"+exit;
-    log_file("mobile_rooms",identify(PO)+", "+room+", "+dest+", "+exit+".\n");
+    log_file("living/mobile_rooms",identify(PO)+", "+room+", "+dest+", "+exit+".\n");
 
     //Save();
     return 1;

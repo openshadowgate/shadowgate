@@ -153,8 +153,6 @@ void disenchant_item(mapping map)
         return;
     }
 
-    log_file("disenchant", tp->query_true_name()+" disenchanted "+base_name(obj)+" for "+value+" mats, result = "+pass+"\n");
-
     tell_object(tp,"You manage to salvage "+value+" materials from the "+obj->query_short()+".");
 
     obj->move("/d/shadowgate/void");

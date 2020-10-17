@@ -8,11 +8,11 @@
 
 inherit DAEMON;
 
-int cmd_echo(string str) 
+int cmd_echo(string str)
 {
 	object *usrs;
 	int x, min, max;
-	string posxxx, range, msg, *tmp; 
+	string posxxx, range, msg, *tmp;
    	if(!objectp(TP)) { return 0; }
 	posxxx = lower_case((string)TP->query_position());
    	if(posxxx == "builder" || posxxx == "apprentice")
@@ -21,15 +21,15 @@ int cmd_echo(string str)
        	return 1;
    	}
 
-    	if(!str) 
+    	if(!str)
 	{
       	notify_fail("Echo what?\n");
         	return 0;
     	}
-  	
+
 
 	if(sscanf(str,"%s | %s", range, msg))
-	{ 
+	{
 		tmp = explode(range, " ");
 
 		if(sizeof(tmp) > 1)
@@ -38,7 +38,7 @@ int cmd_echo(string str)
 		}
 		tmp = explode(range, "-");
 
-		if(sizeof(tmp) > 1) 
+		if(sizeof(tmp) > 1)
 		{
 			min = to_int(tmp[0]);
 			max = to_int(tmp[1]);
@@ -48,8 +48,8 @@ int cmd_echo(string str)
 			min = to_int(range);
 			max = min;
 		}
-		
-		if(!intp(min) || !min) 
+
+		if(!intp(min) || !min)
 		{
 			tell_object(TP, "You failed to specify a level range.");
 			tell_object(TP, "Try echo level minlevel-maxlevel | msg");
@@ -64,7 +64,7 @@ int cmd_echo(string str)
 		{
 			if(!objectp(usrs[x])) continue;
 			if(usrs[x]->query_level() >= min &&
-			usrs[x]->query_level() <= max) 
+			usrs[x]->query_level() <= max)
 			{
 				tell_object(usrs[x], msg);
 				continue;
@@ -72,7 +72,6 @@ int cmd_echo(string str)
 		}
 		seteuid(UID_LOG);
 	  	str = replace_string(str,"\n","%^NL%^");
-    		log_file("shouts", geteuid(previous_object())+" (echo): "+str+"\n");
     		seteuid(getuid());
 		return 1;
 	}
@@ -80,12 +79,11 @@ int cmd_echo(string str)
 	message("environment", str, environment(this_player()));
     	seteuid(UID_LOG);
   	str = replace_string(str,"\n","%^NL%^");
-    	log_file("shouts", geteuid(previous_object())+" (echo): "+str+"\n");
     	seteuid(getuid());
     	return 1;
 }
 
-void help() 
+void help()
 {
 	message("help",
       "Syntax: <echo [message]>\n"

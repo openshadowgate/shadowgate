@@ -87,7 +87,7 @@ int withdraw_funds(string temple, int amount, object who) {
       tWithdrawals[temple]+= amount;
       tell_object(who,"You have withdrawn %^YELLOW%^"+amount+" gold %^RESET%^"
          "of the funds of the temple of "+temple+".");
-      log_file("tithes",capitalize(who->query_name())+" withdrew "
+      log_file("player/tithes",capitalize(who->query_name())+" withdrew "
         +amount+" gold from the temple of "+capitalize(temple)+
         " on "+ctime(time())+".\n");
       SAVE();
@@ -103,7 +103,7 @@ void add_temple_gold(string temple, int amount, string type, object who, string 
    name = who->query_name();
    if(!item)  who->add_money(type, -amount);
    who->force_me("save");
-   log_file("tithes",capitalize(who->query_name())+" donated "+amount+" "+type+
+   log_file("player/tithes",capitalize(who->query_name())+" donated "+amount+" "+type+
         " to the temple of "+capitalize(temple)+" on "+ctime(time())+".\n");
    if(!tAccounts)                 tAccounts = ([]);
    if(!tAccounts[temple])         tAccounts[temple] = 0;

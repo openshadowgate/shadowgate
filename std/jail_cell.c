@@ -1,4 +1,4 @@
-/* by Styx for Shadow jail 3/31/02, converted to /std/ inheritable 8/2005 
+/* by Styx for Shadow jail 3/31/02, converted to /std/ inheritable 8/2005
 * - food and water force-feeding based on Crystal's code in Alliance dungeon,
 * - added real food & water slipped under the door for unbound people
 * - jail_main sets property of player age when put in, release after MAXTIME
@@ -7,8 +7,8 @@
 ** set max jail time in player age (online time) for auto-release
 ** is in seconds so 10800 = 3 hrs. (could easily take 6-10 if they mostly
 ** idle and their time isn't all counting)
-** 12/20/02 - doubled it and also made it 24 hrs. for people on the wanted list 
-**   after someone got early release that shouldn't have - hopefully those won't 
+** 12/20/02 - doubled it and also made it 24 hrs. for people on the wanted list
+**   after someone got early release that shouldn't have - hopefully those won't
 **   get out sooner than 3 RL days now, if then and those involved with the RP
 **   will follow up and check on them regularly
 ** 2/12 - reduced playtime max to 1hr, and overall RL time to 2hrs; slim playerbase
@@ -18,7 +18,7 @@
 /* **********************************************************************
 *  Notes regarding use:
 *	can put extra messages in reset OR overload do_messages()
-*     if banned list is to be captured rather than killed, need to use 
+*     if banned list is to be captured rather than killed, need to use
 *  set_release_to(filename) so they will be dumped outside the area with guards
 
 ************************************************************************* */
@@ -38,7 +38,7 @@ void set_jail_location(string loc);	// must match the jail room's location
 void set_jail(string filename);		// main jail filename for the area
 void set_release_to(string filename);	// main jail or outside the city
 
-void __Feed_em();		
+void __Feed_em();
 void __CheckRelease();
 void do_messages();
 void __ThrowOut();
@@ -76,7 +76,7 @@ void init() {
 void reset() {
    ::reset();
    do_messages();
-   __CheckRelease();   
+   __CheckRelease();
    if(random(2))
 	__Feed_em();
 }
@@ -94,7 +94,7 @@ void do_messages() {
 		"of agony from nearby.\n\n%^RESET%^They slowly weaken and "
 		"subside into moans and, finally, eerie silence.");   break;
      case 7:  tell_room(TO,"%^BOLD%^%^CYAN%^The chill from the damp stone "
-		"begins to drain your strength and will.");	     break; 
+		"begins to drain your strength and will.");	     break;
      case 8 : tell_room(TO,"%^ORANGE%^A large rat scurries across the bed "
 	"and disappears through a small crack in the wall.\n");      break;
      case 9 : tell_room(TO,"%^BOLD%^You hear footsteps outside but it's "
@@ -107,7 +107,7 @@ void do_messages() {
                  "your attention.  Is it moving or are you beginning to "
                  "lose your sanity?\n");                             break;
      case 13: tell_room(TO,"%^BOLD%^%^CYAN%^A bit of a breeze blows in "
-                 "somehow and relieves the stench a little.\n");  
+                 "somehow and relieves the stench a little.\n");
                                                                      break;
      case 14: tell_room(TO,"%^RED%^You notice some of the dark spots on "
                  "the walls look like blood.  Now you realize some people "
@@ -146,16 +146,16 @@ void __CheckRelease() {
    object *inven;
    inven = all_living(TO);
    j = sizeof(inven);
-   for(i=0;i<j;i++) 
+   for(i=0;i<j;i++)
    {
       if(!userp(inven[i])) continue;
-      if(!jailed = inven[i]->query("jailed_age")) continue;      
+      if(!jailed = inven[i]->query("jailed_age")) continue;
       jailtime = (int)inven[i]->query_age() - jailed;
       name = inven[i]->query_name();
       //now, unless they are removed from the wanted list somehow
       //they would sit in jail until the play time they have since
       //getting jailed is greater than MAXWANTED - I am changing this - Saide
-      //keep track of the time that they were jailed - in order to see if it has been longer 
+      //keep track of the time that they were jailed - in order to see if it has been longer
       //than that if so release them
       if(!intp(jailrealtime = (int)inven[i]->query("jailed_time")))
       {
@@ -169,7 +169,7 @@ void __CheckRelease() {
 	   " was %^RED%^TIME released from the "+JailLoc+" jail.%^RESET%^");
       AREALISTS_D->remove_prisoner(inven[i], JailLoc, TO);
       AREALISTS_D->remove_wanted(inven[i], JailLoc, TO);
-      log_file("ICjails", "Prisoners - "+JailLoc+":  "+inven[i]->QCN+" was "
+      log_file("player/city_jails", "Prisoners - "+JailLoc+":  "+inven[i]->QCN+" was "
 	   "out of the "+JailLoc+" jail on "+ctime(time())+".\n");
       tell_object(inven[i],"%^BOLD%^Some rough looking guards enter and "
          "drag you out of the cell to freedom.\n");

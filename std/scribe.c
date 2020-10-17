@@ -544,9 +544,6 @@ void translate_object(string str)
 			"counter.");
 			force_me("drop scribe key");
 		}
-		log_file("scribes", "LEFT:  "+ capitalize(TPQN) + " left an item ("+
-		base_name(ob)+") " +
-		"with "+__ScribeName+ " at ("+base_name(ETP)+") on "+ctime(time()) + ".\n");
 		ob->remove();
 	}
 	if(environment(key) == TO)
@@ -745,12 +742,6 @@ void pickup_object(string str)
 	tell_room(ETP, TPQCN + " pays the scribe and "+QS+ " takes a slight bow.", TP);
 	tell_object(TP, "You pay the scribe and "+QS+" takes a slight bow.");
 	TP->use_funds("gold", (int)SavedObjects[ob_name][2]);
-
-	log_file("scribes", "PICKED UP:  "+ capitalize(TPQN) + " picked up an item ("+
-	base_name(item)+") " +
-	"from "+__ScribeName+ " at ("+base_name(ETP)+") on "+ctime(time()) + " for ("+
-	SavedObjects[ob_name][2] + ") gold.  Item was dropped off by "+
-	capitalize(SavedObjects[ob_name][1])+ ".\n");
 
 	map_delete(SavedObjects, ob_name);
 	save_object(SCRIBE_FILE);

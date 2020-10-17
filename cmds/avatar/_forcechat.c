@@ -10,7 +10,7 @@ int cmd_forcechat(string str)
     object target, current;
     int x;
 
-   string posxxx; 
+   string posxxx;
    if(!objectp(TP)) { return 0; }
    posxxx = lower_case((string)TP->query_position());
    if(posxxx == "builder" || posxxx == "apprentice")
@@ -27,7 +27,6 @@ int cmd_forcechat(string str)
              targs = lower_case(targs);
 	  }
 	seteuid(UID_LOG);
-	log_file("shouts", geteuid(previous_object())+" (forcechat):("+targs+") "+line+"\n");
 	seteuid(getuid());
         names = explode(line," ");
         nme=names[0];
@@ -37,9 +36,7 @@ int cmd_forcechat(string str)
            x=1;
         }
 	line = replace_string(line,"%^NL%^","\n");
-//	message("environment",line,targets);
         "/daemon/chat"->force_chat(target,nme,line,x);
-//	message("environment","You echolist "+targs+":\n"+line+"",TP);
 	return 1;
     }
 

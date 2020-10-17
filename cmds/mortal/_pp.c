@@ -57,7 +57,7 @@ int cmd_pp(string str) {
 
     if (wizardp(ob)) {
 	    notify_fail("That is not adviseable.\n");
-	    return 0;                                                               
+	    return 0;
     }
 
     if (ob->is_player() && !interactive(ob)) return 0;
@@ -90,17 +90,17 @@ int cmd_pp(string str) {
 
     if (ob->query_invis()) steal -= INVIS_PENALTY;
     /* Display messages */
-    
+
     roll = random(100)+1;
     //    tell_object(TP,"x = "+roll+" steal = "+steal); */
     steal = TP->query_skill("thievery") + roll_dice(1,20);
     if(sizeof(TP->query_armour("torso"))) steal += TP->skill_armor_mod(TP->query_armor("torso"));
     roll = ob->query_skill("perception") + roll_dice(1,20);
-	
+
     if (roll>steal || (TP->get_static("caught") &&  time() - (int)((mapping)TP->get_static("caught"))[ob] <= 150)) {
 	    write("You utterly fail in your attempt to pick from "+ob->query_cap_name()+".");
 	    check_caught(roll,ob,steal);
-	    return 1;                                                               
+	    return 1;
 	}
 
 	platinum = (int)ob->query_money("platinum");
@@ -108,7 +108,7 @@ int cmd_pp(string str) {
 	electrum = (int)ob->query_money("electrum");
 	silver = (int)ob->query_money("silver");
 	copper = (int)ob->query_money("copper");
-	
+
     if (!platinum && !gold && !electrum && !silver && !copper) {
 	    tell_object(TP,""+ob->query_cap_name()+" is flat broke!\n");
 	    return 1;
@@ -119,7 +119,7 @@ int cmd_pp(string str) {
 	electrum = (steal*(electrum/10))/100;
 	silver = (steal*(silver/10))/100;
 	copper = (steal*(copper/10))/100;
-	
+
     if (!platinum && !gold && !silver && !electrum && !copper) {
 	    write("You fail to get anything from "+ob->query_cap_name()+"'s purse.");
 	} else {
@@ -154,7 +154,7 @@ int cmd_pp(string str) {
     }
 
 	//if (interactive(ob))
-	log_file("stealing", TPQN+" stole "+gold+" gold from "+ob->query_name()+" on "+ctime(time())+"\n");
+	log_file("player/theft", TPQN+" stole "+gold+" gold from "+ob->query_name()+" on "+ctime(time())+"\n");
 	i = check_caught(roll,ob, sLevel);
 	if(TP->query("stolen money")){
 	    TP->set("stolen money",(int)TP->query("stolen money")+amt);
@@ -197,7 +197,7 @@ void check_caught(int roll, object target, int sLevel){
 
 	intox = (((int)target->query_intox())/35) - ((int)TP->query_intox())/35;
 	condition = (100- (int)target->query_condition_percent()) - (100- (int)TP->query_condition_percent());
-	busy = (5 * ( sizeof(all_living(ETP)) -2) ) - 10; 
+	busy = (5 * ( sizeof(all_living(ETP)) -2) ) - 10;
 	bonus = intox + condition + busy + sLevel;
 	test = 50 + ((int)target->query_highest_level() - bonus);
 	if ((100 - roll)<test) {
@@ -211,19 +211,19 @@ void check_caught(int roll, object target, int sLevel){
 	            TP->set_magic_hidden(0);
 	        }
         }
-	    
+
         tell_object(target,"You catch "+TPQCN+" with "+TP->query_possessive()+" hand in your pocket.\n");
 	    //tell_object(target,capitalize(TP->query_subjective())+" was stealing from you.\n");
 	    tell_object(TP,"You get caught.");
-	    tell_room(environment(TP),"You see "+target->query_cap_name()+" catch "+TPQCN+" with a hand in "+target->query_possessive()+" pocket.",({TP,target})); 
+	    tell_room(environment(TP),"You see "+target->query_cap_name()+" catch "+TPQCN+" with a hand in "+target->query_possessive()+" pocket.",({TP,target}));
         inven = all_living(ETP);
         for(i=0;i<sizeof(inven);i++){
 	        if(objectp(inven[i])) inven[i]->check_caught(TP,target,roll);
         }
 
 	    if (!interactive(target)) target->kill_ob(TP,0);
-	    else 
-		    log_file("stealing", TPQN+"("+sLevel+") was caught stealing from "+target->query_name()+"("+target->query_lowest_level()+") on "+ctime(time())+"\n");
+	    else
+		    log_file("player/theft", TPQN+"("+sLevel+") was caught stealing from "+target->query_name()+"("+target->query_lowest_level()+") on "+ctime(time())+"\n");
             if (TP->is_singleClass()) {
                 TP->set_disable(2,target);
             } else {
