@@ -172,6 +172,14 @@ void reset()
         new("/d/magic/obj/r_wand")->move(TO);
     }
 
+    {
+        object wand;
+        wand = new("/d/magic/obj/r_wand");
+        wand->set("spell", "secret chest");
+        wand->make_me();
+        wand->move(TO);
+    }
+
     while (!present("paper 6")) {
         new(CMISC "paper")->move(TO);
     }
