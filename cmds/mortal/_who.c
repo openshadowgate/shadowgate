@@ -127,9 +127,9 @@ string list_users(string *races, object tp)
             tmp += race_color(who[i]);
 
             if (!who[i]->query_alignment()) {
-                melnmarn = capitalize((string)who[i]->query_name()) + " the new adventurer";
+                melnmarn = capitalize((string)who[i]->query_name()) + " the unmade";
             } else if (time() - who[i]->query_login_time() < 120) {
-                melnmarn = "Someone is waking up";
+                melnmarn = "Someone is emerging";
             } else if ((string)who[i]->query_title()) {
                 melnmarn = (string)who[i]->query_title();
             } else {

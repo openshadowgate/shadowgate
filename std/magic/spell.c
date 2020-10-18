@@ -521,7 +521,7 @@ void startCasting()
     if (TP->usable_feat("elusive spellcraft")) {
         roll += roll_dice(2, 8);
     }
-    if (function_exists("query_cast_string", TO)) {
+    if (query_cast_sring()) {
         displaystring = (string)TO->query_cast_string() + "\n";
     } else {
         displaystring = "%^BOLD%^%^WHITE%^" + TPQCN + " starts casting a spell.%^RESET%^\n";
