@@ -2146,59 +2146,52 @@ void write_messages()
     message = ({});
 }
 
-string query_title() {
-  string str, mod;
-  string foo,fii;
-  string known;
-  string desc;
+string query_title()
+{
+    string str, mod;
+    string foo, fii;
+    string known;
+    string desc;
 
-  if ((avatarp(TO) || wizardp(TO)) && query_disguised()) return ::query_short();
-  if (query_ghost()) return "A ghost";
+    if ((avatarp(TO) || wizardp(TO)) && query_disguised()) {
+        return ::query_short();
+    }
+    if (query_ghost()) {
+        return "A ghost";
+    }
 
-  if(query_death_flag()) { mod = "%^BOLD%^%^RED%^Gr %^GREEN%^"; }
-  if(get_pk_death_flag() || TO->query("no pk")) mod = "%^BOLD%^%^MAGENTA%^NoPK %^GREEN%^";
-  if (newbiep(TO)) mod = "%^BOLD%^%^CYAN%^N %^GREEN%^";
-  if(objectp(TP) && TP->knownAs(query_true_name()))
-  {
-    if(wizardp(TO) || TO == TP)
-    {
-        known = query_name();
-    } else
-    {
-        known = TP->knownAs(query_true_name());
+    if (query_death_flag()) {
+        mod = "%^BOLD%^%^RED%^Gr %^GREEN%^";
     }
-  }
-  else
-  {
-    if(wizardp(TO))
-    {
-        known = query_name();
+    if (get_pk_death_flag() || TO->query("no pk")) {
+        mod = "%^BOLD%^%^MAGENTA%^NoPK %^GREEN%^";
     }
-    else
-    {
-        str = getWholeDescriptivePhrase();
-        if(stringp(mod)) return (mod + str);
-        return str;
+    if (newbiep(TO)) {
+        mod = "%^BOLD%^%^CYAN%^N %^GREEN%^";
     }
-  }
-  str = capitalize(known)+", "+getWholeDescriptivePhrase();
-  if( wizardp(TO) && TO->query("wiz titles") )
-  {
-    str = getenv( "TITLE" );
-    if ( !str )
-    {
-        str = capitalize(known);
+    if (objectp(TP) && (TP->knownAs(query_true_name()) || wizardp(TP))) {
+        if (wizardp(TO) || TO == TP || wizardp(TP)) {
+            known = query_name();
+        } else {
+            known = TP->knownAs(query_true_name());
+        }
+    }else {
+        if (wizardp(TO)) {
+            known = query_name();
+        }else {
+            str = getWholeDescriptivePhrase();
+            if (stringp(mod)) {
+                return (mod + str);
+            }
+            return str;
+        }
     }
-    else
-    {
-        if( !sscanf(str, "%s$N%s", foo,fii) )
-            str = capitalize(known) + " " + str;
-        else
-            str = substr( str, "$N", capitalize(known));
+    str = capitalize(known) + ", " + getWholeDescriptivePhrase();
+
+    if (stringp(mod)) {
+        return (mod + str);
     }
-  }
-  if(stringp(mod)) return (mod+str);
-  return str;
+    return str;
 }
 
 void set_disguise(string str) {
