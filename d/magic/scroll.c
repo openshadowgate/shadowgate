@@ -268,9 +268,9 @@ int use_scroll(string str)
     }
 
     if (!((sizeof(ARCANE_CLASSES - (ARCANE_CLASSES - scroll_classes)) && sizeof(ARCANE_CLASSES - (ARCANE_CLASSES - player_classes))) ||
-        (sizeof(DIVINE_CLASSES - (DIVINE_CLASSES - scroll_classes)) && sizeof(DIVINE_CLASSES - (DIVINE_CLASSES - player_classes))) ||
-          FEATS_D->usable_feat(TP, "insightful scroll"))) {
+        (sizeof(DIVINE_CLASSES - (DIVINE_CLASSES - scroll_classes)) && sizeof(DIVINE_CLASSES - (DIVINE_CLASSES - player_classes)))) ) {
         int roll = roll_dice(1, 20);
+        int roll_bonus = 0;
 
         // Can you activate the scroll properly? This is deterministic UMD check
         if (lowest_mental_stat_bonus < lowest_spell_level) {
@@ -280,14 +280,19 @@ int use_scroll(string str)
             }
         }
 
+        if (FEATS_D->usable_feat(TP, "insightful scroll")) {
+            roll_bonus = 7;
+        }
+
         // Can you activate the magic within?
-        if (roll == 1 || (TP->query_skill("spellcraft") + roll < lowest_spell_level + TP->query_level() / 2) && roll != 20) {
+        if (roll == 1 || (TP->query_skill("spellcraft") + roll + roll_bonus < lowest_spell_level) && roll != 20) {
             // It is supposed to be 24 hour lock, but whatever
             jolt(TP);
             return 1;
         }
     }
 
+    // TODO: return scroll caster levels, rewrite UMD checks
     lev = TP->query_skill("spellcraft") * 3 / 4 + 2;
 
     if (FEATS_D->usable_feat(TP, "enhance scroll")) {
