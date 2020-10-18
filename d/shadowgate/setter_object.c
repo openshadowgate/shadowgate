@@ -382,32 +382,36 @@ string *generate_race()
 
     choices = get_dir("/std/races/*.c");
     choices = map(choices, (:replace_string($1, ".c", ""):));
-    choices = filter_array(choices, (:member_array($1, ("/std/class/" + $2)->restricted_races()) == -1:), char_sheet["class"]);
     choices = filter_array(choices, (:!(("/std/races/" + $1)->is_gender_locked(char_sheet["gender"])):));
     choices = filter_array(choices, (:sizeof(({1, 2, 3, 4, 5, 6, 7, 8, 9}) - (("/std/races/" + $1)->restricted_alignments(char_sheet["subrace"]) + ("/std/class/" + $2)->restricted_alignments())) :), char_sheet["class"]);
-
-    {
-        string* newchoices, choice;
-        string* subraces, subrace;
-
-        newchoices = choices;
-
-        foreach(choice in newchoices)
-        {
-            if (sizeof(subraces = ("/std/races/" + choice)->query_subraces(ETO))) {
-                foreach(subrace in subraces)
-                {
-                    choices = filter_array(choices, (: member_array($2, ("/std/races/" + $1)->restricted_classes($3)) == -1 :), choice, subrace);
-                }
-            } else {
-                choices = filter_array(choices, (: member_array($2, ("/std/races/" + $1)->restricted_classes()) == -1 :), choice);
-            }
-        }
-    }
 
     if (!unrestricted_player(ETO)) {
         choices = filter_array(choices, (:!(("/std/races/") + $1)->is_restricted():));
     }
+
+    {
+        string choice;
+        string subrace, *subraces;
+        string restricted_classes;
+
+        foreach(choice in choices) {
+            subraces = ("/std/races/" + choice)->query_subraces(ETO);
+            subraces = subraces ? subraces : ({""});
+            foreach(subrace in subraces) {
+                restricted_classes = ("/std/races/" + choice)->restricted_classes(subrace);
+
+                if (member_array(char_sheet["class"], restricted_classes) != -1) {
+                    subraces -= ({subrace});
+                }
+
+                if (!sizeof(subraces)) {
+                    choices -= ({choice});
+                }
+
+            }
+        }
+    }
+
 
     return choices;
 }

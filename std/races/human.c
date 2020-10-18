@@ -376,7 +376,7 @@ string *query_eye_colors(string subrace) {
 
 string* query_subraces(object who)
 {
-    string* subraces;
+    string* subraces = ({});
     subraces = ({ "heartlander", "zin'charu", "aesatri", "attayan", "tsarven", "morinnen", "tonaz'tlacar", "senzokuan", "maalish" });
     if (OB_ACCOUNT->is_experienced(who->query_true_name()) ||
         OB_ACCOUNT->is_high_mortal(who->query_true_name()) ||
