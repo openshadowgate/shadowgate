@@ -45,7 +45,7 @@ int hit_func(object targ){
 	}
 	else
 		{
-		targ->set_paralyzed(1); //short diration if make save
+		tell_object(targ,"Your reflexes let you avoid the worst of the sand.");
 		}
 		
 return 0;	}
