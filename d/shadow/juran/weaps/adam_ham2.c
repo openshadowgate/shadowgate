@@ -100,11 +100,10 @@ int extra_hit(object victim){
      		tell_room(environment(ETO),"%^BOLD%^%^RED%^"+ETO->QCN+" "+
      			"staggers "+victim->QCN+" with a vicious swing of "+
      			""+ETO->QP+" hammer!%^RESET%^",({ETO,victim}));
+			if(!"/daemon/saving_throw_d.c"->fort_save(victim,-20))
             victim->set_paralyzed(random(4)+2,"%^BOLD%^%^RED%^Your head still rings "+
         		"from the blow of the hammer!");
-     		set_property("magic",1);
-    		victim->do_damage("torso",random(2)+1);
-    		set_property("magic",-1);
-  			return 1;
+    		
+  			return random(2)+1;
     	}else return 0;
 }

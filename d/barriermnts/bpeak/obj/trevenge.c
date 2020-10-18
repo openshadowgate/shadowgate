@@ -32,19 +32,21 @@ int hit_func(object target) {
   	      tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETO->query_cap_name()+" quickly spins around and smashes "+target->query_cap_name()+" with the hammer end of the polearm!%^RESET%^",({target,ETO}));
             tell_object(ETO,"%^BOLD%^%^BLACK%^You spin around to knock "+target->query_cap_name()+" mercilessly with the hammer end of your weapon!%^RESET%^",target);
             tell_object(target,"%^BOLD%^%^BLACK%^"+ETO->query_cap_name()+" spins around to bring the hammer end of his weapon crushing into you!%^RESET%^");
-            target->do_damage("torso",random(5)+1);
+          
          break ;
  	   case 2..3:
   	      tell_room(environment(ETO),"%^RESET%^%^RED%^"+ETO->query_cap_name()+" pulls the polearm up over "+ETO->query_possessive()+" head and brings the spiked end down upon "+target->query_cap_name()+" with a savage blow!%^RESET%^",({target,ETO}));
             tell_object(ETO,"%^RESET%^%^RED%^You pull the polearm up over your head and bring it down upon "+target->query_cap_name()+" with a savage blow!%^RESET%^");
             tell_object(target,"%^RESET%^%^RED%^"+ETO->query_cap_name()+" pulls the polearm up over "+ETO->query_possessive()+" and quickly brings it down upon you in a savage blow!%^RESET%^");
-            target->do_damage("torso",random(10)+1);
+           
          case 4:
             tell_room(environment(ETO),"%^BOLD%^%^CYAN%^"+ETO->query_cap_name()+" ducks down low as "+ETO->query_subjective()+" spins the polearm around to sweep the hook end of "+ETO->query_possessive()+" weapon quickly beneath "+target->query_cap_name()+"'s feet!%^RESET%^",({target,ETO}));
             tell_object(ETO,"%^BOLD%^%^CYAN%^You duck down low and spin the polearm quickly around to sweep the hook end of the weapon beneath  "+target->query_cap_name()+"'s feet!%^RESET%^",target);
             tell_object(target, "%^BOLD%^%^CYAN%^"+ETO->query_cap_name()+" ducks down low and spins the polearm around before quickly sweeping the hook end of "+ETO->query_possessive()+" weapon beneath your feet!");
-            target->set_paralyzed(20,"You are still trying to stand up!");
-            target->do_damage("torso",random(5)+1);
+            if(!"/daemon/saving_throw_d.c"->fort_save(target,-20))
+              target->set_tripped(1,"You are still trying to stand up!");
+           
       }
    }
+   return random(5)+1;
 }

@@ -51,19 +51,20 @@ int hit_func(object target) {
   	      tell_room(environment(ETO),"%^BOLD%^%^WHITE%^"+ETO->query_cap_name()+" quickly spins around and smashes "+target->query_cap_name()+" with the pommel of the sword!%^RESET%^",({target,ETO}));
             tell_object(ETO,"%^BOLD%^%^WHITE%^With amazing quickness and agility, you spin around to smash "+target->query_cap_name()+" with the pommel of the sword!%^RESET%^",target);
             tell_object(target,"%^BOLD%^%^WHITE%^With quickness and agility rarely seen, "+ETO->query_cap_name()+" spins around and smashes you with the pommel of the sword!%^RESET%^");
-            target->do_damage("torso",random(5)+1);
          break ;
  	   case 2..3:
   	      tell_room(environment(ETO),"%^RESET%^%^RED%^The sword "+ETO->query_cap_name()+" holds %^BOLD%^%^RED%^glows brightly %^RESET%^%^RED%^as "+ETO->query_subjective()+" swings it around to hit "+target->query_cap_name()+"!%^RESET%^",({target,ETO}));
             tell_object(ETO,"%^RESET%^%^RED%^The sword %^BOLD%^%^RED%^glows brightly %^RESET%^%^RED%^as you swing it around to make contact with "+target->query_cap_name()+"!%^RESET%^");
             tell_object(target,"%^RESET%^%^RED%^The sword in "+ETO->query_cap_name()+"'s hand %^BOLD%^%^RED%^glows brightly %^RESET%^%^RED%^as "+ETO->query_subjective()+" swings it around to make contact with you!%^RESET%^");
-            target->do_damage("torso",random(5)+1);
-         case 4:
+         break ;
+      case 4:
             tell_room(environment(ETO),"%^BOLD%^%^CYAN%^The fists of "+ETO->query_cap_name()+"s sword release one another and open up to hurl a %^YELLOW%^blinding light %^CYAN%^at "+target->query_cap_name()+"!%^RESET%^",({target,ETO}));
             tell_object(ETO,"%^BOLD%^%^CYAN%^The fists of the sword release one another and open up to hurl a %^FLASH%^%^YELLOW%^blinding light %^RESET%^%^BOLD%^%^CYAN%^at "+target->query_cap_name()+"!%^RESET%^",target);
             tell_object(target, "%^BOLD%^%^CYAN%^The fists of the sword held by "+ETO->query_cap_name()+" release one another and open up to hurl a %^FLASH%^%^YELLOW%^blinding light %^RESET%^%^BOLD%^%^CYAN%^!");
-            target->set_paralyzed(20,"You are still stumbling around.");
-            target->do_damage("torso",random(5)+1);
+            if(!"/daemon/saving_throw_d.c"->fort_save(target,-20))
+              target->set_paralyzed(20,"You are still stumbling around.");
+            
       }
    }
+   return random(5)+1;
 }

@@ -32,6 +32,6 @@ int hit_func(object target) {
   	tell_room(environment(ETO),"%^BOLD%^%^WHITE%^"+ETO->query_cap_name()+" quickly spins around and smashes the  hammer into "+target->query_cap_name()+"!%^RESET%^",({target,ETO}));
       tell_object(ETO,"%^BOLD%^%^WHITE%^With amazing quickness and agility, you spin around to smash the hammer into "+target->query_cap_name()+"!%^RESET%^",target);
       tell_object(target,"%^BOLD%^%^WHITE%^With quickness and agility rarely seen, "+ETO->query_cap_name()+" spins around and smashes the hammer into you!%^RESET%^");
-      target->do_damage("torso",random(5)+1);
+      return random(5)+1;
    }
 }
