@@ -521,11 +521,8 @@ void startCasting()
     if (TP->usable_feat("elusive spellcraft")) {
         roll += roll_dice(2, 8);
     }
-    if (query_cast_sring()) {
-        displaystring = (string)TO->query_cast_string() + "\n";
-    } else {
-        displaystring = "%^BOLD%^%^WHITE%^" + TPQCN + " starts casting a spell.%^RESET%^\n";
-    }
+
+    displaystring = TO->query_cast_string() + "\n";
 
     if (displaystring == "display\n") {
         displayflag = 1;
@@ -1635,6 +1632,7 @@ string* query_domains()
 
 string query_cast_string()
 {
+    return "%^BOLD%^%^WHITE%^" + TPQCN + " starts casting a spell.%^RESET%^";
 }
 
 int query_silent_casting()
