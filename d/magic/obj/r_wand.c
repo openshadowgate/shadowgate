@@ -40,15 +40,15 @@ void make_me()
     string *classes = ({});
     i = random(sizeof(WTYPES));
     type = WTYPES[i];
-    classes = ({"mage", "cleric", "druid", "psion", "psywarrior", "ranger", "paladin", "inquisitor"});
-    sclass = classes[random(sizeof(classes))];
     if (TO->query("spell")) {
         spell = TO->query("spell");
+        classes = keys(MAGIC_D->query_index_row(spell)["levels"]);
+        sclass = classes[random(sizeof(classes))];
     } else {
+        classes = ({"mage", "cleric", "druid", "psion", "psywarrior", "ranger", "paladin", "inquisitor"});
+        sclass = classes[random(sizeof(classes))];
         spell = MAGIC_D->query_random_spell(sclass);
     }
-
-    ::create();
 
     if (sclass == "psion" ||
         sclass == "psywarrior") {
