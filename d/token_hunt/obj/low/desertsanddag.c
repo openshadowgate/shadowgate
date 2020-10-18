@@ -40,6 +40,13 @@ int hit_func(object targ){
 	tell_room(environment(query_wielded()),"%^YELLOW%^A sudden burst of sand explodes from "+ETOQCN+"'s %^RESET%^"+query_short()+"%^YELLOW%^.  "+targ->QCN+" staggers back furiously rubbing at their eyes to get the grit out.%^RESET%^",({ETO,targ}));
 	tell_object(ETO,"%^YELLOW%^The golden symbols flare to life and a burst of sand explodes from the surface of your dagger, blinding "+targ->QCN+" and causing them to rub at their eyes to get the grit out!%^RESET%^");
 	tell_object(targ,"%^YELLOW%^A burst of sand flies into your face, briefly stunning you as "+ETOQCN+" slashes and cuts through your defenses!%^RESET%^");
+	if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-10)){
 		targ->set_paralyzed(roll_dice(1,4)+1);
+	}
+	else
+		{
+		targ->set_paralyzed(1); //short diration if make save
+		}
+		
 return 0;	}
 }
