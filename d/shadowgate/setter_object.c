@@ -537,13 +537,14 @@ display_stats()
             (char_sheet["template"] == "undead" || char_sheet["template"] == "vampire")) {
             write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^BLACK%^--");
         } else {
-            write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]) + (tadjust ? ((tadjust > 0 ? "%^BOLD%^%^CYAN%^ +" : "%^BOLD%^%^RED%^ ") + tadjust) : ""));
+            write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]) + (tadjust ? ((tadjust > 0 ? "%^BOLD%^%^CYAN%^ +" : "%^BOLD%^%^RED%^ -") + abs(tadjust)) + " %^ORANGE%^" + (char_sheet["stats"][i] + tadjust) : ""));
         }
 
         sum += char_sheet["stats"][i];
     }
 
     write("\n");
+    write("%^BOLD%^%^GREEN%^Your stats are displayed with %^WHITE%^no modifications%^GREEN%^, %^CYAN%^adjust%^RED%^ments%^GREEN%^ and %^ORANGE%^final%^GREEN%^ values.");
     if (92 - sum == 0) {
         write("%^BOLD%^%^GREEN%^You may proceed with %^ORANGE%^<done>%^GREEN%^ to the next step.");
     } else {
@@ -559,7 +560,7 @@ synopsis_stats()
 {
 
     write("
-%^BOLD%^Your stats define your physical and mental abilities. To see in-dept explanation of each stat, type in %^ORANGE%^<help %^ULINE%^STAT%^%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<help charisma>%^WHITE%^.
+%^BOLD%^Your stats define your physical and mental abilities, they are adjusted by your race, subrace, age and template. To see in-dept explanation of each stat, type in %^ORANGE%^<help %^ULINE%^STAT%^%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<help charisma>%^WHITE%^.
 
 %^BOLD%^%^Your race and age has some effect on your stats. After your selections, values right of the stats will be added or subtracted from choices you have made.
 
@@ -1275,6 +1276,11 @@ int age_to_adjust(int age, string stat, string race)
     int *base = ({0, 0, 0, 0, 0, 0});
 
     int *age_brackets = racefile->age_brackets();
+
+    if (char_sheet["template"] == "undead" ||
+        char_sheet["template"] == "vampire") {
+        return 0;
+    }
 
     if(age > age_brackets[3])
     {
