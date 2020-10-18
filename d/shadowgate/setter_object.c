@@ -419,7 +419,7 @@ string *generate_race()
 hint_race()
 {
     write("
-%^BOLD%^Your race determines your make-up. Your race determines your make-up. Some races are predisposed to being stronger, sturdier, more intelligent, more sensitive to light, etc. than other races. In addition, different races are physically different from others, having different limbs and other types of body parts. Some races are better suited to be magical classes, others prefer physical approach. Whatever choice you make, remember that how other characters will treat you will depend on your race. If you're unsure, pick %^CYAN%^human%^WHITE%^ or %^CYAN%^elf%^WHITE%^ for your first character.
+%^BOLD%^Some races are predisposed to being stronger, sturdier, more intelligent, more sensitive to light, etc. than other races. In addition, different races are physically different from others, having different limbs and other types of body parts. Some races are better suited to be magical classes, others prefer physical approach. Whatever choice you make, remember that how other characters will treat you will depend on your race. If you're unsure, pick %^CYAN%^human%^WHITE%^ or %^CYAN%^elf%^WHITE%^ for your first character.
 
 %^BOLD%^To overview all available races look at %^ORANGE%^<help races>%^WHITE%^.
 %^BOLD%^To see what embodies race of your choice see %^ORANGE%^<help %^ULINE%^RACENAME%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<help human>%^RESET%^.");
