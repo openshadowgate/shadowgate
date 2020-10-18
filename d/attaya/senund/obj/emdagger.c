@@ -62,11 +62,8 @@ int extra_hit(object targ)
           "%^GREEN%^The emerald dagger wielded by "+ETOQCN+
           " seems to %^BOLD%^glow%^RESET%^%^GREEN%^ as it stabs into you"+
           "!%^RESET%^");
-        ETO->set_property("magic",1);
-        targ->do_damage("torso",random(10));
-        ETO->set_property("magic",-1);
         }
-    return 1;
+    return random(10)+1;
 }
 int extra_wield()
 {
