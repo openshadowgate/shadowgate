@@ -3,6 +3,7 @@
 //couldn't carry the weight.  I'd assume in that case it should have still landed on the floor.  *Styx*  4/11/02
 // found the encumbrance problem being with the code on the old scimitar, updating this to inherit from /d/common while I'm checking things out though *Styx* 8/20/06
 // adjusted the light addition from +5 to +3 - too overpowering. N, 11/06.
+//Updated stuns to have saving throws, also removed do_damage and replaced with divine damage -Hades 10/18/20
 
 #include <std.h>
 #include <daemons.h>
@@ -60,12 +61,11 @@ int extra_hit(object ob){
              "exposed area before "+ob->QCN+" recovers!",({ETO,ob}));
 	    tell_object(ob,"%^BOLD%^%^WHITE%^"+ETOQCN+" slices into "+
              "you and before you can react drives a knee into your ribs!");
-	    TO->set_property("magic",1);
-          ob->do_damage("torso",random(5)+3);
+      if(!"/daemon/saving_throw_d.c"->fort_save(ob,-20))
 	    ob->set_paralyzed(random(5)+2,"You take a couple of deep breaths "+
              "to get your balance again!");
-	    TO->remove_property("magic");
-	    return dam;
+
+	    return dam+random(5)+3;
 	    break;
 	case 2:
 	    tell_object(ETO,"%^BOLD%^%^WHITE%^The silver blade "+
@@ -79,9 +79,11 @@ int extra_hit(object ob){
              "%^FLASH%^flashes%^RESET%^%^BOLD%^ brilliantly as "+
              "it swings towards you and you can see nothing but "+
              "spots before your eyes!");
+      if(!"/daemon/saving_throw_d.c"->reflex_save(target,-20)){
 	    if(!random(3)) ob->set_blind(1);
 	    else ob->set_paralyzed(4+random(4),"%^BOLD%^You're "+
              "rubbing the spots out of your eyes.");
+      }
           return dam;
 	    break;
 	case 3..6:
@@ -107,21 +109,20 @@ int extra_hit(object ob){
              ""+ETO->QP+" scimitar across your body and continues "+
              "to spin with the movement to bring the pommel "+
              "smashing back into you!");
+      if(!"/daemon/saving_throw_d.c"->fort_save(ob,-20))
 	    ob->set_paralyzed(15,"%^BOLD%^%^CYAN%^You stagger dazed "+
              "from the blow!");
 	    return 10;
 	    break;
 	case 9..26:
-          tell_object(ETO,"%^BOLD%^%^WHITE%^The blade flashes "+
+       tell_object(ETO,"%^BOLD%^%^WHITE%^The blade flashes "+
              "like moonlight through clouds, and "+ob->QCN+"'s "+
              "body tries to tear itself apart under the light!");
 	    tell_room(EETO,"%^BOLD%^%^CYAN%^"+ETOQCN+"'s scimitar "+
              "flashes as it hits "+ob->QCN+"!",({ETO,ob}));
-          tell_object(ob,"%^BOLD%^%^WHITE%^"+ETOQCN+"'s scimitar "+
+       tell_object(ob,"%^BOLD%^%^WHITE%^"+ETOQCN+"'s scimitar "+
              "flashes as it bites into your flesh!");
-	    TO->set_property("magic",1);
-	    ob->do_damage("torso",random(15)+5);
-	    TO->remove_property("magic");
+	    ob->cause_typed_damage(ob,0,roll_dice(1,15)+5,"divine");
 	    return dam;
 	    break;
 	case 27:
@@ -132,9 +133,7 @@ int extra_hit(object ob){
              "flashes as it hits "+ob->QCN+"!",({ETO,ob}));
           tell_object(ob,"%^BOLD%^%^WHITE%^"+ETOQCN+"'s scimitar "+
              "flashes as it bites into your flesh!");
-	    TO->set_property("magic",1);
-          ob->do_damage("torso",random(25)+10);
-          TO->remove_property("magic");
+      ob->cause_typed_damage(ob,0,roll_dice(1,25)+4,"divine");
 	    return random(10)+3;
 	    break;
 	default:
@@ -184,7 +183,7 @@ int extra_wield(){
      tell_room(EETO,"%^BOLD%^%^RED%^The scimitar flashes as "+
         ""+ETOQCN+" tries to wield it, burning "+ETO->QO+"!",ETO);
      ETO->force_me("drop scimitar of the silver moon");
-     ETO->do_damage("torso",random(50)+25);
+     ETO->cause_typed_damage(ETO,0,roll_dice(1,50)+25,"divine");
      return 0;
    }
    tell_object(ETO,"The scimitar glows brightly as you wield it.");
