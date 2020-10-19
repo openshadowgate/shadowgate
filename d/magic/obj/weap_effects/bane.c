@@ -53,6 +53,9 @@ int bane_func(object ob)
     if(!enemy)
         return 0;
     
+    if(ob != player->query_wielded()[0])
+        return 0;
+    
     valid = 0;
     ids = enemy->query_id();
     
@@ -115,7 +118,7 @@ void remove_prop(object ob)
     ob->remove_property("temp_hit_bonus");
     
     player = environment(ob);
-    player && tell_object(player, "Your magical bane fades from your weapon.%^RESET%^");
+    player && tell_object(player, "%^BOLD%^Your magical bane fades from your weapon.%^RESET%^");
 }   
     
     
