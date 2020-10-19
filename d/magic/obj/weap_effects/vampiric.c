@@ -65,7 +65,7 @@ void remove_prop(object ob)
     ob->remove_property_value("added short", ({ "%^MAGENTA%^ {vampiric}%^RESET%^" }) );
     ob->remove_property("temp_hit_bonus");
     
-    player = environment(this_object());
+    player = environment(ob);
     player && tell_object(player, "%^GREEN%^The vampiric energies fade from your weapon.%^RESET%^");
 }
     
