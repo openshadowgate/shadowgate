@@ -70,10 +70,12 @@ void execute_feat()
     mapping info;
     int timer;
     
+    ::execute_feat();
+    
+    valid_choices = keys(VALID_ENEMY);
+    
     if(!caster)
         return;
-    
-    weapon = caster->query_wielded()[0];
     
     if((int)caster->query_property("using instant feat"))
     {
@@ -95,12 +97,15 @@ void execute_feat()
         return;
     }
     
-    if(member_array(arg, valid_choices) < 0)
+    if(!arg || member_array(arg, valid_choices) < 0)
     {
         write("Valid bane choices are : " + implode(valid_choices, ", "));
         dest_effect();
         return;
     }
+    
+    if(sizeof(caster->query_wielded()))
+        weapon = caster->query_wielded()[0];
     
     if(!weapon)
     {
@@ -124,6 +129,7 @@ void execute_feat()
     weapon->set_property("temp_hit_bonus", info);
     weapon->set_property("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     caster->set_property("using instant feat",1);
+    caster->set_property("bane type", arg);
     timer = 1 + this_player()->query_guild_level("inquisitor");
     call_out("dest_effect", timer);
 }

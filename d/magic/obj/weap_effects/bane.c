@@ -13,22 +13,10 @@
 
 inherit DAEMON;
 
-string bane_type;
-
-int set_bane_type(string str)
-{
-    if(!str)
-        return 0;
-    
-    bane_type = str;
-    
-    return 1;
-}
-
 int bane_func(object ob)
 {
     object room, player, spell, enemy;
-    string *ids, pname, ename;
+    string *ids, pname, ename, bane_type;
     int valid, damage, glvl;
     
     if(!ob)
@@ -36,6 +24,7 @@ int bane_func(object ob)
     
     player = environment(ob);
     player && room = environment(player);
+    bane_type = player->query_property("bane type");
     
     if(!player || !room)
         return 0;
@@ -116,6 +105,7 @@ void remove_prop(object ob)
     
     ob->remove_property_value("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     ob->remove_property("temp_hit_bonus");
+    ob->remove_property("bane type");
     
     player = environment(ob);
     player && tell_object(player, "%^BOLD%^Your magical bane fades from your weapon.%^RESET%^");
