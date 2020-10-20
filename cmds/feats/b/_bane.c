@@ -87,15 +87,6 @@ void execute_feat()
         return;
     }
     
-    glvl = caster->query_guild_level("inquisitor");
-    timer = (5 + (glvl / 10)) * 8;
-    
-    if(caster->query_property("bane reset") > time() - timer)
-    {
-        write("You can't use your bane yet.");
-        return;
-    }
-    
     if(!arg || member_array(arg, valid_choices) < 0)
     {
         write("Valid bane choices are : " + implode(valid_choices, ", "));
@@ -129,8 +120,10 @@ void execute_feat()
     weapon->set_property("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     caster->set_property("using instant feat",1);
     caster->set_property("bane type", arg);
-    caster->set_property("bane reset", time());
-    //delay_subject_msg(caster, timer, "%^BOLD%^You can infuse your weapon with a bane once again.%^RESET%^");
+    
+    glvl = caster->query_guild_level("inquisitor");
+    timer = (5 + (glvl / 10)) * 8;
+    
     call_out("dest_effect", timer);
 }
 
