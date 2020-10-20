@@ -232,7 +232,7 @@ if(!objectp(ob) || !objectp(vic)) return 1;
         "%^BOLD%^%^BLACK%^A ribbon wraps around your foot, yanking you to the ground."
      ,ob);
 	vic->set_tripped(1,"%^RED%^You try to get up, but the world is spinning.");
-    vic->do_damage("head",random(8)+1);
+    vic->cause_typed_damage(vic,0,roll_dice(1,10),"bludgeoning");
     uses = uses - random(3)+1;
 
     return 1;
@@ -252,7 +252,7 @@ if(!objectp(ob) || !objectp(vic)) return 1;
 		+vic->query_name()+"."
     ,environment(ob),(({environment(TO), ob})));
 
-    return 1;
+    return dam;
 
 
   case 4:
@@ -281,7 +281,7 @@ if(!objectp(ob) || !objectp(vic)) return 1;
         ETO->add_follower(rib);
   }
     uses = uses - 3;
-    return 1;
+    return dam;
 
     }
   }
@@ -302,7 +302,7 @@ int extra_wield() { // no ugly wielders
 	else{
 	   say("%^RED%^"+ETOQCN+" holds the spear but jerks violently"+
 	     " as ribbons lash out from it, wrapping tightly.");
-	   write("Your whole body seems to seize and you feel ugly.");
+	   write("%^BOLD%^%^RED%^Your whole body seems to seize and you feel ugly.");
 	   TP->set_paralyzed(10,"Your head is pounding");
        TP->set_bound(50,"Ribbons bind you fast.");
 	   return 0;

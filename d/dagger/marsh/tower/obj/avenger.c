@@ -1,6 +1,7 @@
 // fixed wear/unwear to use ETO, added obvious short-last change was 7/01  *Styx* 8/2003
 // Updated to new desc, abilities, lore, etc by Circe 9/5/04
 //Added Auppenser and Sune to the list - Cythera 8/05
+//removed some redefines that are already in inherit -Hades 10/18/20
 #include <std.h>
 #include <daemons.h>
 inherit "/d/common/obj/weapon/longsword.c";
@@ -81,11 +82,7 @@ Original description -
      %^WHITE%^To summon a mount, proud and tall
 CIRCE
     );
-    set_weight(15);
-    set_size(2);
-    set_value(10000);
-    set_wc(1,8);
-    set_large_wc(1,12);
+     set_value(10000);
     set_type("slashing");
     if((int)TO->query_property("enchantment") < 5){
        remove_property("enchantment");

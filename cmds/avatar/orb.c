@@ -52,7 +52,7 @@ string strip_colors(string sh)
     string output = "", *list = ({});
    	string *words = ({});
     int i;
-	if(!sh) 
+	if(!sh)
 	{
 		return output;
 	}
@@ -175,8 +175,6 @@ int control(string str) {
   if( (int)monster->npc_mon(1, player) == 1 ) {
      write("You now have control of "+ monster->query_cap_name() +".");
 	 monster->set_property("knock unconscious",1);
-     log_file("orb", capitalize(TPQN)+" used an orb to control "
-	+base_name(monster)+" on "+ctime(time())+".\n");
      in_use = 1;
      return 1;
    }
@@ -184,7 +182,7 @@ int control(string str) {
 }
 
 
-int command_mon(string str) 
+int command_mon(string str)
 {
     if(!stringp(str) || str == "" || str == " ") { return 0; }
   if( !in_use )  {
@@ -196,15 +194,13 @@ int command_mon(string str)
      in_use = 0;
      return 1;
    }
-  
+
   if (member_array(str, ({"cast","chant","moncast","monchant"}),1)!= -1)
     if (str != "mon")
       return chantcast(str);
   if(strsrch(str, "kill") != -1)
-     log_file("orb", capitalize(TPQN)+" commanded "+base_name(monster)+
-	" to "+str+" on "+ctime(time())+".\n");
   switch(str)  {
-   case "l"    : 
+   case "l"    :
    case "look" : mon_look();
      break;
    case "n"    : monster->force_NPC("north");
@@ -340,7 +336,7 @@ void remove() {
 
 int save_me(string file_name) { return 1;}
 
-varargs int chantcast(string str, int flag) 
+varargs int chantcast(string str, int flag)
 {
   object targ, *armor, mymon;
   int i,j, max;
@@ -368,32 +364,32 @@ varargs int chantcast(string str, int flag)
       }
   }
 
-  if (!objectp(monster) && !flag) 
+  if (!objectp(monster) && !flag)
   {
     write("You must <control> a monster before this command will function.");
     return 1;
   }
   if(!flag) max = 1;
   if(flag) max = sizeof(GUARD_ARRAY);
-  
+
   for(i = 0;i < max;i++)
   {
       if(!flag) mymon = monster;
       else mymon = GUARD_ARRAY[i];
       if(!objectp(mymon)) continue;
-     
-      if(!pointerp(mymon->query_spells()) || 
+
+      if(!pointerp(mymon->query_spells()) ||
       undefinedp(mymon->query_spells()))
       {
           write(mymon->QCN+" has no magical powers.");
           continue;
       }
-      if(member_array(str2, mymon->query_spells()) == -1) 
+      if(member_array(str2, mymon->query_spells()) == -1)
       {
           write(mymon->QCN+" can only cast the following spells \n"+
           identify(mymon->query_spells()));
           continue;
-      }  
+      }
       if(!tar) tar = 0;
       new(tmp)->use_spell(mymon,tar,100);
       continue;
@@ -405,27 +401,27 @@ varargs int chantcast(string str, int flag)
 
   seteuid(getuid());
 
-  
+
   /*if (query_verb() == "cast" || query_verb() == "moncast") {
-    if(((flag = (int)monster->query_guild_level("mage")) > 0) 
+    if(((flag = (int)monster->query_guild_level("mage")) > 0)
        || ((flag = (int)monster->query_guild_level("bard")) > 0) )
       type = "wizard";
-    else if(((flag = (int)monster->query_guild_level("cleric")) > 0) 
-            || ((flag = (int)monster->query_guild_level("druid")) > 0) 
-            || ((flag = (int)monster->query_guild_level("paladin")) > 0) 
+    else if(((flag = (int)monster->query_guild_level("cleric")) > 0)
+            || ((flag = (int)monster->query_guild_level("druid")) > 0)
+            || ((flag = (int)monster->query_guild_level("paladin")) > 0)
             || ((flag = (int)monster->query_guild_level("antipaladin")) > 0)
             || ((flag = (int)monster->query_guild_level("ranger")) > 0) )
       type = "priest";
   } else {
-    if(((flag = (int)monster->query_guild_level("cleric")) > 0) 
+    if(((flag = (int)monster->query_guild_level("cleric")) > 0)
        || ((flag = (int)monster->query_guild_level("druid")) > 0))
       type = "priest";
-    else if(((flag = (int)monster->query_guild_level("mage")) > 0) 
+    else if(((flag = (int)monster->query_guild_level("mage")) > 0)
 	    || ((flag = (int)monster->query_guild_level("bard")) > 0) )
       type = "wizard";
   }*/
 
- 
+
 
  /* tmp = "Caster level = "+ flag + "\n";
   tmp += "Mage level = "+(int)monster->query_guild_level("mage") + "\n";
@@ -434,7 +430,7 @@ varargs int chantcast(string str, int flag)
   tmp += "Druid level = "+(int)monster->query_guild_level("druid") + "\n";
   write(tmp);*/
 
-  
+
   /***********************************************************************
   // We're not checking armour.
   if(type == "wizard")
@@ -458,9 +454,9 @@ varargs int chantcast(string str, int flag)
         write("You cannot cast while wearing all that armor!");
         return 1;
     }
-  }  
+  }
   ************************************************************************/
-  
+
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
@@ -533,11 +529,11 @@ void add_data(string str,object obj,string type)
 			new_guard_func("");
 			return;
 		}
-		if(member_array(str,(string *)"/adm/daemon/race_d.c"->query_races()) == -1) 
-		{ 
+		if(member_array(str,(string *)"/adm/daemon/race_d.c"->query_races()) == -1)
+		{
 			tell_object(obj,"Invalid race.");
 			new_guard_func("");
-			return; 
+			return;
 		}
 		tell_object(obj,"Race set to "+str+"");
 		GUARD_RACE = str;
@@ -596,26 +592,26 @@ void add_data(string str,object obj,string type)
 				}
 				switch(arr2[0])
 				{
-				case "str": 
-					GUARD_STR = to_int(arr2[1]); 
+				case "str":
+					GUARD_STR = to_int(arr2[1]);
 					break;
-				case "dex": 
-					GUARD_DEX = to_int(arr2[1]); 
+				case "dex":
+					GUARD_DEX = to_int(arr2[1]);
 					break;
-				case "con": 
-					GUARD_CON = to_int(arr2[1]); 
+				case "con":
+					GUARD_CON = to_int(arr2[1]);
 					break;
-				case "int": 
-					GUARD_INT = to_int(arr2[1]); 
+				case "int":
+					GUARD_INT = to_int(arr2[1]);
 					break;
-				case "wis": 
-					GUARD_WIS = to_int(arr2[1]); 
+				case "wis":
+					GUARD_WIS = to_int(arr2[1]);
 					break;
-				case "cha": 
-					GUARD_CHA = to_int(arr2[1]); 
+				case "cha":
+					GUARD_CHA = to_int(arr2[1]);
 					break;
 				}
-			}				
+			}
 		}
 
 		tell_object(obj,"Strength set to: "+GUARD_STR+"\n");
@@ -1134,7 +1130,7 @@ int new_guard_func(string str)
 			hold += ({ arrange_string("  "+arrange_string("%^RESET%^%^MAGENTA%^"+(i+1)+"%^RESET%^>%^CYAN%^",4)+""+capitalize(guard_stages[i])+"%^RESET%^",35) });
 		}
 	}
-	
+
 	for(i=0;i<sizeof(hold);i+=2)
 	{
         if((sizeof(hold)-1) == i)
@@ -1146,7 +1142,7 @@ int new_guard_func(string str)
 		    display += ({ hold[i]+hold[i+1] });
         }
 	}
-		
+
 	tell_object(obj,"  This is the new and improved guard maker.  The editor will guide you through the "
 		"creation of the guard.  Please select one of the following:");
 	tell_object(obj,""+implode(display,"\n")+"");
@@ -1162,7 +1158,7 @@ void make_guard(object ob,object player)
 
     if(GUARD_NAME) { ob->set_monster_name(GUARD_NAME); }
     else ob->set_monster_name("generic guard");
-    
+
     if(pointerp(GUARD_IDS)) { ob->set_id(GUARD_IDS); }
     else ob->set_id(({"guard","generic guard"}));
 
@@ -1237,9 +1233,9 @@ void make_guard(object ob,object player)
     if(GUARD_SPELL_CHANCE) { ob->set_monster_spell_chance(GUARD_SPELL_CHANCE); }
 
     if(GUARD_PLATINUM) { ob->set_monster_money("platinum",GUARD_PLATINUM); }
-    
+
     if(GUARD_GOLD) { ob->set_monster_money("gold",GUARD_GOLD); }
-    
+
     if(GUARD_ELECTRUM) { ob->set_monster_money("electrum",GUARD_ELECTRUM); }
 
     if(GUARD_SILVER) { ob->set_monster_money("silver",GUARD_SILVER); }
@@ -1272,10 +1268,10 @@ void make_guard(object ob,object player)
         }
     }
 
-    GUARD_ARRAY += ({ ob });    
+    GUARD_ARRAY += ({ ob });
     	ob->move(environment(player));
-    	if((int)ob->is_weaponless() && !sizeof(ob->query_attack_limbs()) && 
-	!sizeof(ob->query_wielding_limbs())) 
+    	if((int)ob->is_weaponless() && !sizeof(ob->query_attack_limbs()) &&
+	!sizeof(ob->query_wielding_limbs()))
 	{
 		tell_object(player, "%^BOLD%^%^RED%^This monster has no attack "+
 		"limbs - do you want the code to try to add some, y/n?%^RESET%^");
@@ -1287,13 +1283,13 @@ void make_guard(object ob,object player)
 
 int make_guard_attack_limbs(string str, object ob, object who)
 {
-	string *ValidAttLimbs = ({"left hand", "right hand", "left claw", "right claw", 
+	string *ValidAttLimbs = ({"left hand", "right hand", "left claw", "right claw",
 					  "left foreclaw", "right foreclaw"});
-	string *MyActualLimbs, *MyAttLimbs = ({}); 
+	string *MyActualLimbs, *MyAttLimbs = ({});
 	int x;
 	if(!objectp(who)) return 0;
 	if(!objectp(ob)) return 0;
-	if(lower_case(str[0..0]) == "y") 
+	if(lower_case(str[0..0]) == "y")
 	{
 		MyActualLimbs = ob->query_limbs();
 		for(x = 0;x < sizeof(MyActualLimbs);x++)
@@ -1305,7 +1301,7 @@ int make_guard_attack_limbs(string str, object ob, object who)
 			if(sizeof(MyAttLimbs) == 2) break;
 			continue;
 		}
-		if(!sizeof(MyAttLimbs)) 
+		if(!sizeof(MyAttLimbs))
 		{
 			tell_object(who, "No attack limbs added, found no suitable limbs.");
 			return 1;
@@ -1332,7 +1328,7 @@ int guard_func(string str)
     string *info;
     int i;
 
-    if(!str) 
+    if(!str)
     {
         ob = new(GUARD_FILE);
         make_guard(ob,TP);
@@ -1357,7 +1353,7 @@ int guard_func(string str)
             "guard, or inventory save styx, then it will save the inventory of that "
             "object, and the next guard you make will come standard with all of that "
             "object's inventory.  Note that properties of items are not saved, nor "
-            "are items inside of containers(sacks, bags, etc).");			
+            "are items inside of containers(sacks, bags, etc).");
         write("\t"+arrange_string("guard set name",30)+"guard set race");
         write("\t"+arrange_string("guard set gender", 30)+"guard set size");
         write("\t"+arrange_string("guard set short",30)+"guard set long");
@@ -1405,7 +1401,7 @@ int guard_func(string str)
 			for(i=0;i<sizeof(GUARD_ARRAY);i++)
 			{
 				if(!objectp(GUARD_ARRAY[i])) { continue; }
-				GUARD_ARRAY[i]->set_hp(GUARD_ARRAY[i]->query_max_hp());				
+				GUARD_ARRAY[i]->set_hp(GUARD_ARRAY[i]->query_max_hp());
 			}
 		}
 	}
@@ -1413,12 +1409,12 @@ int guard_func(string str)
 
     switch(info[0])
     {
-		
+
     case "set":
 
         if(sizeof(info) < 2) { return 1; }
         switch(info[1])
-        {             
+        {
         case "name":
             write("Enter the guard's name.");
             input_to("set_guard_stuff","name");
@@ -1588,7 +1584,7 @@ int guard_func(string str)
 	case "new":
 
 		new_guard_func("");
-		return 1;    
+		return 1;
 
     case "remove":
 
@@ -1599,7 +1595,7 @@ int guard_func(string str)
             write("Enter the class you wish to remove");
             input_to("remove_guard_class");
             break;
-		case "id": 
+		case "id":
 			write("Enter the id you wish to remove");
 			input_to("remove_guard_id");
 			break;
@@ -1820,7 +1816,7 @@ void add_guard_stuff(string str,string what)
             if(!pointerp(TARGETED_PLAYERS)) { TARGETED_PLAYERS = ({}); }
 			TARGETED_PLAYERS += ({ tmp[i] });
 			write("Adding player "+tmp[i]+" to the auto attack list.");
-		}	
+		}
 		break;
     default:
         break;
@@ -1831,7 +1827,7 @@ void add_guard_stuff(string str,string what)
 void set_guard_spells(string str)
 {
     if(!stringp(str)) { return; }
-    
+
     switch(str)
     {
     case "**":
@@ -1879,11 +1875,11 @@ int display()
     if(intp(GUARD_EXP))             { write("Current guard exp set to:              "+GUARD_EXP+""); }
     if(intp(GUARD_SIZE))            { write("Current guard size set to:             "+GUARD_SIZE+""); }
     if(intp(GUARD_LEVEL))           { write("Current guard level set to:            "+GUARD_LEVEL+""); }
-    if(intp(GUARD_SWARM))           
-    { 
+    if(intp(GUARD_SWARM))
+    {
         if(GUARD_SWARM == 1)        { write("Current guard swarm set to:            %^CYAN%^ON%^RESET%^"); }
         else                        { write("Current guard swarm set to:            %^RED%^OFF%^RESET%^"); }
-    }    
+    }
     if(intp(GUARD_AC))              { write("Current guard ac set to:               "+GUARD_AC+""); }
     if(intp(GUARD_ATTACKS))         { write("Current guard attacks set to:          "+GUARD_ATTACKS+""); }
     if(intp(GUARD_DAMAGE))          { write("Current guard unarmed damage set to:   "+GUARD_DAMAGE+""); }
@@ -1901,7 +1897,7 @@ int display()
     if(intp(GUARD_ELECTRUM))        { write("Electrum: random "+GUARD_ELECTRUM+""); }
     if(intp(GUARD_SILVER))          { write("Silver:   random "+GUARD_SILVER+""); }
     if(intp(GUARD_COPPER))          { write("Copper:   random "+GUARD_COPPER+""); }
-    if(intp(GUARD_DROP))            { write("Will this guard drop its inventory? "+yes_no+""); }	
+    if(intp(GUARD_DROP))            { write("Will this guard drop its inventory? "+yes_no+""); }
     if(pointerp(GUARD_IDS))         { write("Current guard ids: "+implode(GUARD_IDS," ")+""); }
     if(stringp(GUARD_SHORT))        { write("Current guard short description: "+GUARD_SHORT+""); }
     if(stringp(GUARD_LONG))         { write("Current guard long description:\n"+GUARD_LONG+""); }
@@ -1910,7 +1906,7 @@ int display()
     if(pointerp(DONT_TARGET))       { write("Players currently allied with the guards: \n\t"+implode(DONT_TARGET,"\n\t\t        ")+""); }
     if(pointerp(GUARD_SPELLS))      { write("Current guard spells: \n\t"+implode(GUARD_SPELLS,"\n\t")+""); }
     if(SMART)                       { write("%^RED%^Smart combat is enabled.%^RESET%^"); }
-    else                            { write("Smart combat is disabled."); } 
+    else                            { write("Smart combat is disabled."); }
     if(pointerp(GUARD_INVENTORY))   { write("Guard inventory: \n\t"+implode(GUARD_INVENTORY,"\n\t\t      ")+""); }
     write("\n-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
     return 1;
@@ -1993,16 +1989,16 @@ void save_guard()
                      "guard_con"            : GUARD_CON,
                      "guard_int"            : GUARD_INT,
                      "guard_wis"            : GUARD_WIS,
-                     "guard_cha"            : GUARD_CHA, 
-                     "guard_drop"           : GUARD_DROP, 
+                     "guard_cha"            : GUARD_CHA,
+                     "guard_drop"           : GUARD_DROP,
                      "guard_targeting"      : GUARD_TARGETING, ]);
-                        
+
 
     save_arrays = ([ "guard_ids"            : GUARD_IDS,
                      "guard_class"          : GUARD_CLASS,
                      "guard_spells"         : GUARD_SPELLS,
-                     "guard_inventory"      : GUARD_INVENTORY, 
-					 "guard_targets"		: TARGETED_PLAYERS, 
+                     "guard_inventory"      : GUARD_INVENTORY,
+					 "guard_targets"		: TARGETED_PLAYERS,
                      "dont_target"          : DONT_TARGET, ]);
 
     key = new(KEY_FILE);
@@ -2035,7 +2031,7 @@ int turn_key(string str)
     if(which) { key = present("key "+which+"",TP); }
     else { key = present("key",TP); }
     if(!objectp(key)) { tell_object(TP,"No key found."); return 1; }
-    
+
     if(base_name(key) != KEY_FILE) { tell_object(TP,"Wrong type of key.\n"); return 1; }
 
     GUARD_NAME          = key->get_guard_data("guard_name");
@@ -2117,10 +2113,6 @@ int inventory_save(string str)
     else { targ = present(""+what+"",ETP); }
     if(!objectp(targ)) { tell_object(TP,"Invalid target.\n"); return 1; }
 
-    if(targ->is_player() && !avatarp(targ))
-    {
-        log_file("orb",""+ctime(time())+" "+capitalize((string)TP->query_true_name())+" copied "+targ->QCN+"'s inventory.");
-    }
 
     stuff = all_inventory(targ);
     if(!sizeof(stuff)) { tell_object(TP,"Target has no inventory.\n"); return 1; }
@@ -2159,10 +2151,10 @@ void save_key(string keyTarg)
 	string fname, KEYDIR;
 	if(!objectp(TO)) return;
 	if(!objectp(TP)) return;
-	if(!stringp(keyTarg)) keyTarg = "all";	
+	if(!stringp(keyTarg)) keyTarg = "all";
 	else
 	{
-		if(!objectp(myKey = present(keyTarg, TP))) 
+		if(!objectp(myKey = present(keyTarg, TP)))
 		{
 			tell_object(TP, "You do not seem to have a "+keyTarg+ " key.");
 			return 1;
@@ -2190,23 +2182,23 @@ void save_key(string keyTarg)
 			continue;
 		}
 	}
-	if(!sizeof(myKeys)) 
+	if(!sizeof(myKeys))
 	{
 		tell_object(TP, "You apparently have no guard keys...");
 		return 1;
-	}	
+	}
 	KEYDIR = "/d/avatars/"+TPQN+"/keys/";
 	seteuid(UID_ROOT);
-	if(!sizeof(get_dir(KEYDIR))) 
+	if(!sizeof(get_dir(KEYDIR)))
 	{
 		mkdir(KEYDIR);
-	}	
+	}
 	for(x = 0;x < sizeof(myKeys);x++)
 	{
 		fname = (string)myKeys[x]->get_guard_data("guard_name");
 		tell_object(TP, "Saving key with guard name "+fname+".");
 		fname = strip_colors(fname);
-		fname = implode(explode(fname, " "), "_");		
+		fname = implode(explode(fname, " "), "_");
 		myKeys[x]->key_save(KEYDIR + fname);
 		continue;
 	}
@@ -2223,13 +2215,13 @@ void restore_key(string arg)
 	object myKey;
 	if(!objectp(TO)) return;
 	if(!objectp(TP)) return;
-	if(!stringp(arg)) 
+	if(!stringp(arg))
 	{
 		tell_object(TP, "You need to specify a key to restore.");
 		return 1;
 	}
 
-	if(sscanf(arg, "%s key %s", avTarg, keyName) != 2) 
+	if(sscanf(arg, "%s key %s", avTarg, keyName) != 2)
 	{
 		avTarg = TPQN;
 		keyName = arg;
@@ -2242,7 +2234,7 @@ void restore_key(string arg)
 	}
 	files = get_dir("/d/avatars/"+avTarg+"/keys/*.o");
 	if(keyName == "-list" || keyName == "- list")
-	{		
+	{
 		tmps = hformat + "\n";
 		tmps += "%^BOLD%^%^CYAN%^\t\t"+capitalize(avTarg)+"'s Keys%^RESET%^\n";
 		tmps += hformat +"\n";
@@ -2258,7 +2250,7 @@ void restore_key(string arg)
 	}
 	else
 	{
-		if(keyName != "all") 
+		if(keyName != "all")
 		{
 			fname = implode(explode(keyName, " "), "_") + ".o";
 			if(member_array(fname, files) == -1)
@@ -2269,7 +2261,7 @@ void restore_key(string arg)
 			}
 			else
 			{
-				seteuid(UID_ROOT);	
+				seteuid(UID_ROOT);
 				myKey = new("/cmds/avatar/guard_key");
 				fname = explode(fname, ".o")[0];
 				myKey->restore_key("/d/avatars/"+avTarg+"/keys/"+fname);
@@ -2284,7 +2276,7 @@ void restore_key(string arg)
 			tell_object(TP, "Attemping to restore all of "+avTarg+"'s keys!");
 			for(x = 0;x < sizeof(files);x++)
 			{
-				seteuid(UID_ROOT);	
+				seteuid(UID_ROOT);
 				myKey = new("/cmds/avatar/guard_key");
 				fname = explode(files[x], ".o")[0];
 				myKey->restore_key("/d/avatars/"+avTarg+"/keys/"+fname);
@@ -2298,5 +2290,3 @@ void restore_key(string arg)
 	}
 	return 1;
 }
-	
-

@@ -26,7 +26,8 @@ void create() {
    " boots to better connect his followers to the "+
    "earth.  Not many used them as they were extremely"+
    " heavy and wearing stone encrusted boots tended"+
-   " to make one look silly to their peers.");
+   " to make one look silly to their peers.  "+
+   "You could <stomp> to use them.");
    set_property("lore difficulty",20);
    set_value(0);
    set_type("clothing");
@@ -104,8 +105,9 @@ int stomp_fun(string str) {
        for(i=0;i<sizeof(pplz);i++) {
          if(pplz[i] != ETO && !pplz[i]->query_true_invis() &&
 objectp(pplz[i])) {
-           tell_object(pplz[i],"%^ORANGE%^The force of the tremor shakes you from your "+
-"feet!\n");
+           tell_object(pplz[i],"%^ORANGE%^The force of the tremor shakes you from"+
+           " your feet!\n");
+           if(!"/daemon/saving_throw_d.c"->reflex_save(pplz[i],-10))
            pplz[i]->set_tripped(1,"You are still trying to stand!\n");
          }
        }
