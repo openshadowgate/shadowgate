@@ -76,21 +76,18 @@ void execute_feat()
     if(caster->query_property("using instant feat"))
     {
         write("You are already in the middle of using a feat!");
-        dest_effect();
         return;
     }
     
     if(caster->query_current_attacker())
     {
         write("You cannot infuse your weapon with a bane during combat.");
-        dest_effect();
         return;
     }
     
     if(!arg || member_array(arg, valid_choices) < 0)
     {
         write("Valid bane choices are : " + implode(valid_choices, ", "));
-        dest_effect();
         return;
     }
     
@@ -100,27 +97,21 @@ void execute_feat()
     if(!weapon)
     {
         write("You must be wielding a weapon in your main hand to use Bane.");
-        dest_effect();
         return;
     }
     
-    if(weapon->query_property("tmp_hit_bonus"))
+    if(caster->query_property("bane weapon"))
     {
         write("Your weapon is already magically enhanced.");
-        dest_effect();
         return;
     }
     
     write("%^BOLD%^You infuse your weapon with the might of your god, giving it extra potency against %^CYAN%^" + arg + "%^RESET%^BOLD%^ enemies.");
-    info = ([  ]);
-    info["file"] = "/d/magic/obj/weap_effects/bane";
-    info["func name"] = "bane_func";
-    info["spell"] = this_object();
-    weapon->set_property("temp_hit_bonus", info);
+
     weapon->set_property("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     caster->set_property("using instant feat",1);
-    weapon->remove_property("bane type");
-    weapon->set_property("bane type", arg);
+    caster->remove_property("bane weapon");
+    caster->set_property("bane weapon", ({ weapon, arg }));
     
     glvl = caster->query_guild_level("inquisitor");
     timer = (5 + (glvl / 3)) * 8;
@@ -142,8 +133,9 @@ void execute_attack()
 
 void dest_effect()
 {
-    if(objectp(weapon))
-        load_object("/d/magic/obj/weap_effects/bane")->remove_prop(weapon);
+    caster && tell_object(caster, "%^BOLD%^You sense your magical bane fading.%^RESET%^");
+    caster && caster->remove_property("bane weapon");
+    weapon && weapon->remove_property_value("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     ::dest_effect();
     remove_feat(this_object());
     return;
