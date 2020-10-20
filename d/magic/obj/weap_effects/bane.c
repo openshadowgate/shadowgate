@@ -59,8 +59,8 @@ int bane_func(object ob)
         return 0;
     
     glvl = player->query_guild_level("inquisitor");
-    //Damage scales from 1dWC + 2 to 4dWC + 2
-    damage = ob->query_wc() * (1 + glvl / 10) + 2;
+    //Damage scales from 1dWC + 2 to 6dWC + 2
+    damage = (ob->query_wc() + 2) * (1 + glvl / 10);
 
     if(random(10 - glvl / 10))
         return 0;

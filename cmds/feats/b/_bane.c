@@ -123,7 +123,7 @@ void execute_feat()
     weapon->set_property("bane type", arg);
     
     glvl = caster->query_guild_level("inquisitor");
-    timer = (5 + (glvl / 10)) * 8;
+    timer = (5 + (glvl / 3)) * 8;
     
     call_out("dest_effect", timer);
 }
