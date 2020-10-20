@@ -119,7 +119,8 @@ void execute_feat()
     weapon->set_property("temp_hit_bonus", info);
     weapon->set_property("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     caster->set_property("using instant feat",1);
-    caster->set_property("bane type", arg);
+    weapon->remove_property("bane type");
+    weapon->set_property("bane type", arg);
     
     glvl = caster->query_guild_level("inquisitor");
     timer = (5 + (glvl / 10)) * 8;

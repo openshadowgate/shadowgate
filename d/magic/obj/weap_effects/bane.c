@@ -24,10 +24,11 @@ int bane_func(object ob)
     
     player = environment(ob);
     player && room = environment(player);
-    bane_type = player->query_property("bane type");
     
     if(!player || !room)
         return 0;
+
+    bane_type = ob->query_property("bane type");
     
     if(!bane_type)
         return 0;
@@ -96,6 +97,7 @@ int bane_func(object ob)
     }
     
     enemy->cause_typed_damage(enemy, enemy->return_target_limb(), damage, "divine");
+    return 1;
         
 }
 
