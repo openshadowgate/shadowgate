@@ -34,6 +34,7 @@ void create()
     set_spell(1);
     set_weight(1);
     set_value(10);
+    set_read("You should <use scroll> with spell arguments.");
 }
 
 void init()
@@ -48,6 +49,11 @@ void init()
             add_action("transcribe", "transcribe");
         }
         add_action("use_scroll", "use");
+        if (!level) {
+            set_clevel(TP->query_level() > CHARACTER_LEVEL_CAP ? CHARACTER_LEVEL_CAP : TP->query_level());
+        }
+        set("lore", "%^BOLD%^%^ORANGE%^This is a scroll of " + query_spell_name() + " of " + query_clevel() + "'th circle.");
+        set("lore difficulty", TO->query_spell_level() + 15);
     }
 }
 
@@ -94,44 +100,56 @@ void jolt(object targ)
     tell_room(environment(targ), "%^YELLOW%^The scroll explodes from the release of the magical energy, shocking " + targ->QCN + "!", targ);
     tell_object(targ, "%^YELLOW%^The scroll explodes from the release of the magic energy and you get a serious jolt!");
 
-    if (newbiep(targ)) {
-        targ->do_damage("torso", roll_dice(1, 6));
-    }else {
-        targ->do_damage("torso", roll_dice(targ->query_level(), 6));
+    if (!random(10)) {
+        if (newbiep(targ) || !level) {
+            targ->do_damage("torso", roll_dice(1, 6));
+        } else {
+            targ->do_damage("torso", roll_dice(level ? level : targ->query_level(), 6));
+        }
     }
 
-    TP->set_paralyzed(roll_dice(1, 3) * 8, "%^BOLD%^You're shaking with pain.%^RESET%^");
+    TP->set_paralyzed(roll_dice(1, 3) * 2, "%^BOLD%^You're shaking with pain.%^RESET%^");
 }
 
-void set_spell(int mylevel)
+varargs void set_spell(int mylevel, myclevel)
 {
     mylevel = mylevel - 2 + roll_dice(1, 4);
-    set_av_spell(mylevel);
+
+    myclevel ? set_av_spell(mylevel, myclevel) : set_av_spell(mylevel);
 }
 
-void set_av_spell(int mylevel)
+varargs void set_av_spell(int mylevel, int myclevel)
 {
-    string* whichspells, str;
-    int num, i;
-    mapping allspells = ([]);
+    string * rclass;
+    string * rspell;
+
     mylevel = mylevel > 9?9:mylevel;
     mylevel = mylevel < 1?1:mylevel;
-    for (i = 0; i < sizeof(SCRL_CLASSES); i++) {
-        allspells += MAGIC_D->query_index(SCRL_CLASSES[i]);
-    }
-    whichspells = keys(filter_mapping(
-                           allspells,
-                           (: $2 == $3:), mylevel));
-    num = random(sizeof(whichspells));
-    str = whichspells[num];
-    if (!str) {
+
+    rclass = SCRL_CLASSES[random(sizeof(SCRL_CLASSES))];
+    rspell = MAGIC_D->query_random_spell(rclass, rspell);
+    if (!rspell) {
         set_spell_name("magic missile");
-    }else {
-        set_spell_name(str);
+    } else {
+        set_spell_name(rspell);
+    }
+
+    if (!myclevel && objectp(ETO)) {
+        if (ETO->is_living() && ETO->query_level()) {
+            set_clevel(ETO->query_level() + roll_dice(1, 8));
+        }
+    } else {
+        set_clevel(myclevel);
     }
 }
 
+// compatibility function
 set_spell_level(int l)
+{
+    level = l;
+}
+
+set_clevel(int l)
 {
     level = l;
 }
@@ -285,15 +303,14 @@ int use_scroll(string str)
         }
 
         // Can you activate the magic within?
-        if (roll == 1 || (TP->query_skill("spellcraft") + roll + roll_bonus < lowest_spell_level) && roll != 20) {
+        if (roll == 1 || (TP->query_skill("spellcraft") + roll + roll_bonus < lowest_spell_level + level ? level : 0) && roll != 20) {
             // It is supposed to be 24 hour lock, but whatever
             jolt(TP);
             return 1;
         }
     }
 
-    // TODO: return scroll caster levels, rewrite UMD checks
-    lev = TP->query_skill("spellcraft") * 3 / 4 + 2;
+    lev = TO->query_clevel();
 
     if (FEATS_D->usable_feat(TP, "enhance scroll")) {
         lev = TP->query_guild_level(TP->query("base_class"));
@@ -333,6 +350,11 @@ int query_spell_level()
 }
 
 int query_scroll_level()
+{
+    return level;
+}
+
+int query_clevel()
 {
     return level;
 }
