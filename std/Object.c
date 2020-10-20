@@ -543,7 +543,6 @@ mixed query_property(string prop)
         return num;
     }
 
-
     if (prop == "fast healing") {
         if (TO->is_vampire()) {
             if (!TO->is_in_sunlight()) {

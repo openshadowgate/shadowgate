@@ -6,7 +6,7 @@ inherit OBJECT;
 string spell, * readpassed;
 mapping readfailed;
 
-#define SCRL_CLASSES ({ "bard", "cleric", "druid", "inquisitor", "mage", "paladin", "ranger" })
+#define SCRL_CLASSES ({ "bard", "cleric", "druid", "inquisitor", "mage", "paladin", "ranger", "magus" })
 
 /**
  * @file

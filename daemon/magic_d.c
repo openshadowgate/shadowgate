@@ -21,7 +21,7 @@
 #include <master_limits.h>
 
 #define CQCN spell->query_caster()->query_cap_name()
-#define VCASTERS ({"bard", "mage", "psion", "cleric", "ranger", "sorcerer", "paladin", "druid", "psywarrior"})
+#define VCASTERS ({"bard", "mage", "psion", "cleric", "ranger", "sorcerer", "paladin", "druid", "psywarrior", "magus"})
 inherit DAEMON;
 
 #define MAGIC_D_SAVE "/daemon/save/magic_d"
@@ -497,7 +497,7 @@ mixed query_random_spell(string myclass, int lev)
         if (lev > 4) {
             lev = 4;
         }
-    case "bard": case "psywarrior": case "inquisitor":
+    case "bard": case "psywarrior": case "inquisitor": case "magus":
         if (lev > 6) {
             lev = 6;
         }

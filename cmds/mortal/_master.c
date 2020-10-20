@@ -14,6 +14,7 @@ mapping CLASSMAP=(["mage":MAGEKNOWN,
                    "psywarrior":PWKNOWN,
                    "inquisitor":INQKNOWN,
                    "bard":INQKNOWN,
+                   "magus" : MAGUSKNOWN,
                    "warlock":WARLOCKKNOWN]);
 
 mapping query_mastering_classes()

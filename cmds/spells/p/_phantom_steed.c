@@ -15,7 +15,7 @@ object ob;
 void create(){
     ::create();
     set_spell_name("phantom steed");
-    set_spell_level(([ "bard" : 3, "mage" : 3,"oracle" : 3, "psion" : 2 ]));
+    set_spell_level(([ "bard" : 3, "mage" : 3, "oracle" : 3, "psion" : 2, "magus" : 3 ]));
     set_mystery("whimsy");
     set_discipline("nomad");
     set_spell_sphere("conjuration_summoning");

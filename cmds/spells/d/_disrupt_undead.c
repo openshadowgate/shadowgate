@@ -6,7 +6,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("disrupt undead");
-    set_spell_level(([ "mage" : 1,"inquisitor":1 ]));
+    set_spell_level(([ "mage" : 1,"inquisitor":1, "magus" : 1 ]));
     set_spell_sphere("necromancy");
     set_affixed_spell_level(5);
     set_damage_desc("positive energy on undead");

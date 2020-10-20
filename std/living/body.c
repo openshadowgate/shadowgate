@@ -273,6 +273,43 @@ int query_shieldMiss()
     }
 }
 
+int query_spellTurning() {
+    int turnperc, reflection, flag;
+    turnperc = 0;
+
+    if (FEATS_D->usable_feat(TO, "spell reflection")) {
+        turnperc = (int)TO->query_skill("spellcraft") / 4;
+        flag = 1;
+    }
+
+    if (FEATS_D->usable_feat(TO, "reflection") && TO->is_wearing_type("shield")) {
+        reflection = (int)TO->query_skill("athletics") / 4;
+        turnperc = turnperc < reflection ? reflection : turnperc;
+    }
+    //This was on spell.c, i think it's for monsters that have the feat but no skill.
+    if ((flag || reflection) && !turnperc) {
+        turnperc = 15;
+    }
+
+    if ((int)TO->query_property("spellturning")) {
+        reflection = (int)TO->query_property("spellturning");
+        turnperc = turnperc < reflection ? reflection : turnperc;
+    }
+
+    if (turnperc < 0) {
+        turnperc = 0;
+    }
+
+    if (!turnperc) {
+        return 0;
+    }
+
+    if (turnperc > 85) {
+        turnperc = 85;
+    }
+    return turnperc;
+}
+
 void add_hp(int x)
 {
     int num;
