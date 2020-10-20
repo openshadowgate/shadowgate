@@ -32,7 +32,8 @@ void create()
     feat_desc("This feat allows the inquisitor to infuse the weapon in their main " +
 "hand with divine power that targets a specific type of enemy. This infusion has a " +
 "chance to do divine damage, based on weapon dice. The chance of this bane hitting and the " +
-"damage done increases with your Inquisitor levels. " +
+"damage done increases with your Inquisitor levels. Additionally, your weapon gets an additional +2 " +
+"attack and +2 damage bonuses against the selected type. " +
 "You can select from the following bane enemy types: \n\n" + "%^CYAN%^BOLD%^" + implode(valid_choices, "\n"));
     set_target_required(0);
 }
@@ -106,7 +107,7 @@ void execute_feat()
         return;
     }
     
-    write("%^BOLD%^You infuse your weapon with the might of your god, giving it extra potency against %^CYAN%^" + arg + "%^RESET%^BOLD%^ enemies.");
+    write("%^BOLD%^You infuse your weapon with the might of your god, giving it extra potency against %^CYAN%^" + arg + "%^RESET%^.");
 
     weapon->set_property("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     caster->set_property("using instant feat",1);
@@ -133,7 +134,7 @@ void execute_attack()
 
 void dest_effect()
 {
-    caster && tell_object(caster, "%^BOLD%^You sense your magical bane fading.%^RESET%^");
+    caster && tell_object(caster, "%^BOLD%^You sense the magical bane fading from your weapon.%^RESET%^");
     caster && caster->remove_property("bane weapon");
     weapon && weapon->remove_property_value("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     ::dest_effect();

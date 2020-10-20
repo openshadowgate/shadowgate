@@ -560,7 +560,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
     {
         int glvl, bane_dmg, valid;
         string *ids = target->query_id();
-        string *bane = attacker->query_property("bane weapon");
+        mixed *bane = attacker->query_property("bane weapon");
         
         if(sizeof(bane) == 2 && weapon == bane[0])
         {
