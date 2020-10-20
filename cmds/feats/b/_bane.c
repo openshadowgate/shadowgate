@@ -12,8 +12,6 @@
 #include <dirs.h>
 #include <favored_types.h>
 
-#define COOLDOWN 500
-
 inherit FEAT;
 
 object weapon, feat;
@@ -60,7 +58,7 @@ int cmd_bane(string str)
         return 0;
 
     feat = new(base_name(this_object()));
-    feat->setup_feat(this_player());
+    feat->setup_feat(this_player(), str);
     return 1;
 }
 
@@ -68,16 +66,14 @@ void execute_feat()
 {
     string type;
     mapping info;
-    int timer;
+    int timer, glvl;
     
     ::execute_feat();
-    
-    valid_choices = keys(VALID_ENEMY);
     
     if(!caster)
         return;
     
-    if((int)caster->query_property("using instant feat"))
+    if(caster->query_property("using instant feat"))
     {
         write("You are already in the middle of using a feat!");
         dest_effect();
@@ -91,9 +87,12 @@ void execute_feat()
         return;
     }
     
-    if(this_player()->query_property("bane reset") > time() - COOLDOWN)
+    glvl = caster->query_guild_level("inquisitor");
+    timer = (5 + (glvl / 10)) * 8;
+    
+    if(caster->query_property("bane reset") > time() - timer)
     {
-        write("You may only change your favored enemy once every three weeks.");
+        write("You can't use your bane yet.");
         return;
     }
     
@@ -121,7 +120,7 @@ void execute_feat()
         return;
     }
     
-    write("%^BOLD%^You fuse your weapon with the might of your god, giving it extra potency against %^CYAN%^" + arg + "%^RESET%^BOLD%^ enemies.");
+    write("%^BOLD%^You infuse your weapon with the might of your god, giving it extra potency against %^CYAN%^" + arg + "%^RESET%^BOLD%^ enemies.");
     info = ([  ]);
     info["file"] = "/d/magic/obj/weap_effects/bane";
     info["func name"] = "bane_func";
@@ -130,7 +129,8 @@ void execute_feat()
     weapon->set_property("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     caster->set_property("using instant feat",1);
     caster->set_property("bane type", arg);
-    timer = 1 + this_player()->query_guild_level("inquisitor");
+    caster->set_property("bane reset", time());
+    //delay_subject_msg(caster, timer, "%^BOLD%^You can infuse your weapon with a bane once again.%^RESET%^");
     call_out("dest_effect", timer);
 }
 
@@ -141,8 +141,6 @@ void execute_attack()
         dest_effect();
         return;
     }   
-    delay_subject_msg(caster, COOLDOWN, "%^BOLD%^You can infuse your weapon with a bane once again.%^RESET%^");
-    caster->set_property("bane reset", time());
     caster->remove_property("using instant feat");
     ::execute_attack();
 }
