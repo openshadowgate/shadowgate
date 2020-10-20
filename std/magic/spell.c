@@ -521,11 +521,8 @@ void startCasting()
     if (TP->usable_feat("elusive spellcraft")) {
         roll += roll_dice(2, 8);
     }
-    if (function_exists("query_cast_string", TO)) {
-        displaystring = (string)TO->query_cast_string() + "\n";
-    } else {
-        displaystring = "%^BOLD%^%^WHITE%^" + TPQCN + " starts casting a spell.%^RESET%^\n";
-    }
+
+    displaystring = TO->query_cast_string() + "\n";
 
     if (displaystring == "display\n") {
         displayflag = 1;
@@ -1653,6 +1650,7 @@ string* query_domains()
 
 string query_cast_string()
 {
+    return "%^BOLD%^%^WHITE%^" + TPQCN + " starts casting a spell.%^RESET%^";
 }
 
 int query_silent_casting()
@@ -1839,7 +1837,7 @@ void check_fizzle(object ob)
     }
 
     if (place->query_property("antimagic field")) {
-        if (clevel - 10 + random(20) < place->query_property("antimagic field")) {
+        if (place->query_property("antimagic field") > roll_dice(1, 6) + clevel) {
             tell_object(caster, "%^CYAN%^Your " + whatsit + " fails to gather power in the anitmagic field.");
             tell_room(place, "%^CYAN%^" + caster->QCN + "'s " + whatsit + " fizzles harmlessly.");
             caster->removeAdminBlock();
@@ -2071,11 +2069,13 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
     }
 
     if (objectp(place)) {
-        if (place->query_property("antimagic field") - 10 + random(20) > clevel) {
-            tell_object(caster, "%^B_BLUE%^%^BOLD%^Your spell dissipates around " + victim->QCN + ".");
-            tell_room(place, "%^B_BLUE%^%^BOLD%^" + caster->QCN + "'s spell dissipates around " + victim->QCN + ".", caster);
-            TO->remove();
-            return 1;
+        if (place->query_property("antimagic field")) {
+            if (place->query_property("antimagic field") > clevel + roll_dice(1, 6)) {
+                tell_object(caster, "%^B_BLUE%^%^BOLD%^Your spell dissipates around " + victim->QCN + ".");
+                tell_room(place, "%^B_BLUE%^%^BOLD%^" + caster->QCN + "'s spell dissipates around " + victim->QCN + ".", caster);
+                TO->remove();
+                return 1;
+            }
         }
     }
 
@@ -2136,6 +2136,11 @@ void define_clevel()
         if (spell_type == caster->query("base_class")) {
             clevel = caster->query_base_character_level();
         }
+    }
+    
+    if (FEATS_D->usable_feat(caster, "tricky spells")) {
+        if(spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "alteration")
+            clevel = caster->query_base_character_level();
     }
 
     if (spell_type == "monk") {
@@ -2198,11 +2203,6 @@ void define_clevel()
         if (caster->query_property("raged")) {
             clevel += 3;
         }
-    }
-
-    if (FEATS_D->usable_feat(caster, "tricky spells")) {
-        if(spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "alteration")
-            clevel = caster->query_base_character_level();
     }
 
     if ((int)caster->query_property("empowered")) {

@@ -1661,7 +1661,7 @@ int query_attack_bonus()
         ret += 2;
     }
     if (FEATS_D->usable_feat(TO, "weapon training")) {
-        ret += TO->query_prestige_level("fighter") / 10 + 1;
+        ret += TO->query_prestige_level("fighter") / 8 + 1;
     }
 
     if (FEATS_D->usable_feat(TO, "weapon focus")) {
@@ -1679,7 +1679,7 @@ int query_attack_bonus()
     attacker = TO->query_current_attacker();
 
     //Added by Tlaloc to handle favored enemies for Rangers
-    if (FEATS_D->usable_feat(TO, "favored enemy") && attacker)
+    if (FEATS_D->usable_feat(TO, "favored enemy"))
     {
 
         if(TO->is_favored_enemy(attacker))
@@ -1691,26 +1691,6 @@ int query_attack_bonus()
             FEATS_D->usable_feat(TO, "third favored enemy") && ret += 2;
         }
     }
-    
-    //Inquisitor Bane
-    if(this_object()->query_property("bane weapon") && sizeof(weap) && attacker)
-    {
-        int valid;
-        string *ids = attacker->query_id();
-        mixed *bane = this_object()->query_property("bane weapon");
-        
-        if(sizeof(bane) == 2 && weap[0] == bane[0])
-        {
-            foreach(string id in ids)
-            {
-                if(USER_D->is_valid_enemy(id, bane[1]))
-                valid = 1;
-            }
-        }
-        
-        if(valid)
-            ret += 2;
-    }  
 
     if (FEATS_D->usable_feat(TO, "true strikes") &&
         sizeof(TO->query_wielded()) == 1 &&
@@ -1768,27 +1748,6 @@ int query_damage_bonus()
 
     if(FEATS_D->usable_feat(TO, "slay the undead") && attacker && attacker->is_undead())
         ret += 2;
-    
-    weap = this_object()->query_wielded();
-    
-    if(this_object()->query_property("bane weapon") && sizeof(weap) && attacker)
-    {
-        int valid;
-        string *ids = attacker->query_id();
-        mixed *bane = this_object()->query_property("bane weapon");
-        
-        if(sizeof(bane) == 2 && weap[0] == bane[0])
-        {
-            foreach(string id in ids)
-            {
-                if(USER_D->is_valid_enemy(id, bane[1]))
-                valid = 1;
-            }
-        }
-        
-        if(valid)
-            ret += 2;
-    }
 
     return ret;
 }

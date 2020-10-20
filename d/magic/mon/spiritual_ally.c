@@ -64,7 +64,7 @@ void setup_servant(object caster, int clevel)
         int ench;
 
         normalizedDeity = replace_string(deity," ","_");
-        if(deity == "godless")
+        if(deity == "godless" || deity == "callamir")
             normalizedDeity = "kismet";
 
         wpn=new("/d/magic/obj/weapons/"+normalizedDeity+"");

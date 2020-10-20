@@ -382,32 +382,36 @@ string *generate_race()
 
     choices = get_dir("/std/races/*.c");
     choices = map(choices, (:replace_string($1, ".c", ""):));
-    choices = filter_array(choices, (:member_array($1, ("/std/class/" + $2)->restricted_races()) == -1:), char_sheet["class"]);
     choices = filter_array(choices, (:!(("/std/races/" + $1)->is_gender_locked(char_sheet["gender"])):));
     choices = filter_array(choices, (:sizeof(({1, 2, 3, 4, 5, 6, 7, 8, 9}) - (("/std/races/" + $1)->restricted_alignments(char_sheet["subrace"]) + ("/std/class/" + $2)->restricted_alignments())) :), char_sheet["class"]);
-
-    {
-        string* newchoices, choice;
-        string* subraces, subrace;
-
-        newchoices = choices;
-
-        foreach(choice in newchoices)
-        {
-            if (sizeof(subraces = ("/std/races/" + choice)->query_subraces(ETO))) {
-                foreach(subrace in subraces)
-                {
-                    choices = filter_array(choices, (: member_array($2, ("/std/races/" + $1)->restricted_classes($3)) == -1 :), choice, subrace);
-                }
-            } else {
-                choices = filter_array(choices, (: member_array($2, ("/std/races/" + $1)->restricted_classes()) == -1 :), choice);
-            }
-        }
-    }
 
     if (!unrestricted_player(ETO)) {
         choices = filter_array(choices, (:!(("/std/races/") + $1)->is_restricted():));
     }
+
+    {
+        string choice;
+        string subrace, *subraces;
+        string restricted_classes;
+
+        foreach(choice in choices) {
+            subraces = ("/std/races/" + choice)->query_subraces(ETO);
+            subraces = subraces ? subraces : ({""});
+            foreach(subrace in subraces) {
+                restricted_classes = ("/std/races/" + choice)->restricted_classes(subrace);
+
+                if (member_array(char_sheet["class"], restricted_classes) != -1) {
+                    subraces -= ({subrace});
+                }
+
+                if (!sizeof(subraces)) {
+                    choices -= ({choice});
+                }
+
+            }
+        }
+    }
+
 
     return choices;
 }
@@ -415,7 +419,7 @@ string *generate_race()
 hint_race()
 {
     write("
-%^BOLD%^Your race determines your make-up. Your race determines your make-up. Some races are predisposed to being stronger, sturdier, more intelligent, more sensitive to light, etc. than other races. In addition, different races are physically different from others, having different limbs and other types of body parts. Some races are better suited to be magical classes, others prefer physical approach. Whatever choice you make, remember that how other characters will treat you will depend on your race. If you're unsure, pick %^CYAN%^human%^WHITE%^ or %^CYAN%^elf%^WHITE%^ for your first character.
+%^BOLD%^Some races are predisposed to being stronger, sturdier, more intelligent, more sensitive to light, etc. than other races. In addition, different races are physically different from others, having different limbs and other types of body parts. Some races are better suited to be magical classes, others prefer physical approach. Whatever choice you make, remember that how other characters will treat you will depend on your race. If you're unsure, pick %^CYAN%^human%^WHITE%^ or %^CYAN%^elf%^WHITE%^ for your first character.
 
 %^BOLD%^To overview all available races look at %^ORANGE%^<help races>%^WHITE%^.
 %^BOLD%^To see what embodies race of your choice see %^ORANGE%^<help %^ULINE%^RACENAME%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<help human>%^RESET%^.");
@@ -533,13 +537,14 @@ display_stats()
             (char_sheet["template"] == "undead" || char_sheet["template"] == "vampire")) {
             write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^BLACK%^--");
         } else {
-            write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]) + (tadjust ? ((tadjust > 0 ? "%^BOLD%^%^CYAN%^ +" : "%^BOLD%^%^RED%^ ") + tadjust) : ""));
+            write("%^BOLD%^%^GREEN%^ " + arrange_string(capitalize(i) + " ", 12) + "%^BOLD%^%^BLACK%^ : %^WHITE%^" + sprintf("%2s", "" + char_sheet["stats"][i]) + (tadjust ? ((tadjust > 0 ? "%^BOLD%^%^CYAN%^ +" : "%^BOLD%^%^RED%^ -") + abs(tadjust)) + " %^ORANGE%^" + (char_sheet["stats"][i] + tadjust) : ""));
         }
 
         sum += char_sheet["stats"][i];
     }
 
     write("\n");
+    write("%^BOLD%^%^GREEN%^Your stats are displayed with %^WHITE%^no modifications%^GREEN%^, %^CYAN%^adjust%^RED%^ments%^GREEN%^ and %^ORANGE%^final%^GREEN%^ values.");
     if (92 - sum == 0) {
         write("%^BOLD%^%^GREEN%^You may proceed with %^ORANGE%^<done>%^GREEN%^ to the next step.");
     } else {
@@ -555,7 +560,7 @@ synopsis_stats()
 {
 
     write("
-%^BOLD%^Your stats define your physical and mental abilities. To see in-dept explanation of each stat, type in %^ORANGE%^<help %^ULINE%^STAT%^%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<help charisma>%^WHITE%^.
+%^BOLD%^Your stats define your physical and mental abilities, they are adjusted by your race, subrace, age and template. To see in-dept explanation of each stat, type in %^ORANGE%^<help %^ULINE%^STAT%^%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<help charisma>%^WHITE%^.
 
 %^BOLD%^%^Your race and age has some effect on your stats. After your selections, values right of the stats will be added or subtracted from choices you have made.
 
@@ -1272,6 +1277,11 @@ int age_to_adjust(int age, string stat, string race)
 
     int *age_brackets = racefile->age_brackets();
 
+    if (char_sheet["template"] == "undead" ||
+        char_sheet["template"] == "vampire") {
+        return 0;
+    }
+
     if(age > age_brackets[3])
     {
         base = ({ -3, -3, -3, 3, 3, 3});
@@ -1309,5 +1319,5 @@ int age_to_adjust(int age, string stat, string race)
 
 int unrestricted_player(object plr)
 {
-    return OB_ACCOUNT->is_experienced(ETO->query_true_name()) || OB_ACCOUNT->is_high_mortal(ETO->query_true_name()) || avatarp(ETO);
+    return OB_ACCOUNT->is_experienced(ETO->query_true_name()) || OB_ACCOUNT->is_high_mortal(ETO->query_true_name()) || avatarp(ETO) || ETO->query("unrestricted_creation");
 }

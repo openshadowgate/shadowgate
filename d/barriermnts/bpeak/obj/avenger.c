@@ -1,3 +1,5 @@
+//updated to have a saving throw for stun and change untyped damage to typed damage 
+//-hades 10/18/20 
 #include <std.h>
 
 inherit "/d/common/obj/weapon/double_bladed_sword.c";
@@ -44,15 +46,17 @@ int hit_func(object target) {
   	      tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETO->query_cap_name()+" lunges forward and smashes the center of the shaft straight into "+target->query_cap_name()+"!%^RESET%^",({target,ETO}));
             tell_object(ETO,"%^BOLD%^%^BLACK%^You lunge forward and smash the center of the shaft straight into  "+target->query_cap_name()+"!%^RESET%^",target);
             tell_object(target,"%^BOLD%^%^BLACK%^"+ETO->query_cap_name()+" lunges towards you and smashes the center of the shaft right into you!%^RESET%^");
-             target->set_paralyzed(20,"Damn damn damn that hurt for a blunt blow!");
-            target->do_damage("torso",random(5)+1);
+            if(!"/daemon/saving_throw_d.c"->fort_save(target,-20))
+            target->set_paralyzed(20,"Damn damn damn that hurt for a blunt blow!");
+            target->cause_typed_damage(target,0,roll_dice(1,6),"bludgeoning");
          break ;
            case 1..3:
            ETO->execute_attack();
 tell_room(environment(ETO),"%^RESET%^%^RED%^"+ETO->query_cap_name()+" stabs one blade of "+ETO->query_possessive()+" into "+target->query_cap_name()+" with primal savagery before flipping the sword to strike again with the other!%^RESET%^",({target,ETO}));
        tell_object(ETO,"%^RESET%^%^RED%^You stab one blade of your weapon into "+target->query_cap_name()+" primal savagery before expertly flipping the sword to strike again with the other!%^RESET%^");
 tell_object(target,"%^RESET%^%^RED%^"+ETO->query_cap_name()+" stabs one blade of "+ETO->query_possessive()+" into "+ETO->query_possessive()+" with primal savagery before expertly flipping the sword to strike again with the other!%^RESET%^");
-            target->do_damage("torso",random(10)+1);
+            target->cause_typed_damage(target,0,roll_dice(1,10),"slashing");
       }
    }
+   return 1;
 }

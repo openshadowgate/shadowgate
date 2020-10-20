@@ -57,7 +57,7 @@ int extra_hit(object victim) {
       tell_room(environment(ETO),"%^RED%^"+ETO->query_cap_name()+" drives "+
          ""+ETO->query_possessive()+" spear visciously into "+victim->query_cap_name()+", gutting "+
          ""+victim->query_objective()+"!", ({ETO,victim}));
-      victim->do_damage("torso",random(5)+2);
+      victim->cause_typed_damage(victim,0,roll_dice(1,10)+1,"piercing");
       return 0;
    }
    else return 0;
