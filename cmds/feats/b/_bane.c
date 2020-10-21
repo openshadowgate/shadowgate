@@ -107,7 +107,8 @@ void execute_feat()
         return;
     }
     
-    write("%^BOLD%^You infuse your weapon with the might of your god, giving it extra potency against %^CYAN%^" + arg + "%^RESET%^.");
+    write("%^BOLD%^You infuse your weapon with extra potency against %^CYAN%^" + arg + "%^RESET%^.");
+    tell_room(environment(caster),"%^BOLD%^"+caster->QCN+" infuses their weapon with magical potency.", ({ caster }));
 
     weapon->set_property("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     caster->set_property("using instant feat",1);
