@@ -1777,36 +1777,6 @@ int sizeof_monsters()
     return sizeof(monsters4);
 }
 
-int check_aura(object target, string type)
-{
-    object *allies;
-    string aura;
-    int prot;
-    
-    if(!target || !type)
-        return 0;
-    
-    allies = PARTY_D->query_party_members(target->query_party());
-    
-    if(!sizeof(allies))
-        allies = ({ target });
-    
-    //Immunity
-    if(FEATS_D->usable_feat(target, "aura of " + type))
-        return 1;
-    
-    allies -= ({ target });
-    
-    //+4
-    foreach(object ally in allies)
-    {
-        if(FEATS_D->usable_feat(ally, "aura of " + type))
-            return 2;
-    }
-    
-    return 0;
-}
-
 int immunity_check(object obj, string type)
 {
     string myrace, mysubrace;
@@ -1835,12 +1805,6 @@ int immunity_check(object obj, string type)
         }
         return 0;
     }
-    
-    case "charm":
-    {
-        if(aura_check(obj, "resolve") == 1)
-            return 1;
-    }
 
     case "fear":
     {
@@ -1850,9 +1814,6 @@ int immunity_check(object obj, string type)
         if (FEATS_D->usable_feat(obj, "bravery")) {
             return 1;
         }
-        if(aura_check(obj, "courage") == 1)
-            return 1;
-        
         switch (myrace) {
         case "halfling":
             return 1;
