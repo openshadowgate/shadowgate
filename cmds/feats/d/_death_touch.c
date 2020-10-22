@@ -137,7 +137,7 @@ void execute_attack()
         dest_effect();
         return;
     }
-    if (target->query_property("negative energy affinity")) {
+    if (target->query_property("negative energy affinity") || FEATS_D->usable_feat(target, "undead graft")) {
         tell_room(place, "%^BLUE%^" + target->QCN + " is healed completely!%^RESET%^", caster);
         target->add_hp(target->query_max_hp());
         return;

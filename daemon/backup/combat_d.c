@@ -464,13 +464,20 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 
 void check_extra_abilities(object attacker, object target, object weapon, int crit_hit)
 {
+    string ename, pname;
     int effect_chance;
+    object room;
+    
     if (!objectp(attacker)) {
         return;
     }
     if (!objectp(weapon)) {
         return;
     }
+    
+    pname = capitalize(attacker->query_name());
+    ename = capitalize(target->query_name());
+    room = environment(attacker);
 
     if (crit_hit) {
         if (
@@ -547,6 +554,64 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             POISON_D->ApplyPoison(target, attacker->query_property("natural poison"), attacker, "injury");
         }
     }
+    
+    //Inquisitor Bane Stuff
+    if(attacker->query_guild_level("inquisitor") && weapon)
+    {
+        int glvl, bane_dmg, valid;
+        string *ids = target->query_id();
+        mixed *bane = attacker->query_property("bane weapon");
+        
+        if(sizeof(bane) == 2 && weapon == bane[0])
+        {
+            foreach(string id in ids)
+            {
+                if(USER_D->is_valid_enemy(id, bane[1]))
+                valid = 1;
+            }
+        }
+
+        glvl = attacker->query_guild_level("inquisitor");  
+
+        //Chance from 10% to 33% at max        
+        if(valid && !random(10 - glvl / 7))
+        {
+            //Damage scales from 1dWC + 2 to 6dWC + 2
+            bane_dmg = (weapon->query_wc() + 2) * (1 + glvl / 10);
+
+            switch(attacker->query_true_align())
+            {
+                case 1:
+                case 4:
+                case 7:
+                tell_object(attacker, "%^BOLD%^WHITE%^Your weapon s%^CYAN%^i%^RESET%^%^CYAN%^n%^BOLD%^%^WHITE%^gs with r%^CYAN%^i%^RESET%^%^CYAN%^g%^BOLD%^%^WHITE%^ht%^CYAN%^e%^RESET%^%^CYAN%^o%^BOLD%^%^WHITE%^us g%^CYAN%^l%^RESET%^%^CYAN%^o%^BOLD%^%^WHITE%^ry as it cuts into your foe!%^RESET%^");
+                tell_object(target, "%^BOLD%^WHITE%^" + pname + "'s weapon s%^CYAN%^i%^RESET%^%^CYAN%^n%^BOLD%^%^WHITE%^gs with r%^CYAN%^i%^RESET%^%^CYAN%^g%^BOLD%^%^WHITE%^ht%^CYAN%^e%^RESET%^%^CYAN%^o%^BOLD%^%^WHITE%^us g%^CYAN%^l%^RESET%^%^CYAN%^o%^BOLD%^%^WHITE%^ry as it cuts into you!%^RESET%^");
+                tell_room(room, "%^BOLD%^WHITE%^" + pname + "'s weapon s%^CYAN%^i%^RESET%^%^CYAN%^n%^BOLD%^%^WHITE%^gs with r%^CYAN%^i%^RESET%^%^CYAN%^g%^BOLD%^%^WHITE%^ht%^CYAN%^e%^RESET%^%^CYAN%^o%^BOLD%^%^WHITE%^us g%^CYAN%^l%^RESET%^%^CYAN%^o%^BOLD%^%^WHITE%^ry as it cuts into " + ename + "!%^RESET%^", ({ attacker, target }));
+                break;
+                case 2:
+                case 5:
+                case 8:
+                tell_object(attacker, "%^BOLD%^CYAN%^Your weapon c%^WHITE%^u%^RESET%^%^CYAN%^t%^BOLD%^s into your foe with t%^WHITE%^i%^RESET%^%^CYAN%^r%^BOLD%^el%^WHITE%^e%^RESET%^%^CYAN%^s%^BOLD%^s v%^WHITE%^i%^RESET%^%^CYAN%^g%^BOLD%^or!%^RESET%^");
+                tell_object(target, "%^BOLD%^CYAN%^" + pname + "'s weapon c%^WHITE%^u%^RESET%^%^CYAN%^t%^BOLD%^s into you with t%^WHITE%^i%^RESET%^%^CYAN%^r%^BOLD%^el%^WHITE%^e%^RESET%^%^CYAN%^s%^BOLD%^s v%^WHITE%^i%^RESET%^%^CYAN%^g%^BOLD%^or!%^RESET%^");
+                tell_room(room, "%^CYAN%^BOLD%^" + pname + "'s weapon c%^WHITE%^u%^RESET%^%^CYAN%^t%^BOLD%^s into " + ename + " with t%^WHITE%^i%^RESET%^%^CYAN%^r%^BOLD%^el%^WHITE%^e%^RESET%^%^CYAN%^s%^BOLD%^s v%^WHITE%^i%^RESET%^%^CYAN%^g%^BOLD%^or!%^RESET%^", ({ attacker, target }));
+                break;
+                case 3:
+                case 6:
+                case 9:
+                tell_object(attacker, "%^BOLD%^BLACK%^Your weapon t%^RESET%^%^CYAN%^e%^BOLD%^a%^WHITE%^r%^BLACK%^s into your foe with r%^RESET%^%^CYAN%^e%^BOLD%^l%^WHITE%^e%^BLACK%^nt%^RESET%^%^CYAN%^l%^BOLD%^e%^WHITE%^s%^BLACK%^s h%^RESET%^%^CYAN%^u%^BOLD%^n%^WHITE%^g%^BLACK%^er!%^RESET%^");
+                tell_object(target, "%^BLACK%^BOLD%^" + pname + "'s weapon t%^RESET%^%^CYAN%^e%^BOLD%^a%^WHITE%^r%^BLACK%^s into you with r%^RESET%^%^CYAN%^e%^BOLD%^l%^WHITE%^e%^BLACK%^nt%^RESET%^%^CYAN%^l%^BOLD%^e%^WHITE%^s%^BLACK%^s h%^RESET%^%^CYAN%^u%^BOLD%^n%^WHITE%^g%^BLACK%^er!%^RESET%^");
+                tell_room(room, "%^BOLD%^BLACK%^" + pname + "'s weapon t%^RESET%^%^CYAN%^e%^BOLD%^a%^WHITE%^r%^BLACK%^s into " + ename + " with r%^RESET%^%^CYAN%^e%^BOLD%^l%^WHITE%^e%^BLACK%^nt%^RESET%^%^CYAN%^l%^BOLD%^e%^WHITE%^s%^BLACK%^s h%^RESET%^%^CYAN%^u%^BOLD%^n%^WHITE%^g%^BLACK%^er!%^RESET%^", ({ attacker, target }));
+                break;
+                default:
+                return 0;
+                break;
+            }
+        
+            target->cause_typed_damage(target, target->return_target_limb(), bane_dmg, "divine");
+        }
+    }
+    //END BANE SECTION       
+                          
     //monster feat stuff
     if (attacker->query("combat_feats_enabled") &&
         !attacker->query_property("using instant feat")) {
