@@ -39,9 +39,9 @@ void create()
         set_open("grate",0);
         set_string("grate","open","You lift the grate.");
         set_string("grate","knock","bang");
-        set_door("black portal","/d/shadow/room/city/adventure","adventure",0);
-        set_open("black portal",0);
-        set_string("black portal","open","You tap open the mysterious portal.");
+      //  set_door("black portal","/d/shadow/room/city/adventure","adventure",0);
+      //  set_open("black portal",0); this room not there anymore
+      //  set_string("black portal","open","You tap open the mysterious portal.");
         //set_invis_door("black portal",1);
 }
 
