@@ -20,8 +20,8 @@ void create()
     set_helpful_spell(1);
     evil_spell(1);
     set_components(([
-      "mage" : ([ "large diamond" : 13]),
-    ]));
+                        "mage" : ([ "large diamond" : 13]),
+                        ]));
 }
 
 string query_cast_string()
@@ -36,7 +36,7 @@ int preSpell()
         tell_object(caster, "%^BOLD%^%^BLACK%^Cover what sun? You're inside!%^RESET%^");
         return 0;
     }
-    if((int)caster->query_property("eclipse_caused") + DELAY > time())
+    if(caster->query_time_delay("eclipse_caused", DELAY))
     {
         tell_object(caster, "%^BOLD%^%^BLACK%^Tyrannos won't move yet.%^RESET%^");
         return 0;
@@ -62,7 +62,7 @@ void spell_effect(int prof)
     /*     mark = new("/d/common/assassins/obj/mark"); */
     /*     mark->move(caster); */
     /* } */
-    caster->set_property("eclipse_caused",time());
+    caster->set_time_delay("eclipse_caused");
     tell_object(caster,"%^BOLD%^%^WHITE%^As power rushes through you and you throw your hands toward the sky, you notice Tyrannos starts to move to stand in front of the sun!%^RESET%^");
     tell_room(place,"%^BOLD%^%^WHITE%^As "+caster->QCN+"'s chanting grows louder, up in the sky you see Tyrannos moving!",caster);
     message("info","%^BOLD%^%^BLACK%^You see the moon Tyrannos moving in front of the sun up in the sky!%^BOLD%^%^BLACK%^\n",filter_array(users(),(:!(environment($1)->query_property("indoors")):)));

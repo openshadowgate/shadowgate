@@ -2119,6 +2119,11 @@ void define_clevel()
             clevel = caster->query_base_character_level();
         }
     }
+    
+    if (FEATS_D->usable_feat(caster, "tricky spells")) {
+        if(spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "alteration")
+            clevel = caster->query_base_character_level();
+    }
 
     if (spell_type == "monk") {
         if (FEATS_D->usable_feat(caster, "elemental attunement")) {
@@ -2180,11 +2185,6 @@ void define_clevel()
         if (caster->query_property("raged")) {
             clevel += 3;
         }
-    }
-
-    if (FEATS_D->usable_feat(caster, "tricky spells")) {
-        if(spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "alteration")
-            clevel = caster->query_base_character_level();
     }
 
     if ((int)caster->query_property("empowered")) {
