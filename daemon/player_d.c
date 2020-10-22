@@ -1838,7 +1838,7 @@ int immunity_check(object obj, string type)
     
     case "charm":
     {
-        if(aura_check(obj, "resolve") == 1)
+        if(check_aura(obj, "resolve") == 1)
             return 1;
     }
 
@@ -1850,7 +1850,7 @@ int immunity_check(object obj, string type)
         if (FEATS_D->usable_feat(obj, "bravery")) {
             return 1;
         }
-        if(aura_check(obj, "courage") == 1)
+        if(check_aura(obj, "courage") == 1)
             return 1;
         
         switch (myrace) {
