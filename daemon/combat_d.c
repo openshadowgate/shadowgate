@@ -331,6 +331,14 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         }
     }
 
+
+    if (type == "negative energy" ||
+        type == "positive energy" &&
+        member_array(targ->query_race(), ({"soulforged", "golem", "construct"})) != -1) {
+        return 0;
+    }
+
+
     if (type == "negative energy") {
         if (targ->query_property("heart of darkness") ||
             FEATS_D->usable_feat(targ, "undead graft") ||
@@ -468,14 +476,14 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
     string ename, pname;
     int effect_chance;
     object room;
-    
+
     if (!objectp(attacker)) {
         return;
     }
     if (!objectp(weapon)) {
         return;
     }
-    
+
     pname = capitalize(attacker->query_name());
     ename = capitalize(target->query_name());
     room = environment(attacker);
@@ -555,14 +563,14 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             POISON_D->ApplyPoison(target, attacker->query_property("natural poison"), attacker, "injury");
         }
     }
-    
+
     //Inquisitor Bane Stuff
     if(attacker->query_guild_level("inquisitor") && weapon)
     {
         int glvl, bane_dmg, valid;
         string *ids = target->query_id();
         mixed *bane = attacker->query_property("bane weapon");
-        
+
         if(sizeof(bane) == 2 && weapon == bane[0])
         {
             foreach(string id in ids)
@@ -572,9 +580,9 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             }
         }
 
-        glvl = attacker->query_guild_level("inquisitor");  
+        glvl = attacker->query_guild_level("inquisitor");
 
-        //Chance from 10% to 33% at max        
+        //Chance from 10% to 33% at max
         if(valid && !random(10 - glvl / 7))
         {
             //Damage scales from 1dWC + 2 to 6dWC + 2
@@ -607,12 +615,12 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
                 return 0;
                 break;
             }
-        
+
             target->cause_typed_damage(target, target->return_target_limb(), bane_dmg, "divine");
         }
     }
-    //END BANE SECTION       
-                          
+    //END BANE SECTION
+
     //monster feat stuff
     if (attacker->query("combat_feats_enabled") &&
         !attacker->query_property("using instant feat")) {

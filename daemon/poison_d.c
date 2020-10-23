@@ -309,15 +309,32 @@ void query_poisons_list()
 int can_be_poisoned(object targ)
 {
     string trace;
-    if(!objectp(targ)) return 0;
-    if(targ->query_property("poison immunity")) return 0;
-    if(FEATS_D->usable_feat(targ, "venom immunity")) return 0;
-    if(FEATS_D->usable_feat(targ, "undead graft")) return 0;
-    if(FEATS_D->usable_feat(targ, "purity of body")) return 0;
-    if(FEATS_D->usable_feat(targ,"earthen blood")) return 0;
-    if(targ->is_undead()) return 0;
+    if (!objectp(targ)) {
+        return 0;
+    }
+    if (targ->query_property("poison immunity")) {
+        return 0;
+    }
+    if (FEATS_D->usable_feat(targ, "venom immunity")) {
+        return 0;
+    }
+    if (FEATS_D->usable_feat(targ, "undead graft")) {
+        return 0;
+    }
+    if (FEATS_D->usable_feat(targ, "purity of body")) {
+        return 0;
+    }
+    if (FEATS_D->usable_feat(targ, "earthen blood")) {
+        return 0;
+    }
+    if (targ->is_undead()) {
+        return 0;
+    }
     trace = (string)targ->query_race();
-    if(trace == "zombie" || trace == "skeleton" || trace == "undead") return 0;
+    if (trace == "zombie" || trace == "skeleton" || trace == "undead" ||
+        trace == "golem" || trace == "construct" || trace == "soulforged") {
+        return 0;
+    }
     return 1;
 }
 

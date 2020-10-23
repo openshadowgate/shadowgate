@@ -601,12 +601,6 @@ mixed query_property(string prop)
         if (FEATS_D->usable_feat(TO, "improved damage resistance")) {
             num += 2;
         }
-        if (TO->query_race() == "elf") {
-            subrace = (string)TO->query("subrace");
-            if (subrace == "fey'ri") {
-                num += 0;
-            }
-        }
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "damage resistance"));
     }

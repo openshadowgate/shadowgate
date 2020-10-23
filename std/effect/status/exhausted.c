@@ -27,7 +27,7 @@ void status_effect()
         return;
     }
 
-    if (target->is_undead()) {
+    if (PLAYER_D->immunity_check(target, "fatigue")) {
         TO->remove();
         return;
     }
