@@ -79,17 +79,6 @@ int wieldme()
         return 0;
     }
 
-    if (((int)ETO->query_prestige_level("mage") < 45) && ((int)ETO->query_prestige_level("sorcerer") < 45)) {
-        tell_object(ETO, "%^BOLD%^%^RED%^You are unable to control the power of the rod and it lashes out at you!");
-        tell_room(EETO, "%^BOLD%^%^RED%^" + ETO->QCN + " suddenly gets a look of horror and recoils in pain!%^RESET%^ ", ({ ETO }));
-        ETO->do_damage("head", 50);
-        ETO->add_attacker(TO);
-        ETO->continue_attack();
-        ETO->remove_attacker(TO);
-        uses = uses + 50;
-        return 0;
-    }
-
     tell_object(ETO, "%^BOLD%^%^RED%^You grip the rod firmly and a strange sense of power overcomes you.");
     return 1;
 }
@@ -132,7 +121,7 @@ int fireball(string str)
         return notify_fail("You do not see that!");
     }
     tell_room(ETP, "%^BOLD%^%^CYAN%^" + TPQCN + " raises " + TP->QP + " rod and utters a word!", TP);
-    new("/cmds/spells/f/_fireball")->use_spell(TP, ob, 35, 100, "mage");
+    new("/cmds/spells/f/_fireball")->use_spell(TP, ob, TP->query_level(), 100, "mage");
     TP->set_paralyzed(2, "You are busy controlling the rod.");
     return 1;
 }
@@ -158,7 +147,7 @@ int cone_of_cold(string str)
         return notify_fail("You do not see that!");
     }
     tell_room(ETP, "%^BOLD%^%^RED%^" + TPQCN + " raises " + TP->QP + " rod and utters a word!", TP);
-    new("/cmds/spells/c/_cone_of_cold")->use_spell(TP, ob, 45, 100, "mage");
+    new("/cmds/spells/c/_cone_of_cold")->use_spell(TP, ob, TP->query_level(), 100, "mage");
     TP->set_paralyzed(2, "You are busy controlling the rod.");
     uses = uses - 10;
     return 1;
@@ -185,7 +174,7 @@ int prismatic_spray(string str)
         return notify_fail("You do not see that!");
     }
     tell_room(ETP, "%^BOLD%^%^YELLOW%^" + TPQCN + " raises " + TP->QP + " rod and utters a word!", TP);
-    new("/cmds/spells/p/_prismatic_spray")->use_spell(TP, ob, 45, 100, "mage");
+    new("/cmds/spells/p/_prismatic_spray")->use_spell(TP, ob, TP->query_level(), 100, "mage");
     TP->set_paralyzed(2, "You are busy controlling the rod.");
     uses = uses - 15;
     return 1;
@@ -641,7 +630,7 @@ int escape_fun()
         "light!\n%^RESET%^%^YELLOW%^" + TPQCN + " vanishes!"
         "%^RESET%^"
         , TP);
-    TP->move_player("/d/shadow/room/city/cguild/mage/top.c", "with a puff of smoke and clap of thunder");
+    TP->move_player("/d/darkwood/room/road18.c", "with a puff of smoke and clap of thunder");
     TP->set_paralyzed(2, "%^MAGENTA%^You are stunned from the plane shift!%^RESET%^");
     uses = uses - 50;
     return 1;
