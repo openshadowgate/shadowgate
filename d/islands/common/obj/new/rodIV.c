@@ -471,7 +471,7 @@ int expend_fun(string str)
         uses = 0;
     }
 //  TP replaced by ETO Lujke 17 Oct 2005
-    ETO->set_paralyzed(8, "%^BLUE%^You are busy expending the rod's energy!%^RESET%^");
+    ETO->set_paralyzed(4, "%^BLUE%^You are busy expending the rod's energy!%^RESET%^");
     return 1;
 }
 

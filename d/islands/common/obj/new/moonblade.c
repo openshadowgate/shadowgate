@@ -226,7 +226,7 @@ int hit_func(object targ){
       tell_room(EETO,"%^BOLD%^%^BLUE%^The third rune upon "+ETO->QCN+"'s longsword %^GREEN%^c%^YELLOW%^r"
 "%^GREEN%^ack%^WHITE%^l%^GREEN%^es %^BLUE%^with light, and a sudden burst of energy races down the blade to "
 "throw "+targ->QO+" to the ground!%^RESET%^",({ETO,targ}));
-      targ->set_paralyzed(roll_dice(1,10) + 10, "You are struggling to stand up!");
+      targ->set_paralyzed(roll_dice(1,16) + 8, "You are shaking from the blast!");
     }
 
     if(rand > 7 && rand < 10) {

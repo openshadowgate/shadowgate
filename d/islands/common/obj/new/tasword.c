@@ -203,9 +203,12 @@ int hit_func(object target)
             tell_room(EETO,"%^BOLD%^%^BLACK%^The sword sucks in the darkness from around it and hurtles it at "+target->QCN+"!",({target,ETO}));
             tell_object(ETO,"%^BOLD%^%^BLACK%^The sword sucks in the darkness from around it and hurtles it at "+target->QCN+"!%^RESET%^");
             tell_object(target,"%^BOLD%^%^BLACK%^The sword in "+ETO->QCN+" hand sucks up the darkness from around it and hurtles it at you!");
-            target->set_paralyzed(20,"You are trying to get to your feet.");
-            if(!random(5)) { target->set_blind(1); }
-            else { target->set_paralyzed(3+random(4),"%^BOLD%^%^BLACK%^You are trying to remove the orb of darkness from around you!"); }
+            target->set_paralyzed(roll_dice(1, 16) + 8,"You are trying to get to your feet.");
+            if (!random(5)) {
+                target->set_blind(1);
+            }else {
+                target->set_paralyzed(4, "%^BOLD%^%^BLACK%^You are trying to remove the orb of darkness from around you!");
+            }
             break;
 
         case 5:

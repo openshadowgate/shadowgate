@@ -103,7 +103,7 @@ int hit_func(object targ)
             set_property("magic",1);
             targ->do_damage(targ->return_target_limb(),random(14)+13);
             set_property("magic",-1);
-            targ->set_paralyzed(5,"%^BOLD%^You are recovering from that hit.");
+            targ->set_paralyzed(6,"%^BOLD%^You are recovering from that hit.");
             break;
 
         case 7..8:

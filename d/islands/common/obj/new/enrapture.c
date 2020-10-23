@@ -117,7 +117,7 @@ int hit_func(object targ)
             tell_room(EETO,"%^RESET%^%^MAGENTA%^As "+ETOQCN+" swings the whip towards "+targ->QCN+", it begins to glow soothingly, leaving "+targ->QO+" standing there unmoving.",({targ,ETO}));
             tell_object(ETO,"%^RESET%^%^MAGENTA%^As you swing the whip towards "+targ->QCN+", it begins to glow soothingly, leaving "+targ->QO+" standing there unmoving.%^RESET%^",targ);
             tell_object(targ, "%^RESET%^%^MAGENTA%^As "+ETOQCN+" swings the whip towards you, it begins to glow soothingly, leaving the image of "+ETO->query_name()+"'s seductive eyes burnt in your mind.");
-            targ->set_paralyzed(20,"%^BOLD%^%^MAGENTA%^You cant get the image of those eyes out of your mind.");
+            targ->set_paralyzed(10,"%^BOLD%^%^MAGENTA%^You cant get the image of those eyes out of your mind.");
             return roll_dice(2,4)+20;
         }
     }
