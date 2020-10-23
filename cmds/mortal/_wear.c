@@ -10,8 +10,8 @@ int cmd_wear(string str)
 {
     mixed* limbs;
     string ret, what, where, wear, unwear, ob_quest, * player_quests;
-    int i, j, level, quiet, ultimate, positioning;
-    object ob, * obs;
+    int i, j, level, quiet, ultimate, active_feat;
+    object ob, * obs, deactivate_feat;
     mapping itembonuses;
 
     if (!objectp(TP)) {
@@ -207,12 +207,23 @@ int cmd_wear(string str)
         }
     }
 
-    positioning = (int)TP->query_property("tactical_positioning");
-    if (positioning && ob->query_type() == "shield") {
+    //positioning
+    active_feat = (int)TP->query_property("tactical_positioning");
+    if (active_feat && ob->query_type() == "shield") {
         message("my_action", "You can't benefit from positioning with a shield.", TP);
-        TP->set_property("tactical_positioning", -positioning);
-        TP->add_ac_bonus(-positioning);
-        TP->add_attack_bonus(positioning);
+        TP->set_property("tactical_positioning", -active_feat);
+        TP->add_ac_bonus(-active_feat);
+        TP->add_attack_bonus(active_feat);
+    }
+    //spell combat
+    active_feat = (int)TP->query_property("magus cast");
+    if (active_feat && ob->query_type() == "shield") {
+        deactivate_feat = FEAT->query_active_feat("spell combat");
+        if (deactivate_feat) {
+            deactivate_feat->dest_effect();
+            message("my_action", "You can't benefit from spell combat with a shield.", TP);
+        }
+
     }
 
     if (itembonuses = ob->query_item_bonuses()) {

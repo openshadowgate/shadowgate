@@ -37,6 +37,20 @@ void execute_feat()
     return;
 }
 
+void permanent_effects(object ob)
+{
+    ::permanent_effects(ob);
+    dest_effect();
+    return;
+}
+
+void reverse_permanent_effects(object ob)
+{
+    ::reverse_permanent_effects(ob);
+    dest_effect();
+    return;
+}
+
 void dest_effect()
 {
     ::dest_effect();

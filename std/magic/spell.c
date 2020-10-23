@@ -2282,13 +2282,26 @@ void define_base_damage(int adjust)
         }
     }
     if (FEATS_D->is_active(caster, "spell combat") && caster->query_property("magus spell")) {
-        int magus;
+        int magus, crit_range;
         if (caster->is_class("magus") && file_exists("/std/class/magus.c")) {
             magus = (int)"/std/class/magus.c"->spell_combat(caster);
         }
-        //magus = (int)FEATS_D->is_active(caster, "eldritch warfare") * 2 > magus ? 2 : magus;
-        //missing spellstrike
         sdamage = roll_dice(4, sdamage / 4) * magus / 2;
+
+        if (FEATS_D->usable_feat(caster, "spellstrike") &&
+            !query_aoe_spell() &&
+            !query_traveling_spell() &&
+            !query_traveling_aoe_spell()) {
+            object* wielded;
+            wielded = (object*)caster->query_wielded();
+            crit_range = (int)wielded[0]->query_critical_threat_range();
+            if (FEATS_D->usable_feat(caster, "lethal strikes")) {
+                crit_range *= 2;
+            }
+            if (roll_dice(1, 20) >= (21 - crit_range)) {
+                sdamage *= 2;
+            }
+        }
     }else if (FEATS_D->is_active(caster, "eldritch warfare")) {
         sdamage = roll_dice(4, sdamage / 4);
     }

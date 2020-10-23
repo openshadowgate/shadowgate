@@ -1260,8 +1260,11 @@ void check_active_feats(int numwielded) {
     active_feat = (int)TO->query_property("magus cast");
     if (active_feat && numwielded != 1) {
         deactivate_feat = FEAT->query_active_feat("spell combat");
-        deactivate_feat->dest_effect();
-        message("my_action", "You can only benefit from spell combat with a single one-handed weapon.", TO);
+        if (deactivate_feat) {
+            deactivate_feat->dest_effect();
+            message("my_action", "You can only benefit from spell combat with a single one-handed melee weapon.", TO);
+        }
+
     }
 }
 

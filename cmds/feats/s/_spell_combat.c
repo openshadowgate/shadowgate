@@ -35,8 +35,24 @@ int prerequisites(object ob)
 
 int cmd_spell_combat(string str)
 {
-    object feat;
+    object feat, * wielded;
     if(!objectp(TP)) { return 0; }
+    if ((int)TP->is_wearing_type("shield"))
+    {
+        tell_object(TP, "%^RESET%^%^BOLD%^You can't be wearing a shield.%^RESET%^");
+        return 1;
+    }
+    wielded = (object*)TP->query_wielded();
+    if (!sizeof(wielded) == 1)
+    {
+        tell_object(TP, "%^RESET%^%^BOLD%^You must be wielding a single one-handed melee weapon.%^RESET%^");
+        return 1;
+    }
+    if (wielded[0]->is_lrweapon())
+    {
+        tell_object(TP, "%^RESET%^%^BOLD%^You must be wielding a single one-handed melee weapon.%^RESET%^");
+        return 1;
+    }
     feat = new(base_name(TO));
     feat->setup_feat(TP,str);
     return 1;
