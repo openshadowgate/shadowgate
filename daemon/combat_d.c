@@ -332,8 +332,8 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
 
-    if (type == "negative energy" ||
-        type == "positive energy" &&
+    if ((type == "negative energy" ||
+        type == "positive energy") &&
         member_array(targ->query_race(), ({"soulforged", "golem", "construct"})) != -1) {
         return 0;
     }
