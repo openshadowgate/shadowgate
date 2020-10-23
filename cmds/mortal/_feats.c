@@ -87,6 +87,7 @@ int remove_spell_mastery_spell(string str, object ob, string feat, string mytype
             if (myclasses[i] == "bard" ||
                 myclasses[i] == "inquisitor" ||
                 myclasses[i] == "oracle" ||
+                myclasses[i] == "magus" ||
                 myclasses[i] == "sorcerer") {
                 num++;
             }
@@ -182,6 +183,7 @@ int spell_mastery_spell(string str, object ob, string feat, string mytype)
             okclasses += ({ myclasses[i] });
             if (myclasses[i] == "bard" ||
                 myclasses[i] == "inquisitor" ||
+                myclasses[i] == "magus" ||
                 myclasses[i] == "oracle" ||
                 myclasses[i] == "sorcerer") {
                 num++;

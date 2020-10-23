@@ -142,7 +142,7 @@ string *query_opposite_sphere(string str) {
 }
 
 string *query_mastering_classes() {
-    return ({ "bard", "sorcerer", "inquisitor", "oracle", "psion", "psywarrior" });
+    return ({ "bard", "sorcerer", "inquisitor", "oracle", "psion", "psywarrior", "magus" });
 }
 
 int is_mastering_class(string str) {

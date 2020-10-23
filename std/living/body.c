@@ -1217,7 +1217,7 @@ string equip_weapon_to_limb(object weap, string limb1, string limb2)
         ApplyObjectBonuses(weap, TO, "add", "wield");
     }
     num_wielded++;
-    check_positioning(num_wielded);
+    check_active_feats(num_wielded);
     return 0;
 }
 
@@ -1238,21 +1238,30 @@ int remove_weapon_from_limb(object ob)
     }
     ac += (int)ob->query_ac();
     num_wielded--;
-    check_positioning(num_wielded);
+    check_active_feats(num_wielded);
     if (TO->is_player()) {
         ApplyObjectBonuses(ob, TO, "remove", "wield");
     }
     return 1;
 }
 
-void check_positioning(int numwielded) {
-    int positioning;
-    positioning = (int)TO->query_property("tactical_positioning");
-    if (positioning && numwielded != 1) {
-        message("my_action", "You can't benefit from positioning with a shield.", TO);
-        TO->set_property("tactical_positioning", -positioning);
-        TO->add_ac_bonus(-positioning);
-        TO->add_attack_bonus(positioning);
+void check_active_feats(int numwielded) {
+    int active_feat;
+    object deactivate_feat;
+    //positioning
+    active_feat = (int)TO->query_property("tactical_positioning");
+    if (active_feat && numwielded != 1) {
+        message("my_action", "You can only benefit from positioning with a single one-handed weapon.", TO);
+        TO->set_property("tactical_positioning", -active_feat);
+        TO->add_ac_bonus(-active_feat);
+        TO->add_attack_bonus(active_feat);
+    }
+    //spell combat
+    active_feat = (int)TO->query_property("magus cast");
+    if (active_feat && numwielded != 1) {
+        deactivate_feat = FEAT->query_active_feat("spell combat");
+        deactivate_feat->dest_effect();
+        message("my_action", "You can only benefit from spell combat with a single one-handed weapon.", TO);
     }
 }
 

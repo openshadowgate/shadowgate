@@ -455,6 +455,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
     string ename, pname;
     int effect_chance;
     object room;
+    string* elements;
     
     if (!objectp(attacker)) {
         return;
@@ -484,6 +485,20 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped");     //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
             //attempting to debug to see if it's multiplied - Odin
         }
+        /* magus crits
+        if (!attacker->query_property("shapeshifted") &&
+            objectp(weapon)) {
+            foreach(string element in elements)
+            {
+                if (USER_D->is_valid_enemy(id, bane[1]))
+                    valid = 1;
+            }
+            tell_object(attacker, "%^CYAN%^You cry a brief warsong and unleash wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^");
+            tell_object(target, "%^CYAN%^" + attacker->QCN + " shouts a brief warsong, and %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ burns through you!%^RESET%^");
+            tell_room(environment(attacker), "%^CYAN%^" + attacker->QCN + " shouts a brief warsong and unleashes wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^", ({ target, attacker }));
+            target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped");     //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
+            //attempting to debug to see if it's multiplied - Odin
+        }*/
 
         //Handles Crypststalker feat
         if (

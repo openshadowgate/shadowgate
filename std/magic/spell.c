@@ -1132,6 +1132,13 @@ void wizard_interface(object user, string type, string targ)
     }
 
     caster->set_casting(1);
+    if (spell_type == "magus") {
+        caster->set_property("magus spell", 1);
+    }
+    else {
+        caster->remove_property("magus spell");
+    }
+
     if (0) {
         if (target) {
             TP->setAdminBlock(100);
@@ -1597,6 +1604,9 @@ int query_spell_level(string classtype)
     }
     if (classtype == "wizard" && spell_levels["bard"]) {
         return spell_levels["bard"];
+    }
+    if (classtype == "wizard" && spell_levels["magus"]) {
+        return spell_levels["magus"];
     }
     if (classtype == "psionics" && spell_levels["psion"]) {
         return spell_levels["psion"];
@@ -2271,9 +2281,19 @@ void define_base_damage(int adjust)
             sdamage = roll_dice(clevel, 8);
         }
     }
-    if (FEATS_D->is_active(caster, "eldritch warfare")) {
+    if (FEATS_D->is_active(caster, "spell combat") && caster->query_property("magus spell")) {
+        int magus;
+        if (caster->is_class("magus") && file_exists("/std/class/magus.c")) {
+            magus = (int)"/std/class/magus.c"->spell_combat(caster);
+        }
+        //magus = (int)FEATS_D->is_active(caster, "eldritch warfare") * 2 > magus ? 2 : magus;
+        //missing spellstrike
+        sdamage = roll_dice(4, sdamage / 4) * magus / 2;
+    }else if (FEATS_D->is_active(caster, "eldritch warfare")) {
         sdamage = roll_dice(4, sdamage / 4);
     }
+
+    
 }
 
 int query_base_damage()

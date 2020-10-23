@@ -79,7 +79,7 @@ void end_heart()
 
 void heart_beat()
 {
-    int i,j, x,roll, k,l,num_attacks,fighter_attacks,mod1,mod2,num;
+    int i,j, x,roll, k,l,num_attacks,fighter_attacks,mod1,mod2,num, canfullattack;
     string file;
     object *weapons,*classes,ob,*tmp = ({}), *busy=({}),shape,ammo;
     //if(!objectp(TO)) { if(debug) { tell_object(find_player("saide"), "Room is invalid?");} return; }
@@ -217,9 +217,22 @@ void heart_beat()
             num_attacks = shape->query_base_attack_num();
         }
 
+
+        canfullattack = 0;
+        if (combatants[i]->query_casting()) {
+            if (combatants[i]->query_property("cast and attack")) {
+                canfullattack = 1;
+            }
+            if (combatants[i]->query_property("magus cast") && combatants[i]->query_property("magus spell")) {
+                canfullattack = 1;
+            }
+        }
+        else {
+            canfullattack = 1;
+        }
+
         //if (combatants[i]->query_casting() && objectp(combatants[i]->query("spell_casting")) )
-        if(combatants[i]->query_casting() &&
-           !combatants[i]->query_property("cast and attack"))
+        if(!canfullattack)
         {
             busy+=({combatants[i]});
             if(debug) { tell_room(TO,"DEBUG: Busy: "+identify(combatants[i])); }

@@ -60,4 +60,5 @@
                             "paladin" : (["strength" : 18, "charisma" : 18, "wisdom" : 18, "constitution" : 16, "intelligence" : 11, "dexterity" : 11]),\
                             "ranger" : (["dexterity" : 18, "wisdom" : 16, "strength" : 16, "constitution" : 18, "intelligence" : 12, "charisma" : 12]),\
                             "monk" : (["dexterity" : 18, "wisdom" : 18, "constitution" : 16, "intelligence" : 12, "charisma" : 12, "strength" : 16]),\
+                            "magus" : (["dexterity" : 18, "wisdom" : 14, "constitution" : 18, "intelligence" : 18, "charisma" : 10, "strength" : 14]),\
                             "cavalier" : (["strength" : 18, "charisma" : 18, "wisdom" : 18, "constitution" : 16, "intelligence" : 11, "dexterity" : 11]),])

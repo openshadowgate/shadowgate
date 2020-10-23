@@ -464,6 +464,7 @@ string get_class(string spell)
         if (myclass == "bard" ||
             myclass == "sorcerer" ||
             myclass == "oracle" ||
+            myclass == "magus" ||
             myclass == "inquisitor") {
             if (owner->can_memorize(myclass, "level " + level)) {
                 return myclass;

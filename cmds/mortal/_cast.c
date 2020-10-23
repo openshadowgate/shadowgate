@@ -129,6 +129,7 @@ int cmd_cast(string str)
     if (type == "bard" ||
         type == "sorcerer" ||
         type == "inquisitor" ||
+        type == "magus" ||
         type == "oracle" ||
         type == "psion" ||
         type == "psywarrior") {
@@ -194,11 +195,11 @@ int cmd_cast(string str)
         }
     }
     if (type == "magus") {
-        maguslvl = TP->query_class_level("magus");//7/13
+        maguslvl = TP->query_class_level("magus");
         if (maguslvl > 12) {
             armor = ({});
         }
-        else if (maguslvl > 7) {
+        else if (maguslvl > 6) {
             armor = TP->all_armour();
             armor = distinct_array(armor);
             armor = filter_array(armor, "medium_armor_filter", TO);
@@ -279,6 +280,7 @@ int cmd_cast(string str)
     if (type == "bard" ||
         type == "sorcerer" ||
         type == "inquisitor" ||
+        type == "magus" ||
         type == "oracle" ||
         type == "psywarrior" ||
         type == "psion") {

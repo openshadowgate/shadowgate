@@ -25,10 +25,7 @@ int prerequisites(object ob) {
     if (ob->is_class("magus") && file_exists("/std/class/magus.c")) {
         magus = (int)"/std/class/magus.c"->fighter_training(ob);
     }
-    if() {
-        dest_effect();
-        return 0;
-    }
+
     if(!FEATS_D->has_feat(ob, "weapon focus") ||
         ob->query_class_level("fighter") + magus < 8) {
         dest_effect();
