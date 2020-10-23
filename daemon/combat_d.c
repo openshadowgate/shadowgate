@@ -299,23 +299,6 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
     resist_perc = (int)targ->query_resistance_percent(type);
-    /*
-    //Venger: living creatures are healed with positive energy
-    //undead and exceptions creatures are healed with negative energy
-    //now let's change all spells to "deal" damage
-    if (type == "positive energy") {
-        if (!targ->query_property("negative energy affinity")) {
-            resist_perc += 200;
-        }
-    }
-    if (type == "negative energy") {
-        if (targ->query_property("heart of darkness") ||
-            targ->query_property("negative energy affinity")) {
-            resist_perc += 200;
-        }
-    }
-    */
-
     resist = (int)targ->query_resistance(type);
 
     if (resist_perc > 500) {
@@ -325,10 +308,19 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         resist_perc = -500;
     }
 
-    // resistance less than 0 equals more damage done
-    // resistance between 0 and 100 equals reduced damage
-    // resistance greater than 100 equals healing
-    percentage = to_float((100 - resist_perc) / to_float(100));
+    switch (resist_perc) {
+    case (-500)..(-1): // resistance less than 0 equals more damage done
+        percentage = to_float((100 + absolute_value(resist_perc)) / to_float(100));
+        break;
+
+    case 0..100: // resistance between 0 and 100 equals reduced damage
+        percentage = to_float((100 - resist_perc) / to_float(100));
+        break;
+
+    case 101..500: // resistance greater than 100 equals healing
+        percentage = to_float((100 - resist_perc) / to_float(100));
+        break;
+    }
 
     damage = to_int(damage * percentage);
 
@@ -512,42 +504,6 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             tell_room(environment(attacker), "%^CYAN%^" + attacker->QCN + " shouts a brief warsong and unleashes wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^", ({ target, attacker }));
             target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped");     //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
             //attempting to debug to see if it's multiplied - Odin
-        }
-        // magus crits
-        if (!attacker->query_property("shapeshifted") &&
-            objectp(weapon) &&
-            attacker->query_property("magus properties")) {
-            string* elements, * bursts, * actions;
-            int crit_mult;
-
-            //the feat already validates if the user is wielding 1h
-            if (sizeof(weapons)) {
-                crit_mult = (int)weapons[0]->set_critical_hit_multiplier() - 1;
-
-                if (!crit_mult) {
-                    crit_mult = 1;
-                }
-                if (FEATS_D->usable_feat(attacker, "exploit weakness")) {
-                    crit_mult += 2;
-                }
-                else if (FEATS_D->usable_feat(attacker, "weapon mastery")) {
-                    crit_mult += 1;
-                }
-            }
-
-            elements = ({ "fire","cold","electricity" });
-            actions = ({ "burst","wave","charge" });
-
-            for (i = 0; i < sizeof(elements); i++)
-            {
-                if (attacker->query_property(element[i] + " burst")) {
-                    tell_object(attacker, "%^CYAN%^You unleash a " + actions[i] + " of " + elements[i] + " at " + target->QCN + "!%^RESET%^");
-                    tell_object(target, "%^CYAN%^" + attacker->QCN + " unleashes a " + actions[i] + " of " + element + "  through you!%^RESET%^");
-                    tell_room(environment(attacker), "%^CYAN%^" + attacker->QCN + " unleashes a "  + actions[i] + " of " + elements  + " at " + target->QCN + "!%^RESET%^", ({ target, attacker }));
-
-                        target->cause_typed_damage(target, target->return_target_limb(), roll_dice(crit_mult, 10), elements);
-                }
-            }
         }
 
         //Handles Crypststalker feat
