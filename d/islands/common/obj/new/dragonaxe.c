@@ -88,7 +88,7 @@ int hitit(object ob)
     if (race == "dragon") {
         rand = 650;
     }else {
-        rand = 333;
+        rand = 500;
     }
 
     if (random(1000) < rand) {

@@ -69,7 +69,7 @@ int hit(object targ)
         if(!objectp(targ)) { return 1; }
     }
 
-    if(!random(3))
+    if(random(2))
     {
         switch(random(1000))
         {

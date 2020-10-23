@@ -40,19 +40,18 @@ void create()
 
     set_value(229500);
 
-    set_property("no curse", 1);
-    set_property("enchantment", 7);
+    set_property("no curse",1);
+    set_property("enchantment",7);
 
-    set_item_bonus("spell damage resistance", 35);
-    set_item_bonus("constitution", 6);
-    set_item_bonus("shieldMiss", 40);
+    set_item_bonus("spell damage resistance",25);
+    set_item_bonus("constitution",6);
 
-    set_wear((: TO, "wear_it" :));
-    set_remove((: TO, "remove_it" :));
-    set_struck((: TO, "struck" :));
+    set_wear((:TO,"wear_it":));
+    set_remove((:TO,"remove_it":));
+    set_struck((:TO,"struck":));
 
-    set_property("quest required", "%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^");
-    set_property("level required", 35);
+    set_property("quest required","%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^");
+    set_property("level required",35);
 }
 
 int wear_it()

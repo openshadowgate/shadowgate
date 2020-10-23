@@ -49,7 +49,7 @@ void create()
     set_remove((:TO,"remove_me":));
 
     set_item_bonus("strength",6);
-    set_item_bonus("attack bonus",7);
+    set_item_bonus("constitution",6);
     set_item_bonus("damage bonus",7);
 
     set_property("quest required","%^BOLD%^%^RED%^Defeated the great red wyrm Klauth!%^RESET%^");

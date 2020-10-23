@@ -69,7 +69,7 @@ int hit_func(object targ)
 {
     if(!objectp(targ) || !objectp(ETO)) return 1;
 
-    if(!random(3))
+    if(random(2))
     {
         switch(random(9))
         {

@@ -56,7 +56,7 @@ int hit_me(object targ)
     if(!objectp(ETO)) return 1;
     if(!objectp(targ)) return 1;
 
-    if(!random(3)) { return roll_dice(1,6); }
+    if(random(2)) { return roll_dice(1,6); }
 
     switch(random(5))
     {

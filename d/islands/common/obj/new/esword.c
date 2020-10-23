@@ -106,7 +106,7 @@ int hit_func(object target)
     if(!objectp(target)) { target = ETO->query_current_attacker(); }
     if(!objectp(target)) return 0;
 
-    if(random(1000) < 333)
+    if(random(1000) < 500)
     {
         switch(random(20))
         {

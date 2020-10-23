@@ -78,7 +78,7 @@ int hit_func(object targ)
 
     if(!objectp(targ)) { return 1; }
 
-    if(random(1000) < 333)
+    if(random(1000) < 500)
     {
         switch(random(10))
         {

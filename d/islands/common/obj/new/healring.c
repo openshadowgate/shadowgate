@@ -61,7 +61,7 @@ void heart_beat()
 
     if(uses > 0) { used_time = time(); }
 
-    if(WAIT_TIME < (time() - used_time))    { uses = 5; }
+    if(WAIT_TIME < (time() - used_time))    { uses = 3; }
     if(WAIT_TIME2 > (time() - used_time2))  { return; }
     if(!TO->query_worn()) { return; }
 
