@@ -114,6 +114,7 @@ int confirm_drop(string str, string theclass, int drop, int cost)
     tell_object(TP, "%^BOLD%^Clearing old feats...%^RESET%^");
     TP->delete("free_feat_wipe");
     TP->delete("is_auto_detecting_traps");
+    TP->delete("skill_focus");
 
     if (TP->is_class("warlock")) {
         TP->delete("warlock_blast_type");
