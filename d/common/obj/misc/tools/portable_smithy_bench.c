@@ -8,7 +8,7 @@ void create()
     set_id(({ "smithy", "portable smithy", "anvil", "forge", "bench", "smithyx" }));
     set_short("%^BOLD%^%^BLACK%^A portable smithy%^RESET%^");
     set_long("%^BOLD%^%^BLACK%^This portable smithy consists of a metal anvil, a simple coal forge with a manual bellows, a tank filled with oil for quenching weapons and armor, and all the necessary hand tools for shaping metal including tongs, hammers, and heavy gloves. You can %^BOLD%^%^WHITE%^<breakdown> %^BOLD%^%^BLACK%^the smithy when you're done with it.%^RESET%^");
-    set_weight(100000);
+    set_weight(1500000);
     set("value", 0);
     set_property("no animate", 1);
     set_property("no offer", 1);
