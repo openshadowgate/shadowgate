@@ -31,7 +31,7 @@ spell_effect(int prof)
     int rnd;
 
     set_helpful_spell(1);
-    if(!(target->query_property("negative energy affinity")))
+    if(!target->query_property("negative energy affinity"))
     {
         tell_room(place,"%^BOLD%^%^BLACK%^Nothing happens.");
         dest_effect();
@@ -56,8 +56,8 @@ spell_effect(int prof)
         tell_object(target, "%^BOLD%^%^BLACK%^"+caster->QCN+" sends a beam of fell energy at you.");
     }
 
-    rnd = - sdamage * 7/6;
-    damage_targ(target,target->return_target_limb(),rnd,"negative energy");
+    rnd = sdamage * 7/6;
+    damage_targ(target, target->return_target_limb(), rnd, "negative energy");
 
     dest_effect();
 }

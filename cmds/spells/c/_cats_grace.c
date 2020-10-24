@@ -10,7 +10,7 @@ int mydiff;
 void create() {
     ::create();
     set_spell_name("cats grace");
-    set_spell_level(([ "ranger" : 2, "bard" : 2,"druid" : 2, "assassin" : 2, "mage" : 2 ]));
+    set_spell_level(([ "ranger" : 2, "bard" : 2,"druid" : 2, "assassin" : 2, "mage" : 2, "magus" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS cats grace on TARGET");
     set_description("This spell allows the caster to infuse their target with the grace of a feline, granting them improved agility and coordination. This spell doesn't stack with similarly powerful spells of enhancement.");

@@ -96,23 +96,22 @@ void spell_effect(int prof)
         {
             if(!objectp(targets[i])) { continue; }
             if(!present(targets[i],place)) { continue; }
-            if(!!target->query_property("negative energy affinity"))
+            if (targets[i]->query_property("negative energy affinity"))
             {
-                tell_room(place,"%^BOLD%^%^CYAN%^A brilliant wave moves through"+
-                    " "+targets[i]->QCN+" carrying with it the essence of "+
-                    "life, as "+caster->QCN+" voice rings out.",({ targets[i],caster }));
-                tell_object(caster,"%^BOLD%^%^CYAN%^A brilliant "+
-                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of life.");
-                tell_object(targets[i],"%^BOLD%^%^CYAN%^A brilliant "+
-                    "wave moves through you, carrying with it the essence of life.");
+                if (targets[i] == caster) {
+                    continue;
+                    tell_object(targets[i], "You shouldn't do that to yourself.");
+                }
                 set_helpful_spell(0);
-                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"positive energy");
             }
-            else if(targets[i] == caster)
+            else {
+                set_helpful_spell(1);
+            }
+
+            if(targets[i] == caster)
             {
                 tell_object(targets[i],"%^BOLD%^%^CYAN%^A brilliant "+
                     "wave moves through you, carrying with it the essence of life.");
-                damage_targ(targets[i],targets[i]->return_target_limb(),-healamnt,"positive energy");
             }
             else
             {
@@ -123,9 +122,9 @@ void spell_effect(int prof)
                     "wave moves through "+targets[i]->QCN+", carrying with it the essence of life.");
                 tell_object(targets[i],"%^BOLD%^%^CYAN%^A brilliant "+
                     "wave moves through you, carrying with it the essence of life.");
-                set_helpful_spell(1);
-                damage_targ(targets[i],targets[i]->return_target_limb(),-healamnt,"positive energy");
             }
+            damage_targ(targets[i], targets[i]->return_target_limb(), healamnt, "positive energy");
+
             if(query_spell_name()=="mass heal")
                 if(member_array(targets[i],caster->query_attackers())==-1)
                     "/std/magic/cleanse"->cleanse(targets[i]);

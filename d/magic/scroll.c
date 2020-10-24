@@ -6,10 +6,10 @@ inherit OBJECT;
 string spell, * readpassed;
 mapping readfailed;
 
-#define ARCANE_CLASSES ({"mage","sorcerer", "bard", "assassin",})
+#define ARCANE_CLASSES ({"mage", "sorcerer", "bard", "assassin", "magus",})
 #define DIVINE_CLASSES ({"cleric", "oracle", "druid", "inquisitor", "paladin", "ranger",})
 
-#define SCRL_CLASSES ({"bard", "mage", "cleric", "druid", "inquisitor", "paladin", "ranger"})
+#define SCRL_CLASSES ({"bard", "mage", "cleric", "druid", "inquisitor", "paladin", "ranger", "magus"})
 
 /**
  * @file
@@ -221,7 +221,7 @@ int transcribe(string str)
         return 0;
     }
     if (member_array(spell, keys(MAGIC_D->query_index("mage"))) == -1) {
-        notify_fail("You can only transcribe aracne spells");
+        notify_fail("You can only transcribe arcane spells");
     }
     write("%^ORANGE%^You carefully file " + spell + " into your spellbook.\n");
     book->set_spellbook(spell);

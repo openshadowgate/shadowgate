@@ -9,7 +9,7 @@ inherit SPELL;
 create() {
     ::create();
     set_spell_name("magic missile");
-    set_spell_level(([ "mage" : 1 ]));
+    set_spell_level(([ "mage" : 1, "magus" : 1 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS magic missile on TARGET");
     set_damage_desc("force");

@@ -78,10 +78,9 @@ void spell_effect(int prof) {
        mytally = cap;
 //       tell_object(caster, "Healing "+mytally+" hit points.");
     }
-    mytally = mytally*-1;
     tell_object(caster,"%^YELLOW%^You feel a rush of healing as you "
        "siphon off energy from your foes.%^RESET%^");
-    damage_targ(caster,caster->return_target_limb(),mytally,"positive energy");
+    damage_targ(caster, caster->return_target_limb(), mytally, "positive energy");
     dest_effect();
 }
 

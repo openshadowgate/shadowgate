@@ -140,7 +140,7 @@ void execute_attack()
                 !(dude->query_property("negative energy affinity") ^ undead_caster)) {
                 tell_object(dude, "%^CYAN%^The magical energy adds a bit of strength to you!%^RESET%^");
                 tell_room(place, "%^CYAN%^Some of " + dude->QCN + "'s wounds seem to heal!%^RESET%^", caster);
-                damage_targ(dude, dude->return_target_limb(), -sdamage, energy_type);
+                damage_targ(dude, dude->return_target_limb(), sdamage, energy_type);
             }
         }
 

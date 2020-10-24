@@ -592,7 +592,7 @@ void set_helpful_spell(int x)
 
 int check_reflection()
 {
-    int turnperc, flagz;
+    int turnperc, flagz, counters;
     object temp;
 
     if (!objectp(caster)) {
@@ -621,14 +621,26 @@ int check_reflection()
         flagz = 2;
     }
 
+    counters = 0 ;
+    if (FEATS_D->usable_feat(target, "spell counterstrike")) {
+        counters += 1;
+    }
     if (FEATS_D->usable_feat(target, "spellbreaker")) {
+        counters += 1;
+    }
+    //Venger: with a single feat is 1 counter and a chance to counter again.
+    //with both feats is 3 counters instead of doubling the counters.
+    if (counters) {
         spell_kill(target, caster);
         target->execute_attack();
-        if (!random(3)) {
+        if (counters > 1) {
             target->execute_attack();
+            target->execute_attack();
+        }else if (!random(3)) {
+                target->execute_attack();
         }
     }
-
+    /*
     switch (flagz) {
     case 1:
         turnperc = (int)target->query_skill("spellcraft") / 4;
@@ -661,7 +673,8 @@ int check_reflection()
 
     if (turnperc > 85) {
         turnperc = 85;
-    }
+    }*/
+    turnperc = target->query_spellTurning();
 
     if (turnperc >= roll_dice(1, 100)) {
         if (!FEATS_D->usable_feat(target, "perfect caster")) {
@@ -920,6 +933,11 @@ void wizard_interface(object user, string type, string targ)
                     nodo = 1;
                 }
             }
+            if (spell_type == "magus" &&
+                sizeof(weaps) == 1 &&
+                !caster->is_wearing_type("shield")) {
+                nodo = 0;
+            }
             if (spell_type == "psywarrior" || spell_type == "psion") {
                 if (FEATS_D->usable_feat(caster, "combat manifester") ||
                     FEATS_D->usable_feat(caster, "mind before matter")) {
@@ -1114,6 +1132,13 @@ void wizard_interface(object user, string type, string targ)
     }
 
     caster->set_casting(1);
+    if (spell_type == "magus") {
+        caster->set_property("magus spell", 1);
+    }
+    else {
+        caster->remove_property("magus spell");
+    }
+
     if (0) {
         if (target) {
             TP->setAdminBlock(100);
@@ -1579,6 +1604,9 @@ int query_spell_level(string classtype)
     }
     if (classtype == "wizard" && spell_levels["bard"]) {
         return spell_levels["bard"];
+    }
+    if (classtype == "wizard" && spell_levels["magus"]) {
+        return spell_levels["magus"];
     }
     if (classtype == "psionics" && spell_levels["psion"]) {
         return spell_levels["psion"];
@@ -2253,9 +2281,32 @@ void define_base_damage(int adjust)
             sdamage = roll_dice(clevel, 8);
         }
     }
-    if (FEATS_D->is_active(caster, "eldritch warfare")) {
+    if (FEATS_D->is_active(caster, "spell combat") && caster->query_property("magus spell")) {
+        int magus, crit_range;
+        if (caster->is_class("magus") && file_exists("/std/class/magus.c")) {
+            magus = (int)"/std/class/magus.c"->spell_combat(caster);
+        }
+        sdamage = roll_dice(4, sdamage / 4) * magus / 2;
+
+        if (FEATS_D->usable_feat(caster, "spellstrike") &&
+            !query_aoe_spell() &&
+            !query_traveling_spell() &&
+            !query_traveling_aoe_spell()) {
+            object* wielded;
+            wielded = (object*)caster->query_wielded();
+            crit_range = (int)wielded[0]->query_critical_threat_range();
+            if (FEATS_D->usable_feat(caster, "lethal strikes")) {
+                crit_range *= 2;
+            }
+            if (roll_dice(1, 20) >= (21 - crit_range)) {
+                sdamage *= 2;
+            }
+        }
+    }else if (FEATS_D->is_active(caster, "eldritch warfare")) {
         sdamage = roll_dice(4, sdamage / 4);
     }
+
+    
 }
 
 int query_base_damage()
@@ -2692,7 +2743,7 @@ int calculate_bonus(int stat)
 int is_caster(string myclass)
 {
     string* casterclasses;
-    casterclasses = (({ "mage", "sorcerer", "cleric", "druid", "bard", "psion", "psywarrior", "inquisitor", "oracle" }));
+    casterclasses = (({ "mage", "sorcerer", "cleric", "druid", "bard", "psion", "psywarrior", "inquisitor", "oracle", "magus" }));
     if (member_array(myclass, casterclasses) != -1) {
         return 1;
     }

@@ -14,6 +14,7 @@ mapping CLASSMAP=(["mage":MAGEKNOWN,
                    "psywarrior":PWKNOWN,
                    "inquisitor":INQKNOWN,
                    "bard":INQKNOWN,
+                   "magus" : INQKNOWN,
                    "warlock":WARLOCKKNOWN]);
 
 mapping query_mastering_classes()
@@ -160,7 +161,7 @@ int cmd_master(string args)
         write("%^CYAN%^You have forgotten %^BOLD%^%^WHITE%^" + sarg + "%^RESET%^%^CYAN%^.%^RESET%^");
         return 1;
     }
-
+    else
     {
         mapping spell_index = MAGIC_D->index_masterable_spells(TP, myclass);
         int mylvl = TP->query_prestige_level(myclass);

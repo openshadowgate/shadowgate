@@ -6,7 +6,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("disrupt undead");
-    set_spell_level(([ "mage" : 1,"inquisitor":1 ]));
+    set_spell_level(([ "mage" : 1,"inquisitor":1, "magus" : 1 ]));
     set_spell_sphere("necromancy");
     set_affixed_spell_level(5);
     set_damage_desc("positive energy on undead");
@@ -19,7 +19,7 @@ void create() {
 
 spell_effect(int prof) {
 
-    if((string)target->query_race() != "undead" && !target->query_property("undead"))
+    if(!target->is_undead())
     {
         tell_object(caster,"%^YELLOW%^As your target is not undead, the spell fizzles harmlessly.");
         dest_effect();
@@ -32,6 +32,6 @@ spell_effect(int prof) {
         tell_room(place,"%^YELLOW%^"+caster->QCN+" chants sonorously and directs a ray of light at "+target->QCN+"!", ({caster}) );
     }
     tell_object(place,"%^YELLOW%^A ray of light scorches "+target->QP+"!");
-    damage_targ(target, target->return_target_limb(), sdamage,"positive energy");
+    damage_targ(target, target->return_target_limb(), sdamage, "positive energy");
     TO->dest_effect();
 }

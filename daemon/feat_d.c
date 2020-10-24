@@ -1568,6 +1568,9 @@ void display_feats(object ob,object targ, string mytype)
     if (!targ->is_class("psion") && !targ->is_class("psywarrior") && !avatarp(targ)) {
         currentlist -= ({ "Psionics" });
     }
+    if (!targ->is_class("magus") && !avatarp(targ)) {
+        currentlist -= ({ "MagusArcana" });
+    }
 
     classes = targ->query_classes();
     for (i = 0; i < sizeof(PRESTIGE_FEATS); i++) {
