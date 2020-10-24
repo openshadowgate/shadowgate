@@ -36,7 +36,7 @@ int preSpell()
         tell_object(caster, "%^BOLD%^%^BLACK%^Cover what sun? You're inside!%^RESET%^");
         return 0;
     }
-    if(caster->query_time_delay("eclipse_caused", DELAY))
+    if(!caster->query_time_delay("eclipse_caused", DELAY))
     {
         tell_object(caster, "%^BOLD%^%^BLACK%^Tyrannos won't move yet.%^RESET%^");
         return 0;
