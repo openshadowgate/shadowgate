@@ -96,8 +96,8 @@ int extra_hit(object targ)
         !present("feyspirit",EETO))
         {  tell_room(EETO,"%^CYAN%^A blue haze shoots from"
            +ETO->QCN+"'s halberd and a glowing light comes to aid you.",({ETO}));
-        tell_object(ETO,"%^CYAN%^A fey spirit "+
-         " comes to your aid.");
+        tell_object(ETO,"%^CYAN%^A f%^GREEN%^e%^CYAN%^y s%^MAGENTA%^p%^CYAN%^irit "+
+         "comes to your aid.");
         tree =new(MON+"fey_spirit");
         tree ->move(environment(ETO));
         tree ->ownerz(ETO);
