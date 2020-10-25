@@ -10,7 +10,7 @@ void create()
     feat_category("Gravecaller");
     feat_name("inspired necromancy");
     feat_prereq("Gravecaller L1");
-    feat_desc("With this knowledge master necromancer learns to preserve any necromantic spell of level six or less in the memory.");
+    feat_desc("With this knowledge master necromancer learns to preserve any necromantic spell of level five or less in the memory.");
     permanent(1);
 }
 
