@@ -92,7 +92,7 @@ int hit(object targ)
             tell_room(EETO,"%^BOLD%^%^BLACK%^"+ETOQCN+"'s stomps one foot and steps into one powerful swing! ",({ETO,targ}));
             tell_object(ETO,"%^BOLD%^%^BLACK%^You feel a burst of strength as you step into one powerful stroke of the sword!");
             tell_object(targ,"%^BOLD%^%^BLACK%^"+ETOQCN+" knocks you clean to the ground in one powerful stroke of the sword!");
-            targ->set_paralyzed(15,"%^BOLD%^%^WHITE%^You are regaining your senses%^RESET%^.");
+            targ->set_paralyzed(12,"%^BOLD%^%^WHITE%^You are regaining your senses%^RESET%^.");
             break;
 
         case 601..800:

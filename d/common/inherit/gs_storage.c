@@ -168,9 +168,7 @@ void reset()
         scroll->set_spell_name("secret chest");
     }
 
-    if (!present("wand")) {
-        new("/d/magic/obj/r_wand")->move(TO);
-    }
+    new("/d/magic/obj/r_wand")->move(TO);
 
     {
         object wand;
@@ -178,6 +176,14 @@ void reset()
         wand->set("spell", "secret chest");
         wand->make_me();
         wand->move(TO);
+
+        wand = new("/d/magic/obj/r_wand");
+        wand->set("spell", "heal");
+        wand->set("level", roll_dice(8, 6));
+        wand->set("uses", roll_dice(2, 6));
+        wand->make_me();
+        wand->move(TO);
+
     }
 
     while (!present("paper 6")) {

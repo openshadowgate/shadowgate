@@ -1590,6 +1590,7 @@ void heart_beat()
                 !TO->query_property("inactive") &&
                 !TO->is_undead() &&
                 !TO->query_ghost() &&
+                !TO->query_race() == "soulforged" &&
                 random(2)){
                 if (!TO->query_stuffed())
                 {
@@ -4863,8 +4864,13 @@ int age_mod(string stat) {
    VENERABLE = ({ -3, -3, -3,  3,  3,  3 });
    agebracket = query_real_age_cat();
 
-   if(TO->is_undead())
+   if (TO->is_undead()) {
        return 0;
+   }
+
+   if (TO->query_race() == "soulforged") {
+       return 0;
+   }
 
     switch(stat)
     {

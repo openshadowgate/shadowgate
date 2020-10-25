@@ -162,7 +162,7 @@ void shadow_effects(object obj)
         tell_object(obj, cm("A streak of darkness flies from " + caster->QCN + "'s shadow vortex and flies towards your head!"));
         if (!obj->reflex_save(clevel) && !obj->query_property("no stun")) {
             tell_object(obj, cm("You try to dodge but to no avail, the streak of darkness hits you in the head, staggering you with intense pain!"));
-            obj->set_paralyzed(roll_dice(1, 2) * 8, cm("You are trying to recover your senses!"));
+            obj->set_paralyzed(roll_dice(1, 4) * 4, cm("You are trying to recover your senses!"));
         }else {
             tell_object(obj, cm("You duck to the side, avoiding the streak of darkness at the last instant."));
         }
@@ -181,7 +181,7 @@ void shadow_effects(object obj)
 
     case 8..14: //damage
 
-        damage = roll_dice(clevel, 4); // hits all targets
+        damage = roll_dice(clevel, 2);
         if (obj->fort_save(clevel)) {
             damage = damage / 2;
         }

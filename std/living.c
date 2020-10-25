@@ -809,6 +809,9 @@ int calculate_healing()
         if (TO->is_undead()) {
             healing["intox"] = 0;
         }
+        if (TO->query_race() == "sourlforged") {
+            healing["intox"] = 0;
+        }
         if (healing["intox"] < HEALING_FORMULA / 3) {
             tolerance_flag = 0;
         }
@@ -857,7 +860,8 @@ int calculate_healing()
     if (!(TO->query_property("sustenance") ||
           TO->query_property("inactive") ||
           FEATS_D->usable_feat(TO, "timeless body") ||
-          TO->is_undead()
+          TO->is_undead() ||
+          TO->query_race() == "soulforged"
           )) {
         healing["stuffed"]--;
         healing["quenched"]--;
@@ -1691,14 +1695,14 @@ int query_attack_bonus()
             FEATS_D->usable_feat(TO, "third favored enemy") && ret += 2;
         }
     }
-    
+
     //Inquisitor Bane
     if(this_object()->query_property("bane weapon") && sizeof(weap) && attacker)
     {
         int valid;
         string *ids = attacker->query_id();
         mixed *bane = this_object()->query_property("bane weapon");
-        
+
         if(sizeof(bane) == 2 && weap[0] == bane[0])
         {
             foreach(string id in ids)
@@ -1707,10 +1711,10 @@ int query_attack_bonus()
                 valid = 1;
             }
         }
-        
+
         if(valid)
             ret += 2;
-    }  
+    }
 
     if (FEATS_D->usable_feat(TO, "true strikes") &&
         sizeof(TO->query_wielded()) == 1 &&
@@ -1768,15 +1772,15 @@ int query_damage_bonus()
 
     if(FEATS_D->usable_feat(TO, "slay the undead") && attacker && attacker->is_undead())
         ret += 2;
-    
+
     weap = this_object()->query_wielded();
-    
+
     if(this_object()->query_property("bane weapon") && sizeof(weap) && attacker)
     {
         int valid;
         string *ids = attacker->query_id();
         mixed *bane = this_object()->query_property("bane weapon");
-        
+
         if(sizeof(bane) == 2 && weap[0] == bane[0])
         {
             foreach(string id in ids)
@@ -1785,7 +1789,7 @@ int query_damage_bonus()
                 valid = 1;
             }
         }
-        
+
         if(valid)
             ret += 2;
     }

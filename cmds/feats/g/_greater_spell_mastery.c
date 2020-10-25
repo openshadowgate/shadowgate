@@ -12,7 +12,7 @@ void create()
     feat_category("Archmage");
     feat_name("greater spell mastery");
     feat_prereq("Archmage L4");
-    feat_desc("With the greater spell mastery feat, casters are able to cast up to a 5th level spell of their school spontaneously.");
+    feat_desc("With the greater spell mastery feat, casters are able to cast up to a level four spell of their school spontaneously.");
     permanent(1);
     set_required_for(({"arcane perfection"}));
 }

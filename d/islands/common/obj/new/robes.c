@@ -63,12 +63,6 @@ int wearme()
 {
     string MASTER;
 
-    if((int)ETO->query_prestige_level("mage") < 45 && (int)ETO->query_prestige_level("sorcerer") < 45)
-    {
-        tell_object(ETO,"You have not earned the right to make use of this item.");
-        return 0;
-    }
-
     if((string)ETO->query_gender() == "female") MASTER = "mistress";
     if((string)ETO->query_gender() == "male")   MASTER = "master";
 

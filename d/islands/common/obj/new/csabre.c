@@ -76,7 +76,7 @@ int hit(object targ)
         return 1;
     }
 
-    if (random(1000) < 333) {
+    if (random(1000) < 500) {
         switch (random(9)) {
         case 0:
 
@@ -121,7 +121,7 @@ int hit(object targ)
             tell_room(EETO, "%^BOLD%^%^BLACK%^" + ETOQCN + " elbows " + targ->QCN + " in the nose then brings the blade of the sabre back across " + targ->QCN + "'s eyes!%^RESET%^", ({ ETO, targ }));
             tell_object(ETO, "%^BOLD%^%^BLACK%^You elbow your opponent in the nose then bring the sword back across the eyes!%^RESET%^");
             tell_object(targ, "%^BOLD%^%^BLACK%^" + ETOQCN + " elbows you in the nose then brings the sword back across your eyes!%^RESET%^");
-            targ->set_paralyzed(7, "%^BOLD%^%^RED%^You are trying to wipe the blood from your eyes!%^RESET%^");
+            targ->set_paralyzed(6, "%^BOLD%^%^RED%^You are trying to wipe the blood from your eyes!%^RESET%^");
             targ->do_damage("torso", roll_dice(3, 10));
             counter++;
             break;

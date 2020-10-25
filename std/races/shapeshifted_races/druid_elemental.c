@@ -12,25 +12,26 @@ void create()
     ::create();
 
     set_attack_limbs( ({ "right arm","left arm" }) );
-    set_new_damage_type("bludgeoning");    
+    set_new_damage_type("bludgeoning");
     set_limbs( ({ "head","torso","right arm", "left arm" }) );
 //    set_attack_functions(([ "right arm" : (:TO,"arm_attack":), "left arm" : (:TO,"arm_attack":) ])); // moving this to an on-demand command
     set_attack_functions(([ "right arm" : (:TO,"shape_attack":), "left arm" : (:TO,"shape_attack":) ]));
     set_ac_bonus(0); // ac bonus is different from the other bonuses because of the way ac is calculated with different body types -Ares
-    set_base_attack_num(0); 
+    set_base_attack_num(0);
     set_castable(1);
     set_can_talk(0);
     set_shape_race("elemental");
     set_shape_language("sylvan");
     set_shape_profile("druid_elemental_999"); // needs to be something the player is unlikely to name one of their profiles when disguise goes in
-    set_shape_bonus("perception",2);
+    set_shape_bonus("perception",4);
     set_shape_bonus("spellcraft",4);
     set_shape_bonus("sight bonus",3);
     set_shape_bonus("water breather",1);
     set_shape_bonus("empowered",2);
     set_shape_bonus("spell penetration",4);
     set_shape_bonus("damage resistance",10);
-    set_shape_bonus("magic resistance",10);
+    set_shape_bonus("spell damage resistance",10);
+    set_shape_bonus("magic resistance",2);
     set_shape_height(200+random(40));
     set_shape_weight(5000+random(2000));
 }
@@ -92,7 +93,7 @@ int change_outof_message(object obj)
     tell_room(environment(obj),"%^RESET%^%^BOLD%^"+obj->QCN+"'s motions slow and "+obj->QS+" gets a far-away look in "+obj->QP+" eyes.",obj);
     tell_room(environment(obj),"%^RESET%^%^BLUE%^"+obj->QCN+"'s body begins to change shape, shrinking and gaining definition!",obj);
     tell_room(environment(obj),"%^RESET%^%^GREEN%^Where "+obj->QCN+" once stood, now stands a "+obj->query_race()+"!",obj);
-    
+
     return 1;
 }
 
@@ -107,7 +108,7 @@ int arm_attack(object tp, object targ)
     object etp,*attackers,att;
     string *specials=({}),*active_specials=({}),myrace;
     int i,j,chance,dice;
- 
+
     etp = environment(tp);
 
     if(!objectp(tp)) { return 0; }
@@ -124,9 +125,9 @@ int arm_attack(object tp, object targ)
 
     if(roll_dice(1,100) > chance) { return roll_dice(dice,3); }
     myrace = (string)TO->query_shape_race();
-    
+
     // picks up one spell of L2, L3 and L4 for each type of elemental (and default). Varies by element.
-    // switch falls through intentionally 
+    // switch falls through intentionally
     switch(chance)
     {
         case 35..60: specials += ({ "level 4" });
@@ -172,22 +173,22 @@ int arm_attack(object tp, object targ)
                 {
                     if(!objectp(att = attackers[j])) { continue; }
 
-                    if(!att->reflex_save(chance))                     
+                    if(!att->reflex_save(chance))
                     {
                         tell_object(att,"%^GREEN%^The earth shakes and knocks you off of your feet!");
                         tell_room(etp,"%^GREEN%^The earth shakes and knocks "+att->QCN+" off of "+att->QP+" feet!",({att}));
 
-                        att->set_tripped(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You are struggling to get your feet back under you!"); 
+                        att->set_tripped(roll_dice(1,dice),"%^RESET%^%^YELLOW%^You are struggling to get your feet back under you!");
                     }
                     else
                     {
                         tell_object(att,"%^BOLD%^%^GREEN%^You manage to withstand the trembling of the earth and keep your footing!");
                         tell_room(etp,"%^BOLD%^%^GREEN%^"+att->QCN+" manages to withstand the trembling of the earth and keep "+att->QP+" footing!",({att}));
                     }
-                }                
+                }
                 break;
             } // falls through if timer isn't up
-            
+
 
         case "level 2":
 

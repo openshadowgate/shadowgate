@@ -13,13 +13,13 @@ supreme_healer_spells = ({ "cure light wounds",
 natures_gift_spells = ({ "faerie fire",
             "entangle",
             "animal messenger",
-            "spider climb",
             "meld into nature",
+            "flame strike",
             "wall of thorns",
-            "treestride",
-            "insect plague",
             "wall of stone",
-            "regeneration", });
+            "vortex",
+            "euphoric tranquility",
+            "regenerate", });
 
 raging_healer_spells = ({
         "cure light wounds", "cause light wounds",

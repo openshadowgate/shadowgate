@@ -56,7 +56,7 @@ int hitit(object targ)
     if(!objectp(ETO)) return 1;
     if(!objectp(targ)) return 1;
 
-    if(random(1000) < 333)
+    if(random(1000) < 400)
     {
         switch(random(4))
         {

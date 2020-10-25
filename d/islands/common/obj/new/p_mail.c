@@ -126,7 +126,7 @@ int strike_func(int damage, object what, object who)
                     "%^ORANGE%^i%^YELLOW%^s%^GREEN%^m%^CYAN%^a%^BLUE%^t" +
                     "%^MAGENTA%^i%^RESET%^%^MAGENTA%^c%^RESET%^%^BOLD%^ " +
                     "light flashes to life as you strike " + ETO->QCN + ".");
-        who->set_paralyzed(random(3) + 1);
+        who->set_paralyzed(roll_dice(1, 4) + 1);
         return damage;
     }
 }

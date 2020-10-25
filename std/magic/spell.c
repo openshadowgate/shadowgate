@@ -1102,7 +1102,8 @@ void wizard_interface(object user, string type, string targ)
         !(FEATS_D->usable_feat(caster, "supreme healer") && (member_array(spell_name, supreme_healer_spells) != -1)) &&
         !(FEATS_D->usable_feat(caster, "natures gift") && (member_array(spell_name, natures_gift_spells) != -1)) &&
         !(FEATS_D->usable_feat(caster, "raging healer") && (member_array(spell_name, raging_healer_spells) != -1) && caster->query_property("raged")) &&
-        !(FEATS_D->usable_feat(caster, "greater spell mastery") && casting_level < 6 && spell_sphere == caster->query_school()) &&
+        !(FEATS_D->usable_feat(caster, "timeweaver") && (member_array(spell_name, MAGIC_SS_D->query_class_special_spells("chronicler", "all")) != -1)) &&
+        !(FEATS_D->usable_feat(caster, "greater spell mastery") && casting_level < 5 && spell_sphere == caster->query_school()) &&
         !(FEATS_D->usable_feat(caster, "inspired necromancy") && casting_level < 7 && spell_sphere == "necromancy")) {
         if (!caster->check_memorized(spell_type, improv)) {
             tell_object(caster, "You cannot " + whatdo + " this " + whatsit + " at this time.");
@@ -2119,7 +2120,7 @@ void define_clevel()
             clevel = caster->query_base_character_level();
         }
     }
-    
+
     if (FEATS_D->usable_feat(caster, "tricky spells")) {
         if(spell_sphere == "enchantment_charm" || spell_sphere == "illusion" || spell_sphere == "alteration")
             clevel = caster->query_base_character_level();
@@ -2254,7 +2255,7 @@ void define_base_damage(int adjust)
         }
     }
     if (FEATS_D->is_active(caster, "eldritch warfare")) {
-        sdamage = roll_dice(4, sdamage / 4);
+        sdamage = roll_dice(2, sdamage / 4);
     }
 }
 
@@ -2849,7 +2850,7 @@ varargs int do_save(object targ, int mod)
 
     if (shadow_spell) {
         type = "will";
-        /* caster_bonus = shadow_spell * caster_bonus / 10; */
+        caster_bonus = shadow_spell * caster_bonus / 10;
     }
 
     // this is directly copied below for the shadowdancer reroll - if

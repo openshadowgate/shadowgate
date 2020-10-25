@@ -166,7 +166,7 @@ int strike(object targ)  // It's intentional that more than one special is possi
     if(!objectp(targ)) { return 0; }
     if(!objectp(ETO))  { return 0; }
     if(!objectp(EETO)) { return 0; }
-    if(roll_dice(1,100) > 60) { COUNTER += 2; return roll_dice(1,4); }
+    if(roll_dice(1,100) > 50) { COUNTER += 2; return roll_dice(1,4); }
 
     if(rand > 0 && rand < 5) // between 1 and 4 or 40%
     {
@@ -194,7 +194,7 @@ int strike(object targ)  // It's intentional that more than one special is possi
             "bl%^RED%^a%^BLACK%^de pulsates as it slices through the air causing the "
             "ground to %^RESET%^%^RED%^shudder %^BOLD%^%^BLACK%^and %^RESET%^%^RED%^crack "
             "%^BOLD%^%^BLACK%^beneath "+targ->QCN+"!%^RESET%^",({ETO,targ}));
-        targ->do_damage("torso",roll_dice(4,10));
+        targ->do_damage("torso",roll_dice(5,10));
         COUNTER--;
     }
 
@@ -261,7 +261,7 @@ int strike(object targ)  // It's intentional that more than one special is possi
             "with %^BOLD%^%^BLACK%^unholy l%^RED%^i%^BLACK%^ght%^RESET%^%^RED%^ and "+targ->QCN+" is "
             "suddenly %^BOLD%^immolated %^RESET%^%^RED%^by %^BOLD%^%^BLACK%^crackling black "
             "flames%^RESET%^%^RED%^!%^RESET%^",({ETO,targ}));
-        targ->set_paralyzed(roll_dice(5,5) + 25, "%^BOLD%^BLACK%^You are overcome by the seering pain!%^RESET%^");
+        targ->set_paralyzed(roll_dice(1,20) + 16, "%^BOLD%^BLACK%^You are overcome by the seering pain!%^RESET%^");
         if(!targ->fort_save(ETO->query_base_character_level())) { targ->set_temporary_blinded(2); }
     }
 

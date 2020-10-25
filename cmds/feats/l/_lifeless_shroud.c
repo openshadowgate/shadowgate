@@ -193,7 +193,7 @@ void negative_effects(object obj)
         break;
 
     case 4..15:
-        damage = roll_dice(clevel, 2);
+        damage = roll_dice(1, clevel) * 3 / 2;
         if (obj->fort_save(clevel)) {
             damage = damage / 2;
         }
@@ -212,14 +212,14 @@ void negative_effects(object obj)
     case 16..17:
         if (!obj->reflex_save(clevel)) {
             tell_object(obj, cm("You feel tired as the cold envelops you."));
-            "/std/effect/status/fatigued"->apply_effect(obj, clevel / 18 + 1);
+            "/std/effect/status/fatigued"->apply_effect(obj, clevel / 25 + 1);
         }
         break;
 
     case 18..19:
         if (!obj->reflex_save(clevel)) {
             tell_object(obj, cm("You feel sickened as the cold reaches your internals."));
-            "/std/effect/status/sickened"->apply_effect(obj, clevel / 18 + 1);
+            "/std/effect/status/sickened"->apply_effect(obj, clevel / 25 + 1);
         }
         break;
     }

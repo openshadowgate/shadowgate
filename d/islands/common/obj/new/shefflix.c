@@ -69,7 +69,7 @@ int hit_func(object targ)
 {
     if(!objectp(targ) || !objectp(ETO)) return 1;
 
-    if(!random(3))
+    if(random(2))
     {
         switch(random(9))
         {
@@ -103,7 +103,7 @@ int hit_func(object targ)
             set_property("magic",1);
             targ->do_damage(targ->return_target_limb(),random(14)+13);
             set_property("magic",-1);
-            targ->set_paralyzed(5,"%^BOLD%^You are recovering from that hit.");
+            targ->set_paralyzed(6,"%^BOLD%^You are recovering from that hit.");
             break;
 
         case 7..8:

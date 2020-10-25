@@ -5,7 +5,7 @@ inherit FEAT;
 
 int BaseFlag;
 
-void create() 
+void create()
 {
    ::create();
    feat_type("instant");
@@ -19,10 +19,10 @@ void create()
 
 int allow_shifted() { return 1; }
 
-int prerequisites(object ob) 
+int prerequisites(object ob)
 {
    if(!objectp(ob)) { return 0; }
-   if((int)ob->query_class_level("monk") < 18 || (int)ob->query_alignment() > 3) 
+   if((int)ob->query_class_level("monk") < 18 || (int)ob->query_alignment() > 3)
    {
       dest_effect();
       return 0;
@@ -30,7 +30,7 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_empty_body(string str) 
+int cmd_empty_body(string str)
 {
    object feat;
    if(!objectp(TP)) { return 0; }
@@ -51,7 +51,7 @@ void execute_feat()
 {
     object *weapons;
     int x;
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;
@@ -94,33 +94,33 @@ void execute_feat()
         return;
     }
     weapons = caster->query_wielded();
-    
+
     for(x = 0;x < sizeof(weapons);x++)
     {
         if(!objectp(weapons[x])) continue;
         if((int)weapons[x]->query_size() > 1)
         {
             tell_object(caster, "%^BOLD%^%^GREEN%^Your "+weapons[x]->query_short()+
-            " prevents you from emptying your body of its vulnerabilities!%^RESET%^");         
+            " prevents you from emptying your body of its vulnerabilities!%^RESET%^");
             dest_effect();
             return;
         }
         continue;
-    }        
+    }
     if(!caster->is_ok_armour("barb"))
     {
         tell_object(caster, "%^BOLD%^%^GREEN%^Your armor "+
-        "prevents you from emptying your body of its vulnerabilities!%^RESET%^");        
+        "prevents you from emptying your body of its vulnerabilities!%^RESET%^");
         dest_effect();
         return;
-    }    
-    
+    }
+
     if(!(int)caster->spend_ki(4))
     {
         tell_object(caster, "%^BOLD%^%^CYAN%^Your empty body attempt fails, you lack the needed ki.%^RESET%^");
         dest_effect();
         return;
-    }    
+    }
     if(!caster->query_invis())
     {
         tell_object(caster, "%^BOLD%^%^WHITE%^You harness your inner Ki, emptying your body of all of its vulnerabilities, as "+
@@ -130,11 +130,11 @@ void execute_feat()
     {
         tell_object(caster, "%^BOLD%^%^WHITE%^You harness your inner Ki, emptying your body of all of its vulnerabilities!");
     }
-    if(objectp(environment(caster))) 
+    if(objectp(environment(caster)))
     {
         if(!caster->query_invis()) tell_room(environment(caster), caster->QCN+"%^BOLD%^%^WHITE%^ fades from view!%^RESET%^", caster);
     }
-    caster->set_property("using empty body", time() + 300);
+    caster->set_property("using empty body", time() + 180);
     caster->set_property("empty body", TO);
     if(!caster->query_invis())
     {
@@ -148,7 +148,7 @@ void execute_feat()
 void dest_effect()
 {
     object myEB;
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         ::dest_effect();
         remove_feat(TO);
@@ -170,9 +170,8 @@ void dest_effect()
             }
             caster->remove_property("empty body");
         }
-    }    
+    }
     ::dest_effect();
     remove_feat(TO);
     return;
 }
-

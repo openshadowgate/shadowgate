@@ -96,10 +96,18 @@ void make_me()
     }
 
     set("effect", "spell_effect");
-    set("uses", 10 + roll_dice(1, 8));
+
     set("spell", spell);
     set("spell type", sclass );
-    set("level", 10 + random(31));
+
+    if (!query("uses")) {
+        set("uses", 10 + roll_dice(1, 8));
+    }
+
+    if (!query("level")) {
+        set("level", 10 + random(CHARACTER_LEVEL_CAP - 10));
+    }
+
     set("language", "wizzish");
     set_value(query("level") * query("uses") * 4);
     set("read", "The runes indicate that you should %^YELLOW%^<use wand on target>%^RESET%^ while wielding it.");

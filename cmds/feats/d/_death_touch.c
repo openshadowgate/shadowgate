@@ -89,7 +89,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if (!present(target, place)) {
+    if (environment(target) != environment(caster)) {
         tell_object(caster, "That is not here!");
         dest_effect();
         return;
@@ -105,7 +105,7 @@ void execute_feat()
     caster->set_property("using instant feat",1);
 
     tell_object(caster, "%^RESET%^%^BLUE%^You point a finger at "+target->QCN+".%^RESET%^");
-    tell_room(place, "%^RESET%^%^BLUE%^"+caster->QCN+" points a finger at "+target->QCN+".%^RESET%^");
+    tell_room(place, "%^RESET%^%^BLUE%^"+caster->QCN+" points a finger at "+target->QCN+".%^RESET%^", ({ caster }));
     return;
 }
 
@@ -137,7 +137,7 @@ void execute_attack()
         dest_effect();
         return;
     }
-    if (target->query_property("negative energy affinity")) {
+    if (target->query_property("negative energy affinity") || FEATS_D->usable_feat(target, "undead graft")) {
         tell_room(place, "%^BLUE%^" + target->QCN + " is healed completely!%^RESET%^", caster);
         target->add_hp(target->query_max_hp());
         return;
@@ -175,6 +175,7 @@ void execute_attack()
     tell_room(place,"%^BLUE%^A ray of death releases of "+caster->QCN+"'s finger and hits "+target->QCN+"!",caster);
 
     bonusdc = clevel+BONUS_D->query_stat_bonus(caster, "intelligence");
+    spell_kill(target,caster);
     if((string)target->query_property("no death") ||do_save(target,-bonusdc))
     {
         tell_object(target,"%^BOLD%^Your soul struggles, but manages to survive.");

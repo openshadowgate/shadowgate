@@ -68,7 +68,7 @@ int hit_func(object targ)
         return 1;
     }
 
-    if (random(1000) < 333) {
+    if (random(1000) < 500) {
         switch (random(1000)) {
         case 0..300:
 
