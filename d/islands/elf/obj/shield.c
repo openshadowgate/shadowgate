@@ -6,11 +6,12 @@ void create(){
    ::create();
    set_name("shell shield");
    set_id(({"shield","shell shield"}));
-   set_short("shell shield");
+   set_short("%^MAGENTA%^s%^BLUE%^h%^MAGENTA%^ell s%^BLUE%^h%^MAGENTA%^ield");
+   set_obvious_short("%^MAGENTA%^sea stained shield%^RESET%^");
    set_long("This is a shield made from "+
    "a large sea shell with some straps on it."+
-   "  The shell has blackened barnicles growing"+
-   " on it.  They pulse with a toxic pressure.");
+   "  The shell has %^BOLD%^%^BLACK%^blackened barnicles%^RESET%^ growing"+
+   " on it.  They pulse with a %^GREEN%^toxic %^RESET%^pressure.");
    set_lore("This might have just been a regular"+
    " shell at one point.  But the resentment of "+
    "the person who died caused it to turn into an"+
