@@ -33,6 +33,12 @@ void spell_effect()
     
     weapon = present(arg, caster);
     
+    if(!arg)
+    {
+        tell_object(caster, "You need a target for dissolving weapon.");
+        return;
+    }
+    
     if(!objectp(weapon))
     {
         tell_object(caster, "There is no " + arg + " in your possession.");
@@ -74,7 +80,7 @@ void spell_effect()
 void dest_effect()
 {
     if(weapon && objectp(weapon))
-        load_object("/d/magic/obj/weap_effects/acidic")->remove_prop(weapon);
+        load_object("/d/magic/obj/weap_effects/acidic.c")->remove_prop(weapon);
     ::dest_effect();
     if(objectp(this_object()))
         this_object()->remove();
