@@ -18,11 +18,11 @@ void create(){
    set_long((:TO,"long_desc":));
    set("night long",(:TO,"night_desc":));
    set_items(([
-      (({"ocean","water"})) :
+     (({"ocean","water"})) :
         "The ocean is littered with ice bergs.  You could _swim_ to the surface but the currents are rather wild.",
 	  (({"ice berg","berg"})) : "Large blocks of ice float in the ocean.",
-	   ]));
-        (({"mud","road"})) : "The ground is a gray mud.  Perhaps you could _search_ it?.",
+	   
+     (({"mud","road"})) : "The ground is a gray mud.  Perhaps you could _search_ mud?.",
 	   ]));
     set_smell("default","Near freezing water fills your nose.");
     set_listen("default","You hear swooshing of water currents.");
