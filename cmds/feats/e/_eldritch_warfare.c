@@ -13,7 +13,7 @@ void create()
     feat_category("EldritchKnight");
     feat_name("eldritch warfare");
     feat_prereq("Eldritch Knight L4");
-    feat_syntax("eldritch_warfare");
+    feat_syntax("eldritch_warfare [arcane|divine|spellsong]");
     feat_desc("The eldritch knight becomes one with magic during combat, if they so wish, the knight can divide their attention and cast during combat at the price of potency of their spells.");
 }
 
@@ -50,6 +50,7 @@ string cm(string str)
 void execute_feat()
 {
     object obj;
+    string castmesson, castmessoff, messon, messoff;
 
     if(!objectp(caster))
     {
@@ -59,18 +60,50 @@ void execute_feat()
 
     if(FEATS_D->is_active(caster,"eldritch warfare"))
     {
+        switch(TP->query_property("warfare type")){
+            case "divine":
+                castmessoff = "You release your concentration on blending your martial skill and divine power.";
+                messoff = ""+caster->QCN+" releases "+caster->QP+" concentration on blending the martial and divine.";
+                break;
+            case "spellsong":
+                castmessoff = "You release your concentration on the warsongs.";
+                messoff = ""+caster->QCN+" releases "+caster->QP+" concentration on the warsongs.";
+                break;
+            case "arcane":
+            default:
+                castmessoff = "You release your concentration on blending your martial and arcane prowess.";
+                messoff = ""+caster->QCN+" releases "+caster->QP+" concentration on blending the martial and arcane.";
+                break;
+        }
         obj = query_active_feat("eldritch warfare");
-        tell_object(caster,cm("You release your concentration on the warsongs."));
-        tell_room(place,cm(""+caster->QCN+" releases "+caster->QP+" concentration on the warsongs."), caster);
+        tell_object(caster,cm(castmessoff));
+        tell_room(place,cm(messoff), caster);
         obj->dest_effect();
         return;
     }
     ::execute_feat();
 
-    tell_object(caster,cm("You concentrate on your warsongs, starting to move rhythmically."));
-    tell_room(place,cm(""+caster->QCN+" starts moving rhythmically in unison with "+caster->QP+" warsongs."), caster);
+    switch(arg){
+        case "divine":
+            castmesson = "You concentrate on blending your martial skill and divine power.";
+            messon = ""+caster->QCN+" starts to concentrate on blending "+caster->QP+" martial and divine power.";
+            break;
+        case "spellsong":
+            castmesson = "You concentrate on your warsongs, starting to move rhythmically.";
+            messon = ""+caster->QCN+" starts moving rhythmically in unison with "+caster->QP+" warsongs.";
+            break;
+        case "arcane":
+        default:
+            castmesson = "You concentrate on blending your martial skill and arcane prowess.";
+            messon = ""+caster->QCN+" starts to concentrate on blending "+caster->QP+" martial and arcane prowess.";
+            break;
+    }
+
+    tell_object(caster,cm(castmesson));
+    tell_room(place,cm(messon), caster);
     caster->set_property("active_feats",({TO}));
     caster->set_property("cast and attack",1);
+    caster->set_property("warfare type", arg);
     return;
 }
 
@@ -80,7 +113,7 @@ void dest_effect()
     {
         caster->remove_property_value("active_feats",({TO}));
         caster->remove_property("cast and attack");
-        tell_object(caster,"%^BOLD%^%^BLUE%^Your concentration on the warsongs fades.");
+        tell_object(caster,"%^BOLD%^%^BLUE%^Your concentration on eldritch warfare fades.");
     }
     ::dest_effect();
     remove_feat(TO);
