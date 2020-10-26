@@ -1,9 +1,9 @@
 /*
   _bend_reality.c
-  
+
   Similar to shadow spells like shadow alteration.
   Lets you cast lower level psychic powers.
-  
+
   -- Tlaloc -- 4.4.20
 */
 
@@ -41,7 +41,7 @@ int preSpell()
         tell_object(caster,"You must provide arguments to this spell!");
         return 0;
     }
-    
+
     if(sscanf(arg, "%s on %s", spl, sargs)!=2)
         spl = arg;
 
@@ -65,20 +65,20 @@ int preSpell()
 
     psi_level = spell_to_cast->query_spell_level("psion");
     war_level = spell_to_cast->query_spell_level("psywarrior");
-    
+
     //If it's not a spell that exists for psion or psywarrior, error message.
     if(!psi_level && !war_level)
     {
         tell_object(this_player(), "You may only cast psywarrior or psion spells with this power!");
         return 0;
     }
-    
+
     max_level = MAX_PSI;
 
     if(spell_to_cast->query_discipline() && spell_to_cast->query_discipline() != "me")
         if(caster->query_discipline() != spell_to_cast->query_discipline())
             max_level = MAX_DIS;
-    
+
     if(psi_level && psi_level <= max_level)
     {
         ctype = "psion";
@@ -94,10 +94,10 @@ int preSpell()
         tell_object(this_player(),"This spell is too powerful for bend reality!");
         return 0;
     }
-    
+
     tell_object(caster, "%^BOLD%^%^CYAN%^You c%^RESET%^%^CYAN%^o%^BOLD%^ncentrate d%^RESET%^%^CYAN%^e%^BOLD%^eply and b%^RESET%^%^CYAN%^e%^BOLD%^nd the v%^RESET%^%^CYAN%^e%^BOLD%^ry f%^RESET%^%^CYAN%^a%^BOLD%^bric of r%^RESET%^%^CYAN%^e%^BOLD%^ality a%^RESET%^%^CYAN%^r%^BOLD%^ound y%^RESET%^%^CYAN%^o%^BOLD%^u!%^RESET%^");
-    tell_room(place,"%^CYAN%^BOLD%^"+caster->QCN+" %^BOLD%^%^CYAN%^c%^RESET%^%^CYAN%^o%^BOLD%^ncentrates d%^RESET%^%^CYAN%^e%^BOLD%^eply and b%^RESET%^%^CYAN%^e%^BOLD%^nds the v%^RESET%^%^CYAN%^e%^BOLD%^ry f%^RESET%^%^CYAN%^a%^BOLD%^bric of r%^RESET%^%^CYAN%^e%^BOLD%^ality a%^RESET%^%^CYAN%^r%^BOLD%^ound " + caster->query_possessive(), ({ caster }));
-    
+    tell_room(place,"%^CYAN%^BOLD%^"+caster->QCN+" %^BOLD%^%^CYAN%^c%^RESET%^%^CYAN%^o%^BOLD%^ncentrates d%^RESET%^%^CYAN%^e%^BOLD%^eply and b%^RESET%^%^CYAN%^e%^BOLD%^nds the v%^RESET%^%^CYAN%^e%^BOLD%^ry f%^RESET%^%^CYAN%^a%^BOLD%^bric of r%^RESET%^%^CYAN%^e%^BOLD%^ality a%^RESET%^%^CYAN%^r%^BOLD%^ound " + caster->query_objective(), ({ caster }));
+
     spell_successful();
 
     spell_to_cast->use_spell(TP,sargs,clevel,100,ctype);

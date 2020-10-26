@@ -1,9 +1,9 @@
 /*
   _dissolving_weapon.c
-  
+
   Dissolving Weapon from PF SRD.
   Adds acid damage to your weapon.
-  
+
   -- Tlaloc --
 */
 
@@ -30,48 +30,48 @@ void spell_effect()
 {
     mapping info;
     string pname, wname, pposs;
-    
+
     weapon = present(arg, caster);
-    
+
     if(!arg)
     {
         tell_object(caster, "You need a target for dissolving weapon.");
         return;
     }
-    
+
     if(!objectp(weapon))
     {
         tell_object(caster, "There is no " + arg + " in your possession.");
         this_object()->remove();
         return;
     }
-    
+
     if(!weapon->is_weapon())
     {
         tell_object(caster, "That is not a weapon!");
         this_object()->remove();
         return;
     }
-    
+
     if(weapon->query_property("temp_hit_bonus"))
     {
         tell_object(caster, "That weapon is already magically enhanced.");
         this_object()->remove();
         return;
     }
-    
+
     info = ([  ]);
     info["file"] = "/d/magic/obj/weap_effects/acidic";
     info["func name"] = "acid_func";
     info["spell"] = this_object();
-    
+
     weapon->set_property("temp_hit_bonus", info);
-    pname = capitalize(caster->query_name());
+    pname = caster->query_cap_name();
     wname = weapon->query_name();
     pposs = caster->query_possessive();
-    
+
     tell_object(caster, "%^GREEN%^BOLD%^You focus your psychic energies onto your " + wname + " and it takes on a coat of acid.%^RESET%^");
-    place && tell_room(place, "%^GREEN%^BOLD%^" + pname + "focuses " + pposs + " psychic energies onto " + pposs + " weapon and it is soon coated with acid.%^RESET%^", ({ caster }));
+    place && tell_room(place, "%^GREEN%^BOLD%^" + pname + " focuses " + pposs + " psychic energies onto " + pposs + " weapon and it is soon coated with acid.%^RESET%^", ({ caster }));
     caster->set_property("spelled", ({ this_object() }));
     weapon->set_property("added short", ({ "%^GREEN%^BOLD%^ {acidic}%^RESET%^" }) );
     addSpellToCaster();

@@ -1,10 +1,10 @@
 /*
   bane.c
-  
+
   Bane feature from PF SRD for Inquisitors
   Temporarily buffs your weapon to do more
   damage to a specific type of enemy.
-  
+
   -- Tlaloc --
 */
 
@@ -18,56 +18,56 @@ int bane_func(object ob)
     object room, player, spell, enemy;
     string *ids, pname, ename, bane_type;
     int valid, damage, glvl;
-    
+
     if(!ob)
         return 0;
-    
+
     player = environment(ob);
     player && room = environment(player);
-    
+
     if(!player || !room)
         return 0;
 
     bane_type = ob->query_property("bane type");
-    
+
     if(!bane_type)
         return 0;
-    
+
     spell = ob->query_property("temp_hit_bonus")["spell"];
-    
+
     if(!spell)
         return 0;
-    
+
     enemy = player->query_current_attacker();
-    
+
     if(!enemy)
         return 0;
-    
+
     if(ob != player->query_wielded()[0])
         return 0;
-    
+
     valid = 0;
     ids = enemy->query_id();
-    
+
     foreach(string id in ids)
     {
         if(USER_D->is_valid_enemy(id, bane_type))
             valid = 1;
     }
-    
+
     if(!valid)
         return 0;
-    
+
     glvl = player->query_guild_level("inquisitor");
     //Damage scales from 1dWC + 2 to 6dWC + 2
     damage = (ob->query_wc() + 2) * (1 + glvl / 10);
 
     if(random(10 - glvl / 10))
         return 0;
-    
-    pname = capitalize(player->query_name());
-    ename = capitalize(enemy->query_name());
-    
+
+    pname = player->query_cap_name();
+    ename = enemy->query_cap_name();
+
     switch(player->query_true_align())
     {
         case 1:
@@ -95,30 +95,20 @@ int bane_func(object ob)
         return 0;
         break;
     }
-    
+
     enemy->cause_typed_damage(enemy, enemy->return_target_limb(), damage, "divine");
     return 1;
-        
+
 }
 
 void remove_prop(object ob)
 {
     object player;
-    
+
     ob->remove_property_value("added short", ({ "%^CYAN%^BOLD%^ [bane]%^RESET%^" }) );
     ob->remove_property("temp_hit_bonus");
     ob->remove_property("bane type");
-    
+
     player = environment(ob);
     player && tell_object(player, "%^BOLD%^Your magical bane fades from your weapon.%^RESET%^");
-}   
-    
-    
-  
-    
-    
-    
-    
-    
-    
-    
+}
