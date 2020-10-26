@@ -55,7 +55,7 @@ set_monster_feats(({
 set_property("water breather", 1);
 set_property("function and attack",1);
 new(OBJ"weed_cloak")->move(TO);
-new(OBJ"weed_belt")->move(TO);
+new(OBJ"weed_belt2")->move(TO);
 new(OBJ"shield")->move(TO);
 new(OBJ"ray_spear")->move(TO);
 new(OBJ"bottoms")->move(TO);
