@@ -61,29 +61,37 @@ void execute_feat()
     if(FEATS_D->is_active(caster,"eldritch warfare"))
     {
         switch(TP->query_property("warfare type")){
+            case "arcane":
+                castmessoff = "You release your concentration on blending martial and arcane prowess.";
+                messoff = ""+caster->QCN+" releases "+caster->QP+" concentration on blending the martial and arcane.";
+                break;
             case "divine":
-                castmessoff = "You release your concentration on blending your martial skill and divine power.";
+                castmessoff = "You release your concentration on blending martial skill and divine power.";
                 messoff = ""+caster->QCN+" releases "+caster->QP+" concentration on blending the martial and divine.";
                 break;
             case "spellsong":
                 castmessoff = "You release your concentration on the warsongs.";
                 messoff = ""+caster->QCN+" releases "+caster->QP+" concentration on the warsongs.";
                 break;
-            case "arcane":
             default:
-                castmessoff = "You release your concentration on blending your martial and arcane prowess.";
-                messoff = ""+caster->QCN+" releases "+caster->QP+" concentration on blending the martial and arcane.";
+                castmessoff = "You release your concentration on enspelling the martial form.";
+                messoff = ""+caster->QCN+" releases "+caster->QP+" concentration on enspelling the martial form.";
                 break;
         }
         obj = query_active_feat("eldritch warfare");
         tell_object(caster,cm(castmessoff));
         tell_room(place,cm(messoff), caster);
+        caster->remove_property("warfare type");
         obj->dest_effect();
         return;
     }
     ::execute_feat();
 
     switch(arg){
+        case "arcane":
+            castmesson = "You concentrate on blending your martial skill and arcane prowess.";
+            messon = ""+caster->QCN+" starts to concentrate on blending "+caster->QP+" martial and arcane prowess.";
+            break;
         case "divine":
             castmesson = "You concentrate on blending your martial skill and divine power.";
             messon = ""+caster->QCN+" starts to concentrate on blending "+caster->QP+" martial and divine power.";
@@ -92,10 +100,9 @@ void execute_feat()
             castmesson = "You concentrate on your warsongs, starting to move rhythmically.";
             messon = ""+caster->QCN+" starts moving rhythmically in unison with "+caster->QP+" warsongs.";
             break;
-        case "arcane":
         default:
-            castmesson = "You concentrate on blending your martial skill and arcane prowess.";
-            messon = ""+caster->QCN+" starts to concentrate on blending "+caster->QP+" martial and arcane prowess.";
+            castmesson = "You concentrate on enspelling your martial form.";
+            messon = ""+caster->QCN+" starts to concentrate on enspelling "+caster->QP+" martial form.";
             break;
     }
 
