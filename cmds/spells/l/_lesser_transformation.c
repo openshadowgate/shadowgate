@@ -69,7 +69,7 @@ void dest_effect()
     if(objectp(caster))
     {
         caster->remove_property("lesser_transformation");
-        caster->set_property("fighter_attacks_mod",-abonus);
+        caster->set_property("fighter_attacks_mod",-abonus/2-1);
         caster->add_skill_bonus("athletics",-abonus);
         caster->add_saving_bonus("reflex",-abonus);
         tell_object(caster,"%^MAGENTA%^You feel calm and lethargic as your muscles return to normal state.");
