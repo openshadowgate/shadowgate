@@ -18,7 +18,7 @@ string *restricted_classes() { return ({ }); }
 
 int *restricted_alignments()
 {
-    return ({ 7, 8, 9, });
+    return return ({});
 }
 
 string *restricted_gods() { return ({}); }
