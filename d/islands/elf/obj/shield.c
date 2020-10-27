@@ -6,7 +6,7 @@ void create(){
    ::create();
    set_name("shell shield");
    set_id(({"shield","shell shield"}));
-   set_short("%^MAGENTA%^s%^BLUE%^h%^MAGENTA%^ell s%^BLUE%^h%^MAGENTA%^ield");
+   set_short("%^MAGENTA%^s%^BLUE%^h%^MAGENTA%^ell s%^BLUE%^h%^MAGENTA%^ield%^RESET%^");
    set_obvious_short("%^MAGENTA%^sea stained shield%^RESET%^");
    set_long("This is a shield made from "+
    "a large sea shell with some straps on it."+
