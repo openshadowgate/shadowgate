@@ -28,7 +28,7 @@ void create() {
 }
 
 int read_map(string str){
-  if(!str) notify_fail("Read what?");
+  if(!str) return notify_fail("Read what?"); //causing errors in debug log hopefully this will fix -Hades
 //  if(str != "map") return 0;
 // Fix to make sure you can "read map 2"...
         if (present(str, ETO) != TO) return 0;
