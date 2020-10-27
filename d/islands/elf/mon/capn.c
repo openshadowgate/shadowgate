@@ -67,6 +67,22 @@ set_func_chance(75);
 set_missChance(25);
 add_attack_bonus(20);
 add_damage_bonus(20);
+set_emotes(10,({
+    "Captian Rev says: We must defeat the elves.",
+    "A small fish chews on the undead man's flesh",
+    "Captian Rev says: We were a proud kingdom once.",
+    "Captian Rev says: The only good elf is a dead one.",
+    "Captian Rev says: We will destroy the elves.",
+    "Captian Rev says: For killing the royals the elves must pay.",
+    "Captian Rev say: Even in death I will serve.",
+    "Captian Rev looks around fearing some unseen attacker.",
+    "Captian Rev frowns looking frusterated.",
+    "Captian Rev says: How could they kill even the innocents.",
+    "Captian Rev paces around the room..",
+    "Captian Rev's eyes open wide!",
+    "Captian Rev says: My whole family was killed by those gold bastards...",
+    "Captian Rev says: My soul won't rest until every elf is dead."
+}),0);
 }
 void init(){
     ::init();
@@ -109,7 +125,7 @@ void sweep(object targ){
     critters = query_attackers();
     tell_room(ETO,"%^RED%^The dead captain lets out a %^BLUE%^drowning%^RED%^ gurgle!");
     foreach(object ob in critters){
-      tell_object(ob, "%^BLUE%^The noise makes you feel like you are drowning!." );
-      ob->cause_typed_damage(ob, ob->return_target_limb(),random(200),"mental");
+    tell_object(ob, "%^BLUE%^The noise makes you feel like you are drowning!." );
+    ob->cause_typed_damage(ob, ob->return_target_limb(),random(200),"mental");
   }
 }
