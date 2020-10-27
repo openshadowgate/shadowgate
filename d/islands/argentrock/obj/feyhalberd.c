@@ -38,7 +38,7 @@ void mess() {
     object *msgs;
     if(!query_wielded() || !ETO) return;
         msgs = ({"Fey'ri are not to be trusted.",
-        "What villains would harvest the souls of their companions to try to imitate the power of a moonblade?",
+"What villains would harvest the souls of their companions to try to imitate the power of a moonblade?",
 "The evils of this world would do anything for power.  ",
 "Protecting the pure against those who would defile the forest that is our goal.",
 "The Fey'ri abandoned the gods when they chastised them and sought favor with the demons.",
@@ -82,7 +82,7 @@ int extra_hit(object targ)
           targ->set_paralyzed(5,"%^ORANGE%^The brambles around your neck "+
           "stop you from %^RED%^breathing.");
 
-                if(!present("brambobj",targ)){
+          if(!present("brambobj",targ)){
                 ob = new(OBJ+"bram");
                 ob->move(targ);
                 if(objectp(ob) && objectp(targ))
@@ -96,7 +96,7 @@ int extra_hit(object targ)
         !present("feyspirit",EETO))
         {  tell_room(EETO,"%^CYAN%^A blue haze shoots from"
            +ETO->QCN+"'s halberd and a glowing light comes to aid you.",({ETO}));
-        tell_object(ETO,"%^CYAN%^A f%^GREEN%^e%^CYAN%^y s%^MAGENTA%^p%^CYAN%^irit "+
+           tell_object(ETO,"%^CYAN%^A f%^GREEN%^e%^CYAN%^y s%^MAGENTA%^p%^CYAN%^irit "+
          "comes to your aid.");
         tree =new(MON+"fey_spirit");
         tree ->move(environment(ETO));
@@ -121,9 +121,9 @@ int extra_hit(object targ)
          " and your weapon sprays %^ORANGE%^thorns%^GREEN%^ into the wound.");
      tell_room(EETO,"%^GREEN%^"+ETO->QCN+"'s"+
           " halberd sprays %^ORANGE%^thorns%^GREEN%^ at "+
-                  targ->QCN+".",({ETO,targ}));
-         tell_object(targ,"%^GREEN%^"+ETO->QCN+"'s"+
-                " halberd slashes you then begins spraying thorns.");
+           targ->QCN+".",({ETO,targ}));
+     tell_object(targ,"%^GREEN%^"+ETO->QCN+"'s"+
+          " halberd slashes you then begins spraying thorns.");
     
 new("/cmds/spells/t/_thorn_spray")->use_spell(ETO,targ,20,100,"cleric");
         return 1;
@@ -139,20 +139,20 @@ int extra_wield() { // only goodly
     if (!ETO) return 0;
     myalign = (int)ETO->query_alignment();
     if((myalign % 3) == 1) {
-                write(
+        write(
             "%^GREEN%^You wield the halberd and feel accepted.");
         say(
             "%^GREEN%^"+ETOQCN+" wields a halberd and gets a far "+
             "away look in "+ETO->QP+" eyes.");
 
-                ETO->set_property("good item",1);
-         if(find_call_out("mess")==-1)
+        ETO->set_property("good item",1);
+        if(find_call_out("mess")==-1)
            call_out("mess",120+random(1000));
                 }
         else{
            say("%^GREEN%^"+ETOQCN+" holds the halberd but jerks violently"+
-             " as brambles lash out from it, wrapping "+ETO->QO+"
-tightly.");
+             " as brambles lash out from it, wrapping "+ETO->QO+
+             " tightly.");
            write("%^ORANGE%^The halberd juts out brambles that bind"+
            " you fast when you place your hand on it."+
            "  \n They cut into you terribly."+
@@ -170,8 +170,8 @@ int extra_unwield() {
     if (!ETO) return 0;
     tell_object(ETO,
     "%^GREEN%^You release the "+
-         "Halberd and sigh.");
-        ETO->set_property("good item",-1);
+    "Halberd and sigh.");
+    ETO->set_property("good item",-1);
    return 1;
 }
 void init() {
@@ -179,7 +179,7 @@ void init() {
     if(!objectp(TP)) return;
     if(!objectp(ETO)) return;
     if(TP != ETO) return;
-   add_action("grow","grow");
+    add_action("grow","grow");
 }
 
 int grow(string str) {
@@ -199,7 +199,7 @@ int grow(string str) {
        rope->set_short("%^GREEN%^A vine rope");
        rope->set_long("%^GREEN%^This rope looks more like a "+
             "jungle vine than a rope.  It is quite flexable"+
-                " and could bind a person very well.");
+            " and could bind a person very well.");
        rope->move(ETO);
        ETO->use_stamina(50);
        ETO->set_paralyzed(5,"%^ORANGE%^The weapon drains your stamina.");
