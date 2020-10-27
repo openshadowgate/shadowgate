@@ -1230,6 +1230,10 @@ mixed WildMagicArea(object where)
         return 0;
     }
 
+    if (spell_name == "suppress wild magic") {
+        return 0;
+    }
+
     if (where->query_property("wild magic") > roll_dice(1, 100)) {
         wm_affect = where->query_property("wild magic affect");
         if (!stringp(wm_notify = where->query_property("wild magic warning"))) {
