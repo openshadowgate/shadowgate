@@ -7,6 +7,7 @@ inherit FEAT;
 void create()
 {
     ::create();
+    set_author("wedex");
     feat_type("permanent");
     feat_category("MagusArcana");
     feat_name("fighter training");

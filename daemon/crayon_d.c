@@ -6,13 +6,13 @@ inherit DAEMON;
 #define CAPS "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
 #define R "%^RED%^"
-#define B "%^BLUE%^"
-#define O "%^ORANGE%^"
-#define Y "%^YELLOW%^"
 #define G "%^GREEN%^"
-#define L "%^BOLD%^%^BLACK%^"
+#define B "%^BLUE%^"
 #define C "%^CYAN%^"
 #define M "%^MAGENTA%^"
+#define Y "%^YELLOW%^"
+#define L "%^BOLD%^%^BLACK%^"
+#define O "%^ORANGE%^"
 #define D "%^BOLD%^"
 #define S "%^RESET%^"
 #define E "%^RESET%^%^BOLD%^"
@@ -177,6 +177,18 @@ mapping color_scheme(string scheme)
         back_color = C;
         common_colors = ({C});
         rare_colors = ({S+D,D+O,O,D+C,L});
+        scatter = 2;
+        break;
+    case "lightning yellow":
+        back_color = Y;
+        common_colors = ({ Y, D + Y, L });
+        rare_colors = ({ C });
+        scatter = 2;
+        break;
+    case "ice blue":
+        back_color = C;
+        common_colors = ({ C, D + C, L });
+        rare_colors = ({ B });
         scatter = 2;
         break;
     case "rand":

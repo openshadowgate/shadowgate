@@ -1247,7 +1247,6 @@ int remove_weapon_from_limb(object ob)
 
 void check_active_feats(int numwielded) {
     int active_feat;
-    object deactivate_feat;
     //positioning
     active_feat = (int)TO->query_property("tactical_positioning");
     if (active_feat && numwielded != 1) {
@@ -1259,12 +1258,20 @@ void check_active_feats(int numwielded) {
     //spell combat
     active_feat = (int)TO->query_property("magus cast");
     if (active_feat && numwielded != 1) {
-        deactivate_feat = FEAT->query_active_feat("spell combat");
-        if (deactivate_feat) {
-            deactivate_feat->dest_effect();
-            message("my_action", "You can only benefit from spell combat with a single one-handed melee weapon.", TO);
-        }
+        object deactivate_feat, * active_feats;
+        int i;
+        //Venger: im almost sure that this part might work better with query_active_feat("spell combat")
+        active_feats = TO->query_property("active_feats");
 
+        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
+        {
+            if (!objectp(active_feats[i])) { continue; }
+            if (active_feats[i]->query_feat_name() != "spell combat") { continue; }
+            deactivate_feat = active_feats[i];
+            break;
+        }
+        deactivate_feat->dest_effect();
+        message("my_action", "You can only benefit from spell combat with a single one-handed melee weapon.", TO);
     }
 }
 

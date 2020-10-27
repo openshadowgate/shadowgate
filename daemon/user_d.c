@@ -225,6 +225,92 @@ void init_ki(object ob)
 }
 //END OF MONK FUNCS :P
 
+//Magus Arcana Functions, Wedex October 2020 
+int spend_arcana(object ob, int amount)
+{
+    int avail;
+    if (!intp(amount)) {
+        return 0;
+    }
+    if (!objectp(ob)) {
+        return 0;
+    }
+    avail = (int)ob->query("available arcana");
+    if (amount > avail) {
+        return 0;
+    }
+    avail -= amount;
+    ob->set("available arcana", avail);
+    return 1;
+}
+
+int can_spend_arcana(object ob, int amount)
+{
+    int avail;
+    if (!intp(amount)) {
+        return 0;
+    }
+    if (!objectp(ob)) {
+        return 0;
+    }
+    avail = (int)ob->query("available arcana");
+    if (avail >= amount) {
+        return 1;
+    }
+    return 0;
+}
+
+int has_arcana(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!ob->query("available arcana")) {
+        return 0;
+    }
+    return 1;
+}
+
+varargs void regenerate_arcana(object ob, int amount, int pass)
+{
+    int avail, max, delay;
+    if (!intp(amount)) return 0;
+    if (!objectp(ob)) return 0;
+    if (pass == 1 && (time() < (int)ob->query("last arcana regen"))) return;
+    avail = (int)ob->query("available arcana");
+    max = (int)ob->query("maximum arcana");
+    avail += amount;
+    if (avail > max) avail = max;
+    ob->set("available arcana", avail);
+    if (pass)
+    {
+        delay = 10 + random(11);
+        delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
+        if (delay < 5) delay = 5;
+        ob->set("last arcana regen", time() + delay);
+    }
+    return;
+}
+
+void init_arcana(object ob)
+{
+    int avail, newmax, oldmax, diff;
+    if (!objectp(ob)) return;
+    if (!(int)ob->is_class("magus")) return;
+    newmax = (int)ob->query_guild_level("magus") / 2;
+    newmax = (newmax > 0 ? newmax: 1) + (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
+    if (!intp(avail = (int)ob->query("available arcana"))) avail = newmax;
+    if (intp(oldmax = (int)ob->query("maximum arcana")))
+    {
+        diff = newmax - oldmax;
+        avail += diff;
+    }
+    ob->set("available arcana", avail);
+    ob->set("maximum arcana", newmax);
+    return;
+}
+//END of Magus
+
 //various FLAG command Functions
 int no_exp(object who)
 {

@@ -371,6 +371,10 @@ int advance(object tp, string myclass)
     {
         "/daemon/user_d.c"->init_ki(tp);
     }
+    if (myclass == "magus")
+    {
+        "/daemon/user_d.c"->init_arcana(tp);
+    }
     return ret;
 }
 

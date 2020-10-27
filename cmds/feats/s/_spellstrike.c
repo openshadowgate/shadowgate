@@ -10,10 +10,10 @@ void create()
     set_author("wedex");
     feat_type("permanent");
     feat_category("MagusArcana");
-    feat_name("magus armor");
-    feat_prereq("Magus L1");
+    feat_name("spellstrike");
+    feat_prereq("Magus L2");
     feat_classes("magus");
-    feat_desc("A magus can cast magus spells while wearing light armor. At 7th level this feats extends to medium armors. At 13th level this feats extends to heavy armors.");
+    feat_desc("While under the effects of spell combat, the magus can deliver one his spells through any weapon he is wielding as part of a melee attack. This attack uses the weapon's critical range (modified by the keen property or similar effects), but the spell effect only deals x2 damage on a successful critical hit.");
     permanent(1);
 }
 
@@ -24,7 +24,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (!ob->is_class("magus")) {
+    if (ob->query_class_level("magus") < 2) {
         dest_effect();
         return 0;
     }

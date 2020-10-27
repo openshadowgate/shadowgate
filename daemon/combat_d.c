@@ -299,6 +299,23 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
     resist_perc = (int)targ->query_resistance_percent(type);
+    /*
+    //Venger: living creatures are healed with positive energy
+    //undead and exceptions creatures are healed with negative energy
+    //now let's change all spells to "deal" damage
+    if (type == "positive energy") {
+        if (!targ->query_property("negative energy affinity")) {
+            resist_perc += 200;
+        }
+    }
+    if (type == "negative energy") {
+        if (targ->query_property("heart of darkness") ||
+            targ->query_property("negative energy affinity")) {
+            resist_perc += 200;
+        }
+    }
+    */
+
     resist = (int)targ->query_resistance(type);
 
     if (resist_perc > 500) {
@@ -308,19 +325,10 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         resist_perc = -500;
     }
 
-    switch (resist_perc) {
-    case (-500)..(-1): // resistance less than 0 equals more damage done
-        percentage = to_float((100 + absolute_value(resist_perc)) / to_float(100));
-        break;
-
-    case 0..100: // resistance between 0 and 100 equals reduced damage
-        percentage = to_float((100 - resist_perc) / to_float(100));
-        break;
-
-    case 101..500: // resistance greater than 100 equals healing
-        percentage = to_float((100 - resist_perc) / to_float(100));
-        break;
-    }
+    // resistance less than 0 equals more damage done
+    // resistance between 0 and 100 equals reduced damage
+    // resistance greater than 100 equals healing
+    percentage = to_float((100 - resist_perc) / to_float(100));
 
     damage = to_int(damage * percentage);
 
@@ -474,8 +482,9 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 void check_extra_abilities(object attacker, object target, object weapon, int crit_hit)
 {
     string ename, pname;
-    int effect_chance;
+    int effect_chance, i;
     object room;
+    string * elements, * actions, * bursts, * colors;
 
     if (!objectp(attacker)) {
         return;
@@ -504,6 +513,38 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             tell_room(environment(attacker), "%^CYAN%^" + attacker->QCN + " shouts a brief warsong and unleashes wave of %^YELLOW%^w%^MAGENTA%^i%^WHITE%^l%^RED%^d %^GREEN%^m%^BLUE%^a%^WHITE%^g%^ORANGE%^i%^RED%^c%^RESET%^%^CYAN%^ at " + target->QCN + "!%^RESET%^", ({ target, attacker }));
             target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 8), "untyped");     //note this is multiplied by the critical multiplier of the weapon, or at least appears to be
             //attempting to debug to see if it's multiplied - Odin
+        }
+        // magus spell_combat crits
+        if (!attacker->query_property("shapeshifted") &&
+            objectp(weapon) &&
+            attacker->query_property("magus properties")) {
+            int crit_mult;
+
+            //the feat already validates if the user is wielding 1h 
+            crit_mult = (int)weapon->query_critical_hit_multiplier() - 1;
+
+            if (FEATS_D->usable_feat(attacker, "exploit weakness")) {
+                crit_mult += 2;
+            }
+            else if (FEATS_D->usable_feat(attacker, "weapon mastery")) {
+                crit_mult += 1;
+            }
+
+            elements = ({ "fire", "cold", "electricity" });
+            actions = ({ "a burst", "shards", "tendrils" });
+            bursts = ({ "flames", "ice", "lightning" });
+            colors = ({ "fire red", "ice blue", "lightning yellow" });
+
+            for (i = 0; i < sizeof(elements); i++)
+            {
+                if (attacker->query_property(elements[i] + " burst")) {
+                    tell_object(attacker, CRAYON_D->color_string("You release " + actions[i] + " of " + bursts[i] + " at " + target->QCN + "!", colors[i]));
+                    tell_object(target, CRAYON_D->color_string(attacker->QCN + " releases " + actions[i] + " of " + bursts[i] + "  through you!", colors[i]));
+                    tell_room(environment(attacker), CRAYON_D->color_string(attacker->QCN + " releases " + actions[i] + " of " + bursts[i] + " at " + target->QCN + "!", colors[i]), ({ target, attacker }));
+
+                    target->cause_typed_damage(target, target->return_target_limb(), roll_dice(crit_mult, 10), elements[i]);
+                }
+            }
         }
 
         //Handles Crypststalker feat
@@ -561,6 +602,27 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         }
         if (effect_chance > roll_dice(1, 100)) {
             POISON_D->ApplyPoison(target, attacker->query_property("natural poison"), attacker, "injury");
+        }
+    }
+
+    // magus spell_combat damage
+    if (!attacker->query_property("shapeshifted") &&
+        objectp(weapon) &&
+        attacker->query_property("magus properties")) {
+
+        elements = ({ "fire", "cold", "electricity" });
+        bursts = ({ "flames", "ice", "lightning" });
+        colors = ({ "fire red", "ice blue", "lightning yellow" });
+
+        for (i = 0; i < sizeof(elements); i++)
+        {
+            if (attacker->query_property(elements[i] + " burst")) {
+                tell_object(attacker, CRAYON_D->color_string("You release " + bursts[i] + " at " + target->QCN + "!", colors[i]));
+                tell_object(target, CRAYON_D->color_string(attacker->QCN + " releases " + bursts[i] + "  through you!", colors[i]));
+                tell_room(environment(attacker), CRAYON_D->color_string(attacker->QCN + " releases " + bursts[i] + " at " + target->QCN + "!", colors[i]), ({ target, attacker }));
+
+                target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 6), elements[i]);
+            }
         }
     }
 

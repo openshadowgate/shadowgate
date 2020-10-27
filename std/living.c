@@ -382,6 +382,9 @@ void heart_beat()
     if (TO->is_class("monk")) {
         "/daemon/user_d.c"->regenerate_ki(TO, (1 + random(2)), 1);
     }
+    if (TO->is_class("magus")) {
+        "/daemon/user_d.c"->regenerate_arcana(TO, (1 + random(2)), 1);
+    }
     if (used_stamina > 0) {
         if (!userp(TO)) {
             used_stamina -= 10;

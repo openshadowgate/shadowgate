@@ -4,11 +4,10 @@
 
 inherit FEAT;
 
-object *exclude = ({});
-
 void create()
 {
     ::create();
+    set_author("wedex");
     feat_type("instant");
     feat_category("MagusArcana");
     feat_name("spell combat");
@@ -66,6 +65,8 @@ string cm(string str)
 void execute_feat()
 {
     object obj;
+    string * elements;
+    int i;
 
     if(!objectp(caster))
     {
@@ -85,6 +86,15 @@ void execute_feat()
     tell_object(caster,cm("You combine your magical ability and martial prowess."));
     caster->set_property("active_feats",({TO}));
     caster->set_property("magus cast", 1);
+    caster->set_property("magus properties", 1);
+    elements = ({ "fire","cold","electricity" });
+    
+    for (i = 0; i < sizeof(elements); i++)
+    {
+        caster->set_property(elements[i], 1);
+        caster->set_property(elements[i] + " burst", 1);
+    }
+    
     return;
 }
 
@@ -92,8 +102,16 @@ void dest_effect()
 {
     if(objectp(caster))
     {
+        string * elements;
         caster->remove_property_value("active_feats",({TO}));
         caster->remove_property("magus cast");
+        elements = ({ "fire","cold","electricity" });
+        
+        for (i = 0; i < sizeof(elements); i++)
+        {
+            caster->remove_property(elements[i]);
+            caster->remove_property(elements[i] + " burst");
+        }
         tell_object(caster,"%^BOLD%^%^BLUE%^Your concentration fades.");
     }
     ::dest_effect();

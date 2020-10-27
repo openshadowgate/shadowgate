@@ -530,6 +530,8 @@ int can_gain_hybrid_feat(object ob, string feat)
         }
         if (myclasses[i] == "psywarrior") {
             currentlvl = ((int)ob->query_class_level(myclasses[i]) / 3) + 1;
+        }else if (myclasses[i] == "magus") {
+            currentlvl = ((int)ob->query_class_level(myclasses[i]) / 3);
         }else {
             currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // hybrid classes @ L21 & every 5 levels thereafter
         }

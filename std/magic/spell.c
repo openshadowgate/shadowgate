@@ -1083,6 +1083,25 @@ void wizard_interface(object user, string type, string targ)
         }
     }
 
+    if (spell_type == "magus" && caster->query_property("spell recall")) {
+        if (FEATS_D->usable_feat(caster, "improved spell recall")) {
+            mycost = (query_spell_level("magus") + 1) / 2;
+        }
+        else {
+            mycost = query_spell_level("magus");
+        }
+        if (!mycost) {
+            tell_object(caster, "Something is wrong with the arcana cost for this " + whatsit + ". Please contact a wiz.");
+            TO->remove();
+            return;
+        }
+        if (!USER_D->spend_arcana(caster, mycost)) {
+            tell_object(caster, "You do not have enough available arcana to " + whatdo + " that " + whatsit + "!");
+            TO->remove();
+            return;
+        }
+    }
+
     // time for a new check for feat-based spells! N, 7/15.
     featneeded = query_feat_required(spell_type);
     if (featneeded != "me" && !FEATS_D->usable_feat(caster, featneeded)) {
@@ -1121,14 +1140,21 @@ void wizard_interface(object user, string type, string targ)
         !(FEATS_D->usable_feat(caster, "natures gift") && (member_array(spell_name, natures_gift_spells) != -1)) &&
         !(FEATS_D->usable_feat(caster, "raging healer") && (member_array(spell_name, raging_healer_spells) != -1) && caster->query_property("raged")) &&
         !(FEATS_D->usable_feat(caster, "greater spell mastery") && casting_level < 6 && spell_sphere == caster->query_school()) &&
-        !(FEATS_D->usable_feat(caster, "inspired necromancy") && casting_level < 7 && spell_sphere == "necromancy")) {
+        !(FEATS_D->usable_feat(caster, "inspired necromancy") && casting_level < 7 && spell_sphere == "necromancy") &&
+        !(spell_type == "magus" && caster->query_property("spell recall"))) {
         if (!caster->check_memorized(spell_type, improv)) {
             tell_object(caster, "You cannot " + whatdo + " this " + whatsit + " at this time.");
             TO->remove();
             return;
         }
     }else {
-        tell_object(caster, "%^CYAN%^The spell preserves in your memory.");
+        if (spell_type == "magus" && caster->query_property("spell recall")) {
+            caster->remove_property("spell recall");
+            tell_object(caster, "%^CYAN%^Arcana preserves the spell in your memory.");
+        }
+        else {
+            tell_object(caster, "%^CYAN%^The spell preserves in your memory.");
+        }
     }
 
     caster->set_casting(1);
@@ -2286,7 +2312,7 @@ void define_base_damage(int adjust)
         if (caster->is_class("magus") && file_exists("/std/class/magus.c")) {
             magus = (int)"/std/class/magus.c"->spell_combat(caster);
         }
-        sdamage = roll_dice(4, sdamage / 4) * magus / 2;
+        sdamage = roll_dice(2, sdamage / 4) * magus / 2;
 
         if (FEATS_D->usable_feat(caster, "spellstrike") &&
             !query_aoe_spell() &&

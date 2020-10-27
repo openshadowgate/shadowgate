@@ -115,7 +115,10 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
     }
 
     if (!target->query_memorized(spell_type, spell_name)) {
-        return 0;
+        if (!(spell_type == "magus" && target->query_property("spell recall"))) {
+            tell_object(target, "return 0");
+            return 0;
+        }
     }
 
     x = target->query_guild_level(spell_type);
