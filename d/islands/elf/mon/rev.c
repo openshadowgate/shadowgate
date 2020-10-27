@@ -95,7 +95,7 @@ void sweep(object targ){
   tell_room(ETO,"%^RED%^Revenant lets out a %^BLUE%^drowning%^RED%^ gurgle!");
   foreach(object ob in critters){
       tell_object(ob, "%^BLUE%^The noise makes you feel like you are drowning!." );
-      ob->cause_typed_damwizage(ob, ob->return_target_limb(),random(200),"mental");
+      ob->cause_typed_damage(ob, ob->return_target_limb(),random(200),"mental");
   }
   
 }
