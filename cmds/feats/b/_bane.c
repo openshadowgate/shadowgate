@@ -1,9 +1,9 @@
 /*
   _bane.c
-  
+
   Inquisitor feat from PF SRD.
   Temporarily buffs your weapon against a specific enemy type.
-  
+
   -- Tlaloc --
 */
 
@@ -20,9 +20,9 @@ string *valid_choices;
 void create()
 {
     ::create();
-    
+
     valid_choices = keys(VALID_ENEMY);
-    
+
     set_author("tlaloc");
     feat_type("instant");
     feat_category("Inquisition");
@@ -33,8 +33,8 @@ void create()
 "hand with divine power that targets a specific type of enemy. This infusion has a " +
 "chance to do divine damage, based on weapon dice. The chance of this bane hitting and the " +
 "damage done increases with your Inquisitor levels. Additionally, your weapon gets an additional +2 " +
-"attack and +2 damage bonuses against the selected type. " +
-"You can select from the following bane enemy types: \n\n" + "%^CYAN%^BOLD%^" + implode(valid_choices, "\n"));
+"attack and +2 damage bonuses against the selected type.\n " +
+              "%^BOLD%^You can select from the following bane enemy types: \n\n" + implode(map(valid_choices, (:" " + $1:)), "\n"));
     set_target_required(0);
 }
 
@@ -54,7 +54,7 @@ int prerequisites(object ob)
 }
 
 int cmd_bane(string str)
-{   
+{
     if(!this_player())
         return 0;
 
@@ -68,45 +68,45 @@ void execute_feat()
     string type;
     mapping info;
     int timer, glvl;
-    
+
     ::execute_feat();
-    
+
     if(!caster)
         return;
-    
+
     if(caster->query_property("using instant feat"))
     {
         write("You are already in the middle of using a feat!");
         return;
     }
-    
+
     if(caster->query_current_attacker())
     {
         write("You cannot infuse your weapon with a bane during combat.");
         return;
     }
-    
+
     if(!arg || member_array(arg, valid_choices) < 0)
     {
         write("Valid bane choices are : " + implode(valid_choices, ", "));
         return;
     }
-    
+
     if(sizeof(caster->query_wielded()))
         weapon = caster->query_wielded()[0];
-    
+
     if(!weapon)
     {
         write("You must be wielding a weapon in your main hand to use Bane.");
         return;
     }
-    
+
     if(caster->query_property("bane weapon"))
     {
         write("Your weapon is already magically enhanced.");
         return;
     }
-    
+
     write("%^BOLD%^You infuse your weapon with extra potency against %^CYAN%^" + arg + "%^RESET%^.");
     tell_room(environment(caster),"%^BOLD%^"+caster->QCN+" infuses their weapon with magical potency.", ({ caster }));
 
@@ -114,10 +114,10 @@ void execute_feat()
     caster->set_property("using instant feat",1);
     caster->remove_property("bane weapon");
     caster->set_property("bane weapon", ({ weapon, arg }));
-    
+
     glvl = caster->query_guild_level("inquisitor");
     timer = (5 + (glvl / 3)) * 8;
-    
+
     call_out("dest_effect", timer);
 }
 
@@ -127,11 +127,11 @@ void execute_attack()
     {
         dest_effect();
         return;
-    }   
+    }
     caster->remove_property("using instant feat");
     ::execute_attack();
 }
-       
+
 
 void dest_effect()
 {
@@ -142,4 +142,3 @@ void dest_effect()
     remove_feat(this_object());
     return;
 }
-    
