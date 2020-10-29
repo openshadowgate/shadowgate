@@ -2565,7 +2565,7 @@ int check_avoidance(object who, object victim)
 //  Avoidance Roll
     attack = (int)who->query_highest_level(); //changed to highest level rather than BAB.  Doesn't nerf SC thieves.
     attack += (int)who->query_skill("athletics")/2; //athletics/2 to improve dex but not make it a god stat.
-    defend = (int)who->query_highest_level();
+    defend = (int)victim->query_highest_level();
     defend += (int)victim->query_skill("athletics")/2;
     defend *= mod; // mod is a multiplier for fraction method
     chance = (int) 1.0*defend/(attack + defend) * 1000;
