@@ -16,5 +16,5 @@ void create(){
 reset(){
     ::reset();
     if(!present("celisse"))
-    new(MON"cilesse")->move(TO);
+    new(MON"celisse")->move(TO);
 }
