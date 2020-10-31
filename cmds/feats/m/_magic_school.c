@@ -22,14 +22,14 @@ void create()
 School of magic gives mages a degree of specialization. Spells of that school become more potent, while spells of opposing school become weaker, with power difference growing as mage learns.
 
 %^BOLD%^You can select from the following schools%^RESET%^
-  Abjuration
-  Alteration
-  Conjuration_Summoning
-  Divination
-  Enchantment_Charm
-  Illusion
-  Invocation_Evocation
-  Necromancy
+ Abjuration
+ Alteration
+ Conjuration_Summoning
+ Divination
+ Enchantment_Charm
+ Illusion
+ Invocation_Evocation
+ Necromancy
 
 A mage that haven't made his choice will belong to %^WHITE%^%^BOLD%^Universalist%^RESET%^ school, having no penalties or bonuses.
 
