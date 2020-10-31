@@ -26,5 +26,5 @@ void create() {
   set_stats("intelligence",12);
   set_stats("charisma",14);
   set_items_allowed("material");
-
+  new("/std/obj/metal")->move(TO);
 }
