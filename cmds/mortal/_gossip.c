@@ -40,7 +40,8 @@ varargs cmd_gossip(string str){
  }
 
 void report(string str){
-  "/daemon/reporter_d.c"->report("lujke", str);
+  //"/daemon/reporter_d.c"->report("lujke", str); not there anymore -H
+  "/d/atoyatl/reporter_d.c"->report("lujke", str);
 }
 
 varargs string list_commands(string str){
