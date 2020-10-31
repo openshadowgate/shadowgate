@@ -24,5 +24,23 @@ void create()
     " drow for helping the drow in tharis she left as"+
     " a refugee.  Now she sell herbs in the grove to "+
     "anyone that would have them." );
+    new("/d/common/obj/brewing/herb_pouch")->move(TO);
+    set_emotes(10,({
+    "Celisse says: I used to live in tharis.",
+    "Celisse says: Tharis's elf quarter was a terrible place.",
+    "Celisse says: There are not humans here tormenting us like in tharis.",
+    "Celisse says: In tharis Merve used to hurt me.",
+    "Celisse says: Some drow came to tharis offering help....",
+    "Celisse says: When the drow started recruiting elves in tharis I knew I had to leave.",
+    "Celisse says: I begged my cousin to leave tharis but she wouldn't.",
+    "Celisse says: Sometimes I miss tharis, but it is peaceful here.",
+    "Celisse says: My cousin stayed in tharis.  She was tricked by the drow.",
+    "Celisse says: Drow came to help tharis but look how that turned out.",
+    "Celisse says: The tharis elders said never trust a drow.  I had to leave.",
+    "Celisse sorts through some herbs.",
+    "Celisse says: This place is small but better than tharis.",
+    "Celisse smiles and says: Can I offer you some herbs?"
+}),0);
+}
 
 }
