@@ -323,65 +323,86 @@ int stop(string str) {
   return 1;
 }
 
-int peer(string str) {
-  if(str != "through "+alias) return 0;
-  if(!ok_to_scry) {
-    write("%^BOLD%^RED%^You aren't scrying anything.");
+int peer(string str)
+{
+    if (TP->query_paralyzed()) {
+        return notify_fail("" + (string)TP->query_paralyze_message() + "\n");
+    }
+
+    if (str != "through " + alias) {
+        return 0;
+    }
+    if (!ok_to_scry) {
+        write("%^BOLD%^RED%^You aren't scrying anything.");
+        return 1;
+    }
+    if (TP->query_blind() || TP->query_blindfolded() || TP->query_unconscious()) {
+        write("You cannot do that in your current state!");
+        return 1;
+    }
+    write("%^BOLD%^GREEN%^The image zooms out briefly, granting a glance...");
+    scry_object->look_room(environment(scry_object));
     return 1;
-  }
-  if(TP->query_blind() || TP->query_blindfolded() || TP->query_unconscious()){
-     write("You cannot do that in your current state!");
-     return 1;
-  }
-  write("%^BOLD%^GREEN%^The image zooms out briefly, granting a glance...");
-  scry_object->look_room(environment(scry_object));
-  return 1;
 }
 
-int look(string str) {
-  if(str != "through "+alias) return 0;
-  if(!ok_to_scry) {
-    write("%^BOLD%^RED%^You aren't scrying anything.");
+int look(string str)
+{
+    if (TP->query_paralyzed()) {
+        return notify_fail("" + (string)TP->query_paralyze_message() + "\n");
+    }
+
+    if (str != "through " + alias) {
+        return 0;
+    }
+    if (!ok_to_scry) {
+        write("%^BOLD%^RED%^You aren't scrying anything.");
+        return 1;
+    }
+    if (TP->query_blind() || TP->query_blindfolded() || TP->query_unconscious()) {
+        write("You cannot do that in your current state!");
+        return 1;
+    }
+    write("%^BOLD%^GREEN%^The image zooms out, giving you a long look around...");
+    if (objectp(scry_object)) {
+        scry_object->long_look_room(environment(scry_object));
+    }
     return 1;
-  }
-  if(TP->query_blind() || TP->query_blindfolded() || TP->query_unconscious()){
-     write("You cannot do that in your current state!");
-     return 1;
-  }
-  write("%^BOLD%^GREEN%^The image zooms out, giving you a long look around...");
-  if(objectp(scry_object))
-      scry_object->long_look_room(environment(scry_object));
-  return 1;
 }
 
-int recognize(string str) {
-  string who,as;
-  object ob;
+int recognize(string str)
+{
+    string who, as;
+    object ob;
 
-  if(!str) {
-    return 0;
-  }
-  if(sscanf(str, "%s as %s through "+alias ,who, as) != 2) {
-    return 0;
-  }
-  ob = present(who,environment(scry_object));
-  if(!objectp(ob)) {
-    return write("There is no "+who+" in the area you are viewing.\n");
-  }
-  if(TP->query_blind() || TP->query_blindfolded() || TP->query_unconscious()){
-     write("You cannot do that in your current state!");
-     return 1;
-  }
-  else{
-    if(userp(ob)){
-      write("You will recognize "+who+" as "+capitalize(as)+".");
-      TP->addRelationship(ob,as);
+    if (!str) {
+        return 0;
     }
-    else{
-      write("You can only recognize other players at this time.");
+
+    if (TP->query_paralyzed()) {
+        return notify_fail("" + (string)TP->query_paralyze_message() + "\n");
     }
-  }
-  return 1;
+
+    if (sscanf(str, "%s as %s through " + alias, who, as) != 2) {
+        return 0;
+    }
+
+
+    ob = present(who, environment(scry_object));
+    if (!objectp(ob)) {
+        return write("There is no " + who + " in the area you are viewing.\n");
+    }
+    if (TP->query_blind() || TP->query_blindfolded() || TP->query_unconscious()) {
+        write("You cannot do that in your current state!");
+        return 1;
+    }else {
+        if (userp(ob)) {
+            write("You will recognize " + who + " as " + capitalize(as) + ".");
+            TP->addRelationship(ob, as);
+        }else {
+            write("You can only recognize other players at this time.");
+        }
+    }
+    return 1;
 }
 
 int cast(string str) {
@@ -460,42 +481,54 @@ int cast(string str) {
   return 1;
 }
 
-int remember(string str) {
-  object ob;
-  int i;
-  string filename;
-  mapping remembered;
-  string name;
+int remember(string str)
+{
+    object ob;
+    int i;
+    string filename;
+    mapping remembered;
+    string name;
 
-  if (!str) return 0;
-  if (sscanf(str,"through mirror as %s",name) || sscanf(str,"through ball as %s",name) || sscanf(str,"through crystal ball as %s",name) || sscanf(str,"through "+alias+" as %s",name)) {
-//stuff for crystal ball added by Circe 6/4/07
-//was just if (sscanf(str,"through mirror as %s",name)){
-    if (!name)
-      return notify_fail("Remember this room as what?\n");
-  if(TP->query_blind() || TP->query_blindfolded() || TP->query_unconscious()){
-     write("You cannot do that in your current state!");
-     return 1;
-  }
+    if (!str) {
+        return 0;
+    }
 
-    remembered = TP->query_rem_rooms();
-  if (!objectp(scry_object)) return notify_fail("Something is wrong with the scrying sensor. Please contact a wiz.\n");
-    ob = environment(scry_object);
-    filename=file_name(ob);
-    if (!remembered = TP->query_rem_rooms() ) // mapping ([name:place])
-      remembered = ([ ]);
-    if (!sortrem = TP->query_rem_rooms_sort() ) //names
-      sortrem = ({});
-    remembered[name] = filename;
-    sortrem = distinct_array(({ name}) + sortrem);
-    if (sizeof(sortrem) > (int)TP->query_stats("intelligence"))
-      remembered = shorten((int)TP->query_stats("intelligence"), remembered);
-    TP->set_rem_rooms(remembered, sortrem);
-    tell_object(TP, "You study the location, retaining its features firmly in your mind.");
-  } else {
-    return 0;
-  }
-  return 1;
+    if (TP->query_paralyzed()) {
+        return notify_fail("" + (string)TP->query_paralyze_message() + "\n");
+    }
+
+    if (sscanf(str, "through mirror as %s", name) || sscanf(str, "through ball as %s", name) || sscanf(str, "through crystal ball as %s", name) || sscanf(str, "through " + alias + " as %s", name)) {
+        if (!name) {
+            return notify_fail("Remember this room as what?\n");
+        }
+        if (TP->query_blind() || TP->query_blindfolded() || TP->query_unconscious()) {
+            write("You cannot do that in your current state!");
+            return 1;
+        }
+
+        remembered = TP->query_rem_rooms();
+        if (!objectp(scry_object)) {
+            return notify_fail("Something is wrong with the scrying sensor. Please contact a wiz.\n");
+        }
+        ob = environment(scry_object);
+        filename = file_name(ob);
+        if (!remembered = TP->query_rem_rooms()) { // mapping ([name:place])
+            remembered = ([]);
+        }
+        if (!sortrem = TP->query_rem_rooms_sort()) { //names
+            sortrem = ({});
+        }
+        remembered[name] = filename;
+        sortrem = distinct_array(({ name }) + sortrem);
+        if (sizeof(sortrem) > (int)TP->query_stats("intelligence")) {
+            remembered = shorten((int)TP->query_stats("intelligence"), remembered);
+        }
+        TP->set_rem_rooms(remembered, sortrem);
+        tell_object(TP, "You study the location, retaining its features firmly in your mind.");
+    } else {
+        return 0;
+    }
+    return 1;
 }
 
 mapping shorten( int newsize, mapping remembered ) {
