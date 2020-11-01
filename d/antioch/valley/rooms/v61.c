@@ -75,7 +75,7 @@ void pick(string str)
       return 1;
    }
    if(str != "freesia") {
-      return notify_fail("What exactly are you trying to pick?");
+      return notify_fail("You can pick freesia here.");
    }
    if(FREESIA > 3) {
       tell_object(TP,"It looks like most of the freesia flowers have"+

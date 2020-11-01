@@ -79,7 +79,7 @@ void pick(string str)
       return 1;
    }
    if(str != "strawberries" && str != "berries") {
-      return notify_fail("What exactly are you trying to pick?");
+      return notify_fail("You can pick berries here.");
    }
    if(BERRIES > 6) {
       tell_object(TP,"It looks like all the ripe strawberries have been"+
