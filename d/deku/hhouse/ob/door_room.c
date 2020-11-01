@@ -176,8 +176,11 @@ void check_contents(string dest, object who)
     TO->remove();
 }
 
-int GoThroughDoor(string door)
+int GoThroughDoor(mixed door)
 {
+
+    tell_room(ETP, "%^BOLD%^%^WHITE%^Suddenly a door materializes and opens, then quickly disappears.");
+
     if(objectp(TP) && objectp(MyRoomOwner))
     {
         if(TP == MyRoomOwner)
@@ -185,5 +188,7 @@ int GoThroughDoor(string door)
             call_out("check_contents", 1, query_verb(), TP);
         }
     }
+
+
     return 1;
 }
