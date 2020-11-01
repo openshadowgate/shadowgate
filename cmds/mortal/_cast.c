@@ -335,6 +335,12 @@ For example, if you have light spell prepared you can cast it as cure/cause ligh
 Positive energy heals living and harms undead.
 Negative energy harms living and heals undead.
 
+%^CYAN%^INNATE CASTING%^RESET%^
+Some spells are innate.   They can be cast without preparing them.
+EX:   cast innate undeath ward
+
+Would cast undeath ward if you are a crypt stalker with enough levels for that ability. 
+
 %^CYAN%^SEE ALSO%^RESET%^
 
 forget, buff, prepare, spells, recall, dispell
