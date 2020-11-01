@@ -92,7 +92,7 @@ int add_member(string str) {
     string party;
     int x;
 
-    str = TP->realName(str);
+    str = TP->realNameVsProfile(str);
     ob = find_player(str);
     if(!ob) {
         notify_fail("No player by that name on the mud.\n");
@@ -123,7 +123,7 @@ int sub(string str) {
     string party;
     int i;
 
-    str = TP->realName(str);
+    str = TP->realNameVsProfile(str);
     ob = find_player(str);
     if(!ob) {
 //        write(identify(ob));
@@ -158,7 +158,7 @@ int leader(string str) {
     string party;
     int x;
 
-    str = TP->realName(str);
+    str = TP->realNameVsProfile(str);
     ob = find_player(str);
     if(!ob) {
         notify_fail("That player is not on line.\n");
@@ -245,28 +245,26 @@ int join_party(string str) {
 }
 
 void help() {
-    write("Command: party\n"+
-        "Syntax: <party form [name]>\n"+
-        "        <party add [player]>\n"+
-	"        <party join [name]>\n"+
-        "        <party remove [player]>\n"+
-        "        <party leave>\n"+
-        "        <party list>\n"+
-          //"        <party line [message]> (depricated)\n"+
-              //"        <party emote [message]> (depricated)\n"+
-        "        <party leader [player]>\n\n"+
-        "This command accesses the various party enabling functions.\n"+
-        "The person who forms any party is automatically the leader of\n"+
-        "the party.  Only that player may add or remove players.  That\n"+
-        "player may also designate another player as the party leader.\n"+
-        "Any party member may leave the party at any time through the\n"+
-        "\"leave\" function.  A list of all current party members is\n"+
-        "given by the \"list\" function.  Experience is awarded based\n"+
-	"on the individual's level with respect to the rest of the party.\n"+
-	"Once you have been invited to join the party, you must type\n"+
- "<party join [name]> (where name is the name of the party).\n"
- "See also: follow, kill\n"
-  );
+    write("
+%^CYAN%^NAME%^RESET%^
+
+party -- manage your party
+
+%^CYAN%^SYNTAX%^RESET%^
+
+party [form|join] %^ORANGE%^%^ULINE%^NAME%^RESET%^
+party [add|remove|leader] %^ORANGE%^%^ULINE%^PLAYER%^RESET%^
+party list
+party leave
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command accesses the various party enabling functions. The person who forms any party is automatically the leader of the party. Only that player may add or remove players. That player may also designate another player as the party leader.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+levelcheck, follow, unfollow, followers, who, kill, threaten, flag
+");
 }
 
 int party_line(string str) {
