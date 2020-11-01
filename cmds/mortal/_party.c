@@ -206,22 +206,12 @@ int list() {
         notify_fail("You are no longer in a party.\n");
         return 0;
     }
-    write("%^BOLD%^%^CYAN%^The following are members of the party "+party+":\n");
-// changing to fix so can't tell if someone, or self, is invis. & not give away real names *Styx*  8/16/03
-/*
-   if(who[i]->query_vis_name())
-write("%^BOLD%^%^RED%^"+capitalize((string)who[i]->query_vis_name())+"%^RESET%^%^WHITE%^ (leader)\n");
-  else write("%^BOLD%^%^RED%^"+capitalize((string)who[i]->query_cap_name())+"%^RESET%^%^WHITE%^ (leader)\n");
-*/
-    write("%^BOLD%^%^RED%^"+capitalize((string)who[i]->getParsableName())+"%^RESET%^%^WHITE%^ (leader)\n");
+    write("%^BOLD%^%^CYAN%^The following are members of the party %^WHITE%^"+party+"%^CYAN%^:");
+    write(" %^BOLD%^%^RED%^"+capitalize((string)who[i]->getParsableName())+"%^RESET%^%^WHITE%^ (leader)");
 
     for(i=0; i<sizeof(who); i++) {
         if(!i) continue;
-/*
-        if(who[i]->query_vis_name()) write("%^BOLD%^%^RED%^"+capitalize(who[i]->query_vis_name())+"\n");
-        else write("%^BOLD%^%^RED%^"+capitalize(who[i]->query_cap_name())+"\n");
-*/
-	write("%^BOLD%^%^RED%^"+capitalize(who[i]->getParsableName())+"\n");
+	write(" %^BOLD%^%^RED%^"+capitalize(who[i]->getParsableName())+"");
     }
     return 1;
 }
