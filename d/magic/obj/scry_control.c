@@ -229,7 +229,7 @@ int scry(string str)
         }
 
         if (blockobj = present("blockerx111", environment(target)) || blockobj = present("blockerx111", target)) {
-            if (TO->query_scry_power() < blockobj->query_block_power()) {
+            if (TO->query_scry_power() <= blockobj->query_block_power()) {
                 tell_object(ETO, "%^BOLD%^RED%^There appears to be " +
                             "interference blocking your scrying attempt in the " +
                             "vicinity of the target!%^RESET%^");
@@ -251,7 +251,7 @@ int scry(string str)
         }
         target = find_object_or_load(map[targ]);
         if (blockobj = present("blockerx111", target)) {
-            if (TO->query_scry_power() < blockobj->query_block_power()) {
+            if (TO->query_scry_power() <= blockobj->query_block_power()) {
                 tell_object(ETO, "%^BOLD%^RED%^There appears to be " +
                             "interference blocking your scrying attempt in " +
                             "the vicinity of the target!%^RESET%^");
