@@ -1744,64 +1744,80 @@ void heart_beat()
     user_ticker++;
 }
 
-void net_dead2() {
-    object *exclude;
-  if (!objectp(TO)) return;
-  if (!query_property("disc") && userp(TO)) return;
-  CHAT_D->remove_user(static_user["channels"]);
-  static_user["channels"] = ({});
-  set_heart_beat(0);
-  static_user["net_died_here"] = file_name( ETO );
-  if(objectp(ETO)) { set_primary_start(file_name(ETO)); }
-  else { set_primary_start("/d/shadow/room/pass/pass3"); }
-  save_player(query_name());
-  NOTIFY_D->mud_notify("disconnected from",this_player());
+void net_dead2()
+{
+    object* exclude;
 
-  exclude = ({TO});
+    if (!objectp(TO)) {
+        return;
+    }
+    if (!query_property("disc") && userp(TO)) {
+        return;
+    }
 
-  if(avatarp(TO)) {
-    exclude += filter_array(all_living(ETO),"is_non_immortal_player",FILTERS_D);
-  }
-    message("other_action", sprintf("%s is disconnected",getParsableName()), ETO, exclude);
+    CHAT_D->remove_user(static_user["channels"]);
+    static_user["channels"] = ({});
+    set_heart_beat(0);
+    static_user["net_died_here"] = file_name(ETO);
+    if (objectp(ETO)) {
+        set_primary_start(file_name(ETO));
+    }else {
+        set_primary_start("/d/shadow/room/pass/pass3");
+    }
+    save_player(query_name());
+    NOTIFY_D->mud_notify("disconnected", this_player());
 
-  TO->move_player(ROOM_FREEZER);
-  if (query_snoop(TO))
-    tell_object(query_snoop(TO), capitalize(query_name())+" has gone net-dead.");
+    exclude = ({ TO });
+
+    if (avatarp(TO)) {
+        exclude += filter_array(all_living(ETO), "is_non_immortal_player", FILTERS_D);
+    }
+    message("other_action", sprintf("%s is disconnected", getParsableName()), ETO, exclude);
+
+    TO->move_player(ROOM_FREEZER);
+    if (query_snoop(TO)) {
+        tell_object(query_snoop(TO), capitalize(query_name()) + " has gone net-dead.");
+    }
 }
 
-void net_dead() {
-  set_property("disc",1);
-  if (query_attackers() != ({}))
-    call_out("net_dead2",30);
-  else
-    net_dead2();
-  remove_property("disc");
+void net_dead()
+{
+    set_property("disc", 1);
+    if (query_attackers() != ({})) {
+        call_out("net_dead2", 30);
+    }else {
+        net_dead2();
+    }
+    remove_property("disc");
 }
 
 void restart_heart() {
-    object *exclude;
-  string dead_ed;
+    object* exclude;
+    string dead_ed;
 
-  message("write", (wizardp(TO) && file_size(dead_ed = user_path(getuid())+"dead.edit") > -1 ? "\nYour edit file was saved as: "+dead_ed+"\n" : "Reconnected."), TO);
-  set_heart_beat(1);
-  if (static_user["net_died_here"]) TO->move_player(static_user["net_died_here"]);
-  else {
-    if (!objectp(ETO))
-      TO->move_player(ROOM_START);
-    else
-      describe_current_room(1);
-  }
-  static_user["net_died_here"] = 0;
-  exclude = ({TO});
-  if(avatarp(TO)) {
-    exclude += filter_array(all_living(ETO),"is_non_immortal_player",FILTERS_D);
-  }
-  tell_room(ETO,getParsableName()+" rejoins",exclude);
+    message("write", (wizardp(TO) && file_size(dead_ed = user_path(getuid()) + "dead.edit") > -1 ? "\nYour edit file was saved as: " + dead_ed + "\n" : "Reconnected."), TO);
+    set_heart_beat(1);
+    if (static_user["net_died_here"]) {
+        TO->move_player(static_user["net_died_here"]);
+    }else {
+        if (!objectp(ETO)) {
+            TO->move_player(ROOM_START);
+        }else {
+            describe_current_room(1);
+        }
+    }
+    static_user["net_died_here"] = 0;
+    exclude = ({ TO });
+    if (avatarp(TO)) {
+        exclude += filter_array(all_living(ETO), "is_non_immortal_player", FILTERS_D);
+    }
+    tell_room(ETO, getParsableName() + " rejoins", exclude);
 //  NOTIFY_D->logon_notify("%^YELLOW%^"+capitalize(getParsableName())+" rejoins the ShadowGate adventure.%^RESET%^", this_player());
-  NOTIFY_D->mud_notify("rejoined",this_player());
-  register_channels();
-  if(TO->query_property("inactive"))
-    TO->remove_property("inactive");
+    NOTIFY_D->mud_notify("rejoined", this_player());
+    register_channels();
+    if (TO->query_property("inactive")) {
+        TO->remove_property("inactive");
+    }
 }
 
 void resetLevelForExp(int expLoss)
