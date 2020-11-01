@@ -1839,8 +1839,15 @@ int immunity_check(object obj, string type)
 
     case "charm":
     {
-        if(check_aura(obj, "resolve") == 1)
+        switch (myrace) {
+            case "barrus":
+                return 1;
+                break;
+        }
+
+        if (check_aura(obj, "resolve") == 1) {
             return 1;
+        }
     }
 
     case "fear":
