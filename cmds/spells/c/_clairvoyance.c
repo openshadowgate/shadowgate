@@ -90,7 +90,7 @@ void spell_effect(int prof)
 
 
     if(avatarp(caster)) { write("You know who you're looking for."); }
-    mytarg = find_player(caster->realName(targ));
+    mytarg = find_player(caster->realNameVsProfile(targ));
 
     if(!objectp(mytarg))
     {

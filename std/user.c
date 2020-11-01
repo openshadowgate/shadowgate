@@ -4110,10 +4110,14 @@ string realName(string who)
             return str;
 }
 
+/**
+ * Query real name from name used as recognized profile.
+ */
 string realNameVsProfile(string who)
 {
     string * names, name;
     string * profiles, profile;
+    string * outnames = ({});
     object peep;
 
     mapping tmp = ([]);
@@ -4138,12 +4142,29 @@ string realNameVsProfile(string who)
             if (lower_case(who) == tmp[profile]) {
                 if (objectp(peep = find_player(name))) {
                     if (peep->query("relationship_profile") == profile) {
-                        return name;
+                        outnames += ({name});
                     }
                 }
             }
         }
     }
+
+    if (sizeof(outnames) == 1) {
+        return outnames[0];
+    } else {
+        foreach(name in outnames) {
+            if (present(name, ETO)) {
+                return name;
+            }
+        }
+        foreach(name in outnames) {
+            if (objectp(find_player(name))) {
+                return name;
+            }
+        }
+        return outnames[random(sizeof(outnames))];
+    }
+
     return "";
 }
 
