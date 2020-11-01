@@ -2831,7 +2831,7 @@ varargs int do_save(object targ, int mod)
                 targrace == "half-elf" ||
                 targrace == "drow" ||
                 targrace == "half-drow" ||
-                targrace == "barrus" ||
+                targrace == "barrus"
                 )) {
             caster_bonus -= 2;
         }
