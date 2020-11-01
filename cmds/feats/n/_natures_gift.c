@@ -3,14 +3,14 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("Archdruid");
     feat_name("natures gift");
     feat_prereq("Archdruid L4");
-    feat_desc("The archdruid has learned to cast certain spells so well that she is able to cast them an unlimited amount of times per day without needing to prepare the spells. The following spells can be cast without preparation: faerie fire, entangle, animal messenger, spider climb, meld into nature, wall of thorns, treestride, insect plague, wall of stone, and regeneration.");
+    feat_desc("The archdruid has learned to cast certain spells so well that she is able to cast them an unlimited amount of times per day without needing to prepare the spells. The following spells can be cast without preparation: faerie fire, entangle, animal messenger, meld into nature, flame strike, wall of thorns, wall of stone, vortex, euphoric tranquility and regenerate.");
     permanent(1);
 }
 
@@ -54,4 +54,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
