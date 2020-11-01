@@ -3,7 +3,7 @@
 inherit INTERACTIVE;
 
 void create()
-{
+{   object pap;
     ::create();
     remove_std_db();
     remove_dbs(({"miscvendors"}));
@@ -41,6 +41,15 @@ void create()
     "Celisse says: This place is small but better than tharis.",
     "Celisse smiles and says: Can I offer you some herbs?"
 }),0);
-}
+  pap = new("/d/common/obj/misc/paper");
+  pap->move(TO);
+  pap->set("language","elven");
+  pap->set("read","%^GREEN%^Dear Cousin in exile\n\n%^RESET%^"+
+       "I have no idea if I'll ever send this letter."+
+       "  My heart aches when we parted ways because "+
+       "of the drow that came to tharis.  I hope one "+
+       "day we could bridge the rift they created "+
+       "between us.  I know the gods cursed you to become"+
+       " a drow.  I still miss you though cousin.");
 
 }
