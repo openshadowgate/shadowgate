@@ -1,4 +1,5 @@
 // sea elf wants fish
+// and other stuff -H 11/1/20
 #include <std.h>
 #include <daemons.h>
 #include "../elf.h"
@@ -68,6 +69,7 @@ void receive_given_item(object obj){
 	     force_me("say Thank you for the Lobster.");
     }
     case "betrayer's edge":{
+       new(OBJ"clance")->move(TO);
        force_me("give lance to "+name);
        return;
     }
