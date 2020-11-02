@@ -15,7 +15,7 @@ void create() {
     set_spell_level(([ "mage" : 1, "bard" : 1, "warlock" : 1 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS summon companion");
-    set_description("This spell allows a caster to manifest a creature as a permanent companion. Upon casting, the caster must select what sort of creature she wishes to call, which is dependand on the power of the caster.
+    set_description("This spell allows a caster to manifest a creature as a permanent companion. Upon casting, the caster must select what sort of creature she wishes to call, which is dependent on the power of the caster.
 
 You will have the next commands available:
 

@@ -99,9 +99,7 @@ void pick(string str)
       return 1;
    }
    if(str != "rose") {
-      return notify_fail("What exactly are you trying to pick?");
+      return notify_fail("You can pick roses here.");
    }
 
 }
-
-   

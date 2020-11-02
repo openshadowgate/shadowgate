@@ -18,7 +18,7 @@ int query_unbound_age()
 
 int* restricted_alignments(string subrace)
 {
-    return ({ 1, 2, 3, 7, 8, 9 });
+    return ({ });
 }
 
 string* restricted_classes(string subrace)

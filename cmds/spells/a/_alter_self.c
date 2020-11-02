@@ -41,27 +41,24 @@ void spell_effect(int prof)
     string profile;
     string raceto;
 
-    if(arg)
-        eargs = explode(arg," ");
+    if (arg) {
+        eargs = explode(arg, " ");
+    }
 
     raceto = caster->query("race");
 
-    if(sizeof(eargs))
-    {
+    if (sizeof(eargs)) {
         foreach(earg in eargs)
         {
-            if(regexp(earg,implode(RACE_D->query_races(),"|")))
+            if (regexp(earg, implode(RACE_D->query_races(), "|"))) {
                 raceto = earg;
-            if(regexp(earg,"[0-9]"))
-            {
-                if(atoi(earg)<(clevel/12+1))
-                {
-                    profile="spell_alter_self_"+(1000-atoi(earg));
-                    caster->set("alter_self_profile",profile);
-                }
-                else
-                {
-                    tell_object(caster,"You can't have that many profiles!");
+            }
+            if (regexp(earg, "[0-9]")) {
+                if (atoi(earg) < (clevel / 10 + 1)) {
+                    profile = "spell_alter_self_" + (1000 - atoi(earg));
+                    caster->set("alter_self_profile", profile);
+                }else {
+                    tell_object(caster, "You can't have that many profiles!");
                     dest_effect();
                     return;
                 }
@@ -69,7 +66,9 @@ void spell_effect(int prof)
         }
     }
 
-    if (!objectp(caster) || !userp(caster)) { TO->remove(); return; }
+    if (!objectp(caster) || !userp(caster)) {
+        TO->remove(); return;
+    }
     new("/std/races/shapeshifted_races/spell_alter_self.c")->init_shape(caster,raceto);
     spell_successful();
     addSpellToCaster();

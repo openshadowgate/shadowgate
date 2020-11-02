@@ -49,6 +49,7 @@ void init()
             add_action("transcribe", "transcribe");
         }
         add_action("use_scroll", "use");
+        add_action("wash_scroll", "wash");
         if (!level) {
             set_clevel(TP->query_level() > CHARACTER_LEVEL_CAP ? CHARACTER_LEVEL_CAP : TP->query_level());
         }
@@ -342,6 +343,18 @@ int use_scroll(string str)
 
     remove();
     return 1;
+}
+
+int wash_scroll(string args)
+{
+    if (TO != present(args, TP)) {
+        return 0;
+    }
+
+    tell_object(TP,"%^BOLD%^%^WHITE%^You quickly wash the magic away from the scroll and get a parchment.");
+    tell_room(ETP, "%^BOLD%^%^WHITE%^" + TP->QCN + " clears magic from a scroll.", TP);
+    new("/d/tharis/obj/parchment")->move(TP);
+    TO->remove();
 }
 
 int query_spell_level()

@@ -168,7 +168,7 @@ Lastly, some items that you may find within the Shadowgate world have the abilit
 
 No! It creates lag having useless items laying about. You should get removed from the game environment as soon as possible if it is `junk'. Either take the stuff you do not want to local stores and sell it as money is important and your character likely needs it, or type : offer %^ORANGE%^<item>%^RESET%^, and this will remove the item, as well as it may heal you a slight bit for each item you offer.
 
-There is also the command %^ORANGE%^<offerall>%^RESET%^ which will get rid of whatever is laying about on the ground. Please note that this is an OOC command to help clean up the mud.
+There is also the command %^ORANGE%^<bury all>%^RESET%^ which will get rid of all corpses on the ground, emptying their contents. Command %^ORANGE%^<offerall>%^RESET%^ will clean the room and move contents of the corpses into it. It is safer to use %^ORANGE%^<bury all>%^RESET%^ for looting.
 
 %^CYAN%^20. Ok I know the game terms and I got a good idea on what is going on but Shadowgate seems really big and I am confused as to where to start adventuring, where to get equip, where not to go etc.
 

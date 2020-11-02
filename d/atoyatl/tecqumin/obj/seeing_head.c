@@ -44,9 +44,9 @@ int ask_me(string str){
   }
   if (check_exits()<1){
     tell_object(TP, "%^RESET%^" + nm +" %^RESET%^%^CYAN%^whispers, "
-      +"'%^BOLD%^%^WHITE%^I can detect nothing here.%^RESET%^%^CYAN%^'"); 
+      +"'%^BOLD%^%^WHITE%^I can detect nothing here.%^RESET%^%^CYAN%^'");
   }
-  return 1;  
+  return 1;
 }
 
 int check_exits(){
@@ -94,7 +94,7 @@ int check_exits(){
       list += hidden_exits[i];
       if (i<count-1){
         list += ", ";
-      } 
+      }
       if (i == count -1 && i>0 ){
         list += " and ";
       }
@@ -104,48 +104,52 @@ int check_exits(){
   }
   // LIST CLIMB EXITS
   climb_exits = EETO->query_climb_exits();
-  climb_directions = keys(climb_exits);
-  count = sizeof(climb_directions);
+  count = 0;
+  if (sizeof(climb_exits)) {
+      climb_directions = keys(climb_exits);
+      count = sizeof(climb_directions);
+  }
   if (count > 0){
-    list = ""; 
+
+    list = "";
     preamble =  "%^RESET%^" + nm +" %^RESET%^%^CYAN%^whispers,"
       +" %^BOLD%^%^WHITE%^'You can %^RESET%^";
     for (i=0;i<count;i++){
       if (i==1){
-        preamble =  "%^RESET%^" + nm +" %^RESET%^%^CYAN%^whispers,"  
+        preamble =  "%^RESET%^" + nm +" %^RESET%^%^CYAN%^whispers,"
           +" %^BOLD%^%^WHITE%^'You can %^RESET%^";
       }
       list += climb_directions[i];
       if (i<count-1){
         list += ", ";
-      }   
+      }
       if (i == count -1 && i>0 ){
         list += " or ";
       }
     }
-    
+
     tell_object(ETO, preamble + list + "%^BOLD%^%^WHITE%^ here.'");
   }
   //LIST BURIED EXITS
   buried_exits = keys(EETO->query_orig_exits());
   count = sizeof(buried_exits);
   if (count>0){
-    list = ""; 
+    list = "";
     preamble =  "%^RESET%^" + nm +" %^RESET%^%^CYAN%^whispers,"
       +" %^BOLD%^%^WHITE%^'There is a buried exit here, leading %^RESET%^";
     for (i=0;i<count;i++){
       if (i==1){
-        preamble =  "%^RESET%^" + nm +" %^RESET%^%^CYAN%^whispers,"  
+        preamble =  "%^RESET%^" + nm +" %^RESET%^%^CYAN%^whispers,"
           +" %^BOLD%^%^WHITE%^'There are buried exits here, leading %^RESET%^";
       }
       list += buried_exits[i];
       if (i<count-1){
         list += ", ";
-      }   
+      }
       if (i == count -1 && i>0 ){
         list += " and ";
       }
-    }    
+    }
     tell_object(ETO, preamble + list + "%^BOLD%^%^WHITE%^.'");
   }
 

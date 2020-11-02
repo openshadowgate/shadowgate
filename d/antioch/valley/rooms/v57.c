@@ -34,7 +34,7 @@ void create()
    ({"grass","blue-eyed grass","blue eyed grass"}) : "%^CYAN%^The"+
    " blue-eyed grass is rather pretty, with stalks of %^GREEN%^dark green"+
    " leaves%^CYAN%^ sticking straight up from which the flowers sprout"+
-   " from. The flowers themselves have six %^MAGENTA%^purple%^CYAN%^ petals that open up with"+ 
+   " from. The flowers themselves have six %^MAGENTA%^purple%^CYAN%^ petals that open up with"+
    " darker purple veins. The very center of the flower is a %^YELLOW%^bright"+
   " yellow%^RESET%^%^CYAN%^ with a stamen protruding, similar to a hibiscus.%^RESET%^",
    "lupine" : "%^BOLD%^%^GREEN%^The yellow lupine is mainly a very leafy"+
@@ -96,7 +96,7 @@ void pick(string str)
       return 1;
    }
    if(str != "pansy" && str != "pansies") {
-      return notify_fail("What exactly are you trying to pick?");
+      return notify_fail("You can pick pansies here.");
    }
    if(PANSY > 4) {
       tell_object(TP,"Picking any more pansies would ruin the look of this"+

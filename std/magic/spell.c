@@ -2819,17 +2819,20 @@ varargs int do_save(object targ, int mod)
 
 
     // racial saves from spells here
-    if (targ->query_race() == "gnome" && spell_sphere == "illusion") {
-        caster_bonus -= 2;
-    }
+    {
+        string targrace = targ->query_race();
 
-    if (targ->query_race() == "elf" || targ->query_race() == "half-elf") {
-        if (spell_sphere == "enchantment_charm") {
+        if (targrace == "gnome" && spell_sphere == "illusion") {
             caster_bonus -= 2;
         }
-    }
-    if (targ->query_race() == "drow" || targ->query_race() == "half-drow") {
-        if (spell_sphere == "enchantment_charm") {
+
+        if (spell_sphere == "enchantment_charm" && (
+                targrace == "elf" ||
+                targrace == "half-elf" ||
+                targrace == "drow" ||
+                targrace == "half-drow" ||
+                targrace == "barrus"
+                )) {
             caster_bonus -= 2;
         }
     }
@@ -2934,7 +2937,7 @@ object* target_filter(object* targets)
 {
     object* newtargs = ({});
     int i;
-    targets -= ({ 0 });
+    filter_array(targets, (:objectp($1):));
     targets -= ({ caster });
 
     if (!objectp(caster)) {

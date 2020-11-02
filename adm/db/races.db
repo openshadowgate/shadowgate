@@ -12,6 +12,7 @@
 # natural ac: natural AC bonus for the race
 
 #Playable races
+barrus:-2:13000:5:right hand;left hand:1:1:-1:0:0:-1:human:3:4
 beastkin:0:8000:5:right hand;left hand:0:0:0:0:2:-2:human:2:2
 bugbear:-2:8000:5:right hand;left hand:1:0:-1:0:0:0:human:2:0
 centaur:2:10000:5:right hand;left hand:4:2:-2:0:2:0:centaur:3:2
@@ -48,7 +49,6 @@ troll:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:3:7
 voadkyn:2:10000:5:right hand;left hand:1:-1:0:0:2:-2:human:3:2
 wemic:2:10000:5:right hand;left hand:2:2:0:0:2:-2:wemic:3:4
 yuan-ti:2:10000:5:right hand;left hand:0:0:0:0:0:0:human:2:0
-
 
 #Service races
 unborn:0:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:0

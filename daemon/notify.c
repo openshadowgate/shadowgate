@@ -30,8 +30,6 @@ varargs void mud_notify(string str, object target, string extra) {
   imms = filter_array(users(), "imm_users", this_object(), target);
   players = filter_array(users(), "player_users", this_object(), target);
 
-// disconnecting is currently bugged due to a lack of object to query. Continuing to try and resolve, modifying to prevent bug log spammage in the meantime. N, 3/14.
-// The string that's actually passed from user.c is "disconnected from", so I added that to see if it would stop the errors. ~Circe~ 8/20/15
   if(str == "disconnects from" || str == "disconnected from")
       message("notify","%^YELLOW%^<< A player has "+str+""+extra+"%^YELLOW%^ >>\n%^RESET%^",imms);
   else
