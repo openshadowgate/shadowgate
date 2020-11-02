@@ -50,7 +50,8 @@ void receive_given_item(object obj){
    if(!objectp(obj)) return;
    item = obj->query_name();
    if((string)obj->query_name() != "Dire Crab"
-     && (string)obj->query_name() != "Dire Lobster") {
+     && (string)obj->query_name() != "Dire Lobster"
+     && (string)obj->query_name() != "betrayer's edge") {
       force_me("say Ummm thanks, but this won't help.");
 	   force_me("give "+obj->query_name()+" to "+name+"");
       return;
@@ -65,6 +66,9 @@ void receive_given_item(object obj){
 	 case "Dire Lobster":{
 
 	     force_me("say Thank you for the Lobster.");
+    }
+    case "betrayer's edge":{
+       force_me("give lance to "+name);
     }
 	 break;}
 	 
@@ -85,8 +89,13 @@ void reply_func(string msg, object who){
    set_spoken("wizish");
    if(!msg || !objectp(who)) return;
 
-    force_me("say Hello Traveler, you look capable enough.  I'm trying to capture some of the lobsters and crabs down in the water but they are really strong.  I'll pay 1000 gold for each dead one.");
-
+    force_me("say Hello Traveler, you look capable enough. "+
+    " I'm trying to capture some of the lobsters and crabs "+
+    "down in the water but they are really strong.  I'll pay 1000 gold for each dead one.");
+   force_me("emote sighs and continues.")
+   force_me("say Also, the gold elves said to trade any evil"+
+   " items found down there for good ones they made so if you"+
+   " have something give it to me and I'll see if there is something good to trade if for.")
      return;
 }
 

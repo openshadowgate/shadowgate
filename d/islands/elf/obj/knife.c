@@ -4,7 +4,7 @@ inherit "/d/common/obj/weapon/dagger.c";
 
 void create(){
     ::create();
-    set_name("knife");
+    set_name("betrayer's edge");
     set_id( ({"knife","dark knife","edge","betrayer's edge"}) );
     set_short("%^BOLD%^%^RED%^Betrayer's edge%^RESET%^");
     set_obvious_short("%^RED%^a dark knife%^RESET%^");
