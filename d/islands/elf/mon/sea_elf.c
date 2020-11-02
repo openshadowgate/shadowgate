@@ -69,6 +69,7 @@ void receive_given_item(object obj){
     }
     case "betrayer's edge":{
        force_me("give lance to "+name);
+       return;
     }
 	 break;}
 	 
@@ -95,7 +96,7 @@ void reply_func(string msg, object who){
    force_me("emote sighs and continues.")
    force_me("say Also, the gold elves said to trade any evil"+
    " items found down there for good ones they made so if you"+
-   " have something give it to me and I'll see if there is something good to trade if for.")
+   " have something give it to me and I'll see if there is something good to trade if for.");
      return;
 }
 
