@@ -93,7 +93,7 @@ void reply_func(string msg, object who){
     force_me("say Hello Traveler, you look capable enough. "+
     " I'm trying to capture some of the lobsters and crabs "+
     "down in the water but they are really strong.  I'll pay 1000 gold for each dead one.");
-   force_me("emote sighs and continues.")
+   force_me("emote sighs and continues.");
    force_me("say Also, the gold elves said to trade any evil"+
    " items found down there for good ones they made so if you"+
    " have something give it to me and I'll see if there is something good to trade if for.");
