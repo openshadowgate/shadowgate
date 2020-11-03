@@ -23,7 +23,6 @@ int allow_shifted() { return 1; }
 int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
-
     if(!ob->is_class("magus"))
     {
         dest_effect();
@@ -42,12 +41,7 @@ int cmd_spell_combat(string str)
         return 1;
     }
     wielded = (object*)TP->query_wielded();
-    if (!sizeof(wielded) == 1)
-    {
-        tell_object(TP, "%^RESET%^%^BOLD%^You must be wielding a single one-handed melee weapon.%^RESET%^");
-        return 1;
-    }
-    if (wielded[0]->is_lrweapon())
+    if (!sizeof(wielded) == 1 || wielded[0]->is_lrweapon())
     {
         tell_object(TP, "%^RESET%^%^BOLD%^You must be wielding a single one-handed melee weapon.%^RESET%^");
         return 1;
@@ -103,6 +97,7 @@ void dest_effect()
     if(objectp(caster))
     {
         string * elements;
+        int i;
         caster->remove_property_value("active_feats",({TO}));
         caster->remove_property("magus cast");
         elements = ({ "fire","cold","electricity" });

@@ -225,8 +225,9 @@ void init_ki(object ob)
 }
 //END OF MONK FUNCS :P
 
-//Magus Arcana Functions, Wedex October 2020 
-int spend_arcana(object ob, int amount)
+//Resource Functions, Wedex October 2020
+//pool_type: ki, arcana, grace
+int spend_pool(object ob, int amount, string pool_type)
 {
     int avail;
     if (!intp(amount)) {
@@ -235,16 +236,16 @@ int spend_arcana(object ob, int amount)
     if (!objectp(ob)) {
         return 0;
     }
-    avail = (int)ob->query("available arcana");
+    avail = (int)ob->query("available " + pool_type);
     if (amount > avail) {
         return 0;
     }
     avail -= amount;
-    ob->set("available arcana", avail);
+    ob->set("available " + pool_type, avail);
     return 1;
 }
 
-int can_spend_arcana(object ob, int amount)
+int can_spend_pool(object ob, int amount, string pool_type)
 {
     int avail;
     if (!intp(amount)) {
@@ -253,63 +254,123 @@ int can_spend_arcana(object ob, int amount)
     if (!objectp(ob)) {
         return 0;
     }
-    avail = (int)ob->query("available arcana");
+    avail = (int)ob->query("available " + pool_type);
     if (avail >= amount) {
         return 1;
     }
     return 0;
 }
 
-int has_arcana(object ob)
+int has_pool(object ob, string pool_type)
 {
     if (!objectp(ob)) {
         return 0;
     }
-    if (!ob->query("available arcana")) {
+    if (!ob->query("available " + pool_type)) {
         return 0;
     }
     return 1;
 }
 
-varargs void regenerate_arcana(object ob, int amount, int pass)
+varargs void regenerate_pool(object ob, int amount, int pass, string pool_type)
 {
     int avail, max, delay;
     if (!intp(amount)) return 0;
     if (!objectp(ob)) return 0;
-    if (pass == 1 && (time() < (int)ob->query("last arcana regen"))) return;
-    avail = (int)ob->query("available arcana");
-    max = (int)ob->query("maximum arcana");
+    if (pass == 1 && (time() < (int)ob->query("last " + pool_type + " regen"))) return;
+    avail = (int)ob->query("available " + pool_type);
+    max = (int)ob->query("maximum " + pool_type);
     avail += amount;
+    if (pool_type == "ki") {
+        object class_ob;
+        class_ob = find_object_or_load(DIR_CLASSES + "/monk.c");
+        if (pass && (class_ob->monk_check(ob, "way of the fist")) && (int)ob->query_class_level("monk") > 10) avail += 1;
+    }
     if (avail > max) avail = max;
-    ob->set("available arcana", avail);
+    ob->set("available " + pool_type, avail);
     if (pass)
     {
-        delay = 10 + random(11);
-        delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
-        if (delay < 5) delay = 5;
-        ob->set("last arcana regen", time() + delay);
+        switch (pool_type) {
+        case "arcana":
+            if ((int)ob->is_class("magus")) {
+                delay = 20 + random(11);
+                delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
+                if (delay < 15) delay = 15;
+            }
+            break;
+        case "ki":
+            if ((int)ob->is_class("monk")) {
+                delay = 10 + random(11);
+                delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "wisdom");
+                if (delay < 5) delay = 5;
+            }
+            break;
+        case "grace":
+            if ((int)ob->is_class("paladin")) {
+                delay = 40 + random(11);
+                delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "charisma");
+                if (delay < 35) delay = 35;
+            }
+            break;
+        }
+        ob->set("last " + pool_type + " regen", time() + delay);
     }
     return;
 }
 
-void init_arcana(object ob)
+void init_pool(object ob, string pool_type)
 {
     int avail, newmax, oldmax, diff;
     if (!objectp(ob)) return;
-    if (!(int)ob->is_class("magus")) return;
-    newmax = (int)ob->query_guild_level("magus") / 2;
-    newmax = (newmax > 0 ? newmax: 1) + (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
-    if (!intp(avail = (int)ob->query("available arcana"))) avail = newmax;
-    if (intp(oldmax = (int)ob->query("maximum arcana")))
+
+    switch (pool_type) {
+    case "arcana":
+        if (!(int)ob->is_class("magus")){
+            return;
+        }else {
+            newmax = (int)ob->query_guild_level("magus") / 2;
+            newmax = (newmax > 0 ? newmax : 1) + (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
+        }
+        break;
+    case "ki":
+        if ((int)ob->query_class_level("monk") < 2) {
+            return;
+        }
+        else {
+            string myWay;
+            myWay = (string)ob->query("monk way");
+            if (FEATS_D->usable_feat(ob, "grandmaster of the way")) { myWay = "grandmaster of the way"; }
+            if (stringp(myWay))
+            {
+                if (myWay == "way of the elements" || myWay == "grandmaster of the way")
+                {
+                    newmax = to_int((int)ob->query_guild_level("monk") * 2);
+                }
+                else newmax = (int)ob->query_guild_level("monk");
+            }
+            else newmax = (int)ob->query_class_level("monk");
+        }
+        break;
+    case "grace":
+        if ((int)ob->query_class_level("paladin") < 5) {
+            return;
+        }
+        else {
+            newmax = ((int)ob->query_guild_level("paladin") - 1) / 4;
+        }
+        break;
+    }
+    if (!intp(avail = (int)ob->query("available " + pool_type))) avail = newmax;
+    if (intp(oldmax = (int)ob->query("maximum  " + pool_type)))
     {
         diff = newmax - oldmax;
         avail += diff;
     }
-    ob->set("available arcana", avail);
-    ob->set("maximum arcana", newmax);
+    ob->set("available " + pool_type, avail);
+    ob->set("maximum " + pool_type, newmax);
     return;
 }
-//END of Magus
+//END of Generic Resource
 
 //various FLAG command Functions
 int no_exp(object who)

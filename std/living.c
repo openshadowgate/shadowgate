@@ -295,25 +295,25 @@ int query_parrying()
     object* weapons;
     weapons = TO->query_wielded();
     if (sizeof(weapons) && !weapons[0]->is_lrweapon()) {
-        if (FEATS_D->usable_feat(TO, "parry")) {
-            return 1;
-        }
-        if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
-            if (sizeof(weapons) == 1 && !TO->is_wearing_type("shield")) {
-                return 1;
-            }
-        }
-        if (FEATS_D->usable_feat(TO, "unassailable parry")) {
-            weapons = distinct_array(weapons);
-            if (sizeof(weapons) > 1 && !weapons[1]->is_lrweapon()) {
-                return 1;
-            }
-        }
-        if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
-            if (sizeof(weapons) > 1 && weapons[0] == weapons[1]) {
-                return 1;
-            }
-        }
+if (FEATS_D->usable_feat(TO, "parry")) {
+    return 1;
+}
+if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
+    if (sizeof(weapons) == 1 && !TO->is_wearing_type("shield")) {
+        return 1;
+    }
+}
+if (FEATS_D->usable_feat(TO, "unassailable parry")) {
+    weapons = distinct_array(weapons);
+    if (sizeof(weapons) > 1 && !weapons[1]->is_lrweapon()) {
+        return 1;
+    }
+}
+if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
+    if (sizeof(weapons) > 1 && weapons[0] == weapons[1]) {
+        return 1;
+    }
+}
     }
     if (FEATS_D->usable_feat(TO, "unarmed parry")) {
         if (!sizeof(weapons)) {
@@ -357,6 +357,7 @@ void reinit_path()
 void heart_beat()
 {
     int myskill, mylevel, i;
+    int enh_timer, enh_bonus;
 
     if (!objectp(TO)) {
         return;
@@ -370,21 +371,35 @@ void heart_beat()
             TO->remove_property("stabs_available");
         }
         if (FEATS_D->usable_feat(TO, "combat reflexes")) {
-/*            i = (max(({TO->query_guild_level("thief"),
-                                TO->query_class_level("thief") + TO->query_class_level("arcane_trickster")
-                                }))+9)/10; */
-// there's a lib query for this now to get ANY thief PrC inherits, let's use that for efficiency! N, 1/3/20
+            /*            i = (max(({TO->query_guild_level("thief"),
+                                            TO->query_class_level("thief") + TO->query_class_level("arcane_trickster")
+                                            }))+9)/10; */
+                                            // there's a lib query for this now to get ANY thief PrC inherits, let's use that for efficiency! N, 1/3/20
             i = (TO->query_prestige_level("thief") + 9) / 10;
             TO->set_property("stabs_available", i);
         }
     }
-
+    /*
     if (TO->is_class("monk")) {
         "/daemon/user_d.c"->regenerate_ki(TO, (1 + random(2)), 1);
+    }*/
+    if (TO->is_class("monk")) {
+        "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "ki");
     }
     if (TO->is_class("magus")) {
-        "/daemon/user_d.c"->regenerate_arcana(TO, (1 + random(2)), 1);
+        "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "arcana");
     }
+    //enhancement effects
+    enh_timer = TO->query_property("enhancement timer");
+    if (enh_timer > 0) {
+        enh_timer -= 2;
+        if (enh_timer < 1) {
+            "/cmds/mortal/_enhance.c"->off_enhances(TO);
+        }else {
+            TO->set_property("enhancement timer", - 2);
+        }
+    }
+
     if (used_stamina > 0) {
         if (!userp(TO)) {
             used_stamina -= 10;
