@@ -1273,6 +1273,11 @@ void check_active_feats(int numwielded) {
         deactivate_feat->dest_effect();
         message("my_action", "You can only benefit from spell combat with a single one-handed melee weapon.", TO);
     }
+    //enhance, not a feat
+    active_feat = (int)TO->query_property("enhancement timer");
+    if (active_feat && numwielded ==0) {
+        "/cmds/mortal/_enhance.c"->off_enhances(TO);
+    }
 }
 
 string size_ok(string type, object arm)

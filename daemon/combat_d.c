@@ -612,12 +612,10 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
 
         enhance_chance = attacker->query_guild_level("magus");
         enhance_chance += attacker->query_guild_level("paladin");
-        enhance_chance += 40;
         enhance_chance = 10 - enhance_chance / 7;
 
         for (i = 0; i < sizeof(elements); i++)
         {
-
             //Chance from 10% to 33% at max for each element, on crit is 100% if burst.
             effect_chance = !random(enhance_chance);
             if ((attacker->query_property(elements[i]) && effect_chance) ||

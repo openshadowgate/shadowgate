@@ -9,7 +9,7 @@ int cmd_enhance(string str)
     object enhanceob, oldob;
     mapping enhances, enhance;
     string enhancement_name, *arguments, *temp = ({}), *display = ({}), * normal_enhances = ({});
-    int duration, i;
+    int i;
 
     if (!objectp(TP)) {
         return 0;
@@ -34,15 +34,12 @@ int cmd_enhance(string str)
         }
 
         enhances = get_enhances(TP);
-        power = TP->query_property("enhancement bonus");
+        power = TP->query_property("enhancement timer");
         if (power) {
-            TP->remove_property("enhancement timer");
-            TP->remove_property("enhancement bonus");
-            TP->add_attack_bonus(-power);
-            TP->add_damage_bonus(-power);
+            off_enhances(TP);
         }
         temp = keys(enhances);
-        power = 1;
+        power = 0;
         if (FEATS_D->has_feat(TP, "arcane pool")) {
             power += ((int)TP->query_guild_level("magus") + 7) / 8;
             if (FEATS_D->has_feat(TP, "legendary blade")) {
@@ -103,7 +100,6 @@ int cmd_enhance(string str)
             TP->add_attack_bonus(power);
             TP->add_damage_bonus(power);
         }
-        duration = 1;
         TP->set_property("enhancement timer", 80);
         return 1;
     }
