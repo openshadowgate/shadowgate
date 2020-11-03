@@ -44,7 +44,7 @@ void spell_effect(int prof)
     caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
-    call_out("dest_effect",(clevel*20));
+    call_out("dest_effect",(clevel*5*ROUND_LENGTH));
     //TODO: add test that checks for rage/transformation and calls dest_effect
     call_out("validate_conditions",ROUND_LENGTH*2);
 }
