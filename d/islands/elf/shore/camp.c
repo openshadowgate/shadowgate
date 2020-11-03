@@ -9,7 +9,7 @@ void create(){
    set_travel(RUBBLE);
    set_climate("arctic");
    set_name("Fishing Camp");
-   set_short("Fishing Camp");
+   set_short("%^BOLD%^Fishing Camp%^RESET%^");
    set_long((:TO,"long_desc":));
    set("night long",(:TO,"night_desc":));
    set_items(([
@@ -32,17 +32,17 @@ void create(){
 
 string long_desc(){
   
-   return("%^CYAN%^This is a small fishing camp set up by sea elves."+
-   "   The camp is set on top of the sea because the ice is so thick"+
-   " here.  There is firepit to light fires and places to store "+
+   return(query_short()+"\n%^CYAN%^This is a small fishing camp set up by sea elves."+
+   "   The %^RESET%^camp%^CYAN%^ is set on top of the sea because the %^RESET%^ice%^CYAN%^ is so thick"+
+   " here.  There is %^RESET%^firepit%^CYAN%^ to light fires and places to store "+
    "things.   Several simple shelters are here to ward against the bitter cold."+
 "\n");
  
 }
 string night_desc() {
-   return("%^BLUE%^This is a small fishing camp set up by sea elves."+
-   "   The camp is set on top of the sea because the ice is so thick"+
-   " here.  There is firepit to light fires and places to store "+
+   return(query_short()+"\n%^BLUE%^This is a small fishing camp set up by sea elves."+
+   "   The %^RESET%^camp%^BLUE%^ is set on top of the sea because the %^REST%^ice%^BLUE%^ is so thick"+
+   " here.  There is %^RESET%^firepit%^BLUE%^ to light fires and places to store "+
    "things.   Several simple shelters are here to ward against the bitter cold."+
 "\n");
 }
@@ -53,7 +53,7 @@ void reset(){
   
   set_locked("gate",0);
   set_open("gate", 0);
- switch(random(7)){
+ switch(random(8)){
       case 0:  tell_room(TO,"%^CYAN%^A gust of wind blows by, chilling your bones.");
                break;
       case 1:  tell_room(TO,"%^CYAN%^You hear strange whispering"+
@@ -74,7 +74,10 @@ void reset(){
                break;	
       case 6:  tell_room(TO,"%^CYAN%^The wind dies down,"+
 	  " leaving a cold hush.");
-               break;				   
+               break;
+      case 7:  tell_room(TO,"%^CYAN%^Several sea elves,"+
+	  " prepare a large lobster for dinner.");
+               break;							   
                }
  return;
 }
