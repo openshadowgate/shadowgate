@@ -60,6 +60,8 @@ Additional codes:
   %^MAGENTA%^$E%^WHITE%^ eldritch essence
   %^MAGENTA%^$k%^WHITE%^ available ki
   %^MAGENTA%^$K%^WHITE%^ maximum ki
+  %^MAGENTA%^$a%^WHITE%^ available arcana
+  %^MAGENTA%^$A%^WHITE%^ maximum arcana
   %^MAGENTA%^$p%^WHITE%^ power points
   %^MAGENTA%^$P%^WHITE%^ maximum power points
   %^MAGENTA%^$f%^WHITE%^ lower case shapeshifted form

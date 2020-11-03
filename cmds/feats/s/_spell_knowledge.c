@@ -24,7 +24,7 @@ int prerequisites(object ob)
         return 0;
     }
 
-    clss = ({"bard", "inquisitor", "mage", "oracle", "psion", "psywarrior", "sorcerer", "warlock"});
+    clss = ({"bard", "inquisitor", "mage", "oracle", "psion", "psywarrior", "sorcerer", "warlock", "magus"});
     clslvls = map(clss, (:$2->query_class_level($1):), ob);
 
     if(max(clslvls) < 21)

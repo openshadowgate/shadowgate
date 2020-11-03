@@ -70,8 +70,8 @@ spell_effect(int prof)
         tell_object(target, "%^WHITE%^%^BOLD%^"+caster->QCN+" sends a beam of energy at you.");
     }
 
-    rnd = - sdamage * 7/6;
-    damage_targ(target,target->return_target_limb(),rnd,"positive energy");
+    rnd = sdamage * 7/6;
+    damage_targ(target, target->return_target_limb(), rnd, "positive energy");
 
     if(query_spell_name()=="heal")
         if(member_array(target,caster->query_attackers())==-1)

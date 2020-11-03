@@ -91,8 +91,7 @@ void spell_effect(int prof) {
     }
     if(hpgain) {
       tell_object(caster,"%^BOLD%^%^CYAN%^The consumed spells flood your body with %^BOLD%^%^GREEN%^v%^YELLOW%^i%^BOLD%^%^GREEN%^gor%^BOLD%^%^CYAN%^!%^RESET%^");
-      hpgain *= -1;
-      damage_targ(caster,"torso", hpgain,"positive energy");
+      damage_targ(caster, "torso", hpgain, "positive energy");
     }
     dest_effect();
 }

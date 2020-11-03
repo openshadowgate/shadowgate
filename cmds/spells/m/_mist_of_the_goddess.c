@@ -64,7 +64,7 @@ void spell_effect(int prof)
         tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" wraps "+target->QCN+" in"+
             " the cleansing mist.",({target,caster}));
     }
-    damage_targ(target,"torso",(-1*clevel),"positive energy");
+    damage_targ(target, "torso", clevel, "positive energy");
     target->add_quenched(10000);
     //target->add_poisoning(-1*(int)target->query_poisoning());
 	POISON_D->clear_poisons_by_dc(target, 1000, 0); //should clear all poisons this way - Saide

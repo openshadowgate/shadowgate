@@ -159,6 +159,14 @@ string write_prompt()
             prompt = replace_string(prompt, "$k", "");
             prompt = replace_string(prompt, "$K", "");
         }
+        if ((int)TP->query("maximum arcana")) {
+            prompt = replace_string(prompt, "$a", "" + (int)TP->query("available arcana"));
+            prompt = replace_string(prompt, "$A", "" + (int)TP->query("maximum arcana"));
+        }
+        else {
+            prompt = replace_string(prompt, "$a", "");
+            prompt = replace_string(prompt, "$A", "");
+        }
         if ((int)TP->query_mp()) {
             prompt = replace_string(prompt, "$p",
                                     "" + (int)this_player()->query_mp());

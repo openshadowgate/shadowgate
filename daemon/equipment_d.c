@@ -107,6 +107,8 @@ mapping BONUS_CATS = ([
              "bonus spell slots",
              "caster level",
              "damage bonus",
+             "spellTurning",
+             "missChance",
              "shieldMiss",
              "sight bonus",
              "light",
@@ -410,6 +412,12 @@ mixed all_active_bonuses(object who, int flag)
             break;
             case "caster level":
                 totalBon = who->query_property("empowered");
+                break;
+            case "spellTurning":
+                totalBon = who->query_spellTurning();
+                break;
+            case "missChance":
+                totalBon = who->query_missChance();
                 break;
             case "shieldMiss":
                 totalBon = who->query_shieldMiss();

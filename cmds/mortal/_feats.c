@@ -87,6 +87,7 @@ int remove_spell_mastery_spell(string str, object ob, string feat, string mytype
             if (myclasses[i] == "bard" ||
                 myclasses[i] == "inquisitor" ||
                 myclasses[i] == "oracle" ||
+                myclasses[i] == "magus" ||
                 myclasses[i] == "sorcerer") {
                 num++;
             }
@@ -182,6 +183,7 @@ int spell_mastery_spell(string str, object ob, string feat, string mytype)
             okclasses += ({ myclasses[i] });
             if (myclasses[i] == "bard" ||
                 myclasses[i] == "inquisitor" ||
+                myclasses[i] == "magus" ||
                 myclasses[i] == "oracle" ||
                 myclasses[i] == "sorcerer") {
                 num++;
@@ -786,6 +788,9 @@ int cmd_feats(string str)
             }
             if (subset[i] == "psywarrior") {
                 j = ((int)TP->query_class_level(subset[i]) / 3) + 1;
+            }
+            else if (subset[i] == "magus") {
+                j = ((int)TP->query_class_level(subset[i]) / 3);
             } else {
                 j = (((int)TP->query_class_level(subset[i]) - 16) / 5);
             }
@@ -1214,6 +1219,9 @@ int cmd_feats(string str)
             }
             if (subset[i] == "psywarrior") {
                 j = ((int)TP->query_class_level(subset[i]) / 3) + 1;
+            }
+            else if (subset[i] == "magus") {
+                j = ((int)TP->query_class_level(subset[i]) / 3);
             } else {
                 j = (((int)TP->query_class_level(subset[i]) - 16) / 5);
             }

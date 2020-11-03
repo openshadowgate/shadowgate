@@ -35,7 +35,7 @@ string query_cast_string(){
 }
 
 void spell_effect(int prof){
-    int damage,i;
+    int damage, i;
     object *attackers;
 
     if(!present(target,place))
@@ -44,30 +44,28 @@ void spell_effect(int prof){
         dest_effect();
         return;
     }
-
+    damage = sdamage / 2;
     tell_object(caster,"%^BOLD%^%^BLACK%^You hurl your fist towards "+target->QCN+" and a beam of "
         "darkness flows forth towards "+target->QO+".");
     tell_object(target,"%^BOLD%^%^BLACK%^A beam of darkness flows forth from "+caster->QCN+"'s "
         "hand towards you!");
     tell_room(place,"%^BOLD%^%^BLACK%^"+ caster->QCN+" hurls "+caster->QP+" fist forth and a beam "
         "of darkness flows towards "+target->QCN+"!",({ caster, target}) );
-    if(!do_save(target,-2))
+    if (!do_save(target, -2))
     {
-        tell_object(target,"%^BLUE%^The beam of darkness strikes you, ravaging your mind.");
-        tell_room(environment(target),"%^BLUE%^The beam of darkness strikes "+target->QCN+".", target);
-        damage_targ(target, "torso", damage/2,"negative energy");
-        damage_targ(target, "torso", damage/2,"cold");
-        target->set_temporary_blinded(roll_dice(2,4));
-        spell_kill(target,caster);
+        tell_object(target, "%^BLUE%^The beam of darkness strikes you, ravaging your mind.");
+        tell_room(environment(target), "%^BLUE%^The beam of darkness strikes " + target->QCN + ".", target);
+        target->set_temporary_blinded(roll_dice(2, 4));
     }
     else
     {
-        tell_object(target,"%^BLUE%^The beam grazes you.");
-        tell_room(environment(caster),"%^BLUE%^The beam almost misses "+target->QCN+".",target);
-        damage_targ(target, "torso", damage/4,"negative energy");
-        damage_targ(target, "torso", damage/4,"cold");
-        spell_kill(target,caster);
+        tell_object(target, "%^BLUE%^The beam grazes you.");
+        tell_room(environment(caster), "%^BLUE%^The beam almost misses " + target->QCN + ".", target);
+        damage /= 2;
     }
+    damage_targ(target, "torso", damage, "negative energy");
+    damage_targ(target, "torso", damage, "cold");
+    spell_kill(target, caster);
     spell_successful();
     dest_effect();
 }

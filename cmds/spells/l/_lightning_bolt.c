@@ -11,7 +11,7 @@ void dest_effect();
 void create() {
     ::create();
     set_spell_name("lightning bolt");
-    set_spell_level(([ "mage" : 3 ]));
+    set_spell_level(([ "mage" : 3, "magus" : 3 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS lightning bolt on TARGET");
     set_description("This spell, when cast, will allow you to hurl a lightning bolt at your target.  The blazing "
