@@ -9,7 +9,7 @@ int cmd_enhance(string str)
     object enhanceob, oldob;
     mapping enhances, enhance;
     string enhancement_name, *arguments, *temp = ({}), *display = ({}), * normal_enhances = ({});
-    int i;
+    int duration, i;
 
     if (!objectp(TP)) {
         return 0;
@@ -43,8 +43,16 @@ int cmd_enhance(string str)
         }
         temp = keys(enhances);
         power = 1;
-        if (FEATS_D->has_feat(TP, "arcane pool")) { power += ((int)TP->query_guild_level("magus") + 7) / 8; }
-        if (FEATS_D->has_feat(TP, "divine bond")) { power += ((int)TP->query_guild_level("paladin") + 1) / 6; }
+        if (FEATS_D->has_feat(TP, "arcane pool")) {
+            power += ((int)TP->query_guild_level("magus") + 7) / 8;
+            if (FEATS_D->has_feat(TP, "legendary blade")) {
+                power += 2;
+
+            }
+        }
+        if (FEATS_D->has_feat(TP, "divine bond")) {
+            power += ((int)TP->query_guild_level("paladin") + 1) / 6;
+        }
         if (!sizeof(temp))
         {
             tell_object(TP, "You don't seem to have any additional enhancements in your list.");
@@ -95,7 +103,8 @@ int cmd_enhance(string str)
             TP->add_attack_bonus(power);
             TP->add_damage_bonus(power);
         }
-        TP->set_property("enhancement timer", 16);
+        duration = 1;
+        TP->set_property("enhancement timer", 80);
         return 1;
     }
     
@@ -313,7 +322,7 @@ The command will allow player to store a list of enhancements they can apply to 
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-magus, arcane pool, paladin, weapon bond
+enhancements, magus, arcane pool, paladin, weapon bond
 "
         );
 }

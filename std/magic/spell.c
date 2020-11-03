@@ -2329,7 +2329,7 @@ void define_base_damage(int adjust)
             }
         }
     }else if (FEATS_D->is_active(caster, "eldritch warfare")) {
-        sdamage = roll_dice(4, sdamage / 4);
+        sdamage = roll_dice(2, sdamage / 4);
     }
 
     

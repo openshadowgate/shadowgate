@@ -18,9 +18,9 @@
                                 "speed" : ([ "property" : "speedy weapon", "cost" : 3 ]), \
                             ]);
 
-#define MAGUS_ENHANCEMENTS ({ "flaming", "frost", "shock", "flaming burst", "icy burst", "shocking burst", "keen" });
-//magus pending: dancing, vorpal, speedy.
+#define MAGUS_ENHANCEMENTS ({ "flaming", "frost", "shock", "flaming burst", "icy burst", "shocking burst" });
+//magus pending: dancing, vorpal, speedy, keen.
 
-#define PALADIN_ENHANCEMENTS ({ "flaming", "flaming burst", "holy", "unholy", "axiomatic", "anarchic", "keen" });
-//paladin pending: brilliant energy, defending, disruption, merciful, speedy.
-//antipaladin pending: vicious, wounding, vorpal
+#define PALADIN_ENHANCEMENTS ({ "flaming", "flaming burst", "holy", "unholy", "axiomatic", "anarchic" });
+//paladin pending: brilliant energy, defending, disruption, merciful, speedy, keen.
+//antipaladin pending: vicious, wounding, vorpal, keen.
