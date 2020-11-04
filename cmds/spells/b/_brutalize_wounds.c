@@ -1,8 +1,8 @@
 /*
   _brutalize_wounds.c
-  
+
   From PF SRD. Makes target vulnerable to physical attacks.
-  
+
   -- Tlaloc --
 */
 
@@ -30,30 +30,30 @@ void create()
 void spell_effect()
 {
     string ename, pname, eposs;
-    
+
     if(!place || !caster || !target)
         return;
-    
+
     if(!target || !present(target, place))
     {
         tell_object(caster, "Your target is no longer here.");
         return;
     }
-    
+
     if(target->query_property("brutalized"))
     {
         tell_object(caster, "That target is already affected by brutalize wounds.");
         return;
     }
-    
-    pname = capitalize(caster->query_name());
-    ename = capitalize(target->query_name());
+
+    pname = caster->query_cap_name();
+    ename = target->query_cap_name();
     eposs = target->query_possessive();
-    
+
     tell_object(caster, "%^CYAN%^BOLD%^" + sprintf("You invade %s's mind, carefully dismantling %s defenses.", ename, eposs) + "%^RESET%^");
     tell_object(target, "%^BOLD%^" + pname + " invades your mind, carefully dismantling your defenses.%^RESET%^");
     tell_room(place, "%^BOLD%^CYAN%^" + sprintf("%s invades %s's mind, carefully dismantling %s defenses.", pname, ename, eposs) + "%^RESET%^", ({ target, caster }));
-    
+
     if(do_save(target, 0))
     {
         tell_object(target, "%^BOLD%^You manage to shrug off some of the effects of the brutality.%^RESET%^");
@@ -66,7 +66,7 @@ void spell_effect()
         tell_object(caster, "%^RED%^BOLD%^" + ename + " screams in pain as they feel amplified pain!%^RESET%^");
         target->set_property("brutalized", 2 + caster->query_guild_level("psywarrior") / 20);
     }
-    
+
     spell_successful();
     call_out("dest_effect", caster->query_guild_level("psywarrior"));
 }
@@ -78,11 +78,3 @@ void dest_effect()
     if(this_object())
         this_object()->remove();
 }
-
-        
-    
-    
-    
-
-
-

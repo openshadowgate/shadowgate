@@ -40,7 +40,7 @@ void spell_effect(int prof){
     cur_players = ({});
     partied = PARTY_D->query_party_members(caster->query_party());
     if(!sizeof(partied)) partied = ({ caster });
-  
+
     if(sizeof(all_living(environment(caster)))) { inven += all_living(environment(caster)); }
     for(i = 0;i<sizeof(inven);i++) {
         if(userp(inven[i]) && (member_array(inven[i],partied) != -1) && !inven[i]->query_true_invis())
@@ -84,7 +84,7 @@ void do_bravery(){
           tell_object(cur_players[i],"%^BOLD%^%^RED%^You are already in a frenzy and feel no different!");
           continue;
         }
-   	  if(pointerp(cur_players[i]->query_property("rally")) && 
+   	  if(pointerp(cur_players[i]->query_property("rally")) &&
           member_array(caster->query_name(),cur_players[i]->query_property("rally")) != -1) continue;
         inv += ({ cur_players[i] });
     }
@@ -139,7 +139,7 @@ void dest_effect(){
          if(member_array(myname,holding) != -1) holding -= ({ myname });
        }
        cur_players[i]->remove_property("rally");
-       cur_players[i]->set_property("rally",holding);
+       if(sizeof(holding)) cur_players[i]->set_property("rally",holding);
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();

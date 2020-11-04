@@ -1,8 +1,8 @@
 /*
   _wall_walker.c
-  
+
   From PF SRD. Behaves like spider climb.
-  
+
   -- Tlaloc --
 */
 
@@ -34,14 +34,14 @@ int preSpell()
 string query_cast_string()
 {
     tell_object(caster, "%^CYAN%^BOLD%^You focus inwardly with your mind and begin to change your body.%^RESET%^");
-    tell_room(place, "%^CYAN%^BOLD%^" + capitalize(caster->query_name()) + " focuses inwardly with " + caster->query_possessive() + " mind.%^RESET%^");
+    tell_room(place, "%^CYAN%^BOLD%^" + caster->query_cap_name() + " focuses inwardly with " + caster->query_possessive() + " mind.%^RESET%^");
     return "display";
 }
 
 void spell_effect(int prof)
 {
     tell_object(caster, "%^BOLD%^You change the makeup of your body to adhere to surfaces. You can now climb with superhuman ability!%^RESET%^");
-    tell_room(place, "%^BOLD%^" + capitalize(caster->query_name()) + " seems to change the very makeup of their body.%^RESET%^");
+    tell_room(place, "%^BOLD%^" + caster->query_cap_name() + " seems to change the very makeup of their body.%^RESET%^");
     caster->set_property("spider climb", 1);
     spell_successful();
     addSpellToCaster();
@@ -59,4 +59,3 @@ void dest_effect()
     if(objectp(this_object()))
         this_object()->remove();
 }
-    
