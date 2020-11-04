@@ -1,8 +1,8 @@
 /*
   ectoplasm.c
-  
+
   Reskinned rewrite of web with psionic theme.
-  
+
   -- Tlaloc -- 3.20.20
 */
 
@@ -27,7 +27,7 @@ create()
     set_save("reflex");
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     return caster->QCN+" steps away from "+target->QCN+" and begins meditating.";
 }
@@ -35,12 +35,12 @@ string query_cast_string()
 spell_effect(int prof)
 {
     int save;
-    
+
     string my_name, your_name;
-    
-    my_name = caster->query_name();
-    your_name = target->query_name();
-    
+
+    my_name = caster->query_cap_name();
+    your_name = target->query_cap_name();
+
     tell_object(caster, "%^CYAN%^" + sprintf("You summon strands of astral ectoplasm that shoot out towards %s!", your_name) + "%^RESET%^");
     tell_object(target, "%^CYAN%^" + sprintf("%s summons strands of astral ectoplasm that shoot out towards you!", my_name) + "%^RESET%^");
     tell_room(place, "%^CYAN%^" + sprintf("%s summons strands of astral ectoplasm that shoot out towards %s!", my_name, your_name) + "%^RESET%^", ({ caster, target }));
@@ -52,13 +52,13 @@ spell_effect(int prof)
         tell_room(environment(caster),""+target->QCN+" manages to dodge the ectoplasm!",({caster, target}) );
         dest_effect();
         return;
-    } 
+    }
     else
     {
         spell_successful();
-        tell_object(caster, "%^CYAN%^" + sprintf("Your strands of ectoplasm wrap around %s, trapping %s in place!",your_name,target->query_pronoun()) + "%^RESET%^");
+        tell_object(caster, "%^CYAN%^" + sprintf("Your strands of ectoplasm wrap around %s, trapping %s in place!",your_name,target->query_objective()) + "%^RESET%^");
         tell_object(target, "%^CYAN%^" + sprintf("%s's strands of ectoplasm wrap around you, trapping you in place!", my_name) + "%^RESET%^");
-        tell_room(place, sprintf("%s's strands of ectoplasm wrap around %s, trapping %s in place!", my_name, your_name, target->query_pronoun()), ({ caster, target }));
+        tell_room(place, sprintf("%s's strands of ectoplasm wrap around %s, trapping %s in place!", my_name, your_name, target->query_objective()), ({ caster, target }));
         target->set_tripped(roll_dice(1,8));
     }
 }

@@ -1,9 +1,9 @@
 /*
   _dissolving_touch.c
-  
+
   Dissolving Touch from PF SRD.
   Does acid damage with touch attack.
-  
+
   -- Tlaloc --
 */
 
@@ -38,33 +38,33 @@ void spell_effect(int prof)
     object enemy;
     int roll;
     string pname, ename;
-    
+
     enemy = present(arg, place);
-    
+
     if(!enemy)
         enemy = caster->query_current_attacker();
-    
+
     if(!enemy)
     {
         tell_object(caster, "That is not a valid target.");
         return;
     }
-    
+
     roll = BONUS_D->process_hit(caster, enemy, 1, 0, 0, 1);
-    ename = capitalize(enemy->query_name());
-    pname = capitalize(caster->query_name());
-    
+    ename = enemy->query_cap_name();
+    pname = caster->query_cap_name();
+
     if(roll < 1)
     {
         tell_object(caster, "%^BOLD%^You reach out with your acidic hand, but miss!%^RESET%^");
         tell_room(place, "%^BOLD%^" + pname + " reaches out with " + caster->query_possessive() + " acidic hand, but misses " + ename + "!%^RESET%^", ({ caster }));
         this_object()->remove();
     }
-    
+
     spell_successful();
     tell_object(caster, "%^BOLD%^GREEN%^You reach out and touch " + ename +", dissolving their flesh!%^RESET%^");
     tell_room(place, "%^BOLD%^GREEN%^" + pname + " reaches out and touches " + ename + ", dissolving their flesh with acid!%^RESET%^", ({ caster }));
-    
+
     damage_targ(enemy, enemy->return_target_limb(), sdamage, "acid");
     dest_effect();
 }
@@ -75,7 +75,3 @@ void dest_effect()
     if(objectp(this_object()))
         this_object()->remove();
 }
-    
-    
-        
-
