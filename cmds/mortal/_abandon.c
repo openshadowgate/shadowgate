@@ -172,10 +172,11 @@ int confirm_drop(string str, string theclass, int drop, int cost)
         tell_object(TP, "%^BOLD%^Resetting your monk way and ki spells. You may reassign these at a church/temple if you still have class levels.");
         TP->delete("monk way");
         TP->delete("ki spells");
-        "/daemon/user_d.c"->init_ki(TP);
+        //"/daemon/user_d.c"->init_ki(TP);
+        "/daemon/user_d.c"->init_pool(TP, "ki");
     }
     if (theclass == "magus") {
-        "/daemon/user_d.c"->init_arcana(TP);
+        "/daemon/user_d.c"->init_pool(TP, "arcana");
     }
     TP->force_me("fixspells");
     TP->set("hp_array", 0);

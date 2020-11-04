@@ -41,14 +41,14 @@ int cmd_enhance(string str)
         temp = keys(enhances);
         power = 0;
         if (FEATS_D->has_feat(TP, "arcane pool")) {
-            power += ((int)TP->query_guild_level("magus") + 7) / 8;
+            power += ((int)TP->query_class_level("magus") + 7) / 8;
             if (FEATS_D->has_feat(TP, "legendary blade")) {
                 power += 2;
 
             }
         }
         if (FEATS_D->has_feat(TP, "divine bond")) {
-            power += ((int)TP->query_guild_level("paladin") + 1) / 6;
+            power += ((int)TP->query_class_level("paladin") + 1) / 6;
         }
         if (!sizeof(temp))
         {

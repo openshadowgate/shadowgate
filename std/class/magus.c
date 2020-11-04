@@ -41,7 +41,7 @@ string *class_feats(string myspec)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : class_feats()+({"arcane pool", "spell combat", "magus armor"}), 2 : ({"spellstrike"}), 4 : ({"spell recall"}), 7 : ({"medium armor proficiency"}), 10 : ({"fighter training"}), 11 : ({"improved spell recall"}), 13 : ({"heavy armor proficiency"}), 16 : ({"spell counterstrike"}), 20 : ({"true magus"})]);
+    return ([ 1 : class_feats()+({"arcane pool", "spell combat", "magus armor"}), 2 : ({"spellstrike"}), 4 : ({"spell recall"}), 7 : ({"medium armor proficiency"}), 10 : ({"fighter training"}), 11 : ({"improved spell recall"}), 13 : ({"heavy armor proficiency"}), 16 : ({"spell counterstrike"}), 20 : ({"legendary blade"})]);
 }
 
 string *class_skills()

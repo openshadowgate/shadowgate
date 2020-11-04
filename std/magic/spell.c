@@ -1095,7 +1095,7 @@ void wizard_interface(object user, string type, string targ)
             TO->remove();
             return;
         }
-        if (!USER_D->spend_arcana(caster, mycost)) {
+        if (!"/daemon/user_d.c"->spend_pool(caster, mycost, "arcana")) {
             tell_object(caster, "You do not have enough available arcana to " + whatdo + " that " + whatsit + "!");
             TO->remove();
             return;
@@ -1141,7 +1141,7 @@ void wizard_interface(object user, string type, string targ)
         !(FEATS_D->usable_feat(caster, "raging healer") && (member_array(spell_name, raging_healer_spells) != -1) && caster->query_property("raged")) &&
         !(FEATS_D->usable_feat(caster, "timeweaver") && (member_array(spell_name, MAGIC_SS_D->query_class_special_spells("chronicler", "all")) != -1)) &&
         !(FEATS_D->usable_feat(caster, "greater spell mastery") && casting_level < 5 && spell_sphere == caster->query_school()) &&
-        !(FEATS_D->usable_feat(caster, "inspired necromancy") && casting_level < 7 && spell_sphere == "necromancy")
+        !(FEATS_D->usable_feat(caster, "inspired necromancy") && casting_level < 7 && spell_sphere == "necromancy") &&
         !(spell_type == "magus" && caster->query_property("spell recall"))) {
         if (!caster->check_memorized(spell_type, improv)) {
             tell_object(caster, "You cannot " + whatdo + " this " + whatsit + " at this time.");

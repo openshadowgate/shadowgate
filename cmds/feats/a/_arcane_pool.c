@@ -13,7 +13,9 @@ void create()
     feat_name("arcane pool");
     feat_prereq("Magus L1");
     feat_classes("magus");
-    feat_desc("The Shieldwall feat allows you to fight defensively using your shield to help deflect attacks and avoid incoming damage. The more defensively that you fight with your shield, the fewer melee attacks that you will get. You may increase your defensive ability with your shield until you have only one melee attack remaining. Using shieldwall defensively will also reduce the power of your spells. Using shieldwall defensively when you have the counter feat will also increase the damage of your attacks.");
+    feat_desc("The magus gains a reservoir of mystical arcane energy that he can draw upon to fuel his powers and enhance his weapon. The magus has the following properties available: flaming, flaming burst, frost, icy burst, shock, shocking burst.
+        
+See also: enhance, enhancements");
     permanent(1);
 }
 

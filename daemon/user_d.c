@@ -326,14 +326,18 @@ void init_pool(object ob, string pool_type)
     switch (pool_type) {
     case "arcana":
         if (!(int)ob->is_class("magus")){
+            ob->delete("available " + pool_type);
+            ob->delete("maximum " + pool_type);
             return;
         }else {
-            newmax = (int)ob->query_guild_level("magus") / 2;
+            newmax = (int)ob->query_class_level("magus") / 2;
             newmax = (newmax > 0 ? newmax : 1) + (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
         }
         break;
     case "ki":
         if ((int)ob->query_class_level("monk") < 2) {
+            ob->delete("available " + pool_type);
+            ob->delete("maximum " + pool_type);
             return;
         }
         else {
@@ -353,15 +357,17 @@ void init_pool(object ob, string pool_type)
         break;
     case "grace":
         if ((int)ob->query_class_level("paladin") < 5) {
+            ob->delete("available " + pool_type);
+            ob->delete("maximum " + pool_type);
             return;
         }
         else {
-            newmax = ((int)ob->query_guild_level("paladin") - 1) / 4;
+            newmax = ((int)ob->query_class_level("paladin") - 1) / 4;
         }
         break;
     }
     if (!intp(avail = (int)ob->query("available " + pool_type))) avail = newmax;
-    if (intp(oldmax = (int)ob->query("maximum  " + pool_type)))
+    if (intp(oldmax = (int)ob->query("maximum " + pool_type)))
     {
         diff = newmax - oldmax;
         avail += diff;

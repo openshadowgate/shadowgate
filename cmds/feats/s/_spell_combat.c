@@ -59,8 +59,6 @@ string cm(string str)
 void execute_feat()
 {
     object obj;
-    string * elements;
-    int i;
 
     if(!objectp(caster))
     {
@@ -81,13 +79,6 @@ void execute_feat()
     caster->set_property("active_feats",({TO}));
     caster->set_property("magus cast", 1);
     caster->set_property("magus properties", 1);
-    elements = ({ "fire","cold","electricity" });
-    
-    for (i = 0; i < sizeof(elements); i++)
-    {
-        caster->set_property(elements[i], 1);
-        caster->set_property(elements[i] + " burst", 1);
-    }
     
     return;
 }
@@ -96,17 +87,8 @@ void dest_effect()
 {
     if(objectp(caster))
     {
-        string * elements;
-        int i;
         caster->remove_property_value("active_feats",({TO}));
         caster->remove_property("magus cast");
-        elements = ({ "fire","cold","electricity" });
-        
-        for (i = 0; i < sizeof(elements); i++)
-        {
-            caster->remove_property(elements[i]);
-            caster->remove_property(elements[i] + " burst");
-        }
         tell_object(caster,"%^BOLD%^%^BLUE%^Your concentration fades.");
     }
     ::dest_effect();
