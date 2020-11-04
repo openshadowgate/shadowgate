@@ -429,7 +429,7 @@ stats [gain %^ORANGE%^%^ULINE%^STAT%^RESET%^]|[move %^ORANGE%^%^ULINE%^STAT1%^RE
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-Without an argument, this command displays your character stats.
+Without an argument, this command displays your character stats. Players have stat supremum set at 24 and infimum at 6, which can be changed through race and class adjustments. In addition to that, spells, magical items and other effects can both increase stats beyond and this point, but never to values more than 30 or less than 1.
 
 This command is also used to manipulate your stats:
 
