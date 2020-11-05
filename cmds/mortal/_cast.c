@@ -202,11 +202,13 @@ int cmd_cast(string str)
         else if (maguslvl > 6) {
             armor = TP->all_armour();
             armor = distinct_array(armor);
+            armor = filter_array(armor, "armor_filter", TO);
             armor = filter_array(armor, "medium_armor_filter", TO);
         }
         else {
             armor = TP->all_armour();
             armor = distinct_array(armor);
+            armor = filter_array(armor, "armor_filter", TO);
             armor = filter_array(armor, "light_armor_filter", TO);
         }
     }
