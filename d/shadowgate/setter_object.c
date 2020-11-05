@@ -247,7 +247,7 @@ select_common(string str)
 
     str = lower_case(str);
 
-    choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
+    choices = distinct_array(call_other(TO, "generate_" + ROLL_CHAIN[head]));
 
     if (sizeof(choices)) {
         if (str == "random") {
@@ -276,7 +276,7 @@ display_common()
         return;
     }
 
-    choices = distinct_array(call_other(TO, "generate_" + ROLL_CHAIN[head]));
+    choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
     if (sizeof(choices) > 1) {
         write("%^RESET%^--==%^BOLD%^< %^GREEN%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + " %^WHITE%^>%^RESET%^==--\n");
