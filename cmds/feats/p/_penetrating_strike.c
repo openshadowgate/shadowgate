@@ -21,10 +21,15 @@ int allow_shifted()
 
 int prerequisites(object ob)
 {
+    int magus = 0;
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("fighter") < 12) {
+
+    if (ob->is_class("magus") && file_exists("/std/class/magus.c")) {
+        magus = (int)"/std/class/magus.c"->fighter_training(ob);
+    }
+    if (ob->query_class_level("fighter") + magus < 12) {
         dest_effect();
         return 0;
     }

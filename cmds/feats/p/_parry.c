@@ -22,7 +22,11 @@ int allow_shifted() { return 1; }
 
 int prerequisites(object ob) {
     if(!objectp(ob)) { return 0; }
-    if(!ob->is_class("fighter") && !ob->is_class("cavalier") && !ob->is_class("paladin") && !ob->is_class("antipaladin")) {
+    if(!ob->is_class("fighter") &&
+        !ob->is_class("cavalier") &&
+        !ob->is_class("paladin") &&
+        !ob->is_class("antipaladin") &&
+        !FEATS_D->has_feat(ob, "fighter training")) {
         dest_effect();
         return 0;
     }

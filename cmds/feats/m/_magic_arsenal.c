@@ -6,7 +6,7 @@ inherit FEAT;
 void create() 
 {
     ::create();
-    feat_type("premanent");
+    feat_type("permanent");
     feat_category("MagicDamage");
     feat_name("magic arsenal");
     feat_prereq("greater spell power");

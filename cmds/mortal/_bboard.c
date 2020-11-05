@@ -22,6 +22,7 @@ string * BBOARDS=({
             "fighter",
             "lawboard",
             "mage",
+            "magus",
             "monk",
             "paladin",
             "psion",

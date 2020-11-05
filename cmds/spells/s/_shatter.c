@@ -12,7 +12,7 @@ void create()
     ::create();
     set_author("ares");
     set_spell_name("shatter");
-    set_spell_level(([ "cleric" : 2, "monk" : 7,"paladin":2]));
+    set_spell_level(([ "cleric" : 2, "monk" : 7,"paladin": 2, "magus" : 2 ]));
     set_spell_sphere("alteration");
     set_monk_way("way of the elements");
     set_domains("destruction");

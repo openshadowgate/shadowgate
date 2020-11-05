@@ -31,6 +31,8 @@
     "bonus_spell_slots_7", \
     "bonus_spell_slots_8", \
     "bonus_spell_slots_9", \
+    "spellTurning", \
+    "missChance", \
     "shieldMiss", \
     "fire resistance",             "fire resistance percent", \
     "cold resistance",             "cold resistance percent", \

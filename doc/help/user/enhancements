@@ -1,0 +1,17 @@
+%^CYAN%^ENHANCEMENTS%^RESET%^
+
+The following Enhancements are available:
+
+%^CYAN%^%^ULINE%^Enhancement:%^RESET%^             %^CYAN%^%^ULINE%^(Cost) Description:
+flaming               (1) Adds fire damage.
+flaming burst         (2) As flaming, but additional damage on a critical.
+frost                 (1) Adds cold damage.
+icy burst             (2) As frost, but additional damage on a critical.
+shock                 (1) Adds electricity damage.
+shocking burst        (2) As shock, but additional damage on a critical.
+Holy                  (2) Ignores defenses from Evil beings, adds damage.
+Unholy                (2) Ignores defenses from Good beings, adds damage.
+Axiomatic             (2) Ignores defenses from Chaotic beings, adds damage.
+Anarchic              (2) Ignores defenses from Lawful beings, adds damage.
+
+%^CYAN%^See also:%^RESET%^ enhance

@@ -190,7 +190,8 @@ int set_memorized(string myclass, string spell, int num)
     if (myclass == "bard" ||
         myclass == "sorcerer" ||
         myclass == "oracle" ||
-        myclass == "inquisitor") { //get spontaneous settings
+        myclass == "inquisitor" ||
+        myclass == "magus") { //get spontaneous settings
         if (sscanf(spell, "level %d", level) != 1) {
             return 0;
         }
@@ -241,6 +242,7 @@ varargs int forget_memorized(string myclass, string spell, int forced)
     }
     if (myclass == "bard" ||
         myclass == "inquisitor" ||
+        myclass == "magus" ||
         myclass == "oracle" ||
         myclass == "sorcerer") { //get spontaneous settings
         if (sscanf(spell, "level %d", level) != 1) {
@@ -301,6 +303,7 @@ varargs int forget_memorized(string myclass, string spell, int forced)
 
     if (myclass == "bard" ||
         myclass == "inquisitor" ||
+        myclass == "magus" ||
         myclass == "oracle" ||
         myclass == "sorcerer") {
         spells_memorized[myclass][level][spell] = spells_memorized[myclass][level][spell] - 1;
@@ -367,6 +370,7 @@ int query_memorized(string myclass, string spell)
     }
     if (myclass == "bard" ||
         myclass == "inquisitor" ||
+        myclass == "magus" ||
         myclass == "oracle" ||
         myclass == "sorcerer") {
         if (sscanf(spell, "level %d", lvl) != 1) {
@@ -412,6 +416,7 @@ int can_memorize(string myclass, string spell)
     }
     if (myclass == "bard" ||
         myclass == "inquisitor" ||
+        myclass == "magus" ||
         myclass == "oracle" ||
         myclass == "sorcerer") {
         if (sscanf(spell, "level %d", lvl) != 1) {

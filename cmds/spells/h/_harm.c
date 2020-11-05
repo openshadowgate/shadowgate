@@ -64,7 +64,7 @@ spell_effect(int prof)
     }
 
     rnd = sdamage * 7/6;
-    damage_targ(target,target->return_target_limb(),rnd,"negative energy");
+    damage_targ(target, target->return_target_limb(), rnd, "negative energy");
 
     if(query_spell_name()=="harm")
         if(member_array(target,caster->query_attackers())==-1)

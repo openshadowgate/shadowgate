@@ -17,12 +17,17 @@ void create()
 int allow_shifted() { return 1; }
 
 int prerequisites(object ob) {
-    if(!objectp(ob)) { return 0; }
-    if(!FEATS_D->has_feat(ob,"weapon focus")) {
-        dest_effect();
+    int magus = 0;
+    if (!objectp(ob)) {
         return 0;
     }
-    if(ob->query_class_level("fighter") < 8) {
+
+    if (ob->is_class("magus") && file_exists("/std/class/magus.c")) {
+        magus = (int)"/std/class/magus.c"->fighter_training(ob);
+    }
+
+    if(!FEATS_D->has_feat(ob, "weapon focus") ||
+        ob->query_class_level("fighter") + magus < 8) {
         dest_effect();
         return 0;
     }

@@ -41,15 +41,17 @@ void spell_effect(int prof)
 
     foreach(foe in foes)
     {
-        if (combat_death_save(foe, 0)) {
-            tell_object(foe, "%^BLUE%^%^BOLD%^The darkness washes over you, but nothing happens!");
-            continue;
-        }
+        if (!foe->query_property("negative energy affinity")) {
+            if (combat_death_save(foe, 0)) {
+                tell_object(foe, "%^BLUE%^%^BOLD%^The darkness washes over you, but nothing happens!");
+                continue;
+            }
 
-        tell_object(foe, "%^BLUE%^%^BOLD%^Your life ends, as negative energy destroys your very soul!");
-        tell_room(place, "%^BLUE%^%^BOLD%^" + foe->QCN + " crumbles to dust!", foe);
-        damage_targ(foe, foe->return_target_limb(), foe->query_max_hp() * 2, "negative energy");
-        max -= foe->query_level();
+            tell_object(foe, "%^BLUE%^%^BOLD%^Your life ends, as negative energy destroys your very soul!");
+            tell_room(place, "%^BLUE%^%^BOLD%^" + foe->QCN + " crumbles to dust!", foe);
+            damage_targ(foe, foe->return_target_limb(), foe->query_max_hp() * 2, "negative energy");
+            max -= foe->query_level();
+        }        
     }
 
     spell_successful();

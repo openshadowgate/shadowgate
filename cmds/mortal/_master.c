@@ -14,6 +14,7 @@ mapping CLASSMAP=(["mage":MAGEKNOWN,
                    "psywarrior":PWKNOWN,
                    "inquisitor":INQKNOWN,
                    "bard":INQKNOWN,
+                   "magus" : INQKNOWN,
                    "warlock":WARLOCKKNOWN]);
 
 mapping query_mastering_classes()
@@ -41,7 +42,7 @@ int cmd_master(string args)
         int mylvl = TP->query_prestige_level(myclass);
         mapping spell_index = MAGIC_D->query_index(myclass);
         int i;
-        int bonuslimit;
+        int bonuslimit, max_spells, spell_access;
         int* spelllevels = allocate(9);
         string sname;
         string* myspells = TP->query_mastered_base()[myclass];
@@ -55,10 +56,15 @@ int cmd_master(string args)
             }
         }
 
+        if (myclass == "magus" && FEATS_D->usable_feat(TP, "greater spell access")) {
+            spell_access = 2;
+        }
+
         write("%^CYAN%^You have spells as follows:");
         for (i = 0; i < 9; i++) {
+            max_spells = CLASSMAP[myclass][mylvl][i] + spell_access;
             if (CLASSMAP[myclass][mylvl][i]) {
-                write("%^CYAN%^Level " + (i + 1) + ": %^RESET%^" + spelllevels[i] + " of " + CLASSMAP[myclass][mylvl][i]);
+                write("%^CYAN%^Level " + (i + 1) + ": %^RESET%^" + spelllevels[i] + " of " + max_spells);
             }
         }
         if (FEATS_D->usable_feat(TP, "spell knowledge")) {
@@ -160,13 +166,13 @@ int cmd_master(string args)
         write("%^CYAN%^You have forgotten %^BOLD%^%^WHITE%^" + sarg + "%^RESET%^%^CYAN%^.%^RESET%^");
         return 1;
     }
-
+    else
     {
         mapping spell_index = MAGIC_D->index_masterable_spells(TP, myclass);
         int mylvl = TP->query_prestige_level(myclass);
         int bonuslimit = 0;
         int *knownperlevel = allocate(9);
-        int i;
+        int i, max_spells, spell_access;
         string sname;
         string *myspells = TP->query_mastered_base()[myclass];
 
@@ -197,10 +203,15 @@ int cmd_master(string args)
 
         mylvl = mylvl>50?50:mylvl;
 
+        if (myclass == "magus" && FEATS_D->usable_feat(TP, "greater spell access")) {
+            spell_access = 2;
+        }
+
         {
             for (i = 0; i < 9; i++) {
-                if (knownperlevel[i] > CLASSMAP[myclass][mylvl][i]) {
-                    bonuslimit -= knownperlevel[i] - CLASSMAP[myclass][mylvl][i];
+                max_spells = CLASSMAP[myclass][mylvl][i] + spell_access;
+                if (knownperlevel[i] > max_spells) {
+                    bonuslimit -= knownperlevel[i] - max_spells;
                 }
             }
             if (FEATS_D->usable_feat(TP, "spell knowledge")) {
@@ -214,8 +225,9 @@ int cmd_master(string args)
             }
         }
 
-        if (knownperlevel[spell_index[args] - 1] < CLASSMAP[myclass][mylvl][spell_index[args] - 1] ||
-            bonuslimit > 0) {
+        if (CLASSMAP[myclass][mylvl][spell_index[args] - 1] &&
+            (knownperlevel[spell_index[args] - 1] < CLASSMAP[myclass][mylvl][spell_index[args] - 1] + spell_access ||
+            bonuslimit > 0)) {
             TP->add_mastered(myclass, args);
             write("%^CYAN%^You have just mastered %^BOLD%^%^WHITE%^" + args + "%^RESET%^%^CYAN%^!%^RESET%^");
             if (myclass == "mage") {

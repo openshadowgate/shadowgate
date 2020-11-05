@@ -7,7 +7,7 @@ inherit OBJECT;
 
 // Skip to MODULES section to write new module.
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age","stat_mod", "stats", "height", "weight", "body_type", "hair_color", "eye_color", "language", "alignment", "deity", "class_special"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age", "stat_mod", "stats", "height", "weight", "body_type", "hair_color", "eye_color", "language", "alignment", "deity", "class_special"});
 
 /**
  * @file

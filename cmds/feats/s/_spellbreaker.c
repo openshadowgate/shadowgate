@@ -10,7 +10,9 @@ void create()
     feat_category("MagicResistance");
     feat_name("spellbreaker");
     feat_prereq("Disruptive, Fighter L10");
-    feat_desc("You extend your wards, allowing yourself to make an attack of opportunity, sometimes two, whenever enemy casts a spell at you.");
+    feat_desc("You extend your wards, allowing yourself to make an attack of opportunity, sometimes two, whenever enemy casts a spell at you.
+
+If a character has both the spell counterstrike feat and the spellbreaker feat they will perform three attacks of opportunity.");
     permanent(1);
     allow_blind(1);
 }
@@ -28,11 +30,16 @@ void execute_feat()
 
 int prerequisites(object ob)
 {
+    int magus = 0;
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("fighter") < 10 ||
-        !FEATS_D->has_feat(ob,"disruptive")) {
+
+    if (ob->is_class("magus") && file_exists("/std/class/magus.c")) {
+        magus = (int)"/std/class/magus.c"->fighter_training(ob);
+    }
+    if (!FEATS_D->has_feat(ob, "disruptive") ||
+        ob->query_class_level("fighter") + magus < 10) {
         dest_effect();
         return 0;
     }
