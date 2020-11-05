@@ -247,7 +247,7 @@ select_common(string str)
 
     str = lower_case(str);
 
-    choices = distinct_array(call_other(TO, "generate_" + ROLL_CHAIN[head]));
+    choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
     if (sizeof(choices)) {
         if (str == "random") {
