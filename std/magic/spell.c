@@ -1084,7 +1084,7 @@ void wizard_interface(object user, string type, string targ)
     }
 
     if (spell_type == "magus" && caster->query_property("spell recall")) {
-        if (FEATS_D->usable_feat(caster, "improved spell recall")) {
+        if (FEATS_D->has_feat(caster, "improved spell recall")) {
             mycost = (query_spell_level("magus") + 1) / 2;
         }
         else {
