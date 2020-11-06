@@ -75,7 +75,7 @@ void execute_feat()
     if (FEATS_D->is_active(caster, "rage")) {
         obj = query_active_feat("rage");
         obj->dest_effect();
-        caster = 0;
+        //caster = 0;
         return;
     }
 
