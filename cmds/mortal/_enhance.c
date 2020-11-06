@@ -6,7 +6,7 @@ inherit DAEMON;
 
 int cmd_enhance(string str)
 {
-    object enhanceob, oldob;
+    object enhanceob, oldob, * wielded;
     mapping enhances, enhance;
     string enhancement_name, *arguments, *temp = ({}), *display = ({}), * normal_enhances = ({});
     int i;
@@ -18,6 +18,13 @@ int cmd_enhance(string str)
     if (!FEATS_D->has_feat(TP, "arcane pool") &&
         !FEATS_D->has_feat(TP, "divine bond")) {
         return 0;
+    }
+
+    wielded = (object*)TP->query_wielded();
+    if (!sizeof(wielded))
+    {
+        tell_object(TP, "%^RESET%^%^BOLD%^You must be wielding a weapon.%^RESET%^");
+        return 1;
     }
     
     if (!stringp(str) || str == "" || str == " ") {
@@ -67,6 +74,7 @@ int cmd_enhance(string str)
                 if (!this_enhance[enhancement_name]) { continue; }
                 property_name = this_enhance[enhancement_name]["property"];
                 cost = (int)this_enhance[enhancement_name]["cost"];
+                has_element = 0;
                 if (is_burst = strsrch(property_name, "burst") + 1) {
                     element = replace_string(property_name, " burst", "");
                     if (has_element = TP->query_property(element)) {
