@@ -86,7 +86,7 @@ int cmd_enhance(string str)
                         TP->set_property(element, 1);
                         power -= cost;
                     }
-                    tell_object(TP, "Appliying " + enhancement_name + " to your weapon.");
+                    tell_object(TP, "Applying " + enhancement_name + " to your weapon.");
                     power -= cost;
                     TP->set_property("weapon enhancements", 1);
                 }
@@ -99,6 +99,7 @@ int cmd_enhance(string str)
             TP->set_property("enhancement bonus", power);
             TP->add_attack_bonus(power);
             TP->add_damage_bonus(power);
+            tell_object(TP, "You enhance your weapon for combat.");
         }
         TP->set_property("enhancement timer", 80);
         return 1;
