@@ -75,7 +75,8 @@ void execute_feat()
     if (FEATS_D->is_active(caster, "rage")) {
         obj = query_active_feat("rage");
         obj->dest_effect();
-        //caster = 0;
+        caster = 0;
+        dest_effect();
         return;
     }
 
@@ -207,10 +208,6 @@ void execute_attack()
 
     if (!objectp(caster)) {
         dest_effect();
-        return;
-    }
-
-    if (!FEATS_D->is_active(caster, "rage")) {
         return;
     }
 
