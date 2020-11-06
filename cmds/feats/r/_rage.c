@@ -203,8 +203,14 @@ void execute_attack()
     object* allies = ({ });
     int i;
 
+
+
     if (!objectp(caster)) {
         dest_effect();
+        return;
+    }
+
+    if (!FEATS_D->is_active(caster, "rage")) {
         return;
     }
 
