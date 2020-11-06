@@ -76,7 +76,6 @@ void execute_feat()
         obj = query_active_feat("rage");
         obj->dest_effect();
         caster = 0;
-        dest_effect();
         return;
     }
 
