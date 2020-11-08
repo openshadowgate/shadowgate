@@ -6,19 +6,19 @@ void create()
 {
     ::create();
     set_name("shepard's rest");
-    set_short("%^RESET%^%^CYAN%^Shepard's Rest%^RESET%^");
+    set_short("%^RESET%^%^CYAN%^Sh%^GREEN%^e%^CYAN%^pard's R%^GREEN%^e%^CYAN%^st%^RESET%^");
     set_obvious_short("%^RESET%^%^CYAN%^Wool hats%^RESET%^");
     set_id(({"shepard's rest","hat","silvered helm"}));
     set_long(
-        "This hat is made from magic wool.  It is thick and "+
+        "This hat is made from %^CYAN%^magic wool%^RESET%^.  It is thick and "+
         "warm.  It has several elven runes sewn into it that"+
         " shine with a magic aura.  There are two cloth "+
-        "animal ears sewn into it.");
-        
+        "%^CYAN%^animal ears%^RESET%^ sewn into it.");
     set_value(1000);
     set_size(-1);
     set_property("enchantment",4+random(2));
-    set_item_bonus("bonus_spell_slots_4",1);
+    set_item_bonus("cold resistance", 10);
+    set_item_bonus("constitution",2);
     set_remove((:TO,"remove_func":));
     set_wear( (:TO,"wear_func":) );
     set_struck((:TO,"strike_func":));
@@ -45,8 +45,6 @@ int wear_func(){
   tell_room(EETO,"%^CYAN%^"+ETOQCN+"'s hat ears %^BOLD%^twitch "+
          "%^RESET%^%^CYAN%^on "+ETO->QP+" head.",ETO);
           return 1;
-          
-   
 }
 int strike_func(int damage, object what, object who){
     object sheep;
@@ -58,8 +56,5 @@ int strike_func(int damage, object what, object who){
         sheep->ownerz(ETO);
         sheep->force_me("hop "+ETO->query_race());
     }
-
-
-    return damage;
- }
+ return damage;
 }
