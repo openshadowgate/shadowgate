@@ -13,7 +13,7 @@ void create()
     ::create();
     set_author("cythera");
     set_spell_name("gust of wind");
-    set_spell_level(([ "mage" : 2, "monk" : 13, "druid":2, "oracle" : 2 ]));
+    set_spell_level(([ "mage" : 2, "monk" : 13, "druid":2, "oracle" : 2, "magus" : 2 ]));
     set_mystery("wind");
     set_spell_sphere("alteration");
     set_monk_way("way of the elements");

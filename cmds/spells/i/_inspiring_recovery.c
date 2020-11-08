@@ -42,7 +42,7 @@ string what_alignment(int align)
 }
 
 spell_effect(int prof) {
-    string what, theirname;
+    string what, theirname, dam_type;
     object corpse, targ;
 
     ::spell_effect();
@@ -104,17 +104,18 @@ spell_effect(int prof) {
         if(caster->is_undead())
         {
             tell_room(place,"%^BLUE%^"+caster->QCN+" points "+caster->QP+" hand at "+target->QCN+" and channels a beam of darkness energy into them!");
+            dam_type = "negative energy";
             if(!target->is_undead())
                 set_helpful_spell(0);
-            damage_targ(target, "torso", sdamage,"negative energy");
         }
         else
         {
             tell_room(place,"%^ORANGE%^"+caster->QCN+" points "+caster->QP+" hand at "+target->QCN+" and channels a beam of light into them!");
+            dam_type = "positive energy";
             if(target->is_undead())
                 set_helpful_spell(0);
-            damage_targ(target, "torso", sdamage,"positive energy");
         }
+        damage_targ(target, "torso", sdamage, dam_type);
     }
     dest_effect();
 }

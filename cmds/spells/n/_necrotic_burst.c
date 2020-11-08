@@ -74,38 +74,35 @@ void spell_effect(int prof)
             int healamnt = calculate_healing();
             if(!objectp(targets[i])) { continue; }
             if(!present(targets[i],place)) { continue; }
-            if(!target->query_property("negative energy affinity"))
+
+            if (!targets[i]->query_property("negative energy affinity") && !targets[i]->query_property("heart of darkness"))
             {
-                tell_room(place,"%^BLUE%^A fell wave moves through"+
-                    " "+targets[i]->QCN+" carrying with it the essence of "+
-                    "death.",({ targets[i],caster }));
-                tell_object(caster,"%^BLUE%^A fell "+
-                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
-                tell_object(targets[i],"%^BLUE%^A fell "+
-                    "wave moves through you, carrying with it the essence of death.");
+                if (targets[i] == caster) {
+                    continue;
+                    tell_object(targets[i], "You shouldn't do that to yourself.");
+                }
                 set_helpful_spell(0);
-                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"negative energy");
             }
-            else if(targets[i] == caster)
+            else {
+                set_helpful_spell(1);
+            }
+
+            if (targets[i] == caster)
             {
-                tell_object(targets[i],"%^BLUE%^A fell "+
+                tell_object(targets[i], "%^BOLD%^%^BLACK%^A fell " +
                     "wave moves through you, carrying with it the essence of death.");
-                damage_targ(targets[i],targets[i]->return_target_limb(),-healamnt,"negative energy");
             }
             else
             {
-                if(do_save(target,0))
-                    healamnt/=2;
-                tell_room(place,"%^BLUE%^A fell wave moves through"+
-                    " "+targets[i]->QCN+" carrying with it the essence of "+
-                    "death.",({ targets[i],caster }));
-                tell_object(caster,"%^BLUE%^A fell "+
-                    "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
-                tell_object(targets[i],"%^BLUE%^A fell "+
+                tell_room(place, "%^BLUE%^A fell wave moves through" +
+                    " " + targets[i]->QCN + " carrying with it the essence of " +
+                    "death.", ({ targets[i],caster }));
+                tell_object(caster, "%^BLUE%^A fell " +
+                    "wave moves through " + targets[i]->QCN + ", carrying with it the essence of death.");
+                tell_object(targets[i], "%^BLUE%^A fell " +
                     "wave moves through you, carrying with it the essence of death.");
-                set_helpful_spell(1);
-                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"negative energy");
             }
+            damage_targ(targets[i], targets[i]->return_target_limb(), healamnt, "negative energy");
         }
     }
 

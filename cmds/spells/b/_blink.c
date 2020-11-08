@@ -8,7 +8,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("blink");
-    set_spell_level(([ "mage" : 3, "bard" : 3 ]));
+    set_spell_level(([ "mage" : 3, "bard" : 3, "magus" : 3 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS blink");
     set_damage_desc("35% miss chance");

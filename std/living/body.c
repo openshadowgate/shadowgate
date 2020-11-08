@@ -273,6 +273,43 @@ int query_shieldMiss()
     }
 }
 
+int query_spellTurning() {
+    int turnperc, reflection, flag;
+    turnperc = 0;
+
+    if (FEATS_D->usable_feat(TO, "spell reflection")) {
+        turnperc = (int)TO->query_skill("spellcraft") / 4;
+        flag = 1;
+    }
+
+    if (FEATS_D->usable_feat(TO, "reflection") && TO->is_wearing_type("shield")) {
+        reflection = (int)TO->query_skill("athletics") / 4;
+        turnperc = turnperc < reflection ? reflection : turnperc;
+    }
+    //This was on spell.c, i think it's for monsters that have the feat but no skill.
+    if ((flag || reflection) && !turnperc) {
+        turnperc = 15;
+    }
+
+    if ((int)TO->query_property("spellturning")) {
+        reflection = (int)TO->query_property("spellturning");
+        turnperc = turnperc < reflection ? reflection : turnperc;
+    }
+
+    if (turnperc < 0) {
+        turnperc = 0;
+    }
+
+    if (!turnperc) {
+        return 0;
+    }
+
+    if (turnperc > 85) {
+        turnperc = 85;
+    }
+    return turnperc;
+}
+
 void add_hp(int x)
 {
     int num;
@@ -1180,7 +1217,7 @@ string equip_weapon_to_limb(object weap, string limb1, string limb2)
         ApplyObjectBonuses(weap, TO, "add", "wield");
     }
     num_wielded++;
-    check_positioning(num_wielded);
+    check_active_feats(num_wielded);
     return 0;
 }
 
@@ -1201,21 +1238,45 @@ int remove_weapon_from_limb(object ob)
     }
     ac += (int)ob->query_ac();
     num_wielded--;
-    check_positioning(num_wielded);
+    check_active_feats(num_wielded);
     if (TO->is_player()) {
         ApplyObjectBonuses(ob, TO, "remove", "wield");
     }
     return 1;
 }
 
-void check_positioning(int numwielded) {
-    int positioning;
-    positioning = (int)TO->query_property("tactical_positioning");
-    if (positioning && numwielded != 1) {
-        message("my_action", "You can't benefit from positioning with a shield.", TO);
-        TO->set_property("tactical_positioning", -positioning);
-        TO->add_ac_bonus(-positioning);
-        TO->add_attack_bonus(positioning);
+void check_active_feats(int numwielded) {
+    int active_feat;
+    //positioning
+    active_feat = (int)TO->query_property("tactical_positioning");
+    if (active_feat && numwielded != 1) {
+        message("my_action", "You can only benefit from positioning with a single one-handed weapon.", TO);
+        TO->set_property("tactical_positioning", -active_feat);
+        TO->add_ac_bonus(-active_feat);
+        TO->add_attack_bonus(active_feat);
+    }
+    //spell combat
+    active_feat = (int)TO->query_property("magus cast");
+    if (active_feat && numwielded != 1) {
+        object deactivate_feat, * active_feats;
+        int i;
+        //Venger: im almost sure that this part might work better with query_active_feat("spell combat")
+        active_feats = TO->query_property("active_feats");
+
+        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
+        {
+            if (!objectp(active_feats[i])) { continue; }
+            if (active_feats[i]->query_feat_name() != "spell combat") { continue; }
+            deactivate_feat = active_feats[i];
+            break;
+        }
+        deactivate_feat->dest_effect();
+        message("my_action", "You can only benefit from spell combat with a single one-handed melee weapon.", TO);
+    }
+    //enhance, not a feat
+    active_feat = (int)TO->query_property("enhancement timer");
+    if (active_feat && numwielded ==0) {
+        "/cmds/mortal/_enhance.c"->off_enhances(TO);
     }
 }
 

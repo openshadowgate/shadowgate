@@ -251,6 +251,7 @@ int cmd_prepare(string str)
     if(myclass != "bard" &&
        myclass != "sorcerer" &&
        myclass != "oracle" &&
+       myclass != "magus" &&
        myclass != "inquisitor")
     {
         if (member_array(spellname, magic) == -1) { return notify_fail("You don't know of a spell named " + spellname + " to prepare.\n"); }
@@ -265,6 +266,7 @@ int cmd_prepare(string str)
     if (myclass != "bard" &&
         myclass != "inquisitor" &&
         myclass != "oracle" &&
+        myclass != "magus" &&
         myclass != "sorcerer") { sl = spells[spellname]; }
 
     rst = TP->can_memorize(myclass,spellname);
@@ -806,6 +808,7 @@ void check_list(object obj, string list, string myclass)
     if (myclass == "bard" ||
         myclass == "sorcerer" ||
         myclass == "oracle" ||
+        myclass == "magus" ||
         myclass == "inquisitor")
         return;
 
@@ -936,6 +939,7 @@ int add_spell_to_list(object obj, string spell, string list, string myclass)
 
     if(myclass == "sorcerer" ||
        myclass == "inquisitor" ||
+       myclass == "magus" ||
        myclass == "oracle" ||
        myclass == "bard")
         spell_level = to_int(replace_string(spell,"level ",""));

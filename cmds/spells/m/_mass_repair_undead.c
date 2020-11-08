@@ -84,7 +84,7 @@ void spell_effect(int prof)
         {
             if(!objectp(targets[i]))
                 continue;
-            if(!present(targets[i],place))
+            if(!present(targets[i], place))
                 continue;
             if(!target->query_property("negative energy affinity"))
                 continue;
@@ -93,7 +93,6 @@ void spell_effect(int prof)
             {
                 tell_object(targets[i],"%^BOLD%^%^BLACK%^A fell "+
                     "wave moves through you, carrying with it the essence of death.");
-                damage_targ(targets[i],targets[i]->return_target_limb(),-healamnt,"negative energy");
             }
             else
             {
@@ -104,9 +103,9 @@ void spell_effect(int prof)
                     "wave moves through "+targets[i]->QCN+", carrying with it the essence of death.");
                 tell_object(targets[i],"%^BOLD%^%^BLACK%^A fell "+
                     "wave moves through you, carrying with it the essence of death.");
-                set_helpful_spell(1);
-                damage_targ(targets[i],targets[i]->return_target_limb(),healamnt,"negative energy");
             }
+            set_helpful_spell(1);
+            damage_targ(targets[i], targets[i]->return_target_limb(), healamnt, "negative energy");
         }
     }
 

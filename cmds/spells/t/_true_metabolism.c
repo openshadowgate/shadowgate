@@ -46,7 +46,7 @@ void spell_effect(int prof)
     spell_successful();
     addSpellToCaster();
     execute_attack();
-    counter = clevel*5+4;
+    counter = clevel * 10 + 4;
     call_out("room_check",ROUND_LENGTH);
 }
 

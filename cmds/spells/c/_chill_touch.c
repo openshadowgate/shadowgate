@@ -15,7 +15,7 @@ create()
 {
     ::create();
     set_spell_name("chill touch");
-    set_spell_level(([ "mage" : 1, "oracle" : 1 ]));
+    set_spell_level(([ "mage" : 1, "oracle" : 1, "magus" : 1 ]));
     set_spell_sphere("necromancy");
     set_mystery("reaper");
     set_syntax("cast CLASS chill touch on TARGET");

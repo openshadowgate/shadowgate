@@ -51,24 +51,14 @@ void spell_effect(int prof) {
 		for(i=0;i<sizeof(targets);i++) {
 			if(!objectp(targets[i])) continue;
 			if(!present(targets[i],place)) continue;
-			if((string)targets[i]->query_race() == "undead") {
-                    tell_room(place,"%^BOLD%^%^BLUE%^A blue field radiates out from"+
-				    " "+targets[i]->QCN+" as "+caster->QCN+" releases a wave "+
-				    "of energy.",({ targets[i],caster }));
-                    tell_object(caster,"%^BOLD%^%^BLUE%^A blue field radiates out "+
-				    "from "+targets[i]->QCN+ " as you release a wave of energy.");
-                    tell_object(targets[i],"%^BOLD%^%^BLUE%^A blue field radiates out"+
-				    " from you as "+caster->QCN+" casts a spell.");			
-				    damage_targ(targets[i],targets[i]->return_target_limb(),calculate_healing(),"positive energy");
-			}
-			else if(targets[i]->query_property("berserked"))
+			if(targets[i]->query_property("berserked"))
             {
 			    tell_object(targets[i],"%^RED%^The rage fights off the healing!%^RESET%^");
+                continue;
             }
 			else if(targets[i] == caster)	
             {
-                tell_object(targets[i],"%^BOLD%^%^BLUE%^A soft blue glow envelopes you.");				
-				damage_targ(targets[i],targets[i]->return_target_limb(),(-1 * calculate_healing()),"positive energy");
+                tell_object(targets[i], "%^BOLD%^%^BLUE%^A soft blue glow envelopes you.");
 			}
 			else 
             {
@@ -78,9 +68,9 @@ void spell_effect(int prof) {
                 tell_object(caster,"%^BOLD%^%^BLUE%^A blue field radiates out "+
 				    "from "+targets[i]->QCN+ " as you release a wave of energy.");
                 tell_object(targets[i],"%^BOLD%^%^BLUE%^A blue field radiates out"+
-				    " from you as "+caster->QCN+" casts a spell.");			
-			    damage_targ(targets[i],targets[i]->return_target_limb(),(-1 *calculate_healing()),"positive energy");
+				    " from you as "+caster->QCN+" casts a spell.");
 			}
+            damage_targ(targets[i], targets[i]->return_target_limb(), calculate_healing(), "positive energy");
 		}
 	}
 

@@ -95,10 +95,20 @@
                     "an affinity for the strict procedures that such an order imparts on them. Because "\
                     "of this they are only able to be a lawful alignment."
 
+#define MAGUS       "There are those who spend their lives poring over ancient tomes and texts, "\
+                    "unlocking the power of magic, and there are those who spend their time perfecting "\
+                    "the use of individual weapons, becoming masters without equal. The magus is at once "\
+                    "a student of both philosophies, blending magical ability and martial prowess into "\
+                    "something entirely unique, a discipline in which both spell and steel are used "\
+                    "to devastating effect. As he grows in power, the magus unlocks powerful forms of "\
+                    "arcana that allow him to merge his talents further, and at the pinnacle of his "\
+                    "art, the magus becomes a blur of steel and magic, a force that few foes "\
+                    "would dare to stand against."        
+
 #define CLASS_BLURBS (["mage" : MAGE, "fighter" : FIGHTER, "cleric" : CLERIC, "psion" : PSION, "psywarrior" : PSYWARRIOR,\
                      "druid" : DRUID, "warlock" : WARLOCK, "bard" : BARD, "sorcerer" : SORCERER,\
                      "barbarian" : BARBARIAN, "thief" : THIEF, "paladin" : PALADIN, \
-                       "ranger" : RANGER, "monk" : MONK, "inquisitor" : INQUIS])
+                       "ranger" : RANGER, "monk" : MONK, "inquisitor" : INQUIS, "magus" : MAGUS])
 
 #define HUMAN       "Humans are perhaps the most prolific and adaptable race, capable of any class "\
                     "or alignment. They possess many different ethnicities, and may gain a small "\

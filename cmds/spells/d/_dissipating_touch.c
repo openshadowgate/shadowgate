@@ -41,8 +41,8 @@ void spell_effect(int prof)
         return;
     }
 
-    my_name = capitalize(caster->query_name());
-    your_name = capitalize(target->query_name());
+    my_name = caster->query_cap_name();
+    your_name = target->query_cap_name();
 
     if (!thaco(target, 0) && target && caster) {
         tell_object(caster, sprintf("You reach out to touch %s but miss!", your_name));

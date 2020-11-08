@@ -7,7 +7,7 @@ inherit OBJECT;
 
 // Skip to MODULES section to write new module.
 
-string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age","stat_mod", "stats", "height", "weight", "body_type", "hair_color", "eye_color", "language", "alignment", "deity", "class_special"});
+string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age", "stat_mod", "stats", "height", "weight", "body_type", "hair_color", "eye_color", "language", "alignment", "deity", "class_special"});
 
 /**
  * @file
@@ -276,7 +276,7 @@ display_common()
         return;
     }
 
-    choices = distinct_array(call_other(TO, "generate_" + ROLL_CHAIN[head]));
+    choices = call_other(TO, "generate_" + ROLL_CHAIN[head]);
 
     if (sizeof(choices) > 1) {
         write("%^RESET%^--==%^BOLD%^< %^GREEN%^You must now choose your %^CYAN%^" + replace_string(ROLL_CHAIN[head], "_", " ") + " %^WHITE%^>%^RESET%^==--\n");

@@ -40,7 +40,7 @@ spell_effect(int prof) {
   tell_room(PLACE,YOU+" reaches out and touches a hand to "+target->QCN+", healing it completely.",({ CASTER, target}) );
 
   if((int)target->query_hp() <=(int)target->query_max_hp())
-    damage_targ(target,target->return_target_limb(),(int)target->query_hp() - ((int)target->query_max_hp()),"positive energy");
+    damage_targ(target, target->return_target_limb(), (int)target->query_max_hp() - (int)target->query_hp(), "positive energy");
 
   target->remove_paralyzed();
   target->set_poisoning((-1)*(int)target->query_poisoning());

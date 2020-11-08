@@ -79,10 +79,10 @@ void spell_effect(int prof) {
     call_out("test",2);
     mylevel = clevel;
     if(FEATS_D->usable_feat(TO,"slippery caster")) {
-    call_out("dest_effect",(mylevel*20 * 1.33));
+    call_out("dest_effect",(mylevel * 5 * ROUND_LENGTH * 1.33));
     return;
     }else{
-    call_out("dest_effect",(mylevel*20)); }
+    call_out("dest_effect",(mylevel * 5 * ROUND_LENGTH)); }
     return;
 }
 

@@ -253,8 +253,10 @@ attack, lessing its force!%^RESET%^");
 varargs int typed_damage_modification(object attacker, object targ, string limb, int damage, string type)
 {
     object myEB;
-    int resist_perc, resist, reduction, mod, amt;
+    int resist_perc, resist, reduction, mod, amt, i;
     float percentage;
+    string* alignments, * enemy_alignments;
+    string target_align;
 
     if (!objectp(targ)) {
         return 0;
@@ -299,6 +301,23 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
     resist_perc = (int)targ->query_resistance_percent(type);
+    /*
+    //Venger: living creatures are healed with positive energy
+    //undead and exceptions creatures are healed with negative energy
+    //now let's change all spells to "deal" damage
+    if (type == "positive energy") {
+        if (!targ->query_property("negative energy affinity")) {
+            resist_perc += 200;
+        }
+    }
+    if (type == "negative energy") {
+        if (targ->query_property("heart of darkness") ||
+            targ->query_property("negative energy affinity")) {
+            resist_perc += 200;
+        }
+    }
+    */
+
     resist = (int)targ->query_resistance(type);
 
     if (resist_perc > 500) {
@@ -308,19 +327,10 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         resist_perc = -500;
     }
 
-    switch (resist_perc) {
-    case (-500)..(-1): // resistance less than 0 equals more damage done
-        percentage = to_float((100 + absolute_value(resist_perc)) / to_float(100));
-        break;
-
-    case 0..100: // resistance between 0 and 100 equals reduced damage
-        percentage = to_float((100 - resist_perc) / to_float(100));
-        break;
-
-    case 101..500: // resistance greater than 100 equals healing
-        percentage = to_float((100 - resist_perc) / to_float(100));
-        break;
-    }
+    // resistance less than 0 equals more damage done
+    // resistance between 0 and 100 equals reduced damage
+    // resistance greater than 100 equals healing
+    percentage = to_float((100 - resist_perc) / to_float(100));
 
     damage = to_int(damage * percentage);
 
@@ -419,10 +429,23 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     if ((int)targ->query_property("damage resistance")) {
         if (member_array(type, PHYSICAL_DAMAGE_TYPES) != -1) {
             if (damage > 0) {
+                target_align = (string)targ->query_true_align();
                 if (targ->query_alignment()) {
                     if (arrayp(attacker->query_property("aligned_weapon"))) {
                         if (member_array(targ->query_alignment(), attacker->query_property("aligned_weapon")) != -1) {
                             return damage;
+                        }
+                    }
+                    //alignments, enemy_alignments, target_align, i
+                    alignments = ({ "alignment 147", "alignment 369", "alignment 123", "alignment 789" });
+                    enemy_alignments = ({ "369", "147", "789", "123" });
+                    if (attacker->query_property("weapon enhancements")) {
+                        for (i = 0; i < sizeof(alignments); i++)
+                        {
+                            if (attacker->query_property(alignments[i]) &&
+                                strsrch(enemy_alignments[i], target_align + "") + 1) {
+                                return damage;
+                            }
                         }
                     }
                 }
@@ -431,7 +454,8 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 
                 if (attacker->query_property("magic")) {
                     mod = (int)attacker->query_property("magic") * 10;
-                }else if (objectp(attacker->query_current_weapon()) && (attacker->query_current_weapon())->query_property("magic")) {
+                }
+                else if (objectp(attacker->query_current_weapon()) && (attacker->query_current_weapon())->query_property("magic")) {
                     mod = (int)attacker->query_current_weapon()->query_property("magic") * 10;
                 }
 
@@ -473,9 +497,10 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 
 void check_extra_abilities(object attacker, object target, object weapon, int crit_hit)
 {
-    string ename, pname;
-    int effect_chance;
+    string ename, pname, enhance_msg, target_align;
+    int effect_chance, enhance_dmg, crit_mult, enhance_chance, i;
     object room;
+    string* elements, * actions, * bursts, * colors, * alignments, * enemy_alignments, * align_text, * a_colors;
 
     if (!objectp(attacker)) {
         return;
@@ -560,6 +585,70 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         }
         if (effect_chance > roll_dice(1, 100)) {
             POISON_D->ApplyPoison(target, attacker->query_property("natural poison"), attacker, "injury");
+        }
+    }
+
+    // magus arcane pool - paladin divine bond
+    //weapon enhancements
+    if (!attacker->query_property("shapeshifted") &&
+        objectp(weapon) &&
+        attacker->query_property("weapon enhancements")) {
+
+        if (crit_hit) {
+            crit_mult = (int)weapon->query_critical_hit_multiplier() - 1;
+            if (FEATS_D->has_feat(attacker, "exploit weakness")) {
+                crit_mult += 2;
+            }
+            else if (FEATS_D->has_feat(attacker, "weapon mastery")) {
+                crit_mult += 1;
+            }
+        }
+        //it can be optimized to mapping, any help appreciated
+        elements = ({ "fire", "cold", "electricity" });
+        actions = ({ "a burst", "shards", "tendrils" });
+        bursts = ({ "flames", "ice", "lightning" });
+        colors = ({ "fire red", "ice blue", "lightning yellow" });
+
+        enhance_chance = attacker->query_guild_level("magus");
+        enhance_chance += attacker->query_guild_level("paladin");
+        enhance_chance = 10 - enhance_chance / 7;
+
+        for (i = 0; i < sizeof(elements); i++)
+        {
+            //Chance from 10% to 33% at max for each element, on crit is 100% if burst.
+            effect_chance = !random(enhance_chance);
+            if ((attacker->query_property(elements[i]) && effect_chance) ||
+                (attacker->query_property(elements[i] + " burst") && crit_hit)) {
+                enhance_msg = bursts[i];
+                enhance_dmg = roll_dice(1, 6);
+                if (crit_hit && attacker->query_property(elements[i] + " burst")) {
+                    enhance_msg = actions[i] + " of " + bursts[i];
+                    enhance_dmg += roll_dice(crit_mult, 10);
+                }
+                tell_object(attacker, CRAYON_D->color_string("You release " + enhance_msg + " at " + target->QCN + "!", colors[i]));
+                tell_object(target, CRAYON_D->color_string(attacker->QCN + " releases " + enhance_msg + "  through you!", colors[i]));
+                tell_room(environment(attacker), CRAYON_D->color_string(attacker->QCN + " releases " + enhance_msg + " at " + target->QCN + "!", colors[i]), ({ target, attacker }));
+                target->cause_typed_damage(target, target->return_target_limb(), enhance_dmg, elements[i]);
+            }
+        }
+        alignments = ({ "alignment 147", "alignment 369", "alignment 123", "alignment 789" });
+        enemy_alignments = ({ "369", "147", "789", "123" });
+        align_text = ({ "holy wrath", "unholy fury", "righteous justice", "rebellious might" });
+        a_colors = ({ "ice blue", "fire red", "lightning yellow", "lightning yellow" });
+        target_align = (string)target->query_true_align();
+        for (i = 0; i < sizeof(alignments); i++)
+        {
+            effect_chance = !random(enhance_chance);
+            if (attacker->query_property(alignments[i]) &&
+                effect_chance &&
+                strsrch(enemy_alignments[i], target_align + "") + 1) {
+                enhance_msg = align_text[i];
+                enhance_dmg = roll_dice(2, 6);
+                tell_object(attacker, CRAYON_D->color_string("You unleash your " + enhance_msg + " at " + target->QCN + "!", a_colors[i]));
+                tell_object(target, CRAYON_D->color_string(attacker->QCN + " unleashes " + attacker->query_possessive() + " " + enhance_msg + " through you!", a_colors[i]));
+                tell_room(environment(attacker), CRAYON_D->color_string(attacker->QCN + " unleashes " + attacker->query_possessive() + " " + enhance_msg + " at " + target->QCN + "!", a_colors[i]), ({ target, attacker }));
+                target->cause_typed_damage(target, target->return_target_limb(), enhance_dmg, "divine");
+            }
         }
     }
 
