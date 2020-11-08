@@ -40,9 +40,9 @@ void heart_beat(){
     
     if (!friend) return; // no friends
 
-    tell_room(ETO,"%^BOLD%^%^CYAN%^Sheep fluffs "+friend->QCN+" with fluffy wool.");
+    tell_room(ETO,"%^BOLD%^%^CYAN%^Sheep fluffs "+friend->QCN+" with %^WHITE%^fluffy wool.",friend);
     friend->add_hp(random(6)+1);
-
+    tell_object(friend,"%^BOLD%^%^CYAN%^Sheep fluff's you %^WHITE%^fluffy.");
     return;
 }
 
