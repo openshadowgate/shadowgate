@@ -30,6 +30,7 @@ create() {
   set_hp(random(50)+10);
   set_max_level(3);
   set_emotes(2,({
+   "Sea Elf prepares crab parts for cooking.",
    "Sea Elf repairs some crab pods.",
    "Sea Elf sharpens a small knife.",
    "Sea Elf puts some crab parts in a box.",
@@ -39,6 +40,9 @@ create() {
    "%^MAGENTA%^Sea Elf says:%^RESET%^ If you get me a lobster or a crab I will pay you for it.",
    "Sea Elf throws some firewood on the fire.",
    "%^MAGENTA%^Sea Elf says:%^RESET%^ Imagine going to dinner and getting served a six foot lobster!",
+   "%^MAGENTA%^Sea Elf says:%^RESET%^ I wonder if edea coming here came at a price.",
+   "%^MAGENTA%^Sea Elf says:%^RESET%^ Got a bad feeling about the waters now... They seem wrong.",
+   "%^MAGENTA%^Sea Elf says:%^RESET%^ The gold elves seem really worried about the ruins below.",
    }),0);
 }
 void receive_given_item(object obj){
@@ -71,6 +75,13 @@ void receive_given_item(object obj){
     case "betrayer's edge":{
        new(OBJ"clance")->move(TO);
        force_me("give lance to "+name);
+       force_me("say Thanks, the gold elves said to give you this for that.")
+       return;
+    }
+   case "shell shield":{
+       new(OBJ"sheep_hat")->move(TO);
+       force_me("give hat to "+name);
+       force_me("say Thanks, the gold elves said to give you one of these for that.")
        return;
     }
 	 break;}
