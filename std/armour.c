@@ -168,6 +168,18 @@ void unwear() {
            wornBy->set_property("shieldwall_bonus", -shieldwall);
            wornBy->set_property("empowered", shieldwall);
        }
+
+       if ((int)wornBy->query_property("enruned shield") && query_type() == "shield") {
+           message("my_action", "%^CYAN%^The rune in your shield vanishes.%^RESET%^", wornBy);
+           wornBy->remove_property("enruned shield");
+       }
+
+       if ((int)wornBy->query_property("armor enhancement timer") &&
+           (query_type() == "armour" || query_type() == "chain" || query_type() == "leather") &&
+           query_limbs()[0] == "torso"
+           ) {
+           "/cmds/mortal/_enhance.c"->off_enhances(wornBy, "armor");
+       }
    }
 
    if(itembonuses = TO->query_item_bonuses()) run_item_bonuses("remove",wornBy,itembonuses);

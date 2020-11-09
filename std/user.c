@@ -4524,6 +4524,7 @@ void clear_feats()
     set_bonus_feats_gained(0);
     set_magic_feats_gained(0);
     set_hybrid_feats_gained(0);
+    set_arcana_feats_gained(0);
     set_other_feats_gained(0);
     set_epic_feats_gained(0);
     return;
@@ -4588,6 +4589,19 @@ int query_hybrid_feats_gained()
     if(!intp(__FEAT_DATA["hybrid_feats_gained"])) { __FEAT_DATA["hybrid_feats_gained"] = 0; }
     return __FEAT_DATA["hybrid_feats_gained"];
 }
+
+void set_arcana_feats_gained(int num)
+{
+    __FEAT_DATA["arcana_feats_gained"] = num;
+    return;
+}
+
+int query_arcana_feats_gained()
+{
+    if (!intp(__FEAT_DATA["arcana_feats_gained"])) { __FEAT_DATA["arcana_feats_gained"] = 0; }
+    return __FEAT_DATA["arcana_feats_gained"];
+}
+
 void set_other_feats_gained(int num)
 {
     __FEAT_DATA["other_feats_gained"] = num;
@@ -4692,6 +4706,22 @@ mapping query_hybrid_feats()
     return __FEAT_DATA["hybrid"];
 }
 
+void set_arcana_feats(mapping feats)
+{
+    if (!mapp(__FEAT_DATA["arcana"])) { __FEAT_DATA["arcana"] = ([]); }
+    if (mapp(feats))
+    {
+        __FEAT_DATA["arcana"] = feats;
+    }
+    return;
+}
+
+mapping query_arcana_feats()
+{
+    if (!mapp(__FEAT_DATA["arcana"])) { __FEAT_DATA["arcana"] = ([]); }
+    return __FEAT_DATA["arcana"];
+}
+
 void set_other_feats(mapping feats)
 {
     if(!mapp(__FEAT_DATA["other"])) { __FEAT_DATA["other"] = ([]); }
@@ -4787,6 +4817,14 @@ string *query_player_feats() {
       mykeys = keys(testmap);
       if(sizeof(mykeys)) {
         for(i=0;i<sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];
+      }
+      testmap = ([]);
+    }
+    if (mapp(__FEAT_DATA["arcana"])) {
+      testmap = __FEAT_DATA["arcana"];
+      mykeys = keys(testmap);
+      if (sizeof(mykeys)) {
+        for (i = 0;i < sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];
       }
       testmap = ([]);
     }

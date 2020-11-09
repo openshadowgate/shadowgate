@@ -16,9 +16,7 @@ void create()
     feat_desc("A magus learns to cast spells and wield his weapons at the same time. The magus must have one hand free, while wielding a light or one-handed melee weapon in the other hand. The spell potency has a penalty but its lessened at 8th level and again at 14th level.");
 }
 
-
 int allow_shifted() { return 1; }
-
 
 int prerequisites(object ob)
 {
@@ -35,13 +33,18 @@ int cmd_spell_combat(string str)
 {
     object feat, * wielded;
     if(!objectp(TP)) { return 0; }
-    if ((int)TP->is_wearing_type("shield"))
+    if ((int)TP->is_wearing_type("shield") && !TP->query_property("enruned shield"))
     {
         tell_object(TP, "%^RESET%^%^BOLD%^You can't be wearing a shield.%^RESET%^");
         return 1;
     }
     wielded = (object*)TP->query_wielded();
-    if (!sizeof(wielded) == 1 || wielded[0]->is_lrweapon())
+    if (!wielded || //no weapons
+        wielded[0]->is_lrweapon() || //is ranged
+        (sizeof(wielded) == 2 && //using both hands and...
+            ((wielded[0] != wielded[1] && !TP->query_property("enruned offhand")) || //weapons are different and no feat
+                (wielded[0] == wielded[1] && !TP->query_property("enruned great weapon")) //same weapon and no feat
+            )))
     {
         tell_object(TP, "%^RESET%^%^BOLD%^You must be wielding a single one-handed melee weapon.%^RESET%^");
         return 1;
@@ -78,7 +81,6 @@ void execute_feat()
     tell_object(caster,cm("You combine your magical ability and martial prowess."));
     caster->set_property("active_feats",({TO}));
     caster->set_property("magus cast", 1);
-    caster->set_property("magus properties", 1);
     
     return;
 }

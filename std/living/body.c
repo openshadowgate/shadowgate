@@ -1249,11 +1249,22 @@ void check_active_feats(int numwielded) {
     int active_feat;
     //positioning
     active_feat = (int)TO->query_property("tactical_positioning");
-    if (active_feat && numwielded != 1) {
+    if (active_feat) {
         message("my_action", "You can only benefit from positioning with a single one-handed weapon.", TO);
         TO->set_property("tactical_positioning", -active_feat);
         TO->add_ac_bonus(-active_feat);
         TO->add_attack_bonus(active_feat);
+    }
+    //magus options
+    active_feat = (int)TO->query_property("enruned offhand");
+    if (active_feat) {
+        message("my_action", "%^CYAN%^The rune in your offhand weapon vanishes.%^RESET%^", TO);
+        TO->remove_property("enruned offhand");
+    }
+    active_feat = (int)TO->query_property("enruned great weapon");
+    if (active_feat) {
+        message("my_action", "%^CYAN%^The rune in your weapon vanishes.%^RESET%^", TO);
+        TO->remove_property("enruned great weapon");
     }
     //spell combat
     active_feat = (int)TO->query_property("magus cast");
@@ -1274,9 +1285,9 @@ void check_active_feats(int numwielded) {
         message("my_action", "You can only benefit from spell combat with a single one-handed melee weapon.", TO);
     }
     //enhance, not a feat
-    active_feat = (int)TO->query_property("enhancement timer");
-    if (active_feat && numwielded ==0) {
-        "/cmds/mortal/_enhance.c"->off_enhances(TO);
+    active_feat = (int)TO->query_property("weapon enhancement timer");
+    if (active_feat && numwielded == 0) {
+        "/cmds/mortal/_enhance.c"->off_enhances(TO, "weapon");
     }
 }
 

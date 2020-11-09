@@ -4,18 +4,16 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     set_author("wedex");
     feat_type("permanent");
     feat_category("MagusArcana");
-    feat_name("arcane pool");
-    feat_prereq("Magus L1");
+    feat_name("greater enduring warding");
+    feat_prereq("Enduring Warding");
     feat_classes("magus");
-    feat_desc("The magus gains a reservoir of mystical arcane energy that he can draw upon to fuel his powers or grant enhancement bonuses or properties to his weapon, the bonuses and properties last for 1 minute. The magus has the following properties available: flaming, flaming burst, frost, icy burst, shock, shocking burst.
-        
-See also: enhance, enhancements");
+    feat_desc("When expending a point from the arcane pool to grant enhancement bonuses or properties to a worn body armor, the bonuses and properties last for 1 hour per level.");
     permanent(1);
 }
 
@@ -30,6 +28,10 @@ int prerequisites(object ob)
         dest_effect();
         return 0;
     }
+    if (!FEATS_D->has_feat(ob, "enduring warding")) {
+        dest_effect();
+        return 0;
+    }
     return ::prerequisites(ob);
 }
 
@@ -37,6 +39,7 @@ void execute_feat()
 {
     ::execute_feat();
     dest_effect();
+    return;
 }
 
 void permanent_effects(object ob)
@@ -56,6 +59,6 @@ void reverse_permanent_effects(object ob)
 void dest_effect()
 {
     ::dest_effect();
-    remove_feat(this_object());
+    remove_feat(TO);
     return;
 }

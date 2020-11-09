@@ -1,6 +1,6 @@
 #include <std.h>
 #include <daemons.h>
-#include <weapon_enhancements.h>
+#include <enhancements.h>
 
 inherit DAEMON;
 
@@ -9,28 +9,46 @@ int cmd_enhance(string str)
     object enhanceob, oldob, * wielded;
     mapping enhances, enhance;
     string enhancement_name, *arguments, *temp = ({}), *display = ({}), * normal_enhances = ({});
-    int i;
+    int power, duration, i;
+
+    string element, property_name;
+    int is_burst, has_element, is_alignement, cost;
+    mapping this_enhance;
 
     if (!objectp(TP)) {
         return 0;
     }
 
     if (!FEATS_D->has_feat(TP, "arcane pool") &&
-        !FEATS_D->has_feat(TP, "divine bond")) {
+        !FEATS_D->has_feat(TP, "weapon bond") &&
+        !FEATS_D->has_feat(TP, "armor bond")) {
         return 0;
-    }
-
-    wielded = (object*)TP->query_wielded();
-    if (!sizeof(wielded))
-    {
-        tell_object(TP, "%^RESET%^%^BOLD%^You must be wielding a weapon.%^RESET%^");
-        return 1;
     }
     
     if (!stringp(str) || str == "" || str == " ") {
-        //turn on this thing
-        int power;
+        str = "list";
+        
+    }
+    
+    arguments = explode(str, " ");
 
+    if (!sizeof(arguments)) {
+        return 1;
+    }
+
+    switch (arguments[0])
+    {
+    case "weapon":
+        if (!FEATS_D->has_feat(TP, "arcane pool") &&
+            !FEATS_D->has_feat(TP, "weapon bond")) {
+            return 0;
+        }
+        wielded = (object*)TP->query_wielded();
+        if (!sizeof(wielded))
+        {
+            tell_object(TP, "%^RESET%^%^BOLD%^You must be wielding a weapon.%^RESET%^");
+            return 1;
+        }
         if (!(int)"/daemon/user_d.c"->spend_pool(TP, 1, "arcana"))
         {
             if (!(int)"/daemon/user_d.c"->spend_pool(TP, 1, "grace"))
@@ -41,9 +59,9 @@ int cmd_enhance(string str)
         }
 
         enhances = get_enhances(TP);
-        power = TP->query_property("enhancement timer");
+        power = TP->query_property("weapon enhancement timer");
         if (power) {
-            off_enhances(TP);
+            off_enhances(TP, "weapon");
         }
         temp = keys(enhances);
         power = 0;
@@ -54,19 +72,12 @@ int cmd_enhance(string str)
 
             }
         }
-        if (FEATS_D->has_feat(TP, "divine bond")) {
+        if (FEATS_D->has_feat(TP, "weapon bond")) {
             power += ((int)TP->query_class_level("paladin") + 1) / 6;
         }
-        if (!sizeof(temp))
+        if (sizeof(temp))
         {
-            tell_object(TP, "You don't seem to have any additional enhancements in your list.");
-        }
-        else {
-
-            string element, property_name;
-            int is_burst, has_element, is_alignement, cost;
-            mapping this_enhance;
-            this_enhance = VALID_ENHANCEMENTS;
+            this_enhance = VALID_WEAPON_ENHANCEMENTS;
             for (i = 0;i < sizeof(temp);i++)
             {
                 enhancement_name = temp[i];
@@ -81,7 +92,7 @@ int cmd_enhance(string str)
                         cost -= 1;
                     }
                 }
-                if (power - cost >= 0) {                   
+                if (power - cost >= 0) {
                     if (strsrch(property_name, "alignment ") + 1) {
                         is_alignement = strsrch(property_name, (string)TP->query_true_align()) + 1;
                         if (!is_alignement) {
@@ -104,24 +115,99 @@ int cmd_enhance(string str)
             }
         }
         if (power) {
-            TP->set_property("enhancement bonus", power);
+            TP->set_property("weapon enhancement bonus", power);
             TP->add_attack_bonus(power);
             TP->add_damage_bonus(power);
             tell_object(TP, "You enhance your weapon for combat.");
         }
-        TP->set_property("enhancement timer", 80);
+        if (TP->query_property("greater enduring arcana")) {
+            duration = (int)TP->query_class_level("magus") * 600;
+        }
+        else if (TP->query_property("enduring arcana")) {
+            duration = (int)TP->query_class_level("magus") * 60;
+        }
+        else {
+            duration = 80;
+        }
+        TP->set_property("weapon enhancement timer", duration);
         return 1;
-    }
-    
-    arguments = explode(str, " ");
 
-    if (!sizeof(arguments)) {
+    case "armor":
+        if (!FEATS_D->has_feat(TP, "warding") &&
+            !FEATS_D->has_feat(TP, "armor bond")) {
+            return 0;
+        }//lets reuse this variable to check body armor
+        wielded = filter_array(distinct_array(TP->query_armour("torso")), "armor_filter", TP);
+        if (!sizeof(wielded))
+        {
+            tell_object(TP, "%^RESET%^%^BOLD%^You must be wearing body armor.%^RESET%^");
+            return 1;
+        }
+        if (!(int)"/daemon/user_d.c"->spend_pool(TP, 1, "arcana"))
+        {
+            if (!(int)"/daemon/user_d.c"->spend_pool(TP, 1, "grace"))
+            {
+                tell_object(TP, "%^CYAN%^You can't enhance your body armor!%^RESET%^");
+                return 1;
+            }
+        }
+
+        enhances = get_enhances(TP);
+        power = TP->query_property("armor enhancement timer");
+        if (power) {
+            off_enhances(TP, "armor");
+        }
+        temp = keys(enhances);
+        power = 0;
+        if (FEATS_D->has_feat(TP, "warding")) {
+            power += ((int)TP->query_class_level("magus") + 7) / 8;
+        }
+        if (FEATS_D->has_feat(TP, "armor bond")) {
+            power += ((int)TP->query_class_level("paladin") + 5) / 6;
+        }
+        if (sizeof(temp))
+        {
+            this_enhance = VALID_ARMOR_ENHANCEMENTS;
+            for (i = 0;i < sizeof(temp);i++)
+            {
+                enhancement_name = temp[i];
+                enhance = enhances[enhancement_name];
+                if (!this_enhance[enhancement_name]) { continue; }
+                property_name = this_enhance[enhancement_name]["property"];
+                cost = (int)this_enhance[enhancement_name]["cost"];
+                if (power - cost >= 0) {
+                    if (strsrch(property_name, "fortification ") + 1) {
+                        TP->set_property(property_name, 1);
+                    }
+                    else {
+                        TP->set_property(property_name, 1);
+                    }
+                    tell_object(TP, "Applying " + enhancement_name + " to your armor.");
+                    power -= cost;
+                    TP->set_property("armor enhancements", 1);
+                }
+                else {
+                    tell_object(TP, "Can't apply " + enhancement_name + " to your armor.");
+                }
+            }
+        }
+        if (power) {
+            TP->set_property("armor enhancement bonus", power);
+            TP->add_ac_bonus(power);
+            tell_object(TP, "You enhance your armor defenses.");
+        }
+        if (TP->query_property("greater enduring warding")) {
+            duration = (int)TP->query_class_level("magus") * 600;
+        }
+        else if (TP->query_property("enduring warding")) {
+            duration = (int)TP->query_class_level("magus") * 60;
+        }
+        else {
+            duration = 80;
+        }
+        TP->set_property("armor enhancement timer", duration);
         return 1;
-    }
 
-    switch (arguments[0])
-    {
-        
     case "add":
 
         if (sizeof(arguments) < 2) {
@@ -206,8 +292,13 @@ int does_enhance_exist(object obj, string str)
     int property_num;
     string * enhancements;
     enhancements = ({ });
-    if (FEATS_D->has_feat(obj, "divine bond")) { enhancements += PALADIN_ENHANCEMENTS; }
-    if (FEATS_D->has_feat(obj, "arcane pool")) { enhancements += MAGUS_ENHANCEMENTS; }
+    if (FEATS_D->has_feat(obj, "weapon bond")) { enhancements += PALADIN_WEAPON_ENHANCEMENTS; }
+    if (FEATS_D->has_feat(obj, "armor bond")) { enhancements += PALADIN_ARMOR_ENHANCEMENTS; }
+    if (FEATS_D->has_feat(obj, "arcane pool")) { enhancements += MAGUS_WEAPON_ENHANCEMENTS; }
+    if (FEATS_D->has_feat(obj, "warding")) { enhancements += MAGUS_ARMOR_ENHANCEMENTS; }
+    if (FEATS_D->has_feat(obj, "thundering arcana")) { enhancements += THUNDERING_ENHANCEMENTS; }
+    if (FEATS_D->has_feat(obj, "corrosive arcana")) { enhancements += CORROSIVE_ENHANCEMENTS; }
+    if (FEATS_D->has_feat(obj, "devoted arcana")) { enhancements += ALIGNMENT_ENHANCEMENTS; }
     enhancements = distinct_array(enhancements);
     if (member_array(str, enhancements) != -1) { return 1; }
     return 0;
@@ -264,21 +355,48 @@ void save_enhances(object obj, mapping enhances)
 }
 
 
-void off_enhances(object obj)
+void run_enhances_timer(object obj, string enh_type)
+{
+    int enh_timer;
+    enh_timer = obj->query_property(enh_type + " enhancement timer");
+    if (enh_timer > 0) {
+        enh_timer -= 2;
+        if (enh_timer < 1) {
+            off_enhances(obj, enh_type);
+        }
+        else {
+            obj->set_property(enh_type + " enhancement timer", -2);
+        }
+    }
+    return;
+}
+
+
+void off_enhances(object obj, string enh_type)
 {
     int i, enh_bonus;
     string * temp = ({});
     mapping enhances;
     if (!objectp(obj)) { return; }
-    tell_object(obj, "%^CYAN%^Your weapon enhancements fade.%^RESET%^");
-    obj->remove_property("enhancement timer");
-    enh_bonus = obj->query_property("enhancement bonus");
+    tell_object(obj, "%^CYAN%^Your " + enh_type + " enhancements fade.%^RESET%^");
+    obj->remove_property(enh_type + " enhancement timer");
+    enh_bonus = obj->query_property(enh_type + " enhancement bonus");
     if (enh_bonus) {
-        obj->remove_property("enhancement bonus");
-        obj->add_attack_bonus(-enh_bonus);
-        obj->add_damage_bonus(-enh_bonus);
+        obj->remove_property(enh_type + " enhancement bonus");
+        if (enh_type == "armor") {
+            obj->add_ac_bonus(-enh_bonus);
+        }
+        else {
+            obj->add_attack_bonus(-enh_bonus);
+            obj->add_damage_bonus(-enh_bonus);
+        }
     }
-    enhances = VALID_ENHANCEMENTS;
+    if (enh_type == "armor") {
+        enhances = VALID_ARMOR_ENHANCEMENTS;
+    }
+    else {
+        enhances = VALID_WEAPON_ENHANCEMENTS;
+    }
     temp = keys(enhances);
     if (!sizeof(temp))
     {
@@ -308,6 +426,8 @@ enhance list
 enhance add %^ORANGE%^%^ULINE%^PROPERTY_NAME%^RESET%^
 enhance remove %^ORANGE%^%^ULINE%^PROPERTY_NAME%^RESET%^
 enhance clear
+enhance weapon
+enhance armor
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -325,9 +445,15 @@ The command will allow player to store a list of enhancements they can apply to 
 %^ORANGE%^<enhance clear>%^RESET%^
   Will clear your enhancement list.
 
+%^ ORANGE%^ <enhance clear>%^ RESET%^
+  Will enhance your main weapon with the listed valid options.
+
+%^ ORANGE%^ <enhance clear>%^ RESET%^
+  Will enhance your body armor with the listed valid options.
+
 %^CYAN%^SEE ALSO%^RESET%^
 
-enhancements, magus, arcane pool, paladin, weapon bond
+enhancements, magus, arcane pool, warding, paladin, armor bond, weapon bond
 "
         );
 }

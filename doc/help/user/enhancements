@@ -2,7 +2,7 @@
 
 The following Enhancements are available:
 
-%^CYAN%^%^ULINE%^Enhancement:%^RESET%^             %^CYAN%^%^ULINE%^(Cost) Description:
+%^CYAN%^%^ULINE%^Weapon Enhancement:%^RESET%^               %^CYAN%^%^ULINE%^(Cost) Description:
 flaming               (1) Adds fire damage.
 flaming burst         (2) As flaming, but additional damage on a critical.
 frost                 (1) Adds cold damage.
@@ -13,5 +13,16 @@ Holy                  (2) Ignores defenses from Evil beings, adds damage.
 Unholy                (2) Ignores defenses from Good beings, adds damage.
 Axiomatic             (2) Ignores defenses from Chaotic beings, adds damage.
 Anarchic              (2) Ignores defenses from Lawful beings, adds damage.
+
+%^CYAN%^%^ULINE%^Armor Enhancement:%^RESET%^                %^CYAN%^%^ULINE%^(Cost) Description:
+light fortification           (1) Adds fire damage.
+moderate fortification        (3) As flaming, but additional damage on a critical.
+heavy fortification           (5) Adds cold damage.
+invulnerability               (3) As frost, but additional damage on a critical.
+acid energy resistance        (4) Resistance to acid damage.
+cold energy resistance        (4) Resistance to cold damage.
+electricity energy resistance (4) Resistance to electricity damage.
+fire energy resistance        (4) Resistance to fire damage.
+sonic energy resistance       (4) Resistance to sonic damage.
 
 %^CYAN%^See also:%^RESET%^ enhance

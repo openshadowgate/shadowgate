@@ -4,18 +4,15 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     set_author("wedex");
     feat_type("permanent");
     feat_category("MagusArcana");
-    feat_name("arcane pool");
-    feat_prereq("Magus L1");
+    feat_name("corrosive arcana");
     feat_classes("magus");
-    feat_desc("The magus gains a reservoir of mystical arcane energy that he can draw upon to fuel his powers or grant enhancement bonuses or properties to his weapon, the bonuses and properties last for 1 minute. The magus has the following properties available: flaming, flaming burst, frost, icy burst, shock, shocking burst.
-        
-See also: enhance, enhancements");
+    feat_desc("The magus adds corrosive and corrosive burst to his list of enhancements.");
     permanent(1);
 }
 
@@ -37,6 +34,7 @@ void execute_feat()
 {
     ::execute_feat();
     dest_effect();
+    return;
 }
 
 void permanent_effects(object ob)
@@ -56,6 +54,6 @@ void reverse_permanent_effects(object ob)
 void dest_effect()
 {
     ::dest_effect();
-    remove_feat(this_object());
+    remove_feat(TO);
     return;
 }
