@@ -1,6 +1,6 @@
 #include <std.h>
 #include "../valley.h"
-inherit WEAPON;
+inherit "/d/common/obj/weapon/longsword.c";
 
 void create()
 {
@@ -15,9 +15,6 @@ void create()
 	" affixed to the blade and a cold handle that doesn't have"+
 	" much grip to it."
 	);
-	set_size(2);
-	set_type("slash");
-	set_wc(1,8);
 	set_large_wc(1,12);
 	set_weight(10);
 	set_value(10);
