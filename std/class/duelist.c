@@ -1,5 +1,6 @@
 #include <std.h>
 #include <dirs.h>
+#include <daemons.h>
 
 inherit DAEMON;
 
@@ -7,6 +8,15 @@ inherit DAEMON;
 void create()
 {
     ::create();
+}
+
+object base_class_ob(object ob)
+{
+    object class_ob;
+    if(!objectp(ob) || !ob->query("base_class")) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
+    else { class_ob = find_object_or_load(DIR_CLASSES+"/"+ob->query("base_class")+".c"); }
+    if(!objectp(class_ob)) { class_ob = find_object_or_load(DIR_CLASSES+"/mage.c"); }
+    return class_ob;
 }
 
 int set_base_class(object obj, string choice)
@@ -134,12 +144,12 @@ int prerequisites(object player)
     if (!player->is_class(base)) {
         return 0;
     }
-
+       
     if ((player->query_class_level(base)) < 20) {
         write("fail level");
         return 0;
     }
-
+    
     if ((player->query_stats("intelligence")) < 14) {
         write("fail intelligence");
         return 0;
