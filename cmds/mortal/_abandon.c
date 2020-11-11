@@ -178,6 +178,9 @@ int confirm_drop(string str, string theclass, int drop, int cost)
     if (theclass == "magus") {
         "/daemon/user_d.c"->init_pool(TP, "arcana");
     }
+    if (theclass == "magus") {
+        "/daemon/user_d.c"->init_pool(TP, "grace");
+    }
     TP->force_me("fixspells");
     TP->set("hp_array", 0);
     TP->make_new_hitpoint_rolls(TP);

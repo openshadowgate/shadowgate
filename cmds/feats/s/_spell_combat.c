@@ -39,7 +39,7 @@ int cmd_spell_combat(string str)
         return 1;
     }
     wielded = (object*)TP->query_wielded();
-    if (!wielded || //no weapons
+    if (!sizeof(wielded) || //no weapons
         wielded[0]->is_lrweapon() || //is ranged
         (sizeof(wielded) == 2 && //using both hands and...
             ((wielded[0] != wielded[1] && !TP->query_property("enruned offhand")) || //weapons are different and no feat
@@ -50,7 +50,7 @@ int cmd_spell_combat(string str)
         return 1;
     }
     feat = new(base_name(TO));
-    feat->setup_feat(TP,str);
+    feat->setup_feat(TP, str);
     return 1;
 }
 

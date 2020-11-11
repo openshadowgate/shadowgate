@@ -1975,6 +1975,7 @@ void set_magic_feats_gained(int num) { __FEAT_DATA["magic_feats_gained"] = num; 
 void set_bonus_feats_gained(int num) { __FEAT_DATA["bonus_feats_gained"] = num; return; }
 void set_hybrid_feats_gained(int num) { __FEAT_DATA["hybrid_feats_gained"] = num; return; }
 void set_arcana_feats_gained(int num) { __FEAT_DATA["arcana_feats_gained"] = num; return; }
+void set_divinebond_feats_gained(int num) { __FEAT_DATA["divinebond_feats_gained"] = num; return; }
 void set_other_feats_gained(int num) { __FEAT_DATA["other_feats_gained"] = num; return; }
 void set_epic_feats_gained(int num) { __FEAT_DATA["epic_feats_gained"] = num; return; }
 
@@ -1983,6 +1984,7 @@ void set_class_feats(mapping feats) { __FEAT_DATA["class"] = feats; return; }
 void set_magic_feats(mapping feats) { __FEAT_DATA["magic"] = feats; return; }
 void set_hybrid_feats(mapping feats) { __FEAT_DATA["hybrid"] = feats; return; }
 void set_arcana_feats(mapping feats) { __FEAT_DATA["arcana"] = feats; return; }
+void set_divinebond_feats(mapping feats) { __FEAT_DATA["divinebond"] = feats; return; }
 void set_other_feats(mapping feats) { __FEAT_DATA["other"] = feats; return; }
 void set_epic_feats(mapping feats) { __FEAT_DATA["epic"] = feats; return; }
 
@@ -1991,6 +1993,7 @@ int query_bonus_feats_gained() { return __FEAT_DATA["bonus_feats_gained"]; }
 int query_magic_feats_gained() { return __FEAT_DATA["magic_feats_gained"]; }
 int query_hybrid_feats_gained() { return __FEAT_DATA["hybrid_feats_gained"]; }
 int query_arcana_feats_gained() { return __FEAT_DATA["arcana_feats_gained"]; }
+int query_divinebond_feats_gained() { return __FEAT_DATA["divinebond_feats_gained"]; }
 int query_other_feats_gained() { return __FEAT_DATA["other_feats_gained"]; }
 int query_epic_feats_gained() { return __FEAT_DATA["epic_feats_gained"]; }
 
@@ -1999,6 +2002,7 @@ mapping query_bonus_feats() { return __FEAT_DATA["bonus"]; }
 mapping query_magic_feats() { return __FEAT_DATA["magic"]; }
 mapping query_hybrid_feats() { return __FEAT_DATA["hybrid"]; }
 mapping query_arcana_feats() { return __FEAT_DATA["arcana"]; }
+mapping query_divinebond_feats() { return __FEAT_DATA["divinebond"]; }
 mapping query_other_feats() { return __FEAT_DATA["other"]; }
 mapping query_epic_feats() { return __FEAT_DATA["epic"]; }
 

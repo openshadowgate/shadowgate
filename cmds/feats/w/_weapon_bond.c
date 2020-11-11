@@ -9,11 +9,13 @@ void create()
     ::create();
     set_author("wedex");
     feat_type("permanent");
-    feat_category("MagusArcana");
-    feat_name("legendary blade");
-    feat_prereq("Magus L20");
-    feat_classes("magus");
-    feat_desc("When the magus enhances his weapon with his arcane pool, he grants it an additional +2 enhancement bonus to his weapon.");
+    feat_category("DivineBond");
+    feat_name("weapon bond");
+    feat_classes("paladin");
+    feat_desc("The paladin can expend a point from the grace pool to grant enhancement bonuses or properties to a wielded weapon. The paladin has the following properties available: flaming, flaming burst, holy, unholy, axiomatic, anarchic.
+The enhancement bonus is 1 at 5th and one additional point for every 6 additional levels
+
+See also : enhance, enhancements");
     permanent(1);
 }
 
@@ -24,7 +26,11 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("magus") < 20) {
+    if (ob->query_class_level("paladin") < 5) {
+        dest_effect();
+        return 0;
+    }
+    if (ob->has_feat("armor bond")) {
         dest_effect();
         return 0;
     }

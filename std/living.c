@@ -388,6 +388,9 @@ void heart_beat()
     if (TO->is_class("magus")) {
         "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "arcana");
     }
+    if (TO->is_class("paladin")) {
+        "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "grace");
+    }
     //enhancement effects
     "/cmds/mortal/_enhance.c"->run_enhances_timer(TO, "weapon");
     "/cmds/mortal/_enhance.c"->run_enhances_timer(TO, "armor");

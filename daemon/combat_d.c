@@ -173,8 +173,7 @@ void track_damage(object attacker, object victim, int damage)
         return;
     }else {
         if (member_array(tname, being_tracked) == -1) {
-            DAMAGE_TRACKING += ([tname:(["damage" : damage, "hits" : myhits, "ignored" : myignore, "user" : isuser, "max damage" : damage, "min
-damage" : damage, "average damage" : damage]) ]);
+            DAMAGE_TRACKING += ([tname:(["damage" : damage, "hits" : myhits, "ignored" : myignore, "user" : isuser, "max damage" : damage, "min damage" : damage, "average damage" : damage]) ]);
         }else {
             DAMAGE_TRACKING[tname]["damage"] += damage;
             DAMAGE_TRACKING[tname]["hits"] += myhits;
@@ -498,8 +497,8 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 void check_extra_abilities(object attacker, object target, object weapon, int crit_hit)
 {
     string ename, pname, enhance_msg, target_align;
-    int effect_chance, enhance_dmg, crit_mult, enhance_chance, i;
-    object room;
+    int effect_chance, enhance_dmg, crit_mult, enhance_chance, is_main_hand, i;
+    object room, * weapons;
     string* elements, * actions, * bursts, * colors, * alignments, * enemy_alignments, * align_text, * a_colors;
 
     if (!objectp(attacker)) {
@@ -590,9 +589,14 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
 
     // magus arcane pool - paladin divine bond
     //weapon enhancements
+    weapons = attacker->query_wielded();
+    if (sizeof(weapons))
+    {
+        if (weapons[0] == weapon){ is_main_hand = 1; }        
+    }
     if (!attacker->query_property("shapeshifted") &&
         objectp(weapon) &&
-        //check for main hand only wielded[0]
+        is_main_hand &&
         attacker->query_property("weapon enhancement timer")) {
 
         if (crit_hit) {
@@ -618,11 +622,11 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         {
             //Chance from 10% to 33% at max for each element, on crit is 100% if burst.
             effect_chance = !random(enhance_chance);
-            if ((attacker->query_property(elements[i]) && effect_chance) ||
-                (attacker->query_property(elements[i] + " burst") && crit_hit)) {
+            if ((attacker->query_property(elements[i] + " en_dam") && effect_chance) ||
+                (attacker->query_property(elements[i] + " en_dam burst") && crit_hit)) {
                 enhance_msg = bursts[i];
                 enhance_dmg = roll_dice(1, 6);
-                if (crit_hit && attacker->query_property(elements[i] + " burst")) {
+                if (crit_hit && attacker->query_property(elements[i] + " en_dam burst")) {
                     enhance_msg = actions[i] + " of " + bursts[i];
                     enhance_dmg += roll_dice(crit_mult, 10);
                 }

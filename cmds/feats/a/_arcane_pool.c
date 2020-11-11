@@ -14,7 +14,8 @@ void create()
     feat_prereq("Magus L1");
     feat_classes("magus");
     feat_desc("The magus gains a reservoir of mystical arcane energy that he can draw upon to fuel his powers or grant enhancement bonuses or properties to his weapon, the bonuses and properties last for 1 minute. The magus has the following properties available: flaming, flaming burst, frost, icy burst, shock, shocking burst.
-        
+The enhancement bonus is 1 at 1st and one additional point for every 8 additional levels
+
 See also: enhance, enhancements");
     permanent(1);
 }

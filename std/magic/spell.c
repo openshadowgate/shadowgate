@@ -934,8 +934,10 @@ void wizard_interface(object user, string type, string targ)
                 }
             }
             if (spell_type == "magus" &&
-                sizeof(weaps) == 1 &&
-                !caster->is_wearing_type("shield")) {
+                ((sizeof(weaps) == 1 && (!caster->is_wearing_type("shield") || caster->query_property("enruned shield"))) ||
+                    (sizeof(weaps) == 2 && weaps[0] == weaps[1] && caster->query_property("enruned great weapon")) ||
+                    (sizeof(weaps) == 2 && weaps[0] != weaps[1] && caster->query_property("enruned offhand")))
+                ) {
                 nodo = 0;
             }
             if (spell_type == "psywarrior" || spell_type == "psion") {

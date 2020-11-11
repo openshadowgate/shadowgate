@@ -1247,6 +1247,8 @@ int remove_weapon_from_limb(object ob)
 
 void check_active_feats(int numwielded) {
     int active_feat;
+    object deactivate_feat, * active_feats;
+    int i;
     //positioning
     active_feat = (int)TO->query_property("tactical_positioning");
     if (active_feat) {
@@ -1258,19 +1260,39 @@ void check_active_feats(int numwielded) {
     //magus options
     active_feat = (int)TO->query_property("enruned offhand");
     if (active_feat) {
+        active_feats = TO->query_property("active_feats");
+
+        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
+        {
+            if (!objectp(active_feats[i])) { continue; }
+            if (active_feats[i]->query_feat_name() != "enruned offhand") { continue; }
+            deactivate_feat = active_feats[i];
+            break;
+        }
+        deactivate_feat->dest_effect();
+        /*
         message("my_action", "%^CYAN%^The rune in your offhand weapon vanishes.%^RESET%^", TO);
-        TO->remove_property("enruned offhand");
+        TO->remove_property("enruned offhand");*/
     }
     active_feat = (int)TO->query_property("enruned great weapon");
     if (active_feat) {
+        active_feats = TO->query_property("active_feats");
+
+        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
+        {
+            if (!objectp(active_feats[i])) { continue; }
+            if (active_feats[i]->query_feat_name() != "enruned great weapon") { continue; }
+            deactivate_feat = active_feats[i];
+            break;
+        }
+        deactivate_feat->dest_effect();
+        /*
         message("my_action", "%^CYAN%^The rune in your weapon vanishes.%^RESET%^", TO);
-        TO->remove_property("enruned great weapon");
+        TO->remove_property("enruned great weapon");*/
     }
     //spell combat
     active_feat = (int)TO->query_property("magus cast");
     if (active_feat && numwielded != 1) {
-        object deactivate_feat, * active_feats;
-        int i;
         //Venger: im almost sure that this part might work better with query_active_feat("spell combat")
         active_feats = TO->query_property("active_feats");
 

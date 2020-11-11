@@ -30,18 +30,23 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_spell_combat(string str)
+int cmd_enruned_shield()
 {
     object feat;
     if (!objectp(TP)) { return 0; }
     if (!(int)TP->is_wearing_type("shield"))
     {
-        tell_object(TP, "%^RESET%^%^BOLD%^You mustt be wearing a shield.%^RESET%^");
+        tell_object(TP, "%^RESET%^%^BOLD%^You must be wearing a shield.%^RESET%^");
         return 1;
     }
     feat = new(base_name(TO));
-    feat->setup_feat(TP, str);
+    feat->setup_feat(TP, "");
     return 1;
+}
+
+string cm(string str)
+{
+    return CRAYON_D->color_string(str, "dark black");
 }
 
 void execute_feat()
@@ -57,13 +62,12 @@ void execute_feat()
     if (FEATS_D->is_active(caster, "enruned shield"))
     {
         obj = query_active_feat("enruned shield");
-        tell_object(caster, cm("You release your concentration."));
         obj->dest_effect();
         return;
     }
     ::execute_feat();
 
-    tell_object(caster, cm("You combine your magical ability and martial prowess."));
+    tell_object(caster, cm("You scribe a rune in your shield."));
     caster->set_property("active_feats", ({ TO }));
     caster->set_property("enruned shield", 1);
 
@@ -76,7 +80,7 @@ void dest_effect()
     {
         caster->remove_property_value("active_feats", ({ TO }));
         caster->remove_property("enruned shield");
-        tell_object(caster, "%^BOLD%^%^BLUE%^Your concentration fades.");
+        tell_object(caster, cm("The rune in your shield vanishes."));
     }
     ::dest_effect();
     remove_feat(TO);

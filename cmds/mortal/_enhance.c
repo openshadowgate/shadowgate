@@ -9,7 +9,7 @@ int cmd_enhance(string str)
     object enhanceob, oldob, * wielded;
     mapping enhances, enhance;
     string enhancement_name, *arguments, *temp = ({}), *display = ({}), * normal_enhances = ({});
-    int power, duration, i;
+    int power, duration, feat_ap, feat_wb, feat_ab, feat_wr, has_resource, i;
 
     string element, property_name;
     int is_burst, has_element, is_alignement, cost;
@@ -19,9 +19,14 @@ int cmd_enhance(string str)
         return 0;
     }
 
-    if (!FEATS_D->has_feat(TP, "arcane pool") &&
-        !FEATS_D->has_feat(TP, "weapon bond") &&
-        !FEATS_D->has_feat(TP, "armor bond")) {
+    feat_ap = FEATS_D->has_feat(TP, "arcane pool");
+    feat_wb = FEATS_D->has_feat(TP, "weapon bond");
+    feat_ab = FEATS_D->has_feat(TP, "armor bond");
+    feat_wr = FEATS_D->has_feat(TP, "warding");
+
+    if (!feat_ap &&
+        !feat_wb &&
+        !feat_ab) {
         return 0;
     }
     
@@ -39,8 +44,8 @@ int cmd_enhance(string str)
     switch (arguments[0])
     {
     case "weapon":
-        if (!FEATS_D->has_feat(TP, "arcane pool") &&
-            !FEATS_D->has_feat(TP, "weapon bond")) {
+        if (!feat_ap &&
+            !feat_wb) {
             return 0;
         }
         wielded = (object*)TP->query_wielded();
@@ -49,13 +54,16 @@ int cmd_enhance(string str)
             tell_object(TP, "%^RESET%^%^BOLD%^You must be wielding a weapon.%^RESET%^");
             return 1;
         }
-        if (!(int)"/daemon/user_d.c"->spend_pool(TP, 1, "arcana"))
+        has_resource = 0;
+        if (feat_ap && (int)"/daemon/user_d.c"->spend_pool(TP, 1, "arcana"))
         {
-            if (!(int)"/daemon/user_d.c"->spend_pool(TP, 1, "grace"))
-            {
-                tell_object(TP, "%^CYAN%^You can't enhance your weapon!%^RESET%^");
-                return 1;
-            }
+            has_resource = 1;
+        } else if (feat_wb && (int)"/daemon/user_d.c"->spend_pool(TP, 1, "grace"))
+        {
+            has_resource = 1;
+        } else{
+            tell_object(TP, "%^CYAN%^You can't enhance your weapon!%^RESET%^");
+            return 1;
         }
 
         enhances = get_enhances(TP);
@@ -65,14 +73,14 @@ int cmd_enhance(string str)
         }
         temp = keys(enhances);
         power = 0;
-        if (FEATS_D->has_feat(TP, "arcane pool")) {
+        if (feat_ap) {
             power += ((int)TP->query_class_level("magus") + 7) / 8;
             if (FEATS_D->has_feat(TP, "legendary blade")) {
                 power += 2;
 
             }
         }
-        if (FEATS_D->has_feat(TP, "weapon bond")) {
+        if (feat_wb) {
             power += ((int)TP->query_class_level("paladin") + 1) / 6;
         }
         if (sizeof(temp))
@@ -86,6 +94,7 @@ int cmd_enhance(string str)
                 property_name = this_enhance[enhancement_name]["property"];
                 cost = (int)this_enhance[enhancement_name]["cost"];
                 has_element = 0;
+                //element = replace_string(property_name, " en_dam", "");
                 if (is_burst = strsrch(property_name, "burst") + 1) {
                     element = replace_string(property_name, " burst", "");
                     if (has_element = TP->query_property(element)) {
@@ -93,21 +102,22 @@ int cmd_enhance(string str)
                     }
                 }
                 if (power - cost >= 0) {
-                    if (strsrch(property_name, "alignment ") + 1) {
-                        is_alignement = strsrch(property_name, (string)TP->query_true_align()) + 1;
-                        if (!is_alignement) {
-                            tell_object(TP, "Your alignment doesn't match to " + enhancement_name + ".");
-                            continue;
+                    if (!TP->query_property(property_name)) {
+                        if (strsrch(property_name, "alignment ") + 1) {
+                            is_alignement = strsrch(property_name, (string)TP->query_true_align()) + 1;
+                            if (!is_alignement) {
+                                tell_object(TP, "Your alignment doesn't match to " + enhancement_name + ".");
+                                continue;
+                            }
                         }
-                    }
-                    TP->set_property(property_name, 1);
-                    if (is_burst && !has_element) {
-                        TP->set_property(element, 1);
+                        TP->set_property(property_name, 1);
+                        if (is_burst && !has_element) {
+                            TP->set_property(element, 1);
+                        }
+                        tell_object(TP, "Applying " + enhancement_name + " to your weapon.");
                         power -= cost;
+                        TP->set_property("weapon enhancements", 1);
                     }
-                    tell_object(TP, "Applying " + enhancement_name + " to your weapon.");
-                    power -= cost;
-                    TP->set_property("weapon enhancements", 1);
                 }
                 else {
                     tell_object(TP, "Can't apply " + enhancement_name + " to your weapon.");
@@ -133,8 +143,8 @@ int cmd_enhance(string str)
         return 1;
 
     case "armor":
-        if (!FEATS_D->has_feat(TP, "warding") &&
-            !FEATS_D->has_feat(TP, "armor bond")) {
+        if (!feat_wr &&
+            !feat_ab) {
             return 0;
         }//lets reuse this variable to check body armor
         wielded = filter_array(distinct_array(TP->query_armour("torso")), "armor_filter", TP);
@@ -143,13 +153,18 @@ int cmd_enhance(string str)
             tell_object(TP, "%^RESET%^%^BOLD%^You must be wearing body armor.%^RESET%^");
             return 1;
         }
-        if (!(int)"/daemon/user_d.c"->spend_pool(TP, 1, "arcana"))
+        has_resource = 0;
+        if (feat_wr && (int)"/daemon/user_d.c"->spend_pool(TP, 1, "arcana"))
         {
-            if (!(int)"/daemon/user_d.c"->spend_pool(TP, 1, "grace"))
-            {
-                tell_object(TP, "%^CYAN%^You can't enhance your body armor!%^RESET%^");
-                return 1;
-            }
+            has_resource = 1;
+        }
+        else if (feat_ab && (int)"/daemon/user_d.c"->spend_pool(TP, 1, "grace"))
+        {
+            has_resource = 1;
+        }
+        else {
+            tell_object(TP, "%^CYAN%^You can't enhance your armor!%^RESET%^");
+            return 1;
         }
 
         enhances = get_enhances(TP);
@@ -159,11 +174,11 @@ int cmd_enhance(string str)
         }
         temp = keys(enhances);
         power = 0;
-        if (FEATS_D->has_feat(TP, "warding")) {
+        if (feat_wr) {
             power += ((int)TP->query_class_level("magus") + 7) / 8;
         }
-        if (FEATS_D->has_feat(TP, "armor bond")) {
-            power += ((int)TP->query_class_level("paladin") + 5) / 6;
+        if (feat_ab) {
+            power += ((int)TP->query_class_level("paladin") + 1) / 6;
         }
         if (sizeof(temp))
         {
@@ -175,16 +190,29 @@ int cmd_enhance(string str)
                 if (!this_enhance[enhancement_name]) { continue; }
                 property_name = this_enhance[enhancement_name]["property"];
                 cost = (int)this_enhance[enhancement_name]["cost"];
+                has_element = 0;
+                element = replace_string(property_name, " en_res", "");
+                if (strsrch(property_name, " en_res") + 1 && feat_ab) { cost -= 1; } //improveds are set as 6 
+                if (is_burst = strsrch(property_name, "improved") + 1) {
+                    element = replace_string(property_name, " en_res improved", "");
+                    if (has_element = TP->query_property(element + " en_res")) {
+                        cost -= 3;
+                    }
+                }
                 if (power - cost >= 0) {
-                    if (strsrch(property_name, "fortification ") + 1) {
+                    if (!TP->query_property(property_name)) {
+                        if (strsrch(property_name, "en_res") + 1) {
+                            TP->set_resistance(element, 10);
+                        }
                         TP->set_property(property_name, 1);
+                        if (is_burst && !has_element) {
+                            TP->set_property(element + " en_res", 1);
+                            TP->set_resistance(element, 10);
+                        }
+                        tell_object(TP, "Applying " + enhancement_name + " to your armor.");
+                        power -= cost;
+                        TP->set_property("armor enhancements", 1);
                     }
-                    else {
-                        TP->set_property(property_name, 1);
-                    }
-                    tell_object(TP, "Applying " + enhancement_name + " to your armor.");
-                    power -= cost;
-                    TP->set_property("armor enhancements", 1);
                 }
                 else {
                     tell_object(TP, "Can't apply " + enhancement_name + " to your armor.");
@@ -375,7 +403,7 @@ void run_enhances_timer(object obj, string enh_type)
 void off_enhances(object obj, string enh_type)
 {
     int i, enh_bonus;
-    string * temp = ({});
+    string element, property_name, * temp = ({});
     mapping enhances;
     if (!objectp(obj)) { return; }
     tell_object(obj, "%^CYAN%^Your " + enh_type + " enhancements fade.%^RESET%^");
@@ -404,7 +432,16 @@ void off_enhances(object obj, string enh_type)
     }
     for (i = 0;i < sizeof(temp);i++)
     {
-        obj->remove_property(enhances[temp[i]]["property"]);
+        property_name = enhances[temp[i]]["property"];
+        if (obj->query_property(property_name)) {
+            if (strsrch(property_name, "en_res") + 1) {
+                element = replace_string(property_name, " en_res", "");
+                element = replace_string(element, " improved", "");
+                TP->set_resistance(element, -10);
+            }
+            obj->remove_property(property_name);
+        
+        }
     }
     return;
 }
@@ -445,10 +482,10 @@ The command will allow player to store a list of enhancements they can apply to 
 %^ORANGE%^<enhance clear>%^RESET%^
   Will clear your enhancement list.
 
-%^ ORANGE%^ <enhance clear>%^ RESET%^
+%^ORANGE%^ <enhance weapon>%^RESET%^
   Will enhance your main weapon with the listed valid options.
 
-%^ ORANGE%^ <enhance clear>%^ RESET%^
+%^ORANGE%^ <enhance armor>%^RESET%^
   Will enhance your body armor with the listed valid options.
 
 %^CYAN%^SEE ALSO%^RESET%^
