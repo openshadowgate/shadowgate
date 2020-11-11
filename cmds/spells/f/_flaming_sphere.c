@@ -18,7 +18,7 @@ void dest_effect();
 void create() {
     ::create();
     set_spell_name("flaming sphere");
-    set_spell_level(([ "druid" : 2, "oracle" : 2, "magus" : 2 ]));
+    set_spell_level(([ "druid" : 2, "oracle" : 2 ]));
     set_mystery("solar");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS flaming sphere on TARGET");

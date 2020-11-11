@@ -9,7 +9,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("serenity");
-    set_spell_level(([ "mage" : 6, "cleric" : 5, "bard" : 4, "psion" : 6 ]));
+    set_spell_level(([ "mage" : 6, "cleric" : 5, "bard" : 4, "psion" : 6, "magus" : 6 ]));
     set_spell_sphere("enchantment_charm");
     set_discipline("telepath");
     set_syntax("cast CLASS serenity");
