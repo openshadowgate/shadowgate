@@ -493,7 +493,7 @@ int can_gain_magic_feat(object ob,string feat)
          myclasses[i] == "oracle" ||
          myclasses[i] == "mage" ||
          myclasses[i] == "sorcerer")
-          currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);
+          currentlvl = (((int)ob->query_class_level(myclasses[i]) + 4) / 5);
       else
           currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5);
       if(currentlvl < 0) currentlvl = 0;
