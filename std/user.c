@@ -1389,6 +1389,19 @@ void setup()
             }
         }
 
+        if (objectp(find_object_or_load("/daemon/user_d.c"))) {
+            if (objectp(TO)) {
+                if (TO->is_class("magus"))
+                {
+                    "/daemon/user_d.c"->init_pool(TO, "arcana");
+                }
+                if (TO->is_class("paladin"))
+                {
+                    "/daemon/user_d.c"->init_pool(TO, "grace");
+                }
+            }
+        }
+
         init_feats();
         load_autoload_obj();
 
