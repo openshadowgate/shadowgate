@@ -124,6 +124,8 @@ void spell_effect(int prof) {
 
     tell_object(caster,"%^GREEN%^You break into "+target->QCN+"'s mind and "
         "overcome "+target->QP+" willpower!");
+    caster->remove_attacker(target);
+    target->remove_attacker(caster);
     spell_successful();
     addSpellToCaster();
     change=0;
