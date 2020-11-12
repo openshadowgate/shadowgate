@@ -130,10 +130,10 @@ int cmd_enhance(string str)
             TP->add_damage_bonus(power);
             tell_object(TP, "You enhance your weapon for combat.");
         }
-        if (TP->query_property("greater enduring arcana")) {
+        if (FEATS_D->has_feat(TP, "greater enduring arcana")) {
             duration = (int)TP->query_class_level("magus") * 600;
         }
-        else if (TP->query_property("enduring arcana")) {
+        else if (FEATS_D->has_feat(TP, "enduring arcana")) {
             duration = (int)TP->query_class_level("magus") * 60;
         }
         else {
@@ -224,10 +224,10 @@ int cmd_enhance(string str)
             TP->add_ac_bonus(power);
             tell_object(TP, "You enhance your armor defenses.");
         }
-        if (TP->query_property("greater enduring warding")) {
+        if (FEATS_D->has_feat(TP, "greater enduring warding")) {
             duration = (int)TP->query_class_level("magus") * 600;
         }
-        else if (TP->query_property("enduring warding")) {
+        else if (FEATS_D->has_feat(TP, "enduring warding")) {
             duration = (int)TP->query_class_level("magus") * 60;
         }
         else {

@@ -837,8 +837,8 @@ int cmd_feats(string str)
             if (subset[i] == "psywarrior") {
                 j = ((int)TP->query_class_level(subset[i]) / 3) + 1;
             }
-            if (subset[i] == "magus") {
-                j = ((int)TP->query_class_level(subset[i]) + 1 / 6);
+            else if (subset[i] == "magus") {
+                j = (((int)TP->query_class_level(subset[i]) + 1) / 6);
             } else {
                 j = (((int)TP->query_class_level(subset[i]) - 16) / 5);
             }
@@ -1316,7 +1316,7 @@ int cmd_feats(string str)
                 j = ((int)TP->query_class_level(subset[i]) / 3) + 1;
             }
             else if (subset[i] == "magus") {
-                j = ((int)TP->query_class_level(subset[i]) / 3);
+                j = (((int)TP->query_class_level(subset[i]) + 1) / 6);
             } else {
                 j = (((int)TP->query_class_level(subset[i]) - 16) / 5);
             }

@@ -53,6 +53,7 @@ string cm(string str)
 void execute_feat()
 {
     object obj;
+    int duration;
 
     if (!objectp(caster))
     {
@@ -71,6 +72,15 @@ void execute_feat()
     tell_object(caster, cm("You scribe a rune in your offhand weapon."));
     caster->set_property("active_feats", ({ TO }));
     caster->set_property("enruned offhand", 1);
+
+    if (FEATS_D->has_feat(caster, "greater enruned offhand")) {
+        duration = (int)caster->query_class_level("magus") * 600;
+    }
+    else {
+        duration = (int)caster->query_class_level("magus") * 60;
+    }
+
+    call_out("dest_effect", duration);
 
     return;
 }
