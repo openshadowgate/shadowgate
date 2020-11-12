@@ -10,7 +10,7 @@ object *mons = ({});
 void create() {
     ::create();
     set_spell_name("phantom guardians");
-    set_spell_level(([ "mage" : 6 ]));
+    set_spell_level(([ "mage" : 6, "magus" : 6 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS phantom guardians on <centaurs|bats|soldiers>");
     set_description("This spell creates casting level relative guardians who will guard the caster blindly.  You have the "

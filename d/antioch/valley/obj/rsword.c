@@ -15,7 +15,6 @@ void create()
 	" affixed to the blade and a cold handle that doesn't have"+
 	" much grip to it."
 	);
-	set_large_wc(1,12);
 	set_weight(10);
 	set_value(10);
 	set_cointype("copper");

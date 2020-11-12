@@ -13,7 +13,7 @@ void create()
     ::create();
     set_author("nienne");
     set_spell_name("mind fog");
-    set_spell_level(([ "mage" : 5, "bard" : 5 ]));
+    set_spell_level(([ "mage" : 5, "bard" : 5, "magus" : 5 ]));
     set_domains(({"mentalism"}));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS mind fog on TARGET");

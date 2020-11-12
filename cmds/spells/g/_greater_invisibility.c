@@ -11,7 +11,7 @@ void create()
     ::create();
     set_author("nienne");
     set_spell_name("greater invisibility");
-    set_spell_level(([ "mage" : 4, "bard" : 4, "assassin" : 4, "inquisitor" : 4, "magus" : 4 ]));
+    set_spell_level(([ "mage" : 4, "bard" : 4, "assassin" : 4, "inquisitor" : 4 ]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS greater invisibility");
     set_description("This spell, available only to masters of illusion, allows the caster to enhance the normally fragile "

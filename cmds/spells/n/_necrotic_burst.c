@@ -11,7 +11,7 @@ void create()
 {
     ::create();
     set_spell_name("necrotic burst");
-    set_spell_level(([ "mage" : 3,]));
+    set_spell_level(([ "mage" : 3, "magus" : 3 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS necrotic burst on TARGET");
     set_description("This spells represents necromancer's ability to channel negative energies. You will open a Small rip in fabric of the reality near your target and it will release burst of pure negative energy, directed at your enemies near it.");

@@ -2,7 +2,7 @@
 
 The following Enhancements are available:
 
-%^CYAN%^%^ULINE%^Enhancement:%^RESET%^             %^CYAN%^%^ULINE%^(Cost) Description:
+%^CYAN%^%^ULINE%^Weapon Enhancement:%^RESET%^   %^CYAN%^%^ULINE%^(Cost) Description:
 flaming               (1) Adds fire damage.
 flaming burst         (2) As flaming, but additional damage on a critical.
 frost                 (1) Adds cold damage.
@@ -13,5 +13,21 @@ Holy                  (2) Ignores defenses from Evil beings, adds damage.
 Unholy                (2) Ignores defenses from Good beings, adds damage.
 Axiomatic             (2) Ignores defenses from Chaotic beings, adds damage.
 Anarchic              (2) Ignores defenses from Lawful beings, adds damage.
+
+%^CYAN%^%^ULINE%^Armor Enhancement:%^RESET%^                     %^CYAN%^%^ULINE%^(Cost) Description:
+light fortification                    (1) 25% chance to ignore stabs and critical damage.
+moderate fortification                 (3) 50% chance to ignore stabs and critical damage.
+heavy fortification                    (5) 75% chance to ignore stabs and critical damage.
+invulnerability                        (3) As frost, but additional damage on a critical.
+acid energy resistance                 (4) Resistance 10 to acid damage. With the armor bond feat costs 3.
+cold energy resistance                 (4) Resistance 10 to cold damage. With the armor bond feat costs 3.
+electricity energy resistance          (4) Resistance 10 to electricity damage. With the armor bond feat costs 3.
+fire energy resistance                 (4) Resistance 10 to fire damage. With the armor bond feat costs 3.
+sonic energy resistance                (4) Resistance 10 to sonic damage. With the armor bond feat costs 3.
+improved acid energy resistance        (5) Resistance 20 to acid damage.
+improved cold energy resistance        (5) Resistance 20 to cold damage.
+improved electricity energy resistance (5) Resistance 20 to electricity damage.
+improved fire energy resistance        (5) Resistance 20 to fire damage.
+improved sonic energy resistance       (5) Resistance 20 to sonic damage.
 
 %^CYAN%^See also:%^RESET%^ enhance

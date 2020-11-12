@@ -376,6 +376,10 @@ int advance(object tp, string myclass)
     {
         "/daemon/user_d.c"->init_pool(tp, "arcana");
     }
+    if (tp->is_class("paladin"))
+    {
+        "/daemon/user_d.c"->init_pool(tp, "grace");
+    }
     return ret;
 }
 
