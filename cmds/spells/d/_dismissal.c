@@ -4,7 +4,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("dismissal");
-    set_spell_level(([ "mage" : 5, "cleric" : 4, "inquisitor" : 4, "psion" : 3 ]));
+    set_spell_level(([ "mage" : 5, "cleric" : 4, "inquisitor" : 4, "psion" : 3, "magus" : 5 ]));
     set_spell_sphere("abjuration");
     set_discipline("nomad");
     set_syntax("cast CLASS dismissal");
