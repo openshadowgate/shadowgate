@@ -11,7 +11,7 @@ string *restricted_classes(string subrace) {
     if(!subrace || subrace == "") return ({"warlock","monk","bard","barbarian","psywarrior","sorcerer","fighter","paladin","ranger"});
     switch(subrace)
     {
-    case "hon-ele": return ({ "psion","monk", "mage","psywarrior", "sorcerer", "druid","ranger","cleric","bard","warlock"}); break;
+    case "hon-ele": return ({ "psion","monk", "mage", "magus", "psywarrior", "sorcerer", "druid","ranger","cleric","bard","warlock"}); break;
     default: return ({"warlock","monk","bard","barbarian","psywarrior","sorcerer","fighter","paladin","ranger","inquisitor"});
     }
 }

@@ -10,7 +10,7 @@ int *age_brackets() { return ({ 17, 40, 200, 250 }); }
 int *restricted_alignments(string subrace) { return ({ 1, 4, 7}); }
 
 string *restricted_classes(string subrace) {
-    return ({ "mage", "psion", "psywarrior",  "paladin", "sorcerer", "monk", "warlock", "inquisitor"});
+    return ({ "mage", "magus",  "psion", "psywarrior",  "paladin", "sorcerer", "monk", "warlock", "inquisitor"});
 }
 
 // stats in order: str, dex, con, int, wis, cha
