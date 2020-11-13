@@ -11,7 +11,7 @@ void create()
 {
     ::create();
     set_spell_name("dimensional anchor");
-    set_spell_level(([ "cleric" : 4, "inquisitor" : 3, "mage" : 4, "psion" : 4 ]));
+    set_spell_level(([ "cleric" : 4, "inquisitor" : 3, "mage" : 4, "psion" : 4, "magus" : 4 ]));
     set_spell_sphere("abjuration");
     set_discipline("nomad");
     set_syntax("cast CLASS dimensional anchor on TARGET");

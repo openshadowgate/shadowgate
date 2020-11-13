@@ -449,6 +449,48 @@ int confirm_add_hybrid(string str, object ob, string feat, string extradata)
     return 1;
 }
 
+int confirm_add_arcana(string str, object ob, string feat, string extradata)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!stringp(feat)) {
+        return 0;
+    }
+
+    if (str != "yes") {
+        tell_object(TP, "Aborting...");
+        free = 0;
+        return 1;
+    }
+    FEATS_D->add_my_feat(ob, "arcana", feat);
+    tell_object(ob, "%^YELLOW%^Congratulations, you have successfully added "
+        "the bonus arcana feat %^BLUE%^" + feat + "%^YELLOW%^!%^RESET%^");
+    free = 0;
+    return 1;
+}
+
+int confirm_add_divinebond(string str, object ob, string feat, string extradata)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!stringp(feat)) {
+        return 0;
+    }
+
+    if (str != "yes") {
+        tell_object(TP, "Aborting...");
+        free = 0;
+        return 1;
+    }
+    FEATS_D->add_my_feat(ob, "divinebond", feat);
+    tell_object(ob, "%^YELLOW%^Congratulations, you have successfully added "
+        "the divine bond feat %^BLUE%^" + feat + "%^YELLOW%^!%^RESET%^");
+    free = 0;
+    return 1;
+}
+
 int confirm_remove(string str, object ob, string feat, string extradata)
 {
     int price, i;
@@ -556,6 +598,14 @@ int cmd_feats(string str)
 
         case "general":
             FEATS_D->display_feats(TP, TP, "general");
+            return 1;
+
+        case "arcana":
+            FEATS_D->display_feats(TP, TP, "arcana");
+            return 1;
+
+        case "divinebond":
+            FEATS_D->display_feats(TP, TP, "divinebond");
             return 1;
 
         case "epic":
@@ -748,12 +798,10 @@ int cmd_feats(string str)
         BONUS_ALLOWED = 0;
         for (i = 0; i < sizeof(subset); i++) {
             if (member_array(subset[i], MELEECLASSES) != -1) {
-// melee classes get no bonus caster feats!
-                continue;
+                continue;                // melee classes get no bonus caster feats!
             }
             if (member_array(subset[i], HYBRID) != -1) {
-// neither do hybrids!
-                continue;
+                continue;                // neither do hybrids!
             }
             if (subset[i] == "psion" ||
                 subset[i] == "sorcerer" ||
@@ -790,7 +838,7 @@ int cmd_feats(string str)
                 j = ((int)TP->query_class_level(subset[i]) / 3) + 1;
             }
             else if (subset[i] == "magus") {
-                j = ((int)TP->query_class_level(subset[i]) / 3);
+                j = (((int)TP->query_class_level(subset[i]) + 1) / 6);
             } else {
                 j = (((int)TP->query_class_level(subset[i]) - 16) / 5);
             }
@@ -806,6 +854,41 @@ int cmd_feats(string str)
             tell_object(TP, "You have %^BOLD%^%^BLUE%^" + BONUS_ALLOWED + "%^RESET%^ free hybrid "
                         "bonus feats. You have used %^BOLD%^%^BLUE%^" + num_bonus + " %^RESET%^and you now have "
                         "%^BOLD%^%^BLUE%^" + bonus + "%^RESET%^ left.%^RESET%^");
+        }
+
+// arcana feat allocation here
+        if (TP->is_class("magus")) {
+            BONUS_ALLOWED = 0;
+            j = ((int)TP->query_class_level("magus") / 3);
+            BONUS_ALLOWED += j;
+
+            num_bonus = (int)TP->query_arcana_feats_gained();
+            bonus = BONUS_ALLOWED - num_bonus;
+
+            if (BONUS_ALLOWED) {
+                tell_object(TP, "You have %^BOLD%^%^BLUE%^" + BONUS_ALLOWED + "%^RESET%^ free arcana "
+                    "bonus feats. You have used %^BOLD%^%^BLUE%^" + num_bonus + " %^RESET%^and you now have "
+                    "%^BOLD%^%^BLUE%^" + bonus + "%^RESET%^ left.%^RESET%^");
+            }
+        }
+
+// divine feat allocation here
+        if (TP->is_class("paladin")) {
+            BONUS_ALLOWED = 0;
+            j = 0;
+            if ((int)TP->query_class_level("paladin") > 4) {
+                j = 1;
+            }
+            BONUS_ALLOWED += j;
+
+            num_bonus = (int)TP->query_divinebond_feats_gained();
+            bonus = BONUS_ALLOWED - num_bonus;
+
+            if (BONUS_ALLOWED) {
+                tell_object(TP, "You have %^BOLD%^%^BLUE%^" + BONUS_ALLOWED + "%^RESET%^ free divine bond "
+                    "feats. You have used %^BOLD%^%^BLUE%^" + num_bonus + " %^RESET%^and you now have "
+                    "%^BOLD%^%^BLUE%^" + bonus + "%^RESET%^ left.%^RESET%^");
+            }
         }
 
 // free-cost feat allocation here
@@ -860,6 +943,18 @@ int cmd_feats(string str)
                             "an epic feat. You can only have one at a time.%^RESET%^");
                 return 1;
             }
+        }
+
+        if ((string)FEATS_D->get_category(tmp) == "MagusArcana") {
+            tell_object(TP, "%^RESET%^%^BOLD%^This is a magus class feat. "
+                "This feat can only be selected as an arcana feat.%^RESET%^");
+            return 1;
+        }
+
+        if ((string)FEATS_D->get_category(tmp) == "DivineBond") {
+            tell_object(TP, "%^RESET%^%^BOLD%^This is a paladin class feat. "
+                "This feat can only be selected as a divinebond feat.%^RESET%^");
+            return 1;
         }
 
         my_tmp_feats = (string*)TP->query_temporary_feats();
@@ -1221,7 +1316,7 @@ int cmd_feats(string str)
                 j = ((int)TP->query_class_level(subset[i]) / 3) + 1;
             }
             else if (subset[i] == "magus") {
-                j = ((int)TP->query_class_level(subset[i]) / 3);
+                j = (((int)TP->query_class_level(subset[i]) + 1) / 6);
             } else {
                 j = (((int)TP->query_class_level(subset[i]) - 16) / 5);
             }
@@ -1302,6 +1397,149 @@ int cmd_feats(string str)
                     "to spend exp to remove it later if you change your mind.%^RESET%^");
         tell_object(TP, "Enter <yes> to add the feat, anything else to abort.");
         input_to("confirm_add_hybrid", TP, tmp, "");
+        return 1;
+
+    case "arcana":
+        if (sscanf(str, "%s %s", category, tmp) != 2) {
+            tell_object(TP, "See <help feats> for syntax.");
+            return 1;
+        }
+
+        subset = TP->query_classes();
+        if (!sizeof(subset)) {
+            tell_object(TP, "%^RED%^There is an error in the settings of your classes. Please notify a wiz with this error message.%^RESET%^");
+            return 1;
+        }
+
+        BONUS_ALLOWED = 0;
+        if (TP->is_class("magus")) {
+            j = ((int)TP->query_class_level(subset[i]) / 3);
+        }
+        BONUS_ALLOWED += j;
+
+        num_bonus = (int)TP->query_arcana_feats_gained();
+        if (num_bonus >= BONUS_ALLOWED) {
+            tell_object(TP, "%^RESET%^%^BOLD%^You are not able to add "
+                "any more bonus arcana feats at your current level.%^RESET%^");
+            return 1;
+        }
+        if (FEATS_D->has_feat(TP, tmp)) {
+            tell_object(TP, "%^RESET%^%^BOLD%^You already have that "
+                "feat.");
+            return 1;
+        }
+        if (TP->query("negative level")) {
+            tell_object(TP, "You have a negative level and must have it removed before " +
+                "you can add any feats!");
+            return 1;
+        }
+        if (intp("/daemon/user_d.c"->get_scaled_level(TP))) {
+            tell_object(TP, "You have scaled your level down and must revert it back to " +
+                "normal before you can add any feats!");
+            return 1;
+        }
+        if ((string)FEATS_D->get_category(tmp) == "EpicFeats") {
+            tell_object(TP, "%^RESET%^%^BOLD%^You can't buy epic feats "
+                "with class bonus slots.%^RESET%^");
+            return 1;
+        }
+
+        my_tmp_feats = (string*)TP->query_temporary_feats();
+        TP->clear_temporary_feats();
+
+        if (!FEATS_D->can_gain_arcana_feat(TP, tmp)) {
+            tell_object(TP, "%^RESET%^%^BOLD%^You are not able to add the "
+                "feat " + tmp + ", please make sure you meet all of the "
+                "requirements.%^RESET%^");
+            TP->set_temporary_feats(my_tmp_feats);
+            return 1;
+        }
+
+        TP->set_temporary_feats(my_tmp_feats);
+
+        category = FEATS_D->get_category(tmp);
+        if (!(category == "MagusArcana")) {
+            tell_object(TP, "%^YELLOW%^The %^BLUE%^" + tmp + " %^YELLOW%^ feat is not an arcana feat.%^RESET%^");
+            tell_object(TP, "Aborting...");
+            return 1;
+        }
+        tell_object(TP, "%^YELLOW%^Are you sure you want to add the feat " + tmp + " as one of "
+            "your free bonus arcana feats?  It will cost nothing to add, but you will have "
+            "to spend exp to remove it later if you change your mind.%^RESET%^");
+        tell_object(TP, "Enter <yes> to add the feat, anything else to abort.");
+        input_to("confirm_add_arcana", TP, tmp, "");
+        return 1;
+
+    case "divinebond":
+        if (sscanf(str, "%s %s", category, tmp) != 2) {
+            tell_object(TP, "See <help feats> for syntax.");
+            return 1;
+        }
+
+        subset = TP->query_classes();
+        if (!sizeof(subset)) {
+            tell_object(TP, "%^RED%^There is an error in the settings of your classes. Please notify a wiz with this error message.%^RESET%^");
+            return 1;
+        }
+
+        BONUS_ALLOWED = 0;
+        j = 0;
+        if ((int)TP->query_class_level("paladin") > 4) {
+            j = 1;
+        }
+        BONUS_ALLOWED += j;
+
+        num_bonus = (int)TP->query_divinebond_feats_gained();
+        if (num_bonus >= BONUS_ALLOWED) {
+            tell_object(TP, "%^RESET%^%^BOLD%^You are not able to add "
+                "any more bonus divine bond feats at your current level.%^RESET%^");
+            return 1;
+        }
+        if (FEATS_D->has_feat(TP, tmp)) {
+            tell_object(TP, "%^RESET%^%^BOLD%^You already have that "
+                "feat.");
+            return 1;
+        }
+        if (TP->query("negative level")) {
+            tell_object(TP, "You have a negative level and must have it removed before " +
+                "you can add any feats!");
+            return 1;
+        }
+        if (intp("/daemon/user_d.c"->get_scaled_level(TP))) {
+            tell_object(TP, "You have scaled your level down and must revert it back to " +
+                "normal before you can add any feats!");
+            return 1;
+        }
+        if ((string)FEATS_D->get_category(tmp) == "EpicFeats") {
+            tell_object(TP, "%^RESET%^%^BOLD%^You can't buy epic feats "
+                "with class bonus slots.%^RESET%^");
+            return 1;
+        }
+
+        my_tmp_feats = (string*)TP->query_temporary_feats();
+        TP->clear_temporary_feats();
+
+        if (!FEATS_D->can_gain_divinebond_feat(TP, tmp)) {
+            tell_object(TP, "%^RESET%^%^BOLD%^You are not able to add the "
+                "feat " + tmp + ", please make sure you meet all of the "
+                "requirements.%^RESET%^");
+            TP->set_temporary_feats(my_tmp_feats);
+            return 1;
+        }
+
+        TP->set_temporary_feats(my_tmp_feats);
+
+        category = FEATS_D->get_category(tmp);
+        if (!(category == "DivineBond")) {
+            tell_object(TP, "%^YELLOW%^The %^BLUE%^" + tmp + " %^YELLOW%^ feat is not a divine bond feat.%^RESET%^");
+            tell_object(TP, "Aborting...");
+            return 1;
+        }
+        tell_object(TP, "%^YELLOW%^Are you sure you want to add the feat " + tmp + " as one of "
+            "your free bonus divine bond feat?  It will cost nothing to add, but you will have "
+            "to spend exp to remove it later if you change your mind.%^RESET%^");
+        tell_object(TP, "Enter <yes> to add the feat, anything else to abort.");
+        input_to("confirm_add_divinebond", TP, tmp, "");
         return 1;
 
     case "remove":
@@ -1400,15 +1638,15 @@ feats - manipulate or view your feats
 
 feats allowed
 feats check|add|remove %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
-feats racial|martial|spellcraft|hybrid %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
-feats list [martial|spellcraft|hybrid|general]
+feats racial|martial|spellcraft|hybrid|arcana|divinebond %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
+feats list [martial|spellcraft|hybrid|arcana|divinebond|general]
 feats fix
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 Feats represents specialized techniques or powers a character can learn throughout its career. Some feats are class-specific (usually gained for free with class-levels), while others are generic and must be paid for by adding to your exp tax (see <help exp tax>). A character gains 1 generic feat every 3. level which can be bought in such a way. Feats awarded by character class are added automatically. Some classes gain additional free feats known as bonus feats. When you level your character, you will get notified if you are allowed new feats.
 
-Feats are divided into types (martial, spellcraft, hybrid, generic, epic) and organized in feat trees.  Some feats have prerequisites as specified in their individual help files.
+Feats are divided into types (martial, spellcraft, hybrid, arcana, generic, epic) and organized in feat trees.  Some feats have prerequisites as specified in their individual help files.
 
 The following commands apply:
 
@@ -1420,9 +1658,9 @@ The following commands apply:
     Will add the feat if you have any remaining levelling feats.
 %^ORANGE%^<feats remove %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
     Will remove the feat if you no longer want to retain it.
-%^ORANGE%^<feats racial|martial|spellcraft|hybrid %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
+%^ORANGE%^<feats racial|martial|spellcraft|hybrid|arcana %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
     Will add the feat of given category if you have any bonus feats in it.
-%^ORANGE%^<feats list martial|spellcraft|hybrid|general|epic>%^RESET%^
+%^ORANGE%^<feats list martial|spellcraft|hybrid|arcana|general|epic>%^RESET%^
     Displays the specified feat trees.
 %^ORANGE%^<feats fix>%^RESET%^
     Will attempt to fix your feat tree. If your feats seem incorrect, use this command.

@@ -1389,6 +1389,19 @@ void setup()
             }
         }
 
+        if (objectp(find_object_or_load("/daemon/user_d.c"))) {
+            if (objectp(TO)) {
+                if (TO->is_class("magus"))
+                {
+                    "/daemon/user_d.c"->init_pool(TO, "arcana");
+                }
+                if (TO->is_class("paladin"))
+                {
+                    "/daemon/user_d.c"->init_pool(TO, "grace");
+                }
+            }
+        }
+
         init_feats();
         load_autoload_obj();
 
@@ -4524,6 +4537,8 @@ void clear_feats()
     set_bonus_feats_gained(0);
     set_magic_feats_gained(0);
     set_hybrid_feats_gained(0);
+    set_arcana_feats_gained(0);
+    set_divinebond_feats_gained(0);
     set_other_feats_gained(0);
     set_epic_feats_gained(0);
     return;
@@ -4588,6 +4603,31 @@ int query_hybrid_feats_gained()
     if(!intp(__FEAT_DATA["hybrid_feats_gained"])) { __FEAT_DATA["hybrid_feats_gained"] = 0; }
     return __FEAT_DATA["hybrid_feats_gained"];
 }
+
+void set_arcana_feats_gained(int num)
+{
+    __FEAT_DATA["arcana_feats_gained"] = num;
+    return;
+}
+
+int query_arcana_feats_gained()
+{
+    if (!intp(__FEAT_DATA["arcana_feats_gained"])) { __FEAT_DATA["arcana_feats_gained"] = 0; }
+    return __FEAT_DATA["arcana_feats_gained"];
+}
+
+void set_divinebond_feats_gained(int num)
+{
+    __FEAT_DATA["divinebond_feats_gained"] = num;
+    return;
+}
+
+int query_divinebond_feats_gained()
+{
+    if (!intp(__FEAT_DATA["divinebond_feats_gained"])) { __FEAT_DATA["divinebond_feats_gained"] = 0; }
+    return __FEAT_DATA["divinebond_feats_gained"];
+}
+
 void set_other_feats_gained(int num)
 {
     __FEAT_DATA["other_feats_gained"] = num;
@@ -4692,6 +4732,38 @@ mapping query_hybrid_feats()
     return __FEAT_DATA["hybrid"];
 }
 
+void set_arcana_feats(mapping feats)
+{
+    if (!mapp(__FEAT_DATA["arcana"])) { __FEAT_DATA["arcana"] = ([]); }
+    if (mapp(feats))
+    {
+        __FEAT_DATA["arcana"] = feats;
+    }
+    return;
+}
+
+mapping query_arcana_feats()
+{
+    if (!mapp(__FEAT_DATA["arcana"])) { __FEAT_DATA["arcana"] = ([]); }
+    return __FEAT_DATA["arcana"];
+}
+
+void set_divinebond_feats(mapping feats)
+{
+    if (!mapp(__FEAT_DATA["divinebond"])) { __FEAT_DATA["divinebond"] = ([]); }
+    if (mapp(feats))
+    {
+        __FEAT_DATA["divinebond"] = feats;
+    }
+    return;
+}
+
+mapping query_divinebond_feats()
+{
+    if (!mapp(__FEAT_DATA["divinebond"])) { __FEAT_DATA["divinebond"] = ([]); }
+    return __FEAT_DATA["divinebond"];
+}
+
 void set_other_feats(mapping feats)
 {
     if(!mapp(__FEAT_DATA["other"])) { __FEAT_DATA["other"] = ([]); }
@@ -4789,6 +4861,22 @@ string *query_player_feats() {
         for(i=0;i<sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];
       }
       testmap = ([]);
+    }
+    if (mapp(__FEAT_DATA["arcana"])) {
+      testmap = __FEAT_DATA["arcana"];
+      mykeys = keys(testmap);
+      if (sizeof(mykeys)) {
+        for (i = 0;i < sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];
+      }
+      testmap = ([]);
+    }
+    if (mapp(__FEAT_DATA["divinebond"])) {
+        testmap = __FEAT_DATA["divinebond"];
+        mykeys = keys(testmap);
+        if (sizeof(mykeys)) {
+            for (i = 0;i < sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];
+        }
+        testmap = ([]);
     }
     if(mapp(__FEAT_DATA["other"])) {
       testmap = __FEAT_DATA["other"];

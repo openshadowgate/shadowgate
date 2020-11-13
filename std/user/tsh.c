@@ -167,6 +167,14 @@ string write_prompt()
             prompt = replace_string(prompt, "$a", "");
             prompt = replace_string(prompt, "$A", "");
         }
+        if ((int)TP->query("maximum grace")) {
+            prompt = replace_string(prompt, "$z", "" + (int)TP->query("available grace"));
+            prompt = replace_string(prompt, "$Z", "" + (int)TP->query("maximum grace"));
+        }
+        else {
+            prompt = replace_string(prompt, "$z", "");
+            prompt = replace_string(prompt, "$Z", "");
+        }
         if ((int)TP->query_mp()) {
             prompt = replace_string(prompt, "$p",
                                     "" + (int)this_player()->query_mp());

@@ -9,7 +9,7 @@ int i;
 void create() {
     ::create();
     set_spell_name("identify");
-    set_spell_level(([ "mage" : 1, "oracle":1]));
+    set_spell_level(([ "mage" : 1, "oracle":1, "magus" : 1 ]));
     set_spell_sphere("divination");
     set_mystery("lore");
     set_syntax("cast CLASS identify on OBJECT");

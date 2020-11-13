@@ -13,7 +13,7 @@ void create()
     feat_name("legendary blade");
     feat_prereq("Magus L20");
     feat_classes("magus");
-    feat_desc("When the magus enhances his weapon with his arcane pool, he grants it an additional +2 enhancement bonus");
+    feat_desc("When the magus enhances his weapon with his arcane pool, he grants it an additional +2 enhancement bonus to his weapon.");
     permanent(1);
 }
 

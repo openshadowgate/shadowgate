@@ -173,8 +173,7 @@ void track_damage(object attacker, object victim, int damage)
         return;
     }else {
         if (member_array(tname, being_tracked) == -1) {
-            DAMAGE_TRACKING += ([tname:(["damage" : damage, "hits" : myhits, "ignored" : myignore, "user" : isuser, "max damage" : damage, "min
-damage" : damage, "average damage" : damage]) ]);
+            DAMAGE_TRACKING += ([tname:(["damage" : damage, "hits" : myhits, "ignored" : myignore, "user" : isuser, "max damage" : damage, "min damage" : damage, "average damage" : damage]) ]);
         }else {
             DAMAGE_TRACKING[tname]["damage"] += damage;
             DAMAGE_TRACKING[tname]["hits"] += myhits;
@@ -439,7 +438,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
                     //alignments, enemy_alignments, target_align, i
                     alignments = ({ "alignment 147", "alignment 369", "alignment 123", "alignment 789" });
                     enemy_alignments = ({ "369", "147", "789", "123" });
-                    if (attacker->query_property("weapon enhancements")) {
+                    if (attacker->query_property("weapon enhancement timer")) {
                         for (i = 0; i < sizeof(alignments); i++)
                         {
                             if (attacker->query_property(alignments[i]) &&
@@ -498,8 +497,8 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 void check_extra_abilities(object attacker, object target, object weapon, int crit_hit)
 {
     string ename, pname, enhance_msg, target_align;
-    int effect_chance, enhance_dmg, crit_mult, enhance_chance, i;
-    object room;
+    int effect_chance, enhance_dmg, crit_mult, enhance_chance, is_main_hand, i;
+    object room, * weapons;
     string* elements, * actions, * bursts, * colors, * alignments, * enemy_alignments, * align_text, * a_colors;
 
     if (!objectp(attacker)) {
@@ -590,9 +589,15 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
 
     // magus arcane pool - paladin divine bond
     //weapon enhancements
+    weapons = attacker->query_wielded();
+    if (sizeof(weapons))
+    {
+        if (weapons[0] == weapon){ is_main_hand = 1; }        
+    }
     if (!attacker->query_property("shapeshifted") &&
         objectp(weapon) &&
-        attacker->query_property("weapon enhancements")) {
+        is_main_hand &&
+        attacker->query_property("weapon enhancement timer")) {
 
         if (crit_hit) {
             crit_mult = (int)weapon->query_critical_hit_multiplier() - 1;
@@ -604,10 +609,10 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             }
         }
         //it can be optimized to mapping, any help appreciated
-        elements = ({ "fire", "cold", "electricity" });
-        actions = ({ "a burst", "shards", "tendrils" });
-        bursts = ({ "flames", "ice", "lightning" });
-        colors = ({ "fire red", "ice blue", "lightning yellow" });
+        elements = ({ "fire", "cold", "electricity", "sonic", "acid" });
+        actions = ({ "a burst", "shards", "tendrils", "explosion", "splatter" });
+        bursts = ({ "flames", "ice", "lightning", "sounds", "acid" });
+        colors = ({ "fire red", "ice blue", "lightning yellow", "lightning yellow", "acid green" });
 
         enhance_chance = attacker->query_guild_level("magus");
         enhance_chance += attacker->query_guild_level("paladin");
@@ -617,11 +622,11 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         {
             //Chance from 10% to 33% at max for each element, on crit is 100% if burst.
             effect_chance = !random(enhance_chance);
-            if ((attacker->query_property(elements[i]) && effect_chance) ||
-                (attacker->query_property(elements[i] + " burst") && crit_hit)) {
+            if ((attacker->query_property(elements[i] + " en_dam") && effect_chance) ||
+                (attacker->query_property(elements[i] + " en_dam burst") && crit_hit)) {
                 enhance_msg = bursts[i];
                 enhance_dmg = roll_dice(1, 6);
-                if (crit_hit && attacker->query_property(elements[i] + " burst")) {
+                if (crit_hit && attacker->query_property(elements[i] + " en_dam burst")) {
                     enhance_msg = actions[i] + " of " + bursts[i];
                     enhance_dmg += roll_dice(crit_mult, 10);
                 }
@@ -2841,7 +2846,7 @@ void combined_attack(object who, object victim)
 //FUNCTIONS BELOW STILL NEED CONVERTING
 void internal_execute_attack(object who)
 {
-    int toAttack, toattack, lastHand, critical_hit;
+    int toAttack, toattack, lastHand, critical_hit, fortification;
     int i, roll, temp1, temp2, touch_attack = 0, fumble = 0;
     object* weapons, current, victim, * protectors, * attackers, EWHO;
     string target_thing;
@@ -2965,14 +2970,34 @@ void internal_execute_attack(object who)
             temp1 *= 2;
         }
 
+        if (victim->query_property("fortification 75")) {
+            fortification = 75;
+        }
+        else if (victim->query_property("fortification 50")) {
+            fortification = 50;
+        }
+        else if (victim->query_property("fortification 25")) {
+            fortification = 25;
+        }
+        else {
+            fortification = 0;
+        }
+
         if (roll >= (21 - temp1)) { // if threat range of weapon is 2, then we have a crit threat on a roll of 19 or 20
-            critical_roll = roll;
-            if (!victim->query_property("no crit") && (!interactive(victim) || ((int)victim->query_level() > 5))) {
-                temp2 = BONUS_D->process_hit(who, victim, i, current);
-                if (temp2) {
-                    who->adjust_combat_mapps("static vars", "critical hit", 1);
-                    who->adjust_combat_mapps("static vars", "critical message", 1);
-                    critical_hit = 1;
+            if (!(roll_dice(1, 100) > fortification) && victim->query_property("armor enhancement timer")) { // fortification chance to avoid critical
+                tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.");
+                tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but your armor produces a magical force that protects your vital areas.");
+                tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.", ({ victim, who }));
+            }
+            else {
+                critical_roll = roll;
+                if (!victim->query_property("no crit") && (!interactive(victim) || ((int)victim->query_level() > 5))) {
+                    temp2 = BONUS_D->process_hit(who, victim, i, current);
+                    if (temp2) {
+                        who->adjust_combat_mapps("static vars", "critical hit", 1);
+                        who->adjust_combat_mapps("static vars", "critical message", 1);
+                        critical_hit = 1;
+                    }
                 }
             }
         }
@@ -3039,7 +3064,13 @@ void internal_execute_attack(object who)
             tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + " seems unaffected.");
             tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but you are resilient against the worst of the attack.");
             tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + " seems unaffected.", ({ victim, who }));
-        }else {
+        }
+        else if (!(roll_dice(1, 100) > fortification) && victim->query_property("armor enhancement timer")) {// fortification chance to avoid stab
+            tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.");
+            tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but your armor produces a magical force that protects your vital areas.");
+            tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.", ({ victim, who }));
+        }
+        else {
             tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable.");
             tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable.");
             tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable.", ({ victim, who }));

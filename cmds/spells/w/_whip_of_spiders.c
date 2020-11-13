@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("whip of spiders");
-    set_spell_level(([ "bard" : 2, "druid" : 2, "mage" : 2]));
+    set_spell_level(([ "bard" : 2, "druid" : 2, "mage" : 2, "magus" : 2 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS whip of spiders");
     set_description("You summon hundreds of tiny spiders that form into a whip that extends from your hand.");

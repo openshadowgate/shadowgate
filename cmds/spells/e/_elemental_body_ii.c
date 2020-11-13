@@ -35,7 +35,7 @@ void create()
 {
     ::create();
     set_spell_name("elemental body ii");
-    set_spell_level(([ "mage" : 5, "oracle" : 5, "magus" : 5 ]));
+    set_spell_level(([ "mage" : 5, "oracle" : 5 ]));
     set_mystery("elemental");
     set_description("When you cast this spell, you infuse yourself with the power of the element. Infusions give the next effects as follows:
 

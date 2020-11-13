@@ -357,7 +357,6 @@ void reinit_path()
 void heart_beat()
 {
     int myskill, mylevel, i;
-    int enh_timer, enh_bonus;
 
     if (!objectp(TO)) {
         return;
@@ -389,16 +388,12 @@ void heart_beat()
     if (TO->is_class("magus")) {
         "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "arcana");
     }
-    //enhancement effects
-    enh_timer = TO->query_property("enhancement timer");
-    if (enh_timer > 0) {
-        enh_timer -= 2;
-        if (enh_timer < 1) {
-            "/cmds/mortal/_enhance.c"->off_enhances(TO);
-        }else {
-            TO->set_property("enhancement timer", - 2);
-        }
+    if (TO->is_class("paladin")) {
+        "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "grace");
     }
+    //enhancement effects
+    "/cmds/mortal/_enhance.c"->run_enhances_timer(TO, "weapon");
+    "/cmds/mortal/_enhance.c"->run_enhances_timer(TO, "armor");
 
     if (used_stamina > 0) {
         if (!userp(TO)) {

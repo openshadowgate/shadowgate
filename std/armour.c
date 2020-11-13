@@ -129,7 +129,7 @@ int decayMe() {
 void unwear() {
    function f;
    string catchbug;
-   int answer, shieldwall;
+   int answer;
    mapping itembonuses;
 
    if(!objectp(wornBy)) {       return;   }
@@ -160,14 +160,8 @@ void unwear() {
                message("my_action", "You notice your "+::query_short()+" is"+query_broken()+".",wornBy);
        }
        else message("my_action", "You remove your "+query_short()+".",wornBy);
-       shieldwall = (int)wornBy->query_property("shieldwall");
-       if (shieldwall && query_type() == "shield") {
-           message("my_action", "You can't benefit from shieldwall without a shield.", wornBy);
-           wornBy->set_property("shieldwall", -shieldwall);
-           wornBy->set_property("damage resistance", -shieldwall);
-           wornBy->set_property("shieldwall_bonus", -shieldwall);
-           wornBy->set_property("empowered", shieldwall);
-       }
+       
+       check_active_feats(wornBy, query_type(), query_limbs()[0]);
    }
 
    if(itembonuses = TO->query_item_bonuses()) run_item_bonuses("remove",wornBy,itembonuses);
@@ -180,6 +174,42 @@ void unwear() {
 
    wornBy = 0;
    actualLimbs = allocate(1);
+}
+
+void check_active_feats(object wornBy, string type, string limb){
+    int shieldwall;
+    shieldwall = (int)wornBy->query_property("shieldwall");
+    if (shieldwall && type == "shield") {
+        message("my_action", "You can't benefit from shieldwall without a shield.", wornBy);
+        wornBy->set_property("shieldwall", -shieldwall);
+        wornBy->set_property("damage resistance", -shieldwall);
+        wornBy->set_property("shieldwall_bonus", -shieldwall);
+        wornBy->set_property("empowered", shieldwall);
+    }
+
+    if ((int)wornBy->query_property("enruned shield") && type == "shield") {
+
+        object deactivate_feat, * active_feats;
+        int i;
+        active_feats = wornBy->query_property("active_feats");
+
+        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
+        {
+            if (!objectp(active_feats[i])) { continue; }
+            if (active_feats[i]->query_feat_name() != "enruned shield") { continue; }
+            deactivate_feat = active_feats[i];
+            break;
+        }
+        deactivate_feat->dest_effect();
+        message("my_action", "lalala.", wornBy);
+    }
+
+    if ((int)wornBy->query_property("armor enhancement timer") &&
+        (type == "armour" || type == "chain" || type == "leather") &&
+        limb == "torso"
+        ) {
+        "/cmds/mortal/_enhance.c"->off_enhances(wornBy, "armor");
+    }
 }
 
 void unequip()
