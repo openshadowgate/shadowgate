@@ -3,6 +3,6 @@
 
 #include <std.h>
 
-#define ROOMS "/realms/chernobog/thief_training/room/"
-#define OBJ "/realms/chernobog/thief_training/obj/"
-#define INH "/realms/chernobog/thief_training/inherit/"
+#define ROOMS "/d/shadow/thief_training/room/"
+#define OBJ "/d/shadow/thief_training/obj/"
+#define INH "/d/shadow/thief_training/inherit/"
