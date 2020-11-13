@@ -113,7 +113,7 @@ int cmd_tell(string str)
         return 1;
     }
 
-    if (ob->query_invis() || ob->query_quietness() && !avatarp(TP)) {
+    if (ob->query_quietness() && !avatarp(TP)) { //removed ob->query_invis() as why would that block you?
         message("info", sprintf("%s%s", capitalize(who), NOT_HERE), this_player());
 
         if (member_array(TPQN, ignored) == -1 || wizardp(TP)) {
