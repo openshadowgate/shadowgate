@@ -182,7 +182,8 @@ void receive_given_item(object obj){
    }   
    if(!(member_array("myringz",(string)obj->query_id()) != -1)) {
      force_me("say Thank you, but this isn't any help.");
-     force_me("give "+obj->query_name()+" to "+TP->query_name()+"");
+     //force_me("give "+obj->query_name()+" to "+TP->query_name()+"");
+     force_me("drop "+ obj->query_name()+"");
      return;
    }
    if(member_array("myringz",(string)obj->query_id()) != -1) {
