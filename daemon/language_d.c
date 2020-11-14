@@ -572,7 +572,7 @@ varargs string translate(string str, string lang, object player,int reading)
     int prof, i,j, thing,read_time;
     string *words, ret = "";
 
-    set_seed(str);
+    /* set_seed(str); */
 
     if(!objectp(player)) { return str; }
 
