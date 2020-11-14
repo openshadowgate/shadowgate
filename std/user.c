@@ -2424,11 +2424,12 @@ void set_level(int lev) {
   return;
 }
 
-string *query_messages(string myclass){
-  if(!static_user["pastMessages"] || !static_user["pastMessages"][myclass]){
-    return ({});
-  }
-  return static_user["pastMessages"][myclass];
+mixed* query_messages(string myclass)
+{
+    if (!static_user["pastMessages"] || !static_user["pastMessages"][myclass]) {
+        return ({});
+    }
+    return static_user["pastMessages"][myclass];
 }
 
 string *query_message_classes()
@@ -2436,17 +2437,20 @@ string *query_message_classes()
     return keys(static_user["pastMessages"]);
 }
 
-void save_messages(string msg_class, string msg) {
-  int i,j;
-  if (member_array(msg_class,static_user["saveable"]) == -1) return;
-  if ((j = sizeof(static_user["pastMessages"][msg_class])) > MAXSTOREDMESSAGES) {
-    for (i=0;i<j-1;i++) {
-      static_user["pastMessages"][msg_class][i] = static_user["pastMessages"][msg_class][i+1];
+varargs void save_messages(string msg_class, string msg, string the_lang)
+{
+    int i, j;
+    if (member_array(msg_class, static_user["saveable"]) == -1) {
+        return;
     }
-    static_user["pastMessages"][msg_class][j-1] = msg;
-  } else {
-    static_user["pastMessages"][msg_class]+= ({msg});
-  }
+    if ((j = sizeof(static_user["pastMessages"][msg_class])) > MAXSTOREDMESSAGES) {
+        static_user["pastMessages"][msg_class] = static_user["pastMessages"][msg_class][1..(j - 1)];
+    }
+    if (the_lang) {
+        static_user["pastMessages"][msg_class] += ({({msg, the_lang})});
+    } else {
+        static_user["pastMessages"][msg_class] += ({msg});
+    }
 }
 
 void receive_message(string msg_class, string msg)
@@ -2688,7 +2692,11 @@ void receive_message(string msg_class, string msg)
 
     if (pointerp(static_user["saveable"]) && member_array(msg_class,static_user["saveable"]) != -1)
     {
-        save_messages(msg_class, omsg);
+        if (the_lang) {
+            save_messages(msg_class, omsg, the_lang);
+        } else {
+            save_messages(msg_class, omsg);
+        }
     }
     true_msg = implode(words, "");
     while(sizeof(true_msg) > 8000)

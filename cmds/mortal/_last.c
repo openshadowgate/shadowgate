@@ -1,8 +1,5 @@
-// _last.c
-
-// returns the last 10 lines sent from tell broadcast say and lines
-
 #include <std.h>
+#include <daemons.h>
 
 inherit DAEMON;
 
@@ -11,7 +8,8 @@ int help();
 int cmd_last(string str)
 {
     int i, j;
-    string* stuff, msg;
+    string  msg;
+    mixed * stuff;
 
 
     if (str == "types") {
@@ -34,9 +32,21 @@ int cmd_last(string str)
 
     write("%^BOLD%^Last lines of " + str);
     for (i = 0; i < j; i++) {
-        write("%^CYAN%^>> %^RESET%^" + stuff[i] + "%^RESET%^");
+        write("%^CYAN%^>> %^RESET%^" + (arrayp(stuff[i]) ? (parse_message(stuff[i][0], stuff[i][1])) : stuff[i]) + "%^RESET%^");
     }
     return 1;
+}
+
+string parse_message(string str, string lang)
+{
+    string pre, post;
+
+    if (sscanf(str, "%s:%s", pre, post) != 2) {
+        return str;
+    }
+
+    return pre + ":" + LANGUAGE_D->translate(post, lang, TP);
+
 }
 
 void help()
