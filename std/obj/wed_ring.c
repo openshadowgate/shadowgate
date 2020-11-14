@@ -18,8 +18,9 @@ void create()
     ::create();
     set_id(({ "band", "night_wed_ring", "wedding ring" }));
     set_name("band");
-    set_short((: this_object(), "short_fun" :));
-    set_long("A Wedding Ring\n");
+    /* set_short((: this_object(), "short_fun" :)); */
+    set_short("A wedding band.")
+    set_long("A Wedding Ring.");
     set_ac(0);
     set_type("ring");
     set_limbs(({ "left hand", "right hand" }));
@@ -35,8 +36,8 @@ notify_spouse(str)
         return 1;
     }
 
-    message("honey", "%^BOLD%^%^RED%^Honey: %^RESET%^" + str + "\n", find_living(spouse));
-    message("honey", "%^BOLD%^%^RED%^You tell your spouse: %^RESET%^" + str + "\n", TP);
+    message("tell", "%^BOLD%^%^RED%^Honey: %^RESET%^" + str + "\n", find_living(spouse));
+    message("tell", "%^BOLD%^%^RED%^You tell your spouse: %^RESET%^" + str + "\n", TP);
     return 1;
 }
 
@@ -78,11 +79,6 @@ wear(str)
     set_short((: this_object(), "short_fun" :));
     set_long("A solid gold band. There is some writing on it.\n");
     set("read", "From " + capitalize(spouse) + " with love.\n");
-}
-
-string short_fun()
-{
-    return ("$&$" + me + "$&$'s wedding band");
 }
 
 string query_spouse()

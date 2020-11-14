@@ -76,7 +76,7 @@ int cmd_echo(string str)
 		return 1;
 	}
 	str = replace_string(str,"%^NL%^","\n");
-	message("environment", str, environment(this_player()));
+	message("echo", str, environment(this_player()));
     	seteuid(UID_LOG);
   	str = replace_string(str,"\n","%^NL%^");
     	seteuid(getuid());

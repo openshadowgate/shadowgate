@@ -30,7 +30,7 @@ inherit "/std/user/more";
 
 #define OVERRIDE_IGNORE_MSG ({ "damage","broadcast", "info", "more", "room_description", "room_exits","smell","listen","write","say", "system", "prompt", "inanimate_item", "living_item"})
 #define YUCK_D ("/daemon/yuck_d")
-#define KEPTMESSAGES ({"reply","notify","broadcast","say","emote","whisper","party","honey","emoteto", "discuss"})
+#define KEPTMESSAGES ({"reply","notify","broadcast","say","emote","whisper","party","emoteto", "discuss", "echo"})
 #define MAXSTOREDMESSAGES 10
 #define VOID "/d/shadowgate/void"
 #define LIGHT_MAX_RANGE 5
@@ -2431,6 +2431,11 @@ string *query_messages(string myclass){
   return static_user["pastMessages"][myclass];
 }
 
+string *query_message_classes()
+{
+    return keys(static_user["pastMessages"]);
+}
+
 void save_messages(string msg_class, string msg) {
   int i,j;
   if (member_array(msg_class,static_user["saveable"]) == -1) return;
@@ -2595,7 +2600,7 @@ void receive_message(string msg_class, string msg)
         return;
     }
     if (query_blocked(msg_class) && member_array(msg_class, OVERRIDE_IGNORE_MSG) == -1) { return; }
-    if (msg_class == "say" || msg_class == "whisper" || msg_class == "reply" || msg_class == "party" || msg_class == "honey" || msg_class == "tell")
+    if (msg_class == "say" || msg_class == "whisper" || msg_class == "reply" || msg_class == "party" || msg_class == "tell")
     {
         if(sscanf(msg,"%s:%s:%s",intro, pname, str) != 3 && msg_class == "tell")
         {
