@@ -106,7 +106,6 @@ int enchant_me(string str){
            tell_room(ETO,"Innara looks over "+TPQCN+"'s "+ob->query_name()+" and speaks some strange magical words.\n",TP);
            tell_object(TP,"Innara looks over your "+ob->query_name()+" and speaks some strange magical words.\n");
            enc +=1;
-           log_file("player/enchanter",""+capitalize(TP->query_true_name())+" enchanted "+ob->query_short()+" to +"+enc+" at "+ctime(time())+"\n");
            ob->set_property("enchantment",1);
            if((int)ob->query_property("enchantment") == enc) { // AKA if it didn't curse it!
                ob->set_property("manual enchantment",1);
