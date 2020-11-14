@@ -35,7 +35,7 @@ void create(){
   set_property("no random treasure", 1);
 
   // Due to numerous crashes caused by parrots
-  TO->remove();
+//  TO->remove();
 }
 
 void set_sayings(mapping s){
@@ -43,7 +43,7 @@ void set_sayings(mapping s){
 }
 
 void report(string str){
-//  "/daemon/reporter_d.c"->report("lujke", str);
+  "/d/atoyatl/reporter_d.c"->report("lujke", str);
 }
 
 mapping query_sayings(){
