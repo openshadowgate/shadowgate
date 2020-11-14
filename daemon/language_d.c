@@ -18,12 +18,15 @@
 
 inherit DAEMON;
 
-string seed;
+string seed  = "wxV7cxVQ/fdxBGHmWN/wF2IzJu9IdMP91g0IiZT4oYX4LbuFETwoztcJcTNCvDfXMtZcNAwaSxCPiFCb2TIe.";
 int shift = 0;
 
 set_seed(string ss)
 {
     shift = 0;
+    if (!ss) {
+        return;
+    }
     seed = crypt(ss,"$6$")[4..];
 }
 
