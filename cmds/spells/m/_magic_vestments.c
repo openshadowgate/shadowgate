@@ -80,10 +80,9 @@ spell_effect(int prof) {
     caster->remove_paralyzed();
     caster->force_me("wear vestments");
     spell_successful();
-    if(!FEATS_D->usable_feat(caster,"thick skinned caster"))
-    {
-        call_out("dest_effect",clevel*35);
-    }
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 6;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
      addSpellToCaster();
 }
 

@@ -1,6 +1,7 @@
 // Entangle
 #include <std.h>
 #include <daemons.h>
+#include <magic.h>
 
 inherit SPELL;
 
@@ -76,7 +77,9 @@ void spell_effect(int prof)
     }
     addSpellToCaster();
     spell_successful();
-    call_out("dest_effect", clevel);
+    spell_duration = (clevel / 15 + 1) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void execute_attack()

@@ -62,7 +62,9 @@ void spell_effect(int prof) {
     caster->add_damage_bonus(mybonus);
     caster->set_property("raged",1);
     addSpellToCaster();
-    call_out("dest_effect",clevel*10);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 2;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     call_out("rage",ROUND_LENGTH);
     caster->set_property("spelled", ({TO}) );
 

@@ -62,6 +62,8 @@ void spell_effect(int prof){
             duration = ROUND_LENGTH*clevel*6;
 
             caster->set_temporary_blinded(duration);
+            spell_duration = duration;
+            set_end_time();
             call_out("dest_effect",duration);
             caster->set_property("remote scrying",1);
             call_out("check_blindness",ROUND_LENGTH);
@@ -99,6 +101,6 @@ void dest_effect()
     if(objectp(TO)) TO->remove();
 }
 
-string querySpellDisplay(){
+string query_spell_display(){
    return "Witnessing: "+theName;
 }

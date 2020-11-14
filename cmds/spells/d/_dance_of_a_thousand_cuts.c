@@ -1,6 +1,6 @@
 // Top end melee bard buff. Note that it can and does stack with heroism and haste, so no longer replicates the same bonuses.
 // The idea of this spell is to boost them to parity with a fighter or similar pure-melee class.
-// /daemon/bonus_d picks up the spell property to give them fighter-parity BAB/attacks innately, so the spell itself only sets the 
+// /daemon/bonus_d picks up the spell property to give them fighter-parity BAB/attacks innately, so the spell itself only sets the
 // property and attaches the AC.
 #include <priest.h>
 inherit SPELL;
@@ -46,14 +46,16 @@ void spell_effect(int prof) {
     if(mybonus > 4) mybonus = 4;
     caster->add_ac_bonus(mybonus);
     caster->set_property("dance-of-cuts",1);
-    call_out("dest_effect", 1200 + (clevel * 10));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH + 1200;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
     addSpellToCaster();
 }
 
 void dest_effect(){
     int i;
-    
+
     if(objectp(caster)) {
       tell_object(caster,"%^MAGENTA%^Your graceful movements lose their precision and return to normal.%^RESET%^");
       tell_room(environment(caster),"%^CYAN%^"+caster->QCN+"'s smooth, flawless motions seem to return to normal again.%^RESET%^",caster);

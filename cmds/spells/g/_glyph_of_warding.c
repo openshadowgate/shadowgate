@@ -101,11 +101,12 @@ void spell_effect(int prof) {
       glyph->add_mini_me(mini_me);
       mini_me->move(room);
    }
-   duration = 9 * (int)CLEVEL;
    glyph->set_myroom(place);
    addSpellToCaster();
    caster->set_property("glyphed",TO);
-   call_out("dest_effect", duration);
+   spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+   set_end_time();
+   call_out("dest_effect",spell_duration);
    return;
 }
 

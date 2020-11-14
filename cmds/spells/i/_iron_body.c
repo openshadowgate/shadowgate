@@ -77,7 +77,9 @@ void spell_effect(int prof) {
     caster->set_property("poison immunity",1);
     addSpellToCaster();
     spell_successful();
-    call_out("dest_effect", (clevel+roll_dice(1,20)) * ROUND_LENGTH * 10);
+    spell_duration = (clevel+roll_dice(1,20)) * ROUND_LENGTH * 8;
+    set_end_time();
+    call_out("dest_effect", spell_duration);
 }
 
 void dest_effect() {

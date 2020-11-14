@@ -91,8 +91,9 @@ void spell_effect(int prof)
 
     caster->set_property("added short",({ashort}));
 
-    call_out("dest_effect",ROUND_LENGTH * ( clevel + 10 ) * 10);
-
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 7;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

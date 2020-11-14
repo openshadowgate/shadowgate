@@ -78,12 +78,9 @@ void spell_effect(int prof) {
     addSpellToCaster();
     call_out("test",2);
     mylevel = clevel;
-    if(FEATS_D->usable_feat(TO,"slippery caster")) {
-    call_out("dest_effect",(mylevel * 5 * ROUND_LENGTH * 1.33));
-    return;
-    }else{
-    call_out("dest_effect",(mylevel * 5 * ROUND_LENGTH)); }
-    return;
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 5;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void test(){

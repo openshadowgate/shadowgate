@@ -98,7 +98,9 @@ void spell_effect(int prof) {
     send_ob->set_teller(CASTER);
     send_ob->move(CASTER);
     CASTER->set_property("spelled",({TO}));
-    call_out("dest_effect",60);
+    spell_duration = 60;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

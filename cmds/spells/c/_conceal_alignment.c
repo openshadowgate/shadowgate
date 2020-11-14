@@ -83,7 +83,6 @@ void spell_effect(int prof){
     tell_object(caster,"%^BOLD%^%^CYAN%^Your alignment will "+
        "been seen as "+arg+" for a time.");
     caster->set_property("hidden alignment",newal);
-    call_out("dest_effect", 1800 + (clevel * 10));
     spell_successful();
     addSpellToCaster();
 }

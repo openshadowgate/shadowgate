@@ -41,7 +41,9 @@ void spell_effect(int prof) {
     thebonus = clevel / 3;
     target->add_attack_bonus(thebonus);
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*(clevel/12+1));
+    spell_duration = (clevel / 10 + 1) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

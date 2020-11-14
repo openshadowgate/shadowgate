@@ -146,7 +146,9 @@ void spell_effect(int prof) {
     remote->move(caster);
     remote->move_is_ok(0);
     if (duration) {
-        call_out("dest_effect", duration);
+        spell_duration = duration;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     }
 }
 

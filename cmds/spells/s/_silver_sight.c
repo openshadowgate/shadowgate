@@ -5,6 +5,7 @@
 //Rebalancing domains ~Circe~ 5/10/08
 // duration on all scrying spells (and between-cast delays where relevant) rebalanced. Nienne, 5/15.
 #include <std.h>
+#include <magic.h>
 
 inherit SPELL;
 
@@ -86,7 +87,9 @@ void spell_effect(int prof){
       motes->set_scry_power(power);
       motes->move(place);
       theName = place->query_short();
-      call_out("dest_effect",60+(clevel*10));
+      spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+      set_end_time();
+      call_out("dest_effect",spell_duration);
       caster->set_property("remote scrying",1);
       addSpellToCaster();
       return;
@@ -123,7 +126,9 @@ void spell_effect(int prof){
          motes->set_scry_power(power);
          motes->move(environment(ob));
          theName = ob->query_short();
-         call_out("dest_effect",60+(clevel*10));
+         spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+         set_end_time();
+         call_out("dest_effect",spell_duration);
          caster->set_property("remote scrying",1);
          addSpellToCaster();
          return;
@@ -144,6 +149,6 @@ void dest_effect(){
     if(objectp(TO)) TO->remove();
 }
 
-string querySpellDisplay(){
+string query_spell_display(){
    return "Silver Sight: "+theName;
 }

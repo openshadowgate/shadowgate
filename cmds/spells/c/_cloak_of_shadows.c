@@ -102,7 +102,9 @@ void targ_vanish()
       caster->set_property("spelled",({TO}));
       caster->set_property("cloak_of_shadows",1);
       duration = 9 * (int)CLEVEL;
-      call_out("dest_effect", duration);
+      spell_duration = duration;
+      set_end_time();
+      call_out("dest_effect",spell_duration);
       return;
     }
     tell_object(caster,"Something has gone wrong! Please contact a wiz!");

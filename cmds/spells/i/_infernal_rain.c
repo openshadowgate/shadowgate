@@ -27,7 +27,7 @@ void create(){
     set_feats_required(([ "warlock" : "infernal practitioner"]));
 }
 
-string query_cast_string(){ 
+string query_cast_string(){
    tell_object(caster,"%^RED%^You extend your power outwards, seeking weaknesses between the planes.%^RESET%^");
    tell_room(place,"%^RED%^"+caster->QCN+" falls into a state of momentary concentration.%^RESET%^",caster);
    return "display";
@@ -40,8 +40,10 @@ void spell_effect(int prof){
     PLACE->set_property("spelled", ({TO}));
     storm_room = PLACE;
     addSpellToCaster();
-    spell_successful();    
-    call_out("dest_effect",duration);
+    spell_successful();
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void execute_attack(){
@@ -61,7 +63,7 @@ void execute_attack(){
    }
    attackers = CASTER->query_attackers();
    attackers = filter_array(attackers,"is_non_immortal",FILTERS_D);
-   
+
    if(sizeof(attackers))
    {
       tell_room(storm_room,"%^BOLD%^%^BLACK%^Searing h%^BOLD%^%^RED%^e%^BOLD%^%^BLACK%^llfire tears through reality and lashes the area!%^RESET%^");
@@ -77,7 +79,7 @@ void execute_attack(){
    {
        dest_effect();
        return;
-   }   
+   }
 }
 
 int storm_effects(object obj){
@@ -94,7 +96,7 @@ int storm_effects(object obj){
    if(do_save(obj,0)){
       if(!evade_splash(obj)) {
         tell_object(obj,"%^RED%^You scramble clear of the worst of the baleful firestorm!%^RESET%^");
-        tell_room(room,"%^RED%^"+obj->QCN+" scrambles clear of the worst of the baleful firestorm!%^RESET%^",obj);        
+        tell_room(room,"%^RED%^"+obj->QCN+" scrambles clear of the worst of the baleful firestorm!%^RESET%^",obj);
         damage_targ(obj,obj->return_target_limb(),damage/2,"untyped"); // all damage is hellfire, and thus untyped. N, 4/17.
       }
    }else{

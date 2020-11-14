@@ -62,8 +62,11 @@ void spell_effect(int prof)
 
         }
     }
-    if(sizeof(victims))
-        call_out("dest_effect",duration*ROUND_LENGTH);
+    if(sizeof(victims)){
+        spell_duration = duration * ROUND_LENGTH;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
+    }
 }
 
 void dest_effect()

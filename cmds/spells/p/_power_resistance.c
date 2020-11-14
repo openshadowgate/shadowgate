@@ -1,4 +1,5 @@
 #include <std.h>
+#include <magic.h>
 inherit SPELL;
 
 int lower;
@@ -63,7 +64,9 @@ void spell_effect(int prof) {
     target->set_property("raised spell damage resistance",1);
     addSpellToCaster();
     spell_successful();
-    call_out("dest_effect",80 + clevel*8,lower);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 2;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect(){

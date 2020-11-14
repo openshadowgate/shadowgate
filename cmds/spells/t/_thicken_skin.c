@@ -1,5 +1,6 @@
 #include <spell.h>
 #include <daemons.h>
+#include <magic.h>
 inherit SPELL;
 
 void dest_effect();
@@ -50,7 +51,9 @@ void spell_effect(int prof) {
     target->set_property("add_armor",1);
     addSpellToCaster();
     call_out("test", 7);
-    call_out("dest_effect", 1800 + (clevel * 10));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH + 1800;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void test(){

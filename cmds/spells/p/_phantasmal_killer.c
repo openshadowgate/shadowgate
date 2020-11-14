@@ -90,7 +90,9 @@ void spell_effect(int prof){
    ob->add_id(caster->query_name()+"monster");
    caster->set_property("phantasmal_killer",ob);
    spell_kill(target,caster);
-   call_out("dest_effect",clevel*ROUND_LENGTH);
+   spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+   set_end_time();
+   call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

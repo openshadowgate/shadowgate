@@ -127,7 +127,9 @@ void spell_effect(int prof)
     CASTER->set_property("allowed tell",casterallowed);
     CASTER->set_property("spelled", ({TO}) );
     who->set_property("allowed tell",targallowed);
-    call_out("dest_effect",clevel*10);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 4;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

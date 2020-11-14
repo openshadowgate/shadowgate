@@ -1,8 +1,8 @@
 /*
   _ego_whip.c
-  
+
   Does 1d4 damage to mental stats
-  
+
   -- Tlaloc -- 4.3.20
 */
 
@@ -18,7 +18,7 @@ int amount;
 void create()
 {
     ::create();
-    
+
     set_author("tlaloc");
     set_spell_name("ego whip");
     set_spell_level( ([ "psion" : 2 ]) );
@@ -37,7 +37,7 @@ int preSpell()
       tell_object(caster,"Your target is already affected by this effect!");
       return 0;
    }
-   
+
    return 1;
 }
 
@@ -51,21 +51,21 @@ void spell_effect(int prof)
 {
     string myname, yourname;
     int mylevel;
-    
+
     myname = caster->QCN;
-  
+
     tell_object(caster, "%^CYAN%^BOLD%^You lash out at " + target->QCN + ", assaulting " + target->query_possessive() + " ego!");
     tell_object(target, "%^BOLD%^" + " lashes out at you, assaulting your ego!");
     say("%^BOLD%^" + sprintf("%s lashes out at %s with a mental assault!", caster->QCN, target->QCN), ({ caster, target }));
 
     amount = roll_dice(1, 8);
-    
+
     target->set_property("idiocied", 1);
     target->ser_stat_bonus(-amount);
-    
+
     if(!do_save(target, 0))
         target->set_paralyzed(3, "%^BOLD%^You are dazed by the mental attack!");
-    
+
     call_out("dest_effect", 3);
     spell_successful();
 }
@@ -75,7 +75,7 @@ void dest_effect()
     tell_object(caster, "%^MAGENTA%^BOLD%^The shadows subsuming your body seem to dissapate.");
     target->remove_property("idiocied");
     target->set_stat_bonus("charisma", amount);
-    
+
     ::dest_effect();
     if(objectp(this_object()))
         this_object()->remove();

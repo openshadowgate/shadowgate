@@ -40,10 +40,9 @@ void spell_effect(int prof) {
     caster->set_detecting_magic(1);
     spell_successful();
     addSpellToCaster();
-    if (prof < random(100)) {
-        dest_effect();
-    } else
-    call_out("dest_effect",clevel*2*ROUND_LENGTH);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 4;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

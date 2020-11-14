@@ -124,7 +124,9 @@ void spell_effect(int prof) {
     if(avatarp(caster)) duration = 400;
     addSpellToCaster();
     caster->set_property("remote scrying",1);
-    call_out("dest_effect", duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

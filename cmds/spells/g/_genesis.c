@@ -59,7 +59,9 @@ void spell_effect(int prof)
     tell_room(place, "%^BOLD%^%^BLUE%^The gem seems to grow, opening into "+
        "a small portal before it stops spinning!");
     addSpellToCaster();
-    call_out("dest_effect", (ROUND_LENGTH * 20 * mylevel * prof)/100);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 10;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

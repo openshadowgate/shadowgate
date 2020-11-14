@@ -61,7 +61,9 @@ void spell_effect(int prof) {
     target->set_property("spelled", ({TO}) );
     target->set_property("sands of time",1);
     addSpellToCaster();
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 }
 

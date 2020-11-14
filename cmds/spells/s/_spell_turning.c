@@ -56,7 +56,9 @@ void spell_effect(int prof)
     }
     bonus = clevel / 6 + 5;
     caster->set_property("spellturning", bonus);
-    call_out("dest_effect", 1800 + (ROUND_LENGTH * (clevel * 3 + roll_dice(1, 20))));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 5 + 1800;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
     addSpellToCaster();
 }

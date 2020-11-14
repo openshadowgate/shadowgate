@@ -3,6 +3,7 @@
 //been dispelled/destroyed.  12/9/04 -Tsera
 // moved monster files to /d/magic/mon central location Ares/Styx 1/29/05
 #include <std.h>
+#include <magic.h>
 inherit SPELL;
 
 object *mons = ({});
@@ -143,8 +144,9 @@ void spell_effect(int prof) {
         break;
     }
     addSpellToCaster();
-	//if(objectp(find_player("saide"))) tell_object(find_player("saide"), "caster = "+caster->query_name() + ", clevel = "+clevel + ", call out in "+(clevel*(prof/25)));
-    call_out("dest_effect",clevel*(prof/25));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

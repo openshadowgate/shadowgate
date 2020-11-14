@@ -58,7 +58,9 @@ void spell_effect()
     caster->set_property("call_to_mind", 1);
     addSpellToCaster();
 
-    call_out("dest_effect", ROUND_LENGTH * clevel * 2);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 2;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

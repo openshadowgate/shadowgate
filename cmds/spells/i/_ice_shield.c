@@ -57,7 +57,9 @@ void spell_effect(int prof){
     caster->add_property("added short",({"%^BOLD%^%^CYAN%^ (enfolded in frost)"}));
     addSpellToCaster();
     spell_successful();
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void execute_attack(){

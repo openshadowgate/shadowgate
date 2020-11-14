@@ -51,7 +51,9 @@ void spell_effect(int prof)
     caster->add_saving_bonus("all",4);
     caster->add_ac_bonus(4);
     execute_attack();
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     call_out("room_check",ROUND_LENGTH);
 }
 

@@ -75,7 +75,9 @@ void spell_effect(int prof) {
         target->set_unconscious(roll_dice(1,6),"You're unconscious!");
     }
     addSpellToCaster();
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 }
 

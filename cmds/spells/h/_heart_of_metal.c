@@ -73,7 +73,9 @@ void spell_effect(int prof)
         caster->set_property("spelled", ({TO}) );
         addSpellToCaster();
         mylevel = clevel;
-        call_out("dest_effect", (mylevel * 2 * ROUND_LENGTH));
+        spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 2;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
         break;
 
     case "cold iron":
@@ -91,7 +93,9 @@ void spell_effect(int prof)
         caster->set_property("spelled", ({TO}) );
         addSpellToCaster();
         mylevel = clevel;
-        call_out("dest_effect", (mylevel * 2 * ROUND_LENGTH));
+        spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 2;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
         break;
     }
 }

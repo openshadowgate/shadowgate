@@ -43,7 +43,9 @@ void spell_effect()
     tell_room(place,"%^GREEN%^%^BOLD%^"+caster->QCN+" extends "+caster->QP+" hand and a ray of green sprays out of it, covering "+target->QCN+" in a green emerald field.%^RESET%^",({caster,target}));
     target->set_property("teleport proof",clevel);
 
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 }
 

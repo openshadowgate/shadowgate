@@ -47,7 +47,9 @@ void spell_effect(int prof) {
     where->set_property("spelled", ({TO}) );
     duration = (amount * 30);
     spell_successful();
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     addSpellToCaster();
 }
 

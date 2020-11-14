@@ -45,7 +45,9 @@ void spell_effect(int prof) {
     spell_successful();
     addSpellToCaster();
     caster->set_property("spelled", ({TO}) );
-    call_out("dest_effect", clevel * ROUND_LENGTH * 5); // darkvision is *20, det invis is no multiplier; we'll go for somewhere in the middle at *5.
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 4;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

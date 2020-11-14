@@ -54,7 +54,9 @@ void spell_effect(int prof){
 		return;
 	}
 	place = environment(caster);
-	call_out("dest_effect",4*ROUND_LENGTH*(int)CLEVEL);
+        spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 4;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     make_sword();
 }
 

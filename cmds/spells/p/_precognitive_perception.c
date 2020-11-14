@@ -50,7 +50,9 @@ spell_effect()
     target->set_property("spelled", ({TO}) );
     target->set_property("precognitive perception",1);
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*(clevel/8+1));
+    spell_duration = (clevel / 10+ roll_dice(1, 6)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

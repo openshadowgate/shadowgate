@@ -53,7 +53,9 @@ void spell_effect(int prof)
         "much more aware of the health of your allies.");
     caster->set_property("death watch",1);
     addSpellToCaster();
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 }
 
@@ -72,15 +74,15 @@ void execute_attack()
     int hp,max_hp,high_percent,low_percent,i;
 
     ::execute_attack();
-    if(!objectp(caster)){ 
+    if(!objectp(caster)){
         dest_effect();
-        return;     
+        return;
     }
 
     room  = environment(caster);
     party_members = ob_party(caster);
     party_members -= ({caster});
-    
+
     if(!sizeof(party_members))
     {
         room->addObjectToCombatCycle(TO,1);
@@ -105,7 +107,7 @@ void execute_attack()
             continue;
         }
     }
-    
+
     room->addObjectToCombatCycle(TO,1);
     return;
 }

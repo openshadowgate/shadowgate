@@ -83,7 +83,9 @@ void spell_effect(int prof)
         addSpellToCaster();
         spell_successful();
         marked = target;
-        call_out("dest_effect", duration);
+        spell_duration = duration;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
         return;
     }else {
         tell_object(caster, "%^CYAN%^You close your eyes and attempt " +

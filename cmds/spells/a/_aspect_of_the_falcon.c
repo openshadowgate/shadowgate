@@ -59,7 +59,9 @@ void spell_effect()
     caster->set_property("aspect_of_the_falcon", 1);
     addSpellToCaster();
 
-    call_out("dest_effect",MINUTE * clevel);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

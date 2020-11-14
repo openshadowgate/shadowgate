@@ -40,7 +40,9 @@ void spell_effect(int prof) {
     caster->set_property("spider climb",1);
     caster->set_property("no web",1);
     active = 1;
-    call_out("dest_effect", 900 + (clevel * 10));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
     addSpellToCaster();
 }

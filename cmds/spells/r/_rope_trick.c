@@ -84,7 +84,9 @@ void spell_effect(int prof) {
     rope->start_magic(place, prof, roomName);
     tell_room(place, "The rope leaps up and stands straight in mid-air!");
     addSpellToCaster();
-    call_out("dest_effect", (ROUND_LENGTH * 20 * clevel * prof)/100);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 12;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

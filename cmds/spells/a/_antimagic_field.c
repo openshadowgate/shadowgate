@@ -48,7 +48,9 @@ void spell_effect()
     caster->set_property("antimagic field", place);
     addSpellToCaster();
 
-    call_out("dest_effect", (clevel / 6 + 1) * ROUND_LENGTH);
+    spell_duration = (clevel / 5 + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 
     call_out("notify_effect", ROUND_LENGTH * 2);
 }

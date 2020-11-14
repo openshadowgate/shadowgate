@@ -11,7 +11,7 @@ object *immortals;
 string line_name;
 
 
-void create() 
+void create()
 {
     ::create();
     set_author("ares");
@@ -37,7 +37,7 @@ void create()
 }
 
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^MAGENTA%^%^Touching your fingertips to "+
         "your temples, you lean your head back as you focus.");
@@ -51,52 +51,52 @@ int preSpell()
 {
     object *net,*linked,mindnet;
     string *ignored;
-    
+
     if(!arg)
     {
         dest_effect();
         return;
     }
-    
+
     target = find_player(caster->realName(lower_case(arg)));
-    
+
     if(!objectp(target))
     {
         tell_object(caster,"You can't make a connection with anyone named "+capitalize(arg)+".");
         return 0;
     }
-    
+
     if(target->query_true_invis())
     {
         tell_object(caster,"You can't reach anyone named "+capitalize(arg)+".");
         return 0;
     }
-    
-    if(target->query_ghost()) 
+
+    if(target->query_ghost())
     {
         tell_object(caster, "You can't reach anyone named "+capitalize(arg)+
         ".");
         return 0;
     }
-    
+
     ignored = target->query_ignored();
-    if (!ignored) 
+    if (!ignored)
     {
         target->reset_ignored();
         ignored = target->query_ignored();
-        if((member_array(caster->query_name(),ignored) != -1)) 
+        if((member_array(caster->query_name(),ignored) != -1))
         {
             tell_object(caster,""+capitalize(arg)+" is ignoring you.\n");
             return 0;
         }
     }
-    
+
     if(target == caster)
     {
         tell_object(caster,"You can't target yourself!");
         return 0;
     }
-    
+
     if(target->query_property("mindnet"))
     {
         net = (object *)target->query_property("mindnet");
@@ -106,7 +106,7 @@ int preSpell()
             return 0;
         }
     }
-    
+
     if(target->query_property("shapeshifted"))
     {
         if(!FEATS_D->usable_feat(target,"wild speech"))
@@ -114,12 +114,12 @@ int preSpell()
             tell_object(caster,"%^BOLD%^That target doesn't appear to be able to communicate with you.");
             return 0;
         }
-    }  
+    }
 
     mindnet = (object)caster->query_property("mindnetobj");
     if(objectp(mindnet)) { linked = mindnet->query_linked(); }
     else { linked = ({}); }
-    
+
     if(member_array(target,linked) != -1)
     {
         tell_object(caster,"%^BOLD%^That target is alread in your mindnet.");
@@ -138,7 +138,7 @@ int immortal_filter(object obj)
 }
 
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     object mindnet,*linked;
     int duration,i;
@@ -202,6 +202,9 @@ void spell_effect(int prof)
             "%^B_RED%^%^BOLD%^%^WHITE%^Please note that this is an IC line that represents a telepathy "
             "spell between multiple people.  Please RP accordingly.");
         call_out("dest_effect",duration);
+        spell_duration = duration;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     }
     else
     {
@@ -227,19 +230,19 @@ void spell_effect(int prof)
 }
 
 
-void dest_effect() 
+void dest_effect()
 {
     object mindnet,*linked;
     int i;
 
     mindnet   = (object)caster->query_property("mindnetobj");
-    
-    if(!objectp(mindnet)) 
+
+    if(!objectp(mindnet))
     {
         ::dest_effect();
         if(objectp(TO)) TO->remove();
     }
-    
+
     linked    = mindnet->query_linked();
     line_name = mindnet->query_line_name();
 
@@ -262,7 +265,7 @@ void dest_effect()
         tell_object(caster,"You can no longer use the "+line_name+" line.");
         caster->remove_property_value("mindnet",({caster}));
     }
-    
+
     if(sizeof(immortals))
     {
         for(i=0;i<sizeof(immortals);i++)
@@ -274,7 +277,7 @@ void dest_effect()
             immortals[i]->restrict_channel(line_name);
         }
     }
-    
+
     if(objectp(mindnet)) mindnet->remove();
     ::dest_effect();
     if(objectp(TO)) TO->remove();

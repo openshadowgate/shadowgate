@@ -82,7 +82,9 @@ void spell_effect(int prof) {
     target->add_attack_bonus(bonus);
     target->set_property("spelled",({TO}));
     target->set_property("blessed",1);
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     if(prof != -100) addSpellToCaster();
     spell_successful();
 }

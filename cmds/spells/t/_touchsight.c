@@ -44,7 +44,9 @@ spell_effect(int prof) {
     caster->add_sight_bonus(3);
     caster->set_property("spelled", ({TO}) );
     addSpellToCaster();
-    call_out("dest_effect", clevel * (ROUND_LENGTH *2 + 1));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 
