@@ -8,7 +8,7 @@ mapping sayings;
 int cloned;
 string owner;
 
-void create(){
+void create(){ //This is a TEST
    ::create();
    cloned = -1;
    set_lore("The parrots of the Tecqumin jungle are known for their curious"
@@ -136,13 +136,14 @@ int move(object dest){
 }
 
 void report(string str){
-  "/daemon/reporter_d.c"->report("lujke", str);
+  "/d/atoyatl/reporter_d.c"->report("lujke", str);
 }
 
 int hear(string str){
   mixed * details;
   int num, sentences, i, j, n;
-  string language, speech, describe, sentence1, sentence2, sentence3, sentence4, sentence5, sentence6, saylias, saylias1, saylias2;
+  string language, speech, describe, sentence1, sentence2, sentence3, sentence4, sentence5, sentence6, saylias, saylias1,
+saylias2;
   string * ks, * ls;
   mapping als;
   
