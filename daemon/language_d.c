@@ -30,7 +30,7 @@ set_seed(string ss)
     seed = crypt(ss,"$6$")[4..];
 }
 
-int random(int x)
+int random_(int x)
 {
     int res;
 
