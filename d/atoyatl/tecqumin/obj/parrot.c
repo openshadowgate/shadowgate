@@ -8,7 +8,7 @@ mapping sayings;
 int cloned;
 string owner;
 
-void create(){
+void create(){ //This is a TEST
    ::create();
    cloned = -1;
    set_lore("The parrots of the Tecqumin jungle are known for their curious"
