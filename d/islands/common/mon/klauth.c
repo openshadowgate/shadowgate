@@ -547,7 +547,7 @@ void die(object obj)
         killers += ({ ppl[i] });
     }
 
-    log_file("klauth", "Klauth was killed by: " + identify(killers) + "\n");
+    log_file("player/klauth", "Klauth was killed by: " + identify(killers) + "\n");
 
     tell_room(ETO, "\n%^BOLD%^%^RED%^A thrilling sense of accomplishment runs through you as you realise "
               "the great red wyrm Klauth has fallen to your hand!%^RESET%^\n");
