@@ -132,10 +132,28 @@ int __interactive(object fnord){
   return 0;
 }
 
-int is_player(object fnord) {
-  if (!objectp(fnord)) return 0;
-  if (fnord->is_player()) return 1;
-  return 0;
+int is_player(object fnord)
+{
+    if (!objectp(fnord)) {
+        return 0;
+    }
+    if (fnord->is_player()) {
+        return 1;
+    }
+    return 0;
+}
+
+int is_player_or_minion(object obj)
+{
+    if (!objectp(obj)) {
+        return 0;
+    }
+
+    if (is_player(obj) || objectp(obj->query_property("minion"))) {
+        return 1;
+    }
+
+    return 0;
 }
 
 int is_non_immortal(object fnord)

@@ -225,7 +225,7 @@ void reset()
     if (objectp(TO)) {
         ppl = all_living(TO);
         if (sizeof(ppl)) {
-            ppl = filter_array(ppl, "is_player", FILTERS_D);
+            ppl = filter_array(ppl, "is_player_or_minion", FILTERS_D);
         }
 
         if (!sizeof(ppl)) {
