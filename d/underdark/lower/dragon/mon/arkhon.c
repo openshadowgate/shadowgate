@@ -217,7 +217,6 @@ void heart_beat() {
         for(i=1;i<sizeof(fighterz);i++) printme += ", "+fighterz[i]->query_name();
       }
 //      tell_room(ETO,"%^BOLD%^%^BLUE%^Debugging: fighterz array to select "+printme+".");
-      log_file("player/arkhon", "Fight commenced at "+ctime(time())+" by "+printme+".\n");
     }
     if(active) {
       if(!sizeof(query_attackers()) && query_property("no paralyze")) {
@@ -294,7 +293,6 @@ void die(object ob){
      }
      treasures = find_object_or_load(ROOMS"treasurevault");
      if(objectp(treasures)) treasures->activate_loot();
-     log_file("player/arkhon", "Slain at "+ctime(time())+" by "+printme+".\n");
    }
    else tell_room(ETO,"%^YELLOW%^Error: notify Nienne of this message - ppl or rath variables not written!%^RESET%^");
    if(member_array("out",ETO->query_exits()) == -1) ETO->add_exit(ROOMS"treasurevault","out");
