@@ -1896,9 +1896,9 @@ void check_fizzle(object ob)
     }
 
     if (place->query_property("antimagic field")) {
-        if (place->query_property("antimagic field") > roll_dice(1, 6) + clevel) {
+        if (place->query_property("antimagic field") > clevel) {
             tell_object(caster, "%^CYAN%^Your " + whatsit + " fails to gather power in the anitmagic field.");
-            tell_room(place, "%^CYAN%^" + caster->QCN + "'s " + whatsit + " fizzles harmlessly.");
+            tell_room(place, "%^CYAN%^" + caster->QCN + "'s " + whatsit + " dissipates harmlessly.");
             caster->removeAdminBlock();
             TO->remove();
             return;
@@ -2129,7 +2129,7 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
 
     if (objectp(place)) {
         if (place->query_property("antimagic field")) {
-            if (place->query_property("antimagic field") > clevel + roll_dice(1, 6)) {
+            if (place->query_property("antimagic field") > clevel) {
                 tell_object(caster, "%^B_BLUE%^%^BOLD%^Your spell dissipates around " + victim->QCN + ".");
                 tell_room(place, "%^B_BLUE%^%^BOLD%^" + caster->QCN + "'s spell dissipates around " + victim->QCN + ".", caster);
                 TO->remove();
