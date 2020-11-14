@@ -304,7 +304,6 @@ int sac_act(string str)
     " BLOOD drips down, splashing all over the skeletal remains!%^RESET%^", TP);
 
     has_blood = 1;
-    call_out("devar_awakening", 15, TP);
     return 1;
 }
 void reset()
