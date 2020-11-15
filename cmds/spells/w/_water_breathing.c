@@ -41,7 +41,9 @@ void spell_effect(int prof) {
     tell_object(target, "%^BOLD%^%^CYAN%^"+caster->QCN+" gives you the power to breathe water.");
 
     breathob = new(WTROB);
-    breathob->set_maxtime(clevel * 2 * HOUR);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    breathob->set_maxtime(spell_duration);
     breathob->set_property("spell", TO);
     breathob->set_property("spelled", ({TO}));
     addSpellToCaster();
