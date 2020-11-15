@@ -1,9 +1,9 @@
 #include <std.h>
 #include <daemons.h>
 inherit WEAPONLESS;
-
-#define TRUST ({"elf","voadkyn","firbolg","gnome","wemic","half-elf","dwarf","human","half-orc","halfling"})
-#define DISTRUST ({"beastman","drow","half-drow","orc","goblin","hobgoblin","bugbear","ogre","half-ogre","gnoll","ogre-mage","kobold"})
+//not sure if this does anything -H 11/14/20
+#define TRUST ({"elf","voadkyn","firbolg","gnome","wemic","half-elf","dwarf","human","half-orc","halfling","dryad","saurian","squole","nymph","kitsune","wemic","deva"})
+#define DISTRUST ({"beastman","drow","half-drow","orc","goblin","hobgoblin","bugbear","ogre","half-ogre","gnoll","ogre-mage","kobold","ratkin","shade","troll","minotaur"})
 
 int step1;
 int step2;
