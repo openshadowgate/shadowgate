@@ -62,9 +62,7 @@ nosave mapping thief_skill_bonuses;
 string real_name, email, ip, last_on, password, cpath, original_site, real_last_on;
 int start_age, pheight, pweight;
 private string position, primary_start;
-//private nosave string *channels;
 string *restricted_channels;
-//Favored/Mastered Terrain
 string *favored_enemy = ({ "none", "none", "none" }),
        *favored_terrain = ({ "none", "none", "none" });
 string mastered_terrain;
@@ -74,12 +72,9 @@ string *mysites;
 string *guild, *shguild;
 string *message;
 mixed *current_marriage, *divorced;
-//nosave string net_died_here;
-//nosave mapping term_info;
-//nosave object died_here;
 object charmed;
-//nosave int watched; // anti-stab stuff
 int hm_quest;
+nosave string session_seed;
 
 int ageCat = 0;
 string body_type;
@@ -1255,6 +1250,9 @@ void setup()
     set_id(({ "player" }));
     fix_limbs();
     tsh::initialize();
+
+    session_seed = "/adm/daemon/pwgen"->random_salt(64);
+
     if (!primary_start) {
         primary_start = getenv("start");
     }
@@ -2065,67 +2063,95 @@ nomask void die()
     return;
 }
 
-void set_rname(string rname) {
-  if (geteuid(previous_object()) != UID_ROOT &&
-      geteuid(previous_object()) != UID_USERACCESS) return;
-  real_name = rname;
+void set_rname(string rname)
+{
+    if (geteuid(previous_object()) != UID_ROOT &&
+        geteuid(previous_object()) != UID_USERACCESS) {
+        return;
+    }
+    real_name = rname;
 }
 
-int is_player() {
-  return 1;
+int is_player()
+{
+    return 1;
 }
 
-int is_avatar() { return(avatarp(TO)); }
-
-string query_my_ip_name() {
-  return query_ip_name();
+int is_avatar()
+{
+    return (avatarp(TO));
 }
 
-string query_ip() {
-  if (!realmso(PO)) return ip;
-  return 0;
+string query_my_ip_name()
+{
+    return query_ip_name();
 }
 
-string query_email() {
-  if (email) return email;return "???@" + ip;
+string query_ip()
+{
+    if (!realmso(PO)) {
+        return ip;
+    }
+    return 0;
 }
 
-string query_rname() {
-  return real_name ? real_name : "???";
+string query_session_seed()
+{
+    return session_seed;
 }
 
-string query_password() {
-  return password;
+void set_session_seed(string ss)
+{
+    session_seed = ss;
 }
 
-void set_password(string pass) {
-  /*
-    if(geteuid(previous_object()) != UID_ROOT &&
-    file_name(previous_object()) != PASSWD_D) return 0;
-  */
-  password = pass;
-  save_player( query_name() );
+string query_email()
+{
+    if (email) {
+        return email;
+    }
+    return "???@" + ip;
 }
 
-void set_email(string e) {
-  if (geteuid(previous_object()) != UID_ROOT &&
-      geteuid(previous_object()) != UID_USERACCESS) return 0;
-  if (this_player(1) != this_player()) return 0;
-  email = e;
-  save_player( query_name() );
+string query_rname()
+{
+    return real_name ? real_name : "???";
 }
 
-string get_path() {
-  return cpath;
+string query_password()
+{
+    return password;
 }
 
-void set_path(string path) {
-  int foo;
+void set_password(string pass)
+{
+    password = pass;
+    save_player(query_name());
+}
 
-  if (geteuid(previous_object()) != geteuid(TO)) return;
-  foo = strlen(path) - 1;
-  if (path[foo] == '/') path = path[0..foo-1];
-  cpath = path;
+void set_email(string e)
+{
+    email = e;
+    save_player(query_name());
+}
+
+string get_path()
+{
+    return cpath;
+}
+
+void set_path(string path)
+{
+    int foo;
+
+    if (geteuid(previous_object()) != geteuid(TO)) {
+        return;
+    }
+    foo = strlen(path) - 1;
+    if (path[foo] == '/') {
+        path = path[0..foo - 1];
+    }
+    cpath = path;
 }
 
 void write_messages()
@@ -2536,43 +2562,45 @@ void receive_message(string msg_class, string msg)
 
         if(objectp(TP))
         {
-            words = explode(msg,"#@&");
-		    //safeguard to see if this fixes shutdown problem which uses emote to deliver the message that you quit - Saide
+            words = explode(msg, "#@&");
             ob = find_player(who);
-            if(objectp(ob)) the_lang = (string)ob->query_spoken();
-            else if(objectp(TP)) the_lang = (string)TP->query_spoken();
-		    else the_lang = "common";
+            if (objectp(ob)) {
+                the_lang = (string)ob->query_spoken();
+            }else if (objectp(TP)) {
+                the_lang = (string)TP->query_spoken();
+            }else {
+                the_lang = "common";
+            }
 
-            if(sizeof(words))
-            {
-                for(i=0;i<sizeof(words);i++)
-                {
-                    if(i%2 == 0)
-                    {
+            if (sizeof(words)) {
+                for (i = 0; i < sizeof(words); i++) {
+                    if (i % 2 == 0) {
                         tmp += words[i];
-                    }
-                    else
-                    {
-                        if(words[i] == "mumbles through the gag" && TO != TP)
-                        {
-                            tmp += "\""+words[i]+"\"";
-                        }
-                        else
-                        {
-                            if(member_array(the_lang,ANIMAL_LANGS) != -1)
-                            {
-                                if(objectp(ob)) temp = "daemon/language_d"->animal_translate(words[i],the_lang,ob);
-                                if(stringp(temp)) temp = "daemon/language_d"->animal_translate(temp,the_lang,TO);
-                                else temp = "daemon/language_d"->translate(words[i], the_lang, TO);
-                            }
-                            else
-                            {
-                                if(objectp(ob)) temp = "daemon/language_d"->translate(words[i], the_lang, TO);
-                                if(stringp(temp)) temp = "daemon/language_d"->animal_translate(temp,the_lang,TO);
-                                else temp = "daemon/language_d"->translate(words[i], the_lang, TO);
+                    }else {
+                        if (words[i] == "mumbles through the gag" && TO != TP) {
+                            tmp += "\"" + words[i] + "\"";
+                        }else {
+                            if (member_array(the_lang, ANIMAL_LANGS) != -1) {
+                                if (objectp(ob)) {
+                                    temp = "daemon/language_d"->animal_translate(words[i], the_lang, ob);
+                                }
+                                if (stringp(temp)) {
+                                    temp = "daemon/language_d"->animal_translate(temp, the_lang, TO);
+                                }else {
+                                    temp = "daemon/language_d"->translate(words[i], the_lang, TO);
+                                }
+                            }else {
+                                if (objectp(ob)) {
+                                    temp = "daemon/language_d"->translate(words[i], the_lang, TO);
+                                }
+                                if (stringp(temp)) {
+                                    temp = "daemon/language_d"->animal_translate(temp, the_lang, TO);
+                                }else {
+                                    temp = "daemon/language_d"->translate(words[i], the_lang, TO);
+                                }
                             }
 
-                            tmp += "\""+temp+"\"";
+                            tmp += "\"" + temp + "\"";
                         }
                     }
                 }
@@ -2583,7 +2611,9 @@ void receive_message(string msg_class, string msg)
         break;
     }
 
-    if(!stringp(str=getenv("SCREEN"))) { str = "75"; }
+    if (!stringp(str = getenv("SCREEN"))) {
+        str = "75";
+    }
     omsg = msg;
     x = atoi(str);
     //msg += "\nmsg_class = "+msg_class;
@@ -2612,49 +2642,57 @@ void receive_message(string msg_class, string msg)
         }
         else
         {
-            if(msg_class != "tell") sscanf(msg,"%s:%s",intro,str);
+            if (msg_class != "tell") {
+                sscanf(msg, "%s:%s", intro, str);
+            }
             ob = find_player(who);
-            if(!objectp(ob) && msg_class == "tell") the_lang = "wizish";
-            else if(objectp(ob)) the_lang = (string)ob->query_spoken();
-            else if(objectp(TP)) the_lang = (string)TP->query_spoken();
-            else the_lang = "common";
-            // tell_object(TO, "who = "+identify(who));
-            if(TO->query_property("understand_all_langs") || wizardp(TO)) { str = str; }
-            else if(objectp(ob) && ob->query_property("verstandnis")) { str = str; }
-            else
-            {
-                if(member_array(the_lang,ANIMAL_LANGS) == -1)
-                {
-                    if(objectp(ob) && !ob->query_property("verstandnis")) str = "/daemon/language_d"->translate(str, the_lang, ob);
-                    str = "/daemon/language_d"->translate(str, the_lang, TO);
-                    if(stringp(pname) && msg_class == "tell") msg = intro+":"+pname+": "+str+"\n";
-                    else msg = intro+":"+str+"\n";
-                }
-                else
-                {
-                    first_words = sizeof(explode(str," "));
-                    if(objectp(ob) && !TO->query_property("verstandnis")) str = "daemon/language_d"->animal_translate(str,the_lang,ob);
-                    str = "/daemon/language_d"->animal_translate(str, the_lang, TO);
-                    second_words = sizeof(explode(str," "));
+            if (!objectp(ob) && msg_class == "tell") {
+                the_lang = "wizish";
+            }else if (objectp(ob)) {
+                the_lang = (string)ob->query_spoken();
+            }else if (objectp(TP)) {
+                the_lang = (string)TP->query_spoken();
+            }else {
+                the_lang = "common";
+            }
 
-                    if(second_words >= first_words) // understood everything
-                    {
-                        if(stringp(pname) && msg_class == "tell") msg = intro+":"+pname+": ("+the_lang+") "+str+"\n";
-                        else msg = intro+": ("+the_lang+") "+str+"\n"; // exactly like normal language
+            if (TO->query_property("understand_all_langs") || the_lang == "wizish" || wizardp(TO)) {
+                str = str;
+            }else if (objectp(ob) && ob->query_property("verstandnis")) {
+                str = str;
+            }else {
+                if (member_array(the_lang, ANIMAL_LANGS) == -1) {
+                    if (objectp(ob) && !ob->query_property("verstandnis")) {
+                        str = "/daemon/language_d"->translate(str, the_lang, ob);
                     }
-                    else if(!second_words && TO != TP) // understood nothing
-                    {
-                        msg = "%^MAGENTA%^You think "+known+" was trying to communicate, but you couldn't understand.\n";
+                    str = "/daemon/language_d"->translate(str, the_lang, TO);
+                    if (stringp(pname) && msg_class == "tell") {
+                        msg = intro + ":" + pname + ": " + str + "\n";
+                    }else {
+                        msg = intro + ":" + str + "\n";
                     }
-                    else if(TO != TP)
-                    {
-                        msg = "%^MAGENTA%^You think "+known+" was trying to say ("+the_lang+"):%^RESET%^ "+str+"\n";
+                }else {
+                    first_words = sizeof(explode(str, " "));
+                    if (objectp(ob) && !TO->query_property("verstandnis")) {
+                        str = "daemon/language_d"->animal_translate(str, the_lang, ob);
                     }
-                } // animal languages are handled differently -Ares
+                    str = "/daemon/language_d"->animal_translate(str, the_lang, TO);
+                    second_words = sizeof(explode(str, " "));
+
+                    if (second_words >= first_words) {
+                        if (stringp(pname) && msg_class == "tell") {
+                            msg = intro + ":" + pname + ": (" + the_lang + ") " + str + "\n";
+                        }else {
+                            msg = intro + ": (" + the_lang + ") " + str + "\n";
+                        }
+                    }else if (!second_words && TO != TP) {
+                        msg = "%^MAGENTA%^You think " + known + " was trying to communicate, but you couldn't understand.\n";
+                    }else if (TO != TP) {
+                        msg = "%^MAGENTA%^You think " + known + " was trying to say (" + the_lang + "):%^RESET%^ " + str + "\n";
+                    }
+                }
             }
         }
-//Next three lines Added by Lujke to make it possible to make
-// players obey commands when drugged - also see obey_command func
         if (TO != ob && query_property("compliant")){
                 call_out("obey_command", 1, str, TP);
         }
@@ -2707,6 +2745,7 @@ void receive_message(string msg_class, string msg)
     }
     receive(true_msg+static_user["term_info"]["RESET"]);
 }
+
 //obey_command func is for making players obey commands when they have
 // the "compliant" property set. It's for simulating drugged or
 // hypnotised states. Lujke
@@ -5294,8 +5333,15 @@ string *query_favored_terrains() {
     return favored_terrain;
 }
 
-string set_mastered_terrain(string str) { mastered_terrain = str; return mastered_terrain; }
-string query_mastered_terrain() { return mastered_terrain; }
+string set_mastered_terrain(string str)
+{
+    mastered_terrain = str; return mastered_terrain;
+}
+
+string query_mastered_terrain()
+{
+    return mastered_terrain;
+}
 
 int is_favored_enemy(object ob)
 {
