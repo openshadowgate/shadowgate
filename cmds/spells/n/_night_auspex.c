@@ -56,7 +56,7 @@ void dest_effect()
 {
     if (objectp(caster)) {
         tell_object(caster, "%^BOLD%^%^BLACK%^Your vision is suddenly hazy as your eyes return to normal.%^RESET%^");
-        tell_room(environment(caster), "%^BOLD%^%^BLACK%^" + caster->QCN "'s eyes glaze over for a brief instant before returning to normal.%^RESET%^", caster);
+        tell_room(environment(caster), "%^BOLD%^%^BLACK%^" + caster->QCN + "'s eyes glaze over for a brief instant before returning to normal.%^RESET%^", caster);
         caster->set_true_seeing(0);
         caster->remove_property_value("spelled", ({ TO }));
         remove_call_out("flip");
