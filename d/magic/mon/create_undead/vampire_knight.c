@@ -7,7 +7,7 @@ void create(){
 
     ::create();
     set_name("vampire");
-    set_id(({"vampire knight","vampire","undead","Vampire knight"}));
+    set_id(({"vampire knight","vampire","undead","Vampire knight", "knight"}));
     set_short("%^RESET%^%^RED%^Vampire %^BOLD%^%^BLACK%^knight%^RESET%^");
     set_long("%^RED%^Before you floats a powerful humanoid figure encased into heavy armour, wielding a huge two-handed sword. It's skin is gray, ears are bat like and eyes glow with undead red hatred towards all living. Despite being in heavy armor it floats above the ground with ease and moves with supernatural agility.");
     set_race("human");
@@ -41,8 +41,9 @@ void create(){
     set_spells(({"cause blindness",
                     "dispel magic",
                     "orders oath",
+                    "vapiric touch",
                     "call lightning"}));
-    set_spell_chance(25);
+    set_spell_chance(15);
 
     set_alignment(3);
 
@@ -51,15 +52,18 @@ void create(){
 
         stuff = new("/d/common/obj/weapon/bastard_two");
         stuff->set_property("monsterweapon", 1);
+        stuff->set_short("%^BOLD%^%^RED%^Two handed sword.");
         stuff->move(TO);
         weapon = stuff;
-        command("wield halberd");
+        command("wield sword");
         stuff = new("/d/common/obj/armour/plate");
         stuff->set_property("monsterweapon", 1);
+        stuff->set_short("%^BOLD%^%^BLACK%^Black plate.");
         stuff->move(TO);
         command("wear plate");
         stuff = new("/d/common/obj/armour/greaves");
         stuff->set_property("monsterweapon", 1);
+        stuff->set_short("%^BOLD%^%^BLACK%^Black greaves.");
         stuff->move(TO);
         command("wear greaves");
     }
@@ -71,10 +75,29 @@ void create(){
                 "strength of arm",
                     "blade block",
                     "light weapon",
-                    "rush",
+                    "sweepingblow",
+                    "weapon focus",
                     }));
 
     set_fighter_style("soldier");
+
+    set_property("flying", 1);
     command("message in floats in.");
     command("message out floats $D.");
+}
+
+heart_beat()
+{
+    ::heart_beat();
+
+    if (!sizeof(query_attackers()) && query_hp() < query_max_hp() * 4 / 5) {
+        add_hp(roll_dice(1, 12));
+    }
+}
+
+void die(object obj)
+{
+    tell_room(ETO, "%^BOLD%^%^RED%^Vampire knight turns into dust.");
+    TO->remove();
+    return;
 }

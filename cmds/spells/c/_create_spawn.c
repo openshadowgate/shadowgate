@@ -40,6 +40,13 @@ void setup_undead_scaling(object undead)
 {
     undead->set_guild_level("fighter", clevel);
     undead->set_mlevel("fighter", clevel);
+    if (caster->is_class("vampire_lord")) {
+        undead->set_guild_level("mage", clevel);
+        undead->set_mlevel("mage", clevel);
+        undead->set_weap_enchant(clevel / 10);
+        tell_object(caster,"%^BOLD%^%^RED%^Vampire knight speaks to your mind: %^RESET%^%^RED%^I am yours to command, Master.");
+    }
+
     undead->set_skill("perception", clevel);
     undead->set_level(clevel);
     undead->set_hd(clevel, 8);
