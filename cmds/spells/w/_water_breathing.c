@@ -44,6 +44,7 @@ void spell_effect(int prof) {
     breathob = new(WTROB);
     spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
     set_end_time();
+    breathob->set_maxtime(spell_duration);
     breathob->set_property("spell", TO);
     breathob->set_property("spelled", ({TO}));
     addSpellToCaster();

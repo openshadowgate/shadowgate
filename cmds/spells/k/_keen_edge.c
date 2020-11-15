@@ -1,4 +1,5 @@
 #include <std.h>
+#include <magic.h>
 inherit SPELL;
 
 int trackera, trackerb;
