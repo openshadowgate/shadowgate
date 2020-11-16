@@ -115,7 +115,7 @@ void execute_feat()
         return;
     }
 
-    if(!(int)caster->spend_ki(4))
+    if(!(int)caster->spend_ki(8))
     {
         tell_object(caster, "%^BOLD%^%^CYAN%^Your empty body attempt fails, you lack the needed ki.%^RESET%^");
         dest_effect();
