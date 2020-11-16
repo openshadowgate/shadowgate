@@ -12,9 +12,9 @@ void create()
     feat_category("DivineBond");
     feat_name("armor bond");
     feat_classes("paladin");
-    feat_desc("The paladin can expend a point from the grace pool to grant enhancement bonuses or properties to a worn body armor. The paladin has the following properties available: fortification (light, moderate, heavy), energy resistance and improved energy resistance.
-The enhancement bonus is 1 at 5th and one additional point for every 6 additional levels
+    feat_desc("The paladin can expend a point from the grace pool to grant enhancement bonuses or properties to a worn body armor. The paladin has the following properties available: fortification (light, moderate, heavy), energy resistance and improved energy resistance. The enhancement bonus is 1 at 5th and one additional point for every 6 additional levels.
 
+%^BOLD%^N.B.%^RESET%^ This is a divine feat, use <feats divinebond armor bond> to gain the feat.
 See also : enhance, enhancements");
     permanent(1);
 }

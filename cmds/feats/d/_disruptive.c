@@ -10,7 +10,9 @@ void create()
     feat_category("MagicResistance");
     feat_name("disruptive");
     feat_prereq("Fighter L6");
-    feat_desc("By warding yourself, this feat increases your chance to avoid negative spell effects, granting you +4 to all your saving throws against spells.");
+    feat_desc("By warding yourself, this feat increases your chance to avoid negative spell effects, granting you +4 to all your saving throws against spells.
+
+%^BOLD%^N.B.%^RESET%^ Magus can select disruptive as one of his arcana feats from level 6.");
     permanent(1);
     allow_blind(1);
 }
