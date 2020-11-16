@@ -3,7 +3,7 @@
 
 inherit FEAT;
 
-void create()
+void create()a
 {
     ::create();
     feat_type("permanent");
