@@ -762,7 +762,7 @@ int cmd_feats(string str)
                     "normal before you can remove any feats!");
                 return 1;
             }
-            i = calculate_feat_cost(TP);
+            i = calculate_feat_cost(TP) / 8;
             if ((tmp == "archmage" || tmp == "greater spell mastery") && FEATS_D->has_feat(TP, "spellmastery")) {
                 if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0 && i > 0) {
                     tell_object(TP, "%^YELLOW%^Are you sure you want to remove the feat "
