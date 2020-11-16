@@ -8,9 +8,9 @@ void create()
     ::create();
     feat_type("permanent");
     feat_category("VampireLord");
-    feat_name("embrace the beast");
+    feat_name("aspect of the beast");
     feat_prereq("Vampire Lord L4");
-    feat_desc("Vampire lord learns to take the form of greater vampire and form of varghulf.");
+    feat_desc("You gain access to forms of greater vampire and form of varghulf as your twilight shape.");
     permanent(1);
 }
 

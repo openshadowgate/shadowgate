@@ -676,7 +676,7 @@ mixed query_property(string prop)
         }
     }
     if (prop == "sunlight_umbrella") {
-        if (FEATS_D->usable_feat(TO, "mask of immortality")) {
+        if (FEATS_D->usable_feat(TO, "mask of mortality")) {
             return 1;
         }
         num += props[prop];

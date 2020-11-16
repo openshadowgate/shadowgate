@@ -8,9 +8,9 @@ void create()
     ::create();
     feat_type("permanent");
     feat_category("VampireLord");
-    feat_name("ancient bloodline");
-    feat_prereq("Vampire Lord L7");
-    feat_desc("Vampire Lord forms own bloodline and learns ancient secrets of ancestral magic, it gains knowledge on how to pass its powers to others.");
+    feat_name("mask of mortality");
+    feat_prereq("Vampire Lord L1");
+    feat_desc("This power allows you to forget about your true from and endure the curse of the sun. This, however, won't allow the vampire to avoid negative effects of the sun.");
     permanent(1);
 }
 
@@ -25,7 +25,7 @@ int prerequisites(object ob)
         return 0;
     }
 
-    if ((int)ob->query_class_level("vampire_lord") < 4) {
+    if ((int)ob->query_class_level("vampire_lord") < 1) {
         dest_effect();
         return 0;
     }

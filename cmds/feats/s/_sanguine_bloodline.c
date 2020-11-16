@@ -8,9 +8,9 @@ void create()
     ::create();
     feat_type("permanent");
     feat_category("VampireLord");
-    feat_name("mask of immortality");
-    feat_prereq("Vampire Lord L1");
-    feat_desc("This is an Extraordinary Ability that Vampire Lords posses. This power allows the vampire to conceal their true nature from other non-vampires and endure the curse of the sun through mere will. This, however, won't allow the vampire to avoid negative effects of the sun.");
+    feat_name("sanguine bloodline");
+    feat_prereq("Vampire Lord L7");
+    feat_desc("Through forming greater bloodline, you gain ability to control ancient blood magic in a limited fashion and gain unique spells. This feat adds some hemomancy abilities to innate spell list.");
     permanent(1);
 }
 
@@ -25,7 +25,7 @@ int prerequisites(object ob)
         return 0;
     }
 
-    if ((int)ob->query_class_level("vampire_lord") < 1) {
+    if ((int)ob->query_class_level("vampire_lord") < 4) {
         dest_effect();
         return 0;
     }

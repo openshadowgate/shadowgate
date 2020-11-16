@@ -153,7 +153,7 @@ int prerequisites(object player)
     }
 
     align = player->query_alignment();
-    if (member_array(align, ({3, 6, 9})) == -1) {
+    if (member_array(align, ({2, 3, 5, 6, 8, 9})) == -1) {
         write("Fail alignment.");
         return 0;
     }
@@ -209,7 +209,7 @@ int caster_level_calcs(object player, string the_class)
 
 mapping class_featmap(string myspec)
 {
-    return ([ 1 : ({ "mask of immortality" }), 4 : ({ "embrace the beast" }), 7 : ({ "ancient bloodline" }), ]);
+    return ([ 1 : ({ "mask of mortality" }), 4 : ({ "aspect of the beast" }), 7 : ({ "sanguine bloodline" }), ]);
 }
 
 string* class_skills(object ob)

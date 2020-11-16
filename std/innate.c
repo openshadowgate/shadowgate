@@ -78,7 +78,7 @@ void InitInnate()
                             "create greater undead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
             ]);
     }
-    if(FEATS_D->usable_feat(TO,"ancient bloodline"))
+    if(FEATS_D->usable_feat(TO,"sanguine bloodline"))
     {
         feat_spells += ([
                             "night auspex" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),

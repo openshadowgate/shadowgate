@@ -5,7 +5,7 @@ int bonus;
 
 string* valid_forms()
 {
-    if (FEATS_D->usable_feat(caster, "embrace the beast")) {
+    if (FEATS_D->usable_feat(caster, "aspect of the beast")) {
         return ({ "bat", "wolf", "vampire", "varghulf" });
     }
     return ({ "bat", "wolf", });
