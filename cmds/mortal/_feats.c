@@ -951,7 +951,9 @@ int validation_messages(object obj, string group, string feat_name) {
 
     if (group != "add") {
         category = FEATS_D->get_category(feat_name);
-        if (member_array(category, valid_categories) == -1 && group != "racial") {
+        if ((member_array(category, valid_categories) == -1 && group != "racial") &&
+            !(group == "arcana" && feat_name == "disruptive") &&
+            !(group == "arcana" && feat_name == "spellbreaker")) {
             tell_object(obj, "%^YELLOW%^The %^BLUE%^" + feat_name + " %^YELLOW%^ feat is not a valid " + group_2 + " feat.%^RESET%^");
             tell_object(obj, "Aborting...");
             return 1;

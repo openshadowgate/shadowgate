@@ -32,14 +32,11 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (FEATS_D->has_feat(ob, "disruptive ma")) {
-        dest_effect();
-        return 0;
-    }
     if (ob->is_class("magus") && file_exists("/std/class/magus.c")) {
         magus = (int)"/std/class/magus.c"->fighter_training(ob);
     }
-    if (ob->query_class_level("fighter") + magus < 6) {
+    if (!(ob->query_class_level("fighter") + magus >= 6 ||
+        ob->query_class_level("magus") >= 6)) {
         dest_effect();
         return 0;
     }
