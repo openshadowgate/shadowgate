@@ -34,7 +34,7 @@ void heart_beat()
     return;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^YELLOW%^Sparkling motes of light gather"+
 		" in your hands as you lift your voice in song.");
@@ -47,7 +47,7 @@ string query_cast_string()
 int preSpell()
 {
     if(!objectp(target))
-    { 
+    {
         tell_object(caster,"You need a target for this spell.");
         return 0;
     }
@@ -59,18 +59,18 @@ int preSpell()
     return 1;
 }
 
-void spell_effect(int prof) 
-{ 
+void spell_effect(int prof)
+{
     int duration;
-    if(sizeof(caster->query_classes()) == 1) 
-    { 
+    if(sizeof(caster->query_classes()) == 1)
+    {
         duration = (ROUND_LENGTH * 10) * clevel;
-        bonus = clevel/5; 
+        bonus = clevel/5;
     }
-    else 
-    { 
+    else
+    {
         duration = (ROUND_LENGTH * 5) * clevel;
-        bonus = clevel/10; 
+        bonus = clevel/10;
     }
 
     if(!present(target,place))
@@ -91,14 +91,16 @@ void spell_effect(int prof)
     target->set_property("spelled",({TO}));
     target->set_property("added short",({"%^BOLD%^%^WHITE%^ (glowing)%^RESET%^"}));
     addSpellToCaster();
+    spell_duration = duration;
+    set_end_time();
     call_out("dest_effect",duration);
 
 }
 
 void dest_effect()
 {
-    if(objectp(target)) 
-    { 
+    if(objectp(target))
+    {
 	    tell_room(place,"%^YELLOW%^The gleaming motes of light "+
 		    "around "+target->QCN+" fade away.");
 	    tell_object(target,"%^YELLOW%^The gleaming motes of "+

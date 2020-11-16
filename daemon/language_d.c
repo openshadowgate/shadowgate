@@ -18,7 +18,29 @@
 
 inherit DAEMON;
 
-string *query_lang_list() {return ALL_LANGS;}
+string seed  = "m1KeeLnUp0T70bKqJe2BMUhkdL6Xd9kgA3iM3IQ6QvrH3es07RiPVtK26Z9/fOUS";
+int shift = 0;
+
+set_seed(string ss)
+{
+    shift = 0;
+    seed = ss;
+}
+
+int random_(int x)
+{
+    int res;
+
+    if (!sizeof(seed)) {
+        res = efun::random(x);
+    } else {
+        shift++;
+        shift = shift > sizeof(seed) ? 0 : shift;
+        res = seed[shift] % x;
+    }
+
+    return res;
+}
 
 varargs string fakeWord(string lang, int l){
    string word = ({});
@@ -149,7 +171,7 @@ varargs string fakeWord(string lang, int l){
            word += HARDVOWELS[random(sizeof(HARDVOWELS))];
       }
       break;
-   case "kobold":
+   case "draconic":
       j = random(4)+3;
       if(a = random(2))
          word = CONSTS[random(sizeof(CONSTS))];
@@ -547,17 +569,22 @@ varargs string translate(string str, string lang, object player,int reading)
     int prof, i,j, thing,read_time;
     string *words, ret = "";
 
-    if(!objectp(player)) { return str; }
+    if (!objectp(player)) {
+        return str;
+    }
+
+    if (lang == "wizish") {
+        return str;
+    }
 
     prof      = (int)player->query_lang(lang);
     read_time = (int)player->query_property("last_time_read");
-
-    if(lang == "wizish") { return str; }
 
     if(objectp(player))
     {
         if(player->query_property("verstandnis")) return str;
     }
+
     if(prof >= 100)
     {
         if(player != TP || query_verb() == "read")

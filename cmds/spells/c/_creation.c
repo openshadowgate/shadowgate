@@ -2,6 +2,7 @@
 //~Circe~ 7/23/05
 
 #include <std.h>
+#include <magic.h>
 
 inherit SPELL;
 
@@ -89,7 +90,9 @@ void spell_effect(int prof) {
     }
     addSpellToCaster();
     spell_successful();
-    call_out("dest_effect",mylevel*4);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 4;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

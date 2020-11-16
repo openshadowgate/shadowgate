@@ -81,7 +81,12 @@ set_responses(){
     +" the eastern parrt of the jungle, between the city and the"
     +" riverr. But I think it wasn't very well."}));
 
-  set_response(({"fountain of youth", "fountain"}), ({"Ah yes, the %^ORANGE%^legends%^RESET%^ say that the %^BOLD%^%^YELLOW%^f%^BLUE%^ou%^CYAN%^nt%^BLUE%^a%^WHITE%^i%^CYAN%^n of %^YELLOW%^y%^WHITE%^o%^RESET%^%^ORANGE%^u%^BOLD%^%^YELLOW%^th%^RESET%^ is somewhere in the %^BOLD%^%^GREEN%^j%^RESET%^%^GREEN%^u%^BOLD%^ng%^RESET%^%^GREEN%^l%^BOLD%^e%^RESET%^, though I never heard where. It's supposed to be on an %^BOLD%^%^GREEN%^island%^RESET%^, though, so maybe somewhere on the %^BOLD%^%^BLUE%^river%^RESET%^?"}));
+  set_response(({"fountain of youth", "fountain"}), ({"Ah yes, the %^ORANGE%^legends%^RESET%^ say that the
+%^BOLD%^%^YELLOW%^f%^BLUE%^ou%^CYAN%^nt%^BLUE%^a%^WHITE%^i%^CYAN%^n of
+%^YELLOW%^y%^WHITE%^o%^RESET%^%^ORANGE%^u%^BOLD%^%^YELLOW%^th%^RESET%^ is somewhere in the
+%^BOLD%^%^GREEN%^j%^RESET%^%^GREEN%^u%^BOLD%^ng%^RESET%^%^GREEN%^l%^BOLD%^e%^RESET%^,
+though I never heard where. It's supposed to be on an %^BOLD%^%^GREEN%^island%^RESET%^, though, so maybe
+somewhere on the %^BOLD%^%^BLUE%^river%^RESET%^?"}));
   set_response(({"not very well"}), ({"The %^BOLD%^%^GREEN%^trree"
     +" spirit%^RESET%^ I saw was not very well. Not... rright in"
     +" the head, you know? Or brranches, I suppose."}));
@@ -148,7 +153,7 @@ void buy_parrot(string str){
   if (str != "yes")
   {
     tell_object(TP, "You decide against buying the parrot");
-    tell_room(ETO, TPQCN + " decides against buying the parrot");
+    tell_room(ETO, TPQCN + " decides against buying the parrot", TP);
     return;
   }
 
@@ -195,7 +200,7 @@ void buy_parrot(string str){
    + TP->QO+" to stroke it gently in just the way it seems to like."
    +" The %^BOLD%^%^BLUE%^p%^BOLD%^%^RED%^a%^YELLOW%^rr%^RED%^o"
    +"%^BLUE%^t%^RESET%^ warbles and rubs its head against "+ TPQCN 
-   +"%^RESET%^'s  fingers, seeming to accept "+TP->QO +"." );
+   +"%^RESET%^'s  fingers, seeming to accept "+TP->QO +".", TP );
   parrot->set_owner(TP->query_name());
   parrot->move(TP); 
 }

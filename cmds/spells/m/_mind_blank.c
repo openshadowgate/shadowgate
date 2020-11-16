@@ -149,7 +149,9 @@ void spell_effect(int prof)
     duration = 5 * mylevel * ROUND_LENGTH;
     spell_successful();
     addSpellToCaster();
-    call_out("dest_effect", duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

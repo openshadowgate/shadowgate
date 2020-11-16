@@ -9,9 +9,9 @@ inherit DAEMON;
  */
 
 #define COLORS ({"%^RED%^red", "%^BLUE%^blue","%^CYAN%^cyan","%^GREEN%^green","%^MAGENTA%^magenta","%^YELLOW%^yellow","white","%^ORANGE%^orange","%^BOLD%^%^BLACK%^black"})
-#define OBJECTS ({"chalice","parchment","tunic","boots","cup","bowl","knife","scroll","tablet","hat","tome","rod","statue","figurine","amulet","talisman","slippers","flask","candle","mirror","rug","brooch","egg","scarf", "sphere","cube","stone","crown","amulet"})
+#define OBJECTS ({"chalice","parchment","tunic","boots","cup","bowl","knife","scroll","tablet","hat","tome","rod","statue","figurine","amulet","talisman","slippers","flask","candle","mirror","rug","brooch","egg","scarf", "sphere","cube","stone","crown","amulet","skull","pillar","doll","jar","ball"})
 
-#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good","neutrality","the sun","the earth","the moon","the land","the sky","force","darkness","light","control","destiny","fortitude","cowardice","death","health","life","shielding","the universe","horror","beauty","comeliness","humility","pride","truth","lies","weakness","strength","nature","terror","fear","courage","wonder", "the cosmos"})
+#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good","neutrality","the sun","the earth","the moon","the land","the sky","force","darkness","light","control","destiny","fortitude","cowardice","death","health","life","shielding","the universe","horror","beauty","comeliness","humility","pride","truth","lies","weakness","strength","nature","terror","fear","courage","wonder", "the cosmos","kittens","greyhounds"})
 
 #define SAVE_QUESTS "/daemon/save/quests_high"
 
@@ -22,7 +22,7 @@ inherit DAEMON;
 #define HIGH ({"/d/islands/tonerra/monastary/m", "/d/attaya/base/", "/d/dagger/ogres/rooms/", "/d/deku/hhouse/rooms/","/d/dagger/marsh/tower/rooms/", "/d/antioch/ruins/portal/", "/d/laerad/cavern2/","/d/island/elf/shore/" })
 
 
-#define UMM ({"/d/attaya/tower/", "/d/islands/tonerra/lava/","/d/islands/common/eldebaro/newrooms/tomb*","/d/islands/common/aramanth/d"})
+#define UMM ({"/d/attaya/tower/", "/d/islands/tonerra/lava/","/d/islands/common/eldebaro/newrooms/tomb*","/d/islands/common/aramanth/d","/d/atoyatl/tecqumin/jungle/rooms/j"})
 
 #define AREAS      ({MED_H1, MED_H1, MED_H2, MED_H2, HIGH, HIGH, UMM})
 #define AREA_VALUE ({200000, 350000, 500000, 600000, 700000, 800000, 900000})
@@ -95,6 +95,7 @@ inherit DAEMON;
                         DEKU "aurus_devar_bones.c" : 2000000 ,\
                         ICE "squid.c" : 1000000 ,\
                         ICE "capn.c" : 1000000 ,\
+                        ICE "daelas.c" : 1000000 ,\
                         ])
 
 mapping __Quests, __Rooms, __Monsters;

@@ -107,7 +107,9 @@ void do_bravery(){
     tell_object(caster,"%^BOLD%^%^CYAN%^You finish inspiring your comrades.%^RESET%^");
     caster->set_property("using rally",time() + duration);
     call_out("check",ROUND_LENGTH);
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

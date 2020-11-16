@@ -292,7 +292,9 @@ void do_travel_2(string file)
         TO->set_property("MyCreatedExit", "portal"+portnum);
     }
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*clevel);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

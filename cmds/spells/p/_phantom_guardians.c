@@ -3,6 +3,7 @@
 //been dispelled/destroyed.  12/9/04 -Tsera
 // moved monster files to /d/magic/mon central location Ares/Styx 1/29/05
 #include <std.h>
+#include <magic.h>
 inherit SPELL;
 
 object *mons = ({});
@@ -11,7 +12,7 @@ void create() {
     ::create();
     set_spell_name("phantom guardians");
     set_spell_level(([ "mage" : 6, "magus" : 6 ]));
-    set_spell_sphere("conjuration_summoning");
+    set_spell_sphere("illusion");
     set_syntax("cast CLASS phantom guardians on <centaurs|bats|soldiers>");
     set_description("This spell creates casting level relative guardians who will guard the caster blindly.  You have the "
 "choice of 3 types: 2 centaurs, 4 soldiers or 8 bats. These guardians will not be effected by area effect spells.");
@@ -143,8 +144,9 @@ void spell_effect(int prof) {
         break;
     }
     addSpellToCaster();
-	//if(objectp(find_player("saide"))) tell_object(find_player("saide"), "caster = "+caster->query_name() + ", clevel = "+clevel + ", call out in "+(clevel*(prof/25)));
-    call_out("dest_effect",clevel*(prof/25));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

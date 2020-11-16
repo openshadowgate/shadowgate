@@ -115,7 +115,9 @@ void spell_effect(int prof) {
     spell_successful();
     addSpellToCaster();
     call_out("wings",ROUND_LENGTH);
-    call_out("dest_effect",(clevel*20));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void wings(){
@@ -141,7 +143,7 @@ void dest_effect() {
       caster->remove_property("MIN");
       caster->remove_property("MOUT");
       caster->add_attack_bonus(-bonus);
-      caster->add_damage_bonus(-bonus);      
+      caster->add_damage_bonus(-bonus);
       caster->add_ac_bonus(-bonus);
       caster->set_property("hasted",-1);
 

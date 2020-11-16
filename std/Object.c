@@ -675,6 +675,14 @@ mixed query_property(string prop)
             return 1;
         }
     }
+    if (prop == "sunlight_umbrella") {
+        if (FEATS_D->usable_feat(TO, "mask of immortality")) {
+            return 1;
+        }
+        num += props[prop];
+        return num;
+    }
+
     if (prop == "negative energy affinity") {
         if (TO->is_undead()) {
             return 1;

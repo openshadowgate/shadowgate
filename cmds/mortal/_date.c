@@ -8,20 +8,27 @@
 
 inherit DAEMON;
 
-int cmd_date(string str) {
-   int borg;
+int cmd_date(string str)
+{
+    int borg;
 
-   if(!str) str = (string)this_player()->getenv("TZONE");
-   borg = (int)TIME_D->query_tzone(str);
-   write("%^BOLD%^%^RED%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-   if(!str) write("%^BOLD%^%^CYAN%^Current mud time: %^YELLOW%^"+ctime(borg));
-   else write("%^BOLD%^%^CYAN%^Current time "+str+": %^YELLOW%^"+ctime(borg));
-   write("%^BOLD%^%^BLUE%^Current ShadowGate time: %^GREEN%^"+hour(time())+":"+(minutes(time()) > 9?minutes(time()):"0"+minutes(time()))+" "+day(time())+", "+date(time())+" "+month(time())+", "+year(time())+" SG");
-  	write("%^BOLD%^%^RED%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
-   return 1;
+    if (!str) {
+        str = (string)this_player()->getenv("TZONE");
+    }
+    borg = (int)TIME_D->query_tzone(str);
+    write("%^BOLD%^%^RED%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+    if (!str) {
+        write("%^BOLD%^%^CYAN%^Current mud time: %^YELLOW%^" + ctime(borg));
+    }else {
+        write("%^BOLD%^%^CYAN%^Current time " + str + ": %^YELLOW%^" + ctime(borg));
+    }
+    write("%^BOLD%^%^BLUE%^Current ShadowGate time: %^GREEN%^" + hour(time()) + ":" + (minutes(time()) > 9?minutes(time()):"0" + minutes(time())) + " " + day(time()) + ", " + date(time()) + " " + month(time()) + ", " + year(time()) + " SG");
+    write("%^BOLD%^%^RED%^-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-");
+    return 1;
 }
 
-void help() {
+void help()
+{
     write("
 %^CYAN%^NAME%^RESET%^
 
@@ -39,7 +46,7 @@ help, set, weather, look
 
 "
 
-);
+        );
 /* write( */
 /* @ZONES */
 /* Available time zones are: */

@@ -97,7 +97,9 @@ void spell_effect(int prof)
       caster->force_me("wear armor");
       spell_successful();
       mylevel = clevel;
-      call_out("dest_effect",mylevel*16);
+      spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 6;
+      set_end_time();
+      call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

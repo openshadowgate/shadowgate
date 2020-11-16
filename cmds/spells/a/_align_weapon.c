@@ -80,7 +80,9 @@ void spell_effect()
         caster->set_property("spelled",({TO}));
         spell_successful();
         addSpellToCaster();
-        call_out("dest_effect", (clevel+roll_dice(1,20)) * ROUND_LENGTH * 10);
+        spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 10;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     }
 }
 

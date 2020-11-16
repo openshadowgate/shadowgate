@@ -75,7 +75,9 @@ void spell_effect(int prof) {
    spell_successful();
    environment(caster)->addObjectToCombatCycle(TO,1);
    call_out("emote_em",15*ROUND_LENGTH);
-   call_out("dest_effect", 1800 + (mylevel * 10));
+   spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 5 + 1800;
+   set_end_time();
+   call_out("dest_effect",spell_duration);
 }
 
 int party_filter(object obj){

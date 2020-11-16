@@ -44,7 +44,9 @@ spell_effect()
     target->set_property("spelled", ({TO}) );
     target->set_property("deadeyes_lore",1);
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*clevel*2);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 3;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

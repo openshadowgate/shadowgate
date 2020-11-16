@@ -47,7 +47,9 @@ spell_effect()
     target->set_time_delay("shadowform_used");
     target->set_property("added short", ({ "%^RESET%^%^BLUE%^ (a shadow)%^RESET%^" }));
     addSpellToCaster();
-    call_out("dest_effect", ROUND_LENGTH * (clevel / 6 + 1));
+    spell_duration = (clevel / 5 + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

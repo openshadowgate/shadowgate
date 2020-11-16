@@ -90,7 +90,9 @@ void spell_effect(int prof){
     addSpellToCaster();
     spell_successful();
     caster->set_property("spelled",({TO}));
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect(){

@@ -59,7 +59,7 @@ int set_base_class(object obj, string choice)
     classes = obj->query_classes();
     if(!sizeof(classes)) { return 0; }
     if(member_array(choice,classes) == -1) { return 0; }
-    if(member_array(choice,({"mage","sorcerer","bard", "warlock", "thief", "magus" })) == -1) { return 0; }
+    if(member_array(choice,({"mage","sorcerer","bard", "warlock", "magus", "thief" })) == -1) { return 0; }
     obj->set("base_class",choice);
     return 1;
 }
@@ -84,7 +84,7 @@ string requirements() // string version, maybe we'll need this, maybe not, can r
 {
     string str;
     str = "Prerequisites:\n"
-        "    10 Base class levels (level adjustments considered part of required levels)\n"
+        "    10 Base class levels\n"
         "    10 Thief (level adjustments considered part of required levels)\n"
         "    10 Points Spent in Stealth Skill\n"
         "    10 Points Spent in Spellcraft Skill\n";
@@ -120,7 +120,7 @@ int prerequisites(object player)
     if ((player->query_class_level(base)) < 10) {
         return 0;
     }
-    if ((player->query_class_level("thief")) < 10) {
+    if (player->query_class_level("thief") < 10) {
         return 0;
     }
     if (skills["stealth"] < 10) {

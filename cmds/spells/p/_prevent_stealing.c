@@ -45,7 +45,9 @@ void spell_effect(int prof) {
     duration = ( clevel * 45);
     if (duration < 250) duration = 250;
     spell_successful();
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

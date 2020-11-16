@@ -113,11 +113,11 @@ int cmd_tell(string str)
         return 1;
     }
 
-    if (ob->query_invis() || ob->query_quietness() && !avatarp(TP)) {
+    if (ob->query_quietness() && !avatarp(TP)) {
         message("info", sprintf("%s%s", capitalize(who), NOT_HERE), this_player());
 
         if (member_array(TPQN, ignored) == -1 || wizardp(TP)) {
-            message("reply", sprintf("%s is unaware of telling you: %s", namestr, msg), ob);
+            message("reply", sprintf("%^CYAN%^%s is unaware of telling you: %s", namestr, msg), ob);
             if (!TP->query_disguised() || !wizardp(TP)) {
                 ob->set("reply", TP->getParsableName(ob));
             } else {

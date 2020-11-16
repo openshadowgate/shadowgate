@@ -49,7 +49,9 @@ void spell_effect(int prof){
    caster->set_property("detecting_snares",TO);
    addSpellToCaster();
    caster->set_property("spelled",({TO}));
-   call_out("dest_effect",duration);
+   spell_duration = duration;
+   set_end_time();
+   call_out("dest_effect",spell_duration);
    spell_successful();
 }
 

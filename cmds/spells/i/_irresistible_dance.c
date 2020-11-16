@@ -61,7 +61,9 @@ void spell_effect(int prof) {
     addSpellToCaster();
     call_out("dancing_echo",ROUND_LENGTH*2);
     duration = (ROUND_LENGTH) * clevel;
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 }
 

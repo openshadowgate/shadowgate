@@ -189,7 +189,9 @@ spell_effect(int prof)
     {
         stat_change(target,"strength",-1);
         target->set_property("spelled", ({TO}) );
-        call_out("dest_effect", (3 + clevel + bonus) * ROUND_LENGTH);
+        spell_duration = (clevel + roll_dice(1, 20) + bonus) * ROUND_LENGTH;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     }
     else
     {

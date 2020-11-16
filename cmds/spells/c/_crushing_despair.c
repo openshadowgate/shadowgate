@@ -69,7 +69,9 @@ void spell_effect(int prof) {
     }
     caster->add_saving_bonus("all", (-1) * bonus);
     target->set_property("crushing_despair", 1);
-    call_out("dest_effect", duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 }
 

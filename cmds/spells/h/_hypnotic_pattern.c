@@ -57,7 +57,9 @@ void spell_effect(int prof)
         target->set_property("fascinated",1);
         bonus = clevel/8+1;
         target->add_skill_bonus("perception",-bonus);
-        call_out("dest_effect",duration*ROUND_LENGTH);
+        spell_duration = duration * ROUND_LENGTH;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     }
 }
 

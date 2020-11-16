@@ -1,6 +1,7 @@
 //minor prescience
 //~Circe~ 7/20/05
 #include <spell.h>
+#include <magic.h>
 inherit SPELL;
 
 object targ;
@@ -44,7 +45,9 @@ void spell_effect(int prof){
     bonus = bonus>4?4:bonus;
     target->add_attack_bonus(bonus);
     target->add_damage_bonus(bonus);
-    call_out("dest_effect",mylevel*20);
+    spell_duration = (clevel / 2 + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     target->set_property("prescienced",1);
     target->set_property("spelled", ({TO}) );
     addSpellToCaster();

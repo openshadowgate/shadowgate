@@ -5,6 +5,8 @@
 #include <std.h>
 #include <langs.h>
 #include <daemons.h>
+#include <magic.h>
+
 inherit SPELL;
 int theProf;
 
@@ -56,7 +58,9 @@ void spell_effect(int prof) {
     	}
     	addSpellToCaster();
     	target->set_property("spelled",({TO}));
-    	call_out("dest_effect",clevel*16);
+        spell_duration = (clevel / 2 + roll_dice(1, 20)) * ROUND_LENGTH;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

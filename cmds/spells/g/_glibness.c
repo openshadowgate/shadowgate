@@ -44,7 +44,9 @@ spell_effect()
     target->set_property("spelled", ({ TO }));
     target->set_property("glibness_spell", 1);
     addSpellToCaster();
-    call_out("dest_effect", ROUND_LENGTH * clevel);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

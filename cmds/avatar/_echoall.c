@@ -24,7 +24,7 @@ int cmd_echoall(string str) {
         return 0;
     }
   str = replace_string(str,"%^NL%^","\n");
-    message("environment", str, users());
+    message("echo", str, users());
     seteuid(UID_LOG);
     seteuid(getuid());
     return 1;

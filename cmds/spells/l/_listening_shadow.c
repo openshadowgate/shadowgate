@@ -78,7 +78,9 @@ void spell_effect(int prof){
         shadow->set_scry_power(power);
         shadow->move(place);
         theName = place->query_short();
-        call_out("dest_effect",ROUND_LENGTH*clevel*4);
+        spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
         caster->set_property("remote scrying",1);
         addSpellToCaster();
         return;
@@ -110,7 +112,9 @@ void spell_effect(int prof){
             shadow->set_scry_power(power);
             shadow->move(environment(ob));
             theName = ob->query_short();
-            call_out("dest_effect",ROUND_LENGTH*clevel*4);
+            spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+            set_end_time();
+            call_out("dest_effect",spell_duration);
             caster->set_property("remote scrying",1);
             addSpellToCaster();
             return;
@@ -131,6 +135,6 @@ void dest_effect(){
     if(objectp(TO)) TO->remove();
 }
 
-string querySpellDisplay(){
+string query_spell_display(){
    return "Listening Shadow: "+theName;
 }

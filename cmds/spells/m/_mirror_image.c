@@ -61,7 +61,9 @@ void spell_effect() {
         caster->add_protector(ob);
     }
     addSpellToCaster();
-    call_out("dest_effect",clevel*ROUND_LENGTH);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 3;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

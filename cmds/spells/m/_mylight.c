@@ -24,7 +24,7 @@ void create() {
 }
 
 spell_effect(int prof) {
-    int level; 
+    int level;
 
     if(!objectp(target)) target = caster;
     if (interactive(caster)) {
@@ -47,19 +47,20 @@ spell_effect(int prof) {
        if(member_array(target->query_race(),PLAYER_D->night_races()) == -1){
           target->add_sight_bonus(3);
        }else{
-          target->add_sight_bonus(-3); 
+          target->add_sight_bonus(-3);
        }
     }
-    if(level > 40) level = 40;
-    call_out("dest_effect", 1800 + (level * 10));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 10;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 }
 
-void dest_effect() 
+void dest_effect()
 {
     if(find_call_out("dest_effect") != -1) remove_call_out("dest_effect");
 
-    if(objectp(target)) 
+    if(objectp(target))
     {
        tell_object(target,"%^RESET%^%^ORANGE%^Your vision returns to normal "
        "as the psionic power fades from your sight.%^RESET%^");
@@ -67,7 +68,7 @@ void dest_effect()
           target->add_sight_bonus(-3);
        }else
        {
-          target->add_sight_bonus(3); 
+          target->add_sight_bonus(3);
        }
     }
     ::dest_effect();

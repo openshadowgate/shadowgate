@@ -431,7 +431,7 @@ void set_level(int lev)
     return;
 }
 
-string *query_messages(string myclass)
+mixed *query_messages(string myclass)
 {
     if(!static_user["pastMessages"] || !static_user["pastMessages"][myclass])
     {

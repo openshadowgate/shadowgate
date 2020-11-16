@@ -28,7 +28,7 @@ int cmd_echoarea(string str) {
    primary = (string *)env->query_destinations();
 	seteuid(UID_LOG);
 	seteuid(getuid());
-	message("environment", str, ETP);
+	message("echo", str, ETP);
    for(i=0, tmp_arr = ({}), secondary=({}), tmp=sizeof(primary);i<tmp;i++) {
       char_arr = (string)env->query_direction(primary[i]);
       if(char_arr) {

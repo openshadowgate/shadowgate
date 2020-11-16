@@ -80,7 +80,9 @@ void spell_effect(int prof){
     tell_object(caster,"%^BOLD%^%^CYAN%^Your alignment will "+
        "been seen as "+arg+" for a time.");
     caster->set_property("hidden alignment",newal);
-    call_out("dest_effect", 1800 + (clevel * 10));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 10 + 1800;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
     addSpellToCaster();
 }

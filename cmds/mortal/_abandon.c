@@ -134,7 +134,9 @@ int confirm_drop(string str, string theclass, int drop, int cost)
 // allows players to reset certain attributes, and mastered spells should be cleared by default
     if (sizeof(TP->query_mastered_spells())) {
         tell_object(TP, "%^BOLD%^Clearing mastered spells... please reassign your spell slots if you still have class levels.");
-        TP->reset_mastered();
+        if (!(theclass == "mage" && theclass == "magus")) {
+            TP->reset_mastered();
+        }
     }
     if (theclass == "mage") {
         tell_object(TP, "%^BOLD%^Clearing mage school... if you still have class levels you may reassign this with <help advance>.");

@@ -106,7 +106,8 @@ void create()
    ]));
    set_exits(([
       "bar" : ROOMS"bestiary",
-	  "east" : ROOMS"thieffence"
+	  "fence" : ROOMS"thieffence",
+	  "training" : "/d/shadow/thief_training/room/entrance",
    ]));
 }
 

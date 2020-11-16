@@ -54,6 +54,8 @@ void spell_effect(int prof)
     storm_room = environment(caster);
     addSpellToCaster();
     spell_successful();
+    spell_duration = duration;
+    set_end_time();
     call_out("dest_effect",duration);
 }
 

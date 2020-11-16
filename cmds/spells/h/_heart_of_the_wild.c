@@ -67,9 +67,10 @@ void spell_effect(int prof) {
     wis_bonus = BONUS_D->query_stat_bonus(caster,"wisdom");
     blocker->set_block_power(CLEVEL + wis_bonus*2);
     blocker->set_ranger_block(1);
-    duration = 9 * (int)CLEVEL;
     addSpellToCaster();
-    call_out("dest_effect", duration);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 2;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

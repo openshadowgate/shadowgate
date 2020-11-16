@@ -70,8 +70,9 @@ void spell_effect(int prof) {
         return;
     }
     detector->set_detect_power(power);
-    duration = 8 * (int)CLEVEL;
-    call_out("dest_effect", duration);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 8;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

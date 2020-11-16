@@ -151,7 +151,9 @@ void spell_effect(int prof) {
         duration = 60 + (CLEVEL);
     }
     caster->set_property("remote scrying",1);
-    call_out("dest_effect", duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     addSpellToCaster();
 //below code added to delay followers from chain scrying -Tsera 3-31-12
    if(!userp(caster)) { // only run checks if it's not a player object casting

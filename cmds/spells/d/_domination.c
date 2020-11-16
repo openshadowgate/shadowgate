@@ -124,6 +124,8 @@ void spell_effect(int prof) {
 
     tell_object(caster,"%^GREEN%^You break into "+target->QCN+"'s mind and "
         "overcome "+target->QP+" willpower!");
+    caster->remove_attacker(target);
+    target->remove_attacker(caster);
     spell_successful();
     addSpellToCaster();
     change=0;
@@ -144,7 +146,9 @@ void spell_effect(int prof) {
     remote->move(caster);
     remote->move_is_ok(0);
     if (duration) {
-        call_out("dest_effect", duration);
+        spell_duration = duration;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     }
 }
 

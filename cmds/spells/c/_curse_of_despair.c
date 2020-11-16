@@ -60,7 +60,9 @@ void spell_effect(int prof) {
     for(i=0;i<sizeof(CORE_SKILLS);i++) caster->add_skill_bonus(CORE_SKILLS[i],(-1)*bonus);
     caster->add_saving_bonus("all",(-1)*bonus);
     target->set_property("cursed",1);
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 }
 

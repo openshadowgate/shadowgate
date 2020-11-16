@@ -46,7 +46,6 @@ void spell_effect(int prof) {
     caster->add_sight_bonus(modifier);
     caster->set_property("spelled",({TO}));
     caster->set_property("darkvision",1);
-    call_out("dest_effect",duration);
 }
 
 void dest_effect() {

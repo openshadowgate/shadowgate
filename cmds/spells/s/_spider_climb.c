@@ -40,7 +40,9 @@ void spell_effect(int prof) {
     tell_object(caster, "%^BOLD%^%^CYAN%^As you manage to swallow the components, your fingertips suddenly feel sticky!%^RESET%^");
     tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" manages to swallow the components, flexing "+caster->QP+" fingertips.%^RESET%^",caster);
     caster->set_property("spider climb",1);
-    call_out("dest_effect", 900 + (clevel * 10));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
     addSpellToCaster();
 }

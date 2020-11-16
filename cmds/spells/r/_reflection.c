@@ -84,7 +84,9 @@ void spell_effect(int prof) {
 
     myduration = 60+(clevel*10);
     if(myduration > 300) myduration = 300; // capping at 5min since this is free vs mages/psions that pay; this ensures only 50% uptime.
-    call_out("dest_effect",myduration);
+    spell_duration = myduration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     caster->set_property("remote scrying",1);
 
     addSpellToCaster();

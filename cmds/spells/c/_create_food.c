@@ -53,7 +53,9 @@ void spell_effect(int prof) {
 
     spell_successful();
     addSpellToCaster();
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

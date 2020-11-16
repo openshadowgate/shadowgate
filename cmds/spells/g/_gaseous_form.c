@@ -2,6 +2,7 @@
 //added the checks for mage armor from armor code -Tsera 11/5/04
 #include <std.h>
 #include <daemons.h>
+#include <magic.h>
 inherit SPELL;
 
 void create()
@@ -64,7 +65,9 @@ void spell_effect(int prof)
     addSpellToCaster();
     call_out("test", 2);
     caster->set_property("added short",({" %^BOLD%^%^CYAN%^(translucent)%^RESET%^"}));
-    call_out("dest_effect",(clevel*20));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 7;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void test()

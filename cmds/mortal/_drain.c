@@ -72,7 +72,7 @@ int cmd_drain(string args)
         return 1;
     }
 
-    if (targobj->query_property("negative energy affinity")) {
+    if (targobj->is_undead()) {
         write("You should eat fresh food.\n");
         return 1;
     }
@@ -181,7 +181,12 @@ void drain_process(object target)
 void drain_health(object target)
 {
     int dam;
-    dam = roll_dice(TP->query_level(), 6);
+    if (TP->is_class("vampire_lord")) {
+        dam = roll_dice(TP->query_level(), 12);
+    } else {
+        dam = roll_dice(TP->query_level(), 6);
+    }
+
     target->cause_typed_damage(target, "torso", dam, "negative energy");
     TP->add_max_hp_bonus(dam);
     //target->cause_typed_damage(caster,"torso",dam,"negative energy");
@@ -190,7 +195,11 @@ void drain_health(object target)
 void drain_life(object target)
 {
     int dam;
-    dam = roll_dice(TP->query_level(), 6);
+    if (TP->is_class("vampire_lord")) {
+        dam = roll_dice(TP->query_level(), 12);
+    } else {
+        dam = roll_dice(TP->query_level(), 6);
+    }
     target->cause_typed_damage(target, "torso", dam, "negative energy");
     target->cause_typed_damage(TP, "torso", dam * 2, "negative energy");
 }

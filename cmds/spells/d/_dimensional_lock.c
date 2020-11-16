@@ -89,7 +89,9 @@ void spell_effect(int prof) {
     target->set_property("spelled",({TO}));
     duration = 30 * (int)CLEVEL;
     if(duration > 900 && !avatarp(caster)) duration = 900;
-    call_out("dest_effect", duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

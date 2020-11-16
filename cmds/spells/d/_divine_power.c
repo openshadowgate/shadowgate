@@ -49,7 +49,9 @@ void spell_effect(int prof)
     caster->add_attack_bonus(mybonus);
     caster->add_damage_bonus(mybonus);
     addSpellToCaster();
-    call_out("dest_effect", clevel * 10);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     call_out("berserk", ROUND_LENGTH);
     caster->set_property("spelled", ({ TO }));
 }

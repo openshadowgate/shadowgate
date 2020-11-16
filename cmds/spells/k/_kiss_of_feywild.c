@@ -69,7 +69,9 @@ void spell_effect()
         target->set_property("fast_healing_spell",1);
         spell_successful();
         addSpellToCaster();
-        call_out("dest_effect",duration);
+        spell_duration = duration;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     }
 }
 

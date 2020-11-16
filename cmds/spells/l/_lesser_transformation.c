@@ -44,7 +44,9 @@ void spell_effect(int prof)
     caster->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
-    call_out("dest_effect",(clevel*5*ROUND_LENGTH));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 5;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     //TODO: add test that checks for rage/transformation and calls dest_effect
     call_out("validate_conditions",ROUND_LENGTH*2);
 }

@@ -76,8 +76,9 @@ void spell_effect(int prof)
         return;
     }
     detector->set_detect_power(power);
-    duration = 6 * clevel * ROUND_LENGTH;
-    call_out("dest_effect", duration);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 6;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     addSpellToCaster();
     return;
 }

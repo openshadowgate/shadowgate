@@ -76,7 +76,9 @@ void spell_effect(int prof){
     else
         newfoes->set_tripped(duration,"%^BOLD%^You are floating uncontrollably in the air!%^RESET%^",4);
 
-    call_out("dest_effect",(duration-1)*ROUND_LENGTH);
+    spell_duration = (duration - 1) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 }
 

@@ -60,12 +60,17 @@ spell_effect(int prof) {
     caster->force_me("wear barkskin");
     spell_successful();
     addSpellToCaster();
-    call_out("dest_effect",150+(clevel*35));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {
-    if (objectp(skin) && objectp(caster)) skin->remove();
+    if (objectp(skin) && objectp(caster)) {
+        skin->remove();
+    }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
-
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }

@@ -34,6 +34,11 @@ int cmd_buff(string str)
 
     switch (arguments[0])
     {
+    case "stop":
+        oldob = present("buffobxyz", TP);
+        oldob->abort();
+        return 1;
+        break;
     case "add":
 
         if (sizeof(arguments) < 2) {
@@ -328,6 +333,7 @@ buff list|diff
 buff add %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^ [| cast %^ORANGE%^%^ULINE%^CAST_ARGUMENTS%^RESET%^]
 buff remove %^ORANGE%^%^ULINE%^SPELL_NAME%^RESET%^
 buff clear
+buff stop
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -347,6 +353,9 @@ The command will allow player to store a list of buff spells they can start cast
 
 %^ORANGE%^<buff clear>%^RESET%^
   Will clear your buff list.
+
+%^ORANGE%^<buff stop>%^RESET%^
+  Will abort ongoing buff.
 
 %^CYAN%^SHADOW SPELLS%^RESET%^
 

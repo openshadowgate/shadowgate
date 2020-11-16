@@ -14,7 +14,7 @@ int query_unbound_age()
 int *restricted_alignments(string subrace) { return ({ 1,2,3,4,5,6 }); }
 
 string *restricted_classes(string subrace) {
-    return ({  "paladin", "fighter", "barbarian", "mage", "psion", "psywarrior", "monk", "inquisitor" });
+    return ({  "paladin", "fighter", "barbarian", "mage", "magus",  "psion", "psywarrior", "monk", "inquisitor" });
 }
 
 // this only affects rolling in creation; does not prevent dedication to a deity in-game, to allow for character evolution. N, 3/16.

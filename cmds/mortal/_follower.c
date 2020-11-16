@@ -19,7 +19,10 @@ int help(){
     mapping retinue;
 
      if(!avatarp(TP))
-       if(!FEATS_D->usable_feat(TP,"leadership")) return 0;
+       if(!FEATS_D->usable_feat(TP,"leadership")){
+           write("You need the leadership feat to view this help file.");
+            return 0;
+       }
 
     RETINUE->init_knights(TP);
     retinue = TP->get_retinue_mapping();

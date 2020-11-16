@@ -48,7 +48,9 @@ void spell_effect()
     spell_successful();
     caster->set_property("has_faithful_hound",1);
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*4*clevel); //20 mins max cause reasons;
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 4;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

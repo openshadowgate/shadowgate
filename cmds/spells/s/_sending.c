@@ -91,7 +91,9 @@ void spell_effect(int prof) {
     send_ob->set_receiver(who);
     send_ob->set_teller(CASTER);
     CASTER->set_property("spelled",({TO}));
-    call_out("dest_effect",clevel*2);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {
