@@ -68,7 +68,9 @@ int spell_effect()
     caster->set_property("spelled",({TO}));
     spell_successful();
     addSpellToCaster();
-    call_out("dest_effect", duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

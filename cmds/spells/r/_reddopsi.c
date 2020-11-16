@@ -42,7 +42,9 @@ void spell_effect(int prof) {
     }
     tell_room(place,"%^RESET%^%^MAGENTA%^You smell %^ORANGE%^saffron %^MAGENTA%^followed by a strong scent of %^BOLD%^%^CYAN%^ozone%^RESET%^%^MAGENTA%^ as a %^CYAN%^rune %^MAGENTA%^appears by sweeps and loops in the air before "+caster->QCN+"!%^RESET%^",caster);
     caster->set_property("spellturning",clevel/6+5);
-    call_out("dest_effect", 1800 + (ROUND_LENGTH * (clevel * 3 + roll_dice(1, 20))));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 3 + 1800;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
     addSpellToCaster();
 }

@@ -104,7 +104,9 @@ void spell_effect(int prof){
 
       mylevel = clevel;
 
-      call_out("dest_effect",(((mylevel/10)+1)*ROUND_LENGTH));
+      spell_duration = ((clevel + roll_dice(1, 20)) / 10 + 1) * ROUND_LENGTH;
+      set_end_time();
+      call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

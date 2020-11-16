@@ -30,8 +30,8 @@ int cmd_echoto(string str)
 	seteuid(UID_LOG);
 	seteuid(getuid());
   line = replace_string(line,"%^NL%^","\n");
-        message("environment",line,target);
-        message("environment","You echoto "+targ+":\n"+line+"",TP);
+        message("echo",line,target);
+        message("echo","You echoto "+targ+":\n"+line+"",TP);
 	return 1;
 }
 

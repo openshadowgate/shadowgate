@@ -110,7 +110,7 @@ mixed* genoutput(object targ)
     if(targ->is_class("ranger")) {
         output += ({ ({ "Favored Enemy", "%^BOLD%^CYAN%^" + implode(targ->query_favored_enemies(), "/") }) });
         output += ({ ({ "Favored Terrain", "%^BOLD%^CYAN%^" + implode(targ->query_favored_terrains(), "/") }) });
-    }   
+    }
 
     if (sizeof(targ->query_divine_domain())) {
         output += ({ ({ "Divine Domain", "%^BOLD%^%^WHITE%^" + implode(targ->query_divine_domain(), "/") }) });
@@ -155,7 +155,7 @@ Use <review> to review you choices or <press button> to start the process.\n");
     write("%^RESET%^%^GREEN%^--=%^BOLD%^<%^WHITE%^ " + targ->query_title() + " %^BOLD%^%^GREEN%^>%^RESET%^%^GREEN%^=--%^RESET%^");
 
     {
-        int columns, maxwidth, maxcolumns, scrwidth;
+        int columns, maxwidth, maxcolumns, scrwidth, itemwidth;
         int i;
         int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
 
@@ -164,14 +164,21 @@ Use <review> to review you choices or <press button> to start the process.\n");
         maxcolumns = scolumn ? scolumn : atoi(TP->getenv("COLUMNS"));
         maxcolumns = maxcolumns < 1 ? 1 : maxcolumns;
 
-        columns = atoi(TP->getenv("SCREEN")) / (36);
+        itemwidth = 36;
+
+        if (maxcolumns == 1) {
+            itemwidth = 72;
+        }
+
+        columns = atoi(TP->getenv("SCREEN")) / (itemwidth);
         columns = columns < 1 ? 1 : columns;
 
         columns = columns > maxcolumns ? maxcolumns : columns;
 
-        scrwidth = columns * 36;
 
-        obuff = map_array(output, (:arrange_string("%^BOLD%^%^GREEN%^ " + arrange_string($1[0] + " %^BOLD%^%^BLACK%^--------------", 14) + "%^RESET%^%^GREEN%^ : %^RESET%^" + $1[1], 36):));
+        scrwidth = columns * itemwidth;
+
+        obuff = map_array(output, (:arrange_string("%^BOLD%^%^GREEN%^ " + arrange_string($1[0] + " %^BOLD%^%^BLACK%^--------------", 14) + "%^RESET%^%^GREEN%^ : %^RESET%^" + $1[1], $2):), itemwidth);
 
         tell_object(TP, format_page(obuff, columns, scrwidth, vertical));
     }

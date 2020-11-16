@@ -118,7 +118,9 @@ void spell_effect(int prof) {
     blocker->set_block_power(power);
     duration = 9 * mylevel;
     spell_successful();
-    call_out("dest_effect", duration);
+    spell_duration = (clevel / 2 + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

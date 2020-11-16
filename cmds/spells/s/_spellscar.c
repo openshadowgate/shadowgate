@@ -36,8 +36,9 @@ void spell_effect()
     caster->set_property("spelled", ({TO}) );
     addSpellToCaster();
 
-    call_out("dest_effect",(clevel/4+5)*ROUND_LENGTH);
-
+    spell_duration = (clevel / 5 + 5) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     call_out("notify_effect",ROUND_LENGTH*2);
 }
 

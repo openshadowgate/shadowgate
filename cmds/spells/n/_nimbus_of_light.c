@@ -77,7 +77,9 @@ void spell_effect(int prof){
     caster->set_property("light nimbus",1);
     if(!FEATS_D->usable_feat(caster,"thick skinned caster"))
     {
-        call_out("dest_effect",duration);
+        spell_duration = duration;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     }
 //added to thick skinned caster to match it's evil counterpart, Armor of Darkness.
 //~Circe~ 10/29/13

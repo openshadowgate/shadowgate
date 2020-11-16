@@ -7,6 +7,7 @@
 */
 
 #include <std.h>
+#include <magic.h>
 
 inherit SPELL;
 
@@ -68,7 +69,9 @@ void spell_effect()
     }
 
     spell_successful();
-    call_out("dest_effect", caster->query_guild_level("psywarrior"));
+    spell_duration = (clevel / 10 + 1) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

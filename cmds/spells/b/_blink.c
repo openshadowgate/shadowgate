@@ -59,7 +59,9 @@ void spell_effect(int prof) {
     spell_successful();
     addSpellToCaster();
     call_out("test", 2);
-    call_out("dest_effect",(clevel*5*ROUND_LENGTH));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 5;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void test() {

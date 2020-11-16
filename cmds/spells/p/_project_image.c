@@ -103,7 +103,9 @@ void spell_effect(int prof){
       make_image();
       addSpellToCaster();
       call_out("check",ROUND_LENGTH);
-      call_out("dest_effect",10*(int)CLEVEL);
+      spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 2;
+      set_end_time();
+      call_out("dest_effect",spell_duration);
 }
 
 void check() {

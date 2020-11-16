@@ -41,8 +41,6 @@ void spell_effect(int prof) {
     caster->set_property("spell shield",1);
     spell_successful();
     addSpellToCaster();
-//    call_out("dest_effect",20 + (clevel*2));
-    /* call_out("dest_effect",(clevel*10)*ROUND_LENGTH); */
     call_out("test", ROUND_LENGTH);
 }
 

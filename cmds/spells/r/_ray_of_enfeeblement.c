@@ -73,7 +73,9 @@ void spell_effect(int prof)
         target->set_property("spelled", ({ TO }));
         addSpellToCaster();
         spell_kill(target, caster);
-        call_out("dest_effect", (ROUND_LENGTH * (clevel / 16 + 1)));
+        spell_duration = (clevel / 15 + 1) * ROUND_LENGTH;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     }
     return 1;
 }

@@ -48,7 +48,9 @@ void spell_effect(int prof) {
         mons += ({ob});
     }
     addSpellToCaster();
-    call_out("dest_effect",clevel*6*ROUND_LENGTH);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 6;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

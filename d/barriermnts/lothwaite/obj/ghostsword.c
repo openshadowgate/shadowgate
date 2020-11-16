@@ -111,9 +111,7 @@ int extra_hit(object vic) {
                           "you as "+vic->QCN+" is frozen by a %^BOLD%^"+
                           "%^WHITE%^frosty blast %^RESET%^%^CYAN%^"+
                           "from "+ETOQCN+"'s sword!", ({ETO,vic}));
-                       set_property("magic",1);
-                       vic->do_damage("torso",random(10)+8);
-                       set_property("magic",-1);
+                       vic->cause_typed_damage(vic,0,roll_dice(1,10)+7,"cold");            
                        break;
           case 20..29: tell_object(ETO,"%^BOLD%^%^CYAN%^A cool breeze "+
                           "rises, leaving you feeling refreshed.");
@@ -153,9 +151,7 @@ int extra_hit(object vic) {
                            "%^WHITE%^cleaves %^RESET%^%^CYAN%^"+
                            ""+vic->QCN+" with "+ETO->QP+" icy "+
                            "sword!",({ETO,vic}));
-                       set_property("magic",1);
-                       vic->do_damage("torso",random(16)+8);
-                       set_property("magic",-1);
+                       vic->cause_typed_damage(vic,0,roll_dice(1,16)+8,"cold");  
                        call_out("frostbite",7,vic);
                        break;
           case 48..54:  tell_object(ETO,"%^BOLD%^%^BLUE%^You feel "+
@@ -164,7 +160,8 @@ int extra_hit(object vic) {
                         tell_room(EETO,"%^BOLD%^%^BLUE%^"+ETOQCN+" "+
                            "begins to chant, holding "+ETO->QP+" "+
                            "sword in front of "+ETO->QO+"!",ETO);
-                        new("/cmds/spells/f/_frost_breath")->use_spell(ETO,vic,15,100,"cleric");
+                        new("/cmds/spells/f/_frost_breath")->use_spell(ETO,vic,15,100,"druid");
+                        //cleric can't cast frost breath -H
                         break;
           default:  break;
        }
@@ -177,8 +174,6 @@ int frostbite(object vic){
    if(!objectp(TO)) return 1;
    if(!objectp(ETO)) return 1;
    tell_object(vic,"%^BOLD%^Frostbite scalds your flesh!");
-   set_property("magic",1);
-   vic->do_damage("torso",random(16)+6);
-   set_property("magic",-1);
+   vic->cause_typed_damage(vic,0,roll_dice(1,10)+7,"cold");  
    return 1;
 }

@@ -81,7 +81,9 @@ void spell_effect(int prof) {
     caster->set_property("added short",({"%^BOLD%^%^MAGENTA%^ (slightly distorted)%^RESET%^"}));
     spell_successful();
     addSpellToCaster();
-    call_out("dest_effect",(clevel*5*ROUND_LENGTH));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 5;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

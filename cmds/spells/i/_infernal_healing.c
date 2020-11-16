@@ -57,7 +57,7 @@ void spell_effect()
 
     tell_room(place, "%^BOLD%^%^RED%^" + target->QCN + "%^BOLD%^%^RED%^'s veins burn %^BLACK%^infernal %^BLACK%^re%^RED%^d%^RED%^ through the skin.%^RESET%^", caster);
     {
-        int duration = clevel * ROUND_LENGTH * 10;
+        int duration = clevel * ROUND_LENGTH * 12;
         tell_object(target, "%^BOLD%^%^RED%^You feel your blood %^BLACK%^bur%^RED%^n%^BLACK%^i%^RED%^n%^BLACK%^g %^RED%^a%^BLACK%^w%^RED%^a%^RED%^y%^RED%^ your wounds.%^RESET%^
 ");
         target->set_property("spelled", ({ TO }));
@@ -65,7 +65,9 @@ void spell_effect()
         target->set_property("fast_healing_spell", 1);
         spell_successful();
         addSpellToCaster();
-        call_out("dest_effect", duration);
+        spell_duration = duration;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
     }
 }
 

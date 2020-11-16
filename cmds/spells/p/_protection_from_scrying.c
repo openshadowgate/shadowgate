@@ -125,7 +125,9 @@ Previous block power
 //touch of randomness
     duration = 6 * (int)CLEVEL * ROUND_LENGTH;
     addSpellToCaster();
-    call_out("dest_effect", duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

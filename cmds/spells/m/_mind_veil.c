@@ -79,7 +79,9 @@ void spell_effect(int prof) {
       feattracker = 1;
    }
    duration = 6 * clevel  * ROUND_LENGTH;
-   call_out("dest_effect", duration);
+   spell_duration = duration;
+   set_end_time();
+   call_out("dest_effect",spell_duration);
 }
 
 void dest_effect(){

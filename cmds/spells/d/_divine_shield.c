@@ -72,7 +72,9 @@ void spell_effect(int prof)
             caster->remove_paralyzed();
             caster->force_me("wear shield");
             spell_successful();
-            call_out("dest_effect",clevel*25);
+            spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 10;
+            set_end_time();
+            call_out("dest_effect",spell_duration);
             addSpellToCaster();
             return;
         }

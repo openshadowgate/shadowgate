@@ -57,7 +57,9 @@ void spell_effect(int prof)
     caster->set_property("foresighted",1);
     addSpellToCaster();
     call_out("test", 10);
-    call_out("dest_effect", duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void test()

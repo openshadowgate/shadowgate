@@ -1,4 +1,6 @@
 #include <spell.h>
+#include <magic.h>
+
 inherit SPELL;
 
 void create() {
@@ -17,7 +19,7 @@ void create() {
 }
 
 int preSpell(){
-    if(caster->query_stoneSkinned() || caster->query_property("iron body")){ 
+    if(caster->query_stoneSkinned() || caster->query_property("iron body")){
         tell_object(caster,"You already have protection of this nature!");
         return 0;
     }
@@ -40,7 +42,9 @@ void spell_effect(int prof) {
     caster->set_property("poison immunity",1);
     caster->set_property("added short",({"%^RESET%^%^BLUE%^ (%^BOLD%^%^BLACK%^is a %^RESET%^%^BLUE%^hazy %^BOLD%^%^BLACK%^silhouette%^RESET%^%^BLUE%^) %^RESET%^"}));
     addSpellToCaster();
-    call_out("dest_effect", 1800 + (clevel * 10));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH + 1800;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

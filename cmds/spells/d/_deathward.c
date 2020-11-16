@@ -49,7 +49,9 @@ void spell_effect(int prof)
     target->set_property("no death", 1);
     spell_successful();
     addSpellToCaster();
-    call_out("dest_effect", (ROUND_LENGTH * 12 + roll_dice(1, 20)) * clevel);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 12;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

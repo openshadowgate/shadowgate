@@ -43,7 +43,7 @@ void set_sayings(mapping s){
 }
 
 void report(string str){
-//  "/daemon/reporter_d.c"->report("lujke", str);
+  "/d/atoyatl/reporter_d.c"->report("lujke", str);
 }
 
 mapping query_sayings(){

@@ -85,8 +85,10 @@ target->QCN+" as though it were the solid strings of a lute, leaving heavy silen
     power = CLEVEL + cha_bonus + random(6);
     blocker->set_block_power(power);
     blocker->set_bard_damager(CLEVEL);
-    duration = 9 * (int)CLEVEL;
-    call_out("dest_effect", duration);
+    duration = 2 * (int)CLEVEL * ROUND_LENGTH;
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

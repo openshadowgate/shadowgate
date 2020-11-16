@@ -79,7 +79,9 @@ void spell_effect(int prof) {
         target->add_skill_bonus(CORE_SKILLS[i], skillbonus);
     }
     target->set_property("morale-boost", 1);
-    call_out("dest_effect", (clevel * 5 + roll_dice(1, 20)) * ROUND_LENGTH);
+    spell_duration = (clevel * 5 + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect", spell_duration);
     spell_successful();
     if (prof != -100) {
         addSpellToCaster();

@@ -266,6 +266,12 @@ int __Sell(string str)
         tell_room(ETO, response + "You don't have any " + str + " to sell!");
         return 1;
     }
+
+    if (ob->query_property("nosell")) {
+        tell_room(ETO, response + "Are you sure you don't want to <keep> this?");
+        return 1;
+    }
+
     if (check_allowed(ob) == 0) {
         if (sizeof(str)) {
             tell_room(ETO, response + "Sorry, I don't deal in " + str + "s!");

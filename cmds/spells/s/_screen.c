@@ -104,8 +104,9 @@ void spell_effect(int prof) {
    blocker->set_block_power(power);
    spell_successful();
    addSpellToCaster();
-   duration = 6 * (int)CLEVEL * ROUND_LENGTH;
-   call_out("dest_effect", duration);
+   spell_duration = 6 * (int)CLEVEL * ROUND_LENGTH;
+   set_end_time();
+   call_out("dest_effect", spell_duration);
    return;
 }
 

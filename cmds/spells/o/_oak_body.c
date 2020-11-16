@@ -1,6 +1,7 @@
 // Similar to Iron Body but with less DR and a vulnerability to fire
 
 #include <spell.h>
+#include <magic.h>
 
 inherit SPELL;
 
@@ -62,7 +63,9 @@ void spell_effect(int prof) {
      caster->set_resistance("fire",-5);
      addSpellToCaster();
      spell_successful();
-     call_out("dest_effect", 1800 + (mylevel * 10));
+     spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH + 1800;
+     set_end_time();
+     call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

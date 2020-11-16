@@ -60,7 +60,9 @@ void spell_effect(int prof)
     target->set_property("added short",({"%^BOLD%^%^CYAN%^ (surrounded by helix of water)%^RESET%^"}));
     addSpellToCaster();
     call_out("test", 10);
-    call_out("dest_effect", duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void test()

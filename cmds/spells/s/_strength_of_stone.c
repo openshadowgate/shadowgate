@@ -59,7 +59,9 @@ void spell_effect(int prof) {
     addSpellToCaster();
     target->set_property("spelled",({TO}));
     target->set_property("blessed",1); //using this property so it won't stack with similar spells
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 }
 

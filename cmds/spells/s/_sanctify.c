@@ -55,7 +55,9 @@ void spell_effect(int prof) {
     tell_room(place, "%^BOLD%^%^CYAN%^A concussion without sound sends ripples"+
 	    " outwards and in the center of their wake is left standing a simple iron gate.");
     addSpellToCaster();
-    call_out("dest_effect", (ROUND_LENGTH * 20 * clevel * prof)/100);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 10;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

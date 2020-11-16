@@ -54,7 +54,9 @@ spell_effect()
     caster->set_property("lend_judgement",target);
     caster->set_property("spelled", ({TO}) );
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*(clevel+1)*6);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 7;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 dest_effect()

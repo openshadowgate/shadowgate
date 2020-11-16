@@ -33,8 +33,8 @@ int cmd_echolist(string str)
 	seteuid(UID_LOG);
 	seteuid(getuid());
 	line = replace_string(line,"%^NL%^","\n");
-	message("environment",line,targets);
-	message("environment","You echolist "+targs+":\n"+line+"",TP);
+	message("echo",line,targets);
+	message("echo","You echolist "+targs+":\n"+line+"",TP);
 	return 1;
     }
 

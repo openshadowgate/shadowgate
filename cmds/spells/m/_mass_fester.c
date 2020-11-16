@@ -56,7 +56,9 @@ void spell_effect()
     tell_room(place,"%^MAGENTA%^The place gets a little cold...");
 
     addSpellToCaster();
-    call_out("dest_effect",(clevel / 12 + 1)*ROUND_LENGTH,lower);
+    spell_duration = (clevel / 10 + 1) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

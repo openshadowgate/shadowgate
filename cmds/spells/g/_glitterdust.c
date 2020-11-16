@@ -71,7 +71,9 @@ void spell_effect(int prof) {
       targets[i]->set_property("spelled",({TO}));
       targets[i]->set_property("added short",({"%^YELLOW%^ (sparkling)%^RESET%^"}));
     }
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect(){

@@ -53,7 +53,9 @@ void spell_effect()
         return;
     }
 
-    call_out("dest_effect",(clevel+5)*ROUND_LENGTH);
+    spell_duration = (clevel + roll_dice(1, 6)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     call_out("itch_itch",ROUND_LENGTH);
 
     bonus = clevel/18+1;

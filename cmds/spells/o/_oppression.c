@@ -51,7 +51,9 @@ void spell_effect(int prof)
         "your chant!");
     tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" begins to glow with a dark aura as "
         ""+caster->QS+" completes "+caster->QP+" chant!",caster);
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     addSpellToCaster();
 //Making it show up on dispell
     spell_successful();

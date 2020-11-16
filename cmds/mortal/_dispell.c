@@ -31,7 +31,7 @@ int cmd_dispell(string str)
         message("info", "%^RESET%^%^BOLD%^%^BLUE%^--==%^RESET%^%^BOLD%^%^CYAN%^< %^RESET%^%^BOLD%^Spells you maintain %^RESET%^%^BOLD%^%^CYAN%^>%^RESET%^%^BOLD%^%^BLUE%^==--%^RESET%^", TP);
         for (i = 0; i < sizeof(spells); i++) {
             if (objectp(spells[i])) {
-                message("info", "%^BOLD%^%^BLUE%^" + sprintf("%2d", i) + ".%^BOLD%^GREEN%^ " + spells[i]->querySpellDisplay(), TP);
+                message("info", "%^BOLD%^%^BLUE%^" + sprintf("%2d", i) + ". " + spells[i]->query_spell_display(), TP);
             }
         }
         return 1;
@@ -41,7 +41,7 @@ int cmd_dispell(string str)
         if (atoi(str) > (sizeof(spells) - 1)) {
             write("%^BOLD%^%^CYAN%^No spell under this number.");
         } else if (objectp(spells[atoi(str)])) {
-            write("BOLD%^%^CYAN%^You dispell " + spells[atoi(str)]->querySpellDisplay());
+            write("BOLD%^%^CYAN%^You dispell " + spells[atoi(str)]->query_spell_display());
             spells[atoi(str)]->dest_effect();
         } else {
             write("%^BOLD%^%^CYAN%^No spell under this number.");
@@ -53,7 +53,7 @@ int cmd_dispell(string str)
         object spell;
         foreach(spell in spells) {
             if (objectp(spell)) {
-                write("%^BOLD%^%^CYAN%^You dispell " + spell->querySpellDisplay());
+                write("%^BOLD%^%^CYAN%^You dispell " + spell->query_spell_display());
                 spell->dest_effect();
             }
         }
@@ -110,7 +110,7 @@ int cmd_dispell(string str)
 
                 if (spell->query_spell_name() == sname ||
                     tname = targ) {
-                    write("%^BOLD%^%^CYAN%^You dispell " + spell->querySpellDisplay());
+                    write("%^BOLD%^%^CYAN%^You dispell " + spell->query_spell_display());
                     spell->dest_effect();
                     if (!allflag) {
                         break;

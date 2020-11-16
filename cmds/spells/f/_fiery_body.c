@@ -68,7 +68,9 @@ void spell_effect()
     effect(1);
     caster->set_property("added short",({ashort}));
     caster->set_property("spelled", ({TO}) );
-    call_out("dest_effect",ROUND_LENGTH*clevel);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     addSpellToCaster();
     spell_successful();
 }

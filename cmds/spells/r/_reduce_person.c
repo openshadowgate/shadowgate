@@ -57,7 +57,9 @@ void spell_effect(int prof)
     target->add_ac_bonus(2);
     target->add_stat_bonus("strength",-2);
     target->add_stat_bonus("dexterity",2);
-    call_out("dest_effect",ROUND_LENGTH*clevel);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     addSpellToCaster();
 }
 

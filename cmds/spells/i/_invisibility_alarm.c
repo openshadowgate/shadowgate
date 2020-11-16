@@ -31,7 +31,9 @@ void spell_effect()
     alarm->set_property("spelled", ({TO}) );
     spell_successful();
     addSpellToCaster();
-    call_out("dest_effect",ROUND_LENGTH*240); //20 mins max mostly cause reasons related to room resets.
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 12;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect()

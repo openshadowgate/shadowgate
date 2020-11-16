@@ -35,8 +35,8 @@ int cmd_echodeity(string str)
 	seteuid(UID_LOG);
 	seteuid(getuid());
 	line = replace_string(line,"%^NL%^","\n");
-	message("environment",line,targets);
-	message("environment","You echodeity "+deity+":\n"+line+"",TP);
+	message("echo",line,targets);
+	message("echo","You echodeity "+deity+":\n"+line+"",TP);
 	return 1;
 
 }

@@ -73,7 +73,9 @@ void spell_effect(int prof)
         target->add_stat_bonus("wisdom", -adjust);
         target->add_stat_bonus("charisma", -adjust);
         target->set_property("spelled", ({TO}) );
-        call_out("dest_effect", (ROUND_LENGTH * (clevel / 10 + 1)));
+        spell_duration = (clevel / 10 + 1) * ROUND_LENGTH;
+        set_end_time();
+        call_out("dest_effect",spell_duration);
         addSpellToCaster();
     }
     return 1;

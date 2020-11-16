@@ -179,7 +179,9 @@ void do_next(object endplace)
     open_portal();
     //changing this so if it's dispelled the portal will go away correctly
     //functions much like gate - Saide
-    call_out("dest_effect", clevel * ROUND_LENGTH);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     return;
 }
 

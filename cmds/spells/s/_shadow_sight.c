@@ -71,7 +71,9 @@ void spell_effect(int prof)
         call_out("flip",random(20),0);
     }
     else addSpellToCaster();
-    call_out("dest_effect", clevel * ROUND_LENGTH * 4);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 5;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void flip(int onOff)

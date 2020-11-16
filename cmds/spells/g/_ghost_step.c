@@ -73,7 +73,9 @@ void spell_effect(int prof) {
     caster->set_property("untrackable",1);
     addSpellToCaster();
     spell_successful();
-    call_out("dest_effect",duration);
+    spell_duration = duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void dest_effect() {

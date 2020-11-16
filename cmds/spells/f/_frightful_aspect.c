@@ -57,7 +57,9 @@ void spell_effect(int prof)
     spell_successful();
     addSpellToCaster();
     environment(caster)->addObjectToCombatCycle(TO, 1);
-    call_out("dest_effect", ROUND_LENGTH * (clevel + roll_dice(1, 12)));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 void execute_attack()

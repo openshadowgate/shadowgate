@@ -46,7 +46,9 @@ void spell_effect(int prof) {
     addSpellToCaster();
     affected = ({});
     immune = ({});
-    call_out("dest_effect",(clevel*20));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     call_out("test", ROUND_LENGTH);
 }
 

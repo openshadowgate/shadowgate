@@ -64,7 +64,9 @@ void make_sword(){
     control->move(caster);
     control->set_property("spell",TO);
     control->set_property("spelled", ({TO}) );
-    call_out("dest_effect",4*ROUND_LENGTH*mylevel);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 4;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     ob=new("/d/magic/mon/psychokinetic_weapon");
     control->set_sword(ob);
     caster->add_follower(ob);

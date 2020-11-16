@@ -52,7 +52,9 @@ void spell_effect(int prof)
     target->add_stat_bonus("dexterity",-2);
     target->set_property("spelled", ({TO}) );
     target->set_property("enlarged",1);
-    call_out("dest_effect",ROUND_LENGTH*clevel);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     addSpellToCaster();
 }
 

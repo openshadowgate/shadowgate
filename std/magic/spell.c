@@ -83,7 +83,9 @@ int spell_level,
     splash_spell,
     permanent,
     evil_spell,
-    mental_spell;
+    mental_spell,
+    end_time,
+    spell_duration;
 
 
 object* attackers,
@@ -314,6 +316,20 @@ void set_description(string descript)
         description = "";
     }
     description = descript;
+}
+
+varargs void set_end_time(int t)
+{
+    if (!t) {
+        end_time = time() + spell_duration;
+    } else {
+        end_time = t;
+    }
+}
+
+int query_end_time()
+{
+    return end_time;
 }
 
 void set_syntax(string synt)
@@ -1880,9 +1896,9 @@ void check_fizzle(object ob)
     }
 
     if (place->query_property("antimagic field")) {
-        if (place->query_property("antimagic field") > roll_dice(1, 6) + clevel) {
+        if (place->query_property("antimagic field") > clevel) {
             tell_object(caster, "%^CYAN%^Your " + whatsit + " fails to gather power in the anitmagic field.");
-            tell_room(place, "%^CYAN%^" + caster->QCN + "'s " + whatsit + " fizzles harmlessly.");
+            tell_room(place, "%^CYAN%^" + caster->QCN + "'s " + whatsit + " dissipates harmlessly.");
             caster->removeAdminBlock();
             TO->remove();
             return;
@@ -2113,7 +2129,7 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
 
     if (objectp(place)) {
         if (place->query_property("antimagic field")) {
-            if (place->query_property("antimagic field") > clevel + roll_dice(1, 6)) {
+            if (place->query_property("antimagic field") > clevel) {
                 tell_object(caster, "%^B_BLUE%^%^BOLD%^Your spell dissipates around " + victim->QCN + ".");
                 tell_room(place, "%^B_BLUE%^%^BOLD%^" + caster->QCN + "'s spell dissipates around " + victim->QCN + ".", caster);
                 TO->remove();
@@ -2339,7 +2355,7 @@ void define_base_damage(int adjust)
         sdamage = roll_dice(2, sdamage / 4);
     }
 
-    
+
 }
 
 int query_base_damage()
@@ -2485,20 +2501,9 @@ int spell_kill(object victim, object caster)
     return 1;
 }
 
-//updated to show arguments for spells that are on the list - Saide - May 5th, 2016
-string querySpellDisplay()
+string query_spell_display()
 {
-    if (!objectp(target)) {
-        if (!query_arg()) {
-            return spell_name;
-        }
-        return spell_name + " (" + query_arg() + ")";
-    }else {
-        if (!query_arg()) {
-            return spell_name + " on " + target->getParsableName() + ".";
-        }
-        return spell_name + " (" + query_arg() + ") on " + target->getParsableName() + ".";
-    }
+    return "%^BOLD%^%^GREEN%^" + spell_name + (query_arg() ? ("%^ORANGE%^ on " + query_arg()) : "") + (objectp(target) ? ("%^ORANGE%^ on " + target->getParsableName()) : "") + (query_end_time() ? ("%^ORANGE%^ ( " + parse_time(query_end_time() - time()) + " )") : "");
 }
 
 void removeSpellFromCaster()

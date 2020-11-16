@@ -60,7 +60,9 @@ void spell_effect(int prof)
     tell_room(place,"%^ORANGE%^The air ripples and wobbles as if through a %^BOLD%^%^BLACK%^smo%^RESET%^k"
         "%^BOLD%^%^BLACK%^y haze%^RESET%^%^ORANGE%^, and a small cottage phases into view.");
     addSpellToCaster();
-    call_out("dest_effect", (ROUND_LENGTH * 20 * clevel * prof)/100);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 12;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 }
 
 

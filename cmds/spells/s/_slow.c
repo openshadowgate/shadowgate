@@ -65,7 +65,9 @@ spell_effect()
     spell_kill(target, caster);
 
     addSpellToCaster();
-    call_out("dest_effect", ((round_duration) * ROUND_LENGTH));
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     spell_successful();
 
 }

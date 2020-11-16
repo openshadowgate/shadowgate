@@ -86,7 +86,9 @@ void spell_effect(int prof) {
    spell_successful();
    environment(caster)->addObjectToCombatCycle(TO,1);
    call_out("emote_em",15*ROUND_LENGTH,mytype);
-   call_out("dest_effect",duration);
+   spell_duration = duration;
+   set_end_time();
+   call_out("dest_effect",spell_duration);
 }
 
 void execute_attack(){
