@@ -490,7 +490,7 @@ int add_my_feat(object ob, string type, string feat)
             ob->set_class_feats_gained(num);
             update_usable(ob);
             if(feat == "grandmaster of the way")
-                TP->init_ki();
+                ob->init_ki();
             return 1;
         }
         else return 0;
@@ -1752,7 +1752,7 @@ int number_feats(object obj, string category, string* valid_classes) {
                 j = (((int)obj->query_class_level(subset[i]) + 1) / 2) + 1;
                 break;
             case "paladin":
-                if (category = "divinebond") {
+                if (category == "divinebond") {
                     if ((int)obj->query_class_level("paladin") > 4) {
                         j = 1;
                     }
@@ -1772,7 +1772,7 @@ int number_feats(object obj, string category, string* valid_classes) {
                 j = ((int)obj->query_class_level(subset[i]) / 3) + 1;
                 break;
             case "magus":
-                if (category = "arcana") {
+                if (category == "arcana") {
                     j = ((int)obj->query_class_level(subset[i]) / 3);
                 }
                 else {

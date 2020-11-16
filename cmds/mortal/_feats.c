@@ -276,7 +276,7 @@ int skill_focus_setting(string str, object ob, string feat, string mytype)
     for (i = 0; i < sizeof(myclasses); i++) {
         file = DIR_CLASSES + "/" + myclasses[i] + ".c";
         if (file_exists(file)) {
-            myclassskills = (string*)file->class_skills(TP);
+            myclassskills = (string*)file->class_skills(ob);
             if (member_array(str, myclassskills) != -1) {
                 tell_object(ob, "%^RED%^Warning:%^YELLOW%^ you already have %^BLUE%^" + str + " %^YELLOW%^as a class skill from one or more of your existing classes.%^RESET%^");
             }
@@ -319,7 +319,7 @@ int confirm_add_type(string str, object ob, string feat, string extradata, strin
         return 0;
     }
     if (str != "yes") {
-        tell_object(TP, "Aborting...");
+        tell_object(ob, "Aborting...");
         free = 0;
         return 1;
     }
@@ -329,8 +329,8 @@ int confirm_add_type(string str, object ob, string feat, string extradata, strin
 
     if (feattype == "other") {
         price = calculate_feat_cost(ob);
-        if ((int)TP->query("free_feats")) {
-            TP->set("free_feats", ((int)TP->query("free_feats") - 1));
+        if ((int)ob->query("free_feats")) {
+            ob->set("free_feats", ((int)ob->query("free_feats") - 1));
         }
 
         if (feat == "spellmastery" || feat == "archmage" || feat == "greater spell mastery") {
@@ -342,7 +342,7 @@ int confirm_add_type(string str, object ob, string feat, string extradata, strin
         FEATS_D->add_my_feat(ob, feattype, feat);
         //moved this down - otherwise feats that require a specific level will
         //never get added if the exp cost would cause you to lose a level - Saide
-        if (!avatarp(TP)) {
+        if (!avatarp(ob)) {
             if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
                 ob->add_exp(price * -1);
                 ob->resetLevelForExp(0);
@@ -409,7 +409,7 @@ int confirm_remove(string str, object ob, string feat, string extradata)
     }
 
     price = calculate_feat_cost(ob) / 8;
-    if (!avatarp(TP)) {
+    if (!avatarp(ob)) {
         if ((int)"/daemon/config_d.c"->check_config("character improvement") == 0) {
             ob->add_exp(price * -1);
             ob->resetLevelForExp(0);
@@ -427,7 +427,7 @@ int confirm_remove(string str, object ob, string feat, string extradata)
         }
     }
     if ((int)ob->query("free_feats")) {
-        ob->set("free_feats", ((int)TP->query("free_feats") - 1));
+        ob->set("free_feats", ((int)ob->query("free_feats") - 1));
     }
     FEATS_D->remove_my_feat(ob, feat);
     tell_object(ob, "%^YELLOW%^You have successfully removed the feat "
@@ -856,14 +856,14 @@ int validation_messages(object obj, string group, string feat_name) {
     case "add"://class
         valid_classes = ({ });
         valid_categories = ({ });
-        num_bonus = (int)TP->query_other_feats_gained();
+        num_bonus = (int)obj->query_other_feats_gained();
         can_gain = FEATS_D->can_gain_type_feat(obj, feat_name, "class");
         group_2 = "";
         break;
     case "racial":
         valid_classes = ({ });
         valid_categories = ({ });
-        num_bonus = (int)TP->query_racial_feats_gained();
+        num_bonus = (int)obj->query_racial_feats_gained();
         can_gain = FEATS_D->can_gain_type_feat(obj, feat_name, "racial");
         group_2 = "racial";
         break;
