@@ -7,9 +7,9 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("MagicResistance");
-    feat_name("disruptive");
-    feat_prereq("Fighter L6");
+    feat_category("MagusArcana");
+    feat_name("disruptive ma");
+    feat_prereq("Magus L6");
     feat_desc("By warding yourself, this feat increases your chance to avoid negative spell effects, granting you +4 to all your saving throws against spells.");
     permanent(1);
     allow_blind(1);
@@ -28,18 +28,14 @@ void execute_feat()
 
 int prerequisites(object ob)
 {
-    int magus = 0;
     if (!objectp(ob)) {
         return 0;
     }
-    if (FEATS_D->has_feat(ob, "disruptive ma")) {
+    if (FEATS_D->has_feat(ob, "disruptive")) {
         dest_effect();
         return 0;
     }
-    if (ob->is_class("magus") && file_exists("/std/class/magus.c")) {
-        magus = (int)"/std/class/magus.c"->fighter_training(ob);
-    }
-    if (ob->query_class_level("fighter") + magus < 6) {
+    if (ob->query_class_level("magus") < 6) {
         dest_effect();
         return 0;
     }
