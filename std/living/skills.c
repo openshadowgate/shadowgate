@@ -1647,7 +1647,7 @@ int has_ki()
 
 varargs void regenerate_ki(int amount, int pass)
 {
-    return "/daemon/user_d.c"->regenerate_ki(TO, amount, pass);
+    return "/daemon/user_d.c"->regenerate_pool(TO, amount, pass, "ki");
 }
 
 string* query_ki_spells()

@@ -205,7 +205,7 @@ void execute_attack()
         return;
     }
 
-    if(!caster->spend_ki(1))
+    if(!caster->spend_ki(2))
     {
         tell_object(caster, "%^CYAN%^You lack the needed ki to attempt "+
         "a stunning strike!%^RESET%^");
