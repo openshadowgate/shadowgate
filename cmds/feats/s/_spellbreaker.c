@@ -38,8 +38,8 @@ int prerequisites(object ob)
         magus = (int)"/std/class/magus.c"->fighter_training(ob);
     }
     if (!FEATS_D->has_feat(ob, "disruptive") ||
-        !(ob->query_class_level("fighter") + magus >= 6 ||
-            ob->query_class_level("magus") >= 6)) {
+        !(ob->query_class_level("fighter") + magus >= 10 ||
+            ob->query_class_level("magus") >= 9)) {
         dest_effect();
         return 0;
     }
