@@ -30,7 +30,7 @@ int prerequisites(object ob)
         dest_effect();
         return 0;
     }
-    if (ob->has_feat("armor bond")) {
+    if (FEATS_D->has_feat(ob, "armor bond")) {
         dest_effect();
         return 0;
     }
