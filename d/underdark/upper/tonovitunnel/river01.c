@@ -9,7 +9,7 @@ void create() {
     set_property("indoors",1);
     set_property("light",0);
     set_travel(FOOT_PATH);
-    set_terrain(ROCKY);
+    set_terrain(NAT_TUNNEL);
     set_name("An underground river");
     set_short("%^RESET%^%^BLUE%^An underground river%^RESET%^");
     set_long("%^BOLD%^%^BLACK%^The sound of moving water fills this "

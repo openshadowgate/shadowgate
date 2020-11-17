@@ -7,7 +7,7 @@ void create() {
     set_property("indoors",1);  
     set_property("light",2);
     set_travel(FOOT_PATH);
-    set_terrain(ROCKY);
+    set_terrain(NAT_CAVE);
     set_name("A small cave off the Dagger Sea");    
     set_short("%^BOLD%^%^BLUE%^A small cave off the Dagger Sea%^RESET%^");
     set_long("%^BOLD%^%^BLUE%^Carved by time and the %^CYAN%^waves%^BLUE%^"
