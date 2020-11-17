@@ -5,14 +5,14 @@ inherit ROOM;
 void create()
 {
    ::create();
-   set_terrain(BARREN);
+    set_property("indoors",1);
+   set_terrain(NAT_TUNNEL); //needs a valid inside one so picked this -H
    set_travel(FOOT_PATH);
    set_property("no teleport",1);
    set_property("no lightning",1);
    set_climate("tropical");
-   set_property("indoors",1);
    set_property("light",2);
-  set_property("night light",3);
+   set_property("night light",3);
    set_property("no sticks",1);
    set_name("Plane of Fire");
    set_short("%^BOLD%^%^RED%^Plane of Fire%^RESET%^");

@@ -7,7 +7,10 @@ int done;
 void create(){
   ::create();
   set_property("no teleport",1);
-    set_property("used sticks",1);
+  set_property("used sticks",1);
+  set_property("indoors",1);
+  set_terrain(BUILT_CAVE);
+  set_travel(PAVED_ROAD);
 }
 
 int is_junk(object obj)

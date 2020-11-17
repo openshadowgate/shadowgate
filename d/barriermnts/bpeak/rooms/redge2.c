@@ -8,7 +8,7 @@ void create(){
 ::create();
    set_property("indoors",1);
    set_travel(FOOT_PATH);
-   set_terrain(ROCKY);
+   set_terrain(NAT_CAVE);
    set_name("%^BOLD%^%^BLACK%^Just on the other side of the river%^RESET%^");
    set_short("%^RESET%^The other side of the river");
    set_property("no teleport",1);
