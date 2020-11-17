@@ -161,7 +161,7 @@ string get_trap_room_auto_detect(string str, object who, int is_door)
 	MySkill = (int)who->query_skill("dungeoneering");
 	if(sizeof(who->query_armour("torso"))) 
 	{
-		MySkill += (int)who->skill_armor_mod(TP->query_armor("torso"));
+		MySkill += (int)who->skill_armor_mod(TP->query_armour("torso"));
 	}
 	switch(is_door) 
 	{

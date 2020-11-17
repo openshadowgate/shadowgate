@@ -167,7 +167,7 @@ int cmd_steal(string str) {
 
 /* Calculations */
   steal = TP->query_skill("thievery") + roll_dice(1,20);
-  if(sizeof(TP->query_armour("torso"))) steal += TP->skill_armor_mod(TP->query_armor("torso"));
+  if(sizeof(TP->query_armour("torso"))) steal += TP->skill_armor_mod(TP->query_armour("torso"));
 
     if (victim->query_invis()) steal -= INVIS_PENALTY;
     if ((int)ob->query_weight() > 50 ) steal -= WEIGHT_PENALTY;

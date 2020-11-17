@@ -33,7 +33,7 @@ int cmd_detect(string str){
   if(!TP->query_invis())
     tell_room(environment(TP),"You see "+TPQCN+" attempt to detect noise toward the "+where+".",TP);
   score = TP->query_skill("perception") + roll_dice(1,20);
-  if(sizeof(TP->query_armour("torso"))) score += TP->skill_armor_mod(TP->query_armor("torso"));
+  if(sizeof(TP->query_armour("torso"))) score += TP->skill_armor_mod(TP->query_armour("torso"));
   if(score <= 20){
     notify_fail("You hear nothing!!\n");
     return 0;
