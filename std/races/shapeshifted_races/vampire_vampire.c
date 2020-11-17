@@ -18,7 +18,10 @@ void create()
     set_shape_bonus("attack bonus",2);
     set_base_attack_num(2);
     set_shape_bonus("damage resistance",6);
-    set_shape_bonus("spell damage resistance",12);
+    set_shape_bonus("spell damage resistance",20);
+    set_shape_bonus("empowered",2);
+    set_shape_bonus("spell penetration",4);
+    set_shape_bonus("sight bonus",4);
 }
 
 int default_descriptions(object obj)

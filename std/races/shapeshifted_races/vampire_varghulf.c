@@ -19,10 +19,10 @@ void create()
     set_can_talk(0);
     set_shape_race("varghulf");
     set_shape_profile("vampire_varghulf_999");
-    set_shape_bonus("survival",4);
+    set_shape_bonus("survival",6);
     set_shape_bonus("perception",4);
-    set_shape_bonus("damage bonus",3);
-    set_shape_bonus("attack bonus",3);
+    set_shape_bonus("damage bonus",6);
+    set_shape_bonus("attack bonus",6);
     set_shape_bonus("sight bonus",4);
     set_shape_bonus("damage resistance",8);
     set_shape_height(90);
