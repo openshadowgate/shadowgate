@@ -211,7 +211,7 @@ void execute_attack()
         return;
     }
 
-    if(!caster->spend_ki(3))
+    if(!caster->spend_ki(8))
     {
         tell_object(caster, "%^CYAN%^You lack the needed ki to attempt "+
         "quivering palm!%^RESET%^");

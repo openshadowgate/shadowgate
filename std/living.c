@@ -378,10 +378,6 @@ void heart_beat()
             TO->set_property("stabs_available", i);
         }
     }
-    /*
-    if (TO->is_class("monk")) {
-        "/daemon/user_d.c"->regenerate_ki(TO, (1 + random(2)), 1);
-    }*/
     if (TO->is_class("monk")) {
         "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "ki");
     }

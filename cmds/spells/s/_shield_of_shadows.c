@@ -45,6 +45,9 @@ void spell_effect(int prof) {
     caster->set_property("spell shield",1);
     spell_successful();
     addSpellToCaster();
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 8;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
     call_out("test", ROUND_LENGTH);
 }
 
