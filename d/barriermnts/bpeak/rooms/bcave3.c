@@ -12,7 +12,7 @@ void create(){
    set_property("light",1);
    set_property("indoors",1);
    set_travel(FOOT_PATH);
-   set_terrain(ROCKY);
+   set_terrain(NAT_CAVE);
    set_name("%^BOLD%^%^BLACK%^The messhall%^RESET%^");
    set_short("%^RESET%^Inside a cave");
    set_smell("default","A foul smell permeates the air here.");

@@ -30,10 +30,12 @@ void create(){
     ::create();
 	set_property("light",2);
 	set_property("indoors",1);
+  set_terrain(WOOD_BUILDING);
+  set_travel(DIRT_ROAD);
   set_property("no attack",1);
   set_property("no teleport",1);
 	set("short","The downward slide");
-       set_long("%^RESET%^%^ORANGE%^You are sailing across the "+
+  set_long("%^RESET%^%^ORANGE%^You are sailing across the "+
 	   "%^BOLD%^%^RED%^Riv%^RESET%^%^RED%^e%^BOLD%^r of "+ 
 	   "Fla%^RESET%^%^RED%^m%^BOLD%^e %^RESET%^%^ORANGE%^aboard a "+ 
 	   "magical vessel. The %^BOLD%^h%^BLACK%^e%^ORANGE%^at "+ 
@@ -50,10 +52,10 @@ void create(){
 	   "e%^RESET%^%^CYAN%^n%^BOLD%^e%^RESET%^r%^CYAN%^g%^BOLD%^y "+ 
 	   "%^RESET%^%^ORANGE%^in front of him, he controls the vessel "+ 
 	   "with mere thought.%^WHITE%^\n");
-     set_smell("default", "The incredible heat and overpowering tang of molten metals forces you to cover your nose.");
-     set_listen("default", "Currents of flame crackle and pop around you.");
+  set_smell("default", "The incredible heat and overpowering tang of molten metals forces you to cover your nose.");
+  set_listen("default", "Currents of flame crackle and pop around you.");
 	set_exits(([]));
-        set_items(([
+  set_items(([
     "river" : "Molten metals and lava swirl and rush around you beneath the phantom vessel.",
     "boat" : "The phantom vessel is a small sailing ship that you can see right through!  It floats just above the water!",
     "vessel" : "The phantom vessel is a small sailing ship that you can see right through!  It floats just above the lava.",

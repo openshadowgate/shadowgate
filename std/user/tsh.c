@@ -327,6 +327,7 @@ string hunger2str(object player)
     int max = player->query_formula();
     int cur, perc;
     cur = player->query_stuffed();
+    max = max ? max : 1;
     perc = cur*100/max;
 
     if(perc > 100*5/6)
@@ -348,6 +349,7 @@ string thirst2str(object player)
     int max = player->query_formula();
     int cur, perc;
     cur = player->query_quenched();
+    max = max ? max : 1;
     perc = cur*100/max;
 
     if(perc > 100*5/6)

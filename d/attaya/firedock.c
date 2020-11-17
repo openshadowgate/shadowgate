@@ -9,6 +9,8 @@ void create() {
     ::create();
     set_property("light",2);
     set_property("indoors",0);
+    set_terrain(SHORE);
+    set_travel(PAVED_ROAD);
     set_short("Granite pier on the River of Flame.");
     set_long("%^BOLD%^%^BLACK%^You stand upon a granite slab above a fast "+
 	"moving %^RED%^ri%^BLACK%^v%^RESET%^%^RED%^e%^BOLD%^r %^BLACK%^of "+ 

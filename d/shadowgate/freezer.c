@@ -11,10 +11,11 @@ void create()
     ::create();
     set_property("light", 1);
     set_property("no teleport", 1);
-
+    set_terrain(WOOD_BUILDING);
+    set_travel(DIRT_ROAD);
     set_property("indoors", 1);
     set("short", "The freezer");
-    set("long", "The local freezer.");
+    set("long", "The local freezer.  A place for the link-dead.");
     set_exits((["exit" : "/d/shadow/room/forest/road30"]));
     set_pre_exit_functions(({ "exit" }), ({ "GoThroughDoor" }));
     set_no_clean(1);

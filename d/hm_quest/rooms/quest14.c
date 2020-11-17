@@ -6,7 +6,7 @@ void create(){
     set_property("light", 2);
     set_property("indoors", 1);
     set_property("no teleport", 1);
-    set_terrain(BARREN);
+    set_terrain(STONE_BUILDING);
     set_travel(DECAYED_FLOOR);
     set_name("An abandoned temple");
     set_short("%^RESET%^%^BLUE%^An abandoned temple%^RESET%^");

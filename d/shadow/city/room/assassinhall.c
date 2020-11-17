@@ -16,7 +16,6 @@ void create()
                    "torches" : "%^YELLOW%^The torches burn low, giving off neither much light or warmth.%^RESET%^",
                    ({"staircase","stairs","water"}) : "%^RESET%^%^CYAN%^The stairs come to an abrupt end where the river is constantly eroding away at their collapsed remains. The water is cold, dark and full of shifting shadows from the deep. There is no way to proceed from here, and no good reason to want to try.%^WHITE%^",
                    ]));
-    set_indoors(1);
     set_property("no teleport",1);
     set_exits(([
                    "up":ROOMS+"/assassinentr",

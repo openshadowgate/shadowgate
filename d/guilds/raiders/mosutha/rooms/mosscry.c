@@ -18,6 +18,8 @@ void create(){
         "barely illuminated.\n"+
         "%^RESET%^");
     set_property("indoors",1);
+	set_travel(FOOT_PATH);
+    set_terrain(STONE_BUILDING);
     set_property("light",2);
     set_smell("default","The room smells clean and dry.");
     set_listen("default","You hear nothing save the noises you make yourself.");
