@@ -660,7 +660,7 @@ int cmd_feats(string str)
                 break;
             case "spellcraft":
                 BONUS_ALLOWED = FEATS_D->number_feats(TP, feat_types[i], CASTERCLASSES);
-                num_bonus = (int)TP->query_spellcraft_feats_gained();
+                num_bonus = (int)TP->query_magic_feats_gained();
                 feat_types_labels = "magic";
                 break;
             case "hybrid":

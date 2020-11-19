@@ -1743,6 +1743,7 @@ int number_feats(object obj, string category, string* valid_classes) {
             return -1;
         }
         for (i = 0; i < sizeof(subset); i++) {
+            j = 0;
             if (member_array(subset[i], valid_classes) == -1) {
                 continue;
             }
