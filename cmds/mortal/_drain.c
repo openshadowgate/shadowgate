@@ -94,7 +94,7 @@ int cmd_drain(string args)
     input_to("cancel_drain", 0);
     draining = 1;
     drain_process(targobj);
-    TP->add_bloodlust(20000);
+    TP->add_bloodlust(400 * targobj->query_level());
 
     return 1;
 }
