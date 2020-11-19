@@ -450,7 +450,7 @@ void heart_beat()
                 if (TO->is_vampire()) {
                     if (query_bloodlust() < (5000)) {
                         write("%^RED%^Bloodlust drives you insane.");
-                        tell_room(ETO, "%^RED%^" + TO->QCN + "'s eyes glow dark red.");
+                        tell_room(ETO, "%^RED%^" + TO->QCN + "'s eyes glow dark red.", TO);
                     }
                 }
             }

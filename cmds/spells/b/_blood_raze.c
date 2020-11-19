@@ -36,7 +36,7 @@ void spell_effect(int prof)
     caster->add_bloodlust(-500);
     tell_room(place, "%^BOLD%^%^RED%^" + caster->QCN + " waves hand and releases an arc of crimson red flames!%^RESET%^");
     if (sizeof(attackers) < 1) {
-        tell_object(caster, "%^RED%^The flames fly but fail to touch anything.%^RESET%^");
+        tell_object(caster, "%^RED%^The flames surround you but fail to touch anything as nobody is attacking you.%^RESET%^");
         dest_effect();
         return;
     }
@@ -51,7 +51,7 @@ void spell_effect(int prof)
         }
         tell_object(attackers[i], "%^RED%^%^BOLD%^The %^BLACK%^flame%^RED%^ burns through you!%^RESET%^");
         tell_room(place, "%^RED%^%^BOLD%^The %^BLACK%^crimson flame%^RED%^ burns through " + attackers[i]->QCN + "!%^RESET%^", attackers[i]);
-        if (RACE_D->is_valid_blooddrain_target(targ, caster)) {
+        if (RACE_D->is_valid_blooddrain_target(attackers[i], caster)) {
             caster->add_bloodlust(100);
             caster->cause_typed_damage(caster, "torso", admg / 8, "negative energy");
         }
