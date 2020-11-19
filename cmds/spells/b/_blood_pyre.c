@@ -103,7 +103,7 @@ void execute_attack()
             tell_object(attackers[i], "%^BOLD%^%^BLACK%^You are caressed by the flames around " + caster->QCN + "!");
             damage_targ(attackers[i], attackers[i]->return_target_limb(), sdamage, "negative energy");
         }
-        if (RACE_D->is_valid_blooddrain_target(targ, caster)) {
+        if (RACE_D->is_valid_blooddrain_target(attackers[i], caster)) {
             caster->add_bloodlust(100);
             if (caster->query_hp() < caster->query_max_hp()) {
                 damage_targ(caster, caster->return_target_limb(), -sdamage / 8 * (i > 8?8:i), "untyped");
