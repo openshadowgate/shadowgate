@@ -773,6 +773,7 @@ void show_wall_to_name(string name){
 int * query_positions(string climber){
   string * cs;
   int * positions;
+  if (!mapp(climbers) || sizeof(climbers)<1) return -1;
   cs = keys(climbers);
   if (member_array(climber, cs) ==-1) return -1;
   positions = climbers[climber];
@@ -3048,7 +3049,8 @@ void show_wall(object who){
   screen_height = atoi(who->getenv("LINES"));
   if (screen_width<10) screen_width = 75;
   limbs = query_positions(who->query_name());
-  report("showwall 2 left hand pos: " + limbs[L_HAND] + " right hand pos: " + limbs[R_HAND] + " left leg pos: " + limbs[L_LEG] + " right leg pos: " + limbs[R_LEG] + " body pos: " + limbs[BODY], 4);
+  report("showwall 2. No further comment");
+
   my_x = limbs[BODY] % 10000;
   my_y = limbs[BODY] / 10000;
   if (sizeof(mywall) > screen_height)
