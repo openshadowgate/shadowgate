@@ -32,6 +32,7 @@ string query_cast_string()
 void spell_effect(int prof)
 {
     tell_room(place,"%^BOLD%^%^BLACK%^Barrage of blood storm fills the area at " +caster->QCN+"'s command.%^RESET%^");
+    caster->add_bloodlust(-500);
     counter = clevel * 3;
     addSpellToCaster();
     spell_successful();
@@ -60,8 +61,6 @@ void execute_attack()
 
     define_base_damage(2);
 
-    caster->add_bloodlust(-2000);
-
     tell_room(place, "%^BOLD%^%^RED%^The blood storm razes all life within.");
     for (i = 0; i < sizeof(foes); i++) {
         targ = foes[i];
@@ -76,8 +75,8 @@ void execute_attack()
         tell_object(targ, "%^BOLD%^%^BLACK%^You feel at an ebb as you slowly die.%^RESET%^");
         damage_targ(targ, targ->return_target_limb(), sdamage, "negative energy");
 
-        if (RACE_D->is_race(targ->query_race())) {
-            caster->add_bloodlust(10);
+        if (RACE_D->is_valid_blooddrain_target(targ, caster)) {
+            caster->add_bloodlust(100);
             caster->cause_typed_damage(caster, "torso", roll_dice(1, 4), "negative energy");
         }
     }

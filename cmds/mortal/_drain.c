@@ -67,7 +67,7 @@ int cmd_drain(string args)
         return 1;
     }
 
-    if (!RACE->is_valid_blooddrain_target(targobj, TP)) {
+    if (!RACE_D->is_valid_blooddrain_target(targobj, TP)) {
         write("Feeding on this is beneath you.");
         return 1;
     }
@@ -94,7 +94,6 @@ int cmd_drain(string args)
     input_to("cancel_drain", 0);
     draining = 1;
     drain_process(targobj);
-    TP->add_bloodlust(400 * targobj->query_level());
 
     return 1;
 }
@@ -162,6 +161,7 @@ void drain_process(object target)
         tell_object(TP, "%^BOLD%^%^RED%^You feel too infused as it is. You continue to drain for life.%^RESET%^");
         type = "life";
     }
+
     if (type == "health") {
         drain_health(target);
     }else {
@@ -170,6 +170,7 @@ void drain_process(object target)
     TP->set_paralyzed(ROUND_LENGTH * 8, "%^BOLD%^%^BLACK%^You are held in place %^RED%^feeding%^BLACK%^ of " + target->QCN + "!%^RESET%^
 %^BOLD%^%^BLACK%^Hit %^RED%^<return>%^BLACK%^ to stop feeding.%^RESET%^");
     tell_object(TP, "%^BOLD%^%^RED%^Fresh blood runs down your tongue.");
+    TP->add_bloodlust(400 * target->query_level());
     tell_room(ETP, "%^BOLD%^%^RED%^" + TP->QCN + " leans over " + target->QCN + "'s neck, slurping sound heard from them.", TP);
     tell_object(target, "%^RED%^" + TARGMSGS[random(sizeof(TARGMSGS))] + "%^RESET%^");
     if (!random(7)) {

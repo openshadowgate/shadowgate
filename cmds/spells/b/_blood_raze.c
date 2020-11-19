@@ -51,12 +51,13 @@ void spell_effect(int prof)
         }
         tell_object(attackers[i], "%^RED%^%^BOLD%^The %^BLACK%^flame%^RED%^ burns through you!%^RESET%^");
         tell_room(place, "%^RED%^%^BOLD%^The %^BLACK%^crimson flame%^RED%^ burns through " + attackers[i]->QCN + "!%^RESET%^", attackers[i]);
-        if (RACE_D->is_race(attackers[i]->query_race()) && !attackers[i]->is_undead()) {
-            caster->add_bloodlust(10);
+        if (RACE_D->is_valid_blooddrain_target(targ, caster)) {
+            caster->add_bloodlust(100);
             caster->cause_typed_damage(caster, "torso", admg / 8, "negative energy");
-        } else {
-            damage_targ(attackers[i], attackers[i]->return_target_limb(), admg, "fire");
         }
+
+        damage_targ(attackers[i], attackers[i]->return_target_limb(), admg, "fire");
+
     }
     spell_successful();
     dest_effect();
