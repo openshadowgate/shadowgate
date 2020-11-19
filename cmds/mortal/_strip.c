@@ -36,16 +36,10 @@ int cmd_strip(string str) {
     }
 
 
-//   if(!(who = present(TP->realName(whom), ETP)) ) {
-// It was...
-// We need to fix this better...
-// But I'm too tired tonight. - Garrett
-     if(!(who = present(whom, ETP)) || 
-     //(avatarp(who) && who->query_disguised())) {
-     (avatarp(who) && who->query_true_invis())) {
-// Which was bugging with current avatars.,, We need to fix strip, bind, etc...
-        return notify_fail(capitalize(whom)+" is not here.\n");
-    }
+    if (!(who = present(whom, ETP)) ||
+        (avatarp(who) && who->query_true_invis())) {
+        return notify_fail(capitalize(whom) + " is not here.\n");
+     }
 
     if(!TP->ok_to_kill(who)) return notify_fail("Supernatural forces prevent you from doing that.\n");
     if(!who->query_bound() && !who->query_unconscious()) {
@@ -204,4 +198,3 @@ get, bind, blindfold, gag, hit, pkilling, rules
 "
          );
 }
-

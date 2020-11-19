@@ -58,7 +58,7 @@ int cmd_sign(string str)
         return 1;
     }
 
-    who2 = TP->realName(who);
+    who2 = TP->realNameVs(who);
     if (!stringp(who2)) {
         write("You can't forge a signature of someone you don't know.");
         return 1;

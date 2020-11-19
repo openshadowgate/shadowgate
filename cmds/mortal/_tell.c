@@ -38,7 +38,7 @@ object resolve_tell_playerob(string whom)
     if (objectp(ob) && (avatarp(ob) || avatarp(TP))) {
         return ob;
     }
-    real_whom = TP->realName(whom2);
+    real_whom = TP->realNameVsProfile(whom2);
     if (objectp(ob = find_player(real_whom))) {
         return ob;
     }
