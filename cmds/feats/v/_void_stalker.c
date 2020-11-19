@@ -54,7 +54,7 @@ int cmd_void_stalker(string str)
         return 1;
     }
 
-    target = TP->realName(str);
+    target = TP->realNameVsProfile(str);
     ob = find_player(target);
 
     if(!ob)

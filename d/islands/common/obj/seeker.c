@@ -22,7 +22,7 @@ void create() {
    " so that they might <seek> out grave violators of justice."+
    " Then one day the High Priest boat was sank when he did not have the cloak."+
    " The cloak was then used to find the one responsible for sinking"+
-   " the boat and it was never seen again." 
+   " the boat and it was never seen again."
    );
    set_weight(2);
    set_type("clothing");
@@ -65,40 +65,40 @@ void init(){
    add_action("seeker","seek");
 }
 
-int seeker(string str) 
+int seeker(string str)
 {
     object ob,location;
     string target;
     if(!str) return 0;
-    if(!TO->query_worn()) 
+    if(!TO->query_worn())
     {
         tell_object(TP,"You can't feel anything from the cloak, without it wrapped about you.");
         return 1;
-    }   
-    if(WAIT_TIME > (time() - used_time)) 
+    }
+    if(WAIT_TIME > (time() - used_time))
     {
         tell_object(TP,"The magic is faded.");
         return 1;
-    }   
-    if (ETO->query_bound() || EETO->query_unconscious() || EETO->query_paralyzed()) 
+    }
+    if (ETO->query_bound() || EETO->query_unconscious() || EETO->query_paralyzed())
     {
         ETO->send_paralyzed_message("info",ETO);
     }
-    
-    target = ETO->realName(str);
+
+    target = ETO->realNameVsProfile(str);
     ob = find_player(target);
-    
-    if(!ob) 
+
+    if(!ob)
     {
         notify_fail("Nothing happens...");
         return 0;
     }
-    if(ob == TP) 
+    if(ob == TP)
     {
         notify_fail("You need only look around you to find yourself!\n");
         return 0;
     }
-    if(wizardp(ob)) 
+    if(wizardp(ob))
     {
         notify_fail("Nothing happens...");
         return 0;
@@ -106,10 +106,10 @@ int seeker(string str)
     write("%^BOLD%^%^WHITE%^You close your eyes and begin to seek...");
     say("%^BOLD%^%^WHITE%^"+ETOQCN+" closes "+ETO->QP+" eyes and begins to fade...");
     location = environment(find_living(target));
-    if(location->query_property("teleport proof") || location->query_property("no teleport") || ETP->query_property("no teleport") || ETP->query_property("teleport proof")) 
+    if(location->query_property("teleport proof") || location->query_property("no teleport") || ETP->query_property("no teleport") || ETP->query_property("teleport proof"))
     {
-        notify_fail("Something is blocking your path"); 
-        return 0; 
+        notify_fail("Something is blocking your path");
+        return 0;
     }
     else
     {
@@ -125,8 +125,8 @@ void set_used_time(int x) {
 }
 
 
-int query_size(){ 
-    if(living(ETO)) 
+int query_size(){
+    if(living(ETO))
         return ETO->query_size();
     else return 2;
 }
