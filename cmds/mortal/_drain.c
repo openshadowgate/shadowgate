@@ -67,13 +67,13 @@ int cmd_drain(string args)
         return 1;
     }
 
-    if (!(verify_conditions(targobj))) {
-        write("Your target is not incapacitated.\n");
+    if (!RACE->is_valid_blooddrain_target(targobj, TP)) {
+        write("Feeding on this is beneath you.");
         return 1;
     }
 
-    if (targobj->is_undead()) {
-        write("You should eat fresh food.\n");
+    if (!(verify_conditions(targobj))) {
+        write("Your target is not incapacitated.\n");
         return 1;
     }
 
@@ -83,7 +83,7 @@ int cmd_drain(string args)
         tell_object(TP, "%^BOLD%^%^RED%^Something is wrong with your target's blood, it makes you sic!");
         tell_object(TP, "%^BOLD%^%^RED%^You start uncontrollably puking blood.");
         TP->add_bloodlust(-20000);
-        TP->set_paralyzed(roll_dice(1, 4) * 8, "%^BOLD%^%^RED%^You are sick from garlic scent.");
+        TP->set_paralyzed(roll_dice(1, 4) * 8, "%^BOLD%^%^RED%^You are sick from feeding on improper blood.");
         return 1;
     }
 
