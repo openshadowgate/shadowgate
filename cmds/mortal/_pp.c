@@ -94,7 +94,7 @@ int cmd_pp(string str) {
     roll = random(100)+1;
     //    tell_object(TP,"x = "+roll+" steal = "+steal); */
     steal = TP->query_skill("thievery") + roll_dice(1,20);
-    if(sizeof(TP->query_armour("torso"))) steal += TP->skill_armor_mod(TP->query_armor("torso"));
+    if(sizeof(TP->query_armour("torso"))) steal += TP->skill_armor_mod(TP->query_armour("torso"));
     roll = ob->query_skill("perception") + roll_dice(1,20);
 
     if (roll>steal || (TP->get_static("caught") &&  time() - (int)((mapping)TP->get_static("caught"))[ob] <= 150)) {

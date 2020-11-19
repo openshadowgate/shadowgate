@@ -53,7 +53,7 @@ void spell_effect(int prof)
     addSpellToCaster();
     spell_successful();
     caster->add_ac_bonus(4);
-    caster->add_saving_bonus("fort", 4);
+    caster->add_saving_bonus("fortitude", 4);
 
     spell_duration = duration;
     set_end_time();
@@ -119,7 +119,7 @@ void dest_effect()
         tell_object(caster, "%^CYAN%^Your energy conversion fades.");
         caster->remove_property("nimbus");
         caster->add_ac_bonus(-4);
-        caster->add_saving_bonus("fort", -4);
+        caster->add_saving_bonus("fortitude", -4);
         caster->remove_property_value("added short", ({ "%^CYAN%^BOLD%^ (In an aura of energy)" }) );
     }
 

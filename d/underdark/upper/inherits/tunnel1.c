@@ -7,7 +7,7 @@ void create() {
     set_property("indoors",1);  
     set_property("light",1);
     set_travel(FOOT_PATH);
-    set_terrain(ROCKY);
+    set_terrain(BUILT_TUNNEL);
     set_name("A tunnel deep in the earth");    
     set_short("%^RESET%^%^ORANGE%^A tunnel deep in the earth%^RESET%^");
     set_long("%^BOLD%^%^BLACK%^Hollowed from the granite stone of the "

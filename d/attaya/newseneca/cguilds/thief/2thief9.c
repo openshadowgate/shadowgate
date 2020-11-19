@@ -11,6 +11,7 @@ string *registered;
 void create(){
 //    object ob;
     ::create();
+    set_property("indoors",1);
     set_terrain(WOOD_BUILDING);
     set_travel(DIRT_ROAD);
     registered = ({});

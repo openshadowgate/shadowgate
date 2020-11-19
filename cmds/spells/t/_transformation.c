@@ -57,7 +57,7 @@ void spell_effect(int prof) {
       if((int)caster->query_stats(VALIDSTATS[i]) < 29) statperks += ({2});
       caster->add_stat_bonus(VALIDSTATS[i],statperks[i]);
     }
-    caster->add_saving_bonus("fort",5);
+    caster->add_saving_bonus("fortitude",5);
     caster->add_ac_bonus(4);
     caster->set_property("transformed",1);
     if(pointerp(caster->query_temporary_feats()))
@@ -79,7 +79,7 @@ void dest_effect(){
       tell_object(caster,"%^CYAN%^Your transformation ebbs away.%^RESET%^");
       tell_room(environment(caster),"%^CYAN%^"+caster->QCN+"'s powerful transformation fades away.%^RESET%^",caster);
       for(i = 0;i<sizeof(VALIDSTATS);i++) caster->add_stat_bonus(VALIDSTATS[i],(-1)*statperks[i]);
-      caster->add_saving_bonus("fort",-5);
+      caster->add_saving_bonus("fortitude",-5);
       caster->add_ac_bonus(-4);
       caster->set_property("transformed",-1);
       if(feattracker == 1) caster->remove_temporary_feat("martial weapon proficiency");

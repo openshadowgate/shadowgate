@@ -114,13 +114,13 @@ int cmd_enhance(string str)
                         if (is_burst && !has_element) {
                             TP->set_property(element, 1);
                         }
-                        tell_object(TP, "Applying " + enhancement_name + " to your weapon.");
+                        tell_object(TP, "Applying %^BOLD%^%^GREEN%^" + enhancement_name + "%^RESET%^ to your weapon.");
                         power -= cost;
                         TP->set_property("weapon enhancements", 1);
                     }
                 }
                 else {
-                    tell_object(TP, "Can't apply " + enhancement_name + " to your weapon.");
+                    tell_object(TP, "Can't apply %^BOLD%^%^RED%^" + enhancement_name + "%^RESET%^ to your weapon.");
                 }
             }
         }
@@ -209,13 +209,13 @@ int cmd_enhance(string str)
                             TP->set_property(element + " en_res", 1);
                             TP->set_resistance(element, 10);
                         }
-                        tell_object(TP, "Applying " + enhancement_name + " to your armor.");
+                        tell_object(TP, "Applying %^BOLD%^%^GREEN%^" + enhancement_name + "%^RESET%^ to your armor.");
                         power -= cost;
                         TP->set_property("armor enhancements", 1);
                     }
                 }
                 else {
-                    tell_object(TP, "Can't apply " + enhancement_name + " to your armor.");
+                    tell_object(TP, "Can't apply %^BOLD%^%^RED%^" + enhancement_name + "%^RESET%^ to your armor.");
                 }
             }
         }
