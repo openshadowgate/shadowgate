@@ -305,3 +305,30 @@ int can_fly(object ob)
         (member_array(TP->query("subrace"), flysubraces) != -1) ||
         (member_array(TP->query("relationship_profile"), flyprofiles) != -1);
 }
+
+int is_valid_blooddrain_target(object targobj, object vampobj)
+{
+    if (!objectp(targobj)) {
+        return;
+    }
+
+    if (!vampobj->ok_to_kill(targobj)) {
+        return 0;
+    }
+
+    if (!is_race(targobj->query_race())) {
+        return 0;
+    }
+
+    if (targobj->query_property("spell_creature") ||
+        targobj->query("not living")) {
+        return 0;
+    }
+
+    if (targobj->is_undead()) {
+        return 0;
+    }
+
+    return 1;
+
+}
