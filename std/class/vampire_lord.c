@@ -203,7 +203,7 @@ int caster_level_calcs(object player, string the_class)
     base = player->query("base_class");
 
     level = player->query_class_level(base);
-    level += player->query_class_level("stonelord");
+    level += player->query_class_level("vampire_lord");
     return level;
 }
 
