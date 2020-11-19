@@ -32,7 +32,7 @@ string query_cast_string()
 void spell_effect(int prof)
 {
     tell_room(place,"%^BOLD%^%^BLACK%^Barrage of blood storm fills the area at " +caster->QCN+"'s command.%^RESET%^");
-    caster->add_bloodlust(-500);
+    caster->add_bloodlust(-100);
     counter = clevel * 3;
     addSpellToCaster();
     spell_successful();
