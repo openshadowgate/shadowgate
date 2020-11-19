@@ -1,13 +1,13 @@
 //updated by Circe with new desc, lore, etc 6/13/04
 //Coded by Bane//
 #include <std.h>
-inherit WEAPON;
+inherit "/d/common/obj/weapon/morningstar";
 void create(){
     ::create();
     set_id(({"star","morning star","morning star of the sun","sun star","sunstar","Sun Star"}));
     set_name("morning star");
     set_short("%^YELLOW%^Sun Star%^RESET%^");
-    set_obvious_short("A golden morning star");
+    set_obvious_short("%^BOLD%^%^ORANGE%^A golden morning star");
     set_long(
        "%^BOLD%^This beautiful morning star has been crafted from "+
        "a strong %^RESET%^steel alloy %^RESET%^and covered with a "+
