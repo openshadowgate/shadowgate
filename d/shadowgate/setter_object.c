@@ -1041,6 +1041,8 @@ string* generate_language()
         }
     }
 
+    choices = distinct_array(choices);
+
     return choices;
 }
 

@@ -11,24 +11,9 @@ inherit DAEMON;
 
 string * BBOARDS=({
         "comment",
-            "assassin",
             "announcement",
             "newbie",
-            "barbarian",
-            "bard",
-            "cleric",
-            "druid",
-            "inquisitor",
-            "fighter",
             "lawboard",
-            "mage",
-            "magus",
-            "monk",
-            "paladin",
-            "psion",
-            "ranger",
-            "thief",
-            "warlock",
             "avatar",
             "pkmail",
             "avatarmail",
@@ -79,17 +64,8 @@ int check_access(string my_command, string which_board)
         return 0;
     switch (which_board)
     {
-        case "assassin":
-            if (TP->is_class("assassin") || avatarp(TP)) return 1;
-            else return 0;
-            break;
-        case "hm":
-            if (high_mortalp(TP) || OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()) || avatarp(TP)) return 1;
-            else return 0;
-            break;
         case "newbie":
-            if (newbiep(TP) || high_mortalp(TP) || OB_ACCOUNT->is_high_mortal((string)TP->query_true_name()) || avatarp(TP)) return 1;
-            else return 0;
+            return 1;
             break;
         case "comment":
             return 1;
@@ -105,21 +81,6 @@ int check_access(string my_command, string which_board)
                     return 1;
                     break;
             }
-        case "mage":
-            if (TP->is_class("sorcerer") || avatarp(TP)) return 1;
-            if(TP->is_class(which_board)) return 1;
-            else return 0;
-            break;
-        case "cleric":
-            if (TP->is_class("oracle") || avatarp(TP)) return 1;
-            if(TP->is_class(which_board)) return 1;
-            else return 0;
-            break;
-        case "psion":
-            if(TP->is_class("psywarrior") || TP->is_class("psion") ||avatarp(TP)) return 1;
-            if (TP->is_class(which_board)) return 1;
-            else return 0;
-            break;
         case "avatar": case "pkmail": case "avatarmail": case "wiz": case "lib": case "lawboard":
             if(avatarp(TP)) return 1;
             else return 0;

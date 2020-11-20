@@ -17,7 +17,7 @@ int cmd_unignore(string str)
         return 1;
     }
     str = lower_case(str);
-    rstr = TP->realName(str);
+    rstr = TP->realNameVsProfile(str);
     if (member_array(rstr, ignored) == -1) {
         tell_object(TP, "You are not ignoring " + str);
         return 1;
@@ -41,7 +41,7 @@ int list_ignored(string* str)
 void help()
 {
     write(
-"
+        "
 %^CYAN%^NAME%^RESET%^
 
 unignore - remove people form ignore list
@@ -61,5 +61,4 @@ Without an argument, shows list of people you're ignoring.
 ignore, tellblock, tell, reply, telepathy, line use, rules
 "
         );
-
 }
