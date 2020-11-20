@@ -1041,7 +1041,7 @@ string* generate_language()
         }
     }
 
-    coices = distinct_array(choices);
+    choices = distinct_array(choices);
 
     return choices;
 }
