@@ -51,8 +51,12 @@ void flystep(string destination, object flyee)
         TO->remove();
         return;
     }
+    
+    //Forces a load on the destination
+    call_other(destobj, "???");
 
-    if (!objectp(flroom) || !objectp(destobj)) {
+    if (!objectp(flroom) || !objectp(destobj))
+    {
         flyee->move_player("/d/darkwood/room/road18");
         TO->remove();
         return;
