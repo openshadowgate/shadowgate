@@ -473,7 +473,7 @@ int add_my_feat(object ob, string type, string feat)
     string * subset;
     if(!objectp(ob)) { return 0; }
     if(!stringp(type)) { return 0; }
-    if(!stringp(feat)) { return 0; }    
+    if(!stringp(feat)) { return 0; }
 
     level = (int)ob->query_other_feats_gained();
     if(!level) { level = 1; }
@@ -991,29 +991,26 @@ int level_to_use(object ob,string feat)
 int can_use_shifted(object ob, string feat)
 {
     string file;
-    object myfeat;
 
-    if(!objectp(ob)) { return 0; }
-    if(!has_feat(ob,feat)) { return 0; }
-
-    if(!ob->query_property("shapeshifted")) { return 1; } // not shifted, don't bother to check
-
-    file = DIR_FEATS+"/"+feat[0..0]+"/_"+feat+".c";
-    //if(find_player("saide")) tell_object(find_player("saide"), "file = "+file);
-    file = replace_string(file," ","_");
-    if(catch(myfeat = new(file))) { return 0; }
-    if(!objectp(myfeat)) { return 0; }
-
-    if(!myfeat->allow_shifted())
-    {
-        destruct(myfeat);
+    if (!objectp(ob)) {
         return 0;
     }
-    else
-    {
-        destruct(myfeat);
+    if (!has_feat(ob, feat)) {
+        return 0;
+    }
+
+    if (!ob->query_property("shapeshifted")) {
+        return 1;
+    }                                                     // not shifted, don't bother to check
+
+    file = DIR_FEATS + "/" + feat[0..0] + "/_" + feat + ".c";
+    file = replace_string(file, " ", "_");
+
+    if (file->allow_shifted()) {
         return 1;
     }
+
+    return 0;
 }
 
 int level_of_feat(object ob,string feat)
@@ -1794,6 +1791,6 @@ int number_feats(object obj, string category, string* valid_classes) {
             BONUS_ALLOWED += j;
         }
     }
-    
+
     return BONUS_ALLOWED;
 }

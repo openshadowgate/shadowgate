@@ -84,8 +84,7 @@ int spell_level,
     permanent,
     evil_spell,
     mental_spell,
-    end_time,
-    spell_duration;
+    end_time;
 
 
 object* attackers,
@@ -735,16 +734,12 @@ int check_reflection()
 //  added "whatsit" to designate between spell/power for psions ~C~ 7/15/05
 void wizard_interface(object user, string type, string targ)
 {
-    int mp_req, x;
-    mapping comp;
-    string* comp_names, msg, whatsit, whatdo, improv, old_spell_type, featneeded, altclass, way;
-    object* weaps, compbag, wildspell, wpcaster, shapeob;
+    string* msg, whatsit, whatdo, improv, old_spell_type, featneeded, altclass, way;
+    object* weaps, wildspell, shapeob;
     int nodo, i, casting_level;
     string* supreme_healer_spells,
           * raging_healer_spells,
           * natures_gift_spells;
-
-    string* player_feats = user->query_player_feats(); //Note that includes inactive feats
 
     if (!type) {
         tell_object(caster, "Something has gone wrong, the spell has no type specified!");
@@ -1288,7 +1283,7 @@ mixed WildMagicArea(object where)
     int psi_immune, slev, count;
     mixed wmlev, * wm_affect = ({});
     string wmclass, file, rspell, wm_notify;
-    string* aoelist;
+
 
     psi_immune = 1;
     slev = query_spell_level(spell_type);
@@ -1493,9 +1488,9 @@ varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string cla
         return;
     }
 
-    if (!prof) {
-        prof == FULL_EFFECT;
-    }
+
+
+
 
     if (targ) {
         if (arg_needed) {
@@ -1838,7 +1833,7 @@ void init()
 void check_fizzle(object ob)
 {
     int fizzle, i, prof;
-    string* immunities, before, after, whatsit;
+    string* whatsit;
     whatsit = "spell";
     if (spell_type == "psion") {
         whatsit = "power";
@@ -2069,7 +2064,7 @@ varargs int damage_targ(object victim, string hit_limb, int wound, string damage
 
 varargs int do_spell_damage(object victim, string hit_limb, int wound, string damage_type)
 {
-    int nokill, reduction, spmod;
+    int nokill, spmod;
     string* limbs = ({});
     int dieroll;
     nokill = 1;
@@ -2435,7 +2430,7 @@ int query_peace_needed()
 int spell_kill(object victim, object caster)
 {
     object* borg_people, * inven;
-    int i, initiative, k;
+    int i, k;
     string* pkill;
 
     pkill = ({});
@@ -2801,7 +2796,7 @@ void debug_saves(int num)
 varargs int do_save(object targ, int mod)
 {
     string type, stat, * myclasses;
-    int caster_bonus, target_level, num, casting_level, classbonus, i, classlvl, stat_bonus;
+    int caster_bonus, target_level, num, casting_level, i, classlvl, stat_bonus;
     mapping debug_map = ([]);
 
     if (!objectp(caster)) {
@@ -3112,7 +3107,7 @@ object *target_selector()
 int perfect_filter(object obj)
 {
     object* party = ({}), * followers = ({}), ally;
-    string tmp;
+
     int i;
 
     if (!objectp(obj)) {
@@ -3374,10 +3369,9 @@ int mind_immunity_damage(object obj)
 
 void help()
 {
-    mapping mycomps, compmap;
-    string* classkeys, printclass, * compskeys, * mapkeys, printcomps;
+    string* classkeys, printclass, * compskeys, printcomps;
     string quickname;
-    int i, j;
+    int i;
 
     if (mapp(MAGIC_D->query_index_row(spell_name))) {
         quickname = MAGIC_D->query_index_row(spell_name)["quick"];
