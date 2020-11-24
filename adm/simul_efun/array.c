@@ -52,12 +52,11 @@ int sum_array(int *arr, int ele)
 }
 
 /**
- * Collapses (summs) an arbitrary array. Relatively memory-greedy.
+ * Collapses (summs, flattens) an arbitrary array.
  *
  * @param *arr Array to collapse
  * @return sum
  */
-
 mixed collapse_array(mixed *array)
 {
     mixed sum;
