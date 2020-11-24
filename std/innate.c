@@ -68,67 +68,66 @@ void InitInnate()
 
     feat_spells = ([]);
 
-    if(FEATS_D->usable_feat(TO,"undead cohort"))
-    {
+    if (FEATS_D->usable_feat(TO, "undead cohort")) {
         feat_spells += ([
-                            "vampiric touch" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                            "animate dead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                            "exhume corpses" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                            "create undead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                            "create greater undead" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-            ]);
-    }
-    if(FEATS_D->usable_feat(TO,"sanguine bloodline"))
-    {
-        feat_spells += ([
-                            "night auspex" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                            "blood raze" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                            "blood pyre" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                            "blood cauldron" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-            ]);
-    }
-    if(FEATS_D->usable_feat(TO,"one with the shadows")) // shadow stride -1, darkvision -1, shadow double 1
-    {
-        feat_spells += ([
-                                "darkvision" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "shadow stride" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "shadow double" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "greater shadow conjuration" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "shadow evocation" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "shadow necromancy" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-                                "shadow body" : (["type" : "spell", "daily uses" : -1,"level required" : 0,]),
-            ]);
-    }
-    if(FEATS_D->usable_feat(TO,"command the stone")) // meld into stone -1, stoneskin 1, earthquake 2, conjure elemental -1
-    {
-        feat_spells += ([
-            "strength of stone" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            "meld into stone"   : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            "stone body"        : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),
-            "wall of stone"     : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),
-            "statue"            : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),
-            "earthquake"        : (["type" : "spell", "daily uses" : 4, "level required" : 0 ]),
-            "conjure elemental" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            "earth reaver"      : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            "shapechange"       : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            ]);
-    }
-    if(FEATS_D->usable_feat(TO, "slay the undead"))
-    {
-        feat_spells += ([
-            "rope trick" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            "detect undead" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            "heart of metal" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            "disrupting weapon" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            "undeath ward" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            ]);
+                            "vampiric touch" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "animate dead" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "exhume corpses" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "create undead" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "create greater undead" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                        ]);
     }
 
-    if(FEATS_D->usable_feat(TO, "tricky spells"))
-    {
+    if (FEATS_D->usable_feat(TO, "sanguine bloodline")) {
         feat_spells += ([
-            "spectral hand" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
-            ]);
+                            "night auspex" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "blood raze" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "blood pyre" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "blood cauldron" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "harvest of tyrannos" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            ]);
+    }
+
+    if (FEATS_D->usable_feat(TO, "one with the shadows")) { // shadow stride -1, darkvision -1, shadow double 1
+        feat_spells += ([
+                            "darkvision" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "shadow stride" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "shadow double" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "greater shadow conjuration" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "shadow evocation" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "shadow necromancy" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "shadow body" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            ]);
+    }
+
+    if (FEATS_D->usable_feat(TO, "command the stone")) { // meld into stone -1, stoneskin 1, earthquake 2, conjure elemental -1
+        feat_spells += ([
+                            "strength of stone" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                            "meld into stone"   : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                            "stone body"        : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),
+                            "wall of stone"     : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),
+                            "statue"            : (["type" : "spell", "daily uses" : 1, "level required" : 0 ]),
+                            "earthquake"        : (["type" : "spell", "daily uses" : 4, "level required" : 0 ]),
+                            "conjure elemental" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                            "earth reaver"      : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                            "shapechange"       : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                        ]);
+    }
+
+    if (FEATS_D->usable_feat(TO, "slay the undead")) {
+        feat_spells += ([
+                            "rope trick" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                            "detect undead" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                            "heart of metal" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                            "disrupting weapon" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                            "undeath ward" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                        ]);
+    }
+
+    if (FEATS_D->usable_feat(TO, "tricky spells")) {
+        feat_spells += ([
+                            "spectral hand" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
+                        ]);
     }
 
     // to add new classes or reasons for innates, simply add to feat_spells here before this line.
