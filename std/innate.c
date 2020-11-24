@@ -85,6 +85,7 @@ void InitInnate()
                             "blood pyre" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                             "blood cauldron" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                             "harvest of tyrannos" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
+                            "mytherceria" : (["type" : "spell", "daily uses" : -1, "level required" : 0, ]),
                             ]);
     }
 
