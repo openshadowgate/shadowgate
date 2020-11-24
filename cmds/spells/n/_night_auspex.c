@@ -1,6 +1,7 @@
 // Detect Invisibility
 #include <spell.h>
 #include <magic.h>
+#include <daemons.h>
 inherit SPELL;
 
 object oldenv, * conceal;
