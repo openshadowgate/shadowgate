@@ -22,7 +22,7 @@ void create() {
 int preSpell() {
     if (RACE_D->is_valid_blooddrain_target(target, caster)) {
         tell_object(caster,"This is not a fresh victim.");
-        return 1
+        return 1;
     }
     return 0;
 }
