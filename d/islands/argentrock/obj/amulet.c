@@ -22,7 +22,7 @@ void create()
     set_size(-1);
     set_value(5000);
     set_wear((: TO, "wear_me" :));
-    set_property("enchantment", 4 + random(1));
+    set_property("enchantment", 4 + random(2));
     set_item_bonus("fire resistance", 40);
     set_item_bonus("divine resistance", -20); //this was light resistance, which does nothing, changing it to divine and upping it - Odin 3/27/2020
     set_item_bonus("negative energy resistance", 40);
