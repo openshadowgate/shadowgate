@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("blood cauldron");
-    set_spell_level(([ "innate":3]));
+    set_spell_level(([ "innate":5]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS blood cauldron");
     set_damage_desc("negative energy");
