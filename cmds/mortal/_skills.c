@@ -106,7 +106,7 @@ int cmd_skills(string str)
         "you can add any skills!");
         return 1;
       }
-      if(intp("/daemon/user_d.c"->get_scaled_level(TP)))
+      if(intp(USER_D->get_scaled_level(TP)))
       {
         tell_object(TP, "You have scaled your level down and must revert it back to "+
         "normal before you can add any skills!");

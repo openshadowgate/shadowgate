@@ -248,17 +248,17 @@ varargs void regenerate_pool(object ob, int amount, int pass, string pool_type)
         switch (pool_type) {
         case "arcana":
             if ((int)ob->is_class("magus")) {
-                delay = 20 + random(11);
-                delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
-                if (delay < 15) {
-                    delay = 15;
+                delay = 20 + roll_dice(6, 4);
+                delay -= (int)BONUS_D->query_stat_bonus(ob, "intelligence");
+                if (delay < 20) {
+                    delay = 20;
                 }
             }
             break;
         case "ki":
             if ((int)ob->is_class("monk")) {
                 delay = 10 + roll_dice(3, 4);
-                delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "wisdom");
+                delay -= (int)BONUS_D->query_stat_bonus(ob, "wisdom");
                 if (delay < 5) {
                     delay = 5;
                 }
@@ -266,8 +266,8 @@ varargs void regenerate_pool(object ob, int amount, int pass, string pool_type)
             break;
         case "grace":
             if ((int)ob->is_class("paladin")) {
-                delay = 40 + random(11);
-                delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "charisma");
+                delay = 30 + roll_dice(9, 4);
+                delay -= (int)BONUS_D->query_stat_bonus(ob, "charisma");
                 if (delay < 35) {
                     delay = 35;
                 }
@@ -281,7 +281,7 @@ varargs void regenerate_pool(object ob, int amount, int pass, string pool_type)
 
 void init_pool(object ob, string pool_type)
 {
-    int avail, newmax, oldmax, diff;
+    int avail, newmax, oldmax, diff, divisor;
     if (!objectp(ob)) return;
 
     switch (pool_type) {
@@ -291,8 +291,12 @@ void init_pool(object ob, string pool_type)
             ob->delete("maximum " + pool_type);
             return;
         }else {
-            newmax = (int)ob->query_class_level("magus") / 2;
-            newmax = (newmax > 0 ? newmax : 1) + (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
+            divisor = 2;
+            if (FEATS_D->usable_feat(ob, "greater arcane pool")) {
+                divisor = 1;
+            }
+            newmax = (int)ob->query_class_level("magus") / divisor;
+            newmax = (newmax > 0 ? newmax : 1) + (int)BONUS_D->query_stat_bonus(ob, "intelligence");
         }
         break;
     case "ki":

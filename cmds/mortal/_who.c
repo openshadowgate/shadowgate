@@ -181,7 +181,7 @@ string list_users(string *races, object tp)
             }
             belphy += tmp;
         }
-    rp_flags = "/daemon/user_d.c"->get_rp_flags();
+    rp_flags = USER_D->get_rp_flags();
     for(i = 0;i < sizeof(rp_flags);i++)
     {
         if(!objectp(rp_flags[i])) continue;

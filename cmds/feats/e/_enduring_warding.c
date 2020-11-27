@@ -1,6 +1,5 @@
 #include <std.h>
 #include <daemons.h>
-#include <dirs.h>
 
 inherit FEAT;
 
@@ -14,6 +13,7 @@ void create()
     feat_prereq("Warding");
     feat_classes("magus");
     feat_desc("When expending a point from the arcane pool to grant enhancement bonuses or properties to a worn body armor, the bonuses and properties last for 1 minute per level.");
+    set_required_for(({ "greater enduring warding" }));
     permanent(1);
 }
 

@@ -29,7 +29,7 @@ void create(){
     set_overall_ac(4);
 
     set_monster_feats(({
-                "thoughness",
+                "toughness",
                 "regeneration",
             }));
 

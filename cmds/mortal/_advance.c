@@ -735,7 +735,7 @@ int cmd_advance(string myclass){
       tell_object(TP, "%^BOLD%^%^RED%^You have incurred a negative level and must remove it before you are able to advance.");
       return 1;
    }
-   if(intp("/daemon/user_d.c"->get_scaled_level(TP))){
+   if(intp(USER_D->get_scaled_level(TP))){
       tell_object(TP, "%^BOLD%^%^RED%^You have scaled your level down and cannot advance until your level is reset to normal.%^RESET%^");
       return 1;
 //Start real advance info

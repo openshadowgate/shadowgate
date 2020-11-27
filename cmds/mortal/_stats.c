@@ -315,7 +315,7 @@ int cmd_stats(string person)
                             "you can gain stats!");
                 return 1;
             }
-            if (intp("/daemon/user_d.c"->get_scaled_level(TP))) {
+            if (intp(USER_D->get_scaled_level(TP))) {
                 tell_object(TP, "You have scaled your level down and must revert it back to " +
                             "normal before you can gain any stats!");
                 return 1;
@@ -337,7 +337,7 @@ int cmd_stats(string person)
                             "you can move stats!");
                 return 1;
             }
-            if (intp("/daemon/user_d.c"->get_scaled_level(TP))) {
+            if (intp(USER_D->get_scaled_level(TP))) {
                 tell_object(TP, "You have scaled your level down and must revert it back to " +
                             "normal before you can move any stats!");
                 return 1;

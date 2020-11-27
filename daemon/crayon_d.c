@@ -191,6 +191,12 @@ mapping color_scheme(string scheme)
         rare_colors = ({ B });
         scatter = 2;
         break;
+    case "acid green":
+        back_color = G;
+        common_colors = ({ G, D + G, Y });
+        rare_colors = ({ C });
+        scatter = 2;
+        break;
     case "rand":
     default: // completely random, there's no telling what we'll get here
         back_color = possible[random(sizeof(possible))];

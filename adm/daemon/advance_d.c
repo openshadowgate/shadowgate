@@ -369,16 +369,15 @@ int advance(object tp, string myclass)
     if((tp->is_class("sorcerer") || tp->is_class("psywarrior") || tp->is_class("psion") || tp->is_class("warlock"))) tp->set("can_swap_spells",1); // flag to let sorcs swap spells on even levels; added psionic classes ~Circe~ 9/20/15; added warlocks, N 12/15.
     if(tp->is_class("monk") || myclass == "monk" || myclass == "grandmaster_of_the_way" || FEATS_D->usable_feat(tp, "grandmaster of the way"))
     {
-        //"/daemon/user_d.c"->init_ki(tp);
-        "/daemon/user_d.c"->init_pool(tp, "ki");
+        USER_D->init_pool(tp, "ki");
     }
     if (tp->is_class("magus"))
     {
-        "/daemon/user_d.c"->init_pool(tp, "arcana");
+        USER_D->init_pool(tp, "arcana");
     }
     if (tp->is_class("paladin"))
     {
-        "/daemon/user_d.c"->init_pool(tp, "grace");
+        USER_D->init_pool(tp, "grace");
     }
     return ret;
 }

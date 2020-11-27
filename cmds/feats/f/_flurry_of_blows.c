@@ -44,7 +44,7 @@ int cmd_flurry_of_blows(string str)
       tell_object(TP,"Use flurry_of_blows on or flurry_of_blows off.");
       return 1;
    }
-   if(!(int)"/daemon/user_d.c"->can_spend_ki(TP, 1) && str == "on")
+   if(!(int)USER_D->can_spend_ki(TP, 1) && str == "on")
    {
        tell_object(TP, "%^BOLD%^%^CYAN%^You lack the needed ki to enable flurry of blows.%^RESET%^");
        dest_effect();
@@ -104,7 +104,7 @@ void execute_feat()
                 dest_effect();
                 break;
             }
-            if(!(int)"/daemon/user_d.c"->can_spend_ki(caster, 1))
+            if(!(int)USER_D->can_spend_ki(caster, 1))
             {
                 tell_object(caster, "%^BOLD%^%^CYAN%^You lack the needed ki to focus your mind so completely.%^RESET%^");
                 dest_effect();
@@ -379,7 +379,7 @@ void check()
         dest_effect();
         return;
     }
-    if(!(int)"/daemon/user_d.c"->can_spend_ki(caster, 1))
+    if(!(int)USER_D->can_spend_ki(caster, 1))
     {
         call_out("check",ROUND_LENGTH);
         return;
@@ -425,7 +425,7 @@ void check()
             call_out("check",ROUND_LENGTH);
             return;
         }        
-        if(!(int)"/daemon/user_d.c"->can_spend_ki(caster, 1))
+        if(!(int)USER_D->can_spend_ki(caster, 1))
         {
             if(objectp(myFB)) myFB->dest_effect();
             dest_effect();

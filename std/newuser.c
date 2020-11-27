@@ -315,7 +315,7 @@ void net_dead()
 }
 void restart_heart() { return USERUC_D->restart_heart(TO); }
 void resetLevelForExp(int expLoss) { return USERUC_D->resetLevelForExp(TO, expLoss); }
-void reset_all_status_problems() { "/daemon/user_d.c"->reset_all_status_problems(TO); }
+void reset_all_status_problems() { USER_D->reset_all_status_problems(TO); }
 void die() { return USERUC_D->die(TO); }
 
 void set_rname(string rname)
@@ -1208,7 +1208,7 @@ mapping query_rem_rooms()
     //function that clears invalid rooms - IE rooms we kept in the game
     //for one reason or another but that are no longer accessible to characters
     //Saide, December 2016
-    rem_rooms = "/daemon/user_d.c"->check_rem_rooms(TO, rem_rooms_sort, rem_rooms);
+    rem_rooms = USER_D->check_rem_rooms(TO, rem_rooms_sort, rem_rooms);
     return rem_rooms;
 }
 

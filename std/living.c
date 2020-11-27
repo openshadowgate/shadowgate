@@ -379,13 +379,13 @@ void heart_beat()
         }
     }
     if (TO->is_class("monk")) {
-        "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "ki");
+        USER_D->regenerate_pool(TO, (1 + random(2)), 1, "ki");
     }
     if (TO->is_class("magus")) {
-        "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "arcana");
+        USER_D->regenerate_pool(TO, (1 + random(2)), 1, "arcana");
     }
     if (TO->is_class("paladin")) {
-        "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "grace");
+        USER_D->regenerate_pool(TO, (1 + random(2)), 1, "grace");
     }
     //enhancement effects
     "/cmds/mortal/_enhance.c"->run_enhances_timer(TO, "weapon");

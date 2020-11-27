@@ -181,7 +181,7 @@ void obsolete_feat(object ob) {
 
             if(has_feat(ob,"unassailable parry") && has_feat(ob,"parry")) {
               mytype = get_feat_type(ob,"unassailable parry");
-              if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free\
+              if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
               if(mytype != "class") { // had to put this in cuz fighter/ranger multis were freaking out with the class feat! N, 6/15.
                 remove_my_feat(ob,"unassailable parry",1);
                 tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^unassailable parry");
@@ -550,6 +550,8 @@ int add_my_feat(object ob, string type, string feat)
             num = (int)ob->query_arcana_feats_gained();
             num += 1;
             ob->set_arcana_feats_gained(num);
+            if (feat == "greater arcane pool")
+                USER_D->init_pool(ob, "arcana");
             update_usable(ob);
             return 1;
         }
@@ -635,6 +637,8 @@ int remove_my_feat(object ob,string feat,int bypass)
         if (!num) num = 0;
         num -= 1;
         ob->set_arcana_feats_gained(num);
+        if (feat == "greater arcane pool")
+            USER_D->init_pool(ob, "arcana");
         update_usable(ob);
         return 1;
     case "divinebond":
@@ -1539,7 +1543,7 @@ void display_feats(object ob,object targ, string mytype)
         currentlist -= ({ "Psionics" });
     }
     if (!targ->is_class("magus") && !avatarp(targ)) {
-        currentlist -= ({ "MagusArcana" });
+        currentlist -= ({ "MagusArcana", "Steel&Magic" });
     }
     if (!targ->is_class("paladin") && !avatarp(targ)) {
         currentlist -= ({ "DivineBond" });
@@ -1725,7 +1729,6 @@ int racial_bonus_feats(object ob) {
     }
     return num;
 }
-
 
 int number_feats(object obj, string category, string* valid_classes) {
     string* subset;

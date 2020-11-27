@@ -1,4 +1,5 @@
 //minor fix by Circe 7/28/19 - fixing "choosen" typo
+#include <daemons.h>
 #include <living.h>
 #include <security.h>
 #include <std.h>
@@ -174,14 +175,13 @@ int confirm_drop(string str, string theclass, int drop, int cost)
         tell_object(TP, "%^BOLD%^Resetting your monk way and ki spells. You may reassign these at a church/temple if you still have class levels.");
         TP->delete("monk way");
         TP->delete("ki spells");
-        //"/daemon/user_d.c"->init_ki(TP);
-        "/daemon/user_d.c"->init_pool(TP, "ki");
+        USER_D->init_pool(TP, "ki");
     }
     if (theclass == "magus") {
-        "/daemon/user_d.c"->init_pool(TP, "arcana");
+        USER_D->init_pool(TP, "arcana");
     }
     if (theclass == "paladin") {
-        "/daemon/user_d.c"->init_pool(TP, "grace");
+        USER_D->init_pool(TP, "grace");
     }
     TP->force_me("fixspells");
     TP->set("hp_array", 0);
@@ -252,7 +252,7 @@ int cmd_abandon(string str)
         return 1;
     }
 
-    if (intp("/daemon/user_d.c"->get_scaled_level(TP))) {
+    if (intp(USER_D->get_scaled_level(TP))) {
         tell_object(TP, "%^BOLD%^%^RED%^You have scaled your level down and cannot abandon " +
                     "until your level is reset to normal.%^RESET%^");
         return 1;

@@ -1628,7 +1628,7 @@ int move(mixed dest)
     i = move::move(dest);
     if (objectp(TO)) {
         if (objectp(ETO) && living(ETO)) {
-            if (intp(scaled = "/daemon/user_d.c"->get_scaled_level(ETO)) && (string)TO->query("scaledfor") == (string)ETO->query_true_name()) {
+            if (intp(scaled = USER_D->get_scaled_level(ETO)) && (string)TO->query("scaledfor") == (string)ETO->query_true_name()) {
                 TO->set("scaledlevel", scaled);
             }
         }
