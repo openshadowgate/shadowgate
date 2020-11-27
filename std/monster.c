@@ -1964,3 +1964,10 @@ int move(mixed dest)
     }
     return ::move(dest);
 }
+//this is for the orb /cmds/avatar/orb -H
+void mon_look(){
+    string dsc;
+    dsc = ETO->query_short();
+    tell_object(TP, dsc);
+    return;
+}
