@@ -8,7 +8,7 @@ int cmd_unprotect(string str){
   object ob, unprotectee;
 
   if(!str) return notify_fail("Unprotect who?\n");
-  unprotectee = find_player((string)TP->realName(str));
+  unprotectee = find_player((string)TP->realNameVsProfile(str));
   if( (!objectp(unprotectee)) || (!ob = present(unprotectee, ETP))) {
     if (!ob = present(str,ETP))
       return notify_fail("You can't seem to find that to unprotect.\n");
@@ -30,16 +30,19 @@ int cmd_unprotect(string str){
 
 int help() {
   write(
-@HELP
-	Command: unprotect
-	Syntax: unprotect <player | npc | pet>
+"
+%^CYAN%^NAME%^RESET%^
 
-	This command allows you to stop protecting an other player you are
-	already protecting.
 
-        You can also protect pets of yours. (paladin's horses) as well as NPC's.
-	See also: protect, wimpy, wimpydir, follow, party, kill
-HELP
+
+%^CYAN%^SYNTAX%^RESET%^
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+
+"
 	);
   return 1;
 }

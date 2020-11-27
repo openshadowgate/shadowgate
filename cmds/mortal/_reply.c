@@ -34,7 +34,7 @@ int cmd_reply(string str)
         return 0;
     }
 
-    if(!objectp(ob)) { ob = find_player(TP->realName(reply)); }
+    if(!objectp(ob)) { ob = find_player(TP->realNameVsProfile(reply)); }
 
     if(!ob && (sscanf(reply, "%s@%s", a, b) != 2))
     {

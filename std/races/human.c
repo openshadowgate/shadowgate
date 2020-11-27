@@ -250,13 +250,17 @@ int height_mod(string gender) {
 
 // minimum weight for the race = base, max weight for the race = base + (modifier x height mod)
 // height mod = player height minus base height.
-int weight_base(string gender) {
-    if(gender == "male") return 120;
+int weight_base(string gender)
+{
+    if (gender == "male") {
+        return 120;
+    }
     return 85;
 }
 
-int weight_mod(string gender) {
-    return 8;
+int weight_mod(string gender)
+{
+    return 30;
 }
 
 // used by /daemon/player_d

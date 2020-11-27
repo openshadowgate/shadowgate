@@ -15,7 +15,7 @@ int cmd_threaten(string str)
         return 0;
     }
 
-    if(!(targ = find_player(TP->realName(str))))
+    if(!(targ = find_player(TP->realNameVsProfile(str))))
     {
         notify_fail("No such player found.\n");
         return 0;

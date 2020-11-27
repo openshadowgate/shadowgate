@@ -71,7 +71,10 @@ int spell_effect(int prof)
         tell_object(caster, "%^CYAN%^Reality rips and astral prism manifests itself to protect you!%^RESET%^");
     }
 
-    duration = time() + 300 + (ROUND_LENGTH * clevel);
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH + 300;
+    duration = time() + spell_duration;
+    set_end_time();
+    call_out("dest_effect",spell_duration);
 
     addSpellToCaster();
     spell_successful();
