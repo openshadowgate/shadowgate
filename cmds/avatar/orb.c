@@ -112,7 +112,6 @@ void init() {
   add_action("inventory_save","invent");
 }
 
-
 int read(string str) {
   if( str != "orb" )
     return 0;
@@ -157,7 +156,7 @@ int destroy(string str) {
 }
 
 int control(string str) {
-  if( catch( monster = get_object( str ) ) )
+  if( catch( monster = get_objecto( str ) ) )
     return 0;
   if( in_use )  {
      write("You can't try to control something else when you are already "
@@ -200,9 +199,7 @@ int command_mon(string str)
       return chantcast(str);
       
   if(strsrch(str, "kill") != -1)*/
-  write("test msg:Does it even make it this far?");
-  monster->force_NPC("hop");
-  monster->force_NPC("say"+ str);
+
   switch(str)  {
    case "l"    :
    case "look" : mon_look();
@@ -254,7 +251,7 @@ int move_mon(string str) {
      in_use = 0;
      return 1;
    }
-  monster->move(environment(get_object(str)));
+  monster->move(environment(get_objecto(str)));
   return 1;
 }
 
