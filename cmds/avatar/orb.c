@@ -200,6 +200,9 @@ int command_mon(string str)
       return chantcast(str);
       
   if(strsrch(str, "kill") != -1)*/
+  write("test msg:Does it even make it this far?");
+  monster->force_NPC("hop");
+  monster->force_NPC("say"+ str);
   switch(str)  {
    case "l"    :
    case "look" : mon_look();
