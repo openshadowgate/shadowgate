@@ -7,6 +7,7 @@ inherit DAEMON;
 int cmd_orb(){
 
 	new("/cmds/avatar/orb")->move(TP);
+    write("You hold out your hand and make a control orb.");
      return 1;
 }
 
