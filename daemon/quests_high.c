@@ -17,7 +17,7 @@ inherit DAEMON;
 
 #define MED_H1 ({"/d/attaya", "/d/islands/tonerra/path/", "/d/islands/tonerra/mountain/", "/d/dagger/marsh/swamp/rooms/m", "/d/dagger/arctic/rooms/lake/", "/d/dagger/arctic/rooms/cave/", })
 
-#define MED_H2 ({"/d/attaya", "/d/islands/common/aramanth/room", "/d/islands/argentrock/rooms/", "/d/laerad/cavern1/", "/d/dagger/marsh/swamp/rooms/f", "/d/dagger/arctic/rooms/cave/","/d/islands/elf/ice/"})
+#define MED_H2 ({"/d/attaya", "/d/islands/common/aramanth/room", "/d/islands/argentrock/rooms/",  "/d/dagger/marsh/swamp/rooms/f", "/d/dagger/arctic/rooms/cave/","/d/islands/elf/ice/"})
 
 #define HIGH ({"/d/islands/tonerra/monastary/m", "/d/attaya/base/", "/d/dagger/ogres/rooms/", "/d/deku/hhouse/rooms/","/d/dagger/marsh/tower/rooms/", "/d/antioch/ruins/portal/", "/d/laerad/cavern2/","/d/island/elf/shore/" })
 
