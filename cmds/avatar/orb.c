@@ -156,7 +156,7 @@ int destroy(string str) {
 }
 
 int control(string str) {
-  if( catch( monster = get_objecto( str ) ) )
+  if( catch( monster = get_object( str ) ) )
     return 0;
   if( in_use )  {
      write("You can't try to control something else when you are already "
@@ -251,7 +251,7 @@ int move_mon(string str) {
      in_use = 0;
      return 1;
    }
-  monster->move(environment(get_objecto(str)));
+  monster->move(environment(get_object(str)));
   return 1;
 }
 
