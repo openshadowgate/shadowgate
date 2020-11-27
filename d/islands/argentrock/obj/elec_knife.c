@@ -52,6 +52,7 @@ void create(){
     set_type("piercing");
     set_prof_type("small blades");
     set_size(1);
+    set_property("repairtype",({"woodwork", "weaponsmith"}));
 }
 
 

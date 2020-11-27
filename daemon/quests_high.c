@@ -17,7 +17,7 @@ inherit DAEMON;
 
 #define MED_H1 ({"/d/attaya", "/d/islands/tonerra/path/", "/d/islands/tonerra/mountain/", "/d/dagger/marsh/swamp/rooms/m", "/d/dagger/arctic/rooms/lake/", "/d/dagger/arctic/rooms/cave/", })
 
-#define MED_H2 ({"/d/attaya", "/d/islands/common/aramanth/room", "/d/islands/argentrock/rooms/", "/d/laerad/cavern1/", "/d/dagger/marsh/swamp/rooms/f", "/d/dagger/arctic/rooms/cave/","/d/islands/elf/ice/"})
+#define MED_H2 ({"/d/attaya", "/d/islands/common/aramanth/room", "/d/islands/argentrock/rooms/",  "/d/dagger/marsh/swamp/rooms/f", "/d/dagger/arctic/rooms/cave/","/d/islands/elf/ice/"})
 
 #define HIGH ({"/d/islands/tonerra/monastary/m", "/d/attaya/base/", "/d/dagger/ogres/rooms/", "/d/deku/hhouse/rooms/","/d/dagger/marsh/tower/rooms/", "/d/antioch/ruins/portal/", "/d/laerad/cavern2/","/d/island/elf/shore/" })
 
@@ -25,7 +25,7 @@ inherit DAEMON;
 #define UMM ({"/d/attaya/tower/", "/d/islands/tonerra/lava/","/d/islands/common/eldebaro/newrooms/tomb*","/d/islands/common/aramanth/d","/d/atoyatl/tecqumin/jungle/rooms/j"})
 
 #define AREAS      ({MED_H1, MED_H1, MED_H2, MED_H2, HIGH, HIGH, UMM})
-#define AREA_VALUE ({200000, 350000, 500000, 600000, 700000, 800000, 900000})
+#define AREA_VALUE ({150000, 300000, 450000, 550000, 650000, 760000, 850000})
 
 #define MAXSIZE 25
 #define QOBJECT "/d/common/obj/misc/qobject.c"

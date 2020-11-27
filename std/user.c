@@ -4995,20 +4995,38 @@ void remove_temporary_feat(string feat)
 string query_real_age_cat()
 {
     string myfile, myrace;
-    int *agecats;
-    if(!objectp(TO)) return 0;
-    if(avatarp(TO)) return "immortal";
+    int* agecats;
+    if (!objectp(TO)) {
+        return 0;
+    }
+    if (avatarp(TO)) {
+        return "immortal";
+    }
     myrace = (string)TO->query_race();
-    if(!myrace) return 0;
-    myfile = "/std/races/"+myrace+".c";
-    if(!file_exists(myfile)) return 0;
-    agecats = (int *)myfile->age_brackets();
-    if(sizeof(agecats) < 4) return "error in array";
+    if (!myrace) {
+        return 0;
+    }
+    myfile = "/std/races/" + myrace + ".c";
+    if (!file_exists(myfile)) {
+        return 0;
+    }
+    agecats = (int*)myfile->age_brackets();
+    if (sizeof(agecats) < 4) {
+        return "error in array";
+    }
 
-    if(TO->query_real_age() >= agecats[3]) return "venerable";
-    if(TO->query_real_age() >= agecats[2]) return "old";
-    if(TO->query_real_age() >= agecats[1]) return "middle";
-    if(TO->query_real_age() >= agecats[0]) return "normal";
+    if (TO->query_real_age() >= agecats[3]) {
+        return "venerable";
+    }
+    if (TO->query_real_age() >= agecats[2]) {
+        return "old";
+    }
+    if (TO->query_real_age() >= agecats[1]) {
+        return "middle";
+    }
+    if (TO->query_real_age() >= agecats[0]) {
+        return "normal";
+    }
     return "child";
 }
 

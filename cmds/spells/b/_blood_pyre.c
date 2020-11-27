@@ -8,7 +8,7 @@ void create()
 {
     ::create();
     set_spell_name("blood pyre");
-    set_spell_level(([ "innate" : 2]));
+    set_spell_level(([ "innate" : 5]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS blood pyre");
     set_damage_desc("negative energy");
@@ -102,11 +102,11 @@ void execute_attack()
         for (i = 0; i < sizeof(attackers); i++) {
             tell_object(attackers[i], "%^BOLD%^%^BLACK%^You are caressed by the flames around " + caster->QCN + "!");
             damage_targ(attackers[i], attackers[i]->return_target_limb(), sdamage, "negative energy");
-        }
-        if (RACE_D->is_valid_blooddrain_target(attackers[i], caster)) {
-            caster->add_bloodlust(100);
-            if (caster->query_hp() < caster->query_max_hp()) {
-                damage_targ(caster, caster->return_target_limb(), -sdamage / 8 * (i > 8?8:i), "untyped");
+            if (RACE_D->is_valid_blooddrain_target(attackers[i], caster)) {
+                caster->add_bloodlust(100);
+                if (caster->query_hp() < caster->query_max_hp()) {
+                    damage_targ(caster, caster->return_target_limb(), -sdamage / 8 * (i > 8?8:i), "untyped");
+                }
             }
         }
     }

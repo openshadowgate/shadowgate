@@ -6,39 +6,12 @@
 #include <dirs.h>
 inherit DAEMON;
 
-
 // stealing from the recall spells command -Ares
 #define LEV_AND_COLORS ([ 1 : "%^BOLD%^%^BLACK%^", 2 : "%^RED%^", 3 : "%^GREEN%^", 4 : "%^MAGENTA%^", 5 : "%^CYAN%^", 6 : "%^BOLD%^%^BLUE%^", 7 : "%^BOLD%^%^RED%^", 8 : "%^BOLD%^%^GREEN%^", 9 : "%^BOLD%^%^MAGENTA%^"])
-
 
 mapping spells;
 string *magic;
 int wait;
-
-
-// powerpoints info
-int prep_power_points(string myclass, int times);
-
-int get_spells(object player, string myclass);
-void add_spell(string spellname, int lvl);
-
-
-/// function prototypes to support preparing lists of spells below here
-int max_allowed(object obj, string myclass, int level);
-int num_current_spells(mapping level_list);
-mapping filter_spells(mapping listed_spells, mapping memorized_spells);
-mapping compare_spells(object obj, string list, string myclass);
-void send_final_message(object obj);
-void prepare_list(object obj, string *spells, int delay, string myclass, int index);
-void prepare_listed_spells(object obj, string list, string myclass);
-void display_list(object obj, string list, string myclass);
-int remove_spell_from_list(object obj, string spell, string list, string myclass);
-int add_spell_to_list(object obj, string spell, string list, string myclass);
-mapping get_level_list(int level, mapping current_list);
-mapping get_current_list(mapping lists, string list);
-void delete_list(object obj, mapping lists, string list);
-mapping get_lists(object obj);
-int save_lists(object obj, mapping lists);
 
 int cmd_prepare(string str)
 {
@@ -200,36 +173,36 @@ int cmd_prepare(string str)
         tell_object(TP,"You can't prepare more than once in a round.");
         return 1;
     }
+
     TP->remove_property("last_prepare",time());
     TP->set_property("last_prepare",time());
 
-    if (!TP->is_class(myclass) && !avatarp(TP)) { return notify_fail("You cannot cast spells as a " + myclass + "!\n"); }
+    if (!TP->is_class(myclass) && !avatarp(TP)) {
+        return notify_fail("You cannot cast spells as a " + myclass + "!\n");
+    }
 
-    if(myclass == "monk")
-    {
-        tell_object(TP,"Monks don't need to prepare spells, please see <help ki>");
+    if (myclass == "monk") {
+        tell_object(TP, "Monks don't need to prepare spells, please see <help ki>");
         return 1;
     }
 
-    if(myclass == "warlock")
-    {
-        tell_object(TP,"Warlocks don't need to prepare spells, just cast");
+    if (myclass == "warlock") {
+        tell_object(TP, "Warlocks don't need to prepare spells, just cast");
         return 1;
     }
-
-    if (myclass == "antipaladin") { myclass = "paladin"; }
 
     validfocus = 0;
 
-
-    if(myclass == "psywarrior" || myclass == "psion")
-    {
-        if (sscanf(str, "%s %s", myclass, args) != 2) { return notify_fail("Syntax: <prepare classname points [times x].>\n"); }
-        if(sscanf(args,"%s times %d",spellname, times) != 2)
-        {
+    if (myclass == "psywarrior" || myclass == "psion") {
+        if (sscanf(str, "%s %s", myclass, args) != 2) {
+            return notify_fail("Syntax: <prepare classname points [times x].>\n");
+        }
+        if (sscanf(args, "%s times %d", spellname, times) != 2) {
             spellname = args;
             times = 1;
-            if (spellname != "points") { return notify_fail("Syntax: <prepare classname points [times x]>\n"); }
+            if (spellname != "points") {
+                return notify_fail("Syntax: <prepare classname points [times x]>\n");
+            }
         }
         prep_power_points(myclass, times);
         return 1;
@@ -247,6 +220,8 @@ int cmd_prepare(string str)
         spellname = args;
         times = 1;
     }
+
+    spellname = MAGIC_D->expand_quick_name(spellname);
 
     if(myclass != "bard" &&
        myclass != "sorcerer" &&
