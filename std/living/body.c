@@ -2055,14 +2055,13 @@ void add_death(string str)
     if (!str) {
         return;
     }
-    if (environment(this_object())->query_property("arena")) {
-        return;
-    }
+
     if (!deaths) {
         deaths = ({ ({ str, time() }) });
     }else {
         deaths += ({ ({ str, time() }) });
     }
+
 }
 
 mixed* query_deaths()
