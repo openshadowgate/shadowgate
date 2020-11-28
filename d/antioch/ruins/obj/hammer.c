@@ -26,7 +26,7 @@ void create() {
 	" piece of work."
 	);
 	set_lore("The Hammer of the Crimson Blaze was first crafted by the "+
-		"Hammer Maiden of Tempus, Brunhelda Silvermine, a dwarven female"+
+		"Hammer Maiden, Brunhelda Silvermine, a dwarven female"+
 		" warrior.   Brunhelda was a skilled blacksmith, as most dwarves "+
 		"are.  She crafted the hammer herself from the finest rubies and "+
 		"mithril she could find.  Taking over a decade to shape the hammer,"+
@@ -36,7 +36,7 @@ void create() {
                " is until almost half a century later when the wyrm was slain.  As "+
 		"the seven adventures sorted through the trinkets, artifacts, and "+
 		"treasures of Fezlegarath's horde, The Hammer of Crimson Blaze was "+
-		"discovered.  One of the adventures, a human cleric of Tyr by the "+
+		"discovered.  One of the adventures, a human cleric by the "+
 		"name of Jezzim, was so impressed with the workmanship of the hammer "+
 		"that he claimed it as his own.  Spending nearly all of his portion "+
 		"of the treasure, Jezzim enlisted the aid of an elven mage, he had "+
