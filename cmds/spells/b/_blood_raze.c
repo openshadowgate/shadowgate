@@ -11,7 +11,7 @@ void create()
     set_spell_name("blood raze");
     set_spell_level(([ "innate" : 5 ]));
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS blood race");
+    set_syntax("cast CLASS blood raze");
     set_damage_desc("fire, negative energy");
     set_description("You expend some of your bloodlust, sending away crimson flames at your enemies. If your enemies are living, you will drain them for both health and bloodlust.");
     set_verbal_comp();
