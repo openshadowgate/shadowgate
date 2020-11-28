@@ -1,5 +1,5 @@
 #include <std.h>
-inherit "/std/weapon";
+inherit "/d/common/obj/longsword";
 create() {
     ::create();
     set_name("longsword");
@@ -11,12 +11,6 @@ create() {
 	"Regime. However it still is an amazingly crafted weapon and "
 	"emanates magical properties."
     );
-    set_weight(5);
-    set_size(2);
-    set_value(50);
-    set_wc(1,8);
-    set_large_wc(1,12);
-    set_type("slashing");
     set_property("enchantment",1);
     set_wield((: TO,"drow" :));
 }
@@ -32,10 +26,9 @@ int drow() {
             "You feel a %^BOLD%^%^YELLOW%^shock%^RESET%^ run through your "
 	    "body as you wield the sword!"
         );
-        TP->do_damage("torso",roll_dice(2,6));
-      TP->add_attacker(TO);
-      TP->continue_attack();
-      TP->remove_attacker(TO);
+  
+        TP->cause_typed_damage(TP, TP->return_target_limb()
+         ,random(13), "electricity");
         return 1;
     }
     return 1;
