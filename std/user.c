@@ -5191,19 +5191,6 @@ int reactivate(string str,int when){
    return 1;
 }
 
-int is_in_sunlight()
-{
-    if(EVENTS_D->query_time_of_day()!="day")
-        return 0;
-    if(ETO->query_property("indoors"))
-        return 0;
-    if(WEATHER_D->query_clouds(TO)>3)
-        return 0;
-    if(ASTRONOMY_D->query_eclipse())
-        return 0;
-    return 1;
-}
-
 int test_passive_perception()
 {
     object* living, targ;

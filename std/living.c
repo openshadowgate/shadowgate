@@ -2265,6 +2265,19 @@ int is_vampire()
     return (query_acquired_template() == "vampire") || 0;
 }
 
+int is_in_sunlight()
+{
+    if(EVENTS_D->query_time_of_day()!="day")
+        return 0;
+    if(ETO->query_property("indoors"))
+        return 0;
+    if(WEATHER_D->query_clouds(TO)>3)
+        return 0;
+    if(ASTRONOMY_D->query_eclipse())
+        return 0;
+    return 1;
+}
+
 int is_were()
 {
     if (query_acquired_template() == "weretiger" || query_acquired_template() == "werewolf" || query_acquired_template() == "wererat") {
