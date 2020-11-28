@@ -5150,35 +5150,6 @@ int race_mod(string stat)
     }
 }
 
-int is_good(object obj)
-{
-    int align;
-
-    if(!objectp(obj)) { return 0; }
-    align = (int)obj->query_alignment();
-    if(align == 1 || align == 4 || align == 7) { return 1; }
-    return 0;
-}
-
-int is_evil(object obj)
-{
-    int align;
-
-    if(!objectp(obj)) { return 0; }
-    align = (int)obj->query_alignment();
-    if(align == 3 || align == 6 || align == 9) { return 1; }
-    return 0;
-}
-
-int is_neutral(object obj)
-{
-    int align;
-    if(!objectp(obj)) { return 0; }
-    align = (int)obj->query_alignment();
-    if(align == 2 || align == 5 || align == 8) { return 1; }
-    return 0;
-}
-
 int reactivate(string str,int when){
         TO->remove_property("inactive");
         tell_object(TO, "You wake up from the slumber.\n");
