@@ -3505,6 +3505,7 @@ int add_active_pet(string str) {
 
     // if no loaded/active pets match the filename, load a new one please and add to active array!
     ob = new(file);
+    ob->set_property("minion", TO);
     ob->set_owner(TO);
     ob->move(ETO);
     static_user["pets"] += ({ob});
