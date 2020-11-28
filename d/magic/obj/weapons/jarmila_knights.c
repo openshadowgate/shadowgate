@@ -40,7 +40,7 @@ int hit_func(object targ){
         tell_room(environment(ETO),"%^RED%^A burst of %^BOLD%^f%^ORANGE%^l"+
 "%^RED%^a%^CYAN%^m%^RED%^e%^ORANGE%^s %^RESET%^%^RED%^covers %^YELLOW%^"+ETO->QCN+"'s "+
 "%^RESET%^%^RED%^ivory rapier and burns %^BOLD%^%^GREEN%^"+targ->QCN+"%^RESET%^%^RED%^.%^RESET%^.",({ETO,targ}));
-                targ->do_damage("torso",random(4)+8);
-        return 1;
+           
+        return random(4)+8;
    }
 }

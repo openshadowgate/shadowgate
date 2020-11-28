@@ -39,7 +39,7 @@ int hit_func(object targ){
         tell_room(environment(ETO),"%^BOLD%^"+ETO->QCN+" %^RED%^sl%^ORANGE%^a%^RESET%^%^ORANGE%^s%^RED%^h"+
 "%^YELLOW%^e%^RED%^s %^WHITE%^"+ETO->QP+"'s b%^ORANGE%^l%^RESET%^%^ORANGE%^a%^BOLD%^d%^WHITE%^e "+
 "%^ORANGE%^through %^RESET%^%^RED%^"+targ->QCN+" %^YELLOW%^with a steady and true hand.%^RESET%^",({ETO,targ}));
-                targ->do_damage("torso",random(4)+8);
-        return 1;
+ 
+        return random(4)+8;
    }
 }
