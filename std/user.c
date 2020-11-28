@@ -1896,17 +1896,18 @@ nomask void die()
         message("death", "You are immortal and cannot die.", TO);
         return;
     }
-    if (TO->query_ghost()) return;
-    /*Death avoidance for unyielding rage feat - Octothorpe 1/23/16*/
-    if(FEATS_D->usable_feat(TO,"unyielding rage") && TO->query_property("raged") && (int)TO->query("rage death avoided") < time())
-    {
-        tell_object(TO,"%^BOLD%^%^RED%^With the last blow you feel the darkness beginning to flow inwards from the edge of your vision...Suddenly you're on your knees in a pool of your own %^RESET%^%^RED%^blood %^BOLD%^%^RED%^with your extremities going numb.");
-        tell_room(ETO,"%^BOLD%^%^RED%^"+TO->query_cap_name()+" falls to the ground in a bloody mess.",TO);
-        tell_object(TO,"%^BOLD%^No...no...this cannot be happening...there are so many more enemies left to kill and blood to be spilt...GET UP AND FIGHT!");
-        tell_room(ETO,"%^RESET%^%^RED%^With a blood-curdling scream, "+TO->query_cap_name()+" springs from the ground and looks ready to beat back Kelemvor himself.",TO);
+    if (TO->query_ghost()) {
+        return;
+    }
+
+    if (FEATS_D->usable_feat(TO, "unyielding rage") && TO->query_property("raged") && (int)TO->query("rage death avoided") < time()) {
+        tell_object(TO, "%^BOLD%^%^RED%^With the last blow you feel the darkness beginning to flow inwards from the edge of your vision...Suddenly you're on your knees in a pool of your own %^RESET%^%^RED%^blood %^BOLD%^%^RED%^with your extremities going numb.");
+        tell_room(ETO, "%^BOLD%^%^RED%^" + TO->query_cap_name() + " falls to the ground in a bloody mess.", TO);
+        tell_object(TO, "%^BOLD%^No...no...this cannot be happening...there are so many more enemies left to kill and blood to be spilt...GET UP AND FIGHT!");
+        tell_room(ETO, "%^RESET%^%^RED%^With a blood-curdling scream, " + TO->query_cap_name() + " springs from the ground and looks ready to beat back Kelemvor himself.", TO);
         TO->force_me("say I will not die until I murder you lot!");
         TO->set_hp(query_max_hp());
-        TO->set("rage death avoided",time()+7200);
+        TO->set("rage death avoided", time() + 7200);
         return;
     }
 
@@ -1917,22 +1918,21 @@ nomask void die()
     }
     if (ETO->query_property("arena"))
     {
-        if (wizardp(klr) || !objectp(klr) || (!userp(klr) && !klr->query_property("rabid mon") ) ||
-        (TO->query_property("safe arena") && klr->query_property("safe arena")) ||
-        environment(klr)->query_property("arena entrance") )
-        {
-            object *arenaman;
-            tell_object(TO,"You have been defeated in combat.");
+        object* arenaman;
 
-            tell_room(ETO,TO->query_cap_name()+" has been defeated in combat.",TO);
-            TO->set_hp(query_max_hp());
-            reset_all_status_problems();
-            cease_all_attacks();
-            if (TO->query_property("arena allowed")) TO->remove_property("arena allowed");
-            if (TO->query_property("safe arena")) TO->remove_property("safe arena");
-            if (room = ETO->query_property("deathmove")) TO->move_player(room);
-            return;
+        tell_object(TO, "You have been defeated in combat.");
+
+        tell_room(ETO, TO->query_cap_name() + " has been defeated in combat.", TO);
+
+        TO->set_hp(query_max_hp());
+        reset_all_status_problems();
+        cease_all_attacks();
+
+        if (room = ETO->query_property("deathmove")) {
+            TO->move_player(room);
         }
+
+        return;
     }
     ghost = 1;
     ob = TO;
@@ -1954,73 +1954,51 @@ nomask void die()
             TO->set("death level",(int)TO->query_base_character_level());
         }
     }
+
     death_age = player_age;
 
-    while(present("corpse",TO))
-    {
-        if(objectp(ETO)) { present("corpse",TO)->move(ETO); }
-        else { break; }
+    while (present("corpse", TO)) {
+        if (objectp(ETO)) {
+            present("corpse", TO)->move(ETO);
+        }else {
+            break;
+        }
     }
-    if(TO->query_property("rebirth"))
-    {
-        if(TO->query_property("rebirth")) reztype = "rebirth";
+
+    if (TO->query_property("rebirth")) {
+        if (TO->query_property("rebirth")) {
+            reztype = "rebirth";
+        }
         cease_all_attacks();
-        if(objectp(klr)) klr->cease_all_attacks();
+        if (objectp(klr)) {
+            klr->cease_all_attacks();
+        }
         reset_all_status_problems();
         break_all_spells();
         remove_stat_bonuses();
         in_vehicle = 0;
-        if(query_property("rally"))  remove_property("rally");
+        if (query_property("rally")) {
+            remove_property("rally");
+        }
         ob = new("/d/magic/obj/rebirther");
         ob->set_reztype(reztype);
         ob->move(TO);
         return;
     }
+
     message("death", "You die.\nYou feel the sensations of nothingness " +
     "as you rise above your corpse.\nYou arrive at a destination in a reality " +
     "not like your own.", TO);
-    if (!avatarp(TO) || !query_disguised()) seen = getParsableName();
-    else seen = query_vis_name();
 
-    switch(random(12)+1)
-    {
-        case 1:
-            msg_death="%^BOLD%^%^RED%^The fires of hell blaze with an unholy light as "+seen+" succumbs to death's grip!";
-            break;
-        case 2:
-            msg_death="%^BOLD%^%^BLUE%^A wave of bitter sorrow washes over you as "+seen+" passes from the realms and into the afterlife!";
-            break;
-        case 3:
-            msg_death="%^BOLD%^%^RED%^"+seen+"'s death brings to you the harsh realization that survival of the fittest has become a reality at Shadowgate!";
-            break;
-        case 4:
-            msg_death="%^BOLD%^%^MAGENTA%^"+seen+" lets out a final scream of agony as the Grim Reaper removes "+query_possessive()+" soul!";
-            break;
-        case 5:
-            msg_death="%^BOLD%^%^RED%^The Grim Reaper lays down the Welcome Mat and greets "+seen+" with open arms!";
-            break;
-        case 6:
-            msg_death="%^BOLD%^%^CYAN%^The funeral bells begin to chime as "+seen+"'s life comes to an abrupt halt!";
-            break;
-        case 7:
-            msg_death="%^BOLD%^%^BLUE%^A dark shadow passes overhead as "+seen+"'s soul is whisked up into the heavens!";
-            break;
-        case 8:
-            msg_death="%^BOLD%^%^RED%^All the demons of the Abyss gather happily together as "+seen+"'s death brings them a new soul to torment for eternity!";
-            break;
-        case 9:
-            msg_death="%^BOLD%^%^CYAN%^A new gravestone is carved from pure marble and placed beside "+seen+"'s fresh grave!";
-            break;
-        case 10:
-            msg_death="%^BOLD%^%^GREEN%^The citizens of the land suddenly wonder what great foe was responsible for "+seen+"'s untimely demise!";
-            break;
-        case 11:
-            msg_death="%^BOLD%^%^GREEN%^The thieves of the land suddenly wonder where "+seen+"'s corpse might be found!";
-            break;
-        default:
-            msg_death="%^BOLD%^%^RED%^Death hast taken "+seen+" from our midsts!";
-            break;
+    if (!avatarp(TO) || !query_disguised()) {
+        seen = getParsableName();
+    }else {
+        seen = query_vis_name();
     }
+
+
+    msg_death="%^BOLD%^%^RED%^Death hast taken "+seen+".";
+
     "/daemon/messaging_d"->first_death_message( "death",msg_death,all_inventory(ETO), ({ TO }) );
     "/daemon/messaging_d"->handle_death_messages(TO, TO->query_property("watching_death_objects"), TO->query("watching_death_objects"));
 
@@ -2031,7 +2009,7 @@ nomask void die()
         } else {
             corpse->set_name(capitalize(query_vis_name()));
         }
-        corpse->add_id("corpse of " + query_vis_name());   // adds name to corpse ids -Ares 8/29/05-
+        corpse->add_id("corpse of " + query_vis_name());
         corpse->copy_body(TO);
         corpse->move(ETO);
         corpse->set_true_name(query_true_name());
@@ -2040,26 +2018,33 @@ nomask void die()
         tell_room(ETO, capitalize(query_vis_name()) + " turns into smoke.");
     }
 
-    filter_array(all_inventory(TO), (:$1->is_disease():))->remove();
+
+    filter_array(all_inventory(TO), (: $1->is_disease() :))->remove();
 
     cease_all_attacks();
     reset_all_status_problems();
     break_all_spells();
 
     "/daemon/death_effects_d"->death_notification(TO);
-    if(objectp(klr) && klr->is_player() && TO->is_player())
-    {
-        TO->set("just_been_pkilled",1); // new to hopefully prevent missing PKflags.
+    if (objectp(klr) && klr->is_player() && TO->is_player()) {
+        TO->set("just_been_pkilled", 1);
     }
 
     in_vehicle = 0;
     move("/d/shadowgate/death/death_room");
-    if(query_property("rally")) remove_property("rally");
-    remove_property("master weapon"); // probaby should be a global function that clears these on death somewhere.
+
+    if (query_property("rally")) {
+        remove_property("rally");
+    }
+
+    remove_property("master weapon");
     remove_stat_bonuses();
+
     save_player( query_name() );
+
     PLAYER_D->add_player_info();
     FEATS_D->update_usable(TO);
+
     return;
 }
 
