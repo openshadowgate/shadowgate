@@ -34,7 +34,7 @@ int cmd_ki(string str)
         }
         if(str == "init")
         {
-            "/daemon/user_d.c"->init_pool(TP, "ki");
+            USER_D->init_pool(TP, "ki");
             tell_object(TP, "Your ki has been re-initialized.");
             return 1;
         }

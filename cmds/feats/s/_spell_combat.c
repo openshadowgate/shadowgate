@@ -1,6 +1,5 @@
 #include <std.h>
 #include <daemons.h>
-#include <dirs.h>
 
 inherit FEAT;
 
@@ -9,11 +8,12 @@ void create()
     ::create();
     set_author("wedex");
     feat_type("instant");
-    feat_category("MagusArcana");
+    feat_category("Steel&Magic");
     feat_name("spell combat");
     feat_prereq("Magus L1");
     feat_syntax("spell_combat");
-    feat_desc("A magus learns to cast spells and wield his weapons at the same time. The magus must have one hand free, while wielding a light or one-handed melee weapon in the other hand. The spell potency has a penalty but its lessened at 8th level and again at 14th level.");
+    feat_desc("A magus learns to cast spells and fight with his weapon at the same time. The magus must have one hand free, while wielding a light or one-handed melee weapon in the other hand. The spell potency has a penalty but its lessened at 8th level and again at 14th level.");
+    set_required_for(({ "enruned shield", "enruned offhand", "enruned great weapon" }));
 }
 
 int allow_shifted() { return 1; }

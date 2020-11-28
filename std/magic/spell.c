@@ -607,7 +607,7 @@ void set_helpful_spell(int x)
 
 int check_reflection()
 {
-    int turnperc, flagz, counters;
+    int turnperc, flagz, counters, can_spend;
     object temp;
 
     if (!objectp(caster)) {
@@ -634,6 +634,16 @@ int check_reflection()
 
     if (FEATS_D->usable_feat(target, "reflection") && target->is_wearing_type("shield")) {
         flagz = 2;
+    }
+
+    can_spend = 0;
+    if (target->query_property("arcana reflection") && USER_D->can_spend_pool(target, spell_level, "arcana")) {
+        turnperc = BONUS_D->query_stat_bonus(target, "intelligence") + target->query_class_level("magus") / 2;
+        flagz = 3;
+        can_spend = 1;
+    }
+    else {
+        turnperc = target->query_spellTurning();
     }
 
     counters = 0 ;
@@ -689,9 +699,11 @@ int check_reflection()
     if (turnperc > 85) {
         turnperc = 85;
     }*/
-    turnperc = target->query_spellTurning();
 
     if (turnperc >= roll_dice(1, 100)) {
+        if (flagz == 3 && can_spend) {
+            USER_D->spend_pool(target, spell_level, "arcana");
+        }
         if (!FEATS_D->usable_feat(target, "perfect caster")) {
             target->add_temporary_feat("perfect caster");
             target->set_property("temp_perfect_caster", 1);
@@ -709,6 +721,13 @@ int check_reflection()
                     target->counter_attack(target);
                 }
             }
+        }else if (flagz == 3) {
+            tell_object(target, "%^BOLD%^%^RED%^" + caster->QCN + "'s spell is repeled by your "
+                "arcana and redirected at " + caster->QO + "!%^RESET%^");
+            tell_object(caster, "%^BOLD%^%^RED%^Your spell is repeled back at you by "
+                "" + target->QCN + "'s inner magic!%^RESET%^");
+            tell_room(environment(target), "%^BOLD%^%^RED%^" + caster->QCN + "'s spell is repeled "
+                "by " + target->QCN + "'s inner magic!%^RESET%^", ({ caster, target }));
         }else {
             tell_object(target, "%^BOLD%^%^RED%^" + caster->QCN + "'s spell bounces harmlessly off your "
                         "ward and reflects back at " + caster->QO + "!%^RESET%^");
@@ -1046,9 +1065,9 @@ void wizard_interface(object user, string type, string targ)
         caster->set_cast_type(lower_case(old_spell_type));
     }
 
-    if (!"/daemon/magic_d"->can_cast(caster, casting_level, spell_type, spell_name, spell_duration) &&
+    if (!MAGIC_D->can_cast(caster, casting_level, spell_type, spell_name, spell_duration) &&
         (!stringp(improv = query_property("improvised")) ||
-         !"/daemon/magic_d"->can_cast(caster, casting_level, spell_type, improv, spell_duration))) {
+         !MAGIC_D->can_cast(caster, casting_level, spell_type, improv, spell_duration))) {
         tell_object(caster, "You cannot " + whatdo + " that " + whatsit + ".\n");
         TO->remove();
         return;
@@ -1108,7 +1127,7 @@ void wizard_interface(object user, string type, string targ)
             TO->remove();
             return;
         }
-        if (!"/daemon/user_d.c"->spend_pool(caster, mycost, "arcana")) {
+        if (!USER_D->spend_pool(caster, mycost, "arcana")) {
             tell_object(caster, "You do not have enough available arcana to " + whatdo + " that " + whatsit + "!");
             TO->remove();
             return;

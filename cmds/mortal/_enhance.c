@@ -55,10 +55,10 @@ int cmd_enhance(string str)
             return 1;
         }
         has_resource = 0;
-        if (feat_ap && (int)"/daemon/user_d.c"->spend_pool(TP, 1, "arcana"))
+        if (feat_ap && (int)USER_D->spend_pool(TP, 1, "arcana"))
         {
             has_resource = 1;
-        } else if (feat_wb && (int)"/daemon/user_d.c"->spend_pool(TP, 1, "grace"))
+        } else if (feat_wb && (int)USER_D->spend_pool(TP, 1, "grace"))
         {
             has_resource = 1;
         } else{
@@ -154,11 +154,11 @@ int cmd_enhance(string str)
             return 1;
         }
         has_resource = 0;
-        if (feat_wr && (int)"/daemon/user_d.c"->spend_pool(TP, 1, "arcana"))
+        if (feat_wr && (int)USER_D->spend_pool(TP, 1, "arcana"))
         {
             has_resource = 1;
         }
-        else if (feat_ab && (int)"/daemon/user_d.c"->spend_pool(TP, 1, "grace"))
+        else if (feat_ab && (int)USER_D->spend_pool(TP, 1, "grace"))
         {
             has_resource = 1;
         }

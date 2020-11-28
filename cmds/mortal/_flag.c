@@ -36,7 +36,7 @@ varargs void do_flag_display(object who, object targ)
     for(x = 0;x < sizeof(SUPPORTEDFLAGS);x++)
     {
         j = 14 - strlen(SUPPORTEDFLAGS[x]);
-        tell_object(targ, "%^BOLD%^%^WHITE%^"+capitalize(SUPPORTEDFLAGS[x]) + arrange_string(" ", j)+ "%^RESET%^"+"/daemon/user_d.c"->get_flag(who, SUPPORTEDFLAGS[x]));
+        tell_object(targ, "%^BOLD%^%^WHITE%^"+capitalize(SUPPORTEDFLAGS[x]) + arrange_string(" ", j)+ "%^RESET%^"+ USER_D->get_flag(who, SUPPORTEDFLAGS[x]));
         continue;
     }
     if(pointerp(activeEvents = WORLD_EVENTS_D->parsable_world_events(who)))
@@ -184,7 +184,7 @@ int cmd_flag(string str)
                     tell_object(TP, "You cannot raise your character improvement tax above 100%.");
                     return 1;
                 }
-                "/daemon/user_d.c"->set_character_improvement_tax_percent(TP, perc);
+                USER_D->set_character_improvement_tax_percent(TP, perc);
                 return 1;
             case "roleplay flag":
                 if(arg != "on")
@@ -194,7 +194,7 @@ int cmd_flag(string str)
                     "will adjust automatically.");
                     return 1;
                 }
-                if(!"/daemon/user_d.c"->setup_rp_flag(TP))
+                if(!USER_D->setup_rp_flag(TP))
                 {
                     tell_object(TP, "Something went wrong when setting up the roleplay flag.");
                     return 1;
@@ -236,7 +236,7 @@ int cmd_flag(string str)
                 }
                 base = TP->query_base_character_level();
                 if (arg == "revert" || arg == "normal") {
-                    "/daemon/user_d.c"->scale_level_to(TP, base);
+                    USER_D->scale_level_to(TP, base);
                     return 1;
                 }
                 perc = to_int(arg);
@@ -251,10 +251,10 @@ int cmd_flag(string str)
                     return 1;
                 }
                 if (perc == base) {
-                    "/daemon/user_d.c"->scale_level_to(TP, base);
+                    USER_D->scale_level_to(TP, base);
                     return 1;
                 }
-                "/daemon/user_d.c"->scale_level_to(TP, perc);
+                USER_D->scale_level_to(TP, perc);
                 return 1;
         }
         return 1;

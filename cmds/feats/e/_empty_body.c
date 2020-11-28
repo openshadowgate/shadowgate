@@ -36,7 +36,7 @@ int cmd_empty_body(string str)
    if(!objectp(TP)) { return 0; }
    if((int)TP->query_class_level("monk") < 18) return 0;
    if((int)TP->query_alignment() > 3) return 0;
-   if(!(int)"/daemon/user_d.c"->can_spend_ki(TP, 4))
+   if(!(int)USER_D->can_spend_ki(TP, 4))
    {
        tell_object(TP, "%^BOLD%^%^CYAN%^Your empty body attempt fails, you lack the needed ki.%^RESET%^");
        dest_effect();
@@ -69,7 +69,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if(!(int)"/daemon/user_d.c"->can_spend_ki(TP, 4))
+    if(!(int)USER_D->can_spend_ki(TP, 4))
     {
         tell_object(caster, "%^BOLD%^%^CYAN%^Your empty body attempt fails, you lack the needed ki.%^RESET%^");
         dest_effect();

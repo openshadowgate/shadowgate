@@ -1,6 +1,5 @@
 #include <std.h>
 #include <daemons.h>
-#include <dirs.h>
 
 inherit FEAT;
 
@@ -9,7 +8,7 @@ void create()
     ::create();
     set_author("wedex");
     feat_type("permanent");
-    feat_category("MagusArcana");
+    feat_category("Steel&Magic");
     feat_name("legendary blade");
     feat_prereq("Magus L20");
     feat_classes("magus");

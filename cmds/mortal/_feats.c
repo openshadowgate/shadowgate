@@ -757,7 +757,7 @@ int cmd_feats(string str)
                     "you can remove any feats!");
                 return 1;
             }
-            if (intp("/daemon/user_d.c"->get_scaled_level(TP))) {
+            if (intp(USER_D->get_scaled_level(TP))) {
                 tell_object(TP, "You have scaled your level down and must revert it back to " +
                     "normal before you can remove any feats!");
                 return 1;
@@ -896,7 +896,7 @@ int validation_messages(object obj, string group, string feat_name) {
             "you can add any feats!");
         return 1;
     }
-    if (intp("/daemon/user_d.c"->get_scaled_level(obj))) {
+    if (intp(USER_D->get_scaled_level(obj))) {
         tell_object(obj, "You have scaled your level down and must revert it back to " +
             "normal before you can add any feats!");
         return 1;

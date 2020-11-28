@@ -375,7 +375,7 @@ protected void receive_message(string cl, string msg)
     mapping TermInfo;
     if (cl != "logon") return;
     if(!stringp(msg)) return;
-    TermInfo = "/daemon/user_d.c"->myTerm(TO, 1);
+    TermInfo = USER_D->myTerm(TO, 1);
     msg = terminal_colour(msg, TermInfo, 140, 0);
     receive(msg);
 }

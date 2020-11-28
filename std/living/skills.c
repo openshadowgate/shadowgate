@@ -521,8 +521,8 @@ mapping query_levels()
 int query_class_level(string str)
 {
     if (mlevels && mlevels != ([]) && mlevels[str] && objectp(TO)) {
-        if (intp("/daemon/user_d.c"->get_scaled_class_level(TO))) {
-            return "/daemon/user_d.c"->get_scaled_class_level(TO, str);
+        if (intp(USER_D->get_scaled_class_level(TO))) {
+            return USER_D->get_scaled_class_level(TO, str);
         }
         return mlevels[str];
     }
@@ -579,8 +579,8 @@ int query_character_level()
     myrace = this_object()->query_race();
     mysubrace = (string)query("subrace");
     num += lvladjust;
-    if (intp("/daemon/user_d.c"->get_scaled_level(TO))) {
-        return "/daemon/user_d.c"->get_scaled_level(TO);
+    if (intp(USER_D->get_scaled_level(TO))) {
+        return USER_D->get_scaled_level(TO);
     }
     return num;
 }
@@ -1139,7 +1139,7 @@ int use_XP_tax(int exp)
     if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1) {
         amt = _IRS["tax"]["improvement"]["amount"];
         if (amt > 0) {
-            ctp = "/daemon/user_d.c"->get_character_improvement_tax_percent(TO);
+            ctp = USER_D->get_character_improvement_tax_percent(TO);
             ctp = (adjustment * to_float(ctp)) / 100;
             ctp = to_int(ctp);
             if (ctp >= amt) {
@@ -1158,7 +1158,7 @@ int use_XP_tax(int exp)
         }
     }
     //scaled level then don't gain any actual experience
-    if (intp("/daemon/user_d.c"->get_scaled_level(TO))) {
+    if (intp(USER_D->get_scaled_level(TO))) {
         return 0;
     }
     return to_int(adjustment);
@@ -1367,7 +1367,7 @@ void add_exp(int exp)
         PARTY_OB->calculate_exp(TO->query_party(), exp, previous_object());
         return;
     }
-    if ("/daemon/user_d.c"->no_exp(TO) && exp > 0) {
+    if (USER_D->no_exp(TO) && exp > 0) {
         return;
     }
     if (has_XP_levelcap() && (exp > 0)) {
@@ -1384,7 +1384,7 @@ void add_exp(int exp)
 
 void party_exp(int exp, object tmp)
 {
-    if ("/daemon/user_d.c"->no_exp(TO)) {
+    if (USER_D->no_exp(TO)) {
         return;
     }
     if (exp > 0) {
@@ -1408,7 +1408,7 @@ void party_exp(int exp, object tmp)
 
 void fakeparty_exp(int exp, object tmp)
 {
-    if ("/daemon/user_d.c"->no_exp(TO)) {
+    if (USER_D->no_exp(TO)) {
         return;
     }
     if (exp > 0) {
@@ -1432,7 +1432,7 @@ void fakeparty_exp(int exp, object tmp)
 
 void fix_exp(int exp, object tmp)
 {
-    if ("/daemon/user_d.c"->no_exp(TO)) {
+    if (USER_D->no_exp(TO)) {
         return;
     }
     if (exp > 0) {
@@ -1452,7 +1452,7 @@ void fix_exp(int exp, object tmp)
 
 void quest_exp(int exp, object tmp)
 {
-    if ("/daemon/user_d.c"->no_exp(TO)) {
+    if (USER_D->no_exp(TO)) {
         return;
     }
     if (exp > 0) {
@@ -1472,7 +1472,7 @@ void quest_exp(int exp, object tmp)
 
 void partyquest_exp(int exp, object tmp)
 {
-    if ("/daemon/user_d.c"->no_exp(TO)) {
+    if (USER_D->no_exp(TO)) {
         return;
     }
     if (exp > 0) {
@@ -1637,22 +1637,22 @@ string query_combat_spec(string myclass)
 
 int spend_ki(int amount)
 {
-    return "/daemon/user_d.c"->spend_ki(TO, amount);
+    return USER_D->spend_ki(TO, amount);
 }
 
 int has_ki()
 {
-    return "/daemon/user_d.c"->has_ki(TO);
+    return USER_D->has_ki(TO);
 }
 
 varargs void regenerate_ki(int amount, int pass)
 {
-    return "/daemon/user_d.c"->regenerate_pool(TO, amount, pass, "ki");
+    return USER_D->regenerate_pool(TO, amount, pass, "ki");
 }
 
 string* query_ki_spells()
 {
-    return "/daemon/user_d.c"->query_ki_spells(TO);
+    return USER_D->query_ki_spells(TO);
 }
 
 //End Monk Functions

@@ -9,10 +9,10 @@ void create()
     set_author("wedex");
     feat_type("permanent");
     feat_category("MagusArcana");
-    feat_name("greater enruned great weapon");
-    feat_prereq("Enruned Great Weapon");
+    feat_name("greater arcane pool");
     feat_classes("magus");
-    feat_desc("The duration of a rune inscribed in the two handed weapon increases to 1 hour per level.");
+    feat_prereq("Magus L21");
+    feat_desc("The magus expands his inner arcana. The arcane pool size is now equal to your magus level plus your intelligence modifier.");
     permanent(1);
 }
 
@@ -23,11 +23,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (!ob->is_class("magus")) {
-        dest_effect();
-        return 0;
-    }
-    if (!FEATS_D->has_feat(ob, "enruned great weapon")) {
+    if (ob->query_class_level("magus") < 21) {
         dest_effect();
         return 0;
     }

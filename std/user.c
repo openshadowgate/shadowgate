@@ -335,7 +335,7 @@ void redo_my_languages() {
       // Each time lang system is updated, add update marker removal
       // here
       if (query("lang_update_20200422")) {
-          delte("lang_update_20200422");
+          delete("lang_update_20200422");
       }
   }
 
@@ -1391,11 +1391,11 @@ void setup()
             if (objectp(TO)) {
                 if (TO->is_class("magus"))
                 {
-                    "/daemon/user_d.c"->init_pool(TO, "arcana");
+                    USER_D->init_pool(TO, "arcana");
                 }
                 if (TO->is_class("paladin"))
                 {
-                    "/daemon/user_d.c"->init_pool(TO, "grace");
+                    USER_D->init_pool(TO, "grace");
                 }
             }
         }
@@ -1875,7 +1875,7 @@ void resetLevelForExp(int expLoss)
 
 void reset_all_status_problems()
 {
-    "/daemon/user_d.c"->reset_all_status_problems(TO);
+    USER_D->reset_all_status_problems(TO);
 }
 
 mixed get_death_place()
@@ -2620,15 +2620,15 @@ void receive_message(string msg_class, string msg)
     if (msg_class[0] == 'N') { msg_class = msg_class[1..sizeof(msg_class)-1]; }
     else if (msg_class != "prompt")
     {
-        TermInfo = "/daemon/user_d.c"->myTerm(TO);
+        TermInfo = USER_D->myTerm(TO);
         msg = terminal_colour(msg + "%^RESET%^\n", TermInfo, x, 0);
         //msg += "%^RESET%^";
         //msg = wrap(msg, x);
     }
     if (msg_class == "system" || msg_class == "more" || msg_class == "logon")
     {
-        if(msg_class == "logon") { TermInfo = "/daemon/user_d.c"->myTerm(TO, 1); }
-        else TermInfo = "/daemon/user_d.c"->myTerm(TO);
+        if(msg_class == "logon") { TermInfo = USER_D->myTerm(TO, 1); }
+        else TermInfo = USER_D->myTerm(TO);
         msg = terminal_colour(msg + "%^RESET%^\n", TermInfo, x, 0);
         receive(msg);
         return;
@@ -3674,7 +3674,7 @@ mapping query_rem_rooms()
     //function that clears invalid rooms - IE rooms we kept in the game
     //for one reason or another but that are no longer accessible to characters
     //Saide, December 2016
-    rem_rooms = "/daemon/user_d.c"->check_rem_rooms(TO, rem_rooms_sort, rem_rooms);
+    rem_rooms = USER_D->check_rem_rooms(TO, rem_rooms_sort, rem_rooms);
     return rem_rooms;
 }
 

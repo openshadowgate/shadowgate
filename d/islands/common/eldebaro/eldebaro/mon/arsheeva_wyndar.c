@@ -52,7 +52,7 @@ void create()
     
     set_class("monk", 50);    
     set("monk way", "way of the fist");
-    "/daemon/user_d.c"->init_ki(TO);
+    USER_D->init_ki(TO);
     set_alignment(2);
     set_size(2);
     set_stats("strength",15);

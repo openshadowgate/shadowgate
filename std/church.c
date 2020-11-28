@@ -209,7 +209,7 @@ int pray()
         string myclass;
         int charlvl;
 
-        "/daemon/user_d.c"->scale_level_to(TP, TP->query_adjusted_character_level());
+        USER_D->scale_level_to(TP, TP->query_adjusted_character_level());
         /* Subtracting exp to next level  */
         thelevel = TP->query_adjusted_character_level();
 
@@ -477,7 +477,7 @@ int select_domain(string str)
         tell_object(TP, "%^BOLD%^%^WHITE%^You have chosen to specialize in the " +
                     "%^YELLOW%^" + str + "%^BOLD%^%^WHITE%^!%^RESET%^");
         TP->set("monk way", str);
-        "/daemon/user_d.c"->init_ki(TP);
+        USER_D->init_ki(TP);
         return 1;
         break;
     case "domain":

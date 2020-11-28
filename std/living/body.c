@@ -618,7 +618,7 @@ int query_max_hp_base()
     myrace = (string)TO->query_race();
     subrace = (string)TO->query("subrace");
 
-    if (intp("/daemon/user_d.c"->get_scaled_level(TO))) {
+    if (intp(USER_D->get_scaled_level(TO))) {
         num += sum_array(TO->query("hp_array"), (int)TO->query_base_character_level());
         num = WORLD_EVENTS_D->monster_modification_event(num, "health", TO);
         return num;

@@ -1,6 +1,5 @@
 #include <std.h>
 #include <daemons.h>
-#include <dirs.h>
 
 inherit FEAT;
 
@@ -14,6 +13,7 @@ void create()
     feat_classes("magus");
     feat_syntax("enruned_great_weapon");
     feat_desc("You may expend a point from the arcane pool to scribe a rune of power on a two handed weapon wielded. You can use a hand holding the weapon to cast magus spells and you can use spell combat. The rune lasts 10 minutes per level.");
+    set_required_for(({ "greater enruned great weapon" }));
 }
 
 int allow_shifted() { return 0; }
