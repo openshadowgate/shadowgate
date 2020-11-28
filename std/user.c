@@ -1412,8 +1412,10 @@ void setup()
             environment()->remove_tenant(query_name());
         }
     }
+
     age = time() - (int)TO->query_birthday();
     PLAYER_D->add_player_info();
+
     if (!(PRISON_D->is_imprisoned(query_name()))) {
         if (!query_body_type() && query_race() != "unborn") {
             move_player("/d/dagger/bodyhold");
@@ -1423,6 +1425,13 @@ void setup()
             load_pets();
         }
     }
+
+    if (query_ghost() && !query("just_been_pkilled")) {
+        if (base_name(ETO)[0..18] != "/d/shadowgate/death/") {
+            TO->move_player("/d/shadowgate/death/death_exit");
+        }
+    }
+
     convert_kills();
     if (query_property("inactive")) {
         remove_property("inactive");
@@ -1997,7 +2006,7 @@ nomask void die()
     }
 
 
-    msg_death="%^BOLD%^%^RED%^Death hast taken "+seen+".";
+    msg_death="%^BOLD%^%^BLUE%^ Death hast taken "+seen+".";
 
     "/daemon/messaging_d"->first_death_message( "death",msg_death,all_inventory(ETO), ({ TO }) );
     "/daemon/messaging_d"->handle_death_messages(TO, TO->query_property("watching_death_objects"), TO->query("watching_death_objects"));
@@ -2967,9 +2976,9 @@ void revive(int xploss)
     save_player( query_name() );
 }
 
-int query_ghost() {
-   // if (objectp(ETO) && (base_name(ETO)==DEATH_ROOM)) return 0;
-  return ghost;
+int query_ghost()
+{
+    return ghost;
 }
 
 void set_ghost(int x){
@@ -4375,40 +4384,63 @@ int get_perma_death_flag()
     return query("permadeath flag");
 }
 
-void manual_perma_death(){
-  if (!D_BUG_D->perma_death_d())
-  set("perma death length",time()+get_perma_death_flag());
-  else
-  PERMA_DEATH_D->set_permadeath(TO->query_name(),time()+TO->get_perma_death_flag());
-}
-void perma_death(){
-  if (!D_BUG_D->perma_death_d())
-  set("perma death length",time()+get_perma_death_flag());
-  else
-//  PERMA_DEATH_D->set_permadeath(TO->query_name(),time()+5*3600); // Five RL hour timeout.
-// reducing timer on this temporarily, until quests are added to afterlife. Please restore to full time at this point. N, 2/12.
-  PERMA_DEATH_D->set_permadeath(TO->query_name(),time()+(2*3600)); // Two RL hour timeout.
+void manual_perma_death()
+{
+    if (!D_BUG_D->perma_death_d()) {
+        set("perma death length", time() + get_perma_death_flag());
+    }else {
+        PERMA_DEATH_D->set_permadeath(TO->query_name(), time() + TO->get_perma_death_flag());
+    }
 }
 
-int get_perma_death(){
-  if (!D_BUG_D->perma_death_d())
-  return query("perma death length");
-  else
-  return PERMA_DEATH_D->get_permadeath(TO->query_name());
+void perma_death()
+{
+    if (!D_BUG_D->perma_death_d()) {
+        set("perma death length", time() + get_perma_death_flag());
+    }else {
+        PERMA_DEATH_D->set_permadeath(TO->query_name(), time() + (2 * 3600)); // Two RL hour timeout.
+    }
 }
 
-int query_death_age() {  return death_age; }
-void set_death_age(int x) { death_age = x; }
+int get_perma_death()
+{
+    if (!D_BUG_D->perma_death_d()) {
+        return query("perma death length");
+    }else {
+        return PERMA_DEATH_D->get_permadeath(TO->query_name());
+    }
+}
 
-void set_pk_death_flag() { pk_death_flag = 1; }
+int query_death_age()
+{
+    return death_age;
+}
+
+void set_death_age(int x)
+{
+    death_age = x;
+}
+
+void set_pk_death_flag()
+{
+    pk_death_flag = 1;
+}
+
 void remove_pk_death_flag()
 {
-	if(objectp(TO)) TO->delete("pk_death_age");
-	if(objectp(TO)) TO->delete("pk_death_time");
-	pk_death_flag = 0;
+    if (objectp(TO)) {
+        TO->delete("pk_death_age");
+    }
+    if (objectp(TO)) {
+        TO->delete("pk_death_time");
+    }
+    pk_death_flag = 0;
 }
 
-int get_pk_death_flag() { return ( pk_death_flag || down_time); }
+int get_pk_death_flag()
+{
+    return (pk_death_flag || down_time);
+}
 
 int query_death_flag()
 {
@@ -4437,76 +4469,99 @@ int light_blind_remote(int actionbonus, object whichroom, int distance) {
   int _sight_bonus;
   int calc;
 
-  if (!objectp(TO)) return 0;
-  if (!objectp(whichroom)) return 0;
-  if (whichroom->query_property("ooc_room")) return 0;
-  if (whichroom->query_property("ooc room")) return 0;
-  if (geteuid(whichroom) == "Shadowgate") return 0;
-  _total_light=total_light(whichroom);
-  _sight_bonus=query_sight_bonus();
+  if (!objectp(TO)) {
+      return 0;
+  }
+  if (!objectp(whichroom)) {
+      return 0;
+  }
+  if (whichroom->query_property("ooc_room")) {
+      return 0;
+  }
+  if (whichroom->query_property("ooc room")) {
+      return 0;
+  }
+  if (geteuid(whichroom) == "Shadowgate") {
+      return 0;
+  }
+  _total_light = total_light(whichroom);
+  _sight_bonus = query_sight_bonus();
 
-  if (!D_BUG_D->user_new_light())
-    return (_total_light + _sight_bonus - actionbonus < 0);
+  if (!D_BUG_D->user_new_light()) {
+      return (_total_light + _sight_bonus - actionbonus < 0);
+  }
 
-  if (_sight_bonus * _total_light < 0)
-    calc = _sight_bonus + _total_light;
-  else
-    calc = _total_light;
-  if (D_BUG_D->calc_message())
-  tell_object(TO,"calc = "+calc);
+  if (_sight_bonus * _total_light < 0) {
+      calc = _sight_bonus + _total_light;
+  }else {
+      calc = _total_light;
+  }
+  if (D_BUG_D->calc_message()) {
+      tell_object(TO, "calc = " + calc);
+  }
 
-  if (member_array(query_race(),(string)PLAYER_D->night_races() ) != -1) {
-    calc *= -1;
-    _total_light *= -1;
+  if (member_array(query_race(), (string)PLAYER_D->night_races()) != -1) {
+      calc *= -1;
+      _total_light *= -1;
   }
 
   if (intp(actionbonus)) {
-    if (calc > (0+actionbonus)) {
-
-      if (_total_light < (LIGHT_MAX_RANGE-actionbonus)) {
-        // proper light!
-        return 0;
+      if (calc > (0 + actionbonus)) {
+          if (_total_light < (LIGHT_MAX_RANGE - actionbonus)) {
+              // proper light!
+              return 0;
+          } else {
+              //      tell_object(TO,"first return");
+              return (_total_light - (LIGHT_MAX_RANGE - actionbonus));
+          }
       } else {
-        //      tell_object(TO,"first return");
-        return (_total_light - (LIGHT_MAX_RANGE-actionbonus));
+          //      tell_object(TO,"second return");
+          return calc - actionbonus;
       }
-    } else {
-      //      tell_object(TO,"second return");
-      return calc - actionbonus ;
-    }
   } else {
-    //      tell_object(TO,"second if");
-    if (calc > 0)
-      if (_total_light < LIGHT_MAX_RANGE)
-        return 0;
-      else
-        return (_total_light - LIGHT_MAX_RANGE);
-    else
-      return (calc - 0);
+      //      tell_object(TO,"second if");
+      if (calc > 0) {
+          if (_total_light < LIGHT_MAX_RANGE) {
+              return 0;
+          }else {
+              return (_total_light - LIGHT_MAX_RANGE);
+          }
+      }else {
+          return (calc - 0);
+      }
   }
-  tell_object(TO,"Light error!");
+  tell_object(TO, "Light error!");
   return 0;
 }
 
-int light_blind(int actionbonus) {
-  if (!objectp(TO)) return 0;
-  if (!objectp(ETO)) return 0;
-  return light_blind_remote(actionbonus,ETO,0);
+int light_blind(int actionbonus)
+{
+    if (!objectp(TO)) {
+        return 0;
+    }
+    if (!objectp(ETO)) {
+        return 0;
+    }
+    return light_blind_remote(actionbonus, ETO, 0);
 }
-  // *****/
-string light_blind_fail_message(int blindlight) {
-  if (blindlight == 0)
-    return "";
-  if (member_array(query_race(),(string)PLAYER_D->night_races() ) != -1) {
-    if (blindlight < 0)
-      return "The bright light burns your eyes too much to see!";
-    else
-      return "Even your vision is useless here.";
-  }
-  if (blindlight > 0)
-    return "It is too bright.";
-  else
-    return "It is too dark.";
+
+string light_blind_fail_message(int blindlight)
+{
+    if (blindlight == 0) {
+        return "";
+    }
+    if (member_array(query_race(), (string)PLAYER_D->night_races()) != -1) {
+        if (blindlight < 0) {
+            return "The bright light burns your eyes too much to see!";
+        }else {
+            return "Even your vision is useless here.";
+        }
+    }
+    if (blindlight > 0) {
+        return "It is too bright.";
+    }else {
+        return "It is too dark.";
+    }
 }
 
 //follower npcs... initially for cavaliers

@@ -2347,6 +2347,7 @@ int is_evil(object obj)
 int is_neutral(object obj)
 {
     int align;
+
     if (!objectp(obj)) {
         return 0;
     }

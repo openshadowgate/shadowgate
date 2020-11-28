@@ -80,6 +80,7 @@ void choose_death(string str)
 {
     if (str == "die") {
         write("%^BOLD%^%^RED%^The choice have been made, may the gods forgive you...%^RESET%^");
+        TP->add_death (capitalize(TP->query_name());
         TP->die();
     } else {
         write("%^BOLD%^Alas! The life yet has some meaning. You put your pocket knife away.%^RESET%^");
