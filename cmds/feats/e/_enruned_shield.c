@@ -68,29 +68,47 @@ void execute_feat()
     }
     ::execute_feat();
 
-    tell_object(caster, cm("You scribe a rune in your shield."));
-    caster->set_property("active_feats", ({ TO }));
-    caster->set_property("enruned shield", 1);
+    if ((int)USER_D->spend_pool(caster, 1, "arcana")) {
 
-    if (FEATS_D->has_feat(caster, "greater enruned shield")) {
-        duration = (int)caster->query_class_level("magus") * 600;
+        tell_object(caster, cm("You scribe a rune in your shield."));
+        caster->set_property("active_feats", ({ TO }));
+        caster->set_property("enruned shield", 1);
+
+        if (FEATS_D->has_feat(caster, "greater enruned shield")) {
+            duration = (int)caster->query_class_level("magus") * 600;
+        }
+        else {
+            duration = (int)caster->query_class_level("magus") * 60;
+        }
+
+        call_out("dest_effect", duration);
+        return;
     }
-    else {
-        duration = (int)caster->query_class_level("magus") * 60;
-    }
-
-    call_out("dest_effect", duration);
-
+    tell_object(caster, "You lack the inner power to inscribe a rune");
     return;
 }
 
 void dest_effect()
 {
+    object deactivate_feat, * active_feats;
+    int i;
+
     if (objectp(caster))
     {
         caster->remove_property_value("active_feats", ({ TO }));
         caster->remove_property("enruned shield");
         tell_object(caster, cm("The rune in your shield vanishes."));
+
+        active_feats = caster->query_property("active_feats");
+
+        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
+        {
+            if (!objectp(active_feats[i])) { continue; }
+            if (active_feats[i]->query_feat_name() != "spell combat") { continue; }
+            deactivate_feat = active_feats[i];
+            break;
+        }
+        deactivate_feat->dest_effect();
     }
     ::dest_effect();
     remove_feat(TO);

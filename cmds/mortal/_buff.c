@@ -364,7 +364,7 @@ N.b., to add buffs cast through shadow spells you have to use special cast strin
 E.g., to add blink and elemental body as a mage cast through shadow alteration, you'll have to run these commands:
 
 %^ORANGE%^<buff add blink | cast mage shadow alteration on blink>%^RESET%^
-%^ORANGE%^<buff add elemental body i | cast mage shadow alteration on cast mage elemental body i on fire>%^RESET%^
+%^ORANGE%^<buff add elemental body i | cast mage shadow alteration on elemental body i on fire>%^RESET%^
 
 %^CYAN%^SEE ALSO%^RESET%^
 
