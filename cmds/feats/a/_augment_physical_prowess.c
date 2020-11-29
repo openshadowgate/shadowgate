@@ -11,7 +11,7 @@ void create()
     ::create();
     set_author("wedex");
     feat_type("instant");
-    feat_category("Steel&Magic");
+    feat_category("MagusArcana");
     feat_name("augment physical prowess");
     feat_classes("magus");
     feat_syntax("augment_physical_prowess str|strength|dex|dexterity|con|constitution|check");

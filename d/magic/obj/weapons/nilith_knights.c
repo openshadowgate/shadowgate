@@ -55,7 +55,7 @@ int hit_func(object targ){
 "%^RED%^crunch %^BLACK%^rings out as "+ETO->QCN+"'s weapon seems to pass through "+targ->QCN+"'s "
 "flesh like a %^RESET%^%^BLUE%^sp%^CYAN%^e%^BLUE%^cter"
 "%^BOLD%^%^BLACK%^!",({ETO,targ}));
-       targ->do_damage("torso",random(4)+8);
-     return 1;
+
+     return random(4)+8;
    }
 }

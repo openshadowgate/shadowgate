@@ -49,7 +49,7 @@ int hit_func(object targ){
      tell_room(environment(ETO),"%^BOLD%^%^RED%^The head of "+ETO->QCN+"'s mace "
 "bursts into bile-green flames as it slams into "
 ""+targ->QCN+"!",({ETO,targ}));
-       targ->do_damage("torso",random(4)+8);
-     return 1;
+
+     return random(4)+8;
    }
 }

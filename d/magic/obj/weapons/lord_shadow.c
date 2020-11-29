@@ -52,7 +52,7 @@ int hit_func(object targ){
 "%^BLACK%^"+ETO->QCN+" 's %^RESET%^%^MAGENTA%^b%^BOLD%^%^BLACK%^l%^RESET%^%^MAGENTA%^ade follows "+
 "%^BOLD%^%^BLACK%^"+ETO->QP+" %^RESET%^%^MAGENTA%^and %^BOLD%^lashes %^RESET%^%^MAGENTA%^out at "+
 "%^BOLD%^%^WHITE%^"+targ->QCN+" %^MAGENTA%^again!%^RESET%^",({ETO,targ}));
-                targ->do_damage("torso",random(4)+8);
-        return 1;
+
+        return random(4)+8;
    }
 }

@@ -1412,8 +1412,10 @@ void setup()
             environment()->remove_tenant(query_name());
         }
     }
+
     age = time() - (int)TO->query_birthday();
     PLAYER_D->add_player_info();
+
     if (!(PRISON_D->is_imprisoned(query_name()))) {
         if (!query_body_type() && query_race() != "unborn") {
             move_player("/d/dagger/bodyhold");
@@ -1423,6 +1425,13 @@ void setup()
             load_pets();
         }
     }
+
+    if (query_ghost() && !query("just_been_pkilled")) {
+        if (base_name(ETO)[0..18] != "/d/shadowgate/death/") {
+            TO->move_player("/d/shadowgate/death/death_exit");
+        }
+    }
+
     convert_kills();
     if (query_property("inactive")) {
         remove_property("inactive");
@@ -1896,17 +1905,18 @@ nomask void die()
         message("death", "You are immortal and cannot die.", TO);
         return;
     }
-    if (TO->query_ghost()) return;
-    /*Death avoidance for unyielding rage feat - Octothorpe 1/23/16*/
-    if(FEATS_D->usable_feat(TO,"unyielding rage") && TO->query_property("raged") && (int)TO->query("rage death avoided") < time())
-    {
-        tell_object(TO,"%^BOLD%^%^RED%^With the last blow you feel the darkness beginning to flow inwards from the edge of your vision...Suddenly you're on your knees in a pool of your own %^RESET%^%^RED%^blood %^BOLD%^%^RED%^with your extremities going numb.");
-        tell_room(ETO,"%^BOLD%^%^RED%^"+TO->query_cap_name()+" falls to the ground in a bloody mess.",TO);
-        tell_object(TO,"%^BOLD%^No...no...this cannot be happening...there are so many more enemies left to kill and blood to be spilt...GET UP AND FIGHT!");
-        tell_room(ETO,"%^RESET%^%^RED%^With a blood-curdling scream, "+TO->query_cap_name()+" springs from the ground and looks ready to beat back Kelemvor himself.",TO);
+    if (TO->query_ghost()) {
+        return;
+    }
+
+    if (FEATS_D->usable_feat(TO, "unyielding rage") && TO->query_property("raged") && (int)TO->query("rage death avoided") < time()) {
+        tell_object(TO, "%^BOLD%^%^RED%^With the last blow you feel the darkness beginning to flow inwards from the edge of your vision...Suddenly you're on your knees in a pool of your own %^RESET%^%^RED%^blood %^BOLD%^%^RED%^with your extremities going numb.");
+        tell_room(ETO, "%^BOLD%^%^RED%^" + TO->query_cap_name() + " falls to the ground in a bloody mess.", TO);
+        tell_object(TO, "%^BOLD%^No...no...this cannot be happening...there are so many more enemies left to kill and blood to be spilt...GET UP AND FIGHT!");
+        tell_room(ETO, "%^RESET%^%^RED%^With a blood-curdling scream, " + TO->query_cap_name() + " springs from the ground and looks ready to beat back Kelemvor himself.", TO);
         TO->force_me("say I will not die until I murder you lot!");
         TO->set_hp(query_max_hp());
-        TO->set("rage death avoided",time()+7200);
+        TO->set("rage death avoided", time() + 7200);
         return;
     }
 
@@ -1917,22 +1927,21 @@ nomask void die()
     }
     if (ETO->query_property("arena"))
     {
-        if (wizardp(klr) || !objectp(klr) || (!userp(klr) && !klr->query_property("rabid mon") ) ||
-        (TO->query_property("safe arena") && klr->query_property("safe arena")) ||
-        environment(klr)->query_property("arena entrance") )
-        {
-            object *arenaman;
-            tell_object(TO,"You have been defeated in combat.");
+        object* arenaman;
 
-            tell_room(ETO,TO->query_cap_name()+" has been defeated in combat.",TO);
-            TO->set_hp(query_max_hp());
-            reset_all_status_problems();
-            cease_all_attacks();
-            if (TO->query_property("arena allowed")) TO->remove_property("arena allowed");
-            if (TO->query_property("safe arena")) TO->remove_property("safe arena");
-            if (room = ETO->query_property("deathmove")) TO->move_player(room);
-            return;
+        tell_object(TO, "You have been defeated in combat.");
+
+        tell_room(ETO, TO->query_cap_name() + " has been defeated in combat.", TO);
+
+        TO->set_hp(query_max_hp());
+        reset_all_status_problems();
+        cease_all_attacks();
+
+        if (room = ETO->query_property("deathmove")) {
+            TO->move_player(room);
         }
+
+        return;
     }
     ghost = 1;
     ob = TO;
@@ -1954,73 +1963,51 @@ nomask void die()
             TO->set("death level",(int)TO->query_base_character_level());
         }
     }
+
     death_age = player_age;
 
-    while(present("corpse",TO))
-    {
-        if(objectp(ETO)) { present("corpse",TO)->move(ETO); }
-        else { break; }
+    while (present("corpse", TO)) {
+        if (objectp(ETO)) {
+            present("corpse", TO)->move(ETO);
+        }else {
+            break;
+        }
     }
-    if(TO->query_property("rebirth"))
-    {
-        if(TO->query_property("rebirth")) reztype = "rebirth";
+
+    if (TO->query_property("rebirth")) {
+        if (TO->query_property("rebirth")) {
+            reztype = "rebirth";
+        }
         cease_all_attacks();
-        if(objectp(klr)) klr->cease_all_attacks();
+        if (objectp(klr)) {
+            klr->cease_all_attacks();
+        }
         reset_all_status_problems();
         break_all_spells();
         remove_stat_bonuses();
         in_vehicle = 0;
-        if(query_property("rally"))  remove_property("rally");
+        if (query_property("rally")) {
+            remove_property("rally");
+        }
         ob = new("/d/magic/obj/rebirther");
         ob->set_reztype(reztype);
         ob->move(TO);
         return;
     }
+
     message("death", "You die.\nYou feel the sensations of nothingness " +
     "as you rise above your corpse.\nYou arrive at a destination in a reality " +
     "not like your own.", TO);
-    if (!avatarp(TO) || !query_disguised()) seen = getParsableName();
-    else seen = query_vis_name();
 
-    switch(random(12)+1)
-    {
-        case 1:
-            msg_death="%^BOLD%^%^RED%^The fires of hell blaze with an unholy light as "+seen+" succumbs to death's grip!";
-            break;
-        case 2:
-            msg_death="%^BOLD%^%^BLUE%^A wave of bitter sorrow washes over you as "+seen+" passes from the realms and into the afterlife!";
-            break;
-        case 3:
-            msg_death="%^BOLD%^%^RED%^"+seen+"'s death brings to you the harsh realization that survival of the fittest has become a reality at Shadowgate!";
-            break;
-        case 4:
-            msg_death="%^BOLD%^%^MAGENTA%^"+seen+" lets out a final scream of agony as the Grim Reaper removes "+query_possessive()+" soul!";
-            break;
-        case 5:
-            msg_death="%^BOLD%^%^RED%^The Grim Reaper lays down the Welcome Mat and greets "+seen+" with open arms!";
-            break;
-        case 6:
-            msg_death="%^BOLD%^%^CYAN%^The funeral bells begin to chime as "+seen+"'s life comes to an abrupt halt!";
-            break;
-        case 7:
-            msg_death="%^BOLD%^%^BLUE%^A dark shadow passes overhead as "+seen+"'s soul is whisked up into the heavens!";
-            break;
-        case 8:
-            msg_death="%^BOLD%^%^RED%^All the demons of the Abyss gather happily together as "+seen+"'s death brings them a new soul to torment for eternity!";
-            break;
-        case 9:
-            msg_death="%^BOLD%^%^CYAN%^A new gravestone is carved from pure marble and placed beside "+seen+"'s fresh grave!";
-            break;
-        case 10:
-            msg_death="%^BOLD%^%^GREEN%^The citizens of the land suddenly wonder what great foe was responsible for "+seen+"'s untimely demise!";
-            break;
-        case 11:
-            msg_death="%^BOLD%^%^GREEN%^The thieves of the land suddenly wonder where "+seen+"'s corpse might be found!";
-            break;
-        default:
-            msg_death="%^BOLD%^%^RED%^Death hast taken "+seen+" from our midsts!";
-            break;
+    if (!avatarp(TO) || !query_disguised()) {
+        seen = getParsableName();
+    }else {
+        seen = query_vis_name();
     }
+
+
+    msg_death="%^BOLD%^%^BLUE%^ Death hast taken "+seen+".";
+
     "/daemon/messaging_d"->first_death_message( "death",msg_death,all_inventory(ETO), ({ TO }) );
     "/daemon/messaging_d"->handle_death_messages(TO, TO->query_property("watching_death_objects"), TO->query("watching_death_objects"));
 
@@ -2031,7 +2018,7 @@ nomask void die()
         } else {
             corpse->set_name(capitalize(query_vis_name()));
         }
-        corpse->add_id("corpse of " + query_vis_name());   // adds name to corpse ids -Ares 8/29/05-
+        corpse->add_id("corpse of " + query_vis_name());
         corpse->copy_body(TO);
         corpse->move(ETO);
         corpse->set_true_name(query_true_name());
@@ -2040,26 +2027,33 @@ nomask void die()
         tell_room(ETO, capitalize(query_vis_name()) + " turns into smoke.");
     }
 
-    filter_array(all_inventory(TO), (:$1->is_disease():))->remove();
+
+    filter_array(all_inventory(TO), (: $1->is_disease() :))->remove();
 
     cease_all_attacks();
     reset_all_status_problems();
     break_all_spells();
 
     "/daemon/death_effects_d"->death_notification(TO);
-    if(objectp(klr) && klr->is_player() && TO->is_player())
-    {
-        TO->set("just_been_pkilled",1); // new to hopefully prevent missing PKflags.
+    if (objectp(klr) && klr->is_player() && TO->is_player()) {
+        TO->set("just_been_pkilled", 1);
     }
 
     in_vehicle = 0;
     move("/d/shadowgate/death/death_room");
-    if(query_property("rally")) remove_property("rally");
-    remove_property("master weapon"); // probaby should be a global function that clears these on death somewhere.
+
+    if (query_property("rally")) {
+        remove_property("rally");
+    }
+
+    remove_property("master weapon");
     remove_stat_bonuses();
+
     save_player( query_name() );
+
     PLAYER_D->add_player_info();
     FEATS_D->update_usable(TO);
+
     return;
 }
 
@@ -2982,9 +2976,9 @@ void revive(int xploss)
     save_player( query_name() );
 }
 
-int query_ghost() {
-   // if (objectp(ETO) && (base_name(ETO)==DEATH_ROOM)) return 0;
-  return ghost;
+int query_ghost()
+{
+    return ghost;
 }
 
 void set_ghost(int x){
@@ -3511,6 +3505,7 @@ int add_active_pet(string str) {
 
     // if no loaded/active pets match the filename, load a new one please and add to active array!
     ob = new(file);
+    ob->set_property("minion", TO);
     ob->set_owner(TO);
     ob->move(ETO);
     static_user["pets"] += ({ob});
@@ -4390,40 +4385,63 @@ int get_perma_death_flag()
     return query("permadeath flag");
 }
 
-void manual_perma_death(){
-  if (!D_BUG_D->perma_death_d())
-  set("perma death length",time()+get_perma_death_flag());
-  else
-  PERMA_DEATH_D->set_permadeath(TO->query_name(),time()+TO->get_perma_death_flag());
-}
-void perma_death(){
-  if (!D_BUG_D->perma_death_d())
-  set("perma death length",time()+get_perma_death_flag());
-  else
-//  PERMA_DEATH_D->set_permadeath(TO->query_name(),time()+5*3600); // Five RL hour timeout.
-// reducing timer on this temporarily, until quests are added to afterlife. Please restore to full time at this point. N, 2/12.
-  PERMA_DEATH_D->set_permadeath(TO->query_name(),time()+(2*3600)); // Two RL hour timeout.
+void manual_perma_death()
+{
+    if (!D_BUG_D->perma_death_d()) {
+        set("perma death length", time() + get_perma_death_flag());
+    }else {
+        PERMA_DEATH_D->set_permadeath(TO->query_name(), time() + TO->get_perma_death_flag());
+    }
 }
 
-int get_perma_death(){
-  if (!D_BUG_D->perma_death_d())
-  return query("perma death length");
-  else
-  return PERMA_DEATH_D->get_permadeath(TO->query_name());
+void perma_death()
+{
+    if (!D_BUG_D->perma_death_d()) {
+        set("perma death length", time() + get_perma_death_flag());
+    }else {
+        PERMA_DEATH_D->set_permadeath(TO->query_name(), time() + (2 * 3600)); // Two RL hour timeout.
+    }
 }
 
-int query_death_age() {  return death_age; }
-void set_death_age(int x) { death_age = x; }
+int get_perma_death()
+{
+    if (!D_BUG_D->perma_death_d()) {
+        return query("perma death length");
+    }else {
+        return PERMA_DEATH_D->get_permadeath(TO->query_name());
+    }
+}
 
-void set_pk_death_flag() { pk_death_flag = 1; }
+int query_death_age()
+{
+    return death_age;
+}
+
+void set_death_age(int x)
+{
+    death_age = x;
+}
+
+void set_pk_death_flag()
+{
+    pk_death_flag = 1;
+}
+
 void remove_pk_death_flag()
 {
-	if(objectp(TO)) TO->delete("pk_death_age");
-	if(objectp(TO)) TO->delete("pk_death_time");
-	pk_death_flag = 0;
+    if (objectp(TO)) {
+        TO->delete("pk_death_age");
+    }
+    if (objectp(TO)) {
+        TO->delete("pk_death_time");
+    }
+    pk_death_flag = 0;
 }
 
-int get_pk_death_flag() { return ( pk_death_flag || down_time); }
+int get_pk_death_flag()
+{
+    return (pk_death_flag || down_time);
+}
 
 int query_death_flag()
 {
@@ -4452,76 +4470,99 @@ int light_blind_remote(int actionbonus, object whichroom, int distance) {
   int _sight_bonus;
   int calc;
 
-  if (!objectp(TO)) return 0;
-  if (!objectp(whichroom)) return 0;
-  if (whichroom->query_property("ooc_room")) return 0;
-  if (whichroom->query_property("ooc room")) return 0;
-  if (geteuid(whichroom) == "Shadowgate") return 0;
-  _total_light=total_light(whichroom);
-  _sight_bonus=query_sight_bonus();
+  if (!objectp(TO)) {
+      return 0;
+  }
+  if (!objectp(whichroom)) {
+      return 0;
+  }
+  if (whichroom->query_property("ooc_room")) {
+      return 0;
+  }
+  if (whichroom->query_property("ooc room")) {
+      return 0;
+  }
+  if (geteuid(whichroom) == "Shadowgate") {
+      return 0;
+  }
+  _total_light = total_light(whichroom);
+  _sight_bonus = query_sight_bonus();
 
-  if (!D_BUG_D->user_new_light())
-    return (_total_light + _sight_bonus - actionbonus < 0);
+  if (!D_BUG_D->user_new_light()) {
+      return (_total_light + _sight_bonus - actionbonus < 0);
+  }
 
-  if (_sight_bonus * _total_light < 0)
-    calc = _sight_bonus + _total_light;
-  else
-    calc = _total_light;
-  if (D_BUG_D->calc_message())
-  tell_object(TO,"calc = "+calc);
+  if (_sight_bonus * _total_light < 0) {
+      calc = _sight_bonus + _total_light;
+  }else {
+      calc = _total_light;
+  }
+  if (D_BUG_D->calc_message()) {
+      tell_object(TO, "calc = " + calc);
+  }
 
-  if (member_array(query_race(),(string)PLAYER_D->night_races() ) != -1) {
-    calc *= -1;
-    _total_light *= -1;
+  if (member_array(query_race(), (string)PLAYER_D->night_races()) != -1) {
+      calc *= -1;
+      _total_light *= -1;
   }
 
   if (intp(actionbonus)) {
-    if (calc > (0+actionbonus)) {
-
-      if (_total_light < (LIGHT_MAX_RANGE-actionbonus)) {
-        // proper light!
-        return 0;
+      if (calc > (0 + actionbonus)) {
+          if (_total_light < (LIGHT_MAX_RANGE - actionbonus)) {
+              // proper light!
+              return 0;
+          } else {
+              //      tell_object(TO,"first return");
+              return (_total_light - (LIGHT_MAX_RANGE - actionbonus));
+          }
       } else {
-        //      tell_object(TO,"first return");
-        return (_total_light - (LIGHT_MAX_RANGE-actionbonus));
+          //      tell_object(TO,"second return");
+          return calc - actionbonus;
       }
-    } else {
-      //      tell_object(TO,"second return");
-      return calc - actionbonus ;
-    }
   } else {
-    //      tell_object(TO,"second if");
-    if (calc > 0)
-      if (_total_light < LIGHT_MAX_RANGE)
-        return 0;
-      else
-        return (_total_light - LIGHT_MAX_RANGE);
-    else
-      return (calc - 0);
+      //      tell_object(TO,"second if");
+      if (calc > 0) {
+          if (_total_light < LIGHT_MAX_RANGE) {
+              return 0;
+          }else {
+              return (_total_light - LIGHT_MAX_RANGE);
+          }
+      }else {
+          return (calc - 0);
+      }
   }
-  tell_object(TO,"Light error!");
+  tell_object(TO, "Light error!");
   return 0;
 }
 
-int light_blind(int actionbonus) {
-  if (!objectp(TO)) return 0;
-  if (!objectp(ETO)) return 0;
-  return light_blind_remote(actionbonus,ETO,0);
+int light_blind(int actionbonus)
+{
+    if (!objectp(TO)) {
+        return 0;
+    }
+    if (!objectp(ETO)) {
+        return 0;
+    }
+    return light_blind_remote(actionbonus, ETO, 0);
 }
-  // *****/
-string light_blind_fail_message(int blindlight) {
-  if (blindlight == 0)
-    return "";
-  if (member_array(query_race(),(string)PLAYER_D->night_races() ) != -1) {
-    if (blindlight < 0)
-      return "The bright light burns your eyes too much to see!";
-    else
-      return "Even your vision is useless here.";
-  }
-  if (blindlight > 0)
-    return "It is too bright.";
-  else
-    return "It is too dark.";
+
+string light_blind_fail_message(int blindlight)
+{
+    if (blindlight == 0) {
+        return "";
+    }
+    if (member_array(query_race(), (string)PLAYER_D->night_races()) != -1) {
+        if (blindlight < 0) {
+            return "The bright light burns your eyes too much to see!";
+        }else {
+            return "Even your vision is useless here.";
+        }
+    }
+    if (blindlight > 0) {
+        return "It is too bright.";
+    }else {
+        return "It is too dark.";
+    }
 }
 
 //follower npcs... initially for cavaliers
@@ -5165,35 +5206,6 @@ int race_mod(string stat)
     }
 }
 
-int is_good(object obj)
-{
-    int align;
-
-    if(!objectp(obj)) { return 0; }
-    align = (int)obj->query_alignment();
-    if(align == 1 || align == 4 || align == 7) { return 1; }
-    return 0;
-}
-
-int is_evil(object obj)
-{
-    int align;
-
-    if(!objectp(obj)) { return 0; }
-    align = (int)obj->query_alignment();
-    if(align == 3 || align == 6 || align == 9) { return 1; }
-    return 0;
-}
-
-int is_neutral(object obj)
-{
-    int align;
-    if(!objectp(obj)) { return 0; }
-    align = (int)obj->query_alignment();
-    if(align == 2 || align == 5 || align == 8) { return 1; }
-    return 0;
-}
-
 int reactivate(string str,int when){
         TO->remove_property("inactive");
         tell_object(TO, "You wake up from the slumber.\n");
@@ -5204,19 +5216,6 @@ int reactivate(string str,int when){
         tell_room(environment(TO), TPQCN+" wakes up.\n", ({TO}) );
         return 1;
    return 1;
-}
-
-int is_in_sunlight()
-{
-    if(EVENTS_D->query_time_of_day()!="day")
-        return 0;
-    if(ETO->query_property("indoors"))
-        return 0;
-    if(WEATHER_D->query_clouds(TO)>3)
-        return 0;
-    if(ASTRONOMY_D->query_eclipse())
-        return 0;
-    return 1;
 }
 
 int test_passive_perception()

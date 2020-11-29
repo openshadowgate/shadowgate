@@ -60,7 +60,7 @@ void spell_effect(int prof)
     resistance = target->query_property("magic resistance");
 
     tell_room(place, "%^MAGENTA%^In a great forceful pull you can see power yanked in the iron bar.");
-    lower = clevel / 12;
+    lower = clevel / 20;
     target->set_property("magic resistance", (-1 * lower));
     target->set_property("lowered resistance", 1);
     call_out("undo", 80 + clevel * 8, lower);

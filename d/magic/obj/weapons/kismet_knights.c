@@ -38,7 +38,7 @@ int hit_func(object targ){
 "w%^RESET%^i%^BOLD%^th a %^YELLOW%^b%^CYAN%^r%^WHITE%^i%^CYAN%^g%^ORANGE%^h%^CYAN%^t g%^WHITE%^l%^ORANGE%^o%^CYAN%^w%^RESET%^ as %^ORANGE%^"+ETO->QS+" %^WHITE%^slashes into %^CYAN%^you%^WHITE%^!%^RESET%^");
         tell_room(environment(ETO),"%^BOLD%^The silver mesh around %^ORANGE%^"+ETO->QCN+"'s %^WHITE%^blade "+
 "blazes with a %^YELLOW%^b%^CYAN%^r%^WHITE%^i%^CYAN%^g%^ORANGE%^h%^CYAN%^t g%^WHITE%^l%^ORANGE%^o%^CYAN%^w%^RESET%^ as %^ORANGE%^"+ETO->QS+" %^WHITE%^slashes into %^CYAN%^"+targ->QCN+"%^WHITE%^!%^RESET%^",({ETO,targ}));
-                targ->do_damage("torso",random(4)+8);
-        return 1;
+           
+        return random(4)+8;
    }
 }

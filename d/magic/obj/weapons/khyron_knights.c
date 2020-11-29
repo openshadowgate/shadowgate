@@ -32,7 +32,7 @@ int hit_func(object targ)
         tell_room(room, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from " + player->query_name() + "'s scimitar shoots forth and scorches " + targ->QCN + "!%^RESET%^", ({ player, targ }));
         tell_object(player, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from your scimitar shoots forth and scorches " + targ->QCN + "!%^RESET%^");
         tell_object(targ, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from " + player->query_name() + "'s scimitar shoots forth and scorches you!%^RESET%^");
-        targ->do_damage("torso", random(4) + 8);
-        return 1;
+     
+        return random(4)+8;
     }
 }

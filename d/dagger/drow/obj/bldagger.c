@@ -1,6 +1,6 @@
 
 #include <std.h>
-inherit "/std/weapon";
+inherit "/d/common/obj/weapon";
 create() {
     ::create();
     set_name("dagger");
@@ -14,14 +14,6 @@ create() {
 	"%^YELLOW%^electricity%^RESET%^ seem to run "
    "up and down its blade."
     );
-    set_weight(2);
-    set_size(1);
-    set_value(30);
-// The WC is higher than a daggers to reflect it's length being greater
-// than a regular dagger. Amount is increase of 2.
-    set_wc(2,3);
-    set_large_wc(2,4);
-    set_type("slashing");
     set_property("enchantment",1);
     set_wield((: TO,"drow" :));
     set_hit((: TO,"extra_hit" :));
@@ -37,10 +29,9 @@ int drow() {
 	"You feel a %^BOLD%^%^YELLOW%^shock%^RESET%^ run through your "
 	"body as you wield the dagger!"
     );
-    ETO->do_damage("torso",roll_dice(2,6));
-      ETO->add_attacker(TO);
-      ETO->continue_attack();
-      ETO->remove_attacker(TO);
+    ETO->cause_typed_damage(ETO, ETO->return_target_limb()
+         ,random(13), "electricity");
+
     return 1;
     }
 return 1;

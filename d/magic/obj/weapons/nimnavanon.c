@@ -49,7 +49,7 @@ int hit_func(object targ){
 "%^BOLD%^%^GREEN%^s %^RESET%^%^GREEN%^from %^BOLD%^%^RED%^"+ETO->QCN+"'s%^BOLD%^s%^ORANGE%^t"+
 "%^GREEN%^a%^ORANGE%^f%^GREEN%^f %^RESET%^%^GREEN%^wrap around %^YELLOW%^"+targ->QCN+"'s"
     "body and begin to %^BOLD%^%^RED%^c%^RESET%^%^RED%^rus%^BOLD%^h%^YELLOW%^"+targ->QP+"!%^RESET%^",({ETO,targ}));
-                targ->do_damage("torso",random(4)+8);
-        return 1;
+       
+        return random(4)+8;
    }
 }

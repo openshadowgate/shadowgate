@@ -46,7 +46,7 @@ int hit_func(object targ){
          "khopesh deeply into%^RED%^ "+targ->QCN+",%^ORANGE%^ the movement causing "+
          "small spheres of fever iron to "+
          "gash %^RED%^"+targ->QO+"%^ORANGE%^ as well!%^RESET%^",({ETO,targ}));
-      targ->do_damage("torso",random(4)+8);
-      return 1;
+
+      return random(4)+8;
    }
 }

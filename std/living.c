@@ -2265,6 +2265,19 @@ int is_vampire()
     return (query_acquired_template() == "vampire") || 0;
 }
 
+int is_in_sunlight()
+{
+    if(EVENTS_D->query_time_of_day()!="day")
+        return 0;
+    if(ETO->query_property("indoors"))
+        return 0;
+    if(WEATHER_D->query_clouds(TO)>3)
+        return 0;
+    if(ASTRONOMY_D->query_eclipse())
+        return 0;
+    return 1;
+}
+
 int is_were()
 {
     if (query_acquired_template() == "weretiger" || query_acquired_template() == "werewolf" || query_acquired_template() == "wererat") {
@@ -2301,4 +2314,46 @@ void reset_all_status_effects()
         TO->set_magic_hidden(0);
         TO->set_invis();
     }
+}
+
+int is_good(object obj)
+{
+    int align;
+
+    if (!objectp(obj)) {
+        return 0;
+    }
+    align = (int)obj->query_alignment();
+    if (align == 1 || align == 4 || align == 7) {
+        return 1;
+    }
+    return 0;
+}
+
+int is_evil(object obj)
+{
+    int align;
+
+    if (!objectp(obj)) {
+        return 0;
+    }
+    align = (int)obj->query_alignment();
+    if (align == 3 || align == 6 || align == 9) {
+        return 1;
+    }
+    return 0;
+}
+
+int is_neutral(object obj)
+{
+    int align;
+
+    if (!objectp(obj)) {
+        return 0;
+    }
+    align = (int)obj->query_alignment();
+    if (align == 2 || align == 5 || align == 8) {
+        return 1;
+    }
+    return 0;
 }

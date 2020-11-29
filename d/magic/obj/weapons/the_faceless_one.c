@@ -28,7 +28,6 @@ if(!random(10)) {
         tell_object(ETO,"%^RED%^With unnatural strength and determination you plunge the dagger into "+targ->QCN+".");
         tell_object(targ,"%^RED%^"+ETO->QCN+"'s blade pierces your flesh with otherworldly strength");
         tell_room(environment(ETO),"%^RED%^"+ETO->QCN+" serenely pierces "+targ->QCN+"'s flesh with the thin blade.",({ETO,targ}));
-targ->do_damage("torso",random(4)+8);
-        return 1;
+        return random(4)+8;
 }
 }
