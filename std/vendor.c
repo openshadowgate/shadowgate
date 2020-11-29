@@ -492,7 +492,12 @@ int __List(string str)
         myCoin = inv[x]->query_cointype();
         myType = types(inv[x]);
         if (inv[x]->is_armour()) {
-            myStat = "AC: " + inv[x]->query_original_ac() + " MaxDEX: "+ inv[x]->query_max_dex_bonus();
+            if (inv[x]->query_armor_prof() == "shield") {
+                myStat = "Block: " + inv[x]->query_item_bonus("shieldMiss");
+            }
+            else {
+                myStat = "AC: " + inv[x]->query_original_ac() + " MaxDEX: " + inv[x]->query_max_dex_bonus();
+            }
         }else if (inv[x]->is_weapon()) {
             myStat = inv[x]->query_critical_threat_range();
             if (myStat > 1) {
