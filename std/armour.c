@@ -201,7 +201,6 @@ void check_active_feats(object wornBy, string type, string limb){
             break;
         }
         deactivate_feat->dest_effect();
-        message("my_action", "lalala.", wornBy);
     }
 
     if ((int)wornBy->query_property("armor enhancement timer") &&

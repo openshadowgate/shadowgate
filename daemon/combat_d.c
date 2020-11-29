@@ -2985,9 +2985,9 @@ void internal_execute_attack(object who)
 
         if (roll >= (21 - temp1)) { // if threat range of weapon is 2, then we have a crit threat on a roll of 19 or 20
             if (!(roll_dice(1, 100) > fortification) && victim->query_property("armor enhancement timer")) { // fortification chance to avoid critical
-                tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.");
-                tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but your armor produces a magical force that protects your vital areas.");
-                tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.", ({ victim, who }));
+                tell_object(who, "%^BOLD%^%^YELLOW%^You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.%^RESET%^");
+                tell_object(victim, "%^BOLD%^%^YELLOW%^You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but your armor produces a magical force that protects your vital areas.%^RESET%^");
+                tell_room(EWHO, "%^BOLD%^%^YELLOW%^" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.%^RESET%^", ({ victim, who }));
             }
             else {
                 critical_roll = roll;
@@ -3061,19 +3061,19 @@ void internal_execute_attack(object who)
         who->set_property("stabs_available", -1);
         if (victim->query_property("stab_resilience")) {
             victim->set_property("stab_resilience", -1);
-            tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + " seems unaffected.");
-            tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but you are resilient against the worst of the attack.");
-            tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + " seems unaffected.", ({ victim, who }));
+            tell_object(who, "%^BOLD%^%^YELLOW%^You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + " seems unaffected.%^RESET%^");
+            tell_object(victim, "%^BOLD%^%^YELLOW%^You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but you are resilient against the worst of the attack.%^RESET%^");
+            tell_room(EWHO, "%^BOLD%^%^YELLOW%^" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + " seems unaffected.%^RESET%^", ({ victim, who }));
         }
         else if (!(roll_dice(1, 100) > fortification) && victim->query_property("armor enhancement timer")) {// fortification chance to avoid stab
-            tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.");
-            tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but your armor produces a magical force that protects your vital areas.");
-            tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.", ({ victim, who }));
+            tell_object(who, "%^BOLD%^%^YELLOW%^You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.%^RESET%^");
+            tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but your armor produces a magical force that protects your vital areas.%^RESET%^");
+            tell_room(EWHO, "%^BOLD%^%^YELLOW%^" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.%^RESET%^", ({ victim, who }));
         }
         else {
-            tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable.");
-            tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable.");
-            tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable.", ({ victim, who }));
+            tell_object(who, "%^BOLD%^%^YELLOW%^You successfully position yourself to strike where " + victim->QCN + " is vulnerable.%^RESET%^");
+            tell_object(victim, "%^BOLD%^%^YELLOW%^You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable.%^RESET%^");
+            tell_room(EWHO, "%^BOLD%^%^YELLOW%^" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable.%^RESET%^", ({ victim, who }));
             "/cmds/mortal/_stab"->scramble_stab(who, victim);
         }
     }

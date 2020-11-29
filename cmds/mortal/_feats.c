@@ -476,27 +476,12 @@ int cmd_feats(string str)
         }
         switch (info[0]) {
         case "spellcraft":
-            FEATS_D->display_feats(TP, TP, "magic");
-            return 1;
-
         case "martial":
-            FEATS_D->display_feats(TP, TP, "melee");
-            return 1;
-
         case "hybrid":
-            FEATS_D->display_feats(TP, TP, "hybrid");
-            return 1;
-
         case "general":
-            FEATS_D->display_feats(TP, TP, "general");
-            return 1;
-
         case "arcana":
-            FEATS_D->display_feats(TP, TP, "arcana");
-            return 1;
-
         case "divinebond":
-            FEATS_D->display_feats(TP, TP, "divinebond");
+            FEATS_D->display_feats(TP, TP, info[0]);
             return 1;
 
         case "epic":
@@ -698,6 +683,10 @@ int cmd_feats(string str)
             tell_object(TP, "%^BOLD%^%^CYAN%^You currently have %^BLUE%^" + TP->query("free_feats") + "%^BOLD%^%^CYAN%^ free-cost feats.");
         }
         FEATS_D->display_feats(TP, TP, "allowed");
+        return 1;
+
+    case "active":
+        FEATS_D->display_feats(TP, TP, "active");
         return 1;
 
     case "add":
@@ -1044,6 +1033,7 @@ feats check|add|remove %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
 feats racial|martial|spellcraft|hybrid|arcana|divinebond %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
 feats list [martial|spellcraft|hybrid|arcana|divinebond|general]
 feats fix
+feats active
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -1067,6 +1057,8 @@ The following commands apply:
     Displays the specified feat trees.
 %^ORANGE%^<feats fix>%^RESET%^
     Will attempt to fix your feat tree. If your feats seem incorrect, use this command.
+%^ORANGE%^<feats active>%^RESET%^
+    Tells you what feats you have activated.
 %^ORANGE%^<feats wipe>%^RESET%^
     Will wipe all your feats once per character or if devs granted you free wipe.
 
