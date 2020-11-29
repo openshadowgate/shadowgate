@@ -32,7 +32,6 @@ int hit_func(object targ)
         tell_room(room, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from " + player->query_name() + "'s hammer shoots forth and scorches " + targ->QCN + "!%^RESET%^", ({ ETO, targ }));
         tell_object(player, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from your hammer shoots forth and scorches " + targ->QCN + "!%^RESET%^");
         tell_object(targ, "%^BOLD%^%^BLACK%^A blast of %^YELLOW%^l%^WHITE%^i%^YELLOW%^ghtn%^WHITE%^i%^YELLOW%^ng %^BOLD%^%^BLACK%^from " + player->query_name() + "'s hammer shoots forth and scorches you!%^RESET%^");
-        targ->do_damage("torso", random(4) + 8);
-        return 1;
+        return random(4)+8;
     }
 }

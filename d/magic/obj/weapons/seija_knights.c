@@ -27,7 +27,7 @@ int hit_func(object targ)
         tell_room(room, "%^BOLD%^%^BLUE%^A blast of primordial %^RED%^e%^BLUE%^l%^YELLOW%^e%^BLUE%^m%^WHITE%^e%^BLUE%^nt%^RESET%^%^ORANGE%^a%^BLUE%^l energy %^BOLD%^%^BLUE%^from " + player->query_name() + "'s flail leaps forth and strikes " + targ->QCN + "!%^RESET%^", ({ ETO, targ }));
         tell_object(player, "%^BOLD%^%^BLUE%^A blast of primordial %^RED%^e%^BLUE%^l%^YELLOW%^e%^BLUE%^m%^WHITE%^e%^BLUE%^nt%^RESET%^%^ORANGE%^a%^BLUE%^l energy %^BOLD%^%^BLUE%^from your flail leaps forth and strikes " + targ->QCN + "!%^RESET%^");
         tell_object(targ, "%^BOLD%^%^BLUE%^A blast of primordial %^RED%^e%^BLUE%^l%^YELLOW%^e%^BLUE%^m%^WHITE%^e%^BLUE%^nt%^RESET%^%^ORANGE%^a%^BLUE%^l energy %^BOLD%^%^BLUE%^from " + player->query_name() + "'s flail leaps forth and strikes you!%^RESET%^");
-        targ->do_damage("torso", random(4) + 8);
-        return 1;
+ 
+        return random(4)+8;
     }
 }

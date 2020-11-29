@@ -42,7 +42,7 @@ int hit_func(object targ){
         tell_room(environment(ETO),"%^BOLD%^%^CYAN%^Motes of light within %^RED%^"+ETO->QCN+"%^CYAN%^'s "+
 "crystal chain begin to spin faster before releasing a %^RED%^f%^ORANGE%^i%^RESET%^%^RED%^e%^YELLOW%^r"+
 "%^RED%^y %^CYAN%^burst into %^ORANGE%^"+targ->QCN+"%^CYAN%^!%^RESET%^",({ETO,targ}));
-                targ->do_damage("torso",random(4)+8);
-        return 1;
+              
+        return random(4)+8;
    }
 }

@@ -44,7 +44,7 @@ int hit_func(object targ){
 "%^ORANGE%^t%^BLUE%^a%^RED%^l %^BOLD%^%^BLACK%^tip of %^RESET%^%^ORANGE%^"+ETO->QCN+"%^BOLD%^%^BLACK%^'s "+
 "spear %^RED%^f%^ORANGE%^l%^RED%^a%^RESET%^%^RED%^s%^BOLD%^h%^ORANGE%^e%^RED%^s %^BLACK%^and "+
 "bursts into %^CYAN%^"+targ->QCN+"%^BLACK%^.%^RESET%^",({ETO,targ}));
-                targ->do_damage("torso",random(4)+8);
-        return 1;
+     
+        return random(4)+8;
    }
 }

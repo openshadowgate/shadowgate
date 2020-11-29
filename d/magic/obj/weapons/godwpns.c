@@ -24,6 +24,7 @@ void create()
     set_wield((: TO, "extra_wield" :));
     set_unwield((: TO, "extra_unwield" :));
     set_property("able to cast", 1);
+    set_property("repairtype",({"woodwork", "weaponsmith"})); //ppl complaining about repair type
 }
 
 int query_size()

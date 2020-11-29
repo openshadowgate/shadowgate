@@ -41,8 +41,8 @@ int hit_func(object targ){
         tell_room(environment(ETO),"%^CYAN%^The %^WHITE%^t%^BOLD%^h%^BLACK%^r%^WHITE%^e"+
 "%^BLACK%^e r%^RESET%^i%^BOLD%^ng%^RESET%^s %^CYAN%^on %^BOLD%^"+ETO->QCN+"'s %^RESET%^%^CYAN%^wrist "+
 "guard %^YELLOW%^g%^RESET%^%^ORANGE%^l%^BOLD%^o%^RESET%^%^ORANGE%^w %^CYAN%^and shoot out at %^BOLD%^%^BLACK%^"+targ->QCN+"%^RESET%^%^CYAN%^!%^WHITE%^",({ETO,targ}));
-                targ->do_damage("torso",random(4)+8);
-        return 1;
+    
+        return random(4)+8;
    }
 }
 

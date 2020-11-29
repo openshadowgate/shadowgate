@@ -71,7 +71,7 @@ int exitdown_fun() {
 int word_fun(string str) {
     new("/cmds/mortal/_say.c")->cmd_say(str);
     if(str!="vertisdun")
-        return 0;
+        return 1;
     if(FLAG != 1) {
 
 	message("info",
@@ -103,7 +103,7 @@ int word_fun(string str) {
         "wisdom" : 2, "constitution" : 2, "charisma" : 2, "level" : 2, "health" : roll_dice(3,10)]), "announce" : 1, "announce to" : "world" ]),]));
         return 1;
     }
-    return 0;
+    return 1;
 }
 void reset() {
     ::reset();

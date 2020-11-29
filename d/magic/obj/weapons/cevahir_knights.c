@@ -19,8 +19,8 @@ int hit_func(object targ){
       tell_object(ETO,"%^YELLOW%^With a quick flick of your wrist, you stab "+targ->QCN+" with the spiked end of your glaive!%^RESET%^");
       tell_object(targ,"%^YELLOW%^With a quick flick of "+ETO->QP+" wrist, "+ETOQCN+" stabs you with the spiked end of "+ETO->QP+" glaive!%^RESET%^");
       tell_room(EETO,"%^YELLOW%^With a quick flick of "+ETO->QP+" wrist, "+ETOQCN+" stabs "+targ->QCN+" with the spiked end of "+ETO->QP+" glaive!%^RESET%^",({ETO,targ}));
-      targ->do_damage("torso",random(4)+8);
-      return 1;
+  
+      return random(4)+8;
    }
 }
 
