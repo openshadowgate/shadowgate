@@ -4,7 +4,7 @@
 
 inherit OBJECT;
 
-string* RAND_MSG = ({ "A cool breeze gives your wings some extra lift as you soar through the air.",
+string * RAND_MSG = ({"A cool breeze gives your wings some extra lift as you soar through the air.",
             "The wind whips by your face as you zoom past the clouds.",
             "Spreading your wings wide, you allow the currents in the air to hold you steady.",
             "Peering far below, you can see a river winding it's way through a thick forest.",
@@ -14,8 +14,8 @@ string* RAND_MSG = ({ "A cool breeze gives your wings some extra lift as you soa
             "A flutter of wings takes you into the air.",
             "You slowly descend to the ground in a series of languid swoops.",
             "Powerful thrusts of your wings carry you higher.",
-            "Soaring through the air calm you as you ride the wind currents." });
-string* RAND_CLRS = ({ "%^BLUE%^%^BOLD%^", "%^BOLD%^%^WHITE%^", "%^WHITE%^", "%^BLUE%^", "%^ORANGE%^" });
+            "Soaring through the air calm you as you ride the wind currents."});
+string * RAND_CLRS = ({"%^BLUE%^%^BOLD%^","%^BOLD%^%^WHITE%^","%^WHITE%^","%^BLUE%^","%^ORANGE%^"});
 string FLIGHT_ROOM = "/std/flying_room.c";
 object destobj;
 object flroom;
@@ -34,7 +34,7 @@ void setup(object thingy, string dest)
     destobj = find_object_or_load(dest);
 
     if (!objectp(destobj)) {
-        tell_object(thingy, "%^BOLD%^You stumple in confusion. Something wend wrong and you didn't take off.");
+        tell_object(thingy,"%^BOLD%^You stumple in confusion. Something wend wrong and you didn't take off.");
         TO->remove();
     }
 
@@ -47,19 +47,31 @@ void setup(object thingy, string dest)
 
 void flystep(string destination, object flyee)
 {
+    int loaded;
+    
     if (!objectp(flyee)) {
         TO->remove();
         return;
     }
+    
+    if(!objectp(destobj))
+        destobj = load_object(destination);
+    
+    //Forces a load on the destination
+    loaded = call_other(destobj, "???");
 
-    call_other(destobj, "???");
-
-    if (!objectp(flroom) || !objectp(destobj)) {
+    if (!objectp(flroom) || !objectp(destobj))
+    {
         flyee->move_player("/d/darkwood/room/road18");
         TO->remove();
         return;
     }
-
+/* Tlaloc moved this to the above if statement. My guess is sometimes "destination" just isn't matching up to a loading object
+   I'm also wondering where destinations are defined.
+    if (!objectp(destobj)) {
+        destobj = load_object(destination);
+    }
+*/
     if (flroom != ENV(flyee)) {
         TO->remove();
         return;
