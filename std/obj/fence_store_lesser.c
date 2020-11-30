@@ -5,7 +5,7 @@
 inherit "std/room";
 
 #define FENCE_D "/daemon/fence_d"
-#define OKSCROLLS ({ "identify","detect magic","scorcher","fireball","fog cloud","sleet storm","monster summoning 3","monster summoning 4","enlarge person", "reduce person" }) // lesser non-school
+#define OKSCROLLS ({ "identify","detect magic","scorcher","fireball","fog cloud","sleet storm","monster summoning iii","monster summoning iv","enlarge person", "reduce person" }) // lesser non-school
 
 int flag;
 int save_contents() { return 1;}

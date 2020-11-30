@@ -5,7 +5,7 @@
 inherit "std/room";
 
 #define FENCE_D "/daemon/fence_d"
-#define OKSCROLLS ({ "screen","stoneskin","heroism","haste","acid fog","cone of cold","monster summoning 7","monster summoning 8" })
+#define OKSCROLLS ({ "screen","stoneskin","heroism","haste","acid fog","cone of cold","monster summoning vii","monster summoning iix" })
 
 int flag;
 int save_contents() { return 1;}
