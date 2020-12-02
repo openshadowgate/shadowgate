@@ -27,7 +27,7 @@ void create()
         set_hit((:TO,"hit_func":));
         set_wield((:TO,"wieldme":));
         set_unwield((:TO,"removeme":));
-		set_item_bonus("darkness resistance",1);
+		set_item_bonus("bludgeoning resistance",1);
 }
 
 int wieldme()
