@@ -75,20 +75,27 @@ void receive_given_item(object obj){
     case "betrayer's edge":{
        new(OBJ"clance")->move(TO);
        force_me("give lance to "+name);
-       force_me("say Thanks, the gold elves said to give you this for that.")
+       force_me("say Thanks, the gold elves said to give you this for that.");
        return;
     }
    case "shell shield":{
        new(OBJ"sheep_hat")->move(TO);
        force_me("give hat to "+name);
-       force_me("say Thanks, the gold elves said to give you one of these for that.")
+       force_me("say Thanks, the gold elves said to give you one of these for that.");
+       return;
+    }
+   case "Stingray speer":{
+       new(OBJ"c_blade")->move(TO);
+       force_me("give sword to "+name);
+       force_me("say Thanks, take this huge thing.  It is big so it has to be good!");
        return;
     }
 	 break;}
 	 
    tell_room(ETO,"The Sea Elf puts the meat away and hands you some money.");
    
-   force_me("say Thanks for helping.  Trying to get those things caught in a trap is proving to be impossible but they look really tasty!");
+   force_me("say Thanks for helping.  Trying to get those "+
+   "things caught in a trap is proving to be impossible but they look really tasty!");
   
    force_me("emote gets a sack of gold.");
 
