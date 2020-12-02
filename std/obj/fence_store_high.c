@@ -5,7 +5,7 @@
 inherit "std/room";
 
 #define FENCE_D "/daemon/fence_d"
-#define OKSCROLLS ({ "screen","stoneskin","heroism","haste","acid fog","cone of cold","monster summoning 7","monster summoning 8" })
+#define OKSCROLLS ({ "screen","stoneskin","heroism","foresight","armor of darkness","monster summoning ix","siphon magic" })
 
 int flag;
 int save_contents() { return 1;}
@@ -29,11 +29,11 @@ void reset() {
 
    inven = all_inventory(TO);
    if(sizeof(inven)) {
-     for(i=0;i<sizeof(inven);i++) {
-       if(userp(inven[i])) continue;
-       inven[i]->move("/d/shadowgate/void");
-       inven[i]->remove();
-     }
+		for(i=0;i<sizeof(inven);i++) {
+			if(userp(inven[i])) continue;
+			inven[i]->move("/d/shadowgate/void");
+			inven[i]->remove();
+			}
    }
 
    flag = FENCE_D->restore_item(TO);
@@ -56,41 +56,41 @@ void reset() {
         }
     }
     for(i=0;i<9;i++) { // scroll time!
-//      if(!present("safe scroll 9")) { //We actually want a crap load of scrolls - Uriel
+		if(!present("safe scroll 9")) {
         ob = new("/d/magic/safe_scroll");
+		ob->set_spell_name(OKSCROLLS[random(sizeof(OKSCROLLS))]);
         ob->move(TO);
-        ob->set_spell(random(9)+1);
-//      }
+		}
     }
 
     if(!present("vial 6")) { // first five should be kits!
-      datamap = ELIXIRS;
-      switch(random(4)) {
-        case 0:
-          ob = new("/d/common/obj/brewing/elixirs/elixir_of_darkvision");
-          elixirname = "elixir of darkvision";
-        break;
-        case 1:
-          ob = new("/d/common/obj/brewing/elixirs/elixir_of_barkskin");
-          elixirname = "elixir of barkskin";
-        break;
-        case 2:
-          datamap = POTIONS;
-          ob = new("/d/common/obj/brewing/potions/potion_of_detect_invisibility");
-          elixirname = "potion of detect invisibility";
-        break;
-        default:
-          datamap = POTIONS;
-          ob = new("/d/common/obj/brewing/potions/potion_of_neutralize_poison");
-          elixirname = "potion of neutralize poison";
-        break;
-      }
-      ob->set_myname(elixirname);
-      ob->set_dc(datamap[elixirname]["dc"]);
-      ob->set_strength(25);
-      ob->set_hue(datamap[elixirname]["color"]);
-      ob->set_value((datamap[elixirname]["value"] * roll_dice(3,4)));
-      ob->move(TO);
+		datamap = ELIXIRS;
+		switch(random(4)) {
+			case 0:
+				ob = new("/d/common/obj/brewing/elixirs/elixir_of_darkvision");
+				elixirname = "elixir of darkvision";
+				break;
+			case 1:
+				ob = new("/d/common/obj/brewing/elixirs/elixir_of_barkskin");
+				elixirname = "elixir of barkskin";
+				break;
+			case 2:
+				datamap = POTIONS;
+				ob = new("/d/common/obj/brewing/potions/potion_of_detect_invisibility");
+				elixirname = "potion of detect invisibility";
+				break;
+			default:
+				datamap = POTIONS;
+				ob = new("/d/common/obj/brewing/potions/potion_of_neutralize_poison");
+				elixirname = "potion of neutralize poison";
+				break;
+		}
+		ob->set_myname(elixirname);
+		ob->set_dc(datamap[elixirname]["dc"]);
+		ob->set_strength(25);
+		ob->set_hue(datamap[elixirname]["color"]);
+		ob->set_value((datamap[elixirname]["value"] * roll_dice(3,4)));
+		ob->move(TO);
     }
 
     if(!present("poison")) POISON_D->QueryPoisonObject("any", "injury")->move(TO);
@@ -98,17 +98,18 @@ void reset() {
     if(!present("poison 3")) POISON_D->QueryPoisonObject("any", "ingested")->move(TO);
 
     if(!present("playersettabletrapkit")) {
-      i = 2 + random(2);
-      while(i) {
-        ob = TRAP_D->get_trap_object("high", "random");
-        val = 300 + random(201);
-        if(objectp(ob)) {
-          tell_room(TO, "Trap object is valid");
-          ob->move(TO);
-          ob->set_value(val);
-        }
+		i = 2 + random(2);
+		while(i) {
+			ob = TRAP_D->get_trap_object("high", "random");
+			val = 300 + random(201);
+			if(objectp(ob)) {
+				tell_room(TO, "Trap object is valid");
+				ob->move(TO);
+				ob->set_value(val);
+			}
         i--;
         continue;
-      }
+		}
     }
 }
+
