@@ -120,7 +120,7 @@ mapping daily_uses(string subrace) {
       case "aasimar": return ([ "light" : 1 ]); break;
       case "air genasi": return ([ "levitate" : 1 ]); break;
       case "earth genasi": return ([ "ghost step" : 1 ]); break;
-      case "fire genasi": return ([ "handfire" : 1 ]); break;
+      case "fire genasi": return ([ "produce flame" : 1 ]); break;
       case "feytouched": return ([ "faerie fire" : 1 ]); break;
       case "tiefling": return ([ "darkness" : 1 ]); break;
       case "water genasi": return ([ "water breathing" : 1 ]); break;

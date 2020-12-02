@@ -543,13 +543,6 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
                     tell_room(environment(attacker), "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends " + target->QCN + "'s undead existence!%^RESET%^", ({ target, attacker }));
                     target->set_hp(-100);
                 }
-                else
-                {
-                    tell_object(attacker, "%^BOLD%^You unleash a flash of searing energy that burns " + target->QCN + "'s very essence!%^RESET%^");
-                    tell_object(target, "%^BOLD%^" + attacker->QCN + " unleashes a flash of searing white light burns your very essence!RESET%^");
-                    tell_room(environment(attacker), "%^BOLD%^" + attacker->QCN + " unleashes a flash of searing energy that burns " + target->QCN + "'s undead essence!%^RESET%^", ({ target, attacker }));
-                    target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 6), "divine");
-                }
             }
         }
         if (weapon->is_lrweapon() &&

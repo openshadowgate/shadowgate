@@ -350,7 +350,7 @@ void UpdateBonuses(object possessor, string which)
         return;
     }
     if (!living(TO)) {
-        if (TO->is_armor()) {
+        if (TO->is_armour()) {
             possessor->ApplyObjectBonuses(TO, possessor, which, "wear");
         }
         if (TO->is_weapon()) {
@@ -1603,7 +1603,7 @@ void init()
     add_action("__Read", "read");
     add_action("__Use", "use");
     if (!TO->query_property("repairtype")) {
-        if (!TO->is_instrument() && !TO->is_armor() && !TO->is_weapon()) {
+        if (!TO->is_instrument() && !TO->is_armour() && !TO->is_weapon()) {
             TO->set_property("repairtype", ({ "tailor", "jewel", "woodwork", "leatherwork" }));
         }
     }

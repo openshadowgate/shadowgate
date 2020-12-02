@@ -455,8 +455,8 @@ int __List(string str)
 {
     mapping myItems;
     object* inv, * myInv, * mySame;
-    string* tmp, myShort, myCoin, myType;
-    int i, x, j, myVal, k, l, m;
+    string* tmp, myShort, myCoin, myType, myStat;
+    int i, x, j, myVal, k, l, m, n;
     if (!objectp(TO)) {
         return 0;
     }
@@ -491,13 +491,32 @@ int __List(string str)
         myShort = inv[x]->query_short();
         myCoin = inv[x]->query_cointype();
         myType = types(inv[x]);
+        if (inv[x]->is_armour()) {
+            if (inv[x]->query_armor_prof() == "shield") {
+                myStat = "Block: " + inv[x]->query_item_bonus("shieldMiss");
+            }
+            else {
+                myStat = "AC: " + inv[x]->query_original_ac() + " MaxDEX: " + inv[x]->query_max_dex_bonus();
+            }
+        }else if (inv[x]->is_weapon()) {
+            myStat = inv[x]->query_critical_threat_range();
+            if (myStat > 1) {
+                myStat = (21 - (int)myStat) + "-";
+            }else {
+                myStat = "";
+            }
+            myStat = "DMG: " + inv[x]->query_wc_num() + "d" + inv[x]->query_wc_dice() + " " + myStat + "20x" + inv[x]->query_critical_hit_multiplier() + "";
+        }else {
+            myStat = "";
+        }
         if (!myType) {
             myType = "";
         }
         myVal = inv[x]->query_value();
         if (myItems[myShort]) {
             if (myItems[myShort]["type"] == myType && myItems[myShort]["coin"] == myCoin
-                && myItems[myShort]["value"] == myVal && myItems[myShort]["short"] == myShort) {
+                && myItems[myShort]["value"] == myVal && myItems[myShort]["short"] == myShort
+                && myItems[myShort]["stat"] == myStat) {
                 myItems[myShort]["quantity"]++;
                 if (member_array(inv[x], mySame) == -1 && member_array(myShort, tmp) == -1) {
                     mySame += ({ inv[x] });
@@ -509,7 +528,7 @@ int __List(string str)
                 continue;
             }
         }else {
-            myItems += ([myShort:(["type" : myType, "value" : myVal, "short" : myShort, "coin" : myCoin, "quantity" : 1, ]), ]);
+            myItems += ([myShort:(["type" : myType, "value" : myVal, "short" : myShort, "coin" : myCoin, "quantity" : 1, "coin" : myCoin, "stat" : myStat, ]), ]);
             if (member_array(inv[x], mySame) == -1 && member_array(myShort, tmp) == -1) {
                 mySame += ({ inv[x] });
                 tmp += ({ myShort });
@@ -522,7 +541,7 @@ int __List(string str)
     inv = sort_array(inv, "sort_items", TO);
     i = sizeof(inv);
     //write("%^YELLOW%^ Description			  Cost			 Type");
-    write(sprintf("%%^YELLOW%%^%-38s %-8s %-10s %-5s", "Description", "Stock", "Type", "Cost"));
+    write(sprintf("%%^YELLOW%%^%-38s %-8s %-10s %-15s %-5s", "Description", "Stock", "Type", "Cost", "Stats"));
     for (x = 0, tmp = ({}); x < i; x++) {
         //stolen from ares token vendor to fix line wrap + color problem.
         myShort = inv[x]->query_short();
@@ -536,11 +555,13 @@ int __List(string str)
             l = 10 - l;
             m = strlen("" + myItems[myShort]["quantity"]);
             m = 4 - m;
+            n = strlen("" + myItems[myShort]["coin"]);
+            n = 10 - n;
 
             tmp += ({ "%^BOLD%^%^GREEN%^" + arrange_string(myItems[myShort]["short"], 40) + "  %^BOLD%^%^WHITE%^" +
                       myItems[myShort]["quantity"] + arrange_string(" ", m) + " " + myItems[myShort]["type"] + arrange_string(" ", l) +
                       " " + adjust_cost(myItems[myShort]["value"]) + arrange_string(" ", k) + "%^BOLD%^%^YELLOW%^" + myItems[myShort]["coin"] +
-                      "%^RESET%^" });
+                      arrange_string(" ", n) + "%^BLACK%^" + myItems[myShort]["stat"] + "%^RESET%^" });
         }else {
             myType = types(inv[x]);
             if (!myType) {

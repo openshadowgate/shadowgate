@@ -14,8 +14,8 @@ void create()
     feat_classes("magus");
     feat_syntax("arcana_reflection");
     feat_desc("When arcana reflection is active, 1 or more points from the arcane pool can be sacrificed to reflect a spell back at its caster.
-The chance is half the magus level plus your intelligence modifier.
-A number of points equal to the spell level are required to reflect the spell.");
+The chance is half the magus level plus your intelligence modifier. If active, this feat takes precedence over and doesn't stack with other reflection sources.
+A number of points equal to the spell level are required to reflect the spell. If not enough points are available, you might use your regular reflection chance.");
 }
 
 int allow_shifted() { return 0; }

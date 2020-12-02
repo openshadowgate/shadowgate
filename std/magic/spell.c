@@ -3135,7 +3135,7 @@ int perfect_filter(object obj)
     if (!objectp(caster)) {
         return 0;
     }
-    if (!interactive(caster) && !caster->is_merc()) {
+    if (!userp(caster) && !caster->is_merc()) {
         //basically adding this so that we can
         //have monsters allied together and not
         //hurting one another with aoe spells -

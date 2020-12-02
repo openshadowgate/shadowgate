@@ -27,7 +27,7 @@ void create()
 		"By tending to the forests he found the inner peace that he "+
 		"searched for. They claim that Ilskan was mauled to death by "+
 		"a pack of wild wolves during the night of a full moon.  Given"+
-		" the connection to the full moon, lycanthropes and Malar the "+
+		" the connection to the full moon, lycanthropes and the "+
 		"Beastlord, I have to wonder if the transformation of the "+
 		"Foresters Axe to the Axe of the Hunter has some connection "+
 		"to that faith. - Libram of Greenleaves - Holy Forester "+

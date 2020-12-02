@@ -32,15 +32,15 @@ void create()
    	//set_prof_type("medium axe");
 	set_value(350);
 	set_lore("The Axe of Bramble and Thorns was a common "+
-		"weapon seen on a band of rangers devoted to Mielikki"+
+		"weapon seen on a band of rangers devoted to the nature"+
 		" named the Thorns of Nature.  Taking a more sever "+
 		"approach to the encroachment upon forests than some "+
 		"of their more lenient brothers, the Thorns often came "+
 		"into conflict with loggers and hunters and even their "+
-		"fellow rangers and faithful of Mielikki.  The Thorns of "+
+		"fellow rangers and faithful.  The Thorns of "+
 		"Nature though were able to put their differences aside "+
 		"when it came to hunting down their eternal foes, followers"+
-		" of Malar.  The Axes of Bramble and Thorns was seen as a "+
+		" of ancient god of the beast.  The Axes of Bramble and Thorns was seen as a "+
 		"badge of honor with the Thorns of Nature.");
 	set_property("lore",10);
 	set_hit((:TO,"hitme":));

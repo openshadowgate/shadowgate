@@ -799,6 +799,14 @@ int display_meets_requirements(string feat, object ob)
 	return meets_requirements(ob, feat);
 }
 
+int display_is_active(string feat, object ob)
+{
+    int x;
+    if (!objectp(ob)) return 0;
+    if (!stringp(feat)) return 0;
+    return is_active(ob, feat);
+}
+
 int filter_feats(object ob, string feat)
 {
     object obj;
@@ -1510,8 +1518,8 @@ void display_feats(object ob,object targ, string mytype)
     categories = keys(temp_feats);
     if(!mytype || mytype == "") mytype = "all";
     switch(mytype) {
-      case "magic": currentlist += SPELLFEATS; break;
-      case "melee": currentlist += MELEEFEATS; break;
+      case "spellcraft": currentlist += SPELLFEATS; break;
+      case "martial": currentlist += MELEEFEATS; break;
       case "hybrid": currentlist += SPELLFEATS; currentlist += MELEEFEATS;  break;
       case "arcana": currentlist += MAGUSFEATS;  break;
       case "divinebond": currentlist += PALADINFEATS;  break;
@@ -1565,6 +1573,9 @@ void display_feats(object ob,object targ, string mytype)
             //a list of feats they are allowed to take
             if (mytype == "allowed") {
                 temp = filter_array(temp, "display_meets_requirements", TO, targ);
+            }
+            if (mytype == "active") {
+                temp = filter_array(temp, "display_is_active", TO, targ);
             }
             good = ({});
             for (j = 0; j < sizeof(temp); j++) {
