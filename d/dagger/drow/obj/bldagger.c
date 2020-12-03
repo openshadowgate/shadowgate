@@ -1,6 +1,6 @@
 
 #include <std.h>
-inherit "/d/common/obj/weapon";
+inherit "/d/common/obj/weapon/dagger";
 create() {
     ::create();
     set_name("dagger");
@@ -61,7 +61,7 @@ int extra_hit(object ob) {
 	    ,vic);
 	    dam = random(6)+1;
     if((int)ETO->query_alignment() == 9) {
-        dam = dam * (((int)ETO->query_level()/8)+1); 
+        dam = dam * (((int)ETO->query_level()/8)+1);
     }
         } else {
 	    if(random(150) < 1) {
