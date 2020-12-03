@@ -19,13 +19,21 @@ void create(){
   set_body_type("dragon");
   set_ac(0);
   set_exp(1);
-  set_property("magic",1);
   set_mob_magic_resistance("average");
   set_property("weapon resistance",1);
   set_attacks_num(1);
   set_damage(2,8);
   set_attack_limbs( ({"teeth","tail","left foreclaw","right foreclaw"}) );
   set_base_damage_type("slashing");
-  set_base_damage_type("slashing"); 
   set_property("knock unconscious",1);
+  set_funcs(({"breath"}));
+  set_func_chance(25);
+}
+void breath(object targ){
+
+  tell_room(ETO,"%^GREEN%^Serpent breaths a green fire at "+targ->QCN+".");
+  tell_object(ob, "%^GREEN%^Serpent breaths green fire at you." );
+  targ->cause_typed_damage(targ, targ->return_target_limb(),random(9)+2,"fire");
+  }
+  
 }
