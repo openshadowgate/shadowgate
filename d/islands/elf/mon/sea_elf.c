@@ -54,11 +54,13 @@ void receive_given_item(object obj){
    name = TPQN;
    if(!objectp(obj)) return;
    item = obj->query_name();
-   if((string)obj->query_name() != "Dire Crab"
+   if(  (string)obj->query_name() != "Dire Crab"
      && (string)obj->query_name() != "Dire Lobster"
-     && (string)obj->query_name() != "betrayer's edge") {
+     && (string)obj->query_name() != "betrayer's edge"
+     && (string)obj->query_name() != "shell shield"
+     && (string)obj->query_name() != "Stingray spear") {
       force_me("say Ummm thanks, but this won't help.");
-	   force_me("give "+obj->query_name()+" to "+name+"");
+	   force_me("drop "+obj->query_name());
       return;
 	  }
 
@@ -84,7 +86,7 @@ void receive_given_item(object obj){
        force_me("say Thanks, the gold elves said to give you one of these for that.");
        return;
     }
-   case "Stingray speer":{
+   case "Stingray spear":{
        new(OBJ"c_blade")->move(TO);
        force_me("give sword to "+name);
        force_me("say Thanks, take this huge thing.  It is big so it has to be good!");
