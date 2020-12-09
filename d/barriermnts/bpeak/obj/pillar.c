@@ -18,7 +18,7 @@ void create()
 		" covered with a %^YELLOW%^golden dragon%^WHITE%^ shaped etching that winds"+
 		" from hilt to tip.%^RESET%^");
         set_lore("This is the weapon of a long forgotten firbolg "+
-        "warrior. He served Torm and his philosophy was to slay "+
+        "warrior. He served the god of justice and his philosophy was to slay "+
         "evil immediately.  It is said that he joined a crusade "+
         "to the barrier mountains but was never heard from again.");
         set_property("lore",24);
@@ -27,7 +27,7 @@ void create()
         set_hit((:TO,"hit_func":));
         set_wield((:TO,"wieldme":));
         set_unwield((:TO,"removeme":));
-		set_item_bonus("darkness resistance",1);
+		set_item_bonus("bludgeoning resistance",1);
 }
 
 int wieldme()
@@ -58,10 +58,10 @@ int wieldme()
            }
 
     else if(ALIGN->is_evil(ETO)){
-            tell_object(ETO,"All the rubies"+
+            tell_object(ETO,"All the lapis lazuli"+
                         " on the hilt flash angrily as you wield the sacred"+
-                        " Sunblade.");
-            tell_room(EETO,"The rubies"+
+                        " pillar.");
+            tell_room(EETO,"The lapis lazuli"+
                         " on the hilt of "+ETO->QCN+"'s"+
                         " pillar flash briefly.",ETO);
             set_item_bonus("damage resistance",-10);

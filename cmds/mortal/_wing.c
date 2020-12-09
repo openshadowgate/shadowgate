@@ -73,6 +73,7 @@ int cmd_wing(string args)
         wing = new(WINGO);
         wing->move(TP);
         wing->setup(TP, dest);
+        call_other(dest, "???");
     }
 
     return 1;

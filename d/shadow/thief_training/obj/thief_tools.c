@@ -9,7 +9,7 @@ void create(){
 	set_name("locksmith tools");
 	set_id(({"tools","thief toolx","thief tools","lock picks","locksmith tools","picks"}));
 	set_short("%^RESET%^%^CYAN%^A small %^BOLD%^%^BLACK%^leatherbound %^RESET%^%^CYAN%^set of %^BOLD%^%^BLACK%^t%^RESET%^o%^BOLD%^o%^RESET%^l%^BOLD%^%^BLACK%^s%^RESET%^");
-	set_long("%^RESET%^%^CYAN%^This is a small, soft leather case that can be rolled and tied closed with leather thongs. The case, when fully opened, reveals rows of pouches and slots filled with various skeleton keys, long metal picks and pries, and it even has a small hammer with a metal wedge. These tools would aid any locksmith. The leather case has been dyed a mottled black, and the tools themselves have been crafted to be dark and matte, all the better to hide in the shadows.%^RESET%^");
+	set_long("%^RESET%^%^CYAN%^This is a small, soft leather case that can be rolled and tied closed with leather thongs. The case, when fully opened, reveals rows of pouches and slots filled with various skeleton keys, long metal picks and pries, and it even has a small hammer with a metal wedge. These tools would aid any locksmith. The leather case has been dyed a mottled black, and the tools themselves have been crafted to be dark and matte, all the better to hide in the shadows.\n\n%^RESET%^%^ORANGE%^The image of a lonely mountain partially obscuring a full moon has been embossed on the front of the leather case.%^RESET%^");
 	set_value(30);
 	set_weight(1);
 }
