@@ -825,7 +825,7 @@ int filter_feats(object ob, string feat)
 
 int display_filtered_feats(string feat, object ob)
 {
-      int x;
+    int x;
 	if(!objectp(ob)) return 0;
 	if(!stringp(feat)) return 0;
 	return filter_feats(ob, feat);
@@ -1508,7 +1508,7 @@ int is_feat_obsolete(string feat)
 // to mess with it again.  -Ares
 void display_feats(object ob,object targ, string mytype)
 {
-    int i,j,tmp,tmp2;
+    int i,j,tmp;
     string *categories,*left_cats=({}),*right_cats=({}),*left_column,*right_column,display_cat,*display_feats,*classes,targ_class;
     string *display = ({}),*temp=({}),*good=({}),*currentlist=({}),*badcategories=({});
     mapping feats=([]),temp_feats=([]);
@@ -1601,6 +1601,11 @@ void display_feats(object ob,object targ, string mytype)
         return;
     }
     if (!objectp(targ)) {
+        return;
+    }
+
+    if (!sizeof(categories) && mytype == "active") {
+        tell_object(ob, "%^BOLD%^%^RED%^You don't have any active feats at the moment.%^RESET%^");
         return;
     }
 
