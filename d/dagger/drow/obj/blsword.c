@@ -1,5 +1,5 @@
 #include <std.h>
-inherit "/d/common/obj/longsword";
+inherit "/d/common/obj/weapon/longsword";
 create() {
     ::create();
     set_name("longsword");

@@ -1,6 +1,6 @@
 
 #include <std.h>
-inherit "/d/common/obj/weapon";
+inherit "/d/common/obj/weapon/dagger";
 create() {
     ::create();
     set_name("dagger");
