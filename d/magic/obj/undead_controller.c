@@ -1,6 +1,8 @@
 #include <std.h>
 inherit OBJECT;
 
+//#define UNDEAD_MINIONS ({ "skeleton", "graveknight", "skelemage", "skelehorses", });
+
 object caster, * mons = ({});
 int count;
 
@@ -61,7 +63,7 @@ int clean_mons()
 {
     object* temp = ({});
     int i;
-    int poolsize;
+    int poolsize, skeletons, graveknights, skelemages, skelehorses; //consider using a mapping instead
 
     for (i = 0; i < sizeof(mons); i++) {
         if (!objectp(mons[i])) {
@@ -69,6 +71,10 @@ int clean_mons()
         }
         temp += ({ mons[i] });
         poolsize += (int)mons[i]->query_property("raised");
+        skeletons += (int)mons[i]->query_property("raised skeleton");
+        graveknights += (int)mons[i]->query_property("raised graveknight");
+        skelemages += (int)mons[i]->query_property("raised skelemage");
+        skelehorses += (int)mons[i]->query_property("raised skelehorses");
     }
     if (!sizeof(temp)) {
         if (objectp(TO)) {
@@ -79,6 +85,14 @@ int clean_mons()
 
     caster->remove_property("raised");
     caster->set_property("raised", poolsize);
+    caster->remove_property("raised skeleton");
+    caster->set_property("raised skeleton", skeletons);
+    caster->remove_property("raised graveknight");
+    caster->set_property("raised graveknight", graveknights);
+    caster->remove_property("raised skelemage");
+    caster->set_property("raised skelemage", skelemages);
+    caster->remove_property("raised skelehorses");
+    caster->set_property("raised skelehorses", skelehorses);
 
     mons = temp;
     return 0;
@@ -102,6 +116,10 @@ void remove()
     }
     if (objectp(caster)) {
         caster->remove_property("raised");
+        caster->remove_property("raised skeleton");
+        caster->remove_property("raised graveknight");
+        caster->remove_property("raised skelemage");
+        caster->remove_property("raised skelehorse");
     }
     return ::remove();
 }
@@ -116,14 +134,31 @@ void init()
 
 int poolsize(string str)
 {
-    int pool;
+    int pool, skeleton, graveknight, skelemage, horses;
+    string b_msg;
 
     clean_mons();
-    pool = (int)caster->query_property("raised");
+    pool = (int)caster->query_property("raised") + (int)caster->query_property("raised skelehorse");
+    skeleton = (int)caster->query_property("raised skeleton");
+    graveknight = (int)caster->query_property("raised graveknight");
+    skelemage = (int)caster->query_property("raised skelemage");
+    horses = (int)caster->query_property("raised skelehorse");
     if (pool) {
         tell_object(caster, "%^BOLD%^%^BLACK%^YOUR UNDEAD POOL IS FILLED WITH %^WHITE%^" + pool + "%^BLACK%^ UNDEAD.%^RESET%^");
+        if (skeleton) {
+            tell_object(caster, "%^BOLD%^%^BLACK%^YOU HAVE POWER OVER %^WHITE%^" + skeleton + "%^BLACK%^ UNDEAD CHAMPIONS.%^RESET%^");
+        }
+        if (graveknight) {
+            tell_object(caster, "%^BOLD%^%^BLACK%^YOU HAVE POWER OVER %^WHITE%^" + graveknight + "%^BLACK%^ UNDEAD GRAVEKNIGHTS.%^RESET%^");
+        }
+        if (skelemage) {
+            tell_object(caster, "%^BOLD%^%^BLACK%^YOU HAVE POWER OVER %^WHITE%^" + skelemage + "%^BLACK%^ UNDEAD MAGES.%^RESET%^");
+        }
+        if (horses) {
+            tell_object(caster, "%^BOLD%^%^BLACK%^YOU HAVE POWER OVER %^WHITE%^" + horses + "%^BLACK%^ UNDEAD HORSES.%^RESET%^");
+        }
     }else {
-        tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^THERE IS NO DEAD THAT FOLLOWS %^BLACK%^Y%^BLACK%^O%^BLACK%^U%^RESET%^%^RESET%^");
+        tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^THERE IS NO DEAD THAT FOLLOWS %^BLACK%^Y%^BLACK%^O%^BLACK%^U%^RESET%^");
     }
 
     return 1;
@@ -140,7 +175,7 @@ int cmd(string str)
     }
 
     if (!str) {
-        return notify_fail("%^RESET%^%^BOLD%^%^BLACK%^PROVIDE YOUR DEMMANDS%^RESET%^%^RESET%^");
+        return notify_fail("%^RESET%^%^BOLD%^%^BLACK%^PROVIDE YOUR DEMANDS%^RESET%^%^RESET%^");
     }
 
     if (sscanf(str, "%s to %s", who, what) != 2) {
@@ -178,6 +213,9 @@ int cmd(string str)
     }
 
     for (i = 0; i < sizeof(mons); i++) {
+        if (mons[i]->query_property("raised skelehorse")) {
+            continue;
+        }
         if (!mons[i]->force_me(what)) {
             continue;
         }
@@ -192,7 +230,7 @@ int dismiss(string str)
     if (!str || str != "undead") {
         return 0;
     }
-    tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^THE SOULS %^BLACK%^R%^BLACK%^E%^BLACK%^J%^BLACK%^O%^BLACK%^I%^BLACK%^C%^BLACK%^E%^BLACK%^ IN %^BLACK%^F%^BLACK%^R%^BLACK%^E%^BLACK%^E%^BLACK%^D%^BLACK%^O%^BLACK%^M%^RESET%^%^RESET%^");
+    tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^THE SOULS %^BLACK%^R%^BLACK%^E%^BLACK%^J%^BLACK%^O%^BLACK%^I%^BLACK%^C%^BLACK%^E%^BLACK%^ IN %^BLACK%^F%^BLACK%^R%^BLACK%^E%^BLACK%^E%^BLACK%^D%^BLACK%^O%^BLACK%^M%^RESET%^");
     tell_room(environment(caster), "%^BOLD%^%^GREEN%^The undead creature crumble to dust!%^", ({ caster }));
     remove();
     return 1;
