@@ -70,6 +70,7 @@ void raise_ghosts(int clevel, int limit, object caster, object controller)
         lvl=clevel;
         nummon += lvl;
         undead->set_property("raised",1);
+        undead->set_property("raised " + undead_to_raise(), lvl / 6);
         undead->set_property("minion",caster);
         undead->move(environment(caster));
         undead->serve(caster);
@@ -85,6 +86,7 @@ void raise_ghosts(int clevel, int limit, object caster, object controller)
         undead->set_property("keep exp",1);
         undead->set_exp((int)undead->query_hd()*50);
         caster->set_property("raised", lvl/6);
+        undead->set_property("raised " + undead_to_raise(), lvl / 6);
         controller->add_monster(undead);
 
         i++;
@@ -92,4 +94,8 @@ void raise_ghosts(int clevel, int limit, object caster, object controller)
 
     if(raised)
         tell_room(environment(caster),"%^BOLD%^%^BLUE%^The chilling energy ripples through the nearby corpses, drawing their spirits to "+caster->QCN+"'s defense!%^RESET%^",caster);
+}
+
+string undead_to_raise() {
+    return "animus";
 }

@@ -15,10 +15,10 @@ void create()
     set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS create undead");
-    set_damage_desc("raises no more than four graveknights.");
-    set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something more potent and powerful that can serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel the new shell is twisted and changed forever (of a maximum 4).
+    set_damage_desc("raises no more than three graveknights.");
+    set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something more potent and powerful that can serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel the new shell is twisted and changed forever (of a maximum 3).
 
-You can control up to 4 + clevel/9 humanoids and 5 beasts.
+You can control up to 8 humanoids and 4 beasts.
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
 To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
@@ -38,13 +38,9 @@ string undead_to_raise() {
 int amount_to_raise() {
     return 1;
 }
-/*
-int total_max_hd() {
-    return 10;
-}
-*/
+
 int this_max_hd() {
-    return 4;
+    return 3;
 }
 
 string query_cast_string() {
