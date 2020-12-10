@@ -56,14 +56,14 @@ int total_max_hd() {
     if (is_mount == 1) {
         return 20; //skelehorses dont use hd
     }
-    return 6;
+    return 8;
 }
 
 int this_max_hd() {
     if (is_mount == 1) {
         return 4; //can only have 4 skelehorses at a time, intended for self and all graveknights max
     }
-    return 8;
+    return 6;
 }
 
 string query_cast_string() {
