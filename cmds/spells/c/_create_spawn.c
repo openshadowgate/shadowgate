@@ -13,6 +13,7 @@ void create()
     set_syntax("cast CLASS create spawn");
     set_description("With this spell a vampire can use the recently deceased to raise a powerful undead vampire spawn to aid them in combat. This power behaves the same way similar spells of creating undead does, but it is unique to vampires.
 
+You can control up to 4 + clevel / 9 spawns.
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
 To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
@@ -22,11 +23,6 @@ To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
     set_arg_needed();
 }
 
-string query_cast_string()
-{
-    return "%^BOLD%^%^BLACK%^A vampire knight forms itself out of the mist.%^RESET%^";
-}
-
 string undead_to_raise()
 {
     if (caster->is_class("vampire_lord")) {
@@ -34,6 +30,23 @@ string undead_to_raise()
     }
 
     return "vampire_spawn";
+}
+
+int amount_to_raise() {
+    return 1;
+}
+/*
+int total_max_hd() {
+    return 10;
+}
+*/
+int this_max_hd() {
+    return 8;
+}
+
+string query_cast_string()
+{
+    return "%^BOLD%^%^BLACK%^A vampire knight forms itself out of the mist.%^RESET%^";
 }
 
 void setup_undead_scaling(object undead)
@@ -54,4 +67,13 @@ void setup_undead_scaling(object undead)
     undead->set_attacks_num(clevel / 5 + 1);
     undead->set_hp(undead->query_max_hp());
     undead->set_overall_ac(6 - clevel);
+}
+
+string err_message_i() {
+    return "%^BOLD%^%^BLACK%^A PATHETIC WEAKLING SUCH AS YOURSELF SHALL NOT RAISE MORE!%^RESET%^";
+}
+
+void end_message() {
+    tell_room(place, "%^BOLD%^%^GREEN%^The corpses %^GREEN%^t%^BLACK%^w%^GREEN%^i%^BLACK%^st%^GREEN%^ and %^BLACK%^c%^GREEN%^h%^BLACK%^an%^GREEN%^g%^BLACK%^e%^GREEN%^s%^GREEN%^ under %^GREEN%^t%^GREEN%^h%^BLACK%^e %^BLACK%^f%^GREEN%^e%^BLACK%^ll %^BLACK%^ma%^GREEN%^g%^BLACK%^i%^GREEN%^c%^BLACK%^,%^GREEN%^ and then finally %^BLACK%^o%^GREEN%^b%^BLACK%^edien%^GREEN%^t%^BLACK%^l%^GREEN%^y%^GREEN%^ stands as %^BLACK%^" + undead_to_raise() + "%^RESET%^", caster);
+    tell_object(caster, "%^BOLD%^%^BLACK%^THE %^WHITE%^" + capitalize(replace_string(undead_to_raise(), "_", " ")) + "%^BLACK%^ RISES%^RESET%^");
 }

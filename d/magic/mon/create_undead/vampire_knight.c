@@ -11,9 +11,6 @@ void create(){
     set_short("%^RESET%^%^RED%^Vampire %^BOLD%^%^BLACK%^knight%^RESET%^");
     set_long("%^RED%^Before you floats a powerful humanoid figure encased into heavy armour, wielding a huge two-handed sword. It's skin is gray, ears are bat like and eyes glow with undead red hatred towards all living. Despite being in heavy armor it floats above the ground with ease and moves with supernatural agility.");
     set_race("human");
-    set_gender("male");
-
-    set_size(2);
     set_class("fighter");
 
     set_guild_level("fighter",6);
@@ -21,14 +18,12 @@ void create(){
     set_level(8);
     set_hd(8,8);
 
-    set_max_hp(random(30)+255);
-    set_hp(query_max_hp());
+   set_property("vampire", 1);
+   set_property("fast healing", 5);
 
-    set_wielding_limbs(({"right hand","left hand"}));
-    set_property("undead",1);
-    set_property("vampire",1);
-    set_body_type("human");
-    set_property("full attacks",1);
+   set_property("spell damage resistance", 5);
+   set_property("silver resistance", 5);
+   set_property("electricity resistance", 5);
 
     set_stats("strength",22);
     set_stats("dexterity",22);
@@ -68,7 +63,6 @@ void create(){
         command("wear greaves");
     }
 
-    add_search_path("/cmds/feats");
     add_search_path("/cmds/fighter");
 
     set_monster_feats(({
