@@ -13,7 +13,7 @@ void create()
     set_syntax("cast CLASS create spawn");
     set_description("With this spell a vampire can use the recently deceased to raise a powerful undead vampire spawn to aid them in combat. This power behaves the same way similar spells of creating undead does, but it is unique to vampires.
 
-You can control up to 4 + clevel / 9 spawns.
+You can control up to 8 humanoids.
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
 To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
@@ -35,11 +35,7 @@ string undead_to_raise()
 int amount_to_raise() {
     return 1;
 }
-/*
-int total_max_hd() {
-    return 10;
-}
-*/
+
 int this_max_hd() {
     return 8;
 }
