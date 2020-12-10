@@ -68,7 +68,7 @@ void end_message() {
 
 string undead_to_raise()
 {
-    if (previous_object()->is_class("vampire_lord")) {
+    if (caster && caster->is_class("vampire_lord")) {
         return "vampire_knight";
     }
 
