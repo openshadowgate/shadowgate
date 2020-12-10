@@ -25,7 +25,7 @@ To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
 
 string undead_to_raise()
 {
-    if (caster->is_class("vampire_lord")) {
+    if (this_player()->is_class("vampire_lord")) {
         return "vampire_knight";
     }
 
