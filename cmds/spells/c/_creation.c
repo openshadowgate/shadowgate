@@ -78,6 +78,8 @@ void spell_effect(int prof) {
        ob->set_property("spell", TO);
        ob->set_damage_bonus(mylevel/4);
        ob->set_attack_bonus(mylevel/4);
+       ob->set_max_hp((query_spell_level(spell_type)*2+clevel)*20+20);
+       ob->set_hp(ob->query_max_hp());
        ob->set_exp(0);
        ob->add_id("summoned monster");
        ob->add_id(caster->query_name()+"monster");

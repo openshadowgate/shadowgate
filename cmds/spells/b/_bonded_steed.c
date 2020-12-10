@@ -78,7 +78,9 @@ void mount()
     ob->set_property("spell_creature", TO);
     ob->set_property("minion", caster);
     ob->set_owner(caster);
-    /* ob->set_level(clevel); */
+    ob->set_level(clevel);
+    ob->set_max_hp(clevel * 10);
+    ob->set_hp(ob->query_max_hp());
     ob->move(place);
     switch ((int)caster->query_alignment() % 3) {
     case 1:
