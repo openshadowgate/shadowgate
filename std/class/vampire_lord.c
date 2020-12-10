@@ -152,7 +152,7 @@ int prerequisites(object player)
         return 0;
     }
 
-    align = player->query_alignment();
+    align = player->query_true_align();
     if (member_array(align, ({2, 3, 5, 6, 8, 9})) == -1) {
         write("Fail alignment.");
         return 0;
