@@ -51,8 +51,8 @@ void restore_damage_tracker()
 
 varargs int extra_hit_calcs(object attacker, object victim, object weapon, string limb)
 {
-    object env;
-    int ShieldMissChance, MissChance, AttackerMissChance;
+    object env, rider, defender;
+    int ShieldMissChance, MissChance, AttackerMissChance, mount;
     if (!objectp(attacker)) {
         return 1;
     }
@@ -62,8 +62,18 @@ varargs int extra_hit_calcs(object attacker, object victim, object weapon, strin
     if (victim->query_paralyzed()) {
         return 1;
     }
+    if (victim->is_animal()) {
+        rider = (object)victim->query_current_rider();
+        if (objectp(rider)) {
+            mount = 1;
+        }
+    }
     MissChance = (int)victim->query_missChance();
-    ShieldMissChance = (int)victim->query_shieldMiss();
+    if (mount && FEATS_D->usable_feat(rider, "mounted shield")) {
+        ShieldMissChance = (int)rider->query_shieldMiss();
+    }else {
+        ShieldMissChance = (int)victim->query_shieldMiss();
+    }
     AttackerMissChance = (int)attacker->query_property("noMissChance");
     //attacker has a property set so that they cannot miss - Saide
     if (AttackerMissChance) {
@@ -98,8 +108,13 @@ varargs int extra_hit_calcs(object attacker, object victim, object weapon, strin
             return 1;
         }
         if (ShieldMissChance >= roll_dice(1, 100)) {
+            if (mount) {
+                defender = rider;
+            }else {
+                defender = victim;
+            }
             if (living(attacker)) {
-                tell_object(attacker, "%^RESET%^%^BOLD%^Your attack is deflected off of " + victim->QCN + "'s "
+                tell_object(attacker, "%^RESET%^%^BOLD%^Your attack is deflected off of " + defender->QCN + "'s "
                             "shield!%^RESET%^");
                 attacker->delete("featMiss");
                 attacker->set("featMiss", victim->QCN + " deflected your");
@@ -107,27 +122,21 @@ varargs int extra_hit_calcs(object attacker, object victim, object weapon, strin
                             "shield!%^RESET%^");
 
                 if (objectp(env)) {
-                    tell_room(env, "%^RESET%^%^BOLD%^" + victim->QCN + " deflects " + attacker->QCN + "'s attack with "
-                              "" + victim->QP + " shield!%^RESET%^", ({ attacker, victim }));
+                    tell_room(env, "%^RESET%^%^BOLD%^" + defender->QCN + " deflects " + attacker->QCN + "'s attack with "
+                              "" + defender->QP + " shield!%^RESET%^", ({ attacker, defender }));
                 }
-                if (FEATS_D->usable_feat(victim, "counter")) {
-                    if (random(4)) {
-                        victim->counter_attack(victim);
-                    }
-                }
-                return 0;
             }else {
                 tell_object(victim, "%^RESET%^%^BOLD%^You deflect the attack with your shield!%^RESET%^");
                 if (objectp(env)) {
-                    tell_room(env, "%^RESET%^%^BOLD%^" + victim->QCN + " deflects the attack with " + victim->QP + " shield!%^RESET%^", ({ victim }));
+                    tell_room(env, "%^RESET%^%^BOLD%^" + defender->QCN + " deflects the attack with " + defender->QP + " shield!%^RESET%^", ({ defender }));
                 }
-                if (FEATS_D->usable_feat(victim, "counter")) {
-                    if (random(4)) {
-                        victim->counter_attack(victim);
-                    }
-                }
-                return 0;
             }
+            if (FEATS_D->usable_feat(victim, "counter")) {
+                if (random(4)) {
+                    victim->counter_attack(victim);
+                }
+            }
+            return 0;
         }
         return 1;
     }

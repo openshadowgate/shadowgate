@@ -13,6 +13,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
 {
     int *saves,num,save,roll1,i,level,statbonus,mod;
     string *classes,file;
+    object rider;
 
     switch (type) {
     case "fortitude": case "fort":   num = 0; save_info["save_type"] = "fort"; break;
@@ -144,12 +145,22 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         }
     }
 
+    if (ob->is_animal()) {
+        rider = (object)ob->query_current_rider();
+        if (objectp(rider)) {
+            if (save < rider->query_skill("athletics") / 2 && FEATS_D->usable_feat(rider, "indomitable mount")) {
+                save = rider->query_skill("athletics") / 2;
+            }
+        }
+    }
+
     save_info["dc"] = dc;
     save_info["final_saving_throw"] = save;
 
     if (dc > 0) {
         dc *= -1;
     }
+
     roll1 = roll_dice(1, 20);
     save_info["saving_throw_roll"] = roll1;
     save_info["pass_or_fail_by"] = roll1 + save + dc;

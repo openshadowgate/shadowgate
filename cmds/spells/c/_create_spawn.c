@@ -2,7 +2,7 @@
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
-inherit "/cmds/spells/c/_create_undead";
+inherit "/cmds/spells/a/_animate_dead";
 
 void create()
 {
@@ -11,13 +11,7 @@ void create()
     set_spell_level(([ "innate" : 8 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS create spawn");
-    set_description("With this spell a vampire can use the recently deceased to raise a powerful undead vampire spawn to aid them in combat. This power behaves the same way similar spells of creating undead does, but it is unique to vampires.
-
-You can control up to 8 humanoids.
-To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
-To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
+    set_description("With this spell a vampire can use the recently deceased to raise a powerful undead vampire spawn to aid them in combat. This power behaves the same way similar spells of creating undead does, but it is unique to vampires." + help_message());
     evil_spell(1);
     set_helpful_spell(1);
     set_arg_needed();
@@ -25,10 +19,9 @@ To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
 
 string undead_to_raise()
 {
-    if (caster->is_class("vampire_lord")) {
+    if (caster && caster->is_class("vampire_lord")) {
         return "vampire_knight";
     }
-
     return "vampire_spawn";
 }
 
