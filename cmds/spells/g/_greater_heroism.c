@@ -3,7 +3,7 @@ inherit "/cmds/spells/h/_heroism";
 void create() {
     ::create();
     set_spell_name("greater heroism");
-    set_spell_level(([ "mage" : 6, "bard" : 5, "oracle" : 6 ]));
+    set_spell_level(([ "mage" : 6, "bard" : 5, "oracle" : 6, "magus" : 5 ]));
     set_domains("vigilance");
     set_mystery("ancestor");
     set_syntax("cast CLASS greater heroism [on TARGET]");
