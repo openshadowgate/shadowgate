@@ -2,7 +2,7 @@
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
-inherit "/cmds/spells/c/_create_undead";
+inherit "/cmds/spells/a/_animate_dead";
 
 void create()
 {
@@ -11,16 +11,19 @@ void create()
     set_spell_level(([ "innate" : 8 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS create spawn");
-    set_description("With this spell a vampire can use the recently deceased to raise a powerful undead vampire spawn to aid them in combat. This power behaves the same way similar spells of creating undead does, but it is unique to vampires.
-
-You can control up to 8 humanoids.
-To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
-To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
+    set_damage_desc("raises no more than eight vampires.");
+    set_description("With this spell a vampire can use the recently deceased to raise a powerful undead vampire spawn to aid them in combat. This power behaves the same way similar spells of creating undead does, but it is unique to vampires." + help_message());
     evil_spell(1);
     set_helpful_spell(1);
     set_arg_needed();
+}
+
+string undead_to_raise()
+{
+    if (caster && caster->is_class("vampire_lord")) {
+        return "vampire_knight";
+    }
+    return "vampire_spawn";
 }
 
 int amount_to_raise() {
@@ -64,13 +67,4 @@ void end_message() {
     tell_room(place, "%^BOLD%^%^GREEN%^The corpses %^GREEN%^t%^BLACK%^w%^GREEN%^i%^BLACK%^st%^GREEN%^ and %^BLACK%^c%^GREEN%^h%^BLACK%^an%^GREEN%^g%^BLACK%^e%^GREEN%^s%^GREEN%^ under %^GREEN%^t%^GREEN%^h%^BLACK%^e %^BLACK%^f%^GREEN%^e%^BLACK%^ll %^BLACK%^ma%^GREEN%^g%^BLACK%^i%^GREEN%^c%^BLACK%^,%^GREEN%^ and then finally %^BLACK%^o%^GREEN%^b%^BLACK%^edien%^GREEN%^t%^BLACK%^l%^GREEN%^y%^GREEN%^ stands as %^BLACK%^" + undead_to_raise() + "%^RESET%^", caster);
     //tell_object(caster, "%^BOLD%^%^BLACK%^THE %^WHITE%^" + capitalize(replace_string(undead_to_raise(), "_", " ")) + "%^BLACK%^ RISES%^RESET%^");
     tell_object(caster, "%^BOLD%^%^BLACK%^THE %^WHITE%^" + (caster->is_class("vampire_lord") ? "VAMPIRE KNIGHT" : "VAMPIRE SPAWN") + "%^BLACK%^ RISES%^RESET%^");
-}
-
-string undead_to_raise()
-{
-    if (caster && caster->is_class("vampire_lord")) {
-        return "vampire_knight";
-    }
-
-    return "vampire_spawn";
 }
