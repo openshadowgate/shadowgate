@@ -13,7 +13,7 @@ void create()
     ::create();
     set_author("nienne");
     set_spell_name("mages sword");
-    set_spell_level(([ "mage" : 7 ]));
+    set_spell_level(([ "mage" : 7, "magus" : 6 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS mages sword");
     set_description("This spell will create a floating and controllable sword for you that you can use to attack your "

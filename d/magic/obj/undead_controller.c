@@ -41,7 +41,9 @@ set_caster(object ob)
 }
 
 object* query_mons()
+
 {
+  if (clean_mons()) { return 0;}
     return mons;
 }
 

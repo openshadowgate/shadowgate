@@ -316,10 +316,6 @@ varargs int monk_check(object player, string type, mixed extra)
             tell_object(player, "%^YELLOW%^You can't heal yourself in combat again yet.");
             return 0;
         }
-        if (player->query_alignment() > 3) {
-            tell_object(player, "%^YELLOW%^You may only heal yourself in combat as a monk of lawful alignment");
-            return 0;
-        }
         if (!USER_D->can_spend_ki(player, 3)) {
             tell_object(player, "%^YELLOW%^You don't have enough ki to heal yourself.");
             return 0;
