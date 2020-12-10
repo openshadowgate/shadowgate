@@ -23,6 +23,15 @@ To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
     set_arg_needed();
 }
 
+string undead_to_raise()
+{
+    if (this_player()->is_class("vampire_lord")) {
+        return "vampire_knight";
+    }
+
+    return "vampire_spawn";
+}
+
 int amount_to_raise() {
     return 1;
 }
@@ -62,15 +71,5 @@ string err_message_i() {
 
 void end_message() {
     tell_room(place, "%^BOLD%^%^GREEN%^The corpses %^GREEN%^t%^BLACK%^w%^GREEN%^i%^BLACK%^st%^GREEN%^ and %^BLACK%^c%^GREEN%^h%^BLACK%^an%^GREEN%^g%^BLACK%^e%^GREEN%^s%^GREEN%^ under %^GREEN%^t%^GREEN%^h%^BLACK%^e %^BLACK%^f%^GREEN%^e%^BLACK%^ll %^BLACK%^ma%^GREEN%^g%^BLACK%^i%^GREEN%^c%^BLACK%^,%^GREEN%^ and then finally %^BLACK%^o%^GREEN%^b%^BLACK%^edien%^GREEN%^t%^BLACK%^l%^GREEN%^y%^GREEN%^ stands as %^BLACK%^" + undead_to_raise() + "%^RESET%^", caster);
-    //tell_object(caster, "%^BOLD%^%^BLACK%^THE %^WHITE%^" + capitalize(replace_string(undead_to_raise(), "_", " ")) + "%^BLACK%^ RISES%^RESET%^");
-    tell_object(caster, "%^BOLD%^%^BLACK%^THE %^WHITE%^" + (caster->is_class("vampire_lord") ? "VAMPIRE KNIGHT" : "VAMPIRE SPAWN") + "%^BLACK%^ RISES%^RESET%^");
-}
-
-string undead_to_raise()
-{
-    if (previous_object()->is_class("vampire_lord")) {
-        return "vampire_knight";
-    }
-
-    return "vampire_spawn";
+    tell_object(caster, "%^BOLD%^%^BLACK%^THE %^WHITE%^" + capitalize(replace_string(undead_to_raise(), "_", " ")) + "%^BLACK%^ RISES%^RESET%^");
 }
