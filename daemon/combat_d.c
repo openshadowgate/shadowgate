@@ -630,8 +630,9 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         bursts = ({ "flames", "ice", "lightning", "sounds", "acid" });
         colors = ({ "fire red", "ice blue", "lightning yellow", "lightning yellow", "acid green" });
 
-        enhance_chance = attacker->query_guild_level("magus");
-        enhance_chance += attacker->query_guild_level("paladin");
+        enhance_chance = attacker->query_prestige_level("magus");
+        enhance_chance += attacker->query_prestige_level("paladin");
+        enhance_chance += (attacker->query_level() - enhance_chance) / 2;
         enhance_chance = 10 - enhance_chance / 7;
 
         for (i = 0; i < sizeof(elements); i++)
