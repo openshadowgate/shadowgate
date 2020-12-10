@@ -120,7 +120,7 @@ int cmd_enhance(string str)
                     }
                 }
                 else {
-                    tell_object(TP, "Can't apply %^BOLD%^%^RED%^" + enhancement_name + "%^RESET%^ to your weapon.");
+                    tell_object(TP, "Can't apply %^BOLD%^%^RED%^" + enhancement_name + "%^RESET%^ to your weapon, requires " + cost + " bonus points.");
                 }
             }
         }
@@ -215,7 +215,7 @@ int cmd_enhance(string str)
                     }
                 }
                 else {
-                    tell_object(TP, "Can't apply %^BOLD%^%^RED%^" + enhancement_name + "%^RESET%^ to your armor.");
+                    tell_object(TP, "Can't apply %^BOLD%^%^RED%^" + enhancement_name + "%^RESET%^ to your armor, requires " + cost + " bonus points.");
                 }
             }
         }
@@ -482,10 +482,10 @@ The command will allow player to store a list of enhancements they can apply to 
 %^ORANGE%^<enhance clear>%^RESET%^
   Will clear your enhancement list.
 
-%^ORANGE%^ <enhance weapon>%^RESET%^
+%^ORANGE%^<enhance weapon>%^RESET%^
   Will enhance your main weapon with the listed valid options.
 
-%^ORANGE%^ <enhance armor>%^RESET%^
+%^ORANGE%^<enhance armor>%^RESET%^
   Will enhance your body armor with the listed valid options.
 
 %^CYAN%^SEE ALSO%^RESET%^

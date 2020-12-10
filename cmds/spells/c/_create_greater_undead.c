@@ -10,6 +10,7 @@ void create()
     set_spell_name("create greater undead");
     set_spell_level(([ "mage" : 8, "cleric" : 8 ]));
     set_spell_sphere("necromancy");
+    set_damage_desc("raises no more than three skelemages.");
     set_syntax("cast CLASS create greater undead");
     evil_spell(1);
     set_components(([
@@ -19,14 +20,7 @@ void create()
     set_arg_needed();
 }
 
-string query_cast_string()
-{
-    tell_object(caster, "%^BOLD%^%^CYAN%^You cut your %^BOLD%^%^CYAN%^wrists and %^CYAN%^s%^BLACK%^i%^CYAN%^n%^CYAN%^g%^CYAN%^ low in %^CYAN%^f%^BLACK%^ell%^CYAN%^ tongues.%^RESET%^");
-    return "%^BOLD%^%^CYAN%^" + caster->QCN + " cuts " + caster->QP + "%^BOLD%^%^CYAN%^wrists and %^CYAN%^s%^BLACK%^i%^CYAN%^n%^CYAN%^g%^BLACK%^s%^CYAN%^ low in %^CYAN%^f%^BLACK%^ell%^CYAN%^ tongues.%^RESET%^";
-}
-
-string undead_to_raise()
-{
+string undead_to_raise() {
     return "skelemage";
 }
 

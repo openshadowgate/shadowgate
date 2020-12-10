@@ -22,7 +22,7 @@ void create(){
     set_save("reflex");
     set_helpful_spell(1);
     traveling_aoe_spell(1);
-    set_arg_needed(1);
+    set_arg_needed();
 }
 
 string query_cast_string(){

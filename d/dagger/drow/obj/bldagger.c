@@ -1,7 +1,7 @@
 #include <std.h>
 inherit "/d/common/obj/weapon/dagger";
-create()
-{
+
+create() {
     ::create();
     set_name("dagger");
     set_id(({ "longdagger", "long dagger", "black dagger", "dagger" }));
