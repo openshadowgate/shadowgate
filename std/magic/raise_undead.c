@@ -70,7 +70,7 @@ void raise_ghosts(int clevel, int limit, object caster, object controller)
         lvl=clevel;
         nummon += lvl;
         undead->set_property("raised",1);
-        undead->set_property("raised " + undead_to_raise(), lvl / 6);
+        undead->set_property("raised " + undead_to_raise(), 1);
         undead->set_property("minion",caster);
         undead->move(environment(caster));
         undead->serve(caster);
