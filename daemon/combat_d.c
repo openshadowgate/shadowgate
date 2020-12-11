@@ -1065,7 +1065,7 @@ int damage_done(object attacker, object weap, int damage, int isranged)
                     prof = to_int(prof * 1.60);
                 }
                 if(FEATS_D->usable_feat(attacker, "artful precision")) {
-                    prof = to_int(prof * 1.10);
+                    prof = to_int(prof * 1.20);
                 }
             }
         }
@@ -2608,7 +2608,7 @@ int check_avoidance(object who, object victim)
            }
        }
        if(FEATS_D->usable_feat(victim, "elaborate parry")
-          && victim->is_wielding("one handed") && random(3))
+          && victim->is_wielding("one handed") && random(4))
           counterAttack = 1;
     }
     if (victim->query_scrambling()) {
