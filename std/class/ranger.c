@@ -3,7 +3,7 @@ inherit DAEMON;
 
 void create() { ::create(); }
 
-string *search_paths() { return ({ }); } // temporary
+string *search_paths() { return ({ "/cmds/ranger" }); } // temporary
 
 int caster_class() { return 1; }
 
@@ -46,7 +46,7 @@ string *class_feats(string myspec) {
 mapping class_featmap(string myspec)   // "dual wield" is default setting
 {
     if (!myspec || myspec == "") {
-        return ([ 1 : ({ "favored enemy", "ambidexterity", "light armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance", "favored terrain" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 7 : ({ "hunters bond" }), 9 : ({ "two weapon fighting", "evasion" }), 11 : ({ "second favored enemy" }), 13 : ({ "improved two weapon fighting", "second favored terrain" }), 17 : ({ "unassailable parry", "third favored enemy" }), 19 : ({ "third favored terrain" }), 21 : ({ "seen it before" }), ]);
+        return ([ 1 : ({ "favored enemy", "ambidexterity", "light armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "track" }), 3 : ({ "rangers endurance", "favored terrain" }), 4 : ({ "animal companion" }), 5 : ({ "whirl" }), 7 : ({ "hunters bond" }), 9 : ({ "two weapon fighting", "evasion" }), 10 : ({ "quarry" }), 11 : ({ "second favored enemy" }), 13 : ({ "improved two weapon fighting", "second favored terrain" }), 17 : ({ "unassailable parry", "third favored enemy" }), 18 : ({ "improved quarry" }), 19 : ({ "third favored terrain" }), 21 : ({ "seen it before" }), ]);
     }
 
     switch (myspec) {

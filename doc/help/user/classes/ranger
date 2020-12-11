@@ -12,9 +12,11 @@
  %^RESET%^L4:  animal companion
  %^RESET%^L7:  hunters bond
  %^RESET%^L9:  evasion
+ %^RESET%^L10: quarry
  %^RESET%^L11: second favored enemy
  %^RESET%^L13: second favored terrain
  %^RESET%^L17: third favored enemy
+ %^RESET%^L18: improved quarry
  %^RESET%^L19: third favored terrain
  %^RESET%^L21: seen it before
  %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
@@ -47,3 +49,4 @@ Rangers can cast in any armor they can wear, but must not wield while doing so.
 
 %^RESET%^%^CYAN%^See also:%^RESET%^ ranged weapons, ranger roleplay, feats, stats, skills, spells, cast, prepare, buff, combatstyle, prestige classes
 
+%^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard ranger list>%^CYAN%^.%^RESET%^
