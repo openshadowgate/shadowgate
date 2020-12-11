@@ -5,7 +5,7 @@
 inherit SPELL;
 int num_mon, num_this_undead, is_mount;
 object controller, undead, * targs = ({}), * temp = ({}), * inven = ({});
-
+//create undead, create greater undead, create spawn, the dead walk -> inherit this.
 #define UNDEADDIR "/d/magic/mon/create_undead/"
 
 void fail();
