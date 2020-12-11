@@ -29,7 +29,7 @@ void create()
     feat_name("quarry");
     feat_desc("This feat allows the ranger to designate a target in the room " +
 "as their quarry. Attacks the ranger makes against their quarry get an additional " +
-"+2 to attack rolls. The ranger can only designate targets that are already their " +
+"+2 to attack and damage rolls. The ranger can only designate targets that are already their " +
 "favored enemy.");
     set_target_required(1);
 }
