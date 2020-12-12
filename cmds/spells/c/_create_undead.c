@@ -4,10 +4,6 @@
 #include <rooms.h>
 inherit "/cmds/spells/a/_animate_dead";
 
-void fail();
-
-#define UNDEADDIR "/d/magic/mon/create_undead/"
-
 void create()
 {
     ::create();
@@ -16,13 +12,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS create undead");
     set_damage_desc("raises no more than three graveknights.");
-    set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something more potent and powerful that can serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel the new shell is twisted and changed forever (of a maximum 3).
-
-You can control up to 8 humanoids and 4 beasts.
-To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
-To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
+    set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something more potent and powerful that can serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel the new shell is twisted and changed forever (of a maximum 3)." + help_message());
     evil_spell(1);
     set_components(([
       "mage" : ([ "drop of blood" : 1, ]),
@@ -67,5 +57,5 @@ string err_message_i() {
 
 void end_message() {
     tell_room(place, "%^BOLD%^%^GREEN%^The corpses %^GREEN%^t%^BLACK%^w%^GREEN%^i%^BLACK%^st%^GREEN%^ and %^BLACK%^c%^GREEN%^h%^BLACK%^an%^GREEN%^g%^BLACK%^e%^GREEN%^s%^GREEN%^ under %^GREEN%^t%^GREEN%^h%^BLACK%^e %^BLACK%^f%^GREEN%^e%^BLACK%^ll %^BLACK%^ma%^GREEN%^g%^BLACK%^i%^GREEN%^c%^BLACK%^,%^GREEN%^ and then finally %^BLACK%^o%^GREEN%^b%^BLACK%^edien%^GREEN%^t%^BLACK%^l%^GREEN%^y%^GREEN%^ stands as %^BLACK%^" + undead_to_raise() + "%^RESET%^", caster);
-    tell_object(caster, "%^BOLD%^%^BLACK%^THE %^WHITE%^" + capitalize(replace_string(undead_to_raise(), "_", " ")) + "%^BLACK%^ RISES%^RESET%^");
+    tell_object(caster, "%^BOLD%^%^BLACK%^THE %^WHITE%^" + upper_case(replace_string(undead_to_raise(), "_", " ")) + "%^BLACK%^ RISES%^RESET%^");
 }

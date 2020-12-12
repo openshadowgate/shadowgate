@@ -5,7 +5,7 @@
 inherit SPELL;
 int num_mon, num_this_undead, is_mount;
 object controller, undead, * targs = ({}), * temp = ({}), * inven = ({});
-
+//create undead, create greater undead, create spawn, the dead walk -> inherit this.
 #define UNDEADDIR "/d/magic/mon/create_undead/"
 
 void fail();
@@ -19,13 +19,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animate dead [on TARGET | mount]");
     set_damage_desc("raises no more than six skeletal champions.");
-    set_description("%^RESET%^With this spell, the caster uses remnants of the negative energy released upon a recent death in order to bend the deceased to the will of the caster. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of this spell are known to be inherently evil. Each skeleton will use 1 pool level (of a maximum 8).
-
-You can control up to 8 humanoids and 4 beasts.
-To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
-To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check how many undead you have use %^ORANGE%^<poolsize>%^RESET%^");
+    set_description("%^RESET%^With this spell, the caster uses remnants of the negative energy released upon a recent death in order to bend the deceased to the will of the caster. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of this spell are known to be inherently evil. Each skeleton will use 1 pool level (of a maximum 8)." + help_message());
 
     if (undead_to_raise() == "skeleton") {
         set_mystery("bones");
@@ -56,14 +50,14 @@ int total_max_hd() {
     if (is_mount == 1) {
         return 20; //skelehorses dont use hd
     }
-    return 6;
+    return 8;
 }
 
 int this_max_hd() {
     if (is_mount == 1) {
         return 4; //can only have 4 skelehorses at a time, intended for self and all graveknights max
     }
-    return 8;
+    return 6;
 }
 
 string query_cast_string() {
@@ -222,4 +216,16 @@ int validate_poolsize(string undead_type, int max_hd, int this_hd) {
         return 0;
     }
     return 1;
+}
+
+string help_message() {
+
+    return "
+
+You can control up to 8 humanoids and 4 beasts.
+To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
+To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
+To command graveknights to ride use %^ORANGE%^<command undead to mount>%^RESET%^
+To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
+To check how many undead you have use %^ORANGE%^<poolsize>%^RESET%^";
 }

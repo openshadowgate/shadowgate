@@ -12,12 +12,7 @@ void create() {
     set_spell_name("the dead walk");
     set_spell_level(([ "warlock" : 2 ]));
     set_syntax("cast CLASS the dead walk [on TARGET]");
-    set_description("This invocation infuses the recently dead with negative energy to reanimate their bodies as undead. You can raise a total number of hit dice worth of zombies and skeletons up to your casting level. They will follow you and defend you from your enemies. Unlike most common summoning spells, these monsters will not go away unless the caster quits. They are undead, so they can be turned, and so forth, but they cannot be dispelled. Many faiths and cultures condemn this spell and alike powers as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil.
-
-To command undead, use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To dismiss undead, use %^ORANGE%^<dismiss undead>%^RESET%^
-To command lost undead to follow you, use %^ORANGE%^<command undead to follow>%^RESET%^
-To check how many levels you have rised use %^ORANGE%^<poolsize>%^RESET%^");
+    set_description("This invocation infuses the recently dead with negative energy to reanimate their bodies as undead. You can raise a total number of hit dice worth of zombies and skeletons up to your casting level. They will follow you and defend you from your enemies. Unlike most common summoning spells, these monsters will not go away unless the caster quits. They are undead, so they can be turned, and so forth, but they cannot be dispelled. Many faiths and cultures condemn this spell and alike powers as it serves caster's selfish, often evil, motives and frequent users of the spell are known to be inherently evil." + help_message());
     set_verbal_comp();
     set_somatic_comp();
     set_non_living_ok(1);

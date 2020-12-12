@@ -9,7 +9,7 @@ int cmd_enhance(string str)
     object enhanceob, oldob, * wielded;
     mapping enhances, enhance;
     string enhancement_name, *arguments, *temp = ({}), *display = ({}), * normal_enhances = ({});
-    int power, duration, feat_ap, feat_wb, feat_ab, feat_wr, has_resource, i;
+    int power, duration, feat_ap, feat_wb, feat_ab, feat_wr, has_resource, my_levels, i;
 
     string element, property_name;
     int is_burst, has_element, is_alignement, cost;
@@ -74,15 +74,18 @@ int cmd_enhance(string str)
         temp = keys(enhances);
         power = 0;
         if (feat_ap) {
-            power += ((int)TP->query_class_level("magus") + 7) / 8;
+            my_levels = (int)TP->query_prestige_level("magus");
+            power += ((int)TP->query_prestige_level("magus") + 7) / 8;
             if (FEATS_D->has_feat(TP, "legendary blade")) {
                 power += 2;
 
             }
         }
         if (feat_wb) {
-            power += ((int)TP->query_class_level("paladin") + 1) / 6;
+            my_levels = (int)TP->query_prestige_level("paladin");
+            power += ((int)TP->query_prestige_level("paladin") + 1) / 6;
         }
+        power += ((int)TP->query_level() - my_levels) / 16;//half levels / 8
         if (sizeof(temp))
         {
             this_enhance = VALID_WEAPON_ENHANCEMENTS;
@@ -131,10 +134,10 @@ int cmd_enhance(string str)
             tell_object(TP, "You enhance your weapon for combat.");
         }
         if (FEATS_D->has_feat(TP, "greater enduring arcana")) {
-            duration = (int)TP->query_class_level("magus") * 600;
+            duration = (int)TP->query_prestige_level("magus") * 600;
         }
         else if (FEATS_D->has_feat(TP, "enduring arcana")) {
-            duration = (int)TP->query_class_level("magus") * 60;
+            duration = (int)TP->query_prestige_level("magus") * 60;
         }
         else {
             duration = 80;
@@ -175,11 +178,14 @@ int cmd_enhance(string str)
         temp = keys(enhances);
         power = 0;
         if (feat_wr) {
-            power += ((int)TP->query_class_level("magus") + 7) / 8;
+            my_levels = (int)TP->query_prestige_level("magus");
+            power += ((int)TP->query_prestige_level("magus") + 7) / 8;
         }
         if (feat_ab) {
-            power += ((int)TP->query_class_level("paladin") + 1) / 6;
+            my_levels = (int)TP->query_prestige_level("paladin");
+            power += ((int)TP->query_prestige_level("paladin") + 1) / 6;
         }
+        power += ((int)TP->query_level() - my_levels) / 16;//half levels / 8
         if (sizeof(temp))
         {
             this_enhance = VALID_ARMOR_ENHANCEMENTS;
@@ -225,10 +231,10 @@ int cmd_enhance(string str)
             tell_object(TP, "You enhance your armor defenses.");
         }
         if (FEATS_D->has_feat(TP, "greater enduring warding")) {
-            duration = (int)TP->query_class_level("magus") * 600;
+            duration = (int)TP->query_prestige_level("magus") * 600;
         }
         else if (FEATS_D->has_feat(TP, "enduring warding")) {
-            duration = (int)TP->query_class_level("magus") * 60;
+            duration = (int)TP->query_prestige_level("magus") * 60;
         }
         else {
             duration = 80;

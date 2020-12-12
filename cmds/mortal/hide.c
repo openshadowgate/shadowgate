@@ -72,6 +72,8 @@ int cancel_inv()
         return 0;
     }
     if(player->query_hidden()) { player->set_hidden(0); }
+    
+    player && tell_object(player, "%^YELLOW%^You appear from the shadows.%^RESET%^");
     call_out("dest_fun",1);
     return 0;
 }
