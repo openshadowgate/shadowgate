@@ -166,6 +166,7 @@ void reset()
         scroll = new("/d/magic/safe_scroll");
         scroll->move(TO);
         scroll->set_spell_name("secret chest");
+		scroll->set_clevel(10);
     }
 
     new("/d/magic/obj/r_wand")->move(TO);

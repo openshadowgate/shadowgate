@@ -57,13 +57,13 @@ int preSpell()
     }
     spell_to_cast = new(splfn);
     if (spell_to_cast->query_spell_sphere() != shadow_school()) {
-        tell_object(TP, "Only evocation school spells are allowed!");
+        tell_object(TP, "Only " + replace_string(shadow_school(), "_", "/") + " school spells are allowed!");
         return 0;
     }
 
     slevel = spell_to_cast->query_spell_level("mage");
     if (slevel > max_level || slevel == 0) {
-        tell_object(TP, "This spell is too powerful for shadow evocation!");
+        tell_object(TP, "This spell is too powerful for " + spell_name + "!");
         return 0;
     }
     spell_to_cast->set_shadow_spell(max_level);

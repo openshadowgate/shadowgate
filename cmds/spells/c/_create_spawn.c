@@ -2,7 +2,7 @@
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
-inherit "/cmds/spells/c/_create_undead";
+inherit "/cmds/spells/a/_animate_dead";
 
 void create()
 {
@@ -27,7 +27,6 @@ string undead_to_raise()
     if (caster->is_class("vampire_lord")) {
         return "vampire_knight";
     }
-
     return "vampire_spawn";
 }
 

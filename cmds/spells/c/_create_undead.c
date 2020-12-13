@@ -5,10 +5,6 @@
 inherit SPELL;
 int num_mon;
 
-void fail();
-
-#define UNDEADDIR "/d/magic/mon/create_undead/"
-
 void create()
 {
     ::create();

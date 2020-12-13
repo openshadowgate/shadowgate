@@ -33,7 +33,7 @@ void create()
         "An ominous castle has been built on the mountainside here.");
     set_exits(([
                    "south" : MOUNT + "pass_1",
-                   "northeast" : MOUNT + "trail1",
+                  // "northeast" : MOUNT + "trail1", moving muln to ice island -H 12/12/20
                    "castle" : MOUNT + "tcastle_1",
                    ]));
     set_items(([

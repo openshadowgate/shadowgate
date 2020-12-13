@@ -66,6 +66,7 @@ string *restricted_channels;
 string *favored_enemy = ({ "none", "none", "none" }),
        *favored_terrain = ({ "none", "none", "none" });
 string mastered_terrain;
+string chosen_animal;
 mapping mini_quests;
 string *quests;
 string *mysites;
@@ -163,6 +164,8 @@ int add_favored_terrain(int x, string str);
 int remove_favored_terrain(int x);
 string set_mastered_terrain(string str);
 string query_mastered_terrain();
+string set_chosen_animal(string str);
+string query_chosen_animal();
 
 // *** END OF PROTOTYPING ** (gar)
 
@@ -5421,4 +5424,15 @@ int is_favored_terrain(object room)
     }
 
     return 0;
+}
+
+string set_chosen_animal(string str)
+{
+    chosen_animal = str;
+    return chosen_animal;
+}
+
+string query_chosen_animal()
+{
+    return chosen_animal;
 }

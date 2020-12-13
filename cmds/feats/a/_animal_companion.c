@@ -54,7 +54,8 @@ The Animal Companion can also be customized through several commands, which will
 
   'animal short [DESCRIPTION]' - Changes the short description of the companion.
   'animal long  [DESCRIPTION]' - Changes the long description of the companion.
-  
+
+  To have the animal companion follow you, use 'animal follow'.  
   To command the animal companion, use %^ORANGE%^<animal command %^ULINE%^ACTION%^RESET%^ORANGE%^>.%^RESET%^");
   
     set_target_required(0);

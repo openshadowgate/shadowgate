@@ -3,6 +3,7 @@
 #include <magic.h>
 #include <rooms.h>
 inherit SPELL;
+
 int num_mon;
 
 #define UNDEADDIR "/d/magic/mon/create_undead/"
@@ -16,6 +17,7 @@ void create()
     set_spell_level(([ "mage" : 4, "cleric" : 3, "paladin" : 3, "inquisitor" : 3, "oracle" : 3 ]));
     set_mystery("bones");
     set_spell_sphere("necromancy");
+
     set_syntax("cast CLASS animate dead [on TARGET]");
     set_damage_desc("raises no more than four skeletal champions");
     set_description("%^RESET%^With this spell, the caster uses remnants of the negative energy released upon a recent death in order to summon an undead skeleton. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of this spell are known to be inherently evil." + extra_help());

@@ -2,6 +2,7 @@
 inherit OBJECT;
 
 object caster, * mons = ({});
+string * undead_list = ({ "skeleton", "graveknight", "skelemage", "skelehorse", "vampire_spawn", "vampire_knight", "animus", });
 int count;
 
 void save_me(string file)

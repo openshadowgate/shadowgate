@@ -72,7 +72,11 @@ void execute_feat()
         if (isInside(terrain) && !isCivilization(terrain)) {
             switch (terrain) {
               case HUT:        	  prof -= 1;                break;
-              case NAT_CAVE:      prof -= 2;                break;
+              case NAT_CAVE:      
+                   prof -= 2;
+                   if(caster->is_class("crypt stalker"))
+                       prof += 2;
+                   break;
               case NAT_TUNNEL:    prof -= 2;                break;
               default:            prof -= 4;
             }
@@ -104,6 +108,14 @@ void execute_feat()
             }
         }
     }
+    
+    if(caster->is_favored_terrain(terrain))
+    {
+        prof += (FEATS_D->usable_feat(caster, "favored terrain") * 2);
+        prof += (FEATS_D->usable_feat(caster, "second favored terrain") * 2);
+        prof += (FEATS_D->usable_feat(caster, "third favored terrain") * 2);
+    }
+    
     for (i=size-1;i>=0;i--) {
         if (random(10)+1 > (prof-i)) continue;
         else {
@@ -115,6 +127,10 @@ void execute_feat()
             sscanf(str,"%s&%s&%s&%s&%s", who, didwhat, direction, theirname, time);
 
             who = capitalize(article(who))+" "+who;
+            
+            //We always track our quarry unless they're also a ranger.
+            if(caster->query_property("quarry") == who && !who->is_class("ranger"))
+                prof += 100;
 
             tdiff=(time()-atoi(time))/20/60;
 

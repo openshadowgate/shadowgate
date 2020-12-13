@@ -1128,10 +1128,10 @@ void wizard_interface(object user, string type, string targ)
 
     if (spell_type == "magus" && caster->query_property("spell recall")) {
         if (FEATS_D->has_feat(caster, "improved spell recall")) {
-            mycost = (query_spell_level("magus") + 1) / 2;
+            mycost = (spell_level + 1) / 2;
         }
         else {
-            mycost = query_spell_level("magus");
+            mycost = spell_level;
         }
         if (!mycost) {
             tell_object(caster, "Something is wrong with the arcana cost for this " + whatsit + ". Please contact a wiz.");
