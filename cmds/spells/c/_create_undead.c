@@ -5,6 +5,10 @@
 inherit SPELL;
 int num_mon;
 
+void fail();
+
+#define UNDEADDIR "/d/magic/mon/create_undead/"
+
 void create()
 {
     ::create();
@@ -12,18 +16,20 @@ void create()
     set_spell_level(([ "mage" : 6, "cleric" : 6 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS create undead");
-    set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something more potent and powerful that can serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel the new shell is twisted and changed forever. Each undead will use one pool slot, with six pool slot maximum. Undead pool is shared across similar spells." + extra_help());
+    set_description("Animating dead is a pathetic craft for the weak. A true necromancer's art is to change what was into something more potent and powerful that can serve his fell desires and schemes. This spell uses a fallen corpse to make an undead creature from rotting flesh. Such a creature is more potent than lesser skeletons and zombies, and will serve the necromancer until discorporated. This spell is without a doubt evil, as the soul used to fuel the new shell is twisted and changed forever.
+
+Unlike the animate dead spell, these undead will use 2 levels of poolsize each (of a maximum 6).
+
+To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
+To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
+To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
+To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^");
     evil_spell(1);
     set_components(([
       "mage" : ([ "drop of blood" : 1, ]),
     ]));
     set_helpful_spell(1);
     set_arg_needed();
-}
-
-string extra_help(){
-
-    return "/cmds/spells/a/_animate_dead"->extra_help();
 }
 
 string undead_to_raise()
@@ -42,7 +48,7 @@ void spell_effect(int prof)
     object controller, undead, corpse, *corpses=({}), *undeadl;
     int lvl;
 
-    if ((int)caster->query_property("raised") >= 6) {
+    if ((int)caster->query_property("raised") >= 8) {
         tell_object(caster, "%^BOLD%^%^BLACK%^A PATHETIC WEAKLING SUCH AS YOURSELF SHALL NOT RAISE MORE!%^RESET%^");
         TO->remove();
         return;
@@ -110,7 +116,7 @@ void setup_undead_scaling(object undead)
     undead->set_guild_level("fighter", clevel);
     undead->set_weap_enchant(clevel / 10);
     undead->set_skill("athletics", clevel);
-    undead->set_skill("perception", clevel - clevel / 5);
+    undead->set_skill("perception", clevel - 10);
     undead->set_level(clevel);
     undead->set_hd(clevel, 6);
     undead->set_max_hp(clevel * 14 + 100);
