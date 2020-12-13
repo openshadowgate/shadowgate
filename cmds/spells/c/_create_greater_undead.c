@@ -33,13 +33,13 @@ string undead_to_raise()
 void setup_undead_scaling(object undead)
 {
     undead->set_level(clevel);
+    undead->set_hd(clevel, 6);
     undead->set_guild_level("mage", clevel * 6 / 7);
     undead->set_mlevel("mage", clevel * 6 / 7);
     undead->set_skill("spellcraft", clevel);
-    undead->set_skill("perception", clevel - 10);
+    undead->set_skill("perception", clevel - clevel / 5);
     undead->set_property("spell penetration", clevel);
-    undead->set_hd(clevel, 8);
-    undead->set_max_hp(clevel * 10 + 100);
+    undead->set_max_hp(clevel * 8 + 100);
     undead->set_hp(undead->query_max_hp());
-    undead->set_overall_ac(10 - clevel);
+    undead->set_overall_ac(10 - clevel / 2);
 }

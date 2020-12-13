@@ -34,12 +34,15 @@ void create()
     set_stats("wisdom", 12);
     set_stats("charisma", 4);
 
+    set_property("flying", 1);
+
     set_alignment(9);
 
     add_search_path("/cmds/feats");
 
-    set_spells(({ "magic missile",
-                    "lightning bolt", }));
+    set_spells(({ "touch of fatigue",
+                    "touch of sickening",
+                    "chill touch", }));
     set_spell_chance(100);
 
     set_monster_feats(({
