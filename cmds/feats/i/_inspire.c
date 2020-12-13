@@ -50,7 +50,7 @@ int cmd_inspire(string args)
         return 1;
     }
 
-    if(!FEATS_D->usable_feat(TP,"inspire " + args))
+    if(!FEATS_D->usable_feat(TP,"inspire " + args) && args != "nothing")
     {
         tell_object(TP,"%^BOLD%^%^CYAN%^You don't have a feat required to use this inspiration.");
         dest_effect();
@@ -65,29 +65,31 @@ int cmd_inspire(string args)
 void execute_feat()
 {
     ::execute_feat();
-    if ((int)caster->query_property("using instant feat")) {
-        tell_object(caster, "You are already in the middle of using a feat!");
+
+    if (caster->query_property("using instant feat")) {
+        tell_object(caster, "%^BOLD%^You are already in the middle of using a feat.%^RESET%^");
         dest_effect();
         return;
     }
 
-    tell_object(caster,"%^MAGENTA%^You m%^WHITE%^u%^MAGENTA%^se preparing the m%^BOLD%^e%^WHITE%^l%^MAGENTA%^o%^WHITE%^d%^MAGENTA%^y%^RESET%^%^MAGENTA%^.%^WHITE%^");
+    if (arg != "nothing") {
+        tell_object(caster,"%^MAGENTA%^You m%^WHITE%^u%^MAGENTA%^se preparing the m%^BOLD%^e%^WHITE%^l%^MAGENTA%^o%^WHITE%^d%^MAGENTA%^y%^RESET%^%^MAGENTA%^.%^WHITE%^");
+        tell_room(ENV(caster), "%^MAGENTA%^" +caster->QCN + " m%^WHITE%^u%^MAGENTA%^ses preparing the m%^BOLD%^e%^WHITE%^l%^MAGENTA%^o%^WHITE%^d%^MAGENTA%^y%^RESET%^%^MAGENTA%^.%^WHITE%^", caster);
+    }
+
     caster->use_stamina(roll_dice(1, 6));
     caster->set_property("using instant feat", 1);
 }
 
 void execute_attack()
 {
-    if(!objectp(caster)) {
-        dest_effect();
-        return;
-    }
     ::execute_attack();
 
-    INSPIRATION->setup_inspiration(caster, flevel);
+    caster->remove_property("using instant feat");
+    INSPIRATION->setup_inspiration(caster, flevel, arg);
+
 
     dest_effect();
-    return;
 }
 
 void dest_effect()

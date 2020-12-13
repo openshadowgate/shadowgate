@@ -328,24 +328,27 @@ int can_use()
     return 1;
 }
 
-varargs void setup_feat(object ob,string str)
+varargs void setup_feat(object ob, string str)
 {
-    if(!objectp(ob)) { return; }
-    if(interactive(ob))
-    {
-        if(!FEATS_D->is_temporary(ob,feat_name))
-        {
-            if(interactive(ob) && !prerequisites(ob))
-            {
-                tell_object(ob,"You don't meet all the prerequisites for this feat.");
-              	if(objectp(TO)) TO->remove();
+    if (!objectp(ob)) {
+        return;
+    }
+    if (interactive(ob)) {
+        if (!FEATS_D->is_temporary(ob, feat_name)) {
+            if (interactive(ob) && !prerequisites(ob)) {
+                tell_object(ob, "You don't meet all the prerequisites for this feat.");
+                if (objectp(TO)) {
+                    TO->remove();
+                }
                 return;
             }
         }
     }
-    if(stringp(str)) { arg = str; }
+    if (stringp(str)) {
+        arg = str;
+    }
     caster = ob;
-    place  = environment(caster);
+    place = environment(caster);
     execute_feat();
     return;
 }

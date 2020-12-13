@@ -6,7 +6,8 @@
 inherit OBJECT;
 
 string *INSPIRATION_TYPES = ({
-        "courage",
+        "nothing",
+            "courage",
             "competence",
             "greatness",
             "heroics"
@@ -57,10 +58,20 @@ object setup_inspiration(object mycaster, int myclevel, string inspiration)
                 inv[0]->dest_all_effects();
             } else if (inspiration && inspiration != inv[0]->query_active_inspiration()) {
                 inv[0]->change_inspiration(inspiration);
+            } else if (inspiration && inspiration == inv[0]->query_active_inspiration()) {
+                tell_object(mycaster,"%^MAGENTA%^You m%^WHITE%^u%^MAGENTA%^se, but composition doesn't change.");
+                tell_room(mycaster,"%^MAGENTA%^" +mycaster->QCN+" m%^WHITE%^u%^MAGENTA%^ses, keeping the melody.", mycaster);
             }
-
             return 0;
         }
+    }
+
+    if (inspiration == "nothing") {
+        if (objectp(inspiration)) {
+            inspiration->remove();
+        }
+
+        return 0;
     }
 
     insprtion->move(mycaster);
@@ -178,7 +189,7 @@ void inspire_ally(object ally, int direction, int changeflag)
 
     if (direction == 1) {
         tell_object(ally, "%^MAGENTA%^The p%^BOLD%^e%^RESET%^%^MAGENTA%^r%^BOLD%^m%^RESET%^%^MAGENTA%^u%^BOLD%^t%^RESET%^%^MAGENTA%^a%^BOLD%^t%^RESET%^%^MAGENTA%^i%^BOLD%^o%^RESET%^%^MAGENTA%^n of music e%^BOLD%^l%^WHITE%^at%^MAGENTA%^e%^RESET%^%^MAGENTA%^s you with " +active_inspiration+".%^WHITE%^");
-        ally->add_property("inspiration", TO);
+        ally->set_property("inspiration", TO);
     }
     if (direction == -1 && !changeflag) {
         tell_object(ally, "%^BOLD%^%^BLACK%^Colors of the world turn d%^RESET%^%^CYAN%^u%^BOLD%^%^BLACK%^ll as the m%^RESET%^%^MAGENTA%^u%^BOLD%^%^BLACK%^s%^RESET%^%^MAGENTA%^i%^BOLD%^%^BLACK%^c l%^RESET%^%^MAGENTA%^ea%^BOLD%^%^BLACK%^v%^RESET%^%^MAGENTA%^e%^BOLD%^%^BLACK%^s you.%^RESET%^");
@@ -325,8 +336,12 @@ int countersong(int lvl)
     if (lvl + roll> clevel || roll == 20 && roll != 1) {
         if (objectp(caster)) {
             tell_object(caster,"%^BOLD%^%^BLACK%^Hostile c%^RESET%^%^RED%^ou%^BOLD%^%^BLACK%^nt%^RESET%^%^RED%^e%^BOLD%^%^BLACK%^rs%^RESET%^%^RED%^o%^BOLD%^%^BLACK%^ng d%^RESET%^%^RED%^i%^BOLD%^%^BLACK%^sr%^RESET%^%^RED%^u%^BOLD%^%^BLACK%^pts the harmony of your melodies.%^RESET%^");
+            tell_room(ENV(caster),"%^BOLD%^%^BLACK%^Hostile c%^RESET%^%^RED%^ou%^BOLD%^%^BLACK%^nt%^RESET%^%^RED%^e%^BOLD%^%^BLACK%^rs%^RESET%^%^RED%^o%^BOLD%^%^BLACK%^ng d%^RESET%^%^RED%^i%^BOLD%^%^BLACK%^sr%^RESET%^%^RED%^u%^BOLD%^%^BLACK%^pts the harmony of " + caster->QCN + " melodies.%^RESET%^", caster);
         }
         dest_all_effects();
+    } else {
+            tell_object(caster,"%^BOLD%^%^BLACK%^Hostile c%^RESET%^%^RED%^ou%^BOLD%^%^BLACK%^nt%^RESET%^%^RED%^e%^BOLD%^%^BLACK%^rs%^RESET%^%^RED%^o%^BOLD%^%^BLACK%^ng %^WHITE%^fails%^BLACK to disrupt your melodies.%^RESET%^");
+            tell_room(ENV(caster),"%^BOLD%^%^BLACK%^Hostile c%^RESET%^%^RED%^ou%^BOLD%^%^BLACK%^nt%^RESET%^%^RED%^e%^BOLD%^%^BLACK%^rs%^RESET%^%^RED%^o%^BOLD%^%^BLACK%^ng %^WHITE%^fails%^BLACK%^ to disrupt the harmony of " + caster->QCN + "'s melodies.%^RESET%^", caster);
     }
 }
 
@@ -338,6 +353,11 @@ string *query_inspiration_types()
 int query_clevel()
 {
     return clevel;
+}
+
+object query_caster()
+{
+    return caster;
 }
 
 void remove()
