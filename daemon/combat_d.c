@@ -309,22 +309,6 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
     resist_perc = (int)targ->query_resistance_percent(type);
-    /*
-    //Venger: living creatures are healed with positive energy
-    //undead and exceptions creatures are healed with negative energy
-    //now let's change all spells to "deal" damage
-    if (type == "positive energy") {
-        if (!targ->query_property("negative energy affinity")) {
-            resist_perc += 200;
-        }
-    }
-    if (type == "negative energy") {
-        if (targ->query_property("heart of darkness") ||
-            targ->query_property("negative energy affinity")) {
-            resist_perc += 200;
-        }
-    }
-    */
 
     resist = (int)targ->query_resistance(type);
 
@@ -608,7 +592,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
     weapons = attacker->query_wielded();
     if (sizeof(weapons))
     {
-        if (weapons[0] == weapon){ is_main_hand = 1; }        
+        if (weapons[0] == weapon){ is_main_hand = 1; }
     }
     if (!attacker->query_property("shapeshifted") &&
         objectp(weapon) &&
