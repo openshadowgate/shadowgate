@@ -16,6 +16,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS night auspex");
     set_description("You expend a little of your bloodlust to gain true sight.");
+    set_blood_magic(1);
     set_helpful_spell(1);
     set_silent_casting(1);
 }

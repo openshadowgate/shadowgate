@@ -15,6 +15,7 @@ void create() {
     set_damage_desc("fire");
     set_description("Your gaze fills with black flame of Tyrannos, burning your victim's soul and blood in an instant of its death.");
     set_save("will");
+    set_blood_magic(1);
     set_target_required(1);
     set_peace_needed(1);
 }

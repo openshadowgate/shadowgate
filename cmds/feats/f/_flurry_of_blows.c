@@ -21,10 +21,10 @@ void create() {
 
 int allow_shifted() { return 1; }
 
-int prerequisites(object ob) 
+int prerequisites(object ob)
 {
    if(!objectp(ob)) { return 0; }
-   if((int)ob->query_class_level("monk") < 2 || (int)ob->query_alignment() > 3) 
+   if((int)ob->query_class_level("monk") < 2 || (int)ob->query_alignment() > 3)
    {
       dest_effect();
       return 0;
@@ -32,7 +32,7 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_flurry_of_blows(string str) 
+int cmd_flurry_of_blows(string str)
 {
    object feat;
    if(!objectp(TP)) { return 0; }
@@ -55,11 +55,11 @@ int cmd_flurry_of_blows(string str)
    return 1;
 }
 
-void execute_feat() 
+void execute_feat()
 {
     object myFB;
     int i;
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;
@@ -109,9 +109,9 @@ void execute_feat()
                 tell_object(caster, "%^BOLD%^%^CYAN%^You lack the needed ki to focus your mind so completely.%^RESET%^");
                 dest_effect();
                 return;
-            }            
+            }
             tell_object(caster,"%^BOLD%^%^CYAN%^You focus your mind enabling yourself to see the weak spots in your "+
-            "enemies defenses.%^RESET%^");                
+            "enemies defenses.%^RESET%^");
             tell_room(place,"%^BOLD%^%^CYAN%^%^"+caster->QCN+" begins focusing intently.%^RESET%^",caster);
             call_out("check",ROUND_LENGTH);
             caster->set_property("flurry of blows", TO);
@@ -170,22 +170,22 @@ void flurry_hit()
         dest_effect();
         return;
     }
-    
+
     myWay = (string)caster->query("monk way");
     if(FEATS_D->usable_feat(caster,"grandmaster of the way")) // maybe give the grandmaster its own hit func at some point
     {
         myWay = ways[random(sizeof(ways))];
     }
-    
+
     myVic = caster->query_current_attacker();
     if(!objectp(myVic)) return;
     if(caster->query_paralyzed()) return;
     DC = (int)caster->query_class_level("monk");
     DC += (int)"/daemon/bonus_d.c"->query_stat_bonus(caster, "wisdom");
     DC += 5;
-    if((crit = (int)BONUS_D->process_hit(caster, myVic, 1, 0, 0, 1)))   
+    if((crit = (int)BONUS_D->process_hit(caster, myVic, 1, 0, 0, 1)))
     {
-        dam = calculate_my_dam(myVic, crit);        
+        dam = calculate_my_dam(myVic, crit);
         dam_type = "bludgeoning";
         tell_object(caster, "%^BOLD%^%^BLACK%^You strike "+myVic->QCN+
         " with a sudden ferocity!%^RESET%^");
@@ -205,7 +205,7 @@ void flurry_hit()
                 if(objectp(environment(caster)))
                 {
                     tell_room(environment(caster), myVic->QCN+"%^BOLD%^%^RED%^'s body "+
-                    "shudders violently for a brief instant but "+myVic->QS+ 
+                    "shudders violently for a brief instant but "+myVic->QS+
                     " manages to shake off most of the strike.%^RESET%^", ({myVic}));
                 }
             }
@@ -221,8 +221,8 @@ void flurry_hit()
                     "shudders violently for a brief instant before "+myVic->QS+
                     " collapses!%^RESET%^", ({myVic}));
                 }
-            }                        
-        }          
+            }
+        }
         else if(myWay == "way of the shadow" && (int)caster->query_class_level("monk") > 16)
         {
             tell_object(caster, "%^BOLD%^%^BLACK%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
@@ -231,17 +231,17 @@ void flurry_hit()
             "sh%^BOLD%^%^WHITE%^a%^BOLD%^%^BLACK%^d%^BOLD%^%^WHITE%^o"+
             "%^BOLD%^%^BLACK%^w lash out at "+myVic->query_cap_name()+
             "%^BOLD%^%^BLACK%^!%^RESET%^");
-            
+
             mybonus = ((int)caster->query_class_level("monk")/10)+1;
             dam += roll_dice(mybonus,4);
-            
+
             tell_object(myVic, "%^BOLD%^%^BLACK%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
             "%^BLACK%^n%^BOLD%^%^WHITE%^d%^BOLD%^%^BLACK%^r%^BOLD%^%^WHITE%^"+
             "l%^BOLD%^%^BLACK%^l%^BOLD%^%^WHITE%^s%^BOLD%^%^BLACK%^ of "+
             "sh%^BOLD%^%^WHITE%^a%^BOLD%^%^BLACK%^d%^BOLD%^%^WHITE%^o"+
             "%^BOLD%^%^BLACK%^w lash out at you from "+caster->QCN+
             "%^BOLD%^%^BLACK%^!%^RESET%^");
-                    
+
             if(objectp(environment(caster)))
             {
                 tell_room(environment(caster), "%^BOLD%^%^BLACK%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
@@ -258,16 +258,16 @@ void flurry_hit()
             dam_type = caster->query("monk_ele_focus");
             if(!stringp(dam_type)) dam_type = "fire";
             switch(dam_type)
-            {                     
+            {
                 case "cold":
                     tell_object(caster, "%^BOLD%^%^WHITE%^Sh%^BOLD%^%^CYAN%^a%^BOLD%^%^WHITE%^"+
                     "rds of Ic%^BOLD%^%^CYAN%^"+
                     "e%^BOLD%^%^WHITE%^ shoot out at "+myVic->QCN+"%^BOLD%^%^WHITE%^!%^RESET%^");
-                    
+
                     tell_object(myVic, "%^BOLD%^%^WHITE%^Sh%^BOLD%^%^CYAN%^a%^BOLD%^%^WHITE%^"+
                     "rds of Ic%^BOLD%^%^CYAN%^"+
                     "e%^BOLD%^%^WHITE%^ shoot out at you from "+caster->QCN+"%^BOLD%^%^WHITE%^!%^RESET%^");
-                    
+
                     if(objectp(environment(caster)))
                     {
                         tell_room(environment(caster), "%^BOLD%^%^WHITE%^Sh%^BOLD%^%^CYAN%^a%^BOLD%^%^WHITE%^"+
@@ -280,11 +280,11 @@ void flurry_hit()
                     tell_object(caster, "%^BOLD%^%^YELLOW%^Arcs of %^BOLD%^%^BLUE%^e%^YELLOW%^"+
                     "l%^BLUE%^e%^YELLOW%^ctr%^BLUE%^i%^YELLOW%^c%^BLUE%^i%^YELLOW%^ty %^YELLOW%^ "+
                     "jump from you to "+myVic->QCN+"%^BOLD%^%^YELLOW%^!%^RESET%^");
-                    
+
                     tell_object(myVic, "%^BOLD%^%^YELLOW%^Arcs of %^BOLD%^%^BLUE%^e%^YELLOW%^"+
                     "l%^BLUE%^e%^YELLOW%^ctr%^BLUE%^i%^YELLOW%^c%^BLUE%^i%^YELLOW%^ty %^YELLOW%^ "+
                     "jump to you from "+caster->QCN+"%^BOLD%^%^YELLOW%^!%^RESET%^");
-                    
+
                     if(objectp(environment(caster)))
                     {
                         tell_room(environment(caster), "%^BOLD%^%^YELLOW%^Arcs of %^BOLD%^%^BLUE%^e%^YELLOW%^"+
@@ -297,11 +297,11 @@ void flurry_hit()
                     tell_object(caster, "%^BOLD%^%^GREEN%^An %^RESET%^%^GREEN%^a%^BOLD%^"+
                     "c%^RESET%^%^GREEN%^i%^BOLD%^d%^RESET%^%^GREEN%^i%^BOLD%^c mist sprays "+
                     myVic->QCN+"%^BOLD%^%^WHITE%^!%^RESET%^");
-                    
+
                     tell_object(myVic, "%^BOLD%^%^GREEN%^An %^RESET%^%^GREEN%^a%^BOLD%^"+
                     "c%^RESET%^%^GREEN%^i%^BOLD%^d%^RESET%^%^GREEN%^i%^BOLD%^c mist from "+
                     caster->QCN+" sprays you!%^RESET%^");
-                    
+
                     if(objectp(environment(caster)))
                     {
                         tell_room(environment(caster), "%^BOLD%^%^GREEN%^An %^RESET%^%^GREEN%^a%^BOLD%^"+
@@ -317,17 +317,17 @@ void flurry_hit()
                     "fl%^BOLD%^%^YELLOW%^a%^BOLD%^%^RED%^m%^BOLD%^%^YELLOW%^e"+
                     "%^BOLD%^%^RED%^ lash out at "+myVic->query_cap_name()+
                     "%^BOLD%^%^RED%^!%^RESET%^");
-            
+
                     //mybonus = ((int)caster->query_class_level("monk")/10)+1;
                     //dam += roll_dice(mybonus,2);
-            
+
                     tell_object(myVic, "%^BOLD%^%^RED%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
                     "%^RED%^n%^BOLD%^%^WHITE%^d%^BOLD%^%^RED%^r%^BOLD%^%^WHITE%^"+
                     "i%^BOLD%^%^RED%^l%^BOLD%^%^WHITE%^l%^BOLD%^%^RED%^s of "+
                     "fl%^BOLD%^%^YELLOW%^a%^BOLD%^%^RED%^m%^BOLD%^%^YELLOW%^e"+
                     "%^BOLD%^%^RED%^ lash out at you from "+caster->QCN+
                     "%^BOLD%^%^RED%^!%^RESET%^");
-                    
+
                     if(objectp(environment(caster)))
                     {
                         tell_room(environment(caster), "%^BOLD%^%^RED%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
@@ -388,15 +388,15 @@ void check()
     {
         call_out("check",ROUND_LENGTH);
         return;
-    }    
+    }
     if(caster->is_in_combat())
-    {       
+    {
         //only very rare chance of getting extra attacks when doing either - Saide
         myWay = (string)caster->query("monk way");
         if((int)caster->query_property("using instant feat") || caster->query_casting())
         {
             //higher chance of procs for way of the elements monks when casting or using another
-            //feat             
+            //feat
             if(myWay == "way of the elements" && random(3))
             {
                 call_out("check", ROUND_LENGTH);
@@ -419,12 +419,12 @@ void check()
                 return;
             }
             continue;
-        }                
+        }
         if(!caster->is_ok_armour("barb"))
         {
             call_out("check",ROUND_LENGTH);
             return;
-        }        
+        }
         if(!(int)USER_D->can_spend_ki(caster, 1))
         {
             if(objectp(myFB)) myFB->dest_effect();
@@ -450,7 +450,7 @@ void check()
                 flurry_hit();
             }
         }
-        else if(!random(6) && (int)caster->query_class_level("monk") >= 15) 
+        else if(!random(6) && (int)caster->query_class_level("monk") >= 15)
         {
             tell_object(caster, "%^BOLD%^%^CYAN%^You spot a weakness in your enemy's defense and "+
             "launch an attack!%^RESET%^");
@@ -467,8 +467,8 @@ void check()
             if(objectp(myFB)) myFB->dest_effect();
             dest_effect();
             return;
-        }*/      
-    }    
+        }*/
+    }
     call_out("check",ROUND_LENGTH);
     return;
 }
@@ -476,7 +476,7 @@ void check()
 void dest_effect()
 {
     object myFB;
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         ::dest_effect();
         remove_feat(TO);
