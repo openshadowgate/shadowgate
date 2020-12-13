@@ -32,14 +32,14 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec)
+string* class_feats(string myspec)
 {
     return ({ "simple weapon proficiency",
-            "martial weapon proficiency",
-           "light armor proficiency",
-           "medium armor proficiency",
-          "dodge",
-         "spell focus" });
+                "martial weapon proficiency",
+                "light armor proficiency",
+                "medium armor proficiency",
+                "dodge",
+                "spell focus" });
 }
 
 mapping class_featmap(string myspec) {
