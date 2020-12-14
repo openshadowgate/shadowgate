@@ -5,13 +5,13 @@
 inherit "std/room";
 
 #define FENCE_D "/daemon/fence_d"
-#define OKSCROLLS ({ "screen","stoneskin","heroism","foresight","armor of darkness","monster summoning ix","siphon magic" })
+#define OKSCROLLS ({ "greater invisibility","stoneskin","heroism","iron body","transformation","monster summoning ix","false life" })
 
 int flag;
 int save_contents() { return 1;}
 
 void create() {
-    ::create();
+	::create();
     set_properties((["light":1, "indoors":1, "no teleport":1]));
     set_properties((["storage room":1, "save contents":1]));
     set("short","A storage room for the thieves guild.");
@@ -59,6 +59,7 @@ void reset() {
 		if(!present("safe scroll 9")) {
         ob = new("/d/magic/safe_scroll");
 		ob->set_spell_name(OKSCROLLS[random(sizeof(OKSCROLLS))]);
+        ob->set_clevel(35);
         ob->move(TO);
 		}
     }

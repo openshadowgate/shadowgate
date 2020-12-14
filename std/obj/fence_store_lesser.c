@@ -5,7 +5,7 @@
 inherit "std/room";
 
 #define FENCE_D "/daemon/fence_d"
-#define OKSCROLLS ({ "identify","fog cloud","false life","monster summoning iii","cats grace","eagles splendor" })
+#define OKSCROLLS ({ "identify","fog cloud","siphon magic","monster summoning iii","cats grace","eagles splendor" })
 
 int flag;
 int save_contents() { return 1;}
@@ -56,6 +56,7 @@ void reset() {
 		if(!present("safe scroll 6")){
 			ob = new("/d/magic/safe_scroll");
 			ob->set_spell_name(OKSCROLLS[random(sizeof(OKSCROLLS))]);
+            ob->set_clevel(10);
 			ob->move(TO);
 		}
     }
