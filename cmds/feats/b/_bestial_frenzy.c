@@ -13,7 +13,7 @@
 
 inherit FEAT;
 
-object *companions;
+object companion;
 
 void create()
 {
@@ -93,15 +93,13 @@ void execute_feat()
         return;
     }
     
-    companions = caster->query_property("animal_companion");
+    companion = caster->query_property("animal_companion");
     
-    if(!sizeof(companions))
+    if(!companion)
     {
         tell_object(caster, "%^BOLD%^You can't enter a bestial frenzy without your pack.%^RESET%^");
         return;
     }
-    
-    companions = filter_array(companions, (: objectp($1) :));
     
     if (caster->query_property("effect_exhausted") || caster->query_property("effect_fatigued")) {
         tell_object(caster, "%^BOLD%^You are fatigued or exhausted and cannot rage.%^RESET%^");
@@ -119,29 +117,16 @@ void execute_feat()
     caster->add_stat_bonus("dexterity", 4);
     caster->add_stat_bonus("constitution", 4);
     caster->add_property("fast healing", 2);
-    
-    tell_object(caster, "You rage OK.");
-
-    foreach(object ob in companions)
-    {        
-        if(!objectp(ob))
-        {
-            tell_object(caster, "Animal failed.");
-            continue;
-        }
-        if(caster->query_chosen_animal() != ob->query_name())
-            continue;
         
-        tell_object(caster, cm("Your " + ob->query_name() + " loses itself to the thrill of the hunt."));
+    tell_object(caster, cm("Your " + companion->query_name() + " loses itself to the thrill of the hunt."));
         
-        ob->set_property("raged", 1);
-        ob->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
-        ob->set_property("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
-        ob->add_stat_bonus("strength", 4);
-        ob->add_stat_bonus("dexterity", 4);
-        ob->add_stat_bonus("constitution", 4);
-        ob->add_property("fast healing", 2);
-    }
+    companion->set_property("raged", 1);
+    companion->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
+    companion->set_property("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
+    companion->add_stat_bonus("strength", 4);
+    companion->add_stat_bonus("dexterity", 4);
+    companion->add_stat_bonus("constitution", 4);
+    companion->add_property("fast healing", 2);
     
     call_out("dest_effect", ROUND_LENGTH * flevel * 4);
 }
@@ -150,7 +135,8 @@ void dest_effect()
 {
     if (objectp(caster))
     {
-        if (FEATS_D->is_active(caster, "bestial frenzy")) {
+        if (FEATS_D->is_active(caster, "bestial frenzy"))
+        {
             tell_object(caster, cm("Your pack comes down from its bestial frenzy."));
             caster->remove_property_value("active_feats", ({ TO }));
             caster->remove_property("raged");
@@ -160,18 +146,15 @@ void dest_effect()
             caster->add_stat_bonus("constitution", -4);
             caster->add_property("feast healing", -2);
             "/std/effect/status/fatigued"->apply_effect(target, 36);
-
-            foreach(object ob in companions)
+            
+            if(objectp(companion))
             {
-                if(!objectp(ob))
-                    continue;
-        
-                ob->remove_property("raged");
-                ob->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
-                ob->add_stat_bonus("strength", -4);
-                ob->add_stat_bonus("dexterity", -4);
-                ob->add_stat_bonus("constitution", -4);
-                ob->add_property("fast healing", -2);
+                companion->remove_property("raged");
+                companion->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
+                companion->add_stat_bonus("strength", -4);
+                companion->add_stat_bonus("dexterity", -4);
+                companion->add_stat_bonus("constitution", -4);
+                companion->add_property("fast healing", -2);
             }
         }
     }

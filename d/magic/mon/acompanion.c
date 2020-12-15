@@ -162,9 +162,6 @@ void heart_beat()
         }
         else
             bonus = 2;
-        
-        if(owner->query_chosen_animal() == this_object()->query_name())
-            bonus += 2;
     }
     else
     {
@@ -316,45 +313,18 @@ void special_attack(object target)
     
 void die(object ob)
 {
-    object *companions;
+    //"/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
     owner && tell_object(owner, "%^RED%^Your animal companion screams in agony as it passes from this world!%^RESET%^");
-    
-    owner && companions = owner->query_property("animal_companion");
-    pointerp(companions) && companions = filter_array(companions, (: objectp($1) :));
     owner && owner->remove_property("animal_companion");
-    
-    if(pointerp(companions) && member_array(this_object(), companions) >= 0)
-    {
-        companions -= ({ this_object() });
-        if(sizeof(companions))
-            owner && owner->set_property("animal_companion", companions);
-        else
-            owner && owner->remove_property("animal_companion");
-    }
-    
-    //owner && owner->remove_property("animal_companion");
+    owner && owner->remove_property("has_elemental");
     remove();
 }
 
 int remove()
 {
-    object *companions;
-    
-    if(!objectp(owner))
-        return 0;
-  
-    owner && companions = owner->query_property("animal_companion");
-    pointerp(companions) && companions = filter_array(companions, (: objectp($1) :));
+    //"/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
+    //all_inventory(this_object())->remove();
     owner && owner->remove_property("animal_companion");
-
-    if(pointerp(companions) && member_array(this_object(), companions) >= 0)
-    {
-        companions -= ({ this_object() });
-        if(sizeof(companions))
-            owner && owner->set_property("animal_companion", companions);
-        else
-            owner && owner->remove_property("animal_companion");
-    }
-    //owner && owner->remove_property("animal_companion");
+    owner && owner->remove_property("has_elemental");
     ::remove();
 }
