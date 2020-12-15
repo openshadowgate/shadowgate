@@ -181,6 +181,7 @@ void special_attack(object target)
     string tname, aname, mess;
     object room;
     int scale;
+    mapping attacks;
     
     if(!target || !objectp(target))
         return;
@@ -193,6 +194,7 @@ void special_attack(object target)
         return;
     
     scale = 1 + this_object()->query_level() / 10;
+    attacks = ([  ]);
     
     switch(query_name())
     {
@@ -201,72 +203,110 @@ void special_attack(object target)
         case "bear":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s claws %s twice.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 6));
-        target->do_damage("torso", scale * roll_dice(2, 4));
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
+        attacks += ([ "two" : ({ (scale * roll_dice(2, 4)), "slashing" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 6));
+        //target->do_damage("torso", scale * roll_dice(2, 4));
         break;
         case "bird":
         tell_room(room, "%^BOLD%^" + sprintf("%s swoops in and bites %s.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s claws %s with its talons twice.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 4));
-        target->do_damage("torso", scale * roll_dice(2, 4));
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 4)), "piercing" }) ]);
+        attacks += ([ "two" : ({ (scale * roll_dice(2, 4)), "slashing" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 4));
+        //target->do_damage("torso", scale * roll_dice(2, 4));
         break;
         case "boar":
         tell_room(room, "%^BOLD%^" + sprintf("%s gores %s.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 8));
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 8));
         break;
         case "camel":
         tell_room(room, "%^BOLD%^" + sprintf("%s spits on %s.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 4));
-        target && "/std/effect/status/sickened"->apply_effect(target,2);
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "untyped" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 4));
+        if(!random(5))
+            target && "/std/effect/status/sickened"->apply_effect(target,2);
         break;
         case "lion":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s claws %s twice.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 8));
-        target->do_damage("torso", scale * roll_dice(2, 6));
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 8)), "piercing" }) ]);
+        attacks += ([ "two" : ({ (scale * roll_dice(2, 6)), "slashing" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 8));
+        //target->do_damage("torso", scale * roll_dice(2, 6));
         break;
         case "cheetah":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites and trips %s.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s claws %s twice.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 6));
-        target->do_damage("torso", scale * roll_dice(2, 3));
-        target && target->set_tripped(1, "%^WHITE%^You are struggling to regain your footing!%^RESET%^");
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
+        attacks += ([ "two" : ({ (scale * roll_dice(2, 3)), "slashing" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 6));
+        //target->do_damage("torso", scale * roll_dice(2, 3));
+        if(!random(5))
+            target && target->set_tripped(1, "%^WHITE%^You are struggling to regain your footing!%^RESET%^");
         break;
         case "crocodile":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s slaps %s with its tail.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 8));
-        target->do_damage("torso", scale * roll_dice(1, 12));
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 8)), "piercing" }) ]);
+        attacks += ([ "two" : ({ (scale * roll_dice(1, 12)), "bludgeoning" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 8));
+        //target->do_damage("torso", scale * roll_dice(1, 12));
         break;
         case "dinosaur":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s claws %s twice.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s rakes %s with its talons twice.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 6));
-        target->do_damage("torso", scale * roll_dice(2, 4));
-        target->do_damage("torso", scale * roll_dice(2, 8));
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
+        attacks += ([ "two" : ({ (scale * roll_dice(2, 4)), "slashing" }) ]);
+        attacks += ([ "two" : ({ (scale * roll_dice(2, 8)), "slashing" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 6));
+        //target->do_damage("torso", scale * roll_dice(2, 4));
+        //target->do_damage("torso", scale * roll_dice(2, 8));
         break;
         case "dog":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 6));
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 6));
         break;
         case "horse":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s kicks %s with its hooves twice.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 4));
-        target->do_damage("torso", scale * roll_dice(2, 6));
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 4)), "piercing" }) ]);
+        attacks += ([ "two" : ({ (scale * roll_dice(2, 6)), "bludgeoning" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 4));
+        //target->do_damage("torso", scale * roll_dice(2, 6));
         break;
         case "snake":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 4));
-        POISON_D->ApplyPoison(target, "black_adder_venom", this_object(), "injury");
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 4)), "piercing" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 4));
+        if(!random(5))
+            POISON_D->ApplyPoison(target, "black_adder_venom", this_object(), "injury");
         break;
         case "wolf":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites and trips %s.", aname, tname));
-        target->do_damage("torso", scale * roll_dice(1, 6));
-        target && target->set_tripped(1, "%^WHITE%^You are struggling to regain your footing! %^RESET%^");
+        attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
+        //target->do_damage("torso", scale * roll_dice(1, 6));
+        if(!random(5))
+            target && target->set_tripped(1, "%^WHITE%^You are struggling to regain your footing! %^RESET%^");
         break;
-    }   
+    }
+
+    foreach(string str in keys(attacks))
+    {
+        if(!target)
+            return;
+        
+        if(sizeof(attacks[str]) < 2)
+            return;
+        
+        if(FEATS_D->usable_feat(owner, "silverclaw"))
+            target->caused_typed_damage(target, "torso", attacks[str][0], "silver");
+        else
+            target->caused_typed_damage(target, "torso", attacks[str][0], attacks[str][1]);
+    }
     
     return;
 }

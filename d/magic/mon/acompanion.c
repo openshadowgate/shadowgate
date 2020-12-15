@@ -162,6 +162,9 @@ void heart_beat()
         }
         else
             bonus = 2;
+        
+        if(owner->query_chosen_animal() == this_object()->query_name())
+            bonus += 2;
     }
     else
     {
@@ -313,18 +316,27 @@ void special_attack(object target)
     
 void die(object ob)
 {
-    //"/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
+    object *companions;
     owner && tell_object(owner, "%^RED%^Your animal companion screams in agony as it passes from this world!%^RESET%^");
-    owner && owner->remove_property("animal_companion");
-    owner && owner->remove_property("has_elemental");
+    
+    owner && companions = owner->query_property("animal_companion");
+    if(pointerp(companions) && member_array(this_object(), companions >= 0))
+        owner && owner->set_property("animal_companion", companions - ({ this_object() }));
+    //owner && owner->remove_property("animal_companion");
     remove();
 }
 
 int remove()
 {
-    //"/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
-    //all_inventory(this_object())->remove();
-    owner && owner->remove_property("animal_companion");
-    owner && owner->remove_property("has_elemental");
+    object *companions;
+    
+    if(!objectp(owner))
+        return 0;
+    
+    if(owner)
+        companions = owner->query_property("animal_companion");
+    if(pointerp(companions) && member_array(this_object(), companions) >= 0)
+        owner && owner->set_property("animal_companion", companions - ({ this_object() }));
+    //owner && owner->remove_property("animal_companion");
     ::remove();
 }
