@@ -102,7 +102,7 @@ void execute_feat()
     caster->add_stat_bonus("strength", 4);
     caster->add_stat_bonus("dexterity", 4);
     caster->add_stat_bonus("constitution", 4);
-    caster->add_property("feast healing", 2);
+    caster->add_property("fast healing", 2);
     
     companions = caster->query_property("animal_companion");
 
