@@ -5,7 +5,7 @@ inherit FEAT;
 void create() {
     ::create();
     feat_type("permanent");
-    feat_category("WildernessLore");
+    feat_category("BeastMastery");
     feat_name("pack leader");
     feat_prereq("Beast Master L4");
     feat_desc("The Beast Master has become a pack leader, able to call on their pack to aid them. " +
