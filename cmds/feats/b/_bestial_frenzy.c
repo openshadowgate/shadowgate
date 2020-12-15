@@ -19,7 +19,7 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("SavageCombat");
+    feat_category("BeastMastery");
     feat_name("bestial frenzy");
     feat_prereq("Beast Master L7");
     feat_syntax("bestial_frenzy");
@@ -102,6 +102,7 @@ void execute_feat()
     caster->add_stat_bonus("strength", 4);
     caster->add_stat_bonus("dexterity", 4);
     caster->add_stat_bonus("constitution", 4);
+    caster->add_property("feast healing", 2);
     
     companions = caster->query_property("animal_companion");
 
@@ -116,6 +117,10 @@ void execute_feat()
         ob->set_property("raged", 1);
         ob->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
         ob->set_property("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
+        ob->add_stat_bonus("strength", 4);
+        ob->add_stat_bonus("dexterity", 4);
+        ob->add_stat_bonus("constitution", 4);
+        ob->add_property("fast healing", 2);
     }
     
     call_out("dest_effect", ROUND_LENGTH * flevel * 4);
@@ -123,20 +128,34 @@ void execute_feat()
 
 void dest_effect()
 {
-    if (objectp(caster)) {
+    if (objectp(caster))
+    {
         if (FEATS_D->is_active(caster, "bestial frenzy")) {
             tell_object(caster, cm("Your pack comes down from its bestial frenzy."));
             caster->remove_property_value("active_feats", ({ TO }));
             caster->remove_property("raged");
             caster->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
+            caster->add_stat_bonus("strength", -4);
+            caster->add_stat_bonus("dexterity", -4);
+            caster->add_stat_bonus("constitution", -4);
+            caster->add_property("feast healing", -2);
             "/std/effect/status/fatigued"->apply_effect(target, 36);
+
+            foreach(object ob in companions)
+            {
+                if(!objectp(ob))
+                    continue;
+        
+                ob->remove_property("raged");
+                ob->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
+                ob->add_stat_bonus("strength", -4);
+                ob->add_stat_bonus("dexterity", -4);
+                ob->add_stat_bonus("constitution", -4);
+                ob->add_property("fast healing", -2);
+            }
         }
     }
     ::dest_effect();
     remove_feat(TO);
     return;
 }
-    
-
-  
- 
