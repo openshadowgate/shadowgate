@@ -180,6 +180,12 @@ void execute_feat()
         companion->set_monster_feats( ({ "evasion", "resistance", "precise strikes" }) );
     if(class_level >= 15)
         companion->set_monster_feats( ({ "evasion", "resistance", "precise strikes", "stalwart" }) );
+    
+    if(FEATS_D->usable_feat(caster, "chosen animal") && caster->query_chosen_animal() == arg)
+    {
+        companion->set_property("effective_enchantment", class_level / 7);
+        companion->set_property("damage_resistance", 10);
+    }
        
     return;
 }
