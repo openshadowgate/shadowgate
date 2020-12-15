@@ -320,6 +320,7 @@ void die(object ob)
     owner && tell_object(owner, "%^RED%^Your animal companion screams in agony as it passes from this world!%^RESET%^");
     
     owner && companions = owner->query_property("animal_companion");
+    pointerp(companions) && companions = filter_array(companions, (: objectp($1) :));
     owner && owner->remove_property("animal_companion");
     
     if(pointerp(companions) && member_array(this_object(), companions) >= 0)
@@ -342,7 +343,8 @@ int remove()
     if(!objectp(owner))
         return 0;
   
-    owner && companions = owner->query_property("animal_companion");   
+    owner && companions = owner->query_property("animal_companion");
+    pointerp(companions) && companions = filter_array(companions, (: objectp($1) :));
     owner && owner->remove_property("animal_companion");
 
     if(pointerp(companions) && member_array(this_object(), companions) >= 0)

@@ -101,6 +101,8 @@ void execute_feat()
         return;
     }
     
+    companions = filter_array(companions, (: objectp($1) :));
+    
     if (caster->query_property("effect_exhausted") || caster->query_property("effect_fatigued")) {
         tell_object(caster, "%^BOLD%^You are fatigued or exhausted and cannot rage.%^RESET%^");
         dest_effect();
