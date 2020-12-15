@@ -57,7 +57,12 @@ int cmd_bestial_frenzy(string str)
     feat->setup_feat(TP, str);
 
     return 1;
-}  
+}
+
+string cm(string str)
+{
+    return CRAYON_D->color_string(str, "red and black");
+}
 
 void execute_feat()
 {
@@ -87,6 +92,15 @@ void execute_feat()
         dest_effect();
         return;
     }
+    
+    companions = caster->query_property("animal_companion");
+    
+    if(!sizeof(companions))
+    {
+        tell_object(caster, "%^BOLD%^You can't enter a bestial frenzy without your pack.%^RESET%^");
+        return;
+    }
+    
     if (caster->query_property("effect_exhausted") || caster->query_property("effect_fatigued")) {
         tell_object(caster, "%^BOLD%^You are fatigued or exhausted and cannot rage.%^RESET%^");
         dest_effect();
@@ -103,16 +117,15 @@ void execute_feat()
     caster->add_stat_bonus("dexterity", 4);
     caster->add_stat_bonus("constitution", 4);
     caster->add_property("fast healing", 2);
-    
-    companions = caster->query_property("animal_companion");
 
     foreach(object ob in companions)
-    {
+    {        
+        if(!objectp(ob))
+            continue;
         if(caster->query_chosen_animal() != ob->query_name())
             continue;
         
-        if(!objectp(ob))
-            continue;
+        tell_object(caster, cm("Your " + ob->query_name() + " loses itself to the thrill of the hunt."));
         
         ob->set_property("raged", 1);
         ob->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
