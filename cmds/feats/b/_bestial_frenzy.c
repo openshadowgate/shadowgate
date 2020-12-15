@@ -117,11 +117,16 @@ void execute_feat()
     caster->add_stat_bonus("dexterity", 4);
     caster->add_stat_bonus("constitution", 4);
     caster->add_property("fast healing", 2);
+    
+    tell_object(caster, "You rage OK.");
 
     foreach(object ob in companions)
     {        
         if(!objectp(ob))
+        {
+            tell_object(caster, "Animal failed.");
             continue;
+        }
         if(caster->query_chosen_animal() != ob->query_name())
             continue;
         

@@ -320,8 +320,17 @@ void die(object ob)
     owner && tell_object(owner, "%^RED%^Your animal companion screams in agony as it passes from this world!%^RESET%^");
     
     owner && companions = owner->query_property("animal_companion");
-    if(pointerp(companions) && member_array(this_object(), companions >= 0))
-        owner && owner->set_property("animal_companion", companions - ({ this_object() }));
+    owner && owner->remove_property("animal_companion");
+    
+    if(pointerp(companions) && member_array(this_object(), companions) >= 0)
+    {
+        companions -= ({ this_object() });
+        if(sizeof(companions))
+            owner && owner->set_property("animal_companion", companions);
+        else
+            owner && owner->remove_property("animal_companion");
+    }
+    
     //owner && owner->remove_property("animal_companion");
     remove();
 }
@@ -332,11 +341,18 @@ int remove()
     
     if(!objectp(owner))
         return 0;
-    
-    if(owner)
-        companions = owner->query_property("animal_companion");
+  
+    owner && companions = owner->query_property("animal_companion");   
+    owner && owner->remove_property("animal_companion");
+
     if(pointerp(companions) && member_array(this_object(), companions) >= 0)
-        owner && owner->set_property("animal_companion", companions - ({ this_object() }));
+    {
+        companions -= ({ this_object() });
+        if(sizeof(companions))
+            owner && owner->set_property("animal_companion", companions);
+        else
+            owner && owner->remove_property("animal_companion");
+    }
     //owner && owner->remove_property("animal_companion");
     ::remove();
 }

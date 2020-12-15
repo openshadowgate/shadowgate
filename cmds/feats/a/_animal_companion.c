@@ -121,13 +121,15 @@ void execute_feat()
     if(!pointerp(companions))
         companions = ({  });
     
-    foreach(object ob in companions)
+    if(sizeof(companions))
     {
-        if(objectp(ob))
-        {
+        if(sizeof(companions) > 1)
+            tell_object(caster, "You dismiss your animal companions.");
+        else
             tell_object(caster, "You dismiss your animal companion.");
-            ob && ob->remove();
-        }
+            
+        foreach(object ob in companions)
+                ob && ob->remove();
 
         caster->remove_property("animal_companion");
         return;
@@ -203,7 +205,8 @@ void execute_feat()
         
         companions += ({ companion });       
     }
-       
+    
+    caster->remove_property("animal_companion");
     caster->set_property("animal_companion", companions);
    
     return;
