@@ -33,7 +33,7 @@ mapping valid_types = ([
                          "wolf" :      ({ 13, 15, 15, 2, 12, 6, 2, 4,  }),
                        ]);
 
-object companion, *pack;
+object companion, pack_animal, *pack = ({  });
 
 void create()
 {
@@ -118,16 +118,24 @@ void execute_feat()
     
     
     companion = caster->query_property("animal_companion");
+    pack = caster->query_followers();
+    pack = filter_array(pack, (: $1->query_pack_member() :));
     
-    if(objectp(companion))
+    if(objectp(companion) || sizeof(pack))
     {
-        tell_object(caster, "You dismiss your animal companion.");
+        companion && tell_object(caster, "You dismiss your animal companion.");
         caster->remove_property("animal_companion");
         companion && companion->remove();
         
         if(sizeof(pack))
+        {
             foreach(object obj in pack)
+            {
+                tell_object(caster, "You dismiss your pack member.");
+                pack -= ({ obj });
                 obj && obj->remove();
+            }
+        }
                 
         return;
     }
@@ -202,48 +210,47 @@ void execute_feat()
         {
             for(int x = 0; x < BEAST_MOD; x++)
             {
-                companion = new("/d/magic/mon/acompanion");
-                companion->set_race(arg);
-                companion->set_name(arg);
-                companion->set_id( ({ arg, "companion", "animal companion", "greater summon", "animal", "pack member", caster->query_name() + "'s ally" }) );
-                companion->set_short(sprintf("%s's faithful %s pack member.",capitalize(caster->query_name()),arg));
-                companion->set_level(class_level);
-                companion->set_hd(comp_hd, 14);
-                companion->set_attacks_num(2 + class_level / 8);
-                companion->set_mlevel("fighter", comp_hd);
-                companion->set_max_hp(14 + (14 * comp_hd));
-                companion->set_hp(14 * comp_hd + 14);
-                companion->set_alignment(caster->query_alignment());
-                companion->set_owner(caster);
+                pack_animal = new("/d/magic/mon/pack_member");
+                pack_animal->set_race(arg);
+                pack_animal->set_name(arg);
+                pack_animal->set_id( ({ arg, "pack animal", "greater summon", "animal", "pack member", caster->query_name() + "'s ally" }) );
+                pack_animal->set_short("%^BOLD%^WHITE%^" + caster->QCN + "'s faithful %^GREEN%^" + arg + "%^RESET%^BOLD%^ pack member");
+                //pack_animal->set_short(sprintf("%s's faithful %s pack member",capitalize(caster->query_name()),arg));
+                pack_animal->set_level(class_level);
+                pack_animal->set_hd(comp_hd, 14);
+                pack_animal->set_attacks_num(2 + class_level / 8);
+                pack_animal->set_mlevel("fighter", comp_hd);
+                pack_animal->set_max_hp(14 + (14 * comp_hd));
+                pack_animal->set_hp(14 * comp_hd + 14);
+                pack_animal->set_alignment(caster->query_alignment());
+                pack_animal->set_owner(caster);
        
-                caster->add_follower(companion);
-                caster->add_protector(companion);
+                caster->add_follower(pack_animal);
+                caster->add_protector(pack_animal);
 
-                companion->set_property("minion", caster);
-                companion->move(environment(caster));
-                companion->set_heart_beat(1);
+                pack_animal->set_property("minion", caster);
+                pack_animal->move(environment(caster));
+                pack_animal->set_heart_beat(1);
     
                 //Setting companion stats based on type per SRD
-                companion->set_stats("strength", valid_types[arg][0] + min( ({ class_level / 5, 6 }) ) );
-                companion->set_stats("dexterity", valid_types[arg][1] + min( ({ class_level / 5, 6 }) ) );
-                companion->set_stats("constitution", valid_types[arg][2]);
-                companion->set_stats("intelligence", valid_types[arg][3]);
-                companion->set_stats("wisdom", valid_types[arg][4]);
-                companion->set_stats("charisma", valid_types[arg][5]);
-                companion->set_size(valid_types[arg][6]);
-                companion->set_overall_ac(0 - comp_ac - valid_types[arg][7]);
+                pack_animal->set_stats("strength", valid_types[arg][0] + min( ({ class_level / 5, 6 }) ) );
+                pack_animal->set_stats("dexterity", valid_types[arg][1] + min( ({ class_level / 5, 6 }) ) );
+                pack_animal->set_stats("constitution", valid_types[arg][2]);
+                pack_animal->set_stats("intelligence", valid_types[arg][3]);
+                pack_animal->set_stats("wisdom", valid_types[arg][4]);
+                pack_animal->set_stats("charisma", valid_types[arg][5]);
+                pack_animal->set_size(valid_types[arg][6]);
+                pack_animal->set_overall_ac(0 - comp_ac - valid_types[arg][7]);
                 
                 //Based on SRD - companion gets "specials" at certain caster levels
                 if(class_level >= 3)
-                    companion->set_monster_feats( ({ "evasion" }) );
+                    pack_animal->set_monster_feats( ({ "evasion" }) );
                 if(class_level >= 6)
-                    companion->set_monster_feats( ({ "evasion", "resistance" }) );
+                    pack_animal->set_monster_feats( ({ "evasion", "resistance" }) );
                 if(class_level >= 9)
-                    companion->set_monster_feats( ({ "evasion", "resistance", "precise strikes" }) );
+                    pack_animal->set_monster_feats( ({ "evasion", "resistance", "precise strikes" }) );
                 if(class_level >= 15)
-                    companion->set_monster_feats( ({ "evasion", "resistance", "precise strikes", "stalwart" }) );
-                
-                pack += ({ companion });
+                    pack_animal->set_monster_feats( ({ "evasion", "resistance", "precise strikes", "stalwart" }) );
             }
         }
     }
