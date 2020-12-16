@@ -1,7 +1,7 @@
 /*
   pack_member.c
   
-  Animal companion for rangers. Will be fleshed
+  Pack Member for Beast Masters. Will be fleshed
   out more over time.
   
   -- Tlaloc --
@@ -12,10 +12,15 @@ inherit WEAPONLESS;
 #include <daemons.h>
 #include "/d/magic/mon/summoned_monster.h"
 
+#define SAVEDIR "/d/save/summons/" + owner->query_name() + "/animal/"
+
 object owner;
 
 int setup,
     bonus;
+
+string saved_short,
+       saved_long;
 
 int set_owner(object ob) { owner = ob; return 1; }
 int query_pack_member()  { return 1; }
@@ -42,6 +47,21 @@ void init()
     
     if(this_player() != owner)
         return;
+    
+    saved_short = read_file(SAVEDIR + "short");
+    saved_long = read_file(SAVEDIR + "long");
+    
+    //Used read_file here - don't want to save whole object for 2 variables
+    if(!strlen(saved_short) && !strlen(saved_long))
+    {
+        mkdir("/d/save/summons/" + this_player()->query_name());
+        mkdir(SAVEDIR);
+    }
+    else
+    {
+        set_short(saved_short);
+        set_long(saved_long);
+    }
 }
     
 

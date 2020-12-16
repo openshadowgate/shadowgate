@@ -149,7 +149,7 @@ void execute_feat()
         return;
     }
     
-    tell_object(caster, sprintf("You summon your trusty %s companion to your side.", arg));
+    tell_object(caster, sprintf("You summon your trusty %s companion%s to your side.", arg, caster->query_chosen_animal() == arg ? "s" : ""));
     
     class_level = caster->query_guild_level("ranger");
     comp_hd = class_level + 2;

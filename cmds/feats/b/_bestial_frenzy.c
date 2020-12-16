@@ -13,7 +13,7 @@
 
 inherit FEAT;
 
-object companion;
+object companion, *pack;
 
 void create()
 {
@@ -94,6 +94,7 @@ void execute_feat()
     }
     
     companion = caster->query_property("animal_companion");
+    pack = filter(caster->query_followers(), (: $1->query_pack_member() :));
     
     if(!companion)
     {
@@ -128,6 +129,25 @@ void execute_feat()
     companion->add_stat_bonus("constitution", 4);
     companion->add_property("fast healing", 2);
     
+    if(sizeof(pack))
+    {
+        tell_object(caster, cm("Your pack loses itself to the thrill of the hunt."));
+        
+        foreach(object animal in pack)
+        {
+            if(!objectp(animal))
+                continue;
+            
+            animal->set_property("raged", 1);
+            animal->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
+            animal->set_property("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
+            animal->add_stat_bonus("strength", 4);
+            animal->add_stat_bonus("dexterity", 4);
+            animal->add_stat_bonus("constitution", 4);
+            animal->add_property("fast healing", 2);
+        }
+    }
+    
     call_out("dest_effect", ROUND_LENGTH * caster->query_guild_level("ranger") * 4);
 }
 
@@ -156,8 +176,26 @@ void dest_effect()
                 companion->add_stat_bonus("constitution", -4);
                 companion->add_property("fast healing", -2);
             }
+            
+            if(sizeof(pack))
+            {
+        
+                foreach(object animal in pack)
+                {
+                    if(!objectp(animal))
+                        continue;
+            
+                    animal->remove_property("raged", 1);
+                    animal->remove_property_value("added short", ({ "%^RESET%^%^BOLD%^%^RED%^ (%^RESET%^%^RED%^enraged%^BOLD%^)%^RESET%^" }));
+                    animal->add_stat_bonus("strength", -4);
+                    animal->add_stat_bonus("dexterity", -4);
+                    animal->add_stat_bonus("constitution", -4);
+                    animal->add_property("fast healing", -2);
+                }
+            }
         }
-    }
+    }            
+
     ::dest_effect();
     remove_feat(TO);
     return;
