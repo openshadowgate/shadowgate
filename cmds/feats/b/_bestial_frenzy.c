@@ -128,7 +128,7 @@ void execute_feat()
     companion->add_stat_bonus("constitution", 4);
     companion->add_property("fast healing", 2);
     
-    call_out("dest_effect", ROUND_LENGTH * flevel * 4);
+    call_out("dest_effect", ROUND_LENGTH * caster->query_guild_level("ranger") * 4);
 }
 
 void dest_effect()
