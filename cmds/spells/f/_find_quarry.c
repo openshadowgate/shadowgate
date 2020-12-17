@@ -113,6 +113,7 @@ int long_look_room(object dest)
     message("room_description","\n%^YELLOW%^[S] %^RESET%^"+(string)dest->query_long()+"\n", caster);
     inv = all_inventory(dest);
 
+    /*
     for(i=0;i<sizeof(inv);i++)
     {
         if(!objectp(inv[i])) continue;
@@ -120,6 +121,7 @@ int long_look_room(object dest)
         if(!inv[i]->is_detectable()) continue;
         TO->send_living_name(inv[i]);
     }
+    */
     return 1;
 }
 
