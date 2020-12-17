@@ -1,7 +1,7 @@
 /*
-  acompanion.c
+  pack_member.c
   
-  Animal companion for rangers. Will be fleshed
+  Pack Member for Beast Masters. Will be fleshed
   out more over time.
   
   -- Tlaloc --
@@ -16,13 +16,14 @@ inherit WEAPONLESS;
 
 object owner;
 
-string saved_short,
-       saved_long;
-
 int setup,
     bonus;
 
+string saved_short,
+       saved_long;
+
 int set_owner(object ob) { owner = ob; return 1; }
+int query_pack_member()  { return 1; }
 object query_owner()     { return owner; }
 
 void create(){
@@ -61,52 +62,6 @@ void init()
         set_short(saved_short);
         set_long(saved_long);
     }
-    
-    add_action("animal_command", "animal");
-}
-
-int animal_command(string str)
-{
-    string *input;
-    
-    if(this_player() != owner)
-        return 0;
-    
-    input = explode(str, " ");
-    
-    if(sizeof(input) < 2)
-    {
-        tell_object(this_player(), "Syntax : animal [long/short] [input].");
-        return 1;
-    }
-    
-    switch(input[0])
-    {
-        case "short":
-        this_object()->set_short(implode(input[1..], " "));
-        tell_object(this_player(), "Your Animal Companion will now be seen as: \n" + query_short());
-        rm(SAVEDIR + "short");
-        write_file(SAVEDIR + "short", query_short());
-        break;
-        case "long":
-        this_object()->set_long(implode(input[1..], " "));
-        tell_object(this_player(), "Your Animal Companion will now be described as: " + query_long());
-        rm(SAVEDIR + "long");
-        write_file(SAVEDIR + "long", query_long());
-        break;
-        case "command":
-        command(implode(input[1..], " "));
-        break;
-        case "follow":
-        tell_object(this_player(), "Your Animal Companion is now following you.");
-        this_player()->add_follower(this_object());
-        default:
-        tell_object(this_player(), "Please select 'long', 'short', 'follow' or 'command' as options.");
-        return 1;
-        break;
-    }
-    
-    return 1;
 }
     
 
@@ -120,7 +75,7 @@ void heart_beat()
     
     room = environment(this_object());
     
-    if(!objectp(owner) || owner->query_property("animal_companion") != this_object())
+    if(!objectp(owner))
     {
         this_object()->remove();
         return;
@@ -205,26 +160,20 @@ void special_attack(object target)
         tell_room(room, "%^BOLD%^" + sprintf("%s claws %s twice.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
         attacks += ([ "two" : ({ (scale * roll_dice(2, 4)), "slashing" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 6));
-        //target->do_damage("torso", scale * roll_dice(2, 4));
         break;
         case "bird":
         tell_room(room, "%^BOLD%^" + sprintf("%s swoops in and bites %s.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s claws %s with its talons twice.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 4)), "piercing" }) ]);
         attacks += ([ "two" : ({ (scale * roll_dice(2, 4)), "slashing" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 4));
-        //target->do_damage("torso", scale * roll_dice(2, 4));
         break;
         case "boar":
         tell_room(room, "%^BOLD%^" + sprintf("%s gores %s.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 8));
         break;
         case "camel":
         tell_room(room, "%^BOLD%^" + sprintf("%s spits on %s.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "untyped" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 4));
         if(!random(5))
             target && "/std/effect/status/sickened"->apply_effect(target,2);
         break;
@@ -233,16 +182,12 @@ void special_attack(object target)
         tell_room(room, "%^BOLD%^" + sprintf("%s claws %s twice.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 8)), "piercing" }) ]);
         attacks += ([ "two" : ({ (scale * roll_dice(2, 6)), "slashing" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 8));
-        //target->do_damage("torso", scale * roll_dice(2, 6));
         break;
         case "cheetah":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites and trips %s.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s claws %s twice.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
         attacks += ([ "two" : ({ (scale * roll_dice(2, 3)), "slashing" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 6));
-        //target->do_damage("torso", scale * roll_dice(2, 3));
         if(!random(5))
             target && target->set_tripped(1, "%^WHITE%^You are struggling to regain your footing!%^RESET%^");
         break;
@@ -251,8 +196,6 @@ void special_attack(object target)
         tell_room(room, "%^BOLD%^" + sprintf("%s slaps %s with its tail.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 8)), "piercing" }) ]);
         attacks += ([ "two" : ({ (scale * roll_dice(1, 12)), "bludgeoning" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 8));
-        //target->do_damage("torso", scale * roll_dice(1, 12));
         break;
         case "dinosaur":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
@@ -261,36 +204,27 @@ void special_attack(object target)
         attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
         attacks += ([ "two" : ({ (scale * roll_dice(2, 4)), "slashing" }) ]);
         attacks += ([ "two" : ({ (scale * roll_dice(2, 8)), "slashing" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 6));
-        //target->do_damage("torso", scale * roll_dice(2, 4));
-        //target->do_damage("torso", scale * roll_dice(2, 8));
+
         break;
         case "dog":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 6));
         break;
         case "horse":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
         tell_room(room, "%^BOLD%^" + sprintf("%s kicks %s with its hooves twice.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 4)), "piercing" }) ]);
         attacks += ([ "two" : ({ (scale * roll_dice(2, 6)), "bludgeoning" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 4));
-        //target->do_damage("torso", scale * roll_dice(2, 6));
         break;
         case "snake":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 4)), "piercing" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 4));
         if(!random(5))
             POISON_D->ApplyPoison(target, "black_adder_venom", this_object(), "injury");
         break;
         case "wolf":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites and trips %s.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
-        //target->do_damage("torso", scale * roll_dice(1, 6));
-        if(!random(5))
-            target && target->set_tripped(1, "%^WHITE%^You are struggling to regain your footing! %^RESET%^");
         break;
     }
 
@@ -302,10 +236,7 @@ void special_attack(object target)
         if(sizeof(attacks[str]) < 2)
             return;
         
-        if(FEATS_D->usable_feat(owner, "silverclaw"))
-            target->caused_typed_damage(target, "torso", attacks[str][0], "silver");
-        else
-            target->caused_typed_damage(target, "torso", attacks[str][0], attacks[str][1]);
+        target->caused_typed_damage(target, "torso", attacks[str][0], attacks[str][1]);
     }
     
     return;
@@ -313,18 +244,11 @@ void special_attack(object target)
     
 void die(object ob)
 {
-    //"/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
-    owner && tell_object(owner, "%^RED%^Your animal companion screams in agony as it passes from this world!%^RESET%^");
-    owner && owner->remove_property("animal_companion");
-    owner && owner->remove_property("has_elemental");
+    owner && tell_object(owner, "%^RED%^Your pack member screams in agony as it passes from this world!%^RESET%^");
     remove();
 }
 
 int remove()
 {
-    //"/daemon/yuck_d"->save_inventory(this_object(), SAVEDIR + "acompanion");
-    //all_inventory(this_object())->remove();
-    owner && owner->remove_property("animal_companion");
-    owner && owner->remove_property("has_elemental");
     ::remove();
 }

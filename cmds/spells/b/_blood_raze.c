@@ -16,6 +16,7 @@ void create()
     set_description("You expend some of your bloodlust, sending away crimson flames at your enemies. If your enemies are living, you will drain them for both health and bloodlust.");
     set_verbal_comp();
     set_somatic_comp();
+    set_blood_magic(1);
     splash_spell(2);
     set_save("reflex");
 }

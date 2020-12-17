@@ -1,5 +1,4 @@
 #include <std.h>
-#include "common.h"
 
 inherit "/std/riding_animal";
 
@@ -11,7 +10,8 @@ void create() {
     set_long("%^BOLD%^%^WHITE%^Before you stands an undead creature, an equine skeleton. Its bones float in fell aura forming resemblance of an animal being, %^RED%^its eyes glow red with graft of undeath's hatred towards the life.");
     set_level(10);
     set_value(0);
-    set_race("undead");
+    set_race("horse");
+    set_property("undead", 1);
     set_gender("male");
     set_body_type("equine");
     set_size(3);

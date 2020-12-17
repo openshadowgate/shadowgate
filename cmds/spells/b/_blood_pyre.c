@@ -15,6 +15,7 @@ void create()
     set_description("You raise expend some of your bloodlust to create a hurricane of necrotic flames around you, .");
     set_save("reflex");
     set_helpful_spell(1);
+    set_blood_magic(1);
     traveling_aoe_spell(1);
 }
 

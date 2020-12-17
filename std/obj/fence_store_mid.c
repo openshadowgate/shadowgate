@@ -58,6 +58,7 @@ void reset() {
 		if(!present("safe scroll 6")){
 			ob = new("/d/magic/safe_scroll");
 			ob->set_spell_name(OKSCROLLS[random(sizeof(OKSCROLLS))]);
+            ob->set_clevel(20);
 			ob->move(TO);
 		}
     }

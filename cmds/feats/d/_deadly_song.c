@@ -7,14 +7,14 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("Inquisition");
-    feat_name("true judgement");
-    feat_syntax("true_judgement [TARGET]");
-    feat_prereq("Inquisitor L20");
-    feat_desc("At 20th level, an inquisitor can call true judgment down upon a foe during combat. The inquisitor can invoke true judgment on a foe. Once declared, the target must make a fortitude save or die. Targets warded from death or targets that succeeded a save throw won't be affected.
+    feat_category("Performance");
+    feat_name("deadly song");
+    feat_syntax("deadly song [TARGET]");
+    feat_prereq("Bard L20");
+    feat_desc("At 20th level, a bard can use her performance to cause one enemy to die from joy or sorrow.
 
 If used without an argument this feat will pick up a random attacker.");
-    set_save("fort");
+    set_save("will");
 }
 
 int allow_shifted()
@@ -27,14 +27,14 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if ((int)ob->query_class_level("inquisitor") < 20) {
+    if ((int)ob->query_class_level("bard") < 20) {
         dest_effect();
         return 0;
     }
     return ::prerequisites(ob);
 }
 
-int cmd_true_judgement(string str)
+int cmd_deadly_song(string str)
 {
     object feat;
     if (!objectp(TP)) {
@@ -51,7 +51,7 @@ void execute_feat()
     object* weapons;
     int x;
     ::execute_feat();
-    tempmap = caster->query_property("using true judgement");
+    tempmap = caster->query_property("using deadly song");
     if (!objectp(target)) {
         object* attackers = caster->query_attackers();
         if (mapp(tempmap)) {
@@ -109,8 +109,12 @@ void execute_feat()
     }
     caster->set_property("using instant feat", 1);
 
-    tell_object(caster, "%^RESET%^%^BLUE%^You point a finger at " + target->QCN + " and proclaim the true judgement.%^RESET%^");
-    tell_room(place, "%^RESET%^%^BLUE%^" + caster->QCN + " points a finger at " + target->QCN + " and proclaims the judgement of death.%^RESET%^", caster);
+    tell_room(ENV(target), "%^BOLD%^%^BLUE%^" + caster->QCN + " invokes a s%^CYAN%^i%^WHITE%^nister%^BLUE%^ tune.", caster);
+    tell_room(ENV(target),"%^BLUE%^D%^BOLD%^%^BLACK%^r%^RESET%^%^BLUE%^e%^BOLD%^%^BLACK%^a%^RESET%^%^BLUE%^df%^BOLD%^%^BLACK%^u%^RESET%^%^BLUE%^l melody %^BOLD%^%^BLACK%^w%^RESET%^%^BLUE%^e%^BOLD%^a%^BLACK%^v%^RESET%^%^BLUE%^es the %^BOLD%^%^BLACK%^death %^RESET%^%^BLUE%^itself around " +target->QCN+".%^WHITE%^", caster);
+    tell_object(target,"%^BOLD%^%^BLUE%^You feel your soul slipping away!");
+
+    tell_object(caster,"%^BLUE%^You w%^BOLD%^e%^RESET%^%^BLUE%^a%^BOLD%^%^BLACK%^v%^RESET%^%^BLUE%^e the %^BOLD%^%^BLACK%^death %^RESET%^%^BLUE%^itself around " +target->QCN+" with your m%^BOLD%^u%^RESET%^s%^BLUE%^ic.%^WHITE%^");
+
     return;
 }
 
@@ -141,7 +145,7 @@ void execute_attack()
         return;
     }
 
-    tempmap = caster->query_property("using true judgement");
+    tempmap = caster->query_property("using deadly song");
     if (!mapp(tempmap)) {
         tempmap = ([]);
     }
@@ -156,24 +160,24 @@ void execute_attack()
         continue;
     }
     timerz = time() + 300;
-    delay_subject_msg(target, 300, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^true judged again%^WHITE%^ again.%^RESET%^");
+    delay_subject_msg(target, 300, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^deadly sang%^WHITE%^ at again.%^RESET%^");
     tempmap += ([ target:timerz ]);
-    caster->remove_property("using true judgement");
-    caster->set_property("using true judgement", tempmap);
+    caster->remove_property("using deadly song");
+    caster->set_property("using deadly song", tempmap);
 
-    tell_object(caster, "%^BLUE%^A ray of deadly raw power releases of your finger and hits " + target->QCN + "!");
-    tell_room(place, "%^BLUE%^A ray of death releases of " + caster->QCN + "'s finger and hits " + target->QCN + "!", caster);
+    tell_object(caster, "%^BLUE%^The deadly melody coils and collapses at " + target->QCN + "!");
+    tell_room(place, "%^BLUE%^The deadly melody coils and collapses at " + target->QCN + "!", caster);
 
     bonusdc = clevel;
-    bonusdc += BONUS_D->query_stat_bonus(caster, "wisdom");
+    bonusdc += BONUS_D->query_stat_bonus(caster, "charisma");
     spell_kill(target, caster);
     if ((string)target->query_property("no death") || do_save(target, -bonusdc)) {
-        tell_room(place, "%^BOLD%^%^BLUE%^" + target->QCN + " is utterly unaffected by the judgement!", target);
-        tell_object(target, "%^BOLD%^%^BLUE%^You are utterly unaffected by the judgement!");
+        tell_room(place, "%^BOLD%^%^BLUE%^" + target->QCN + " is utterly unaffected by the melody!", target);
+        tell_object(target, "%^BOLD%^%^BLUE%^You are utterly unaffected by the melody!");
     } else {
         tell_room(place, "%^BOLD%^%^MAGENTA%^The soul is pushed beyond %^MAGENTA%^the veil%^MAGENTA%^ from its coil!");
         tell_room(place, "%^BOLD%^%^MAGENTA%^The lifeless husk of " + target->QCN + " drops to the ground!", target);
-        tell_object(target, "%^BOLD%^%^MAGENTA%^Your soul is ripped from you body!\n");
+        tell_object(target, "%^BOLD%^%^MAGENTA%^Your soul is ripped from you body! Bye bye!\n");
         target->cause_typed_damage(target, target->return_target_limb(), target->query_max_hp() * 2, "untyped");
     }
 

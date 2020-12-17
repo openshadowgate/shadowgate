@@ -11,6 +11,8 @@
 #include <daemons.h>
 #include <magic.h>
 
+#define BEAST_MOD 2
+
 inherit FEAT;
 
 //Format - type : ({ STR, DEX, CON, INT, WIS, CHA, SIZE, AC BONUS, }),
@@ -31,7 +33,7 @@ mapping valid_types = ([
                          "wolf" :      ({ 13, 15, 15, 2, 12, 6, 2, 4,  }),
                        ]);
 
-object control, companion;
+object companion, pack_animal, *pack = ({  });
 
 void create()
 {
@@ -116,15 +118,29 @@ void execute_feat()
     
     
     companion = caster->query_property("animal_companion");
+    pack = caster->query_followers();
+    pack = filter_array(pack, (: $1->query_pack_member() :));
     
-    if(objectp(companion))
+    if(objectp(companion) || sizeof(pack))
     {
-        tell_object(caster, "You dismiss your animal companion.");
+        companion && tell_object(caster, "You dismiss your animal companion.");
         caster->remove_property("animal_companion");
         companion && companion->remove();
-        control && control->remove();
+        
+        if(sizeof(pack))
+        {
+            foreach(object obj in pack)
+            {
+                tell_object(caster, "You dismiss your pack member.");
+                pack -= ({ obj });
+                obj && obj->remove();
+            }
+        }
+                
         return;
     }
+    
+    pack = ({  });
     
     if(!arg || member_array(arg, keys(valid_types)) < 0)
     {
@@ -133,7 +149,7 @@ void execute_feat()
         return;
     }
     
-    tell_object(caster, sprintf("You summon your trusty %s companion to your side.", arg));
+    tell_object(caster, sprintf("You summon your trusty %s companion%s to your side.", arg, caster->query_chosen_animal() == arg ? "s" : ""));
     
     class_level = caster->query_guild_level("ranger");
     comp_hd = class_level + 2;
@@ -180,6 +196,64 @@ void execute_feat()
         companion->set_monster_feats( ({ "evasion", "resistance", "precise strikes" }) );
     if(class_level >= 15)
         companion->set_monster_feats( ({ "evasion", "resistance", "precise strikes", "stalwart" }) );
+    
+    if(caster->query_chosen_animal() == arg)
+    {
+        //Chosen animal greatly buffs the animal companion
+        if(FEATS_D->usable_feat(caster, "chosen animal"))
+        {
+            companion->set_property("damage_resistance", 10);
+            companion->set_monster_feats( ({ "toughness", "improved toughness", "evasion", "resistance", "precise strikes", "stalwart", "rapid strikes" }) );
+        }
+    
+        if(FEATS_D->usable_feat(caster, "pack leader"))
+        {
+            for(int x = 0; x < BEAST_MOD; x++)
+            {
+                pack_animal = new("/d/magic/mon/pack_member");
+                pack_animal->set_race(arg);
+                pack_animal->set_name(arg);
+                pack_animal->set_id( ({ arg, "pack animal", "greater summon", "animal", "pack member", caster->query_name() + "'s ally" }) );
+                pack_animal->set_short("%^BOLD%^GREEN%^" + caster->QCN + "'s faithful %^BLACK%^" + arg + "%^RESET%^BOLD%^GREEN%^ pack member");
+                //pack_animal->set_short(sprintf("%s's faithful %s pack member",capitalize(caster->query_name()),arg));
+                pack_animal->set_level(class_level);
+                pack_animal->set_hd(comp_hd, 14);
+                pack_animal->set_attacks_num(2 + class_level / 8);
+                pack_animal->set_mlevel("fighter", comp_hd);
+                pack_animal->set_max_hp(14 + (14 * comp_hd));
+                pack_animal->set_hp(14 * comp_hd + 14);
+                pack_animal->set_alignment(caster->query_alignment());
+                pack_animal->set_owner(caster);
+       
+                caster->add_follower(pack_animal);
+                caster->add_protector(pack_animal);
+
+                pack_animal->set_property("minion", caster);
+                pack_animal->move(environment(caster));
+                pack_animal->set_heart_beat(1);
+    
+                //Setting companion stats based on type per SRD
+                pack_animal->set_stats("strength", valid_types[arg][0] + min( ({ class_level / 5, 6 }) ) );
+                pack_animal->set_stats("dexterity", valid_types[arg][1] + min( ({ class_level / 5, 6 }) ) );
+                pack_animal->set_stats("constitution", valid_types[arg][2]);
+                pack_animal->set_stats("intelligence", valid_types[arg][3]);
+                pack_animal->set_stats("wisdom", valid_types[arg][4]);
+                pack_animal->set_stats("charisma", valid_types[arg][5]);
+                pack_animal->set_size(valid_types[arg][6]);
+                pack_animal->set_overall_ac(0 - comp_ac - valid_types[arg][7]);
+                
+                //Based on SRD - companion gets "specials" at certain caster levels
+                if(class_level >= 3)
+                    pack_animal->set_monster_feats( ({ "evasion" }) );
+                if(class_level >= 6)
+                    pack_animal->set_monster_feats( ({ "evasion", "resistance" }) );
+                if(class_level >= 9)
+                    pack_animal->set_monster_feats( ({ "evasion", "resistance", "precise strikes" }) );
+                if(class_level >= 15)
+                    pack_animal->set_monster_feats( ({ "evasion", "resistance", "precise strikes", "stalwart" }) );
+            }
+        }
+    }
        
     return;
 }

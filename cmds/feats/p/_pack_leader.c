@@ -1,31 +1,31 @@
 #include <std.h>
 #include <daemons.h>
-
 inherit FEAT;
 
-void create()
-{
+void create() {
     ::create();
     feat_type("permanent");
-    feat_category("VampireLord");
-    feat_name("sanguine bloodline");
-    feat_prereq("Vampire Lord L7");
-    feat_desc("Through forming greater bloodline, you gain ability to control ancient blood magic in a limited fashion and gain unique spells. This feat adds some hemomancy abilities to innate spell list: blood cauldron, blood pyre, blood raze, night auspex, mytherceria, harvest of tyrannos.");
+    feat_category("BeastMastery");
+    feat_name("pack leader");
+    feat_prereq("Beast Master L4");
+    feat_desc("The Beast Master has become a pack leader, able to call on their pack to aid them. " +
+              "With this feat, the Beast Master's animal companion feat summons two additional copies " +
+              "of their animal companion, provided the animal companion is their chosen animal type.");
     permanent(1);
+    set_required_for(({}));
 }
 
-int allow_shifted()
-{
-    return 1;
-}
+int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {
-    if (!objectp(ob)) {
+    if (!objectp(ob))
+    {
         return 0;
     }
 
-    if ((int)ob->query_class_level("vampire_lord") < 4) {
+    if ((int)ob->query_class_level("beast_master") < 4)
+    {
         dest_effect();
         return 0;
     }

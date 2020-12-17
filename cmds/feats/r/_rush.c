@@ -3,10 +3,6 @@
 #include <magic.h>
 inherit FEAT;
 
-void rush_mess(object play,object targ);
-void miss_mess(object play,object targ);
-void hit_mess(object play,object targ);
-
 int FEATTIMER = 25;
 //check time in magic.h
 

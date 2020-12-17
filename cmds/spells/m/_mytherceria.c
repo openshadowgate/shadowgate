@@ -10,6 +10,7 @@ void create()
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS mytherceria");
     set_description("You extend your senses beyond your body to observe presence of the blood.");
+    set_blood_magic(1);
     set_verbal_comp();
     set_helpful_spell(1);
     set_silent_casting(1);
