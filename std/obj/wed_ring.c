@@ -74,7 +74,7 @@ void init_arg(mixed* arg)
     notify_spouse("I'm home.");
 }
 
-wear(str)
+void wear(str)
 {
     //set_short((: this_object(), "short_fun" :));
     set_long("A solid gold band. There is some writing on it.\n");
