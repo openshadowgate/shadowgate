@@ -76,7 +76,7 @@ void init_arg(mixed* arg)
 
 wear(str)
 {
-    set_short((: this_object(), "short_fun" :));
+    //set_short((: this_object(), "short_fun" :));
     set_long("A solid gold band. There is some writing on it.\n");
     set("read", "From " + capitalize(spouse) + " with love.\n");
 }
