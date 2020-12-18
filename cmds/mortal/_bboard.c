@@ -10,11 +10,9 @@
 inherit DAEMON;
 
 string * BBOARDS=({
-        "comment",
             "announcement",
             "newbie",
             "lawboard",
-            "avatar",
             "pkmail",
             "avatarmail",
             "wiz",
@@ -33,20 +31,28 @@ int do_all_info()
     board_count = new_count = 0;
     while (iter--)
     {
-        if (!check_access("info",BBOARDS[iter])) continue;
-        if(!file_exists("/d/common/boards/"+BBOARDS[iter]+"board.c")) continue;
-
-        board = present("board",find_object_or_load("/d/common/boards/"+BBOARDS[iter]+"board"));
-        board_count ++;
-        if (!objectp(board))
-        {
-            tmp = find_object_or_load("/d/common/boards/"+BBOARDS[iter]+"board")->reset();
-            if(!objectp(tmp)) continue;
-            board = present("board", tmp);
-            if(!objectp(board)) continue;
+        if (!check_access("info", BBOARDS[iter])) {
+            continue;
         }
-        if (board->has_new())
-            new_count+=board->has_new();
+        if (!file_exists("/d/common/boards/" + BBOARDS[iter] + "board.c")) {
+            continue;
+        }
+
+        board = present("board", find_object_or_load("/d/common/boards/" + BBOARDS[iter] + "board"));
+        board_count++;
+        if (!objectp(board)) {
+            tmp = find_object_or_load("/d/common/boards/" + BBOARDS[iter] + "board")->reset();
+            if (!objectp(tmp)) {
+                continue;
+            }
+            board = present("board", tmp);
+            if (!objectp(board)) {
+                continue;
+            }
+        }
+        if (board->has_new()) {
+            new_count += board->has_new();
+        }
         board_spam += "%^ORANGE%^"+board->query_remote_short();
         board_spam += "\n";
     }
@@ -66,9 +72,6 @@ int check_access(string my_command, string which_board)
         case "newbie":
             return 1;
             break;
-        case "comment":
-            return 1;
-            break;
         case "announcement":
             switch (my_command)
             {
@@ -80,7 +83,7 @@ int check_access(string my_command, string which_board)
                     return 1;
                     break;
             }
-        case "avatar": case "pkmail": case "avatarmail": case "wiz": case "lawboard":
+        case "pkmail": case "avatarmail": case "wiz": case "lawboard":
             if(avatarp(TP)) return 1;
             else return 0;
             break;
@@ -99,29 +102,40 @@ int cmd_bboard(string str)
     mixed what;
     int ret, ok, iter, number;
 
-    if (!TP->query_level()) return notify_fail("Please create a character before using this command!");
-    if(!str) {
+    if (!TP->query_level()) {
+        return notify_fail("Please create a character before using this command!");
+    }
+    if (!str) {
         do_all_info();
         return 1;
     }
-    if(str == "next")
-    {
-        iter=sizeof(BBOARDS);
-        while (iter--)
-        {
-            if (!check_access("info",BBOARDS[iter])) continue;
-            if(!file_exists("/d/common/boards/"+BBOARDS[iter]+"board.c")) continue;
-            board = present("board",find_object_or_load("/d/common/boards/"+BBOARDS[iter]+"board"));
-            if (!objectp(board))
-            {
-                tmp = find_object_or_load("/d/common/boards/"+BBOARDS[iter]+"board")->reset();
-                if(!objectp(tmp)) continue;
-                board = present("board", tmp);
-                if(!objectp(board)) continue;
+    if (str == "next") {
+        iter = sizeof(BBOARDS);
+        while (iter--) {
+            if (!check_access("info", BBOARDS[iter])) {
+                continue;
             }
-            if((int)BBOARD_D->get_new_post(board->query_board_id(), (string)TP->query_true_name()) == -1) { continue; }
-            if( (int)BBOARD_D->get_new_post(board->query_board_id(), (string)TPQN) == sizeof( (mapping *)BBOARD_D->query_posts(board->query_board_id())) ) continue;
-            write("Message read from the %^YELLOW%^"+BBOARDS[iter]+" board%^RESET%^.");
+            if (!file_exists("/d/common/boards/" + BBOARDS[iter] + "board.c")) {
+                continue;
+            }
+            board = present("board", find_object_or_load("/d/common/boards/" + BBOARDS[iter] + "board"));
+            if (!objectp(board)) {
+                tmp = find_object_or_load("/d/common/boards/" + BBOARDS[iter] + "board")->reset();
+                if (!objectp(tmp)) {
+                    continue;
+                }
+                board = present("board", tmp);
+                if (!objectp(board)) {
+                    continue;
+                }
+            }
+            if ((int)BBOARD_D->get_new_post(board->query_board_id(), (string)TP->query_true_name()) == -1) {
+                continue;
+            }
+            if ((int)BBOARD_D->get_new_post(board->query_board_id(), (string)TPQN) == sizeof((mapping*)BBOARD_D->query_posts(board->query_board_id()))) {
+                continue;
+            }
+            write("Message read from the %^YELLOW%^" + BBOARDS[iter] + " board%^RESET%^.");
             return board->read_message();
         }
         write("%^BOLD%^There are no unread messages on your list of boards.\n");
