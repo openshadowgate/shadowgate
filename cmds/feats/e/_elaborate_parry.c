@@ -5,7 +5,7 @@ inherit FEAT;
 void create() {
     ::create();
     feat_type("permanent");
-    feat_category("Duelist");
+    feat_category("PrestigeDuelist");
     feat_name("elaborate parry");
     feat_prereq("Duelist L7");
     feat_desc(""
