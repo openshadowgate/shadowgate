@@ -9,7 +9,7 @@ void create()
     feat_type("instant");
     feat_category("Performance");
     feat_name("deadly song");
-    feat_syntax("deadly song [TARGET]");
+    feat_syntax("deadly_song [TARGET]");
     feat_prereq("Bard L20");
     feat_desc("At 20th level, a bard can use her performance to cause one enemy to die from joy or sorrow.
 
