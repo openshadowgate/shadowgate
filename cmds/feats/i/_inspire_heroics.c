@@ -11,7 +11,7 @@ void create()
     feat_category("Performance");
     feat_name("inspire heroics");
     feat_prereq("Bard L15");
-    feat_desc("With this feat you gain access to songs of heroics. They grant a bonus every four levels, but no more than eight, to all saves and admor class.");
+    feat_desc("With this feat you gain access to songs of heroics. They grant a bonus every four levels, but no more than eight, to all saves and armor class.");
     permanent(1);
 }
 
