@@ -65,6 +65,7 @@ void spell_effect(int prof)
         dwpn->move(caster);
 
         caster->remove_paralyzed();
+        addSpellToCaster();
         caster->force_me("wield weapon in left hand");
         spell_successful();
         spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 10;
