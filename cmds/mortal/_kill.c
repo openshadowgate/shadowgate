@@ -22,26 +22,28 @@ int cmd_kill(string str)
     }
 
     if (!str) {
-        object * livings;
+        victim = TP->query_property("last_attacker");
+        if (!(objectp(victim) && objectp(present(victim, ETP)))) {
+            object* livings;
 
-        livings = all_living(ETP);
+            livings = all_living(ETP);
 
-        if (TP->query_party()) {
-            object * party;
+            if (TP->query_party()) {
+                object* party;
 
-            party = PARTY_D->query_party_members(TP->query_party());
-            livings -= party;
-            livings -= collapse_array(party->query_followers());
+                party = PARTY_D->query_party_members(TP->query_party());
+                livings -= party;
+                livings -= collapse_array(party->query_followers());
+            }
+
+            livings -= (TP->query_followers() - TP->query_attackers());
+            livings -= ({ TP });
+            livings = filter_array(livings, (: !$1->query_true_invis() :));
+
+            if (sizeof(livings)) {
+                victim = livings[random(sizeof(livings))];
+            }
         }
-
-        livings -= (TP->query_followers() - TP->query_attackers());
-        livings -= ({TP});
-        livings = filter_array(livings, (:!$1->query_true_invis():));
-
-        if (sizeof(livings)) {
-            victim = livings[random(sizeof(livings))];
-        }
-
     } else {
         str = lower_case(str);
         victim = present(str, environment(this_player()));
