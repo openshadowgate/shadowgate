@@ -1,4 +1,6 @@
 #include <std.h>
+#include <daemons.h>
+
 inherit "/std/obj/fence_store_epic";
 
 void create(){
@@ -9,8 +11,9 @@ void create(){
     set("long","If you're here you shouldn't be");
 }
 
-void reset() {
+void reset(){
     object ob;
+    ::reset();
     if(!present("smokebomb")) {
         ob = new("/d/tharis/obj/smokebomb");
         ob->move(TO);
