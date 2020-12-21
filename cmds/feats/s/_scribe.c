@@ -11,7 +11,7 @@ void create() {
     feat_category("ArcaneSpellcraft");
     feat_name("scribe");
     feat_syntax("scribe SPELL_NAME [as level SPELL_LEVEL] [for NUM times]");
-    feat_prereq("Bard, Cleric, Druid, Inquisitor, Mage, Magus, Paladin, Ranger, Sorcerer, Oracle, Cypher");
+    feat_prereq("Bard, Cleric, Druid, Inquisitor, Mage, Magus, Paladin, Ranger, Sorcerer, Oracle");
     feat_desc("This feat allows a character to use their knowledge of the arcane to scribe simple scrolls of spells they already know. Such scrolls are only good for a single use. You must have an empty parchment sheet in your inventory for scribe to work. It has to be parchment, other writing materials won't do.
 
 SPELL_NAME
@@ -43,6 +43,7 @@ int prerequisites(object ob)
         !ob->is_class("sorcerer") &&
         !ob->is_class("cleric") &&
         !ob->is_class("bard") &&
+        !ob->is_class("thief") && // Thief is here not by mistake
         !ob->is_class("inquisitor") &&
         !ob->is_class("oracle") &&
         !ob->is_class("ranger") &&
