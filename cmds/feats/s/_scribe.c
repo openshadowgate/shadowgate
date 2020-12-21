@@ -10,7 +10,7 @@ void create() {
     feat_type("instant");
     feat_category("ArcaneSpellcraft");
     feat_name("scribe");
-    feat_syntax("scribe SPELL_NAME [as level SPELL_LEVEL]");
+    feat_syntax("scribe SPELL_NAME [as level SPELL_LEVEL] [for NUM times]");
     feat_prereq("Bard, Cleric, Druid, Inquisitor, Mage, Magus, Paladin, Ranger, Sorcerer, Oracle, Cypher");
     feat_desc("This feat allows a character to use their knowledge of the arcane to scribe simple scrolls of spells they already know. Such scrolls are only good for a single use. You must have an empty parchment sheet in your inventory for scribe to work. It has to be parchment, other writing materials won't do.
 
@@ -19,6 +19,11 @@ SPELL_NAME
 
 SPELL_LEVEL
   Optinal scroll power you can specify. By default scroll will be scribed with maximum power available.
+
+NUM
+  Defines how many scrolls you want to scribe.
+
+To scribe a scroll you must expend five gold coins per spell level and one parchment.
 
 %^BOLD%^N.B.%^RESET%^ Multiclassing characters will use currently %^ULINE%^posed%^RESET%^ class for this feat. Use <pose> to switch it.");
     set_target_required(0);
@@ -69,7 +74,7 @@ void execute_feat()
 {
     object ob, tp;
     int level, number;
-    int spell_clevel;
+    int spell_clevel, scroll_amount;
     string tmp, str, levelstring;
     ::execute_feat();
 
@@ -77,7 +82,17 @@ void execute_feat()
         return help();
     }
 
-    if (regexp(arg, "[ a-z]+ [0-9]")) {
+    if (regexp(arg, "as level [0-9]+ for [0-9]+ times$")) {
+        if (sscanf(arg, "%s as level %d for %d times", str, spell_clevel, scroll_amount) != 3) {
+            help();
+            return 1;
+        }
+    } else if (regexp(arg, "for [0-9]+ times$")) {
+        if (sscanf(arg, "%s for %d times", str, scroll_amount) != 2) {
+            help();
+            return 1;
+        }
+    } else if (regexp(arg, "as level [0-9]+$")) {
         if (sscanf(arg, "%s as level %d", str, spell_clevel) != 2) {
             help();
             return 1;
@@ -126,10 +141,19 @@ void execute_feat()
         return 1;
     }
 
+    if (!scroll_amount) {
+        scroll_amount = 1;
+    }
+
+    if (!caster->query_funds("gold", spell_clevel * 5 * scroll_amount)) {
+        tell_object(caster, "You don't have enough money. You need " + (spell_clevel * 5 * scroll_amount) + "gold.");
+        return 0;
+    }
+
     tell_room(environment(caster), "%^BOLD%^" + caster->QCN + " sits and begins to scribe a spell onto some parchment.", caster);
     tell_object(caster, "%^BOLD%^You sit and start to scribe " + str + " onto the parchment.");
 
-    call_out("scribe", ROUND_LENGTH, str, spell_clevel, caster, ob);
+    call_out("scribe", ROUND_LENGTH, str, spell_clevel, caster, scroll_amount, ENV(caster));
 
     return;
 }
@@ -145,27 +169,65 @@ void cancel(object ob, string spell){
     remove_call_out("scribe");
 }
 
-void scribe(string spell, int spell_clevel, object tp, object paper)
+void scribe(string spell, int spell_clevel, object tp, int scroll_amount, object place)
 {
     object scroll, compbag;
+    object paper;
     string tmp, * comp_names;
     int x;
 
-    if (!objectp(paper)) {
-        return 0;
-    }
     if (!objectp(tp)) {
         return 0;
     }
 
-    tell_object(tp, "%^BOLD%^You finish scribing " + spell + ".");
-    tell_room(environment(tp), "%^BOLD%^" + tp->query_cap_name() + " finishes " + tp->QP + " scribing.", tp);
+    if(TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
+        TP->send_paralyzed_message("info",TP);
+        return 0;
+    }
+
+    if (sizeof(caster->query_attackers())) {
+        tell_object(tp, "Enemies interrupt your scribing.");
+        return 0;
+    }
+
+    if (ENV(tp) != place) {
+        tell_object(tp, "Movement interrupted your scribing.");
+        return 0;
+    }
+
+    paper = present("parchment11", tp);
+
+    if (!objectp(paper = present("parchment11", tp))) {
+        tell_object(tp, "You don't have any parchment!");
+        return 0;
+    }
+
+    if (!tp->query_funds("gold", spell_clevel * 5 * scroll_amount)) {
+        tell_object(tp, "You don't have enough money. You need " + (spell_clevel * 5 * scroll_amount) + "gold.");
+        return 0;
+    }
+
+    scroll_amount--;
+
+
+    tell_object(tp,"%^ORANGE%^You carefully scribe a scroll of %^BOLD%^" +spell+"%^RESET%^%^ORANGE%^, then seal the powers inside with golden vapour, spending %^BOLD%^" +spell_clevel * 5+"%^RESET%^%^ORANGE%^ gold.");
+    tell_room(ENV(tp),"%^ORANGE%^" +tp->QCN+" carefully scribes a scroll, then seals it with golden vapour.", tp);
+
+    if (scroll_amount) {
+        tell_object(tp, "%^BOLD%^There are " + scroll_amount + " scrolls left to scribe.");
+    }
+
     scroll = new("/d/magic/scroll");
     scroll->set_spell_name(spell);
     scroll->set_passed((string)tp->query_name());
     scroll->set_clevel(spell_clevel);
     scroll->move(environment(tp));
     paper->remove();
+    caster->use_funds("gold", spell_clevel * 5);
+
+    if (scroll_amount) {
+        call_out("scribe", ROUND_LENGTH, spell, spell_clevel, tp, scroll_amount, ENV(tp));
+    }
 }
 
 void dest_effect() {
