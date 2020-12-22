@@ -10,8 +10,8 @@ void create()
     ::create();
     feat_type("instant");
     feat_category("Performance");
-    feat_name("frightening tune 14");
-    feat_prereq("Bard L8");
+    feat_name("frightening tune");
+    feat_prereq("Bard L14");
     feat_classes("bard");
     feat_desc("Your play a melody that inspires fear in your opponens. If they fail a save, they'll become momentarely frightened.
 
