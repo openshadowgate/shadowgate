@@ -3,14 +3,14 @@
 #include <magic.h>
 inherit FEAT;
 
-#define FEATTIMER 15
+#define FEATTIMER 45
 
 void create()
 {
     ::create();
     feat_type("instant");
     feat_category("Performance");
-    feat_name("psionicweapon");
+    feat_name("dirge of doom");
     feat_prereq("Bard L8");
     feat_classes("bard");
     feat_desc(".");
@@ -36,7 +36,7 @@ int prerequisites(object ob)
     return ::prerequisites(ob);
 }
 
-int cmd_psionicweapon(string str)
+int cmd_dirge_of_doom(string str)
 {
     object feat;
     if (!objectp(TP)) {
@@ -70,16 +70,21 @@ void execute_feat()
     }
 
     delay = time() + FEATTIMER;
-    delay_messid_msg(FEATTIMER, "%^BOLD%^%^WHITE%^You can ding %^CYAN%^dirge of doom%^WHITE%^ again.%^RESET%^");
+    delay_messid_msg(FEATTIMER, "%^BOLD%^%^WHITE%^You can sing %^CYAN%^dirge of doom%^WHITE%^ again.%^RESET%^");
     caster->set_property("using instant feat", 1);
     caster->remove_property("using dirge of doom");
     caster->set_property("using dirge of doom", delay);
+
+    tell_object(caster,"%^ORANGE%^You muse a melody, inspiring a sense of growing dread in your enemies!");
+    tell_room(place,"%^ORANGE%^As "+caster->QCN+" muses a melody with a sense of growing dread embedded into it.",caster);
+
     return;
 }
 
 void execute_attack()
 {
     int die, i;
+    int bonusdc;
     object* targets;
 
     if (!objectp(caster)) {
@@ -109,12 +114,19 @@ void execute_attack()
 
     targets = shuffle(targets);
 
+    bonusdc = flevel;
+    bonusdc += BONUS_D->query_stat_bonus(caster, "charisma");
+
     for (i = 0; i < sizeof(targets) && i < 8; i++) {
         if (targets[i] == caster) {
             continue;
         }
 
         if (!objectp(targets[i])) {
+            continue;
+        }
+
+        if (do_save(target, -bonusdc)) {
             continue;
         }
 
