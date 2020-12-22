@@ -72,7 +72,6 @@ void execute_feat()
     tell_room(place,"%^BOLD%^%^WHITE%^Closes their eyes an look distant for a split second.",caster);
 
     caster->set_property("using instant feat",1);
-    spell_kill(target,caster);
     return;
 }
 
@@ -103,8 +102,9 @@ void execute_attack()
     attackers = caster->query_attackers();
 
     allies = ob_party(caster) + (caster->query_followers() - caster->query_attackers()) + ({ caster });
-    allies = distinct_array(allies);
     allies = filter_array(allies, (: environment($1) == $2:), environment(caster));
+    allies = ({caster}) + allies;
+    allies = distinct_array(allies);
 
     dam = roll_dice(flevel, 6);
 
