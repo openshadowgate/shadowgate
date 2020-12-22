@@ -114,11 +114,10 @@ void execute_attack()
 
         tell_object(targets[i],"%^BOLD%^%^WHITE%^Your wounds and fatigue wash away in the melody.");
         targets[i]->cause_typed_damage(targets[i], targets[i]->return_target_limb(), -dam, "untyped");
-        "/std/magic/cleanse"->restore(target);
+        "/std/magic/cleanse"->restore(targets[i]);
     }
 
     dest_effect();
-    return;
 }
 
 void dest_effect()
