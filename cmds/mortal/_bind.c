@@ -50,7 +50,6 @@ int cmd_bind(string str)
     }  else {
         action = "some rope to bind";
     }
-
     what->remove();
     tell_room(ETP, "%^BOLD%^" + TPQCN + " uses " + action + " " + who->query_cap_name() + "'s hands and feet.", ({ TP, who }));
     tell_object(TP, "%^BOLD%^You use " + action + " " + who->query_cap_name() + "'s hands and feet.");
@@ -68,10 +67,17 @@ int cmd_bind(string str)
     if (who->query_property("submit_bind", TP)) {
         who->remove_property("submit_bind", TP);
     }
-//   who->set_bound( (int)TP->query_stats("wisdom") * (int)TP->query_stats("strength") * (random(5) +1));
+//   who->set_bound( (int)TP->query_stats("wisdom") * (int)TP->query_stats("strength") * (random(5) +1));     
+    if (who->query_bound()) {
+       who->set_bound(who->query_bound() + ((int)TP->query_skill("rope use") * 50));
+       TP->set_paralyzed(2, "You are busy binding " + who->query_cap_name());
+       return 1;
+       }
+    else{  
     who->set_bound(1000 + ((int)TP->query_skill("rope use") * 50));
     TP->set_paralyzed(5, "You are busy binding " + who->query_cap_name());
     return 1;
+    }
 }
 
 // updated help file to mention being able to tighten just by having rope and binding again.
