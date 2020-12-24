@@ -71,23 +71,27 @@ int wieldme(){
       return 1;
    }
    if(ETO->is_class("cleric") || ETO->is_class("druid")){
-      tell_object(ETO,"%^GREEN%^You feel a slight vibration as you "+
-         "wield the staff, and you know you can channel the power within.");
-      tell_room(EETO,"%^GREEN%^You hear a low hum as "+ETOQCN+" "+
-         "takes up the staff.",ETO);
-      return 1;
+       if (!ETO->query_property("silent_wield")) {
+           tell_object(ETO, "%^GREEN%^You feel a slight vibration as you " +
+               "wield the staff, and you know you can channel the power within.");
+           tell_room(EETO, "%^GREEN%^You hear a low hum as " + ETOQCN + " " +
+               "takes up the staff.", ETO);
+       }
+       return 1;
    }
    tell_object(ETO,"You have no idea how to use a staff such as this!");
    return 0;
 }
 
 int unwieldme(){
-   if(iced != 0){
-      remove_shield();
-      remove_call_out("remove_shield");
-   }
-   tell_object(ETO,"You set aside the power of the staff for now.");
-   return 1;
+    if (!ETO->query_property("silent_wield")) {
+        if (iced != 0) {
+            remove_shield();
+            remove_call_out("remove_shield");
+        }
+        tell_object(ETO, "You set aside the power of the staff for now.");
+    }
+    return 1;
 }
 
 int flame(string str){
@@ -268,4 +272,23 @@ void remove_shield()
         ETO->add_ac_bonus(-4);
         iced = 0;
         return 1;
+}
+
+int query_charges() {
+    return uses;
+}
+
+void set_charges(int c) {
+    uses = c;
+}
+
+void set_charges_empty() {
+    uses = MAXUSES + 1;
+}
+
+int query_charges_empty() {
+    if (uses > MAXUSES) {
+        return 1;
+    }
+    return 0;
 }

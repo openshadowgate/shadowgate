@@ -9,8 +9,10 @@ object owned,LOCUST;
 void init() {
     ::init();
     if(interactive(TP) && TP==environment(TO) && !owned) {
-	owned = TPQN;
-        uses = random((int)TP->query_level() * 10)+100;
+		owned = TPQN;
+		if (!uses) {
+			uses = random((int)TP->query_level() * 10) + 100;
+		}
     }
 }
 create() {
@@ -57,15 +59,19 @@ int extra_wield() {
 	write("The staff fails to bond with you and vanishes!");
 	TO->remove();
 	return 0;
-    }     
-    tell_object(ETO,"%^GREEN%^Your heart is filled with ancient anguish and sorrow!%^RESET%^");
-    tell_room(EETO,"%^GREEN%^A look of great sorrow crosses over "+ETOQCN+"'s face.%^RESET%^",ETO);
+    }
+	if (!ETO->query_property("silent_wield")) {
+		tell_object(ETO, "%^GREEN%^Your heart is filled with ancient anguish and sorrow!%^RESET%^");
+		tell_room(EETO, "%^GREEN%^A look of great sorrow crosses over " + ETOQCN + "'s face.%^RESET%^", ETO);
+	}
     return 1;
 }
 
 int extra_unwield() {
-    tell_object(ETO,"%^GREEN%^The feelings of sorrow leave your body.%^RESET%^");
-    tell_room(EETO,"%^GREEN%^"+ETOQCN+" appears happier now.%^RESET%^",ETO);
+	if (!ETO->query_property("silent_wield")) {
+		tell_object(ETO, "%^GREEN%^The feelings of sorrow leave your body.%^RESET%^");
+		tell_room(EETO, "%^GREEN%^" + ETOQCN + " appears happier now.%^RESET%^", ETO);
+	}
     return 1;
 }
 
@@ -232,4 +238,23 @@ int extra_hit(object vic){
 	    return dam;
 	}
     }
+}
+
+int query_charges() {
+	return uses;
+}
+
+void set_charges(int c) {
+	uses = c;
+}
+
+void set_charges_empty() {
+	uses = -1;
+}
+
+int query_charges_empty() {
+	if (uses < 0) {
+		return 1;
+	}
+	return 0;
 }

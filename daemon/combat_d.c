@@ -506,7 +506,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 void check_extra_abilities(object attacker, object target, object weapon, int crit_hit)
 {
     string ename, pname, enhance_msg, target_align;
-    int effect_chance, enhance_dmg, crit_mult, enhance_chance, is_main_hand, i;
+    int effect_chance, enhance_dmg, crit_mult, enhance_chance, is_main_hand, effective_level, i;
     object room, * weapons;
     string* elements, * actions, * bursts, * colors, * alignments, * enemy_alignments, * align_text, * a_colors;
 
@@ -568,17 +568,16 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             switch (element) {
             case "acid":
                 tell_room(environment(target), "%^GREEN%^The projectile explodes with ooze of acid all over " + target->QCN + "%^RESET%^", ({ target }));
-                tell_object(target, "%^GREEN%^The missile explodes with ooze of acid all over you%^RESET%^");                  break;
-
+                tell_object(target, "%^GREEN%^The missile explodes with ooze of acid all over you%^RESET%^");
+                break;
             case "cold":
                 tell_room(environment(target), "%^BLUE%^The projectile explodes with sharp shards of ice that pierce " + target->QCN + "%^RESET%^", ({ target }));
                 tell_object(target, "%^GREEN%^The missile explodes with ooze of acid all over you%^RESET%^");
                 break;
-
             case "sonic":
                 tell_room(environment(target), "%^CYAN%^The projectile explodes sonic scream that shatters " + target->QCN + "%^RESET%^", ({ target }));
-                tell_object(target, "%^GREEN%^The missile explodes with sonic scream that shatters you%^RESET%^");             break;
-
+                tell_object(target, "%^GREEN%^The missile explodes with sonic scream that shatters you%^RESET%^");
+                break;
             default:
                 tell_room(environment(target), "%^RED%^The projectile explodes and scorches " + target->QCN + "%^RESET%^", ({ target }));
                 tell_object(target, "%^GREEN%^The missile explodes and burns you!%^RESET%^");
@@ -630,10 +629,10 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         bursts = ({ "flames", "ice", "lightning", "sounds", "acid" });
         colors = ({ "fire red", "ice blue", "lightning yellow", "lightning yellow", "acid green" });
 
-        enhance_chance = attacker->query_prestige_level("magus");
-        enhance_chance += attacker->query_prestige_level("paladin");
-        enhance_chance += (attacker->query_level() - enhance_chance) / 2;
-        enhance_chance = 10 - enhance_chance / 7;
+        effective_level = attacker->query_prestige_level("magus");
+        effective_level += attacker->query_prestige_level("paladin");
+        effective_level += (attacker->query_level() - effective_level) / 2;
+        enhance_chance = 10 - effective_level / 7;
 
         for (i = 0; i < sizeof(elements); i++)
         {
@@ -642,10 +641,10 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             if ((attacker->query_property(elements[i] + " en_dam") && effect_chance) ||
                 (attacker->query_property(elements[i] + " en_dam burst") && crit_hit)) {
                 enhance_msg = bursts[i];
-                enhance_dmg = roll_dice(1, 6);
+                enhance_dmg = roll_dice(1 + effective_level / 10, 6);
                 if (crit_hit && attacker->query_property(elements[i] + " en_dam burst")) {
                     enhance_msg = actions[i] + " of " + bursts[i];
-                    enhance_dmg += roll_dice(crit_mult, 10);
+                    enhance_dmg += roll_dice(crit_mult * (1 + effective_level / 10), 10);
                 }
                 tell_object(attacker, CRAYON_D->color_string("You release " + enhance_msg + " at " + target->QCN + "!", colors[i]));
                 tell_object(target, CRAYON_D->color_string(attacker->QCN + " releases " + enhance_msg + "  through you!", colors[i]));
@@ -665,7 +664,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
                 effect_chance &&
                 strsrch(enemy_alignments[i], target_align + "") + 1) {
                 enhance_msg = align_text[i];
-                enhance_dmg = roll_dice(2, 6);
+                enhance_dmg = weapon->query_wc() * (1 + effective_level / 10); //scaling as bane
                 tell_object(attacker, CRAYON_D->color_string("You unleash your " + enhance_msg + " at " + target->QCN + "!", a_colors[i]));
                 tell_object(target, CRAYON_D->color_string(attacker->QCN + " unleashes " + attacker->query_possessive() + " " + enhance_msg + " through you!", a_colors[i]));
                 tell_room(environment(attacker), CRAYON_D->color_string(attacker->QCN + " unleashes " + attacker->query_possessive() + " " + enhance_msg + " at " + target->QCN + "!", a_colors[i]), ({ target, attacker }));
@@ -890,7 +889,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
                 mysize++;             //run small creatures as normal size please.
             }
             mysize -= (int)weapon->query_size();
-            if (FEATS_D->usable_feat(attacker, "weapon finesse") && (mysize >= 0)) { // if has-feat & weapon is smaller than / same size as user - Saide, November 23rd, 2017
+            if (FEATS_D->usable_feat(attacker, "weapon finesse") && ((mysize >= 0) || weapon->query_property("finesse"))) { // if has-feat & weapon is smaller than / same size as user - Saide, November 23rd, 2017 or weapon has the property - Venger dec20
                 damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("dexterity"));
             }else {
                 damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("strength"));

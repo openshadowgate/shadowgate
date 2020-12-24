@@ -22,31 +22,13 @@ void create()
         " together smoothly and seem to almost be moving in some"+
         " sort of pattern.%^RESET%^\n"
         );
-        switch(random(2)) {
-                case 0:
-                        set_size(2);
-                        //set_ac(0);
-                        //set_weight(6);
-                        break;
-                case 1:
-                        set_size(3);
-                        //set_ac(2);
-                        //set_weight(8);
-                        break;
-        }
+        set_size(2 + random(2));
         set_value(2500);
         //set_wc(1,8);
         //set_large_wc(1,10);
         //set_type("bludgeoning");
         //set_prof_type("staff");
-        switch(random(2)) {
-	          case 0:
-                        set_property("enchantment",2);
-                        break;
-                case 1:
-                        set_property("enchantment",3);
-                        break;
-        }
+        set_property("enchantment", 2 + random(2));
         set_wield((:TO,"wieldme":));
         set_unwield((:TO,"removeme":));
         set_hit((:TO,"hitme":));
@@ -66,29 +48,29 @@ void create()
 
 int wieldme()
 {
-        if(ETO->is_class("cleric")) {
-                tell_object(ETO,"%^BOLD%^%^GREEN%^You sense a power within the"+
+    if (!ETO->query_property("silent_wield")) {
+        if (ETO->is_class("cleric")) {
+            tell_object(ETO, "%^BOLD%^%^GREEN%^You sense a power within the" +
                 " staff.");
-                return 1;
         }
         else {
-                tell_object(ETO,"%^GREEN%^The staff feels pleasantly cool to your"+
+            tell_object(ETO, "%^GREEN%^The staff feels pleasantly cool to your" +
                 " touch.");
-                return 1;
         }
+    }
+    return 1;
 }
 
 int removeme()
 {
-        if(ETO->is_class("cleric")) {
-                tell_object(ETO,"%^BOLD%^%^GREEN%^You sigh and set the staff to the"+
+    if (!ETO->query_property("silent_wield")) {
+        if (ETO->is_class("cleric")) {
+            tell_object(ETO, "%^BOLD%^%^GREEN%^You sigh and set the staff to the" +
                 " side for now.");
-                tell_room(ETO,"%^BOLD%^%^GREN%^"+ETO->QCN+" sighs deeply.",ETO);
-                return 1;
+            tell_room(ETO, "%^BOLD%^%^GREN%^" + ETO->QCN + " sighs deeply.", ETO);
         }
-        else {
-                return 1;
-        }
+    }
+    return 1;
 }
 
 int hitme(object targ)

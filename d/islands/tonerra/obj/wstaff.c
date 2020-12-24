@@ -34,18 +34,19 @@ void create(){
 }
 
 int wieldme(){
-   set_property("magic",1);
-   if(!interactive(TP)) return 1;
-
-   tell_object(TP,"%^BOLD%^%^RED%^You are burned horribly by the staff.");
-  if(TP->is_class("cleric"))
-   TP->do_damage("torso",roll_dice(3,10));
-else
-	TP->do_damage("torso",roll_dice(5,10));
-   TP->add_attacker(TO);
-   TP->continue_attack();
-     TP->remove_attacker(TO);
-   return 1;
+    set_property("magic",1);
+    if(!interactive(TP)) return 1;
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(TP, "%^BOLD%^%^RED%^You are burned horribly by the staff.");
+        if (TP->is_class("cleric"))
+            TP->do_damage("torso", roll_dice(3, 10));
+        else
+            TP->do_damage("torso", roll_dice(5, 10));
+        TP->add_attacker(TO);
+        TP->continue_attack();
+        TP->remove_attacker(TO);
+    }
+    return 1;
 }
 
 int hitme(object targ){

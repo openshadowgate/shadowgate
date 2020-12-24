@@ -12,7 +12,9 @@ void init() {
    ::init();
    if(interactive(TP) && TP == environment(TO) && !wizardp(TP) && !owner) {
       owner = TPQN;
-      charges = 20 + random( (int)TP->query_level()/3 );
+      if (!charges) {
+          charges = 20 + random((int)TP->query_level() / 3);
+      }
    }
 }
 
@@ -59,9 +61,11 @@ int more_wield() {
             case 1:
             case 2:
             case 3:
-               tell_room(environment(ETO),"The %^RESET%^%^YELLOW%^"+
-                  "Firedoom staff %^RESET%^makes a loud noise as if it "+
-                  "cheers.");
+                if (!ETO->query_property("silent_wield")) {
+                    tell_room(environment(ETO), "The %^RESET%^%^YELLOW%^" +
+                        "Firedoom staff %^RESET%^makes a loud noise as if it " +
+                        "cheers.");
+                }
                return 1;
                break;
             default:
@@ -127,4 +131,23 @@ int more_hit(object victim) {
          charges -= 2;
          return 0;
    }
+}
+
+int query_charges() {
+    return charges;
+}
+
+void set_charges(int c) {
+    charges = c;
+}
+
+void set_charges_empty() {
+    charges = -1;
+}
+
+int query_charges_empty() {
+    if (charges < 0) {
+        return 1;
+    }
+    return 0;
 }

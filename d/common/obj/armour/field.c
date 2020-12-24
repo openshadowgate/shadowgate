@@ -16,7 +16,7 @@ void create() {
 	"armor hampers movement only slightly."
        );
     set_weight(32);
-    set("value", 2000);
+    set("value", 1500);
     set_type("armour");
     set_limbs( ({ "torso" }) );
     set_ac(8);

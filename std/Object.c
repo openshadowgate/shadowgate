@@ -1857,22 +1857,22 @@ void temp_hit()
     }
 
     file = info["file"];
-    func_name = info["func name"];
+func_name = info["func name"];
 
-    if (!file_exists(file + ".c")) {
-        return;
-    }
-    if (!stringp(func_name)) {
-        return;
-    }
-
-    if (!objectp(item = TO->query_property("temp_hit_item"))) {
-        item = find_object_or_load(file);
-        TO->set_property("temp_hit_item", item);
-    }
-
-    call_other(item, func_name, TO);
+if (!file_exists(file + ".c")) {
     return;
+}
+if (!stringp(func_name)) {
+    return;
+}
+
+if (!objectp(item = TO->query_property("temp_hit_item"))) {
+    item = find_object_or_load(file);
+    TO->set_property("temp_hit_item", item);
+}
+
+call_other(item, func_name, TO);
+return;
 }
 
 //varargs int property_special(mixed arg, object enemy_weapon, object attacker)
@@ -1881,7 +1881,7 @@ mixed query_hit()
     function f;
     temp_hit();
     if (query_property("hit")) {
-        f = (: TO, "property_special" :);
+        f = (: TO, "property_special" : );
         set_property("fhit", 1);
         return (*f)(1);
     }
@@ -1893,7 +1893,7 @@ mixed query_lrhit()
     function f;
     temp_hit();
     if (query_property("hit")) {
-        f = (: TO, "property_special" :);
+        f = (: TO, "property_special" : );
         set_property("flrhit", 1);
         return (*f)(1);
     }
@@ -1934,16 +1934,17 @@ void __ActuallyUnwield()
     }
     if (TO->query_property("funwield")) {
         unwieldf = TO->query_unwield();
-        f = (: call_other, TO, unwieldf:);
+        f = (: call_other, TO, unwieldf : );
         if ((!"/adm/daemon/shutdown_d"->shuttingDown()) && (query_verb() != "quit") && interactive(ETO)) {
-            catchbug = catch(answer = (*f)());
+            catchbug = catch (answer = (*f)());
             if (catchbug) {
                 write(catchbug);
             }
             if (!answer) {
                 return 1;
             }
-        } else {
+        }
+        else {
             if (!(*f)()) {
                 return 1;
             }
@@ -1956,14 +1957,19 @@ void __ActuallyUnwield()
     wielded->remove_weapon_from_limb(this_object());
     if (stringp(unwieldf) && !query_property("funwield")) {
         message("my_action", unwieldf, wielded);
-    }else {
-        message("my_action", "You unwield " + query_short() + ".",
+    }
+    else {
+        if (!wielded->query_property("silent_wield")){
+            message("my_action", "You unwield " + query_short() + ".",
                 wielded);
+        }
     }
     if (objectp(environment(wielded))) {
-        message("other_action", (string)wielded->query_cap_name() +
+        if (!wielded->query_property("silent_wield")) {
+            message("other_action", (string)wielded->query_cap_name() +
                 " unwields " + query_short() + ".", environment(wielded),
                 ({ wielded }));
+        }
     }
     set_not_inhand();
 }

@@ -68,20 +68,24 @@ int wield_fun(){
          }
          break;
    }
-   tell_room(EETO,"%^BOLD%^A barely audible hum originates from the "+
-      "pike as "+ETOQCN+" wields it.%^RESET%^",ETO);
-   tell_object(ETO,"%^BOLD%^As you wield the pike, a barely audible "+
-      "hum becomes apparent.%^RESET%^");
+   if (!ETO->query_property("silent_wield")) {
+	   tell_room(EETO, "%^BOLD%^A barely audible hum originates from the " +
+		   "pike as " + ETOQCN + " wields it.%^RESET%^", ETO);
+	   tell_object(ETO, "%^BOLD%^As you wield the pike, a barely audible " +
+		   "hum becomes apparent.%^RESET%^");
+   }
    return 1;
 }
 
 int unwield_fun(){
-   tell_room(EETO,"%^BOLD%^%^CYAN%^"+ETOQCN+" sways and blinks "+
-      ""+ETO->QP+" eyes as the pike leaves "+ETO->QP+" hands."+
-	  "%^RESET%^",ETO);
-   tell_object(ETO,"%^BOLD%^%^CYAN%^As you unwield the pike, you "+
-      "become lightheaded and nearly fall to the ground.%^RESET%^");
-   return 1;
+	if (!ETO->query_property("silent_wield")) {
+		tell_room(EETO, "%^BOLD%^%^CYAN%^" + ETOQCN + " sways and blinks " +
+			"" + ETO->QP + " eyes as the pike leaves " + ETO->QP + " hands." +
+			"%^RESET%^", ETO);
+		tell_object(ETO, "%^BOLD%^%^CYAN%^As you unwield the pike, you " +
+			"become lightheaded and nearly fall to the ground.%^RESET%^");
+	}
+	return 1;
 }
 
 int hit_fun(object targ){

@@ -36,6 +36,7 @@ void create() {
     set_wield((:this_object(), "extra_wield":));
     set_unwield((:this_object(), "extra_unwield":));
 }
+
 int extra_hit(object ob) {
     int zz,dam,cost;
     object vic = ETO->query_current_attacker();
@@ -219,6 +220,7 @@ int extra_hit(object ob) {
             return dam;
     }
 }
+
 void heart_beat() {
     object owner,env,obj;
     if(!objectp(TO)) return;
@@ -322,6 +324,7 @@ void heart_beat() {
     }
     return;
 }
+
 int word_func() {
     object victim = ETO->query_current_attacker();
     object ob = ETO->query_current_attacker();
@@ -376,6 +379,7 @@ int word_func() {
         return 1;
     }
 }
+
 int extra_wield() {
     if(!ETO->is_class("mage") && !ETO->is_class("bard")) {
         tell_object(ETO,"You will never wield this!\n");
@@ -394,31 +398,57 @@ int extra_wield() {
             return 0;
         }
     }
-    write(
-         "%^BOLD%^%^RED%^The staff tells you: %^RESET%^I am ready to serve "
-         "master. I am hungry for energy as always."
-         "\n%^RED%^The staff giggles inanely.%^RESET%^"
-         );
-    say(
-       "%^RED%^"+ETO->query_cap_name()+" cackles insanely!%^RESET%^"
-       );
-    charges = 0;
-    return 1;
-}
-int extra_unwield() {
-    countdown = countdown + 1;
-    charges = 0;
-    write(
-         "The staff tells you: WAIT!!! What "
-         "are you doing?!? Have I not served well enough?"
-         );
-    if(countdown > (int)ETO->query_stats("wisdom") * 3) {
+    if (!ETO->query_property("silent_wield")) {
         write(
-             "The staff tells you: Your puny mind "
-             "does not deserve to control me!"
-             "\nThe staff vanishes!"
-             );
-        call_out("remove",1);
+            "%^BOLD%^%^RED%^The staff tells you: %^RESET%^I am ready to serve "
+            "master. I am hungry for energy as always."
+            "\n%^RED%^The staff giggles inanely.%^RESET%^"
+        );
+        say(
+            "%^RED%^" + ETO->query_cap_name() + " cackles insanely!%^RESET%^"
+        );
+        charges = 0;
     }
     return 1;
+}
+
+int extra_unwield() {
+    if (!ETO->query_property("silent_wield")) {
+        countdown = countdown + 1;
+        charges = 0;
+        write(
+            "The staff tells you: WAIT!!! What "
+            "are you doing?!? Have I not served well enough?"
+        );
+        if (countdown > (int)ETO->query_stats("wisdom") * 3) {
+            write(
+                "The staff tells you: Your puny mind "
+                "does not deserve to control me!"
+                "\nThe staff vanishes!"
+            );
+            call_out("remove", 1);
+        }
+    }
+    return 1;
+}
+
+void query_charges()
+{
+    return charges;
+}
+
+void set_charges(int x)
+{
+    charges = x;
+}
+
+void set_charges_empty() {
+    charges = -1;
+}
+
+int query_charges_empty() {
+    if (charges < 0) {
+        return 1;
+    }
+    return 0;
 }

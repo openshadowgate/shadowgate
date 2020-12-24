@@ -25,17 +25,20 @@ create() {
    set_property("enchantment",2);
    set_item_bonus("attack bonus",1);
    set_item_bonus("damage bonus",2);
-      set_wield((:this_object(),"wield_func":));
+   set_wield((:TO,"wield_func":));
    set_hit((:TO,"hit_func":));
 }
+
 int wield_func(){
-   if((int)ETO->query_level() < 15) {
-      tell_object(ETO,"%^RESET%^%^RED%^You do not have the power to wield such an awesome weapon yet!%^RESET%^");
-                return 0;
-   }
-      tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETOQCN+" grips the shaft of the weapon and quickly slashes one end to the right and the other to the left.%^RESET%^",ETO);
-      tell_object(ETO,"%^BOLD%^%^BLACK%^You grip the shaft of the weapon and quickly slash one blade to the right and the other to the left.%^RESET%^");
-      return 1;
+    if((int)ETO->query_level() < 15) {
+        tell_object(ETO,"%^RESET%^%^RED%^You do not have the power to wield such an awesome weapon yet!%^RESET%^");
+        return 0;
+    }
+    if (!ETO->query_property("silent_wield")) {
+        tell_room(environment(ETO), "%^BOLD%^%^BLACK%^" + ETOQCN + " grips the shaft of the weapon and quickly slashes one end to the right and the other to the left.%^RESET%^", ETO);
+        tell_object(ETO, "%^BOLD%^%^BLACK%^You grip the shaft of the weapon and quickly slash one blade to the right and the other to the left.%^RESET%^");
+    }
+    return 1;
 }
 
 int hit_func(object target) {

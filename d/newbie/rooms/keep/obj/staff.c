@@ -29,13 +29,17 @@ void create() {
 }
 
 int wieldme() {
-   tell_room(EETO,"%^ORANGE%^The staff's orb takes on a %^CYAN%^soft glow%^ORANGE%^.%^RESET%^");
-   return 1;
+    if (!ETO->query_property("silent_wield")) {
+        tell_room(EETO, "%^ORANGE%^The staff's orb takes on a %^CYAN%^soft glow%^ORANGE%^.%^RESET%^");
+    }
+    return 1;
 }
 
 int removeme() {
-   tell_room(EETO,"%^ORANGE%^The orb atop the staff stops glowing again.%^RESET%^");
-   return 1;
+    if (!ETO->query_property("silent_wield")) {
+        tell_room(EETO, "%^ORANGE%^The orb atop the staff stops glowing again.%^RESET%^");
+    }
+    return 1;
 }
 
 int hitme(object targ){

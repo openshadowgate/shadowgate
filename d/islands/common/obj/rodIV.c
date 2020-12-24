@@ -77,7 +77,9 @@ int wieldme()
         uses = uses + 50;
         return 0;
     }
-    write("%^BOLD%^%^RED%^You grip the rod firmly and a strange sense of power overcomes you.");
+    if (!ETO->query_property("silent_wield")) {
+        write("%^BOLD%^%^RED%^You grip the rod firmly and a strange sense of power overcomes you.");
+    }
     return 1;
 }
 
@@ -684,4 +686,23 @@ int consume_fun()
         notify_fail("There is no corpse present!\n");
         return 0;
     }
+}
+
+int query_charges() {
+    return uses;
+}
+
+void set_charges(int c) {
+    uses = c;
+}
+
+void set_charges_empty() {
+    uses = -1;
+}
+
+int query_charges_empty() {
+    if (uses < 0) {
+        return 1;
+    }
+    return 0;
 }

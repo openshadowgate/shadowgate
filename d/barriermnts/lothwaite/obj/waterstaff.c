@@ -37,7 +37,7 @@ CIRCE
    set_value(800);
    set_property("enchantment",2);
    set_wield((:TO,"wieldme":));
-   set_unwield("You set aside the power of the staff for now.");
+   set_unwield((:TO,"unwieldme":));
 }
 
 int wieldme(){
@@ -49,9 +49,18 @@ int wieldme(){
          "from the staff as if suddenly frozen.",ETO);
       return 0;
    }
-   tell_object(ETO,"%^CYAN%^You feel the ice inside the staff as "+
-      "you wield it!");
+   if (!ETO->query_property("silent_wield")) {
+       tell_object(ETO, "%^CYAN%^You feel the ice inside the staff as " +
+           "you wield it!");
+   }
    return 1;
+}
+
+int unwieldme() {
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, "You set aside the power of the staff for now.");
+    }
+    return 1;
 }
 
 void init(){
@@ -97,11 +106,29 @@ int ice(string str){
    }
 }
 
-
 int remove_shield()
 {
         tell_room(EETO,"%^CYAN%^The ice shield melts away.");
         ETO->add_ac_bonus(-2);
         iced = 0;
         return 1;
+}
+
+int query_charges() {
+    return uses;
+}
+
+void set_charges(int c) {
+    uses = c;
+}
+
+void set_charges_empty() {
+    uses = MAXUSES + 1;
+}
+
+int query_charges_empty() {
+    if (uses > MAXUSES) {
+        return 1;
+    }
+    return 0;
 }
