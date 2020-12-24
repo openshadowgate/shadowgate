@@ -212,7 +212,10 @@ int caster_level_calcs(object player, string the_class)
 
 mapping class_featmap(string myspec)
 {
-    return ([ 1 : ({ "enhance scroll", "scribe" }), 4 : ({ "insightful scroll" }), 7 : ({ "clone scroll" }), ]);
+    return ([ 1 : ({ "enhance scroll" }), 4 : ({ "insightful scroll" }), 7 : ({ "clone scroll" }), ]);
+  // Had "scribe" in here, but it was causing recursion errors. Please don't put it back in without testing.
+  // @@evilbunny@@
+  // <3 Garrett.
 }
 
 string* class_skills(object ob)
