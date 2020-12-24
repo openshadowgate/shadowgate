@@ -41,9 +41,7 @@ set_caster(object ob)
 }
 
 object* query_mons()
-
 {
-  if (clean_mons()) { return 0;}
     return mons;
 }
 
@@ -63,9 +61,8 @@ void add_monster(object obj)
 int clean_mons()
 {
     object* temp = ({});
-    int i, j;
-    int poolsize, * my_undead = ({}); //consider using a mapping instead
-
+    int i;
+    int poolsize;
 
     for (i = 0; i < sizeof(mons); i++) {
         if (!objectp(mons[i])) {
@@ -73,10 +70,6 @@ int clean_mons()
         }
         temp += ({ mons[i] });
         poolsize += (int)mons[i]->query_property("raised");
-        for (j = 0; j < sizeof(undead_list); j++) {
-            my_undead += ({ 0 });
-            my_undead[j] += (int)mons[i]->query_property("raised " + undead_list[j]);
-        }
     }
     if (!sizeof(temp)) {
         if (objectp(TO)) {
@@ -87,10 +80,6 @@ int clean_mons()
 
     caster->remove_property("raised");
     caster->set_property("raised", poolsize);
-    for (j = 0; j < sizeof(undead_list); j++) {
-        caster->remove_property("raised " + undead_list[j]);
-        caster->set_property("raised " + undead_list[j], my_undead[j]);
-    }
 
     mons = temp;
     return 0;
@@ -114,9 +103,6 @@ void remove()
     }
     if (objectp(caster)) {
         caster->remove_property("raised");
-        for (i = 0; i < sizeof(undead_list); i++) {
-            caster->remove_property("raised " + undead_list[i]);
-        }
     }
     return ::remove();
 }
@@ -131,24 +117,14 @@ void init()
 
 int poolsize(string str)
 {
-    int i, pool, * my_undead = ({});
-    string b_msg;
+    int pool;
 
     clean_mons();
-    pool = (int)caster->query_property("raised") + (int)caster->query_property("raised skelehorse");
-    for (i = 0; i < sizeof(undead_list); i++) {
-        my_undead += ({ 0 });
-        my_undead[i] += (int)caster->query_property("raised " + undead_list[i]);
-    }
+    pool = (int)caster->query_property("raised");
     if (pool) {
         tell_object(caster, "%^BOLD%^%^BLACK%^YOUR UNDEAD POOL IS FILLED WITH %^WHITE%^" + pool + "%^BLACK%^ UNDEAD.%^RESET%^");
-        for (i = 0; i < sizeof(undead_list); i++) {
-            if (my_undead[i]) {
-                tell_object(caster, "%^BOLD%^%^BLACK%^YOU HAVE POWER OVER %^WHITE%^" + my_undead[i] + "%^BLACK%^ " + capitalize(replace_string(undead_list[i], " ", "_")) + ".%^RESET%^");
-            }
-        }
     }else {
-        tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^THERE IS NO DEAD THAT FOLLOWS %^BLACK%^Y%^BLACK%^O%^BLACK%^U%^RESET%^");
+        tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^THERE IS NO DEAD THAT FOLLOWS %^BLACK%^Y%^BLACK%^O%^BLACK%^U%^RESET%^%^RESET%^");
     }
 
     return 1;
@@ -158,14 +134,14 @@ int cmd(string str)
 {
     object ob;
     string what, who, what2, holder;
-    int i, j, flag;
+    int i, flag;
 
     if (clean_mons()) {
         return 0;
     }
 
     if (!str) {
-        return notify_fail("%^RESET%^%^BOLD%^%^BLACK%^PROVIDE YOUR DEMANDS%^RESET%^%^RESET%^");
+        return notify_fail("%^RESET%^%^BOLD%^%^BLACK%^PROVIDE YOUR DEMMANDS%^RESET%^%^RESET%^");
     }
 
     if (sscanf(str, "%s to %s", who, what) != 2) {
@@ -187,27 +163,6 @@ int cmd(string str)
         }
     }
 
-    if (what == "mount") {
-        flag = 1;
-        for (i = 0; i < sizeof(mons); i++) {
-            if (!objectp(mons[i])) {
-                continue;
-            }
-            if (!present(mons[i], environment(caster))) {
-                continue;
-            }
-            if (!mons[i]->query_property("raised graveknight")) {
-                continue;
-            }
-            for (j = 1; j < 5; j++) {
-                if (mons[i]->force_me(what + " skelehorse " + j)) {
-                    continue;
-                }
-            }
-        }
-        return 1;
-    }
-
     if (what == "follow") {
         flag = 1;
         for (i = 0; i < sizeof(mons); i++) {
@@ -224,9 +179,6 @@ int cmd(string str)
     }
 
     for (i = 0; i < sizeof(mons); i++) {
-        if (mons[i]->query_property("raised skelehorse")) {
-            continue;
-        }
         if (!mons[i]->force_me(what)) {
             continue;
         }
@@ -241,7 +193,7 @@ int dismiss(string str)
     if (!str || str != "undead") {
         return 0;
     }
-    tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^THE SOULS %^BLACK%^R%^BLACK%^E%^BLACK%^J%^BLACK%^O%^BLACK%^I%^BLACK%^C%^BLACK%^E%^BLACK%^ IN %^BLACK%^F%^BLACK%^R%^BLACK%^E%^BLACK%^E%^BLACK%^D%^BLACK%^O%^BLACK%^M%^RESET%^");
+    tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^THE SOULS %^BLACK%^R%^BLACK%^E%^BLACK%^J%^BLACK%^O%^BLACK%^I%^BLACK%^C%^BLACK%^E%^BLACK%^ IN %^BLACK%^F%^BLACK%^R%^BLACK%^E%^BLACK%^E%^BLACK%^D%^BLACK%^O%^BLACK%^M%^RESET%^%^RESET%^");
     tell_room(environment(caster), "%^BOLD%^%^GREEN%^The undead creature crumble to dust!%^", ({ caster }));
     remove();
     return 1;

@@ -32,25 +32,23 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec)
+string* class_feats(string myspec)
 {
     return ({ "simple weapon proficiency",
-            "martial weapon proficiency",
-           "light armor proficiency",
-           "medium armor proficiency",
-          "dodge",
-         "spell focus" });
+                "martial weapon proficiency",
+                "light armor proficiency",
+                "medium armor proficiency",
+                "dodge",
+                "spell focus" });
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "simple weapon proficiency", "martial weapon proficiency", "light armor proficiency", "medium armor proficiency","shield proficiency", "spell focus","rally","dodge" }), 5 : ({ "indomitable" }), 8 : ({ "anger" }), 10 : ({ "tools of the trade" }), 11 : ({ "calm" }),  14 : ({ "force of personality" }), 17 : ({ "charm" }), ]);
+    return ([ 1:({ "simple weapon proficiency", "martial weapon proficiency", "light armor proficiency","shield proficiency", "spell focus","inspire","inspire courage", "dodge", "countersong"}), 3:({"inspire competence"}), 8:({"dirge of doom"}), 9:({"inspire greatness"}), 10:({ "tools of the trade" }), 12:({"soothing song"}), 14:({"frightening tune"}), 15:({"inspire heroics"}), 20:({"deadly song"})]);
 }
 
 string *class_skills()
 {
-// disguise temporarily disabled, please restore the first line when the command is installed. N, 1/14.
-//    return ({ "academics","disguise","influence","spellcraft","athletics"});
-    return ({ "academics","thievery","influence","spellcraft","athletics" });  //adding in athletics as tumble is a class skill
+    return ({ "academics","thievery","influence","spellcraft","athletics" });
 }
 
 int skill_points() { return 6; }

@@ -19,6 +19,7 @@ void create()
     set_description("You create a storm of necrotic energy that destroys every living in sight. Any humanoid caught in the storm will replenish your health and bloodlust at the expense of its life .");
     set_verbal_comp();
     set_somatic_comp();
+    set_blood_magic();
     aoe_spell(1);
     set_aoe_message("%^BOLD%^%^BLACK%^(pl%^RESET%^%^RED%^%^BOLD%^un%^RESET%^%^RED%^ge%^BOLD%^%^BLACK%^%^RESET%^%^RED%^d in%^BOLD%^%^BLACK%^to %^RESET%^%^RED%^a %^RESET%^%^RED%^blood%^BOLD%^s%^RESET%^%^RED%^to%^BOLD%^%^BLACK%^rm)%^RESET%^");
 }

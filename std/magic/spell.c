@@ -84,6 +84,7 @@ int spell_level,
     permanent,
     evil_spell,
     mental_spell,
+    blood_magic,
     end_time;
 
 
@@ -603,6 +604,16 @@ int query_helpful()
 void set_helpful_spell(int x)
 {
     help_or_harm = x;
+}
+
+void set_blood_magic()
+{
+    blood_magic = 1;
+}
+
+void query_blood_magic()
+{
+    return blood_magic;
 }
 
 int check_reflection()
@@ -2475,6 +2486,7 @@ int spell_kill(object victim, object caster)
 
     // Non link-dead users have to excercise their own judgement.
     if (interactive(victim)) {
+        victim->set_property("last_attacker", caster);
         return 0;
     }
 
@@ -3424,7 +3436,7 @@ void help()
     write("%^BOLD%^%^RED%^Class:%^RESET%^ " + (affixed_level ? ("(L" + affixed_level + " fixed) ") : "") + printclass);
 
     if (spell_sphere) {
-        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ " + spell_sphere + (spell_domain ? (" [" + spell_domain + "]") : "") + (evil_spell ? " [evil]" : "") + (mental_spell ? " [mind-affecting]" : ""));
+        write("%^BOLD%^%^RED%^Sphere:%^RESET%^ " + spell_sphere + (spell_domain ? (" [" + spell_domain + "]") : "") + ((evil_spell || blood_magic) ? " [evil]" : "") + (blood_magic ? " [blood]" : "")+ (mental_spell ? " [mind-affecting]" : ""));
     }
 
     if (sizeof(divine_domains)) {

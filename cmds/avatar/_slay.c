@@ -19,11 +19,16 @@ varargs int cmd_slay(string str)
     notify_fail("You can only slay living things\n");
     return 0;
   }
-  if (interactive(targ)){
+  if (avatarp(TP) && interactive(targ)){
     notify_fail("You can't slay players - only mobs & NPCs. You"
                     +" still you have to kill players by hand.\n");
     return 0;
   }
+  if (avatarp(targ)) {
+    notify_fail("You can't slay avatars or above with this command.");
+    return 0;
+  }
+  
   targ->die(TP);
   tell_object(TP, "You slay " + str);
   return 1;

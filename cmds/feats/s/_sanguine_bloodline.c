@@ -10,7 +10,7 @@ void create()
     feat_category("VampireLord");
     feat_name("sanguine bloodline");
     feat_prereq("Vampire Lord L7");
-    feat_desc("Through forming greater bloodline, you gain ability to control ancient blood magic in a limited fashion and gain unique spells. This feat adds some hemomancy abilities to innate spell list.");
+    feat_desc("Through forming greater bloodline, you gain ability to control ancient blood magic in a limited fashion and gain unique spells. This feat adds some hemomancy abilities to innate spell list: blood cauldron, blood pyre, blood raze, night auspex, mytherceria, harvest of tyrannos.");
     permanent(1);
 }
 

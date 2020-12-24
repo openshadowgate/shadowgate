@@ -12,13 +12,23 @@ void create(){
     set_short("%^RESET%^%^BLUE%^V%^BOLD%^%^BLUE%^ampi%^RESET%^%^BLUE%^r%^BOLD%^%^BLUE%^e %^BLUE%^s%^RESET%^%^BLUE%^p%^BOLD%^%^BLUE%^a%^RESET%^%^BLUE%^w%^BOLD%^%^BLUE%^n%^RESET%^");
     set_long("%^RED%^A disfigured humanoid figure stands in front of you. It is hard to say what it has been in its former life. Its skin is gray, it is slightly crouching its lithe athletic body on its elongated limbs. It has long bat-like ears, and the face is disfigured with the large jaw that has long fangs protruding out of the mouth. Its eyes glow red with supernatural hatred and hunger.");
     set_race("human");
+    set_gender("male");
+
+    set_size(2);
     set_class("fighter");
 
     set_guild_level("fighter",6);
     set_level(8);
     set_hd(8,8);
 
+    set_max_hp(random(30)+255);
+    set_hp(query_max_hp());
+
+    set_wielding_limbs(({"right hand","left hand"}));
+    set_property("undead",1);
     set_property("vampire",1);
+    set_body_type("human");
+    set_property("full attacks",1);
     set_property("fast healing",5);
 
     set_property("spell damage resistance",5);

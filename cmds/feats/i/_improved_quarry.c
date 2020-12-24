@@ -26,7 +26,7 @@ void create()
     feat_category("WildernessLore");
     feat_name("improved quarry");
     feat_desc("This feat makes your quarry better by providing an additional "+
-"+2 to attack rolls against them. You also will never fail to track your quarry " +
+"+2 to attack and damage rolls against them. You also will never fail to track your quarry " +
 "unless they are also a Ranger.");
     permanent(1);
 }

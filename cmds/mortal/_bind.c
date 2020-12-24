@@ -1,7 +1,5 @@
 #include <std.h>
 
-inherit DAEMON;
-
 int cmd_bind(string str)
 {
     object who;
@@ -14,27 +12,33 @@ int cmd_bind(string str)
     }
 
     if (!str) {
-        return notify_fail("Bind who??\n");
+        tell_object(TP, "Bind who?\n");
+        //return notify_fail("Bind who??\n");
     }
 
     if (!who = present(str, ETP)) {
-        return notify_fail("That is not here.\n");
+        tell_object(TP, "That is not here.\n");
+        //return notify_fail("That is not here.\n");
     }
     if (!TP->ok_to_kill(who)) {
-        return notify_fail("Supernatural forces prevent you from doing that.\n");
+        tell_object(TP, "Supernatural forces prevent you from doing that.\n");
+        //return notify_fail("Supernatural forces prevent you from doing that.\n");
     }
 
     if (!userp(who) && !who->is_townsman()) {
-        return notify_fail("Binding can only be done in RP situations.\n");
+        tell_object(TP, "Binding can only be done in RP situations.\n");
+        //return notify_fail("Binding can only be done in RP situations.\n");
     }
 
     if (sizeof(TP->query_attackers())) {
-        return notify_fail("You're too busy right now.\n");
+        tell_object(TP, "You're too busy right now.\n");
+        //return notify_fail("You're too busy right now.\n");
     }
 
     if (!what = present("rope", TP)) {
         if (!what = present("rope", ETP)) {
-            return notify_fail("You need rope to bind someone.\n");
+            tell_object(TP, "You need rope to bind someone.\n");
+            //return notify_fail("You need rope to bind someone.\n"); Why is this failing to work now?
         }
     }
     if (!who->query_unconscious() && !who->query_property("submit_bind", TP) &&
@@ -50,7 +54,6 @@ int cmd_bind(string str)
     }  else {
         action = "some rope to bind";
     }
-
     what->remove();
     tell_room(ETP, "%^BOLD%^" + TPQCN + " uses " + action + " " + who->query_cap_name() + "'s hands and feet.", ({ TP, who }));
     tell_object(TP, "%^BOLD%^You use " + action + " " + who->query_cap_name() + "'s hands and feet.");
@@ -68,10 +71,17 @@ int cmd_bind(string str)
     if (who->query_property("submit_bind", TP)) {
         who->remove_property("submit_bind", TP);
     }
-//   who->set_bound( (int)TP->query_stats("wisdom") * (int)TP->query_stats("strength") * (random(5) +1));
+//   who->set_bound( (int)TP->query_stats("wisdom") * (int)TP->query_stats("strength") * (random(5) +1));     
+    if (who->query_bound()) {
+       who->set_bound(who->query_bound() + ((int)TP->query_skill("rope use") * 50));
+       TP->set_paralyzed(2, "You are busy binding " + who->query_cap_name());
+       return 1;
+       }
+    else{  
     who->set_bound(1000 + ((int)TP->query_skill("rope use") * 50));
     TP->set_paralyzed(5, "You are busy binding " + who->query_cap_name());
     return 1;
+    }
 }
 
 // updated help file to mention being able to tighten just by having rope and binding again.

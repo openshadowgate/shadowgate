@@ -37,7 +37,7 @@ spell_effect(int prof)
             target->remove_attacker(attacker);
             attacker->remove_attacker(target);
         }
-        tell_room(place,"%^BOLD%^%^MAGENTA%^"+target->QCN+" flashes a friendly smile at everyone.%^RESET%^");
+        tell_room(place,"%^BOLD%^%^MAGENTA%^"+target->QCN+" ceases all attacks, appearing to be tranquil for the moment..%^RESET%^");
     }
     else
     {
