@@ -659,8 +659,8 @@ int double_weapon_fun(string str) {
 
     ob1 = createWeapon(this_weapon[0]);
     ob2 = createWeapon(this_weapon[0]);
-    ob1->set_charges(-1);
-    ob2->set_charges(-1);
+    ob1->set_charges_empty();
+    ob2->set_charges_empty();
     if (charges = this_weapon[0]->query_charges()) {
         ob1->set_charges(charges);
     }
@@ -688,7 +688,7 @@ int single_weapon_fun(string str) {
     if (sizeof(this_weapon)) {
         item_name = this_weapon[0]->query_name();
         ob = createWeapon(this_weapon[0]);
-        ob->set_charges(-1);
+        ob->set_charges_empty();
         if (this_weapon[0]->query_charges() > 0) {
             ob->set_charges(this_weapon[0]->query_charges());
         }else if (this_weapon[1]->query_charges() > 0) {

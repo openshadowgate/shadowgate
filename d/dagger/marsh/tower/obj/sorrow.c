@@ -6,15 +6,17 @@
 inherit "/d/common/obj/weapon/quarter_staff.c";
 int xy,CYCLE,uses;
 object owned,LOCUST;
+
 void init() {
     ::init();
-    if(interactive(TP) && TP==environment(TO) && !owned) {
+    if(interactive(TP) && TP == environment(TO) && !owned) {
 		owned = TPQN;
-		if (!uses) {
+		if (query_charges_empty()) {
 			uses = random((int)TP->query_level() * 10) + 100;
 		}
     }
 }
+
 create() {
     ::create();
     set_name("staff");

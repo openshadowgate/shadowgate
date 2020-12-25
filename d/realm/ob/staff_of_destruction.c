@@ -125,7 +125,7 @@ void init()
 {
 	::init();
 	add_action("absorb", "absorb");
-    	add_action("destroy", "destroy");
+    add_action("destroy", "destroy");
 }
 
 void failure() 

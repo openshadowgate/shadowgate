@@ -1,13 +1,15 @@
 //Updated to inherit standard staff - Octothorpe 7/15/09
 #include <std.h>
 #include "/d/tharis/barrow/short1.h"
-inherit "/d/common/obj/weapon/quarter_staff.c";
+inherit "/d/common/obj/weapon/club_lg.c";
 
 int charges,countdown,xx,yy;
 void init() {
     ::init();
-    charges = 0;
-    countdown = 0;
+    if (query_charges_empty()) {
+        charges = 0;
+        countdown = 0;
+    }
     add_action("word_func","sivaar");
 }
 void create() {
@@ -398,40 +400,40 @@ int extra_wield() {
             return 0;
         }
     }
-    if (!ETO->query_property("silent_wield")) {
-        write(
-            "%^BOLD%^%^RED%^The staff tells you: %^RESET%^I am ready to serve "
-            "master. I am hungry for energy as always."
-            "\n%^RED%^The staff giggles inanely.%^RESET%^"
-        );
-        say(
-            "%^RED%^" + ETO->query_cap_name() + " cackles insanely!%^RESET%^"
-        );
-        charges = 0;
-    }
+    //if (!ETO->query_property("silent_wield")) {
+    write(
+        "%^BOLD%^%^RED%^The staff tells you: %^RESET%^I am ready to serve "
+        "master. I am hungry for energy as always."
+        "\n%^RED%^The staff giggles inanely.%^RESET%^"
+    );
+    say(
+        "%^RED%^" + ETO->query_cap_name() + " cackles insanely!%^RESET%^"
+    );
+    charges = 0;
+    //}
     return 1;
 }
 
 int extra_unwield() {
-    if (!ETO->query_property("silent_wield")) {
-        countdown = countdown + 1;
-        charges = 0;
+    //if (!ETO->query_property("silent_wield")) {
+    countdown = countdown + 1;
+    charges = 0;
+    write(
+        "The staff tells you: WAIT!!! What "
+        "are you doing?!? Have I not served well enough?"
+    );
+    if (countdown > (int)ETO->query_stats("wisdom") * 3) {
         write(
-            "The staff tells you: WAIT!!! What "
-            "are you doing?!? Have I not served well enough?"
+            "The staff tells you: Your puny mind "
+            "does not deserve to control me!"
+            "\nThe staff vanishes!"
         );
-        if (countdown > (int)ETO->query_stats("wisdom") * 3) {
-            write(
-                "The staff tells you: Your puny mind "
-                "does not deserve to control me!"
-                "\nThe staff vanishes!"
-            );
-            call_out("remove", 1);
-        }
+        call_out("remove", 1);
     }
+    //}
     return 1;
 }
-
+/*
 void query_charges()
 {
     return charges;
@@ -452,3 +454,4 @@ int query_charges_empty() {
     }
     return 0;
 }
+*/

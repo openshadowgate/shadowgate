@@ -12,7 +12,7 @@ void init() {
    ::init();
    if(interactive(TP) && TP == environment(TO) && !wizardp(TP) && !owner) {
       owner = TPQN;
-      if (!charges) {
+      if (query_charges_empty()) {
           charges = 20 + random((int)TP->query_level() / 3);
       }
    }
