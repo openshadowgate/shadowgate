@@ -16,7 +16,7 @@ void create()
 	   " length of the blade. The hilt is made of gilded %^BOLD%^mithril%^RESET%^"+
 	   " and has a %^BOLD%^%^BLUE%^star sapphire%^RESET%^ set into the pommel."
 	   );
-	set_lore("Seen as a holy blade in the church of Mystra, the Starlight "+
+	set_lore("Seen as a holy blade in the church of banished goddess of magic, the Starlight "+
 		"Sword is a deeply revered.  Often the favored weapon for knights"+
 		" of the church, as well as many bards, rangers, and warriors, "+
 		"the Starlight Sword is said to have been woven from the weave "+
