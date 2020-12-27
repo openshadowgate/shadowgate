@@ -6,23 +6,27 @@ int cmd_vote(string str)
     write(
 "%^BOLD%^%^GREEN%^Please, consider voting for us to bring more people into the game:
  Top Mud Sites : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tms%^RESET%^%^BOLD%^%^GREEN%^
-
 You can view and follow us on the grapevine:
  Grapevine     : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/grapevine-sg%^RESET%^%^BOLD%^%^GREEN%^
 "
         );
     if(str == "social")
     {
+        write("%^GREEN%^-=%^BOLD%^< %^ORANGE%^Community sites%^GREEN%^ >%^RESET%^%^GREEN%^=-%^RESET%^");
+        write(
+"%^BOLD%^%^GREEN%^ Discord     : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/discord-sg%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^ Forum       : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://shadowgate.org/forum%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^ Wiki        : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://shadowgate.org/wiki%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^ Git         : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://shadowgate.org/git%^RESET%^%^BOLD%^%^GREEN%^");
         write("%^GREEN%^-=%^BOLD%^< %^ORANGE%^Social networks%^GREEN%^ >%^RESET%^%^GREEN%^=-%^RESET%^");
         write(
-"%^BOLD%^%^GREEN%^ Discord    : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/discord-sg%^RESET%^%^BOLD%^%^GREEN%^
-%^BOLD%^%^GREEN%^ Mastodon   : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/toot-sg%^RESET%^%^BOLD%^%^GREEN%^
-%^BOLD%^%^GREEN%^ Github     : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/github-sg%^RESET%^%^BOLD%^%^GREEN%^
-%^BOLD%^%^GREEN%^ FaceBook   : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/fbook-sg%^RESET%^%^BOLD%^%^GREEN%^
+"%^BOLD%^%^GREEN%^ Mastodon    : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/toot-sg%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^ Github      : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/github-sg%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^ FaceBook    : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/fbook-sg%^RESET%^%^BOLD%^%^GREEN%^
 %^GREEN%^-=%^BOLD%^< %^ORANGE%^Other Mudlistings%^GREEN%^ >%^RESET%^%^GREEN%^=-%^RESET%^
-%^BOLD%^%^GREEN%^ Mudlistings       : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-ml%^RESET%^%^BOLD%^%^GREEN%^
-%^BOLD%^%^GREEN%^ The Mud Connector : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tmc%^RESET%^%^BOLD%^%^GREEN%^
- Mudiverse         : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-mv%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^ Mudlistings : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-ml%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^ TMC         : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-tmc%^RESET%^%^BOLD%^%^GREEN%^
+%^BOLD%^%^GREEN%^ Mudiverse   : %^RESET%^%^BOLD%^%^CYAN%^%^ULINE%^https://bit.ly/sg-mv%^RESET%^%^BOLD%^%^GREEN%^
 "            );
     }
     else

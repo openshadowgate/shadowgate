@@ -2486,6 +2486,7 @@ int spell_kill(object victim, object caster)
 
     // Non link-dead users have to excercise their own judgement.
     if (interactive(victim)) {
+        victim->set_property("last_attacker", caster);
         return 0;
     }
 

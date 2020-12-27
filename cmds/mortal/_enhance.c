@@ -107,7 +107,7 @@ int cmd_enhance(string str)
                 if (power - cost >= 0) {
                     if (!TP->query_property(property_name)) {
                         if (strsrch(property_name, "alignment ") + 1) {
-                            is_alignement = strsrch(property_name, (string)TP->query_true_align()) + 1;
+                            is_alignement = strsrch(property_name, (string)TP->query_true_align() + "") + 1;
                             if (!is_alignement) {
                                 tell_object(TP, "Your alignment doesn't match to " + enhancement_name + ".");
                                 continue;

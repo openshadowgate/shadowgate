@@ -76,6 +76,7 @@ void spell_effect(int prof)
                 dshld->set_property("enchantment", ench);
             }
             dshld->move(caster);
+            addSpellToCaster();
             caster->remove_paralyzed();
             caster->force_me("wear shield");
             spell_successful();
