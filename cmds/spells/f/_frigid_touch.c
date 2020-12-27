@@ -25,7 +25,7 @@ create()
 
 string query_cast_string()
 {
-    return "%^BOLD%^%^CYAN%^" + caster->QCN + " utters a firid chant.";
+    return "%^BOLD%^%^CYAN%^" + caster->QCN + " utters cold words.";
 }
 
 spell_effect(int prof)
