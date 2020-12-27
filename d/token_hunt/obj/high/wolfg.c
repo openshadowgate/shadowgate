@@ -13,8 +13,8 @@ void create(){
 "and %^BOLD%^silver buckles%^RESET%^. A sense of power emanates from the greaves.");
    set_value(0);
 	set_lore("%^BOLD%^%^CYAN%^The %^RESET%^%^BOLD%^H%^RESET%^e%^BOLD%^%^BLACK%^a%^WHITE%^r%^RESET%^t of the %^ORANGE%^Pa%^BOLD%^%^BLACK%^c%^RESET%^%^ORANGE%^k%^BOLD%^%^CYAN%^ greaves first "
-"appeared in these lands being worn by Jerlekt Softstrider, known to some as the %^BLACK%^Shadowed Wolf%^CYAN%^. He was a devoted ranger of Selune and battled the minions of Selune's enemies "
-"whenever he could, always striking from the shadows only to slide back into them after slaying them cleanly. Selune purportedly gifted him with these greaves to assist him with his constant "
+"appeared in these lands being worn by Jerlekt Softstrider, known to some as the %^BLACK%^Shadowed Wolf%^CYAN%^. He was a devoted ranger of a moon goddess and battled the minions of the moon goddess's enemies "
+"whenever he could, always striking from the shadows only to slide back into them after slaying them cleanly. His goddess purportedly gifted him with these greaves to assist him with his constant "
 "battles. His disappearance was never recorded, so it is speculated that perhaps he has just retired, or perhaps his %^BLACK%^shadow%^CYAN%^ finally caught up to him. %^WHITE%^- 'Chronicles of "
 "the %^BLACK%^Wolf%^WHITE%^', Saelmion Dukanish.");
 	set_property("lore difficulty",15);
