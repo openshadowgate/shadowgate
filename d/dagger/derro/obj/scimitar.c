@@ -79,7 +79,7 @@ int extra_hit(object ob){
              "%^FLASH%^flashes%^RESET%^%^BOLD%^ brilliantly as "+
              "it swings towards you and you can see nothing but "+
              "spots before your eyes!");
-      if(!"/daemon/saving_throw_d.c"->reflex_save(target,-20)){
+      if(!"/daemon/saving_throw_d.c"->reflex_save(ob,-20)){
 	    if(!random(3)) ob->set_blind(1);
 	    else ob->set_paralyzed(4+random(4),"%^BOLD%^You're "+
              "rubbing the spots out of your eyes.");
