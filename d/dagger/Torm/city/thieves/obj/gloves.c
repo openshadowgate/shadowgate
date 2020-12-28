@@ -9,7 +9,7 @@ void create() {
     set_long(
       "These gloves are made of a strange silvery cloth, but much stronger.  These gloves slide over your hands and halfway up your forearms, to protect your arms.  The gloves themselves glow with a strange %^BOLD%^power%^RESET%^ that comes from deep from within the soul of the wearer.\n   %^CYAN%^There is an inscription on the gloves."
     );
- 
+}
 
 int wear_me() {
     tell_object(TP, "You slide the gloves on, and a dull %^BOLD%^glow%^RESET%^ spreads across them.");
