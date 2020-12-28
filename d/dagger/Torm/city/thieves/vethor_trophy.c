@@ -62,7 +62,7 @@ string time_east_wall(string str) {
 
 string my_query_long(string str) {
 	if(query_time_of_day() == "dawn" || query_time_of_day() == "twilight") {
-		return( "The center of this room is dominated by a %^BOLD%^small "
+		return( query_short()+"\nThe center of this room is dominated by a %^BOLD%^small "
 		"marble platform %^RESET%^with a glass case on top in which several "
 		"items of interest rest.  Attached to the platform just below the glass "
 		"is a small plaque.  The floor is covered with a %^BLUE%^deep blue "
@@ -73,7 +73,7 @@ string my_query_long(string str) {
       "wall is %^BOLD%^brightly lit with %^RED%^fiery %^RESET%^%^BOLD%^glowing "
       "runes." );
 	} else {
-	return("The center of this room is dominated by a %^BOLD%^small marble "
+	return(query_short()+"\nThe center of this room is dominated by a %^BOLD%^small marble "
 	"platform %^RESET%^with a glass case on top in which several items of "
 	"interest rest.  Attached to the platform just below the glass is a "
 	"small plaque.  The floor is covered with a %^BLUE%^deep blue carpeting "
@@ -127,8 +127,9 @@ int twist_plaque(string str){
 	return 1;
 }
 void reset(){
-	::reset();
-  object chest;
+	object chest;
+  ::reset();
+  
   chest = new("/d/common/obj/misc/chest");
   chest->move(TO);
   chest->set_lock("locked");
