@@ -33,8 +33,6 @@ void create(){
    set_wear((:TO,"wear_fun":));
    set_remove((:TO,"remove_fun":));
    set_weight(1);
-   set_guild_name("The Raiders in Night's Cloak");
-   set_guild_object("/d/guilds/raiders/obj/earring.c");
 }
 int wear_fun(){
    ETO->set_property("evil item",1);
