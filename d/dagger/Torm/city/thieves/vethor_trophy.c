@@ -126,3 +126,14 @@ int twist_plaque(string str){
 	TP->move_player("/d/dagger/Torm/city/thieves/vethor_guild");
 	return 1;
 }
+void reset(){
+	::reset();
+  object chest;
+  chest = new("/d/common/obj/misc/chest");
+  chest->move(TO);
+  chest->set_lock("locked");
+  chest->toggle_closed();
+  new("/d/dagger/Torm/city/thieves/obj/earring")->move(chest);
+  new("/d/dagger/Torm/city/thieves/obj/gloves")->move(chest);
+
+}
