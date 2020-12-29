@@ -48,6 +48,7 @@ void create(){
 "and later the Tempered Blades.",
         ({"platform", "marble platform"}) : "This is a marble block approximately three feet high.  On top of "
 "the marble block sits a glass case and on the side of the block is a small plaque.",
+        "glass":"The glass on the display case could <break> if someone was a vandal.",
 	]));
 	set_exits(([
 		"out" : "/d/dagger/Torm/city/warehouse",
@@ -139,6 +140,8 @@ int break_glass(string str){
 
     new("/d/dagger/Torm/city/thieves/obj/earring")->move(TO);
     new("/d/dagger/Torm/city/thieves/obj/gloves")->move(TO);
+	new("/d/dagger/Torm/city/thieves/obj/ring")->move(TO);
+	new("/d/dagger/Torm/city/thieves/obj/screamer")->move(TO);
     broken = 1;
 	return 1;
 }
