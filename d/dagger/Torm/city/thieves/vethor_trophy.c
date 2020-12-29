@@ -131,7 +131,7 @@ int twist_plaque(string str){
 int break_glass(string str){
 	if(!str || str != "glass") return notify_fail("Break what?  The glass?\n");
 	if(broken){
-		write("Looks like someone already broke the glass here.")
+		write("Looks like someone already broke the glass here.");
 		return 1;
 	}
 	tell_room(ETP,"%^CYAN%^"+TPQCN+" breaks the glass and some of the items on display fall out",TP);
