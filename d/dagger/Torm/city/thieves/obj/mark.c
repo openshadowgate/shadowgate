@@ -78,7 +78,6 @@ void heart_beat()
     creature->force_me("speech %^BOLD%^%^MAGENTA%^pu%^RESET%^%^MAGENTA%^r%^MAGENTA%^r%^BOLD%^%^BLACK%^ in a %^RESET%^%^MAGENTA%^s%^MAGENTA%^m%^BOLD%^%^MAGENTA%^ok%^RESET%^%^MAGENTA%^y%^BOLD%^%^BLACK%^ voice%^RESET%^");
     creature->force_me("say %^BOLD%^%^MAGENTA%^You have been chosen to %^RED%^die%^MAGENTA%^.%^RESET%^");
     creature->set_target(ETO->query_name());
-    creature->set_reason(reason);
     creature->kill_ob(ETO);
     creature->force_me("set seal");
     creature->force_me("crit " + ETO);

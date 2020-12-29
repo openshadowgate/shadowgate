@@ -127,7 +127,7 @@ void heart_beat()
     }
 
     if (!sizeof(TO->query_attackers())) {
-        tell_room(ETO, "%^BOLD%^%^MAGENTA%^The %^RESET%^%^MAGENTA%^a%^BOLD%^%^MAGENTA%^s%^RESET%^%^MAGENTA%^s%^BOLD%^%^MAGENTA%^assi%^RESET%^%^MAGENTA%^n%^BOLD%^%^MAGENTA%^ steps into shadows and %^MAGENTA%^d%^RESET%^%^MAGENTA%^i%^BOLD%^%^MAGENTA%^sappea%^RESET%^%^MAGENTA%^r%^BOLD%^%^MAGENTA%^s%^RESET%^%^MAGENTA%^.");
+        tell_room(ETO, "%^BOLD%^%^MAGENTA%^Anne steps into shadows and %^MAGENTA%^d%^RESET%^%^MAGENTA%^i%^BOLD%^%^MAGENTA%^sappea%^RESET%^%^MAGENTA%^r%^BOLD%^%^MAGENTA%^s%^RESET%^%^MAGENTA%^.");
         TO->move("/d/shadowgate/void");
         TO->remove();
         return;
