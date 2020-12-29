@@ -9,6 +9,21 @@ void create() {
     set_long(
       "These gloves are made of a strange silvery cloth, but much stronger.  These gloves slide over your hands and halfway up your forearms, to protect your arms.  The gloves themselves glow with a strange %^BOLD%^power%^RESET%^ that comes from deep from within the soul of the wearer.\n   %^CYAN%^There is an inscription on the gloves."
     );
+    set_lore("These silvery gloves were crafted "+
+    "for the Legion of Lost Souls guild, dedicated"+
+    " to the acquisition of power at any cost.  "+
+    "Nobody knows where Beowulf had them commissioned,"+
+    " but only a limited number were ever constructed.  "+
+    "Legends speak of a unique power granted by the "+
+    "gloves.  When worn, they would allow the wearer"+
+    " to throw their voice and mimic others, tricking"+
+    " any listeners into thinking someone else had"+
+    " spoken.  Unfortunately, it appears whatever"+
+    " enchantment they had once been imbued with "+
+    "has long since faded.");
+    set_property("lore difficulty",26);
+    set_wear((:TO,"wear_me":));
+    set_remove((:TO,"remove_me":));
 }
 
 int wear_me() {

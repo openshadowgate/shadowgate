@@ -1,8 +1,9 @@
 #include <std.h>
 #include <daemons.h>
 inherit ROOM;
-
+int broken = 0;
 string query_time_of_day();
+
 
 void create(){
 	::create();
@@ -90,6 +91,7 @@ void init() {
 	add_action("read_stuff", "read");
 	add_action("twist_plaque", "twist");
 	add_action("twist_plaque", "turn");
+	add_action("break_glass", "break");
 }
 
 int read_stuff(string str){   
@@ -126,15 +128,25 @@ int twist_plaque(string str){
 	TP->move_player("/d/dagger/Torm/city/thieves/vethor_guild");
 	return 1;
 }
+int break_glass(string str){
+	if(!str || str != "glass") return notify_fail("Break what?  The glass?\n");
+	if(broken){
+		write("Looks like someone already broke the glass here.")
+		return 1;
+	}
+	tell_room(ETP,"%^CYAN%^"+TPQCN+" breaks the glass and some of the items on display fall out",TP);
+	write("Like a buglar you break the glass to get at the items on display!\n");
+
+    new("/d/dagger/Torm/city/thieves/obj/earring")->move(TO);
+    new("/d/dagger/Torm/city/thieves/obj/gloves")->move(TO);
+    broken = 1;
+	return 1;
+}
 void reset(){
-	object chest;
+
   ::reset();
   
-  chest = new("/d/common/obj/misc/chest");
-  chest->move(TO);
-  chest->set_lock("locked");
-  chest->toggle_closed();
-  new("/d/dagger/Torm/city/thieves/obj/earring")->move(chest);
-  new("/d/dagger/Torm/city/thieves/obj/gloves")->move(chest);
+  broken = 0;
+  return;
 
 }
