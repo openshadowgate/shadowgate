@@ -12,12 +12,13 @@ void create(){
 	set_property("light", 2);
       set_property("indoors",1);
       set_property("no teleport",1);
-	set_short("%^BOLD%^%^WHITE%^A room of trophies%^RESET%^");
+	set_short("%^BOLD%^%^WHITE%^A R%^RESET%^%^RED%^o%^BOLD%^%^WHITE%^om of Tr%^RESET%^%^RED%^o%^BOLD%^%^WHITE%^phies%^RESET%^");
       set_long( (:TO,"my_query_long" :) );
 	set_smell("default", "You smell cleanliness.");
 	set_listen("default", "You can hear your own breathing and some movement to the north.");
 	set_items(([
 	  "carpet":"A dark plush carpet that your feet sink deeply into, padding your footsteps.",
+	  "walls":"There is an east wall, west wall and south wall.",
         "west wall":"Perhaps you can read the west wall.",
         "east wall": (:TO,"time_east_wall" :),
         "south wall":"This wall would be simple panelling if it weren't for the rich stain used to give the "
@@ -65,7 +66,7 @@ string time_east_wall(string str) {
 string my_query_long(string str) {
 	if(query_time_of_day() == "dawn" || query_time_of_day() == "twilight") {
 		return( query_short()+"\nThe center of this room is dominated by a %^BOLD%^small "
-		"marble platform %^RESET%^with a glass case on top in which several "
+		"marble platform %^RESET%^with a %^CYAN%^glass%^RESET%^ case on top in which several "
 		"items of interest rest.  Attached to the platform just below the glass "
 		"is a small plaque.  The floor is covered with a %^BLUE%^deep blue "
       "carpeting%^RESET%^ so thick and plush you can't hear your own footsteps.  "
@@ -77,7 +78,7 @@ string my_query_long(string str) {
 	} else {
 	return(query_short()+"\nThe center of this room is dominated by a %^BOLD%^small marble "
 	"platform %^RESET%^with a glass case on top in which several items of "
-	"interest rest.  Attached to the platform just below the glass is a "
+	"interest rest.  Attached to the platform just below the %^CYAN%^glass%^RESET%^ is a "
 	"small plaque.  The floor is covered with a %^BLUE%^deep blue carpeting "
 	"%^RESET%^so thick and plush you can't hear your own footsteps.  The "
 	"south wall is covered with %^ORANGE%^richly grained walnut paneling "
@@ -124,7 +125,7 @@ string query_time_of_day() {
 
 int twist_plaque(string str){
 	if(!str || str != "plaque") return notify_fail("Twist what?\n");
-	tell_room(ETP,""+TPQCN+" twists the plaque and suddenly blinks out of sight!",TP);
+	tell_room(ETP,"%^BOLD%^"+TPQCN+" twists the plaque and suddenly blinks out of sight!",TP);
 	write("Suddenly you feel a rush of air and movement.\nYou find yourself someplace else!\n");
 	TP->move_player("/d/dagger/Torm/city/thieves/vethor_guild");
 	return 1;
