@@ -3,8 +3,6 @@
 #include <daemons.h>
 inherit MONSTER;
 
-string reason;
-
 void create()
 {
     ::create();
@@ -50,7 +48,6 @@ void create()
     set_new_exp(60, "boss");
     set_max_level(35);
     set_base_damage_type("silver");
-    reason = "";
     new("/d/atoyatl/tecqumin/obj/seal.c")->move(TO);
 }
 
@@ -92,10 +89,7 @@ void set_tripped(int time, string message)
     return 0;
 }
 
-void set_reason(string why)
-{
-    reason = why;
-}
+
 
 void heart_beat()
 {
@@ -118,17 +112,16 @@ void heart_beat()
             continue;
         }
         if (ppl[i]->query_unconscious()) {
-            tell_room(ETO, "%^BOLD%^%^BLACK%^The assassin lands a %^BLACK%^fi%^RESET%^%^MAGENTA%^n%^BOLD%^%^BLACK%^a%^RESET%^%^MAGENTA%^l%^BOLD%^%^BLACK%^ blow at%^RESET%^ " + ppl[i]->QCN);
+            tell_room(ETO, "%^BOLD%^%^BLACK%^The assassin lands a %^BLACK%^fi%^RESET%^%^MAGENTA%^n%^BOLD%^%^BLACK%^a%^RESET%^%^MAGENTA%^l%^BOLD%^%^BLACK%^ blow at%^RESET%^ ");
 
             ppl[i]->die();
-            if (strlen(reason)) {
-                tell_object(ppl[i], "%^BOLD%^%^CYAN%^OOC - This assassin was sent to kill because of the following reason:\n" + reason + "\n");
-            }
+            tell_object(ppl[i], "%^BOLD%^%^CYAN%^OOC - This maid killed you for breaking Vethor's trophy case.");
+            
             stuff = all_inventory(ppl[i]);
             for (j = 0; j < sizeof(stuff); j++) { //remove all assassin marks
-                if (stuff[j]->id("mark999")) {
+                if (stuff[j]->id("mark999")) 
                     stuff[j]->remove();
-                }
+                
             }
         }
     }

@@ -5,7 +5,6 @@
 inherit OBJECT;
 
 int tracker;
-string reason;
 
 void create()
 {
@@ -18,15 +17,13 @@ void create()
     set_property("no animate",1);
     set_heart_beat(2);
     tracker = time() + 3600;
-    reason = "";
+  
 }
 
 int set_timer(int x)
 {
     tracker = time()+x;
 }
-
-void set_reason(string why) { reason = why; }
 
 void heart_beat()
 {
