@@ -142,6 +142,7 @@ int break_glass(string str){
     new("/d/dagger/Torm/city/thieves/obj/gloves")->move(TO);
 	new("/d/dagger/Torm/city/thieves/obj/ring")->move(TO);
 	new("/d/dagger/Torm/city/thieves/obj/screamer")->move(TO);
+	new("/d/dagger/Torm/city/thieves/obj/mark")->move(TP);
     broken = 1;
 	return 1;
 }
