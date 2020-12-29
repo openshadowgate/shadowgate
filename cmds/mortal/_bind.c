@@ -78,7 +78,7 @@ int cmd_bind(string str)
        return 1;
        }
     else{  
-    who->set_bound(1000 + ((int)TP->query_skill("rope use") * 50));
+    who->set_bound(1000 + ((int)TP->query_skill("rope use") * 100));
     TP->set_paralyzed(5, "You are busy binding " + who->query_cap_name());
     return 1;
     }
