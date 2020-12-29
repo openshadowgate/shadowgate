@@ -116,7 +116,7 @@ void heart_beat()
 
             ppl[i]->die();
             tell_object(ppl[i], "%^BOLD%^%^CYAN%^OOC - This maid killed you for breaking Vethor's trophy case.");
-            
+            ppl[i]->set_mini_quest("Achieved: Gracefully slain by Anne for messing with Vethor's trophy case");
             stuff = all_inventory(ppl[i]);
             for (j = 0; j < sizeof(stuff); j++) { //remove all assassin marks
                 if (stuff[j]->id("mark999")) 
