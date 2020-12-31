@@ -11,7 +11,7 @@ void create(){
     set_short("%^BOLD%^%^BLACK%^The Deep Roads%^RESET%^");
     set_property("no teleport", 1);
     set_long(query_short() + "\n" + "%^CYAN%^This tunnel is enormous, with pristine ancient %^WHITE%^masonry%^CYAN%^ forming all of its surfaces. Faded %^ORANGE%^basreliefs%^CYAN%^ on the walls depict undecipherable stories visually telling history of dwarven people. Being ancient it is nearly impossible to tell what they say nowdays. Although abandoned, worn and unmaintained, these tunnels did not crumble over the ages. Wide roads still can host an army marching through. The path is lit with glowing stone %^ORANGE%^lamps%^CYAN%^ on the ceiling.");
-    set_listen("default", "%^BLUE%^Distant rumble of the earth can be heard from the stone.");
+    set_listen("default", "%^BLUE%^Rumble of the earth resonates of the stone.");
     set_items(([
                    "masonry":"Simple but masterful masonry features stones of various shapes fit together to form regular shapes of roads, walls, ceiling and columns in this tunnel.",
                    "tunnels":"You're on the deep roads, basreliefs hint you these paths were constucted by ancient dwarves.",
