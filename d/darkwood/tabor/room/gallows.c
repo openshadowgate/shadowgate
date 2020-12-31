@@ -65,13 +65,12 @@ void create(){
 
   	set_exits(([
            "north" : "/d/darkwood/tabor/room/jail",
+           "down":"/d/shadow/ratpaths/rooms/rp_p000_p000",
 	]));
-	//set_door("iron door","/d/darkwood/tabor/room/jail","north");
-	//set_open("door",0);
-    	//set_door_description("door", "This is a heavy iron door,"+
-      //    " used to keep unwanted people from entering the gallows.");
-    	//"/d/darkwood/tabor/room/jail"->set_open("door",0);
+        set_invis_exits(({"down"}));
 	set_property("knock unconscious",1);
+        set_search("default", "One of the crates seems to be nailed to the stones.");
+        set_search("crate", "You find a ladder leading down inside of the crate.");
     	HUNG = 0;
 }
 
@@ -165,7 +164,7 @@ void make_dead(object tp){
 }
 void give_chance(object tp){
 	string name;
-	
+
 	if(!objectp(tp))return;
 	name = tp->query_name();
 	if(present(name)){
@@ -263,7 +262,7 @@ int hang_em(string str){
 }
 
 void hanging(object tp,int num){
-   string hang_mess;  
+   string hang_mess;
     	switch(num){
       	case(0):
       		TP->set_paralyzed(5000,"%^BOLD%^You are busy "+
@@ -275,7 +274,7 @@ void hanging(object tp,int num){
                 		"about "+tp->query_cap_name()+"'s neck.\n",({TP,tp}));
                  	break;
            	case(1):
-               hang_mess = "%^BOLD%^You hear a sharp crack as the gallows " 
+               hang_mess = "%^BOLD%^You hear a sharp crack as the gallows "
                  "trapdoor in the next room is released.  Almost immediately "
                  "you also hear a dull thud and shouts from the crowd.";
            	   tell_room("/d/shadow/room/city/jail", hang_mess);

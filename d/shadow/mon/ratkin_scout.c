@@ -1,0 +1,42 @@
+#include <std.h>
+#include "/d/common/common.h"
+
+inherit MONSTER;
+
+void create() {
+
+	::create();
+	set_name("Ratkin");
+	set_id(({"Ratkin","scout", "ratkin", "ratkin scout"}));
+	set_race("ratkin");
+	set_gender("male");
+	set_short("%^RESET%^%^GREEN%^Ra%^MAGENTA%^t%^ORANGE%^k%^GREEN%^in%^CYAN%^ scout%^RESET%^");
+	set_long("This is a ratkin, small rat-like humanoid. This particular individual is cloaked, it wears many pouches and bandoliers over its armor. It holds a sword in its hands. Its face can't be seen, but red eyes reflect with menacing glow.");
+
+	set_hd(12, 3);
+	set("aggressive",19);
+	set_alignment(6);
+	set_size(1);
+	set_overall_ac(8);
+	set_stats("intelligence",8);
+	set_stats("wisdom",16);
+	set_stats("strength",18);
+	set_stats("charisma",4);
+	set_stats("dexterity",18);
+	set_stats("constitution",12);
+
+	add_money("gold",random(50));
+
+        {
+            object ob;
+            ob = new(CWEAP"shortsword");
+            ob->set_property("monsterweapon",1);
+            ob->move(this_object());
+            command("wield sword in right hand");
+            ob = new(CARMOR"hide");
+            ob->set_property("monsterweapon",1);
+            ob->move(TO);
+            command("wear armor");
+        }
+
+}

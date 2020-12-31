@@ -20,7 +20,10 @@ void create()
                    "north" : "/d/azha/town/market6",
                    "west" : "/d/azha/town/market2",
                    "northwest" : "/d/azha/town/market5",
+                   "down":"/d/shadow/ratpaths/rooms/rp_n008_n015",
                    ]));
+    set_invis_exits(({"down"}));
+    set_search("default", "You notice a hatch leading down, hidden in the corner of the market.");
 }
 
 reset()
