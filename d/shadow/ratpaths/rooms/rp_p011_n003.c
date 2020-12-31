@@ -1,5 +1,5 @@
 #include <std.h>
-#include "common.h"
+#include "../common.h"
 
 inherit DEEPROAD;
 
