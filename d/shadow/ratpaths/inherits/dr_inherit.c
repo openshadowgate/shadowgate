@@ -4,6 +4,8 @@ inherit ROOM;
 
 void create(){
     ::create();
+    set_terrain(BUILT_TUNNEL);
+    set_travel(PAVED_ROAD);
     set_property("indoors",1);
     set_light(1);
     set_short("%^BOLD%^%^BLACK%^The Deep Roads%^RESET%^");
