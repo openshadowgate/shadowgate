@@ -4,3 +4,4 @@
 #define DEEPROAD_TR "/d/shadow/ratpaths/inherits/dr_transition"
 #define PATH "/d/shadow/ratpaths/rooms/"
 #define SHMON "/d/shadow/mon/"
+#define RPMON "/d/shadow/ratpaths/mon/"

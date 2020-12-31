@@ -14,7 +14,7 @@ void create() {
 	set_long("This is a ratkin, small rat-like humanoid. This particular individual is cloaked, it wears many pouches and bandoliers over its armor. It holds a sword in its hands. Its face can't be seen, but red eyes reflect with menacing glow.");
 
 	set_hd(12, 2);
-	set("aggressive",19);
+	set("aggressive",10);
 	set_alignment(6);
 	set_size(1);
 	set_overall_ac(8);
