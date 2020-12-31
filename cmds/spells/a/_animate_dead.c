@@ -85,7 +85,7 @@ void spell_effect(int prof)
     if (!intp(num_mon)) {
         num_mon = 0;
     }
-    if (num_mon >= 8) {
+    if (num_mon >= 6) {
         tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^YOU ARE %^WHITE%^NOT %^WHITE%^WORTHY%^BLACK%^ TO RAISE MORE!%^RESET%^%^RESET%^");
         tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
         TO->remove();
