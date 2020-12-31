@@ -7,7 +7,7 @@ void create(){
     ::create();
     set_exits(([
     "northwest":PATH+"rp_p030_p011",
-    "up":"/d/dagger/tonovi/town/wall6",
+    "up":"/d/underdark/upper/tonovitunnel/tonovi02",
                    ]));
 
 }
