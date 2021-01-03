@@ -26,6 +26,10 @@ int cmd_unwield(string str)
         write("The curse on this item prevents you from unwielding it.");
         return 1;
     }
+    if (ob->query_property("weapon end") && ob->query_wielded()) {
+        TP->force_me("single_weapon");
+        ob = TP->query_wielded()[0];
+    }
     ob->__ActuallyUnwield();
     return 1;
 }

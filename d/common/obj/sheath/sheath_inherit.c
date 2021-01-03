@@ -467,7 +467,7 @@ int draw_from(string str) {
 
 int sheath_into(string str){
     int silly;
-	int res, i;
+	int res, is_weaponend, i;
 	object ths,tht,*inv;
 	string this, that;
     if(TP->query_bound() || TP->query_unconscious()
@@ -503,28 +503,39 @@ int sheath_into(string str){
 		notify_fail("You can't find somewhere free to put that.\n");
 		return 0;
 	    }
+        if (ths->query_property("weapon end")) {
+            TP->force_me("single_weapon");
+            ths = TP->query_wielded()[0];
+            is_weaponend = 1;
+        }
 	    if(!will_work(ths,tht)) {
-		notify_fail("You can't seem to find one that will work for that weapon unused.\n");
-		return 0;
+		    notify_fail("You can't seem to find one that will work for that weapon unused.\n");
+            if (is_weaponend) {
+                TP->force_me("double_weapon");
+            }
+		    return 0;
 	    }
 	    if((ths->query_is_lrweapon() != 0) && 
 	      (ths->query_size() > query_property("sheath_size"))) {
-		notify_fail("This weapon is too large for your available "+CM+"!\n");
-		return 0;
+            if (is_weaponend) {
+                TP->force_me("double_weapon");
+            }
+		    notify_fail("This weapon is too large for your available "+CM+"!\n");
+		    return 0;
 	    }
 	    if (tht->receive_objects()) {
-		res = (int)ths->move(tht);
-		if (res == MOVE_OK) {
-		    write("You sheathe "+ths->query_short()+" into "+tht->query_short()+".\n");
-		    say("%^BOLD%^%^BLUE%^"+TPQCN+" sheathes "+ths->query_short()+ " in "+tht->query_short()+".\n");
-		    TP->add_encumbrance(ths->query_weight());
-		    return 1;
-		}
-		if (res == MOVE_NO_ROOM)
-		    notify_fail("For some reason it does not fit in any of your "+CM+".\n");
-		if (res == MOVE_NOT_ALLOWED)
-		    notify_fail("You are not allowed to do that.\n");
-		return 0;
+		    res = (int)ths->move(tht);
+		    if (res == MOVE_OK) {
+		        write("You sheathe "+ths->query_short()+" into "+tht->query_short()+".\n");
+		        say("%^BOLD%^%^BLUE%^"+TPQCN+" sheathes "+ths->query_short()+ " in "+tht->query_short()+".\n");
+		        TP->add_encumbrance(ths->query_weight());
+		        return 1;
+		    }
+		    if (res == MOVE_NO_ROOM)
+		        notify_fail("For some reason it does not fit in any of your "+CM+".\n");
+		    if (res == MOVE_NOT_ALLOWED)
+		        notify_fail("You are not allowed to do that.\n");
+		    return 0;
 	    }
 	    notify_fail("It is closed.\n");
 	    return 0;

@@ -638,40 +638,33 @@ int double_weapon_fun(string str) {
     this_weapon = loc->query_wielded();
     loc->set_property("silent_wield", 1);
     if (sizeof(this_weapon) > 1 &&
-        this_weapon[0]->query_size() > loc->query_size() &&
         this_weapon[0] == this_weapon[1]) {
-        this_weapon[0]->set_name("remove_this");
-        loc->force_me("unwield remove_this");
+        if (this_weapon[0]->query_property("double weapon")) {
+            if (FEATS_D->usable_feat(loc, this_weapon[0]->query_weapon_prof() + " weapon proficiency")) {
+                
+                ob1 = createWeapon(this_weapon[0]);
+                ob2 = createWeapon(this_weapon[0]);
+                ob1->set_charges_empty();
+                ob2->set_charges_empty();
+                if (charges = this_weapon[0]->query_charges()) {
+                    ob1->set_charges(charges);
+                }
+                this_weapon[0]->move("/d/shadowgate/void");
+                ob1->move(loc);
+                ob2->move(loc);
+                loc->force_me("wield " + ob1->query_name());
+                loc->force_me("wield " + ob2->query_name() + " 2");
+                loc->remove_property("silent_wield");
+                this_weapon[0]->remove();
+                return 1;
+            }else {
+                tell_object(loc, "%^ORANGE%^You lack the proficiency to use this as a double weapon.%^RESET%^");
+                return 1;
+            }
+        }
     }
-    else if (sizeof(this_weapon) > 1 &&
-        this_weapon[0] != this_weapon[1]) {
-        tell_object(loc, "%^ORANGE%^You are already using this weapon as a double weapon%^RESET%^");
-        return 1;
-    }
-    else if (sizeof(this_weapon)) {
-        tell_object(loc, "%^ORANGE%^You can't use this weapon as a double weapon%^RESET%^");
-        return 1;
-    }
-    else {
-        loc->remove_property("silent_wield");
-        return 0;
-    }
-
-    ob1 = createWeapon(this_weapon[0]);
-    ob2 = createWeapon(this_weapon[0]);
-    ob1->set_charges_empty();
-    ob2->set_charges_empty();
-    if (charges = this_weapon[0]->query_charges()) {
-        ob1->set_charges(charges);
-    }
-    ob1->move(loc);
-    ob2->move(loc);
-    TO->move("/d/shadowgate/void");
-    loc->force_me("wield " + ob1->query_name());
-    loc->force_me("wield " + ob2->query_name() + " 2");
     loc->remove_property("silent_wield");
-    TO->remove();
-    return 1;
+    return 0;
 }
 
 int single_weapon_fun(string str) {
@@ -694,11 +687,11 @@ int single_weapon_fun(string str) {
         }else if (this_weapon[1]->query_charges() > 0) {
             ob->set_charges(this_weapon[1]->query_charges());
         }
-        ob->move(loc);
-        TO->remove_property("weapon end");
-        TO->move("/d/shadowgate/void");
+        this_weapon[0]->remove_property("weapon end");
         this_weapon[1]->remove_property("weapon end");
+        this_weapon[0]->move("/d/shadowgate/void");
         this_weapon[1]->move("/d/shadowgate/void");
+        ob->move(loc);
         this_weapon[1]->remove();
         loc->force_me("wield " + item_name);
     }else {
@@ -706,14 +699,14 @@ int single_weapon_fun(string str) {
         return 0;
     }
     loc->remove_property("silent_wield");
-    TO->remove();
+    this_weapon[0]->remove();
     return 1;
 }
 
 object createWeapon(object weapon) {
     object ob, * names;
     int i, my_enchantment, my_size, my_speed;
-    string item_path, weapon_short, t1;
+    string item_path, weapon_short, weapon_long, t1;
 
     item_path = file_name(weapon);
     if (sscanf(item_path, "%s#", t1)) {
@@ -721,11 +714,19 @@ object createWeapon(object weapon) {
     }
     my_enchantment = weapon->query_property("enchantment");
     ob = new(item_path);
-    if (my_enchantment) {
+    if (my_enchantment < 0) {
         ob->remove_property("enchantment");
         ob->set_property("enchantment", my_enchantment);
+    }else {
+        while ((int)ob->query_property("enchantment") != my_enchantment) {
+            ob->remove_property("enchantment");
+            ob->set_property("enchantment", my_enchantment);
+        }
     }
-    
+    /*ob->remove_property("enchantment");
+    if (my_enchantment) {
+        ob->set_property("enchantment", my_enchantment);
+    }*/
     if (weapon->query_identified()) {
         names = weapon->query_identified();
         for (i = 0;i < sizeof(names);i++) {
@@ -753,7 +754,11 @@ object createWeapon(object weapon) {
         if (sscanf(weapon_short, "%s(wielded in", t1)) {
             weapon_short = t1;
         }
-        ob->set_long("This is one end of the " + weapon_short + ". " + weapon->query_long());
+        weapon_long = ob->query_long();
+        if (sscanf(weapon_long, "%s(size ", t1)) {
+            weapon_long = t1;
+        }
+        ob->set_long("This is one end of the " + weapon_short + ". " + weapon_long);
         if (ob->query_obvious_short()) {
             ob->set_obvious_short(ob->query_obvious_short() + "'s end");
         }
@@ -764,26 +769,5 @@ object createWeapon(object weapon) {
     }
     ob->set_overallStatus(weapon->query_overallStatus());
     return ob;
-}
-
-void __ActuallyUnwield() {
-    object loc, ob, * this_weapon;
-    int i;
-    ::__ActuallyUnwield();
-
-    if (TO->query_property("weapon end")) {
-        this_weapon = ETO->query_wielded();
-        ETO->set_property("silent_wield", 1);
-        if (sizeof(this_weapon)) {
-            ob = createWeapon(this_weapon[0]);
-            loc = ETO;
-            ob->move(loc);
-            this_weapon[0]->move("/d/shadowgate/void");
-            this_weapon[0]->remove();
-            loc->remove_property("silent_wield");
-            TO->move("/d/shadowgate/void");
-            TO->remove();
-        }
-    }
 }
 //End of double weapon stuff.
