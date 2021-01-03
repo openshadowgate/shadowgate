@@ -15,7 +15,7 @@ void create()
 	"On the east is a very large, newly built church. It stretches"+
 	" up a few stories in height. The entrance to it is a little"+
 	" south from here, at the intersection of Cedar, Crescent,"+
-	" and Cherry street. Cherry street is the main street through"+
+	" and %^MAGENTA%^Cherry street%^RESET%^ Cherry street is the main street through"+
 	" town, it has most of the shops on it, along with the bank."+
 	" Crescent street runs along the southwest, heading back"+
 	" towards the town gates. Cedar continues to the northwest,"+
@@ -30,7 +30,7 @@ void create()
 	" is a little further south from here, at the intersection"+
 	" of Cedar, Crescent, and Cherry. Crescent street continues"+
 	" down to the southwest, while Cedar runs up to the northwest."+
-	" Cherry street runs straight west and is the main street"+
+	" %^MAGENTA%^Cherry street%^RESET%^runs straight west and is the main street"+
 	" through town, having most of the shops on it."
 	);
 	set_smell("default","A light scent of incense is in the air.");

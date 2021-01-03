@@ -11,16 +11,16 @@ void create()
 	set_property("light",2);
 	set_short("Apple Street");
 	set_long(
-	"You are on Apple street.\n"+
+	"You are on %^RED%^Apple street%^RESET%^\n"+
 	"To the northeast Apple street continues and branches to"+
 	" the east. It also looks like there may be a shop further"+
 	" up the street on the west hand side. To the south is the"+
-	" intersection with Cherry and Pine street. There is also"+
+	" intersection with Cherry and %^GREEN%^Pine street%^RESET%^ There is also"+
 	" a stables there, and the sounds and smells of the horses"+
 	" can be easily detected from here."
 	);
 	set("night long",
-	"You are on Apple street.\n"+
+	"You are on %^RED%^Apple street%^RESET%^\n"+
 	"The street lights to the south and northeast shed light"+
 	" on this section, keeping the streets of Antioch fairly well"+
 	" lit. This street continues on to the northeast and"+
@@ -36,7 +36,7 @@ void create()
 	set_listen("default","Horses can be heard stomping restlessly"+
 	" in their stalls.");
 	set_items(([
-	"street sign" : "This is Apple street.",
+	"street sign" : "This is %^RED%^Apple street%^RESET%^",
 	({"street","cobblestones","cobbles","road","path"}) : "The"+
 	" street is paved with cobblestones.",
 	"sign" : "There is a wooden sign with the symbol of a stables"+

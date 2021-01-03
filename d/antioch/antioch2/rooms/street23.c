@@ -21,7 +21,7 @@ void create()
 	" local tavern. On the opposite side of the street is a large and"+
 	" respectable looking inn. It reaches up two stories in height"+
 	" and looks clean. At the very end of Oak street is the palace."+
-	" Straight south of here Oak joins with Cherry street at a large"+
+	" Straight south of here Oak joins with %^MAGENTA%^Cherry street%^RESET%^at a large"+
 	" fountain."
 	);
 	set("night long",
@@ -36,7 +36,7 @@ void create()
 	" Across the street from the inn looks like the local tavern. The"+
 	" sounds of drunken laughter confirm that, it sounds like everyone's"+
 	" having a good time in there. To the south is a large fountain"+
-	" at the point where Oak and Cherry street join."
+	" at the point where Oak and %^MAGENTA%^Cherry street%^RESET%^join."
 	);
 	if(query_night() == 1) {
 		set_smell("default","You smell the aroma of some delicious"+

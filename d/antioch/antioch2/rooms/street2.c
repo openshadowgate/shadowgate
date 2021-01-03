@@ -14,25 +14,13 @@ void create()
 	set_property("light",2);
 	set_short("A cobbled street");
 	set_long(
-	"You are standing at the intersection of Pine and Crescent."+
-	" Pine street runs up to the northwest and you can see at"+
-	" least one shop along it. Crescent street runs to the"+
-	" northeast and there is also a shop in that direction."+
-	" Immediately to the west appears to be a Healer, there is"+
-	" a sign with the Healer's symbol engraved on it hanging"+
-	" outside the door. To the east is the entrance to the"+
-        " guard tower and you can hear the guards talking and"+
-        " laughing inside. "
-	);
-	set("night long",
-	"A street light illuminates the intersection. To the"+
-	" northeast is Crescent street, it appears to have a shop"+
-	" along the way, as does Pine street, which runs to the"+
-	" northwest. A sign is hanging on the house to the west with"+
-	" the Healer's symbol engraved on it. Across the street from"+
-	" that is the guard tower with warm yellow light spilling"+
-	" out from the doorway. Even now you can hear guards talking"+
-	" and laughing inside."
+            "%^WHITE%^You are at the intersection of %^BOLD%^%^GREEN%^Pine%^RESET%^%^WHITE%^ and %^BOLD%^%^ORANGE%^C%^ORANGE%^r%^RESET%^%^ORANGE%^escen%^BOLD%^%^ORANGE%^t%^RESET%^%^ORANGE%^.%^WHITE%^ %^GREEN%^Pine street%^RESET%^runs up to the
+%^WHITE%^northwest and you can see at least one shop along it. Crescent street runs to the
+%^WHITE%^northeast and there is also a shop in that direction. Immediately to the west appears to
+%^WHITE%^be a Healer, there is a %^ORANGE%^s%^BOLD%^%^ORANGE%^i%^RESET%^%^ORANGE%^gn%^WHITE%^ with the Healer's symbol engraved on it hanging outside the
+%^WHITE%^door. To the east is the entrance to the guard %^BOLD%^%^BLACK%^t%^BLACK%^ower%^RESET%^%^WHITE%^ and you can hear the guards talking
+%^WHITE%^and laughing inside.
+"
 	);
 	set_smell("default","You smell a light scent of herbs mingled"+
 	" with the guards' sweat.");
@@ -92,4 +80,3 @@ void reset() {
 void init() {
    ::init();
 }
-

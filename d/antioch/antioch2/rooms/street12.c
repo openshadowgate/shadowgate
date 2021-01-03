@@ -26,7 +26,7 @@ void create()
 	" of the tailor's house. The street splits off to the west"+
 	" there, joining with Oak and Apple street at a crossroads."+
 	" Cedar street runs southeast, quickly turning to the south"+
-	" up ahead to intersect with Crescent and Cherry street right"+
+	" up ahead to intersect with Crescent and %^MAGENTA%^Cherry street%^RESET%^right"+
 	" in front of the church."
 	);
 	set_smell("default","A faint smell of food is in the air.");
