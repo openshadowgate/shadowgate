@@ -246,7 +246,7 @@ int look(string str) {
 
     foreach(oline in output)
     {
-        obuff += ({oline});
+        obuff += ({" " + oline});
         x++;
         bsize += sizeof(oline);
 

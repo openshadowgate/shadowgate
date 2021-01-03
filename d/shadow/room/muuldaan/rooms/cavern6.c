@@ -2,7 +2,7 @@
 #include "../defs.h"
 inherit INH+"town";
 
-void create(){ 
+void create(){
    ::create();
    set_long("%^BOLD%^A dark cavern%^RESET%^\n"
 "The roof of this dark cavern arcs far above you, lost from view in the cave's %^BLACK%^%^BOLD%^shadows"
@@ -12,7 +12,7 @@ void create(){
 "been cleared, revealing enough stone floor to navigate around the area.  A few little %^ORANGE%^shanties "
 "%^RESET%^have been set up in the area, though they're merely a few pieces of scavenged wood, cloth and "
 "metal, leaning together in vague semblances of structure.  To the south are several particularly large "
-"heaps of what look like rubbish, and a small tunnel-like cavern breaks away to the northeast.\n");
+"heaps of what look like rubbish, and a small tunnel-like cavern breaks away to the northeast. Ladder leads down through the hole dug in the soil.\n");
 
    set_exits(([
      "southeast":ROOMS"cavern7",
@@ -20,5 +20,6 @@ void create(){
      "south":ROOMS"components",
      "northeast":ROOMS"bank",
      "northwest":ROOMS"cavern11",
+     "down":"/d/shadow/ratpaths/rooms/rp_p003_p011",
    ]));
 }

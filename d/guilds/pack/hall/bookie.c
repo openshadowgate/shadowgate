@@ -2,7 +2,8 @@
 #include "/d/guilds/pack/short.h"
 
 inherit ROOM;
-inherit "/d/guilds/inherit/g_money.c";
+//inherit "/d/guilds/inherit/g_money.c";
+//this room is not loading so just making it a normal room. -H 12/27/20
 
 void create() {
     room::create();
@@ -24,8 +25,9 @@ SEETH
 
       ]) );
 }
-
+/*
 void init() {
     room::init();
     money::init();
 }
+*/

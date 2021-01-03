@@ -72,11 +72,13 @@ void execute_feat(string str)
         return;
     }
     
+    /*
     if(caster->query_current_attacker())
     {
         write("You cannot choose your quarry during combat.");
         return;
     }
+    */
     
     if(!caster->is_favored_enemy(target))
     {

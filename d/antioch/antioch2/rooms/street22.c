@@ -15,7 +15,7 @@ void create()
 	"Straight north you can see the entrance to the palace. To the"+
 	" south is the large fountain and the intersection with Cherry"+
 	" street and Oak. On either side of you are shops, but their"+
-	" entrances are on Cherry street and you can't tell what they"+
+	" entrances are on %^MAGENTA%^Cherry street%^RESET%^and you can't tell what they"+
 	" are from here. A little further north is the intersection of"+
 	" oak with Apple and Cedar. You can also see that just passed the"+
 	" intersection are two large buildings. The one on the eastern"+
@@ -26,7 +26,7 @@ void create()
 	"You are on Oak street.\n"+
 	"The street light here helps to light the way. On either side of"+
 	" you are two buildings, most likely shops but their entrances"+
-	" must be on Cherry street. Just to the south is a large fountain"+
+	" must be on %^MAGENTA%^Cherry street%^RESET%^ Just to the south is a large fountain"+
 	" and the intersection of Oak with Cherry. In the distance to the"+
 	" north you can see the palace. Light spills forth from several"+
 	" of the windows there. Before the palace are two buildings, the"+
@@ -62,7 +62,7 @@ void create()
 	({"bar","tavern"}) : "Across from the inn looks like a bar.",
 	({"building","buildings","shop","shops"}) : "There are two"+
 	" buildings on either side of you, but their entrances must be"+
-	" to the south on Cherry street.",
+	" to the south on %^MAGENTA%^Cherry street%^RESET%^",
 	]));
 	set_exits(([
 	"south" : ROOMS+"fountain",

@@ -13,6 +13,8 @@ void create() {
    set_property("no pocket space",1);
    set_property("no sticks", 1);
    set_property("indoors", 1);
+   set_terrain(CITY);
+   set_travel(STAIRWAY);
    set_long(
 "%^RESET%^%^ORANGE%^Inside a cosy cottage%^RESET%^\n"
 "You stand within a small but cosy cottage.  A few aged wooden "

@@ -18,6 +18,8 @@ void create()
     set_property("no teleport", 1);
     set_property("no sticks", 1);
     set_property("indoors", 1);
+    set_terrain(CITY);
+    set_travel(STAIRWAY);
 }
 
 void init()

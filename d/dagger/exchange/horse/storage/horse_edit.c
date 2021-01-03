@@ -882,8 +882,8 @@ void withdraw2(int num)
 
 void SAVE()
 {
-    seteuid(UID_DAEMONSAVE);
-	save_object(SAVE_FILE);
+    seteuid(getuid());
+    save_me(SAVE_FILE);
     seteuid(getuid());
 
 	horse_master =find_object_or_load(STORAGE"horse_master.c");

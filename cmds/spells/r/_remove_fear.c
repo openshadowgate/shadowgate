@@ -6,7 +6,7 @@ void create()
 {
     ::create();
     set_spell_name("remove fear");
-    set_spell_level(([ "cleric" : 1, "bard" : 1,]));
+    set_spell_level(([ "cleric" : 1, "bard" : 1, "inquisitor" : 1 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS remove fear [on TARGET]");
     set_damage_desc("removes cowering, frightened, panicked, shaken");

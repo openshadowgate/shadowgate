@@ -16,15 +16,12 @@ void create()
     set_light(2);
     set_short("Holy room");
     set_long(
-        @DESC
-        % ^ CYAN % ^ Holy room % ^ RESET % ^ BOLD % ^
-        This is the holy room of the castle, here the warriors come
-        to strengthen thier faith and to remember their lost friends
-        and loved ones.In the end of the room you see a large altar
-        filled with white candles, you also see holy symbols and torches
-        on the walls.% ^ RESET % ^
-        DESC
-        );
+        "%^CYAN%^ Holy room %^RESET%^BOLD%^"+
+        "This is the holy room of the castle, here the warriors come"+
+        "to strengthen thier faith and to remember their lost friends"+
+        "and loved ones.  In the end of the room you see a large altar"+
+        "filled with white candles, you also see holy symbols and torches"+
+        "on the walls.%^RESET%^"  );
     set_listen("default", "The silence dominates this room.");
     set_smell("default", "You smell candles.");
     set_exits(([

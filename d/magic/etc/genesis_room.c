@@ -16,6 +16,8 @@ void create() {
    set_property("no sticks", 1);
    set_property("no pocket space",1);
    set_property("indoors", 1);
+   set_terrain(CITY);
+   set_travel(STAIRWAY);
    set_long(
 @GENESIS
 %^BOLD%^%^BLUE%^A Small Demiplane%^RESET%^
