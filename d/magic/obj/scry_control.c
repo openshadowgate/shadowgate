@@ -279,7 +279,7 @@ int scry(string str)
         SCRY_D->stop_scry(TO, 0);
         return 1;
     }
-    TP->set_paralyzed(8, "%^BOLD%^You're concentrating on a remote location...");
+    TP->set_paralyzed(8 * 2, "%^BOLD%^You're concentrating on a remote location...");
     write("%^BOLD%^GREEN%^You concentrate on remote location scrying...");
     ok_to_scry = 1;
     scry_object->scry_on();
@@ -325,8 +325,9 @@ int stop(string str) {
 
 int peer(string str)
 {
-    if (TP->query_paralyzed()) {
-        return notify_fail("" + (string)TP->query_paralyze_message() + "\n");
+    if (TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
+        TP->send_paralyzed_message("info", ETO);
+        return 0;
     }
 
     if (str != "through " + alias) {
@@ -347,8 +348,10 @@ int peer(string str)
 
 int look(string str)
 {
-    if (TP->query_paralyzed()) {
-        return notify_fail("" + (string)TP->query_paralyze_message() + "\n");
+
+    if (TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
+        TP->send_paralyzed_message("info", ETO);
+        return 0;
     }
 
     if (str != "through " + alias) {
@@ -378,8 +381,9 @@ int recognize(string str)
         return 0;
     }
 
-    if (TP->query_paralyzed()) {
-        return notify_fail("" + (string)TP->query_paralyze_message() + "\n");
+    if (TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
+        TP->send_paralyzed_message("info", ETO);
+        return 0;
     }
 
     if (sscanf(str, "%s as %s through " + alias, who, as) != 2) {
@@ -493,8 +497,9 @@ int remember(string str)
         return 0;
     }
 
-    if (TP->query_paralyzed()) {
-        return notify_fail("" + (string)TP->query_paralyze_message() + "\n");
+    if (TP->query_bound() || TP->query_unconscious() || TP->query_paralyzed()) {
+        TP->send_paralyzed_message("info", ETO);
+        return 0;
     }
 
     if (sscanf(str, "through mirror as %s", name) || sscanf(str, "through ball as %s", name) || sscanf(str, "through crystal ball as %s", name) || sscanf(str, "through " + alias + " as %s", name)) {
