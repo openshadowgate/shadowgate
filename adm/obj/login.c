@@ -25,20 +25,16 @@ void create()
 protected void logon()
 {
     int Z, ttl;
-    call_out("idle", LOGON_TIMEOUT);
 
-    if(time() < __LoginTimeBuffer)
-    {
-        message("logon", "Please wait one second, login time buffer in effect.",TO);
+    if (time() < __LoginTimeBuffer) {
+        message("logon", "Please wait one second, login time buffer in effect.", TO);
         internal_remove();
         return;
     }
     __LoginTimeBuffer = time() + 1;
 
-    if(catch(__Player = new(OB_USER)))
-    {
-        if(catch(__Player = new("/adm/failsafe/user_failsafe")))
-        {
+    if (catch(__Player = new(OB_USER))) {
+        if (catch(__Player = new("/adm/failsafe/user_failsafe"))) {
             message("logon", "Someone appears to be messing with the user object.\n"
                     "Please try again in a few minutes.\n", this_object());
             internal_remove();
@@ -62,6 +58,8 @@ protected void logon()
             message("logon", "\n<<< Please consider waiting for a minute for the game to boot properly!!! >>>\n", this_object());
         }
     }
+
+    call_out("idle", LOGON_TIMEOUT);
 
     message("logon", "  Host: shadowgate.org\n  Ports: 8080, 8443 (SSL)\n", this_object());
     message("logon", "  E-mail: law@shadowgate.org\n", this_object());
@@ -365,27 +363,40 @@ protected void enter_email(string str) {
     exec_user();
 }
 
-protected void idle() {
-    message("logon", "\nLogin timed out.\n", this_object());
+protected void idle()
+{
+    if (interactive(TO)) {
+        message("logon", "\nLogin timed out.\n", this_object());
+    }
     internal_remove();
 }
 
 protected void receive_message(string cl, string msg)
 {
     mapping TermInfo;
-    if (cl != "logon") return;
-    if(!stringp(msg)) return;
+    if (cl != "logon") {
+        return;
+    }
+    if (!stringp(msg)) {
+        return;
+    }
     TermInfo = USER_D->myTerm(TO, 1);
     msg = terminal_colour(msg, TermInfo, 140, 0);
     receive(msg);
 }
 
-protected void internal_remove() {
-    if (__Player) destruct(__Player);
+protected void internal_remove()
+{
+    if (__Player) {
+        destruct(__Player);
+    }
     destruct(this_object());
 }
 
-void remove() {
-    if (geteuid(previous_object()) != UID_ROOT) return;
+void remove()
+{
+    if (geteuid(previous_object()) != UID_ROOT) {
+        return;
+    }
     internal_remove();
 }
