@@ -425,6 +425,17 @@ int clear_domains(string str)
     return 1;
 }
 
+int is_alignment_domain(string domain)
+{
+    string * align_domains = ({"law", "chaos", "good", "evil"});
+
+    if (member_array(domain, align_domains) != -1) {
+        return 1;
+    }
+
+    return 0;
+}
+
 int select_domain(string str)
 {
     string* possible_domains, * player_domains, * info, player_deity, temple_deity, selection, which;
@@ -513,7 +524,19 @@ int select_domain(string str)
             return 1;
         }
 
-        if (TP->query("new_class_type") && FEATS_D->usable_feat(TP, "divine domain")) {
+        if (is_alignment_domain(selection)) {
+            string tmpdom;
+
+            foreach(tmpdom in player_domains)
+            {
+                if (is_alignment_domain(tmpdom)) {
+                    tell_object(TP, "You can not select more than one alignment domain, as you already have " + tmpdom + " domain. Choose something else.");
+                    return 1;
+                }
+            }
+        }
+
+        if (FEATS_D->usable_feat(TP, "divine domain")) {
             if (!sizeof(player_domains)) {
                 TP->set_divine_domain(({ selection }));
                 tell_object(TP, "You have choosen to select the " + selection + " domain.\n");
