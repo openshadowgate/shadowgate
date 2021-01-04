@@ -134,7 +134,7 @@ varargs object snoop(object snooper, object snoopee)
         return efun::snoop(snooper, snoopee);
     }
     seteuid(UID_ROOT);
-    log_file("snoop", snooper->query_name() + " attempted snoop of " + snoopee->query_name() + "\n");
+    log_file("adm/snoop", snooper->query_name() + " attempted snoop of " + snoopee->query_name() + "\n");
     seteuid(getuid(TO));
     if ((int)master()->query_member_group(geteuid(snooper), "superuser") ||
         (int)master()->query_member_group(geteuid(snooper), "assist") ||
