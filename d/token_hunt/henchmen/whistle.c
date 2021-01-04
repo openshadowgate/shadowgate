@@ -24,10 +24,10 @@ void create()
     set_weight(0);
     set_value(0);
     set_property("death keep",1);
-    set_property("no animate",1);   
+    set_property("no animate",1);
     set_property("no offer",1);
     set_property("no drop",1);
-    
+
     set_read("%^RESET%^%^BOLD%^The impossibly small letters seem to magnify in your vision as you look at the side of the whistle: \n"
         "%^RESET%^%^BOLD%^You may %^CYAN%^<%^MAGENTA%^call merc%^RESET%^%^BOLD%^%^CYAN%^> %^RESET%^%^BOLD%^to call your hired mercenary to your aid.\n"
         "%^RESET%^%^BOLD%^You may make your merc %^CYAN%^<%^MAGENTA%^wait%^RESET%^%^BOLD%^%^CYAN%^> %^RESET%^%^BOLD%^for you if you need to go somewhere alone.\n"
@@ -37,7 +37,7 @@ void create()
         "%^RESET%^%^BOLD%^when you try to hire another.%^RESET%^\n"
         "%^RESET%^%^BOLD%^%^CYAN%^HINT: %^RESET%^%^BOLD%^If there is more than one person in the room and you are talking to the mercenary, it "
         "would be useful to address him or her by name, so the mercenary knows who you're talking to.%^RESET%^");
-    
+
     call_out("check_duration",1);
 }
 
@@ -54,13 +54,13 @@ void check_duration()
                 HENCH_D->penalize(ETO,"late");
                 TO->remove();
             }
-        }        
+        }
     }
     return;
 }
 
 
-void init() 
+void init()
 {
     ::init();
     add_action("summon_merc","call");
@@ -78,7 +78,7 @@ int query_end_time() { return END_TIME; }
 void setup_whistle(object obj)
 {
     if(!objectp(obj)) { return; }
-    
+
     MERC_NAME = (string)obj->query_name();
     MERC_RACE = (string)obj->query_race();
     if(!END_TIME) { END_TIME = (int)obj->get_end_time(); }
@@ -89,36 +89,39 @@ void setup_whistle(object obj)
 int fire_merc(string str)
 {
     object obj;
-    
+
     if(!stringp(str) || str == "" || str == " ") { return 0; }
     if(str != "contract") { return 0; }
-    
+
     tell_object(TP,"%^BOLD%^%^GREEN%^You terminate the mercenary contract.");
-    
-    if(!objectp(MERC)) 
+
+    if(!objectp(MERC))
     {
         if(time() > END_TIME) { HENCH_D->penalize(TP,"late"); }
         TO->remove();
-        return 1; 
+        return 1;
     }
     MERC->fire_me();
-    return 1;    
+    return 1;
 }
 
 
 int summon_merc(string str)
 {
     object obj;
-    
+
     if(!objectp(ETO) || !interactive(ETO)) { return 0; }
-    if(!SETUP) 
+    if (str != "merc") {
+        return 0;
+    }
+    if(!SETUP)
     {
         tell_object(ETO,"ERROR your whistle was not setup correctly... deleting.");
         TO->remove();
-        return 0; 
+        return 0;
     }
-    if(!stringp(str)) { return 0; }    
-  
+    if(!stringp(str)) { return 0; }
+
     if(!objectp(MERC))
     {
         obj=new(PATH+"/henchman.c");
@@ -144,7 +147,7 @@ int stuck_merc(string str)
         TO->remove();
         return 0;
     }
-    
+
     summon_merc(str);
     MERC->set_heart_beat(1);
     MERC->move(EETO);
@@ -162,5 +165,5 @@ int ditch_merc(string str)
     TP->remove_follower(MERC);
     MERC->force_me("speak wizish");
     MERC->force_me("say fine, I'll wait here.");
-    return 1;    
+    return 1;
 }
