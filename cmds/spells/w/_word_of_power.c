@@ -1,7 +1,7 @@
 #include <priest.h>
 inherit SPELL;
 
-#define ACTIVETEMPLES ({ "jarmila", "kreysneothosies", "lord shadow", "lysara", "ryorik", "the faceless one", "callamir", "kismet", "nilith", "nimnavanon" })
+#define ACTIVETEMPLES ({ "jarmila", "kreysneothosies", "cevahir", "lord shadow", "lysara", "the faceless one", "callamir", "kismet", "nilith", "nimnavanon", "seija"})
 
 void create()
 {
@@ -133,7 +133,7 @@ void spell_effect(int prof)
             where = "/d/magic/temples/" + mygod + "/" + mygod;
             break;
         } else {
-            where = "/d/shadow/room/city/church";
+            where = "/d/darkwood/room/road18";
             placename = "Shadow";
             break;
         }
