@@ -11,7 +11,7 @@ void create()
     set_property("light", 2);
     set_short("Entrance of the Antioch Stables");
     set_long(
-        "%^WHITE%^This is the entrance to the Antioch stables. It is a very large building with a huge entrance. The %^ORANGE%^ceiling%^WHITE%^ is arched high so the horses won't feel too claustrophobic. Enchanted %^ORANGE%^light%^WHITE%^ stones hang down from the ceiling, providing light to the stables without the threat of a fire. The %^BOLD%^%^BLACK%^f%^RESET%^%^ORANGE%^loor%^WHITE%^ is made of dirt and some %^ORANGE%^hay%^WHITE%^ has been tracked in here. To the south looks like to be a tethering post to tie your horse up to. To the north are some stables and there are some more to the west. %^MAGENTA%^Cherry street%^RESET%^is back to the east.
+        "%^WHITE%^This is the entrance to the Antioch stables. It is a very large building with a huge entrance. The %^ORANGE%^ceiling%^WHITE%^ is arched high so the horses won't feel too claustrophobic. Enchanted %^ORANGE%^light%^WHITE%^ stones hang down from the ceiling, providing light to the stables without the threat of a fire. The %^BOLD%^%^BLACK%^f%^RESET%^%^ORANGE%^loor%^WHITE%^ is made of dirt and some %^ORANGE%^hay%^WHITE%^ has been tracked in here. To the south looks like to be a tethering post to tie your horse up to. To the north are some stables and there are some more to the west. %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^is back to the east.
 "
         );
     set_smell("default", "You can smell the sweat of horses mingled" +

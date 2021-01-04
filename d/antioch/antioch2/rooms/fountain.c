@@ -12,7 +12,7 @@ void create()
 	set_property("light",2);
 	set_short("%^BOLD%^A fountain");
 	set_long(
-	"%^CYAN%^You are at the intersection of Cherry and Oak street. In the center of the street is a large %^BOLD%^%^WHITE%^white marble fountain%^RESET%^%^CYAN%^. It is a %^BOLD%^%^BLUE%^s%^BLUE%^t%^WHITE%^at%^BLUE%^u%^WHITE%^e%^RESET%^%^CYAN%^ of Ignatius humbly kneeling down in the %^BOLD%^%^BLUE%^water%^RESET%^%^CYAN%^ with his arms outstretched, imploring for forgiveness. %^YELLOW%^Golden %^BLUE%^t%^ORANGE%^e%^BLUE%^ars%^RESET%^%^CYAN%^ spill down his handsome face, returning to a normal %^BOLD%^%^ORANGE%^blue%^RESET%^%^CYAN%^ color as they join with the rest of the %^BOLD%^%^BLUE%^water%^RESET%^%^CYAN%^. The base of the fountain is three feet in height and circular, with a diameter of about four feet. On the base of the fountain many %^BOLD%^%^RED%^runes%^RESET%^%^CYAN%^ are carved, telling of the sad tale of Antioch. %^MAGENTA%^Cherry street%^RESET%^continues to the west and east with shops along the way and directly south of here is a large stone building with a wooden sign with the symbol of a bank on it. To the north Oak street runs to the palace.
+	"%^CYAN%^You are at the intersection of %^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ and %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^. In the center of the street is a large %^BOLD%^%^WHITE%^white marble fountain%^RESET%^%^CYAN%^. It is a %^BOLD%^%^BLUE%^s%^BLUE%^t%^WHITE%^at%^BLUE%^u%^WHITE%^e%^RESET%^%^CYAN%^ of Ignatius humbly kneeling down in the %^BOLD%^%^BLUE%^water%^RESET%^%^CYAN%^ with his arms outstretched, imploring for forgiveness. %^YELLOW%^Golden %^BLUE%^t%^ORANGE%^e%^BLUE%^ars%^RESET%^%^CYAN%^ spill down his handsome face, returning to a normal %^BOLD%^%^ORANGE%^blue%^RESET%^%^CYAN%^ color as they join with the rest of the %^BOLD%^%^BLUE%^water%^RESET%^%^CYAN%^. The base of the fountain is three feet in height and circular, with a diameter of about four feet. On the base of the fountain many %^BOLD%^%^RED%^runes%^RESET%^%^CYAN%^ are carved, telling of the sad tale of Antioch. %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^continues to the west and east with shops along the way and directly south of here is a large stone building with a wooden sign with the symbol of a bank on it. To the north %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^ runs to the palace.
 "
 	);
 	set_smell("default","The scent of spring flowers seems to be"+
@@ -22,7 +22,7 @@ void create()
 	set_items(([
 	({"street","cobblestones","cobbles","road","path"}) : "The"+
 	" street is paved with cobblestones.",
-	"street sign" : "This is the intersection of %^MAGENTA%^Cherry street%^RESET%^with Oak.",
+	"street sign" : "This is the intersection of %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^with Oak.",
 	({"bank","stone building","building"}) : "This is a sturdy stone"+
 	" building with a brown wooden roof. It would not be easy to"+
 	" break into and even the door looks fortified. A wooden sign"+

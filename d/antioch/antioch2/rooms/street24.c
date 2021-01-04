@@ -12,7 +12,7 @@ void create()
     set_property("light", 2);
     set_short("Oak Street");
     set_long(
-        "%^WHITE%^You are on Oak street.\n o the west is a large and cheerful looking %^ORANGE%^bar,%^WHITE%^ though it doesn't seem to have too many customers just yet. It is a new building, and while not the most extravagant, it probably suits its customers well. Across from the bar is the %^ORANGE%^inn.%^WHITE%^ It reaches two stories in height and seems to be fairly clean and well run. You can hear the clank and clatter of dishes coming from its kitchen, and all sorts of delicious smells spill out the entrance. This would be a good place to get a good meal from. Further north is a mighty %^BOLD%^%^WHITE%^palace.%^RESET%^%^WHITE%^ Back to the south Oak street continues, meeting with Apple and Cedar in a crossroads and then continuing south to join with Cherry street.
+        "%^WHITE%^You are on %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^.\nTo the west is a large and cheerful looking %^ORANGE%^bar,%^WHITE%^ though it doesn't seem to have too many customers just yet. It is a new building, and while not the most extravagant, it probably suits its customers well. Across from the bar is the %^ORANGE%^inn.%^WHITE%^ It reaches two stories in height and seems to be fairly clean and well run. You can hear the clank and clatter of dishes coming from its kitchen, and all sorts of delicious smells spill out the entrance. This would be a good place to get a good meal from. Further north is a mighty %^BOLD%^%^WHITE%^palace.%^RESET%^%^WHITE%^ Back to the south %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^ continues, meeting with %^GREEN%^A%^RED%^pp%^GREEN%^l%^RED%^e%^RESET%^ and %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r%^RESET%^ in a crossroads and then continuing south to join with %^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ .
 "
         );
     if (query_night() == 1) {
@@ -27,7 +27,7 @@ void create()
     set_items(([
                    ({ "street", "cobblestones", "cobbles", "road", "path" }) : "The" +
                    " street is paved with cobblestones.",
-                   "street sign" : "This is Oak street.",
+                   "street sign" : "This is %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^.",
                    "palace" : "At the northern part of this road is a large and" +
                    " impressive palace.",
                    "inn" : "The inn is the large two story building on the east," +

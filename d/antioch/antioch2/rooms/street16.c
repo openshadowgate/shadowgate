@@ -9,10 +9,10 @@ void create()
     set_travel(PAVED_ROAD);
     set_property("indoors", 0);
     set_property("light", 2);
-    set_short("Crescent Street");
+    set_short("%^ORANGE%^Crescent%^RESET%^ Street");
     set_long(
-        "You are on Crescent street.\n" +
-        "%^WHITE%^To the northeast Crescent %^ORANGE%^street%^WHITE%^ continues to join with Cherry and Cedar outside of the large %^BOLD%^%^ORANGE%^chur%^WHITE%^c%^ORANGE%^h.%^RESET%^%^WHITE%^ It also continues to the southwest, meeting with %^GREEN%^Pine street%^RESET%^not far from the Antioch gates. On the southern side of the road there is a small %^ORANGE%^h%^ORANGE%^o%^BOLD%^%^BLACK%^use%^RESET%^%^WHITE%^ with a brown roof. There appears to be an entrance to it a little further down this street.
+        "You are on %^BOLD%^%^ORANGE%^C%^RESET%^%^ORANGE%^re%^BOLD%^%^ORANGE%^s%^RESET%^%^ORANGE%^c%^BOLD%^%^ORANGE%^e%^RESET%^%^ORANGE%^n%^BOLD%^%^ORANGE%^t%^RESET%^ %^ORANGE%^street%^WHITE%^.\n" +
+        "%^WHITE%^To the northeast %^ORANGE%^Crescent%^RESET%^ %^ORANGE%^street%^WHITE%^ continues to join with %^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ and %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r%^RESET%^ outside of the large %^BOLD%^%^ORANGE%^chur%^WHITE%^c%^ORANGE%^h.%^RESET%^%^WHITE%^ It also continues to the southwest, meeting with %^GREEN%^%^BOLD%^%^BLACK%^P%^RESET%^%^GREEN%^ine %^GREEN%^str%^BOLD%^%^BLACK%^e%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^t%^RESET%^ street%^RESET%^not far from the Antioch gates. On the southern side of the road there is a small %^ORANGE%^h%^ORANGE%^o%^BOLD%^%^BLACK%^use%^RESET%^%^WHITE%^ with a brown roof. There appears to be an entrance to it a little further down this street.
 "
         );
     set_smell("default", "You smell the faint scent of dried" +
@@ -27,7 +27,7 @@ void create()
     set_items(([
                    ({ "street", "cobblestones", "cobbles", "road", "path" }) : "The" +
                    " street is paved with cobblestones.",
-                   "street sign" : "This is Crescent street.",
+                   "street sign" : "This is %^BOLD%^%^ORANGE%^C%^RESET%^%^ORANGE%^re%^BOLD%^%^ORANGE%^s%^RESET%^%^ORANGE%^c%^BOLD%^%^ORANGE%^e%^RESET%^%^ORANGE%^n%^BOLD%^%^ORANGE%^t%^RESET%^ %^ORANGE%^street%^WHITE%^.",
                    ({ "house", "building", "shop" }) : "It is a small little wooden" +
                    " house with a pretty brown roof. The entrance is a little" +
                    " southwest of here.",

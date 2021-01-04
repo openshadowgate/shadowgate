@@ -24,7 +24,7 @@ void create()
     }
     set_items(([
                    ({ "door", "cherry door" }) : "The lovely cherry wood door leads" +
-                   " north to %^MAGENTA%^Cherry street%^RESET%^",
+                   " north to %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^",
                    "window" : "A window on the eastern wall allows a cool breeze" +
                    " to drift in and helps carry away the strong smell of the oils.",
                    "floor" : "The hardwood floor looks as though it has been recently" +

@@ -10,10 +10,10 @@ void create()
     set_travel(PAVED_ROAD);
     set_property("indoors", 0);
     set_property("light", 2);
-    set_short("Cherry Street");
+    set_short("%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ Street");
     set_long(
-        "%^ORANGE%^You are on %^MAGENTA%^Cherry street%^RESET%^\n" +
-        "%^ORANGE%^This is the main street through town and there are lots of %^BOLD%^%^BLACK%^shop%^WHITE%^s%^RESET%^%^ORANGE%^ on it. There is even a little bank back to the west, just south of the large %^CYAN%^fo%^BOLD%^%^CYAN%^u%^CYAN%^n%^RESET%^%^CYAN%^t%^BOLD%^%^CYAN%^a%^RESET%^%^CYAN%^in%^BOLD%^%^CYAN%^.%^RESET%^%^ORANGE%^ To the north there is a weapons shop, with a sign hanging over the doorway with a picture of a serrated mace on it. To south is the shop of an armorer with a sign declaring it the Silver Gauntlet. At the end of the street to the east there is a very large and beautiful %^BOLD%^%^ORANGE%^church.%^RESET%^%^ORANGE%^ Just in front of the church Crescent and Cedar intersect with Cherry. Crescent street runs to the southwest towards the Antioch gates, and Cedar street runs to the northwest to meet with Oak street. Oak street runs from the fountain straight north to the palace.
+        "%^ORANGE%^You are on %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^\n" +
+        "%^ORANGE%^This is the main street through town and there are lots of %^BOLD%^%^BLACK%^shop%^WHITE%^s%^RESET%^%^ORANGE%^ on it. There is even a little bank back to the west, just south of the large %^CYAN%^fo%^BOLD%^%^CYAN%^u%^CYAN%^n%^RESET%^%^CYAN%^t%^BOLD%^%^CYAN%^a%^RESET%^%^CYAN%^in%^BOLD%^%^CYAN%^.%^RESET%^%^ORANGE%^ To the north there is a weapons shop, with a sign hanging over the doorway with a picture of a serrated mace on it. To south is the shop of an armorer with a sign declaring it the Silver Gauntlet. At the end of the street to the east there is a very large and beautiful %^BOLD%^%^ORANGE%^church.%^RESET%^%^ORANGE%^ Just in front of the church %^ORANGE%^Crescent%^RESET%^ and %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r%^RESET%^ intersect with %^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^. %^BOLD%^%^ORANGE%^C%^RESET%^%^ORANGE%^re%^BOLD%^%^ORANGE%^s%^RESET%^%^ORANGE%^c%^BOLD%^%^ORANGE%^e%^RESET%^%^ORANGE%^n%^BOLD%^%^ORANGE%^t%^RESET%^ %^ORANGE%^street%^WHITE%^ runs to the southwest towards the Antioch gates, and %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r %^ORANGE%^s%^BOLD%^%^BLACK%^tre%^RESET%^%^ORANGE%^e%^ORANGE%^t%^RESET%^ runs to the northwest to meet with %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^. %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^ runs from the fountain straight north to the palace.
 "
         );
     set_smell("default", "The smell of oil is thick in the air.");
@@ -27,7 +27,7 @@ void create()
     set_items(([
                    ({ "street", "cobblestones", "cobbles", "road", "path" }) : "The" +
                    " street is paved with cobblestones.",
-                   "street sign" : "This is %^MAGENTA%^Cherry street%^RESET%^",
+                   "street sign" : "This is %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^",
                    "fountain" : "There is a large fountain to the west.",
                    "church" : "A very impressive stone church sits at the eastern" +
                    " end of this street.",

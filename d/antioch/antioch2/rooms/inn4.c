@@ -49,7 +49,7 @@ void create()
 	" exact same shade as the carpet.",
 	]));
 	set_exits(([
-	"stairs" : ROOMS+"inn1",
+	"down" : ROOMS+"inn1",
 	"south" : ROOMS+"green_room",
 	"west" : ROOMS+"lilac_room",
 	"north" : ROOMS+"rose_room",
