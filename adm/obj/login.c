@@ -60,6 +60,7 @@ protected void logon()
     }
 
     call_out("idle", LOGON_TIMEOUT);
+    call_out("internal_remove", LOGON_TIMEOUT * 10);
 
     message("logon", "  Host: shadowgate.org\n  Ports: 8080, 8443 (SSL)\n", this_object());
     message("logon", "  E-mail: law@shadowgate.org\n", this_object());
