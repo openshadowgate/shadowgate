@@ -354,8 +354,8 @@ int __Read_me(string str)
     }
     write("%^CYAN%^You can ask divines to return you to the true life here:%^RESET%^
 
-  %^ORANGE%^<pray>%^RESET%^                    Return to life, keeping the D flag
-  %^ORANGE%^<return>%^RESET%^                  Return to life, without the D flag
+  %^ORANGE%^<pray>%^RESET%^                    Return to life, with %^BOLD%^%^RED%^Gr%^RESET%^ace time protection from player kill
+  %^ORANGE%^<return>%^RESET%^                  Return to life, without the %^BOLD%^%^RED%^Gr%^RESET%^ flag
 
 %^MAGENTA%^The church performs the following tasks, most for a fee of course:%^RESET%^
 
