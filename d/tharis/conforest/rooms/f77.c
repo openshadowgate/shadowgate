@@ -17,19 +17,19 @@ void create() {
 }
 
 int __Read_me(string str){
-	if(!str || str != "sign") 
+	if(!str || str != "sign")
 		return 0;
-	
+
 	tell_room(TO,TPQCN+" reads over the sign. You should too.",TP);
 	write(
 @OLI
 	%^BOLD%^
    %^BOLD%^
    This is meant as a warning.  This area is meant to be extremely difficult.
-   Due to abuses, those below level 15 are no longer allowed to enter. 
+   Due to abuses, those below level 15 are no longer allowed to enter.
    This area is meant to be difficult and the rewards for higher levels.
-   Also this is an area which makes strict use of alignment with 
-   far-reaching consequences.  	
+   Also this is an area which makes strict use of alignment with
+   far-reaching consequences.
 OLI
 	);
 	return 1;
@@ -44,8 +44,6 @@ int GoThroughDoor(){
    if(TP->query_highest_level() < 15) {
        "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" tried to enter Tharis "
           "forest in spite of the warning sign.");
-     log_file("tharis", TPQCN+" tried to enter Tharis forest in spite of the "
-          "warning sign."+ctime(time())+".\n");
      write("That forest seems too ominous for someone of your level.\n"
           "Read the sign if you didn't already!");
      return 0;
