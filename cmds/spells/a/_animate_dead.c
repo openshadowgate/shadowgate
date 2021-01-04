@@ -19,7 +19,7 @@ void create()
     set_spell_sphere("necromancy");
 
     set_syntax("cast CLASS animate dead [on TARGET]");
-    set_damage_desc("raises no more than four skeletal champions");
+    set_damage_desc("raises no more than three skeletal champions at a time");
     set_description("%^RESET%^With this spell, the caster uses remnants of the negative energy released upon a recent death in order to summon an undead skeleton. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of this spell are known to be inherently evil." + extra_help());
     set_verbal_comp();
     set_somatic_comp();
@@ -85,7 +85,7 @@ void spell_effect(int prof)
     if (!intp(num_mon)) {
         num_mon = 0;
     }
-    if (num_mon >= 6) {
+    if (num_mon >= 5) {
         tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^YOU ARE %^WHITE%^NOT %^WHITE%^WORTHY%^BLACK%^ TO RAISE MORE!%^RESET%^%^RESET%^");
         tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
         TO->remove();
@@ -94,11 +94,11 @@ void spell_effect(int prof)
 
     spell_successful();
 
-    for (i = 0; i < sizeof(targs) && i < 3; i++) {
+    for (i = 0; i < sizeof(targs) && i < 2; i++) {
         undead = new(UNDEADDIR + "skeleton");
         lvl = 1;
 
-        if (num_mon >= 6) {
+        if (num_mon >= 5) {
             undead->remove();
             tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^RAISING MORE IS %^WHITE%^BEYOND%^BLACK%^ YOUR PATHETIC %^BLACK%^M%^WHITE%^ASTERY!%^RESET%^%^RESET%^");
             tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
