@@ -1,6 +1,8 @@
 // Occult classes or ic development only
 #define OCCULT_GODS (([\
     "dream":({"Dreams/Madness", ({4, 5, 6, 7, 8, 9}), ({5, 7, 8, 9})}), \
+    "edea":({"Light/Good", ({1, 2, 4, 5, 7, 8}), ({1, 4, 7})}), \
+    "ashra":({"Darkness/Evil", ({2, 3, 5, 6, 8, 9}), ({3, 6, 9})}), \
 ]))
 
 #define OCCULT_CLASSES ({"warlock"})
