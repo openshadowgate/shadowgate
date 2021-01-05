@@ -28,6 +28,8 @@ void create() {
         set_class("thief");
         set_mlevel("thief",query_level());
         set_guild_level("thief",query_level());
+        set_skill("stealth", query_level());
+        set_hidden(1);
 
         set_monster_feats(({
                     "dodge",
@@ -58,4 +60,19 @@ void create() {
                         "combat reflexes"
                         }));
 
+}
+
+init()
+{
+    ::init();
+
+    if (sizeof(query_attackers())) {
+        return;
+    }
+
+    if (TP->query_level() > 12 && !TP->query_invis() && !TP->query_hidden()) {
+        tell_object(TP,"%^BOLD%^%^WHITE%^Someone stabs you in the back!%^RESET%^");
+        TO->add_attacker(TP);
+        TP->add_attacker(TO);
+    }
 }

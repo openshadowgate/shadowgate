@@ -97,17 +97,18 @@ void hitem()
 }
 
 
-void init(){
+void init()
+{
     ::init();
-    if(!query_property("blinking")) {
-        new("/cmds/spells/b/_blink.c")->use_spell(TO,TO,70,100,"mage");
+    if (!query_property("blinking")) {
+        new("/cmds/spells/b/_blink.c")->use_spell(TO, TO, 70, 100, "mage");
     }
-    if(!query_property("Gflagprop")) {
-        new("/cmds/spells/s/_stoneskin")->use_spell(TO, TO->query_name(),70,100,"mage");
+    if (!query_property("iron body")) {
+        new("/cmds/spells/s/_stoneskin")->use_spell(TO, TO->query_name(), 70, 100, "mage");
         Gbl = 40;
         set_property("Gflagprop", 1);
     }
-    if(!wizardp(TP)&&!TP->query_true_invis()){
+    if (!wizardp(TP) && !TP->query_true_invis() && userp(TP)) {
         kill_ob(TP, 1);
     }
 }
