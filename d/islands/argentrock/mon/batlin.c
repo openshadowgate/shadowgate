@@ -489,6 +489,10 @@ void die(object ob)
         tell_room(ETO, "%^MAGENTA%^Batlin whispers%^RESET%^: You are worthless trash. You are cursed forever!");
     }
 
+    if (!random(5)) {
+        new("/d/common/obj/misc/tools/portable_lab_case.c")->move(TO);
+    }
+
     //daemon princess ring phrase here
     command("unwear ring");
     command("offer ring");

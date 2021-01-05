@@ -38,9 +38,15 @@ void create() {
     set_max_hp(20000);
     set_hp(query_max_hp());
     set_size(2);
+
     new("/d/dagger/marsh/tower/obj/speedboots.c")->move(TO);
     new("/d/dagger/marsh/tower/obj/dagger_sarfice.c")->move(TO);
     new("/d/dagger/marsh/tower/obj/psicirclet.c")->move(TO);
+
+    if (!random(5)) {
+        new("/d/common/obj/misc/tools/portable_crystal_ball.c")->move(TO);
+    }
+
     new(VHAND)->move(TO);
     TO->force_me("attach hand");
     force_me("wearall");
