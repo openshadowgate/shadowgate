@@ -371,24 +371,3 @@ string * bound_to() {
    if(sizeof(owners)) return owners;
    return 0;
 }
-
-void query_charges()
-{
-    return charges;
-}
-
-void set_charges(int x)
-{
-    charges = x;
-}
-
-void set_charges_empty() {
-    charges = -1;
-}
-
-int query_charges_empty() {
-    if (charges < 0) {
-        return 1;
-    }
-    return 0;
-}

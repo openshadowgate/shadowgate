@@ -1,7 +1,7 @@
 #include <std.h>
 
 //Added following so it's wieldable with weapon feats Octothorpe 5/6/09
-inherit "/d/common/obj/weapon/mclub.c";
+inherit "/d/common/obj/weapon/mstaff.c";
 #define MAXUSES1 15
 #define MAXUSES2 10
 

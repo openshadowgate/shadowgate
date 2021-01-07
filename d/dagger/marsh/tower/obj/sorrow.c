@@ -11,9 +11,7 @@ void init() {
     ::init();
     if(interactive(TP) && TP == environment(TO) && !owned) {
 		owned = TPQN;
-		if (query_charges_empty()) {
-			uses = random((int)TP->query_level() * 10) + 100;
-		}
+		uses = random((int)TP->query_level() * 10) + 100;
     }
 }
 
@@ -240,23 +238,4 @@ int extra_hit(object vic){
 	    return dam;
 	}
     }
-}
-
-int query_charges() {
-	return uses;
-}
-
-void set_charges(int c) {
-	uses = c;
-}
-
-void set_charges_empty() {
-	uses = -1;
-}
-
-int query_charges_empty() {
-	if (uses < 0) {
-		return 1;
-	}
-	return 0;
 }

@@ -107,22 +107,3 @@ int quake(string str){
       return 1;
    }
 }
-
-int query_charges() {
-    return uses;
-}
-
-void set_charges(int c) {
-    uses = c;
-}
-
-void set_charges_empty() {
-    uses = MAXUSES + 1;
-}
-
-int query_charges_empty() {
-    if (uses > MAXUSES) {
-        return 1;
-    }
-    return 0;
-}

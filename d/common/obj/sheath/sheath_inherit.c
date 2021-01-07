@@ -467,7 +467,7 @@ int draw_from(string str) {
 
 int sheath_into(string str){
     int silly;
-	int res, is_weaponend, i;
+	int res, i;
 	object ths,tht,*inv;
 	string this, that;
     if(TP->query_bound() || TP->query_unconscious()
@@ -503,23 +503,12 @@ int sheath_into(string str){
 		notify_fail("You can't find somewhere free to put that.\n");
 		return 0;
 	    }
-        if (ths->query_property("weapon end")) {
-            TP->force_me("single_weapon");
-            ths = TP->query_wielded()[0];
-            is_weaponend = 1;
-        }
 	    if(!will_work(ths,tht)) {
 		    notify_fail("You can't seem to find one that will work for that weapon unused.\n");
-            if (is_weaponend) {
-                TP->force_me("double_weapon");
-            }
 		    return 0;
 	    }
 	    if((ths->query_is_lrweapon() != 0) && 
 	      (ths->query_size() > query_property("sheath_size"))) {
-            if (is_weaponend) {
-                TP->force_me("double_weapon");
-            }
 		    notify_fail("This weapon is too large for your available "+CM+"!\n");
 		    return 0;
 	    }

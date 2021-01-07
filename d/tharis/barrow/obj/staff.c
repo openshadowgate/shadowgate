@@ -1,15 +1,13 @@
 //Updated to inherit standard staff - Octothorpe 7/15/09
 #include <std.h>
 #include "/d/tharis/barrow/short1.h"
-inherit "/d/common/obj/weapon/club_lg.c";
+inherit "/d/common/obj/weapon/quarter_staff.c";
 
 int charges,countdown,xx,yy;
 void init() {
     ::init();
-    if (query_charges_empty()) {
-        charges = 0;
-        countdown = 0;
-    }
+    charges = 0;
+    countdown = 0;
     add_action("word_func","sivaar");
 }
 void create() {
@@ -433,25 +431,3 @@ int extra_unwield() {
     //}
     return 1;
 }
-/*
-void query_charges()
-{
-    return charges;
-}
-
-void set_charges(int x)
-{
-    charges = x;
-}
-
-void set_charges_empty() {
-    charges = -1;
-}
-
-int query_charges_empty() {
-    if (charges < 0) {
-        return 1;
-    }
-    return 0;
-}
-*/

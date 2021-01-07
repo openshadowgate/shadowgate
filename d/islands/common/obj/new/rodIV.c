@@ -688,22 +688,3 @@ int consume_fun()
         return 0;
     }
 }
-
-int query_charges() {
-    return uses;
-}
-
-void set_charges(int c) {
-    uses = c;
-}
-
-void set_charges_empty() {
-    uses = -1;
-}
-
-int query_charges_empty() {
-    if (uses < 0) {
-        return 1;
-    }
-    return 0;
-}

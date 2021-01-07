@@ -97,14 +97,6 @@ int cmd_drop(string str)
                 return 1;
             }
 
-            if (ob->query_property("weapon end")) {
-                if (ob->query_wielded()) {
-                    TP->force_me("single_weapon");
-                    ob = TP->query_wielded()[0];
-                    tmp = (string)ob->query_short();
-                }
-            }
-
             res = (int)ob->move(ETP);
             if (res == MOVE_OK) {
                 tell_room(ETP, TPQCN + " drops " + tmp + ".\n", TP);

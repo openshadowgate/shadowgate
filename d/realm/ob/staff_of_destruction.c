@@ -109,18 +109,6 @@ void adj_charges(int x)
 	charges = charges + x;
 }
 
-void set_charges_empty() {
-	charges = -1;
-}
-
-int query_charges_empty() {
-	if (charges < 0) {
-		return 1;
-	}
-	return 0;
-}
-
-
 void init()
 {
 	::init();

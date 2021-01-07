@@ -981,10 +981,6 @@ int quit()
     for(x = 0;x < sizeof(inv);x++)
     {
         if(objectp(inv[x])) {
-            if (inv[x]->query_property("weapon end") && inv[x]->query_wielded()) {
-                TO->force_me("single_weapon");
-                inv[x] = TO->query_wielded()[0];
-            }
             inv[x]->unequip();
         }
     }
@@ -2002,12 +1998,6 @@ nomask void die()
         ob->set_reztype(reztype);
         ob->move(TO);
         return;
-    }
-
-    if (TP->query_wielded()) {
-        if (TP->query_wielded()[0]->query_property("weapon end")) {
-            TP->force_me("single_weapon");
-        }
     }
 
     message("death", "You die.\nYou feel the sensations of nothingness " +
