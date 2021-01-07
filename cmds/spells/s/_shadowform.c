@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("shadowform");
-    set_spell_level(([ "paladin" : 4, "bard" : 4, "psion" : 4, "mage" : 4 ]));
+    set_spell_level(([ "paladin" : 4, "bard" : 4, "psion" : 4, "mage" : 4, "magus" : 4 ]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS shadowform");
     set_damage_desc("a chance to reduce damage to 1/5");
