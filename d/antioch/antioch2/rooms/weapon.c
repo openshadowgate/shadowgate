@@ -45,7 +45,7 @@ void create()
                    " stones used for sharpening weapons. That must be where the" +
                    " weapons smith works.",
                    ({ "door", "oak door" }) : "This sturdy door is made of oak and" +
-                   " leads outside to %^MAGENTA%^Cherry street%^RESET%^",
+                   " leads outside to %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^",
                    ({ "window", "windows" }) : "There are two small windows on the" +
                    " eastern side of the room, open to let the fresh air in.",
                    ]));

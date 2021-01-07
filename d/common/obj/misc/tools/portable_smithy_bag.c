@@ -9,7 +9,6 @@ void create()
     set_short("%^BOLD%^%^BLACK%^A sturdy canvas bag%^RESET%^");
     set_long("%^BOLD%^%^BLACK%^This sturdy canvas duffle bag measures twenty four inches in diameter by another thirty-six inches tall.  The interior is absolutely crammed with various blacksmithing materials including an anvil, a forge with manual bellows, a small sack of coal, and various blacksmithing hammers and tongs; its obvious these materials comprise what anyone would need to equip a fully funcioning smithy. Oddly enough, the interior of this bag appears far more voluminous than you would have otherwise suspected. Looks like you me able to %^BOLD%^%^WHITE%^<setup> %^BOLD%^%^BLACK%^the smithy somewhere.%^RESET%^");
     set_weight(20);
-    set_value(1500000);
 }
 
 void setup_func()

@@ -2484,6 +2484,10 @@ int spell_kill(object victim, object caster)
         return 0;
     }
 
+    if (victim->query_property("minion") == caster) {
+        return 0;
+    }
+
     // Non link-dead users have to excercise their own judgement.
     if (interactive(victim)) {
         victim->set_property("last_attacker", caster);

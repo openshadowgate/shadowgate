@@ -14,9 +14,9 @@
  */
 int night_light(object env, int light)
 {
-    return ((light-3)+
-            ((int)ASTRONOMY_D->query_moon_light()) +
-            ((int)env->query_property("night light")));
+    return ((light - 3) +
+            (ASTRONOMY_D->query_moon_light()) +
+            (env->query_property("night light")));
 }
 
 /**
@@ -25,31 +25,35 @@ int night_light(object env, int light)
  * @param who Object you want to calculate illumination for
  * @return Light in mud units
  */
-int total_light(object who) {
-    object *inv;
+int total_light(object who)
+{
+    object* inv;
     object env;
     int light, i;
 
-    if (objectp(who) && who->is_room())
-    {
+    if (objectp(who) && who->is_room()) {
         env = who;
+    }else {
+        if (!who || !(env = environment(who))) {
+            return 0;
+        }
     }
-    else
-    {
-        if(!who || !(env = environment(who))) return 0;
-    }
-    i = sizeof(inv = all_inventory(env));
+
+    inv = all_inventory(env);
+    i = sizeof(inv);
+
     light = (int)env->query_property("light");
-    while(i--)
+    while (i--) {
         light += (int)inv[i]->query_property("light");
-    if(env->query_property("indoors"))
-        return light;
-    if((int)ASTRONOMY_D->query_eclipse())
-    {
-        return night_light(env,light);
     }
-    switch( EVENTS_D->query_time_of_day() )
-    {
+
+    if (env->query_property("indoors")) {
+        return light;
+    }
+    if ((int)ASTRONOMY_D->query_eclipse()) {
+        return night_light(env, light);
+    }
+    switch (EVENTS_D->query_time_of_day()) {
     case "dawn":
         return --light;
     case "day":
@@ -57,7 +61,7 @@ int total_light(object who) {
     case "twilight":
         return --light;
     case "night":
-        return night_light(env,light);
+        return night_light(env, light);
     }
     return light;
 }

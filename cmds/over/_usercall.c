@@ -43,17 +43,6 @@ int cmd_usercall( string a )
        write("**WARNING** Misuse of this function will be punished\n");
     if( !a ) { notify_fail( SYNTAX ); return 0; }
 
-  // This code inserted by Aragorn.  DO NOT remove it without his or 
-  // Melnmarn's permission!
-
-    //  seteuid(UID_LOG);
-    //    log_file( "calls",
-    //      this_player()-> query_name() + " under euid " + geteuid() + " " +
-    //      ctime( time() ) + "\n" + a + "\n" 
-    //    );
-
-  // end Aragorn's code.
-
   seteuid( geteuid( previous_object() ) );
   exp_a = explode( a, ";" );
   s = sizeof( exp_a );
@@ -91,11 +80,11 @@ int cmd_usercall( string a )
     else
       write( "Can't identify " + identify( funcs[i] )+" as a string." );
   }
- 
+
   if( !sizeof( tmp ) )
     return 1;
   funcs = tmp;
-  
+
   if( pointerp( args ) && ( s = sizeof( args ) ) )
     for( i = 0 ; i < s ; i++ )
       args[i] = resolv_ref( resolv_str( args[i] ) );
@@ -114,7 +103,7 @@ int cmd_usercall( string a )
       //	  }
       //	}
       //      }
-      //if((string)this_player()->query_position() == "apprentice") 
+      //if((string)this_player()->query_position() == "apprentice")
       //if(!interactive(objs[i])) {
       //      write("Only creators can call non-interactive objects.");
       //      write("You may only call yourself.");
@@ -164,10 +153,9 @@ int help()
 {
     message("Nhelp", SYNTAX+
     "Effect: Calls the function <function> in player object <object>,\n"+
-    "passing as many arguments <arg> as you give.\n"+ 
+    "passing as many arguments <arg> as you give.\n"+
     "If no function is specified a dump of the object is given.\n"+
     "<object> and <function> can be arrays (eg \"users\")\n"+
     "See also: refs\n", this_player());
   return 1;
 }
-

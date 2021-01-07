@@ -1,22 +1,21 @@
-#include <std.h>
-
 // Must correspond to deities.h
 
 // Occult gods are in this file for multiclassing only. People that MC
-// with cleric will have to deal with domain disbalance on their own
-// unless someone looks at it.
+// with cleric will have to deal with lack of domains
 #define SPELL_DOMAINS (([\
-    "callamir"         : ({ "good", "charm", "air", "trickery", "travel", "chaos",}), \
-    "cevahir"          : ({ "mentalism", "renewal", "strength", "war" }) , \
-    "dream"            : ({ "chaos", "madness", "void", "stars", "evil", "good"}),\
-    "jarmila"          : ({ "good", "renewal", "sun", "protection", "fire", "martyr" }) ,\
-    "khyron"           : ({ "fire", "storms", "destruction", "suffering", "chaos", "plague" }) , \
-    "kismet"           : ({ "creation", "knowledge", "magic", "stars"}) , \
-    "kreysneothosies"  : ({ "protection", "vigilance", "strength", "good", "war", "law"}) , \
-    "lord shadow"      : ({ "evil", "cold", "tyranny", "suffering", "darkness", "law"}) , \
-    "lysara"           : ({ "travel", "fate", "repose", "moon", "water", "void"}) , \
-    "nilith"           : ({ "war", "strength", "destruction", "evil", "chaos", "undeath"}), \
-    "nimnavanon"       : ({ "storms", "plant", "animal", "earth", "destruction", "good" }) , \
-    "seija"            : ({ "elements", "sun", "moon", "cavern", "law"}) , \
-    "the faceless one" : ({ "trickery", "illusion", "cavern", "darkness", "evil", "madness"}) , \
+ "ashra":({"illusion", "void", "darkness", "evil",}), \
+ "callamir" : ({ "charm", "air", "trickery", "travel", "good", "chaos"}), \
+ "cevahir" : ({ "mentalism", "renewal", "strength", "war", "air", }) , \
+ "dream" : ({ "madness", "void", "stars", "chaos", }), \
+ "edea":({"renewal", "void", "protection", "good",}), \
+ "jarmila" : ({ "renewal", "sun", "fire", "martyr", "good", }) , \
+ "khyron" : ({ "fire", "storms", "destruction", "suffering", "chaos", }) , \
+ "kismet" : ({ "creation", "knowledge", "magic", "stars", "fate"}) , \
+ "kreysneothosies" : ({ "protection", "vigilance", "strength", "war", "law", "good", }) , \
+ "lord shadow" : ({ "cold", "tyranny", "suffering", "darkness", "evil", "law", }) , \
+ "lysara" : ({ "travel", "fate", "repose", "moon", "water"}) , \
+ "nilith" : ({ "earth", "plague", "destruction", "undeath", "chaos", "evil", }), \
+ "nimnavanon" : ({ "storms", "plant", "animal", "earth", "plague", }) , \
+ "seija" : ({ "elements", "sun", "moon", "water", "law", }) , \
+ "the faceless one" : ({ "illusion", "cavern", "darkness", "madness", "evil", }) , \
 ]))

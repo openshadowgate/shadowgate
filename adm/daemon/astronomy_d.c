@@ -22,58 +22,38 @@ moons = (["sera" : "%^BOLD%^%^WHITE%^silvery moon",
           "tyrannos" : "%^BOLD%^%^BLACK%^pitch black moon%^RESET%^"]);
 
 /**
- * Moonshine is in illumination units. Must be positive.
- * Argument to closure is current day of calendar month.
+ * Argument is time()
+ * 0 new moon, 7 is full moon
  */
-moonshine = (["sera" : (: (sin($1 * PI / 12) + 1) :),
-              "tyrannos" : (: 0 :)]);
+moonphase = ([
+                 "sera" : (: to_int((-abs(CURRENT_DAY($1) - 12) / 12.0 + 1) * 7) :),
+             "tyrannos" : (: 4 :),
+    ]);
 
 /**
- * Orbital anomaly (argument of periapsis + true anomaly) for an
- * observer, with values < 0 implying object is below the horizon.
- * Argument to closure is current hour of day.
+ * Argument is time()
  */
-moonorbit = (["sera" : (: sin($1 * PI * 2 * 1 / 18) :),
-              "tyrannos" : (: sin($1 * PI * 2 * 1 / 40) :)]);
+moonvisibility = (["sera" : (: (CURRENT_HOUR($1) < 5 || CURRENT_HOUR($1) > 15) :),
+                   "tyrannos" : (: (!(CURRENT_DAY($1) % 3)) :)]);
 
-/**
- * This is illumination to moonphase formulae. You need to convert illumination to [0:7] scale here.
- * Argument to closure is illumination.
- */
-moonphase = (["sera" : (: to_int(round(abs($1) * 7) / 2) :),
-              "tyrannos" : (: to_int(round(abs($1) * 7)) :)]);
+moonillumination = (["sera":1, "tyrannos":0]);
 
 /**
  * Moon phases indexed by [0:7]. If you want custom moon phases for specific moon, well, good luck.
  */
-moonphases = ({ "new moon",
+moonphases = ({ "new",
             "waxing crescent",
             "first quarter",
             "waxing gibbous",
-            "full moon",
+            "full",
             "waning gibbous",
             "last quarter",
             "waning crescent",
-            "new moon" });
+            "new" });
 
 void create()
 {
     seteuid(getuid());
-}
-
-/**
- * Calculates moon illumination.
- * Pulls closures from moonshine map.
- *
- * @param moon Moon name
- * @return Illumination
- */
-float query_moon_state(string moon)
-{
-    if (!functionp(moonshine[moon])) {
-        return 0.0;
-    }
-    return evaluate(moonshine[moon], DAY_OF_THE_MONTH(time()));
 }
 
 /**
@@ -84,26 +64,8 @@ float query_moon_state(string moon)
  */
 int query_moon_phase(string moon)
 {
-    if (!functionp(moonphase[moon])) {
-        return 0;
-    }
     return evaluate(moonphase[moon],
-                    query_moon_state(moon));
-}
-
-/**
- * Returns orbital anomaly of the moon for an observer.
- *
- * @param moon Moon name
- * @return Angle ∈ [-pi:pi]
- */
-float query_moon_anomaly(string moon)
-{
-    if (!functionp(moonorbit[moon])) {
-        return 0;
-    }
-    return evaluate(moonorbit[moon],
-                    CURRENT_HOUR(time()));
+                    time());
 }
 
 /**
@@ -115,9 +77,15 @@ float query_moon_anomaly(string moon)
  */
 int is_moon_visible(string moon)
 {
-    float alpha;
-    alpha = query_moon_anomaly(moon);
-    return alpha > 0?1:0;
+    return evaluate(moonvisibility[moon], time());
+}
+
+/**
+ *
+ *
+ */
+int query_moon_illumination(moon){
+    return is_moon_visible(moon) ? moonillumination[moon] : 0;
 }
 
 /**
@@ -142,17 +110,18 @@ int query_moon_light()
     string moon;
     float light;
     int night;
+
     night = query_night() || query_eclipse();
 
     if (!night) {
         return 0;
     }
 
-    light = 0.0;
+    light = 0;
 
     foreach(moon in keys(moons))
     {
-        light += is_moon_visible(moon)?query_moon_state(moon):0;
+        light += query_moon_illumination(moon);
     }
 
     return to_int(round(light));
@@ -164,7 +133,7 @@ int query_moon_light()
 void set_eclipse()
 {
     in_eclipse = 1;
-    call_out("remove_eclipse", 600);//cap if causer forgets cleanup
+    call_out("remove_eclipse", 900);//cap if causer forgets cleanup
 }
 
 /**
@@ -223,6 +192,9 @@ string basicsky(string str)
             if (night) {
                 string moon;
                 borg = "%^BLUE%^You see a dark night sky.\n";
+                if (in_eclipse) {
+                        borg = "%^BOLD%^%^BLACK%^The sky is dark, Tyrannos shades the Sun in %^RESET%^%^ORANGE%^e%^BOLD%^%^BLACK%^clips%^RESET%^%^ORANGE%^e%^BOLD%^%^BLACK%^.\n";
+                }
                 foreach(moon in keys(moons))
                     if (is_moon_visible(moon)) {
                         borg += "%^RESET%^%^BLUE%^You see a " + query_moon_phase_string(moon) + " " + moons[moon] + ".\n";
@@ -276,14 +248,14 @@ string basicsky(string str)
             break;
         case "sera":
             if (is_moon_visible("sera")) {
-                borg = capitalize(moons["sera"]) + "%^BOLD%^%^WHITE%^ of Sera shines in the " + query_moon_phase_string("sera") + ".%^RESET%^";
+                borg = "%^BOLD%^%^WHITE%^Sera shines " + query_moon_phase_string("sera") + ".%^RESET%^";
             }else {
                 borg = DEFAULT_MSG;
             }
             break;
         case "tyrannos":
             if (is_moon_visible("tyrannos")) {
-                borg = capitalize(moons["tyrannos"]) + "%^BOLD%^%^BLACK%^ of Tyrannos glooms over in the " + query_moon_phase_string("tyrannos") + "%^RESET%^.";
+                borg = "%^BOLD%^%^BLACK%^Tyrannos glooms over in the sky.%^RESET%^.";
             }else {
                 borg = DEFAULT_MSG;
             }

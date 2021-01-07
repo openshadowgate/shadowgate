@@ -11,23 +11,23 @@ void create()
 	set_property("light",2);
 	set_short("Oak Street");
 	set_long(
-	"You are on Oak street.\n"+
+	"You are on %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^.\n"+
 	"Straight north you can see the entrance to the palace. To the"+
-	" south is the large fountain and the intersection with Cherry"+
+	" south is the large fountain and the intersection with %^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^"+
 	" street and Oak. On either side of you are shops, but their"+
-	" entrances are on %^MAGENTA%^Cherry street%^RESET%^and you can't tell what they"+
+	" entrances are on %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^and you can't tell what they"+
 	" are from here. A little further north is the intersection of"+
-	" oak with Apple and Cedar. You can also see that just passed the"+
+	" oak with %^GREEN%^A%^RED%^pp%^GREEN%^l%^RED%^e%^RESET%^ and %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r%^RESET%^. You can also see that just passed the"+
 	" intersection are two large buildings. The one on the eastern"+
 	" side appears to be an inn, and you guess that the other is"+
 	" probably the town tavern."
 	);
 	set("night long",
-	"You are on Oak street.\n"+
+	"You are on %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^.\n"+
 	"The street light here helps to light the way. On either side of"+
 	" you are two buildings, most likely shops but their entrances"+
-	" must be on %^MAGENTA%^Cherry street%^RESET%^ Just to the south is a large fountain"+
-	" and the intersection of Oak with Cherry. In the distance to the"+
+	" must be on %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^ Just to the south is a large fountain"+
+	" and the intersection of Oak with %^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^. In the distance to the"+
 	" north you can see the palace. Light spills forth from several"+
 	" of the windows there. Before the palace are two buildings, the"+
 	" one on the right appears to be an inn and you can see lights in"+
@@ -36,7 +36,7 @@ void create()
 	" gurgling of the fountain is the most prominent noise. The faint"+
 	" scent of food is carried to you on the breeze, the inn would"+
 	" probably be a good place to stop for a bite to eat. Just before"+
-	" the inn is the intersection of Oak with Apple and Cedar, that"+
+	" the inn is the intersection of Oak with %^GREEN%^A%^RED%^pp%^GREEN%^l%^RED%^e%^RESET%^ and %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r%^RESET%^, that"+
 	" branch off to the west and east respectively."
 	);
 	if(query_night() == 1) {
@@ -54,7 +54,7 @@ void create()
 	set_items(([
 	({"street","cobblestones","cobbles","road","path"}) : "The"+
 	" street is paved with cobblestones.",
-	"street sign" : "This is Oak street.",
+	"street sign" : "This is %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^.",
 	"fountain" : "A large fountain is just south of here.",
 	"palace" : "At the northern part of this road is a large and"+
 	" impressive palace.",
@@ -62,7 +62,7 @@ void create()
 	({"bar","tavern"}) : "Across from the inn looks like a bar.",
 	({"building","buildings","shop","shops"}) : "There are two"+
 	" buildings on either side of you, but their entrances must be"+
-	" to the south on %^MAGENTA%^Cherry street%^RESET%^",
+	" to the south on %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^",
 	]));
 	set_exits(([
 	"south" : ROOMS+"fountain",

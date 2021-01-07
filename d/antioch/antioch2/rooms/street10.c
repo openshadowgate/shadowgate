@@ -12,7 +12,7 @@ void create()
     set_property("light", 2);
     set_short("A crossroads");
     set_long(
-        "%^WHITE%^You are standing at the intersection of Oak, Apple, and Cedar. Apple street runs west and then southwest, there is a little jeweler's shop on the corner there. To the east is Cedar street, with a tailor's shop at the corner where it turns southeast. Oak street runs north and south. To the south you can see a large fountain where it joins with Cherry street which runs east and west and has most of the shops on it. Along Oak street to the north is the bar and the inn. Further north is the %^BOLD%^%^WHITE%^palace.%^RESET%^
+        "%^WHITE%^You are standing at the intersection of Oak, %^GREEN%^A%^RED%^pp%^GREEN%^l%^RED%^e%^RESET%^, and %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r%^RESET%^. %^GREEN%^A%^RED%^pp%^GREEN%^l%^RED%^e %^RED%^st%^GREEN%^r%^RED%^eet%^RESET%^ runs west and then southwest, there is a little jeweler's shop on the corner there. To the east is %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r %^ORANGE%^s%^BOLD%^%^BLACK%^tre%^RESET%^%^ORANGE%^e%^ORANGE%^t%^RESET%^, with a tailor's shop at the corner where it turns southeast. %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^ runs north and south. To the south you can see a large fountain where it joins with %^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^  which runs east and west and has most of the shops on it. Along %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^ to the north is the bar and the inn. Further north is the %^BOLD%^%^WHITE%^palace.%^RESET%^
 "
         );
     set_smell("default", "The smell of alcohol mingles with the" +
@@ -27,8 +27,8 @@ void create()
     set_items(([
                    ({ "street", "cobblestones", "cobbles", "road", "path" }) : "The" +
                    " street is paved with cobblestones.",
-                   "street sign" : "This is the intersection of Oak, Apple," +
-                   " and Cedar.",
+                   "street sign" : "This is the intersection of Oak, %^GREEN%^A%^RED%^pp%^GREEN%^l%^RED%^e%^RESET%^," +
+                   " and %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r%^RESET%^.",
                    "fountain" : "There appears to be a fountain a little ways" +
                    " to the south.",
                    "palace" : "The palace is to the north.",
