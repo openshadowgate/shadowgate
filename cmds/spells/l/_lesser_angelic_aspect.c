@@ -27,7 +27,7 @@ void create()
 {
     ::create();
     set_spell_name("lesser angelic aspect");
-    set_spell_level(([ "cleric": 2, "paladin": 2, "mage": 2 ]));
+    set_spell_level(([ "cleric": 2, "paladin": 2, "mage": 2, "magus" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS lesser angelic aspect");
     set_damage_desc("levitating, 5 DR to Acid and Cold");
