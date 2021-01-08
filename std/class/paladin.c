@@ -42,7 +42,7 @@ string *class_feats(string myspec) {
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "parry", "channel"}), 2 : ({ "smite", "divine grace" }), 3 : ({"divine health" }), 6 : ({ "layonhands" }), 7 : ({ "indomitable" }),14 : ({ "force of personality" }), 17 : ({ "leadership" }), ]);
+    return ([ 1 : ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "parry", "channel"}), 2 : ({ "smite" }), 3 : ({"divine health" }), 6 : ({ "layonhands" }), 7 : ({ "indomitable" }),14 : ({ "force of personality" }), 17 : ({ "leadership" }), ]);
 }
 
 string *class_skills()
