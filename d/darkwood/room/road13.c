@@ -13,13 +13,8 @@ void create() {
     ::create();
     set_light(2);
     set_long(
-@THORN
-You are on the Royal Southern Road.  To the northwest, the road takes a 
-path straight through the heart of the forest, while eastward the trees 
-lighten.  From what you can tell, the forest is filled with a mixture of
-coniferous and deciduous trees that seem to form a perfect canopy.  The 
-forest looks unusually dark inside thanks to the cover of the trees.
-THORN
+"%^GREEN%^You are on the Royal Southern Road. To the northwest, the road takes a path straight through the heart of the forest, while eastward the trees lighten. From what you can tell, the forest is filled with a mixture ofconiferous and deciduous trees that seem to form a perfect canopy. The forest looks unusually dark inside thanks to the cover of the trees.
+"
     );
     set_exits(
               (["northwest" : "/d/darkwood/room/road12",
