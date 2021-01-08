@@ -183,21 +183,12 @@ string parse_special(object obj,string str)
     string special,*temp;
     if (!stringp(str) || str == "" || str == " ") { return 0; }
     if (strsrch(str, "|") == -1) { return 0; }
-    if (strsrch(str, "cast") == -1)
-    {
-        write("You must have cast in your syntax for special cast strings.  Syntax <buff add spell name | cast class spell name arguments>");
-        return -1;
-    }
+
     special = replace_string(str, "| ", "", 1);
     temp = explode(special, " ");
-    if (sizeof(temp) < 3)
+    if (sizeof(temp) < 1)
     {
         write("Syntax <buff add spell name | cast class spell name arguments>");
-        return -1;
-    }
-    if (!obj->is_class(temp[1]) && temp[1] != "innate")
-    {
-        write("You don't seem to have the class " + temp[1] + ".");
         return -1;
     }
     return special;

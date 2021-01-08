@@ -92,3 +92,23 @@ void heart_beat()
 
     return;
 }
+
+object infect(object victim, int dc)
+{
+    object tmp;
+    object * diseases;
+
+    if (is_immune(victim)) {
+        return 0;
+    }
+
+    diseases = filter_array(all_inventory(victim), (:$1->is_disease():));
+    if (member_array(query_name(), diseases->query_name()) != -1) {
+        return 0;
+    }
+
+    tmp = new(file_name(TO));
+    tmp->move(victim);
+    tmp->init_disease(dc);
+    return tmp;
+}

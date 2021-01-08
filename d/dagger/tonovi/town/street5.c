@@ -53,7 +53,7 @@ void create() {
 	"east" : RPATH "street3",
 	"west" : RPATH "street6",
 	"north" : RPATH "weapon",
-	"southwest" : RPATH "hotel1"
+//	"southwest" : RPATH "hotel1"
       ]));
 
    ob = new("/std/bboard");

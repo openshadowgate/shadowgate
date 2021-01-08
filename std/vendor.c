@@ -993,6 +993,7 @@ string types(object ob)
     if (ob->is_lrweapon()) {
         type = "[" + type + "]";
     }
+
     return type;
 }
 

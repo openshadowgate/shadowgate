@@ -139,21 +139,6 @@ void cast_special_spells()
             myclass = explode(buffs[spell]["special"], " ")[1];
 
             if (special) {
-                if (strsrch(special, "cast") == -1) {
-                    tell_object(owner, "Special cast strings must include the word 'cast'.  Your special cast string is: " + special + "\nAborting...");
-                    if (objectp(TO)) {
-                        TO->remove();
-                    }
-                    return;
-                }
-                if (strsrch(special, myclass) == -1) {
-                    tell_object(owner, "class: " + myclass);
-                    tell_object(owner, "You must include your class in your special cast string.  Your special cast string is: " + special + "\nAborting...");
-                    if (objectp(TO)) {
-                        TO->remove();
-                    }
-                    return;
-                }
 
                 if (strsrch(special, "$T") != -1) {
                     party_special += ({ spell });

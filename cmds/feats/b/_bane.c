@@ -80,11 +80,13 @@ void execute_feat()
         return;
     }
 
+    /*
     if(caster->query_current_attacker())
     {
         write("You cannot infuse your weapon with a bane during combat.");
         return;
     }
+    */
 
     if(!arg || member_array(arg, valid_choices) < 0)
     {

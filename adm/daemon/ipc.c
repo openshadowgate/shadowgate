@@ -138,6 +138,16 @@ void ipc_read(int fd, mixed data)
 
         CHAT_D->ipc_chat(chan, nick, msg);
     }
+
+    if (data[0..4] == "HELP:") {
+        string helpstring;
+
+        // helper=new(helper);
+        // helper->force_me("help helpstring");
+        // helpfile=collapse(helper->query_buffer(),"\n");
+        // hlper->remove();
+        // ip_send_back(helpfile);
+    }
 }
 
 int* query_ttys()

@@ -32,7 +32,7 @@ been strenghened by sinews tanned and wrapped around it tightly. The tip of the 
 sharpened into an almost crude spear with jagged sides. The bow almost seems to radiate power and
 there is a distict smell of ozone in the area. Small crude native images have been cut into the
 bone showing a massive storm that is destroying a village with lightning, winds and rain. The
-strong bowstring is made out of twisted aninal sinews, and you can only image what strength it
+strong bowstring is made out of twisted aninal sinews, and you can only imagine what strength it
 takes to draw the bow.\n");
 
     set_obvious_short("strange longbow");

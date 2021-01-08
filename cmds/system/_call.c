@@ -43,13 +43,13 @@ cmd_call( string a )
        write("**WARNING** Misuse of this function will be punished\n");
     if( !a ) { notify_fail( SYNTAX ); return 0; }
 
-  // This code inserted by Aragorn.  DO NOT remove it without his or 
+  // This code inserted by Aragorn.  DO NOT remove it without his or
   // Melnmarn's permission!
 
   seteuid(UID_LOG);
-    log_file( "calls",
+    log_file( "adm/calls",
       this_player()-> query_name() + " under euid " + geteuid() + " " +
-      ctime( time() ) + "\n" + a + "\n" 
+      ctime( time() ) + "\n" + a + "\n"
     );
 
   // end Aragorn's code.
@@ -115,7 +115,7 @@ cmd_call( string a )
           }
         }
       }
-    if((string)this_player()->query_position() == "apprentice") 
+    if((string)this_player()->query_position() == "apprentice")
       if(!interactive(objs[i])) {
             write("Only creators can call non-interactive objects.");
             write("You may only call yourself.");
@@ -165,7 +165,7 @@ if(((object)this_player() == ob) && (func == "set_level") && !archp(TP)) return 
     }
     str += " )";
   } else str += "()";
-    
+
 /*
 // how does one do this using function type variables?
   f = (: ob, func :);
@@ -196,10 +196,9 @@ int help()
 {
     message("Nhelp", SYNTAX+
     "Effect: Calls the function <function> in object <object>,\n"+
-    "passing as many arguments <arg> as you give.\n"+ 
+    "passing as many arguments <arg> as you give.\n"+
     "If no function is specified a dump of the object is given.\n"+
     "<object> and <function> can be arrays (eg \"users\")\n"+
     "See also: refs\n", this_player());
   return 1;
 }
-

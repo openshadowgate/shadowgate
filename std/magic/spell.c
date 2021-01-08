@@ -2484,6 +2484,10 @@ int spell_kill(object victim, object caster)
         return 0;
     }
 
+    if (victim->query_property("minion") == caster) {
+        return 0;
+    }
+
     // Non link-dead users have to excercise their own judgement.
     if (interactive(victim)) {
         victim->set_property("last_attacker", caster);
@@ -2530,7 +2534,7 @@ int spell_kill(object victim, object caster)
 
 string query_spell_display()
 {
-    return "%^BOLD%^%^GREEN%^" + spell_name + (query_arg() ? ("%^ORANGE%^ on " + query_arg()) : "") + (objectp(target) ? ("%^ORANGE%^ on " + target->getParsableName()) : "") + (query_end_time() ? ("%^ORANGE%^ ( " + parse_time(query_end_time() - time()) + " )") : "");
+    return "%^BOLD%^%^GREEN%^" + spell_name + (query_arg() ? ("%^ORANGE%^ on " + query_arg()) : "") + ((objectp(target) && target->getParsableName()) ? ("%^ORANGE%^ on " + target->getParsableName()) : "") + (query_end_time() ? ("%^ORANGE%^ ( " + parse_time(query_end_time() - time()) + " )") : "");
 }
 
 void removeSpellFromCaster()

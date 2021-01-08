@@ -61,7 +61,7 @@ void create()
 	set_exits(([
 	"west" : ROOMS+"street24",
 	"east" : ROOMS+"inn2",
-	"stairs" : ROOMS+"inn4",
+	"up" : ROOMS+"inn4",
 	]));
 	set_door("door",ROOMS+"street24","west",0);
 	set_pre_exit_functions(({"stairs"}),({"go_stairs"}));
@@ -75,4 +75,3 @@ int go_stairs()
 	" stair case.");
 	return 1;
 }
-

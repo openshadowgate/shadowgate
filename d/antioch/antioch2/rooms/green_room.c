@@ -61,7 +61,7 @@ void create()
 	" it an even darker coloration, matching the dresser. It is quite"+
 	" simple, but would be a good place to write on. You can envision"+
 	" a bard writing ballads at the desk during a stay at the inn.",
-	"window" : "The window overlooks Cedar street, you can hear the"+
+	"window" : "The window overlooks %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r %^ORANGE%^s%^BOLD%^%^BLACK%^tre%^RESET%^%^ORANGE%^e%^ORANGE%^t%^RESET%^, you can hear the"+
 	" people passing by below. %^GREEN%^Green curtains%^RESET%^ frame"+
 	" the window, they can be shut to block out the light.",
 	"curtains" : "%^GREEN%^Dark green curtains frame the window. They"+

@@ -1,7 +1,7 @@
 #include <std.h>
 #include "/d/shadow/room/goblin/short.h"
 inherit ROOM;
- 
+
 void create() {
     ::create();
    set_terrain(STONE_BUILDING);
@@ -32,7 +32,10 @@ void create() {
     set_exits(([
         "east": RPATH "inner2",
 	"north": RPATH "inner4",
+        "down":"/d/shadow/ratpaths/rooms/rp_p002_n003",
     ]));
+    set_invis_exits(({"down"}));
+    set_search("default", "Hidden behind some rubble, you find a hatch with ladder leading down.");
 }
 
 void reset() {

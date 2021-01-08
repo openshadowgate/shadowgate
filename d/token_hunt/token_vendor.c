@@ -25,15 +25,15 @@ int remove_me(string str);
 int remove_item(string type,string item);
 
 
-void create() 
-{ 
+void create()
+{
     if(!objectp(INV_OB=find_object(INV)))
     {
         INV_OB = find_object_or_load(INV);
     }
 
     INVENTORY = INV_OB->get_inventory();
-    ::create(); 
+    ::create();
     fill_storage_room();
 }
 
@@ -118,7 +118,7 @@ void fill_storage_room()
     int i;
 
     if(!__Eco["storage file"]) { return; }
-    if(!__Eco["storage object"]) 
+    if(!__Eco["storage object"])
     {
         __Eco["storage object"] = find_object_or_load(__Eco["storage file"]);
     }
@@ -137,7 +137,7 @@ void fill_storage_room()
     }
     for(i=0;i<sizeof(files);i++)
     {
-        if(member_array(files[i],tmp) != -1) { continue; } 
+        if(member_array(files[i],tmp) != -1) { continue; }
         ob = new(files[i]);
         if(objectp(ob)) ob->move(__Eco["storage object"]);
         if(!objectp(ob))
@@ -223,7 +223,7 @@ string query_item_price(string type,object item)
     return ""+cost+" "+token+"";
 }
 
-int __Sell(string str) 
+int __Sell(string str)
 {
     string response,gender,word;
 
@@ -234,15 +234,15 @@ int __Sell(string str)
     case "female":  word = "hers";  break;
     default:        word = "its";   break;
     }
-        
+
     response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
-    
+
     tell_room(ETO,""+TOQCN+" shakes "+word+" head.");
     tell_room(ETO,response+" we don't buy things here, only sell.");
     return 1;
 }
 
-int __Buy(string str) 
+int __Buy(string str)
 {
     object ob,box;
     string price,*tmp=({});
@@ -254,10 +254,10 @@ int __Buy(string str)
         return 1;
     }
     not_allowed = ({ "bound", "disabled", "unconscious" });
-    if(disabled(TP, not_allowed))  
+    if(disabled(TP, not_allowed))
        return 1;
     if(disabled(TO, not_allowed)){
-      write("Do you really expect someone who cannot move to sell you something?");  
+      write("Do you really expect someone who cannot move to sell you something?");
        return 1;
     }
     response = "%^MAGENTA%^"+TOQCN+" says:  %^RESET%^";
@@ -297,10 +297,10 @@ int __Buy(string str)
 
     price = query_item_price(query_store_type(),ob);
     tmp = explode(price," ");
-    if(!price || price == "no item" || price == "no type" || sizeof(tmp) != 2) 
-    { 
+    if(!price || price == "no item" || price == "no type" || sizeof(tmp) != 2)
+    {
         tell_room(ETO,response+"Uh.. I think I forgot the price for that, try again later.");
-        return 1; 
+        return 1;
     }
 
     if(!box->spend_tokens(tmp[1],to_int(tmp[0])))
@@ -324,7 +324,7 @@ int __Buy(string str)
     tell_room(ETO, TOQCN+" hands "+TPQCN+" "+(string)ob->query_short()+".", TP);
     tell_object(TP, TOQCN+" hands you "+(string)ob->query_short()+".");
 
-    if (ob->move(TP)) 
+    if (ob->move(TP))
     {
         tell_object(TP, "You drop it as fast as you get it!");
         tell_room(ETO, TPQCN+" drops "+(string)ob->query_short()+".", TP);
@@ -342,10 +342,10 @@ int __Show(string str) {
         write("Try 'show <object>'.");
         return 1;
     }
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
        return 1;
-    if(disabled(TO, ({"disabled", "unconscious", "bound"})) ){  
-      write("Get real.");  
+    if(disabled(TO, ({"disabled", "unconscious", "bound"})) ){
+      write("Get real.");
        return 1;
     }
     if(sscanf(str, "%s to %s",what, whom) == 2)
@@ -363,9 +363,9 @@ int __Show(string str) {
     tell_room(ETO, TOQCN+" shows "+TPQCN+" "+(string)ob->query_short()+".", TP);
     message("info", (string)ob->query_long(), TP);
 // added to have vendor tell them the skillneeded per requests *Styx*  2/13/03
-    if(ob->is_weapon()) 
+    if(ob->is_weapon())
     {
-           if(ob->is_lrweapon()) 
+           if(ob->is_lrweapon())
            {
                tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says: %^RESET%^To use this as a ranged weapon, you'll need to have the "+ob->query_weapon_prof()+" weapon proficiency feat.");
         }
@@ -373,7 +373,7 @@ int __Show(string str) {
 
     }
 
-    if(ob->is_armor()) 
+    if(ob->is_armor())
     {
        tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says: %^RESET%^This particular piece of armor is classed as "+ob->query_type()+".");
        if(ob->query_armor_prof())
@@ -381,16 +381,16 @@ int __Show(string str) {
            tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says:%^RESET%^ You will need the "+ob->query_armor_prof()+ " armor proficiency in order to use it.%^RESET%^");
        }
        tell_room(ETO, "%^MAGENTA%^"+TOQCN+" says: %^RESET%^it will fit on your "+implode((string *)ob->query_limbs(), ", ")+".%^RESET%^");
-    }    
+    }
     price = query_item_price(query_store_type(),ob);
     tmp = explode(price," ");
-    if(!price || price == "no item" || price == "no type" || sizeof(tmp) != 2) 
-    { 
-        return 1; 
+    if(!price || price == "no item" || price == "no type" || sizeof(tmp) != 2)
+    {
+        return 1;
     }
     tell_room(ETO,"%^MAGENTA%^"+TOQCN+" says:  %^RESET%^This item "+
     "will cost you "+tmp[0]+" "+tmp[1]+" tokens%^RESET%^.");
-    
+
     if(mapp(tmpmap = ob->query_item_bonuses()))
     {
         tmp = keys(tmpmap);
@@ -404,12 +404,12 @@ int __Show(string str) {
                 bonus_string += val + " "+tmp[x];
                 if(x == (sizeof(tmp)-1)) bonus_string += ".";
                 else if(x == (sizeof(tmp) - 2)) bonus_string += ", and ";
-                else if(x < sizeof(tmp) && sizeof(tmp) > 1) bonus_string += ", ";                
+                else if(x < sizeof(tmp) && sizeof(tmp) > 1) bonus_string += ", ";
             }
         }
     }
-    
-    if(objectp(TP)) 
+
+    if(objectp(TP))
     {
         if(stringp(bonus_string)) TO->force_me("whisper "+TPQN+" "+bonus_string);
         if(intp(x = ob->query_property("enchantment")))
@@ -423,7 +423,7 @@ int __Show(string str) {
             }
         }
     }
-    
+
     return 1;
 }
 
@@ -432,7 +432,7 @@ int __List(string str) {
     object *inv;
     string *tmp,price,*num=({});
     int i, x,j;
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
        return 1;
     fill_storage_room();
     tell_room(ETO, TPQCN+" looks over the shop's inventory and price list.", TP);
@@ -459,7 +459,7 @@ int __List(string str) {
         j = 39 - j;
         if (inv[x]->is_armour() || inv[x]->is_weapon()) {
             tmp +=({sprintf("%%^BOLD%%^%%^GREEN%%^%-30s %%^YELLOW%%^%4d %%^WHITE%%^%-20s %-5s",
-                             inv[x]->query_short()+""+arrange_string(" ",j),to_int(num[0]),num[1]+" tokens", types(inv[x]))});
+                        inv[x]->query_short()+""+arrange_string(" ",j),to_int(num[0]),num[1]+" tokens", types(inv[x]) ? types(inv[x]) : "")});
         } else {
             tmp +=({sprintf("%%^BOLD%%^%%^GREEN%%^%-30s %%^YELLOW%%^%4d %%^WHITE%%^%s",
                 inv[x]->query_short()+""+arrange_string(" ",j),to_int(num[0]),num[1]+" tokens") });
@@ -487,10 +487,10 @@ int __Value(string str) {
         write("Try 'value <object>'.");
         return 1;
     }
-    if(disabled(TP, ({"disabled", "unconscious"})) )  
+    if(disabled(TP, ({"disabled", "unconscious"})) )
        return 1;
-    if(disabled(TO, ({"unconscious", "disabled"})) ){  
-      write("Do you really expect an unconscious person to give you an appraisal?");  
+    if(disabled(TO, ({"unconscious", "disabled"})) ){
+      write("Do you really expect an unconscious person to give you an appraisal?");
        return 1;
     }
     tell_room(ETO,response+"We don't buy anything here.");

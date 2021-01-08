@@ -21,7 +21,7 @@ void create(){
         will_open_doors(1);
         set_nogo( ({ "/d/antioch/antioch2/rooms/gates", }) );
         set_name("guard");
-        set_short("A Guardsman of Antioch");
+        set_short("%^ORANGE%^%^BOLD%^%^ORANGE%^G%^RESET%^%^ORANGE%^uardsm%^BOLD%^%^ORANGE%^a%^RESET%^%^ORANGE%^n%^WHITE%^ of %^BOLD%^%^ORANGE%^A%^RESET%^%^ORANGE%^nti%^BOLD%^%^ORANGE%^o%^RESET%^%^ORANGE%^ch%^RESET%^");
         set_id(({"guard","guardsman","antioch guard",CITYLAW,
                 "guardsman of Antioch","guardsman of antioch","Antioch guard"}));
         set_long(
@@ -113,11 +113,11 @@ int is_bad_race(object live){ // added N's fix for subraces
     if(live->query_unconscious()) { return 0; }
     if(live->id("wild_world_monster")) { return 1; }
     if(query_bad_race(live)) { return 1; }
-    
+
     if(live->query_race() == "shade")
         return 1;
-    
-    if((string)live->query_race() == "elf") { 
+
+    if((string)live->query_race() == "elf") {
         // un-altered fey'ri in natural demonic form
       if((string)live->query("subrace") == "fey'ri" &&
       !live->query_property("altered")) return 1;

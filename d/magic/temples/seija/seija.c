@@ -1,5 +1,3 @@
-//Temple of Ryorik - created by Kassius 10/18
-//updated by ~Circe~ 10/5/19
 #include <std.h>
 inherit "/std/temple";
 

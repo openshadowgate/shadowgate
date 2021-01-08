@@ -107,11 +107,11 @@ lore - manage stories
 
 %^CYAN%^SYNTAX%^RESET%^
 
-lore recite|teach|list|stop|review|edit sotry|song %^ORANGE%^%^ULINE%^NAME%^RESET%^ [%^ORANGE%^%^ULINE%^PLAYER%^RESET%^]
+lore recite|teach|list|stop|review|edit story|song %^ORANGE%^%^ULINE%^NAME%^RESET%^ [%^ORANGE%^%^ULINE%^PLAYER%^RESET%^]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-Lore is the bard command that allows you to work with stories       and songs you have written. 
+Lore is the bard command that allows you to work with stories and songs you have written.
       
 %^ORANGE%^<lore recite story|song %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^
   You recite songs or stories of a particular %^ORANGE%^%^ULINE%^NAME%^RESET%^ when you wish to to perform them. 
@@ -120,7 +120,7 @@ Lore is the bard command that allows you to work with stories       and songs yo
   You list the types of songs or stories you know.
 
 %^ORANGE%^<lore teach story|song %^ORANGE%^%^ULINE%^NAME%^RESET%^ %^ORANGE%^%^ULINE%^PLAYER%^RESET%^%^ORANGE%^>%^RESET%^
-  You may teach a story or song to another bard. 
+  You may teach a story or song to another bard.
 
 %^ORANGE%^<lore stop>%^RESET%^
   You may stop reciting.
@@ -129,15 +129,15 @@ Lore is the bard command that allows you to work with stories       and songs yo
   You can review stories or songs already written.
 
 %^ORANGE%^<lore delete story|song %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^
-  You can delete stories or songs
+  You can delete stories or songs.
 
 %^ORANGE%^<lore edit stories|songs %^ORANGE%^%^ULINE%^NAME%^RESET%^%^ORANGE%^>%^RESET%^
-  You can edit stories or songs
+  You can edit stories or songs.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
 story, song, languages, say, emoteat, pose
-"       
+"
       );
    return 1;
 }
