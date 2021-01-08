@@ -48,7 +48,7 @@ void create(){
     set_listen("default","You can hear birds singing.");
     set_listen("birds","They seems to sing songs of love.");
 
-    if (!random(20)) {
+    if (!random(8)) {
         new(MONDIR + "bandits")->move(TO);
     }
 }
