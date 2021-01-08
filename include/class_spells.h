@@ -116,6 +116,12 @@ class_spell_storage =
         ({ "doom", "sands of time", "spiritual ally", "foresight", "timeless body", "timestop" }),
 ]),
 
+"archdruid":
+([
+    "all":
+        ({"faerie fire", "entangle", "animal messenger", "meld into nature", "flame strike", "wall of thorns", "wall of stone", "vortex", "euphoric tranquility", "regenerate",}),
+]),
+
 "psion":
 ([
     "egoist":

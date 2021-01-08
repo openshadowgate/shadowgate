@@ -216,7 +216,7 @@ int set_memorized(string myclass, string spell, int num)
     return 1;
 }
 
-varargs int forget_memorized(string myclass, string spell, int forced)
+varargs int forget_memorized(string myclass, string spell)
 {
     int level, stat;
     mapping tmp;
@@ -256,49 +256,6 @@ varargs int forget_memorized(string myclass, string spell, int forced)
 
     if (!mapp(spells_memorized[myclass])) {
         add_mem_class(myclass);
-    }
-    if (forced != 1) {
-        if (TO->query_property("clearcasting")) {
-            TO->remove_property("clearcasting");
-            tell_object(TO, "%^BOLD%^%^WHITE%^Your concentration is so great that you keep memory of the spell even after its casting!%^RESET%^");
-            return 1;
-        }
-        if (TO->is_class("sorcerer") ||
-            TO->is_class("mage")) {
-            if (FEATS_D->usable_feat(TO, "arcane perfection")) {
-                if (TO->is_class("sorcerer")) {
-                    stat = TO->query_stats("charisma");
-                }else {
-                    stat = TO->query_stats("intelligence");
-                }
-
-                stat += 30;
-                if (roll_dice(1, 100) < stat) {
-                    tell_object(TO, "%^RESET%^%^MAGENTA%^Your %^BOLD%^%^CYAN%^k%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^owledge%^RESET%^%^MAGENTA%^ of the %^BOLD%^%^CYAN%^Wea%^RESET%^%^CYAN%^v%^CYAN%^e%^MAGENTA%^ is so %^CYAN%^pe%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^f%^BOLD%^%^CYAN%^e%^RESET%^%^CYAN%^ct%^MAGENTA%^ that you %^BOLD%^%^CYAN%^retain%^RESET%^%^MAGENTA%^ the spell in memory!%^RESET%^");
-                    return 1;
-                }
-            }
-        }
-        if (TO->is_class("hierophant") ||
-            TO->is_class("archdruid")) {
-            if (FEATS_D->usable_feat(TO, "natural perfection") ||
-                FEATS_D->usable_feat(TO, "theurgic perfection")) {
-                if (TO->query("base_class") == "oracle") { //this is a workaround for now. assuming that oracles do not multiclass with druids or clerics.  Will figure more specifics out later - Odin 3/22/2020
-                    stat = TO->query_stats("charisma");
-                }else {
-                    stat = TO->query_stats("wisdom");
-                }
-                stat += 30;
-                if (roll_dice(1, 100) < stat) {
-                    if (TO->is_class("druid")) {
-                        tell_object(TO, "%^BOLD%^%^GREEN%^You are so in tune with the natural world around you that you retain the spell in memory!");
-                    }else {
-                        tell_object(TO, "%^BOLD%^%^CYAN%^You are so in tune with the divine forces around you that you retain the spell in memory!");
-                    }
-                    return 1;
-                }
-            }
-        }
     }
 
     if (myclass == "bard" ||

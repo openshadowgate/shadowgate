@@ -767,9 +767,7 @@ void wizard_interface(object user, string type, string targ)
     string* msg, whatsit, whatdo, improv, old_spell_type, featneeded, altclass, way;
     object* weaps, wildspell, shapeob;
     int nodo, i, casting_level;
-    string* supreme_healer_spells,
-          * raging_healer_spells,
-          * natures_gift_spells;
+    int preserve_in_memory = 0;
 
     if (!type) {
         tell_object(caster, "Something has gone wrong, the spell has no type specified!");
@@ -1170,7 +1168,7 @@ void wizard_interface(object user, string type, string targ)
         return;
     }
 
-#include <prc_improv_spells.h>
+
 // improv code; if nothing supplied, improv defaults to the spell being cast
     if (!stringp(improv = query_property("improvised"))) {
         improv = spell_name;
@@ -1178,26 +1176,87 @@ void wizard_interface(object user, string type, string targ)
     spell_name = replace_string(spell_name, "_", " ");
     improv = replace_string(improv, "_", " ");
 
-    if (!(FEATS_D->usable_feat(caster, "spellmastery") && (caster->query("spellmastery_spell") == spell_name)) &&
-        !(FEATS_D->usable_feat(caster, "supreme healer") && (member_array(spell_name, supreme_healer_spells) != -1)) &&
-        !(FEATS_D->usable_feat(caster, "natures gift") && (member_array(spell_name, natures_gift_spells) != -1)) &&
-        !(FEATS_D->usable_feat(caster, "raging healer") && (member_array(spell_name, raging_healer_spells) != -1) && caster->query_property("raged")) &&
-        !(FEATS_D->usable_feat(caster, "timeweaver") && (member_array(spell_name, MAGIC_SS_D->query_class_special_spells("chronicler", "all")) != -1)) &&
-        !(FEATS_D->usable_feat(caster, "greater spell mastery") && casting_level < 5 && spell_sphere == caster->query_school()) &&
-        !(FEATS_D->usable_feat(caster, "inspired necromancy") && casting_level < 7 && spell_sphere == "necromancy") &&
-        !(spell_type == "magus" && caster->query_property("spell recall"))) {
+    if ((FEATS_D->usable_feat(caster, "spellmastery") && (caster->query("spellmastery_spell") == spell_name)) ||
+  (FEATS_D->usable_feat(caster, "natures gift") && (member_array(spell_name, MAGIC_SS_D->query_class_special_spells("archdruid", "all")) != -1)) ||
+  (FEATS_D->usable_feat(caster, "timeweaver") && (member_array(spell_name, MAGIC_SS_D->query_class_special_spells("chronicler", "all")) != -1)) ||
+  (FEATS_D->usable_feat(caster, "greater spell mastery") && casting_level < 5 && spell_sphere == caster->query_school()) ||
+  (FEATS_D->usable_feat(caster, "inspired necromancy") && casting_level < 7 && spell_sphere == "necromancy"))
+    {
+        preserve_in_memory = 1;
+        tell_object(caster, "%^CYAN%^The spell preserves in your memory.");
+    }
+
+    if (spell_type == "magus" && caster->query_property("spell recall")) {
+        caster->remove_property("spell recall");
+        tell_object(caster, "%^CYAN%^Arcana preserves the spell in your memory.");
+        preserve_in_memory = 1;
+    }
+
+
+    {
+        string * supreme_healer_spells,
+            *raging_healer_spells;
+#include <prc_improv_spells.h>
+
+        if ((FEATS_D->usable_feat(caster, "supreme healer") && (member_array(spell_name, supreme_healer_spells) != -1)) && roll_dice(1, 20) > 12) {
+            tell_object(caster,"%^BOLD%^%^WHITE%^Divine preserves the spell in your memory.");
+            preserve_in_memory = 1;
+        }
+
+        if ((FEATS_D->usable_feat(caster, "raging healer") && (member_array(spell_name, raging_healer_spells) != -1) && caster->query_property("raged") && roll_dice(1, 10) > 6)) {
+            tell_object(caster,"%^BOLD%^%^RED%^Your anger helps you to preserve the spell in your memory.");
+            preserve_in_memory = 1;
+        }
+    }
+
+    if (caster->query_property("cleancasting")) {
+        caster->remove_property("clearcasting");
+        tell_object(caster, "%^BOLD%^%^WHITE%^Your concentration is so great that you keep memory of the spell even after its casting!%^RESET%^");
+        preserve_in_memory = 1;
+    }
+
+    if (FEATS_D->usable_feat(caster, "arcane perfection") &&
+        (spell_type == caster->query("base_class"))) {
+        int stat;
+
+        if (caster->is_class("sorcerer")) {
+            stat = caster->query_stats("charisma");
+        }else {
+            stat = caster->query_stats("intelligence");
+        }
+
+        stat += 30;
+        if (roll_dice(1, 100) < stat) {
+            tell_object(caster, "%^RESET%^%^MAGENTA%^Your %^BOLD%^%^CYAN%^k%^RESET%^%^CYAN%^n%^BOLD%^%^CYAN%^owledge%^RESET%^%^MAGENTA%^ of the %^BOLD%^%^CYAN%^Wea%^RESET%^%^CYAN%^v%^CYAN%^e%^MAGENTA%^ is so %^CYAN%^pe%^BOLD%^%^CYAN%^r%^RESET%^%^CYAN%^f%^BOLD%^%^CYAN%^e%^RESET%^%^CYAN%^ct%^MAGENTA%^ that you %^BOLD%^%^CYAN%^retain%^RESET%^%^MAGENTA%^ the spell in memory!%^RESET%^");
+            preserve_in_memory = 1;
+        }
+    }
+
+    if ((FEATS_D->usable_feat(caster, "natural perfection") && spell_type == "druid") ||
+        (FEATS_D->usable_feat(caster, "theurgic perfection") && spell_type == caster->query("base_class"))) {
+        int stat;
+
+        if (caster->query("base_class") == "oracle") {
+            stat = caster->query_stats("charisma");
+        }else {
+            stat = caster->query_stats("wisdom");
+        }
+        stat += 30;
+        if (roll_dice(1, 100) < stat) {
+            if (caster->is_class("druid")) {
+                tell_object(caster, "%^BOLD%^%^GREEN%^You are so in tune with the natural world around you that you retain the spell in memory!");
+            }else {
+                tell_object(caster, "%^BOLD%^%^CYAN%^You are so in tune with the divine forces around you that you retain the spell in memory!");
+            }
+            preserve_in_memory = 1;
+        }
+    }
+
+    if (!preserve_in_memory) {
         if (!caster->check_memorized(spell_type, improv)) {
             tell_object(caster, "You cannot " + whatdo + " this " + whatsit + " at this time.");
             TO->remove();
             return;
-        }
-    }else {
-        if (spell_type == "magus" && caster->query_property("spell recall")) {
-            caster->remove_property("spell recall");
-            tell_object(caster, "%^CYAN%^Arcana preserves the spell in your memory.");
-        }
-        else {
-            tell_object(caster, "%^CYAN%^The spell preserves in your memory.");
         }
     }
 
@@ -1862,7 +1921,7 @@ void init()
 
 void check_fizzle(object ob)
 {
-    int fizzle, i, prof;
+    int fizzle, prof;
     string* whatsit;
     whatsit = "spell";
     if (spell_type == "psion") {
@@ -2096,7 +2155,6 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
 {
     int nokill, spmod;
     string* limbs = ({});
-    int dieroll;
     nokill = 1;
 
     if (!objectp(victim)) {
@@ -2166,17 +2224,6 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
     if (!stringp(damage_type) || damage_type == "" || damage_type == " ") {
         damage_type = "untyped";
     }
-/*
-    if (FEATS_D->usable_feat(caster, "surprise spells")) {
-        if (victim->query_tripped() ||
-            victim->query_paralyzed() ||
-            victim->query_asleep() ||
-            victim->query_bound() ||
-            victim->query_unconscious()) {
-            wound *= 3 / 2;
-        }
-    }
-*/
 
     wound = (int)COMBAT_D->typed_damage_modification(caster, victim, hit_limb, wound, damage_type);
 
@@ -2204,8 +2251,6 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
 
 void define_clevel()
 {
-    int highest;
-
     clevel = caster->query_guild_level(spell_type);
 
     if (spell_type == "assassin") {
