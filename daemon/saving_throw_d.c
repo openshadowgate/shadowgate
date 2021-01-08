@@ -99,6 +99,10 @@ varargs void do_save(object ob, int dc, string type, raw_save)
                 ob->query("subrace") == "maalish") {
                 mod += 1;
             }
+            if(PLAYER_D->check_save(ob, "courage") == 2)
+                mod += 2;
+            if(PLAYER_D->check_save(ob, "resolve") == 2)
+                mod += 2;
             break;
         }
 
@@ -120,6 +124,9 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         }
         if (FEATS_D->usable_feat(ob, "shadow master") && objectp(ENV(ob)) && ENV(ob)->query_light() < 2) {
             num += 2;
+        }
+        if (FEATS_D->usable_feat(ob, "divine grace")) {
+            num += min( ({ BONUS_D->query_stat_bonus(ob, "charisma"), 4 }) ); //Limited to +4 for now
         }
 
         save_info["misc_modifiers"] = mod;
