@@ -184,7 +184,7 @@ int cmd_discern(string str)
         if (obj->query_property("finesse")) {
             write("%^BOLD%^%^ORANGE%^Weapon finesse%^RESET%^ can be used with it.");
         }
-        if (obj->query_property("double weapon") || obj->query_property("weapon end")) {
+        if (obj->query_property("double weapon")) {
             write("%^WHITE%^It is a %^BOLD%^%^ORANGE%^double weapon%^RESET%^.");
         }
         write("");

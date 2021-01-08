@@ -9,7 +9,7 @@ inherit DAEMON;
 int cmd_wear(string str)
 {
     mixed* limbs;
-    string ret, what, where, wear, unwear, ob_quest, * player_quests, my_style;
+    string ret, what, where, wear, unwear, ob_quest, * player_quests;
     int i, j, level, quiet, ultimate, active_feat;
     object ob, * obs;
     mapping itembonuses;
