@@ -54,7 +54,7 @@ do_events()
         return;
     }
 
-    tell_room(TO, events[event_counter]);
+    tell_room(TO, events[event_counter] + "\n");
     event_counter++;
 
     call_out("do_events",ROUND_LENGTH / 2);
