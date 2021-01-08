@@ -47,6 +47,10 @@ void create(){
     set_smell("flowers","The odor of the flowers is overwhelming, you nearly pass out.");
     set_listen("default","You can hear birds singing.");
     set_listen("birds","They seems to sing songs of love.");
+
+    if (!random(8)) {
+        new(MONDIR + "bandits")->move(TO);
+    }
 }
 
 string make_fdesc()

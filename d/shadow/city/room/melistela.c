@@ -3,6 +3,7 @@
 
 #include <std.h>
 #include "../defs.h"
+
 inherit INH+"melistel";
 
 void create(){
@@ -12,6 +13,6 @@ void create(){
    set_exits(([
       "north" : ROOMS"plaza",
       "south" : ROOMS"melistelb",
-      "west" : ROOMS"gs_store",     
-   ]));   
+      "west" : ROOMS"gs_store",
+   ]));
 }

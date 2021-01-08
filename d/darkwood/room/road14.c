@@ -12,13 +12,8 @@ inherit "/d/darkwood/room/road2";
 void create() {
     ::create();
 set_long(
-@THORN
-You are on the Royal Southern Road.  You appear to be in a 
-clear area just outside of a dark forest.  There are a 
-few hills to the south of here.  To the west, the road 
-heads into a tall forest, while it continues into the 
-hills further east. 
-THORN
+"%^GREEN%^You are on the Royal Southern Road. You appear to be in a clear area just outside of a dark forest. There are a few hills to the south of here. To the west, the road heads into a tall forest, while it continues into the hills further east.
+"
 );
     set_exits(
               ([

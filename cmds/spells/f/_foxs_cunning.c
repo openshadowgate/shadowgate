@@ -9,7 +9,7 @@ int mydiff;
 void create() {
     ::create();
     set_spell_name("foxs cunning");
-    set_spell_level(([ "bard" : 2, "assassin" : 2, "mage" : 2 ]));
+    set_spell_level(([ "bard" : 2, "assassin" : 2, "mage" : 2, "magus" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS foxs cunning on TARGET");
     set_description("This spell allows the caster to infuse their target with the slyness of a fox, broadening their wit and cunning. This spell doesn't stack with similarly powerful spells of enhancement.");

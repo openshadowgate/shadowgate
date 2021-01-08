@@ -43,7 +43,7 @@ void create(){
 "I've the matter of avoiding the lich's retribution to "
 "deal with.\n\n"
 "%^RESET%^%^CYAN%^I have come across quite the stroke of "
-"luck; Lady Beshaba seems not to despise my existence. "
+"luck; the lady of misfortune seems not to despise my existence. "
 "I've discovered a clearing deep within the marshes, "
 "evidently touched both by those who represent Sun and "
 "Moon. The combination of their vile, holy influence seems"
