@@ -1209,7 +1209,7 @@ void wizard_interface(object user, string type, string targ)
         }
     }
 
-    if (caster->query_property("cleancasting")) {
+    if (caster->query_property("clearcasting")) {
         caster->remove_property("clearcasting");
         tell_object(caster, "%^BOLD%^%^WHITE%^Your concentration is so great that you keep memory of the spell even after its casting!%^RESET%^");
         preserve_in_memory = 1;
