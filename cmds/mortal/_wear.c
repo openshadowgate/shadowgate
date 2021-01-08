@@ -9,7 +9,7 @@ inherit DAEMON;
 int cmd_wear(string str)
 {
     mixed* limbs;
-    string ret, what, where, wear, unwear, ob_quest, * player_quests;
+    string ret, what, where, wear, unwear, ob_quest, * player_quests, my_style;
     int i, j, level, quiet, ultimate, active_feat;
     object ob, * obs;
     mapping itembonuses;
@@ -205,33 +205,7 @@ int cmd_wear(string str)
         }else {
             message("my_action", "You wear " + ob->query_short() + ".", this_player());
         }
-    }
-
-    //positioning
-    active_feat = (int)TP->query_property("tactical_positioning");
-    if (active_feat && ob->query_type() == "shield") {
-        message("my_action", "You can't benefit from positioning with a shield.", TP);
-        TP->set_property("tactical_positioning", -active_feat);
-        TP->add_ac_bonus(-active_feat);
-        TP->add_attack_bonus(active_feat);
-    }
-    //spell combat
-    active_feat = (int)TP->query_property("magus cast");
-    if (active_feat && ob->query_type() == "shield") {
-        object deactivate_feat, * active_feats;
-        //Venger: im almost sure that this part might work better with query_active_feat("spell combat")
-        active_feats = TP->query_property("active_feats");
-
-        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
-        {
-            if (!objectp(active_feats[i])) { continue; }
-            if (active_feats[i]->query_feat_name() != "spell combat") { continue; }
-            deactivate_feat = active_feats[i];
-            break;
-        }
-        deactivate_feat->dest_effect();
-        message("my_action", "You can't benefit from spell combat with a shield.", TP);
-    }
+    }  
 
     if (itembonuses = ob->query_item_bonuses()) {
         ob->run_item_bonuses("equip", TP, itembonuses);

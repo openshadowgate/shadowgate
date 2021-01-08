@@ -295,25 +295,24 @@ int query_parrying()
     object* weapons;
     weapons = TO->query_wielded();
     if (sizeof(weapons) && !weapons[0]->is_lrweapon()) {
-if (FEATS_D->usable_feat(TO, "parry")) {
-    return 1;
-}
-if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
-    if (sizeof(weapons) == 1 && !TO->is_wearing_type("shield")) {
-        return 1;
-    }
-}
-if (FEATS_D->usable_feat(TO, "unassailable parry")) {
-    weapons = distinct_array(weapons);
-    if (sizeof(weapons) > 1 && !weapons[1]->is_lrweapon()) {
-        return 1;
-    }
-}
-if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
-    if (sizeof(weapons) > 1 && weapons[0] == weapons[1]) {
-        return 1;
-    }
-}
+        if (FEATS_D->usable_feat(TO, "parry")) {
+            return 1;
+        }
+        if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
+            if (TO->validate_combat_stance("one hander")) {
+                return 1;
+            }
+        }
+        if (FEATS_D->usable_feat(TO, "unassailable parry")) {
+            if (TO->validate_combat_stance("dual wield") && !weapons[1]->is_lrweapon()) {
+                return 1;
+            }
+        }
+        if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
+            if (TO->validate_combat_stance("two hander")) {
+                return 1;
+            }
+        }
     }
     if (FEATS_D->usable_feat(TO, "unarmed parry")) {
         if (!sizeof(weapons)) {
@@ -1734,8 +1733,7 @@ int query_attack_bonus()
     }
 
     if (FEATS_D->usable_feat(TO, "true strikes") &&
-        sizeof(TO->query_wielded()) == 1 &&
-        !(int)TO->is_wearing_type("shield")) {
+        TO->validate_combat_stance("one hander")) {
         ret += 3;
     }
 
@@ -2360,6 +2358,41 @@ int is_neutral(object obj)
     }
     align = (int)obj->query_alignment();
     if (align == 2 || align == 5 || align == 8) {
+        return 1;
+    }
+    return 0;
+}
+
+/*generic combat stance
+unarmed
+unarmed and shield
+weapon and shield
+one hander
+two hander
+dual wield -> dual wield includes double weapon
+double weapon
+validate lrweapon separately for now
+*/
+void set_combat_stance(string stance) {
+    if (query_property("combat stance")) {
+        remove_property("combat stance");
+    }
+    set_property("combat stance", stance);
+}
+
+string query_combat_stance() {
+    string stance;
+    if (stance = query_property("combat stance")) {
+        return stance;
+    }
+    return "unarmed";
+}
+
+int validate_combat_stance(string stance) {
+    if (query_combat_stance() == stance) {
+        return 1;
+    }
+    if (stance == "dual wield" && query_combat_stance() == "double weapon") {
         return 1;
     }
     return 0;

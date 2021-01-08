@@ -1217,7 +1217,23 @@ string equip_weapon_to_limb(object weap, string limb1, string limb2)
         ApplyObjectBonuses(weap, TO, "add", "wield");
     }
     num_wielded++;
-    check_active_feats(num_wielded);
+
+    if (sizeof(wielded_objects) > 1) {
+        if (wielded_objects[limb1] == wielded_objects[limb2]) {
+            TO->set_combat_stance("two hander");
+        }else {
+            TO->set_combat_stance("dual wield");
+        }
+    } else if (limb1) {
+        if (TO->validate_combat_stance("unarmed and shield")) {
+            TO->set_combat_stance("weapon and shield");
+        }
+        else {
+            TO->set_combat_stance("one hander");
+        }
+    }
+    check_weapon_active_feats(num_wielded);
+
     return 0;
 }
 
@@ -1238,66 +1254,60 @@ int remove_weapon_from_limb(object ob)
     }
     ac += (int)ob->query_ac();
     num_wielded--;
-    check_active_feats(num_wielded);
+
     if (TO->is_player()) {
         ApplyObjectBonuses(ob, TO, "remove", "wield");
     }
+
+    if (num_wielded) {
+        TO->set_combat_stance("one hander");
+    }else if (TO->validate_combat_stance("weapon and shield")) {
+        TO->set_combat_stance("unarmed and shield");
+    }else {
+        TO->set_combat_stance("unarmed");
+    }
+    check_weapon_active_feats(num_wielded);
+
     return 1;
 }
 
-void check_active_feats(int numwielded) {
-    int active_feat;
+void check_weapon_active_feats(int numwielded) {
+    int bonus_value;
     object deactivate_feat, * active_feats;
     int i;
     //positioning
-    active_feat = (int)TO->query_property("tactical_positioning");
-    if (active_feat) {
+    bonus_value = (int)TO->query_property("tactical_positioning");
+    if (bonus_value) {
         message("my_action", "You can only benefit from positioning with a single one-handed weapon.", TO);
-        TO->set_property("tactical_positioning", -active_feat);
-        TO->add_ac_bonus(-active_feat);
-        TO->add_attack_bonus(active_feat);
+        TO->set_property("tactical_positioning", -bonus_value);
+        TO->add_ac_bonus(-bonus_value);
+        TO->add_attack_bonus(bonus_value);
     }
     //magus options
-    active_feat = (int)TO->query_property("enruned offhand");
-    if (active_feat) {
+    if ((int)TO->query_property("enruned offhand")) {
         active_feats = TO->query_property("active_feats");
-
-        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
-        {
+        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++) {
             if (!objectp(active_feats[i])) { continue; }
             if (active_feats[i]->query_feat_name() != "enruned offhand") { continue; }
             deactivate_feat = active_feats[i];
             break;
         }
         deactivate_feat->dest_effect();
-        /*
-        message("my_action", "%^CYAN%^The rune in your offhand weapon vanishes.%^RESET%^", TO);
-        TO->remove_property("enruned offhand");*/
     }
-    active_feat = (int)TO->query_property("enruned great weapon");
-    if (active_feat) {
+    if ((int)TO->query_property("enruned great weapon")) {
         active_feats = TO->query_property("active_feats");
-
-        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
-        {
+        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++) {
             if (!objectp(active_feats[i])) { continue; }
             if (active_feats[i]->query_feat_name() != "enruned great weapon") { continue; }
             deactivate_feat = active_feats[i];
             break;
         }
         deactivate_feat->dest_effect();
-        /*
-        message("my_action", "%^CYAN%^The rune in your weapon vanishes.%^RESET%^", TO);
-        TO->remove_property("enruned great weapon");*/
     }
     //spell combat
-    active_feat = (int)TO->query_property("magus cast");
-    if (active_feat && numwielded != 1) {
-        //Venger: im almost sure that this part might work better with query_active_feat("spell combat")
+    if ((int)TO->query_property("magus cast") && numwielded != 1) {
         active_feats = TO->query_property("active_feats");
-
-        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
-        {
+        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++) {
             if (!objectp(active_feats[i])) { continue; }
             if (active_feats[i]->query_feat_name() != "spell combat") { continue; }
             deactivate_feat = active_feats[i];
@@ -1307,8 +1317,7 @@ void check_active_feats(int numwielded) {
         message("my_action", "You can only benefit from spell combat with a single one-handed melee weapon.", TO);
     }
     //enhance, not a feat
-    active_feat = (int)TO->query_property("weapon enhancement timer");
-    if (active_feat && numwielded == 0) {
+    if ((int)TO->query_property("weapon enhancement timer") && numwielded == 0) {
         "/cmds/mortal/_enhance.c"->off_enhances(TO, "weapon");
     }
 }
@@ -1523,6 +1532,16 @@ string equip_armour_to_limb(object arm, string* limb)
     /*  "equip_armour_to_limb() called from "+ */
     /*  identify(previous_object()) +"."); */
     /* } */
+
+    if (type == "shield") {
+        if (TO->validate_combat_stance("one hander")) {
+            TO->set_combat_stance("weapon and shield");
+        }else {
+            TO->set_combat_stance("unarmed and shield");
+        }
+    }
+    check_armor_active_feats(TO, type, (string)limb[0], "equip");
+
     ac -= (int)arm->query_ac();
     return 0;
 }
@@ -1545,26 +1564,16 @@ int remove_armour_from_limb(object arm, string* limb)
         }
         body[limb[i]]["armour_ob"] -= ({ arm });
     }
-/*
-   if(member_array(type,MULTIPLE_WEAR) == -1)
-      ac += (int)arm->query_ac();
-   else {
-      if(member_array(arm, ac_armour) != -1) {
-         ac += (int)arm->query_ac();
-         ac_armour -= ({arm});
-         ac -= get_ac_armour(limb[0]);
-      }
-   }
- */
 
-    /* if(userp(TO)) */
-    /* { */
-    /*  log_file("armor_class_changes", "\n\nAC Change : " + TO->query_name() +" "+ */
-    /*  "lost AC from "+identify(arm) + " - Ac went from ("+ */
-    /*  ac +") to ("+(ac+(int)arm->query_ac())+").  Function "+ */
-    /*  "remove_armour_to_limb() called from "+ */
-    /*  identify(previous_object()) +"."); */
-    /* } */
+    if (type == "shield") {
+        if (TO->validate_combat_stance("weapon and shield")) {
+            TO->set_combat_stance("one hander");
+        }else {
+            TO->set_combat_stance("unarmed");
+        }
+    }
+    check_armor_active_feats(TO, type, (string)limb[0], "remove");
+
     ac += (int)arm->query_ac();
     if (ac > 10) {
         ac = 10;
@@ -1573,6 +1582,64 @@ int remove_armour_from_limb(object arm, string* limb)
         ApplyObjectBonuses(arm, TO, "remove", "wear");
     }
     return 1;
+}
+
+void check_armor_active_feats(object wornBy, string type, string limb, string action) {
+    int bonus_value;
+    object deactivate_feat, * active_feats;
+    int i;
+    if (type == "shield") {
+        if (action == "remove") {
+            //shieldwall
+            bonus_value = (int)wornBy->query_property("shieldwall");
+            if (bonus_value) {
+                message("my_action", "You can't benefit from shieldwall without a shield.", wornBy);
+                wornBy->set_property("shieldwall", -bonus_value);
+                wornBy->set_property("damage resistance", -bonus_value);
+                wornBy->set_property("shieldwall_bonus", -bonus_value);
+                wornBy->set_property("empowered", bonus_value);
+            }
+
+            if ((int)wornBy->query_property("enruned shield")) {
+                active_feats = wornBy->query_property("active_feats");
+                for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++) {
+                    if (!objectp(active_feats[i])) { continue; }
+                    if (active_feats[i]->query_feat_name() != "enruned shield") { continue; }
+                    deactivate_feat = active_feats[i];
+                    break;
+                }
+                deactivate_feat->dest_effect();
+            }
+        }else {
+            //positioning
+            bonus_value = (int)wornBy->query_property("tactical_positioning");
+            if (bonus_value) {
+                message("my_action", "You can't benefit from positioning with a shield.", wornBy);
+                wornBy->set_property("tactical_positioning", -bonus_value);
+                wornBy->add_ac_bonus(-bonus_value);
+                wornBy->add_attack_bonus(bonus_value);
+            }
+            //spell combat
+            if ((int)wornBy->query_property("magus cast")) {
+                active_feats = wornBy->query_property("active_feats");
+                for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++) {
+                    if (!objectp(active_feats[i])) { continue; }
+                    if (active_feats[i]->query_feat_name() != "spell combat") { continue; }
+                    deactivate_feat = active_feats[i];
+                    break;
+                }
+                deactivate_feat->dest_effect();
+                message("my_action", "You can't benefit from spell combat with a shield.", wornBy);
+            }
+        }
+    }
+
+    if (action == "remove" &&
+        (int)wornBy->query_property("armor enhancement timer") &&
+        (type == "armour" || type == "chain" || type == "leather") &&
+        limb == "torso") {
+        "/cmds/mortal/_enhance.c"->off_enhances(wornBy, "armor");
+    }
 }
 
 /*

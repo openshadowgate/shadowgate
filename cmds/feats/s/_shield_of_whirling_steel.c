@@ -43,7 +43,7 @@ int cmd_shield_of_whirling_steel(string str)
     object feat;
     if(!objectp(TP)) { return 0; }
 
-    if(!TP->is_wielding("dual wielding"))
+    if(!TP->validate_combat_stance("dual wield"))
     {
         tell_object(TP,"%^RESET%^%^BOLD%^You must be wielding two weapons to use shield of whirling steel.%^RESET%^");
         return 1;
@@ -96,7 +96,7 @@ void execute_feat()
         return;
     }
     
-    if(!caster->is_wielding("dual wielding"))
+    if(!caster->validate_combat_stance("dual wield"))
     {        
         tell_object(TP,"%^RESET%^%^BOLD%^You must be wielding two weapons to use shield of whirling steel.%^RESET%^");
         dest_effect();
@@ -141,7 +141,7 @@ void execute_attack()
         return;
     }
     
-    if(!caster->is_wielding("dual wielding"))
+    if(!caster->validate_combat_stance("dual wield"))
     {        
         tell_object(TP,"%^RESET%^%^BOLD%^You must be wielding two weapons to use shield of whirling steel.%^RESET%^");
         dest_effect();
