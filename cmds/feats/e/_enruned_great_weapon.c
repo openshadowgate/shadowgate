@@ -100,7 +100,7 @@ void dest_effect()
         caster->remove_property("enruned great weapon");
         tell_object(caster, cm("The rune in your weapon vanishes."));
 
-        if ((int)wornBy->query_property("spell combat")) {
+        if ((int)caster->query_property("spell combat")) {
             active_feats = caster->query_property("active_feats");
             for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
             {
