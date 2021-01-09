@@ -807,6 +807,16 @@ int display_is_active(string feat, object ob)
     return is_active(ob, feat);
 }
 
+int display_is_activable(string feat, object ob)
+{
+    int x;
+    if (!objectp(ob)) return 0;
+    if (!stringp(feat)) return 0;
+    if (pick_color(feat, ob) == "%^BOLD%^%^CYAN%^") return 1;
+    if (pick_color(feat, ob) == "%^YELLOW%^") return 1;
+    return 0;
+}
+
 int filter_feats(object ob, string feat)
 {
     object obj;
@@ -863,6 +873,7 @@ int is_active(object ob,string feat)
     if(!objectp(ob))                    { return 0; }
     if(!stringp(feat))                  { return 0; }
     if(!has_feat(ob,feat))              { return 0; }
+
     feats = (object *)ob->query_property("active_feats");
     if(!pointerp(feats))                { return 0; }
     if(!sizeof(feats))                  { return 0; }
@@ -1575,7 +1586,7 @@ void display_feats(object ob,object targ, string mytype)
                 temp = filter_array(temp, "display_meets_requirements", TO, targ);
             }
             if (mytype == "active") {
-                temp = filter_array(temp, "display_is_active", TO, targ);
+                temp = filter_array(temp, "display_is_activable", TO, targ);
             }
             good = ({});
             for (j = 0; j < sizeof(temp); j++) {
