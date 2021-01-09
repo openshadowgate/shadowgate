@@ -12,14 +12,9 @@ inherit "/d/darkwood/room/road8.c";
 void create() {
     ::create();
     set_long(
-@THORN
-You are on the Royal Southern Road entering a dark forest.  The light
-of the sun is almost blotted out by the near-perfect shade of the trees
-all round you.  The thick growth of bushes beneath the trees looks as 
-thought it might be hiding any number of unsavory creatures.  Just to 
-the southeast, it seems that the road is heading out of the forest, and 
-the light in that direction beckons you forward.
-THORN
+"%^GREEN%^You are on the Royal Southern Road entering a dark forest. The lightof the sun is almost blotted out by the near-perfect shade of the treesall round you. The thick growth of bushes beneath the trees looks as thought it might be hiding any number of unsavory creatures. Just to the southeast, it seems that the road is heading out of the forest, and the light in that direction beckons you forward.
+
+"
     );
     set_exits(
               (["north" : "/d/darkwood/room/road11",

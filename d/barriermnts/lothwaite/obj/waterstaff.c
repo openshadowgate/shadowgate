@@ -37,7 +37,7 @@ CIRCE
    set_value(800);
    set_property("enchantment",2);
    set_wield((:TO,"wieldme":));
-   set_unwield("You set aside the power of the staff for now.");
+   set_unwield((:TO,"unwieldme":));
 }
 
 int wieldme(){
@@ -49,9 +49,18 @@ int wieldme(){
          "from the staff as if suddenly frozen.",ETO);
       return 0;
    }
-   tell_object(ETO,"%^CYAN%^You feel the ice inside the staff as "+
-      "you wield it!");
+   if (!ETO->query_property("silent_wield")) {
+       tell_object(ETO, "%^CYAN%^You feel the ice inside the staff as " +
+           "you wield it!");
+   }
    return 1;
+}
+
+int unwieldme() {
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, "You set aside the power of the staff for now.");
+    }
+    return 1;
 }
 
 void init(){
@@ -96,7 +105,6 @@ int ice(string str){
       return 1;
    }
 }
-
 
 int remove_shield()
 {

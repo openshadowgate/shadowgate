@@ -77,7 +77,9 @@ int wieldme()
         uses = uses + 50;
         return 0;
     }
-    write("%^BOLD%^%^RED%^You grip the rod firmly and a strange sense of power overcomes you.");
+    if (!ETO->query_property("silent_wield")) {
+        write("%^BOLD%^%^RED%^You grip the rod firmly and a strange sense of power overcomes you.");
+    }
     return 1;
 }
 

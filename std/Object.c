@@ -1937,7 +1937,7 @@ void __ActuallyUnwield()
     }
     if (TO->query_property("funwield")) {
         unwieldf = TO->query_unwield();
-        f = (: call_other, TO, unwieldf:);
+        f = (: call_other, TO, unwieldf :);
         if ((!"/adm/daemon/shutdown_d"->shuttingDown()) && (query_verb() != "quit") && interactive(ETO)) {
             catchbug = catch(answer = (*f)());
             if (catchbug) {
@@ -1946,7 +1946,7 @@ void __ActuallyUnwield()
             if (!answer) {
                 return 1;
             }
-        } else {
+        }else {
             if (!(*f)()) {
                 return 1;
             }
@@ -1960,13 +1960,17 @@ void __ActuallyUnwield()
     if (stringp(unwieldf) && !query_property("funwield")) {
         message("my_action", unwieldf, wielded);
     }else {
-        message("my_action", "You unwield " + query_short() + ".",
+        if (!wielded->query_property("silent_wield")){
+            message("my_action", "You unwield " + query_short() + ".",
                 wielded);
+        }
     }
     if (objectp(environment(wielded))) {
-        message("other_action", (string)wielded->query_cap_name() +
+        if (!wielded->query_property("silent_wield")) {
+            message("other_action", (string)wielded->query_cap_name() +
                 " unwields " + query_short() + ".", environment(wielded),
                 ({ wielded }));
+        }
     }
     set_not_inhand();
 }

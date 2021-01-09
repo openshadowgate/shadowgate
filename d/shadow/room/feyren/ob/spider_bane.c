@@ -63,15 +63,19 @@ void create()
 
 int extra_wield() 
 {
-    tell_object(ETO,"%^RESET%^%^GREEN%^You almost sense life emmitting out "+
-    "from the staff!%^RESET%^");
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, "%^RESET%^%^GREEN%^You almost sense life emmitting out " +
+            "from the staff!%^RESET%^");
+    }
     return 1;
 }
 
 int extra_unwield() 
 {
-    tell_object(ETO,"%^RESET%^%^GREEN%^You feel the sense of life "+
-    "emitted from the staff fade away!%^RESET%^");
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, "%^RESET%^%^GREEN%^You feel the sense of life " +
+            "emitted from the staff fade away!%^RESET%^");
+    }
     return 1;
 }
 

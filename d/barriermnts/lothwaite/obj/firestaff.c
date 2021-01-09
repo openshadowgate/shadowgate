@@ -34,7 +34,7 @@ CIRCE
    set_value(800);
    set_property("enchantment",2);
    set_wield((:TO,"wieldme":));
-   set_unwield("You set aside the power of the staff for now.");
+   set_unwield((:TO,"unwieldme":));
 }
 
 int wieldme(){
@@ -46,9 +46,18 @@ int wieldme(){
          "away from the staff, leaving charred flesh behind.",ETO);
       return 0;
    }
-   tell_object(ETO,"%^RED%^You feel the heat inside the staff as "+
-      "you wield it!");
+   if (!ETO->query_property("silent_wield")) {
+       tell_object(ETO, "%^RED%^You feel the heat inside the staff as " +
+           "you wield it!");
+   }
    return 1;
+}
+
+int unwieldme() {
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, "You set aside the power of the staff for now.");
+    }
+    return 1;
 }
 
 void init(){

@@ -63,23 +63,27 @@ void init()
 
 int wieldme(){
    if((ETO->is_class("cleric")) && (!ETO->is_class("mage")) && (!ETO->is_class("fighter"))){
-      tell_object(ETO,"%^BOLD%^%^BLACK%^You feel a hidden power within the "+
-         "staff and know its abilities are yours to command!");
-      tell_room(EETO,"%^BOLD%^%^BLACK%^You hear a strange whisper as "+ETOQCN+" "+
-         "takes up the staff.",ETO);
-      return 1;
+       if (!ETO->query_property("silent_wield")) {
+           tell_object(ETO, "%^BOLD%^%^BLACK%^You feel a hidden power within the " +
+               "staff and know its abilities are yours to command!");
+           tell_room(EETO, "%^BOLD%^%^BLACK%^You hear a strange whisper as " + ETOQCN + " " +
+               "takes up the staff.", ETO);
+       }
+       return 1;
    }
    tell_object(ETO,"You have no idea how to use a staff such as this!");
    return 0;
 }
 
 int unwieldme(){
-   if(iced != 0){
-      remove_shield();
-      remove_call_out("remove_shield");
-   }
-   tell_object(ETO,"You set aside the power of the staff for now.");
-   return 1;
+    if (!ETO->query_property("silent_wield")) {
+        if (iced != 0) {
+            remove_shield();
+            remove_call_out("remove_shield");
+        }
+        tell_object(ETO, "You set aside the power of the staff for now.");
+    }
+    return 1;
 }
 
 int swarm_em(string str){

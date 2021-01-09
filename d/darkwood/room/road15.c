@@ -12,16 +12,11 @@ inherit "/d/darkwood/room/road2";
 void create() {
     ::create();
     set_long(
-@THORN
-You are on the Royal Southern Road.  The road seems to be
-skirting the southern edge of a dark forest.  To the south
-of you appears to be some hills and a wide plain stretching
-to the horizon.  The road continues to the east-west.
-THORN
+"%^GREEN%^You are on the Royal Southern Road. The road seems to beskirting the southern edge of a dark forest. To the southof you appears to be some hills and a wide plain stretchingto the horizon. The road continues to the east-west.
+"
     );
     set_exits(
               (["west" : "/d/darkwood/room/road14",
 				"east" : "/d/darkwood/room/road16"]) );
     set_smell("default","The scent of pine lingers in the air.");
 }
-

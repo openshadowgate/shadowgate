@@ -14,7 +14,6 @@ create(){
 "arcs and often used by nimble, swashbuckling types or those who prefer to "
 "employ finesse rather than brute force in sparring or battle.  It looks "
 "durable, light, and easy to maintain.");
-//    set_large_wc(1,6);
     set_wc(1,6);
     set_large_wc(1,6);
     set_weight(4);
@@ -28,4 +27,5 @@ create(){
    set_critical_hit_multiplier(2);
    set_damage_type("piercing");
    set_property("repairtype",({"weaponsmith"}));
+   set_property("finesse", 1);
 }

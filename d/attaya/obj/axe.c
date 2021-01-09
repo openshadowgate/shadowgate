@@ -1,6 +1,6 @@
 #include <std.h>
 #include <daemons.h>
-inherit "/d/common/obj/weapon/double_axe.c";
+inherit "/d/common/obj/weapon/butchering_axe.c";
 
 
 void create()

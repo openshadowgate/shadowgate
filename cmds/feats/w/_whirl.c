@@ -89,12 +89,7 @@ void execute_feat()
     }
     weapons = caster->query_wielded();
     if (!in_shapeshift) {
-        if (sizeof(weapons) < 2) {
-            tell_object(caster, "%^YELLOW%^You need to be dual-wielding in order to use this feat!\n");
-            dest_effect();
-            return;
-        }
-        if (weapons[0] == weapons[1] && !in_shapeshift) {
+        if (!caster->validate_combat_stance("dual wield")) {
             tell_object(caster, "%^YELLOW%^You need to be dual-wielding in order to use this feat!\n");
             dest_effect();
             return;
@@ -149,13 +144,14 @@ void execute_attack()
         return;
     }
     if (!in_shapeshift) {
-        if (sizeof(weapons) < 2) {
+        if (!caster->validate_combat_stance("dual wield")) {
             tell_object(caster, "%^YELLOW%^You need to be dual-wielding in order to use this feat!\n");
             return 1;
         }
-        if (weapons[0] == weapons[1]) {
-            tell_object(caster, "%^YELLOW%^You need to be dual-wielding in order to use this feat!\n");
-            return 1;
+        if (weapons[0]->is_lrweapon() || weapons[1]->is_lrweapon()) {
+            tell_object(caster, "%^YELLOW%^You cannot whirl while using ranged weapons!\n");
+            dest_effect();
+            return;
         }
     }
 

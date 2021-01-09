@@ -72,25 +72,29 @@ void create()
 
 int wield_me() 
 {
-    	if(ETO->query_highest_level() < 30) 
+    if(ETO->query_highest_level() < 30) 
 	{
-        	tell_object(ETO, "%^BOLD%^%^RED%^The staff refuses "+
+        tell_object(ETO, "%^BOLD%^%^RED%^The staff refuses "+
 		"to be controlled by someone as weak as you!%^RESET%^");
 		return 0;
-    	}
-	tell_object(ETO, "%^BOLD%^%^BLACK%^You feel empowered by the "+
-	"staff.%^RESET%^");
-    	return 1;
+    }
+	if (!ETO->query_property("silent_wield")) {
+		tell_object(ETO, "%^BOLD%^%^BLACK%^You feel empowered by the " +
+			"staff.%^RESET%^");
+	}
+    return 1;
 }
 
 int unwield_me() 
 {
-	tell_object(ETO,"%^BOLD%^%^BLACK%^You feel the empowerment "+
-	"granted to you by the staff fade away.%^RESET%^");
-    	return 1;
+	if (!ETO->query_property("silent_wield")) {
+		tell_object(ETO, "%^BOLD%^%^BLACK%^You feel the empowerment " +
+			"granted to you by the staff fade away.%^RESET%^");
+	}
+    return 1;
 }
 
-void query_charges() 
+int query_charges() 
 {
 	return charges;
 }
@@ -109,7 +113,7 @@ void init()
 {
 	::init();
 	add_action("absorb", "absorb");
-    	add_action("destroy", "destroy");
+    add_action("destroy", "destroy");
 }
 
 void failure() 
@@ -196,8 +200,6 @@ int absorb(string str)
 	return 1;
 }		
 	
-
-
 int destroy(string str) 
 {
 	object ob, myspell;
@@ -333,4 +335,3 @@ int destroy(string str)
     	return 1;
 }
         
-

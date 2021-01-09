@@ -99,6 +99,10 @@ varargs void do_save(object ob, int dc, string type, raw_save)
                 ob->query("subrace") == "maalish") {
                 mod += 1;
             }
+            if(PLAYER_D->check_aura(ob, "courage") == 2)
+                mod += 2;
+            if(PLAYER_D->check_aura(ob, "resolve") == 2)
+                mod += 2;
             break;
         }
 
