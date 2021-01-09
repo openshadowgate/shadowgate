@@ -100,16 +100,17 @@ void dest_effect()
         caster->remove_property("enruned great weapon");
         tell_object(caster, cm("The rune in your weapon vanishes."));
 
-        active_feats = caster->query_property("active_feats");
-
-        for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
-        {
-            if (!objectp(active_feats[i])) { continue; }
-            if (active_feats[i]->query_feat_name() != "spell combat") { continue; }
-            deactivate_feat = active_feats[i];
-            break;
+        if ((int)wornBy->query_property("spell combat")) {
+            active_feats = caster->query_property("active_feats");
+            for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
+            {
+                if (!objectp(active_feats[i])) { continue; }
+                if (active_feats[i]->query_feat_name() != "spell combat") { continue; }
+                deactivate_feat = active_feats[i];
+                break;
+            }
+            deactivate_feat->dest_effect();
         }
-        deactivate_feat->dest_effect();
     }
     ::dest_effect();
     remove_feat(TO);

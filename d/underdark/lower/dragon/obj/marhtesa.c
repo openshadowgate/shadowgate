@@ -76,39 +76,43 @@ int wield_fun() {
       tell_object(ETO,"You are not experienced enough to use this staff.");
       return 0;
     }
-    set_obvious_short("%^WHITE%^%^BOLD%^a %^RESET%^%^MAGENTA%^s%^RED%^"
-"p%^MAGENTA%^i%^RED%^r%^MAGENTA%^a"
-"%^RED%^l %^BOLD%^%^CYAN%^longstaff %^WHITE%^inset with a "
-"%^YELLOW%^gl%^CYAN%^o%^YELLOW%^wing cry%^CYAN%^s%^YELLOW%^tal%^RESET%^");
-    tell_object(ETO,"%^BOLD%^%^WHITE%^The %^BOLD%^%^BLACK%^ja%^RED%^g%^BLACK%^"
-"g%^YELLOW%^ed %^WHITE%^crystal inset in the longstaff takes on a "
-"%^RESET%^%^CYAN%^so%^GREEN%^f%^CYAN%^t %^GREEN%^g%^CYAN%^l%^GREEN%^ow"
-"%^BOLD%^%^WHITE%^ as you take hold of it.%^RESET%^");
-    tell_room(EETO,"%^BOLD%^%^WHITE%^The %^BOLD%^%^BLACK%^ja%^RED%^g%^BLACK%^"
-"g%^YELLOW%^ed %^WHITE%^crystal inset in the longstaff takes on a %^RESET%^"
-"%^CYAN%^so%^GREEN%^f%^CYAN%^t %^GREEN%^g%^CYAN%^l%^GREEN%^ow%^BOLD%^%^WHITE%^"
-" as "+ETO->QCN+" takes hold of it.%^RESET%^",ETO);
-    set_property("enchantment",5);
-    while (query_property("enchantment") != 5) {
-      remove_property("enchantment");
-      set_property("enchantment",5);
+    if (!ETO->query_property("silent_wield")) {
+        set_obvious_short("%^WHITE%^%^BOLD%^a %^RESET%^%^MAGENTA%^s%^RED%^"
+            "p%^MAGENTA%^i%^RED%^r%^MAGENTA%^a"
+            "%^RED%^l %^BOLD%^%^CYAN%^longstaff %^WHITE%^inset with a "
+            "%^YELLOW%^gl%^CYAN%^o%^YELLOW%^wing cry%^CYAN%^s%^YELLOW%^tal%^RESET%^");
+        tell_object(ETO, "%^BOLD%^%^WHITE%^The %^BOLD%^%^BLACK%^ja%^RED%^g%^BLACK%^"
+            "g%^YELLOW%^ed %^WHITE%^crystal inset in the longstaff takes on a "
+            "%^RESET%^%^CYAN%^so%^GREEN%^f%^CYAN%^t %^GREEN%^g%^CYAN%^l%^GREEN%^ow"
+            "%^BOLD%^%^WHITE%^ as you take hold of it.%^RESET%^");
+        tell_room(EETO, "%^BOLD%^%^WHITE%^The %^BOLD%^%^BLACK%^ja%^RED%^g%^BLACK%^"
+            "g%^YELLOW%^ed %^WHITE%^crystal inset in the longstaff takes on a %^RESET%^"
+            "%^CYAN%^so%^GREEN%^f%^CYAN%^t %^GREEN%^g%^CYAN%^l%^GREEN%^ow%^BOLD%^%^WHITE%^"
+            " as " + ETO->QCN + " takes hold of it.%^RESET%^", ETO);
+        set_property("enchantment", 5);
+        while (query_property("enchantment") != 5) {
+            remove_property("enchantment");
+            set_property("enchantment", 5);
+        }
     }
     return 1;
 }
 
 int unwield_fun() {
-    tell_object(ETO,"%^BOLD%^%^WHITE%^The %^BOLD%^%^BLACK%^ja%^RED%^g%^BLACK%^"
-"g%^YELLOW%^ed %^WHITE%^crystal inset in the longstaff stops %^RESET%^%^GREEN%^g%^CYAN%^l"
-"%^GREEN%^owing%^BOLD%^%^WHITE%^ as you release it.%^RESET%^");
-    tell_room(EETO,"%^BOLD%^%^WHITE%^The %^BOLD%^%^BLACK%^ja%^RED%^g%^BLACK%^"
-"g%^YELLOW%^ed %^WHITE%^crystal inset in the longstaff stops %^RESET%^%^GREEN%^g%^CYAN%^"
-"l%^GREEN%^owing%^BOLD%^%^WHITE%^ as "+ETO->QCN+" releases it.%^RESET%^",ETO);
-    set_obvious_short("%^WHITE%^%^BOLD%^a %^RESET%^%^MAGENTA%^s%^RED%^"
-"p%^MAGENTA%^i%^RED%^r%^MAGENTA%^a"
-"%^RED%^l %^BOLD%^%^CYAN%^longstaff %^WHITE%^inset with a "
-"%^RESET%^tran%^BOLD%^%^BLACK%^s%^RESET%^lucent cry%^BOLD%^"
-"%^BLACK%^s%^RESET%^tal%^RESET%^");
-    remove_property("enchantment");
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, "%^BOLD%^%^WHITE%^The %^BOLD%^%^BLACK%^ja%^RED%^g%^BLACK%^"
+            "g%^YELLOW%^ed %^WHITE%^crystal inset in the longstaff stops %^RESET%^%^GREEN%^g%^CYAN%^l"
+            "%^GREEN%^owing%^BOLD%^%^WHITE%^ as you release it.%^RESET%^");
+        tell_room(EETO, "%^BOLD%^%^WHITE%^The %^BOLD%^%^BLACK%^ja%^RED%^g%^BLACK%^"
+            "g%^YELLOW%^ed %^WHITE%^crystal inset in the longstaff stops %^RESET%^%^GREEN%^g%^CYAN%^"
+            "l%^GREEN%^owing%^BOLD%^%^WHITE%^ as " + ETO->QCN + " releases it.%^RESET%^", ETO);
+        set_obvious_short("%^WHITE%^%^BOLD%^a %^RESET%^%^MAGENTA%^s%^RED%^"
+            "p%^MAGENTA%^i%^RED%^r%^MAGENTA%^a"
+            "%^RED%^l %^BOLD%^%^CYAN%^longstaff %^WHITE%^inset with a "
+            "%^RESET%^tran%^BOLD%^%^BLACK%^s%^RESET%^lucent cry%^BOLD%^"
+            "%^BLACK%^s%^RESET%^tal%^RESET%^");
+        remove_property("enchantment");
+    }
     return 1;
 }
 

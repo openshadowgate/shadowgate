@@ -39,28 +39,34 @@ int wieldme()
         return 0;
     }
     if ((string)ETO->is_class("mage") || (string)ETO->is_class("cleric") || (string)ETO->is_class("sorcerer") || (string)ETO->is_class("psion") || (string)ETO->is_class("druid")) {
-        tell_object(ETO, "%^YELLOW%^The %^BOLD%^%^RED%^c%^RESET%^%^ORANGE%^o%^YELLOW%^l%^GREEN%^o%^CYAN%^r%^BLUE%^s %^YELLOW%^swirl within the base, flaring to life as you wield the " + TO->query_obvious_short() + "!%^RESET%^");
-        tell_room(EETO, "%^YELLOW%^The %^BOLD%^%^RED%^c%^RESET%^%^ORANGE%^o%^YELLOW%^l%^GREEN%^o%^CYAN%^r%^BLUE%^s %^YELLOW%^swirl within the base, flaring to life as " + ETOQCN + " wields the " + TO->query_obvious_short() + "!%^RESET%^", ETO);
+        if (!ETO->query_property("silent_wield")) {
+            tell_object(ETO, "%^YELLOW%^The %^BOLD%^%^RED%^c%^RESET%^%^ORANGE%^o%^YELLOW%^l%^GREEN%^o%^CYAN%^r%^BLUE%^s %^YELLOW%^swirl within the base, flaring to life as you wield the " + TO->query_obvious_short() + "!%^RESET%^");
+            tell_room(EETO, "%^YELLOW%^The %^BOLD%^%^RED%^c%^RESET%^%^ORANGE%^o%^YELLOW%^l%^GREEN%^o%^CYAN%^r%^BLUE%^s %^YELLOW%^swirl within the base, flaring to life as " + ETOQCN + " wields the " + TO->query_obvious_short() + "!%^RESET%^", ETO);
+        }
         set_item_bonus("attack bonus", 1);
         FLAG = 1;
         return 1;
     }
     set_item_bonus("attack bonus", 0);
-    tell_object(ETO, "%^CYAN%^You hear a faint whispering at the edge of your perception as you grip the staff.%^RESET%^");
-    tell_room(EETO, "%^CYAN%^" + ETOQCN + " hefts the staff and seems to be listening to something unheard.%^RESET%^", ETO);
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, "%^CYAN%^You hear a faint whispering at the edge of your perception as you grip the staff.%^RESET%^");
+        tell_room(EETO, "%^CYAN%^" + ETOQCN + " hefts the staff and seems to be listening to something unheard.%^RESET%^", ETO);
+    }
     return 1;
 }
 
 int unwieldme()
 {
-    if (FLAG) {
-        tell_object(ETO, "%^CYAN%^The colors in the staff fade once more as you set it aside, leaving you feeling smaller somehow.%^RESET%^");
-        tell_room(EETO, "%^CYAN%^" + ETOQCN + " seems to diminish as " + ETO->QS + " puts aside the staff, and it grows dark.%^RESET%^", ETO);
-        FLAG = 0;
-        return 1;
+    if (!ETO->query_property("silent_wield")) {
+        if (FLAG) {
+            tell_object(ETO, "%^CYAN%^The colors in the staff fade once more as you set it aside, leaving you feeling smaller somehow.%^RESET%^");
+            tell_room(EETO, "%^CYAN%^" + ETOQCN + " seems to diminish as " + ETO->QS + " puts aside the staff, and it grows dark.%^RESET%^", ETO);
+            FLAG = 0;
+            return 1;
+        }
+        tell_object(ETO, "%^CYAN%^Your mind suddenly grows quiet as you lower the staff.%^RESET%^");
+        tell_room(EETO, "%^CYAN%^" + ETOQCN + "'s face suddenly looks clearer as " + ETO->QS + " lowers the staff.%^RESET%^", ETO);
     }
-    tell_object(ETO, "%^CYAN%^Your mind suddenly grows quiet as you lower the staff.%^RESET%^");
-    tell_room(EETO, "%^CYAN%^" + ETOQCN + "'s face suddenly looks clearer as " + ETO->QS + " lowers the staff.%^RESET%^", ETO);
     return 1;
 }
 

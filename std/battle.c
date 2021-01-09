@@ -207,7 +207,13 @@ void heart_beat()
         weapons = combatants[i]->query_wielded();
         weapons = distinct_array(weapons);
 
-        if(sizeof(weapons)) { num_attacks = sizeof(weapons); }
+        if(sizeof(weapons)) {
+            if (combatants[i]->validate_combat_stance("dual wield")) {//dual wield and double weapons
+                num_attacks = 2;
+            }else {
+                num_attacks = sizeof(weapons);
+            }
+        }
         else { num_attacks = 2; }
 
         if (num_attacks < 1) { num_attacks = 1; }
@@ -241,7 +247,7 @@ void heart_beat()
         {
             if(userp(combatants[i]))
             {
-                if(sizeof(weapons) > 1)
+                if(combatants[i]->validate_combat_stance("dual wield"))
                 {
                     if(FEATS_D->usable_feat(combatants[i],"improved two weapon fighting"))
                         num_attacks += 2;

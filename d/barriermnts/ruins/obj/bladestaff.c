@@ -43,16 +43,20 @@ void init() {
 }
 
 int wield_fun() {
-   tell_room(EETO,"%^WHITE%^%^BOLD%^"+ETOQCN+" grasps the midsection of the bladestaff securely, ready "
-"for combat!%^RESET%^",ETO);
-   tell_object(ETO,"%^WHITE%^%^BOLD%^You grasp the midsection of the bladestaff, ready for "
-"combat!%^RESET%^");
+    if (!ETO->query_property("silent_wield")) {
+        tell_room(EETO, "%^WHITE%^%^BOLD%^" + ETOQCN + " grasps the midsection of the bladestaff securely, ready "
+            "for combat!%^RESET%^", ETO);
+        tell_object(ETO, "%^WHITE%^%^BOLD%^You grasp the midsection of the bladestaff, ready for "
+            "combat!%^RESET%^");
+    }
    return 1;
 }
 
 int unwield_fun() {
-   tell_room(EETO,"%^WHITE%^%^BOLD%^"+ETOQCN+" spins the bladestaff once and releases it.%^RESET%^",ETO);
-   tell_object(ETO,"%^WHITE%^%^BOLD%^You spin the bladestaff once, and release your hold.%^RESET%^");
+    if (!ETO->query_property("silent_wield")) {
+        tell_room(EETO, "%^WHITE%^%^BOLD%^" + ETOQCN + " spins the bladestaff once and releases it.%^RESET%^", ETO);
+        tell_object(ETO, "%^WHITE%^%^BOLD%^You spin the bladestaff once, and release your hold.%^RESET%^");
+    }
    return 1;
 }
 

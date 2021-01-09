@@ -37,7 +37,7 @@ int prerequisites(object ob)
 
 int cmd_positioning(string str)
 {
-    object feat, *wielded;
+    object feat;
     if (!objectp(TP)) { return 0; }
     if (str) str = lower_case(str);
     if (str != "offensive" &&
@@ -46,14 +46,11 @@ int cmd_positioning(string str)
         str != "min") {
         str = "check";
     }	
-    if((int)TP->is_wearing_type("shield"))
-    {
+    if((int)TP->is_wearing_type("shield")){
         tell_object(TP,"%^RESET%^%^BOLD%^You can't be wearing a shield.%^RESET%^");
         return 1;
-    }	
-	wielded = (object*)TP->query_wielded();
-	if(!sizeof(wielded) == 1)
-    {
+    }
+	if(!TP->validate_combat_stance("one hander")){
         tell_object(TP,"%^RESET%^%^BOLD%^You must be wielding a single one-handed weapon.%^RESET%^");
         return 1;
     }	

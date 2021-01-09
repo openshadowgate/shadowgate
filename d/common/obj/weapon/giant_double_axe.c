@@ -16,12 +16,13 @@ void create() {
    set_type("slashing");
    set_prof_type("double axe");
    set_weapon_prof("exotic");
-   set_wc(3,8);  //putting this a die higher than TT to reflect that we lack tech to make it usable as two weapons without needing ambidexterity - Odin
-   set_large_wc(3,8); //putting this a die higher than TT to reflect that we lack tech to make it usable as two weapons without needing ambidexterity - Odin
+   set_wc(2, 6);
+   set_large_wc(2, 6);
    set_weight(20);
    set_weapon_speed(11);
    set_critical_threat_range(1);
    set_critical_hit_multiplier(3);
    set_damage_type("slashing");
    set_property("repairtype",({"weaponsmith"}));
+   set_property("double weapon", 1);
 }

@@ -98,7 +98,7 @@ void execute_feat() {
 void execute_attack() {
     int i, timerz, res;
     object *targweapon, *keyz;
-    string *ids;
+    string wpn_name, *ids;
     mapping tempmap, newmap;
 
     if(!objectp(caster)) {
@@ -183,8 +183,12 @@ void execute_attack() {
 
     targweapon = target->query_wielded();
     i = random(sizeof(targweapon));
-    ids = targweapon[i]->query_id();
-    target->force_me("unwield "+ids[0]);
+    //ids = targweapon[i]->query_id();
+    wpn_name = targweapon[i]->query_name();
+    targweapon[i]->set_name("disarm_this");
+    target->force_me("unwield disarm_this");
+    targweapon[i]->set_name(wpn_name);
+    //target->force_me("unwield "+ids[0]);
     target->remove_property("disarm time");
     target->set_property("disarm time",(time() + (ROUND_LENGTH * roll_dice(1,4))));
 

@@ -91,12 +91,7 @@ void execute_feat()
         in_shapeshift = 0;
     }
     if (!in_shapeshift) {
-        if (sizeof(weapons) < 2) {
-            tell_object(caster, "You need to be wielding a two handed weapon to use this feat.");
-            dest_effect();
-            return;
-        }
-        if (weapons[0] != weapons[1]) {
+        if (!caster->validate_combat_stance("two hander")) {
             tell_object(caster, "You need to be wielding a two handed weapon to use this feat.");
             dest_effect();
             return;

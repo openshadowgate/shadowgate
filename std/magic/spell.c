@@ -648,7 +648,7 @@ int check_reflection()
     }
 
     can_spend = 0;
-    if (target->query_property("arcana reflection") && USER_D->can_spend_pool(target, spell_level, "arcana")) {
+    if (target->query_property("arcana reflection") && USER_D->can_spend_pool(target, query_spell_level(spell_type), "arcana")) {
         turnperc = BONUS_D->query_stat_bonus(target, "intelligence") + target->query_class_level("magus") / 2;
         flagz = 3;
         can_spend = 1;
@@ -1126,10 +1126,10 @@ void wizard_interface(object user, string type, string targ)
 
     if (spell_type == "magus" && caster->query_property("spell recall")) {
         if (FEATS_D->has_feat(caster, "improved spell recall")) {
-            mycost = (spell_level + 1) / 2;
+            mycost = (query_spell_level("magus") + 1) / 2;
         }
         else {
-            mycost = spell_level;
+            mycost = query_spell_level("magus");
         }
         if (!mycost) {
             tell_object(caster, "Something is wrong with the arcana cost for this " + whatsit + ". Please contact a wiz.");

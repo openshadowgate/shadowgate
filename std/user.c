@@ -980,7 +980,9 @@ int quit()
     inv = all_inventory(TO);
     for(x = 0;x < sizeof(inv);x++)
     {
-        if(objectp(inv[x])) { inv[x]->unequip(); }
+        if(objectp(inv[x])) {
+            inv[x]->unequip();
+        }
     }
     YUCK_D->save_inventory(TO);
     inv=all_inventory(TO);

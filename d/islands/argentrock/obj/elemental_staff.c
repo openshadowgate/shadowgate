@@ -129,7 +129,7 @@ void create()
 int more_wield()
 {
     int resistance_base;
-    string color;
+    string color, wield_message;
     resistance_base = 50;
     if (member_array("%^BOLD%^%^RED%^Won %^RESET%^%^RED%^a %^BOLD%^%^CYAN%^fair %^RESET%^%^CYAN%^challenge %^RED%^against %^BOLD%^B%^CYAN%^a%^RED%^tl%^CYAN%^i%^RED%^n%^RESET%^", ETO->query_mini_quests()) == -1) {
         tell_object(ETO, "%^BOLD%^You have not earned the %^CYAN%^right%^RESET%^%^BOLD%^ to make use of this item.");
@@ -137,6 +137,7 @@ int more_wield()
     }
     if ((int)ETO->query_level() < 35) {
         tell_object(ETO, "%^BOLD%^You are too weak to handle this staff!");
+        return 0;
     }
     switch (random(4)) {
     case 0:
@@ -178,22 +179,22 @@ int more_wield()
         TO->set_item_bonus("fire resistance", 0);
         color = "%^CYAN%^";
     }
-    if (ETO->is_class("mage") || ETO->is_class("sorcerer") || ETO->is_class("warlock")) {
-        tell_object(ETO, color + "%^BOLD%^As you grip the staff you can feel the" +
-                    " raw power of the elements bending to your might.");
-    } else if (ETO->is_class("cleric") || ETO->is_class("druid")) {
-        tell_object(ETO, color + "%^BOLD%^As you grip the staff you can feel the" +
-                    " raw power of the elements bending to your will within the staff.");
-    } else if ((ETO->is_class("bard"))) {
-        tell_object(ETO, color + "%^BOLD%^As you grip the staff you can feel the" +
-                    " raw power of the elements throbbing rhythmically.");
-    } else if ((ETO->is_class("psion"))) {
-        tell_object(ETO, color + "%^BOLD%^As you grip the staff you can feel the" +
-                    " raw power of the elements bending to your might.");
-    }else {
+    if (ETO->is_class("mage") || ETO->is_class("sorcerer") || ETO->is_class("warlock") || ETO->is_class("psion")) {
+        wield_message = "bending to your might.";
+    }
+    else if (ETO->is_class("cleric") || ETO->is_class("druid")) {
+            wield_message = "bending to your will within the staff.");
+    }
+    else if ((ETO->is_class("bard"))) {
+            wield_message = "throbbing rhythmically.");
+    }
+    else {
         tell_object(ETO, "%^BOLD%^Your mind just doesn't know how to harness" +
-                    " the power of this staff.");
+            " the power of this staff.");
         return 0;
+    }
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, color + "%^BOLD%^As you grip the staff you can feel the raw power of the elements " + wield_message);
     }
     return 1;
 }

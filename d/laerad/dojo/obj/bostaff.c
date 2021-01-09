@@ -49,15 +49,19 @@ int wield_fun(){
       tell_object(ETO,"%^BOLD%^You must train further before you can attempt to use a weapon of this calibre.%^RESET%^");
       return 0;
     }
-    tell_object(ETO,"%^BOLD%^%^BLACK%^You take a balanced grip on the staff and extend it horizontally, ready for combat.%^RESET%^");
-    tell_room(EETO,"%^BOLD%^%^BLACK%^"+ETO->QCN+" takes a sturdy grip on the staff and extends it horizontally, ready for combat.%^RESET%^",ETO);
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, "%^BOLD%^%^BLACK%^You take a balanced grip on the staff and extend it horizontally, ready for combat.%^RESET%^");
+        tell_room(EETO, "%^BOLD%^%^BLACK%^" + ETO->QCN + " takes a sturdy grip on the staff and extends it horizontally, ready for combat.%^RESET%^", ETO);
+    }
     return 1;
 }
 
 int unwield_fun() {
-   tell_object(ETO,"%^BOLD%^%^BLACK%^You set the staff aside for now.%^RESET%^");
-   tell_room(EETO,"%^BOLD%^%^BLACK%^"+ETOQCN+" sets the staff aside.%^RESET%^",ETO);
-   return 1;
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, "%^BOLD%^%^BLACK%^You set the staff aside for now.%^RESET%^");
+        tell_room(EETO, "%^BOLD%^%^BLACK%^" + ETOQCN + " sets the staff aside.%^RESET%^", ETO);
+    }
+    return 1;
 }
 
 int hit_fun(object targ) {
