@@ -71,21 +71,21 @@ double_weapon - switch the stance of a double weapon
 
 %^CYAN%^SYNOPSIS%^RESET%^
 
-enhance
-enhance check
-enhance on | off
+double_weapon
+double_weapon check
+double_weapon on | off
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 The command will allow player to switch between fighting with both ends of a double weapon as if fighting with two weapons or use a double weapon two-handed, attacking with only one end of it.
 
-%^ORANGE%^<enhance check>%^RESET%^
+%^ORANGE%^<double_weapon check>%^RESET%^
   Will show your current stance while wielding a double weapon.
 
-%^ORANGE%^<enhance on>%^RESET%^
+%^ORANGE%^<double_weapon on>%^RESET%^
   Will switch to fight with both ends of a double weapon as if fighting with two weapons.
 
-%^ORANGE%^<enhance off>%^RESET%^
+%^ORANGE%^<double_weapon off>%^RESET%^
   Will switch to two-handed, attacking with only one end.
 
 %^CYAN%^SEE ALSO%^RESET%^
