@@ -22,7 +22,7 @@ int cmd_double_weapon(string str)
         return 1;
     }
 
-    if (!TP->validate_combat_stance("two hander")) {
+    if (!TP->validate_combat_stance("two hander") && !TP->validate_combat_stance("double weapon")) {
         tell_object(TP, "You must use both hands to wield this as a double weapon.");
         return 1;
     }
