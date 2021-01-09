@@ -908,6 +908,10 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
         }
         damage += COMBAT_D->unarmed_enchantment(attacker);
     }
+    //Paladin smite target takes additional damage based on CHA mod
+    if(attacker->query_guild_level("paladin") && targ->query_property("paladin smite") == attacker)
+        damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("charisma"));
+    
     damage = damage_done(attacker, weapon, damage, fired);
     if (!objectp(targ)) {
         return;
