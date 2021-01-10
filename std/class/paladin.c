@@ -29,7 +29,7 @@ string *combat_styles() {
 }
 
 mapping stat_requirements() {
-    return ([ "strength" : 12, "wisdom" : 12, "charisma" : 12 ]);
+    return ([ "strength" : 12, "charisma" : 12 ]);
 }
 
 // strong & weak saving throws. Fort, Ref, Will
@@ -42,7 +42,7 @@ string *class_feats(string myspec) {
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "parry", "channel"}), 2 : ({ "smite", "layonhands" }), 3 : ({"divine health", "aura of courage" }), 6 : ({  }), 7 : ({ "indomitable" }),14 : ({ "force of personality" }), 17 : ({ "leadership" }), ]);
+    return ([ 1 : ({ "light armor proficiency", "medium armor proficiency", "heavy armor proficiency", "shield proficiency", "simple weapon proficiency", "martial weapon proficiency", "parry", "channel", "smite" }), 2 : ({ "layonhands" }), 3 : ({ "divine health", "aura of courage" }), 6 : ({  }), 7 : ({ "indomitable" }), 8 : ({ "aura of resolve" }), 14 : ({ "force of personality" }), 17 : ({ "leadership", "aura of justification" }), ]);
 }
 
 string *class_skills()
@@ -109,7 +109,7 @@ int number_of_attacks(object player)
 }
 
 string query_casting_stat(){
-   return "wisdom";
+   return "charisma";
 }
 
 mapping query_class_spells()

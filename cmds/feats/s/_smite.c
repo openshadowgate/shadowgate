@@ -1,124 +1,167 @@
+/*
+  _smite.c
+  
+  Rewrite for Paladin remap. Now does lower base damage
+  and is not AOE, but does bonus damage based on target
+  alignment. Also adds chamod to attacks against target
+  for a number of rounds if opposed alignment.
+  
+  -- Tlaloc --
+*/
+
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
-#include <dieties.h>
+#include <favored_types.h>
+
 inherit FEAT;
 
-#define FEATTIMER 35
+#define FEATTIMER 40
 
-void create() {
+void finish_smite(object you, object me);
+
+void create()
+{
     ::create();
-    feat_type("instant");
+    feat_type("insant");
+    feat_name("smite");
     feat_category("Presence");
     feat_syntax("smite");
-    feat_prereq("Paladin L2");
+    feat_prereq("Paladin L1");
     feat_classes("paladin");
-    feat_desc("Drawing on the divine energy that infuses every holy knight, the paladin can smite the evil or good that lies in the hearts of men, beasts, and monsters alike. A successful attempt will strike any creature audacious enough to attack the paladin, causing vicious damage.");
-    feat_name("smite");
+    feat_desc("With this feat, the paladin calls out to the powers of her beliefs to aid her in battle against those who oppose those beliefs. This results in an initial burst of divine damage against her primary attacker. If that enemy is of an opposed alignment, the damage is increased and the enemy becomes vulnerable to the paladin's attacks. For a few rounds, the paladin's attacks do additional damage based on her charisma modifier.");
 }
 
-int allow_shifted() { return 0; }
-
-int prerequisites(object ob){
-    if(!objectp(ob)) return 0;
-    if(ob->query_class_level("paladin") < 2) {
+int prerequisites(object ob)
+{
+    if(ob->query_class_level("paladin") < 1)
+    {
         dest_effect();
         return 0;
     }
     return ::prerequisites(ob);
 }
 
-int cmd_smite(string str) {
+int cmd_smite(string str)
+{
     object feat;
-    if(!objectp(TP)) return 0;
-    feat = new(base_name(TO));
-    feat->setup_feat(TP,"");
+    
+    if(!objectp(this_player()))
+        return 0;
+    
+    feat = new(base_name(this_object()));
+    feat->setup_feat(this_player(),"");
     return 1;
 }
 
-void execute_feat() {
-    mapping tempmap;
+void execute_feat()
+{
     int delay;
-    string mygawd, *mygawds;
+    
     ::execute_feat();
-    if((int)caster->query_property("using smite") > time()) {
-        tell_object(caster,"You are not prepared to channel such powerful energies again so soon!");
-        dest_effect();
-        return;
-    }
-    if((int)caster->query_property("using instant feat")) {
-        tell_object(caster,"You are already in the middle of using a feat!");
-        dest_effect();
-        return;
-    }
-    mygawd = (string)caster->query_diety();
-    mygawds = keys(DIETIES);
-    if(member_array(mygawd,mygawds) == -1) {
-        tell_object(caster,"You have no deity to call upon!");
-        dest_effect();
-        return;
-    }
-    if(!sizeof(caster->query_attackers())) {
+
+    if(!sizeof(caster->query_attackers()))
+    {
         tell_object(caster,"You're not under attack!");
         dest_effect();
         return;
     }
+    if((int)caster->query_property("using smite") > time())
+    {
+        tell_object(caster,"You are not prepared to channel such powerful energies again so soon!");
+        dest_effect();
+        return;
+    }
+    if((int)caster->query_property("using instant feat"))
+    {
+        tell_object(caster,"You are already in the middle of using a feat!");
+        dest_effect();
+        return;
+    }
+    
+    tell_object(caster, "%^BOLD%^You prepare to smite your foe with divine energy.%^RESET%^");
+    
     delay = time() + FEATTIMER;
     delay_messid_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^smite%^WHITE%^ again.%^RESET%^");
     caster->set_property("using instant feat",1);
     caster->remove_property("using smite");
     caster->set_property("using smite",delay);
-    return;
 }
 
-void execute_attack() {
-    int chamod, i, dmg;
-    object *targets;
-
-    if(!objectp(caster)) {
+void execute_attack()
+{
+    int dam, mod, glvl, opposed;
+    object target, attackers;
+    
+    if(!caster || caster->query_unconscious())
+    {
         dest_effect();
         return;
     }
+    
     caster->remove_property("using instant feat");
     ::execute_attack();
-
-    if(caster->query_unconscious()) {
-        dest_effect();
+    
+    target = caster->query_current_attacker();
+    if(!target)
         return;
+    
+    //Smites do not stack
+    target->remove_property("paladin smite");
+    
+    glvl = caster->query_guild_level("paladin");
+    mod = BONUS_D->query_stat_bonus(caster, "charisma");
+    dam = 10 + glvl + mod;
+    opposed = PLAYER_D->opposed_alignment(caster, target);
+    
+    //Does double damage against opposed, triple damage against polar opposite
+    //Opposed alignment also gets smite debuff that adds CHA bonus to this paladin's
+    //attacks against it.
+    if(opposed)
+    {
+        dam += dam * opposed;
+        target->set_property("paladin smite", caster);
+        
+        //Smite banishes opposing outsiders when paladin has champion feat (non-players)
+        if(FEATS_D->usable_feat(caster, "champion"))
+        {
+            if(member_array(target->query_race(), VALID_ENEMY["outsiders"]) >= 0 && 
+            !userp(target) && 
+            caster->query_level() + 10 >= target->query_level())
+            {
+                tell_object(caster, "You smite your opponent, banishing their soul back to their home plane!");
+                tell_room(place, caster->QCN + " smites " + target->QCN + ", banishing their soul back to their home plane!", ({ caster }));
+                target->set_hp(-100);
+                return;
+            }
+        }
     }
-    chamod = ((int)caster->query_stats("charisma") - 10)/2;
-
-    targets = caster->query_attackers();
-    if(!sizeof(targets)) {
-        tell_object(caster,"You are not under attack, and the divine energies dissipate harmlessly!");
-        dest_effect();
-        return;
-    }
-    caster->set_property("magic",1);
-    targets += ({ caster });
-    tell_object(caster,"%^BOLD%^%^CYAN%^With a shout to the heavens you unleash the divine might of your patron!");
-    tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" lets out a shout to the heavens and unleashes a wave of divine "
-"energy!",targets);
-    targets -= ({ caster });
-
-    targets = shuffle(targets);
-
-    for(i=0;i<sizeof(targets) && i < 8;i++) {
-        if(targets[i] == caster) continue;
-        if(!objectp(targets[i])) continue;
-   	  tell_object(targets[i],"%^BOLD%^%^WHITE%^The energy washes over you, burning like fire!%^RESET%^");
-        dmg = roll_dice(flevel + chamod,8);
-        caster->cause_typed_damage(targets[i],"head",dmg,"divine");
-        caster->add_attacker(targets[i]);
-        targets[i]->add_attacker(caster);
-    }
-    caster->set_property("magic",-1);
-    dest_effect();
-    return;
+    
+    caster->set_property("magic", 1);
+    tell_object(caster, "%^BOLD%^CYAN%^With a shout of your convictions, you unleash divine energy upon your foe!%^RESET%^");
+    tell_room(place, "%^BOLD%^CYAN%^" + caster->QCN + " lets out a shout and strikes down " + caster->query_possessive() + " foe with divine energy!%^RESET%^", ({ caster }));
+    caster->cause_typed_damage(target, "head", dam, "divine");
+    caster->set_property("magic", -1);
+    
+    call_out("finish_smite", ROUND_LENGTH * 5, target, caster);
 }
 
-void dest_effect(){
+void finish_smite(object you, object me)
+{
+    if(you)
+    {
+        if(you->query_property("paladin smite"))
+        {
+            you->remove_property("paladin smite");
+            tell_object(you, "%^BOLD%^You feel the paladin's smite fade from you.%^RESET%^");
+            me && tell_object(me, "%^BOLD%^Your divine smite fades from your foe.%^RESET%^");
+        }
+    }
+    dest_effect();
+}
+
+void dest_effect()
+{
     ::dest_effect();
     remove_feat(TO);
-    return;
 }

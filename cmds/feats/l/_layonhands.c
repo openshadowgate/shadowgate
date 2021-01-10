@@ -13,7 +13,7 @@
 
 inherit FEAT;
 
-#define FEATTIMER 60
+#define FEATTIMER 80
 
 void create()
 {
