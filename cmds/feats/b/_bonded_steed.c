@@ -18,7 +18,7 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("Presence");
+    feat_category("DivineBond");
     feat_name("bonded steed");
     feat_prereq("Paladin L5");
     feat_syntax("bonded_steed to summon or bonded_steed to dismiss");
