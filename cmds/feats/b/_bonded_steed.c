@@ -30,12 +30,12 @@ The Bonded Steed can also be customized through several commands, which will all
   'steed long  [DESCRIPTION]' - Changes the long description of the steed.
 
   To have the bonded steed follow you, use 'steed follow'.  
-  To command the bonded steed, use %^ORANGE%^<steed command %^ULINE%^ACTION%^RESET%^ORANGE%^>.%^RESET%^");
+  To command the bonded steed, use %^ORANGE%^<steed command %^ULINE%^ACTION%^RESET%^ORANGE%^>.%^RESET%^
   
+N.B. This is a divine feat, use <feats divinebond bonded steed> to gain the feat. ");
+
     set_target_required(0);
 }
-
-int allow_shifted() { return 1; }
 
 int prerequisites(object ob)
 {
