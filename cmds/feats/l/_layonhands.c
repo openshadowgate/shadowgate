@@ -13,7 +13,7 @@
 
 inherit FEAT;
 
-#define FEATTIMER 50
+#define FEATTIMER 60
 
 void create()
 {
@@ -117,7 +117,7 @@ void execute_attack()
     dedication = caster->query_dedication();
     
     //If used offensively, has to pass touch attack test
-    if(member(target, caster->query_attackers() >= 0) && BONUS_D->process_hit(caster, target, 1, 0, 0, 1) <= 0)
+    if(member_array(target, caster->query_attackers()) >= 0 && BONUS_D->process_hit(caster, target, 1, 0, 0, 1) <= 0)
     {
         tell_object(caster, "You attempt to lay hands on your opponent but miss!");
         tell_object(target, caster->QCN + " attempts to lay hands on you but misses!");
@@ -126,9 +126,9 @@ void execute_attack()
     
     //Undead paladins channel negative energy
     if(caster->query_property("negative energy affinity"))
-        damage_targ(target, target->return_target_limb(), amount, "negative energy");
+        caster->cause_typed_damage(target, target->return_target_limb(), amount, "negative energy");
     else
-        damage_targ(target, target->return_target_limb(), amount, "positive energy");
+        caster->cause_typed_damage(target, target->return_target_limb(), amount, "positive energy");
     
     if(dedication && target != caster->query_current_attacker())
     {
