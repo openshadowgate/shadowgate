@@ -67,6 +67,7 @@ string *favored_enemy = ({ "none", "none", "none" }),
        *favored_terrain = ({ "none", "none", "none" });
 string mastered_terrain;
 string chosen_animal;
+string dedication;
 mapping mini_quests;
 string *quests;
 string *mysites;
@@ -166,6 +167,10 @@ string set_mastered_terrain(string str);
 string query_mastered_terrain();
 string set_chosen_animal(string str);
 string query_chosen_animal();
+
+//Paladin Dedication
+string set_dedication(string str);
+string query_dedication();
 
 // *** END OF PROTOTYPING ** (gar)
 
@@ -5437,4 +5442,15 @@ string set_chosen_animal(string str)
 string query_chosen_animal()
 {
     return chosen_animal;
+}
+
+string set_dedication(string str)
+{
+    dedication = str;
+    return dedication;
+}
+
+string query_dedication()
+{
+    return dedication;
 }
