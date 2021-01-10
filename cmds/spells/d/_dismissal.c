@@ -19,8 +19,8 @@ void spell_effect(int prof)
     attackers = caster->query_attackers();
     attackers = target_filter(attackers);
 
-    tell_room(place,"%^BLUE%^"+caster->QCN+" releases waves of arcane energies.%^RESET%^");
-    
+    tell_room(place,"%^BLUE%^"+caster->QCN+" releases waves of arcane energies.%^RESET%^",caster);
+    tell_object(caster,"%^BLUE%^You release waves of arcane energies.");
     if(!sizeof(attackers))
     {
         tell_object(caster,"%^BOLD%^%^CYAN%^The waves fail to touch anything.%^RESET%^");
