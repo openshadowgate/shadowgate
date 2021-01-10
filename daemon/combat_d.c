@@ -443,6 +443,16 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
                 }
 
                 reduction = (int)targ->query_property("damage resistance");
+                
+                if(PLAYER_D->check_aura(targ, "justification") == 2)
+                {
+                    if(PLAYER_D->opposed_alignment(targ, attacker))
+                    {
+                        reduction += 5;
+                        if(FEATS_D->usable_feat("champion"))
+                            reduction += 5;
+                    }
+                }
 
                 if (attacker->query_property("magic")) {
                     mod = (int)attacker->query_property("magic") * 10;
