@@ -1781,9 +1781,10 @@ int number_feats(object obj, string category, string* valid_classes) {
                 break;
             case "paladin":
                 if (category == "divinebond") {
-                    if ((int)obj->query_class_level("paladin") > 4) {
-                        j = 1;
-                    }
+                    if ((int)obj->query_class_level("paladin") > 4)
+                        j = 1;                   
+                    if ((int)obj->query_class_level("paladin") > 20)
+                        j = 2;
                 }
                 else {
                     j = (((int)obj->query_class_level(subset[i]) + 4) / 5);
