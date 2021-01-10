@@ -74,6 +74,8 @@ void execute_feat()
         return;
     }
     
+    tell_object(caster, "%^BOLD%^You begin to channel divine energy.%^RESET%^");
+    
     delay = time() + FEATTIMER;
     delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^layonhands%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using layonhands");
@@ -134,7 +136,7 @@ void execute_attack()
     {
         string ename;
         
-        tell_object(caster, "%^BOLD%^Your healing is enhanced through your dedication to %^CYAN%^" + dedication +"%^WHITE%^.");
+        tell_object(caster, "%^BOLD%^Your healing is enhanced through your dedication to those who are %^CYAN%^" + dedication +"%^WHITE%^.");
     
         if(dedication == "blinded")
         {

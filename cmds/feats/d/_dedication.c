@@ -115,7 +115,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if(ob->query_class_level("paladin") < 3)
+    if(ob->query_class_level("paladin") < 13)
     {
         dest_effect();
         return 0;
