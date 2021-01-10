@@ -1787,7 +1787,7 @@ int number_feats(object obj, string category, string* valid_classes) {
                         j = 2;
                 }
                 else {
-                    j = (((int)obj->query_class_level(subset[i]) + 4) / 5);
+                    j = (((int)obj->query_class_level(subset[i]) - 16) / 5);
                 }
                 break;
                 //casters
