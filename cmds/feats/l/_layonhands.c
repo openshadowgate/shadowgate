@@ -58,8 +58,12 @@ int cmd_layonhands(string str)
 void execute_feat()
 {
     int delay;
-
-    ::execute_feat();
+    
+    if(!(int)USER_D->spend_pool(TP, 1, "grace"))
+    {
+        tell_object(caster, "You don't have the Divine Grace to use Lay on Hands!");
+        return;
+    }
     
     if(!objectp(target))
     {
@@ -67,11 +71,7 @@ void execute_feat()
         return;
     }
     
-    if(!(int)USER_D->spend_pool(TP, 1, "grace"))
-    {
-        tell_object(caster, "You don't have the Divine Grace to use Lay on Hands!");
-        return;
-    }
+    ::execute_feat();
     
     tell_object(caster, "%^BOLD%^You begin to channel divine energy.%^RESET%^");
     

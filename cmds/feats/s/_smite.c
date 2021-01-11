@@ -57,8 +57,6 @@ int cmd_smite(string str)
 void execute_feat()
 {
     int delay;
-    
-    ::execute_feat();
 
     if(!sizeof(caster->query_attackers()))
     {
@@ -77,6 +75,8 @@ void execute_feat()
         tell_object(caster, "You don't have the Divine Grace to Smite your foe!");
         return;
     }
+    
+    ::execute_feat();
     
     tell_object(caster, "%^BOLD%^You prepare to smite your foe with divine energy.%^RESET%^");
     
