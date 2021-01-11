@@ -327,7 +327,7 @@ void init_pool(object ob, string pool_type)
             return;
         }
         else {
-            newmax = 1 + (int)ob->query_class_level("paladin") / 5;
+            newmax = 2 + (int)ob->query_class_level("paladin") / 10;
         }
         break;
     }
