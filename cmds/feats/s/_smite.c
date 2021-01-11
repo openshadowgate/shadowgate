@@ -29,7 +29,7 @@ void create()
     feat_syntax("smite");
     feat_prereq("Paladin L1");
     feat_classes("paladin");
-    feat_desc("With this feat, the paladin calls out to the powers of her beliefs to aid her in battle against those who oppose those beliefs. This results in an initial burst of divine damage against her primary attacker. If that enemy is of an opposed alignment, the damage is increased and the enemy becomes vulnerable to the paladin's attacks. For a few rounds, the paladin's attacks do additional damage based on her charisma modifier.");
+    feat_desc("With this feat, the paladin calls out to the powers of her beliefs to aid her in battle against those who oppose those beliefs. This results in an initial burst of divine damage against her primary attacker. If that enemy is of an opposed alignment, the damage is increased and the enemy becomes vulnerable to the paladin's attacks. For a few rounds, the paladin's attacks do additional damage based on her charisma modifier. Smite costs one Divine Grace point to use.");
 }
 
 int prerequisites(object ob)
@@ -66,23 +66,22 @@ void execute_feat()
         dest_effect();
         return;
     }
-    if((int)caster->query_property("using smite") > time())
-    {
-        tell_object(caster,"You are not prepared to channel such powerful energies again so soon!");
-        dest_effect();
-        return;
-    }
     if((int)caster->query_property("using instant feat"))
     {
         tell_object(caster,"You are already in the middle of using a feat!");
         dest_effect();
         return;
+    }   
+    if(!(int)USER_D->spend_pool(TP, 1, "grace"))
+    {
+        tell_object(caster, "You don't have the Divine Grace to Smite your foe!");
+        return;
     }
     
     tell_object(caster, "%^BOLD%^You prepare to smite your foe with divine energy.%^RESET%^");
     
-    delay = time() + FEATTIMER;
-    delay_messid_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^smite%^WHITE%^ again.%^RESET%^");
+    //delay = time() + FEATTIMER;
+    //delay_messid_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^smite%^WHITE%^ again.%^RESET%^");
     caster->set_property("using instant feat",1);
     caster->remove_property("using smite");
     caster->set_property("using smite",delay);
@@ -111,7 +110,7 @@ void execute_attack()
     
     glvl = caster->query_guild_level("paladin");
     mod = BONUS_D->query_stat_bonus(caster, "charisma");
-    dam = 10 + glvl + mod;
+    dam = 5 + glvl + mod;
     opposed = PLAYER_D->opposed_alignment(caster, target);
     
     //Does double damage against opposed, triple damage against polar opposite

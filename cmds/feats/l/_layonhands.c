@@ -22,7 +22,7 @@ void create()
     feat_category("Presence");
     feat_name("layonhands");
     feat_syntax("layonhands TARGET");
-    feat_desc("This will heal the player you choose, increasing in power with your paladin level and your charisma. Invoking this kind of divine power can be wearying, so the paladin will need to wait a few minutes before they can attempt to use such a blessing again. Lay on hands matches your positive/negative energy affinity and can be used to cause damage, much like channel.");
+    feat_desc("This will heal the player you choose, increasing in power with your paladin level and your charisma. Invoking this kind of divine power can be wearying, so the paladin will need to wait a few minutes before they can attempt to use such a blessing again. Lay on hands matches your positive/negative energy affinity and can be used to cause damage, much like channel. Lay on Hands costs one Divine Grace point to use.");
     feat_prereq("Paladin L2");
     set_target_required(1);
 }
@@ -67,17 +67,16 @@ void execute_feat()
         return;
     }
     
-    if((int)caster->query_property("using layonhands") > time())
+    if(!(int)USER_D->spend_pool(TP, 1, "grace"))
     {
-        tell_object(caster,"You are not prepared to channel such powerful energies again so soon!");
-        dest_effect();
+        tell_object(caster, "You don't have the Divine Grace to use Lay on Hands!");
         return;
     }
     
     tell_object(caster, "%^BOLD%^You begin to channel divine energy.%^RESET%^");
     
-    delay = time() + FEATTIMER;
-    delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^layonhands%^WHITE%^ again.%^RESET%^");
+    //delay = time() + FEATTIMER;
+    //delay_msg(FEATTIMER,"%^BOLD%^%^WHITE%^You can %^CYAN%^layonhands%^WHITE%^ again.%^RESET%^");
     caster->remove_property("using layonhands");
     caster->set_property("using layonhands",delay);
     return;
