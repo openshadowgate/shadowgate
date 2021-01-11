@@ -24,7 +24,6 @@ void create()
     feat_syntax("layonhands TARGET");
     feat_desc("This will heal the player you choose, increasing in power with your paladin level and your charisma. Invoking this kind of divine power can be wearying, so the paladin will need to wait a few minutes before they can attempt to use such a blessing again. Lay on hands matches your positive/negative energy affinity and can be used to cause damage, much like channel. Lay on Hands costs one Divine Grace point to use.");
     feat_prereq("Paladin L2");
-    set_target_required(1);
 }
 
 int prerequisites(object ob)
@@ -58,20 +57,17 @@ int cmd_layonhands(string str)
 void execute_feat()
 {
     int delay;
-    
-    if(!(int)USER_D->spend_pool(TP, 1, "grace"))
+ 
+    if(!(int)USER_D->spend_pool(this_player(), 1, "grace"))
     {
         tell_object(caster, "You don't have the Divine Grace to use Lay on Hands!");
         return;
     }
     
-    if(!objectp(target))
-    {
-        dest_effect();
-        return;
-    }
-    
     ::execute_feat();
+    
+    if(!objectp(target))
+        target = this_player();
     
     tell_object(caster, "%^BOLD%^You begin to channel divine energy.%^RESET%^");
     
