@@ -10,7 +10,7 @@ void create()
     feat_name("channel");
     feat_prereq("Cleric L1 or Paladin L4");
     feat_classes(({"paladin", "cleric"}));
-    feat_desc("This power allows divine caster to channel primal energies (negative or positive) at their allies and foes. The type of energy will depend on your affinity, e.g. undead will channel negative energy while living will channel positive energy. This feat will auto determine which type of energy is appliable to allies and enemies.");
+    feat_desc("This power allows divine caster to channel primal energies (negative or positive) at their allies and foes. The type of energy will depend on your affinity, e.g. undead will channel negative energy while living will channel positive energy. This feat will auto determine which type of energy is appliable to allies and enemies. Paladins must spend one Divine Grace point to use Channel.");
     feat_syntax("channel");
     set_target_required(0);
 }
@@ -58,8 +58,16 @@ void execute_feat()
         dest_effect();
         return;
     }
-
-    if ((int)caster->query_property("using channel") > time() &&
+    
+    if(!caster->query_class_level("cleric"))
+    {
+        if(!(int)USER_D->spend_pool(TP, 1, "grace"))
+        {
+            tell_object(caster, "You don't have the Divine Grace to Channel Energy!");
+            return;
+        }
+    }    
+    else if ((int)caster->query_property("using channel") > time() &&
         !FEATS_D->usable_feat(caster, "supreme healer")) {
         tell_object(caster, "It's too soon to use channel again yet!");
         dest_effect();
@@ -91,10 +99,14 @@ void execute_attack()
     caster->remove_property("using instant feat");
 
     caster->remove_property("using channel");
-    caster->set_property("using channel",(time() + 35));
+    
+    if(caster->query_class_level("cleric"))
+    {
+        caster->set_property("using channel",(time() + 35));
 
-    if (!FEATS_D->usable_feat(caster, "supreme healer")) {
-        delay_messid_msg(35, "%^BOLD%^%^WHITE%^You can %^CYAN%^channel%^WHITE%^ again.%^RESET%^");
+        if (!FEATS_D->usable_feat(caster, "supreme healer")) {
+            delay_messid_msg(35, "%^BOLD%^%^WHITE%^You can %^CYAN%^channel%^WHITE%^ again.%^RESET%^");
+        }
     }
 
     ::execute_attack();
