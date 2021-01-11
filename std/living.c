@@ -384,7 +384,7 @@ void heart_beat()
         USER_D->regenerate_pool(TO, (1 + random(2)), 1, "arcana");
     }
     if (TO->is_class("paladin")) {
-        USER_D->regenerate_pool(TO, (1 + random(1)), 1, "grace");
+        USER_D->regenerate_pool(TO, 1, 1, "grace");
     }
     //enhancement effects
     "/cmds/mortal/_enhance.c"->run_enhances_timer(TO, "weapon");
