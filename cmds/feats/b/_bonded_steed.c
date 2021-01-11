@@ -31,7 +31,9 @@ The Bonded Steed can also be customized through several commands, which will all
 
   To have the bonded steed follow you, use 'steed follow'.  
   To command the bonded steed, use %^ORANGE%^<steed command %^ULINE%^ACTION%^RESET%^ORANGE%^>.%^RESET%^
-  
+
+This feat costs one Divine Grace point.
+ 
 N.B. This is a divine feat, use <feats divinebond bonded steed> to gain the feat. ");
 
     set_target_required(0);
@@ -88,6 +90,11 @@ void execute_feat()
         return;
     }
     
+    if(!(int)USER_D->spend_pool(TP, 1, "grace"))
+    {
+        tell_object(caster, "You don't have the Divine Grace to summon your steed!");
+        return;
+    }
     
     companion = caster->query_property("animal_companion");
     
