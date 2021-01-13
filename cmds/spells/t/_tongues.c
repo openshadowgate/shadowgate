@@ -1,11 +1,11 @@
 #include <std.h>
-#include <magic.h>
+#include <langs.h>
 #include <daemons.h>
+#include <magic.h>
 inherit SPELL;
 
-int theProf;
-
-void create() {
+void create()
+{
     ::create();
     set_spell_name("tongues");
     set_spell_level(([ "mage" : 3, "bard" : 2, "psion" : 2, "inquisitor" : 2, "cleric" : 3, "magus" : 3 ]));
@@ -13,52 +13,51 @@ void create() {
     set_domains("knowledge");
     set_mystery("lore");
     set_syntax("cast CLASS tongues on TARGET");
-    set_description("This will give the target the ability to understand, any mortal language. You will be able to speak the way you'll be understood by any being. This will not alter you knowledge and won't allow you to teach or write in languages you don't know.");
+    set_description("This will give the target the ability to understand, both read and write any language. This should not change the ability to teach the language.");
     set_verbal_comp();
-	set_helpful_spell(1);
+    set_helpful_spell(1);
     set_target_required(1);
-}
-
-int preSpell()
-{
-    if(target->query_property("verstandnis"))
-    {
-        tell_object(caster,"The target is already under the influence of similar magic");
-        return 0;
-    }
-    return 1;
 }
 
 string query_cast_string()
 {
-   return caster->QCN+" starts to mouth out syllables.\n";
+    return caster->QCN + " starts to mouth out syllables.\n";
 }
 
-void spell_effect(int prof) {
+void spell_effect()
+{
     int i;
-    string what, arg;
-    object ob;
 
-    tell_object(caster,"%^BOLD%^You imbue "+target->QCN+" with knowledge to understand all tongues.");
-    tell_object(target,"%^BOLD%^You start to feel knowledge enter your mind that you lacked before.");
-
-    target->set_property("verstandnis",1);
-
-    addSpellToCaster();
+    tell_object(caster, "%^BOLD%^You start to cast tongues.");
+    tell_object(target, "%^BOLD%^You start to feel knowledge enter your mind that you lacked before.");
     spell_successful();
-    caster->set_property("spelled",({TO}));
+
+    for (i = 0; i < sizeof(ALL_LANGS); i++) {
+        if (member_array(ALL_LANGS[i], OLD_LANGS) == -1) {
+            target->add_lang_overload(ALL_LANGS[i], 100);
+        }
+    }
+    addSpellToCaster();
+    caster->set_property("spelled", ({ TO }));
     spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 3;
-    set_end_time();
     call_out("dest_effect",spell_duration);
 }
 
-void dest_effect() {
+void dest_effect()
+{
     int i;
-    if (objectp(target)) {
-        target->set_property("verstandnis",-1);
-    }
-    ::dest_effect();
-    if(objectp(TO)) TO->remove();
-}
 
-void do_spell_blowup(int prof){ MAGIC_D->fizzile(TO); }
+    if (objectp(target)) {
+        for (i = 0; i < sizeof(ALL_LANGS); i++) {
+            if (member_array(ALL_LANGS[i], OLD_LANGS) == -1) {
+                target->subtract_lang_overload(ALL_LANGS[i], 100);
+            }
+        }
+        tell_object(target,"%^BOLC%^Knowledge of tongues fades from your mind.");
+    }
+
+    ::dest_effect();
+    if (objectp(TO)) {
+        TO->remove();
+    }
+}
