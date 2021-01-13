@@ -10,21 +10,6 @@
  *        log and check for permissions.
  */
 
-object find_living(string str)
-{
-    string whom;
-    object who;
-    if (sscanf(geteuid(previous_object()), "%sobj", whom) > 0) {
-        if (member_group(whom, "law")) {
-            return efun::find_living(str);
-        }
-        who = efun::find_living(str);
-        if (objectp(who) && ((int)who->query_level() > (int)this_player()->query_level())) {
-            return 0;
-        }
-    }
-    return efun::find_living(str);
-}
 
 object find_player(string str)
 {
@@ -33,15 +18,6 @@ object find_player(string str)
     int i;
     if (!stringp(str)) {
         return 0;
-    }
-    if (sscanf(geteuid(previous_object()), "%sobj", whom) > 0) {
-        if (member_group(whom, "law")) {
-            return efun::find_player(str);
-        }
-        who = efun::find_player(str);
-        if (objectp(who) && ((int)who->query_level() > (int)this_player()->query_level())) {
-            return 0;
-        }
     }
     who = efun::find_player(str);
     if (!who) {
@@ -55,29 +31,6 @@ object find_player(string str)
         }
     }
     return who;
-}
-
-object* users()
-{
-    string who;
-    object* userList, * List;
-    int i, j;
-    if (sscanf(getuid(previous_object()), "%sobj", who) > 0) {
-        if (member_group(who, "law")) {
-            return efun::users();
-        }
-        List = ({});
-        userList = efun::users();
-        j = sizeof(userList);
-        for (i = 0; i < j; i++) {
-            if (userList[i]->query_level() < this_player()->query_level()) {
-                List +=
-                    ({ userList[i] });
-            }
-        }
-        return List;
-    }
-    return efun::users();
 }
 
 void destruct(object destructee)
@@ -209,26 +162,6 @@ void write(string str)
     }
 }
 
-object find_object(string str)
-{
-    string whom;
-    object who;
-
-    if (!geteuid(previous_object())) {
-        return efun::find_object(str);
-    }
-    if (sscanf(geteuid(previous_object()), "%sobj", whom) > 0) {
-        if (member_group(whom, "law")) {
-            return efun::find_object(str);
-        }
-        who = efun::find_object(str);
-        if (objectp(who) && userp(who) && ((int)who->query_level() > (int)this_player()->query_level())) {
-            return 0;
-        }
-    }
-    return efun::find_object(str);
-}
-
 string query_ip_name(object ob)
 {
     string whom;
@@ -257,7 +190,7 @@ int wizardp(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if ((string)ob->query_position() == "dm") {
+    if ((string)ob->query_position() == "creator") {
         if (member_group((string)ob->query_true_name(), "assist")) {
             return 1;
         }
