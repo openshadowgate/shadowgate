@@ -28,6 +28,10 @@ void spell_effect()
 {
     int i;
 
+    if (!objectp(target)) {
+        target = caster;
+    }
+
     tell_object(caster, "%^BOLD%^You start to cast tongues.");
     tell_object(target, "%^BOLD%^You start to feel knowledge enter your mind that you lacked before.");
     spell_successful();
@@ -40,6 +44,7 @@ void spell_effect()
     addSpellToCaster();
     caster->set_property("spelled", ({ TO }));
     spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 3;
+    set_end_time();
     call_out("dest_effect",spell_duration);
 }
 
