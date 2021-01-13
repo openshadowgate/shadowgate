@@ -16,7 +16,6 @@ void create()
     set_description("This will give the target the ability to understand, both read and write any language. This should not change the ability to teach the language.");
     set_verbal_comp();
     set_helpful_spell(1);
-    set_target_required(1);
 }
 
 string query_cast_string()
@@ -32,8 +31,12 @@ void spell_effect()
         target = caster;
     }
 
-    tell_object(caster, "%^BOLD%^You start to cast tongues.");
     tell_object(target, "%^BOLD%^You start to feel knowledge enter your mind that you lacked before.");
+
+    if (target != caster) {
+        tell_object(caster,"%^BOLD%^You grant " + target->QCN + " knowledge of tongues.");
+    }
+
     spell_successful();
 
     for (i = 0; i < sizeof(ALL_LANGS); i++) {
@@ -58,7 +61,7 @@ void dest_effect()
                 target->subtract_lang_overload(ALL_LANGS[i], 100);
             }
         }
-        tell_object(target,"%^BOLC%^Knowledge of tongues fades from your mind.");
+        tell_object(target,"%^BOLD%^Knowledge of tongues fades from your mind.");
     }
 
     ::dest_effect();
