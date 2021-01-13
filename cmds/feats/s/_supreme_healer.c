@@ -3,14 +3,14 @@
 
 inherit FEAT;
 
-void create() 
+void create()
 {
     ::create();
     feat_type("permanent");
     feat_category("RadiantServant");
     feat_name("supreme healer");
     feat_prereq("Radiant servant L7");
-    feat_desc("Supreme healer will allow the Radiant Servant to cast any wound-curing spell that she knows without needing the healing spell prepared and without using any spell slots, at will and an unlimited amount of times per day.");
+    feat_desc("Supreme healer will give a Radiant Servant a chance to preserve spell slot used to cast healing spell.");
     permanent(1);
 }
 
@@ -53,4 +53,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
