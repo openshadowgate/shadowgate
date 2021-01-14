@@ -9,6 +9,7 @@ void create() {
     set_author("nienne");
     set_spell_name("beguiling influence");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("alteration");
     set_syntax("cast CLASS beguiling influence");
     set_description("This invocation allows the warlock to channel traces of their power into their own "
 "body, enhancing their natural force of personality.");

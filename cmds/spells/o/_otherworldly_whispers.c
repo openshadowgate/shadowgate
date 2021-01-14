@@ -10,6 +10,7 @@ void create() {
     set_author("nienne");
     set_spell_name("otherworldly whispers");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("divination");
     set_syntax("cast CLASS otherworldly whispers on OBJECT");
     set_description("This invocation draws upon the knowledge of unnamed beings beyond. "
 "The warlock can draw upon his or her connection with them to reveal secrets that might "
