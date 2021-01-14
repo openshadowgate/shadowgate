@@ -19,7 +19,7 @@ int* restricted_alignments(string subrace)
 
 string* restricted_classes(string subrace)
 {
-    return ({ "cleric", "bard", "ranger", "psion", "psywarrior", "paladin", "monk", "druid" });
+    return ({ "cleric", "bard", "ranger", "psion", "psywarrior", "paladin", "monk", "inquisitor", "oracle"});
 }
 
 // stats in order: str, dex, con, int, wis, cha
