@@ -204,7 +204,7 @@ string* query_hair_colors(string who)
     string* choices = ({});
     choices += ({ "ebony" });
     choices += ({ "blonde" });
-    choices += ({ "black", "blue-black", "dark green", "yellow" });
+    choices += ({ "black", "blue-black", "dark green", "yellow", "white", "silver"});
     return choices;
 }
 
