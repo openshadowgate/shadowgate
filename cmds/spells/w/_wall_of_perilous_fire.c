@@ -14,6 +14,7 @@ void create() {
     ::create();
     set_spell_name("wall of perilous fire");
     set_spell_level(([ "warlock" : 3 ]));
+    set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS wall of perilous fire [on <exit>]");
     set_description("This invocation is quite similar to the mage spell 'wall of fire', save that it is conjured purely "
 "of planar energy. It allows the caster to create a wall of brilliant blue flames around himself, protectively, or in "

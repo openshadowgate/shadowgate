@@ -8,6 +8,7 @@ void create() {
     set_author("nienne");
     set_spell_name("dark discorporation");
     set_spell_level(([ "warlock" : 4 ]));
+    set_spell_sphere("alteration");
     set_syntax("cast CLASS dark discorporation");
     set_description("By using this invocation, the warlock dissipates into a hazy mist, only vaguely retaining "
 "his or her prior form. By this means he or she can avoid taking as much damage from physical attacks, and "

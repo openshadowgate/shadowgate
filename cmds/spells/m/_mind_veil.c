@@ -13,6 +13,7 @@ void create() {
     set_author("nienne");
     set_spell_name("mind veil");
     set_spell_level(([ "warlock" : 3 ]));
+    set_spell_sphere("illusion");
     set_syntax("cast CLASS mind veil");
     set_description("This invocation conjures a shroud of magical energy about the caster, "
 "which will oppose all devices and spells that detect, influence or read emotions or thoughts. "

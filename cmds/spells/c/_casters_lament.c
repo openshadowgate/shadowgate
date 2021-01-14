@@ -9,6 +9,7 @@ void create() {
     set_author("nienne");
     set_spell_name("casters lament");
     set_spell_level(([ "warlock" : 4 ]));
+    set_spell_sphere("abjuration");
     set_damage_desc("clevel / 6 + 2 but no more than 8 to all saves OR shatters magic on cursed item");
     set_syntax("cast CLASS casters lament (on <object> [at <player>])");
     set_description("This invocation harnesses the greatest of a warlock's natural aptitude for manipulating "
