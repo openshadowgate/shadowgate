@@ -86,7 +86,7 @@ void spell_effect(int prof) {
     else {
       tell_object(caster,"%^MAGENTA%^You gesture towards "+target->QCN+""+
                 " engulfing "+target->QO+" with the twinkling motes!");
-      tell_object(target,"%^MAGENTA%^With a simple gesture towards you, "+caster->QCN+""
+      tell_object(target,"%^MAGENTA%^With a simple gesture towards you, "+caster->QCN+" " +
         	"engulfs you in twinkling motes of light!");
       tell_room(place,"%^MAGENTA%^With a simple gesture "+caster->QCN+" "+
 		"engulfs "+target->QCN+" in twinkling motes of light!",({target,caster}));
