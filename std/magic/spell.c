@@ -543,7 +543,7 @@ void startCasting()
     if (displaystring == "display\n") {
         displayflag = 1;
     }
-    if (!TP->query_invis() && userp(target)) {
+    if (!TP->query_invis() && objectp(target) && userp(target)) {
         printstring = "%^YELLOW%^You recognize this spell as " + spell_name + ", aimed at " + target->QCN + "!%^RESET%^";
     } else {
         printstring = "%^YELLOW%^You recognize this spell as " + spell_name + "!%^RESET%^";

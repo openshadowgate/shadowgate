@@ -274,3 +274,19 @@ string english_number(mixed x)
     }
     return implode(len, "");
 }
+
+int wizardp(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    return efun::wizardp(ob);
+}
+
+int userp(object ob)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+    return efun::userp(ob);
+}
