@@ -198,7 +198,8 @@ object * query_retired() {
   retired_files= get_dir("/d/retired/*.c");
   for(iter=0; iter<sizeof(retired_files); iter++) {
     if ( objectp(find_object("/d/retired/"+retired_files[iter])))
-     retireds += ({ find_object("/d/retired/"+retired_files[iter]) });
+ //    retireds += ({ find_object("/d/retired/"+retired_files[iter]) });
+    retired += ({children("d/retired/"+retired_files[iter])});
   }
   return retireds;
 }
