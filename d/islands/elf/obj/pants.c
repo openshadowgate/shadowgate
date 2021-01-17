@@ -43,7 +43,7 @@ int removeme(){
 	tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETO->QCN+" removes"+
 	" "+ETO->query_possessive()+" noble-looking pants.",ETO);
     if(trak){
-        ETO->remove_temporary_feat("evasion");
+        ETO->remove_temporary_feat("death ward");
         trak = 0;
     }
 	return 1;
