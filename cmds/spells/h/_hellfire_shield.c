@@ -10,6 +10,7 @@ void create(){
     ::create();
     set_spell_name("hellfire shield");
     set_spell_level(([ "warlock" : 3 ]));
+    set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS hellfire shield");
     set_description("This spell surrounds the warlock with a searing barrier of hellfire, which will move with the "
 "caster and harm any foes that get too close.  The strength of the flames depends on the level of the caster.\n\n"

@@ -10,6 +10,7 @@ void create() {
     set_author("nienne");
     set_spell_name("see the unseen");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("divination");
     set_syntax("cast CLASS see the unseen");
     set_description("This invocation allows a warlock to magically augment their vision, "
 "allowing vastly improved sight in areas of extreme light or darkness, as well as the "

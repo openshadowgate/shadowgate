@@ -298,8 +298,7 @@ void make_new_hitpoint_rolls(object obj)
 
     hp = 30;
     rolls = (int*)obj->query("hp_array");
-    for(i=0;i<(int)obj->query_base_character_level()+1;i++)
-    {
+    for (i = 0; i < (int)obj->query_base_character_level() + 1 && i < 100; i++) {
         hp += rolls[i];
     }
 
@@ -1234,8 +1233,9 @@ void setup()
     if (!skills) {
         init_skills(0);
     }
-    if (member_array(query_position(), MORTAL_POSITIONS) == -1) {
+    if (query_position() == "creator" || query_position() == "Admin") {
         enable_wizard();
+        log_file("adm/enable_wizard", identify(TO) + " enabled wizard for itself during logon.\n");
     }
     init_living();
     basic_commands();

@@ -35,7 +35,7 @@ void setup_undead_scaling(object undead)
 {
     undead->set_guild_level("fighter", clevel);
     undead->set_mlevel("fighter", clevel);
-    undead->set_property("raised", 2);
+    undead->set_property("raised", 1);
     if (caster->is_class("vampire_lord")) {
         undead->set_guild_level("mage", clevel);
         undead->set_mlevel("mage", clevel);

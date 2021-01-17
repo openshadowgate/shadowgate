@@ -35,7 +35,7 @@ string extra_help(){
 
     return "
 
-Each undead will use one pool slot, with six pool slot maximum.
+Each undead will use one pool slot, with five pool slot maximum.
 Undead pool is shared across similar spells.
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
 To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
@@ -98,7 +98,7 @@ void spell_effect(int prof)
         undead = new(UNDEADDIR + "skeleton");
         lvl = 1;
 
-        if (num_mon >= 5) {
+        if (num_mon > 4) {
             undead->remove();
             tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^RAISING MORE IS %^WHITE%^BEYOND%^BLACK%^ YOUR PATHETIC %^BLACK%^M%^WHITE%^ASTERY!%^RESET%^%^RESET%^");
             tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);

@@ -15,7 +15,7 @@ void create()
     set_domains("chaos");
     set_syntax("cast CLASS cloak of chaos");
     set_damage_desc("divine damage, 4 AC, 4 to all saves");
-    set_description("You are surrounded by a cloak of random colors that will harm all your opponents and will slightly protect you. This is nimbus-family spell that won't work with other nimbuses.");
+    set_description("You are surrounded by a cloak of random colors that will harm all your opponents and will slightly protect you. This is nimbus-family spell that won't work with other nimbuses. Like other numbuses it requires a certain alignment from caster.");
     set_property("magic", 1);
     traveling_aoe_spell(1);
 }

@@ -396,7 +396,6 @@ int can_memorize(string myclass, string spell)
     max = 0;
     switch (myclass) {
     case "cleric":
-    case "paladin":
     case "ranger":
     case "druid":
     case "inquisitor":
@@ -405,6 +404,7 @@ int can_memorize(string myclass, string spell)
     case "bard":
     case "sorcerer":
     case "oracle":
+    case "paladin":
         mystat = "charisma"; break;
 
     default:

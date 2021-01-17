@@ -11,6 +11,7 @@ void create() {
     set_author("nienne");
     set_spell_name("ignore the pyre");
     set_spell_level(([ "warlock" : 2, ]));
+    set_spell_sphere("abjuration");
     set_syntax("cast CLASS ignore the pyre on ELEMENT");
     set_description("This invocation bestows the warlock with an innate affinity for the element of choice, which results "
 "in less damage taken from any attacks of that type. Elements that can be chosen are acid, cold, electricity, fire, or sonic.");
