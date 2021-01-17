@@ -298,8 +298,7 @@ void make_new_hitpoint_rolls(object obj)
 
     hp = 30;
     rolls = (int*)obj->query("hp_array");
-    for(i=0;i<(int)obj->query_base_character_level()+1;i++)
-    {
+    for (i = 0; i < (int)obj->query_base_character_level() + 1 && i < 100; i++) {
         hp += rolls[i];
     }
 

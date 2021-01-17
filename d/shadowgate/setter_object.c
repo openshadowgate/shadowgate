@@ -55,10 +55,12 @@ void create()
 void init()
 {
     ::init();
-    if (userp(ETO))
-        if (!newbiep(ETO)) {
+
+    if (userp(ETO)) {
+        if (!(newbiep(ETO) || ETO->query_property("creation"))) {
             TO->remove();
         }
+    }
 
     if(!final_set)
     {
