@@ -1233,7 +1233,7 @@ void setup()
     if (!skills) {
         init_skills(0);
     }
-    if (member_array(query_position(), MORTAL_POSITIONS) == -1) {
+    if (query_position() == "creator" || query_position() == "Admin") {
         enable_wizard();
     }
     init_living();
