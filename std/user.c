@@ -1235,6 +1235,7 @@ void setup()
     }
     if (query_position() == "creator" || query_position() == "Admin") {
         enable_wizard();
+        log_file("adm/enable_wizard", identify(TO) + " enabled wizard for itself during logon.\n");
     }
     init_living();
     basic_commands();
