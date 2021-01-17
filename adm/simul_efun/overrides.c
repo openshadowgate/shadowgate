@@ -185,28 +185,6 @@ int living(object ob)
     return efun::living(ob);
 }
 
-int wizardp(object ob)
-{
-    if (!objectp(ob)) {
-        return 0;
-    }
-    if ((string)ob->query_position() == "creator") {
-        if (member_group((string)ob->query_true_name(), "assist")) {
-            return 1;
-        }
-        return 0;
-    }
-    return efun::wizardp(ob);
-}
-
-int userp(object ob)
-{
-    if (!objectp(ob)) {
-        return 0;
-    }
-    return efun::userp(ob);
-}
-
 int exp_for_level(int x)
 {
     int lev;
