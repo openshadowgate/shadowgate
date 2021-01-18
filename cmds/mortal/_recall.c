@@ -107,6 +107,86 @@ int cmd_recall(string str) {
         }
         return 1;
     }
+    if (str == "monsters") {
+        remembered = TP->query_study_mons();
+        strarr = TP->query_study_mons_sort();
+        if (!remembered || sizeof(remembered) < 1)
+        {
+            tell_object(TP, "You haven't studied a foe.");
+            return 1;
+        }
+        else
+        {
+            string* output = ({});
+            int y, z;
+            int columns;
+            int scrw = atoi(TP->getenv("SCREEN"));
+            int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
+            int roomnw;
+            int maxknown = TP->query_base_stats("intelligence") * 2;
+
+            if (FEATS_D->usable_feat(TP, "monster lore")) {
+                if (TP->query_base_stats("wisdom") > TP->query_base_stats("intelligence")) {
+                    maxknown = (int)TP->query_base_stats("wisdom") * 2;
+                }
+            }
+
+            strarr = sort_array(strarr, 1);
+            num = sizeof(strarr);
+
+            write("%^BOLD%^%^BLUE%^--==%^CYAN%^< %^WHITE%^ " + num + "/" + maxknown + " Studied Monsters %^CYAN%^>%^BLUE%^==--%^RESET%^");
+            output = ({});
+
+            roomnw = max(map(keys(remembered), (:sizeof($1) : )));
+
+            for (i = 0;i < sizeof(strarr);i++)
+            {
+                if (!strarr[i] ||
+                    !file_exists(strarr[i] + ".c") ||
+                    !find_object_or_load(strarr[i]))
+                {
+                    strtemp = strarr[i];
+                    temp = remembered;
+                    map_delete(temp, strtemp);
+                    TP->set_study_mons(temp, strarr - ({ strarr[i] }));
+                    continue;
+                }
+                output += ({ "%^RESET%^%^CYAN%^ " + i + ". " + strarr[i]->query_short() });
+            }
+
+            // "Best fit columns algorithm"
+
+            // Maximum width of the column
+            z = max(map(output, (:sizeof(strip_colors($1)) : ))) + 2;
+
+            // If mobile user has terminal width less than 34 they can suffer.
+            scrw = scrw > 34 ? scrw : 72;
+
+            // Columns setting set by user
+            y = atoi(TP->getenv("COLUMNS"));
+            y = y < 1 ? 1 : y;
+
+            // If user has no columns set display full width of the names
+            z = y > 1 ? 34 : z;
+
+            // How many times output string fits in current screen width?
+            columns = scrw / z;
+            columns = columns < 1 ? 1 : columns;
+
+            // If that value is more than columns setting, it will be
+            // maximum used and user will see less columns than they
+            // have set.
+            columns = columns > y ? y : columns;
+
+            // Recalculating best fit screen width to arrange by the left edge.
+            scrw = z * columns;
+
+            // Location data is small, no buffering is necessary, we can just output it.
+            tell_object(TP, format_page(output, columns, scrw, vertical));
+
+        }
+        return 1;
+    }
     if(str == "innate spells")
     {
         if(recall_innate_spells(TP)) return 1;
