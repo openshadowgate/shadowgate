@@ -869,7 +869,7 @@ study - learn some lore
 
 %^CYAN%^SYNOPSIS%^RESET%^
 
-study [%^ORANGE%^%^ULINE%^ITEM%^RESET%^|room]
+study [%^ORANGE%^%^ULINE%^ITEM%^RESET%^|room|monster %^ORANGE%^%^ULINE%^MONSTERNAME%^RESET%^ %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -878,6 +878,8 @@ Study will try to discern lore and magical properties about an %^ORANGE%^%^ULINE
 If you fail to study an item you may try againonce you have gained higher rank in appropriate skills. There are also spells that replace this command with gaining knowledge through devination or other means.
 
 Some rooms have lore set as well and you may try to %^ORANGE%^<study room>%^RESET%^ to gain lore and knowledge about it.
+
+You can also study monsters to compare their power with yours.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
