@@ -31,8 +31,7 @@ void sort(string *arr);
 void swap(string *arr, int i, int j);
 
 int cmd_recall(string str) {
-   	int i,num;
-
+   	int i, num, what;
     if (str == "locations") {
         remembered=TP->query_rem_rooms();
         strarr=TP->query_rem_rooms_sort();
@@ -107,22 +106,17 @@ int cmd_recall(string str) {
         }
         return 1;
     }
-    if (str == "monsters") {
+    if (str == "monsters" || sscanf(str, "monster %d", what) == 1) {
         remembered = TP->query_study_mons();
         strarr = TP->query_study_mons_sort();
-        if (!remembered || sizeof(remembered) < 1)
-        {
+        if (!remembered || sizeof(remembered) < 1) {
             tell_object(TP, "You haven't studied a foe.");
             return 1;
-        }
-        else
-        {
-            string* output = ({});
-            int y, z;
-            int columns;
+        }else {
+            string *output = ({});
+            int y, z, columns, roomnw;
             int scrw = atoi(TP->getenv("SCREEN"));
             int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
-            int roomnw;
             int maxknown = TP->query_base_stats("intelligence") * 2;
 
             if (FEATS_D->usable_feat(TP, "monster lore")) {
@@ -134,17 +128,27 @@ int cmd_recall(string str) {
             strarr = sort_array(strarr, 1);
             num = sizeof(strarr);
 
+            if (str != "monsters") {
+                if (what >= 0 && what < num) {
+                    tell_object(TP, strarr[what]->query_short());
+                    tell_object(TP, strarr[what]->query_long());
+                    "/cmds/mortal/_study"->do_monster_read(TP, strarr[what]);
+                    return 1;
+                }else {
+                    tell_object(TP, "That's not a valid option.");
+                    return 1;
+                }
+            }
+
             write("%^BOLD%^%^BLUE%^--==%^CYAN%^< %^WHITE%^ " + num + "/" + maxknown + " Studied Monsters %^CYAN%^>%^BLUE%^==--%^RESET%^");
             output = ({});
 
             roomnw = max(map(keys(remembered), (:sizeof($1) : )));
 
-            for (i = 0;i < sizeof(strarr);i++)
-            {
+            for (i = 0;i < sizeof(strarr);i++) {
                 if (!strarr[i] ||
                     !file_exists(strarr[i] + ".c") ||
-                    !find_object_or_load(strarr[i]))
-                {
+                    !find_object_or_load(strarr[i])) {
                     strtemp = strarr[i];
                     temp = remembered;
                     map_delete(temp, strtemp);
@@ -551,15 +555,24 @@ recall - recall knowledge
 %^CYAN%^SYNOPSIS%^RESET%^
 
 recall locations
+recall monsters
+recall monster %^ORANGE%^%^ULINE%^NUMBER%^RESET%^
 recall %^ORANGE%^%^ULINE%^CLASS%^RESET%^ spells [%^ORANGE%^%^ULINE%^LEVEL%^RESET%^]
 recall innate spells
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command allows you to recall locations or spells you know.
+This command allows you to recall locations, monsters or spells you know.
 
 %^ORANGE%^<recall locations>%^RESET%^
     You'll be displayed a list of locations you remembered with %^ORANGE%^<remember>%^RESET%^. Note, whenever you do it, list of locations will be validated and any non-existent or temporary locations (such as rope trick rooms) will be removed.
+
+%^ORANGE%^<recall monsters>%^RESET%^
+    You'll be displayed a list of monsters you studied with %^ORANGE%^<study>%^RESET%^. Note, whenever you do it, list of monsters will be validated.
+
+%^ORANGE%^<recall monster %^ORANGE%^%^ULINE%^NUMBER%^RESET%^>%^RESET%^
+    You'll be displayed the details of a monster you studied with %^ORANGE%^<study>%^RESET%^. The number is taken from %^ORANGE%^<recall monsters>%^RESET%^.
+
 
 %^ORANGE%^<recall %^ORANGE%^%^ULINE%^CLASS%^RESET%^%^ORANGE%^ spells [%^ORANGE%^%^ULINE%^LEVEL%^RESET%^%^ORANGE%^]>%^RESET%^
     You'll view list of memorized spells for standard casters, power points fo psionic classes and spell levels for spontaneous classes. Additionally you can specify level to view that level only.
@@ -571,7 +584,7 @@ This command is affected by collumns setting of the %^ORANGE%^<set>%^RESET%^ com
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-remember, unremember, recognize, set
+remember, unremember, recognize, set, study
 HELP
 );
     return;

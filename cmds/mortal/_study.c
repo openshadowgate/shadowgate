@@ -125,19 +125,19 @@ int cmd_study(string str)
             return 1;
         }
         if (monster) {
-            tell_object(TP, "You carefully begin studying the " + what + " here.");
+            tell_object(TP, "You carefully begin studying the " + monster->query_short() + ".");
             tell_room(ETP, TPQCN + " seems to be carefully studying the " +
-                what + " here.", TP);
+                monster->query_short() + " here.", TP);
             TP->set_time_delay("studying");
             do_monster_study(TP, monster);
-            do_monster_read(TP, monster);
+            do_monster_read(TP, file_name(monster));
             return 1;
         }
-        tell_object(TP, "You carefully begin studying the monster in the area.");
-        tell_room(ETP, TPQCN + " seems to be carefully studying a monster.", TP);
+        tell_object(TP, "You carefully begin studying the creature in the area.");
+        tell_room(ETP, TPQCN + " seems to be carefully studying a creature.", TP);
         TP->set_time_delay("studying");
         do_monster_study(TP, monster);
-        do_monster_read(TP, monster);
+        do_monster_read(TP, file_name(monster));
         return 1;
     }
 
@@ -483,11 +483,11 @@ int do_monster_study(object myplayer, object monster) {
     return 1;
 }
 
-int do_monster_read(object myplayer, object monster) {
+int do_monster_read(object myplayer, string monster) {
     string filename, t1;
     mapping remembered;
     int result, msgCheck;
-    filename = file_name(monster);
+    filename = monster;
     if (sscanf(filename, "%s#", t1)) {
         filename = t1;
     }
@@ -883,7 +883,7 @@ You can also study monsters to compare their power with yours.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-skills, academics, spellcraft, repair, look
+skills, academics, spellcraft, repair, look, recall, unremember
 "
         );
 }
