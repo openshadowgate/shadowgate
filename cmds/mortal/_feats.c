@@ -7,8 +7,6 @@
  * Some of functions in this file have an external use.
  */
 
-//updated to include Psionics category for psions/psywarriors
-//~Circe~ 9/3/15
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
@@ -672,9 +670,9 @@ int cmd_feats(string str)
             bonus = BONUS_ALLOWED - num_bonus;
 
             if (BONUS_ALLOWED > 0) {
-                tell_object(TP, "You have %^BOLD%^%^BLUE%^" + BONUS_ALLOWED + "%^RESET%^ free " + feat_types_labels +
-                    " bonus feats. You have used %^BOLD%^%^BLUE%^" + num_bonus + " %^RESET%^and you now have "
-                    "%^BOLD%^%^BLUE%^" + bonus + "%^RESET%^ left.%^RESET%^");
+                tell_object(TP, "%^BOLD%^%^WHITE%^You have %^BOLD%^%^BLUE%^" + BONUS_ALLOWED + "%^WHITE%^ free " + feat_types_labels +
+                    " bonus feats. You have used %^BOLD%^%^BLUE%^" + num_bonus + " %^WHITE%^. You have "
+                    "%^BOLD%^%^BLUE%^" + bonus + "%^WHITE%^ left.%^WHITE%^");
             }
         }
 
@@ -979,7 +977,7 @@ int validation_messages(object obj, string group, string feat_name) {
                 "your skill focus feat to use.");
             input_to("skill_focus_setting", obj, feat_name, group_2);
             return 1;
-        }    
+        }
     }
 
     if (group == "add") {

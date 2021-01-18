@@ -41,4 +41,8 @@ void reset(){
 
   if(!present("carving"))
    new(OBJ"sign3")->move(TO);
+  if(!present("ornsul"))
+   new("/d/retired/ornsul")->move(TO);
+  
+  return;
  }

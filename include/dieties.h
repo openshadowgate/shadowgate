@@ -31,4 +31,4 @@
 
 #define PANTHEON DIETIES + OCCULT_GODS
 
-#define PALADIN_GODS ({"jarmila", "kreysneothosies", "nilith", "lord shadow", "kismet", "lysara","cevahir","khyron","seija"})
+#define PALADIN_GODS ({"jarmila", "kreysneothosies", "nilith", "lord shadow", "kismet", "lysara","cevahir","khyron","seija", "nimnavanon"})

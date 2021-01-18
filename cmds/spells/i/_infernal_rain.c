@@ -13,6 +13,7 @@ void create(){
     ::create();
     set_spell_name("infernal rain");
     set_spell_level(([ "warlock" : 4 ]));
+    set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS infernal rain");
     set_description("This invocation unleashes a storm of hellfire, raining down the wrath of infernal energies upon the "
 "warlock's foes.  The invocation will last several rounds depending upon the level of the warlock, and the warlock must "

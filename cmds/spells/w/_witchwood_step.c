@@ -9,6 +9,7 @@ void create(){
     set_author("nienne");
     set_spell_name("witchwood step");
     set_spell_level(([ "warlock" : 2 ]));
+    set_spell_sphere("abjuration");
     set_syntax("cast CLASS witchwood step");
     set_description("This invocation attunes the warlock to an element of flowing energy, commonly that of air, "
 "water, or the chaotic fluctuations of the feywild. Such energies will lie dormant in the caster's veins, triggering "

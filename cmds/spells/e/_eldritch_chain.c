@@ -16,6 +16,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("eldritch chain");
+    set_spell_sphere("invocation_evocation");
     set_spell_level(([ "warlock" : 2 ]));
     set_syntax("cast CLASS eldritch chain on TARGET");
     set_description("This is an extension of the core spell-like ability of the warlock - the "

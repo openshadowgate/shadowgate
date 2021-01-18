@@ -11,6 +11,7 @@ void create() {
     set_author("nienne");
     set_spell_name("dark ones own luck");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("divination");
     set_syntax("cast CLASS dark ones own luck on fortitude|reflex|will");
     set_description("The caster draws upon their connection with the planes beyond, seeking the "
 "luck (or perhaps misfortune for their foes?) to better their chances at avoiding harm. This "

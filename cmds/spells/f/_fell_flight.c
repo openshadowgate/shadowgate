@@ -11,6 +11,7 @@ void create(){
     ::create();
     set_spell_name("fell flight");
     set_spell_level(([ "warlock" : 2 ]));
+    set_spell_sphere("alteration");
     set_syntax("cast CLASS fell flight");
     set_description("This spell causes the warlock to sprout a set of wings, their nature "
 "dependent upon the origins of their pact. As the wings are only shaped from energy, they "

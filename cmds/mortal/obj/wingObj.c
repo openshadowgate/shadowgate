@@ -48,15 +48,16 @@ void setup(object thingy, string dest)
 void flystep(string destination, object flyee)
 {
     int loaded;
-    
+
     if (!objectp(flyee)) {
         TO->remove();
         return;
     }
-    
-    if(!objectp(destobj))
-        destobj = load_object(destination);
-    
+
+    if (!objectp(destobj)) {
+        destobj = find_object_or_load(destination);
+    }
+
     //Forces a load on the destination
     loaded = call_other(destobj, "???");
 

@@ -12,6 +12,7 @@ void create() {
     set_author("nienne");
     set_spell_name("breath of the night");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS breath of the night");
     set_description("This invocation draws mosture from the air to form a dense mist, blanketing the "
 "nearby area and making it impossible for anyone, including the warlock, to see more than a few inches "

@@ -14,6 +14,7 @@ void create() {
     set_author("nienne");
     set_spell_name("walk the planes");
     set_spell_level(([ "warlock" : 4 ]));
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS walk the planes on <location>");
     set_description("This powerful invocation allows the warlock to travel along the edge of the plane with "
 "which they bear affinity, using it as 'shortcut' of sorts to a known destination upon the prime. Such travel "

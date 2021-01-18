@@ -55,6 +55,7 @@ STYX
 	   "The kobold's rat-like tail twitches.", 
 	   "The kobold points his spear at you.", 
 	   "The kobold runs past and tries to trip you." }) );
+        command("speak draconic");
 }
 
 int hate_types(){

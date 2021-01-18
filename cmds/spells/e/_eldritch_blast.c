@@ -17,6 +17,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("eldritch blast");
+    set_spell_sphere("invocation_evocation");
     set_spell_level(([ "warlock" : 1 ]));
     set_syntax("cast CLASS eldritch blast on TARGET");
     set_description("This is the core spell-like ability of the warlock - the ability to invoke "

@@ -13,6 +13,7 @@ void create() {
     set_author("nienne");
     set_spell_name("beckoned from beyond");
     set_spell_level(([ "warlock" : 3 ]));
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS beckoned from beyond on <swarm|guardian>");
     set_description("This invocation extends the warlock's innate personal force into the plane with which they are linked, calling forth creatures to serve at their bidding. Such spellcraft can compel the (temporary!) loyalty of a swarm of lesser outsiders, capable of speed and flight but not possessed of great intellect or a capacity to follow complex commands beyond the warlock's direct protection.
 

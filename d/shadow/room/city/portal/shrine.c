@@ -53,7 +53,7 @@ void create(){
          "from flawless blue cloth and features the %^BOLD%^stylized "+
          "eye%^RESET%^%^BLUE%^ that is the holy symbol of the "+
          "%^BOLD%^%^CYAN%^Master of the Invisible Art%^RESET%^%^BLUE%^, "+
-         "%^BOLD%^%^WHITE%^Auppenser%^RESET%^%^BLUE%^.  The tapestries "+
+         "%^BOLD%^%^WHITE%^god of minds%^RESET%^%^BLUE%^.  The tapestries "+
          "have all been trimmed in %^ORANGE%^bronze braid%^BLUE%^, and "+
          "their pointed ends are capped with a %^ORANGE%^bronze tassel"+
          "%^BLUE%^.%^RESET%^",
@@ -63,7 +63,7 @@ void create(){
          "narrow channels have been carved and filled with %^RESET%^"+
          "%^ORANGE%^molten bronze%^BOLD%^%^BLUE%^, giving definition "+
          "to its form.  The front of the altar is carved with a "+
-         "beautiful depiction of the holy symbol of %^CYAN%^Auppenser"+
+         "beautiful depiction of the holy symbol of %^CYAN%^god of minds"+
          "%^BLUE%^, a stylized eye.%^RESET%^",
       ({"bowl","crystal bowl","crystalline bowl"}) : "%^MAGENTA%^The "+
          "cut crystalline bowl is made from an %^BOLD%^amythest"+
@@ -105,14 +105,14 @@ void init(){
 
 int worship(string str){
    if(!str){
-      tell_object(TP,"You should try to <worship auppenser> here.");
+      tell_object(TP,"You shouldn't try to <worship> here.  This place is abandoned.");
       return 1;
    }
-   if(str != "auppenser" && str != "Auppenser" && str != "at altar"){
-      tell_object(TP,"You should try to <worship auppenser> here.");
+   if(str != "god of minds" && str != "god of minds" && str != "at altar"){
+      tell_object(TP,"You should try to <worship god of minds> here.");
       return 1;
    }
-   if((string)TP->query_diety() != "auppenser"){
+   if((string)TP->query_diety() != "god of minds"){
       tell_object(TP,"%^BOLD%^You kneel before the %^BLUE%^altar %^WHITE%^of "+
          "the %^CYAN%^Enlightened One%^WHITE%^ to pay your respects.%^RESET%^");
       if(!TP->query_invis()){

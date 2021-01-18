@@ -67,6 +67,7 @@ string *favored_enemy = ({ "none", "none", "none" }),
        *favored_terrain = ({ "none", "none", "none" });
 string mastered_terrain;
 string chosen_animal;
+string dedication;
 mapping mini_quests;
 string *quests;
 string *mysites;
@@ -166,6 +167,10 @@ string set_mastered_terrain(string str);
 string query_mastered_terrain();
 string set_chosen_animal(string str);
 string query_chosen_animal();
+
+//Paladin Dedication
+string set_dedication(string str);
+string query_dedication();
 
 // *** END OF PROTOTYPING ** (gar)
 
@@ -293,8 +298,7 @@ void make_new_hitpoint_rolls(object obj)
 
     hp = 30;
     rolls = (int*)obj->query("hp_array");
-    for(i=0;i<(int)obj->query_base_character_level()+1;i++)
-    {
+    for (i = 0; i < (int)obj->query_base_character_level() + 1 && i < 100; i++) {
         hp += rolls[i];
     }
 
@@ -607,22 +611,28 @@ void describe_current_room(int verbose) {
   int light,bonus;
 
   env = ETO;
-  if (!objectp(TO)) return;
-  if(!objectp(env))
-  {
-      //messsage("room_description", "It appears that your environment is invalid.");
-      tell_object(TP,"It appears that your environment is invalid.");
+
+  if (!objectp(TO)) {
       return;
   }
+  if (!objectp(env)) {
+      tell_object(TP, "It appears that your environment is invalid.");
+      return;
+  }
+
   bonus = TO->query_sight_bonus();
-  if (wizardp(TO) && objectp(env)) borg = file_name(env)+"\n";
-  else borg = "";
+
+  if (wizardp(TO) && objectp(env)) {
+      borg = file_name(env) + "\n";
+  }else {
+      borg = "";
+  }
 
   if (query_unconscious()) {
     message("room_description","You have the sensation of being moved.",TO);
     return;
   }
-  //  if ((light=effective_light(TO)) > 6 ||( light+bonus) < 1 || TO->query_blind()) {
+
   if ((light = light_blind(0)) || TO->query_blind()) {
       if (TO->query_blind())
           borg += "You have been blinded and cannot see anything.";
@@ -1223,8 +1233,9 @@ void setup()
     if (!skills) {
         init_skills(0);
     }
-    if (member_array(query_position(), MORTAL_POSITIONS) == -1) {
+    if (query_position() == "creator" || query_position() == "Admin") {
         enable_wizard();
+        log_file("adm/enable_wizard", identify(TO) + " enabled wizard for itself during logon.\n");
     }
     init_living();
     basic_commands();
@@ -5451,4 +5462,15 @@ string set_chosen_animal(string str)
 string query_chosen_animal()
 {
     return chosen_animal;
+}
+
+string set_dedication(string str)
+{
+    dedication = str;
+    return dedication;
+}
+
+string query_dedication()
+{
+    return dedication;
 }

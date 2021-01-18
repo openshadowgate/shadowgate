@@ -79,19 +79,19 @@ string list_users(string *races, object tp)
                 position == "creator" ||
                 position == "overseer" ||
                 position == "elder" ||
-                position == "arch")
+                position == "arch") {
                 tmp += "%^BOLD%^%^BLACK%^Wizard %^BOLD%^%^BLACK%^----- ";
-            else
-            {
+            } else {
                 rabbit=who[i]->query_race();
-                if(objectp(shape = who[i]->query_property("shapeshifted")))
+                if (objectp(shape = who[i]->query_property("shapeshifted"))) {
                     rabbit = (string)shape->query_shape_race();
-                else if(objectp(shape = who[i]->query_property("altered")))
-                    if((string)shape->query_shape_race())
+                }else if (objectp(shape = who[i]->query_property("altered"))) {
+                    if ((string)shape->query_shape_race()) {
                         rabbit = (string)shape->query_shape_race();
+                    }
+                }
 
-                if (!wizardp(who) && time() - who[i]->query_login_time() < 120)
-                {
+                if (!wizardp(who[i]) && time() - who[i]->query_login_time() < 120) {
                     rabbit = "someone";
                 }
 

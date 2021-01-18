@@ -9,6 +9,7 @@ void create() {
     set_author("nienne");
     set_spell_name("entropic warding");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("illusion");
     set_syntax("cast CLASS entropic warding");
     set_description("The caster invokes chaotic energies into a field around their person, "
 "which makes it harder to discern their exact location. This may cause physical blows to miss "

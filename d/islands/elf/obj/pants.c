@@ -18,7 +18,7 @@ void create()
     "likely were made for diplomats considering the embelishments."+
     "  The style is very old and whoever created them is likely long gone."+
     "Legend has it that the wearer of this is %^RED%^immune to death magic.");
-	set_property("lore",35);  
+	set_property("lore_difficulty",35);  
 	set_property("enchantment",4+random(3));
     set_item_bonus("magic resistance",1);
 	set_item_bonus("charisma",2);
@@ -43,7 +43,7 @@ int removeme(){
 	tell_room(environment(ETO),"%^BOLD%^%^BLACK%^"+ETO->QCN+" removes"+
 	" "+ETO->query_possessive()+" noble-looking pants.",ETO);
     if(trak){
-        ETO->remove_temporary_feat("evasion");
+        ETO->remove_temporary_feat("death ward");
         trak = 0;
     }
 	return 1;
