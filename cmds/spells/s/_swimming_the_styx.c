@@ -9,6 +9,7 @@ void create(){
     set_author("nienne");
     set_spell_name("swimming the styx");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("alteration");
     set_syntax("cast CLASS swimming the styx");
     set_description("This invocation channels the famed river that traverses the astral and lower planes. Doing "
 "so grants the caster minor aquatic traits, with their hands and feet becoming slightly webbed to aid in swimming. "

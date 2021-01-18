@@ -99,7 +99,12 @@ int cmd_buff(string str)
     case "diff":
 
         normal_buffs = keys(get_buffs(TP));
-        myspells = filter_array(TP->query_property("dispellable spells")->query_spell_name(), (:stringp($1):));
+
+        if (sizeof(TP->query_property("dispellable spells"))) {
+            myspells = filter_array(TP->query_property("dispellable spells")->query_spell_name(), (:stringp($1):));
+        } else {
+            myspells = ({});
+        }
 
         normal_buffs -= myspells;
         normal_buffs = sort_array(normal_buffs, 1);

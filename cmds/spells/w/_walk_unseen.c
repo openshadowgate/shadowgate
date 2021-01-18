@@ -11,6 +11,7 @@ void create() {
     set_author("nienne");
     set_spell_name("walk unseen");
     set_spell_level(([ "warlock" : 2 ]));
+    set_spell_sphere("illusion");
     set_syntax("cast CLASS walk unseen");
     set_description("This invocation places illusory spellcraft around the warlock, deceiving the "
 "eyes of those around so as to effectively disappear from view. While minor, a small degree of "

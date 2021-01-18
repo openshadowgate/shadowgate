@@ -100,7 +100,7 @@ void dest_effect()
         caster->remove_property("enruned offhand");
         tell_object(caster, cm("The rune in your offhand weapon vanishes."));
 
-        if ((int)caster->query_property("spell combat")) {
+        if ((int)caster->query_property("magus cast")) {
             active_feats = caster->query_property("active_feats");
             for (i = 0;sizeof(active_feats), i < sizeof(active_feats);i++)
             {

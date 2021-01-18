@@ -13,6 +13,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("eldritch burst");
+    set_spell_sphere("invocation_evocation");
     set_spell_level(([ "warlock" : 4 ]));
     set_syntax("cast CLASS eldritch burst");
     set_description("This is the pinnacle of the core spell-like ability of the warlock - the "

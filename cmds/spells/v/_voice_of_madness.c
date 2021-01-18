@@ -10,6 +10,7 @@ void create(){
     set_author("nienne");
     set_spell_name("voice of madness");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("illusion");
     set_syntax("cast CLASS voice of madness on TARGET");
     set_description("This invocation will call upon beings beyond, unfathomable and terrifying, to whisper in the ears "
         "of the target. A weak-willed target will become overwhelmed by the maddening voices, and may babble incoherently, attack "

@@ -10,6 +10,7 @@ void create() {
     set_author("nienne");
     set_spell_name("cunning insight");
     set_spell_level(([ "warlock" : 4 ]));
+    set_spell_sphere("alteration");
     set_syntax("cast CLASS cunning insight");
     set_description("By means of this potent invocation, the warlock imbues his body with "
 "power, thereby expanding his awareness and ability to resist and react to outside forces. "

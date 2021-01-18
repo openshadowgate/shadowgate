@@ -16,6 +16,7 @@ void create() {
     ::create();
     set_spell_name("enthrall");
     set_spell_level(([ "warlock" : 2 ]));
+    set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS enthrall on TARGET");
     set_description("By means of this invocation, the warlock will attempt to assert a degree of mental control over the target. If successful, the target will follow the caster around and try to protect them from harm. If the warlock harms the enthralled creature, their control will be lost. Only one creature may be controlled in this way at a time, and it will not work on other players, although it may confuse them briefly.");
     set_verbal_comp();

@@ -383,6 +383,10 @@ varargs int hit_bonus(object who, object targ, int attack_num, object current)
             to_hit += query_stat_bonus(who, "strength");
         }
     }
+    
+    //Paladin smite against opposed alignment adds cha mod to attack rolls
+    if(who->query_guild_level("paladin") && targ->query_property("paladin smite") == who)
+        to_hit += query_stat_bonus(who, "charisma");
 
     // +1 BAB to rock gnome, racial, vs goblinoids
     if ((string)who->query_race() == "gnome" && (string)who->query("subrace") == "rock gnome") {

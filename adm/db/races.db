@@ -22,6 +22,7 @@ dryad:2:10000:5:right hand;left hand:0:0:0:0:0:0:human:2:4
 dwarf:2:6000:4:right hand;left hand:2:4:-1:4:3:-4:human:2:0
 elf:3:8000:5:right hand;left hand:0:0:5:8:3:1:human:2:0
 firbolg:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:3:7
+faery:2:7000:5:right hand;left hand:-2:-3:-1:0:9:-4:human:1:0
 gnoll:-2:8000:5:right hand;left hand:1:0:-1:0:0:0:human:3:0
 gnome:2:8000:4:right hand;left hand:-1:-1:5:5:1:-7:human:1:0
 goblin:-2:6000:5:right hand;left hand:-1:0:0:0:0:-1:human:1:0
@@ -46,6 +47,7 @@ shade:3:9999:5:right hand;left hand:0:2:0:0:0:2:human:2:0
 soulforged:-2:13000:5:right hand;left hand:1:1:-1:0:0:-1:human:2:6
 squole:2:9999:5:right hand;left hand:-1:-1:1:0:0:3:human:2:2
 troll:0:10000:5:right hand;left hand:2:0:0:0:0:-2:human:3:7
+trixie:2:7000:5:right hand;left hand:-2:-3:-1:0:9:-4:human:1:0
 voadkyn:2:10000:5:right hand;left hand:1:-1:0:0:2:-2:human:3:2
 wemic:2:10000:5:right hand;left hand:2:2:0:0:2:-2:wemic:3:4
 yuan-ti:2:10000:5:right hand;left hand:0:0:0:0:0:0:human:2:0

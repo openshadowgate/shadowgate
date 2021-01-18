@@ -45,15 +45,13 @@ void create()
     }
 }
 
+/**
+ * For most classes this spell check whether you have spell memorized,
+ * sufficient amount of arcana, ki or power points to cast it.
+ */
 int can_cast(object target, int spell_level, string spell_type, string spell_name, int spell_delay) {
     string myexp;
     int x;
-    string *supreme_healer_spells,
-        *raging_healer_spells,
-        *natures_gift_spells;
-
-#include <prc_improv_spells.h>
-
 // casting so errors don't show up from other places in lib.
     if (spell_type == "priest") {
         spell_type = "cleric";
@@ -70,20 +68,30 @@ int can_cast(object target, int spell_level, string spell_type, string spell_nam
         return 0;
     }
 
-    if (mapp(spellIndex[spell_name])) {
-        if (FEATS_D->usable_feat(target, "supreme healer") && member_array(spell_name, supreme_healer_spells) != -1) {
-            return 1;
-        }
-        if (FEATS_D->usable_feat(target, "natures gift") && member_array(spell_name, natures_gift_spells) != -1) {
-            return 1;
-        }
-        if (FEATS_D->usable_feat(target, "raging healer") && member_array(spell_name, raging_healer_spells) != -1) {
-            return 1;
-        }
-        if (FEATS_D->usable_feat(target, "inspired necromancy") && spell_level < 7 && spellIndex[spell_name]["sphere"] == "necromancy") {
-            return 1;
+    // This snippet is to allow certain spells to be cast without being memorized
+    {
+        string* supreme_healer_spells,
+            * raging_healer_spells,
+            * natures_gift_spells;
+
+#include <prc_improv_spells.h>
+
+        if (mapp(spellIndex[spell_name])) {
+            if (FEATS_D->usable_feat(target, "supreme healer") && member_array(spell_name, supreme_healer_spells) != -1) {
+                return 1;
+            }
+            if (FEATS_D->usable_feat(target, "natures gift") && member_array(spell_name, MAGIC_SS_D->query_class_special_spells("archdruid", "all")) != -1) {
+                return 1;
+            }
+            if (FEATS_D->usable_feat(target, "raging healer") && member_array(spell_name, raging_healer_spells) != -1) {
+                return 1;
+            }
+            if (FEATS_D->usable_feat(target, "inspired necromancy") && spell_level < 7 && spellIndex[spell_name]["sphere"] == "necromancy") {
+                return 1;
+            }
         }
     }
+
 
     if (FEATS_D->usable_feat(target, "expanded knowledge 1")) {
         myexp = target->query("expanded_knowledge_1");

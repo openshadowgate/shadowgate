@@ -9,6 +9,7 @@ void create() {
     ::create();
     set_spell_name("warlocks call");
     set_spell_level(([ "warlock" : 2 ]));
+    set_spell_sphere("divination");
     set_syntax("cast CLASS warlocks call to TARGET");
     set_description("This invocation allows a brief message to be sent to the target (less than 200 characters). "
 ". Doing so opens the warlock up to a response from the target - either a message of a similarly short nature, or "

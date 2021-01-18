@@ -10,6 +10,7 @@ void create() {
     set_author("nienne");
     set_spell_name("hungry darkness");
     set_spell_level(([ "warlock" : 2 ]));
+    set_spell_sphere("necromancy");
     set_syntax("cast CLASS hungry darkness");
     set_description("This invocation calls a supernatural darkness down within the area, blurring the line between the "
 "prime material plane and the planes beyond. What lies beyond will ignore the warlock, but will reach out, biting and "

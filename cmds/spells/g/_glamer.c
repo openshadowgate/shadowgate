@@ -7,6 +7,7 @@ void create() {
       set_author("nienne");
       set_spell_name("glamer");
       set_spell_level(([ "warlock" : 2 ]));
+    set_spell_sphere("illusion");
       set_syntax("cast CLASS glamer");
       set_description("This invocation creates an illusion to alter the warlock's features. It is "
 "a drastic enough change that they become unrecognizable even to those they are familiar with. It "

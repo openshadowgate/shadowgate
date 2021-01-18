@@ -13,6 +13,7 @@ void create()
     ::create();
     set_spell_name("mayhem");
     set_spell_level(([ "warlock" : 4 ]));
+    set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS mayhem");
     set_damage_desc("AOE confusion over several rounds.");
     set_description(""

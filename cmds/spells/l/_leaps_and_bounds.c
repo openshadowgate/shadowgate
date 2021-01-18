@@ -8,6 +8,7 @@ void create() {
     set_author("nienne");
     set_spell_name("leaps and bounds");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("alteration");
     set_syntax("cast CLASS leaps and bounds");
     set_description("This invocation grants the caster a startling degree of agility and stamina. It grants a bonus to "
 "both the athletics and endurance skills for its duration.");

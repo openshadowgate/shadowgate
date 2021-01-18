@@ -37,7 +37,8 @@ void heart_beat()
         return;
     if(!interactive(ETO))
         return;
-
+    if(!avatarp(ETO)) //so it doesn't kill cyric
+        return;
     //send assassin if not in city
     if (tracker > time())
         return;

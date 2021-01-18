@@ -543,7 +543,7 @@ void startCasting()
     if (displaystring == "display\n") {
         displayflag = 1;
     }
-    if (!TP->query_invis() && userp(target)) {
+    if (!TP->query_invis() && objectp(target) && userp(target)) {
         printstring = "%^YELLOW%^You recognize this spell as " + spell_name + ", aimed at " + target->QCN + "!%^RESET%^";
     } else {
         printstring = "%^YELLOW%^You recognize this spell as " + spell_name + "!%^RESET%^";
@@ -1197,6 +1197,8 @@ void wizard_interface(object user, string type, string targ)
         string * supreme_healer_spells,
             *raging_healer_spells;
 #include <prc_improv_spells.h>
+
+        // can_cast call in magic_d defines conditions that allow to cast these spells without memorizing
 
         if ((FEATS_D->usable_feat(caster, "supreme healer") && (member_array(spell_name, supreme_healer_spells) != -1)) && roll_dice(1, 20) > 12) {
             tell_object(caster,"%^BOLD%^%^WHITE%^Divine preserves the spell in your memory.");

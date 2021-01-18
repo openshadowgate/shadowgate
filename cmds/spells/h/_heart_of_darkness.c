@@ -8,6 +8,7 @@ void create() {
     set_author("nienne");
     set_spell_name("heart of darkness");
     set_spell_level(([ "warlock" : 3 ]));
+    set_spell_sphere("necromancy");
     set_syntax("cast CLASS heart of darkness");
     set_description("By means of this invocation, the caster attunes their soul to withstand the darkest of energies. "
 "It will grant them the hitpoints of a warrior of their level, and render them immune to death spells and spell-like "

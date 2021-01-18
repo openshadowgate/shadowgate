@@ -15,6 +15,7 @@ void create() {
     set_author("nienne");
     set_spell_name("devour magic");
     set_spell_level(([ "warlock" : 4 ]));
+    set_spell_sphere("abjuration");
     set_syntax("cast CLASS devour magic [on TARGET]");
     set_description("This invocation bears greater potency than its lesser cousin, voracious dispelling. In a similar "
 "fashion, it will attempt to destroy any spell enchantments, magical summonings, and anything conjured.  The chances of "

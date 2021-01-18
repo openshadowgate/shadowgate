@@ -8,6 +8,7 @@ void create() {
     set_author("nienne");
     set_spell_name("spiderwalk");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("alteration");
     set_syntax("cast CLASS spiderwalk");
     set_description("A warlock uses this basic invocation to capture the nature of a spider, including their "
 "ability to climb sheer surfaces, and their immunity to webs.");
