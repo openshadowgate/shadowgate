@@ -70,7 +70,7 @@ void create()
          "signs of wear, its details fading from centuries of "+
          "worshippers laying their hands on the stone surface. %^BOLD%^"+
          "Candles %^RESET%^and %^BOLD%^%^GREEN%^flowers %^RESET%^are "+
-         "strewn about the base of the statue, each one somebody’s prayer "+
+         "strewn about the base of the statue, each one somebody's prayer "+
          "to the %^BOLD%^%^MAGENTA%^Mother of Mysteries%^RESET%^.",
       ({"cracks","moss"}) : "%^BOLD%^%^BLACK%^Cracks %^RESET%^have "+
          "begun to creep along the surface of everything, and "+

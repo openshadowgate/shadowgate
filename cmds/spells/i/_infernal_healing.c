@@ -14,7 +14,7 @@ void create()
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS infernal healing [on TARGET]");
     set_damage_desc("fast healing 1");
-    set_description("You anoint a wounded creature with devil’s blood or unholy water, giving it fast healing 1.
+    set_description("You anoint a wounded creature with devil's blood or unholy water, giving it fast healing 1.
 
 %^BOLD%^%^RED%^See also:%^RESET%^ status effects");
     evil_spell(1);

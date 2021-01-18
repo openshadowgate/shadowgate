@@ -96,8 +96,8 @@ int death_age, death_time, pk_death_flag;  // death tracking & display support *
 
 //For being invisible for lower level players
 int quietness;
-mapping rem_rooms, rem_obs;
-string *rem_rooms_sort, *rem_obs_sort;
+mapping rem_rooms, rem_obs, study_mons;
+string *rem_rooms_sort, *rem_obs_sort, study_mons_sort;
 
 int test_passive_perception();
 
@@ -3669,6 +3669,10 @@ string *query_rem_obs_sort() {
   return rem_obs_sort;
 }
 
+string *query_study_mons_sort() {
+    return study_mons_sort;
+}
+
 mapping query_rem_rooms()
 {
     //function that clears invalid rooms - IE rooms we kept in the game
@@ -3702,6 +3706,11 @@ object query_rem_room(string room)
     return destobj;
 }
 
+mapping query_study_mons()
+{
+    return study_mons;
+}
+
 mapping query_rem_obs() {
   return rem_obs;
 }
@@ -3714,6 +3723,11 @@ void set_rem_rooms( mapping remembered, string *sorted ) {
 void set_rem_obs( mapping remembered, string *sorted ) {
   rem_obs = remembered;
   rem_obs_sort = sorted;
+}
+
+void set_study_mons(mapping studied, string *sorted) {
+    study_mons = studied;
+    study_mons_sort = sorted;
 }
 
 int toggle_quit(int x) {

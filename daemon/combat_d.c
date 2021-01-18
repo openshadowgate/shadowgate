@@ -945,10 +945,10 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
             continue;
         }
         mod = armor[i]->do_struck(damage, weapon, attacker);
-        if (mod <= 0) {
+        if (mod < 0) {
             damage += mod;
         }
-        if (mod > 0) {
+        if (mod >= 0) {
             damage = mod;
         }
     }

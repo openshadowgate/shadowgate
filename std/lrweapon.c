@@ -212,7 +212,7 @@ int __Shoot(string str) {
     }
     //following lines moved here to correct light blindness calculations - Lujke
     x = TP->light_blind_remote(0, current, distance);
-    tell_object(TP, "x = " + x + ", room = " + base_name(env) + ", distance = " + distance);
+   // tell_object(TP, "x = " + x + ", room = " + base_name(current) + ", distance = " + distance);
     if (x !=0)
     {
         tell_object(TP, "You can't see well enough to shoot into that room");
@@ -265,7 +265,7 @@ int __Shoot(string str) {
             tohitroll += (FEATS_D->usable_feat(TP, "second favored enemy") * 2);
             tohitroll += (FEATS_D->usable_feat(TP, "third favored enemy") * 2);
 
-            if(foe->is_undead() && FEATS_D->usable_feat("slay the undead"))
+            if(foe->is_undead() && FEATS_D->usable_feat(TP, "slay the undead"))
                 tohitroll += 2;
         }
     }
@@ -320,7 +320,7 @@ int __Shoot(string str) {
                 damage += (FEATS_D->usable_feat(TP, "second favored enemy") * 2);
                 damage += (FEATS_D->usable_feat(TP, "third favored enemy") * 2);
 
-                if(foe->is_undead() && FEATS_D->usable_feat("slay the undead"))
+                if(foe->is_undead() && FEATS_D->usable_feat(TP, "slay the undead"))
                     damage += 2;
             }
         }
