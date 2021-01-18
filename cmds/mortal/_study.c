@@ -359,10 +359,10 @@ int do_monster_study(object myplayer, object monster) {
         filename = t1;
     }
     
-    if (!remembered = TP->query_study_mons()) {// mapping ([name:place])
+    if (!remembered = myplayer->query_study_mons()) {// mapping ([name:place])
         remembered = ([filename:(["results":({ 0, 0, 0, 0 }), "stats" : ({ 0, 0, 0, 0 })])]);
     }
-    if (!sortrem = TP->query_study_mons_sort()) {//names
+    if (!sortrem = myplayer->query_study_mons_sort()) {//names
         sortrem = ({});
     }
     
@@ -464,20 +464,20 @@ int do_monster_study(object myplayer, object monster) {
         }
     }
     sortrem = distinct_array(({ filename }) + sortrem);
-    newsize = (int)TP->query_base_stats("intelligence") * 2;
+    newsize = (int)myplayer->query_base_stats("intelligence") * 2;
     if (FEATS_D->usable_feat(myplayer, "monster lore")) {
-        if (myplayer->query_base_stats("wisdom") > TP->query_base_stats("intelligence")) {
-            newsize = (int)TP->query_base_stats("wisdom") * 2;
+        if (myplayer->query_base_stats("wisdom") > myplayer->query_base_stats("intelligence")) {
+            newsize = (int)myplayer->query_base_stats("wisdom") * 2;
         }
     }
-    if (sizeof(sortrem) > newsize && !avatarp(TP)) {
+    if (sizeof(sortrem) > newsize && !avatarp(myplayer)) {
         while (sizeof(sortrem) > newsize) {
             map_delete(remembered, sortrem[sizeof(sortrem) - 1]);
             sortrem -= ({ sortrem[sizeof(sortrem) - 1] });
         }
         tell_object(myplayer, "oversize");
     }
-    TP->set_study_mons(remembered, sortrem);
+    myplayer->set_study_mons(remembered, sortrem);
     tell_object(myplayer, "You study the monster, looking its behavior and learning it.");
 
     return 1;
@@ -502,7 +502,7 @@ int do_monster_read(object myplayer, object monster) {
     case 2:
         break;
     case 1:
-        result = myplayer->query_level() - remembered[filename]["results"][0];
+        result = myplayer->query_level() - remembered[filename]["stats"][0];
         if (result > 9) {
             tell_object(myplayer, "This foe is lethal.");
         }else if (result > 3) {
@@ -517,7 +517,7 @@ int do_monster_read(object myplayer, object monster) {
         msgCheck = 1;
         break;
     case 3:
-        result = myplayer->query_level() - remembered[filename]["results"][0];
+        result = myplayer->query_level() - remembered[filename]["stats"][0];
         if (result > 9) {
             tell_object(myplayer, "This foe isn't worth your time.");
         }else if (result > 3) {
@@ -540,7 +540,7 @@ int do_monster_read(object myplayer, object monster) {
     case 2:
         break;
     case 1:
-        result = (myplayer->query_max_hp() - remembered[filename]["results"][1]) * 100 / myplayer->query_max_hp();
+        result = (myplayer->query_max_hp() - remembered[filename]["stats"][1]) * 100 / myplayer->query_max_hp();
         if (result > 49) {
             tell_object(myplayer, "This foe is a good match.");
         }else if (result > 19) {
@@ -555,7 +555,7 @@ int do_monster_read(object myplayer, object monster) {
         msgCheck = 1;
         break;
     case 3:
-        result = (myplayer->query_max_hp() - remembered[filename]["results"][1]) * 100 / myplayer->query_max_hp();
+        result = (myplayer->query_max_hp() - remembered[filename]["stats"][1]) * 100 / myplayer->query_max_hp();
         if (result > 49) {
             tell_object(myplayer, "This foe might outlast you.");
         }else if (result > 19) {
@@ -578,7 +578,7 @@ int do_monster_read(object myplayer, object monster) {
     case 2:
         break;
     case 1:
-        result = (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity") - remembered[filename]["results"][2]) * 100 / (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity"));
+        result = (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity") - remembered[filename]["stats"][2]) * 100 / (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity"));
         if (result > 49) {
             tell_object(myplayer, "This foe is in the same condition as you.");
         }else if (result > 19) {
@@ -593,7 +593,7 @@ int do_monster_read(object myplayer, object monster) {
         msgCheck = 1;
         break;
     case 3:
-        result = (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity") - remembered[filename]["results"][2]) * 100 / (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity"));
+        result = (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity") - remembered[filename]["stats"][2]) * 100 / (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity"));
         if (result > 49) {
             tell_object(myplayer, "This foe is remarkable athletic.");
         }else if (result > 19) {
@@ -616,7 +616,7 @@ int do_monster_read(object myplayer, object monster) {
     case 2:
         break;
     case 1:
-        result = (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma") - remembered[filename]["results"][3]) * 100 / (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma"));
+        result = (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma") - remembered[filename]["stats"][3]) * 100 / (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma"));
         if (result > 49) {
             tell_object(myplayer, "This foe is an equal.");
         }
@@ -635,7 +635,7 @@ int do_monster_read(object myplayer, object monster) {
         msgCheck = 1;
         break;
     case 3:
-        result = (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma") - remembered[filename]["results"][3]) * 100 / (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma"));
+        result = (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma") - remembered[filename]["stats"][3]) * 100 / (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma"));
         if (result > 49) {
             tell_object(myplayer, "This foe is majestic.");
         }
