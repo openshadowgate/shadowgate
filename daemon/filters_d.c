@@ -203,7 +203,11 @@ object * query_retired() {
       // write("retired char name "+retireee[0]->query_name());
 
  
+<<<<<<< HEAD
       retireds += ({ retireee[0] });
+=======
+      retireds += ({children("d/retired/"+retired_files[iter]) });
+>>>>>>> 0213abd6038a720bdc5f7455862baa2d79de0b88
     }
   }
   return retireds;
