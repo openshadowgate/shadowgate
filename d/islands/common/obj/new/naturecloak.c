@@ -21,7 +21,7 @@ void create()
 			 "BOLD%^%^CYAN%^S%^RESET%^%^CYAN%^e%^BOLD%^%^GREEN%^a%^RESET%^%^GREEN%^s%^BOLD%^%^RED%^o%"
 			 "^RESET%^%^RED%^n%^ORANGE%^s%^RESET%^");
     
-    set_long("%^RESET%^%^GREEN%^This %^BOLD%^fine cloak %^RESET%^%^GREEN%^drapes the wearer’s shoulder"
+    set_long("%^RESET%^%^GREEN%^This %^BOLD%^fine cloak %^RESET%^%^GREEN%^drapes the wearer's shoulder"
 			 "s like a %^CYAN%^gentle breeze %^GREEN%^and %^BOLD%^%^BLUE%^cascades %^RESET%^%^GREEN%^d"
 			 "own its back like a miniature %^BOLD%^%^BLUE%^waterfall%^RESET%^%^GREEN%^. The %^BOLD%^s"
 			 "ilken sheen %^RESET%^%^GREEN%^of the fabric s%^BOLD%^h%^RESET%^%^GREEN%^im%^BOLD%^m%^RES"

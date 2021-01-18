@@ -140,7 +140,7 @@ set_menu_short( ({
 }) );
 
 set_menu_long(({
-"%^RESET%^%^ORANGE%^This is a glass of %^BOLD%^%^BLACK%^muddy water%^RESET%^%^ORANGE%^. It can be refreshing after a long day if you don't mind the stuff that’s floating in it, or the %^RED%^metallic %^ORANGE%^taste.%^RESET%^",
+"%^RESET%^%^ORANGE%^This is a glass of %^BOLD%^%^BLACK%^muddy water%^RESET%^%^ORANGE%^. It can be refreshing after a long day if you don't mind the stuff that's floating in it, or the %^RED%^metallic %^ORANGE%^taste.%^RESET%^",
 "%^RESET%^%^CYAN%^This is a glass of %^BOLD%^water%^RESET%^%^CYAN%^, clear and fresh. It should sate your thirst.%^RESET%^",
 "%^YELLOW%^This is a tall glass of clear b%^RESET%^u%^ORANGE%^b%^BOLD%^bli%^RESET%^n%^YELLOW%^g l%^RESET%^i%^ORANGE%^q%^BOLD%^ui%^RESET%^d%^YELLOW%^. The bartender calls it a 'soda', but it is %^RESET%^y%^ORANGE%^e%^BOLD%^llow%^RESET%^i%^ORANGE%^s%^WHITE%^h %^ORANGE%^b%^BOLD%^r%^RESET%^o%^ORANGE%^w%^BOLD%^n and smells like sulfur.%^RESET%^",
 "%^BOLD%^%^RED%^This is a glass of %^RESET%^%^RED%^red liquid %^BOLD%^the makes your nose hairs curl as you sniff it.%^RESET%^",

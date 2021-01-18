@@ -11,7 +11,7 @@ void create()
     set_smell("default","%^RESET%^%^CYAN%^The room smells of parchment and ink.%^WHITE%^");
     set_listen("default","%^RESET%^%^MAGENTA%^It is very quiet.%^WHITE%^");
     set_items(([
-                   ({"floor","wall","ceiling"}) : "%^RESET%^%^ORANGE%^The walls here are surprisingly dry. Perhaps they’ve been magically fortified in order to protect the precious pages of books found here.%^WHITE%^",
+                   ({"floor","wall","ceiling"}) : "%^RESET%^%^ORANGE%^The walls here are surprisingly dry. Perhaps they've been magically fortified in order to protect the precious pages of books found here.%^WHITE%^",
                    "sconces" : "%^YELLOW%^Orbs burns steadily from the heavy sconces. Likely it is through magic or alchemy that they manage to shine so bright.%^RESET%^",
                    ({"candles","desk"}) : "%^YELLOW%^The flicker of the candles casts a warm glow across the old wooden desk. Parchment and inkwells neatly line the desk.%^RESET%^",
                    "scrolls" : "%^RESET%^%^MAGENTA%^You may wish to %^WHITE%^<list scrolls> %^MAGENTA%^to get a better look.%^WHITE%^",

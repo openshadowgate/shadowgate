@@ -24,7 +24,7 @@ void create() {
 	"The Rats were known to bring a variety of performances to the streets, including "+ 
 	"singing, dancing, storytelling, fire eating, juggling and acrobatics. Relying upon the "+ 
 	"generosity of passersby to fill their coffers, the performers were often left cold and hungry. "+ 
-	"Many years have passed since the name ‘The Plague Rats’ faded from memory. Some say a "+ 
+	"Many years have passed since the name 'The Plague Rats' faded from memory. Some say a "+ 
 	"majority of members fell to, ironically, a plague, leaving the few remaining members to "+ 
 	"scurry off into obscurity. Other rumors suggest that the performers found themselves in the "+ 
 	"midst of a territory war with the local thieves guild and were methodically picked off.\n");

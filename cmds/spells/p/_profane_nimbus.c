@@ -14,7 +14,7 @@ void create()
     set_spell_sphere("combat");
     set_syntax("cast CLASS profane nimbus");
     set_damage_desc("divine to good");
-    set_description("You are surrounded by a nimbus of darkness shaped like your god’s holy symbol or a symbol of your faith. Any good creature attacking you will be scorched by the darkness.");
+    set_description("You are surrounded by a nimbus of darkness shaped like your god's holy symbol or a symbol of your faith. Any good creature attacking you will be scorched by the darkness.");
     set_property("magic",1);
     traveling_aoe_spell(1);
     evil_spell(1);

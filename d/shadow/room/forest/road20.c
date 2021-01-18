@@ -17,7 +17,7 @@ void create(){
 	   "here, the only sounds being songbirds high in the trees.%^WHITE%^");
 	set_items(([
 	({"pit","fire pit"}) : "%^BOLD%^%^BLACK%^A ring of stones marks the borders of this fire pit. "+
-	"The big rocks are charred from many years of holding back flames of traveller’s fires.%^RESET%^",
+	"The big rocks are charred from many years of holding back flames of traveller's fires.%^RESET%^",
 	({"trees","foliage"}) : "%^RESET%^%^GREEN%^The camp is set back far enough from the road that the trees "+
 	"block out most sights and sounds coming from that direction. These trees are old, with fat trunks and "+
 	"crowns that are far overhead. A soft layer of moss circles the space, and some foliage and weeds have "+

@@ -1,10 +1,14 @@
 #include <std.h>
 #include <daemons.h>
+//#include <damage_types.h>
+//#include <favored_types.h>
 
 int cmd_study(string str)
 {
-    string* ids, what;
-    object obj;
+    string what, dir, file, *myclasses, *myclassskills, mydisc, *ids;
+    object obj, current, monster, *roomList;
+    int x;
+
     if (TP->query_bound()) {
         TP->send_paralyzed_message("info", TP);
         return 1;
@@ -21,6 +25,7 @@ int cmd_study(string str)
         notify_fail("study what?\n");
         return 0;
     }
+
     if (sscanf(str, "room %s", what) == 1 || str == "room" && !present(str, TP)) {
         if (!TP->query_time_delay("studying", 3) && !avatarp(TP)) {
             write("You need more time to reflect on your knowledge and " +
@@ -43,6 +48,96 @@ int cmd_study(string str)
         tell_room(ETP, TPQCN + " seems to be carefully studying the area.", TP);
         TP->set_time_delay("studying");
         do_room_study(TP, "room");
+        return 1;
+    }
+
+    if (sscanf(str, "monster %s", what) == 1) {
+
+        if(sscanf(str, "monster %s %s", what, dir) != 2){
+            return notify_fail("Syntax: study monster [monster name] [direction]\n");
+        }
+
+        current = ETP;
+        roomList = allocate(1);
+        roomList[0] = current;
+        
+        if (current->query_door(dir) &&
+            !current->query_open(current->query_door(dir))) {
+            write("There seems to be a closed door between you and your target.");
+            return 1;
+        }
+        current = find_object_or_load((string)current->query_exit(dir));
+        x = TP->light_blind_remote(0, current, 1);
+        if (x != 0)
+        {
+            tell_object(TP, "You can't see well enough to observe into that room");
+            tell_object(TP, TP->light_blind_fail_message(x));
+            return 1;
+        }
+
+        monster = present(what, current);
+
+        if (!objectp(monster)) {
+            return notify_fail("There is no " + what + " there!\n");
+        }
+        if (!TP->ok_to_kill(monster)) {
+            return notify_fail("Greater forces prevent your malice.\n");
+        }
+        myclasses = TP->query_classes();
+        myclassskills = ({});
+        
+        for (x = 0;x < sizeof(myclasses);x++) {
+            file = DIR_CLASSES + "/" + myclasses[x] + ".c";
+            if (file_exists(file))
+            {
+                if (myclasses[x] == "psion")
+                {
+                    mydisc = TP->query_discipline();
+                    myclassskills += (string*)file->discipline_skills(mydisc);
+                }
+                else if (myclasses[x] == "monk")
+                {
+                    mydisc = TP->query("monk way");
+                    myclassskills += (string*)file->way_skills(mydisc);
+                }
+                else if (myclasses[x] == "oracle")
+                {
+                    mydisc = TP->query_mystery();
+                    myclassskills += (string*)file->mystery_skills(mydisc);
+                }
+                else  myclassskills += (string*)file->class_skills(TP);
+            }
+            continue;
+        }
+        if (FEATS_D->usable_feat(TP, "skill focus"))
+        {
+            myclassskills += ({ ((string)TP->query("skill_focus")) });
+        }
+        myclassskills = distinct_array(myclassskills);
+
+        if (member_array("academics", myclassskills) == -1 && !TP->is_favored_enemy(monster)) {
+            return notify_fail("You need training in academics to study this monster.\n");
+        }
+        
+        if (!TP->query_time_delay("studying", 3) && !avatarp(TP)) {
+            write("You need more time to reflect on your knowledge and " +
+                "research before trying that again.");
+            return 1;
+        }
+        if (monster) {
+            tell_object(TP, "You carefully begin studying the " + what + " here.");
+            tell_room(ETP, TPQCN + " seems to be carefully studying the " +
+                what + " here.", TP);
+            TP->set_time_delay("studying");
+            do_monster_study(TP, monster);
+            do_monster_read(TP, monster);
+            return 1;
+        }
+        tell_object(TP, "You carefully begin studying the monster in the area.");
+        tell_room(ETP, TPQCN + " seems to be carefully studying a monster.", TP);
+        TP->set_time_delay("studying");
+        do_monster_study(TP, monster);
+        do_monster_read(TP, monster);
         return 1;
     }
 
@@ -253,6 +348,320 @@ int do_potion_study(object myplayer, object obj, string str)
     return 1;
 }
 
+int do_monster_study(object myplayer, object monster) {
+
+    string name, obname, a, b, * sortrem, filename, t1;
+    mapping remembered;
+    int newsize, * temp = ({}), i;
+    int myRoll, myCheck, myDC, myResult, myStat;
+    filename = file_name(monster);
+    if (sscanf(filename, "%s#", t1)) {
+        filename = t1;
+    }
+    
+    if (!remembered = TP->query_study_mons()) {// mapping ([name:place])
+        remembered = ([filename:(["results":({ 0, 0, 0, 0 }), "stats" : ({ 0, 0, 0, 0 })])]);
+    }
+    if (!sortrem = TP->query_study_mons_sort()) {//names
+        sortrem = ({});
+    }
+    
+    if (!remembered[filename]) {
+        remembered[filename] = (["results":({ 0, 0, 0, 0 }), "stats" : ({ 0, 0, 0, 0 })]);
+    }
+    if (sizeof(remembered[filename]["results"])) {
+        //use monsterrace and favored_types to select another skill
+        myCheck = myplayer->query_skill("academics");
+        if (FEATS_D->usable_feat(myplayer, "monster lore")) {
+            myCheck += myplayer->query_base_stats("wisdom");
+        }
+        if (myplayer->query_class() == "ranger") {
+            if (myplayer->is_favored_enemy(monster)) {
+                myCheck += 2;
+                myCheck += (FEATS_D->usable_feat(myplayer, "second favored enemy") * 2);
+                myCheck += (FEATS_D->usable_feat(myplayer, "third favored enemy") * 2);
+
+                if (monster->is_undead() && FEATS_D->usable_feat(myplayer, "resist undead"))
+                    myCheck += 2;
+            }
+        }
+        myRoll = roll_dice(1, 20);
+        myDC = monster->query_level() + 10;
+
+        if (myRoll == 1) {
+            myResult = "1";
+        }else if (myRoll == 20) {
+            myResult = "20";
+        }else if (myRoll < myDC) {
+            myResult = "fail";
+        }else {
+            myResult = "pass";
+        }
+        switch (myResult) {
+        case "1":
+            if (member_array(0, remembered[filename]["results"]) != -1) {//first fill the array
+                myStat = member_array(0, remembered[filename]["results"]);
+                remembered[filename]["results"][myStat] = 1;
+            }else if (member_array(2, remembered[filename]["results"]) != -1) {//then worsen fails
+                myStat = member_array(2, remembered[filename]["results"]);
+                remembered[filename]["results"][myStat] = 2;
+            }else if (member_array(3, remembered[filename]["results"]) != -1) {//then unlearn stuff
+                myStat = member_array(3, remembered[filename]["results"]);
+                remembered[filename]["results"][myStat] = 3;
+            }
+            break;
+        case "fail":
+            if (member_array(0, remembered[filename]["results"]) != -1) {//first fill the array
+                myStat = member_array(0, remembered[filename]["results"]);
+                remembered[filename]["results"][myStat] = 2;
+            }
+            break;
+        case "pass":
+            if (member_array(0, remembered[filename]["results"]) != -1) {//first fill the array
+                myStat = member_array(0, remembered[filename]["results"]);
+                remembered[filename]["results"][myStat] = 3;
+            }
+            break;
+        case "20":
+            if (member_array(0, remembered[filename]["results"]) != -1) {//first fill the array
+                myStat = member_array(0, remembered[filename]["results"]);
+                remembered[filename]["results"][myStat] = 3;
+            }
+            else if (member_array(2, remembered[filename]["results"]) != -1) {//then worsen fails
+                myStat = member_array(2, remembered[filename]["results"]);
+                remembered[filename]["results"][myStat] = 3;
+            }
+            else if (member_array(1, remembered[filename]["results"]) != -1) {//then unlearn stuff
+                myStat = member_array(1, remembered[filename]["results"]);
+                remembered[filename]["results"][myStat] = 2;
+            }
+            break;
+        default:
+            break;
+        }
+
+        switch (myStat) {
+        case 0:
+            remembered[filename]["stats"][myStat] = monster->query_level();
+            break;
+        case 1:
+            remembered[filename]["stats"][myStat] = monster->query_max_hp();
+            break;
+        case 2:
+            remembered[filename]["stats"][myStat] = (int)(monster->query_stats("strength") + monster->query_stats("constitution") + monster->query_stats("dexterity"));
+            break;
+        case 3:
+            remembered[filename]["stats"][myStat] = (int)(monster->query_stats("intelligence") + monster->query_stats("wisdom") + monster->query_stats("charisma"));
+            break;
+        case 4://TODO resist
+            remembered[filename]["stats"][myStat] = monster->query_level();
+            break;
+        case 5://TODO vulnerability
+            remembered[filename]["stats"][myStat] = monster->query_level();
+            break;
+        default:
+
+        }
+    }
+    sortrem = distinct_array(({ filename }) + sortrem);
+    newsize = (int)TP->query_base_stats("intelligence") * 2;
+    if (FEATS_D->usable_feat(myplayer, "monster lore")) {
+        if (myplayer->query_base_stats("wisdom") > TP->query_base_stats("intelligence")) {
+            newsize = (int)TP->query_base_stats("wisdom") * 2;
+        }
+    }
+    if (sizeof(sortrem) > newsize && !avatarp(TP)) {
+        while (sizeof(sortrem) > newsize) {
+            map_delete(remembered, sortrem[sizeof(sortrem) - 1]);
+            sortrem -= ({ sortrem[sizeof(sortrem) - 1] });
+        }
+        tell_object(myplayer, "oversize");
+    }
+    TP->set_study_mons(remembered, sortrem);
+    tell_object(myplayer, "You study the monster, looking its behavior and learning it.");
+
+    return 1;
+}
+
+int do_monster_read(object myplayer, object monster) {
+    string filename, t1;
+    mapping remembered;
+    int result, msgCheck;
+    filename = file_name(monster);
+    if (sscanf(filename, "%s#", t1)) {
+        filename = t1;
+    }
+
+    if (!remembered = myplayer->query_study_mons()) {
+        tell_object(myplayer, "You haven't studied a foe yet.");
+        return 1;
+    }
+
+    switch (remembered[filename]["results"][0]) {
+    case 0:
+    case 2:
+        break;
+    case 1:
+        result = myplayer->query_level() - remembered[filename]["results"][0];
+        if (result > 9) {
+            tell_object(myplayer, "This foe is lethal.");
+        }else if (result > 3) {
+            tell_object(myplayer, "This foe is strong.");
+        }else if (abs(result) < 4) {
+            tell_object(myplayer, "This foe isn't worth your time.");
+        }else if (result < -9) {
+            tell_object(myplayer, "This foe is a good challenge.");
+        }else if (result < -3) {
+            tell_object(myplayer, "This foe is weak.");
+        }
+        msgCheck = 1;
+        break;
+    case 3:
+        result = myplayer->query_level() - remembered[filename]["results"][0];
+        if (result > 9) {
+            tell_object(myplayer, "This foe isn't worth your time.");
+        }else if (result > 3) {
+            tell_object(myplayer, "This foe is weak.");
+        }else if (abs(result) < 4) {
+            tell_object(myplayer, "This foe is a good challenge.");
+        }else if (result < -9) {
+            tell_object(myplayer, "This foe is a lethal.");
+        }else if (result < -3) {
+            tell_object(myplayer, "This foe is strong.");
+        }
+        msgCheck = 1;
+        break;
+    default:
+        break;
+    }
+
+    switch (remembered[filename]["results"][1]) {
+    case 0:
+    case 2:
+        break;
+    case 1:
+        result = (myplayer->query_max_hp() - remembered[filename]["results"][1]) * 100 / myplayer->query_max_hp();
+        if (result > 49) {
+            tell_object(myplayer, "This foe is a good match.");
+        }else if (result > 19) {
+            tell_object(myplayer, "This foe won't last.");
+        }else if (abs(result) < 20) {
+            tell_object(myplayer, "This foe is for culling.");
+        }else if (result < -49) {
+            tell_object(myplayer, "This foe might outlast you.");
+        }else if (result < -19) {
+            tell_object(myplayer, "This foe is very tough.");
+        }
+        msgCheck = 1;
+        break;
+    case 3:
+        result = (myplayer->query_max_hp() - remembered[filename]["results"][1]) * 100 / myplayer->query_max_hp();
+        if (result > 49) {
+            tell_object(myplayer, "This foe might outlast you.");
+        }else if (result > 19) {
+            tell_object(myplayer, "This foe is very tough.");
+        }else if (abs(result) < 20) {
+            tell_object(myplayer, "This foe is a good match.");
+        }else if (result < -49) {
+            tell_object(myplayer, "This foe is for culling.");
+        }else if (result < -19) {
+            tell_object(myplayer, "This foe won't last.");
+        }
+        msgCheck = 1;
+        break;
+    default:
+        break;
+    }
+
+    switch (remembered[filename]["results"][2]) {
+    case 0:
+    case 2:
+        break;
+    case 1:
+        result = (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity") - remembered[filename]["results"][2]) * 100 / (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity"));
+        if (result > 49) {
+            tell_object(myplayer, "This foe is in the same condition as you.");
+        }else if (result > 19) {
+            tell_object(myplayer, "This foe is in no shape.");
+        }else if (abs(result) < 20) {
+            tell_object(myplayer, "This foe is pathetic.");
+        }else if (result < -49) {
+            tell_object(myplayer, "This foe is remarkable athletic.");
+        }else if (result < -19) {
+            tell_object(myplayer, "This foe is athletic.");
+        }
+        msgCheck = 1;
+        break;
+    case 3:
+        result = (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity") - remembered[filename]["results"][2]) * 100 / (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity"));
+        if (result > 49) {
+            tell_object(myplayer, "This foe is remarkable athletic.");
+        }else if (result > 19) {
+            tell_object(myplayer, "This foe is athletic.");
+        }else if (abs(result) < 20) {
+            tell_object(myplayer, "This foe is in the same condition as you.");
+        }else if (result < -49) {
+            tell_object(myplayer, "This foe is pathetic.");
+        }else if (result < -19) {
+            tell_object(myplayer, "This foe is in no shape.");
+        }
+        msgCheck = 1;
+        break;
+    default:
+        break;
+    }
+
+    switch (remembered[filename]["results"][3]) {
+    case 0:
+    case 2:
+        break;
+    case 1:
+        result = (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma") - remembered[filename]["results"][3]) * 100 / (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma"));
+        if (result > 49) {
+            tell_object(myplayer, "This foe is an equal.");
+        }
+        else if (result > 19) {
+            tell_object(myplayer, "This foe is dull.");
+        }
+        else if (abs(result) < 20) {
+            tell_object(myplayer, "This foe is a joke.");
+        }
+        else if (result < -49) {
+            tell_object(myplayer, "This foe is majestic.");
+        }
+        else if (result < -19) {
+            tell_object(myplayer, "This foe is impresive.");
+        }
+        msgCheck = 1;
+        break;
+    case 3:
+        result = (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma") - remembered[filename]["results"][3]) * 100 / (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma"));
+        if (result > 49) {
+            tell_object(myplayer, "This foe is majestic.");
+        }
+        else if (result > 19) {
+            tell_object(myplayer, "This foe is impresive.");
+        }
+        else if (abs(result) < 20) {
+            tell_object(myplayer, "This foe is an equal.");
+        }
+        else if (result < -49) {
+            tell_object(myplayer, "This foe is a joke.");
+        }
+        else if (result < -19) {
+            tell_object(myplayer, "This foe is dull.");
+        }
+        msgCheck = 1;
+        break;
+    default:
+        break;
+    }
+    if (!msgCheck) {
+        tell_object(myplayer, "You don't know anything about this foe.");
+    }
+    return 1;
+}
+
 int do_study(object myplayer, object obj, string str)
 {
     int enchant, diff, level, baselevel, test, droll, adjlvl, failed_level;
@@ -460,7 +869,7 @@ study - learn some lore
 
 %^CYAN%^SYNOPSIS%^RESET%^
 
-study [%^ORANGE%^%^ULINE%^ITEM%^RESET%^|room]
+study [%^ORANGE%^%^ULINE%^ITEM%^RESET%^|room|monster %^ORANGE%^%^ULINE%^MONSTERNAME%^RESET%^ %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -469,6 +878,8 @@ Study will try to discern lore and magical properties about an %^ORANGE%^%^ULINE
 If you fail to study an item you may try againonce you have gained higher rank in appropriate skills. There are also spells that replace this command with gaining knowledge through devination or other means.
 
 Some rooms have lore set as well and you may try to %^ORANGE%^<study room>%^RESET%^ to gain lore and knowledge about it.
+
+You can also study monsters to compare their power with yours.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
