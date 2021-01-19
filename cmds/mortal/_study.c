@@ -90,7 +90,7 @@ int cmd_study(string str)
         if (!objectp(monster)) {
             return notify_fail("There is no " + what + " there!\n");
         }
-        if (monster->is_player()) {
+        if (userp(monster)) {
             return notify_fail("You can only study monsters or npcs.\n");
         }
         if (!TP->ok_to_kill(monster)) {
