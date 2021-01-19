@@ -360,17 +360,17 @@ int do_monster_study(object myplayer, object monster) {
     }
     
     if (!remembered = myplayer->query_study_mons()) {// mapping ([name:place])
-        remembered = ([filename:(["results":({ 0, 0, 0, 0 }), "stats" : ({ 0, 0, 0, 0 })])]);
+        remembered = ([ filename : ({ 0, 0, 0, 0 }) ]);
     }
     if (!sortrem = myplayer->query_study_mons_sort()) {//names
         sortrem = ({});
     }
     
     if (!remembered[filename]) {
-        remembered[filename] = (["results":({ 0, 0, 0, 0 }), "stats" : ({ 0, 0, 0, 0 })]);
+        remembered[filename] = ({ 0, 0, 0, 0 });
     }
-    if (sizeof(remembered[filename]["results"])) {
-        //use monsterrace and favored_types to select another skill
+    if (sizeof(remembered[filename])) {
+        //use monsterrace and favored_types to select another skill, modify do_monster_read to get the skill
         myCheck = myplayer->query_skill("academics");
         if (FEATS_D->usable_feat(myplayer, "monster lore")) {
             myCheck += myplayer->query_base_stats("wisdom");
@@ -399,68 +399,45 @@ int do_monster_study(object myplayer, object monster) {
         }
         switch (myResult) {
         case "1":
-            if (member_array(0, remembered[filename]["results"]) != -1) {//first fill the array
-                myStat = member_array(0, remembered[filename]["results"]);
-                remembered[filename]["results"][myStat] = 1;
-            }else if (member_array(2, remembered[filename]["results"]) != -1) {//then worsen fails
-                myStat = member_array(2, remembered[filename]["results"]);
-                remembered[filename]["results"][myStat] = 2;
-            }else if (member_array(3, remembered[filename]["results"]) != -1) {//then unlearn stuff
-                myStat = member_array(3, remembered[filename]["results"]);
-                remembered[filename]["results"][myStat] = 3;
+            if (member_array(0, remembered[filename]) != -1) {//first fill the array
+                myStat = member_array(0, remembered[filename]);
+                remembered[filename][myStat] = 1;
+            }else if (member_array(2, remembered[filename]) != -1) {//then worsen fails
+                myStat = member_array(2, remembered[filename]);
+                remembered[filename][myStat] = 2;
+            }else if (member_array(3, remembered[filename]) != -1) {//then unlearn stuff
+                myStat = member_array(3, remembered[filename]);
+                remembered[filename][myStat] = 3;
             }
             break;
         case "fail":
-            if (member_array(0, remembered[filename]["results"]) != -1) {//first fill the array
-                myStat = member_array(0, remembered[filename]["results"]);
-                remembered[filename]["results"][myStat] = 2;
+            if (member_array(0, remembered[filename]) != -1) {//first fill the array
+                myStat = member_array(0, remembered[filename]);
+                remembered[filename][myStat] = 2;
             }
             break;
         case "pass":
-            if (member_array(0, remembered[filename]["results"]) != -1) {//first fill the array
-                myStat = member_array(0, remembered[filename]["results"]);
-                remembered[filename]["results"][myStat] = 3;
+            if (member_array(0, remembered[filename]) != -1) {//first fill the array
+                myStat = member_array(0, remembered[filename]);
+                remembered[filename][myStat] = 3;
             }
             break;
         case "20":
-            if (member_array(0, remembered[filename]["results"]) != -1) {//first fill the array
-                myStat = member_array(0, remembered[filename]["results"]);
-                remembered[filename]["results"][myStat] = 3;
+            if (member_array(0, remembered[filename]) != -1) {//first fill the array
+                myStat = member_array(0, remembered[filename]);
+                remembered[filename][myStat] = 3;
             }
-            else if (member_array(2, remembered[filename]["results"]) != -1) {//then worsen fails
-                myStat = member_array(2, remembered[filename]["results"]);
-                remembered[filename]["results"][myStat] = 3;
+            else if (member_array(2, remembered[filename]) != -1) {//then worsen fails
+                myStat = member_array(2, remembered[filename]);
+                remembered[filename][myStat] = 3;
             }
-            else if (member_array(1, remembered[filename]["results"]) != -1) {//then unlearn stuff
-                myStat = member_array(1, remembered[filename]["results"]);
-                remembered[filename]["results"][myStat] = 2;
+            else if (member_array(1, remembered[filename]) != -1) {//then unlearn stuff
+                myStat = member_array(1, remembered[filename]);
+                remembered[filename][myStat] = 2;
             }
             break;
         default:
             break;
-        }
-
-        switch (myStat) {
-        case 0:
-            remembered[filename]["stats"][myStat] = monster->query_level();
-            break;
-        case 1:
-            remembered[filename]["stats"][myStat] = monster->query_max_hp();
-            break;
-        case 2:
-            remembered[filename]["stats"][myStat] = (int)(monster->query_stats("strength") + monster->query_stats("constitution") + monster->query_stats("dexterity"));
-            break;
-        case 3:
-            remembered[filename]["stats"][myStat] = (int)(monster->query_stats("intelligence") + monster->query_stats("wisdom") + monster->query_stats("charisma"));
-            break;
-        case 4://TODO resist
-            remembered[filename]["stats"][myStat] = monster->query_level();
-            break;
-        case 5://TODO vulnerability
-            remembered[filename]["stats"][myStat] = monster->query_level();
-            break;
-        default:
-
         }
     }
     sortrem = distinct_array(({ filename }) + sortrem);
@@ -486,7 +463,7 @@ int do_monster_study(object myplayer, object monster) {
 int do_monster_read(object myplayer, string monster) {
     string filename, t1;
     mapping remembered;
-    int result, msgCheck;
+    int result, msgCheck, myVar;
     filename = monster;
     if (sscanf(filename, "%s#", t1)) {
         filename = t1;
@@ -497,12 +474,12 @@ int do_monster_read(object myplayer, string monster) {
         return 1;
     }
     //Thx to Chernobog for clarifying the messages!
-    switch (remembered[filename]["results"][0]) {
+    switch (remembered[filename][0]) {
     case 0:
     case 2:
         break;
     case 1:
-        result = myplayer->query_level() - remembered[filename]["stats"][0];
+        result = myplayer->query_level() - filename->query_level();
         if (result > 9) {
             tell_object(myplayer, "It appears to be exceptionally seasoned.");
         }else if (result > 3) {
@@ -517,7 +494,7 @@ int do_monster_read(object myplayer, string monster) {
         msgCheck = 1;
         break;
     case 3:
-        result = myplayer->query_level() - remembered[filename]["stats"][0];
+        result = myplayer->query_level() - filename->query_level();
         if (result > 9) {
             tell_object(myplayer, "It appears clueless.");
         }else if (result > 3) {
@@ -535,12 +512,12 @@ int do_monster_read(object myplayer, string monster) {
         break;
     }
 
-    switch (remembered[filename]["results"][1]) {
+    switch (remembered[filename][1]) {
     case 0:
     case 2:
         break;
     case 1:
-        result = (myplayer->query_max_hp() - remembered[filename]["stats"][1]) * 100 / myplayer->query_max_hp();
+        result = (myplayer->query_max_hp() - filename->query_max_hp()) * 100 / myplayer->query_max_hp();
         if (result > 49) {
             tell_object(myplayer, "You could keep up with it.");
         }else if (result > 19) {
@@ -555,7 +532,7 @@ int do_monster_read(object myplayer, string monster) {
         msgCheck = 1;
         break;
     case 3:
-        result = (myplayer->query_max_hp() - remembered[filename]["stats"][1]) * 100 / myplayer->query_max_hp();
+        result = (myplayer->query_max_hp() - filename->query_max_hp()) * 100 / myplayer->query_max_hp();
         if (result > 49) {
             tell_object(myplayer, "You could never compare to its stamina.");
         }else if (result > 19) {
@@ -573,12 +550,13 @@ int do_monster_read(object myplayer, string monster) {
         break;
     }
 
-    switch (remembered[filename]["results"][2]) {
+    switch (remembered[filename][2]) {
     case 0:
     case 2:
         break;
     case 1:
-        result = (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity") - remembered[filename]["stats"][2]) * 100 / (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity"));
+        myVar = myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity");
+        result = (myVar - (filename->query_stats("strength") + filename->query_stats("constitution") + filename->query_stats("dexterity"))) * 100 / myVar;
         if (result > 49) {
             tell_object(myplayer, "It probably would see you as an equal challenger.");
         }else if (result > 19) {
@@ -593,7 +571,8 @@ int do_monster_read(object myplayer, string monster) {
         msgCheck = 1;
         break;
     case 3:
-        result = (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity") - remembered[filename]["stats"][2]) * 100 / (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity"));
+        myVar = myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity");
+        result = (myVar - (filename->query_stats("strength") + filename->query_stats("constitution") + filename->query_stats("dexterity"))) * 100 / myVar;
         if (result > 49) {
             tell_object(myplayer, "It probably overpowers any threats it encounters.");
         }else if (result > 19) {
@@ -611,12 +590,13 @@ int do_monster_read(object myplayer, string monster) {
         break;
     }
 
-    switch (remembered[filename]["results"][3]) {
+    switch (remembered[filename][3]) {
     case 0:
     case 2:
         break;
     case 1:
-        result = (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma") - remembered[filename]["stats"][3]) * 100 / (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma"));
+        myVar = myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma");
+        result = (myVar - (filename->query_stats("intelligence") + filename->query_stats("wisdom") + filename->query_stats("charisma"))) * 100 / myVar;
         if (result > 49) {
             tell_object(myplayer, "There is a familiar strategy to its behavior.");
         }
@@ -635,7 +615,8 @@ int do_monster_read(object myplayer, string monster) {
         msgCheck = 1;
         break;
     case 3:
-        result = (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma") - remembered[filename]["stats"][3]) * 100 / (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma"));
+        myVar = myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma");
+        result = (myVar - (filename->query_stats("intelligence") + filename->query_stats("wisdom") + filename->query_stats("charisma"))) * 100 / myVar;
         if (result > 49) {
             tell_object(myplayer, "There is a terrifying intellect to its strategies.");
         }
@@ -879,7 +860,7 @@ If you fail to study an item you may try againonce you have gained higher rank i
 
 Some rooms have lore set as well and you may try to %^ORANGE%^<study room>%^RESET%^ to gain lore and knowledge about it.
 
-You can also study monsters to compare their power with yours.
+You can also study monsters to compare their power with yours. You need to be one room away from a monster to study it.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

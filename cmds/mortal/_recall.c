@@ -32,6 +32,7 @@ void swap(string *arr, int i, int j);
 
 int cmd_recall(string str) {
    	int i, num, what;
+    string errCheck;
     if (str == "locations") {
         remembered=TP->query_rem_rooms();
         strarr=TP->query_rem_rooms_sort();
@@ -189,6 +190,9 @@ int cmd_recall(string str) {
             tell_object(TP, format_page(output, columns, scrw, vertical));
 
         }
+        return 1;
+    }else if (sscanf(str, "monster %s", errCheck) == 1) {
+        tell_object(TP, "That's not a valid option.");
         return 1;
     }
     if(str == "innate spells")
