@@ -3,7 +3,7 @@ inherit "/d/shadow/room/troll/mon/troll.c";
 
 
 string LONG = "The Troll soldier is trained well in the ways of war and "
-	"battle. A bloody aggresive creature, they know little mercy towards "
+	"battle. A bloody aggressive creature, they know little mercy towards "
 	"their foes. Bred as cannon fodder in the greater Troll movement, they "
 	"also are used as guards within the various Troll camps and outposts "
 	"throughout the lands...for they are completly expendable.";

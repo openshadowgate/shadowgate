@@ -90,6 +90,9 @@ int cmd_study(string str)
         if (!objectp(monster)) {
             return notify_fail("There is no " + what + " there!\n");
         }
+        if (monster->is_player()) {
+            return notify_fail("You can only study monsters or npcs.\n");
+        }
         if (!TP->ok_to_kill(monster)) {
             return notify_fail("Greater forces prevent your malice.\n");
         }
@@ -129,7 +132,7 @@ int cmd_study(string str)
             return notify_fail("You need training in academics to study this monster.\n");
         }
         
-        if (!TP->query_time_delay("studying", 3) && !avatarp(TP)) {
+        if (!TP->query_time_delay("studying_monster", 5) && !avatarp(TP)) {
             write("You need more time to reflect on your knowledge and " +
                 "research before trying that again.");
             return 1;
@@ -138,7 +141,7 @@ int cmd_study(string str)
             tell_object(TP, "You carefully begin studying the " + monster->query_short() + ".");
             tell_room(ETP, TPQCN + " seems to be carefully studying the " +
                 monster->query_short() + " here.", TP);
-            TP->set_time_delay("studying");
+            TP->set_time_delay("studying_monster");
             do_monster_study(TP, monster);
             do_monster_read(TP, file_name(monster));
             return 1;
