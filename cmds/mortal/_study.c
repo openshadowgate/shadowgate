@@ -53,6 +53,16 @@ int cmd_study(string str)
 
     if (sscanf(str, "monster %s", what) == 1) {
 
+        if (what == "reset") {
+            string *sortrem;
+            mapping remembered;
+            remembered = ([ ]);
+            sortrem = ({ });
+            TP->set_study_mons(remembered, sortrem);
+            write("Monster data reseted.");
+            return 1;
+        }
+
         if(sscanf(str, "monster %s %s", what, dir) != 2){
             return notify_fail("Syntax: study monster [monster name] [direction]\n");
         }
@@ -860,6 +870,7 @@ If you fail to study an item you may try againonce you have gained higher rank i
 Some rooms have lore set as well and you may try to %^ORANGE%^<study room>%^RESET%^ to gain lore and knowledge about it.
 
 You can also study monsters to compare their power with yours. You need to be one room away from a monster to study it.
+To fix your monster list use %^ORANGE%^<study monster reset>%^RESET%^.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
