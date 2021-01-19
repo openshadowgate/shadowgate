@@ -496,7 +496,7 @@ int do_monster_read(object myplayer, string monster) {
         tell_object(myplayer, "You haven't studied a foe yet.");
         return 1;
     }
-
+    //Thx to Chernobog for clarifying the messages!
     switch (remembered[filename]["results"][0]) {
     case 0:
     case 2:
@@ -504,30 +504,30 @@ int do_monster_read(object myplayer, string monster) {
     case 1:
         result = myplayer->query_level() - remembered[filename]["stats"][0];
         if (result > 9) {
-            tell_object(myplayer, "This foe is lethal.");
+            tell_object(myplayer, "It appears to be exceptionally seasoned.");
         }else if (result > 3) {
-            tell_object(myplayer, "This foe is strong.");
+            tell_object(myplayer, "It appears to be experienced.");
         }else if (abs(result) < 4) {
-            tell_object(myplayer, "This foe isn't worth your time.");
+            tell_object(myplayer, "It appears clueless.");
         }else if (result < -9) {
-            tell_object(myplayer, "This foe is a good challenge.");
+            tell_object(myplayer, "It appears to have a familiar aptitude to yourself.");
         }else if (result < -3) {
-            tell_object(myplayer, "This foe is weak.");
+            tell_object(myplayer, "It appears slightly naive.");
         }
         msgCheck = 1;
         break;
     case 3:
         result = myplayer->query_level() - remembered[filename]["stats"][0];
         if (result > 9) {
-            tell_object(myplayer, "This foe isn't worth your time.");
+            tell_object(myplayer, "It appears clueless.");
         }else if (result > 3) {
-            tell_object(myplayer, "This foe is weak.");
+            tell_object(myplayer, "It appears slightly naive.");
         }else if (abs(result) < 4) {
-            tell_object(myplayer, "This foe is a good challenge.");
+            tell_object(myplayer, "It appears to have a familiar aptitude to yourself.");
         }else if (result < -9) {
-            tell_object(myplayer, "This foe is a lethal.");
+            tell_object(myplayer, "It appears to be exceptionally seasoned.");
         }else if (result < -3) {
-            tell_object(myplayer, "This foe is strong.");
+            tell_object(myplayer, "It appears to be experienced.");
         }
         msgCheck = 1;
         break;
@@ -542,30 +542,30 @@ int do_monster_read(object myplayer, string monster) {
     case 1:
         result = (myplayer->query_max_hp() - remembered[filename]["stats"][1]) * 100 / myplayer->query_max_hp();
         if (result > 49) {
-            tell_object(myplayer, "This foe is a good match.");
+            tell_object(myplayer, "You could keep up with it.");
         }else if (result > 19) {
-            tell_object(myplayer, "This foe won't last.");
+            tell_object(myplayer, "You could outlast it easily.");
         }else if (abs(result) < 20) {
-            tell_object(myplayer, "This foe is for culling.");
+            tell_object(myplayer, "You could probably knock it over with a breath.");
         }else if (result < -49) {
-            tell_object(myplayer, "This foe might outlast you.");
+            tell_object(myplayer, "You could never compare to its stamina.");
         }else if (result < -19) {
-            tell_object(myplayer, "This foe is very tough.");
+            tell_object(myplayer, "You couldn't match it for very long.");
         }
         msgCheck = 1;
         break;
     case 3:
         result = (myplayer->query_max_hp() - remembered[filename]["stats"][1]) * 100 / myplayer->query_max_hp();
         if (result > 49) {
-            tell_object(myplayer, "This foe might outlast you.");
+            tell_object(myplayer, "You could never compare to its stamina.");
         }else if (result > 19) {
-            tell_object(myplayer, "This foe is very tough.");
+            tell_object(myplayer, "You couldn't match it for very long.");
         }else if (abs(result) < 20) {
-            tell_object(myplayer, "This foe is a good match.");
+            tell_object(myplayer, "You could keep up with it.");
         }else if (result < -49) {
-            tell_object(myplayer, "This foe is for culling.");
+            tell_object(myplayer, "You could probably knock it over with a breath.");
         }else if (result < -19) {
-            tell_object(myplayer, "This foe won't last.");
+            tell_object(myplayer, "You could outlast it easily.");
         }
         msgCheck = 1;
         break;
@@ -580,30 +580,30 @@ int do_monster_read(object myplayer, string monster) {
     case 1:
         result = (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity") - remembered[filename]["stats"][2]) * 100 / (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity"));
         if (result > 49) {
-            tell_object(myplayer, "This foe is in the same condition as you.");
+            tell_object(myplayer, "It probably would see you as an equal challenger.");
         }else if (result > 19) {
-            tell_object(myplayer, "This foe is in no shape.");
+            tell_object(myplayer, "It probably avoids fights if possible.");
         }else if (abs(result) < 20) {
-            tell_object(myplayer, "This foe is pathetic.");
+            tell_object(myplayer, "It probably needs a rest every few minutes.");
         }else if (result < -49) {
-            tell_object(myplayer, "This foe is remarkable athletic.");
+            tell_object(myplayer, "It probably overpowers any threats it encounters.");
         }else if (result < -19) {
-            tell_object(myplayer, "This foe is athletic.");
+            tell_object(myplayer, "It probably wins more fights than it loses.");
         }
         msgCheck = 1;
         break;
     case 3:
         result = (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity") - remembered[filename]["stats"][2]) * 100 / (myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity"));
         if (result > 49) {
-            tell_object(myplayer, "This foe is remarkable athletic.");
+            tell_object(myplayer, "It probably overpowers any threats it encounters.");
         }else if (result > 19) {
-            tell_object(myplayer, "This foe is athletic.");
+            tell_object(myplayer, "It probably wins more fights than it loses.");
         }else if (abs(result) < 20) {
-            tell_object(myplayer, "This foe is in the same condition as you.");
+            tell_object(myplayer, "It probably would see you as an equal challenger.");
         }else if (result < -49) {
-            tell_object(myplayer, "This foe is pathetic.");
+            tell_object(myplayer, "It probably needs a rest every few minutes.");
         }else if (result < -19) {
-            tell_object(myplayer, "This foe is in no shape.");
+            tell_object(myplayer, "It probably avoids fights if possible.");
         }
         msgCheck = 1;
         break;
@@ -618,38 +618,38 @@ int do_monster_read(object myplayer, string monster) {
     case 1:
         result = (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma") - remembered[filename]["stats"][3]) * 100 / (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma"));
         if (result > 49) {
-            tell_object(myplayer, "This foe is an equal.");
+            tell_object(myplayer, "There is a familiar strategy to its behavior.");
         }
         else if (result > 19) {
-            tell_object(myplayer, "This foe is dull.");
+            tell_object(myplayer, "There is an obvious method to its madness.");
         }
         else if (abs(result) < 20) {
-            tell_object(myplayer, "This foe is a joke.");
+            tell_object(myplayer, "There is no way this could outsmart you.");
         }
         else if (result < -49) {
-            tell_object(myplayer, "This foe is majestic.");
+            tell_object(myplayer, "There is a terrifying intellect to its strategies.");
         }
         else if (result < -19) {
-            tell_object(myplayer, "This foe is impresive.");
+            tell_object(myplayer, "There is a clever implication in its movements.");
         }
         msgCheck = 1;
         break;
     case 3:
         result = (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma") - remembered[filename]["stats"][3]) * 100 / (myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma"));
         if (result > 49) {
-            tell_object(myplayer, "This foe is majestic.");
+            tell_object(myplayer, "There is a terrifying intellect to its strategies.");
         }
         else if (result > 19) {
-            tell_object(myplayer, "This foe is impresive.");
+            tell_object(myplayer, "There is a clever implication in its movements.");
         }
         else if (abs(result) < 20) {
-            tell_object(myplayer, "This foe is an equal.");
+            tell_object(myplayer, "There is a familiar strategy to its behavior.");
         }
         else if (result < -49) {
-            tell_object(myplayer, "This foe is a joke.");
+            tell_object(myplayer, "There is no way this could outsmart you.");
         }
         else if (result < -19) {
-            tell_object(myplayer, "This foe is dull.");
+            tell_object(myplayer, "There is an obvious method to its madness.");
         }
         msgCheck = 1;
         break;
