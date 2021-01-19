@@ -387,12 +387,11 @@ int do_monster_study(object myplayer, object monster) {
         }
         myRoll = roll_dice(1, 20);
         myDC = monster->query_level() + 10;
-
         if (myRoll == 1) {
             myResult = "1";
         }else if (myRoll == 20) {
             myResult = "20";
-        }else if (myRoll < myDC) {
+        }else if (myCheck + myRoll < myDC) {
             myResult = "fail";
         }else {
             myResult = "pass";
