@@ -870,7 +870,7 @@ If you fail to study an item you may try againonce you have gained higher rank i
 Some rooms have lore set as well and you may try to %^ORANGE%^<study room>%^RESET%^ to gain lore and knowledge about it.
 
 You can also study monsters to compare their power with yours. You need to be one room away from a monster to study it.
-To fix your monster list use %^ORANGE%^<study monster reset>%^RESET%^.
+To fix your monster list use %^ORANGE%^<study monster reset>%^RESET%^. This will clear your monster list.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
