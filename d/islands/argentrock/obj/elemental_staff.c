@@ -186,8 +186,7 @@ int more_wield()
     }else if (ETO->is_class("bard")) {
             wield_message = "throbbing rhythmically.";
     }else {
-        tell_object(ETO, "%^BOLD%^Your mind just doesn't know how to harness" +
-            " the power of this staff.";
+        tell_object(ETO, "%^BOLD%^Your mind just doesn't know how to harness" + " the power of this staff.");
         return 0;
     }
     if (!ETO->query_property("silent_wield")) {
