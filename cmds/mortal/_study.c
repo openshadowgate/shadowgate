@@ -493,32 +493,34 @@ int do_monster_read(object myplayer, string monster) {
     case 1:
         result = myplayer->query_level() - filename->query_level();
         if (result > 9) {
-            tell_object(myplayer, "It appears to be exceptionally seasoned.");
+            t1 = "It appears to be exceptionally seasoned.";
         }else if (result > 3) {
-            tell_object(myplayer, "It appears to be experienced.");
+            t1 = "It appears to be experienced.";
         }else if (abs(result) < 4) {
-            tell_object(myplayer, "It appears clueless.");
+            t1 = "It appears clueless.";
         }else if (result < -9) {
-            tell_object(myplayer, "It appears to have a familiar aptitude to yourself.");
+            t1 = "It appears to have a familiar aptitude to yourself.";
         }else if (result < -3) {
-            tell_object(myplayer, "It appears slightly naive.");
+            t1 = "It appears slightly naive.";
         }
         msgCheck = 1;
+        tell_object(myplayer, "(level) " + t1);
         break;
     case 3:
         result = myplayer->query_level() - filename->query_level();
         if (result > 9) {
-            tell_object(myplayer, "It appears clueless.");
+            t1 = "It appears clueless.";
         }else if (result > 3) {
-            tell_object(myplayer, "It appears slightly naive.");
+            t1 = "It appears slightly naive.";
         }else if (abs(result) < 4) {
-            tell_object(myplayer, "It appears to have a familiar aptitude to yourself.");
+            t1 = "It appears to have a familiar aptitude to yourself.";
         }else if (result < -9) {
-            tell_object(myplayer, "It appears to be exceptionally seasoned.");
+            t1 = "It appears to be exceptionally seasoned.";
         }else if (result < -3) {
-            tell_object(myplayer, "It appears to be experienced.");
+            t1 = "It appears to be experienced.";
         }
         msgCheck = 1;
+        tell_object(myplayer, "(level) " + t1);
         break;
     default:
         break;
@@ -531,32 +533,34 @@ int do_monster_read(object myplayer, string monster) {
     case 1:
         result = (myplayer->query_max_hp() - filename->query_max_hp()) * 100 / myplayer->query_max_hp();
         if (result > 49) {
-            tell_object(myplayer, "You could keep up with it.");
+            t1 = "You could keep up with it.";
         }else if (result > 19) {
-            tell_object(myplayer, "You could outlast it easily.");
+            t1 = "You could outlast it easily.";
         }else if (abs(result) < 20) {
-            tell_object(myplayer, "You could probably knock it over with a breath.");
+            t1 = "You could probably knock it over with a breath.";
         }else if (result < -49) {
-            tell_object(myplayer, "You could never compare to its stamina.");
+            t1 = "You could never compare to its stamina.";
         }else if (result < -19) {
-            tell_object(myplayer, "You couldn't match it for very long.");
+            t1 = "You couldn't match it for very long.";
         }
         msgCheck = 1;
+        tell_object(myplayer, "(hp) " + t1);
         break;
     case 3:
         result = (myplayer->query_max_hp() - filename->query_max_hp()) * 100 / myplayer->query_max_hp();
         if (result > 49) {
-            tell_object(myplayer, "You could never compare to its stamina.");
+            t1 = "You could never compare to its stamina.";
         }else if (result > 19) {
-            tell_object(myplayer, "You couldn't match it for very long.");
+            t1 = "You couldn't match it for very long.";
         }else if (abs(result) < 20) {
-            tell_object(myplayer, "You could keep up with it.");
+            t1 = "You could keep up with it.";
         }else if (result < -49) {
-            tell_object(myplayer, "You could probably knock it over with a breath.");
+            t1 = "You could probably knock it over with a breath.";
         }else if (result < -19) {
-            tell_object(myplayer, "You could outlast it easily.");
+            t1 = "You could outlast it easily.";
         }
         msgCheck = 1;
+        tell_object(myplayer, "(hp) " + t1);
         break;
     default:
         break;
@@ -570,33 +574,35 @@ int do_monster_read(object myplayer, string monster) {
         myVar = myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity");
         result = (myVar - (filename->query_stats("strength") + filename->query_stats("constitution") + filename->query_stats("dexterity"))) * 100 / myVar;
         if (result > 49) {
-            tell_object(myplayer, "It probably would see you as an equal challenger.");
+            t1 = "It probably would see you as an equal challenger.";
         }else if (result > 19) {
-            tell_object(myplayer, "It probably avoids fights if possible.");
+            t1 = "It probably avoids fights if possible.";
         }else if (abs(result) < 20) {
-            tell_object(myplayer, "It probably needs a rest every few minutes.");
+            t1 = "It probably needs a rest every few minutes.";
         }else if (result < -49) {
-            tell_object(myplayer, "It probably overpowers any threats it encounters.");
+            t1 = "It probably overpowers any threats it encounters.";
         }else if (result < -19) {
-            tell_object(myplayer, "It probably wins more fights than it loses.");
+            t1 = "It probably wins more fights than it loses.";
         }
         msgCheck = 1;
+        tell_object(myplayer, "(physical) " + t1);
         break;
     case 3:
         myVar = myplayer->query_stats("strength") + myplayer->query_stats("constitution") + myplayer->query_stats("dexterity");
         result = (myVar - (filename->query_stats("strength") + filename->query_stats("constitution") + filename->query_stats("dexterity"))) * 100 / myVar;
         if (result > 49) {
-            tell_object(myplayer, "It probably overpowers any threats it encounters.");
+            t1 = "It probably overpowers any threats it encounters.";
         }else if (result > 19) {
-            tell_object(myplayer, "It probably wins more fights than it loses.");
+            t1 = "It probably wins more fights than it loses.";
         }else if (abs(result) < 20) {
-            tell_object(myplayer, "It probably would see you as an equal challenger.");
+            t1 = "It probably would see you as an equal challenger.";
         }else if (result < -49) {
-            tell_object(myplayer, "It probably needs a rest every few minutes.");
+            t1 = "It probably needs a rest every few minutes.";
         }else if (result < -19) {
-            tell_object(myplayer, "It probably avoids fights if possible.");
+            t1 = "It probably avoids fights if possible.";
         }
         msgCheck = 1;
+        tell_object(myplayer, "(physical) " + t1);
         break;
     default:
         break;
@@ -610,41 +616,35 @@ int do_monster_read(object myplayer, string monster) {
         myVar = myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma");
         result = (myVar - (filename->query_stats("intelligence") + filename->query_stats("wisdom") + filename->query_stats("charisma"))) * 100 / myVar;
         if (result > 49) {
-            tell_object(myplayer, "There is a familiar strategy to its behavior.");
-        }
-        else if (result > 19) {
-            tell_object(myplayer, "There is an obvious method to its madness.");
-        }
-        else if (abs(result) < 20) {
-            tell_object(myplayer, "There is no way this could outsmart you.");
-        }
-        else if (result < -49) {
-            tell_object(myplayer, "There is a terrifying intellect to its strategies.");
-        }
-        else if (result < -19) {
-            tell_object(myplayer, "There is a clever implication in its movements.");
+            t1 = "There is a familiar strategy to its behavior.";
+        }else if (result > 19) {
+            t1 = "There is an obvious method to its madness.";
+        }else if (abs(result) < 20) {
+            t1 = "There is no way this could outsmart you.";
+        }else if (result < -49) {
+            t1 = "There is a terrifying intellect to its strategies.";
+        }else if (result < -19) {
+            t1 = "There is a clever implication in its movements.";
         }
         msgCheck = 1;
+        tell_object(myplayer, "(mental) " + t1);
         break;
     case 3:
         myVar = myplayer->query_stats("intelligence") + myplayer->query_stats("wisdom") + myplayer->query_stats("charisma");
         result = (myVar - (filename->query_stats("intelligence") + filename->query_stats("wisdom") + filename->query_stats("charisma"))) * 100 / myVar;
         if (result > 49) {
-            tell_object(myplayer, "There is a terrifying intellect to its strategies.");
-        }
-        else if (result > 19) {
-            tell_object(myplayer, "There is a clever implication in its movements.");
-        }
-        else if (abs(result) < 20) {
-            tell_object(myplayer, "There is a familiar strategy to its behavior.");
-        }
-        else if (result < -49) {
-            tell_object(myplayer, "There is no way this could outsmart you.");
-        }
-        else if (result < -19) {
-            tell_object(myplayer, "There is an obvious method to its madness.");
+            t1 = "There is a terrifying intellect to its strategies.";
+        }else if (result > 19) {
+            t1 = "There is a clever implication in its movements.";
+        }else if (abs(result) < 20) {
+            t1 = "There is a familiar strategy to its behavior.";
+        }else if (result < -49) {
+            t1 = "There is no way this could outsmart you.";
+        }else if (result < -19) {
+            t1 = "There is an obvious method to its madness.";
         }
         msgCheck = 1;
+        tell_object(myplayer, "(mental) " + t1);
         break;
     default:
         break;
@@ -873,6 +873,7 @@ If you fail to study an item you may try againonce you have gained higher rank i
 Some rooms have lore set as well and you may try to %^ORANGE%^<study room>%^RESET%^ to gain lore and knowledge about it.
 
 You can also study monsters to compare their power with yours. You need to be one room away from a monster to study it.
+You can discover up to 4 statistics of your foe.
 To fix your monster list use %^ORANGE%^<study monster reset>%^RESET%^. This will clear your monster list.
 
 %^CYAN%^SEE ALSO%^RESET%^

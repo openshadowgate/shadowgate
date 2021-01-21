@@ -6,12 +6,12 @@ The following Enhancements are available:
 
 %^BOLD%^%^MAGENTA%^Elemental damage%^RESET%^ (Cost:1)
 Chance to deal elemental damage on hit.
-flaming/frost/shock/corrosive/sonic
+flaming/frost/shock/corrosive/thundering
 	%^ORANGE%^<enhance add flaming>%^RESET%^
 
 %^BOLD%^%^MAGENTA%^Elemental burst%^RESET%^ (Cost:2, replaces regular elemental damage)
 As elemental damage but also deal additional damage on a critical hit.
-flaming/icy/shocking/corrosive/sonic burst    
+flaming/icy/shocking/corrosive/thundering burst    
 	%^ORANGE%^<enhance add icy burst>%^RESET%^
 
 %^BOLD%^%^MAGENTA%^Aligned weapon%^RESET%^ (Cost:1)
