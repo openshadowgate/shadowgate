@@ -6,3 +6,4 @@ inherit "/std/user/edit";
 inherit "/std/user/trace";
 inherit "/std/user/bitflags";
 inherit "/std/user/refs";
+inherit "/std/user/more";
