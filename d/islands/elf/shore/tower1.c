@@ -23,6 +23,7 @@ void create(){
  	   ]));
 }
 void reset(){
+   ::reset();
    if(!present("daelas",TO))
      new(MON"daelas")->move(TO);
 }
