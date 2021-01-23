@@ -56,6 +56,6 @@ if(!present("larrows"))
   new("/d/common/obj/lrweapon/larrows")->move(TO);
 if(!present("cloak"))
   new(OBJ"cloak")->move(TO);
-if(!present("cloak"))
+if(!present("cologne"))
   new(OBJ"cologne")->move(TO);
 }
