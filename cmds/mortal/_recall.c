@@ -124,6 +124,18 @@ int cmd_recall(string str)
         tell_object(TP, "See <help ki>");
         return 1;
     }
+    if (str == "relationships") {
+        mapping relationships = TP->getRelationships();
+        string known = ({});
+
+        known = collapse_array(map(values(relationships), (:values($1):)));
+        known = sort_array(distinct_array(known), 1);
+
+        tell_object(TP, "%^BOLD%^%^BLUE%^--==%^CYAN%^< %^WHITE%^People Remembered %^CYAN%^>%^BLUE%^==--%^RESET%^");
+        tell_object(TP,auto_format_page(known, TP, 34));
+
+        return 1;
+    }
     if (str == "spells") {
         tell_object(TP, "Please specify which spells you " +
                     "would like to recall: <recall classname spells>.");
@@ -520,6 +532,7 @@ recall - recall knowledge
 %^CYAN%^SYNOPSIS%^RESET%^
 
 recall locations
+recall relationships
 recall monsters
 recall monster %^ORANGE%^%^ULINE%^NUMBER%^RESET%^
 recall %^ORANGE%^%^ULINE%^CLASS%^RESET%^ spells [%^ORANGE%^%^ULINE%^LEVEL%^RESET%^]
@@ -531,6 +544,9 @@ This command allows you to recall locations, monsters or spells you know.
 
 %^ORANGE%^<recall locations>%^RESET%^
     You'll be displayed a list of locations you remembered with %^ORANGE%^<remember>%^RESET%^. Note, whenever you do it, list of locations will be validated and any non-existent or temporary locations (such as rope trick rooms) will be removed.
+
+%^ORANGE%^<recall relationships>%^RESET%^
+    You'll be displayed a list of names you used to recognize people as.
 
 %^ORANGE%^<recall monsters>%^RESET%^
     You'll be displayed a list of monsters you studied with %^ORANGE%^<study>%^RESET%^. Note, whenever you do it, list of monsters will be validated.
