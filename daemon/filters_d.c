@@ -200,14 +200,10 @@ object * query_retired() {
   for(iter=0; iter<sizeof(retired_files); iter++) {
     retireee = children("/d/retired/"+retired_files[iter]);
     if (retireee != ({ }) ){
-      // write("retired char name "+retireee[0]->query_name());
 
- 
 
       retireds += ({ retireee[0] });
-=======
-      retireds += ({children("d/retired/"+retired_files[iter]) });
->>>>>>> 0213abd6038a720bdc5f7455862baa2d79de0b88
+
     }
   }
   return retireds;
