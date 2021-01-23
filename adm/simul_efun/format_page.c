@@ -68,8 +68,6 @@ string auto_format_page(string *output, object player, int min_col_width)
     int scrw = atoi(player->getenv("SCREEN"));
     int vertical = player->getenv("VCOLUMNS") ? 1 : 0;
 
-
-
     // "Best fit columns algorithm"
 
     // Maximum width of the column
