@@ -9,7 +9,7 @@ void create(){
    set_short("%^RESET%^%^YELLOW%^Golden Meadow%^RESET%^");
    set_long("This is a wooden bottle with a golden top"+
    " on it.  Opening the topper reveals a sent of "+
-   "plants from a fresh meadow.   It is a crisp "+
+   "plants from a %^ORANGE%^fresh meadow%^RESET%^.   It is a crisp "+
    "clean sent that one could wear to add a pleasant smell.%^RESET%^");
    set_value(random(50)+100);
    set_weight(1);
@@ -31,7 +31,7 @@ int wear_per(string str){
          "%^ORANGE%^meadows %^RESET%^rises in the air.");
       tell_room(ETP,""+TPQCN+" wears a %^ORANGE%^meadow-"+
          "scented %^RESET%^cologne.",TP);
-      TP->set("long","%^ORANGE%^"+capitalize(TP->QS)+" "+
+      TP->set("long","%^RESET%^"+capitalize(TP->QS)+" "+
          "is wearing a crisp %^ORANGE%^meadow%^RESET%^ scent%^RESET%^.");
       count++;
       return 1;

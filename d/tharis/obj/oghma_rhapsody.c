@@ -23,7 +23,9 @@ void init(){
         :: init();
         add_action("wear_per","wear");
 }
-
+string query_type(){
+    return "cologne";
+}
 
 int wear_per(string str){
    if(str == "cologne" || str == "divine's rhapsody"){
