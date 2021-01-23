@@ -27,12 +27,12 @@ void create()
 	);
 	set_lore("Commissioned for Holy Inquisitor Barethel Del'Forez , "+
 		"the Ebony Armor was a gift present from the church of "+
-		"Loviatar.  Sir Barethel had a successful career in spreading"+
+		"torture.  Sir Barethel had a successful career in spreading"+
 		" the fear and pain of his Mistress to those in the lands.  "+
 		"With his barbed lance, Sir Barethel delighted in charging "+
 		"into combat, usually against peasant folk that he called "+
 		"'animals'.  The arrogant noble son helped develop a few "+
-		"creative means of torture that the faith of Loviatar still"+
+		"creative means of torture that the faith still"+
 		" practices to this day.");
 	set_property("lore",13);  
 	set_value(15000);
