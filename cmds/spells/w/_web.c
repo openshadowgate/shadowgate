@@ -41,8 +41,6 @@ spell_effect(int prof)
         tell_object(caster, "%^BOLD%^%^RED%^" + target->QCN + " manages to dodge your mass of webs!");
         tell_object(target, "%^BOLD%^%^RED%^You manage to dodge the mass of webs!");
         tell_room(environment(caster), "%^BOLD%^%^RED%^" + target->QCN + " manages to dodge the mass of webs!", ({ caster, target }));
-        dest_effect();
-        return;
     } else {
         strength = "furiously wrap around";
         spell_successful();
@@ -51,4 +49,5 @@ spell_effect(int prof)
         tell_room(place, "%^BOLD%^%^RED%^" + caster->QCN + "'s mass of webs " + strength + " " + target->QCN + " trapping " + target->QP + " legs!", ({ caster, target }));
         target->set_tripped(roll_dice(3, 4));
     }
+    spell_successful();
 }

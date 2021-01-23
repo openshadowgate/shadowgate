@@ -16,7 +16,7 @@
 #include <tsh.h>
 #include <new_exp_table.h>
 
-#define ABLOCK_WHITELIST ({"quit"})+TP->query_channels()
+#define ABLOCK_WHITELIST ({"quit", "help"})+TP->query_channels()
 
 #define DEFAULT_PROMPT "%^BOLD%^%^BLACK%^-%^RED%^> "
 #define MAX_HIST_SIZE  50
@@ -240,31 +240,32 @@ int adminBlock(){
 
 nomask string process_input(string arg)
 {
-    if(this_player()->query_property("memorizing") )
-    {
+    if (this_player()->query_property("memorizing") && member_array(arg, ABLOCK_WHITELIST) == -1) {
         this_player()->remove_property("memorizing");
-        message("damage","%^BOLD%^%^GREEN%^You stop your preparations to do something else!",this_object());
+        message("damage", "%^BOLD%^%^GREEN%^You stop your preparations to do something else!", this_object());
     }
     USER_D->process_pkill_input(this_player(), arg);
     //TODO: log to syslog
-    if(wizardp(TP))
-        log_file("tshlog/wizard/"+TP->query_true_name(),do_alias(do_nicknames(handle_history(arg)))+"\n",1);
-    else if(avatarp(TP))
-        log_file("tshlog/avatar/"+TP->query_true_name(),do_alias(do_nicknames(handle_history(arg)))+"\n",1);
-    else
-        log_file("tshlog/player/"+TP->query_true_name(),do_alias(do_nicknames(handle_history(arg)))+"\n",1);
+    if (wizardp(TP)) {
+        log_file("tshlog/wizard/" + TP->query_true_name(), do_alias(do_nicknames(handle_history(arg))) + "\n", 1);
+    }else if (avatarp(TP)) {
+        log_file("tshlog/avatar/" + TP->query_true_name(), do_alias(do_nicknames(handle_history(arg))) + "\n", 1);
+    }else {
+        log_file("tshlog/player/" + TP->query_true_name(), do_alias(do_nicknames(handle_history(arg))) + "\n", 1);
+    }
 
-    if(adminBlock())
-        if(member_array(arg,ABLOCK_WHITELIST)==-1)
-        {
+    if (adminBlock()) {
+        if (member_array(arg, ABLOCK_WHITELIST) == -1) {
             write("You are otherwise occupied.");
             arg = "";
         }
+    }
 
-    if(arg && arg != "")
+    if (arg && arg != "") {
         return do_alias(do_nicknames(handle_history(arg)));
-    else
+    }else {
         return arg;
+    }
 }
 
 int tsh(string file) {

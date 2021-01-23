@@ -23,6 +23,8 @@ write in %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ on %^ORANGE%^%^ULINE%^OBJECT%^RESE
 
 This will allow you to write on %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ in %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^ you specified. Anyone then will be able to %^ORANGE%^<read %^ORANGE%^%^ULINE%^OBJECT%^RESET%^>%^RESET%^ to read your message. You and the reader both must know the %^ORANGE%^%^ULINE%^LANGUAGE%^RESET%^.
 
+Ability to write property is heavily affected by your academics skill. Adacemics skills is rolled against d20 on every word with no critical chances. If you fail, the word gets scrambled.
+
 Typical %^ORANGE%^%^ULINE%^OBJECT%^RESET%^s to write on are, but not limited to, paper, parchment.
 
 %^CYAN%^SEE ALSO%^RESET%^
@@ -126,7 +128,7 @@ string do_proficiency(object tp, string str)
     }
     tmp = "\n";
     for (i = 0; i < sizeof(all); i++) {
-        if (prof == 11 || random(10) < prof + 1) {
+        if (prof == 21 || random(20) < prof + 1) {
             all[i] = all[i];
         } else {
             all[i] = morph_word(all[i], all, i);

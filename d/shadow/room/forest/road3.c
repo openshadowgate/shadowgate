@@ -17,9 +17,10 @@ void create(){
 	"forest":"A quiet forest, for sure. Only the sounds of birds.",
     "tent":"%^ORANGE%^This tent resembles those used by the desert peoples of the Tsarvani Empire, only with less decorative flare and more utilitarian design. Heavy canvas is used for fabric, and judging by the wear on it, the tent has seen many seasons of use. Patches have been sewn into places where cuts or tears have happened.%^RESET%^"
 	]));
- 
+
     set_exits(([
 	"east" : FORESTDIR+"road2",
+        "north":"/d/shadow/room/forest/oocthall1",
     /*"north":"/d/shadow/room/goblin/rooms/gate1",*/
 	"southwest" : FORESTDIR+"road4"
    	]));
@@ -33,6 +34,5 @@ void reset()
     if(!present("merc_boss"))
     {
         new("/d/token_hunt/henchmen/hench_boss.c")->move(TO);
-    }    
+    }
 }
-

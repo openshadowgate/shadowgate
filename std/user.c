@@ -22,8 +22,6 @@
 #include <domination.h>
 #include <dieties.h>
 
-inherit "/std/user/more";
-
 #define MAX_ENCUMBRANCE ({15,25,35,45,60,85,105,125,145,160,180,195,210,225,235,245,255,270,285,300, 305,310,315,320,325,330,335,340,345,350,355,\
                           360,365,370,375,380,385,390,395,400,405,410,415,420,425,430,435,440,445,450,455,460,465,470,475,480,485,495,500,505,510,\
                           515,520,525,530,535,540,545,550,555,565,576,585,590,595,600,605,610})
@@ -893,13 +891,10 @@ int id(string str)
 }
 
 void create() {
-  more::create();
   weaponless_users::create();
   position = "newbie";
   wielded = ([]);
-//  thief_skills = ([]);
   relationships = ([]);
-  //quitAllow = 1;
   set_start_time(time());
   restricted_channels = allocate(50);
   level = 1;
@@ -909,7 +904,6 @@ void create() {
   TO->set_diety("pan");
   enable_commands();
   set_max_internal_encumbrance(MAX_ENCUMBRANCE[7]);
-  //  = 0;
   set("id",({"player"}));
   init_feats();
 
@@ -1134,60 +1128,62 @@ void break_all_spells()
 }
 
 
-void new_body() {
-  mapping borg;
-  string *zippo;
-  int i, max, newmax, mylvl;
-  string tmp;
+void new_body()
+{
+    mapping borg;
+    string* zippo;
+    int i, max, newmax, mylvl;
+    string tmp;
 
-  init_limb_data();
-  static_user["stage"] = 60;
-  if (!query_race()) return;
-//   tmp = query_race();
+    init_limb_data();
+    static_user["stage"] = 60;
+    if (!query_race()) {
+        return;
+    }
 
-  tmp = query("race");
+    tmp = query("race");
 
-  /*
-    set_max_hp(50 + stats["constitution"] * 10);
-    set_hp( (50 + stats["constitution"]*8)/2 );
-  */
-/*
-  set_max_mp( (stats["intelligence"])/2 );
-  set_mp( (stats["intelligence"])/2 );
-*/
-  if(TO->is_class("psywarrior")){
-     mylvl = (int)TO->query_prestige_level("psywarrior");
-     mylvl--;
-     if(mylvl < 0) mylvl = 0;
-     if(mylvl > CHARACTER_LEVEL_CAP-1) mylvl = CHARACTER_LEVEL_CAP-1;
-     newmax = PWPOINTS[mylvl];
-     TP->set_max_mp(newmax);
-  }
-  if(TO->is_class("psion")){
-     mylvl = (int)TO->query_prestige_level("psion");
-     mylvl--;
-     if(mylvl < 0) mylvl = 0;
-     if(mylvl > CHARACTER_LEVEL_CAP-1) mylvl = CHARACTER_LEVEL_CAP-1;
-     newmax = PSIONPOINTS[mylvl];
-     TP->set_max_mp(newmax);
-  }
-  set_heal_rate(2);
-  //   set_ac(10);
-  set_overall_ac(10-(int)RACE_D->query_ac(TO->query_race()));
-  borg = (mapping)RACE_D->body(TO);
-  set_start_time(time());
-  for (i=0, max=sizeof(zippo=keys(borg)); i<max; i++)
-    add_limb(zippo[i], borg[zippo[i]]["limb_ref"],borg[zippo[i]]["max_dam"], 0, 0);
-  if (member_array("neck",(string *)TO->query_limbs()) == -1)
-    // Neck fix for two necks.
-    add_limb("neck","neck",query_hp(),0,0);
-  set_wielding_limbs((string *)RACE_D->query_wielding_limbs(tmp));
-  set_fingers((int)RACE_D->query_fingers(tmp));
-  //   set_max_internal_encumbrance(MAX_ENCUMBRANCE[stats["strength"]]);
-  do_encumbrance();
-  set_attack_limbs(({"right hand","left hand","right foot","left foot","head","right elbow","left elbow","right knee","left knee"}));
-  //   add_stuffed(100);
-  //   add_quenched(100);
+    if (TO->is_class("psywarrior")) {
+        mylvl = (int)TO->query_prestige_level("psywarrior");
+        mylvl--;
+        if (mylvl < 0) {
+            mylvl = 0;
+        }
+        if (mylvl > CHARACTER_LEVEL_CAP - 1) {
+            mylvl = CHARACTER_LEVEL_CAP - 1;
+        }
+        newmax = PWPOINTS[mylvl];
+        TP->set_max_mp(newmax);
+    }
+    if (TO->is_class("psion")) {
+        mylvl = (int)TO->query_prestige_level("psion");
+        mylvl--;
+        if (mylvl < 0) {
+            mylvl = 0;
+        }
+        if (mylvl > CHARACTER_LEVEL_CAP - 1) {
+            mylvl = CHARACTER_LEVEL_CAP - 1;
+        }
+        newmax = PSIONPOINTS[mylvl];
+        TP->set_max_mp(newmax);
+    }
+    set_heal_rate(2);
+    set_overall_ac(10 - (int)RACE_D->query_ac(TO->query_race()));
+    borg = (mapping)RACE_D->body(TO);
+    set_start_time(time());
+
+    for (i = 0, max = sizeof(zippo = keys(borg)); i < max; i++) {
+        add_limb(zippo[i], borg[zippo[i]]["limb_ref"], borg[zippo[i]]["max_dam"], 0, 0);
+    }
+
+    if (member_array("neck", (string*)TO->query_limbs()) == -1) {
+        add_limb("neck", "neck", query_hp(), 0, 0);
+    }
+
+    set_wielding_limbs((string*)RACE_D->query_wielding_limbs(tmp));
+    set_fingers((int)RACE_D->query_fingers(tmp));
+    do_encumbrance();
+    set_attack_limbs(({ "right hand", "left hand", "right foot", "left foot", "head", "right elbow", "left elbow", "right knee", "left knee" }));
 }
 
 void setup_messages() {
@@ -1195,6 +1191,7 @@ void setup_messages() {
 
   static_user["saveable"] = TO->query_channels()+KEPTMESSAGES;
   static_user["pastMessages"] = ([]);
+
   for (i = 0,j=sizeof(static_user["saveable"]);i<j;i++) {
     static_user["pastMessages"][static_user["saveable"][i]] = ({});
   }

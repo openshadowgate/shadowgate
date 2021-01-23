@@ -30,7 +30,7 @@ set_smell("default","The air is fresh and smells of trees.");
 set_listen("default","Birds sing cheerfully high up in the braches.");
     set_exits(([
     "south":"/d/shadow/room/forest/road2",
-     "north":"/d/shadow/room/forest/owagon1","east":"/d/shadow/room/forest/oocthall1",
+     "north":"/d/shadow/room/forest/owagon1",
     ] ));
     set_items(([
 "pond" : "The pond is just the right size. It is filled with shiny fish, darting about beneath the calm surface.",

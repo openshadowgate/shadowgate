@@ -1,8 +1,3 @@
-/*Part of combat code is duplicated in this file. A similar duplication was causing problems in weaponless_monsters,
-and I removed it there. If/when this file becomes active, please explore the duplications and see if they should be removed. ~Circe~ 2/12/13*/
-
-//For hand to hand monsters
-
 #include <std.h>
 #include <daemons.h>
 #include <security.h>
@@ -11,19 +6,10 @@ inherit "/std/spellcaster";
 
 /**
  * @file
- * @brief Weaponless combatans
+ * @brief This is the last object common both to mobiles and users. This object can be inherited to create npcs, mobiles or users.
  */
 
 nosave mapping static_weaponless = ([]);
-
-void set_damage(int num, int dice);
-void set_attacks_num(int number);
-void set_nat_weapon_type(string type);
-void set_attack_limbs(string *limbs);
-string *query_attack_limbs();
-void set_hit_funcs(mapping stuff);
-private int get_hand_damage(string limb, int damage, object attacked);
-
 
 void create()
 {
@@ -38,7 +24,7 @@ void create()
 
     ::create();
 }
-// not used for shapeshifting, maybe old code somewhere? -Ares
+
 void toggle_polymorphed()
 {
    static_weaponless["polymorphed"]?static_weaponless["polymorphed"] = 0:static_weaponless["polymorphed"]=1;
