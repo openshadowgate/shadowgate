@@ -17,7 +17,7 @@ void create()
              "sh%^BOLD%^i%^RESET%^%^RED%^m%^YELLOW%^m%^RESET%^%^RED%^e%^BOLD%^r%^RESET%"
              "^%^RED%^s and s%^YELLOW%^h%^RESET%^%^RED%^in%^YELLOW%^e%^RESET%^%^RED%^s"
              " as %^BOLD%^%^WHITE%^li%^RESET%^gh%^BOLD%^t %^RESET%^%^RED%^plays across it,"
-             " amplified by the mineral’s %^BOLD%^purity%^RESET%^%^RED%^. When %^YELLOW%^g"
+             " amplified by the mineral's %^BOLD%^purity%^RESET%^%^RED%^. When %^YELLOW%^g"
              "%^WHITE%^ol%^ORANGE%^d %^RESET%^%^RED%^and %^BOLD%^%^WHITE%^li%^RESET%^gh%^B"
              "OLD%^t %^RESET%^%^RED%^meet at just the right angle, the %^BOLD%^%^WHITE%^s"
              "hield %^ORANGE%^gl%^WHITE%^o%^ORANGE%^ws %^RESET%^%^RED%^strongly as though"

@@ -31,8 +31,8 @@ void sort(string *arr);
 void swap(string *arr, int i, int j);
 
 int cmd_recall(string str) {
-   	int i,num;
-
+   	int i, num, what;
+    string errCheck;
     if (str == "locations") {
         remembered=TP->query_rem_rooms();
         strarr=TP->query_rem_rooms_sort();
@@ -105,6 +105,94 @@ int cmd_recall(string str) {
             tell_object(TP, format_page(output, columns, scrw, vertical));
 
         }
+        return 1;
+    }
+    if (str == "monsters" || sscanf(str, "monster %d", what) == 1) {
+        remembered = TP->query_study_mons();
+        strarr = TP->query_study_mons_sort();
+        if (!remembered || sizeof(remembered) < 1) {
+            tell_object(TP, "You haven't studied a foe.");
+            return 1;
+        }else {
+            string *output = ({});
+            int y, z, columns, roomnw;
+            int scrw = atoi(TP->getenv("SCREEN"));
+            int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
+            int maxknown = TP->query_base_stats("intelligence") * 2;
+
+            if (FEATS_D->usable_feat(TP, "monster lore")) {
+                if (TP->query_base_stats("wisdom") > TP->query_base_stats("intelligence")) {
+                    maxknown = (int)TP->query_base_stats("wisdom") * 2;
+                }
+            }
+
+            strarr = sort_array(strarr, 1);
+            num = sizeof(strarr);
+
+            if (str != "monsters") {
+                if (what >= 0 && what < num) {
+                    tell_object(TP, strarr[what]->query_short());
+                    tell_object(TP, strarr[what]->query_long());
+                    "/cmds/mortal/_study"->do_monster_read(TP, strarr[what]);
+                    return 1;
+                }else {
+                    tell_object(TP, "That's not a valid option.");
+                    return 1;
+                }
+            }
+
+            write("%^BOLD%^%^BLUE%^--==%^CYAN%^< %^WHITE%^ " + num + "/" + maxknown + " Studied Monsters %^CYAN%^>%^BLUE%^==--%^RESET%^");
+            output = ({});
+
+            roomnw = max(map(keys(remembered), (:sizeof($1) : )));
+
+            for (i = 0;i < sizeof(strarr);i++) {
+                if (!strarr[i] ||
+                    !file_exists(strarr[i] + ".c") ||
+                    !find_object_or_load(strarr[i])) {
+                    strtemp = strarr[i];
+                    temp = remembered;
+                    map_delete(temp, strtemp);
+                    TP->set_study_mons(temp, strarr - ({ strarr[i] }));
+                    continue;
+                }
+                output += ({ "%^RESET%^%^CYAN%^ " + i + ". " + strarr[i]->query_short() });
+            }
+
+            // "Best fit columns algorithm"
+
+            // Maximum width of the column
+            z = max(map(output, (:sizeof(strip_colors($1)) : ))) + 2;
+
+            // If mobile user has terminal width less than 34 they can suffer.
+            scrw = scrw > 34 ? scrw : 72;
+
+            // Columns setting set by user
+            y = atoi(TP->getenv("COLUMNS"));
+            y = y < 1 ? 1 : y;
+
+            // If user has no columns set display full width of the names
+            z = y > 1 ? 34 : z;
+
+            // How many times output string fits in current screen width?
+            columns = scrw / z;
+            columns = columns < 1 ? 1 : columns;
+
+            // If that value is more than columns setting, it will be
+            // maximum used and user will see less columns than they
+            // have set.
+            columns = columns > y ? y : columns;
+
+            // Recalculating best fit screen width to arrange by the left edge.
+            scrw = z * columns;
+
+            // Location data is small, no buffering is necessary, we can just output it.
+            tell_object(TP, format_page(output, columns, scrw, vertical));
+
+        }
+        return 1;
+    }else if (sscanf(str, "monster %s", errCheck) == 1) {
+        tell_object(TP, "That's not a valid option.");
         return 1;
     }
     if(str == "innate spells")
@@ -471,15 +559,24 @@ recall - recall knowledge
 %^CYAN%^SYNOPSIS%^RESET%^
 
 recall locations
+recall monsters
+recall monster %^ORANGE%^%^ULINE%^NUMBER%^RESET%^
 recall %^ORANGE%^%^ULINE%^CLASS%^RESET%^ spells [%^ORANGE%^%^ULINE%^LEVEL%^RESET%^]
 recall innate spells
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command allows you to recall locations or spells you know.
+This command allows you to recall locations, monsters or spells you know.
 
 %^ORANGE%^<recall locations>%^RESET%^
     You'll be displayed a list of locations you remembered with %^ORANGE%^<remember>%^RESET%^. Note, whenever you do it, list of locations will be validated and any non-existent or temporary locations (such as rope trick rooms) will be removed.
+
+%^ORANGE%^<recall monsters>%^RESET%^
+    You'll be displayed a list of monsters you studied with %^ORANGE%^<study>%^RESET%^. Note, whenever you do it, list of monsters will be validated.
+
+%^ORANGE%^<recall monster %^ORANGE%^%^ULINE%^NUMBER%^RESET%^>%^RESET%^
+    You'll be displayed the details of a monster you studied with %^ORANGE%^<study>%^RESET%^. The number is taken from %^ORANGE%^<recall monsters>%^RESET%^.
+
 
 %^ORANGE%^<recall %^ORANGE%^%^ULINE%^CLASS%^RESET%^%^ORANGE%^ spells [%^ORANGE%^%^ULINE%^LEVEL%^RESET%^%^ORANGE%^]>%^RESET%^
     You'll view list of memorized spells for standard casters, power points fo psionic classes and spell levels for spontaneous classes. Additionally you can specify level to view that level only.
@@ -491,7 +588,7 @@ This command is affected by collumns setting of the %^ORANGE%^<set>%^RESET%^ com
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-remember, unremember, recognize, set
+remember, unremember, recognize, set, study
 HELP
 );
     return;

@@ -14,10 +14,10 @@
                                 "shocking burst" : ([ "property" : "electricity en_dam burst", "cost" : 2 ]), \
                                 "thundering burst" : ([ "property" : "sonic en_dam burst", "cost" : 2 ]), \
                                 "corrosive burst" : ([ "property" : "acid en_dam burst", "cost" : 2 ]), \
-                                "holy" : ([ "property" : "alignment 147", "cost" : 2 ]), \
-                                "unholy" : ([ "property" : "alignment 369", "cost" : 2 ]), \
-                                "axiomatic" : ([ "property" : "alignment 123", "cost" : 2 ]), \
-                                "anarchic" : ([ "property" : "alignment 789", "cost" : 2 ]), \
+                                "holy" : ([ "property" : "alignment 147", "cost" : 1 ]), \
+                                "unholy" : ([ "property" : "alignment 369", "cost" : 1 ]), \
+                                "axiomatic" : ([ "property" : "alignment 123", "cost" : 1 ]), \
+                                "anarchic" : ([ "property" : "alignment 789", "cost" : 1 ]), \
                                 "keen" : ([ "property" : "keen weapon", "cost" : 1 ]), \
                                 "speed" : ([ "property" : "speedy weapon", "cost" : 3 ]), \
                             ]);

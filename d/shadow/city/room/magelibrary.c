@@ -48,7 +48,7 @@ void create()
       "pages.%^RESET%^");
    set_items(([
       ({"books","scrolls","shelves"}) : "%^RESET%^%^CYAN%^Some of the "+
-         "books and scrolls look so old that you’re afraid touching "+
+         "books and scrolls look so old that you're afraid touching "+
          "them would turn them to %^WHITE%^dust%^CYAN%^. Others are so "+
          "new you can still smell the fresh %^BOLD%^%^BLACK%^ink"+
          "%^RESET%^%^CYAN%^. They line the shelves by the thousands, "+

@@ -492,7 +492,7 @@ int __List(string str)
         myCoin = inv[x]->query_cointype();
         myType = types(inv[x]);
         if (inv[x]->is_armour()) {
-            if (inv[x]->query_armor_prof() == "shield") {
+            if (inv[x]->query_armor_prof() == "shield" || inv[x]->query_armor_prof() == "thiefshield") {
                 myStat = "Block: " + inv[x]->query_item_bonus("shieldMiss");
             }
             else {

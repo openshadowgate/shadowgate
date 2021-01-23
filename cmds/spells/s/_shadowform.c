@@ -14,7 +14,7 @@ void create()
     set_syntax("cast CLASS shadowform");
     set_damage_desc("a chance to reduce damage to 1/5");
     set_save("will");
-    set_description("You replace own body with mystic shadow material drawn from the Shadow Plane, rendering the own physical form only quasi-real. Whenever a foe tries to directly attack you of the spell (for instance, with a weapon or a targeted spell), that foe must attempt a Will save to disbelieve. If successful, the opponent can attack you normally and is unaffected by shadowform for 1 round. If the foe fails, you take only one-fifth the normal amount of damage from the foe’s successful attack.");
+    set_description("You replace own body with mystic shadow material drawn from the Shadow Plane, rendering the own physical form only quasi-real. Whenever a foe tries to directly attack you of the spell (for instance, with a weapon or a targeted spell), that foe must attempt a Will save to disbelieve. If successful, the opponent can attack you normally and is unaffected by shadowform for 1 round. If the foe fails, you take only one-fifth the normal amount of damage from the foe's successful attack.");
     set_arg_needed();
     set_helpful_spell(1);
 }

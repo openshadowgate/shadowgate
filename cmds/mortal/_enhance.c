@@ -19,10 +19,10 @@ int cmd_enhance(string str)
         return 0;
     }
 
-    feat_ap = FEATS_D->has_feat(TP, "arcane pool");
-    feat_wb = FEATS_D->has_feat(TP, "weapon bond");
-    feat_ab = FEATS_D->has_feat(TP, "armor bond");
-    feat_wr = FEATS_D->has_feat(TP, "warding");
+    feat_ap = FEATS_D->usable_feat(TP, "arcane pool");
+    feat_wb = FEATS_D->usable_feat(TP, "weapon bond");
+    feat_ab = FEATS_D->usable_feat(TP, "armor bond");
+    feat_wr = FEATS_D->usable_feat(TP, "warding");
 
     if (!feat_ap &&
         !feat_wb &&
@@ -76,7 +76,7 @@ int cmd_enhance(string str)
         if (feat_ap) {
             my_levels = (int)TP->query_prestige_level("magus");
             power += ((int)TP->query_prestige_level("magus") + 7) / 8;
-            if (FEATS_D->has_feat(TP, "legendary blade")) {
+            if (FEATS_D->usable_feat(TP, "legendary blade")) {
                 power += 2;
 
             }
@@ -133,10 +133,10 @@ int cmd_enhance(string str)
             TP->add_damage_bonus(power);
             tell_object(TP, "You enhance your weapon for combat.");
         }
-        if (FEATS_D->has_feat(TP, "greater enduring arcana")) {
+        if (FEATS_D->usable_feat(TP, "greater enduring arcana")) {
             duration = (int)TP->query_prestige_level("magus") * 600;
         }
-        else if (FEATS_D->has_feat(TP, "enduring arcana")) {
+        else if (FEATS_D->usable_feat(TP, "enduring arcana")) {
             duration = (int)TP->query_prestige_level("magus") * 60;
         }
         else {
@@ -230,10 +230,10 @@ int cmd_enhance(string str)
             TP->add_ac_bonus(power);
             tell_object(TP, "You enhance your armor defenses.");
         }
-        if (FEATS_D->has_feat(TP, "greater enduring warding")) {
+        if (FEATS_D->usable_feat(TP, "greater enduring warding")) {
             duration = (int)TP->query_prestige_level("magus") * 600;
         }
-        else if (FEATS_D->has_feat(TP, "enduring warding")) {
+        else if (FEATS_D->usable_feat(TP, "enduring warding")) {
             duration = (int)TP->query_prestige_level("magus") * 60;
         }
         else {
@@ -327,13 +327,13 @@ int does_enhance_exist(object obj, string str)
     int property_num;
     string * enhancements;
     enhancements = ({ });
-    if (FEATS_D->has_feat(obj, "weapon bond")) { enhancements += PALADIN_WEAPON_ENHANCEMENTS; }
-    if (FEATS_D->has_feat(obj, "armor bond")) { enhancements += PALADIN_ARMOR_ENHANCEMENTS; }
-    if (FEATS_D->has_feat(obj, "arcane pool")) { enhancements += MAGUS_WEAPON_ENHANCEMENTS; }
-    if (FEATS_D->has_feat(obj, "warding")) { enhancements += MAGUS_ARMOR_ENHANCEMENTS; }
-    if (FEATS_D->has_feat(obj, "thundering arcana")) { enhancements += THUNDERING_ENHANCEMENTS; }
-    if (FEATS_D->has_feat(obj, "corrosive arcana")) { enhancements += CORROSIVE_ENHANCEMENTS; }
-    if (FEATS_D->has_feat(obj, "devoted arcana")) { enhancements += ALIGNMENT_ENHANCEMENTS; }
+    if (FEATS_D->usable_feat(obj, "weapon bond")) { enhancements += PALADIN_WEAPON_ENHANCEMENTS; }
+    if (FEATS_D->usable_feat(obj, "armor bond")) { enhancements += PALADIN_ARMOR_ENHANCEMENTS; }
+    if (FEATS_D->usable_feat(obj, "arcane pool")) { enhancements += MAGUS_WEAPON_ENHANCEMENTS; }
+    if (FEATS_D->usable_feat(obj, "warding")) { enhancements += MAGUS_ARMOR_ENHANCEMENTS; }
+    if (FEATS_D->usable_feat(obj, "thundering arcana")) { enhancements += THUNDERING_ENHANCEMENTS; }
+    if (FEATS_D->usable_feat(obj, "corrosive arcana")) { enhancements += CORROSIVE_ENHANCEMENTS; }
+    if (FEATS_D->usable_feat(obj, "devoted arcana")) { enhancements += ALIGNMENT_ENHANCEMENTS; }
     enhancements = distinct_array(enhancements);
     if (member_array(str, enhancements) != -1) { return 1; }
     return 0;

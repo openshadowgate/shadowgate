@@ -22,7 +22,7 @@ void create()
     feat_name("shatter");
     feat_syntax("shatter TARGET");
     feat_prereq("powerattack");
-    feat_desc("The character can attempt to shatter an opponent's magical defenses, including stoneskin, iron body & similar variants. This will only work while shapeshifted, or using a weapon, unless the character has an aptitude in unarmed combat. Success is reliant on not only connecting with the target, but being able to overcome their willpower to successfully disrupt their protective spell/s.
+    feat_desc("The character can attempt to shatter an opponent's magical defenses, including stoneskin, iron body & similar variants. This will only work while shapeshifted, or using a weapon, unless the character has an aptitude in unarmed combat. Success is reliant on not only connecting with the target, but being able to overcome their agility to successfully disrupt their protective spell/s.
 
 %^BOLD%^See also:%^RESET%^ shatter *spells");
     set_target_required(1);

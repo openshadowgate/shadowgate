@@ -30,6 +30,7 @@ void create()
     feat_desc("This feat allows a ranger to focus their knowledge and training\
 fighting a third enemy type of their choice. The ranger will recieve an\
 addiional +2 bonus to attack and damage rolls while fighting their favored enemy.\
+A ranger also adds this bonus when studying his favored enemy and doesn't need training in academics.\
 You can select from the following favored enemies: \n\n" + "%^GREEN%^" + implode(valid_choices, "\n") +
 "%^RESET%^\n\n\To start selection process type <favored enemy> [TYPE].");
     allow_tripped(1);

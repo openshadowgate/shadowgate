@@ -8,7 +8,7 @@ inherit MONSTER;
 create() {
   ::create();
    set_name("Zombie");
-   set_id(({"juju","zombie","Zombie","juju zombie","Juju"}));
+   set_id(({"juju","zombie","Zombie","juju zombie","Juju","undead"}));
    set_gender("male");
    set_race("zombie");
    set_short("A juju zombie");
