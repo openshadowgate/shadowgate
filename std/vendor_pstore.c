@@ -96,6 +96,10 @@ int notify_players()
         if (!interactive(user)) {
             continue;
         }
+        if (user->query_invis() || user->query_hidden()) {
+            continue;
+        }
+
         what = ({});
         foreach(i in inv)
         {
@@ -106,7 +110,7 @@ int notify_players()
 
         if (sizeof(what)) {
             notify_messages(user);
-            user->set_property("notified_about_mess", time() + 60 * 40);
+            user->set_property("notified_about_mess", time() + 60 * 60);
         }
     }
     return 1;
