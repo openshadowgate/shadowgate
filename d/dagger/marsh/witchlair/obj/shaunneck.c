@@ -46,7 +46,6 @@ void create() {
   set_value(4200);
   set_type("clothing");
   set_limbs(({"neck"}));
-  set_size(1);
   set_wear((:TO,"wearit":));
   set_property("enchantment",3);
   set_ac(0);
@@ -67,4 +66,5 @@ int wearit(){
 "someone, somewhere, humming a pleasant tune.%^RESET%^");
     tell_room(environment(ETO),"%^RESET%^%^MAGENTA%^You "
 "see "+ETOQCN+" smile a bit, looking amused.%^RESET%^",ETO);
+    return 1;
 }
