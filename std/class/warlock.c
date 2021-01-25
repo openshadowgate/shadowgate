@@ -69,11 +69,24 @@ int max_stance_defensive() { return 1; }
 
 int attack_bonus(object player)
 {
-    int level,bonus;
-    level = (int)player->query_prestige_level("warlock");
-//    if(level > 20) { bonus = (level - 20) + 15; }
-//    else bonus = (level*3) / 4;
-    bonus = (level*3) / 4;
+    int bonus;
+    float penalty, full_level, class_level;
+    
+    full_level = to_float(player->query_base_character_level());
+    class_level = to_float(player->query_prestige_level("warlock"));
+    
+    if(full_level < 20.00)
+    {
+        bonus = (to_int(full_level) * 3 / 4);
+        return bonus;
+    }
+    
+    // Above 20
+    // 3/4 BAB gets half penalty to BAB
+    // Weighted average of class level compared to total level
+    penalty = (10.00 * (class_level / full_level)) / 2.00;
+    bonus = to_int(class_level - penalty);
+    
     return bonus;
 }
 
