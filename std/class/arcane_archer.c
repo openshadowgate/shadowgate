@@ -177,7 +177,7 @@ int max_stance_offensive(object ob) { return base_class_ob(ob)->max_stance_offen
 
 int max_stance_defensive(object ob) { return base_class_ob(ob)->max_stance_defensive(); }
 
-int attack_bonus(object player) { return 6; }
+int attack_bonus(object player) { return 0; }
 
 int number_of_attacks(object player) { return base_class_ob(player)->number_of_attacks(player); }
 
