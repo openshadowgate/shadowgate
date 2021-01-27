@@ -33,6 +33,7 @@ void init()
             call_out("end_death0_undead", 5, TP);
             return;
         }else if (TP->query("subrace") == "feytouched" ||
+                  TP->query("race") == "faery" ||
                   TP->query("race") == "satyr" ||
                   TP->query("race") == "nymph" ||
                   TP->query("race") == "dryad") {
