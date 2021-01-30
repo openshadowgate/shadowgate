@@ -13,7 +13,7 @@ void create(){
 "chips of wood that fall to the ground as it defends against blows.%^RESET%^");
   set_type("leather");
   set_limbs(({"torso"}));
-  set_weight(15);
+  set_weight(1); //changing this down because it doesn't cast right if encumberance goes over max
   set_value(0);
   set_ac(8);
   set("no curse",1);
