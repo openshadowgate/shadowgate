@@ -2,7 +2,7 @@
 //coded by Circe for Oghma 8/30/04
 
 #include <std.h>
-#include <daemons.h>
+
 inherit "/d/common/obj/weapon/dagger";
 
 void create(){
@@ -109,7 +109,7 @@ int hitme(object targ){
    object *inven;
    object *live;
    string wielder = ETO;
-   targ = ETO->query_current_attacker();
+   //targ = ETO->query_current_attacker(); this is silly why do this?
    if(!objectp(targ)) return 0;
    if(!random(6)){
       switch(random(50)){
@@ -122,9 +122,9 @@ int hitme(object targ){
                       tell_room(EETO,"%^YELLOW%^A tempest of ozone and "+
                       "charred flesh fills the area as "+targ->QCN+" "+
                       "becomes consumed in a torrent of energy!",({ETO,targ}));
-                      ETO->set_property("magic",1);
-                      targ->do_damage(targ->return_target_limb(),6+random(4));
-                      ETO->set_property("magic",-1);
+
+                      targ->cause_typed_damage(targ, targ->return_target_limb(),random(4)+6,"electricity");
+     
                       break;
          case 21..35: tell_object(ETO,"%^MAGENTA%^You feel a magnetic "+
                       "force build within the dagger as you extract it "+
@@ -139,9 +139,9 @@ int hitme(object targ){
                       "suddenly pales from the loss of %^BOLD%^%^RED%^blood "+
                       "%^RESET%^%^MAGENTA%^streaking from "+targ->QP+" wound!",
                       ({ETO,targ}));
-                      ETO->set_property("magic",1);
-                      targ->do_damage(targ->return_target_limb(),8+random(8));
-                      ETO->set_property("magic",-1);
+                  
+                      targ->cause_typed_damage(targ, targ->return_target_limb(),random(8)+8,"slashing");
+    
                       break;
          case 36..42: tell_object(ETO,"%^BOLD%^%^CYAN%^Your soul "+
                       "courses with a divine prescience, and your "+
@@ -171,8 +171,8 @@ int hitme(object targ){
                       obj->force_me("protect "+wielder->query_name());
                       wielder->add_follower(obj);
                       break;
-         case 48..49: inven = all_living(EETO);
-                      live = filter_array(inven, "is_non_immortal_player", FILTERS_D);
+         case 48..49: 
+                      live = query_attackers();
                       j = sizeof(live);
                       tell_object(ETO,"%^RESET%^%^ORANGE%^Gritting "+
                       "your teeth, you arc the dagger in a spin "+
@@ -190,7 +190,8 @@ int hitme(object targ){
                          tell_object(live[i],"%^YELLOW%^Suddenly "+
                             "a roar of searing sand "+
                             "begins to sheer and flay your flesh!");
-                         live[i]->do_damage("torso",random(10)+8);
+      
+                         live[i]->cause_typed_damage(live[i], live[i]->return_target_limb(),random(10)+8,"slashing");
                          live[i]->set_paralyzed(3+random(2),"You "+
                             "are reeling from the sand!");
                       }
