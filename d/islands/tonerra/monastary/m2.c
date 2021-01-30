@@ -17,7 +17,7 @@ void create(){
 %^BOLD%^%^WHITE%^This lab is a small area. Obviously the monks have tried
 to store the knowledge of chemicals and such here. You see
 %^RESET%^%^ORANGE%^%^BOLD%^%^WHITE%^ lining the walls with the bottles, vials, and beakers.
-%^REST%^Dust%^BOLD%^%^WHITE%^ covers everything, and it's obvious that this is not a well
+%^RESET%^Dust%^BOLD%^%^WHITE%^ covers everything, and it's obvious that this is not a well
 used area.%^RESET%^
 OLI
    );
