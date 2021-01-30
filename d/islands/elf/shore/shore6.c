@@ -89,5 +89,5 @@ int dive(){
 void reset(){
    ::reset();
    if(!present("sign",TO))
-     new("OBJ"sign4)->move(TO);
+     new(OBJ"sign4")->move(TO);
 }
