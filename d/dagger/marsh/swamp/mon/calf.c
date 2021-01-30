@@ -80,8 +80,6 @@ void moo(object targ)
 
     if(FORT(targ,-1*(level - 10))) { dam = dam/2; }
 
-    TO->set_property("magic",1);
-    targ->do_damage(targ->return_target_limb(),dam);
-    TO->set_property("magic",-1);
+    targ->cause_typed_damage(targ, targ->return_target_limb(),dam,"force");
     TO->add_hp(dam);
 }

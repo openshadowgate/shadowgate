@@ -88,6 +88,6 @@ void absorb(object targ)
                 "%^RED%^red light%^GREEN%^ as he strikes you!\n%^RED%^An intense chill fills "
                 "your soul as a portion of your life is drained away!%^RESET%^");
 
-    targ->do_damage("torso", dam);
+    targ->cause_typed_damage(targ, targ->return_target_limb(),dam,"negative energy");
     TO->add_hp(dam);
 }
