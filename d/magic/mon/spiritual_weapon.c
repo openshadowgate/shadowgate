@@ -29,7 +29,7 @@ void create(){
     set_overall_ac(4);
 
     set_alignment(5);
-
+    command("speak common");
     command("message floats in.");
     command("message floats $D.");
 }
