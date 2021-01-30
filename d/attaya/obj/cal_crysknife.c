@@ -172,7 +172,7 @@ int hitme(object targ){
                       wielder->add_follower(obj);
                       break;
          case 48..49: 
-                      live = query_attackers();
+                      live = ETO->query_attackers();
                       j = sizeof(live);
                       tell_object(ETO,"%^RESET%^%^ORANGE%^Gritting "+
                       "your teeth, you arc the dagger in a spin "+
