@@ -17,11 +17,11 @@ void create(){
     set_items( ([
      "roots" : "The roots of the giant oak are big enough to walk on",
       "hole" : "A powerful energy can be felt from "+
-      "the hole whatever happened here must have been epic.",
+      "the hole; whatever happened here must have been epic.",
       "memorial" : "On this day Formday, 8 Autumnstime, 751 SG: \n"+
       "The four hearts of the elements combined to banish the "+
       "eternal night that had claimed our world.\n"+
-      "We thank Jenna, Rheyn, Ramius and Singer for"+
+      "We thank %^GREEN%^Jenna, Rheyn, Ramius and Singer%^RESET%^ for"+
       " bringing the elemental hearts together.\n"+
       "And the many who gave their lives to protect them during the ritual.",
     ]) );
