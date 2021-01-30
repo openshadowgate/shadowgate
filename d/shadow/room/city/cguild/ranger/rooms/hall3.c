@@ -108,7 +108,13 @@ inherit ROOM;
    "/d/laerad/parnelli/forest/pittrap1.c",\
    "/d/laerad/parnelli/forest/pittrap2.c",\
 })
-
+#define ARGH ({\
+   "/d/islands/argentrock/rooms/argpath1",\
+   "/d/islands/argentrock/rooms/argpath2",\
+   "/d/islands/argentrock/rooms/argpath3",\
+   "/d/islands/argentrock/rooms/argpath4",\
+   "/d/islands/argentrock/rooms/argpath5",\
+})
 void create(){
    ::create();
    set_terrain(BRANCHES);
@@ -162,6 +168,7 @@ void create(){
      "attaya":"/d/attaya/jun1",
      "parnelli":"/d/laerad/parnelli/forest/for070",
      "peth":"/d/undead/rooms/forest/room5",
+     "argentrock":"/d/islands/argentrock/rooms/argpath1",
      "down":RROOM"hall2",
    ]));
 
@@ -173,6 +180,7 @@ void create(){
    set_pre_exit_functions(({"attaya"}),({"attaya_fun"})); 
    set_pre_exit_functions(({"parnelli"}),({"parnelli_fun"}));
    set_pre_exit_functions(({"peth"}),({"peth_fun"}));
+   set_pre_exit_functions(({"argentrock"}),({"argh_fun"}));
 }
 
 void reset(){
@@ -248,6 +256,11 @@ int peer_fun(string str){
 "bordered by %^BLUE%^dark forest %^GREEN%^on all sides.  It resembles the %^CYAN%^Moonstone Vale%^GREEN%^, "
 "north of the mainland city of Antioch.%^RESET%^");
      break;
+     case "argentrock":
+     tell_object(TP,"%^GREEN%^You peer between the gap in the "+
+     "branches, and see a dangerous looking forest covered "+
+     "island.   Huge beasts roam about looking for prey.%^RESET%^");
+     break;
      default: return 0; break;
    }
    return 1;
@@ -308,6 +321,10 @@ string *get_rooms(string str) {
       rooms2 = ({});
       rooms2 += ATTAYA;
       break;
+      case "argentrock":
+      rooms2 = ({});
+      rooms2 += ARGH;
+      break;
 
       case "parnelli":
       rooms = get_dir(PARNELLI);
@@ -327,6 +344,7 @@ string *get_rooms(string str) {
         rooms2 += ({thisroom});
       }
       break;
+      
     }
     return rooms2;
 }
@@ -519,6 +537,32 @@ int peth_fun(){
    rooms = get_rooms("peth");
    place = rooms[random(sizeof(rooms))];
    tell_room(place,"%^GREEN%^"+TP->QCN+" steps out from among the trees.%^RESET%^",TP);
+   TP->move_player(place);
+   return 0;
+}
+
+int argh_fun(){
+   string place, *rooms;
+   if(!TP->is_class("ranger") && !TP->is_class("druid") && !TP->query_true_invis()) {
+      tell_object(TP,"%^GREEN%^You move forward, but you realise the treant is watching you, and you find that "
+"the very gaps in the branches seem to close before you!%^RESET%^");
+      return 0;
+   }
+   if((int)TP->query_level() < 25) {
+      tell_object(TP,"%^GREEN%^You move forward, but you realise the treant is watching you, and you find that "
+"the very gaps in the branches seem to close before you in warning.  You realise the forest beyond is likely "
+"not safe for you to be in.%^RESET%^");
+      return 0;
+   }
+   tell_object(TP,"%^GREEN%^You move forward, slipping through the gap in the branches with ease.  Upon the "
+"other side, you step into a thick forest with flowers and mushrooms."
+"%^RESET%^");
+   tell_room(ETP,"%^GREEN%^"+TP->QCN+" moves forward and slips through a gap in the branches with ease, "
+"disappearing from view into the forest beyond.%^RESET%^",TP);
+   rooms = ({});
+   rooms = get_rooms("argentrock");
+   place = rooms[random(sizeof(rooms))];
+   tell_room(place,"%^GREEN%^"+TP->QCN+" steps out from among the trees at the side of the path.%^RESET%^",TP);
    TP->move_player(place);
    return 0;
 }
