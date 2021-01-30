@@ -33,6 +33,8 @@ void reset(){
   ::reset();
   set_locked("gate",0);
   set_open("gate", 0);
+  if(!present("sign",TO))
+     new(OBJ"sign4")->move(TO);
 
  }
 
@@ -85,9 +87,4 @@ int dive(){
    TP->force_me("emote dives into the %^BOLD%^%^CYAN%^frigid sea%^RESET%^ like a %^BOLD%^%^CYAN%^crazy%^RESET%^ person.");
    TP->move(ROOMS"shore/water");
    return 1;
-}
-void reset(){
-   ::reset();
-   if(!present("sign",TO))
-     new(OBJ"sign4")->move(TO);
 }
