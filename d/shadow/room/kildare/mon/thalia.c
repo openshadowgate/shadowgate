@@ -19,7 +19,7 @@ void create()
    set_gender("female");
    set_race("human");
    set_body_type("humanoid");
-   set_hd(1,1);
+   set_hd(1,10);
    set_stats("strength",4);
    set_exp(1);
    set_emotes(1,({
