@@ -182,7 +182,9 @@ void moves(object targ)
                 tell_room(ETO, "%^BOLD%^" + targ->QCN + " ducks at the last instant, "
                           "avoiding the bolt!", targ);
             }else {
-                targ->do_damage("head", roll_dice(8, 8));
+
+                targ->cause_typed_damage(targ, "head",roll_dice(8, 8),"divine");
+                
             }
             return 1;
         }
