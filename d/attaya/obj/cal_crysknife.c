@@ -166,7 +166,7 @@ int hitme(object targ){
                       "tinkling of fey-like laughter fills the sky "+
                       "as a portal opens releasing a sand-shrouded "+
                       "figure!",ETO);
-                      obj = new("/d/avatars/circe/dust_mephit");
+                      obj = new("/d/attaya/mon/dust_mephit");
                       obj->move(EETO);
                       obj->force_me("protect "+wielder->query_name());
                       wielder->add_follower(obj);
