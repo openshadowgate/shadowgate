@@ -7,7 +7,6 @@ void create() {
    set_property("light",2);
    set_terrain(STONE_BUILDING);
    set_travel(PAVED_ROAD);
-//        set_temple("mystra");
    set_name("Temple Ruins");
    set_short("Temple Ruins");
    set_long("%^RESET%^%^MAGENTA%^This circular temple must once have "
@@ -45,7 +44,7 @@ void create() {
    set_smell("default","A faint residue of smoke lingers about these ruins.");
    set_listen("default","Silence hangs heavily upon this place.");
    set_exits(([
-      "out" : "/d/shadow/room/village/mainroad3"
+      "south" : "/d/magic/temples/m_ruin"
    ]));
 
 }
