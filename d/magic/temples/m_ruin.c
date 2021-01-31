@@ -162,7 +162,7 @@ void display_painting()
 "%^WHITE%^%^BOLD%^A drow appears and quickly strikes down the guild's leader, running her through with a sharp %^BLACK%^black blade%^WHITE%^.%^RESET%^\n",
 "%^WHITE%^%^BOLD%^She lays on the ground still... %^RESET%^%^RED%^blood %^WHITE%^%^BOLD%^pools on the floor around her.\n",
 "%^WHITE%^%^BOLD%^Next it shows the same woman looking defeated, hanging up her cowl on a board and walking down the stairs, though the library and out of the guild.%^RESET%^\n",
-"%^WHITE%^%^BOLD%^The painting animates itself, and the guild members appear to be talking and sharing parchments with %^RESET%^%^MAGENTA%^runes %^WHITE%^%^BOLD%^written on them.  One by one all of the cowled mages blur out of the picture, until only a male half-elf bearing the holy symbol of %^RED%^Talos %^WHITE%^remains.%^RESET%^\n",
+"%^WHITE%^%^BOLD%^The painting animates itself, and the guild members appear to be talking and sharing parchments with %^RESET%^%^MAGENTA%^runes %^WHITE%^%^BOLD%^written on them.  One by one all of the cowled mages blur out of the picture, until only a male half-elf bearing the holy symbol of %^RED%^the storm god %^WHITE%^remains.%^RESET%^\n",
 "%^WHITE%^%^BOLD%^This image holds for a long time, then %^RESET%^%^WHITE%^fades %^BOLD%^as the colours seep away, leaving the parchment blank.%^RESET%^\n",
 "%^WHITE%^%^BOLD%^The half-elf appears again, this time not wearing the cowl.  She is teaching young mages in a smaller temple, pointing them to the symbol of goddess.%^RESET%^\n",
 "%^WHITE%^%^BOLD%^The female half-elf stays and the background changes to that of a city, where she continues to reprimand mages for their disrespect of magic.%^RESET%^\n",
