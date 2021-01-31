@@ -116,7 +116,7 @@ int move(object dest){
     return res;
   }
     if (!living(ETO)){
-    parrot = new (MOB + "parrot");
+    parrot = new ("/realms/lujke/tecqumin/mons/" + "parrot");
     if (stringp(owner)){
       parrot->set_owner(owner);
     }
@@ -136,13 +136,14 @@ int move(object dest){
 }
 
 void report(string str){
-  "/daemon/reporter_d.c"->report("lujke", str);
+  "/d/atoyatl/reporter_d.c"->report("lujke", str);
 }
 
 int hear(string str){
   mixed * details;
   int num, sentences, i, j, n;
-  string language, speech, describe, sentence1, sentence2, sentence3, sentence4, sentence5, sentence6, saylias, saylias1, saylias2;
+  string language, speech, describe, sentence1, sentence2, sentence3, sentence4, sentence5, sentence6, saylias, saylias1,
+saylias2;
   string * ks, * ls;
   mapping als;
   

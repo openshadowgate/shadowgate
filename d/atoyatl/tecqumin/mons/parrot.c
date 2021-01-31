@@ -35,7 +35,7 @@ void create(){
   set_property("no random treasure", 1);
 
   // Due to numerous crashes caused by parrots
-  TO->remove();
+//  TO->remove();
 }
 
 void set_sayings(mapping s){
@@ -43,7 +43,8 @@ void set_sayings(mapping s){
 }
 
 void report(string str){
-//  "/daemon/reporter_d.c"->report("lujke", str);
+  return;  //THIS FUNCTION ONLY NEEDED FOR DEBUGGING
+  "/d/atoyatl/reporter_d.c"->report("lujke", str);
 }
 
 mapping query_sayings(){
@@ -57,6 +58,46 @@ void output(string what, string language){
   force_me("say " + what);
 }
 
+int trim_sayings(){  // For cutting down the number of sayings the parrot remembers, to keep them lean
+  string * ks, k, * pot_removals, * removals;
+  int x, num, stats_ks, highest_x, i, target;
+  mapping stats;
+  if (!mapp(sayings) || sizeof(sayings)<300) return 0;
+  target = sizeof(sayings) - 300;
+  target = target *5;
+  ks = keys(sayings);
+  stats = ([]);
+  pot_removals = ({});
+  removals = ({});
+  foreach(k in ks)
+  {
+    x = sayings[k][0];
+    if (highest_x < x) highest_x = x;
+    stats_ks = keys(stats);
+    if (member_array(x, stats_ks)!=-1)
+    { 
+      pot_removals = stats[x];
+      pot_removals += ({k});
+    } else
+    {
+      pot_removals = ({k});
+    }
+    stats[x] = pot_removals;   
+  }
+  stats_ks = keys(stats);
+  pot_removals = ({});
+  for(i=1;i<=highest_x;i++){
+    if (member_array(i, stats_ks)==-1) continue;
+    pot_removals += stats[x];
+    if (sizeof(pot_removals)>=target) break;
+  }
+  foreach (k in pot_removals) 
+  {
+    if(!random(4)) map_delete(sayings, k);
+    if (sizeof(sayings)<270) break;
+  }
+}
+
 void squawk(){
   int count, total, i, x, y, roll, num;
   string * ks, * usables, msg, speech, describe, language, colour, saylias, saylias_start, saylias_end, * alks, junk, new_key;
@@ -65,7 +106,8 @@ void squawk(){
   if (!mapp(sayings) || sizeof(sayings)<1) return;
   ks = keys(sayings);
   count = sizeof(ks);
-  if (count<1){
+  if (count<1)
+  {
     return;
   }
   onr = find_player(owner);
@@ -74,13 +116,15 @@ void squawk(){
     report("finding owner in immediate environment");
     ps = all_living(ETO);
     ps -= ({TO});
-    foreach(onr in ps){
+    foreach(onr in ps)
+    {
       if (interactive(onr)) break;
     }
     if (!objectp(onr))
     {
       ps = children("/std/user.c");
-      foreach(onr in ps){
+      foreach(onr in ps)
+      {
         if (interactive(onr)) break;
       }
     }
@@ -117,54 +161,29 @@ void squawk(){
   report(" Saylias_end: " + saylias_end + "|End of Saylias_end");
   total = 0;
   usables = ({});
-  if (!sizeof(ks)) {
+  if (!sizeof(ks)) 
+  {
       return;
   }
-
-  for (i=count-1;i>=0;i--){
+  for (i=count-1;i>=0;i--)
+  {
     x = sayings[ks[i]][0];
     msg = ks[i];
-    if (num>0)
-    {
-      if(strlen(saylias_start)>0 && interact(saylias_start, ks[i]))
-      {
-        report ("sscanffing ks[i]: " + ks[i]);
-        sscanf (ks[i], "%s"+ saylias_start+"%s", junk, new_key);
-        report ("ks[i] sscanffed");
-        new_key = junk + new_key;
-        sayings[new_key] = sayings[ks[i]];
-        map_delete(sayings, ks[i]);
-      } else
-      {
-        report(ks[i] + " does not contain " + saylias_start);
-      }
-    }
-    if (num>1)
-    {
-      if(strlen(saylias_end)>0 && interact(saylias_end, ks[i]))
-      {
-        sscanf (ks[i], "%s"+ saylias_end+"%s", junk, new_key);
-        new_key = junk + new_key;
-        sayings[new_key] = sayings[ks[i]];
-        map_delete(sayings, ks[i]);
-      } else
-      {
-        report(ks[i] + " does not contain " + saylias_end);
-      }
-    }
     if (x<3 && random(500)) continue; //Just occasionally, it might squawk out something it only heard once or twice.
     usables += ({ks[i]});
     total += x;
   }
   count = sizeof(usables);
-  if (count<1){
+  if (count<1)
+  {
     report("There are no usable usables");
     return;
   }
   report("%^BOLD%^%^CYAN%^About to actually squawk!");
   y = 0;
   roll = random(total);
-  for (i = 0; i<count; i++){
+  for (i = 0; i<count; i++)
+  {
     report("Actually squawking. i: " + i);
     if (sizeof(usables)<=i)
     {
@@ -179,7 +198,8 @@ void squawk(){
     x = sayings[usables[i]][0];
     y += x;
     report ("%^BOLD%^%^BLACK%^x: " + x + " y: " + y);
-    if (roll <y){
+    if (roll <y)
+    {
       report("%^BOLD%^%^MAGENTA%^roll: " + roll +" < y: " + y);
       language = sayings[usables[i]][1];
       speech =  sayings[usables[i]][2];
@@ -192,7 +212,8 @@ void squawk(){
     }
   }
   report("Finished actually squawking");
-  if (random(4)){
+  if (random(4))
+  {
     call_out("squawk", 1 + random(4));
   }
 }
@@ -204,10 +225,12 @@ void catch_say(string str){
   string language, speech, describe, sentence1, sentence2, sentence3, sentence4, sentence5, sentence6, saylias, saylias_start, saylias_end;
   string * ks, * alks;
   mapping als;
+  if (!objectp(TP)||!objectp(ETO)) return;
   if (TP->id("parrot")){
     return;
   }
   if (mapp(sayings) && sizeof(sayings)>0) ks = keys (sayings);
+  if (sizeof(sayings)>310) trim_sayings();
   else ks = ({});
   language = TP->query_language();
   if (catch(  str = "/daemon/stripper_d.c"->stripcolors(str))) return;
@@ -297,21 +320,19 @@ void catch_say(string str){
       str = str[1..strlen(str)-1]; //remove any starting space from sentence
     }
     if (catch(str = FILTERS_D->filter_colors(str))) return;
-    if (sizeof(ks) <1 || member_array(str, ks)!= -1){
+    if (sizeof(ks)>0 &&  member_array(str, ks)!= -1){
       num = sayings[str][0];
       num++;
     } else {
       num = 1;
     }
+    if (!stringp(str) || strlen(str)<1) return;
     details = ({num, language, speech, describe});
     sayings[str] = details;
   }
   return;
 }
 
-string remove_saylias(string str, string saylias){
-
-}
 
 
 void heart_beat(){
@@ -341,7 +362,7 @@ void heart_beat(){
         tell_room(ETO, "The parrot looks distressed, as its owner's environment is broken");
       }
     } else {
-      tell_room(ETO, "The parrot looks distressed, as it can't find its owner");
+     if (!random(10)) tell_room(ETO, "The parrot looks distressed, as it can't find its owner");
     }
   }
 }
@@ -422,7 +443,7 @@ void settle_down(){
   object ob, * conts;
   int i, count;
   if (!objectp(ETO)){return;}
-  ob = new(OBJ + "parrot.c");
+  ob = new("/realms/lujke/tecqumin/obj/" + "parrot.c");
   if (!objectp(ob)){
     tell_room(ETO, "ERROR - parrot isn't working. Please tell Lujke");
   }
