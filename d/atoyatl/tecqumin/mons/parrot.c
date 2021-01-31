@@ -34,7 +34,7 @@ void create(){
   set_property("no animate",1);
   set_property("no random treasure", 1);
 
-  // Due to numerous crashes caused by parrots
+  // Parrots are perfectly fine now
 //  TO->remove();
 }
 
