@@ -22,7 +22,7 @@ void create() {
      " a ruin.  There are %^BOLD%^%^BLACK%^broken black streaked"+
      " marble pillars%^RESET%^ barely holding up a roof "+
      "full of holes.   Torn curtains line the "+
-     "walls.   Several paintings seem oddly to "+
+     "walls.   Several %^MAGENTA%^paintings%^RESET%^ seem oddly to "+
      "be intact.  They are lifesized and take"+
      " up the whole wall.  The plaques on them also seem intact.");
 
@@ -41,7 +41,10 @@ void create() {
      ({"painting", "paintings"}) : "There are a total of eight "+
         "paintings in the hall.  Each of them depict someone that "+
         "is related of import in magic in the lands of Shadowgate.  "+
-        "They were heroes of a lost goddess of magic.",
+        "They were heroes of a lost goddess of magic.\n"+
+        "%^BOLD%^You feel you could %^MAGENTA%^<touch painting 1>%^WHITE%^"+
+        " or %^MAGENTA%^<touch painting 8>%^WHITE%^ to learn something from"+
+        " each of the eight paintings.",
 //Here are the short descs of the paintings
      "painting 1" : "This is a painting of an average looking "+
         "female half-elf standing near a tower and holding a book. "+
