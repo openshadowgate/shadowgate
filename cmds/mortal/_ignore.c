@@ -21,7 +21,7 @@ int cmd_ignore(string str)
         return 1;
     }
     str = lower_case(str);
-    rstr = TP->realName(str);
+    rstr = TP->realNameVsProfile(str);
     if (member_array(rstr, ignored) != -1) {
         tell_object(TP, str + " is already on your ignored list.");
         return 1;

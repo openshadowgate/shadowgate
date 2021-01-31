@@ -11,6 +11,7 @@ void create() {
     set_author("nienne");
     set_spell_name("mire the mind");
     set_spell_level(([ "warlock" : 3 ]));
+    set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS mire the mind");
     set_description("The caster creates a chilling aura around themselves, which insinuates "
 "itself into the minds of nearby foes, should they not have the willpower to resist. It will "

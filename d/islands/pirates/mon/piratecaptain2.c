@@ -46,7 +46,7 @@ void create (){
      command("wear coat");
    set_funcs(({"slash","slash","rushem","flashem","flashem"}));
    set_func_chance(30);
-   set("aggresive",3);
+   set("aggressive",3);
    set_property("swarm",1);
    add_money("silver", random(300)+100);
    add_money("copper", random(30)+10);

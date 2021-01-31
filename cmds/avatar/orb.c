@@ -112,7 +112,6 @@ void init() {
   add_action("inventory_save","invent");
 }
 
-
 int read(string str) {
   if( str != "orb" )
     return 0;
@@ -194,11 +193,13 @@ int command_mon(string str)
      in_use = 0;
      return 1;
    }
-
+/*   this is not gonna work with spell changes I don't think -H 11/26/20
   if (member_array(str, ({"cast","chant","moncast","monchant"}),1)!= -1)
     if (str != "mon")
       return chantcast(str);
-  if(strsrch(str, "kill") != -1)
+      
+  if(strsrch(str, "kill") != -1)*/
+
   switch(str)  {
    case "l"    :
    case "look" : mon_look();

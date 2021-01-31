@@ -438,7 +438,7 @@ void run_race()
 
         num3 = ((accel / lap) + (speed / weather) + (health * lap) + (jockey * danger) +(random(50)) );
 			switch(random(3)){
-			case(0): tell_room(ETP,"Clarise %^CYAN%^relates%^RESET%^: Blessed by Akadi today "+name+"%^RESET%^ is really moving!");
+			case(0): tell_room(ETP,"Clarise %^CYAN%^relates%^RESET%^: Blessed by Seija today "+name+"%^RESET%^ is really moving!");
 			break;
 			case(1): tell_room(ETP,"Clarise %^CYAN%^relates%^RESET%^: "+name+"%^RESET%^ is keeping a solid pace!");
 			break;

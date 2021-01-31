@@ -39,13 +39,13 @@ void create() {
   set_stats("intelligence",10);
   set_stats("charisma",15);
   set_gender("male");
-    
+
 }
 
 void do_rewards(string what, string str, object who) {
     object ob;
     int *rewards, gold, x;
-    
+
     if(member_array(str,SAVE_D->query_array("deku_names_seeking_array")) != -1) {
         if(what == "dead") {
         command("emote nods");
@@ -60,7 +60,7 @@ void do_rewards(string what, string str, object who) {
                 "notified.");
                 ob->move("/d/shadowgate/void");
                 SAVE_D->remove_name_from_array("deku_names_seeking_array");
-                
+
                 "/d/deku/inherits/name_gen_d.c"->remove_name((string)ob->query_name());
                 ob->remove();
             }
@@ -69,7 +69,7 @@ void do_rewards(string what, string str, object who) {
         gold = rewards[member_array(str,SAVE_D->query_array("deku_names_seeking_array"))];
         SAVE_D->remove_name_from_array("deku_names_seeking_array",str);
         "/d/deku/inherits/name_gen_d.c"->remove_name(str);
-        SAVE_D->remove_name_from_array("deku_names_seeking_reward_array",gold);             
+        SAVE_D->remove_name_from_array("deku_names_seeking_reward_array",gold);
         command("say reward is "+gold+ " gold coins.");
         command("emoteat "+who->QCN+" hands a money pouch to $N");
         who->add_money("gold",gold);
@@ -77,7 +77,7 @@ void do_rewards(string what, string str, object who) {
     }
     command("say no such person has been reported missing.");
     return 1;
-   
+
 }
 
 void catch_say(string msg){
@@ -143,9 +143,9 @@ void response(string msg, object ob){
             }
             ob1->set_master(ob->query_name());
             return 1;
-        }                
+        }
         return 1;
-    } 
+    }
 }
 
 void init() {
@@ -203,13 +203,13 @@ void pay_fine(string str) {
          return 1;
     }
     return;
-}       
+}
 
 void remove_fine(string who, int gold) {
     SAVE_D->remove_name_from_array("deku_has_guard",who);
     SAVE_D->remove_name_from_array("deku_guard_fine",gold);
 }
-           
+
 void contract_okay(object who) {
     return 1;
 }
@@ -251,7 +251,7 @@ int buy_contract(string str) {
             return 1;
         }
 
-        if(contract_okay(TP) == 1) { 
+        if(contract_okay(TP) == 1) {
             TP->force_me("emoteat dariul hands a money pouch over to "+
             "$N");
             TP->add_money("gold",-gold);
@@ -270,13 +270,6 @@ int buy_contract(string str) {
 
             ob->set_id_name(nam);
 
-            log_file("deku_contracts","BOUGHT:"+
-            " "+capitalize(TP->query_name())+" "+
-            "bought a contract ( id "+ob->query_id_name()+" ) "+
-            "from dariul for "+gold+ " (value set to "+
-            to_int(gold/2)+") gold on "+ ctime(time())+"\n");
-
-           
             ob->set_read("Contract shall be considered valid by "+
             "the town of verbobone until officially voided.  "+
             "Contract shall, over the course of time, draw value "+
@@ -321,11 +314,6 @@ void receive_given_item(object ob){
             return 1;
         }
         worth = calc_g_worth(ob);
-        
-        log_file("deku_contracts","SOLD: "+
-        capitalize(TP->query_name())+" sold a contract ( "+
-        "id "+ob->query_id_name()+" ) to dariul for "+
-        worth+ " gold on "+ ctime(time())+"\n");
 
         force_me("say we honor contract for "+worth+" gold pieces.");
         force_me("emoteat "+TP->query_name()+" hands $N a pouch of "+
@@ -346,7 +334,7 @@ void receive_given_item(object ob){
         force_me("say that is not offical, I have no use for it.");
         return 1;
     }
-   
+
 }
 
 int estimate_me(string str) {

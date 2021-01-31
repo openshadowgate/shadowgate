@@ -1,6 +1,6 @@
 #include "/d/dagger/tonovi/town/short.h"
 
-inherit "/d/dagger/tonovi/town/wall4"; 
+inherit "/d/dagger/tonovi/town/wall4";
 
 void create(){
     ::create();
@@ -8,4 +8,5 @@ void create(){
 	"east" : RPATH "wall5",
 	"west" : RPATH "wall7",
       ]) );
+
 }

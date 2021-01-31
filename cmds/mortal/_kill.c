@@ -8,7 +8,7 @@ int help();
 int cmd_kill(string str)
 {
     object victim;
-    int retvalue;   /* return value * / /* ORLY? */
+    int retvalue;   /* return value * / /* ORLY? */ /* YRLY! */
     int i;
 
     if (this_player()->query_ghost()) {
@@ -22,23 +22,28 @@ int cmd_kill(string str)
     }
 
     if (!str) {
-        object * livings;
+        victim = TP->query_property("last_attacker");
+        if (!(objectp(victim) && objectp(present(victim, ETP)))) {
+            object* livings;
 
-        livings = all_living(ETP);
-        livings -= ({TP}) - TP->query_followers();
+            livings = all_living(ETP);
 
-        if (TP->query_party()) {
-            object * party;
+            if (TP->query_party()) {
+                object* party;
 
-            party = PARTY_D->query_party_members(TP->query_party());
-            livings -= party;
-            livings -= collapse_array(party->query_followers());
+                party = PARTY_D->query_party_members(TP->query_party());
+                livings -= party;
+                livings -= collapse_array(party->query_followers());
+            }
+
+            livings -= (TP->query_followers() - TP->query_attackers());
+            livings -= ({ TP });
+            livings = filter_array(livings, (: !$1->query_true_invis() :));
+
+            if (sizeof(livings)) {
+                victim = livings[random(sizeof(livings))];
+            }
         }
-
-        if (sizeof(livings)) {
-            victim = livings[random(sizeof(livings))];
-        }
-
     } else {
         str = lower_case(str);
         victim = present(str, environment(this_player()));
@@ -77,6 +82,7 @@ void choose_death(string str)
 {
     if (str == "die") {
         write("%^BOLD%^%^RED%^The choice have been made, may the gods forgive you...%^RESET%^");
+        TP->add_death(capitalize(TP->query_name()));
         TP->die();
     } else {
         write("%^BOLD%^Alas! The life yet has some meaning. You put your pocket knife away.%^RESET%^");

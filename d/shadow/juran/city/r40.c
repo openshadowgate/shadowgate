@@ -15,8 +15,10 @@ void create(){
    		"east" : JROOMS+"r41",
 		"west" : JROOMS+"r31",
                 "south" : JROOMS+"psion",
-//                "north" : "/d/hm_quest/rooms/hm_quest_juran"
+                "down":"/d/shadow/ratpaths/rooms/rp_p016_p006",
     	]));
+        set_search("default", "You notice a ladder leading down, hidden behind some trash and foliage.");
+        set_invis_exits(({"down"}));
 	make_em();
 }
 void reset() {

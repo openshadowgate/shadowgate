@@ -13,7 +13,7 @@ create() {
    " It is generally used to hit someone with, and is a rather crude weapon."
    );
    set_weight(4);
-   set_size( 2 );
+   set_size(2);
    set_prof_type("club");
    set("value", 8);
    set_cointype("silver");

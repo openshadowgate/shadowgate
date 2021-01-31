@@ -70,18 +70,15 @@ void is_straight_cleric(object ob)
 
 int wieldme() 
 {
-    if((int)ETO->query_lowest_level() >= 22 && is_straight_cleric(ETO)) 
+    if((int)ETO->query_lowest_level() >= 22) 
     {
-        tell_object(ETO,"%^BOLD%^The %^BLUE%^r%^GREEN%^i%^RESET%^%^CYAN%^n%^BOLD%^%^BLUE%^"
-            "g%^GREEN%^s%^WHITE%^ on the staff chime together as you grasp the yew wood staff.");
-        tell_room(EETO, "%^BOLD%^As "+ETO->QCN+" grasps the yew wood staff, the three metal "
-            "%^BLUE%^r%^GREEN%^i%^RESET%^%^CYAN%^n%^BOLD%^%^BLUE%^g%^GREEN%^s%^WHITE%^ "
-            "chime together",ETO);
-        return 1;
-    }
-
-    if((int)ETO->query_lowest_level() >= 22 )
-    {
+        if (!ETO->query_property("silent_wield") && is_straight_cleric(ETO)) {
+            tell_object(ETO, "%^BOLD%^The %^BLUE%^r%^GREEN%^i%^RESET%^%^CYAN%^n%^BOLD%^%^BLUE%^"
+                "g%^GREEN%^s%^WHITE%^ on the staff chime together as you grasp the yew wood staff.");
+            tell_room(EETO, "%^BOLD%^As " + ETO->QCN + " grasps the yew wood staff, the three metal "
+                "%^BLUE%^r%^GREEN%^i%^RESET%^%^CYAN%^n%^BOLD%^%^BLUE%^g%^GREEN%^s%^WHITE%^ "
+                "chime together", ETO);
+        }
         return 1;
     }
 
@@ -93,12 +90,14 @@ int unwieldme()
 {
     if(is_straight_cleric(ETO)) 
     {
-        tell_object(ETO,"%^BOLD%^Pulling your hands from the smooth staff, "
-            "the metal %^BLUE%^r%^GREEN%^i%^RESET%^%^CYAN%^n%^BOLD%^%^BLUE%^"
-            "g%^GREEN%^s%^WHITE%^ chime once more");
-        tell_room(EETO,"%^BOLD%^As "+ETO->QCN+" removes their hold from the "
-            "yew wood staff, the three metals %^BLUE%^r%^GREEN%^i%^RESET%^%^CYAN%^"
-            "n%^BOLD%^%^BLUE%^g%^GREEN%^s%^WHITE%^ chime together",ETO);
+        if (!ETO->query_property("silent_wield")) {
+            tell_object(ETO, "%^BOLD%^Pulling your hands from the smooth staff, "
+                "the metal %^BLUE%^r%^GREEN%^i%^RESET%^%^CYAN%^n%^BOLD%^%^BLUE%^"
+                "g%^GREEN%^s%^WHITE%^ chime once more");
+            tell_room(EETO, "%^BOLD%^As " + ETO->QCN + " removes their hold from the "
+                "yew wood staff, the three metals %^BLUE%^r%^GREEN%^i%^RESET%^%^CYAN%^"
+                "n%^BOLD%^%^BLUE%^g%^GREEN%^s%^WHITE%^ chime together", ETO);
+        }
         return 1;
     }
     return 1;

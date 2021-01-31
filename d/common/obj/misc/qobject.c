@@ -69,8 +69,3 @@ int clean_up()
 {
     return 0;
 }
-
-int save_me()
-{
-    return 1;
-}

@@ -65,15 +65,8 @@ void execute_feat()
     }
 
     weapons = caster->query_wielded();
-    if (sizeof(weapons) < 2) {
-        tell_object(caster, "You need to be wielding a two handed weapon to use "
-                    "this feat.");
-        dest_effect();
-        return;
-    }
-    if (weapons[0] != weapons[1]) {
-        tell_object(caster, "You need to be wielding a two handed weapon to use "
-                    "this feat.");
+    if (!caster->validate_combat_stance("two hander")) {
+        tell_object(caster, "You need to be wielding a two handed weapon to use this feat.");
         dest_effect();
         return;
     }
@@ -127,15 +120,8 @@ void execute_attack()
     attackers = (object*)caster->query_attackers();
     weapons = caster->query_wielded();
 
-    if (sizeof(weapons) < 2) {
-        tell_object(caster, "You need to be wielding a two handed weapon to use "
-                    "this feat!");
-        dest_effect();
-        return;
-    }
-    if (weapons[0] != weapons[1]) {
-        tell_object(caster, "You need to be wielding a two handed weapon to use "
-                    "this feat!");
+    if (!caster->validate_combat_stance("two hander")) {
+        tell_object(caster, "You need to be wielding a two handed weapon to use this feat!");
         dest_effect();
         return;
     }

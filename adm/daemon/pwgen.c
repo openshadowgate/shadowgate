@@ -36,4 +36,3 @@ public string random_salt(int len)
 {
     return random_string(len,B64);
 }
-

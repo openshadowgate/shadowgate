@@ -33,6 +33,8 @@ void reset(){
   ::reset();
   set_locked("gate",0);
   set_open("gate", 0);
+  if(!present("sign",TO))
+     new(OBJ"sign4")->move(TO);
 
  }
 

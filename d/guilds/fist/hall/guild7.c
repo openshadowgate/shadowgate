@@ -15,7 +15,7 @@ The floor, like the curved walls, is made of a white marble, but it
 has been mottled and stained with the dark brown of long dried blood.
 FIST
    );
-   set_property("indoors",0);
+   set_property("indoors",1);
    set_property("light",2);
    set_light(2);
    set_listen("default","You hear the ghostly whispering of long dead warriors of the %^RED%^Iron Fist.");

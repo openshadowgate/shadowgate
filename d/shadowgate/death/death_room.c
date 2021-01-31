@@ -33,6 +33,7 @@ void init()
             call_out("end_death0_undead", 5, TP);
             return;
         }else if (TP->query("subrace") == "feytouched" ||
+                  TP->query("race") == "faery" ||
                   TP->query("race") == "satyr" ||
                   TP->query("race") == "nymph" ||
                   TP->query("race") == "dryad") {
@@ -62,6 +63,8 @@ void create(){
     ::create();
     set_property("light", 2);
     set_property("indoors",1);
+    set_terrain(WOOD_BUILDING);
+    set_travel(DIRT_ROAD);
     set_property("no teleport", 1);
     set_short("The void between life and death");
     set_long( (:this_object(), "d_long":) );

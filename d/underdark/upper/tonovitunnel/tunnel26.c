@@ -7,7 +7,7 @@ void create() {
     set_property("indoors",1);  
     set_property("light",1);
     set_travel(FOOT_PATH);
-    set_terrain(ROCKY);
+    set_terrain(NAT_TUNNEL);
     set_name("A dusty passage under the earth");    
     set_short("%^ORANGE%^A dusty passage under the earth%^RESET%^");
     set_long("%^RESET%^%^ORANGE%^Hard packed earth has been shorn up here "

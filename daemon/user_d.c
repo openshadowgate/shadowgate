@@ -116,77 +116,23 @@ mixed check_rem_rooms(object who, string *arr, mapping rem)
 
 int spend_ki(object ob, int amount)
 {
-    int avail;
-    if (!intp(amount)) {
-        return 0;
-    }
-    if (!objectp(ob)) {
-        return 0;
-    }
-    avail = (int)ob->query("available ki");
-    if (amount > avail) {
-        return 0;
-    }
-    avail -= amount;
-    ob->set("available ki", avail);
-    return 1;
+    return spend_pool(ob, amount, "ki");
 }
 
 int can_spend_ki(object ob, int amount)
 {
-    int avail;
-    if (!intp(amount)) {
-        return 0;
-    }
-    if (!objectp(ob)) {
-        return 0;
-    }
-    avail = (int)ob->query("available ki");
-    if (avail >= amount) {
-        return 1;
-    }
-    return 0;
+    return can_spend_pool(ob, amount, "ki");
 }
 
 int has_ki(object ob)
 {
-    if (!objectp(ob)) {
-        return 0;
-    }
-    if (!ob->query("available ki")) {
-        return 0;
-    }
-    return 1;
+    return has_pool(ob, "ki");
 }
 
 string *query_ki_spells(object ob)
 {
     int level = ob->query_prestige_level("monk");
     return collapse_array(values(filter_mapping(MAGIC_D->index_ki_spells_by_level(ob), (:$1 <= $3:), level)));
-}
-
-varargs void regenerate_ki(object ob, int amount, int pass)
-{
-    int avail, max, delay;
-    object class_ob;
-    if(!intp(amount)) return 0;
-    if(!objectp(ob)) return 0;
-    if(pass == 1 && (time() < (int)ob->query("last ki regen"))) return;
-    avail = (int)ob->query("available ki");
-    max = (int)ob->query("maximum ki");
-    avail += amount;
-    class_ob = find_object_or_load(DIR_CLASSES+"/monk.c");
-    if(pass && (class_ob->monk_check(ob, "way of the fist")) && (int)ob->query_class_level("monk") > 10) avail += 1;
-    if(avail > max) avail = max;
-    ob->set("available ki", avail);
-    if(pass)
-    {
-        delay = 10 + random(11);
-        delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "wisdom");
-        if(delay < 5) delay = 5;
-        ob->set("last ki regen", time() + delay);
-    }
-    return;
 }
 
 int sort_ki_spells(int kiLev, int compLev)
@@ -275,41 +221,56 @@ int has_pool(object ob, string pool_type)
 varargs void regenerate_pool(object ob, int amount, int pass, string pool_type)
 {
     int avail, max, delay;
-    if (!intp(amount)) return 0;
-    if (!objectp(ob)) return 0;
-    if (pass == 1 && (time() < (int)ob->query("last " + pool_type + " regen"))) return;
+    if (!intp(amount)) {
+        return 0;
+    }
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (pass == 1 && (time() < (int)ob->query("last " + pool_type + " regen"))) {
+        return;
+    }
     avail = (int)ob->query("available " + pool_type);
     max = (int)ob->query("maximum " + pool_type);
     avail += amount;
     if (pool_type == "ki") {
         object class_ob;
         class_ob = find_object_or_load(DIR_CLASSES + "/monk.c");
-        if (pass && (class_ob->monk_check(ob, "way of the fist")) && (int)ob->query_class_level("monk") > 10) avail += 1;
+        if (pass && (class_ob->monk_check(ob, "way of the fist")) && (int)ob->query_class_level("monk") > 10) {
+            avail += 1;
+        }
     }
-    if (avail > max) avail = max;
+    if (avail > max) {
+        avail = max;
+    }
     ob->set("available " + pool_type, avail);
-    if (pass)
-    {
+    if (pass) {
         switch (pool_type) {
         case "arcana":
             if ((int)ob->is_class("magus")) {
-                delay = 20 + random(11);
-                delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
-                if (delay < 15) delay = 15;
+                delay = 20 + roll_dice(6, 4);
+                delay -= (int)BONUS_D->query_stat_bonus(ob, "intelligence");
+                if (delay < 20) {
+                    delay = 20;
+                }
             }
             break;
         case "ki":
             if ((int)ob->is_class("monk")) {
-                delay = 10 + random(11);
-                delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "wisdom");
-                if (delay < 5) delay = 5;
+                delay = 10 + roll_dice(3, 4);
+                delay -= (int)BONUS_D->query_stat_bonus(ob, "wisdom");
+                if (delay < 5) {
+                    delay = 5;
+                }
             }
             break;
         case "grace":
             if ((int)ob->is_class("paladin")) {
-                delay = 40 + random(11);
-                delay -= (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "charisma");
-                if (delay < 35) delay = 35;
+                delay = 30 + roll_dice(9, 4);
+                delay -= (int)BONUS_D->query_stat_bonus(ob, "charisma");
+                if (delay < 40) {
+                    delay = 40;
+                }
             }
             break;
         }
@@ -320,7 +281,7 @@ varargs void regenerate_pool(object ob, int amount, int pass, string pool_type)
 
 void init_pool(object ob, string pool_type)
 {
-    int avail, newmax, oldmax, diff;
+    int avail, newmax, oldmax, diff, divisor;
     if (!objectp(ob)) return;
 
     switch (pool_type) {
@@ -330,8 +291,12 @@ void init_pool(object ob, string pool_type)
             ob->delete("maximum " + pool_type);
             return;
         }else {
-            newmax = (int)ob->query_class_level("magus") / 2;
-            newmax = (newmax > 0 ? newmax : 1) + (int)"/daemon/bonus_d.c"->query_stat_bonus(ob, "intelligence");
+            divisor = 2;
+            if (FEATS_D->usable_feat(ob, "greater arcane pool")) {
+                divisor = 1;
+            }
+            newmax = (int)ob->query_class_level("magus") / divisor;
+            newmax = (newmax > 0 ? newmax : 1) + (int)BONUS_D->query_stat_bonus(ob, "intelligence");
         }
         break;
     case "ki":
@@ -356,13 +321,13 @@ void init_pool(object ob, string pool_type)
         }
         break;
     case "grace":
-        if ((int)ob->query_class_level("paladin") < 5) {
+        if ((int)ob->query_class_level("paladin") < 1) {
             ob->delete("available " + pool_type);
             ob->delete("maximum " + pool_type);
             return;
         }
         else {
-            newmax = ((int)ob->query_class_level("paladin") - 1) / 4;
+            newmax = 2 + (int)ob->query_class_level("paladin") / 10;
         }
         break;
     }

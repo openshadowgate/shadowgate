@@ -5,6 +5,7 @@
 %^RESET%^%^CYAN%^Hitdice:%^RESET%^ d8
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ will strong, fort/reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ spellcraft
+%^RESET%^%^CYAN%^Restricted Races:%^RESET%^  beastman, ogre, ogre-mage, voadkyn, wemic 
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
  %^RESET%^L1: light armor proficiency, medium armor proficiency, simple weapon proficiency, shield proficiency, spell focus
  %^RESET%^L5: indomitable
@@ -26,4 +27,3 @@ Oracles can cast in any armor, but they must take the appropriate feats first. T
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ mysteries, feats, stats, skills, spells, cast, buff, prepare, domains, deities, prestige classes
 
-%^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard cleric list>%^CYAN%^.%^RESET%^

@@ -295,25 +295,24 @@ int query_parrying()
     object* weapons;
     weapons = TO->query_wielded();
     if (sizeof(weapons) && !weapons[0]->is_lrweapon()) {
-if (FEATS_D->usable_feat(TO, "parry")) {
-    return 1;
-}
-if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
-    if (sizeof(weapons) == 1 && !TO->is_wearing_type("shield")) {
-        return 1;
-    }
-}
-if (FEATS_D->usable_feat(TO, "unassailable parry")) {
-    weapons = distinct_array(weapons);
-    if (sizeof(weapons) > 1 && !weapons[1]->is_lrweapon()) {
-        return 1;
-    }
-}
-if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
-    if (sizeof(weapons) > 1 && weapons[0] == weapons[1]) {
-        return 1;
-    }
-}
+        if (FEATS_D->usable_feat(TO, "parry")) {
+            return 1;
+        }
+        if (FEATS_D->usable_feat(TO, "opportunistic parry")) {
+            if (TO->validate_combat_stance("one hander")) {
+                return 1;
+            }
+        }
+        if (FEATS_D->usable_feat(TO, "unassailable parry")) {
+            if (TO->validate_combat_stance("dual wield") && !weapons[1]->is_lrweapon()) {
+                return 1;
+            }
+        }
+        if (FEATS_D->usable_feat(TO, "blade block")) { // this should not allow parrying with bows!
+            if (TO->validate_combat_stance("two hander")) {
+                return 1;
+            }
+        }
     }
     if (FEATS_D->usable_feat(TO, "unarmed parry")) {
         if (!sizeof(weapons)) {
@@ -378,18 +377,14 @@ void heart_beat()
             TO->set_property("stabs_available", i);
         }
     }
-    /*
     if (TO->is_class("monk")) {
-        "/daemon/user_d.c"->regenerate_ki(TO, (1 + random(2)), 1);
-    }*/
-    if (TO->is_class("monk")) {
-        "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "ki");
+        USER_D->regenerate_pool(TO, (1 + random(2)), 1, "ki");
     }
     if (TO->is_class("magus")) {
-        "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "arcana");
+        USER_D->regenerate_pool(TO, (1 + random(2)), 1, "arcana");
     }
     if (TO->is_class("paladin")) {
-        "/daemon/user_d.c"->regenerate_pool(TO, (1 + random(2)), 1, "grace");
+        USER_D->regenerate_pool(TO, 1, 1, "grace");
     }
     //enhancement effects
     "/cmds/mortal/_enhance.c"->run_enhances_timer(TO, "weapon");
@@ -452,8 +447,9 @@ void heart_beat()
             }
             if (!random(10)) {
                 if (TO->is_vampire()) {
-                    if (query_bloodlust() < (20000 / 6)) {
+                    if (query_bloodlust() < (5000)) {
                         write("%^RED%^Bloodlust drives you insane.");
+                        tell_room(ETO, "%^RED%^" + TO->QCN + "'s eyes glow dark red.", TO);
                     }
                 }
             }
@@ -1707,6 +1703,13 @@ int query_attack_bonus()
             FEATS_D->usable_feat(TO, "second favored enemy") && ret += 2;
             FEATS_D->usable_feat(TO, "third favored enemy") && ret += 2;
         }
+        
+        //Are we fighting our quarry?
+        if(TO->query_property("quarry") == attacker)
+        {
+            FEATS_D->usable_feat(TO, "quarry") && ret += 2;
+            FEATS_D->usable_feat(TO, "improved quarry") && ret += 2;
+        }
     }
 
     //Inquisitor Bane
@@ -1730,8 +1733,7 @@ int query_attack_bonus()
     }
 
     if (FEATS_D->usable_feat(TO, "true strikes") &&
-        sizeof(TO->query_wielded()) == 1 &&
-        !(int)TO->is_wearing_type("shield")) {
+        TO->validate_combat_stance("one hander")) {
         ret += 3;
     }
 
@@ -2268,6 +2270,19 @@ int is_vampire()
     return (query_acquired_template() == "vampire") || 0;
 }
 
+int is_in_sunlight()
+{
+    if(EVENTS_D->query_time_of_day()!="day")
+        return 0;
+    if(ETO->query_property("indoors"))
+        return 0;
+    if(WEATHER_D->query_clouds(TO)>3)
+        return 0;
+    if(ASTRONOMY_D->query_eclipse())
+        return 0;
+    return 1;
+}
+
 int is_were()
 {
     if (query_acquired_template() == "weretiger" || query_acquired_template() == "werewolf" || query_acquired_template() == "wererat") {
@@ -2304,4 +2319,81 @@ void reset_all_status_effects()
         TO->set_magic_hidden(0);
         TO->set_invis();
     }
+}
+
+int is_good(object obj)
+{
+    int align;
+
+    if (!objectp(obj)) {
+        return 0;
+    }
+    align = (int)obj->query_alignment();
+    if (align == 1 || align == 4 || align == 7) {
+        return 1;
+    }
+    return 0;
+}
+
+int is_evil(object obj)
+{
+    int align;
+
+    if (!objectp(obj)) {
+        return 0;
+    }
+    align = (int)obj->query_alignment();
+    if (align == 3 || align == 6 || align == 9) {
+        return 1;
+    }
+    return 0;
+}
+
+int is_neutral(object obj)
+{
+    int align;
+
+    if (!objectp(obj)) {
+        return 0;
+    }
+    align = (int)obj->query_alignment();
+    if (align == 2 || align == 5 || align == 8) {
+        return 1;
+    }
+    return 0;
+}
+
+/*generic combat stance
+unarmed
+unarmed and shield
+weapon and shield
+one hander
+two hander
+dual wield -> dual wield includes double weapon
+double weapon
+validate lrweapon separately for now
+*/
+void set_combat_stance(string stance) {
+    if (query_property("combat stance")) {
+        remove_property("combat stance");
+    }
+    set_property("combat stance", stance);
+}
+
+string query_combat_stance() {
+    string stance;
+    if (stance = query_property("combat stance")) {
+        return stance;
+    }
+    return "unarmed";
+}
+
+int validate_combat_stance(string stance) {
+    if (query_combat_stance() == stance) {
+        return 1;
+    }
+    if (stance == "dual wield" && query_combat_stance() == "double weapon") {
+        return 1;
+    }
+    return 0;
 }

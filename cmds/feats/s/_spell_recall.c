@@ -1,6 +1,5 @@
 #include <std.h>
 #include <daemons.h>
-#include <dirs.h>
 
 inherit FEAT;
 
@@ -9,11 +8,12 @@ void create()
     ::create();
     set_author("wedex");
     feat_type("instant");
-    feat_category("MagusArcana");
+    feat_category("Steel&Magic");
     feat_name("spell recall");
     feat_prereq("Magus L4");
     feat_syntax("spell_recall");
     feat_desc("The next spell you cast will use your arcana pool instead of a spell slot.");
+    set_required_for(({ "improved spell recall" }));
 }
 
 

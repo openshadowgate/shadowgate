@@ -12,9 +12,11 @@
  %^RESET%^L4:  animal companion
  %^RESET%^L7:  hunters bond
  %^RESET%^L9:  evasion
+ %^RESET%^L10: quarry
  %^RESET%^L11: second favored enemy
  %^RESET%^L13: second favored terrain
  %^RESET%^L17: third favored enemy
+ %^RESET%^L18: improved quarry
  %^RESET%^L19: third favored terrain
  %^RESET%^L21: seen it before
  %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter

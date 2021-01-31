@@ -13,7 +13,7 @@ void create() {
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS trial by fire");
     set_damage_desc("half fire, half divine on unfaithful");
-    set_description("You test a creature’s purity of convictions by exposing it to a sheet of divine fire. Unless they are of the same faith as you they'll take damage. Half of this damage comes directly from the divine and can't be reduced.");
+    set_description("You test a creature's purity of convictions by exposing it to a sheet of divine fire. Unless they are of the same faith as you they'll take damage. Half of this damage comes directly from the divine and can't be reduced.");
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(3);

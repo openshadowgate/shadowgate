@@ -6,39 +6,12 @@
 #include <dirs.h>
 inherit DAEMON;
 
-
 // stealing from the recall spells command -Ares
 #define LEV_AND_COLORS ([ 1 : "%^BOLD%^%^BLACK%^", 2 : "%^RED%^", 3 : "%^GREEN%^", 4 : "%^MAGENTA%^", 5 : "%^CYAN%^", 6 : "%^BOLD%^%^BLUE%^", 7 : "%^BOLD%^%^RED%^", 8 : "%^BOLD%^%^GREEN%^", 9 : "%^BOLD%^%^MAGENTA%^"])
-
 
 mapping spells;
 string *magic;
 int wait;
-
-
-// powerpoints info
-int prep_power_points(string myclass, int times);
-
-int get_spells(object player, string myclass);
-void add_spell(string spellname, int lvl);
-
-
-/// function prototypes to support preparing lists of spells below here
-int max_allowed(object obj, string myclass, int level);
-int num_current_spells(mapping level_list);
-mapping filter_spells(mapping listed_spells, mapping memorized_spells);
-mapping compare_spells(object obj, string list, string myclass);
-void send_final_message(object obj);
-void prepare_list(object obj, string *spells, int delay, string myclass, int index);
-void prepare_listed_spells(object obj, string list, string myclass);
-void display_list(object obj, string list, string myclass);
-int remove_spell_from_list(object obj, string spell, string list, string myclass);
-int add_spell_to_list(object obj, string spell, string list, string myclass);
-mapping get_level_list(int level, mapping current_list);
-mapping get_current_list(mapping lists, string list);
-void delete_list(object obj, mapping lists, string list);
-mapping get_lists(object obj);
-int save_lists(object obj, mapping lists);
 
 int cmd_prepare(string str)
 {
@@ -200,36 +173,36 @@ int cmd_prepare(string str)
         tell_object(TP,"You can't prepare more than once in a round.");
         return 1;
     }
+
     TP->remove_property("last_prepare",time());
     TP->set_property("last_prepare",time());
 
-    if (!TP->is_class(myclass) && !avatarp(TP)) { return notify_fail("You cannot cast spells as a " + myclass + "!\n"); }
+    if (!TP->is_class(myclass) && !avatarp(TP)) {
+        return notify_fail("You cannot cast spells as a " + myclass + "!\n");
+    }
 
-    if(myclass == "monk")
-    {
-        tell_object(TP,"Monks don't need to prepare spells, please see <help ki>");
+    if (myclass == "monk") {
+        tell_object(TP, "Monks don't need to prepare spells, please see <help ki>");
         return 1;
     }
 
-    if(myclass == "warlock")
-    {
-        tell_object(TP,"Warlocks don't need to prepare spells, just cast");
+    if (myclass == "warlock") {
+        tell_object(TP, "Warlocks don't need to prepare spells, just cast");
         return 1;
     }
-
-    if (myclass == "antipaladin") { myclass = "paladin"; }
 
     validfocus = 0;
 
-
-    if(myclass == "psywarrior" || myclass == "psion")
-    {
-        if (sscanf(str, "%s %s", myclass, args) != 2) { return notify_fail("Syntax: <prepare classname points [times x].>\n"); }
-        if(sscanf(args,"%s times %d",spellname, times) != 2)
-        {
+    if (myclass == "psywarrior" || myclass == "psion") {
+        if (sscanf(str, "%s %s", myclass, args) != 2) {
+            return notify_fail("Syntax: <prepare classname points [times x].>\n");
+        }
+        if (sscanf(args, "%s times %d", spellname, times) != 2) {
             spellname = args;
             times = 1;
-            if (spellname != "points") { return notify_fail("Syntax: <prepare classname points [times x]>\n"); }
+            if (spellname != "points") {
+                return notify_fail("Syntax: <prepare classname points [times x]>\n");
+            }
         }
         prep_power_points(myclass, times);
         return 1;
@@ -247,6 +220,8 @@ int cmd_prepare(string str)
         spellname = args;
         times = 1;
     }
+
+    spellname = MAGIC_D->expand_quick_name(spellname);
 
     if(myclass != "bard" &&
        myclass != "sorcerer" &&
@@ -270,7 +245,7 @@ int cmd_prepare(string str)
         myclass != "sorcerer") { sl = spells[spellname]; }
 
     rst = TP->can_memorize(myclass,spellname);
-    if (rst == TOO_MANY)            { return notify_fail("You have prepared all of the spells that you are allowed at this level.\n"); }
+    if (rst == TOO_MANY)            { return notify_fail("You have prepared all of the spells allowed.\n"); }
     if (rst == SPELL_RESTRICTED)    { return notify_fail("Your use of this spell has been restricted!\n"); }
     if (rst == TOO_STUPID)          { return notify_fail("You do not meet the stat requirement to use that spell.\n"); }
     if (rst != MEM_OK)              { return notify_fail("You cannot prepare that spell.\n"); }
@@ -304,8 +279,8 @@ int cmd_prepare(string str)
     {
     case "cleric": case "paladin":
 
-        tell_object(TP, "%^BOLD%^%^GREEN%^You focus on your holy symbol and begin praying for the spell of " + spellname + "  (" + times + " attempt(s) - Any action you take will interrupt your praying.)");
-        tell_room(ETP, TPQCN + " focuses on " + TP->QP + " holy symbol and begins praying for spells.", TP);
+        tell_object(TP, "%^BOLD%^%^GREEN%^You begin praying for the spell of " + spellname + "  (" + times + " attempt(s) - Any action you take will interrupt your praying.)");
+        tell_room(ETP, TPQCN + " begins praying for spells.", TP);
         break;
 
     case "psion":
@@ -704,8 +679,8 @@ void prepare_listed_spells(object obj, string list, string myclass)
     {
     case "cleric": case "paladin":
 
-        tell_object(obj, "%^BOLD%^%^GREEN%^You focus on your holy symbol and begin praying for spells - Any action you take will interrupt your praying.)");
-        tell_room(environment(obj), obj->QCN + " focuses on " + obj->QP + " holy symbol and begins praying for spells.", obj);
+        tell_object(obj, "%^BOLD%^%^GREEN%^You begin praying for spells - Any action you take will interrupt your praying.)");
+        tell_room(environment(obj), obj->QCN + " begins praying for spells.", obj);
         break;
 
     default:
@@ -1056,41 +1031,20 @@ int save_lists(object obj,mapping lists)
 
 int can_prepare_as(string myclass)
 {
-    object *inven;
+    object* inven;
     int validprep;
     int i;
 
-    if(myclass == "paladin" || myclass == "cleric") //divine check for holy symbol
-    {
+    if (myclass == "mage") {
         inven = all_inventory(TP);
-        if(sizeof(inven))
-        {
-            for(i = 0;i<sizeof(inven);i++)
-            {
-                if(inven[i]->is_holy_symbol())
-                {
-                    if((string)inven[i]->query_diety() == (string)TP->query_diety() &&
-                       (string)inven[i]->query_owner() == (string)TP->query_name())
-                        validprep = 1;
+        if (sizeof(inven)) {
+            for (i = 0; i < sizeof(inven); i++) {
+                if (inven[i]->is_spellbook()) {
+                    validprep = 1;
                 }
             }
         }
-        if (!validprep && !avatarp(TP))
-        {
-            write("You need a dedicated holy symbol as a focus for your prayer!");
-            return 0;
-        }
-    }
-
-    if(myclass == "mage") //divine check for holy symbol
-    {
-        inven = all_inventory(TP);
-        if(sizeof(inven))
-            for(i = 0;i<sizeof(inven);i++)
-                if(inven[i]->is_spellbook())
-                    validprep = 1;
-        if (!validprep && !avatarp(TP))
-        {
+        if (!validprep && !avatarp(TP)) {
             write("You need a spellbook!");
             return 0;
         }

@@ -16,8 +16,7 @@ You are on a small ledge approximately 75 feet up the side of the cliff
 face.  The path continues to the east and the south here, as it passes a 
 large dark cave which, no doubt, leads deep underground.  To the south, 
 the path winds down a steep cliff, and to the east, the path is a bit 
-more level.  An impressive crystalline building stands on the 
-mountainside to the northeast.
+more level.  A sad wind blows in from the northeast.
 GRAYHAWK
     );
 

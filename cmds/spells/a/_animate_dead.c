@@ -3,6 +3,7 @@
 #include <magic.h>
 #include <rooms.h>
 inherit SPELL;
+
 int num_mon;
 
 #define UNDEADDIR "/d/magic/mon/create_undead/"
@@ -16,14 +17,10 @@ void create()
     set_spell_level(([ "mage" : 4, "cleric" : 3, "paladin" : 3, "inquisitor" : 3, "oracle" : 3 ]));
     set_mystery("bones");
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS animate dead [on TARGET]");
-    set_damage_desc("raises no more than four skeletal champions");
-    set_description("%^RESET%^With this spell, the caster uses remnants of the negative energy released upon a recent death in order to bend the deceased to the will of the caster. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of this spell are known to be inherently evil. Each skeleton will use 1 pool level (of a maximum 6).
 
-To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
-To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
-To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
-To check how many undead you have use %^ORANGE%^<poolsize>%^RESET%^");
+    set_syntax("cast CLASS animate dead [on TARGET]");
+    set_damage_desc("raises no more than three skeletal champions at a time");
+    set_description("%^RESET%^With this spell, the caster uses remnants of the negative energy released upon a recent death in order to summon an undead skeleton. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of this spell are known to be inherently evil." + extra_help());
     set_verbal_comp();
     set_somatic_comp();
     set_non_living_ok(1);
@@ -33,6 +30,19 @@ To check how many undead you have use %^ORANGE%^<poolsize>%^RESET%^");
                         ]));
     set_helpful_spell(1);
 }
+
+string extra_help(){
+
+    return "
+
+Each undead will use one pool slot, with five pool slot maximum.
+Undead pool is shared across similar spells.
+To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^
+To command undead use %^ORANGE%^<command undead to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^
+To force lost undead to follow use %^ORANGE%^<command undead to follow>%^RESET%^
+To check how many undead you have rised use %^ORANGE%^<poolsize>%^RESET%^";
+}
+
 
 void spell_effect(int prof)
 {
@@ -75,7 +85,7 @@ void spell_effect(int prof)
     if (!intp(num_mon)) {
         num_mon = 0;
     }
-    if (num_mon >= 8) {
+    if (num_mon >= 5) {
         tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^YOU ARE %^WHITE%^NOT %^WHITE%^WORTHY%^BLACK%^ TO RAISE MORE!%^RESET%^%^RESET%^");
         tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
         TO->remove();
@@ -84,11 +94,11 @@ void spell_effect(int prof)
 
     spell_successful();
 
-    for (i = 0; i < sizeof(targs) && i < 4; i++) {
+    for (i = 0; i < sizeof(targs) && i < 2; i++) {
         undead = new(UNDEADDIR + "skeleton");
         lvl = 1;
 
-        if (num_mon >= 8) {
+        if (num_mon > 4) {
             undead->remove();
             tell_object(caster, "%^RESET%^%^BOLD%^%^BLACK%^RAISING MORE IS %^WHITE%^BEYOND%^BLACK%^ YOUR PATHETIC %^BLACK%^M%^WHITE%^ASTERY!%^RESET%^%^RESET%^");
             tell_room(environment(caster), "%^CYAN%^" + caster->QCN + " seems to strain doing something.%^RESET%^", caster);
@@ -125,6 +135,7 @@ void spell_effect(int prof)
         undead->set_property("minion", caster);
         controller->add_monster(undead);
         caster->set_property("raised", 1);
+
     }
     tell_object(caster, "%^BLUE%^You let your arms drop limply after completing the spell.");
     tell_room(place, "%^BOLD%^" + caster->QCN + " lets " + caster->QP + " arms drop limply.", caster);

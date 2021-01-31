@@ -1,7 +1,7 @@
 #include <priest.h>
 inherit SPELL;
 
-#define ACTIVETEMPLES ({ "jarmila", "kreysneothosies", "lord shadow", "lysara", "ryorik", "the faceless one", "callamir", "kismet", "nilith", "nimnavanon" })
+#define ACTIVETEMPLES ({ "jarmila", "kreysneothosies", "cevahir", "lord shadow", "lysara", "the faceless one", "callamir", "kismet", "nilith", "nimnavanon", "seija","khyron"})
 
 void create()
 {
@@ -18,6 +18,7 @@ Azha
 Dallyh
 Eldebaro (East Oasis)
 Graez (Sangri)
+Ice
 Juran
 Kinaro
 Lothwaite
@@ -125,6 +126,10 @@ void spell_effect(int prof)
         where = "/d/shadow/room/muuldaan/rooms/church";
     placename = "Muul'daan";
     break;
+    case "ice":
+        where = "/d/islands/elf/church";
+    placename = "ice";
+    break;
     default:
         mygod = (string)CASTER->query_diety();
         if (member_array(mygod, ACTIVETEMPLES) != -1) {
@@ -133,7 +138,7 @@ void spell_effect(int prof)
             where = "/d/magic/temples/" + mygod + "/" + mygod;
             break;
         } else {
-            where = "/d/shadow/room/city/church";
+            where = "/d/darkwood/room/road18";
             placename = "Shadow";
             break;
         }

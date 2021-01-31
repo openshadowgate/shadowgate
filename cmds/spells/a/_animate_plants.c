@@ -78,7 +78,7 @@ spell_effect(int prof)
         plant->set_guild_level("fighter",clevel);
         plant->set_attacks_num(0);
         plant->set_max_hp(clevel*8+30);
-        plant->set_hp(clevel*3+30);
+        plant->set_hp(plant->query_max_hp());//kinda silly to be badly injured on summon
         plant->set_property("spelled",({TO}));
         plant->set_property("spell_creature",TO);
         plant->set_property("spell",TO);

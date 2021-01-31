@@ -1,8 +1,9 @@
 #include <std.h>
 #include <daemons.h>
 inherit ROOM;
-
+int broken = 0;
 string query_time_of_day();
+
 
 void create(){
 	::create();
@@ -11,12 +12,13 @@ void create(){
 	set_property("light", 2);
       set_property("indoors",1);
       set_property("no teleport",1);
-	set_short("%^BOLD%^%^WHITE%^A room of trophies%^RESET%^");
+	set_short("%^BOLD%^%^WHITE%^A R%^RESET%^%^RED%^o%^BOLD%^%^WHITE%^om of Tr%^RESET%^%^RED%^o%^BOLD%^%^WHITE%^phies%^RESET%^");
       set_long( (:TO,"my_query_long" :) );
 	set_smell("default", "You smell cleanliness.");
 	set_listen("default", "You can hear your own breathing and some movement to the north.");
 	set_items(([
 	  "carpet":"A dark plush carpet that your feet sink deeply into, padding your footsteps.",
+	  "walls":"There is an east wall, west wall and south wall.",
         "west wall":"Perhaps you can read the west wall.",
         "east wall": (:TO,"time_east_wall" :),
         "south wall":"This wall would be simple panelling if it weren't for the rich stain used to give the "
@@ -47,6 +49,7 @@ void create(){
 "and later the Tempered Blades.",
         ({"platform", "marble platform"}) : "This is a marble block approximately three feet high.  On top of "
 "the marble block sits a glass case and on the side of the block is a small plaque.",
+        "glass":"The glass on the display case could <break> if someone was a vandal.",
 	]));
 	set_exits(([
 		"out" : "/d/dagger/Torm/city/warehouse",
@@ -62,8 +65,8 @@ string time_east_wall(string str) {
 
 string my_query_long(string str) {
 	if(query_time_of_day() == "dawn" || query_time_of_day() == "twilight") {
-		return( "The center of this room is dominated by a %^BOLD%^small "
-		"marble platform %^RESET%^with a glass case on top in which several "
+		return( query_short()+"\nThe center of this room is dominated by a %^BOLD%^small "
+		"marble platform %^RESET%^with a %^CYAN%^glass%^RESET%^ case on top in which several "
 		"items of interest rest.  Attached to the platform just below the glass "
 		"is a small plaque.  The floor is covered with a %^BLUE%^deep blue "
       "carpeting%^RESET%^ so thick and plush you can't hear your own footsteps.  "
@@ -73,9 +76,9 @@ string my_query_long(string str) {
       "wall is %^BOLD%^brightly lit with %^RED%^fiery %^RESET%^%^BOLD%^glowing "
       "runes." );
 	} else {
-	return("The center of this room is dominated by a %^BOLD%^small marble "
+	return(query_short()+"\nThe center of this room is dominated by a %^BOLD%^small marble "
 	"platform %^RESET%^with a glass case on top in which several items of "
-	"interest rest.  Attached to the platform just below the glass is a "
+	"interest rest.  Attached to the platform just below the %^CYAN%^glass%^RESET%^ is a "
 	"small plaque.  The floor is covered with a %^BLUE%^deep blue carpeting "
 	"%^RESET%^so thick and plush you can't hear your own footsteps.  The "
 	"south wall is covered with %^ORANGE%^richly grained walnut paneling "
@@ -90,6 +93,7 @@ void init() {
 	add_action("read_stuff", "read");
 	add_action("twist_plaque", "twist");
 	add_action("twist_plaque", "turn");
+	add_action("break_glass", "break");
 }
 
 int read_stuff(string str){   
@@ -121,8 +125,33 @@ string query_time_of_day() {
 
 int twist_plaque(string str){
 	if(!str || str != "plaque") return notify_fail("Twist what?\n");
-	tell_room(ETP,""+TPQCN+" twists the plaque and suddenly blinks out of sight!",TP);
+	tell_room(ETP,"%^BOLD%^"+TPQCN+" twists the plaque and suddenly blinks out of sight!",TP);
 	write("Suddenly you feel a rush of air and movement.\nYou find yourself someplace else!\n");
 	TP->move_player("/d/dagger/Torm/city/thieves/vethor_guild");
 	return 1;
+}
+int break_glass(string str){
+	if(!str || str != "glass") return notify_fail("Break what?  The glass?\n");
+	if(broken){
+		write("Looks like someone already broke the glass here.");
+		return 1;
+	}
+	tell_room(ETP,"%^CYAN%^"+TPQCN+" breaks the glass and some of the items on display fall out",TP);
+	write("Like a buglar you break the glass to get at the items on display!\n");
+
+    new("/d/dagger/Torm/city/thieves/obj/earring")->move(TO);
+    new("/d/dagger/Torm/city/thieves/obj/gloves")->move(TO);
+	new("/d/dagger/Torm/city/thieves/obj/ring")->move(TO);
+	new("/d/dagger/Torm/city/thieves/obj/screamer")->move(TO);
+	new("/d/dagger/Torm/city/thieves/obj/mark")->move(TP);
+    broken = 1;
+	return 1;
+}
+void reset(){
+
+  ::reset();
+  
+  broken = 0;
+  return;
+
 }

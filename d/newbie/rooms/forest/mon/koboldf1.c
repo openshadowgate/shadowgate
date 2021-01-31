@@ -81,6 +81,7 @@ STYX
 	   "evasion",
 	   "scramble",
 	})); 	
+   command("speak draconic");
 }
 
 int hate_types(){

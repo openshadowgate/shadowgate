@@ -251,7 +251,7 @@ int reveal_action(string input)
 		TargSkill = MyTargs[x]->query_skill("dungeoneering");
 		if(sizeof(MyTargs[x]->query_armour("torso"))) 
 		{
-			TargSkill += MyTargs[x]->skill_armor_mod(MyTargs[x]->query_armor("torso"));
+			TargSkill += MyTargs[x]->skill_armor_mod(MyTargs[x]->query_armour("torso"));
 		}
 		flag = 0;
 		TN = MyTargs[x]->query_name();
@@ -381,7 +381,7 @@ int set_action(string input)
 	MySkill = TP->query_skill("dungeoneering");
 	if(sizeof(TP->query_armour("torso"))) 
 	{
-		MySkill += TP->skill_armor_mod(TP->query_armor("torso"));
+		MySkill += TP->skill_armor_mod(TP->query_armour("torso"));
 	}
 	if(MySkill < 15) 
 	{
@@ -549,7 +549,7 @@ int detect_action(string input)
       }
 	if(sizeof(TP->query_armour("torso"))) 
 	{
-		MySkill += TP->skill_armor_mod(TP->query_armor("torso"));
+		MySkill += TP->skill_armor_mod(TP->query_armour("torso"));
 	}
 	if(MySkill < 15) 
 	{
@@ -672,7 +672,7 @@ int find_action(string input)
       }
 	if(sizeof(TP->query_armour("torso"))) 
 	{
-		MySkill += TP->skill_armor_mod(TP->query_armor("torso"));
+		MySkill += TP->skill_armor_mod(TP->query_armour("torso"));
 	}
 	switch(MyType)
 	{
@@ -930,7 +930,7 @@ int remove_recover_action(string input, string Atype)
 
 	if(sizeof(TP->query_armour("torso"))) 
 	{
-		MySkill += TP->skill_armor_mod(TP->query_armor("torso"));
+		MySkill += TP->skill_armor_mod(TP->query_armour("torso"));
 	}
 	TrapKeys = keys(TrapInfo);
 	

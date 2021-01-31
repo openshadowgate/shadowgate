@@ -6,7 +6,8 @@
 %^RESET%^%^CYAN%^Saving throws:%^RESET%^ fort/will strong, reflex weak
 %^RESET%^%^CYAN%^Class Skills:%^RESET%^ perception, survival, athletics, academics, influence
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
- %^RESET%^L1: simple weapon proficiency, exotic weapon proficiency, light armor proficiency, medium armor proficiency, spell focus, shield profficiency, judgement
+ %^RESET%^L1: simple weapon proficiency, exotic weapon proficiency, light armor proficiency, medium armor proficiency, spell focus, shield proficiency, judgement, monster lore
+ %^RESET%^L2: track
  %^RESET%^L3: force of personality
  %^RESET%^L5: bane
  %^RESET%^L6: leadership
@@ -26,4 +27,3 @@ Inquisitors are spontaneous casters that use %^ORANGE%^<master>%^RESET%^ command
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, spells, cast, buff, prepare, master, prestige classes
 
-%^CYAN%^Once you have chosen this class and finished creation, please refer to the class bboard for information and updates by typing%^RESET%^ <bboard inquisitor list>%^CYAN%^.%^RESET%^

@@ -1,3 +1,8 @@
+//edit 2021/01/31 by Ergo - changed nickname and say to use "me" instead of
+//                          first two characters of character name.
+//                          "is" and "to" nicknames broke the sequence.
+
+
 #include <std.h>
 inherit NPC;
 
@@ -32,20 +37,20 @@ void init() {
    add_action("side_fun","ask");
 }
 
-void step_1(object target) 
+void step_1(object target)
 {
     if(!objectp(target)) return 0;
     if(!objectp(TO)) return 0;
     if(!present(target,ETO)) return 0;
-    if(target->query("newbtutorial5") > 1) 
+    if(target->query("newbtutorial5") > 1)
     {
         tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The short lean human turns to you "+
         "and says:%^RESET%^ Hello there.  Do you want to start again at where we left off?  If you can't remember "+
         "where you were up to, just %^YELLOW%^<ask>%^RESET%^ me.\n\nHe smiles broadly at you.");
         return;
     }
-    else 
-    {   
+    else
+    {
         tell_object(target,"\n\n%^RESET%^%^MAGENTA%^The short lean human smiles kindly at you and says:%^RESET%^ Hello "+
         "there.  I have some basics to teach you about the world that are really more of a convenience. First off, I want you to "+
         "types <%^YELLOW%^alias%^RESET%^>. This will show you a list of pre-defined aliases that have already been set up for you. "+
@@ -55,7 +60,7 @@ void step_1(object target)
     }
 }
 
-int step_2(string str) 
+int step_2(string str)
 {
     if(((int)TP->query("newbtutorial5") != 1 && !str) ||
     ((int)TP->query("newbtutorial5") != 2 && stringp(str)))
@@ -97,7 +102,7 @@ int step_2(string str)
     }
 }
 
-int step_3(string str) 
+int step_3(string str)
 {
     string myName;
     if(((int)TP->query("newbtutorial5") != 3 && !str) ||
@@ -113,26 +118,26 @@ int step_3(string str)
         tell_object(TP, "\n\n%^RESET%^%^MAGENTA%^The man speaks calmly: %^RESET%^Very good! Nicknames work almost like an alias "+
         "except their functionality is somewhat different. For example, if you type <nickname b "+
         "this is a test>, whenever you type the letter b anywhere, the game will substitute it for 'this is a test'. "+
-        "Now, I want you to make a nickname. I want you to type %^YELLOW%^<nickname "+myName[0..1]+" "+myName+">%^RESET%^. "+
-        "This will cause the game to substitute your name, "+myName+", anytime you type the letters "+myName[0..1]+".");
+        "Now, I want you to make a nickname. I want you to type %^YELLOW%^<nickname me "+myName+">%^RESET%^. "+
+        "This will cause the game to substitute your name, "+myName+", anytime you type the letters me.");
         return 1;
     }
     else if(stringp(str))
     {
-        
-        if(str != myName[0..1] + " "+ myName)
+
+        if(str != "me "+ myName)
         {
             tell_object(TP, "\n%^RESET%^%^MAGENTA%^The man shakes his head before speaking:%^RESET%^ No, no, that's not quite "+
-            "it. Just type %^YELLOW%^%^YELLOW%^<nickname "+myName[0..1]+" "+myName+">%^RESET%^ when you are ready "+
+            "it. Just type %^YELLOW%^%^YELLOW%^<nickname me "+myName+">%^RESET%^ when you are ready "+
             "to continue.\n\nHe smiles warmly at you.");
             return 1;
         }
         TP->set("newbtutorial5",5);
-        TP->force_me("nickname "+myName[0..1]+" "+myName);
+        TP->force_me("nickname me "+myName);
         tell_object(TP, "\n\n%^RESET%^%^MAGENTA%^The man cheers before speaking again:%^RESET%^ That's it. Now you have learned "+
         "how to establish a nickname of your own! Nicknames are powerful and convenient when used properly. "
         "I want to show you an example of their functionality now. When you are ready I want you to "+
-        "simply %^YELLOW%^<say "+myName[0..1]+" is going to see the world!>%^RESET%^");
+        "simply %^YELLOW%^<say me is going to see the world!>%^RESET%^");
         return 1;
     }
 }
@@ -143,7 +148,7 @@ int step_4(string str)
     int flag;
     if((int)TP->query("newbtutorial5") != 5) return 0;
     myName = TPQN;
-    
+
     if(!str) flag = 1;
     else if(stringp(str))
     {
@@ -152,7 +157,7 @@ int step_4(string str)
     if(flag)
     {
         tell_object(TP,"\n%^RESET%^%^MAGENTA%^The man shakes his head before speaking:%^RESET%^ No, not that's not quite "+
-        "it. Just type %^YELLOW%^<say "+myName[0..1]+" is going to see the world!>%^RESET%^ when you are "+
+        "it. Just type %^YELLOW%^<say me is going to see the world!>%^RESET%^ when you are "+
         "ready to continue. I want you to see the functionality of nicknames in action!%^RESET%^");
         return 1;
     }
@@ -167,11 +172,11 @@ int step_4(string str)
     "for death on Shadowgate is only temporary. Use the knowledge that you have learned here and "+
     "live a long prosperous life!\n\n%^RESET%^%^MAGENTA%^The man smiles once more before speaking again:%^RESET%^ "+
     "With that, I have nothing more to teach you. Your destiny awaits!%^RESET%^");
-    
+
    return 1;
 }
 
-int side_fun(string str) 
+int side_fun(string str)
 {
     int tracker;
     string myName;
@@ -183,33 +188,33 @@ int side_fun(string str)
     myName = TPQN;
     tell_object(TP,"%^RESET%^%^MAGENTA%^The man speaks quietly:%^RESET%^ Have you forgotten where you were up to? "
     " Ok, let's try again.");
-    switch(tracker) 
+    switch(tracker)
     {
-        case 1: 
+        case 1:
             tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ simply type %^YELLOW%^<alias>"
-            "%^RESET%^ when you are ready to continue."); 
-            break;      
-        case 2: 
-            tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ try establishing an alias of "+
-            "your own. Type %^YELLOW%^<alias bc bury corpse>%^RESET%^ when you are ready to continue."); 
+            "%^RESET%^ when you are ready to continue.");
             break;
-        case 3: 
+        case 2:
+            tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ try establishing an alias of "+
+            "your own. Type %^YELLOW%^<alias bc bury corpse>%^RESET%^ when you are ready to continue.");
+            break;
+        case 3:
             tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ simply type %^YELLOW%^<nickname>"+
             "%^RESET%^ when you are ready to continue.");
             break;
-        case 4: 
+        case 4:
             tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ try establishing a nickname of "+
-            "your own. Simply type %^YELLOW%^<nickname "+myName[0..1]+" "+myName+">%^RESET%^ when "+
-            "you are ready to continue.%^RESET%^"); 
+            "your own. Simply type %^YELLOW%^<nickname me "+myName+">%^RESET%^ when "+
+            "you are ready to continue.%^RESET%^");
             break;
-        case 5: 
+        case 5:
             tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ to understand how the functionality of "+
-            "a nickname I want you to simply %^YELLOW%^<say "+myName[0..1]+ " is going to see the world!>%^RESET%^ "+
+            "a nickname I want you to simply %^YELLOW%^<say me is going to see the world!>%^RESET%^ "+
             "when you are ready to continue.");
             break;
-        case 6: 
+        case 6:
             tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ I have taught you all that I can. Your destiny "+
-            "awaits!"); 
+            "awaits!");
             break;
    }
    return 1;

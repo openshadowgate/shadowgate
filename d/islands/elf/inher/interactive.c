@@ -66,6 +66,7 @@ int should_interact(object ob)
            (string)ob->query_race() != "nymph" &&
            (string)ob->query_race() != "voadkyn" &&
            (string)ob->query_race() != "dryad" &&
+           (string)ob->query_race() != "faery" &&
            (string)ob->query("subrace") != "szarkai") {
                 force_me("say Sorry, but we don't serve your kind here.  Only fey are welcome in Ashta.");
                 return 0;

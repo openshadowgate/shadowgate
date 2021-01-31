@@ -1,6 +1,5 @@
 #include <std.h>
 #include <daemons.h>
-#include <dirs.h>
 
 inherit FEAT;
 

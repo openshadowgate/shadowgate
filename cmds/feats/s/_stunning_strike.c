@@ -67,7 +67,7 @@ int check_can_use()
         tell_object(caster,"You cannot use stunning strike while mounted!");
         return 0;
     }
-    if(!(int)"/daemon/user_d.c"->can_spend_ki(caster, 1))
+    if(!(int)USER_D->can_spend_ki(caster, 1))
     {
         tell_object(caster, "%^CYAN%^You lack the needed ki to attempt "+
         "a stunning strike!%^RESET%^");
@@ -205,7 +205,7 @@ void execute_attack()
         return;
     }
 
-    if(!caster->spend_ki(1))
+    if(!caster->spend_ki(2))
     {
         tell_object(caster, "%^CYAN%^You lack the needed ki to attempt "+
         "a stunning strike!%^RESET%^");

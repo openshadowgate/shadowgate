@@ -66,12 +66,12 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
-    if (prof <100 && random(100) > prof)
-    {
-        call_out("flip",random(20),0);
+    if (prof < 100 && random(100) > prof) {
+        call_out("flip", random(20), 0);
+    }else {
+        addSpellToCaster();
     }
-    else addSpellToCaster();
-    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 5;
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 6;
     set_end_time();
     call_out("dest_effect",spell_duration);
 }

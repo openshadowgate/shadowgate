@@ -46,7 +46,8 @@ create() {
    }),0);
 }
 void receive_given_item(object obj){
-   string name, item;
+   string name, item, id1;
+   string *ids;
    object *ppl;
    int i;
    if(!objectp(TP)) return;
@@ -54,11 +55,15 @@ void receive_given_item(object obj){
    name = TPQN;
    if(!objectp(obj)) return;
    item = obj->query_name();
-   if((string)obj->query_name() != "Dire Crab"
+   ids = obj->query_id();
+   id1 =ids[0]; 
+   if(  (string)obj->query_name() != "Dire Crab"
      && (string)obj->query_name() != "Dire Lobster"
-     && (string)obj->query_name() != "betrayer's edge") {
-      force_me("say Ummm thanks, but this won't help.");
-	   force_me("give "+obj->query_name()+" to "+name+"");
+     && (string)obj->query_name() != "betrayer's edge"
+     && (string)obj->query_name() != "shell shield"
+     && (string)obj->query_name() != "Stingray spear") {
+      force_me("say Ummm thanks, but this won't help.  I'll just set this on the ground for you.");
+	   force_me("drop "+id1+"");
       return;
 	  }
 
@@ -75,20 +80,30 @@ void receive_given_item(object obj){
     case "betrayer's edge":{
        new(OBJ"clance")->move(TO);
        force_me("give lance to "+name);
-       force_me("say Thanks, the gold elves said to give you this for that.")
+       force_me("say Thanks, the gold elves said to give you this for that.");
+       obj->remove();
        return;
     }
    case "shell shield":{
        new(OBJ"sheep_hat")->move(TO);
        force_me("give hat to "+name);
-       force_me("say Thanks, the gold elves said to give you one of these for that.")
+       force_me("say Thanks, the gold elves said to give you one of these for that.");
+       obj->remove();
+       return;
+    }
+   case "Stingray spear":{
+       new(OBJ"c_blade")->move(TO);
+       force_me("give sword to "+name);
+       force_me("say Thanks, take this huge thing.  It is big so it has to be good!");
+       obj->remove();
        return;
     }
 	 break;}
 	 
    tell_room(ETO,"The Sea Elf puts the meat away and hands you some money.");
    
-   force_me("say Thanks for helping.  Trying to get those things caught in a trap is proving to be impossible but they look really tasty!");
+   force_me("say Thanks for helping.  Trying to get those "+
+   "things caught in a trap is proving to be impossible but they look really tasty!");
   
    force_me("emote gets a sack of gold.");
 

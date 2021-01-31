@@ -43,7 +43,10 @@ void set_sayings(mapping s){
 }
 
 void report(string str){
+<<<<<<< HEAD
   return;  //THIS FUNCTION ONLY NEEDED FOR DEBUGGING
+=======
+>>>>>>> 82410b7113c9a8c74870f9bd2def95733eef565d
   "/d/atoyatl/reporter_d.c"->report("lujke", str);
 }
 

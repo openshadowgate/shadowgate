@@ -1,13 +1,13 @@
-//Updated due to the addition of a jail in Antioch. Kismet. 
-//Ready to be installed: Proper path is: /d/antioch/antioch2/rooms/street1 Remove this line. Kismet. 
+//Updated due to the addition of a jail in Antioch. Kismet.
+//Ready to be installed: Proper path is: /d/antioch/antioch2/rooms/street1 Remove this line. Kismet.
 
 #include <std.h>
-#include "../antioch.h" 
+#include "../antioch.h"
 #include <daemons.h>
 
 inherit CVAULT;
 
-void create() 
+void create()
 {
    set_monsters( ({ "/d/antioch/antioch2/mons/patrol_guard", }), ({ roll_dice(1, 4) + 1 }));
    ::create();
@@ -17,10 +17,8 @@ void create()
 	set_property("light",2);
 	set_short("A cobbled street");
 	set_long("A cobbled street.\n"+
-"You are standing just inside the impressive gates of the New City of Antioch. The city is bustling with life, yet the thoroughfare is kept neat and relatively clean. To the west, there is a square with a large tree in its center, behind which looms the city jail. The cobblestone street leads you further north, towards a busy intersection, where you can see an entrance to the guard tower. Opposite the tower, you can barely make out a plaque with the symbol of a Healer engraved onto it.");
-	set("night long",
-	"A cobbled street.\n"+
-"You are standing just inside the impressive gates of the New City of Antioch. Warm light spills forth from many doorways to help light the way, and a street light is posted at the intersection up north. To the west, there is a square with a large tree in its center, behind which looms the city jail. The cobblestone street leads you further north, towards a busy intersection, where you can see an entrance to the guard tower. Opposite the tower, you can barely make out a plaque with the symbol of a Healer engraved onto it.");
+"%^WHITE%^You are standing just inside the impressive %^BOLD%^%^ORANGE%^gates%^RESET%^%^WHITE%^ of the %^BOLD%^%^ORANGE%^New %^WHITE%^C%^ORANGE%^i%^WHITE%^t%^WHITE%^y %^ORANGE%^of %^ORANGE%^An%^WHITE%^t%^ORANGE%^i%^WHITE%^o%^ORANGE%^ch.%^RESET%^%^WHITE%^ The city is bustling with life, yet the thoroughfare is kept neat and relatively clean. To the west, there is a %^BOLD%^%^BLACK%^s%^BLACK%^q%^BLACK%^u%^BLACK%^a%^BLACK%^r%^BLACK%^e%^RESET%^%^WHITE%^ with a large tree in its center, behind which looms the city jail. The %^BOLD%^%^BLACK%^c%^BLACK%^obble%^BLACK%^s%^BLACK%^tone%^RESET%^%^WHITE%^ street leads you further north, towards a busy intersection, where you can see an entrance to the %^BOLD%^%^BLACK%^guard %^BLACK%^to%^BLACK%^w%^BLACK%^er.%^RESET%^%^WHITE%^ Opposite the tower, you can barely make out a %^BOLD%^%^WHITE%^p%^WHITE%^l%^WHITE%^a%^ORANGE%^que%^RESET%^%^WHITE%^ with the symbol of a Healer engraved onto it.
+");
     set_smell("default","There is a faint herbal scent in the air.");
     if(query_night() == 1) {
         set_listen("default","You hear the sounds of a bustling city all around.");
@@ -58,5 +56,3 @@ int go_east()
 		"/d/antioch/antioch2/rooms/gates"->set_dir("east");
         return 1;
 }
-
-		

@@ -181,6 +181,12 @@ int cmd_discern(string str)
                 }
             }
         }
+        if (obj->query_property("finesse")) {
+            write("%^BOLD%^%^ORANGE%^Weapon finesse%^RESET%^ can be used with it.");
+        }
+        if (obj->query_property("double weapon")) {
+            write("%^WHITE%^It is a %^BOLD%^%^ORANGE%^double weapon%^RESET%^.");
+        }
         write("");
         if (!obj->query_weapon_prof()) {
             write("%^WHITE%^It has %^BOLD%^%^GREEN%^no proficiency set.%^RESET%^");

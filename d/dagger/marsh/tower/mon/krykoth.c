@@ -27,7 +27,7 @@ void create() {
     set_size(3);
     set_wielding_limbs(({"right hand","left hand"}));
     set_overall_ac(-8);
-set_property("magic",1);
+
     set_hp(165);
     set_property("no bump",1);
     set_mob_magic_resistance("average");
@@ -81,13 +81,13 @@ int moves() {
         "and "+targ->query_cap_name()+" screams out in "
         "pain!%^RESET%^"
     ,targ);
-    targ->do_damage("head",roll_dice(5,8));
+    targ->cause_typed_damage(targ, "head",roll_dice(5, 8),"mental");
     return 1;
     case 3:
     for(i=0;i<4;i++) {
         say(
             "%^CYAN%^The krykoth mutters a guttural oath of healing to "
-            "Lloth.%^RESET%^"
+            "the lady of spiders.%^RESET%^"
         );
         TO->add_hp(roll_dice(2,3));
     }
@@ -99,7 +99,7 @@ int moves() {
         "%^BOLD%^%^GREEN%^The krykoth lashes out with his claws and "
         "slashs "+targ->query_cap_name()+" across the face!%^RESET%^"
     ,targ);
-    targ->do_damage("head",roll_dice(4,10));
+    targ->cause_typed_damage(targ, "head",roll_dice(4, 10),"slashing");
     return 1;
     case 4:
     tell_object(targ,
@@ -110,7 +110,8 @@ int moves() {
         "%^BOLD%^%^GREEN%^The krykoth lashes out with his claws and "
         "slashs "+targ->query_cap_name()+" across the face!%^RESET%^"
     ,targ);
-    targ->do_damage("head",roll_dice(3,6));
+
+    targ->cause_typed_damage(targ, "head",roll_dice(3, 6),"slashing");
     TO->force_me("say You Fool! I will take you to the Abyss!");
     tell_object(targ,
         "%^BOLD%^%^BLUE%^The krykoth rears back and slams his horned "
@@ -122,7 +123,8 @@ int moves() {
         "slams his skull into "+targ->query_cap_name()+"'s "
         "forehead!%^RESET%^"
     ,targ);
-    targ->do_damage("head",roll_dice(3,10));
+
+    targ->cause_typed_damage(targ, "head",roll_dice(3, 10),"bludgeoning");
     targ->set_paralyzed(22,"You are stunned by the blow!");
     TO->force_me("say How do you like that puny mortal!");
     tell_object(targ,
@@ -134,7 +136,7 @@ int moves() {
         "out with his claws slicing "
         +targ->query_cap_name()+"'s chest wide open!%^RESET%^"
     ,targ);
-    targ->do_damage("torso",roll_dice(6,4));
+    targ->cause_typed_damage(targ, "torso",roll_dice(6, 4),"slashing");
     TO->force_me("roar");
     return 1;
   }
@@ -168,7 +170,7 @@ int fire_fun() {
             " screams out as the flames burn "
             "their body!%^RESET%^"
         ,sucker);
-        sucker->do_damage("torso",roll_dice(5,10));
+        sucker->cause_typed_damage(sucker, "torso",roll_dice(5, 10),"fire");
         }
     }
     return 1;

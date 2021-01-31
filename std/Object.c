@@ -350,7 +350,7 @@ void UpdateBonuses(object possessor, string which)
         return;
     }
     if (!living(TO)) {
-        if (TO->is_armor()) {
+        if (TO->is_armour()) {
             possessor->ApplyObjectBonuses(TO, possessor, which, "wear");
         }
         if (TO->is_weapon()) {
@@ -656,6 +656,7 @@ mixed query_property(string prop)
         num += props[prop];
         return (num + EQ_D->gear_bonus(TO, "magic resistance"));
     }
+
     if (prop == "no death") {
         if (TO->is_undead()) {
             return 1;
@@ -670,11 +671,21 @@ mixed query_property(string prop)
             return 1;
         }
     }
+
     if (prop == "no disarm") {
         if (FEATS_D->usable_feat(TO, "weapon mastery")) {
             return 1;
         }
     }
+
+    if (prop == "sunlight_umbrella") {
+        if (FEATS_D->usable_feat(TO, "mask of mortality")) {
+            return 1;
+        }
+        num += props[prop];
+        return num;
+    }
+
     if (prop == "negative energy affinity") {
         if (TO->is_undead()) {
             return 1;
@@ -1595,7 +1606,7 @@ void init()
     add_action("__Read", "read");
     add_action("__Use", "use");
     if (!TO->query_property("repairtype")) {
-        if (!TO->is_instrument() && !TO->is_armor() && !TO->is_weapon()) {
+        if (!TO->is_instrument() && !TO->is_armour() && !TO->is_weapon()) {
             TO->set_property("repairtype", ({ "tailor", "jewel", "woodwork", "leatherwork" }));
         }
     }
@@ -1620,7 +1631,7 @@ int move(mixed dest)
     i = move::move(dest);
     if (objectp(TO)) {
         if (objectp(ETO) && living(ETO)) {
-            if (intp(scaled = "/daemon/user_d.c"->get_scaled_level(ETO)) && (string)TO->query("scaledfor") == (string)ETO->query_true_name()) {
+            if (intp(scaled = USER_D->get_scaled_level(ETO)) && (string)TO->query("scaledfor") == (string)ETO->query_true_name()) {
                 TO->set("scaledlevel", scaled);
             }
         }
@@ -1926,7 +1937,7 @@ void __ActuallyUnwield()
     }
     if (TO->query_property("funwield")) {
         unwieldf = TO->query_unwield();
-        f = (: call_other, TO, unwieldf:);
+        f = (: call_other, TO, unwieldf :);
         if ((!"/adm/daemon/shutdown_d"->shuttingDown()) && (query_verb() != "quit") && interactive(ETO)) {
             catchbug = catch(answer = (*f)());
             if (catchbug) {
@@ -1935,7 +1946,7 @@ void __ActuallyUnwield()
             if (!answer) {
                 return 1;
             }
-        } else {
+        }else {
             if (!(*f)()) {
                 return 1;
             }
@@ -1949,13 +1960,17 @@ void __ActuallyUnwield()
     if (stringp(unwieldf) && !query_property("funwield")) {
         message("my_action", unwieldf, wielded);
     }else {
-        message("my_action", "You unwield " + query_short() + ".",
+        if (!wielded->query_property("silent_wield")){
+            message("my_action", "You unwield " + query_short() + ".",
                 wielded);
+        }
     }
     if (objectp(environment(wielded))) {
-        message("other_action", (string)wielded->query_cap_name() +
+        if (!wielded->query_property("silent_wield")) {
+            message("other_action", (string)wielded->query_cap_name() +
                 " unwields " + query_short() + ".", environment(wielded),
                 ({ wielded }));
+        }
     }
     set_not_inhand();
 }

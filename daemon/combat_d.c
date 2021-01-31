@@ -51,8 +51,8 @@ void restore_damage_tracker()
 
 varargs int extra_hit_calcs(object attacker, object victim, object weapon, string limb)
 {
-    object env;
-    int ShieldMissChance, MissChance, AttackerMissChance;
+    object env, rider, defender;
+    int ShieldMissChance, MissChance, AttackerMissChance, mount;
     if (!objectp(attacker)) {
         return 1;
     }
@@ -62,8 +62,18 @@ varargs int extra_hit_calcs(object attacker, object victim, object weapon, strin
     if (victim->query_paralyzed()) {
         return 1;
     }
+    if (victim->is_animal()) {
+        rider = (object)victim->query_current_rider();
+        if (objectp(rider)) {
+            mount = 1;
+        }
+    }
     MissChance = (int)victim->query_missChance();
-    ShieldMissChance = (int)victim->query_shieldMiss();
+    if (mount && FEATS_D->usable_feat(rider, "mounted shield")) {
+        ShieldMissChance = (int)rider->query_shieldMiss();
+    }else {
+        ShieldMissChance = (int)victim->query_shieldMiss();
+    }
     AttackerMissChance = (int)attacker->query_property("noMissChance");
     //attacker has a property set so that they cannot miss - Saide
     if (AttackerMissChance) {
@@ -98,8 +108,13 @@ varargs int extra_hit_calcs(object attacker, object victim, object weapon, strin
             return 1;
         }
         if (ShieldMissChance >= roll_dice(1, 100)) {
+            if (mount) {
+                defender = rider;
+            }else {
+                defender = victim;
+            }
             if (living(attacker)) {
-                tell_object(attacker, "%^RESET%^%^BOLD%^Your attack is deflected off of " + victim->QCN + "'s "
+                tell_object(attacker, "%^RESET%^%^BOLD%^Your attack is deflected off of " + defender->QCN + "'s "
                             "shield!%^RESET%^");
                 attacker->delete("featMiss");
                 attacker->set("featMiss", victim->QCN + " deflected your");
@@ -107,27 +122,21 @@ varargs int extra_hit_calcs(object attacker, object victim, object weapon, strin
                             "shield!%^RESET%^");
 
                 if (objectp(env)) {
-                    tell_room(env, "%^RESET%^%^BOLD%^" + victim->QCN + " deflects " + attacker->QCN + "'s attack with "
-                              "" + victim->QP + " shield!%^RESET%^", ({ attacker, victim }));
+                    tell_room(env, "%^RESET%^%^BOLD%^" + defender->QCN + " deflects " + attacker->QCN + "'s attack with "
+                              "" + defender->QP + " shield!%^RESET%^", ({ attacker, defender }));
                 }
-                if (FEATS_D->usable_feat(victim, "counter")) {
-                    if (random(4)) {
-                        victim->counter_attack(victim);
-                    }
-                }
-                return 0;
             }else {
                 tell_object(victim, "%^RESET%^%^BOLD%^You deflect the attack with your shield!%^RESET%^");
                 if (objectp(env)) {
-                    tell_room(env, "%^RESET%^%^BOLD%^" + victim->QCN + " deflects the attack with " + victim->QP + " shield!%^RESET%^", ({ victim }));
+                    tell_room(env, "%^RESET%^%^BOLD%^" + defender->QCN + " deflects the attack with " + defender->QP + " shield!%^RESET%^", ({ defender }));
                 }
-                if (FEATS_D->usable_feat(victim, "counter")) {
-                    if (random(4)) {
-                        victim->counter_attack(victim);
-                    }
-                }
-                return 0;
             }
+            if (FEATS_D->usable_feat(victim, "counter")) {
+                if (random(4)) {
+                    victim->counter_attack(victim);
+                }
+            }
+            return 0;
         }
         return 1;
     }
@@ -300,22 +309,6 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     }
 
     resist_perc = (int)targ->query_resistance_percent(type);
-    /*
-    //Venger: living creatures are healed with positive energy
-    //undead and exceptions creatures are healed with negative energy
-    //now let's change all spells to "deal" damage
-    if (type == "positive energy") {
-        if (!targ->query_property("negative energy affinity")) {
-            resist_perc += 200;
-        }
-    }
-    if (type == "negative energy") {
-        if (targ->query_property("heart of darkness") ||
-            targ->query_property("negative energy affinity")) {
-            resist_perc += 200;
-        }
-    }
-    */
 
     resist = (int)targ->query_resistance(type);
 
@@ -450,6 +443,16 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
                 }
 
                 reduction = (int)targ->query_property("damage resistance");
+                
+                if(PLAYER_D->check_aura(targ, "justification") == 2)
+                {
+                    if(PLAYER_D->opposed_alignment(targ, attacker))
+                    {
+                        reduction += 5;
+                        if(FEATS_D->usable_feat("champion"))
+                            reduction += 5;
+                    }
+                }
 
                 if (attacker->query_property("magic")) {
                     mod = (int)attacker->query_property("magic") * 10;
@@ -497,7 +500,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 void check_extra_abilities(object attacker, object target, object weapon, int crit_hit)
 {
     string ename, pname, enhance_msg, target_align;
-    int effect_chance, enhance_dmg, crit_mult, enhance_chance, is_main_hand, i;
+    int effect_chance, enhance_dmg, crit_mult, enhance_chance, is_main_hand, effective_level, i;
     object room, * weapons;
     string* elements, * actions, * bursts, * colors, * alignments, * enemy_alignments, * align_text, * a_colors;
 
@@ -543,6 +546,13 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
                     tell_room(environment(attacker), "%^BOLD%^" + attacker->QCN + " unleashes a flash of blinding white light that ends " + target->QCN + "'s undead existence!%^RESET%^", ({ target, attacker }));
                     target->set_hp(-100);
                 }
+                else
+                {
+                    tell_object(attacker, "%^BOLD%^You unleash a flash of searing energy that burns " + target->QCN + "'s very essence!%^RESET%^");
+                    tell_object(target, "%^BOLD%^" + attacker->QCN + " unleashes a flash of searing white light burns your very essence!RESET%^");
+                    tell_room(environment(attacker), "%^BOLD%^" + attacker->QCN + " unleashes a flash of searing energy that burns " + target->QCN + "'s undead essence!%^RESET%^", ({ target, attacker }));
+                    target->cause_typed_damage(target, target->return_target_limb(), roll_dice(1, 6), "divine");
+                }
             }
         }
         if (weapon->is_lrweapon() &&
@@ -552,17 +562,16 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             switch (element) {
             case "acid":
                 tell_room(environment(target), "%^GREEN%^The projectile explodes with ooze of acid all over " + target->QCN + "%^RESET%^", ({ target }));
-                tell_object(target, "%^GREEN%^The missile explodes with ooze of acid all over you%^RESET%^");                  break;
-
+                tell_object(target, "%^GREEN%^The missile explodes with ooze of acid all over you%^RESET%^");
+                break;
             case "cold":
                 tell_room(environment(target), "%^BLUE%^The projectile explodes with sharp shards of ice that pierce " + target->QCN + "%^RESET%^", ({ target }));
                 tell_object(target, "%^GREEN%^The missile explodes with ooze of acid all over you%^RESET%^");
                 break;
-
             case "sonic":
                 tell_room(environment(target), "%^CYAN%^The projectile explodes sonic scream that shatters " + target->QCN + "%^RESET%^", ({ target }));
-                tell_object(target, "%^GREEN%^The missile explodes with sonic scream that shatters you%^RESET%^");             break;
-
+                tell_object(target, "%^GREEN%^The missile explodes with sonic scream that shatters you%^RESET%^");
+                break;
             default:
                 tell_room(environment(target), "%^RED%^The projectile explodes and scorches " + target->QCN + "%^RESET%^", ({ target }));
                 tell_object(target, "%^GREEN%^The missile explodes and burns you!%^RESET%^");
@@ -592,7 +601,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
     weapons = attacker->query_wielded();
     if (sizeof(weapons))
     {
-        if (weapons[0] == weapon){ is_main_hand = 1; }        
+        if (weapons[0] == weapon){ is_main_hand = 1; }
     }
     if (!attacker->query_property("shapeshifted") &&
         objectp(weapon) &&
@@ -614,9 +623,10 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
         bursts = ({ "flames", "ice", "lightning", "sounds", "acid" });
         colors = ({ "fire red", "ice blue", "lightning yellow", "lightning yellow", "acid green" });
 
-        enhance_chance = attacker->query_guild_level("magus");
-        enhance_chance += attacker->query_guild_level("paladin");
-        enhance_chance = 10 - enhance_chance / 7;
+        effective_level = attacker->query_prestige_level("magus");
+        effective_level += attacker->query_prestige_level("paladin");
+        effective_level += (attacker->query_level() - effective_level) / 2;
+        enhance_chance = 10 - effective_level / 7;
 
         for (i = 0; i < sizeof(elements); i++)
         {
@@ -625,10 +635,10 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
             if ((attacker->query_property(elements[i] + " en_dam") && effect_chance) ||
                 (attacker->query_property(elements[i] + " en_dam burst") && crit_hit)) {
                 enhance_msg = bursts[i];
-                enhance_dmg = roll_dice(1, 6);
+                enhance_dmg = roll_dice(1 + effective_level / 10, 6);
                 if (crit_hit && attacker->query_property(elements[i] + " en_dam burst")) {
                     enhance_msg = actions[i] + " of " + bursts[i];
-                    enhance_dmg += roll_dice(crit_mult, 10);
+                    enhance_dmg += roll_dice(crit_mult * (1 + effective_level / 10), 10);
                 }
                 tell_object(attacker, CRAYON_D->color_string("You release " + enhance_msg + " at " + target->QCN + "!", colors[i]));
                 tell_object(target, CRAYON_D->color_string(attacker->QCN + " releases " + enhance_msg + "  through you!", colors[i]));
@@ -648,7 +658,7 @@ void check_extra_abilities(object attacker, object target, object weapon, int cr
                 effect_chance &&
                 strsrch(enemy_alignments[i], target_align + "") + 1) {
                 enhance_msg = align_text[i];
-                enhance_dmg = roll_dice(2, 6);
+                enhance_dmg = weapon->query_wc() * (1 + effective_level / 10); //scaling as bane
                 tell_object(attacker, CRAYON_D->color_string("You unleash your " + enhance_msg + " at " + target->QCN + "!", a_colors[i]));
                 tell_object(target, CRAYON_D->color_string(attacker->QCN + " unleashes " + attacker->query_possessive() + " " + enhance_msg + " through you!", a_colors[i]));
                 tell_room(environment(attacker), CRAYON_D->color_string(attacker->QCN + " unleashes " + attacker->query_possessive() + " " + enhance_msg + " at " + target->QCN + "!", a_colors[i]), ({ target, attacker }));
@@ -752,7 +762,7 @@ int crit_damage(object attacker, object targ, object weapon, int size, int damag
         if (objectp(targ) &&
             attacker->is_class("warmaster") &&
             FEATS_D->usable_feat(attacker, "skull collector") &&
-            attacker->is_wielding("two handed") &&
+            attacker->validate_combat_stance("two hander") &&
             targ->query_hp_percent() < roll_dice(3, 6) &&
             targ->query_hp_percent() > 0 &&
             !targ->query_property("no death") &&
@@ -836,7 +846,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
     int res, eff_ench, ench;
     int i, j, mysize;
     int speed, enchantment, fired = 0, cant_shot=0, bonus_hit_damage = 0;// added for new stamina formula -Ares
-    object* armor, shape, ammo;
+    object* armor, shape, ammo, paladin;
     string ammoname;
 
     if (!objectp(attacker)) {
@@ -873,7 +883,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
                 mysize++;             //run small creatures as normal size please.
             }
             mysize -= (int)weapon->query_size();
-            if (FEATS_D->usable_feat(attacker, "weapon finesse") && (mysize >= 0)) { // if has-feat & weapon is smaller than / same size as user - Saide, November 23rd, 2017
+            if (FEATS_D->usable_feat(attacker, "weapon finesse") && ((mysize >= 0) || weapon->query_property("finesse"))) { // if has-feat & weapon is smaller than / same size as user - Saide, November 23rd, 2017 or weapon has the property - Venger dec20
                 damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("dexterity"));
             }else {
                 damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("strength"));
@@ -908,6 +918,22 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
         }
         damage += COMBAT_D->unarmed_enchantment(attacker);
     }
+    
+    paladin = targ->query_property("paladin smite");
+    
+    if(objectp(paladin))
+    {
+        
+        //Paladin smite target takes additional damage based on CHA mod
+        //Smite debuff lasts a few rounds
+        if(attacker->query_guild_level("paladin") && paladin == attacker)
+            damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("charisma"));
+        
+        //Aura of Fury adds smite bonus of +2 to rest of party for duration
+        if(PLAYER_D->check_aura(attacker, "fury") == 2)
+            damage += 2;
+    }   
+    
     damage = damage_done(attacker, weapon, damage, fired);
     if (!objectp(targ)) {
         return;
@@ -945,10 +971,10 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
             continue;
         }
         mod = armor[i]->do_struck(damage, weapon, attacker);
-        if (mod <= 0) {
+        if (mod < 0) {
             damage += mod;
         }
-        if (mod > 0) {
+        if (mod >= 0) {
             damage = mod;
         }
     }
@@ -1033,26 +1059,24 @@ int damage_done(object attacker, object weap, int damage, int isranged)
             if (FEATS_D->usable_feat(attacker, "deadeye")) {
                 prof = to_int(prof * 1.50);
             }
-        }else if (sizeof(wielded) == 2) {
-            if (objectp(wielded[0]) && objectp(wielded[1])) {
-                if (wielded[0] == wielded[1] && FEATS_D->usable_feat(attacker, "strength of arm")) {
-                    prof = to_int(prof * 1.50);
-                }
+        }else if (attacker->validate_combat_stance("two hander")) {
+            if (FEATS_D->usable_feat(attacker, "strength of arm")) {
+                prof = to_int(prof * 1.50);
             }
-        }else if (sizeof(wielded) == 1) {
-            if (objectp(wielded[0])) {
-                if ((int)attacker->query_shieldMiss() && FEATS_D->usable_feat(attacker, "counter")) {
-                    prof = to_int(prof * (1.25 + ((int)attacker->query_property("shieldwall") * 0.10)));
-                }
-                if (FEATS_D->usable_feat(attacker, "opportunity strikes") && !attacker->is_wearing_type("shield")) {
-                    prof = to_int(prof * 1.60);
-                }
-                if(FEATS_D->usable_feat(attacker, "artful precision")) {
-                    prof = to_int(prof * 1.10);
-                }
+        }else if (attacker->validate_combat_stance("weapon and shield")) {
+            if (FEATS_D->usable_feat(attacker, "counter") && (int)attacker->query_shieldMiss()) {
+                prof = to_int(prof * (1.25 + ((int)attacker->query_property("shieldwall") * 0.10)));
+            }
+        }else if (attacker->validate_combat_stance("one hander")) {
+            if (FEATS_D->usable_feat(attacker, "opportunity strikes")) {
+                prof = to_int(prof * 1.60);
+            }
+            if (FEATS_D->usable_feat(attacker, "artful precision")) {
+                prof = to_int(prof * 1.20);
             }
         }
     }
+
     //prof += (random(30) - random(30)); //Commenting out because I see no logical reason to add variance here when it's already handled through weapon die rolls - Odin 4/30/20
 
     if (prof == 0) {
@@ -2429,7 +2453,10 @@ void ok_to_wield(object who)
                 Size = 1;
             }
 
-            if ((wielded[0]->query_size() > Size) && (wielded[1]->query_size() > Size) && (wielded[0] != wielded[1])) {
+            if (((wielded[0]->query_size() > Size) &&
+                    (wielded[1]->query_size() > Size) &&
+                    who->validate_combat_stance("dual wield")) ||
+                who->validate_combat_stance("double weapon")) {
                 if (FEATS_D->usable_feat(who, "ambidexterity")) {
                     if (sizeof(worn)) {
                         tell_object(who, "You scramble to hang on to your " + wielded[0]->query_name() + " and "
@@ -2584,14 +2611,14 @@ int check_avoidance(object who, object victim)
        avoid += ({"TYPE_PARRY"});
        //check for counterattack
        if (FEATS_D->usable_feat(victim, "masters parry")
-           && victim->is_wielding("dual wielding")) {
+           && victim->validate_combat_stance("dual wield")) {
            if (random(4)) {
                // should happen frequently as it's a level 47 ability
                counterAttack = 1;
            }
        }
        if(FEATS_D->usable_feat(victim, "elaborate parry")
-          && victim->is_wielding("one handed") && random(3))
+          && victim->validate_combat_stance("one hander") && random(4))
           counterAttack = 1;
     }
     if (victim->query_scrambling()) {
@@ -2985,9 +3012,9 @@ void internal_execute_attack(object who)
 
         if (roll >= (21 - temp1)) { // if threat range of weapon is 2, then we have a crit threat on a roll of 19 or 20
             if (!(roll_dice(1, 100) > fortification) && victim->query_property("armor enhancement timer")) { // fortification chance to avoid critical
-                tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.");
-                tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but your armor produces a magical force that protects your vital areas.");
-                tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.", ({ victim, who }));
+                tell_object(who, "%^BOLD%^%^YELLOW%^You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.%^RESET%^");
+                tell_object(victim, "%^BOLD%^%^YELLOW%^You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but your armor produces a magical force that protects your vital areas.%^RESET%^");
+                tell_room(EWHO, "%^BOLD%^%^YELLOW%^" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.%^RESET%^", ({ victim, who }));
             }
             else {
                 critical_roll = roll;
@@ -3061,19 +3088,19 @@ void internal_execute_attack(object who)
         who->set_property("stabs_available", -1);
         if (victim->query_property("stab_resilience")) {
             victim->set_property("stab_resilience", -1);
-            tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + " seems unaffected.");
-            tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but you are resilient against the worst of the attack.");
-            tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + " seems unaffected.", ({ victim, who }));
+            tell_object(who, "%^BOLD%^%^YELLOW%^You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + " seems unaffected.%^RESET%^");
+            tell_object(victim, "%^BOLD%^%^YELLOW%^You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but you are resilient against the worst of the attack.%^RESET%^");
+            tell_room(EWHO, "%^BOLD%^%^YELLOW%^" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + " seems unaffected.%^RESET%^", ({ victim, who }));
         }
         else if (!(roll_dice(1, 100) > fortification) && victim->query_property("armor enhancement timer")) {// fortification chance to avoid stab
-            tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.");
-            tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but your armor produces a magical force that protects your vital areas.");
-            tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.", ({ victim, who }));
+            tell_object(who, "%^BOLD%^%^YELLOW%^You successfully position yourself to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.%^RESET%^");
+            tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable, but your armor produces a magical force that protects your vital areas.%^RESET%^");
+            tell_room(EWHO, "%^BOLD%^%^YELLOW%^" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable, but " + victim->QS + "'s armor produces a magical force that protects " + victim->QP + " vital areas.%^RESET%^", ({ victim, who }));
         }
         else {
-            tell_object(who, "You successfully position yourself to strike where " + victim->QCN + " is vulnerable.");
-            tell_object(victim, "You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable.");
-            tell_room(EWHO, "" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable.", ({ victim, who }));
+            tell_object(who, "%^BOLD%^%^YELLOW%^You successfully position yourself to strike where " + victim->QCN + " is vulnerable.%^RESET%^");
+            tell_object(victim, "%^BOLD%^%^YELLOW%^You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable.%^RESET%^");
+            tell_room(EWHO, "%^BOLD%^%^YELLOW%^" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable.%^RESET%^", ({ victim, who }));
             "/cmds/mortal/_stab"->scramble_stab(who, victim);
         }
     }

@@ -40,7 +40,7 @@ void create (){
    set_func_chance(30);
    set_emotes(5, ({"The captain takes a huge bite of meat.","The captain burps loudly."}),0);
 //   set_property("full attacks",1);
-   set("aggresive",3);
+   set("aggressive",3);
    set_property("swarm",1);
    add_money("gold", random(300)+100);
    add_money("platinum", random(30)+10);

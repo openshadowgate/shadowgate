@@ -28,6 +28,5 @@ void create(){
   set_damage(2,8);
   set_attack_limbs( ({"teeth","tail","left foreclaw","right foreclaw"}) );
   set_base_damage_type("slashing");
-  set_base_damage_type("slashing"); 
   set_property("knock unconscious",1);
 }

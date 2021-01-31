@@ -9,6 +9,7 @@ void create() {
     ::create();
    set_terrain(WOOD_BUILDING);
    set_travel(DIRT_ROAD);
+   set_property("indoors", 1);
     set("short","Foyer of a mysterious house");
     set("long","%^BOLD%^%^GREEN%^Foyer of a mysterious house%^RESET%^
 You see a mysterious wooden %^ORANGE%^house %^WHITE%^standing right there. There are several %^CYAN%^windows%^WHITE%^. Some smoke comes out of the %^MAGENTA%^chimney %^WHITE%^on top of the house. There is a very dim light coming out of a large %^ORANGE%^window%^WHITE%^. The entrance %^ORANGE%^doorway %^WHITE%^is in front of you. 

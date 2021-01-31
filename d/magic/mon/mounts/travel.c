@@ -1,6 +1,6 @@
 // selune: travel domain, faithful mount. Nienne, 05/07.
 #include <std.h>
-inherit "/std/riding_animal.c";
+inherit "/std/riding_animal";
 
 void create(){
     ::create();
@@ -12,10 +12,6 @@ void create(){
     set_level(10);
     set_value(0);
     set_race("horse");
-    if(random(2))
-        set_gender("female");
-    else
-        set_gender("male");
     set_body_type("equine");
     set_attack_limbs( ({"right forehoof", "left forehoof"}) );
     set_size(3);

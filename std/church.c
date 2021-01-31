@@ -209,7 +209,7 @@ int pray()
         string myclass;
         int charlvl;
 
-        "/daemon/user_d.c"->scale_level_to(TP, TP->query_adjusted_character_level());
+        USER_D->scale_level_to(TP, TP->query_adjusted_character_level());
         /* Subtracting exp to next level  */
         thelevel = TP->query_adjusted_character_level();
 
@@ -354,8 +354,8 @@ int __Read_me(string str)
     }
     write("%^CYAN%^You can ask divines to return you to the true life here:%^RESET%^
 
-  %^ORANGE%^<pray>%^RESET%^                    Return to life, keeping the D flag
-  %^ORANGE%^<return>%^RESET%^                  Return to life, without the D flag
+  %^ORANGE%^<pray>%^RESET%^                    Return to life, with %^BOLD%^%^RED%^Gr%^RESET%^ace time protection from player kill
+  %^ORANGE%^<return>%^RESET%^                  Return to life, without the %^BOLD%^%^RED%^Gr%^RESET%^ flag
 
 %^MAGENTA%^The church performs the following tasks, most for a fee of course:%^RESET%^
 
@@ -425,6 +425,17 @@ int clear_domains(string str)
     return 1;
 }
 
+int is_alignment_domain(string domain)
+{
+    string * align_domains = ({"law", "chaos", "good", "evil"});
+
+    if (member_array(domain, align_domains) != -1) {
+        return 1;
+    }
+
+    return 0;
+}
+
 int select_domain(string str)
 {
     string* possible_domains, * player_domains, * info, player_deity, temple_deity, selection, which;
@@ -477,7 +488,7 @@ int select_domain(string str)
         tell_object(TP, "%^BOLD%^%^WHITE%^You have chosen to specialize in the " +
                     "%^YELLOW%^" + str + "%^BOLD%^%^WHITE%^!%^RESET%^");
         TP->set("monk way", str);
-        "/daemon/user_d.c"->init_ki(TP);
+        USER_D->init_ki(TP);
         return 1;
         break;
     case "domain":
@@ -513,7 +524,19 @@ int select_domain(string str)
             return 1;
         }
 
-        if (TP->query("new_class_type") && FEATS_D->usable_feat(TP, "divine domain")) {
+        if (is_alignment_domain(selection)) {
+            string tmpdom;
+
+            foreach(tmpdom in player_domains)
+            {
+                if (is_alignment_domain(tmpdom)) {
+                    tell_object(TP, "You can not select more than one alignment domain, as you already have " + tmpdom + " domain. Choose something else.");
+                    return 1;
+                }
+            }
+        }
+
+        if (FEATS_D->usable_feat(TP, "divine domain")) {
             if (!sizeof(player_domains)) {
                 TP->set_divine_domain(({ selection }));
                 tell_object(TP, "You have choosen to select the " + selection + " domain.\n");

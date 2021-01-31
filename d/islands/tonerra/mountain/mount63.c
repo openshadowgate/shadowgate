@@ -19,6 +19,8 @@ DESC
    );
    set_light(2);
    set_indoors(0);
+   set_terrain(OLD_MOUNTS);
+   set_travel(DIRT_ROAD);
    set_listen("default","The slight breeze stirs the small plants.");
    set_smell("default","The land has a charred smell about it.");
    set_items((["chair":"This chair looks like a sacraficial seat. The chair is meant to be sat it in."]));

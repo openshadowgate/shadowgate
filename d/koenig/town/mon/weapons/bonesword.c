@@ -27,10 +27,22 @@ void create()
 		"blades with such speed that they would whistle.");
    	set_property("lore difficulty",8);
 	set_hit((:TO,"hitme":));
-   	set_wield("%^BOLD%^%^BLUE%^The double bladed sword "+
-		"feels well balanced in your hands.");
-	set_unwield("%^BOLD%^%^BLUE%^You set aside the well "+
-		"balanced double bladed sword.");
+	set_wield((:TO,"wield_func":));
+	set_unwield((:TO,"unwield_func":));
+}
+
+int wield_fun() {
+	if (!ETO->query_property("silent_wield")) {
+		tell_object(ETO, "%^BOLD%^%^BLUE%^The double bladed sword feels well balanced in your hands.");
+	}
+	return 1;
+}
+
+int unwield_fun() {
+	if (!ETO->query_property("silent_wield")) {
+		tell_object(ETO, "%^BOLD%^%^BLUE%^You set aside the well balanced double bladed sword.");
+	}
+	return 1;
 }
 
 int hitme(object targ){

@@ -12,7 +12,7 @@ void init() {
    ::init();
    if(interactive(TP) && TP == environment(TO) && !wizardp(TP) && !owner) {
       owner = TPQN;
-      charges = 20 + random( (int)TP->query_level()/3 );
+      charges = 20 + random((int)TP->query_level() / 3);
    }
 }
 
@@ -58,8 +58,10 @@ int more_wield() {
             case 7:
             case 8:
             case 9:
-               tell_room(environment(ETO),"The %^RESET%^%^RED%^Firedoom "+
-                  "staff %^RESET%^makes a loud noise as if it cheers.");
+                if (!ETO->query_property("silent_wield")) {
+                    tell_room(environment(ETO), "The %^RESET%^%^RED%^Firedoom " +
+                        "staff %^RESET%^makes a loud noise as if it cheers.");
+                }
                return 1;
                break;
             default:

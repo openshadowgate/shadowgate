@@ -12,7 +12,8 @@ void create()
     feat_prereq("Disruptive, Fighter L10");
     feat_desc("You extend your wards, allowing yourself to make an attack of opportunity, sometimes two, whenever enemy casts a spell at you.
 
-If a character has both the spell counterstrike feat and the spellbreaker feat they will perform three attacks of opportunity.");
+%^BOLD%^N.B.%^RESET%^ If a character has both the spell counterstrike feat and the spellbreaker feat they will perform three attacks of opportunity.
+     Magus can select spellbreaker as one of his arcana feats from level 9.");
     permanent(1);
     allow_blind(1);
 }
@@ -34,12 +35,12 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-
     if (ob->is_class("magus") && file_exists("/std/class/magus.c")) {
         magus = (int)"/std/class/magus.c"->fighter_training(ob);
     }
     if (!FEATS_D->has_feat(ob, "disruptive") ||
-        ob->query_class_level("fighter") + magus < 10) {
+        !(ob->query_class_level("fighter") + magus >= 10 ||
+            ob->query_class_level("magus") >= 9)) {
         dest_effect();
         return 0;
     }

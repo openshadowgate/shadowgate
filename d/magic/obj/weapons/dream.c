@@ -25,7 +25,7 @@ int hit_func(object targ)
         tell_object(ETO, "%^CYAN%^Your whip lashes into " + targ->QCN + ", cutting into " + targ->QP + " flesh.");
         tell_object(targ, "%^CYAN%^%^" + ETO->QCN + "'s whip lashes into you, cutting into your flesh!");
         tell_room(environment(ETO), "%^CYAN%^%^" + ETO->QCN + "'s whip lashes into " + targ->QCN + ", cutting into " + targ->QP + " flesh!", ({ ETO, targ }));
-        targ->do_damage("torso", random(4) + 4);
-        return 1;
+  
+        return random(4)+4;
     }
 }

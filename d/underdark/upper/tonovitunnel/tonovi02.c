@@ -4,11 +4,11 @@ inherit VAULT;
 
 void create() {
     ::create();
-    set_property("indoors",1);  
+    set_property("indoors",1);
     set_property("light",1);
     set_travel(FOOT_PATH);
     set_terrain(ROCKY);
-    set_name("A earthen basement");    
+    set_name("A earthen basement");
     set_short("A earthen basement");
     set_long("%^RESET%^%^ORANGE%^You find yourself standing in what "
 "appears to be a basement carved out of the earth.  Thick timbers are set "
@@ -51,7 +51,10 @@ void create() {
     set_exits(([
       "west" : TUNNEL"tonovi01",
       "up" : "/d/dagger/tonovi/tower1",
+        "down":"/d/shadow/ratpaths/rooms/rp_p031_p010",
     ]));
+    set_invis_exits(({"down"}));
+    set_search("default", "You find a hatch with ladder leading down behind some rubble.");
     set_door("trapdoor","/d/dagger/tonovi/tower1","up",0);
     set_door_description("trapdoor", "%^BOLD%^%^BLACK%^This iron and wood door leads back up to the surface and out of the basement.%^RESET%^");
 }

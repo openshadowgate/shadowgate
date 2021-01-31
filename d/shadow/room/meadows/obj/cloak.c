@@ -17,7 +17,7 @@ CIRCE
    );
    set_lore(
 @CIRCE
-The Cape of the Ruby Heart was once rumored to have been an order from the Church of Lathander of hedonists that devoted themselves to the more sensual side of life.  The Church of Lathander though claims no ties to this rogue cluster of followers in the past.  The Ruby Hearts, as they were called, were wildly known for their healthy appetite for fine food, sensual pleasures and love of wine and liquor.  The Church of Lathander though denies any ties to this organization and the excesses they partook in.%^RESET%^
+The Cape of the Ruby Heart was once rumored to have been an order from the a lost church of hedonists that devoted themselves to the more sensual side of life.  The Church though claims no ties to this rogue cluster of followers in the past.  The Ruby Hearts, as they were called, were wildly known for their healthy appetite for fine food, sensual pleasures and love of wine and liquor.  The followers of dawn though denies any ties to this organization and the excesses they partook in.%^RESET%^
 CIRCE
    );
    set_property("lore difficulty",10);

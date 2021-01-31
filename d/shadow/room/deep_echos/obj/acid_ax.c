@@ -27,19 +27,26 @@ void create(){
   set_hit((:TO,"hit_func":));
   set_item_bonus("acid resistance",2);
 }
+
 int wield_func(){
-        tell_room(EETO,"%^GREEN%^"+ETOQCN+" grips the double "+
-           "axe and it starts dripping green fluid.",ETO);
-        tell_object(ETO,"%^GREEN%^The axe heads moisten with acid.");
-        return 1;
+    if (!ETO->query_property("silent_wield")) {
+        tell_room(EETO, "%^GREEN%^" + ETOQCN + " grips the double " +
+            "axe and it starts dripping green fluid.", ETO);
+        tell_object(ETO, "%^GREEN%^The axe heads moisten with acid.");
+    }
+    return 1;
 }
+
 int unwield_func(){
-        tell_room(EETO,"%^GREEN%^"+ETOQCN+" releases the axe "+
-           "and the acid dries up.",ETO);
-        tell_object(ETO,"%^GREEN%^"+
-		"When you unwield the axe, the acid dries.");
-        return 1;
+    if (!ETO->query_property("silent_wield")) {
+        tell_room(EETO, "%^GREEN%^" + ETOQCN + " releases the axe " +
+            "and the acid dries up.", ETO);
+        tell_object(ETO, "%^GREEN%^" +
+            "When you unwield the axe, the acid dries.");
+    }
+    return 1;
 }
+
 int hit_func(object targ){
      if(random(1000) < 250){
         tell_room(ETO, "%^GREEN%^"+ETOQCN+"'s "+

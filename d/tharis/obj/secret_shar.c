@@ -1,4 +1,4 @@
-//Coded by Circe 1/9/05 with desc by Shar
+//Coded by Circe 1/9/05 with desc by night
 #include <std.h>
 inherit OBJECT;
 
@@ -6,8 +6,8 @@ int count;
 void create(){
    ::create();
    set_name("perfume");
-   set_id(({"perfume","bottle of perfume","secrets of shar"}));
-   set_short("%^RESET%^%^MAGENTA%^Secrets of Shar%^RESET%^");
+   set_id(({"perfume","bottle of perfume","secrets of night"}));
+   set_short("%^RESET%^%^MAGENTA%^Secrets of Night%^RESET%^");
    set_long("%^MAGENTA%^In a purple crystal vial, a %^BOLD%^%^BLACK%^"+
       "dark liquid %^RESET%^%^MAGENTA%^is kept.  Opening the %^BOLD%^"+
       "%^BLACK%^jet stopper %^RESET%^%^MAGENTA%^on this bottler "+
@@ -24,7 +24,7 @@ void init(){
 
 
 int wear_per(string str){
-   if(str == "perfume" || str == "secrets of shar"){
+   if(str == "perfume" || str == "secrets of night"){
       if(count > 4){
          tell_object(TP,"The bottle of perfume is empty.");
          return 1;

@@ -15,15 +15,10 @@ void create() {
     set_light(1);
     set_indoors(0);
     set_name("The Royal Southern Road");
-    set_short("The Royal Southern Road");
-set_long(
-@THORN
-The Royal Southern Road takes its path through the center of this dark 
-forest.  The light of the sun is almost blotted out by the near-perfect 
-shade of the trees all round you.  The thick growth of bushes beneath 
-the trees looks as thought it might be hiding any number of 
-unsavory creatures.
-THORN
+    set_short("%^ORANGE%^Y%^BOLD%^%^ORANGE%^n%^RESET%^%^ORANGE%^tala %^ORANGE%^Pa%^BOLD%^%^ORANGE%^s%^RESET%^%^ORANGE%^s");
+    set_long(query_short() + "\n" +
+"%^GREEN%^Yntala pass takes its path through the center of this %^BOLD%^%^BLACK%^d%^RESET%^%^GREEN%^a%^BOLD%^%^BLACK%^r%^RESET%^%^GREEN%^k %^GREEN%^f%^GREEN%^o%^GREEN%^r%^BOLD%^%^BLACK%^es%^RESET%^%^GREEN%^t%^GREEN%^.%^GREEN%^ The light of the sun is almost blotted out by the near-perfect shade of the %^GREEN%^t%^GREEN%^r%^GREEN%^e%^GREEN%^e%^GREEN%^s%^GREEN%^ all round you. The thick growth of %^GREEN%^b%^BOLD%^%^BLACK%^us%^RESET%^%^GREEN%^h%^BOLD%^%^BLACK%^e%^RESET%^%^GREEN%^s%^GREEN%^ beneath the trees looks as thought it might be hiding any number of unsavory %^GREEN%^c%^GREEN%^r%^GREEN%^e%^BOLD%^%^BLACK%^a%^RESET%^%^GREEN%^t%^BOLD%^%^BLACK%^u%^RESET%^%^GREEN%^r%^GREEN%^e%^GREEN%^s%^BOLD%^%^BLACK%^.%^RESET%^
+"
 );
     set_exits(
               (["north" : "/d/darkwood/room/road7",

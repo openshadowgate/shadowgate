@@ -47,12 +47,22 @@ void setup(object thingy, string dest)
 
 void flystep(string destination, object flyee)
 {
+    int loaded;
+
     if (!objectp(flyee)) {
         TO->remove();
         return;
     }
 
-    if (!objectp(flroom) || !objectp(destobj)) {
+    if (!objectp(destobj)) {
+        destobj = find_object_or_load(destination);
+    }
+
+    //Forces a load on the destination
+    loaded = call_other(destobj, "???");
+
+    if (!objectp(flroom) || !objectp(destobj))
+    {
         flyee->move_player("/d/darkwood/room/road18");
         TO->remove();
         return;

@@ -274,6 +274,11 @@ int die(object ob){
       return 0;
    }
 
+    if (!random(5)) {
+        new("/d/common/obj/misc/tools/portable_smithy_bag.c")->move(TO);
+    }
+
+
    tell_room(ETO,"Intruder drops to his knees and begins to laugh "+
       "mockingly. \n");
    tell_room(ETO,"%^BOLD%^As Intruder's undead existence ends, he "+

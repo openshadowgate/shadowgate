@@ -60,7 +60,7 @@ void create()
       "%^BOLD%^You eat the last of the cookies, leaving not even a "+
          "crumb behind.%^RESET%^\n",
       "%^BOLD%^So much %^MAGENTA%^sweetness%^WHITE%^, as if you "+
-         "weren’t already sweet enough.%^RESET%^\n",
+         "weren't already sweet enough.%^RESET%^\n",
    }));
    set_your_mess(({
       "finishes the tea and looks invigorated!\n",

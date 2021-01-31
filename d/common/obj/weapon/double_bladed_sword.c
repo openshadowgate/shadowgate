@@ -1,5 +1,6 @@
 #include <std.h>
 inherit "/std/weapon";
+
 void create() {
    ::create();
    set_id(({"sword", "double bladed sword"}));
@@ -14,14 +15,14 @@ void create() {
    set_weight(15);
    set_size(3);
    set_value(50);
-   set_wc(2,8); //putting this a die higher than TT to reflect that we lack tech to make it usable as two weapons without needing ambidexterity
+   set_wc(1,8);
     set_type("slashing");
-   set_large_wc(2,8); //putting this a die higher than TT to reflect that we lack tech to make it usable as two weapons without needing ambidexterity
+   set_large_wc(1,8);
    set_weapon_prof("exotic");
    set_weapon_speed(10);
-
    set_critical_threat_range(2);
    set_critical_hit_multiplier(2);
    set_damage_type("slashing");
    set_property("repairtype",({"weaponsmith"}));
+   set_property("double weapon", 1);
 }

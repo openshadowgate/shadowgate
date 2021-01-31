@@ -16,13 +16,13 @@ void setup_manna_effects(object who, mapping tmp, int mod);
 void parse_mana_effects(object who, string type);
 void dest_effect()
 {
-    if(!objectp(PO)) 
-    {       
+    if(!objectp(PO))
+    {
         return;
     }
     setup_manna_effects(PO, (mapping)PO->query_property("eldebaro manna"), -1);
     PO->remove_property("eldebaro manna");
-    return;    
+    return;
 }
 
 void setup_manna_effects(object who, mapping tmp, int mod)
@@ -36,7 +36,7 @@ void setup_manna_effects(object who, mapping tmp, int mod)
     {
         who->remove_property("eldebaro manna");
         if(tmp["notified"]) tmp["notified"] = 1;
-        who->set_property("eldebaro manna", tmp);            
+        who->set_property("eldebaro manna", tmp);
         tell_object(who, "%^BOLD%^%^CYAN%^You feel the power of the manna changing you!%^RESET%^");
         who->set_property("spelled", ({TO}));
     }
@@ -44,10 +44,10 @@ void setup_manna_effects(object who, mapping tmp, int mod)
     {
         tell_object(who, "%^BOLD%^%^CYAN%^You feel the power of the manna leave you!%^RESET%^");
         map_delete(MANNA_EFFECTS, (string)who->query_true_name());
-        who->remove_property("eldebaro manna");        
-    }    
-    effects = keys(tmp);    
-    for(x = 0;x < sizeof(effects);x++) 
+        who->remove_property("eldebaro manna");
+    }
+    effects = keys(tmp);
+    for(x = 0;x < sizeof(effects);x++)
     {
         switch(effects[x])
         {
@@ -72,7 +72,7 @@ void setup_manna_effects(object who, mapping tmp, int mod)
         }
         continue;
     }
-    
+
 }
 
 void process_manna_effects()
@@ -89,15 +89,15 @@ void process_manna_effects()
             map_delete(FAKE_MANA_EFFECTS, people[x]);
             continue;
         }
-        //require 1d10 seconds to kick in... though this 
-        //will effectively be higher, depending on the call out 
+        //require 1d10 seconds to kick in... though this
+        //will effectively be higher, depending on the call out
         if((time() + roll_dice(1,10)) > FAKE_MANA_EFFECTS[people[x]])
         {
             map_delete(FAKE_MANA_EFFECTS, people[x]);
             tell_object(people[x], "%^BOLD%^%^WHITE%^You feel no different from the manna.%^RESET%^");
             continue;
         }
-        continue;        
+        continue;
     }
     people = keys(MANNA_EFFECTS);
     for(x = 0;x < sizeof(people);x++)
@@ -111,15 +111,15 @@ void process_manna_effects()
         if(!objectp(who = MANNA_EFFECTS[people[x]]["object"]))
         {
             map_delete(MANNA_EFFECTS, people[x]);
-            continue;       
+            continue;
         }
         if((time() + roll_dice(1, 10)) > MANNA_EFFECTS[people[x]]["delay"] && MANNA_EFFECTS[people[x]]["notified"] == 0)
         {
             MANNA_EFFECTS[people[x]]["notified"] = 1;
-            setup_manna_effects(who, MANNA_EFFECTS[people[x]], 1);            
+            setup_manna_effects(who, MANNA_EFFECTS[people[x]], 1);
             continue;
-        }        
-        
+        }
+
         if (MANNA_EFFECTS[people[x]]["notified"] == 1)
         {
             MANNA_EFFECTS[people[x]]["lasts for"] -= 12;
@@ -139,7 +139,7 @@ void process_manna_effects()
 void start_manna_d()
 {
     //tell_object(find_player("saide"), "Getting to start_manna_d");
-    if(find_call_out("process_manna_effects") == -1) 
+    if(find_call_out("process_manna_effects") == -1)
     {
         //tell_object(find_player("saide"), "call out getting started....");
         call_out("process_manna_effects", 12);
@@ -157,7 +157,7 @@ void parse_mana_effects(object who, string type)
         FAKE_MANA_EFFECTS += ([who : time()]);
         start_manna_d();
         return;
-    }   
+    }
     if(member_array((string)who->query_true_name(), keys(MANNA_EFFECTS)) != -1)
     {
         FAKE_MANA_EFFECTS += ([who : time()]);
@@ -167,23 +167,23 @@ void parse_mana_effects(object who, string type)
     switch(type)
     {
         case "heaven":
-            ben += (["will bonus" : 4]);
+            ben += (["will bonus" : 2]);
             diff = 30 - (int)who->query_stats("wisdom");
-            if(diff > 4) diff = 4;
+            if(diff > 2) diff = 2;
             ben += (["wisdom bonus" : diff]);
             break;
         case "power":
             ben += (["health bonus" : roll_dice(8,10)]);
             diff = 30 - (int)who->query_stats("strength");
-            if(diff > 4) diff = 4;
+            if(diff > 2) diff = 2;
             ben += (["strength bonus" : diff]);
             break;
         case "insight":
-            ben += (["empowered bonus" : 4]);
+            ben += (["empowered bonus" : 2]);
             diff = 30 - (int)who->query_stats("intelligence");
-            if(diff > 4) diff = 4;
+            if(diff > 2) diff = 2;
             ben += (["intelligence bonus" : diff]);
-            break;            
+            break;
     }
     ben += (["notified" : 0, "object" : who, "delay" : (time() + roll_dice(1, 10)), "lasts for" : roll_dice(10,100)]);
     MANNA_EFFECTS += ([(string)who->query_true_name() : ben]);

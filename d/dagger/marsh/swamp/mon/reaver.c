@@ -160,7 +160,7 @@ void moves(object targ)
             tell_object(targ, "%^RESET%^%^GREEN%^Your soul is %^RED%^burned%^GREEN%^ and "
                         "%^RED%^torn%^GREEN%^!%^RESET%^");
             "/std/effect/status/shaken"->apply_effect(targ, roll_dice(1, 6));
-            targ->do_damage("torso", roll_dice(1, (level / 2)));
+            targ->cause_typed_damage(targ, targ->return_target_limb(),roll_dice(1, (level / 2)),"divine");
         }
         return 1;
 
@@ -182,7 +182,9 @@ void moves(object targ)
                 tell_room(ETO, "%^BOLD%^" + targ->QCN + " ducks at the last instant, "
                           "avoiding the bolt!", targ);
             }else {
-                targ->do_damage("head", roll_dice(8, 8));
+
+                targ->cause_typed_damage(targ, "head",roll_dice(8, 8),"divine");
+                
             }
             return 1;
         }

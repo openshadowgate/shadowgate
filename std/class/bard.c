@@ -32,25 +32,23 @@ string *combat_styles() {
     return ({});
 }
 
-string *class_feats(string myspec)
+string* class_feats(string myspec)
 {
     return ({ "simple weapon proficiency",
-            "martial weapon proficiency",
-           "light armor proficiency",
-           "medium armor proficiency",
-          "dodge",
-         "spell focus" });
+                "martial weapon proficiency",
+                "light armor proficiency",
+                "medium armor proficiency",
+                "dodge",
+                "spell focus" });
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "simple weapon proficiency", "martial weapon proficiency", "light armor proficiency", "medium armor proficiency","shield proficiency", "spell focus","rally","dodge" }), 5 : ({ "indomitable" }), 8 : ({ "anger" }), 10 : ({ "tools of the trade" }), 11 : ({ "calm" }),  14 : ({ "force of personality" }), 17 : ({ "charm" }), ]);
+    return ([ 1:({ "simple weapon proficiency", "martial weapon proficiency", "light armor proficiency","shield proficiency", "spell focus","inspire","inspire courage", "dodge", "countersong"}), 3:({"inspire competence"}), 8:({"dirge of doom"}), 9:({"inspire greatness"}), 10:({ "tools of the trade" }), 12:({"soothing song"}), 14:({"frightening tune"}), 15:({"inspire heroics"}), 20:({"deadly song"})]);
 }
 
 string *class_skills()
 {
-// disguise temporarily disabled, please restore the first line when the command is installed. N, 1/14.
-//    return ({ "academics","disguise","influence","spellcraft","athletics"});
-    return ({ "academics","thievery","influence","spellcraft","athletics" });  //adding in athletics as tumble is a class skill
+    return ({ "academics","thievery","influence","spellcraft","athletics" });
 }
 
 int skill_points() { return 6; }
@@ -80,11 +78,24 @@ int max_stance_defensive() { return 4; }
 
 int attack_bonus(object player)
 {
-    int level,bonus;
-    level = (int)player->query_prestige_level("bard");
-//    if(level > 20) { bonus = (level - 20) + 15; }
-//    else bonus = (level*3) / 4;
-    bonus = (level*3) / 4; // boosted to tabletop equiv
+    int bonus;
+    float penalty, full_level, class_level;
+    
+    full_level = to_float(player->query_base_character_level());
+    class_level = to_float(player->query_prestige_level("bard"));
+    
+    if(full_level < 20.00)
+    {
+        bonus = (to_int(full_level) * 3 / 4);
+        return bonus;
+    }
+    
+    // Above 20
+    // 3/4 BAB gets half penalty to BAB
+    // Weighted average of class level compared to total level
+    penalty = (10.00 * (class_level / full_level)) / 2.00;
+    bonus = to_int(class_level - penalty);
+    
     return bonus;
 }
 

@@ -153,7 +153,7 @@ int cmd_master(string args)
                 return 1;
             }
 
-            if (forgettime > time() - 32400) {
+            if (forgettime > time() - 108000) {
                 write("%^ORANGE%^You can forget a spell %^RED%^%^BOLD%^once per nine hours%^RESET%^%^ORANGE%^.%^RESET%^");
                 return 1;
             }

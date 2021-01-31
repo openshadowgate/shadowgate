@@ -17,7 +17,7 @@ int check_climb(int climb_info, object ob)
     }
     skill = ob->query_skill("athletics") + roll_dice(1, 20);
     if (sizeof(ob->query_armour("torso"))) {
-        skill += ob->skill_armor_mod(ob->query_armor("torso"));
+        skill += ob->skill_armor_mod(ob->query_armour("torso"));
     }
 
     if (skill < climb_info) {

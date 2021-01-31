@@ -2,32 +2,38 @@
 
 The following Enhancements are available:
 
-%^CYAN%^%^ULINE%^Weapon Enhancement:%^RESET%^   %^CYAN%^%^ULINE%^(Cost) Description:
-flaming               (1) Adds fire damage.
-flaming burst         (2) As flaming, but additional damage on a critical.
-frost                 (1) Adds cold damage.
-icy burst             (2) As frost, but additional damage on a critical.
-shock                 (1) Adds electricity damage.
-shocking burst        (2) As shock, but additional damage on a critical.
-Holy                  (2) Ignores defenses from Evil beings, adds damage.
-Unholy                (2) Ignores defenses from Good beings, adds damage.
-Axiomatic             (2) Ignores defenses from Chaotic beings, adds damage.
-Anarchic              (2) Ignores defenses from Lawful beings, adds damage.
+%^CYAN%^%^ULINE%^Weapon Enhancements:%^RESET%^
 
-%^CYAN%^%^ULINE%^Armor Enhancement:%^RESET%^                     %^CYAN%^%^ULINE%^(Cost) Description:
-light fortification                    (1) 25% chance to ignore stabs and critical damage.
-moderate fortification                 (3) 50% chance to ignore stabs and critical damage.
-heavy fortification                    (5) 75% chance to ignore stabs and critical damage.
-invulnerability                        (3) As frost, but additional damage on a critical.
-acid energy resistance                 (4) Resistance 10 to acid damage. With the armor bond feat costs 3.
-cold energy resistance                 (4) Resistance 10 to cold damage. With the armor bond feat costs 3.
-electricity energy resistance          (4) Resistance 10 to electricity damage. With the armor bond feat costs 3.
-fire energy resistance                 (4) Resistance 10 to fire damage. With the armor bond feat costs 3.
-sonic energy resistance                (4) Resistance 10 to sonic damage. With the armor bond feat costs 3.
-improved acid energy resistance        (5) Resistance 20 to acid damage.
-improved cold energy resistance        (5) Resistance 20 to cold damage.
-improved electricity energy resistance (5) Resistance 20 to electricity damage.
-improved fire energy resistance        (5) Resistance 20 to fire damage.
-improved sonic energy resistance       (5) Resistance 20 to sonic damage.
+%^BOLD%^%^MAGENTA%^Elemental damage%^RESET%^ (Cost:1)
+Chance to deal elemental damage on hit.
+flaming/frost/shock/corrosive/thundering
+	%^ORANGE%^<enhance add flaming>%^RESET%^
+
+%^BOLD%^%^MAGENTA%^Elemental burst%^RESET%^ (Cost:2, replaces regular elemental damage)
+As elemental damage but also deal additional damage on a critical hit.
+flaming/icy/shocking/corrosive/thundering burst    
+	%^ORANGE%^<enhance add icy burst>%^RESET%^
+
+%^BOLD%^%^MAGENTA%^Aligned weapon%^RESET%^ (Cost:1)
+Ignores defenses from opposing alignement, chance to deal added damage. Your alignement must match the choice(s).
+holy/unholy/axiomatic/anarchic
+	%^ORANGE%^<enhance add axiomatic>%^RESET%^
+
+%^CYAN%^%^ULINE%^Armor Enhancements:%^RESET%^
+
+%^BOLD%^%^MAGENTA%^Fortification%^RESET%^ (Cost:1/3/5)
+25/50/75% chance to ignore stabs and critical damage.
+light/moderate/heavy fortification
+	%^ORANGE%^<enhance add moderate fortification>%^RESET%^
+
+%^BOLD%^%^MAGENTA%^Energy resistance%^RESET%^ (Cost:4, 3 with armor bond)
+Resistance 10 to elemental damage.
+acid/cold/electricity/fire/sonic energy resistance
+	%^ORANGE%^<enhance add cold energy resistance>%^RESET%^
+
+%^BOLD%^%^MAGENTA%^Improved energy resistance%^RESET%^ (Cost:5, replaces energy resistance)
+Resistance 20 to elemental damage.
+improved acid/cold/electricity/fire/sonic energy resistance
+	%^ORANGE%^<enhance add improved acid energy resistance>%^RESET%^
 
 %^CYAN%^See also:%^RESET%^ enhance

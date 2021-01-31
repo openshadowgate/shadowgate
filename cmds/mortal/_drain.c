@@ -67,13 +67,13 @@ int cmd_drain(string args)
         return 1;
     }
 
-    if (!(verify_conditions(targobj))) {
-        write("Your target is not incapacitated.\n");
+    if (!RACE_D->is_valid_blooddrain_target(targobj, TP)) {
+        write("Feeding on this is beneath you.");
         return 1;
     }
 
-    if (targobj->query_property("negative energy affinity")) {
-        write("You should eat fresh food.\n");
+    if (!(verify_conditions(targobj))) {
+        write("Your target is not incapacitated.\n");
         return 1;
     }
 
@@ -83,7 +83,7 @@ int cmd_drain(string args)
         tell_object(TP, "%^BOLD%^%^RED%^Something is wrong with your target's blood, it makes you sic!");
         tell_object(TP, "%^BOLD%^%^RED%^You start uncontrollably puking blood.");
         TP->add_bloodlust(-20000);
-        TP->set_paralyzed(roll_dice(1, 4) * 8, "%^BOLD%^%^RED%^You are sick from garlic scent.");
+        TP->set_paralyzed(roll_dice(1, 4) * 8, "%^BOLD%^%^RED%^You are sick from feeding on improper blood.");
         return 1;
     }
 
@@ -94,7 +94,6 @@ int cmd_drain(string args)
     input_to("cancel_drain", 0);
     draining = 1;
     drain_process(targobj);
-    TP->add_bloodlust(20000);
 
     return 1;
 }
@@ -162,6 +161,7 @@ void drain_process(object target)
         tell_object(TP, "%^BOLD%^%^RED%^You feel too infused as it is. You continue to drain for life.%^RESET%^");
         type = "life";
     }
+
     if (type == "health") {
         drain_health(target);
     }else {
@@ -170,6 +170,7 @@ void drain_process(object target)
     TP->set_paralyzed(ROUND_LENGTH * 8, "%^BOLD%^%^BLACK%^You are held in place %^RED%^feeding%^BLACK%^ of " + target->QCN + "!%^RESET%^
 %^BOLD%^%^BLACK%^Hit %^RED%^<return>%^BLACK%^ to stop feeding.%^RESET%^");
     tell_object(TP, "%^BOLD%^%^RED%^Fresh blood runs down your tongue.");
+    TP->add_bloodlust(400 * target->query_level());
     tell_room(ETP, "%^BOLD%^%^RED%^" + TP->QCN + " leans over " + target->QCN + "'s neck, slurping sound heard from them.", TP);
     tell_object(target, "%^RED%^" + TARGMSGS[random(sizeof(TARGMSGS))] + "%^RESET%^");
     if (!random(7)) {
@@ -181,7 +182,12 @@ void drain_process(object target)
 void drain_health(object target)
 {
     int dam;
-    dam = roll_dice(TP->query_level(), 6);
+    if (TP->is_class("vampire_lord")) {
+        dam = roll_dice(TP->query_level(), 12);
+    } else {
+        dam = roll_dice(TP->query_level(), 6);
+    }
+
     target->cause_typed_damage(target, "torso", dam, "negative energy");
     TP->add_max_hp_bonus(dam);
     //target->cause_typed_damage(caster,"torso",dam,"negative energy");
@@ -190,7 +196,11 @@ void drain_health(object target)
 void drain_life(object target)
 {
     int dam;
-    dam = roll_dice(TP->query_level(), 6);
+    if (TP->is_class("vampire_lord")) {
+        dam = roll_dice(TP->query_level(), 12);
+    } else {
+        dam = roll_dice(TP->query_level(), 6);
+    }
     target->cause_typed_damage(target, "torso", dam, "negative energy");
     target->cause_typed_damage(TP, "torso", dam * 2, "negative energy");
 }

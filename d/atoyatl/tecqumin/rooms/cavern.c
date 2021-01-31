@@ -245,6 +245,7 @@ int touch_blocks(string str){
       +",%^ORANGE%^ <check letters>");
     return 1;
   }
+  which = upper_case(which);
   if (HEXER_D->is_a_hex(which)==-1){
     tell_object(TP, which + " is not a hexagon letter. To see the letters for the different hexagons"
       +",%^ORANGE%^ <check letters>");

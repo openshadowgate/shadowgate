@@ -12,6 +12,7 @@ void create() {
     set_author("nienne");
     set_spell_name("nightmares made real");
     set_spell_level(([ "warlock" : 3 ]));
+    set_spell_sphere("illusion");
     set_syntax("cast CLASS nightmares made real");
     set_damage_desc("negative energy");
     set_description("By means of this invocation, the warlock cloaks the surrounding area in a horrific dreamscape "

@@ -38,8 +38,7 @@ void create(){
     set_stats("charisma",22);
 
     set_property("cast and attack",1);
-    set_spells(({"cause blindness",
-                    "dispel magic",
+    set_spells(({"vampiric touch",
                     "orders oath",
                     "call lightning"}));
     set_spell_chance(25);

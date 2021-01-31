@@ -12,9 +12,9 @@ void create(){
     set_property("indoors",1);
     set_name("An old warehouse");
     set_short("%^RESET%^%^ORANGE%^An old warehouse%^RESET%^");
-    set_long("%^RESET%^%^ORANGE%^This warehouse is much the same as the rest up and down the docks of Torm.  "
-"Old and run-down, it seems not to have seen much use lately, and dust is settled all over the crates and "
-"boxes that crowd the area.  The wooden walls are darkened with age, and damp from the sea air.%^RESET%^\n");
+    set_long(""+query_short()+"\n%^RESET%^%^ORANGE%^This warehouse is much the same as the rest up and down the docks of Torm.  "
+"Old and run-down, it seems not to have seen much use lately, and dust is settled all over the %^RESET%^crates%^ORANGE%^ and "
+"boxes that crowd the area.  The %^RESET%^floors%^ORANGE%^ are also in need of replacement.  The wooden %^RESET%^walls%^ORANGE%^ are darkened with age, and damp from the sea air.%^RESET%^\n");
     set_smell("default","The thick, musty smell of the disused building tickles at your nose.");
     set_listen("default","You can hear the lap of the waves against the boardwalk outside.");
 
@@ -24,7 +24,7 @@ void create(){
     ]));
 set_items(([
 	"floors" : "They are old, wooden, and creak underfoot as you tread over them.",
-	"walls" : "The walls are darkened from age, staining the wood.  The southern wall has been strangely cleared of crates and boxes.",
+	"walls" : "The walls are darkened from age, staining the wood.  The %^ORANGE%^southern wall%^RESET%^ has been strangely cleared of crates and boxes.",
 	({"crates","boxes"}) : "Crates and boxes are scattered around the room, covered in a thick layer of dust.",
 	({"south wall", "southern wall"}): "The south wall, unlike the rest, is completely bare of any obstructions and looks very plain.  There is something about it you can't quite put your finger on.",
 ]));

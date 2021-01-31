@@ -14,6 +14,7 @@ void create() {
     set_author("nienne");
     set_spell_name("eldritch claws");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS eldritch claws [on one hand]");
     set_description("%^RESET%^A variant on the core spell-like ability of the warlock, this invocation allows the caster to shape their eldritch blast into as many claws as they have free hands, all of which can be used as melee weapons. If the warlock has no free hands, the invocation will fail entirely; similarly, if a different shaped eldritch ability is invoked, the claw/s will disappear. Releasing grip upon a claw will cause it to disappear. As with eldritch blast, the claw/s can be imbued with various essences; however as the invocation is essentially a single shaping of the warlock's eldritch ability, so only one essence may be harnessed at a time even between two
 claws.
@@ -145,7 +146,7 @@ void spell_effect(int prof){
         caster->force_me("wield eldritch claw");
     }
     spell_successful();
-    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 10;
     set_end_time();
     call_out("dest_effect",spell_duration);
 }

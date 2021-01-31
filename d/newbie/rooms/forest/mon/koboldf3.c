@@ -69,6 +69,7 @@ STYX
 	   "The kobold's beady red eyes nearly glow with hatred.", 
 	   "The kobold barks out some gibberish.", 
 	}) );
+   command("speak draconic");
 }
 
 int kill_baddies() {

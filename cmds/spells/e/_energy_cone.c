@@ -134,6 +134,9 @@ void spell_effect(int prof){
 
     foes -= ({caster});
 
+    foes = distinct_array(foes);
+    foes -= ({target});
+
     if (caster->query_followers())
         foes -= caster->query_followers();
     tell_object(caster,""+color+"You summon a latent energy inside your "+

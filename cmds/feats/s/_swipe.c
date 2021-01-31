@@ -216,7 +216,7 @@ void execute_attack()
     }
     tell_object(caster, "%^BOLD%^%^WHITE%^Your precise strike slams into " + target->QCN + "!%^RESET%^");
 
-    tell_object(target, caster->QCN + "%^BOLD%^%^CYAN%^ manages to find weakness in your defensesn and slams into you!%^RESET%^");
+    tell_object(target, caster->QCN + "%^BOLD%^%^CYAN%^ manages to find weakness in your defenses and slams into you!%^RESET%^");
 
     if (objectp(environment(caster))) {
         tell_room(environment(caster), caster->QCN + "%^BOLD%^%^WHITE%^ manages to find a weakness in " + target->QCN + "%^BOLD%^%^WHITE%^ defenses and strikes with precision!%^RESET%^", ({ caster, target }));

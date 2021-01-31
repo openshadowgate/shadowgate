@@ -99,7 +99,12 @@ int cmd_buff(string str)
     case "diff":
 
         normal_buffs = keys(get_buffs(TP));
-        myspells = filter_array(TP->query_property("dispellable spells")->query_spell_name(), (:stringp($1):));
+
+        if (sizeof(TP->query_property("dispellable spells"))) {
+            myspells = filter_array(TP->query_property("dispellable spells")->query_spell_name(), (:stringp($1):));
+        } else {
+            myspells = ({});
+        }
 
         normal_buffs -= myspells;
         normal_buffs = sort_array(normal_buffs, 1);
@@ -183,21 +188,12 @@ string parse_special(object obj,string str)
     string special,*temp;
     if (!stringp(str) || str == "" || str == " ") { return 0; }
     if (strsrch(str, "|") == -1) { return 0; }
-    if (strsrch(str, "cast") == -1)
-    {
-        write("You must have cast in your syntax for special cast strings.  Syntax <buff add spell name | cast class spell name arguments>");
-        return -1;
-    }
+
     special = replace_string(str, "| ", "", 1);
     temp = explode(special, " ");
-    if (sizeof(temp) < 3)
+    if (sizeof(temp) < 1)
     {
         write("Syntax <buff add spell name | cast class spell name arguments>");
-        return -1;
-    }
-    if (!obj->is_class(temp[1]) && temp[1] != "innate")
-    {
-        write("You don't seem to have the class " + temp[1] + ".");
         return -1;
     }
     return special;
@@ -364,7 +360,7 @@ N.b., to add buffs cast through shadow spells you have to use special cast strin
 E.g., to add blink and elemental body as a mage cast through shadow alteration, you'll have to run these commands:
 
 %^ORANGE%^<buff add blink | cast mage shadow alteration on blink>%^RESET%^
-%^ORANGE%^<buff add elemental body i | cast mage shadow alteration on cast mage elemental body i on fire>%^RESET%^
+%^ORANGE%^<buff add elemental body i | cast mage shadow alteration on elemental body i on fire>%^RESET%^
 
 %^CYAN%^SEE ALSO%^RESET%^
 

@@ -78,9 +78,10 @@ int wieldme()
         uses = uses + 50;
         return 0;
     }
-
-    tell_object(ETO, "%^BOLD%^%^RED%^You grip the rod firmly and a strange sense of power overcomes you.");
-    return 1;
+    if (!ETO->query_property("silent_wield")) {
+        tell_object(ETO, "%^BOLD%^%^RED%^You grip the rod firmly and a strange sense of power overcomes you.");
+        return 1;
+    }
 }
 
 int read_rod(string str)

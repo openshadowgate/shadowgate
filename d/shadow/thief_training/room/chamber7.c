@@ -81,7 +81,7 @@ int pick_fun(string str){
 int look_fun(string str){
 	if((str!="scratches") && (str!="at scratches"))
 		return 0;
-	if(!TP->is_class("thief")){
+	if((!TP->is_class("thief")) && (!TP->is_class("bard"))){
 		tell_object(TP,"%^RESET%^%^RED%^You have no idea what these markings are about.%^RESET%^");
 		tell_room(ETP, "%^RESET%^%^RED%^"+TP->QCN+" looks at the strange scratches with a confused expression.",TP);
 	}

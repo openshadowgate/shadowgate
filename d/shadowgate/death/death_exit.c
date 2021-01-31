@@ -12,6 +12,8 @@ void create() {
     set_property("light", 2);
     set_property("no teleport", 1);
     set_property("indoors", 1);
+    set_terrain(WOOD_BUILDING);
+    set_travel(DIRT_ROAD);
     set_long(
             "%^WHITE%^%^BOLD%^Beyond the Veil%^RESET%^
 %^RED%^%^BOLD%^A letters of tongue unknown %^ORANGE%^b%^BOLD%^%^RED%^u%^ORANGE%^rn%^RED%^ in front of you:
@@ -38,6 +40,7 @@ void create() {
                 "torm" :  "/d/dagger/Torm/city/c101b",
                 "tabor" : "/d/darkwood/tabor/room/church",
                 "muuldaan" : "/d/shadow/room/muuldaan/rooms/church",
+                "ice" : "/d/islands/elf/church",
                 "temple" : "/d/shadow/room/city/church",
                 "accept" : "/d/shadow/room/city/church",
                 "cancel" : "/d/shadow/room/city/church",

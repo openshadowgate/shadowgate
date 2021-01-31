@@ -94,7 +94,7 @@ void spell_effect(int prof){
     tell_object(caster, "%^RESET%^%^GREEN%^You extend your hands, bringing them to rest against the woody "
 "surface of the tree.  Closing your eyes, you focus upon essence of nature within it, that flows through all "
 "wild things.%^RESET%^");
-    caster->set_paralyzed(25, "You are focussing upon the tree!");
+    caster->set_paralyzed(20, "You are focussing upon the tree!");
     call_out("part2", 5);
 }
 

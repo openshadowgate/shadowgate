@@ -18,7 +18,7 @@ AVATAR
 	set_value(75);
 	set_lore(
 @AVATAR
-The Cloak of Shadows is often seen with members of Mask and Shar's faith.  It is rumored that the cloak has the ability to diminish the light of a room just by it's presence.  Some even suspect the cloak was woven from the shadows itself.
+The Cloak of Shadows is often seen with members of dark faith.  It is rumored that the cloak has the ability to diminish the light of a room just by it's presence.  Some even suspect the cloak was woven from the shadows itself.
 
 AVATAR
 	);

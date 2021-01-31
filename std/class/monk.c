@@ -175,9 +175,24 @@ int max_stance_defensive()
 
 int attack_bonus(object player)
 {
-    int level, bonus;
-    level = (int)player->query_prestige_level("monk");
-    bonus = (level * 3) / 4;
+    int bonus;
+    float penalty, full_level, class_level;
+    
+    full_level = to_float(player->query_base_character_level());
+    class_level = to_float(player->query_prestige_level("monk"));
+    
+    if(full_level < 20.00)
+    {
+        bonus = (to_int(full_level) * 3 / 4);
+        return bonus;
+    }
+    
+    // Above 20
+    // 3/4 BAB gets half penalty to BAB
+    // Weighted average of class level compared to total level
+    penalty = (10.00 * (class_level / full_level)) / 2.00;
+    bonus = to_int(class_level - penalty);
+    
     return bonus;
 }
 
@@ -314,10 +329,6 @@ varargs int monk_check(object player, string type, mixed extra)
         }
         if (player->query_property("wholeness of body") > time()) {
             tell_object(player, "%^YELLOW%^You can't heal yourself in combat again yet.");
-            return 0;
-        }
-        if (player->query_alignment() > 3) {
-            tell_object(player, "%^YELLOW%^You may only heal yourself in combat as a monk of lawful alignment");
             return 0;
         }
         if (!USER_D->can_spend_ki(player, 3)) {

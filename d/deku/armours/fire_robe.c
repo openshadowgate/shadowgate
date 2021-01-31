@@ -64,7 +64,7 @@ int strike_func(int damage, object what, object who){
         "%^RED%^en%^YELLOW%^i%^RESET%^%^RED%^x on its torso "+
         "screams loudly and an immense pain swells in your "+
         "head!%^RESET%^");
-        who->do_damage("head",random(10)+5);
+        who->cause_typed_damage(who, "torso", roll_dice(1, 10) + 4, "fire");
         return 0;
     }
 }

@@ -12,14 +12,10 @@
 
 #define DEFAULT_MORE "%^BOLD%^%^BLACK%^%^B_WHITE%^"
 #define TO this_object()
-nosave private mapping __More;
-
-void create()
-{
-    __More = ([]);
-}
+nosave private mapping __More = ([]);
 
 void fixmore(){ __More = ([]);}
+
 varargs int more(mixed what, string cl, function endmore)
 {
     string *tmp;

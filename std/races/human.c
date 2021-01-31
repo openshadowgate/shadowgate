@@ -120,7 +120,7 @@ mapping daily_uses(string subrace) {
       case "aasimar": return ([ "light" : 1 ]); break;
       case "air genasi": return ([ "levitate" : 1 ]); break;
       case "earth genasi": return ([ "ghost step" : 1 ]); break;
-      case "fire genasi": return ([ "handfire" : 1 ]); break;
+      case "fire genasi": return ([ "produce flame" : 1 ]); break;
       case "feytouched": return ([ "faerie fire" : 1 ]); break;
       case "tiefling": return ([ "darkness" : 1 ]); break;
       case "water genasi": return ([ "water breathing" : 1 ]); break;
@@ -250,13 +250,17 @@ int height_mod(string gender) {
 
 // minimum weight for the race = base, max weight for the race = base + (modifier x height mod)
 // height mod = player height minus base height.
-int weight_base(string gender) {
-    if(gender == "male") return 120;
+int weight_base(string gender)
+{
+    if (gender == "male") {
+        return 120;
+    }
     return 85;
 }
 
-int weight_mod(string gender) {
-    return 8;
+int weight_mod(string gender)
+{
+    return 30;
 }
 
 // used by /daemon/player_d

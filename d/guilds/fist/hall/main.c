@@ -29,7 +29,7 @@ FIST
    ]));
    set_smell("default","The biting aroma of fine whiskey blends with the soft smell of fine tobacco.");
    set_listen("default","You hear tinkling of glasses, and soft conversation.");
-   ob= new(BBOARD);
+   /*ob= new(BBOARD);
    ob->set_name("board");
    ob->set_id(({"board","guild board"}));
    ob->set_board_id("fistguild");
@@ -37,4 +37,5 @@ FIST
    ob->set_location("/d/guilds/fist/hall/main.c");
    ob->set_short("Iron Fist guild board");
    ob->set_long("%^RED%^The Iron Fist%^MAGENTA%^ guild board, for fist members to brag and leave messages for each other");
+   looks like someone tried to remove this board but failed... fixed -H 12/21/20*/
 }

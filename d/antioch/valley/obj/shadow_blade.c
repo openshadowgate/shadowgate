@@ -24,7 +24,7 @@ void create()
 	  "  The blade is said to be infused with negative energy,"+
 	  " giving it is gruesome abilities.  The blade has since"+
 	  " gone on to become a favorite weapon for many of the "+
-	  "rogues in the church of Mask.");
+	  "rogues in the church of shadow.");
    set_property("lore",9);
    set_hit((:TO, "hitme":));
    set_value(50);
@@ -51,7 +51,7 @@ int wieldme()
 		 " "+ETO->query_cap_name()+" wields the Shadow Blade"+
 		 " a slight smile spreads across "+ETO->query_possessive()+" face.",ETO);
 		 set_ac(0);
-		 if((string)ETO->query_diety() == "mask"){
+		 if((string)ETO->query_diety() == "lord shadow"){
             	set_item_bonus("attack bonus",2);
          }			
             else set_item_bonus("attack bonus",0);

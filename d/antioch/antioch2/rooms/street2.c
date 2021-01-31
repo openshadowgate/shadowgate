@@ -14,25 +14,7 @@ void create()
 	set_property("light",2);
 	set_short("A cobbled street");
 	set_long(
-	"You are standing at the intersection of Pine and Crescent."+
-	" Pine street runs up to the northwest and you can see at"+
-	" least one shop along it. Crescent street runs to the"+
-	" northeast and there is also a shop in that direction."+
-	" Immediately to the west appears to be a Healer, there is"+
-	" a sign with the Healer's symbol engraved on it hanging"+
-	" outside the door. To the east is the entrance to the"+
-        " guard tower and you can hear the guards talking and"+
-        " laughing inside. "
-	);
-	set("night long",
-	"A street light illuminates the intersection. To the"+
-	" northeast is Crescent street, it appears to have a shop"+
-	" along the way, as does Pine street, which runs to the"+
-	" northwest. A sign is hanging on the house to the west with"+
-	" the Healer's symbol engraved on it. Across the street from"+
-	" that is the guard tower with warm yellow light spilling"+
-	" out from the doorway. Even now you can hear guards talking"+
-	" and laughing inside."
+            "%^WHITE%^You are at the intersection of %^BOLD%^%^GREEN%^P%^RESET%^%^GREEN%^i%^BOLD%^%^GREEN%^n%^RESET%^%^GREEN%^e%^WHITE%^ and %^ORANGE%^C%^BOLD%^%^ORANGE%^r%^RESET%^%^ORANGE%^esce%^BOLD%^%^ORANGE%^n%^RESET%^%^ORANGE%^t. %^GREEN%^%^BOLD%^%^BLACK%^P%^RESET%^%^GREEN%^ine %^GREEN%^str%^BOLD%^%^BLACK%^e%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^t%^RESET%^ %^GREEN%^s%^BOLD%^%^GREEN%^t%^RESET%^%^GREEN%^reet%^WHITE%^ runs up to the northwest and you can see at least one shop along it. %^BOLD%^%^ORANGE%^C%^RESET%^%^ORANGE%^re%^BOLD%^%^ORANGE%^s%^RESET%^%^ORANGE%^c%^BOLD%^%^ORANGE%^e%^RESET%^%^ORANGE%^n%^BOLD%^%^ORANGE%^t%^RESET%^ %^ORANGE%^street%^WHITE%^ runs to the northeast and there is also a shop in that direction. Immediately to the west appears to be a Healer, there is a %^ORANGE%^sig%^BOLD%^%^ORANGE%^n%^RESET%^%^WHITE%^ with the Healer's symbol engraved on it hanging outside the door. To the east is the entrance to the guard %^BOLD%^%^BLACK%^t%^BLACK%^o%^BLACK%^w%^BLACK%^er%^RESET%^%^WHITE%^ and you can hear the guards talkingand laughing inside."
 	);
 	set_smell("default","You smell a light scent of herbs mingled"+
 	" with the guards' sweat.");
@@ -45,8 +27,8 @@ void create()
 	" street is paved with cobblestones.",
 	({"tower","guard tower"}) : "This is a great stone guard"+
 	" tower.",
-	"street sign" : "You are at the intersection of Pine and"+
-	" Crescent street. Pine runs along the northwest and Crescent"+
+	"street sign" : "You are at the intersection of %^BOLD%^%^BLACK%^P%^RESET%^%^GREEN%^ine %^GREEN%^str%^BOLD%^%^BLACK%^e%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^t%^RESET%^ and"+
+	" %^BOLD%^%^ORANGE%^C%^RESET%^%^ORANGE%^re%^BOLD%^%^ORANGE%^s%^RESET%^%^ORANGE%^c%^BOLD%^%^ORANGE%^e%^RESET%^%^ORANGE%^n%^BOLD%^%^ORANGE%^t%^RESET%^ %^ORANGE%^street%^WHITE%^. %^BOLD%^%^BLACK%^P%^RESET%^%^GREEN%^ine %^GREEN%^str%^BOLD%^%^BLACK%^e%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^t%^RESET%^ runs along the northwest and %^ORANGE%^Crescent%^RESET%^"+
 	" runs up to the northeast.",
 	]));
 	set_exits(([
@@ -92,4 +74,3 @@ void reset() {
 void init() {
    ::init();
 }
-

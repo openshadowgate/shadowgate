@@ -5,7 +5,7 @@ create() {
    set_id(({ "waveblade" }));
    set_name("waveblade");
    set_short("A waveblade");
-   set_long("Also known as a scorpion’s tail due to its unique, stinger-like shape, this short, double-curved blade has no hilt but features a knuckle guard.");
+   set_long("Also known as a scorpion's tail due to its unique, stinger-like shape, this short, double-curved blade has no hilt but features a knuckle guard.");
    set_weight(2);
    set_size(1);
    set("value", 2);

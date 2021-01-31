@@ -16,7 +16,7 @@ void create(){
       (({"ice"})) :
         "The whole area is frozen.",
       (({"camp"})) : "The camp is simple and humble.",
-      (({"fire","fire pit"})) : "The firepit is a pile of stones on top of the ice.",
+      (({"fire","fire pit","firepit"})) : "The firepit is a pile of stones on top of the ice.",
 
 	   ]));
    set_listen("default",

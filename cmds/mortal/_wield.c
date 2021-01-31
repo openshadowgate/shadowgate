@@ -238,15 +238,18 @@ int cmd_wield(string str)
         return 1;
     }
 
-    if(stringp(wieldf) && !ob->query_property("fwield"))
+    if (stringp(wieldf) && !ob->query_property("fwield")) {
         message("my_action", wieldf, this_player());
-    else
-        message("my_action", "You wield "+ob->query_short()+".", this_player());
-
-    if(objectp(ETP))
-    {
-        message("other_action", (string)this_player()->query_cap_name() +
-        " wields " + ob->query_short() + ".", environment(this_player()), ({ this_player()}));
+    }else {
+        if (!this_player()->query_property("silent_wield")) {
+            message("my_action", "You wield " + ob->query_short() + ".", this_player());
+        }
+    }
+    if (!this_player()->query_property("silent_wield")) {
+        if (objectp(ETP)) {
+            message("other_action", (string)this_player()->query_cap_name() +
+            " wields " + ob->query_short() + ".", environment(this_player()), ({ this_player()}));
+        }
     }
     //           " wields #^#(:\"" + file_name(ob) +"\",\"query_short\":)#^#.", environment(this_player()),
 	POISON_D->is_object_poisoned(ob, TP, "wield", 1);

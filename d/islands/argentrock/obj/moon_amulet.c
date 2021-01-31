@@ -22,6 +22,7 @@ void create()
     set_size(-1);
     set_value(5000);
     set_wear((: TO, "wear_me" :));
+    set_property("enchantment", 4 + random(2));
     set_item_bonus("fire resistance", 10);
     set_item_bonus("cold iron resistance", -10); 
     set_item_bonus("positive energy resistance", -5); 

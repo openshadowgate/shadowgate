@@ -102,6 +102,11 @@ object get_targ()
 void die(object ob)
 {
     int eventpower;
+
+    if (!random(5)) {
+        new("/d/common/obj/misc/tools/portable_scrying_mirror.c")->move(TO);
+    }
+
     eventpower = 10 + random(15);
     tell_room(ETO, "%^BOLD%^%^RED%^Cruiser Tetron tells you: %^RESET%^Be warned...  After a time, death itself dies...");
     tell_room(ETO, "%^BOLD%^%^CYAN%^Cruiser Tetron whispers to you: %^RESET%^Perhaps, death is better.");

@@ -5,15 +5,15 @@
 inherit ARMOUR;
 
 void create(){
-    ::create();
-    set_name("shoulder plates");
-    set_id(({"shoulderplates","shoulder plates","plates","silver shoulder plates"}));
-    set_obvious_short("silver shoulderplates");
-    set_short("%^BOLD%^%^WHITE%^Silver Shoulderplates of the Kinnesaruda%^RESET%^");
+   ::create();
+   set_name("shoulder plates");
+   set_id(({"shoulderplates","shoulder plates","plates","silver shoulder plates"}));
+   set_obvious_short("silver shoulderplates");
+   set_short("%^BOLD%^%^WHITE%^Silver Shoulderplates of the Kinnesaruda%^RESET%^");
 /*
     set_long("%^RED%^They are heavy metal plates, attached to a center breastplate.  The shoulderplates are about 2 feet long each and are silver with red and gold accents.");
 */
-    set_long("%^BOLD%^These shoulderplates are made of heavy "+
+   set_long("%^BOLD%^These shoulderplates are made of heavy "+
        "metal with a silvered finish.  Each shoulderplate is "+
        "about two feet long, extending well over the wearer's "+
        "shoulder and ending in a curving point.  %^RED%^Red "+
@@ -23,7 +23,7 @@ void create(){
        "breastplate which may be worn over other armor, though "+
        "the rising neck guard would probably make wearing other "+
        "neck ornamentation such as a cloak or necklace impossible.%^RESET%^");
-    set_lore("Despite their pristine appearance that makes these "+
+   set_lore("Despite their pristine appearance that makes these "+
        "shoulderplates seem somewhat angelic, they actually "+
        "stem from a rather evil source.  They match the description "+
        "of shoulderplates worn by Intruder, who is known to "+
@@ -32,17 +32,17 @@ void create(){
        "including the fallen god Ashtar and his follower Bishimon.  "+
        "Some claim the breastplates house part of Intruder's "+
        "power, while others say that's impossible.");
-    set_property("lore difficulty",26);
-    set_weight(5);
-    set_limbs(({"neck"})); //Removed left and right arms - Octothorpe 1/26/10
-    set_type("clothing");
-    set_value(14000);
-    set_ac(0);
+   set_property("lore difficulty",26);
+   set_weight(5);
+   set_limbs(({"neck"})); //Removed left and right arms - Octothorpe 1/26/10
+   set_type("armour");
+   set_value(14000);
+   set_ac(0);
 	set_size(-1);
-    set_property("enchantment",5);
-    set_item_bonus("influence",2);
-    set_wear((:TO,"extra_wear":));
-    set_remove((:TO,"extra_remove":));
+   set_property("enchantment",5);
+   set_item_bonus("influence",2);
+   set_wear((:TO,"extra_wear":));
+   set_remove((:TO,"extra_remove":));
 	set_armor_prof("heavy");
 }
 

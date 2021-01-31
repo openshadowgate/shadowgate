@@ -10,7 +10,6 @@ void create()
 ");
     set_smell("default","%^RESET%^%^CYAN%^Scents from the river drift in from outside.%^WHITE%^");
     set_listen("default","%^RESET%^%^BLUE%^You can hear the sound of water rushing over rocks.");
-    set_indoors(1);
     set_property("no teleport",1);
     set_items(([
                    ({"floor","wall","ceiling"}) : "%^RESET%^%^ORANGE%^Dark stones, resilient but old, hold together this sunken tower. The persistent dampness from the flowing river outside of the crumbling walls allows for %^BOLD%^%^GREEN%^gr%^RESET%^%^ORANGE%^e%^GREEN%^e%^BOLD%^n m%^RESET%^%^GREEN%^o%^ORANGE%^s%^BOLD%^%^GREEN%^s %^RESET%^%^ORANGE%^to flourish between the cracks. %^CYAN%^Water %^ORANGE%^trickles in and pools in the corners of the uneven floors, making every slippery step seem perilous.%^WHITE%^",

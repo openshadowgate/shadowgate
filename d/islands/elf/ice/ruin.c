@@ -28,8 +28,9 @@ void create() {
                                 "the symbols for a chance to activate it.",
         ]));
         set_exits(([
-			"up"  : ROOMS"rampart",
-            "down"  : ROOMS"ice25",
+			    "up"  : ROOMS"rampart",
+          "down"  : ROOMS"ice25",
+          "northeast"  : "/d/antioch/wild/mount/trail1",
         ]));
         set_search("room","You dig through the snow and find"+
          " a strange boulder covered with odd symbols."); 

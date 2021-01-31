@@ -25,6 +25,7 @@ void create(){
    set_hp(100000);
    set_gender("male");
    set_emotes(1, (({
+      "%^MAGENTA%^The treant rumbles:%^RESET%^ This tree was dying when the sky turned black.  Adventurers used the four hearts of the elements to revive Edea and brought dawn to the endless night.",
       "%^MAGENTA%^The treant rumbles:%^RESET%^ Parnelli is a vibrant forest of magic and mystery.",
       "%^MAGENTA%^The treant rumbles:%^RESET%^ The Moonstone Vale is a serene haven in the midst of the cursed Dark forest.",
       "%^MAGENTA%^The treant rumbles:%^RESET%^ The Darkwood forest will bring you back near Shadow, north of here.",

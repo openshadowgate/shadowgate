@@ -152,7 +152,7 @@ object infect(object victim, int dc)
     }
 
     diseases = filter_array(all_inventory(victim), (:$1->is_disease():));
-    if (member_array(query_name(), diseases->query_name()) != -1) {
+    if (sizeof(diseases)) {
         return 0;
     }
 

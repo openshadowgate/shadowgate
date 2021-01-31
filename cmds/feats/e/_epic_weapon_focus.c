@@ -9,7 +9,7 @@ void create()
     feat_type("permanent");
     feat_category("WeaponMastery");
     feat_name("epic weapon focus");
-    feat_prereq("Greater Weapon Focus");
+    feat_prereq("Greater Weapon Focus, Fighter L16");
     feat_desc("This feat, available only as a class skill to trained fighters, further increases the accuracy of all attacks with weapons by +1.");
     permanent(1);
 }
@@ -17,11 +17,21 @@ void create()
 int allow_shifted() { return 1; }
 
 int prerequisites(object ob) {
-    if(!objectp(ob)) { return 0; }
-    if(!FEATS_D->has_feat(ob,"greater weapon focus")) {
+    int magus = 0;
+    if (!objectp(ob)) {
+        return 0;
+    }
+
+    if (ob->is_class("magus") && file_exists("/std/class/magus.c")) {
+        magus = (int)"/std/class/magus.c"->fighter_training(ob);
+    }
+
+    if(!FEATS_D->has_feat(ob,"greater weapon focus") ||
+        ob->query_class_level("fighter") + magus < 16) {
         dest_effect();
         return 0;
     }
+
     return ::prerequisites(ob);
 }
 

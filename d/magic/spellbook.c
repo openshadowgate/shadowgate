@@ -163,13 +163,10 @@ int query_spellbook(string spell) {
 
 int look(string str) {
     object ob;
-    int x, y, z, columns;
-    int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
-    int bsize;
     string tmp, gtype, pagebuff;
     string filter;
-    string * output = ({}), oline, *obuff;
-
+    string * output = ({});
+    int x;
 
     tmp = ({});
 
@@ -232,40 +229,7 @@ int look(string str) {
     }
 
     // Columns interface is documented in _spells.c
-    z = max(map_array(output, (: sizeof(strip_colors($1)) :))) + 2;
-
-    columns = atoi(TP->getenv("SCREEN")) / z;
-    columns = columns < 1 ? 1 : columns;
-
-    y = atoi(TP->getenv("COLUMNS"));
-    y = y < 1 ? 1 : y;
-    columns = columns > y ? y : columns;
-    obuff=({});
-    x=0;
-    bsize = 0;
-
-    foreach(oline in output)
-    {
-        obuff += ({oline});
-        x++;
-        bsize += sizeof(oline);
-
-        if (!(x % columns)) {
-
-            if (bsize > 2200) {
-                pagebuff = format_page(obuff, columns, z * columns, vertical);
-                tell_object(TP, pagebuff);
-
-                if (vertical) {
-                    tell_object(TP," ");
-                }
-
-                obuff = ({});
-                bsize = 0;
-            }
-        }
-    }
-    tell_object(TP,format_page(obuff, columns, z * columns, vertical));
+    tell_object(TP,auto_format_page(output, TP, 34));
 
     if (avatarp(TP)) write(
 @GARRETT

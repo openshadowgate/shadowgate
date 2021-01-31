@@ -44,7 +44,7 @@ int hit_func(object targ){
         tell_room(environment(ETO),"%^MAGENTA%^Dark flames flare up off the surface of "+
 "%^BOLD%^%^BLACK%^"+ETO->QCN+"'s %^RESET%^%^MAGENTA%^sword and burn "+
 "%^BOLD%^"+targ->QCN+"%^RESET%^%^MAGENTA%^.%^WHITE%^",({ETO,targ}));
-                targ->do_damage("torso",random(4)+8);
-        return 1;
+          
+        return random(4)+8;
    }
 }

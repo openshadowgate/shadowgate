@@ -32,7 +32,6 @@ int get_price(string str) {
       return 1;
     }
     if(TP->query_blind()) return notify_fail("You can't even see who to ask!\n");
-    if(TP->query_invis() && !avatarp(TP)) return notify_fail("Noone can see you!\n");
     mynomad = present("portalpsion");
     if(sizeof(mynomad->query_attackers()) > 0) return notify_fail("The psion is too distracted right now.\n");
     if(sizeof(TP->query_attackers()) > 0) return notify_fail("You are too distracted right now.\n");

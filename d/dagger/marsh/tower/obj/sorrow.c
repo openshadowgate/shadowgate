@@ -6,13 +6,15 @@
 inherit "/d/common/obj/weapon/quarter_staff.c";
 int xy,CYCLE,uses;
 object owned,LOCUST;
+
 void init() {
     ::init();
-    if(interactive(TP) && TP==environment(TO) && !owned) {
-	owned = TPQN;
-        uses = random((int)TP->query_level() * 10)+100;
+    if(interactive(TP) && TP == environment(TO) && !owned) {
+		owned = TPQN;
+		uses = random((int)TP->query_level() * 10) + 100;
     }
 }
+
 create() {
     ::create();
     set_name("staff");
@@ -57,15 +59,19 @@ int extra_wield() {
 	write("The staff fails to bond with you and vanishes!");
 	TO->remove();
 	return 0;
-    }     
-    tell_object(ETO,"%^GREEN%^Your heart is filled with ancient anguish and sorrow!%^RESET%^");
-    tell_room(EETO,"%^GREEN%^A look of great sorrow crosses over "+ETOQCN+"'s face.%^RESET%^",ETO);
+    }
+	if (!ETO->query_property("silent_wield")) {
+		tell_object(ETO, "%^GREEN%^Your heart is filled with ancient anguish and sorrow!%^RESET%^");
+		tell_room(EETO, "%^GREEN%^A look of great sorrow crosses over " + ETOQCN + "'s face.%^RESET%^", ETO);
+	}
     return 1;
 }
 
 int extra_unwield() {
-    tell_object(ETO,"%^GREEN%^The feelings of sorrow leave your body.%^RESET%^");
-    tell_room(EETO,"%^GREEN%^"+ETOQCN+" appears happier now.%^RESET%^",ETO);
+	if (!ETO->query_property("silent_wield")) {
+		tell_object(ETO, "%^GREEN%^The feelings of sorrow leave your body.%^RESET%^");
+		tell_room(EETO, "%^GREEN%^" + ETOQCN + " appears happier now.%^RESET%^", ETO);
+	}
     return 1;
 }
 

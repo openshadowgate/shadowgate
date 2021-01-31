@@ -1,6 +1,6 @@
 // Repose domain, spectral steed. Nienne, 04/07.
 #include <std.h>
-inherit "/std/riding_animal.c";
+inherit "/std/riding_animal";
 
 void create(){
     ::create();

@@ -10,36 +10,11 @@ void create()
    set_travel(PAVED_ROAD);
         set_property("indoors",0);
         set_property("light",2);
-        set_short("Cherry Street");
+        set_short("%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ Street");
         set_long(
-        "You are on Cherry street.\n"+
-        "A strange musky odor hangs in the air here. It is coming"+
-        " from the shop directly south. It is a little house with"+
-        " a red roof and the sign of a mage's component shop out"+
-        " front. On the sign is a picture of a lizard's tail. The"+
-        " door is made of a dark walnut wood and looks sturdy."+
-        " To the north there is a building that is marked as the"+
-        " general store, it has a pine wood door, in fact, the entire"+
-        " building seems to be made out of pine. There you can buy basic"+
-        " things and any odds and ends you might need. A sign that hangs over"+
-        " the doorway has a picture of a winged griffin on it. To the west Cherry"+
-        " street joins with Pine and Apple street right outside the"+
-        " stables. To the east is a very large fountain and the"+
-        " intersection of Cherry and Oak street. All the way at the end"+
-        " of the street there is an impressive stone church."
-        );
-        set("night long",
-        "You are on Cherry street.\n"+
-        "The street post here sheds light on the surrounding area."+
-        " The shops seem closed right now, all the doors are shut"+
-        " but a little light leaks out from underneath each doorway."+
-        " The bank is still open, it appears. The component shop and"+
-        " the general store, that are south and north of you respectively,"+
-        " both have their doors shut and the owners have apparently"+
-        " gone to sleep for the night. To the west Cherry street"+
-        " intersects with Pine and Apple outside the stables. To the"+
-        " east is a very large fountain, and at the end of the road"+
-        " there is a big stone church."
+        "%^ORANGE%^You are on %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^\n"+
+        "%^ORANGE%^A strange musky odor hangs in the air here. It is coming from the %^BOLD%^%^BLACK%^sho%^RESET%^%^ORANGE%^p%^ORANGE%^ directly south. It is a little house with a red roof and the sign of a mage's component shop out front. On the sign is a picture of a lizard's tail. The door is made of a dark walnut wood and looks sturdy. To the north there is a building that is marked as the general store, it has a pine wood door, in fact, the entire building seems to be made out of pine. There you can buy basic things and any odds and ends you might need. A sign that hangs over the doorway has a picture of a winged griffin on it. To the west %^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^  joins with %^BOLD%^%^BLACK%^P%^RESET%^%^GREEN%^ine %^GREEN%^str%^BOLD%^%^BLACK%^e%^RESET%^%^GREEN%^e%^BOLD%^%^BLACK%^t%^RESET%^ and %^GREEN%^A%^RED%^pp%^GREEN%^l%^RED%^e %^RED%^st%^GREEN%^r%^RED%^eet%^RESET%^ right outside the stables. To the east is a very large %^BOLD%^%^CYAN%^f%^RESET%^%^CYAN%^ount%^BOLD%^%^CYAN%^a%^RESET%^%^CYAN%^in%^ORANGE%^ and the intersection of %^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ and %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^. All the way at the end of the street there is an impressive stone church.
+"
         );
         set_smell("default","There is an odd musky scent coming from"+
         " the component shop on the south.");
@@ -54,7 +29,7 @@ void create()
         set_items(([
         ({"street","cobblestones","cobbles","road","path"}) : "The"+
         " street is paved with cobblestones.",
-        "street sign" : "This is Cherry street.",
+        "street sign" : "This is %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^",
         "fountain" : "There is a fountain to the east of here.",
         "shops" : "There are many shops along this street.",
         ]));

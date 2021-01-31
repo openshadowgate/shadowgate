@@ -11,21 +11,21 @@ void create()
 	set_property("light",2);
 	set_short("Oak Street");
 	set_long(
-	"You are on Oak street.\n"+
-	"Just north of here is the intersection of Oak with Apple and"+
-	" Cedar street. Apple street runs to the west and there is a shop"+
-	" at the corner where it turns curves to the south. Cedar street"+
+	"You are on %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^.\n"+
+	"Just north of here is the intersection of Oak with %^GREEN%^A%^RED%^pp%^GREEN%^l%^RED%^e%^RESET%^ and"+
+	" %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r %^ORANGE%^s%^BOLD%^%^BLACK%^tre%^RESET%^%^ORANGE%^e%^ORANGE%^t%^RESET%^. %^GREEN%^A%^RED%^pp%^GREEN%^l%^RED%^e %^RED%^st%^GREEN%^r%^RED%^eet%^RESET%^ runs to the west and there is a shop"+
+	" at the corner where it turns curves to the south. %^ORANGE%^C%^BOLD%^%^BLACK%^e%^BLACK%^d%^BLACK%^a%^RESET%^%^ORANGE%^r %^ORANGE%^s%^BOLD%^%^BLACK%^tre%^RESET%^%^ORANGE%^e%^ORANGE%^t%^RESET%^"+
 	" travels east, and there is also a shop at the corner where it"+
 	" turns towards the south. A little ways passed the intersection"+
 	" there are two buildings. The one on the west looks like the"+
 	" local tavern. On the opposite side of the street is a large and"+
 	" respectable looking inn. It reaches up two stories in height"+
-	" and looks clean. At the very end of Oak street is the palace."+
-	" Straight south of here Oak joins with Cherry street at a large"+
+	" and looks clean. At the very end of %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^ is the palace."+
+	" Straight south of here Oak joins with %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^at a large"+
 	" fountain."
 	);
 	set("night long",
-	"You are on Oak street.\n"+
+	"You are on %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^.\n"+
 	"It is a little darker here, but street lights to the north and"+
 	" south help to shed light on the area. At the very end of this"+
 	" street is a large palace with many windows spilling forth warm"+
@@ -36,7 +36,7 @@ void create()
 	" Across the street from the inn looks like the local tavern. The"+
 	" sounds of drunken laughter confirm that, it sounds like everyone's"+
 	" having a good time in there. To the south is a large fountain"+
-	" at the point where Oak and Cherry street join."
+	" at the point where Oak and %^MAGENTA%^%^RED%^C%^RED%^h%^RED%^e%^BOLD%^%^RED%^rry%^RESET%^ %^RED%^stre%^RESET%^%^RED%^e%^BOLD%^%^RED%^t%^RESET%^ %^RESET%^join."
 	);
 	if(query_night() == 1) {
 		set_smell("default","You smell the aroma of some delicious"+
@@ -53,7 +53,7 @@ void create()
 	set_items(([
 	({"street","cobblestones","cobbles","road","path"}) : "The"+
 	" street is paved with cobblestones.",
-	"street sign" : "This is Oak street.",
+	"street sign" : "This is %^WHITE%^O%^WHITE%^a%^WHITE%^k %^WHITE%^s%^BOLD%^%^BLACK%^t%^RESET%^%^WHITE%^r%^BOLD%^%^BLACK%^eet%^RESET%^.",
 	"fountain" : "A large fountain is to the south of here.",
 	"palace" : "At the northern part of this road is a large and"+
 	" impressive palace.",

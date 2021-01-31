@@ -31,7 +31,7 @@ void create() {
     set_obvious_short("%^BOLD%^%^WHITE%^A magnificent sword%^RESET%^");
     set_short("%^BOLD%^%^WHITE%^Holy Avenger%^RESET%^");
 /*
-Original description - 
+Original description -
     set_long(
 	"%^WHITE%^%^BOLD%^This is the Holy Avenger of the Order of "
 	"Paladins. Besides being a tool of destruction against evil "
@@ -56,7 +56,7 @@ Original description -
        "%^WHITE%^of an enemy seems to fall away, leaving it pristine "+
        "once again.  The weapon is completed by the rounded %^CYAN%^"+
        "platinum pommel %^WHITE%^that houses a large, spherical "+
-       "colorless gem.%^RESET%^"); 
+       "colorless gem.%^RESET%^");
     set_lore("Originally crafted by the great weaponsmith Mahavir many "+
        "centuries ago in the year 98 SG, the first Holy Avenger was "+
        "made for a paladin by the name of Erastus Moraine during his "+
@@ -162,10 +162,10 @@ int paladin() {
        "%^WHITE%^of an enemy seems to fall away, leaving it pristine "+
        "once again.  The weapon is completed by the rounded %^CYAN%^"+
        "platinum pommel %^WHITE%^that houses a large, spherical "+
-       ""+GEM+"%^BOLD%^%^WHITE%^.%^RESET%^"); 
+       ""+GEM+"%^BOLD%^%^WHITE%^.%^RESET%^");
     ETO->set_property("good item",1);
     return 1;
-}  
+}
 
 int removeme() {
   string god = ETO->query_diety();
@@ -213,7 +213,7 @@ int removeme() {
        "%^WHITE%^of an enemy seems to fall away, leaving it pristine "+
        "once again.  The weapon is completed by the rounded %^CYAN%^"+
        "platinum pommel %^WHITE%^that houses a large, spherical "+
-       "colorless gem.%^RESET%^"); 
+       "colorless gem.%^RESET%^");
    ETO->set_property("good item",-1);
    return 1;
 }
@@ -250,7 +250,7 @@ int extra_hit() {
        tell_object(ETO,"%^BOLD%^%^WHITE%^The sword channels your "+
           "%^MAGENTA%^holy energy%^WHITE%^ into its swing!\n"+
           "%^BOLD%^%^CYAN%^A bright %^RED%^flash%^CYAN%^ is seen "+
-          "as you slash at "+ob->QCN+"!%^RESET%^");    
+          "as you slash at "+ob->QCN+"!%^RESET%^");
           if(FLAG == 1){
              tell_object(ETO,"\n%^BOLD%^%^RED%^The Avenger tells "+
                 "you: I detect great evil in our foe!%^RESET%^\n%^RED%^"+
@@ -321,7 +321,7 @@ int align, i, counter;
                "it senses the presence of an evil intent.");
             tell_room(EETO,"%^CYAN%^The sword held by "+ETOQCN+" "+
                "glows blue.",ETO);
-            continue;            
+            continue;
          }
        }
       }
@@ -361,7 +361,7 @@ object ob;
 
 int dispel_em(string str){
 object ob;
-   if (ETO->query_bound() || ETO->query_unconscious() 
+   if (ETO->query_bound() || ETO->query_unconscious()
     || ETO->query_paralyzed()) {
         ETO->send_paralyzed_message("info",ETO);
     }
@@ -390,49 +390,45 @@ object ob;
    return 1;
 }
 
-int summon_em(string str){
-   string god = ETO->query_diety();
-   object ob;
-   if (ETO->query_bound() || ETO->query_unconscious() 
-    || ETO->query_paralyzed()) {
-        ETO->send_paralyzed_message("info",ETO);
+int summon_em(string str)
+{
+    string god = ETO->query_diety();
+    object ob;
+    if (ETO->query_bound() || ETO->query_unconscious()
+        || ETO->query_paralyzed()) {
+        ETO->send_paralyzed_message("info", ETO);
     }
-   if(!str){
-      tell_object(ETO,"You may ask your deity for aid in the form of "+
-         "a mount - <call mount>");
-      return 1;
-   }
-   if(!TO->query_wielded()){
-      tell_object(ETO,"You must be wielding the sword to call on its power.");
-      return 1;
-   }
-   if(str == "mount"){
-      if(SUMMONTIME > (time() - summon_time)) {
-         failure();
-         return 1;
-      }
-      summon_time = time();
-      tell_object(ETO,"%^CYAN%^You plant the tip of your sword into "+
-         "the ground and spread your arms wide, calling for aid.");
-      tell_room(EETO,"%^CYAN%^"+ETOQCN+" plants "+ETO->QP+" sword "+
-         "in the ground and spreads "+ETO->QP+" arms wide.",ETO);
-//      ob = new("/d/common/mounts/pegasus"); // original sword summoning
-//      tell_room(EETO,"%^BOLD%^%^CYAN%^A pegasus flies in, answering the call!");
-      tell_room(EETO,"%^BOLD%^%^CYAN%^A mighty beast appears before you, answering the call!");
-  switch(god){
-      case "lysara": ob = new("/d/common/mounts/panther"); break;
-      case "kreysneothosies":  ob = new("/d/common/mounts/gpegasus"); break;
-      case "kismet":  ob = new("/d/common/mounts/spegasus"); break;
-      case "jarmila": ob = new("/d/common/mounts/funicorn"); break;
-      case "lord shadow":  ob = new("/d/common/mounts/graywolf"); break;
-      default:  break;
-   }
-   if(ob) {
-      ob->set_owner(TP);
-      ob->move(EETO);
-   }
-      return 1;
-   }
-   tell_object(ETO,"You may only ask the sword to <call mount>.");
-   return 1;
+    if (str != "mount") {
+        return 0;
+    }
+    if (!TO->query_wielded()) {
+        tell_object(ETO, "You must be wielding the sword to call on its power.");
+        return 1;
+    }
+    if (str == "mount") {
+        if (SUMMONTIME > (time() - summon_time)) {
+            failure();
+            return 1;
+        }
+        summon_time = time();
+        tell_object(ETO, "%^CYAN%^You plant the tip of your sword into " +
+                    "the ground and spread your arms wide, calling for aid.");
+        tell_room(EETO, "%^CYAN%^" + ETOQCN + " plants " + ETO->QP + " sword " +
+                  "in the ground and spreads " + ETO->QP + " arms wide.", ETO);
+        tell_room(EETO, "%^BOLD%^%^CYAN%^A mighty beast appears before you, answering the call!");
+        switch (god) {
+        case "lysara": ob = new("/d/common/mounts/panther"); break;
+        case "kreysneothosies":  ob = new("/d/common/mounts/gpegasus"); break;
+        case "jarmila": ob = new("/d/common/mounts/funicorn"); break;
+        case "lord shadow":  ob = new("/d/common/mounts/graywolf"); break;
+        default: case "kismet":  ob = new("/d/common/mounts/spegasus");
+        }
+        if (ob) {
+            ob->set_owner(TP);
+            ob->move(EETO);
+        }
+        return 1;
+    }
+    tell_object(ETO, "You may only ask the sword to <call mount>.");
+    return 1;
 }

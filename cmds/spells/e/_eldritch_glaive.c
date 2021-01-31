@@ -13,6 +13,7 @@ void create() {
     set_author("nienne");
     set_spell_name("eldritch glaive");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS eldritch glaive");
     set_description("%^RESET%^A variant on the core spell-like ability of the warlock, this invocation allows the caster to shape their eldritch blast into a single glaive, which can be used as a melee weapon. Both hands must be empty in order for this invocation to work; similarly, if a different shaped blast is invoked, the glaive will disappear. Releasing grip upon the weapon will end the invocation. As with the eldritch blast, the glaive can be imbued with various essences.
 
@@ -98,7 +99,7 @@ void spell_effect(int prof){
     caster->force_me("wield eldritch glaive");
 
     spell_successful();
-    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 10;
     set_end_time();
     call_out("dest_effect",spell_duration);
     return;

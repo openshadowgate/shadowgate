@@ -10,7 +10,7 @@ void create()
     feat_category("Psionics");
     feat_name("closed mind");
     feat_prereq("Psywarrior L1 or Psion L1");
-    feat_desc("Your mind is better able to resist psionics than normal. You gain +2 to all saving thwors against powers and spells.");
+    feat_desc("Your mind is better able to resist psionics than normal. You gain +2 to all saving throws against powers and spells.");
     permanent(1);
     allow_blind(1);
     psionic(1);

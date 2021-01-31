@@ -9,7 +9,7 @@
 #define EFFECT_DELAY 1
 
 // Defines the length of a standard combat round for some purposes
-#define ROUND_LENGTH 5
+#define ROUND_LENGTH 6
 
 // Where all wizard spell files are kept.
 #define SPELL_DIR "/cmds/wizard/"

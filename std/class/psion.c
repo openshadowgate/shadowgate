@@ -85,11 +85,24 @@ int max_stance_defensive() { return 1; }
 
 int attack_bonus(object player)
 {
-    int level,bonus;
-    level = (int)player->query_prestige_level("psion");
-//    if(level > 20) { bonus = (level - 20) + 6; }
-//    else(bonus = level / 3);
-    bonus = level / 2; // boosted to tabletop equiv
+    int bonus;
+    float penalty, full_level, class_level;
+    
+    full_level = to_float(player->query_base_character_level());
+    class_level = to_float(player->query_prestige_level("psion"));
+    
+    if(full_level < 20.00)
+    {
+        bonus = (to_int(full_level) * 1 / 2);
+        return bonus;
+    }
+    
+    // Above 20
+    // 1/2 BAB gets full penalty to BAB
+    // Weighted average of class level compared to total level
+    penalty = (10.00 * (class_level / full_level));
+    bonus = to_int(class_level - penalty);
+    
     return bonus;
 }
 

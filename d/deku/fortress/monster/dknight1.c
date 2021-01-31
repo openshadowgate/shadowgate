@@ -72,7 +72,7 @@ void point(object targ) {
     tell_object(targ, "The death knight chills you with his "+
         "fingers.");
      set_property("magic",1);
-  targ->do_damage("torso", 10000);
+     targ->cause_typed_damage(targ, "torso", 10000, "cold");
      remove_property("magic");
   return 1;
    }

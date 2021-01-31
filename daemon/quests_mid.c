@@ -11,9 +11,9 @@ inherit DAEMON;
 
 #define COLORS ({"%^RED%^red", "%^BLUE%^blue","%^CYAN%^cyan", "%^GREEN%^green", "%^MAGENTA%^magenta", "%^YELLOW%^yellow","white","%^ORANGE%^orange","%^BOLD%^%^BLACK%^black"})
 
-#define OBJECTS ({"chalice","parchment","tunic","boots","cup","bowl", "knife", "scroll", "tablet","hat","tome","rod","statue","figurine","amulet", "talisman", "slippers", "flask","candle","mirror","rug","brooch","egg","scarf", "sphere", "cube", "stone", "crown", "amulet"})
+#define OBJECTS ({"chalice","parchment","tunic","boots","cup","bowl", "knife", "scroll", "tablet","hat","tome","rod","statue","figurine","amulet", "talisman", "slippers", "flask","candle","mirror","rug","brooch","egg","scarf", "sphere", "cube", "stone", "crown", "amulet","paw","feather","tooth","tail"})
 
-#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good", "neutrality", "the sun","the earth","the moon","the land","the sky", "force", "darkness", "light", "control", "destiny", "fortitude", "cowardice","death","health", "life", "shielding", "the universe", "horror", "beauty", "comeliness","humility","pride", "truth", "lies", "weakness", "strength", "nature", "terror", "fear", "courage", "wonder", "kittens","hounds"})
+#define DESCRIPTS ({"brilliance","fortune","doom","power","evil","good", "neutrality", "the sun","the earth","the moon","the land","the sky", "force", "darkness", "light", "control", "destiny", "fortitude", "cowardice","death","health", "life", "shielding", "the universe", "horror", "beauty", "comeliness","humility","pride", "truth", "lies", "weakness", "strength", "nature", "terror", "fear", "courage", "wonder", "kittens","hounds","whiskers","bunnies"})
 
 #define SAVE_QUESTS "/daemon/save/quests_mid"
 
@@ -26,7 +26,7 @@ inherit DAEMON;
 #define HMID1 ({"/d/laerad/plains/", "/d/laerad/swamp/", "/d/laerad/parnelli/forest/", "/d/laerad/wasteland/", "/d/tharis/forest/", "/d/deku/sanctuary/tower/", "/d/deku/keep/rooms/dungeon"})
 
 #define HMID2 ({"/d/laerad/parnelli/systyquah/", "/d/antioch/valley/rooms/v", "/d/antioch/valley/rooms/g", "/d/islands/dallyh/forest/rooms/", "/d/tharis/barrow/rooms/mound", "/d/barriermnts/bpeak/rooms/",\
-"/d/barriermnts/lothwaite/rooms/bt", "/d/dagger/derro/rooms/c", "/d/deku/mausoleum/rooms/","/d/shadow/room/deep_echos/"})
+"/d/barriermnts/lothwaite/rooms/bt", "/d/dagger/derro/rooms/c", "/d/deku/mausoleum/rooms/","/d/shadow/room/deep_echos/","/d/antioch/valley/rooms/v","/d/laerad/cavern1/","/d/antioch/greaterantioch/rooms/foothills/foothills11/"})
 
 #define AREAS ({ LMID1, LMID2, MED, HMID1, HMID2})
 #define AREA_VALUE ({60000, 80000, 100000, 120000, 140000})
@@ -94,6 +94,7 @@ inherit DAEMON;
                         LAERAD "mon/skuz.c":102000,\
                         LAERAD "mon/anti.c":102000,\
                         LAERAD "mon/paladin.c":104000,\
+                        LAERAD "mon/lich.c":154000,\
                         LAERAD "parnelli/asgard/sewer/mons/lking.c":105000,\
                         BARRIER "mage.c":90000,\
                         BARRIER "wyvern.c":90000,\

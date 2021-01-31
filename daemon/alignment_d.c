@@ -39,3 +39,29 @@ int is_law_neutral(object thing){
         return 1;
     return 0;
 }
+
+int opposed_alignment(object me, object you)
+{
+    string *opposed;
+    int my_align, your_align;
+    
+    if(!me || !you)
+        return 0;
+    
+    my_align = me->query_true_align();
+    your_align = you->query_true_align();
+    
+    if(my_align == 5 || your_align == 5)
+        return 0;
+    
+    //If you're the polar opposite
+    if(my_align - (10 - your_align) == 0)
+        return 2;
+    
+    opposed = ({ "000", "78936", "789", "78914", "369", "000", "147", "12369", "123", "12347" });
+    
+    if(strsrch(opposed[my_align], your_align + "") >= 0)
+        return 1;
+    
+    return 0;
+}

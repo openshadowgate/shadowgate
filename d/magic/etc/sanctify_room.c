@@ -18,6 +18,8 @@ void create()
     set_property("no teleport", 1);
     set_property("no sticks", 1);
     set_property("indoors", 1);
+    set_terrain(CITY);
+    set_travel(STAIRWAY);
 }
 
 void init()
@@ -42,6 +44,8 @@ int pull_up_rope(string str)
     if (str != "gate") {
         return 0;
     }
+    if (this_player()->query_bound() != 0)
+        return 0;
     inv = all_inventory(TO);
     for (x = 0; x < sizeof(inv); x++) {
         if (living(inv[x])) {
@@ -67,6 +71,8 @@ int lower_rope(string str)
     if (str != "gate") {
         return 0;
     }
+    if (this_player()->query_bound() != 0)
+        return 0;
     tell_room(TO, TPQCN + " opens the gate, granting access to " +
               "the Prime Material plane.", TP);
     tell_object(TP, "You open the gate to the Prime Material plane.");

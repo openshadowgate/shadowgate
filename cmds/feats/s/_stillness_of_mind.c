@@ -33,7 +33,7 @@ int cmd_stillness_of_mind(string str)
     if(!objectp(TP)) return 0;
     if(!TP->is_class("monk")) return 0;
     if((int)TP->query_class_level("monk") < 7) return 0;
-    if(!(int)"/daemon/user_d.c"->can_spend_ki(TP, 2))
+    if(!(int)USER_D->can_spend_ki(TP, 2))
     {
         tell_object(TP, "%^BOLD%^%^CYAN%^You lack the needed ki to still your mind.%^RESET%^");
         dest_effect();
@@ -67,7 +67,7 @@ int check_can_use()
         "with your stillness of mind!%^RESET%^");
         return 0;
     }
-    if(!(int)"/daemon/user_d.c"->can_spend_ki(caster, 2))
+    if(!(int)USER_D->can_spend_ki(caster, 2))
     {
         tell_object(caster, "%^CYAN%^You lack the needed ki to still "+
         "your mind!%^RESET%^");

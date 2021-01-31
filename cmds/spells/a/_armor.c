@@ -15,7 +15,7 @@ void create()
 {
     ::create();
     set_spell_name("armor");
-    set_spell_level(([ "mage" : 1, "oracle" : 1 ]));
+    set_spell_level(([ "mage" : 1, "magus" : 1, "oracle" : 1 ]));
     set_mystery("spellscar");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS armor [on TARGET]");

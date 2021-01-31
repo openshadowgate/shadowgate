@@ -24,84 +24,86 @@ int get_price(string x);
 string *query_menu();
 
 void create(){
-   ::create();
-   set_terrain(WOOD_BUILDING);
-   set_travel(PAVED_ROAD);
-   set_property("indoors",1);
-   set_property("light",2);
-   set_property("no sticks",1);
-   set_short("Rhapsody Inn, a small cozy inn");
-   set_long("%^BOLD%^Rhapsody Inn, a small cozy inn\n This small, yet cozy inn has been painstakingly built of %^RESET%^grey %^BOLD%^stones harvested from the Saakrune Sea and the legendary %^RESET%^%^ORANGE%^timber %^BOLD%^%^WHITE%^of the Tharis Forest. Although obviously a newly rebuilt structure, it has the look and feel of the old, maintaining the feeling of being an establishment that has been here as long as memory serves. Ornately carved %^RESET%^%^ORANGE%^wooden %^BOLD%^%^WHITE%^moldings line high vaulted ceilings, which offer even the largest of individuals a comfortable place to rest and relax. The inn boasts a fully stocked %^CYAN%^bar%^WHITE%^ and a small %^RESET%^%^ORANGE%^wooden %^BOLD%^%^CYAN%^stage%^WHITE%^ lined with %^RED%^r%^RESET%^%^RED%^e%^BOLD%^d %^WHITE%^velvet curtains, upon which one may find a softly crooning songstress, a master storyteller, or even a poet reciting his work. A %^CYAN%^hammock%^WHITE%^ has been set up in the northwestern corner of the room, it looks very comfortable. A %^RED%^blazing %^BOLD%^%^WHITE%^fireplace is found not far from it, heating up the room. A lovely %^CYAN%^painting%^WHITE%^ and a %^ORANGE%^banjolele%^WHITE%^ is hung over the fireplace. A throw rug has been laid out in front of the fireplace. Tables dot the room, providing a spot to congregate among friends. One table in particular stands out, it is still stained with %^RESET%^ %^RED%^blood %^BOLD%^%^WHITE%^and bears %^BOLD%^%^BLACK%^burn %^WHITE%^marks, and has an assassin's dagger deeply embedded in the center of the table. There are two %^RED%^menu%^WHITE%^ parchments nailed to the wall by the bar.%^RESET%^\n");
-   set_smell("default","The fresh aroma of the food and drink waft in from the kitchen.");
-   set_listen("default","You hear the joking banter of the crowd and an occasional fun loving tune.");
-   set_items( ([
-      "menu":"There are two different menus, the drinks menu and the food menu, choose which one to read.",
-      "stage":"%^BOLD%^Crafted from %^RESET%^%^ORANGE%^timber %^BOLD%^ %^WHITE%^of the Tharis Forest, the stage provides a small area for friends and acquaintances to perform. You may even be lucky enough to glimpse the owners, recounting tales of their adventures. Thick, %^RED%^r%^RESET%^%^RED%^e%^BOLD%^d %^BOLD%^%^WHITE%^velvet curtains line the stage and allow privacy between performances. Mounted at the front of the stage, a gleaming %^RESET%^s%^BOLD%^i%^RESET%^lv%^BOLD%^e %^RESET%^r %^CYAN%^plaque%^RESET%^ garners attention%^RESET%^.",
-      ({"painting","lovely painting","rememberance painting"}):"%^BOLD%^A wave of sadness washes over you as you look at this painting.\n\n A handsome man stands here, flowing %^RESET%^%^ORANGE%^brown %^BOLD%^%^WHITE%^hair whips in the wind, piercing %^BLUE%^blue %^WHITE%^eyes gaze into yours. Clad in cloak and robes, he is quite a sight to see. He clings tightly to a book, superbly bound and covered, probably containing some sort of arcane magic that he used. Next to him stands a pretty elven girl, sparkling %^RESET%^gr%^BOLD%^e%^RESET%^y %^BOLD%^eyes look out at you curiously as she clings to the man. Clad in similar robes and a cloak. Her raven hair spills over the edge of her robes and flows down her back. An eerie m%^YELLOW%^oo%^WHITE%^nlight seems to bathe this lovely couple, and you think you can almost see a beautiful woman in the background, casting the light on this ill-fated pair.%^RESET%^\n\n The painting is entitled: Taaveti and Kindra, together forever.\n Painted by: Vashna Tal'Razzan.",
-      "bar":"%^BOLD%^A large %^RESET%^%^ORANGE%^wooden %^BOLD%^%^WHITE%^ bar, polished to a gleaming shine. A row of comfortable bar stools stands before it.",
-      "plaque":"%^BOLD%^Rhapsody is dedicated to the Love of Adventure and all who have it.%^RESET%^",
-      "door":"On the west is the large door of the Rhapsody Inn, it leads outside.",
-      ({"banjo","banjolele"}):"An old rusty banjolele. The plaque below it reads in tongues: This banjolele belonged to Jimijuker, a famous gnomish bard.",
-      "wooden door":"Next to the bar on the south is a wooden door that leads to the back room, where kegs of beer are kept. Drunks are often placed back there to let them sleep it off.",
-      ({"curtains","red velvet curtains","red curtains","velvet curtains"}):"%^BOLD%^ Thick %^RED%^r%^RESET%^%^RED%^e%^BOLD%^d %^WHITE%^velvet curtains line the stage. They can be closed for privacy but are currently open, inviting performers up on stage., tables : %^BOLD%^Several tables are scattered about the room., ({table,bloody table}):%^BOLD%^One table in particular catches your eye. It is covered in %^RESET%^%^RED%^blood %^BOLD%^%^WHITE%^that has long since stained the table top. Embedded deeply into the center of the table is an assassin's dagger. Some odd events must have occured here.",
-      ({"bar stool","bar stools"}):"%^BOLD%^Several tall bar stools are placed in front of the bar for people to sit on.",
-      ({"chair","chairs"}):"Chairs are positioned around the tables about the room for customers to sit on.",
-      ({"assassin dagger","assassin's dagger"}):"%^BOLD%^Embedded so deeply into the middle of the table that it can't be removed is an assassin's dagger.",
-      "blood":"%^RED%^Blood %^RESET%^stains cover one of the table tops.",
-      ({"fire place","fireplace"}):"%^BOLD%^A large %^RED%^red %^BOLD%^ %^WHITE%^brick fireplace is blazing on the northern wall, keeping the room nice and toasty.",
-      "hammock" : "%^BOLD%^On the northwestern wall is a large comfortable hammock. It is near the fireplace, so whoever is in it will be kept nice and warm.",
-      ({"rug","throw rug"}):"%^BOLD%^A throw rug has been laid out in front of the fireplace. It is made of wool and appears to have been hand woven. It has been imported from a distant land, and the image woven into it is that of what is called a Rune Blade. The weapon is special, and hard to make, carefully tuned to the owner of the sword. Those who wield such blades are called Sword Singers, for their weapon is a part of them and they sing as they fight, weaving their magic through song. They are likened to bards in many cases, for their songs are beautiful and from the soul, ever changing, always different, like their owners.",
-   ]) );
+    ::create();
+    set_terrain(WOOD_BUILDING);
+    set_travel(PAVED_ROAD);
+    set_property("indoors",1);
+    set_property("light",2);
+    set_property("no sticks",1);
+    set_short("Rhapsody Inn, a small cozy inn");
+    set_long("%^BOLD%^Rhapsody Inn, a small cozy inn\n This small, yet cozy inn has been painstakingly built of %^RESET%^grey %^BOLD%^stones harvested from the Saakrune Sea and the legendary %^RESET%^%^ORANGE%^timber %^BOLD%^%^WHITE%^of the Tharis Forest. Although obviously a newly rebuilt structure, it has the look and feel of the old, maintaining the feeling of being an establishment that has been here as long as memory serves. Ornately carved %^RESET%^%^ORANGE%^wooden %^BOLD%^%^WHITE%^moldings line high vaulted ceilings, which offer even the largest of individuals a comfortable place to rest and relax. The inn boasts a fully stocked %^CYAN%^bar%^WHITE%^ and a small %^RESET%^%^ORANGE%^wooden %^BOLD%^%^CYAN%^stage%^WHITE%^ lined with %^RED%^r%^RESET%^%^RED%^e%^BOLD%^d %^WHITE%^velvet curtains, upon which one may find a softly crooning songstress, a master storyteller, or even a poet reciting his work. A %^CYAN%^hammock%^WHITE%^ has been set up in the northwestern corner of the room, it looks very comfortable. A %^RED%^blazing %^BOLD%^%^WHITE%^fireplace is found not far from it, heating up the room. A lovely %^CYAN%^painting%^WHITE%^ and a %^ORANGE%^banjolele%^WHITE%^ is hung over the fireplace. A throw rug has been laid out in front of the fireplace. Tables dot the room, providing a spot to congregate among friends. One table in particular stands out, it is still stained with %^RESET%^ %^RED%^blood %^BOLD%^%^WHITE%^and bears %^BOLD%^%^BLACK%^burn %^WHITE%^marks, and has an assassin's dagger deeply embedded in the center of the table. There are two %^RED%^menu%^WHITE%^ parchments nailed to the wall by the bar.%^RESET%^\n");
+    set_smell("default","The fresh aroma of the food and drink waft in from the kitchen.");
+    set_listen("default","You hear the joking banter of the crowd and an occasional fun loving tune.");
+    set_items(([
+        "menu" : "There are two different menus, the drinks menu and the food menu, choose which one to read.",
+        "stage" : "%^BOLD%^Crafted from %^RESET%^%^ORANGE%^timber %^BOLD%^ %^WHITE%^of the Tharis Forest, the stage provides a small area for friends and acquaintances to perform. You may even be lucky enough to glimpse the owners, recounting tales of their adventures. Thick, %^RED%^r%^RESET%^%^RED%^e%^BOLD%^d %^BOLD%^%^WHITE%^velvet curtains line the stage and allow privacy between performances. Mounted at the front of the stage, a gleaming %^RESET%^s%^BOLD%^i%^RESET%^lv%^BOLD%^e %^RESET%^r %^CYAN%^plaque%^RESET%^ garners attention%^RESET%^.",
+        ({"painting","lovely painting","rememberance painting"}) : "%^BOLD%^A wave of sadness washes over you as you look at this painting.\n\n A handsome man stands here, flowing %^RESET%^%^ORANGE%^brown %^BOLD%^%^WHITE%^hair whips in the wind, piercing %^BLUE%^blue %^WHITE%^eyes gaze into yours. Clad in cloak and robes, he is quite a sight to see. He clings tightly to a book, superbly bound and covered, probably containing some sort of arcane magic that he used. Next to him stands a pretty elven girl, sparkling %^RESET%^gr%^BOLD%^e%^RESET%^y %^BOLD%^eyes look out at you curiously as she clings to the man. Clad in similar robes and a cloak. Her raven hair spills over the edge of her robes and flows down her back. An eerie m%^YELLOW%^oo%^WHITE%^nlight seems to bathe this lovely couple, and you think you can almost see a beautiful woman in the background, casting the light on this ill-fated pair.%^RESET%^\n\n The painting is entitled: Taaveti and Kindra, together forever.\n Painted by: Vashna Tal'Razzan.",
+        "bar" : "%^BOLD%^A large %^RESET%^%^ORANGE%^wooden %^BOLD%^%^WHITE%^ bar, polished to a gleaming shine. A row of comfortable bar stools stands before it.",
+        "plaque" : "%^BOLD%^Rhapsody is dedicated to the Love of Adventure and all who have it.%^RESET%^",
+        "door" : "On the west is the large door of the Rhapsody Inn, it leads outside.",
+        ({"banjo","banjolele"}) : "An old rusty banjolele. The plaque below it reads in tongues: This banjolele belonged to Jimijuker, a famous gnomish bard.",
+        "wooden door" : "Next to the bar on the south is a wooden door that leads to the back room, where kegs of beer are kept. Drunks are often placed back there to let them sleep it off.",
+        ({"curtains","red velvet curtains","red curtains","velvet curtains"}) : "%^BOLD%^ Thick %^RED%^r%^RESET%^%^RED%^e%^BOLD%^d %^WHITE%^velvet curtains line the stage. They can be closed for privacy but are currently open, inviting performers up on stage.",
+        "tables" : "%^BOLD%^Several tables are scattered about the room.",
+        ({"table","bloody table"}) : "%^BOLD%^One table in particular catches your eye. It is covered in %^RESET%^%^RED%^blood %^BOLD%^%^WHITE%^that has long since stained the table top. Embedded deeply into the center of the table is an assassin's dagger. Some odd events must have occured here.",
+        ({"bar stool","bar stools"}):"%^BOLD%^Several tall bar stools are placed in front of the bar for people to sit on.",
+        ({"chair","chairs"}):"Chairs are positioned around the tables about the room for customers to sit on.",
+        ({"assassin dagger","assassin's dagger"}):"%^BOLD%^Embedded so deeply into the middle of the table that it can't be removed is an assassin's dagger.",
+        "blood":"%^RED%^Blood %^RESET%^stains cover one of the table tops.",
+        ({"fire place","fireplace"}):"%^BOLD%^A large %^RED%^red %^BOLD%^ %^WHITE%^brick fireplace is blazing on the northern wall, keeping the room nice and toasty.",
+        "hammock" : "%^BOLD%^On the northwestern wall is a large comfortable hammock. It is near the fireplace, so whoever is in it will be kept nice and warm.",
+        ({"rug","throw rug"}):"%^BOLD%^A throw rug has been laid out in front of the fireplace. It is made of wool and appears to have been hand woven. It has been imported from a distant land, and the image woven into it is that of what is called a Rune Blade. The weapon is special, and hard to make, carefully tuned to the owner of the sword. Those who wield such blades are called Sword Singers, for their weapon is a part of them and they sing as they fight, weaving their magic through song. They are likened to bards in many cases, for their songs are beautiful and from the soul, ever changing, always different, like their owners.",
+    ]));
 
-   set_exits( (["out":"/d/darkwood/room/road7",
-      "south" : "/d/darkwood/room/backroom"]) );
-   set_door("door","/d/darkwood/room/road7","out","rhapsody key");
-   set_open("door",0);
-   set_locked("door",0);
-   "/d/darkwood/room/road7"->set_open("door",0);
-   "/d/darkwood/room/road7"->set_locked("door",0);
-   set_door("wooden door","/d/darkwood/room/backroom.c","south","rhapsody key");
-   "/d/darkwood/room/backroom"->set_open("wooden door",0);
-   "/d/darkwood/room/backroom"->set_locked("wooden door",0);
+    set_exits( (["out":"/d/darkwood/room/road7",
+        "south" : "/d/darkwood/room/backroom"]) );
+    set_door("door","/d/darkwood/room/road7","out","rhapsody key");
+    set_open("door",0);
+    set_locked("door",0);
+    "/d/darkwood/room/road7"->set_open("door",0);
+    "/d/darkwood/room/road7"->set_locked("door",0);
+    set_door("wooden door","/d/darkwood/room/backroom.c","south","rhapsody key");
+    "/d/darkwood/room/backroom"->set_open("wooden door",0);
+    "/d/darkwood/room/backroom"->set_locked("wooden door",0);
 
-   set_menu( ({"raging tempo","treble clef","languishing lyre","rhapsody",
-      "elven steak","pheasant","story stew","sparkling melody","spinach salad",
-      "pretzels","licorice lager","evermeet tea","cocoa","destroyers draught",
-      "leg of lamb","feywine"}),
-      ({"alcoholic","alcoholic","alcoholic","alcoholic","food","food","food",
-      "soft drink","food","food","alcoholic","soft drink","soft drink","alcoholic",
-      "food","alcoholic"}),
-      ({40, 15, 10, 15, 20, 20, 10, 15, 20, 10, 20, 15, 40, 35, 40, 75}) );
-   set_my_mess( ({
-      "Your head starts to pound in a raging tempo as you slam this drink down.",
-      "Your throat constricts a bit as you drink the slightly sour liquid.",
-      "The warmth plucks lazily at your soul as your lips curve into a smile.",
-      "One sip of this drink and blissful peace washes over you in waves.", 
-      "The savory steak provides you with renewed strength.",
-      "You are delighted by the pheasant's wonderful flavor.",
-      "As you sample the stew, you are taken back to your grandest adventure.",
-      "You drink the sparkling melody down, and can't help but laugh a little "+
-      "as it tickles your throat.",
-      "As you eat the salad, it invigorates you with the health and harmony"+
-      " of the forest.",
-      "As you eat the pretzels, you begin to get your sense of logic twisted"+
-      " in a good knot.",
-      "You suck the lager down and it warms your stomach, you finish off the"+
-      " licorice stick with a couple of quick bites.",
-      "You drink the tea and feel the warmth and raspberries drift down into"+
-      " your soul, relaxing you down to your toes, the vigor of youth"+
-      " returning to you as the tea works its wonders.",
-      "You sip the thick, sweet drink and it tickles your tongue as it slides"+
-      " down your throat and warms your belly, leaving a sweet taste in your mouth.",
-      "You drink the ale down, and feel ready to battle all your enemies, as"+
-      " the alcohol takes hold and strips away your fears and worries.",
-      "You tear into the leg of lamb with nothing but your bare hands and teeth"+
-      " as your hunger becomes overwhelming and impossible to control.",
-      "You drink the feywine and feel an almost magical, blissful peace wash"+
-      " over you as your skin starts to tingle all over. The glass almost"+
-      " slips from your hands as you hear a faerie giggling in your ear.  You"+
-      " set the glass down, letting the wine take full effect."}) );
-   set_your_mess( ({
+    set_menu( ({"raging tempo","treble clef","languishing lyre","rhapsody",
+        "elven steak","pheasant","story stew","sparkling melody","spinach salad",
+        "pretzels","licorice lager","evermeet tea","cocoa","destroyers draught",
+        "leg of lamb","feywine"}),
+        ({"alcoholic","alcoholic","alcoholic","alcoholic","food","food","food",
+        "soft drink","food","food","alcoholic","soft drink","soft drink","alcoholic",
+        "food","alcoholic"}),
+        ({40, 15, 10, 15, 20, 20, 10, 15, 20, 10, 20, 15, 40, 35, 40, 75}) );
+    set_my_mess( ({
+        "Your head starts to pound in a raging tempo as you slam this drink down.",
+        "Your throat constricts a bit as you drink the slightly sour liquid.",
+        "The warmth plucks lazily at your soul as your lips curve into a smile.",
+        "One sip of this drink and blissful peace washes over you in waves.", 
+        "The savory steak provides you with renewed strength.",
+        "You are delighted by the pheasant's wonderful flavor.",
+        "As you sample the stew, you are taken back to your grandest adventure.",
+        "You drink the sparkling melody down, and can't help but laugh a little "+
+        "as it tickles your throat.",
+        "As you eat the salad, it invigorates you with the health and harmony"+
+        " of the forest.",
+        "As you eat the pretzels, you begin to get your sense of logic twisted"+
+        " in a good knot.",
+        "You suck the lager down and it warms your stomach, you finish off the"+
+        " licorice stick with a couple of quick bites.",
+        "You drink the tea and feel the warmth and raspberries drift down into"+
+        " your soul, relaxing you down to your toes, the vigor of youth"+
+        " returning to you as the tea works its wonders.",
+        "You sip the thick, sweet drink and it tickles your tongue as it slides"+
+        " down your throat and warms your belly, leaving a sweet taste in your mouth.",
+        "You drink the ale down, and feel ready to battle all your enemies, as"+
+        " the alcohol takes hold and strips away your fears and worries.",
+        "You tear into the leg of lamb with nothing but your bare hands and teeth"+
+        " as your hunger becomes overwhelming and impossible to control.",
+        "You drink the feywine and feel an almost magical, blissful peace wash"+
+        " over you as your skin starts to tingle all over. The glass almost"+
+        " slips from your hands as you hear a faerie giggling in your ear.  You"+
+        " set the glass down, letting the wine take full effect."}) );
+    set_your_mess( ({
      "'s eyes close and head shakes in pain while quickly downing the liquid from the glass.",
       "lets out a small squeak of surprise.",
       "gives a small smile while sipping the violet drink.",

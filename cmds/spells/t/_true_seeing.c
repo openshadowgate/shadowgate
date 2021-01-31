@@ -15,7 +15,7 @@ void see_changes();
 void create() {
     ::create();
     set_spell_name("true seeing");
-    set_spell_level(([ "cleric" : 7,"druid" : 7, "mage" : 7,"inquisitor" : 5, "psion" : 5, "magus" : 6 ]));
+    set_spell_level(([ "cleric" : 7,"druid" : 7, "mage" : 7,"inquisitor" : 5, "psion" : 5, "magus" : 5 ]));
     set_spell_sphere("divination");
     set_spell_domain("magic");
     set_domains(({"animal", "magic"}));
@@ -56,7 +56,7 @@ spell_effect(int prof)
     tell_object(caster,"%^BOLD%^Your eyes snap open and flash bright white for an instant.");
     caster->set_true_seeing(1);
     caster->set_property("spelled", ({TO}) );
-    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 2;
     set_end_time();
     call_out("dest_effect",spell_duration);
     addSpellToCaster();

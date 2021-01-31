@@ -95,11 +95,14 @@ void absorb(object targ)
     if (!WILL(targ, -1 * (level - 10))) {
         tell_object(targ, "%^BOLD%^%^BLUE%^Your arms feel like lead and your "
                     "legs like jelly as the banshee looks at you and wails in despair!%^RESET%^");
-        targ->do_damage("torso", dam);
+      
+        
         targ->set_paralyzed(dam / 2, "You cannot move! The despair in you is too great!");
     }else {
         tell_object(targ, "%^RESET%^%^BOLD%^You shudder but manage to shrug off the "
                     "horrible wail of the banshee!%^RESET%^");
-        targ->do_damage("torso", dam);
+    
     }
+    targ->cause_typed_damage(targ, "torso",dam,"sonic");
+  
 }

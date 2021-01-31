@@ -50,10 +50,12 @@ if(!present("iridescent ioun"))
  new(OBJ"iioun")->move(TO);
 if(!present("wood sheath"))
  new(OBJ"sheath")->move(TO);
- if(!present("sack"))
- new(OBJ"sack")->move(TO);
- if(!present("larrows"))
- new("/d/common/obj/lrweapon/larrows")->move(TO);
- if(!present("cloak"))
- new(OBJ"cloak")->move(TO);
+if(!present("sack"))
+  new(OBJ"sack")->move(TO);
+if(!present("larrows"))
+  new("/d/common/obj/lrweapon/larrows")->move(TO);
+if(!present("cloak"))
+  new(OBJ"cloak")->move(TO);
+if(!present("cologne"))
+  new(OBJ"cologne")->move(TO);
 }

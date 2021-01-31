@@ -9,7 +9,7 @@ void create()  {
 //  set_property("light", 2);  it has light set in the inherit *Styx*  7/28/05
   set_terrain(LIGHT_FOREST);
   set_travel(FOOT_PATH);
-  set_long("The dense trees of the forest have been thinned "+
+  set_long("%^GREEN%^The dense trees of the forest have been thinned "+
      "here, allowing for a small open area.  The canopy still "+
      "rises overhead, effectively shading and cooling the area.  "+
      "Despite the shade, the ground is covered in thick, soft "+
@@ -21,6 +21,7 @@ void create()  {
   set_listen("default", "The neighs of horses are punctuated by laughter from the inn.");
   set_exits(([
 	"southwest": "/d/darkwood/room/road7",
+        "down":"/d/shadow/ratpaths/rooms/rp_p021_n006",
   ]));
   set_items( ([
       ({"post","posts","hitching post","hitching posts","tether","tethering post","tethering posts"}) : "There are several posts set up here to tether horses to. They are"+

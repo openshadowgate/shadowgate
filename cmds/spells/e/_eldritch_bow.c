@@ -13,6 +13,7 @@ void create() {
     set_author("nienne");
     set_spell_name("eldritch bow");
     set_spell_level(([ "warlock" : 1 ]));
+    set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS eldritch bow");
     set_description("A variant on the core spell-like ability of the warlock, this invocation allows "
 "the caster to shape their eldritch blast into a single bow, which can be used as a melee weapon. "
@@ -102,7 +103,7 @@ void spell_effect(int prof){
     caster->force_me("wield eldritch bow");
 
     spell_successful();
-    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH * 10;
     set_end_time();
     call_out("dest_effect",spell_duration);
     return;

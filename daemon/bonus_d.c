@@ -368,7 +368,7 @@ varargs int hit_bonus(object who, object targ, int attack_num, object current)
                 mysize++;           //run small creatures as normal size please.
             }
             mysize -= (int)current->query_size();
-            if (FEATS_D->usable_feat(who, "weapon finesse") && (mysize >= 0)) { // if has-feat & weapon is smaller/same size as user - Odin 5/24/2020
+            if (FEATS_D->usable_feat(who, "weapon finesse") && ((mysize >= 0) || current->query_property("finesse"))) { // if has-feat & weapon is smaller/same size as user - Odin 5/24/2020 or weapon has the property - Venger dec20
                 to_hit += (query_dex_bonus(who) * -1);
             }else {
                 to_hit += query_stat_bonus(who, "strength");
@@ -383,6 +383,10 @@ varargs int hit_bonus(object who, object targ, int attack_num, object current)
             to_hit += query_stat_bonus(who, "strength");
         }
     }
+    
+    //Paladin smite against opposed alignment adds cha mod to attack rolls
+    if(who->query_guild_level("paladin") && targ->query_property("paladin smite") == who)
+        to_hit += query_stat_bonus(who, "charisma");
 
     // +1 BAB to rock gnome, racial, vs goblinoids
     if ((string)who->query_race() == "gnome" && (string)who->query("subrace") == "rock gnome") {

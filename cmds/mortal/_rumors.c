@@ -88,7 +88,7 @@ arealist = ({
             ({"Haunted House (Deku)",30,35,}),
             ({"Ice Island (30 16)",30,45,}),
             ({"Kinaro Underdark (Beneath Kinaro)" ,30,35,}),
-            ({"Muln's Lair (Charu Mountains)" ,30,35,}),
+            ({"Muln's Lair (Ice Island)" ,30,35,}),
             ({"Oubliette (Crystal Tower)",30,35,}),
             ({"Lava Tubes (Tonerra)",33,42,}),
             ({"Arkhon's Lair" ,35,40,}),

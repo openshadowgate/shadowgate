@@ -8,12 +8,15 @@ void create()
     set_author("nienne");
     set_spell_name("mending");
     set_spell_level(([ "bard" : 1, "druid" : 1, "cleric" : 1, "mage" : 1, "oracle" : 1, "psion" : 1, "warlock" : 1, "magus" : 1 ]));
+    set_affixed_spell_level(3);
     set_mystery(({ "life", "metal" }));
     set_spell_sphere("alteration");
     set_syntax(
         "cast CLASS mending on OBJECT
         cast CLASS mending on OBJECT at PLAYER");
-    set_description("This spell will attempt to repair the item in question. If a player target is not specified, it will default to items carried in the caster's inventory. Unlike normal repairs, the reliability of the spell is based upon the caster's power. The spell cannot be cast in combat.");
+    set_description("This spell will attempt to repair the item in question. If a player target is not specified, it will default to items carried in the caster's inventory. Unlike normal repairs, the reliability of the spell is based upon the caster's power. The spell cannot be cast in combat.
+
+If used on a construct, this spell will repair it as efficiently as repair undead spell.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -48,6 +51,9 @@ void spell_effect(int prof)
 
     if (!who) {
         ob = present(what, caster);
+        if (!objectp(ob)) {
+            ob = present(what, place);
+        }
     }   else {
         if ((string)caster->realName(who) != "") {
             who = (string)caster->realName(who);
@@ -64,6 +70,16 @@ void spell_effect(int prof)
         dest_effect();
         return;
     }
+
+    if (ob->is_living() && member_array(ob->query_race(), ({"soulforged", "golem", "construct"})) != -1) {
+        tell_object(ob,"%^BOLD%^%^CYAN%^You tremble as the spell passes over you and appears to be in better shape.");
+        tell_room(place, "%^BOLD%^%^CYAN%^" + ob->QCN + " trembles as the spell passes over them and appear to be in better shape.");
+
+        damage_targ(ob, ob->return_target_limb(), -sdamage * 7 / 6, "untyped");
+
+        return;
+    }
+
     if (!ob->query_property("repairtype") &&
         !ob->is_instrument() && !ob->is_armor() && !ob->is_weapon() && !ob->is_container() && !ob->is_carving()) {
         tell_object(caster, "That item cannot be repaired.");

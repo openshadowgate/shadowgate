@@ -1,6 +1,6 @@
 #include <std.h>
 
-inherit WEAPON;
+inherit "/d/common/obj/weapon/bastard.c";
 
 void create(){
    ::create();
@@ -47,30 +47,7 @@ void create(){
     	"s stood the test of time. The ending is one that to this day does n"+
     	"ot leave a dry eye in the house. - Classical Plays of Yesteryears -"+
     	" Haldor Lemsage  ");
-   set_property("lore difficulty",13);
-   	switch(random(7)) {
-case 0..3:
-    	set_prof_type("medium blades");
-        set_weapon_prof("exotic");
-	set_weight(10);
-   	set_size(2);
-   	set_wc(1,8);
-   	set_large_wc(1,12);
-   	set_type("slash");
-   	set_weapon_speed(6);
-break;
-default:
-    	set_prof_type("large blades");
-        set_weapon_prof("exotic");
-	set_weight(10);
-   	set_size(3);
-   	set_ac(1);
-        set_wc(3,4);
-        set_large_wc(3,4);
-   	set_type("slash");
-   	set_weapon_speed(8);
-break;
-		}
+set_property("lore difficulty",13);
 set_property("enchantment",random(2)+2);
    	set_value(1356);
    	set_wield((:TO,"wield_func":));

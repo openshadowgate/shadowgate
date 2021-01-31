@@ -15,11 +15,7 @@ nosave mapping __USABLE_FEATS;
  */
 void validate_class_feats(object ob)
 {
-    string* myclassfeats;
-    string* classfeats;
-    string* toremove = ({});
-    string* toadd = ({});
-    string fname;
+    string fname, * myclassfeats, * classfeats, * toremove = ({}), * toadd = ({});
 
     if (!objectp(ob)) {
         return;
@@ -67,8 +63,8 @@ void validate_class_feats(object ob)
 }
 
 void obsolete_feat(object ob) {
-    string *obsolete, *bad_feats=({}), *removing_feats, mytype,*myspells,*schoolspells;
-    int i,j,num,freebs;
+    string mytype, * obsolete, * bad_feats=({}), * removing_feats, * myspells, * schoolspells;
+    int i, j, num, freebs;
     object feat_ob;
 
     if (!objectp(ob)) {
@@ -92,7 +88,7 @@ void obsolete_feat(object ob) {
         return;
     }
 
-    num = (int)ob->query("free_feats");
+    num = ob->query("free_feats");
     freebs = num;
 
     for(i=0;i<sizeof(bad_feats);i++) {
@@ -185,7 +181,7 @@ void obsolete_feat(object ob) {
 
             if(has_feat(ob,"unassailable parry") && has_feat(ob,"parry")) {
               mytype = get_feat_type(ob,"unassailable parry");
-              if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free\
+              if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
               if(mytype != "class") { // had to put this in cuz fighter/ranger multis were freaking out with the class feat! N, 6/15.
                 remove_my_feat(ob,"unassailable parry",1);
                 tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^unassailable parry");
@@ -422,210 +418,100 @@ void clear_usable_feats()
     return;
 }
 
-int can_gain_feat(object ob,string feat)
+int can_gain_type_feat(object ob, string feat, string feattype)
 {
-    int MAX_ALLOWED;
-    string type;
-    if(!objectp(ob)) { return 0; }
-    if(!stringp(feat)) { return 0; }
-    if(has_feat(ob,feat)) { return 0; }
-    if(!meets_requirements(ob,feat)) { return 0; }
-    MAX_ALLOWED = ((int)ob->query_highest_level() / 3) + 1;
-    if((int)ob->query_other_feats_gained() >= MAX_ALLOWED) { return 0; }
-    return 1;
-}
-
-int can_gain_racial_feat(object ob,string feat)
-{
-    int MAX_ALLOWED;
-    if(!objectp(ob)) { return 0; }
-    if(!stringp(feat)) { return 0; }
-    if(has_feat(ob,feat)) { return 0; }
-    if(!meets_requirements(ob,feat)) { return 0; }
-    MAX_ALLOWED = racial_bonus_feats(ob);
-
-    if((int)ob->query_racial_feats_gained() >= MAX_ALLOWED) { return 0; }
-    return 1;
-}
-
-int can_gain_bonus_feat(object ob,string feat)
-{
-    int MAX_ALLOWED, i;
-    string type, *myclasses, currentlvl;
-    if(!objectp(ob)) { return 0; }
-    if(!stringp(feat)) { return 0; }
-    if(has_feat(ob,feat)) { return 0; }
-    if(!meets_requirements(ob,feat)) { return 0; }
-    myclasses = ob->query_classes();
-    if(!sizeof(myclasses)) return 0;
-    MAX_ALLOWED = 0;
-    for(i=0;i<sizeof(myclasses);i++) {
-      if(member_array(myclasses[i],CASTERCLASSES) != -1) continue; // caster classes get no bonus melee feats!
-      if(member_array(myclasses[i],HYBRID) != -1) continue; // neither do hybrids!
-      if(myclasses[i] == "fighter" )
-          currentlvl = (((int)ob->query_class_level(myclasses[i]) +1) / 2) + 1;
-      else if(myclasses[i] == "paladin")
-          currentlvl = (((int)ob->query_class_level(myclasses[i]) +4) / 5);
-      else
-          currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // melee classes @ L21 & every 5 levels thereafter
-      if(currentlvl < 0) currentlvl = 0;
-      MAX_ALLOWED += currentlvl;
-    }
-    if((int)ob->query_bonus_feats_gained() >= MAX_ALLOWED) { return 0; }
-    return 1;
-}
-
-int can_gain_magic_feat(object ob,string feat)
-{
-    int MAX_ALLOWED, i;
-    string type, *myclasses, currentlvl;
-    if(!objectp(ob)) { return 0; }
-    if(!stringp(feat)) { return 0; }
-    if(has_feat(ob,feat)) { return 0; }
-    if(!meets_requirements(ob,feat)) { return 0; }
-    myclasses = ob->query_classes();
-    if(!sizeof(myclasses)) return 0;
-    MAX_ALLOWED = 0;
-    for(i=0;i<sizeof(myclasses);i++) {
-      if(member_array(myclasses[i],MELEECLASSES) != -1) continue; // melee classes get no bonus caster feats!
-      if(member_array(myclasses[i],HYBRID) != -1) continue; // neither do hybrids!
-      if(myclasses[i] == "psion" ||
-         myclasses[i] == "oracle" ||
-         myclasses[i] == "mage" ||
-         myclasses[i] == "sorcerer")
-          currentlvl = (((int)ob->query_class_level(myclasses[i]) + 4) / 5);
-      else
-          currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5);
-      if(currentlvl < 0) currentlvl = 0;
-      MAX_ALLOWED += currentlvl;
-    }
-    if((int)ob->query_magic_feats_gained() >= MAX_ALLOWED) { return 0; }
-    return 1;
-}
-
-int can_gain_hybrid_feat(object ob, string feat)
-{
-    int MAX_ALLOWED, i, total;
-    string type, * myclasses, currentlvl;
-    if (!objectp(ob)) {
-        return 0;
-    }
-    if (!stringp(feat)) {
-        return 0;
-    }
-    if (has_feat(ob, feat)) {
-        return 0;
-    }
-    if (!meets_requirements(ob, feat)) {
-        return 0;
-    }
-    myclasses = ob->query_classes();
-    if (!sizeof(myclasses)) {
-        return 0;
-    }
-    MAX_ALLOWED = 0;
-    for (i = 0; i < sizeof(myclasses); i++) {
-        if (member_array(myclasses[i], HYBRID) == -1) {
-            continue;
-        }
-        if (myclasses[i] == "psywarrior") {
-            currentlvl = ((int)ob->query_class_level(myclasses[i]) / 3) + 1;
-        }else if (myclasses[i] == "magus") {
-            currentlvl = (((int)ob->query_class_level(myclasses[i]) + 1) / 6);
-        }else {
-            currentlvl = (((int)ob->query_class_level(myclasses[i]) - 16) / 5); // hybrid classes @ L21 & every 5 levels thereafter
-        }
-        if (currentlvl < 0) {
-            currentlvl = 0;
-        }
-        MAX_ALLOWED += currentlvl;
-    }
-    total = 0;
-    total += (int)ob->query_hybrid_feats_gained();
-    if (total >= MAX_ALLOWED) {
-        return 0;
-    }
-    return 1;
-}
-
-int can_gain_arcana_feat(object ob, string feat)
-{
-    int MAX_ALLOWED, i;
+    int MAX_ALLOWED, GAINED;
     if (!objectp(ob)) { return 0; }
     if (!stringp(feat)) { return 0; }
     if (has_feat(ob, feat)) { return 0; }
     if (!meets_requirements(ob, feat)) { return 0; }
-    if (!ob->is_class("magus")) return 0;
-    MAX_ALLOWED = ((int)ob->query_class_level("magus") / 3);
-    if ((int)ob->query_arcana_feats_gained() >= MAX_ALLOWED) { return 0; }
-    return 1;
-}
 
-int can_gain_divinebond_feat(object ob, string feat)
-{
-    int MAX_ALLOWED, i;
-    if (!objectp(ob)) { return 0; }
-    if (!stringp(feat)) { return 0; }
-    if (has_feat(ob, feat)) { return 0; }
-    if (!meets_requirements(ob, feat)) { return 0; }
-    if (!ob->is_class("paladin")) return 0;
-    MAX_ALLOWED = 0;
-    if ((int)TP->query_class_level("paladin") > 4) {
-        MAX_ALLOWED = 1;
+    switch (feattype) {
+    case "class":
+        MAX_ALLOWED = (ob->query_highest_level() / 3) + 1;
+        GAINED = ob->query_other_feats_gained();
+        break;
+    case "racial":
+        MAX_ALLOWED = racial_bonus_feats(ob);
+        GAINED = ob->query_racial_feats_gained();
+        break;
+    case "martial":
+        MAX_ALLOWED = number_feats(ob, "martial", MELEECLASSES);
+        GAINED = ob->query_bonus_feats_gained();
+        break;
+    case "spellcraft":
+        MAX_ALLOWED = number_feats(ob, "spellcraft", CASTERCLASSES);
+        GAINED = ob->query_magic_feats_gained();
+        break;
+    case "hybrid":
+        MAX_ALLOWED = number_feats(ob, "hybrid", HYBRIDCLASSES);
+        GAINED = ob->query_hybrid_feats_gained();
+        break;
+    case "arcana":
+        MAX_ALLOWED = number_feats(ob, "arcana", ({ "magus" }));// (ob->query_class_level("magus") / 3);
+        GAINED = ob->query_arcana_feats_gained();
+        break;
+    case "divinebond":
+        MAX_ALLOWED = number_feats(ob, "divinebond", ({ "paladin" }));
+        GAINED = ob->query_divinebond_feats_gained();
+        break;
+    default:
+        MAX_ALLOWED = 0;
+        GAINED = 0;
+        break;
     }
-    if ((int)ob->query_divinebond_feats_gained() >= MAX_ALLOWED) { return 0; }
+
+    if (GAINED >= MAX_ALLOWED) { return 0; }
     return 1;
 }
 
 mixed identify_hybrid() { return HYBRID; }
 
-int add_my_feat(object ob,string type,string feat)
+int add_my_feat(object ob, string type, string feat)
 {
-    int allowed,num,level,i,num_feats, mod;
-    string *subset;
+    int allowed, num, level, i, num_feats, mod;
+    string * subset;
     if(!objectp(ob)) { return 0; }
     if(!stringp(type)) { return 0; }
     if(!stringp(feat)) { return 0; }
 
-    level = (int)ob->query_other_feats_gained();
+    level = ob->query_other_feats_gained();
     if(!level) { level = 1; }
     else { level = level * 3; }
 
     switch(type)
     {
     case "class":
-        if(gain_feat(ob,type,feat,(int)ob->query_character_level()))
+        if(gain_feat(ob,type,feat,ob->query_character_level()))
         {
-            num = (int)ob->query_class_feats_gained();
+            num = ob->query_class_feats_gained();
             if(!num) num = 0;
             num += 1;
             ob->set_class_feats_gained(num);
             update_usable(ob);
             if(feat == "grandmaster of the way")
-                TP->init_ki();
+                ob->init_ki();
             return 1;
         }
         else return 0;
     case "racial":
         num = 1;
-
         if(gain_feat(ob,type,feat,num))
         {
             num = 0;
-            num = (int)ob->query_racial_feats_gained();
+            num = ob->query_racial_feats_gained();
             num += 1;
             ob->set_racial_feats_gained(num);
             update_usable(ob);
             return 1;
         }
         else return 0;
-    case "bonus":
+    case "martial":
         num = 1;
-
         if(gain_feat(ob,type,feat,num))
         {
             num = 0;
-            num = (int)ob->query_bonus_feats_gained();
+            num = ob->query_bonus_feats_gained();
             num += 1;
             ob->set_bonus_feats_gained(num);
             update_usable(ob);
@@ -637,7 +523,7 @@ int add_my_feat(object ob,string type,string feat)
         if(gain_feat(ob,type,feat,num))
         {
             num = 0;
-            num = (int)ob->query_magic_feats_gained();
+            num = ob->query_magic_feats_gained();
             num += 1;
             ob->set_magic_feats_gained(num);
             update_usable(ob);
@@ -649,7 +535,7 @@ int add_my_feat(object ob,string type,string feat)
         if(gain_feat(ob,type,feat,num))
         {
             num = 0;
-            num = (int)ob->query_hybrid_feats_gained();
+            num = ob->query_hybrid_feats_gained();
             num += 1;
             ob->set_hybrid_feats_gained(num);
             update_usable(ob);
@@ -661,9 +547,11 @@ int add_my_feat(object ob,string type,string feat)
         if (gain_feat(ob, type, feat, num))
         {
             num = 0;
-            num = (int)ob->query_arcana_feats_gained();
+            num = ob->query_arcana_feats_gained();
             num += 1;
             ob->set_arcana_feats_gained(num);
+            if (feat == "greater arcane pool")
+                USER_D->init_pool(ob, "arcana");
             update_usable(ob);
             return 1;
         }
@@ -673,7 +561,7 @@ int add_my_feat(object ob,string type,string feat)
         if (gain_feat(ob, type, feat, num))
         {
             num = 0;
-            num = (int)ob->query_divinebond_feats_gained();
+            num = ob->query_divinebond_feats_gained();
             num += 1;
             ob->set_divinebond_feats_gained(num);
             update_usable(ob);
@@ -683,12 +571,12 @@ int add_my_feat(object ob,string type,string feat)
     case "other":
         if(gain_feat(ob,type,feat,level))
         {
-            num = (int)ob->query_other_feats_gained();
+            num = ob->query_other_feats_gained();
             if(!num) num = 0;
             num += 1;
             ob->set_other_feats_gained(num);
             if(get_category(feat) == "EpicFeats") { // to track
-              num = (int)ob->query_epic_feats_gained();
+              num = ob->query_epic_feats_gained();
               if(!num) num = 0;
               num += 1;
               ob->set_epic_feats_gained(num);
@@ -717,54 +605,56 @@ int remove_my_feat(object ob,string feat,int bypass)
     switch(type)
     {
     case "racial":
-        num = (int)ob->query_racial_feats_gained();
+        num = ob->query_racial_feats_gained();
         if(!num) num = 0;
         num -= 1;
         ob->set_racial_feats_gained(num);
         update_usable(ob);
         return 1;
-    case "bonus":
-        num = (int)ob->query_bonus_feats_gained();
+    case "martial":
+        num = ob->query_bonus_feats_gained();
         if(!num) num = 0;
         num -= 1;
         ob->set_bonus_feats_gained(num);
         update_usable(ob);
         return 1;
     case "magic":
-        num = (int)ob->query_magic_feats_gained();
+        num = ob->query_magic_feats_gained();
         if(!num) num = 0;
         num -= 1;
         ob->set_magic_feats_gained(num);
         update_usable(ob);
         return 1;
     case "hybrid":
-        num = (int)ob->query_hybrid_feats_gained();
+        num = ob->query_hybrid_feats_gained();
         if(!num) num = 0;
         num -= 1;
         ob->set_hybrid_feats_gained(num);
         update_usable(ob);
         return 1;
     case "arcana":
-        num = (int)ob->query_arcana_feats_gained();
+        num = ob->query_arcana_feats_gained();
         if (!num) num = 0;
         num -= 1;
         ob->set_arcana_feats_gained(num);
+        if (feat == "greater arcane pool")
+            USER_D->init_pool(ob, "arcana");
         update_usable(ob);
         return 1;
     case "divinebond":
-        num = (int)ob->query_divinebond_feats_gained();
+        num = ob->query_divinebond_feats_gained();
         if (!num) num = 0;
         num -= 1;
         ob->set_divinebond_feats_gained(num);
         update_usable(ob);
         return 1;
     case "other":
-        num = (int)ob->query_other_feats_gained();
+        num = ob->query_other_feats_gained();
         if(!num) num = 0;
         num -= 1;
         ob->set_other_feats_gained(num);
         if(get_category(feat) == "EpicFeats") { // to track
-          num = (int)ob->query_epic_feats_gained();
+          num = ob->query_epic_feats_gained();
           if(!num) num = 0;
           num -= 1;
           ob->set_epic_feats_gained(num);
@@ -862,11 +752,11 @@ mixed get_usable(object ob)
 // gain_feat(player,(class bonus other), feat, level
 varargs int gain_feat(object ob, string type, string feat,int level)
 {
-    if(!objectp(ob))   { return 0; }
+    if(!objectp(ob)) { return 0; }
     if(!stringp(type)) { return 0; }
     if(!stringp(feat)) { return 0; }
 
-    if(has_feat(ob,feat))            { return 0; }
+    if(has_feat(ob,feat)) { return 0; }
 
     if(!meets_requirements(ob,feat))
     {
@@ -874,11 +764,11 @@ varargs int gain_feat(object ob, string type, string feat,int level)
             "feat "+feat+".");
         return 0;
     }
-    if(get_category(feat) == "EpicFeats" && (int)ob->query_epic_feats_gained() > 0) {
+    if(get_category(feat) == "EpicFeats" && ob->query_epic_feats_gained() > 0) {
         tell_object(ob,"You have already bought one epic feat, you can't buy another.");
         return 0;
     }
-    if(member_array(type,({"class","racial","bonus","magic","other","hybrid","arcana","divinebond" })) == -1) { return 0; }
+    if(member_array(type,({"class","racial","martial","magic","other","hybrid","arcana","divinebond" })) == -1) { return 0; }
 
     add_feat(ob,type,feat,level);
 
@@ -909,6 +799,24 @@ int display_meets_requirements(string feat, object ob)
 	return meets_requirements(ob, feat);
 }
 
+int display_is_active(string feat, object ob)
+{
+    int x;
+    if (!objectp(ob)) return 0;
+    if (!stringp(feat)) return 0;
+    return is_active(ob, feat);
+}
+
+int display_is_activable(string feat, object ob)
+{
+    int x;
+    if (!objectp(ob)) return 0;
+    if (!stringp(feat)) return 0;
+    if (pick_color(feat, ob) == "%^BOLD%^%^CYAN%^") return 1;
+    if (pick_color(feat, ob) == "%^YELLOW%^") return 1;
+    return 0;
+}
+
 int filter_feats(object ob, string feat)
 {
     object obj;
@@ -927,7 +835,7 @@ int filter_feats(object ob, string feat)
 
 int display_filtered_feats(string feat, object ob)
 {
-      int x;
+    int x;
 	if(!objectp(ob)) return 0;
 	if(!stringp(feat)) return 0;
 	return filter_feats(ob, feat);
@@ -965,6 +873,7 @@ int is_active(object ob,string feat)
     if(!objectp(ob))                    { return 0; }
     if(!stringp(feat))                  { return 0; }
     if(!has_feat(ob,feat))              { return 0; }
+
     feats = (object *)ob->query_property("active_feats");
     if(!pointerp(feats))                { return 0; }
     if(!sizeof(feats))                  { return 0; }
@@ -1105,29 +1014,26 @@ int level_to_use(object ob,string feat)
 int can_use_shifted(object ob, string feat)
 {
     string file;
-    object myfeat;
 
-    if(!objectp(ob)) { return 0; }
-    if(!has_feat(ob,feat)) { return 0; }
-
-    if(!ob->query_property("shapeshifted")) { return 1; } // not shifted, don't bother to check
-
-    file = DIR_FEATS+"/"+feat[0..0]+"/_"+feat+".c";
-    //if(find_player("saide")) tell_object(find_player("saide"), "file = "+file);
-    file = replace_string(file," ","_");
-    if(catch(myfeat = new(file))) { return 0; }
-    if(!objectp(myfeat)) { return 0; }
-
-    if(!myfeat->allow_shifted())
-    {
-        destruct(myfeat);
+    if (!objectp(ob)) {
         return 0;
     }
-    else
-    {
-        destruct(myfeat);
+    if (!has_feat(ob, feat)) {
+        return 0;
+    }
+
+    if (!ob->query_property("shapeshifted")) {
+        return 1;
+    }                                                     // not shifted, don't bother to check
+
+    file = DIR_FEATS + "/" + feat[0..0] + "/_" + feat + ".c";
+    file = replace_string(file, " ", "_");
+
+    if (file->allow_shifted()) {
         return 1;
     }
+
+    return 0;
 }
 
 int level_of_feat(object ob,string feat)
@@ -1138,7 +1044,7 @@ int level_of_feat(object ob,string feat)
 
     if(!objectp(ob))          { return -1; }
     if(!stringp(feat))        { return -1; }
-    if(is_temporary(ob,feat)) { return (int)ob->query_character_level(); }
+    if(is_temporary(ob,feat)) { return ob->query_character_level(); }
     if(!has_feat(ob,feat))    { return -1; }
     type   = get_feat_type(ob,feat);
     feats  = get_feats(ob,type);
@@ -1230,7 +1136,7 @@ string get_feat_type(object ob,string feat)
     if(!stringp(feat))      { return 0; }
     if(!has_feat(ob,feat))  { return 0; }
     if(!is_feat(feat))      { return 0; }
-    tmp = ({ "class","racial","bonus","magic","other","hybrid","arcana","divinebond" });
+    tmp = ({ "class","racial","martial","magic","other","hybrid","arcana","divinebond" });
     for(i=0;i<sizeof(tmp);i++)
     {
         feats = get_feats(ob,tmp[i]);
@@ -1348,7 +1254,7 @@ void set_feats(object ob,string type,mapping feats)
     case "racial":
         ob->set_racial_feats(feats);
         break;
-    case "bonus":
+    case "martial":
         ob->set_bonus_feats(feats);
         break;
     case "magic":
@@ -1382,7 +1288,7 @@ mapping get_feats(object ob,string type)
     case "racial":
         feats = ob->query_racial_feats();
         break;
-    case "bonus":
+    case "martial":
         feats = ob->query_bonus_feats();
         break;
     case "magic":
@@ -1413,7 +1319,7 @@ mapping get_feats(object ob,string type)
 mapping player_data(object ob)
 {
     mapping data;
-    data = ([ "level" : (int)ob->query_highest_level(), ]);
+    data = ([ "level" : ob->query_highest_level(), ]);
     return data;
 }
 
@@ -1570,19 +1476,19 @@ string format_feat(string feat,object targ) {
         tmp = "%^CYAN%^--";
     } else if (!level_check) {
         tmp = "%^BOLD%^%^RED%^" + level + "%^RESET%^";
-    } else if (bought_as_class_feat(feat, targ)) {
+    } else if (bought_as_type_feat(feat, targ, "class")) {
         tmp = "%^BOLD%^%^MAGENTA%^" + level + "%^RESET%^";
-    } else if (bought_as_racial_feat(feat, targ)) {
+    } else if (bought_as_type_feat(feat, targ, "racial")) {
         tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
-    } else if (bought_as_bonus_feat(feat, targ)) {
+    } else if (bought_as_type_feat(feat, targ, "martial")) {
         tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
-    } else if (bought_as_magic_feat(feat, targ)) {
+    } else if (bought_as_type_feat(feat, targ, "spellcraft")) {
         tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
-    } else if (bought_as_hybrid_feat(feat, targ)) {
+    } else if (bought_as_type_feat(feat, targ, "hybrid")) {
         tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
-    } else if (bought_as_arcana_feat(feat, targ)) {
+    } else if (bought_as_type_feat(feat, targ, "arcana")) {
         tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
-    } else if (bought_as_divinebond_feat(feat, targ)) {
+    } else if (bought_as_type_feat(feat, targ, "divinebond")) {
         tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
     } else {
         tmp = "%^CYAN%^" + level + "%^RESET%^";
@@ -1613,7 +1519,7 @@ int is_feat_obsolete(string feat)
 // to mess with it again.  -Ares
 void display_feats(object ob,object targ, string mytype)
 {
-    int i,j,tmp,tmp2;
+    int i,j,tmp;
     string *categories,*left_cats=({}),*right_cats=({}),*left_column,*right_column,display_cat,*display_feats,*classes,targ_class;
     string *display = ({}),*temp=({}),*good=({}),*currentlist=({}),*badcategories=({});
     mapping feats=([]),temp_feats=([]);
@@ -1623,8 +1529,8 @@ void display_feats(object ob,object targ, string mytype)
     categories = keys(temp_feats);
     if(!mytype || mytype == "") mytype = "all";
     switch(mytype) {
-      case "magic": currentlist += SPELLFEATS; break;
-      case "melee": currentlist += MELEEFEATS; break;
+      case "spellcraft": currentlist += SPELLFEATS; break;
+      case "martial": currentlist += MELEEFEATS; break;
       case "hybrid": currentlist += SPELLFEATS; currentlist += MELEEFEATS;  break;
       case "arcana": currentlist += MAGUSFEATS;  break;
       case "divinebond": currentlist += PALADINFEATS;  break;
@@ -1653,7 +1559,7 @@ void display_feats(object ob,object targ, string mytype)
         currentlist -= ({ "Psionics" });
     }
     if (!targ->is_class("magus") && !avatarp(targ)) {
-        currentlist -= ({ "MagusArcana" });
+        currentlist -= ({ "MagusArcana", "Steel&Magic" });
     }
     if (!targ->is_class("paladin") && !avatarp(targ)) {
         currentlist -= ({ "DivineBond" });
@@ -1678,6 +1584,9 @@ void display_feats(object ob,object targ, string mytype)
             //a list of feats they are allowed to take
             if (mytype == "allowed") {
                 temp = filter_array(temp, "display_meets_requirements", TO, targ);
+            }
+            if (mytype == "active") {
+                temp = filter_array(temp, "display_is_activable", TO, targ);
             }
             good = ({});
             for (j = 0; j < sizeof(temp); j++) {
@@ -1706,26 +1615,15 @@ void display_feats(object ob,object targ, string mytype)
         return;
     }
 
+    if (!sizeof(categories) && mytype == "active") {
+        tell_object(ob, "%^BOLD%^%^RED%^You don't have any active feats at the moment.%^RESET%^");
+        return;
+    }
+
     categories = sort_array(categories, 1);
     {
-        string oline, ft;
-        int columns, scrw, maxcolumns, maxw;
         int vertical = ob->getenv("VCOLUMNS") ? 1 : 0;
         string * obuff;
-
-        maxw = 34;
-
-        scrw = atoi(ob->getenv("SCREEN"));
-
-        maxcolumns = scrw / maxw;
-        maxcolumns = maxcolumns < 1 ? 1 : maxcolumns;
-
-        columns = atoi(ob->getenv("COLUMNS"));
-        columns = columns < 1 ? 1 : columns;
-
-        columns = columns > maxcolumns ? maxcolumns : columns;
-
-        scrw = columns * maxw;
 
         if (vertical) {
             obuff = ({});
@@ -1735,13 +1633,13 @@ void display_feats(object ob,object targ, string mytype)
                 obuff += map(sort_array(feats[categories[i]], 1), (: format_feat($1, $2) :),targ);
                 obuff += ({" "});
             }
-            tell_object(ob, format_page(obuff, columns, scrw, vertical));
+            tell_object(ob, auto_format_page(obuff, ob, 34));
         } else {
             for (i = 0; i < sizeof(categories); i++)
             {
                 obuff = map(sort_array(feats[categories[i]], 1), (: format_feat($1, $2) :),targ);
                 tell_object(ob, "%^BOLD%^%^WHITE%^" + categories[i]);
-                tell_object(ob, format_page(obuff, columns, scrw));
+                tell_object(ob, auto_format_page(obuff, ob, 34));
             }
 
         }
@@ -1782,134 +1680,45 @@ string* class_feat_array(string myclass, string spec)
     return feat_array;
 }
 
-int bought_as_class_feat(string feat,object targ) {
-    string *feat_array;
-    mapping class_feats;
-    int *featkeys, i;
-
-    feat = lower_case(feat);
-    if(!has_feat(targ,feat)) return 0;
-    class_feats = targ->query_class_feats();
-    if(!mapp(class_feats)) return 0;
-    featkeys = keys(class_feats);
-    if(!sizeof(featkeys)) return 0;
-
-    feat_array = ({});
-    for(i=0;i<sizeof(featkeys);i++) feat_array += class_feats[featkeys[i]];
-    if(!sizeof(feat_array)) return 0;
-    if(member_array(feat,feat_array) == -1) return 0;
-    return 1;
-}
-
-int bought_as_racial_feat(string feat,object targ) {
-    string *feat_array;
-    mapping racial_feats;
-    int *featkeys, i;
-
-    feat = lower_case(feat);
-    if(!has_feat(targ,feat)) return 0;
-    racial_feats = targ->query_racial_feats();
-    if(!mapp(racial_feats)) return 0;
-    featkeys = keys(racial_feats);
-    if(!sizeof(featkeys)) return 0;
-
-    feat_array = ({});
-    for(i=0;i<sizeof(featkeys);i++) feat_array += racial_feats[featkeys[i]];
-    if(!sizeof(feat_array)) return 0;
-    if(member_array(feat,feat_array) == -1) return 0;
-    return 1;
-}
-
-int bought_as_bonus_feat(string feat,object targ) {
-    string *feat_array;
-    mapping bonus_feats;
-    int *featkeys, i;
-
-    feat = lower_case(feat);
-    if(!has_feat(targ,feat)) return 0;
-    bonus_feats = targ->query_bonus_feats();
-    if(!mapp(bonus_feats)) return 0;
-    featkeys = keys(bonus_feats);
-    if(!sizeof(featkeys)) return 0;
-
-    feat_array = ({});
-    for(i=0;i<sizeof(featkeys);i++) feat_array += bonus_feats[featkeys[i]];
-    if(!sizeof(feat_array)) return 0;
-    if(member_array(feat,feat_array) == -1) return 0;
-    return 1;
-}
-
-int bought_as_magic_feat(string feat,object targ) {
-    string *feat_array;
-    mapping magic_feats;
-    int *featkeys, i;
-
-    feat = lower_case(feat);
-    if(!has_feat(targ,feat)) return 0;
-    magic_feats = targ->query_magic_feats();
-    if(!mapp(magic_feats)) return 0;
-    featkeys = keys(magic_feats);
-    if(!sizeof(featkeys)) return 0;
-
-    feat_array = ({});
-    for(i=0;i<sizeof(featkeys);i++) feat_array += magic_feats[featkeys[i]];
-    if(!sizeof(feat_array)) return 0;
-    if(member_array(feat,feat_array) == -1) return 0;
-    return 1;
-}
-
-int bought_as_hybrid_feat(string feat,object targ) {
-    string *feat_array;
-    mapping hybrid_feats;
-    int *featkeys, i;
-
-    feat = lower_case(feat);
-    if(!has_feat(targ,feat)) return 0;
-    hybrid_feats = copy(targ->query_hybrid_feats());
-    if(!mapp(hybrid_feats)) return 0;
-    featkeys = keys(hybrid_feats);
-    if(!sizeof(featkeys)) return 0;
-
-    feat_array = ({});
-    for(i=0;i<sizeof(featkeys);i++) feat_array += hybrid_feats[featkeys[i]];
-    if(!sizeof(feat_array)) return 0;
-    if(member_array(feat,feat_array) == -1) return 0;
-    return 1;
-}
-
-int bought_as_arcana_feat(string feat, object targ) {
+int bought_as_type_feat(string feat, object targ, string feattype) {
     string* feat_array;
-    mapping arcana_feats;
+    mapping type_feats;
     int* featkeys, i;
 
     feat = lower_case(feat);
     if (!has_feat(targ, feat)) return 0;
-    arcana_feats = copy(targ->query_arcana_feats());
-    if (!mapp(arcana_feats)) return 0;
-    featkeys = keys(arcana_feats);
+    switch (feattype) {
+    case "class":
+        type_feats = targ->query_class_feats();
+        break;
+    case "racial":
+        type_feats = targ->query_racial_feats();
+        break;
+    case "martial":
+        type_feats = targ->query_bonus_feats();
+        break;
+    case "spellcraft":
+        type_feats = targ->query_magic_feats();
+        break;
+    case "hybrid":
+        type_feats = targ->query_hybrid_feats();
+        break;
+    case "arcana":
+        type_feats = targ->query_arcana_feats();
+        break;
+    case "divinebond":
+        type_feats = targ->query_divinebond_feats();
+        break;
+    default:
+        type_feats = targ->query_class_feats();
+        break;
+    }
+    if (!mapp(type_feats)) return 0;
+    featkeys = keys(type_feats);
     if (!sizeof(featkeys)) return 0;
 
     feat_array = ({});
-    for (i = 0;i < sizeof(featkeys);i++) feat_array += arcana_feats[featkeys[i]];
-    if (!sizeof(feat_array)) return 0;
-    if (member_array(feat, feat_array) == -1) return 0;
-    return 1;
-}
-
-int bought_as_divinebond_feat(string feat, object targ) {
-    string* feat_array;
-    mapping divinebond_feats;
-    int* featkeys, i;
-
-    feat = lower_case(feat);
-    if (!has_feat(targ, feat)) return 0;
-    divinebond_feats = copy(targ->query_divinebond_feats());
-    if (!mapp(divinebond_feats)) return 0;
-    featkeys = keys(divinebond_feats);
-    if (!sizeof(featkeys)) return 0;
-
-    feat_array = ({});
-    for (i = 0;i < sizeof(featkeys);i++) feat_array += divinebond_feats[featkeys[i]];
+    for (i = 0;i < sizeof(featkeys);i++) feat_array += type_feats[featkeys[i]];
     if (!sizeof(feat_array)) return 0;
     if (member_array(feat, feat_array) == -1) return 0;
     return 1;
@@ -1927,4 +1736,81 @@ int racial_bonus_feats(object ob) {
         }
     }
     return num;
+}
+
+int number_feats(object obj, string category, string* valid_classes) {
+    string* subset;
+    int i, j, BONUS_ALLOWED;
+    if (!sizeof(valid_classes)) {
+        if (category == "racial") {
+            BONUS_ALLOWED = racial_bonus_feats(obj);
+        }else {
+            BONUS_ALLOWED = (obj->query_highest_level() / 3) + 1;
+        }
+    }else {
+        subset = obj->query_classes();
+        if (!sizeof(subset)) {
+            tell_object(obj, "%^RED%^There is an error in the settings of your classes. Please notify a wiz with this error message.%^RESET%^");
+            return -1;
+        }
+        for (i = 0; i < sizeof(subset); i++) {
+            j = 0;
+            if (member_array(subset[i], valid_classes) == -1) {
+                continue;
+            }
+            switch (subset[i]) {
+                //martials
+            case "fighter":
+                if (obj->query_class_level("fighter") < 21) {
+                    j = (obj->query_class_level(subset[i]) / 2) + 1;
+                } else {
+                    j = 11 + (((obj->query_class_level(subset[i])) - 16) / 5);
+                }
+                break;
+            case "paladin":
+                if (category == "divinebond") {
+                    if (obj->query_class_level("paladin") > 4)
+                        j = 1;
+                    if (obj->query_class_level("paladin") > 20)
+                        j = 2;
+                }
+                else {
+                    j = ((obj->query_class_level(subset[i]) - 16) / 5);
+                }
+                break;
+                //casters
+            case "psion":
+            case "sorcerer":
+            case "mage":
+            case "oracle":
+                j = ((obj->query_class_level(subset[i]) + 4) / 5);
+                break;
+                //hybrids
+            case "magus":
+                if (category == "arcana") {
+                    j = (obj->query_class_level(subset[i]) / 3);
+                }
+                else {
+                    j = ((obj->query_class_level(subset[i]) + 1) / 6);
+                }
+                break;
+            case "psywarrior":
+                if (obj->query_class_level("psywarrior") < 21) {
+                    j = (obj->query_class_level(subset[i]) / 3) + 1;
+                } else {
+                    j = 7 + (((obj->query_class_level(subset[i])) - 16) / 5);
+                }
+                break;
+            default:
+                j = ((obj->query_class_level(subset[i]) - 16) / 5);
+                break;
+            }
+            if (j < 0) {
+                j = 0;
+            }
+            BONUS_ALLOWED += j;
+        }
+    }
+
+    return BONUS_ALLOWED;
 }

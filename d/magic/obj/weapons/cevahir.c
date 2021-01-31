@@ -20,7 +20,7 @@ int hit_func(object targ){
       tell_object(ETO,"%^RESET%^%^MAGENTA%^A beam of %^BOLD%^light %^RESET%^%^MAGENTA%^shoots forth from your sword, searing into "+targ->QCN+"!%^RESET%^");
       tell_object(targ,"%^RESET%^%^MAGENTA%^A beam of %^BOLD%^light %^RESET%^%^MAGENTA%^shoots forth from "+ETOQCN+"'s sword, searing into you!%^RESET%^");
       tell_room(EETO,"%^RESET%^%^MAGENTA%^A beam of %^BOLD%^light %^RESET%^%^MAGENTA%^shoots forth from "+ETOQCN+"'s sword, searing into "+targ->QCN+"!%^RESET%^",({ETO,targ}));
-      targ->do_damage("torso",random(4)+8);
-      return 1;
+  
+      return random(4)+8;
    }
 }

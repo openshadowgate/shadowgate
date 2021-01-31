@@ -6,8 +6,8 @@ int count;
 void create(){
    ::create();
    set_name("cologne");
-   set_id(({"cologne","bottle of cologne","oghma's rhapsody"}));
-   set_short("%^RESET%^%^RED%^Oghma's Rhapsody%^RESET%^");
+   set_id(({"cologne","bottle of cologne","divine rhapsody"}));
+   set_short("%^RESET%^%^RED%^Divine Rhapsody%^RESET%^");
    set_long("%^RED%^In a red-tinted square bottle this liquid "+
       "is housed.  Opening the stopper on the bottle reveals "+
       "the rich aroma of %^ORANGE%^tobacco %^RED%^and %^YELLOW%^"+
@@ -23,10 +23,12 @@ void init(){
         :: init();
         add_action("wear_per","wear");
 }
-
+string query_type(){
+    return "cologne";
+}
 
 int wear_per(string str){
-   if(str == "cologne" || str == "oghma's rhapsody"){
+   if(str == "cologne" || str == "divine's rhapsody"){
       if(count > 4){
          tell_object(TP,"The bottle of cologne is empty.");
          return 1;

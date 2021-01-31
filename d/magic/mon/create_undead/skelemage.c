@@ -30,17 +30,24 @@ void create()
     set_stats("strength", 10);
     set_stats("dexterity", 18);
     set_stats("constitution", 20);
-    set_stats("intelligence", 22);
-    set_stats("wisdom", 12);
+    set_stats("intelligence", 24);
+    set_stats("wisdom", 16);
     set_stats("charisma", 4);
+
+    set_property("flying", 1);
 
     set_alignment(9);
 
     add_search_path("/cmds/feats");
 
-    set_spells(({ "magic missile",
-                    "lightning bolt", }));
+    set_spells(({ "touch of fatigue",
+                    "touch of sickening",
+                    "burning hands",
+                    "ray of frost",
+                    "shocking grasp",
+                    "chill touch", }));
     set_spell_chance(100);
+    set_property("specral_hand", 1);
 
     set_monster_feats(({
                 "spell reflection",

@@ -155,32 +155,11 @@ Use <review> to review you choices or <press button> to start the process.\n");
     write("%^RESET%^%^GREEN%^--=%^BOLD%^<%^WHITE%^ " + targ->query_title() + " %^BOLD%^%^GREEN%^>%^RESET%^%^GREEN%^=--%^RESET%^");
 
     {
-        int columns, maxwidth, maxcolumns, scrwidth, itemwidth;
-        int i;
-        int vertical = TP->getenv("VCOLUMNS") ? 1 : 0;
-
         string * obuff;
 
-        maxcolumns = scolumn ? scolumn : atoi(TP->getenv("COLUMNS"));
-        maxcolumns = maxcolumns < 1 ? 1 : maxcolumns;
+        obuff = map_array(output, (:arrange_string("%^BOLD%^%^GREEN%^ " + arrange_string($1[0] + " %^BOLD%^%^BLACK%^--------------", 14) + "%^RESET%^%^GREEN%^ : %^RESET%^" + $1[1], $2):), 72);
 
-        itemwidth = 36;
-
-        if (maxcolumns == 1) {
-            itemwidth = 72;
-        }
-
-        columns = atoi(TP->getenv("SCREEN")) / (itemwidth);
-        columns = columns < 1 ? 1 : columns;
-
-        columns = columns > maxcolumns ? maxcolumns : columns;
-
-
-        scrwidth = columns * itemwidth;
-
-        obuff = map_array(output, (:arrange_string("%^BOLD%^%^GREEN%^ " + arrange_string($1[0] + " %^BOLD%^%^BLACK%^--------------", 14) + "%^RESET%^%^GREEN%^ : %^RESET%^" + $1[1], $2):), itemwidth);
-
-        tell_object(TP, format_page(obuff, columns, scrwidth, vertical));
+        tell_object(TP, auto_format_page(obuff, TP, 36));
     }
 
     return 1;
@@ -195,14 +174,12 @@ score - show your characters score sheet
 
 %^CYAN%^SYNOPSIS%^RESET%^
 
-score [%^ORANGE%^%^ULINE%^NUM%^RESET%^]
+score
 Avatars: score [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command gives you overview of your character, listing many various facts about them.
-
-%^ORANGE%^%^ULINE%^NUM%^RESET%^ given as an argument will display score with %^ORANGE%^%^ULINE%^NUM%^RESET%^ columns mode even if you have other column mode enabled.
 
 Avatars and above can specify target other than themselves.
 

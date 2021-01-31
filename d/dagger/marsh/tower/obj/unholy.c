@@ -31,7 +31,7 @@ void create() {
     set_obvious_short("%^BOLD%^%^BLACK%^A flawless darkened sword%^RESET%^");
     set_short("%^BOLD%^%^BLACK%^Unholy Avenger%^RESET%^");
 /*
-Original desc - 
+Original desc -
     set_long("%^RESET%^%^BLUE%^This is the Unholy Avenger of the Black Order of "
 	"Antipaladins.  Besides being a tool of destruction against holy "
 	"beings, it lends magical protection to the wielder.%^RESET%^"
@@ -51,7 +51,7 @@ Original desc -
        "colorless gems %^BLACK%^are seamlessly joined together as the "+
        "hilt, with two protrusions of colorless gems %^BLACK%^curved "+
        "out into crosspieces.  Slick with fresh %^RED%^blood%^BLACK%^, "+
-       "the hilt appears dangerous to handle.%^RESET%^"); 
+       "the hilt appears dangerous to handle.%^RESET%^");
     set_lore("Created as a mocking answer to the swords wielded by "+
        "holy paladins, the swords known as the unholy avengers were "+
        "commissioned originally by the archlich Vecna during the "+
@@ -158,10 +158,10 @@ int paladin() {
        ""+GEM+" gems %^BLACK%^are seamlessly joined together as the "+
        "hilt, with two protrusions of "+GEM+" gems %^BLACK%^curved "+
        "out into crosspieces.  Slick with fresh %^RED%^blood%^BLACK%^, "+
-       "the hilt appears dangerous to handle.%^RESET%^"); 
+       "the hilt appears dangerous to handle.%^RESET%^");
     ETO->set_property("evil item",1);
     return 1;
-}  
+}
 
 int removeme() {
   string god = ETO->query_diety();
@@ -208,7 +208,7 @@ int removeme() {
        "colorless gems %^BLACK%^are seamlessly joined together as the "+
        "hilt, with two protrusions of colorless gems %^BLACK%^curved "+
        "out into crosspieces.  Slick with fresh %^RED%^blood%^BLACK%^, "+
-       "the hilt appears dangerous to handle.%^RESET%^"); 
+       "the hilt appears dangerous to handle.%^RESET%^");
    ETO->set_property("evil item",-1);
    return 1;
 }
@@ -256,7 +256,7 @@ int extra_hit() {
        tell_object(ETO,"%^BOLD%^%^BLACK%^The sword channels your "+
           "%^RED%^unholy energy%^BLACK%^ into its swing!\n"+
           "%^BOLD%^%^RED%^A bright %^GREEN%^flash%^RED%^ is seen "+
-          "as you slash at "+ob->QCN+"!%^RESET%^");    
+          "as you slash at "+ob->QCN+"!%^RESET%^");
           if(FLAG == 1){
              tell_object(ETO,"\n%^BOLD%^%^RED%^The Avenger tells "+
                 "you: I detect the weakness of a good soul in our foe"+
@@ -327,7 +327,7 @@ int align, i, counter;
                "it senses the presence of a good heart.");
             tell_room(EETO,"%^BOLD%^%^BLACK%^The sword held by "+ETOQCN+" "+
                "darkens.",ETO);
-            continue;            
+            continue;
          }
        }
       }
@@ -368,7 +368,7 @@ object ob;
 
 int dispel_em(string str){
 object ob;
-   if (ETO->query_bound() || ETO->query_unconscious() 
+   if (ETO->query_bound() || ETO->query_unconscious()
     || ETO->query_paralyzed()) {
         ETO->send_paralyzed_message("info",ETO);
     }
@@ -396,50 +396,46 @@ object ob;
    return 1;
 }
 
-int summon_em(string str){
-   string god = ETO->query_diety();
-   object ob;
-   god = ETO->query_diety();
-   if (ETO->query_bound() || ETO->query_unconscious() 
-    || ETO->query_paralyzed()) {
-        ETO->send_paralyzed_message("info",ETO);
+int summon_em(string str)
+{
+    string god = ETO->query_diety();
+    object ob;
+    god = ETO->query_diety();
+    if (ETO->query_bound() || ETO->query_unconscious()
+        || ETO->query_paralyzed()) {
+        ETO->send_paralyzed_message("info", ETO);
     }
-   if(!str){
-      tell_object(ETO,"You may ask your deity for aid in the form of "+
-         "a mount - <call mount>");
-      return 1;
-   }
-   if(!TO->query_wielded()){
-      tell_object(ETO,"You must be wielding the sword to call on its power.");
-      return 1;
-   }
-   if(str == "mount"){
-      if(SUMMONTIME > (time() - summon_time)) {
-         failure();
-         return 1;
-      }
-      summon_time = time();
-      tell_object(ETO,"%^BOLD%^%^BLACK%^You plant the tip of your sword into "+
-         "the ground and spread your arms wide, calling for aid.");
-      tell_room(EETO,"%^BOLD%^%^BLACK%^"+ETOQCN+" plants "+ETO->QP+" sword "+
-         "in the ground and spreads "+ETO->QP+" arms wide.",ETO);
-//      ob = new("/d/common/mounts/nightmare"); // original sword summoning
-//      tell_room(EETO,"%^BOLD%^%^RED%^A nightmare flies in, answering the call!");
-      tell_room(EETO,"%^BOLD%^%^RED%^A mighty beast appears before you, answering the call!");
-  switch(god){
-  case "the faceless one":  ob = new("/d/common/mounts/dpegasus"); break;
-  case "grumbar":  ob = new("/d/common/mounts/bulette"); break;
-  case "lysara": ob = new("/d/common/mounts/panther"); break;
-  case "nilith":  ob = new("/d/common/mounts/nightmare"); break;      
-  case "kreysneothosies":  ob = new("/d/common/mounts/panther"); break;
-  case "kismet":  ob = new("/d/common/mounts/kirre"); break;
-  case "lord shadow":  ob = new("/d/common/mounts/shadowsteed"); break;
-  default:  break;
-   }
-      ob->set_owner(TP);
-      ob->move(EETO);
-      return 1;
-   }
-   tell_object(ETO,"You may only ask the sword to <call mount>.");
-   return 1;
+    if (str != "mount") {
+        return 0;
+    }
+    if (!TO->query_wielded()) {
+        tell_object(ETO, "You must be wielding the sword to call on its power.");
+        return 1;
+    }
+    if (str == "mount") {
+        if (SUMMONTIME > (time() - summon_time)) {
+            failure();
+            return 1;
+        }
+        summon_time = time();
+        tell_object(ETO, "%^BOLD%^%^BLACK%^You plant the tip of your sword into " +
+                    "the ground and spread your arms wide, calling for aid.");
+        tell_room(EETO, "%^BOLD%^%^BLACK%^" + ETOQCN + " plants " + ETO->QP + " sword " +
+                  "in the ground and spreads " + ETO->QP + " arms wide.", ETO);
+        tell_room(EETO, "%^BOLD%^%^RED%^A mighty beast appears before you, answering the call!");
+        switch (god) {
+        case "the faceless one":  ob = new("/d/common/mounts/dpegasus"); break;
+        case "grumbar":  ob = new("/d/common/mounts/bulette"); break;
+        case "lysara": ob = new("/d/common/mounts/panther"); break;
+        case "nilith":  ob = new("/d/common/mounts/nightmare"); break;
+        case "kreysneothosies":  ob = new("/d/common/mounts/panther"); break;
+        case "lord shadow":  ob = new("/d/common/mounts/shadowsteed"); break;
+        default:  ob = new("/d/common/mounts/kirre"); break;
+        }
+        ob->set_owner(TP);
+        ob->move(EETO);
+        return 1;
+    }
+    tell_object(ETO, "You may only ask the sword to <call mount>.");
+    return 1;
 }

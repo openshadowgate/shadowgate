@@ -43,7 +43,7 @@ void create()
 
     set_weight(3);
     set_value(2000);
-    set_item_bonus("temporary feats", "reflection");
+    //set_item_bonus("temporary feats", "reflection");
     //set_type("chain");
     //set_property("enchantment", 4);
     set_wear((:TO,"wear_func":));
@@ -80,6 +80,7 @@ int wear_func(){
     tell_object(ETO,"%^BLUE%^You struggle with the ill-fitted "+
     "blue metal gauntlet and finally manage to pull it into place. "+
     "%^RESET%^");
+    ETO->add_temporary_feat("reflection");
     return 1;
 }
 
@@ -94,6 +95,7 @@ int remove_me()
     tell_object(ETO,"%^BLUE%^You struggle with the ill-fitted "+
     "blue metal gauntlet and finally manage to pull it from your "+
     "hand!%^RESET%^");
+    ETO->remove_temporary_feat("reflection");
     return 1;
 }
 
