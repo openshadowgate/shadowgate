@@ -410,9 +410,9 @@ int __Show(string str)
     if (ob->is_weapon()) {
         if (ob->is_lrweapon()) {
             if (TP->query("new_class_type")) {
-                tell_room(ETO, "%^MAGENTA%^" + TOQCN + " says: %^RESET%^To use this as a ranged weapon, you'll have to visit the archery range and train in the use of " + ob->query_weapon_prof() + " weapon proficiency.");
+                tell_room(ETO, "%^MAGENTA%^" + TOQCN + " says: %^RESET%^To use this as a ranged weapon, you'll have to be trained in the use of " + ob->query_weapon_prof() + " weapon proficiency.");
             }else {
-                tell_room(ETO, "%^MAGENTA%^" + TOQCN + " says: %^RESET%^To use this as a ranged weapon, you'll have to visit the archery range and train in the use of " + ob->query_lr_prof_type() + ".");
+                tell_room(ETO, "%^MAGENTA%^" + TOQCN + " says: %^RESET%^To use this as a ranged weapon, you'll have to be trained in the use of " + ob->query_lr_prof_type() + ".");
             }
         }else {
             if (TP->query("new_class_type")) {
