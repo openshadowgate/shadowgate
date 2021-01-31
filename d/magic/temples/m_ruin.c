@@ -2,7 +2,7 @@
 //cleaned and coloured by Nienne, 12/04 //
 //changed to be a ruin by hades 1-30-21
 #include <std.h>
-inhert ROOM;
+inherit ROOM;
 //global variable to show which painting is active will be zero if no paintings showing
 int showing = 0;
 int scene = 0;
