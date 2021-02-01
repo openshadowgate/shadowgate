@@ -53,7 +53,7 @@ void check_my_heart()
 }
 
 string short_desc(){
-  if (TP->query_true_invis() || wizp(TP)){
+  if (TP->query_true_invis() || wizardp(TP)){
     return "An archer squad object, filename: " + base_name(TO);
   } else {
     return "An archer squad object you shouldn't be seeing. Please make a bug report";
