@@ -43,6 +43,6 @@ void drain(object target)
     int round_duration = roll_dice(query_level(), 20);
     int power = roll_dice(1, 4);
     tell_object(target, "%^BOLD%^BLUE%^You feel your life force drain away!");
-    tell_room(ETO, "%^BOLD%^BLUE%^" + target->query_cap_name() + "'s stumbles back weakly from the touch of the " + TO->query_name() + "!", targ);
+    tell_room(ETO, "%^BOLD%^BLUE%^" + target->query_cap_name() + "'s stumbles back weakly from the touch of the " + TO->query_name() + "!", target);
     "/std/effect/status/negative_level"->apply_effect(target, round_duration, power);
 }
