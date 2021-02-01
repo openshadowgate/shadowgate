@@ -73,29 +73,18 @@ void execute_feat()
     tell_room(place,"%^RESET%^%^ORANGE%^Strange symbols flash in "
         ""+caster->QCN+"'s eyes as "+caster->QS+" gives a warcry.%^RESET%^",caster);
 
-    mod = (flevel + 9) / 10;
+    //Should be 5 most of the time (except real low level) - new BAB adjustment
+    //This should bridge the gap between 3/4 BAB to full BAB
+    mod = caster->query_level() - BONUS_D->new_bab(caster->query_base_level(), caster); //5
 
-    intelligence = (int)caster->query_stats("intelligence");
-    if(intelligence < 1) intelligence = 1; //shouldn't be possible, but you never know
-    switch(intelligence)
-    {
-    case 1..15:  mod = mod; break;
-    case 16..18: mod += 1;  break;
-    case 19..20: mod += 2;  break;
-    case 21..23: mod += 3;  break;
-    default:     mod += 4;  break;
-    }
+    if(FEATS_D->usable_feat(caster,"battle psyche")) //10
+        mod += 5;
 
-    if(FEATS_D->usable_feat(caster,"battle psyche")) { extra = 4; }
+    caster->add_attack_bonus(mod); //+10
+    caster->add_damage_bonus(mod); //+10
 
-    caster->add_attack_bonus(mod + extra);
-    caster->add_damage_bonus(mod + extra);
-
-    duration = flevel/10;
-    if(duration < 1) duration = 1;
-    duration += 5;
-    if(extra) { duration = duration * extra; }
-    duration = duration * ROUND_LENGTH;
+    duration = 2 * (mod + BONUS_D->query_stat_bonus("intelligence", caster));
+    duration *= ROUND_LENGTH;
     caster->set_property("prescienced",1);
     call_out("check",ROUND_LENGTH);
     call_out("dest_effect",duration);
@@ -171,16 +160,14 @@ void check()
 void dest_effect()
 {
     ::dest_effect();
-    mod = mod + extra;
-    mod = mod*(-1);
     if(!objectp(caster))
     {
         remove_feat(TO);
         return;
     }
     tell_object(caster,"%^RESET%^%^ORANGE%^Your insight into battle fades, leaving you feeling slightly disoriented.%^RESET%^");
-    caster->add_attack_bonus(mod);
-    caster->add_damage_bonus(mod);
+    caster->add_attack_bonus(-mod);
+    caster->add_damage_bonus(-mod);
     caster->remove_property("prescienced");
     remove_feat(TO);
     return;
