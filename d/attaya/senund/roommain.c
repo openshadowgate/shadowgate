@@ -106,7 +106,7 @@ int search_shadow()
       {
         case 0:
          tell_object(TP,"The shadows appear empty.");
-         tell_room(TO,TPQCN+"does not seem to find anything.",TP);
+         tell_room(TO,TPQCN+" does not seem to find anything.",TP);
          return 1;
         case 1:
          tell_object(TP, "%^BLUE%^As you peer into the shadows two "+

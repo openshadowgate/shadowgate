@@ -37,28 +37,12 @@ void create(){
 	"left hand":(:TO,"drain":)
     ]) );
 }
-int drain(object targ)
+
+void drain(object target)
 {
-    int i, hp_loss;
-    string curclass,*classes;
-
-    if(targ->query_exp() < 6001)
-    {
-	    tell_object(targ,"%^BOLD%^RED%^The Skuz has withered your body to dust!");
-	    tell_room(ETO,"%^BOLD%^RED%^The Skuz has withered "+targ->query_cap_name()+"'s body to dust!",targ);
-        set_property("magic",1);
-        targ->set_hp(-1);
-        remove_property("magic");
-	} 
-
-    else 
-    {
-        tell_object(targ,"%^BOLD%^BLUE%^You feel your life force drain away!");
-        tell_room(ETO,"%^BOLD%^BLUE%^"+targ->query_cap_name()+" stumbles back weakly from the touch of the Skuz!",targ);
-	    targ->resetLevelForExp(-6000);
-//	    ADVANCE_D->class_news(curclass,targ->query_cap_name()+" has lost a level to the touch of a Skuz!");
-// Removed the broadcast message about the level loss because it is old code and no longer seems appropriate
-// Lujke November 2005
-    }
-
+    int round_duration = roll_dice(query_level(), 20);
+    int power = roll_dice(1, 4);
+    tell_object(target, "%^BOLD%^BLUE%^You feel your life force drain away!");
+    tell_room(ETO, "%^BOLD%^BLUE%^" + target->query_cap_name() + "'s stumbles back weakly from the touch of the " + TO->query_name() + "!", target);
+    "/std/effect/status/negative_level"->apply_effect(target, round_duration, power);
 }

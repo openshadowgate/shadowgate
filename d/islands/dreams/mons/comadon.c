@@ -90,7 +90,7 @@ int do_information()
 int do_information2()
 {
   force_me("say I do not know of much, except that I failed in my "+
-	"my duties to protect my charge.  Helm seems to have left "+
+	"my duties to protect my charge.  Kreysneothosies seems to have left "+
 	"me here until I can redeem myself to him.  I have learned "+
 	"how to traverse between regions in this area, and can "+
 	"%^CYAN%^teleport%^RESET%^ you deeper or %^CYAN%^wake%^RESET%^ "+

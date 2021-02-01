@@ -116,7 +116,7 @@ int move(object dest){
     return res;
   }
     if (!living(ETO)){
-    parrot = new (MOB + "parrot");
+    parrot = new ("/realms/lujke/tecqumin/mons/" + "parrot");
     if (stringp(owner)){
       parrot->set_owner(owner);
     }

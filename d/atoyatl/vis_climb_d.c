@@ -68,6 +68,8 @@ void create(){
   report_nums = ({});
 }
 
+
+
 void set_unreport(int u){
   unreport = u;
 }
@@ -3049,8 +3051,12 @@ void show_wall(object who){
   screen_height = atoi(who->getenv("LINES"));
   if (screen_width<10) screen_width = 75;
   limbs = query_positions(who->query_name());
+<<<<<<< HEAD
+  report("showwall 2 left hand pos: "); // + limbs[L_HAND] + " right hand pos: " + limbs[R_HAND] + " left leg pos: " + limbs[L_LEG] + " right leg pos: " + limbs[R_LEG] + " body pos: " + limbs[BODY], 4);
+=======
   report("showwall 2. No further comment");
 
+>>>>>>> 82410b7113c9a8c74870f9bd2def95733eef565d
   my_x = limbs[BODY] % 10000;
   my_y = limbs[BODY] / 10000;
   if (sizeof(mywall) > screen_height)
