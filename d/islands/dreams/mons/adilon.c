@@ -139,7 +139,7 @@ int do_ped3()
 int do_place()
 {
   force_me("say From what I can tell, we are standing in what "+
-	"resulted from a powerful spell gone wrong.  The Moonmaiden "+
+	"resulted from a powerful spell gone wrong.  Lady Graymantle "+
 	"has given me some guidance on this matter, and I shall "+
 	"share with you what little I know.");
   call_out("do_place2",10,TP);
@@ -199,7 +199,7 @@ int do_place6()
 
 int do_place7()
 {
-  force_me("say The Moonmaiden has willed that I remain here, until "+
+  force_me("say TLady Graymantle has willed that I remain here, until "+
 	"I can finally guide lost souls such as yourself back to the "+
 	"paths they seek.  You must find the four crystals, and "+
 	"place them within that pedestal.  From there, we may figure "+
