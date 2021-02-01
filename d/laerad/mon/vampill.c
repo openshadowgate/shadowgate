@@ -147,58 +147,21 @@ void brain_me1(object targ)
 {
     int i, hp_loss;
     string curclass, * classes;
-    if (wizardp(targ)) {
-        return;
-    }
-    if (interactive(targ)) {
-        if (targ->query_exp() < 6001) {
-            tell_object(targ, "The Vampire Illithid has withered your body to dust!");
-            tell_room(ETO, "The Vampire Illithid has withered " + targ->query_cap_name() + "'s body to dust!", targ);
-            set_property("magic", 1);
-            targ->do_damage(targ->return_target_limb(), targ->query_hp() + 10);
-            remove_property("magic");
-        } else {
-            tell_object(targ, "You feel your life force drain away!");
-            tell_room(ETO, targ->query_cap_name() + " stumbles back weakly from the touch of the Vampire Illithid!", targ);
-            targ->add_exp(random(5000) * -1);
-            targ->resetLevelForExp(0);
-            //  targ->general_exp_perc_adjust(-2);
-            //	targ->add_exp(-6000);
-            //	classes = targ->query_classes();
-            //        for(i=0;i<sizeof(targ->query_classes());i++){
-            //            curclass = classes[i];
-            //	    while((int)ADVANCE_D->get_exp(targ->query_class_level(curclass),curclass, targ) > ((int)targ->query_exp()/sizeof(classes))){
-            //	    targ->set_mlevel(curclass,(int)targ->query_class_level(curclass) - 1);
-            //            hp_loss = ADVANCE_D->get_hp_bonus(curclass,targ->query_stats("constitution"),targ->query_class_level(curclass),targ);
-            //            targ->set_max_hp(((int)targ->query_max_hp() - hp_loss));
-            //            targ->reduce_my_skills(curclass);
-            //            targ->reduce_my_skills(curclass);
-/*            if(interactive(targ)){
-            if(!wizardp(targ)){
-          ADVANCE_D->class_news(curclass,targ->query_cap_name()+" has lost a level to the touch of a Vampire Illithid!");
+
+    if (!SAVING_THROW_D->fort_save(targ, 20)) {
+        tell_object(targ, "%^BOLD%^As the tentacle hits you it grabs ahold of your head and starts to burrow towards your brain!");
+        tell_room(ETO, "%^BOLD%^As the tentacle hits " + targ->query_cap_name() + " it grabs ahold of " + targ->query_possessive() + " head and starts to burrow into it!", targ);
+        set_attack_limbs((string*)TO->query_attack_limbs() - ({ limb }));
+        num -= 1;
+        if (num < 1) {
+            num = 1;
         }
-           }
-   Removed after talking to several other wizzes about the message being outdated
-   ~Circe~ 9/28/05
- */
-//    }
-//  }
+        if (num > 4) {
+            num = 4;
         }
-        if (!SAVING_THROW_D->fort_save(targ, 20)) {
-            tell_object(targ, "%^BOLD%^As the tentacle hits you it grabs ahold of your head and starts to burrow towards your brain!");
-            tell_room(ETO, "%^BOLD%^As the tentacle hits " + targ->query_cap_name() + " it grabs ahold of " + targ->query_possessive() + " head and starts to burrow into it!", targ);
-            set_attack_limbs((string*)TO->query_attack_limbs() - ({ limb }));
-            num -= 1;
-            if (num < 1) {
-                num = 1;
-            }
-            if (num > 4) {
-                num = 4;
-            }
-            set_attacks_num(num);
-            call_out("burrow1", 5, targ);
-            return 1;
-        }
+        set_attacks_num(num);
+        call_out("burrow1", 5, targ);
+        return 1;
     }
 }
 
