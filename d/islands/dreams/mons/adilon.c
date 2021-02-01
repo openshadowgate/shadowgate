@@ -199,7 +199,7 @@ int do_place6()
 
 int do_place7()
 {
-  force_me("say TLady Graymantle has willed that I remain here, until "+
+  force_me("say Lady Graymantle has willed that I remain here, until "+
 	"I can finally guide lost souls such as yourself back to the "+
 	"paths they seek.  You must find the four crystals, and "+
 	"place them within that pedestal.  From there, we may figure "+
