@@ -138,10 +138,14 @@ void execute_attack()
         color = "%^WHITE%^";
     }
 
-    tell_room(ENV(caster), "%^BOLD%^" + color + caster->QCN + " channels divine energy through " + caster->QP + " weapon and strikes " + attacker->QCN + "!", ({ attacker }));
-
-    attacker->cause_typed_damage(attacker, attacker->return_target_limb(), dam, energy_type);
-    attacker && tell_object(attacker, "%^BOLD%^" + color + "You are struck with divine energy!");
+    if(BONUS_D->process_hit(caster, attacker, 1, 0, 0, 0) <= 0)
+        tell_room(ENV(caster), caster->QCN + " tries to strike + " + attacker->QCN + " with their divine-infused weapon but misses!");
+    else
+    {        
+        tell_room(ENV(caster), "%^BOLD%^" + color + caster->QCN + " channels divine energy through " + caster->QP + " weapon and strikes " + attacker->QCN + "!", ({ attacker }));
+        attacker->cause_typed_damage(attacker, attacker->return_target_limb(), dam, energy_type);
+        attacker && tell_object(attacker, "%^BOLD%^" + color + "You are struck with divine energy!");
+    }
 
     dest_effect();
 }
