@@ -82,7 +82,7 @@ int attack_bonus(object player)
     
     if(full_level < 20.00)
     {
-        bonus = (to_int(full_level) * 1 / 2);
+        bonus = (to_int(class_level) * 1 / 2);
         return bonus;
     }
     
