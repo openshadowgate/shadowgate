@@ -143,6 +143,7 @@ void execute_attack()
     else
     {        
         tell_room(ENV(caster), "%^BOLD%^" + color + caster->QCN + " channels divine energy through " + caster->QP + " weapon and strikes " + attacker->QCN + "!", ({ attacker }));
+        caster->execute_attack();
         attacker->cause_typed_damage(attacker, attacker->return_target_limb(), dam, energy_type);
         attacker && tell_object(attacker, "%^BOLD%^" + color + "You are struck with divine energy!");
     }
