@@ -74,5 +74,4 @@ int struck(int damage, object what, object who){
 		"blow, asorbing the damage!%^RESET%^");
    	  return -damage;
    }
-   return damage;
 }
