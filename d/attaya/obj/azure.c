@@ -68,10 +68,11 @@ int struck(int damage, object what, object who){
    if(!random(5)){
       tell_room(environment(query_worn()),"%^RESET%^%^CYAN%^"+ETO->QCN+"'s chainmail"+
 		", ripples against the blow as if asorbing the force!%^RESET%^",({who,ETO}));
-   	tell_object(who,"%^RESET%^%^CYAN%^As you hit "+ETO->QCN+", the armor ripples "+
+	  tell_object(who,"%^RESET%^%^CYAN%^As you hit "+ETO->QCN+", the armor ripples "+
 		"under your blow, asorbing the damage!");
-   	tell_object(ETO,"%^RESET%^%^CYAN%^The chainmail ripples under the weight of the "+
+	  tell_object(ETO,"%^RESET%^%^CYAN%^The chainmail ripples under the weight of the "+
 		"blow, asorbing the damage!%^RESET%^");
+   	  return -damage;
    }
-   return (-1)*(damage);
+   return damage;
 }
