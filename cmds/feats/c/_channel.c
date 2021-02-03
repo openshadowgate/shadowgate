@@ -118,7 +118,8 @@ void execute_attack()
     allies = ({caster}) + allies;
     allies = distinct_array(allies);
 
-    dam = roll_dice(flevel, 6);
+    dam = flevel + (FEATS_D->usable_feat(caster, "improved channel") * 2);
+    dam = roll_dice(dam, 6);
 
     if (caster->query_property("negative energy affinity")) {
         energy_type = "negative energy";

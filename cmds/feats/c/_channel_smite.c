@@ -127,7 +127,8 @@ void execute_attack()
 
     ::execute_attack();
 
-    dam = roll_dice(flevel, 6);
+    dam = flevel + (FEATS_D->usable_feat(caster, "improved channel") * 2);
+    dam = roll_dice(dam, 6);
 
     //Evil channel negative energy
     if (caster->query_true_align() % 3 == 0) {
