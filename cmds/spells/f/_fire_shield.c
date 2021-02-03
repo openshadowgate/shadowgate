@@ -105,14 +105,14 @@ void execute_attack(){
         tell_object(caster,"%^BOLD%^"+scolor+"Flames of your fire shield burn your enemies!");
 
         define_base_damage(0);
-        for(i=0;i<sizeof(attackers);i++){
-            tell_object(attackers[i],"%^BOLD%^"+scolor+"You are burned by the shield of flames as you strike "
+        for(i=0;i<sizeof(foes);i++){
+            tell_object(foes[i],"%^BOLD%^"+scolor+"You are burned by the shield of flames as you strike "
                         ""+caster->QCN+"!");
-            if(do_save(attackers[i], 0))
+            if(do_save(foes[i], 0))
             {
-                damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage / 2,element);
+                damage_targ(foes[i],foes[i]->return_target_limb(),sdamage / 2,element);
             } else {
-                damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,element);
+                damage_targ(foes[i],foes[i]->return_target_limb(),sdamage,element);
             }
         }
     }

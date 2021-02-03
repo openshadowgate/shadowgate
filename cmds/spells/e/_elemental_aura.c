@@ -115,13 +115,13 @@ void execute_attack(){
 
         define_base_damage(0);
 
-        for(i=0;i<sizeof(attackers);i++){
+        for(i=0;i<sizeof(foes);i++){
             dam = sdamage;
-            if(do_save(attackers[i],0))
+            if(do_save(foes[i],0))
                 dam/=2;
-            tell_object(attackers[i],colormap[element]+"You are burned by a shield of flames as you strike "
+            tell_object(foes[i],colormap[element]+"You are burned by a shield of flames as you strike "
                         ""+caster->QCN+"!");
-            damage_targ(attackers[i],attackers[i]->return_target_limb(),dam,element);
+            damage_targ(foes[i],foes[i]->return_target_limb(),dam,element);
         }
     }
     prepend_to_combat_cycle(place);
