@@ -111,8 +111,8 @@ void execute_attack(){
         tell_object(caster,"%^BOLD%^%^BLACK%^Your spinning blades tear into your enemies as they get too close!");
         tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+"'s spinning blades tear into "+caster->QP+" enemies as they get too close!",caster);
         define_base_damage(0);
-        for(i=0;i<sizeof(attackers);i++){
-            damage_targ(attackers[i],attackers[i]->return_target_limb(),sdamage,"fire");
+        for(i=0;i<sizeof(foes);i++){
+            damage_targ(foes[i],foes[i]->return_target_limb(),sdamage,"fire");
         }
     }
     prepend_to_combat_cycle(place);
