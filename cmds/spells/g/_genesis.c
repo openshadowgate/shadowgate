@@ -51,11 +51,11 @@ void spell_effect(int prof)
        "and it floats in midair, spinning!", caster);
     spell_successful();
     roomName = base_name(place);
+    portal->move(place);
     portal->set_property("spell", TO );
     portal->set_property("spelled", ({TO}) );
     portal->set_spellobj(TO);
     portal->start_magic(place, prof, roomName);
-    portal->move(place);
     tell_room(place, "%^BOLD%^%^BLUE%^The gem seems to grow, opening into "+
        "a small portal before it stops spinning!");
     addSpellToCaster();
