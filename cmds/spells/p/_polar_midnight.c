@@ -62,6 +62,7 @@ void execute_attack()
         return;
     }
 
+    message("info", "%^BOLD%^%^BLACK%^The brutal chill of the arctic night permeates the area!%^RESET%^", place);
     foes = target_selector();
     foes -= ({ caster });
 
