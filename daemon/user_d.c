@@ -265,9 +265,12 @@ varargs void regenerate_pool(object ob, int amount, int pass, string pool_type)
             }
             break;
         case "grace":
-            if ((int)ob->is_class("paladin")) {
+            if ((int)ob->is_class("paladin") || ob->is_class("cleric")) {
                 delay = 30 + roll_dice(9, 4);
-                delay -= (int)BONUS_D->query_stat_bonus(ob, "charisma");
+                if(ob->is_class("cleric"))
+                    delay -= (int)BONUS_D->query_stat_bonus(ob, "wisdom");
+                if(ob->is_class("paladin"))
+                    delay -= (int)BONUS_D->query_stat_bonus(ob, "charisma");
                 if (delay < 40) {
                     delay = 40;
                 }
@@ -321,13 +324,13 @@ void init_pool(object ob, string pool_type)
         }
         break;
     case "grace":
-        if ((int)ob->query_class_level("paladin") < 1) {
+        if ((int)ob->query_class_level("paladin") < 1 && ob->query_class_level("cleric") < 1) {
             ob->delete("available " + pool_type);
             ob->delete("maximum " + pool_type);
             return;
         }
         else {
-            newmax = 2 + (int)ob->query_class_level("paladin") / 10;
+            newmax = 2 + (int)ob->query_class_level("paladin") / 10 + ob->query_class_level("cleric") / 10;
         }
         break;
     }

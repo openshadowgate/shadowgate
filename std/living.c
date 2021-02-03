@@ -383,7 +383,7 @@ void heart_beat()
     if (TO->is_class("magus")) {
         USER_D->regenerate_pool(TO, (1 + random(2)), 1, "arcana");
     }
-    if (TO->is_class("paladin")) {
+    if (TO->is_class("paladin") || TO->is_class("cleric")) {
         USER_D->regenerate_pool(TO, 1, 1, "grace");
     }
     //enhancement effects
