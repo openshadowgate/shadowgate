@@ -10,7 +10,7 @@ void create()
     feat_name("channel smite");
     feat_prereq("Channel");
     feat_classes(({"paladin", "cleric"}));
-    feat_desc("This power allows a divine caster to channel primal energies (negative or positive) through their weapon, causing it to become infused with divine wrath, striking at their current attacker. The type of energy will depend on your alignment, e.g. evil will channel negative energy while good and neutral will channel positive energy. This feat will auto determine which type of energy is applied to the foe. Paladins must spend one Divine Grace point to use Channel Smite. The damage is based on your Channel dice. This feat shares a cooldown with Channel. Note : This is not a free feat.");
+    feat_desc("This power allows a divine caster to channel primal energies (negative or positive) through their weapon, causing it to become infused with divine wrath, striking at their current attacker. The type of energy will depend on your alignment, e.g. evil will channel negative energy while good and neutral will channel positive energy. This feat will auto determine which type of energy is applied to the foe. You must spend one Divine Grace point to use Channel Smite. The damage is based on your Channel dice. Note : This is not a free feat.");
     feat_syntax("channel_smite");
     set_target_required(0);
 }
@@ -68,20 +68,20 @@ void execute_feat()
         return;
     }
     
-    if(!caster->query_class_level("cleric"))
+    if(!(int)USER_D->spend_pool(TP, 1, "grace"))
     {
-        if(!(int)USER_D->spend_pool(TP, 1, "grace"))
-        {
-            tell_object(caster, "You don't have the Divine Grace to Channel Energy!");
-            return;
-        }
-    }    
+        tell_object(caster, "You don't have the Divine Grace to Channel Energy!");
+        return;
+    }
+
+    /*    
     else if ((int)caster->query_property("using channel") > time() &&
         !FEATS_D->usable_feat(caster, "supreme healer")) {
         tell_object(caster, "It's too soon to use channel or channel smite!");
         dest_effect();
         return;
     }
+    */
 
     ::execute_feat();
 
