@@ -1,10 +1,12 @@
 Name: %^CYAN%^Divine Grace%^RESET%^
 Type: Permanent
-Prerequisites: Paladin L1
+Prerequisites: Paladin or Cleric
 
-Paladins are able to draw upon a divine pool of resources to enhance their natural combat abilities. This pool is known as their %^CYAN%^Divine Grace%^RESET%^ pool.
+Paladins and Clerics are able to draw upon a divine pool of resources to enhance their natural combat abilities. This pool is known as their %^CYAN%^Divine Grace%^RESET%^ pool.
 
 This pool fuels the paladin's ability to %^CYAN%^Smite%^RESET%^ their foes, to %^CYAN%^Channel Divine Energy%^RESET%^, %^CYAN%^Lay on Hands%^RESET%^, and utilize their %^CYAN%^Bonded Weapon, Bonded Armor, and Bonded Steed%^RESET%^ class features.
+
+Clerics also use Divine Grace to fuel the spell-like abilities granted by their domains or to %^CYAN%^Channel Divine Energy%^RESET%^. 
 
 Divine Grace will replenish itself over time. To show your divine grace pool, please type 'help prompt'.
 
