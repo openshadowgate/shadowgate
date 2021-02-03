@@ -375,7 +375,7 @@ int advance(object tp, string myclass)
     {
         USER_D->init_pool(tp, "arcana");
     }
-    if (tp->is_class("paladin"))
+    if (tp->is_class("paladin") || tp->is_class("cleric"))
     {
         USER_D->init_pool(tp, "grace");
     }
