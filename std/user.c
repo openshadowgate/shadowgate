@@ -1406,7 +1406,7 @@ void setup()
                 {
                     USER_D->init_pool(TO, "arcana");
                 }
-                if (TO->is_class("paladin"))
+                if (TO->is_class("paladin") || TO->is_class("cleric"))
                 {
                     USER_D->init_pool(TO, "grace");
                 }
