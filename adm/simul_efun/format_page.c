@@ -61,27 +61,30 @@ varargs string format_page_v(string* items, int columns, int scrwidth)
     return ret;
 }
 
-string auto_format_page(string *output, object player, int min_col_width)
+string auto_format_page(string *output, object player)
 {
     int y, z;
     int columns;
     int scrw = atoi(player->getenv("SCREEN"));
+    int scrl = atoi(player->getenv("LINES"));
     int vertical = player->getenv("VCOLUMNS") ? 1 : 0;
+    int i;
+    string result;
 
     // "Best fit columns algorithm"
 
     // Maximum width of the column
     z = max(map(output, (:sizeof(strip_colors($1)):))) + 2;
 
-    // If mobile user has terminal width less than 34 they can suffer.
-    scrw = scrw > min_col_width ? scrw : 72;
+    // We don't support pretty output on terminals too thin in both directions
+    scrw = scrw ? scrw : 72;
+    scrw = scrw > 34 ? scrw : 34;
+    scrl = scrl ? scrl : 20;
+    scrl = scrl > 6 ? scrl : 6;
 
     // Columns setting set by user
     y = atoi(player->getenv("COLUMNS"));
     y = y < 1 ? 1 : y;
-
-    // If user has no columns set display full width of the names
-    z = y > 1 ? 34 : z;
 
     // How many times output string fits in current screen width?
     columns = scrw / z;
@@ -96,6 +99,14 @@ string auto_format_page(string *output, object player, int min_col_width)
     scrw = z * columns;
 
     // Location data is small, no buffering is necessary, we can just output it.
-    return format_page(output, columns, scrw, vertical);
+    result = "";
+
+    while(i < sizeof(output))
+    {
+        result += format_page(output[i..(i + columns * scrl - 1)], columns, scrw, vertical) + "\n";
+        i += columns * scrl;
+    }
+
+    return result;
 
 }

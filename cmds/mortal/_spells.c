@@ -89,7 +89,7 @@ int cmd_spells(string str)
 
     if (sizeof(output))
     {
-        tell_object(TP, auto_format_page(output, TP, 34));
+        tell_object(TP, auto_format_page(output, TP));
     }
 
     CleanUpSpellObjects();
