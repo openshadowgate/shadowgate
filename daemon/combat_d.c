@@ -344,6 +344,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
     if (type == "negative energy") {
         if (targ->query_property("heart of darkness") ||
             FEATS_D->usable_feat(targ, "undead graft") ||
+            member_array("undeath", targ->query_divine_domain()) >= 0 ||
             targ->query_property("negative energy affinity")) {
             damage = -abs(damage);
         }else {

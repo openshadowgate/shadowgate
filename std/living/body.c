@@ -693,6 +693,8 @@ void set_resistance_percent(string res, int num)
 int query_resistance(string res)
 {
     int myres;
+    string *domains;
+    
     if (!valid_resistance(res)) {
         return 0;                        // to avoid throwing errors on any invalid queries. N, 8/15.
     }
@@ -734,6 +736,34 @@ int query_resistance(string res)
             }
         }
     }
+    
+    //Cleric domain-specific resistances
+    domains = TO->query_divine_domain();
+    
+    if(sizeof(domains))
+    {
+        switch(res)
+        {
+            case "fire":
+            if(member_array("fire", domains) >= 0)
+                myres += TO->query_class_level("cleric");
+            break;
+            
+            case "cold":
+            if(member_array("cold", domains) >= 0)
+                myres += TO->query_class_level("cleric");
+            break;
+            
+            case "acid":
+            if(member_array("earth", domains) >= 0)
+                myres += TO->query_class_level("cleric");
+            break;
+            
+            case "electricity":
+            if(member_array("air", domains) >= 0)
+                myres += TO->query_class_level("cleric");
+        }
+    }              
 
     if (TO->query_race() == "shade") {
         if (res == "cold" || res == "electricity") {
