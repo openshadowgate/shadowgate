@@ -88,7 +88,7 @@ int unwield_func(){
 "the dagger.%^RESET%^");
    tell_room(EETO,"%^MAGENTA%^"+ETO->QCN+"'s body becomes %^BLUE%^solid %^MAGENTA%^again as "+ETO->QS+
 " releases "+ETO->QP+" grip on the dagger.%^RESET%^",ETO);
-   ETO->remove_property("added short",({" %^BOLD%^%^BLACK%^(a little faded and hazy)%^RESET%^"}));
+   ETO->remove_property_value("added short",({" %^BOLD%^%^BLACK%^(a little faded and hazy)%^RESET%^"}));
    ETO->set("long",0);
    ETO->set_property("master weapon",-1);
    return 1;
