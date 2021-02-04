@@ -39,7 +39,6 @@ int get_exp_cost(object obj, int num)
 {
     int level, cost, extra;
 
-    int level_adjust;
     string race, subrace, file;
 
     if (!objectp(obj)) {
@@ -52,9 +51,6 @@ int get_exp_cost(object obj, int num)
     race = (string)obj->query_race();
     subrace = (string)obj->query("subrace");
     file = "/std/races/" + race + ".c";
-    if (file_exists(file)) {
-        level_adjust = (int)file->level_adjustment(subrace);
-    }
 
     level = (int)obj->query_adjusted_character_level();
     if (level > CHARACTER_LEVEL_CAP) {
@@ -62,7 +58,7 @@ int get_exp_cost(object obj, int num)
     }
     extra = (int)obj->query_exp() - total_exp_for_level(level);
 
-    cost = total_exp_for_level(level) - total_exp_for_level(level - (num + level_adjust));
+    cost = total_exp_for_level(level) - total_exp_for_level(level - (num));
     cost = cost + extra;
     return cost;
 }
@@ -198,7 +194,7 @@ int confirm_drop(string str, string theclass, int drop, int cost)
 int cmd_abandon(string str)
 {
     string* classes, myrace, mysubrace, file;
-    int class_level, cost, drop, lvladjust = 0, i;
+    int class_level, cost, drop, i;
     object class_ob;
 
     if (!objectp(TP)) {
@@ -218,9 +214,6 @@ int cmd_abandon(string str)
     myrace = TP->query_race();
     mysubrace = TP->query("subrace");
     file = "/std/races/" + myrace + ".c";
-    if (file_exists(file)) {
-        lvladjust = (int)file->level_adjustment(mysubrace);
-    }
 
     for (i = 0; i < sizeof(classes); i++) {
         class_ob = find_object_or_load(DIR_CLASSES + "/" + classes[i] + ".c");

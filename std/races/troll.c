@@ -20,7 +20,6 @@ int is_restricted() { return 1; } // restricted races by approval
 
 mapping skill_mods(string subrace) { return ([ "perception" : 2 ]); }
 
-int level_adjustment(string subrace) { return 0; }
 
 int natural_AC(string subrace) { return 0; }
 

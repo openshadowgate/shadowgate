@@ -20,7 +20,6 @@ int *stat_mods(string subrace) { return ({ 2, 0, 0, 0, 0, 0 }); }
 
 mapping skill_mods(string subrace) { return ([ "endurance" : 2 ]); }
 
-int level_adjustment(string subrace) { return 0; }
 
 int natural_AC(string subrace) { return 0; }
 

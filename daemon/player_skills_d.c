@@ -554,7 +554,7 @@ int query_adjusted_character_level() {
 }
 
 int query_character_level() {
-    int i,num,lvladjust;
+    int i,num;
     string myrace,mysubrace,file;
     if(!sizeof(classes)) { return 0; }
 
@@ -568,8 +568,6 @@ int query_character_level() {
     myrace = this_object()->query_race();
     mysubrace = (string)query("subrace");
     file = "/std/races/"+myrace+".c";
-    if(file_exists(file)) lvladjust = (int)file->level_adjustment(mysubrace);
-    num += lvladjust;
     return num;
 }
 

@@ -31,10 +31,6 @@ mapping skill_mods(string subrace) {
     return ([ "influence" : 2 ]);
 }
 
-int level_adjustment(string subrace) {
-    if(!subrace || subrace == "") return 0;
-}
-
 int natural_AC(string subrace) { return 0; }
 
 int sight_bonus(string subrace)

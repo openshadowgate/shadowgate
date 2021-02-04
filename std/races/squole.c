@@ -37,11 +37,6 @@ mapping skill_mods(string subrace)
     return ([ "athletics" : 2 ]);
 }
 
-int level_adjustment(string subrace)
-{
-    return 0;
-}
-
 int natural_AC(string subrace)
 {
     return 0;

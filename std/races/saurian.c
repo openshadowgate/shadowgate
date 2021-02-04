@@ -32,7 +32,6 @@ int *stat_mods(string subrace) {
 
 mapping skill_mods(string subrace) { return ([ "perception" : 2 ]); }
 
-int level_adjustment(string subrace) { return 0; }
 
 int natural_AC(string subrace) { return 2; }
 

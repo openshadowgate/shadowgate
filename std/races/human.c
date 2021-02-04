@@ -78,20 +78,6 @@ mapping skill_mods(string subrace) {
     }
 }
 
-int level_adjustment(string subrace) {
-    if(!subrace || subrace == "") return 0;
-    if(subrace == "tiefling" ||
-       subrace == "aasimar" ||
-       subrace == "air genasi" ||
-       subrace == "feytouched" ||
-       subrace == "earth genasi" ||
-       subrace == "fire genasi" ||
-       subrace == "water genasi" ||
-       subrace == "dhampir")
-        return 0;
-    return 0;
-}
-
 int natural_AC(string subrace) {
     if(!subrace || subrace == "") return 0;
     switch(subrace) {
