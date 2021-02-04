@@ -1,8 +1,9 @@
-inherit "/std/bag_logic";
+inherit "/d/common/obj/misc/sack";
 
-void create() {
-  ::create();
-   set_id(({"sack","ssack","small sack"}));
+void create()
+{
+    ::create();
+    set_id(({ "sack", "ssack", "small sack" }));
     set_name("small sack");
     set("short", "A small cloth sack");
     set_weight(5);
@@ -11,4 +12,8 @@ void create() {
     set_cointype("copper");
     set_max_internal_encumbrance(15);
 }
-int is_light_opaque() { return 1;}
+
+int is_light_opaque()
+{
+    return 1;
+}

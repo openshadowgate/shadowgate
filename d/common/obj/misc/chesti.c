@@ -22,21 +22,6 @@ void create()
     set_property("repairtype",({ "woodwork" }));
 }
 
-string query_chest_type() { return chest_type; }
-void set_chest_type(string type) { chest_type = type; }
-//Unused - Saide
-
-/*string fix_color(string color)
-{
-	int x;
-	string *ncolor;
-	ncolor = explode(color, "");
-	for(x = 0;x<sizeof(ncolor);x++)
-	{
-		ncolor[x] = capitalize(ncolor[x]);
-	}
-	return "%^"+implode(ncolor,"")+"%^";
-}*/
 
 void create_treasure_chest(mixed size, string type)
 {
@@ -450,3 +435,5 @@ int save_me(string file)
 }
 
 int is_chest() { return 1; }
+
+int is_sack() {return 1;}

@@ -13,6 +13,23 @@ void create()
     set_max_internal_encumbrance(30);
     set_property("repairtype",({"tailor" }));
 }
+
+void init()
+{
+    ::init();
+
+    // Intentionally not deep_inventory
+    if (collapse_array(all_inventory(TP)->is_sack()) > 5) {
+        write("%^BOLD%^%^RED%^You struggle to hold that many sacks, and drop it on the ground.");
+        TO->move(ETP);
+    }
+}
+
+int is_sack()
+{
+    return 1;
+}
+
 int is_light_opaque()
 {
     return 1;
