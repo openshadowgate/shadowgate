@@ -74,7 +74,13 @@ int animal_command(string str)
     
     input = explode(str, " ");
     
-    if(sizeof(input) < 2)
+    if(sizeof(input) < 1)
+    {
+        tell_object(this_player(), "Syntax : animal [long/short/follow].");
+        return 1;
+    }
+    
+    if(sizeof(input) < 2 && input[0] == "long" || input[0] == "short")
     {
         tell_object(this_player(), "Syntax : animal [long/short] [input].");
         return 1;
