@@ -85,6 +85,12 @@ int immunity_check(object obj, string type)
             return 1;
         }
 
+        if(obj->query_class_level("cleric"))
+        {
+            if(member_array("martyr", obj->query_divine_domain()) >= 0)
+                return 1;
+        }
+
         return 0;
     }
 
