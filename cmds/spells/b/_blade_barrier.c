@@ -104,15 +104,17 @@ void execute_attack(){
 
     foes = caster->query_attackers();
 
-    if(sizeof(foes))
-    {
-        define_base_damage(0);//reroll each turn
+    if (sizeof(foes)) {
+        define_base_damage(0);    //reroll each turn
 
-        tell_object(caster,"%^BOLD%^%^BLACK%^Your spinning blades tear into your enemies as they get too close!");
-        tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+"'s spinning blades tear into "+caster->QP+" enemies as they get too close!",caster);
+        tell_object(caster, "%^BOLD%^%^BLACK%^Your spinning blades tear into your enemies as they get too close!");
+        tell_room(place, "%^BOLD%^%^BLACK%^" + caster->QCN + "'s spinning blades tear into " + caster->QP + " enemies as they get too close!", caster);
         define_base_damage(0);
-        for(i=0;i<sizeof(foes);i++){
-            damage_targ(foes[i],foes[i]->return_target_limb(),sdamage,"fire");
+        for (i = 0; i < sizeof(foes); i++) {
+            if (!objectp(foes[i])) {
+                continue;
+            }
+            damage_targ(foes[i], foes[i]->return_target_limb(), sdamage, "fire");
         }
     }
     prepend_to_combat_cycle(place);
@@ -122,13 +124,15 @@ void execute_attack(){
 void dest_effect()
 {
     remove_call_out("room_check");
-    if(objectp(caster)){
-        tell_room(environment(caster),"%^CYAN%^The spinning blades surrounding "+caster->QCN+" slow "
-            "and then dissipate.",caster);
-        tell_object(caster,"%^CYAN%^The spinning blades surrounding you slow and then fade away.");
+    if (objectp(caster)) {
+        tell_room(environment(caster), "%^CYAN%^The spinning blades surrounding " + caster->QCN + " slow "
+                  "and then dissipate.", caster);
+        tell_object(caster, "%^CYAN%^The spinning blades surrounding you slow and then fade away.");
         caster->remove_property("blade barrier");
-	    caster->remove_property_value("added short",({"%^CYAN%^ (encircled by blades)%^RESET%^"}));
+        caster->remove_property_value("added short", ({ "%^CYAN%^ (encircled by blades)%^RESET%^" }));
     }
-   ::dest_effect();
-   if(objectp(TO)) TO->remove();
+    ::dest_effect();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }
