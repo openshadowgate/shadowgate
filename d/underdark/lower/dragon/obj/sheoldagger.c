@@ -95,7 +95,7 @@ int unwield_func(){
 }
 
 int hit_func(object targ){
-   int rand, i;
+   int rand, i, extra;
    object *targetz;
 
    rand = roll_dice(1,10);
@@ -112,7 +112,7 @@ int hit_func(object targ){
          tell_object(targ,"%^MAGENTA%^The dagger's blade fades to %^BOLD%^%^BLACK%^translu%^RESET%^%^BLUE%^ce"
 "%^BOLD%^%^BLACK%^nt shadow %^RESET%^%^MAGENTA%^as it passes through your armor and clothing unharmed, only "
 "leaving a painful %^RED%^mark %^MAGENTA%^in your flesh!%^RESET%^");
-         return roll_dice(3,4);
+         extra = roll_dice(3,4);
     }
 
     if(rand > 2 && rand < 6)  {// between 3 and 5 or 30%
@@ -163,6 +163,8 @@ int hit_func(object targ){
 "%^MAGENTA%^gleam as "+ETO->QS+" plunges the weapon into "+targ->QCN+", and "+targ->QS+" blinks sightlessly.%^RESET%^",({ETO,targ}));
       targ->set_temporary_blinded(2);
     }
+
+    if(extra) return extra;
 }
 
 void bind_me(string *pplz) {
