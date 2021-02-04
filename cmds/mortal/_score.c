@@ -130,7 +130,6 @@ mixed* genoutput(object targ)
 int cmd_score(string args)
 {
     mixed* output = ({}), oline;
-    int scolumn = 0;
     object targ;
 
     if (TP->query_race() == "unborn") {
@@ -141,9 +140,7 @@ Use <review> to review you choices or <press button> to start the process.\n");
     targ = TP;
 
     if (args) {
-        if (regexp(args, "[1-9]")) {
-            scolumn = atoi(args);
-        }else if (args && avatarp(TP)) {
+        if (args && avatarp(TP)) {
             if (!(targ = find_player(args))) {
                 return notify_fail("That person is not available for scoring.\n");
             }
@@ -157,7 +154,7 @@ Use <review> to review you choices or <press button> to start the process.\n");
     {
         string * obuff;
 
-        obuff = map_array(output, (:arrange_string("%^BOLD%^%^GREEN%^ " + arrange_string($1[0] + " %^BOLD%^%^BLACK%^--------------", 14) + "%^RESET%^%^GREEN%^ : %^RESET%^" + $1[1], $2):), 72);
+        obuff = map_array(output, (:arrange_string("%^BOLD%^%^GREEN%^ " + arrange_string($1[0] + " %^BOLD%^%^BLACK%^--------------", 14) + "%^RESET%^%^GREEN%^ : %^RESET%^" + $1[1], $2):), 34);
 
         tell_object(TP, auto_format_page(obuff, TP, 36));
     }

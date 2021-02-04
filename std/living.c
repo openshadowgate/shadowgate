@@ -1703,7 +1703,7 @@ int query_attack_bonus()
             FEATS_D->usable_feat(TO, "second favored enemy") && ret += 2;
             FEATS_D->usable_feat(TO, "third favored enemy") && ret += 2;
         }
-        
+
         //Are we fighting our quarry?
         if(TO->query_property("quarry") == attacker)
         {
@@ -2028,11 +2028,11 @@ string query_condition_string()
 
     switch (query_condition_percent()) {
     case 1..20:
-        stamina = "Falling Over";
+        stamina = "Collapsing";
         break;
 
     case 21..40:
-        stamina = "Exhausted";
+        stamina = "Spent";
         break;
 
     case 41..60:
@@ -2043,16 +2043,12 @@ string query_condition_string()
         stamina = "Vigorous";
         break;
 
-    case 81..99:
+    case 81..100:
         stamina = "Energetic";
         break;
 
-    case 100:
-        stamina = "Buzzing and Hustling";
-        break;
-
     default:
-        stamina = "Passed out";
+        stamina = "Fainted";
     }
     return stamina;
 }
