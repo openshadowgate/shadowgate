@@ -9,7 +9,7 @@ int cmd_man(string str)
 
     if (!str) {
         write("%^BOLD%^Sections: ");
-        write(format_page(get_dir("/doc/efun/")));
+        write(auto_format_page(get_dir("/doc/efun/"), TP));
         write("%^BOLD%^To view section type: <man *SECTION>");
         return 1;
     }
@@ -17,7 +17,7 @@ int cmd_man(string str)
         string sname;
         sscanf(str, "*%s", sname);
         write("%^BOLD%^Subtopics: ");
-        write(format_page(get_dir("/doc/efun/" + sname + "/")));
+        write(auto_format_page(get_dir("/doc/efun/" + sname + "/"), TP));
         write("%^BOLD%^To view topic type: <man *TOPIC>");
         return 1;
     }
