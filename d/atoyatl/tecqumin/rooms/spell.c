@@ -3415,7 +3415,7 @@ int race_immunity_check(object obj, string type)
     if (type = "fear silent") {
         type = "fear";
     }
-    return PLAYER_D->immunity_check(obj, type);
+    return LIVING_D->immunity_check(obj, type);
 }
 
 varargs int mind_immunity_check(object obj, string type)

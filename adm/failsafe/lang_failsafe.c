@@ -110,7 +110,7 @@ void init_lang() {
    }
 // was at the end, moving up so everyone gets common *Styx* 9/06
 // altered so beast/underdark races get undercommon instead as default.
-   if(member_array(TO->query_race(),PLAYER_D->night_races()) == -1) { // if is not a night race
+   if(member_array(TO->query_race(),LIVING_D->night_races()) == -1) { // if is not a night race
      if(!query_lang("common"))   // removed the intel > 8 && *Styx* 9/06
        set_lang("common",(75 + random(5)) );  // was (55 + random(intel))
    }

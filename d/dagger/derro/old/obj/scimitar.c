@@ -188,7 +188,7 @@ int extra_wield(){
      tell_object(ETO,"The scimitar glows brightly as you wield it.");
      tell_room(EETO,"The scimitar glows brightly as "+ETOQCN+" "+
         "wields it.",ETO);
-      if(member_array(ETO->query_race(),PLAYER_D->night_races()) != -1) ETO->add_sight_bonus(-3);
+      if(member_array(ETO->query_race(),LIVING_D->night_races()) != -1) ETO->add_sight_bonus(-3);
       else ETO->add_sight_bonus(3);
       ETO->set_property("good item",1);
 	return 1;
@@ -203,7 +203,7 @@ int extra_wield(){
     }
 }
 int extra_unwield(){
-    if(member_array(ETO->query_race(),PLAYER_D->night_races()) != -1) ETO->add_sight_bonus(3);
+    if(member_array(ETO->query_race(),LIVING_D->night_races()) != -1) ETO->add_sight_bonus(3);
     else ETO->add_sight_bonus(-3);
     tell_room(EETO,""+ETOQCN+"'s sword dims as it is released.",ETO);
     tell_object(ETO,"The sword dims as you let it go.");

@@ -111,7 +111,7 @@ void execute_attack()
     glvl = caster->query_guild_level("paladin");
     mod = BONUS_D->query_stat_bonus(caster, "charisma");
     dam = 5 + glvl + mod;
-    opposed = PLAYER_D->opposed_alignment(caster, target);
+    opposed = LIVING_D->opposed_alignment(caster, target);
     
     //Does double damage against opposed, triple damage against polar opposite
     //Opposed alignment also gets smite debuff that adds CHA bonus to this paladin's

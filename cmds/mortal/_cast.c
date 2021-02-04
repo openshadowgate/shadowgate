@@ -76,7 +76,7 @@ int cmd_cast(string str)
         str = replace_string(str, "as " + domain_name + " domain", "", 1);
     }
 
-    if (regexp(str, implode("/daemon/player_d"->list_classes(), "|") + "|innate")) {
+    if (regexp(str, implode(LIVING_D->list_classes(), "|") + "|innate")) {
         if (!sscanf(str, "%s %s", type, str2)) {
             return notify_fail("Syntax: <cast CLASS CAST_STRING>\n");
         }
@@ -359,7 +359,7 @@ Negative energy harms living and heals undead.
 Some spells are innate.   They can be cast without preparing them.
 EX:   cast innate undeath ward
 
-Would cast undeath ward if you are a crypt stalker with enough levels for that ability. 
+Would cast undeath ward if you are a crypt stalker with enough levels for that ability.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

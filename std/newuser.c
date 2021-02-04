@@ -1876,7 +1876,7 @@ int light_blind_remote(int actionbonus, object whichroom, int distance) {
   if (D_BUG_D->calc_message())
   tell_object(TO,"calc = "+calc);
 
-  if (member_array(query_race(),(string)PLAYER_D->night_races() ) != -1) {
+  if (member_array(query_race(),(string)LIVING_D->night_races() ) != -1) {
     calc *= -1;
     _total_light *= -1;
   }
@@ -1915,7 +1915,7 @@ int light_blind(int actionbonus) { return light_blind_remote(actionbonus, ETO, 0
 string light_blind_fail_message(int blindlight) {
   if (blindlight == 0)
     return "";
-  if (member_array(query_race(),(string)PLAYER_D->night_races() ) != -1) {
+  if (member_array(query_race(),(string)LIVING_D->night_races() ) != -1) {
     if (blindlight < 0)
       return "The bright light burns your eyes too much to see!";
     else
