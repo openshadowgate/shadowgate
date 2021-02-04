@@ -1703,7 +1703,7 @@ int query_attack_bonus()
             FEATS_D->usable_feat(TO, "second favored enemy") && ret += 2;
             FEATS_D->usable_feat(TO, "third favored enemy") && ret += 2;
         }
-
+        
         //Are we fighting our quarry?
         if(TO->query_property("quarry") == attacker)
         {
@@ -1807,6 +1807,16 @@ int query_damage_bonus()
 
         if(valid)
             ret += 2;
+    }
+    
+    //Plant domain gets +2 to unarmed fighting damage
+    if (!sizeof(weap) || weap[0] == attacker || attacker->query_property("shapeshifted"))
+    {
+        if(this_object()->query_class_level("cleric"))
+        {
+            if(member_array("plant", this_object()->query_divine_domain()) >= 0)
+                ret += 2;
+        }
     }
 
     return ret;
@@ -2028,11 +2038,11 @@ string query_condition_string()
 
     switch (query_condition_percent()) {
     case 1..20:
-        stamina = "Collapsing";
+        stamina = "Falling Over";
         break;
 
     case 21..40:
-        stamina = "Spent";
+        stamina = "Exhausted";
         break;
 
     case 41..60:
@@ -2043,12 +2053,16 @@ string query_condition_string()
         stamina = "Vigorous";
         break;
 
-    case 81..100:
+    case 81..99:
         stamina = "Energetic";
         break;
 
+    case 100:
+        stamina = "Buzzing and Hustling";
+        break;
+
     default:
-        stamina = "Fainted";
+        stamina = "Passed out";
     }
     return stamina;
 }
