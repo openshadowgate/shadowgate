@@ -1871,6 +1871,12 @@ varargs int do_saving_throw(object player, string type, int mod)
         mod -= 4;
     }
 
+    if(type == "will")
+    {
+        if(member_array("suffering", caster->query_divine_domain()))
+            mod -= 2;
+    }
+
     if (!type) {
         temp = "/daemon/saving_d.c"->saving_throw(player, "spell", mod);
     }else {
