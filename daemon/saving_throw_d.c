@@ -99,9 +99,9 @@ varargs void do_save(object ob, int dc, string type, raw_save)
                 ob->query("subrace") == "maalish") {
                 mod += 1;
             }
-            if(LIVING_D->check_aura(ob, "courage") == 2)
+            if(PLAYER_D->check_aura(ob, "courage") == 2)
                 mod += 2;
-            if(LIVING_D->check_aura(ob, "resolve") == 2)
+            if(PLAYER_D->check_aura(ob, "resolve") == 2)
                 mod += 2;
             break;
         }
@@ -178,6 +178,23 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     } else {
         save_info["save_result"] = 0;
     }
+    
+    if(save_info["save_result"] == 0)
+    {
+        if(ob->query_class_level("cleric"))
+        {
+            //Fate domain has a chance to add 1d4 to save and try again
+            if(member_array("fate", ob->query_divine_domain()) && !random(5))
+            {
+                roll1 += roll_die(1, 4);
+                if(roll1 + save + dc >= 0)
+                {
+                    tell_object(ob, "%^MAGENTA%^You feel the hand of fate change the outcome!%^RESET%^");
+                    save_info["save_result"] = 1;
+                }
+            }
+        }
+    }       
 }
 
 int get_save(object who, string type)
