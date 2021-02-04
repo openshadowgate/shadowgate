@@ -1873,7 +1873,7 @@ varargs int do_saving_throw(object player, string type, int mod)
 
     if(type == "will")
     {
-        if(member_array("suffering", caster->query_divine_domain()))
+        if(member_array("suffering", caster->query_divine_domain()) >= 0)
             mod -= 2;
     }
 
