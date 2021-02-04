@@ -767,6 +767,7 @@ int crit_damage(object attacker, object targ, object weapon, int size, int damag
             targ->query_hp_percent() < roll_dice(3, 6) &&
             targ->query_hp_percent() > 0 &&
             !targ->query_property("no death") &&
+            member_array("repose", targ->query_divine_domain()) < 0 &&
             targ->fort_save(attacker->query_level())
             ) {
             tell_object(targ, "%^BOLD%^%^RED%^" + attacker->QCN + " swings " + attacker->QP + " " + weapon->query_short() + " in a brutal swipe, hitting you in the head!\nEverything goes black...");
@@ -784,6 +785,7 @@ int crit_damage(object attacker, object targ, object weapon, int size, int damag
                 targ->query_hp_percent() < roll_dice(6, 6) &&
                 targ->query_hp_percent() > 0 &&
                 !targ->query_property("no death") &&
+                member_array("repose", targ->query_divine_domain()) < 0 &&
                 !targ->fort_save(attacker->query_guild_level("monk"))
                 ) {
                 tell_object(targ, "%^BOLD%^%^BLUE%^" + attacker->QCN + " strikes you swiftly on the forehead and everthing goes black!%^RESET%^");

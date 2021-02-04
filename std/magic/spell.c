@@ -2305,9 +2305,11 @@ void define_clevel()
             break;
         }
         
-        if(hour(date()) <= 6 || hour(date()) >= 18)
-            if(member_array("stars", domains) >= 0)
+        if(member_array("stars", domains) >= 0)
+        {
+            if(hour(date()) <= 6 || hour(date()) >= 18)
                 clevel += 1;
+        }
     }
 
     if ((spell_type == "mage" || spell_type == "sorcerer") && !shadow_spell) {
@@ -3102,6 +3104,7 @@ int combat_death_save(object foe, int casters_disadvantage)
         foe->query_property("no death") ||
         foe->query_level() > caster->query_level() ||
         foe->query_level() > clevel ||
+        (member_array("repose", foe->query_divine_domain()) + 1) ||
         random(2);
 }
 
