@@ -174,6 +174,9 @@ int is_immune(object victim)
         FEATS_D->usable_feat(victim, "divine health")) {
         return 1;
     }
+    if(member_array("plague", victim->query_divine_domain()) >= 0)
+        return 1;
+    
     return 0;
 }
 
