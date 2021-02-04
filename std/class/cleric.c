@@ -29,14 +29,18 @@ string *combat_styles() {
 }
 
 string *class_feats(string myspec)
-{
+{                
     return ({ "light armor proficiency",
               "medium armor proficiency",
               "simple weapon proficiency" });
 }
 
-mapping class_featmap(string myspec) {
-    return ([ 1: ({ "light armor proficiency", "medium armor proficiency", "simple weapon proficiency", "shield proficiency", "divine domain", "spell focus", "channel", "second divine domain"}), 5 : ({ "indomitable" }), 10: ({ "force of personality" }), 15: ({ "leadership" }), ]);
+mapping class_featmap(string myspec, object player) {
+
+    if(member_array("war", player->query_divine_domain()) >= 0)    
+        return ([ 1: ({ "light armor proficiency", "medium armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "shield proficiency", "divine domain", "spell focus", "channel", "second divine domain"}), 5 : ({ "indomitable" }), 10: ({ "force of personality" }), 15: ({ "leadership" }), ]);
+    else
+        return ([ 1: ({ "light armor proficiency", "medium armor proficiency", "simple weapon proficiency", "shield proficiency", "divine domain", "spell focus", "channel", "second divine domain"}), 5 : ({ "indomitable" }), 10: ({ "force of personality" }), 15: ({ "leadership" }), ]);
 }
 
 string *class_skills()
