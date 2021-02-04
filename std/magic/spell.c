@@ -2253,6 +2253,8 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
 
 void define_clevel()
 {
+    string *domains;
+    
     clevel = caster->query_guild_level(spell_type);
 
     if (spell_type == "assassin") {
@@ -2284,6 +2286,28 @@ void define_clevel()
         if (FEATS_D->usable_feat(caster, "mind wave")) {
             clevel += 2;
         }
+    }
+    
+    if(spell_type == "cleric")
+    {
+        domains = caster->query_divine_domain();
+        
+        switch(spell_sphere)
+        {
+            case "illusion":
+            if(member_array("illusion", domains) >= 0)
+                clevel += 1;
+            break;
+            
+            case "enchantment":
+            if(member_array("tyranny", domains) >= 0)
+                clevel += 1;
+            break;
+        }
+        
+        if(hour(date()) <= 6 || hour(date()) >= 18)
+            if(member_array("stars", domains) >= 0)
+                clevel += 1;
     }
 
     if ((spell_type == "mage" || spell_type == "sorcerer") && !shadow_spell) {
