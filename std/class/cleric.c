@@ -45,6 +45,12 @@ mapping class_featmap(string myspec, object player) {
 
 string *class_skills()
 {
+    if(member_array("trickery", ob->query_divine_domain()) >= 0)
+        return ({ "healing", "influence", "perception", "spellcraft", "stealth" });
+    
+    if(member_array("animal", ob->query_divine_domain()) >= 0)
+        return ({ "healing", "influence", "perception", "spellcraft", "survival" });
+        
     return ({ "healing","influence","perception","spellcraft" });
 }
 
