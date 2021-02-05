@@ -2315,11 +2315,16 @@ void define_clevel()
                 clevel += 1;
         }
         
+        //Stars domain gets caster level bonus at night
         if(member_array("stars", domains) >= 0)
         {
             if(hour(date()) < 6 || hour(date()) >= 18)
                 clevel += 1;
         }
+
+        //Madness domain gets caster level bonus with saving throw penalty
+        if(member_array("madness", domains) >= 0)
+            clevel += 1;
         
         if(evil_spell)
         {
