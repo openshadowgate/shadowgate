@@ -33,7 +33,7 @@ DOMAIN_SPELLS = ([
 "plague":({"touch of sickening", "necrophage", "contagion", "purge spirit", "greater contagion", "epidemic", "plague storm", "horrid wilting", "entropic storm"}),
 "plant" : ({ "entangle", "barkskin", "contagion", "thorn body", "wall of thorns", "liveoak", "animate plants", "mind blank", "shambler" }),
 "protection" : ({ "divine favor", "shield other", "resist energy", "lesser globe of invulnerability", "invisibility purge", "repulsion", "spell turning", "mind blank", "dimensional lock" }),
-"renewal" : ({ "bless", "restoration", "rejuvenation", "freedom of movement", "waves of fatigue", "disintegrate", "waves of exhaustion", "rebirth", "greater ruin" }),
+"renewal" : ({ "mending", "restoration", "rejuvenation", "freedom of movement", "breath of life", "heroes feast", "aura of healing", "rebirth", "resurrection" }),
 "repose" : ({ "spectral touch", "gentle repose", "phantom steed", "deathward", "slay living", "undeath is death", "waves of exhaustion", "destruction", "wail of the banshee" }),
 "stars":({"dancing lights", "levitate", "hypnotic pattern", "dimension door", "prying eyes", "sunbeam",  "reverse gravity", "sunburst", "meteor swarm"}),
 "storms" : ({ "snowball", "lightning touch", "sleet storm", "ice storm", "stormwinds", "sirocco", "acid fog", "stormrage", "storm of vengeance" }),
