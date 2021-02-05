@@ -125,6 +125,8 @@ varargs void do_save(object ob, int dc, string type, raw_save)
         if (FEATS_D->usable_feat(ob, "shadow master") && objectp(ENV(ob)) && ENV(ob)->query_light() < 2) {
             num += 2;
         }
+        if(member_array("madness", ob->query_divine_domain()) >= 0)
+            num -= 1;
 
         save_info["misc_modifiers"] = mod;
         {
