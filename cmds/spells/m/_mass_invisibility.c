@@ -9,7 +9,7 @@ create()
 {
     ::create();
     set_spell_name("mass invisibility");
-    set_spell_level(([ "mage" : 7, "assassin" : 4, "oracle: 7" ]));
+    set_spell_level(([ "mage" : 7, "assassin" : 4, "oracle": 7 ]));
     set_domains("trickery");
     set_mystery("shadow");
     set_spell_sphere("illusion");
