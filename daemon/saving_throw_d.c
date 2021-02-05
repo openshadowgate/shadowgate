@@ -126,7 +126,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
             num += 2;
         }
         if(member_array("madness", ob->query_divine_domain()) >= 0)
-            num -= 1;
+            num -= 2;
 
         save_info["misc_modifiers"] = mod;
         {
