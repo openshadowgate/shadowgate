@@ -2316,6 +2316,12 @@ void define_clevel()
             if(hour(date()) <= 6 || hour(date()) >= 18)
                 clevel += 1;
         }
+        
+        if(evil_spell)
+        {
+            if(member_array("evil", domains) >= 0)
+                clevel += 1;
+        }
     }
 
     if ((spell_type == "mage" || spell_type == "sorcerer") && !shadow_spell) {
