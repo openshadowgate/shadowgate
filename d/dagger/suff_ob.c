@@ -95,7 +95,8 @@ void heart_beat(){
     !present("underwtr_breath_ob", owner) && 
     !owner->query_property("water breather"))||
     (environment(owner)->query_property("vacuum")&&
-    !present("vacuum_breath_ob", owner)&& 
+    !present("vacuum_breath_ob", owner)&&
+    member_array("water", owner->query_divine_domain()) < 0 &&
     !owner->query_property("vacuum breather")))
     {
         held_time++;
