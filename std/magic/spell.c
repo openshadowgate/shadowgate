@@ -2309,11 +2309,15 @@ void define_clevel()
             if(member_array("tyranny", domains) >= 0)
                 clevel += 1;
             break;
+
+            case "divination":
+            if(member_array("knowledge", domains) >= 0)
+                clevel += 1;
         }
         
         if(member_array("stars", domains) >= 0)
         {
-            if(hour(date()) <= 6 || hour(date()) >= 18)
+            if(hour(date()) < 6 || hour(date()) >= 18)
                 clevel += 1;
         }
         
