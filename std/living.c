@@ -1810,7 +1810,7 @@ int query_damage_bonus()
     }
     
     //Plant domain gets +2 to unarmed fighting damage
-    if (!sizeof(weap) || weap[0] == attacker || attacker->query_property("shapeshifted"))
+    if (!sizeof(weap) || weap[0] == this_object() || this_object()->query_property("shapeshifted"))
     {
         if(this_object()->query_class_level("cleric"))
         {
