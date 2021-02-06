@@ -73,7 +73,13 @@ void create(){
             "fabricated %^BOLD%^%^GREEN%^fiction%^RESET%^%^CYAN%^. However, none of "+
             "them seem to have recently been moved. It is quite possible that this "+
             "grand repository of knowledge is purely for show.%^RESET%^",
-        ({"table", "ashtray"}) : "ADD SHIT",
+        ({"table", "ashtray"}) : "%^RESET%^%^CYAN%^Every %^BOLD%^%^BLACK%^chair "+
+            "%^RESET%^%^CYAN%^is accompanied by a three legged %^ORANGE%^table%^CYAN%^"+
+            ". Each leg is slender and flares outward before curing in at the foot, "+
+            "and the circular top is just wide enough to accommodate a small %^BOLD%^"+
+            "%^WHITE%^g%^RESET%^l%^BOLD%^a%^CYAN%^s%^WHITE%^s a%^RESET%^s%^BOLD%^h"+
+            "%^CYAN%^t%^WHITE%^r%^RESET%^a%^BOLD%^y %^RESET%^%^CYAN%^and room for a "+
+            "drink of choice.%^RESET%^",
         ]));
     set_exits(([
         "hall" : ROOMS "hall",

@@ -11,7 +11,7 @@ void create(){
         "east" : ROOMS "hallway1",
         ]));
     set_door("ebony door", ROOMS "hallway1", "east", 0);
-	set_door_description("oak door","%^RESET%^%^CYAN%^Fashioned from %^BOLD%^%^BLACK%^"+
+	set_door_description("ebony door","%^RESET%^%^CYAN%^Fashioned from %^BOLD%^%^BLACK%^"+
         "solid ebony%^RESET%^%^CYAN%^, this door is massive and sturdy in construction. "+
         "A %^YELLOW%^br%^RESET%^%^ORANGE%^a%^BOLD%^s%^RESET%^%^ORANGE%^s %^BOLD%^k"+
         "%^RESET%^%^ORANGE%^n%^BOLD%^ob %^RESET%^%^CYAN%^and %^YELLOW%^k%^RESET%^"+
