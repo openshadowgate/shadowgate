@@ -1181,7 +1181,7 @@ void InitInnate()
         if(member_array("earth", TO->query_divine_domain()) >= 0)
             feat_spells += ([ "acid dart" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
         if(member_array("darkness", TO->query_divine_domain()) >= 0)
-            feat_spells += ([ "blurred movement" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+            feat_spells += ([ "touch of darkness" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
     }
 
     // to add new classes or reasons for innates, simply add to feat_spells here before this line.
