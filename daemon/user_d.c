@@ -852,7 +852,7 @@ int is_pk_race_player(object ob)
 
     if (file_exists(racefile)) {
         if (ob->query("no pk")) {
-            if (racefile->is_pk_race(query("subrace")) ||
+            if (racefile->is_pk_race(ob->query("subrace")) ||
                 ob->is_undead()) {
                 return 1;
             }
