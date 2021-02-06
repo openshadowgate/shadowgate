@@ -38,12 +38,6 @@ string query_cast_string()
 
 int preSpell()
 {
-    if(!caster->ok_to_kill(target))
-    {
-        dest_effect();
-        return 0;
-    }
-    
     if(!(int)USER_D->spend_pool(this_player(), 1, "grace"))
     {
         tell_object(caster, "You don't have the Divine Grace to cast Bramble Armor!");
@@ -119,6 +113,3 @@ void dest_effect()
     if(objectp(this_object()))
         this_object()->remove();
 }
-    
-    
-
