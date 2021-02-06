@@ -188,7 +188,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
             //Fate domain has a chance to add 1d4 to save and try again
             if(member_array("fate", ob->query_divine_domain()) && !random(5))
             {
-                roll1 += roll_die(1, 4);
+                roll1 += roll_dice(1, 4);
                 if(roll1 + save + dc >= 0)
                 {
                     tell_object(ob, "%^MAGENTA%^You feel the hand of fate change the outcome!%^RESET%^");
