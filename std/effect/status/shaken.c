@@ -22,6 +22,16 @@ void status_effect()
         return;
     }
 
+    if (target->query_property("mind_immunity")) {
+        int roll = roll_dice(1, 20);
+        if (roll < target->query_property("mind_immunity") && roll != 20) {
+            tell_object(target,"%^CYAN%^Through your will you manage to avoid being shaken, at a price.");
+            target->cause_typed_damage(target,target->return_target_limb(),roll_dice(target->query_level(), 6),"mental");
+            TO->remove();
+            return;
+        }
+    }
+
     target->set_property("effect_shaken", 1);
 
     tell_object(target, "%^ORANGE%^You feel shaken.%^RESET%^");

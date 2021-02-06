@@ -29,6 +29,16 @@ void status_effect()
         return;
     }
 
+    if (target->query_property("mind_immunity")) {
+        int roll = roll_dice(1, 20);
+        if (roll < target->query_property("mind_immunity") && roll != 20) {
+            tell_object(target,"%^CYAN%^You endure through the panic, at a price.");
+            target->cause_typed_damage(target,target->return_target_limb(),roll_dice(target->query_level(), 8),"mental");
+            TO->remove();
+            return;
+        }
+    }
+
     target->set_property("effect_panicked", 1);
 
     tell_object(target, "%^BLUE%^You feel panicked.%^RESET%^");

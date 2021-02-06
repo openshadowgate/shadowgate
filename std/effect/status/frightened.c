@@ -31,6 +31,16 @@ void status_effect()
         return;
     }
 
+    if (target->query_property("mind_immunity")) {
+        int roll = roll_dice(1, 20);
+        if (roll < target->query_property("mind_immunity") && roll != 20) {
+            tell_object(target,"%^BLUE%^Through your will you manage to avoid fears, at a price.");
+            target->cause_typed_damage(target,target->return_target_limb(),roll_dice(target->query_level(), 6),"mental");
+            TO->remove();
+            return;
+        }
+    }
+
     target->set_property("effect_frightened",1);
 
     tell_object(target,"%^BLUE%^You feel frightened.%^RESET%^");

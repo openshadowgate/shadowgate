@@ -30,6 +30,16 @@ void status_effect()
         return;
     }
 
+    if (target->query_property("mind_immunity")) {
+        int roll = roll_dice(1, 20);
+        if (roll < target->query_property("mind_immunity") && roll != 20) {
+            tell_object(target,"%^ORANGE%^You endure the confusion, at a price.");
+            target->cause_typed_damage(target,target->return_target_limb(),roll_dice(target->query_level(), 8),"mental");
+            TO->remove();
+            return;
+        }
+    }
+
     target->set_property("effect_confused", 1);
     if (objectp(query_param())) {
         caster = query_param();
@@ -41,24 +51,25 @@ void status_effect()
 
 void maintain_confusion()
 {
-    if(!objectp(caster)||
-       !objectp(target))
+    if (!objectp(caster) ||
+        !objectp(target)) {
         dest_effect();
+    }
 
-    if(counter<0)
+    if (counter < 0) {
         dest_effect();
+    }
 
-    CONFUSION->confuse(caster,target);
-    call_out("maintain_confusion",ROUND_LENGTH);
+    CONFUSION->confuse(caster, target);
+    call_out("maintain_confusion", ROUND_LENGTH);
     counter--;
 }
 
 void dest_effect()
 {
     int i;
-    if(objectp(target))
-    {
-        tell_object(target,"%^ORANGE%^You are no longer confused.%^RESET%^");
+    if (objectp(target)) {
+        tell_object(target, "%^ORANGE%^You are no longer confused.%^RESET%^");
         target->remove_property("effect_confused");
     }
     ::dest_effect();
