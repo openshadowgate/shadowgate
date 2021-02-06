@@ -135,6 +135,12 @@ int GoThroughDoor()
             "been closed and the funds transferred into your inventory. You can check "+
             "this with the %^BOLD%^%^YELLOW%^money%^BOLD%^%^CYAN%^ command.%^RESET%^");
         }
+
+        if (USER_D->is_pk_race_player(TP)) {
+            TP->delete("no pk");
+            tell_object(TP, "%^YELLOW%^As a player of PK race, you are no longer flagged for PK immunity.%^RESET");
+        }
+
         if(member_array((string)TP->query_race(), bad_races) == -1)
         {
             tell_object(TP, "\n\n%^BOLD%^%^CYAN%^A map of the town of tabor appears "+

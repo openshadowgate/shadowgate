@@ -1309,18 +1309,9 @@ void setup()
         }
     }
 
-    {
-        string racefile = "/std/races/" + query("race") + ".c";
-
-        if (file_exists(racefile)) {
-            if (query("no pk")) {
-                if (racefile->is_pk_race(query("subrace")) ||
-                    TO->is_undead()) {
-                    delete("no pk");
-                    tell_object(TO, "%^YELLOW%^As a player of PK race, you are no longer flagged for PK immunity.%^RESET");
-                }
-            }
-        }
+    if (USER_D->is_pk_race_player(TO)) {
+        delete("no pk");
+        tell_object(TO, "%^YELLOW%^As a player of PK race, you are no longer flagged for PK immunity.%^RESET");
     }
 
     register_channels();
@@ -1346,11 +1337,11 @@ void setup()
             }
         }
         sight_bonus = (int)RACE_D->query_sight_bonus(query("race"));
-        
+
         if(member_array("cavern", TO->query_divine_domain()) >= 0 ||
            member_array("darkness", TO->query_divine_domain()) >= 0)
             sight_bonus += 2;
-        
+
         if (query_property("spell_points")) {
             holder1 = query_property("spell_points");
         }

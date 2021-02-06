@@ -839,3 +839,25 @@ int is_valid_terrain(string id, string cat)
 
     return 0;
 }
+
+/**
+ * Checks whether player belongs to pk race.
+ * Used to drop pk flag and is intended for infreequent use.
+ */
+int is_pk_race_player(object ob)
+{
+    string racefile;
+
+    racefile = "/std/races/" + ob->query("race") + ".c";
+
+    if (file_exists(racefile)) {
+        if (query("no pk")) {
+            if (racefile->is_pk_race(query("subrace")) ||
+                ob->is_undead()) {
+                return 1;
+            }
+        }
+    }
+
+    return 0;
+}
