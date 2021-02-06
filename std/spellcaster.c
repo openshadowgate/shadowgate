@@ -1169,6 +1169,18 @@ void InitInnate()
                             "spectral hand" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
                         ]);
     }
+    
+    if(TO->is_class("cleric"))
+    {
+        if(member_array("cold", TO->query_divine_domain()) >= 0)
+            feat_spells += ([ "ice bolt" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+        if(member_array("fire", TO->query_divine_domain()) >= 0)
+            feat_spells += ([ "fire bolt" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+        if(member_array("air", TO->query_divine_domain()) >= 0)
+            feat_spells += ([ "lightning blast" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+        if(member_array("air", TO->query_divine_domain()) >= 0)
+            feat_spells += ([ "acid dart" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    }
 
     // to add new classes or reasons for innates, simply add to feat_spells here before this line.
     newmap = keys(feat_spells);
