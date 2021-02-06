@@ -16,7 +16,7 @@
     shadow double
     shadow body
 
-%^CYAN%^Seer:%^RESET%^ 
+%^CYAN%^Seer:%^RESET%^
     dissonance
     clairvoyance
     hypercognition
@@ -27,7 +27,7 @@
     fortune fate
     foresight
 
-%^CYAN%^Shaper:%^RESET%^ 
+%^CYAN%^Shaper:%^RESET%^
     minor creation
     astral construct
     web
@@ -38,7 +38,7 @@
     create demiplane
     implosion
 
-%^CYAN%^Kineticist:%^RESET%^ 
+%^CYAN%^Kineticist:%^RESET%^
     animate object
     energy emanation
     energy cone
@@ -52,15 +52,15 @@
 %^CYAN%^Nomad:%^RESET%^
     dimension slide
     phantom steed
-    dismissal
+    trace teleport
     dimensional anchor
     psionic teleport
-    planar sending
+    create demiplane
     planar portal
     astral projection
     timestop
 
-%^CYAN%^Telepath:%^RESET%^ 
+%^CYAN%^Telepath:%^RESET%^
     command
     charm monster
     hostile empathic transfer
@@ -70,8 +70,6 @@
     visions from within
     mindnet
     overwhelming presence
-   
+
 
 %^CYAN%^See also:%^RESET%^ psion, discipline roleplay
-
-
