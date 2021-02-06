@@ -1184,6 +1184,8 @@ void InitInnate()
             feat_spells += ([ "touch of darkness" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
         if(member_array("moon", TO->query_divine_domain()) >= 0)
             feat_spells += ([ "moonfire" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+        if(member_array("plant", TO->query_divine_domain()) >= 0)
+            feat_spells += ([ "bramble armor" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
     }
 
     // to add new classes or reasons for innates, simply add to feat_spells here before this line.
