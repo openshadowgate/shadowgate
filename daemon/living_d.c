@@ -41,7 +41,7 @@ int immunity_check(object obj, string type)
             return 1;
         }
 
-        if (member_array(myrace, ({ "elf", "drow", "half-elf", "half-drow", "golem", "soulforged" })) == -1) {
+        if (member_array(myrace, ({ "elf", "drow", "half-elf", "half-drow", "golem", "soulforged" })) != -1) {
             return 1;
         }
 
