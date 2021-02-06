@@ -12,3 +12,7 @@ void create() {
     set_max_internal_encumbrance(35);
     set_property("repairtype",({ "leatherwork","tailor" }));
 }
+
+int is_sack() {
+    return 1;
+}
