@@ -21,7 +21,7 @@ void create()
     set_spell_level( ([ "psion" : 2 ]) );
     set_spell_sphere("healing");
     set_syntax("cast CLASS empathic relief on TARGET");
-    set_description("You cleanse the subject's body of unhealthy influences, relieving all debilitating conditions, including dazed, confused, stunned, blinded, paralyzed, fatigued, exhausted, sickened, poisoned and will clear negative levels.");
+    set_description("You cleanse the subject's body of unhealthy influences, relieving all debilitating conditions, including dazed, confused, stunned, blinded, paralyzed, fatigued, exhausted, sickened and will clear negative levels.");
     set_target_required(1);
     set_helpful_spell(1);
 }
