@@ -19,7 +19,7 @@ void create()
     
     set_spell_name("moonfire");
     set_spell_level( ([ "innate" : 5 ]) );
-    set_domains("fire");
+    set_domains("moon");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast innate moonfire on TARGET");
     set_damage_desc("Divine damage to target on successful ranged touch attack");
