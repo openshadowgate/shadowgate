@@ -1057,7 +1057,7 @@ void reset_racial_innate() { TO->delete("racial innate"); }
 
 void InitInnate()
 {
-    string MyRaceFile,*oldmap,*newmap;
+    string MyRaceFile,*oldmap,*newmap, MyClassFile, *classes;
     int i;
     mixed RacialInnate;
     mapping feat_spells;
@@ -1170,6 +1170,29 @@ void InitInnate()
                         ]);
     }
     
+    //Class Innates will be drawn from the class files here.
+    classes = this_object()->query_classes();
+    
+    if(sizeof(classes))
+    {
+        mapping testclass;
+        
+        foreach(string cur in classes)
+        {
+            MyClassFile = DIR_CLASSES + "/" + cur + ".c";
+            
+            if(!file_exists(MyClassFile))
+                continue;
+            
+            testclass = MyClassFile->query_innate_spells(this_object());
+            
+            if(sizeof(testclass))
+                feat_spells += testclass;
+        }
+    }
+    
+    /* This code moving to class file
+    
     if(TO->is_class("cleric"))
     {
         if(member_array("cold", TO->query_divine_domain()) >= 0)
@@ -1187,6 +1210,7 @@ void InitInnate()
         if(member_array("plant", TO->query_divine_domain()) >= 0)
             feat_spells += ([ "bramble armor" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
     }
+    */
 
     // to add new classes or reasons for innates, simply add to feat_spells here before this line.
     newmap = keys(feat_spells);

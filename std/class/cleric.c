@@ -123,6 +123,31 @@ mapping query_class_spells()
     ]));
 }
 
+mapping query_innate_spells(object player)
+{
+    mapping innate_spells = ([  ]);
+    
+    if(!player)
+        return innate_spells;
+    
+    if(member_array("cold", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "ice bolt" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("fire", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "fire bolt" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("air", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "lightning blast" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("earth", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "acid dart" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("darkness", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "touch of darkness" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("moon", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "moonfire" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("plant", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "bramble armor" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    
+    return innate_spells;
+}
+
 int caster_level_calcs(object player, string the_class)
 {
     int level;
