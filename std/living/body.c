@@ -807,6 +807,12 @@ int query_resistance_percent(string res)
     if (res == "fire" && TO->query_race() == "troll") {
             mod += -15;
     }
+    
+    if(FEATS_D->usable_feat(TO, "perfection"))
+    {
+        if(res == "electricity" || res == "cold")
+            mod = 100;
+    }
 
     return resistances["resistance percents"][res] + mod;
 }
@@ -1025,7 +1031,11 @@ int query_ac()
 
     if(FEATS_D->usable_feat(TO, "canny defense") && !TO->query_paralyzed() &&
        !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief"))
-       myac += ( ( TO->query_stats("intelligence") - 10 ) / 2 );
+           myac += BONUS_D->query_stat_bonus(TO, "intelligence");
+       
+    if(FEATS_D->usable_feat(TO, "spiritual body") && !TO->query_paralyzed() &&
+       !TO->query_tripped() && !TO->query_bound())
+           myac += BONUS_D->query_stat_bonus(TO, "charisma");
 
     if (TO->query_blind() || TO->query_temporary_blinded()) {
         myac -= TO->query_level() / 12 + 1;

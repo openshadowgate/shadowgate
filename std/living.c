@@ -1362,7 +1362,18 @@ int query_stats(string stat)
             res -= blst < 0 ? 0 : blst;
         }
     }
-
+    
+    if(TO->is_class("cleric"))
+    {
+        if(stat == "strength" && member_array("strength", TO->query_divine_domain()) >= 0)
+            res += 2;
+        if(stat == "charisma" && member_array("charm", TO->query_divine_domain()) >= 0)
+            res += 2;
+    }
+    
+    if(stat == "charisma" && FEATS_D->usable_feat(TO, "spiritual body"))
+        res += 2;
+        
     res += EQ_D->gear_bonus(TO, stat);
 
     if (res > 29 && userp(TO)) {
