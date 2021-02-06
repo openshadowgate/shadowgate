@@ -713,7 +713,7 @@ string* get_all_removable_feats(object ob)
     for (i = 0; i < sizeof(classes); i++) {
         myspec = ob->query_combat_spec(classes[i]);
         file = DIR_CLASSES + "/" + classes[i] + ".c";
-        cls_feats += class_feat_array(classes[i], myspec);
+        cls_feats += class_feat_array(classes[i], myspec, ob);
     }
     feats = (string*)ob->query_player_feats();
     feats -= cls_feats;
@@ -732,7 +732,7 @@ string* get_all_class_feats(object ob)
     for (i = 0; i < sizeof(classes); i++) {
         myspec = ob->query_combat_spec(classes[i]);
         file = DIR_CLASSES + "/" + classes[i] + ".c";
-        cls_feats += class_feat_array(classes[i], myspec);
+        cls_feats += class_feat_array(classes[i], myspec, ob);
     }
     feats = cls_feats;
     return feats;
@@ -1651,7 +1651,7 @@ void display_feats(object ob,object targ, string mytype)
 //  End Display related stuff  /////////////////
 ////////////////////////////////////////////////
 
-string* class_feat_array(string myclass, string spec)
+string* class_feat_array(string myclass, string spec, object ob)
 {
     string file, * feat_array;
     mapping cls_feats;
@@ -1664,7 +1664,7 @@ string* class_feat_array(string myclass, string spec)
     if (!file_exists(file)) {
         return 0;
     }
-    cls_feats = file->class_featmap(spec);
+    cls_feats = file->class_featmap(spec, ob);
     if (!mapp(cls_feats)) {
         return 0;
     }

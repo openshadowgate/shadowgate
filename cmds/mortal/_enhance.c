@@ -8,8 +8,8 @@ int cmd_enhance(string str)
 {
     object enhanceob, oldob, * wielded;
     mapping enhances, enhance;
-    string enhancement_name, *arguments, *temp = ({}), *display = ({}), * normal_enhances = ({});
-    int power, duration, feat_ap, feat_wb, feat_ab, feat_wr, has_resource, my_levels, i;
+    string enhancement_name, *arguments, *domains, *temp = ({}), *display = ({}), * normal_enhances = ({});
+    int power, duration, feat_ap, feat_wb, feat_ab, feat_wr, feat_cl, has_resource, my_levels, i;
 
     string element, property_name;
     int is_burst, has_element, is_alignement, cost;
@@ -23,9 +23,21 @@ int cmd_enhance(string str)
     feat_wb = FEATS_D->usable_feat(TP, "weapon bond");
     feat_ab = FEATS_D->usable_feat(TP, "armor bond");
     feat_wr = FEATS_D->usable_feat(TP, "warding");
+    
+    if(TP->is_class("cleric"))
+    {
+        domains = TP->query_divine_domain();
+        
+        if(member_array("good", domains) >= 0  ||
+           member_array("evil", domains) >= 0  ||
+           member_array("chaos", domains) >= 0 ||
+           member_array("law", domains) >= 0)
+            feat_cl = 1;
+    }
 
     if (!feat_ap &&
         !feat_wb &&
+        !feat_cl &&
         !feat_ab) {
         return 0;
     }
@@ -45,6 +57,7 @@ int cmd_enhance(string str)
     {
     case "weapon":
         if (!feat_ap &&
+            !feat_cl &&
             !feat_wb) {
             return 0;
         }
@@ -334,6 +347,7 @@ int does_enhance_exist(object obj, string str)
     if (FEATS_D->usable_feat(obj, "thundering arcana")) { enhancements += THUNDERING_ENHANCEMENTS; }
     if (FEATS_D->usable_feat(obj, "corrosive arcana")) { enhancements += CORROSIVE_ENHANCEMENTS; }
     if (FEATS_D->usable_feat(obj, "devoted arcana")) { enhancements += ALIGNMENT_ENHANCEMENTS; }
+    if (obj->is_class("cleric")) { enhancements += CLERIC_WEAPON_ENHANCEMENTS; }
     enhancements = distinct_array(enhancements);
     if (member_array(str, enhancements) != -1) { return 1; }
     return 0;
