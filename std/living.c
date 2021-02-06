@@ -1362,7 +1362,7 @@ int query_stats(string stat)
             res -= blst < 0 ? 0 : blst;
         }
     }
-    
+
     if(TO->is_class("cleric"))
     {
         if(stat == "strength" && member_array("strength", TO->query_divine_domain()) >= 0)
@@ -1370,10 +1370,10 @@ int query_stats(string stat)
         if(stat == "charisma" && member_array("charm", TO->query_divine_domain()) >= 0)
             res += 2;
     }
-    
+
     if(stat == "charisma" && FEATS_D->usable_feat(TO, "spiritual body"))
         res += 2;
-        
+
     res += EQ_D->gear_bonus(TO, stat);
 
     if (res > 29 && userp(TO)) {
@@ -2056,26 +2056,23 @@ string query_condition_string()
     case 1..20:
         stamina = "Collapsing";
         break;
-
     case 21..40:
         stamina = "Spent";
         break;
-
     case 41..60:
         stamina = "Tired";
         break;
-
     case 61..80:
         stamina = "Vigorous";
         break;
-
     case 81..100:
         stamina = "Energetic";
         break;
-
     default:
         stamina = "Fainted";
     }
+
+    return stamina;
 }
 
 int query_unconscious()

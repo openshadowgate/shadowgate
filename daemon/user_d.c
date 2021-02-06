@@ -851,7 +851,7 @@ int is_pk_race_player(object ob)
     racefile = "/std/races/" + ob->query("race") + ".c";
 
     if (file_exists(racefile)) {
-        if (query("no pk")) {
+        if (ob->query("no pk")) {
             if (racefile->is_pk_race(query("subrace")) ||
                 ob->is_undead()) {
                 return 1;
