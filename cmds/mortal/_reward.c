@@ -55,7 +55,6 @@ int cmd_reward(string str)
         TP->delete("last_reward");
         TP->set("last_reward", time());
 
-        log_file("player/reward", TP->query_name() + " awarded " + target->query_name() + " with " + english_number(expdelta) + " exp\n");
     }
 
     return 1;
