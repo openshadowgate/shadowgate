@@ -32,6 +32,8 @@
 //paladin pending: brilliant energy, defending, disruption, merciful, speedy, keen.
 //antipaladin pending: vicious, wounding, vorpal, keen.
 
+#define CLERIC_WEAPON_ENHANCEMENTS ({ "holy", "unholy", "axiomatic", "anarchic", });
+
 #define VALID_ARMOR_ENHANCEMENTS ([ \
                                 "light fortification" : ([ "property" : "fortification 25", "cost" : 1 ]), \
                                 "moderate fortification" : ([ "property" : "fortification 50", "cost" : 3 ]), \
