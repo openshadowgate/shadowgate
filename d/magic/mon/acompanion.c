@@ -80,7 +80,7 @@ int animal_command(string str)
         return 1;
     }
     
-    if(sizeof(input) < 2 && input[0] == "long" || input[0] == "short")
+    if(sizeof(input) < 2 && (input[0] == "long" || input[0] == "short"))
     {
         tell_object(this_player(), "Syntax : animal [long/short] [input].");
         return 1;
