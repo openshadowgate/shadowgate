@@ -14,14 +14,14 @@ void create()
 		""axe of thorns","axe of brambles","axe of mielikki","+
 		""battle axe"}));
 	set_short("%^BOLD%^%^GREEN%^Axe of Brambles and Thorns%^RESET%^");
-   set_obvious_short("%^BOLD%^%^GREEN%^A medium axe%^RESET%^");
+    set_obvious_short("%^BOLD%^%^GREEN%^A medium axe%^RESET%^");
 	set_long(
-	"%^BOLD%^%^GREEN%^	Axe of Brambles and Thorns\n%^WHITE%^"+
-	"The blade of the axe is decorated with flowery runes. \n"+
-	"The handle of the axe is carved with patterns of \n"+
-	"brambles and thorns. On the very bottom of the handle \n"+
-	"is a picture of a white unicorn on a green field,\n"+
-	"the symbol of Mielikki, Lady of the forest.%^RESET%^"
+	    "%^BOLD%^%^GREEN%^	Axe of Brambles and Thorns\n%^WHITE%^"+
+	    "The blade of the axe is decorated with flowery runes. \n"+
+	    "The handle of the axe is carved with patterns of \n"+
+	    "brambles and thorns. On the very bottom of the handle \n"+
+	    "is a picture of a white unicorn on a green field,\n"+
+	    "the symbol of the former Lady of the Forest.%^RESET%^"
 	);
 	//set_weight(7);
 	//set_type("slash");
