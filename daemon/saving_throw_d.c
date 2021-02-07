@@ -99,6 +99,8 @@ varargs void do_save(object ob, int dc, string type, raw_save)
                 ob->query("subrace") == "maalish") {
                 mod += 1;
             }
+            if(member_array("stars", ob->query_divine_domain()) >= 0)
+                mod += 2;
             if(LIVING_D->check_aura(ob, "courage") == 2)
                 mod += 2;
             if(LIVING_D->check_aura(ob, "resolve") == 2)
