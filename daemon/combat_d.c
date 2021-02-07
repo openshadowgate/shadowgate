@@ -2978,6 +2978,10 @@ void internal_execute_attack(object who)
         }
         roll = random(20) + 1;
 
+        //Touch of Chaos gives disadvantage
+        if(who->query_property("touch of chaos"))
+            roll = min( ({ roll, random(20) + 1 }) );
+
         if (roll == 1) { //automatic miss on rolls of a one
             fumble = 1;
         }else {
