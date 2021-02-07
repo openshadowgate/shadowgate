@@ -421,6 +421,7 @@ int clear_domains(string str)
     TP->set_divine_domain(({}));
     TP->delete("domains_cleared");
     TP->set("domains_cleared", time());
+    TP->InitInnate();
     tell_object(TP, "%^BOLD%^%^WHITE%^You sense you have forgotten your domains and can select new ones.");
     return 1;
 }
@@ -569,6 +570,7 @@ int select_domain(string str)
                     return 1;
                 }
                 TP->set_divine_domain(({ player_domains[0], player_domains[1], selection }));
+                TP->InitInnate();
                 tell_object(TP, "You have chosen to select the " + selection + " domain.");
                 tell_object(TP, "Your now have the following domains: " + player_domains[0] + ", " + player_domains[1] + " and " + selection + "\n");
                 return 1;
