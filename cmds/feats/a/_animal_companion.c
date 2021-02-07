@@ -134,6 +134,9 @@ void execute_feat()
                 tell_object(caster, "You dismiss your pack member.");
                 pack -= ({ obj });
                 obj && obj->remove();
+                //Trying to get rid of sticky animals
+                if(objectp(obj))
+                    obj->remove();
             }
         }
                 
