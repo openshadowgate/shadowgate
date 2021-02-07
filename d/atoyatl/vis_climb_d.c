@@ -43,7 +43,7 @@ void create(){
 " oooooooooooooooooo",
 " oooooooooooooooooo",
 " oooooooooooooooooo",
-" oooooooooooooooooo" 
+" oooooooooooooooooo"
 });
   wall_colours = wall;
   bg_colours = wall;
@@ -59,7 +59,7 @@ void create(){
 " __________________",
 " __________________",
 " __________________",
-" __________________" 
+" __________________"
 });
   handhold_challenge = handholds;
   handhold_strength = handholds;
@@ -134,10 +134,10 @@ int jump_me(object ob, string direction){
   if (!objectp(room)) return -2;
   handhold_location = get_jumpable_handhold(ob->query_name(), direction);
   report("Trying to jump to location: " + handhold_location + " Handhold type = " + query_handhold(handhold_location));
-  if (handhold_location <1) 
+  if (handhold_location <1)
   {
     return -3;
-  } 
+  }
   x = handhold_location % 10000;
   y = handhold_location / 10000;
   limbs = query_positions(ob->query_name());
@@ -180,9 +180,9 @@ int jump_me(object ob, string direction){
     hold_descrip = get_handhold_name(handhold_location);
     hold_descrip += " " + get_handhold_description(handhold_location);
     report ("Hold description: " + hold_descrip);
-  } else 
+  } else
   {
-    if (hold_type == LEDGE)  
+    if (hold_type == LEDGE)
     {
       report ("Trying to jump to a ledge with a leg Hold type: " + hold_type);
       if (direction == "right")
@@ -196,12 +196,12 @@ int jump_me(object ob, string direction){
         limb = L_LEG;
         bod_location = handhold_location +19999;
         report ("%^BOLD%^%^CYAN%^Attempting to land with left leg. Bod_location: " + bod_location);
-      }   
+      }
       hold_descrip = get_foothold_name(handhold_location);
       report("Foothold hold_descrip, attempt 1:" + hold_descrip);
       hold_descrip += " " + get_foothold_description(handhold_location);
       report("Foothold hold_descrip, attempt 2:" + hold_descrip);
-    } else 
+    } else
     {
       report ("Trying to grab a non ledge with a hand. Hold type: " + hold_type);
       if (direction == "right")
@@ -234,11 +234,11 @@ int jump_me(object ob, string direction){
     tell_object (ob, "As you sail through the air, you aim for " + hold_descrip + ", but you miss it completely and fall off the wall!");
     if (!ob->query_true_invis()) tell_room(room, "As " + ob->QCN + " sails through the air, " + ob->QS + " passes by " + hold_descrip + ", missing it completely. " + capitalize(ob->QS) + " falls off the wall!", TP);
     return 0;
-  } else 
-  { 
+  } else
+  {
     if (grip_strength>5 && (direction == "left" || direction == "right")) //If they made the jump easily, allow them to make the landing with their rear leg rather than the front one.
     {                    //In many cases, this will make it easier to land the other foot on a ledge, for example.
-      
+
       switch(limb)
       {
       case L_LEG:
@@ -249,7 +249,7 @@ int jump_me(object ob, string direction){
         break;
       }
     }
-   
+
     tell_object (ob, "As you sail through the air, you aim for " + hold_descrip + ".");
     limbs[BODY]=bod_location;
     if (!ob->query_true_invis()) tell_room(room, "As " + ob->QCN + " sails through the air, " + ob->QS + " aims for " + hold_descrip + ".", ob);
@@ -260,17 +260,17 @@ int jump_me(object ob, string direction){
       if (!ob->query_true_invis())tell_room(ob->QCN + "manages to lock onto the handhold with one hand, arresting " + ob->QP + " fall");
       limbs = ({-1,-1,-1,-1,handhold_location + 2});
       limbs [limb] = handhold_location;
-      climbers[ob->query_name()] = limbs; 
+      climbers[ob->query_name()] = limbs;
       shift_body(ob->query_name(), 4);
       shift_body(ob->query_name(), 4);
       shift_body(ob->query_name(), 4);
       break;
-    case R_HAND: 
+    case R_HAND:
       tell_object(ob, "\nYou manage to lock onto the handhold with one hand, establishing a " + query_grip_strength_adjective(grip_strength) + " grip!");
       if (!ob->query_true_invis())tell_room(ob->QCN + "manages to lock onto the handhold with one hand, arresting " + ob->QP + " fall");
       limbs = ({-1,-1,-1,-1,handhold_location -4});
       limbs [limb] = handhold_location;
-      climbers[ob->query_name()] = limbs; 
+      climbers[ob->query_name()] = limbs;
       shift_body(ob->query_name(), 4);
       shift_body(ob->query_name(), 4);
       shift_body(ob->query_name(), 4);
@@ -305,7 +305,7 @@ int jump_me(object ob, string direction){
       if (catch_second_limb(ob->query_name())) report ("Second limb caught", 7);
       else report("Second limb not caught", 7);
     } else report ("Grip not strong enough to catch a secnod limb. Grip strength: " + grip_strength, 7);
-  }  
+  }
   return 1;
 }
 
@@ -342,7 +342,7 @@ int catch_second_limb(string name){
         if (x>= strlen(line)) continue;
         ch = line[x..x];
         if (ch != " " && is_valid_limb_position(name, limb, x,y)>0 )
-        { 
+        {
           return finish_catching(name, limb, y * 10000 + x);
         }
       }
@@ -367,7 +367,7 @@ int catch_second_limb(string name){
         if (x>= strlen(line)) continue;
         ch = line[x..x];
         if (ch != " " && is_valid_limb_position(name, limb, x,y)>0 )
-        { 
+        {
           return finish_catching(name, limb, y * 10000 + x);
         }
       }
@@ -422,7 +422,7 @@ string describe_location_lattitude(int loc){
   report ("RIght end: " + right_end);
   result = "nowhere";
   if (feet ==0) result = "at the left end of the wall";
-  if (feet == right_end) result = "at the right end of the wall";    
+  if (feet == right_end) result = "at the right end of the wall";
   if (feet ==1 && !half) return "one foot from the left end of the wall";
   if (result == "nowhere")
   {
@@ -481,14 +481,14 @@ mapping get_handhold_descriptions(string name){
       }
     } else desc = get_handhold_and_location_description(limbs[limb], i);
     if (limbs[i] / 10000 >= sizeof(wall)-1) desc = " is on the ground";
-    m[limb_name] = desc;  
+    m[limb_name] = desc;
   }
 }
 
 string describe_all_handholds(object who){
   string name, limb, * limbs;
   if (!objectp(who)) return "error with 'who' in describe_all_handholds in vis_climb_d - please use the game command to make a bug report stating this";
-    
+
 }
 
 string get_handhold_and_location_description(int loc, int limb){
@@ -518,7 +518,7 @@ void set_grip(string name, int limb, int grip){
   {
     climb_grips = ([]);
     grips = ({-1, -1, -1, -1, -1});
-  }  else 
+  }  else
   {
     cs = keys(climb_grips);
     if (member_array(name, cs) == -1) grips = ({-1, -1, -1, -1, -1});
@@ -633,7 +633,7 @@ string query_grip_strength_adjective(int grip_strength){
   case 1:
     return "precarious";
     break;
-  case 2: 
+  case 2:
     return "unsteady";
     break;
   case 3:
@@ -642,7 +642,7 @@ string query_grip_strength_adjective(int grip_strength){
   case 4:
     return "reasonably steady";
     break;
-  case 5: 
+  case 5:
     return "firm";
     break;
   case 6:
@@ -660,7 +660,7 @@ string query_grip_description(string name, int limb){
   int hold_strength, * grips, * limbs, x, y, hold_no;
   switch(limb)
   {
-  case 0: 
+  case 0:
     limb_type = "hand";
     side = "left";
     break;
@@ -671,12 +671,12 @@ string query_grip_description(string name, int limb){
   case 2:
     limb_type = "foot";
     side = "left";
-    break; 
+    break;
   case 3:
     limb_type = "foot";
     side = "right";
     break;
-  }  
+  }
   if (!mapp(climb_grips) || sizeof(climb_grips)< 1) return "There has been an error deriving your climbing grip description. Throw something at Lujke";
   cs = keys(climb_grips);
   if (member_array(name, cs == -1)) return "There has been an error deriving your climbing grip description. Throw something pointy at Lujke";
@@ -692,10 +692,10 @@ string query_grip_description(string name, int limb){
   switch(limb_type)
   {
   case "hand":
-    result = "a " + quality + " grip on a " + hold_type + " " + limb_type + "hold with their " + side + " " + limb_type;  
+    result = "a " + quality + " grip on a " + hold_type + " " + limb_type + "hold with their " + side + " " + limb_type;
     break;
   case "foot":
-    result = "a " + quality + " footrest on a " + hold_type + " with their " + side + " " + limb_type;  
+    result = "a " + quality + " footrest on a " + hold_type + " with their " + side + " " + limb_type;
     break;
   }
 }
@@ -724,7 +724,7 @@ int set_wall(string * w){
   foreach(line in w)
   {
     wall += ({line});
-  }  
+  }
   ground_level = sizeof(wall)-1;
   return 1;
 }
@@ -766,7 +766,7 @@ void show_wall_to_name(string name){
   ob = get_player(name);
   if (!objectp(ob)){
     report ("%^BOLD%^%^YELLOW%^Couldn't find player!");
-    return 0;  
+    return 0;
   }
   report ("About to show_wall");
   show_wall(ob);
@@ -833,7 +833,7 @@ void report_limb_positions(){
   if (sizeof (cs)>0 && member_array("lujke", cs)!=-1)
   {
     limbs = climbers["lujke"];
-    report("l hand pos: " + limbs[0] + " r hand pos: " + limbs[1] + " l leg: " + limbs[2] + " r leg: " + limbs[3] + " body: " + limbs[4]); 
+    report("l hand pos: " + limbs[0] + " r hand pos: " + limbs[1] + " l leg: " + limbs[2] + " r leg: " + limbs[3] + " body: " + limbs[4]);
   }
 }
 
@@ -850,7 +850,7 @@ int is_handhold(int x, int y){
   {
     line = handholds[y];
     report ("line examined: '" + line + "'");
-  } else 
+  } else
   {
     report ("y (" + y + ") is larger than size of handholds (" + sizeof(handholds) + ")");
     return -1;
@@ -859,8 +859,8 @@ int is_handhold(int x, int y){
     current_handhold = line[x..x];
     handhold_above = " ";
     if(y>0) handhold_above = handholds[y-1][x..x];
-    report ("Character examined at x=" + x + ", y=" + y + " : '" + current_handhold + "'"); 
-  } else 
+    report ("Character examined at x=" + x + ", y=" + y + " : '" + current_handhold + "'");
+  } else
   {
     report ("x (" + x + ") is larger than length of line (" + strlen(line) + ")");
     return 0;
@@ -884,7 +884,7 @@ varargs int do_grip_strength(int name, int limb, int location, object room, pena
   grip_strength = calculate_grip_strength(name, location, room, penalty);
   grips[limb] = grip_strength;
   climb_grips[name] = grips;
-  return grip_strength; // 
+  return grip_strength; //
 }
 
 string query_line(int line_no){
@@ -892,7 +892,7 @@ string query_line(int line_no){
   report ("Size of wall: " + sizeof(wall));
   report ("Line number sought: " + line_no);
   if (line_no<sizeof(wall)) return wall[line_no];
-  return "error";  
+  return "error";
 }
 
 int move_right_hand_up(string name){
@@ -986,7 +986,7 @@ int is_dangling(string name){
   if (sizeof(limbs)<4) return 0;
   if (limbs[L_LEG] == -1 && limbs[R_LEG]==-1)
   {
-    if (limbs[R_HAND] == -1) 
+    if (limbs[R_HAND] == -1)
     {
       if (limbs[L_HAND] !=-1)
       limbs[BODY] = limbs[L_HAND] + 30000 ;
@@ -1007,21 +1007,21 @@ int shift_body_down(string name){
   string * cs;
   int * limbs, bod_pos, lh_pos, rh_pos, flag, i;
   if (!mapp(climbers)|| sizeof(climbers)<1) return;
-  cs = keys(climbers); 
+  cs = keys(climbers);
   if (member_array(name, cs) ==-1) return 0;
   limbs = climbers[name];
   if (sizeof(limbs)<5) return 0;
   bod_pos = limbs[BODY];
   lh_pos = limbs[L_HAND];
   rh_pos = limbs[R_HAND];
- 
+
   limbs[BODY] = limbs[BODY] +10000;
   climbers[name] = limbs;
   flag = 0;
   for (i=0; i<4;i++)
   {
     report ("%^BOLD%^%^CYAN%^shift body down, iteration " + i + " checking whether limbs are valid", 4);
-    if (is_valid_limb_position(name, L_HAND, lh_pos % 10000, lh_pos/10000)>0 && is_valid_limb_position(name, R_HAND, rh_pos % 10000, rh_pos/10000)>0 ) 
+    if (is_valid_limb_position(name, L_HAND, lh_pos % 10000, lh_pos/10000)>0 && is_valid_limb_position(name, R_HAND, rh_pos % 10000, rh_pos/10000)>0 )
     {
       report ("%^BOLD%^%^GREEN%^limbs are valid!", 4);
       flag ++;
@@ -1031,7 +1031,7 @@ int shift_body_down(string name){
       break;
     }
   }
-  if (flag ==0) 
+  if (flag ==0)
   {
     limbs[BODY] = limbs[BODY]-10000;
     climbers[name] = limbs;
@@ -1055,7 +1055,7 @@ int can_reach_location(string name, int loc){
   for (i=0;i<sizeof(limbs);i++)
   {
     orig_pos += ({limbs[i]});
-  }  
+  }
   report ("Can reach location 1");
   for (limb =0; limb<4; limb ++)
   {
@@ -1065,7 +1065,7 @@ int can_reach_location(string name, int loc){
       for (i=0;i<sizeof(orig_pos);i++)
       {
         limbs += ({orig_pos[i]});
-      }  
+      }
       climbers[name] = limbs;
       return 1;
     }
@@ -1078,11 +1078,11 @@ int can_reach_location(string name, int loc){
     for(i=0;i<sizeof(orig_pos);i++)
     {
       limbs += ({orig_pos[i]});
-    }  
+    }
 
     for(i=0;i<5;i++)
     {
-      if (!shift_body(name, direction)) break;  
+      if (!shift_body(name, direction)) break;
     }
     for (limb =0; limb<4; limb ++)
     {
@@ -1094,7 +1094,7 @@ int can_reach_location(string name, int loc){
         {
           limbs += ({orig_pos[i]});
         }
-        climbers[name] = limbs;  
+        climbers[name] = limbs;
         return 1;
       }
     }
@@ -1106,7 +1106,7 @@ int can_reach_location(string name, int loc){
   for (i=0;i<sizeof(orig_pos);i++)
   {
     limbs += ({orig_pos[i]});
-  }  
+  }
   climbers[name] = limbs;
   return 0;
 }
@@ -1172,7 +1172,7 @@ varargs int move_limb_up(string name, int limb, is_repeat, object room){
   y = pos /10000;
   current_handhold = " ";
   if (pos <0 || is_handhold (x,y)<1)
-  { 
+  {
     report("Position " + (y*10000 + x) + " is not a handhold.");
     pos = positions[BODY];
     pos += 10001;
@@ -1184,7 +1184,7 @@ varargs int move_limb_up(string name, int limb, is_repeat, object room){
       x --;
       break;
     case R_HAND:
-      x++; 
+      x++;
       break;
     case L_LEG:
       x --;
@@ -1196,12 +1196,12 @@ varargs int move_limb_up(string name, int limb, is_repeat, object room){
       break;
     }
     report("Resetting position to " + (y*10000 + x));
-  }     
+  }
   possible_handholds = ({});
   if (topmost>=y){
     report ("y (" + y + ") is higher than topmmost (" + topmost + ")");
     result = -1;
-  } else 
+  } else
   {
     report ("Leftmost: " + leftmost +" Rightmost: "+ rightmost + " Topmost: " + topmost + " Bottommost " + bottommost);
     for (i=topmost;i<y;i++)
@@ -1229,7 +1229,7 @@ varargs int move_limb_up(string name, int limb, is_repeat, object room){
     }
     report ("Found " + sizeof(possible_handholds) + " possible handholds");
     if (sizeof(possible_handholds)<1)
-    {    
+    {
       report("There are no possible handholds!");
       result = -1;
     } else
@@ -1242,19 +1242,19 @@ varargs int move_limb_up(string name, int limb, is_repeat, object room){
           report ("Position " + temp_pos + " is not a handhold and needs to be removed");
           removed_handholds += ({temp_pos});
         }
-      }  
+      }
       report ("Removing " + sizeof(removed_handholds) + " non-handholds");
       if (sizeof(removed_handholds)>0)
       {
         foreach(temp_pos in removed_handholds)
         {
           report ("Removing position " + temp_pos + "from possible handholds");
-          possible_handholds -= ({temp_pos}); 
+          possible_handholds -= ({temp_pos});
         }
-      } 
+      }
     }
     if (sizeof(possible_handholds)<1) result = -2;
-    else 
+    else
     {
       temp_pos = possible_handholds[0];
       distance = calculate_distance(temp_pos, pos);
@@ -1265,7 +1265,7 @@ varargs int move_limb_up(string name, int limb, is_repeat, object room){
         if (((limb == L_HAND || limb == L_LEG)&& poss_pos % 10000==rightmost ) || ((limb == R_HAND || limb == R_LEG)&& poss_pos % 10000==leftmost ))
         {
           continue;
-        } 
+        }
         report ("Next position being checked: " + poss_pos + " Distance from initial position: " + calculate_distance(poss_pos, pos));
         if (calculate_distance(poss_pos, pos)<distance)
         {
@@ -1386,12 +1386,12 @@ int get_post_swing_handhold(int name, string dir){
   {
     right = bod_pos % 10000;
     left = right - 4;
-  } else 
+  } else
   {
     left = bod_pos % 10000 + 1;
     right = left + 3;
   }
-  report("Getting post swing handhold. left: "+ left +" right: "+ right +" top: "+ top+" bottom: " + bottom, 10);  
+  report("Getting post swing handhold. left: "+ left +" right: "+ right +" top: "+ top+" bottom: " + bottom, 10);
   top = bod_pos/10000 - 3;
   bottom = top + 6;
   target = bod_pos + 4;
@@ -1480,25 +1480,25 @@ varargs int move_limb_down(string name, int limb, is_repeat, room){
   y = pos /10000;
   current_handhold = " ";
   if (is_handhold (x,y)<1)
-  { 
+  {
     report("Position " + (y*10000 + x) + " is not a handhold.");
     pos = positions[BODY];
     pos += 10001;
     x = pos % 10000;
     y = pos /10000;
     report("Resetting position to " + (y*10000 + x));
-  }     
+  }
   possible_handholds = ({});
   if (bottommost<=y){
     report ("y (" + y + ") is lower then bottommost (" + bottommost + ")");
     result = -1;
-  } else 
+  } else
   {
     for (i=y+1;i<=bottommost;i++)
     {
-      for (j= leftmost;j<=rightmost;j++)  
+      for (j= leftmost;j<=rightmost;j++)
       {
-//        if (i<topmost +2 && j> rightmost-2) 
+//        if (i<topmost +2 && j> rightmost-2)
         if (is_valid_limb_position(name, limb, j, i) <1)
         {
           report("%^BOLD%^%^YELLOW%^i (" + i +"), j (" +j+ ") is not a valid limb position for limb: " + limb + ". Continuing");
@@ -1514,7 +1514,7 @@ varargs int move_limb_down(string name, int limb, is_repeat, room){
     {
       report("There are no possible handholds!");
       result = -1;
-    } else 
+    } else
     {
       removed_handholds =({});
       foreach(temp_pos in possible_handholds)
@@ -1524,20 +1524,20 @@ varargs int move_limb_down(string name, int limb, is_repeat, room){
           report ("Position " + temp_pos + " is not a handhold and needs to be removed");
           removed_handholds += ({temp_pos});
         }
-      }  
+      }
       report ("Removing " + sizeof(removed_handholds) + " non-handholds");
       if (sizeof(removed_handholds)>0)
       {
         foreach(temp_pos in removed_handholds)
         {
           report ("Removing position " + temp_pos + "from possible handholds");
-          possible_handholds -= ({temp_pos}); 
+          possible_handholds -= ({temp_pos});
         }
-      } 
+      }
       if (sizeof(possible_handholds)<1) result = -2;
       else
       {
-        temp_pos = possible_handholds[0];  
+        temp_pos = possible_handholds[0];
         distance = calculate_distance(temp_pos, pos);
         report ("First position being checked: " + temp_pos + " Distance from initial position: " + distance);
         //of the remaining possible handholds, choose the one that is closest to the previous handhold
@@ -1666,14 +1666,14 @@ varargs int move_limb_right(string name, int limb, is_repeat, room){
   y = pos /10000;
   current_handhold = " ";
   if (is_handhold (x,y)<1)
-  { 
+  {
     report("Position " + (y*10000 + x) + " is not a handhold.");
     pos = positions[BODY];
     pos += 10001;
     x = pos % 10000;
     y = pos /10000;
     report("Resetting position to " + (y*10000 + x));
-  }     
+  }
   possible_handholds = ({});
   if (rightmost<=x){
     report ("y (" + y + ") is lower then bottommost (" + bottommost + ")");
@@ -1683,7 +1683,7 @@ varargs int move_limb_right(string name, int limb, is_repeat, room){
     for (i=topmost;i<=bottommost;i++)
     {
       for (j= x+1;j<=rightmost;j++)
-      { 
+      {
         if (is_valid_limb_position(name, limb, j, i) <1)
         {
           report("%^BOLD%^%^YELLOW%^i (" + i +"), j (" +j+ ") is not a valid limb position for limb: " + limb + ". Continuing");
@@ -1698,7 +1698,7 @@ varargs int move_limb_right(string name, int limb, is_repeat, room){
     {
       report("There are no possible handholds!");
       result = -1;
-    } else 
+    } else
     {
       removed_handholds =({});
       foreach(temp_pos in possible_handholds)
@@ -1708,18 +1708,18 @@ varargs int move_limb_right(string name, int limb, is_repeat, room){
           report ("Position " + temp_pos + " is not a handhold and needs to be removed");
           removed_handholds += ({temp_pos});
         }
-      }  
+      }
       report ("Removing " + sizeof(removed_handholds) + " non-handholds");
       if (sizeof(removed_handholds)>0)
       {
         foreach(temp_pos in removed_handholds)
         {
           report ("Removing position " + temp_pos + "from possible handholds");
-          possible_handholds -= ({temp_pos}); 
+          possible_handholds -= ({temp_pos});
         }
-      } 
+      }
       if (sizeof(possible_handholds)<1) result = -2;
-      else 
+      else
       {
         temp_pos = possible_handholds[0];
         distance = calculate_distance(temp_pos, pos);
@@ -1788,7 +1788,7 @@ varargs int move_limb_left(string name, int limb, is_repeat, room){
   int pos, temp_pos, poss_pos, * positions, x,y, * possible_handholds, i,j,topmost, bottommost, rightmost, leftmost, vert_mid, horiz_mid, * removed_handholds, distance, result, flag, count, grip_strength;
   string current_handhold, new_handhold;
   positions = query_positions(name);
-  
+
   if (sizeof(positions)<1)
   {
     report ("No positions found for " + name + ". Aborting");
@@ -1822,7 +1822,7 @@ varargs int move_limb_left(string name, int limb, is_repeat, room){
     leftmost = x-4;
     vert_mid = y;
     horiz_mid = x-2;
-    report ("Moving left hand left. Current position: " + pos + " Leftmost: " + leftmost + " Rightmost: " + rightmost + " Topmost: " + topmost + " Bottommost: " + bottommost); 
+    report ("Moving left hand left. Current position: " + pos + " Leftmost: " + leftmost + " Rightmost: " + rightmost + " Topmost: " + topmost + " Bottommost: " + bottommost);
     break;
   case R_LEG:
     topmost = y +1;
@@ -1850,30 +1850,30 @@ varargs int move_limb_left(string name, int limb, is_repeat, room){
   y = pos /10000;
   current_handhold = " ";
   if (is_handhold (x,y)<1)
-  { 
+  {
     report("Position " + (y*10000 + x) + " is not a handhold.");
     pos = positions[BODY];
     pos += 10001;
     x = pos % 10000;
     y = pos /10000;
     report("Resetting position to " + (y*10000 + x));
-  }     
+  }
   possible_handholds = ({});
   if (leftmost>=x){
     report ("x (" + x + ") is lefter then leftmost (" + leftmost + ")");
     result = -1;
-  } else 
+  } else
   {
     for (i=topmost;i<=bottommost;i++)
 
     {
      for (j= leftmost;j<rightmost;j++)
-       {  
+       {
         if (is_valid_limb_position(name, limb, j, i) <1)
         {
           report("%^BOLD%^%^YELLOW%^i (" + i +"), j (" +j+ ") is not a valid limb position for limb: " + limb + ". Continuing");
           continue;
-        }      
+        }
         temp_pos = i*10000 + j;
         possible_handholds += ({temp_pos});
       }
@@ -1893,16 +1893,16 @@ varargs int move_limb_left(string name, int limb, is_repeat, room){
           report ("Position " + temp_pos + " is not a handhold and needs to be removed");
           removed_handholds += ({temp_pos});
         }
-      }   
+      }
       report ("Removing " + sizeof(removed_handholds) + " non-handholds");
       if (sizeof(removed_handholds)>0)
       {
         foreach(temp_pos in removed_handholds)
         {
           report ("Removing position " + temp_pos + "from possible handholds");
-          possible_handholds -= ({temp_pos}); 
+          possible_handholds -= ({temp_pos});
         }
-      } 
+      }
       if (sizeof(possible_handholds)<1) result = -2;
       else
       {
@@ -2036,7 +2036,7 @@ varargs void report_grip_failure(string name, int limb, int pos, object room){
     tell_object(climber, result);
     if(objectp(room))
     {
-      tell_room(room, climber->QCN + " reaches for " + hand_name + ", but can't get a grip", TP); 
+      tell_room(room, climber->QCN + " reaches for " + hand_name + ", but can't get a grip", TP);
     }
     break;
   case "left leg":
@@ -2045,10 +2045,10 @@ varargs void report_grip_failure(string name, int limb, int pos, object room){
     tell_object(climber, result);
     if(objectp(room))
     {
-      tell_room(room, climber->QCN + " fails isn't able to secure a foothold on " + foot_name, TP); 
+      tell_room(room, climber->QCN + " fails isn't able to secure a foothold on " + foot_name, TP);
     }
     break;
-  }  
+  }
 }
 
 varargs void report_grip_success(string name, int limb, int pos, int grip_strength, string dir, object room){
@@ -2061,7 +2061,7 @@ varargs void report_grip_success(string name, int limb, int pos, int grip_streng
   if (objectp(room) && room->query_property("silent")==1)
   {
     return;
-  } else 
+  } else
   {
     if (!objectp(room)) report( "%^BOLD%^%^RED%^room not a valid object", 9);
   }
@@ -2080,12 +2080,12 @@ varargs void report_grip_success(string name, int limb, int pos, int grip_streng
   {
   case "left hand":
   case "right hand": //deliberately falling through
-    
+
     result = "You move your " + limb_name + " " + dir + " and establish a " + grip_name + " grip on " + hand_name;
     tell_object(climber, result);
     if(objectp(room))
     {
-      tell_room(room, climber->QCN + " moves " + climber->QP + " " + limb_name + " " + dir + " and establishes a " + grip_name + " grip on " + hand_name, TP); 
+      tell_room(room, climber->QCN + " moves " + climber->QP + " " + limb_name + " " + dir + " and establishes a " + grip_name + " grip on " + hand_name, TP);
     }
     break;
   case "left leg":
@@ -2094,10 +2094,10 @@ varargs void report_grip_success(string name, int limb, int pos, int grip_streng
     tell_object(climber, result);
     if(objectp(room))
     {
-      tell_room(room, climber->QCN + " moves " + climber->QP + " " + limb_name + " " + dir + " and establishes a " + grip_name + " foothold on " + hand_name, TP); 
+      tell_room(room, climber->QCN + " moves " + climber->QP + " " + limb_name + " " + dir + " and establishes a " + grip_name + " foothold on " + hand_name, TP);
     }
     break;
-  }  
+  }
 }
 
 int query_grip_strength(string name, int limb){
@@ -2220,7 +2220,7 @@ string get_handhold_name(int pos){
   case ROPE:
     hand_name = "a rope";
     break;
-  default: 
+  default:
     hand_name = "the ground";
   }
   return hand_name;
@@ -2242,8 +2242,8 @@ int get_jumpable_handhold(string name, string direction){
   dist_mod = 0;
   if (objectp(climber)) dist_mod = climber->query_skill("athletics")/10; //athletics skill lets you jump further
   switch(direction)
-  { 
-  case "left": 
+  {
+  case "left":
     dir = 2;
     break;
   case "right":
@@ -2270,11 +2270,11 @@ int get_jumpable_handhold(string name, string direction){
   bottom = y+8;
   if (bottom>sizeof(wall)-8)
   {
-    if ( bottom < y+1) 
+    if ( bottom < y+1)
     {
       if (y>sizeof(wall)-7) bottom = sizeof(wall) -2;
       else bottom = sizeof(wall) -8;
-    } 
+    }
   }
   left = x - 8;
   right = x + 9;
@@ -2349,7 +2349,7 @@ int get_jumpable_handhold(string name, string direction){
               report("%^BOLD%^%^MAGENTA%^x (" + x + ") > bod_x ("+bod_x + ") -2. Continuing");
               continue;
             }
-            if (result <1 || x > result % 10000) result = loc; 
+            if (result <1 || x > result % 10000) result = loc;
             else report("%^BOLD%^%^CYAN%^x is not greater than result % 1000");
             break;
           case "right":
@@ -2362,7 +2362,7 @@ int get_jumpable_handhold(string name, string direction){
             {
               report("%^BOLD%^%^CYAN%^Setting x to loc: " + loc );
               result = loc;
-            } 
+            }
             else report("%^BOLD%^%^CYAN%^x is not less than result % 1000");
             break;
           case "up":
@@ -2374,8 +2374,8 @@ int get_jumpable_handhold(string name, string direction){
           }
         }
       }
-      continue; 
-    } else 
+      continue;
+    } else
     {
       report("Hold is a ledge. Hurrah", 2);
       if (y> sizeof(wall)-9 && y<sizeof(wall)-5)
@@ -2383,15 +2383,15 @@ int get_jumpable_handhold(string name, string direction){
          report ("Ledge at location "+ loc + " is too high to jump to with a leg, and too high to jump to with a hand");
          continue;
       }
-    } 
+    }
     if (result == 0) result = loc;
     switch(direction)
     {
     case "left":
-      if (x < result % 10000) result = loc; 
+      if (x < result % 10000) result = loc;
       break;
     case "right":
-      if (x > result % 10000) result = loc; 
+      if (x > result % 10000) result = loc;
       break;
     case "up":
       if (y>result / 10000) result = loc;
@@ -2446,13 +2446,13 @@ int * order_locations(int * locs, string direction, int bod_x){
     report("Calculating y for row. First location is  " + row[0] );
     y = row[0]/10000;
     report ("Y = " + y);
-    left_hand_x = bod_x; 
+    left_hand_x = bod_x;
     right_hand_x = bod_x + 4;
     report("Reordering row: ");
 //    tell_object(TP,  row);
-    for (dist = 0; dist < 6; dist ++) 
+    for (dist = 0; dist < 6; dist ++)
     {
-      report("Calculating next loc.  Left_hand_x: " + left_hand_x + " Right hand x: " + right_hand_x + " Dist: " + dist + " y: " + y); 
+      report("Calculating next loc.  Left_hand_x: " + left_hand_x + " Right hand x: " + right_hand_x + " Dist: " + dist + " y: " + y);
       loc = (y * 10000) + left_hand_x + dist;
       report("Checking location " + loc);
       if (member_array(loc, row)!= -1)
@@ -2477,8 +2477,8 @@ int * order_locations(int * locs, string direction, int bod_x){
       {
         new_row += ({loc});
         row -= ({loc});
-      } else report("%^BOLD%^%^MAGENTA%^location " + loc + " is not in the row. How did that happen?");     
-    }  
+      } else report("%^BOLD%^%^MAGENTA%^location " + loc + " is not in the row. How did that happen?");
+    }
     report("%^RED%^Row ordered. " + sizeof(new_row) + " locations in resulting row");
     new_rows += ({new_row});
   }
@@ -2486,7 +2486,7 @@ int * order_locations(int * locs, string direction, int bod_x){
   new_rows = ({});
   report("%^ORANGE%^About to order rows. Number of rows to order: " + sizeof(rows));
   while(sizeof(rows)>0)    //Then, order rows by size according to direction
-  { 
+  {
     top = 10000;
     count = sizeof(new_rows);
     target_row = 0;
@@ -2496,7 +2496,7 @@ int * order_locations(int * locs, string direction, int bod_x){
       my_row = rows[i];
       if (sizeof(my_row)<1) break;
       y = my_row[0]/10000;
-      if ( ( direction == "up" && top > y ) || ( direction == "up" && top < y ) )  //This is the line that adjusts according to direction  
+      if ( ( direction == "up" && top > y ) || ( direction == "up" && top < y ) )  //This is the line that adjusts according to direction
       {
         top = y;
         target_row = i;
@@ -2504,7 +2504,7 @@ int * order_locations(int * locs, string direction, int bod_x){
     }
     row = rows[target_row];
     new_rows += ({row});
-    rows -= ({row}); 
+    rows -= ({row});
   }
   result  = ({}); //finally, put all the rows back into a flat array
   foreach(row in new_rows)
@@ -2584,7 +2584,7 @@ string get_foothold_description(int pos){
   case HORN:
     foot_name = "that is easy to stand on";
     break;
-  default: 
+  default:
     foot_name = "";
   }
   return foot_name;
@@ -2623,7 +2623,7 @@ string get_foothold_name(int pos){
   case HORN:
     foot_name = "a projection";
     break;
-  default: 
+  default:
     foot_name = "the ground";
   }
   return foot_name;
@@ -2634,7 +2634,7 @@ string get_limb_name(int limb){
   switch(limb)
   {
   case L_HAND:
-    limb_name = "left hand";    
+    limb_name = "left hand";
     break;
   case R_HAND:
     limb_name = "right hand";
@@ -2674,7 +2674,7 @@ varargs int calculate_grip_strength(string name, int location, object room, int 
   {
     if (!objectp(ob)) continue;
     if (ob->query_name()==name) break;
-  } 
+  }
   if (!objectp(ob) || ob->query_name() != name)
   {
     if (!objectp(room)) return -1;
@@ -2690,7 +2690,7 @@ varargs int calculate_grip_strength(string name, int location, object room, int 
       athletics = 10;
       break;
     }
-  } else 
+  } else
   {
     athletics = ob->query_skill("athletics");
   }
@@ -2708,7 +2708,7 @@ varargs int calculate_grip_strength(string name, int location, object room, int 
   if (grip<1) grip = 1;
   grip = grip /s;
   if (grip <1) grip = 0;
-  if (grip > 7) grip = 7; 
+  if (grip > 7) grip = 7;
   return grip;
 }
 
@@ -2800,10 +2800,10 @@ int calculate_distance(int pos1, int pos2){
   x2 = pos2 %10000;
   y1 = pos1 / 10000;
   y2 = pos2 / 10000;
-  difference = x1 - x2; 
+  difference = x1 - x2;
   if (difference < 0 ) difference = difference *-1;
   result = difference;
-  difference = y1 - y2; 
+  difference = y1 - y2;
   if (difference < 0 ) difference = difference *-1;
   result += difference;
   return result;
@@ -2863,22 +2863,22 @@ varargs int is_valid_limb_position(string climber, int limb, int x, int y){
   if (y<topmost)
   {
     report ("Y (" + y + ") < topmost (" + topmost + ")");
-    return -1;    
+    return -1;
   }
   if (y>bottommost)
   {
     report ("Y (" + y + ") > bottommost (" + bottommost + ")");
-    return -1;    
+    return -1;
   }
   if (x<leftmost)
   {
     report ("X (" + x + ") < leftmost (" + leftmost + ")");
-    return -1;    
+    return -1;
   }
   if (x> rightmost)
   {
     report ("X (" + x + ") > rightmost (" + rightmost + ")");
-    return -1;    
+    return -1;
   }
   if (limb == R_HAND )
   {
@@ -2907,7 +2907,7 @@ varargs int is_valid_limb_position(string climber, int limb, int x, int y){
     {
       report("%^BOLD%^%^YELLOW%^y (" + y +") = topmost (" + topmost + ") and x (" +x+ ")!= horiz_mid (" + horiz_mid + "). Not a valid limb position");
       return -4;
-    }  
+    }
   }
 
   if (limb == R_LEG)
@@ -2955,7 +2955,7 @@ string * add_pic_to_wall(string * pic, string * mywall, int x, int y){
   report ("Adding pic to wall. Sizeof wall: " + sizeof(wall));
   foreach(picline in pic){
     if (i>=sizeof(mywall) ) break;
-    if (i<0) 
+    if (i<0)
     {
       i++;
       continue;
@@ -2967,24 +2967,24 @@ string * add_pic_to_wall(string * pic, string * mywall, int x, int y){
     for (j = strlen(picline)-1; j>=0; j--)
     {
       report ("Working online. i: " + i + " j: " + j);
-      report ("Current line: '" + line + "'"); 
+      report ("Current line: '" + line + "'");
       ch = picline[j..j];
-      if (ch != " ") 
-      { 
-        if (ch == "*") ch =  "_";   
-        if (ch == "~") ch =  " ";  
-        line = "/daemon/str_insert_d.c"->insert_string(line,ch, j+x); 
+      if (ch != " ")
+      {
+        if (ch == "*") ch =  "_";
+        if (ch == "~") ch =  " ";
+        line = "/daemon/str_insert_d.c"->insert_string(line,ch, j+x);
         report("line adjusted. Character inserted: " + ch + " Size of new line: " + strlen(line) + " New line: '" + line + "'" );
         colour_code = "W";
-        col_line = "/daemon/str_insert_d.c"->insert_string(col_line,colour_code, j+x);       
+        col_line = "/daemon/str_insert_d.c"->insert_string(col_line,colour_code, j+x);
         if (is_last_character(j, picline)) // This section mostly fixes the colour bleed problem
-        {  
+        {
           colour_code = "P";
-          col_line = "/daemon/str_insert_d.c"->insert_string(col_line,colour_code, j+x+1);      
-          continue; 
-        }  
+          col_line = "/daemon/str_insert_d.c"->insert_string(col_line,colour_code, j+x+1);
+          continue;
+        }
       }
-     
+
     }
     temp_colours[i] = col_line;
     mywall[i] = line;
@@ -3045,18 +3045,13 @@ void show_wall(object who){
   report_limb_positions();
   mywall = add_climbers_to_wall();
   temp_colours = wall_colours;
-  temp_bg = bg_colours; 
+  temp_bg = bg_colours;
 
   screen_width = atoi(who->getenv("SCREEN"));
   screen_height = atoi(who->getenv("LINES"));
   if (screen_width<10) screen_width = 75;
   limbs = query_positions(who->query_name());
-<<<<<<< HEAD
   report("showwall 2 left hand pos: "); // + limbs[L_HAND] + " right hand pos: " + limbs[R_HAND] + " left leg pos: " + limbs[L_LEG] + " right leg pos: " + limbs[R_LEG] + " body pos: " + limbs[BODY], 4);
-=======
-  report("showwall 2. No further comment");
-
->>>>>>> 82410b7113c9a8c74870f9bd2def95733eef565d
   my_x = limbs[BODY] % 10000;
   my_y = limbs[BODY] / 10000;
   if (sizeof(mywall) > screen_height)
@@ -3065,7 +3060,7 @@ void show_wall(object who){
     report ("my_y - screen_height/2-1: " + (my_y - screen_height/2-1) + " my_y + screen_height/2 +1: " + (my_y + screen_height/2 +1));
     mywall = mywall[my_y - screen_height/2-1..my_y + screen_height/2 +1];
     temp_colours = temp_colours[my_y - screen_height/2-1..my_y + screen_height/2 +1];
-    temp_bg = temp_bg[my_y - screen_height/2-1..my_y + screen_height/2 +1]; 
+    temp_bg = temp_bg[my_y - screen_height/2-1..my_y + screen_height/2 +1];
   }
   i = 0;
   report("%^BOLD%^%^YELLOW%^left_x: " + (my_x-screen_width/2+1) + " right_x: " + (my_x+ screen_width/2-1));
@@ -3108,7 +3103,7 @@ void show_wall(object who){
   report("showwall 3");
   report_limb_positions();
   mywall = colour_wall(mywall);
-  
+
   foreach(line in mywall)
   {
     tell_object(who, line);
@@ -3134,7 +3129,7 @@ int stop_reporting(){
 
 
 varargs void report(string str, int num){
-  if (sizeof(report_nums)>0) 
+  if (sizeof(report_nums)>0)
   {
     if (!intp(num) || num ==0 || member_array (num, report_nums)==-1) return;
   }
@@ -3197,7 +3192,7 @@ string * get_medium_climber_pic(object climber){
   report("%^BOLD%^%^MAGENTA%^get_medium_climer_pic 3");
   report_limb_positions();
 
-  if (is_dangling(name)||is_hanging(name)) 
+  if (is_dangling(name)||is_hanging(name))
   {
     if (climber->query_property("swinging") == 1)
     {
@@ -3208,7 +3203,7 @@ string * get_medium_climber_pic(object climber){
       return SWING_LEFT;
     }
   }
-  if (is_dangling(name)) 
+  if (is_dangling(name))
   {
     report("%^BOLD%^%^MAGENTA%^get_medium_climer_pic 3.2");
     report_limb_positions();
@@ -3285,7 +3280,7 @@ string * add_name(object climber, string * arr)
   if (TP->isKnown(name))
   {
     display_name = capitalize(TP->knownAs(name));
-  } else 
+  } else
   {
     display_name = capitalize(climber->query_race());
   }
@@ -3298,7 +3293,7 @@ string * add_name(object climber, string * arr)
     line = arr[i+1];
     for (j=0;j<strlen(line) && j< strlen(display_name); j++)
     {
-      if (line[j..j] != " ") 
+      if (line[j..j] != " ")
       {
         report("found a non-space character at point " + j);
         flag = 1;
@@ -3310,10 +3305,10 @@ string * add_name(object climber, string * arr)
     {
       line = arr[i];
       break;
-    } 
+    }
   }
   if (flag == 0) i--;
-  report ("About to insert string: '" + display_name + "' to line: '" + line + "'"); 
+  report ("About to insert string: '" + display_name + "' to line: '" + line + "'");
   line = "/daemon/str_insert_d"->insert_string(line, display_name[0..end], 0);
   arr[i] = line;
   return arr;
@@ -3372,7 +3367,7 @@ string * add_left_leg(string * pic, int limb_no){
     limb_pic = ({});
     break;
   }
-//  if (sizeof(limb_pic)<1) report("sizeof(limb_pic)<1"); 
+//  if (sizeof(limb_pic)<1) report("sizeof(limb_pic)<1");
   pic = add_limb(pic, limb_pic, 0,3);
   return pic;
 }
@@ -3380,7 +3375,7 @@ string * add_left_leg(string * pic, int limb_no){
 void report_limb_pic_nos(string name){
   int * limbs, i;
   limbs = query_positions(name);
-  if (sizeof(limbs)<5) 
+  if (sizeof(limbs)<5)
   {
     tell_object(TP, name + " Does not have a full set of limbs recorded.");
     return;
@@ -3418,7 +3413,7 @@ string * add_right_leg(string * pic, int limb_no){
     limb_pic = R_LEG_4;
 //    limb_pic = ({"    ","  /\\,","    ","    ","    "});
     break;
-  case 5: 
+  case 5:
     report ("Adding R_LEG_5", 12);
     limb_pic = R_LEG_5;
     break;
@@ -3477,7 +3472,7 @@ string * add_right_leg(string * pic, int limb_no){
   default:
     limb_pic = ({});
   }
-  if (sizeof(limb_pic)<1) report("sizeof(limb_pic)<1"); 
+  if (sizeof(limb_pic)<1) report("sizeof(limb_pic)<1");
   pic = add_limb(pic, limb_pic, 3,3);
   return pic;
 }
@@ -3567,7 +3562,7 @@ varargs string * add_left_arm(string * pic, int limb_no, int dangling){
   default:
     limb_pic = ({});
   }
-  if (sizeof(limb_pic)<1) report("sizeof(limb_pic)<1"); 
+  if (sizeof(limb_pic)<1) report("sizeof(limb_pic)<1");
   if (dangling >0) pic = add_limb(pic, limb_pic, 1,0);//blah
   else pic = add_limb(pic, limb_pic, 0,0);
   return pic;
@@ -3580,7 +3575,7 @@ varargs string * add_right_arm(string * pic, int limb_no, dangling){
   case 1:
     limb_pic = R_ARM_1;
     break;
-  case 2: 
+  case 2:
     limb_pic = R_ARM_2;
     break;
   case 10:
@@ -3664,7 +3659,7 @@ varargs string * add_right_arm(string * pic, int limb_no, dangling){
   default:
     limb_pic = ({});
   }
-  if (sizeof(limb_pic)<1) report("sizeof(limb_pic)<1"); 
+  if (sizeof(limb_pic)<1) report("sizeof(limb_pic)<1");
   if (dangling >0) pic = add_limb(pic, limb_pic, 2,0);//blah
   else pic = add_limb(pic, limb_pic, 4,0);
   return pic;
@@ -3681,7 +3676,7 @@ int test_handhold(string name, int limb, int penalty){
   if (member_array  (name, cs)==-1) return -2;
   grips = climb_grips[name];
   grip_strength = grips[limb];
-  report ("Grip strength: " + grip_strength + " Target number: " + (490 - (grip_strength * grip_strength *10) + penalty) , 2);  
+  report ("Grip strength: " + grip_strength + " Target number: " + (490 - (grip_strength * grip_strength *10) + penalty) , 2);
   if (random(5490) +1 < 490 - (grip_strength * grip_strength *10) + penalty) return 0;
   return 1;
 }
@@ -3789,13 +3784,13 @@ varargs int check_grip_failure_on_limb_move(string name, int limb, object room){
       continue;
     }
     limb_positions = query_positions(name);
-    if (limb_positions[i]/ 10000 >= sizeof(wall)-1) 
+    if (limb_positions[i]/ 10000 >= sizeof(wall)-1)
     {
       report("You can't lose your grip on the ground. Continuing", 1);
       continue;
     }
     result = test_handhold(name, i, penalty);
-    report ("%^BOLD%^%^GREEN%^RESULT for limb : " + i + " is : " + result, 1); 
+    report ("%^BOLD%^%^GREEN%^RESULT for limb : " + i + " is : " + result, 1);
     switch(result)
     {
     case -1:
@@ -3805,18 +3800,18 @@ varargs int check_grip_failure_on_limb_move(string name, int limb, object room){
       report("Error 2 on checking grip failure", 1);
       break;
     case 0:
-      report ("Grip failure on limb: " + i, 1); 
+      report ("Grip failure on limb: " + i, 1);
       flag = 1;
       report("%^B_ORANGE%^%^BOLD%^%^WHITE%^About to check whether climber is a valid object", 1);
       if (objectp(climber))
       {
-        tell_object(climber, "%^BOLD%^%^RED%^Your " + limb_name + " slips and you lose your grip!" );   
+        tell_object(climber, "%^BOLD%^%^RED%^Your " + limb_name + " slips and you lose your grip!" );
         report("%^B_MAGENTA%^%^BOLD%^%^WHITE%^Climber is a valid object", 1);
         report("Climber name: ", 1);
         report(climber->query_name(), 1);
       }
       else report ("%^BOLD%^%^MAGENTA%^Error loading climber", 1);
-      if (objectp(room)) tell_room(room, "%^BOLD%^%^RED%^" + climber->QCN + "%^BOLD%^%^RED%^'s " + limb_name + " slips and " + climber->QS + " loses " + climber->QP + " grip!", climber );   
+      if (objectp(room)) tell_room(room, "%^BOLD%^%^RED%^" + climber->QCN + "%^BOLD%^%^RED%^'s " + limb_name + " slips and " + climber->QS + " loses " + climber->QP + " grip!", climber );
       else report ("%^BOLD%^%^MAGENTA%^Error loading room", 1);
       limbs[i] = -1;
       climb_grips[name] = limbs;
@@ -3826,9 +3821,9 @@ varargs int check_grip_failure_on_limb_move(string name, int limb, object room){
       return check_grip_failure_on_limb_move(name, limb, room);
       break;
     case 1:
-      report ("Grip HELD on limb: " + i, 1); 
+      report ("Grip HELD on limb: " + i, 1);
       continue;
-      break;      
+      break;
     }
   }
   num = count_grips(name);
@@ -4023,13 +4018,13 @@ mapping get_reachable_handholds(string name){
 
   positions = ({});   //reset positions to original state
   foreach(i in temp_pos)
-  { 
+  {
     positions += ({i});
 
   }
   unreport = 0;
   return result;
-//int is_valid_limb_position(string climber, int limb, int x, int y)  
+//int is_valid_limb_position(string climber, int limb, int x, int y)
 }
 
 
@@ -4060,23 +4055,23 @@ string describe_jump_difficulty(string name, int loc){
   bod_loc = positions[BODY];
   x_dist = bod_loc % 10000 - loc % 10000;
   y_dist = bod_loc / 10000 - loc / 10000;
-  if (y_dist < 0) 
+  if (y_dist < 0)
   {
     y_dist += 3;
     while(y_dist>0) y_dist --;
   }
-  if (y_dist > 0) 
+  if (y_dist > 0)
   {
     y_dist -= 3;
     while(y_dist<0) y_dist ++;
   }
 
-  if (x_dist < 0) 
+  if (x_dist < 0)
   {
     x_dist += 3;
     while(x_dist>0) x_dist --;
   }
-  if (x_dist > 0) 
+  if (x_dist > 0)
   {
     x_dist -= 3;
     while(x_dist<0) x_dist ++;
@@ -4085,7 +4080,7 @@ string describe_jump_difficulty(string name, int loc){
 
   distance = sqrt(x_dist * x_dist + y_dist * y_dist);
   challenge = get_handhold_challenge(loc);
-  report ("Describe jump difficulty. x_dist: " + x_dist +" y_dist " + y_dist + " ditance: " + distance + " challenge: " + challenge + " athletics: " + athletics, 5);  
+  report ("Describe jump difficulty. x_dist: " + x_dist +" y_dist " + y_dist + " ditance: " + distance + " challenge: " + challenge + " athletics: " + athletics, 5);
   number = "" + (distance *distance/2 - (8-challenge) - (athletics / 15));
   difficulty = atoi(number); //bluh
   if (difficulty<0) difficulty = 0;
@@ -4122,14 +4117,14 @@ string describe_reachable_handholds(string name, string arg){
   jumpable_handholds = get_jumpable_handholds (name);
   excluded_limbs = ({});
   report("Describe reachable handholds 1 - result: " + result, 6);
-  if (!mapp(handholds) || sizeof(handholds)<1) return "You cannot reach any new handholds from here";  
+  if (!mapp(handholds) || sizeof(handholds)<1) return "You cannot reach any new handholds from here";
   limbs = keys(handholds);
   jumpable_directions = keys(jumpable_handholds);
   jump_result = "";
   report("%^BOLD%^%^CYAN%^Initial number of handholds identified: " + sizeof(limbs), 6);
   switch(arg)
   {
-  case "above":  
+  case "above":
   case "up":    //deliberately falling through
   case "below": //deliberately falling through
   case "down":  //deliberately falling through
@@ -4143,13 +4138,13 @@ string describe_reachable_handholds(string name, string arg){
       report("checking limb " + limb);
       locations = handholds[limb];
       directions = keys(locations);
-      if (member_array(arg, directions)==-1) 
+      if (member_array(arg, directions)==-1)
       {
         report("%^BOLD%^%^CYAN%^Removing limb " + limb + " from handholds, as it has no available handholds in the " + direction +" direction");
         m_delete(handholds, limb);
         excluded_limbs += ({limb});
       }
-      else 
+      else
       {
         report("%^BOLD%^%^MAGENTA%^Removing unwanted directions for limb: " + limb);
         foreach(direction in directions)
@@ -4176,7 +4171,7 @@ string describe_reachable_handholds(string name, string arg){
         handholds = m_delete(handholds, limb);
       }
       else report ("Retaining limb " + limb);
-    }    
+    }
     if (sizeof(handholds)<1) return "You cannot reach any handholds with your " + arg;
     break;
   }
@@ -4186,18 +4181,18 @@ string describe_reachable_handholds(string name, string arg){
   limbs = keys(handholds);
   switch(arg)
   {
-  case "above":  
+  case "above":
   case "up":    //deliberately falling through
   case "below": //deliberately falling through
   case "down":  //deliberately falling through
   case "left":  //deliberately falling through
-  case "right": //deliberately falling through 
+  case "right": //deliberately falling through
     report("%^CYAN%^arg is a direction: " + arg, 6);
     direction = arg;
     if ( member_array(arg, jumpable_directions) == -1 || jumpable_handholds[arg] ==0)
     {
       jump_result = "There is no handhold you can jump to in that direction";
-    } else 
+    } else
     {
       positions = query_positions(name);
       if (sizeof(positions)>=5) body_loc = positions[BODY];
@@ -4217,13 +4212,13 @@ string describe_reachable_handholds(string name, string arg){
         h_end = jumpable_handholds[arg]%10000;
       }
       if (positions[L_LEG]>0) v_start = positions[L_LEG]/10000;
-      if (positions[R_LEG]>0 && positions[R_LEG] > positions[L_LEG]) v_start = positions[R_LEG]/10000; 
+      if (positions[R_LEG]>0 && positions[R_LEG] > positions[L_LEG]) v_start = positions[R_LEG]/10000;
       v_end = jumpable_handholds[arg]/10000;
       if (v_end < v_start) v_start = positions[BODY]/10000 -1;
-      jump_result = "There is " + get_handhold_name(jumpable_handholds[arg]) + " you could jump to in that direction. It is " 
+      jump_result = "There is " + get_handhold_name(jumpable_handholds[arg]) + " you could jump to in that direction. It is "
                   + describe_h_distance(h_start, h_end) + " and " + describe_v_distance(v_start , v_end) + ".";
       difficulty_description = describe_jump_difficulty(name, jumpable_handholds[arg]);
-      jump_result += " This would be " + difficulty_description + " jump.";      
+      jump_result += " This would be " + difficulty_description + " jump.";
     }
     break;
     //No need to calculate jump positions if they entered a limb as an argument
@@ -4237,11 +4232,11 @@ string describe_reachable_handholds(string name, string arg){
     switch(direction){
 
     case "up":
-    case "above": //deliberately falling through 
+    case "above": //deliberately falling through
       report("Reachable directions up or above", 6);
       direction = "up";
       break;
-    case "down":  
+    case "down":
     case "below": //deliberately falling through
       report("Reachable directions down or below", 6);
       direction = "down";
@@ -4249,36 +4244,36 @@ string describe_reachable_handholds(string name, string arg){
     case "left":
       report("Reachable directions left", 6);
       direction = "left";
-      break;  
+      break;
     case "right":
       report("Reachable directions right", 6);
       direction = "right";
-      break; 
+      break;
     }
     result = "%^CYAN%^";
     report("%^BOLD%^%^CYAN%^Describe reachable handholdsn 4a. Direction: %^RESET%^" + direction + " size of limbs: " + sizeof(limbs), 6);
-    foreach(limb in limbs)  
-    { 
+    foreach(limb in limbs)
+    {
       report("%^BOLD%^%^CYAN%^Describe reachable handholds. Checking limb: %^RESET%^" + limb, 6);
       if (member_array(limb, excluded_limbs)!=-1) continue;
       locations = handholds[limb];
       directions = keys(locations);
       if (member_array(direction, directions)==-1) continue;
-      result += "You could move your %^RESET%^" + limb + " %^ORANGE%^" + direction + "%^CYAN%^ to "; 
+      result += "You could move your %^RESET%^" + limb + " %^ORANGE%^" + direction + "%^CYAN%^ to ";
       loc = locations[direction];
       handhold_name = get_handhold_name(loc);
       handhold_description = get_handhold_description(loc);
       result += handhold_name + " " + handhold_description + "."  + brief_location_position(loc) +"\n";
-    }   
+    }
   } else
   {
     report("Describe reachable handholds 5 - result: " + result, 6);
     result = "";
     if (direction == "left hand" || direction == "right hand" || direction == "left leg" || direction == "right leg" ) my_limb = direction;
     else my_limb = "none";
-    
-    foreach(limb in limbs)  
-    { 
+
+    foreach(limb in limbs)
+    {
       report("%^RED%^Describe reachable handholds - checking limb:%^RESET%^ " + limb);
       if (my_limb != "none" && my_limb != limb) continue;
       limbresult = "";
@@ -4318,11 +4313,11 @@ string describe_reachable_handholds(string name, string arg){
           break;
         }
         limbresult += handhold_name + " " + handhold_description + " " + brief_location_position(loc);
-      }    
+      }
       if (limbresult == "") continue;
       result += "%^RESET%^%^ORANGE%^With your %^RESET%^" + limb + "%^ORANGE%^, you can reach:";
       result += limbresult;
-      result += "\n"; 
+      result += "\n";
     }
   }
   report("Describe reachable handholds 6 - result: " + result, 6);
@@ -4349,11 +4344,11 @@ string describe_location_position(int loc){
   if (x==0)
   {
     horiz_desc = "At the left end of the wall";
-  } else 
+  } else
   {
     horiz_desc = "" + (x/2);
     if (x % 2 == 1) horiz_desc += " and a half";
-    horiz_desc += " feet from the left and of the wall"; 
+    horiz_desc += " feet from the left and of the wall";
   }
   result = vert_desc + ", " + horiz_desc;
   return result;
@@ -4385,7 +4380,7 @@ string * add_limb (string * pic, string * limb, int x, int y){
     {
       ch = line[j-x..j-x];
       if (ch != " ")
-      {  
+      {
         picline = "/daemon/str_insert_d.c"->insert_string(picline, ch, j);
       }
     }
@@ -4404,13 +4399,13 @@ string describe_h_distance(int start, int finish){
   {
     direction = "left";
     distance = start-finish;
-  } else 
+  } else
   {
     direction = "right";
     distance = finish-start;
   }
   result = "" + (distance/2);
-  if (distance % 2 ==1) result += " and a half"; 
+  if (distance % 2 ==1) result += " and a half";
   result += " feet to the " + direction;
   return result;
 }
@@ -4424,7 +4419,7 @@ string describe_v_distance(int start, int finish){
   {
     direction = "above";
     distance = start-finish;
-  } else 
+  } else
   {
     direction = "below";
     distance = finish-start;
@@ -4456,10 +4451,10 @@ string * colour_wall (string * pic){
   {
     if (sizeof(pic)<= i){
       report ("i: " + i + " size of pic: " + sizeof(pic) + " continuing");
-      continue; 
+      continue;
     }
     line = pic[i];
-    if (sizeof(wall_colours)<= i) continue; 
+    if (sizeof(wall_colours)<= i) continue;
     col_line = temp_colours[i];
     if (sizeof(bg_colours)<= i) continue;
     if (i>0) bg_line = temp_bg[i];
@@ -4521,7 +4516,7 @@ varargs string survey_handholds(string type, object who, int l_x, r_x, l_y, u_y 
   int x, y, * locations, location, start_location, * positions, left_x, bottom_y;
   handhold_info = query_handhold_info();
   new_map = ([]);
-  if (!stringp(type) || type == "") 
+  if (!stringp(type) || type == "")
   {
     return "This command will give you a text description of the handholds in a section of the wall. Possible options:\n"
                       +"all:       Describes the whole wall (This will be a very large amount of text)\n"
@@ -4537,7 +4532,7 @@ varargs string survey_handholds(string type, object who, int l_x, r_x, l_y, u_y 
                       +"           left limit, right limit, lower limit, upper limit\n"
                       +"           The left and right limits are defined in terms of feet from the left end of the wall\n"
                       +"           Upper and lower limits are defined in terms of feet from the bottom of the wall";
-  }                                          
+  }
   if (!objectp(who)) return;
   climber = who->query_name();
   positions = query_positions(climber);
@@ -4581,7 +4576,7 @@ varargs string survey_handholds(string type, object who, int l_x, r_x, l_y, u_y 
      handhold_info = limit_mapping(handhold_info, left_x, start_location % 10000 +20, start_location/10000 +4, start_location/10000 - 2 );
      break;
   }
-  return describe_handholds(handhold_info); 
+  return describe_handholds(handhold_info);
 }
 
 int * order_array (int * arr){
@@ -4594,11 +4589,11 @@ int * order_array (int * arr){
     pos = member_array(lowest, arr);
     if (sizeof(arr==1))
     {
-      arr = ({}); 
+      arr = ({});
       continue;
     }
     if (pos ==0) arr = arr[1..sizeof(arr)-1];
-    else 
+    else
     {
       if (pos == sizeof(arr)-1) arr = arr[0..sizeof(arr)-2];
       else arr = arr[0..pos-1] + arr[pos +1..sizeof(arr)-1];
@@ -4624,8 +4619,8 @@ int * order_array (int * arr){
         report ("%^B_RED%^Reversing array from point " + i + "current point: " + arr[i] + " previous point: " + arr[i-1], 12);
         reverse_arr = arr[i.. sizeof(arr)-1];
         for (j=sizeof(reverse_arr)-1;j>=0;j--) new_array = new_array + ({reverse_arr[j]});
-        break;   
-      } 
+        break;
+      }
     }
   } else report("%^BOLD%^%^BLUE%^No need to reverse tail end of array");
   return new_array;
@@ -4656,7 +4651,7 @@ mapping limit_mapping (mapping m, int low_x, high_x, low_y, high_y){
   foreach(k in ks)
   {
     if (member_array(k, filtered)!=-1) result[k] = m[k];
-  } 
+  }
   report ("Limit_mapping. Size of limited mapping: " + sizeof(result));
   return result;
 }
@@ -4703,4 +4698,3 @@ string * query_base_handholds(){
 void set_base_handholds(string * h){
   base_handholds = h;
 }
-

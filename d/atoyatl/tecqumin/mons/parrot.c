@@ -43,10 +43,7 @@ void set_sayings(mapping s){
 }
 
 void report(string str){
-<<<<<<< HEAD
   return;  //THIS FUNCTION ONLY NEEDED FOR DEBUGGING
-=======
->>>>>>> 82410b7113c9a8c74870f9bd2def95733eef565d
   "/d/atoyatl/reporter_d.c"->report("lujke", str);
 }
 
@@ -78,14 +75,14 @@ int trim_sayings(){  // For cutting down the number of sayings the parrot rememb
     if (highest_x < x) highest_x = x;
     stats_ks = keys(stats);
     if (member_array(x, stats_ks)!=-1)
-    { 
+    {
       pot_removals = stats[x];
       pot_removals += ({k});
     } else
     {
       pot_removals = ({k});
     }
-    stats[x] = pot_removals;   
+    stats[x] = pot_removals;
   }
   stats_ks = keys(stats);
   pot_removals = ({});
@@ -94,7 +91,7 @@ int trim_sayings(){  // For cutting down the number of sayings the parrot rememb
     pot_removals += stats[x];
     if (sizeof(pot_removals)>=target) break;
   }
-  foreach (k in pot_removals) 
+  foreach (k in pot_removals)
   {
     if(!random(4)) map_delete(sayings, k);
     if (sizeof(sayings)<270) break;
@@ -164,7 +161,7 @@ void squawk(){
   report(" Saylias_end: " + saylias_end + "|End of Saylias_end");
   total = 0;
   usables = ({});
-  if (!sizeof(ks)) 
+  if (!sizeof(ks))
   {
       return;
   }
