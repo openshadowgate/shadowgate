@@ -25,6 +25,7 @@ void create(){
    set_item_bonus("wisdom",-1);
    set_item_bonus("slashing resistance",5);
    set_struck((:TO,"strikeme":));
+   set_wear((:TO,"wearme":));
 }
 int strikeme(int damage, object what, object who){
     if(!random(4)){
@@ -34,7 +35,7 @@ int strikeme(int damage, object what, object who){
 		"lunges at you and tries to trip you");
     tell_room(environment(ETO),"%^BOLD%^"+ETO->QCN+"'s tail tries to trip "+who->QCN+" with"+
 		" a quick motion!",({who,ETO}));
-    if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-30))
+    if(!"/daemon/saving_throw_d.c"->reflex_save(who,-30))
      	who->set_tripped(1,"%^BOLD%^You feel over from a tail trip!");
   }
   return damage;
