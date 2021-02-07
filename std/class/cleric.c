@@ -160,6 +160,8 @@ mapping query_innate_spells(object player)
         innate_spells += ([ "dazing touch" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
     if(member_array("illusion", player->query_divine_domain()) >= 0)
         innate_spells += ([ "mirror image" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("knowledge", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "identify" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
 
     return innate_spells;
 }
