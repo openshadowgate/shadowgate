@@ -28,7 +28,7 @@ int preSpell() {
     if(!(int)USER_D->spend_pool(this_player(), 1, "grace"))
     {
         tell_object(caster, "You don't have the Divine Grace to cast Touch of Darkness!");
-        return;
+        return 0;
     }
 
     return 1;
