@@ -25,14 +25,36 @@ void create()
 {
     ::create();
     set_spell_name("ray of enfeeblement");
-    set_spell_level(([ "mage" : 2, "magus" : 1 ]));
+    set_spell_level(([ "mage" : 2, "magus" : 1, "innate" : 5 ]));
     set_spell_sphere("necromancy");
+    set_domains("suffering");
     set_syntax("cast CLASS ray of enfeeblement on TARGET");
-    set_description("A coruscating ray springs from your hand. You must succeed on a ranged touch attack to strike a target. The subject takes a penalty to Strength equal to 1d6+1 per two caster levels (maximum 1d6+5).");
+    set_description("A coruscating ray springs from your hand. You must succeed on a ranged touch attack to strike a target. The subject takes a penalty to Strength equal to 1d6+1 per two caster levels (maximum 1d6+5). Clerics with the Suffering Domain can cast this spell innately by spending one Divine Grace point");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
 }
+
+int preSpell()
+{
+    if(!caster->ok_to_kill(target))
+    {
+        dest_effect();
+        return 0;
+    }
+    
+    if(caster->is_class("cleric"))
+    {
+        if(!(int)USER_D->spend_pool(this_player(), 1, "grace"))
+        {
+            tell_object(caster, "You don't have the Divine Grace to cast Touch of Chaos!");
+            return 0;
+        }
+    }
+    
+    return 1;
+}
+    
 void spell_effect(int prof)
 {
     int roll;
@@ -40,10 +62,6 @@ void spell_effect(int prof)
     theProf = prof;
     set_orig_targ(target);
 
-    if (!caster->ok_to_kill(target)) {
-        dest_effect();
-        return;
-    }
     spell_kill(target, caster);
     roll = BONUS_D->process_hit(caster, target, 1, 0, 0, 1);
     if (!roll || roll == -1 && !caster->query_property("spectral_hand")) {
