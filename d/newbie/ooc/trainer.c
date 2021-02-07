@@ -1,4 +1,5 @@
 #include <std.h>
+#include <daemons.h>
 #define NEWB_D "/d/newbie/ooc/newbie_d.c"
 
 inherit "/std/quest_room.c";
