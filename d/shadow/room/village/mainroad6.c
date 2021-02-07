@@ -4,10 +4,6 @@ inherit VAULT;
 
 void create(){
     ::create();
-    set_terrain(CITY);
-    set_travel(PAVED_ROAD);
-    set_property("light" , 2);
-    set_property("indoors" , 0);
     set_short("On The Quiet Forest Road");
     set_long("/d/shadow/room/forest/road1"->query_long()+"
 %^RED%^A warning sign stands on the side of the road, just in front of the gates to the farmland.%^RESET%^");

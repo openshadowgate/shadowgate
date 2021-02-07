@@ -98,6 +98,14 @@ void receive_given_item(object obj){
        obj->remove();
        return;
     }
+   case "seeweed belt":{
+       new(OBJ"tail")->move(TO);
+       force_me("give belt to "+name);
+       force_me("say A belt?  Try this one it is better!");
+       force_me("wink");
+       obj->remove();
+       return;
+    }
 	 break;}
 	 
    tell_room(ETO,"The Sea Elf puts the meat away and hands you some money.");

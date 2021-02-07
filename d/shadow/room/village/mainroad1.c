@@ -5,7 +5,7 @@ inherit VAULT;
 
 void create(){
     ::create();
-    set_terrain(CITY);
+    set_terrain(VILLAGE);
     set_travel(PAVED_ROAD);
     set_property("light" , 2);
     set_property("indoors" , 0);

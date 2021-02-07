@@ -3,10 +3,6 @@ inherit "/d/shadow/room/forest/road1";
 
 void create(){
     ::create();
-    set_terrain(CITY);
-    set_travel(PAVED_ROAD);
-    set_property("light" , 2);
-    set_property("indoors" , 0);
     set_short("On The Quiet Forest Road");
     set_items(([
 	"road":"A road through the village.",
