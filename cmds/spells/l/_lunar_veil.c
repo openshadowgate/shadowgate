@@ -17,7 +17,7 @@ void create()
     set_domains("moon");
     set_spell_sphere("illusion");
     set_syntax("cast CLASS lunar veil");
-    set_damage_desc("reverts lycanthropes in the immediate are to their true forms");
+    set_damage_desc("Darkens the area and reverts lycanthropes to their true forms");
     set_description("You conjure a tremendous area of shadow to obscure moonlight within the area, creating something akin to a lunar eclipse. The area becomes darker. Lycanthropes in the area must make a Will save every round or revert to their humanoid forms.");
     set_save("will");
     set_verbal_comp();
@@ -33,7 +33,7 @@ string query_cast_string()
 
 void spell_effect()
 {
-    tell_room("%^MAGENTA%^BOLD%^Darkness blots out the sky and a swirling magic flits about the area.%^RESET%^");
+    tell_room("%^MAGENTA%^BOLD%^Darkness blots out the sky and the moon disappears as a swirling magic flits about the area.%^RESET%^");
     olight = place->query_light();
     if(olight > -2)
         place->set_light(-2);
