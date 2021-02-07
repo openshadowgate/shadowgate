@@ -153,7 +153,10 @@ mapping query_innate_spells(object player)
     if(member_array("undeath", player->query_divine_domain()) >= 0)
         innate_spells += ([ "bleeding touch" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
     if(member_array("storms", player->query_divine_domain()) >= 0)
+    {
         innate_spells += ([ "gale aura" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+        innate_spells += ([ "call lightning" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    }
     if(member_array("magic", player->query_divine_domain()) >= 0)
         innate_spells += ([ "dispelling touch" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
     if(member_array("charm", player->query_divine_domain()) >= 0)
