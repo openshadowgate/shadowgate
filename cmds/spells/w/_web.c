@@ -14,7 +14,7 @@ create()
     ::create();
     set_spell_name("web");
     set_spell_level(([ "mage" : 2, "assassin" : 2, "psion" : 3, "magus" : 2 ]));
-    set_spell_sphere("invocation_evocation");
+    set_spell_sphere("conjuration_summoning");
     set_discipline("shaper");
     set_syntax("cast CLASS web on TARGET");
     set_damage_desc("tripped for 3d4 rounds");
