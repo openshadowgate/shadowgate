@@ -2305,7 +2305,7 @@ void define_clevel()
                 clevel += 1;
             break;
             
-            case "enchantment":
+            case "enchantment_charm":
             if(member_array("tyranny", domains) >= 0)
                 clevel += 1;
             break;
@@ -2314,7 +2314,7 @@ void define_clevel()
             if(member_array("knowledge", domains) >= 0)
                 clevel += 1;
 
-            case "conjuration":
+            case "conjuration_summoning":
             if(member_array("creation", domains) >= 0)
                 clevel += 1;
 
