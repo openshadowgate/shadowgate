@@ -57,7 +57,7 @@ void summon_servant() {
     ob=new("/d/magic/mon/spiritual_weapon.c");
     ob->set_alignment(caster->query_alignment());
     ob->set_short(("/d/magic/obj/weapons/"+normalizedDeity)->query_short());
-    ob->set_long(("/d/magic/obj/weapons/"+normalizedDeity)->query_short());
+    ob->set_long(("/d/magic/obj/weapons/"+normalizedDeity)->query_long());
     ob->set_id(ob->query_id()+("/d/magic/obj/weapons/"+normalizedDeity)->query_id());
     ob->setup_servant(caster,clevel);
 
