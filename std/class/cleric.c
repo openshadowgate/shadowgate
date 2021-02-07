@@ -167,6 +167,8 @@ mapping query_innate_spells(object player)
         innate_spells += ([ "identify" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
     if(member_array("chaos", player->query_divine_domain()) >= 0)
         innate_spells += ([ "touch of chaos" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("suffering", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "ray of enfeeblement" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
 
     return innate_spells;
 }
