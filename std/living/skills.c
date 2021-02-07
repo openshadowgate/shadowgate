@@ -347,6 +347,12 @@ int query_skill(string skill)
         x += 10;
     }
 
+    if(TO->query_class_level("cleric"))
+    {
+        if(member_array("travel", TO->query_divine_domain()) >= 0 && skill == "endurance")
+            x += 10;
+    }
+
     if( (skill == "perception" || skill == "survival" || skill == "stealth") && FEATS_D->usable_feat(TO, "favored terrain") )
     {
         if(TO->is_favored_terrain(environment(TO)))
