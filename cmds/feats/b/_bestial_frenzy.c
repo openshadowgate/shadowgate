@@ -164,7 +164,7 @@ void dest_effect()
             caster->add_stat_bonus("strength", -4);
             caster->add_stat_bonus("dexterity", -4);
             caster->add_stat_bonus("constitution", -4);
-            caster->set_property("feast healing", -2);
+            caster->set_property("fast healing", -2);
             "/std/effect/status/fatigued"->apply_effect(target, 36);
             
             if(objectp(companion))
