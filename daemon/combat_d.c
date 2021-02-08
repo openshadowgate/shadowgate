@@ -922,7 +922,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
         damage += COMBAT_D->unarmed_enchantment(attacker);
     }
     
-    paladin = targ->query_property("paladin smite");
+    targ && paladin = targ->query_property("paladin smite");
     
     if(objectp(paladin))
     {
