@@ -31,10 +31,10 @@ void create()
 
 void setup(object thingy, string dest)
 {
-    destobj = find_object_or_load(dest);
+    destobj = find_object(dest, 1);
 
     if (!objectp(destobj)) {
-        tell_object(thingy,"%^BOLD%^You stumple in confusion. Something wend wrong and you didn't take off.");
+        tell_object(thingy,"%^BOLD%^You stumble in confusion. Something wend wrong and you didn't take off.");
         TO->remove();
     }
 
@@ -86,7 +86,7 @@ void flystep(string destination, object flyee)
         flroom->change_stage("final landing");
     } else if (step > 30) {
         tell_room(destobj, "%^BOLD%^%^WHITE%^" + flyee->QCN + " descends into the area from the sky.%^RESET%^");
-        flyee->move_player(find_object(destination, 1));
+        flyee->move_player(destobj);
         tell_object(flyee, "%^BOLD%^%^WHITE%^You have arrived at your destination.%^RESET%^");
         TO->remove();
         return;
@@ -94,7 +94,7 @@ void flystep(string destination, object flyee)
 
     tell_object(flyee, RAND_CLRS[random(sizeof(RAND_CLRS))] + RAND_MSG[random(sizeof(RAND_MSG))] + "%^RESET%^");
     if (step > 18) {
-        tell_room(destination, "%^BOLD%^%^BLACK%^You see a shadow of something descending to the ground.%^RESET%^");
+        tell_room(destobj, "%^BOLD%^%^BLACK%^You see a shadow of something descending to the ground.%^RESET%^");
     }
 
     step++;
