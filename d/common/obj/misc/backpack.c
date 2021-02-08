@@ -1,5 +1,5 @@
 #include <std.h>
-inherit "/std/bag_logic";
+inherit "/common/obj/misc/sack";
 
 void create() {
     set_id( ({"backpack","pack","bag"}) );
@@ -11,8 +11,4 @@ void create() {
     set_property("treasure_type", "5A");
     set_max_internal_encumbrance(35);
     set_property("repairtype",({ "leatherwork","tailor" }));
-}
-
-int is_sack() {
-    return 1;
 }
