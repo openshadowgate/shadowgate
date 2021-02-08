@@ -55,7 +55,7 @@ void flystep(string destination, object flyee)
     }
 
     if (!objectp(destobj)) {
-        destobj = find_object_or_load(destination);
+        destobj = find_object(destination, 1);
     }
 
     //Forces a load on the destination
@@ -67,12 +67,7 @@ void flystep(string destination, object flyee)
         TO->remove();
         return;
     }
-/* Tlaloc moved this to the above if statement. My guess is sometimes "destination" just isn't matching up to a loading object
-   I'm also wondering where destinations are defined.
-    if (!objectp(destobj)) {
-        destobj = load_object(destination);
-    }
-*/
+
     if (flroom != ENV(flyee)) {
         TO->remove();
         return;
