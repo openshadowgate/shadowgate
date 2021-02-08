@@ -12,7 +12,7 @@ string WINGO = "/cmds/mortal/obj/wingObj.c";
 
 int cmd_wing(string args)
 {
-    object myshape;
+    object myshape, dest_room;
     string dest;
 
     if (TP->query_bound() || TP->query_paralyzed()) {
@@ -45,11 +45,13 @@ int cmd_wing(string args)
         }
     }
 
-    if (!objectp(dest)) {
-        load_object(dest);
+    if(!(dest_room = find_object(dest, 1)))
+    {
+        tell_object(this_player(), "Destination error. Contact an immortal.")
+        return 1;
     }
 
-    if (dest->query_property("indoors")) {
+    if (dest_room->query_property("indoors")) {
         tell_object(TP, "Your destination must be outside.");
         return 1;
     }
@@ -59,7 +61,7 @@ int cmd_wing(string args)
         return 1;
     }
 
-    if (!TELEPORT->object_can_be_teleported(TP, find_object_or_load(dest), TP->query_level(), 1)) {
+    if (!TELEPORT->object_can_be_teleported(TP, dest_room, TP->query_level(), 1)) {
         tell_object(TP, "Something prevents you from flying there.");
         return 1;
     }
@@ -73,7 +75,7 @@ int cmd_wing(string args)
         wing = new(WINGO);
         wing->move(TP);
         wing->setup(TP, dest);
-        call_other(dest, "???");
+        call_other(dest_room, "???");
     }
 
     return 1;
