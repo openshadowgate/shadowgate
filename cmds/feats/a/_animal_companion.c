@@ -132,12 +132,14 @@ void execute_feat()
             foreach(object obj in pack)
             {
                 tell_object(caster, "You dismiss your pack member.");
-                pack -= ({ obj });
+                //pack -= ({ obj });
                 obj && obj->remove();
                 //Trying to get rid of sticky animals
                 if(objectp(obj))
-                    obj->remove();
+                    destruct(obj);
             }
+            
+            pack = ({  });
         }
                 
         return;
