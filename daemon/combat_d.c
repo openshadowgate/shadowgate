@@ -2982,6 +2982,10 @@ void internal_execute_attack(object who)
         if(who->query_property("touch of chaos"))
             roll = min( ({ roll, random(20) + 1 }) );
 
+        //Touch of Law makes the roll 11
+        if(who->query_property("touch of law"))
+            roll = 11;
+
         if (roll == 1) { //automatic miss on rolls of a one
             fumble = 1;
         }else {
