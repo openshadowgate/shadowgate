@@ -78,12 +78,16 @@ void heart_beat()
     if(!objectp(owner))
     {
         this_object()->remove();
+        destruct(this_object());
         return;
     }
     
     //Faithful companion finds his master
     if(objectp(owner) && room != environment(owner))
+    {
         this_object()->move(environment(owner));
+        owner->add_follower(this_object());
+    }
     
     //Companion hides if master is hiding
     if(!this_object()->query_invis())

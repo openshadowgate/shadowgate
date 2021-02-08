@@ -118,7 +118,7 @@ void execute_feat()
     
     
     companion = caster->query_property("animal_companion");
-    pack = caster->query_followers();
+    pack = caster->query_protectors();
     pack = filter_array(pack, (: $1->query_pack_member() :));
     
     if(objectp(companion) || sizeof(pack))

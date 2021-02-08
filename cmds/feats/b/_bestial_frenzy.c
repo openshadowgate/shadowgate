@@ -117,7 +117,7 @@ void execute_feat()
     caster->add_stat_bonus("strength", 4);
     caster->add_stat_bonus("dexterity", 4);
     caster->add_stat_bonus("constitution", 4);
-    caster->add_property("fast healing", 2);
+    caster->set_property("fast healing", 2);
         
     tell_object(caster, cm("Your " + companion->query_name() + " loses itself to the thrill of the hunt."));
         
@@ -127,7 +127,7 @@ void execute_feat()
     companion->add_stat_bonus("strength", 4);
     companion->add_stat_bonus("dexterity", 4);
     companion->add_stat_bonus("constitution", 4);
-    companion->add_property("fast healing", 2);
+    companion->set_property("fast healing", 2);
     
     if(sizeof(pack))
     {
@@ -144,7 +144,7 @@ void execute_feat()
             animal->add_stat_bonus("strength", 4);
             animal->add_stat_bonus("dexterity", 4);
             animal->add_stat_bonus("constitution", 4);
-            animal->add_property("fast healing", 2);
+            animal->set_property("fast healing", 2);
         }
     }
     
@@ -164,7 +164,7 @@ void dest_effect()
             caster->add_stat_bonus("strength", -4);
             caster->add_stat_bonus("dexterity", -4);
             caster->add_stat_bonus("constitution", -4);
-            caster->add_property("feast healing", -2);
+            caster->set_property("feast healing", -2);
             "/std/effect/status/fatigued"->apply_effect(target, 36);
             
             if(objectp(companion))
@@ -174,7 +174,7 @@ void dest_effect()
                 companion->add_stat_bonus("strength", -4);
                 companion->add_stat_bonus("dexterity", -4);
                 companion->add_stat_bonus("constitution", -4);
-                companion->add_property("fast healing", -2);
+                companion->set_property("fast healing", -2);
             }
             
             if(sizeof(pack))
@@ -190,7 +190,7 @@ void dest_effect()
                     animal->add_stat_bonus("strength", -4);
                     animal->add_stat_bonus("dexterity", -4);
                     animal->add_stat_bonus("constitution", -4);
-                    animal->add_property("fast healing", -2);
+                    animal->set_property("fast healing", -2);
                 }
             }
         }
