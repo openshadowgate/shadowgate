@@ -91,7 +91,7 @@ void flystep(string destination, object flyee)
         flroom->change_stage("final landing");
     } else if (step > 30) {
         tell_room(destobj, "%^BOLD%^%^WHITE%^" + flyee->QCN + " descends into the area from the sky.%^RESET%^");
-        flyee->move_player(destination);
+        flyee->move_player(find_object(destination, 1));
         tell_object(flyee, "%^BOLD%^%^WHITE%^You have arrived at your destination.%^RESET%^");
         TO->remove();
         return;
