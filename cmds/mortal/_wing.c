@@ -38,7 +38,11 @@ int cmd_wing(string args)
 
     if (!(dest = TP->query_rem_room(args))) {
         if (member_array(args, keys(preset_destinations)) != -1) {
+<<<<<<< HEAD
             dest = to_string(preset_destinations[args]);
+=======
+            dest = (string)preset_destinations[args];
+>>>>>>> c4da73fe32f0e91410d4739d8daaa48a5e4272ae
         }else {
             tell_object(TP, "You can't remember " + args + ".");
             return 1;
