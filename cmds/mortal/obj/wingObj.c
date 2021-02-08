@@ -31,7 +31,7 @@ void create()
 
 void setup(object thingy, string dest)
 {
-    destobj = find_object(dest, 1);
+    destobj = find_object("" + dest, 1);
 
     if (!objectp(destobj)) {
         tell_object(thingy,"%^BOLD%^You stumble in confusion. Something wend wrong and you didn't take off.");
@@ -55,7 +55,7 @@ void flystep(string destination, object flyee)
     }
 
     if (!objectp(destobj)) {
-        destobj = find_object(destination, 1);
+        destobj = find_object("" + destination, 1);
     }
 
     //Forces a load on the destination
