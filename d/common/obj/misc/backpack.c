@@ -1,5 +1,5 @@
 #include <std.h>
-inherit "/common/obj/misc/sack";
+inherit "/d/common/obj/misc/sack";
 
 void create() {
     set_id( ({"backpack","pack","bag"}) );
