@@ -810,7 +810,7 @@ int query_resistance_percent(string res)
     
     if(FEATS_D->usable_feat(TO, "perfection"))
     {
-        if(res == "electricity" || res == "cold")
+        if(res == "electricity" || res == "cold" || res == "acid")
             mod = 100;
     }
 
