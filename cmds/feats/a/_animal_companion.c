@@ -229,6 +229,7 @@ void execute_feat()
                 pack_animal->set_hp(14 * comp_hd + 14);
                 pack_animal->set_alignment(caster->query_alignment());
                 pack_animal->set_owner(caster);
+                pack_animal->set_property("damage_resistance", 10);
        
                 caster->add_follower(pack_animal);
                 caster->add_protector(pack_animal);
