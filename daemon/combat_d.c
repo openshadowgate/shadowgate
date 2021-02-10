@@ -455,6 +455,16 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
                     }
                 }
 
+                if(targ->is_class("cleric"))
+                {
+                    if(LIVING_D->opposed_alignment(targ, attacker))
+                    {
+                        if(member_array("good", targ->query_divine_domain()) >= 0 ||
+                           member_array("law", targ->query_divine_domain()) >= 0)
+                             reduction += 5;
+                    }
+                }
+
                 if (attacker->query_property("magic")) {
                     mod = (int)attacker->query_property("magic") * 10;
                 }
