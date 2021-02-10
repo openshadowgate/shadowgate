@@ -459,8 +459,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
                 {
                     if(LIVING_D->opposed_alignment(targ, attacker))
                     {
-                        if(member_array("good", targ->query_divine_domain()) >= 0 ||
-                           member_array("law", targ->query_divine_domain()) >= 0)
+                        if(member_array("good", targ->query_divine_domain()) >= 0)
                              reduction += 5;
                     }
                 }
