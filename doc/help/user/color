@@ -36,11 +36,15 @@ The following color codes and their associated colors are available on Shadowgat
  %^MAGENTA%^*%^RESET%^ Put a %%%^^^RESET%%%^^^ at the start and end of all your colored works.
  %^MAGENTA%^*%^RESET%^ If you use background color make sure you're using high contrast color. Otherwise many clients just won't see the text you've written. Most terminals default to bright colors for background colors.
 
-%^ULINE%^%^CYAN%^Trillet's "Color Code Preview/Generation Flash Application"
+%^ULINE%^%^CYAN%^Trillet's "Color Code Editor"
 
-You may also want to look for the "Color Code Preview/Generation Flash Application" created by %^BOLD%^%^CYAN%^Trillet%^RESET%^:
+You may also want to look for the "Color Code Editor" created by %^BOLD%^%^CYAN%^Trillet%^RESET%^:
 
-%^ULINE%^https://shadowgate.org/forum/viewtopic.php?f=16&t=11
+%^ULINE%^https://shadowgate.org/wiki/color_editor
+
+Because Flash has been discontinued, you may need to use the debug Flash application.
+
+%^ULINE%^https://www.adobe.com/support/flashplayer/debug_downloads.html
 
 %^CYAN%^EXAMPLES%^RESET%^
 
