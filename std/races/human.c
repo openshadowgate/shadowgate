@@ -159,7 +159,7 @@ mapping query_racial_innate(string subrace)
 				"class specific" : 0])]);
 				break;
 		case "fire genasi":
-				return (["handfire" : (["type" : "spell", "casting level" : 0.5,
+				return (["produce flame" : (["type" : "spell", "casting level" : 0.5,
 				"daily uses" : 1, "delay" : 1, "uses left" : 1,
 				"refresh time" : -1, "level required" : 0,
 				"class specific" : 0])]);
