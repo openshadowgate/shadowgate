@@ -22,18 +22,18 @@ void create()
     set_somatic_comp();
     set_save("reflex");
     aoe_spell(1);
-    set_aoe_message("%^RESET%^%^%^BLUE%^(%^BOLD%^%^WHITE%^engulfed in white light%^RESET%^%^BLUE%^)%^RESET%^");
+    set_aoe_message("%^RESET%^%^%^BLUE%^(%^BOLD%^%^WHITE%^engulfed in white swirling lights%^RESET%^%^BLUE%^)%^RESET%^");
 }
 
 string query_cast_string()
 {
-    tell_room(place,"%^RESET%^%^WHITE%^As "+caster->QCN+" voices a few syllables, the place becomes extremely bright.");
+    tell_room(place,"%^RESET%^%^WHITE%^As "+caster->QCN+" voices a few syllables, the area begins to swirl with celestial energy.");
     return "display";
 }
 
 void spell_effect(int prof)
 {
-    tell_room(place,"%^BOLD%^%^WHITE%^Brilliant divine energy brightens the area!");
+    tell_room(place,"%^BOLD%^%^WHITE%^A conduit to the celestial realms is opened and swirling celestial energy engulfs the area!");
     prevlight=place->query_light();
     if(prevlight<1)
         place->set_light(1);
@@ -61,7 +61,7 @@ void execute_attack()
         return;
     }
 
-    message("info", "%^BOLD%^%^WHITE%^The incandescent brightness fills the area!%^RESET%^", place);
+    message("info", "%^BOLD%^%^WHITE%^Swirling incandescent energy engulfs everyone in the room, sparing friends and smiting foes!%^RESET%^", place);
     foes = target_selector();
     foes -= ({ caster });
 
@@ -76,7 +76,10 @@ void execute_attack()
         tell_object(targ,"%^BOLD%^%^WHITE%^The brightness threatens to dazzle you!");
         
         if(foes[i]->is_undead())
+        {
             sdamage = (sdamage * 5) / 4;
+            message("info", "%^BOLD%^YELLOW%^" + foes[i]->QCN + "'s very essence struggles as it is consumed!", place);
+        }
         damage_targ(targ,targ->return_target_limb(),sdamage,"divine");
     }
     counter--;
