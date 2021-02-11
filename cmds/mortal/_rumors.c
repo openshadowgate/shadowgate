@@ -106,7 +106,7 @@ arealist = ({
             ({"Muln's Lair (Ice Island)" ,30,35,}),
             ({"Oubliette (Crystal Tower)",30,35,}),
             ({"Lava Tubes (Tonerra)",33,42,}),
-            ({"QUESTt: Shar's Failed Deed (Tonerra)",33,42,}),
+            ({"QUEST: Shar's Failed Deed (Tonerra)",33,42,}),
             ({"Arkhon's Lair" ,35,40,}),
             ({"Atoyatl Jungle" ,35,50,}),
             ({"Forest on Argentrock Island",35,40,}),
