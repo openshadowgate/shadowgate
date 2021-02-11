@@ -154,7 +154,7 @@ int cmd_master(string args)
             }
 
             if (forgettime > time() - 108000) {
-                write("%^ORANGE%^You can forget a spell %^RED%^%^BOLD%^once per nine hours%^RESET%^%^ORANGE%^.%^RESET%^");
+                write("%^ORANGE%^You can forget a spell %^RED%^%^BOLD%^once per thirty hours%^RESET%^%^ORANGE%^.%^RESET%^");
                 return 1;
             }
         }
@@ -318,7 +318,7 @@ This command is an extensive interface to your knowledge of spells. Some caster 
   With this command you will commit to learning a %^ORANGE%^%^ULINE%^SPELL%^RESET%^.
 
 %^ORANGE%^<master forget %^ORANGE%^%^ULINE%^SPELL%^RESET%^%^ORANGE%^>%^RESET%^
-  Once per 9 hours you can forget a %^ORANGE%^%^ULINE%^SPELL%^RESET%^ and learn a new one.
+  Once per 30 hours you can forget a %^ORANGE%^%^ULINE%^SPELL%^RESET%^ and learn a new one.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
