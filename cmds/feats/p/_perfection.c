@@ -22,7 +22,7 @@ int prerequisites(object ob)
         return 0;
     }
 
-    if ((int)ob->query_class_level("risen martyr") < 7)
+    if ((int)ob->query_class_level("risen_martyr") < 7)
     {
         dest_effect();
         return 0;
