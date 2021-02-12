@@ -184,6 +184,8 @@ void check_contents()
         tell_object(vics[x], "%^BOLD%^%^RED%^You are burned by the thick %^BOLD%^%^GREEN%^"+
         "acidic%^BOLD%^%^RED%^ slime!%^RESET%^");
         vics[x]->cause_typed_damage(vics[x], 0, roll_dice(12, 8), "acid");
+        if (vics[x]->query_hp() < 0)
+            vics[x]->die();  //adding sanity check because people sometimes get stuck there
         continue;
     }
     if(objectp(myBeast)) 
