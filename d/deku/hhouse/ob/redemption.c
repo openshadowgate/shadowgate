@@ -241,7 +241,7 @@ void heart_beat()
                         "e%^BOLD%^%^WHITE%^n%^BOLD%^%^GREEN%^e%^BOLD%^%^WHITE%^rgy "+
                         "zaps from "+ETOQCN+"%^BOLD%^%^WHITE%^'s blade and slams into "+
                         targ->QCN+"%^BOLD%^%^WHITE%^!%^RESET%^", ({ETO, targ}));
-                        targ->cause_typed_damage(targ, 0, roll_dice(2,8), "positive energy");
+                        targ->cause_typed_damage(targ, 0, roll_dice(2,8), "divine");
                         continue;
                     }
                 }
@@ -400,7 +400,7 @@ int hit_func(object targ)
         tell_room(EETO, targ->QCN+"%^BOLD%^%^WHITE%^ suddenly looks weaker as "+ETOQCN+
         "%^BOLD%^%^WHITE%^'s blade slices into "+targ->QO+"!%^RESET%^", ({ETO, targ}));
 
-        targ->cause_typed_damage(targ, "torso", roll_dice(1,10), "positive energy");
+        targ->cause_typed_damage(targ, "torso", roll_dice(1,10), "divine");
 
         return 0;
     }
@@ -427,7 +427,7 @@ int hit_func(object targ)
             if(!random(25)) dam = MyPower * 2;
             MyPower = 0;
             targ->set_tripped(2, "%^BOLD%^%^WHITE%^You are struggling to get back up!%^RESET%^");
-            targ->cause_typed_damage(targ, "torso", dam, "positive energy");
+            targ->cause_typed_damage(targ, "torso", dam, "divine");
             return 0;
         }
         else
@@ -461,7 +461,7 @@ int hit_func(object targ)
                     MyPower += dam;
                     if((int)ETO->query_hp() < (int)ETO->query_max_hp()) ETO->heal(dam);
                     else if((int)ETO->query_extra_hp() < 100) ETO->add_extra_hp(dam);
-                    targ->cause_typed_damage(targ, "torso", dam, "positive energy");
+                    targ->cause_typed_damage(targ, "torso", dam, "divine");
                     return 0;
                     break;
 
