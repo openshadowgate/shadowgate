@@ -57,7 +57,7 @@ int extra_hit(object ob) {
 	        " screams with blood filled energy as it slices deep into your flesh!%^RESET%^"
             ,vic);
 	    amnt = random(10)+10;
-	    vic->do_damage(vic->return_target_limb(),amnt);
+        vic->cause_typed_damage(vic, vic->return_target_limb(),amnt,"slashing");
         }
    }
     if (uses < 1) {

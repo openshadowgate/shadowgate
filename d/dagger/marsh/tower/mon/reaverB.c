@@ -32,7 +32,6 @@ void create()
         "%^RESET%^"
         );
     set_gender("male");
-    //set_property("magic", 1);
     set_hd(30, 5);
     set_size(2);
     set_property("no steal", 1);
@@ -59,12 +58,7 @@ void create()
     if (!random(9)) { //changing drop to be 1 in 10 since you can no longer solo Vecna
         new("/d/dagger/marsh/tower/obj/mistkey")->move(TO);
     }
-/*
-    new( OPATH "scythe" )->move(TO);
-    command("wield scythe in left hand");
-    new( OPATH "scythe" )->move(TO);
-    command("wield scythe in right hand");
- */
+
     ob = new(OPATH "greater_scythe");
     if (random(3)) {
         ob->set_property("monsterweapon", 1);
@@ -78,9 +72,6 @@ void create()
         new(OPATH "stormvest")->move(TO);
         command("wear vest");
     }
-    //ob = new("/d/shadow/obj/potion/extra_heal");
-    //ob->set_uses(3);
-    //ob->move(TO);
     set_property("add kits", random(2) + 1);
     add_money("gold", random(2000) + 400);
     set_funcs(({
@@ -180,10 +171,8 @@ int moves()
                         "Your soul is %^RED%^burned%^GREEN%^ and "
                         "%^RED%^torn%^GREEN%^!%^RESET%^"
                         );
-            //targ->do_damage("torso",random(50)+5);
-            set_property("magic", 1);
-            targ->do_damage("torso", (int)targ->query_max_hp() / 20);
-            remove_property("magic");
+
+            targ->cause_typed_damage(targ, "torso",roll_dice(8,10)+100,"divine");
         }
         return 1;
 
@@ -208,7 +197,7 @@ int moves()
                   "of pure evil "
                   "at " + targ->query_cap_name() + "!%^RESET%^"
                   , targ);
-        targ->do_damage("head", roll_dice(8, 10));
+        targ->cause_typed_damage(targ, "head",roll_dice(8,10),"divine");
         "/std/effect/status/shaken"->apply_effect(targ, roll_dice(1, 6));
         return 1;
 
