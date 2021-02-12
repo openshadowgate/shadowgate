@@ -38,6 +38,8 @@ void spell_effect(int prof)
     if(prevlight<1)
         place->set_light(1);
     counter = clevel * 2;
+    place->set_property("spelled", ({ this_object() }) );
+    caster->set_property("spelled",({ this_object() }));
     addSpellToCaster();
     spell_successful();
     execute_attack();
@@ -92,7 +94,9 @@ void dest_effect() {
     {
         place->set_light(prevlight);
         tell_object(place,"%^BOLD%^%^BLUE%^The brightness recedes, and the place becomes a bit cooler.%^RESET%^");
+        place->remove_property_value("spelled", ({TO}) );
     }
+    caster->remove_property_value("spelled", ({TO}) );
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
