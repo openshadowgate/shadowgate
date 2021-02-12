@@ -1034,9 +1034,11 @@ int query_ac()
         myac += 4;
     }
     
+    /*
     if(TO->is_class("cleric"))
         if(member_array("protection", TO->query_divine_domain()) >= 0)
             myac += 4;
+    */
 
     if(FEATS_D->usable_feat(TO, "canny defense") && !TO->query_paralyzed() &&
        !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief"))
