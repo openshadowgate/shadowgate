@@ -173,6 +173,8 @@ mapping query_innate_spells(object player)
         innate_spells += ([ "ray of enfeeblement" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
     if(member_array("law", player->query_divine_domain()) >= 0)
         innate_spells += ([ "touch of law" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("madness", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "touch of madness" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
 
     return innate_spells;
 }
