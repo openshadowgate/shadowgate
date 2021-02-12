@@ -43,6 +43,8 @@ mapping class_featmap(string myspec, object player) {
     
     if(player && member_array("war", player->query_divine_domain()) >= 0)    
         feats[1] += ({ "martial weapon proficiency" });
+    if(player && member_array("protection", player->query_divine_domain()) >= 0)    
+        feats[1] += ({ "heavy armor proficiency" });
     if(player && member_array("cavern", player->query_divine_domain()) >= 0)    
         feats[1] += ({ "blindfight" });
     
