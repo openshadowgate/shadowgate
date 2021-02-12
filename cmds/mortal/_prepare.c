@@ -375,12 +375,12 @@ int max_allowed(object obj, string myclass, int level)
 
     switch (myclass)
     {
-    case "cleric": case "paladin": case "ranger": case "druid": case "inquisitor":
+    case "cleric": case "ranger": case "druid": case "inquisitor":
 
         stat = "wisdom";
         break;
 
-    case "bard": case "sorcerer": case "oracle":
+    case "bard": case "sorcerer": case "oracle": case "paladin":
 
         stat = "charisma";
         break;

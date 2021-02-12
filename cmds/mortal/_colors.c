@@ -47,11 +47,13 @@ colors start|end COLOR
 
 This command will set color of direct speech inside of emotes. You can have only one direct speech within single emote.
 
-For example, <color start %%%^^^CYAN%%%^^^> followed by <color start %%%^^^RED%%%^^^> will make your emote
+Using the <colors start (color codes)> will determine the color of your speech within the quotes in your emoteat. The <colors end (color codes)> command will determine the color of your emoteat after your speech in parenthesis ends.
+
+For example, <colors start %%%^^^CYAN%%%^^^> and <colors end %%%^^^RED%%%^^^> will make your emoteats have this color effect:
 
     <emoteat TARGET $M pokes $N gently, \"Hey you\", then snickers.> 
 
-appear as 
+will appear as 
 
     Yourname pokes Someone gently, %^CYAN%^\"Hey you\"%^RED%^, then snickers.%^RESET%^
 

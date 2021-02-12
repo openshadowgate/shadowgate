@@ -99,6 +99,8 @@ varargs void do_save(object ob, int dc, string type, raw_save)
                 ob->query("subrace") == "maalish") {
                 mod += 1;
             }
+            if(member_array("stars", ob->query_divine_domain()) >= 0)
+                mod += 2;
             if(LIVING_D->check_aura(ob, "courage") == 2)
                 mod += 2;
             if(LIVING_D->check_aura(ob, "resolve") == 2)
@@ -168,6 +170,11 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     }
 
     roll1 = roll_dice(1, 20);
+
+    //Touch of Law makes the roll 11
+    if(ob->query_property("touch of law"))
+        roll1 = 11;
+
     save_info["saving_throw_roll"] = roll1;
     save_info["pass_or_fail_by"] = roll1 + save + dc;
 

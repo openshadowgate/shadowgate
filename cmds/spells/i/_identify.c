@@ -2,6 +2,8 @@
 //Fixed bug where it was revealing caster's true name ~Circe~ 5/4/11
 #include <std.h>
 #include <spell.h>
+#include <daemons.h>
+
 inherit SPELL;
 object ob,*ppl;
 int i;
@@ -9,13 +11,15 @@ int i;
 void create() {
     ::create();
     set_spell_name("identify");
-    set_spell_level(([ "mage" : 1, "oracle":1, "magus" : 1 ]));
+    set_spell_level(([ "mage" : 1, "oracle":1, "magus" : 1, "innate" : 5 ]));
     set_spell_sphere("divination");
+    set_domains("knowledge");
     set_mystery("lore");
     set_syntax("cast CLASS identify on OBJECT");
     set_description("This is the spell for you to identify the enchantment of items (usually equipment, though it may "
 "show attributes of other objects also).  The item must be in your inventory or the room where you are.  NOTE: Anyone in "
-"the same room with you will also know the enchantment of that item.");
+"the same room with you will also know the enchantment of that item. Clerics with the Knowledge domain can cast this spell "
+"innately by casting one Divine Grace point.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
@@ -28,6 +32,21 @@ void create() {
 string query_cast_string() {
     if(objectp(caster)) { return "%^CYAN%^Blinking several times, "+caster->QCN+" chants a short phrase."; }
     return "";
+}
+
+int preSpell()
+{
+    
+    if(caster->is_class("cleric"))
+    {
+        if(!(int)USER_D->spend_pool(this_player(), 1, "grace"))
+        {
+            tell_object(caster, "You don't have the Divine Grace to cast Identify!");
+            return 0;
+        }
+    }
+    
+    return 1;
 }
 
 void spell_effect(int prof) {

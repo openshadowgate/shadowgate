@@ -1970,11 +1970,6 @@ void increment_stamina(int x)
     if (TO->is_undead()) {
         return;
     }
-    if(TO->query_class_level("cleric"))
-    {
-        if(member_array("travel", TO->query_divine_domain()) >= 0)
-            x /= 2;
-    }
     used_stamina += x;
     if (used_stamina < 0) {
         used_stamina = 0;

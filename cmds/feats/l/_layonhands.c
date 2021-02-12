@@ -142,7 +142,11 @@ void execute_attack()
         }
         if(dedication == "poisoned")
         {
-            target->set_poisoning(-target->query_poisoning());
+            if(POISON_D->clear_poisons_by_dc(target, clevel, 0))
+                tell_object(caster, "You are able to cleanse the poison and it fades away.");
+            else
+                tell_object(caster, "You were not able to cleanse the poison.");
+            
             dest_effect();
             return;
         }

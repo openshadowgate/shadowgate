@@ -118,7 +118,7 @@ void execute_feat()
     
     
     companion = caster->query_property("animal_companion");
-    pack = caster->query_followers();
+    pack = caster->query_protectors();
     pack = filter_array(pack, (: $1->query_pack_member() :));
     
     if(objectp(companion) || sizeof(pack))
@@ -132,12 +132,14 @@ void execute_feat()
             foreach(object obj in pack)
             {
                 tell_object(caster, "You dismiss your pack member.");
-                pack -= ({ obj });
+                //pack -= ({ obj });
                 obj && obj->remove();
                 //Trying to get rid of sticky animals
                 if(objectp(obj))
-                    obj->remove();
+                    destruct(obj);
             }
+            
+            pack = ({  });
         }
                 
         return;
@@ -227,6 +229,7 @@ void execute_feat()
                 pack_animal->set_hp(14 * comp_hd + 14);
                 pack_animal->set_alignment(caster->query_alignment());
                 pack_animal->set_owner(caster);
+                pack_animal->set_property("damage_resistance", 10);
        
                 caster->add_follower(pack_animal);
                 caster->add_protector(pack_animal);

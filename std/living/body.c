@@ -810,8 +810,17 @@ int query_resistance_percent(string res)
     
     if(FEATS_D->usable_feat(TO, "perfection"))
     {
-        if(res == "electricity" || res == "cold")
+        if(res == "electricity" || res == "cold" || res == "acid")
             mod = 100;
+    }
+
+    if(TO->is_class("cleric"))
+    {
+        if(res == "fire" || res == "cold" || res == "acid" || res == "electricity")
+        {
+            if(member_array("elements", TO->query_divine_domain()) >= 0 )
+                mod += 25;
+        }
     }
 
     return resistances["resistance percents"][res] + mod;

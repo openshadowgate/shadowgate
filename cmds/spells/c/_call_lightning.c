@@ -11,11 +11,13 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("call lightning");
-    set_spell_level(([ "cleric" : 3,"druid" : 3]));
+    set_spell_level(([ "druid" : 3, "innate" : 5 ]));
+    set_domains("storms");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS call lightning on TARGET");
     set_description("This is a destructive spell that could hurt an opponent very badly!  The higher level the caster is "
-        "the more devastating this spell will become.  The spell can now be used anywhere, regardless of weather or if the caster is indoors.");
+        "the more devastating this spell will become.  The spell can now be used anywhere, regardless of weather or if the caster is indoors. "
+        "A cleric with the storms domain can cast this spell innately by spending one Divine Grace point.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -42,6 +44,16 @@ int preSpell() {
       tell_object(caster,"You cannot summon lightning from here!");
       return 0;
    }*/
+
+    if(caster->is_class("cleric"))
+    {
+        if(!(int)USER_D->spend_pool(this_player(), 1, "grace"))
+        {
+            tell_object(caster, "You don't have the Divine Grace to cast Call Lightning!");
+            return 0;
+        }
+    }
+
     return 1;
 }
 

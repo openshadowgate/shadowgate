@@ -106,7 +106,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (!(ob->is_class("ranger")))
+    if (ob->query_class_level("ranger") < 19)
     {
         dest_effect();
         return 0;

@@ -61,9 +61,11 @@ recognize %^ORANGE%^%^ULINE%^WHO%^RESET%^ as %^ORANGE%^%^ULINE%^NAME%^RESET%^
 
 Allows you to recognize another player by an id, such as race, and assign them a %^ORANGE%^%^ULINE%^NAME%^RESET%^.
 
+You can recall list of recognized people with <recall relationships>.
+
 %^CYAN%^SEE ALSO%^RESET%^
 
-fixrecognized, who, mail
+recall, fixrecognized, who, mail
 HELP
     );
     return 1;

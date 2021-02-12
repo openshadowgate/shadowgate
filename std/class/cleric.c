@@ -153,10 +153,25 @@ mapping query_innate_spells(object player)
     if(member_array("undeath", player->query_divine_domain()) >= 0)
         innate_spells += ([ "bleeding touch" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
     if(member_array("storms", player->query_divine_domain()) >= 0)
+    {
         innate_spells += ([ "gale aura" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+        innate_spells += ([ "call lightning" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    }
     if(member_array("magic", player->query_divine_domain()) >= 0)
         innate_spells += ([ "dispelling touch" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
-   
+    if(member_array("charm", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "dazing touch" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("illusion", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "mirror image" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("knowledge", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "identify" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("chaos", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "touch of chaos" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("suffering", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "ray of enfeeblement" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("law", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "touch of law" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+
     return innate_spells;
 }
 

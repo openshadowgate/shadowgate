@@ -32,12 +32,11 @@ int cmd_enhance(string str)
            member_array("evil", domains) >= 0  ||
            member_array("chaos", domains) >= 0 ||
            member_array("law", domains) >= 0)
-            feat_cl = 1;
+            feat_wb = 1;
     }
 
     if (!feat_ap &&
         !feat_wb &&
-        !feat_cl &&
         !feat_ab) {
         return 0;
     }
@@ -57,7 +56,6 @@ int cmd_enhance(string str)
     {
     case "weapon":
         if (!feat_ap &&
-            !feat_cl &&
             !feat_wb) {
             return 0;
         }

@@ -455,6 +455,15 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
                     }
                 }
 
+                if(targ->is_class("cleric"))
+                {
+                    if(LIVING_D->opposed_alignment(targ, attacker))
+                    {
+                        if(member_array("good", targ->query_divine_domain()) >= 0)
+                             reduction += 5;
+                    }
+                }
+
                 if (attacker->query_property("magic")) {
                     mod = (int)attacker->query_property("magic") * 10;
                 }
@@ -922,7 +931,7 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
         damage += COMBAT_D->unarmed_enchantment(attacker);
     }
     
-    paladin = targ->query_property("paladin smite");
+    targ && paladin = targ->query_property("paladin smite");
     
     if(objectp(paladin))
     {
@@ -2977,6 +2986,14 @@ void internal_execute_attack(object who)
             return;
         }
         roll = random(20) + 1;
+
+        //Touch of Chaos gives disadvantage
+        if(who->query_property("touch of chaos"))
+            roll = min( ({ roll, random(20) + 1 }) );
+
+        //Touch of Law makes the roll 11
+        if(who->query_property("touch of law"))
+            roll = 11;
 
         if (roll == 1) { //automatic miss on rolls of a one
             fumble = 1;
