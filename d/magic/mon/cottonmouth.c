@@ -7,7 +7,7 @@ inherit WEAPONLESS;
 void create(){
 	::create();
 	set_name("cotton mouth");
-	set_id(({"cotton mouth","Cotten mouth","snake","cotton"}));
+	set_id(({"cotton mouth","Cotten mouth","snake","cotton","summoned monster"}));
 	set_short("snake");
 	set_long(
 @OLI

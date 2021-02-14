@@ -8,7 +8,7 @@ void create(){
 
    ::create();
    set_name("earth elemental");
-   set_id(({"elemental","earth elemental","eelemental"}));
+   set_id(({"elemental","earth elemental","eelemental","summoned monster"}));
    set_short("Earth Elemental");
    set_long(
 @PEG

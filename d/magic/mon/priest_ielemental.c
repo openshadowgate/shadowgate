@@ -8,7 +8,7 @@ void create(){
 
    ::create();
    set_name("ice elemental");
-   set_id(({"elemental","ice elemental","ielemental"}));
+   set_id(({"elemental","ice elemental","ielemental","summoned monster"}));
    set_short("Ice Elemental");
    set_long("%^BOLD%^%^CYAN%^This massive creature appears to have a vaguely humanoid sape, just like a "
 "statue.  However its whole body is crystalline and semi-transparent, made entirely of ice!  Its limbs are "

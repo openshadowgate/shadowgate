@@ -7,7 +7,7 @@ inherit WEAPONLESS;
 void create(){
 	::create();
 	set_name("copper head");
-	set_id(({"copperhead","Copperhead","snake"}));
+	set_id(({"copperhead","Copperhead","snake","summoned monster"}));
 	set_short("snake");
 	set_long(
 @OLI

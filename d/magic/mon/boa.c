@@ -10,7 +10,7 @@ int flag;
 void create(){
 	::create();
 	set_name("boa constrictor");
-	set_id(({"snake","boa","Boa"}));
+	set_id(({"snake","boa","Boa","summoned monster"}));
    set_short("snake");
 	set_long(
 @OLI

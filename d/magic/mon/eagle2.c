@@ -10,7 +10,7 @@ create() {
     ::create();
 set_name("eagle");
  set_id( ({
-"eagle"
+"eagle","summoned monster"
  }) );
 set("race", "eagle");
  set_gender("male");

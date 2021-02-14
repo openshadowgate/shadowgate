@@ -7,7 +7,7 @@ void create(){
    set_name("psionic fighter");
    set_short("Ephemeral psionic fighter");
    set("not living",1);
-   set_id(({"warrior","psychic warrior","ephemeral psychic warrior","fighter","psionic fighter","emphemeral psionic fighter"}));
+   set_id(({"warrior","psychic warrior","ephemeral psychic warrior","fighter","psionic fighter","emphemeral psionic fighter","summoned monster"}));
    set_long("%^BOLD%^%^BLUE%^This ephemeral psionic fighter seems "+
       "to fade in and out of existence.  Its body appears forceful, "+
       "if not substantial, though it carries no weapons and wears no "+

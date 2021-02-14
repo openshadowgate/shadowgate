@@ -9,7 +9,7 @@ void create(){
 
    ::create();
    set_name("fire elemental");
-   set_id(({"fire","fire elemental","elemental","felemental"}));
+   set_id(({"fire","fire elemental","elemental","felemental","summoned monster"}));
    set_short("Fire Elemental");
    set_long(
 @PEG

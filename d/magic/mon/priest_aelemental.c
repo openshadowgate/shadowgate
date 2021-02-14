@@ -9,7 +9,7 @@ void create(){
   
    ::create();
     set_name("air elemental");
-    set_id(({"elemental","air elemental","aelemental"}));
+    set_id(({"elemental","air elemental","aelemental","summoned monster"}));
     set("short","Air Elemental");
     set("long",
 @PEG
