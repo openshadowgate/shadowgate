@@ -41,13 +41,14 @@ int hit_func(object target) {
    string limb;
    object *minions;
    int i = 0;
+   int count = 0;
    if(!objectp(target)) return 0;
    if(!objectp(ETO)) return 0;
    if(!objectp(EETO)) return 0;
    if(present("summoned monster",EETO)){
     minions   = query_current_attackers();
    
-    for(i=0;i<sizeof(minions);i++)
+    for(i=0;i<sizeof(minions);i++) //$@$#% fodder
     {
       if(count > 3) break;
       if(!objectp(minions[i])) { continue; }
