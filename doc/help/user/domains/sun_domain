@@ -4,7 +4,9 @@ Soaking in the pure rays of the sun, casters with this
 domain can command the light to protect them as well as
 harm their enemies.
 
-Clerics with the Sun Domain add their Cleric Level to damage or healing with Channel.
+Clerics with the Sun Domain gain the following benefits:
+- A bonus to healing or damage with %^YELLOW%^Channel%^RESET%^ equal to their cleric level.
+- %^BOLD%^YELLOW%^Blinding Flash%^RESET%^ as an innate spell.
 
 The sun domain contains the following spells:
 
