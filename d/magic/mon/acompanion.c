@@ -36,8 +36,8 @@ void create(){
     set_damage(2, 6);
     set_size(2);
     set_gender("neuter");
-    set_funcs( ({ "special_attack" }) );
-    set_func_chance(35);
+    //set_funcs( ({ "special_attack" }) );
+    //set_func_chance(35);
 }
 
 void init()
@@ -183,6 +183,10 @@ void heart_beat()
     
     this_object()->add_damage_bonus(bonus);
     this_object()->add_attack_bonus(bonus);
+    
+    //Do the specials if the attacker is valid
+    if(this_object()->query_current_attacker() && !random(3))
+        special_attack(this_object()->query_current_attacker());
 }
 
 void special_attack(object target)
@@ -257,7 +261,7 @@ void special_attack(object target)
         tell_room(room, "%^BOLD%^" + sprintf("%s rakes %s with its talons twice.", aname, tname));
         attacks += ([ "one" : ({ (scale * roll_dice(1, 6)), "piercing" }) ]);
         attacks += ([ "two" : ({ (scale * roll_dice(2, 4)), "slashing" }) ]);
-        attacks += ([ "two" : ({ (scale * roll_dice(2, 8)), "slashing" }) ]);
+        attacks += ([ "three" : ({ (scale * roll_dice(2, 8)), "slashing" }) ]);
         break;
         case "dog":
         tell_room(room, "%^BOLD%^" + sprintf("%s bites %s.", aname, tname));
