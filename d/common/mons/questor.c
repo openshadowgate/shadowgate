@@ -44,6 +44,10 @@ void mercy(object target)
 
     tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an angry voice:%^RESET%^ Not today.");
     tell_room(ETO,query_name()+" snaps her fingers.");
+
+    if(target->query_property("no death") || target->fort_save(60))
+        return;
+        
     target->die();
 }
 
