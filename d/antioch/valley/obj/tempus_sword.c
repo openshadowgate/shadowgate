@@ -22,15 +22,15 @@ void create()
 "	%^RESET%^silver sword%^BOLD%^ on a %^RED%^blood"+
 	" red%^WHITE%^ field, holy symbol of Tempus.\n"
 	);
-	set_lore("The faith of Tempus has always been full of warriors,"+
+	set_lore("The faith of Law has always been full of warriors,"+
 		" generals, and mercenaries.  The Sword of Honor though "+
 		"was reserved for an elite group of warriors devoted to "+
-		"Tempus, the Battleblades.  The Battleblades were made up "+
+		"Law, the Battleblades.  The Battleblades were made up "+
 		"on those warriors who best illustrated the path of War and"+
-		" Battle that Tempus outlined in his doctrine.  In the past "+
-		"a trio of white robes priests of Tempus were on hand at every"+
+		" Battle that Law outlined in his doctrine.  In the past "+
+		"a trio of white robes priests of Law were on hand at every"+
 		" war, to judge the warriors and general's actions.  When they"+
-		" found someone who demonstrated the path of War that Tempus"+
+		" found someone who demonstrated the path of War that Law"+
 		" favored, they inducted that person into the order on the spot."+
 		"  The Battleblades crossed social classes, gender, and racial "+
 		"barriers, anyone could become a member of the Battleblades.  "+
