@@ -106,6 +106,14 @@ void receive_given_item(object obj){
        obj->remove();
        return;
     }
+   case "Gloves of the Vampire":{
+       new(OBJ"staff")->move(TO);
+       force_me("give staff to "+name);
+       force_me("say Here try this staff I think it might do something interesting!");
+       force_me("smirk");
+       obj->remove();
+       return;
+    }
 	 break;}
 	 
    tell_room(ETO,"The Sea Elf puts the meat away and hands you some money.");

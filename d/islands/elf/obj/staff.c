@@ -54,7 +54,7 @@ int hit_func(object target) {
       if(!objectp(minions[i])) { continue; }
       if(interactive(minions[i])) { continue; }
       if(member_array(minions[i]->query_id(),"summoned monster") == -1) { continue; }
-      tell_object(ETO,"Your staff's anti-magic undoes the summoning of "+minions[i]->QCN);
+      tell_object(ETO,"%^MAGENTA%^Your staff's anti-magic undoes the summoning of "+minions[i]->QCN);
       tell_room(EETO,"%^MAGENTA%^A wave of anti-magic from"+ETOQCN+"'s staff undoes the summoning of"+minions[i]->QCN+".",ETO);
       minions[i]->die();
       count++;
