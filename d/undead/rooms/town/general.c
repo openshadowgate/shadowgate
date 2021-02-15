@@ -18,7 +18,7 @@ void create() {
 "than this interchange of goods.\n");
     set_smell("default","The fresh scent of the ocean drifts through the ruined city.");
     set_listen("default","You hear the sounds of battle in the distance.");
-
+    set_property("fill waterskin",1);
     set_exits( ([
         "west":TOWN"street1"
     ]) );
