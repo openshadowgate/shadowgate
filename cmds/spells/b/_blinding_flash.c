@@ -24,6 +24,7 @@ void create()
     set_damage_desc("Blindness on attackers on failed fortitude save");
     set_description("Clerics with the sun domain learn, by the grace of their deity, how to cause a flash of light to blind their enemies. Enemies who are at or below the cleric's level make a fortitude save or suffer blindness for 1d4 rounds. This spell requires one Divine Grace point to use.");
     set_save("fort");
+    splash_spell(2);
     set_immunities( ({  }) );
 }
 
@@ -57,7 +58,7 @@ void spell_effect(int prof)
        
     spell_successful();
     
-    attackers = caster->query_attackers();
+    attackers = caster->target_selector();
     
     tell_object(caster, "%^BOLD%^You snap your finger, and a bright flash illuminates the area around you!%^RESET%^");
     tell_room(place, "%^BOLD%^" + caster->QCN + " snaps " + caster->QP + " finger, illuminating the area with a bright flash!%^RESET%^", ({ caster }));
@@ -72,6 +73,6 @@ void spell_effect(int prof)
         
         tell_room(place, "%^BOLD%^" + ob->QCN + " is blinded by the flash!%^RESET%^", ({ ob }));
         tell_object(ob, "%^BOLD%^You are blinded by the flash!%^RESET%^");
-        ob->set_temporary_blinded(1);
+        ob->set_temporary_blinded(roll_dice(1, 4));
     }
 }
