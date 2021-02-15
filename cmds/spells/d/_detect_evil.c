@@ -46,8 +46,8 @@ void spell_effect(int prof)
     int i, hits = 0;
     object *alive,ob;
 
-    arg = caster->realName(arg);
-    if(arg == "") arg = ARG;
+    //arg = caster->realName(arg);
+    if(!arg) arg = ARG;
     if(arg == "room") {
         alive = all_living(environment(CASTER));
         alive -= ({CASTER});
