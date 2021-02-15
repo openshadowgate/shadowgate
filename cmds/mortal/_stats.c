@@ -253,6 +253,11 @@ int move_stat(object obj, string* stats)
     cost = exp_for_level(obj->query_adjusted_character_level());
     tcheck = cost;
 
+    if (obj->is_undead() && (stat_one == "constitution" || stat_two == "constitution")) {
+        tell_object(ob,"As an undead you can't manipulate your constitution.");
+        return 0;
+    }
+
     tell_object(obj, "%^YELLOW%^You will incur a character improvement " +
                 "tax of %^MAGENTA%^" + cost + "%^RESET%^%^YELLOW%^ "
                 " to move 1 point from " + stat_one + " into " + stat_two +

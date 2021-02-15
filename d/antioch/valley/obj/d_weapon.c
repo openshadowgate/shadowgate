@@ -51,8 +51,8 @@ void create_weapon(object obj)
 			obj->set_wc(1,4);
 			obj->set_large_wc(1,3);
 			obj->set_type("piercing");
-            obj->set_prof_type("small blades"); 
-			obj->set_weight(2);     
+            obj->set_prof_type("small blades");
+			obj->set_weight(2);
 			break;
 		case 200..299:
 			TYPE = "club";
@@ -338,11 +338,11 @@ void create_weapon(object obj)
    obj->set_value(x);
    obj->set_property("enchantment",(random(2))+2);
        obj->set_lore("Omrick Greenwood was a skilled blacksmith in "+
-                "service to the faith of Tempus.  Omrick strived to bring "+
-                "the message of Tempus to all in the lands, by crafting and"+
+                "service to the faith of Law.  Omrick strived to bring "+
+                "the message of Law to all in the lands, by crafting and"+
                 " enchanting weapons.  These weapons helped many temples, "+
                 "kingdoms and city-states arm their forces in the event of "+
-                "war.  Through Omrick's service to the church of Tempus, he"+
+                "war.  Through Omrick's service to the church of Law, he"+
                 " was blessed with a special honor.  Now among the faith of"+
                 " The Lord of Battles the favored blacksmith is given the "+
                 "title Omrick.");

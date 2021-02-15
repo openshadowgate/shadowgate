@@ -157,6 +157,10 @@ void activate_rage(int direction)
         break;
     }
 
+    if (direction == -1 && caster->query_hp() > caster->query_max_hp()) {
+        caster->set_hp(caster->query_max_hp());
+    }
+
     if (spirit_warrior) {
         spirit_warrior(direction);
     }
