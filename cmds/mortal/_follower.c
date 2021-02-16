@@ -13,6 +13,7 @@ inherit DAEMON;
 #define PSION "/cmds/mortal/followers/psion" // this is to load a plot granted follower only - this is not a standard-issue follower! N, 12/15.
 #define BARD "/cmds/mortal/followers/bard" // this is to load a plot granted follower only - this is not a standard-issue follower! N, 1/18.
 #define DUMBY "/cmds/mortal/followers/dumbyroom"
+#define MONK "/cmds/mortal/followers/monk"
 
 int help(){
     int i;
@@ -105,6 +106,9 @@ object makeFollower(mapping map){
         break;
     case "bard": // this is to load a plot granted follower only - this is not a standard-issue follower! N, 12/15.
         follower = new ( BARD);
+        break;
+    case "monk":
+        follower = new ( MONK);
         break;
     default:
         error("Unknown class "+c);
