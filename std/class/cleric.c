@@ -177,6 +177,8 @@ mapping query_innate_spells(object player)
         innate_spells += ([ "touch of madness" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
     if(member_array("sun", player->query_divine_domain()) >= 0)
         innate_spells += ([ "blinding flash" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
+    if(member_array("water", player->query_divine_domain()) >= 0)
+        innate_spells += ([ "ice bolt" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
 
     return innate_spells;
 }
