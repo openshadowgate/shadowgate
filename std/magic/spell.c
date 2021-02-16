@@ -2325,6 +2325,10 @@ void define_clevel()
             case "abjuration":
             if(member_array("mentalism", domains) >= 0)
                 clevel += 1;
+            
+            case "invocation_evocation":
+            if(member_array("elements", domains) >= 0)
+                clevel += 1;
         }
         
         //Stars domain gets caster level bonus at night, and penalty during the day
