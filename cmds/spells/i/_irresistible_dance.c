@@ -66,7 +66,7 @@ void spell_effect(int prof) {
             return;
         }
     }
-    if(do_save(target,0))
+    if(do_save(target,-6))
     {
         tell_object(caster,"%^ORANGE%^You feel your spell take a grasp on "+target->QCN+" but then disperse as its power is rendered useless!\n");
         tell_object(target,"%^ORANGE%^You feel a spell attempt to dance your mind, but the grip slips and you the thought to dance passes.\n");
