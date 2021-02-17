@@ -254,7 +254,7 @@ int move_stat(object obj, string* stats)
     tcheck = cost;
 
     if (obj->is_undead() && (stat_one == "constitution" || stat_two == "constitution")) {
-        tell_object(ob,"As an undead you can't manipulate your constitution.");
+        tell_object(obj,"As an undead you can't manipulate your constitution.");
         return 0;
     }
 
