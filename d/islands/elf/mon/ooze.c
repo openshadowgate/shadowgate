@@ -45,8 +45,9 @@ void my_hit(object targ){
 						" is overwhelmed by the ooze.",targ);
 				if(!present("oozeobj",targ)) {
 				          ooze = new(OBJ"oozeobj");
+                          ooze->move(targ);
 						  call_other(ooze, "hurt",targ);
-				          //ooze->hurt(targ);
+
 				          }	
 
                 }
