@@ -58,7 +58,7 @@ spell_effect(int prof)
     tell_object(target,"%^BOLD%^%^WHITE%^The sonic orb explodes as it hits you!",target);
     tell_room(environment(target),"%^BOLD%^%^WHITE%^The sonic orb explodes as it hits "+target->QCN+"!",target);
 
-    if(!do_save(target)) { damage_targ(target, "torso", sdamage / 2, "acid" ); }
+    if(!do_save(target)) { damage_targ(target, "torso", sdamage / 2, "sonic" ); }
     else { damage_targ(target, "torso", sdamage / 2, "acid" ); }
 
     for(i=0;sizeof(foes),i<sizeof(foes);i++)
@@ -69,13 +69,13 @@ spell_effect(int prof)
         {
             tell_room(environment(foes[i]),"%^BOLD%^%^BLUE%^Sound catches "+foes[i]->QCN+"!",foes[i]);
             tell_object(foes[i],"%^BOLD%^%^BLUE%^Your flesh is resonating with the sound!");
-            damage_targ(foes[i], "torso", sdamage, "acid" );
+            damage_targ(foes[i], "torso", sdamage, "sonic" );
             continue;
         }
 
         tell_room(environment(foes[i]),"%^BOLD%^%^GREEN%^Sound catches "+foes[i]->QCN+"!",foes[i]);
         tell_object(foes[i],"%^BOLD%^%^GREEN%^Your flesh is resonating with the sound!");
-        damage_targ(foes[i], "torso", sdamage / 2, "acid");
+        damage_targ(foes[i], "torso", sdamage / 2, "sonic");
     }
 
     dest_effect();
