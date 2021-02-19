@@ -96,7 +96,7 @@ inherit DAEMON;
                         ICE "squid.c" : 1000000 ,\
                         ICE "capn.c" : 1000000 ,\
                         ICE "daelas.c" : 1000000 ,\
-                        "/d/islands/common/eldebaro/mon/arsheeva_wyndar.c" : 1000000,\
+                        "/d/islands/common/eldebaro/mon/arsheeva_wyndar.c" : 5500000,\
                         ])
 
 mapping __Quests, __Rooms, __Monsters;
