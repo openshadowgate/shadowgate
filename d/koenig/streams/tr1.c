@@ -9,7 +9,7 @@ void create(){
 ::create();
   set_property("indoors",1);
   set_property("light",1);
-  set_travel(RUBBLE);
+  set_travel(NAT_CAVE);
   set_terrain(ROCKY);
   set_name("Gretlexsh's room");
   set_short("%^BOLD%^%^BLACK%^A very dark cavern%^RESET%^");

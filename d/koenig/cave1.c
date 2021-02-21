@@ -11,11 +11,11 @@ void create(){
 ::create();
   set_property("indoors",1);
   set_property("light",1);
-  set_travel(RUBBLE);
+  set_travel(NAT_CAVE);
   set_terrain(ROCKY);
   set_name("A dank cavern");
   set_short("%^RESET%^%^BLUE%^%^A %^BOLD%^%^BLACK%^dark %^RESET%^%^BLUE%^cavern%^RESET%^");
-  set_long("%^RESET%^%^BLUE%^These caves look as though they"
+  set_long(""+query_short()+"\n%^RESET%^%^BLUE%^These caves look as though they"
 " have been crudely dug out of the very mountain itself."
 " Jagged edges can just be seen in the %^BOLD%^%^BLACK%^dark"
 " shadows %^RESET%^%^BLUE%^that line the edges of this system"
