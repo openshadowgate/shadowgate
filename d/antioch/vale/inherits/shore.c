@@ -8,6 +8,8 @@ void create()
    set_property("indoors",0);
    set_property("light",2);
 	set_property("fill waterskin", 1);
+   set_travel(FOOT_PATH);
+   set_terrain(MEADOWLANDS);
    set_short("%^BOLD%^%^CYAN%^Secluded Lake%^RESET%^");
    set_long(
    "%^CYAN%^A %^BOLD%^%^CYAN%^waterfall%^RESET%^%^CYAN%^ pours into a "+

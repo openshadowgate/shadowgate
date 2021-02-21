@@ -7,6 +7,8 @@ void create()
    ::create();
    set_property("indoors",0);
    set_property("light",2);
+   set_travel(FOOT_PATH);
+   set_terrain(MEADOWLANDS);
    set_short("%^BOLD%^%^BLUE%^River Bank%^RESET%^");
    set_long(
    "%^CYAN%^A %^BLUE%^%^BOLD%^river%^RESET%^%^CYAN%^ slowly winds its "+

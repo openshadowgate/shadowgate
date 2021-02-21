@@ -7,6 +7,8 @@ void create()
 	::create();
 	set_property("indoors",1);
 	set_property("light",1);
+    set_travel(FOOT_PATH);
+    set_terrain(MEADOWLANDS);
 	set_short("A simple hut");
 	set_long(
 	"%^ORANGE%^This is a rather simple hut. The walls are made of wood, but"+

@@ -76,7 +76,7 @@ void execute_attack()
     }
     room = environment(caster);
 
-    inven = target_selector(2);
+    inven = target_selector(); //doesn't look like this function can take an argument
 
     if (sizeof(inven)) {
         foreach(ppl in inven)

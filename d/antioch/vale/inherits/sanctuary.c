@@ -9,6 +9,8 @@ void create()
    set_property("indoors",0);
    set_property("light",3);
    set_property("no teleport",1);
+   set_travel(FOOT_PATH);
+   set_terrain(MEADOWLANDS);
    set_short("%^BOLD%^A peaceful sanctuary%^RESET%^");
    set_long(
    "%^GREEN%^Druidic Sanctuary%^RESET%^\n"+
