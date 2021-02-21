@@ -37,7 +37,7 @@ void my_hit(object targ){
 				" Its acids eats at you!\n");
 				targ->cause_typed_damage(targ,0,roll_dice(5,10),"acid");
                 //trying to cut back on chain stun some more
-                if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-30) && targ->query_paralyzed == 0){//easier because perma stun
+                if(!"/daemon/saving_throw_d.c"->reflex_save(targ,-30) && targ->query_paralyzed() == 0){//easier because perma stun
                         targ->set_paralyzed(40+random(30),"You are paralyzed in the gray ooze.");
                         tell_object(targ,"%^BOLD%^You are paralyzed by the ooze's touch!\n");
                         tell_object(targ,"%^BOLD%^Its acid eats at you.\n");
