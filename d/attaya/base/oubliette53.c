@@ -5,8 +5,10 @@ void create() {
      ::create();
      set_light(2);
      set_indoors(1);
+     set_travel(STONE_BUILDING;
+     set_terrain(DIRT_ROAD);
      set_short("Escape from the oubliette");
-      set_long("
+     set_long("
     %^BLUE%^
     This is the portal that can carry you from the horrible oubliette!
     The stone walls and ceiling seem to drop away into a black void that warps inward to form a portal out of thin air!
