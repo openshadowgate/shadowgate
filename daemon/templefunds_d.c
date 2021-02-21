@@ -17,6 +17,7 @@ void create()
     restore_object(SAVE_FILE);
     seteuid(getuid());
     clear_data();
+    save_data();
 }
 
 void save_data()
@@ -100,8 +101,6 @@ int clear_data()
             map_delete(tAccounts, diety);
         }
     }
-
-    save_data();
 }
 
 int clean_up()
