@@ -139,8 +139,8 @@ void slow_clean(object* objs, int step)
     }
 
     if (step == sizeof(objs)) {
-        debug_message("%^B_BLUE%^%^WHITE%^Finished one cleaning series.%^RESET%^");
-        debug_message("%^B_BLUE%^%^WHITE%^Total objects cleaned: " + test_counter + "");
+        debug_message("Finished one cleaning series.");
+        debug_message("Total objects cleaned: " + test_counter + "");
         cleaning = 0;
         begin_cleaning();
         return;
@@ -173,8 +173,8 @@ void clean_block(object* objs, object* block, int step)
         return;
     }
 
-    debug_message("Cleaning block " + step + "");
-    debug_message("Block size is: " + sizeof(block) + "");
+    debug_message(" Cleaning block " + step + "");
+    debug_message(" Block size is: " + sizeof(block) + "");
     for (i = 0; i < sizeof(block); i++) {
         if (!objectp(block[i])) {
             continue;
@@ -185,14 +185,13 @@ void clean_block(object* objs, object* block, int step)
         }
         test_counter++;
     }
-    debug_message("Total objects cleaned: " + test_counter + "");
-    debug_message("Total memory usage: " + memory_info() + "");
+    debug_message(" Total objects cleaned: " + test_counter + "");
+    debug_message(" Total memory usage: " + memory_info() + "");
 
     slow_clean(objs, step);
     return;
 }
 
-// allows you to set an object to send debug messages to, ie, yourself
 void set_debug_object(object obj)
 {
     if (!objectp(obj)) {
@@ -202,7 +201,6 @@ void set_debug_object(object obj)
     debug_object = obj;
 }
 
-// sends debug messages to the object specified with set_debug_object
 void debug_message(string str)
 {
     if (!objectp(debug_object)) {
