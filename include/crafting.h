@@ -29,7 +29,7 @@ ARMORSMITH = ([
 mapping LEATHERWORK = ([]);
 LEATHERWORK = ([
                    "barding":(["file":COMMONFILE"armour/pcleatherbarding","units":2,"type":"armor"]),
-                   "belt":(["file":COMMONFILE"clothing/belt","units":1]),
+                   "belt":(["file":COMMONFILE"armour/belt","units":1]),
                    "backpack":(["file":COMMONFILE"misc/backpack","units":2]),
                    "breastplate":(["file":COMMONFILE"armour/leather_plate","units":3,"type":"armor"]),
                    "buckler":(["file":COMMONFILE"armour/buckler","units":2,"type":"armor"]),
