@@ -98,64 +98,95 @@ varargs receive_objects(object ob)
    return 1;
 }
 
-int add_encumbrance(int enc) {
-   if( !max_internal_encumbrance ) return 1;
-   if(enc > 0 && enc + query_internal_encumbrance() > (int)TO->query_max_internal_encumbrance()) return 0;
-   internal_encumbrance += enc;
-   return 1;
+int add_encumbrance(int enc)
+{
+    if (!max_internal_encumbrance) {
+        return 1;
+    }
+    if (enc > 0 && enc + query_internal_encumbrance() > (int)TO->query_max_internal_encumbrance()) {
+        return 0;
+    }
+    internal_encumbrance += enc;
+    return 1;
 }
 
-string describe_living_contents(object *exclude) {
-  object *inv;
+int query_living_visibility(object item, object viewer)
+{
+    if (item->is_disease()) {
+        return 0;
+    }
+
+    if ((item->query_true_invis() && avatarp(item) && !avatarp(viewer)) || !item->is_detectable()) {
+        return 0;
+    }
+
+    if (item->query_hidden() && !(avatarp(viewer) || viewer->true_seeing())) {
+        return 0;
+    }
+
+    if (item->query_hidden() && !living(item)) {
+        return 0;
+    }
+
+    if (item->query_magic_hidden()) {
+        return 2;
+    }
+
+    return 1;
+}
+
+string describe_living_contents(object* exclude)
+{
+    object* inv;
     object work;
-  mapping list;
-  string *shorts;
-  string tmp, ret;
-  int i, x;
+    mapping list;
+    string* shorts;
+    string tmp, ret;
+    int i, x;
 
-  int death_time;
-  mixed *deaths;
+    int death_time;
+    mixed* deaths;
 
-  i = sizeof(inv = filter_array(all_inventory(this_object())-exclude,"filter_living", this_object()));
-  if(!i) return "";
-  list = ([]);
-  while(i--) {
-    if(inv[i]->is_disease()) continue;
-    if((inv[i]->query_true_invis() && avatarp(inv[i])) || !inv[i]->is_detectable()) {
-      continue;
+    i = sizeof(inv = filter_array(all_inventory(this_object()) - exclude, "filter_living", this_object()));
+    if (!i) {
+        return "";
     }
-    work = (objectp(TP))?TP:PO;
-    if(inv[i]->query_magic_hidden() && !work->detecting_invis()) {
-      continue;
-    }
+    list = ([]);
+    while (i--) {
 
-    if(inv[i]->query_hidden() && !(avatarp(work)||work->true_seeing())) { continue; }
-    if(inv[i]->query_hidden() && !living(inv[i])) { continue; }
+        work = (objectp(TP))?TP:PO;
 
-    TO->set_property("information",1);
-    if(!(tmp = (string)inv[i]->query_short())) {
-      TO->remove_property("information");
-      if(wizardp(inv[i]) || random(101)> (int)previous_object()->query_level()) continue;
+        if (!query_living_visibility(inv[i], work)) {
+            continue;
+        }
+
+        TO->set_property("information", 1);
+        if (!(tmp = (string)inv[i]->query_short())) {
+            TO->remove_property("information");
+        }
+        if (!tmp) {
+            continue;
+        }else {
+            if (inv[i]->query_invis()) {
+                tmp = (inv[i]->query_magic_hidden()?"%^RESET%^%^CYAN%^(inv)":"%^RESET%^%^ORANGE%^(hid)") + "%^RESET%^ " + tmp;
+            }
+            if (!list[tmp]) {
+                list[tmp] = ({ inv[i] });
+            }else {
+                list[tmp] += ({ inv[i] });
+            }
+        }
     }
-    if(!tmp)
-      continue;
-    else  {
-      if (inv[i]->query_invis()) {
-          tmp = (inv[i]->query_magic_hidden()?"%^RESET%^%^CYAN%^(inv)":"%^RESET%^%^ORANGE%^(hid)")+"%^RESET%^ "+tmp;
-      }
-      if(!list[tmp])
-	list[tmp] = ({ inv[i]});
-      else
-	list[tmp] += ({ inv[i]});
+    i = sizeof(shorts = keys(list));
+    ret = "";
+    while (i--) {
+        if ((x = sizeof(list[shorts[i]])) < 2) {
+            ret += shorts[i] + "\n";
+        }else {
+            ret += capitalize(consolidate(x, shorts[i])) + "\n";
+        }
     }
-  }
-  i = sizeof(shorts = keys(list));
-  ret = "";
-  while(i--) {
-    if((x=sizeof(list[shorts[i]])) < 2) ret += shorts[i]+"\n";
-    else ret += capitalize(consolidate(x, shorts[i]))+"\n";
-  }
-  return ret;
+    return ret;
 }
 
 string describe_item_contents(object *exclude)

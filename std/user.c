@@ -602,100 +602,115 @@ void get_email(string e) {
   email = e;
 }
 
-void describe_current_room(int verbose) {
-  object env;
-  string borg;
-  mixed tmp;
-  int light,bonus;
+void describe_current_room(int verbose)
+{
+    object env;
+    string borg;
+    mixed tmp;
+    int light, bonus;
 
-  env = ETO;
+    env = ETO;
 
-  if (!objectp(TO)) {
-      return;
-  }
-  if (!objectp(env)) {
-      tell_object(TP, "It appears that your environment is invalid.");
-      return;
-  }
+    if (!objectp(TO)) {
+        return;
+    }
+    if (!objectp(env)) {
+        tell_object(TP, "It appears that your environment is invalid.");
+        return;
+    }
 
-  bonus = TO->query_sight_bonus();
+    bonus = TO->query_sight_bonus();
 
-  if (wizardp(TO) && objectp(env)) {
-      borg = file_name(env) + "\n";
-  }else {
-      borg = "";
-  }
+    if (wizardp(TO) && objectp(env)) {
+        borg = file_name(env) + "\n";
+    }else {
+        borg = "";
+    }
 
-  if (query_unconscious()) {
-    message("room_description","You have the sensation of being moved.",TO);
-    return;
-  }
+    if (query_unconscious()) {
+        message("room_description", "You have the sensation of being moved.", TO);
+        return;
+    }
 
-  if ((light = light_blind(0)) || TO->query_blind()) {
-      if (TO->query_blind())
-          borg += "You have been blinded and cannot see anything.";
-      else if (member_array(query_race(), (string) LIVING_D->night_races()) != -1) {
-          if (light >= 1)
-              borg += "It is too dark to see.";
-          else if (light >= -1)
-              borg += "It is bright.";
-          else if (light >= -2)
-              borg += "It is quite bright.";
-          else if (light >= -3)
-              borg += "It is very bright.";
-          else
-              borg += "It is dazzlingly bright..";
-      } else {
-          if (light >= 1)
-              borg += "It is too bright to see.";
-          else if (light >= -1)
-              borg += "It is dark.";
-          else if (light >= -2)
-              borg += "It is quite dark.";
-          else if (light >= -3)
-              borg += "It is very dark.";
-          else
-              borg += "It is completely dark.";
-      }
-      message("room_description", borg, TO);
-      if (stringp(tmp = (string) env->query_smell("default")))
-          message("smell", tmp, TO);
-      else if (functionp(tmp))
-          message("smell", (string) ((*tmp) ("default")), TO);
-      if (stringp(tmp = (mixed) env->query_listen("default")))
-          message("listen", tmp, TO);
-      else if (functionp(tmp))
-          message("listen", (string) ((*tmp) ("default")), TO);
-      if (stringp(tmp = (string) WEATHER_D->Check_Weather(TO)))
-          message("weather", "%^MAGENTA%^" + tmp + "%^RESET%^", TO);
-      return;
-  } else if (light_blind(1) >= 1)
-      borg += "It is somewhat bright.\n";
-  else if (light_blind(1) <= -1)
-      borg += "It is somewhat dark.\n";
-  borg += (verbose ? (string) env->query_long(0) + " " : (string) env->query_short());
-  message("room_description", borg, TO);
+    if ((light = light_blind(0)) || TO->query_blind()) {
+        if (TO->query_blind()) {
+            borg += "You have been blinded and cannot see anything.";
+        }else if (member_array(query_race(), (string)LIVING_D->night_races()) != -1) {
+            if (light >= 1) {
+                borg += "It is too dark to see.";
+            }else if (light >= -1) {
+                borg += "It is bright.";
+            }else if (light >= -2) {
+                borg += "It is quite bright.";
+            }else if (light >= -3) {
+                borg += "It is very bright.";
+            }else {
+                borg += "It is dazzlingly bright..";
+            }
+        } else {
+            if (light >= 1) {
+                borg += "It is too bright to see.";
+            }else if (light >= -1) {
+                borg += "It is dark.";
+            }else if (light >= -2) {
+                borg += "It is quite dark.";
+            }else if (light >= -3) {
+                borg += "It is very dark.";
+            }else {
+                borg += "It is completely dark.";
+            }
+        }
+        message("room_description", borg, TO);
+        if (stringp(tmp = (string)env->query_smell("default"))) {
+            message("smell", tmp, TO);
+        }else if (functionp(tmp)) {
+            message("smell", (string)((*tmp)("default")), TO);
+        }
+        if (stringp(tmp = (mixed)env->query_listen("default"))) {
+            message("listen", tmp, TO);
+        }else if (functionp(tmp)) {
+            message("listen", (string)((*tmp)("default")), TO);
+        }
+        if (stringp(tmp = (string)WEATHER_D->Check_Weather(TO))) {
+            message("weather", "%^MAGENTA%^" + tmp + "%^RESET%^", TO);
+        }
+        return;
+    } else if (light_blind(1) >= 1) {
+        borg += "It is somewhat bright.\n";
+    }else if (light_blind(1) <= -1) {
+        borg += "It is somewhat dark.\n";
+    }
+    borg += (verbose ? (string)env->query_long(0) + " " : (string)env->query_short());
+    message("room_description", borg, TO);
 
-  if (!verbose)
-    message("room_exits", (string)env->query_short_exits(), TO);
-  if (verbose && stringp(tmp=(mixed)env->query_smell("default")))
-    message("smell", tmp, TO);
-  else if (verbose && functionp(tmp))
-    message("smell",(string)((*tmp)("default")), TO);
-  if (verbose && stringp(tmp=(mixed)env->query_listen("default")))
-    message("listen", tmp, TO);
-  else if (verbose && functionp(tmp))
-    message("listen", (string)((*tmp)("default")), TO);
-  if (stringp(tmp=(string)WEATHER_D->Check_Weather(TO)))
-    message("weather", "%^MAGENTA%^"+tmp+"%^RESET%^", TO);
-  if (stringp(tmp=(string)env->query_effects()))
-    message("room_effects",tmp,TO);
-  if (verbose && (tmp=(string)env->query_long_exits()) && tmp != "")
-    message("room_exits", sprintf("\n%s\n", tmp), TO);
-  if ((tmp=(string)env->describe_living_contents(({TO})))!="")
-    message("living_item", tmp, TO);
-  if ((tmp=(string)env->describe_item_contents(({})))!="")
-    message("inanimate_item", tmp, TO);
+    if (!verbose) {
+        message("room_exits", (string)env->query_short_exits(), TO);
+    }
+    if (verbose && stringp(tmp = (mixed)env->query_smell("default"))) {
+        message("smell", tmp, TO);
+    }else if (verbose && functionp(tmp)) {
+        message("smell", (string)((*tmp)("default")), TO);
+    }
+    if (verbose && stringp(tmp = (mixed)env->query_listen("default"))) {
+        message("listen", tmp, TO);
+    }else if (verbose && functionp(tmp)) {
+        message("listen", (string)((*tmp)("default")), TO);
+    }
+    if (stringp(tmp = (string)WEATHER_D->Check_Weather(TO))) {
+        message("weather", "%^MAGENTA%^" + tmp + "%^RESET%^", TO);
+    }
+    if (stringp(tmp = (string)env->query_effects())) {
+        message("room_effects", tmp, TO);
+    }
+    if (verbose && (tmp = (string)env->query_long_exits()) && tmp != "") {
+        message("room_exits", sprintf("\n%s\n", tmp), TO);
+    }
+    if ((tmp = (string)env->describe_living_contents(({ TO }))) != "") {
+        message("living_item", tmp, TO);
+    }
+    if ((tmp = (string)env->describe_item_contents(({}))) != "") {
+        message("inanimate_item", tmp, TO);
+    }
 }
 
 void basic_commands() {
