@@ -26,7 +26,7 @@ void create()
          "only on her shoulders and waist, where it is secured with "+
          "a velvet sash."
 	);
-      set_items_allowed("clothing");
+
 	set_race("gnome");
 	set_gender("female");
 	set_hd(20,4);
