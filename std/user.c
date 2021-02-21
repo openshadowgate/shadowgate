@@ -2953,11 +2953,14 @@ void clear_quests()
     quests = ({});
 }
 
-string *query_quests()
+string* query_quests()
 {
-    if (!quests) quests = ({});
-    if(sizeof(quests)) CHAMPION_D->mass_monster_quests(quests);
-    if(avatarp(TO)) return quests + CHAMPION_D->query_monster_quests();
+    if (!quests) {
+        quests = ({});
+    }
+    if (avatarp(TO)) {
+        return quests;
+    }
     return quests;
 }
 
@@ -2975,7 +2978,6 @@ int remove_quest(string str)
 int set_quest(string str)
 {
     if (!quests || !pointerp(quests)) quests = ({});
-    CHAMPION_D->add_monster_quest(str);
     if (!stringp(str) || member_array(str, quests) != -1) return 0;
     //player_data["general"]["quest points"] += (int)call_other(ROOM_QUEST,"query_quest_points",str);
     quests += ({ str});
@@ -3180,28 +3182,34 @@ void hide(int x) {
  */
 varargs int set_mini_quest(string str, int x, string desc)
 {
-    if(!objectp(TP))
+    if (!objectp(TP)) {
         return 0;
-    if(!objectp(ETP))
+    }
+    if (!objectp(ETP)) {
         return 0;
-    if (!mini_quests)
+    }
+    if (!mini_quests) {
         mini_quests = ([]);
-    if(!str)
+    }
+    if (!str) {
         return 0;
-    CHAMPION_D->add_monster_quest(str);
-    if(!desc)
+    }
+    if (!desc) {
         desc = str;
-    if(mini_quests[str])
+    }
+    if (mini_quests[str]) {
         return 0;
-    else
-        mini_quests[str] = ({ time(), desc});
+    }else {
+        mini_quests[str] = ({ time(), desc });
+    }
 
-    fix_exp(x,TO);
-    log_file("player/quests", query_name()+" completed mini-quest "+str+" "+ctime(time())+" for "+x+" exp.\n");
-    if(ETP->query_property("no_ckpt"))
+    fix_exp(x, TO);
+    log_file("player/quests", query_name() + " completed mini-quest " + str + " " + ctime(time()) + " for " + x + " exp.\n");
+    if (ETP->query_property("no_ckpt")) {
         return 1;
-    "/cmds/avatar/_note.c"->cmd_note("ckpt "+TPQN+" completed mini-quest/deed "
-				   "%^YELLOW%^"+str+" for "+x+" exp.");
+    }
+    "/cmds/avatar/_note.c"->cmd_note("ckpt " + TPQN + " completed mini-quest/deed "
+                                     "%^YELLOW%^" + str + " for " + x + " exp.");
     return 1;
 }
 
@@ -3219,8 +3227,7 @@ string *query_mini_quests()
     string *res;
     if (!mini_quests) res = ({});
     else res = keys(mini_quests);
-    if(sizeof(res)) CHAMPION_D->mass_monster_quests(res);
-    if(avatarp(TO)) return res + CHAMPION_D->query_monster_quests();
+    if(avatarp(TO)) return res;
     return res;
 }
 
