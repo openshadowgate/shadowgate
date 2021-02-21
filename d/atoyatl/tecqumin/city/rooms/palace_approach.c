@@ -8,7 +8,7 @@ void create() {
   ::create();
   set_indoors(0);
   set_property("light", 2);
-  set_terrain(STONE_BUILDING);
+  set_terrain(JUNGLE);
   set_travel(DECAYED_FLOOR);
   set_name( "In front of a building shaped like a jaguar" );
   set_short("In front of a building shaped like a %^ORANGE%^j"
