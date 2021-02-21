@@ -5,11 +5,11 @@ inherit ROOM;
 void create()
 {
     ::create();
-   set_terrain(STONE_BUILDING);
+   set_terrain(CEMETERY);
    set_travel(DIRT_ROAD);
-    set_property("light", 2);
-    set_property("outdoors",1);
-    set_short("%^RESET%^%^ORANGE%^B"+
+   set_property("light", 2);
+   set_indoors(0);  
+   set_short("%^RESET%^%^ORANGE%^B"+
 "%^BOLD%^%^BLACK%^e%^RESET%^%^ORANGE%^f%^BOLD%^%^BLACK%^or%^RESET%^%^ORANGE%^e"
 " %^BOLD%^%^BLACK%^an %^RESET%^%^ORANGE%^I%^BOLD%^%^BLACK%^m%^RESET%^%^ORANGE%^p"+
 "%^BOLD%^%^BLACK%^os%^RESET%^%^ORANGE%^i%^BOLD%^%^BLACK%^n%^RESET%^%^ORANGE%^g "
