@@ -24,7 +24,7 @@ void create(){
       ::create();
       set_name("Star Maze");
       set_short("%^MAGENTA%^Star Maze");
-      set_terrain(BARREN);
+      set_terrain(BUILT_CAVE);
       set_travel(FRESH_BLAZE);
       set_property("indoors",1);
       set_property("light",1);
