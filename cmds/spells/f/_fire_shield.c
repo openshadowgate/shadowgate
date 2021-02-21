@@ -97,6 +97,7 @@ void execute_attack(){
     }
 
     foes = caster->query_attackers();
+    if (foes == ({ })) return;
 
     if(sizeof(foes))
     {
