@@ -51,7 +51,7 @@ string list_users(string *races, object tp)
 {
     object *who, *wizzes, *rp_flags;
     mixed *deaths, *worldEvents;
-    string mark, belphy, tmp, *person, melnmarn, title, rabbit, position;
+    string mark, belphy, tmp, *person, display_string, title, rabbit, position;
     int i,j,maxj, max, x,length,inc,num,death_time;
     int gre;
 
@@ -127,13 +127,13 @@ string list_users(string *races, object tp)
             tmp += race_color(who[i]);
 
             if (!who[i]->query_alignment()) {
-                melnmarn = capitalize((string)who[i]->query_name()) + " the unmade";
-            } else if (time() - who[i]->query_login_time() < 120) {
-                melnmarn = "Someone is emerging";
+                display_string = capitalize((string)who[i]->query_name()) + " the unmade";
+            } else if (time() - who[i]->query_login_time() < 120 && !wizardp(who[i])) {
+                display_string = "Someone is emerging";
             } else if ((string)who[i]->query_title()) {
-                melnmarn = (string)who[i]->query_title();
+                display_string = (string)who[i]->query_title();
             } else {
-                melnmarn = "(" + capitalize((string)who[i]->query_name()) + ")";
+                display_string = "(" + capitalize((string)who[i]->query_name()) + ")";
             }
 
             if (in_edit(who[i]) || in_input(who[i]))
@@ -142,13 +142,13 @@ string list_users(string *races, object tp)
                 else if(who[i]->query_title())
                 {
                     if (strlen((string)who[i]->query_title()) > length-4)
-                        melnmarn = arrange_string(melnmarn,length-4);
+                        display_string = arrange_string(display_string,length-4);
                 }
                 else { continue; }
-                melnmarn += "%^BOLD%^%^WHITE%^ **%^RESET%^";
+                display_string += "%^BOLD%^%^WHITE%^ **%^RESET%^";
             }
-            melnmarn = arrange_string(melnmarn,length-1);
-            tmp += melnmarn+" ";
+            display_string = arrange_string(display_string,length-1);
+            tmp += display_string+" ";
             //
             if (who[i]->query_property("inactive"))
                 tmp += "%^BOLD%^%^MAGENTA%^Inactive%^RESET%^";
