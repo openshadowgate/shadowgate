@@ -13,6 +13,8 @@ void create() {
   room::create();
 	set_light(2);
 	set_indoors(0);  
+	set_travel(PAVED_ROAD);
+    set_terrain(CITY);
 	set_short("High Street, Azha");
   set_long(
 @AZHA

@@ -5,8 +5,8 @@ void create() {
      ::create();
      set_light(2);
      set_indoors(1);
-     set_travel(STONE_BUILDING;
-     set_terrain(DIRT_ROAD);
+     set_travel(DIRT_ROAD);
+     set_terrain(STONE_BUILDING);
      set_short("Escape from the oubliette");
      set_long("
     %^BLUE%^
