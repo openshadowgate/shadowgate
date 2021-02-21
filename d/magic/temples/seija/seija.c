@@ -5,7 +5,7 @@ inherit "/std/temple";
 
 void create() {
    ::create();
-   set_terrain(STONE_BUILDING);
+   set_terrain(HILLS);
    set_travel(PAVED_ROAD);
    set_light(4);
    set_indoors(0);

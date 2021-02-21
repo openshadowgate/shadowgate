@@ -13,6 +13,8 @@ mapping extraitems=([]);
 void create() {
    ::create();
    set_light(1);
+   set_terrain(STONE_BUILDING);
+   set_travel(PAVED_ROAD);
    set_property("indoors", 1);
    set_short("%^BOLD%^%^BLUE%^a small demiplane%^RESET%^");
    set_short("%^CYAN%^Nowhere%^RESET%^");

@@ -8,7 +8,7 @@ void create() {
    set_terrain(STONE_BUILDING);
    set_travel(PAVED_ROAD);
    set_light(3);
-   set_indoors(0);
+   set_indoors(1);
    set_temple("kismet");
    set_name("Temple of Kismet");
    set_short("%^BOLD%^%^BLUE%^Temple of Kismet%^RESET%^");
