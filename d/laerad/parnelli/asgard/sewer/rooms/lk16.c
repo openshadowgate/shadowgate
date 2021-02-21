@@ -12,6 +12,8 @@ set("long","%^ORANGE%^While this room is larger than the others you cannot help 
 set_property("indoors",1);
 set_property("no teleport",1);
 set_property("light",2);
+set_terrain(NAT_CAVE);
+set_travel(DIRT_ROAD);
 set_smell("default","The room smells dusty and dry.");
 set_listen("default","It is very quiet in these rooms save for the sounds you make.");
 set_items(([

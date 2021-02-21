@@ -66,7 +66,7 @@ void create()
     set_property("light",1);
     set_property("indoors",0);
     set_property("no teleport", 1);
-    set_terrain(WOOD_BUILDING);
+    set_terrain(VILLAGE);
     set_travel(DECAYED_FLOOR);
 
     set_property("no peer", 1);

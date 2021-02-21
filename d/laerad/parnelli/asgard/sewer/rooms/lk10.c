@@ -11,6 +11,8 @@ set("long","%^ORANGE%^You find yourself in a small dry room of the cavern.  "+
 set_property("indoors",1);
 set_property("no teleport",1);
 set_property("light",2);
+set_terrain(NAT_CAVE);
+set_travel(DIRT_ROAD);
 set_smell("default","The room smells dusty and dry.");
 set_listen("default","It is very quiet in these rooms save for the sounds you make.");
 set_items(([

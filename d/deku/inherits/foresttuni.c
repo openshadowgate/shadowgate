@@ -6,7 +6,7 @@ void create() {
     ::create();
     set_property("light",1);
     set_property("indoors",1);
-    set_terrain(LIGHT_FOREST);
+    set_terrain(NAT_CAVE);
     set_travel(FOOT_PATH);
     set_short("%^BOLD%^%^BLACK%^Enclosed Forest Passage%^RESET%^");
     set_name("enclosed forest passage");

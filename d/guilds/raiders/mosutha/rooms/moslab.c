@@ -25,6 +25,8 @@ void create(){
     	);
     	set_property("indoors",1);
     	set_property("light",2);
+		set_terrain(STONE_BUILDING);
+        set_travel(PAVED_ROAD);
     	set_smell("default","Exotic smells of spices, potions, spell components "+
     		"rush to greet your nose and makes your eyes water.");
     	set_listen("default","Bubbling sounds of brewing potions fill the room.");

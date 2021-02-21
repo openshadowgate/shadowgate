@@ -15,6 +15,8 @@ set_property("indoors",1);
 set_property("no teleport",1);
 set_property("no invis",1);
 set_property("light",1);
+set_terrain(NAT_CAVE);
+set_travel(DIRT_ROAD);
 set_smell("default","The caves smell musty and damp.");
 set_listen("default","An occasional drop from a stalactite splashes to the water.");
 set_items(([

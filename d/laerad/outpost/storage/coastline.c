@@ -16,7 +16,7 @@ void create() {
     //pick_critters();
     set_repop(45);
     ::create();
-    set_terrain(STONE_BUILDING);
+    set_terrain(VILLAGE);
     set_travel(PAVED_ROAD);
     set_property("indoors",0);
     set_property("light",2);

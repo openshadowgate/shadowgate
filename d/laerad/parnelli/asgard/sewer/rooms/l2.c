@@ -14,6 +14,8 @@ set("long","You find yourself in a large cavern.  Mud sticks to you and chills y
 set_property("indoors",1);
 set_property("no teleport",1);
 set_property("light",1);
+set_terrain(NAT_CAVE);
+set_travel(DIRT_ROAD);
 set_smell("default","The smell of the sewer water dominates the area.");
 set_listen("default","An occasional drop from a stalactite splashes to the floor.");
 set_items(([
