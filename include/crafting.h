@@ -30,6 +30,7 @@ mapping LEATHERWORK = ([]);
 LEATHERWORK = ([
                    "barding":(["file":COMMONFILE"armour/pcleatherbarding","units":2,"type":"armor"]),
                    "belt":(["file":COMMONFILE"clothing/belt","units":1]),
+                   "backpack":(["file":COMMONFILE"misc/backpack","units":2]),
                    "breastplate":(["file":COMMONFILE"armour/leather_plate","units":3,"type":"armor"]),
                    "buckler":(["file":COMMONFILE"armour/buckler","units":2,"type":"armor"]),
                    "boots":(["file":COMMONFILE"clothing/shoes","units":2]),
@@ -60,6 +61,7 @@ TAILOR = ([
               "belt":(["file":COMMONFILE"clothing/belt","units":1]),
               "caparison":(["file":COMMONFILE"clothing/caparison","units":4]),
               "cloak":(["file":COMMONFILE"clothing/cloak","units":3]),
+              "eyepatch":(["file":COMMONFILE"misc/eyepatch","units":1]),
               "gloves":(["file":COMMONFILE"clothing/gloves","units":1]),
               "hat":(["file":COMMONFILE"clothing/hat","units":2]),
               "breeches":(["file":COMMONFILE"clothing/breeches","units":3]),
