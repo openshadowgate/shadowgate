@@ -65,7 +65,7 @@ inherit DAEMON;
   mapping __destinations, __timings; //__destinations holds the list of waystations
 //__timings holds a list of times when the waystations for each destination were set
 
-void SAVE();
+void save_data();
 
 
 void create(){
@@ -73,7 +73,7 @@ void create(){
   __destinations = ([]);
   __timings = ([]);
     seteuid(UID_DAEMONSAVE);
-    restore_object(SAVE_FILE,1);
+// restore_object(SAVE_FILE,1);
     seteuid(getuid());
 }
 
@@ -116,10 +116,10 @@ void add_waystation(string destination, string room, int stage){
     __waystations += ([room: stage]);
   }
   __timings[destination] = time();
-  SAVE();
+  save_data();
 }
 
-void SAVE(){
+void save_data(){
     seteuid(UID_DAEMONSAVE);
     save_object(SAVE_FILE);
     seteuid(getuid());
@@ -275,7 +275,7 @@ varargs object * add_waystations(object * rooms, object room, string destination
   pot_waystations = rooms[prevcount..count];
   if (sizeof(pot_waystations)<1){
     report("%^BOLD%^%^RED%^Size of pot_waystations <1). Exiting add_waystations");
-    SAVE();
+    save_data();
     return pot_waystations;
   }
 
@@ -290,7 +290,7 @@ varargs object * add_waystations(object * rooms, object room, string destination
       report("Not adding waystation to " + file_name(temproom) + " Because it is near waystation: " + file_name(near_waystation));
     }
   }
-  SAVE();
+  save_data();
   report ("%^CYAN%^Finished Add_waystations. Number of pot_waystations being returned: " + sizeof(pot_waystations));
   return pot_waystations; // returns this so that the calling function can
                           // then check through a limited number of rooms
@@ -302,7 +302,7 @@ void clear_waystations(string destination){
   /*removes the waystations for the named destination */
   __destinations[destination] = ([]);
   __timings[destination] = 0;
-  SAVE();
+  save_data();
 }
 
 void remove_destination(string destination){
@@ -313,7 +313,7 @@ void clear_destinations(){
   /*removes all destination settings - disaster recovery ONLY! */
   __destinations = ([]);
   __timings = ([]);
-  SAVE();
+  save_data();
 }
 
 varargs void generate_waystations(string destination, int stages, int spacing, string * nogo){
@@ -385,7 +385,7 @@ varargs void generate_waystations(string destination, int stages, int spacing, s
   }
   __timings[destination] = time();
   report ("Finished cycling. About to save");
-  SAVE();
+  save_data();
   report ("SAVED");
 }
 
@@ -442,7 +442,7 @@ void generate_maze_waystations(string destination, int stages, int spacing){
     next_rooms = ({});
   }
   __timings[destination] = time();
-  SAVE();
+  save_data();
 }
 
 
