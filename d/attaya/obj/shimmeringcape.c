@@ -150,7 +150,7 @@ void docolour(string str) {
        colour = "%^WHITE%^%^BOLD%^wh%^RESET%^%^WHITE%^i%^BOLD%^te%^RESET%^";
      break;
      case "black":
-       TO->set_short("%^BLACK%^%^BOLD%^Min%^RESET%^%^WHITE%^o%^BLACK%^%^BOLD%^r C%^RESET%^%^WHITE%^p%^BLACK%^%^BOLD%^e of %^RESET%^%^WHITE%^D%^BLACK%^%^BOLD%^isp%^RESET%^%^WHITE%^l%^BLACK%^%^BOLD%^ace%^RESET%^%^WHITE%^m%^BLACK%^%^BOLD%^ent%^RESET%^");
+       TO->set_short("%^BLACK%^%^BOLD%^Min%^RESET%^%^WHITE%^o%^BLACK%^%^BOLD%^r Ca%^RESET%^%^WHITE%^p%^BLACK%^%^BOLD%^e of %^RESET%^%^WHITE%^D%^BLACK%^%^BOLD%^isp%^RESET%^%^WHITE%^l%^BLACK%^%^BOLD%^ace%^RESET%^%^WHITE%^m%^BLACK%^%^BOLD%^ent%^RESET%^");
        TO->set_obvious_short("%^BLACK%^%^BOLD%^Shi%^RESET%^%^WHITE%^m%^BLACK%^%^BOLD%^mer%^RESET%^%^WHITE%^i%^BLACK%^%^BOLD%^ng C%^RESET%^%^WHITE%^a%^BLACK%^%^BOLD%^pe%^RESET%^");
        colour = "%^BLACK%^%^BOLD%^bla%^RESET%^%^WHITE%^c%^BLACK%^%^BOLD%^k%^RESET%^";
      break;
