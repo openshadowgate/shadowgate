@@ -117,6 +117,12 @@ void thank()
                 "You're not helping anyone but yourself.",
                 "You're wasting your time on these. You should go do something useful.",
                 "Your existence is meaningless.",
+                "Please just give up why do you even collect these things?",
+                "Some of these things are weird.  Are you sure it is okay to be seen carrying them around?",
+                "One time someone said they killed intruder then came back and said 'oh now there is an item intruder has'.",
+                "What kind of person collects these.  Shouldn't you be out saving a princess instead?",
+                "I had a cat once.  When she went missing no one quested to find her.",
+                "I heard a joke about how a bard touches himself pillar.  How is that funny?",
                 });
     tell_room(ETO,"%^RESET%^%^MAGENTA%^"+query_name()+" speaks in an annoyed voice:%^RESET%^ "+thanklist[random(sizeof(thanklist))]);
 }
