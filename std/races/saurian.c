@@ -7,12 +7,14 @@ int *age_brackets() { return ({ 20, 70, 200, 300 }); }
 
 int *restricted_alignments(string subrace) { return ({ 1,3,7,9 }); }
 
-string *restricted_classes(string subrace) {
-    if(!subrace || subrace == "") return ({"warlock","monk","bard","barbarian","psywarrior","sorcerer","fighter","paladin","ranger"});
-    switch(subrace)
-    {
-    case "hon-ele": return ({ "psion","monk", "mage", "magus", "psywarrior", "sorcerer", "druid","ranger","cleric","bard","warlock"}); break;
-    default: return ({"warlock","monk","bard","barbarian","psywarrior","sorcerer","fighter","paladin","ranger","inquisitor"});
+string* restricted_classes(string subrace)
+{
+    if (!subrace || subrace == "") {
+        subrace = "lani-ele";
+    }
+    switch (subrace) {
+    case "hon-ele": return ({ "psion", "monk", "mage", "magus", "psywarrior", "sorcerer", "druid", "ranger", "cleric", "bard", "warlock" }); break;
+    default: return ({ "warlock", "monk", "bard", "barbarian", "psywarrior", "sorcerer", "fighter", "paladin", "ranger", "inquisitor" });
     }
 }
 

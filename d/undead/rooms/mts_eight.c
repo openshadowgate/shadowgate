@@ -2,7 +2,7 @@
 
 inherit ROOM;
 
-void create() 
+void create()
 {
     ::create();
 
@@ -16,14 +16,14 @@ void create()
     set_short("%^MAGENTA%^You are in the mountains");
 
     set_long("%^MAGENTA%^You are traveling a small path in the mountains.%^RESET%^\n"
-        "All around you the treacherous peaks of the Thoradin Range rise up "
+        "%^CYAN%^All around you the treacherous peaks of the Thoradin Range rise up "
         "like daggers through the clouds. Right now you are traveling between "
         "the peaks in no particular direction, trying your best to keep your "
         "footing. You are now hiking up one of the largest mountains in the "
         "entire Thoradin Range. Few people ever bother to come up here, come "
         "to think of it, you have heard no tales of what may lay at the top "
       "of this mountain, and how you can %^RESET%^%^CYAN%^challenge %^RESET%^it.");
-    
+
     set_exits(([
         "northeast":MTS+"room60",
         "southwest":MTS+"room67"
