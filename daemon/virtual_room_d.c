@@ -26,7 +26,7 @@ void clear_data()
         }
 
         foreach(usr in vroom_info["names"]) {
-            if (file_exists("/adm/save/users/" + usr[0..0] + "/" + usr + ".o")) {
+            if (user_exists(usr)) {
                 usr_count++;
             }
         }
