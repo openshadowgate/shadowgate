@@ -88,7 +88,7 @@ int clear_data()
     }
 
     foreach(usr in keys(pDonations)) {
-        if (!file_exists("/adm/save/users/" + usr[0..0] + "/" + usr + ".o")) {
+        if (!user_exists(usr)) {
             map_delete(pDonations, usr);
         }
         if (!sizeof(pDonations[usr])) {

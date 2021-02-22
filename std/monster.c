@@ -1910,15 +1910,14 @@ int query_static_bab()
     return static_bab;
 }
 
-//dummy functions so stuff doesn't break on Mobs - Saide, January 2017
 string* query_mini_quests()
 {
-    return CHAMPION_D->query_monster_quests();
+    return ({});
 }
 
 string* query_quests()
 {
-    return CHAMPION_D->query_monster_quests();
+    return ({});
 }
 
 void hurry()
@@ -1951,20 +1950,12 @@ int move(mixed dest)
         }
     }
 
-    if (!TO->query_property("champion_check")) {
-        CHAMPION_D->champion_monster(TO);
-    }
-
-    //added to support assigning random treasure to monsters based on their level/hps
-    //it is also possible to set_property("treasure type", A||B||C||D||E)
-    //and set_property("treasure level", 5||10||15||20||25||30||35||40)
-    //on a specific monster - this function call will assign the treasure - Saide - May 2016
     if (!TO->query_property("has_random_treasure") && !TO->query_property("no_random_treasure")) {
         "/daemon/random_monster_treasure_d.c"->assign_treasure(TO);
     }
     return ::move(dest);
 }
-//this is for the orb /cmds/avatar/orb -H
+
 void mon_look(){
     string dsc;
     dsc = ETO->query_short();
