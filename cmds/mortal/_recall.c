@@ -128,6 +128,8 @@ int cmd_recall(string str)
         mapping relationships = TP->getRelationships();
         string known = ({});
 
+        map_mapping(relationships, (:(!user_exists($1)) && $3->remove_relationship($1):), TP);
+
         known = collapse_array(map(values(relationships), (:values($1):)));
         known = sort_array(distinct_array(known), 1);
 

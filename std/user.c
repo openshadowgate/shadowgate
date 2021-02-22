@@ -4049,29 +4049,38 @@ void set_unique(int x) {  return; }
 // to convert over to the new recognize system so each person can have multiple profiles
 void convert_relationships()
 {
-    mapping temp=([]),rels=([]);
-    string *names=({});
+    mapping temp = ([]), rels = ([]);
+    string* names = ({});
     int i;
 
-    if(!objectp(TO)) { return; }
-    if(avatarp(TO)) { return; }
-    if(TO->query("relationships_converted")) { return; }
+    if (!objectp(TO)) {
+        return;
+    }
 
-    temp = (mapping)TP->getRelationships();
-    if(!sizeof(keys(temp))) { relationships = ([]);}
+    if (avatarp(TO)) {
+        return;
+    }
+
+    if (TO->query("relationships_converted")) {
+        return;
+    }
+
+    temp = TP->getRelationships();
+    if (!sizeof(keys(temp))) {
+        relationships = ([]);
+    }
 
     names = keys(relationships);
 
-    for(i=0;i<sizeof(names);i++)
-    {
+    for (i = 0; i < sizeof(names); i++) {
         rels[names[i]] = ([ "default" : lower_case(relationships[names[i]]) ]);
     }
 
     relationships = rels;
 
-    TO->set("relationships_converted",1);
-    TO->set("relationship_profile","default");
-    tell_object(TO,"%^B_RED%^%^BOLD%^%^CYAN%^Converting relationships... %^RESET%^");
+    TO->set("relationships_converted", 1);
+    TO->set("relationship_profile", "default");
+    tell_object(TO, "%^B_RED%^%^BOLD%^%^CYAN%^Converting relationships... %^RESET%^");
     return;
 }
 
