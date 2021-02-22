@@ -1,0 +1,43 @@
+#include <std.h>
+#include "elf.h"
+
+inherit ROOM;
+
+void create()
+{
+   ::create();
+   set_indoors(1);
+   set_property("light",2);
+   set_terrain(STONE_BUILDING);
+   set_travel(PAVED_ROAD);
+   set_name("Training Room");
+   set_short("%^BOLD%^Training Room%^RESET%^");
+   set_long(query_short()+"\n%^GREEN%^This is a simple area for "+
+   "training.  It is a place set against a cliff "+
+   "overlooking the grove that has a stone overhang"+
+   " above it to protect people from the elements.  "+
+   "There are some marks of powerful spells and "+
+   "weapons being tested here.%^RESET%^");
+   set_smell("default", "It smells of crispt and cold air.");
+   set_listen("default", "Cold winds woosh along the cliff.");
+   set_exits(([
+      "southwest" : ROOMS"stable",
+      "down" : ROOMS"grove5",
+ 
+   ]));
+   set_items(([
+      ({"mark", "marks"}): "Marks from hacks of weapons and blasts of spells are all over.",
+      ({"overlook", "stones"}): "There is a stone overlook protecting this place from the elements.",
+      
+   ]));
+}
+void reset(){
+    ::reset();
+    object dummy;
+    if(!present("dummy")){
+     dummy = new("/d/common/mons");
+     dummy->move(TO);
+     dummy->set_property("damage tester");
+
+    }
+}
