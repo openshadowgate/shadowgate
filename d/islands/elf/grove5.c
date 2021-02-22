@@ -10,9 +10,9 @@ void create(){
    set_exits(([
     "northwest": ROOMS"cliff4", 
    	"west" : ROOMS"cliff3",
-	"east" : ROOMS"grove4",
-	"southwest" : ROOMS"cliff2",
-	"north" : ROOMS"grove7",
+	  "east" : ROOMS"grove4",
+	  "southwest" : ROOMS"cliff2",
+	  "north" : ROOMS"grove7",
     "south": ROOMS"grove2", ]));
 }
 void reset(){

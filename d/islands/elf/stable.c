@@ -34,7 +34,6 @@ void create(){
 		"west":ROOMS"arch",
         "north": ROOMS"quest",
         "southwest": ROOMS"forge",
-        "northeast": ROOMS"train",
     ]) );
 }
 

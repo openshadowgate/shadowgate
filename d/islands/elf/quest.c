@@ -22,6 +22,7 @@ void create() {
     set_smell("default","The room smells of animals and grass.");
     set_listen("default","You can hear the strange sounds of exotic animals.");
     set_exits(([
+       "northeast" : ROOMS"train",
        "south" : ROOMS"stable",
        "down" : ROOMS"cliff3",
 

@@ -21,8 +21,8 @@ void create()
    set_smell("default", "It smells of crispt and cold air.");
    set_listen("default", "Cold winds woosh along the cliff.");
    set_exits(([
-      "southwest" : ROOMS"stable",
-      "down" : ROOMS"grove5",
+      "southwest" : ROOMS"quest",
+      "down" : ROOMS"cliff4",
  
    ]));
    set_items(([
