@@ -8,7 +8,7 @@ void create(){
     ::create();
 
    set_exits(([ 
-   "up": ROOMS"train",
+  
    "south": ROOMS"grove7",
    "southwest": ROOMS"cliff4",  
    "east": ROOMS"wfall",    ]));
