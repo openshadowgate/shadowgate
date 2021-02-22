@@ -32,8 +32,9 @@ void create()
    ]));
 }
 void reset(){
-    ::reset();
     object dummy;
+    ::reset();
+    
     if(!present("dummy")){
      dummy = new("/d/common/mons");
      dummy->move(TO);
