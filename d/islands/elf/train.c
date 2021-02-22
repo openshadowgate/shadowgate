@@ -36,7 +36,7 @@ void reset(){
     ::reset();
     
     if(!present("dummy")){
-     dummy = new("/d/common/mons");
+     dummy = new("/d/common/mons/testdummy");
      dummy->move(TO);
      dummy->set_property("damage tester");
 
