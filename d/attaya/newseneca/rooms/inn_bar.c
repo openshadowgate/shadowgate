@@ -35,7 +35,7 @@ void create(){
       "%^BOLD%^%^BLACK%^velvet curtains%^RESET%^%^MAGENTA%^ that may be pulled to "
       "shield them from view. Almost out of sight, one corner of a %^ORANGE%^prop "
       "box %^MAGENTA%^peeks out from behind the curtain when it is fully open.%^RESET%^\n\n"
-      "%^CYAN%^A sign on the bar presents a menu you could read.%^RESET%^\n"); 
+      "%^CYAN%^A sign on the bar presents a menu you could read.%^RESET%^\n");
    set_smell("default","The heady fragrance of wine and ale hangs in the air.");
    set_listen("default","Voices engaged in conversation reach your ears.");
    set_items(([
@@ -96,7 +96,6 @@ void reset(){
 void init(){
    ::init();
    add_action("read_em","read");
-  "/d/atoyatl/garus_locator_d.c"->initiate_garus_check(TO);
 }
 
 int read_em(string str){
