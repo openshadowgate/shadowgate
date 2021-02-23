@@ -1,7 +1,3 @@
-//edit 2021/01/31 by Ergo - changed nickname and say to use "me" instead of
-//                          first two characters of character name.
-//                          "is" and "to" nicknames broke the sequence.
-
 
 #include <std.h>
 inherit NPC;
@@ -118,26 +114,26 @@ int step_3(string str)
         tell_object(TP, "\n\n%^RESET%^%^MAGENTA%^The man speaks calmly: %^RESET%^Very good! Nicknames work almost like an alias "+
         "except their functionality is somewhat different. For example, if you type <nickname b "+
         "this is a test>, whenever you type the letter b anywhere, the game will substitute it for 'this is a test'. "+
-        "Now, I want you to make a nickname. I want you to type %^YELLOW%^<nickname me "+myName+">%^RESET%^. "+
+        "Now, I want you to make a nickname. I want you to type %^YELLOW%^<nickname mynickname "+myName+">%^RESET%^. "+
         "This will cause the game to substitute your name, "+myName+", anytime you type the letters me.");
         return 1;
     }
     else if(stringp(str))
     {
 
-        if(str != "me "+ myName)
+        if(str != "mynickname "+ myName)
         {
             tell_object(TP, "\n%^RESET%^%^MAGENTA%^The man shakes his head before speaking:%^RESET%^ No, no, that's not quite "+
-            "it. Just type %^YELLOW%^%^YELLOW%^<nickname me "+myName+">%^RESET%^ when you are ready "+
+            "it. Just type %^YELLOW%^%^YELLOW%^<nickname mynickname "+myName+">%^RESET%^ when you are ready "+
             "to continue.\n\nHe smiles warmly at you.");
             return 1;
         }
         TP->set("newbtutorial5",5);
-        TP->force_me("nickname me "+myName);
+        TP->force_me("nickname mynickname "+myName);
         tell_object(TP, "\n\n%^RESET%^%^MAGENTA%^The man cheers before speaking again:%^RESET%^ That's it. Now you have learned "+
         "how to establish a nickname of your own! Nicknames are powerful and convenient when used properly. "
         "I want to show you an example of their functionality now. When you are ready I want you to "+
-        "simply %^YELLOW%^<say me is going to see the world!>%^RESET%^");
+        "simply %^YELLOW%^<say mynickname is going to see the world!>%^RESET%^");
         return 1;
     }
 }
@@ -171,7 +167,9 @@ int step_4(string str)
     "there are many things that would see you dead. Sometimes they will succeed. You must not lose heart, though, "+
     "for death on Shadowgate is only temporary. Use the knowledge that you have learned here and "+
     "live a long prosperous life!\n\n%^RESET%^%^MAGENTA%^The man smiles once more before speaking again:%^RESET%^ "+
-    "With that, I have nothing more to teach you. Your destiny awaits!%^RESET%^");
+    "With that, I have nothing more to teach you. Your destiny awaits! Don't "+
+    "forget you can remove the nickname you made by typing "+
+    "%^BOLD%^%^YELLOW%^<unnickname mynickname>%^RESET%^");
 
    return 1;
 }
@@ -204,17 +202,18 @@ int side_fun(string str)
             break;
         case 4:
             tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ try establishing a nickname of "+
-            "your own. Simply type %^YELLOW%^<nickname me "+myName+">%^RESET%^ when "+
+            "your own. Simply type %^YELLOW%^<nickname mynickname "+myName+">%^RESET%^ when "+
             "you are ready to continue.%^RESET%^");
             break;
         case 5:
             tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ to understand how the functionality of "+
-            "a nickname I want you to simply %^YELLOW%^<say me is going to see the world!>%^RESET%^ "+
+            "a nickname I want you to simply %^YELLOW%^<say mynickname is going to see the world!>%^RESET%^ "+
             "when you are ready to continue.");
             break;
         case 6:
-            tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ I have taught you all that I can. Your destiny "+
-            "awaits!");
+            tell_object(TP,"%^RESET%^%^MAGENTA%^He says:%^RESET%^ I have taught you all that I can. "+
+            "Your destiny awaits! Don't forget you can remove the nickname you made by typing "+
+            "%^BOLD%^%^YELLOW%^<unnickname mynickname>");
             break;
    }
    return 1;
