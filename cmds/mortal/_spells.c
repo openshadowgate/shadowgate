@@ -92,6 +92,8 @@ int cmd_spells(string str)
         tell_object(TP, auto_format_page(output, TP));
     }
 
+    spells = ([]);
+    speccache = ([]);
     magic = ({});
     return 1;
 }
