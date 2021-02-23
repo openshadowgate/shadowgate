@@ -13,16 +13,9 @@ void create(){
 }
 
 void copy_corpse(object corpse){
-    if (corpse->get_was_user()) {
-        set_short("The skin of "+article(corpse->query_race())+" "+corpse->query_race());
-        set_long("The skin of "+article(corpse->query_race())+" "+corpse->query_race()+".");
-        set_subtype(corpse->query_race());
-    }
-    else {
-        set_short("The skin of "+article(corpse->query_name())+" "+corpse->query_name());
-        set_long("The skin of "+article(corpse->query_name())+" "+corpse->query_name()+".");
-        set_subtype(corpse->query_name());
-    }
+    set_short("The skin of "+article(corpse->query_race())+" "+corpse->query_race());
+    set_long("The skin of "+article(corpse->query_name())+" "+corpse->query_name()+".");
+    set_subtype(corpse->query_race());
     add_id(corpse->query_race()+" skin");
     value = corpse->query_level();
     ac = corpse->query_ac();
