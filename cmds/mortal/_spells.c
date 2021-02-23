@@ -92,25 +92,8 @@ int cmd_spells(string str)
         tell_object(TP, auto_format_page(output, TP));
     }
 
-    CleanUpSpellObjects();
+    magic = ({});
     return 1;
-}
-
-void CleanUpSpellObjects()
-{
-    int x;
-    if(!sizeof(ToClean)) return;
-    //tell_object(find_player("saide"), "It is getting here... spell objects should be cleaned up");
-    for(x = 0;x < sizeof(ToClean);x++)
-    {
-        if(objectp(ToClean[x]))
-        {
-            //tell_object(find_player("saide"), ToClean[x]->query_name()+ " being cleaned.");
-            ToClean[x]->remove();
-        }
-        continue;
-    }
-    return;
 }
 
 int get_spells(object player, string myclass)
