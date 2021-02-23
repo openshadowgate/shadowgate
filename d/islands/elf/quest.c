@@ -27,5 +27,8 @@ void create() {
        "down" : ROOMS"cliff3",
 
     ] ));
+    set_door("door",ROOMS"train","northeast","key");
+    set_open("door",0);
+    set_locked("door",0);
     set_quest_daemon("/daemon/quests_high");  
 }

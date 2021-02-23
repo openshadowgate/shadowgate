@@ -17,7 +17,8 @@ void create()
    "overlooking the grove that has a stone overhang"+
    " above it to protect people from the elements.  "+
    "There are some marks of powerful spells and "+
-   "weapons being tested here.%^RESET%^");
+   "weapons being tested here.  To the southwest is"+
+   " door that leads to a stable%^RESET%^");
    set_smell("default", "It smells of crispt and cold air.");
    set_listen("default", "Cold winds woosh along the cliff.");
    set_exits(([
@@ -30,6 +31,9 @@ void create()
       ({"overlook", "stones"}): "There is a stone overlook protecting this place from the elements.",
       
    ]));
+   set_door("door",ROOMS"quest","southwest","key");
+   set_open("door",0);
+   set_locked("door",0);
 }
 void reset(){
     object dummy;
