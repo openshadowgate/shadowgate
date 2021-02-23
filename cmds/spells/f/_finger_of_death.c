@@ -40,7 +40,7 @@ void spell_effect(int prof)
 
     spell_successful();
 
-    if (combat_death_save(target, 6)) {
+    if (combat_death_save(target, 4)) {
         tell_object(target, "%^BOLD%^The struggle is won, yet at a price.");
         tell_room(place, "%^BOLD%^The soul survives, yet at a price.", target);
         damage_targ(target, target->return_target_limb(), sdamage, "negative energy");
