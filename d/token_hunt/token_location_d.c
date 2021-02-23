@@ -6,27 +6,14 @@
 inherit DAEMON;
 
 #define SAVE_FILE   INV_PATH"directories"
-#define POP_LOW     15
-#define POP_MID     15
-#define POP_HIGH    15
+#define POP_LOW     16
+#define POP_MID     16
+#define POP_HIGH    16
 #define MON_FILE    FILE_PATH"token_monster"
 
-int type_check(string type);
-void clean_monsters();
-int track_monster(string type,object mob);
-object *query_monsters(string type);
-string *monster_locations(string type);
-int add_directory(string type,string dir);
-string *query_directories(string type);
-int add_excluded_room(string room);
-int check_excluded(string room);
-string select_room(string type);
-void add_monsters(string type,int num);
-void check_population();
-
-mapping DIRS,PLAYER_TOKENS;
+mapping DIRS, PLAYER_TOKENS;
 nosave mapping MONS;
-string *EXCLUDED;
+string* EXCLUDED;
 
 void create()
 {
@@ -54,6 +41,7 @@ void clean_monsters()
     if(!pointerp(MONS["low"])) { MONS["low"] = ({}); }
     if(!pointerp(MONS["mid"])) { MONS["mid"] = ({}); }
     if(!pointerp(MONS["high"])) { MONS["high"] = ({}); }
+
     mons = MONS["low"];
     mons = distinct_array(mons);
     if(sizeof(mons))
@@ -287,35 +275,44 @@ void add_monsters(string type,int num)
 
 void check_population()
 {
-    int i,j,x;
-    object *mobs=({});
-    string *types = ({ "low","mid","high" });
-    int *nums = ({ POP_LOW,POP_MID,POP_HIGH });
+    int i, j, x;
+    object* mobs = ({});
+    string* types = ({ "low", "mid", "high" });
+    int* nums = ({ POP_LOW, POP_MID, POP_HIGH });
 
-    string *dirs=({});
-    if(!pointerp(DIRS["low"])) { return; }
+    string* dirs = ({});
+    if (!pointerp(DIRS["low"])) {
+        return;
+    }
     dirs = DIRS["low"];
-    if(!sizeof(dirs)) { return; }
-    if(!pointerp(DIRS["mid"])) { return; }
+    if (!sizeof(dirs)) {
+        return;
+    }
+    if (!pointerp(DIRS["mid"])) {
+        return;
+    }
     dirs = DIRS["mid"];
-    if(!sizeof(dirs)) { return; }
-    if(!pointerp(DIRS["high"])) { return; }
+    if (!sizeof(dirs)) {
+        return;
+    }
+    if (!pointerp(DIRS["high"])) {
+        return;
+    }
     dirs = DIRS["high"];
-    if(!sizeof(dirs)) { return; }
+    if (!sizeof(dirs)) {
+        return;
+    }
 
-    for(i=0;i<sizeof(types);i++)
-    {
+    for (i = 0; i < sizeof(types); i++) {
         mobs = query_monsters(types[i]);
-        if(!sizeof(mobs))
-        {
-            add_monsters(types[i],nums[i]);
+        if (!sizeof(mobs)) {
+            add_monsters(types[i], nums[i]);
         }
-        for(j=0;j<sizeof(mobs);j++)
-        {
+        for (j = 0; j < sizeof(mobs); j++) {
             clean_monsters();
         }
         mobs = query_monsters(types[i]);
-        add_monsters(types[i],(nums[i] - sizeof(mobs)));
+        add_monsters(types[i], (nums[i] - sizeof(mobs)));
     }
     return;
 }
@@ -345,8 +342,14 @@ void set_player_tokens(object player, mapping tokens)
 
 mapping get_player_tokens(string name)
 {
-    if(!stringp(name)) { return ([]); }
-    if(!mapp(PLAYER_TOKENS)) { PLAYER_TOKENS = ([]); }
-    if(!mapp(PLAYER_TOKENS[name])) { return ([]); }
+    if (!stringp(name)) {
+        return ([]);
+    }
+    if (!mapp(PLAYER_TOKENS)) {
+        PLAYER_TOKENS = ([]);
+    }
+    if (!mapp(PLAYER_TOKENS[name])) {
+        return ([]);
+    }
     return PLAYER_TOKENS[name];
 }
