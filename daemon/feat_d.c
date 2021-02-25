@@ -1764,7 +1764,7 @@ int number_feats(object obj, string category, string* valid_classes) {
                 if (obj->query_class_level("fighter") < 21) {
                     j = (obj->query_class_level(subset[i]) / 2) + 2;
                 } else {
-                    j = 11 + (((obj->query_class_level(subset[i])) - 16) / 5);
+                    j = 12 + (((obj->query_class_level(subset[i])) - 16) / 5);
                 }
                 break;
             case "paladin":
