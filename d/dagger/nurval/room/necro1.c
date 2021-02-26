@@ -42,4 +42,6 @@ void reset()
         new(MONS + "/necroknight")->move(TO);
     if (!present("bonewyvern"))
         new(MONS + "/bonewyvern")->move(TO);
+    if (!present("bonewyvern 2"))
+        new(MONS + "/bonewyvern")->move(TO);
 }
