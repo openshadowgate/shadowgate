@@ -44,7 +44,7 @@ void create()
     set_hd(level, 10);
     set_overall_ac(-50);
 
-    set_max_hp(level * 14 + 1000);
+    set_max_hp(level * 14 + 5000);
     set_hp(query_max_hp());
 
     set_property("undead", 1);
@@ -118,7 +118,7 @@ void heart_beat()
         
             foreach(object ob in att)
             {
-                if(!ob->reflex_save(level))
+                if(!ob->reflex_save(level + 5))
                 {
                     tell_object(ob, "You are knocked off your feet!");
                     ob->set_tripped(roll_dice(1,6),"%^RESET%^%^YELLOW%^You are struggling to get your feet back under you!");
