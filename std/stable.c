@@ -87,6 +87,7 @@ void set_animal_price(string *name, int *prices) {
 int buy(string str) {
    string *animal;
    object ob;
+   string *petty;
    int i;
 
    if(!str) return 0;
@@ -95,6 +96,9 @@ int buy(string str) {
       notify_fail("You can't buy that here.\n");
       return 0;
    }
+   petty = TP->query_pets();
+   if (sizeof(petty) > 4)
+      return notify_fail("You can only have 5 pets.  I won't condone animal hoarding.");
    if(!amount[str]) return notify_fail("We don't have any for sale right now. Please read the sign to see what is available.\n");
    if(!TP->query_funds("gold",price[str])) return notify_fail("You don't have the gold to pay for it.\n");
    tell_room(TO,"%^BOLD%^%^RED%^ The stable boy nods and walks toward the stalls at the end of the barn.%^RESET%^");
