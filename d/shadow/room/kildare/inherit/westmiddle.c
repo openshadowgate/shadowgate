@@ -7,7 +7,7 @@ void create(){
    ::create();
    set_indoors(0);
    set_property("light",2);
-   set_terrain(ROCKY);
+   set_terrain(LIGHT_FOREST);
    set_travel(FOOT_PATH);
    set_name("abandoned trail");
    set_short("Abandoned Trail");
