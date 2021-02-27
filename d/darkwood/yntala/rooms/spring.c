@@ -46,6 +46,7 @@ int dive(string str){
    this_player()->move_player(INRMS+"uw1");
    return 1;
    }
+   write("Dive what?  Dive into hole?");
 }
 string ldesc(string str){
    return("%^RESET%^%^GREEN%^As you make your way through"
