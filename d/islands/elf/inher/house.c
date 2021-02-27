@@ -1,14 +1,11 @@
-//underwater ruined road
+//underwater ruined house
 #include <std.h>
 #include "../elf.h"
 inherit WATER;
 int items = 1; //has items
 
-void pick_critters();
 
 void create(){
-   pick_critters();
-   set_repop(35);
    ::create();
    set_terrain(DEEP_WATER);
    set_travel(RUBBLE);
@@ -94,7 +91,7 @@ int search_mud(string str){
       tell_room(TO,"%^RED%^"+TPQCN+
       " searches the mud and disturbs a long dead corpse who rises in anger.");
       tell_object(TP,"%^RED%^You search the mud and disturb the resting place of a long dead human.");
-      obj = new(MON"rev");
+      obj = new(MON"skele");
       obj->move(TO);
       obj->kill_ob(TP);
    }
