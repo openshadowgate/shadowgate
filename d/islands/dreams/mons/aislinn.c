@@ -169,7 +169,7 @@ void die(object ob){
    tell_room(ETO, "%^BOLD%^Motes of spirit lights flood into the void and head through the portal, their souls finding peace from these lucid dreams.  You see the spirits of Aidlon and Comadon float by, waving to you before they vanish into the violet orb.%^RESET%^");
    ppl = all_living(ETO);
    for(i=0;i<sizeof(ppl);i++){
-      if(!interactive(ppl[i])) continue;
+      if(!userp(ppl[i])) continue;
       ppl[i]->set_mini_quest("%^BOLD%^%^CYAN%^Lucid Dreams%^RESET%^", 50000,"%^MAGENTA%^Lucid %^BOLD%^%^CYAN%^D%^WHITE%^r%^BLUE%^e%^CYAN%^a%^WHITE%^m%^BLUE%^s%^RESET%^");
       tell_object(ppl[i], "\n%^CYAN%^%^BOLD%^Feeling a sense of accomplishment in letting the souls trapped here come to a rest, you feel like it is time for these lucid dreams to come to an end.%^RESET%^");
    }
