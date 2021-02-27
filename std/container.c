@@ -120,11 +120,11 @@ int query_living_visibility(object item, object viewer)
         return 0;
     }
 
-    if (item->query_hidden() && !(avatarp(viewer) || viewer->true_seeing())) {
+    if (item->query_magic_hidden() && !(avatarp(viewer) || viewer->true_seeing())) {
         return 0;
     }
 
-    if (item->query_hidden() && !living(item)) {
+    if (item->query_hidden()) {
         return 0;
     }
 

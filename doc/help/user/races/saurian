@@ -10,8 +10,8 @@
 
 %^BOLD%^%^BLUE%^Standard alignments: %^RESET%^LN, NG, TN, NE, CN
 %^BOLD%^%^BLUE%^Classes restricted:%^RESET%^
-    lani-ele: warlock, monk, bard, barbarian, psywarrior, sorcerer, fighter, paladin, ranger, inquisitor
-    hon-ele: psion, monk, mage, magus, psywarrior, sorcerer, druid, ranger, cleric, bard, warlock
+    lani-ele: barbarian, bard, fighter, inquisitor, magus, monk, paladin, psywarrior, ranger, sorcerer, warlock
+    hon-ele: bard, cleric, druid, mage, magus, monk, psion, psywarrior, ranger, sorcerer, warlock
 %^BOLD%^%^BLUE%^Normal adventuring starting age: %^RESET%^20
 %^BOLD%^%^BLUE%^Average life span: %^RESET%^300
 

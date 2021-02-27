@@ -14,7 +14,7 @@ string* restricted_classes(string subrace)
     }
     switch (subrace) {
     case "hon-ele": return ({ "psion", "monk", "mage", "magus", "psywarrior", "sorcerer", "druid", "ranger", "cleric", "bard", "warlock" }); break;
-    default: return ({ "warlock", "monk", "bard", "barbarian", "psywarrior", "sorcerer", "fighter", "paladin", "ranger", "inquisitor" });
+    default: return ({ "warlock", "monk", "bard", "barbarian","magus", "psywarrior", "sorcerer", "fighter", "paladin", "ranger", "inquisitor" });
     }
 }
 

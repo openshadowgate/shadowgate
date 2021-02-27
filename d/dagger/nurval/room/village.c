@@ -53,4 +53,6 @@ void reset()
         new(MONS + "/banshee")->move(TO);
     if (!present("banshee 2"))
         new(MONS + "/banshee")->move(TO);
+    if(!present("bonewyvern"))
+        new(MONS + "/bonewyvern")->move(TO);
 }

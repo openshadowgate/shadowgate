@@ -78,7 +78,7 @@ void create(){
         "Your head starts to pound in a raging tempo as you slam this drink down.",
         "Your throat constricts a bit as you drink the slightly sour liquid.",
         "The warmth plucks lazily at your soul as your lips curve into a smile.",
-        "One sip of this drink and blissful peace washes over you in waves.", 
+        "One sip of this drink and blissful peace washes over you in waves.",
         "The savory steak provides you with renewed strength.",
         "You are delighted by the pheasant's wonderful flavor.",
         "As you sample the stew, you are taken back to your grandest adventure.",
@@ -122,7 +122,7 @@ void create(){
       "drinks the ale down and gains an expression of confidence, looking ready to take on an army.",
       "tears into the leg of lamb ravenously and almost savagely.",
       "drinks the feywine and smiles while setting the glass back down, "+
-      "eyes fluttering closed for a long moment.", 
+      "eyes fluttering closed for a long moment.",
    }) );
    set_menu_short( ({
       "A squat glass of dancing liquid",
@@ -189,9 +189,6 @@ void init() {
    add_action("swing","swing");
    add_action("lay","lay");
    add_action("sprawl","sprawl");
-   //add_action("space_shifter","expel");
-   //add_action("space_shifter","exile");
-  "/d/atoyatl/garus_locator_d.c"->initiate_garus_check(TO);
 }
 
 int read(string str){
@@ -307,7 +304,7 @@ void set_menu(string *item_names, string *types, int *strengths){
    }
 }
 
-void set_my_mess(string *msg){ 
+void set_my_mess(string *msg){
    int i;
    for(i=0; i<sizeof(menu_items); i++){
       menu[menu_items[i]]["my message"] = msg[i];
