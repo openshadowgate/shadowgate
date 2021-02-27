@@ -1,7 +1,7 @@
 #include <std.h>
 #include "elf.h"
 
-inherit ROOM;
+inherit VAULT;
 
 void create()
 {
