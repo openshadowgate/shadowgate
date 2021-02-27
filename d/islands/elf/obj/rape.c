@@ -29,17 +29,18 @@ void create() {
    set_hit((:TO,"hit_func":));
    set_item_bonus("sight bonus",2);
    set_special_material_type("silver");
+   set_property("able to cast",1);
 }
 
 int wield_func(){
-     TO->set_property("able to cast",1);
+
       tell_room(EETO,"%^BOLD^The pearl on "
            +ETOQCN+"'s weapon glows brightly.",ETO);
       tell_object(ETO,"%^BOLD%^The pearl on the rapier flashes brightly.");
       return 1;
 }
 int unwield_func(){
-  TO->set_property("able to cast",-1);
+
    tell_room(EETO,"The rapier of "+ETOQCN+
    " dims.",ETO);
    tell_object(ETO,"The rapier dims when unwielded.");

@@ -52,17 +52,16 @@ void reset(){
  switch(random(9)){
       case 0:  tell_room(TO,"%^CYAN%^Near freezing water chills your bones.");
                break;
-      case 1:  tell_room(TO,"%^CYAN%^You hear a swoosh as water currents flow past you.");
+      case 1:  tell_room(TO,"%^CYAN%^A ghostly woman appears and crouches down like something might crush her.  She vanishes shortly after.");
                break;
       case 2:  tell_room(TO,"%^CYAN%^A thunderous crack rumbles"+
 	  " through the area as a large block of ice breaks above.");
               break;
       case 3:  tell_room(TO,"%^BOLD%^Several odd fish swim past.");
                break;
-      case 4:  tell_room(TO,"%^CYAN%^Some strange creature moves along the ocean floor.");
+      case 4:  tell_room(TO,"%^CYAN%^A ghost appears bending over what used to be a kitchen then fades away.");
                break;
-      case 5:  tell_room(TO,"%^BOLD%^There is a crack and a splash "+
-	  "as a berg of ice cavs into the sea.");
+      case 5:  tell_room(TO,"%^BOLD%^A translucent ghost of a woman walks across the house then vanishes.");
                break;	
       case 6:  tell_room(TO,"%^CYAN%^Several bubbles pop up from the ruins.");
                break;		
