@@ -1,9 +1,3 @@
-// Feat was opened to cleric/druid/oracle spells, but never had settings for their spell type.
-// Have put in a half-fix for now to select the first default class that can cast it.
-// Temporary overrides for sorc -> mage and oracle -> cleric cuz all sorc spells are "mage",
-// and most oracle spells are cleric, so will conflict if querying by base class.
-// Will at least stop people enchanting spells from classes they don't have for now!
-// Longterm it needs a proper set of queries for can_cast etc. N, 7/3/20.
 #include <std.h>
 #include <daemons.h>
 inherit FEAT;
@@ -186,7 +180,7 @@ void select_spell(string str, object ob)
     /*     return; */
     /* } */
 
-    write("%^YELLOW%^Number of charges (15 max):");
+    write("%^YELLOW%^Number of charges (10 max):");
     write("~q to cancel");
     input_to("spell_charges", 0, ob, str, spell);
     return;
@@ -214,7 +208,7 @@ void spell_charges(string str, object ob, string spell, string file)
         input_to("spell_charges", 0, ob, spell, file);
         return;
     }
-    if (charges > 15) {
+    if (charges > 10) {
         write("You may only input a maximum of 15 charges to an item.");
         write("%^YELLOW%^Number of charges (15 max):");
         write("~q to cancel");
