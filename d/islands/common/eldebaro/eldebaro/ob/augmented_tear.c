@@ -28,7 +28,7 @@ void create(){
     "used frequently by some one.%^RESET%^");
     
     set_lore("This amulet is rumored to have been one of the most prized "+
-    "possessions of a Kelemvorian named Marsivian Wyndar, a man who has been "+
+    "possessions of a Lysaraian named Marsivian Wyndar, a man who has been "+
     "largely forgotten by history. It is said that this amulet was a gift given to "+
     "him by his wife, herself a cleric of some renown. The same stories suggest that "+
     "the amulet imbued him with the ability to use certain spells to augment his own "+

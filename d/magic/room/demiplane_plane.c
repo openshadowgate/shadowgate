@@ -68,7 +68,7 @@ int set_plane_feature(string str)
 
     if(regexp(str,"^remove"))
     {
-        if(sscanf(str,"add %s",cargs)!=1)
+        if(sscanf(str,"remove %s",cargs)!=1)
         {
             write("You must provide feature name.");
             return 1;

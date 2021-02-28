@@ -1200,13 +1200,13 @@ void wizard_interface(object user, string type, string targ)
 
         // can_cast call in magic_d defines conditions that allow to cast these spells without memorizing
 
-        if ((FEATS_D->usable_feat(caster, "supreme healer") && (member_array(spell_name, supreme_healer_spells) != -1)) && roll_dice(1, 20) > 12) {
-            tell_object(caster,"%^BOLD%^%^WHITE%^Divine preserves the spell in your memory.");
+        if ((FEATS_D->usable_feat(caster, "supreme healer") && (member_array(spell_name, supreme_healer_spells) != -1)) && roll_dice(1, 20) > 16) {
+            tell_object(caster,"%^BOLD%^%^WHITE%^The divine preserves the spell in your memory.");
             preserve_in_memory = 1;
         }
 
-        if ((FEATS_D->usable_feat(caster, "raging healer") && (member_array(spell_name, raging_healer_spells) != -1) && caster->query_property("raged") && roll_dice(1, 10) > 6)) {
-            tell_object(caster,"%^BOLD%^%^RED%^Your anger helps you to preserve the spell in your memory.");
+        if ((FEATS_D->usable_feat(caster, "raging healer") && (member_array(spell_name, raging_healer_spells) != -1) && caster->query_property("raged") && roll_dice(1, 20) > 14)) {
+            tell_object(caster,"%^BOLD%^%^RED%^You're so angry you forgot to forget the spell.");
             preserve_in_memory = 1;
         }
     }
@@ -2260,7 +2260,7 @@ varargs int do_spell_damage(object victim, string hit_limb, int wound, string da
 void define_clevel()
 {
     string *domains;
-    
+
     clevel = caster->query_guild_level(spell_type);
 
     if (spell_type == "assassin") {
@@ -2293,18 +2293,18 @@ void define_clevel()
             clevel += 2;
         }
     }
-    
+
     if(spell_type == "cleric")
     {
         domains = caster->query_divine_domain();
-        
+
         switch(spell_sphere)
         {
             case "illusion":
             if(member_array("illusion", domains) >= 0)
                 clevel += 1;
             break;
-            
+
             case "enchantment_charm":
             if(member_array("tyranny", domains) >= 0)
                 clevel += 1;
@@ -2325,12 +2325,12 @@ void define_clevel()
             case "abjuration":
             if(member_array("mentalism", domains) >= 0)
                 clevel += 1;
-            
+
             case "invocation_evocation":
             if(member_array("elements", domains) >= 0)
                 clevel += 1;
         }
-        
+
         //Stars domain gets caster level bonus at night, and penalty during the day
         if(member_array("stars", domains) >= 0)
         {
@@ -2343,7 +2343,7 @@ void define_clevel()
         //Madness domain gets caster level bonus with saving throw penalty
         if(member_array("madness", domains) >= 0)
             clevel += 1;
-        
+
         if(evil_spell)
         {
             if(member_array("evil", domains) >= 0)

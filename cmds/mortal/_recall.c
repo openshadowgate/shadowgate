@@ -567,7 +567,7 @@ This command is affected by collumns setting of the %^ORANGE%^<set>%^RESET%^ com
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-remember, unremember, recognize, set, study, fixrecognized, fixspells
+remember, unremember, recognize, set, study, fixspells
 HELP
 );
     return;

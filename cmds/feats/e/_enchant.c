@@ -1,9 +1,3 @@
-// Feat was opened to cleric/druid/oracle spells, but never had settings for their spell type.
-// Have put in a half-fix for now to select the first default class that can cast it.
-// Temporary overrides for sorc -> mage and oracle -> cleric cuz all sorc spells are "mage",
-// and most oracle spells are cleric, so will conflict if querying by base class.
-// Will at least stop people enchanting spells from classes they don't have for now!
-// Longterm it needs a proper set of queries for can_cast etc. N, 7/3/20.
 #include <std.h>
 #include <daemons.h>
 inherit FEAT;
@@ -20,9 +14,11 @@ void create()
     feat_name("enchant");
     feat_syntax("enchant ITEM");
     feat_classes(({"mage", "sorcerer", "oracle", "druid", "cleric", "psion"}));
-    feat_desc("This feat allows a caster to enchant items with charges of spells they already know. The enchanted item can be used as easily by the caster themselves, as those without training. Creating such an item drains the essence of the mage, however, and should not be taken lightly.
+    feat_desc("This feat allows a caster to enchant weapons or rings with charges of spells they already know. The enchanted item can be used as easily by the caster themselves, as those without training. Creating such an item drains the essence of the mage, however, and should not be taken lightly.
 
-Enchanting uses gems as material components. Any gem would do, but it will be destroyed on use.");
+You can not use channeling spells such as heal or harm for this feat.
+
+Enchanting uses gems and gold as material components. Any gem would do, but it will be destroyed on use.");
     feat_prereq("Mage, Sorcerer, Psion, Cleric, Druid, Oracle");
     set_target_required(0);
 }
@@ -83,10 +79,17 @@ void execute_feat()
     if (!objectp(ob)) {
         return notify_fail("There is no " + arg + " around.\n");
     }
+
     if (!environment(caster)->is_lab() && !present("portable lab", environment(caster))) {
         write("You can only enchant items in a laboratory.");
         return 1;
     }
+
+    if (!(ob->is_weapon() || ob->query_type() == "ring")) {
+        write("You can only enchant rings and weapons.");
+        return 1;
+    }
+
     if (ob->query("uses")) {
         write("This object already has magic instilled in it.");
         return 1;
@@ -125,6 +128,14 @@ void select_spell(string str, object ob)
     }
     write("%^BOLD%^%^RED%^You have selected: %^GREEN%^" + str + "...");
 
+    if (regexp(spell, ".*(cure|cause).*wounds") || regexp(spell, "repair.*undead")|| regexp(spell, (".*(heal|harm)"))) {
+        tell_object(caster,"%^BOLD%^%^RED%^You can not use channeling spells such as harm or heal.");
+        write("%^YELLOW%^Enter spell name:");
+        write("~q to cancel");
+        input_to("select_spell", 0, ob);
+        return;
+    }
+
     spell = replace_string(str, " ", "_");
     spell = "/cmds/spells/" + spell[0..0] + "/_" + spell;
     filename = spell + ".c";
@@ -136,6 +147,7 @@ void select_spell(string str, object ob)
         input_to("select_spell", 0, ob);
         return;
     }
+
     myclasses = caster->query_classes();
     if (!sizeof(myclasses)) {
         tell_object(caster, "You don't have any classes! Please contact an imm to unbork yourself!");
@@ -150,7 +162,6 @@ void select_spell(string str, object ob)
         string tmpclass = myclasses[i];
         int castable = 0;
 
-        //TODO: Cleric domain specific spells
         if (filename->query_spell_level(tmpclass) && TP->query_memorized(tmpclass, str)) {
 
             if (MAGIC_D->is_mastering_class(tmpclass)) {
@@ -176,17 +187,7 @@ void select_spell(string str, object ob)
         return;
     }
 
-    //TODO: Fix corresponding code in use
-    /* if(spell->query_arg_needed()){ */
-    /*     write("You can't enchant something with that spell."); */
-    /*     write("%^BOLD%^%^RED%^You start the process of enchanting the "+ob->query_short()+"."); */
-    /*     write("%^YELLOW%^Enter spell name:"); */
-    /*     write("~q to cancel"); */
-    /*     input_to("select_spell",0,ob); */
-    /*     return; */
-    /* } */
-
-    write("%^YELLOW%^Number of charges (15 max):");
+    write("%^YELLOW%^Number of charges (10 max):");
     write("~q to cancel");
     input_to("spell_charges", 0, ob, str, spell);
     return;
@@ -214,7 +215,7 @@ void spell_charges(string str, object ob, string spell, string file)
         input_to("spell_charges", 0, ob, spell, file);
         return;
     }
-    if (charges > 15) {
+    if (charges > 10) {
         write("You may only input a maximum of 15 charges to an item.");
         write("%^YELLOW%^Number of charges (15 max):");
         write("~q to cancel");
@@ -287,10 +288,6 @@ void do_enchant(string str, object ob, string spell, string file, int charges, i
     ob->set("effect", "spell_effect");
     ob->set("uses", charges);
     ob->set("spell", spell);
-/*    if (caster->is_class("psion"))
-        ob->set("spell type","psion");
-    else
-        ob->set("spell type","mage"); */
     ob->set("spell type", castclass);
     ob->set("level", level);
     write("%^BOLD%^You lift the gem and focus your energy into it.");

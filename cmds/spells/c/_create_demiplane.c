@@ -54,6 +54,15 @@ Inside the plane you have access to the following commands:
     set_helpful_spell(1);
 }
 
+int preSpell()
+{
+    if (sizeof(caster->query_property("dispellable spells")) && collapse_array(map((caster->query_property("dispellable spells"))->query_name(), (: $1 == "create demiplane" :))) > 0) {
+        tell_object(caster, "%^BOLD%^%^ORANGE%^You have an entrance to your demiplane summoned elsewhere...");
+        return 0;
+    }
+    return 1;
+}
+
 void spell_effect(int prof)
 {
     if(!objectp(caster) || !objectp(place))

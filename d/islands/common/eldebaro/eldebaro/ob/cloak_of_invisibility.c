@@ -32,7 +32,7 @@ void create()
 
 	set_lore("%^BOLD%^%^BLACK%^This is a cloak of invisibility. There have been "+
     "many of them throughout history but these particular cloaks was made for some segment "+
-    "of the temple of Kelemvor. It is thought that they were used at one point to allow certain "+
+    "of the temple of Lysara. It is thought that they were used at one point to allow certain "+
     "members of the segment to do reconnaissance work against some being who was raising a "+
     "vast army of undead. The most likely stories suggest that this cloak was also imbued with "+
     "some ability to protect its wearer from all types of damage, supposedly so that if they "+

@@ -129,9 +129,8 @@ int __Shoot(string str) {
         return 1;
     }
     if(distance < 1)
-        return notify_fail("Yeah that monster might let you do that.\n");
+        return notify_fail("You don't need much aim to kill that.\n");
 
-//Following code borrowed from /cmds/mortal/_peer, to fix problems with players with sight bonuses not being able to shoot in the dark - Lujke
     x = TP->light_blind(0);
     if(x)
     {
@@ -210,9 +209,10 @@ int __Shoot(string str) {
             return 1;
         }
     }
-    //following lines moved here to correct light blindness calculations - Lujke
+
+
     x = TP->light_blind_remote(0, current, distance);
-   // tell_object(TP, "x = " + x + ", room = " + base_name(current) + ", distance = " + distance);
+
     if (x !=0)
     {
         tell_object(TP, "You can't see well enough to shoot into that room");
@@ -334,12 +334,10 @@ int __Shoot(string str) {
                     write("Your shot smites your undead foe into dust!");
                     foe->cause_typed_damage(foe, "body", foe->query_max_hp() + 500, "divine");
                 }
-            }       
+            }
         }
         tell_room(current,"A "+ capitalize(query_ammo())+" from "+fdir+" hits "+whom+"!",foe);
-//Bows are erroring all over the place on the line about querying a hit message, and I can't
-//seem to find where any are set on standard ammo. Removing this for now to see if it
-//fixes the errors. ~Circe~ 4/30/13
+
         write("You hit "+whom+"!");
         tell_object(foe,"A "+ capitalize(query_ammo())+" from "+fdir+" hits you!");
 
@@ -362,9 +360,7 @@ int __Shoot(string str) {
             return 1;
         }
     }
-//above added by Circe with help from g to hopefully fix problem
-//with the arrows desting before the damage is done.  12/20/04
-//   ammo->use_shots();  moved up to fix bugs of not using ammo *Styx*  11/14/04
+
     if(!userp(foe) && living(foe)){
         env = environment(foe);
         file = base_name(EETO);
@@ -437,8 +433,6 @@ void move_monster(object foe, object player) {
 
         call_out("move_monster",2,foe,player);
     }
-//       foe->set("aggressive",25);
-    //tell_room(environment(TP),foe->query_cap_name()+" enters the room.");
 
 }
 

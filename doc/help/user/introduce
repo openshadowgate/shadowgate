@@ -1,0 +1,15 @@
+%^CYAN%^NAME%^RESET%^
+
+introduce -- make your name known
+
+%^CYAN%^SYNTAX%^RESET%^
+
+introduce
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command provides and audiable name to ther room, idea being that names are not language-specific.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+recognize, recall, who, mail

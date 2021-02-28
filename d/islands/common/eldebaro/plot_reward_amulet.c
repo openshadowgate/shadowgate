@@ -43,16 +43,16 @@ void create()
     "simply too much for you... I wish with all that I am that "+
     "this was not the case. Hell, I wish I were still with you, how I know "+
     "that my soul yearns to see all three of you in this life again. \n"+
-    "I know that I have went to join Kelemvor now, these amulets where "+
+    "I know that I have went to join Lysara now, these amulets where "+
     "my gift to you for the sacrifice that I had to make that day... \n\n"+
     "With them comes a tremendous power... for on those days in which your "+
     "mortal shell is too much, simply %^BOLD%^%^BLACK%^shed%^BOLD%^%^WHITE%^ "+
     "it. BUT heed my warning, you MUST return to your shell quickly, simply "+
     "by willing the amulet to let you %^BOLD%^%^BLACK%^return%^BOLD%^%^WHITE%^. \n\n"+
-    "Also know this, Kelemvor has warned me, that should your mortal shell be "+
+    "Also know this, Lysara has warned me, that should your mortal shell be "+
     "shed, there is a planar being who watches, waiting, and he WILL come for you"+
     " and he will demand of you your mortal life, but I have confidence "+
-    "and have reassured Kelemvor that you would be able to persevere.\n\n"+
+    "and have reassured Lysara that you would be able to persevere.\n\n"+
     "Stay strong my sons, for the journey does not end, it simply changes, and soon "+
     "you too shall come to realize this, \n\n"+
     "Your loving father, \n"+
@@ -62,17 +62,17 @@ void create()
     "divine gifts granted to a man who history has mostly forgotten. His name was "+
     "Marsivian Wyndar. He did not receive the amulets for himself, but rather received "+
     "them as a boon for his three children, Arsheeva, Dyveryll, and Myrkahl. "+
-    "The entire family had long ago devoted itself to the service of Kelemvor and "+
+    "The entire family had long ago devoted itself to the service of Lysara and "+
     "ending any and all undead. Marsivian spent his last breath banishing a powerful "+
     "lich that had for years been terrorizing some community in the northern Dagger "+
     "reaches, a community that itself has been forgotten to time. After his death "+
-    "the amulets were bestowed to his children by a messenger of Kelemvor. "+
+    "the amulets were bestowed to his children by a messenger of Lysara. "+
     "At least if the stories are to be believed. The same stories suggest that "+
     "they were imbued with a powerful magic that allows them to grow in strength as "+
     "the children did. However, their most powerful feature and most dangerous, is the "+
     "ability to become, at will, a ghost and avoid circumstances which would bring about "+
     "certain death. Some rumors suggest that doing so can only happen rarely and "+
-    "that there is a heavy penalty invoked, which could include facing Kelemvor anyway.%^RESET%^");
+    "that there is a heavy penalty invoked, which could include facing Lysara anyway.%^RESET%^");
 
     set_property("lore difficulty",35);
     
@@ -216,14 +216,14 @@ void heart_beat()
         if(timer >= 500 && !warned)
         {
             tell_object(ETO, "%^BOLD%^%^CYAN%^A soothing voice whispers to you: %^RESET%^If you do not return "+
-            "you shall be lost soon... you shall die for real and go to face Kelemvor");
+            "you shall be lost soon... you shall die for real and go to face Lysara");
             warned = 1;
         }
         if(timer >= 650)
         {
             tell_object(ETO, "%^BOLD%^%^CYAN%^A frantic voice calls out to you: %^RESET%^I am sorry... but your time "+
-            "is up.... You go now to face Kelemvor!%^RESET%^");
-            tell_room(EETO, ETOQCN+"%^BOLD%^%^CYAN%^ fades away to meet Kelemvor!%^RESET%^", ETO);
+            "is up.... You go now to face Lysara!%^RESET%^");
+            tell_room(EETO, ETOQCN+"%^BOLD%^%^CYAN%^ fades away to meet Lysara!%^RESET%^", ETO);
             warned = 0;
             using_amulet = 0;
             being_hunted = 0;

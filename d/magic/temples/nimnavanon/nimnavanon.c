@@ -1,5 +1,3 @@
-//Temple of Nim'navanon revised from Silvanus - created by Nienne 2/18
-//updated by ~Circe~ 10/5/19 to include allies and enemies
 #include <std.h>
 inherit "/std/temple";
 
@@ -12,7 +10,7 @@ void create()
     set_light(2);
     set_indoors(0);
     set_temple("nimnavanon");
-    set_name("Temple of Silvanus");
+    set_name("Temple of Nimnavanon");
     set_short("%^BOLD%^%^GREEN%^Temple of Nim'navanon%^RESET%^");
 
     season = season(time());
@@ -38,7 +36,8 @@ void create()
     set_smell("default", "The air is filled with the smell of the forest that surrounds you.");
     set_listen("default", "The wind rustles gently through the trees.");
     set_exits(([
-                   "out" : "/d/tharis/conforest/rooms/path26"
+                   "out" : "/d/tharis/conforest/rooms/path26",
+                   "south":"/d/magic/temples/nimnavanon/pond"
                    ]));
 }
 

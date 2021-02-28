@@ -24,14 +24,14 @@ void create()
     "%^ORANGE%^ marks the entire length of the it.%^RESET%^");
 
     set_lore("%^RESET%^%^GREEN%^These lances were standard equipment for an ancient order "+
-    "of Knights, dedicated to Kelemvor. They were made specifically with the intention of "+
+    "of Knights, dedicated to Lysara. They were made specifically with the intention of "+
     "ripping apart undeath filth. The original creator of them has long been lost to the passage "+
     "of time, but it is believed that he was some Knight of Renown who had dedicated himself to the "+
     "destruction on undeath where ever he might find it. Some say that he imbued the lances to "+
     "emit fire to burn away undead in combat.\n\n"+
     "It is somewhat alarming that these lances have turned up recently on Eldebaro. Supposedly they "+
     "are wielded by several apparent Knights who have lost their sanity and roam the island. Some stories "+
-    "are suggesting that these Knights are the very same ancient order that once served Kelemvor. Others "+
+    "are suggesting that these Knights are the very same ancient order that once served Lysara. Others "+
     "say that they are the ancestors of those Knights. Whichever story is true, if either, remains a "+
     "mystery.%^RESET%^");
     

@@ -30,7 +30,7 @@ void create()
     tmp = "%^RESET%^%^ORANGE%^This bread is known as manna of "+
     MannaType+". The process for preparing it has been lost to time, or at least "+
     "was thought lost, until now. Originally it was prepared for a "+
-    "nomadic cult of Kelemvorian priests, to take with them on their "+
+    "nomadic cult of Lysaraian priests, to take with them on their "+
     "journies. This particular type of manna is said to ";
     switch(MannaType)
     {

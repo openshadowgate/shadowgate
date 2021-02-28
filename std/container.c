@@ -116,15 +116,19 @@ int query_living_visibility(object item, object viewer)
         return 0;
     }
 
+    if (!objectp(viewer)) {
+        return 0;
+    }
+
     if ((item->query_true_invis() && avatarp(item) && !avatarp(viewer)) || !item->is_detectable()) {
         return 0;
     }
 
-    if (item->query_magic_hidden() && !(avatarp(viewer) || viewer->true_seeing())) {
+    if (item->query_magic_hidden() && !(avatarp(viewer) || viewer->detecting_invis() || viewer->true_seeing())) {
         return 0;
     }
 
-    if (item->query_hidden()) {
+    if (item->query_hidden() && !viewer->true_seeing()) {
         return 0;
     }
 

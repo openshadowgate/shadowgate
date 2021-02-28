@@ -35,7 +35,7 @@ void create()
     "Freeholm. Some say that they never left the island. Which could explain why these sickles have "+
     "started turning up there. However, others suggest that they did indeed leave for a long time "+
     "but something brought them back recently. Each sickle was rumored to be able actually reap "+
-    "souls for Kelemvor, but who knows if that is true or not. Most of them are also rumored to "+
+    "souls for Lysara, but who knows if that is true or not. Most of them are also rumored to "+
     "provided increased accuracy in combat.%^RESET%^");
 
     set_property("enchantment",5);
