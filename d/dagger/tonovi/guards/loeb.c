@@ -26,8 +26,10 @@ void create()
     set_hd(LVL + random(10), 1);
     set_max_hp(LVL * 20 + 5000);
     set_hp(TO->query_max_hp());
-    set_new_exp(35, "normal");
+    set_new_exp(50, "boss");
     set_class("fighter");
+    set_guild_level("fighter", LVL);
+    set_mlevel("fighter", LVL);
     add_search_path("/cmds/fighter");
     set_fighter_style("soldier");
     set_speed(30);
@@ -76,10 +78,10 @@ void create()
     }));
     set_func_chance(35);
     set_property("full attacks", 1);
+    set_property("fast healing", 5);
     set_property("magic resistance", random(60) + 10);
     set_ac(-50 - random(10));
     set_detecting_invis(1);
-    set_exp(1);
     set_long("This " + query_gender() + " guard wears the standard uniform of "
              "the Tonovi Guard, with an insignia indicating a rank of Champion.  "
              "Vigilant in " + QP + " duties, " + QS + " patrols the streets "
@@ -116,7 +118,7 @@ void set_guard_stuff()
                            "orc"       : "Don't let the orc escape!  You know it's spying for an invasion.",
                            "undead"    : "Fell undead, destroy it!",
                            "minotaur"  : "Pray to your gods, a minotaur got past the gate!",
-                           "troll "    : "To arm!  Burn the troll!",
+                           "troll "    : "To arms!  Burn the troll!",
                        ]));
     ARREST_MSG = "%^BOLD%^%^CYAN%^Stop in the name of the law!";
     CAPTURE_MSG = "%^BOLD%^You are under arrest, criminal!";
