@@ -16,8 +16,9 @@ void create() {
     set_mystery("lore");
     set_spell_sphere("divination");
     set_syntax("cast CLASS telepathic bond to TARGET");
-    set_description("This spell allows the caster to reach out and touch the mind of a known person, allowing "
-"conversations without speech and potentially over vast distances.");
+    set_description("This spell allows the caster to reach out and touch the mind of a known person, allowing conversations without speech and potentially over vast distances.
+
+Tis spell grands you access to <tell> and <reply> commands.");
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
