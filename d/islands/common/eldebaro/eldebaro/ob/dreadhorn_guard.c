@@ -21,7 +21,7 @@ void create()
     
     set_lore("%^BOLD%^%^GREEN%^The original purpose of this stone has been "+
     "lost. Some legends suggest that it once served as means of protecting "+
-    "priests of Kelemvor. Supposedly they were able to store a fraction of their "+
+    "priests of Lysara. Supposedly they were able to store a fraction of their "+
     "souls in the stone so that should they perish, the stone could be used "+
     "to bring them back to life. Now, however, it seems to contain a strange and "+
     "foul liquid, that is recognizable as deathblade poison. Someone has obviously "+

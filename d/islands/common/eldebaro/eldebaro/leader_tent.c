@@ -18,7 +18,7 @@ void create()
     "several %^RESET%^%^GREEN%^tables%^RESET%^%^ORANGE%^ set up in the center of it. There are various %^BOLD%^maps"+
     "%^RESET%^%^ORANGE%^ and %^BOLD%^writings%^RESET%^%^ORANGE%^ scattered all over them. There are also "+
     "several engravings of an %^BOLD%^%^WHITE%^upright skeletal arm holding a scales of justice%^RESET%^%^ORANGE%^, "+
-    "the recognizable symbol of %^RESET%^%^WHITE%^Kelemvor%^RESET%^%^ORANGE%^ on each of the tables. The material "+
+    "the recognizable symbol of %^RESET%^%^WHITE%^Lysara%^RESET%^%^ORANGE%^ on each of the tables. The material "+
     "of the tent is even more impressive from the inside, it is %^BOLD%^%^CYAN%^m%^BOLD%^%^MAGENTA%^u%^BOLD%^%^WHITE%^"+
     "l%^BOLD%^%^YELLOW%^t%^BOLD%^%^GREEN%^i%^BOLD%^%^CYAN%^c%^BOLD%^%^MAGENTA%^o%^BOLD%^%^WHITE%^l%^BOLD%^%^YELLOW%^o"+
     "%^BOLD%^%^GREEN%^r%^BOLD%^%^CYAN%^e%^BOLD%^%^MAGENTA%^d%^RESET%^%^ORANGE%^ and appears very thick. "+
@@ -43,7 +43,7 @@ void create()
         ({"tables", "writings", "maps", "engravings"}) : "%^BOLD%^%^WHITE%^"+
         "%^RESET%^%^GREEN%^These tables have been set up in the center of the tent here, making the "+
         "tent much more cramped than it otherwise would be. They are covered with writings, maps, and "+
-        "engravings of the symbol of Kelemvor. The writings and maps mostly seem unimportant, however, "+
+        "engravings of the symbol of Lysara. The writings and maps mostly seem unimportant, however, "+
         "one larger map is shrouded by something and no matter how you look at it, you cannot make out "+
         "any locations on it. It seems to be a map of the Eldebaro Island, but for whatever reason it "+
         "has obviously been warded against prying eyes.%^RESET%^",

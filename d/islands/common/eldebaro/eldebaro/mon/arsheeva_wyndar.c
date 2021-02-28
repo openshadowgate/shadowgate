@@ -6,7 +6,7 @@ mapping AttackerInfo;
 object *myImpaled, *myShadowed;
 
 string MYQUEST = "%^BOLD%^%^CYAN%^Achieved:%^BOLD%^%^WHITE%^ "+
-                "Freed The Tormented Kelemvorian Monk,%^BOLD%^%^WHITE%^ "+
+                "Freed The Tormented Lysaraian Monk,%^BOLD%^%^WHITE%^ "+
                 "Arsh%^BOLD%^%^BLACK%^ee%^WHITE%^v%^BLACK%^a %^BOLD%^%^WHITE%^Wynd%^BLACK%^"+
                 "a%^WHITE%^r%^RESET%^";
                 
@@ -19,7 +19,7 @@ string get_my_short()
 {
     string ret;
     ret = "%^BOLD%^%^WHITE%^Arsh%^BOLD%^%^BLACK%^ee%^WHITE%^v%^BLACK%^a %^BOLD%^%^WHITE%^Wynd%^BLACK%^"+
-    "a%^WHITE%^r, Crazed Monk of Kelemvor%^RESET%^";
+    "a%^WHITE%^r, Crazed Monk of Lysara%^RESET%^";
     ret += RUNEPLACE->ar_desc();
     return ret;
 }
@@ -30,7 +30,7 @@ void create()
     ::create();
     set_name("arsheeva wyndar");
     set_id(({"arsheeva", "arsheeva wyndar", "human", "arsheeva wyndar crazed", "monk", 
-    "wyndar", "monk of kelemvor"}));
+    "wyndar", "monk of lysara"}));
     set_gender("male");
     set_race("human");
     add_attack_bonus(10);
@@ -173,7 +173,7 @@ void die(object ob)
             if(member_array(MYQUEST, tmpquests) != -1) continue;
             MyKillers[Amt]->set_mini_quest(MYQUEST, 2000000, MYQUEST);
             tell_object(MyKillers[Amt], "%^BOLD%^%^WHITE%^You have freed the tormented "+
-            "Kelemvorian Monk, Arsheeva Wyndar, but you know that whatever had "+
+            "Lysaraian Monk, Arsheeva Wyndar, but you know that whatever had "+
             "possessed him still lives... somewhere.%^RESET%^");
         }
         message("info", "%^BOLD%^%^BLACK%^A massive storm over the Island of "+
@@ -339,12 +339,12 @@ void explain_myself(int step)
                 case 2:
                     command("speech speak slowly");
                     command("say We came here to find the source of evil... and eradicate it for our "+
-                    "Lord Kelemvor... we were woefully unprepared for what we found.");
+                    "Lord Lysara... we were woefully unprepared for what we found.");
                     command("emote seems to be fighting against something unseen");
                     break;
                 case 3:
                     command("speech speak firmly");
-                    command("say I am sorry for what I do!! Please forgive me Kelemvor!! YOU MUST "+
+                    command("say I am sorry for what I do!! Please forgive me Lysara!! YOU MUST "+
                     "STOP ME!!!");                    
                     break;
             }
@@ -420,7 +420,7 @@ void explain_myself(int step)
                 case 3:
                     command("emote closes his eyes and focuses deeply");
                     command("speech say softly");
-                    command("say soon I shall meet my Lord Kelemvor, but your battle is just now "+
+                    command("say soon I shall meet my Lord Lysara, but your battle is just now "+
                     "beginning... a darkness rises from the depths of this land, a darkness so "+
                     "profound that the entire world will shake!!");
                     break;

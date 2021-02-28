@@ -27,7 +27,7 @@ void create() {
     
     set_lore("%^BOLD%^%^BLACK%^This longbow was rumored to have been one of the "+
     "most powerful weapons ever wielded by Arsheeva Wyndar. It was said to have been "+
-    "a gift from Kelemvor himself, but whether or not that is true is a matter of debate. "+
+    "a gift from Lysara himself, but whether or not that is true is a matter of debate. "+
     "What is known about the bow is that it bestows an incredible dexterity on the "+
     "wielder and is said to possess the ability to reign down destruction during "+
     "combat, the likes of which have rarely ever been seen before.%^RESET%^");

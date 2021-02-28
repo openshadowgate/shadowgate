@@ -56,13 +56,13 @@ void create()
     object ob;
     ::create();
     set_name("dyveryll wyndar");
-    set_id(({"wyndar", "dyveryll wyndar", "psionist of kelemvor", "human", "dyveryll"}));
+    set_id(({"wyndar", "dyveryll wyndar", "psionist of lysara", "human", "dyveryll"}));
     set_gender("male");
     set_race("human");
 
     set_short("%^RESET%^%^CYAN%^Dyv%^BOLD%^e%^RESET%^%^CYAN%^ryll "+
     "Wynd%^BOLD%^a%^RESET%^%^CYAN%^r, proud psionist of %^BOLD%^%^WHITE%^"+
-    "Kelemvor%^RESET%^");
+    "Lysara%^RESET%^");
 
     set_long((:TO, "get_my_long":));    
     
@@ -236,7 +236,7 @@ void do_brother_explain(object ob, int step)
         case 0:
             command("speech say with an obvious sadness");
             command("say The brother that I speak of, is Arsheeva Wyndar. "+
-            "He considered himself a warrior-priest of our Lord, Kelemvor. "+
+            "He considered himself a warrior-priest of our Lord, Lysara. "+
             "In truth, he was what you might refer to as a monk, but....");
             command("emote smiles briefly his eyes full of sadness.");
             break;
@@ -249,7 +249,7 @@ void do_brother_explain(object ob, int step)
             break;
         case 2:
             command("say but my brother, he was powerful. Some of us thought "+
-            "that maybe Kelemvor himself had touched him, this is how powerful he "+
+            "that maybe Lysara himself had touched him, this is how powerful he "+
             "had become.");
             command("emote stares off in the distance, obviously quite disturbed");
             command("say Something on this island, coming from the island itself "+
