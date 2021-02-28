@@ -120,9 +120,9 @@ string class_str(object ob)
     string myclass, level;
     int i;
 
-    str = arrange_string("error", 18);
+    str = arrange_string("error", 20);
     classes = ob->query_classes();
-    if(!sizeof(classes)) return arrange_string("None", 18);
+    if(!sizeof(classes)) return arrange_string("None", 20);
 
     if(sizeof(classes) == 1)
     {
@@ -132,7 +132,7 @@ string class_str(object ob)
         {
             myclass += "%^RESET%^%^BOLD%^ A%^RESET%^";
         }
-        myclass = arrange_string(myclass, 18);
+        myclass = arrange_string(myclass, 20);
         
         return myclass;
     }
@@ -152,9 +152,9 @@ string class_str(object ob)
     }
     if(ob->query("is_assassin")) {
       str += " %^RESET%^%^BOLD%^A%^RESET%^";
-      return arrange_string(str, 18);
+      return arrange_string(str, 20);
     }
-    return arrange_string(str, 18);
+    return arrange_string(str, 20);
 }
 
 
