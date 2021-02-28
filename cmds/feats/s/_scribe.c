@@ -109,6 +109,12 @@ void execute_feat()
     }
 
     tmp = MAGIC_D->get_spell_file_name(str);
+
+    if (regexp(spell, ".*(cure|cause).*wounds") || regexp(spell, "repair.*undead") || regexp(spell, (".*(heal|harm)"))) {
+        tell_object(caster,"You puzzle, unsure how to scribe this spell.");
+        return 1;
+    }
+
     if (!objectp(find_object_or_load(tmp))) {
         tell_object(caster, "You don't know a spell named " + str + "."); return 1;
     }

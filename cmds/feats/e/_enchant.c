@@ -128,7 +128,7 @@ void select_spell(string str, object ob)
     }
     write("%^BOLD%^%^RED%^You have selected: %^GREEN%^" + str + "...");
 
-    if (regexp(spell, ".*cure.*wounds") || regexp(spell, ".*cause.*wounds") || regexp(spell, "repair.*undead")|| spell == "heal" || spell == "harm") {
+    if (regexp(spell, ".*(cure|cause).*wounds") || regexp(spell, "repair.*undead")|| regexp(spell, (".*(heal|harm)"))) {
         tell_object(caster,"%^BOLD%^%^RED%^You can not use channeling spells such as harm or heal.");
         write("%^YELLOW%^Enter spell name:");
         write("~q to cancel");
