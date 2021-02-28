@@ -24,6 +24,7 @@ void create() {
    set_type("piercing");
    set_damage_type("piercing");
    set_hit((:TO,"hit_fun":));
+   set_property("able to cast",1);
 }
 
 void __ActuallyUnwield() {
