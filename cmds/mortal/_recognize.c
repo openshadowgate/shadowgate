@@ -65,7 +65,7 @@ You can recall list of recognized people with <recall relationships>.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-recall, fixrecognized, who, mail
+recall, who, mail
 HELP
     );
     return 1;
