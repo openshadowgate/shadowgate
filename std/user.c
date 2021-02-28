@@ -5283,13 +5283,20 @@ int test_passive_perception()
     if (!objectp(ETO)) {
         return;
     }
+
+    if (TO->query_watched() < 1) {
+        return;
+    }
+
     if (FEATS_D->usable_feat(TO, "spot")) {
         perception = (int)TO->query_skill("perception");
     } else {
         perception = (int)TO->query_skill("perception") * 3 / 4;
     }
+
     living = filter_array(all_living(ETO) - ({ TO }), "is_non_immortal", FILTERS_D);
     numnotvisible = 0;
+
     for (i = 0; i < sizeof(living); i++) {
         targ = living[i];
         if (!objectp(targ)) {
