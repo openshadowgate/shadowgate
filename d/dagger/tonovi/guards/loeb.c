@@ -2,6 +2,7 @@
 #include "/d/common/common.h"
 
 #define CITYLAW "tonovi law"
+#define LVL 70
 
 inherit "/std/guardsman.c";
 
@@ -21,10 +22,11 @@ void create()
     set_short("%^CYAN%^Marvin Loeb%^BLACK%^, C%^RESET%^%^CYAN%^h%^BOLD%^a%^WHITE%^m%^BLACK%^pion of the C%^RESET%^%^CYAN%^i%^BOLD%^t%^WHITE%^y %^BLACK%^G%^RESET%^%^CYAN%^u%^BOLD%^a%^WHITE%^r%^BLACK%^d%^RESET%^");
     set_gender(1);
     set_race("human");
-    set_hd(70 + random(10), 1);
-    set_max_hp(20000);
+    set_level(LVL);
+    set_hd(LVL + random(10), 1);
+    set_max_hp(LVL * 20 + 5000);
     set_hp(TO->query_max_hp());
-    set_new_exp(20, "normal");
+    set_new_exp(35, "normal");
     set_class("fighter");
     add_search_path("/cmds/fighter");
     set_fighter_style("soldier");
