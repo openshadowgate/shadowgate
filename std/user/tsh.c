@@ -209,6 +209,7 @@ string write_prompt()
         prompt = replace_string(prompt, "$t", ""+sprintf("%2d",hour(time()))+":"+sprintf("%.2d",minutes(time())));
         prompt = replace_string(prompt, "$B", ""+bloodlust2string(this_player()));
         prompt = replace_string(prompt, "$e", ""+expperc);
+        prompt = replace_string(prompt, "$d", ""+"cmds/mortal/_hp.c"->intox2str(TP->query_intox()*100 / TP->query_formula()));
         if (stringp(this_object()->query("warlock_blast_type"))) {
             prompt = replace_string(prompt, "$E", "" + this_object()->query("warlock_blast_type") + "");
         } else {
