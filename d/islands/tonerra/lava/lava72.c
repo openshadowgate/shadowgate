@@ -9,6 +9,8 @@ void create(){
   set_light(1);
   set_property("no teleport",1);
   set_property("used sticks",1);
+  set_terrain(BUILT_CAVE);
+  set_travel(PAVED_ROAD);
   set_short("Before the Temple");
   set_long(
 @DESC

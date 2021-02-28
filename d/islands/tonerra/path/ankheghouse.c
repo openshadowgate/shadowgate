@@ -11,6 +11,8 @@ void create(){
 	set_name("ankheghouse");
 	set_short("Ankheghouse");
 	set_property("indoors",1);
+	set_terrain(BUILT_CAVE);
+    set_travel(FRESH_BLAZE);
 	set_light(0);
 	set_long(
 @OLI
