@@ -18,7 +18,7 @@ void create()
 %^BOLD%^%^BLACK%^Arch in the obsidian wall signifies the entrance. The main road passes through to the east.
 ");
     set_exits(([
-                   "west": "/d/dagger/road/road25",
+                   //"west": "/d/dagger/road/road25",
                    "east":ROOMS + "/necro4",
                    ]));
 }

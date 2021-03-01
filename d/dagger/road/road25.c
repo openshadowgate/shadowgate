@@ -20,7 +20,7 @@ void create() {
     set_exits(([
 	"north" : RPATH "road26",
 	"south" : RPATH "road24",
-	"east" : "/d/dagger/nurval/room/necro1",
+        //"east" : "/d/dagger/nurval/room/necro1",
       ]));
 }
 void reset()
@@ -28,12 +28,4 @@ void reset()
     ::reset();
     if(!present("street_light",TO))
         new("/d/common/obj/misc/street_light")->move(TO);
-    if(!present("skeleton",TO))
-        new("/d/magic/mon/skeleton")->move(TO);
-    if(!present("skeleton 2",TO))
-        new("/d/magic/mon/skeleton")->move(TO);
-    if(!present("skeleton 3",TO))
-        new("/d/magic/mon/skeleton")->move(TO);
-    if(!present("skeleton 4",TO))
-        new("/d/magic/mon/skeleton")->move(TO);
 }
