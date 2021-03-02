@@ -22,6 +22,8 @@ void create() {
 
 void spell_effect(int prof) {
    int tmp;
+   
+   spell_successful();
    if(interactive(caster)) {
       tell_object(caster,"%^RESET%^%^CYAN%^You touch your fingers to your "
          "temples and feel toxins evaporate from your body.%^RESET%^");
@@ -38,7 +40,6 @@ void spell_effect(int prof) {
       caster->use_stamina(-1*tmp);
    }
    dest_effect();
-   spell_successful();
 }
 
 void dest_effect() {
