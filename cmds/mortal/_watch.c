@@ -43,11 +43,11 @@ watch - watch your back
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-While watching your back you get bonus in intercepting thief stabs.
+Watch activates passive perception. In addition to that, while watching your back you get bonus in intercepting thief stabs.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-stab, thief, perception
+spot, stab, thief, perception
 "
         );
 }
