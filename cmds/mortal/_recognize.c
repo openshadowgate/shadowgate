@@ -26,7 +26,6 @@ int cmd_recognize(string str)
     }else {
         if (userp(ob)) {
             write("You will recognize " + who + " as " + capitalize(as) + ".");
-            TP->addRelationship(ob, as);
 
             if (!(TP->isKnown(ob->query_name()))) {
                 int expdelta;
@@ -38,6 +37,8 @@ int cmd_recognize(string str)
                 TP->add_general_exp(TP->query_classes()[0], expdelta);
                 TP->remove_property("ignore tax");
             }
+
+            TP->addRelationship(ob, as);
 
         }else {
             write("You can only recognize other players at this time.");
