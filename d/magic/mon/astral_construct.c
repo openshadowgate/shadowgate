@@ -144,7 +144,7 @@ void heart_beat()
 
 void die(object obj)
 {
-    if (objectp(cast)) {
+    if (objectp(caster)) {
         caster->remove_property("has_elemental");
     }
     tell_room(ETO, "%^BOLD%^%^CYAN%^Unable to maintain corporeal form, the construct returns to the astral plane.%^RESET%^");
