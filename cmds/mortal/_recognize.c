@@ -28,16 +28,16 @@ int cmd_recognize(string str)
             write("You will recognize " + who + " as " + capitalize(as) + ".");
             TP->addRelationship(ob, as);
 
-            /* if (!(TP->isKnown(ob->query_name()) && random(3))) { */
-            /*     int expdelta; */
-            /*     int thelevel = TP->query_level(); */
+            if (!(TP->isKnown(ob->query_name()))) {
+                int expdelta;
+                int thelevel = TP->query_level();
 
-            /*     expdelta = abs(EXP_NEEDED[thelevel + 1] - EXP_NEEDED[thelevel]) / 12; */
+                expdelta = abs(EXP_NEEDED[thelevel + 1] - EXP_NEEDED[thelevel]) / 9;
 
-            /*     TP->set_property("ignore tax", 1); */
-            /*     TP->add_general_exp(TP->query_classes()[0], expdelta); */
-            /*     TP->remove_property("ignore tax"); */
-            /* } */
+                TP->set_property("ignore tax", 1);
+                TP->add_general_exp(TP->query_classes()[0], expdelta);
+                TP->remove_property("ignore tax");
+            }
 
         }else {
             write("You can only recognize other players at this time.");
@@ -61,7 +61,7 @@ recognize%^ORANGE%%^ULINE%^WHO%^RESET%^as%^ORANGE%%^ULINE%^NAME%^RESET % ^
 
 Allows you to recognize another player by an id, such as race, and assign them a%^ORANGE%%^ULINE%^NAME%^RESET % ^.
 
-Recognizing someone for the first time sometimes grants you a small amount of exp towards next level.
+Recognizing someone for the first time grants you a small amount of exp towards next level.
 
 You can recall list of recognized people with <recall relationships>.
 

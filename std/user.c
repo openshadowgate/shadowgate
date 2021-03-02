@@ -4135,10 +4135,35 @@ void addRelationship(object who, string as)
 
 int remove_relationship(string name)
 {
-    if(!stringp(name)) { return 0; }
-    if(member_array(name,keys(relationships)) == -1) { return 0; }
-    map_delete(relationships,lower_case(name));
+    if (!stringp(name)) {
+        return 0;
+    }
+    if (member_array(name, keys(relationships)) == -1) {
+        return 0;
+    }
+    map_delete(relationships, lower_case(name));
     return 1;
+}
+
+int remove_relationship_profile(string name, string profile)
+{
+    string s1, s2;
+    int res = 0;
+
+    if (!stringp(name)) {
+        return 0;
+    }
+
+    if (member_array(name, keys(relationships)) == -1) {
+        return 0;
+    }
+
+    if (member_array(profile, keys(relationships[name])) == -1) {
+        return 0;
+    }
+
+    map_delete(relationships[name], profile);
+    return res;
 }
 
 mapping getRelationships()
@@ -4150,6 +4175,9 @@ mapping getRelationships()
     return relationships;
 }
 
+/**
+ * is known under current profile?
+ */
 int isKnown(string who)
 {
     mapping profiles = ([]);
@@ -4162,32 +4190,29 @@ int isKnown(string who)
         return 0;
     }
 
-    if(!TO->query("relationships_converted"))
-    {
-        return member_array(who,keys(relationships)) != -1;
+    if (member_array(who, keys(relationships)) == -1) {
+        return 0;
     }
-    else
-    {
 
-        if(member_array(who,keys(relationships)) == -1) { return 0; }
-
-        if(!objectp(find_player(who)))
-        {
-            if(!user_exists(who)) { return 0; }
-            profile = "/adm/daemon/user_call.c"->user_call(who,"query","relationship_profile");
+    if (!objectp(find_player(who))) {
+        if (!user_exists(who)) {
+            return 0;
         }
-        else
-        {
-            profile = (string)find_player(who)->query("relationship_profile");
-        }
-
-        if(!profile) { profile = "default"; }
-        profiles = relationships[who];
-        profile_names = keys(profiles);
-        if(member_array(profile,profile_names) == -1) { return 0; }
-
-        return 1;
+        profile = "/adm/daemon/user_call.c"->user_call(who, "query", "relationship_profile");
+    }else {
+        profile = find_player(who)->query("relationship_profile");
     }
+
+    if (!profile) {
+        profile = "default";
+    }
+    profiles = relationships[who];
+    profile_names = keys(profiles);
+    if (member_array(profile, profile_names) == -1) {
+        return 0;
+    }
+
+    return 1;
 }
 
 string knownAs(string who)
@@ -4195,33 +4220,32 @@ string knownAs(string who)
     string profile;
     object obj;
 
-    if(!isKnown(who)) { return 0; }
+    if (!isKnown(who)) {
+        return 0;
+    }
 
-    if(!TO->query("relationships_converted"))
-    {
-        return lower_case(relationships[who]);
-    }
-    else
-    {
-        if(!objectp(find_player(who)))
-        {
-            if(!user_exists(who)) { return 0; }
-            profile = "/adm/daemon/user_call.c"->user_call(who,"query","relationship_profile");
+    if (!objectp(find_player(who))) {
+        if (!user_exists(who)) {
+            return 0;
         }
-        else
-        {
-            profile = (string)find_player(who)->query("relationship_profile");
-        }
-        if(!profile) { profile = "default"; }
-        return lower_case(relationships[who][profile]);
+        profile = "/adm/daemon/user_call.c"->user_call(who, "query", "relationship_profile");
+    }else {
+        profile = (string)find_player(who)->query("relationship_profile");
     }
+    if (!profile) {
+        profile = "default";
+    }
+    return lower_case(relationships[who][profile]);
 }
 
 string realName(string who)
 {
     foreach(string str in keys(relationships))
-        if(relationships[str]["default"] == lower_case(who))
+    {
+        if (relationships[str]["default"] == lower_case(who)) {
             return str;
+        }
+    }
 }
 
 /**

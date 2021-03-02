@@ -41,10 +41,16 @@ void spell_effect(int prof)
     }
 
     if (!(do_save(target, -4) && mind_immunity_damage(target))) {
+        string caster_profile = caster->query("relationship_profile");
+
+        if (!caster_profile) {
+            caster_profile = "default";
+        }
+
         spell_successful();
         tell_object(caster, "%^BLUE%^You sense your memory attempt succeeded, and your victim is momentarily dazed.%^RESET%^");
         target->set_paralyzed(roll_dice(1, 3) * 8, "%^RESET%^%^BLUE%^You feel oblivious and momentarily distracted... As if you have forgotten something.%^RESET%^");
-        target->remove_relationship(caster->query_true_name());
+        target->remove_relationship_profile(caster->query_true_name(), caster_profile);
     }else {
         tell_object(caster, "%^BLUE%^You sense your memory altering attempt failed.%^RESET%^");
     }
