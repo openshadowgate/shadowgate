@@ -37,6 +37,8 @@ int preSpell()
 }
 
 void spell_effect(int prof) {
+    
+    spell_successful();
     tell_object(caster, "%^RED%^You feel a greater understanding of combat filling your mind.");
     caster->set_property("keen_edge",1);
     if(member_array("lethal strikes",(string*)caster->query_temporary_feats()) == -1) {
