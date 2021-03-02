@@ -38,7 +38,7 @@ void create()
     set_exits(([
                    "out" : "/d/tharis/conforest/rooms/path26",
                    "south":"/d/magic/temples/nimnavanon/pond",
-                   "east":"/d/magic/temples/nimnavanon/mound"
+                   "east":"/d/magic/temples/nimnavanon/hall"
                    ]));
 }
 
