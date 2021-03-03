@@ -106,7 +106,7 @@ int pick(string str)
             tell_object(TP, "You pick a handful of ripe salmonberries.");
             tell_room(ETP, "" + TP->query_cap_name() + " picks a handful of ripe salmonberries.", TP);
             berrycount -= 1;
-            new("(((OBJECT BERRIES)))")->move(TP);
+            new("/d/magic/temples/nimnavanon/strawberries.c")->move(TP);
             if (berrycount < 1) {
                 add_item("bushes", "%^RED%^Sa%^BOLD%^lm%^RESET%^%^RED%^o%^BOLD%^n%^RESET%^%^RED%^berr%^BOLD%^y %^GREEN%^bushes grow close to the pond, but they have been picked clean.%^RESET%^");
             }
