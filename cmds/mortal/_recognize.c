@@ -21,8 +21,8 @@ int cmd_recognize(string str)
         return help();
     }
 
-    if (!TP->query_time_delay("last_move"), 120) {
-        return notify_fail("You struggle to memorize anyone, as you just arrived here.");
+    if (!TP->query_time_delay("last_move", 120)) {
+        return notify_fail("You struggle to memorize anyone, as you just arrived here.\n");
     }
 
     ob = present(who, ETP);
