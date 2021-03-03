@@ -21,7 +21,7 @@ int cmd_recognize(string str)
         return help();
     }
 
-    if (!TP->query_time_delay("last_move", 60)) {
+    if (!TP->query_time_delay("last_move", 60) && !newbiep(TP)) {
         return notify_fail("You struggle to memorize anyone, as you just arrived here.\n");
     }
 
@@ -37,7 +37,7 @@ int cmd_recognize(string str)
 
             write("You will recognize " + who + " as " + capitalize(as) + ".");
 
-            if (!(TP->isKnown(ob->query_name()))) {
+            if (!newbiep(TP) && !(TP->isKnown(ob->query_name()))) {
                 int expdelta;
                 int thelevel = TP->query_level();
 
