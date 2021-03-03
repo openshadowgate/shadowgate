@@ -10,7 +10,7 @@ void create()
     set_property("light", 2);
 
     set_climate("temperate");
-    set_short("%^ORANGE%^ common hall");
+    set_short("%^ORANGE%Common hall");
     set_long(query_short() + "\n" + "%^ORANGE%^Inside the mound the walls are made of stone and the ceiling of wooden logs. Vividly colored %^MAGENTA%^t%^MAGENTA%^a%^MAGENTA%^p%^BOLD%^%^BLACK%^est%^RESET%^%^MAGENTA%^r%^BOLD%^%^BLACK%^ies%^RESET%^%^ORANGE%^ hang from the walls and creates small alocoves and compartments along the side of the building. A huge fire burns in the middle of the hall. Large %^ORANGE%^h%^BOLD%^%^BLACK%^o%^RESET%^%^ORANGE%^l%^BOLD%^%^BLACK%^e%^RESET%^%^ORANGE%^s%^ORANGE%^ in the ceiling lets out the %^BOLD%^%^BLACK%^s%^RESET%^%^WHITE%^m%^BOLD%^%^BLACK%^ok%^RESET%^%^WHITE%^e%^BOLD%^%^BLACK%^,%^RESET%^%^ORANGE%^ and lights up the room in the daytime. %^BOLD%^%^BLACK%^Ben%^RESET%^%^ORANGE%^c%^BOLD%^%^BLACK%^h%^RESET%^%^ORANGE%^e%^BOLD%^%^BLACK%^s%^RESET%^%^ORANGE%^ draped in fur and %^BOLD%^%^BLACK%^c%^RESET%^%^ORANGE%^h%^ORANGE%^a%^BOLD%^%^BLACK%^i%^RESET%^%^ORANGE%^r%^ORANGE%^s%^ORANGE%^ made of roots provides to sit and eat or talk. Drying herbs hang from the ceiling.
 ");
     set_smell("default", "%^ORANGE%^It smells of %^BOLD%^%^BLACK%^earth%^RESET%^%^ORANGE%^, %^BOLD%^%^BLACK%^a%^BLACK%^sh, %^BLACK%^s%^WHITE%^m%^BLACK%^oke%^ORANGE%^ and %^ORANGE%^c%^BOLD%^%^BLACK%^oo%^RESET%^%^ORANGE%^k%^ORANGE%^e%^ORANGE%^d %^BOLD%^%^BLACK%^m%^ORANGE%^e%^ORANGE%^a%^ORANGE%^t%^ORANGE%^.");
