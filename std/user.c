@@ -274,21 +274,27 @@ void convert_to_new_class_type()
 
 void make_new_hitpoint_rolls(object obj)
 {
-    string *classes;
-    int hp=30,i,j,num,level,old,*rolls;
+    string* classes;
+    int hp = 30, i, j, level, old, * rolls;
 
-    if(!objectp(obj)) { return; }
-    if(avatarp(obj)) { return; }
+    if (!objectp(obj)) {
+        return;
+    }
+    if (avatarp(obj)) {
+        return;
+    }
 
     obj->delete("hp_array");
 
-    if(pointerp(obj->query("hp_array"))) { return; }
+    if (pointerp(obj->query("hp_array"))) {
+        return;
+    }
 
-    classes = (string *)obj->query_classes();
+    classes = (string*)obj->query_classes();
     old = (int)obj->query_max_hp();
 
     for (i = 0; i < sizeof(classes); i++) {
-        for (j = 1; j <= (int) obj->query_class_level(classes[i]); j++) {
+        for (j = 1; j <= (int)obj->query_class_level(classes[i]); j++) {
             level++;
             hp += "/adm/daemon/advance_d"->get_hp_bonus(classes[i], query_base_stats("constitution"), level, obj);
         }
@@ -1212,18 +1218,19 @@ void setup_messages() {
   }
 }
 
-void check_guilds(){
-  int i,j;
-  string *removes = ({});
-  i=sizeof(guild);
-  for(j = 0;j<i;j++) {
-    if(!"/daemon/guilds_d"->is_member(guild[j],query_name())) {
-      removes += guild[j];
+void check_guilds()
+{
+    int i, j;
+    string* removes = ({});
+    i = sizeof(guild);
+    for (j = 0; j < i; j++) {
+        if (!"/daemon/guilds_d"->is_member(guild[j], query_name())) {
+            removes += guild[j];
+        }
     }
-  }
-  for(i=0;i<sizeof(removes);i++) {
-    remove_guild(removes[i]);
-  }
+    for (i = 0; i < sizeof(removes); i++) {
+        remove_guild(removes[i]);
+    }
 }
 
 /**
@@ -1232,8 +1239,8 @@ void check_guilds(){
  */
 void setup()
 {
-    int holder1, holder2, tempage, age, hp, i, j, feats;
-    string tmp, * classes, * myknown;
+    int holder1, holder2, age;
+    string tmp;
     object ob;
 
     set_living_name(query_name());
@@ -1867,7 +1874,7 @@ void restart_heart() {
 void resetLevelForExp(int expLoss)
 {
     mapping my_levels;
-    string *classes,curclass,myclass,active_class;
+    string active_class;
     int i, hp_loss,*rolls,tmp;
 
     add_exp(expLoss);
@@ -1921,9 +1928,9 @@ mixed query_death_place() { return get_death_place(); }
 
 nomask void die()
 {
-    object ob, corpse, money_ob, *stuff, klr,*keeping=({}),*debind=({});
-    string *currs,curclass, seen, msg_death, reztype;
-    int tmp, hp_loss, i,j, room,num;
+    object ob, corpse, klr;
+    string seen, msg_death, reztype;
+    int room;
     if (wizardp(TO) && !query_killable() )
     {
         message("death", "You are immortal and cannot die.", TO);
@@ -2483,7 +2490,7 @@ string *query_message_classes()
 
 varargs void save_messages(string msg_class, string msg, string the_lang)
 {
-    int i, j;
+    int j;
     if (member_array(msg_class, static_user["saveable"]) == -1) {
         return;
     }
@@ -2500,8 +2507,7 @@ varargs void save_messages(string msg_class, string msg, string the_lang)
 void receive_message(string msg_class, string msg)
 {
     string *words, str, pre, post, intro, who, blah, blah2, known,the_lang,tmp="",temp, omsg, pname, owho;
-    int i, max, x, do_wrap,first_words,second_words, true_msg;
-    function fp;
+    int i, max, x, first_words,second_words, true_msg;
     object ob;
     mapping TermInfo;
 
@@ -2764,12 +2770,9 @@ void receive_message(string msg_class, string msg)
     receive(true_msg+static_user["term_info"]["RESET"]);
 }
 
-//obey_command func is for making players obey commands when they have
-// the "compliant" property set. It's for simulating drugged or
-// hypnotised states. Lujke
 void obey_command(string command, object commander){
-    int para, count, i;
-    string para_message, lang, name, comm, *words;
+    int para, count;
+    string para_message, lang, name, comm;
     if (!stringp(command)){
       return;
     }
@@ -3318,7 +3321,6 @@ string query_first_site() {
 void set_primary_start(string str)
 {
     object ob;
-    string file;
 
     if (!(ob = find_object_or_load(str))) return;
     if(!clonep(ob))
@@ -4147,7 +4149,6 @@ int remove_relationship(string name)
 
 int remove_relationship_profile(string name, string profile)
 {
-    string s1, s2;
     int res = 0;
 
     if (!stringp(name)) {
@@ -4181,7 +4182,6 @@ mapping getRelationships()
 int isKnown(string who)
 {
     mapping profiles = ([]);
-    object obj;
     string *profile_names=({}),profile;
 
     if (!relationships)
@@ -4218,7 +4218,6 @@ int isKnown(string who)
 string knownAs(string who)
 {
     string profile;
-    object obj;
 
     if (!isKnown(who)) {
         return 0;
@@ -4368,12 +4367,8 @@ string getDefaultDescriptivePhrase(){
   return capitalize(article(str)+" "+str);
 }
 
-/* Adjusting the below so Planetouched appear as their subrace
-~Circe~ 1/29/13
-Adjusting again to allow for the option of subrace or not ~Circe~ 2/9/13
-*/
 string getWholeDescriptivePhrase(){
-  string desc, str,the_race=0;
+  string str,the_race=0;
   string subrace = (string)query("subrace");
   string phrase = getDescriptivePhrase();
   object shape;
@@ -4421,11 +4416,6 @@ string getWholeDescriptivePhrase(){
   }
 
   return capitalize(article(str)+" "+str);
-  /*
-    desc = (getDescriptivePhrase()?getDescriptivePhrase()+" ":"");
-    str = capitalize(article(desc+query_race()))+" "+desc+query_race();
-    return str;
-  */
 }
 
 string getParsableName()
