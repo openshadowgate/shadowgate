@@ -98,8 +98,6 @@ int quietness;
 mapping rem_rooms, rem_obs, study_mons;
 string *rem_rooms_sort, *rem_obs_sort, study_mons_sort;
 
-int test_passive_perception();
-
 nosave int user_ticker = 0; // timer increased once per heartbeat
 int killable;
 
@@ -148,31 +146,10 @@ int advance_death_time()
     if (TO->query("just_been_pkilled")) {
         TO->set("pk_death_age", player_age);
         TO->set("pk_death_time", (time() + PK_DEATH_RL_TIME));
-// this was resetting the PK flag every normal death. Not helpful!
     }
     death_time = time() + PK_DEATH_RL_TIME;
     return 1;
 }
-
-//Favored Ranger stuff
-int is_favored_enemy(object ob);
-int is_favored_terrain(object room);
-int add_favored_enemy(int x, string str);
-int remove_favored_enemy(int x);
-int add_favored_terrain(int x, string str);
-int remove_favored_terrain(int x);
-string set_mastered_terrain(string str);
-string query_mastered_terrain();
-string set_chosen_animal(string str);
-string query_chosen_animal();
-
-//Paladin Dedication
-string set_dedication(string str);
-string query_dedication();
-
-// *** END OF PROTOTYPING ** (gar)
-
-//// Start of overrides for new logout-time track
 
 void save_player(string name) {
    quit_time = time();
@@ -180,7 +157,10 @@ void save_player(string name) {
    return;
 }
 
-int query_quit_time() { return quit_time; }
+int query_quit_time()
+{
+    return quit_time;
+}
 
 // changing to new lower numbers *Styx* 5/22/06
 int do_exceptional_str() {
@@ -201,24 +181,44 @@ int do_exceptional_str() {
   }
 }
 
-int filter_autowear(string awstr) {
-   if (undefinedp(awstr)) return 0;
-  if (awstr == 0) return 0;
-  if (explode(awstr,"##")[1] != query_true_name()) return 0;
- return 1;
+int filter_autowear(string awstr)
+{
+    if (undefinedp(awstr)) {
+        return 0;
+    }
+    if (awstr == 0) {
+        return 0;
+    }
+    if (explode(awstr, "##")[1] != query_true_name()) {
+        return 0;
+    }
+    return 1;
 }
 
-int sort_autowear(string awstr1, string awstr2) {
-  int aw1, aw2;
-  if (awstr1 == 0) return -1;
-  if (awstr1 == "") return -1;
-  if (awstr2 == "") return 1;
-  if (awstr2 == 0) return 1;
-  aw1 =atoi(explode(awstr1,"##")[0]);
-  aw2 =atoi(explode(awstr2,"##")[0]);
-  if (aw1 == aw2) return 0;
-   if (aw1 < aw2) return -1;
-  return 1;
+int sort_autowear(string awstr1, string awstr2)
+{
+    int aw1, aw2;
+    if (awstr1 == 0) {
+        return -1;
+    }
+    if (awstr1 == "") {
+        return -1;
+    }
+    if (awstr2 == "") {
+        return 1;
+    }
+    if (awstr2 == 0) {
+        return 1;
+    }
+    aw1 = atoi(explode(awstr1, "##")[0]);
+    aw2 = atoi(explode(awstr2, "##")[0]);
+    if (aw1 == aw2) {
+        return 0;
+    }
+    if (aw1 < aw2) {
+        return -1;
+    }
+    return 1;
 }
 
 int execute_autowear(string awstr) {

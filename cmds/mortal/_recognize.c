@@ -20,6 +20,11 @@ int cmd_recognize(string str)
     if (sscanf(str, "%s as %s", who, as) != 2) {
         return help();
     }
+
+    if (!TP->query_time_delay("last_move"), 120) {
+        return notify_fail("You struggle to memorize anyone, as you just arrived here.");
+    }
+
     ob = present(who, ETP);
     if (!objectp(ob) || wizardp(ob)) {
         return notify_fail("There is no " + who + " here.\n");

@@ -17,15 +17,6 @@ nosave private int no_clean;
 private int size;
 nosave private object last_location;
 
-void set_weight(int x);
-void set_no_clean(int x);
-int query_no_clean();
-int clean_up();
-void set_last_location(object ob);
-int query_weight();
-int move(mixed dest);
-int remove();
-
 void set_size(int x) { size = x;}
 
 int query_size() {

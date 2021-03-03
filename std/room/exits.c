@@ -219,141 +219,149 @@ int blocked(string exit) {
 
 int use_exit()
 {
-    string verb,paths;
-    string *tmpstrs;
-    object incoming,effect,obj;
-    int val,stmp, flee_delay;
+    string verb, paths;
+    string* tmpstrs;
+    object incoming, effect, obj;
+    int val, stmp, flee_delay;
 
-    if (!objectp(TP)) return 1;
+    if (!objectp(TP)) {
+        return 1;
+    }
     if (this_player()->query_paralyzed() || TP->query_bound() || TP->query_tripped() || TP->query_unconscious()) {
-        TP->send_paralyzed_message("info",TP);
+        TP->send_paralyzed_message("info", TP);
         return notify_fail("");
     }
 
-    if ( this_player()->query_disable()  ) {
+    if (this_player()->query_disable()) {
         write("You can not exit while doing something else.");
         return 1;
     }
 
     if ((int)TP->query_condition_percent() < 1) {
-        return notify_fail("You are too tired to go on. (This is temperary, ultimately you will pass out at this stage. Think about how you move and comment on it to the wizes.)\n");
+        return notify_fail("You are too tired to go on.\n");
     }
 
-    if (!(verb = query_verb())) return 0;
+    if (!(verb = query_verb())) {
+        return 0;
+    }
 
-
-    if ((paths = query_exit(verb)) == ROOM_VOID)
+    if ((paths = query_exit(verb)) == ROOM_VOID) {
         if ((paths = query_climb_exit(verb, 0)) == ROOM_VOID) {
             write("That doesn't lead to anywhere.");
             return 1;
         }
+    }
 
     if (blocked(verb)) {
         return 1;
     }
-    if (sizeof(TP->query_attackers()) &&  verb != (string)TP->query_property("true moving"))
-    {
+    if (sizeof(TP->query_attackers()) && verb != (string)TP->query_property("true moving")) {
         flee_delay = random(2) + 2;
         effect = new("/std/room/exiteffect");
         effect->set_tp(TP);
         effect->set_dir(verb);
         effect->set_env(TO);
 
-        if(TP->is_player())
-        {
-            if(TP->query_property("my_exiteffect"))
-            {
+        if (TP->is_player()) {
+            if (TP->query_property("my_exiteffect")) {
                 TO->removeObjectFromCombatCycle((object)TP->query_property("my_exiteffect"));
                 obj = (object)TP->query_property("my_exiteffect");
                 TP->remove_property("my_exiteffect");
-                if(objectp(obj))
-                {
-                    flee_delay += ((int)obj->query_delay()/2);
+                if (objectp(obj)) {
+                    flee_delay += ((int)obj->query_delay() / 2);
                     obj->remove();
                 }
             }
             effect->set_delay(flee_delay);
-            TP->set_property("my_exiteffect",effect);
+            TP->set_property("my_exiteffect", effect);
             TP->remove_property("running_away_time");
-            TP->set_property("running_away_time",time() + random(2) + 2);
-            TO->addObjectToCombatCycle(effect,(int)effect->query_delay(), 1);
+            TP->set_property("running_away_time", time() + random(2) + 2);
+            TO->addObjectToCombatCycle(effect, (int)effect->query_delay(), 1);
+        }else {
+            TO->addObjectToCombatCycle(effect, random(3) + 1, 1);
         }
-        else
-        {
-            TO->addObjectToCombatCycle(effect,random(3)+1, 1);
-        }
-        tell_room(TO,"%^BOLD%^"+TPQCN+" makes a run for the "+verb+" exit.",TP);
-        tell_object(TP,"%^BOLD%^You make a run for the "+verb+" exit.");
+        tell_room(TO, "%^BOLD%^" + TPQCN + " makes a run for the " + verb + " exit.", TP);
+        tell_object(TP, "%^BOLD%^You make a run for the " + verb + " exit.");
         return 1;
     }
 
-    if (!object_pre_exits(verb)) return 1;
+    if (!object_pre_exits(verb)) {
+        return 1;
+    }
 
-    if (!perform_pre_exits(verb)) return 1;
+    if (!perform_pre_exits(verb)) {
+        return 1;
+    }
 
-    if(userp(TP) && TP->query_property("automapping")==1) catch("/daemon/map_maker_d.c"->add_room(TP, verb));
-    if ((verb == "climb") || (verb == "descend"))
-        if (!climb_ok(verb))
+    if (userp(TP) && TP->query_property("automapping") == 1) {
+        catch("/daemon/map_maker_d.c"->add_room(TP, verb));
+    }
+    if ((verb == "climb") || (verb == "descend")) {
+        if (!climb_ok(verb)) {
             return 1;
-	//leaving this in until I get the rest of the lib
-	//updated to support new traps - Saide
-    	if (TO->trapped(verb))
-        if (TO->do_spec_trap(verb)) return 1;
-	if(TO->is_trapped(verb))
-	{
-		if(TO->execute_trap(verb, TP)) return 1;
-	}
+        }
+    }
+    if (TO->trapped(verb)) {
+        if (TO->do_spec_trap(verb)) {
+            return 1;
+        }
+    }
+    if (TO->is_trapped(verb)) {
+        if (TO->execute_trap(verb, TP)) {
+            return 1;
+        }
+    }
 
-    if (TP->query_blind() && !random(20) && !FEATS_D->usable_feat(TO,"blindfight")) {
+    if (TP->query_blind() && !random(20) && !FEATS_D->usable_feat(TO, "blindfight")) {
         write("You stumble over something in your path.");
-        TP->set_tripped(1,"You are getting back to your feet.");
+        TP->set_tripped(1, "You are getting back to your feet.");
         return 1;
     }
 
-    if (!objectp(TP)) return 1;
+    if (!objectp(TP)) {
+        return 1;
+    }
 
-      TP->pre_exit_func();
+    TP->pre_exit_func();
     this_player()->move_player(paths, verb);
-//    if((objectp(TP)) && (!wizardp(TP))) {
+
     if (objectp(TP)) {
         incoming = TP;
         if (TP->query_in_vehicle()) {
             incoming = TP->query_in_vehicle();
             stmp = query_stamina_usage();
-            if(TP->query_property("endurance"))
-            {
+            if (TP->query_property("endurance")) {
                 stmp = stmp - (int)TP->query_property("endurance");
-                if(stmp < 0) { stmp = 0; }
+                if (stmp < 0) {
+                    stmp = 0;
+                }
             }
             TP->use_stamina(stmp);
         } else {
             stmp = query_stamina_usage() + 1;
-            if(TP->query_property("endurance"))
-            {
+            if (TP->query_property("endurance")) {
                 stmp = stmp - (int)TP->query_property("endurance");
-                if(stmp < 0) { stmp = 0; }
+                if (stmp < 0) {
+                    stmp = 0;
+                }
             }
             TP->use_stamina(stmp);
         }
-        add_tracks(incoming,"left",verb);
+        TP->set_time_delay("last_move");
+        add_tracks(incoming, "left", verb);
     }
-    if(!objectp(TP)) { return 1; }
-      TP->post_exit_func();
+    if (!objectp(TP)) {
+        return 1;
+    }
+    TP->post_exit_func();
 
-/*
-    if(TP->query_in_vehicle()) {
-        TP->use_stamina();
+    if (TP->query_property("fled") > time()) {
+        TP->set_property("fled", time() + 210);
     }
-    else {
-        TP->use_stamina(2);
+    if (intp(TP->query_property("PKfled")) && (TP->query_property("PKFled") > time())) {
+        TP->remove_property("PKFled");
+        TP->set_property("PKFled", time() + TP->query_property("PKfled_delay") + 20);
     }
-*/
-    if (TP->query_property("fled") > time())
-          TP->set_property("fled",time()+210);
-    if (intp(TP->query_property("PKfled")) && (TP->query_property("PKFled") > time()) ) {
-       TP->remove_property("PKFled");
-      TP->set_property("PKFled",time()+TP->query_property("PKfled_delay")+20);
-      }
     perform_post_exits(verb);
     return 1;
 }
