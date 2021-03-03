@@ -6,8 +6,8 @@ void create()
 {
     ::create();
 
-    set_property("indoors", 0);
-    set_property("light", 1);
+    set_property("indoors", 1);
+    set_property("light", 2);
 
     set_climate("temperate");
     set_short("%^ORANGE%^ common hall");
@@ -16,7 +16,7 @@ void create()
     set_smell("default", "%^ORANGE%^It smells of %^BOLD%^%^BLACK%^earth%^RESET%^%^ORANGE%^, %^BOLD%^%^BLACK%^a%^BLACK%^sh, %^BLACK%^s%^WHITE%^m%^BLACK%^oke%^ORANGE%^ and %^ORANGE%^c%^BOLD%^%^BLACK%^oo%^RESET%^%^ORANGE%^k%^ORANGE%^e%^ORANGE%^d %^BOLD%^%^BLACK%^m%^ORANGE%^e%^ORANGE%^a%^ORANGE%^t%^ORANGE%^.");
     set_listen("default", "%^CYAN%^You hear the faint sound of someone talking outside the mound, and some light snoring from one of the %^BOLD%^%^BLACK%^alcoves%^RESET%^%^CYAN%^.");
     set_exits(([
-                   "west" : "/d/magic/temples/nimnavanon/nimnavanon",
+                   "west" : "/d/magic/temples/nimnavanon/mound",
                    ]));
 
     set_items(([
