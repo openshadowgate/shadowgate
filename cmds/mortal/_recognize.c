@@ -21,7 +21,7 @@ int cmd_recognize(string str)
         return help();
     }
 
-    if (!TP->query_time_delay("last_move", 120)) {
+    if (!TP->query_time_delay("last_move", 60)) {
         return notify_fail("You struggle to memorize anyone, as you just arrived here.\n");
     }
 
@@ -30,6 +30,11 @@ int cmd_recognize(string str)
         return notify_fail("There is no " + who + " here.\n");
     }else {
         if (userp(ob)) {
+
+            if (ob->query_property("inactive")) {
+                return notify_fail("You can't recognize inactive players.\n");
+            }
+
             write("You will recognize " + who + " as " + capitalize(as) + ".");
 
             if (!(TP->isKnown(ob->query_name()))) {
