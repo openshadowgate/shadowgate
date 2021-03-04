@@ -110,7 +110,7 @@ void execute_feat()
 
     tmp = MAGIC_D->get_spell_file_name(str);
 
-    if (regexp(spell, ".*(cure|cause).*wounds") || regexp(spell, "repair.*undead") || regexp(spell, (".*(heal|harm)"))) {
+    if (regexp(tmp, ".*(cure|cause).*wounds") || regexp(tmp, "repair.*undead") || regexp(tmp, (".*(heal|harm)"))) {
         tell_object(caster,"You puzzle, unsure how to scribe this spell.");
         return 1;
     }
