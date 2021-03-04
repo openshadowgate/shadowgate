@@ -46,7 +46,6 @@ int do_effect()
 
 int potion_effect()
 {
-    int temp;
     do_effect();
     return 1;
 }

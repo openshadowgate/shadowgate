@@ -35,7 +35,7 @@ int preSpell()
         return 0;
     }
 
-    tell_room(place, "%^BLUE%^" + caster->QCN + " %^BOLD%^%^BLACK%^w%^RESET%^%^BLUE%^h%^BOLD%^i%^RESET%^%^BLUE%^sp%^BOLD%^%^BLACK%^e%^RESET%^%^BLUE%^r%^BOLD%^%^BLUE%^s %^RESET%^%^BLUE%^in%^BOLD%^%^BLACK%^c%^RESET%^%^BLUE%^o%^BOLD%^h%^RESET%^%^BLUE%^er%^BOLD%^%^BLACK%^e%^RESET%^%^BLUE%^ntly.%^WHITE%^");
+    tell_room(place, "%^WHITE%^" + caster->QCN + " %^BOLD%^%^BLACK%^w%^RESET%^%^WHITE%^h%^BOLD%^i%^RESET%^%^WHITE%^sp%^BOLD%^%^BLACK%^e%^RESET%^%^WHITE%^r%^BOLD%^%^WHITE%^s %^RESET%^%^WHITE%^in%^BOLD%^%^BLACK%^c%^RESET%^%^WHITE%^o%^BOLD%^h%^RESET%^%^WHITE%^er%^BOLD%^%^BLACK%^e%^RESET%^%^WHITE%^ntly.%^WHITE%^");
     if (sscanf(arg, "%s on %s", spl, sargs) != 2) {
         spl = arg;
     }

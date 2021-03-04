@@ -17,7 +17,7 @@ void create(){
 ");
 
     set_exits(([
-                   "north":"/d/dagger/road/road35",
+                   //"north":"/d/dagger/road/road35",
 //                "northwest":ROOMS+"/necro28",
 //                "west":ROOMS+"/necro28",
 //                "southwest":ROOMS+"/necro27",

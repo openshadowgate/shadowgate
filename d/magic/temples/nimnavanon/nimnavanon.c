@@ -37,7 +37,8 @@ void create()
     set_listen("default", "The wind rustles gently through the trees.");
     set_exits(([
                    "out" : "/d/tharis/conforest/rooms/path26",
-                   "south":"/d/magic/temples/nimnavanon/pond"
+                   "south":"/d/magic/temples/nimnavanon/pond",
+                   "east":"/d/magic/temples/nimnavanon/mound"
                    ]));
 }
 

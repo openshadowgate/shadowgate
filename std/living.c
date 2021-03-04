@@ -66,52 +66,7 @@ nosave function* post_exit_funcs;
 private nosave object* protectors;
 string diety;
 
-int query_condition();
-
-object query_in_vehicle();
-void set_in_vehicle(object ob);
-void set_stats(string str, int x);
-void set_alignment(int x);
-void add_alignment(int x);
-void adj_alignment(int x);
-string adjust_targeted_limb(object victim, string limb);
-int do_typed_damage_effects();
-void adjust_biorhythms();
-void set_invis();
-int query_alignment();
-int query_stats(string str);
-int query_base_stats(string stat);
-int query_poisoning();
-void add_poisoning(int x);
-void set_spell_interrupted(int x);
-int query_spell_interrupted();
-string query_gender();
-void set_gender(string str);
-int query_exp();
-string query_objective();
-string query_possessive();
-string query_subjective();
-int query_intox();
-int query_stuffed();
-int query_quenched();
-int query_invis();
-int query_formula();
-int query_parrying();
-int query_num_attacks();
-void set_num_attacks(int i);
-void set_parrying(int i);
-string query_party();
-string query_long(string unused);
-string query_desc(string unused);
-object query_draggee();
-void set_draggee(object drag);
-void init_path();
-void add_saving_bonus(string throw, int bonus);
-int query_saving_bonus(string throw);
-void remove_stat_bonuses();
-//added by Circe for change to fighter's rush and flash.  5/14/04
 string fighter_style;
-varargs void set_nwp(string name, int level, int seed);
 
 void create()
 {

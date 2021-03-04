@@ -21,6 +21,6 @@ void create(){
     set_exits( ([
 	"southwest" : RPATH "road34",
 	"northeast" : RPATH "road36",
-	"south" : "/d/dagger/nurval/room/necro31",
+        //"south" : "/d/dagger/nurval/room/necro31",
       ]) );
 }

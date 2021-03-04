@@ -15,9 +15,9 @@ void create()
     set_climate("temperate");
     set_short("A Quiet Pond");
     set("day long", "%^CYAN%^A quiet pond%^RESET%^\n" +
-        "%^CYAN%^Tall %^ORANGE%^reeds %^CYAN%^and %^ORANGE%^morass %^CYAN%^harbor a quiet %^BOLD%^pond %^RESET%^%^CYAN%^in the center of a sheltered clearing. A natural pier of %^WHITE%^boulders %^CYAN%^allows one to walk out to where the water is clear. Giant %^GREEN%^firs %^CYAN%^allows a few strands of %^YELLOW%^sunlight %^RESET%^%^CYAN%^through the canopy, otherwise the area lies in %^BLUE%^shade%^CYAN%^. The lowest tree branches hover high above you, but a plenitude of the huge dark trunks is enough to block out the view. A well trodden %^BOLD%^%^BLACK%^path %^RESET%^%^CYAN%^winds northwards through the wood.%^RESET%^");
+        "%^CYAN%^Tall %^ORANGE%^reeds %^CYAN%^and %^ORANGE%^morass %^CYAN%^harbor a quiet %^BOLD%^pond %^RESET%^%^CYAN%^in the center of a sheltered clearing. A natural pier of %^WHITE%^boulders %^CYAN%^allows one to walk out to where the water is clear. Giant %^GREEN%^firs %^CYAN%^allows a few strands of %^YELLOW%^sunlight %^RESET%^%^CYAN%^through the canopy, otherwise the area lies in %^BLUE%^shade%^CYAN%^. The lowest tree branches hover high above you, but a plenitude of the huge dark trunks is enough to block out the view. A well trodden %^BOLD%^%^BLACK%^path %^RESET%^%^CYAN%^winds northwards through the woods.%^RESET%^");
     set("night long", "%^BLUE%^A quiet pond%^RESET%^\n" +
-        "%^BLUE%^Tall %^ORANGE%^reeds %^BLUE%^and %^ORANGE%^morass %^BLUE%^harbor a quiet %^BOLD%^%^CYAN%^pond %^RESET%^%^BLUE%^in the center of a sheltered clearing. A natural pier of %^WHITE%^boulders %^BLUE%^allows one to walk out to where the water is clear. Giant %^GREEN%^firs %^BLUE%^allowes a glimpse of the %^YELLOW%^stars %^RESET%^%^BLUE%^through the canopy, otherwise the area is shrouded in darkness. The lowest tree branches hover high above you, but a plenitude of the huge dark trunks is enough to block out the view. A well trodden %^BOLD%^%^BLACK%^path %^RESET%^%^BLUE%^winds northwards through the wood.%^RESET%^");
+        "%^BLUE%^Tall %^ORANGE%^reeds %^BLUE%^and %^ORANGE%^morass %^BLUE%^harbor a quiet %^BOLD%^%^CYAN%^pond %^RESET%^%^BLUE%^in the center of a sheltered clearing. A natural pier of %^WHITE%^boulders %^BLUE%^allows one to walk out to where the water is clear. Giant %^GREEN%^firs %^BLUE%^allows a glimpse of the %^YELLOW%^stars %^RESET%^%^BLUE%^through the canopy, otherwise the area is shrouded in darkness. The lowest tree branches hover high above you, but a plenitude of the huge dark trunks is enough to block out the view. A well trodden %^BOLD%^%^BLACK%^path %^RESET%^%^BLUE%^winds northwards through the woods.%^RESET%^");
     set_smell("default", "%^BOLD%^%^CYAN%^The fresh fragrence of pine mixes with a whiff of murky water.%^RESET%^");
     set_listen("default", "%^ORANGE%^You hear an occasional call of a bluejay, a rustling of a squirrel, and a barely audible howl in the wind.%^RESET%^");
     set_items(([
@@ -106,7 +106,7 @@ int pick(string str)
             tell_object(TP, "You pick a handful of ripe salmonberries.");
             tell_room(ETP, "" + TP->query_cap_name() + " picks a handful of ripe salmonberries.", TP);
             berrycount -= 1;
-            new("(((OBJECT BERRIES)))")->move(TP);
+            new("/d/magic/temples/nimnavanon/strawberries.c")->move(TP);
             if (berrycount < 1) {
                 add_item("bushes", "%^RED%^Sa%^BOLD%^lm%^RESET%^%^RED%^o%^BOLD%^n%^RESET%^%^RED%^berr%^BOLD%^y %^GREEN%^bushes grow close to the pond, but they have been picked clean.%^RESET%^");
             }
