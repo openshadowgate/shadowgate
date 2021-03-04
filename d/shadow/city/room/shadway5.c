@@ -6,9 +6,11 @@
 inherit INH+"shadway";
 
 void create(){
-   ::create();
-   set_exits(([
-      "west" : ROOMS"shadway4",
-      "east" : ROOMS"westcross",
-   ]));
+    ::create();
+    set_exits(([
+        "west" : ROOMS"westcross",
+        "east" : ROOMS"shadway4",
+        "north" : "/realms/chernobog/coliseum/room/thoroughfare.c",
+    ]));
 }
+
