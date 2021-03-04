@@ -172,7 +172,7 @@ int moves()
                         "%^RED%^torn%^GREEN%^!%^RESET%^"
                         );
 
-            targ->cause_typed_damage(targ, "torso",roll_dice(8,10)+100,"divine");
+            targ->cause_typed_damage(targ, "torso",roll_dice(8,10),"divine");
         }
         return 1;
 
