@@ -73,9 +73,11 @@ void spell_effect(int prof)
     
     if(sizeof(minions))
     {    
+        tell_object(caster, "Your connection to your minions is severed!");
+        
         foreach(object ob in minions)
         {
-            if(ob->query_property("spell_creature"))
+            if(ob->query_property("spell_creature") || ob->query_race() == "outsider" || ob->is_undead())
             {
                 ob->move("/d/shadowgate/void");
                 ob->remove();
