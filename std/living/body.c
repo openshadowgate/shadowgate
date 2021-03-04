@@ -822,6 +822,10 @@ int query_resistance_percent(string res)
                 mod += 25;
         }
     }
+    
+    //Mage is invulnerable for duration of prismatic sphere
+    if(TO->query_property("prismatic sphere"))
+        mod = 100;
 
     return resistances["resistance percents"][res] + mod;
 }

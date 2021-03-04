@@ -1030,6 +1030,13 @@ void wizard_interface(object user, string type, string targ)
             }
         }
     }
+    //Prismatic sphere prevents caster from using attack spells
+    if(caster->query_property("prismatic sphere") && !help_or_harm)
+    {
+        tell_object(caster, "%^YELLOW%^Your spell fizzles at it is blocked by the prismatic sphere!%^RESET%^");
+        TO->remove();
+        return;
+    }
     if (caster->query_property("shapeshifted")) {
         shapeob = caster->query_property("shapeshifted");
         if (!objectp(shapeob)) {
