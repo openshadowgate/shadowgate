@@ -11,8 +11,8 @@ void create(){
 ::create();
   set_property("indoors",1);
   set_property("light",1);
-  set_travel(NAT_CAVE);
-  set_terrain(ROCKY);
+  set_travel(ROCKY);
+  set_terrain(NAT_CAVE);
   set_name("A dank cavern");
   set_short("%^RESET%^%^BLUE%^%^A %^BOLD%^%^BLACK%^dark %^RESET%^%^BLUE%^cavern%^RESET%^");
   set_long(""+query_short()+"\n%^RESET%^%^BLUE%^These caves look as though they"
