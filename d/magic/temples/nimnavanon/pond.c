@@ -40,6 +40,7 @@ void init()
 {
     ::init();
     add_action("drink_func", "drink");
+    add_action("pick_func", "pick");
 }
 
 int drink_func(string str)
@@ -77,7 +78,7 @@ void reset()
     }
 }
 
-int pick(string str)
+int pick_func(string str)
 {
 
     string season;
