@@ -290,6 +290,10 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         }
         return damage;
     }
+    
+    //Prismatic sphere prevents damage between combatants.
+    if(targ->query_property("prismatic sphere") || attacker->query_property("prismatic sphere"))
+        return 0;
 
     if (objectp(targ) && FEATS_D->usable_feat(targ, "kinetic conversion")) {
         if (member_array(type, PHYSICAL_DAMAGE_TYPES) > -1) {
