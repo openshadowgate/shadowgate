@@ -5,10 +5,12 @@ inherit "/d/common/inherit/hitching_post";
 
 void create()  {
   //::create();
+  set_name("A tethering area");
   set_property("indoors",0);
 //  set_property("light", 2);  it has light set in the inherit *Styx*  7/28/05
   set_terrain(LIGHT_FOREST);
   set_travel(FOOT_PATH);
+  set_short("%^GREEN%^A tethering area%^RESET%^");
   set_long("%^GREEN%^The dense trees of the forest have been thinned "+
      "here, allowing for a small open area.  The canopy still "+
      "rises overhead, effectively shading and cooling the area.  "+

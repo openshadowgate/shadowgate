@@ -5,12 +5,13 @@ inherit INC+"pathwe";
 void create()
 {
   ::create();
-  set_search("default","There appears to be an overgrown path twisting %^BOLD%^%^CYAN%^north%^RESET%^ through the forest here.");
+  set_search("default","There appears to be an overgrown %^BOLD%^%^CYAN%^path%^RESET%^ twisting north through the forest here.");
+  set_search("path","The twisting %^BOLD%^%^CYAN%^path%^RESET%^ is overgrown but passable.");
   set_exits(
     ([
     "east" : ROOMS+"path30",
     "west" : ROOMS+"path28",
-    "north": "/d/player_houses/rheyn/sapling" //spot where rheyn wants sapling grove
+    "path": "/d/player_houses/rheyn/sapling" //spot where rheyn wants sapling grove
     ]) );
-    set_invis_exits(({"north"}));
+    set_invis_exits(({"path"}));
 }
