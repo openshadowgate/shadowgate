@@ -20,7 +20,7 @@ KAYLA
     set_listen("default","You hear a few normal forest sounds here.");
     set_smell("default","A slight scent of peaches wafts on the wind.");
     set_exits(([
-      "temple":"/d/magic/temples/silvanus_old",
+      "grove":"/d/magic/temples/silvanus_old",
        "north" : F_ROOMS"11-al1",
        "east" :  F_ROOMS"11-al2a",
     ] ));
