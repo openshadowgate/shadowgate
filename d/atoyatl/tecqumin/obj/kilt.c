@@ -27,7 +27,7 @@ void create() {
    colour2 = COLOURS[col2];
    code1 = COLOUR_CODES[col1];
    code2 = COLOUR_CODES[col2];
-   set_obvious_short("%^BOLD%^%^WHITE%^a short kilt"); 
+   set_obvious_short("%^BOLD%^%^WHITE%^a short kilt");
    switch (which){
    case WARRIOR:
      set_obvious_short(query_obvious_short() + "%^BOLD%^%^WHITE%^ with a %^RESET%^crossed sword%^BOLD%^%^WHITE%^ motif");
@@ -41,7 +41,7 @@ void create() {
      set_obvious_short(query_obvious_short() + "%^BOLD%^%^WHITE%^ with a %^BOLD%^%^BLACK%^black blindfold%^BOLD%^%^WHITE%^ motif");
      set_short(code1 + colour1 + " %^RESET%^%^CYAN%^Tecqumin " + code1 + "ceremonial %^BOLD%^%^WHITE%^k%^RESET%^i%^BOLD%^%^WHITE%^lt");
      break;
-   case TRACKER: 
+   case TRACKER:
      set_obvious_short(query_obvious_short() + "%^BOLD%^%^WHITE%^ with a %^BOLD%^%^GREEN%^ju%^RESET%^%^GREEN%^ng%^BOLD%^l%^RESET%^"
        +"%^GREEN%^e %^ORANGE%^path%^BOLD%^%^WHITE%^ motif");
      set_short(code1 + colour1 + " %^RESET%^%^CYAN%^Tecqumin " + code1 + "tracker's %^BOLD%^%^WHITE%^k%^RESET%^i%^BOLD%^%^WHITE%^lt");
@@ -55,7 +55,7 @@ void create() {
        +"%^BOLD%^%^WHITE%^ss%^RESET%^e%^BOLD%^%^WHITE%^d"
        +" sw%^RESET%^o%^BOLD%^%^WHITE%^rds");
      break;
-   case ASSASSIN: 
+   case ASSASSIN:
      set_long(query_long() + ", and is %^BOLD%^%^BLACK%^embroidered%^RESET%^"
        +" with a small motif of an unsheathed %^BOLD%^%^BLACK%^dagger%^RESET%^.");
      break;
@@ -105,7 +105,7 @@ string long_desc(){
        +" sw%^RESET%^o%^BOLD%^%^WHITE%^rds";
      return result;
      break;
-   case ASSASSIN: 
+   case ASSASSIN:
      result = result + ", and is %^BOLD%^%^BLACK%^embroidered%^RESET%^"
        +" with a small motif of an unsheathed %^BOLD%^%^BLACK%^dagger%^RESET%^.";
      return result;
@@ -122,7 +122,7 @@ string long_desc(){
        +"%^GREEN%^e %^ORANGE%^path%^RESET%^.";
      return result;
      break;
-   } 
+   }
 }
 
 
@@ -144,22 +144,17 @@ void do_bonuses(){
   }
 }
 
-int wear_func() {
-   string code1, code2;
-   do_bonuses();
-   code1 = COLOUR_CODES[col1];
-   code2 = COLOUR_CODES[col2];
-  if (!ETO->id("ghost") && EVENT_RECORDS_D->has_killed(ETO->query_name(), 
- MOB + "ghost_warrior", 10000000000)==-1
-    && EVENT_RECORDS_D->has_killed(ETO->query_name(), MOB + "ghost_priest", 10000000000)==-1){
-    tell_object(ETO, "The " + code1 + "kilt%^RESET%^ refuses to fasten around your waist");
-    return 0;
-  }
-  tell_object(ETO,"You fasten the " + code1 + "kilt%^RESET%^ around your waist");
-  if (objectp(EETO)){
-    tell_room(EETO, ETO->QCN + " fastens the " + code1 + "kilt%^RESET%^ around " + ETO->QP + " waist.", ETO );
-  }
-  return 1;
+int wear_func()
+{
+    string code1, code2;
+    do_bonuses();
+    code1 = COLOUR_CODES[col1];
+    code2 = COLOUR_CODES[col2];
+    tell_object(ETO, "You fasten the " + code1 + "kilt%^RESET%^ around your waist");
+    if (objectp(EETO)) {
+        tell_room(EETO, ETO->QCN + " fastens the " + code1 + "kilt%^RESET%^ around " + ETO->QP + " waist.", ETO);
+    }
+    return 1;
 }
 
 int remove_func() {
@@ -195,11 +190,11 @@ int strike_func(int damage, object what, object who)
     if(random(6)<1)
     {
         tell_room(EETO, ETOQCN + "'s " + code1 + "p" + code2 + "o" + code1 + "nch" + code2 + "o%^RESET%^ flickers, and " + ETO->QS + " becomes momentarily insubstantial, allowing " + who->QCN+" 's blow to pass right through " + ETO->QO, ({ETO, who}));
-        
+
         tell_object(ETO, "Your poncho goes cold and you feel a strange shock as " + who->QCN + "'s attack passes right through, leaving you feeling weird but otherwise unharmed.");
-                                
+
         tell_object(who,  ETOQCN + "'s " + code1 + "p" + code2 + "o" + code1 + "nch" + code2 + "o%^RESET%^ flickers, and " + ETO->QS + " becomes momentarily insubstantial, allowing your blow to pass right through " + ETO->QO);
-        return 0;        
-    }    
+        return 0;
+    }
     return damage;
 }
