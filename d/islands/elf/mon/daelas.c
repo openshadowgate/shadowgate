@@ -135,6 +135,8 @@ void heart_beat()
     if (!objectp(TO)) {
         return;
     }
+    if (query_attackers() == ({}))
+        return;
     if ((TO->query_hp() < 1000) && (FLAG != 1)) {
         FLAG = 1;
         TO->force_me("say %^BOLD%^%^RED%^I HAVEN'T BEEN HERE FOR CENTURIES TO DIE LIKE THIS!");
