@@ -40,7 +40,7 @@ int cmd_offer(string str)
         return 1;
     }
     if (ob->query_property("nosell")) {
-        return notify_fail("You can't offer kept objects.");
+        return notify_fail("You can't offer kept objects.\n");
     }
 
     if (ob->query_worn()) {

@@ -30,7 +30,7 @@ cmd_offerall()
             continue;
         }
         if (inv[i]->query_property("nosell")) {
-            tell_object(TP, "You can't offer" + inv[i]->query_name() + ", as it is kept object.");
+            tell_object(TP, "You can't offer " + inv[i]->query_name() + ", as it is kept object.");
             continue;
         }
 

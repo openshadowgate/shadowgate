@@ -52,11 +52,11 @@ end - end the game
 
 %^CYAN%^SYNTAX%^RESET%^
 
-end [%^ORANGE%^%^ULINE%^TIME%^RESET%^]
+end [%^ORANGE%^%^ULINE%^TIME%^RESET%^|cancel]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This will turn the driver off in TIME minutes.
+This will turn the driver off in TIME minutes, or will cancel shutdown.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
