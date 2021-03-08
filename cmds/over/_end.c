@@ -14,9 +14,13 @@ int cmd_end(string str)
     if (!stringp(str)) {
         return notify_fail("Please enter a number of minutes to count down.");
     }
-    if (str == "now") {
-        return 0;
+
+    if (str == "cancel") {
+        SHUT_D->cancel_shutdown();
+        return 1;
     }
+
+
     if (!sscanf(str, "%d", ShutdownTime)) {
         write("Invalid parameter");
     }
@@ -25,10 +29,11 @@ int cmd_end(string str)
     }
 
     seteuid(UID_SHUTDOWN);
+
     if (!ShutdownTime) {
-        catch(call_other(SHUT_D, "startShutdown", 4, 10));
+        catch(call_other(SHUT_D, "start_shutdown", 4, 10));
     }else {
-        catch(call_other(SHUT_D, "startShutdown", 4, ShutdownTime));
+        catch(call_other(SHUT_D, "start_shutdown", 4, ShutdownTime));
     }
     seteuid(getuid());
     write("Ok.\n");
