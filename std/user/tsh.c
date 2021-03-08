@@ -223,7 +223,6 @@ string write_prompt()
         if (avatarp(this_player())) {
             prompt = replace_string(prompt, "$I", am_invis);
         }
-        prompt += " ";
     } else {
         prompt = DEFAULT_PROMPT;
     }
