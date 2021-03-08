@@ -34,10 +34,10 @@ keep %^ORANGE%^%^ULINE%^OBJECT%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command marks and unmarks an object the way it won't be sold if you accidently suggest it to vendor.
+This command marks and unmarks an object the way it won't be sold if you accidently suggest it to vendor and the way it won't be offered if you use offer or offerall commands.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-shop, inventory, eq, look, steal, money
+shop, inventory, eq, look, steal, money, offer, offerall, bury
 ");
 }

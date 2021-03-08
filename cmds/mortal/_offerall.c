@@ -70,9 +70,11 @@ offerall - clean the room
 
 This command will offer everything that's on the ground in front of you.
 
+If you wish to protect an object from acciental offering, use keep command.
+
 %^CYAN%^SEE ALSO%^RESET%^
 
-offer, pkilling, get, drop
+bury, offer, pkilling, get, drop
 ");
     return 1;
 }

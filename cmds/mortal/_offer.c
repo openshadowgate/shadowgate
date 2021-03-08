@@ -77,12 +77,7 @@ int cmd_offer(string str)
                 tell_room(ETP, TPQCN + " offers " + ob->query_short() + ".", TP);
             }
         }
-        if (ob->query_value()) {
-            ob->remove();
-            TP->add_hp(random(5));
-        } else {
-            ob->remove();
-        }
+        ob->remove();
         return 1;
     }
 }
@@ -101,11 +96,13 @@ offer %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [to %^ORANGE%^%^ULINE%^GOD%^RESET%^]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This will destroy %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ in your inventory displaying a fancy message. Destroying objects heals 1d5 hp. You can specify a %^ORANGE%^%^ULINE%^GOD%^RESET%^ if you wish so, but it gives no mechanical benefits.
+This will destroy %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ in your inventory displaying a fancy message. You can specify a %^ORANGE%^%^ULINE%^GOD%^RESET%^ if you wish so, but it gives no mechanical benefits.
+
+If you wish to protect an object from acciental offering, use keep command.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-offerall, drop, get, inventory
+bury, offerall, drop, get, keep, inventory
 "
         );
     return 1;
