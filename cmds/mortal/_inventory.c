@@ -105,7 +105,7 @@ If simple inventory is turned on it won't show worn and equipped items.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-eq, set, look, score, stats
+eq, set, keep, look, score, stats
 "
           );
 }
