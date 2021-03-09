@@ -60,7 +60,7 @@ This command displays a list of the items that you are currently using.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-inventory, limbs, score, money
+inventory, keep, limbs, score, money
 "
         );
 }

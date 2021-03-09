@@ -2563,29 +2563,14 @@ string query_bonus_display()
 {
     string ret = "";
     string* mykeys;
-    int mytracker, i;
+    string myhit;
+    int i;
     mapping mybonuses;
     mybonuses = query_item_bonuses();
-    if (!mapp(mybonuses) || !objectp(TP)) {
-        return ret;
-    }
-    if (!sizeof(mybonuses)) {
-        return ret;
-    }
     mykeys = keys(mybonuses);
 
     if (is_identified((string)TPQN)) {
-        mytracker = 0;
-        for (i = 0; i < sizeof(mykeys); i++) {
-            if (mybonuses[mykeys[i]]) {
-                mytracker = 1;
-            }
-        }
-        if (!mytracker) {
-            return ret;            // skip out if it has nothing but zero (conditional) bonuses. N, 8/12.
-        }
-        ret += "\n%^BOLD%^%^WHITE%^You are aware of the following %^RESET%^%^WHITE%^(base)%^BOLD%^ innate magical properties of this item:%^RESET%^ ";
-        if (mybonuses[mykeys[0]]) {
+        if (sizeof(mybonuses) && mybonuses[mykeys[0]]) {
             if (!pointerp(mybonuses[mykeys[0]])) {
                 ret += "" + mybonuses[mykeys[0]] + " " + mykeys[0] + "";
             }else {
@@ -2604,6 +2589,20 @@ string query_bonus_display()
                 }
             }
         }
+
+        if (myhit = query_hit()) {
+            if (myhit == "property_special") {
+                ret += query_property("hit");
+            } else {
+                ret += (ret ? "," : "") + " unknown power releases on hit";
+            }
+        }
+
+        if (ret == "") {
+            return ret;
+        }
+
+        ret = "\n%^BOLD%^%^WHITE%^You are aware of the following magic within this item:%^RESET%^ " + ret;
         ret += ".\n";
     }
     return ret;
