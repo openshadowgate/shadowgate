@@ -359,7 +359,7 @@ string *generate_class()
 hint_class()
 {
     write("
-%^BOLD%^Your character class defines core of your game play and responds to what your character does as an adventurer. Different classes have different mechanics and can behave very unlike others. Difficulty of your game play will depend on your class, so if you're unsure what to pick, it is highly recommended no to select caster classes for your first time on the ShadowGate.
+%^BOLD%^Your character class defines core of your game play and responds to what your character does as an adventurer. Different classes have different mechanics and can behave very unlike others. Difficulty of your game play will depend on your class, so if you're unsure what to pick, it is highly recommended not to select classes that actively utilize spells for your first time on the ShadowGate.
 
 %^BOLD%^To overview all available classes look at %^ORANGE%^<help classes>%^WHITE%^.
 %^BOLD%^To see what embodies class of your choice see %^ORANGE%^<help %^ULINE%^CLASSNAME%^RESET%^%^ORANGE%^%^BOLD%^>%^WHITE%^, for example %^ORANGE%^<help fighter>%^RESET%^.");
