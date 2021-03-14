@@ -6,7 +6,7 @@ inherit DAEMON;
 
 #define WING_DELAY 120
 
-string WINGO = "/cmds/mortal/obj/wingObj.c";
+string WINGO = "/d/magic/obj/wingObj.c";
 
 #include <common_destinations.h>
 
