@@ -66,7 +66,7 @@ recognize - recognize someone
 
 %^CYAN%^SYNOPSIS%^RESET%^
 
-recognize%^ORANGE%^%^ULINE%^WHO%^RESET%^as%^ORANGE%%^ULINE%^NAME%^RESET%^
+recognize %^ORANGE%^%^ULINE%^WHO%^RESET%^ as %^ORANGE%^%^ULINE%^NAME%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
