@@ -8,10 +8,8 @@ int cmd_thought(string str)
     if (!stringp(str)) {
         return notify_fail("Have no thoughts of your own?\n");
     }
-// if (TP->query_unconscious()) return notify_fail("You think that you are ill equipped to do that currently.\n");
-//  if(!avatarp(TP)) return 0;
-
     CHAT_D->force_chat(TP, "petition", "%^BOLD%^. o O ( " + str + " )%^RESET%^", 1);
+    IPC->ipc_send_all("CHAT:petition: :" + capitalize(TPQN) + ":" + strip_colors(str) + "\n");
     write(capitalize((string)TP->query_name()) + " %^BOLD%^. o O ( " + str + " )%^RESET%^");
     return 1;
 }

@@ -9,9 +9,9 @@ object tp;
  * @brief Manages various user settings.
  *
  * To add a setting place it in order you want it to be in in
- * VALID_SETTINGS array, then add set_NAME(string) function to set
- * that setting and get_NAME function to get that setting. Don't
- * forget to append explanation to helpfile.
+ * VALID_SETTINGS array, then add 'int set_NAME(string)' function to
+ * set that setting and 'string get_NAME' function to get that
+ * setting. Don't forget to append explanation to helpfile.
  */
 
 
@@ -454,7 +454,7 @@ int set_taxperc(string val)
     }
 }
 
-int get_taxperc()
+string get_taxperc()
 {
     return sprintf("%d", USER_D->get_character_improvement_tax_percent(tp));
 }

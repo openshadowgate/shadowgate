@@ -128,6 +128,7 @@ int cmd_reply(string str)
 
     if (!wizardp(ob) && !wizardp(TP) && !ob->query_true_invis() && !TP->query_true_invis()) {
         CHAT_D->force_chat(TP, "telepathy", "tells " + ob->QCN + " " + str + " ", 1);
+        IPC->ipc_send_all("CHAT:telepathy: :" + capitalize(TPQN) + ":tells " + capitalize(ob->query_name()) + ", "+ strip_colors(str) + "\n");
     }
 
 #include <detect_thoughts.h>
