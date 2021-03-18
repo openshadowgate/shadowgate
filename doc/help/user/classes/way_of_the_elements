@@ -14,6 +14,6 @@ Way of The Elements monks receive the following spells:
 %^CYAN%^ L15:%^RESET%^ cone of cold, acid breath
 %^CYAN%^ L17:%^RESET%^ fire storm, monsoon
 
-Monks of this dedication receive 2 Ki points per level.
+Monks of this dedication receive 1.5 Ki points per level.
 
 Monks of this dedication are able to use the ki command to specify which element they want to focus on. The command to do so is %^ORANGE%^<ki focus %^ORANGE%^%^ULINE%^ELEMENT%^RESET%^%^ORANGE%^>%^RESET%^. Valid types are fire, cold, electricity, and acid. This elemental focus will determine the damage type of flurry of blows, as well as the type of guardians who may show up when the elemental opportunist feat is selected.

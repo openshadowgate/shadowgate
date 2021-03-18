@@ -145,23 +145,30 @@ void init_ki(object ob)
 {
     int avail, newmax, oldmax, diff;
     string myWay;
-    if(!objectp(ob)) return;
-    if((int)ob->query_class_level("monk") < 2) return;
+    if (!objectp(ob)) {
+        return;
+    }
+    if ((int)ob->query_class_level("monk") < 2) {
+        return;
+    }
     //giving way of the elements 1.5 ki per level - may need some tweaking - Saide
     myWay = (string)ob->query("monk way");
-    if(FEATS_D->usable_feat(ob,"grandmaster of the way")) { myWay = "grandmaster of the way"; }
-    if(stringp(myWay))
-    {
-        if(myWay == "way of the elements" || myWay == "grandmaster of the way")
-        {
-            newmax = to_int((int)ob->query_guild_level("monk")*2);
-        }
-        else newmax = (int)ob->query_guild_level("monk");
+    if (FEATS_D->usable_feat(ob, "grandmaster of the way")) {
+        myWay = "grandmaster of the way";
     }
-    else newmax = (int)ob->query_class_level("monk");
-    if(!intp(avail = (int)ob->query("available ki"))) avail = newmax;
-    if(intp(oldmax = (int)ob->query("maximum ki")))
-    {
+    if (stringp(myWay)) {
+        if (myWay == "way of the elements" || myWay == "grandmaster of the way") {
+            newmax = to_int((int)ob->query_guild_level("monk") * 3 / 2);
+        }else {
+            newmax = (int)ob->query_guild_level("monk");
+        }
+    }else {
+        newmax = (int)ob->query_class_level("monk");
+    }
+    if (!intp(avail = (int)ob->query("available ki"))) {
+        avail = newmax;
+    }
+    if (intp(oldmax = (int)ob->query("maximum ki"))) {
         diff = newmax - oldmax;
         avail += diff;
     }
