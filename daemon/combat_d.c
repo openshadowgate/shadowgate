@@ -290,7 +290,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         }
         return damage;
     }
-    
+
     //Prismatic sphere prevents damage between combatants.
     if(targ->query_property("prismatic sphere") || attacker->query_property("prismatic sphere"))
         return 0;
@@ -308,7 +308,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
         }
     }
 
-    if (objectp(targ) && FEATS_D->usable_feat(targ, "way of the learned pupil")) {
+    if (objectp(targ) && FEATS_D->usable_feat(targ, "way of the learned pupil") && !random(8)) {
         USER_D->regenerate_ki(targ, 1);
     }
 
@@ -448,7 +448,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
                 }
 
                 reduction = (int)targ->query_property("damage resistance");
-                
+
                 if(LIVING_D->check_aura(targ, "justification") == 2)
                 {
                     if(LIVING_D->opposed_alignment(targ, attacker))
@@ -934,22 +934,22 @@ varargs void calculate_damage(object attacker, object targ, object weapon, strin
         }
         damage += COMBAT_D->unarmed_enchantment(attacker);
     }
-    
+
     targ && paladin = targ->query_property("paladin smite");
-    
+
     if(objectp(paladin))
     {
-        
+
         //Paladin smite target takes additional damage based on CHA mod
         //Smite debuff lasts a few rounds
         if(attacker->query_guild_level("paladin") && paladin == attacker)
             damage += BONUS_D->new_damage_bonus(attacker, attacker->query_stats("charisma"));
-        
+
         //Aura of Fury adds smite bonus of +2 to rest of party for duration
         if(LIVING_D->check_aura(attacker, "fury") == 2)
             damage += 2;
-    }   
-    
+    }
+
     damage = damage_done(attacker, weapon, damage, fired);
     if (!objectp(targ)) {
         return;
