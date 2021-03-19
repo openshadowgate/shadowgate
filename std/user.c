@@ -4678,18 +4678,14 @@ void set_retinue_level(int l){
     retinue_level = l;
 }
 
-
-
-
-// Feat Stuff
-
 void init_feats()
 {
-    if(!mapp(__FEAT_DATA)) { __FEAT_DATA = ([]); }
-    //if(!mapp(class_feats)) class_feats = ([]);
-    //if(!mapp(bonus_feats)) bonus_feats = ([]);
-    //if(!mapp(other_feats)) other_feats = ([]);
-    if(!pointerp(player_feats)) player_feats = ({});
+    if (!mapp(__FEAT_DATA)) {
+        __FEAT_DATA = ([]);
+    }
+    if (!pointerp(player_feats)) {
+        player_feats = ({});
+    }
     return;
 }
 
