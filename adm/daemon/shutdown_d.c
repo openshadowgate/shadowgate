@@ -37,7 +37,7 @@ create()
     loginAllow = 1;
     armShutdown = 0;
     time_estimate = time() + (TEST_INTERVAL * 60) + (LAG_MINUTES * 60);
-    call_out("check_planned", 45);
+    /* call_out("check_planned", 45); */
     return 1;
 }
 
