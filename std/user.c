@@ -4207,7 +4207,9 @@ int isKnown(string who)
         profile = "default";
     }
     profiles = relationships[who];
+
     if (!mapp(profiles)) {
+        convert_relationships();
         return 0;
     }
 
