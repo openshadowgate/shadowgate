@@ -9,22 +9,20 @@ int bonus;
 void create()
 {
     ::create();
-    set_spell_name("infernal healing");
-    set_spell_level(([ "mage" : 1, "cleric" : 1, "warlock": 1, "magus" : 1 ]));
+    set_spell_name("celestial healing");
+    set_spell_level(([ "mage" : 1, "cleric" : 1, "magus" : 1 ]));
     set_spell_sphere("conjuration_summoning");
-    set_syntax("cast CLASS infernal healing [on TARGET]");
+    set_syntax("cast CLASS celestial healing [on TARGET]");
     set_damage_desc("fast healing 1");
-    set_description("You anoint a wounded creature with devil's blood or unholy water, giving it faster healing. For the duration of the spell you'll have an evil aura.
+    set_description("You anoint a wounded creature with the blood of an outsider with the good subtype (such as an angel) or holy water, giving it faster healing. For the duration of the spell you'll have a good aura.
 
 %^BOLD%^%^RED%^See also:%^RESET%^ status effects");
-    evil_spell(1);
     set_helpful_spell(1);
-    set_feats_required(([ "warlock" : "infernal practitioner"]));
 }
 
 string query_casting_string()
 {
-    return "%^BOLD%^%^RED%^"+caster->QCN+" %^BOLD%^%^RED%^spells an %^RED%^i%^BLACK%^n%^RED%^f%^BLACK%^ernal %^BLACK%^inc%^RED%^a%^BLACK%^nt%^RED%^a%^RED%^t%^BLACK%^ion.%^RESET%^
+    return "%^BOLD%^%^ORANGE%^"+caster->QCN+" %^BOLD%^%^ORANGE%^spells an %^ORANGE%^i%^WHITE%^n%^ORANGE%^f%^WHITE%^ernal %^WHITE%^inc%^ORANGE%^a%^WHITE%^nt%^ORANGE%^a%^ORANGE%^t%^WHITE%^ion.%^RESET%^
 ";
 }
 
@@ -35,7 +33,7 @@ int preSpell()
     }
 
     if (target->query_property("fast_healing_spell") || target->query_property("hidden alignment")) {
-        tell_object(caster, "%^BOLD%^%^BLACK%^You feel your spell repelled...");
+        tell_object(caster, "%^BOLD%^%^WHITE%^You feel your spell repelled...");
         return 0;
     }
 
@@ -57,27 +55,30 @@ void spell_effect()
         return;
     }
 
-    tell_room(place, "%^BOLD%^%^RED%^" + target->QCN + "%^BOLD%^%^RED%^'s veins burn %^BLACK%^infernal %^BLACK%^re%^RED%^d%^RED%^ through the skin.%^RESET%^", caster);
+    tell_room(place, "%^ORANGE%^An %^ORANGE%^i%^BOLD%^%^ORANGE%^l%^RESET%^%^ORANGE%^l%^BOLD%^%^ORANGE%^ustri%^RESET%^%^ORANGE%^o%^ORANGE%^u%^BOLD%^%^ORANGE%^s %^ORANGE%^ha%^RESET%^%^ORANGE%^l%^BOLD%^%^ORANGE%^o%^RESET%^%^ORANGE%^ shines above " + target->QCN + "' head.", target);
+
     {
         int duration = clevel * ROUND_LENGTH * 12;
-        tell_object(target, "%^BOLD%^%^RED%^You feel your blood %^BLACK%^bur%^RED%^n%^BLACK%^i%^RED%^n%^BLACK%^g %^RED%^a%^BLACK%^w%^RED%^a%^RED%^y%^RED%^ your wounds.%^RESET%^
-");
+
+        tell_object(target, "%^ORANGE%^An %^ORANGE%^i%^BOLD%^%^ORANGE%^l%^RESET%^%^ORANGE%^l%^BOLD%^%^ORANGE%^ustri%^RESET%^%^ORANGE%^o%^ORANGE%^u%^BOLD%^%^ORANGE%^s %^ORANGE%^ha%^RESET%^%^ORANGE%^l%^BOLD%^%^ORANGE%^o%^RESET%^%^ORANGE%^ shines above your head.");
+
         target->set_property("spelled", ({ TO }));
         target->set_property("fast healing", 1);
         target->set_property("fast_healing_spell", 1);
-        target->set_property("hidden alignment", 6);
+        target->set_property("hidden alignment", 4);
         spell_successful();
         addSpellToCaster();
         spell_duration = duration;
         set_end_time();
         call_out("dest_effect",spell_duration);
     }
+
 }
 
 void dest_effect()
 {
     if (objectp(target)) {
-        tell_object(target, "%^BOLD%^%^RED%^Your blood cools down.%^RESET%^");
+        tell_object(target, "%^BOLD%^%^ORANGE%^The celestial light abandons your blood.%^RESET%^");
         target->remove_property_value("spelled", ({ TO }));
         target->set_property("fast healing", -1);
         target->remove_property("fast_healing_spell");
