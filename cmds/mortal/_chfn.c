@@ -1,9 +1,3 @@
-//      /bin/user/_chfn.c
-//      from the Nightmare Mudlib
-//      command to change finger info
-//      created by Sulam@TMI 911208
-//      modified for the Nightmare 3.0 security by Descartes of Borg 930814
-
 #include <std.h>
 #include <security.h>
 
@@ -12,7 +6,7 @@ inherit DAEMON;
 int cmd_chfn(string arg) {
     if( (string)this_player()->query_name() == "guest" ) return 0;
     write("Changing finger information on " +
-	(string) this_player()->query_name() + " at ShadowGate.\n");
+          (string) this_player()->query_name() + " at ShadowGate.\n");
     write("Default values are printed inside '[]'.\n");
     write("To accept the default, type <return>.\n");
     write("\n");
@@ -32,10 +26,8 @@ protected void new_email(string e)
 {
     string user,host, olde;
     olde=this_player()->query_email();
-    if (!e && stringp(olde) && (strlen(olde) > 6))
+    if (!e && stringp(olde))
     {
-        // Show me a valid email address with 6 characters and I
-        // will be amazed.
         write ("Leaving email as ["+olde+"].");
         warning_display();
         input_to("ooc_contact");
@@ -108,7 +100,7 @@ protected void ooc_contact(string cont, string contact)
 
 int
 help() {
-  write("
+    write("
 %^CYAN%^NAME%^RESET%^
 
 chfn - change user information
@@ -125,6 +117,6 @@ Reminder, do no use information provided by others to harass them.
 
 finger, who, set, passwd, ignore
 "
-  );
-  return 1;
+        );
+    return 1;
 }
