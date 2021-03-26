@@ -349,7 +349,7 @@ protected void ansi_test(string str) {
     }
     __Player->set_gender("other");
     __Player->set_rname("Unknown");
-    __Player->set_email(str);
+    __Player->set_email(" ");
 
     seteuid(UID_LOG);
     log_file("player/enter", sprintf("%s (new player): %s\n", __Name, ctime(time())));
