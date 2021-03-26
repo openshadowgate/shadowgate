@@ -23,6 +23,7 @@ void create()
     set_target_required(1);
     set_casting_time(15);
     set_helpful_spell(1);
+    set_save("fort");
 }
 
 
@@ -47,8 +48,13 @@ spell_effect(int prof)
     int rnd;
 
     set_helpful_spell(1);
-    if(target->query_property("negative energy affinity"))
+    if (target->query_property("negative energy affinity")) {
         set_helpful_spell(0);
+
+        if (do_save(target, -2)) {
+            sdamage /= 2;
+        }
+    }
     if (interactive(caster))
     {
         // CAST UPON ONESELF
@@ -70,7 +76,7 @@ spell_effect(int prof)
         tell_object(target, "%^WHITE%^%^BOLD%^"+caster->QCN+" sends a beam of energy at you.");
     }
 
-    rnd = sdamage * 7/6;
+    sdamage;
     damage_targ(target, target->return_target_limb(), rnd, "positive energy");
 
     if(query_spell_name()=="heal")

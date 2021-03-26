@@ -26,6 +26,7 @@ void create()
     set_target_required(1);
     set_helpful_spell(1);
     splash_spell(1);
+    set_save("fort");
 }
 
 int preSpell()
@@ -70,6 +71,9 @@ void spell_effect(int prof)
         set_helpful_spell(1);
     }else if (member_array(target, attackers) != -1) {
         set_helpful_spell(0);
+        if (do_save(target, -2)) {
+            sdamage /= 2;
+        }
         targets = filter_array(attackers, (: $1->query_property("negative energy affinity") :));
     }else {
         targets = ({ target });
@@ -97,6 +101,9 @@ void spell_effect(int prof)
                     tell_object(targets[i], "You shouldn't do that to yourself.");
                 }
                 set_helpful_spell(0);
+                if (do_save(target, -2)) {
+                    sdamage /= 2;
+                }
             }else {
                 set_helpful_spell(1);
             }
@@ -130,7 +137,7 @@ void spell_effect(int prof)
 
 int calculate_healing(object targ)
 {
-    return sdamage * 7 / 6;
+    return sdamage;
 }
 
 void dest_effect()
