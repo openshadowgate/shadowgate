@@ -26,9 +26,7 @@
 #define UID_HM "HighMortal"
 #define UID_SHUTDOWN "Shutdown"
 #define UID_LAW "UidLaw"
-#define UID_LAWP ({"saide", "nienne", "ares"})
 #define UID_APPROVAL "Approval"
-#define UID_GOD "saide"
 
 /* Generalized euid groupings (set at time of special use, return to uid) */
 
@@ -41,6 +39,5 @@
 #define UID_USERSAVE              "UserSave"
 #define UID_AREA_DB             "dbuid"
 
-
-#define ICQ ({"ICQ","icq"," ICQ"," icq","i c q","i.c.q"})
+#define ICQ ({})
 #endif /* __SECURITY_H */
