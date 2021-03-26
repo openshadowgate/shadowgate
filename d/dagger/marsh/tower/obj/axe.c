@@ -4,10 +4,7 @@
 inherit "/d/common/obj/weapon/large_battle_axe.c";
 int uses;
 object owned;
-void init() {
-    ::init();
-    if(interactive(TP) && !owned) owned = TPQN;
-}
+
 void create() {
     ::create();
     set_name("axe");
@@ -29,7 +26,7 @@ void create() {
     set_hit((: TO, "extra_hit":));
     set_wield((: TO, "extra_wield":));
    set_unwield((:TO,"removeme":));
-// Improving the enchantment to +5 per bug request. Its a lvl 25+ weapon. 
+// Improving the enchantment to +5 per bug request. Its a lvl 25+ weapon.
 //    set_property("enchantment",3);
     set_property("enchantment",5);
   uses = random((100)+30);
@@ -62,7 +59,7 @@ int extra_hit(object ob) {
    }
     if (uses < 1) {
     dam = random(5)+2;
-    } else {  
+    } else {
             message("my_action",
 	        "%^RED%^The battle axe of bloodlust delivers a stunning blow!%^RESET%^"
             ,ETO);
@@ -87,11 +84,7 @@ int extra_wield() {
 	write("You could not control the power this weapon can deliver!");
 	return 0;
     }
-    if((string)ETOQN != owned && (string)ETOQN != "istvan") {
-	write("The axe fails to bond with you and vanishes!");
-        TO->remove();
-        return 0;
-    }
+
     if(uses > 0) {
         write(
 	    "%^RESET%^%^MAGENTA%^You say: %^RESET%^Time to slice, dice and mutilate mice!"
