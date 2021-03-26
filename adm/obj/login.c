@@ -92,6 +92,12 @@ protected void get_name(string str) {
             message("logon",read_file("/news/_arrested"),this_object());
             internal_remove();
         }
+
+        if (file_size("/realms/" + __Name) == -2) {
+            message("logon",read_file("/news/_lost_wiz"),this_object());
+            internal_remove();
+        }
+
         if (!((int)BANISH_D->valid_name(__Name))) {
             message("logon", sprintf("\n%s is not a valid name choice for %s.\n",
                                      capitalize(__Name), mud_name()), this_object());
@@ -302,18 +308,17 @@ protected void confirm_password(string str2, string str1)
         message("logon",
 "
 
-ANSI color adds very much to your enjoyment of playing.The following
-is an ANSI color test. If you see color, then you support ANSI. If you
-see garbage, then you do NOT support ANSI. If you don't see color and
-you don't see garbage, then ANSI would still probably be a wise
-decision.
+Ccolor adds much to your enjoyment of playing. The following is a
+color test. If you see color, then you support it. If you see garbage,
+then you do NOT support it. If you don't see color and you don't see
+garbage, then allowing color would still probably be a wise decision.
 
 "
         , this_object());
-        message("logon","ANSI color test: "+HIM+"A"+HIG+"N"+HIC+"S"+HIR+"I"+BLU+
+        message("logon","Color test: "+HIM+"A"+HIG+"N"+HIC+"S"+HIR+"I"+BLU+
                 " test"+NOR+"\n\n", this_object());
         message("logon","That should have read 'ANSI test' in multiple colors.\n"+
-                "Do you support ANSI? [y/n]: ", this_object());
+                "Do you support colors? [y/n]: ", this_object());
         input_to("ansi_test");
     } else {
         message("logon", "\nPassword entries do not match.  Choose a password: ",
