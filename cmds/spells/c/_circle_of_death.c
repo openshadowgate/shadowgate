@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("circle of death");
-    set_spell_level(([ "mage" : 6, "cleric" : 6, "inquisitor" : 6, , "nightblade":6]));
+    set_spell_level(([ "mage" : 6, "cleric" : 6, "inquisitor" : 6, "nightblade":6]));
     set_spell_sphere("necromancy");
     set_mystery(({ "bones", "apocalypse" }));
     set_syntax("cast CLASS circle of death");
@@ -51,7 +51,7 @@ void spell_effect(int prof)
             tell_room(place, "%^BLUE%^%^BOLD%^" + foe->QCN + " crumbles to dust!", foe);
             damage_targ(foe, foe->return_target_limb(), foe->query_max_hp() * 2, "negative energy");
             max -= foe->query_level();
-        }        
+        }
     }
 
     spell_successful();
