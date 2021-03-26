@@ -8,7 +8,7 @@ object *targets;
 void create() {
     ::create();
     set_spell_name("glitterdust");
-    set_spell_level(([ "bard" : 2, "mage" : 2, "magus" : 2 ]));
+    set_spell_level(([ "bard" : 2, "mage" : 2, "magus" : 2, "nightblade":2]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS glitterdust");
     set_description("This spell casts glittering dust through the air, revealing all invisible and hiding beings in the room where the caster has cast his spell, and preventing them from hiding until the dust fades.");

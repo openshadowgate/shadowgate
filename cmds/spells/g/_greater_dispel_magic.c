@@ -8,7 +8,7 @@ inherit "/cmds/spells/d/_dispel_magic";
 void create() {
     ::create();
     set_spell_name("greater dispel magic");
-    set_spell_level(([ "mage" : 7, "bard" : 5, "cleric" : 6, "druid" : 6, "inquisitor":6, "magus" : 6 ]));
+    set_spell_level(([ "mage" : 7, "bard" : 5, "cleric" : 6, "druid" : 6, "inquisitor":6, "magus" : 6 , "nightblade":5]));
     set_domains("creation");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS greater dispel magic [on TARGET]");

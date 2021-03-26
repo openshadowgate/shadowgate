@@ -7,7 +7,7 @@ create()
 {
     ::create();
     set_spell_name("grease");
-    set_spell_level(([ "mage" : 1, "bard" : 1, "magus" : 1 ]));
+    set_spell_level(([ "mage" : 1, "bard" : 1, "magus" : 1, "nightblade":1]));
     set_spell_sphere("conjuration_summoning");
     set_damage_desc("tripped for 1d4 rounds");
     set_description("A grease spell covers a solid surface with a layer of slippery grease. Any creature in the area when the spell is cast must make a successful Reflex save or fall.");

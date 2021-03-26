@@ -9,7 +9,7 @@ string theName;
 void create(){
     ::create();
     set_spell_name("witness");
-    set_spell_level(([ "inquisitor" : 3, "bard" : 3, "psion":3]));
+    set_spell_level(([ "inquisitor" : 3, "bard" : 3, "psion":3, "nightblade":3]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS witness on TARGET");
     set_description("You link your senses to the target, allowing you to see and hear through its eyes and ears. For the duration of the effect you'll remain blinded.");

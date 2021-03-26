@@ -11,7 +11,7 @@ void create()
     ::create();
     set_author("nienne");
     set_spell_name("shocking grasp");
-    set_spell_level(([ "mage" : 1, "magus" : 1 ]));
+    set_spell_level(([ "mage" : 1, "magus" : 1, "nightblade":1]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shocking grasp on TARGET");
     set_description("This spell allows the mage to generate a small electrical charge in their fingertips. They may then "

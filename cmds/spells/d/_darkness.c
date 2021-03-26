@@ -10,7 +10,7 @@ void create()
 {
     ::create();
     set_spell_name("darkness");
-    set_spell_level(([ "mage" : 2, "bard" : 2, "cleric" : 2, "monk" : 3, "assassin" : 2, "paladin" : 2, "inquisitor" : 1, "monk" : 5, "magus" : 2 ]));
+    set_spell_level(([ "mage" : 2, "bard" : 2, "cleric" : 2, "monk" : 3, "assassin" : 2, "paladin" : 2, "inquisitor" : 1, "monk" : 5, "magus" : 2, "nightblade":2]));
     set_spell_sphere("invocation_evocation");
     set_monk_way("way of the shadow");
     set_monk_way("way of the shadow");

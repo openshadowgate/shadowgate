@@ -13,7 +13,7 @@ void create()
 {
     ::create();
     set_spell_name("plague storm");
-    set_spell_level(([ "cleric" : 6, "mage" : 7, "druid" : 6, ]));
+    set_spell_level(([ "cleric" : 6, "mage" : 7, "druid" : 6, , "nightblade":6]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS plague storm");
     set_description("This spell works exactly like contagion, but is an aoe.");

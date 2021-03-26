@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("rainbow pattern");
-    set_spell_level((["mage":4,"oracle":4,"bard":4]));
+    set_spell_level((["mage":4,"oracle":4,"bard":4, "nightblade":4]));
     set_mystery("heavens");
     set_spell_sphere("illusion");
     set_damage_desc("clevel / 8 to perception");

@@ -8,7 +8,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("detect poison");
-    set_spell_level(([ "cleric" : 1, "paladin" : 1, "ranger" : 1, "druid" : 1, "assassin" : 1, "mage" : 1, "psion" : 2 ]));
+    set_spell_level(([ "cleric" : 1, "paladin" : 1, "ranger" : 1, "druid" : 1, "assassin" : 1, "mage" : 1, "psion" : 2, "nightblade":1]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS detect poison on TARGET");
     set_description("Will detect if any poisons are present on an "+
@@ -38,7 +38,7 @@ void DoPoisonDisplay(mixed poison)
 	{
 		info += "%^BOLD%^%^GREEN%^" + capitalize(pnames[x]);
 		info += "%^BOLD%^%^WHITE%^ ( %^BOLD%^%^RED%^";
-		if(lvl >= poison[pnames[x]]["DC"]) 
+		if(lvl >= poison[pnames[x]]["DC"])
 		{
 			info += poison[pnames[x]]["TrueInfo"];
 		}
@@ -51,52 +51,52 @@ void DoPoisonDisplay(mixed poison)
 	return;
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
 	int x;
 	mixed poison;
-	
+
 	poison = POISON_D->query_poisons_affecting(TARGET);
 
     // interactive calls detect poison
-    if (interactive(CASTER)) 
+    if (interactive(CASTER))
 	{
-      	if (mapp(poison)) 
+      	if (mapp(poison))
 	  	{
-			DoPoisonDisplay(poison);	
-			//DoPoisonDisplay();		
+			DoPoisonDisplay(poison);
+			//DoPoisonDisplay();
             	tell_room(PLACE, YOU+" detects poison in the area.",CASTER);
 			if(interactive(TARGET))
 			{
                 tell_object(TARGET,YOU+" sniffed and found interesting smells on you.");
 			}
-        } 
-		else 
+        }
+		else
 		{
             tell_object(CASTER,"You detect no poison in "+HIM+".");
             tell_room(PLACE,YOU+" detects no poison in the area.",CASTER);
-			if(interactive(TARGET)) 
+			if(interactive(TARGET))
 			{
             		tell_object(TARGET,YOU+" sniffed and found nothing of interest on you.");
 			}
         }
     }
     // object calls detect poison
-    else 
+    else
 	{
-        if (mapp(poison)) 
+        if (mapp(poison))
 		{
-            DoPoisonDisplay(poison);	
+            DoPoisonDisplay(poison);
             tell_room(PLACE,YOU+" detects poison in the area.");
-            if(interactive(TARGET)) 
+            if(interactive(TARGET))
             {
 	            tell_object(TARGET,YOU+" sniffed and found interesting smells on you.");
-            } 
-        } 
-        else 
+            }
+        }
+        else
         {
             tell_room(PLACE,YOU+" detects no poison in the area.");
-            if(interactive(TARGET)) 	
+            if(interactive(TARGET))
             {
                 tell_object(TARGET,YOU+" sniffed and found nothing of interest on you.");
             }

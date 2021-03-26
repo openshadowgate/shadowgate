@@ -8,7 +8,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("misdirection");
-    set_spell_level(([ "mage" : 2, "bard" : 2, "assassin" : 3 ]));
+    set_spell_level(([ "mage" : 2, "bard" : 2, "assassin" : 3, "nightblade":2]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS misdirection on ALIGNMENT");
     set_description("This spell allows a skilled illusionist to weave an aura of misdirection around them, preventing the "

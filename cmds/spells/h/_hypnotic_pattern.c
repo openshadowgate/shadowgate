@@ -9,7 +9,7 @@ void create()
 {
     ::create();
     set_spell_name("hypnotic pattern");
-    set_spell_level((["mage":2,"oracle":2]));
+    set_spell_level((["mage":2,"oracle":2, "nightblade":2]));
     set_mystery("heavens");
     set_spell_sphere("illusion");
     set_damage_desc("clevel / 8 to perception");

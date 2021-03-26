@@ -6,7 +6,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("detect thoughts");
-    set_spell_level(([ "bard":2, "inquisitor":2, "mage":2]));
+    set_spell_level(([ "bard":2, "inquisitor":2, "mage":2, "nightblade":2]));
     set_spell_sphere("divination");
     set_damage_desc("indicates presence of telepathic communication in the area");
     set_syntax("cast CLASS detect thoughts");

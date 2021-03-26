@@ -25,7 +25,7 @@ void create()
 {
     ::create();
     set_spell_name("ray of enfeeblement");
-    set_spell_level(([ "mage" : 2, "magus" : 1, "innate" : 5 ]));
+    set_spell_level(([ "mage" : 2, "magus" : 1, "innate" : 5, "nightblade":2]));
     set_spell_sphere("necromancy");
     set_domains("suffering");
     set_syntax("cast CLASS ray of enfeeblement on TARGET");
@@ -42,7 +42,7 @@ int preSpell()
         dest_effect();
         return 0;
     }
-    
+
     if(caster->is_class("cleric"))
     {
         if(!(int)USER_D->spend_pool(this_player(), 1, "grace"))
@@ -51,10 +51,10 @@ int preSpell()
             return 0;
         }
     }
-    
+
     return 1;
 }
-    
+
 void spell_effect(int prof)
 {
     int roll;

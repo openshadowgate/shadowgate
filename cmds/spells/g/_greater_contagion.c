@@ -5,7 +5,7 @@ inherit "/cmds/spells/c/_contagion";
 void create() {
     ::create();
     set_spell_name("greater contagion");
-    set_spell_level(([ "cleric":5, "druid":5, "mage":5]));
+    set_spell_level(([ "cleric":5, "druid":5, "mage":5, "nightblade":5]));
     set_spell_sphere("necromancy");
     set_damage_desc("Random disease");
     set_syntax("cast CLASS greater contagion on TARGET");

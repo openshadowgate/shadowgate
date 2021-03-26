@@ -5,7 +5,7 @@ void create() {
     ::create();
     set_author("nienne");
     set_spell_name("shield of shadows");
-    set_spell_level(([ "mage" : 1 ]));
+    set_spell_level(([ "mage" : 1, "nightblade":2]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS shield of shadows");
     set_description("This spell calls a protective shield into existance before the caster, crafted of the stuff of "

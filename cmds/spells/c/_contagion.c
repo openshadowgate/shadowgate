@@ -7,7 +7,7 @@ string diseases = ({"blinding sickness", "cackle fever", "filth fever", "mindfir
 void create() {
     ::create();
     set_spell_name("contagion");
-    set_spell_level(([ "paladin":3, "cleric":3, "druid":3, "mage":4]));
+    set_spell_level(([ "paladin":3, "cleric":3, "druid":3, "mage":4, "nightblade":3]));
     set_spell_sphere("necromancy");
     set_damage_desc("Random disease");
     set_syntax("cast CLASS contagion on TARGET");

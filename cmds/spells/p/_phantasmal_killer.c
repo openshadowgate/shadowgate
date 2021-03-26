@@ -11,7 +11,7 @@ void create(){
     ::create();
     set_author("nienne");
     set_spell_name("phantasmal killer");
-    set_spell_level(([ "mage" : 4, "cleric" : 8, "magus" : 4 ]));
+    set_spell_level(([ "mage" : 4, "cleric" : 8, "magus" : 4 , "nightblade":4]));
     set_spell_sphere("illusion");
     set_spell_domain("illusion");
     set_syntax("cast CLASS phantasmal killer on TARGET");

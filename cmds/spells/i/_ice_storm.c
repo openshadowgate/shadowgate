@@ -13,7 +13,7 @@ string target_limb, element;
 void create() {
     ::create();
     set_spell_name("ice storm");
-    set_spell_level(([ "mage" : 4, "druid" : 4, "oracle" : 4, "magus" : 4 ]));
+    set_spell_level(([ "mage" : 4, "druid" : 4, "oracle" : 4, "magus" : 4 , "nightblade":4]));
     set_mystery( ({ "apocalypse", "winter", "waves" }) );
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS ice storm");

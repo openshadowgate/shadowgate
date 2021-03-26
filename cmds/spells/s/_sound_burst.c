@@ -11,7 +11,7 @@ void dest_effect();
 void create() {
     ::create();
     set_spell_name("sound burst");
-    set_spell_level(([ "bard" : 2, "cleric" : 2, "inquisitor" : 2 ]));
+    set_spell_level(([ "bard" : 2, "cleric" : 2, "inquisitor" : 2, "nightblade":2]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sound burst on TARGET");
     set_description("This spell enhances a simple click of the fingers, reaching the target with an ear-shattering pitch "

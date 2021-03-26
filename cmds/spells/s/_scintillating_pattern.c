@@ -10,7 +10,7 @@ void create()
 {
     ::create();
     set_spell_name("scintillating pattern");
-    set_spell_level(([ "mage" : 8 ]));
+    set_spell_level(([ "mage" : 8 , "nightblade":6]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS scintillating pattern");
     set_damage_desc("mass confusion for clevel/5 + 1 rounds on enemies");

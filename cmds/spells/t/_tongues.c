@@ -8,7 +8,7 @@ void create()
 {
     ::create();
     set_spell_name("tongues");
-    set_spell_level(([ "mage" : 3, "bard" : 2, "psion" : 2, "inquisitor" : 2, "cleric" : 3, "magus" : 3 ]));
+    set_spell_level(([ "mage" : 3, "bard" : 2, "psion" : 2, "inquisitor" : 2, "cleric" : 3, "magus" : 3, "nightblade":2]));
     set_spell_sphere("alteration");
     set_domains("knowledge");
     set_mystery("lore");

@@ -6,7 +6,7 @@ inherit SPELL;
 void create() {
     ::create();
     set_spell_name("blurred movement");
-    set_spell_level(([ "mage" : 1, "bard" : 1, "oracle" : 1, "magus" : 1 ]));
+    set_spell_level(([ "mage" : 1, "bard" : 1, "oracle" : 1, "magus" : 1, "nightblade":1]));
     set_mystery("shadow");
     set_spell_sphere("illusion");
     set_syntax("cast CLASS blurred movement");

@@ -8,7 +8,7 @@ object *targets;
 void create() {
     ::create();
     set_spell_name("dust of twilight");
-    set_spell_level(([ "mage" : 2, "oracle" : 2 ]));
+    set_spell_level(([ "mage" : 2, "oracle" : 2, "nightblade":2]));
     set_spell_sphere("conjuration_summoning");
     set_mystery( ({ "darkness", "lunar" }) );
     set_syntax("cast CLASS dust of twilight");

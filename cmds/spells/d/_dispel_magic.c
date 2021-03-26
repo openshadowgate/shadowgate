@@ -14,7 +14,7 @@ int checkDispel(object ob);
 void create() {
     ::create();
     set_spell_name("dispel magic");
-    set_spell_level(([ "mage" : 3, "cleric" : 3, "paladin" : 3, "bard" : 3, "druid" : 4,"inquisitor" : 3, "oracle": 3, "magus" : 3 ]));
+    set_spell_level(([ "mage" : 3, "cleric" : 3, "paladin" : 3, "bard" : 3, "druid" : 4,"inquisitor" : 3, "oracle": 3, "magus" : 3, "nightblade":3]));
     set_mystery("spellscar");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS dispel magic (on TARGET)");

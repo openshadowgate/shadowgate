@@ -13,7 +13,7 @@ void make_image();
 void create() {
     ::create();
     set_spell_name("project image");
-    set_spell_level(([ "mage" : 7, "bard" : 6,"oracle":7 ]));
+    set_spell_level(([ "mage" : 7, "bard" : 6,"oracle":7 , "nightblade":6]));
     set_mystery("whimsy");
     set_spell_sphere("illusion");
     set_syntax("cast CLASS project image on TARGET");

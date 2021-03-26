@@ -12,7 +12,7 @@ void create()
 {
     ::create();
     set_spell_name("shadow vortex");
-    set_spell_level(([ "mage":3,]));
+    set_spell_level(([ "mage":3,"nightblade":3]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shadow vortex");
     set_damage_desc("half cold, half electricity");

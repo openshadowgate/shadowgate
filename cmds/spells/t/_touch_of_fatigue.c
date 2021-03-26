@@ -14,7 +14,7 @@ create()
 {
     ::create();
     set_spell_name("touch of fatigue");
-    set_spell_level(([ "mage" : 1, "magus" : 1 ]));
+    set_spell_level(([ "mage" : 1, "magus" : 1, "nightblade":1]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS touch of fatigue on TARGET");
     set_damage_desc("fatigue for clevel/4+1 rounds");

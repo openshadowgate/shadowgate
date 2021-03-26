@@ -7,7 +7,7 @@ inherit SPELL;
 void create() {
 	::create();
     set_spell_name("cause fear");
-    set_spell_level(([ "mage" : 1, "bard" : 2, "cleric":1,"paladin":1,"inquisitor" : 1,"oracle":1 ]));
+    set_spell_level(([ "mage" : 1, "bard" : 2, "cleric":1,"paladin":1,"inquisitor" : 1,"oracle":1, "nightblade":1]));
     set_spell_sphere("necromancy");
     set_mystery(({"dragon","bones"}));
     set_syntax("cast CLASS cause fear on TARGET");
