@@ -16,7 +16,7 @@ void create()
     set_syntax("cast CLASS harm on TARGET");
     set_damage_desc("negative energy");
     set_description("%^RESET%^This spell will channel huge amount of negative energy into target and will allow the caster to cause massive amount damage. This spell will cure status effects such as blinded, confused, dazzled, paralyzed, fatigued, exhausted, sickened and will clear negative levels.");
-    set_save("will");
+    set_save("fort");
     set_target_required(1);
     set_helpful_spell(1);
 }
@@ -42,8 +42,12 @@ spell_effect(int prof)
     int rnd;
 
     set_helpful_spell(1);
-    if(!(target->query_property("negative energy affinity")))
+    if (!(target->query_property("negative energy affinity"))) {
         set_helpful_spell(0);
+        if (do_save(target, -2)) {
+            sdamage /= 2;
+        }
+    }
     if (interactive(caster))
     {
         if ( caster == target )
