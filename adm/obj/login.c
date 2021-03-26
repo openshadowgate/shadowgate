@@ -103,7 +103,7 @@ protected void get_name(string str) {
             return;
         }
         if (!((int)BANISH_D->allow_logon(__Name, query_ip_number()))) {
-            message("logon",read_file("/news/register"), this_object());
+            message("logon",read_file("/news/_register"), this_object());
             internal_remove();
             return;
         }
@@ -343,25 +343,17 @@ protected void ansi_test(string str) {
         __Player->reset_terminal();
     }
     __Player->set_gender("other");
-    message("logon", sprintf("
-If you wish to be able to restore your password, enter your email. You
-can later change this setting with <chfn> command.
-Your email address: ", mud_name()), this_object());
-    input_to("enter_email");
-    return;
-
-}
-
-protected void enter_email(string str) {
-    string a, b;
-
-    __Player->set_email(str);
     __Player->set_rname("Unknown");
+    __Player->set_email(str);
+
     seteuid(UID_LOG);
     log_file("player/enter", sprintf("%s (new player): %s\n", __Name, ctime(time())));
     log_file("player/new_players",sprintf("%s(%s) <%s> at %s from %s\n",__Name, str, __Player->query_email(),ctime(time()),query_ip_number()));
     seteuid(getuid());
     exec_user();
+
+    return;
+
 }
 
 protected void idle()

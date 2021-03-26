@@ -16,33 +16,14 @@ int cmd_chfn(string arg) {
     write("Default values are printed inside '[]'.\n");
     write("To accept the default, type <return>.\n");
     write("\n");
-    write("Name ["+(string)this_player()->query_rname()+"] : ");
-    input_to("new_name");
-    return 1;
-}
-
-protected void new_name(string rname)
-{
-    if( rname && (strlen( rname ) > 0) )
-    {
-        seteuid(UID_USERACCESS);
-        this_player()->set_rname(rname);
-        seteuid(getuid());
-        this_player()->save_player((string)this_player()->query_name());
-    }
     write("Email address ["+this_player()->query_email()+"] : ");
     input_to("new_email");
+    return 1;
 }
 
 void warning_display()
 {
-    write ("Please input any information you wish to show up at the bottom of your finger display.
-
-You may use it to allow other players to contact you OOG. Do NOT use any such information for harassment and if you are harassed, please report by whom.
-
-Displaying any information here is entirely voluntary and not required. However, whatever you input here will be available to anyone who uses the finger command. You are free to include whatever you wish to include.
-
-If you do not enter anything then ** will simply exit the command and nothing will be visible to players who use the finger command on you.
+    write ("Input any information you wish to show up at the bottom of your finger display.
 
 Type ** to exit.");
 }
@@ -58,13 +39,6 @@ protected void new_email(string e)
         write ("Leaving email as ["+olde+"].");
         warning_display();
         input_to("ooc_contact");
-        return;
-    }
-    else if (stringp(e) && (strlen(e) <= 6))
-    {
-        write("Sorry, I don't believe you.\nAt least TRY to make it valid!\n");
-        write("Email address ["+olde+"] : ");
-        input_to("new_email");
         return;
     }
 
