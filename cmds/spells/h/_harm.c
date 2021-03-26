@@ -39,8 +39,6 @@ string query_cast_string()
 
 spell_effect(int prof)
 {
-    int rnd;
-
     set_helpful_spell(1);
     if (!(target->query_property("negative energy affinity"))) {
         set_helpful_spell(0);
