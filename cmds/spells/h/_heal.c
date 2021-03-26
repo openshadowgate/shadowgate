@@ -77,7 +77,7 @@ spell_effect(int prof)
     }
 
     sdamage;
-    damage_targ(target, target->return_target_limb(), rnd, "positive energy");
+    damage_targ(target, target->return_target_limb(), sdamage, "positive energy");
 
     if(query_spell_name()=="heal")
         if(member_array(target,caster->query_attackers())==-1)
