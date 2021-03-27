@@ -873,7 +873,7 @@ void set_hd(int dice, int bonus)
     }
     set_level(dice);
     conbonus = (int)(query_stats("constitution") - 10) / 2;
-    set_max_hp(roll_dice(dice, 12) + bonus + (dice * conbonus));
+    set_max_hp(roll_dice(dice, 14) + bonus + (dice * conbonus));
     set_hp(query_max_hp());
 }
 

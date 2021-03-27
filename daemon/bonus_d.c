@@ -451,9 +451,10 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
                 pFlag = 1;
             }
         }
-        if (who->query_static_bab() && !pFlag) { // giving monsters a static base attack bonus to see if this helps armor classes vs monsters -Ares
+        if (who->query_static_bab() && !pFlag) {
             bon = (int)who->query_static_bab();
-            bon += ((int)who->query_max_hp() / 250); // give some extra chance to hit based on monster health, so bosses don't miss as often
+            bon += ((int)who->query_max_hp() / 225);
+// give some extra chance to hit based on monster health, so bosses don't miss as often
             bon += ((int)hit_bonus(who, targ, attack_num, current) / 2);
         }else {
             bon = hit_bonus(who, targ, attack_num, current);
