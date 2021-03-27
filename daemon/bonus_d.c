@@ -383,7 +383,7 @@ varargs int hit_bonus(object who, object targ, int attack_num, object current)
             to_hit += query_stat_bonus(who, "strength");
         }
     }
-    
+
     //Paladin smite against opposed alignment adds cha mod to attack rolls
     if(who->query_guild_level("paladin") && targ->query_property("paladin smite") == who)
         to_hit += query_stat_bonus(who, "charisma");
@@ -475,6 +475,7 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
     if (attack_roll == 20) {
         return 20;
     }
+
     //if(attack_roll == 1) return -1;
     //does this change make AC less OP? - Saide, August 2017
     if ((bon + 15) < AC) {
