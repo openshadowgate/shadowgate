@@ -476,17 +476,26 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
         return 20;
     }
 
+<<<<<<< HEAD
     //if(attack_roll == 1) return -1;
     //does this change make AC less OP? - Saide, August 2017
     if ((bon + 15) < AC) {
         if (random(bon + AC + attack_roll) >= AC) {
             return attack_roll;
         }
+=======
+    if (attack_roll == 1) {
+>>>>>>> 385f80f9c (L40 cap.)
         return 0;
     }
-    if ((attack_roll + bon) >= AC) {
+
+    AC = AC > 40 ? (-1500 / AC + 77) : AC;
+    bon = bon > 40 ? (-1500 / bon + 77) : bon;
+
+    if (bon + attack_roll >= AC) {
         return attack_roll;
     }
+
     return 0;
 }
 
