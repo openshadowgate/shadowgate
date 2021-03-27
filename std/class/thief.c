@@ -38,7 +38,7 @@ string *class_feats(string myspec)
 }
 
 mapping class_featmap(string myspec) {
-    return ([ 1 : ({ "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "dodge" }), 4 : ({ "combat reflexes" }), 7 : ({ "mobility" }), 10 : ({ "tools of the trade" }), 11 : ({ "evasion" }), 14 : ({ "scramble" }), 17 : ({ "spring attack" }) ]);
+    return ([ 1 : ({ "light armor proficiency", "simple weapon proficiency", "martial weapon proficiency", "dodge" }), 2:({"evasion"}), 4 : ({ "combat reflexes" }), 7 : ({ "mobility" }), 10 : ({ "tools of the trade" }), 14 : ({ "scramble" }), 17 : ({ "spring attack" }) ]);
 }
 
 string *class_skills()
@@ -74,22 +74,22 @@ int attack_bonus(object player)
 {
     int bonus;
     float penalty, full_level, class_level;
-    
+
     full_level = to_float(player->query_base_character_level());
     class_level = to_float(player->query_prestige_level("thief"));
-    
+
     if(full_level < 20.00)
     {
         bonus = (to_int(class_level) * 3 / 4);
         return bonus;
     }
-    
+
     // Above 20
     // 3/4 BAB gets half penalty to BAB
     // Weighted average of class level compared to total level
     penalty = (10.00 * (class_level / full_level)) / 2.00;
     bonus = to_int(class_level - penalty);
-    
+
     return bonus;
 }
 
