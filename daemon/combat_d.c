@@ -40,15 +40,6 @@ void restore_damage_tracker()
     seteuid(geteuid());
 }
 
-//this is called in internal_execute_attack in combat.c
-//is also called in feat.c in the thaco() function can be ignored there for touch attack type feats
-//can be called anywhere you want to check to see if a person successfully deflects or avoids an attack
-//called when the dice roll is not 20 or not a miss - so
-//only when attacker hits with a dice roll that is not 20
-//I am treating 20s as automatic hits bypassing shields and concealing amorpha - Saide
-//a return value of 1 will be processed as a hit
-//a return value of 0 is a miss - tell the attacker and the victim - Saide
-
 varargs int extra_hit_calcs(object attacker, object victim, object weapon, string limb)
 {
     object env, rider, defender;
@@ -1093,8 +1084,6 @@ int damage_done(object attacker, object weap, int damage, int isranged)
         }
     }
 
-    //prof += (random(30) - random(30)); //Commenting out because I see no logical reason to add variance here when it's already handled through weapon die rolls - Odin 4/30/20
-
     if (prof == 0) {
         return 0;
     }
@@ -1110,9 +1099,6 @@ int damage_done(object attacker, object weap, int damage, int isranged)
     }
 }
 
-/*The following two functions were moved from combat.c - in order to
-   attempt to have everything related to damage calculations in combat_d.c - Saide - September 2016
- */
 varargs int get_damage(object attacker, object weap, object targ)
 {
     function f;

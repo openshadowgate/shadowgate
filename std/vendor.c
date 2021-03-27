@@ -102,32 +102,14 @@ int query_mymaxvalue()
  */
 int adjustment_cost(object ob)
 {
-    int cost, x, enchant, bonus;
-    mapping tmpmap;
+    int cost, enchant;
 
     if (ob->query_property("enchantment")) {
         enchant = absolute_value((int)ob->query_property("enchantment"));
         enchant ? enchant : 1;
     }
 
-    if (mapp(tmpmap = ob->query_item_bonuses())) {
-        if (sizeof(keys(tmpmap)) > enchant) {
-            bonus = sizeof(keys(tmpmap));
-        }
-        bonus = bonus ? bonus : 0;
-    }
-    if (!enchant && (ob->is_armour() || ob->is_weapon())) {
-        enchant = 3;
-    }
-
-    cost = (int)ob->query_property("repair cost");
-    if (!cost) {
-        x = enchant;
-        cost = -(565 * x * x * x - 12165 * x * x + 11600 * x - 4500) / 9;
-        x = bonus;
-        cost += -(500 * x * x * 2 - 6500 * x) / 6;
-        ob->set_property("repair cost", cost);
-    }
+    cost = max(({ob->query_value(), enchant * 500}));
 
     return adjust_cost(cost);
 }
@@ -298,13 +280,11 @@ int __Sell(string str)
         tell_room(ETO, response + "Please unwield that before selling it.");
         return 1;
     }
-    //Added by Saide to support the new soulbound/ownered
-    //item code - 3/21/2007
+
     if (ob->query_item_owner_prop("sale_clear")) {
         ob->clear_item_owners();
     }
-    //this mymax check is here so it will bypass this code if the vendor has no max set
-    //This starts the maxvalue code.  Circe 3/19/05
+
     if (mymax = TO->query_mymaxvalue()) {
         if (myenchant = ob->query_property("enchantment")) {
             switch (mymax) {
@@ -607,6 +587,11 @@ int __Value(string str)
     }
     tell_room(ETO, TPQCN + " asks for an appraisal.", TP);
     response = "%^MAGENTA%^" + TOQCN + " says:  %^RESET%^";
+
+    if (str == "all") {
+
+    }
+
     if (!(ob = present(str, TP))) {
         tell_room(ETO, response + "You don't have a " + str + "!");
         return 1;
@@ -617,7 +602,7 @@ int __Value(string str)
         }
         return 1;
     }
-//    message("other_action", TPQCN+" asks for an appraisal.", ETO, ({TO,TP}));
+
     if (ob->query_property("no_profit") || ob->query_property("plot_item")) {
         tell_room(ETO, response + "Sorry, I can't buy that " + ob->query_short() + "!");
         return 1;
@@ -629,45 +614,16 @@ int __Value(string str)
     }
     value = value - (value / 3);
     value = adjust_cost(value, 1);
-    cost = (int)ob->query_property("repair cost");
-
-    if (!cost) {
-        if (ob->query_property("enchantment")) {
-            enchant = absolute_value((int)ob->query_property("enchantment"));
-            enchant += 1;
-        }
-        switch ((int)TP->query_base_character_level()) {
-        case 0..10:
-            cost = enchant * ((roll_dice(1, 2)) * 400);
-            break;
-
-        case 11..20:
-            cost = enchant * ((roll_dice(1, 3)) * 500);
-            break;
-
-        case 21..30:
-            cost = enchant * ((2 + roll_dice(1, 4)) * 1000);
-            break;
-
-        default:
-            cost = enchant * ((4 + roll_dice(1, 4)) * 1200);
-            break;
-        }
-        if (!cost) {
-            cost = 100 + random(200);
-        }
-        ob->set_property("repair cost", cost);
-    }
 
     cost = adjust_cost(cost);
 
     cn = ob->query_cointype();
 
     tell_room(ETO, response + TPQCN + ", I will offer you " + value + " " + cn + " for it. I can also restore it " +
-              "to a pristine condition for " + cost + " " + cn + ".", TP);
+              "to a pristine condition for " + repair_cost(ob) + " " + cn + ".", TP);
 
     tell_object(TP, response + "I will offer you " + value + " " + cn + " for it. I can also restore it " +
-                "to a pristine condition for " + cost + " " + cn + ".");
+                "to a pristine condition for " + repair_cost(ob) + " " + cn + ".");
 
     return 1;
 }
@@ -916,10 +872,10 @@ Shops of this type have next commands:
     List shop inventoryfiltering by %^ORANGE%^%^ULINE%^TYPE%^RESET%^.
 %^ORANGE%^<show %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^
     Show you an %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
+%^ORANGE%^<value %^ULINE%^ITEM%^>%^ORANGE%^
+    Evaluate item sell value and its repair cost.
 %^ORANGE%^<repair %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^
     Repair an %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
-%^ORANGE%^<repair cost %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^|all>%^RESET%^
-    Evaluate cost of repairing an %^ORANGE%^%^ULINE%^ITEM%^RESET%^.
 %^ORANGE%^<repair all>%^RESET%^
     Repair everything in your inventory.
 %^ORANGE%^<resize %^ORANGE%^%^ULINE%^ITEM%^RESET%^%^ORANGE%^>%^RESET%^
