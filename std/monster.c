@@ -1707,7 +1707,7 @@ int query_exp_needed(int level)
 }
 
 /**
- * Automatically Sets monster exp based on exp needed towards next level
+ * Automatically Sets monster exp based monster tier
  *
  * @param level optional, monster level
  * @param perc optional, "very low" "low" "normal" "high" "very high" "boss",
