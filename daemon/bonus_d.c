@@ -480,7 +480,7 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
         return 0;
     }
 
-    AC = AC > 40 ? (-1578 / AC + 80) : AC;
+    AC = AC > 35 ? (-1578 / AC + 80) : AC;
     bon = bon > 40 ? (-1500 / bon + 77) : bon;
 
     if (bon + attack_roll >= AC) {
