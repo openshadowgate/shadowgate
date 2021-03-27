@@ -589,7 +589,29 @@ int __Value(string str)
     response = "%^MAGENTA%^" + TOQCN + " says:  %^RESET%^";
 
     if (str == "all") {
+        int *costarray;
+        int costsum;
+        object * inv;
 
+        tell_room(ETO, TPQCN + " asks the shopkeeper.", TP);
+
+        inv = all_inventory(TP);
+        inv = filter_array(inv, (:!$1->query_property("nosell)"):));
+        inv = filter_array(inv, (:objectp($1->query_worn()):));
+        costarray = map_array(inv, (:$1->query_value():));
+        costsum = sum_array(costarray, sizeof(costarray));
+        force_me("sigh");
+
+        tell_room(ETO, response + "You can sell stuff worth of " + costsum + " gold.");
+
+        inv = all_inventory(TP);
+
+        costarray = map_array(inv, "repair_cost");
+        costsum = sum_array(costarray, sizeof(costarray));
+
+        tell_room(ETO, response + "That will be " + costsum + " gold to repair all.");
+
+        return 1;
     }
 
     if (!(ob = present(str, TP))) {
