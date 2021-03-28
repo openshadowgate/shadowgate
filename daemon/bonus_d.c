@@ -479,10 +479,9 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
     AC = AC > 35 ? (-1578 / AC + 80) : AC;
     bon = bon > 40 ? (-1500 / bon + 77) : bon;
 
-    // +20 and +15 values are present due to how mob AC assignation
-    // works at the moment.
+    // +15 values are present due to AC assignation bonus
 
-    if (bon + 20 + attack_roll >= AC) {
+    if (bon + 15 + attack_roll >= AC) {
         return attack_roll;
     }
 
