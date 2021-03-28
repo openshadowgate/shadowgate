@@ -454,7 +454,6 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
         if (who->query_static_bab() && !pFlag) {
             bon = (int)who->query_static_bab();
             bon += ((int)who->query_max_hp() / 225);
-// give some extra chance to hit based on monster health, so bosses don't miss as often
             bon += ((int)hit_bonus(who, targ, attack_num, current) / 2);
         }else {
             bon = hit_bonus(who, targ, attack_num, current);
@@ -477,15 +476,20 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
         return 20;
     }
 
-    if (attack_roll == 1) {
-        return 0;
-    }
-
     AC = AC > 35 ? (-1578 / AC + 80) : AC;
     bon = bon > 40 ? (-1500 / bon + 77) : bon;
 
-    if (bon + attack_roll >= AC) {
+    // +20 and +15 values are present due to how mob AC assignation
+    // works at the moment.
+
+    if (bon + 20 + attack_roll >= AC) {
         return attack_roll;
+    }
+
+    if ((bon + 15) < AC) {
+        if (random(bon + AC + attack_roll) >= AC) {
+            return attack_roll;
+        }
     }
 
     return 0;
