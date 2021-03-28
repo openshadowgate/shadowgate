@@ -9,7 +9,7 @@
 
 object __Search_Obj;
 //making smells, listens, searches public, inherits not showing up
-mapping __Smells, __Listens, __Searches; 
+mapping __Smells, __Listens, __Searches;
 
 void set_search(string item, mixed desc);
 void set_smell(string item, mixed desc);
@@ -42,7 +42,7 @@ void initiate() {
     add_action("do_listen", "listen");
 }
 
-int search_room(string str) 
+int search_room(string str)
 {
     int i, x;
     string tmp;
@@ -64,7 +64,7 @@ int search_room(string str)
     return 1;
 }
 
-int smell_things(string str) 
+int smell_things(string str)
 {
     string tmp;
 	if(!objectp(this_object())) return 0;
@@ -94,7 +94,7 @@ int smell_things(string str)
     return 1;
 }
 
-int do_listen(string str) 
+int do_listen(string str)
 {
     string tmp;
 	if(!objectp(this_object())) return 0;
@@ -131,32 +131,54 @@ void set_search(string item, mixed desc) {
     __Searches[(item ? item : "default")] = desc;
 }
 
-void remove_search(string item) 
+void remove_search(string item)
 {
 	if(!mapp(__Searches)) __Searches = ([]);
-	if(!__Searches[item]) return; 
-	map_delete(__Searches, item); 
+	if(!__Searches[item]) return;
+	map_delete(__Searches, item);
 }
 
-void set_smell(string item, mixed desc) 
+void set_smell(string item, mixed desc)
 {
-	if(!item) item = "default";
-	if(!mapp(__Smells)) __Smells = ([]);
-	__Smells[item] = desc;
+    if (!desc && item) {
+        __Smells["default"] = item;
+    }
+
+    if (!item) {
+        item = "default";
+    }
+    if (!mapp(__Smells)) {
+        __Smells = ([]);
+    }
+    __Smells[item] = desc;
 }
 
-void remove_smell(string item) { map_delete(__Smells, item); }
-
-void set_listen(string item, mixed desc) 
+void remove_smell(string item)
 {
-	if(!item) item = "default";
-	if(!mapp(__Listens)) __Listens = ([]);
-	__Listens[item] = desc;
+    map_delete(__Smells, item);
 }
 
-void remove_listen(string item) { map_delete(__Listens, item); }
+void set_listen(string item, mixed desc)
+{
+    if (!desc && item) {
+        __Smells["default"] = item;
+    }
 
-mixed query_search(string item) { 
+    if (!item) {
+        item = "default";
+    }
+    if (!mapp(__Listens)) {
+        __Listens = ([]);
+    }
+    __Listens[item] = desc;
+}
+
+void remove_listen(string item)
+{
+    map_delete(__Listens, item);
+}
+
+mixed query_search(string item) {
     return (__Searches ? __Searches[item] : 0);
 }
 
@@ -166,7 +188,7 @@ mapping query_searches()
    return ([]);
 }
 
-mixed query_smell(string item) 
+mixed query_smell(string item)
 {
     string tmp;
     if(!__Smells || !__Smells[item]) return 0;
@@ -178,14 +200,14 @@ mixed query_smell(string item)
     return (__Smells ? __Smells[item] : 0);
 }
 
-mixed query_listen(string item) 
+mixed query_listen(string item)
 {
     string tmp;
     if(!__Listens || !__Listens[item]) return 0;
     if(functionp(__Listens[item]) && objectp(this_player()))
     {
         tmp = (*__Listens[item])(1);
-        return message("listen", call_other(TO, tmp, item), this_player());        
+        return message("listen", call_other(TO, tmp, item), this_player());
     }
     return (__Listens ? __Listens[item] : 0);
 }
