@@ -1,7 +1,7 @@
 #include <std.h>
 #include <new_exp_table.h>
 
-#define DELAY 2 * 24 * 60 * 60
+#define DELAY 12 * 60 * 60
 
 int cmd_reward(string str)
 {
@@ -50,8 +50,16 @@ int cmd_reward(string str)
         target->add_general_exp(target->query_classes()[0], expdelta);
         target->remove_property("ignore tax");
 
-        tell_object(TP, "%^CYAN%^%^BOLD%^You have rewarded " + target->QCN + " with some experience.");
+        tell_object(TP, "%^CYAN%^%^BOLD%^You have rewarded " + target->QCN + " with some knowledge.");
         tell_object(target, "%^CYAN%^%^BOLD%^You feel enlightened as your powers grow.");
+
+        thelevel = TP->query_adjusted_character_level();
+        expdelta = abs(EXP_NEEDED[thelevel + 1] - EXP_NEEDED[thelevel]) / 12;
+
+        target->set_property("ignore tax", 1);
+        target->add_general_exp(target->query_classes()[0], expdelta);
+        target->remove_property("ignore tax");
+
         TP->delete("last_reward");
         TP->set("last_reward", time());
 
@@ -74,7 +82,9 @@ reward %^ORANGE%^%^ULINE%^TARGET%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-This command will allow you to reward anyone with 12.5% of exp towards their next level. The reason for doing so is left to your discretion. The player won't know who rewarded them, but will see the message about the reward. They also must be present in the room with you. You can do it only once per two days.
+This command will allow you to reward anyone with 12.5% of exp towards their next level. In addition to that, rewardee will gain 10% of the exp towards your next level.
+
+The reason for use of rewards is left to your discretion. The player won't know who rewarded them, but will see the message about the reward. They also must be present in the room with you. You can do it only once twelve hours.
 
 Player may opt out from receiving rewards with noreward setting in %^ORANGE%^<set>%^RESET%^ command. If they did so, your attempt to reward them won't count.
 
