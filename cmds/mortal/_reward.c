@@ -56,9 +56,9 @@ int cmd_reward(string str)
         thelevel = TP->query_adjusted_character_level();
         expdelta = abs(EXP_NEEDED[thelevel + 1] - EXP_NEEDED[thelevel]) / 12;
 
-        target->set_property("ignore tax", 1);
-        target->add_general_exp(target->query_classes()[0], expdelta);
-        target->remove_property("ignore tax");
+        TP->set_property("ignore tax", 1);
+        TP->add_general_exp(TP->query_classes()[0], expdelta);
+        TP->remove_property("ignore tax");
 
         TP->delete("last_reward");
         TP->set("last_reward", time());
