@@ -13,6 +13,7 @@ inherit ROOM;
 void init(){
   ::init();
   add_action("buy_map","draw");
+  add_action("read_sign", "read");
 }
 
 void create() {
@@ -35,7 +36,7 @@ years of use but is kept well-repaired.  A lone shelf to the right
 of the desk holds reams of %^BOLD%^paper %^RESET%^and jars of %^BOLD%^%^BLACK%^ink %^RESET%^while the 
 rest of the office is rather bare.  A single picture is framed on 
 the southern wall, a large portrait of %^YELLOW%^Tabor %^RESET%^with the mage 
-tower prominent in the foreground.
+tower prominent in the foreground. There is a %^BOLD%^%^GREEN%^sign%^RESET%^ on the counter.
 MELNMARN
   );
   set_smell("default","You smell the odors of pen, ink, and paper.");
@@ -44,6 +45,17 @@ MELNMARN
     "west" : ROOMDIR+"math5"
   ]) );
   set_items(([
+     "sign" : "%^RESET%^%^CYAN%^Ask the scribe "+
+       "to %^RESET%^<%^BOLD%^%^CYAN%^write%^RESET%^> %^CYAN%^anything you "+
+       "want, in whatever languages the scribe knows.  He will "+
+	    "%^RESET%^<%^BOLD%^%^CYAN%^translate [item] to [language]%^RESET%^> %^CYAN%^for you.  "+
+	    "He can also give you an estimate of how much it will cost to translate an "+
+	    "item, by using %^RESET%^<%^BOLD%^estimate [item]%^RESET%^>%^CYAN%^.  "+
+	    "If you are interested "+
+        "in a map, you can have him %^RESET%^<%^BOLD%^%^CYAN%^draw "+
+        "tabor%^RESET%^> %^CYAN%^for a map of this fair city or "+
+        "%^RESET%^<%^BOLD%^%^CYAN%^draw area%^RESET%^> %^CYAN%^to "+
+        "get a map of adventure areas around here.",
      "desk" : "%^RED%^The teak wood desk was obviously imported, "+
         "and from the layers of polish upon its surface, it's "+
         "obvious that the owner cares for it greatly.  The top of "+
@@ -126,4 +138,21 @@ void reset(){
        "get a map of adventure areas around here.");
     ob->move(TO);
   }
+}
+
+int read_sign(string str) {
+   if(str != "sign") return notify_fail("Read what?\n");
+   write("%^RESET%^%^CYAN%^Ask the scribe "+
+       "to %^RESET%^<%^BOLD%^%^CYAN%^write%^RESET%^> %^CYAN%^anything you "+
+       "want, in whatever languages the scribe knows.  He will "+
+	    "%^RESET%^<%^BOLD%^%^CYAN%^translate [item] to [language]%^RESET%^> %^CYAN%^for you.  "+
+	    "He can also give you an estimate of how much it will cost to translate an "+
+	    "item, by using %^RESET%^<%^BOLD%^estimate [item]%^RESET%^>%^CYAN%^.  "+
+	    "If you are interested "+
+        "in a map, you can have him %^RESET%^<%^BOLD%^%^CYAN%^draw "+
+        "tabor%^RESET%^> %^CYAN%^for a map of this fair city or "+
+        "%^RESET%^<%^BOLD%^%^CYAN%^draw area%^RESET%^> %^CYAN%^to "+
+        "get a map of adventure areas around here.");
+
+    return 1;
 }
