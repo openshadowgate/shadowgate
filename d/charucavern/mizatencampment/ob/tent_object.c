@@ -38,7 +38,9 @@ void create()
     "There is a large opening, covered with a %^BOLD%^%^GREEN%^thinner material"+
     "%^RESET%^%^GREEN%^, that you could %^BOLD%^%^CYAN%^enter%^RESET%^%^GREEN%^ "+
     "if you were so inclined. You could also %^BOLD%^%^CYAN%^peer%^RESET%^%^GREEN%^ "+
-    "into it if you wanted to see who or what was inside of it.%^RESET%^");
+    "into it if you wanted to see who or what was inside of it. " + 
+    "You can %^BOLD%^%^CYAN%^bag tent%^RESET%^%^GREEN%^ if you want to take it down.%^RESET%^"
+    );
     
     set_property("no animate",1);
     set_value(0);

@@ -10,7 +10,7 @@
 
 inherit ROOM;
 
-#define SIGN_TEXT  "%^RESET%^%^CYAN%^Ask the scribe "
+string sign_text;
 
 
 void init(){
@@ -21,6 +21,21 @@ void init(){
 
 void create() {
   ::create();
+
+
+ sign_text = "%^RESET%^%^CYAN%^Ask the scribe "+
+       "to %^RESET%^<%^BOLD%^%^CYAN%^write%^RESET%^> %^CYAN%^anything you "+
+       "want, in whatever languages the scribe knows.  He will "+
+	    "%^RESET%^<%^BOLD%^%^CYAN%^translate [item] to [language]%^RESET%^> %^CYAN%^for you.  "+
+	    "He can also give you an estimate of how much it will cost to translate an "+
+	    "item, by using %^RESET%^<%^BOLD%^estimate [item]%^RESET%^>%^CYAN%^.  "+
+	    "If you are interested "+
+        "in a map, you can have him %^RESET%^<%^BOLD%^%^CYAN%^draw "+
+        "tabor%^RESET%^> %^CYAN%^for a map of this fair city or "+
+        "%^RESET%^<%^BOLD%^%^CYAN%^draw area%^RESET%^> %^CYAN%^to "+
+        "get a map of adventure areas around here.";
+
+
   set_terrain(CITY);
   set_travel(DIRT_ROAD);
   set_property( "light", 2);
@@ -48,7 +63,7 @@ MELNMARN
     "west" : ROOMDIR+"math5"
   ]) );
   set_items(([
-     "sign" : SIGN_TEXT,
+     "sign" : sign_text,
      "desk" : "%^RED%^The teak wood desk was obviously imported, "+
         "and from the layers of polish upon its surface, it's "+
         "obvious that the owner cares for it greatly.  The top of "+
@@ -118,15 +133,15 @@ void reset(){
        "of Tabor above black cotton breeches.  He spends most of "+
        "his time sitting at the desk, and whenever he stands, you "+
        "could swear you hear his bones creaking.  Still, his "+
-       "eyesight and coordination are impeccable. " +
-       SIGN_TEXT;
+       "eyesight and coordination are impeccable.\n" +
+       sign_text);
     ob->move(TO);
   }
 }
 
 int read_sign(string str) {
    if(str != "sign") return notify_fail("Read what?\n");
-   write(SIGN_TEXT);
+   write(sign_text);
 
     return 1;
 }
