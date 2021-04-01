@@ -30,6 +30,8 @@ near the back of the room seems to be where the dwarven brothers
 conduct their business.  A doorway to the south is open, letting the 
 %^RED%^he%^YELLOW%^a%^RESET%^%^RED%^t %^CYAN%^of the %^RED%^forge %^CYAN%^into the shop.  The dwarven brothers, however, 
 never seem to notice the heat.  
+
+%^RESET%^<help shop> will show you a list of commands to use here.
 TABOR
 );
     set_smell("default","You smell coal being burned in the forge out back.");

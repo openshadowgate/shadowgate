@@ -30,6 +30,8 @@ for sale.  The case near the %^ORANGE%^counter %^CYAN%^in the southern part of t
 holds the weapons that are for sale.  A doorway to the west is open, 
 letting the %^RED%^he%^YELLOW%^a%^RESET%^%^RED%^t %^CYAN%^of the %^RED%^forge %^CYAN%^into the shop.  The dwarven brothers, 
 however, never seem to notice the heat.  
+
+%^RESET%^<help shop> will show you a list of commands to use here.
 TABOR
 );
     set_smell("default","You smell coal being burned in the forge out back.");

@@ -109,6 +109,7 @@ int GoThroughDoor(){
       "city of Tabor, you realize you are heading towards the dark "+
       "Yntala Forest, which can prove quite a challenge to young adventurers.  "+
       "If you stay on the road, you will come to Azha and the southern "+
-      "territories.");
+      "territories. The goblin keep to the southeast is a good place "+
+      "to start your adventures.");
    return 1;
 }

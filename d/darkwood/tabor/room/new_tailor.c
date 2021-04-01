@@ -28,6 +28,8 @@ of the room, and it has been placed discreetly in the back
 to provide a work area with %^BOLD%^%^WHITE%^scissors%^RESET%^%^ORANGE%^, %^YELLOW%^threads%^RESET%^%^ORANGE%^, and a variety 
 of %^MAGENTA%^dyes%^ORANGE%^.  No stool is in sight, as it seems the owner must 
 keep herself rather busy.
+
+%^RESET%^<help shop> will show you a list of commands to use here.
 TABOR
     );
   set_exits(([

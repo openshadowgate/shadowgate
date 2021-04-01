@@ -27,6 +27,9 @@ though not distasteful, decoration.  A low %^RESET%^%^ORANGE%^wooden table %^BOL
 in the back of the room, covering in small hammers, chisels, 
 twine, and various other implements used in jewelling.  A short 
 %^RESET%^%^ORANGE%^stool %^BOLD%^%^BLUE%^stands just behind it.
+
+%^RESET%^<help shop> will show you a list of commands to use here.
+
 TABOR
     );
   set_exits(([
