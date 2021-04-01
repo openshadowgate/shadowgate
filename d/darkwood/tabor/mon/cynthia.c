@@ -49,10 +49,10 @@ void catch_say(string msg){
     }
 
 
-    if (query_bad_race(TP)) {
-        force_me("say What are you doing in Tabor? Get out of here! Shoo!");
-        return;
-    }
+//    if (query_bad_race(TP)) {
+//       force_me("say What are you doing in Tabor? Get out of here! Shoo!");
+//        return;
+//    }
 
 
    ::catch_say(msg);
@@ -224,9 +224,9 @@ void init()
         return;
     }
 
-   if (query_bad_race(TP)) {
-        return;
-   }
+//   if (query_bad_race(TP)) {
+//        return;
+//   }
  
     call_out("notify_newcomers", 1);
 }

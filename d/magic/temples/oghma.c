@@ -98,3 +98,13 @@ EXTRA
    );
    return 1;
 }
+
+
+
+void reset() {
+   ::reset();
+   if(!present("grandma")){
+      new("/d/darkwood/tabor/mon/cynthia")->move(TO);
+   }
+
+}
