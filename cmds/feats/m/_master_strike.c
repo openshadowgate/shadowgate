@@ -10,8 +10,8 @@ void create()
     feat_category("MeleeDamage");
     feat_name("master strike");
     feat_syntax("master_strike [TARGET]");
-    feat_prereq("Thief L1");
-    feat_desc("Ability to surprise your opponent and position yourself properly in combat is represented through the master strike, a deadly technique that allows the thief to deal massive harm or paralyze their opponents.");
+    feat_prereq("Thief L20");
+    feat_desc("Ability to surprise your opponent and position yourself properly in combat is represented through the master strike, a deadly technique that allows the thief to deal massive harm or disruptively paralyze their opponents.");
     set_save("fort");
 }
 
