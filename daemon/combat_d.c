@@ -3111,7 +3111,7 @@ void internal_execute_attack(object who)
             tell_object(who, "%^BOLD%^%^YELLOW%^You successfully position yourself to strike where " + victim->QCN + " is vulnerable.%^RESET%^");
             tell_object(victim, "%^BOLD%^%^YELLOW%^You suddenly notice that " + who->QCN + " has moved to strike where you are vulnerable.%^RESET%^");
             tell_room(EWHO, "%^BOLD%^%^YELLOW%^" + who->QCN + " has positioned " + who->QO + "self to strike where " + victim->QCN + " is vulnerable.%^RESET%^", ({ victim, who }));
-            "/cmds/mortal/_stab"->scramble_stab(who, victim);
+            "/daemon/stabs_d"->combat_backstab(who, victim);
         }
     }
 
@@ -3128,6 +3128,8 @@ void internal_execute_attack(object who)
     }
     return;
 }
+
+
 
 // Does the functions returns 1 if func is executed and 0 if not
 int do_functions(object who)
