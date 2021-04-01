@@ -34,7 +34,8 @@ void create()
          "The somewhat unusual decor is completed by several strands "+
          "of %^BOLD%^glass %^RED%^b%^YELLOW%^e%^WHITE%^a%^GREEN%^d"+
          "%^BLUE%^s %^RESET%^%^CYAN%^and swaths of %^MAGENTA%^"+
-         "silk %^CYAN%^hanging low from the ceiling.\n"
+         "silk %^CYAN%^hanging low from the ceiling.\n\n" +
+        "%^RESET%^<help shop> will show you a list of commands to use here.\n\n"
 	);
 	set_smell("default","The somewhat spicy scent of tobacco "+
          "lingers in the air.");
