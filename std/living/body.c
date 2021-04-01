@@ -1014,6 +1014,19 @@ int query_base_ac()
     return ac;
 }
 
+int is_dex_ac_eligible()
+{
+    if (TO->query_unconscious() ||
+        TO->query_prone() ||
+        TO->query_paralyzed() ||
+        TO->query_asleep() &&
+        !FEATS_D->usable_feat(TO, "dodge")) {
+        return 0;
+    };
+
+    return 1;
+}
+
 int query_ac()
 {
     int myac, raceac, shifted_ac, myLev;
@@ -1025,7 +1038,6 @@ int query_ac()
     }
 
     myac = (ac_bonus + EQ_D->gear_bonus(TO, "armor bonus"));
-
 
     if (FEATS_D->usable_feat(TO, "indomitable")) {
         myac += 2;
@@ -1047,8 +1059,9 @@ int query_ac()
 
     attacker = TO->query_current_attacker();
 
-    if(attacker && FEATS_D->usable_feat(TO, "resist undead") && attacker->is_undead())
+    if (attacker && FEATS_D->usable_feat(TO, "resist undead") && attacker->is_undead()) {
         myac += 8;
+    }
 
     if (!userp(TO)) {
         return ac - myac;
@@ -1056,14 +1069,17 @@ int query_ac()
 
     // adding racial bonus here for players
     myrace = (string)TO->query_race();
+
     if (!myrace) {
         return ac - myac;
     }
+
     mysubrace = (string)TO->query("subrace");
     myfile = "/std/races/" + myrace + ".c";
     if (!file_exists(myfile)) {
         return ac - myac;
     }
+
     raceac = (int)myfile->natural_AC(mysubrace);
 
     if (objectp(shape = TO->query_property("shapeshifted"))) {

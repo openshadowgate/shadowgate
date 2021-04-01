@@ -8,10 +8,9 @@
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
  %^RESET%^L1: light armor proficiency, simple weapon proficiency, martial weapon proficiency, dodge, combat reflexes
  %^RESET%^L2: evasion
- %^RESET%^L7: mobility
- %^RESET%^L10: tools of the trade
- %^RESET%^L14: scramble
- %^RESET%^L17: spring attack
+ %^RESET%^L8: improved dodge, mobility
+ %^RESET%^L10: tools of the trade, scramble
+ %^RESET%^L20: master strike, spring attack
  %^RESET%^Also: one bonus melee feat at L21, and every five class levels thereafter
 
 The thief is a master of the shadows. Their attacks are based on surprise, jumping from the shadows to deal great damage upon a target. %^ORANGE%^<stab>%^RESET%^ target will deal a great blow of damage to an unsuspecting foe, dependent on the thief's stealth. They can also %^ORANGE%^<spy>%^RESET%^ on a target to assess their belongings, hopefully without being noticed.

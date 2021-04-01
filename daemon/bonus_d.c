@@ -305,10 +305,11 @@ varargs ac_bonus(object who, object attacker)
             dexb = 0;
         }
     }
-    if (who->query_unconscious() || who->query_prone() || who->query_paralyzed() || who->query_asleep() &&
-        !FEATS_D->usable_feat(who, "dodge")) {
+
+    if (!who->is_dex_ac_eligible()) {
         dexb = 0;
     }
+
     if (attacker->query_invis() && attacker != who) {
         if (!who->detecting_invis()) {
             dexb = 0;
