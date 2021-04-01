@@ -318,19 +318,15 @@ void heart_beat()
 
     POISON_D->ProcessPoisons(TO);
 
-    // new stab resets available chances once per round.
     if (objectp(TO) && sizeof(TO->query_attackers())) {
         if (TO->query_property("stabs_available")) {
             TO->remove_property("stabs_available");
         }
         if (FEATS_D->usable_feat(TO, "combat reflexes")) {
-            /*            i = (max(({TO->query_guild_level("thief"),
-                                            TO->query_class_level("thief") + TO->query_class_level("arcane_trickster")
-                                            }))+9)/10; */
-                                            // there's a lib query for this now to get ANY thief PrC inherits, let's use that for efficiency! N, 1/3/20
-            i = (TO->query_prestige_level("thief") + 9) / 10;
+            i = (TO->query_prestige_level("thief")) / 10;
             TO->set_property("stabs_available", i);
         }
+        // A place to plug in more stab sources
     }
     if (TO->is_class("monk")) {
         USER_D->regenerate_pool(TO, (1 + random(2)), 1, "ki");
@@ -341,7 +337,7 @@ void heart_beat()
     if (TO->is_class("paladin") || TO->is_class("cleric")) {
         USER_D->regenerate_pool(TO, 1, 1, "grace");
     }
-    //enhancement effects
+
     "/cmds/mortal/_enhance.c"->run_enhances_timer(TO, "weapon");
     "/cmds/mortal/_enhance.c"->run_enhances_timer(TO, "armor");
 

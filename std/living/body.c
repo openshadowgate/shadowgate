@@ -694,7 +694,7 @@ int query_resistance(string res)
 {
     int myres;
     string *domains;
-    
+
     if (!valid_resistance(res)) {
         return 0;                        // to avoid throwing errors on any invalid queries. N, 8/15.
     }
@@ -736,10 +736,10 @@ int query_resistance(string res)
             }
         }
     }
-    
+
     //Cleric domain-specific resistances
     domains = TO->query_divine_domain();
-    
+
     if(sizeof(domains))
     {
         switch(res)
@@ -748,22 +748,22 @@ int query_resistance(string res)
             if(member_array("fire", domains) >= 0)
                 myres += TO->query_class_level("cleric");
             break;
-            
+
             case "cold":
             if(member_array("cold", domains) >= 0)
                 myres += TO->query_class_level("cleric");
             break;
-            
+
             case "acid":
             if(member_array("earth", domains) >= 0)
                 myres += TO->query_class_level("cleric");
             break;
-            
+
             case "electricity":
             if(member_array("air", domains) >= 0)
                 myres += TO->query_class_level("cleric");
         }
-    }              
+    }
 
     if (TO->query_race() == "shade") {
         if (res == "cold" || res == "electricity") {
@@ -807,7 +807,7 @@ int query_resistance_percent(string res)
     if (res == "fire" && TO->query_race() == "troll") {
             mod += -15;
     }
-    
+
     if(FEATS_D->usable_feat(TO, "perfection"))
     {
         if(res == "electricity" || res == "cold" || res == "acid")
@@ -822,7 +822,7 @@ int query_resistance_percent(string res)
                 mod += 25;
         }
     }
-    
+
     //Mage is invulnerable for duration of prismatic sphere
     if(TO->query_property("prismatic sphere"))
         mod = 100;
@@ -1023,37 +1023,26 @@ int query_ac()
     if (!userp(TO) && !TO->query_property("full ac")) {
         return monster_ac;
     }
+
     myac = (ac_bonus + EQ_D->gear_bonus(TO, "armor bonus"));
-    if (FEATS_D->usable_feat(TO, "unarmored defense") && TO->is_ok_armour("barb")) {
-        myac += 6;
-    }
-    if (TO->is_class("monk")) {
-        myac += (int)"/daemon/bonus_d.c"->query_stat_bonus(TO, "wisdom");
-    }
+
+
     if (FEATS_D->usable_feat(TO, "indomitable")) {
         myac += 2;
     }
-    if (FEATS_D->usable_feat(TO, "mobility") && !TO->query_paralyzed() &&
-        !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief")) {
-        myac += 4;
-    }
-    
-    /*
-    if(TO->is_class("cleric"))
-        if(member_array("protection", TO->query_divine_domain()) >= 0)
-            myac += 4;
-    */
 
-    if(FEATS_D->usable_feat(TO, "canny defense") && !TO->query_paralyzed() &&
-       !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief"))
-           myac += BONUS_D->query_stat_bonus(TO, "intelligence");
-       
-    if(FEATS_D->usable_feat(TO, "spiritual body") && !TO->query_paralyzed() &&
-       !TO->query_tripped() && !TO->query_bound())
-           myac += BONUS_D->query_stat_bonus(TO, "charisma");
+    if (FEATS_D->usable_feat(TO, "canny defense") && !TO->query_paralyzed() &&
+        !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief")) {
+        myac += BONUS_D->query_stat_bonus(TO, "intelligence");
+    }
+
+    if (FEATS_D->usable_feat(TO, "spiritual body") && !TO->query_paralyzed() &&
+        !TO->query_tripped() && !TO->query_bound()) {
+        myac += BONUS_D->query_stat_bonus(TO, "charisma");
+    }
 
     if (TO->query_blind() || TO->query_temporary_blinded()) {
-        myac -= TO->query_level() / 12 + 1;
+        myac -= TO->query_level() / 10 + 1;
     }
 
     attacker = TO->query_current_attacker();

@@ -284,6 +284,20 @@ varargs ac_bonus(object who, object attacker)
     MyBonus = 0;
 
     dexb = query_dex_bonus(who);
+
+    if (FEATS_D->usable_feat(who, "unarmored defense") && who->is_ok_armour("barb")) {
+        dexb -= 6;
+    }
+
+    if (who->is_class("monk")) {
+        dexb -= query_stat_bonus(who, "wisdom");
+    }
+
+    if (FEATS_D->usable_feat(TO, "mobility") && !TO->query_paralyzed() &&
+        !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief")) {
+        dexb -= 4;
+    }
+
     dexb = -dexb;
 
     if (who->query_temporary_blinded() || who->query_blind()) {
