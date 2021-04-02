@@ -9,7 +9,7 @@ void create() {
     feat_category("Evasion");
     feat_name("dodge");
     feat_prereq("Dexterity 13");
-    feat_desc("This feat allows the character to retain their dexterity bonus to ac even being incapacitated.");
+    feat_desc("This feat allows the character to retain all their dodge bonuses to ac even being incapacitated, tripped, paralyzed.");
     set_required_for(({"mobility","evasion","scramble","spring attack"}));
     set_target_required(1);
 }

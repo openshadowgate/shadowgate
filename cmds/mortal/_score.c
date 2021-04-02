@@ -60,7 +60,7 @@ mixed* genoutput(object targ)
     output += ({ ({ "Exp", "%^BOLD%^%^CYAN%^" + english_number(targ->query_exp()) }) });
 
 
-    output += ({ ({ "Armor Class", "%^BOLD%^%^WHITE%^" + BONUS_D->effective_ac(targ) + " base + " + BONUS_D->ac_bonus(targ, targ) + " dex" }) });
+    output += ({ ({ "Armor Class", "%^BOLD%^%^WHITE%^" + BONUS_D->effective_ac(targ) + " base + " + BONUS_D->ac_bonus(targ, targ) + " dodge " }) });
     output += ({ ({ "Base Hit", BONUS_D->new_bab(1, targ) }) });
 
     if (stringp(targ->query_diety())) {
