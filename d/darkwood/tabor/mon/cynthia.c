@@ -245,7 +245,7 @@ void setup()
    // and calling it from init. - Vanadis
   
 
-   set_emotes(15,({"Cynthia rocks in her chair.",
+   set_emotes(10,({"Cynthia rocks in her chair.",
       "Cynthia coughs and takes a deep breath.",
       "Cynthia knits intently.",
       "Cynthia closes her eyes and slumbers for a few moments."}),0);
