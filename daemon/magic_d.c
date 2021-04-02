@@ -726,9 +726,9 @@ void elemental_opportunist(object caster, object target)
     if(!max) return;
     if(roll_dice(1, 100) > (max+random(20))) return;
     max = (max / 5) + 1;
-    if(objectp elemental = present("monkeledevice99x", caster)))
+    if(objectp(elemental = present("monkeledevice99x", caster)))
     {
-        if((int elemental->query_my_guardians() < max)
+        if(elemental->query_my_guardians() < max)
         {
             elemental->add_guardian();
             return;
