@@ -8,7 +8,7 @@ void create() {
     feat_category("Evasion");
     feat_name("mobility");
     feat_prereq("Dodge");
-    feat_desc("This passive feat grants an AC dodge bonus against all melee foes, except while incapacitated.");
+    feat_desc("This passive feat grants an AC dodge bonus against all melee foes. As all dodge bonuses this one won't count towards your total ac if you're incapacitated, unless you have dodge feat.");
     permanent(1);
     set_required_for(({"scramble","spring attack"}));
 }
@@ -46,4 +46,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-

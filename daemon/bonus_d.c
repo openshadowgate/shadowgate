@@ -293,8 +293,7 @@ varargs ac_bonus(object who, object attacker)
         dexb -= query_stat_bonus(who, "wisdom");
     }
 
-    if (FEATS_D->usable_feat(TO, "mobility") && !TO->query_paralyzed() &&
-        !TO->query_tripped() && !TO->query_bound() && TO->is_ok_armour("thief")) {
+    if (FEATS_D->usable_feat(TO, "mobility")) {
         dexb -= 4;
     }
 
