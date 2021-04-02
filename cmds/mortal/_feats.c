@@ -672,7 +672,7 @@ int cmd_feats(string str)
             if (BONUS_ALLOWED > 0) {
                 tell_object(TP, "%^BOLD%^%^WHITE%^You have %^BOLD%^%^BLUE%^" + BONUS_ALLOWED + "%^WHITE%^ free " + feat_types_labels +
                     " bonus feats. You have used %^BOLD%^%^BLUE%^" + num_bonus + " %^WHITE%^. You have "
-                    "%^BOLD%^%^BLUE%^" + bonus + "%^WHITE%^ left.%^WHITE%^");
+                    "%^BOLD%^%^BLUE%^" + bonus + "%^WHITE%^ left. \nUse %^ORANGE%^<feats " +feat_types_labels+" FEATNAME>%^WHITE%^ to buy these feats. %^WHITE%^");
             }
         }
 
