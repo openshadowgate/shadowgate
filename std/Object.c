@@ -2569,7 +2569,11 @@ string query_bonus_display()
     mybonuses = query_item_bonuses();
     mykeys = keys(mybonuses);
 
-    if (is_identified((string)TPQN)) {
+    if (!TP) {
+        return "";
+    }
+
+    if (is_identified(TPQN)) {
         if (sizeof(mybonuses) && mybonuses[mykeys[0]]) {
             if (!pointerp(mybonuses[mykeys[0]])) {
                 ret += "" + mybonuses[mykeys[0]] + " " + mykeys[0] + "";
