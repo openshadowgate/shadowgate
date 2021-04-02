@@ -56,9 +56,9 @@ varargs int get_stab_damage(object player, object target, object weapon)
     }
 
     if (player->query_property("strong stab")) {
-        roll = 6;
-    }else {
         roll = 8;
+    }else {
+        roll = 6;
     }
 
     // 1d8 per level for "strong stab" creatures, 1d6 for normal/players

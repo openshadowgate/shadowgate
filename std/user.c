@@ -1775,12 +1775,12 @@ void heart_beat()
             FEATS_D->usable_feat(TO,"remember the future")) &&
            !TO->query_property("stab_resilience"))
         {
-            TO->set_property("stab_resilience",(TO->query_level()/10));
+            TO->set_property("stab_resilience",(TO->query_level()/10) + 1);
         }
         if(FEATS_D->usable_feat(TO,"undead graft") &&
            !TO->query_property("stab_resilience"))
         {
-            TO->set_property("stab_resilience",(TO->query_level()/20));
+            TO->set_property("stab_resilience",(TO->query_level()/20) + 1);
         }
     }
 
