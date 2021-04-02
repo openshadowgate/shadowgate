@@ -22,7 +22,7 @@ varargs int object_can_be_teleported(object teleportee, object destination, int 
     if (!(teleportee && destination && clevel)) {
         return 0;
     }
-    
+
     if(catch(call_other(destination, "???")))
     {
         tell_object(teleportee, "Destination error.");
@@ -49,9 +49,9 @@ varargs int object_can_be_teleported(object teleportee, object destination, int 
     if (!noroll) {
         roll = roll_dice(1, 20);
 
-        if (roll == 1) {
-            return 0;
-        }
+        /* if (roll == 1) { */
+        /*     return 0; */
+        /* } */
 
         if (roll == 20) {
             return 1;
