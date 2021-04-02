@@ -293,7 +293,7 @@ varargs ac_bonus(object who, object attacker)
         dexb -= query_stat_bonus(who, "wisdom");
     }
 
-    if (FEATS_D->usable_feat(TO, "mobility")) {
+    if (FEATS_D->usable_feat(who, "mobility")) {
         dexb -= 4;
     }
 

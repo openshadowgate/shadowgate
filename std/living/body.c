@@ -1096,13 +1096,7 @@ int query_ac_bonus()
     if (FEATS_D->usable_feat(TO, "indomitable")) {
         myac += 2;
     }
-    if (FEATS_D->usable_feat(TO, "mobility") &&
-        !TO->query_paralyzed() &&
-        !TO->query_tripped() &&
-        !TO->query_bound() &&
-        TO->is_ok_armour("thief")) {
-        myac += 4;
-    }
+
     return (myac + EQ_D->gear_bonus(TO, "armor bonus"));
 }
 
