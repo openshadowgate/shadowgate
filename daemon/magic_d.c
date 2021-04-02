@@ -719,28 +719,28 @@ void clean_quick_names()
 void elemental_opportunist(object caster, object target)
 {
     int max;
-    object EO;
+    object elemental;
     if(!objectp(caster)) return;
     if(!FEATS_D->usable_feat(caster, "elemental opportunist")) return;
     max = (int)caster->query_class_level("monk");
     if(!max) return;
     if(roll_dice(1, 100) > (max+random(20))) return;
     max = (max / 5) + 1;
-    if(objectp(EO = present("monkeledevice99x", caster)))
+    if(objectp elemental = present("monkeledevice99x", caster)))
     {
-        if((int)EO->query_my_guardians() < max)
+        if((int elemental->query_my_guardians() < max)
         {
-            EO->add_guardian();
+            elemental->add_guardian();
             return;
         }
         return;
     }
     else
     {
-        EO = new("/d/magic/obj/monkeledevice");
-        EO->set_caster(caster);
-        EO->move(caster);
-        EO->add_guardian();
+        elemental = new("/d/magic/obj/monkeledevice");
+        elemental->set_caster(caster);
+        elemental->move(caster);
+        elemental->add_guardian();
         return;
     }
     return;
