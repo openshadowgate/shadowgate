@@ -29,10 +29,7 @@ void create(){
    set_stats("intelligence",18);
    set_exp(1);
    force_me("speech say lightly");
-   set_emotes(3,({"Cynthia rocks in her chair.",
-      "Cynthia coughs and takes a deep breath.",
-      "Cynthia knits intently.",
-      "Cynthia closes her eyes and slumbers for a few moments."}),0);
+
 }
 
 void catch_say(string msg){
@@ -212,6 +209,8 @@ void init()
 {
     ::init();
 
+   setup();
+
    if(TP->query_level() > 7) {
        return;
     }
@@ -235,4 +234,21 @@ void notify_newcomers()
 {
     command("emote looks up with a friendly smile.");
     command("say Hello there, dear.");
+}
+
+
+void setup()
+{
+   // I encountered a problem with set_emotes. They didn't trigger  if I left the room
+   // and returned. This was a problem whether the code was in create or init.
+   // For some reason this works, putting the code in a setup function
+   // and calling it from init. - Vanadis
+  
+
+   set_emotes(15,({"Cynthia rocks in her chair.",
+      "Cynthia coughs and takes a deep breath.",
+      "Cynthia knits intently.",
+      "Cynthia closes her eyes and slumbers for a few moments."}),0);
+
+
 }
