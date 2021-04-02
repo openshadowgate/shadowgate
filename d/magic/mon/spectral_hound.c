@@ -29,6 +29,7 @@ void create(){
   set_attack_limbs(({"torso"}));
   set_base_damage_type("slashing");
   set_property("knock unconscious",1);
+  set_property("no random treasure", 1);
 }
 
 void setup(invoker,clevel)

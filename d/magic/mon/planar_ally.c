@@ -32,6 +32,7 @@ void create()
     set_gender("neuter");
     set_overall_ac(0);
     set_attacks_num(4);
+    set_property("no random treasure", 1);
 }
 
 int isMagic()

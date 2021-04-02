@@ -49,6 +49,7 @@ void create()
     set_base_damage_type("bludgeoning");
     set_funcs(({ "tangle" }));
     set_func_chance(10);
+    set_property("no random treasure", 1);
 }
 
 int isMagic()

@@ -30,6 +30,7 @@ void create(){
     set_attack_limbs(({"chest"}));
     setenv("MIN", "$N floats in.");
     setenv("MOUT", "$N floats off to the $D.");
+    set_property("no random treasure", 1);
 }
 
 void setup_chest(object invoker)

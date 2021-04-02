@@ -24,6 +24,7 @@ void create()
     set_value(0);
     set_property("no animate", 1);
     call_out("sting", 2);
+    set_property("no random treasure", 1);
 }
 
 int disperse_fun(string str)

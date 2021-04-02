@@ -33,6 +33,7 @@ void create(){
     command("message floats in.");
     command("message floats $D.");
     set_property("knock unconscious",1);
+    set_property("no random treasure", 1);
 }
 
 void setup_servant(object caster, int clevel)

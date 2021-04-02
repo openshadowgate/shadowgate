@@ -19,6 +19,7 @@ void create() {
     set_base_damage_type("piercing");
     set_gender("neuter");
     set_race("outsider");
+    set_property("no random treasure", 1);
 }
 
 void set_mytype(string heritage) {
@@ -75,7 +76,7 @@ case "star":
         set_fake_limbs(({"torso","eyestalk","tentacle"}));
         set_attack_limbs(({"tentacle","spike"}));
         break;
-		
+
     case "gloom":
         set_short("%^RESET%^%^BLUE%^winged shadow%^RESET%^");
         set_name("winged shadow");

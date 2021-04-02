@@ -6,7 +6,7 @@ inherit WEAPONLESS;
 
 void create(){
    int num;
-  
+
    ::create();
     set_name("windghost");
     set_id(({"elemental","windghost","ghost"}));
@@ -38,5 +38,6 @@ PEG
     set_base_damage_type("slashing");
     set_gender("sexless");
     set_overall_ac(0);
+    set_property("no random treasure", 1);
 }
 int isMagic() {return 5;}

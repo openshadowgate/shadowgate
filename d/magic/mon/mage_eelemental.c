@@ -39,6 +39,7 @@ void create(){
     set_base_damage_type("bludgeoning");
     set_gender("sexless");
     set_overall_ac(4);
+    set_property("no random treasure", 1);
 }
 
 void setup_elemental(object caster)

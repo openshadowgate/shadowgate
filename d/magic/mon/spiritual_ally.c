@@ -37,6 +37,7 @@ void create(){
 
     command("message walks in");
     command("message walks $D");
+    set_property("no random treasure", 1);
 }
 
 void setup_servant(object caster, int clevel)

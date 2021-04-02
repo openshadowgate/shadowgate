@@ -35,6 +35,7 @@ void create(){
     set_gender("sexless");
     set_wielding_limbs(({"right crest","left crest"}));
     set_overall_ac(2);
+    set_property("no random treasure", 1);
   }
 
 void setup_elemental(object caster)

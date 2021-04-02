@@ -21,6 +21,7 @@ void create()
     set_attack_limbs(({"right hand","left hand"}));
     set("magic",1);
     call_out("check",5);
+    set_property("no random treasure", 1);
 }
 
 void check()
@@ -77,7 +78,7 @@ void setup_elemental(string str,object obj)
            "with flickers of %^BOLD%^%^WHITE%^white %^RESET%^%^RED%^and "
            "%^BOLD%^%^BLACK%^ashy gray%^RESET%^%^RED%^.  Although it has no "
            "visible eyes, this creature seems to have no trouble seeking out its enemies.%^RESET%^");
-        break;        
+        break;
 
     case "air":
 
@@ -132,13 +133,12 @@ void setup_elemental(string str,object obj)
 void die(object ob)
 {
    tell_room(ETO,"%^BOLD%^The ancient elemental howls in the throes of death and disappears back into its home plane!%^RESET%^");
-   
+
    if(objectp(spell))
    {
        spell->swarm("new elemental");
    }
-   
+
    remove();
    return;
 }
-

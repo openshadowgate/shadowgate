@@ -11,13 +11,13 @@ object *summoned;
 
 void create(){
 	::create();
-	
+
 	set_name("treant");
 	set_id(({"tree","treant"}));
 	set("short","A grand treant");
 	set("long",
 @OLI
-	This treant has seen many many years of glory in this forest. It has 
+	This treant has seen many many years of glory in this forest. It has
 stood the test of time. Its thick base and knarled trunk show that it has
 seen its fights and won. Its heavy foliage provides a large area of shade.
 OLI
@@ -37,8 +37,9 @@ OLI
     set_stats("intelligence",1);
 	set_alignment(7);
 	summoned = ({});
+    set_property("no random treasure", 1);
 	}
-	
+
 void make_me(){
 	int i;
 	i = random(7);
@@ -49,7 +50,7 @@ void make_me(){
 		case 10:
 		case 11:
 			set_damage(2,8);
-			
+
 			break;
 		case 12:
 		case 13:
@@ -68,7 +69,7 @@ void make_me(){
 void summon(object obj){
 	int i,j;
 	object ob;
-	
+
 	j = random(3);
 	for(i=0;i<j;i++) {
 		ob = new("/d/tharis/monsters/tree");

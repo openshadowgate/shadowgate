@@ -25,6 +25,7 @@ void create(){
     set_funcs(({"my_special"}));
     set_func_chance(20);
     iselemental = 0;
+    set_property("no random treasure", 1);
 }
 
 int isMagic() {return 5;}
