@@ -63,7 +63,7 @@ void create(){
     desc_cliff_north = "%^ORANGE%^Directly to the north is %^BOLD%^the cliff of a mountain side %^RESET%^%^ORANGE%^making progress impossible in that direction.";
     // Directly to the north is the cliff of a mountain side making progress impossible in that direction.
 
-    desc_plain_fade = "%^ORANGE%^To the north a " + desc_flat_plain + " %^ORANGE%^and " + desc_foothills + "%^ORANGE%^fade into the intimidating " + desc_charu_mountains + "%^ORANGE%^ in the distance.%^RESET %^";
+    desc_plain_fade = "%^ORANGE%^To the north a " + desc_flat_plain + " %^ORANGE%^and " + desc_foothills + " %^ORANGE%^fade into the intimidating " + desc_charu_mountains + "%^ORANGE%^ in the distance.%^RESET%^ ";
     // To the north a flat plain and foothills fade into the intimidating Charu Mountains in the distance.
 
     desc_road_fade = "%^ORANGE%^To the north the road climbs higher into the " + desc_foothills + " %^ORANGE%^which fade into the intimidating " + desc_charu_mountains + "%^ORANGE%^ in the near distance.%^RESET %^";
