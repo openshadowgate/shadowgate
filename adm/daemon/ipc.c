@@ -99,7 +99,7 @@ void ipc_listen(int fd)
 }
 
 /**
- * This function reads for IPC messages.
+ * This function waits for IPC messages.
  *
  * @param fd Socket's file descriptor.
  * @param data Recieved data,

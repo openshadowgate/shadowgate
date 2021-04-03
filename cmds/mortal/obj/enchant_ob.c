@@ -8,7 +8,7 @@
 #define allowed_armor  ({ "stun","trip","heal","attack","repair","disarm","reflect","bleed","blind" })
 #define allowed_weapon ({ "stun","trip","heal","attack","repair","poison","bleed","blind" })
 
-#define restricted_skills ({ "craft, armorsmith", "craft, jeweller", "craft, leatherworker", "craft, weaponsmith", "craft, woodworker", "craft, tailor", "craft, leatherwork", "light", "fast healing" })
+#define restricted_bonuses ({ "craft, armorsmith", "craft, jeweller", "craft, leatherworker", "craft, weaponsmith", "craft, woodworker", "craft, tailor", "craft, leatherwork", "light", "fast healing", "spellTurning" })
 
 #define EXTRA_BONUSES ({ "enchantment","special" })
 
@@ -232,11 +232,11 @@ int bonus_allowed(object tp, object item, string bonus, int amt)
                     );
             return 0;
         }
-        if(member_array(bonus,restricted_skills) != -1)
+        if(member_array(bonus,restricted_bonuses) != -1)
         {
             db(tp,
                     "%^RESET%^%^BOLD%^%^YELLOW%^The following skills have been restricted and can no longer be crafted "
-                    "on items: %^RESET%^%^BOLD%^%^MAGENTA%^"+implode(restricted_skills," - ")+"\n"
+                    "on items: %^RESET%^%^BOLD%^%^MAGENTA%^"+implode(restricted_bonuses," - ")+"\n"
                     );
             return 0;
         }
@@ -2044,7 +2044,7 @@ int message_check(string message, string type)
 
 string sort_valid_bonuses()
 {
-    string *bonuses = VALID_BONUSES - restricted_skills, display;
+    string *bonuses = VALID_BONUSES - restricted_bonuses, display;
     bonuses = filter_array(bonuses, (:!regexp($1, " percent"):));
     display = format_page(bonuses,3);
     display = "%^RESET%^%^BOLD%^%^GREEN%^"+display;
