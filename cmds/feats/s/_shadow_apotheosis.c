@@ -152,6 +152,7 @@ void shadow_effects(object obj)
         tell_object(obj, cm("A shadowy tendril lashes out from " + caster->QCN + "'s vortex of shadows and tries to grasp you!"));
         if (!obj->reflex_save(clevel) && !obj->query_property("no trip")) {
             tell_object(obj, cm("The shadowy tendril wraps around your ankle and pulls you from your feet!"));
+            target->set_tripped(roll_dice(3, 4));
         }else {
             tell_object(obj, cm("You managed to sidestep the grasping tendril!"));
         }
