@@ -153,10 +153,20 @@ int cmd_master(string args)
                 return 1;
             }
 
-            if (forgettime > time() - 108000) {
-                write("%^ORANGE%^You can forget a spell %^RED%^%^BOLD%^once per thirty hours%^RESET%^%^ORANGE%^.%^RESET%^");
-                return 1;
+            if (myclass == "mage") {
+                if (forgettime > time() - 108000) {
+                    write("%^ORANGE%^You can forget a spell %^RED%^%^BOLD%^once per thirty hours%^RESET%^%^ORANGE%^.%^RESET%^");
+                    write("%^ORANGE%^You have " + parse_time(forgettime + 108000 - time()) + " left to wait.");
+                    return 1;
+                }
+            } else {
+                if (forgettime > time() - 36000) {
+                    write("%^ORANGE%^You can forget a spell %^RED%^%^BOLD%^once per ten hours%^RESET%^%^ORANGE%^.%^RESET%^");
+                    write("%^ORANGE%^You have " + parse_time(forgettime + 36000 - time()) + " left to wait.");
+                    return 1;
+                }
             }
+
         }
         if (TP->is_class("warlock")) {
             TP->delete("warlock_blast_type");
