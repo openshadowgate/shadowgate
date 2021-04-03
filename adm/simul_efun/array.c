@@ -100,12 +100,12 @@ varargs mixed *exclude_array(mixed *array,int from, int to)
 /**
  * Inserts new element into an array. Doesn't change the original
  *
- * @param arr Array to wok on
+ * @param arr Array to work on
  * @param el element to insert
  * @param pos Postion to insert at
  * @return Modified array
  */
-mixed insert(mixed arr, mixed el, int pos)
+mixed insert(mixed *arr, mixed el, int pos)
 {
     if (stringp(arr)) {
         return arr[0..pos - 1] + el + arr[pos..];
