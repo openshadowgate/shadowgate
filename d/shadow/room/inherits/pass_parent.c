@@ -31,13 +31,13 @@ void create(){
     desc_dragon_pass_road = "%^CYAN%^D%^BOLD%^ra%^RESET%^%^CYAN%^g%^BOLD%^o%^RESET%^%^CYAN%^n P%^BOLD%^a%^RESET%^%^CYAN%^ss Ro%^BOLD%^a%^RESET%^%^CYAN%^d%^RESET%^";
     desc_flat_plain = "%^CYAN%^flat plain%^RESET%^";
 
-    desc_trees = "%^ORANGE%^To the east is a %^BOLD%^%^GREEN%^sma%^RESET%^%^GREEN%^l%^BOLD%^l t%^RESET%^%^GREEN%^h%^BOLD%^ic%^RESET%^%^GREEN%^k%^BOLD%^et o%^RESET%^%^GREEN%^f %^BOLD%^t%^RESET%^%^GREEN%^re%^BOLD%^es %^RESET%^%^ORANGE%^which have somehow managed to survive along the edge of the inhospitable %^BOLD%^Shadow Desert%^RESET%^%^CYAN%^.%^RESET%^ ";
+    desc_trees = "%^ORANGE%^To the east is a %^BOLD%^%^GREEN%^sma%^RESET%^%^GREEN%^l%^BOLD%^l t%^RESET%^%^GREEN%^h%^BOLD%^ic%^RESET%^%^GREEN%^k%^BOLD%^et o%^RESET%^%^GREEN%^f %^BOLD%^t%^RESET%^%^GREEN%^re%^BOLD%^es %^RESET%^%^ORANGE%^which have somehow managed to survive along the edge of the inhospitable %^BOLD%^Shadow Desert%^RESET%^%^ORANGE%^.%^RESET%^ ";
     // To the east is a small thicket of trees which have somehow managed to survive
     // along the edge of the inhospitable Shadow Desert.
 
-    desc_road_slow = "%^ORANGE%^The " + desc_dragon_pass_road + " %^ORANGE%^is well kept here and is %^CYAN%^mostly flat%^ORANGE%^, but %^CYAN%^t%^ORANGE%^w%^CYAN%^i%^ORANGE%^s%^CYAN%^t%^ORANGE%^s a%^CYAN%^n%^ORANGE%^d %^CYAN%^t%^ORANGE%^u%^CYAN%^r%^ORANGE%^n%^CYAN%^s %^ORANGE%^making travel %^RED%^slower than in the surrounding "+ desc_foothills;
+    desc_road_slow = "%^ORANGE%^The " + desc_dragon_pass_road + " %^ORANGE%^is well kept here and is %^CYAN%^mostly flat%^ORANGE%^, but %^CYAN%^t%^ORANGE%^w%^CYAN%^i%^ORANGE%^s%^CYAN%^t%^ORANGE%^s a%^CYAN%^n%^ORANGE%^d %^CYAN%^t%^ORANGE%^u%^CYAN%^r%^ORANGE%^n%^CYAN%^s %^ORANGE%^makes travel %^RED%^slower %^ORANGE%^than in the surrounding "+ desc_foothills;
     // The Dragon Pass road is well kept here and is mostly flat, but twists
-    // and turns making travel slower than in the surrounding foothills 
+    // and turns makes travel slower than in the surrounding foothills 
 
     desc_and_cumbersome = "%^ORANGE%^and at times %^RED%^c%^BOLD%^u%^RESET%^%^RED%^mbers%^BOLD%^o%^RESET%^%^RED%^me%^ORANGE%^.%^RESET%^ ";
     // and at times cumbersome.
@@ -66,7 +66,7 @@ void create(){
     desc_plain_fade = "%^ORANGE%^To the north a " + desc_flat_plain + " %^ORANGE%^and " + desc_foothills + " %^ORANGE%^fade into the intimidating " + desc_charu_mountains + "%^ORANGE%^ in the distance.%^RESET%^ ";
     // To the north a flat plain and foothills fade into the intimidating Charu Mountains in the distance.
 
-    desc_road_fade = "%^ORANGE%^To the north the road climbs higher into the " + desc_foothills + " %^ORANGE%^which fade into the intimidating " + desc_charu_mountains + "%^ORANGE%^ in the near distance.%^RESET %^";
+    desc_road_fade = "%^ORANGE%^To the north the road climbs higher into the " + desc_foothills + " %^ORANGE%^which fade into the intimidating " + desc_charu_mountains + "%^ORANGE%^ in the near distance.%^RESET%^ ";
     // To the north the road climbs higher into the foothills which fade into the intimidating 
     // Charu Mountains in the near distance.
 
@@ -80,7 +80,7 @@ void create(){
     set_property("indoors",0);
     set_short("%^ORANGE%^On the %^BOLD%^%^CYAN%^D%^RESET%^%^CYAN%^r%^BOLD%^ag%^RESET%^%^CYAN%^o%^BOLD%^n P%^RESET%^%^CYAN%^a%^BOLD%^ss %^RESET%^%^ORANGE%^Road%^RESET%^");
 
-    set_smell("default","%^BOLD%^%^CYAN%^You can smell the fresh mountain air.%^RESET%^");
+    set_smell("default","\n%^BOLD%^%^WHITE%^You can smell the fresh mountain air.%^RESET%^");
     set_listen("default","You can hear the wind blowing through the valleys.");
     set_items(([
 	"road":"A new road through the mountains.",
