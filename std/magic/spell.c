@@ -9,13 +9,10 @@
 #define NO_EFFECT -100
 inherit DAEMON;
 
-#include <spellcomponents.h>
-
 /**
  * @file
  * @brief Parent for all spells
  */
-
 
 string spell_name,
        spell_type,
@@ -41,8 +38,6 @@ string spell_name,
        aoe_message;
 
 nosave int FULL_EFFECT = 100;
-
-mixed WildMagicArea(object where);
 
 int spell_level,
     silent_casting,
@@ -99,92 +94,6 @@ mapping spell_levels;
 mapping components;
 mapping feats_required;
 mapping magic_resisted = ([]);
-
-//  Function Prototypes
-
-void set_diety(string who);
-void set_spell_name(string name);
-void set_spell_level(mapping levels);
-void set_spell_sphere(string sphere);
-void set_components(mapping temp);
-string query_components_value(string myclass);
-void set_feats_required(mapping temp);
-string query_feat_required(string myclass);
-void set_syntax(string synt);
-void set_description(string descript);
-void set_cast_string(string str);
-void set_silent_casting(int a);
-void set_target_required(int a);
-void wizard_interface(object user, string type, string targ);
-varargs void use_spell(object ob, mixed targ, int ob_level, int prof, string classtype);
-//fsvoid spell_effect(int prof);
-void dest_effect();
-void before_cast_dest_effect();
-void spell_successful();
-void set_spell_duration();
-void set_verbal_comp();
-void set_somatic_comp();
-void set_immunities(string* arr);
-void set_xp_bonus(int xp);
-void define_clevel();
-varargs void damage_targ(object victim, string hit_limb, int wound, string damage_type);
-varargs void do_spell_damage(object victim, string hit_limb, int wound, string damage_type);
-void death_check(object fool);
-void set_arg_needed();
-void set_non_living_ok(int ok);
-void set_discipline(string what);
-void set_save(string save);
-void debug_saves(int num);
-void set_helpful_spell(int x);
-void get_casting_stat();
-void set_caster(object ob);
-
-int preSpell();
-int query_spell_duration();
-int check_light(object caster);
-int query_target_required();
-int query_xp_bonus();
-int check_fizzle(object ob);
-int spell_kill(object victim, object caster);
-int remove();
-int query_helpful();
-int check_point_cost(int plvl);
-int evade_splash(object splashtarg);
-
-varargs int checkMagicResistance(object victim, int mod);
-string get_save();
-
-object query_caster();
-object query_target();
-object query_place();
-
-void set_target(object ob);
-
-string query_diety();
-string query_discipline();
-string query_spell_level(string classtype);
-string* query_immunities();
-void    removeSpellFromCaster();
-
-varargs int do_saving_throw(object player, string type, int mod);
-
-// Added for use with the new cleric domain spells
-void set_spell_domain(string domain);
-string get_spell_domain();
-
-// New saving throw
-varargs int do_save(object targ, int mod);
-
-// Interface for the permanent spell daemon to use to reactivate
-// persistent spells upon startup.
-int preload_interface(
-    int arg_reg_num,
-    object arg_target,
-    string arg_cname,
-    int arg_clevel
-    );
-
-//END prototypes
 
 int clean_up()
 {
@@ -305,7 +214,7 @@ void set_affixed_spell_level(int x)
     }
 }
 
-void set_components(mapping temp)
+void set_components()
 {
     return;
 }
