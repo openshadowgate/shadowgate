@@ -93,6 +93,19 @@ void reply_func(string msg, object who){
      "The scribe is a darling, I'm sure you'll get one for free if you ask nicely.");
       return;
    }
+
+   if(strsrch(msg,"knitting") != -1 ){
+      force_me("say I'm knitting a pair of nice, warm woolen socks. I can't find my old pair - "+
+      "The goblins must have stolen them, that's what I'm thinking!");
+      return;
+   }
+
+
+   if(strsrch(msg,"question") != -1 ){
+      force_me("say You can ask me for tips, dear. Or I can tell you about Tabor and the surrounding areas.");
+      return;
+   }
+
    if(strsrch(msg,"scribe") != -1 || strsrch(msg,"Scribe") != -1 ){
       force_me("say The scribe's shop is in the center of Tabor, just opposite the general store, south of the bank.");
       return;
@@ -111,7 +124,7 @@ void reply_func(string msg, object who){
       return;
    }
 
-   if(strsrch(msg,"Tabor") != -1 ){
+   if(strsrch(msg,"abor") != -1 ){
       force_me("say This is such a lovely town, don't you think? It's a quiet place, except for those blasted goblins! "+
       "When you get tired of this this lazy old town, you might want to go to Shadow next.");
       return;
@@ -119,10 +132,18 @@ void reply_func(string msg, object who){
 
    if(strsrch(msg,"randma") != -1 || strsrch(msg,"Cynthia") != -1 ){
       force_me("say I had such adventures when I was your age! " +
-      "Yes, I lived fully, even though I never had any children of my own." +
-      "say And now in my old age I find it a true pleasure helping young adventurers like yourself.");
+      "Yes, I lived fully, even though I never had any children of my own. " +
+      "And now in my old age I find it a true pleasure helping young adventurers like yourself.");
       return;
    }
+
+
+   if(strsrch(msg,"help") != -1 || strsrch(msg,"Help") != -1 ){
+      force_me("say Do you need help, dear? Perhaps I can help. " +
+      "It's many years since my adventuring days, but I might have some tips for you. ");
+      return;
+   }
+
 
 
    if(strsrch(msg,"city") != -1 || strsrch(msg,"country") != -1
@@ -136,7 +157,7 @@ void reply_func(string msg, object who){
    }
 
 
-   if(strsrch(msg,"Shadow") != -1  ){
+   if(strsrch(msg,"hadow") != -1  ){
       force_me("say Shadow is a magnificent city if ever I saw one!");
       force_me("say But what makes it so special is that it is very well connected indeed. " + 
       "You can walk there on the road of course, or take the river ferry. "+
@@ -165,11 +186,35 @@ void reply_func(string msg, object who){
    }
 
 
-   if(strsrch(msg,"ereid") != -1 ){
-      force_me("say The nereid is rumored to live in a cave somewhere in the riverlands "+
-      "northeast of Tabor.");
+   if(strsrch(msg,"goblin") != -1 ){
+      force_me("say The goblins are a nuisince to the town! And the guards aren't doing a good "+
+      "job keeping them in check, bless their hearts. The keep is just south of Tabor.");
       return;
    }
+
+   if(strsrch(msg,"Ekibi") != -1 ){
+      force_me("say The Ekibi caves are far from here, but Rosinden might make it worth "+
+      "your trouble if you need bit of gold.");
+      force_me("say To find the caves, go out the northwestern gate, then follow the road "+
+      "northwest to the plains. Continue north. The caves are northeast of the "+
+      "Meadowlands. Bring a map in case you get lost.");
+
+      return;
+   }
+
+   if(strsrch(msg,"osinden") != -1 ){
+      force_me("say Rosinden needs... minerals... or something... Go talk to her. " +
+      "You'll find her near the Ekibi caverns.");
+
+      return;
+   }
+
+
+   if(strsrch(msg,"question") != -1 ){
+      force_me("say You can ask me for tips, dear. Or I can tell you about Tabor and the surrounding areas.");
+      return;
+   }
+
 
 
    if(strsrch(msg,"gnome") != -1 || strsrch(msg,"Gnome") != -1
