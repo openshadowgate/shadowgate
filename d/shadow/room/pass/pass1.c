@@ -4,30 +4,27 @@
 #include <daemons.h>
 #include "../pass.h"
 
+
+inherit "/d/shadow/room/inherits/pass_parent";
 inherit VAULT;
 
 void create(){
     ::create();
-   set_terrain(ROCKY);
-   set_travel(DIRT_ROAD);
-    set_property("light" , 2);
-    set_property("indoors" , 0);
-    set_short("On Dragon Pass Road");
-    set_long(
-@MELNMARN
-%^BOLD%^You are walking on the Dragon Pass Road.%^RESET%^
-%^ORANGE%^To the north of you lie the Charu Mountains. They are very intimidating, looming high in the sky. South of you is the NorthGate to Shadow.
-MELNMARN
+
+    set_long(desc_start + 
+
+"%^ORANGE%^Meeting the northern gate of the %^BOLD%^city of Shadow%^RESET%^%^ORANGE%^ in the south " +
+"the " +desc_dragon_pass_road + " %^ORANGE%^comes to an abrupt end or sudden start along "+
+"the edge of a set of %^WHITE%^steel bound %^BOLD%^%^BLACK%^g%^WHITE%^a%^BLACK%^t%^WHITE%^e%^BLACK%^s %^RESET%^%^ORANGE%^and %^BOLD%^%^BLACK%^p%^WHITE%^o%^BLACK%^r%^WHITE%^t%^BLACK%^c%^WHITE%^u%^BLACK%^l%^WHITE%^l%^BLACK%^i%^WHITE%^s%^RESET%^%^ORANGE%^ " +
+"walled by %^BOLD%^%^CYAN%^t%^RESET%^%^CYAN%^ower%^BOLD%^s%^RESET%^%^ORANGE%^ on either side. To " +
+"the north there is a " + desc_flat_plain + " %^ORANGE%^which turns into " + desc_foothills + " %^ORANGE%^off in the " +
+"distance before fading into the intimidating " + desc_charu_mountains + "%^ORANGE%^. "
++ desc_trees
+
+
+
+
 );
-
-    set_smell("default","You can smell the fresh mountain air.");
-    set_listen("default","You can hear the wind blowing through the valleys.");
-
-
-    set_items(([
-    "road":"A new road through the mountains.",
-    "mountains":"They are impressive, even from here.",
-    ]));
 
     set_exits(([
         "south" : "/d/shadow/city/room/northgate",
