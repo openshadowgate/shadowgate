@@ -189,7 +189,7 @@ void shadow_effects(object obj)
 
         tell_object(obj, cm("A bolt of black lightning strikes out from the vortex surrounding " + caster->QCN + " striking you painfully!"));
         obj->cause_typed_damage(obj, obj->return_target_limb(), damage, "untyped");
-        caster->add_hp(damage / 6);
+        caster->add_hp(damage / 5);
         break;
     }
     return;
