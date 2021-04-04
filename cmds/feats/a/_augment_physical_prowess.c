@@ -66,7 +66,7 @@ void execute_feat()
         dest_effect();
         return;
     }
-    
+
     switch (arg)
     {
     case "str":
@@ -93,11 +93,11 @@ void execute_feat()
         return;
         break;
     }
-	
+
 	if(!USER_D->can_spend_pool(caster, 1, "arcana")){
         tell_object(caster, "%^BOLD%^%^RED%^You can't improve your body.%^RESET%^");
 		return;
-	}	
+	}
 
     if (FEATS_D->is_active(caster, "augment physical prowess"))
     {
@@ -105,8 +105,8 @@ void execute_feat()
         obj->dest_effect();
     }
     ::execute_feat();
-	
-    duration = (int)caster->query_class_level("magus") * ROUND_LENGTH;
+
+    duration = (int)caster->query_class_level("magus") * ROUND_LENGTH * 2;
     bonus = 1 + (int)caster->query_class_level("magus") / 10;
     stat_value = (int)caster->query_stats(VALIDSTATS[i]);
     if (stat_value > 30) {
