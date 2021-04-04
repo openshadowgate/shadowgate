@@ -4,6 +4,20 @@ int cmd_keep(string str)
 {
     object obj;
 
+    if (!str) {
+        object * inven = all_inventory(TP);
+        object thingy;
+
+        inven = filter_array(inven, (:$1->query_property("nosell"):));
+
+        write("%^GREEN%^--=%^BOLD%^< %^ORANGE%^You are keeping %^GREEN%^>%^RESET%^%^GREEN%^=--%^RESET%^");
+
+        foreach(thingy in inven) {
+            write(" " + thingy->query_short());
+        }
+        return 1;
+    }
+
     if (!(obj = present(str, TP))) {
         tell_object(TP,"%^BOLD%^%^RED%^You don't have any " + str + ".");
         return 1;
