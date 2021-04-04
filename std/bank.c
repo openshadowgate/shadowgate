@@ -381,11 +381,11 @@ int read(string str) {
   Closes your account.
 %^ORANGE%^<balance>%^RESET%^
   Gives your account balance info.
-%^ORANGE%^<deposit %^ORANGE%^%^ULINE%^NUM%^RESET%^ %^ORANGE%^%^ULINE%^TYPE%^RESET%^>%^RESET%^
+%^ORANGE%^<deposit %^ORANGE%^%^ULINE%^NUM%^RESET%^ %^ORANGE%^%^ULINE%^TYPE%^RESET%^%^ORANGE%^>%^RESET%^
   Deposits %^ORANGE%^%^ULINE%^NUM%^RESET%^ of currency of %^ORANGE%^%^ULINE%^TYPE%^RESET%^.
-%^ORANGE%^<withdraw %^ORANGE%^%^ULINE%^NUM%^RESET%^ %^ORANGE%^%^ULINE%^TYPE%^RESET%^>%^RESET%^
+%^ORANGE%^<withdraw %^ORANGE%^%^ULINE%^NUM%^RESET%^ %^ORANGE%^%^ULINE%^TYPE%^RESET%^%^ORANGE%^>%^RESET%^
   Withdraws %^ORANGE%^%^ULINE%^NUM%^RESET%^ of currency of %^ORANGE%^%^ULINE%^TYPE%^RESET%^.
-%^ORANGE%^<exchange %^ORANGE%^%^ULINE%^NUM%^RESET%^|all %^ORANGE%^%^ULINE%^TYPE%^RESET%^ for %^ORANGE%^%^ULINE%^TYPE%^RESET%^2>%^RESET%^
+%^ORANGE%^<exchange %^ORANGE%^%^ULINE%^NUM%^RESET%^%^ORANGE%^|all %^ORANGE%^%^ULINE%^TYPE%^RESET%^%^ORANGE%^ for %^ORANGE%^%^ULINE%^TYPE2%^RESET%^%^ORANGE%^>%^RESET%^
   Exchanges currencies.
 
 A 15% service fee will be charged to all deposits.
