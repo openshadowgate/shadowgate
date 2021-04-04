@@ -22,9 +22,11 @@ void create(){
    "and who knows what else. Periodically, small pipes jut out of the walls of the tunnel "+ 
    "and hang over the edge of the culvert, allowing wastewater to drain. Access over "+ 
    "the culvert is offered by %^WHITE%^bridges %^ORANGE%^constructed "+ 
-   "haphazardly out of wooden boards.%^WHITE%^\n");
+   "haphazardly out of wooden boards.%^WHITE%^\n"
+   "%^RESET%^An arched doorway leads to a plush room to the east.\n");
    set_exits(([
 	  "south" : ROOMS"sewer27",
+	  "east" : "/d/player_stores/poffices/shadow_sewer",      
    ]));
    set_items(([
       ({"tunnel","sewer","walls","bricks"}) : "%^RESET%^%^GREEN%^Layer upon layer of %^BOLD%^filth%^RESET%^%^GREEN%^ "+

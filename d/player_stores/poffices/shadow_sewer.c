@@ -64,7 +64,7 @@ void create() {
 	"%^YELLOW%^S%^CYAN%^ervice");
   set_long("%^BOLD%^%^YELLOW%^S%^CYAN%^ewer %^YELLOW%^M%^CYAN%^essage "
 	   "%^YELLOW%^S%^CYAN%^ervice\n"
-"%^RESET%^%^WHITE%^The arched doorway leads into a small, plush room with white plaster walls and a green %^GREEN%^car%^CYAN%^p%^GREEN%^et.%^WHITE%^ A clerk sits at a new-looking desk with a bold, brightly coloured %^WHITE%^%^BOLD%^sign%^RESET%^ on it. Black iron %^ORANGE%^la%^BLUE%^n%^BLUE%^t%^ORANGE%^erns%^WHITE%^ on the walls light the room brightly, and there is an additional tall white candle on the clerk's desk. Next to the candle is an odd-looking upturned brass hearing trumpet. Higher up, in the middle of the back wall is a small metal %^BOLD%^%^BLACK%^flap%^RESET%^%^GREEN%^.%^WHITE%^ Two comfortable %^GREEN%^chairs%^WHITE%^ are provided for customers. There is a small metal trash %^GREEN%^can%^WHITE%^ by the door.%^RESET%^
+"%^RESET%^%^WHITE%^The arched doorway leads into a small, plush room with white plaster walls and a green %^GREEN%^car%^CYAN%^p%^GREEN%^et.%^WHITE%^ A clerk sits at a new-looking desk with a bold, brightly coloured %^WHITE%^%^BOLD%^sign%^RESET%^ on it. Black iron %^ORANGE%^la%^GREEN%^nt%^ORANGE%^erns%^WHITE%^ on the walls light the room brightly, and there is an additional tall white candle on the clerk's desk. Next to the candle is an odd-looking upturned brass hearing trumpet. Higher up, in the middle of the back wall is a small metal %^BOLD%^%^BLACK%^flap%^RESET%^%^GREEN%^.%^WHITE%^ Two comfortable %^GREEN%^chairs%^WHITE%^ are provided for customers. There is a small metal trash %^GREEN%^can%^WHITE%^ by the door.%^RESET%^
 
 There is a %^BOLD%^sign%^RESET%^ here.
 "
@@ -139,7 +139,9 @@ void reset() {
 */
 
    if(!present("shop clerk"))
-	new("/d/player_stores/clerks/po_shadow")->move(TO);
+   new("/d/player_stores/clerks/po_se_shadow")->move(TO);
+
+
 //      if(!objectp(environment(clerk)))
 // 	 clerk->move(TO);
 /*
