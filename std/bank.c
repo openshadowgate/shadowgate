@@ -375,17 +375,23 @@ int read(string str) {
    if(str != "sign") return notify_fail("Read what?\n");
    write(
 "
-%^CYAN%^%^BOLD%^ <open account>%^BLACK%^ ----------------- %^RESET%^: %^CYAN%^Will open an account for you.
-%^CYAN%^%^BOLD%^ <close account>%^BLACK%^ ---------------- %^RESET%^: %^CYAN%^Closes your account.
-%^CYAN%^%^BOLD%^ <balance>%^BLACK%^ ---------------------- %^RESET%^: %^CYAN%^Gives your account balance info.
-%^CYAN%^%^BOLD%^ <deposit NUM TYPE>%^BLACK%^ ------------- %^RESET%^: %^CYAN%^Deposits NUM of currency of TYPE.
-%^CYAN%^%^BOLD%^ <withdraw NUM TYPE>%^BLACK%^ ------------ %^RESET%^: %^CYAN%^Withdraws NUM of currency of TYPE.
-%^CYAN%^%^BOLD%^ <exchange NUM|all TYPE for TYPE2>%^BLACK%^ -- %^RESET%^: %^CYAN%^Exchanges currencies.
+%^ORANGE%^<open account>%^RESET%^
+  Will open an account for you.
+%^ORANGE%^<close account>%^RESET%^
+  Closes your account.
+%^ORANGE%^<balance>%^RESET%^
+  Gives your account balance info.
+%^ORANGE%^<deposit %^ORANGE%^%^ULINE%^NUM%^RESET%^ %^ORANGE%^%^ULINE%^TYPE%^RESET%^>%^RESET%^
+  Deposits %^ORANGE%^%^ULINE%^NUM%^RESET%^ of currency of %^ORANGE%^%^ULINE%^TYPE%^RESET%^.
+%^ORANGE%^<withdraw %^ORANGE%^%^ULINE%^NUM%^RESET%^ %^ORANGE%^%^ULINE%^TYPE%^RESET%^>%^RESET%^
+  Withdraws %^ORANGE%^%^ULINE%^NUM%^RESET%^ of currency of %^ORANGE%^%^ULINE%^TYPE%^RESET%^.
+%^ORANGE%^<exchange %^ORANGE%^%^ULINE%^NUM%^RESET%^|all %^ORANGE%^%^ULINE%^TYPE%^RESET%^ for %^ORANGE%^%^ULINE%^TYPE%^RESET%^2>%^RESET%^
+  Exchanges currencies.
 
 A 15% service fee will be charged to all deposits.
 "
    );
-   if(archp(TP)) {
+   if(avatarp(TP)) {
       write("\nAlso, admdeposit (x) (type) (player name)\nadmwithdraw (x) (type) (player name)\n");
    }
    return 1;
