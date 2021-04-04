@@ -125,7 +125,7 @@ mixed insert(mixed *arr, mixed el, int pos)
 /**
  * Returns last element of an array arr or last num elements of arr.
  *
- * @param aarr Array to work on
+ * @param arr Array to work on
  * @param num Optional, number of elements to get
  * @return Either last element or last num elements
  */
@@ -136,4 +136,20 @@ varargs mixed last(mixed *arr, int num)
     }
 
     return arr[sizeof(arr)];
+}
+
+/**
+ * Whether element is a member.
+ *
+ * @param arr Array to work on
+ * @param elem Element to look for
+ * @return 0 if elem is not found, 1 if it is found
+ */
+int is_member(mixed *arr, mixed elem)
+{
+    if (member_array(arr, elem) >= -1) {
+        return 1;
+    }
+
+    return 0;
 }
