@@ -236,7 +236,7 @@ int spell_mastery_spell(string str, object ob, string feat, string mytype)
         tell_object(ob, "%^YELLOW%^Are you sure you want to add the feat " +
                     feat + "?  It will cause you to incur a character improvement tax of " +
                     "%^MAGENTA%^" + amt + "%^YELLOW%^.  This tax will reduce all future " +
-                    "experience gained by %^RED%^" +USER_D->get_character_improvement_tax_percent(tp)+"%^YELLOW%^ until it is repaid.%^RESET%^");
+                    "experience gained by %^RED%^" +USER_D->get_character_improvement_tax_percent(ob)+"%^YELLOW%^ until it is repaid.%^RESET%^");
     }else {
         tell_object(ob, "%^YELLOW%^Are you sure you want to add the feat " +
                     feat + "?");
@@ -296,7 +296,7 @@ int skill_focus_setting(string str, object ob, string feat, string mytype)
         tell_object(ob, "%^YELLOW%^Are you sure you want to add the feat " +
                     feat + "?  It will cause you to incur a character improvement tax of " +
                     "%^MAGENTA%^" + amt + "%^YELLOW%^.  This tax will reduce all future " +
-                    "experience gained by %^RED%^" +USER_D->get_character_improvement_tax_percent(tp)+"%^YELLOW%^ until it is repaid.%^RESET%^");
+                    "experience gained by %^RED%^" +USER_D->get_character_improvement_tax_percent(ob)+"%^YELLOW%^ until it is repaid.%^RESET%^");
     }else {
         tell_object(ob, "%^YELLOW%^Are you sure you want to add the feat " +
                     feat + "?");
@@ -420,7 +420,7 @@ int confirm_remove(string str, object ob, string feat, string extradata)
             }
             if (price > 0) {
                 tell_object(ob, "Incuring character improvement tax of " + price + ". All future experience gained will be " +
-                            "reduced by " +USER_D->get_character_improvement_tax_percent(tp)+"% until it is repaid.");
+                            "reduced by " +USER_D->get_character_improvement_tax_percent(ob)+"% until it is repaid.");
             }
         }
     }
@@ -1000,7 +1000,7 @@ int validation_messages(object obj, string group, string feat_name) {
         else if ((int)"/daemon/config_d.c"->check_config("character improvement") == 1 && i > 0) {
             tell_object(obj, "%^YELLOW%^Are you sure you want to add the feat " + feat_name + "?  It will "
                 "cause you to incur a character improvement tax of %^MAGENTA%^" + i + "%^YELLOW%^.  " +
-                "This tax will cause all future experience gained to be reduced by %^RED%^" + USER_D->get_character_improvement_tax_percent(tp) + "%%^YELLOW%^" +
+                "This tax will cause all future experience gained to be reduced by %^RED%^" + USER_D->get_character_improvement_tax_percent(obj) + "%%^YELLOW%^" +
                 " until it is repaid.%^RESET%^");
         }
         else {
