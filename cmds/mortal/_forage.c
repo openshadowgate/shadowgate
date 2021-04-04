@@ -1,30 +1,8 @@
-/* _forage.c for NWPs - based on original /cmds/mortal/_hunt.c  
-   Was to allow people to gather food while away from normal food sources
-   By *Styx*  7/2002
-   Added to use terrain type, hunt for game and fishing are separate
-   Quality of food & speed improves with skill
-Setting trainers as:
-/d/newbie/mon/doran (level 5)
-/d/tharis/conforest/mons/deladrenia (flower/herbalist lady) 
-   - use her for the herbalist later too?
-/d/antioch/antioch2/mons/andy.c (ration store guy)
-/d/laerad/mon/sage (the one who moves around in parnelli, set to level 15)
-/d/dagger/road/mon/elranglead
-/d/islands/tonerra/mon/chumba (tonerra food storage, level 20)
-
-*/
-
 #include <std.h>
 #include <daemons.h>
 #include <move.h>
 
 inherit DAEMON;
-
-int create_food(object who, int diff);
-void food(object ob, string which);
-
-// herbalism functions
-void pick_herb(object player);
 
 int cmd_forage(string str){
    int max_time, time, i, reps;
@@ -42,32 +20,20 @@ int cmd_forage(string str){
       notify_fail("Sorry, I don't think you'll find anything while blinded.");
       return 1;
    }
-/* I always kind of liked this message, but caves and such should be foragable.
-if(environment(TP)->query_property("indoors")) {
-     tell_room(ETP, TPQCN+" wants to make rock soup.",TP);
-     notify_fail("Rocks, hmm, could make rock soup .... but not on this mud!\n");
-     return 0;
-   }
-*/ 
+
    prof = TP->query_skill("survival")+roll_dice(1,20);
    if(TP->query_blind()) prof = 0;
    if(!str || (str != "for food" && str != "for herbs")) {
       notify_fail("Please specify <forage for herbs> or <forage for food>?\n");
       return 0;
    }
-// Once herbs are implemented, the real stuff needs to move down with the
-// food-related stuff after the NWP is performed, etc. (I think)  *Styx*
-  // if(str == "for herbs") {
-  //    notify_fail("Sorry, foraging for herbs is not implemented yet.\n");
-  //    return 0;
-  // }
+
    if(!TP->query_time_delay("forage",20)) {
       write("You need more time to study the area before you try again.");
       return 1;
    }
    TP->set_time_delay("forage");
-// moved the perform nwp to the finish step so they can't start and just quit
-// and still get the exp.
+
    switch(prof) {
       case 0..5 :    max_time = 60;   break;
       case 6..10 :   max_time = 55;   break;
@@ -88,7 +54,6 @@ if(environment(TP)->query_property("indoors")) {
      call_out("fin_hunt", time, TP);
      return 1;
    }
-
 
    if(str == "for herbs")
    {
@@ -177,7 +142,7 @@ int fin_hunt(object who){
 		diff = 3;	break;
      case 4 :	msg0 = "Surely you can find snails or slugs or SOMETHING even "
                        "here.  Are you sure you want to that badly though?";
-                msg1 = " gets filthy and wet poking around in the slimy water."; 
+                msg1 = " gets filthy and wet poking around in the slimy water.";
      		diff = 7;	break;
      case 5 :	msg0 = "Not much vegetation now is there?  So are you really "
                        "hungry enough to eat roots or bugs?";
@@ -202,15 +167,18 @@ int fin_hunt(object who){
 		diff = 6;	break;
    }
   msg0 = msg0+"\nIt looks like you need to look harder or elsewhere.";
-  if(!msg1)  msg1 = " stops foraging and looks disappointed.";
-//this does need to be down here so the diff. gets set even if don't need msgs.
-  if(prof < (random(20)+(diff*2)) ) { 
-//  roll = random(20)+1;   if(wis < roll) {   <<<<<< it was....
-    tell_object(who,msg0);
-    tell_room(environment(who),who->query_cap_name()+msg1,who);
-    destruct(TO);
-    return 1;
+
+  if (!msg1) {
+      msg1 = " stops foraging and looks disappointed.";
   }
+
+  if (prof < (random(20) + (diff * 2))) {
+      tell_object(who, msg0);
+      tell_room(environment(who), who->query_cap_name() + msg1, who);
+      destruct(TO);
+      return 1;
+  }
+
   tell_room(environment(who),who->query_cap_name()+" seems to find something.",who);
   tell_object(who,"You manage to find some food you hope to be good.\n");
   create_food(who, diff);
@@ -219,20 +187,23 @@ int fin_hunt(object who){
 }
 
 int create_food(object who, int diff) {
-  int prof, terrain_type, filling;
-  object ob;
-  string terrain;
-  if(!objectp(who) || !objectp(environment(who)) )  return 0;
-  terrain = environment(who)->query_terrain();
-  if(avatarp(who))  
-     write("For ref. for immortals the terrain is:  "+identify(terrain));
-  prof = who->query_skill("survival")+roll_dice(1,20);
-  ob = new("std/food");
-  ob->set_name("food");  //this needs to be before the set_mess stuff
+    int prof, terrain_type, filling;
+    object ob;
+    string terrain;
+    if (!objectp(who) || !objectp(environment(who))) {
+        return 0;
+    }
+    terrain = environment(who)->query_terrain();
+    if (avatarp(who)) {
+        write("For ref. for immortals the terrain is:  " + identify(terrain));
+    }
+    prof = who->query_skill("survival") + roll_dice(1, 20);
+    ob = new("std/food");
+    ob->set_name("food");    //this needs to be before the set_mess stuff
 
   terrain_type = TERRAIN_GROUPS[terrain];
   switch(terrain_type) {
-    case 1..2 :	
+    case 1..2 :
 	switch(random(9)) {
 	  case 0..2:  food(ob, "berries");	break;
 	  case 3..4:  food(ob, "nuts");		break;
@@ -256,14 +227,14 @@ int create_food(object who, int diff) {
  	   case 1..2:  food(ob, "bugs");	break;
  	}
  	break;
-    case 5 : 
+    case 5 :
         switch(random(3)) {
            case 0:  food(ob, "roots");		break;
  	   case 1:  food(ob, "nuts");		break;
  	   case 2:  food(ob, "bugs");		break;
  	}
  	break;
-    case 6 : 
+    case 6 :
        switch(random(3)) {
           case 0..1:  food(ob, "roots");	break;
 	  case 2:     food(ob, "nuts");		break;
@@ -279,7 +250,7 @@ int create_food(object who, int diff) {
        break;
     case 8 :  food(ob, "shellfish");		break;
     case 9 :  food(ob, "junk");			break;
-    case 10: 
+    case 10:
        switch(random(7)) {
           case 0:  food(ob, "leftovers");	break;
           case 1:  food(ob, "nuts");		break;
@@ -290,7 +261,7 @@ int create_food(object who, int diff) {
           case 6:  food(ob, "junk");		break;
        }
        break;
-    case 11: 
+    case 11:
        switch(random(5)) {
           case 0:  food(ob, "junk");		break;
           case 1:  food(ob, "bugs");		break;
@@ -299,17 +270,17 @@ int create_food(object who, int diff) {
           case 4:  food(ob, "snails");		break;
        }
        break;
-       
+
     default:  food(ob, "roots");		break;
   }
-   filling = random(15) - random(6) + ((prof - diff)/2);  
- // was (rand 16 - 19 plus wisdom 
+   filling = random(15) - random(6) + ((prof - diff)/2);
+ // was (rand 16 - 19 plus wisdom
    ob->set_strength(filling);
    if(filling <  0 ) {
       ob->set_poison(-filling/2);
       ob->set_your_mess("starts to vomit from the bad food.");
       ob->set_my_mess("You feel sick and then start to vomit.  The food must have been poisoned.");
-   }      
+   }
    ob->set_value(0);
    ob->set_destroy();
    ob->set_weight(1);
@@ -403,15 +374,15 @@ void food(object ob, string which) {
 	break;
    }
    return;
-}   
-   
-   
+}
+
+
 
 int help(){
    write(
 @STYX
-   Syntax: <forage for> [food] 
-                    or  [herbs] 
+   Syntax: <forage for> [food]
+                    or  [herbs]
 
    This command allows you to forage for food, more successfully in some areas than others.  It helps reduce the amount of food you need to carry, trips to civilization  for meals, or eating clerical food.  Do remember that the food might be poisoned.
 
@@ -422,14 +393,6 @@ STYX
    );
    return 1;
 }
-
-
-
-
-
-/// ******************************************
-/// Herbalism Stuff
-
 
 void herb_emotes(object player)
 {
@@ -457,7 +420,7 @@ void herb_emotes(object player)
     }
 
     call_out("herb_emotes", 8, player);
-    
+
     return 1;
 }
 
@@ -496,7 +459,7 @@ int finished_herbing(object player)
 
         tell_room(environment(player),""+player->QCN+" finds several plants and begins "
             "to prepare them and put them into pouches.",player);
-        
+
         for(i=0;i<skill_level;i++)
         {
             pick_herb(player);
@@ -507,8 +470,11 @@ int finished_herbing(object player)
     return 1;
 }
 
-void pick_herb(object player) {
-    if(!objectp(player)) return;
+void pick_herb(object player)
+{
+    if (!objectp(player)) {
+        return;
+    }
     new("/d/common/obj/brewing/herb_inherit")->move(environment(player));
     return 1;
 }
