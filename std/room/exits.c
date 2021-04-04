@@ -327,27 +327,8 @@ int use_exit()
 
     if (objectp(TP)) {
         incoming = TP;
-        if (TP->query_in_vehicle()) {
-            incoming = TP->query_in_vehicle();
-            stmp = query_stamina_usage();
-            if (TP->query_property("endurance")) {
-                stmp = stmp - (int)TP->query_property("endurance");
-                if (stmp < 0) {
-                    stmp = 0;
-                }
-            }
-            TP->use_stamina(stmp);
-        } else {
-            stmp = query_stamina_usage() + 1;
-            if (TP->query_property("endurance")) {
-                stmp = stmp - (int)TP->query_property("endurance");
-                if (stmp < 0) {
-                    stmp = 0;
-                }
-            }
-            TP->use_stamina(stmp);
-        }
-        TP->set_time_delay("last_move");
+
+        TP->set_time_delay("last_move"); // This delay stores last time used
         add_tracks(incoming, "left", verb);
     }
     if (!objectp(TP)) {

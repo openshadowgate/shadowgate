@@ -231,12 +231,7 @@ int use_exit()
         return 1;
     }
 
-    if ((int)TP->query_condition_percent() < 1) {
-        return notify_fail("You are too tired to go on. (This is temperary, ultimately you will pass out at this stage. Think about how you move and comment on it to the wizes.)\n");
-    }
-
     if (!(verb = query_verb())) return 0;
-
 
     if ((paths = query_exit(verb)) == ROOM_VOID)
         if ((paths = query_climb_exit(verb,0)) == ROOM_VOID) {
@@ -309,40 +304,13 @@ int use_exit()
 
       TP->pre_exit_func();
     this_player()->move_player(paths, verb);
-//    if((objectp(TP)) && (!wizardp(TP))) {
     if (objectp(TP)) {
         incoming = TP;
-        if (TP->query_in_vehicle()) {
-            incoming = TP->query_in_vehicle();
-            stmp = query_stamina_usage();
-            if(TP->query_property("endurance"))
-            {
-                stmp = stmp - (int)TP->query_property("endurance");
-                if(stmp < 0) { stmp = 0; }
-            }
-            TP->use_stamina(stmp);
-        } else {
-            stmp = query_stamina_usage() + 1;
-            if(TP->query_property("endurance"))
-            {
-                stmp = stmp - (int)TP->query_property("endurance");
-                if(stmp < 0) { stmp = 0; }
-            }
-            TP->use_stamina(stmp);
-        }
         add_tracks(incoming,"left",verb);
     }
     if(!objectp(TP)) { return 1; }
       TP->post_exit_func();
 
-/*
-    if(TP->query_in_vehicle()) {
-        TP->use_stamina();
-    }
-    else {
-        TP->use_stamina(2);
-    }
-*/
     if (TP->query_property("fled") > time())
           TP->set_property("fled",time()+210);
     if (intp(TP->query_property("PKfled")) && (TP->query_property("PKFled") > time()) ) {
