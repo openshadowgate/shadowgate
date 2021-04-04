@@ -85,13 +85,15 @@ walk - do lazy strolling
 
 %^CYAN%^SYNTAX%^RESET%^
 
-walk %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^
+walk %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^|stop
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 Walk will try to automatically move you into given %^ORANGE%^%^ULINE%^DIRECTION%^RESET%^, or into an obvious direction if one is available.
 
-Walk is slower than doing it with commands,
+To stop walking use %^ORANGE%^<walk stop>%^RESET%^.
+
+Walk is slower than doing it with commands.
 
 You should use %^ORANGE%^<ride>%^RESET%^ when on horse instead.
 
