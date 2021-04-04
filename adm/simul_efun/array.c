@@ -6,7 +6,7 @@
 /**
  * Checks if two awways are equal
  */
-int arrays_equal(mixed *one, mixed *two)
+int arrays_equal(mixed* one, mixed* two)
 {
     int i;
     if (!pointerp(one) || !pointerp(two)) {
@@ -26,7 +26,8 @@ int arrays_equal(mixed *one, mixed *two)
 /**
  * Turns array into a set: an array with unique atoms only.
  */
-mixed *distinct_array(mixed *arr) {
+mixed* distinct_array(mixed* arr)
+{
     return keys(allocate_mapping(arr, 1));
 }
 
@@ -37,14 +38,19 @@ mixed *distinct_array(mixed *arr) {
  * @param ele How many elements to sum. Defaults to 0.
  * @return Sum
  */
-int sum_array(int *arr, int ele)
+int sum_array(int* arr, int ele)
 {
     int sum = 0, i;
-    if(!intp(ele)) return sum;
-    for(i = 0;i < ele;i++)
-    {
-        if(i > (sizeof(arr)-1)) continue;
-        if(!intp(arr[i])) continue;
+    if (!intp(ele)) {
+        return sum;
+    }
+    for (i = 0; i < ele; i++) {
+        if (i > (sizeof(arr) - 1)) {
+            continue;
+        }
+        if (!intp(arr[i])) {
+            continue;
+        }
         sum += arr[i];
         continue;
     }
@@ -67,8 +73,7 @@ mixed collapse_array(mixed *array)
     }
 
     sum = array[0];
-    for (i = 1; i < sizeof(array); ++i)
-    {
+    for (i = 1; i < sizeof(array); ++i) {
         sum += array[i];
     }
     return sum;
@@ -82,19 +87,23 @@ mixed collapse_array(mixed *array)
  * @param to last range indes. Can me ommited.
  * @return Modified array
  */
-varargs mixed *exclude_array(mixed *array,int from, int to)
+varargs mixed* exclude_array(mixed* array, int from, int to)
 {
-   mixed *bottom,*top;
+    mixed* bottom, * top;
 
-   bottom = ({ });
-   top = ({ });
+    bottom = ({ });
+    top = ({ });
 
-   if(!to) to = from;
-   if(from > 0)
-      bottom = array[0 .. from - 1];
-   if(to < sizeof(array) - 1)
-      top = array[to + 1 .. sizeof(array) - 1];
-   return bottom + top;
+    if (!to) {
+        to = from;
+    }
+    if (from > 0) {
+        bottom = array[0..from - 1];
+    }
+    if (to < sizeof(array) - 1) {
+        top = array[to + 1..sizeof(array) - 1];
+    }
+    return bottom + top;
 }
 
 /**
@@ -111,4 +120,20 @@ mixed insert(mixed *arr, mixed el, int pos)
         return arr[0..pos - 1] + el + arr[pos..];
     }
     return arr[0..pos - 1] + ({ el }) + arr[pos..];
+}
+
+/**
+ * Returns last element of an array arr or last num elements of arr.
+ *
+ * @param aarr Array to work on
+ * @param num Optional, number of elements to get
+ * @return Either last element or last num elements
+ */
+varargs mixed last(mixed *arr, int num)
+{
+    if (num) {
+        return arr[(sizeof(arr) - num)..sizeof(arr)];
+    }
+
+    return arr[sizeof(arr)];
 }

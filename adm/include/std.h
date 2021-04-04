@@ -137,3 +137,8 @@
 #define SIZEDTYPES ({"chain","clothing","leather","armour"})
 #define MULTIPLE_WEAR ({"clothing","jewelry", "sheath"})
 #define PK_DAMAGE_PERCENTAGE 100
+
+#define strstr                      strsrch
+#define raise_error                 error
+#define member(x, y)                member_array(y, x)
+#define to_string(x)                ("" + (x))

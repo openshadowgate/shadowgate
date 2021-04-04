@@ -1,4 +1,4 @@
-#pragma types
+#pragma strict_types
 #define strstr                      strsrch
 #define raise_error                 error
 #define member(x, y)                member_array(y, x)
