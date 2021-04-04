@@ -11,7 +11,7 @@ void create()
     feat_name("master strike");
     feat_syntax("master_strike [TARGET]");
     feat_prereq("Thief L20");
-    feat_desc("Ability to surprise your opponent and position yourself properly in combat is represented through the master strike, a deadly technique that allows the thief to deal massive harm or disruptively paralyze their opponents.");
+    feat_desc("Ability to surprise your opponent and position yourself properly in combat is represented through the master strike, a deadly technique that allows the thief to deal harm and disruptively paralyze their opponents. Succesful save will allow their victim to endure through half of the damage.");
     set_save("fort");
 }
 
@@ -123,16 +123,20 @@ void execute_attack()
         dest_effect();
         return;
     }
+
     caster->remove_property("using instant feat");
     ::execute_attack();
+
     if (!objectp(target)) {
         dest_effect();
         return;
     }
+
     if (caster->query_unconscious()) {
         dest_effect();
         return;
     }
+
     if (!objectp(target) || !present(target, place)) {
         tell_object(caster, "Your target has eluded you!");
         dest_effect();
@@ -140,19 +144,24 @@ void execute_attack()
     }
 
     tempmap = caster->query_property("using master strike");
+
     if (!mapp(tempmap)) {
         tempmap = ([]);
     }
+
     if (tempmap[target]) {
         map_delete(tempmap, target);
     }
+
     keyz = keys(tempmap);
+
     for (i = 0; i < sizeof(keyz); i++) {
         if (!objectp(keyz[i])) {
             map_delete(tempmap, keyz[i]);
         }
         continue;
     }
+
     timerz = time() + 300;
     delay_subject_msg(target, 300, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^master striken again%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target:timerz ]);
@@ -169,6 +178,7 @@ void execute_attack()
     {
         object* weapon = caster->query_wielded();
         string damtype;
+        int damage;
 
         if (sizeof(weapon)) {
             damtype = weapon[0]->query_damage_type();
@@ -176,16 +186,17 @@ void execute_attack()
             damtype = "piercing";
         }
 
-        if (target->query_property("no death") || do_save(target, -bonusdc)) {
+        damage = roll_dice(flevel, 6);
+
+        if (do_save(target, -bonusdc)) {
             tell_room(place, "%^BOLD%^%^WHITE%^" + target->QCN + " endures through lethal strike!", target);
             tell_object(target, "%^BOLD%^%^WHITE%^You are are merely slightly shaken, unable to move!");
-            target->set_paralyzed(roll_dice(1, 4) * 2, "%^BOLD%^%^RED%^The impact of the strike has left you unable to move!%^RESET%^");
-            target->cause_typed_damage(target, target->return_target_limb(), roll_dice(flevel, 3), damtype);
+            target->cause_typed_damage(target, target->return_target_limb(), damage / 2, damtype);
         } else {
             tell_room(place, "%^BOLD%^%^MAGENTA%^Crushing strike hits " + target->QCN + " !", target);
-            tell_object(target, "%^BOLD%^%^MAGENTA%^You're almost dead!\n");
-            target->cause_typed_damage(target, target->return_target_limb(), target->query_max_hp() > 2000 ? 2000 : (target->query_max_hp() * 7 / 10), damtype);
-            target->set_paralyzed(4, "%^BOLD%^%^RED%^The impact of the strike has left you unable to move!%^RESET%^");
+            tell_object(target, "%^BOLD%^%^MAGENTA%^Unberable strike finds a weakness in your defences!\n");
+            target->cause_typed_damage(target, target->return_target_limb(), damage, damtype);
+            target->set_paralyzed(roll_dice(1, 4) * 2, "%^BOLD%^%^RED%^The impact of the strike has left you unable to move!%^RESET%^");
         }
     }
 
