@@ -16,14 +16,15 @@ void create(){
   set_body_type("humanoid");
   set_race("shadow");
   set_size(2);
+  set_property("no random treasure");
 }
 
 void die(object ob) {
         object obj;
         tell_room(ETO,"%^CYAN%^The shadow shimmers and disappears.%^RESET%^");
         if (objectp(thing)) {
-            if(member_array(thing,caster->query_protectors()) != -1) { 
-                caster->remove_protector(thing); 
+            if(member_array(thing,caster->query_protectors()) != -1) {
+                caster->remove_protector(thing);
             }
             thing->move(environment(TO));
 
