@@ -104,9 +104,9 @@ kill [%^ORANGE%^%^ULINE%^TARGET%^RESET%^]
 
 This sommand turns combat on for you and %^ORANGE%^%^ULINE%^TARGET%^RESET%^.
 
-To kill yourself just use %^ORANGE%^<kill %^ORANGE%^%^ULINE%^YOURNAME%^RESET%^%^ORANGE%^>%^RESET%^.
+If you wish to end current life of your character, use %^ORANGE%^<kill %^ORANGE%^%^ULINE%^YOURNAME%^RESET%^%^ORANGE%^>%^RESET%^.
 
-Without an argument this command will start combat with random non-hostile non-ally.
+Without an argument this command will start combat with random non-hostile non-ally or the last hostile player.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
