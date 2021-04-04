@@ -19,8 +19,6 @@ void create() {
    ::create();
    set_property("magic hold", 50);
    set_property("no castle", 1);
-//   set_property("light", 2);
-//   set_property("night light", 2);
    set_property("indoors", 1);
    set_short("A Bank");
    set_long("%^BOLD%^A Town Bank%^RESET%^\n");
@@ -131,55 +129,72 @@ int exchange(string str) {
    string from, to;
    float val;
    int amount, amt, amt2, diff, original, check;
+   string amount_s;
 
-   if(!str) {
-      notify_fail("Correct syntax: <exchange NUM TYPE for TYPE>\n"+
-                  "ex: <exchange 100 gold for copper>\n");
-      return 0;
+   if (!str) {
+       notify_fail("Correct syntax: <exchange NUM|all TYPE for TYPE>\n" +
+                   "ex: <exchange 100 gold for copper>\n");
+       return 0;
    }
-   if(sscanf(str, "%d %s for %s", amount, from, to) !=3) {
-      notify_fail("Correct syntax: <exchange NUM TYPE for TYPE\nex: "
-                  "<exchange 100 gold for copper>\n");
-      return 0;
+   if (sscanf(str, "%s %s for %s", amount_s, from, to) != 3) {
+       notify_fail("Correct syntax: <exchange NUM|all TYPE for TYPE\nex: "
+                   "<exchange 100 gold for copper>\n");
+       return 0;
    }
-   if(TP->query_bound() || TP->query_unconscious()){
-      TP->send_paralyzed_message("info",TP);
-      return 1;
+   if (TP->query_bound() || TP->query_unconscious()) {
+       TP->send_paralyzed_message("info", TP);
+       return 1;
    }
-   if(amount < 1) {
-      notify_fail("That would be a nifty trick indeed!\n");
-      return 0;
+
+   if (amount_s == "all") {
+       amount = TP->query_money(from);
+   } else {
+       amount = atoi(amount_s);
    }
-   if((int)this_player()->query_money(from) < amount) {
-      notify_fail("You do not have that much of that currency.\n");
-      return 0;
+
+   if (amount < 1) {
+       notify_fail("That would be a nifty trick indeed!\n");
+       return 0;
    }
-   if( member_array( from, MONEY_TYPES ) == -1 ) {
-      write("The bank does not support "+from+".\n");
-      return 0;
+
+   if (this_player()->query_money(from) < amount) {
+       notify_fail("You do not have that much of that currency.\n");
+       return 0;
    }
-   if( member_array( to, MONEY_TYPES ) == -1) {
-      write("The bank does not support "+to+".\n");
-      return 0;
+
+   if (member_array(from, MONEY_TYPES) == -1) {
+       write("The bank does not support " + from + ".\n");
+       return 0;
    }
+
+   if (member_array(to, MONEY_TYPES) == -1) {
+       write("The bank does not support " + to + ".\n");
+       return 0;
+   }
+
 //Some of the calcs seem unnecessary, but I'm retaining them while reordering to avoid
 //the player losing money when they don't have enough for the exchange, hence the new variable ~Circe~ 12/16/15
+
    original = amount;
    amt = amount;
    val = amount * (int)ECONOMY_D->currency_rate(from);
    amount = to_int(val / (int)ECONOMY_D->currency_rate(to));
-   //check = (amount*85)/100; Currency exchange is free - Odin 5/4/2020
    check = amount;
-   if(check < 1){
-      notify_fail("That is not enough "+from+" to exchange it for "+to+".\n");
-      return 0;
+
+   if (check < 1) {
+       notify_fail("That is not enough " + from + " to exchange it for " + to + ".\n");
+       return 0;
    }
+
    this_player()->add_money(from, -(original));
    amt2 = amount * (int)ECONOMY_D->currency_rate(to);
    amt2 = amt2 / (int)ECONOMY_D->currency_rate(from);
    diff = amt - amt2;
-   if (diff > 0) TP->add_money(from,diff);
-   //amount = (amount*85)/100; See above comment, we're punishing player with 15% deposit fee, shouldn't charge them for exchange
+
+   if (diff > 0) {
+       TP->add_money(from, diff);
+   }
+
    this_player()->add_money(to, amount);
    write("You exchange your "+from+" coins for "+amount+" "+to+".");
    tell_room(ETP,TPQCN+" exchanges some money.",TP);
@@ -359,17 +374,16 @@ int withdraw(string str) {
 int read(string str) {
    if(str != "sign") return notify_fail("Read what?\n");
    write(
-@MELNMARN
-
-%^CYAN%^%^BOLD%^ open account%^BLACK%^ ----------------- %^RESET%^: %^CYAN%^Will open an account for you.
-%^CYAN%^%^BOLD%^ close account%^BLACK%^ ---------------- %^RESET%^: %^CYAN%^Closes your account.
-%^CYAN%^%^BOLD%^ balance%^BLACK%^ ---------------------- %^RESET%^: %^CYAN%^Gives your account balance info.
-%^CYAN%^%^BOLD%^ deposit NUM TYPE%^BLACK%^ ------------- %^RESET%^: %^CYAN%^Deposits NUM of currency of TYPE.
-%^CYAN%^%^BOLD%^ withdraw NUM TYPE%^BLACK%^ ------------ %^RESET%^: %^CYAN%^Withdraws NUM of currency of TYPE.
-%^CYAN%^%^BOLD%^ exchange NUM TYPE for TYPE2%^BLACK%^ -- %^RESET%^: %^CYAN%^Exchanges currencies.
+"
+%^CYAN%^%^BOLD%^ <open account>%^BLACK%^ ----------------- %^RESET%^: %^CYAN%^Will open an account for you.
+%^CYAN%^%^BOLD%^ <close account>%^BLACK%^ ---------------- %^RESET%^: %^CYAN%^Closes your account.
+%^CYAN%^%^BOLD%^ <balance>%^BLACK%^ ---------------------- %^RESET%^: %^CYAN%^Gives your account balance info.
+%^CYAN%^%^BOLD%^ <deposit NUM TYPE>%^BLACK%^ ------------- %^RESET%^: %^CYAN%^Deposits NUM of currency of TYPE.
+%^CYAN%^%^BOLD%^ <withdraw NUM TYPE>%^BLACK%^ ------------ %^RESET%^: %^CYAN%^Withdraws NUM of currency of TYPE.
+%^CYAN%^%^BOLD%^ <exchange NUM|all TYPE for TYPE2>%^BLACK%^ -- %^RESET%^: %^CYAN%^Exchanges currencies.
 
 A 15% service fee will be charged to all deposits.
-MELNMARN
+"
    );
    if(archp(TP)) {
       write("\nAlso, admdeposit (x) (type) (player name)\nadmwithdraw (x) (type) (player name)\n");
