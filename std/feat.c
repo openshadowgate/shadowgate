@@ -463,48 +463,6 @@ varargs int thaco(object targ, int mod, int flag)
     return 1;
 }
 
-
-/*varargs int thaco(object obj,int mod)
-{
-    int thaco,armor,level,num,dex,str,i;
-    string *classes;
-
-    if(!objectp(caster)) { return 0; }
-    if(!objectp(obj)) { return 0; }
-
-    classes = (string)caster->query_classes();
-    dex     = (int)caster->query_stats("dexterity");
-    str     = (int)caster->query_stats("strength");
-
-    thaco = 0;
-
-    if(!caster->query("new_class_type"))
-    {
-        for(i=0;i<sizeof(classes);i++)
-        {
-            level = (int)caster->query_class_level(classes[i]);
-            num   = get_thaco(level,classes[i],obj);
-            if(num > thaco) { thaco = num; }
-        }
-    }
-    else // the attack bonus is based off of the object now, if an object is passed to it.  All calculations for multiple classes are handled there -Ares
-    {
-        thaco = get_thaco(0,"",caster);
-    }
-
-    thaco += (int)caster->query_attack_bonus();
-    thaco += (int)"/daemon/bonus_d"->tohit_bonus(dex,str,target);
-    thaco += roll_dice(1,20);
-
-    if(intp(mod) && mod) { thaco += mod; }
-
-    armor = absolute_value((int)target->query_ac() - 10);
-
-    if(armor > thaco) { return 0; }
-
-    return 1;
-}*/
-
 varargs int do_save(object ob,int mod)
 {
     string save;

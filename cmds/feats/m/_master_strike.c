@@ -178,7 +178,6 @@ void execute_attack()
     {
         object* weapon = caster->query_wielded();
         string damtype;
-        int damage;
 
         if (sizeof(weapon)) {
             damtype = weapon[0]->query_damage_type();
