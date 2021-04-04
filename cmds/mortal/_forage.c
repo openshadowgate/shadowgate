@@ -380,43 +380,48 @@ void food(object ob, string which) {
 
 int help(){
    write(
-@STYX
-   Syntax: <forage for> [food]
-                    or  [herbs]
+"
+%^CYAN%^NAME%^RESET%^
 
-   This command allows you to forage for food, more successfully in some areas than others.  It helps reduce the amount of food you need to carry, trips to civilization  for meals, or eating clerical food.  Do remember that the food might be poisoned.
+forage -- find things in the wilderness
 
-Success rate, time required, and how edible(**) it will be are improved by higher levels in the survival skill, but are also affected by the terrain.  **We do expect some to be glad to find snails or fungus and others to be revolted by those.  Some races might eat almost anything, some would be thrilled to find nuts or berries, while others might strongly dislike anything besides meat, i.e. think RP as well as convenience.
+%^CYAN%^SYNTAX%^RESET%^
 
-Note:  Forage for herbs is available to those with the herbalism NWP.  Those herbs will have various uses to those with that NWP.
-STYX
+forage for [foods|herbs]
+
+%^CYAN%^DESCRIPTION%^RESET%^
+
+This command allows you to forage for various natural yields, more successfully in some areas than others. It helps reduce the amount of food you need to carry, trips to civilization  for meals, or eating clerical food. Be aware that the food might be poisoned.
+
+%^CYAN%^SEE ALSO%^RESET%^
+
+hunt, skin, kill, corpselimbs, rend, hp, score
+"
    );
    return 1;
 }
 
 void herb_emotes(object player)
 {
-    if(!objectp(player) || sizeof(player->query_attackers()))
-    {
+    if (!objectp(player) || sizeof(player->query_attackers())) {
         remove_call_out("finished_herbing");
         return 1;
     }
 
 
-    tell_room(environment(player),player->QCN+" appears to be poking around looking for something.",player);
+    tell_room(environment(player), player->QCN + " appears to be poking around looking for something.", player);
 
-    switch(random(10))
-    {
-    case 0: tell_object(player,"You carefully inspect the terrain."); break;
-    case 1: tell_object(player,"You pull on the leaves of a few plants, but they aren't the right kind."); break;
-    case 2: tell_object(player,"You begin collecting a few samples that look promising.  Maybe you'll find something here yet."); break;
-    case 3: tell_object(player,"Is there really anything useful here?"); break;
-    case 4: tell_object(player,"A tightly bundled wad of plants catches your eye!"); break;
-    case 5: tell_object(player,"Ouch!  Something just bit the end of your finger!"); break;
-    case 6: tell_object(player,"What's that over in the distance?  Could it be exactly what you're looking for?"); break;
-    case 7: tell_object(player,"By the gods, there are so many plants to make herbs from!"); break;
-    case 8: tell_object(player,"Just a few more like this, and you'll really have something!"); break;
-    case 9: tell_object(player,"Dried flowers, these should be useful."); break;
+    switch (random(10)) {
+    case 0: tell_object(player, "You carefully inspect the terrain."); break;
+    case 1: tell_object(player, "You pull on the leaves of a few plants, but they aren't the right kind."); break;
+    case 2: tell_object(player, "You begin collecting a few samples that look promising.  Maybe you'll find something here yet."); break;
+    case 3: tell_object(player, "Is there really anything useful here?"); break;
+    case 4: tell_object(player, "A tightly bundled wad of plants catches your eye!"); break;
+    case 5: tell_object(player, "Ouch!  Something just bit the end of your finger!"); break;
+    case 6: tell_object(player, "What's that over in the distance?  Could it be exactly what you're looking for?"); break;
+    case 7: tell_object(player, "By the gods, there are so many plants to make herbs from!"); break;
+    case 8: tell_object(player, "Just a few more like this, and you'll really have something!"); break;
+    case 9: tell_object(player, "Dried flowers, these should be useful."); break;
     }
 
     call_out("herb_emotes", 8, player);
