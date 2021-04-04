@@ -132,10 +132,10 @@ mixed insert(mixed *arr, mixed el, int pos)
 varargs mixed last(mixed *arr, int num)
 {
     if (num) {
-        return arr[(sizeof(arr) - num)..sizeof(arr)];
+        return arr[(sizeof(arr) - num)..(sizeof(arr) - 1)];
     }
 
-    return arr[sizeof(arr)];
+    return arr[sizeof(arr) - 1];
 }
 
 /**
@@ -147,7 +147,7 @@ varargs mixed last(mixed *arr, int num)
  */
 int is_member(mixed *arr, mixed elem)
 {
-    if (member_array(arr, elem) >= -1) {
+    if (member_array(elem, arr) > -1) {
         return 1;
     }
 
