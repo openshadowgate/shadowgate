@@ -190,7 +190,7 @@ void my_special(object target) {
 "%^GREEN%^e%^RED%^n%^RESET%^%^ORANGE%^c%^BOLD%^%^GREEN%^h %^RESET%^%^ORANGE%^as "+target->QS+" %^BOLD%^%^RED%^struggles "
 "%^RESET%^%^ORANGE%^to free "+target->QO+"self!%^RESET%^",target);
       break;
-	  case "occult":
+      case "star":
         tell_object(target,"%^CYAN%^The %^BLUE%^Wh%^BOLD%^%^CYAN%^i%^RESET%^%^CYAN%^s%^BOLD%^%^WHITE%^pe%^RESET%^%^CYAN%^r%^BOLD%^%^WHITE%^e%^RESET%^%^BLUE%^d %^CYAN%^suddenly lunges at you, and grabs you by the shoulder. Moving its head close in an instant, it whispers into your ear a %^MAGENTA%^Name%^CYAN%^... the %^BOLD%^%^MAGENTA%^L%^GREEN%^i%^RESET%^%^GREEN%^vi%^BOLD%^n%^MAGENTA%^g %^RESET%^%^MAGENTA%^Name%^BOLD%^! %^RESET%^%^CYAN%^Your mind is not ready for it, and it %^BLUE%^rebounds %^CYAN%^within you, the %^MAGENTA%^Name %^BOLD%^%^RED%^tearing you apart %^RESET%^%^CYAN%^as %^BOLD%^your entire being %^RESET%^%^CYAN%^rejects it.%^RESET%^");
         tell_room(ETO,"%^CYAN%^The %^BLUE%^Wh%^BOLD%^%^CYAN%^i%^RESET%^%^CYAN%^s%^BOLD%^%^WHITE%^pe%^RESET%^%^CYAN%^r%^BOLD%^%^WHITE%^e%^RESET%^%^BLUE%^d %^CYAN%^suddenly lunges at %^RESET%^"+target->QCN+"%^CYAN%^, and grabs %^RESET%^"+target->QO+" %^CYAN%^by the shoulder. Moving its head close in an instant, it whispers into %^RESET%^"+target->QO+" %^CYAN%^ear. %^RESET%^"+capitalize(target->QCN)+" %^CYAN%^seems to stop and listen, entranced, before convulsing and seizing erratically!%^RESET%^",target);
       break;
