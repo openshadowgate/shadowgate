@@ -21,6 +21,7 @@ void create() {
 
 
 string long_desc(){
+    /*
   string desc;
   desc = ::long_desc();
   desc = base_desc();
@@ -32,7 +33,16 @@ string long_desc(){
     +" %^ORANGE%^branches %^RESET%^lashed together with%^BOLD%^"
     +" %^GREEN%^l%^RESET%^%^GREEN%^ia%^BOLD%^n%^RESET%^%^GREEN%^a"
     +"%^BOLD%^s%^RESET%^.";
-  return desc;
+  return desc; */
+
+    return ::long_desc() + "%^RESET%^A %^BOLD%^%^YELLOW%^clearing %^RESET%^has been cut"
+    +" through the %^BOLD%^%^GREEN%^j%^RESET%^%^GREEN%^u%^BOLD%^ng"
+    +"%^RESET%^%^GREEN%^l%^BOLD%^e %^RESET%^here, and a tall,%^ORANGE%^"
+    +" rickety tower%^RESET%^ constructed in the %^RESET%^space from"
+    +" %^ORANGE%^branches %^RESET%^lashed together with%^BOLD%^"
+    +" %^GREEN%^l%^RESET%^%^GREEN%^ia%^BOLD%^n%^RESET%^%^GREEN%^a"
+    +"%^BOLD%^s%^RESET%^.";
+
 }
 
 string tower_desc(){
@@ -40,7 +50,7 @@ string tower_desc(){
   int i, count;
   object room, * critters;
   desc = "%^ORANGE%^The tower is close to the height of the surrounding"
-    +" trees, but doesn't quite climb above the"
+    +" trees. It doesn't quite climb above the"
     +" %^BOLD%^%^GREEN%^canopy%^RESET%^%^GREEN%^ of the %^GREEN%^j"
     +"%^BOLD%^%^GREEN%^u%^RESET%^%^GREEN%^ng%^BOLD%^%^GREEN%^l"
     +"%^RESET%^%^GREEN%^e%^ORANGE%^, but it gets close. It is built"
