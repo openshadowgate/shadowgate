@@ -69,8 +69,8 @@ case "star":
         set_name("strange flumph");
         set_id(({"outsider","strange flumph","flumph"}));
         set_long("%^BOLD%^%^CYAN%^This abberant creature looks in some ways very much like an %^BLUE%^jellyfish%^CYAN%^, although jellyfish lack staring %^WHITE%^eyestalks%^CYAN%^ "
-"and %^GREEN%^acidic spikes%^CYAN%^. Its body is a disc, or perhaps a flattened dome. %^WHITE%^Pale, pallid skin^&CYAN%^ covers the body and it's %^WHITE%^eyestalks%^CYAN%^, which"
-" end in unblinking eyes that have the %^RESET%^GREEN%^eldritch^&BOLD%^%^CYAN%^ horizontal %^RESET%^%^BLUE%^pupils%^BOLD%^%^CYAN%^ of a %^RESET%^%^BROWN%^goat%^BOLD%^%^CYAN%^. "
+"and %^GREEN%^acidic spikes%^CYAN%^. Its body is a disc, or perhaps a flattened dome. %^WHITE%^Pale, pallid skin%^CYAN%^ covers the body and it's %^WHITE%^eyestalks%^CYAN%^, which"
+" end in unblinking eyes that have the %^RESET%^GREEN%^eldritch%^BOLD%^%^CYAN%^ horizontal %^RESET%^%^BLUE%^pupils%^BOLD%^%^CYAN%^ of a %^RESET%^%^ORANGE%^goat%^BOLD%^%^CYAN%^. "
 "Their underside is a crystaline collection of hollow, needle-like %^GREEN%^spikes%^CYAN%^. Surrounding these are tentacles easily as long or longer than the several feet of "
 "its body's length. It floats along with flumphing noise from the many tiny pores that suck in and release air in a steady rhythm.%^RESET%^");
         set_fake_limbs(({"torso","eyestalk","tentacle"}));
