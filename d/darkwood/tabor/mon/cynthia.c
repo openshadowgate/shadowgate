@@ -117,6 +117,7 @@ void reply_func(string msg, object who){
    if(strsrch(msg,"rumors") != -1 || strsrch(msg,"Rumors") != -1 ){
       force_me("say Let's see... I could tell you where to find the %^BOLD%^%^CYAN%^Goblin Keep%^RESET%^, the %^BOLD%^%^CYAN%^Ekibi Caverns%^RESET%^, the %^BOLD%^%^CYAN%^Dragon Den's caves%^RESET%^, the %^BOLD%^%^CYAN%^Grasslands%^RESET%^, the %^BOLD%^%^CYAN%^Meadowland%^RESET%^, " +
       "the %^BOLD%^%^CYAN%^Orc Cave%^RESET%^, the %^BOLD%^%^CYAN%^Echoes Mountain%^RESET%^, %^BOLD%^%^CYAN%^Koenig%^RESET%^, the %^BOLD%^%^CYAN%^Darkwood Forest%^RESET%^, %^BOLD%^%^CYAN%^Shadow%^RESET%^ and %^BOLD%^%^CYAN%^Rhapsody%^RESET%^.");
+     force_me("say I might know of a few other places as well. What rumors have you heard?"); 
       tell_object(TP,"\n%^BOLD%^%^GREEN%^Use the command <rumors> to see a list of areas appropriate for your level.%^RESET%^");
       return;
    }
@@ -154,9 +155,12 @@ void reply_func(string msg, object who){
       return;
    }  
 
-    if(strsrch(msg,"nereid") != -1 || strsrch(msg,"Nereid") != -1 ){
-      force_me("say It's just a rumor, dear. I have no idea where the nereis is, or if she's even real! ");
-      force_me("say But aren't nereids nymphs of streams and oceans?");
+    if(strsrch(msg,"nereid") != -1 || strsrch(msg,"Nereid") != -1 
+    || strsrch(msg,"riddle") != -1 || strsrch(msg,"Riddle") != -1){
+      force_me("say Some say a nereid rewards to adventureres who answer her riddles correctly. ");
+      force_me("say She's said to live near Koenig. It's just a rumor, dear. I have no idea where "+
+      "the nereid is, or if she's even real! " +
+      "But aren't nereids nymphs of streams and oceans?");
         force_me("emote nods."); 
       force_me("say I would look near water if I were to try and find her.");             
       return;
@@ -305,9 +309,17 @@ void reply_func(string msg, object who){
       return;
    }
 
+    if(strsrch(msg,"eep gnome") != -1  ){
+      force_me("say I'm not entirely sure where the deep gnome caves are, dear. "+
+    "But you'll come to the Charu Mountains if you travel by the Dragen Pass road north of Shadow. "+
+    "Perhaps there's an entrance to the caves you mentioned somewhere along that road. " +
+    "If so it should be further north than the Dragon Den mountains.");
+      return;
+   }  
 
    if(strsrch(msg,"gnome") != -1 || strsrch(msg,"Gnome") != -1
-    || strsrch(msg,"farm") != -1 || strsrch(msg,"Farm") != -1){
+    || strsrch(msg,"farm") != -1 || strsrch(msg,"Farm") != -1
+    || strsrch(msg,"Piaf") != -1 || strsrch(msg,"piaf") != -1){
       force_me("say North of Tabor is the abandoned village of %^BOLD%^%^CYAN%^Koenig%^RESET%^. Southwest of that village "+
       "you will find the gnome's farm.");
       return;
@@ -322,7 +334,96 @@ void reply_func(string msg, object who){
       return;
    }
 
+   if(strsrch(msg,"Centaur") != -1 || strsrch(msg,"centaur") != -1){
+      force_me("say I hear there are some centaurs who live in the Yntala forest, on the eastern side of the river. " +
+      "Their home is hidden though, so you will have to search for it.");
+      return;
+   }
 
+   if(strsrch(msg,"yntala") != -1 || strsrch(msg,"Yntala") != -1){
+      force_me("say Yntala forest is the large forest south of Tabor. A river runs though it, "+
+      "but there are places to cross the river if you search for them. ");
+      return;
+   }
+
+   if(strsrch(msg,"yntala") != -1 || strsrch(msg,"Yntala") != -1){
+      force_me("say Yntala forest is the large forest south of Tabor. A river runs though it, "+
+      "but there are places to cross the river if you search for them. ");
+      return;
+   }
+
+
+   if(strsrch(msg,"kildare") != -1 || strsrch(msg,"Kildare") != -1){
+      force_me("say Kildare Glen is a lovely little village northwest of Shadow. You'll get there by following " +
+      "the rocky path from north of the the old wagon trail. An alternative route would be to go to the meadowlands, " +
+      "then take the abandoned trail northwards until you reach the fence. Jump the fence and you're there.");
+      return;
+   }
+
+   if(strsrch(msg,"muileann") != -1 || strsrch(msg,"Muileann") != -1){
+      force_me("say Muileann is a small hidden town northeast of Shadow. It is a good place for adventurers " +
+      "to gain some experience, but I imagine it's a terrible place to live... ");
+      force_me("say Go north from Shadow until you reach a crossroads with the old wagon trail heading west and a dusty road going east. "+
+      "Travel east from there to the vast corn field. Northeast of the field you will find a sign and the entrance to Muileann. ");
+      return;
+   }
+
+   if(strsrch(msg,"cryptkeeper") != -1 || strsrch(msg,"Cryptkeeper") != -1){
+      force_me("say I've heard of a cryptkeeper in Muileann, yes. He'd probably be near the graveyard.");
+      return;
+   }
+
+
+   if(strsrch(msg,"gentleman") != -1 || strsrch(msg,"Gentleman") != -1){
+      force_me("say The rumor is there's a tower in Muileann where the dreaded gentleman can be found. "+
+      "If you plan to go there, bring some extra food and perhaps a bloodshard if you can afford one. ");
+      return;
+   }   
+
+   if(strsrch(msg,"bloodshard") != -1 || strsrch(msg,"Bloodshard") != -1){
+      force_me("say There are times you will find yourself caught in a place you cannot easily leave "+
+      "not even with magic. A bloodshard can get you out of such places. I recommend always to carry "+
+      "at least one with you on your journeys. ");
+      return;
+   }   
+
+   if(strsrch(msg,"pyramid") != -1 || strsrch(msg,"Pyramid") != -1){
+      force_me("say There are some pyramids in Yntala, but they're hard to find, even for those with magical sight. " +
+      "I asked an old wizard about it once. He laughed at me and said 'It's all about what you wear.' "+
+      "Whatever that means.");
+      return;
+   }   
+
+   if(strsrch(msg,"feyren") != -1 || strsrch(msg,"Feyren") != -1 || strsrch(msg,"spider") != -1 || strsrch(msg,"Spider") != -1 ){
+      force_me("say Last I heard Feyren farm is still swarming with spiders. You'll find it just west of Shadow. " ,
+      "There are some caves down in the basement, and if you search thoroughly you might find some hidden places. ");
+      return;
+   }   
+
+   if(strsrch(msg,"dark trail") != -1 || strsrch(msg,"Dark Trail") != -1 || strsrch(msg,"Dark trail") != -1 ){
+      force_me("say The dark trail is east of Antioch. From there, go as far east as you can, then follow the trail north.");
+      return;
+   }   
+
+   if(strsrch(msg,"King's forest") != -1 || strsrch(msg,"king's forest") != -1 || strsrch(msg,"King's Forest") != -1 
+    || strsrch(msg,"kings forest") != -1 || strsrch(msg,"Kings Forest") != -1 ){
+      force_me("say The king's forest is west of Antioch.");
+      return;
+   }      
+
+   if(strsrch(msg,"Antioch") != -1 || strsrch(msg,"antioch") != -1  ){
+      force_me("say Antioch is a beautiful city north of Shadow, and well worth a visit. "+
+    "Follow the Dragon Pass Road northwards through the Charu mountains. Eventually you will find some "+
+    "desolate ruins. Head west from there and you'll reach Antioch.");
+      return;
+   }   
+
+
+
+   if(strsrch(msg,"gore") != -1 || strsrch(msg,"Gore") != -1){
+      force_me("say Gore is a leader among the orcs. He has a camp west of the Meadowlands. ");
+      return;
+   }    
 
 
     force_me("say Sorry dear, what was that? Speak up please.");
