@@ -70,7 +70,7 @@ void reply_func(string msg, object who){
       strsrch(msg,"Hail") != -1)  {
       force_me("emote glances up from her knitting to look at you.");
 
-        if(TP->query_level() > 10) {
+        if(TP->query_level() > 15) {
             force_me("say Hello dear. I don't think I have any %^BOLD%^%^CYAN%^tips%^RESET%^ an accomplished adventurer like you don't already know.");
             force_me("emote smiles affably.");
             return;
@@ -311,9 +311,9 @@ void reply_func(string msg, object who){
 
     if(strsrch(msg,"eep gnome") != -1  ){
       force_me("say I'm not entirely sure where the deep gnome caves are, dear. "+
-    "But you'll come to the Charu Mountains if you travel by the Dragen Pass road north of Shadow. "+
-    "Perhaps there's an entrance to the caves you mentioned somewhere along that road. " +
-    "If so it should be further north than the Dragon Den mountains.");
+      "My guess is they're under the chasm. You have to go north from Shadow along the Dragon Pass road, "+
+      "past the Dragon's Den mountains. When you have passed the crossroads, take the next eastern exit, "+
+      "and you'll find the crack in the earth somewhere around there.");
       return;
    }  
 
