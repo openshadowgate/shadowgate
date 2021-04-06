@@ -79,13 +79,14 @@ void reply_func(string msg, object who){
             force_me("emote smiles affably.");
             return;
         }
-      
+
+
         force_me("say Hello dear. My name is Cynthia, but everybody calls me grandma. " +
         "You may not believe me, but I once was an adventurer like you!");
         force_me("say Ask me for %^BOLD%^%^CYAN%^tips%^RESET%^, perhaps these old bones has some wisdom in them still.");
 
        if (queststep == 1){
-         force_me("Oh, and while you're here... Could you do me a favor? Would you bring this letter to Rosinden?");
+         force_me("say Oh, and while you're here... Could you do me a favor? Would you bring this letter to Rosinden?");
          queststep = 2;
        }
       return;
@@ -450,8 +451,8 @@ void reply_func(string msg, object who){
             return 1;
          }else{
             force_me("say Thank you, dear, Here it is, a letter to Rosinden.");
-            tell_room(ETO,"Piaf gives a piece of paper to "+TPQCN+"",TP);
-            tell_object(TP,"Piaf hands you a piece of paper.");
+            tell_room(ETO,"Cynthia gives a piece of paper to "+TPQCN+"",TP);
+            tell_object(TP,"Cynthia hands you a piece of paper.");
             queststep = 3;
             return 1;
          }
@@ -474,7 +475,6 @@ void init()
 
    setup();
 
-
    if(TP->query_level() > 8) {
        return;
     }
@@ -487,6 +487,7 @@ void init()
         return;
     }
 
+// Seems not to work, possibly because the room is in a temple dir, not in Tabor's dir?
 //   if (query_bad_race(TP)) {
 //        return;
 //   }
@@ -497,7 +498,7 @@ void init()
 void notify_newcomers()
 {
 
-    if(member_array("An invitation for Rosinden",TP->query_mini_quests()) == -1) {
+   if(member_array("An invitation for Rosinden",TP->query_mini_quests()) == -1) {
       queststep = 1;
       command("emote looks up with a friendly smile.");
       command("say Hello there, dear.");
