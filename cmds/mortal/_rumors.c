@@ -6,6 +6,7 @@ mixed * arealist = ({});
 //DO NOT USE COMMA IN THE LIST BELOW, because it breaks sorting
 arealist = ({
         ({"Offestry" ,1,6,}),
+            ({"QUEST: Cynthia's request (Tabor)" ,6,8,}),
             ({"Ekibi Caverns (Ekibi Ridge)" ,6,10,}),
             ({"QUEST: Rosiden's Mission (Ebiki Caverns)" ,6,10,}),
             ({"Gobgob (Goblin Fortress)" ,6,10,}),
