@@ -1430,6 +1430,10 @@ void new_struck(int damage, object weapon, object attacker, string limb, object 
         damage_type = (string)shape->get_new_damage_type();
     }
 
+    if (damage == 0) {
+        damage = 1; // Trying PoE improvements.
+    }
+
     if (damage > 0) {
         damage_num = (int)victim->cause_typed_damage(victim, limb, damage, damage_type);
     }else {

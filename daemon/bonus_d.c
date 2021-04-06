@@ -236,7 +236,9 @@ int tohit_bonus(int dex, int str, object target)
     return ret;
 }
 
-//AC only starting at 10 and going up - Saide
+/**
+ * Old function to adjust effective ac.
+ */
 varargs effective_ac(object who)
 {
     int MyAc = 0, tmp = 0;
@@ -245,25 +247,12 @@ varargs effective_ac(object who)
         return 0;
     }
 
-    //AC is starting at 10 now - Saide
-    //AC starts at 10 and goes up
-    //however, our AC goes down by default
-    //so someone with a 2 AC should have an 18 now
-    //or be 8 points away from the base of 10,
-    //someone with a -1 AC would have 21 AC -
-    //because they are 11 points away from the base
-    //I had actually forgot this, then fixed it, then
-    //realized I was right the first time - hopefully
-    //this will explain why AC is 10 and then
-    //the difference from 10 and AC is added
-    //if the query_ac is above 0 and why
-    //an additional 10 is added if it's below 0 - Saide
     MyAc = 10;
-    tmp = (int)who->query_ac();
+    tmp = who->query_ac();
     if (tmp >= 0) {
-        MyAc += (10 - tmp);
+        MyAc -= tmp;
     } else {
-        MyAc += 10 + (tmp * -1);
+        MyAc += -tmp;
     }
 
     return MyAc;
@@ -493,7 +482,7 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
     AC = AC > 35 ? (-1578 / AC + 80) : AC;
     bon = bon > 40 ? (-1500 / bon + 77) : bon;
 
-    // +15 values are present due to AC assignation bonus
+    // +10 values are present due to effective_ac() bonus
 
     if (bon + 15 + attack_roll >= AC) {
         return attack_roll;
