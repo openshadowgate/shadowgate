@@ -90,6 +90,20 @@ void receive_given_item(object obj){
    object ob;
    if(!objectp(obj)) return;
    if(!objectp(TP)) return;
+
+   if((string)obj->query_name() == "an invitation for Rosinden") {
+      obj->remove();
+      force_me("say What's this? Another invitation from Cynthia?");
+      force_me("emote reads the letter and puts it away.");
+      force_me("say It's bee a while since I saw her. Perhaps I should go visit Tabor one of these days.");
+      if(!userp(TP))  return;
+      if(member_array("An invitation for Rosinden",TP->query_mini_quests()) == -1) {
+         tell_object(TP,"%^CYAN%^You completed the quest %^BOLD%^%^MAGENTA%^An invitation for Rosinden%^RESET%^%^CYAN%^!%^RESET%^");
+         TP->set_mini_quest("An invitation for Rosinden",16000,"%^BOLD%^%^MAGENTA%^An invitation for Rosinden%^RESET%^");
+      }
+      return;
+   }
+ 
    if((string)obj->query_name() == "faerzress sample") {
       obj->remove();
       force_me("say Oh, this is perfect!  Thank you!");

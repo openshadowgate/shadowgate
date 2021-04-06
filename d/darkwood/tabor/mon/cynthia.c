@@ -1,6 +1,8 @@
 #include <std.h>
+#include <move.h>
 
 inherit NPC;
+int queststep;
 
 
 void create(){
@@ -29,6 +31,8 @@ void create(){
    set_stats("intelligence",18);
    set_exp(1);
    force_me("speech say lightly");
+
+   queststep = 0;
 
 }
 
@@ -79,6 +83,11 @@ void reply_func(string msg, object who){
         force_me("say Hello dear. My name is Cynthia, but everybody calls me grandma. " +
         "You may not believe me, but I once was an adventurer like you!");
         force_me("say Ask me for %^BOLD%^%^CYAN%^tips%^RESET%^, perhaps these old bones has some wisdom in them still.");
+
+       if (queststep == 1){
+         force_me("Oh, and while you're here... Could you do me a favor? Would you bring this letter to Rosinden?");
+         queststep = 2;
+       }
       return;
    }
    if(strsrch(msg,"tip") != -1 || strsrch(msg,"advice") != -1 ||
@@ -423,7 +432,31 @@ void reply_func(string msg, object who){
    if(strsrch(msg,"gore") != -1 || strsrch(msg,"Gore") != -1){
       force_me("say Gore is a leader among the orcs. He has a camp west of the Meadowlands. ");
       return;
-   }    
+   }   
+
+
+
+
+   if(queststep == 2 && (strsrch(msg,"yes") != -1|| strsrch(msg,"Yes") != -1|| strsrch(msg,"I will")!= -1)) {
+         object invitation;
+
+         tell_object(TP,"Cynthia looks under her shawl and produces a piece of paper.");
+         invitation = new("/d/darkwood/tabor/obj/invitation.c");
+         if((int)(invitation->move(TP))!=MOVE_OK){
+            force_me("say Thank you, dear. What's that, you have your hands full? I'll leave the letter to Rosinden here.");
+            force_me("emote places the piece of paper on the floor.");
+            invitation->move(ETP);
+            queststep = 3;
+            return 1;
+         }else{
+            force_me("say Thank you, dear, Here it is, a letter to Rosinden.");
+            tell_room(ETO,"Piaf gives a piece of paper to "+TPQCN+"",TP);
+            tell_object(TP,"Piaf hands you a piece of paper.");
+            queststep = 3;
+            return 1;
+         }
+
+      } 
 
 
     force_me("say Sorry dear, what was that? Speak up please.");
@@ -435,11 +468,14 @@ void reply_func(string msg, object who){
 
 void init()
 {
-    ::init();
+
+
+   ::init();
 
    setup();
 
-   if(TP->query_level() > 7) {
+
+   if(TP->query_level() > 8) {
        return;
     }
 
@@ -460,8 +496,13 @@ void init()
 
 void notify_newcomers()
 {
-    command("emote looks up with a friendly smile.");
-    command("say Hello there, dear.");
+
+    if(member_array("An invitation for Rosinden",TP->query_mini_quests()) == -1) {
+      queststep = 1;
+      command("emote looks up with a friendly smile.");
+      command("say Hello there, dear.");
+    }
+
 }
 
 
