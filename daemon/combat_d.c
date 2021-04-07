@@ -1431,7 +1431,7 @@ void new_struck(int damage, object weapon, object attacker, string limb, object 
     }
 
     if (damage == 0) {
-        damage = 1; // Trying PoE improvements.
+        damage = 1; // Damage never falls to 0.
     }
 
     if (damage > 0) {
