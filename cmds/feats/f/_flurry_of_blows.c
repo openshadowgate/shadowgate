@@ -227,7 +227,7 @@ void flurry_hit()
         {
             tell_object(caster, "%^BOLD%^%^BLACK%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
             "%^BLACK%^n%^BOLD%^%^WHITE%^d%^BOLD%^%^BLACK%^r%^BOLD%^%^WHITE%^"+
-            "l%^BOLD%^%^BLACK%^l%^BOLD%^%^WHITE%^s%^BOLD%^%^BLACK%^ of "+
+            "i%^BOLD%^%^BLACK%^l%^BOLD%^%^WHITE%^s%^BOLD%^%^BLACK%^ of "+
             "sh%^BOLD%^%^WHITE%^a%^BOLD%^%^BLACK%^d%^BOLD%^%^WHITE%^o"+
             "%^BOLD%^%^BLACK%^w lash out at "+myVic->query_cap_name()+
             "%^BOLD%^%^BLACK%^!%^RESET%^");
@@ -237,7 +237,7 @@ void flurry_hit()
 
             tell_object(myVic, "%^BOLD%^%^BLACK%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
             "%^BLACK%^n%^BOLD%^%^WHITE%^d%^BOLD%^%^BLACK%^r%^BOLD%^%^WHITE%^"+
-            "l%^BOLD%^%^BLACK%^l%^BOLD%^%^WHITE%^s%^BOLD%^%^BLACK%^ of "+
+            "i%^BOLD%^%^BLACK%^l%^BOLD%^%^WHITE%^s%^BOLD%^%^BLACK%^ of "+
             "sh%^BOLD%^%^WHITE%^a%^BOLD%^%^BLACK%^d%^BOLD%^%^WHITE%^o"+
             "%^BOLD%^%^BLACK%^w lash out at you from "+caster->QCN+
             "%^BOLD%^%^BLACK%^!%^RESET%^");
@@ -246,7 +246,7 @@ void flurry_hit()
             {
                 tell_room(environment(caster), "%^BOLD%^%^BLACK%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
                 "%^BLACK%^n%^BOLD%^%^WHITE%^d%^BOLD%^%^BLACK%^r%^BOLD%^%^WHITE%^"+
-                "l%^BOLD%^%^BLACK%^l%^BOLD%^%^WHITE%^s%^BOLD%^%^BLACK%^ of "+
+                "i%^BOLD%^%^BLACK%^l%^BOLD%^%^WHITE%^s%^BOLD%^%^BLACK%^ of "+
                 "sh%^BOLD%^%^WHITE%^a%^BOLD%^%^BLACK%^d%^BOLD%^%^WHITE%^o"+
                 "%^BOLD%^%^BLACK%^w lash out at "+myVic->QCN+"%^BOLD%^%^BLACK%^ "+
                 "from "+caster->QCN+"%^BOLD%^%^BLACK%^!%^RESET%^", ({caster, myVic}));
@@ -313,7 +313,7 @@ void flurry_hit()
                 default:
                     tell_object(caster, "%^BOLD%^%^RED%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
                     "%^RED%^n%^BOLD%^%^WHITE%^d%^BOLD%^%^RED%^r%^BOLD%^%^WHITE%^"+
-                    "i%^BOLD%^%^RED%^l%^BOLD%^%^WHITE%^l%^BOLD%^%^RED%^s of "+
+                    "i%^BOLD%^%^RED%^ls %^BOLD%^of "+
                     "fl%^BOLD%^%^YELLOW%^a%^BOLD%^%^RED%^m%^BOLD%^%^YELLOW%^e"+
                     "%^BOLD%^%^RED%^ lash out at "+myVic->query_cap_name()+
                     "%^BOLD%^%^RED%^!%^RESET%^");
@@ -321,9 +321,9 @@ void flurry_hit()
                     //mybonus = ((int)caster->query_class_level("monk")/10)+1;
                     //dam += roll_dice(mybonus,2);
 
-                    tell_object(myVic, "%^BOLD%^%^RED%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
+                    tell_object(myVic,"%^BOLD%^%^RED%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
                     "%^RED%^n%^BOLD%^%^WHITE%^d%^BOLD%^%^RED%^r%^BOLD%^%^WHITE%^"+
-                    "i%^BOLD%^%^RED%^l%^BOLD%^%^WHITE%^l%^BOLD%^%^RED%^s of "+
+                    "i%^BOLD%^%^RED%^ls %^BOLD%^of "+
                     "fl%^BOLD%^%^YELLOW%^a%^BOLD%^%^RED%^m%^BOLD%^%^YELLOW%^e"+
                     "%^BOLD%^%^RED%^ lash out at you from "+caster->QCN+
                     "%^BOLD%^%^RED%^!%^RESET%^");
@@ -332,7 +332,7 @@ void flurry_hit()
                     {
                         tell_room(environment(caster), "%^BOLD%^%^RED%^T%^BOLD%^%^WHITE%^e%^BOLD%^"+
                         "%^RED%^n%^BOLD%^%^WHITE%^d%^BOLD%^%^RED%^r%^BOLD%^%^WHITE%^"+
-                        "l%^BOLD%^%^RED%^l%^BOLD%^%^WHITE%^s%^BOLD%^%^RED%^ of "+
+                        "i%^BOLD%^%^RED%^ls %^BOLD%^of "+
                         "fl%^BOLD%^%^YELLOW%^a%^BOLD%^%^RED%^m%^BOLD%^%^YELLOW%^e"+
                         "%^BOLD%^%^RED%^ lash out at "+myVic->QCN+"%^BOLD%^%^RED%^ "+
                         "from "+caster->QCN+"%^BOLD%^%^RED%^!%^RESET%^", ({caster, myVic}));
