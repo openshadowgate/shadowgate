@@ -46,8 +46,9 @@ string myLong()
     tmp += "\n\n%^RESET%^Example: %^YELLOW%^explain "+tmp2[0]+"%^RESET%^ to have the mass explain "+tmp2[0]+"\n\n"+
     "Alternatively you can just type %^YELLOW%^explain%^RESET%^ or %^YELLOW%^ask%^RESET%^ to continue "+
     "on with the tutorial.%^RESET%^\n\n";
-    tmp += "%^B_CYAN%^%^YELLOW%^NOTE: You MUST complete all the quests that the mass assigns to you, BEFORE "+
-    "you are able to advance to level 6.%^RESET%^";
+    tmp += "%^B_CYAN%^%^YELLOW%^NOTE: When you advance to level 6 you will leave Offestry, whether or not "+
+    "you have completed all the quests. It is recommended to do the quests instead of grinding, since they will "+
+    "teach you more of the game's many commands.%^RESET%^";
     return tmp;
 }
 
