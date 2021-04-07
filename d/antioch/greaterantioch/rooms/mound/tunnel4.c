@@ -35,7 +35,7 @@ void create()
 int GoThroughDoor() {
     object obj,key;
     if(query_verb() == "door") {
-    if(obj=present("key",TP)){
+    if(obj=present("gnollkey",TP)){
     call_out("do_boss",1,0);
     return 0;}
     else;
