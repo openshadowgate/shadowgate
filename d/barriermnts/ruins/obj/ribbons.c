@@ -21,6 +21,7 @@ void create() {
    set_property("lore difficulty",3);
    set_wear((:TO,"wear_fun":));
    set_remove((:TO,"remove_fun":));
+   set_property("repairtype",({ "jewel","tailor" }));
 }
 
 int wear_fun() {
