@@ -21,12 +21,8 @@ void create()
      "tapestry 1" : "You see a room identical to this one.",
      "tapestry 2" : "You see a room identical to this one.",
      "tapestry 3" : "You see a room identical to this one.",
-     "tapestry 4" : "You see a room identical to this one."
+     "tapestry 4" : "You see a dirty room."
 ]) );
-  set_exits( ([
-     "south" : "/d/koenig/town/tower28"
-]) );
-  set_invis_exits( ({"south"}) );
 }
 void init() {
   ::init();
@@ -35,27 +31,25 @@ void init() {
 }
   int enter_tapestry(string str) {
   if(str=="tapestry 1") {
-  write("You cant enter that one!");
+  write("You try to enter and bump your head against the wall");
   say(TPQCN+" looks rather foolish as they attempt to enter the tapestry and run into the wall.");
   return 1;
 }
   if(str=="tapestry 2") {
-  write("You can not enter that one!");
+  write("You try to enter and bump your head against the wall");
   say(TPQCN+" looks rather silly as they bump into the tapestry and wall.");
   return 1;
 }
   if(str=="tapestry 3") {
-  write("You can not enter that one!");
-  say(TPQCN+" looks rather silly as they bump into the tapestry and wall.");
+  write("There is a slight shift in reality and you find yourself in another room.");
+  say(TPQCN+" enters a tapestry and disappears.");
+  TP->move_player("/d/koenig/town/tower27");
   return 1;
 }
   if(str=="tapestry 4") {
   write("There is a slight shift in reality and you find yourself in another room.");
   say(TPQCN+" enters a tapestry and disappears.");
-  set_items( ([
-     "tapestry 4" : "You see "+TPQCN+" in another room identical to this one."
-]) );
-  TP->move_player("/d/koenig/town/tower23");
+  TP->move_player("/d/koenig/town/tower22");
   return 1;
 }
   return 0;
@@ -72,13 +66,13 @@ void init() {
   return 1;
 }
   if(str=="tapestry 3") {
-  write("You have found an exit leading south.");
+  write("You have found an exit.");
   say(TPQCN+" lifts the tapestry and finds something.");
   return 1;
 }
   if(str=="tapestry 4") {
-  write("You can not lift this one!");
-  say(TPQCN+" tries to lift the tapestry and fails.");
+  write("You have found an exit.");
+  say(TPQCN+" lifts the tapestry and finds something.");
   return 1;
 }
   return 0;

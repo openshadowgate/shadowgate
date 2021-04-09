@@ -23,11 +23,6 @@ void create()
      "tapestry 3" : "You see a room identical to this one.",
      "tapestry 4" : "This one shows a dimly lit stairway with shadows dancing on the walls."
 ]) );
-  set_exits( ([
-     "west" : "/d/koenig/town/tower26",
-     "north" : "/d/koenig/town/tower27"
-]) );
-  set_invis_exits( ({"west", "north"}) );
 }
 void init() {
   ::init();
@@ -35,36 +30,34 @@ void init() {
   add_action("lift_tapestry", "lift");
 }
   int enter_tapestry(string str) {
+
+    if(present("deathknight")) {
+    write("The DeathKnight moves to block your escape.");
+    say("The DeathKnight moves to block "+TPQCN+"'s escape.");
+    return 1;
+}
+
+
   if(str=="tapestry 1") {
-  write("You can not enter this one!");
+  write("You try to enter and bump your head against the wall.");
   say(TPQCN+" looks foolish as they run into the wall in an attempt to enter the tapestry.");
   return 1;
 }
   if(str=="tapestry 2") {
   write("You feel a shift in reality and find yourself in another room.");
   say(TPQCN+" enters and tapestry and disappears.");
-  set_items( ([
-     "tapestry 2" : "You see "+TPQCN+" in a room identical to this one."
-]) );
   TP->move_player("/d/koenig/town/tower28");
   return 1;
 }
   if(str=="tapestry 3") {
-  write("You can not enter that one!");
+  write("You try to enter and bump your head against the wall.");
   say(TPQCN+" looks rather silly as they bump into the tapestry and wall.");
   return 1;
 }
   if(str=="tapestry 4") {
-    if(present("deathknight")) {
-    write("The DeathKnight moves to block your escape.");
-    say("The DeathKnight moves to block "+TPQCN+"'s escape.");
-    return 1;
-}
+
   write("There is a slight shift in reality and you find yourself at the top of some stairs.");
   say(TPQCN+" enters a tapestry and disappears.");
-  set_items( ([
-     "tapestry 4" : "You see "+TPQCN+" ascending the dimly lit stairs."
-]) );
   TP->move_player("/d/koenig/town/tower29");
   return 1;
 }
@@ -72,25 +65,26 @@ void init() {
 }
  int lift_tapestry(string str) {
   if(str=="tapestry 1") {
-  write("You find an exit leading north.");
-  say(TPQCN+" lifts the tapestry and finds something.");
+  write("You can not lift this one!");
+  say(TPQCN+" tries to lift the tapestry and fails.");
   return 1;
 }
   if(str=="tapestry 2") {
-  write("You can not lift this one!");
-  say(TPQCN+" tries to lift the tapestry and fails.");
-  return 1;
-}
-  if(str=="tapestry 3") {
-  write("You find an exit leading west.");
+  write("You find an exit.");
   say(TPQCN+" lifts the tapestry and finds something.");
   return 1;
 }
-  if(str=="tapestry 4") {
+  if(str=="tapestry 3") {
   write("You can not lift this one!");
   say(TPQCN+" tries to lift the tapestry and fails.");
   return 1;
 }
+  if(str=="tapestry 4") {
+      
+  write("You find an exit.");
+  say(TPQCN+" lifts the tapestry and finds something.");
+  return 1;
+  }
   return 0;
 }
 

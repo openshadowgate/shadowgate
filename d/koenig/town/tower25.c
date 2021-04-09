@@ -18,16 +18,13 @@ void create()
   set_smell("default", "It smells rather clean on this floor.");
   set_listen("default", "Your breathing is the only thing that breaks the silence.");
   set_items( ([
-     "tapestry 1" : "You see a room identical to this one.",
+     "tapestry 1" : "You see a dirty room.",
      "tapestry 2" : "You see a room identical to this one.",
-     "tapestry 3" : "You see a room identical to this one.",
+     "tapestry 3" : "This one shows a dimly lit stairway with shadows dancing on the walls.",
      "tapestry 4" : "You see a room identical to this one."
 ]) );
-  set_exits( ([
-     "east" : "/d/koenig/town/tower23"
-]) );
-  set_invis_exits( ({"east"}) );
 }
+
 void init() {
   ::init();
   add_action("enter_tapestry", "enter");
@@ -35,26 +32,23 @@ void init() {
 }
   int enter_tapestry(string str) {
   if(str=="tapestry 1") {
-  write("You cant enter that one!");
-  say(TPQCN+" looks rather foolish as they attempt to enter the tapestry and run into the wall.");
-  return 1;
+  write("There is a slight shift in reality and you find yourself in another room.");
+  say(TPQCN+" enters a tapestry and disappears.");
+  TP->move_player("/d/koenig/town/tower22");
 }
   if(str=="tapestry 2") {
-  write("You can not enter that one!");
+  write("You try to enter and bump your head against the wall.");
   say(TPQCN+" looks rather silly as they bump into the tapestry and wall.");
   return 1;
 }
   if(str=="tapestry 3") {
   write("You feel a shift in reality and find yourself in another room.");
   say(TPQCN+" enters a tapestry and disappears.");
-  set_items( ([
-     "tapestry 3" : "You see "+TPQCN+" in a room identical to this one."
-]) );
   TP->move_player("/d/koenig/town/tower26");
   return 1;
 }
   if(str=="tapestry 4") {
-  write("You can not enter this one!");
+  write("You try to enter and bump your head against the wall.");
   say(TPQCN+" looks foolish as they run into the wall in an attempt to enter the tapestry.");
   return 1;
 }
@@ -62,18 +56,18 @@ void init() {
 }
  int lift_tapestry(string str) {
   if(str=="tapestry 1") {
-  write("You can not lift this one!");
-  say(TPQCN+" tries to lift the tapestry and fails.");
-  return 1;
-}
-  if(str=="tapestry 2") {
-  write("You discover an exit leading east.");
+  write("You discover an exit.");
   say(TPQCN+" lifts the tapestry and finds something.");
   return 1;
 }
-  if(str=="tapestry 3") {
+  if(str=="tapestry 2") {
   write("You can not lift this one!");
   say(TPQCN+" tries to lift the tapestry and fails.");
+  return 1;
+}
+  if(str=="tapestry 3") {
+  write("You discover an exit.");
+  say(TPQCN+" lifts the tapestry and finds something.");
   return 1;
 }
   if(str=="tapestry 4") {
