@@ -50,8 +50,9 @@ void dest_effect() {
         caster->set_detecting_magic(0);
     }
     ::dest_effect();
+    tell_object(caster,"%^BOLD%^You no longer can detect magic. Your view of the world returns to normal.");    
     if(objectp(TO)) TO->remove();
-    tell_object(caster,"%^BOLD%^You no longer can detect magic. Your view of the world returns to normal.");
+
 
 }
 
