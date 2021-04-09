@@ -481,7 +481,15 @@ void choose_item(string str)
         if (ob->query_property("monsterweapon")) {
             ob->remove_property("monsterweapon");
         }
-        command("give " + str + " to " + helper);
+
+        if(helper->query_internal_encumbrance()+ob->query_weight()>=helper->query_max_internal_encumbrance()){
+             command("say Wow, you carry a lot! I'll just drop it here.");
+             command("drop " + str);
+            }else{
+                
+                command("give " + str + " to " + helper);
+            }
+
         command("say Thank you for helping me.");
         command("emote waves to you as she flies away.");
         remove_call_out("go_home");
