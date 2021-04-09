@@ -60,7 +60,7 @@ void create(){
     set_property("can_hold",({ "shield", "thiefshield" }));
   if (!intp(TO->query_property("original_weight")))
     set_property("original_weight",2);
-  set_property("repairtype",({ "jewel","armorsmith" }));
+  set_property("repairtype",({ "leatherwork","armorsmith" }));
   set_name("strap");
   set_id(({"strap","straps","shield strap"}));
   set_short("A shield "+CM);
