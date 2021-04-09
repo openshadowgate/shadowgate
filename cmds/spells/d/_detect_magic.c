@@ -48,10 +48,10 @@ void spell_effect(int prof) {
 void dest_effect() {
     if (objectp(caster)) {
         caster->set_detecting_magic(0);
+       tell_object(caster,"%^BOLD%^You no longer can detect magic. Your view of the world returns to normal.");             
     }
     ::dest_effect();
-    tell_object(caster,"%^BOLD%^You no longer can detect magic. Your view of the world returns to normal.");    
-    if(objectp(TO)) TO->remove();
+   if(objectp(TO)) TO->remove();
 
 
 }
