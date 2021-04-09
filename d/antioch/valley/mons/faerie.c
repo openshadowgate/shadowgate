@@ -576,6 +576,7 @@ void receive_given_item(object ob)
     command("shake");
     convert_item_to_msg(item, 1);
     command("give " + nams[0] + " to " + TPQN);
+    command("drop " + nams[0]); 
     return 1;
 }
 
