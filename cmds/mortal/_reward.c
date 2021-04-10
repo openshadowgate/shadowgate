@@ -30,8 +30,6 @@ int cmd_reward(string str)
         tell_object(TP,"%^BOLD%^%^CYAN%^You have rewarded everyone in the room with some knowledge.");
         map(peeps, (: $2->reward_person($1) :), TO);
 
-        tell_object(TP, "%^CYAN%^%^BOLD%^You have rewarded everyone here with some knowledge.");
-
         reward_self();
 
         return 1;
