@@ -49,7 +49,7 @@ cmd_offerall()
             continue;
         }
         if (inv[i]->query_value()) {
-            TP->add_hp(random(2));
+            TP->add_hp(random(2) + 1);
         }
         inv[i]->remove();
     }
@@ -70,7 +70,9 @@ offerall - clean the room
 
 This command will offer everything that's on the ground in front of you.
 
-If you wish to protect an object from acciental offering, use keep command.
+If you wish to protect an object from acciental offering, use <keep> command, or use <bury> command instead.
+
+Using offer command restores 1-2 hp.
 
 %^CYAN%^SEE ALSO%^RESET%^
 

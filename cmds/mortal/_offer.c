@@ -59,6 +59,9 @@ int cmd_offer(string str)
         return notify_fail("That object has recently been through a player death. You can not offer it yet.\n");
     }
     if (ob && objectp(ob)) {
+
+        TP->add_hp(random(2) + 1);
+
         if (TP->query_verbose_combat()) {
             if (god != "") {
                 write("You raise " + ob->query_short() + " %^RESET%^high in the air and a bolt of lightning crashes down upon it, sending it to " + god + ".");
@@ -98,7 +101,9 @@ offer %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ [to %^ORANGE%^%^ULINE%^GOD%^RESET%^]
 
 This will destroy %^ORANGE%^%^ULINE%^OBJECT%^RESET%^ in your inventory displaying a fancy message. You can specify a %^ORANGE%^%^ULINE%^GOD%^RESET%^ if you wish so, but it gives no mechanical benefits.
 
-If you wish to protect an object from acciental offering, use keep command.
+Using offer command restores 1-2 hp.
+
+If you wish to protect an object from acciental offering, use <keep> command.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
