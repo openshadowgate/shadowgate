@@ -93,8 +93,6 @@ void reward_person(object target)
         return;
     }
 
-    // garrett thinks adjusted is right for here, since this is a scaling award.
-
     expdelta = abs(EXP_NEEDED[thelevel + 1] - EXP_NEEDED[thelevel]) / 8;
 
     target->set_property("ignore tax", 1);
