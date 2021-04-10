@@ -750,27 +750,37 @@ mixed get_usable(object ob)
 }
 
 // gain_feat(player,(class bonus other), feat, level
-varargs int gain_feat(object ob, string type, string feat,int level)
+varargs int gain_feat(object ob, string type, string feat, int level)
 {
-    if(!objectp(ob)) { return 0; }
-    if(!stringp(type)) { return 0; }
-    if(!stringp(feat)) { return 0; }
-
-    if(has_feat(ob,feat)) { return 0; }
-
-    if(!meets_requirements(ob,feat))
-    {
-        tell_object(ob,"You do not meet the prerequisites for the "
-            "feat "+feat+".");
+    if (!objectp(ob)) {
         return 0;
     }
-    if(get_category(feat) == "EpicFeats" && ob->query_epic_feats_gained() > 0) {
-        tell_object(ob,"You have already bought one epic feat, you can't buy another.");
+    if (!stringp(type)) {
         return 0;
     }
-    if(member_array(type, FEAT_TYPES) == -1) { return 0; }
+    if (!stringp(feat)) {
+        return 0;
+    }
 
-    add_feat(ob,type,feat,level);
+    if (has_feat(ob, feat)) {
+        return 0;
+    }
+
+    if (!meets_requirements(ob, feat)) {
+        tell_object(ob, "You do not meet the prerequisites for the "
+                    "feat " + feat + ".");
+        return 0;
+    }
+    if (get_category(feat) == "EpicFeats" && ob->query_epic_feats_gained() > 0) {
+        tell_object(ob, "You have already bought one epic feat, you can't buy another.");
+        return 0;
+    }
+
+    if (!is_member(FEAT_CLASSES, type)) {
+        return 0;
+    }
+
+    add_feat(ob, type, feat, level);
 
     return 1;
 }
@@ -1134,7 +1144,7 @@ string get_feat_type(object ob, string feat)
     if (!is_feat(feat)) {
         return 0;
     }
-    tmp = ({ "class","racial","martial","magic","other","hybrid","arcana","divinebond" });
+    tmp = FEAT_CLASSES;
     for (i = 0; i < sizeof(tmp); i++) {
         feats = get_feats(ob, tmp[i]);
         types = keys(feats);
