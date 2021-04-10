@@ -331,6 +331,35 @@ int restore_description_profile(object tp)
     restore_object(DESC_DIR + folder + true_name);
 }
 
+string *query_profile_list(object tp)
+{
+
+    if (!objectp(tp)) {
+        return ({});
+    }
+
+    restore_description_profile(tp);
+
+    if (!sizeof(profile_info)) {
+        return ({});
+    }
+
+    return keys(profile_info);
+}
+
+string query_profile_adjective(string profile)
+{
+    if (!sizeof(profile_info)) {
+        return "";
+    }
+
+    if (!is_member(keys(profile_info), profile)) {
+        return "";
+    }
+
+    return profile_info[profile]["adjective"];
+}
+
 int new_description_profile(object tp)
 {
     string true_name, folder;

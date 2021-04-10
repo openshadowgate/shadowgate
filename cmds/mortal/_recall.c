@@ -61,6 +61,29 @@ int cmd_recall(string str)
         }
         return 1;
     }
+
+    if (str == "profiles") {
+        object profiler;
+        string * profiles;
+        string * obuff = ({});
+        int maxlength;
+
+        profiler = new(DESC_D);
+
+        profiles = profiler->query_profile_list(TP);
+
+        maxlength = max(map(profiles, (:sizeof($1):))) + 3;
+
+        obuff = map(profiles, (:arrange_string("%^BOLD%^%^RED%^ " + $1 + ": ", $3) + $2->query_profile_adjective($1):), profiler, maxlength);
+
+        write("%^ORANGE%^--%^BOLD%^=<%^WHITE%^ Profiles List %^ORANGE%^>=%^RESET%^%^ORANGE%^--%^RESET%^");
+        tell_object(TP,auto_format_page(obuff, TP, 72));
+
+        profiler->clean_me();
+
+        return 1;
+    }
+
     if (str == "monsters" || sscanf(str, "monster %d", what) == 1) {
         remembered = TP->query_study_mons();
         strarr = TP->query_study_mons_sort();
