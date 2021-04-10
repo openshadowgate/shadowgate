@@ -61,11 +61,12 @@ void create()
 void init()
 {
     ::init();
-    if(interactive(TP))
+/*    if(interactive(TP))
     {
         add_action("startit","talk");
         add_action("listenit","listen");
     }
+    */
 }
 
 
