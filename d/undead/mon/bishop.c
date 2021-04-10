@@ -1,9 +1,9 @@
 #include <std.h>
 #include "../undead.h"
 
-inherit CREATURE;
+inherit NPC;
 
-int builder;
+int builder, queststep, is_talking;
 object player,sucker;
 
 void create() 
@@ -22,7 +22,7 @@ void create()
 "city, he seems very %^MAGENTA%^troubled%^CYAN%^, yet there is something more "
 "to it.  He seems to have this almost tangible aura about him, a very "
 "%^BOLD%^%^GREEN%^sick %^RESET%^%^CYAN%^aura.  It leaves you wondering just "
-"what was causing this.  Perhaps if you %^YELLOW%^listen %^RESET%^%^CYAN%^to "
+"what was causing this.  Perhaps if you %^YELLOW%^talk %^RESET%^%^CYAN%^to "
 "him he will tell you his tale.%^RESET%^");
     set_body_type("human");
     set_class("cleric");
@@ -54,6 +54,7 @@ void create()
         "flamestrike"
               }));
     set_spell_chance(100);
+    is_talking = 0;
 
 }
 
@@ -66,6 +67,149 @@ void init()
         add_action("listenit","listen");
     }
 }
+
+
+void catch_say(string msg){
+
+    if(!userp(TP)){
+        return;
+    }
+//    if (query_bad_race(TP)) {
+//       force_me("say ");
+//        return;
+//    }
+
+   ::catch_say(msg);
+   call_out("reply_func",1,msg,TP);
+}
+
+
+
+void reply_func(string msg, object who){
+//   object current;
+//   object obj;
+//   string name;
+   set_spoken("wizish");
+//   name = who->query_name();
+
+
+// Queststep states:
+//0 - has not greeted, greet or ask for story
+//1 - has greeted, needs to say yes
+//2 - has said yes, give quest
+//3 - delivering quest
+//4 - quest finished
+
+    if(is_talking){
+        return;
+    }
+
+   if(!msg || !objectp(who)) return;
+
+   if(strsrch(msg,"Hi") != -1 || strsrch(msg,"hail") != -1 ||
+      strsrch(msg,"reeting") != -1 || strsrch(msg,"ello") != -1 ||
+      strsrch(msg,"Hail") != -1)  {
+
+        if (queststep < 2) {
+            reply_back("Good day to you. I am in need of some assistance. Can you help me?");
+          
+            queststep = 1;
+            return;
+        }
+
+        if (queststep > 1) {
+          reply_back("Good day to you. Have you brought the items I was looking for? Ask me to repeat my story "+
+          "if you have forgotten. ");
+          queststep = 3;
+          return;
+       }
+      return;
+   }
+
+   if(strsrch(msg,"yes") != -1 || strsrch(msg,"Yes") != -1 || strsrch(msg,"OK") != -1
+   || strsrch(msg,"okay") != -1|| strsrch(msg,"Okay") != -1 || strsrch(msg,"ok") != -1
+   || strsrch(msg,"I will") != -1 || strsrch(msg,"I do") != -1) {
+
+
+        if (queststep == 0 ) {
+          reply_back("Excuse me?");
+        }
+       
+        if (queststep < 2) {
+
+            listenit();
+            queststep = 2;
+            //reply_back("Good day to you. I am in need of some assistance. Can you help me?");
+            return;
+          }
+
+        if (queststep == 2) {
+            reply_back("Excuse me?");
+        }
+
+        if (queststep == 3) {
+            startit();
+        }
+
+
+       
+      //force_me("emote ");
+      //force_me("say ");
+      return;
+   }
+
+
+   if(strsrch(msg,"completed") != -1 || strsrch(msg,"Completed") != -1 ) {
+      
+        reply_back("What is this? Have you completed my request? ");
+        queststep = 3;
+        return;
+   }
+
+
+   if(strsrch(msg,"no") != -1 || strsrch(msg,"No") != -1 || strsrch(msg,"not") != -1) {
+      
+      if (queststep == 3) {
+        reply_back("Well, I have a request. Ask me for my story and I will tell you what I need. ");
+        queststep = 2;
+        return;
+      }
+   }
+
+
+   if(strsrch(msg,"story") != -1 || strsrch(msg,"Story") != -1
+   || strsrch(msg,"ingredients") != -1 || strsrch(msg,"Ingredients") != -1
+   || strsrch(msg,"repeat") != -1 || strsrch(msg,"Repeat") != -1){
+
+       
+          if (queststep < 4) {
+              listenit();
+              if (queststep <2) {
+                queststep = 2;
+              }
+              
+            //force_me("say Good day to you. I am in need of some assistance. Can you help me?");
+            return;
+          }
+
+      /*  if (queststep == 3) {
+          reply_back("I have received the help I need.");
+          return;
+       }*/
+      return;
+   }   
+
+
+
+/*   if(strsrch(msg,"knitting") != -1 ){
+      force_me("say I'm knitting a pair of nice, warm woolen socks. I can't find my old pair - "+
+      "The goblins must have stolen them, that's what I'm thinking!");
+      return;
+   }
+*/
+}
+
+
 
 void reply_back(string str) 
 {
@@ -85,17 +229,20 @@ void reply_back2(string str)
 void reply_back3(string str) 
 {
     tell_room(ETO,""+str,TO);
+    is_talking = 0;
 }
 
-int listenit(string str) 
+//int listenit(string str) 
+int listenit()
 {
-    string tem;
+    is_talking = 1;
+    //string tem;
     player = this_player();
-    if(!str) return notify_fail("Listen to whom?\n");
-    if(!sscanf(str, "to %s", tem)) return notify_fail("You can't listen to that!\n");
-    if(tem != "bishop") return notify_fail("The "+tem+" is not present!\n");
+    //if(!str) return notify_fail("Listen to whom?\n");
+    //if(!sscanf(str, "to %s", tem)) return notify_fail("You can't listen to that!\n");
+    //if(tem != "bishop") return notify_fail("The "+tem+" is not present!\n");
     
-    call_out("reply_back",2,"\n"
+    call_out("reply_back",1,"\n"
         "You should know that this story begins a very long time ago.\n"
         "A time full of hope, and happiness, where a powerful and \n"
         "benevolent king ruled these lands. His name was High King Morock.\n"
@@ -115,9 +262,9 @@ int listenit(string str)
         "to victory against the armies of darkness. I need you to gather\n"
         "the components for my spell, and return them to me.\n");
   
-    call_out("reply_back1",12,"\n");
+    call_out("reply_back1",4,"\n");
   
-    call_out("reply_back3",13,""
+    call_out("reply_back3",5,""
         "Well, I hope you have %^BOLD%^listened%^RESET%^ to me well, \n"
         "because I desperately need for you to recover these spell \n"
         "components. The components are as follows: \n"
@@ -129,24 +276,26 @@ int listenit(string str)
         "Collect these ingredients for me, then return them for me and \n"
         "victory will be ensured!\n");
   
-    call_out("reply_back2",16,"\n");
+    call_out("reply_back2",7,"\n");
   
-    call_out("reply_back3",17,""
+    call_out("reply_back3",8,""
         "It is urgent that you help us, the survival of this entire "
         "continent rests on your shoulders, don't let us down.  Hurry back "
-        "and %^BOLD%^talk %^RESET%^to me.");
+        "and tell me you have completed the task.");
 
     return 1;
 }
 
-int startit(string str)
+//int startit(string str)
+int startit()
 {
-    string temp;
+    //string temp;
     player = this_player();
-	if(!str) return notify_fail("Talk to who?\n");
-	if(!sscanf(str,"to %s",temp)) return notify_fail("You can't talk to that!\n");
-    if(temp != "bishop") return notify_fail("The "+temp+" is not here!");
+	//if(!str) return notify_fail("Talk to who?\n");
+	//if(!sscanf(str,"to %s",temp)) return notify_fail("You can't talk to that!\n");
+    //if(temp != "bishop") return notify_fail("The "+temp+" is not here!");
 	builder = 1;
+    is_talking = 1;
 	return 1;
 }
 
@@ -164,23 +313,25 @@ void heart_beat()
 
     case 2:
         {        
-            say("%^MAGENTA%^Boquillas says:%^RESET%^ Good day to you "+player->QCN+"."); 
+            say("%^MAGENTA%^Boquillas says:%^RESET%^ I'm glad some people are still brave enough to come to this hellish isle!\n"); 
             return 1;
         }
     case 3:
         {         
-            say("%^MAGENTA%^Boquillas says:%^RESET%^ I'm glad some people are still brave enough to come to this hellish isle!.\n"); 
+            say("%^MAGENTA%^Boquillas says:%^RESET%^ Very well, "+player->QCN+". Let me have a look at the ingredients."); 
             return 1;
         }        
     case 4:
         {
-            say("%^MAGENTA%^Boquillas says:%^RESET%^ Please tell me you've brought the ingredients I asked for.\n"); 
+            //say("%^MAGENTA%^Boquillas says:%^RESET%^ Please tell me you've brought the ingredients I asked for.\n"); 
             
             if(!(obj = present("horn",player))) 
             {
 		        builder = 0;
                 say("%^MAGENTA%^Boquillas says:%^RESET%^ What! You did not bring me the horn "
                     "of a minotaur! How dare you!");
+                queststep = 2;
+                is_talking = 0;
 			    return 1;
 		    }
             if(!(obj2 = present("eye",player)))
@@ -188,6 +339,8 @@ void heart_beat()
                 builder = 0;
                 say("%^MAGENTA%^Boquillas says:%^RESET%^ You didn't bring me the eye of someone "
                     "with great foresight? How dare you!");
+                queststep = 2;
+                is_talking = 0;
                 return 1;
             }
             if(!(obj3 = present("necklace of eyes",player)))
@@ -195,6 +348,8 @@ void heart_beat()
                 builder = 0;
                 say("%^MAGENTA%^Boquillas says:%^RESET%^ You didn't bring me the eyes of someone "
                     "who does not see the present? How dare you!");
+                queststep = 2;
+                is_talking = 0;
                 return 1;
             }
             if(!(obj4 = present("cruciform",player)))
@@ -202,6 +357,8 @@ void heart_beat()
                 builder = 0;
                 say("%^MAGENTA%^Boquillas says:%^RESET%^ You didn't bring me the holy cross of "
                     "an unholy man? How dare you!");
+                queststep = 2;
+                is_talking = 0;
                 return 1;
             }
             if(!(obj5 = present("medusa's snake",player)))
@@ -209,6 +366,8 @@ void heart_beat()
                 builder = 0;
                 say("%^MAGENTA%^Boquillas says:%^RESET%^ You didn't bring me a snake that moves "
                     "with two feet? How dare you!");
+                    is_talking = 0;
+                queststep = 2;
                 return 1;
             }
 		
@@ -221,6 +380,7 @@ void heart_beat()
             say("%^MAGENTA%^Boquillas says:%^RESET%^ Good! You did succeed in gathering "
                 "the ingredients!\n");
             write("Boquillas takes the ingredients from you.\n");
+            queststep = 4;
             return 1;
         }	    
     case 5:
