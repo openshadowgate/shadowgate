@@ -444,7 +444,6 @@ int cmd_feats(string str)
     FEATS_D->update_usable(TP);
 
     if (!stringp(str)) {
-//        FEATS_D->display_feats(TP,TP);
         tell_object(TP, "See <help feats> for syntax.");
         return 1;
     }
@@ -472,29 +471,23 @@ int cmd_feats(string str)
             FEATS_D->display_feats(TP, TP);
             return 1;
         }
-        switch (info[0]) {
-        case "spellcraft":
-        case "martial":
-        case "hybrid":
-        case "general":
-        case "arcana":
-        case "divinebond":
+        if (is_member(FEAT_TYPES, info[0])) {
             FEATS_D->display_feats(TP, TP, info[0]);
             return 1;
+        }
 
-        case "epic":
-            if (!high_mortalp(TP) && !avatarp(TP) && CONFIG_D->check_config("HM") == 0) {
-                FEATS_D->display_feats(TP, TP);
-            }else {
-                FEATS_D->display_feats(TP, TP, "epic");
-            }
-            return 1;
-
-        default:
-            FEATS_D->display_feats(TP, TP);
+        if (is_member(map(FEATS_D->query_categories(), (:lower_case($1):)), info[0])) {
+            FEATS_D->display_category(info[0], TP);
             return 1;
         }
+
+        if (info[0] == "categories" || info[0] == "cats") {
+            tell_object(TP,"%^BOLD%^%^WHITE%^" + auto_format_page(sort_array(FEATS_D->query_categories(), 1), TP, 34));
+            return 1;
+        }
+
         FEATS_D->display_feats(TP, TP);
+
         return 1;
 
     case "wipe":
@@ -1034,9 +1027,9 @@ feats active
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
-Feats represents specialized techniques or powers a character can learn throughout its career. Some feats are class-specific (usually gained for free with class-levels), while others are generic and must be paid for by adding to your exp tax (see <help exp tax>). A character gains 1 generic feat every 3. level which can be bought in such a way. Feats awarded by character class are added automatically. Some classes gain additional free feats known as bonus feats. When you level your character, you will get notified if you are allowed new feats.
+Feats are specialized powers a character can learn throughout its career. Some feats are class-specific (usually gained for free with class-levels), while others are generic and must be paid for by adding to your exp tax (see %^ORANGE%^<help exp tax>%^RESET%^). A character gains 1 generic feat every 3. level which can be bought in such a way. Feats awarded by character class are added automatically. Some classes gain additional free feats known as bonus feats. When you level your character, you will get notified if you are allowed new feats.
 
-Feats are divided into types (martial, spellcraft, hybrid, arcana, generic, epic) and organized in feat trees.  Some feats have prerequisites as specified in their individual help files.
+Feats are divided into %^ORANGE%^%^ULINE%^TYPES%^RESET%^ (" +implode(FEAT_TYPES, ", ") + ") and organized in feat trees.  Some feats have prerequisites as specified in their individual help files.
 
 The following commands apply:
 
@@ -1048,12 +1041,12 @@ The following commands apply:
     Will add the feat if you have any remaining levelling feats.
 %^ORANGE%^<feats remove %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
     Will remove the feat if you no longer want to retain it.
-%^ORANGE%^<feats racial|martial|spellcraft|hybrid|arcana|divinebond %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
-    Will add the feat of given category if you have any bonus feats in it.
-%^ORANGE%^<feats list martial|spellcraft|hybrid|arcana|divinebond|general|epic>%^RESET%^
-    Displays the specified feat trees.
+%^ORANGE%^<feats %^ULINE%^TYPENAME%^RESET%^ %^ORANGE%^%^ULINE%^FEAT%^RESET%^%^ORANGE%^>%^RESET%^
+    Will add the feat of given feat type if you have any bonus feats in it.
+%^ORANGE%^<feats list %^ORANGE%^%^ULINE%^CATEGORY%^RESET%^%^ORANGE%^|%^ORANGE%^%^ULINE%^TYPE%^RESET%^%^ORANGE%^|categories>%^RESET%^
+    Displays the specified feat types, feat category or displays list of categories.
 %^ORANGE%^<feats fix>%^RESET%^
-    Will attempt to fix your feat tree. If your feats seem incorrect, use this command.
+    Will attempt to fix your feat type. If your feats seem incorrect, use this command.
 %^ORANGE%^<feats active>%^RESET%^
     Tells you what feats you have activated.
 %^ORANGE%^<feats wipe>%^RESET%^

@@ -768,7 +768,7 @@ varargs int gain_feat(object ob, string type, string feat,int level)
         tell_object(ob,"You have already bought one epic feat, you can't buy another.");
         return 0;
     }
-    if(member_array(type,({"class","racial","martial","magic","other","hybrid","arcana","divinebond" })) == -1) { return 0; }
+    if(member_array(type, FEAT_TYPES) == -1) { return 0; }
 
     add_feat(ob,type,feat,level);
 
@@ -1094,58 +1094,75 @@ int has_feat(object ob, string feat)
 int is_feat(string feat)
 {
     mapping tmp;
-    string *feats=({}),*cats,*hold;
-    int i,j;
+    string* feats = ({}), * cats, * hold;
+    int i, j;
 
     tmp = get_all_feats();
-    if(!mapp(tmp))      { return 0; }
+    if (!mapp(tmp)) {
+        return 0;
+    }
     //this should be doing the same thing - but hopefully will cut down on
     //processing time and too long evaluation errors - Saide April 2016
     cats = values(tmp);
-    if(!pointerp(cats)) { return 0; }
-    for(i=0;i<sizeof(cats);i++)
-    {
-        if(member_array(feat, cats[i]) != -1) { return 1; }
+    if (!pointerp(cats)) {
+        return 0;
+    }
+    for (i = 0; i < sizeof(cats); i++) {
+        if (member_array(feat, cats[i]) != -1) {
+            return 1;
+        }
         continue;
     }
     return 0;
 
     /*cats = keys(tmp);
-    if(!sizeof(cats))   { return 0; }
-    for(i=0;i<sizeof(cats);i++)
-    {
-        hold = tmp[cats[i]];
-        if(!pointerp(hold)) { continue; }
-        if(!sizeof(hold))   { continue; }
-        for(j=0;j<sizeof(hold);j++)
-        {
-            feats += ({ hold[j] });
-        }
-    }
-    if(member_array(feat,feats) == -1) { return 0; }
-    return 1;*/
+      if(!sizeof(cats))   { return 0; }
+      for(i=0;i<sizeof(cats);i++)
+      {
+      hold = tmp[cats[i]];
+      if(!pointerp(hold)) { continue; }
+      if(!sizeof(hold))   { continue; }
+      for(j=0;j<sizeof(hold);j++)
+      {
+      feats += ({ hold[j] });
+      }
+      }
+       if(member_array(feat,feats) == -1) { return 0; }
+       return 1;*/
 }
 
-string get_feat_type(object ob,string feat)
+string get_feat_type(object ob, string feat)
 {
     mapping feats;
-    string type,*tmp,*types;
-    int i,j;
+    string type, * tmp, * types;
+    int i, j;
 
-    if(!objectp(ob))        { return 0; }
-    if(!stringp(feat))      { return 0; }
-    if(!has_feat(ob,feat))  { return 0; }
-    if(!is_feat(feat))      { return 0; }
-    tmp = ({ "class","racial","martial","magic","other","hybrid","arcana","divinebond" });
-    for(i=0;i<sizeof(tmp);i++)
-    {
-        feats = get_feats(ob,tmp[i]);
-        types  = keys(feats);
-        if(!sizeof(types)) { continue; }
-        for(j=0;j<sizeof(types);j++)
-        {
-            if(!pointerp(feats[types[j]])) { continue; }
-            if(member_array(feat,feats[types[j]]) != -1) { return tmp[i]; }
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if (!stringp(feat)) {
+        return 0;
+    }
+    if (!has_feat(ob, feat)) {
+        return 0;
+    }
+    if (!is_feat(feat)) {
+        return 0;
+    }
+    tmp = FEAT_TYPES;
+    for (i = 0; i < sizeof(tmp); i++) {
+        feats = get_feats(ob, tmp[i]);
+        types = keys(feats);
+        if (!sizeof(types)) {
+            continue;
+        }
+        for (j = 0; j < sizeof(types); j++) {
+            if (!pointerp(feats[types[j]])) {
+                continue;
+            }
+            if (member_array(feat, feats[types[j]]) != -1) {
+                return tmp[i];
+            }
         }
     }
     return 0;
@@ -1386,6 +1403,45 @@ void build_feat_list()
         }
     }
     __ALL_FEATS = feats;
+    return;
+}
+
+string *query_categories()
+{
+    return filter_array(keys(__ALL_FEATS), (:stringp($1):));
+}
+
+string *query_category_feats(string category)
+{
+    if (!is_member(query_categories(), category)) {
+        return ({});
+    }
+
+    return __ALL_FEATS[category];
+}
+
+void display_category(string category, object ob)
+{
+    string obuff;
+
+    if (!objectp(ob)) {
+        return;
+    }
+
+    category = last(filter_array(query_categories(), (:lower_case($1) == lower_case($2):), category));
+
+    obuff = query_category_feats(category);
+
+    if (!sizeof(obuff)) {
+        tell_object(ob,"%^BOLD%^%^RED%^No feats in category %^WHITE%^" + category);
+        return;
+    }
+
+    obuff = map(obuff, (:$2->format_feat($1, $3):), TO, ob);
+
+    tell_object(ob,"%^BOLD%^%^WHITE%^" + capitalize(category));
+    tell_object(ob,auto_format_page(obuff, ob, 34));
+
     return;
 }
 
