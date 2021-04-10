@@ -9,47 +9,52 @@
 
 inherit DAEMON;
 
-int form(string str);
-int leave();
-int join_party(string str);
-int add_member(string str);
-int sub(string str);
-int leader(string str);
-int list();
-int party_line(string str);
-int party_emote(string str);
-void help();
-
 int cmd_party(string str){
     string com, extra;
 
-    //if(wizardp(this_player())) return 0;
     if(!str) {
         help();
         return 1;
     }
-    if(sscanf(str, "%s %s", com, extra) == 2) {
-        switch(com) {
-            case "form": return form(extra); break;
-            case "leave": return leave(); break;
-	    case "join": return join_party(extra); break;
-            case "add": return add_member(extra); break;
-            case "remove": return sub(extra); break;
-            case "leader": return leader(extra); break;
-            case "list": return list(); break;
-            //case "line": return party_line(extra); break;
-            //case "emote": return party_emote(extra); break;
-            default: help(); return 1; break;
+
+    if (sscanf(str, "%s %s", com, extra) == 2) {
+        switch (com) {
+        case "form": return form(extra); break;
+        case "leave": return leave(); break;
+        case "join": return join_party(extra); break;
+        case "add": return add_member(extra); break;
+        case "remove": return sub(extra); break;
+        case "leader": return leader(extra); break;
+        case "list": return list(); break;
+        default: help(); return 1; break;
         }
-    }
-    else {
-        if(str == "leave") return leave();
-        else if(str == "list") return list();
-        else {
-            help();
-            return 1;
+    }else {
+        if (str == "leave") {
+            return leave();
         }
+
+        if (str == "list") {
+            return list();
+        }
+
+        if (str == "join") {
+            return join_party();
+        }
+
+        if (str == "form") {
+            string * party_names = ({
+                    "axe","book", "boss", "cake", "cookie", "crystal", "cup", "death", "dream", "drink", "dungeon", "hunt", "light", "love", "magic", "power", "push", "quest", "rage", "raid", "rose", "rush", "shield", "silly", "slayer", "sword", "us", "wrath"
+                        });
+
+            party_names -= PARTY_OB->query_parties();
+
+            return form(party_names[random(sizeof(party_names))]);
+        }
+
+        write("Use <help party> for syntax.");
+        return 1;
     }
+
 }
 
 int form(string str) {
@@ -67,7 +72,7 @@ int form(string str) {
         notify_fail("You are already a member of another party.\n");
         return 0;
     }
-    write("%^BOLD%^%^GREEN%^You form the party "+str+".\nYou are the leader.\n");
+    write("%^BOLD%^%^GREEN%^You form the party %^WHITE%^"+str+"%^GREEN%^.\n%^ORANGE%^You are the leader.\n");
     return 1;
 }
 
@@ -112,9 +117,8 @@ int add_member(string str) {
         return 0;
     }
     PARTY_OB->add_invited(ob, party);
-// changed to capitalize.. getParsableName from QCN
     PARTY_OB->notify_party(party, capitalize((string)ob->getParsableName())+" has been invited to join the party.");
-    tell_object(ob, "%^BOLD%^%^RED%^"+capitalize(TP->getParsableName())+" invites you to join the party \""+party+"\".\n%^RESET%^You have 60 seconds to type <party join "+party+">.\n");
+    tell_object(ob, "%^BOLD%^%^RED%^"+capitalize(TP->getParsableName())+" invites you to join the party \""+party+"\".\n%^RESET%^%^BOLD%^%^WHITE%^You have 60 seconds to type <party join> to join last invitation.\nType <party join "+party+"> to join this specific party.\n");
     return 1;
 }
 
@@ -125,30 +129,31 @@ int sub(string str) {
 
     str = TP->realNameVsProfile(str);
     ob = find_player(str);
-    if(!ob) {
-//        write(identify(ob));
+
+    if (!ob) {
         notify_fail("That player is not on the mud.\n");
         return 0;
     }
+
     party = (string)this_player()->query_party();
-    if(!party) {
+
+    if (!party) {
         notify_fail("You must be the leader of a party to remove a member.\n");
         return 0;
     }
-    if(this_player() != (object)PARTY_OB->query_leader(party)) {
+
+    if (this_player() != (object)PARTY_OB->query_leader(party)) {
         notify_fail("You must be the leader of the party to remove a member.\n");
         return 0;
     }
+
     i = (int)PARTY_OB->remove_member(ob);
-    if(i==NOT_MEMBER) {
-// fixing invis. here too, changed to capitalize.. getParsableName from QCN
-  //getParsableName() here was returning their real name, so
-  //I've changed it to do knownAs(str) - str is their real
-  //name and knownAs() returns what you know them as - Saide 4/08/04
-        notify_fail(capitalize(TP->knownAs(str))+" is not a member of your group.\n");
+
+    if (i == NOT_MEMBER) {
+        notify_fail(capitalize(TP->knownAs(str)) + " is not a member of your group.\n");
         return 0;
     }
-// and invis. here
+
     PARTY_OB->notify_party(party, capitalize(TP->knownAs(str))+" is no longer in the group.");
     return 1;
 }
@@ -201,13 +206,16 @@ int list() {
         notify_fail("You are not a member of any party.\n");
         return 0;
     }
+
     who = (object *)PARTY_OB->query_party_members(party);
+
     if(!sizeof(who)) {
         notify_fail("You are no longer in a party.\n");
         return 0;
     }
+
     write("%^BOLD%^%^CYAN%^The following are members of the party %^WHITE%^"+party+"%^CYAN%^:");
-    write(" %^BOLD%^%^RED%^"+capitalize((string)who[i]->getParsableName())+"%^RESET%^%^WHITE%^ (leader)");
+    write(" %^BOLD%^%^GREEN%^"+capitalize((string)who[i]->getParsableName())+"%^ORANGE%^ (leader)");
 
     for(i=0; i<sizeof(who); i++) {
         if(!i) continue;
@@ -216,21 +224,33 @@ int list() {
     return 1;
 }
 
-int join_party(string str) {
+int join_party(string str)
+{
     int x;
 
-    if(!str) return 0;
-    if(!PARTY_OB->invited_now(this_player(), str)) {
-	notify_fail("You must be invited into a party in order to join.\n");
-	return 0;
+    if (!str) {
+        string * invited_parties = PARTY_OB->query_all_invited_now(TP);
+
+        if (!sizeof(invited_parties)) {
+            return 0;
+        }
+
+        str = last(invited_parties);
     }
+
+    if (!PARTY_OB->invited_now(this_player(), str)) {
+        notify_fail("You must be invited into a party in order to join.\n");
+        return 0;
+    }
+
     x = (int)PARTY_OB->add_member(this_player(), str);
-    if(x==ALREADY_MEMBER) {
-	notify_fail("You are already in another party!\n");
-	return 0;
+
+    if (x == ALREADY_MEMBER) {
+        notify_fail("You are already in another party!\n");
+        return 0;
     }
-// fixing invis. & real name problem here too
-    PARTY_OB->notify_party(str, capitalize(TP->getParsableName())+" has joined the party.\n");
+
+    PARTY_OB->notify_party(str, capitalize(TP->getParsableName()) + " has joined the party.\n");
     return 1;
 }
 
@@ -242,7 +262,7 @@ party -- manage your party
 
 %^CYAN%^SYNTAX%^RESET%^
 
-party [form|join] %^ORANGE%^%^ULINE%^NAME%^RESET%^
+party [form|join] [%^ORANGE%^%^ULINE%^NAME%^RESET%^]
 party [add|remove|leader] %^ORANGE%^%^ULINE%^PLAYER%^RESET%^
 party list
 party leave
@@ -255,37 +275,4 @@ This command accesses the various party enabling functions. The person who forms
 
 levelcheck, follow, unfollow, followers, who, kill, threaten, flag
 ");
-}
-
-int party_line(string str) {
-    string party, pl_name;
-
-    party = (string)this_player()->query_party();
-    if(!party) {
-        notify_fail("You are not a member of a party.\n");
-        return 0;
-    }
-    //str= "daemon/language_d"->translate(str, TP->query_spoken(), TP);
-    pl_name = capitalize((string)this_player()->query_name());
-    if(avatarp(TP) && TP->query_disguised()) pl_name = capitalize(TP->query_vis_name());
-       PARTY_OB->message_party(party,"%^RESET%^"+str);
-    return 1;
-}
-
-int party_emote(string str){
-    string party, pl_name;
-
-    if(TP->query("emote loss")) return 0;
-
-
-    party = (string)this_player()->query_party();
-    if(!party){
-        notify_fail("You are not a member of a party.\n");
-        return 0;
-    }
-    pl_name = capitalize((string)this_player()->query_name());
-    if(avatarp(TP) && TP->query_disguised()) pl_name = capitalize(TP->query_vis_name());
-
-    PARTY_OB->party_emote(party, "%^RESET%^"+pl_name+" "+str);
-    return 1;
 }
