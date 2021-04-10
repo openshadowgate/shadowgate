@@ -1409,7 +1409,6 @@ void level_reaction(int num,object target)
             "you to convulse in unbearable pain!");
         target->set_paralyzed(roll_dice(1,(int)TO->query_level()),"%^RED%^You are thrasing "
             "on the ground in agony!%^RESET%^");
-        target->set_hp(roll_dice(2,12));
         tell_room(room,""+TO->query_short()+" produces a small glass sphere from "
             "a fold in "+TO->QP+" clothes and quickly smashes it!");
         new("/d/tharis/barrow/obj/sphere")->move(TO);
