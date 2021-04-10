@@ -64,20 +64,17 @@ int cmd_recall(string str)
 
     if (str == "profiles") {
         object profiler;
-        string * profiles;
-        string * obuff = ({});
-        int maxlength;
+        string * profiles, profile;
 
         profiler = new(DESC_D);
-
         profiles = profiler->query_profile_list(TP);
 
-        maxlength = max(map(profiles, (:sizeof($1):))) + 3;
-
-        obuff = map(profiles, (:arrange_string("%^BOLD%^%^RED%^ " + $1 + ": ", $3) + $2->query_profile_adjective($1):), profiler, maxlength);
-
         write("%^ORANGE%^--%^BOLD%^=<%^WHITE%^ Profiles List %^ORANGE%^>=%^RESET%^%^ORANGE%^--%^RESET%^");
-        tell_object(TP,auto_format_page(obuff, TP, 72));
+
+        foreach(profile in profiles) {
+            write("%^BOLD%^%^ORANGE%^" + profile + ":");
+            write("  " + profiler->query_profile_adjective(profile));
+        }
 
         profiler->clean_me();
 
@@ -549,16 +546,14 @@ int recall_spells(string type, object who)
 void help()
 {
     write(
-@HELP
+"
 %^CYAN%^NAME%^RESET%^
 
 recall - recall knowledge
 
 %^CYAN%^SYNOPSIS%^RESET%^
 
-recall locations
-recall relationships
-recall monsters
+recall locations|relationships|profiles|monsters
 recall monster %^ORANGE%^%^ULINE%^NUMBER%^RESET%^
 recall %^ORANGE%^%^ULINE%^CLASS%^RESET%^ spells [%^ORANGE%^%^ULINE%^LEVEL%^RESET%^]
 recall innate spells
@@ -572,6 +567,9 @@ This command allows you to recall locations, monsters or spells you know.
 
 %^ORANGE%^<recall relationships>%^RESET%^
     You'll be displayed a list of names you used to recognize people as.
+
+%^ORANGE%^<recall profiles>%^RESET%^
+    You'll be displayed a list of all your profiles and forms.
 
 %^ORANGE%^<recall monsters>%^RESET%^
     You'll be displayed a list of monsters you studied with %^ORANGE%^<study>%^RESET%^. Note, whenever you do it, list of monsters will be validated.
@@ -591,7 +589,7 @@ This command is affected by collumns setting of the %^ORANGE%^<set>%^RESET%^ com
 %^CYAN%^SEE ALSO%^RESET%^
 
 remember, unremember, recognize, set, study, fixspells
-HELP
+"
 );
     return;
 }
