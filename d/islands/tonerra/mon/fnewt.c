@@ -165,9 +165,7 @@ void fire(object targ)
     tell_room(ETO, "%^RED%^A shot a flame bellows toward "
               + targ->query_cap_name() + ".", targ);
     tell_object(targ, "%^RED%^A shot of flame bellows toward you.");
-    set_property("magic", 1);
-    targ->do_damage("torso", random(75));
-    remove_property("magic");
+    target->cause_typed_damage(TO, "torso", roll_dice(query_level(), 4), "fire");
 }
 
 void whirlit(object targ)
