@@ -33,7 +33,7 @@ mixed* genoutput(object targ)
 
     output += ({ ({ "Gender", "%^BOLD%^%^BLUE%^" + capitalize(targ->query_gender()) }) });
 
-#define AL_COLOR ({ "%^BOLD%^%^YELLOW%^", "%^BOLD%^%^WHITE%^", "%^WHITE%^", "%^BOLD%^%^BLUE%^", "%^BLUE%^", "%^CYAN%^", "%^ORANGE%^", "%^BOLD%^%^RED%^", "%^RED%^" })
+#define AL_COLOR ({ "%^BOLD%^%^YELLOW%^", "%^BOLD%^%^BLUE%^", "%^ORANGE%^", "%^BOLD%^%^WHITE%^", "%^BLUE%^", "%^BOLD%^%^RED%^", "%^WHITE%^", "%^CYAN%^", "%^RED%^"})
     output += ({ ({ "Alignment", AL_COLOR[targ->query_alignment() - 1] + capitalize(targ->query_al_title(targ->query_alignment())) }) });
 
     output += ({ ({ "Class", "%^BOLD%^%^MAGENTA%^" + implode(targ->query_classes(), "/") }) });
