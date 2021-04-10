@@ -190,7 +190,6 @@ void drain_health(object target)
 
     target->cause_typed_damage(target, "torso", dam, "negative energy");
     TP->add_max_hp_bonus(dam);
-    //target->cause_typed_damage(caster,"torso",dam,"negative energy");
 }
 
 void drain_life(object target)
