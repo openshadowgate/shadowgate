@@ -10,7 +10,7 @@ void create() {
     set_description("An eldritch blast with this essence applied will leech part of the damage "
 "done to heal the warlock. Multiple-target blast shapes will still leech the same amount of "
 "vampiric healing as a single-targetted blast. This essence will also change the base type of "
-"the blast to negative energy.\nSee also: <help blasttype>.");
+"the blast to negative energy, which allows the warlock to heal undead.\nSee also: <help blasttype>.");
 }
 
 int preSpell() {
