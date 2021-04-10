@@ -1134,7 +1134,7 @@ string get_feat_type(object ob, string feat)
     if (!is_feat(feat)) {
         return 0;
     }
-    tmp = FEAT_TYPES;
+    tmp = ({ "class","racial","martial","magic","other","hybrid","arcana","divinebond" });
     for (i = 0; i < sizeof(tmp); i++) {
         feats = get_feats(ob, tmp[i]);
         types = keys(feats);
