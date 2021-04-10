@@ -1114,21 +1114,6 @@ int is_feat(string feat)
         continue;
     }
     return 0;
-
-    /*cats = keys(tmp);
-      if(!sizeof(cats))   { return 0; }
-      for(i=0;i<sizeof(cats);i++)
-      {
-      hold = tmp[cats[i]];
-      if(!pointerp(hold)) { continue; }
-      if(!sizeof(hold))   { continue; }
-      for(j=0;j<sizeof(hold);j++)
-      {
-      feats += ({ hold[j] });
-      }
-      }
-       if(member_array(feat,feats) == -1) { return 0; }
-       return 1;*/
 }
 
 string get_feat_type(object ob, string feat)
