@@ -71,6 +71,8 @@ The following commands may be used to manage your horses/mounts:
 %^CYAN%^Please note:
  * The mount's short and long descriptions do not save. We suggest you set an alias for them.
  * The mount's descriptions must be RP-appropriate and include the mount's race/type. Please refer to%^ORANGE%^ <help horse guide>%^RESET%^ for rules regarding mount descriptions.
+ * The mount's items also do do not save. If you give your mount items, they will be lost when you log out.
+
 
 %^CYAN%^SEE ALSO
 horse guide, heal, whistle, shoo, athletics, skills, paladin, feats, remember.
