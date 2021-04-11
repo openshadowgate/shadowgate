@@ -5,7 +5,7 @@ inherit "/std/vendor";
 create() {
    ::create();
    set_name("Pendaxin");
-   set_id( ({ "pendaxin", "clerk", "shop keeper", "shopkeeper"}) );
+   set_id( ({ "pendaxin", "clerk", "shop keeper", "shopkeeper", "gstorekeeper"}) );
    set_short("Pendaxin, the clerk of Shadow's General Store");
    set("aggressive", 0);
    set_level(19);
