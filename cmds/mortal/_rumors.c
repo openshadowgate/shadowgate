@@ -165,6 +165,15 @@ int cmd_rumors(string args)
             searchlist = keys(areas);
             foreach(peep in peeps)
             {
+
+                if (peep == TP) {
+                    continue;
+                }
+
+                if (peep->query_base_character_level()>50) {
+                    continue;
+                }
+
                 if(!objectp(ENV(peep)))
                     continue;
                 fn = base_name(environment(peep));
