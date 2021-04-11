@@ -19,6 +19,8 @@ are the finished items. There is everything from work trousers to pretty
 summer dresses. There is a small display of shoes, hats, and gloves as
 well. Although these clothes offer no help to you in battle, it is nice
 to be wearing something instead of walking around naked.
+
+%^BOLD%^<help shop> will provide a list of shop commands.
 CRYSTAL
 	);
 	set_property("light",2);
