@@ -478,17 +478,17 @@ void choose_item(string str)
         }
         command("emote smiles and claps her hands together.");
         command("say Yeah!  You did a great job!  This is yours now.");
+
         if (ob->query_property("monsterweapon")) {
             ob->remove_property("monsterweapon");
         }
 
-        if(helper->query_internal_encumbrance()+ob->query_weight()>=helper->query_max_internal_encumbrance()){
+        if(TP->query_internal_encumbrance()+ob->query_weight()>=TP->query_max_internal_encumbrance()){
              command("say Wow, you carry a lot! I'll just drop it here.");
              command("drop " + str);
             }else{
-                
-                command("give " + str + " to " + helper);
-            }
+             command("give " + str + " to " + helper);
+        }
 
         command("say Thank you for helping me.");
         command("emote waves to you as she flies away.");
