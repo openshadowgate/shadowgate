@@ -47,9 +47,9 @@ void do_help(object to) {
 
 void create() {
     ::create();
-    set_name("a human");
+    set_name("Gareth");
     set_id(({"gareth","human","a human","alchemist"}));
-    set_short("An old and stooped frail human");
+    set_short("Gareth, An old and stooped frail human");
     set_level(15);
     set_long("%^BOLD%^%^WHITE%^This old man has seen better days.  He is stooped now, the "+
     "bones in his back twisted and bent as a result of a difficult life.  His body is "+
@@ -193,6 +193,10 @@ void do_received_stuff(object tp)
 		case 5:
         		force_me("say ahh yes... there is a matter of a reward.  Well, here you go!");
         		force_me("give vault key to " + TP->query_name());
+                if(present("vault key",TO)) {
+         		    force_me("drop vault key");                   
+                }
+
         		if(member_array("Achieved: Retrieved BlackTongue's Crown",
 			TP->query_mini_quests()) == -1) 
 			{
