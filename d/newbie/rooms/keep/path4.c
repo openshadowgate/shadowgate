@@ -9,7 +9,8 @@ void create() {
    set_property("light",2);
    set_name("A well-trodden path");
    set_short("%^RESET%^%^ORANGE%^A well-trodden path%^RESET%^");
-   set_long("%^RESET%^A large %^CYAN%^keep %^RESET%^stands directly in front of "
+   set_long("%^RESET%^%^ORANGE%^A well-trodden path in front of the keep\n\n%^RESET%^"+
+   "%^RESET%^A large %^CYAN%^keep %^RESET%^stands directly in front of "
 "you.  It is in bad shape, judging by the %^BLUE%^holes %^RESET%^in the walls "
 "and the %^GREEN%^vines %^RESET%^growing up over the building.  Some sections "
 "seem to have collapsed entirely, further towards the back.  Before you appears "

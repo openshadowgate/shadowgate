@@ -5,6 +5,7 @@ inherit FROAD;
 
 void create()
 {
+   direction = "north";
    ::create();
    set_exits(([
     "south":FROAD+"1",

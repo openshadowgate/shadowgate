@@ -4,6 +4,7 @@
 #include "../../newbie.h"
 
 inherit ROOM;
+string direction;
 
 void create(){
    ::create();
@@ -12,7 +13,8 @@ void create(){
    set_terrain(LIGHT_FOREST);
    set_travel(DIRT_ROAD);
    set_short("A trail through the forest");
-   set_long("%^RESET%^%^GREEN%^A trail through the forest\nYou are on a trail through a thick and forboding forest.  "+
+   set_long("%^RESET%^%^GREEN%^A trail through the forest %^BOLD%^%^ORANGE%^" +direction+ "%^RESET%^%^GREEN%^ of Offestry\n\n"+
+   "You are on a trail through a thick and forboding forest.  "+
    "The trail is composed of %^RESET%^%^ORANGE%^dirt%^RESET%^%^GREEN%^ that has been "+
    "hardened and packed down from years of frequent use.  The forest surrounding you "+
    "is so overgrown as to be completely impassable beyond the limited range of the trail.  Many "+

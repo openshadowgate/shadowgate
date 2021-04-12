@@ -5,6 +5,7 @@ inherit FROAD;
 
 void create()
 {
+    direction = "south";    
    ::create();
     set_long(TO->query_long()+"%^RESET%^%^GREEN%^  The trail splits here to the south "+
    "or continues northward.%^RESET%^");
