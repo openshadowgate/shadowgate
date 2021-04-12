@@ -1,6 +1,6 @@
 #include <std.h>
 #include "keep.h"
-inherit VAULT;
+inherit CVAULT;
 string location, title;
 
 void create() {

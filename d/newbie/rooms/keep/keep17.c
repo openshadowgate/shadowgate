@@ -1,6 +1,8 @@
 #include <std.h>
 #include "../inherit/keep.h"
+inherit CROOM;
 inherit INH+"keephall2";
+
 
 void create(){
     location = "East";
@@ -19,6 +21,7 @@ void create(){
 }
 
 void reset() {
+   
    int active;
    active = has_mobs();
    if(!active) {
@@ -26,4 +29,5 @@ void reset() {
       set_monsters(({MONS"xvart"}),({random(2)+1}));
    }
    ::reset();
+   
 }
