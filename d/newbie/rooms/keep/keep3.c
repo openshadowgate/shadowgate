@@ -2,7 +2,8 @@
 #include "../inherit/keep.h"
 inherit INH+"keephall2";
 
-void create(){ 
+void create(){
+    location = "South";
    ::create();
    set_long(::query_long() +"  Crumbling walls to the west offer a way out of "
 "the building.\n");

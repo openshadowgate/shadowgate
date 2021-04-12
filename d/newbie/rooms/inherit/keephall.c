@@ -1,6 +1,7 @@
 #include <std.h>
 #include "keep.h"
 inherit CVAULT;
+string location, title;
 
 void create() {
    ::create();
@@ -10,7 +11,8 @@ void create() {
    set_property("light",1);
    set_name("Hallway of a ruined keep");
    set_short("%^CYAN%^Hallway of a ruined keep%^RESET%^");
-   set_long("%^CYAN%^Hallway of a ruined keep%^RESET%^\n"
+   title = "%^CYAN%^%^BOLD%^Hallway%^RESET%^%^CYAN%^ of a ruined keep: %^BOLD%^" + location + "%^RESET%^\n\n";
+   set_long(title +
 "You are traveling down the hallway of a ruined keep.  The %^BLUE%^walls "
 "%^RESET%^are in fairly good shape here, although a few holes and cracks let "
 "the weather in.  The %^ORANGE%^floor %^RESET%^is covered in dust and dirt, and "

@@ -12,8 +12,8 @@ void create() {
    set_property("light",1);
    set_name("Stairway of a ruined keep");
    set_short("%^CYAN%^Stairway of a ruined keep%^RESET%^");
-   set_long("%^CYAN%^Stairway of a ruined keep%^RESET%^\n"
-"You are standing at the bottom of spiral of %^BOLD%^%^BLACK%^stone stairs "
+   set_long("%^CYAN%^%^BOLD%^Stairway%^RESET%^%^CYAN%^ of a ruined keep - %^BOLD%^ground floor%^RESET%^\n\n"
+"You are standing at the %^BOLD%^bottom%^RESET%^ of a %^BOLD%^%^BLACK%^stone spiral staircase "
 "%^RESET%^that lead upwards to another floor of the keep.  The %^BOLD%^"
 "%^BLACK%^stairs %^RESET%^themselves are in surprisingly good condition, "
 "despite being a bit dusty.  A line of old ragged %^GREEN%^carpet %^RESET%^"
@@ -24,7 +24,7 @@ void create() {
    set_smell("default","The smell of age-old decay hangs in the air.");
    set_listen("default","Everything is fairly quiet here.");
    set_items(([
-     ({"stairs","steps","stairway"}) : "%^BOLD%^%^BLACK%^The stone stairs "
+     ({"stairs","steps","stairway", "staircase"}) : "%^BOLD%^%^BLACK%^The stone stairs "
 "leading up in a spiral to the second floor of the keep are in fairly good "
 "condition.  They're very dusty though, and obviously haven't been used "
 "much in a long time.",

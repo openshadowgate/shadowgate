@@ -3,8 +3,9 @@
 inherit INH+"keephall2";
 
 void create(){ 
+    location = "Entrance";
    ::create();
-   set_long("%^CYAN%^Hallway of a ruined keep%^RESET%^\n"
+   set_long(title +
 "You are standing just inside the entrance of a ruined keep.  The %^BLUE%^walls "
 "%^RESET%^seem in fairly poor shape here, with holes and cracks that let the "
 "weather in.  Some bricks are missing, and the ceiling looks a little unsteady"

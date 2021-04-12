@@ -3,6 +3,7 @@
 inherit INH+"keephall";
 
 void create(){ 
+    location = "West";
    ::create();
    set_long(::query_long() +"  The hallway leads off from this point to the "
 "north and south.  Crumbling walls to the south offer a way out of the "

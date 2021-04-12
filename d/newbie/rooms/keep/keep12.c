@@ -3,6 +3,7 @@
 inherit INH+"keephall";
 
 void create(){ 
+    location = "North";
    ::create();
    set_long(::query_long() +"  %^CYAN%^Hinges %^RESET%^on the walls suggest "
 "that a pair of grand doors once stood barring the way east, but they are long "

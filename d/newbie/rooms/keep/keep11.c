@@ -3,6 +3,7 @@
 inherit INH+"keephall";
 
 void create(){ 
+    location = "North";
    ::create();
    set_long(::query_long() +"  To the north is a %^RED%^staircase %^RESET%^that "
 "appears to lead to a floor above this one.  East leads towards the back of the "

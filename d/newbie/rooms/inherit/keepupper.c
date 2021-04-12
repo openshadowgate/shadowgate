@@ -11,7 +11,7 @@ void create() {
    set_property("light",1);
    set_name("A ruined hall");
    set_short("%^CYAN%^A ruined hall%^RESET%^");
-   set_long("%^CYAN%^A ruined hall%^RESET%^\n"
+   set_long("%^CYAN%^A ruined hall on the upper floor%^RESET%^\n\n"
 "%^RESET%^You are standing in a great hall on the second floor of "
 "a ruined keep.  A few ruined %^BOLD%^%^WHITE%^paintings %^RESET%^and "
 "%^ORANGE%^tapestries %^RESET%^still hang upon the walls, and the occasional "

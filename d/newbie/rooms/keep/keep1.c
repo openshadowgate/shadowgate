@@ -6,10 +6,11 @@ inherit INH+"keephall2";
 int FLAG;
 
 void create(){ 
+    location = "Dead End - West";
    ::create();
    set_name("Dead end of a ruined keep");
    set_short("%^CYAN%^Dead end of a ruined keep%^RESET%^");
-   set_long("%^CYAN%^Dead end of a ruined keep%^RESET%^\n"
+   set_long(title+
 "This dead end is a few steps away from the crumbled entrance to the keep.  The "
 "%^BLUE%^walls %^RESET%^seem in fairly poor shape here, with holes and cracks "
 "that let the weather in.  Some bricks are missing, and the ceiling looks a "

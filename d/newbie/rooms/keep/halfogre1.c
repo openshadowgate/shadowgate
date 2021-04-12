@@ -12,7 +12,7 @@ void create() {
    set_property("light",1);
    set_name("Bedroom in a ruined keep");
    set_short("%^CYAN%^Bedroom in a ruined keep%^RESET%^");
-   set_long("%^CYAN%^Bedroom in a ruined keep%^RESET%^\n"
+   set_long("%^CYAN%^%^BOLD%^Bedroom%^RESET%^%^CYAN%^ in a ruined keep%^RESET%^\n\n"
 "You suspect this large room was once a bedroom.  The %^BLUE%^walls "
 "%^RESET%^are crumbling, full of holes and cracks that let in the weather, "
 "and on the south side of the room the roof has fallen in entirely.  The "

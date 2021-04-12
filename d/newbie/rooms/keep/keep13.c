@@ -10,8 +10,8 @@ void create() {
    set_property("indoors",1);
    set_property("light",1);
    set_name("A guard lounge");
-   set_short("%^CYAN%^A guard lounge%^RESET%^");
-   set_long("%^CYAN%^A guard lounge%^RESET%^\n"
+   set_short("%^CYAN%^A neglected guard lounge%^RESET%^");
+   set_long("%^CYAN%^A neglected %^BOLD%^guard lounge%^RESET%^\n\n"
 "This room was once probably a lounge room for the keep guards when they were "
 "off-duty, judging by its placement and now-ruined furnishings.  The %^BLUE%^"
 "floor %^RESET%^is caked with dirt, making the criss-crossing tracks of some "

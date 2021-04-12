@@ -12,8 +12,8 @@ void create() {
    set_property("light",1);
    set_name("Stairway of a ruined keep");
    set_short("%^CYAN%^Stairway of a ruined keep%^RESET%^");
-   set_long("%^CYAN%^Stairway of a ruined keep%^RESET%^\n"
-"You are standing at the top of spiral of %^BOLD%^%^BLACK%^stone stairs "
+   set_long("%^CYAN%^%^BOLD%^Stairway%^RESET%^%^CYAN%^ of a ruined keep - %^BOLD%^upper floor%^RESET%^\n\n"
+"You are standing at the top of a %^BOLD%^%^BLACK%^stone spiral staircase "
 "%^RESET%^that lead downwards to another floor of the keep.  The %^BOLD%^"
 "%^BLACK%^stairs %^RESET%^themselves are in surprisingly good condition, "
 "despite being a bit dusty.  A line of old ragged %^GREEN%^carpet %^RESET%^"

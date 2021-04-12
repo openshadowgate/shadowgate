@@ -11,7 +11,7 @@ void create(){
    set_property("light",1);
    set_name("An abandoned mess hall");
    set_short("%^RESET%^%^CYAN%^An abandoned mess hall%^RESET%^");
-   set_long("%^RESET%^%^CYAN%^An abandoned mess hall%^RESET%^\n"
+   set_long("%^RESET%^%^CYAN%^An abandoned %^BOLD%^mess hall%^RESET%^\n\n"
 "You are standing at the northern end of a vast mess hall.  A long "
 "%^ORANGE%^table %^RESET%^extends nearly the full length of the room, but a "
 "great crack has sundered it and caused it to fall inwards in the middle.  The "

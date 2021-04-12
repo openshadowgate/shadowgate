@@ -10,7 +10,7 @@ void create() {
    set_travel(PAVED_ROAD);
    set_name("A hidden passage");
    set_short("%^ORANGE%^A hidden passage%^RESET%^");
-   set_long("%^ORANGE%^A hidden passage%^RESET%^\n"
+   set_long("%^ORANGE%^A hidden passage on the upper floor%^RESET%^\n\n"
 "You are standing in a hidden passageway that continues along to the west, "
 "although you can't see very far in the dim light.  The corridor seems to "
 "have survived the ravages of time fairly well, as the %^BLUE%^walls "

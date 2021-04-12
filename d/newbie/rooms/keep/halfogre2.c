@@ -12,7 +12,7 @@ void create() {
    set_property("light",2);
    set_name("Garden outside a ruined keep");
    set_short("%^GREEN%^Garden outside a ruined keep%^RESET%^");
-   set_long("%^GREEN%^Garden outside a ruined keep%^RESET%^\n"
+   set_long("%^BOLD%^%^GREEN%^Garden%^RESET%^%^GREEN%^ outside a ruined keep%^RESET%^\n\n"
 "%^GREEN%^Weeds %^RESET%^and %^BOLD%^%^GREEN%^vines %^RESET%^seem to have "
 "had years to crawl all over this abandoned garden.  Cracked %^ORANGE%^"
 "stones %^RESET%^shift underfoot, once perhaps the groundwork of a lovely "

@@ -3,6 +3,7 @@
 inherit INH+"keephall2";
 
 void create(){
+    location = "East";
    ::create();
    set_repop(60);
    set_long(::query_long() +"  West of here appears to be the remains of a "

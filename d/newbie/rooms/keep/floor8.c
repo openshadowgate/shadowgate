@@ -13,7 +13,7 @@ void create() {
    set_property("light",1);
    set_name("A hidden room");
    set_short("%^ORANGE%^A hidden room%^RESET%^");
-   set_long("%^ORANGE%^A hidden room%^RESET%^\n"
+   set_long("%^ORANGE%^A hidden room on the upper floor%^RESET%^\n"
 "The corridor leads to a dead end here in this hidden room, arrayed much "
 "like a lounge.  A worn-out %^ORANGE%^couch %^RESET%^rests against the "
 "northern wall, and a tiny %^RED%^desk %^RESET%^stands in the southwestern "

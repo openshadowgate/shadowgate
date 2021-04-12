@@ -12,7 +12,7 @@ void create() {
    set_property("light",1);
    set_name("A large study");
    set_short("%^CYAN%^A large study");
-   set_long("%^CYAN%^A large study%^RESET%^\n"
+   set_long("%^CYAN%^A large study on the upper floor%^RESET%^\n\n"
 "You have entered a sizeable study room, with %^ORANGE%^bookshelves %^RESET%^"
 "lining the entirety of two walls, the south and east.  A large walnut "
 "%^RED%^desk %^RESET%^obscures most of the northern wall, set with a matching "

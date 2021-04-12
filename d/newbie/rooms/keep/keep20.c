@@ -3,6 +3,7 @@
 inherit INH+"keephall2";
 
 void create(){ 
+    location = "Dead End - East";  
    ::create();
    set_name("Dead end of a ruined keep");
    set_short("%^RESET%^%^CYAN%^Dead end of a ruined keep%^RESET%^");
@@ -66,7 +67,7 @@ string rubble_desc() {
 
 string my_long() {
    if(member_array("south",TO->query_exits()) == -1)
-     return("%^RESET%^%^CYAN%^Dead end of a ruined keep%^RESET%^\n"
+     return(title + 
 "You have reached the dead end of a hallway in a ruined keep.  The "
 "%^BLUE%^walls %^RESET%^are in poor shape here, with holes and cracks that let "
 "the weather in.  The %^ORANGE%^floor %^RESET%^is covered in dust and dirt, and "

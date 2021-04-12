@@ -11,7 +11,7 @@ void create(){
    set_property("light",1);
    set_name("An abandoned kitchen");
    set_short("%^RESET%^%^CYAN%^An abandoned kitchen%^RESET%^");
-   set_long("%^RESET%^%^CYAN%^An abandoned kitchen%^RESET%^\n"
+   set_long("%^RESET%^%^CYAN%^An abandoned %^BOLD%^kitchen%^RESET%^\n\n"
 "Before you lies the destroyed remains of a kitchen.  A massive stone "
 "%^RED%^fireplace %^RESET%^was once set in the northern wall, but it has "
 "crumbled with age and is full of debris.  Rusted %^BOLD%^%^BLACK%^pots "

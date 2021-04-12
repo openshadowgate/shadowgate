@@ -3,12 +3,13 @@
 inherit INH+"keephall2";
 
 void create(){ 
+    location = "Dead End - South";    
    set_monsters(({MONS+"xvart"}),({1}));
    ::create();
    set_repop(40);
    set_name("Dead end of a ruined keep");
    set_short("%^CYAN%^Dead end of a ruined keep%^RESET%^");
-   set_long("%^CYAN%^Dead end of a ruined keep%^RESET%^\n"
+   set_long(title+
 "You are traveling down the hallway of a ruined keep.  The %^BLUE%^walls "
 "%^RESET%^are in poor shape here, with holes and cracks that let the weather "
 "in.  The %^ORANGE%^floor %^RESET%^is covered in dust and dirt, and streaks of "
