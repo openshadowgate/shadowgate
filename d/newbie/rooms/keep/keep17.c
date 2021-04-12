@@ -1,6 +1,6 @@
 #include <std.h>
 #include "../inherit/keep.h"
-inherit CROOM;
+
 inherit INH+"keephall2";
 
 
