@@ -42,6 +42,12 @@ int cmd_actions()
 // This section reports out the actions you can take in a room.
 
     actions = ETP->query_actions();
+
+    if (vault_no_door()) {
+        // If this is a vault but it has no door, remove the following from the ations list
+        actions -= ({"open", "close", "unlock", "lock", "pick", "knock"});
+    }
+
     num = sizeof(actions);
     if (num > 0) {
         found = 1;
@@ -74,4 +80,30 @@ Note this will not tell you the object of a command. For example: for %^ORANGE%^
 
 look, search
 ");
+}
+
+
+
+
+int vault_no_door() {
+    string * exits;
+    int i;
+
+    if (!inherits(VAULT, ETP)) {
+        return 0;
+    }
+    
+    //tell_object(TP,"Inherits vault");
+
+    exits = ETP->query_exits();    
+
+    for (i=0; i<sizeof(exits); i++) {
+        if(ETP->query_door(exits[i])) { 
+            //tell_object(TP,"Found a door, exiting function.");
+            return 0;
+        }
+    }
+    
+    return 1;
+    
 }
