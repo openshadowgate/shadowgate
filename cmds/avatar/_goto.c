@@ -7,6 +7,10 @@
 
 inherit DAEMON;
 
+#include <std.h>
+
+inherit DAEMON;
+
 int cmd_goto(string str)
 {
     object ob;
@@ -53,10 +57,10 @@ int cmd_goto(string str)
         }
     }
 
-    if (avatarp(ob)) {
-        tell_object(ob, TP->query_name() + " are now here.");
+    if (ob && ob->query_invis()) {
+        tell_object(TP, "You can find no such user.");
+        return 1;
     }
-
 
     if (!ob) {
         str = resolv_path((string)this_player()->get_path(), str);
