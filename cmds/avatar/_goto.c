@@ -37,11 +37,6 @@ int cmd_goto(string str)
         }
     }
 
-    if (str == "arena") {
-        TP->move_player("/realms/obsidian/rooms/arena1");
-        return 1;
-    }
-
     if (TP->query_rem_rooms()) {
         if (member_array(str, keys(TP->query_rem_rooms())) != -1) {
             tell_object(TP, "You go to the location remembered as " + str + "!\n");
