@@ -225,8 +225,7 @@ int pray()
 
         expdelta = exp_for_level(thelevel);
 
-        // Weak punishment for low levels, but starting from L40 it will always take a level.
-        exploss = expdelta * (7 * thelevel * thelevel - 30 * thelevel + 2000) / 12000;
+        exploss = expdelta / 2;
         log_file("player/exp_loss", TPQN + " lost " + exploss + " in resurrection at a church.\n");
 
         if (TP->query("hardcore")) {
