@@ -225,7 +225,7 @@ int pray()
 
         expdelta = exp_for_level(thelevel);
 
-        exploss = expdelta / 2;
+        exploss = expdelta / 10;
         log_file("player/exp_loss", TPQN + " lost " + exploss + " in resurrection at a church.\n");
 
         if (TP->query("hardcore")) {
@@ -245,18 +245,15 @@ int pray()
             TP->clear_feats();
             TP->delete("free_feat_wipe");
             TP->set_general_exp(myclass, total_exp_for_level(6));
+
+            TP->resetLevelForExp(0);
+
         } else {
             if (exp - exploss <= total_exp_for_level(6)) {
                 exploss = exp - total_exp_for_level(6);
             }
             TP->set_general_exp(myclass, exp - exploss);
         }
-
-        TP->resetLevelForExp(0);
-
-        /* Adding death tax */
-
-        //TP->set_XP_tax(0, 0, "death");
 
         /* Damaging enchanted inventory. */
         stuff = all_inventory(TP);
