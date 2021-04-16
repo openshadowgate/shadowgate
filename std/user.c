@@ -1767,22 +1767,7 @@ void heart_beat()
         else static_user["stance"] = 0;
     }
 
-    //There are 3 heart beats per round. Adjust values accordingly.
-    if(objectp(TO))
-    {
-        if((FEATS_D->usable_feat(TO,"mighty resilience") ||
-            FEATS_D->usable_feat(TO,"improved dodge") ||
-            FEATS_D->usable_feat(TO,"remember the future")) &&
-           !TO->query_property("stab_resilience"))
-        {
-            TO->set_property("stab_resilience",(TO->query_level()/10) + 1);
-        }
-        if(FEATS_D->usable_feat(TO,"undead graft") &&
-           !TO->query_property("stab_resilience"))
-        {
-            TO->set_property("stab_resilience",(TO->query_level()/20) + 1);
-        }
-    }
+    //Reliably there are 2-3 heart beats per round. Adjust values accordingly.
 
     //Once per round
     /* if(!(user_ticker%3)) */

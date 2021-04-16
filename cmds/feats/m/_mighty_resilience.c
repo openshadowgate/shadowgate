@@ -9,7 +9,7 @@ void create() {
     feat_category("Stonelord");
     feat_name("mighty resilience");
     feat_prereq("Stonelord L4");
-    feat_desc("The Stonelord's kinship with the earth grows, his or her body taking on more of its attributes. He will ignore all of the stabs from rogues of the same level.");
+    feat_desc("The Stonelord's kinship with the earth grows, his or her body taking on more of its attributes. He will ignore 1d6 damage per level from thief backstabs.");
     permanent(1);
     set_required_for(({"command the stone"}));
 }
@@ -49,4 +49,3 @@ void dest_effect(){
     remove_feat(TO);
     return;
 }
-

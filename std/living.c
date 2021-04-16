@@ -318,22 +318,14 @@ void heart_beat()
 
     POISON_D->ProcessPoisons(TO);
 
-    if (objectp(TO) && sizeof(TO->query_attackers())) {
-        if (TO->query_property("stabs_available")) {
-            TO->remove_property("stabs_available");
-        }
-        if (FEATS_D->usable_feat(TO, "combat reflexes")) {
-            i = (TO->query_prestige_level("thief")) / 10;
-            TO->set_property("stabs_available", i);
-        }
-        // A place to plug in more stab sources
-    }
     if (TO->is_class("monk")) {
         USER_D->regenerate_pool(TO, (1 + random(2)), 1, "ki");
     }
+
     if (TO->is_class("magus")) {
         USER_D->regenerate_pool(TO, (1 + random(2)), 1, "arcana");
     }
+
     if (TO->is_class("paladin") || TO->is_class("cleric")) {
         USER_D->regenerate_pool(TO, 1, 1, "grace");
     }

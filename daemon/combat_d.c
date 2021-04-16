@@ -2887,15 +2887,20 @@ void internal_execute_attack(object who)
     if (!objectp(who)) {
         return;
     }
+
     who->set_for_attack(); //sets attacking to 0 - this function will not get called until it is 0
     EWHO = environment(who);
+
     if (!objectp(EWHO)) {
         return;
     }
+
     if (objectp(who)) {
         who->reset_critical();
     }
+
     attackers = who->query_attackers();
+
     if (!sizeof(attackers)) {
         who->prepare_attack();
         if (who->query_combat_mapps("static vars", "attack count") && !who->query_combat_mapps("static vars", "attack loop")) {
@@ -2903,6 +2908,7 @@ void internal_execute_attack(object who)
         }
         return;
     }
+
     if (who->query_property("flee")) {
         who->prepare_attack();
         if (who->query_combat_mapps("static vars", "attack count") && !who->query_combat_mapps("static vars", "attack loop")) {
@@ -2982,12 +2988,14 @@ void internal_execute_attack(object who)
         roll = random(20) + 1;
 
         //Touch of Chaos gives disadvantage
-        if(who->query_property("touch of chaos"))
-            roll = min( ({ roll, random(20) + 1 }) );
+        if (who->query_property("touch of chaos")) {
+            roll = min(({ roll, random(20) + 1 }));
+        }
 
         //Touch of Law makes the roll 11
-        if(who->query_property("touch of law"))
+        if (who->query_property("touch of law")) {
             roll = 11;
+        }
 
         if (roll == 1) { //automatic miss on rolls of a one
             fumble = 1;
@@ -3096,8 +3104,8 @@ void internal_execute_attack(object who)
 
     if (FEATS_D->usable_feat(who, "combat reflexes") &&
         who->is_ok_armour("thief") &&
+        who->query_attack_counter() == 1 &&
         !who->query_casting() &&
-        (int)who->query_property("stabs_available") > 0 &&
         !who->query_paralyzed() && !who->query_tripped()) {
         who->set_property("stabs_available", -1);
         if (victim->query_property("stab_resilience")) {

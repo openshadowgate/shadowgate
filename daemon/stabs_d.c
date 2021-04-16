@@ -64,12 +64,14 @@ varargs int get_stab_damage(object player, object target, object weapon)
     // 1d8 per level for "strong stab" creatures, 1d6 for normal/players
     damage += roll_dice(level, roll);
 
+    if (player->is_class("thief")) {
+        damage *= player->query_guild_level("thief") / 10 + 1;
+    }
 
     // Ghosts and incorporeals can be stabbed only with magic weapons
 
     if (objectp(target)) {
         if (target->query_property("weapon resistance")) {
-
             int enchantment, resistance;
             enchantment = 0;
             resistance = target->query_property("weapon resistance");
@@ -82,9 +84,21 @@ varargs int get_stab_damage(object player, object target, object weapon)
                 damage = 0;
             }
         }
+
+        if ((FEATS_D->usable_feat(target, "mighty resilience") ||
+             FEATS_D->usable_feat(target, "improved dodge") ||
+             FEATS_D->usable_feat(target, "remember the future"))) {
+            damage -= roll_dice(target->query_level(), 6);
+        }
+
+        if (FEATS_D->usable_feat(target, "undead graft")) {
+            damage -= roll_dice(target->query_level() * 3 / 2, 6);
+        }
+
+        damage = damage > 1 ? damage : 0;
     }
 
-    return damage;
+        return damage;
 }
 
 int combat_backstab(object stabber, object victim)
@@ -130,7 +144,6 @@ int combat_backstab(object stabber, object victim)
     }else {
         damtype = "piercing";
     }
-
 
     damage = get_stab_damage(stabber, victim, weapon);
 
@@ -187,13 +200,14 @@ int roll_stab_dcs(object stabber, object vic)
     vic->add_attacker(stabber);
     stabber->add_attacker(vic);
 
-    if ((stabber->query_skill("stealth") + roll_dice(1, 20)) <
-        (vic->query_skill("perception") + i) || !random(20)) {
-        tell_object(stabber, "%^BOLD%^" + vic->QCN + " %^BOLD%^was obviously watching and catches you!");
-        tell_object(vic, "%^BOLD%^You catch " + stabber->QCN + " %^BOLD%^trying to stab you.");
-        tell_room(environment(stabber), "%^BOLD%^" + vic->QCN + " catches " + stabber->QCN + " %^BOLD%^trying to stab " + vic->QO + "!", ({ stabber, vic }));
-        return 0;
+    if (vic->is_flanked_by(stabber, i) || BONUS_D->ac_bonus(vic, vic) < 1 || !random(20)) {
+        return 1;
     }
 
-    return 1;
+    tell_object(stabber, "%^BOLD%^" + vic->QCN + " %^BOLD%^was obviously watching and catches you!");
+    tell_object(vic, "%^BOLD%^You catch " + stabber->QCN + " %^BOLD%^trying to stab you.");
+    tell_room(environment(stabber), "%^BOLD%^" + vic->QCN + " catches " + stabber->QCN + " %^BOLD%^trying to stab " + vic->QO + "!", ({ stabber, vic }));
+
+    return 0;
+
 }

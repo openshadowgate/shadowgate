@@ -9,7 +9,7 @@ void create() {
     feat_category("Evasion");
     feat_name("improved dodge");
     feat_prereq("Thief L8");
-    feat_desc("This feat grants thief knowledge how to avoid backstabs from the thief of the same level.");
+    feat_desc("This feat grants thief knowledge how to avoid backstabs from the thief of the same level. This will grant them damage reduction on all hostile stabs of 1d6 per their level.");
     set_target_required(1);
 }
 

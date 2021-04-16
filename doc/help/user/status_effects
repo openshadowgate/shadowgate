@@ -4,7 +4,10 @@
 This effects adds to chance of your melee attacks to land a hit.
 
 %^CYAN%^Damage bonus%^RESET%^
-This effects adds directly to damage of your melee attacks.
+This effects adds directly to damage of your melee attacks. It can be reduced by your target's damage reduction, but never less than to 1.
+
+%^CYAN%^Armor class%^RESET%^
+Armor class defines your ability to avoid attacks. It is often rolled against attack's bonus to define whether anyone landed a hit. Your armor class is compiled from two sources: base resilience and dodge bonus. Both and either can be denied to you in specific situations.
 
 %^ULINE%^%^CYAN%^FEAR EFFECTS%^RESET%^
 
@@ -38,6 +41,9 @@ This effects adds to the light value of the room, but only for the caster.
 
 %^CYAN%^Temporary blinded%^RESET%^
 Blinded creatures can not see or target other creatures unless it can navigate by other means, like sound or smell. They also loose their dexterity bonus to AC, and take additional penalty of lvl/12 on their armor class.
+
+%^CYAN%^Flanked%^RESET%^
+You're flanking someone when they are unable to percieve your movements in combat. Mechanically it means their perception is less than your stealth.
 
 %^ULINE%^%^CYAN%^TIREDNESS%^RESET%^
 

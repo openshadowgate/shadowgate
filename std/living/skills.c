@@ -21,48 +21,7 @@ private string myclass, * classes, posed, * oldclasses;
 mapping skills, guilds, mlevels;
 nosave mapping skill_bonuses;
 mapping _IRS, combat_specs;
-//int dualClassed;
 string dualClass;
-
-int query_max_skills();
-int query_used_skills();
-int skill_armor_mod(string* myworn);
-void init_skills(string cl);
-void init_guilds();
-void set_skill(string str, int x);
-int skill_exists(string str);
-int query_skill(string str);
-int query_base_skill(string str);
-varargs void set_class(string str, int x);
-void set_old_class(string str);
-string* query_class();
-int query_skill_bonus(string skill);
-string query_old_class();
-int query_guild_level(string str);
-void set_guild_level(string str, int i);
-varargs void set_mlevel(string str, int lev);
-
-//This way we can do TP->is_valid_skill(skillname)
-//to see if something is actually a valid skill or not - Saide
-int is_valid_skill(string str);
-
-int query_highest_level();
-int true_query_highest_level();
-// ******** New(er) Experience Management Functions Here ******
-void __internal_add_exp(int exp);
-// This was the old add_exp and now provides conversion of old characters
-// to newer format (split,spelled out XP between the two classes)
-
-// These three are "shim" functions.
-void add_exp(int exp);
-// void set_general_exp(string type, int x);
-void add_general_exp(string type, int x);
-int general_exp_adjust_perc(int perc);
-int class_exp_adjust_perc(string myclass, int perc);
-
-// new functions for class combat specs. N, 1/14.
-void set_combat_spec(string myclass, string myspec);
-string query_combat_spec(string myclass);
 
 int query_true_guild_level(string str)
 {
@@ -1639,8 +1598,6 @@ string query_combat_spec(string myclass)
     return combat_specs[myclass];
 }
 
-//new Monk Functions. Saide November, 2016
-
 int spend_ki(int amount)
 {
     return USER_D->spend_ki(TO, amount);
@@ -1661,4 +1618,15 @@ string* query_ki_spells()
     return USER_D->query_ki_spells(TO);
 }
 
-//End Monk Functions
+varargs int is_flanked_by(object ob, int mybonus)
+{
+    if (!objectp(ob)) {
+        return 0;
+    }
+
+    if (ob->query_skill("stealth") + roll_dice(1, 20) > TO->query_skill("perception") + mybonus) {
+        return 1;
+    }
+
+    return 0;
+}

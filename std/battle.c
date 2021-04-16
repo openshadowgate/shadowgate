@@ -406,6 +406,10 @@ void heart_beat()
     if (debug) { tell_room(TO,"DEBUG: new round"); }
     if (debug) { tell_room(TO,"DEBUG:"); }
 
+    // Double call is required. See how this function is defined in living/combat.c
+    combatants->set_attack_counter(0);
+    combatants->set_attack_counter(1);
+
     for (i=0;i<20;i++)
     {
         for (k = 0;k<sizeof(round[i]);k++)
@@ -450,21 +454,22 @@ void heart_beat()
                 continue;
             }
 
-            if(round[i][k]->query_property("memorizing"))
-            {
-                tell_object(round[i][k],"You are currently concentrating on a mental action and thus not swinging your weapon!");
-                if (debug)
-                if(debug) tell_room(TO,"DEBUG: Memorizing");
- 		        continue;
-	        }
+            if (round[i][k]->query_property("memorizing")) {
+                tell_object(round[i][k], "You are currently concentrating on a mental action and thus not swinging your weapon!");
+                if (debug) {
+                    if (debug) {
+                        tell_room(TO, "DEBUG: Memorizing");
+                    }
+                }
+                continue;
+            }
 
-	        if(member_array(round[i][k], busy) != -1)
-            {
-                // this message is a little bit too spamy
- 		        //tell_object(round[i][k],"You are currently busy doing something other than focusing on swinging your weapon!");
-                round[i][k]->set_casting(0); // hopefully this will fix the stuck casting bugs
-                if (debug) tell_room(TO,"DEBUG: Casting");
-		        continue;
+            if (member_array(round[i][k], busy) != -1) {
+                round[i][k]->set_casting(0);             // hopefully this will fix the stuck casting bugs
+                if (debug) {
+                    tell_room(TO, "DEBUG: Casting");
+                }
+                continue;
             }
 
             if (debug && stagedebug)
@@ -473,14 +478,21 @@ void heart_beat()
                 tell_room(TO,"DEBUG: Who am i attacking "+file_name(round[i][k]));
             }
 
-            if(!objectp(round[i][k])) continue;
-            round[i][k]->prepare_attack(); // we want to set attacking to 0 in case a bug prevents it -Ares
+            if (!objectp(round[i][k])) {
+                continue;
+            }
+
+            // we want to set attacking to 0 in case a bug prevents it -Ares
+            round[i][k]->prepare_attack();
             round[i][k]->execute_attack();
+            round[i][k]->set_attack_counter(1);
 
         }
 
         round[i] = ({});
     }
+
+
 
     untouchable = ({});
     busy = ({});
