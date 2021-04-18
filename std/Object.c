@@ -2573,6 +2573,11 @@ string query_bonus_display()
         return "";
     }
 
+    if (query_property("enchantment")) {
+        ret += "enchantment " + query_property("enchantment");
+    }
+
+
     if (is_identified(TPQN)) {
         if (sizeof(mybonuses) && mybonuses[mykeys[0]]) {
             if (!pointerp(mybonuses[mykeys[0]])) {
@@ -2598,7 +2603,7 @@ string query_bonus_display()
             if (myhit == "property_special") {
                 ret += query_property("hit");
             } else {
-                ret += (ret ? "," : "") + " unknown power releases on hit";
+                ret += (ret ? "," : "") + " power release on hit";
             }
         }
 
