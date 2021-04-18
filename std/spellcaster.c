@@ -18,7 +18,7 @@ mapping mastered;
 string* masteredspells;
 int* masterable;
 int mypp, mymax, myneeded;
-mapping InnateAbilities;
+nosave mapping InnateAbilities;
 
 int magic_arsenal_feat(int num)
 {
@@ -1169,30 +1169,30 @@ void InitInnate()
                             "spectral hand" : (["type" : "spell", "daily uses" : -1, "level required" : 0 ]),
                         ]);
     }
-    
+
     //Class Innates will be drawn from the class files here.
     classes = this_object()->query_classes();
-    
+
     if(sizeof(classes))
     {
         mapping testclass;
-        
+
         foreach(string cur in classes)
         {
             MyClassFile = DIR_CLASSES + "/" + cur + ".c";
-            
+
             if(!file_exists(MyClassFile))
                 continue;
-            
+
             testclass = MyClassFile->query_innate_spells(this_object());
-            
+
             if(sizeof(testclass))
                 feat_spells += testclass;
         }
     }
-    
+
     /* This code moving to class file
-    
+
     if(TO->is_class("cleric"))
     {
         if(member_array("cold", TO->query_divine_domain()) >= 0)
