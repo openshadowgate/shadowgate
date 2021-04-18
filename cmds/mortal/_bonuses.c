@@ -5,11 +5,11 @@
 #include <daemons.h>
 inherit DAEMON;
 
-int cmd_bonuses(string str) 
+int cmd_bonuses(string str)
 {
     object targ;
     if(!objectp(TP)) return 0;
-    if(avatarp(TP)) 
+    if(avatarp(TP))
     {
         if(!objectp(targ = find_player(str))) targ = TP;
     }
@@ -23,7 +23,7 @@ int cmd_bonuses(string str)
 }
 
 void help() {
-    
+
     write("
 %^CYAN%^NAME%^RESET%^
 
@@ -37,7 +37,7 @@ If the gear is identified it will show you the bonuses from the specific piece o
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-score, stats, enchant, spellcraft
+score, stats, enchant, spellcraft, status effects
 ");
 
     if(avatarp(TP))
