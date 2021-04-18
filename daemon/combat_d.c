@@ -291,13 +291,7 @@ varargs int typed_damage_modification(object attacker, object targ, string limb,
 
     if (objectp(targ) && FEATS_D->usable_feat(targ, "kinetic conversion")) {
         if (member_array(type, PHYSICAL_DAMAGE_TYPES) > -1) {
-            amt = damage / 4;
-            if (amt > 3) {
-                amt = 3;
-            }
-            if (amt < 1) {
-                amt = 1;
-            }
+            amt = roll_dice(1, 4);
             targ->add_mp(amt);
         }
     }
