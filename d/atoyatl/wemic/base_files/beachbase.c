@@ -31,7 +31,7 @@ void create() {
       +" variety of rocks, giving the beach its variegated colours. They are rough on bare"
       +" feet, but it seems to have weathered the beating of the surf for many an age.",
 
-      ({"path", "trail"}) : "There is no path here.",
+      ({"path", "trail"}) : "There is no path into the jungle here, but you can easily walk along the beach.",
    
       ({"jungle", "tree", "trees"}) : "The %^BOLD%^%^GREEN%^j%^RESET%^%^GREEN%^u"
         +"%^BOLD%^ng%^RESET%^%^GREEN%^l%^BOLD%^e%^RESET%^ is a dense tangle of"
@@ -40,10 +40,7 @@ void create() {
         +"%^GREEN%^wth%^RESET%^, unpassable unless a %^ORANGE%^path%^RESET%^ has"
         +" been cut through it.",
 
-      ({"marks", "claw marks", "trees"}) : (:TO, "claw_desc":),
-
-      ({"dock", "quay"}) : "The quay is old, but sturdily built and shows some signs of"
-      +" recent maintenance." 
+      ({"dock", "quay"}) : "You can see an old quay built on the middle of the beach from here." 
     ] ));
   set_listen("default","The rolling waves beat against the beach, and you"
     +" can hear the cries of birds and animals in the distance");
