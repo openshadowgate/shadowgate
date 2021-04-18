@@ -1,4 +1,3 @@
-// body blades
 #include <std.h>
 #include <priest.h>
 #include <magic.h>
@@ -14,6 +13,7 @@ void create()
     set_spell_level(([ "cleric" : 2, "inquisitor" : 2]));
     set_spell_sphere("combat");
     set_syntax("cast CLASS body blades");
+    set_damage_desc("slashing");
     set_description("This spell will cause razor sharp blades to sprout from the caster's skin, protecting them from harm "
                     "and doing damage to anyone who attacks the caster.");
     set_verbal_comp();

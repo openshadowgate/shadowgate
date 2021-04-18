@@ -1,12 +1,3 @@
-/*
-  _bend_reality.c
-
-  Similar to shadow spells like shadow alteration.
-  Lets you cast lower level psychic powers.
-
-  -- Tlaloc -- 4.4.20
-*/
-
 #include <std.h>
 #include <daemons.h>
 

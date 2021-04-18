@@ -14,6 +14,7 @@ void create(){
     set_mystery("metal");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS blade barrier");
+    set_damage_desc("fire");
     set_description("This spell surrounds the caster in a protective whirlwind of spinning, razor sharp blades.  The "
 "blades will follow the caster wherever they go and inflict damage on any enemies that get too close.  The amount of "
 "blades in the air depends on the level of the caster.");

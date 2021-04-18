@@ -1,11 +1,3 @@
-/*
-  _bramble_armor.c
-  
-  Innate spell for Clerics with the Plant Domain.
-  Travelling AOE. Reskin of Sacred Nimbus.
-  
-  -- Tlaloc --
-*/
 
 #include <std.h>
 #include <spell.h>
@@ -19,16 +11,16 @@ int flag;
 void create()
 {
     ::create();
-    
+
     set_spell_name("bramble armor");
     set_spell_level( ([ "innate" : 5 ]) );
     set_domains("plant");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast innate bramble armor");
     set_damage_desc("Piercing damage to attackers");
+    set_damage_desc("piercing");
     set_description("Clerics with the plant domain learn, by the grace of their deity, how to cause a host of thorns to burst from their skin. This spell is a travelling AOE that does piercing damage. This spell requires one Divine Grace point to use.");
     traveling_aoe_spell(1);
-    set_immunities( ({ "piercing" }) );
 }
 
 string query_cast_string()

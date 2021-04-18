@@ -11,9 +11,10 @@ void create(){
     set_domains("mentalism");
     set_discipline("kineticist");
     set_syntax("cast CLASS bolt of force on TARGET");
+    set_damage_desc("force");
     set_description("This spell produces a bolt of pure force in the form of a wave of mental energy that is projected in "
 "a cone before the caster.  Any enemy caught within the blast risks taking damage from the powerful wave of mental "
-"energy.");
+"energy. A successful save will reduce the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

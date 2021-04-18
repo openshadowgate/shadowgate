@@ -13,6 +13,7 @@ void create()
     set_mystery("nature");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS barkskin");
+    set_damage_desc("damage resistance feat");
     set_description("A ranger can attempt to take on part of a tree's nature, their skin hardening a little.  This spell "
         "does not stack with the damage resistance feat.");
     set_verbal_comp();

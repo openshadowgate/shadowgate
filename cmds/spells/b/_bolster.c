@@ -1,4 +1,3 @@
-// Bless
 #include <std.h>
 #include <magic.h>
 
@@ -16,6 +15,7 @@ void create()
     set_spell_level((["paladin" : 1]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS bolster on TARGET");
+    set_damage_desc("1 to attack and damage bonus");
     set_description("This spell will bolster the target, giving them a slightly better chance to hit in combat as well as "
                     "allowing them to do a small amount more damage.");
     set_verbal_comp();
@@ -26,7 +26,6 @@ void create()
 
 int preSpell()
 {
-//    if(!ALIGN_D->is_good(caster)) {
     if (!target) {
         target = caster;
     }

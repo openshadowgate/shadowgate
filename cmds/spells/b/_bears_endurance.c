@@ -11,6 +11,7 @@ void create() {
     ::create();
     set_spell_name("bears endurance");
     set_spell_level(([ "ranger" : 2, "cleric" : 2,"druid" : 2, "assassin" : 2, "mage" : 2, "magus" : 2 ]));
+    set_damage_desc("+2 to constitution");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS bears endurance on TARGET");
     set_description("This spell allows the caster to infuse their target with the endurance of a bear, granting them improved vitality and stamina.  This spell doesn't stack with similarly powerful spells of enhancement.");
@@ -64,7 +65,7 @@ void spell_effect(int prof) {
 }
 
 void dest_effect(){
- 
+
     if(objectp(target) && mydiff) {
       if((string)TO->query_spell_type() == "potion") tell_object(target,"%^RESET%^%^RED%^The potion's enhancement fades from you.%^RESET%^");
       else tell_object(target,"%^RESET%^%^RED%^The spell's enhancement fades from you.%^RESET%^");

@@ -1,4 +1,3 @@
-// Ball Lightning
 #include <spell.h>
 
 inherit SPELL;
@@ -14,6 +13,7 @@ void create()
     set_spell_level(([ "mage" : 5, "druid":4, "magus" : 4, "nightblade":4]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS ball lightning on TARGET");
+    set_damage_desc("lightning, versatile arcanist");
     set_description("This spell allows for a mage to conjure forth at least three balls of lightning, which they can then "
         "hurl at a target. As the mage's power grows, she will find it easier to summon a greater number of lightning balls, "
         "increasing the damage potential of the spell. A versatile arcanist can manipulate the base element of this spell.");

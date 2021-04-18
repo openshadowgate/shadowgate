@@ -1,11 +1,3 @@
-/*
-  _broker.c
-
-  Psion gained clevel / 4 to influence
-
-  -- Tlaloc -- 3.28.20
-*/
-
 #include <std.h>
 #include <magic.h>
 
@@ -21,7 +13,7 @@ void create()
     set_spell_level( ([ "psion" : 1, ]) );
     set_spell_sphere("divination");
     set_syntax("cast CLASS broker");
-    set_damage_desc("Clevel / 4 to influence skill");
+    set_damage_desc("clevel / 4 to influence");
     set_description("By meditating on your character and mannerisms, you can become more influential towards others.");
     set_verbal_comp();
     set_arg_needed();

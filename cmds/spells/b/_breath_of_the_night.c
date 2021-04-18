@@ -14,6 +14,7 @@ void create() {
     set_spell_level(([ "warlock" : 1 ]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS breath of the night");
+    set_damage_desc("blindness to everyone");
     set_description("This invocation draws mosture from the air to form a dense mist, blanketing the "
 "nearby area and making it impossible for anyone, including the warlock, to see more than a few inches "
 "ahead. The thick mist will only linger for a brief time before dissipating, and can only be cast out "
@@ -38,7 +39,7 @@ void spell_effect(int prof) {
     tell_room(place,"%^BLUE%^"+caster->QCN+" spreads "+caster->QP+" arms, as if in a silent entreaty.%^RESET%^",caster);
 
     duration = (ROUND_LENGTH + (ROUND_LENGTH * ((clevel+9)/10))) + time();
-    
+
     cloud = new(OBJECT);
     cloud->set_name("a dark and ominous mist");
     cloud->set_short("%^CYAN%^a dark and ominous mist");

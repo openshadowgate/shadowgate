@@ -1,7 +1,3 @@
-// Invisibility - Coded by Vashkar@shadowgate
-//Adapted by ~Circe~ for Befuddle, a new trickery
-//domain spell with the rebalancing of domains 4/26/08
-
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>

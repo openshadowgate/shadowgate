@@ -10,6 +10,7 @@ void create()
     set_spell_level(([ "psywarrior" : 2, "psion" : 3 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS body adjustment");
+    set_damage_desc("untyped heal");
     set_description("When using this power, the psionic character takes "
         "control of his own healing process and makes minor adjustments "
         "throughout his body, restoring hit points. This power has the "

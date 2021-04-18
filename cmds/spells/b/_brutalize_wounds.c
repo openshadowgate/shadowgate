@@ -1,11 +1,3 @@
-/*
-  _brutalize_wounds.c
-
-  From PF SRD. Makes target vulnerable to physical attacks.
-
-  -- Tlaloc --
-*/
-
 #include <std.h>
 #include <magic.h>
 
@@ -19,7 +11,7 @@ void create()
     set_spell_level( ([ "psywarrior" : 6 ]) );
     set_spell_sphere("combat");
     set_syntax("cast CLASS brutalize wounds on TARGET");
-    set_damage_desc("Target takes additional physical damage.");
+    set_damage_desc("physical");
     set_description("You invade the target's mind and temporarily reduce its ability to " +
     "ward off attacks. If the target fails its saving throw, it takes an additional 2 + guild level / 20 "+
     "damage from all physical attacks. If it succeeds its save, it takes an additional 1 damage "+

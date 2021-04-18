@@ -16,7 +16,7 @@ void create()
     set_spell_level(([ "inquisitor" : 1]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS blight on TARGET");
-    set_damage_desc("clevel / 24 + 1 to damage and attack bonus, but no more than 2");
+    set_damage_desc("clevel / 20 + 1 to damage and attack bonus, but no more than 2");
     set_description("This spell will empower the target with dark energy, giving them a slightly better chance to hit in "
 "combat as well as allowing them to do a small amount more damage.");
     set_verbal_comp();
@@ -52,8 +52,8 @@ void spell_effect(int prof)
 {
     int duration;
     duration = (ROUND_LENGTH * 20) * clevel;
-    bonus = clevel/24+1;
-    bonus = bonus>2?2:bonus;
+    bonus = clevel / 20 + 1;
+    bonus = bonus > 2?2:bonus;
 	if(target == caster)
     {
         tell_room(place,"%^BOLD%^%^RED%^A profane aura surrounds "+caster->QCN+""+

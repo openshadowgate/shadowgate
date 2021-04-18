@@ -11,6 +11,7 @@ void create() {
     set_spell_level(([ "warlock" : 1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS beguiling influence");
+    set_damage_desc("+2 to charisma");
     set_description("This invocation allows the warlock to channel traces of their power into their own "
 "body, enhancing their natural force of personality.");
     set_verbal_comp();

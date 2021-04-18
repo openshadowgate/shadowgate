@@ -1,5 +1,3 @@
-//"breath weapon" for the psion that does acid damage and
-//continues to burn.  ~Circe~ 7/25/05
 #include <spell.h>
 #include <daemons.h>
 #include <magic.h>
@@ -15,6 +13,7 @@ void create() {
     set_spell_level(([ "psion" : 6, "psywarrior" : 6 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS breath of the black dragon on TARGET");
+    set_damage_desc("acid");
     set_description("This power allows the psion an acidic breath weapon, which can be directed once at a target and "
 "those surrounding him.  Thereafter, those hit by the acid continue to burn until the acid has run its course.");
     set_verbal_comp();

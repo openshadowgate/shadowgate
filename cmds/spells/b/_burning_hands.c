@@ -1,9 +1,3 @@
-//      Burning Hands
-//      Thorn@Shadowgate
-//      10/16/94
-//      Totally modified and updated by Vashkar
-//      11/1/95
-
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -22,6 +16,7 @@ void create() {
     set_domains("fire");
     set_spell_sphere("alteration");
     set_monk_way("way of the elements");
+    set_damage_desc("fire, versatile arcanist");
     set_syntax("cast CLASS burning hands on TARGET");
     set_description("This spell begins by the caster fanning out his hands while chanting the spell.  Flames will flare "
 "out and do a small amount of damage to the target and those near him. A versatile arcanist can manipulate the base element "

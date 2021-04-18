@@ -17,6 +17,7 @@ void create()
     set_spell_level(([ "mage" : 4, "warlock" : 3, "magus" : 4 , "nightblade":4]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS black tentacles");
+    set_damage_desc("trips hostiles");
     set_description("This spell summons up a mass of writhing black " +
                     "tentacles from the earth at your feet. These will " +
                     "ensnare anything nearby to slow their escape, and attempt to " +
@@ -24,10 +25,6 @@ void create()
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(3);
-    // school specific mage spell
-    set_components(([
-                        "mage" : ([ "carbon" : 1, ]),
-                        ]));
     set_feats_required(([ "warlock" : "tome of ancient secrets"]));
 }
 

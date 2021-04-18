@@ -1,4 +1,3 @@
-//removed mention of non-specialized mages and sorcerers being unable to cast the spell ~Circe~ 8/2/19
 #include <std.h>
 #include <spell.h>
 inherit SPELL;

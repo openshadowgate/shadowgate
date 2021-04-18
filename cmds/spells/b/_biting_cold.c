@@ -16,6 +16,7 @@ void create() {
     set_spell_level(([ "psywarrior" : 5, "psion" : 5 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS biting cold on TARGET");
+    set_damage_desc("cold");
     set_description("Upon manifesting this power, the psywarrior manipulates "
        "the elemental planes, summoning cold to himself. Concentrating the "
        "icy power in his core, he lashes out, freezing his target. The victim "
@@ -145,12 +146,6 @@ void zap_again()
    counter--;
    damage = roll_dice(mylevel,4);
    if(do_save(target,0)) {
-/*      if(evade_splash(target)){
-         tell_object(target,"%^RESET%^%^CYAN%^Your reflexes are so fast, you avoid the incoming arctic blast!%^RESET%^");
-         tell_room(place,"%^RESET%^%^CYAN%^"+target->QCN+" dodges quickly, avoiding the incoming arctic blast!%^RESET%^",target);
-         return;
-      }
-*/
       damage = damage/2;
    }
    tell_object(target,"%^BOLD%^%^BLUE%^The relentless %^RESET%^%^BLUE%^a%^BOLD%^r%^RESET%^"

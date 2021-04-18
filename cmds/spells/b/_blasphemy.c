@@ -1,7 +1,3 @@
-//Updated by ~Circe~ 5/12/08 after conversations with Ares
-// Rebalanced (and holy word) as it does more damage and effects to every opponent, than higher level spells even do to single foes.
-// Now single target, retains damage boost on aligns and various effects; removed half-dmg on save so it wasn't too nerfed.
-// Lowered blindness duration, buffed stun duration. N, 5/11.
 #include <std.h>
 #include <daemons.h>
 #include <spell.h>
@@ -20,6 +16,7 @@ void create(){
     set_spell_sphere("enchantment_charm");
     set_spell_domain("evil");
     set_syntax("cast CLASS blasphemy");
+    set_damage_desc("divine");
     set_description("This spell channels unholy magic directly to the caster and releases it at a target in the form of a silent "
 "explosion.  Those of good hearts have the additional chance to be blinded and/or stunned, while those of neutral bent may be "
 "stunned briefly.");

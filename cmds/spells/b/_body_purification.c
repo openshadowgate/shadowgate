@@ -1,7 +1,3 @@
-//Body Purification for psywarriors
-//removes status effects but does not heal hit points
-//~Circe~ 9/29/15
-
 #include <priest.h>
 inherit SPELL;
 
@@ -11,6 +7,7 @@ void create() {
     set_spell_level(([ "psywarrior" : 4, "psion" : 3 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS body purification");
+    set_damage_desc("removes blindness, poisons, intoxication, adds stamina");
     set_description("This power will allow the psionic character to remove "
        "certain ailments from her body. While it does not restore lost hit "
        "points, the power will cure blindness, remove poison and intoxication, "
@@ -22,7 +19,7 @@ void create() {
 
 void spell_effect(int prof) {
    int tmp;
-   
+
    spell_successful();
    if(interactive(caster)) {
       tell_object(caster,"%^RESET%^%^CYAN%^You touch your fingers to your "

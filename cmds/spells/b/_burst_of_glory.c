@@ -14,7 +14,7 @@ void create()
     set_domains(({"good"}));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS burst of glory");
-    set_damage_desc("clevel/22+1 to attack, damage bonus, clevel to hp bonus on allies");
+    set_damage_desc("clevel / 20 +1 to attack, damage bonus, clevel to hp bonus on allies");
     set_description("Allies in the place of the time of casting become blessed. This spell won't stack with bless type spells.");
     set_verbal_comp();
     set_somatic_comp();
@@ -33,7 +33,7 @@ int spell_effect()
 
     duration = ROUND_LENGTH * (clevel * 6);
 
-    bonus = clevel / 22 + 1;
+    bonus = clevel / 20 + 1;
 
     allies = ({});
     allies = ob_party(caster) + (caster->query_followers() - caster->query_attackers()) + ({ caster });
