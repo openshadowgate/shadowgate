@@ -82,7 +82,10 @@ varargs int extra_hit_calcs(object attacker, object victim, object weapon, strin
 
     env = environment(attacker);
 
-    if (!ShieldMissChance || MissChance > ShieldMissChance) {
+    if ((!ShieldMissChance || MissChance > ShieldMissChance)) {
+        if (victim->query_property("amorpha") && attacker->true_seeing()) {
+            return 1;
+        }
         if (MissChance >= roll_dice(1, 100)) {
             tell_object(victim, attacker->QCN + "%^BOLD%^%^WHITE%^ cannot see you and misses!");
             tell_object(attacker, "%^BOLD%^%^WHITE%^You cannot see " + victim->QCN + " and miss " + victim->QO + "!");
