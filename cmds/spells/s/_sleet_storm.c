@@ -74,11 +74,13 @@ void execute_attack()
           damage_targ(targ,limb,sdamage/2,"cold");
         }
         else {
-          tell_object(targ,"%^BOLD%^%^CYAN%^Unable to hold your balance, you slip on the ice!%^RESET%^");
-          tell_room(place,"%^CYAN%^%^BOLD%^Unable to hold balance, "+targ->QCN+" slips on the ice!",({targ}));
-          targ->set_temporary_blinded(1);
-          targ->set_tripped(1,"%^BOLD%^You are struggling to regain your footing!%^RESET%^",4);
-          damage_targ(targ,limb,sdamage,"cold");
+            if (targ->set_tripped(1, "%^BOLD%^You are struggling to regain your footing!%^RESET%^", 4)) {
+                tell_object(targ, "%^BOLD%^%^CYAN%^Unable to hold your balance, you slip on the ice!%^RESET%^");
+                tell_room(place, "%^CYAN%^%^BOLD%^Unable to hold balance, " + targ->QCN + " slips on the ice!", ({ targ }));
+
+                targ->set_temporary_blinded(1);
+                damage_targ(targ, limb, sdamage, "cold");
+            }
         }
     }
 

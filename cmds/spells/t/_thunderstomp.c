@@ -60,12 +60,11 @@ void spell_effect(int prof)
           tell_room(environment(mytargs[i]),"%^RESET%^%^CYAN%^"+mytargs[i]->QCN+" is hit by flying debris!%^RESET%^",mytargs[i]);
           damage_targ(mytargs[i],"torso",sdamage,"untyped");
        }
-       if(!do_save(mytargs[i])){
+       if(!do_save(mytargs[i]) && mytargs[i]->set_tripped(roll_dice(1,2),"%^BOLD%^You are struggling to regain your footing!%^RESET%^",4)){
           if(!objectp(mytargs[i])) continue;
           if(!present(mytargs[i],environment(caster))) continue;
           tell_object(mytargs[i],"%^BOLD%^%^CYAN%^You lose your footing and fall to the ground!%^RESET%^");
           tell_room(environment(mytargs[i]),"%^BOLD%^%^CYAN%^"+mytargs[i]->QCN+" falls to the ground!%^RESET%^",mytargs[i]);
-          mytargs[i]->set_tripped(roll_dice(1,2),"%^BOLD%^You are struggling to regain your footing!%^RESET%^",4);
         }
    }
     spell_successful();

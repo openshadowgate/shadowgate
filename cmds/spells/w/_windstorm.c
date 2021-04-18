@@ -127,16 +127,14 @@ int storm_effects(object obj)
         damage_targ(obj,obj->return_target_limb(),damage,"bludgeoning");
     }
 
-    if(!do_save(obj,4))
-    {
-        tell_object(obj,"%^BOLD%^%^WHITE%^The wind throws you from your feet, swirling your "
-            "body up into the air before you hit the ground with a thud!");
-        tell_room(room,"%^BOLD%^%^WHITE%^"+obj->QCN+" is suddenly caught by the force of the "
-            "wind and sent spinning into the air before "+obj->QS+" crashes "
-            "back to the ground with a bone jarring thud!");
-        obj->set_tripped(roll_dice(1,2),"%^BOLD%^You are struggling to get back to "
-            "your feet!",2);
+    if (!do_save(obj, 4) && obj->set_tripped(roll_dice(1, 2), "%^BOLD%^You are struggling to get back to your feet!", 2)) {
+        tell_object(obj, "%^BOLD%^%^WHITE%^The wind throws you from your feet, swirling your "
+                    "body up into the air before you hit the ground with a thud!");
+        tell_room(room, "%^BOLD%^%^WHITE%^" + obj->QCN + " is suddenly caught by the force of the "
+                  "wind and sent spinning into the air before " + obj->QS + " crashes "
+                  "back to the ground with a bone jarring thud!");
     }
+
     return 1;
 }
 

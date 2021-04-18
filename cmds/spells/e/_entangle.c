@@ -63,11 +63,10 @@ void spell_effect(int prof)
         if (!objectp(inven[i])) {
             continue;
         }
-        if (random((int)inven[i]->do_save("reflex"))) {
+        if (random((int)inven[i]->do_save("reflex")) && inven[i]->set_tripped((clevel / 2 + roll_dice(1, 4)), inven[i])) {
             tell_object(inven[i], "%^BOLD%^%^GREEN%^The vegetation comes alive," +
                         " swarming all over you and making it almost impossible to move!");
             inven[i]->set_property("added short", ({ "%^GREEN%^( entangled )%^RESET%^%^CYAN%^" }));
-            inven[i]->set_tripped((clevel / 2 + roll_dice(1, 4)), inven[i]);
             continue;
         }
         tell_object(inven[i], "%^GREEN%^The vegetation comes alive, making it very" +

@@ -37,7 +37,7 @@ spell_effect(int prof)
     tell_object(caster, "%^YELLOW%^You jab your finger at " + target->QCN + " and strands of sticky web shoot out towards " + target->QO + "!");
     tell_object(target, "%^YELLOW%^" + caster->QCN + " jabs " + caster->QP + " finger at you, shooting out strands of sticky web!");
     tell_room(place, "%^YELLOW%^" + caster->QCN + " jabs " + caster->QP + " finger at " + target->QCN + ", shooting out strands of sticky web!", ({ caster, target }));
-    if (do_save(target, -2)) {
+    if ((do_save(target, -2) || !target->set_tripped(roll_dice(3, 4)))) {
         tell_object(caster, "%^BOLD%^%^RED%^" + target->QCN + " manages to dodge your mass of webs!");
         tell_object(target, "%^BOLD%^%^RED%^You manage to dodge the mass of webs!");
         tell_room(environment(caster), "%^BOLD%^%^RED%^" + target->QCN + " manages to dodge the mass of webs!", ({ caster, target }));
@@ -47,7 +47,6 @@ spell_effect(int prof)
         tell_object(caster, "%^BOLD%^%^RED%^Your mass of webs " + strength + " " + target->QCN + " trapping " + target->QP + " legs!");
         tell_object(target, "%^BOLD%^%^RED%^" + caster->QCN + "'s mass of webs " + strength + " you, trapping your legs!");
         tell_room(place, "%^BOLD%^%^RED%^" + caster->QCN + "'s mass of webs " + strength + " " + target->QCN + " trapping " + target->QP + " legs!", ({ caster, target }));
-        target->set_tripped(roll_dice(3, 4));
     }
     spell_successful();
 }

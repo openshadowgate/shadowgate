@@ -43,11 +43,10 @@ void spell_effect(int prof)
         }
 
         dmg = sdamage;
-        if (!do_save(attackers[i], -2)) {
-            attackers[i]->set_tripped(roll_dice(1, 4));
+        if (!do_save(attackers[i], -2) && attackers[i]->set_tripped(roll_dice(1, 4))) {
             tell_object(attackers[i], "%^BOLD%^%^MAGENTA%^You slip and trip in the mud!%^RESET%^");
             tell_room(attackers[i], "%^BOLD%^%^MAGENTA%^" + attackers[i]->QCN + " slips and trips in the mud.%^RESET%^", attackers[i]);
-        }else  {
+        }else {
             tell_room("%^ORANGE%^" + attackers[i]->QCN + " jumps off mud puddle just in time!");
         }
     }

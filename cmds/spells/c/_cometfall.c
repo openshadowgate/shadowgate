@@ -44,23 +44,26 @@ void spell_effect(int prof){
        "fiery %^YELLOW%^comets appear in the air over your head!%^RESET%^");
     tell_room(place,"%^YELLOW%^At "+caster->QCN+"'s command, dozens "+
        "of %^RED%^fiery%^YELLOW%^ comets appear in the air!%^RESET%^",caster);
-    for(i=0;i<sizeof(attackers);i++){
-        if(!objectp(attackers[i])) { continue; }
-        tell_object(attackers[i],"%^BOLD%^%^RED%^The burning "+
-           "%^RESET%^%^ORANGE%^rock %^BOLD%^%^RED%^of the comets "+
-           "tears into your skin!%^RESET%^");
-        damage = sdamage;
-        if(do_save(attackers[i],0)) { damage = damage / 2; }
-        //if(SAVING_D->saving_throw(attackers[i],"spell",0)) { damage = damage/2; }
-        if(!do_save(attackers[i],0)) {
-        //if(!SAVING_D->saving_throw(attackers[i],"petrification_polymorph",0)){
-            tell_object(attackers[i],"%^BOLD%^The molten rock tears "+
-               "into your flesh and knocks you to the ground!%^RESET%^");
-            attackers[i]->set_tripped(roll_dice(1,3),"%^BOLD%^You are unable to stand!");
+
+    for (i = 0; i < sizeof(attackers); i++) {
+        if (!objectp(attackers[i])) {
+            continue;
         }
-        spell_kill(attackers[i],caster);
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),damage/2,"bludgeoning"); // half bludgeoning
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),damage/2,"fire"); // half fire
+        tell_object(attackers[i], "%^BOLD%^%^RED%^The burning " +
+                    "%^RESET%^%^ORANGE%^rock %^BOLD%^%^RED%^of the comets " +
+                    "tears into your skin!%^RESET%^");
+        damage = sdamage;
+        if (do_save(attackers[i], 0)) {
+            damage = damage / 2;
+        }
+        if (!do_save(attackers[i], 0) && attackers[i]->set_tripped(roll_dice(1, 3), "%^BOLD%^You are unable to stand!")) {
+            tell_object(attackers[i], "%^BOLD%^The molten rock tears " +
+                        "into your flesh and knocks you to the ground!%^RESET%^");
+            ;
+        }
+        spell_kill(attackers[i], caster);
+        damage_targ(attackers[i], attackers[i]->return_target_limb(), damage / 2, "bludgeoning"); // half bludgeoning
+        damage_targ(attackers[i], attackers[i]->return_target_limb(), damage / 2, "fire"); // half fire
     }
     spell_successful();
     dest_effect();

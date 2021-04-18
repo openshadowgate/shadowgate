@@ -46,14 +46,14 @@ void spell_effect(int prof)
             continue;
         }
 
-        if (do_save(attackers[i], 0)) {
+        if (do_save(attackers[i], 0) && !attackers[i]->set_tripped(roll_dice(1, 4))) {
             tell_object(attackers[i],"%^BOLD%^%^WHITE%^You manage to remain standing on the ice!");
             tell_room(place, "%^BOLD%^%^WHITE%^" + attackers[i]->QCN + " manages to remain standing on the ice!");
             continue;
         }
+
         tell_object(attackers[i],"%^BOLD%^%^CYAN%^You slips on the ice, unable to stand!");
         tell_room(place, "%^BOLD%^%^CYAN%^" + attackers[i]->QCN + " slips on the ice, and falls down!");
-        attackers[i]->set_tripped(roll_dice(1, 4));
     }
 
     spell_successful();

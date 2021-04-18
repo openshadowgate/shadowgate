@@ -1,8 +1,8 @@
 /*
   _psychic_crush.c
-  
+
   Similar to dictum. Causes status effects or kills.
-  
+
   -- Tlaloc -- 4.7.20
 */
 
@@ -36,36 +36,34 @@ void spell_effect()
     int ldiff;
 
     ldiff=(clevel-target->query_level());
-    
+
     tell_object(caster, "%^BOLD%^CYAN%^You focus your psychic energies on crushing "+target->QCN+"'s mind!");
     tell_object(target, "%^BOLD%^You suddenly feel a vicious attack upon your psyche!");
 
-    if(!do_save(target,4))
-    {
-        tell_room(place,"%^BOLD%^"+target->QCN+" is knocked down by the mental assault!",target);
-        tell_object(target,"%^BOLD%^You are assaulted by a brutal mental assault, knocking you off your feet!");
-        target->set_tripped(roll_dice(1,4),"You are trying to regain your footing.");
+    if (!do_save(target, 4)) {
+        if (target->set_tripped(roll_dice(1, 4), "You are trying to regain your footing.")) {
+            tell_room(place, "%^BOLD%^" + target->QCN + " is knocked down by the mental assault!", target);
+            tell_object(target, "%^BOLD%^You are assaulted by a brutal mental assault, knocking you off your feet!");
+        }
     }
 
-    if(ldiff>4)
-    {
+    if (ldiff > 4) {
         int duration;
-        tell_room(place,"%^BOLD%^"+target->QCN+" is paralyzed by the mental assault!",target);
-        tell_object(target,"%^BOLD%^You feel your body freeze as the mental assault thrashes your mind!");
-        duration = roll_dice(2,4);
-        if(!do_save(target,4))
-            duration = 8*roll_dice(1,4);
-        target->set_paralyzed(duration,"%^BOLD%^You are paralyzed by the mental assault!");
+        tell_room(place, "%^BOLD%^" + target->QCN + " is paralyzed by the mental assault!", target);
+        tell_object(target, "%^BOLD%^You feel your body freeze as the mental assault thrashes your mind!");
+        duration = roll_dice(2, 4);
+        if (!do_save(target, 4)) {
+            duration = 8 * roll_dice(1, 4);
+        }
+        target->set_paralyzed(duration, "%^BOLD%^You are paralyzed by the mental assault!");
     }
 
-    if(ldiff>9)
-    {
-        if(!(do_save(target,4)||
-             target->query_property("no death")))
-        {
-            tell_room(place,sprintf("The psychic assault crushes %s's mind completely and %s drops dead!",target->QCN,target->query_subjective()));
-            tell_object(target,"You die as your mind is crushed!");
-            damage_targ(target,target->return_target_limb(),target->query_max_hp()*2,"mental");
+    if (ldiff > 9) {
+        if (!(do_save(target, 4) ||
+              target->query_property("no death"))) {
+            tell_room(place, sprintf("The psychic assault crushes %s's mind completely and %s drops dead!", target->QCN, target->query_subjective()));
+            tell_object(target, "You die as your mind is crushed!");
+            damage_targ(target, target->return_target_limb(), target->query_max_hp() * 2, "mental");
         }
     }
 

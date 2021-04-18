@@ -30,7 +30,7 @@ spell_effect(int prof)
     tell_object(caster, "%^GREEN%^You jab your finger at " + target->QCN + " and strands of sticky grease shoot out towards " + target->QO + "!");
     tell_object(target, "%^GREEN%^" + caster->QCN + " jabs " + caster->QP + " finger at you, shooting out jet of sticky grease!");
     tell_room(place, "%^GREEN%^" + caster->QCN + " jabs " + caster->QP + " finger at " + target->QCN + ", shooting out jet of sticky grease!", ({ caster, target }));
-    if (do_save(target, -2)) {
+    if (do_save(target, -2) ) {
         tell_object(caster, "%^BOLD%^%^GREEN%^" + target->QCN + " manages to dodge your jet of grease!");
         tell_object(target, "%^BOLD%^%^GREEN%^You manage to dodge the grease!");
         tell_room(environment(caster), "%^BOLD%^%^GREEN%^" + target->QCN + " manages to dodge the grease!", ({ caster, target }));
@@ -38,7 +38,8 @@ spell_effect(int prof)
         return;
     } else {
         spell_successful();
-        tell_room(place, "%^GREEN%^" + target->QCN + " slips on the grease and falls down!", ({ caster, target }));
-        target->set_tripped(roll_dice(1, 4));
+        target->set_tripped(roll_dice(1, 4)) &&
+            tell_room(place, "%^GREEN%^" + target->QCN + " slips on the grease and falls down!", ({ caster, target }));
+
     }
 }

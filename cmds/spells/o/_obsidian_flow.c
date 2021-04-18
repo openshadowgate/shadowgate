@@ -45,10 +45,8 @@ void spell_effect(int prof)
             continue;
 
         dmg = sdamage;
-        if(!do_save(attackers[i],-2))
+        if(!do_save(attackers[i],-2) && attackers[i]->set_tripped(roll_dice(1,4)))
         {
-
-            attackers[i]->set_tripped(roll_dice(1,4));
             tell_object(attackers[i],"%^BOLD%^%^MAGENTA%^You slip and trip on obsidian as it turns solid.%^RESET%^");
             tell_room(attackers[i],"%^BOLD%^%^MAGENTA%^"+attackers[i]->QCN+" slips and trip on obsidian as it turns solid.%^RESET%^",attackers[i]);
             tell_object(attackers[i],"%^BOLD%^Obsidian is so hot it burns you!%^RESET%^");

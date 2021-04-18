@@ -1,14 +1,3 @@
-// Hideous Laughter
-/* Completely re-hashed the spell, to make its duration more reliable and
-  avoid the random infinite_length bug that seemed to be caused by relying
-  on set_tripped for the duration.
-  New function set_length added, and length variable changed to global, to
-  keep it constant between different functions.
-  All changed noted where they are made.
-  Old version saved as _hideous_laughter.lujke
-
-  Lujke September 25 2005
-*/
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>

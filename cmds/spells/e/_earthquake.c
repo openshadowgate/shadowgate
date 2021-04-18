@@ -138,14 +138,13 @@ int storm_effects(object obj)
         damage_targ(obj,obj->return_target_limb(),sdamage,"bludgeoning");
     }
 
-    if(!do_save(obj,4))
+    if(!(do_save(obj,4) && obj->set_tripped(roll_dice(1,2),"%^BOLD%^You are struggling to get back to your feet!%^RESET%^",2)))
     {
         tell_object(obj,"%^ORANGE%^The shifting floor tosses you about, "+
             "leaving you helpless on the ground!%^RESET%^");
         tell_room(room,"%^ORANGE%^"+obj->QCN+" is tossed about by the "+
             "earthquake and ends up helpless on the ground!",obj);
-        obj->set_tripped(roll_dice(1,2),"%^BOLD%^You are struggling "+
-            "to get back to your feet!%^RESET%^",2);
+
     }
     return 1;
 }

@@ -65,16 +65,17 @@ void spell_effect(int prof){
         tell_room(place,"%^RESET%^"+foe->QCN+" starts to float uncontrollably!",({foe}));
     }
 
-    if(indoors)
+    if (indoors) {
         foreach(foe in newfoes)
         {
             define_base_damage(0);
-            tell_object(foe,"%^RESET%^%^WHITE%^You smash into the ceiling!%^RESET%^");
-            tell_room(place,"%^RESET%^"+foe->QCN+" smashes into the ceiling!%^RESET%^");
-            damage_targ(foe,"torso",sdamage,"untyped");
+            tell_object(foe, "%^RESET%^%^WHITE%^You smash into the ceiling!%^RESET%^");
+            tell_room(place, "%^RESET%^" + foe->QCN + " smashes into the ceiling!%^RESET%^");
+            damage_targ(foe, "torso", sdamage, "untyped");
         }
-    else
-        newfoes->set_tripped(duration,"%^BOLD%^You are floating uncontrollably in the air!%^RESET%^",4);
+    }else {
+        newfoes->set_tripped(duration, "%^BOLD%^You are floating uncontrollably in the air!%^RESET%^", 4);
+    }
 
     spell_duration = (duration - 1) * ROUND_LENGTH;
     set_end_time();

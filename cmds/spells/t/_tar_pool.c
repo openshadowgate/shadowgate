@@ -46,10 +46,8 @@ void spell_effect(int prof)
         dmg = sdamage;
         tell_object(attackers[i],"%^BOLD%^Heat raising of the tar burns you!%^RESET%^");
         damage_targ(attackers[i],attackers[i]->return_target_limb(),dmg,"fire");
-        if(!do_save(attackers[i],0))
+        if(!do_save(attackers[i],0) && attackers[i]->set_tripped(roll_dice(1,4)))
         {
-
-            attackers[i]->set_tripped(roll_dice(1,4));
             tell_object(attackers[i],"%^BOLD%^%^BLACK%^You are stuck in the tar.%^RESET%^");
             tell_room(attackers[i],"%^BOLD%^%^BLACK%^"+attackers[i]->QCN+" is stuck in the tar.%^RESET%^",attackers[i]);
         }

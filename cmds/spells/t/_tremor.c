@@ -47,19 +47,18 @@ void spell_effect(int prof){
         for(i=0;i<sizeof(inven);i++){
             if(!objectp(inven[i])) { continue; }
             define_base_damage(0);
-            if(!do_save(inven[i])){
-                tell_object(inven[i],"%^BOLD%^You are thrown to the "+
-                   "ground by the force of the tremor!");
-                tell_room(place,"%^BOLD%^"+inven[i]->QCN+" is thrown "+
-                   "to the ground by the force of the quake!",inven[i]);
+            if (!do_save(inven[i]) && inven[i]->set_tripped(roll_dice(1, 4) + 1, "You are struggling to stand!")) {
+                tell_object(inven[i], "%^BOLD%^You are thrown to the " +
+                            "ground by the force of the tremor!");
+                tell_room(place, "%^BOLD%^" + inven[i]->QCN + " is thrown " +
+                          "to the ground by the force of the quake!", inven[i]);
                 damage = sdamage;
-                inven[i]->set_tripped(roll_dice(1,4)+1,"You are struggling to stand!");
-            }else{
-                tell_object(inven[i],"%^ORANGE%^You stagger from the force of the tremor but "
-                    "manage to maintain your footing!");
-                tell_room(place,"%^ORANGE%^"+inven[i]->QCN+" staggers from the force of the "
-                    "tremor but manages to maintain "+inven[i]->QP+" footing!");
-                damage = sdamage/2;
+            }else {
+                tell_object(inven[i], "%^ORANGE%^You stagger from the force of the tremor but "
+                            "manage to maintain your footing!");
+                tell_room(place, "%^ORANGE%^" + inven[i]->QCN + " staggers from the force of the "
+                          "tremor but manages to maintain " + inven[i]->QP + " footing!");
+                damage = sdamage / 2;
             }
             damage_targ(inven[i],inven[i]->return_target_limb(),damage,"bludgeoning");
         }

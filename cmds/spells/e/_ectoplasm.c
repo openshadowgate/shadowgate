@@ -45,7 +45,7 @@ spell_effect(int prof)
     tell_object(target, "%^CYAN%^" + sprintf("%s summons strands of astral ectoplasm that shoot out towards you!", my_name) + "%^RESET%^");
     tell_room(place, "%^CYAN%^" + sprintf("%s summons strands of astral ectoplasm that shoot out towards %s!", my_name, your_name) + "%^RESET%^", ({ caster, target }));
 
-    if ( do_save(target,-2))
+    if ( do_save(target,-2) || !target->set_tripped(roll_dice(1,8)))
     {
         tell_object(caster,""+target->QCN+" manages to dodge your ectoplasm!");
         tell_object(target,"You manage to dodge the ectoplasm!");
@@ -59,6 +59,5 @@ spell_effect(int prof)
         tell_object(caster, "%^CYAN%^" + sprintf("Your strands of ectoplasm wrap around %s, trapping %s in place!",your_name,target->query_objective()) + "%^RESET%^");
         tell_object(target, "%^CYAN%^" + sprintf("%s's strands of ectoplasm wrap around you, trapping you in place!", my_name) + "%^RESET%^");
         tell_room(place, sprintf("%s's strands of ectoplasm wrap around %s, trapping %s in place!", my_name, your_name, target->query_objective()), ({ caster, target }));
-        target->set_tripped(roll_dice(1,8));
     }
 }

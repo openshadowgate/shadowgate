@@ -65,21 +65,21 @@ void execute_attack()
     foes = target_selector();
     foes -= ({ caster });
 
-    for(i=0;i<sizeof(foes);i++) {
-        if(!objectp(targ = foes[i])) continue;
+    for (i = 0; i < sizeof(foes); i++) {
+        if (!objectp(targ = foes[i])) {
+            continue;
+        }
 
         limb = targ->return_target_limb();
-        if(do_save(targ,0)) {
-          tell_object(targ,"%^BOLD%^%^GREEN%^You avoid the worst of the mire, but the acidic fumes still cause scalding burns!");
-          tell_room(place,"%^GREEN%^"+targ->QCN+" manages to hold strong in the mud!",({targ}));
-          damage_targ(targ,limb,sdamage/2,"acid");
-        }
-        else {
-          tell_object(targ,"%^BOLD%^%^GREEN%^Unable to keep your footing, you slip in the mud!%^RESET%^");
-          tell_room(place,"%^GREEN%^%^BOLD%^Unable to keep balance, "+targ->QCN+" slips in the mud!",({targ}));
-          targ->set_temporary_blinded(1);
-          targ->set_tripped(1,"%^BOLD%^You are struggling to regain your footing!%^RESET%^",4);
-          damage_targ(targ,limb,sdamage,"acid");
+        if (do_save(targ, 0) && !targ->set_tripped(1, "%^BOLD%^You are struggling to regain your footing!%^RESET%^", 4)) {
+            tell_object(targ, "%^BOLD%^%^GREEN%^You avoid the worst of the mire, but the acidic fumes still cause scalding burns!");
+            tell_room(place, "%^GREEN%^" + targ->QCN + " manages to hold strong in the mud!", ({ targ }));
+            damage_targ(targ, limb, sdamage / 2, "acid");
+        }else {
+            tell_object(targ, "%^BOLD%^%^GREEN%^Unable to keep your footing, you slip in the mud!%^RESET%^");
+            tell_room(place, "%^GREEN%^%^BOLD%^Unable to keep balance, " + targ->QCN + " slips in the mud!", ({ targ }));
+            targ->set_temporary_blinded(1);
+            damage_targ(targ, limb, sdamage, "acid");
         }
     }
 

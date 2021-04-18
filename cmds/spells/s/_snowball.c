@@ -29,12 +29,9 @@ spell_effect(int prof)
         tell_object(caster, "%^BOLD%^%^WHITE%^You project the snowball into direction of " + target->QCN + "!");
         tell_room(place, "%^BOLD%^%^WHITE%^" + caster->QCN + " forcefully projects the snowball at " + target->QCN + "!", ({ caster }));
     }
-    if(do_save(target, 0))
-    {
+    if (do_save(target, 0)) {
         dam /= 2;
-    }
-    else
-    {
+    }else {
         target->set_tripped(1, "You are staggered byt the painfully thrown snoball!");
     }
     damage_targ(target, target->return_target_limb(), dam, "bludgeoning");

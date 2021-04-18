@@ -34,10 +34,9 @@ void spell_effect()
 
     caster->force_me("yell %^WHITE%^%^BOLD%^DIE!");
 
-    if (!do_save(target, 4)) {
+    if (!do_save(target, 4) && target->set_tripped(roll_dice(1, 4), "%^BOLD%^You are trying to regain your footing.")) {
         tell_room(place, "%^BOLD%^" + target->QCN + " is blasted to the groud with the power of the voice.", target);
         tell_object(target, "%^BOLD%^%^You are blasted to the ground with the power of the voice.");
-        target->set_tripped(roll_dice(1, 4), "%^BOLD%^You are trying to regain your footing.");
     }
 
     if (ldiff > 4) {

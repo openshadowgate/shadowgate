@@ -157,13 +157,11 @@ int trip_em(object obj)
     }
     room = environment(obj);
 
-    if (!do_save(obj), 4) {
+    if (!do_save(obj, 4) && obj->set_tripped(1, "%^BOLD%^You are struggling to regain your footing!%^RESET%^", 4) ) {
         tell_object(obj, "%^RED%^You land hard, and the earth roils "
                     "as you struggle to stand!%^RESET%^");
         tell_room(room, "%^RED%^" + obj->QCN + " falls to the ground and "
                   "staggers around helplessly!%^%^RESET%^", obj);
-        obj->set_tripped(1, "%^BOLD%^You are struggling " +
-                         "to regain your footing!%^RESET%^", 4);
     }
     return 1;
 }

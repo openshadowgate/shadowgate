@@ -106,10 +106,9 @@ int nightmare_effects(object obj){
       tell_room(room,"%^BOLD%^%^GREEN%^"+obj->QCN+" is tormented by the nightmarish apparitions!%^RESET%^",obj);
       damage_targ(obj,obj->return_target_limb(),damage,"negative energy");
       set_save("reflex");
-      if(!do_save(obj,0)){
+      if(!do_save(obj,0) && obj->set_tripped(roll_dice(1,2),"%^BOLD%^You are struggling to get back to your feet!%^RESET%^",2)){
         tell_object(obj,"%^CYAN%^Writhing %^GREEN%^ve%^CYAN%^g%^GREEN%^etation %^CYAN%^and inc%^RESET%^o%^CYAN%^rpo%^RESET%^re%^CYAN%^al beings grasp at you, knocking you from your feet!%^RESET%^");
         tell_room(room,"%^CYAN%^"+obj->QCN+" is knocked from "+obj->QP+" feet by the grasping ph%^RESET%^a%^CYAN%^nt%^RESET%^as%^CYAN%^ms and writhing %^GREEN%^ve%^CYAN%^g%^GREEN%^etation%^CYAN%^!%^RESET%^",obj);
-        obj->set_tripped(roll_dice(1,2),"%^BOLD%^You are struggling to get back to your feet!%^RESET%^",2);
       }
    }
    return 1;

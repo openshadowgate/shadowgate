@@ -2032,15 +2032,15 @@ void iterate_combat(object who)
     return;
 }
 
-varargs void set_tripped(object who, int severity, string message, int special)
+varargs int set_tripped(object who, int severity, string message, int special)
 {
     int chance;
     if (!objectp(who)) {
-        return;
+        return 0;
     }
     if (who->query_property("no tripped")) {
         tell_object(who, "You cannot be tripped.");
-        return;
+        return 0;
     }
     if (intp(chance = who->query_property("untrippable"))) {
         if (chance > roll_dice(1, 100)) {
@@ -2048,16 +2048,20 @@ varargs void set_tripped(object who, int severity, string message, int special)
             if (objectp(environment(who))) {
                 tell_room(environment(who), who->QCN + " avoids the attempt to trip " + who->QO + "!", who);
             }
-            return;
+            return 0;
         }
+        return 1;
     }
+
     who->adjust_combat_mapps("vars", "tripped", severity);
     who->adjust_combat_mapps("messages", "tripped", message);
+
     if (special) {
+        // Added to give better control over rush, could
+        // be used for other things.  -Ares 12/26/06
         who->adjust_combat_mapps("counters", "tripped counter", special);
-    }  // Added to give better control over rush, could
-       // be used for other things.  -Ares 12/26/06
-    return;
+    }
+    return 1;
 }
 
 /**

@@ -91,16 +91,13 @@ void spell_effect(int prof)
             continue;
         }
         if (random((int)inven[i]->query_stats("dexterity") +
-                   1) < roll_dice(1, 25) && random(2)) {
+                   1) < roll_dice(1, 25) && random(3) &&             inven[i]->set_tripped(1, "%^BOLD%^%^CYAN%^You're regaining your balance!%^RESET%^", 1)) {
             tell_object(inven[i], "%^CYAN%^You stumble as one of the " +
                         "tentacles almost knocks you from your feet!");
 
             tell_room(place, "%^CYAN%^" + inven[i]->QCN +
                       " stumbles as a tentacle knocks " + inven[i]->QO + " from " +
                       inven[i]->QP + " feet!", inven[i]);
-
-            inven[i]->set_tripped(1, "%^BOLD%^%^CYAN%^You're regaining your " +
-                                  "balance!%^RESET%^", 1);
             continue;
         }
     }

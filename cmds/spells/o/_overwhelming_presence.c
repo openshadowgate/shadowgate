@@ -39,14 +39,11 @@ void spell_effect(int prof){
         if(!objectp(attackers[i]))
             continue;
         targ = attackers[i];
-        if(!(do_save(targ,0)&&mind_immunity_damage(targ)))
-        {
-            targ->set_tripped(roll_dice(1,die),"%^BOLD%^You're prostrating in awe of "+caster->QCN+"'s divinity!%^RESET%^",die);
-            tell_room(ENV(targ),"%^YELLOW%^"+targ->QCN+" prostrates itself before "+caster->QCN+"!");
-            if(!targ->query_property("overwhelming_presence"))
-            {
-                targ->set_property("overwhelming_presence",1);
-                targ->add_stat_bonus("wisdom",-roll_dice(1,6));
+        if (!do_save(targ, 0) && mind_immunity_damage(targ) && targ->set_tripped(roll_dice(1, die), "%^BOLD%^You're prostrating in awe of " + caster->QCN + "'s divinity!%^RESET%^", die)) {
+            tell_room(ENV(targ), "%^YELLOW%^" + targ->QCN + " prostrates itself before " + caster->QCN + "!");
+            if (!targ->query_property("overwhelming_presence")) {
+                targ->set_property("overwhelming_presence", 1);
+                targ->add_stat_bonus("wisdom", -roll_dice(1, 6));
             }
         }
     }

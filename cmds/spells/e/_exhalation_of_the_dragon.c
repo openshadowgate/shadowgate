@@ -187,12 +187,14 @@ void spell_effect(int prof)
         {
         case "white":
 
-            tell_object(target,"%^BOLD%^%^WHITE%^The wh%^RESET%^i%^BOLD%^te "
-                "energy freezes the ground beneath you, causing you to slip!%^RESET%^");
-            tell_room(place,"%^BOLD%^%^WHITE%^The wh%^RESET%^i%^BOLD%^te energy "
-                "freezes the ground beneath "+target->QCN+", causing "+target->QCN+" "
-                "to slip!%^RESET%^",target);
-            target->set_tripped(1,"You are struggling to regain your footing!");
+            if (target->set_tripped(1, "You are struggling to regain your footing!")) {
+                tell_object(target, "%^BOLD%^%^WHITE%^The wh%^RESET%^i%^BOLD%^te "
+                            "energy freezes the ground beneath you, causing you to slip!%^RESET%^");
+                tell_room(place, "%^BOLD%^%^WHITE%^The wh%^RESET%^i%^BOLD%^te energy "
+                          "freezes the ground beneath " + target->QCN + ", causing " + target->QCN + " "
+                          "to slip!%^RESET%^", target);
+            }
+
             break;
 
         case "bronze":

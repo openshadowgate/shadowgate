@@ -31,17 +31,18 @@ void spell_effect(int prof){
         return;
     }
 
-    for(i=0;i<sizeof(attackers);i++)
-    {
-        if(!objectp(attackers[i]))
+    for (i = 0; i < sizeof(attackers); i++) {
+        if (!objectp(attackers[i])) {
             continue;
-        admg=sdamage;
-        if(do_save(attackers[i]))
-            admg/=2;
-        else
-            attackers[i]->set_tripped(roll_dice(1,3),"%^BOLD%^You are struggling to regain your footing!%^RESET%^",4);
-        tell_object(attackers[i],"%^BLUE%^%^BOLD%^Hot winds slam into you!%^RESET%^");
-        damage_targ(attackers[i],attackers[i]->return_target_limb(),admg,"bludgeoning");
+        }
+        admg = sdamage;
+        if (do_save(attackers[i])) {
+            admg /= 2;
+        }else {
+            attackers[i]->set_tripped(roll_dice(1, 3), "%^BOLD%^You are struggling to regain your footing!%^RESET%^", 4);
+        }
+        tell_object(attackers[i], "%^BLUE%^%^BOLD%^Hot winds slam into you!%^RESET%^");
+        damage_targ(attackers[i], attackers[i]->return_target_limb(), admg, "bludgeoning");
     }
     spell_successful();
     dest_effect();
