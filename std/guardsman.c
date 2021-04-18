@@ -105,7 +105,7 @@
 
 inherit NPC;
 
-#define VALID_GODS ({"jarmila","callamir","kreysneothosies","ryorik","lord shadow","the faceless one","kismet","lysara","nimnavanon","nilith"})
+#define VALID_GODS ({"jarmila","callamir","kreysneothosies","ryorik","lord shadow","the faceless one","kismet","lysara","nimnavanon","nilith","seija","khyron"})
 
 mapping race_messages=([]);
 string *bad_races=({}),race_action,area_guarded,temple_guarded,jail_location,expel_location,capture_location;
@@ -575,6 +575,10 @@ void interactions(object live)
         return;
     }
     if (sizeof(live->query_attackers())) {
+        if (eval_combatant(live) == 1) {
+            //command("say >> There is good reason why I should not fight " + live->query_id()[0] + ".");
+            return;
+        }
         do_battle(live); return;
     }
     if (query_bad_race(live)) {
@@ -587,6 +591,75 @@ void interactions(object live)
     if (AREALISTS_D->is_banned(live, query_guarding(), TO)) {
         do_laws(live); return;
     }
+}
+
+int eval_combatant(object live) {
+    // used in interactions()
+    // returns 1 if there's a reason not to fight this person.
+    // otherwise returns 0
+    // For now the guards only help pcs when they're fighting monsters and critters, not if they fight npcs or eachother
+    
+    object minionowner, ob, *attackers;
+    string party;
+    int test, i;
+
+    test = 0;
+    attackers = TO->query_attackers();
+    for (i=0; i<sizeof(attackers); i++){
+        if (attackers[i] == live) {test++;}
+    }
+    if (test>0) {
+        //command("say (i) "+ live->query_id()[0] + " is attacking me!");
+        return 0;
+    }
+    if (!objectp(live)) {
+        //command("say " + live->query_id()[0] + " is not objectp, not fighting");
+        return 1;
+    }
+    if (live->is_merc()) {
+        //command("say (i) "+ live->query_id()[0] +" is a merc, not fighting");
+        return 1;
+    }
+    if (!userp(live)) {
+        minionowner = live->query_property("minion");
+        if (minionowner) {
+            //command("say (i) "+ live->query_id()[0] + " might be a minion of " + minionowner->query_name());
+            if (minionowner->is_merc()) {
+                return 1;
+            }
+            test = 0;
+            attackers = TO->query_attackers();
+            for (i=0; i<sizeof(attackers); i++){
+                if (attackers[i] == live) {test++;}
+            }
+            if (test==0) {
+                //command("say (i) "+ live->query_id()[0] + " is not attacking me, leaving minion alone");
+                return 1;
+            }
+
+        } 
+        //command("say (i) "+ live->query_id()[0] +" is not a user");
+    }    
+    if (userp(live)) {
+        //command("say (i) "+ live->query_id()[0] + " is a user ");
+        test = 0;
+
+        attackers = live->query_attackers();
+        if (sizeof(attackers)) {
+            for (i=0; i < sizeof(attackers); i++) {
+                if(userp(attackers[i])) { test++; }  // user is fighting another user
+                if(attackers[i]->is_merc()){ test++; } // user is fighting a merc
+                if(attackers[i]->query_property("minion")){ test++; } // user is fighting a minion
+                if(inherits(NPC, attackers[i])){ test++; } // user is fighting an npc
+
+            }
+            //command("say (i) "+ live->query_id()[0] + " is not in a fight with a user, a merc, a minion or an npc. ");
+            if (test == 0) {
+                return 1; 
+            }
+        }       
+    }
+    return 0;     
 }
 
 void race_action(object live)
