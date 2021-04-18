@@ -24,7 +24,7 @@ string long;
 	if(strsrch(str,"perfume")==-1)
 		return 0;
 	else {
-if(count!=5){
+if(count!=25){
 count+=1; 
 		write("You wear the perfume");
 		tell_room(environment(TP),TPQCN+" wears some perfume.",TP);
