@@ -18,6 +18,7 @@ void create()
     set_description("This spell allows the caster to take on a translucent, almost gaseous form. "+
     "While active it allows the caster to have a higher chance of avoiding physical attacks as "+
     "well as providing some protection from non physical attacks.");
+    no_armor(1);
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);
