@@ -9,6 +9,9 @@ This effects adds directly to damage of your melee attacks. It can be reduced by
 %^CYAN%^Armor class%^RESET%^
 Armor class defines your ability to avoid attacks. It is often rolled against attack's bonus to define whether anyone landed a hit. Your armor class is compiled from two sources: base resilience and dodge bonus. Both and either can be denied to you in specific situations.
 
+%^CYAN%^Miss chance and Shield Miss%^RESET%^
+Miss chance represents your ability to completely avoid damage from any normal attack. It is a percentile. Shield Miss has the same nature but calculated separately only if your miss chance is lower than your shield miss chance.
+
 %^ULINE%^%^CYAN%^FEAR EFFECTS%^RESET%^
 
 %^CYAN%^Cowering%^RESET%^
