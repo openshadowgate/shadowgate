@@ -1732,7 +1732,14 @@ void heart_beat()
         }
         if ((query_idle(TO) > 600) && (!avatarp(TO)) && (!TO->query("test_character")) && (!TO->query_property("inactive")))
         {
-            if(TO && TO->query_forced()) return 1;
+            if (TO && TO->query_forced()) {
+                return 1;
+            }
+
+            if (in_edit() || in_input()) {
+                return 1;
+            }
+
             tell_object(TP, wrap("%^WHITE%^%^BOLD%^You haven't been doing anything and fall into slumber.\n Press RETURN to wake up."));
             TO->set_property("inactive", 1);
             TO->force_me("save");
