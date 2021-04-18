@@ -1,6 +1,3 @@
-//Removing delay to bring it more in line with other
-//domain spells ~Circe~ 4/24/08 also increasing its
-//effect as it's 6th level.  Rebalancing domains
 #include <std.h>
 inherit SPELL;
 
@@ -14,6 +11,7 @@ void create()
     set_spell_level(([ "cleric" : 6 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS aegis of fate on TARGET");
+    set_damage_desc("clevel / 10 + 1 to AC and MR");
     set_description("This spell alters the fate of the target, creating an ever-fluctuating shield about the target.  The "
                     "shield swirls in a chaotic display, offering some protection from both physical and magical effects to the target.  How "
                     "much protection is dependent on the caster's level and, well, the fates themselves.");
@@ -61,9 +59,9 @@ void spell_effect(int prof)
         tell_object(caster, "%^BOLD%^%^GREEN%^You send out a random varying energy "
                     "toward " + target->QCN + ",");
     }
-    prevAc = random(clevel / 8) + 1;
+    prevAc = random(clevel / 10) + 1;
     target->add_ac_bonus(prevAc);
-    magRes = random(clevel / 3) + 1;
+    magRes = random(clevel / 10) + 1;
     target->set_property("magic resistance", (magRes));
     target->set_property("raised resistance", 1);
     addSpellToCaster();
@@ -83,10 +81,10 @@ void execute_attack()
         tell_room(ETO, "%^BOLD%^%^MAGENTA%^" + target->QCN + " shimmers brightly.", target);
         tell_object(target, "%^BOLD%^%^MAGENTA%^You shimmer brightly.");
         target->add_ac_bonus(-1 * prevAc);
-        prevAc = random(clevel / 8) + 1;
+        prevAc = random(clevel / 10) + 1;
         target->add_ac_bonus(prevAc);
         target->set_property("magic resistance", (-1 * magRes));
-        magRes = random(clevel / 3) + 1;
+        magRes = random(clevel / 5) + 1;
         target->set_property("magic resistance", (magRes));
         counter++;
     }

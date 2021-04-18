@@ -17,6 +17,7 @@ void create()
     set_mystery("wind");
     set_domains("air");
     set_spell_sphere("alteration");
+    set_damage_desc("flight");
     set_syntax("cast CLASS air walk on TARGET");
     set_description("This spell will allow the target to walk on the air as if it were perfectly level ground.  "
         "This makes traveling over long distances almost effortless.");

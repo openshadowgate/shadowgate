@@ -14,7 +14,7 @@ void create(){
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS animus blizzard");
-    set_damage_desc("cold");
+    set_damage_desc("cold, raises undead");
     set_description("This dark casting invokes a blizzard infused with negative energy in the area. The storms themselves pierce through the flesh of the caster's enemies with fell cold, causing them to suffer greatly. Due to the nature of this blizzard, it can raise recently deceased creatures, temporarily binding them to defend the caster. Many faiths and cultures condemn this spell and similar powers as it serves the caster's selfish, often evil, motives. Frequent users of the spell are known to be inherently evil.
 
 To remove undead use %^ORANGE%^<dismiss undead>%^RESET%^

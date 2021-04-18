@@ -11,6 +11,7 @@ void create() {
     set_spell_level(([ "warlock" : 1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS all seeing eyes");
+    set_damage_desc("true speech");
     set_description("This will give the warlock the ability to understand any mortal language. You will be able to speak the way you'll be understood by any being. This will not alter you knowledge and won't allow you to teach or write in languages you don't know.");
     set_verbal_comp();
 	set_helpful_spell(1);

@@ -13,7 +13,8 @@ void create() {
     set_spell_level(([ "psywarrior" : 2, "psion" : 1 ]));
     set_spell_sphere("alteration");
     set_discipline("egoist");
-    set_syntax("cast CLASS animal affinity on <stat>");
+    set_syntax("cast CLASS animal affinity on STAT");
+    set_damage_desc("modifies stat by 2");
     set_description("This power allows a psionic character to focus her "
        "mental acuity, resulting in a bonus to one of her stats. Only one "
        "stat can be raised at a time, and this power does not stack with "
@@ -94,7 +95,7 @@ void spell_effect(int prof) {
                                  "as you harness the dexterity of the cat.%^RESET%^");
                               break;
        default:               tell_room(place,"%^RESET%^%^RED%^"+caster->QCN+" gives a ponderous "
-                                 "snuffle and lets out a low ursine roar.%^RESET%^",caster); 
+                                 "snuffle and lets out a low ursine roar.%^RESET%^",caster);
                               tell_object(caster,"%^RESET%^%^RED%^You let out a low ursine roar as "
                                  "you harness the constitution of the bear.%^RESET%^");
                               break;

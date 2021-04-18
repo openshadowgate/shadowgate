@@ -1,9 +1,3 @@
-//      Armor
-//      Thorn@Shadowgate w/ lots of help from Melnmarn
-//      1/19/95
-//      Wizard Spells
-//      armor.c
-//      Modified and updated by Vashkar
 #include <spell.h>
 #include <daemons.h>
 inherit SPELL;
@@ -19,6 +13,7 @@ void create()
     set_mystery("spellscar");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS armor [on TARGET]");
+    set_damage_desc("4 AC");
     set_description("When armor is cast on someone, they will receive an AC bonus of 4..");
     set_verbal_comp();
     set_somatic_comp();

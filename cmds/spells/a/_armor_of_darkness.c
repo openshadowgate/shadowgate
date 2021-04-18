@@ -1,6 +1,3 @@
-//Adjusted by ~Circe~ to give an attack bonus based on
-//level as well.  5/25/08 rebalancing domains
-// armor of darkness
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
@@ -18,6 +15,7 @@ void create()
     set_spell_level(([ "cleric" : 4]));
     set_spell_sphere("divination");
     set_syntax("cast CLASS armor of darkness");
+    set_damage_desc("2 AC, clevel / 10 + 1 attack bonus");
     set_description("This spell will surround the caster in a dark haze making it harder for enemies to see the caster to hit them.  It also improves the caster's vision to allow them to better see through the darkness themselves.");
     set_verbal_comp();
     set_helpful_spell(1);
@@ -51,7 +49,7 @@ void spell_effect(int prof)
     int duration;
 
     armor_bonus = 2;
-    attk_bonus = clevel/10;
+    attk_bonus = clevel/10 + 1;
 
     duration = (ROUND_LENGTH * 20) * clevel;
 

@@ -1,11 +1,3 @@
-/*
-  _adapt_body.c
-  
-  Psion gains +10 to all elemental resistances
-  
-  -- Tlaloc -- 4.3.20
-*/
-
 #include <std.h>
 #include <spell.h>
 #include <magic.h>
@@ -25,7 +17,7 @@ void effect(int direction)
         caster->remove_property("castspellresist");
         caster->remove_property("poison immunity");
     }
-    
+
     caster->set_resistance("fire", 10 * direction);
     caster->set_resistance("acid", 10 * direction);
     caster->set_resistance("electricity", 10 * direction);
@@ -38,12 +30,13 @@ void effect(int direction)
 void create()
 {
     ::create();
-    
+
     set_author("tlaloc");
     set_spell_name("adapt body");
     set_spell_level( ([ "psion" : 5, "psywarrior" : 5 ]) );
     set_spell_sphere("alteration");
     set_syntax("cast CLASS adapt body");
+    set_damage_desc("10 to fire, acid, electricity, cold, sonic DR, poison immunity");
     set_damage_desc("+10 to fire, cold, electricity, acid, and sonic resistance.");
     set_description("With this power, the psion uses psychometabolism and adjusts their body to better survive in harsh environments. This power increases all elemental resistances.");
     set_helpful_spell(1);
@@ -56,7 +49,7 @@ int preSpell()
       tell_object(caster,"You already have protection of this nature!");
       return 0;
    }
-   
+
    return 1;
 }
 
@@ -70,9 +63,9 @@ void spell_effect(int prof)
 {
     string myname, yourname;
     int mylevel;
-    
+
     myname = caster->QCN;
-  
+
     tell_object(caster, "%^CYAN%^BOLD%^You focus internally with your psychic power, adjusting your body to better survive.");
     tell_room(place, "%^BOLD%^CYAN%^" + sprintf("%s focuses on adapting %s body!", myname, caster->query_possessive()), ({ caster }));
 

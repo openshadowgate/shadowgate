@@ -16,10 +16,11 @@ void create()
     set_spell_level(([ "mage" : 3 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS acid orb on TARGET");
+    set_damage_desc("acid");
     set_description("This spell allows a mage to tap into the Para-Elemental Plane of Ooze and borrow some of its energy "
         "to create an orb of pure acid.  Once the orb is launched into the air, the first thing it strikes will cause it to burst "
         "open, releasing the acid on the mage's foes.  Though care should be taken as it is possible to accidently catch the "
-        "mages allies in the blast.");
+        "mages allies in the blast. The successful save will cause half the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

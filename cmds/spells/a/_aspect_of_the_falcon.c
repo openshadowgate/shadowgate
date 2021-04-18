@@ -1,11 +1,3 @@
-/*
-  _aspect_of_the_falcon.c
-
-  +3 to perception skill
-
-  -- Tlaloc -- 7.11.20
-*/
-
 #include <std.h>
 #include <magic.h>
 #include <clock.h>

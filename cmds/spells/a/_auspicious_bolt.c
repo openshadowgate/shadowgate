@@ -1,7 +1,3 @@
-//_luckbolt.c
-//Removing delay to bring it more in line with other
-//domain spells ~Circe~ 4/24/08
-
 #include <std.h>
 #include <priest.h>
 
@@ -17,7 +13,7 @@ void create()
     set_spell_level(([ "cleric" : 3 ]));
     set_spell_sphere("combat");
     set_syntax("cast CLASS auspicious bolt on TARGET");
-    set_damage_desc("Random clevel + 1 HP, Random clevel / 10 + 1 DMG and ATK bonus.");
+    set_damage_desc("clevel + 1 HP, clevel / 20 + 1 damage and attack bonus");
     set_description("This spell will call on the fates to improve the fortune of the recipient in battle.  To what degree "
         "the fortunes are altered in favor of the target depends on the level of the caster, and of course fate itself."
         "This spell does not stack with other similar blessings.");
@@ -50,8 +46,8 @@ int preSpell()
 
 void spell_effect(int prof)
 {
-    newhp = random(clevel)+1;
-    mybonus = random(clevel/10)+1;
+    newhp = clevel / 2+ 1;
+    mybonus = clevel / 20 + 1;
     if(target == caster)
     {
         tell_room(place,"%^BOLD%^%^BLUE%^"+caster->QCN+" is suddenly surrounded"+

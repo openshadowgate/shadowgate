@@ -2,7 +2,7 @@
 
 inherit SPELL;
 
-void create() 
+void create()
 {
     ::create();
     set_spell_name("aura sight");
@@ -20,7 +20,7 @@ void create()
 
 string query_cast_string() { return ""+caster->QCN+" seems to stare off into space, growing still."; }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
     int al;
     string align;
@@ -29,14 +29,13 @@ void spell_effect(int prof)
     align = capitalize(TARGET->query_al_title(al));
     tell_object(CASTER, "%^MAGENTA%^You focus your attentions on "+
         ""+HIM+", carefully probing "+HIS+" inner thoughts.");
-    if(do_save(TARGET,0)) 
+    if(do_save(TARGET,0))
     {
-    //if (do_saving_throw(TARGET, "spell",(-1*clevel))) {
         tell_object(CASTER,"%^BOLD%^%^MAGENTA%^"+HIM+"'s will "+
             "battles yours, and you get no impression about "+
             ""+HIS+" alignment.");
-    } 
-    else 
+    }
+    else
     {
         tell_object(CASTER, "%^BOLD%^%^MAGENTA%^You see that "+
             ""+HIM+"'s alignment is "+align);

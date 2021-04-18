@@ -1,6 +1,3 @@
-//_astral_construct by ~Circe~ 7/27/05
-//based on priest summoning spells
-
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>

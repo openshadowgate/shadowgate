@@ -12,7 +12,7 @@ void create()
     set_domains("animal");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS antilife shell");
-    set_damage_desc("perpetually removes living attackers for clevel / 18 + 1 rounds");
+    set_damage_desc("perpetually removes living attackers for clevel / 15 + 3 rounds");
     set_description("This spell perpetually pushes away living opponents, trying to remove them from combat. It won't act together with similar spells, such as repulsion.");
 }
 
@@ -29,7 +29,7 @@ int preSpell()
 void spell_effect(int prof)
 {
     int duration;
-    duration = (ROUND_LENGTH) * (clevel / 18 + 1);
+    duration = (ROUND_LENGTH) * (clevel / 15 + 3);
     tell_room(place,"%^GREEN%^As "+caster->QCN+" raises a field of magical force around "+caster->QP+".",caster);
     tell_object(caster,"%^GREEN%^You feel you're surrounded by a force field.");
     caster->set_property("repulsion",1);

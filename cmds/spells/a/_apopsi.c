@@ -1,11 +1,3 @@
-/*
-  _apopsi.c
-
-  Deals Damage to an enemy psion's Power Points
-
-  -- Tlaloc -- 4.3.20
-*/
-
 #include <std.h>
 #include <spell.h>
 #include <magic.h>
@@ -24,7 +16,7 @@ void create()
     set_spell_level( ([ "psion" : 9 ]) );
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS apopsi on TARGET");
-    set_damage_desc("Destroys enemy power points or mental damage");
+    set_damage_desc("removes target's power points or mental damage");
     set_description("With this power, a strong psion can dismantle an enemy's ability to use their psychic powers, resulting in severe damage to their power points pool. A failed save will result in the target's power pool being destroyed, cutting the psychic off from their powers. A successful save will result in half mental damage.");
     set_target_required(1);
     set_save("will");
