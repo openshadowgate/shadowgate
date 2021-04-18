@@ -57,7 +57,7 @@ spell_effect(int prof)
     }
 
     oldenv = environment(caster);
-    nummon = 8;
+    nummon = 6;
     numfoes = (sizeof(caster->query_attackers()));
     mons = allocate(nummon);
 
