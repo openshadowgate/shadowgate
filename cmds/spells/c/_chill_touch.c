@@ -19,6 +19,7 @@ create()
     set_spell_sphere("necromancy");
     set_mystery("reaper");
     set_syntax("cast CLASS chill touch on TARGET");
+    set_damage_desc("cold");
     set_description("By casting this spell, your hand will flare up with a blue aura.  You can touch your enemy with that "
         "hand and, if the target doesn't make his save and avoid your touch, you will inflict a small amount of damage.  "
         "Furthermore, the target will be slightly weakened until a certain length of time runs out. A versatile arcanist can "

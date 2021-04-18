@@ -1,6 +1,3 @@
-//Crushing Hand - new spell for the Strength domain by ~Circe~
-//created during the rebalancing of domains 5/4/08
-//Loosely based on Shocklet
 #include <magic.h>
 #include <std.h>
 #include <spell.h>

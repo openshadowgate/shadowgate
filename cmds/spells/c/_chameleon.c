@@ -1,5 +1,3 @@
-//based on stalk
-//~Circe~ 7/28/05
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -15,6 +13,7 @@ void create() {
     set_discipline("egoist");
     set_spell_sphere("illusion");
     set_syntax("cast CLASS chameleon");
+    set_damage_desc("combat invisibility");
     set_description("Chameleon allows an egoist to cover himself with a thin sheen of ectoplasm that he then wills to "
 "blend in perfectly with his surroundings.  This renders the egoist invisible to all eyes (except those enchanted to see "
 "invisible beings, of course).  Because of the nature of the power, the egoist may attack while in this state, though the "

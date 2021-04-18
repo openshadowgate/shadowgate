@@ -18,6 +18,7 @@ void create() {
     set_spell_level(([ "druid" : 2 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS chill metal on TARGET");
+    set_damage_desc("cold");
     set_description("Upon casting this spell, the caster sends forth "
        "a blasting cold, chilling any metal worn by the target.  For "
        "each item that fails its saving throw, the target takes damage "
@@ -56,7 +57,7 @@ void spell_effect(int prof){
     if(!sizeof(stuff)) {
        tell_object(target,"%^BOLD%^The wind chills you but otherwise has no effect!%^RESET%^");
        dest_effect();
-       return; 
+       return;
     }
     for(i=0;i<sizeof(stuff);i++){
         if(object_save(stuff[i])) { continue; }

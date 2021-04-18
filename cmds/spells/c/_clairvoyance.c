@@ -1,5 +1,3 @@
-//spell to allow a brief glimpse at a person's
-//location without a scrying device ~Circe~ 8/28/05
 #include <std.h>
 #include <priest.h>
 

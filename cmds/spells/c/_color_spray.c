@@ -1,10 +1,3 @@
-//      Color Spray
-//      Thorn@Shadowgate
-//      1/31/95
-//      Wizard Spells
-//      color_spray.c
-//      Revamped by Vashkar -- 8/20/95
-
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>

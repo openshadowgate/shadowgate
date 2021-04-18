@@ -10,6 +10,7 @@ void create() {
     set_spell_level(([ "bard" : 5 ]));
     set_spell_sphere("combat");
     set_syntax("cast CLASS cacophonic shield");
+    set_damage_desc("sonic");
     set_description("This spell amplifies the caster's voice into an independently resonating wall of sound.  Any foes attempting to get close enough to harm the caster will find themselves buffeted by the sonic vibrations.");
     set_verbal_comp();
     set_helpful_spell(1);

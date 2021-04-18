@@ -1,7 +1,3 @@
-// Updated by ~Circe~ 5/11/08 for the rebalancing of domains
-// Id Insinuation
-// ~Circe~ 9/11/05
-// Ganked for the priest spell confusion -Ares
 #include <spell.h>
 #include <daemons.h>
 

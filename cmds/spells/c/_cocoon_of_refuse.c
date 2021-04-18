@@ -1,5 +1,3 @@
-// Reskin of Web
-
 #include <spell.h>
 #include <magic.h>
 

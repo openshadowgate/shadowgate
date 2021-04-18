@@ -1,5 +1,3 @@
-// Cometfall
-// Based on Moonfire - converted by ~Circe~ 4/4/08
 #include <std.h>
 #include <daemons.h>
 
@@ -13,6 +11,7 @@ void create(){
     set_spell_sphere("combat");
     set_domains("creation");
     set_syntax("cast CLASS cometfall");
+    set_damage_desc("half fire half bludgeoning");
     set_description("By chanting this spell, the priest calls into being a horde of comets, blanketing a small area.  "
 "Those within the area risk being knocked to the ground and seared by the molten rock.");
     set_verbal_comp();

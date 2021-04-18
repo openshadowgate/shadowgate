@@ -14,7 +14,8 @@ void create() {
     set_spell_level(([ "monk" : 11, "warlock" : 4 ]));
     set_spell_sphere("illusion");
     set_monk_way("way of the shadow");
-    set_syntax("cast CLASS cloak of shadows on <vision|divination>");
+    set_damage_desc("combat invisibility or scrying protection");
+    set_syntax("cast CLASS cloak of shadows on vision|divination");
     set_description("This invocation allows the warlock to draw a curtain of shadow energy around "
 "him, concealing him from normal and magical detection attempts. It can be used in two ways, though "
 "only one at a time. If cast on vision, it will generate a more powerful magical concealment than "

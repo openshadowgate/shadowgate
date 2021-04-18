@@ -10,6 +10,7 @@ void create() {
     set_spell_name("chameleon skin");
     set_spell_level(([ "psywarrior" : 1 ]));
     set_syntax("cast CLASS chameleon skin");
+    set_damage_desc("clevel / 2 to sneak checks");
     set_description("When the psychic character manifests this power, "
        "he harnesses the power of the chameleon, granting him the "
        "ability to blend into his surroundings. This power functions "

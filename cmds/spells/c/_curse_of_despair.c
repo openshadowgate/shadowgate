@@ -1,4 +1,3 @@
-// templated directly from bestow curse; it's rarely seen anyways. And I wrote it so I can haz it. So there. N, 12/15.
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -15,6 +14,7 @@ void create() {
     set_spell_level(([ "warlock" : 2 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS curse of despair on TARGET");
+    spell_damage_desc("clevel / 10 + 1 but no more than 4 to attack, damage, skills, saves, caster level ");
     set_description("By means of this invocation, the caster places a curse upon the target that will weaken them considerably"
 ", lowering their defenses and their combat abilities. It is not dispellable by normal magics, but will fade over time.");
     set_verbal_comp();
@@ -49,7 +49,7 @@ void spell_effect(int prof) {
         TO->remove();
         return;
     }
-    bonus = (clevel+9)/10; // +1 per 10 level bracket - max +4 as per spell description
+    bonus = clevel / 10 + 1;
     if(bonus > 4) bonus = 4;
     duration = (ROUND_LENGTH * 2) * clevel;
 

@@ -15,7 +15,7 @@ void effect(int direction)
     {
         caster->remove_property("castspellresist");
     }
-    
+
     caster->set_resistance("fire", 20 * direction);
     caster->set_resistance("cold", 20 * direction);
 
@@ -25,13 +25,13 @@ void effect(int direction)
 void create()
 {
     ::create();
-    
+
     set_author("tlaloc");
     set_spell_name("cold comfort");
     set_spell_level( ([ "warlock" : 1 ]) );
     set_spell_sphere("alteration");
     set_syntax("cast CLASS cold comfort");
-    set_damage_desc("+20 to fire and cold resistance.");
+    set_damage_desc("+20 to fire and cold resistance");
     set_description("With this invocation, the warlock gains enhanced protection from extreme heat and cold.");
     set_helpful_spell(1);
     set_feats_required(([ "warlock" : "tome of ancient secrets"]));
@@ -44,7 +44,7 @@ int preSpell()
       tell_object(caster,"You already have protection of this nature!");
       return 0;
    }
-   
+
    return 1;
 }
 
@@ -58,9 +58,9 @@ void spell_effect(int prof)
 {
     string myname, yourname;
     int mylevel;
-    
+
     myname = caster->QCN;
-  
+
     tell_object(caster, "%^GREEN%^You place a hand upon yourself, enhancing your body with enhanced protection against heat and cold.");
     tell_room(place, "%^GREEN%^" + sprintf("%s focuses on enhancing %s body with enhanced protection!", myname, caster->query_possessive()), ({ caster }));
 

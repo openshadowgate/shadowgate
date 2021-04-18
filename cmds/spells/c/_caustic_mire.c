@@ -15,11 +15,11 @@ void create()
     set_spell_level(([ "warlock" : 2 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS caustic mire");
-    set_description("This invocations causes the ground in the area to turn into a muddy, acidic mire that will cause all caught within it to lose their footing. The caustic fumes cause victims to suffer from acid damage throughout the duration.");
+    set_damage_desc("acid");
+    set_description("This invocations causes the ground in the area to turn into a muddy, acidic mire that will cause all caught within it to lose their footing. The caustic fumes cause victims to suffer from acid damage throughout the duration. Successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");
-    set_immunities( ({"acid"}) );
     aoe_spell(1);
     set_aoe_message("%^BOLD%^%^GREEN%^(covered in acidic mud)%^RESET%^");
     set_feats_required(([ "warlock" : "tome of ancient secrets"]));

@@ -1,7 +1,3 @@
-// Call lightning
-// Pator@Shadowgate
-// 11/06/95
-
 #include "priest.h"
 #include <std.h>
 #include <daemons.h>
@@ -15,6 +11,7 @@ void create() {
     set_domains("storms");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS call lightning on TARGET");
+    set_damage_desc("electricity");
     set_description("This is a destructive spell that could hurt an opponent very badly!  The higher level the caster is "
         "the more devastating this spell will become.  The spell can now be used anywhere, regardless of weather or if the caster is indoors. "
         "A cleric with the storms domain can cast this spell innately by spending one Divine Grace point.");
@@ -31,20 +28,6 @@ string query_cast_string() {
 }
 
 int preSpell() {
-
-   /* if (place->query_property("indoors")) {
-        tell_object(caster,"This spell can not be cast from in here!");
-        return 0;
-    }
-    if ((string)WEATHER_D->Check_Weather(caster) == "%^BOLD%^%^CYAN%^It is clear.") {
-        tell_object(caster,"There are no clouds from which to summon lightning!");
-        return 0;
-    }
-   if(place->query_property("no lightning")) {
-      tell_object(caster,"You cannot summon lightning from here!");
-      return 0;
-   }*/
-
     if(caster->is_class("cleric"))
     {
         if(!(int)USER_D->spend_pool(this_player(), 1, "grace"))

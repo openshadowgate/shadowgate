@@ -1,5 +1,3 @@
-// Invisibility - Coded by Vashkar@shadowgate
-//altered for psions by ~Circe~ 7/24/05
 #include <spell.h>
 inherit SPELL;
 
@@ -11,6 +9,7 @@ void create() {
     set_spell_level(([ "psion" : 2 ]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS cloud mind on TARGET");
+    set_damage_desc("invisibility");
     set_description("This power allows the psion to create a minor alteration in the minds of onlookers, so that they no "
 "longer see the target.  The effect moves with the target, making him for all practical purposes invisible.  The power "
 "will fail if the target becomes involved in a fight or decides to <appear>.  It may also wear off over time, though it "

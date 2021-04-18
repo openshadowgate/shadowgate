@@ -17,7 +17,7 @@ void create()
     set_mystery("heavens");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS chain lightning on TARGET");
-    set_damage_desc("electricity or versatile arcanist");
+    set_damage_desc("electricity, versatile arcanist");
     set_description("Chain lightning causes a great bolt of electrical energy to attack your target.  After the bolt has "
         "attacked your target, the lightning bolt has enough energy to continue jumping around the room, damaging other people "
         "and anything else that happens to be in the room. A versatile arcanist can manipulate the base element of this spell.");

@@ -13,6 +13,7 @@ void create() {
     set_spell_level(([ "ranger" : 2, "bard" : 2,"druid" : 2, "assassin" : 2, "mage" : 2, "magus" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS cats grace on TARGET");
+    set_damage_desc("+2 to dexterity");
     set_description("This spell allows the caster to infuse their target with the grace of a feline, granting them improved agility and coordination. This spell doesn't stack with similarly powerful spells of enhancement.");
     set_verbal_comp();
     set_somatic_comp();

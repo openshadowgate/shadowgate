@@ -1,5 +1,3 @@
-//~Circe~ 9/27/15 for psywarriors
-
 #include <priest.h>
 inherit SPELL;
 

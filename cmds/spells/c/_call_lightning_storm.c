@@ -15,6 +15,7 @@ void create()
     set_spell_sphere("combat");
     set_save("reflex");
     set_syntax("cast CLASS call lightning storm");
+    set_damage_desc("electricity");
     set_description("This spell will cause the caster to become charged with static electricity.  The electricity will occasionally "
         "discharge at one of the caster's enemies, hitting him or her with a powerful blast of lightning.");
     set_property("magic",1);

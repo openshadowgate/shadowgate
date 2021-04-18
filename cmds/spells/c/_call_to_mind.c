@@ -1,11 +1,3 @@
-/*
-  _call_to_mind.c
-
-  Half CL to Academics Skill
-
-  -- Tlaloc -- 3.28.20
-*/
-
 #include <std.h>
 #include <magic.h>
 
@@ -21,7 +13,7 @@ void create()
     set_spell_level( ([ "psion" : 1, ]) );
     set_spell_sphere("divination");
     set_syntax("cast CLASS call to mind");
-    set_damage_desc("half of clevel to academics skill");
+    set_damage_desc("clevel / 2 to academics");
     set_description("By meditating on a subject, you can recall natural memories and knowledge otherwise inaccessible to you.");
     set_verbal_comp();
     set_somatic_comp();

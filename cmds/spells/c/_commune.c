@@ -1,6 +1,3 @@
-//changed by ~Circe~ 6/6/11 to be in room only after conversations with Tsera, Garrett, and Nienne
-//updated by ~Circe~ 7/30/13 to accommodate the Drow subrace Ssri tel quessir, who have had the curse removed
-
 #include <priest.h>
 inherit SPELL;
 
@@ -8,9 +5,9 @@ object who, cast_ob, targ_ob;
 string whoname, whocname, cname, Ccname;
 int Started;
 
-void create() 
+void create()
 {
-    	::create();     
+    	::create();
     	set_spell_name("commune");
     	set_spell_level(([ "innate" : 1 ]));
     	set_spell_sphere("divination");
@@ -31,25 +28,25 @@ void create()
 int preSpell()
 {
 	object CO;
-	if(objectp(CO = CASTER->query_property("commune_ob"))) 
+	if(objectp(CO = CASTER->query_property("commune_ob")))
 	{
 		CO->failed();
 	}
 	return 1;
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
 	return "%^BOLD%^%^WHITE%^"+YOU+" closes "+MINE+" eyes and concentrates deeply.";
 }
 
-void spell_effect(int prof) 
+void spell_effect(int prof)
 {
 	string arg;
     	string *ignored, *casterallowed, *targallowed;
 
     	arg = lower_case(ARG);
-    	if (!(who = find_player(caster->realName(arg)))) 
+    	if (!(who = find_player(caster->realName(arg))))
 	{
       	tell_object(CASTER,capitalize(arg)+" cannot be found to commune with.\n");
             if(objectp(TO)) TO->remove();
@@ -67,31 +64,31 @@ void spell_effect(int prof)
     	whoname = who->query_name();
     	whocname = who->QCN;
     	Ccname = CASTER->QCN;
-    	if (avatarp(who) && !who->query_disguised()) 
+    	if (avatarp(who) && !who->query_disguised())
 	{
        	tell_object(CASTER,capitalize(arg)+" cannot be found to commune with.\n");
             if(objectp(TO)) TO->remove();
         	return;
     	}
-   	if(avatarp(who) && arg == (string)who->query_true_name()) 
+   	if(avatarp(who) && arg == (string)who->query_true_name())
 	{
       	tell_object(CASTER,capitalize(arg)+" cannot be found to commune with.\n");
             if(objectp(TO)) TO->remove();
       	return;
    	}
-    	if (arg == cname) 
+    	if (arg == cname)
 	{
         	tell_object(CASTER,"You cannot commune with yourself.\n");
             if(objectp(TO)) TO->remove();
         	return;
     	}
-    	if (who->query_invis() && (int)who->query_level() > (int)CASTER->query_level()) 
+    	if (who->query_invis() && (int)who->query_level() > (int)CASTER->query_level())
 	{
       	tell_object(CASTER,capitalize(arg)+" cannot be found to commune with.\n");
             if(objectp(TO)) TO->remove();
         	return;
     	}
-    	if (who->is_player() && !interactive(who)) 
+    	if (who->is_player() && !interactive(who))
 	{
       	tell_object(CASTER, who->QCN+" is link-dead and cannot hear you.\n");
             if(objectp(TO)) TO->remove();
@@ -108,7 +105,7 @@ void spell_effect(int prof)
          }
 	}
 
-	if(sizeof(who->query_attackers())) 
+	if(sizeof(who->query_attackers()))
 	{
 		tell_object(CASTER, who->QCN+" seems preoccupied and unable to commune "+
 		"with you at this time.");
@@ -116,42 +113,42 @@ void spell_effect(int prof)
 		return;
 	}
 
-	if(who->query_ghost()) 
+	if(who->query_ghost())
 	{
 		tell_object(CASTER,capitalize(arg)+" cannot be found to commune with.\n");
             if(objectp(TO)) TO->remove();
 		return;
 	}
-    	if (who->query_blocked("tell")) 
+    	if (who->query_blocked("tell"))
 	{
       	write(who->QCN+" is currently blocking all tells.");
             if(objectp(TO)) TO->remove();
         	return;
     	}
     	ignored = who->query_ignored();
-    	if (!ignored) 
+    	if (!ignored)
 	{
       	who->reset_ignored();
         	ignored = who->query_ignored();
     	}
-    	if ((member_array(cname, ignored) != -1)) 
+    	if ((member_array(cname, ignored) != -1))
 	{
       	tell_object(CASTER, who->QCN+" is ignoring you.\n");
             if(objectp(TO)) TO->remove();
         	return;
     	}
 	casterallowed = CASTER->query_property("allowed tell");
-   	targallowed = who->query_property("allowed tell");   	
+   	targallowed = who->query_property("allowed tell");
 	if (!casterallowed) casterallowed = ({});
     	if (!targallowed) targallowed = ({});
     	if (member_array(cname,targallowed) != -1
-        && member_array(whoname,casterallowed) != -1) 
+        && member_array(whoname,casterallowed) != -1)
 	{
      		tell_object(CASTER,"You already have a mental link with "+who->QCN+".\n");
             if(objectp(TO)) TO->remove();
         	return;
     	}
-	if(objectp(who->query_property("commune_ob"))) 
+	if(objectp(who->query_property("commune_ob")))
 	{
 		tell_object(CASTER, who->QCN+" seems preoccupied and unable to commune "+
 		"with you at this time.");
@@ -190,21 +187,21 @@ void spell_effect(int prof)
 	cast_ob->move(CASTER);
 	//cast_ob->set_heart_beat(1);
 	addSpellToCaster();
-	CASTER->set_property("spelled", ({TO}) );	   
+	CASTER->set_property("spelled", ({TO}) );
 }
 
 void start_delay()
 {
-	if(!Started) 
+	if(!Started)
 	{
 		call_out("dest_effect",clevel*10);
 		Started = 1;
 	}
 }
 
-void dest_effect() 
+void dest_effect()
 {
-	if(objectp(CASTER)) 
+	if(objectp(CASTER))
 	{
 		CASTER->remove_property_value("spelled", ({TO}) );
 	}
@@ -215,7 +212,7 @@ void dest_effect()
 	if(objectp(targ_ob))
 	{
 		targ_ob->completed();
-	}	
+	}
     	::dest_effect();
       if(objectp(TO)) TO->remove();
 }

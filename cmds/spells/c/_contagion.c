@@ -9,8 +9,9 @@ void create() {
     set_spell_name("contagion");
     set_spell_level(([ "paladin":3, "cleric":3, "druid":3, "mage":4, "nightblade":3]));
     set_spell_sphere("necromancy");
-    set_damage_desc("Random disease");
+    set_damage_desc("random disease");
     set_syntax("cast CLASS contagion on TARGET");
+
     set_description("The subject contracts one of the following diseases: blinding sickness, cackle fever, filth fever, mindfire, red ache, shakes, slimy doom. The disease is contracted immediately (the onset period does not apply). Spell's caster level used as spell power. Disease will progress then as usual.");
 
     set_verbal_comp();
