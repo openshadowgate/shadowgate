@@ -11,9 +11,8 @@ void create() {
     set_spell_sphere("illusion");
     set_syntax("cast CLASS blurred movement");
     set_damage_desc("20% miss chance");
-    set_description("You blur your body, making a shadow of every move you perform, gaining 20% concealment.
-
-%^BOLD%^%^RED%^N.B.%^RESET%^ This spell will only work while not wearing armor.");
+    set_description("You blur your body, making a shadow of every move you perform, gaining partial concealment.");
+    no_armor();
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);

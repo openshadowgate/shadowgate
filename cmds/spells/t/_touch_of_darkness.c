@@ -11,7 +11,7 @@ void create() {
     set_spell_sphere("illusion");
     set_syntax("cast innate touch of darkness");
     set_damage_desc("20% miss chance");
-    set_description("You call on the shadows to protect you, gaining 20% concealment. This spell costs one Divine Grace point to cast.");
+    set_description("You call on the shadows to protect you, gaining partial concealment. This spell costs one Divine Grace point to cast.");
     set_helpful_spell(1);
 }
 

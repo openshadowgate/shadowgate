@@ -80,6 +80,7 @@ int spell_level,
     evil_spell,
     mental_spell,
     blood_magic,
+    no_armor, // can't be used with armor indicator
     end_time;
 
 
@@ -364,9 +365,14 @@ int query_healing_spell()
     return healing_spell;
 }
 
-void evil_spell(int num)
+void evil_spell()
 {
     evil_spell = 1;
+}
+
+void no_armor()
+{
+    no_armor = 1;
 }
 
 int query_evil_spell()
@@ -3532,6 +3538,9 @@ void help()
     }
     if (aoe_spell) {
         write("%^BOLD%^%^RED%^This spell affects current area.");
+    }
+    if (no_armor) {
+        write("%^BOLD%^%^RED%^This spell can't be used while you wear any armor stonger than clothing.");
     }
     if (splash_spell == 1) {
         write("%^BOLD%^%^RED%^This spell can affect multiple targets.");

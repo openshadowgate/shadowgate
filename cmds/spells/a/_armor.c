@@ -19,10 +19,10 @@ void create()
     set_mystery("spellscar");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS armor [on TARGET]");
-    set_description("When armor is cast on someone, they will receive an AC bonus of 4. This bonus will only be "
-        "valid while not wearing armor of any type. Clothing is not considered armor.");
+    set_description("When armor is cast on someone, they will receive an AC bonus of 4..");
     set_verbal_comp();
     set_somatic_comp();
+    no_armor();
     set_components(([ "mage" : ([ "blessed leather" : 1, ]), ]));
     set_property("keywords", ({ "defensive", "targeted", "personal" }));
     set_helpful_spell(1);
