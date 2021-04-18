@@ -32,7 +32,7 @@ int wear_me(string str)
 	string long;
 	if(strsrch(str,"perfume")==-1) return 0;
 	else {
-		if(count!=5) {
+		if(count!=25) {
 			count+=1;
 			write("%^BOLD%^You dab on some lilac perfume.");
 			tell_room(environment(TP),"%^BOLD%^"+TP->query_cap_name()+""+
