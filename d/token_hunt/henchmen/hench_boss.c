@@ -59,6 +59,11 @@ string get_response(string word)
     case "hookers":
         return "strange";
 
+    case "Hi":
+    case "Hello":
+    case "Greetings":
+    case "Heya":
+    case "Hey":
     case "hi":
     case "hello":
     case "greetings":
@@ -85,11 +90,15 @@ string get_response(string word)
     case "rent":
         return "hire";
 
+    case "Yes":
+    case "Yah":
+    case "Yep":
     case "yes":
     case "yah":
     case "yep":
         return "yes";
 
+    case "No":
     case "no":
         return "no";
 
