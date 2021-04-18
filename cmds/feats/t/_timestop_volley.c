@@ -46,14 +46,15 @@ void execute_feat()
         return;
     }
     ::execute_feat();
-    
-    if((int)caster->query_property("using instant feat")) 
+
+    if((int)caster->query_property("using instant feat"))
     {
         tell_object(caster,"You are already in the middle of using a feat!");
+        caster = 0;
         dest_effect();
         return;
     }
-    
+
     caster->set_property("using instant feat",1);
     tell_object(caster,"%^RESET%^%^ORANGE%^You spell few syllables and the very time around you slows as you reload.%^RESET%^");
     tell_room(place,"%^RESET%^%^CYAN%^It seems as if "+caster->QCN+" reloads with unnatural speed%^RESET%^",caster);
@@ -70,9 +71,9 @@ void execute_feat()
 }
 
 
-void execute_attack() 
+void execute_attack()
 {
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         dest_effect();
         return;
@@ -120,7 +121,7 @@ void check()
 void dest_effect()
 {
     ::dest_effect();
-    if(!objectp(caster)) 
+    if(!objectp(caster))
     {
         remove_feat(TO);
         return;
@@ -133,4 +134,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
