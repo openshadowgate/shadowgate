@@ -30,7 +30,7 @@ int wear_me(string str)
 	string long;
 	if(strsrch(str,"perfume")==-1) return 0;
 	else {
-		if(count!=5) {
+		if(count!=25) {
 			count+=1;
       write("%^ORANGE%^You spray a bit of citrus perfume on.");
       tell_room(ETP,"%^ORANGE%^"+TPQCN+" sprays on some citrus perfume.",TP);
