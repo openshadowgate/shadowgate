@@ -15,7 +15,7 @@ void create()
     set_spell_level(([ "mage" : 9 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS ride the lightning on TARGET");
-    set_damage_desc("electricity or versatile arcanist");
+    set_damage_desc("electricity or versatile arcanist, 45% Miss chance for 1 round");
     set_description("Developed by archmage Ramius, this spell, when cast, transforms you into a mass of living lightning and propels you toward your foes.  A versatile arcanist can manipulate the base element of this spell.");
     set_verbal_comp();
     set_somatic_comp();
@@ -164,11 +164,17 @@ spell_effect(int prof)
         }
         damage_targ(target, target_limb, sdamage, element);
     }
-    dest_effect();
+    caster->set_missChance(targ->query_missChance() + 45);
+    call_out("dest_effect", ROUND_LENGTH);
 }
 
 void dest_effect()
 {
+    if (objectp(caster)) {
+        tell_object(caster,"%^BOLD%^%^ORANGE%^You are no longer are the lightning.");
+        tell_object(ENV(caster),"%^BOLD%^%^ORANGE%^" + caster->QCN + " is no longer a bolt of living lightning.");
+        caster->set_missChance(caster->query_missChance() - 45);
+    }
     ::dest_effect();
     if (objectp(TO)) {
         TO->remove();
