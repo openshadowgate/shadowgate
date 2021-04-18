@@ -12,7 +12,8 @@ void create() {
     set_author("nienne");
     set_spell_name("voracious dispelling");
     set_spell_level(([ "warlock" : 2 ]));
-    set_syntax("cast CLASS voracious dispelling (on TARGET)");
+    set_syntax("cast CLASS voracious dispelling [on TARGET]");
+    set_damage_desc("untyped for each spell");
     set_description("This invocation will seek to unravel any spell enchantments, magical summonings, and conjurations. "
 "The chances of each dispelling depends on both the dispeller's power, and that of the one who created whatever is being "
 "dispelled. Such is the disruptive nature of the invocation, that successful dispel attempts will also harm their target.");

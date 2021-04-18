@@ -1,9 +1,8 @@
-// for yuan-ti racial ability. N, 1/14.
 #include <priest.h>
 inherit SPELL;
 
 void create() {
-    ::create();     
+    ::create();
     set_spell_name("viper form");
     set_spell_level(([ "innate" : 1 ]));
     set_spell_sphere("transmutation");
@@ -33,7 +32,7 @@ void spell_effect(int prof) {
         TO->remove();
         return;
       }
-      new("/std/races/shapeshifted_races/yuan-ti_viper.c")->init_shape(caster,"viper"); 
+      new("/std/races/shapeshifted_races/yuan-ti_viper.c")->init_shape(caster,"viper");
       spell_successful();
       addSpellToCaster();
 }

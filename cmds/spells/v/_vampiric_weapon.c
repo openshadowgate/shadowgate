@@ -1,12 +1,3 @@
-/*
-  _vampiric_weapon.c
-
-  AKA Vampiric Blade from PF SRD.
-  Adds a life drain effect to your weapon.
-
-  -- Tlaloc --
-*/
-
 #include <std.h>
 
 inherit SPELL;
@@ -21,7 +12,7 @@ void create()
     set_spell_level( ([ "psywarrior" : 3 ]) );
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS vampiric weapon on WEAPON");
-    set_damage_desc("Negative energy damage on enemy and heals wielder.");
+    set_damage_desc("negative energy to hostile, untyped heal to self");
     set_description("With this power, the caster imbues their weapon with an ominous glimmer. When striking, the weapon has a chance to pull on the victim's life force, harming them with necrotic energy and healing the wielder.");
     set_arg_needed(1);
 }

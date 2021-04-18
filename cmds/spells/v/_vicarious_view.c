@@ -1,7 +1,3 @@
-//Adjusted by ~Circe~ 4/26/08 to be a more useful tool
-//in investigation.  Made 5th level and will give an
-//actual scry rather than just a brief glimpse of where
-//the target is.
 #include <std.h>
 #include <magic.h>
 #include <daemons.h>

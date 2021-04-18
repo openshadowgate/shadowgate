@@ -1,5 +1,3 @@
-//Vampiric touch coded by Bane//
-
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>

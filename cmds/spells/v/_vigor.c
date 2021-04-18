@@ -1,5 +1,3 @@
-//hp adjustment updated to bring it in line with similar spells ~Circe~ 11/30/19
-//~Circe~ 7/20/05
 #include <spell.h>
 inherit SPELL;
 
@@ -11,6 +9,7 @@ void create(){
    set_spell_level(([ "psion" : 1, "psywarrior" : 1 ]));
    set_spell_sphere("alteration");
    set_syntax("cast CLASS vigor");
+    set_damage_desc("clevel * 2 to max hp");
    set_description("This power allows the psion to call upon psychic energies to strengthen their body, granting them added health.  As with other psionic powers, this one will grow in strength as the psion does.");
    set_verbal_comp();
    set_somatic_comp();
@@ -41,9 +40,9 @@ void spell_effect(int prof){
    newhp = clevel*2;
    caster->add_max_hp_bonus(newhp);
    caster->set_property("spell_bonus_hp",1);
-   caster->set_property("spelled",({TO}));    
+   caster->set_property("spelled",({TO}));
    addSpellToCaster();
-   spell_successful();    
+   spell_successful();
 }
 
 void dest_effect(){
