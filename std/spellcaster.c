@@ -1191,27 +1191,6 @@ void InitInnate()
         }
     }
 
-    /* This code moving to class file
-
-    if(TO->is_class("cleric"))
-    {
-        if(member_array("cold", TO->query_divine_domain()) >= 0)
-            feat_spells += ([ "ice bolt" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
-        if(member_array("fire", TO->query_divine_domain()) >= 0)
-            feat_spells += ([ "fire bolt" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
-        if(member_array("air", TO->query_divine_domain()) >= 0)
-            feat_spells += ([ "lightning blast" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
-        if(member_array("earth", TO->query_divine_domain()) >= 0)
-            feat_spells += ([ "acid dart" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
-        if(member_array("darkness", TO->query_divine_domain()) >= 0)
-            feat_spells += ([ "touch of darkness" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
-        if(member_array("moon", TO->query_divine_domain()) >= 0)
-            feat_spells += ([ "moonfire" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
-        if(member_array("plant", TO->query_divine_domain()) >= 0)
-            feat_spells += ([ "bramble armor" : ([ "type" : "spell", "daily uses" : -1, "level required" : 0 ]), ]);
-    }
-    */
-
     // to add new classes or reasons for innates, simply add to feat_spells here before this line.
     newmap = keys(feat_spells);
 
