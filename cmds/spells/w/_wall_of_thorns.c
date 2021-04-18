@@ -20,7 +20,8 @@ void create()
     set_domains("plant");
     set_mystery("nature");
     set_spell_sphere("invocation_evocation");
-    set_syntax("cast CLASS wall of thorns [on <exit>] | cast <classname> wall of thorns");
+    set_damage_desc("piercing");
+    set_syntax("cast CLASS wall of thorns [on EXIT] | cast CLASS wall of thorns");
 
     set_description("The spell wall of thorns will create a massive wall of tangled thorn bushes that will "
         "damage anyone going through an exit, or optionally, damage anyone who attacks the caster.  If "

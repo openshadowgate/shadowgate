@@ -18,7 +18,9 @@ void create() {
     set_domains("fire");
     set_spell_sphere("invocation_evocation");
     set_monk_way("way of the elements");
-    set_syntax("cast CLASS wall of fire [on <exit>]");
+    set_damage_desc("fire");
+    set_syntax("cast CLASS wall of fire [on EXIT]");
+
     set_description("The spell, wall of fire, is an impressive spell for the magi indeed.  The wizard can cast the wall "
 "around himself, protectively, or in front of an exit, so all who pass through that exit will be scorched by the flames.  "
 "To cast the wall around him/herself, the mage simply types <cast classname wall of fire>.  Otherwise, the mage might "

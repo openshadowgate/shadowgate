@@ -16,6 +16,7 @@ string * GIBBERISH = ({
             "I stink!",
             "It's a rough situation over here!",
             "Join me, I have cookies!",
+            "Cookies are better than you!",
             "Let me join you!",
             "Look! Over there!",
             "No collusion!",

@@ -13,7 +13,7 @@ void create() {
     set_domains("renewal");
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS waves of fatigue");
-    set_damage_desc("living creatures become fatigued");
+    set_damage_desc("fatigue to living");
     set_description("This spell sends waves of necrotic energy at everyone living in sight, fatiguing them.");
     set_verbal_comp();
     set_somatic_comp();

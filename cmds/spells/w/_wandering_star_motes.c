@@ -12,6 +12,7 @@ void create() {
     set_spell_level(([ "bard" : 4 ]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS wandering star motes on TARGET");
+    set_damage_desc("clevel / 5 + 1 to ac");
     set_description("This spell creates a swarm of sparkling motes of light, that shoot towards the target and swirl around "
 "it in a complex pattern.  It makes the target easier to hit with melee combat, and also makes it impossible for the target "
 "to hide by magical or other means until the spell expires or is dispelled.");
@@ -62,16 +63,9 @@ int preSpell()
 void spell_effect(int prof)
 {
     int duration;
-    if(sizeof(caster->query_classes()) == 1)
-    {
-        duration = (ROUND_LENGTH * 10) * clevel;
-        bonus = clevel/5;
-    }
-    else
-    {
-        duration = (ROUND_LENGTH * 5) * clevel;
-        bonus = clevel/10;
-    }
+
+    duration = (ROUND_LENGTH * 10) * clevel;
+    bonus = clevel / 5 + 1;
 
     if(!present(target,place))
     {

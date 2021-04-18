@@ -11,6 +11,7 @@ void create(){
     set_spell_level(([ "warlock" : 2 ]));
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS witchwood step");
+    set_damage_desc("freedom of movement on demand");
     set_description("This invocation attunes the warlock to an element of flowing energy, commonly that of air, "
 "water, or the chaotic fluctuations of the feywild. Such energies will lie dormant in the caster's veins, triggering "
 "at the next time the caster is stunned or tripped to grant them freedom from the effect. The power of this invocation "
@@ -18,7 +19,7 @@ void create(){
 "cast while at peace.");
     set_verbal_comp();
     set_somatic_comp();
-    set_peace_needed(1); 
+    set_peace_needed(1);
     set_helpful_spell(1);
 }
 

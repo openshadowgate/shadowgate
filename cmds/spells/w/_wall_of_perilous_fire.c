@@ -1,4 +1,3 @@
-// at present, on parity with wall of fire. Should be upgraded when that is.
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
@@ -15,7 +14,8 @@ void create() {
     set_spell_name("wall of perilous fire");
     set_spell_level(([ "warlock" : 3 ]));
     set_spell_sphere("invocation_evocation");
-    set_syntax("cast CLASS wall of perilous fire [on <exit>]");
+    set_syntax("cast CLASS wall of perilous fire [on EXIT]");
+    set_damage_desc("fire");
     set_description("This invocation is quite similar to the mage spell 'wall of fire', save that it is conjured purely "
 "of planar energy. It allows the caster to create a wall of brilliant blue flames around himself, protectively, or in "
 "front of an exit, so all who pass through that exit will be scorched by the flames. Half of the damage done is fire, "
@@ -27,7 +27,7 @@ void create() {
     set_helpful_spell(1);
 }
 
-string query_cast_string() 
+string query_cast_string()
 {
     tell_object(caster,"%^BOLD%^%^WHITE%^You lift a hand to direct your invocation with a fingertip.%^RESET%^");
     if(objectp(place)) { tell_room(place,"%^BOLD%^%^WHITE%^"+caster->QCN+" lifts a hand to direct "+caster->QP+" invocation with a fingertip.%^RESET%^",caster); }

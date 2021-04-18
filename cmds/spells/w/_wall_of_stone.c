@@ -13,7 +13,8 @@ create()
     set_spell_sphere("conjuration_summoning");
     set_mystery("stone");
     set_monk_way("way of the elements");
-    set_syntax("cast CLASS wall of stone on <exit>");
+    set_syntax("cast CLASS wall of stone on EXIT");
+    set_damage_desc("blocks the EXIT");
     set_description("This command will cause a wall of rubble to appear on an exit, preventing travel in that direction "
         "until all of the rubble has been cleared away.  The more powerful the caster, the larger the rubble "
         "wall that must be removed.");

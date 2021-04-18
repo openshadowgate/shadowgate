@@ -1,11 +1,3 @@
-/*
-  _wall_walker.c
-
-  From PF SRD. Behaves like spider climb.
-
-  -- Tlaloc --
-*/
-
 #include <priest.h>
 
 inherit SPELL;

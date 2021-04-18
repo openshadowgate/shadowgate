@@ -1,8 +1,3 @@
-// Windstorm
-//Updated this spell after I realized that the random
-//strength and dex check was way too good and made the
-//target's stats not count for much, which was not
-//the intention ~Circe~ 6/11/08
 #include <spell.h>
 #include <daemons.h>
 #include <magic.h>
@@ -21,6 +16,7 @@ void create()
     set_spell_sphere("invocation_evocation");
     set_domains("air");
     set_syntax("cast CLASS windstorm");
+    set_damage_desc("bludgeoning, tripped for 1d4 rounds");
     set_description("This spell calls on the power of the plane of air to unleash a terrible gale of wind that sends "
         "debris whipping around the caster's enemies.  It has a chance to blind them with sand, and even knock them from their "
         "feet.");
@@ -127,7 +123,7 @@ int storm_effects(object obj)
         damage_targ(obj,obj->return_target_limb(),damage,"bludgeoning");
     }
 
-    if (!do_save(obj, 4) && obj->set_tripped(roll_dice(1, 2), "%^BOLD%^You are struggling to get back to your feet!", 2)) {
+    if (!do_save(obj, 4) && obj->set_tripped(roll_dice(1, 4), "%^BOLD%^You are struggling to get back to your feet!", 2)) {
         tell_object(obj, "%^BOLD%^%^WHITE%^The wind throws you from your feet, swirling your "
                     "body up into the air before you hit the ground with a thud!");
         tell_room(room, "%^BOLD%^%^WHITE%^" + obj->QCN + " is suddenly caught by the force of the "

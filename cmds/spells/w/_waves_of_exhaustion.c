@@ -14,7 +14,7 @@ void create() {
     set_domains(({"repose"}));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS waves of exhaustion");
-    set_damage_desc("living creatures become exhausted");
+    set_damage_desc("exhaustion to living");
     set_description("This spell sends waves of necrotic energy at everyone living in sight, exhausting them.");
     set_verbal_comp();
     set_somatic_comp();

@@ -11,6 +11,7 @@ void create()
     set_spell_level(([ "inquisitor" : 2, "mage" : 2, "magus" : 2, "paladin" : 2, "psion" : 2 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS wieldskill");
+    set_damage_desc("simple, martial and exotic weapon proficiencies");
     set_description("This gives the caster proficiency with any kind of weapon, provided they are able to wield it.");
     set_verbal_comp();
     set_somatic_comp();

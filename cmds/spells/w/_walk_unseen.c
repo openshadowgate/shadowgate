@@ -3,7 +3,6 @@
 #include <rooms.h>
 inherit SPELL;
 
-/*object invisob, caster, target, place; Removing due to the weirdness with the new driver - Octothorpe 3/15/17 */
 object invisob;
 
 void create() {
@@ -13,6 +12,7 @@ void create() {
     set_spell_level(([ "warlock" : 2 ]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS walk unseen");
+    set_damage_desc("invisible");
     set_description("This invocation places illusory spellcraft around the warlock, deceiving the "
 "eyes of those around so as to effectively disappear from view. While minor, a small degree of "
 "concentration is required to maintain the effect, so it can become wearying over time. Becoming "

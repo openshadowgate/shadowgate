@@ -9,6 +9,7 @@ void create() {
     set_spell_level(([ "mage" : 3, "bard":3, "nightblade":5]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS wave of pain");
+    set_damage_desc("untyped");
     set_description("Through this spell, the caster sends out a great wave of pain that can harm, kill, and/or paralyze "
 "all in its path.");
     set_verbal_comp();

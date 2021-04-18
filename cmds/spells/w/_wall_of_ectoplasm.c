@@ -19,6 +19,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     set_arg_needed();
+    set_damage_desc("untyped");
     set_helpful_spell(1);
 }
 
@@ -65,28 +66,6 @@ void spell_effect(int prof) {
             tell_room(outside,"%^CYAN%^A shimmering field suddenly "+
                       "spring up, blocking the "+
                       ins[i]+"!%^RESET%^");
-/*
-            tell_room(outside,"%^CYAN%^A shimmering field suddenly "+
-                      "spring up, blocking the "+
-                      ins[i]+"!\n%^BOLD%^%^CYAN%^A burst of energy "+
-                      "comes hurtling from the field!");
-            burned = all_inventory(outside);
-            for (j=0;j<sizeof(all_inventory(outside));j++) {
-                if(living(burned[j])){
-                        tell_room(outside,"%^BOLD%^%^MAGENTA%^"+
-                                  burned[j]->QCN+" is "+
-                                  "lashed by the energy!",
-                                  burned[j]);
-                        tell_object(burned[j],"%^BOLD%^%^MAGENTA%^The "+
-                           "energy lashes you severely!");
-                        limbs = burned[j]->query_limbs();
-                        if ( burned[j]->query_property("undead") )
-                            damage_targ(burned[j],limbs[random(sizeof(limbs))],(4+random(13)),"force" );
-                        else
-                            damage_targ(burned[j],limbs[random(sizeof(limbs))],(2+random(7)),"force" );
-                }
-            }
-*/
             break;
         }
     }
