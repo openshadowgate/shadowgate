@@ -132,28 +132,32 @@ void execute_feat()
 int calculate_my_dam(object victim, int crit)
 {
     object myFB;
-    int dam, mycrit_range=20;
-    if(!objectp(caster))
-    {
+    int dam, mycrit_range = 20;
+    if (!objectp(caster)) {
         return 0;
     }
-    if(!objectp(myFB = caster->query_property("flurry of blows")))
-    {
+    if (!objectp(myFB = caster->query_property("flurry of blows"))) {
         return 0;
     }
-    if((int)caster->query_alignment() > 3)
-    {
+    if ((int)caster->query_alignment() > 3) {
         return 0;
     }
-    dam = (int)caster->query_unarmed_damage();
-    if(FEATS_D->usable_feat(caster, "weapon finesse")) dam += BONUS_D->query_stat_bonus(caster, "dexterity");
-    else dam += BONUS_D->query_stat_bonus(caster, "strength");
+    dam = caster->query_unarmed_damage();
+    if (FEATS_D->usable_feat(caster, "weapon finesse")) {
+        dam += BONUS_D->query_stat_bonus(caster, "dexterity");
+    }else {
+        dam += BONUS_D->query_stat_bonus(caster, "strength");
+    }
     dam += (int)caster->query_damage_bonus();
-    if(caster->is_class("monk")) dam += "/std/class/monk.c"->effective_enchantment(caster);
-	if(FEATS_D->usable_feat(caster, "lethal strikes")){
-		mycrit_range=19;
-	}
-	if(crit >= mycrit_range) dam = "/daemon/combat_d.c"->crit_damage(caster, victim, 0, (int)victim->query_size(), dam, 0);
+    if (caster->is_class("monk")) {
+        dam += "/std/class/monk.c"->effective_enchantment(caster);
+    }
+    if (FEATS_D->usable_feat(caster, "lethal strikes")) {
+        mycrit_range = 19;
+    }
+    if (crit >= mycrit_range) {
+        dam = "/daemon/combat_d.c"->crit_damage(caster, victim, 0, (int)victim->query_size(), dam, 0);
+    }
     return dam;
 }
 
