@@ -25,7 +25,7 @@ void create()
 
 The first is the use of the conjured portal as a means of transit, both for the caster and his allies, to a specified location previously memorized.
 
-The second is the use of the portal to draw forth a powerful planar creature under the control of the caster, to act as a servant and/or a protector. This is a greater summons, and cannot be used simultaneously with other greater summons. You can give it weapons and equipment if you wish so, outsider will bring them back from outer planes.
+The second is the use of the portal to draw forth a powerful planar creature under the control of the caster, to act as a servant and/or a protector. This is a greater summons, and cannot be used simultaneously with other greater summons. You can give it weapons and equipment if you wish so, outsider will try to bring them back from outer planes.
 
 To command outsider, use %^ORANGE%^<command outsider to %^ORANGE%^%^ULINE%^ACTION%^RESET%^%^ORANGE%^>%^RESET%^.
 To make lost outsider to follow you, %^ORANGE%^<command outsider to follow>%^RESET%^.
