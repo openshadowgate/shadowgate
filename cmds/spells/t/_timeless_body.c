@@ -13,6 +13,7 @@ void create() {
     set_mystery("ancestor");
     set_spell_sphere("combat");
     set_syntax("cast CLASS timeless body");
+    set_damage_desc("100% miss chance second round");
     set_description("This power will enable a psion to take on a ghostly state, making him difficult to hit in combat.  "
 "The power has an equal chance each round to make the psion untouchable or not.  The psion's body fades, becoming "
 "partially on this plane and partially on the Astral Plane.
