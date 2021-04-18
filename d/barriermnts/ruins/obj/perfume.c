@@ -29,7 +29,7 @@ int wear_fun(string str) {
    string long;
    int value;
    if(member_array(str,TO->query_id()) != -1) {
-     if(uses > 4) {
+     if(uses > 24) {
        tell_object(TP,"There is no more perfume left in the vial.");
        return 1;
      }
@@ -39,10 +39,10 @@ int wear_fun(string str) {
      TP->set("long","%^RESET%^%^ORANGE%^A faint aroma of soft spices scents the air around "
 +TP->QO+".%^RESET%^");
      value = TO->query_value();
-     value = value - 110;
+     value = value - 20;
      TO->set_value(value);
      uses++;
-     if (uses > 4) {
+     if (uses > 24) {
        TO->set_short("%^RESET%^empty perfume vial");
        TO->set_long("%^MAGENTA%^This small, slender vial once held softly-spiced perfume, which you can "
 "still smell faintly from the bottle. However, it is now empty.%^RESET%^");
