@@ -1212,19 +1212,18 @@ void InitInnate()
 }
 
 
-void remove_bonus_innate(string *ability)
+void remove_bonus_innate(string* ability)
 {
     int x;
     InitInnate();
-    if(!mapp(InnateAbilities)) return;
-    for(x = 0;x < sizeof(ability);x++)
-    {
-        if(member_array(ability[x], keys(InnateAbilities)) == -1)
-        {
+    if (!mapp(InnateAbilities)) {
+        return;
+    }
+    for (x = 0; x < sizeof(ability); x++) {
+        if (member_array(ability[x], keys(InnateAbilities)) == -1) {
             continue;
         }
-        if(InnateAbilities[ability[x]]["remove time"] == -1)
-        {
+        if (InnateAbilities[ability[x]]["remove time"] == -1) {
             map_delete(InnateAbilities, ability[x]);
             continue;
         }
