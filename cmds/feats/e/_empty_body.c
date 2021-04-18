@@ -36,7 +36,7 @@ int cmd_empty_body(string str)
    if(!objectp(TP)) { return 0; }
    if((int)TP->query_class_level("monk") < 18) return 0;
    if((int)TP->query_alignment() > 3) return 0;
-   if(!(int)USER_D->can_spend_ki(TP, 4))
+   if(!(int)USER_D->can_spend_ki(TP, 5))
    {
        tell_object(TP, "%^BOLD%^%^CYAN%^Your empty body attempt fails, you lack the needed ki.%^RESET%^");
        dest_effect();
@@ -51,97 +51,93 @@ void execute_feat()
 {
     object *weapons;
     int x;
-    if(!objectp(caster))
-    {
+    if (!objectp(caster)) {
         dest_effect();
         return;
     }
-    if(caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
-    {
-        caster->send_paralyzed_message("info",caster);
+    if (caster->query_bound() || caster->query_tripped() || caster->query_paralyzed()) {
+        caster->send_paralyzed_message("info", caster);
         dest_effect();
         return;
     }
     ::execute_feat();
-    if(objectp(caster->query_property("empty body")))
-    {
+    if (objectp(caster->query_property("empty body"))) {
         tell_object(caster, "%^BOLD%^%^CYAN%^You are currently already under the effects of empty body!");
         dest_effect();
         return;
     }
-    if(!(int)USER_D->can_spend_ki(TP, 4))
-    {
+    if (!(int)USER_D->can_spend_ki(TP, 4)) {
         tell_object(caster, "%^BOLD%^%^CYAN%^Your empty body attempt fails, you lack the needed ki.%^RESET%^");
         dest_effect();
         return;
     }
-    if((int)caster->query_property("using empty body") > time())
-    {
-        tell_object(caster, "%^BOLD%^%^CYAN%^Your empty body attempt fails, you must wait longer.%^RESET%^");
+    if (!caster->query_time_delay("empty_body", 35)) {
+        tell_object(caster, "%^BOLD%^%^CYAN%^Your cannot empty body yet...%^RESET%^");
         dest_effect();
         return;
     }
-    if((int)caster->query_property("using instant feat"))
-    {
-        tell_object(caster,"%^BOLD%^You are already in the middle of using a feat.%^RESET%^");
+
+    if ((int)caster->query_property("using instant feat")) {
+        tell_object(caster, "%^BOLD%^You are already in the middle of using a feat.%^RESET%^");
         dest_effect();
         return;
     }
-    if(caster->query_casting())
-    {
-        tell_object(caster,"%^BOLD%^You are already in the middle of casting a spell.%^RESET%^");
+
+    if (caster->query_casting()) {
+        tell_object(caster, "%^BOLD%^You are already in the middle of casting a spell.%^RESET%^");
         dest_effect();
         return;
     }
+
     weapons = caster->query_wielded();
 
-    for(x = 0;x < sizeof(weapons);x++)
-    {
-        if(!objectp(weapons[x])) continue;
-        if((int)weapons[x]->query_size() > 1)
-        {
-            tell_object(caster, "%^BOLD%^%^GREEN%^Your "+weapons[x]->query_short()+
-            " prevents you from emptying your body of its vulnerabilities!%^RESET%^");
+    for (x = 0; x < sizeof(weapons); x++) {
+        if (!objectp(weapons[x])) {
+            continue;
+        }
+        if ((int)weapons[x]->query_size() > 1) {
+            tell_object(caster, "%^BOLD%^%^GREEN%^Your " + weapons[x]->query_short() +
+                        " prevents you from emptying your body of its vulnerabilities!%^RESET%^");
             dest_effect();
             return;
         }
         continue;
     }
-    if(!caster->is_ok_armour("barb"))
-    {
-        tell_object(caster, "%^BOLD%^%^GREEN%^Your armor "+
-        "prevents you from emptying your body of its vulnerabilities!%^RESET%^");
+    if (!caster->is_ok_armour("barb")) {
+        tell_object(caster, "%^BOLD%^%^GREEN%^Your armor " +
+                    "prevents you from emptying your body of its vulnerabilities!%^RESET%^");
         dest_effect();
         return;
     }
 
-    if(!(int)caster->spend_ki(8))
-    {
+    if (!(int)caster->spend_ki(8)) {
         tell_object(caster, "%^BOLD%^%^CYAN%^Your empty body attempt fails, you lack the needed ki.%^RESET%^");
         dest_effect();
         return;
     }
-    if(!caster->query_invis())
-    {
-        tell_object(caster, "%^BOLD%^%^WHITE%^You harness your inner Ki, emptying your body of all of its vulnerabilities, as "+
-        "you fade from view!%^RESET%^");
-    }
-    else
-    {
+
+    if (!caster->query_invis()) {
+        tell_object(caster, "%^BOLD%^%^WHITE%^You harness your inner Ki, emptying your body of all of its vulnerabilities, as " +
+                    "you fade from view!%^RESET%^");
+    }else {
         tell_object(caster, "%^BOLD%^%^WHITE%^You harness your inner Ki, emptying your body of all of its vulnerabilities!");
     }
-    if(objectp(environment(caster)))
-    {
-        if(!caster->query_invis()) tell_room(environment(caster), caster->QCN+"%^BOLD%^%^WHITE%^ fades from view!%^RESET%^", caster);
+
+    if (objectp(environment(caster))) {
+        if (!caster->query_invis()) {
+            tell_room(environment(caster), caster->QCN + "%^BOLD%^%^WHITE%^ fades from view!%^RESET%^", caster);
+        }
     }
-    caster->set_property("using empty body", time() + 180);
+
+    caster->set_time_delay("empty_body");
+
     caster->set_property("empty body", TO);
     if(!caster->query_invis())
     {
         caster->set_magic_hidden(1);
         BaseFlag = 1;
     }
-    call_out("dest_effect", 60);
+    call_out("dest_effect", 20);
     return;
 }
 
