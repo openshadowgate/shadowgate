@@ -164,7 +164,7 @@ void execute_attack()
                     ""+attackers[i]->QCN+" manages to dodge out of the way!",({attackers[i],caster}) );
                 continue;
             }
-            if(attackers[i]->fort_save(level))
+            if(attackers[i]->fort_save(level) && !attackers[i]->set_tripped(level / 10, "%^RESET%^%^GREEN%^You are trying to stand up again!"))
             {
                 tell_object(attackers[i],"%^RED%^"+caster->QCN+" bowls into you with "+caster->QP+" shield, almost knocking you over!");
                 tell_room(place, "%^RED%^"+caster->QCN+" bowls into "+attackers[i]->QCN+" with "+caster->QP+" shield, almost "
@@ -176,7 +176,6 @@ void execute_attack()
                     "knocking your teeth loose!\n%^RESET%^%^GREEN%^You are sent sprawling to the ground!");
                 tell_room(place,"%^RESET%^%^BOLD%^%^BLUE%^"+caster->QCN+" slams into "+attackers[i]->QCN+" with "+caster->QP+" shield, knocking "
                     ""+attackers[i]->QO+" flat on "+attackers[i]->QP+" back!",({attackers[i],caster}));
-                attackers[i]->set_tripped(level / 10, "%^RESET%^%^GREEN%^You are trying to stand up again!");
             }
             doing = 1;
             attackers[i]->cause_typed_damage(attackers[i],attackers[i]->return_target_limb(), roll_dice(6, level), "bludgeoning");
