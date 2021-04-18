@@ -102,7 +102,7 @@ int claw_attack(object tp, object targ)
         tell_object(tp, clr+"You furiously claw "+targ->QCN+"!");
         tell_object(targ, clr+tp->QCN+" furiously claws you!");
         tell_room(ENV(tp), clr+tp->QCN+" furiously claws "+targ->QCN+"!",({tp,targ}));
-        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,8),"slashing");
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,2),"slashing");
     }
 
     return roll_dice(2,6);

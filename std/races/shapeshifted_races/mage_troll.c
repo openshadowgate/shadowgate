@@ -102,8 +102,9 @@ int bite_attack(object tp, object targ)
         tell_object(tp,"%^GREEN%^You lightning quick bite %^BOLD%^%^BLACK%^deeply%^RESET%^%^GREEN%^ into "+targ->QCN+"'s "+(my_limb=targ->return_target_limb())+"!");
         tell_object(targ,"%^GREEN%^"+tp->QCN+" lightning quick bites %^BOLD%^%^BLACK%^deeply%^RESET%^ into your "+my_limb+"!");
         tell_room(ENV(tp),"%^GREEN%^"+tp->QCN+" snakes "+tp->QP+" lightning quick bites %^BOLD^%^BLACK%^deeply%^RESET%^ into "+targ->QCN+"'s "+my_limb+"!",({tp,targ}));
-        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,8),"piercing");
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,3),"piercing");
     }
+    return roll_dice(1, 8);
 }
 
 int claw_attack(object tp, object targ)
@@ -113,7 +114,7 @@ int claw_attack(object tp, object targ)
         tell_object(tp,"%^GREEN%^You reach out and %^BOLD%^violently %^RESET%^%^GREEN%^claw "+targ->QCN+"!");
         tell_object(targ,"%^GREEN%^"+tp->QCN+" reaches out and %^BOLD%^violently%^RESET%^%^GREEN%^ claws you!");
         tell_room(ENV(tp),"%^GREEN%^"+tp->QCN+" reaches out and %^BOLD%^violently%^RESET%^%^GREEN%^ claws "+targ->QCN+"!",({tp,targ}));
-        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,6),"slashing");
+        targ->cause_typed_damage(targ,targ->return_target_limb(),roll_dice(clevel,2),"slashing");
     }
     return roll_dice(2,6);
 }
