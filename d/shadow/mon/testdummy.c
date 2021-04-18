@@ -26,6 +26,16 @@ int do_typed_damage_effects(victim, limb, damage, damage_type)
     return damage;
 }
 
+heart_beat()
+{
+    ::heart_beat();
+
+    if (objectp(ETO) && !ETO->is_ooc_room()) {
+        tell_object(ETO,"The dummy vanishes.");
+        TO->remove();
+    }
+}
+
 pre_round()
 {
     ::pre_round();

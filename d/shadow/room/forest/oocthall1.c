@@ -65,3 +65,8 @@ int return_em(string str)
     }
     return 0;
 }
+
+is_ooc_room()
+{
+    return 1;
+}
