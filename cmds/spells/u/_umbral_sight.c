@@ -12,6 +12,7 @@ void create() {
     set_spell_level(([ "mage" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS umbral sight");
+    set_damage_desc("sight bonus");
     set_description("This spell will imbue the caster's vision with the stuff of darkness, allowing them to see easily "
 "even in deep shadow. It will similarly protect their vision from extremes of light.");
     set_verbal_comp();

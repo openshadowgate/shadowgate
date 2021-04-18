@@ -10,6 +10,7 @@ void create()
     set_spell_level(([ "mage" : 4, "cleric" : 4]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS unliving inversion");
+    set_damage_desc("negative energy affinity");
     set_description("With this spell living being can obtain properties of unliving creature, swapping currents of negative and positive energy within themselves.");
     set_save("will");
     set_verbal_comp();

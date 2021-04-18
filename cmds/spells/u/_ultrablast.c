@@ -12,6 +12,7 @@ void create() {
     set_spell_level(([ "psion" : 7 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS ultrablast on TARGET");
+    set_damage_desc("mental");
     set_description("A psion begins manifesting this spell by creating a psychic 'grumbling' that toys with the minds of "
 "those nearby.  The psion allows his brain to emit an earsplitting shriek that resounds in the minds of the one targetted "
 "and those around him.");
@@ -19,7 +20,6 @@ void create() {
     set_somatic_comp();
     set_target_required(1);
     splash_spell(1);
-    set_save("will");
 }
 
 string query_cast_string() {

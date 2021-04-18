@@ -9,9 +9,10 @@ void create() {
     set_spell_level(([ "druid" : 7, "mage" : 7,"inquisitor":6, "magus" : 6, "oracle":7]));
     set_mystery("shadow");
     set_spell_sphere("necromancy");
-    set_syntax("cast CLASS umbral strike on TARGET");
     set_damage_desc("half cold, half negative energy");
-    set_description("This spell will hurl a bolt of pure darkness at a target, harming them.");
+    set_syntax("cast CLASS umbral strike on TARGET");
+    set_damage_desc("half cold, half negative energy, blindness");
+    set_description("This spell will hurl a bolt of pure darkness at a target, harming them. Successful save will negate blindness and halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

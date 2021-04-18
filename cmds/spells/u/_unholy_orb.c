@@ -21,12 +21,13 @@ void create(){
     set_spell_sphere("combat");
     set_domains("evil");
     set_syntax("cast CLASS unholy orb");
+    set_damage_desc("divine");
     set_description("The orb is a spell normally prepared by a priest who expects to encounter enemies whose alignment "
 "opposes her own.  When cast, the spell streaks from the caster's hand to the desired point of effect, where a sphere "
 "forms.  The sphere drains the essence of life from the targets in the area of effect.  The sphere does damage based on "
 "the alignment of the caster with respect to the target.\n\nNOTE: This spell will damage all attackers regardless of "
 "alignment, but the damage will very if the attackers are players based on each individual's alignment.  The damage done "
-"to mobs is consistent no matter the mob's alignment.");
+"to mobs is consistent no matter the mob's alignment. Successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(2);
