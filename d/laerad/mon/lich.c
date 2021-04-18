@@ -235,6 +235,7 @@ void set_paralyzed(string message, int time)
 void die(object targ)
 {
     object who;
+    object *attackers;
     if (objectp(TO) && objectp(ETO) && present("phylactery", ETO)) {
         phy = present("phylactery", ETO);
         tell_room(ETO, "The body of the lich withers away into dust.");
@@ -242,14 +243,20 @@ void die(object targ)
         phy->remove();
         tooth = new("/d/laerad/cavern2/special/tooth");
         tooth->move(ETO);
-        who = query_current_attacker();
-        if (objectp(who)) {
-            who->set_mini_quest("Killed Hansoth", 0, "Killed Hansoth");
-            tell_room(ETO, who->query_cap_name() + " is briefly surrounded by a "
-                      "%^BOLD%^%^BLACK%^dark, eerie haze %^RESET%^from the explosion.", who);
-            tell_object(who, "You are briefly surrounded by a %^BOLD%^%^BLACK%^"
-                        "dark, eerie haze %^RESET%^from the explosion.");
+
+
+        attackers = TO->query_attackers();
+        for (int i=0; i<sizeof(attackers); i++) {
+            if (objectp(attackers[i]) && userp(objectp(attackers[i]))) {
+                attackers[i]->set_mini_quest("Killed Hansoth", 0, "Killed Hansoth");
+                tell_room(ETO, attackers[i]->query_cap_name() + " is briefly surrounded by a "
+                        "%^BOLD%^%^BLACK%^dark, eerie haze %^RESET%^from the explosion.", attackers[i]);
+                tell_object(attackers[i], "You are briefly surrounded by a %^BOLD%^%^BLACK%^"
+                            "dark, eerie haze %^RESET%^from the explosion.");
+            }
         }
+
+
         ::die(targ);
         return 1;
     }
