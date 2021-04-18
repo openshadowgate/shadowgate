@@ -11,7 +11,7 @@ void create() {
     feat_prereq("Thief L1");
     feat_desc("Combat reflexes represents the highly trained speed and dexterity of the rogue in combat, allowing them more damaging attacks when they flank an opponent. The character will use this chance to stab a foe, or launch alternative attacks in situations where stab would be ineffective. Success on this attack depends on whether your victim is denied their ac dodge bonus, whether you're flanking them and on a criticall roll. You will gain additional stab multiplier per ten class levels.
 
-%^BOLD%^%^WHITE%^See also: status effects");
+%^BOLD%^%^WHITE%^See also:%^RESET%^ status effects");
     permanent(1);
 }
 
