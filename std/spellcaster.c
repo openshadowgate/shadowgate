@@ -1236,39 +1236,44 @@ void remove_bonus_innate(string *ability)
 
 void add_bonus_innate(mapping BonusInnate)
 {
-    string *tmp, *tmp2, *tmp3;
+    string* tmp, * tmp2, * tmp3;
     mapping addThese = ([]);
     int x;
-    if(!mapp(BonusInnate)) return;
-    if(!mapp(InnateAbilities)) InitInnate();
-    if(!mapp(InnateAbilities)) return;
+    if (!mapp(BonusInnate)) {
+        return;
+    }
+    if (!mapp(InnateAbilities)) {
+        InitInnate();
+    }
+    if (!mapp(InnateAbilities)) {
+        return;
+    }
     tmp = keys(BonusInnate);
     tmp2 = keys(InnateAbilities);
     tmp3 = ({});
-    for(x = 0;x < sizeof(tmp);x++)
-    {
-        if(!mapp(BonusInnate[tmp[x]]) || member_array(tmp[x], tmp2) != -1)
-        {
+    for (x = 0; x < sizeof(tmp); x++) {
+        if (!mapp(BonusInnate[tmp[x]]) || member_array(tmp[x], tmp2) != -1) {
             continue;
         }
         BonusInnate[tmp[x]] += (["temp granted" : 1, "remove time" : -1]);
-        if(!BonusInnate[tmp[x]]["type"])
-        {
+        if (!BonusInnate[tmp[x]]["type"]) {
             BonusInnate[tmp[x]] += (["type" : "spell"]);
         }
-        if(!BonusInnate[tmp[x]]["daily uses"])
-        {
+        if (!BonusInnate[tmp[x]]["daily uses"]) {
             BonusInnate[tmp[x]] += (["daily uses" : -1]);
         }
         continue;
     }
-    for(x = 0;x < sizeof(tmp3);x++)
-    {
+    for (x = 0; x < sizeof(tmp3); x++) {
         map_delete(BonusInnate, tmp3[x]);
         continue;
     }
-    if(!mapp(BonusInnate)) return;
-    if(!sizeof(keys(BonusInnate))) return;
+    if (!mapp(BonusInnate)) {
+        return;
+    }
+    if (!sizeof(keys(BonusInnate))) {
+        return;
+    }
     InnateAbilities += BonusInnate;
 }
 
@@ -1308,16 +1313,26 @@ mixed query_innate_spells()
 int can_use_innate_ability(string ability)
 {
     mixed tmp;
-    if(!mapp(InnateAbilities)) InitInnate();
-    if(!mapp(InnateAbilities)) return;
-    if(member_array(ability, keys(InnateAbilities)) == -1) return 0;
-    if(!mapp(InnateAbilities[ability])) return 0;
+    if (!mapp(InnateAbilities)) {
+        InitInnate();
+    }
+    if (!mapp(InnateAbilities)) {
+        return;
+    }
+    if (member_array(ability, keys(InnateAbilities)) == -1) {
+        return 0;
+    }
+    if (!mapp(InnateAbilities[ability])) {
+        return 0;
+    }
     return 1;
 }
 
 int query_innate_ability_uses_remaining(string ability)
 {
-    if(!can_use_innate_ability(ability)) return 0;
+    if (!can_use_innate_ability(ability)) {
+        return 0;
+    }
     return InnateAbilities[ability]["uses left"];
 }
 
@@ -1325,10 +1340,18 @@ int query_innate_ability_uses_remaining(string ability)
 int query_innate_ability_total_uses(string ability)
 {
     mixed tmp;
-    if(!mapp(InnateAbilities)) InitInnate();
-    if(!mapp(InnateAbilities)) return;
-    if(member_array(ability, keys(InnateAbilities)) == -1) return 0;
-    if(!mapp(InnateAbilities[ability])) return 0;
+    if (!mapp(InnateAbilities)) {
+        InitInnate();
+    }
+    if (!mapp(InnateAbilities)) {
+        return;
+    }
+    if (member_array(ability, keys(InnateAbilities)) == -1) {
+        return 0;
+    }
+    if (!mapp(InnateAbilities[ability])) {
+        return 0;
+    }
     return -1;
 }
 
@@ -1336,16 +1359,22 @@ int query_innate_ability_level(string ability)
 {
     int lvl, mod;
     string MyClass;
-    if(!can_use_innate_ability(ability)) return 0;
+    if (!can_use_innate_ability(ability)) {
+        return 0;
+    }
     lvl = (int)TO->query_highest_level();
     lvl = to_int(lvl);
-    if(lvl < 1) lvl = 1;
+    if (lvl < 1) {
+        lvl = 1;
+    }
     return lvl;
 }
 
 int query_innate_useable_time(string ability)
 {
-    if(!query_innate_ability_total_uses(ability)) return 0;
+    if (!query_innate_ability_total_uses(ability)) {
+        return 0;
+    }
     return InnateAbilities[ability]["refresh time"];
 }
 
