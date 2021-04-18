@@ -2460,8 +2460,8 @@ void ok_to_wield(object who)
             }
 
             if (((wielded[0]->query_size() > Size) &&
-                    (wielded[1]->query_size() > Size) &&
-                    who->validate_combat_stance("dual wield")) ||
+                 (wielded[1]->query_size() > Size) &&
+                 who->validate_combat_stance("dual wield")) ||
                 who->validate_combat_stance("double weapon")) {
                 if (FEATS_D->usable_feat(who, "ambidexterity")) {
                     if (sizeof(worn)) {

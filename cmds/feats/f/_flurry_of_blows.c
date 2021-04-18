@@ -5,54 +5,62 @@ inherit FEAT;
 
 int duration, basemax, newmax, deltahp, feattracker, cooldown, myFlag, BonusFlag;
 
-void rage_me();
-void check();
-
-void create() {
-   ::create();
-   feat_type("instant");
-   feat_category("KiOffense");
-   feat_name("flurry of blows");
-   feat_desc("This feat allows the monk to focus her mind. She is able to uncanningly spot the weaknesses in the defenses of her enemies  by doing so, which allows her to attack at least once more, possibly  twice, at the expense of 1 Ki per combat round. This feat functions only  when unarmored and unarmed or wielding small weapons while the monk has  Ki available.");
-   feat_prereq("Monk L2");
-   feat_syntax("flurry_of_blows on|off");
-   set_target_required(0);
+void create()
+{
+    ::create();
+    feat_type("instant");
+    feat_category("KiOffense");
+    feat_name("flurry of blows");
+    feat_desc("This feat allows the monk to focus her mind. She is able to uncanningly spot the weaknesses in the defenses of her enemies  by doing so, which allows her to attack at least once more, possibly  twice, at the expense of 1 Ki per combat round. This feat functions only  when unarmored and unarmed or wielding small weapons while the monk has  Ki available.");
+    feat_prereq("Monk L2");
+    feat_syntax("flurry_of_blows on|off");
+    set_target_required(0);
 }
 
-int allow_shifted() { return 1; }
+int allow_shifted()
+{
+    return 1;
+}
 
 int prerequisites(object ob)
 {
-   if(!objectp(ob)) { return 0; }
-   if((int)ob->query_class_level("monk") < 2 || (int)ob->query_alignment() > 3)
-   {
-      dest_effect();
-      return 0;
-   }
+    if (!objectp(ob)) {
+        return 0;
+    }
+    if ((int)ob->query_class_level("monk") < 2 || (int)ob->query_alignment() > 3) {
+        dest_effect();
+        return 0;
+    }
     return ::prerequisites(ob);
 }
 
 int cmd_flurry_of_blows(string str)
 {
-   object feat;
-   if(!objectp(TP)) { return 0; }
-   if(str) str = lower_case(str);
-   if((int)TP->query_alignment() > 3) return 0;
-   if(!TP->is_class("monk")) return 0;
-   if(str != "on" && str != "off")
-   {
-      tell_object(TP,"Use flurry_of_blows on or flurry_of_blows off.");
-      return 1;
-   }
-   if(!(int)USER_D->can_spend_ki(TP, 1) && str == "on")
-   {
-       tell_object(TP, "%^BOLD%^%^CYAN%^You lack the needed ki to enable flurry of blows.%^RESET%^");
-       dest_effect();
-       return 1;
-   }
-   feat = new(base_name(TO));
-   feat->setup_feat(TP,str);
-   return 1;
+    object feat;
+    if (!objectp(TP)) {
+        return 0;
+    }
+    if (str) {
+        str = lower_case(str);
+    }
+    if ((int)TP->query_alignment() > 3) {
+        return 0;
+    }
+    if (!TP->is_class("monk")) {
+        return 0;
+    }
+    if (str != "on" && str != "off") {
+        tell_object(TP, "Use flurry_of_blows on or flurry_of_blows off.");
+        return 1;
+    }
+    if (!(int)USER_D->can_spend_ki(TP, 1) && str == "on") {
+        tell_object(TP, "%^BOLD%^%^CYAN%^You lack the needed ki to enable flurry of blows.%^RESET%^");
+        dest_effect();
+        return 1;
+    }
+    feat = new(base_name(TO));
+    feat->setup_feat(TP, str);
+    return 1;
 }
 
 void execute_feat()
@@ -363,111 +371,100 @@ void check()
     object myFB, *weapons, myWeapon;
     int x, myDam;
     string myWay;
-    if(!objectp(caster))
-    {
+
+    if (!objectp(caster)) {
         dest_effect();
         return;
     }
-    if(!objectp(myFB = caster->query_property("flurry of blows")))
-    {
+
+    if (!objectp(myFB = caster->query_property("flurry of blows"))) {
         dest_effect();
         return;
     }
-    if((int)caster->query_alignment() > 3)
-    {
+
+    if ((int)caster->query_alignment() > 3) {
         myFB->dest_effect();
         dest_effect();
         return;
     }
-    if(!(int)USER_D->can_spend_ki(caster, 1))
-    {
-        call_out("check",ROUND_LENGTH);
+
+    if (!(int)USER_D->can_spend_ki(caster, 1)) {
+        call_out("check", ROUND_LENGTH);
         return;
     }
-    if(caster->query_bound() || caster->query_tripped() || caster->query_paralyzed())
-    {
-        call_out("check",ROUND_LENGTH);
+
+    if (caster->query_bound() || caster->query_tripped() || caster->query_paralyzed()) {
+        call_out("check", ROUND_LENGTH);
         return;
     }
+
     if(caster->is_in_combat())
     {
         //only very rare chance of getting extra attacks when doing either - Saide
         myWay = (string)caster->query("monk way");
-        if((int)caster->query_property("using instant feat") || caster->query_casting())
-        {
+
+        if ((int)caster->query_property("using instant feat") || caster->query_casting()) {
             //higher chance of procs for way of the elements monks when casting or using another
             //feat
-            if(myWay == "way of the elements" && random(3))
-            {
+            if (myWay == "way of the elements" && random(3)) {
+                call_out("check", ROUND_LENGTH);
+                return;
+            }else if (random(10)) {
                 call_out("check", ROUND_LENGTH);
                 return;
             }
-            else if(random(10))
-            {
-                call_out("check",ROUND_LENGTH);
-                return;
-            }
         }
+
         weapons = (object *)caster->query_wielded();
-        for(x = 0;x < sizeof(weapons);x++)
-        {
-            if(!objectp(weapons[x])) continue;
+
+        for (x = 0; x < sizeof(weapons); x++) {
+            if (!objectp(weapons[x])) {
+                continue;
+            }
             //allow small weapons only - Saide
-            if((int)weapons[x]->query_size() > 1)
-            {
-                call_out("check",ROUND_LENGTH);
+            if ((int)weapons[x]->query_size() > 1) {
+                call_out("check", ROUND_LENGTH);
                 return;
             }
             continue;
         }
-        if(!caster->is_ok_armour("barb"))
-        {
-            call_out("check",ROUND_LENGTH);
+
+        if (!caster->is_ok_armour("barb")) {
+            call_out("check", ROUND_LENGTH);
             return;
         }
-        if(!(int)USER_D->can_spend_ki(caster, 1))
-        {
-            if(objectp(myFB)) myFB->dest_effect();
+
+        if (!(int)USER_D->can_spend_ki(caster, 1)) {
+            if (objectp(myFB)) {
+                myFB->dest_effect();
+            }
             dest_effect();
             return;
         }
+
         tell_object(caster, "%^BOLD%^%^CYAN%^You spot a weakness in your enemy's defense and "+
         "launch an attack!%^RESET%^");
-        /*if(objectp(environment(caster)))
-        {
-            tell_room(environment(caster), caster->QCN+"%^BOLD%^%^CYAN%^ launches an attack!%^RESET%^", caster);
-        }*/
+
         flurry_hit();
+
         //redesigning so that extra hits are successful if
         //making a touch attack - do not use weapon at all - bare hands/tendrils
         //higher chance of second hit for way of the shadow monks with shadow opportunist feat
-        if(FEATS_D->usable_feat(caster, "shadow opportunist"))
-        {
-            if(!random(2))
-            {
-                tell_object(caster, "%^BOLD%^%^CYAN%^You spot a weakness in your enemy's defense and "+
-                "launch an attack!%^RESET%^");
+
+        if (FEATS_D->usable_feat(caster, "shadow opportunist")) {
+            if (!random(2)) {
+                tell_object(caster, "%^BOLD%^%^CYAN%^You spot a weakness in your enemy's defense and " +
+                            "launch an attack!%^RESET%^");
                 flurry_hit();
             }
-        }
-        else if(!random(6) && (int)caster->query_class_level("monk") >= 15)
-        {
-            tell_object(caster, "%^BOLD%^%^CYAN%^You spot a weakness in your enemy's defense and "+
-            "launch an attack!%^RESET%^");
-            /*if(objectp(environment(caster)))
-            {
-                tell_room(environment(caster), caster->QCN+"%^BOLD%^%^CYAN%^ launches an attack!%^RESET%^", caster);
-            }*/
+        }else if (!random(6) && (int)caster->query_class_level("monk") >= 15) {
+            tell_object(caster, "%^BOLD%^%^CYAN%^You spot a weakness in your enemy's defense and " +
+                        "launch an attack!%^RESET%^");
             flurry_hit();
         }
+
         caster->spend_ki(1);
-        //making it simply not function when out of ki - Saide
-        /* if(!(int)"/daemon/user_d.c"->can_spend_ki(caster, 1))
-        {
-            if(objectp(myFB)) myFB->dest_effect();
-            dest_effect();
-            return;
-        }*/
+
     }
     call_out("check",ROUND_LENGTH);
     return;
