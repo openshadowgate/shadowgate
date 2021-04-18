@@ -11,8 +11,8 @@ void create()
     set_indoors(1);
     set_name("An OOC Training Room");
     set_short("%^RESET%^CYAN%^An OOC Training Room%^RESET%^");
-    set_long("%^RESET%^%^CYAN%^This is an OOC Training Room for use by players wanting to figure out around how much damage they do.  You can %^BOLD%^%^WHITE%^<retrieve dummy> %^RESET%^%^CYAN%^to have something to practice on, but make sure you %^BOLD%^%^WHITE%^<return dummy> %^RESET%^%^CYAN%^when finished.%^RESET%^");
-    set_listen("default", "You hear people calculating their DPS.");
+    set_long("%^RESET%^%^CYAN%^This is an OOC Training Room for use by players wanting to figure out around how much damage they do. You can %^BOLD%^%^WHITE%^<retrieve dummy> %^RESET%^%^CYAN%^to have something to practice on, but make sure you %^BOLD%^%^WHITE%^<return dummy> %^RESET%^%^CYAN%^when finished.%^RESET%^");
+    set_listen("default", "You hear people calculating their DPR.");
     set_exits(([
                    "south" : "/d/shadow/room/forest/road3"
                    ]));
