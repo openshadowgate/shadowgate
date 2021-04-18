@@ -10,7 +10,7 @@ void create(){
     set_spell_level(([ "cleric" : 1, ]));
     set_spell_sphere("alteration");
     set_domains("trickery");
-    spell_damage_desc("changes alignment");
+    set_damage_desc("changes alignment");
     set_syntax("cast CLASS conceal alignment on ALIGNMENT");
     set_description("When this spell is cast, the caster must pick the alignment that he wishes for others to see him as"
 ".  This spell has a chance to fool any magical or other means of detecting the caster's true alignment.\n\nThe choices "

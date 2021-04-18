@@ -15,7 +15,7 @@ void create()
     set_spell_level(([ "bard" : 3, "mage" : 4 ]));
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS crushing despair on TARGET");
-    spell_damage_desc("clevel / 8 to damage, attack, caster level, skills");
+    set_damage_desc("clevel / 8 to damage, attack, caster level, skills");
     set_description("By means of this spell, the caster invokes a tangible feeling of despair over their target, "
                     "attempting to sap their morale. It will inflict a penalty to the target's attacks, damage, core skills, saving "
                     "throws and spellpower. Such an effect is not dispellable by normal magics, but will fade over time.");
