@@ -33,7 +33,9 @@ int misc_bonuses(string subrace, string bonus) { return 0; }
 
 mapping query_racial_innate(string subrace){
    return ([
-   "viper form" : (["type" : "spell", "casting level" : 0.5, "daily uses" : -1, "delay" : 1, "uses left" : -1, "refresh time" : -1, "level required" : 0, "class specific" : 0]),]);
+               "viper form" : (["type" : "spell",]),
+               "alter self" : (["type" : "spell",]),
+               ]);
 }
 
 // ---------------------------------------------------------------------------------------------------
