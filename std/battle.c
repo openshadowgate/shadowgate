@@ -410,6 +410,8 @@ void heart_beat()
     combatants->set_attack_counter(0);
     combatants->set_attack_counter(1);
 
+    combatants->pre_round();
+
     for (i=0;i<20;i++)
     {
         for (k = 0;k<sizeof(round[i]);k++)
@@ -492,14 +494,11 @@ void heart_beat()
         round[i] = ({});
     }
 
-
+    combatants->post_round();
 
     untouchable = ({});
     busy = ({});
-//    if (onoff<SPEED)
     onoff += 1;
-//    else
-//    onoff = 0;
     return;
 }
 

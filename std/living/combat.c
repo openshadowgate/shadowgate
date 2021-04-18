@@ -846,14 +846,82 @@ mixed query_combat_mapps(string type, string which)
     return 0;
 }
 
-mapping query_combat_vars() { return combat_vars; }
-mapping query_combat_messages() { return combat_messages; }
-mapping query_combat_counters() { return combat_counters; }
-mapping query_combat_static_vars() { return combat_static_vars; }
-mapping query_combat_arrays() { return combat_arrays; }
+mapping query_combat_vars()
+{
+    return combat_vars;
+}
 
-void set_combat_vars(mapping val) { if(!mapp(val)) { return; } else return combat_vars = val; }
-void set_combat_messages(mapping val) { if(!mapp(val)) { return; } else return combat_messages = val; }
-void set_combat_counters(mapping val) { if(!mapp(val)) { return; } else return combat_counters = val; }
-void set_combat_static_vars(mapping val) { if(!mapp(val)) { return; } else return combat_static_vars = val; }
-void set_combat_arrays(mapping val) { if(!mapp(val)) { return; } else return combat_arrays = val; }
+mapping query_combat_messages()
+{
+    return combat_messages;
+}
+
+mapping query_combat_counters()
+{
+    return combat_counters;
+}
+
+mapping query_combat_static_vars()
+{
+    return combat_static_vars;
+}
+
+mapping query_combat_arrays()
+{
+    return combat_arrays;
+}
+
+void set_combat_vars(mapping val)
+{
+    if (!mapp(val)) {
+        return;
+    } else {
+        return combat_vars = val;
+    }
+}
+
+void set_combat_messages(mapping val)
+{
+    if (!mapp(val)) {
+        return;
+    } else {
+        return combat_messages = val;
+    }
+}
+
+void set_combat_counters(mapping val)
+{
+    if (!mapp(val)) {
+        return;
+    } else {
+        return combat_counters = val;
+    }
+}
+
+void set_combat_static_vars(mapping val)
+{
+    if (!mapp(val)) {
+        return;
+    } else {
+        return combat_static_vars = val;
+    }
+}
+
+void set_combat_arrays(mapping val)
+{
+    if (!mapp(val)) {
+        return;
+    } else {
+        return combat_arrays = val;
+    }
+}
+
+pre_round()
+{
+
+}
+
+post_round()
+{
+
+}
