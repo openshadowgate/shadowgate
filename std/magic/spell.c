@@ -3549,7 +3549,7 @@ void help()
         write("%^BOLD%^%^RED%^This spell will affect mostly enemies.");
     }
     if (splash_spell == 3) {
-        write("%^BOLD%^%^RED%^This spell will affect everyone.");
+        write("%^BOLD%^%^RED%^This spell has a chance to affect anyone in the room.");
     }
 
     if (mapp(feats_required)) {
