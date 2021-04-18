@@ -29,7 +29,7 @@ void init(){
 int wear_per(string str){
 string long;
    if(str == "perfume" || str == "blushing laughter"){
-      if(count > 4){
+      if(count > 24){
          tell_object(TP,"The bottle of perfume is empty.");
          return 1;
       }
