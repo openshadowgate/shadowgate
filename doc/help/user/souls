@@ -1,68 +1,85 @@
-Souls
-=====
-These are the soul commands that
-currently exist at ShadowGate:
+%^ULINE%^%^CYAN%^Souls%^RESET%^
+These are the soul commands that currently exist at ShadowGate:
 
-?           ack         admonish    agree
-apologize   applaud     approve     bark
-bearhug     beat        beep        beg
-bing        bird        bite        bleed
-blink       blow        blush       boggle
-bomb        bonk        bounce      bow
-breathe     burp        butt        cackle
-calm        can         caper       caress
-cheer       chew        chirp       chortle
-chuckle     clap        comfort     consider
-cough       cower       crack       cringe
-crumble     crumple     cry         cuddle
-curtsey     dance       daydream    die
-disagree    dream       drool       drum
-duck        duh         envy        evade
-explode     eye         faint       fall
-fart        fewt        fiddle      fit
-flex        flip        flirt       flop
-flutter     fondle      freak       french
-froth       frown       fume        gag
-gasp        gawk        gaze        gibber
-giggle      glance      glare       gloat
-goo         grab        grimace     grin
-grind       groan       grok        grope
-grovel      growl       grumble     grunt
-gwert       hiccup      hmm         hop
-howl        hug         hum         ignore
-jump        kick        kiss        kneel
-laugh       leer        lick        lite
-love        meditate    melt        meow
-moan        mock        moo         mooch
-mumble      nibble      nod         noogie
-nudge       nuke        nyuck       object
-pace        panic       pant        pat
-phew        pinch       pizza       plead
-point       poke        ponder      pope
-pout        preen       primp       puke
-punch       purr        push        putz
-puzzle      quiver      raise       razz
-recoil      relax       roar        rofl
-roll        rub         ruffle      run
-salute      scratch     scream      shake
-shiver      shrug       shudder     sigh
-sing        sit         slam        slap
-sleep       smack       smile       smirk
-snap        snarl       sneeze      sneer
-snicker     sniff       snivel      snore
-snort       snuggle     soap        sob
-spank       spit        squeeze     stagger
-stand       stare       startle     steam
-stomp       strangle    stroke      strut
-sulk        swear       sweat       tackle
-tantrum     tap         taunt       thank
-think       thumb       tickle      tip
-toast       tongue      touch       tremble
-trip        tsk         twiddle     twitch
-waffle      wail        wait        wake
-wax         wave        weep        welcome
-whiffle     whimper     whine       whistle
-wiggle      wince       wink        womble
-woo         worship     yawn        yodel
-yuck
-
+?		gaze		scratch
+ack		gibber		scream
+admonish	giggle		shake
+agree		glance		shiver
+apologize	glare		shrug
+applaud		gloat		shudder
+approve		goo		sigh
+bark		grab		sing
+bearhug		grimace		sit
+beat		grin		slam
+beep		grind		slap
+beg		groan		sleep
+bing		grok		smack
+bird		grope		smile
+bite		grovel		smirk
+bleed		growl		snap
+blink		grumble		snarl
+blow		grunt		sneeze
+blush		gwert		sneer
+boggle		hiccup		snicker
+bomb		hmm		sniff
+bonk		hop		snivel
+bounce		howl		snore
+bow		hug		snort
+breathe		hum		snuggle
+burp		ignore		soap
+butt		jump		sob
+cackle		kick		spank
+calm		kiss		spit
+can		kneel		squeeze
+caper		laugh		stagger
+caress		leer		stand
+cheer		lick		stare
+chew		lite		startle
+chirp		love		steam
+chortle		meditate	stomp
+chuckle		melt		strangle
+clap		meow		stroke
+comfort		moan		strut
+consider	mock		sulk
+cough		moo		swear
+cower		mooch		sweat
+crack		mumble		tackle
+cringe		nibble		tantrum
+crumble		nod		tap
+crumple		noogie		taunt
+cry		nudge		thank
+cuddle		nuke		think
+curtsey		nyuck		thumb
+dance		object		tickle
+daydream	pace		tip
+die		panic		toast
+disagree	pant		tongue
+dream		pat		touch
+drool		phew		tremble
+drum		pinch		trip
+duck		plead		tsk
+duh		point		twiddle
+envy		poke		twitch
+evade		ponder		waffle
+explode		pope		wail
+eye		pout		wait
+faint		preen		wake
+fall		primp		wax
+fart		puke		wave
+fewt		punch		weep
+fiddle		purr		welcome
+fit		push		whiffle
+flex		putz		whimper
+flip		puzzle		whine
+flirt		quiver		whistle
+flop		raise		wiggle
+flutter		razz		wince
+fondle		recoil		wink
+freak		relax		womble
+french		roar		woo
+froth		rofl		worship
+frown		roll		yawn
+fume		rub		yodel
+gag		ruffle		yuck
+gasp		run
+gawk		salute
