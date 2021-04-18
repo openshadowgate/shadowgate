@@ -164,7 +164,7 @@ spell_effect(int prof)
         }
         damage_targ(target, target_limb, sdamage, element);
     }
-    caster->set_missChance(targ->query_missChance() + 45);
+    caster->set_missChance(caster->query_missChance() + 45);
     call_out("dest_effect", ROUND_LENGTH);
 }
 
