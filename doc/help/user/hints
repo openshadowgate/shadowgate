@@ -25,7 +25,7 @@
 %^CYAN%^Have an amazing plot idea you want to suggest to the avatars, or require their assistance is some manner? Use %^GREEN%^<avatarmail> %^CYAN%^to send them a direct message.
 %^CYAN%^If combat is looking a bit dull, shut off brief mode. Try %^GREEN%^<set brief_combat on> %^RESET%^%^CYAN%^to see what happens.
 %^CYAN%^If you don't know where to go or where to hunt, use %^GREEN%^<rumors>%^CYAN%^ command to list areas appropriate to your level.
-%^CYAN%^If you don't want to sell something by accident, use %^CYAN%^<keep>%^GREEN%^.
+%^CYAN%^If you don't want to sell something by accident, use %^CYAN%^<keep>%^GREEN%^. Kept items will also be protected from offer and offerall.
 %^CYAN%^If you find yourself stuck in a broken room, try %^GREEN%^<fixroom> %^CYAN%^or %^GREEN%^<fixmore> %^CYAN%^to reset the room.
 %^CYAN%^If you find yourself wearing a cursed magical item, a church will remove it for a fee. Many casters also have the power to break a curse, so it doesn't hurt to ask around.
 %^CYAN%^If you need to review the last round of a line conversations, or emotes, says, or tells, use %^GREEN%^<last>%^CYAN%^.
