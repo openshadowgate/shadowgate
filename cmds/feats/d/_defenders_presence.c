@@ -13,7 +13,7 @@ void create()
     feat_name("defenders presence");
     feat_prereq("Immortal defender L1");
     feat_syntax("defenders_presence");
-    feat_desc("The immortal defender can project his presence to his nearby allies. Any fighting on the side of the immortal defender will be inspired. The wounds of the immortal defender and his allies will slowly heal while in battle and the defender and his allies will be inspired to new heights of vigor while in combat.");
+    feat_desc("The immortal defender can project his presence to his nearby allies. Any fighting on the side of the immortal defender will be inspired. The wounds of the immortal defender and his allies will slowly heal while in battle and the defender and his allies will be inspired to new heights of vigor while in combat. The more entities you're protecting the better this power will work.");
     set_target_required(0);
     set_required_for(({ "shield charge", "shield master" }));
 }
@@ -50,7 +50,13 @@ int cmd_defenders_presence(string str)
 void execute_feat()
 {
     if (FEATS_D->is_active(caster, "defenders presence")) {
-        tell_object(caster, "Defender's Presence is already active.");
+        object obj;
+
+        obj = query_active_feat("defenders presence");
+        tell_object(caster,"%^BOLD%^You lower your shield.%^RESET%^");
+        tell_room(place, "" + caster->QCN + " lowers " + caster->QP + " shield.", caster);
+        caster = 0;
+        obj->dest_effect();
         dest_effect();
         return;
     }
@@ -70,6 +76,8 @@ void execute_feat()
     }
 
     caster->set_property("active_feats", ({ TO }));
+
+    ::execute_feat();
 
     return;
 }
@@ -104,7 +112,7 @@ void execute_attack()
     string party_name;
     int i, damage, count;
 
-    if (!objectp(caster) || caster->query_ghost()) {
+    if (!objectp(caster) || caster->query_ghost() || caster->query_unconscious()) {
         dest_effect();
         return;
     }
@@ -182,7 +190,7 @@ void execute_attack()
 void dest_effect()
 {
     if (objectp(caster)) {
-        tell_object(caster, "%^BOLD%^Your defenders presence deactivates.");
+        tell_object(caster, "%^BOLD%^Your defenders presence fades.");
         caster->remove_property_value("active_feats", ({ TO }));
     }
     ::dest_effect();
