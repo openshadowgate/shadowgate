@@ -1,5 +1,3 @@
-// Shout
-
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -15,7 +13,8 @@ create() {
     set_spell_level(([ "mage" : 4, "bard" : 4, "magus" : 4 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shout on TARGET");
-    set_description("This spell allows for the mage to magically enchant and enhance their voice to deliver a strong sonic attack against one target.  The amplified voice can knock some targets off balance for a moment, forcing them to spend some time for the ringing in their ears to pass.");
+    set_damage_desc("sonic, paralyzed for 1 round");
+    set_description("This spell allows for the mage to magically enchant and enhance their voice to deliver a strong sonic attack against one target.  The amplified voice can knock some targets off balance for a moment, forcing them to spend some time for the ringing in their ears to pass. Successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -59,9 +58,6 @@ spell_effect(int prof) {
 		"magically amplified as "+caster->QS+" shouts at "+
             ""+target->QCN+"!", target);
     }
-/*
-    if (!do_saving_throw(target, "spell", (4-prof/25))) {
-*/
     if(!do_save(target)) {
         tell_object(target,"%^CYAN%^%^BOLD%^You are blasted with"+
 		" the sonic force of "+caster->QCN+"'s shout.");

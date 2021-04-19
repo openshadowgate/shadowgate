@@ -11,6 +11,7 @@ void create(){
     set_spell_level(([ "warlock" : 1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS swimming the styx");
+    set_damage_desc("waterbreathing");
     set_description("This invocation channels the famed river that traverses the astral and lower planes. Doing "
 "so grants the caster minor aquatic traits, with their hands and feet becoming slightly webbed to aid in swimming. "
 "The warlock gains the ability to breathe water as well as air for the duration of the spell.");

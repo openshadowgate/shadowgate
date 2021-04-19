@@ -1,9 +1,3 @@
-//Silver Sight - Moon domain scry spell based on Listening
-//Shadow.  Silver Sight, Listening Shadow, and Inner Eye are
-//all essentially the same spell - if you change one, please
-//change all three.
-//Rebalancing domains ~Circe~ 5/10/08
-// duration on all scrying spells (and between-cast delays where relevant) rebalanced. Nienne, 5/15.
 #include <std.h>
 #include <magic.h>
 
@@ -12,8 +6,6 @@ inherit SPELL;
 object motes,remote;
 string theName;
 #define DELAY 300
-//This *should* equal a 5 minute delay, I think.  That's the
-//intention anyway.  ~Circe~ 5/10/08
 
 void create(){
     ::create();

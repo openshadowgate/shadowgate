@@ -1,7 +1,3 @@
-//Rarely hit, so making a bolt spell like the others and
-//raising to 5th level with the rebalancing of domains
-//~Circe~ 4/26/08 - will do d4 and keep the stamina drain
-
 #include <priest.h>
 #include <std.h>
 #include <daemons.h>

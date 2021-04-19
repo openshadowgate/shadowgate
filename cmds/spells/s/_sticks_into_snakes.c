@@ -1,10 +1,3 @@
-//sticks to snakes ... Blatantly stolen from vashkar's monster summoning
-// *Styx* 6/2002 - reduced numbers for lower levels and max # to cut spam
-// and excesses due to ease of leveling here versus TT
-// fixed the vape message to not put them back to sticks since it doesn't put sticks in the room to recast, also lowered the numbers a little more again *Styx*  11/14/04
-// mon file moved to /d/magic/mon/ Ares/Styx 1/29/05
-//changed so rangers cannot use it 3/16/05 -Tsera
-
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>

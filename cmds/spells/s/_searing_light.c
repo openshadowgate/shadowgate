@@ -1,8 +1,3 @@
-// Saide@ShadowGate
-// April 10 2004
-// Updated by ~Circe~ 4/26/08 with the rebalancing of domains
-// Made a bolt spell like other similar spells
-
 #include <priest.h>
 #include <std.h>
 #include <daemons.h>
@@ -18,8 +13,9 @@ void create()
     set_spell_sphere("invocation_evocation");
     set_domains("sun");
     set_syntax("cast CLASS searing light on TARGET");
+    set_damage_desc("divine, more to undead");
     set_description("By using this spell you will accumulate sunlight in an open palm and then release it at the target"
-                    ".  It will do slightly more damage to the undead.  In addition, nearby targets may be struck as well.");
+                    ".  It will do slightly more damage to the undead.  In addition, nearby targets may be struck as well. Damage done to undead is calculated for L5 spell. A successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

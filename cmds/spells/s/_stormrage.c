@@ -16,9 +16,8 @@ void create()
     set_spell_sphere("invocation_evocation");
     set_domains("storms");
     set_syntax("cast CLASS stormrage");
-    set_description("In using this spell, the caster calls upon the might of the weather, creating a powerful storm in an "
-                    "area.  The storm takes several rounds to develop and a few more to recede.  With it comes stinging winds, hail, and "
-                    "blasts of lightning.");
+    set_damage_desc("electricity, bludgeoning or cold");
+    set_description("In using this spell, the caster calls upon the might of the weather, creating a powerful storm in an area. The storm takes several rounds to develop and a few more to recede. With it comes stinging winds, hail, and blasts of lightning. Succesful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");

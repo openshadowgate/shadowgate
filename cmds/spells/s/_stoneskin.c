@@ -1,5 +1,3 @@
-// Stoneskin
-
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
@@ -15,7 +13,7 @@ void create() {
     set_spell_sphere("abjuration");
     set_monk_way("way of the elements");
     set_syntax("cast CLASS stoneskin on TARGET");
-    set_damage_desc("10 damage resistance");
+    set_damage_desc("10 damage reduction");
     set_description("This spell causes the target to take less damage from to a certain number of attacks, based on the level of "
 "the caster. It does not work together with iron body.");
     set_verbal_comp();

@@ -1,4 +1,3 @@
-//racial innate for shades - based off dimension slide, psywarrior spell
 #include <std.h>
 #include <spell.h>
 inherit SPELL;

@@ -8,6 +8,7 @@ void create() {
     set_spell_level(([ "mage" : 1, "nightblade":2]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS shield of shadows");
+    set_damage_desc("4 ac");
     set_description("This spell calls a protective shield into existance before the caster, crafted of the stuff of "
 "shadows. While it may seem intangible, it will negate magic missiles, and provides a small bonus to armor class for "
 "its duration. Use of a physical shield will interfere with the spell and cause it to fade.");

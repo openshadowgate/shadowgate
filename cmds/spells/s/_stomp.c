@@ -1,5 +1,3 @@
-//Greatly weakened version of Greater Stomp/Earthquake
-//low level psywarrior power ~Circe~ 9/27/15
 #include <spell.h>
 #include <daemons.h>
 #include <magic.h>
@@ -12,6 +10,7 @@ void create(){
     set_spell_level(([ "psywarrior" : 1 ]));
     set_spell_sphere("combat");
     set_syntax("cast CLASS stomp");
+    set_damage_desc("untyped, tripped for 1d2 rounds");
     set_description("Upon manifesting this power, the psionic character "
        "releases a stream of psychic energy to empower a stomp, creating a "
        "ripple in the earth. The resulting quake may stun or damage "
@@ -20,7 +19,6 @@ void create(){
     set_somatic_comp();
     set_save("reflex");
     splash_spell(3);
-    //debug_saves(1);
 }
 
 void spell_effect(int prof) {

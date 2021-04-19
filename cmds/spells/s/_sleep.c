@@ -23,7 +23,8 @@ create()
     set_mystery("lunar");
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS sleep on TARGET");
-    set_description("This spell will force your target or everyone in the room, excluding your party, to fall asleep. Attacks on the sleepers will awaken them; normal noise won't, however. Successful save will negate the effect. Immunity to mental attacks will cause damage instead. This is an agressive spell and victims will respond violently.");
+    set_damage_desc("sleep for clevel / 10 + 1d6 rounds");
+    set_description("This spell will force your target or everyone in the room, excluding your party, to fall asleep. Attacks on the sleepers will awaken them; normal noise won't, however. Successful save will negate the effect. Immunity to mental attacks will cause damage instead. This is an agressive spell and victims will respond violently. Successful save will negate the effect.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

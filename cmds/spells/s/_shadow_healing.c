@@ -1,6 +1,3 @@
-// --==** /cmds/priest/_heal.c **==--
-// Modified by Pator@ShadowGate
-// August 25 1995
 #include <priest.h>
 
 inherit SPELL;
@@ -12,7 +9,8 @@ void create()
     set_spell_level(([ "bard" : 3, "druid" : 3, "mage" : 3, "cleric" : 3, "magus" : 3 ]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS shadow healing on TARGET");
-    set_description("With this spell you connect your target to the shadow plane, granting them temporary, illusionary health points, but only if they already don't have them.");
+    set_damage_desc("clevel of extra hp");
+    set_description("With this spell you connect your target to the shadow plane, granting them temporary, illusionary health points, but only if they already don't have them. Note, this spell grants hp to your current amount.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -20,15 +18,13 @@ void create()
     set_helpful_spell(1);
 }
 
-
 string query_cast_string()
 {
     string cast;
-        cast = "%^BLUE%^"+caster->QCN+" folds "+caster->QP+
-            " hands as "+caster->QS+" chants the spell!\n";
-    return "\n"+cast;
+    cast = "%^BLUE%^" + caster->QCN + " folds " + caster->QP +
+        " hands as " + caster->QS + " chants the spell!\n";
+    return "\n" + cast;
 }
-
 
 spell_effect(int prof)
 {
@@ -57,5 +53,7 @@ spell_effect(int prof)
 void dest_effect()
 {
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }

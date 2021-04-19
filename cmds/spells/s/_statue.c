@@ -12,6 +12,7 @@ void create()
     set_spell_sphere("alteration");
     set_mystery( ({ "stone", "metal" }) );
     set_syntax("cast CLASS statue on TARGET");
+    set_damage_desc("paralyzed for clevel / 10 rounds, clevel * 3 / 2 of damage resistance, clevel * 15 / 2 of spell damage resistance");
     set_description("You attempt to turn your target into stone. For the duration of the spell they will be a stone statue, able to hear and understand everything, but being unable to act. They'll have resilience that of a stone statue and will retain their hp.");
     set_verbal_comp();
     set_save("will");
@@ -40,8 +41,8 @@ spell_effect()
     tell_room(place, "%^BOLD%^%^%^WHITE%^" + target->QCN + " turns into a marble statue!", target);
     target->set_paralyzed(duration * 8, "%^WHITE%^%^BOLD%^You are a piece of marble and cannot do a thing!");
     power = clevel * 3 / 2;
-    target->set_property("damage resistance", -power);
-    target->set_property("spell damage resistance", -power * 5);
+    target->set_property("damage resistance", power);
+    target->set_property("spell damage resistance", power * 5);
     call_out("checker", ROUND_LENGTH);
 }
 

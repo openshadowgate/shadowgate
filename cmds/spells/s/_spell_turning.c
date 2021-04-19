@@ -14,7 +14,7 @@ void create()
     set_mystery("spellscar");
     set_spell_sphere("abjuration");
     set_domains("protection");
-    set_damage_desc("clevel/6+5 spell reflection chance.");
+    set_damage_desc("clevel / 6 + 5 spell reflection chance.");
     set_syntax("cast CLASS spell turning");
     set_description("The most skilled of abjurationists can use such a spell to raise a protective ward around themselves"
                     ". While it holds, it will have a chance to reflect any spells which are directly aimed at the caster, regardless of "

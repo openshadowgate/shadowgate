@@ -11,6 +11,7 @@ void create()
     set_spell_level(([ "bard" : 4, "cleric" : 4, "paladin":4, "ranger":4]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shield of dawn");
+    set_damage_desc("fire");
     set_description("This spell will surround the caster's body in a roaring shield of flames that will harm all opponents.");
     set_verbal_comp();
     set_somatic_comp();

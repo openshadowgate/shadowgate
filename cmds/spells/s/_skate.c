@@ -1,6 +1,3 @@
-//adapted from fly/levitate for psywarriors - personal only
-//~Circe~ 9/27/15
-
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -18,6 +15,7 @@ void create() {
     set_domains("travel");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS skate");
+    set_damage_desc("flight");
     set_description("This power gives the psionic character the ability "
        "to skate smoothly over the ground, exerting little energy. The "
        "caster will find traveling over long distances to be very easy "

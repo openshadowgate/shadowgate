@@ -1,5 +1,3 @@
-// strength of stone
-//swapped with earth reaver for L3 and made self-cast only - as we all figured it was a better balance. Nienne, 11/07
 #include <std.h>
 #include <magic.h>
 

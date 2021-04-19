@@ -13,7 +13,7 @@ void create()
     set_spell_level(([ "mage" : 8 , "nightblade":6]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS scintillating pattern");
-    set_damage_desc("mass confusion for clevel/5 + 1 rounds on enemies");
+    set_damage_desc("mass confusion for clevel / 5 + 1 rounds");
     set_description("This casting summons forward illusionary patter that briefly captivates and confuses enemies that are weaker than the spell.");
     splash_spell(2);
 }

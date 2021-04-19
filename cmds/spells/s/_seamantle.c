@@ -35,7 +35,7 @@ int preSpell()
 void spell_effect(int prof)
 {
 
-    duration = (clevel/2+4)*ROUND_LENGTH;
+    duration = (clevel / 2 + 4) * ROUND_LENGTH * 10;
     abonus = 8;
     rbonus = 4;
 

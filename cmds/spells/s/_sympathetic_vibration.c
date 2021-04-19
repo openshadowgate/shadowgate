@@ -11,7 +11,8 @@ void create()
     set_spell_level(([ "bard" : 6 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS sympathetic vibration on TARGET");
-    set_description("By attuning yourself to a target you can create damaging vibrations within it, that will last several rounds.");
+    set_damage_desc("sonic");
+    set_description("By attuning yourself to a target you can create damaging vibrations within it, that will last several rounds. Save will reduce the damage twice.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("will");
@@ -70,7 +71,7 @@ void second_hit()
 
 void last_hit()
 {
-   define_base_damage(-2);    
+   define_base_damage(-2);
    if(!objectp(target))
    {
        dest_effect();
@@ -97,4 +98,3 @@ void dest_effect()
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

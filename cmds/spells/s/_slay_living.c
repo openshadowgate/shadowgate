@@ -13,6 +13,7 @@ void create()
     set_domains(({ "evil", "repose" }));
     set_mystery(({ "reaper", "bones" }));
     set_syntax("cast CLASS slay living on TARGET");
+    set_damage_desc("negative energy");
     set_description("This spell is necromantic in nature and allows the caster to call forth beings from the land of the "
                     "dead to take the caster's target back with them to their homeland. If the beings are successful, this transition will "
                     "result in the target's instant death.");

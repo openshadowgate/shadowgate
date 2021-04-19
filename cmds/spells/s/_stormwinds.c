@@ -1,6 +1,3 @@
-//altered to make it a little more viable (not hit non-hostile creatures) Circe 3/23/05
-// Winds of Akadi
-// changed to stormwinds -Ares
 #include <std.h>
 #include <daemons.h>
 
@@ -15,9 +12,10 @@ void create() {
     set_mystery("wind");
     set_spell_sphere("elemental air");
     set_domains("storms");
+    set_damage_desc("electricity");
     set_syntax("cast CLASS stormwinds on TARGET");
     set_description("This spell causes a great sphere of swirling winds to appear around the target. Lightning bolts "
-"come forth from the mass of air to strike them.");
+"come forth from the mass of air to strike them. Succesful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
@@ -126,10 +124,6 @@ void do_lightning() {
      }
     if (count == (clevel/5)) {
         tell_object(environment(target),"%^BOLD%^%^BLUE%^The swirling winds calm back to normal.");
-/* this not kicking in here until too late, so I'm moving it up *Styx*, 12/31/03, last change 6/24/01
-        if (environment(caster) != environment(target))
-            tell_object(caster,"%^BOLD%^%^BLUE%^The swirling winds calm back to normal.");
-*/
         dest_effect();
         return;
     } else {

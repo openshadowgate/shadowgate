@@ -1,5 +1,3 @@
-// Ganked from rope trick/genesis for use with priest version.  -Ares
-// Changed to recognize no pocket space for certain boss rooms. Dinji 10/30/2007
 #include <std.h>
 #include <spell.h>
 #include <magic.h>

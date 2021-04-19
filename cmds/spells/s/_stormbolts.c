@@ -13,7 +13,7 @@ void create() {
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS stormbolts");
     set_damage_desc("electricity");
-    set_description("When you cast this spell, lightning spills forth from your body in all directions, harming everything in their path. Those unable to withstand the power of lightning will be briefly stunned.");
+    set_description("When you cast this spell, lightning spills forth from your body in all directions, harming everything in their path. Those unable to withstand the power of lightning will be briefly stunned. Succesful save will halven the damage.");
     splash_spell(2);
     set_save("fort");
 }

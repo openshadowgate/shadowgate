@@ -1,7 +1,3 @@
-//Screen - Illusion domain spell by ~Circe~ based on detect scrying
-//and protection from scrying.  Part of the rebalancing of domain
-//spells 5/5/08
-
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>

@@ -11,7 +11,7 @@ void create()
     set_domains("magic");
     set_spell_sphere("abjuration");
     set_syntax("cast CLASS spellscar");
-    set_damage_desc("triggers wild magic in the area");
+    set_damage_desc("triggers clevel wild magic chance in the area");
     set_description("Within the area you choose to affect everything looses its hue. Periodically ripples of vibrant color wriggle through the place. Within this place, spell-like abilities will automatically trigger a wild magic effect.");
 }
 

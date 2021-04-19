@@ -1,5 +1,3 @@
-// lowlevel evocation school specialty spell. Nienne, 08/09.
-//removed mention of non-specialized mages ~Circe~ 8/2/19
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -14,6 +12,7 @@ void create()
     set_spell_level(([ "mage" : 1, "magus" : 1, "nightblade":1]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shocking grasp on TARGET");
+    set_damage_desc("electricity");
     set_description("This spell allows the mage to generate a small electrical charge in their fingertips. They may then "
                     "attempt to touch a foe, discharging it into them in a powerful shock. A caster will find it far easier to contact a foe "
                     "who is carrying or wearing metal items, which will conduct the charge. While this spell can, at first, be considerably "

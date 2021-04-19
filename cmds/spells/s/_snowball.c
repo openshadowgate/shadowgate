@@ -9,7 +9,7 @@ void create()
     set_domains("storms");
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS snowball on TARGET");
-    set_damage_desc("bludgeoning, tripping");
+    set_damage_desc("bludgeoning, trips for 1 round");
     set_description("You create a small snowball and forcefully project it on target. If hit successfully it will stagger opponents for a brief moment.");
     set_save("fort");
     set_verbal_comp();

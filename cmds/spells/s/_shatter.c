@@ -1,7 +1,3 @@
-// Shatter
-//Made D4 to slightly improve it.  Cloudburst does d3 but also trips
-//Changes by ~Circe~ 5/6/08 with rebalancing of domains
-
 #include <std.h>
 #include <daemons.h>
 
@@ -17,6 +13,7 @@ void create()
     set_monk_way("way of the elements");
     set_domains("destruction");
     set_syntax("cast CLASS shatter on TARGET");
+    set_damage_desc("sonic");
     set_description("%^RESET%^This spell sends a piercing vibration of sonic damage straight towards the target of the spell.  If the target is not able to escape the blast, they will take a significant deal of damage.
 
 %^BOLD%^%^RED%^See also:%^RESET%^ shatter *feats");

@@ -9,6 +9,7 @@ void create() {
     set_spell_level(([ "druid" : 1 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS sylvan vigor");
+    set_damage_desc("clevel + 10 to hp bonus");
     set_description("This spell bestows a small blessing upon the caster, increasing her health.");
     set_verbal_comp();
     set_somatic_comp();
@@ -43,16 +44,16 @@ void spell_effect(int prof) {
 
     caster->add_max_hp_bonus(bonus);
     caster->set_property("spell_bonus_hp",1);
-    caster->set_property("spelled",({TO}));    
+    caster->set_property("spelled",({TO}));
     addSpellToCaster();
-    spell_successful();            
+    spell_successful();
 }
 
 void dest_effect() {
-    if(objectp(caster)) 
+    if(objectp(caster))
     {
         caster->add_max_hp_bonus(-bonus);
-        caster->remove_property("spell_bonus_hp");        
+        caster->remove_property("spell_bonus_hp");
     }
     ::dest_effect();
     if(objectp(TO)) TO->remove();
