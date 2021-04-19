@@ -131,7 +131,10 @@ int jump_act(string str)
     int dam;
     if(!objectp(TO)) return 0;
     if(!objectp(TP)) return 0;
-    if(!stringp(jd = TO->query_property("jump_destination"))) return 0;	
+    if(!stringp(jd = TO->query_property("jump_destination"))) {
+        tell_object(TP, "%^BOLD%^%^CYAN%^A magical force blocks you from jumping off the roof! Perhaps you can find a better spot.");
+        return 0;	
+    }
 
     tell_object(TP, "%^BOLD%^%^RED%^In a fit of desperation, you decide that "+
     "the best course of action is to jump from the roof of the "+
