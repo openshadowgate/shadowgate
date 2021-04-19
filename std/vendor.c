@@ -904,7 +904,7 @@ void inventory()
             continue;
         }
 
-        if (inven[i]->query_property("nosell")) {
+        if (inv[i]->query_property("nosell")) {
             continue;
         }
 
