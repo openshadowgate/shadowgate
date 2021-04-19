@@ -26,7 +26,7 @@ void init(){
        if(ob_level ==-1){
        ob_level =TP->query_highest_level();
        }
-      "daemon/quests"->changeShort(query_short(),TP->query_title());
+      "daemon/quests"->changeShort(query_short(),TP->query_short());
       "daemon/quests"->gotten(query_short());
    }
    if(TP->is_monster() && ETO == TP){
