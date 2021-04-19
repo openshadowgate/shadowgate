@@ -12,12 +12,12 @@ void create()
     set_spell_level(([ "druid" : 3 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS quench on TARGET");
+    set_damage_desc("half cold half bludgeoning");
     set_description("This spell creates a large sphere of water that smashes into targets in the area.  The force of the "
-        "impact accounts for half of the destruction in the target area, water damage accounts for the other half.  ");
+        "impact accounts for half of the destruction in the target area, water damage accounts for the other half. A successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-    set_immunities( ({"water"}) );
     set_save("reflex");
     splash_spell(1);
 }
