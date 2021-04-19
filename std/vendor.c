@@ -3,35 +3,6 @@
  * @brief Standart vendor parent object
  */
 
-//      /std/shop.c
-//      a standard object that sells things in shops
-//      created by Melnmarn @ ShadowGate
-
-//	This file has been changed by Melnmarn@ShadowGate
-//	Do *NOT* alter this file without permission from
-//	Melnmarn or Aragorn @ Shadowgate!
-//  moved adjust_cost() to /std/npc so avail. for special vendors such as comp_vend
-/*  changed to have vendors seem more interactive, esp. to indicate to room that someone is interracting with the vendor   *Styx*  Jan. 03
-    added to have vendor tell what skill is needed on show command *Styx*  2/13/03
-    also added to deny buying if no coin type is set (solve kit problem)
- */
-//changed it so that you cannot buy, sell or get an appraisal from an unconscious vendor *tsera* 4/2/04
-/*
-   Changed by Circe 3/19/05
-   This change should make it so we can set a maximum level on
-   the vendor that will control the value and/or power of items
-   that can be sold in the shop.  Essentially, vendors will have
-   a property set_mymaxvalue() that will be a number 1-40.
-   This will make it so that anything above a certain value
-   (defined below) or a certain enchantment will still be sold,
-   but won't go into the shop's storage area to be re-sold to the
-   public.  The set_mymaxvalue() should be basically the level
-   of the players who should frequent the area.
- */
-
-//Minor change 6/14/05 by ~Circe~ to allow showing by size.
-//Made selling items populate the random search treasure -Ares
-
 #include <std.h>
 #include <money.h>
 #include <daemons.h>
@@ -926,12 +897,17 @@ void inventory()
         write("You don't have anything!");
         return 1;
     }
-    write("%^CYAN%^The shop clerk looks over your inventory.");
+    write("%^CYAN%^The shop clerk looks over your inventory, ignoring the items you might keep.");
     while (i--) {
         tmp = "";
         if (!stringp(inv[i]->query_short())) {
             continue;
         }
+
+        if (inven[i]->query_property("nosell")) {
+            continue;
+        }
+
         if (inv[i]->query_short() == "" || undefinedp(inv[i]->query_short())) {
             continue;
         }
