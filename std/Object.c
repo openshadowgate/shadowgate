@@ -1,32 +1,11 @@
-// File:      /std/Object.c
-// Purpose:   Define functions and varibles to be used by all objects
-// Mudlib:    Nightmare
-// Credits:
-// 92-10-**   Descartes of Borg created this, based on TMI's Object.c
-// 93-06-16   Pallando reordered and commented it.
-// 93-06-16   Pallando added create(), reset(), prop() and set_material()
-// 93-06-21   Pallando added init()
-// 93-06-23   Pallando added seteuid(getuid()) to create()
-// traps will be based from here although room.c and bag_logic.c will cantain code that references these
-// in an attempt to make traps as all encompassing and legitimate as possible
-// two minor changes (noted) 8/29/2003 by *Styx*
-// study stuff added by Circe 1/18/05
-// added query_trap_func_map() by *Styx* 5/8/06, last chg. 1/17/05
-// added check for "str" variable in the __Use() function to prevent bugs. Nienne 6/07.
-// added player enchanted validation to set_wield() - Yves 12/18
-
-// std contains the def of MOVE
 #include <std.h>
 #include <daemons.h>
 #include <security.h>
 #include <valid_bonuses.h>
-// daemons contains the #define of ALCHEMIST_D
 #include <daemons.h>
 #include <move.h>
 #include <magic.h>
 
-// move contains the functions "move", "remove", "clean_up", "set_no_clean"
-//   "set_last_location", "query_last_location", "set_weight", "query_weight"
 inherit "/std/trap_data.c";
 inherit MOVE;
 inherit DECAY;
@@ -77,94 +56,9 @@ int unique_lease = 0;
 string wieldf, limbString, unwieldf, hit, lrhit;
 object wielded;
 
-//new var for property-set bonuses. N, 7/12.
 mapping item_bonuses;
 
-//for wielding
-void set_hit(mixed val);
-void set_lrhit(mixed val);
-void set_wield(mixed val);
-void set_unwield(mixed val);
-
-int query_wc();
-int query_property(string str);
-int query_large_wc();
-mixed query_hit();
-mixed query_lrhit();
-mixed query_wield();
-mixed query_unwield();
-int remove_property(string prop);
-
-void unequip();
-void __ActuallyUnwield();
-void set_not_inhand();
-int wieldable();
-string* query_identified();
-void add_identified(string str);
-void set_identified(string* myidentified);
-int is_identified(string name);
-void add_studied(string str);
-int is_studied(string name);
-void add_studied_failed(string name, int level);
-int is_studied_failed(string name, int level);
-void remove_studied_failed(string name);
-void set_read(string str);
-void set_language(string str);
-//void do_remove_stat(object myplayer, string mystat);
-void run_item_bonuses(string mystatus, object myplayer, mapping itembonuses);
-
-//Below added by Circe for faction-specific items.  11/24/07
-void set_factionitem(string str);
-string query_factionitem();
 string factionitem;
-
-//new functions for property-set bonuses. N, 7/12.
-void set_item_bonus(string bonustype, int thebonus);
-int query_item_bonus(string bonustype);
-mapping query_item_bonuses();
-
-//    Functions defined in this file
-//   ================================
-//
-// a) Object property functions.
-//   init_ob               - initalises the "ob_data" mapping
-//   set                   - stores data in the "ob_data" mapping
-//   add                   - alters data in the "ob_data" mapping
-//   query                 - returns data from the "ob_data" mapping
-//   set_property          - alters data in the "props" mapping
-//   query_property        - returns data from the "props" mapping
-//   remove_all_properties - initalises the "props" mapping
-//   remove_property       - removes data from the "props" mapping
-//   remove_property_value - alters data in the "props" mapping
-//   regexp_query_property - returns data from the "props" mapping
-///           New Functions as of 06/07/2008 - garrett
-///   has_property            - tells if an object has this property/ies set.  If they _key_ is valid.
-// b) One line set and query functions.
-//   set_id,set_short,set_long,set_value,query_id,query_name,query_true_name
-//   query_long,query_value,query_destroy,query_creator
-// c) More complicated set and query functions.
-//   id                    - queries if a str is an id
-//   set_name              - also sets cap_name
-//   query_short           - also inits ob
-//   query_cap_name        - deals with invisibility and ghosts
-//   query_light           - also checks if props exists
-//   set_destroy           - also resets ob_data
-//   set_material          - calls domain master object
-// d) Main functions.
-//   create                - initialises object
-//   reset                 - handles temperature
-//   init                  - future expansion - currently a dummy function
-//   move                  - makes sure armor is unequipped
-//   get                   - handles "keep" property
-
-// To allow this item to use the unique item system
-// Thorn@ShadowGate - 27 June 2000
-varargs void set_unique(int x);
-void set_lease(int x);
-int query_unique();
-string query_unique_id();
-void reset_hidden_seen();
-void set_hidden(int xxx);
 
 int save_me(string fname)
 {
