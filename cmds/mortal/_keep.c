@@ -18,6 +18,13 @@ int cmd_keep(string str)
         return 1;
     }
 
+    if (str == "all") {
+        tell_object(TP,"%^BOLD%^%^You mark your current inventory as never to be sold or offered.");
+        all_inventory(TP)->set_property("nosell", 1);
+        return 1;
+    }
+
+
     if (!(obj = present(str, TP))) {
         tell_object(TP,"%^BOLD%^%^RED%^You don't have any " + str + ".");
         return 1;
@@ -44,11 +51,13 @@ keep - prevent something from being sold
 
 %^CYAN%^SYNTAX%^RESET%^
 
-keep %^ORANGE%^%^ULINE%^OBJECT%^RESET%^
+keep %^ORANGE%^%^ULINE%^OBJECT%^RESET%^|all
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 This command marks and unmarks an object the way it won't be sold if you accidently suggest it to vendor and the way it won't be offered if you use offer or offerall commands.
+
+Without an argument this command will display all currently kept items.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
