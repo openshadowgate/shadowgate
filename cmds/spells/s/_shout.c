@@ -14,7 +14,7 @@ create() {
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shout on TARGET");
     set_damage_desc("sonic, paralyzed for 1 round");
-    set_description("This spell allows for the mage to magically enchant and enhance their voice to deliver a strong sonic attack against one target.  The amplified voice can knock some targets off balance for a moment, forcing them to spend some time for the ringing in their ears to pass. Successful save will halven the damage.");
+    set_description("This spell allows for the mage to magically enchant and enhance their voice to deliver a strong sonic attack against one target.  The amplified voice can knock some targets off balance for a moment, forcing them to spend some time for the ringing in their ears to pass. A successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

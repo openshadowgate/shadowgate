@@ -12,7 +12,7 @@ void create() {
     set_damage_desc("half cold, half negative energy");
     set_syntax("cast CLASS umbral strike on TARGET");
     set_damage_desc("half cold, half negative energy, blindness");
-    set_description("This spell will hurl a bolt of pure darkness at a target, harming them. Successful save will negate blindness and halven the damage.");
+    set_description("This spell will hurl a bolt of pure darkness at a target, harming them. A successful save will negate blindness and halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

@@ -16,7 +16,7 @@ void create()
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS shadow vortex");
     set_damage_desc("half cold, half electricity");
-    set_description("This spell snatches part of the great maelstorm from the seas on shadow plane. Summoned vortices will harm everything in the area with cold and lightning. Successful save will halven the damage.");
+    set_description("This spell snatches part of the great maelstorm from the seas on shadow plane. Summoned vortices will harm everything in the area with cold and lightning. A successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");

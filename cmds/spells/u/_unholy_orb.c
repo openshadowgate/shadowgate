@@ -27,7 +27,7 @@ void create(){
 "forms.  The sphere drains the essence of life from the targets in the area of effect.  The sphere does damage based on "
 "the alignment of the caster with respect to the target.\n\nNOTE: This spell will damage all attackers regardless of "
 "alignment, but the damage will very if the attackers are players based on each individual's alignment.  The damage done "
-"to mobs is consistent no matter the mob's alignment. Successful save will halven the damage.");
+"to mobs is consistent no matter the mob's alignment. A successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(2);

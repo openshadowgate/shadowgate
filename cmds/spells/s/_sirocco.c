@@ -15,7 +15,7 @@ void create() {
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sirocco");
     set_damage_desc("bludgeoning");
-    set_description("A blast of furnace-hot wind blasts downward, smashing them with power of the blast and knocking them prone. Successful save will halven the damage.");
+    set_description("A blast of furnace-hot wind blasts downward, smashing them with power of the blast and knocking them prone. A successful save will halven the damage.");
     splash_spell(3);
     set_save("fort");
 }

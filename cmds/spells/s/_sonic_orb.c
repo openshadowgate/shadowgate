@@ -15,7 +15,7 @@ void create()
     set_damage_desc("sonic");
     set_description("This spell allows a mage to to create an orb of pure sonic energy.  Once the orb is launched into the air, the first thing it strikes will cause it to burst "
         "open, releasing cacaphonic sounds on the mage's foes.  Though care should be taken as it is possible to accidently catch the "
-        "mages allies in the blast. Successful save will halven the damage.");
+        "mages allies in the blast. A successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

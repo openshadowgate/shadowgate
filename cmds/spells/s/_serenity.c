@@ -14,7 +14,7 @@ void create() {
     set_discipline("telepath");
     set_syntax("cast CLASS serenity");
     set_damage_desc("mental");
-    set_description("This spell sends a serene song into mind of everyone present. Those who attack you will feel mental pain of overcoming contradiction. Strong-willed will shrug this song off. Successful save will halven the damage.");
+    set_description("This spell sends a serene song into mind of everyone present. Those who attack you will feel mental pain of overcoming contradiction. Strong-willed will shrug this song off. A successful save will halven the damage.");
     splash_spell(2);
     set_save("will");
 }

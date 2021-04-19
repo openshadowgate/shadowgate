@@ -11,7 +11,7 @@ void create()
     set_domains("repose");
     set_syntax("cast CLASS destruction on TARGET");
     set_damage_desc("divine");
-    set_description("This spell instantly delivers untyped damage to the target. If the target's health points fall below zero it instantly dies. Successful save halves the damage.");
+    set_description("This spell instantly delivers untyped damage to the target. If the target's health points fall below zero it instantly dies. A successful save halves the damage.");
     set_verbal_comp();
     set_save("fort");
     set_somatic_comp();

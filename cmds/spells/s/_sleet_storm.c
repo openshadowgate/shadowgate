@@ -18,7 +18,7 @@ void create()
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS sleet storm");
     set_damage_desc("cold");
-    set_description("The spell sleet storm only works outdoors.  When it is cast, the skies will open up and begin pouring freezing rain on the area.  Within a few moments, howling winds and freezing rain will turn the ground into ice. Movement through the area is difficult and sometimes visibility is obstructed to the point of virtual blindness. Successfull save will halven the damage.");
+    set_description("The spell sleet storm only works outdoors.  When it is cast, the skies will open up and begin pouring freezing rain on the area.  Within a few moments, howling winds and freezing rain will turn the ground into ice. Movement through the area is difficult and sometimes visibility is obstructed to the point of virtual blindness. A successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_save("reflex");

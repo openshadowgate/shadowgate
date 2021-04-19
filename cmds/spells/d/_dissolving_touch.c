@@ -22,7 +22,7 @@ void create()
     set_spell_level( ([ "psywarrior" : 2 ]) );
     set_spell_sphere("alteration");
     set_syntax("cast CLASS dissolving touch on TARGET");
-    set_damage_desc("Successful touch attack deals acid damage.");
+    set_damage_desc("A successful touch attack deals acid damage.");
     set_description("Your touch becomes corrosive and bubbling moisture visibly oozes from your hand. A successful touch attack does acid damage to the target. You are immune to your own acid.");
     set_immunities("acid");
 }

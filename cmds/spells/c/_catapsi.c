@@ -17,7 +17,7 @@ void create() {
     set_description("This power can be one of the deadliest in the psion's arsenal, though it causes very little damage.  "
 "By manifesting this power, the psion causes a white noise to resonate in the mind of his target, leaving the target "
 "unable to think, cast spells, or manifest powers.  This power is rightly feared by psions and mages all over the "
-"realms. Successful will save will negate the effect.");
+"realms. A successful will save will negate the effect.");
     set_immunities( ({ "spell_immunity"}) );
     mental_spell();
     set_target_required(1);

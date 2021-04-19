@@ -11,7 +11,7 @@ void create(){
     set_syntax("cast CLASS snakebite on TARGET");
     set_damage_desc("acid");
     set_description("This spell allows the ranger to draw forth the remaining living energy in an otherwise dead stick, "
-"converting it into life.  It will become a serpent that strikes the target, with a chance to poison with its bite. Successfull save will halven the damage.");
+"converting it into life.  It will become a serpent that strikes the target, with a chance to poison with its bite. A successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

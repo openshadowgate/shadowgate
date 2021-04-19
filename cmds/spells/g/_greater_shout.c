@@ -17,7 +17,7 @@ void create() {
     set_description("Like shout, greater shout allows for the mage to magically enchant and enhance his voice, to deliver "
 "a devastating sonic attack against multiple targets, but with more power added to his voice through the use of the "
 "enchantments of this spell.  The amplified voice can knock some targets off balance for a moment, forcing them to spend "
-"some time for the ringing in their ears to pass. Successful save will cause half damage.");
+"some time for the ringing in their ears to pass. A successful save will cause half damage.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
