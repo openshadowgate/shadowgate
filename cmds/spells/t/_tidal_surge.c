@@ -1,8 +1,3 @@
-// tidal surge
-//adjusted to be a damage spell since this is 8th level
-//brought in line with windstorm and stormrage by
-//~Circe~ 5/6/08 with the rebalancing of domains
-
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
@@ -12,12 +7,13 @@ inherit SPELL;
 void create()
 {
     ::create();
-    set_spell_name("tidal surge"); // Tsunami
+    set_spell_name("tidal surge"); // Tsunami!
     set_spell_level(([ "druid" : 9, "mage" : 9, "oracle" : 9 ]));
     set_mystery("waves");
     set_spell_sphere("conjuration_summoning");
     set_domains(({ "water", "destruction" }));
     set_syntax("cast CLASS tidal surge on TARGET");
+    set_damage_desc("bludgeoning, tripped for 1d4 rounds");
     set_description("This spell will draw all of the water in the atmosphere for miles and miles around to a place above "
                     "and behind the caster.  The water is condensed into the form of a massive wave that is directed at the target.  The wave "
                     "may knock the target down as well as force him to drop his weapons.  The force of the water may also keep him from "
@@ -133,7 +129,7 @@ void spell_effect(int prof)
             damage_targ(foes[i], (string)foes[i]->return_target_limb(), (dam), "bludgeoning");
             if (!random(3)) {
                 target->set_tripped(roll_dice(1, 4), "You are " +
-                                    "trying to recover from the wave!", 2); //capping duration 2 rounds. N, 5/11.
+                                    "trying to recover from the wave!", 2);
             }
         }
         if (!sizeof(foes)) {

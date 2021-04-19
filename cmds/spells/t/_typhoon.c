@@ -15,7 +15,7 @@ void create()
     set_spell_level(([ "druid" : 9, "mage" :9,]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS typhoon");
-    set_damage_desc("bludgeoning, tripped");
+    set_damage_desc("bludgeoning, tripped for 1d2 rounds");
     set_description("This spell creates a powerfull typhoon in the area. Flying and big creatures might find it easier to move around in it, but all may be send flying in the winds.");
     set_verbal_comp();
     set_somatic_comp();
@@ -85,9 +85,10 @@ void execute_attack()
         }
 
         if (slipped) {
-            tell_object(targ, "%^BOLD%^%^CYAN%^Unable to hold your balance, you are send flying into the typhoon!%^RESET%^");
-            tell_room(place, "%^CYAN%^%^BOLD%^Unable to hold balance, " + targ->QCN + " is send flying into the typhoon!", ({ targ }));
-            targ->set_tripped(roll_dice(1, 2), "%^BOLD%^You are send flying by the typhoon!%^RESET%^", 4);
+            if (targ->set_tripped(roll_dice(1, 2), "%^BOLD%^You are send flying by the typhoon!%^RESET%^", 4)) {
+                tell_object(targ, "%^BOLD%^%^CYAN%^Unable to hold your balance, you are send flying into the typhoon!%^RESET%^");
+                tell_room(place, "%^CYAN%^%^BOLD%^Unable to hold balance, " + targ->QCN + " is send flying into the typhoon!", ({ targ }));
+            }
         }
 
         tell_object(targ,"%^BOLD%^%^CYAN%^You are crushed by the strong wings of the typhoon!");

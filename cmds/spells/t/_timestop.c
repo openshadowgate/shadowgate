@@ -13,6 +13,7 @@ void create() {
     set_mystery("lore");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS timestop");
+    set_damage_desc("paralyzed for 1d8 rounds");
     set_description("This spell allows the transmuter to alter their immediate surroundings into a state of such forced "
 "suspension that it would seem that time had stopped for all but the caster.  This allows them to act normally while "
 "their opponents can only watch, and will drop them out of direct combat. Foes will force their way out of the spell "

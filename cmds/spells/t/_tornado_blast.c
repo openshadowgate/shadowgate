@@ -11,6 +11,7 @@ void create() {
     set_discipline("kineticist");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS tornado blast on TARGET");
+    set_damage_desc("bludgeoning, tripped for 1d4 rounds");
     set_description("This power enables a kineticist to draw upon his knowledge of energy to create a whirling vortex in "
 "the area.  The vortex is directed at the target, who suffers a chance to be knocked down and lose anything he might be "
 "holding.  Others in the area may also be tossed about by the winds, suffering serious harm.");
@@ -53,7 +54,7 @@ void spell_effect(int prof) {
        if(mycheck > yourcheck) {
           tell_object(target,"%^BOLD%^%^CYAN%^Winds buffet against you, "+
              "tossing you to the ground!");
-          target->set_tripped(random(2),"You are struggling to get to your feet!");
+          target->set_tripped(roll_dice(1, 4),"You are struggling to get to your feet!");
        }
        if(!do_save(target,0)) {
           weapons = target->query_wielded();

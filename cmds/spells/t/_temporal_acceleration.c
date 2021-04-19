@@ -1,4 +1,3 @@
-//Psionic version of haste
 #include <std.h>
 #include <priest.h>
 #include <party.h>
@@ -12,14 +11,15 @@ void create(){
     set_spell_name("temporal acceleration");
     set_spell_level(([ "psion" : 6 ]));
     set_spell_sphere("alteration");
+    set_damage_desc("1 to ac, attack, reflex save, 2 to athletics");
     set_syntax("cast CLASS temporal acceleration");
     set_description("Like the magic spell haste, this power "
        "considerably speeds up the caster and her nearby allies. "
        "It grants all affected targets an extra attack if they are striking "
        "in melee, as well as a small bonus to AC, reflex saves "
        "and athletics. This power does not work in conjunction "
-       "with similar magical effects, such as rage, berserker "
-       "and fell flight.");
+       "with similar magical effects, such as rage, berserker, "
+       "fell flight and haste.");
     set_verbal_comp();
     set_somatic_comp();
     set_helpful_spell(1);

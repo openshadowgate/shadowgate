@@ -1,4 +1,3 @@
-//      Teleport
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
@@ -52,7 +51,7 @@ void spell_effect(int prof) {
                 "in your mind, focusing to bring yourself to it.");
 
     spell_successful();
-    
+
     //sdamage / 4 because it was killing people - Tlaloc 7.25.20
     if(!TELEPORT->object_can_be_teleported(caster,endplace,clevel))
     {

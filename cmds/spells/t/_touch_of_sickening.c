@@ -1,4 +1,3 @@
-//      Chill Touch
 #include <std.h>
 #include <spell.h>
 #include <magic.h>
@@ -18,7 +17,7 @@ create()
     set_spell_sphere("necromancy");
     set_domains(({"water"}));
     set_syntax("cast CLASS touch of sickening on TARGET");
-    set_damage_desc("sickened for clevel/4+1 rounds");
+    set_damage_desc("sickened for clevel / 4 + 1 rounds");
     set_description("With this spell you touch the victim, channeling negative energy through your hand and sickening them.");
     set_verbal_comp();
     set_somatic_comp();

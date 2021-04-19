@@ -1,5 +1,3 @@
-//Insect plague reskin for warlock
-
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>

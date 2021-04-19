@@ -1,12 +1,3 @@
-/*
-  _touch_of_law.c
-  
-  Innate spell for Clerics with the Law Domain.
-  Touch attack for hit.
-  
-  -- Tlaloc --
-*/
-
 #include <std.h>
 #include <spell.h>
 #include <daemons.h>
@@ -16,7 +7,7 @@ inherit SPELL;
 void create()
 {
     ::create();
-    
+
     set_spell_name("touch of law");
     set_spell_level( ([ "innate" : 5 ]) );
     set_domains("law");
@@ -35,29 +26,29 @@ string query_cast_string()
 
 int preSpell()
 {
-    
+
     if(!(int)USER_D->spend_pool(this_player(), 1, "grace"))
     {
         tell_object(caster, "You don't have the Divine Grace to cast Touch of Law!");
         return 0;
     }
-    
+
     return 1;
 }
 
 void spell_effect(int prof)
 {
     int roll;
-       
+
     spell_successful();
-    
+
     tell_object(caster, "%^ORANGE%^You reach out and grasp " + target->QCN + " with a glowing hand, imbuing them with the balance of law!%^RESET%^");
-    tell_room(place, "%^ORANGE%^" + caster->QCN + " reaches out with " + caster->QP + " hand, grasping " + target->QCN + " with a swirl of balancing energy!%^RESET%^", ({ caster })); 
-    
+    tell_room(place, "%^ORANGE%^" + caster->QCN + " reaches out with " + caster->QP + " hand, grasping " + target->QCN + " with a swirl of balancing energy!%^RESET%^", ({ caster }));
+
     target->set_property("touch of law", 1);
-    
+
     spell_kill(target, caster);
-    
+
     call_out("dest_effect", 3);
 }
 
@@ -65,7 +56,7 @@ dest_effect()
 {
     target && tell_object(target, "You feel the touch of law fade from you.");
     target && target->remove_property("touch of law");
-    
+
     ::dest_effect();
     if(objectp(this_object()))
         this_object()->remove();

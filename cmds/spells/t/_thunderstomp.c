@@ -1,11 +1,3 @@
-/*
-  _thunderstomp.c
-
-  reskin of stomp from psywarrior
-
-  -- Tlaloc --
-*/
-
 #include <spell.h>
 #include <daemons.h>
 #include <magic.h>
@@ -19,6 +11,7 @@ void create()
     set_spell_level(([ "ranger" : 1, "druid" : 1, "mage" : 1, "magus" : 1 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS thunderstomp");
+    set_damage_desc("untyped, tripped for 1d2 rounds");
     set_description("Upon casting this spell, the caster "
        "releases a stream of magical energy to empower a stomp, creating a "
        "ripple in the earth. The resulting quake may stun or damage "

@@ -1,5 +1,3 @@
-// midlevel divination school specialty spell. Nienne, 10/09.
-//removed mention of non-secialized mages ~Circe~ 8/2/19
 #include <spell.h>
 #include <magic.h>
 inherit SPELL;

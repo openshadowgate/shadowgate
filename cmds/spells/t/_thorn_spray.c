@@ -11,6 +11,7 @@ void create()
     set_spell_level(([ "cleric" : 7, "druid" : 6]));
     set_spell_sphere("conjuration_summoning");
     set_syntax("cast CLASS thorn spray on TARGET");
+    set_damage_desc("piercing");
     set_description("This spell will cause a number of sharp thorns to fly from the caster's hand toward the target.");
     set_verbal_comp();
     set_somatic_comp();

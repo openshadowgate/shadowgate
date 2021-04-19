@@ -1,5 +1,3 @@
-// Mind Thrust
-// ~Circe~ 7/19/05
 #include <spell.h>
 inherit SPELL;
 

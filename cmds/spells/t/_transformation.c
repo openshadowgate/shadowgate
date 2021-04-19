@@ -1,5 +1,3 @@
-// this spell also does set the caster to have BAB & # attacks as a fighter,
-// but this is done directly in the bonus daemon. N, 5/15.
 #include <priest.h>
 inherit SPELL;
 

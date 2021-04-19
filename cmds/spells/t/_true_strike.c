@@ -11,7 +11,7 @@ void create() {
     set_spell_sphere("divination");
     set_domains(({"destruction", "knowledge", "fate"}));
     set_syntax("cast CLASS true strike on TARGET");
-    set_damage_desc("clevel/3 to attack bonus for clevel/12+1 rounds");
+    set_damage_desc("clevel / 3 to attack bonus for clevel / 10 + 1 rounds");
     set_description("Gaining insight on future events, caster can grant anyone knowledge of how to exploit it to make a strikes unlikely to miss for the next few rounds
 
 %^BOLD%^See also:%^RESET%^ true strikes *feats");
@@ -37,7 +37,6 @@ void spell_effect(int prof) {
         tell_object(caster,"%^BOLD%^%^CYAN%^You touch your forehead, granting yourself a temporary insight into events as they unfold.%^RESET%^");
         tell_room(place,"%^BOLD%^%^CYAN%^"+caster->QCN+" touches "+caster->QP+" forehead, and seems lethargic for a moment.%^RESET%^");
     }
-//    target->set_property("attack bonus",clevel);
     thebonus = clevel / 3;
     target->add_attack_bonus(thebonus);
     addSpellToCaster();

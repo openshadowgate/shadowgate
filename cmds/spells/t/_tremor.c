@@ -1,8 +1,3 @@
-// Changing damage to be clevel,4 after overall agreement on webboard. Dinji - 10/21
-//Making it so if they fail the save, they will always get tripped -
-//Before there was a chance that the message would go through but
-//tripped would be set to 0. ~Circe~ 5/5/08 Rebalancing domains
-
 #include <std.h>
 #include <daemons.h>
 
@@ -15,7 +10,8 @@ void create(){
     set_spell_sphere("combat");
     set_domains("destruction");
     set_syntax("cast CLASS tremor");
-    set_description("This spell causes a great quake to shake the ground, doing some damage to the caster's enemies, and having a chance to knock them down to the ground.");
+    set_damage_desc("bludgeoning, tripped for 1d2 rounds");
+    set_description("This spell causes a great quake to shake the ground, doing some damage to the caster's enemies, and having a chance to knock them down to the ground. On a successful save causes half the damage and no tripped.");
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(3);
@@ -47,7 +43,7 @@ void spell_effect(int prof){
         for(i=0;i<sizeof(inven);i++){
             if(!objectp(inven[i])) { continue; }
             define_base_damage(0);
-            if (!do_save(inven[i]) && inven[i]->set_tripped(roll_dice(1, 4) + 1, "You are struggling to stand!")) {
+            if (!do_save(inven[i]) && inven[i]->set_tripped(roll_dice(1, 2), "You are struggling to stand!")) {
                 tell_object(inven[i], "%^BOLD%^You are thrown to the " +
                             "ground by the force of the tremor!");
                 tell_room(place, "%^BOLD%^" + inven[i]->QCN + " is thrown " +

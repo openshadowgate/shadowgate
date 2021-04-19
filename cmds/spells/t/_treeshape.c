@@ -10,6 +10,7 @@ void create() {
     set_spell_level(([ "ranger" : 3, "druid" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS treeshape");
+    set_damage_desc("summons enchanted armor");
     set_description("A ranger in harmony with the wild can cause their own body to take on the shape of a tree, growing "
 "leaves and a skin of bark that protects them from harm.  This spell does not work while wearing armor.");
     set_verbal_comp();

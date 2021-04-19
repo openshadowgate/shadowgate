@@ -11,6 +11,7 @@ void create() {
     set_monk_way("way of the elements");
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS thunder wave");
+    set_damage_desc("force, tripped");
     set_description("This spell creates a wave of thunderous force, all creatures around the "+
     "caster must make a fortitude save or be damaged and knocked to the ground. Furthemore, all "+
     "inanimate objects not attached and on the ground may be knocked away.\n\nNOTE: The damage of this "+
@@ -18,10 +19,7 @@ void create() {
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(3);
-    //set_target_required(1);
     set_save("fort");
-    set_components(([
-    ]));
 }
 
 string query_cast_string()

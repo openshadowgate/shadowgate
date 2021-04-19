@@ -1,4 +1,3 @@
-//Psionic web, based on will save
 #include <spell.h>
 #include <magic.h>
 

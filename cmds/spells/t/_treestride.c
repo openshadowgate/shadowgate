@@ -1,4 +1,3 @@
-// repose sphere, summons a spectral mount. Nienne, 04/07
 #include <std.h>
 #include <spell.h>
 #include <magic.h>

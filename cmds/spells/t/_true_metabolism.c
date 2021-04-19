@@ -1,7 +1,3 @@
-//somewhat based on Aura of Healing by Garrett
-//Circe 7/29/05
-//Adjusted by ~Circe~ 1/13/16 to improve healing
-//trying heart_beat since the combat approach is not working ~Circe~ 11/10/19
 #include <std.h>
 #include <daemons.h>
 #include <priest.h>
@@ -17,6 +13,7 @@ void create()
     set_spell_level(([ "psion" : 8 ]));
     set_spell_sphere("healing");
     set_syntax("cast CLASS true metabolism");
+    set_damage_desc("untyped healing");
     set_description("This power will allow the psion to focus his energy on making minor bodily adjustments, in effect healing himself over time. The power will gradually expend itself over time.");
     set_verbal_comp();
     set_somatic_comp();
