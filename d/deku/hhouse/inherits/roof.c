@@ -160,9 +160,17 @@ int jump_act(string str)
             break;
     }
     TP->move(dest);
-    tell_object(TP, "%^BOLD%^%^RED%^You slam into the ground with a bone crunching thud!%^RESET%^");
-    TP->heal((-1*roll_dice(15,20)));
-    tell_room(ETP, TPQCN+"%^BOLD%^%^RED%^ lands with a bone crunching thud!%^RESET%^", TP);
+
+    if (TP->query_property("spider climb") ||
+        TP->query_property("flying") ||
+        RACE_D->can_fly(TP)) {
+        tell_object(TP, "%^BOLD%^%^GREEN%^You land quietly on the ground.%^RESET%^");
+        tell_room(ETP, TPQCN+"%^BOLD%^%^GREEN%^ lands quietly on the ground.%^RESET%^", TP);
+    } else {
+        tell_object(TP, "%^BOLD%^%^RED%^You slam into the ground with a bone crunching thud!%^RESET%^");
+        TP->heal((-1*roll_dice(15,20)));
+        tell_room(ETP, TPQCN+"%^BOLD%^%^RED%^ lands with a bone crunching thud!%^RESET%^", TP);
+    }
     return 1;
 }
 
