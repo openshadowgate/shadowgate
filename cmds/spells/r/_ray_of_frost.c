@@ -1,5 +1,3 @@
-// Mind Thrust
-// ~Circe~ 7/19/05
 #include <spell.h>
 inherit SPELL;
 
@@ -8,6 +6,7 @@ void create() {
     set_spell_name("ray of frost");
     set_spell_level(([ "mage" : 1, "magus" : 1 ]));
     set_spell_sphere("invocation_evocation");
+    set_damage_desc("cold");
     set_syntax("cast CLASS ray of frost on TARGET");
     set_description("With this spell you direct a freezing ray at your target.");
     set_verbal_comp();
@@ -36,4 +35,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-

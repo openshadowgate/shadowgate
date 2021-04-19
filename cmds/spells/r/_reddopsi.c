@@ -1,4 +1,3 @@
-//updated to be similar to Spell Turning, which is more in line with source material ~Circe~ 1/14/2020
 #include <priest.h>
 #include <magic.h>
 inherit SPELL;
@@ -11,7 +10,7 @@ void create() {
     set_spell_level(([ "psion" : 7 ]));
     set_spell_sphere("abjuration");
     set_discipline("kineticist");
-    set_damage_desc("clevel/6+5 spell reflection chance.");
+    set_damage_desc("clevel / 6 + 5 spell reflection chance.");
     set_syntax("cast CLASS reddopsi");
     set_description("Talented kineticists can manipulate the area around them, causing spells and powers to rebound upon their originators. While this power holds, it will have a chance to reflect any spells which are directly aimed at the caster, regardless of whether they are hostile or friendly. The ward will not reflect splash damage or AOE, but only direct-targetted spells. This spell will override spell reflection and reflection feats.");
     set_verbal_comp();

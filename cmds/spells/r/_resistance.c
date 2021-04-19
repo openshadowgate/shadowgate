@@ -1,5 +1,3 @@
-//added a property to prevent stacking ~Circe~ 12/16/19
-//updated to add psions and psywarrior to streamline spells - replaces biofeedback ~Circe~ 10/26/19
 #include <priest.h>
 #include <daemons.h>
 inherit SPELL;

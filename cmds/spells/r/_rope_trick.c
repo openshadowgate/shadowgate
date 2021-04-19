@@ -1,9 +1,3 @@
-// Rope Trick
-// fixed typos - problem with the spell ending must be with the object *Styx*  3/15/03
-// added roomName variable to prevent bugs where the room object from has been dested by clean_up to try to fix bugs  *Styx*  3/23/03
-
-// Changed to recognize no pocket space for certain boss rooms. Dinji 10/30/2007
-
 #include <std.h>
 #include <spell.h>
 #include <magic.h>

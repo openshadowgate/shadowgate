@@ -1,6 +1,3 @@
-// Rusting Grasp
-// Coded for druids by ~Circe~ 3/23/13
-// Based on Disintigrate by Ares
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -18,6 +15,7 @@ void create() {
     set_spell_level(([ "druid" : 4 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS rusting grasp on TARGET");
+    set_damage_desc("acid");
     set_description("The caster of this spell invokes the power of "
        "nature to rust metal and cause some damage to the target.  "
        "If the target resists, then he is able to avoid most of the "
@@ -86,7 +84,7 @@ void damage_stuff(object target){
     if(!objectp(target)) { return; }
     stuff = all_inventory(target);
     if(!sizeof(stuff)) { return; }
-    
+
     for(i=0;i<sizeof(stuff);i++){
         if(object_save(stuff[i])) { continue; }
         if(!stuff[i]->is_metal()) { continue; }
@@ -107,7 +105,7 @@ int object_save(object obj)
     return 1;
 }
 
-void dest_effect() 
+void dest_effect()
 {
     ::dest_effect();
     if(objectp(TO)) TO->remove();

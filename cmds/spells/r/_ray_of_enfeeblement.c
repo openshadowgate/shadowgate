@@ -29,6 +29,7 @@ void create()
     set_spell_sphere("necromancy");
     set_domains("suffering");
     set_syntax("cast CLASS ray of enfeeblement on TARGET");
+    set_damage_desc("clevel / 5 but no more than 5 to strength");
     set_description("A coruscating ray springs from your hand. You must succeed on a ranged touch attack to strike a target. The subject takes a penalty to Strength equal to 1d6+1 per two caster levels (maximum 1d6+5). Clerics with the Suffering Domain can cast this spell innately by spending one Divine Grace point");
     set_verbal_comp();
     set_somatic_comp();

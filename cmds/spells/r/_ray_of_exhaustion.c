@@ -12,7 +12,7 @@ void create() {
     set_spell_level(([ "mage" : 3, "magus" : 3, "nightblade":3]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS ray of exhaustion on TARGET");
-    set_damage_desc("exhaustion for clevel/6+1 rounds");
+    set_damage_desc("exhaustion for clevel / 6 + 1 rounds");
     set_description("A black ray springs from your hand. You must succeed on a ranged touch attack to strike a target. The subject becomes exhausted, but on a successful roll they only become fatigued. If they are already fatigued, they become exhausted.");
     set_save("fort");
     set_verbal_comp();

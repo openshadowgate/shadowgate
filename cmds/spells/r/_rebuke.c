@@ -12,8 +12,8 @@ void create() {
     set_spell_level(([ "inquisitor" : 4 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS rebuke");
-    set_damage_desc("half sonic half divine");
-    set_description("Your wrathful words cause physical harm to your enemies. Half of this damage is sonic damage, but the other half results directly from divine power and is therefore not subject to being reduced by resistance to sonic-based attacks. Rebuke is especially devastating to foes who worship your god, punishing them for offending your faith with additional damage.");
+    set_damage_desc("half sonic, half divine");
+    set_description("Your wrathful words cause physical harm to your enemies. Half of this damage is sonic damage, but the other half results directly from divine power and is therefore not subject to being reduced by resistance to sonic-based attacks. Rebuke is especially devastating to foes who worship your god, punishing them for offending your faith with additional damage. A successful save will halven the damage.");
     set_verbal_comp();
     set_somatic_comp();
     splash_spell(3);

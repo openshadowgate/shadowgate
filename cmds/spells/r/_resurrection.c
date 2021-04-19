@@ -1,6 +1,3 @@
-//Based on Raise Dead - Cythera 5/05
-// help file ammended to reflect lower exp. loss and avatar command *Styx* 1/06
-
 #include <std.h>
 #include <spell.h>
 inherit SPELL;

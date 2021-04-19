@@ -1,5 +1,3 @@
-// Psywarrior dispel - tries to dispel 1 effect per round
-//updated by ~Circe~ 10/26/19 to fix bugs and use current code
 #include <std.h>
 #include <magic.h>
 #include <daemons.h>

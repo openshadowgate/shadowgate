@@ -1,7 +1,3 @@
-//Rebirth - new spell for the Renewal domain
-//by ~Circe~ 5/15/08 - will give the caster an
-//option to revive himself after death
-
 #include <std.h>
 #include <clock.h>
 

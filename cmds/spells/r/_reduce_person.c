@@ -12,6 +12,7 @@ void create()
     set_spell_name("reduce person");
     set_spell_level(([ "mage" : 1, "magus" : 1 ]));
     set_spell_sphere("alteration");
+    set_damage_desc("-1 to size");
     set_syntax("cast CLASS reduce person");
     set_description("When this spell is cast, humanoid caster will shrink twice in size. This spell will turn humans into halflings, firbolgs into humans. Halflings will turn into mice!
 

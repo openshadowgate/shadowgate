@@ -18,37 +18,35 @@ void create()
 
 spell_effect()
 {
-    object * effects;
-    if(!objectp(target))
+    object* effects;
+    if (!objectp(target)) {
         target = caster;
-
-    if(target!=caster)
-    {
-        tell_object(caster,"%^GREEN%^You enspell words of support, lifting all of "+target->QCN+" fears!");
-        tell_room(place,"%^GREEN%^"+caster->QCN+" enspells words of support at "+target->QCN+"!",caster);
-        tell_object(target,"%^GREEN%^You feel all your fears disappear!");
     }
-    else
-    {
-        tell_object(caster,"%^GREEN%^You concentrate and lift all own fears.");
+
+    if (target != caster) {
+        tell_object(caster, "%^GREEN%^You enspell words of support, lifting all of " + target->QCN + " fears!");
+        tell_room(place, "%^GREEN%^" + caster->QCN + " enspells words of support at " + target->QCN + "!", caster);
+        tell_object(target, "%^GREEN%^You feel all your fears disappear!");
+    }else {
+        tell_object(caster, "%^GREEN%^You concentrate and lift all own fears.");
     }
 
     effects = target->query_property("status_effects");
 
-    if(sizeof(effects))
-    {
+    if (sizeof(effects)) {
         object effect;
         foreach(effect in effects)
         {
-            if(!objectp(effect))
+            if (!objectp(effect)) {
                 continue;
+            }
 
-            if(effect->query_name() == "effect_cowering" ||
-               effect->query_name() == "effect_frightened" ||
-               effect->query_name() == "effect_panicked" ||
-               effect->query_name() == "effect_shaken")
+            if (effect->query_name() == "effect_cowering" ||
+                effect->query_name() == "effect_frightened" ||
+                effect->query_name() == "effect_panicked" ||
+                effect->query_name() == "effect_shaken") {
                 effect->dest_effect();
+            }
         }
     }
-
 }

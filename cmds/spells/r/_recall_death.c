@@ -7,12 +7,13 @@ inherit SPELL;
 void create()
 {
     ::create();
-    
+
     set_author("nienne");
     set_spell_name("recall death");
     set_spell_level(([ "psion" : 8 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS recall death on TARGET");
+    set_damage_desc("mental");
     set_description("This spell parts the fabric of time, revealing wounds your foe has received in the past (or is yet to receive) that are potentially fatal. That target takes considerable damage as the past (or future) impinges briefly on the present. A failed will save will result in death. A successful save will result in the target still taking damage");
     set_verbal_comp();
     set_somatic_comp();
@@ -44,7 +45,7 @@ void spell_effect(int prof)
 // NO immunity from unyielding soul; this is not a mind effecting spell!
 // Left off the save for half damage as they have no better direct dmg spell. N, 6/11
 // Tlaloc changed this to will save or death. Success = damage.
-    if(do_save(target, 0) || 
+    if(do_save(target, 0) ||
     target->query_property("no death") ||
     target->query_level() > caster->query_level() ||
     target->query_level() > clevel)
@@ -60,7 +61,7 @@ void spell_effect(int prof)
         tell_room(place, "%^BLACK%^BOLD%^" + sprintf("%s's future death becomes manifest and %s falls to the ground...DEAD!", target->QCN, target->query_subjective()), ({ target }));
         target->die();
     }
-    
+
     spell_successful();
     dest_effect();
 }
