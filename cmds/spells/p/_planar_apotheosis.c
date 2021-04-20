@@ -14,6 +14,7 @@ void create() {
     set_spell_level(([ "psywarrior" : 4 ]));
     set_spell_sphere("combat");
     set_syntax("cast CLASS planar apotheosis on CELESTIAL|FIENDISH");
+    set_damage_desc("mental to enemy, to self 10 damage resistance to cold, electricity, 10 damage resistance to acid or fire, 3 spell damage resistance");
     set_description("When manifesting this power, the psionic character "
       "chooses to embrace the powers of either the celestial or the fiendish. "
       "The planar energy chosen grants special resistances and imbues the "
@@ -42,7 +43,7 @@ void spell_effect(int prof) {
    mytype = arg;
    mylevel = clevel;
    duration = (ROUND_LENGTH * 10) * mylevel;
-   myresist = (mylevel/2) + 5; //lower than other resistance spells because it is lower level and grants specific resistances as well. Adjust if needed.
+   myresist = 3;
    if(mytype == "fiendish"){
       tell_object(caster,"%^BOLD%^%^BLACK%^You reach into the depths of "
          "the %^RESET%^Abyss%^BOLD%^%^BLACK%^ and bring forth otherwordly energies, "

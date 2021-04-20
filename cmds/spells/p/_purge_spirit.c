@@ -1,4 +1,3 @@
-// Greater Shout
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -9,7 +8,7 @@ void dest_effect();
 void create()
 {
     ::create();
-    set_spell_name("purge spirit");
+    set_spell_name("purge spirit"); // greater shout reskin
     set_spell_level(([ "mage" : 4, "oracle" : 4 ]));
     set_spell_sphere("necromancy");
     set_mystery("reaper");
@@ -24,7 +23,7 @@ void create()
 
 string query_cast_string()
 {
-    return "%^BOLD%^%^BLUE%^"+caster->QCN+" chants a rhythmic low undertones.";
+    return "%^BOLD%^%^BLUE%^" + caster->QCN + " chants a rhythmic low undertones.";
 }
 
 void spell_effect()
@@ -34,13 +33,13 @@ void spell_effect()
     spell_successful();
 
     target_limb = target->return_target_limb();
-    tell_object(target,"%^BLUE%^%^BOLD%^"+caster->QCN+" makes a pass at you as if grabbing something out of the air and you feel a painful pull on your soul.");
-    tell_room(place,"%^BLUE%^%^BOLD%^"+caster->QCN+" makes a pass at "+target->QCN+" as if grabbing something out of the air.", target);
-    if(!do_save(target)) {
-        tell_object(target,"%^MAGENTA%^%^BOLD%^You are staggered by the force pulling on your soul!");
-        tell_room(environment(caster),"%^BLUE%^%^BOLD%^"+target->QCN+" staggered, unable to move.", ({ target}) );
-        damage_targ(target, target_limb, sdamage,"divine");
-        target->set_paralyzed(roll_dice(1,2)*8,"%^BOLD%^%^BLUE%^You are staggered by the force pulling on your soul!");
+    tell_object(target, "%^BLUE%^%^BOLD%^" + caster->QCN + " makes a pass at you as if grabbing something out of the air and you feel a painful pull on your soul.");
+    tell_room(place, "%^BLUE%^%^BOLD%^" + caster->QCN + " makes a pass at " + target->QCN + " as if grabbing something out of the air.", target);
+    if (!do_save(target)) {
+        tell_object(target, "%^MAGENTA%^%^BOLD%^You are staggered by the force pulling on your soul!");
+        tell_room(environment(caster), "%^BLUE%^%^BOLD%^" + target->QCN + " staggered, unable to move.", ({ target }));
+        damage_targ(target, target_limb, sdamage, "divine");
+        target->set_paralyzed(roll_dice(1, 2) * 8, "%^BOLD%^%^BLUE%^You are staggered by the force pulling on your soul!");
     }
     dest_effect();
 }

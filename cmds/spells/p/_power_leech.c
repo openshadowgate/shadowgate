@@ -1,4 +1,3 @@
-//~Circe~ 7/29/05
 #include <spell.h>
 #include <magic.h>
 
@@ -10,6 +9,7 @@ void create() {
     set_spell_level(([ "psion" : 4 ]));
     set_spell_sphere("necromancy");
     set_syntax("cast CLASS power leech on TARGET");
+    set_damage_desc("mental to enemy, mental healing to self");
     set_description("This power, when manifested, will cause the psion to gather his energy, focusing on the target.  The "
 "psion will then reach out, attempting to touch the target.  Should he succeed, he will empathically deliver damage to "
 "the target, while healing his own wounds for the same amount.  Note: The psion cannot gain extra hit points through this "
@@ -25,13 +25,7 @@ void spell_effect(int prof) {
     object env;
     damage = 0;
     spell_successful();
-    mylevel = clevel;
-    max = mylevel/2;
-    if(max < 1) max = 1; //shouldn't be possible, but better safe than sorry
-    if(max > 25) max = 25;
-    for (num=0;num < max;num++) {
-        damage += roll_dice(1,8);
-    }
+    damage = sdamage;
     target_limb = target->return_target_limb();
     if (interactive(caster)) {
         tell_object(caster,"%^BOLD%^%^WHITE%^Focusing your mind on "+
@@ -55,10 +49,11 @@ void spell_effect(int prof) {
     mybonus = (int)caster->query_class_level("psion");
     mybonus = mybonus/3;
     if(mybonus > 8) mybonus = 8;
-/*    if ((caster->is_class("psion")&&sizeof((string *)caster->query_classes())==1)?(int)caster->Thaco(0,target,0) <= roll_dice(1,20)+5:(int)caster->Thaco(0,target,0) <= roll_dice(1,20)) {*/
     if ((caster->is_class("psion")&&sizeof((string *)caster->query_classes())==1)?(int)caster->Thaco(0,target,0,"cleric") <= roll_dice(1,20)+10+mybonus:(int)caster->Thaco(0,target,0,"cleric") <= roll_dice(1,20)+5+mybonus) {
+
 //Changed the roll above because the power *never* hit.  This seems balanced
 //after testing.  I will continue watching and adjust as needed.  Circe 11/27/07
+
        tell_object(target,"%^BOLD%^%^BLACK%^As "+caster->QCN+" touches "+
           "you, you feel your body wracked with pain!");
        tell_room(place,"%^BOLD%^%^BLACK%^"+caster->QCN+" touches "+

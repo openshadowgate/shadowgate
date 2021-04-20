@@ -13,7 +13,7 @@ void create()
     set_spell_level(([ "warlock" : 2 ]));
     set_spell_sphere("alteration");
     set_syntax("cast CLASS path of shadow");
-    set_damage_desc("Fast Healing 2 on caster");
+    set_damage_desc("fast healing 2");
     set_description("The Shadows, bringer of death, but also the embrace of a dark mother. Feed upon the shadows and find yourself nourished.
 
 %^BOLD%^%^RED%^See also:%^RESET%^ status effects");

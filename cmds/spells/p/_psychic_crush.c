@@ -1,11 +1,3 @@
-/*
-  _psychic_crush.c
-
-  Similar to dictum. Causes status effects or kills.
-
-  -- Tlaloc -- 4.7.20
-*/
-
 #include <std.h>
 #include <spell.h>
 
@@ -18,7 +10,8 @@ create()
     set_spell_level(([ "psion" : 5 ]));
     set_spell_sphere("invocation_evocation");
     set_syntax("cast CLASS psychic crush on TARGET");
-    set_description("Your psychic will abruptly and brutally crushes the mental essence of the target. This power will stagger, paralyze or kill the target.");
+    set_damage_desc("tripped for 1d4 rounds, paralyzed for 2d4 or 1d4 rounds, mental");
+    set_description("Your psychic will abruptly and brutally crushes the mental essence of the target. This power will stagger, paralyze or kill the target. Successful save will negate the effects.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

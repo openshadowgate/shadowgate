@@ -1,7 +1,3 @@
-//Produce Flame for Druids
-//Coded by ~Circe~ 3/19/13
-//Based on burning hands
-
 #include <spell.h>
 #include <magic.h>
 #include <rooms.h>
@@ -18,12 +14,13 @@ void create() {
     set_domains("fire");
     set_spell_sphere("alteration");
     set_syntax("cast CLASS produce flame on TARGET");
+    set_damage_desc("fire");
     set_description("The druid opens his hand, palm up, and a flame as "
        "bright as a torch appears there.  The flame will not harm "
        "the druid or his equipment, but when the druid hurls the "
        "flame at an enemy, it explodes, fanning out to damage those "
        "around him.  Although the druid will try to control the spell "
-       "so as not to damage allies, this may not always be possible.");
+       "so as not to damage allies, this may not always be possible. A successful save will halven the damage;");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);

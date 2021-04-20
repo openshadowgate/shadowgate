@@ -1,11 +1,3 @@
-/*
-  _psionic_blast.c
-
-  AOE Stun
-
-  -- Tlaloc -- 3.31.20
-*/
-
 #include <spell.h>
 #include <daemons.h>
 
@@ -19,7 +11,8 @@ void create()
     set_spell_level( ([ "psion" : 3 ]) );
     set_spell_sphere("enchantment_charm");
     set_syntax("cast CLASS psionic blast");
-    set_description("The air ripples with the force of your mental attack, which blasts the minds of all creatures in range. Psionic blast stuns all affected creatures for 2d4 rounds.");
+    set_damage_desc("stunned for 2d4 rounds");
+    set_description("The air ripples with the force of your mental attack, which blasts the minds of all creatures in range. Psionic blast stuns all affected creatures for 2d4 rounds. A successful save will negate the effect.");
     set_save("will");
     splash_spell(3);
 }

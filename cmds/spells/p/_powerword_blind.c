@@ -12,6 +12,7 @@ void create() {
     set_spell_level(([ "mage" : 7,]));
     set_domains(({"knowledge", "war", "darkness"}));
     set_spell_sphere("enchantment_charm");
+    set_damage_desc("blindness for 2d4, 2d8 or 2d16 rounds");
     set_syntax("cast CLASS powerword blind on TARGET");
     set_description("When the powerword stun blind is uttered, any creature of the caster's choice is blinded, reeling and unable to think coherently or to act for a duration dependent on the creature's current hit points.");
     mental_spell();
