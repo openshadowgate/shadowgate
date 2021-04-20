@@ -46,7 +46,6 @@ void spell_effect(int prof)
 
     target->set_property("added short",({"%^RED%^ (giant)%^RESET%^"}));
     target->set_size_bonus(1);
-    target->add_ac_bonus(2);
     target->add_stat_bonus("strength",4);
     target->add_stat_bonus("constitution",4);
     target->add_stat_bonus("dexterity",-2);
@@ -64,7 +63,6 @@ void dest_effect()
     if(objectp(target))
     {
         target->set_size_bonus(0);
-        target->add_ac_bonus(-2);
         target->remove_property_value("spelled", ({TO}) );
         target->add_stat_bonus("strength",-4);
         target->add_stat_bonus("constitution",-4);

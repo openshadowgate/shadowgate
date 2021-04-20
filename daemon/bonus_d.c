@@ -1,8 +1,3 @@
-// Changed the numbers around to reflect the 3.5 edition rules.  They havethe same effect
-// but are still backwards.  I'm going to leave a copy of the current ones commented out, in
-// case we want to change them back.  -Ares 8/22/06
-// added in BAB for LA characters. Transformation (mage/sorc spell) also picks up here. N, 5/15.
-// added psywarriors ~Circe~ 9/1/15
 #include <std.h>
 #include <dirs.h>
 #include <daemons.h>
@@ -249,6 +244,10 @@ varargs effective_ac(object who)
 
     // This value is cosmetic. BAB gets bonus that overlaps this in process_hit
     MyAc = 10;
+
+    if (who->query_size()) {
+        MyAc += 2 - who->query_size();
+    }
 
     tmp = who->query_ac();
     if (tmp >= 0) {

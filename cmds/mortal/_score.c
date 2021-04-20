@@ -121,6 +121,7 @@ mixed* genoutput(object targ)
     output += ({ ({ "Age", "%^BOLD%^" + targ->query_real_age() + " %^CYAN%^(" + targ->query_real_age_cat() + ")" }) });
     output += ({ ({ "Height", "%^YELLOW%^" + targ->query_player_height() + " %^MAGENTA%^inches" }) });
     output += ({ ({ "Weight", "%^YELLOW%^" + targ->query_player_weight() + " %^MAGENTA%^lbs" }) });
+    output += ({ ({ "Body size", "%^YELLOW%^" + targ->query_size() }) });
     output += ({ ({ "Body type", "%^YELLOW%^" + targ->query_body_type() }) });
     output += ({ ({ "Hair Color", "%^BOLD%^" + targ->query_hair_color() }) });
     output += ({ ({ "Eye Color", "%^BOLD%^" + targ->query_eye_color() }) });

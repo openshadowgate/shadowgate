@@ -55,7 +55,6 @@ void spell_effect(int prof)
     }
     target->set_property("spelled", ({TO}) );
     target->set_property("enlarged",1);
-    target->add_ac_bonus(2);
     target->add_stat_bonus("strength",-2);
     target->add_stat_bonus("dexterity",2);
     spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
@@ -71,7 +70,6 @@ void dest_effect()
     {
         if(!keepsize)
             target->set_size_bonus(0);
-        target->add_ac_bonus(-2);
         target->add_stat_bonus("strength",2);
         target->add_stat_bonus("dexterity",-2);
         target->remove_property_value("spelled", ({TO}) );
