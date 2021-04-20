@@ -2,6 +2,7 @@
 #include "../tomb.h"
 
 inherit ROOM;
+string tunnelexit = "/d/underdark/upper/tonovitunnel/tonovi05.c";
 
 void create()
 {
@@ -16,10 +17,13 @@ void create()
 %^BLUE%^This %^BOLD%^%^BLACK%^endless%^RESET%^%^BLUE%^ graveyard is build upon a %^BOLD%^%^BLACK%^ruined%^RESET%^%^BLUE%^ city. Walls of houses destroyed with fire stand next to the grave stones. Most of the graves are ancient. Some are newly made. Tombs and graves have been moved into the city from elsewhere, as if two places - the graveyard and the city - were joined together. The %^CYAN%^cold%^BLUE%^ rises from the ground touching everything.
 
 %^BOLD%^%^BLACK%^Arch in the obsidian wall signifies the entrance. The main road passes through to the east.
+
+The entrance to the city has been blocked by stone and dirt. But someone has dug a %^BLUE%^hole%^BLACK%^ in the ground.
 ");
     set_exits(([
                    //"west": "/d/dagger/road/road25",
                    "east":ROOMS + "/necro4",
+                   "down":tunnelexit,
                    ]));
 }
 

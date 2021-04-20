@@ -50,6 +50,7 @@ void create() {
 
     set_exits(([
       "west" : TUNNEL"tonovi01",
+      "east" : TUNNEL"tonovi03",      
       "up" : "/d/dagger/tonovi/tower1",
         "down":"/d/shadow/ratpaths/rooms/rp_p031_p010",
     ]));
