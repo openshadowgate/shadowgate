@@ -701,31 +701,43 @@ void delay_messid_msg(int delay, string message)
 }
 
 
-void help(){
+void help()
+{
     string name,
         type,
         syntax,
         prereq,
         desc;
 
-    if (stringp(feat_name))
-        write("%^BOLD%^%^WHITE%^Name:%^RESET%^ "+capitalize(feat_name));
-    else
+    if (stringp(feat_name)) {
+        write("%^BOLD%^%^WHITE%^Name:%^RESET%^ " + capitalize(feat_name));
+    }else {
         return;
-    if (stringp(feat_type))
-        write("%^BOLD%^%^WHITE%^Type:%^RESET%^ "+capitalize(feat_type));
-    if (stringp(feat_category))
-        write("%^BOLD%^%^WHITE%^Category:%^RESET%^ "+capitalize(feat_category));
-    if (stringp(feat_prereq))
-        write("%^BOLD%^%^WHITE%^Prerequisites:%^RESET%^ "+feat_prereq);
-    if (stringp(save_type))
-        write("%^BOLD%^%^WHITE%^Saving throw:%^RESET%^ "+save_type);
-    if (stringp(feat_syntax))
-        write("%^BOLD%^%^WHITE%^Syntax:%^RESET%^ "+feat_syntax);
-    if (stringp(feat_desc))
-        write("\n"+feat_desc+"\n");
-    if (allow_shifted())
+    }
+    if (stringp(feat_type)) {
+        write("%^BOLD%^%^WHITE%^Type:%^RESET%^ " + capitalize(feat_type));
+    }
+    if (stringp(feat_category)) {
+        write("%^BOLD%^%^WHITE%^Category:%^RESET%^ " + capitalize(feat_category));
+    }
+    if (stringp(feat_prereq)) {
+        write("%^BOLD%^%^WHITE%^Prerequisites:%^RESET%^ " + feat_prereq);
+    }
+    if (stringp(save_type)) {
+        write("%^BOLD%^%^WHITE%^Saving throw:%^RESET%^ " + save_type);
+    }
+    if (stringp(feat_syntax)) {
+        write("%^BOLD%^%^WHITE%^Syntax:%^RESET%^ " + feat_syntax);
+    }
+    if (stringp(feat_desc)) {
+        write("\n" + feat_desc + "\n");
+    }
+    if (allow_shifted()) {
         write("%^BOLD%^%^WHITE%^Shapeshift: %^RESET%^This feat won't deactivate in shapeshifted form.");
-    if (psionic)
+    } else {
+        write("%^BOLD%^%^WHITE%^No shapeshift: %^RESET%^This feat will deactivate in shapeshifted form.");
+    }
+    if (psionic) {
         write("%^BOLD%^%^WHITE%^Psionic: %^RESET%^This is a psionic feat. It will improve your psionic body ability.");
+    }
 }
