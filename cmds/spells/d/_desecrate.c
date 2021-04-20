@@ -13,8 +13,6 @@ void create() {
     evil_spell(1);
     set_verbal_comp();
     set_somatic_comp();
-
-    set_target_required(1);
 }
 
 string query_cast_string()
