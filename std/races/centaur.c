@@ -145,6 +145,12 @@ string *query_eye_colors(string subrace) {
     return choices;
 }
 
+// Rationalization: "good" pk race
+int is_pk_race()
+{
+    return 1;
+}
+
 string *query_languages(string subrace)
 {
     return (["required":({"elven","common"}),"optional":({"gnomish","halfling","orcish"})]);

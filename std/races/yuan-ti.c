@@ -150,6 +150,12 @@ string *query_eye_colors(string who) {
     return choices;
 }
 
+// Rationalization: racial background
+int is_pk_race()
+{
+    return 1;
+}
+
 string *query_languages(string subrace)
 {
     return (["required":({"common","yuan-ti",}),"optional":({"aklo", "draconic", "elven", "undercommon", "goblin", "sylvan"})]);

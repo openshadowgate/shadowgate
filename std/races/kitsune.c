@@ -56,8 +56,6 @@ int *min_stats() { return ({ 16, 3, 8, 3, 3, 3 }); }
 int *max_stats() { return ({ 20, 17, 18, 16, 16, 12 }); }
 int *stat_adj() { return ({ 0, 0, 2, 0, 0, 2 }); }
 
-int is_restricted() { return 1; } // restricted races by approval
-
 // Stuff needed to replace what was in the old race database
 
 string race_name() { return "kitsune"; }

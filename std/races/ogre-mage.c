@@ -212,6 +212,12 @@ string *query_subraces(object who) {
     return ({"fire", "water", "kuwa", "void"});
 }
 
+// Rationalization: appearance
+int is_pk_race()
+{
+    return 1;
+}
+
 string* query_languages(string subrace)
 {
     return (["required" : ({ "common", "giant", }), "optional" : ({ "undercommon", "orcish", "gnomish", "dwarvish", })]);

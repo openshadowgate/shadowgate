@@ -148,6 +148,12 @@ string *query_eye_colors(string who) {
     return choices;
 }
 
+// Rationalization: appearance
+int is_pk_race()
+{
+    return 1;
+}
+
 string *query_languages(string subrace)
 {
     return (["required":({"common","beast",}),"optional":({"giant","orcish","dwarvish","gnomish",})]);

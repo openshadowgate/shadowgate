@@ -5,7 +5,7 @@
 
 inherit OBJECT;
 
-// Skip to MODULES section to write new module.
+// Skip to MODULES section to write a new module.
 
 string *ROLL_CHAIN = ({"class", "gender", "race", "subrace", "template", "age", "stat_mod", "stats", "height", "weight", "body_type", "hair_color", "eye_color", "language", "alignment", "deity", "class_special"});
 

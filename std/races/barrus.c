@@ -133,6 +133,12 @@ string *query_hair_colors(string who) {
     return choices;
 }
 
+// Rationalization: appearance
+int is_pk_race()
+{
+    return 1;
+}
+
 string *query_eye_colors(string who) { return ({"purple", "green", "emerald", "blue", "yellow", "amber", "hazel", "brown", "sable"}); }
 
 string *query_languages(string subrace)

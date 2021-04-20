@@ -139,6 +139,12 @@ string* query_subraces(object who)
 
 string *query_eye_colors(string who) { return ({"blue", "brown", "gray"}); }
 
+// Rationalization: ancient code, guard logic
+int is_pk_race()
+{
+    return 1;
+}
+
 string *query_languages(string subrace)
 {
     return (["required":({"common","giant",}),"optional":({"orcish","undercommon","dwarvish","gnomish",})]);
