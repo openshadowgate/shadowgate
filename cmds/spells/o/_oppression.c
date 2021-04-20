@@ -1,4 +1,3 @@
-// oppression
 #include <std.h>
 #include <magic.h>
 #include <party.h>
@@ -18,6 +17,7 @@ void create()
     set_spell_sphere("alteration");
     set_domains("tyranny");
     set_syntax("cast CLASS oppression");
+    set_damage_desc("clevel / 10 + 1 but no more to attack, damage bonus of all non-allies");
     set_description("This spell will surround the caster with a dark aura of oppression.  Any creature caught in the aura "
                     "that is not in the caster's party must make a saving throw or cower in fear from the caster.  Targets that are so "
                     "effected will have their ability to hit and do damage in combat reduced until either the aura expires or they leave the "
@@ -89,7 +89,7 @@ void execute_attack()
         party_members = (object*)PARTY_OB->query_party_members(party);
     }
     inven = all_living(room);
-    inven = filter_array(inven, (:$1->is_living():));
+    inven = filter_array(inven, (: $1->is_living() :));
     inven -= ({ caster });
     inven = target_filter(inven);
     inven = filter_array(inven, "party_filter", TO);
@@ -130,7 +130,6 @@ void execute_attack()
         tell_object(inven[i], "%^RED%^You feel the oppressive force of the aura surrounding "
                     "" + caster->QCN + ".");
         if (!do_save(inven[i], 0)) {
-            //if(!SAVING_D->saving_throw(inven[i],"spell",0)){
             tell_object(inven[i], "%^GREEN%^You cower away from " + caster->QCN + "!");
             tell_object(caster, "%^GREEN%^" + inven[i]->QCN + " cowers in fear of your "
                         "mighty presence!");
