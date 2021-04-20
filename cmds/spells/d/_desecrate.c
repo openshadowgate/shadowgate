@@ -44,7 +44,7 @@ void spell_effect()
     undeads->set_property("desecrated", 1);
 
     tell_object(caster,"%^BLUE%^The power of death washes over the area, infusing present undead.");
-    tell_room(place,"%^BLUE%^Dreadful waves of cold disperse from " + caster->QCN + "'s direction.", caster)
+    tell_room(place,"%^BLUE%^Dreadful waves of cold disperse from " + caster->QCN + "'s direction.", caster);
     foreach(peep in undeads) {
         tell_object(peep,"%^BOLD%^%^BLUE%^You feel empowered.");
     }

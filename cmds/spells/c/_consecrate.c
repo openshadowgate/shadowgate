@@ -44,7 +44,7 @@ void spell_effect()
     undeads->set_property("consecrated", 1);
 
     tell_object(caster,"%^ORANGE%^The power of life washes over the area, infusing present undead.");
-    tell_room(place,"%^ORANGE%^Luminous waves of light disperse from " + caster->QCN + "'s direction.", caster)
+    tell_room(place,"%^ORANGE%^Luminous waves of light disperse from " + caster->QCN + "'s direction.", caster);
     foreach(peep in undeads) {
         tell_object(peep,"%^BOLD%^%^ORANGE%^You feel weakened.");
     }
