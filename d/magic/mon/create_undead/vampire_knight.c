@@ -52,7 +52,7 @@ void create(){
         stuff->set_property("monsterweapon", 1);
         stuff->move(TO);
         weapon = stuff;
-        command("wield halberd");
+        command("wield sword");
         stuff = new("/d/common/obj/armour/plate");
         stuff->set_property("monsterweapon", 1);
         stuff->move(TO);
