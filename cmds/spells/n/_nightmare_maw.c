@@ -21,65 +21,61 @@ void create()
 
 string query_cast_string()
 {
-    return "%^BOLD%^%^BLACK%^As "+caster->QCN+" chants, a giant black maw forms behind"+caster->QS+".%^RESET%^";
+    return "%^BOLD%^%^BLACK%^As " + caster->QCN + " chants, a giant black maw forms behind" + caster->QS + ".%^RESET%^";
 }
 
 spell_effect(int prof)
 {
     spell_successful();
 
-    tell_room(place,"%^BOLD%^%^BLACK%^As "+caster->QCN+" completes the chant, giant maw floats towards "+target->QCN+" and plunges its teeth into them.",target);
-    tell_object(target,"%^BOLD%^%^BLACK%^As "+caster->QCN+" completes the chant, giant maw floats towards you and plunges its teeth into them.",target);
-    damage_targ(target, target->return_target_limb(), sdamage,"slashing");
+    tell_room(place, "%^BOLD%^%^BLACK%^As " + caster->QCN + " completes the chant, giant maw floats towards " + target->QCN + " and plunges its teeth into them.", target);
+    tell_object(target, "%^BOLD%^%^BLACK%^As " + caster->QCN + " completes the chant, giant maw floats towards you and plunges its teeth into them.", target);
+    damage_targ(target, target->return_target_limb(), sdamage, "slashing");
     num = clevel / 8 + 1;
-    if(do_save(target,0))
-        num/=2;
-    call_out("bite_again",ROUND_LENGTH);
+    if (do_save(target, 0)) {
+        num /= 2;
+    }
+    call_out("bite_again", ROUND_LENGTH);
 }
 
 void bite_again()
 {
-
-    if(!objectp(target))
-    {
+    if (!objectp(target)) {
         dest_effect();
         return;
     }
 
-    if(target->query_hp()<0)
-    {
+    if (target->query_hp() < 0) {
         dest_effect();
         return;
     }
 
     define_base_damage(0);
-    tell_room(ENV(target),"%^BOLD%^%^BLACK%^The maw continues to nibble on "+target->QCN+"!%^RESET%^",target);
-    tell_object(target,"%^BOLD%^%^BLACK%^The maw nibbles on you!%^RESET%^");
-    damage_targ(target, target->return_target_limb(), sdamage/6,"slashing");
+    tell_room(ENV(target), "%^BOLD%^%^BLACK%^The maw continues to nibble on " + target->QCN + "!%^RESET%^", target);
+    tell_object(target, "%^BOLD%^%^BLACK%^The maw nibbles on you!%^RESET%^");
+    damage_targ(target, target->return_target_limb(), sdamage / 6, "slashing");
 
-    if(num-- < 0)
-    {
+    if (num-- < 0) {
         dest_effect();
         return;
-    }
-    else
-    {
-        call_out("bite_again",ROUND_LENGTH);
+    }else {
+        call_out("bite_again", ROUND_LENGTH);
     }
 }
 
 dest_effect()
 {
-    if(find_call_out("bite_again") != -1)
+    if (find_call_out("bite_again") != -1) {
         remove_call_out("bite_again");
+    }
 
-    if(objectp(target))
-    {
-        tell_room(ENV(target),"%^BOLD%^%^BLACK%^The maw was nibbling on "+target->QCN+" vanishes.%^RESET%^",target);
-        tell_object(target,"%^BOLD%^%^BLACK%^The maw vanishes!%^RESET%^");
+    if (objectp(target)) {
+        tell_room(ENV(target), "%^BOLD%^%^BLACK%^The maw was nibbling on " + target->QCN + " vanishes.%^RESET%^", target);
+        tell_object(target, "%^BOLD%^%^BLACK%^The maw vanishes!%^RESET%^");
     }
 
     ::dest_effect();
-    if(objectp(TO))
+    if (objectp(TO)) {
         TO->remove();
+    }
 }

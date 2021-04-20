@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     set_spell_name("nightmare");
-    set_spell_level(([ "mage" : 5, "bard":5, "psion":5]));
+    set_spell_level(([ "mage" : 5, "bard" : 5, "psion" : 5]));
     set_spell_sphere("illusion");
     set_syntax("cast CLASS nightmare on TARGET");
     set_damage_desc("mental, fatigue for clevel / 4 + 1  rounds");
@@ -25,7 +25,6 @@ string query_cast_string()
 
 spell_effect()
 {
-
     if (!do_save(target, 0)) {
         if (mind_immunity_damage(target, "default")) {
             spell_successful();
@@ -39,5 +38,4 @@ spell_effect()
 
     tell_object(target, "%^BLUE%^A heavy nightmarish vision descends upon you as " + caster->QCN + " completes the spell.");
     tell_room(ENV(target), "%^BLUE%^" + target->QCN + " shudders and staggers as feeling of dread swipes by the area.", target);
-
 }
