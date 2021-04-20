@@ -343,6 +343,8 @@ Throwing an object without naming a target moves it to the relevant room.
 
 When wielding a bow, you can use shoot command instead.
 
+You can not throw kept objects.
+
 %^CYAN%^EXAMPLES%^%^RESET%^
 
 The command only looks at objects you are wielding. So, if you wish to throw 'dagger 2' in your inventory at a target in the same room as you, use the commands:
@@ -352,7 +354,7 @@ The command only looks at objects you are wielding. So, if you wish to throw 'da
 
 %^CYAN%^SEE ALSO%^RESET%^
 
-peer, look, mmap, map, help
+keep, peer, look, mmap, map, help
 "
         );
     return 1;
