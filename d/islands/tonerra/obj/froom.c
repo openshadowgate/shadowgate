@@ -69,6 +69,7 @@ void heart_beat()
         // added exclude true invis immortals *Styx*  9/20/03, last change was 6/00
         if(inven[i]->query_true_invis()) { continue; }
         if(inven[i]->query_property("fire resistant")) { continue; }
+        if(inven[i]->query_property("fiery_body")) { continue; }
 
         tell_object(inven[i],"%^RED%^You are scorched by the heat.");
         inven[i]->add_attacker(TO);

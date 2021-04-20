@@ -87,6 +87,8 @@ int hitem(object victim) {
 int burnem(){
 
    if(TP->query_property("fire resistant")) return 1;
+   if(TP->query_property("fiery_body")) return 1;
+
    tell_object(TP,"%^RED%^Your hands are burned by the searing heat of this spear.");
    TP->do_damage("torso",roll_dice(2,10));
    return 1;
