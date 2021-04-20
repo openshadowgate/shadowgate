@@ -2706,7 +2706,7 @@ varargs int property_special(mixed arg, object enemy_weapon, object attacker)
 
         messages["type"] = "heal";
         send_messages(messages);
-        ETO->do_damage("torso", -1 * roll_dice(1, min_level) + enchantment + 5);
+        ETO->do_damage("torso", -1 * (roll_dice(1, min_level) + enchantment + 5));
         break;
 
     case "attack":
