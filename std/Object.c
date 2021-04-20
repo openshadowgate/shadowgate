@@ -2468,7 +2468,7 @@ string query_bonus_display()
     }
 
     if (query_property("enchantment")) {
-        ret += "enchantment " + query_property("enchantment");
+        ret += "enchantment " + query_property("enchantment") + ", ";
     }
 
 
