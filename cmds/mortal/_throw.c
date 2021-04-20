@@ -67,11 +67,11 @@ int cmd_throw(string str)
         return 1;
     }
 
-    if (objectp(what_ob) && what_ob->query_property("no drop")) {
+    if (objectp(what_ob) && (what_ob->query_property("no drop") || what_ob->query_property("nosell"))) {
         tell_object(TP, "You are unable to throw " + what_ob->query_name() + ".");
         return 1;
     }
-    //adjust the remainder of the string, depending whether two words or one were used as the identifier
+
     switch (flag) {
     case 0:
         if (what2 == 0) {
