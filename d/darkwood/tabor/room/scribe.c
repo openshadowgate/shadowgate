@@ -88,13 +88,16 @@ MELNMARN
 int buy_map(string str){
   int amount;
   amount = 15;
-  if(!present("scribe")) return notify_fail("Nobody is here to draw you a map.\n");
-  if(str == "map"){ 
-      tell_object(TP,"What would you like him to draw?  He can "+
-         "<draw tabor> or <draw area>.");
-      return 1;
+  if(str && str != "tabor" && str != "area" && str != "map") {
+      tell_object(TP,"If you wish to draw a map, please see the sign. ");       
+      return 0; 
   }
-  if(str != "tabor" && str != "area") return notify_fail("Draw what?\n");
+  if(!present("scribe")) return notify_fail("Nobody is here to draw you a map.\n");
+  if(!str || str == "map"){ 
+      tell_object(TP,"What would you like him to draw?  He can "+
+         "<draw tabor> or <draw area>."); 
+      return 1;
+  } 
   if((this_player()->query_money("gold") < amount))
     return notify_fail("You don't have "+amount+" gold!\n");
   if(str == "tabor"){
