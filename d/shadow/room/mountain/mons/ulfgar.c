@@ -177,17 +177,18 @@ void reply_func(string msg, object who){
       force_me("emote frowns deeply and blushes slightly.");
       force_me("say It's a family heirloom, a pipe.  And I need to be getting it back, but "+
          "I can't find the tricky little devil!  It could be anywhere in this cave system..."+
-         "it connects all the way to Dragon's Den, ya know.  Have you seen the beast?");
+         "it connects all the way to Dragon's Den, ya know.  Have you seen the beast? ");
       force_me("speech say");
+      if(member_array(name, asked) == -1) {
+         SAVE_D->set_value("PipeQuest_asked", name);
+      }
+
       step2 = 1;
       return;
    }
 
    if((strsrch(msg,"yes") != -1 || strsrch(msg,"kobold") != -1 || 
    strsrch(msg,"no") != -1 || strsrch(msg,"Yes") != -1 || strsrch(msg,"pipe") != -1 || strsrch(msg,"No") != -1) && step2 == 1) {
-      if(member_array(name, asked) == -1) {
-         SAVE_D->set_value("PipeQuest_asked", name);
-      }
       force_me("say I think it might be hiding with them other kobolds in Dragon's Den Caves.");
       step3 == 1;
 		return;
@@ -241,14 +242,9 @@ void receive_given_item(object obj){
       return;
    }
    if(member_array(TPQN, asked) == -1) {
-     force_me("say Well, where did ye find this?  How did you know I was looking for it?");
+     force_me("say What is this? What are we talking about again?");
      force_me("emote frowns slightly and seems confused.");
-     force_me("say It does look like something I was looking for...but how do I know you aren't "+
-        "one of those tricky magic users?  Nah...I can't accept this.  You come back if you "+
-        "feel like talking like a civilized person...");
-     force_me("emote gives a small grin but seems suspiscious as he looks over the pipe, then smashes "+
-        "it with his pick, muttering something about illusions.");
-     obj->remove(TO);
+     command("drop " + obj->query_id()[0]);
      return;
    }   
    if((string)obj->query_name() != "ivory cave pipe") {
