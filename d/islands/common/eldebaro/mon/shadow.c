@@ -77,7 +77,7 @@ void move_shadow()
     return;    
 }
 
-void lasts_for(int x) { lasts_for = (x * ROUND_LENGTH); }
+void lasts_for(int x) { lasts_for = x; }
 
 void check_environment()
 {
