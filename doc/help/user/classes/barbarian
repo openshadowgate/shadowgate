@@ -7,6 +7,7 @@
 %^RESET%^%^CYAN%^Class Feats:%^RESET%^
  %^RESET%^L1: light armor proficiency, medium armor proficiency, shield proficiency, simple weapon proficiency, martial weapon proficiency, rage, powerattack, unarmored defense
  %^RESET%^L2: dodge
+ %^RESET%^L5: improved dodge
  %^RESET%^L7: damage resistance
  %^RESET%^L10: damage reduction
  %^RESET%^L11: greater rage
@@ -24,4 +25,3 @@ The barbarian's primary ability in battle is %^ORANGE%^<rage>%^RESET%^. Rage inc
 The barbarian is a melee class, so should rely on feats taken from the martial tree, check %^ORANGE%^<feats list martial>%^RESET%^ for a full list of what is potentially available to you.
 
 %^RESET%^%^CYAN%^See also: %^RESET%^ feats, stats, skills, rage *feats, prestige classes
-

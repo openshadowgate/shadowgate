@@ -86,7 +86,6 @@ varargs int get_stab_damage(object player, object target, object weapon)
         }
 
         if ((FEATS_D->usable_feat(target, "mighty resilience") ||
-             FEATS_D->usable_feat(target, "improved dodge") ||
              FEATS_D->usable_feat(target, "remember the future"))) {
             damage -= roll_dice(target->query_level(), 6);
         }

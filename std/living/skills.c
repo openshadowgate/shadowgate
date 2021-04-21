@@ -1624,6 +1624,10 @@ varargs int is_flanked_by(object ob, int mybonus)
         return 0;
     }
 
+    if (FEATS_D->usable_feat(TO, "improved dodge")) {
+        return 0;
+    }
+
     if (ob->query_skill("stealth") + roll_dice(1, 20) > TO->query_skill("perception") + mybonus) {
         return 1;
     }
