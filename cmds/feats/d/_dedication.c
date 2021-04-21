@@ -43,7 +43,8 @@ the chosen Dedication.
 This dedication will not be applied when Lay on Hands is used offensively.
 You can change your dedication once every three days, so choose carefully!
 
-To start selection process type <dedication>.");
+To see current dedication, type <dedication>.
+To select a dedication, type <dedication [DEDICATION]>.");
     allow_tripped(1);
 }
 
