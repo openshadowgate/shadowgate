@@ -281,7 +281,7 @@ void do_travel_2(string file)
 
     if(member_array("portal", endplace->query_exits()) == -1)
     {
-        endplace->add_exit(base_name(place),"portal");
+        endplace->add_exit(file_name(place),"portal");
     }
     else
     {
@@ -290,7 +290,7 @@ void do_travel_2(string file)
         {
             portnum++;
         }
-        endplace->add_exit(base_name(place), "portal"+portnum);
+        endplace->add_exit(file_name(place), "portal"+portnum);
         TO->set_property("MyCreatedExit", "portal"+portnum);
     }
     addSpellToCaster();
