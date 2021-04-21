@@ -92,6 +92,11 @@ varargs void do_save(object ob, int dc, string type, raw_save)
                 ob->query("subrace") == "senzokuan") {
                 mod += 1;
             }
+
+            if (FEAT_D->usable_feat(ob, "danger sense")) {
+                mod += ob->query_level() / 5 + 1;
+            }
+
             break;
         case "will":
             mod = (int)ob->query_saving_bonus("will");
@@ -117,18 +122,23 @@ varargs void do_save(object ob, int dc, string type, raw_save)
             (ob->query("subrace") == "deep gnome" || ob->query("subrace") == "svirfneblin")) {
             mod += 0;                                                                                                                                                // svirfneblin +2 saves racial - changed in racial update
         }
+
         if (FEATS_D->usable_feat(ob, "resistance")) {
             mod += 2;
         }
+
         if (FEATS_D->usable_feat(ob, "force of personality")) {
             int sbonus = BONUS_D->query_stat_bonus(ob, "charisma");
             mod += sbonus > 5 ? 5 : sbonus;
         }
+
         if (FEATS_D->usable_feat(ob, "shadow master") && objectp(ENV(ob)) && ENV(ob)->query_light() < 2) {
             num += 2;
         }
-        if(member_array("madness", ob->query_divine_domain()) >= 0)
+
+        if (member_array("madness", ob->query_divine_domain()) >= 0) {
             num -= roll_dice(1, 4);
+        }
 
         save_info["misc_modifiers"] = mod;
         {
@@ -187,7 +197,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     } else {
         save_info["save_result"] = 0;
     }
-    
+
     if(save_info["save_result"] == 0)
     {
         if(ob->query_class_level("cleric"))
@@ -203,7 +213,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
                 }
             }
         }
-    }       
+    }
 }
 
 int get_save(object who, string type)

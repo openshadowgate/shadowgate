@@ -287,6 +287,10 @@ varargs ac_bonus(object who, object attacker)
         dexb -= 4;
     }
 
+    if (FEATS_D->usable_feat(who, "danger sense")) {
+        dexb -= (1 + who->query_level() / 5);
+    }
+
     dexb = -dexb;
 
     if (who->query_temporary_blinded() || who->query_blind()) {
