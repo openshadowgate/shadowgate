@@ -192,24 +192,24 @@ int open_portal()
     tell_room(endplace, "%^BOLD%^%^CYAN%^A shimmering portal opens in the air!");
 
     if (member_array("portal", place->query_exits()) == -1) {
-        place->add_exit(base_name(endplace), "portal");
+        place->add_exit(file_name(endplace), "portal");
     }else {
         portnum = 1;
         while (member_array("portal" + portnum, place->query_exits()) != -1) {
             portnum++;
         }
-        place->add_exit(base_name(endplace), "portal" + portnum);
+        place->add_exit(file_name(endplace), "portal" + portnum);
         TO->set_property("MyCreatedEnter", "portal" + portnum);
     }
 
     if (member_array("portal", endplace->query_exits()) == -1) {
-        endplace->add_exit(base_name(place), "portal");
+        endplace->add_exit(file_name(place), "portal");
     }else {
         portnum = 1;
         while (member_array("portal" + portnum, endplace->query_exits()) != -1) {
             portnum++;
         }
-        endplace->add_exit(base_name(place), "portal" + portnum);
+        endplace->add_exit(file_name(place), "portal" + portnum);
         TO->set_property("MyCreatedExit", "portal" + portnum);
     }
     //endplace->add_exit(base_name(place), "portal");
