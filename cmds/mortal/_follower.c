@@ -15,38 +15,55 @@ inherit DAEMON;
 #define DUMBY "/cmds/mortal/followers/dumbyroom"
 #define MONK "/cmds/mortal/followers/monk"
 
+string helpstart = 
+"    This will allow you to manage your followers.\n"
+"    follower <name> summon\n"
+"    follower <name> dismiss\n"
+"    follower <name> <command>\n"
+"    follower <name,name2> <command>\n"
+"\n"
+"   This command allows you to summon, command, and dismiss your followers or retainers. They will come shortly after you summon them and will obey your every command.  You must use them wisely for if they die then they are lost. You must also learn what to order them to do.  You must RP to learn what is best for each follower.  Retainers are gained every 5 levels, or every 5 days of online time.  The <name> argument can be replaced with <all> and the command will be executed by all the retainers.\n"
+"\n"
+"    Of special note:  Followers save themselves.  If you change the title of the follower it will save.  If your follower has 1 hp left it will also save.  If you give your follower a new sword it will save (it will not automatically rewield).\n"
+"\n"
+"    A special title command has been added to allow you to set the title  of your followers: follower <name> title <string containing $N>\n"
+"\n";
+
+string helpend = 
+"Keep the following in mind:%^RESET%^\n\n"
+"   1)  Retainers should only have gear they can actually use.  Example:  "
+"if they cannot wear or wield the armor or weapons due to enchantment "
+"or class they should not have it - clerics with edged weapons, level "
+"8 with +2 gear.\n\n"
+"   2)  They should not have excess equipment they would not have need "
+"for, i.e. mages should not have two sets of bracers or robes.\n\n"
+"   3)  Keep sacks (and other similar storage - chests, baskets, extra "
+"pouches) limited to two since there is no reason for them to be "
+"carrying much in sacks.\n\n"
+"%^BOLD%^%^RED%^Please note:%^WHITE%^ We do not refund gear for followers. "
+"To help avoid gear loss, the following hints may help: 1) Dismiss before "
+"logging out. 2) Don't move when summoning. 3) Summon one follower at a time. 4) Command your follower to save when you are satisfied with their setup.%^RESET%^"
+"\n";
+ 
+
+
 int help(){
     int i;
     mapping retinue;
 
      if(!avatarp(TP))
        if(!FEATS_D->usable_feat(TP,"leadership")){
-           write("You need the leadership feat to view this help file.");
+           write(helpstart);
+           write(helpend);
+           write("You need the leadership feat to view your followers.");
             return 0;
        }
 
     RETINUE->init_knights(TP);
     retinue = TP->get_retinue_mapping();
 
-    write(
-@OLI
-    This will allow you to manage your followers.
-    follower <name> summon
-    follower <name> dismiss
-    follower <name> <command>
-    follower <name,name2> <command>
+    write(helpstart);
 
-    This command allows you to summon, command, and dismiss your followers or retainers. They will come shortly after you summon them and will obey your every command.  You must use them wisely for if they die then they are lost. You must also learn what to order them to do.  You must RP to learn what is best for each follower.  Retainers are gained every 5 levels, or every 5 days of online time.  The <name> argument can be replaced with <all> and the command will be executed by all the retainers.
-OLI
-     +
-@OLI
-
-    Of special note:  Followers save themselves.  If you change the title of the follower it will save.  If your follower has 1 hp left it will also save.  If you give your follower a new sword it will save (it will not automatically rewield).
-
-    A special "title" command has been added to allow you to set the title  of your followers: follower <name> title <string containing $N>
-
-OLI
-    );
     write("Your current followers are:");
     if (retinue && sizeof(values(retinue)) > 0) {
 
@@ -56,20 +73,7 @@ OLI
     } else {
         write("    You currently have no followers.");
     }
-    write("\n Keep the following in mind:%^RESET%^\n\n"
-	"   1)  Retainers should only have gear they can actually use.  Example:  "
-	"if they cannot wear or wield the armor or weapons due to enchantment "
-	"or class they should not have it - clerics with edged weapons, level "
-	"8 with +2 gear.\n\n"
-	"   2)  They should not have excess equipment they would not have need "
-	"for, i.e. mages should not have two sets of bracers or robes.\n\n"
-	"   3)  Keep sacks (and other similar storage - chests, baskets, extra "
-	"pouches) limited to two since there is no reason for them to be "
-	"carrying much in sacks.\n\n"
-      "%^BOLD%^%^RED%^Please note:%^WHITE%^ We do not refund gear for followers. "
-      "To help avoid gear loss, the following hints may help: 1) Dismiss before "
-      "logging out. 2) Don't move when summoning. 3) Summon one follower at a time. 4) Command your follower to save when you are satisfied with their setup.%^RESET%^"
-    );
+    write(helpend);
     if(avatarp(TP))
 	write("%^BOLD%^%^GREEN%^(Immortal eyes only) - you can ban or reinstate "
 	   "the use of followers by using <follower [name] [lock|unlock]>.  "
