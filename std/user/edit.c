@@ -71,7 +71,7 @@ protected void lines(string str) {
       if (act_ob && function_exists(callback,act_ob)) {
 	call_other(act_ob,callback,edit_args);
       }
-      else message("system", "Cannot find function "+callback, this_player());
+      else message("system", "Cannot find function <"+callback + ">. Please try again or contact an admin.", this_player());
       return;
    }
    if (str == "~e") {
