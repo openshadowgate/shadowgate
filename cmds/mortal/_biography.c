@@ -44,8 +44,8 @@ int display_kills(string who)
     else
     {
         if(!wizardp(this_player())) ob = TP;
-        if(!ob=find_player(who))
-            return notify_fail("No such person!\n");
+        else if(!ob=find_player(who)) return notify_fail("No such person!\n");
+        
     }
     kills = ob->query_kills();
     if(!amt=sizeof(kills))
@@ -118,6 +118,7 @@ int display_deaths(string str)
     return 1;
 }
 
+// string str is not used as an argument, I leave it as is in case other objects call this function.
 int display_quests(string mtarg, string str)
 {
     object targ;
@@ -126,7 +127,7 @@ int display_quests(string mtarg, string str)
     int i;
     if(mtarg && avatarp(TP))
     {
-        if(!(mtarg = find_player(str)) || targ->query_highest_level() > TP->query_highest_level())
+        if(!(targ = find_player(mtarg)) || targ->query_highest_level() > TP->query_highest_level())
         {
             tell_object(TP, "That person is not online.\n");
             return 1;
