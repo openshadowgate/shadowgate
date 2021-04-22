@@ -87,6 +87,22 @@ cmd_give(string str) {
       notify_fail("You cannot give that away!\n");
       return 0;
    }
+
+    if (ob->query_property("nosell")) {
+        notify_fail("You can't give away kept objects.\n");
+        return 0;
+    }
+
+    if (ob->query_worn()) {
+        notify_fail("Please remove that before giving it away.\n");
+        return 0;
+    }
+    if (ob->query_wielded()) {
+        notify_fail("Please unwield that first before giving it away.\n");
+        return 0;
+    }
+
+
    i = (int) ob->move(to);
    switch(i) {
    case MOVE_OK: {
