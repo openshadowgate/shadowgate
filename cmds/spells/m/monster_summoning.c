@@ -56,7 +56,7 @@ spell_effect(int prof) {
     numfoes=(sizeof(caster->query_attackers()));
     mons=allocate(nummon);
     foes=caster->query_attackers();
-    for (num=1;num<=nummon;num++) 
+    for (num=1;num<=nummon;num++)
     {
         mon = createMon();
         mons[num-1] = mon;
@@ -82,11 +82,6 @@ spell_effect(int prof) {
                 spell_kill(mon, foes[num2]);
                 tell_object(foes[num2], "%^BOLD%^%^YELLOW%^...and it attacks you!");
             }
-        }
-        if (target == caster) {
-
-            spell_kill(mon, caster);
-            tell_object(caster, "%^BOLD%^%^YELLOW%^...and it attacks you!");
         }
     }
     num=0;
@@ -177,6 +172,3 @@ void dest_effect() {
     ::dest_effect();
     if(objectp(TO)) TO->remove();
 }
-
-
-

@@ -91,16 +91,14 @@ spell_effect(int prof)
             tell_object(foes[j], "%^BOLD%^%^YELLOW%^...and it attacks you!");
         }
     }
-    if (target == caster) {
-        spell_kill(mon, caster);
-        tell_object(caster, "%^BOLD%^%^YELLOW%^...and it attacks you!");
-    }
+
     if (target != caster) {
         // adding additional 5 minute minimum
         spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH + 600;
         set_end_time();
         call_out("check", 1, ({ 0, spell_duration, caster, foes }));
     }
+
     addSpellToCaster();
 }
 
