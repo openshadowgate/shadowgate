@@ -19,7 +19,6 @@ void create()
                     "an object or player which it will follow, instead of the caster.");
     set_verbal_comp();
     set_non_living_ok(1);
-    set_target_required(1);
     set_helpful_spell(1);
 }
 
@@ -42,6 +41,11 @@ void spell_effect(int prof)
     int duration;
 
     level = clevel;
+
+    if (!objectp(target)) {
+        target = caster;
+    }
+
     if (userp(caster)) {
         tell_object(caster, "You create a darkness around you.");
         tell_room(place, caster->QCN + " causes the room to darken.", ({ caster, target }));
