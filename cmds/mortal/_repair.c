@@ -164,53 +164,57 @@ int repair(string str, object player, object what, object env, int count)
 
     send_message(player, type);
     if (count < (roll_dice(1, 20) - myskill)) {
-        call_out("repair", random(4) + 2, str, player, what, env, count += (roll_dice(1, 4)));
+        call_out("repair", 2, str, player, what, env, count += (roll_dice(1, 4)));
         return 1;
     }
 
     player->remove_property("working");
     myskill += roll_dice(1, 20);
-    diff = (int)what->query_property("enchantment") * 4; // caps out at DC28 for +7 current max gear. N, 4/17.
+    diff = (int)what->query_property("enchantment") * 4;
+
     if (diff < 0) {
         diff = diff * (-1);
     }
+
     diff += 10;
     variant = (myskill - diff) * 2;
-    if (variant > 50) {
-        variant = 50;
+
+    if (variant < -15) {
+        variant = -15;
     }
-    if (variant < -30) {
-        variant = -30;               // don't allow them to do more than 30% damage per repair
-    }
+
     state = what->query_overallStatus();
 
-//    tell_object(player,"Debugging time: skill in use is "+type+" to repair "+str+". Skill selected at "+myskill+" (with d20 bonus), difficulty of "+diff+" which gives a variant (capped) of "+variant+".");
-
     state += variant;
+
     if (state > 100) {
         state = 100;
     }
     if (state < 0) {
-        state = 0;           // don't let them set an item beyond 100% or 0% status.
+        state = 0;
     }
+
     what->set_overallStatus(state);
 
-    if (variant < 0) {   //failed
+    if (variant < 0) {
         tell_room(environment(player), "It appears that more harm than good has been done to the " + str + ".");
         if (state == 0) {
             what->set_overallStatus(state);
         }
         return 1;
     }
-    if (variant == 0) {//no diff
+
+    if (variant == 0) {
         tell_room(environment(player), "You can see no noticeable improvement to the state of the " + str + ".");
         return 1;
     }
+
     if (state == 100) {
         tell_room(environment(player), "The " + str + " looks as good as new.");
     }else {
         tell_room(environment(player), "The " + str + " appears to be in better shape.");
     }
+
     return 1;
 }
 
@@ -373,6 +377,7 @@ void send_message(object player, string type)
 
 help()
 {
+
     write("
 %^CYAN%^NAME%^RESET%^
 
@@ -380,11 +385,13 @@ repair - repair a thingy
 
 %^CYAN%^SYNTAX%^RESET%^
 
-repair OBJECT
+repair %^ORANGE%^%^ULINE%^OBJECT%^RESET%^
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
 Allows the repair of equipment based on the appropriate skill, ie. rings can be repaired by a jeweller, leather armor by a leatherworker, etc. Higher skill ranks will allow the repair of magical items, but failure at a skill check can damage the item in question. As a guideline, to effectively repair items intended for your level, we recommend splitting your points over no more than 1-2 crafting skills. However if you want to work on lower-level items, you could potentially split points over more than this.
+
+Often you'll have faster or more reliable options for repair, such the ability to pay gold at certains hops or use of mending spell. These, however, either require you to pay gold for the services or cost a bit more time.
 
 %^CYAN%^SEE ALSO%^RESET%^
 
