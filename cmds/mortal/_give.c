@@ -93,11 +93,11 @@ cmd_give(string str) {
         return 0;
     }
 
-    if (ob->query_worn()) {
+    if (userp(TP) && ob->query_worn()) {
         notify_fail("Please remove that before giving it away.\n");
         return 0;
     }
-    if (ob->query_wielded()) {
+    if (userp(TP) && ob->query_wielded()) {
         notify_fail("Please unwield that first before giving it away.\n");
         return 0;
     }
