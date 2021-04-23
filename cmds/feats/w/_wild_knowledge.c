@@ -4,13 +4,13 @@ inherit FEAT;
 
 int help();
 
-void create() 
+void create()
 {
     ::create();
     feat_type("premanent");
     feat_category("WildernessLore");
     feat_name("wild knowledge");
-    feat_prereq("Druid L16");
+    feat_prereq("Druid L11");
     feat_desc("This feat will allow the user to retain knowledge and access to his or her inventory while shapeshifted. Ordinarily the inventory is merged with the essence of the wearer while transformed, but a druid who has learned this feat will be able to seperate him or herself from the items carried. This also allows gathering things from the environment or dropping them.");
     permanent(1);
 }
@@ -57,4 +57,3 @@ void dest_effect()
     remove_feat(TO);
     return;
 }
-
