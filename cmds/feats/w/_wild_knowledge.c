@@ -21,7 +21,7 @@ int prerequisites(object ob)
 {
     if(!objectp(ob)) { return 0; }
 
-    if((int)ob->query_class_level("druid") < 16)
+    if((int)ob->query_class_level("druid") < 11)
     {
         dest_effect();
         return 0;
