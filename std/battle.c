@@ -484,10 +484,12 @@ void heart_beat()
                 continue;
             }
 
-            // we want to set attacking to 0 in case a bug prevents it -Ares
-            round[i][k]->prepare_attack();
-            round[i][k]->execute_attack();
-            round[i][k]->set_attack_counter(1);
+
+            // We want to set attacking to 0 in case a bug prevents it -Ares
+            // ^ It is also important not to group these as object can be des'ted at any stage.
+            objectp(round[i][k]) && round[i][k]->prepare_attack();
+            objectp(round[i][k]) && round[i][k]->execute_attack();
+            objectp(round[i][k]) && round[i][k]->set_attack_counter(1);
 
         }
 
