@@ -93,7 +93,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
                 mod += 1;
             }
 
-            if (FEAT_D->usable_feat(ob, "danger sense")) {
+            if (FEATS_D->usable_feat(ob, "danger sense")) {
                 mod += ob->query_level() / 5 + 1;
             }
 
