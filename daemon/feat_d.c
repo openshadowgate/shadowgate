@@ -62,8 +62,9 @@ void validate_class_feats(object ob)
     }
 }
 
-void obsolete_feat(object ob) {
-    string mytype, * obsolete, * bad_feats=({}), * removing_feats, * myspells, * schoolspells;
+void obsolete_feat(object ob)
+{
+    string mytype, * obsolete, * bad_feats = ({}), * removing_feats, * myspells, * schoolspells;
     int i, j, num, freebs;
     object feat_ob;
 
@@ -77,7 +78,7 @@ void obsolete_feat(object ob) {
         return;
     }
 
-    obsolete = ({ "greater spell focus", "crushingstrike", "lightning reflexes", "iron will", "great fortitude", "blade block", "unassailable parry", "greater two weapon fighting", "two weapon defense", "calm", "rapid shot", "wild shape dragon", "hardenedminions", "slippery caster", "thick skinned caster", "wild shape wolf", "archmage", "body cognition", "chronicler", "presence of mind", "shadow adept", "shadowdancer", "stalwart", "versatile arcanist", "wild shape dragon", "wild shape elemental", "eschew materials", "fated", });
+    obsolete = ({ "greater spell focus", "crushingstrike", "lightning reflexes", "iron will", "great fortitude", "blade block", "unassailable parry", "greater two weapon fighting", "two weapon defense", "calm", "rapid shot", "wild shape dragon", "hardenedminions", "slippery caster", "thick skinned caster", "wild shape wolf", "archmage", "body cognition", "chronicler", "presence of mind", "shadow adept", "shadowdancer", "stalwart", "versatile arcanist", "wild shape dragon", "wild shape elemental", "eschew materials", "fated", "evasion" });
 
     for (i = 0; i < sizeof(obsolete); i++) {
         if (has_feat(ob, obsolete[i])) {
@@ -91,142 +92,179 @@ void obsolete_feat(object ob) {
     num = ob->query("free_feats");
     freebs = num;
 
-    for(i=0;i<sizeof(bad_feats);i++) {
-        switch(bad_feats[i]) {
+    for (i = 0; i < sizeof(bad_feats); i++) {
+        switch (bad_feats[i]) {
+
+        case "evasion":
+
+            if (has_feat(ob, "evasion") && !usable_feat(ob, "evasion")) {
+                mytype = get_feat_type(ob, "evasion");
+                num++;
+
+                remove_my_feat(ob, "evasion", 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^evasion");
+                tell_object(ob, "%^RED%^%^BOLD%^The feat Evasion has been changed to be a class feat available only to certain classes. Be sure to check it's description!");
+                ob->set("free_feats", num);
+            }
+
+            freebs = num;
+            break;
 
         case "greater spell focus":
 
-            removing_feats = ({ "armored caster","greater spell penetration","spell penetration","greater spell focus" });
-            for(j=0;j<sizeof(removing_feats);j++) {
-                if(!has_feat(ob,removing_feats[j])) continue;
-                mytype = get_feat_type(ob,removing_feats[j]);
-                if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-                remove_my_feat(ob,removing_feats[j],1);
-                tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^"+removing_feats[j]+"");
+            removing_feats = ({ "armored caster", "greater spell penetration", "spell penetration", "greater spell focus" });
+            for (j = 0; j < sizeof(removing_feats); j++) {
+                if (!has_feat(ob, removing_feats[j])) {
+                    continue;
+                }
+                mytype = get_feat_type(ob, removing_feats[j]);
+                if (mytype == "other") {
+                    num++;                   // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, removing_feats[j], 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^" + removing_feats[j] + "");
             }
-            if(num > freebs) {
-                tell_object(ob,"%^RED%^%^BOLD%^The feat Greater Spell Focus has been marked "
-                    "as obsolete and you have had the feats in the MagicAccuracy tree refunded.  For "
-                    "each feat that you had in this tree you will recieve a free feat to spend that will "
-                    "cost you no experience points.  It is not necessary to spend these free feats on "
-                    "feats from the MagicAccuracy tree, feel free to spend them any way that you wish.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-                ob->set("free_feats",num);
+            if (num > freebs) {
+                tell_object(ob, "%^RED%^%^BOLD%^The feat Greater Spell Focus has been marked "
+                            "as obsolete and you have had the feats in the MagicAccuracy tree refunded.  For "
+                            "each feat that you had in this tree you will recieve a free feat to spend that will "
+                            "cost you no experience points.  It is not necessary to spend these free feats on "
+                            "feats from the MagicAccuracy tree, feel free to spend them any way that you wish.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
 
         case "crushingstrike":
 
-            removing_feats = ({ "crushingstrike","blade block","impale","light weapon","sweepingblow" });
-            for(j=0;j<sizeof(removing_feats);j++) {
-                if(!has_feat(ob,removing_feats[j])) continue;
-                mytype = get_feat_type(ob,removing_feats[j]);
-                if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-                remove_my_feat(ob,removing_feats[j],1);
-                tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^"+removing_feats[j]+"");
+            removing_feats = ({ "crushingstrike", "blade block", "impale", "light weapon", "sweepingblow" });
+            for (j = 0; j < sizeof(removing_feats); j++) {
+                if (!has_feat(ob, removing_feats[j])) {
+                    continue;
+                }
+                mytype = get_feat_type(ob, removing_feats[j]);
+                if (mytype == "other") {
+                    num++;                   // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, removing_feats[j], 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^" + removing_feats[j] + "");
             }
-            if(num > freebs) {
-                tell_object(ob,"%^RED%^%^BOLD%^The feat CrushingStrike has been marked "
-                    "as obsolete and you have had the feats in the TwoHandedWeapons tree refunded.  For "
-                    "each feat that you had in this tree you will recieve a free feat to spend that will "
-                    "cost you no experience points.  It is not necessary to spend these free feats on "
-                    "feats from the TwoHandedWeapons tree, feel free to spend them any way that you wish.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-                ob->set("free_feats",num);
+            if (num > freebs) {
+                tell_object(ob, "%^RED%^%^BOLD%^The feat CrushingStrike has been marked "
+                            "as obsolete and you have had the feats in the TwoHandedWeapons tree refunded.  For "
+                            "each feat that you had in this tree you will recieve a free feat to spend that will "
+                            "cost you no experience points.  It is not necessary to spend these free feats on "
+                            "feats from the TwoHandedWeapons tree, feel free to spend them any way that you wish.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
 
         case "lightning reflexes": case "iron will": case "great fortitude":
 
-            removing_feats = ({ "lightning reflexes","iron will","great fortitude","improved resistance","increased resistance" });
-            for(j=0;j<sizeof(removing_feats);j++) {
-                if(!has_feat(ob,removing_feats[j])) continue;
-                mytype = get_feat_type(ob,removing_feats[j]);
-                if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-                remove_my_feat(ob,removing_feats[j],1);
-                tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^"+removing_feats[j]+"");
+            removing_feats = ({ "lightning reflexes", "iron will", "great fortitude", "improved resistance", "increased resistance" });
+            for (j = 0; j < sizeof(removing_feats); j++) {
+                if (!has_feat(ob, removing_feats[j])) {
+                    continue;
+                }
+                mytype = get_feat_type(ob, removing_feats[j]);
+                if (mytype == "other") {
+                    num++;                   // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, removing_feats[j], 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^" + removing_feats[j] + "");
             }
-            if(num > freebs) {
-                tell_object(ob,"%^RED%^%^BOLD%^The feats Great Fortitude, Iron Will and "
-                    "Lightning Reflexes have been marked as obsolete and you have had the feats in "
-                    "the MagicResistance tree refunded.  For each feat that you had in this tree you "
-                    "will recieve a free feat to spend that will "
-                    "cost you no experience points.  It is not necessary to spend these free feats on "
-                    "feats from the MagicResistance tree, feel free to spend them any way that you wish.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-                ob->set("free_feats",num);
+            if (num > freebs) {
+                tell_object(ob, "%^RED%^%^BOLD%^The feats Great Fortitude, Iron Will and "
+                            "Lightning Reflexes have been marked as obsolete and you have had the feats in "
+                            "the MagicResistance tree refunded.  For each feat that you had in this tree you "
+                            "will recieve a free feat to spend that will "
+                            "cost you no experience points.  It is not necessary to spend these free feats on "
+                            "feats from the MagicResistance tree, feel free to spend them any way that you wish.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
 
         case "blade block": //revoking blade block for those now with the fighter or cavalier class parry feat
 
-            if(has_feat(ob,"blade block") && has_feat(ob,"parry")) {
-              mytype = get_feat_type(ob,"blade block");
-              if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-              remove_my_feat(ob,"blade block",1);
-              tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^blade block");
-              tell_object(ob,"%^RED%^%^BOLD%^The feat Blade Block has been removed from your "
-                    "list now that the fighter/cavalier class feat Parry is able to substitute for it.  "
-                    "You have been refunded a free feat to spend that will cost you no experience points.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-              ob->set("free_feats",num);
+            if (has_feat(ob, "blade block") && has_feat(ob, "parry")) {
+                mytype = get_feat_type(ob, "blade block");
+                if (mytype == "other") {
+                    num++;                 // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, "blade block", 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^blade block");
+                tell_object(ob, "%^RED%^%^BOLD%^The feat Blade Block has been removed from your "
+                            "list now that the fighter/cavalier class feat Parry is able to substitute for it.  "
+                            "You have been refunded a free feat to spend that will cost you no experience points.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
 
         case "unassailable parry": //revoking feat for those now with the fighter or cavalier class parry feat
 
-            if(has_feat(ob,"unassailable parry") && has_feat(ob,"parry")) {
-              mytype = get_feat_type(ob,"unassailable parry");
-              if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-              if(mytype != "class") { // had to put this in cuz fighter/ranger multis were freaking out with the class feat! N, 6/15.
-                remove_my_feat(ob,"unassailable parry",1);
-                tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^unassailable parry");
-                tell_object(ob,"%^RED%^%^BOLD%^The feat Unassailable Parry has been removed from your "
-                    "list now that the fighter/cavalier class feat Parry is able to substitute for it.  "
-                    "You have been refunded a free feat to spend that will cost you no experience points.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-                ob->set("free_feats",num);
-              }
+            if (has_feat(ob, "unassailable parry") && has_feat(ob, "parry")) {
+                mytype = get_feat_type(ob, "unassailable parry");
+                if (mytype == "other") {
+                    num++;                 // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                if (mytype != "class") { // had to put this in cuz fighter/ranger multis were freaking out with the class feat! N, 6/15.
+                    remove_my_feat(ob, "unassailable parry", 1);
+                    tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^unassailable parry");
+                    tell_object(ob, "%^RED%^%^BOLD%^The feat Unassailable Parry has been removed from your "
+                                "list now that the fighter/cavalier class feat Parry is able to substitute for it.  "
+                                "You have been refunded a free feat to spend that will cost you no experience points.  "
+                                "Please type <feats allowed> for more information.%^RESET%^");
+                    ob->set("free_feats", num);
+                }
             }
             freebs = num;
             break;
 
         case "greater two weapon fighting": case "two weapon defense": //revising dual-wield tree feats
 
-            removing_feats = ({ "greater two weapon fighting","two weapon defense" });
-            for(j=0;j<sizeof(removing_feats);j++) {
-                if(!has_feat(ob,removing_feats[j])) continue;
-                mytype = get_feat_type(ob,removing_feats[j]);
-                if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-                remove_my_feat(ob,removing_feats[j],1);
-                tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^"+removing_feats[j]+"");
+            removing_feats = ({ "greater two weapon fighting", "two weapon defense" });
+            for (j = 0; j < sizeof(removing_feats); j++) {
+                if (!has_feat(ob, removing_feats[j])) {
+                    continue;
+                }
+                mytype = get_feat_type(ob, removing_feats[j]);
+                if (mytype == "other") {
+                    num++;                   // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, removing_feats[j], 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^" + removing_feats[j] + "");
             }
-            if(num > freebs) {
-              tell_object(ob,"%^RED%^%^BOLD%^The upper dual-wield tree feats have been revised, "
-                    "and the obsolete ones have been removed from your list.  You have been refunded "
-                    "equivalent free feat/s to spend that will cost you no experience points.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-              ob->set("free_feats",num);
+            if (num > freebs) {
+                tell_object(ob, "%^RED%^%^BOLD%^The upper dual-wield tree feats have been revised, "
+                            "and the obsolete ones have been removed from your list.  You have been refunded "
+                            "equivalent free feat/s to spend that will cost you no experience points.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
 
         case "calm": //revoking feat from non-bards
 
-            if(has_feat(ob,"calm") && !ob->is_class("bard")) {
-              mytype = get_feat_type(ob,"calm");
-              if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-              remove_my_feat(ob,"calm",1);
-              tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^calm");
-              tell_object(ob,"%^RED%^%^BOLD%^The feat Calm has been removed from your "
-                    "list as it is restricted to the bard class only.  You have been refunded a "
-                    "free feat to spend that will cost you no experience points.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-              ob->set("free_feats",num);
+            if (has_feat(ob, "calm") && !ob->is_class("bard")) {
+                mytype = get_feat_type(ob, "calm");
+                if (mytype == "other") {
+                    num++;                 // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, "calm", 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^calm");
+                tell_object(ob, "%^RED%^%^BOLD%^The feat Calm has been removed from your "
+                            "list as it is restricted to the bard class only.  You have been refunded a "
+                            "free feat to spend that will cost you no experience points.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
@@ -249,117 +287,133 @@ void obsolete_feat(object ob) {
 
         case "rapid shot": //revoking redundant archery feat
 
-            if(has_feat(ob,"rapid shot")) {
-              mytype = get_feat_type(ob,"rapid shot");
-              if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-              remove_my_feat(ob,"rapid shot",1);
-              tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^rapid shot");
-              tell_object(ob,"%^RED%^%^BOLD%^The feat Rapid Shot has been removed from "
-                    "your list as it is no longer in game.  You have been refunded a "
-                    "free feat to spend that will cost you no experience points.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-              ob->set("free_feats",num);
+            if (has_feat(ob, "rapid shot")) {
+                mytype = get_feat_type(ob, "rapid shot");
+                if (mytype == "other") {
+                    num++;                 // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, "rapid shot", 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^rapid shot");
+                tell_object(ob, "%^RED%^%^BOLD%^The feat Rapid Shot has been removed from "
+                            "your list as it is no longer in game.  You have been refunded a "
+                            "free feat to spend that will cost you no experience points.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
 
         case "wild shape dragon": //revoking from non-hms if they had it before it was transferred.
 
-            if(has_feat(ob,"wild shape dragon") && !high_mortalp(ob) && CONFIG_D->check_config("HM") == 0) {
-              mytype = get_feat_type(ob,"wild shape dragon");
-              if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-              remove_my_feat(ob,"wild shape dragon",1);
-              tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^wild shape dragon");
-              tell_object(ob,"%^RED%^%^BOLD%^The feat Wild Shape dragon has been removed from "
-                    "your list as you are not a HM with access to it.  You have been refunded a "
-                    "free feat to spend that will cost you no experience points.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-              ob->set("free_feats",num);
+            if (has_feat(ob, "wild shape dragon") && !high_mortalp(ob) && CONFIG_D->check_config("HM") == 0) {
+                mytype = get_feat_type(ob, "wild shape dragon");
+                if (mytype == "other") {
+                    num++;                 // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, "wild shape dragon", 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^wild shape dragon");
+                tell_object(ob, "%^RED%^%^BOLD%^The feat Wild Shape dragon has been removed from "
+                            "your list as you are not a HM with access to it.  You have been refunded a "
+                            "free feat to spend that will cost you no experience points.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
 
         case "hardenedminions": //revoking from those without the new pre-reqs.
 
-            if(has_feat(ob,"hardenedminions") && !has_feat(ob,"spell power")) {
-              mytype = get_feat_type(ob,"hardenedminions");
-              if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-              remove_my_feat(ob,"hardenedminions",1);
-              tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^hardenedminions");
-              tell_object(ob,"%^RED%^%^BOLD%^The feat Hardenedminions has been changed "
-                    "to the spellpower tree and has new pre-requisites.  You may have been refunded a "
-                    "free feat (if bought with levelling feats) to spend that will cost you no experience points.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-              ob->set("free_feats",num);
+            if (has_feat(ob, "hardenedminions") && !has_feat(ob, "spell power")) {
+                mytype = get_feat_type(ob, "hardenedminions");
+                if (mytype == "other") {
+                    num++;                 // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, "hardenedminions", 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^hardenedminions");
+                tell_object(ob, "%^RED%^%^BOLD%^The feat Hardenedminions has been changed "
+                            "to the spellpower tree and has new pre-requisites.  You may have been refunded a "
+                            "free feat (if bought with levelling feats) to spend that will cost you no experience points.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
 
         case "slippery caster": //removing upper magicprot tree
 
-            removing_feats = ({ "slippery caster","tough skin","armoredtitan" });
-            for(j=0;j<sizeof(removing_feats);j++) {
-                if(!has_feat(ob,removing_feats[j])) continue;
-                mytype = get_feat_type(ob,removing_feats[j]);
-                if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-                remove_my_feat(ob,removing_feats[j],1);
-                tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^"+removing_feats[j]+"");
+            removing_feats = ({ "slippery caster", "tough skin", "armoredtitan" });
+            for (j = 0; j < sizeof(removing_feats); j++) {
+                if (!has_feat(ob, removing_feats[j])) {
+                    continue;
+                }
+                mytype = get_feat_type(ob, removing_feats[j]);
+                if (mytype == "other") {
+                    num++;                   // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, removing_feats[j], 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^" + removing_feats[j] + "");
             }
             // and since class feats can't be run through remove_my_feat:
-            if(has_feat(ob,"thick skinned caster")) {
-                mytype = get_feat_type(ob,"thick skinned caster");
-                if(mytype == "class") {
-                  remove_feat(ob,"class","thick skinned caster");
-                  tell_object(ob,"%^YELLOW%^Removing class feat %^BLUE%^thick skinned caster");
+            if (has_feat(ob, "thick skinned caster")) {
+                mytype = get_feat_type(ob, "thick skinned caster");
+                if (mytype == "class") {
+                    remove_feat(ob, "class", "thick skinned caster");
+                    tell_object(ob, "%^YELLOW%^Removing class feat %^BLUE%^thick skinned caster");
                 }
             }
-            if(num > freebs) {
-              tell_object(ob,"%^RED%^%^BOLD%^The MagicProtection feats tree has been removed, "
-                    "and the obsolete ones have been removed from your list.  You have been refunded "
-                    "equivalent free feat/s to spend that will cost you no experience points.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-              ob->set("free_feats",num);
+            if (num > freebs) {
+                tell_object(ob, "%^RED%^%^BOLD%^The MagicProtection feats tree has been removed, "
+                            "and the obsolete ones have been removed from your list.  You have been refunded "
+                            "equivalent free feat/s to spend that will cost you no experience points.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
 
         case "thick skinned caster": //had to add this as an extra for those who paid for the feat rather than got it free
 
-            if(has_feat(ob,"thick skinned caster")) {
-                mytype = get_feat_type(ob,"thick skinned caster");
-                if(mytype == "class") continue; // let this be removed elsewhere (or just left alone, not hurting anything)
-                if(mytype == "other") num ++;// this is used to keep track of how many they have removed so can gain them back for free
-                remove_my_feat(ob,"thick skinned caster",1);
-                tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^"+removing_feats[j]+"");
+            if (has_feat(ob, "thick skinned caster")) {
+                mytype = get_feat_type(ob, "thick skinned caster");
+                if (mytype == "class") {
+                    continue;                   // let this be removed elsewhere (or just left alone, not hurting anything)
+                }
+                if (mytype == "other") {
+                    num++;                   // this is used to keep track of how many they have removed so can gain them back for free
+                }
+                remove_my_feat(ob, "thick skinned caster", 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^" + removing_feats[j] + "");
             }
-            if(num > freebs) {
-              tell_object(ob,"%^RED%^%^BOLD%^The MagicProtection feats tree has been removed, "
-                    "and since you had paid to buy 'thick skinned caster', you have been refunded an "
-                    "equivalent free feat to spend that will cost you no experience points.  "
-                    "Please type <feats allowed> for more information.%^RESET%^");
-              ob->set("free_feats",num);
+            if (num > freebs) {
+                tell_object(ob, "%^RED%^%^BOLD%^The MagicProtection feats tree has been removed, "
+                            "and since you had paid to buy 'thick skinned caster', you have been refunded an "
+                            "equivalent free feat to spend that will cost you no experience points.  "
+                            "Please type <feats allowed> for more information.%^RESET%^");
+                ob->set("free_feats", num);
             }
             freebs = num;
             break;
 
         case "wild shape wolf":
 
-            removing_feats = ({ "wild shape cat","wild shape large animal","wild shape bear","wild shape small animal","wild shape wolf" });
-            for(j=0;j<sizeof(removing_feats);j++) {
-                if(!has_feat(ob,removing_feats[j])) continue;
-                remove_my_feat(ob,removing_feats[j],1);
-                tell_object(ob,"%^YELLOW%^Removing feat %^BLUE%^"+removing_feats[j]+"");
+            removing_feats = ({ "wild shape cat", "wild shape large animal", "wild shape bear", "wild shape small animal", "wild shape wolf" });
+            for (j = 0; j < sizeof(removing_feats); j++) {
+                if (!has_feat(ob, removing_feats[j])) {
+                    continue;
+                }
+                remove_my_feat(ob, removing_feats[j], 1);
+                tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^" + removing_feats[j] + "");
             }
-            tell_object(ob,"%^RED%^%^BOLD%^The class-based 'wild shape' feats have been marked "
-                    "as obsolete and you have had the feats in that tree removed.  As these were all class "
-                    "levelling feats, no free feats have been provided to replace them.  You may, however, "
-                    "wish to <feats fix> as the druid class now has a new set of levelling feats.%^RESET%^");
+            tell_object(ob, "%^RED%^%^BOLD%^The class-based 'wild shape' feats have been marked "
+                        "as obsolete and you have had the feats in that tree removed.  As these were all class "
+                        "levelling feats, no free feats have been provided to replace them.  You may, however, "
+                        "wish to <feats fix> as the druid class now has a new set of levelling feats.%^RESET%^");
             break;
 
         case "eschew materials":
-            remove_my_feat(ob,"eschew materials",1);
-            ob->set("free_feats",1);
-            tell_object(ob,"%^BOLD%^%^MAGENTA%^Your feat eschew materials%^MAGENTA%^ has been refunded.%^RESET%^");
+            remove_my_feat(ob, "eschew materials", 1);
+            ob->set("free_feats", 1);
+            tell_object(ob, "%^BOLD%^%^MAGENTA%^Your feat eschew materials%^MAGENTA%^ has been refunded.%^RESET%^");
             break;
 
         case "archmage":
@@ -372,30 +426,30 @@ void obsolete_feat(object ob) {
         case "wild shape dragon":
         case "wild shape elemental":
 
-            removing_feats = ({ "archmage","body cognition","chronicler","presence of mind","shadow adept",
-                    "shadowdancer", "versatile arcanist","wild shape dragon","wild shape elemental" });
-        for (j = 0; j < sizeof(removing_feats); j++) {
-            if (!has_feat(ob, removing_feats[j])) {
-                continue;
-            }
+            removing_feats = ({ "archmage", "body cognition", "chronicler", "presence of mind", "shadow adept",
+                                "shadowdancer", "versatile arcanist", "wild shape dragon", "wild shape elemental" });
+            for (j = 0; j < sizeof(removing_feats); j++) {
+                if (!has_feat(ob, removing_feats[j])) {
+                    continue;
+                }
 
-            feat_ob = find_object_or_load("/cmds/feats/" + removing_feats[j][0..0] + "/_" + replace_string(removing_feats[j], " ", "_") + ".c");
-            if (objectp(feat_ob)) {
-                if (feat_ob->is_obsolete() || !feat_ob->prerequisites(ob)) {
-                    remove_my_feat(ob, removing_feats[j], 1);
-                    if (removing_feats[j] == "archmage") {
-                        ob->delete("spellmastery_spell");
-                    }
-                    if (removing_feats[j] == "shadowdancer") {
-                        ob->InitInnate();
-                    }
+                feat_ob = find_object_or_load("/cmds/feats/" + removing_feats[j][0..0] + "/_" + replace_string(removing_feats[j], " ", "_") + ".c");
+                if (objectp(feat_ob)) {
+                    if (feat_ob->is_obsolete() || !feat_ob->prerequisites(ob)) {
+                        remove_my_feat(ob, removing_feats[j], 1);
+                        if (removing_feats[j] == "archmage") {
+                            ob->delete("spellmastery_spell");
+                        }
+                        if (removing_feats[j] == "shadowdancer") {
+                            ob->InitInnate();
+                        }
 
-                    tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^" + removing_feats[j] + "");
-                    num++;
+                        tell_object(ob, "%^YELLOW%^Removing feat %^BLUE%^" + removing_feats[j] + "");
+                        num++;
+                    }
                 }
             }
-        }
-        update_usable(ob);
+            update_usable(ob);
 
             if (num > freebs) {
                 tell_object(ob, "%^RED%^%^BOLD%^Most of the epic feats have been removed and "
