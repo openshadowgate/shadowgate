@@ -485,8 +485,12 @@ void choose_item(string str)
 
         if(TP->query_internal_encumbrance()+ob->query_weight()>=TP->query_max_internal_encumbrance()){
              command("say Wow, you carry a lot! I'll just drop it here.");
+             command("unwield " + str);
+             command("remove " + str);
              command("drop " + str);
             }else{
+             command("unwield " + str);
+             command("remove " + str);                
              command("give " + str + " to " + helper);
         }
 
