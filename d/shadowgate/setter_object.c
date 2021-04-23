@@ -348,9 +348,14 @@ string *generate_class()
 {
     string * choices;
 
+    // All class files
     choices = get_dir("/std/class/*.c");
     choices = map(choices, (:replace_string($1, ".c", ""):));
+
+    // ...that aren't prestige
     choices = filter_array(choices, (:!("/std/class/" + $1)->is_prestige_class():));
+
+    // ...that aren't locked
     choices = filter_array(choices, (:!("/std/class/" + $1)->is_locked_class():));
 
     return choices;
@@ -384,15 +389,21 @@ string *generate_race()
 {
     string * choices;
 
+    // All race files
     choices = get_dir("/std/races/*.c");
     choices = map(choices, (:replace_string($1, ".c", ""):));
+
+    // ...That are appropriate for selected gender
     choices = filter_array(choices, (:!(("/std/races/" + $1)->is_gender_locked(char_sheet["gender"])):));
+
+    // ...That are appropriate for the alignment restrictions of a selected class, and that have subraces with appropriate restrictions
     choices = filter_array(choices, (:sizeof(({1, 2, 3, 4, 5, 6, 7, 8, 9}) - (("/std/races/" + $1)->restricted_alignments(char_sheet["subrace"]) + ("/std/class/" + $2)->restricted_alignments())) :), char_sheet["class"]);
 
     if (!unrestricted_player(ETO)) {
         choices = filter_array(choices, (:!(("/std/races/") + $1)->is_restricted():));
     }
 
+    // Subtract subraces based on restricted classes by subrace and remove race if there is no subraces left
     {
         string choice;
         string subrace, *subraces;
@@ -401,6 +412,7 @@ string *generate_race()
         foreach(choice in choices) {
             subraces = ("/std/races/" + choice)->query_subraces(ETO);
             subraces = subraces ? subraces : ({""});
+
             foreach(subrace in subraces) {
                 restricted_classes = ("/std/races/" + choice)->restricted_classes(subrace);
 
@@ -434,6 +446,8 @@ string *generate_subrace()
     string * choices = ({});
 
     choices = ("/std/races/" + char_sheet["race"])->query_subraces(ETO);
+
+    // If there are subraces, allow only these that don't have selected class as restricted
     if (sizeof(choices)) {
         choices = filter_array(choices, (:
                                 member_array($2, ("/std/races/" + char_sheet["race"])->restricted_classes($1)) == -1
@@ -455,9 +469,12 @@ string *generate_template()
 {
     string * choices = ({});
 
-    // Ths one is hard to read but not impossible, it is copypaste from old chargen.
+    // Ths one looks like a perl one line, but is not impossible to read
+    // Start from inner functions
 
-    // To read it start from outer functions.
+    // Select all template files
+    // Check whether they allow selected race
+    // The rest is formatting
 
     if(unrestricted_player(ETO))
     {
