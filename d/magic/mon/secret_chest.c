@@ -33,6 +33,11 @@ void create(){
     set_property("no random treasure", 1);
 }
 
+string query_long()
+{
+    return ::query_long() +  (TP == caster ? ("%^BOLD%^%^ORANGE%^The chest is carrying %^WHITE%^" + query_internal_encumbrance() + "%^ORANGE%^ out of %^WHITE%^" + query_max_internal_encumbrance() + "%^ORANGE%^.%^RESET%^") : "");
+}
+
 void setup_chest(object invoker)
 {
     caster = invoker;
