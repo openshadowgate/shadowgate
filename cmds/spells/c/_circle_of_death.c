@@ -44,6 +44,7 @@ void spell_effect(int prof)
         if (!foe->query_property("negative energy affinity")) {
             if (combat_death_save(foe, 0)) {
                 tell_object(foe, "%^BLUE%^%^BOLD%^The darkness washes over you, but nothing happens!");
+                tell_object(caster,"%^BLUE%^%^BOLD%^The darkness washes over " + foe->QCN + ", but nothing happens!");
                 continue;
             }
 

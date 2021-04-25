@@ -50,6 +50,7 @@ void spell_effect(int prof)
             foe->query_level() > caster->query_level() ||
             foe->query_level() > clevel) {
             tell_object(foe, "%^ORANGE%^%^BOLD%^The light washes over you, but nothing happens!");
+            tell_object(caster,"%^ORANGE%^%^BOLD%^The light washes over " + foe->QCN + ", but nothing happens!");
             continue;
         }
 
