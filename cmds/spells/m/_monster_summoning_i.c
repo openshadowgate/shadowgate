@@ -23,7 +23,7 @@ create()
 
 int preSpell()
 {
-    if (present(caster->query_name() + "_monster 3", place)) {
+    if (present(caster->query_name() + "_monster 2", place)) {
         tell_object(caster, "There are already too many monsters.");
         return 0;
     }
@@ -41,7 +41,7 @@ int spell_effect(int prof)
         return;
     }
 
-    num = 4 + roll_dice(1, 4);
+    num = 5;
 
     for (i = 0; i < num; i++) {
         monster = new("/d/magic/mon/astral_defender.c");
@@ -55,7 +55,8 @@ int spell_effect(int prof)
         monster->remove_property("swarm");
         monster->set_mlevel("fighter", clevel);
         monster->set_guild_level("fighter", clevel);
-        monster->set_hd(clevel, query_spell_level(spell_type));
+        monster->set_hd(clevel, 0);
+        monster->set_max_hp(8 * (clevel / 2 + 1) + 8 * query_spell_level(spell_type) * 4);
         monster->set_attacks_num(1);
         monster->set_property("spelled", ({ TO }));
         monster->set_property("spell_creature", TO);
