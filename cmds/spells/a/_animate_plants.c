@@ -63,7 +63,7 @@ spell_effect(int prof)
         return;
     }
 
-    num = 8;
+    num = 6;
 
     for(i=0;i<num;i++)
     {
@@ -72,22 +72,22 @@ spell_effect(int prof)
 
         plants += ({ plant });
 
-        plant->set("aggressive",1);
+        plant->set("aggressive", 1);
         plant->remove_property("swarm");
-        plant->set_mlevel("fighter",clevel);
-        plant->set_guild_level("fighter",clevel);
+        plant->set_mlevel("fighter", clevel);
+        plant->set_guild_level("fighter", clevel);
         plant->set_attacks_num(0);
-        plant->set_max_hp(clevel*8+30);
-        plant->set_hp(plant->query_max_hp());//kinda silly to be badly injured on summon
-        plant->set_property("spelled",({TO}));
-        plant->set_property("spell_creature",TO);
-        plant->set_property("spell",TO);
-        plant->add_id("summoned monster","miniature plant");
+        plant->set_max_hp(clevel * 12 + 30);
+        plant->set_hp(plant->query_max_hp());        //kinda silly to be badly injured on summon
+        plant->set_property("spelled", ({ TO }));
+        plant->set_property("spell_creature", TO);
+        plant->set_property("spell", TO);
+        plant->add_id("summoned monster", "miniature plant");
         plant->set_short("miniature plant");
-        plant->set_stats("strength",14);
-        plant->set_stats("dexterity",14);
-        plant->set_stats("constitution",14);
-        plant->set_new_exp(1,"low");
+        plant->set_stats("strength", 14);
+        plant->set_stats("dexterity", 14);
+        plant->set_stats("constitution", 14);
+        plant->set_new_exp(1, "low");
         plant->set_property("minion", caster);
         plant->move(environment(caster));
         caster->add_follower(plant);

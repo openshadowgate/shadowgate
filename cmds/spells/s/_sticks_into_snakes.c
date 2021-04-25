@@ -157,48 +157,14 @@ int check(mixed* args)
         return 1;
     }
     newfoes = caster->query_attackers();
-    //lets get rid of foes that were attacking
-    //the caster already (foes variable)
-    //tell_object(caster, "Newfoes = "+identify(newfoes));
-    //tell_object(caster, "Foes = "+identify(foes));
     newfoes -= foes;
     newfoes = distinct_array(newfoes);
-    //tell_object(caster, "Newfoes Now = "+identify(newfoes));
-
 
     if (sizeof(newfoes)) {
-        // these messages are way too spammy in combat
-        //tell_object(caster,"%^BOLD%^%^YELLOW%^Your minions "+
-        //"come to your aid and attacks your enemies!");
-
-        //tell_room(environment(caster),"%^BOLD%^%^YELLOW%^"+
-        //caster->QCN+"'s minions come to "+
-        //caster->QP+" aid and attacks "+
-        //caster->QP+" enemies!", caster);
 
         foes = newfoes;
         defend(caster, foes);
     }
-
-
-    /*for (num2=0;num2<=sizeof(newfoes)-1;num2++)
-      {
-      wherefound = member_array(newfoes[num2], foes, 0);
-      if (wherefound == -1)
-      {
-      tell_object(caster,"%^BOLD%^%^YELLOW%^Your minions "+
-      "come to your aid and attacks your enemies!");
-
-      tell_room(environment(caster),"%^BOLD%^%^YELLOW%^"+
-      caster->QCN+"'s minions come to "+
-      caster->QP+" aid and attacks "+
-      caster->QP+" enemies!", caster);
-
-      foes=newfoes;
-      defend(caster, foes);
-      break;
-      }
-      }*/
 
     if (num++ < timetowait) {
         call_out("check", 1, ({ num, timetowait, caster, foes }));
