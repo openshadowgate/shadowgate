@@ -246,7 +246,7 @@ nomask string process_input(string arg)
     }else if (avatarp(TP)) {
         log_file("tshlog/avatar/" + TP->query_true_name(), do_alias(do_nicknames(handle_history(arg))) + "\n", 1);
     }else {
-        log_file("tshlog/player/" + TP->query_true_name(), do_alias(do_nicknames(handle_history(arg))) + "\n", 1);
+        log_file("tshlog/player/" + TP->query_true_name(), do_alias(do_nicknames(handle_history(arg))) + "\n", 0);
     }
 
     if (adminBlock()) {
