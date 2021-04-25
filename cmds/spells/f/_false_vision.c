@@ -88,6 +88,7 @@ target->QCN+" as though it were the solid strings of a lute, leaving heavy silen
     duration = 2 * (int)CLEVEL * ROUND_LENGTH;
     spell_duration = duration;
     set_end_time();
+    addSpellToCaster();
     call_out("dest_effect",spell_duration);
     return;
 }
