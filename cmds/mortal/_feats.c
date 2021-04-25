@@ -496,8 +496,12 @@ int cmd_feats(string str)
             TP->clear_feats();
             return 1;
         }else {
+            if (TP->query("free_feat_wipe") > time()) {
+                TP->delete("free_feat_wipe");
+            }
+
             if (!TP->query("free_feat_wipe")) {
-                TP->set("free_feat_wipe", 1);
+                TP->set("free_feat_wipe", time() + 6 * 24 * 60 * 60);
                 TP->clear_feats();
                 num_feats = ((int)TP->query_level() / 3) + 1;
                 TP->set("free_feats", num_feats);
@@ -506,7 +510,7 @@ int cmd_feats(string str)
                 }
                 TP->force_me("feats fix");
             } else {
-                tell_object(TP, "You already used your free feats wipe. Contact staff to get another one.");
+                tell_object(TP, "%^BOLD%^%^RED%^You already used your free feats wipe. The next one will be available in %^WHITE%^" +parse_time(TP->query("free_feat_wipe"))+"%^RED%^. Alternatively, you can contact staff for a reset.");
             }
             return 1;
         }
