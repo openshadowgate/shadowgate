@@ -83,35 +83,41 @@ int no_cast(string str) {
    return 1;
 }
 
-void breath_fun(object target) {
-   object *vars;
-   int i;
+void breath_fun(object target)
+{
+    object* vars;
+    int i;
 
-   tell_room(ETO,"%^RESET%^%^GREEN%^Arkhon lifts his head, and hissing drops of %^BOLD%^acid %^RESET%^%^GREEN%^fall from "
-"his fangs as he opens his jaws wide!%^RESET%^");
-   vars = all_living(ETO);
-   vars = filter_array(vars,"is_non_immortal",FILTERS_D);
-   TO->set_property("magic",1);
-   for(i=0;i<sizeof(vars);i++){
-     if(vars[i] == TO) continue;
-     if((string)vars[i]->query_name() == "rath'argh") continue;
-     if((string)vars[i]->query_is_mount()) continue; //dun kill the poor knights' horses
-     if(((int)vars[i]->query_level() + roll_dice(1,4)) < 35) { //failed save, do burn twice. No lowbies allowed!
-       tell_object(vars[i],"%^BOLD%^%^GREEN%^From his fanged maw issues a breath of choking, corrosive gas that "
-"%^YELLOW%^burns %^GREEN%^horribly as it touches your skin!%^RESET%^");
-       vars[i]->do_damage("torso",150+random(50));
-       call_out("reburn",ROUND_LENGTH,vars[i]);
-     }
-     else {
-       tell_object(vars[i],"%^BOLD%^%^GREEN%^From his fanged maw issues a breath of choking, corrosive gas. You dive "
-"aside to avoid the worst of it, but it still %^YELLOW%^burns %^GREEN%^horribly as it touches your skin!%^RESET%^");
-       vars[i]->do_damage("torso",150+random(50));
-     }
-   }
-   tell_room(ETO,"%^BOLD%^%^GREEN%^From his fanged maw issues a breath of choking, corrosive gas that %^YELLOW%^burns "
-"%^GREEN%^horribly wherever it touches bare skin!%^RESET%^",vars);
-   TO->remove_property("magic");
-   return;
+    tell_room(ETO, "%^RESET%^%^GREEN%^Arkhon lifts his head, and hissing drops of %^BOLD%^acid %^RESET%^%^GREEN%^fall from "
+              "his fangs as he opens his jaws wide!%^RESET%^");
+    vars = all_living(ETO);
+    vars = filter_array(vars, "is_non_immortal", FILTERS_D);
+    TO->set_property("magic", 1);
+    for (i = 0; i < sizeof(vars); i++) {
+        if (vars[i] == TO) {
+            continue;
+        }
+        if ((string)vars[i]->query_name() == "rath'argh") {
+            continue;
+        }
+        if ((string)vars[i]->query_is_mount()) {
+            continue;                                //dun kill the poor knights' horses
+        }
+        if (((int)vars[i]->query_level() + roll_dice(1, 4)) < 35) { //failed save, do burn twice. No lowbies allowed!
+            tell_object(vars[i], "%^BOLD%^%^GREEN%^From his fanged maw issues a breath of choking, corrosive gas that "
+                        "%^YELLOW%^burns %^GREEN%^horribly as it touches your skin!%^RESET%^");
+            vars[i]->cause_typed_damage(vars[i], vars[i]->return_target_limb(), 150 + random(50), "acid");
+            call_out("reburn", ROUND_LENGTH, vars[i]);
+        }else {
+            tell_object(vars[i], "%^BOLD%^%^GREEN%^From his fanged maw issues a breath of choking, corrosive gas. You dive "
+                        "aside to avoid the worst of it, but it still %^YELLOW%^burns %^GREEN%^horribly as it touches your skin!%^RESET%^");
+            vars[i]->cause_typed_damage(vars[i], vars[i]->return_target_limb(), 150 + random(50), "acid");
+        }
+    }
+    tell_room(ETO, "%^BOLD%^%^GREEN%^From his fanged maw issues a breath of choking, corrosive gas that %^YELLOW%^burns "
+              "%^GREEN%^horribly wherever it touches bare skin!%^RESET%^", vars);
+    TO->remove_property("magic");
+    return;
 }
 
 void reburn(object target) {
@@ -121,7 +127,7 @@ void reburn(object target) {
    tell_room(ETO,"%^BOLD%^%^GREEN%^"+target->QCN+" screams in agony as the corrosive gas continues to eat into "
 +target->QP+" skin!%^RESET%^",target);
    TO->set_property("magic",1);
-   target->do_damage("torso",200+random(100));
+   vars[i]->cause_typed_damage(vars[i], vars[i]->return_target_limb(), 200 + random(50), "acid");
    TO->remove_property("magic");
 }
 
@@ -142,26 +148,33 @@ void earthtomud(object target){
    }
 }
 
-void teeth_fun(object target) {
-   object *vars;
-   int i;
+void teeth_fun(object target)
+{
+    object* vars;
+    int i;
 
-   vars = all_living(ETO);
-   vars = filter_array(vars,"is_non_immortal_player",FILTERS_D);
-   if(!sizeof(vars)) return;
-   target = vars[random(sizeof(vars))];
-   if(!objectp(target)) return;
-   if(!interactive(target)) return;
-   tell_object(target,"%^BOLD%^%^RED%^Arkhon darts forward towards you with startling speed, and searing pain burns "
-"through your body as his teeth sink into your shoulder and he lifts you from the ground.  With a jerk of his powerful "
-"serpentine neck, he releases his hold and suddenly you are airborne, and the cavern wall rushes up to meet you with a "
-"jarring impact!%^RESET%^");
-   tell_room(ETO,"%^BOLD%^%^RED%^Arkhon darts forward with startling speed, his teeth sinking into "+target->QCN+"'s "
-"shoulder and lifting "+target->QO+" bodily from the ground.  A jerk of that powerful serpentine neck, and suddenly "
-+target->QS+" is flying through the air, to impact the cavern wall with an audible thud!%^RESET%^",target);
-   TO->set_property("magic",1);
-   target->do_damage("torso",random(75)+100);
-   TO->remove_property("magic");
+    vars = all_living(ETO);
+    vars = filter_array(vars, "is_non_immortal_player", FILTERS_D);
+    if (!sizeof(vars)) {
+        return;
+    }
+    target = vars[random(sizeof(vars))];
+    if (!objectp(target)) {
+        return;
+    }
+    if (!interactive(target)) {
+        return;
+    }
+    tell_object(target, "%^BOLD%^%^RED%^Arkhon darts forward towards you with startling speed, and searing pain burns "
+                "through your body as his teeth sink into your shoulder and he lifts you from the ground.  With a jerk of his powerful "
+                "serpentine neck, he releases his hold and suddenly you are airborne, and the cavern wall rushes up to meet you with a "
+                "jarring impact!%^RESET%^");
+    tell_room(ETO, "%^BOLD%^%^RED%^Arkhon darts forward with startling speed, his teeth sinking into " + target->QCN + "'s "
+              "shoulder and lifting " + target->QO + " bodily from the ground.  A jerk of that powerful serpentine neck, and suddenly "
+              + target->QS + " is flying through the air, to impact the cavern wall with an audible thud!%^RESET%^", target);
+    TO->set_property("magic", 1);
+    vars[i]->cause_typed_damage(vars[i], vars[i]->return_target_limb(), 75 + random(50), "piercing");
+    TO->remove_property("magic");
 }
 
 void claws_fun(object target) {
@@ -195,7 +208,7 @@ void claws_fun(object target) {
          tell_room(ETO,"%^RED%^Razor-sharp fangs pierce "+target->QCN+"'s skin!%^RESET%^",target);
        break;
      }
-     target->do_damage("torso",random(25)+50);
+     vars[i]->cause_typed_damage(vars[i], vars[i]->return_target_limb(), 30 + random(50), "piercing");
    }
 }
 
@@ -258,46 +271,59 @@ void heart_beat() {
     }
 }
 
-void die(object ob){
-   object *ppl, treasures, thatroom;
-   string printme;
-   int i;
-   string *donequests, queststring, queststringb;
-   queststring = "%^BOLD%^%^BLACK%^Vanquished Arkhon Bloodscale, ancient dragon of the deep!%^RESET%^";
-   queststringb = "%^BOLD%^%^BLACK%^Vanquished %^RESET%^%^MAGENTA%^Ark%^BLUE%^h%^MAGENTA%^on Blo%^RED%^o%^MAGENTA%^dscale%^BOLD%^%^BLACK%^, ancient dragon of the deep!%^RESET%^";
-   tell_room(ETO,"%^ORANGE%^The dragon lets out an ear-splitting shriek, whisps of %^GREEN%^aci%^BOLD%^d%^RESET%^"
-"%^GREEN%^ic breath %^ORANGE%^escaping his fanged maw as droplets splatter and hiss upon the stone floor.%^RESET%^");
-   tell_room(ETO,"%^RED%^Mortally wounded, he staggers back, his slender legs swaying with the effort, and finally he "
-"collapses to the ground with an impact that %^ORANGE%^s%^RESET%^ha%^RED%^k%^YELLOW%^e%^RESET%^%^ORANGE%^s %^RED%^the "
-"very walls of the cavern.%^RESET%^");
-   message("info","%^BOLD%^%^RED%^A great %^RESET%^%^RED%^r%^BOLD%^o%^RESET%^%^RED%^ar %^BOLD%^shakes the earth beneath "
-"your feet, as Arkhon Bloodscale breathes his last!%^RESET%^",users());
-   ppl = ({});
-   for(i=0;i<sizeof(fighterz);i++) {
-     if(userp(fighterz[i])) {
-       ppl += ({ fighterz[i] });
-       if(member_array(queststring,fighterz[i]->query_mini_quests()) == -1) {
-         fighterz[i]->set_mini_quest(queststring,1000000,queststringb);
-         tell_object(fighterz[i],"\n%^BOLD%^%^CYAN%^A thrilling sense of accomplishment runs through you as you realise "
-"the mighty deep dragon has fallen to your hand!%^RESET%^\n");
-       }
-     }
-   }
-   tell_room(ETO,"%^ORANGE%^As the last living breath escapes him, Arkhon's spells begin to fall apart.  A transmuted "
-"stone wall congeals back into %^RED%^mud %^ORANGE%^and oozes to the ground, revealing a passageway to %^CYAN%^escape"
-"%^ORANGE%^ into a small side cavern!%^RESET%^");
-   if(sizeof(ppl) && rath) {
-     for(i = 0;i<sizeof(ppl);i++) {
-       if(!i) printme = (string)ppl[i]->query_name();
-       else printme += ", "+(string)ppl[i]->query_name();
-     }
-     treasures = find_object_or_load(ROOMS"treasurevault");
-     if(objectp(treasures)) treasures->activate_loot();
-   }
-   else tell_room(ETO,"%^YELLOW%^Error: notify Nienne of this message - ppl or rath variables not written!%^RESET%^");
-   if(member_array("out",ETO->query_exits()) == -1) ETO->add_exit(ROOMS"treasurevault","out");
-   if(member_array("tunnel",ETO->query_exits()) == -1) ETO->add_exit(ROOMS"tunnel1","tunnel");
-   thatroom = find_object_or_load(ROOMS"tunnel1");
-   if(member_array("cavern",thatroom->query_exits()) == -1) thatroom->add_exit(ROOMS"lair","cavern");
-   ::die(TO);
+void die(object ob)
+{
+    object* ppl, treasures, thatroom;
+    string printme;
+    int i;
+    string* donequests, queststring, queststringb;
+    queststring = "%^BOLD%^%^BLACK%^Vanquished Arkhon Bloodscale, ancient dragon of the deep!%^RESET%^";
+    queststringb = "%^BOLD%^%^BLACK%^Vanquished %^RESET%^%^MAGENTA%^Ark%^BLUE%^h%^MAGENTA%^on Blo%^RED%^o%^MAGENTA%^dscale%^BOLD%^%^BLACK%^, ancient dragon of the deep!%^RESET%^";
+    tell_room(ETO, "%^ORANGE%^The dragon lets out an ear-splitting shriek, whisps of %^GREEN%^aci%^BOLD%^d%^RESET%^"
+              "%^GREEN%^ic breath %^ORANGE%^escaping his fanged maw as droplets splatter and hiss upon the stone floor.%^RESET%^");
+    tell_room(ETO, "%^RED%^Mortally wounded, he staggers back, his slender legs swaying with the effort, and finally he "
+              "collapses to the ground with an impact that %^ORANGE%^s%^RESET%^ha%^RED%^k%^YELLOW%^e%^RESET%^%^ORANGE%^s %^RED%^the "
+              "very walls of the cavern.%^RESET%^");
+    message("info", "%^BOLD%^%^RED%^A great %^RESET%^%^RED%^r%^BOLD%^o%^RESET%^%^RED%^ar %^BOLD%^shakes the earth beneath "
+            "your feet, as Arkhon Bloodscale breathes his last!%^RESET%^", users());
+    ppl = ({});
+    for (i = 0; i < sizeof(fighterz); i++) {
+        if (userp(fighterz[i])) {
+            ppl += ({ fighterz[i] });
+            if (member_array(queststring, fighterz[i]->query_mini_quests()) == -1) {
+                fighterz[i]->set_mini_quest(queststring, 1000000, queststringb);
+                tell_object(fighterz[i], "\n%^BOLD%^%^CYAN%^A thrilling sense of accomplishment runs through you as you realise "
+                            "the mighty deep dragon has fallen to your hand!%^RESET%^\n");
+            }
+        }
+    }
+    tell_room(ETO, "%^ORANGE%^As the last living breath escapes him, Arkhon's spells begin to fall apart.  A transmuted "
+              "stone wall congeals back into %^RED%^mud %^ORANGE%^and oozes to the ground, revealing a passageway to %^CYAN%^escape"
+              "%^ORANGE%^ into a small side cavern!%^RESET%^");
+    if (sizeof(ppl) && rath) {
+        for (i = 0; i < sizeof(ppl); i++) {
+            if (!i) {
+                printme = (string)ppl[i]->query_name();
+            }else {
+                printme += ", " + (string)ppl[i]->query_name();
+            }
+        }
+        treasures = find_object_or_load(ROOMS "treasurevault");
+        if (objectp(treasures)) {
+            treasures->activate_loot();
+        }
+    }else {
+        tell_room(ETO, "%^YELLOW%^Error: notify Nienne of this message - ppl or rath variables not written!%^RESET%^");
+    }
+    if (member_array("out", ETO->query_exits()) == -1) {
+        ETO->add_exit(ROOMS "treasurevault", "out");
+    }
+    if (member_array("tunnel", ETO->query_exits()) == -1) {
+        ETO->add_exit(ROOMS "tunnel1", "tunnel");
+    }
+    thatroom = find_object_or_load(ROOMS "tunnel1");
+    if (member_array("cavern", thatroom->query_exits()) == -1) {
+        thatroom->add_exit(ROOMS "lair", "cavern");
+    }
+    ::die(TO);
 }
