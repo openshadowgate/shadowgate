@@ -10,8 +10,8 @@ void create(){
 	set_property("no animate",1);
 	set_name("tattoo");
 	set_value(25000);
-	set_id(({ "tattoo", "tat", "ink", "pentadragon", "pentagram", "dragon" }));
-	set_short("a large full-sleeve RED and GOLD Pentadragon tat on his left arm");
+	set_id(({ "tattoo", "tat", "ink", "pentadragon", "pentagram", "dragon", "red", "gold" }));
+	set_short("a large RED and GOLD Pentadragon full-sleeve tat covering his left-arm");
 	set_long(
 @MYLONG
 This is a large full-sleeve tattoo. It covers his left arm (from shoulder to wrist). The name of the design is called ?Pentadragon?. The color scheme is of red, gold and black. And the motif of the tattoo is of different artistic styles of ?pentagrams, and dragons? (each being of either red, gold or black).
