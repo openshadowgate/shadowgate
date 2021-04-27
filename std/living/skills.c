@@ -1632,5 +1632,9 @@ varargs int is_flanked_by(object ob, int mybonus)
         return 1;
     }
 
+    if ((query_temporary_blinded() || query_blind()) && !FEATS_D->usable_feat(TO, "blindfight")) {
+        return 1;
+    }
+
     return 0;
 }

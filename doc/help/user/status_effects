@@ -46,7 +46,7 @@ This effects adds to the light value of the room, but only for the caster.
 Blinded creatures can not see or target other creatures unless it can navigate by other means, like sound or smell. They also loose their dexterity bonus to AC, and take additional penalty of lvl/12 on their armor class.
 
 %^CYAN%^Flanked%^RESET%^
-You're flanking someone when they are unable to percieve your movements in combat. Mechanically it means their perception is less than your stealth.
+You're flanking someone when they are unable to percieve your movements in combat. Mechanically it means their perception is less than your stealth, they are blinded.
 
 %^ULINE%^%^CYAN%^TIREDNESS%^RESET%^
 

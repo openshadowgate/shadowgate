@@ -8,7 +8,9 @@ void create() {
     feat_type("permanent");
     feat_category("GeneralCombat");
     feat_name("blindfight");
-    feat_desc("This feat reflects increased aptitude in handling oneself when robbed of sight, both in combat accuracy and in avoiding obstacles while walking. It will allow to retain dexterity bonus to armor class when blinded and will allow to use targeted feats. It does not, however, allow the character to use spells or directly targetted abilities on an unseen foe.
+    feat_desc("This feat reflects increased aptitude in handling oneself when robbed of sight, both in combat accuracy and in avoiding obstacles while walking. It will allow to retain dexterity bonus to armor class when blinded and will allow to use targeted feats, adding to that, the character's flanking won't be affected by blindness.
+
+The feat does not, however, allow the character to use spells or directly targetted abilities on an unseen foe.
 
 %^BOLD%^See also:%^RESET%^ status effects");
     permanent(1);
