@@ -22,7 +22,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (ob->query_class_level("thief") < 8 ||
+    if (ob->query_class_level("thief") < 8 &&
         ob->query_class_level("barbarian") < 5) {
         dest_effect();
         return 0;
