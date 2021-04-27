@@ -1,4 +1,4 @@
-#define MELEEFEATS ({"MeleeDamage","MeleeAccuracy","TwoHandedWeapons","WeaponAndShield","TwoWeapons","Evasion","Horsemanship","RangedCombat","GeneralCombat","WeaponMastery", "Rampage","SavageCombat", "KiOffense", "KiDefense", "UnarmedCombat", "KiEnhancement","Duelist","DamageResistance", "ArmorMastery"})
+#define MELEEFEATS ({"WeaponDamage","WeaponAccuracy","TwoHandedWeapons","WeaponAndShield","TwoWeapons","Evasion","Horsemanship","RangedCombat","GeneralCombat","WeaponMastery", "Rampage","SavageCombat", "KiOffense", "KiDefense", "UnarmedCombat", "KiEnhancement","Duelist","DamageResistance", "ArmorMastery"})
 #define SPELLFEATS ({"MagicDamage","MagicAccuracy","MagicProtection","ArcaneSpellcraft","DivineSpellcraft","WildernessLore","Psionics","Inquisition","MagicResistance"})
 #define GENERALFEATS ({"MagicResistance","DamageResistance","NonCombat","Performance","Presence", "Racial"})
 #define MAGUSFEATS ({"MagusArcana", "Steel&Magic"})
@@ -24,5 +24,5 @@
 #define FEAT_CLASSES ({ "class","racial","martial","magic","other","hybrid","arcana","divinebond" })
 
 /*
-#define HYBRIDFEATS ({"MeleeDamage","MeleeAccuracy","TwoHandedWeapons","WeaponAndShield","TwoWeapons","Evasion","Horsemanship","Archery","GeneralCombat", "WeaponMastery","Rampage","KiEnhancement", "SavageCombat","MagicDamage","MagicAccuracy","MagicProtection","ArcaneSpellcraft","DivineSpellcraft","WildernessLore","Psionics" })
+#define HYBRIDFEATS ({"WeaponDamage","WeaponAccuracy","TwoHandedWeapons","WeaponAndShield","TwoWeapons","Evasion","Horsemanship","Archery","GeneralCombat", "WeaponMastery","Rampage","KiEnhancement", "SavageCombat","MagicDamage","MagicAccuracy","MagicProtection","ArcaneSpellcraft","DivineSpellcraft","WildernessLore","Psionics" })
 */

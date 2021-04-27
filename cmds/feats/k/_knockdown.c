@@ -11,7 +11,7 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("MeleeAccuracy");
+    feat_category("WeaponAccuracy");
     feat_name("knockdown");
     feat_prereq("Expertise");
     feat_syntax("knockdown TARGET");

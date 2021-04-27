@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("MeleeAccuracy");
+    feat_category("WeaponAccuracy");
     feat_name("expertise");
     feat_prereq("Intelligence 13");
     feat_syntax("expertise offensive|defensive|min|max|check");

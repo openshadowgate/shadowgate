@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("MeleeDamage");
+    feat_category("WeaponDamage");
     feat_name("master strike");
     feat_syntax("master_strike [TARGET]");
     feat_prereq("Thief L20");

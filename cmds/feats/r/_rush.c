@@ -11,7 +11,7 @@ int allow_shifted() { return 1; }
 void create() {
     ::create();
     feat_type("instant");
-    feat_category("MeleeDamage");
+    feat_category("WeaponDamage");
     feat_syntax("rush [TARGET]");
     feat_prereq("Strength 13");
     feat_desc("The character can attempt to rush at a foe with their weapon, throwing as much force as they can behind it in the hope of dealing damage and knocking them over. Missing, however, will send the character sprawling. This will only work while shapeshifted, or using a standard melee weapon, unless the character has an aptitude in unarmed combat.

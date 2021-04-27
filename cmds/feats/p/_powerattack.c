@@ -7,7 +7,7 @@ void create()
 {
     ::create();
     feat_type("instant");
-    feat_category("MeleeDamage");
+    feat_category("WeaponDamage");
     feat_name("powerattack");
     feat_prereq("Strength 13");
     feat_syntax("powerattack offensive|defensive|max|min|check");

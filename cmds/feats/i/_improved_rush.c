@@ -8,7 +8,7 @@ void create()
 {
     ::create();
     feat_type("permanent");
-    feat_category("MeleeDamage");
+    feat_category("WeaponDamage");
     feat_name("improved rush");
     feat_prereq("Rush");
     feat_desc("With this feat you are able avoid being triped on a missed rush.");

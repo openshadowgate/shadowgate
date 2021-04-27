@@ -11,7 +11,7 @@ void refix();
 void create() {
     ::create();
     feat_type("instant");
-    feat_category("MeleeDamage");
+    feat_category("WeaponDamage");
     feat_name("sunder");
     feat_prereq("Powerattack");
     feat_desc("The character can attempt to disrupt or damage the armor of their opponent, making them more vulnerable to melee attacks. This will only work while shapeshifted, or using a weapon, unless the character has an aptitude in unarmed combat.
