@@ -1,12 +1,3 @@
-// Protection from Scrying
-// Protects from any scrying attempts on the
-// target of the spell for a period dependant on
-// the spell level of the caster
-// Thorn@ShadowGate
-// 4 January 2001
-// Updated by ~Circe~ with slightly different block power
-// to match the scry power added to scrying spells 6/20/08
-
 #include <spell.h>
 #include <magic.h>
 #include <daemons.h>
@@ -110,19 +101,10 @@ void spell_effect(int prof) {
         dest_effect();
         return;
     }
-/*
-Previous block power
-    int_bonus = caster->query_stats("intelligence");
-    int_bonus = (int_bonus - 15) / 2;
-    blocker->set_block_power(CLEVEL + int_bonus);
-*/
-//updated by ~Circe~ 9/16/11 to use bonuses properly
     int_bonus = caster->query_stats(casting_stat);
     int_bonus = int_bonus-10;
     power = CLEVEL + int_bonus + random(6);
     blocker->set_block_power(power);
-//new block power by ~Circe~ to match scry power and add a
-//touch of randomness
     duration = 6 * (int)CLEVEL * ROUND_LENGTH;
     addSpellToCaster();
     spell_duration = duration;
@@ -131,9 +113,17 @@ Previous block power
     return;
 }
 
-void dest_effect() {
-    if(objectp(target)) target->remove_property_value("spelled", ({TO}) );
-    if(objectp(blocker)) blocker->self_destruct();
+void dest_effect()
+{
+    if (objectp(target)) {
+        target->remove_property_value("spelled", ({ TO }));
+        tell_object(target,"%^BOLD%^%^CYAN%^The air shimmers once more as the scrying protection you were in recedes.");
+    }
+    if (objectp(blocker)) {
+        blocker->self_destruct();
+    }
     ::dest_effect();
-    if(objectp(TO)) TO->remove();
+    if (objectp(TO)) {
+        TO->remove();
+    }
 }
