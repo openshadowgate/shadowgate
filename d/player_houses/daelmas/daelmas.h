@@ -1,0 +1,5 @@
+#define CWEAP  "/d/common/obj/weapon/"
+#define CARM   "/d/common/obj/armour/"
+#define DROOMS "/d/player_houses/daelmas/rooms/"
+#define DMONS  "/d/player_houses/daelmas/mons/"
+#define DOBJ   "/d/player_houses/daelmas/obj/"

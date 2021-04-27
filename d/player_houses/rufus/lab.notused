@@ -1,0 +1,112 @@
+// Laboratory
+// Thorn@ShadowGate
+// 001027
+// Rufus' Player House
+// lab.c
+
+#include <std.h>
+
+inherit "/std/lab";
+
+void create() {
+  object ob;
+  
+  ::create();
+   set_terrain(STONE_BUILDING);
+   set_travel(PAVED_ROAD);
+  set_property("light", 2);
+  set_property("indoors", 1);
+  set_short("%^BOLD%^Laboratory%^RESET%^");
+  set_long(
+@THORN
+%^BOLD%^Laboratory%^RESET%^
+A normal person would have no problem standing up in here, as the
+ceiling is quite high.  A long chain holds a lamp which appears to be
+powered by magic that gives off a bright white light. The bright
+lighting illuminates a room in a state of very precise order. Component
+bottles are neatly stowed and precisely labelled.  Large leather and
+iron-bound tomes are put away and actually connected with metal chains
+to the bookcases.  In another corner of the room, it looks like a
+workbench has been set up and some mechanical gadgets are in various
+states of repair.  In the center, a table holds the requisite beakers,
+burners and various magical paraphernalia that you might expect.
+
+There is a trap door in the floor by the north wall that gives access 
+to the room below.
+
+There is a large sign on the wall which is written in strange mystic
+characters.
+THORN
+  );
+  set_items(([
+    "sign" : "You can try and read the sign.",
+  ]));
+  set_exits(([
+      "down" : "/d/player_houses/rufus/library",
+  ]));
+  setOwner("rufus");
+  setLabId("rufus");
+  setAllowedStorage(100);
+  set_door("trap door","/d/player_houses/rufus/library","down","rufus house key");
+  set_open("trap door",0);
+  set_locked("trap door",1);
+  "/d/player_houses/rufus/library"->set_open("trap door",0);
+  ob=new("/d/magic/obj/mirror");
+  ob->move(TO);
+}
+
+void reset(){
+  ::reset();  
+}
+
+void init() {
+  ::init();
+  add_action("read", "read");
+  add_action("snap", "snap");
+}
+
+int read(string str) {
+  if(!str) return 0;
+  if((string)TP->query_name() != "rufus" && !avatarp(TP)) {
+    write("You try and read the sign, but the characters appear to be magically encoded.");
+	return 1;
+  }
+  write("You can see how to operate this laboratory by typing <help laboratory>.");
+  return 1;
+}  
+
+int snap(string str) {
+  object ob;
+  object other;
+  
+  if(str != "twice") return 0;
+  if(((string)TP->query_name() != "rufus") && !avatarp(TP))
+    return 0;
+  other = find_object_or_load("/d/player_houses/rufus/library");
+  if(!query_locked("trap door")) {
+    tell_room(TO,
+      TP->query_cap_name()+" snaps "+TP->query_possessive()+
+	  " fingers twice and you hear a bolt slide home!",
+      ({ TP }));
+    tell_room(other,
+      "You hear a bolt slide home on the trap door!",
+      ({ TP }));
+    write("You snap your fingers twice and the trap door locks itself!");
+    TO->set_open("trap door",0);
+    TO->set_locked("trap door",1);
+    other->set_locked("trap door",1);
+    other->set_open("trap door",0);
+	return 1;
+  } 
+  tell_room(TO,
+    TP->query_cap_name()+" snaps "+TP->query_possessive()+
+	" fingers twice and you hear a bolt slide as the trap door unlocks itself!",
+    ({ TP }));
+    tell_room(other,
+      "You hear a bolt slide as the trap door unlocks!",
+      ({ TP }));
+  write("You snap your fingers twice and the trap door unlocks itself!");
+  TO->set_locked("trap door",0);
+  other->set_locked("trap door",0);
+  return 1;
+}

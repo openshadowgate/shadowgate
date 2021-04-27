@@ -1,0 +1,29 @@
+#include <std.h>
+
+#define GHOUSE "/d/player_houses/girruuth/"
+
+inherit VAULT;
+
+void create()   {
+  ::create();
+  set_indoors(1);
+  set_property("light", 2);
+  set_terrain(STONE_BUILDING);
+  set_travel(PAVED_ROAD);
+  set_name("Training area");
+  set_short("Training area");
+  set_long("Girruuth's training area."
+  );
+  set_smell("default", "There is a strong smell of sulfur from the coal fire.");
+  set_listen("default", "The coals in the forge pop and crackle occasionally.");
+  set_exits(([
+	"south": GHOUSE+"stableB",
+	"east" : GHOUSE+"forge",
+  ]));
+  set_door("stable door", GHOUSE+"stableB", "south");
+  set_open("stable door",0);
+  set_door("door",GHOUSE+"forge","smith door");
+  set_door("door", 0);
+  new(GHOUSE+"cart")->move(TO);
+}
+

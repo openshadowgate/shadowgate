@@ -1,0 +1,5 @@
+#define CWEAP  "/d/common/obj/weapon/"
+#define CARM   "/d/common/obj/armour/"
+#define SROOMS "/d/player_houses/saradin/rooms/"
+#define JROOMS "/d/shadow/juran/city/"
+#define SOBJ   "/d/player_houses/saradin/obj/"

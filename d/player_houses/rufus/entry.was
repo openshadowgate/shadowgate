@@ -1,0 +1,104 @@
+// An abandoned temple
+// Thorn@ShadowGate
+// 001205
+// Rufus' Player House
+// entry.c
+
+#include <std.h>
+
+inherit VAULT;
+
+void create() {
+  ::create();
+   set_terrain(STONE_BUILDING);
+   set_travel(DIRT_ROAD);
+  set_property("light", 0);
+  set_property("indoors", 1);
+  set_short("%^BOLD%^An abandoned temple%^RESET%^");
+  set_long(
+@THORN
+%^BOLD%^An abandoned temple%^RESET%^
+This room is dark, even if you have enough light to look around.
+From what you can tell, this is an ancient temple of some sort,
+probably used by ancient peoples who inhabited the Echoes
+Mountains area.  There are dusty stone pillars which bear runes
+engraved in an unknown ancient language.  In the center of the 
+floor is a raised starburst in the floor, made of darkest obsidian,
+but cracked, as though it was hit by a giant stone which has since
+disappeared.  Though everything seems harmless, there is a quivering
+in the air which feels like a distant memory of evil calling from 
+some sort of prison that it can never escape from.
+
+There is a great iron door set in the south wall that bears a sigil
+that almost seems to glow faintly in time with the quiverings in the
+air.  
+
+THORN
+  );
+  set_smell("default", "The smell of parchment and leather pervades the room.");
+  set_listen("default", "There is the sound of a fire crackling.");
+  set_items(([
+    "starburst" : "It looks like a broken symbol of a dark sun.",
+    "sigil" : "This is a complex and obviously magical symbol.  You "
+              "realize that this sign was put here by a power that you "
+              "cannot even imagine and it will still be here long "
+              "after you are dead and gone.",
+    "door" : "This door is made of cold, black iron and is probably as "
+             "heavy as a city gate.  You do notice, however, that the "
+             "hinges are remarkably preserved, and would work perfectly "
+             "if you could somehow get the door to unlock.",
+  ]));
+  set_exits(([
+      "north" : "/d/player_houses/rufus/cfloor",
+      "south" : "/d/player_houses/rufus/hall",
+  ]));
+  set_door("iron door","/d/player_houses/rufus/hall","south","rufus house key");
+  set_open("iron door",0);
+  set_locked("iron door",1);
+  "/d/player_houses/rufus/hall"->set_open("iron door",0);
+}
+
+void reset(){
+  ::reset();  
+}
+
+void init() {
+  ::init();
+  add_action("snap", "snap");
+}
+
+int snap(string str) {
+  object ob;
+  object other;
+  
+  if(str != "twice") return 0;
+  if(((string)TP->query_name() != "rufus") && !avatarp(TP))
+    return 0;
+  other = find_object_or_load("/d/player_houses/rufus/hall");
+  if(!query_locked("iron door")) {
+    tell_room(TO,
+      TP->query_cap_name()+" snaps "+TP->query_possessive()+
+	  " fingers twice and you hear a bolt crash home!",
+      ({ TP }));
+    tell_room(other,
+      "You hear a bolt crash home on the iron door!",
+      ({ TP }));
+    write("You snap your fingers twice and the iron door locks itself with a crash!");
+    TO->set_open("iron door",0);
+    TO->set_locked("iron door",1);
+    other->set_locked("iron door",1);
+    other->set_open("iron door",0);
+	return 1;
+  } 
+  tell_room(TO,
+    TP->query_cap_name()+" snaps "+TP->query_possessive()+
+	" fingers twice and you hear a bolt creak as the iron door unlocks itself!",
+    ({ TP }));
+    tell_room(other,
+      "You hear a mechanism creak as the iron door unlocks!",
+      ({ TP }));
+  write("You snap your fingers twice and the iron door unlocks itself!");
+  TO->set_locked("iron door",0);
+  other->set_locked("iron door",0);
+  return 1;
+}

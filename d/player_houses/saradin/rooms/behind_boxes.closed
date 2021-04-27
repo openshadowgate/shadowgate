@@ -1,0 +1,146 @@
+//Coded by Diego//
+// According to Saradin, T said this was too inaccessible and closed it or had Diego close it.  I broke it and removed the last of the functions referencing it in the living_area so people can't accidentally teleport in to here when others can't access it.  *Styx*  5/17/03
+
+#include <std.h>
+#include "../saradin.h"
+
+inherit VAULT;
+int FLAG;
+
+void create(){
+	::create();
+	set_name("behind the boxes");
+   set_short("behind the boxes");
+   set_long(
+   	"%^RESET%^%^CYAN%^"+
+   	"This is a small area behind the old crates that fills the "+
+   	"south end of the cellar.  There are no crates against the "+
+   	"south wall.  The south wall is made of stone and looks very smooth."+
+   	"%^RESET%^"
+   );
+  	set_terrain(STONE_BUILDING);
+   set_travel(PAVED_ROAD);
+	set_property("indoors",1);
+	set_property("light",1);
+	set_smell("default","The smell of decay and rotted wood fills the air.");
+	set_listen("default","Aside from the wind blowing through the room upstairs it is "+
+		"as quiet as death here.");
+	set_items(([
+     	({"wall","walls"}) : "Parts of some walls are made from stones and "+
+     		"brick and other parts of the walls are made from compacted "+
+     		"dirt.  The south wall is completely stone.  "+
+     		"Roots from the plants above have bored through the "+
+     		"dirt sections.\n",
+     	({"crates","crate"}) : "The crates are old and moldy.  They "+
+     		"look to have been here for a very long time and are stacked "+
+     		"haphazardly in front of the south wall.  The crates are empty.\n"
+  	]));
+
+	set_search("south wall","The south wall looks to be very normal "+
+		"except, upon closer examination, you see what looks to be a "+
+		"keyhole.  Looking very carefully you find the outline of a "+
+		"very cleverly concealed door in the south wall.");
+	set_search("crates","The crates are empty.");
+	set_search("crate","The crate is empty.");
+
+   	set_exits(([
+   		"south" : SROOMS+"hallway",
+		"out" : JROOMS+"rb2d"
+  	]));
+
+  	set_invis_exits(({"south"}));
+
+	set_door("door",SROOMS+"hallway","south","black skeleton key");
+  	set_locked("door",1,"lock");
+	  	(SROOMS+"hallway")->set_locked("door",1,"lock");
+  	set_door_description("door","The door is cleverly made to "+
+  		"blend into the south wall flawlessly.");
+  	lock_difficulty("door", "/daemon/player_housing"->get_phouse_lock_dc("common"),"lock");
+  	set_string("door","open","You open the door noiselessly into a dark hallway.\n");
+
+  	set_trap_functions(({"door"}),({"gas_em"}),({"pick"}));
+
+  	FLAG = 0;
+}
+
+void init() {
+  	::init();
+  	add_action("slide_em","slide");
+}
+
+int slide_em(string str) {
+   if(!str) {
+      tell_object(TP,"%^BOLD%^Slide what where?");
+      return 1;
+   }
+	if(str == "crate left"){
+		if(FLAG == 1){
+			tell_object(TP,"%^BOLD%^There is nothing under the "+
+				"crate, someone must have pinched your stashed key.\n");
+			return 1;
+		}else{
+			tell_object(TP,"%^BOLD%^You find your spare key just where you left it.\n");
+			tell_room(TO,"%^BOLD%^"+TPQCN+" fiddles with one of the crates.\n");
+			FLAG = 1;
+			new(SOBJ+"skel_key")->move(TO);
+			return 1;
+		}
+	}
+}
+
+int gas_em(string str){
+	int poison;
+	if(str!="lock"){
+		return 0;
+	}
+	toggle_trap("door","pick","lock");
+	tell_room((SROOMS+"living_area"),"%^BOLD%^%^RED%^A bell rings once.",TP);
+	tell_room((SROOMS+"bath"),"%^BOLD%^%^RED%^A bell rings once.",TP);
+	tell_room((SROOMS+"bedroom"),"%^BOLD%^%^RED%^A bell rings once.",TP);
+	tell_room((SROOMS+"torture"),"%^BOLD%^%^RED%^A bell rings once.",TP);
+	tell_room((SROOMS+"hallway"),"%^BOLD%^%^RED%^A bell rings once.",TP);
+	tell_room((SROOMS+"hall"),"%^BOLD%^%^RED%^A bell rings once.",TP);
+
+	tell_object(TP,"As you work on the lock with your tools you feel a sudden hitch "+
+		"and then a louder click.\n%^BOLD%^%^GREEN%^You hear a hissing as a "+
+		"cloud of sickly green gas issues from the lock.");
+	tell_room(TO,"%^BOLD%^%^GREEN%^A sickly green mist issues from the lock!",TP);
+      if((int)TP->query_stats("dexterity")>random(20)){
+		tell_object(TP,"%^BOLD%^%^GREEN%^You manage to turn away and the spray misses "+
+			"your face by inches.");
+		tell_room(TO,""+TPQCN+" turns away from the spraying gas.",TP);
+		return 0;
+	}else{
+		tell_room(TO,"%^BOLD%^%^GREEN%^The mist sprays directly into the face "+
+			"of "+TPQCN+"!",TP);
+		tell_object(TP,"%^BOLD%^%^GREEN%^The corrosive mist hits you right "+
+			"in the face and starts burning into your skin and eyes "+
+			"causing immense pain!");
+		TP->set_blind(1);
+		TP->do_damage("head",roll_dice(10,3));
+		TP->add_attacker(TO);
+		TP->continue_attack();
+     	TP->remove_attacker(TO);
+    }
+    if (TP->query_ghost()) {
+        	return 1;
+    }else if((int)TP->query_stats("constitution")>random(20)){
+      	tell_object(TP,"You get a whiff of the deadly vapor, but hopefully not "+
+      		"enough to cause you permanent damage.");
+      	return 1;
+     }else{
+      	poison = roll_dice(20,10);
+      	tell_object(TP,"You breathe in the gas deeply and begin to cough.");
+      	tell_room(TO,""+TPQCN+" coughs and gags as the gas works its way "+
+      		"into "+TP->query_possessive()+" lungs\n",TP);
+			TP->add_poisoning(poison);
+			TP->setPoisoner(TO);
+			TP->add_attacker(TO);
+			TP->continue_attack();
+			return 1;
+	}
+}
+void reset(){
+   ::reset();
+  	FLAG = 0;
+}
