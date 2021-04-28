@@ -70,59 +70,15 @@ void spell_effect()
     effect(1);
     caster->set_property("added short", ({ ashort }));
     caster->set_property("spelled", ({ TO }));
+
+    spell_duration = (clevel + roll_dice(1, 20)) * ROUND_LENGTH;
+    set_end_time();
+    call_out("dest_effect", spell_duration);
+
     addSpellToCaster();
     spell_successful();
-    execute_attack();
-}
 
-void execute_attack()
-{
-    object* attackers;
-    object room;
-    ::execute_attack();
-    if (!objectp(caster)) {
-        dest_effect();
-        return;
-    }
 
-    attackers = caster->query_attackers();
-
-    if (lastattack == time()) {
-        return;
-    }
-
-    room = ENV(caster);
-    room->addObjectToCombatCycle(TO, 1);
-    lastattack = time();
-
-    if (!sizeof(attackers) && !cond_test) {
-        tell_object(caster, "%^BOLD%^%^WHITE%^You begin to feel your mortality...");
-        cond_test = 1;
-        call_out("test", ROUND_LENGTH * 8);
-    }
-
-    prepend_to_combat_cycle();
-}
-
-void test()
-{
-    object* attackers;
-    if (!objectp(caster)) {
-        dest_effect();
-    }
-    attackers = caster->query_attackers();
-    cond_test = 0;
-    if (sizeof(attackers)) {
-        return;
-    }
-    if (ENV(caster)->is_flight_room()) {
-        return;
-    }
-
-    prepend_to_combat_cycle();
-
-    tell_object(caster, "%^BOLD%^%^WHITE%^You feel your mortality return as your angelic aspect fades.");
-    dest_effect();
 }
 
 void dest_effect()
