@@ -276,7 +276,7 @@ varargs ac_bonus(object who, object attacker)
     dexb = query_dex_bonus(who);
 
     if (FEATS_D->usable_feat(who, "unarmored defense") && who->is_ok_armour("barb")) {
-        dexb -= 6;
+        dexb -= 8;
     }
 
     if (who->is_class("monk")) {
