@@ -96,6 +96,7 @@ int confirm_drop(string str, string theclass, int drop, int cost)
     skills = MY_SKILLS;
 
     tell_object(TP, "%^BOLD%^Clearing skills...%^RESET%^");
+
     if (sizeof(skills)) {
         for (i = 0; i < sizeof(skills); i++) {
             TP->set_skill(skills[i], 0);
@@ -116,7 +117,6 @@ int confirm_drop(string str, string theclass, int drop, int cost)
     if (TP->is_class("warlock")) {
         TP->delete("warlock_blast_type");
     }
-
 
     // this should only get called if they have no levels in the class that they abandoned, to remove it from the score sheet
     if (((int)TP->query_class_level(theclass) == 1 || (int)TP->query_class_level(theclass) == 0) && sizeof(TP->query_classes()) > 1) {
