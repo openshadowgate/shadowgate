@@ -52,8 +52,7 @@ int start_time, quit_time, down_time;  // For user timing -- Thorn 950420
 int birth;
 //int logout_time, login_time; // Tracking login/logout timers. - garrett.
 mapping user_vars = ([]);
-nosave mapping static_user=([]);// = (["net_died_here":0,"term_info":([]),"channels":({}),"died_here":0,"watched":0,"pastMessages":([]),"saveable":({})]);
-//nosave int disable, time_of_login, autosave, stage;
+nosave mapping static_user=([]);
 mapping blocked, news;
 mapping thief_skills;
 nosave mapping thief_skill_bonuses;
@@ -933,7 +932,6 @@ void create() {
 		  "term_info":([]),
 		  "channels":({}),
 		  "died_here":0,
-		  "watched":0,
 		  "pastMessages":([]),
 		  "saveable":({}),
 		  "pkilled":({}),
@@ -1756,13 +1754,14 @@ void heart_beat()
         static_user["gutted"] = 0;
         remove_property("gutted");
     }
-    if (!sizeof(query_attackers()) && query("protecting"))
-        set("protecting",0);
+
+    if (!sizeof(query_attackers()) && query("protecting")) {
+        set("protecting", 0);
+    }
+
     static_user["gutted"]++;
     static_user["rushed"]++;
-    if (static_user["watched"]) static_user["watched"]--;
-    if (is_class("barbarian") && static_user["watched"] < query_class_level("barbarian")*2)
-        static_user["watched"] = query_class_level("barbarian")*2;
+
     if(query_offensive_bonus()){
         if(static_user["stance"] > 120) {
             reset_offensive_scale();
@@ -1776,15 +1775,6 @@ void heart_beat()
 
     //Reliably there are 2-3 heart beats per round. Adjust values accordingly.
 
-    //Once per round
-    /* if(!(user_ticker%3)) */
-    /* { */
-
-    /* } */
-
-    if (!avatarp(TO))
-        if (!(user_ticker % 9))
-            test_passive_perception();
     user_ticker++;
 }
 
@@ -3760,15 +3750,6 @@ int query_quitable() {
   return 1;//quitAllow;
 }
 
-void set_watched(int x) {
-  if (x<0) return;
-  static_user["watched"] = x;
-}
-
-int query_watched() {
-  return static_user["watched"];
-}
-
 void set_full_name(string n){
   set("full name",n);
 }
@@ -5269,78 +5250,17 @@ int race_mod(string stat)
     }
 }
 
-int reactivate(string str,int when){
-        TO->remove_property("inactive");
-        tell_object(TO, "You wake up from the slumber.\n");
-        if((time()-when) <= 60)
-           tell_object(TO,"You have been napping for "+(time()-when)+" seconds.");
-        else
-           tell_object(TO,"You have been napping for "+((time()-when)/60)+" minutes.");
-        tell_room(environment(TO), TPQCN+" wakes up.\n", ({TO}) );
-        return 1;
-   return 1;
-}
-
-int test_passive_perception()
+int reactivate(string str, int when)
 {
-    object* living, targ;
-    int i, numnotvisible, ishidden, ismagic;
-    int perception, stealth, spellcraft;
-    if (!objectp(TO)) {
-        return;
+    TO->remove_property("inactive");
+    tell_object(TO, "You wake up from the slumber.\n");
+    if ((time() - when) <= 60) {
+        tell_object(TO, "You have been napping for " + (time() - when) + " seconds.");
+    }else {
+        tell_object(TO, "You have been napping for " + ((time() - when) / 60) + " minutes.");
     }
-    if (!objectp(ETO)) {
-        return;
-    }
-
-    if (TO->query_watched() < 1) {
-        return;
-    }
-
-    if (FEATS_D->usable_feat(TO, "spot")) {
-        perception = (int)TO->query_skill("perception");
-    } else {
-        perception = (int)TO->query_skill("perception") * 3 / 4;
-    }
-
-    living = filter_array(all_living(ETO) - ({ TO }), "is_non_immortal", FILTERS_D);
-    numnotvisible = 0;
-
-    for (i = 0; i < sizeof(living); i++) {
-        targ = living[i];
-        if (!objectp(targ)) {
-            continue;
-        }
-        if (targ->query_property("minion") == TO) {
-            continue;
-        }
-        ishidden = targ->query_hidden();
-        ismagic = targ->query_magic_hidden();
-        stealth = (int)targ->query_skill("stealth");
-        spellcraft = (int)targ->query_skill("spellcraft");
-        if (FEATS_D->usable_feat(TO, "spot") && !TO->true_seeing()) {
-            if (ishidden == 1 && ismagic == 0) {
-                if (perception > stealth) {
-                    numnotvisible++;
-                }
-            }
-            if (ishidden == 1 && ismagic == 1) {
-                if (perception > stealth && perception * 4 / 5 > spellcraft) {
-                    numnotvisible++;
-                }
-            }
-        }
-        if (!TO->detecting_invis()) {
-            if (ishidden == 0 && ismagic == 1) {
-                if (perception > spellcraft * 4 / 5) {
-                    numnotvisible++;
-                }
-            }
-        }
-    }
-    if (numnotvisible > 0) {
-        tell_object(TO, "%^BOLD%^%^CYAN%^You sense an unseen creature lurking nearby!%^RESET%^");
-    }
+    tell_room(environment(TO), TPQCN + " wakes up.\n", ({ TO }));
+    return 1;
     return 1;
 }
 

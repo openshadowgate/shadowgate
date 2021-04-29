@@ -55,18 +55,10 @@ varargs int get_stab_damage(object player, object target, object weapon)
         damage += "/daemon/bonus_d"->damage_bonus(player->query_stats("strength"));
     }
 
-    if (player->query_property("strong stab")) {
-        roll = 8;
-    }else {
-        roll = 6;
-    }
+    roll = 6;
 
     // 1d8 per level for "strong stab" creatures, 1d6 for normal/players
     damage += roll_dice(level, roll);
-
-    if (player->is_class("thief")) {
-        damage *= player->query_guild_level("thief") / 10 + 1;
-    }
 
     // Ghosts and incorporeals can be stabbed only with magic weapons
 
@@ -190,10 +182,6 @@ int roll_stab_dcs(object stabber, object vic)
 
     if (vic->query_in_vehicle()) {
         i += 2;
-    }
-
-    if (vic->query_watched()) {
-        i += vic->query_level() / 10;
     }
 
     vic->add_attacker(stabber);
