@@ -43,18 +43,18 @@ int cmd_master_strike(string str)
     return 1;
 }
 
+string cm(string str)
+{
+    return CRAYON_D->color_string(str, "sierra");
+}
+
 void execute_feat()
 {
-    mapping tempmap;
     object* weapons;
     int x;
     ::execute_feat();
-    tempmap = caster->query_property("using master strike");
     if (!objectp(target)) {
         object* attackers = caster->query_attackers();
-        if (mapp(tempmap)) {
-            attackers = filter_array(attackers, (: $2[$1] < time() :), tempmap);
-        }
         if (!sizeof(attackers)) {
             tell_object(caster, "%^BOLD%^Nobody to affect.%^RESET%^");
             dest_effect();
@@ -98,17 +98,10 @@ void execute_feat()
         return;
     }
 
-    if (mapp(tempmap)) {
-        if (tempmap[target] > time()) {
-            tell_object(caster, "That target is still wary of such an attack!");
-            dest_effect();
-            return;
-        }
-    }
     caster->set_property("using instant feat", 1);
 
-    tell_object(caster, "%^RESET%^%^ORANGE%^You position yourself and commit to an unexpected strike at " + target->QCN + ".%^RESET%^");
-    tell_room(place, "%^RESET%^%^ORANGE%^" + caster->QCN + " through some trickery ends up in " + target->QCN + "'s weak spot.%^RESET%^", caster);
+    tell_object(caster, cm("You position yourself and commit to an unexpected strike at " + target->QCN + ".%^RESET%^"));
+    tell_room(place, cm(caster->QCN + " through some trickery ends up in " + target->QCN + "'s weak spot.%^RESET%^"), caster);
     return;
 }
 
@@ -117,7 +110,6 @@ void execute_attack()
     int damage, timerz, i;
     int bonusdc;
     object* keyz, shape, * weapons, myweapon, qob;
-    mapping tempmap;
 
     if (!objectp(caster)) {
         dest_effect();
@@ -143,33 +135,8 @@ void execute_attack()
         return;
     }
 
-    tempmap = caster->query_property("using master strike");
-
-    if (!mapp(tempmap)) {
-        tempmap = ([]);
-    }
-
-    if (tempmap[target]) {
-        map_delete(tempmap, target);
-    }
-
-    keyz = keys(tempmap);
-
-    for (i = 0; i < sizeof(keyz); i++) {
-        if (!objectp(keyz[i])) {
-            map_delete(tempmap, keyz[i]);
-        }
-        continue;
-    }
-
-    timerz = time() + 30;
-    delay_subject_msg(target, 30, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^master striken again%^WHITE%^ again.%^RESET%^");
-    tempmap += ([ target:timerz ]);
-    caster->remove_property("using master strike");
-    caster->set_property("using master strike", tempmap);
-
-    tell_object(caster, "%^YELLOW%^You strike at " + target->QCN + " with all ferocity!");
-    tell_room(place, "%^YELLOW%^" + caster->QCN + " strikes at " + target->QCN + " with all ferocity!", caster);
+    tell_object(caster, cm("You strike at " + target->QCN + " with all ferocity!"));
+    tell_room(place, cm(caster->QCN + " strikes at " + target->QCN + " with all ferocity!"), caster);
 
     bonusdc = clevel;
     bonusdc += BONUS_D->query_stat_bonus(caster, "dexterity");
@@ -185,17 +152,17 @@ void execute_attack()
             damtype = "piercing";
         }
 
-        damage = roll_dice(flevel, 8);
+        damage = roll_dice(flevel, 10);
 
         if (do_save(target, -bonusdc)) {
-            tell_room(place, "%^BOLD%^%^WHITE%^" + target->QCN + " endures through lethal strike!", target);
-            tell_object(target, "%^BOLD%^%^WHITE%^You are are merely slightly shaken, unable to move!");
+            tell_room(place, cm(target->QCN + " endures through lethal strike!"), target);
+            tell_object(target, cm("You are are merely slightly shaken, unable to move!"));
             target->cause_typed_damage(target, target->return_target_limb(), damage / 2, damtype);
         } else {
-            tell_room(place, "%^BOLD%^%^MAGENTA%^Crushing strike hits " + target->QCN + " !", target);
-            tell_object(target, "%^BOLD%^%^MAGENTA%^Unberable strike finds a weakness in your defences!\n");
+            tell_room(place, cm("Crushing strike hits " + target->QCN + " !"), target);
+            tell_object(target, cm("Unberable strike finds a weakness in your defences!\n"));
             target->cause_typed_damage(target, target->return_target_limb(), damage, damtype);
-            target->set_paralyzed(roll_dice(1, 4) * 2, "%^BOLD%^%^RED%^The impact of the strike has left you unable to move!%^RESET%^");
+            target->set_paralyzed(roll_dice(1, 4) * 2, cm("The impact of the strike has left you unable to move!%^RESET%^"));
         }
     }
 
