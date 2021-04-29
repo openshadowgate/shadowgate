@@ -1053,6 +1053,10 @@ int query_ac()
         myac += BONUS_D->query_stat_bonus(TO, "charisma");
     }
 
+    if (FEATS_D->usable_feat(TO, "beast hide") && TO->query_property("raged")) {
+        myac += query_guild_level("barbarian") / 4 + 1;
+    }
+
     if (TO->query_blind() || TO->query_temporary_blinded()) {
         myac -= TO->query_level() / 10 + 1;
     }

@@ -8,9 +8,9 @@ void create()
     ::create();
     feat_type("permanent");
     feat_category("Rage");
-    feat_name("beast claws");
+    feat_name("beast hide");
     feat_classes("barbarian");
-    feat_desc("While raging a barbarian gains two additional claw attacks that deals 1d6 of slashing damage. The die is increased to 1d8 for small creatures.");
+    feat_desc("While raging a barbarian gains additional armor class point to their armor per every four levels..");
     permanent(1);
 }
 
