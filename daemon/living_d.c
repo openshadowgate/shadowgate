@@ -65,6 +65,10 @@ int immunity_check(object obj, string type)
             return 1;
         }
 
+        if (FEATS_D->usable_feat(obj, "fearless rage") && obj->query_property("raged")) {
+            return 1;
+        }
+
         if (FEATS_D->usable_feat(obj, "bravery")) {
             return 1;
         }
