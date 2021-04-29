@@ -243,7 +243,7 @@ varargs effective_ac(object who)
     }
 
     // This value is cosmetic. BAB gets bonus that overlaps this in process_hit
-    MyAc = 10;
+    MyAc = 20;
 
     if (who->query_size()) {
         MyAc += 2 - who->query_size();
@@ -487,16 +487,16 @@ varargs int process_hit(object who, object targ, int attack_num, mixed current, 
     AC = AC > 35 ? (-1578 / AC + 80) : AC;
     bon = bon > 40 ? (-1500 / bon + 77) : bon;
 
-    // +13 values are present due to effective_ac() bonus
+    // +20 values are present due to effective_ac() bonus
 
-    if (bon + 10 + attack_roll >= AC) {
+    if (bon + 20 + attack_roll >= AC) {
         return attack_roll;
     }
 
     // Saide's "AC Doesn't matter" formula is to be kept till hit
     // balance at all levels is adjusted.
 
-    if ((bon + 10) < AC) {
+    if ((bon + 20) < AC) {
         if (random(bon + AC + attack_roll) >= AC) {
             return attack_roll;
         }
