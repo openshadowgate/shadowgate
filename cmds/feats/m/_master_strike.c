@@ -162,8 +162,8 @@ void execute_attack()
         continue;
     }
 
-    timerz = time() + 60;
-    delay_subject_msg(target, 60, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^master striken again%^WHITE%^ again.%^RESET%^");
+    timerz = time() + 30;
+    delay_subject_msg(target, 30, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^master striken again%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target:timerz ]);
     caster->remove_property("using master strike");
     caster->set_property("using master strike", tempmap);
@@ -185,7 +185,7 @@ void execute_attack()
             damtype = "piercing";
         }
 
-        damage = roll_dice(flevel, 6);
+        damage = roll_dice(flevel, 8);
 
         if (do_save(target, -bonusdc)) {
             tell_room(place, "%^BOLD%^%^WHITE%^" + target->QCN + " endures through lethal strike!", target);
