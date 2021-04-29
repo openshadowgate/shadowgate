@@ -481,6 +481,19 @@ mixed query_property(string prop)
             if (!sizeof(worn)) {
                 num += (query_guild_level("barbarian") - 10) / 6 + 1;
             }
+
+            if (FEATS_D->usable_feat(TO, "increased damage reduction i") && TO->query_property("raged")) {
+                num += 2;
+            }
+
+            if (FEATS_D->usable_feat(TO, "increased damage reduction ii") && TO->query_property("raged")) {
+                num += 2;
+            }
+
+            if (FEATS_D->usable_feat(TO, "increased damage reduction iii") && TO->query_property("raged")) {
+                num += 2;
+            }
+
             if (FEATS_D->usable_feat(TO, "shadow master") && objectp(ETO) && ETO->query_light() < 2) {
                 num += 10;
             }
