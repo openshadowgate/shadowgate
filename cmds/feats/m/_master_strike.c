@@ -100,8 +100,8 @@ void execute_feat()
 
     caster->set_property("using instant feat", 1);
 
-    tell_object(caster, cm("You position yourself and commit to an unexpected strike at " + target->QCN + ".%^RESET%^"));
-    tell_room(place, cm(caster->QCN + " through some trickery ends up in " + target->QCN + "'s weak spot.%^RESET%^"), caster);
+    tell_object(caster, cm("You position yourself and commit to an unexpected strike at " + target->QCN + "."));
+    tell_room(place, cm(caster->QCN + " through some trickery ends up in " + target->QCN + "'s weak spot."), caster);
     return;
 }
 
@@ -162,7 +162,7 @@ void execute_attack()
             tell_room(place, cm("Crushing strike hits " + target->QCN + " !"), target);
             tell_object(target, cm("Unberable strike finds a weakness in your defences!\n"));
             target->cause_typed_damage(target, target->return_target_limb(), damage, damtype);
-            target->set_paralyzed(roll_dice(1, 4) * 2, cm("The impact of the strike has left you unable to move!%^RESET%^"));
+            target->set_paralyzed(roll_dice(1, 4) * 2, cm("The impact of the strike has left you unable to move!"));
         }
     }
 
