@@ -1635,6 +1635,14 @@ int query_attack_bonus()
         ret += 1;
     }
 
+    if (FEATS_D->usable_feat(TO, "lethal stance") && TO->query_property("raged")) {
+        int bo;
+
+        bo = TO->query_guild_level("barbarian") / 4;
+        bo = bo > 6 ? 6 : bo;
+        ret += bo;
+    }
+
     if (FEATS_D->usable_feat(TO, "greater weapon focus")) {
         ret += 1;
     }
@@ -1721,6 +1729,14 @@ int query_damage_bonus()
 
     if (FEATS_D->usable_feat(TO, "epic weapon specialization")) {
         ret += 2;
+    }
+
+    if (FEATS_D->usable_feat(TO, "lethal stance") && TO->query_property("raged")) {
+        int bo;
+
+        bo = TO->query_guild_level("barbarian") / 4;
+        bo = bo > 6 ? 6 : bo;
+        ret += bo;
     }
 
     attacker = TO->query_current_attacker();
