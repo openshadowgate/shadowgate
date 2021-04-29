@@ -8,9 +8,9 @@ void create()
     ::create();
     feat_type("permanent");
     feat_category("Rage");
-    feat_name("beast hide");
+    feat_name("guarded stance");
     feat_classes("barbarian");
-    feat_desc("While raging a barbarian gains additional armor class point to their armor per every four levels. This armor bonus is added to their base armor class.");
+    feat_desc("While raging a barbarian gains additional armor class point to their armor per every four levels. This armor bonus is added to their dodge armor class.");
     permanent(1);
 }
 

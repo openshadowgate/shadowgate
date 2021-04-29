@@ -279,6 +279,10 @@ varargs ac_bonus(object who, object attacker)
         dexb -= 8;
     }
 
+    if (FEATS_D->usable_feat(who, "guarded stance") && who->query_property("raged")) {
+        dexb -= who->query_guild_level("barbarian") / 4 + 1;
+    }
+
     if (who->is_class("monk")) {
         dexb -= query_stat_bonus(who, "wisdom");
     }
