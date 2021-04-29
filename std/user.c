@@ -4675,6 +4675,7 @@ void clear_feats()
     set_magic_feats_gained(0);
     set_hybrid_feats_gained(0);
     set_arcana_feats_gained(0);
+    set_rage_feats_gained(0);
     set_divinebond_feats_gained(0);
     set_other_feats_gained(0);
     set_epic_feats_gained(0);
@@ -4885,6 +4886,22 @@ mapping query_arcana_feats()
     return __FEAT_DATA["arcana"];
 }
 
+void set_rage_feats(mapping feats)
+{
+    if (!mapp(__FEAT_DATA["rage"])) { __FEAT_DATA["rage"] = ([]); }
+    if (mapp(feats))
+    {
+        __FEAT_DATA["rage"] = feats;
+    }
+    return;
+}
+
+mapping query_rage_feats()
+{
+    if (!mapp(__FEAT_DATA["rage"])) { __FEAT_DATA["rage"] = ([]); }
+    return __FEAT_DATA["rage"];
+}
+
 void set_divinebond_feats(mapping feats)
 {
     if (!mapp(__FEAT_DATA["divinebond"])) { __FEAT_DATA["divinebond"] = ([]); }
@@ -5001,6 +5018,14 @@ string *query_player_feats() {
     }
     if (mapp(__FEAT_DATA["arcana"])) {
       testmap = __FEAT_DATA["arcana"];
+      mykeys = keys(testmap);
+      if (sizeof(mykeys)) {
+        for (i = 0;i < sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];
+      }
+      testmap = ([]);
+    }
+    if (mapp(__FEAT_DATA["rage"])) {
+      testmap = __FEAT_DATA["rage"];
       mykeys = keys(testmap);
       if (sizeof(mykeys)) {
         for (i = 0;i < sizeof(mykeys);i++) myreturn += testmap[mykeys[i]];

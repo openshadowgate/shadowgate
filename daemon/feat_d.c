@@ -1638,14 +1638,15 @@ void display_feats(object ob,object targ, string mytype)
       case "martial": currentlist += MELEEFEATS; break;
       case "hybrid": currentlist += SPELLFEATS; currentlist += MELEEFEATS;  break;
       case "arcana": currentlist += MAGUSFEATS;  break;
+      case "rage": currentlist += BARBFEATS;  break;
       case "divinebond": currentlist += PALADINFEATS;  break;
       case "general": currentlist += GENERALFEATS; break;
       case "epic": currentlist += EPICFEATS; break;
       case "prestige": currentlist += PRESTIGE_FEATS; break;
       case "custom":
         if(sizeof(targ->query("custom_feat_array"))) currentlist += targ->query("custom_feat_array"); break;
-      case "all": case "allowed": currentlist += SPELLFEATS; currentlist += MELEEFEATS; currentlist += GENERALFEATS; currentlist += MAGUSFEATS; currentlist += PALADINFEATS; currentlist += EPICFEATS; currentlist += PRESTIGE_FEATS; break;
-      default: currentlist += SPELLFEATS; currentlist += MELEEFEATS; currentlist += GENERALFEATS; currentlist += MAGUSFEATS; currentlist += PALADINFEATS; currentlist += EPICFEATS; currentlist += PRESTIGE_FEATS; break;
+    case "all": case "allowed": currentlist += SPELLFEATS; currentlist += MELEEFEATS; currentlist += GENERALFEATS; currentlist += MAGUSFEATS; currentlist += BARBFEATS; currentlist += PALADINFEATS; currentlist += EPICFEATS; currentlist += PRESTIGE_FEATS; break;
+    default: currentlist += SPELLFEATS; currentlist += MELEEFEATS; currentlist += GENERALFEATS; currentlist += MAGUSFEATS; currentlist += BARBFEATS; currentlist += PALADINFEATS; currentlist += EPICFEATS; currentlist += PRESTIGE_FEATS; break;
     }
 
     if (!targ->is_class("bard") && !avatarp(targ)) {
@@ -1864,12 +1865,22 @@ int number_feats(object obj, string category, string* valid_classes) {
                 continue;
             }
             switch (subset[i]) {
-                //martials
             case "fighter":
                 if (obj->query_class_level("fighter") < 21) {
                     j = (obj->query_class_level(subset[i]) / 2) + 2;
                 } else {
                     j = 12 + (((obj->query_class_level(subset[i])) - 16) / 5);
+                }
+                break;
+            case "barbarian":
+                if (category == "rage") {
+                    if (obj->query_class_level("barbarian") < 21) {
+                        j = (obj->query_class_level(subset[i]) / 2);
+                    } else {
+                        j = 10 + (((obj->query_class_level(subset[i])) - 16) / 5);
+                    }
+                } else {
+                    j = (((obj->query_class_level(subset[i])) + 4) / 5);
                 }
                 break;
             case "paladin":
@@ -1883,14 +1894,12 @@ int number_feats(object obj, string category, string* valid_classes) {
                     j = ((obj->query_class_level(subset[i]) - 16) / 5);
                 }
                 break;
-                //casters
             case "psion":
             case "sorcerer":
             case "mage":
             case "oracle":
                 j = ((obj->query_class_level(subset[i]) + 4) / 5);
                 break;
-                //hybrids
             case "magus":
                 if (category == "arcana") {
                     if (obj->query_class_level("magus") < 21) {

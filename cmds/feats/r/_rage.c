@@ -240,6 +240,57 @@ void execute_attack()
         }
     }
 
+    if (FEATS_D->usable_feat(caster, "animal fury")) {
+        int dmg;
+        int hitroll;
+        object target = attackers[random(sizeof(attackers))];
+
+        objectp(target) && (hitroll = BONUS_D->process_hit(caster, target, 1, 0, 0, 1));
+
+        if (objectp(target) && hitroll) {
+            if (caster->query_size() > 2) {
+                dmg = roll_dice(1, 6);
+            } else {
+                dmg = roll_dice(1, 4);
+            }
+
+            tell_object(caster, cm("In raging frenzy, you furiously bite " + target->QCN + "!"));
+            tell_object(target, cm("In raging frenzy, " + caster->QCN + " furiously bites you!"));
+            tell_object(place, cm(caster->QCN + " furiously bites " + target->QCN + "!", ({ caster, target })));
+
+            target->cause_typed_damage(target, target->return_target_limb(), dmg, "piercing");
+        }
+
+    }
+
+    if (FEATS_D->usable_feat(caster, "beast claws")) {
+        int dmg;
+        int hitroll1, hitroll2;
+        object target = attackers[random(sizeof(attackers))];
+
+        objectp(target) && (hitroll1 = BONUS_D->process_hit(caster, target, 1, 0, 0, 1));
+        objectp(target) && (hitroll2 = BONUS_D->process_hit(caster, target, 1, 0, 0, 1));
+
+        if (objectp(target) && (hitroll1 || hitroll2)) {
+            if (caster->query_size() == 1) {
+                dmg = roll_dice(1, 8);
+            } else {
+                dmg = roll_dice(1, 6);
+            }
+
+            tell_object(caster, cm("You fiercely claw " + target->QCN + "!"));
+            tell_object(target, cm(caster->QCN + " claws into your flesh!"));
+            tell_object(place, cm(caster->QCN + " fiercely claws " + target->QCN + "!", ({ caster, target })));
+
+            target->cause_typed_damage(target, target->return_target_limb(), dmg, "slashing");
+
+            if (hitroll2 && hitroll1) {
+                target->cause_typed_damage(target, target->return_target_limb(), dmg, "slashing");
+            }
+        }
+
+    }
+
     if (objectp(place)) {
         place->addObjectToCombatCycle(TO, 1);
     } else {

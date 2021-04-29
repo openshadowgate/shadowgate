@@ -622,7 +622,6 @@ int cmd_feats(string str)
                     "feats. You have used %^BOLD%^%^BLUE%^" + num_feats + " %^RESET%^and you now have "
                     "%^BOLD%^%^BLUE%^" + allowed + "%^RESET%^ left.%^RESET%^");
 
-//racial, martial, magic, hybrid, arcana, divine
         feat_types = FEAT_TYPES;
         for (i = 0; i < sizeof(FEAT_TYPES); i++) {
             BONUS_ALLOWED = 0;
@@ -651,6 +650,11 @@ int cmd_feats(string str)
             case "arcana":
                 BONUS_ALLOWED = FEATS_D->number_feats(TP, feat_types[i], ({ "magus" }));
                 num_bonus = (int)TP->query_arcana_feats_gained();
+                feat_types_labels = feat_types[i];
+                break;
+            case "rage":
+                BONUS_ALLOWED = FEATS_D->number_feats(TP, feat_types[i], ({ "barbarian" }));
+                num_bonus = (int)TP->query_rage_feats_gained();
                 feat_types_labels = feat_types[i];
                 break;
             case "divinebond":
@@ -689,6 +693,7 @@ int cmd_feats(string str)
     case "spellcraft":
     case "hybrid":
     case "arcana":
+    case "rage":
     case "divinebond":
         if (sscanf(str, "%s %s", category, tmp) != 2) {
             tell_object(TP, "See <help feats> for syntax.");
@@ -829,6 +834,13 @@ int validation_messages(object obj, string group, string feat_name) {
         can_gain = FEATS_D->can_gain_type_feat(obj, feat_name, "arcana");
         group_2 = group;
         break;
+    case "rage":
+        valid_classes = ({ "barbarian" });
+        valid_categories = MAGUSFEATS;
+        num_bonus = (int)obj->query_rage_feats_gained();
+        can_gain = FEATS_D->can_gain_type_feat(obj, feat_name, "rage");
+        group_2 = group;
+        break;
     case "divinebond":
         valid_classes = ({ "paladin" });
         valid_categories = PALADINFEATS;
@@ -902,6 +914,12 @@ int validation_messages(object obj, string group, string feat_name) {
         if ((string)FEATS_D->get_category(feat_name) == "MagusArcana") {
             tell_object(obj, "%^RESET%^%^BOLD%^This is a magus class feat. "
                 "This feat can only be selected as an arcana feat.%^RESET%^");
+            return 1;
+        }
+
+        if ((string)FEATS_D->get_category(feat_name) == "Rage") {
+            tell_object(obj, "%^RESET%^%^BOLD%^This is a barbarian class feat. "
+                "This feat can only be selected as a rage feat.%^RESET%^");
             return 1;
         }
 
@@ -1024,8 +1042,8 @@ feats - manipulate or view your feats
 
 feats allowed
 feats check|add|remove %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
-feats racial|martial|spellcraft|hybrid|arcana|divinebond %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
-feats list [martial|spellcraft|hybrid|arcana|divinebond|general]
+feats racial|martial|spellcraft|hybrid|arcana|rage|divinebond %^ULINE%^%^ORANGE%^FEAT_NAME%^RESET%^
+feats list [martial|spellcraft|hybrid|arcana|rage|divinebond|general]
 feats fix
 feats active
 
