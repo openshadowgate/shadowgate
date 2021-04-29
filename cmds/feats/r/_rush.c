@@ -224,6 +224,22 @@ void execute_attack() {
     }
 
     hit_mess(caster,target);
+
+    if (FEATS_D->usable_feat(caster, "beast rush") && caster->query_property("raged")) {
+        int ii, maxi;
+
+        maxi = caster->query_guild_level("barbarian") / 10 + 1;
+        maxi = maxi > 4 ? 4 : maxi;
+
+        tell_object(caster, "/cmds/feats/r/_rage"->cm("You pounce sporadic attacks at your enemies!"));
+        tell_room(ENV(caster), "/cmds/feats/r/_rage"->cm(caster->QCN + " furiously pounces sporadic attacks at the end of " + caster->QP + " rush!"));
+
+        for (ii; ii < maxi; ii++) {
+            caster->execute_attack();
+        }
+
+    }
+
     caster->cause_typed_damage(target,target->return_target_limb(),damage,damtype);
 
     if(!objectp(target)) {
