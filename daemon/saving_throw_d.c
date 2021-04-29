@@ -97,6 +97,10 @@ varargs void do_save(object ob, int dc, string type, raw_save)
                 mod += ob->query_level() / 5 + 1;
             }
 
+            if (FEATS_D->usable_feat(ob, "reflexive dodge") && ob->query_property("raged")) {
+                mod += 4;
+            }
+
             break;
         case "will":
             mod = (int)ob->query_saving_bonus("will");
