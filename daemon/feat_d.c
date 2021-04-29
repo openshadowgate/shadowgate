@@ -1893,10 +1893,18 @@ int number_feats(object obj, string category, string* valid_classes) {
                 //hybrids
             case "magus":
                 if (category == "arcana") {
-                    j = (obj->query_class_level(subset[i]) / 3);
+                    if (obj->query_class_level("magus") < 21) {
+                        j = (obj->query_class_level(subset[i]) / 3);
+                    } else {
+                        j = 7 + (obj->query_class_level(subset[i]) - 16) / 5;
+                    }
                 }
                 else {
-                    j = ((obj->query_class_level(subset[i]) + 1) / 6);
+                    if (obj->query_class_level("magus") < 21) {
+                        j = ((obj->query_class_level(subset[i]) + 1) / 6);
+                    } else {
+                        j = 3 + (obj->query_class_level(subset[i]) - 16) / 5;
+                    }
                 }
                 break;
             case "psywarrior":
