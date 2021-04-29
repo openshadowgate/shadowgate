@@ -162,8 +162,8 @@ void execute_attack()
         continue;
     }
 
-    timerz = time() + 300;
-    delay_subject_msg(target, 300, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^master striken again%^WHITE%^ again.%^RESET%^");
+    timerz = time() + 60;
+    delay_subject_msg(target, 60, "%^BOLD%^%^WHITE%^" + target->QCN + " can be %^CYAN%^master striken again%^WHITE%^ again.%^RESET%^");
     tempmap += ([ target:timerz ]);
     caster->remove_property("using master strike");
     caster->set_property("using master strike", tempmap);

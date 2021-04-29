@@ -9,7 +9,7 @@ void create()
    feat_category("Rampage");
    feat_name("unarmored defense");
    feat_prereq("Barbarian or Monk");
-   feat_desc("This feat offers the barbarian the equivalent armor class of hide armor whilst unarmored, however, use of a shield is allowed. The protection offered increases as the barbarian gains levels.");
+   feat_desc("This feat offers the character the equivalent armor class of hide armor whilst unarmored, however, use of a shield is allowed. The protection offered increases as the barbarian gains levels.");
    permanent(1);
 }
 
@@ -35,7 +35,7 @@ void permanent_effects(object ob)
    ::permanent_effects(ob);
    dest_effect();
    return;
-}   
+}
 
 void reverse_permanent_effects(object ob)
 {
@@ -50,4 +50,3 @@ void dest_effect()
    remove_feat(TO);
    return;
 }
-
