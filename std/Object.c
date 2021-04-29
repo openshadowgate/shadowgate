@@ -571,6 +571,9 @@ mixed query_property(string prop)
         if (FEATS_D->usable_feat(TO, "death ward")) {
             return 1;
         }
+        if (FEATS_D->usable_feat(TO, "frenzy ward") && TO->query_property("raged")) {
+            return 1;
+        }
         if (FEATS_D->usable_feat(TO, "fated")) {
             return 1;
         }
