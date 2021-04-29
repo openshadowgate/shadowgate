@@ -98,6 +98,15 @@ int immunity_check(object obj, string type)
         return 0;
     }
 
+    case "nausea":
+    {
+        if (FEATS_D->usable_feat(obj, "internal fortitude")) {
+            return 1;
+        }
+
+        return 0;
+    }
+
     case "fatigue":
     {
         if (obj->is_undead()) {

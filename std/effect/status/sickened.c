@@ -20,6 +20,11 @@ int status_effect()
         return;
     }
 
+    if (LIVING_D->immunity_check(target, "nausea")) {
+        TO->remove();
+        return;
+    }
+
     target->set_property("effect_sickened", 1);
 
     tell_object(target, "%^BLUE%^You feel sickened and disgusted.%^RESET%^");

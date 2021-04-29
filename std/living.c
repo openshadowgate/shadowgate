@@ -772,7 +772,7 @@ int calculate_healing()
         }
         if (!healing["intox"]) {
             write("You are not intoxicated..");
-        }else if ((healing["intox"] > HEALING_FORMULA) && !query_tripped() && !query_unconscious()) {
+        }else if ((healing["intox"] > HEALING_FORMULA) && !query_tripped() && !query_unconscious() && !FEAT_D->usable_feat(TO, "internal fortitude")) {
             if (!random(5)) {
                 write("You begin to be sick and vomit from your excessive drinking.");
                 tell_room(ETO, TPQCN + " begins to be sick and vomit from the drinking.", TO);
