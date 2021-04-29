@@ -836,7 +836,7 @@ int validation_messages(object obj, string group, string feat_name) {
         break;
     case "rage":
         valid_classes = ({ "barbarian" });
-        valid_categories = MAGUSFEATS;
+        valid_categories = BARBFEATS;
         num_bonus = (int)obj->query_rage_feats_gained();
         can_gain = FEATS_D->can_gain_type_feat(obj, feat_name, "rage");
         group_2 = group;
