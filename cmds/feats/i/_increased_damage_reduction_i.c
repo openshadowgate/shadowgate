@@ -10,7 +10,7 @@ void create()
     feat_category("Rage");
     feat_name("increased damage reduction i");
     feat_classes("barbarian");
-    feat_desc("While raging a barbarian gains additional two points of damage reduction.");
+    feat_desc("While raging a barbarian gains additional point of damage reduction.");
     permanent(1);
 }
 

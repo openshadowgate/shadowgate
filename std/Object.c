@@ -483,11 +483,11 @@ mixed query_property(string prop)
             }
 
             if (FEATS_D->usable_feat(TO, "increased damage reduction i") && TO->query_property("raged")) {
-                num += 2;
+                num += 1;
             }
 
             if (FEATS_D->usable_feat(TO, "increased damage reduction ii") && TO->query_property("raged")) {
-                num += 2;
+                num += 1;
             }
 
             if (FEATS_D->usable_feat(TO, "increased damage reduction iii") && TO->query_property("raged")) {
