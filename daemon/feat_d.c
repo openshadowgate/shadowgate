@@ -502,7 +502,11 @@ int can_gain_type_feat(object ob, string feat, string feattype)
         GAINED = ob->query_hybrid_feats_gained();
         break;
     case "arcana":
-        MAX_ALLOWED = number_feats(ob, "arcana", ({ "magus" }));// (ob->query_class_level("magus") / 3);
+        MAX_ALLOWED = number_feats(ob, "arcana", ({ "magus" }));
+        GAINED = ob->query_arcana_feats_gained();
+        break;
+    case "rage":
+        MAX_ALLOWED = number_feats(ob, "rage", ({ "barbarian" }));
         GAINED = ob->query_arcana_feats_gained();
         break;
     case "divinebond":
@@ -1880,20 +1884,24 @@ int number_feats(object obj, string category, string* valid_classes) {
                         j = 10 + (((obj->query_class_level(subset[i])) - 16) / 5);
                     }
                 } else {
-                    if (obj->query_class_level("barbarian" > 20)) {
+                    if (obj->query_class_level("barbarian") > 20) {
                         j = ((obj->query_class_level(subset[i]) - 16) / 5);
                     }
                 }
                 break;
             case "paladin":
                 if (category == "divinebond") {
-                    if (obj->query_class_level("paladin") > 4)
+                    if (obj->query_class_level("paladin") > 4) {
                         j = 1;
-                    if (obj->query_class_level("paladin") > 20)
+                    }
+                    if (obj->query_class_level("paladin") > 20) {
                         j = 2;
+                    }
                 }
                 else {
-                    j = ((obj->query_class_level(subset[i]) - 16) / 5);
+                    if (obj->query_class_level("paladin") > 20) {
+                        j = ((obj->query_class_level(subset[i]) - 16) / 5);
+                    }
                 }
                 break;
             case "psion":
