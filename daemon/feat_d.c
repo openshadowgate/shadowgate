@@ -1880,7 +1880,9 @@ int number_feats(object obj, string category, string* valid_classes) {
                         j = 10 + (((obj->query_class_level(subset[i])) - 16) / 5);
                     }
                 } else {
-                    j = (((obj->query_class_level(subset[i])) + 4) / 5);
+                    if (obj->query_class_level("barbarian" > 20)) {
+                        j = ((obj->query_class_level(subset[i]) - 16) / 5);
+                    }
                 }
                 break;
             case "paladin":
