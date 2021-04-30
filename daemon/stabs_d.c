@@ -57,7 +57,6 @@ varargs int get_stab_damage(object player, object target, object weapon)
 
     roll = 6;
 
-    // 1d8 per level for "strong stab" creatures, 1d6 for normal/players
     damage += roll_dice(level, roll);
 
     // Ghosts and incorporeals can be stabbed only with magic weapons
