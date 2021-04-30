@@ -507,7 +507,7 @@ int can_gain_type_feat(object ob, string feat, string feattype)
         break;
     case "rage":
         MAX_ALLOWED = number_feats(ob, "rage", ({ "barbarian" }));
-        GAINED = ob->query_arcana_feats_gained();
+        GAINED = ob->query_rage_feats_gained();
         break;
     case "divinebond":
         MAX_ALLOWED = number_feats(ob, "divinebond", ({ "paladin" }));
@@ -614,6 +614,18 @@ int add_my_feat(object ob, string type, string feat)
             return 1;
         }
         else return 0;
+    case "rage":
+        num = 1;
+        if (gain_feat(ob, type, feat, num))
+        {
+            num = 0;
+            num = ob->query_rage_feats_gained();
+            num += 1;
+            ob->set_rage_feats_gained(num);
+            update_usable(ob);
+            return 1;
+        }
+        else return 0;
     case "divinebond":
         num = 1;
         if (gain_feat(ob, type, feat, num))
@@ -697,6 +709,13 @@ int remove_my_feat(object ob,string feat,int bypass)
         ob->set_arcana_feats_gained(num);
         if (feat == "greater arcane pool")
             USER_D->init_pool(ob, "arcana");
+        update_usable(ob);
+        return 1;
+    case "rage":
+        num = ob->query_rage_feats_gained();
+        if (!num) num = 0;
+        num -= 1;
+        ob->set_rage_feats_gained(num);
         update_usable(ob);
         return 1;
     case "divinebond":
@@ -1336,6 +1355,9 @@ void set_feats(object ob,string type,mapping feats)
     case "arcana":
         ob->set_arcana_feats(feats);
         break;
+    case "rage":
+        ob->set_rage_feats(feats);
+        break;
     case "divinebond":
         ob->set_divinebond_feats(feats);
         break;
@@ -1369,6 +1391,9 @@ mapping get_feats(object ob,string type)
         break;
     case "arcana":
         feats = ob->query_arcana_feats();
+        break;
+    case "rage":
+        feats = ob->query_rage_feats();
         break;
     case "divinebond":
         feats = ob->query_divinebond_feats();
@@ -1597,6 +1622,8 @@ string format_feat(string feat,object targ) {
         tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
     } else if (bought_as_type_feat(feat, targ, "arcana")) {
         tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
+    } else if (bought_as_type_feat(feat, targ, "rage")) {
+        tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
     } else if (bought_as_type_feat(feat, targ, "divinebond")) {
         tmp = "%^BOLD%^%^YELLOW%^" + level + "%^RESET%^";
     } else {
@@ -1670,6 +1697,9 @@ void display_feats(object ob,object targ, string mytype)
     }
     if (!targ->is_class("magus") && !avatarp(targ)) {
         currentlist -= ({ "MagusArcana", "Steel&Magic" });
+    }
+    if (!targ->is_class("barbarian") && !avatarp(targ)) {
+        currentlist -= ({ "Rage" });
     }
     if (!targ->is_class("paladin") && !avatarp(targ)) {
         currentlist -= ({ "DivineBond" });
@@ -1815,6 +1845,9 @@ int bought_as_type_feat(string feat, object targ, string feattype) {
         break;
     case "arcana":
         type_feats = targ->query_arcana_feats();
+        break;
+    case "rage":
+        type_feats = targ->query_rage_feats();
         break;
     case "divinebond":
         type_feats = targ->query_divinebond_feats();

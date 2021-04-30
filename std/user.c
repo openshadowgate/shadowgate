@@ -4754,6 +4754,18 @@ int query_arcana_feats_gained()
     return __FEAT_DATA["arcana_feats_gained"];
 }
 
+void set_rage_feats_gained(int num)
+{
+    __FEAT_DATA["rage_feats_gained"] = num;
+    return;
+}
+
+int query_rage_feats_gained()
+{
+    if (!intp(__FEAT_DATA["rage_feats_gained"])) { __FEAT_DATA["rage_feats_gained"] = 0; }
+    return __FEAT_DATA["rage_feats_gained"];
+}
+
 void set_divinebond_feats_gained(int num)
 {
     __FEAT_DATA["divinebond_feats_gained"] = num;
