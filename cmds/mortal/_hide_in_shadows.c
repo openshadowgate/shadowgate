@@ -62,6 +62,8 @@ int cmd_hide_in_shadows()
        return 1;
    }
 
+   write("You can move now.");
+
    seteuid(getuid());
    obj = new("/cmds/mortal/hide.c");
    obj->set_player(TP);
