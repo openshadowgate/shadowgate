@@ -35,12 +35,13 @@ void activate(int duration, int clevel)
         return;
     }
 
+    myvictim = ETO;
+
     if (myvictim->query_property("in_vitriolic")) {
         TO->remove();
         return;
     }
 
-    myvictim = ETO;
     myvictim->set_property("in_vitriolic", 1);
     myduration = duration;
     dmgboost = clevel / 2;
