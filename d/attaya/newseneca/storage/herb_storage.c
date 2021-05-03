@@ -20,7 +20,7 @@ void create() {
 
 void reset() {
     ::reset();
-   while(!present("packet of herbs 25")) new("/d/common/obj/brewing/herb_inherit")->move(TO);
+   while(!present("packet of herbs 75")) new("/d/common/obj/brewing/herb_inherit")->move(TO);
    if(!present("herb pouch")) new("/d/common/obj/brewing/herb_pouch")->move(TO);
    if(!present("herb pouch 2")) new("/d/common/obj/brewing/herb_pouch")->move(TO);
    if(!present("herb pouch 3") && !random(3)) new("/d/common/obj/brewing/herb_pouch")->move(TO);
