@@ -29,7 +29,7 @@ if(!present("healing potion"))
 if(!present("antidote"))
    new("/d/koenig/town/items/cure.c")->move(this_object());
    new("/d/koenig/town/items/cure.c")->move(this_object());
-while(!present("packet of herbs 25"))
+while(!present("packet of herbs 50"))
    new("/d/common/obj/brewing/herb_inherit")->move(TO);
 if(!present("herb pouch"))
    new("/d/common/obj/brewing/herb_pouch")->move(TO);

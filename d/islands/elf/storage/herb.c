@@ -15,7 +15,7 @@ shouldn't be here!");
 
 void reset() {
     ::reset();
-   while(!present("packet of herbs 28"))
+   while(!present("packet of herbs 78"))
 new("/d/common/obj/brewing/herb_inherit")->move(TO);
    if(!present("herb pouch"))
 new("/d/common/obj/brewing/herb_pouch")->move(TO);
