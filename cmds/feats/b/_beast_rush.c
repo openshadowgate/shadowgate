@@ -21,7 +21,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (!ob->is_class("barbarian")) {
+    if (!(ob->is_class("barbarian") && FEATS_D->has_feat(ob, "rush"))) {
         dest_effect();
         return 0;
     }

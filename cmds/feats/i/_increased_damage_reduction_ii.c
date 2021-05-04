@@ -22,7 +22,7 @@ int prerequisites(object ob)
     if (!objectp(ob)) {
         return 0;
     }
-    if (!(ob->is_class("barbarian") && FEATS_D->usable_feat(ob, "increased damage reduction i"))) {
+    if (!(ob->is_class("barbarian") && FEATS_D->has_feat(ob, "increased damage reduction i"))) {
         dest_effect();
         return 0;
     }
