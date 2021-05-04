@@ -2373,9 +2373,9 @@ void define_base_damage(int adjust)
 
         blasttype = (string)caster->query("warlock_blast_type");
         if (blasttype == "utterdark") {
-            sdamage = roll_dice(clevel, 12);
+            sdamage = roll_dice(clevel + clevel / 8, 12);
         }else {
-            sdamage = roll_dice(clevel, 11);
+            sdamage = roll_dice(clevel, 12);
         }
     } else if (spell_type == "monk") {
         sdamage = roll_dice(clevel, 11);
