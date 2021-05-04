@@ -482,25 +482,20 @@ varargs int thaco(object targ, int mod, int flag)
 varargs int do_save(object ob,int mod)
 {
     string save;
-    int num, pass = 0;
+    int num, pass;
 
     if (!objectp(ob)) {
         return 0;
     }
 
-    if (flevel) {
-        pass -= 10;
-        pass -= flevel;
-    }  else {
-        pass -= clevel;
-    }
+    pass = clevel + 10;
 
     if (stringp(save_stat_bonus)) {
-        pass -= BONUS_D->query_stat_bonus(caster, query_stat_bonus());
+        pass += BONUS_D->query_stat_bonus(caster, query_stat_bonus());
     }
 
     if (mod) {
-        pass -= mod;
+        pass += mod;
     }
 
     save = query_save_type();

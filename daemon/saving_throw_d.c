@@ -180,7 +180,7 @@ varargs void do_save(object ob, int dc, string type, raw_save)
     save_info["final_saving_throw"] = save;
 
     if (dc > 0) {
-        dc *= -1;
+        dc = -dc;
     }
 
     roll1 = roll_dice(1, 20);
