@@ -2,8 +2,6 @@
 #include <magic.h>
 inherit SPELL;
 
-#define DELAY 300
-
 void create(){
     ::create();
     set_author("nienne");
@@ -26,10 +24,6 @@ void create(){
 int preSpell(){
    if(caster->query_property("freedom")){
       tell_object(caster,"%^GREEN%^You are already protected by a freedom spell.%^RESET%^");
-      return 0;
-   }
-   if((int)caster->query_property("freedom time")+DELAY > time()){
-      tell_object(caster,"You cannot cast freedom again so soon.");
       return 0;
    }
    return 1;
