@@ -10,7 +10,7 @@ void create()
     feat_category("Rage");
     feat_name("beast claws");
     feat_classes("barbarian");
-    feat_desc("While raging a barbarian gains two additional claw attacks that deals 1d6 per ten class levels of slashing damage. The die is decreased to 1d6 for small creatures.");
+    feat_desc("While raging a barbarian gains two additional claw attacks that deals 1d8 per ten class levels of slashing damage. The die is decreased to 1d6 for small creatures.");
     permanent(1);
 }
 
