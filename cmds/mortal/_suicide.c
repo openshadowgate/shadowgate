@@ -7,17 +7,19 @@
 inherit DAEMON;
 
 
-int wizuserp(object ob) {
-  if (objectp(ob) && wizardp(ob))
-    return 1;
-  else
-    return 0;
+int wizuserp(object ob)
+{
+    if (objectp(ob) && wizardp(ob)) {
+        return 1;
+    }else {
+        return 0;
+    }
 }
 
 void help()
 {
     write(
-"
+        "
 %^CYAN%^NAME%^RESET%^
 
 suicide - prevent further logins on the character
@@ -48,9 +50,9 @@ int cmd_suicide(string str)
         tell_object(TP, "You cannot commit suicide being a ghost.");
         return 1;
     }
-    if ((TP->query_property("last_death") < time() + 3600) &&
+    if ((TP->query_property("last_death") < time() + 600) &&
         TP->query_property("last_death")) {
-        tell_object(TP, "You cannot commit suicide so soon after death. Reflect upon what went wrong and if you're sure, try again in an hour.");
+        tell_object(TP, "You cannot commit suicide so soon after death. Reflect upon what went wrong and if you're sure, try again in ten iminutes.");
         return 1;
     }
     if (TP && TP->query_forced()) {
