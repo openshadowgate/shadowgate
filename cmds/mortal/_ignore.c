@@ -15,13 +15,16 @@ int cmd_ignore(string str)
     if (!str) {
         return list_ignored(ignored);
     }
+
     if (str == "clear") {
         TP->reset_ignored();
         tell_object(TP, "You are no longer ignoring anyone.");
         return 1;
     }
+
     str = lower_case(str);
-    rstr = TP->realNameVsProfile(str);
+    rstr = TP->realName(str);
+
     if (member_array(rstr, ignored) != -1) {
         tell_object(TP, str + " is already on your ignored list.");
         return 1;
@@ -32,7 +35,8 @@ int cmd_ignore(string str)
     }
 
     TP->add_ignored(rstr);
-    tell_object(TP, "You are ignoring all tells from " + str + ".");
+    tell_object(TP, "You are ignoring all tells and line messages from " + str + ".");
+
     return 1;
 }
 

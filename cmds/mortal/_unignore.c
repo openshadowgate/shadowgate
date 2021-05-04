@@ -17,13 +17,16 @@ int cmd_unignore(string str)
         return 1;
     }
     str = lower_case(str);
-    rstr = TP->realNameVsProfile(str);
+    rstr = TP->realName(str);
+
     if (member_array(rstr, ignored) == -1) {
-        tell_object(TP, "You are not ignoring " + str);
+        tell_object(TP, str + " is not on your ingore list!");
         return 1;
     }
+
     TP->remove_ignored(rstr);
     tell_object(TP, "You are no longer ignoring " + str);
+
     return 1;
 }
 
