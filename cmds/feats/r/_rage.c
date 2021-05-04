@@ -273,9 +273,9 @@ void execute_attack()
 
         if (objectp(target) && (hitroll1 || hitroll2)) {
             if (caster->query_size() == 1) {
-                dmg = roll_dice(1, 8);
-            } else {
                 dmg = roll_dice(1, 6);
+            } else {
+                dmg = roll_dice(1, 8);
             }
 
             tell_object(caster, cm("You fiercely claw " + target->QCN + "!"));
@@ -291,8 +291,8 @@ void execute_attack()
 
     }
 
-    if (objectp(place)) {
-        place->addObjectToCombatCycle(TO, 1);
+    if (objectp(caster) && objectp(ENV(caster))) {
+        ENV(caster)->addObjectToCombatCycle(TO, 1);
     } else {
         dest_effect();
     }
