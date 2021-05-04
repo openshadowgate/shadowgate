@@ -754,6 +754,9 @@ void help()
     if (stringp(save_type)) {
         write("%^BOLD%^%^WHITE%^Saving throw:%^RESET%^ " + save_type + (stringp(save_stat_bonus) ? (", bonus stat: " +save_stat_bonus + "") : ""));
     }
+    if (stringp(save_stat_bonus) && !stringp(save_type)) {
+        write("%^BOLD%^%^WHITE%^Stat bonus:%^RESET%^ " + save_stat_bonus);
+    }
     if (stringp(feat_syntax)) {
         write("%^BOLD%^%^WHITE%^Syntax:%^RESET%^ " + feat_syntax);
     }
