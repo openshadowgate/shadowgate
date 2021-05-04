@@ -249,9 +249,9 @@ void execute_attack()
 
         if (objectp(target) && hitroll) {
             if (caster->query_size() > 2) {
-                dmg = roll_dice(1, 6);
+                dmg = roll_dice(flevel / 10 + 1, 6);
             } else {
-                dmg = roll_dice(1, 4);
+                dmg = roll_dice(flevel / 10 + 1, 4);
             }
 
             tell_object(caster, cm("In raging frenzy, you furiously bite " + target->QCN + "!"));
@@ -273,9 +273,9 @@ void execute_attack()
 
         if (objectp(target) && (hitroll1 || hitroll2)) {
             if (caster->query_size() == 1) {
-                dmg = roll_dice(1, 6);
+                dmg = roll_dice(flevel / 10 + 1, 6);
             } else {
-                dmg = roll_dice(1, 8);
+                dmg = roll_dice(flevel / 10 + 1, 8);
             }
 
             tell_object(caster, cm("You fiercely claw " + target->QCN + "!"));

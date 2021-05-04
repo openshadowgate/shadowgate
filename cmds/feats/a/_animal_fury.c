@@ -10,7 +10,7 @@ void create()
     feat_category("Rage");
     feat_name("animal fury");
     feat_classes("barbarian");
-    feat_desc("While raging a barbarian gains an additional bite attack that deals 1d4 piercing damage. The die is increased to 1d6 for large creatures.");
+    feat_desc("While raging a barbarian gains an additional bite attack that deals 1d4 piercing damage per ten class levels. The die is increased to 1d6 for large creatures.");
     permanent(1);
 }
 
