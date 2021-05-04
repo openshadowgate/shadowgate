@@ -256,7 +256,7 @@ void execute_attack()
 
             tell_object(caster, cm("In raging frenzy, you furiously bite " + target->QCN + "!"));
             tell_object(target, cm("In raging frenzy, " + caster->QCN + " furiously bites you!"));
-            tell_object(place, cm(caster->QCN + " furiously bites " + target->QCN + "!", ({ caster, target })));
+            tell_object(place, cm(caster->QCN + " furiously bites " + target->QCN + "!"), ({ caster, target }));
 
             target->cause_typed_damage(target, target->return_target_limb(), dmg, "piercing");
         }
@@ -280,7 +280,7 @@ void execute_attack()
 
             tell_object(caster, cm("You fiercely claw " + target->QCN + "!"));
             tell_object(target, cm(caster->QCN + " claws into your flesh!"));
-            tell_object(place, cm(caster->QCN + " fiercely claws " + target->QCN + "!", ({ caster, target })));
+            tell_object(place, cm(caster->QCN + " fiercely claws " + target->QCN + "!"), ({ caster, target }));
 
             target->cause_typed_damage(target, target->return_target_limb(), dmg, "slashing");
 
