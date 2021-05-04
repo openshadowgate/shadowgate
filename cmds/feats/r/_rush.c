@@ -21,6 +21,7 @@ If used without an argument this feat will pick up a random attacker.
 %^BOLD%^N.B.%^RESET%^ This feat only works with standard melee combat on foot. It takes quite different feats to <charge> from horseback, or to land a <preciseshot> with a ranged weapon.");
     feat_name("rush");
     set_save("fort");
+    feat_stat_bonus("strength");
 }
 
 int prerequisites(object ob)
@@ -246,7 +247,10 @@ void execute_attack() {
       dest_effect();
       return;
     }
-    target->set_paralyzed(roll_dice(2,6),"You're recovering from that last hit.");
+
+    if (!do_save(target)) {
+        target->set_paralyzed(roll_dice(1,12),"You're recovering from that last hit.");
+    }
 
     if(target->is_npc() || userp(target)) {
       if(target->query_deaths_door() && (userp(caster) || caster->query_property("knock unconscious"))) {
