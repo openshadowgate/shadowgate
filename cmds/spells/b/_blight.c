@@ -17,12 +17,14 @@ void create()
     set_spell_sphere("alteration");
     set_syntax("cast CLASS blight on TARGET");
     set_damage_desc("clevel / 20 + 1 to damage and attack bonus, but no more than 2");
-    set_description("This spell will empower the target with dark energy, giving them a slightly better chance to hit in "
-"combat as well as allowing them to do a small amount more damage.");
+    set_description("This spell will empower the target with dark energy, giving them a slightly better chance to hit in combat as well as allowing them to do a small amount more damage.
+
+This spell is alternative to bless, it can be used only by evil characters.");
     set_verbal_comp();
     set_somatic_comp();
     set_target_required(1);
-	set_helpful_spell(1);
+    set_helpful_spell(1);
+    evil_spell(1);
 }
 
 int preSpell()
