@@ -17,6 +17,7 @@ void create()
 
 If used without an argument this feat will pick up a random attacker.");
     set_save("reflex");
+    feat_stat_bonus("dexterity");
     set_required_for(({ "shot on the run" }));
 }
 
@@ -135,6 +136,7 @@ void execute_feat()
 void execute_attack()
 {
     int damage, timerz, i, res;
+    int bonusdc;
     object* weapons, * keyz, weapon;
     mapping tempmap, newmap;
 
@@ -246,7 +248,10 @@ void execute_attack()
         dest_effect();
         return;
     }
-    target->set_paralyzed(roll_dice(2, 6), "You're still recovering from such a painful shot.");
+
+    if (!do_save(target)) {
+        target->set_paralyzed(roll_dice(1, 2) * 8, "You're still recovering from such a painful shot.");
+    }
 
     if (target->is_npc() || userp(target)) {
         if (target->query_deaths_door() && (userp(caster) || caster->query_property("knock unconscious"))) {

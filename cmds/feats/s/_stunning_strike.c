@@ -10,6 +10,8 @@ void create()
     feat_category("KiOffense");
     feat_name("stunning strike");
     feat_prereq("Monk L5");
+    feat_classes("monk");
+    feat_stat_bonus("wisdom");
     feat_syntax("stunning_strike [TARGET]");
     feat_desc("A monk that is unarmored and unarmed, or wielding small weapons, may attempt a stunning strike on a target. In order for the attempt to be successful the monk must have at least 1 available Ki, must land a touch attack on the target, and the target must fail a fortitude save with a DC of the Monk's level.
 
@@ -258,10 +260,8 @@ void execute_attack()
         "on "+target->QCN+"%^BOLD%^%^CYAN%^ connecting squarely with "+target->QO+
         "!%^RESET%^", ({caster, target}));
     }
-    DC = (int)caster->query_class_level("monk");
-    DC += (int)"/daemon/bonus_d.c"->query_stat_bonus(caster, "wisdom");
-    DC += 10;
-    if(do_save(target, DC) || target->query_property("no paralyze") || target->query_property("no death"))
+
+    if(do_save(target) || target->query_property("no paralyze") || target->query_property("no death"))
     {
         tell_object(target, "%^BOLD%^%^WHITE%^You feel your body shudder momentarily but "+
         "quickly shake off the impact of the strike!%^RESET%^");

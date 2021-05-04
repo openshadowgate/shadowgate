@@ -11,6 +11,7 @@ void create()
     feat_name("true judgement");
     feat_syntax("true_judgement [TARGET]");
     feat_prereq("Inquisitor L20");
+    feat_stat_bonus("wisdom");
     feat_desc("At 20th level, an inquisitor can call true judgment down upon a foe during combat. The inquisitor can invoke true judgment on a foe. Once declared, the target must make a fortitude save or die. Targets warded from death or targets that succeeded a save throw won't be affected.
 
 If used without an argument this feat will pick up a random attacker.");
@@ -164,10 +165,8 @@ void execute_attack()
     tell_object(caster, "%^BLUE%^A ray of deadly raw power releases of your finger and hits " + target->QCN + "!");
     tell_room(place, "%^BLUE%^A ray of death releases of " + caster->QCN + "'s finger and hits " + target->QCN + "!", caster);
 
-    bonusdc = clevel;
-    bonusdc += BONUS_D->query_stat_bonus(caster, "wisdom");
     spell_kill(target, caster);
-    if ((string)target->query_property("no death") || do_save(target, -bonusdc)) {
+    if ((string)target->query_property("no death") || do_save(target)) {
         tell_room(place, "%^BOLD%^%^BLUE%^" + target->QCN + " is utterly unaffected by the judgement!", target);
         tell_object(target, "%^BOLD%^%^BLUE%^You are utterly unaffected by the judgement!");
     } else {

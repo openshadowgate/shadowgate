@@ -13,6 +13,7 @@ void create()
     feat_prereq("Thief L20");
     feat_desc("Ability to surprise your opponent and position yourself properly in combat is represented through the master strike, a deadly technique that allows the thief to deal harm and disruptively paralyze their opponents. Succesful save will allow their victim to endure through half of the damage.");
     set_save("fort");
+    feat_stat_bonus("dexterity");
 }
 
 int allow_shifted()
@@ -138,8 +139,7 @@ void execute_attack()
     tell_object(caster, cm("You strike at " + target->QCN + " with all ferocity!"));
     tell_room(place, cm(caster->QCN + " strikes at " + target->QCN + " with all ferocity!"), caster);
 
-    bonusdc = clevel;
-    bonusdc += BONUS_D->query_stat_bonus(caster, "dexterity");
+    bonusdc = BONUS_D->query_stat_bonus(caster, "dexterity");
     spell_kill(target, caster);
 
     {
@@ -152,9 +152,7 @@ void execute_attack()
             damtype = "piercing";
         }
 
-        damage = roll_dice(flevel, 10);
-
-        if (do_save(target, -bonusdc)) {
+        if (do_save(target)) {
             tell_room(place, cm(target->QCN + " endures through lethal strike!"), target);
             tell_object(target, cm("You are are merely slightly shaken, unable to move!"));
             target->cause_typed_damage(target, target->return_target_limb(), damage / 2, damtype);

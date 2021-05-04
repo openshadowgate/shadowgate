@@ -12,6 +12,7 @@ void create()
     feat_category("KiOffense");
     feat_name("flurry of blows");
     feat_desc("This feat allows the monk to focus her mind. She is able to uncanningly spot the weaknesses in the defenses of her enemies  by doing so, which allows her to attack at least once more, possibly  twice, at the expense of 1 Ki per combat round. This feat functions only  when unarmored and unarmed or wielding small weapons while the monk has  Ki available.");
+    feat_desc("wisdom");
     feat_prereq("Monk L2");
     feat_syntax("flurry_of_blows on|off");
     set_target_required(0);
@@ -184,17 +185,21 @@ void flurry_hit()
     }
 
     myWay = (string)caster->query("monk way");
-    if(FEATS_D->usable_feat(caster,"grandmaster of the way")) // maybe give the grandmaster its own hit func at some point
-    {
+
+    if (FEATS_D->usable_feat(caster, "grandmaster of the way")) { // maybe give the grandmaster its own hit func at some point
         myWay = ways[random(sizeof(ways))];
     }
 
     myVic = caster->query_current_attacker();
-    if(!objectp(myVic)) return;
-    if(caster->query_paralyzed()) return;
-    DC = (int)caster->query_class_level("monk");
-    DC += (int)"/daemon/bonus_d.c"->query_stat_bonus(caster, "wisdom");
-    DC += 5;
+
+    if (!objectp(myVic)) {
+        return;
+    }
+
+    if (caster->query_paralyzed()) {
+        return;
+    }
+
     if((crit = (int)BONUS_D->process_hit(caster, myVic, 1, 0, 0, 1)))
     {
         dam = calculate_my_dam(myVic, crit);
@@ -210,7 +215,7 @@ void flurry_hit()
         }
         if(myWay == "way of the fist" && !random(5))
         {
-            if(do_save(myVic,DC) || myVic->query_property("no paralyze") || myVic->query_property("no death"))
+            if(do_save(myVic) || myVic->query_property("no paralyze") || myVic->query_property("no death"))
             {
                 tell_object(myVic, "%^BOLD%^%^RED%^Your body shudders violently for "+
                 "a brief instant but you manage to shake off most of the strike.%^RESET%^");

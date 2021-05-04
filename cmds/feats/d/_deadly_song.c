@@ -15,6 +15,7 @@ void create()
 
 If used without an argument this feat will pick up a random attacker.");
     set_save("will");
+    feat_stat_bonus("charisma");
 }
 
 int allow_shifted()
@@ -168,10 +169,8 @@ void execute_attack()
     tell_object(caster, "%^BLUE%^The deadly melody coils and collapses at " + target->QCN + "!");
     tell_room(place, "%^BLUE%^The deadly melody coils and collapses at " + target->QCN + "!", caster);
 
-    bonusdc = clevel;
-    bonusdc += BONUS_D->query_stat_bonus(caster, "charisma");
     spell_kill(target, caster);
-    if ((string)target->query_property("no death") || do_save(target, -bonusdc)) {
+    if ((string)target->query_property("no death") || do_save(target)) {
         tell_room(place, "%^BOLD%^%^BLUE%^" + target->QCN + " is utterly unaffected by the melody!", target);
         tell_object(target, "%^BOLD%^%^BLUE%^You are utterly unaffected by the melody!");
     } else {

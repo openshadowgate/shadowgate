@@ -16,6 +16,7 @@ void create()
 
 If used without an argument this feat will pick up a random attacker.");
     set_save("fortitude");
+    feat_stat_bonus("intelligence");
 }
 
 int allow_shifted() { return 1; }
@@ -138,13 +139,10 @@ void execute_feat()
 
     tell_object(caster, "%^RESET%^You find vulnerable spot to attack "+target->QCN+" at.%^RESET%^");
 
-    bonusdc = flevel+10;
-    bonusdc += BONUS_D->query_stat_bonus(caster, "intelligence");
-
     spell_kill(target, caster);
     if (target->query_property("no death") ||
         target->is_undead() ||
-        do_save(target, -bonusdc)) {
+        do_save(target)) {
         int todamage;
         tell_object(target, "%^BOLD%^%^WHITE%^The immense pain spreads from your back!!%^RESET%^");
         tell_room(place, "%^BOLD%^%^WHITE%^You almost didn't see a shadow behind " + target->QCN + "'s back!", ({ target, caster }));

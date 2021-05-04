@@ -25,6 +25,7 @@ void create()
 If used without an argument this feat will pick up a random attacker.");
     // Sets the type of saving throw to use, same as used in spell.c
     set_save("fort");
+    feat_stat_bonus("strength");
     // This tells the feat daemon what feats this one is required for, it's needed for
     // removing feats from players so they don't remove one that they are going to need
     set_required_for(({ "shieldwall", "deflection", "reflection", "counter" }));
@@ -236,14 +237,12 @@ void execute_attack()
         return;
     }
 
-    mod = dam;
-    mod += clevel - (int)target->query_highest_level();
-    mod = mod * -1;
+
     // You have to calculate your opposed modifiers for the new saving throws manually.
     // In this case, I use the damage of the shieldbash, plus or minus the level difference.
     // NEGATIVE modifiers will help the caster, which is what we want because target modifiers
     // are already added in the saving throw daemon.
-    if (!do_save(target, mod)) {
+    if (!do_save(target)) {
         FLAG = 1;
         if (interactive(target)) {
             target->set_static("spell interrupt", "%^RED%^Your head is still hazy from being "

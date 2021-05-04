@@ -13,6 +13,7 @@ string feat_category,
     feat_desc,
     feat_syntax,
     feat_prereq,
+    save_stat_bonus,
     arg,
     save_type,
     *required_for=({}),
@@ -250,11 +251,26 @@ string query_feat_category()
 
 void set_save(string str)
 {
-    if(stringp(str)) { save_type = str; }
+    if (stringp(str)) {
+        save_type = str;
+    }
     return;
 }
 
-string query_save_type() { return save_type; }
+string query_save_type()
+{
+    return save_type;
+}
+
+void feat_stat_bonus(string str)
+{
+    save_stat_bonus = str;
+}
+
+string query_stat_bonus()
+{
+    return save_stat_bonus;
+}
 
 void permanent(int num)
 {
@@ -466,26 +482,43 @@ varargs int thaco(object targ, int mod, int flag)
 varargs int do_save(object ob,int mod)
 {
     string save;
-    int num;
+    int num, pass = 0;
 
-    if(!objectp(ob)) { return 0; }
+    if (!objectp(ob)) {
+        return 0;
+    }
+
+    if (flevel) {
+        pass -= 10;
+        pass -= flevel;
+    }  else {
+        pass -= clevel;
+    }
+
+    if (stringp(save_stat_bonus)) {
+        pass -= BONUS_D->query_stat_bonus(caster, query_stat_bonus());
+    }
+
+    if (mod) {
+        pass -= mod;
+    }
+
     save = query_save_type();
 
-    switch(save)
-    {
-    case "fort":
-    case "fortitude":
-        num = (int)"/daemon/saving_throw_d"->fort_save(ob,mod);
+    switch (save) {
+    case "fort": case "fortitude":
+        num = "/daemon/saving_throw_d"->fort_save(ob, pass);
         break;
-    case "will":
-    case "willpower":
-        num = (int)"/daemon/saving_throw_d"->will_save(ob,mod);
+    case "will": case "willpower":
+        num = "/daemon/saving_throw_d"->will_save(ob, pass);
         break;
     case "reflex":
-        num = (int)"/daemon/saving_throw_d"->reflex_save(ob,mod);
+        num = "/daemon/saving_throw_d"->reflex_save(ob, pass);
         break;
     }
+
     return num;
+
 }
 
 /**
@@ -724,7 +757,7 @@ void help()
         write("%^BOLD%^%^WHITE%^Prerequisites:%^RESET%^ " + feat_prereq);
     }
     if (stringp(save_type)) {
-        write("%^BOLD%^%^WHITE%^Saving throw:%^RESET%^ " + save_type);
+        write("%^BOLD%^%^WHITE%^Saving throw:%^RESET%^ " + save_type + (stringp(save_stat_bonus) ? (", bonus stat: " +save_stat_bonus + "") : ""));
     }
     if (stringp(feat_syntax)) {
         write("%^BOLD%^%^WHITE%^Syntax:%^RESET%^ " + feat_syntax);

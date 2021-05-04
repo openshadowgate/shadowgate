@@ -1,10 +1,3 @@
-// feat revision 1/3/20: changing to simply strip stoneskin/iron body/variant spells directly.
-// given casters can recast just as quickly (single action) and this has a delay, whereas the
-// spells do not, I don't feel this is out of line for the few that choose to take it. -Nienne
-// second revision 1/3/20: testing revealed this to be far too much of a win button, so a
-// will save vs attacker character level has been added to mitigate it being too good. Will
-// continue testing to see if the DC needs adjusted up or down to be reasonable. -Nienne
-//further revision 3/31/20: making it a reflex save since casters autopass will saves - Odin
 #include <std.h>
 #include <daemons.h>
 #include <magic.h>
@@ -22,6 +15,7 @@ void create()
     feat_name("shatter");
     feat_syntax("shatter TARGET");
     feat_prereq("powerattack");
+    feat_stat_bonus("strength");
     feat_desc("The character can attempt to shatter an opponent's magical defenses, including stoneskin, iron body & similar variants. This will only work while shapeshifted, or using a weapon, unless the character has an aptitude in unarmed combat. Success is reliant on not only connecting with the target, but being able to overcome their agility to successfully disrupt their protective spell/s.
 
 %^BOLD%^See also:%^RESET%^ shatter *spells");
@@ -203,7 +197,7 @@ void execute_attack()
         return;
     }
 
-    if (do_save(target, clevel)) { // new will save. N, 1/3/20
+    if (do_save(target)) {
         tell_object(caster, "%^BOLD%^%^CYAN%^You rain down a hail of light blows upon "
                     + target->QCN + ", but " + target->QS + " holds up under the onslaught!");
         tell_object(target, "%^BOLD%^%^CYAN%^" + caster->QCN + " rains down a hail of light "

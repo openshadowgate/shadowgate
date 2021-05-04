@@ -20,6 +20,7 @@ If used without an argument this feat will pick up a random attacker. Be aware t
 
 A druid with the 'mastery of fang and claw' feat may also use this feat while in dragon form, even if it has not been purchased directly.");
     set_save("fort");
+    feat_stat_bonus("strength");
     set_required_for(({ "light weapon", "strength of arm" }));
 }
 
@@ -286,7 +287,8 @@ void execute_attack()
     }
     dam += "/daemon/bonus_d"->damage_bonus(caster->query_stats("strength"));
     dam += (int)caster->query_damage_bonus();
-    mod = dam * -1;
+
+    mod = "/daemon/bonus_d.c"->query_stat_bonus(caster, "strength");
 
     if (!in_shapeshift) {
         theweapon = weapons[0]->query_short();
@@ -315,7 +317,7 @@ void execute_attack()
         break;
     }
 
-    if (!do_save(target, mod)) {
+    if (!do_save(target)) {
         tell_object(caster, "%^BOLD%^%^GREEN%^Your attack leaves " + target->QCN + " stunned and "
                     "unable to move!%^RESET%^");
         tell_object(target, "%^BOLD%^%^GREEN%^" + caster->QCN + "'s attack leaves you stunned and "
@@ -351,7 +353,7 @@ void execute_attack()
             break;
         }
 
-        if (!do_save(target_two, mod)) {
+        if (!do_save(target_two)) {
             tell_object(target_two, "%^BOLD%^%^YELLOW%^The attack staggers you, knocking you off "
                         "balance!%^RESET%^");
             tell_room(place, "%^BOLD%^%^YELLOW%^" + target_two->QCN + " is staggered and knocked out "

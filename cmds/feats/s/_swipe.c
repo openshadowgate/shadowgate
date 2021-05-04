@@ -16,6 +16,7 @@ void create()
 If used without an argument this feat will pick up a random attacker.
 ");
     set_save("reflex");
+    feat_stat_bonus("strength");
 }
 
 int allow_shifted()
@@ -232,8 +233,12 @@ void execute_attack()
             damage = 0;
         }
     }
+
     tell_object(target, "%^BOLD%^%^RED%^You feel immense pain!%^RESET%^");
-    target->set_paralyzed(roll_dice(2, 6), "%^BOLD%^%^RED%^You feel immense pain!%^RESET%^");
+
+    if (!do_save(target)) {
+        target->set_paralyzed(roll_dice(2, 6), "%^BOLD%^%^RED%^You feel immense pain!%^RESET%^");
+    }
 
     caster->cause_typed_damage(target, target->return_target_limb(), damage, weapons[0]->query_damage_type());
 

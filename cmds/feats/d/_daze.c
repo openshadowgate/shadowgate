@@ -17,6 +17,7 @@ void create() {
 %^BOLD%^See also:%^RESET%^ daze *spells");
     feat_syntax("daze TARGET");
     feat_prereq("Knockdown, Disarm");
+    feat_stat_bonus("intelligence");
     set_target_required(1);
     set_save("fort");
 }
@@ -148,11 +149,7 @@ void execute_attack() {
         return;
     }
 
-    mod = clevel;
-    mod += clevel - (int)target->query_level();
-    mod = mod * -1;
-
-    if(!do_save(target,mod)) {
+    if(!do_save(target)) {
         if(fired) {
             tell_object(caster,"%^BOLD%^%^GREEN%^Your shot strikes "+target->QCN+
                 " directly in the throat, leaving "+target->QO+" gasping for air!");

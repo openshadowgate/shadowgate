@@ -19,6 +19,7 @@ void create()
     feat_syntax("frightening_tune");
 
     set_save("will");
+    feat_stat_bonus("charisma");
 }
 
 int allow_shifted()
@@ -116,9 +117,6 @@ void execute_attack()
 
     targets = shuffle(targets);
 
-    bonusdc = flevel;
-    bonusdc += BONUS_D->query_stat_bonus(caster, "charisma");
-
     for (i = 0; i < sizeof(targets) && i < 8; i++) {
         if (targets[i] == caster) {
             continue;
@@ -128,7 +126,7 @@ void execute_attack()
             continue;
         }
 
-        if (do_save(target, -bonusdc)) {
+        if (do_save(target)) {
             continue;
         }
 
