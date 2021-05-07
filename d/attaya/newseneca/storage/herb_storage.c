@@ -19,7 +19,6 @@ void create() {
 }
 
 void reset() {
-    string herb;
     object ob;
     string hn;
     int i;
