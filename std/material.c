@@ -125,6 +125,12 @@ init(){
     if (query_uses() < 1) {
         TO->remove();
     }
+    if (!objectp(ETO)) {
+        return;
+    }
+    if (!objectp(TP)) {
+        return;
+    }
     if(TP == ETO){
         add_action("combine","combine");
     }
