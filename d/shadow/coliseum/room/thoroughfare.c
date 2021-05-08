@@ -24,6 +24,7 @@ void create(){
         ]));
     set_exits(([
         "south" : "/d/shadow/city/room/shadway5.c",
+        "northeast" : ROOMS"entrance",
         ]));
 }
 
