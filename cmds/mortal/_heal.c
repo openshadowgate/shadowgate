@@ -136,7 +136,7 @@ int cmd_heal(string str)
 // taking this out. Player healing is self-limited at about 50% of max.
 
         toheal = (int)targ->query_max_hp();
-        healed = (toheal * healed)/100;
+        healed = (toheal * healed)/100 + 1;
         toheal -= (int)targ->query_hp();
         if(healed > toheal) healed = toheal;
 
