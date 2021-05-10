@@ -13,7 +13,7 @@ void create()
     set_name("bandit");
     set_id(({"bandit","thief","human"}));
     set_race("human");
-    set_short("A human clad with black leather");
+    set_short("A human bandit clad with black leather");
     set_long("%^RESET%^This man is of average height and has a frail build. His hair and eyes are dark and unremarkable.  He "+
     "wears a suit of %^BOLD%^%^BLACK%^black leather%^RESET%^ armor that covers a great deal of his body. "+
     "The exposed parts of his flesh are dirty, suggesting that he doesn't care much about keeping himself "+
