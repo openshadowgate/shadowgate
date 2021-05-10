@@ -21,7 +21,7 @@ void create(){
     set_exits(([
 	"east" : FORESTDIR+"road2",
         "north":"/d/shadow/room/forest/oocthall1",
-        "northeast":"/d/shadow/room/forest/oocthall2",
+        "northwest":"/d/shadow/room/forest/oocthall2",
 	"southwest" : FORESTDIR+"road4"
    	]));
     set_smell("default","You smell fresh air and the odor of %^GREEN%^w%^BOLD%^i%^MAGENTA%^l%^RESET%^%^MAGENTA%^d%^BOLD%^fl%^RESET%^%^MAGENTA%^o%^BOLD%^we%^RESET%^%^MAGENTA%^r%^BOLD%^s%^ORANGE%^.");
