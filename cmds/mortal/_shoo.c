@@ -14,7 +14,7 @@ int cmd_shoo(string str) {
      if(objectp(mysneak)) mysneak->force_cancel();
    }
    if (TP->query_invis()) return notify_fail("That wouldn't work well when you're invisible!\n");
-   if (sizeof((object *)TP->query_attackers())) return notify_fail("You're too busy to do that!\n");
+   //if (sizeof((object *)TP->query_attackers())) return notify_fail("You're too busy to do that!\n");
 
    if (!str) return notify_fail("Shoo what?\n");
    if (!what = present(str, ETP)) return notify_fail("That is not here.\n");
