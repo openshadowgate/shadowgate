@@ -401,7 +401,7 @@ forage -- find things in the wilderness
 
 %^CYAN%^SYNTAX%^RESET%^
 
-forage for [foods|herbs|bait]
+forage for [food|herbs|bait]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
