@@ -23,10 +23,11 @@ int cmd_forage(string str){
 
    prof = TP->query_skill("survival")+roll_dice(1,20);
    if(TP->query_blind()) prof = 0;
-   if(!str || (str != "for food" && str != "for herbs")) {
-      notify_fail("Please specify <forage for herbs> or <forage for food>?\n");
+
+   if(!str || (str != "for food" && str != "for herbs" && str!= "for bait")) {
+      notify_fail("Please specify <forage for herbs>, <forage for food> or <forage for bait>?\n");
       return 0;
-   }
+   }   
 
    if(!TP->query_time_delay("forage",20)) {
       write("You need more time to study the area before you try again.");
@@ -67,8 +68,21 @@ int cmd_forage(string str){
        return 1;
    }
 
+   if(str == "for bait")
+   {
+       tell_room(ETP,TPQCN+" starts foraging for bait.",TP);
+       tell_object(TP,"You start digging around for bait.");
+
+       input_to("stop_bait",0,TP);
+        time = to_int(time / 5);
+       //call_out("herb_emotes",10,TP);
+       call_out("finished_bait",time,TP);
+       return 1;
+   }     
+
    return 1;
 }
+
 
 int stop_hunt(string str, object who){
     remove_call_out("emote_fun");
@@ -387,7 +401,7 @@ forage -- find things in the wilderness
 
 %^CYAN%^SYNTAX%^RESET%^
 
-forage for [foods|herbs]
+forage for [foods|herbs|bait]
 
 %^CYAN%^DESCRIPTION%^RESET%^
 
@@ -481,5 +495,53 @@ void pick_herb(object player)
         return;
     }
     new("/d/common/obj/brewing/herb_inherit")->move(environment(player));
+    return 1;
+}
+
+int stop_bait(string str, object who){
+    //remove_call_out("emote_fun");
+    remove_call_out("finished_bait");
+    write("You stop searching for bait.");
+    tell_room(environment(who),who->query_cap_name()+" stops searching for bait.",who);
+    return 1;
+
+}
+
+
+int finished_bait(object player)
+{
+    string *bad_terrains=({"city","village","stone building","wood building","hut","boats",
+        "built cave","built tunnel","glacier","barren","deep water","ice"});
+
+    int skill_level, i;
+    string terrain;
+
+    if(!objectp(player)) { return 1; }
+
+    //remove_call_out("herb_emotes");
+    skill_level = (int)player->query_skill("survival") + roll_dice(1,20);
+
+    skill_level = (skill_level / 5) + 1;
+
+    terrain = environment(player)->query_terrain();
+
+    if(member_array(terrain,bad_terrains) != -1)
+    {
+        tell_object(player,"You can't seem to find any bait here.");
+        tell_room(environment(player),""+player->QCN+" gives up the search.",player);
+        destruct(TO);
+        return 1;
+    }
+
+
+    if(skill_level > 0)
+    {
+        tell_object(player,"You find some bait.");
+        tell_room(environment(player),""+player->QCN+" finds some bait. ",player);
+
+        new("/d/common/obj/misc/bait")->move(environment(player));
+    }
+
+    destruct(TO);
     return 1;
 }
