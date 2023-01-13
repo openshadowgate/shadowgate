@@ -298,27 +298,27 @@ Lists all players online.
 
 If argument is provided, filters players by races.
 
-%^CYAN%^PLAYER KILL FLAGS%^RESET%^
+//%^CYAN%^PLAYER KILL FLAGS%^RESET%^
 
- %^BOLD%^%^MAGENTA%^NoPK%^RESET%^ - %^BOLD%^%^MAGENTA%^n%^RESET%^o %^BOLD%^%^MAGENTA%^p%^RESET%^layer %^BOLD%^%^MAGENTA%^k%^RESET%^ill - flag in front of the line means the character can't engage in player kill interractions.
+ //%^BOLD%^%^MAGENTA%^NoPK%^RESET%^ - %^BOLD%^%^MAGENTA%^n%^RESET%^o %^BOLD%^%^MAGENTA%^p%^RESET%^layer %^BOLD%^%^MAGENTA%^k%^RESET%^ill - flag in front of the line means the character can't engage in player kill interractions.
 
- %^BOLD%^%^RED%^Gr%^RESET%^ - %^BOLD%^%^RED%^gr%^RESET%^ace - flag in front of the line means the character can't engage in player kill interractions due to recent login. They must wait ten minutes before engaging in any player kill.
+ //%^BOLD%^%^RED%^Gr%^RESET%^ - %^BOLD%^%^RED%^gr%^RESET%^ace - flag in front of the line means the character can't engage in player kill interractions due to recent login. They must wait ten minutes before engaging in any player kill.
 
- %^BOLD%^%^CYAN%^N%^RESET%^ - %^BOLD%^%^CYAN%^n%^RESET%^ewbie - This player is in offestry or creation area. They may adventure with other new players, but can't engage in pk at all, levelcheck will always fail on them, threathen won't work.
+ //%^BOLD%^%^CYAN%^N%^RESET%^ - %^BOLD%^%^CYAN%^n%^RESET%^ewbie - This player is in offestry or creation area. They may adventure with other new players, but can't engage in pk at all, levelcheck will always fail on them, threathen won't work.
 
-%^CYAN%^LEVEL CHECK FLAGS%^RESET%^
+//%^CYAN%^LEVEL CHECK FLAGS%^RESET%^
 
- %^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^ in the end of the line indicates you're free to engage in player %^BOLD%^%^GREEN%^kill%^RESET%^ or adventures with that player.
+ //%^RESET%^%^BOLD%^%^GREEN%^K%^RESET%^ in the end of the line indicates you're free to engage in player %^BOLD%^%^GREEN%^kill%^RESET%^ or adventures with that player.
 
- %^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^ means you're free to %^YELLOW%^adventure%^RESET%^ only and are forbidden to engage in player kill due to recent death or flag changes.
+ //%^RESET%^%^BOLD%^%^YELLOW%^A%^RESET%^ means you're free to %^YELLOW%^adventure%^RESET%^ only and are forbidden to engage in player kill due to recent death or flag changes.
 
- %^RESET%^%^BOLD%^%^BLUE%^P%^RESET%^ in the end of the line indicates you're free to engage in %^BOLD%^%^BLUE%^player kill%^RESET%^ with that player, but can't adventure with them.
+ //%^RESET%^%^BOLD%^%^BLUE%^P%^RESET%^ in the end of the line indicates you're free to engage in %^BOLD%^%^BLUE%^player kill%^RESET%^ with that player, but can't adventure with them.
 
- %^RESET%^%^BOLD%^%^RED%^F%^RESET%^ means you're %^BOLD%^%^RED%^forbidden%^RESET%^ to adventure and engage in unrestricted player kill with the player due to difference in levels.
+// %^RESET%^%^BOLD%^%^RED%^F%^RESET%^ means you're %^BOLD%^%^RED%^forbidden%^RESET%^ to adventure and engage in unrestricted player kill with the player due to difference in levels.
 
-The difference in power is defined by the weakest character. To engage in adventures and PK the difference must be less than 5 levels for characters below level 30 and 10 levels for characters above.
+//The difference in power is defined by the weakest character. To engage in adventures and PK the difference must be less than 5 levels for characters below level 30 and 10 levels for characters above.
 
-%^CYAN%^OTHER FLAGS%^RESET%^
+%^CYAN%^FLAGS%^RESET%^
 
  %^BOLD%^%^CYAN%^Q%^RESET%^ - quietness - before the name means this staff member is not accepting direct tells and is probably ignoring the lines.
 
